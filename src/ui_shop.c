@@ -106,9 +106,14 @@ static void Task_Shop_WaitFadeAndExit(u8);
 static void Task_Shop_Idle(u8);
 
 static void ShopSprite_CreateGenericSprites(void);
-static void ShopSprite_CreateItemSprite(u16, u8, u8, u8, u8);
-static void ShopSprite_CreateItemSprites(void);
-static void ShopSprite_DestroyItemSprites(void);
+u32 ShopSprite_GetSpriteId(enum ShopMenuSprites);
+u32 ShopSprite_GetItemSpriteId(u32);
+void ShopSprite_SetItemSpriteId(u32, u32);
+static void ShopSprite_CreateItemTemplates(void);
+static void ShopSprite_ReloadItemGraphics(void);
+static void ShopSprite_CreateItemTemplate(u8, u8, u8);
+static void ShopSprite_LoadItemGraphics(u16, enum ShopMenuCategories, u8);
+static void SpriteCB_ItemIcon(struct Sprite *);
 static void ShopSprite_ToggleItemIconsVisibility(bool32);
 
 static void ShopInventory_InitCategoryLists(void);
@@ -247,6 +252,19 @@ static const struct ShopSprite sShopSprites[] =
     },
 };
 
+static const union AnimCmd *const sShopItemDummyAnims[] = {
+    (const union AnimCmd[]){
+        ANIMCMD_FRAME(0, 8),
+        ANIMCMD_JUMP(0)
+    },
+};
+
+static const struct OamData sShopItemOamData = {
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1
+};
+
 static const struct SpriteTemplate sShopSpriteTemplate =
 {
     .tileTag = TAG_NONE,
@@ -300,8 +318,19 @@ void ShopMenu_Init(const struct ShopMenuConfigs *configs, MainCallback callback)
 
     sShopMenuStaticDataPtr->shownItemsOnScreen = configs->totalShownItems * configs->totalShownItemRows;
     sShopMenuStaticDataPtr->itemIconIds = AllocZeroed(sShopMenuStaticDataPtr->shownItemsOnScreen);
-    if (!sShopMenuStaticDataPtr->itemIconIds)
+    sShopMenuStaticDataPtr->itemImages = AllocZeroed(sShopMenuStaticDataPtr->shownItemsOnScreen * 4);
+    sShopMenuStaticDataPtr->itemFrameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * sShopMenuStaticDataPtr->shownItemsOnScreen);
+    sShopMenuStaticDataPtr->itemTemplates = AllocZeroed(sizeof(struct SpriteTemplate) * sShopMenuStaticDataPtr->shownItemsOnScreen);
+
+    if (!sShopMenuStaticDataPtr->itemIconIds
+     || !sShopMenuStaticDataPtr->itemImages
+     || !sShopMenuStaticDataPtr->itemFrameImages
+     || !sShopMenuStaticDataPtr->itemTemplates)
     {
+        FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemIconIds);
+        FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemImages);
+        FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemFrameImages);
+        FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemTemplates);
         FREE_AND_SET_NULL(sShopMenuStaticDataPtr);
         FREE_AND_SET_NULL(gShopMenuDataPtr);
         SetMainCallback2(callback);
@@ -350,6 +379,7 @@ static void CB2_ShopSetup(void)
         break;
     case SHOP_SETUP_FRONT_END:
         ShopSprite_CreateGenericSprites();
+        ShopSprite_CreateItemTemplates();
         ShopHelper_UpdateFrontEnd();
         gMain.state++;
         break;
@@ -441,7 +471,7 @@ static void ShopHelper_UpdateFrontEnd(void)
     if (!ShopHelper_IsPurchaseMode() || PokeMart_IsActive())
     {
         ShopBlit_Categories();
-        ShopSprite_CreateItemSprites();
+        ShopSprite_ReloadItemGraphics();
     }
 
     ShopPrint_HelpBar();
@@ -462,24 +492,25 @@ static void ShopHelper_FreeResources(void)
     for (u32 i = 0; i < ShopConfig_GetTotalShownItemsOnScreen(); i++)
     {
         DestroySprite(&gSprites[ShopSprite_GetItemSpriteId(i)]);
+        Free(sShopMenuStaticDataPtr->itemImages[i]);
+        FreeSpritePaletteByTag(TAG_SHOP_ITEMS + i);
     }
 
+    for (u32 i = 0; i < NUM_SHOP_SPRITES; i++)
+        DestroySprite(&gSprites[ShopSprite_GetSpriteId(i)]);
+
     for (u32 i = TAG_SHOP_MENU_UI; i < NUM_SHOP_TAGS; i++)
-    {
         FreeSpriteTilesByTag(i);
-    }
 
     FreeSpritePaletteByTag(TAG_SHOP_MENU_UI);
     FreeSpritePaletteByTag(OBJ_EVENT_PAL_TAG_SILICON);
 
-    for (u32 i = 0; i < NUM_SHOP_SPRITES; i++)
-    {
-        DestroySprite(&gSprites[ShopSprite_GetSpriteId(i)]);
-    }
-
     UnsetBgTilemapBuffer(SHOP_BG_TILEMAP);
 
     TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemIconIds);
+    TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemImages);
+    TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemFrameImages);
+    TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr->itemTemplates);
     TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr->tilemapBuf);
     TRY_FREE_AND_SET_NULL(sShopMenuStaticDataPtr);
     TRY_FREE_AND_SET_NULL(gShopMenuDataPtr);
@@ -763,59 +794,25 @@ u32 ShopSprite_GetItemSpriteId(u32 idx)
     return sShopMenuStaticDataPtr->itemIconIds[idx];
 }
 
-static void ShopSprite_CreateItemSprite(u16 itemId, u8 row, u8 idx, u8 x, u8 y)
+void ShopSprite_SetItemSpriteId(u32 idx, u32 value)
 {
-    u32 spriteIdx = idx;
-
-    if (sShopMenuStaticDataPtr->itemIconIds[spriteIdx] != SPRITE_NONE
-     || !itemId
-     || itemId >= ITEMS_COUNT)
-    {
-        return;
-    }
-
-    u32 spriteId = AddItemIconSprite(spriteIdx, spriteIdx, itemId);
-    gSprites[spriteId].x2 = x;
-    gSprites[spriteId].y2 = y;
-    gSprites[spriteId].oam.priority = 1;
-
-    if (PokeMart_IsActive()
-     && ShopGrid_CategoryInRow(row) != ShopGrid_CurrentCategoryRow())
-    {
-        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-    }
-
-    sShopMenuStaticDataPtr->itemIconIds[spriteIdx] = spriteId;
+    sShopMenuStaticDataPtr->itemIconIds[idx] = value;
 }
 
-static void ShopSprite_CreateItemSprites(void)
+// use only for init setup
+static void ShopSprite_CreateItemTemplates(void)
 {
-    const struct ShopMenuConfigs *configs = ShopConfig_Get();
+    const struct ShopMenuConfigs *configs = gShopMenuDataPtr->configs;
     u32 x = configs->itemIconCoords[SHOP_COORD_X], y = configs->itemIconCoords[SHOP_COORD_Y];
 
-    ShopSprite_DestroyItemSprites();
-
-    for (u32 i = 0, temp = 0, j = 0; i < ShopConfig_GetTotalShownItemRows(); i++)
+    // use maximum value even if the actual items is less
+    for (u32 row = 0, idx = 0; row < configs->totalShownItemRows; row++)
     {
-        for (u32 k = 0; k < ShopConfig_GetTotalShownItems(); k++)
+        for (u32 item = 0; item < configs->totalShownItems; item++)
         {
-            u32 row = (ShopGrid_GetCurrentCategoryIndex() + i) % gShopMenuDataPtr->numCategories;
-            u32 idx = k;
-
-            if (ShopGrid_CurrentCategoryRow() == ShopGrid_CategoryInRow(row))
-            {
-                idx += ShopGrid_GetFirstItemIndex();
-            }
-
-            if (ShopInventory_GetItemIdFromGrid(row, idx) == ITEM_NONE)
-            {
-                continue;
-            }
-
-            ShopSprite_CreateItemSprite(ShopInventory_GetItemIdFromGrid(row, idx), row, temp, x, y);
-
+            ShopSprite_CreateItemTemplate(idx, x, y);
             x += configs->itemIconCoords[SHOP_COORD_PAD];
-            temp++, j++;
+            idx++;
         }
 
         x = configs->itemIconCoords[SHOP_COORD_X];
@@ -823,35 +820,100 @@ static void ShopSprite_CreateItemSprites(void)
     }
 }
 
-static void ShopSprite_DestroyItemSprites(void)
+// used when reloading front end
+static void ShopSprite_ReloadItemGraphics(void)
 {
-    for (u32 i = 0; i < sShopMenuStaticDataPtr->shownItemsOnScreen; i++)
+    AllocItemIconTemporaryBuffers();
+
+    for (u32 i = 0, idx = 0; i < ShopConfig_GetTotalShownItemRows(); i++)
     {
-        if (sShopMenuStaticDataPtr->itemIconIds[i] != SPRITE_NONE)
+        for (u32 j = 0; j < ShopConfig_GetTotalShownItems(); j++, idx++)
         {
-            DestroySprite(&gSprites[sShopMenuStaticDataPtr->itemIconIds[i]]);
-            FreeSpritePaletteByTag(i);
-            FreeSpriteTilesByTag(i);
-            sShopMenuStaticDataPtr->itemIconIds[i] = SPRITE_NONE;
+            u32 row = (ShopGrid_GetCurrentCategoryIndex() + i) % gShopMenuDataPtr->numCategories;
+            u32 item = j;
+
+            if (ShopGrid_CategoryInRow(row) == ShopGrid_CurrentCategoryRow())
+                item += ShopGrid_GetFirstItemIndex();
+
+            ShopSprite_LoadItemGraphics(ShopInventory_GetItemIdFromGrid(row, item), ShopGrid_CategoryInRow(row), idx);
         }
+    }
+
+    FreeItemIconTemporaryBuffers();
+}
+
+static void ShopSprite_CreateItemTemplate(u8 idx, u8 x, u8 y)
+{
+    if (ShopSprite_GetItemSpriteId(idx) != SPRITE_NONE)
+        return;
+
+    sShopMenuStaticDataPtr->itemImages[idx] = AllocZeroed(0x200);
+
+    sShopMenuStaticDataPtr->itemFrameImages[idx].data = sShopMenuStaticDataPtr->itemImages[idx];
+    sShopMenuStaticDataPtr->itemFrameImages[idx].size = 32 * 32 / 2;
+    sShopMenuStaticDataPtr->itemFrameImages[idx].relativeFrames = TRUE;
+
+    AllocSpritePalette(TAG_SHOP_ITEMS + idx);
+
+    sShopMenuStaticDataPtr->itemTemplates[idx].tileTag = TAG_NONE;
+    sShopMenuStaticDataPtr->itemTemplates[idx].paletteTag = TAG_SHOP_ITEMS + idx;
+    sShopMenuStaticDataPtr->itemTemplates[idx].oam = &sShopItemOamData;
+    sShopMenuStaticDataPtr->itemTemplates[idx].images = &sShopMenuStaticDataPtr->itemFrameImages[idx];
+    sShopMenuStaticDataPtr->itemTemplates[idx].anims = sShopItemDummyAnims;
+    sShopMenuStaticDataPtr->itemTemplates[idx].affineAnims = gDummySpriteAffineAnimTable;
+    sShopMenuStaticDataPtr->itemTemplates[idx].callback = SpriteCB_ItemIcon;
+
+    u32 spriteId = CreateSprite(&sShopMenuStaticDataPtr->itemTemplates[idx], 0, 0, 0);
+
+    StartSpriteAnim(&gSprites[spriteId], 0);
+    gSprites[spriteId].x2 = x;
+    gSprites[spriteId].y2 = y;
+
+    ShopSprite_SetItemSpriteId(idx, spriteId);
+}
+
+static void ShopSprite_LoadItemGraphics(u16 itemId, enum ShopMenuCategories cat, u8 idx)
+{
+    u32 spriteId = ShopSprite_GetItemSpriteId(idx);
+
+    if (itemId > ITEM_NONE && itemId < ITEMS_COUNT)
+    {
+        DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+        CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, sShopMenuStaticDataPtr->itemImages[idx]);
+    }
+    else
+    {
+        CpuFill16(0, sShopMenuStaticDataPtr->itemImages[idx], 0x200);
+    }
+
+    StartSpriteAnim(&gSprites[spriteId], 0);
+
+    gSprites[spriteId].data[0] = itemId;
+    gSprites[spriteId].data[1] = cat;
+    gSprites[spriteId].data[2] = itemId == ITEM_NONE || itemId >= ITEMS_COUNT;
+}
+
+static void SpriteCB_ItemIcon(struct Sprite *sprite)
+{
+    if (sprite->data[2]) return;
+
+    if (sprite->data[0])
+    {
+        LoadPalette(GetItemIconPalette(sprite->data[0]), OBJ_PLTT_ID(IndexOfSpritePaletteTag(sprite->template->paletteTag)), PLTT_SIZE_4BPP);
+        if (PokeMart_IsActive() && sprite->data[1] != ShopGrid_CurrentCategoryRow())
+            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+
+        sprite->data[0] = ITEM_NONE;
     }
 }
 
 static void ShopSprite_ToggleItemIconsVisibility(bool32 flag)
 {
     if (PokeMart_IsActive())
-    {
         return;
-    }
 
     for (u32 i = 0; i < ShopConfig_GetTotalShownItemsOnScreen(); i++)
-    {
-        u32 spriteId = sShopMenuStaticDataPtr->itemIconIds[i];
-        if (spriteId != SPRITE_NONE)
-        {
-            gSprites[spriteId].invisible = flag;
-        }
-    }
+        gSprites[sShopMenuStaticDataPtr->itemIconIds[i]].invisible = flag;
 }
 
 static void ShopInventory_InitCategoryLists(void)

@@ -88,7 +88,8 @@ enum ShopMenuSpriteTags
     TAG_SHOP_UP_ARROW_SMALL,
     TAG_SHOP_DOWN_ARROW_SMALL,
 
-    NUM_SHOP_TAGS
+    NUM_SHOP_TAGS,
+    TAG_SHOP_ITEMS,
 };
 
 enum ShopMenuFontColors
@@ -192,6 +193,9 @@ struct ShopMenuStaticData
 {
     u8 *tilemapBuf;
     u8 *itemIconIds;
+    u8 **itemImages;
+    struct SpriteFrameImage *itemFrameImages;
+    struct SpriteTemplate *itemTemplates;
     u8 shownItemsOnScreen;
     u8 spriteIds[NUM_SHOP_SPRITES];
 };

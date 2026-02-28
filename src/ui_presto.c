@@ -347,6 +347,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
             {
                 gSprites[sPrestoItemIconSpriteId].invisible = TRUE;
                 DestroySprite(&gSprites[sPrestoItemIconSpriteId]);
+                FreeSpriteTilesByTag(ShopGrid_GetGridXCursor());
                 sPrestoItemIconSpriteId = SPRITE_NONE;
             }
 
@@ -365,7 +366,7 @@ static void PrestoHelper_UpdateFrontEnd(void)
                 x = 3, y = 6;
 
                 u32 selectedSpriteIdx = ShopGrid_GetGridXCursor();
-                u32 spriteId = AddItemIconSprite(selectedSpriteIdx, selectedSpriteIdx, itemId);
+                u32 spriteId = AddItemIconSprite(selectedSpriteIdx, TAG_SHOP_ITEMS + selectedSpriteIdx, itemId);
 
                 gSprites[spriteId].x2 = TILE_TO_PIXELS(x);
                 gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
