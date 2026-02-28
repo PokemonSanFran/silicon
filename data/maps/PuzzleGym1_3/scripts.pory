@@ -1,0 +1,285 @@
+mapscripts PuzzleGym1_3_MapScripts {}
+
+script PuzzleGym1_3_StartPuzzle {
+    lock
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_3_PanCameraToPuzzle)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_C1, Movement_PuzzleGym1_3_C1)
+    applymovement(LOCALID_C2, Movement_PuzzleGym1_3_C2)
+    applymovement(LOCALID_C3, Movement_PuzzleGym1_3_C3)
+    applymovement(LOCALID_C4, Movement_PuzzleGym1_3_C4)
+    applymovement(LOCALID_C5, Movement_PuzzleGym1_3_C5)
+    applymovement(LOCALID_C6, Movement_PuzzleGym1_3_C6)
+    applymovement(LOCALID_C7, Movement_PuzzleGym1_3_C7)
+    applymovement(LOCALID_C8, Movement_PuzzleGym1_3_C8)
+    applymovement(LOCALID_C9, Movement_PuzzleGym1_3_C9)
+    applymovement(LOCALID_C10, Movement_PuzzleGym1_3_C10)
+    applymovement(LOCALID_C11, Movement_PuzzleGym1_3_C11)
+    waitmovement(LOCALID_C1)
+    waitmovement(LOCALID_C2)
+    waitmovement(LOCALID_C3)
+    waitmovement(LOCALID_C4)
+    waitmovement(LOCALID_C5)
+    waitmovement(LOCALID_C6)
+    waitmovement(LOCALID_C7)
+    waitmovement(LOCALID_C8)
+    waitmovement(LOCALID_C9)
+    waitmovement(LOCALID_C10)
+    waitmovement(LOCALID_C11)
+    special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_3_PanCameraToPlayer)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+	special(RemoveCameraObject)
+    release
+    end
+}
+
+movement Movement_PuzzleGym1_3_PanCameraToPuzzle {
+    walk_up * 5
+}
+
+movement Movement_PuzzleGym1_3_PanCameraToPlayer {
+    walk_down * 5
+}
+
+movement Movement_PuzzleGym1_3_C1 {
+    walk_fast_down * 2
+    walk_fast_right * 2
+    face_up
+    delay_16 * 3
+    walk_fast_right
+    walk_fast_down * 2
+    walk_fast_left * 2
+    face_down
+    walk_right * 4
+    walk_up
+    emote_question_mark
+    face_left
+    face_right
+    walk_fast_up * 4
+    walk_fast_right * 3
+    walk_fast_down * 3
+    walk_fast_left
+    face_up
+    emote_exclamation_mark
+    walk_down * 2
+    walk_right
+    walk_down * 2
+    walk_right * 2
+    walk_up * 3
+    face_right
+}
+
+movement Movement_PuzzleGym1_3_C2 {
+    walk_right * 3
+    walk_down * 2
+    face_right
+    emote_exclamation_mark
+    walk_fast_left * 2
+    walk_fast_down * 2
+    walk_fast_left * 3
+    walk_fast_down * 4
+    walk_fast_right * 3
+    walk_right * 2
+    face_up
+    delay_16 * 3
+    walk_left * 2
+    walk_fast_right * 8
+    face_up
+    emote_question_mark
+    delay_16 * 4
+    walk_fast_left
+    walk_fast_up * 3
+    walk_fast_left * 4
+    face_down
+}
+
+movement Movement_PuzzleGym1_3_C3 {
+    walk_right * 2
+    walk_down * 2
+    face_left
+    walk_right * 2
+    walk_down * 3
+    walk_fast_down * 3
+    walk_fast_right * 3
+    walk_fast_up * 4
+    face_left
+    delay_16 * 3
+    walk_fast_down * 2
+    emote_exclamation_mark
+    walk_up * 5
+    face_left
+    emote_question_mark
+    walk_down * 2
+    walk_fast_up * 3
+    walk_fast_left * 3
+    walk_fast_down
+    face_right
+}
+
+movement Movement_PuzzleGym1_3_C4 {
+    walk_fast_right * 2
+    walk_fast_down
+    walk_fast_left * 4
+    face_up
+    walk_left
+    walk_up * 3
+    walk_left
+    emote_question_mark
+    face_down
+    face_up
+    walk_fast_left * 4
+    walk_fast_down * 3
+    walk_fast_right
+    walk_fast_down * 2
+    walk_left
+    walk_down
+    face_right
+    emote_exclamation_mark
+    delay_16 * 6
+    walk_down * 2
+    walk_fast_right * 6
+    face_up
+}
+
+movement Movement_PuzzleGym1_3_C5 {
+    walk_fast_down * 6
+    walk_left * 7
+    face_up
+    delay_16 * 4
+    walk_fast_right * 2
+    walk_fast_up * 2
+    walk_fast_right
+    walk_up * 2
+    jump_in_place_left_right
+    walk_fast_left * 2
+    walk_fast_up
+    walk_fast_left
+    walk_down * 2
+    emote_exclamation_mark
+    delay_16 * 2
+    walk_left * 4
+    face_down
+}
+
+movement Movement_PuzzleGym1_3_C6 {
+    walk_up * 3
+    walk_left * 3
+    walk_fast_down
+    walk_fast_left * 2
+    emote_question_mark
+    delay_16 * 6
+    walk_up
+    walk_left * 4
+    walk_fast_left * 4
+    walk_fast_down * 3
+    walk_right * 3
+    emote_exclamation_mark
+    delay_16 * 2
+    walk_up
+    walk_right
+    walk_fast_down
+    walk_fast_right * 2
+    face_up
+}
+
+movement Movement_PuzzleGym1_3_C7 {
+    walk_left * 3
+    walk_up
+    face_left
+    delay_16 * 6
+    walk_fast_down
+    walk_fast_left * 5
+    walk_left * 2
+    walk_right
+    jump_in_place_down_up
+    walk_left * 2
+    walk_fast_up * 3
+    walk_fast_right * 2
+    walk_fast_up * 2
+    emote_question_mark
+    delay_16 * 2
+    walk_right
+    walk_up * 3
+    walk_fast_left * 3
+    walk_fast_down
+    face_right
+}
+
+movement Movement_PuzzleGym1_3_C8 {
+    walk_fast_left * 3
+    walk_fast_up * 2
+    emote_exclamation_mark
+    walk_right * 3
+    walk_up * 3
+    walk_left * 2
+    walk_fast_left * 3
+    walk_fast_down * 4
+    jump_in_place_left_right
+    walk_fast_left
+    jump_in_place_up_down
+    delay_16 * 4
+    walk_fast_up * 2
+    walk_left
+    walk_up
+    face_left
+}
+
+movement Movement_PuzzleGym1_3_C9 {
+    walk_left * 3
+    face_down
+    delay_16 * 5
+    walk_fast_right * 3
+    walk_fast_up
+    walk_fast_right * 3
+    walk_up * 3
+    walk_left * 2
+    walk_up
+    walk_fast_right * 5
+    walk_down * 5
+    emote_question_mark
+    delay_16 * 5
+    walk_fast_down * 2
+    face_left
+}
+
+movement Movement_PuzzleGym1_3_C10 {
+    walk_fast_right
+    walk_fast_up
+    walk_left * 4
+    jump_in_place_right_left
+    walk_fast_right * 6
+    walk_right
+    walk_down * 2
+    walk_right * 2
+    emote_exclamation_mark
+    delay_16 * 3
+    walk_fast_down * 2
+    walk_fast_right * 3
+    walk_fast_up * 4
+    face_left
+    delay_16 * 5
+    walk_down
+    walk_up * 3
+    face_left
+}
+
+movement Movement_PuzzleGym1_3_C11 {
+    emote_double_exclamation_mark
+    walk_right * 2
+    face_up
+    jump_in_place_down_up
+    jump_in_place_right_left
+    face_up
+    delay_16 * 8
+    walk_left * 3
+    walk_up
+    face_right
+    emote_question_mark
+    delay_16 * 5
+    walk_down
+    walk_right
+    face_up
+}

@@ -1,0 +1,252 @@
+mapscripts PuzzleGym1_2_MapScripts {}
+
+script PuzzleGym1_2_StartPuzzle {
+    lock
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_2_PanCameraToPuzzle)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_C1, Movement_PuzzleGym1_2_C1)
+    applymovement(LOCALID_C2, Movement_PuzzleGym1_2_C2)
+    applymovement(LOCALID_C3, Movement_PuzzleGym1_2_C3)
+    applymovement(LOCALID_C4, Movement_PuzzleGym1_2_C4)
+    applymovement(LOCALID_C5, Movement_PuzzleGym1_2_C5)
+    applymovement(LOCALID_C6, Movement_PuzzleGym1_2_C6)
+    applymovement(LOCALID_C7, Movement_PuzzleGym1_2_C7)
+    applymovement(LOCALID_C8, Movement_PuzzleGym1_2_C8)
+    waitmovement(LOCALID_C1)
+    waitmovement(LOCALID_C2)
+    waitmovement(LOCALID_C3)
+    waitmovement(LOCALID_C4)
+    waitmovement(LOCALID_C5)
+    waitmovement(LOCALID_C6)
+    waitmovement(LOCALID_C7)
+    waitmovement(LOCALID_C8)
+    special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_2_PanCameraToPlayer)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+	special(RemoveCameraObject)
+    release
+    end
+}
+
+movement Movement_PuzzleGym1_2_PanCameraToPuzzle {
+    walk_up * 5
+}
+
+movement Movement_PuzzleGym1_2_PanCameraToPlayer {
+    walk_down * 5
+}
+
+// NO PHASING
+
+// movement Movement_PuzzleGym1_2_C1 {
+//     walk_right * 7
+//     walk_down * 3
+//     walk_left * 8
+//     walk_up * 3
+//     walk_right * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C2 {
+//     walk_down * 7
+//     walk_left * 3
+//     walk_up * 8
+//     walk_right * 3
+//     walk_down * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C3 {
+//     walk_down * 7
+//     walk_left * 3
+//     walk_up * 8
+//     walk_right * 3
+//     walk_down * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C4 {
+//     walk_left * 7
+//     walk_up * 3
+//     walk_right * 8
+//     walk_down * 3
+//     walk_left * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C5 {
+//     walk_left * 7
+//     walk_up * 3
+//     walk_right * 8
+//     walk_down * 3
+//     walk_left * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C6 {
+//     walk_up * 7
+//     walk_right * 3
+//     walk_down * 8
+//     walk_left * 3
+//     walk_up * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C7 {
+//     walk_up * 7
+//     walk_right * 3
+//     walk_down * 8
+//     walk_left * 3
+//     walk_up * 6
+// }
+
+// movement Movement_PuzzleGym1_2_C8 {
+//     walk_right * 7
+//     walk_down * 3
+//     walk_left * 8
+//     walk_up * 3
+//     walk_right * 6
+// }
+
+
+
+// Phasing
+movement Movement_PuzzleGym1_2_C1 {
+    face_down
+    walk_in_place_down * 3
+    walk_right * 4
+    walk_down
+    face_right
+    delay_16
+    walk_left * 2
+    walk_down * 5
+    face_left
+    walk_in_place_left * 5
+    walk_up * 5
+}
+
+movement Movement_PuzzleGym1_2_C2 {
+    walk_up
+    walk_left
+    face_down
+    delay_16
+    walk_right
+    walk_down * 5
+    walk_right * 4
+    walk_in_place_down * 3
+    walk_right
+    walk_down * 3
+    walk_left * 2
+    face_up
+    delay_16
+}
+
+movement Movement_PuzzleGym1_2_C3 {
+    walk_down * 2
+    walk_left
+    walk_in_place_up * 3
+    walk_left * 2
+    walk_up
+    walk_left * 2
+    delay_16 * 2
+    walk_down
+    walk_left * 2
+    face_up
+    face_down
+    jump_in_place_down
+    walk_left
+    walk_down * 4
+}
+
+movement Movement_PuzzleGym1_2_C4 {
+    walk_down * 2
+    jump_in_place_down * 2
+    walk_left
+    face_down
+    delay_16
+    walk_left
+    walk_down * 3
+    walk_right * 2
+    face_up
+    delay_16 * 2
+    walk_left * 6
+    emote_exclamation_mark
+    walk_right * 2
+    walk_up
+}
+
+movement Movement_PuzzleGym1_2_C5 {
+    walk_left * 2
+    walk_up * 2
+    face_right
+    jump_in_place_right_left * 2
+    walk_left * 2
+    walk_up * 2
+    face_right
+    face_left
+    walk_left * 2
+    walk_up
+    walk_left
+    walk_up * 2
+    emote_question_mark
+    face_right
+    walk_up
+    walk_right * 5
+}
+
+movement Movement_PuzzleGym1_2_C6 {
+    walk_up * 3
+    jump_in_place_up * 2
+    walk_up * 4
+    walk_right
+    face_down
+    delay_16 * 2
+    walk_right * 2
+    walk_down * 3
+    walk_left
+    face_up
+    emote_exclamation_mark
+    walk_left
+    walk_down
+    walk_left * 2
+    walk_down
+    walk_left
+    walk_down
+    walk_right * 2
+    emote_exclamation_mark
+    walk_down
+}
+
+movement Movement_PuzzleGym1_2_C7 {
+    walk_down
+    walk_right * 3
+    walk_up * 2
+    face_right
+    face_left
+    delay_16 * 2
+    walk_up
+    walk_left * 3
+    walk_down * 2
+    emote_exclamation_mark
+    jump_in_place_down_up
+    walk_up * 4
+    walk_right * 5
+    walk_up
+    face_right
+    delay_16 * 2
+    walk_left
+}
+
+movement Movement_PuzzleGym1_2_C8 {
+    emote_exclamation_mark
+    walk_right
+    face_down
+    emote_question_mark
+    walk_up * 2
+    walk_right * 3
+    walk_down * 3
+    face_right
+    delay_16 * 4
+    walk_up * 3
+    walk_right * 3
+    walk_up * 2
+    face_left
+    jump_in_place_left_right * 2
+    walk_down * 5
+}

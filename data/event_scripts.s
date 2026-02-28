@@ -1669,3 +1669,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Route16_Grotto/scripts.inc"
 	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"
+
+	.include "data/maps/PuzzleGym1_1/scripts.inc"
+
+	.include "data/maps/PuzzleGym1_3/scripts.inc"
+
+	.include "data/maps/PuzzleGym1_2/scripts.inc"

@@ -1,0 +1,82 @@
+mapscripts PuzzleGym1_1_MapScripts {}
+
+script PuzzleGym1_StartPuzzle {
+    lock
+    msgbox(format("Let's go!"))
+    waitmessage
+    closemessage
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_PanCameraToPuzzle)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_C1, Movement_PuzzleGym1_C1)
+    applymovement(LOCALID_C2, Movement_PuzzleGym1_C2)
+    applymovement(LOCALID_C3, Movement_PuzzleGym1_C3)
+    applymovement(LOCALID_C4, Movement_PuzzleGym1_C4)
+    waitmovement(0)
+    waitmovement(1)
+    waitmovement(2)
+    waitmovement(3)
+    special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, Movement_PuzzleGym1_PanCameraToPlayer)
+	waitmovement(OBJ_EVENT_ID_CAMERA)
+	special(RemoveCameraObject)
+    release
+    end
+}
+
+movement Movement_PuzzleGym1_PanCameraToPuzzle {
+    walk_up * 3
+}
+
+movement Movement_PuzzleGym1_PanCameraToPlayer {
+    walk_down * 3
+}
+
+movement Movement_PuzzleGym1_C1 {
+    walk_right * 3
+    walk_left
+    walk_right
+    walk_down * 3
+    walk_right * 4
+    walk_up * 3
+    walk_left * 3
+    walk_down * 3
+    walk_left * 3
+    face_up
+}
+
+movement Movement_PuzzleGym1_C2 {
+    walk_left
+    walk_right
+    walk_up * 3
+    walk_left * 3
+    walk_down * 3
+    walk_left
+    walk_up * 2
+    walk_right
+    walk_down * 2
+    walk_right
+    face_up
+}
+
+movement Movement_PuzzleGym1_C3 {
+    walk_down * 3
+    walk_left * 4
+    walk_up * 3
+    walk_right * 3
+    walk_down * 3
+    walk_up * 3
+    walk_right * 2
+    face_down
+}
+
+movement Movement_PuzzleGym1_C4 {
+    walk_up * 3
+    walk_right
+    walk_down * 3
+    walk_right * 3
+    walk_up * 3
+    walk_left * 6
+    face_down
+}
