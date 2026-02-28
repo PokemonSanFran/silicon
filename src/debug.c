@@ -2432,7 +2432,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].tIsComplex = FALSE;
 
     FreeMonIconPalettes();
-    LoadMonIconPalette(gTasks[taskId].tInput);
+    LoadMonIconPalettePersonality(gTasks[taskId].tInput, 0);
     gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
 }
@@ -2466,7 +2466,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].tIsComplex = TRUE;
 
     FreeMonIconPalettes();
-    LoadMonIconPalette(gTasks[taskId].tInput);
+    LoadMonIconPalettePersonality(gTasks[taskId].tInput, 0);
     gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
     gTasks[taskId].tIterator = 0;
@@ -2490,7 +2490,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         Debug_Display_SpeciesInfo(gTasks[taskId].tInput, gTasks[taskId].tDigit, gTasks[taskId].tSubWindowId);
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
         FreeMonIconPalettes();
-        LoadMonIconPalette(gTasks[taskId].tInput);
+        LoadMonIconPalettePersonality(gTasks[taskId].tInput, 0);
         gTasks[taskId].tSpriteId = CreateMonIcon(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0);
         gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
     }
@@ -3696,7 +3696,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
         QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
 
