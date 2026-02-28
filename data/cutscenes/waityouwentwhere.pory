@@ -1,6 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const OLIVER = 10
-const FLAG_HIDE_OLIVER = FLAG_TEMP_1
 
 script WaitYouWentWhere_ObjectSetUp_Script {
 	call(WaitYouWentWhere_HideOliver_Script)
@@ -25,11 +23,11 @@ script WaitYouWentWhere_ObjectSetUp_Script {
 }
 
 script WaitYouWentWhere_HideOliver_Script {
-    setflag(FLAG_HIDE_OLIVER)
+    setobjectflagfromlocalid(LOCALID_POPIDORAPIER_OLIVER)
 }
 
 script WaitYouWentWhere_ShowOliver_Script {
-    clearflag(FLAG_HIDE_OLIVER)
+    clearobjectflagfromlocalid(LOCALID_POPIDORAPIER_OLIVER)
 }
 
 script WaitYouWentWhere_PlayerSetUp_Script {
@@ -59,7 +57,7 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
         waitmovement(0)
 
         applymovement(PLAYER,Player_WaitYouWentWhere_WalkWest)
-        applymovement(OLIVER,Oliver_WaitYouWentWhere_WalkWest)
+        applymovement(LOCALID_POPIDORAPIER_OLIVER,Oliver_WaitYouWentWhere_WalkWest)
 
         msgbox(gText_WaitYouWentWhere_IActuallyJustGot,,SPEAKER_ALICIA)
 
@@ -81,9 +79,9 @@ script WaitYouWentWhere_FirstInteract_Dialogue {
 
         closemessage
 
-        applymovement(OLIVER,WaitYouWentWhere_WalkUpHill)
+        applymovement(LOCALID_POPIDORAPIER_OLIVER,WaitYouWentWhere_WalkUpHill)
         waitmovement(0)
-        removeobject(OLIVER)
+        removeobject(LOCALID_POPIDORAPIER_OLIVER)
         endcutscene
         release
         setvar(VAR_WAIT_YOU_WENT_WHERE,POST_WAITYOUWENTWHERE)

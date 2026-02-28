@@ -1,20 +1,16 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const OLIVER = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const VAR_TALKED_CHARLOTTE = VAR_TEMP_0
 
 script ImProbablyBetterThanYou_ObjectSetUp{
-    setflag(FLAG_HIDE_OLIVER)
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
     return
 }
 
 script ImProbablyBetterThanYou_PostCutscene_ObjectSetUp_Script
 {
     call(ImProbablyBetterThanYou_ObjectSetUp)
-    setobjectxyperm(CHARLOTTE,4,6)
-    turnobject(CHARLOTTE,DIR_WEST)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,4,6)
+    turnobject(SHARPRISE_COMPOUND_1F_CHARLOTTE,DIR_WEST)
    return
 }
 
@@ -43,9 +39,9 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
         lock
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
         playse(SE_PIN)
-        applymovement(CHARLOTTE,Common_Movement_ExclamationMark)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToPlayer)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,ImProbablyBetterThanYou_WalkToPlayer)
         waitmovement(0)
         msgbox(gText_ImProbablyBetterThanYou_YouMustBe,,SPEAKER_CHARLOTTE)
         reveal(REVEAL_CHARLOTTE)
@@ -56,7 +52,7 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
 }
 
 script ImProbablyBetterThanYou_KindaShabby_Dialogue {
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_LookAround)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,ImProbablyBetterThanYou_LookAround)
         waitmovement(0)
         msgbox(gText_ImProbablyBetterThanYou_KindaShabbyHuh,,SPEAKER_CHARLOTTE)
         closemessage
@@ -78,11 +74,11 @@ script ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue {
 
 script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
         msgbox(gText_ImProbablyBetterThanYou_IKnowOurOrientation,,SPEAKER_CHARLOTTE)
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_GestureUpstairs)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,ImProbablyBetterThanYou_GestureUpstairs)
         waitmovement(0)
         msgbox(gText_ImProbablyBetterThanYou_ButBothRooms,,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
                 closemessage
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_WalkToCouch)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,ImProbablyBetterThanYou_WalkToCouch)
         waitmovement(0)
         fadedefaultbgm
         endcutscene
@@ -113,7 +109,7 @@ script ImProbablyBetterThanYou_Annoyed_Dialogue {
             setvar(VAR_TALKED_CHARLOTTE,1)
     }
         closemessage
-        applymovement(CHARLOTTE,ImProbablyBetterThanYou_GoBackToFood)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,ImProbablyBetterThanYou_GoBackToFood)
             waitmovement(0)
 }
 
