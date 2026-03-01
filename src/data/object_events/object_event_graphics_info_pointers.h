@@ -293,6 +293,14 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_6;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_7;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_8;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_9;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Designer_1;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Designer_2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Developer_1;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Developer_2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Founder_1;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Founder_2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_1;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_2;
 // End silicon
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
@@ -601,6 +609,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
+    // Start silicon
     [OBJ_EVENT_GFX_COMRADE_1] =            &gObjectEventGraphicsInfo_Comrade_1,
     [OBJ_EVENT_GFX_COMRADE_2] =            &gObjectEventGraphicsInfo_Comrade_2,
     [OBJ_EVENT_GFX_COMRADE_3] =            &gObjectEventGraphicsInfo_Comrade_3,
@@ -610,6 +619,15 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_COMRADE_7] =            &gObjectEventGraphicsInfo_Comrade_7,
     [OBJ_EVENT_GFX_COMRADE_8] =            &gObjectEventGraphicsInfo_Comrade_8,
     [OBJ_EVENT_GFX_COMRADE_9] =            &gObjectEventGraphicsInfo_Comrade_9,
+    [OBJ_EVENT_GFX_DESIGNER_1] = &gObjectEventGraphicsInfo_Designer_1,
+    [OBJ_EVENT_GFX_DESIGNER_2] = &gObjectEventGraphicsInfo_Designer_2,
+    [OBJ_EVENT_GFX_DEVELOPER_1] = &gObjectEventGraphicsInfo_Developer_1,
+    [OBJ_EVENT_GFX_DEVELOPER_2] = &gObjectEventGraphicsInfo_Developer_2,
+    [OBJ_EVENT_GFX_FOUNDER_1] = &gObjectEventGraphicsInfo_Founder_1,
+    [OBJ_EVENT_GFX_FOUNDER_2] = &gObjectEventGraphicsInfo_Founder_2,
+    [OBJ_EVENT_GFX_PRODUCT_MANAGER_1] = &gObjectEventGraphicsInfo_Product_Manager_1,
+    [OBJ_EVENT_GFX_PRODUCT_MANAGER_2] = &gObjectEventGraphicsInfo_Product_Manager_2,
+    // End silicon
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

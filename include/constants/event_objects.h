@@ -316,11 +316,19 @@
 #define OBJ_EVENT_GFX_COMRADE_7                    300
 #define OBJ_EVENT_GFX_COMRADE_8                    301
 #define OBJ_EVENT_GFX_COMRADE_9                    302
+#define OBJ_EVENT_GFX_DESIGNER_1                   303
+#define OBJ_EVENT_GFX_DESIGNER_2                   304
+#define OBJ_EVENT_GFX_DEVELOPER_1                  305
+#define OBJ_EVENT_GFX_DEVELOPER_2                  306
+#define OBJ_EVENT_GFX_FOUNDER_1                    307
+#define OBJ_EVENT_GFX_FOUNDER_2                    308
+#define OBJ_EVENT_GFX_PRODUCT_MANAGER_1            309
+#define OBJ_EVENT_GFX_PRODUCT_MANAGER_2            310
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        303
+#define NUM_OBJ_EVENT_GFX                        311
 //#define NUM_OBJ_EVENT_GFX                        242
 
 
@@ -477,6 +485,14 @@
 #define OBJ_EVENT_PAL_TAG_COMRADE_7 0x1147
 #define OBJ_EVENT_PAL_TAG_COMRADE_8 0x1148
 #define OBJ_EVENT_PAL_TAG_COMRADE_9 0x1149
+#define OBJ_EVENT_PAL_TAG_DESIGNER_1    0x1150
+#define OBJ_EVENT_PAL_TAG_DESIGNER_2    0x1151
+#define OBJ_EVENT_PAL_TAG_DEVELOPER_1   0x1152
+#define OBJ_EVENT_PAL_TAG_DEVELOPER_2   0x1153
+#define OBJ_EVENT_PAL_TAG_FOUNDER_1     0x1154
+#define OBJ_EVENT_PAL_TAG_FOUNDER_2     0x1155
+#define OBJ_EVENT_PAL_TAG_PRODUCT_MANAGER_1            0x1156
+#define OBJ_EVENT_PAL_TAG_PRODUCT_MANAGER_2            0x1157
 // End silicon
 
 #if OW_FOLLOWERS_POKEBALLS
