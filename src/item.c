@@ -22,6 +22,7 @@
 #include "constants/hold_effects.h"
 #include "sprays.h" // siliconMerge
 #include "move.h" // siliconMerge
+#include "ui_shop.h" // shopMenu
 
 #define DUMMY_PC_BAG_POCKET                 \
 {                                           \
@@ -976,3 +977,41 @@ u32 GetItemNativeGroup(u32 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].nativeItemGroup;
 }
+
+// Start shopMenu
+enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId)
+{
+    static const enum ShopMenuCategories pocketToCategoryTable[POCKETS_COUNT] =
+    {
+        [POCKET_ITEMS]      = SHOP_CATEGORY_OTHER_ITEMS,
+        [POCKET_POKE_BALLS] = SHOP_CATEGORY_POKE_BALLS,
+        [POCKET_TM_HM]      = SHOP_CATEGORY_TMS,
+        [POCKET_BERRIES]    = SHOP_CATEGORY_BERRIES,
+        [POCKET_KEY_ITEMS]  = NUM_SHOP_CATEGORIES,
+    };
+
+    return pocketToCategoryTable[pocketId];
+}
+
+// PSF TODO apply new bag pockets into each respective categories
+enum ShopMenuCategories GetItemShopCategory(u16 itemId)
+{
+    return ConvertPocketToCategory(GetItemPocket(itemId));
+}
+
+u32 GetItemShopCriteriaGoal(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].criteriaGoal;
+}
+
+ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].criteriaFunc;
+}
+
+u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId)
+{
+    return BagPocket_CountTotalItemQuantity(&gBagPockets[pocket], itemId);
+}
+
+// End shopMenu
