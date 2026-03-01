@@ -144,7 +144,7 @@ script YouCantStopMe_Confront_Dialogue {
 }
 
 script YouCantStopMe_StartBossBattle_Script {
-        msgbox(format("You were. Now you’re annoying. Soon to be dead."),MSGBOX_NPC,SPEAKER_LUCREZIA)
+        msgbox(format("You were. Now you’re annoying. Soon to be a thing of the past."),MSGBOX_NPC,SPEAKER_LUCREZIA)
         closemessage
 
         trainerbattle_no_intro(TRAINER_LUCREZIA_A,format("Wow! If I had the foresight I'd have taken you out sooner..."))
