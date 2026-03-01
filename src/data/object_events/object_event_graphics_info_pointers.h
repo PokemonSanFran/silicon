@@ -284,6 +284,15 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalki
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_1;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_3;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_4;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_5;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_6;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_7;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_8;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_9;
 // End silicon
 // Begin pokemon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
@@ -592,6 +601,15 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,
+    [OBJ_EVENT_GFX_COMRADE_1] =            &gObjectEventGraphicsInfo_Comrade_1,
+    [OBJ_EVENT_GFX_COMRADE_2] =            &gObjectEventGraphicsInfo_Comrade_2,
+    [OBJ_EVENT_GFX_COMRADE_3] =            &gObjectEventGraphicsInfo_Comrade_3,
+    [OBJ_EVENT_GFX_COMRADE_4] =            &gObjectEventGraphicsInfo_Comrade_4,
+    [OBJ_EVENT_GFX_COMRADE_5] =            &gObjectEventGraphicsInfo_Comrade_5,
+    [OBJ_EVENT_GFX_COMRADE_6] =            &gObjectEventGraphicsInfo_Comrade_6,
+    [OBJ_EVENT_GFX_COMRADE_7] =            &gObjectEventGraphicsInfo_Comrade_7,
+    [OBJ_EVENT_GFX_COMRADE_8] =            &gObjectEventGraphicsInfo_Comrade_8,
+    [OBJ_EVENT_GFX_COMRADE_9] =            &gObjectEventGraphicsInfo_Comrade_9,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

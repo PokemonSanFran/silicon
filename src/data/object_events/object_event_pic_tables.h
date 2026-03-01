@@ -1661,6 +1661,51 @@ const struct SpriteFrameImage gObjectEventPicTable_ShinzoWalking[] =
     overworld_ascending_frames(gObjectEventPic_ShinzoWalking,4,4),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_1[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_1,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_2[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_2,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_3[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_3,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_4[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_4,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_5[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_5,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_6[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_6,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_7[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_7,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_8[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_8,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Comrade_9[] =
+{
+    overworld_ascending_frames(gObjectEventPic_Comrade_9,4,4),
+};
+
 static const struct SpriteFrameImage sPicTable_Unknown[] = {
     obj_frame_tiles(gObjectEventPic_UnknownNormal),
 };

@@ -479,6 +479,34 @@ const u16 gObjectEventPal_ShinzoWalking[] = INCBIN_U16("graphics/object_events/p
 
 const u32 gObjectEventPic_UnknownNormal[] = INCBIN_U32("graphics/object_events/pics/people/unknown/walking.4bpp");
 const u16 gObjectEventPal_UnknownNormal[] = INCBIN_U16("graphics/object_events/pics/people/unknown/walking.gbapal");
+
+const u32 gObjectEventPic_Comrade_1[] = INCBIN_U32("graphics/object_events/pics/people/comrade_1.4bpp");
+const u16 gObjectEventPal_Comrade_1[] = INCBIN_U16("graphics/object_events/palettes/comrade_1.gbapal");
+
+const u32 gObjectEventPic_Comrade_2[] = INCBIN_U32("graphics/object_events/pics/people/comrade_2.4bpp");
+const u16 gObjectEventPal_Comrade_2[] = INCBIN_U16("graphics/object_events/palettes/comrade_2.gbapal");
+
+const u32 gObjectEventPic_Comrade_3[] = INCBIN_U32("graphics/object_events/pics/people/comrade_3.4bpp");
+const u16 gObjectEventPal_Comrade_3[] = INCBIN_U16("graphics/object_events/palettes/comrade_3.gbapal");
+
+const u32 gObjectEventPic_Comrade_4[] = INCBIN_U32("graphics/object_events/pics/people/comrade_4.4bpp");
+const u16 gObjectEventPal_Comrade_4[] = INCBIN_U16("graphics/object_events/palettes/comrade_4.gbapal");
+
+const u32 gObjectEventPic_Comrade_5[] = INCBIN_U32("graphics/object_events/pics/people/comrade_5.4bpp");
+const u16 gObjectEventPal_Comrade_5[] = INCBIN_U16("graphics/object_events/palettes/comrade_5.gbapal");
+
+const u32 gObjectEventPic_Comrade_6[] = INCBIN_U32("graphics/object_events/pics/people/comrade_6.4bpp");
+const u16 gObjectEventPal_Comrade_6[] = INCBIN_U16("graphics/object_events/palettes/comrade_6.gbapal");
+
+const u32 gObjectEventPic_Comrade_7[] = INCBIN_U32("graphics/object_events/pics/people/comrade_7.4bpp");
+const u16 gObjectEventPal_Comrade_7[] = INCBIN_U16("graphics/object_events/palettes/comrade_7.gbapal");
+
+const u32 gObjectEventPic_Comrade_8[] = INCBIN_U32("graphics/object_events/pics/people/comrade_8.4bpp");
+const u16 gObjectEventPal_Comrade_8[] = INCBIN_U16("graphics/object_events/palettes/comrade_8.gbapal");
+
+const u32 gObjectEventPic_Comrade_9[] = INCBIN_U32("graphics/object_events/pics/people/comrade_9.4bpp");
+const u16 gObjectEventPal_Comrade_9[] = INCBIN_U16("graphics/object_events/palettes/comrade_9.gbapal");
+
 // End silicon
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
 

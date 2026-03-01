@@ -34,9 +34,9 @@ script Earthquake_PostRescue_Objects_Script {
         addobject(BAIYA)
         addobject(ADAORA)
 
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,15,32,10)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,16,31,12)
-        createvobject(OBJ_EVENT_GFX_AQUA_MEMBER_M,17,31,11)
+        createvobject(OBJ_EVENT_GFX_COMRADE_4,15,32,10)
+        createvobject(OBJ_EVENT_GFX_COMRADE_2,16,31,12)
+        createvobject(OBJ_EVENT_GFX_COMRADE_8,17,31,11)
 
         turnvobject(16,DIR_EAST)
         turnvobject(17,DIR_EAST)

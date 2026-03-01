@@ -307,11 +307,20 @@
 #define OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING    291
 #define OBJ_EVENT_GFX_SILICON_PLAYER_N3_WATERING   292
 #define OBJ_EVENT_GFX_APRICORN_TREE              293
+#define OBJ_EVENT_GFX_COMRADE_1                    294
+#define OBJ_EVENT_GFX_COMRADE_2                    295
+#define OBJ_EVENT_GFX_COMRADE_3                    296
+#define OBJ_EVENT_GFX_COMRADE_4                    297
+#define OBJ_EVENT_GFX_COMRADE_5                    298
+#define OBJ_EVENT_GFX_COMRADE_6                    299
+#define OBJ_EVENT_GFX_COMRADE_7                    300
+#define OBJ_EVENT_GFX_COMRADE_8                    301
+#define OBJ_EVENT_GFX_COMRADE_9                    302
 
 // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
 // Since dynamic graphics ids still require at least 16 free values, the actual limit
 // is 65519, but even considering follower Pokémon, this should be more than enough :)
-#define NUM_OBJ_EVENT_GFX                        294
+#define NUM_OBJ_EVENT_GFX                        303
 //#define NUM_OBJ_EVENT_GFX                        242
 
 
@@ -459,6 +468,15 @@
 #define OBJ_EVENT_PAL_TAG_SHINZO 0x1139
 #define OBJ_EVENT_PAL_TAG_SILICON 0x1140
 #define OBJ_EVENT_PAL_TAG_SILICON_UNDERWATER  OBJ_EVENT_PAL_TAG_SILICON
+#define OBJ_EVENT_PAL_TAG_COMRADE_1 0x1141
+#define OBJ_EVENT_PAL_TAG_COMRADE_2 0x1142
+#define OBJ_EVENT_PAL_TAG_COMRADE_3 0x1143
+#define OBJ_EVENT_PAL_TAG_COMRADE_4 0x1144
+#define OBJ_EVENT_PAL_TAG_COMRADE_5 0x1145
+#define OBJ_EVENT_PAL_TAG_COMRADE_6 0x1146
+#define OBJ_EVENT_PAL_TAG_COMRADE_7 0x1147
+#define OBJ_EVENT_PAL_TAG_COMRADE_8 0x1148
+#define OBJ_EVENT_PAL_TAG_COMRADE_9 0x1149
 // End silicon
 
 #if OW_FOLLOWERS_POKEBALLS
