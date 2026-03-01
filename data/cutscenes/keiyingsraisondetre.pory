@@ -230,7 +230,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         delay(32)
         applymovement(KEIYING, Common_Movement_FaceRight)
         waitmovement(0)
-        msgbox(format("Shit, there's an urgent matter at work. I'm so sorry kids, I'll try to hurry back."),,SPEAKER_KEIYING)
+        msgbox(format("Ah!...There's an urgent matter at work. I'm so sorry kids, I'll try to hurry back."),,SPEAKER_KEIYING)
         msgbox(format("{PLAYER}, I would hate to have you make the trek back to CuconuTown this late. We have a guest room, if you'd like to stay here."),,SPEAKER_KEIYING)
         msgbox(format("Oh, that would be great, thanks!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
         closemessage

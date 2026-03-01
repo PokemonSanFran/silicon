@@ -94,7 +94,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
 script WeCanStopYouActually_StartBossBattle_Script {
         setvar(VAR_TOWER_RAID_STATE,SAVE_LUCREZIA_SHARPRISESPIRE)
-        msgbox(format("And I’ll FRIGGIN’ KILL YOU!"),,SPEAKER_LUCREZIA)
+        msgbox(format("I'LL THROW YOU OUT OF THIS BUILDING MYSELF, FROM THE TOP FLOOR IF I HAVE TO!""),,SPEAKER_LUCREZIA,TAIL_SHOUT,EMOTE_ANGRY)
 
         closemessage
 

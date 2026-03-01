@@ -97,7 +97,7 @@ script ExhibitionBattle_PostBattle_Dialogue
         msgbox(format("I've never seen anybody so excited to see me lose!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }
 
-    msgbox(format("I'm convinced. This is going to be the best League season ever. The sponsors are excited, viewership is at an all-time high, and we're going to make it big! I'm getting emotional... perhaps I should capture this moment in an email!"),,SPEAKER_LUCREZIA)
+    msgbox(format("I'm convinced. This is going to be the best League season ever. The sponsors are excited, viewership is at an all-time high, and we're going to make it big! I'm feeling so energised...I could send 1000 emails right now!"),,SPEAKER_LUCREZIA)
     closemessage
     goto(ExhibitionBattle_Monologue)
 }

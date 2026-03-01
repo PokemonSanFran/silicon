@@ -114,7 +114,7 @@ script Warehourse_Interact_Script
 script WarehouseRave_Battle_Script
 {
     lock
-        msgbox(format("Prepare to fight for your life!"),,SPEAKER_KEIYING)
+        msgbox(format("Prepare for the fight of your life!"),,SPEAKER_KEIYING)
         trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,format("Yes… they'll believe I was overpowered by the Champion…"))
         closemessage
 

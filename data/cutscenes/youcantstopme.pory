@@ -101,7 +101,7 @@ script YouCantStopMe_Confront_Dialogue {
 
         msgbox(format("One mass casualty event wasn’t enough?! Ruining a region!? Becoming a multi-billionaire? What else do you want?"),,SPEAKER_ALICIA)
 
-        msgbox(format("Hah! I think mass casualty is a little dramatic, don’t you think? A few people died. They shouldn’t have aligned themselves with terrorists. They were getting in the way of shareholder profits, which is why I have work to do, actually…"),,SPEAKER_LUCREZIA)
+        msgbox(format("Hah! I think mass casualty is a little dramatic, don’t you? A few people died. They shouldn’t have aligned themselves with terrorists. They were getting in the way of shareholder profits, which is why I have work to do, actually…"),,SPEAKER_LUCREZIA)
 
         closemessage
 
@@ -113,7 +113,7 @@ script YouCantStopMe_Confront_Dialogue {
 
         msgbox(format("You really don’t give a shit."),,SPEAKER_ALICIA)
 
-        msgbox(format("Nope! I do wish you had just played your role though. Charlotte isn’t as… charming as you, so we’ve gotta keep them behind the scenes, you know? Gotta find a new kid, I guess."),,SPEAKER_LUCREZIA)
+        msgbox(format("Nope! I do wish you had just played your role though. Charlotte isn’t as… charming as you, so we have to keep them behind the scenes. You could have been our golden child. Suppose we'll have to find another..."),,SPEAKER_LUCREZIA)
 
         msgbox(format("I was just a glorified PR puppet for you?!"),,SPEAKER_ALICIA)
 
@@ -147,7 +147,7 @@ script YouCantStopMe_StartBossBattle_Script {
         msgbox(format("You were. Now you’re annoying. Soon to be dead."),MSGBOX_NPC,SPEAKER_LUCREZIA)
         closemessage
 
-        trainerbattle_no_intro(TRAINER_LUCREZIA_A,format("Wow! Guess we should have taken you out sooner, huh?"))
+        trainerbattle_no_intro(TRAINER_LUCREZIA_A,format("Wow! If I had the foresight I'd have taken you out sooner..."))
         setvar(VAR_TOWER_RAID_STATE,DEFEATED_FIRST_LUCREZIA)
         startcutscene(JUMPPLAYER_YOUCANTSTOPME_POSTBATTLE)
 }
