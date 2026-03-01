@@ -3,6 +3,7 @@
 mapscripts HalerbaWilds_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_12,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueCutM)
     }
 MAP_SCRIPT_ON_FRAME_TABLE [
                 //FLAG_VISITED_HALERBAWILDS_NORTH, FALSE: Generic_Mappreview

@@ -520,7 +520,47 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueStrengthR
     end
 }
 
-script Quest_Bodegaburnout_Script_Hide_BodegaburnoutDeliveryStrengthH
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK
 {
-    setflag(FLAG_TEMP_4)
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_K)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueDiveN
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_DIVE_N)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashP
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueL
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_L)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueWhirlpoolS
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthR
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashO
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueCutM
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_CUT_M)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthQ
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q)
 }

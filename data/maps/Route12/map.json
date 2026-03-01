@@ -153,7 +153,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_1F"
+      "flag": "FLAG_TEMP_1D"
     },
     {
       "local_id": "LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P",
@@ -167,7 +167,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueRockSmashP",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1C"
     }
   ],
   "warp_events": [

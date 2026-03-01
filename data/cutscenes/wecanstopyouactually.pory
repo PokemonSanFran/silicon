@@ -3,9 +3,7 @@ const POLICE_A = 2
 const POLICE_B = 3
 const LUCREZIA = 4
 
-const FLAG_HIDE_OLIVER= FLAG_TEMP_1
 const FLAG_HIDE_POLICE = FLAG_TEMP_2
-const FLAG_HIDE_LUCREZIA = FLAG_TEMP_3
 
 script WeCanStopYouActually_FixPlayerPosition_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
@@ -44,7 +42,8 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         delay(30)
         fadescreen(FADE_TO_BLACK)
 
-        msgbox(format("I am Keiying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on HalaiIsland. We did it to flush out and destroy …"),,SPEAKER_KEIYING)
+        buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+        msgbox(format("I am Kei-Ying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on {STR_VAR_1}. We did it to flush out and destroy …"),,SPEAKER_KEIYING)
 
         closemessage
 
@@ -94,7 +93,7 @@ script WeCanStopYouActually_PostBattle_Dialogue {
 
 script WeCanStopYouActually_StartBossBattle_Script {
         setvar(VAR_TOWER_RAID_STATE,SAVE_LUCREZIA_SHARPRISESPIRE)
-        msgbox(format("I'LL THROW YOU OUT OF THIS BUILDING MYSELF, FROM THE TOP FLOOR IF I HAVE TO!""),,SPEAKER_LUCREZIA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("I'LL THROW YOU OUT OF THIS BUILDING MYSELF, FROM THE TOP FLOOR IF I HAVE TO!"),,SPEAKER_LUCREZIA,TAIL_SHOUT,EMOTE_ANGRY)
 
         closemessage
 

@@ -88,7 +88,7 @@ static void Quest_Generic_CountRemainingSubquestsTryProgressReward(enum QuestIdL
     if (Quest_Generic_CountAndBufferRemainingSubquests(questId) != 0)
         return;
 
-    QuestMenu_ScriptSetActive(questId);
+    QuestMenu_ScriptSetReward(questId);
 }
 
 void Quest_Generic_CompleteSubquests(u16 relevantQuest)

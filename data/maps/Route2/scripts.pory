@@ -4,6 +4,7 @@ mapscripts Route2_MapScripts {
         call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
         call(MaybeIFuckedUp_ShowOri_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_15,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK)
     }
     MAP_SCRIPT_ON_LOAD {
         call(HeresHowThisIsGoingToGo_ConstructionCompleted_Script)

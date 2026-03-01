@@ -136,7 +136,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RouteA_Script_Interact_BodegaburnoutRescueWhirlpoolS",
-      "flag": "0"
+      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [

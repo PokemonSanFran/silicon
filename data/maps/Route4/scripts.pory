@@ -2,6 +2,7 @@ mapscripts Route4_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call(ThisIsntRandom_HideObject_AboveGround_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_19,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthR)
     }
     MAP_SCRIPT_ON_LOAD
     {

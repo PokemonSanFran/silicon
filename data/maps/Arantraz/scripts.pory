@@ -3,6 +3,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 mapscripts Arantraz_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(YouRealizeTheyreEvilRight_HideObject_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_14,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueDiveN)
     }
 
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [

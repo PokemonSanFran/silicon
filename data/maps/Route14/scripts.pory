@@ -2,6 +2,7 @@ mapscripts Route14_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Restaurantexpansion2_HideStaffA_Script)
         call(Quest_Restorehodoucity_HideBlackbelt_Route14_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_13,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthQ)
     }
 }
 

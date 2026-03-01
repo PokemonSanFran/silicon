@@ -1,6 +1,7 @@
 mapscripts Route12_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_ArtisanBalls2_CheckTrainerB_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_16,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashP)
     }
 }
 

@@ -1,6 +1,7 @@
 mapscripts Route7_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Restorehodoucity_HideBlackbelt_Route7_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_17,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueL)
     }
 }
 

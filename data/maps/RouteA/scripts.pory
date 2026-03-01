@@ -1,6 +1,7 @@
 mapscripts RouteA_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Warehousewarfare_Barge1Guard_Visibility_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_18,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueWhirlpoolS)
     }
 }
 

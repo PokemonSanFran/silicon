@@ -1,11 +1,10 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const OLIVER = 2
-const FLAG_HIDE_OLIVER_CHARLOTTE = FLAG_TEMP_1
 
 script OffYouGo_ObjectCleanUp_Script {
     if (var(VAR_GOLDENGATEBRIDGE_STATE) != CALLED_BY_CHARLOTTE){
-        setflag(FLAG_HIDE_OLIVER_CHARLOTTE)
+        setobjectflagfromlocalid(CHARLOTTE)
     }
     return
 }

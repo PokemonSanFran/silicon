@@ -1,7 +1,6 @@
 mapscripts Route10_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(NewAssholeAppears_HideBaiya_Script)
-        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_1,Quest_Bodegaburnout_Script_Hide_BodegaburnoutDeliveryStrengthH)
     }
 }
 script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
