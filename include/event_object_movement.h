@@ -522,6 +522,8 @@ bool8 PlayerIsUnderWaterfall(struct ObjectEvent *objectEvent);
 
 const struct SpritePalette *GetObjectEventSpritePaletteByTag(u16 tag); // startMenu
 u8 GetObjectEventApricornTreeId(u8 objectEventId);
+void SetObjectFlagFromLocalId(u32 localId); // setObjectFlag
+void ClearObjectFlagFromLocalId(u32 localId); // setObjectFlag
 
 // Start pathfinder
 u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);

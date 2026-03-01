@@ -1,20 +1,16 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const OLIVER = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const VAR_TALKED_CHARLOTTE = VAR_TEMP_0
 
 script ImProbablyBetterThanYou_ObjectSetUp{
-    setflag(FLAG_HIDE_OLIVER)
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
     return
 }
 
 script ImProbablyBetterThanYou_PostCutscene_ObjectSetUp_Script
 {
     call(ImProbablyBetterThanYou_ObjectSetUp)
-    setobjectxyperm(CHARLOTTE,4,6)
-    turnobject(CHARLOTTE,DIR_WEST)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,4,6)
+    turnobject(SHARPRISE_COMPOUND_1F_CHARLOTTE,DIR_WEST)
    return
 }
 
@@ -44,9 +40,9 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
         lock
         playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
         playse(SE_PIN)
-        applymovement(CHARLOTTE,Common_Movement_ExclamationMark)
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(CHARLOTTE, moves(walk_right, walk_down, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_right, walk_down, step_end))
         waitmovement(0)
         msgbox(format("You must be {PLAYER}! I'm the other trainer in the Kickstart program, Charlotte."),,SPEAKER_CHARLOTTE)
         reveal(REVEAL_CHARLOTTE)
@@ -57,7 +53,7 @@ script ImProbablyBetterThanYou_CharlotteIntro_Dialogue {
 }
 
 script ImProbablyBetterThanYou_KindaShabby_Dialogue {
-        applymovement(CHARLOTTE, moves(face_left, delay_16, delay_16, face_right, delay_16, delay_16, face_down, delay_16, delay_16, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(face_left, delay_16, delay_16, face_right, delay_16, delay_16, face_down, delay_16, delay_16, step_end))
         waitmovement(0)
         msgbox(format("This place is kinda shabby, huh? I thought Sharprise were pulling out all the stops for us, but no pools or tennis courts or anything of the like…I mean I hardly play since I got into battling but still! Presentation, people…"),,SPEAKER_CHARLOTTE)
         closemessage
@@ -79,11 +75,11 @@ script ImProbablyBetterThanYou_FoodAndWhereYouFrom_Dialogue {
 
 script ImProbablyBetterThanYou_TookTheLeftBedroom_Dialogue {
         msgbox(format("I know our orientation is supposed to start soon, or something like that. I took the bedroom on the left, so the one to the right is yours. I tried to take the good one because I got here first..."),,SPEAKER_CHARLOTTE)
-        applymovement(CHARLOTTE, moves(face_up, delay_16, delay_16, face_down, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(face_up, delay_16, delay_16, face_down, step_end))
         waitmovement(0)
         msgbox(format("but both rooms are exactly the same! Let's chill after you unpack."),,SPEAKER_CHARLOTTE,,EMOTE_LAUGH)
                 closemessage
-        applymovement(CHARLOTTE, moves(walk_up, walk_left, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(walk_up, walk_left, step_end))
         waitmovement(0)
         fadedefaultbgm
         endcutscene
@@ -114,7 +110,7 @@ script ImProbablyBetterThanYou_Annoyed_Dialogue {
             setvar(VAR_TALKED_CHARLOTTE,1)
     }
         closemessage
-        applymovement(CHARLOTTE, moves(face_original_direction, step_end))
+        applymovement(SHARPRISE_COMPOUND_1F_CHARLOTTE, moves(face_original_direction, step_end))
             waitmovement(0)
 }
 

@@ -3578,3 +3578,14 @@
 	.4byte \maxnodes
 	.endm
 @ End pathfinder
+@ Start setObjectFlag
+    .macro setobjectflagfromlocalid localId:req
+	.byte SCR_OP_SETOBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+
+    .macro clearobjectflagfromlocalid localId:req
+	.byte SCR_OP_CLEAROBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+@ End setObjectFlag
