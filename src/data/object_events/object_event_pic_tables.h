@@ -1706,6 +1706,46 @@ const struct SpriteFrameImage gObjectEventPicTable_Comrade_9[] =
     overworld_ascending_frames(gObjectEventPic_Comrade_9,4,4),
 };
 
+const struct SpriteFrameImage gObjectEventPicTable_Designer_1[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Designer_1,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Designer_2[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Designer_2,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Developer_1[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Developer_1,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Developer_2[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Developer_2,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Founder_1[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Founder_1,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Founder_2[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Founder_2,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Product_Manager_1[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Product_Manager_1,4,4),
+};
+
+const struct SpriteFrameImage gObjectEventPicTable_Product_Manager_2[] =
+{
+        overworld_ascending_frames(gObjectEventPic_Product_Manager_2,4,4),
+};
+
 static const struct SpriteFrameImage sPicTable_Unknown[] = {
     obj_frame_tiles(gObjectEventPic_UnknownNormal),
 };

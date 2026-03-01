@@ -554,6 +554,14 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Comrade_7,            OBJ_EVENT_PAL_TAG_COMRADE_7},
     {gObjectEventPal_Comrade_8,            OBJ_EVENT_PAL_TAG_COMRADE_8},
     {gObjectEventPal_Comrade_9,            OBJ_EVENT_PAL_TAG_COMRADE_9},
+    {gObjectEventPal_Designer_1,            OBJ_EVENT_PAL_TAG_DESIGNER_1},
+    {gObjectEventPal_Designer_2,            OBJ_EVENT_PAL_TAG_DESIGNER_2},
+    {gObjectEventPal_Developer_1,            OBJ_EVENT_PAL_TAG_DEVELOPER_1},
+    {gObjectEventPal_Developer_2,            OBJ_EVENT_PAL_TAG_DEVELOPER_2},
+    {gObjectEventPal_Founder_1,            OBJ_EVENT_PAL_TAG_FOUNDER_1},
+    {gObjectEventPal_Founder_2,            OBJ_EVENT_PAL_TAG_FOUNDER_2},
+    {gObjectEventPal_Product_Manager_1,            OBJ_EVENT_PAL_TAG_PRODUCT_MANAGER_1},
+    {gObjectEventPal_Product_Manager_2,            OBJ_EVENT_PAL_TAG_PRODUCT_MANAGER_2},
     // End silicon
 #if OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_MasterBall,            OBJ_EVENT_PAL_TAG_BALL_MASTER},
