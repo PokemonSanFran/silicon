@@ -105,7 +105,7 @@ struct QuestListPosition
     u16 screenCursorPosition;
 };
 
-#define MAX_QUEST_STATES 20
+#define MAX_QUEST_STATES 50
 typedef void (*QuestStateFunc)(u8 state);
 
 struct QuestState

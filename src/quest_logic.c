@@ -1,11 +1,13 @@
 #include "global.h"
 #include "battle.h"
 #include "constants/trainers.h"
+#include "constants/story_jump.h"
 #include "battle_anim.h"
 #include "tv.h"
 #include "buzzr.h"
 #include "script_menu.h"
 #include "battle_setup.h"
+#include "story_jump.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "pokedex.h"
@@ -867,7 +869,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_CUCONU_TOWN_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CUCONU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU,
     },
     [SUB_QUEST_12] =
     {
@@ -875,7 +877,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_CUT_M,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_GLAVEZ,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ,
     },
     [SUB_QUEST_13] =
     {
@@ -883,7 +885,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_PERLACIA_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_PERLACIA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA,
     },
     [SUB_QUEST_14] =
     {
@@ -891,7 +893,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_DIVE_N,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_PETAROSA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA,
     },
     [SUB_QUEST_15] =
     {
@@ -899,7 +901,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_K,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ESPULEE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE,
     },
     [SUB_QUEST_16] =
     {
@@ -907,7 +909,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TIRABUDIN,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN,
     },
     [SUB_QUEST_17] =
     {
@@ -915,7 +917,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_CHASILLA_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_L,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CHASILLA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA,
     },
     [SUB_QUEST_18] =
     {
@@ -923,7 +925,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_MERMEREZA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA,
     },
     [SUB_QUEST_19] =
     {
@@ -931,7 +933,7 @@ static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_
         .assignedMap = MAP_CURENO_PORT_POKEMON_CENTER_1F,
         .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R,
         .deliveryItem = ITEM_NONE,
-        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CURENO,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO,
     },
 };
 
@@ -1081,6 +1083,164 @@ void Script_Quest_Bodegaburnout_GetShopkeeperActiveCode(void)
 {
     enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
     gSpecialVar_Result = Quest_Bodegaburnout_GetShopkeeperActiveCode(subQuestId);
+}
+
+void DebugQuest_BodegaBurnout(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_BODEGABURNOUT_NOT_STARTED:
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_BODEGABURNOUT);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_TALKED_TO_SHOPUNIONREP:
+            VarSet(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_1);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYA);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYB);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_6);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_7);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_8);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_9);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_10);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_11);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_12);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_13);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_14);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEK);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_15);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_16);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEL);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_17);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_18);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_19);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_BODEGABURNOUT);
+            break;
+        default:
+        case STATE_QUEST_BODEGABURNOUT_COMPLETE:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_BODEGABURNOUT);
+            break;
+    }
 }
 
 // ***********************************************************************

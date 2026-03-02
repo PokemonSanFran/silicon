@@ -9,4 +9,8 @@ extern u8 ThereCanOnlyBeOne_Debug_Script[];
 void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType);
 void WarpPlayerAfterVarSet(void);
 
+
+void JumpPlayerTo_WarehouseRave(bool32);
+void JumpPlayerTo_SpeechSpeechSpeech(bool32);
+
 #endif // GUARD_STORYJUMP_H

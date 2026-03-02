@@ -155,8 +155,6 @@ static void JumpPlayerTo_MaskOff_G(bool32);
 static void JumpPlayerTo_MaskOff_Vigrim(bool32);
 static void JumpPlayerTo_LetsFixThis(bool32);
 static void JumpPlayerTo_LockedOut(bool32);
-static void JumpPlayerTo_WarehouseRave(bool32);
-static void JumpPlayerTo_SpeechSpeechSpeech(bool32);
 static void JumpPlayerTo_Persuasivepassenger(bool32);
 static void JumpPlayerTo_Breaktheinternet(bool32);
 static void JumpPlayerTo_Warehousewarfare(bool32);

@@ -53,6 +53,7 @@ void DebugQuest_Hodoutunnels(u8);
 void DebugQuest_Psyop(u8);
 void DebugQuest_BetweenAStoneAndAHardPlace(u8);
 void DebugQuest_RockCollector(u8);
+void DebugQuest_BodegaBurnout(u8);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

@@ -2731,7 +2731,371 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_TWIN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sBodegaBurnout_Sub,
-        .numSubquests = QUEST_BODEGABURNOUT_SUB_COUNT
+        .numSubquests = QUEST_BODEGABURNOUT_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_BODEGABURNOUT_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_ARANTRAZ_MESS_HALL),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_ARANTRAZ_MESS_HALL),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_TALKED_TO_SHOPUNIONREP] =
+            {
+                .name = COMPOUND_STRING("Talked To Shopunionrep"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_CRESALTA_VISTA_SHOP_UNION),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Caphe Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_CAPHE_CITY_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Caphe Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Qiu Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QIU_VILLAGE_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Qiu Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Qiu Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Halai Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_HALAI_ISLAND_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Halai Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Halai Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Oroland Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_OROLAND_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Oroland Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Tora Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_TORA_TOWN_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Tora Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Halerba Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_HALERBA_CITY_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Halerba Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Cresalta Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_CRESALTA_VISTA_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Cresalta Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Irisina Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_IRISINA_TOWN_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Irisina Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Irisina Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Hodou Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_HODOU_CITY_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Hodou Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Hodou Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_ITEM_GIVEN] =
+            {
+                .name = COMPOUND_STRING("Zenzu Item Given"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_ZENZU_ISLAND_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Zenzu Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Zenzu Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Cuconu Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Glavez Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Perlacia Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Petarosa Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Petarosa Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Espulee Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Espulee Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Tirabudin Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Chasilla Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Chasilla Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_TRAINER_BATTLED] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Mermereza Trainer Battled"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Mermereza Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Rescue Target Cureno Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO),
+                .warpId = -1,
+                .x = 7,
+                .y = 21,
+            },
+            [STATE_QUEST_BODEGABURNOUT_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_CURENO_PORT_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+            [STATE_QUEST_BODEGABURNOUT_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_BodegaBurnout,
+                side_quest_map(MAP_CURENO_PORT_POKEMON_CENTER_1F),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_WAREHOUSEWARFARE] =
     {
