@@ -148,11 +148,6 @@ const u8 gText_Quest_AngelDelivery_Desc[] =_("Description");
 const u8 gText_Quest_AngelDelivery_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_AngelDelivery_Map[] =_("TirabudinPlace");
 
-const u8 gText_Quest_GetTheBandBackTogether_Name[] = _("Get The Band Back Together");
-const u8 gText_Quest_GetTheBandBackTogether_Desc[] =_("Description");
-const u8 gText_Quest_GetTheBandBackTogether_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_GetTheBandBackTogether_Map[] =_("CurenoPort");
-
 const u8 gText_Quest_FoodTruckBureacracy_Name[] = _("Food Truck Bureacracy");
 const u8 gText_Quest_FoodTruckBureacracy_Desc[] =_("Description");
 const u8 gText_Quest_FoodTruckBureacracy_DoneDesc[] =_("DoneDescription");
@@ -529,22 +524,6 @@ const u8 gText_Quest_ContractorPorygon_Sub2_Map[] = _("QiuVillage");
 const u8 gText_Quest_ContractorPorygon_Sub3_Name[] = _("Salad");
 const u8 gText_Quest_ContractorPorygon_Sub3_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_ContractorPorygon_Sub3_Map[] = _("Chasilla");
-
-const u8 gText_Quest_GetTheBandBackTogether_Sub1_Name[] = _("Person A");
-const u8 gText_Quest_GetTheBandBackTogether_Sub1_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_GetTheBandBackTogether_Sub1_Map[] = _("Chasilla");
-const u8 gText_Quest_GetTheBandBackTogether_Sub2_Name[] = _("Person B");
-const u8 gText_Quest_GetTheBandBackTogether_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_GetTheBandBackTogether_Sub2_Map[] = _("CresaltaVista");
-const u8 gText_Quest_GetTheBandBackTogether_Sub3_Name[] = _("Person C");
-const u8 gText_Quest_GetTheBandBackTogether_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_GetTheBandBackTogether_Sub3_Map[] = _("Oroland");
-const u8 gText_Quest_GetTheBandBackTogether_Sub4_Name[] = _("Person D");
-const u8 gText_Quest_GetTheBandBackTogether_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_GetTheBandBackTogether_Sub4_Map[] = _("EspuleeOutskirts");
-const u8 gText_Quest_GetTheBandBackTogether_Sub5_Name[] = _("Person E");
-const u8 gText_Quest_GetTheBandBackTogether_Sub5_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_GetTheBandBackTogether_Sub5_Map[] = _("ToraTown");
 
 const u8 gText_Quest_FoodTruckBureacracy_Sub1_Name[] = _("Discount Code");
 const u8 gText_Quest_FoodTruckBureacracy_Sub1_Desc[] = _("Sub Lorem");

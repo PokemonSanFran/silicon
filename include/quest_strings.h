@@ -148,11 +148,6 @@ extern const u8 gText_Quest_AngelDelivery_Desc[];
 extern const u8 gText_Quest_AngelDelivery_DoneDesc[];
 extern const u8 gText_Quest_AngelDelivery_Map[];
 
-extern const u8 gText_Quest_GetTheBandBackTogether_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_DoneDesc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Map[];
-
 extern const u8 gText_Quest_FoodTruckBureacracy_Name[];
 extern const u8 gText_Quest_FoodTruckBureacracy_Desc[];
 extern const u8 gText_Quest_FoodTruckBureacracy_DoneDesc[];
@@ -557,22 +552,6 @@ extern const u8 gText_Quest_ContractorPorygon_Sub2_Map[];
 extern const u8 gText_Quest_ContractorPorygon_Sub3_Name[];
 extern const u8 gText_Quest_ContractorPorygon_Sub3_Desc[];
 extern const u8 gText_Quest_ContractorPorygon_Sub3_Map[];
-
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub1_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub1_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub1_Map[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub2_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub2_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub2_Map[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub3_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub3_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub3_Map[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub4_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub4_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub4_Map[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub5_Name[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub5_Desc[];
-extern const u8 gText_Quest_GetTheBandBackTogether_Sub5_Map[];
 
 extern const u8 gText_Quest_FoodTruckBureacracy_Sub1_Name[];
 extern const u8 gText_Quest_FoodTruckBureacracy_Sub1_Desc[];

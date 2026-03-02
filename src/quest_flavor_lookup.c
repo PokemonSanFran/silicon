@@ -298,3 +298,11 @@ const u8 *GetQuestDesc_BodegaBurnout(void)
     StringAppend(gStringVar4,COMPOUND_STRING(" With Presto’s operations paused, the PokéMart delivery service can now finally start to take off."));
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_GetTheBandBackTogether(void)
+{
+    CopyItemName(ITEM_MACH_BIKE,gStringVar1);
+    u32 flag = ReturnQuestState(QUEST_GETTHEBANDBACKTOGETHER);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_GETTHEBANDBACKTOGETHER].desc[flag]);
+    return gStringVar4;
+}

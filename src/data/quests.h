@@ -255,46 +255,64 @@ static const struct SubQuest sContractorPorygon_Sub[QUEST_CONTRACTORPORYGON_SUB_
 static const struct SubQuest sGetTheBandBackTogether_Sub[QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT] = {
     sub_quest(
             26,
-            gText_Quest_GetTheBandBackTogether_Sub1_Name,
-            gText_Quest_GetTheBandBackTogether_Sub1_Desc,
-            gText_Quest_GetTheBandBackTogether_Sub1_Map,
-            OBJ_EVENT_GFX_BOY_1,
+            COMPOUND_STRING("GetthebandbacktogetherbikerA"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerA of the house!"),
+            gText_Route98,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERA,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Informed")
             ),
     sub_quest(
             27,
-            gText_Quest_GetTheBandBackTogether_Sub2_Name,
-            gText_Quest_GetTheBandBackTogether_Sub2_Desc,
-            gText_Quest_GetTheBandBackTogether_Sub2_Map,
-            OBJ_EVENT_GFX_TEALA,
+            COMPOUND_STRING("GetthebandbacktogetherbikerB"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerB of the house!"),
+            gText_RouteB,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERB,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Informed")
             ),
     sub_quest(
             28,
-            gText_Quest_GetTheBandBackTogether_Sub3_Name,
-            gText_Quest_GetTheBandBackTogether_Sub3_Desc,
-            gText_Quest_GetTheBandBackTogether_Sub3_Map,
-            OBJ_EVENT_GFX_WOMAN_2,
+            COMPOUND_STRING("GetthebandbacktogetherbikerC"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerC of the house!"),
+            gText_HalerbaWilds,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERC,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Informed")
             ),
     sub_quest(
             29,
-            gText_Quest_GetTheBandBackTogether_Sub4_Name,
-            gText_Quest_GetTheBandBackTogether_Sub4_Desc,
-            gText_Quest_GetTheBandBackTogether_Sub4_Map,
-            OBJ_EVENT_GFX_COOK,
+            COMPOUND_STRING("GetthebandbacktogetherbikerD"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerD of the house!"),
+            gText_Route12,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERD,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Informed")
             ),
     sub_quest(
             30,
-            gText_Quest_GetTheBandBackTogether_Sub5_Name,
-            gText_Quest_GetTheBandBackTogether_Sub5_Desc,
-            gText_Quest_GetTheBandBackTogether_Sub5_Map,
-            OBJ_EVENT_GFX_GAMEBOY_KID,
+            COMPOUND_STRING("GetthebandbacktogetherbikerE"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerE of the house!"),
+            gText_NongyuBridge,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERE,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Informed")
+            ),
+    sub_quest(
+            31,
+            COMPOUND_STRING("GetthebandbacktogetherbikerF"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerF of the house!"),
+            gText_Route18,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERF,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Informed")
+            ),
+    sub_quest(
+            32,
+            COMPOUND_STRING("GetthebandbacktogetherbikerG"),
+            COMPOUND_STRING("Informed GetthebandbacktogetherbikerG of the house!"),
+            gText_Route10,
+            OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERG,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Informed")
             ),
@@ -302,7 +320,7 @@ static const struct SubQuest sGetTheBandBackTogether_Sub[QUEST_GETTHEBANDBACKTOG
 
 static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SISTERS_SUB_COUNT] = {
     sub_quest(
-            31,
+            33,
             gText_Quest_ChallengeOfThe7Sisters_Sub1_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub1_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub1_Map,
@@ -311,7 +329,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            32,
+            34,
             gText_Quest_ChallengeOfThe7Sisters_Sub2_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub2_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub2_Map,
@@ -320,7 +338,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            33,
+            35,
             gText_Quest_ChallengeOfThe7Sisters_Sub3_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub3_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub3_Map,
@@ -329,7 +347,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            34,
+            36,
             gText_Quest_ChallengeOfThe7Sisters_Sub4_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub4_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub4_Map,
@@ -338,7 +356,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            35,
+            37,
             gText_Quest_ChallengeOfThe7Sisters_Sub5_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub5_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub5_Map,
@@ -347,7 +365,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            36,
+            38,
             gText_Quest_ChallengeOfThe7Sisters_Sub6_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub6_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub6_Map,
@@ -356,7 +374,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            37,
+            39,
             gText_Quest_ChallengeOfThe7Sisters_Sub7_Name,
             gText_Quest_ChallengeOfThe7Sisters_Sub7_Desc,
             gText_Quest_ChallengeOfThe7Sisters_Sub7_Map,
@@ -368,7 +386,7 @@ static const struct SubQuest sChallengeOfThe7Sisters_Sub[QUEST_CHALLENGEOFTHE7SI
 
 static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
     sub_quest(
-            38,
+            40,
             gText_Quest_CutePokemon_Sub1_Name,
             gText_Quest_CutePokemon_Sub1_Desc,
             gText_Quest_CutePokemon_Sub1_Map,
@@ -377,7 +395,7 @@ static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            39,
+            41,
             gText_Quest_CutePokemon_Sub2_Name,
             gText_Quest_CutePokemon_Sub2_Desc,
             gText_Quest_CutePokemon_Sub2_Map,
@@ -386,7 +404,7 @@ static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            40,
+            42,
             gText_Quest_CutePokemon_Sub3_Name,
             gText_Quest_CutePokemon_Sub3_Desc,
             gText_Quest_CutePokemon_Sub3_Map,
@@ -395,7 +413,7 @@ static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            41,
+            43,
             gText_Quest_CutePokemon_Sub4_Name,
             gText_Quest_CutePokemon_Sub4_Desc,
             gText_Quest_CutePokemon_Sub4_Map,
@@ -407,7 +425,7 @@ static const struct SubQuest sCutePokemon_Sub[QUEST_CUTEPOKEMON_SUB_COUNT] = {
 
 static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
     sub_quest(
-            42,
+            44,
             gText_Quest_WallaceArmy_Sub2_Name,
             gText_Quest_WallaceArmy_Sub2_Desc,
             gText_Quest_WallaceArmy_Sub2_Map,
@@ -416,7 +434,7 @@ static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            43,
+            45,
             gText_Quest_WallaceArmy_Sub3_Name,
             gText_Quest_WallaceArmy_Sub3_Desc,
             gText_Quest_WallaceArmy_Sub3_Map,
@@ -425,7 +443,7 @@ static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            44,
+            46,
             gText_Quest_WallaceArmy_Sub4_Name,
             gText_Quest_WallaceArmy_Sub4_Desc,
             gText_Quest_WallaceArmy_Sub4_Map,
@@ -434,7 +452,7 @@ static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            45,
+            47,
             gText_Quest_WallaceArmy_Sub5_Name,
             gText_Quest_WallaceArmy_Sub5_Desc,
             gText_Quest_WallaceArmy_Sub5_Map,
@@ -443,7 +461,7 @@ static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            46,
+            48,
             gText_Quest_WallaceArmy_Sub6_Name,
             gText_Quest_WallaceArmy_Sub6_Desc,
             gText_Quest_WallaceArmy_Sub6_Map,
@@ -455,7 +473,7 @@ static const struct SubQuest sWallaceArmy_Sub[QUEST_WALLACEARMY_SUB_COUNT] = {
 
 static const struct SubQuest sDexCompletion_Sub[QUEST_DEXCOMPLETION_SUB_COUNT] = {
     sub_quest(
-            47,
+            49,
             gText_Quest_DexCompletion_Sub1_Name,
             gText_Quest_DexCompletion_Sub1_Desc,
             gText_Quest_DexCompletion_Sub1_Map,
@@ -464,7 +482,7 @@ static const struct SubQuest sDexCompletion_Sub[QUEST_DEXCOMPLETION_SUB_COUNT] =
             COMPOUND_STRING("Completed")
             ),
     sub_quest(
-            48,
+            50,
             gText_Quest_DexCompletion_Sub2_Name,
             gText_Quest_DexCompletion_Sub2_Desc,
             gText_Quest_DexCompletion_Sub2_Map,
@@ -476,7 +494,7 @@ static const struct SubQuest sDexCompletion_Sub[QUEST_DEXCOMPLETION_SUB_COUNT] =
 
 static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_SUB_COUNT] = {
     sub_quest(
-            49,
+            51,
             gText_Quest_KitchenVolunteering_Sub1_Name,
             gText_Quest_KitchenVolunteering_Sub1_Desc,
             gText_Quest_KitchenVolunteering_Sub1_Map,
@@ -485,7 +503,7 @@ static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            50,
+            52,
             gText_Quest_KitchenVolunteering_Sub2_Name,
             gText_Quest_KitchenVolunteering_Sub2_Desc,
             gText_Quest_KitchenVolunteering_Sub2_Map,
@@ -494,7 +512,7 @@ static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            51,
+            53,
             gText_Quest_KitchenVolunteering_Sub3_Name,
             gText_Quest_KitchenVolunteering_Sub3_Desc,
             gText_Quest_KitchenVolunteering_Sub3_Map,
@@ -503,7 +521,7 @@ static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            52,
+            54,
             gText_Quest_KitchenVolunteering_Sub4_Name,
             gText_Quest_KitchenVolunteering_Sub4_Desc,
             gText_Quest_KitchenVolunteering_Sub4_Map,
@@ -512,7 +530,7 @@ static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            53,
+            55,
             gText_Quest_KitchenVolunteering_Sub5_Name,
             gText_Quest_KitchenVolunteering_Sub5_Desc,
             gText_Quest_KitchenVolunteering_Sub5_Map,
@@ -524,7 +542,7 @@ static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_
 
 static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
     sub_quest(
-            54,
+            56,
             gText_Quest_ArtisanBalls_Sub1_Name,
             gText_Quest_ArtisanBalls_Sub1_Desc,
             gText_Quest_ArtisanBalls_Sub1_Map,
@@ -533,7 +551,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            55,
+            57,
             gText_Quest_ArtisanBalls_Sub2_Name,
             gText_Quest_ArtisanBalls_Sub2_Desc,
             gText_Quest_ArtisanBalls_Sub2_Map,
@@ -542,7 +560,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            56,
+            58,
             gText_Quest_ArtisanBalls_Sub3_Name,
             gText_Quest_ArtisanBalls_Sub3_Desc,
             gText_Quest_ArtisanBalls_Sub3_Map,
@@ -551,7 +569,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            57,
+            59,
             gText_Quest_ArtisanBalls_Sub4_Name,
             gText_Quest_ArtisanBalls_Sub4_Desc,
             gText_Quest_ArtisanBalls_Sub4_Map,
@@ -560,7 +578,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            58,
+            60,
             gText_Quest_ArtisanBalls_Sub5_Name,
             gText_Quest_ArtisanBalls_Sub5_Desc,
             gText_Quest_ArtisanBalls_Sub5_Map,
@@ -569,7 +587,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            59,
+            61,
             gText_Quest_ArtisanBalls_Sub6_Name,
             gText_Quest_ArtisanBalls_Sub6_Desc,
             gText_Quest_ArtisanBalls_Sub6_Map,
@@ -578,7 +596,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
             COMPOUND_STRING("Tested")
             ),
     sub_quest(
-            60,
+            62,
             gText_Quest_ArtisanBalls_Sub7_Name,
             gText_Quest_ArtisanBalls_Sub7_Desc,
             gText_Quest_ArtisanBalls_Sub7_Map,
@@ -590,7 +608,7 @@ static const struct SubQuest sArtisanBalls_Sub[QUEST_ARTISANBALLS_SUB_COUNT] = {
 
 static const struct SubQuest sArtisanBalls2_Sub[QUEST_ARTISANBALLS2_SUB_COUNT] = {
     sub_quest(
-            61,
+            63,
             gText_Quest_ArtisanBalls2_Sub1_Name,
             gText_Quest_ArtisanBalls2_Sub1_Desc,
             gText_Quest_ArtisanBalls2_Sub1_Map,
@@ -599,7 +617,7 @@ static const struct SubQuest sArtisanBalls2_Sub[QUEST_ARTISANBALLS2_SUB_COUNT] =
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            62,
+            64,
             gText_Quest_ArtisanBalls2_Sub2_Name,
             gText_Quest_ArtisanBalls2_Sub2_Desc,
             gText_Quest_ArtisanBalls2_Sub2_Map,
@@ -608,7 +626,7 @@ static const struct SubQuest sArtisanBalls2_Sub[QUEST_ARTISANBALLS2_SUB_COUNT] =
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            63,
+            65,
             gText_Quest_ArtisanBalls2_Sub3_Name,
             gText_Quest_ArtisanBalls2_Sub3_Desc,
             gText_Quest_ArtisanBalls2_Sub3_Map,
@@ -620,7 +638,7 @@ static const struct SubQuest sArtisanBalls2_Sub[QUEST_ARTISANBALLS2_SUB_COUNT] =
 
 static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_SUB_COUNT] = {
     sub_quest(
-            64,
+            66,
             gText_Quest_NeighborhoodCleanUp_Sub1_Name,
             gText_Quest_NeighborhoodCleanUp_Sub1_Desc,
             gText_Quest_NeighborhoodCleanUp_Sub1_Map,
@@ -629,7 +647,7 @@ static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            65,
+            67,
             gText_Quest_NeighborhoodCleanUp_Sub2_Name,
             gText_Quest_NeighborhoodCleanUp_Sub2_Desc,
             gText_Quest_NeighborhoodCleanUp_Sub2_Map,
@@ -638,7 +656,7 @@ static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            66,
+            68,
             gText_Quest_NeighborhoodCleanUp_Sub3_Name,
             gText_Quest_NeighborhoodCleanUp_Sub3_Desc,
             gText_Quest_NeighborhoodCleanUp_Sub3_Map,
@@ -647,7 +665,7 @@ static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            67,
+            69,
             gText_Quest_NeighborhoodCleanUp_Sub4_Name,
             gText_Quest_NeighborhoodCleanUp_Sub4_Desc,
             gText_Quest_NeighborhoodCleanUp_Sub4_Map,
@@ -656,7 +674,7 @@ static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            68,
+            70,
             gText_Quest_NeighborhoodCleanUp_Sub5_Name,
             gText_Quest_NeighborhoodCleanUp_Sub5_Desc,
             gText_Quest_NeighborhoodCleanUp_Sub5_Map,
@@ -668,7 +686,7 @@ static const struct SubQuest sNeighborhoodCleanUp_Sub[QUEST_NEIGHBORHOODCLEANUP_
 
 static const struct SubQuest sNeighborhoodCleanUp2_Sub[QUEST_NEIGHBORHOODCLEANUP2_SUB_COUNT] = {
     sub_quest(
-            69,
+            71,
             gText_Quest_NeighborhoodCleanUp2_Sub1_Name,
             gText_Quest_NeighborhoodCleanUp2_Sub1_Desc,
             gText_Quest_NeighborhoodCleanUp2_Sub1_Map,
@@ -677,7 +695,7 @@ static const struct SubQuest sNeighborhoodCleanUp2_Sub[QUEST_NEIGHBORHOODCLEANUP
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            70,
+            72,
             gText_Quest_NeighborhoodCleanUp2_Sub2_Name,
             gText_Quest_NeighborhoodCleanUp2_Sub2_Desc,
             gText_Quest_NeighborhoodCleanUp2_Sub2_Map,
@@ -686,7 +704,7 @@ static const struct SubQuest sNeighborhoodCleanUp2_Sub[QUEST_NEIGHBORHOODCLEANUP
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            71,
+            73,
             gText_Quest_NeighborhoodCleanUp2_Sub3_Name,
             gText_Quest_NeighborhoodCleanUp2_Sub3_Desc,
             gText_Quest_NeighborhoodCleanUp2_Sub3_Map,
@@ -695,7 +713,7 @@ static const struct SubQuest sNeighborhoodCleanUp2_Sub[QUEST_NEIGHBORHOODCLEANUP
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            72,
+            74,
             gText_Quest_NeighborhoodCleanUp2_Sub4_Name,
             gText_Quest_NeighborhoodCleanUp2_Sub4_Desc,
             gText_Quest_NeighborhoodCleanUp2_Sub4_Map,
@@ -707,7 +725,7 @@ static const struct SubQuest sNeighborhoodCleanUp2_Sub[QUEST_NEIGHBORHOODCLEANUP
 
 static const struct SubQuest sNeighborhoodCleanUp3_Sub[QUEST_NEIGHBORHOODCLEANUP3_SUB_COUNT] = {
     sub_quest(
-            73,
+            75,
             gText_Quest_NeighborhoodCleanUp3_Sub1_Name,
             gText_Quest_NeighborhoodCleanUp3_Sub1_Desc,
             gText_Quest_NeighborhoodCleanUp3_Sub1_Map,
@@ -716,7 +734,7 @@ static const struct SubQuest sNeighborhoodCleanUp3_Sub[QUEST_NEIGHBORHOODCLEANUP
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            74,
+            76,
             gText_Quest_NeighborhoodCleanUp3_Sub2_Name,
             gText_Quest_NeighborhoodCleanUp3_Sub2_Desc,
             gText_Quest_NeighborhoodCleanUp3_Sub2_Map,
@@ -725,7 +743,7 @@ static const struct SubQuest sNeighborhoodCleanUp3_Sub[QUEST_NEIGHBORHOODCLEANUP
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            75,
+            77,
             gText_Quest_NeighborhoodCleanUp3_Sub3_Name,
             gText_Quest_NeighborhoodCleanUp3_Sub3_Desc,
             gText_Quest_NeighborhoodCleanUp3_Sub3_Map,
@@ -737,7 +755,7 @@ static const struct SubQuest sNeighborhoodCleanUp3_Sub[QUEST_NEIGHBORHOODCLEANUP
 
 static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] = {
     sub_quest(
-            76,
+            78,
             COMPOUND_STRING("Fire Stone"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Underground"),
@@ -746,7 +764,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Delievered")
             ),
     sub_quest(
-            77,
+            79,
             COMPOUND_STRING("Water Stone"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Underground"),
@@ -755,7 +773,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Delievered")
             ),
     sub_quest(
-            78,
+            80,
             COMPOUND_STRING("Thunder Stone"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Underground"),
@@ -764,7 +782,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Delievered")
             ),
     sub_quest(
-            79,
+            81,
             COMPOUND_STRING("Leaf Stone"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Underground"),
@@ -773,7 +791,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
             COMPOUND_STRING("Delievered")
             ),
     sub_quest(
-            80,
+            82,
             COMPOUND_STRING("Moon Stone"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Underground"),
@@ -785,7 +803,7 @@ static const struct SubQuest sRockCollector_Sub[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
 
 static const struct SubQuest sHiddenGrottoMapping_Sub[QUEST_HIDDENGROTTOMAPPING_SUB_COUNT] = {
     sub_quest(
-            81,
+            83,
             gText_Quest_HiddenGrottoMapping_Sub1_Name,
             gText_Quest_HiddenGrottoMapping_Sub1_Desc,
             gText_Quest_HiddenGrottoMapping_Sub1_Map,
@@ -794,7 +812,7 @@ static const struct SubQuest sHiddenGrottoMapping_Sub[QUEST_HIDDENGROTTOMAPPING_
             COMPOUND_STRING("Discovered")
             ),
     sub_quest(
-            82,
+            84,
             gText_Quest_HiddenGrottoMapping_Sub2_Name,
             gText_Quest_HiddenGrottoMapping_Sub2_Desc,
             gText_Quest_HiddenGrottoMapping_Sub2_Map,
@@ -803,7 +821,7 @@ static const struct SubQuest sHiddenGrottoMapping_Sub[QUEST_HIDDENGROTTOMAPPING_
             COMPOUND_STRING("Discovered")
             ),
     sub_quest(
-            83,
+            85,
             gText_Quest_HiddenGrottoMapping_Sub3_Name,
             gText_Quest_HiddenGrottoMapping_Sub3_Desc,
             gText_Quest_HiddenGrottoMapping_Sub3_Map,
@@ -815,7 +833,7 @@ static const struct SubQuest sHiddenGrottoMapping_Sub[QUEST_HIDDENGROTTOMAPPING_
 
 static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT] = {
     sub_quest(
-            84,
+            86,
             gText_Quest_UltraWormholeResearch_Sub1_Name,
             gText_Quest_UltraWormholeResearch_Sub1_Desc,
             gText_Quest_UltraWormholeResearch_Sub1_Map,
@@ -824,7 +842,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            85,
+            87,
             gText_Quest_UltraWormholeResearch_Sub2_Name,
             gText_Quest_UltraWormholeResearch_Sub2_Desc,
             gText_Quest_UltraWormholeResearch_Sub2_Map,
@@ -833,7 +851,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            86,
+            88,
             gText_Quest_UltraWormholeResearch_Sub3_Name,
             gText_Quest_UltraWormholeResearch_Sub3_Desc,
             gText_Quest_UltraWormholeResearch_Sub3_Map,
@@ -842,7 +860,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            87,
+            89,
             gText_Quest_UltraWormholeResearch_Sub4_Name,
             gText_Quest_UltraWormholeResearch_Sub4_Desc,
             gText_Quest_UltraWormholeResearch_Sub4_Map,
@@ -851,7 +869,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            88,
+            90,
             gText_Quest_UltraWormholeResearch_Sub5_Name,
             gText_Quest_UltraWormholeResearch_Sub5_Desc,
             gText_Quest_UltraWormholeResearch_Sub5_Map,
@@ -860,7 +878,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            89,
+            91,
             gText_Quest_UltraWormholeResearch_Sub6_Name,
             gText_Quest_UltraWormholeResearch_Sub6_Desc,
             gText_Quest_UltraWormholeResearch_Sub6_Map,
@@ -869,7 +887,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            90,
+            92,
             gText_Quest_UltraWormholeResearch_Sub7_Name,
             gText_Quest_UltraWormholeResearch_Sub7_Desc,
             gText_Quest_UltraWormholeResearch_Sub7_Map,
@@ -878,7 +896,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            91,
+            93,
             gText_Quest_UltraWormholeResearch_Sub8_Name,
             gText_Quest_UltraWormholeResearch_Sub8_Desc,
             gText_Quest_UltraWormholeResearch_Sub8_Map,
@@ -887,7 +905,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            92,
+            94,
             gText_Quest_UltraWormholeResearch_Sub9_Name,
             gText_Quest_UltraWormholeResearch_Sub9_Desc,
             gText_Quest_UltraWormholeResearch_Sub9_Map,
@@ -896,7 +914,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            93,
+            95,
             gText_Quest_UltraWormholeResearch_Sub10_Name,
             gText_Quest_UltraWormholeResearch_Sub10_Desc,
             gText_Quest_UltraWormholeResearch_Sub10_Map,
@@ -908,7 +926,7 @@ static const struct SubQuest sUltraWormholeResearch_Sub[QUEST_ULTRAWORMHOLERESEA
 
 static const struct SubQuest sWildfireRisk_Sub[QUEST_WILDFIRERISK_SUB_COUNT] = {
     sub_quest(
-            94,
+            96,
             gText_Quest_WildfireRisk_Sub1_Name,
             gText_Quest_WildfireRisk_Sub1_Desc,
             gText_Quest_WildfireRisk_Sub1_Map,
@@ -917,7 +935,7 @@ static const struct SubQuest sWildfireRisk_Sub[QUEST_WILDFIRERISK_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            95,
+            97,
             gText_Quest_WildfireRisk_Sub2_Name,
             gText_Quest_WildfireRisk_Sub2_Desc,
             gText_Quest_WildfireRisk_Sub2_Map,
@@ -926,7 +944,7 @@ static const struct SubQuest sWildfireRisk_Sub[QUEST_WILDFIRERISK_SUB_COUNT] = {
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            96,
+            98,
             gText_Quest_WildfireRisk_Sub3_Name,
             gText_Quest_WildfireRisk_Sub3_Desc,
             gText_Quest_WildfireRisk_Sub3_Map,
@@ -939,7 +957,7 @@ static const struct SubQuest sWildfireRisk_Sub[QUEST_WILDFIRERISK_SUB_COUNT] = {
 static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESWITHWOLVES_SUB_COUNT]
 = {
     sub_quest(
-            97,
+            99,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub1_Map,
@@ -948,7 +966,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            98,
+            100,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub2_Map,
@@ -957,7 +975,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            99,
+            101,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub3_Map,
@@ -966,7 +984,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            100,
+            102,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub4_Map,
@@ -975,7 +993,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            101,
+            103,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub5_Map,
@@ -984,7 +1002,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            102,
+            104,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub6_Map,
@@ -993,7 +1011,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            103,
+            105,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub7_Map,
@@ -1002,7 +1020,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            104,
+            106,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub8_Map,
@@ -1011,7 +1029,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            105,
+            107,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Name,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Desc,
             gText_Quest_TheBoyWhoCriesWithWolves_Sub9_Map,
@@ -1023,7 +1041,7 @@ static const struct SubQuest sTheBoyWhoCriesWithWolves_Sub[QUEST_THEBOYWHOCRIESW
 
 static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_COUNT] = {
     sub_quest(
-            106,
+            108,
             gText_Quest_TaxicabturnaroundSea_Sub1_Name,
             gText_Quest_TaxicabturnaroundSea_Sub1_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub1_Map,
@@ -1032,7 +1050,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            107,
+            109,
             gText_Quest_TaxicabturnaroundSea_Sub2_Name,
             gText_Quest_TaxicabturnaroundSea_Sub2_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub2_Map,
@@ -1041,7 +1059,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            108,
+            110,
             gText_Quest_TaxicabturnaroundSea_Sub3_Name,
             gText_Quest_TaxicabturnaroundSea_Sub3_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub3_Map,
@@ -1050,7 +1068,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            109,
+            111,
             gText_Quest_TaxicabturnaroundSea_Sub4_Name,
             gText_Quest_TaxicabturnaroundSea_Sub4_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub4_Map,
@@ -1059,7 +1077,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            110,
+            112,
             gText_Quest_TaxicabturnaroundSea_Sub5_Name,
             gText_Quest_TaxicabturnaroundSea_Sub5_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub5_Map,
@@ -1068,7 +1086,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            111,
+            113,
             gText_Quest_TaxicabturnaroundSea_Sub6_Name,
             gText_Quest_TaxicabturnaroundSea_Sub6_Desc,
             gText_Quest_TaxicabturnaroundSea_Sub6_Map,
@@ -1077,7 +1095,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            112,
+            114,
             gText_Quest_TaxicabturnaroundAir_Sub1_Name,
             gText_Quest_TaxicabturnaroundAir_Sub1_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub1_Map,
@@ -1086,7 +1104,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            113,
+            115,
             gText_Quest_TaxicabturnaroundAir_Sub2_Name,
             gText_Quest_TaxicabturnaroundAir_Sub2_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub2_Map,
@@ -1095,7 +1113,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            114,
+            116,
             gText_Quest_TaxicabturnaroundAir_Sub3_Name,
             gText_Quest_TaxicabturnaroundAir_Sub3_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub3_Map,
@@ -1104,7 +1122,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            115,
+            117,
             gText_Quest_TaxicabturnaroundAir_Sub4_Name,
             gText_Quest_TaxicabturnaroundAir_Sub4_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub4_Map,
@@ -1113,7 +1131,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            116,
+            118,
             gText_Quest_TaxicabturnaroundAir_Sub5_Name,
             gText_Quest_TaxicabturnaroundAir_Sub5_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub5_Map,
@@ -1122,7 +1140,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            117,
+            119,
             gText_Quest_TaxicabturnaroundAir_Sub6_Name,
             gText_Quest_TaxicabturnaroundAir_Sub6_Desc,
             gText_Quest_TaxicabturnaroundAir_Sub6_Map,
@@ -1131,7 +1149,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            118,
+            120,
             gText_Quest_TaxicabturnaroundLand_Sub1_Name,
             gText_Quest_TaxicabturnaroundLand_Sub1_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub1_Map,
@@ -1140,7 +1158,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            119,
+            121,
             gText_Quest_TaxicabturnaroundLand_Sub2_Name,
             gText_Quest_TaxicabturnaroundLand_Sub2_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub2_Map,
@@ -1149,7 +1167,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            120,
+            122,
             gText_Quest_TaxicabturnaroundLand_Sub3_Name,
             gText_Quest_TaxicabturnaroundLand_Sub3_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub3_Map,
@@ -1158,7 +1176,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            121,
+            123,
             gText_Quest_TaxicabturnaroundLand_Sub4_Name,
             gText_Quest_TaxicabturnaroundLand_Sub4_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub4_Map,
@@ -1167,7 +1185,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            122,
+            124,
             gText_Quest_TaxicabturnaroundLand_Sub5_Name,
             gText_Quest_TaxicabturnaroundLand_Sub5_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub5_Map,
@@ -1176,7 +1194,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            123,
+            125,
             gText_Quest_TaxicabturnaroundLand_Sub6_Name,
             gText_Quest_TaxicabturnaroundLand_Sub6_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub6_Map,
@@ -1185,7 +1203,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            124,
+            126,
             gText_Quest_TaxicabturnaroundLand_Sub7_Name,
             gText_Quest_TaxicabturnaroundLand_Sub7_Desc,
             gText_Quest_TaxicabturnaroundLand_Sub7_Map,
@@ -1197,7 +1215,7 @@ static const struct SubQuest sTaxicabturnaround_Sub[QUEST_TAXICABTURNAROUND_SUB_
 
 static const struct SubQuest sPersuasivePassenger_Sub[QUEST_PERSUASIVEPASSENGER_SUB_COUNT] = {
     sub_quest(
-            125,
+            127,
             gText_Quest_PersuasivePassenger_Sub1_Name,
             gText_Quest_PersuasivePassenger_Sub1_Desc,
             gText_Quest_PersuasivePassenger_Sub1_Map,
@@ -1206,7 +1224,7 @@ static const struct SubQuest sPersuasivePassenger_Sub[QUEST_PERSUASIVEPASSENGER_
             COMPOUND_STRING("Helped")
             ),
     sub_quest(
-            126,
+            128,
             gText_Quest_PersuasivePassenger_Sub2_Name,
             gText_Quest_PersuasivePassenger_Sub2_Desc,
             gText_Quest_PersuasivePassenger_Sub2_Map,
@@ -1215,7 +1233,7 @@ static const struct SubQuest sPersuasivePassenger_Sub[QUEST_PERSUASIVEPASSENGER_
             COMPOUND_STRING("Helped")
             ),
     sub_quest(
-            127,
+            129,
             gText_Quest_PersuasivePassenger_Sub3_Name,
             gText_Quest_PersuasivePassenger_Sub3_Desc,
             gText_Quest_PersuasivePassenger_Sub3_Map,
@@ -1227,7 +1245,7 @@ static const struct SubQuest sPersuasivePassenger_Sub[QUEST_PERSUASIVEPASSENGER_
 
 static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] = {
     sub_quest(
-            128,
+            130,
             COMPOUND_STRING("Bodegaburnoutdelivery_Strength_H"),
             gText_Blank,
             gText_Route10,
@@ -1236,7 +1254,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            129,
+            131,
             COMPOUND_STRING("Bodegaburnoutdelivery_A"),
             gText_Blank,
             gText_PiocaBridge,
@@ -1245,7 +1263,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            130,
+            132,
             COMPOUND_STRING("Bodegaburnoutdelivery_B"),
             gText_Blank,
             gText_Route1,
@@ -1254,7 +1272,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            131,
+            133,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_C"),
             gText_Blank,
             gText_Navalbase,
@@ -1263,7 +1281,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            132,
+            134,
             COMPOUND_STRING("Bodegaburnoutdelivery_Strength_I"),
             gText_Blank,
             gText_Route13,
@@ -1272,7 +1290,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            133,
+            135,
             COMPOUND_STRING("Bodegaburnoutdelivery_Rock_Smash_F"),
             gText_Blank,
             gText_HalerbaWilds,
@@ -1281,7 +1299,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            134,
+            136,
             COMPOUND_STRING("Bodegaburnoutdelivery_Whirlpool_J"),
             gText_Blank,
             gText_RouteE,
@@ -1290,7 +1308,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            135,
+            137,
             COMPOUND_STRING("Bodegaburnoutdelivery_Rock_Smash_G"),
             gText_Blank,
             gText_Robinwilltunnel,
@@ -1299,7 +1317,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            136,
+            138,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_D"),
             gText_Blank,
             gText_Route100,
@@ -1308,7 +1326,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            137,
+            139,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_E"),
             gText_Blank,
             gText_Route3,
@@ -1317,7 +1335,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Gave")
             ),
     sub_quest(
-            138,
+            140,
             COMPOUND_STRING("Bodegaburnoutrescue_Rock_Smash_O"),
             gText_Blank,
             gText_Route11,
@@ -1326,7 +1344,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            139,
+            141,
             COMPOUND_STRING("Bodegaburnoutrescue_Cut_M"),
             gText_Blank,
             gText_HalerbaWilds,
@@ -1335,7 +1353,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            140,
+            142,
             COMPOUND_STRING("Bodegaburnoutrescue_Strength_Q"),
             gText_Blank,
             gText_Route14,
@@ -1344,7 +1362,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            141,
+            143,
             COMPOUND_STRING("Bodegaburnoutrescue_Dive_N"),
             gText_Blank,
             gText_Arantraz,
@@ -1353,7 +1371,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            142,
+            144,
             COMPOUND_STRING("Bodegaburnoutrescue_K"),
             gText_Blank,
             gText_Route2,
@@ -1362,7 +1380,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            143,
+            145,
             COMPOUND_STRING("Bodegaburnoutrescue_Rock_Smash_P"),
             gText_Blank,
             gText_Route12,
@@ -1371,7 +1389,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            144,
+            146,
             COMPOUND_STRING("Bodegaburnoutrescue_L"),
             gText_Blank,
             gText_Route7,
@@ -1380,7 +1398,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            145,
+            147,
             COMPOUND_STRING("Bodegaburnoutrescue_Whirlpool_S"),
             gText_Blank,
             gText_RouteA,
@@ -1389,7 +1407,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             COMPOUND_STRING("Rescued")
             ),
     sub_quest(
-            146,
+            148,
             COMPOUND_STRING("Bodegaburnoutrescue_Strength_R"),
             gText_Blank,
             gText_Route4,
@@ -1401,7 +1419,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
 
 static const struct SubQuest sWarehouseWarfare_Sub[QUEST_WAREHOUSEWARFARE_SUB_COUNT] = {
     sub_quest(
-            147,
+            149,
             gText_Quest_WarehouseWarfare_Sub1_Name,
             gText_Quest_WarehouseWarfare_Sub1_Desc,
             gText_Quest_WarehouseWarfare_Sub1_Map,
@@ -1410,7 +1428,7 @@ static const struct SubQuest sWarehouseWarfare_Sub[QUEST_WAREHOUSEWARFARE_SUB_CO
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            148,
+            150,
             gText_Quest_WarehouseWarfare_Sub2_Name,
             gText_Quest_WarehouseWarfare_Sub2_Desc,
             gText_Quest_WarehouseWarfare_Sub2_Map,
@@ -1419,7 +1437,7 @@ static const struct SubQuest sWarehouseWarfare_Sub[QUEST_WAREHOUSEWARFARE_SUB_CO
             COMPOUND_STRING("Defeated")
             ),
     sub_quest(
-            149,
+            151,
             gText_Quest_WarehouseWarfare_Sub3_Name,
             gText_Quest_WarehouseWarfare_Sub3_Desc,
             gText_Quest_WarehouseWarfare_Sub3_Map,
@@ -1432,7 +1450,7 @@ static const struct SubQuest sWarehouseWarfare_Sub[QUEST_WAREHOUSEWARFARE_SUB_CO
 static const struct SubQuest
 sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
     sub_quest(
-            150,
+            152,
             gText_Quest_RestoreEspuleeOutskirts_Sub1_Name,
             gText_Quest_RestoreEspuleeOutskirts_Sub1_Desc,
             gText_Quest_RestoreEspuleeOutskirts_Sub1_Map,
@@ -1441,7 +1459,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            151,
+            153,
             gText_Quest_RestoreEspuleeOutskirts_Sub2_Name,
             gText_Quest_RestoreEspuleeOutskirts_Sub2_Desc,
             gText_Quest_RestoreEspuleeOutskirts_Sub2_Map,
@@ -1452,7 +1470,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
 };
 static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COUNT] = {
     sub_quest(
-            152,
+            154,
             gText_Quest_RestoreHodouCity_Sub1_Name,
             gText_Quest_RestoreHodouCity_Sub1_Desc,
             gText_Quest_RestoreHodouCity_Sub1_Map,
@@ -1461,7 +1479,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            153,
+            155,
             gText_Quest_RestoreHodouCity_Sub2_Name,
             gText_Quest_RestoreHodouCity_Sub2_Desc,
             gText_Quest_RestoreHodouCity_Sub2_Map,
@@ -1470,7 +1488,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            154,
+            156,
             gText_Quest_RestoreHodouCity_Sub3_Name,
             gText_Quest_RestoreHodouCity_Sub3_Desc,
             gText_Quest_RestoreHodouCity_Sub3_Map,
@@ -1479,7 +1497,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            155,
+            157,
             gText_Quest_RestoreHodouCity_Sub4_Name,
             gText_Quest_RestoreHodouCity_Sub4_Desc,
             gText_Quest_RestoreHodouCity_Sub4_Map,
@@ -1488,7 +1506,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            156,
+            158,
             gText_Quest_RestoreHodouCity_Sub5_Name,
             gText_Quest_RestoreHodouCity_Sub5_Desc,
             gText_Quest_RestoreHodouCity_Sub5_Map,
@@ -1497,7 +1515,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            157,
+            159,
             gText_Quest_RestoreHodouCity_Sub6_Name,
             gText_Quest_RestoreHodouCity_Sub6_Desc,
             gText_Quest_RestoreHodouCity_Sub6_Map,
@@ -1506,7 +1524,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(
-            158,
+            160,
             gText_Quest_RestoreHodouCity_Sub7_Name,
             gText_Quest_RestoreHodouCity_Sub7_Desc,
             gText_Quest_RestoreHodouCity_Sub7_Map,
@@ -1518,7 +1536,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
 static const struct SubQuest
 sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
     sub_quest(
-            159,
+            161,
             gText_Quest_RestoreZenzuIsland_Sub1_Name,
             gText_Quest_RestoreZenzuIsland_Sub1_Desc,
             gText_Quest_RestoreZenzuIsland_Sub1_Map,
@@ -1527,7 +1545,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            160,
+            162,
             gText_Quest_RestoreZenzuIsland_Sub2_Name,
             gText_Quest_RestoreZenzuIsland_Sub2_Desc,
             gText_Quest_RestoreZenzuIsland_Sub2_Map,
@@ -1536,7 +1554,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            161,
+            163,
             gText_Quest_RestoreZenzuIsland_Sub3_Name,
             gText_Quest_RestoreZenzuIsland_Sub3_Desc,
             gText_Quest_RestoreZenzuIsland_Sub3_Map,
@@ -1545,7 +1563,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             COMPOUND_STRING("Found")
             ),
     sub_quest(
-            162,
+            164,
             gText_Quest_RestoreZenzuIsland_Sub4_Name,
             gText_Quest_RestoreZenzuIsland_Sub4_Desc,
             gText_Quest_RestoreZenzuIsland_Sub4_Map,
@@ -1557,7 +1575,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
 static const struct SubQuest
 sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
     sub_quest(
-            163,
+            165,
             gText_Quest_Recruitlocalartists_Sub1_Name,
             gText_Quest_Recruitlocalartists_Sub1_Desc,
             gText_Quest_Recruitlocalartists_Sub1_Map,
@@ -1566,7 +1584,7 @@ sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            164,
+            166,
             gText_Quest_Recruitlocalartists_Sub2_Name,
             gText_Quest_Recruitlocalartists_Sub2_Desc,
             gText_Quest_Recruitlocalartists_Sub2_Map,
@@ -1575,7 +1593,7 @@ sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
             COMPOUND_STRING("Caught")
             ),
     sub_quest(
-            165,
+            167,
             gText_Quest_Recruitlocalartists_Sub3_Name,
             gText_Quest_Recruitlocalartists_Sub3_Desc,
             gText_Quest_Recruitlocalartists_Sub3_Map,
@@ -2308,14 +2326,17 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_GETTHEBANDBACKTOGETHER] =
     {
-        .name = gText_Quest_GetTheBandBackTogether_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_GetTheBandBackTogether_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_GetTheBandBackTogether_DoneDesc,
-        .map = gText_Quest_GetTheBandBackTogether_Map,
-        .sprite = OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M,
+        .name = COMPOUND_STRING("Get The Band Back Together"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Find all the members of the Gear Grind Gang and let them know about the new hacker house initiative. Make sure you’re riding your {STR_VAR_1}!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("The Gear Grind Gang is working on getting more bikes to more people in Resido. Your {STR_VAR_1} now has the Acro upgrade!"),
+        .map = gText_CurenoPort,
+        .sprite = OBJ_EVENT_GFX_ANGELDELIVERYBIKERC,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sGetTheBandBackTogether_Sub,
-        .numSubquests = QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT
+        .numSubquests = QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT,
+        .states =
+        {
+        },
     },
     [QUEST_FOODTRUCKBUREACRACY] =
     {
