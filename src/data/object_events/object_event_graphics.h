@@ -507,6 +507,30 @@ const u16 gObjectEventPal_Comrade_8[] = INCBIN_U16("graphics/object_events/palet
 const u32 gObjectEventPic_Comrade_9[] = INCBIN_U32("graphics/object_events/pics/people/comrade_9.4bpp");
 const u16 gObjectEventPal_Comrade_9[] = INCBIN_U16("graphics/object_events/palettes/comrade_9.gbapal");
 
+const u32 gObjectEventPic_Designer_1[] = INCBIN_U32("graphics/object_events/pics/people/designer_1.4bpp");
+const u16 gObjectEventPal_Designer_1[] = INCBIN_U16("graphics/object_events/palettes/designer_1.gbapal");
+
+const u32 gObjectEventPic_Designer_2[] = INCBIN_U32("graphics/object_events/pics/people/designer_2.4bpp");
+const u16 gObjectEventPal_Designer_2[] = INCBIN_U16("graphics/object_events/palettes/designer_2.gbapal");
+
+const u32 gObjectEventPic_Developer_1[] = INCBIN_U32("graphics/object_events/pics/people/developer_1.4bpp");
+const u16 gObjectEventPal_Developer_1[] = INCBIN_U16("graphics/object_events/palettes/developer_1.gbapal");
+
+const u32 gObjectEventPic_Developer_2[] = INCBIN_U32("graphics/object_events/pics/people/developer_2.4bpp");
+const u16 gObjectEventPal_Developer_2[] = INCBIN_U16("graphics/object_events/palettes/developer_2.gbapal");
+
+const u32 gObjectEventPic_Founder_1[] = INCBIN_U32("graphics/object_events/pics/people/founder_1.4bpp");
+const u16 gObjectEventPal_Founder_1[] = INCBIN_U16("graphics/object_events/palettes/founder_1.gbapal");
+
+const u32 gObjectEventPic_Founder_2[] = INCBIN_U32("graphics/object_events/pics/people/founder_2.4bpp");
+const u16 gObjectEventPal_Founder_2[] = INCBIN_U16("graphics/object_events/palettes/founder_2.gbapal");
+
+const u32 gObjectEventPic_Product_Manager_1[] = INCBIN_U32("graphics/object_events/pics/people/product_manager_1.4bpp");
+const u16 gObjectEventPal_Product_Manager_1[] = INCBIN_U16("graphics/object_events/palettes/product_manager_1.gbapal");
+
+const u32 gObjectEventPic_Product_Manager_2[] = INCBIN_U32("graphics/object_events/pics/people/product_manager_2.4bpp");
+const u16 gObjectEventPal_Product_Manager_2[] = INCBIN_U16("graphics/object_events/palettes/product_manager_2.gbapal");
+
 // End silicon
 const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
 

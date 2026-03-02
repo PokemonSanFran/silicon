@@ -37,4519 +37,724 @@
 #include "quests.h"
 #include "quest_logic.h"
 #include "event_data.h"
+#include "ui_shop.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/items.h"
 #include "constants/party_menu.h"
-#include "constants/ui_presto.h"
 
-#define TAG_PRESTO_INTERFACE 0 // Tile and pal tag used for all interface sprites.
-#define PAL_UI_SPRITES 0
+#define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
+#define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
 
-//==========DEFINES==========//
-enum WindowIds
+#define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(3) + 3) + 4)
+#define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS(4) + 7) + 8)
+
+#define SHOP_RIGHT_ARROW_X ((TILE_TO_PIXELS(8) + 1) + 4)
+#define SHOP_RIGHT_ARROW_Y SHOP_LEFT_ARROW_Y
+
+#define SHOP_UP_ARROW_X    (TILE_TO_PIXELS(15) + 16)
+#define SHOP_UP_ARROW_Y    (TILE_TO_PIXELS(0) + 8)
+
+#define SHOP_DOWN_ARROW_X  SHOP_UP_ARROW_X
+#define SHOP_DOWN_ARROW_Y  ((TILE_TO_PIXELS(17) + 4) + 8)
+
+#define TOTAL_SHOWN_PRESTO_ITEMS_PER_CATEGORIES 5
+#define TOTAL_SHOWN_PRESTO_ITEM_ROWS            3
+#define TOTAL_SHOWN_PRESTO_CATEGORIES           5
+
+#define PRESTO_FEE_BASE_DRONE 50
+#define PRESTO_FEE_RECOMMENDED_BOOST 2
+#define PRESTO_FEE_SHARP_RISE_DISCOUNT 30
+
+enum PrestoPriceTypes
 {
-    WINDOW_1,
+    PRESTO_PRICE_ITEM,
+    PRESTO_PRICE_DRONE,
+    PRESTO_PRICE_FINAL,
 };
 
-enum RowIds
+enum PrestoShopTypes
 {
-    ROW_BUY_AGAIN,
-    ROW_RECOMMENDED,
-    ROW_MEDICINE,
-    ROW_POKEBALLS,
-    ROW_OTHER_ITEMS,
-    ROW_POWER_UPS,
-    ROW_BATTLE_ITEMS,
-    ROW_BERRIES,
-    ROW_TMS,
-    ROW_TREASURES,
-    ROW_MEGA_STONES,
-    ROW_Z_CRYSTALS,
-    NUM_ROWS
+    PRESTO_TYPE_APP,
+    PRESTO_TYPE_TERMINAL,
+
+    NUM_PRESTO_TYPES
 };
 
-struct PrestoMenuResources {
-	MainCallback savedCallback;     // determines callback to run when we exit. e.g. where do we want to go after closing the menu
-    u8 gfxLoadState;
-	u16 currentRow:4;                //Max 12
-	u16 currentFirstShownRow:4;      //Max 9
-	u16 currentItem:8;               //Max 255
-	u16 currentFirstShownItem:8;     //Max 255
-	u16 itemQuantity:10;             //Max 1024
-	u16 notEnoughMoneyWindow:1;      //bool8
-	u16 buyableItems:10;              //Max MAX_BAG_ITEM_CAPACITY
-	u16 rowsSorted:1;                //bool8
-	u16 buyScreen:1;                 //bool8
-	u16 buyWindow:1;                 //bool8
-    u16 numberofRows:4;              //Max 12
-	u16 boughtItem:1;                //bool8
-	u16 filler:1;                    //Filler
-	u16 currentRowItemList[NUM_ROWS][NUM_MAX_ITEMS_PER_ROW];
-	u8 itemNum[NUM_ROWS];           // Max 255
-    u16 recommendedItems[NUM_RECOMMENDED_ITEMS];
-    u8 numRows[NUM_ROWS];
-	u8 spriteIDs[MAX_ITEM_SPRITES + FIRST_ITEM_SPRITE_ID];
-    u8 sItemMenuBuyIcon[12];
-    u8 PrestoUpDownArrowsTask;
-    u8 PrestoLeftRightArrowsTask;
-};
+static EWRAM_INIT u8 sPrestoItemIconSpriteId = SPRITE_NONE;
+extern bool32 PokeMart_IsActive(void);
 
-//==========EWRAM==========//
-static EWRAM_DATA struct PrestoMenuResources *sMenuDataPtr = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
+static u32 PrestoPurchase_GetDroneFee(void);
+static u32 PrestoPurchase_GetItemPrice(u16, u16, enum PrestoPriceTypes);
+static u32 PrestoPurchase_GetTotalItemPrice(u16, u16);
 
-//==========STATIC=DEFINES==========//
-static void Menu_RunSetup(void);
-static bool8 Menu_DoGfxSetup(void);
-static bool8 Menu_InitBgs(void);
-static void Menu_FadeAndBail(void);
-static bool8 Menu_LoadGraphics(void);
-static void Menu_InitWindows(void);
-static void PrintToWindow(u8 windowId, u8 colorIdx);
-static void Task_MenuWaitFadeIn(u8 taskId);
-static void Task_MenuMain(u8 taskId);
-static void PrestoItemInitializeArrayList(void);
-static void RecommendedInitializeArrayList(void);
-static void DestroyAllItemIcons(void);
-static void EnableAllItemIcons(void);
-static void DisableAllItemIcons(void);
-static void CalculateBuyableItems(void);
-static void MoveCurrenItemIcon(u8 idx, u8 x, u8 y);
+static void PrestoHelper_UpdateFrontEnd(void);
+static enum PrestoShopTypes PrestoHelper_GetShopType(void);
+static u32 PrestoHelper_InitItemsList(void);
+static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 itemId);
+static bool8 PrestoHelper_HandleHeal(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleTournament(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleCave(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleWater(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleRoute(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleCash(u32 itemId, enum ShopMenuCategories category);
+static bool8 PrestoHelper_HandleRandom(u32 itemId, enum ShopMenuCategories category);
+static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel);
 
-//==========CONST=DATA==========//
-static const struct BgTemplate sMenuBgTemplates[] =
+static void SpriteCB_BuyIcon(struct Sprite *);
+static void SpriteCB_UpArrow(struct Sprite *);
+static void SpriteCB_DownArrow(struct Sprite *);
+static void SpriteCB_LeftArrow(struct Sprite *);
+static void SpriteCB_RightArrow(struct Sprite *);
+static void SpriteCB_UpArrowSmall(struct Sprite *);
+static void SpriteCB_DownArrowSmall(struct Sprite *);
+
+static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
+static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
+
+static const struct ShopSpriteConfigs sPrestoShopSprites[] =
 {
+    [SHOP_SPRITE_BUY_ICON] =
     {
-        .bg = 0,    // windows, etc
-        .charBaseIndex = 0,
-        .mapBaseIndex = 31,
-        .priority = 1
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol"),
+        .x = (TILE_TO_PIXELS(4) + 1) + 16,
+        .y = (TILE_TO_PIXELS(3) - 1) + 16,
+        .callback = SpriteCB_BuyIcon,
     },
+    [SHOP_SPRITE_UP_ARROW] =
     {
-        .bg = 1,    // this bg loads the UI tilemap
-        .charBaseIndex = 3,
-        .mapBaseIndex = 30,
-        .priority = 2
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol"),
+        .x = SHOP_UP_ARROW_X,
+        .y = SHOP_UP_ARROW_Y,
+        .callback = SpriteCB_UpArrow,
     },
+    [SHOP_SPRITE_DOWN_ARROW] =
     {
-        .bg = 2,    // this bg loads the UI tilemap
-        .charBaseIndex = 0,
-        .mapBaseIndex = 28,
-        .priority = 0
-    }
-};
-
-static const struct WindowTemplate sMenuWindowTemplates[] =
-{
-    [WINDOW_1] =
-    {
-        .bg = 0,            // which bg to print text on
-        .tilemapLeft = 0,   // position from left (per 8 pixels)
-        .tilemapTop = 0,    // position from top (per 8 pixels)
-        .width = 30,        // width (per 8 pixels)
-        .height = 20,       // height (per 8 pixels)
-        .paletteNum = 0,    // palette index to use for text
-        .baseBlock = 1,     // tile start in VRAM
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol"),
+        .x = SHOP_DOWN_ARROW_X,
+        .y = SHOP_DOWN_ARROW_Y,
+        .callback = SpriteCB_DownArrow,
     },
-    DUMMY_WIN_TEMPLATE
-};
-
-static const u32 sMenuTiles[]       = INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol");
-static const u32 sMenuTilemap[]     = INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM");
-static const u32 sMenuTilemapBuy[]  = INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM");
-static const u16 sMenuPalette[]     = INCBIN_U16("graphics/ui_menus/presto/palette.gbapal");
-
-enum Colors
-{
-    FONT_BLACK,
-    FONT_WHITE,
-    FONT_RED,
-    FONT_BLUE,
-};
-static const u8 sMenuWindowFontColors[][3] =
-{
-    [FONT_BLACK]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
-    [FONT_WHITE]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
-    [FONT_RED]      = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_RED,         TEXT_COLOR_TRANSPARENT},
-    [FONT_BLUE]     = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_BLUE,        TEXT_COLOR_TRANSPARENT},
-};
-
-//==========FUNCTIONS==========//
-// UI loader template
-void Task_OpenPrestoFromStartMenu(u8 taskId)
-{
-    if (!gPaletteFade.active)
+    [SHOP_SPRITE_LEFT_ARROW] =
     {
-        CleanupOverworldWindowsAndTilemaps();
-        Presto_Init(CB2_ReturnToFieldWithOpenMenu);
-        DestroyTask(taskId);
-    }
-}
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol"),
+        .x = SHOP_LEFT_ARROW_X,
+        .y = SHOP_LEFT_ARROW_Y,
+        .callback = SpriteCB_LeftArrow,
+    },
+    [SHOP_SPRITE_RIGHT_ARROW] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol"),
+        .x = SHOP_RIGHT_ARROW_X,
+        .y = SHOP_RIGHT_ARROW_Y,
+        .callback = SpriteCB_RightArrow,
+    },
+    [SHOP_SPRITE_UP_ARROW_SMALL] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol"),
+        .x = TILE_TO_PIXELS(12) + 8,
+        .y = (TILE_TO_PIXELS(11) + 2) + 4,
+        .callback = SpriteCB_UpArrowSmall,
+    },
+    [SHOP_SPRITE_DOWN_ARROW_SMALL] =
+    {
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol"),
+        .x = TILE_TO_PIXELS(12) + 8,
+        .y = (TILE_TO_PIXELS(13) + 6) + 4,
+        .callback = SpriteCB_DownArrowSmall,
+    },
+};
+
+static const struct ShopMenuConfigs sPrestoShopConfigs =
+{
+    .sprites = sPrestoShopSprites,
+    .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol"),
+    .map = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM"),
+    .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM"),
+    .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
+    .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
+    .fontColors = (const u8[][3]){
+        [SHOP_FNTCLR_PRIMARY]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
+        [SHOP_FNTCLR_SECONDARY]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
+    },
+
+    .categoryCoords = (const u8[]){
+        [SHOP_COORD_X]   = TILE_TO_PIXELS(0) + 3,
+        [SHOP_COORD_Y]   = TILE_TO_PIXELS(2) + 0,
+        [SHOP_COORD_PAD] = TILE_TO_PIXELS(3) + 2,
+    },
+
+    .itemIconCoords = (const u8[]){
+        [SHOP_COORD_X]    = TILE_TO_PIXELS(6) + 6,
+        [SHOP_COORD_Y]    = TILE_TO_PIXELS(5) + 6,
+        [SHOP_COORD_PAD]  = TILE_TO_PIXELS(5) + 2,
+        [SHOP_COORD_PAD2] = TILE_TO_PIXELS(5) + 4,
+    },
+
+    .totalShownItems = TOTAL_SHOWN_PRESTO_ITEMS_PER_CATEGORIES,
+    .totalShownItemRows = TOTAL_SHOWN_PRESTO_ITEM_ROWS,
+    .totalShownCategories = TOTAL_SHOWN_PRESTO_CATEGORIES,
+
+    .handleFrontend = PrestoHelper_UpdateFrontEnd,
+    .handleTotalPrice = PrestoPurchase_GetTotalItemPrice,
+    .handleInitList = PrestoHelper_InitItemsList,
+};
+
+static const u8 sText_FirstRowName[]      = _("{STR_VAR_1}: {STR_VAR_2}");
+static const u8 sText_ItemNameOwned[]     = _("{STR_VAR_1} - {STR_VAR_2} Owned");
+static const u8 sText_ItemCost[]          = _("Item Cost:{CLEAR_TO 56}¥ {STR_VAR_1}");
+static const u8 sText_DroneFee[]          = _("Drone Fee:{CLEAR_TO 56}¥ {STR_VAR_1}");
+static const u8 sText_OrderTotal[]        = _("Order Total:{CLEAR_TO 56}¥ {STR_VAR_1}");
+static const u8 sText_ItemPrice[]         = _("¥ {STR_VAR_1}");
+static const u8 sText_DeliveryTo[]        = _("Delivery to {STR_VAR_1} ({STR_VAR_2})");
+
+static const u8 sText_OrderDelivered[]    = _("Order Delivered!");
+static const u8 sText_ThanksForBuying[]   = _("Thank you for your purchase!");
+static const u8 sText_YouGot[]            = _("You got");
+static const u8 sText_ItemNumber[]        = _("{STR_VAR_1} x{STR_VAR_2}");
+
+static const u8 *const sText_PurchaseCodeErrors[] =
+{
+    [SHOP_CODE_SUCCESS]          = gText_EmptyString2,
+    [SHOP_CODE_NOT_ENOUGH_MONEY] = COMPOUND_STRING("Your account has been declined for insufficient funds!"),
+    // PSF TODO create better error text
+    [SHOP_CODE_NOT_ENOUGH_SPACE] = COMPOUND_STRING("Your account has been declined for insufficient item space!"),
+};
 
 void CB2_PrestoFromStartMenu(void)
 {
-    Presto_Init(CB2_StartMenu_ReturnToUI);
+    ShopMenu_Init(&sPrestoShopConfigs, CB2_StartMenu_ReturnToUI);
 }
 
-// This is our main initialization function if you want to call the menu from elsewhere
-void Presto_Init(MainCallback callback)
-{
-    if ((sMenuDataPtr = AllocZeroed(sizeof(struct PrestoMenuResources))) == NULL)
-    {
-        SetMainCallback2(callback);
-        return;
-    }
-
-    // initialize stuff
-    sMenuDataPtr->gfxLoadState = 0;
-    sMenuDataPtr->savedCallback = callback;
-
-
-    sMenuDataPtr->currentRow = 0;
-    sMenuDataPtr->currentItem = 0;
-    sMenuDataPtr->currentFirstShownRow  = 0;
-    sMenuDataPtr->currentFirstShownItem = 0;
-    sMenuDataPtr->itemQuantity  = 0;
-    sMenuDataPtr->buyableItems = 1;
-
-    sMenuDataPtr->rowsSorted = FALSE;
-    sMenuDataPtr->buyScreen = FALSE;
-    sMenuDataPtr->buyWindow = FALSE;
-    sMenuDataPtr->notEnoughMoneyWindow = FALSE;
-    sMenuDataPtr->boughtItem = FALSE;
-
-    sMenuDataPtr->PrestoUpDownArrowsTask = TASK_NONE;
-
-    PrestoItemInitializeArrayList();
-    RecommendedInitializeArrayList();
-
-    /*if(gSaveBlock3Ptr->prestoBuyAgainItem[0] == ITEM_NONE &&
-      !sMenuDataPtr->rowsSorted){
-        if(gSaveBlock3Ptr->prestoBuyAgainItem[ROW_RECOMMENDED] != ITEM_NONE)
-            sMenuDataPtr->currentRow = ROW_RECOMMENDED;
-        else
-            sMenuDataPtr->currentRow = ROW_MEDICINE;
-    }*/
-
-    SetMainCallback2(Menu_RunSetup);
-}
-
-static void Menu_RunSetup(void)
-{
-    while (1)
-    {
-        if (Menu_DoGfxSetup() == TRUE)
-            break;
-    }
-}
-
-static void Menu_MainCB(void)
-{
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-    DoScheduledBgTilemapCopiesToVram();
-    UpdatePaletteFade();
-}
-
-static void Menu_VBlankCB(void)
-{
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-}
-
-u8 GetCurrentRow(){
-    u8 row;
-    row = sMenuDataPtr->numRows[sMenuDataPtr->currentRow % NUM_ROWS];
-
-    /*if(sMenuDataPtr->rowsSorted){
-        row = sMenuDataPtr->numRows[(sMenuDataPtr->currentRow + 2)];
-    }
-    else{
-        row = sMenuDataPtr->numRows[sMenuDataPtr->currentRow];
-    }*/
-
-    return row;
-}
-
-u8 getRowNum(u8 rowToGet){
-    u8 row;
-
-    row = sMenuDataPtr->numRows[rowToGet % NUM_ROWS];
-
-    /*if(sMenuDataPtr->rowsSorted){
-        row = sMenuDataPtr->numRows[(rowToGet + 2) % NUM_ROWS];
-    }
-    else{
-        row = sMenuDataPtr->numRows[rowToGet % NUM_ROWS];
-    }*/
-
-    return row;
-}
-
-u8 getCurrentRowItemNum(){
-    return sMenuDataPtr->itemNum[(GetCurrentRow()) % NUM_ROWS];
-}
-
-// Sprite Callback -------------------------------------------------------------------------------------------------------
-
-static void SpriteCB_BuyIcon(struct Sprite *sprite)
-{
-    if(sMenuDataPtr->buyScreen)
-        sprite->invisible = TRUE;
-    else{
-        u8 num = (sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem);
-        u8 x = (5 * num);
-        sprite->x2 = (x * 8) + (2 * num);
-        sprite->invisible = FALSE;
-    }
-}
-
-static void UNUSED SpriteCB_PrestoInvisibleOnBuyMenu(struct Sprite *sprite)
-{
-    if(sMenuDataPtr->buyScreen)
-        sprite->invisible = TRUE;
-    else{
-        sprite->invisible = FALSE;
-    }
-}
-
-static void SpriteCallback_UpArrow(struct Sprite *sprite)
-{
-    u8 val = sprite->data[0];
-    sprite->y2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(sMenuDataPtr->buyScreen || sMenuDataPtr->currentRow == ROW_BUY_AGAIN)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-static void SpriteCallback_DownArrow(struct Sprite *sprite)
-{
-    u8 val = sprite->data[0] + 128;
-    sprite->y2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(sMenuDataPtr->buyScreen || sMenuDataPtr->currentRow == sMenuDataPtr->numberofRows - 1)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-#define LEFT_ARROW_X 30
-#define LEFT_ARROW_Y 43
-#define RIGHT_ARROW_X 70
-#define RIGHT_ARROW_Y 43
-
-static void SpriteCallback_LeftArrow(struct Sprite *sprite)
-{
-    u8 num = (sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem);
-    u8 x = (5 * num);
-    u8 val = sprite->data[0] + 128;
-    sprite->x = LEFT_ARROW_X + (x * 8) + (2 * num);
-
-    sprite->x2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(sMenuDataPtr->buyScreen || sMenuDataPtr->currentItem == 0)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-static void SpriteCallback_RightArrow(struct Sprite *sprite)
-{
-    u8 val = sprite->data[0];
-    u8 num = (sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem);
-    u8 x = (5 * num);
-
-    sprite->x = RIGHT_ARROW_X + (x * 8) + (2 * num);
-    sprite->x2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(sMenuDataPtr->buyScreen || sMenuDataPtr->currentItem == sMenuDataPtr->itemNum[(GetCurrentRow()) % NUM_ROWS] - 1)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-static void SpriteCallback_UpArrowSmall(struct Sprite *sprite)
-{
-    u8 val = sprite->data[0];
-    sprite->y2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(!sMenuDataPtr->buyScreen || sMenuDataPtr->itemQuantity == sMenuDataPtr->buyableItems - 1 || sMenuDataPtr->buyWindow)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-static void SpriteCallback_DownArrowSmall(struct Sprite *sprite)
-{
-    u8 val = sprite->data[0] + 128;
-    sprite->y2 = gSineTable[val] / 128;
-    sprite->data[0] += 8;
-
-    if(!sMenuDataPtr->buyScreen || sMenuDataPtr->itemQuantity == 0 || sMenuDataPtr->buyWindow)
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-// Buy Icon Sprite -------------------------------------------------------------------------------------------------------
-
-static const u32 gBattlePrestoBuyIcon_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol");
-static const u32 gBattlePrestoUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol");
-static const u32 gBattlePrestoUpArrowSmall_Gfx[]   = INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol");
-static const u32 gBattlePrestoDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol");
-static const u32 gBattlePrestoDownArrowSmall_Gfx[] = INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol");
-static const u32 gBattlePrestoLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol");
-static const u32 gBattlePrestoRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol");
-
-static const struct SpritePalette sPrestoInterfaceSpritePalette[] = {
-    {sMenuPalette, PAL_UI_SPRITES},
-};
-
-static void CreateBuyIconSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = GFXTAG_BUY_ICON;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoBuyIcon = {gBattlePrestoBuyIcon_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCB_BuyIcon;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoBuyIcon);
-    LoadSpritePalette(sPrestoInterfaceSpritePalette);
-    spriteId = CreateSprite(&TempSpriteTemplate, 38, 43, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_BUY_ICON_ID] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_BUY_ICON_ID]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_BUY_ICON_ID]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_BUY_ICON_ID]].oam.priority = 1;
-}
-
-#define UP_ARROW_X 120
-#define UP_ARROW_Y 0
-
-static void CreateUpArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = GFXTAG_UP_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoUpArrow = {gBattlePrestoUpArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_UpArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoUpArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, UP_ARROW_X, UP_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW]].oam.priority = 1;
-}
-
-#define DOWN_ARROW_X UP_ARROW_X
-#define DOWN_ARROW_Y 146
-
-static void CreateDownArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = GFXTAG_DOWN_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoDownArrow = {gBattlePrestoDownArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_DownArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoDownArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, DOWN_ARROW_X, DOWN_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.shape = SPRITE_SHAPE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.size = SPRITE_SIZE(32x16);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_DOWN_ARROW]].oam.priority = 1;
-}
-
-
-static void CreateLeftArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = GFXTAG_LEFT_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoLeftArrow = {gBattlePrestoLeftArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag  = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_LeftArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoLeftArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, LEFT_ARROW_X, LEFT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SpriteTag] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.shape = SPRITE_SHAPE(8x16);
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.size = SPRITE_SIZE(8x16);
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.priority = 1;
-}
-
-static void CreateRightArrowSprite(void)
-{
-    u8 spriteId;
-    u8 SpriteTag = GFXTAG_RIGHT_ARROW;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoLeftArrow = {gBattlePrestoRightArrow_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag  = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_RightArrow;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoLeftArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, RIGHT_ARROW_X, RIGHT_ARROW_Y, 0);
-    sMenuDataPtr->spriteIDs[SpriteTag] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.shape = SPRITE_SHAPE(8x16);
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.size = SPRITE_SIZE(8x16);
-    gSprites[sMenuDataPtr->spriteIDs[SpriteTag]].oam.priority = 1;
-}
-
-static void CreateUpArrowSmallSprite(void)
-{
-    u8 x, y, spriteId;
-    u8 SpriteTag = GFXTAG_UP_ARROW_SMALL;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoUpArrow = {gBattlePrestoUpArrowSmall_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    x = (12 * 8) + 4;
-    y = (11 * 8) + 4;
-
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_UpArrowSmall;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoUpArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.shape = SPRITE_SHAPE(16x8);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.size = SPRITE_SIZE(16x8);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.priority = 1;
-}
-
-static void CreateDownArrowSmallSprite(void)
-{
-    u8 x, y, spriteId;
-    u8 SpriteTag = GFXTAG_DOWN_ARROW_SMALL;
-    struct CompressedSpriteSheet sSpriteSheet_PrestoDownArrow = {gBattlePrestoDownArrowSmall_Gfx, 0x0800, SpriteTag};
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    x = (12 * 8) + 4;
-    y = (14 * 8) + 4;
-
-    TempSpriteTemplate.tileTag = SpriteTag;
-    TempSpriteTemplate.callback = SpriteCallback_DownArrowSmall;
-
-    LoadCompressedSpriteSheet(&sSpriteSheet_PrestoDownArrow);
-    spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
-    sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL] = spriteId;
-
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.shape = SPRITE_SHAPE(16x8);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.size = SPRITE_SIZE(16x8);
-    gSprites[sMenuDataPtr->spriteIDs[SPRITE_UP_ARROW_SMALL]].oam.priority = 1;
-}
-
-// -------------------------------------------------------------------------------------------------------
-static bool8 Menu_DoGfxSetup(void)
-{
-    switch (gMain.state)
-    {
-    case 0:
-        DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
-        SetVBlankHBlankCallbacksToNull();
-        ClearScheduledBgCopiesToVram();
-        gMain.state++;
-        break;
-    case 1:
-        ScanlineEffect_Stop();
-        FreeAllSpritePalettes();
-        ResetPaletteFade();
-        ResetSpriteData();
-        ResetTasks();
-        gMain.state++;
-        break;
-    case 2:
-        if (Menu_InitBgs())
-        {
-            sMenuDataPtr->gfxLoadState = 0;
-            gMain.state++;
-        }
-        else
-        {
-            Menu_FadeAndBail();
-            return TRUE;
-        }
-        break;
-    case 3:
-        if (Menu_LoadGraphics() == TRUE)
-            gMain.state++;
-        break;
-    case 4:
-        LoadMessageBoxAndBorderGfx();
-        Menu_InitWindows();
-        gMain.state++;
-        break;
-    case 5:
-        CreateBuyIconSprite();
-        CreateUpArrowSprite();
-        CreateDownArrowSprite();
-        CreateLeftArrowSprite();
-        CreateRightArrowSprite();
-        CreateUpArrowSmallSprite();
-        CreateDownArrowSmallSprite();
-        PrintToWindow(WINDOW_1, FONT_WHITE);
-        CreateTask(Task_MenuWaitFadeIn, 0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-        gMain.state++;
-        break;
-    case 6:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-        gMain.state++;
-        break;
-    default:
-        SetVBlankCallback(Menu_VBlankCB);
-        SetMainCallback2(Menu_MainCB);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-#define try_free(ptr) ({        \
-    void ** ptr__ = (void **)&(ptr);   \
-    if (*ptr__ != NULL)                \
-        Free(*ptr__);                  \
-})
-
-static void Menu_FreeResources(void)
-{
-    try_free(sMenuDataPtr);
-    try_free(sBg1TilemapBuffer);
-
-    FreeAllWindowBuffers();
-}
-
-
-static void Task_MenuWaitFadeAndBail(u8 taskId)
+static void Task_WaitFadeAndOpenPrestoTerminal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sMenuDataPtr->savedCallback);
-        Menu_FreeResources();
+        ShopMenu_Init(&sPrestoShopConfigs, CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
 
-static void Menu_FadeAndBail(void)
+void OpenPrestoTerminalWithinScript(struct ScriptContext *ctx)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_MenuWaitFadeAndBail, 0);
-    SetVBlankCallback(Menu_VBlankCB);
-    SetMainCallback2(Menu_MainCB);
+    CreateTask(Task_WaitFadeAndOpenPrestoTerminal, 0);
 }
 
-static bool8 Menu_InitBgs(void)
-{
-    ResetAllBgsCoordinates();
-    sBg1TilemapBuffer = Alloc(0x800);
-    if (sBg1TilemapBuffer == NULL)
-        return FALSE;
-
-    memset(sBg1TilemapBuffer, 0, 0x800);
-    ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
-    SetBgTilemapBuffer(1, sBg1TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(1);
-    ShowBg(0);
-    ShowBg(1);
-    ShowBg(2);
-    return TRUE;
-}
-
-static void Menu_ChangeTilemap(void)
-{
-    try_free(sBg1TilemapBuffer);
-    sBg1TilemapBuffer = NULL;
-
-    ResetAllBgsCoordinates();
-    sBg1TilemapBuffer = Alloc(0x800);
-
-    memset(sBg1TilemapBuffer, 0, 0x800);
-    ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sMenuBgTemplates, NELEMS(sMenuBgTemplates));
-    SetBgTilemapBuffer(1, sBg1TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(1);
-    ShowBg(0);
-    ShowBg(1);
-    ShowBg(2);
-
-    sMenuDataPtr->buyScreen = !sMenuDataPtr->buyScreen;
-    ResetTempTileDataBuffers();
-    DecompressAndCopyTileDataToVram(1, sMenuTiles, 0, 0, 0);
-    FreeTempTileDataBuffersIfPossible();
-    CalculateBuyableItems();
-    sMenuDataPtr->boughtItem = FALSE;
-
-    if(sMenuDataPtr->buyScreen){
-        DisableAllItemIcons();
-        DecompressDataWithHeaderWram(sMenuTilemapBuy, sBg1TilemapBuffer);
-    }
-    else{
-        EnableAllItemIcons();
-        DecompressDataWithHeaderWram(sMenuTilemap, sBg1TilemapBuffer);
-    }
-}
-
-static bool8 Menu_LoadGraphics(void)
-{
-    switch (sMenuDataPtr->gfxLoadState)
-    {
-    case 0:
-        ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sMenuTiles, 0, 0, 0);
-        sMenuDataPtr->gfxLoadState++;
-        break;
-    case 1:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            DecompressDataWithHeaderWram(sMenuTilemap, sBg1TilemapBuffer);
-            sMenuDataPtr->gfxLoadState++;
-        }
-        break;
-    case 2:
-        LoadPalette(sMenuPalette, 0, 32);
-        sMenuDataPtr->gfxLoadState++;
-        break;
-    default:
-        sMenuDataPtr->gfxLoadState = 0;
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static void Menu_InitWindows(void)
-{
-    InitWindows(sMenuWindowTemplates);
-    DeactivateAllTextPrinters();
-    ScheduleBgCopyTilemapToVram(0);
-
-    FillWindowPixelBuffer(WINDOW_1, 0);
-    LoadUserWindowBorderGfx(WINDOW_1, 720, 14 * 16);
-    PutWindowTilemap(WINDOW_1);
-    CopyWindowToVram(WINDOW_1, 3);
-
-    ScheduleBgCopyTilemapToVram(2);
-}
-
-static void CreateItemIcon(u16 itemId, u8 idx, u8 x, u8 y)
-{
-    u8 spriteId;
-    u32 newspriteID = FIRST_ITEM_SPRITE_ID + idx;
-
-    spriteId = AddItemIconSprite(newspriteID, newspriteID, itemId);
-
-    sMenuDataPtr->spriteIDs[newspriteID] = spriteId;
-    gSprites[spriteId].x2 = x; //24;
-    gSprites[spriteId].y2 = y; //140;
-}
-
-static void DestroyAllItemIcons()
-{
-    u32 i;
-    u32 newspriteID = 0;
-    u32 oldspriteID = 0;
-    u16 palTag = 0;
-    struct SpritePalette sItemSpritePalette[] =
-    {
-        {sMenuPalette, palTag},
-    };
-
-    for(i = 0; i < MAX_ITEM_SPRITES; i++)
-    {
-        newspriteID = FIRST_ITEM_SPRITE_ID + i;
-        oldspriteID = sMenuDataPtr->spriteIDs[newspriteID];
-        GetSpritePaletteTagByPaletteNum(gSprites[oldspriteID].oam.paletteNum);
-        sItemSpritePalette->tag = palTag;
-
-        if(sMenuDataPtr->spriteIDs[newspriteID] != 0){
-            FreeSpriteTilesByTag(newspriteID);
-            FreeSpritePaletteByTag(newspriteID);
-            DestroySpriteAndFreeResources(&gSprites[oldspriteID]);
-        }
-
-    }
-}
-
-static void EnableAllItemIcons()
-{
-    u32 i;
-
-    for(i = 0; i < MAX_ITEM_SPRITES; i++){
-        gSprites[sMenuDataPtr->spriteIDs[FIRST_ITEM_SPRITE_ID + i]].invisible = FALSE;
-    }
-}
-
-static void DisableAllItemIcons()
-{
-    u32 i;
-
-    for(i = 0; i < MAX_ITEM_SPRITES; i++){
-        gSprites[sMenuDataPtr->spriteIDs[FIRST_ITEM_SPRITE_ID + i]].invisible = TRUE;
-    }
-}
-
-static void UNUSED DisableSpecificItemIcon(u8 idx)
-{
-    u8 spriteId = sMenuDataPtr->spriteIDs[FIRST_ITEM_SPRITE_ID + idx];
-    gSprites[spriteId].invisible = TRUE;
-}
-
-static void MoveCurrenItemIcon(u8 idx, u8 x, u8 y)
-{
-    u8 spriteId = sMenuDataPtr->spriteIDs[FIRST_ITEM_SPRITE_ID + idx];
-
-    gSprites[spriteId].invisible = FALSE;
-    gSprites[spriteId].x2 = x; //24;
-    gSprites[spriteId].y2 = y; //140;
-}
-
-// --------------------------------------------------------------------------------------------------------------------
-
-static u8 UNUSED GetCursorPosition()
-{
-    return sMenuDataPtr->currentRow - sMenuDataPtr->currentFirstShownRow;
-}
-
-enum PriceTypes
-{
-    PRICE_ITEM,
-    PRICE_DRONE,
-    PRICE_FINAL,
-};
-
-u32 getDroneFee()
+static u32 PrestoPurchase_GetDroneFee(void)
 {
     s32 discount = (HasPlayerJoinedTheTide()) ? 0 : PRESTO_FEE_SHARP_RISE_DISCOUNT;
-    u32 reccomended = (GetCurrentRow() == ROW_RECOMMENDED) ? PRESTO_FEE_RECCOMENDED_BOOST : 0;
+    u32 recommended = (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_RECOMMENDED) ? PRESTO_FEE_RECOMMENDED_BOOST : 0;
 
-    return (PRESTO_FEE_BASE_DRONE - discount) + reccomended;
+    return (PRESTO_FEE_BASE_DRONE - discount) + recommended;
 }
 
-u8 getRowItemNum(u8 row){
-    if(sMenuDataPtr->rowsSorted){
-        row = (row + 2) % NUM_ROWS;
-    }
-    else{
-       row = row % NUM_ROWS;
-    }
-
-    return sMenuDataPtr->itemNum[row];
-}
-
-static u32 GetCurrentItemPrice(u8 quantity, u16 itemID, u8 type)
+static u32 PrestoPurchase_GetItemPrice(u16 itemId, u16 quantity, enum PrestoPriceTypes type)
 {
-    u32 itemPrice = (quantity + 1)* gItemsInfo[itemID].price;
-    u32 dronePrice = (itemPrice * getDroneFee()) / 100;
+    u32 itemPrice = (quantity + 1) * GetItemPrice(itemId);
+    u32 dronePrice = (itemPrice * PrestoPurchase_GetDroneFee()) / 100;
     u32 totalPrice = itemPrice + dronePrice;
 
-    switch(type){
-        case PRICE_ITEM:
-            return itemPrice;
+    switch (type)
+    {
+    default:
+        return 0;
+    case PRESTO_PRICE_ITEM:
+        return itemPrice;
         break;
-        case PRICE_DRONE:
-            return dronePrice;
+    case PRESTO_PRICE_DRONE:
+        return dronePrice;
         break;
-        case PRICE_FINAL:
-            return totalPrice;
+    case PRESTO_PRICE_FINAL:
+        return PrestoHelper_GetShopType() == PRESTO_TYPE_APP ? totalPrice : itemPrice;
         break;
     }
 
     return 0;
 }
 
-static void CalculateBuyableItems(){
-    u16 itemID = sMenuDataPtr->currentRowItemList[(GetCurrentRow()) % NUM_ROWS][sMenuDataPtr->currentItem];
-    u16 buyableItems = GetMoney(&gSaveBlock1Ptr->money) / GetCurrentItemPrice(0, itemID, PRICE_FINAL);
-
-    if (buyableItems > MAX_BAG_ITEM_CAPACITY)
-        sMenuDataPtr->buyableItems = MAX_BAG_ITEM_CAPACITY;
-    else
-        sMenuDataPtr->buyableItems = buyableItems;
-}
-
-static void PressedDownButton(){
-    if(!sMenuDataPtr->buyScreen){
-        do{
-            u8 halfScreen = ((NUM_MAX_ICONS_ROWNS_ON_SCREEN) - 1) / 2;
-            u8 finalhalfScreen = sMenuDataPtr->numberofRows - halfScreen;
-            sMenuDataPtr->currentItem = 0;
-            sMenuDataPtr->currentFirstShownItem = 0;
-
-            if(sMenuDataPtr->currentRow < halfScreen){
-                sMenuDataPtr->currentRow++;
-            }
-            else if(sMenuDataPtr->currentRow >= (sMenuDataPtr->numberofRows - 1)){ //If you are in the last option go to the first one
-                sMenuDataPtr->currentRow = 0;
-                sMenuDataPtr->currentFirstShownRow = 0;
-            }
-            else if(sMenuDataPtr->currentRow >= (finalhalfScreen - 1)){
-                sMenuDataPtr->currentRow++;
-            }
-            else{
-                sMenuDataPtr->currentRow++;
-                sMenuDataPtr->currentFirstShownRow++;
-            }
-        }
-        while(sMenuDataPtr->currentRowItemList[GetCurrentRow()][0] == ITEM_NONE);
-    }
-    else{
-        if(GetCurrentRow() != ROW_TMS && GetCurrentRow() != ROW_Z_CRYSTALS && GetCurrentRow() != ROW_MEGA_STONES){
-            if(sMenuDataPtr->buyableItems != 0){
-                if(sMenuDataPtr->itemQuantity != 0)
-                    sMenuDataPtr->itemQuantity--;
-                else
-                    sMenuDataPtr->itemQuantity = sMenuDataPtr->buyableItems - 1;
-            }
-        }
-    }
-}
-
-static void PressedUpButton(){
-    if(!sMenuDataPtr->buyScreen){
-        do{
-            u8 halfScreen = ((NUM_MAX_ICONS_ROWNS_ON_SCREEN) - 1) / 2;
-            u8 finalhalfScreen = sMenuDataPtr->numberofRows - halfScreen;
-            sMenuDataPtr->currentItem = 0;
-            sMenuDataPtr->currentFirstShownItem = 0;
-
-            if(sMenuDataPtr->currentRow > halfScreen && sMenuDataPtr->currentRow <= (finalhalfScreen - 1)){
-                sMenuDataPtr->currentRow--;
-                sMenuDataPtr->currentFirstShownRow--;
-            }
-            else if(sMenuDataPtr->currentRow == 0){ //If you are in the first option go to the last one
-                sMenuDataPtr->currentRow = sMenuDataPtr->numberofRows - 1;
-                sMenuDataPtr->currentFirstShownRow = sMenuDataPtr->numberofRows - NUM_MAX_ICONS_ROWNS_ON_SCREEN;
-            }
-            else{
-                sMenuDataPtr->currentRow--;
-            }
-        }
-        while(sMenuDataPtr->currentRowItemList[GetCurrentRow()][0] == ITEM_NONE);
-    }
-    else{
-        if(GetCurrentRow() != ROW_TMS && GetCurrentRow() != ROW_Z_CRYSTALS && GetCurrentRow() != ROW_MEGA_STONES){
-            if(sMenuDataPtr->itemQuantity != MAX_BAG_ITEM_CAPACITY - 1 && sMenuDataPtr->buyableItems > sMenuDataPtr->itemQuantity + 1)
-                sMenuDataPtr->itemQuantity++;
-            else
-                sMenuDataPtr->itemQuantity = 0;
-        }
-    }
-}
-
-#define LEFTRIGHT_ITEM_NUMBER_CHANGE 5
-
-static void PressedRightButton(){
-    if(!sMenuDataPtr->buyScreen){
-        u8 finalhalfScreen;
-        u8 halfScreen = ((NUM_MAX_ICONS_ROWNS_ON_SCREEN) - 1) / 2;
-
-        finalhalfScreen = sMenuDataPtr->itemNum[(GetCurrentRow())] - halfScreen;
-
-        if(sMenuDataPtr->currentItem < halfScreen){
-            sMenuDataPtr->currentItem++;
-        }
-        else if(sMenuDataPtr->currentItem >= (sMenuDataPtr->itemNum[(GetCurrentRow())])){ //If you are in the last option go to the first one
-            sMenuDataPtr->currentItem = 0;
-            sMenuDataPtr->currentFirstShownItem = 0;
-        }
-        else if(sMenuDataPtr->currentItem >= (finalhalfScreen - 1)){
-            sMenuDataPtr->currentItem++;
-        }
-        else{
-            sMenuDataPtr->currentItem++;
-            sMenuDataPtr->currentFirstShownItem++;
-        }
-
-        if(sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem] == ITEM_NONE){ //If you are in the last option go to the first one
-            sMenuDataPtr->currentItem = 0;
-            sMenuDataPtr->currentFirstShownItem = 0;
-        }
-
-    }
-    else{
-        if(GetCurrentRow() != ROW_TMS && GetCurrentRow() != ROW_Z_CRYSTALS && GetCurrentRow() != ROW_MEGA_STONES){
-            if(sMenuDataPtr->itemQuantity != MAX_BAG_ITEM_CAPACITY - 1 &&
-               (sMenuDataPtr->buyableItems - 1) > (sMenuDataPtr->itemQuantity + LEFTRIGHT_ITEM_NUMBER_CHANGE))
-                sMenuDataPtr->itemQuantity = sMenuDataPtr->itemQuantity + LEFTRIGHT_ITEM_NUMBER_CHANGE;
-            else if(sMenuDataPtr->itemQuantity != sMenuDataPtr->buyableItems - 1)
-                sMenuDataPtr->itemQuantity = sMenuDataPtr->buyableItems - 1;
-            else
-                sMenuDataPtr->itemQuantity = 0;
-        }
-    }
-}
-
-static void PressedLeftButton(){
-    if(!sMenuDataPtr->buyScreen){
-        u8 finalhalfScreen;
-        u8 halfScreen = ((NUM_MAX_ICONS_ROWNS_ON_SCREEN) - 1) / 2;
-
-        finalhalfScreen = sMenuDataPtr->itemNum[GetCurrentRow()] - halfScreen;
-
-        if(sMenuDataPtr->currentItem > halfScreen && sMenuDataPtr->currentItem <= (finalhalfScreen - 1)){
-            sMenuDataPtr->currentItem--;
-            sMenuDataPtr->currentFirstShownItem--;
-        }
-        else if(sMenuDataPtr->currentItem == 0){ //If you are in the first option go to the last one
-            sMenuDataPtr->currentItem = sMenuDataPtr->itemNum[GetCurrentRow()] - 1;
-            if(sMenuDataPtr->itemNum[GetCurrentRow()] > NUM_MAX_ICONS_ROWNS_ON_SCREEN)
-                sMenuDataPtr->currentFirstShownItem = sMenuDataPtr->itemNum[GetCurrentRow()] - NUM_MAX_ICONS_ROWNS_ON_SCREEN;
-        }
-        else{
-            sMenuDataPtr->currentItem--;
-        }
-    }
-    else{
-        if(GetCurrentRow() != ROW_TMS && GetCurrentRow() != ROW_Z_CRYSTALS && GetCurrentRow() != ROW_MEGA_STONES){
-            if(sMenuDataPtr->buyableItems != 0){
-                if(sMenuDataPtr->itemQuantity >= LEFTRIGHT_ITEM_NUMBER_CHANGE)
-                    sMenuDataPtr->itemQuantity = sMenuDataPtr->itemQuantity - LEFTRIGHT_ITEM_NUMBER_CHANGE;
-                else if(sMenuDataPtr->itemQuantity != 0)
-                    sMenuDataPtr->itemQuantity = 0;
-                else
-                    sMenuDataPtr->itemQuantity = sMenuDataPtr->buyableItems - 1;
-            }
-        }
-    }
-}
-
-#define ROW_NAME_LENGTH 20
-#define FLAG_NONE 0
-#define VAR_NONE 0
-
-struct PrestoRowData
+static u32 PrestoPurchase_GetTotalItemPrice(u16 itemId, u16 quantity)
 {
-    const u8 title[ROW_NAME_LENGTH];
-};
+    return PrestoPurchase_GetItemPrice(itemId, quantity, PRESTO_PRICE_FINAL);
+}
 
-struct PrestoItemData
+static inline void PrestoBlit_SelectedItem(void)
 {
-    u16 item;
-    u8  numBadges;
-    u16 reqFlag;
-    u16 reqVar;
-    u16 reqVarState;
-    u16 reqQuest;
-};
+    u32 trueColIdx = ShopGrid_GetGridXCursor();
+    u32 x = (5 * trueColIdx) + 4, x2 = (2 * trueColIdx) + 2;
+    u32 y = 4;
 
-static const struct PrestoItemData Presto_Items[NUM_ROWS][NUM_MAX_ITEMS_PER_ROW] = {
-    [ROW_MEDICINE] =
-    {
-        {
-            .item = ITEM_POTION,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SUPER_POTION,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HYPER_POTION,
-            .numBadges = 5,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_POTION,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FULL_RESTORE,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_REVIVE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_REVIVE,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ENERGY_POWDER,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ENERGY_ROOT,
-            .numBadges = 5,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_REVIVAL_HERB,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ANTIDOTE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PARALYZE_HEAL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BURN_HEAL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ICE_HEAL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_AWAKENING,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FULL_HEAL,
-            .numBadges = 5,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ETHER,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_ETHER,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ELIXIR,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_ELIXIR,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_POKEBALLS] =
-    {
-        {
-            .item = ITEM_POKE_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GREAT_BALL,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ULTRA_BALL,
-            .numBadges = 5,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HEAL_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_REPEAT_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LUXURY_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LEVEL_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_LURE_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_MOON_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_FRIEND_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_LOVE_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_FAST_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-        {
-            .item = ITEM_HEAVY_BALL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_ARTISANBALLS3,
-        },
-    },
-    [ROW_OTHER_ITEMS] =
-    {
-        {
-            .item = ITEM_REPEL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SUPER_REPEL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_REPEL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-        },
-        {
-            .item = ITEM_LURE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SUPER_LURE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAX_LURE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_POWER_UPS] =
-    {
-        {
-            .item = ITEM_HP_UP,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PROTEIN,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_IRON,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CALCIUM,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ZINC,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CARBOS,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PP_UP,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PP_MAX,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HEALTH_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MUSCLE_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RESIST_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GENIUS_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CLEVER_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SWIFT_FEATHER,
-            .numBadges = 2,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ABILITY_CAPSULE,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ABILITY_PATCH,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LONELY_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ADAMANT_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_NAUGHTY_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BRAVE_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BOLD_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_IMPISH_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LAX_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RELAXED_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MODEST_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MILD_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RASH_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_QUIET_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CALM_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GENTLE_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CAREFUL_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SASSY_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TIMID_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HASTY_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_JOLLY_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_NAIVE_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SERIOUS_MINT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FIRE_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WATER_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_THUNDER_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LEAF_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ICE_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SUN_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MOON_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SHINY_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DUSK_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DAWN_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SWEET_APPLE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TART_APPLE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CRACKED_POT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHIPPED_POT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GALARICA_CUFF,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GALARICA_WREATH,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DRAGON_SCALE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_UPGRADE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PROTECTOR,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ELECTIRIZER,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAGMARIZER,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DUBIOUS_DISC,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_REAPER_CLOTH,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PRISM_SCALE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WHIPPED_DREAM,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SACHET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_OVAL_STONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STRAWBERRY_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LOVE_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BERRY_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CLOVER_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLOWER_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STAR_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RIBBON_SWEET,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EVERSTONE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RED_NECTAR,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_YELLOW_NECTAR,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PINK_NECTAR,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PURPLE_NECTAR,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLAME_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SPLASH_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ZAP_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MEADOW_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ICICLE_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FIST_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TOXIC_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EARTH_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SKY_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MIND_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_INSECT_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STONE_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SPOOKY_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DRACO_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DREAD_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_IRON_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PIXIE_PLATE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DOUSE_DRIVE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SHOCK_DRIVE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BURN_DRIVE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHILL_DRIVE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FIRE_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WATER_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ELECTRIC_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GRASS_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ICE_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FIGHTING_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POISON_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GROUND_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLYING_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PSYCHIC_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BUG_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROCK_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROCK_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GHOST_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DRAGON_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DARK_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STEEL_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FAIRY_MEMORY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RUSTED_SWORD,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RUSTED_SHIELD,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RED_ORB,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BLUE_ORB,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_BATTLE_ITEMS] =
-    {
-        {
-            .item = ITEM_X_ATTACK,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_X_DEFENSE,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_X_SP_ATK,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_X_SP_DEF,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_X_SPEED,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DIRE_HIT,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GUARD_SPEC,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POKE_DOLL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLUFFY_TAIL,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POKE_TOY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MACHO_BRACE,
-            .numBadges = 5,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_WEIGHT,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_BRACER,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_BELT,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_LENS,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_BAND,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_ANKLET,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHOICE_BAND,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHOICE_SPECS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHOICE_SCARF,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLAME_ORB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TOXIC_ORB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DAMP_ROCK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HEAT_ROCK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SMOOTH_ROCK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ICY_ROCK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ELECTRIC_SEED,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PSYCHIC_SEED,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MISTY_SEED,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GRASSY_SEED,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ABSORB_BULB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CELL_BATTERY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LUMINOUS_MOSS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SNOWBALL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BRIGHT_POWDER,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WHITE_HERB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EXP_SHARE,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_QUICK_CLAW,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SOOTHE_BELL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MENTAL_HERB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_KINGS_ROCK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_AMULET_COIN,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CLEANSE_TAG,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SMOKE_BALL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FOCUS_BAND,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LUCKY_EGG,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SCOPE_LENS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LEFTOVERS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SHELL_BELL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WIDE_LENS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MUSCLE_BAND,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WISE_GLASSES,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EXPERT_BELT,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LIGHT_CLAY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LIFE_ORB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_POWER_HERB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FOCUS_SASH,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ZOOM_LENS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_METRONOME,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_IRON_BALL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LAGGING_TAIL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_DESTINY_KNOT,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BLACK_SLUDGE,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GRIP_CLAW,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STICKY_BARB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SHED_SHELL,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BIG_ROOT,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RAZOR_CLAW,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RAZOR_FANG,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EVIOLITE,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FLOAT_STONE,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROCKY_HELMET,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_AIR_BALLOON,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RED_CARD,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RING_TARGET,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BINDING_BAND,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EJECT_BUTTON,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WEAKNESS_POLICY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ASSAULT_VEST,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SAFETY_GOGGLES,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ADRENALINE_ORB,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TERRAIN_EXTENDER,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PROTECTIVE_PADS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_THROAT_SPRAY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_EJECT_PACK,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HEAVY_DUTY_BOOTS,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BLUNDER_POLICY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROOM_SERVICE,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_UTILITY_UMBRELLA,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_BERRIES] =
-    {
-        {
-            .item = ITEM_CHERI_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHESTO_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PECHA_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RAWST_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ASPEAR_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LEPPA_BERRY,
-            .numBadges = 3,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ORAN_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PERSIM_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LUM_BERRY,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SITRUS_BERRY,
-            .numBadges = 4,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_FIGY_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WIKI_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MAGO_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_AGUAV_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_IAPAPA_BERRY,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHILAN_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_OCCA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PASSHO_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_WACAN_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_RINDO_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_YACHE_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHOPLE_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_KEBIA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SHUCA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_COBA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PAYAPA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_TANGA_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CHARTI_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_KASIB_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_HABAN_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_COLBUR_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_BABIRI_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROSELI_BERRY,
-            .numBadges = 6,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LIECHI_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_GANLON_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_SALAC_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_PETAYA_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_APICOT_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_LANSAT_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_STARF_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ENIGMA_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MICLE_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_CUSTAP_BERRY,
-            .numBadges = 8,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_JABOCA_BERRY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_ROWAP_BERRY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_KEE_BERRY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-        {
-            .item = ITEM_MARANGA_BERRY,
-            .numBadges = 7,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_TMS] =
-    {
-        {
-            .item = ITEM_NONE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_TREASURES] =
-    {
-        {
-            .item = ITEM_NONE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_MEGA_STONES] =
-    {
-        {
-            .item = ITEM_NONE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-    [ROW_Z_CRYSTALS] =
-    {
-        {
-            .item = ITEM_NONE,
-            .numBadges = 0,
-            .reqFlag = FLAG_NONE,
-            .reqVar = VAR_NONE,
-            .reqVarState = 0,
-            .reqQuest = QUEST_NONE,
-        },
-    },
-};
+    BlitBitmapToWindow(SHOP_WINDOW_MAIN, sItemSelector,
+                       TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), 32, 24);
+}
 
-void PrestoItemInitializeArrayList()
+static inline void PrestoPrint_Categories(void)
 {
-    u8 i, j;
-    bool8 canBuy = TRUE;
-    u16 badgeFlag;
-    u8 numbadges = 0;
-    u8 numRows = 0;
-    u8 row;
+    u32 x = 4, y = 2;
 
-    for (badgeFlag = FLAG_BADGE01_GET; badgeFlag < FLAG_BADGE01_GET + NUM_BADGES; badgeFlag++){
-        if(FlagGet(badgeFlag))
-            numbadges++;
-    }
+    for (u32 i = 0; i < ShopConfig_GetTotalShownItemRows(); i++)
+    {
+        u32 trueRowIdx = ShopGrid_GetCurrentCategoryIndex();
 
-    for(i = 0; i < NUM_ROWS; i++){
-        sMenuDataPtr->numRows[i] = NUM_ROWS;
-    }
+        u32 row = (trueRowIdx + i) % gShopMenuDataPtr->numCategories;
 
-    for(i = 0; i < NUM_ROWS; i++){
-        if(sMenuDataPtr->rowsSorted)
-            row = (i + 2) % NUM_ROWS;
+        if (!i)
+        {
+            u8 *end;
+
+            end = StringCopy(gStringVar1, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
+            PrependFontIdToFit(gStringVar1, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(7));
+
+            end = ShopInventory_CopyItemName(ShopInventory_GetChosenItemId(), 1, gStringVar2);
+            PrependFontIdToFit(gStringVar2, end, FONT_SMALL_NARROW, TILE_TO_PIXELS(8));
+
+            StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
+        }
         else
-            row = i % NUM_ROWS;
-
-        for(j = 0; j < NUM_MAX_ITEMS_PER_ROW; j++)
-            sMenuDataPtr->currentRowItemList[row][j] = ITEM_NONE;
-
-        sMenuDataPtr->itemNum[row] = 0;
-        for(j = 0; j < NUM_MAX_ITEMS_PER_ROW; j++){
-            if(Presto_Items[row][j].item != ITEM_NONE && row != ROW_BUY_AGAIN && row != ROW_RECOMMENDED){
-                canBuy = TRUE;
-
-                if(VarGet(Presto_Items[row][j].reqVar) < Presto_Items[row][j].reqVarState && Presto_Items[row][j].reqVar != VAR_NONE)
-                    canBuy = FALSE;
-
-                if(!FlagGet(Presto_Items[row][j].reqFlag) && Presto_Items[row][j].reqFlag != FLAG_NONE)
-                    canBuy = FALSE;
-
-                if(numbadges < Presto_Items[row][j].numBadges && Presto_Items[row][j].numBadges != 0)
-                    canBuy = FALSE;
-
-                if(!QuestMenu_GetSetQuestState(Presto_Items[row][j].reqQuest, FLAG_GET_COMPLETED) && Presto_Items[row][j].reqQuest != QUEST_NONE)
-                    canBuy = FALSE;
-
-                if(gItemsInfo[Presto_Items[row][j].item].price == 0)
-                    canBuy = FALSE;
-
-                if((row == ROW_TMS || row == ROW_Z_CRYSTALS || row == ROW_MEGA_STONES) &&
-                    CheckBagHasItem(Presto_Items[row][j].item, 1))//Removes TMs/Mega Stones/Z Crystals that you already have
-                    canBuy = FALSE;
-
-                if(canBuy){
-                    sMenuDataPtr->currentRowItemList[row][sMenuDataPtr->itemNum[row]] = Presto_Items[row][j].item;
-                    //currentRowItemList[row][itemNum[row]] = Presto_Items[row][j].item;
-                    sMenuDataPtr->itemNum[row]++;
-                }
-            }
-            else if(row == ROW_BUY_AGAIN && j < MAX_PRESTO_BUY_AGAIN_ITEMS && gSaveBlock3Ptr->prestoBuyAgainItem[j] != ITEM_NONE){
-                sMenuDataPtr->currentRowItemList[row][sMenuDataPtr->itemNum[row]] = gSaveBlock3Ptr->prestoBuyAgainItem[j];
-                sMenuDataPtr->itemNum[row]++;
-            }
-            else if(row == ROW_RECOMMENDED && j < NUM_RECOMMENDED_ITEMS){
-                sMenuDataPtr->currentRowItemList[row][sMenuDataPtr->itemNum[row]] = sMenuDataPtr->recommendedItems[j];
-                sMenuDataPtr->itemNum[row]++;
-            }
-        }
-
-        if(sMenuDataPtr->itemNum[row] != 0){
-            sMenuDataPtr->numRows[numRows] = row;
-            numRows++;
-        }
-    }
-    sMenuDataPtr->numberofRows = numRows;
-}
-
-enum CarouselTypes
-{
-    CAROUSEL_NEED_TO_HEAL,
-    CAROUSEL_TOURNAMENT_PREP,
-    CAROUSEL_FOREST_EXPLORE,
-    CAROUSEL_CAVE_EXPLORE,
-    CAROUSEL_WATER_EXPLORE,
-    CAROUSEL_ROUTE_EXPLORE,
-    CAROUSEL_RANDOM,
-    NUM_CAROUSELS,
-};
-
-u8 getCarouselType(){
-    u8 i;
-    u16 currentHP = 0;
-    u16 maxHP = 0;
-    u16 partyHP;
-    u8 partyStatus = 0;
-    u8 PartySize = 0;
-    u16 temp;
-
-    if(VarGet(VAR_STORYLINE_STATE) > STORY_COMPLETED_NAVAL_BASE && VarGet(VAR_STORYLINE_STATE) < STORY_EXPLORE_ZENZU_ISLAND)
-        return CAROUSEL_TOURNAMENT_PREP;
-
-    //Calculate the number of Pokemon in your party
-    for (i = 0; i < PARTY_SIZE; i++, i++)
-    {
-        temp = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        if (temp != SPECIES_NONE)
         {
-            PartySize++;
+            StringCopy(gStringVar4, gShopCategoryNames[ShopGrid_CategoryInRow(row)]);
         }
+
+        ShopPrint_AddTextPrinter(FONT_SMALL_NARROW,
+                                TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y) + (i * 4),
+                                SHOP_FNTCLR_SECONDARY, gStringVar4);
+
+        y += 5;
     }
-
-    //Calculate the Max HP and Current HP of your party
-    for (i = 0; i < PartySize; i++, i++)
-    {
-        currentHP += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        maxHP += GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-    }
-
-    //Calculate the Ailment of your party
-    for (i = 0; i < PartySize; i++, i++)
-    {
-        temp = GetMonAilment(&gPlayerParty[i]);
-        if(temp != AILMENT_NONE && temp != AILMENT_PKRS)
-            partyStatus++;
-    }
-
-    partyStatus = 100 - ((partyStatus / PartySize) * 100);
-
-    partyHP = (currentHP / maxHP) * 100;
-
-    if(partyHP < 26 || partyStatus < 33)
-        return CAROUSEL_NEED_TO_HEAL;
-
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE22) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE22)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE100)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_HALERBA_CITY) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_HALERBA_CITY)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ESPULEE_OUTSKIRTS) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ESPULEE_OUTSKIRTS)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE18) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE18)))
-        return CAROUSEL_FOREST_EXPLORE;
-
-    //PSF TODO Uncomment relevant lines when routes are created
-    /*if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_D) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_D)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_C) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_C)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE20)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_A) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_A)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE98)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_B)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_E) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_E)))
-        return CAROUSEL_WATER_EXPLORE;*/
-
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE20) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE20)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE98) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE98)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE_B) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE_B)))
-        return CAROUSEL_WATER_EXPLORE;
-
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE11) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE11)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE16) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE16)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE4) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE4)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE10) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE10)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE8) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE8)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PSFROUTE7E17FDD1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PSFROUTE7E17FDD1)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE14) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE14)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE5) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE5)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE6) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE6)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE3) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE3)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PSFROUTE9F45DA86) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PSFROUTE9F45DA86)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE1) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE1)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE2) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE2)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SECRET_PATH) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SECRET_PATH)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE9) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE9)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE7) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE7)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE13) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE13)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE100) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE100)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE99) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE99)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE12) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE12)))
-        return CAROUSEL_ROUTE_EXPLORE;
-
-    if((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ARANTRAZ) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ARANTRAZ)) ||
-       (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PIOCA_BRIDGE) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PIOCA_BRIDGE)))
-        return CAROUSEL_CAVE_EXPLORE;
-
-    return CAROUSEL_RANDOM;
 }
 
-void RecommendedInitializeArrayList(){
-    u8 i;
-    u8 CarouselType = getCarouselType();
-    u8 randRow, randItemNum;
-    u8 availableRows[] = {
-        ROW_MEDICINE,
-        ROW_POKEBALLS,
-        ROW_OTHER_ITEMS,
-        ROW_POWER_UPS,
-        ROW_BATTLE_ITEMS,
-        ROW_BERRIES,
-    };
-
-    /*u8 availableTournamentRows[] = {
-        ROW_BATTLE_ITEMS,
-        ROW_TMS,
-    };*/
-    //TMs would cause issues in the recommended row
-
-    u8 availableFieldRows[] = {
-        ROW_POKEBALLS,
-        ROW_OTHER_ITEMS,
-    };
-
-    for(i = 0; i < NUM_RECOMMENDED_ITEMS; i++){
-        switch(CarouselType){
-            case CAROUSEL_NEED_TO_HEAL:
-                do{
-                    //randRow = NeedToHealRows[Random() % (sizeof(NeedToHealRows)/sizeof(NeedToHealRows[0]))];
-                    randRow = ROW_MEDICINE;//numberofRows
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            case CAROUSEL_TOURNAMENT_PREP:
-                do{
-                    //randRow = NeedToHealRows[Random() % (sizeof(NeedToHealRows)/sizeof(NeedToHealRows[0]))];
-                    randRow = ROW_BATTLE_ITEMS;
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            case CAROUSEL_FOREST_EXPLORE:
-                do{
-                    randRow = availableFieldRows[Random() % (sizeof(availableFieldRows)/sizeof(availableFieldRows[0]))];
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] != ITEM_REPEL       &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_REPEL &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_REPEL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LURE        &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_LURE  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_LURE    &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_POKE_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_GREAT_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_ULTRA_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_NET_BALL) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            case CAROUSEL_WATER_EXPLORE:
-                do{
-                    randRow = availableFieldRows[Random() % (sizeof(availableFieldRows)/sizeof(availableFieldRows[0]))];
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] != ITEM_REPEL       &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_REPEL &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_REPEL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LURE        &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_LURE  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_LURE    &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_POKE_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_GREAT_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_ULTRA_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_NET_BALL    &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_DIVE_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LURE_BALL) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            case CAROUSEL_CAVE_EXPLORE:
-                do{
-                    randRow = availableFieldRows[Random() % (sizeof(availableFieldRows)/sizeof(availableFieldRows[0]))];
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] != ITEM_REPEL       &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_REPEL &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_REPEL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LURE        &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_LURE  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_LURE    &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_POKE_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_GREAT_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_ULTRA_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_DUSK_BALL) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            case CAROUSEL_ROUTE_EXPLORE:
-                do{
-                    randRow = availableFieldRows[Random() % (sizeof(availableFieldRows)/sizeof(availableFieldRows[0]))];
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] != ITEM_REPEL       &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_REPEL &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_REPEL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LURE        &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_SUPER_LURE  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_MAX_LURE    &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_POKE_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_GREAT_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_ULTRA_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_HEAL_BALL   &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_TIMER_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_QUICK_BALL  &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_REPEAT_BALL &&
-                       sMenuDataPtr->recommendedItems[i] != ITEM_LUXURY_BALL) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-            default:
-                do{
-                    randRow = availableRows[Random() % (sizeof(availableRows)/sizeof(availableRows[0]))];
-                    randItemNum = (Random() + i)% sMenuDataPtr->itemNum[randRow];
-                    sMenuDataPtr->recommendedItems[i] = sMenuDataPtr->currentRowItemList[randRow][randItemNum];
-                }
-                while(sMenuDataPtr->recommendedItems[i] == ITEM_NONE ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[0] && i != 0) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[1] && i != 1) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[2] && i != 2) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[3] && i != 3) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[4] && i != 4) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[5] && i != 5) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[6] && i != 6) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[7] && i != 7) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[8] && i != 8) ||
-                      (sMenuDataPtr->recommendedItems[i] == sMenuDataPtr->recommendedItems[9] && i != 9));
-                //sMenuDataPtr->itemNum[ROW_RECOMMENDED]++;
-
-            break;
-        }
-    }
-
-    PrestoItemInitializeArrayList();
-}
-
-static const struct PrestoRowData Presto_Rows[NUM_ROWS] = {
-    [ROW_BUY_AGAIN] =
-    {
-        .title = _("Buy Again"),
-    },
-    [ROW_RECOMMENDED] =
-    {
-        .title = _("Recommended"),
-    },
-    [ROW_MEDICINE] =
-    {
-        .title = _("Medicine"),
-    },
-    [ROW_POKEBALLS] =
-    {
-        .title = _("Pokeballs"),
-    },
-    [ROW_OTHER_ITEMS] =
-    {
-        .title = _("Other Items"),
-    },
-    [ROW_POWER_UPS] =
-    {
-        .title = _("Power-Ups"),
-    },
-    [ROW_BATTLE_ITEMS] =
-    {
-        .title = _("Battle Items"),
-    },
-    [ROW_BERRIES] =
-    {
-        .title = _("Berries"),
-    },
-    [ROW_TMS] =
-    {
-        .title = _("TMs"),
-    },
-    [ROW_TREASURES] =
-    {
-        .title = _("Treasures"),
-    },
-    [ROW_MEGA_STONES] =
-    {
-        .title = _("Mega Stones"),
-    },
-    [ROW_Z_CRYSTALS] =
-    {
-        .title = _("Z-Crystals"),
-    },
-};
-
-//Graphics
-static const u8 sRowIcon_0[]                = INCBIN_U8("graphics/ui_menus/presto/icon_0.4bpp");
-static const u8 sRowIcon_1[]                = INCBIN_U8("graphics/ui_menus/presto/icon_1.4bpp");
-static const u8 sRowIcon_2[]                = INCBIN_U8("graphics/ui_menus/presto/icon_2.4bpp");
-static const u8 sRowIcon_Pokeball[]         = INCBIN_U8("graphics/ui_menus/presto/icon_pokeball.4bpp");
-static const u8 sRowIcon_Potion[]           = INCBIN_U8("graphics/ui_menus/presto/icon_potion.4bpp");
-static const u8 sRowIcon_TM[]               = INCBIN_U8("graphics/ui_menus/presto/icon_tm.4bpp");
-static const u8 sRowIcon_Berries[]          = INCBIN_U8("graphics/ui_menus/presto/icon_berries.4bpp");
-static const u8 sRowIcon_Candy[]            = INCBIN_U8("graphics/ui_menus/presto/icon_candy.4bpp");
-static const u8 sRowIcon_Key[]              = INCBIN_U8("graphics/ui_menus/presto/icon_key.4bpp");
-
-static const u8 sRowSelector[]         = INCBIN_U8("graphics/ui_menus/presto/row_selector.4bpp");
-static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
-static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
-
-static const u8 sText_Help_Bar[]          = _("{DPAD_UPDOWN} Rows {DPAD_LEFTRIGHT} Items {A_BUTTON} Buy {B_BUTTON} Exit {START_BUTTON} Sort Rows");
-static const u8 sText_Help_Bar_Buy[]      = _("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +5/-5 {A_BUTTON} Buy Now {B_BUTTON} Cancel");
-static const u8 sText_Help_Bar_Complete[] = _("{A_BUTTON} Buy More {B_BUTTON} Return {START_BUTTON} Exit");
-static const u8 sText_Money_Bar[]         = _("Money: ¥{STR_VAR_1}");
-static const u8 sText_Price[]             = _("Price: ¥{STR_VAR_1}");
-static const u8 sText_FirstRowName[]      = _("{STR_VAR_1}: {STR_VAR_2}");
-static const u8 sText_ItemNameOwned[]     = _("{STR_VAR_1} - {STR_VAR_2} Owned");
-static const u8 sText_ItemCost[]          = _("Item Cost:    ¥ {STR_VAR_1}");
-static const u8 sText_DroneFee[]          = _("Drone Fee:    ¥ {STR_VAR_1}");
-//static const u8 sText_DroneFee[]        = _("Drone Fee:    ¥ {STR_VAR_1} ({STR_VAR_2}%)");
-static const u8 sText_OrderTotal[]        = _("Order Total: ¥ {STR_VAR_1}");
-static const u8 sText_ItemPrice[]         = _("¥ {STR_VAR_1}");
-static const u8 sText_DeliveryTo[]        = _("Delivery to {STR_VAR_1} ({STR_VAR_2})");
-
-
-static const u8 sText_OrderDelivered[]       = _("Order Delivered!");
-static const u8 sText_ThanksForBuying[]      = _("Thank you for your purchase!");
-static const u8 sText_YouGot[]               = _("You got");
-static const u8 sText_ItemNumber[]           = _("{STR_VAR_1} x{STR_VAR_2}");
-
-
-static const u8 sText_noEnoughMoney[]        = _("Your account has been declined for insufficient funds!");
-
-static void PrintToWindow(u8 windowId, u8 colorIdx)
+static inline void PrestoPrint_ItemPrice(void)
 {
-    const u8 *str = sText_Help_Bar;
-    u8 i, j, x2, y2;
-    u8 x = 1;
-    u8 y = 1;
-    u32 quantity;
-    u16 itemID;
-    u8 strArray[16];
-    u8 temp;
-    u8 itemRow[NUM_MAX_ICONS_ROWNS_ON_SCREEN];
-    int offset;
+    u32 x = 20, y = 2;
+    u32 itemId = ShopInventory_GetChosenItemId();
+    u32 price = GetItemPrice(itemId);
 
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Price: "));
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
 
-    if(!sMenuDataPtr->buyScreen){
-        // Row Icons
-        x = 1;
-        y = 2;
-        x2 = 0;
-        y2 = 4;
+    u8 *strVar1 = StringCopy(gStringVar1, COMPOUND_STRING("¥ "));
+    ConvertIntToDecimalStringN(strVar1, price, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    u32 fontId = GetFontIdToFit(gStringVar1, FONT_SMALL_NARROW, 0, TILE_TO_PIXELS(29));
 
-        for(i = 0; i < NUM_MAX_ICONS_ROWNS_ON_SCREEN; i++ ){
-            switch(i){
-                case 1:
-                    itemRow[i] = i;
-                    if(sMenuDataPtr->currentRowItemList[(GetCurrentRow() + itemRow[i]) % NUM_ROWS][0] == ITEM_NONE){
-                        do{
-                            itemRow[i]++;
-                        }
-                        while(sMenuDataPtr->currentRowItemList[(GetCurrentRow() + itemRow[i]) % NUM_ROWS][0] == ITEM_NONE);
-                    }
-                break;
-                default:
-                    itemRow[i] = itemRow[i-1] + 1;
-                    if(sMenuDataPtr->currentRowItemList[(GetCurrentRow() + itemRow[i]) % NUM_ROWS][0] == ITEM_NONE){
-                        do{
-                            itemRow[i]++;
-                        }
-                        while(sMenuDataPtr->currentRowItemList[(GetCurrentRow() + itemRow[i]) % NUM_ROWS][0] == ITEM_NONE);
-                    }
-                break;
+    ShopPrint_AddTextPrinter(fontId, TILE_TO_PIXELS(x) + GetStringWidth(FONT_SMALL_NARROW, gStringVar4, 0), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar1);
+}
+
+static void PrestoHelper_UpdateFrontEnd(void)
+{
+    u32 x, y, x2;
+    enum ShopMenuModes mode = ShopHelper_GetMode();
+
+    switch (mode)
+    {
+    default:
+    case SHOP_MODE_DEFAULT:
+        {
+            if (sPrestoItemIconSpriteId != SPRITE_NONE)
+            {
+                gSprites[sPrestoItemIconSpriteId].invisible = TRUE;
+                DestroySprite(&gSprites[sPrestoItemIconSpriteId]);
+                FreeSpriteTilesByTag(ShopGrid_GetGridXCursor());
+                sPrestoItemIconSpriteId = SPRITE_NONE;
             }
 
-            if(GetCurrentRow() == getRowNum(sMenuDataPtr->currentFirstShownRow + i))
-                BlitBitmapToWindow(windowId, sRowSelector, ((x-1)*8) + x2, ((y-1)*8) + y2 + 4, 32, 24);
+            PrestoBlit_SelectedItem();
+            PrestoPrint_Categories();
+            PrestoPrint_ItemPrice();
 
-            switch(getRowNum(sMenuDataPtr->currentFirstShownRow + i)){
-                case ROW_BUY_AGAIN:
-                    BlitBitmapToWindow(windowId, sRowIcon_0, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_RECOMMENDED:
-                    BlitBitmapToWindow(windowId, sRowIcon_0, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_MEDICINE:
-                    BlitBitmapToWindow(windowId, sRowIcon_Potion, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_POKEBALLS:
-                    BlitBitmapToWindow(windowId, sRowIcon_Pokeball, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_OTHER_ITEMS:
-                    BlitBitmapToWindow(windowId, sRowIcon_0, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_POWER_UPS:
-                    BlitBitmapToWindow(windowId, sRowIcon_Candy, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_BATTLE_ITEMS:
-                    BlitBitmapToWindow(windowId, sRowIcon_0, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_BERRIES:
-                    BlitBitmapToWindow(windowId, sRowIcon_Berries, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_TMS:
-                    BlitBitmapToWindow(windowId, sRowIcon_TM, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_TREASURES:
-                    BlitBitmapToWindow(windowId, sRowIcon_2, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_MEGA_STONES:
-                    BlitBitmapToWindow(windowId, sRowIcon_1, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-                case ROW_Z_CRYSTALS:
-                    BlitBitmapToWindow(windowId, sRowIcon_Key, (x*8) + x2, (y*8) + y2, 16, 16);
-                break;
-            }
-
-            y = y + 3;
-            y2 = y2 + 2;
+            break;
         }
+    case SHOP_MODE_PURCHASE ... SHOP_MODE_FAILURE:
+        {
+            u32 itemId = gShopMenuDataPtr->selectedItemId;
 
-        //Item Selector
-        x = (5 * (sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem)) + 4;
-        y = 4;
-        x2 = (2 * (sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem)) + 2;
-        BlitBitmapToWindow(windowId, sItemSelector, (x*8) + x2, (y*8), 32, 24);
+            if (sPrestoItemIconSpriteId == SPRITE_NONE)
+            {
+                x = 3, y = 6;
 
-        // Item Icon
-        x = 6;
-        y = 5;
-        x2 = 6;
-        y2 = 6;
-        temp = 0;
-        DestroyAllItemIcons();
+                u32 selectedSpriteIdx = ShopGrid_GetGridXCursor();
+                u32 spriteId = AddItemIconSprite(selectedSpriteIdx, TAG_SHOP_ITEMS + selectedSpriteIdx, itemId);
 
-        for(i = 0; i < NUM_MAX_ROWNS_ON_SCREEN; i++ ){
-            for(j = 0; j < NUM_MAX_ICONS_ROWNS_ON_SCREEN; j++ ){
-                switch(i){
-                    case 0:
-                        itemID = sMenuDataPtr->currentRowItemList[(GetCurrentRow()) % NUM_ROWS][(sMenuDataPtr->currentFirstShownItem + j)];
-                    break;
-                    case 1:
-                    case 2:
-                        itemID = sMenuDataPtr->currentRowItemList[(GetCurrentRow() + itemRow[i]) % NUM_ROWS][j];
-                    break;
-                }
+                gSprites[spriteId].x2 = TILE_TO_PIXELS(x);
+                gSprites[spriteId].y2 = TILE_TO_PIXELS(y);
+                gSprites[spriteId].oam.priority = 0;
 
-                CreateItemIcon(itemID, temp, (x * 8) + x2, (y * 8) + y2);
-
-                x = x + 5;
-                x2 = x2 + 2;
-                temp++;
-            }
-            x = 6;
-            x2 = 6;
-            y = y + 5;
-            y2 = y2 + 4;
-        }
-
-        // Row Names
-        x = 4;
-
-        for(i = 0; i < NUM_MAX_ROWNS_ON_SCREEN; i++ ){
-            switch(i){
-                case 0:
-                    str = Presto_Rows[GetCurrentRow()].title;
-                    StringCopy(gStringVar1, str);
-                    str = gItemsInfo[sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem]].name;
-                    StringCopy(gStringVar2, str);
-                    StringExpandPlaceholders(gStringVar4, sText_FirstRowName);
-                break;
-                case 1:
-                case 2:
-                    StringCopy(gStringVar4, Presto_Rows[(GetCurrentRow() + itemRow[i]) % NUM_ROWS].title);
-                break;
+                sPrestoItemIconSpriteId = spriteId;
             }
 
-            switch(i){
-                case 0:
-                    y = 2;
-                    AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-                break;
-                case 1:
-                    y = 7;
-                    AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-                break;
-                case 2:
-                    y = 13;
-                    AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
+            x = 1, y = 2;
+            u32 quantity = CountTotalItemQuantityInBag(itemId);
+            ShopInventory_CopyItemName(itemId, 1, gStringVar1);
+            ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
+            StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
+
+            x = 25, y = 2;
+            ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_ItemPrice);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar4);
+
+            // why is this one use FONT_SHORT_COPY_3
+            x = 5, y = 4;
+            ShopPrint_AddTextPrinter(FONT_SHORT_COPY_3, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, GetItemDescription(itemId));
+
+            x = 16, y = 10;
+            quantity = (gShopMenuDataPtr->itemQuantity + 1) * GetItemPrice(itemId);
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_ItemCost);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            if (PrestoHelper_GetShopType() == PRESTO_TYPE_APP)
+            {
+                x = 16, y = 12;
+                quantity = PrestoPurchase_GetItemPrice(itemId, gShopMenuDataPtr->itemQuantity, PRESTO_PRICE_DRONE);
+
+                ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+                StringExpandPlaceholders(gStringVar4, sText_DroneFee);
+                ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+            }
+
+            x = 16, y = PrestoHelper_GetShopType() == PRESTO_TYPE_APP ? 14 : 12;
+            quantity = ShopConfig_Get()->handleTotalPrice(itemId, gShopMenuDataPtr->itemQuantity);
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+            StringExpandPlaceholders(gStringVar4, sText_OrderTotal);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            x = 12, y = 12;
+            quantity = gShopMenuDataPtr->itemQuantity + 1;
+            ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + 4, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar1);
+
+            x = 1, y = 16, x2 = 4;
+            GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
+            StringCopy_PlayerName(gStringVar2, gSaveBlock2Ptr->playerName);
+            StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
+            ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
+
+            // stop here if we're still purchase mode
+            if (mode == SHOP_MODE_PURCHASE)
+            {
                 break;
             }
-        }
+            else if (mode == SHOP_MODE_SUCCESS)
+            {
+                x = 5, y = 5;
+                BlitBitmapToWindow(SHOP_WINDOW_MAIN, sOrderWindow, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), 152, 72);
 
-        // Item Price --------------------------------------------------------------------------------------------------------------------
-        x = 20;
-        y = 2;
-        quantity = GetCurrentItemPrice(sMenuDataPtr->itemQuantity, sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem], PRICE_ITEM);
-	    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
-        StringExpandPlaceholders(gStringVar4, sText_Price);
+                x = 6, y = 5, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_OrderDelivered, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, sText_OrderDelivered);
 
-        if(sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem] != ITEM_NONE)
-            AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-    }
-    else{
-        //Item Icon --------------------------------------------------------------------------------------------------------------------
-        x = 3;
-        y = 6;
-        x2 = 0;
-        y2 = 0;
-        itemID = sMenuDataPtr->currentRowItemList[(GetCurrentRow()) % NUM_ROWS][sMenuDataPtr->currentItem];
-        if(GetCurrentRow() != ROW_BUY_AGAIN)
-            MoveCurrenItemIcon(sMenuDataPtr->currentItem - sMenuDataPtr->currentFirstShownItem, (x * 8) + x2, (y * 8) + y2);
-        else if(!sMenuDataPtr->boughtItem)
-            MoveCurrenItemIcon(sMenuDataPtr->currentItem, (x * 8) + x2, (y * 8) + y2);
+                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_ThanksForBuying, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_ThanksForBuying);
 
-        //Item Name --------------------------------------------------------------------------------------------------------------------
-        x = 1;
-        y = 2;
-        x2 = 0;
-        y2 = 0;
+                y += 2, x2 = GetStringCenterAlignXOffset(FONT_NARROW, sText_YouGot, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, sText_YouGot);
 
-        str = gItemsInfo[itemID].name;
-        quantity = CountTotalItemQuantityInBag(itemID);
-        StringCopy(gStringVar1, str);
-	    ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, sText_ItemNameOwned);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-
-        //Item Price --------------------------------------------------------------------------------------------------------------------
-        x = 25;
-        y = 2;
-        x2 = 0;
-        y2 = 0;
-
-	    ConvertIntToDecimalStringN(gStringVar1, gItemsInfo[itemID].price, STR_CONV_MODE_LEFT_ALIGN, 6);
-	    //ConvertIntToDecimalStringN(gStringVar1, MAX_MONEY, STR_CONV_MODE_LEFT_ALIGN, 5);
-        StringExpandPlaceholders(gStringVar4, sText_ItemPrice);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-
-        //Item Description --------------------------------------------------------------------------------------------------------------------
-        x = 5;
-        y = 4;
-        x2 = 0;
-        y2 = 0;
-        str = gItemsInfo[itemID].description;
-        AddTextPrinterParameterized4(windowId, 5, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, str);
-
-        //Item Cost --------------------------------------------------------------------------------------------------------------------
-        x = 16;
-        y = 10;
-        x2 = 0;
-        y2 = 0;
-
-        quantity = GetCurrentItemPrice(sMenuDataPtr->itemQuantity, itemID, PRICE_ITEM);
-	    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 6);
-        StringExpandPlaceholders(gStringVar4, sText_ItemCost);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-
-        //Drone Fee --------------------------------------------------------------------------------------------------------------------
-        x = 16;
-        y = 12;
-        x2 = 0;
-        y2 = 0;
-
-        quantity = GetCurrentItemPrice(sMenuDataPtr->itemQuantity, itemID, PRICE_DRONE);
-	    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 6);
-	    ConvertIntToDecimalStringN(gStringVar2, getDroneFee(), STR_CONV_MODE_LEFT_ALIGN, 2);
-        StringExpandPlaceholders(gStringVar4, sText_DroneFee);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-
-        //Order Total --------------------------------------------------------------------------------------------------------------------
-        x = 16;
-        y = 14;
-        x2 = 0;
-        y2 = 0;
-
-        quantity = GetCurrentItemPrice(sMenuDataPtr->itemQuantity, itemID, PRICE_FINAL);
-	    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 6);
-        StringExpandPlaceholders(gStringVar4, sText_OrderTotal);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-
-        //Item Quantity --------------------------------------------------------------------------------------------------------------------
-        x = 12;
-        y = 12;
-        x2 = 4;
-        y2 = 0;
-
-        quantity = sMenuDataPtr->itemQuantity + 1;
-	    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEFT_ALIGN, 5);
-
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar1);
-
-        //Delivery to
-        x = 1;
-        y = 16;
-
-        GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
-
-        StringCopy(&strArray[0], gSaveBlock2Ptr->playerName);
-        str = strArray;
-        StringCopy(gStringVar2, str);
-        StringExpandPlaceholders(gStringVar4, sText_DeliveryTo);
-
-        //AddTextPrinterParameterized4(windowId, 8, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-
-        // Order Delivered --------------------------------------------------------------------------------------------------------------------
-        if(sMenuDataPtr->buyWindow){
-            if(!sMenuDataPtr->notEnoughMoneyWindow){
-                x = 5;
-                y = 5;
-
-                BlitBitmapToWindow(windowId, sOrderWindow, (x*8), (y*8), 152, 72);
-
-                x = 6;
-                x2 = 0;
-                y = 5;
-                y2 = 0;
-                offset = GetStringCenterAlignXOffset(7, sText_OrderDelivered, (16 * 8));
-                x2 = offset;
-                AddTextPrinterParameterized4(windowId, 7, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_OrderDelivered);
-
-                y = 7;
-                offset = GetStringCenterAlignXOffset(7, sText_ThanksForBuying, (16 * 8));
-                x2 = offset;
-                AddTextPrinterParameterized4(windowId, 7, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, sText_ThanksForBuying);
-
-                y = y + 2;
-                offset = GetStringCenterAlignXOffset(7, sText_YouGot, (16 * 8));
-                x2 = offset;
-                AddTextPrinterParameterized4(windowId, 7, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, sText_YouGot);
-
-                y = y + 2;
-                str = gItemsInfo[itemID].name;
-                StringCopy(gStringVar1, str);
-                ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 2);
+                y += 2;
+                ShopInventory_CopyItemName(itemId, quantity, gStringVar1);
+                ConvertIntToDecimalStringN(gStringVar2, quantity, STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringExpandPlaceholders(gStringVar4, sText_ItemNumber);
-                offset = GetStringCenterAlignXOffset(7, gStringVar4, (16 * 8));
-                x2 = offset;
-                AddTextPrinterParameterized4(windowId, 7, (x*8) + x2, (y*8) + y2, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, gStringVar4);
-
-                /*/Item Icon --------------------------------------------------------------------------------------------------------------------
-                if(GetCurrentRow() == ROW_BUY_AGAIN){
-                    x = 3;
-                    y = 6;
-                    x2 = 0;
-                    y2 = 0;
-                    MoveCurrenItemIcon(0, (x * 8) + x2, (y * 8) + y2);
-                }*/
+                x2 = GetStringCenterAlignXOffset(FONT_NARROW, gStringVar4, TILE_TO_PIXELS(16));
+                ShopPrint_AddTextPrinter(FONT_NARROW, TILE_TO_PIXELS(x) + x2, TILE_TO_PIXELS(y), SHOP_FNTCLR_PRIMARY, gStringVar4);
             }
-        }
-    }
-    // Help Bar --------------------------------------------------------------------------------------------------------------------
-    x = 0;
-    y = 18;
+            else if (mode == SHOP_MODE_FAILURE)
+            {
+                const u8 *str = sText_PurchaseCodeErrors[gShopMenuDataPtr->code];
+                ShopPrint_AddTextPrinter(FONT_SMALL_NARROWER, TILE_TO_PIXELS(0) + 4, TILE_TO_PIXELS(18), SHOP_FNTCLR_SECONDARY, str);
+            }
 
-    if(!sMenuDataPtr->buyScreen){
-        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar);
-    }
-    else{
-        if(!sMenuDataPtr->buyWindow){
-            if(!sMenuDataPtr->notEnoughMoneyWindow)
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Buy);
-            else
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_noEnoughMoney);
-        }
-        else{
-            AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Complete);
+            break;
         }
     }
 
+    x = 19, y = 0;
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, TILE_TO_PIXELS(x), TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, COMPOUND_STRING("Money: "));
 
-    // Money --------------------------------------------------------------------------------------------------------------------
-    x = 20;
-    y = 0;
-    //AddMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
-    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_RIGHT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar4, sText_Money_Bar);
+    u8 *strVar1 = StringCopy(gStringVar1, COMPOUND_STRING("¥ "));
+    ConvertIntToDecimalStringN(strVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar1, TILE_TO_PIXELS(29));
 
-    AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar4);
-
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
-
-    sMenuDataPtr->notEnoughMoneyWindow = FALSE;
+    ShopPrint_AddTextPrinter(FONT_SMALL_NARROW, x, TILE_TO_PIXELS(y), SHOP_FNTCLR_SECONDARY, gStringVar1);
 }
 
-static void Task_MenuWaitFadeIn(u8 taskId)
+static enum PrestoShopTypes PrestoHelper_GetShopType(void)
 {
-    if (!gPaletteFade.active)
-        gTasks[taskId].func = Task_MenuMain;
+    if (gShopMenuDataPtr->savedCallback == CB2_ReturnToFieldContinueScript)
+    {
+        return PRESTO_TYPE_TERMINAL;
+    }
+
+    return PRESTO_TYPE_APP;
 }
 
-static void Task_MenuTurnOff(u8 taskId)
+static void PrestoHelper_ProcessRecommendedItems(u32 numCandidates, u16 *recommendedCandidates, u8 *categoryCounts)
 {
-    if (!gPaletteFade.active)
+    for (u32 i = 0, numRecSelected = 0; i < NUM_SHOP_RECOMMENDED_CATEGORY_ITEMS && numCandidates > 0; i++)
     {
-        Menu_FreeResources();
-        SetMainCallback2(sMenuDataPtr->savedCallback);
-        DestroyTask(taskId);
+        u32 randIdx = Random() % numCandidates;
+        u32 risingCategory = ShopInventory_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
+
+        if (!gShopMenuDataPtr->recGenerated)
+            gShopMenuDataPtr->recommendedItems[i] = recommendedCandidates[randIdx];
+
+        ShopInventory_SetItemIdToGrid(gShopMenuDataPtr->recommendedItems[i], risingCategory, numRecSelected);
+        numRecSelected++;
+
+        // DebugPrintf("%S is getting Recommended in position %d",GetItemName(selectedItem),numRecSelected);
+
+        recommendedCandidates[randIdx] = recommendedCandidates[numCandidates - 1];
+        numCandidates--;
+        categoryCounts[SHOP_CATEGORY_RECOMMENDED] = numRecSelected;
     }
 }
 
-static void buynewItem(u16 itemId, u8 quantity){
-    u16 price = GetCurrentItemPrice(quantity, itemId, PRICE_FINAL);
-    u8 i;
-    bool8 newItem = TRUE;
-    u8 oldItem = 0;
-
-    RemoveMoney(&gSaveBlock1Ptr->money, price);
-    AddBagItem(itemId, quantity + 1);
-
-    sMenuDataPtr->buyWindow = TRUE;
-
-    if(GetCurrentRow() != ROW_TMS && GetCurrentRow() != ROW_Z_CRYSTALS && GetCurrentRow() != ROW_MEGA_STONES){
-        for(i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++){
-            if(itemId == gSaveBlock3Ptr->prestoBuyAgainItem[i]){
-                newItem = FALSE;
-                oldItem = i;
-            }
-        }
-
-        if(newItem){
-            for(i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS - 1; i++){
-                gSaveBlock3Ptr->prestoBuyAgainItem[(MAX_PRESTO_BUY_AGAIN_ITEMS - i) - 1] = gSaveBlock3Ptr->prestoBuyAgainItem[(MAX_PRESTO_BUY_AGAIN_ITEMS - i) - 2];
-            }
-        }
-        else{
-            gSaveBlock3Ptr->prestoBuyAgainItem[oldItem] = ITEM_NONE;
-
-            for(i = 0; i < oldItem; i++){
-                gSaveBlock3Ptr->prestoBuyAgainItem[oldItem - i] = gSaveBlock3Ptr->prestoBuyAgainItem[oldItem - i -1];
-            }
-        }
-        gSaveBlock3Ptr->prestoBuyAgainItem[0] = itemId;
-
-        for(i = 0; i < MAX_PRESTO_BUY_AGAIN_ITEMS; i++){
-            sMenuDataPtr->currentRowItemList[ROW_BUY_AGAIN][i] = gSaveBlock3Ptr->prestoBuyAgainItem[i];
-
-            if(sMenuDataPtr->itemNum[ROW_BUY_AGAIN] == 0 && !sMenuDataPtr->rowsSorted){
-                //do{
-                    u8 halfScreen = ((NUM_MAX_ICONS_ROWNS_ON_SCREEN) - 1) / 2;
-                    u8 finalhalfScreen = sMenuDataPtr->numberofRows - halfScreen;
-
-                    if(sMenuDataPtr->currentRow < halfScreen){
-                        sMenuDataPtr->currentRow++;
-                    }
-                    else if(sMenuDataPtr->currentRow >= (sMenuDataPtr->numberofRows - 1)){ //If you are in the last option go to the first one
-                        sMenuDataPtr->currentRow = 0;
-                        sMenuDataPtr->currentFirstShownRow = 0;
-                    }
-                    else if(sMenuDataPtr->currentRow >= (finalhalfScreen - 1)){
-                        sMenuDataPtr->currentRow++;
-                    }
-                    else{
-                        sMenuDataPtr->currentRow++;
-                        sMenuDataPtr->currentFirstShownRow++;
-                    }
-                //}
-                //while(sMenuDataPtr->currentRowItemList[GetCurrentRow()][0] == ITEM_NONE);
-            }
-            else if(sMenuDataPtr->rowsSorted && GetCurrentRow() == ROW_RECOMMENDED && sMenuDataPtr->itemNum[ROW_BUY_AGAIN] == 0){
-                sMenuDataPtr->currentFirstShownRow++;
-                sMenuDataPtr->currentRow++;
-            }
-
-            if(sMenuDataPtr->itemNum[ROW_BUY_AGAIN] < MAX_PRESTO_BUY_AGAIN_ITEMS && newItem)
-                sMenuDataPtr->itemNum[ROW_BUY_AGAIN]++;
-        }
-    }
-
-    if(GetCurrentRow() == ROW_BUY_AGAIN||
-        GetCurrentRow() == ROW_TMS ||
-        GetCurrentRow() == ROW_Z_CRYSTALS ||
-        GetCurrentRow() == ROW_MEGA_STONES){
-            sMenuDataPtr->currentItem = 0;
-            sMenuDataPtr->boughtItem = TRUE;
-    }
-
-    PrestoItemInitializeArrayList();
-    //PrintToWindow(WINDOW_1, FONT_BLACK);
-}
-
-/* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
-static void Task_MenuMain(u8 taskId)
+static void PrestoHelper_RecommendItem(enum ShopMenuCategories itemCat, u32 itemId, u16* recommendedCandidates, u32* numCandidates)
 {
-    if (JOY_NEW(B_BUTTON))
-    {
-        if(!sMenuDataPtr->buyWindow){
-            if(sMenuDataPtr->buyScreen){
-                sMenuDataPtr->itemQuantity = 0;
-                PlaySE(SE_SELECT);
-                Menu_ChangeTilemap();
+    if (PrestoHelper_ShouldRecommend(itemCat, itemId) == FALSE)
+        return;
 
-                if(GetCurrentRow() == ROW_TMS || GetCurrentRow() == ROW_Z_CRYSTALS || GetCurrentRow() == ROW_MEGA_STONES)
-                    PrestoItemInitializeArrayList();
-            }
-            else{
-                PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-                gTasks[taskId].func = Task_MenuTurnOff;
-            }
-        }
-        else{
-            sMenuDataPtr->itemQuantity = 0;
-            sMenuDataPtr->buyWindow = FALSE;
-            Menu_ChangeTilemap();
+    recommendedCandidates[(*numCandidates)++] = itemId;
 
-            if(GetCurrentRow() == ROW_BUY_AGAIN|| GetCurrentRow() == ROW_TMS || GetCurrentRow() == ROW_Z_CRYSTALS || GetCurrentRow() == ROW_MEGA_STONES){
-                PrestoItemInitializeArrayList();
-                sMenuDataPtr->currentItem = 0;
-            }
+    if (*numCandidates != 1)
+        return;
 
-            if(sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem] == ITEM_NONE)
-                sMenuDataPtr->currentRow = ROW_MEDICINE;
-
-            PlaySE(SE_SELECT);
-        }
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        if(!sMenuDataPtr->buyScreen){
-            PlaySE(SE_SELECT);
-            Menu_ChangeTilemap();
-        }
-        else{
-            if(sMenuDataPtr->buyWindow){
-                sMenuDataPtr->buyWindow = FALSE;
-                sMenuDataPtr->itemQuantity = 0;
-
-                if(GetCurrentRow() == ROW_TMS ||
-                   GetCurrentRow() == ROW_Z_CRYSTALS ||
-                   GetCurrentRow() == ROW_MEGA_STONES){
-                    Menu_ChangeTilemap();
-
-                    if(sMenuDataPtr->currentRowItemList[GetCurrentRow()][sMenuDataPtr->currentItem] == ITEM_NONE)
-                        sMenuDataPtr->currentRow = ROW_MEDICINE;
-
-                    PlaySE(SE_SELECT);
-                }
-            }
-            else{
-                if(GetMoney(&gSaveBlock1Ptr->money) >= GetCurrentItemPrice(sMenuDataPtr->itemQuantity, sMenuDataPtr->currentRowItemList[(GetCurrentRow()) % NUM_ROWS][sMenuDataPtr->currentItem], PRICE_FINAL)){
-                    buynewItem(sMenuDataPtr->currentRowItemList[(GetCurrentRow()) % NUM_ROWS][sMenuDataPtr->currentItem], sMenuDataPtr->itemQuantity);
-                    PlaySE(SE_SHOP);
-                }
-                else{
-                    sMenuDataPtr->notEnoughMoneyWindow = TRUE;
-                    PlaySE(SE_FAILURE);
-                }
-            }
-        }
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-    }
-
-    //
-    if(JOY_NEW(START_BUTTON))
-	{
-        if(!sMenuDataPtr->buyScreen && !sMenuDataPtr->buyWindow){
-            sMenuDataPtr->rowsSorted = !sMenuDataPtr->rowsSorted;
-            PrestoItemInitializeArrayList();
-
-            sMenuDataPtr->currentRow = 0;
-            sMenuDataPtr->currentFirstShownRow = 0;
-
-            PlaySE(SE_SELECT);
-
-            PrintToWindow(WINDOW_1, FONT_BLACK);
-        }
-        else if(sMenuDataPtr->buyWindow){
-            PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_MenuTurnOff;
-        }
-	}
-
-    if(JOY_NEW(DPAD_UP) && !sMenuDataPtr->buyWindow)
-	{
-        PressedUpButton();
-        PlaySE(SE_SELECT);
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
-
-    if(JOY_NEW(DPAD_DOWN) && !sMenuDataPtr->buyWindow)
-	{
-        PressedDownButton();
-        PlaySE(SE_SELECT);
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
-
-    if(JOY_NEW(DPAD_RIGHT) && !sMenuDataPtr->buyWindow)
-	{
-        PressedRightButton();
-        PlaySE(SE_SELECT);
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
-
-    if(JOY_NEW(DPAD_LEFT) && !sMenuDataPtr->buyWindow)
-	{
-        PressedLeftButton();
-        PlaySE(SE_SELECT);
-
-        PrintToWindow(WINDOW_1, FONT_BLACK);
-	}
-
+    ShopInventory_GetCategoryMap(SHOP_CATEGORY_RECOMMENDED);
 }
+
+static u32 PrestoHelper_InitItemsList(void)
+{
+    u32 numCandidates = 0;
+    u16 recommendedCandidates[ITEMS_COUNT] = {0};
+    u8 categoryCounts[NUM_SHOP_CATEGORIES] = {0};
+
+    ShopInventory_ProcessBuyAgainItems(categoryCounts);
+
+    for (u32 itemId = (ITEM_NONE + 1); itemId < ITEMS_COUNT; itemId++)
+    {
+        enum Pocket pocket = GetItemPocket(itemId);
+        enum ShopMenuCategories itemCat = ShopInventory_CanItemBeListed(itemId, pocket);
+
+        if (itemCat == NUM_SHOP_CATEGORIES)
+            continue;
+
+        PrestoHelper_RecommendItem(itemCat, itemId, recommendedCandidates, &numCandidates);
+        ShopInventory_TryAddItemToList(itemId, itemCat, categoryCounts);
+    }
+
+    PrestoHelper_ProcessRecommendedItems(numCandidates, recommendedCandidates, categoryCounts);
+    return ShopInventory_ProcessCategoryCounts(categoryCounts);
+
+    /*
+    for (u32 categoryIndex = 0; categoryIndex < NUM_SHOP_CATEGORIES; categoryIndex++) 
+        DebugPrintf("row 	%d has category 	%d (	%d items)",categoryIndex,gShopMenuDataPtr->categoryList[categoryIndex],ShopInventory_GetCategoryNumItems(categoryIndex));
+    */
+}
+
+static bool8 PrestoHelper_ShouldRecommend(enum ShopMenuCategories category, u32 itemId)
+{
+    if (PokeMart_IsActive() || ShopPurchase_IsCategoryOneTimePurchase(category))
+        return FALSE;
+
+    static bool8 (*const carouselHandlers[])(u32, enum ShopMenuCategories) =
+    {
+        [SHOP_CAROUSEL_NEED_TO_HEAL]       = PrestoHelper_HandleHeal,
+        [SHOP_CAROUSEL_TOURNAMENT_PREP]    = PrestoHelper_HandleTournament,
+        [SHOP_CAROUSEL_FOREST_EXPLORE]     = PrestoHelper_HandleForest,
+        [SHOP_CAROUSEL_CAVE_EXPLORE]       = PrestoHelper_HandleCave,
+        [SHOP_CAROUSEL_WATER_EXPLORE]      = PrestoHelper_HandleWater,
+        [SHOP_CAROUSEL_ROUTE_EXPLORE]      = PrestoHelper_HandleRoute,
+        [SHOP_CAROUSEL_HIGH_CASH]          = PrestoHelper_HandleCash,
+        [SHOP_CAROUSEL_RANDOM]             = PrestoHelper_HandleRandom
+    };
+
+    enum ShopMenuCarousels carousel = PrestoHelper_GetCarouselType();
+
+    if (carouselHandlers[carousel] != NULL)
+        return carouselHandlers[carousel](itemId, category);
+
+    return FALSE;
+}
+
+static bool8 PrestoHelper_HandleCash(u32 itemId, enum ShopMenuCategories category)
+{
+    return FALSE;
+}
+
+static bool8 PrestoHelper_HandleHeal(u32 itemId, enum ShopMenuCategories category)
+{
+    return (category == SHOP_CATEGORY_MEDICINE);
+}
+
+static bool8 PrestoHelper_HandleTournament(u32 itemId, enum ShopMenuCategories category)
+{
+    return (category == SHOP_CATEGORY_BATTLE_ITEMS || category == SHOP_CATEGORY_TMS);
+}
+
+static bool8 PrestoHelper_HandleForest(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_HEAL_BALL
+             || itemId == ITEM_TIMER_BALL
+             || itemId == ITEM_QUICK_BALL
+             || itemId == ITEM_REPEAT_BALL
+             || itemId == ITEM_LUXURY_BALL);
+}
+
+static bool8 PrestoHelper_HandleCave(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_DUSK_BALL);
+}
+
+static bool8 PrestoHelper_HandleWater(u32 itemId, enum ShopMenuCategories category)
+{
+    return (itemId == ITEM_REPEL
+             || itemId == ITEM_SUPER_REPEL
+             || itemId == ITEM_MAX_REPEL
+             || itemId == ITEM_LURE
+             || itemId == ITEM_SUPER_LURE
+             || itemId == ITEM_MAX_LURE
+             || itemId == ITEM_POKE_BALL
+             || itemId == ITEM_GREAT_BALL
+             || itemId == ITEM_ULTRA_BALL
+             || itemId == ITEM_NET_BALL
+             || itemId == ITEM_DIVE_BALL
+             || itemId == ITEM_LURE_BALL);
+}
+
+static bool8 PrestoHelper_HandleRoute(u32 itemId, enum ShopMenuCategories category)
+{
+    return TRUE;
+}
+
+static bool8 PrestoHelper_HandleRandom(u32 itemId, enum ShopMenuCategories category)
+{
+    return TRUE;
+}
+
+static void SpriteCB_BuyIcon(struct Sprite *sprite)
+{
+    u32 xCursor = ShopGrid_GetGridXCursor();
+    u32 x = ShopConfig_GetTotalShownItems() * xCursor;
+    u32 x2 = 3 * xCursor;
+
+    if (xCursor)
+    {
+        x2 -= xCursor - 1;
+    }
+
+    sprite->x2 = TILE_TO_PIXELS(x) + x2;
+    sprite->invisible = (ShopHelper_IsPurchaseMode());
+}
+
+static void SpriteCB_UpArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (ShopHelper_IsPurchaseMode() || !ShopGrid_GetGridYCursor());
+}
+
+static void SpriteCB_DownArrow(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
+     || ShopGrid_GetGridYCursor() == ShopConfig_GetTotalShownCategories() - 1);
+}
+
+static void SpriteCB_LeftArrow(struct Sprite *sprite)
+{
+    u32 num = ShopGrid_GetGridXCursor();
+    u32 x = (5 * num);
+    u8 val = sprite->data[0] + 128;
+
+    sprite->x = sprite->data[1] + TILE_TO_PIXELS(x) + (2 * num);
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
+     || !ShopGrid_GetGridXCursor()
+     || ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) < 2);
+}
+
+static void SpriteCB_RightArrow(struct Sprite *sprite)
+{
+    u32 num = ShopGrid_GetGridXCursor();
+    u32 x = (5 * num);
+    u8 val = sprite->data[0];
+
+    sprite->x = sprite->data[1] + TILE_TO_PIXELS(x) + (2 * num);
+    sprite->x2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (ShopHelper_IsPurchaseMode()
+     || ShopGrid_GetGridXCursor() == ShopConfig_GetTotalShownItems() - 1
+     || ShopGrid_GetCurrentItemIndex() >= (ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) - 1)
+     || ShopInventory_GetCategoryNumItems(ShopGrid_GetCurrentCategoryIndex()) < 2);
+}
+
+static void SpriteCB_UpArrowSmall(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0];
+
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId())
+     || gShopMenuDataPtr->itemQuantity == (gShopMenuDataPtr->maxItemQuantity - 1)
+     || (gShopMenuDataPtr->itemQuantity == 0 && gShopMenuDataPtr->maxItemQuantity == 0));
+}
+
+static void SpriteCB_DownArrowSmall(struct Sprite *sprite)
+{
+    u8 val = sprite->data[0] + 128;
+
+    sprite->y2 = gSineTable[val] / 128;
+    sprite->data[0] += 8;
+
+    sprite->invisible = (!ShopHelper_IsProcessingPurchaseMode()
+     || ShopPurchase_IsItemOneTimePurchase(ShopInventory_GetChosenItemId())
+     || gShopMenuDataPtr->itemQuantity == 0);
+}
+
+void PrestoHelper_DetermineCarousel(void)
+{
+    PrestoHelper_SetCarouselType(NUM_SHOP_CAROUSELS);
+
+    if (PokeMart_IsActive())
+        return;
+
+    PrestoHelper_SetCarouselType(ShopInventory_GetRecommendedCarousel());
+}
+
+enum ShopMenuCarousels PrestoHelper_GetCarouselType(void)
+{
+    return gShopMenuDataPtr->carouselType;
+}
+
+static void PrestoHelper_SetCarouselType(enum ShopMenuCarousels carousel)
+{
+    gShopMenuDataPtr->carouselType = carousel;
+}
+
