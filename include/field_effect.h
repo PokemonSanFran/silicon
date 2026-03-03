@@ -74,4 +74,5 @@ bool8 DiveFieldEffect_TryWarp(struct Task *);
 // End qol_field_moves
 bool8 IsRockClimbActive(void);
 void ReturnToFieldFromRegionMapCheapTaxi(void);
+void FieldCallback_FlyIntoMap(void); // flyEncounters
 #endif // GUARD_FIELD_EFFECTS_H

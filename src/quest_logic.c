@@ -2513,19 +2513,24 @@ bool32 Quest_FlightPatterns_OnLastLeg(void)
     return (Quest_FlightPatterns_IsOnFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT);
 }
 
-enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(void)
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32 steps, bool32 isLure)
 {
-    u32 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
-    u16 steps = REPEL_LURE_STEPS(repelLureVar);
-    bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
+    bool32 lastLeg = Quest_FlightPatterns_OnLastLeg();
+
+    if (!isLure && steps && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
     if (!isLure && steps)
         return FLY_ENCOUNTER_QUEST_APPROACH;
 
     TrySkyBattle();
+    if (!gSpecialVar_Result && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
     if (!gSpecialVar_Result)
         return FLY_ENCOUNTER_QUEST_APPROACH;
 
-    if (Quest_FlightPatterns_OnLastLeg())
+    if (lastLeg)
         return FLY_ENCOUNTER_QUEST_BOSS;
 
     return FLY_ENCOUNTER_QUEST_ATTACK;

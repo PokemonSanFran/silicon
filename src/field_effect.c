@@ -81,7 +81,7 @@ static void PokeballGlowEffect_Idle(struct Sprite *);
 static void SpriteCB_PokeballGlow(struct Sprite *);
 
 static void Task_UseFly(u8);
-static void FieldCallback_FlyIntoMap(void);
+//static void FieldCallback_FlyIntoMap(void); // flyEncounters
 static void Task_FlyIntoMap(u8);
 
 static void Task_FallWarpFieldEffect(u8);
@@ -1480,16 +1480,22 @@ static void Task_UseFly(u8 taskId)
         {
             Overworld_ResetStateAfterFly();
             WarpIntoMap();
-            SetMainCallback2(CB2_LoadMap);
-            gFieldCallback = FieldCallback_FlyIntoMap;
-            DestroyTask(taskId);
+            // Start flyEncounters
+            TryFlyWildEncounter(taskId,CB2_LoadMap,FieldCallback_FlyIntoMap);
+            //SetMainCallback2(CB2_LoadMap);
+            //gFieldCallback = FieldCallback_FlyIntoMap;
+            //DestroyTask(taskId);
+            // End flyEncounters
         }
     }
 }
 
 #undef taskState
 
-static void FieldCallback_FlyIntoMap(void)
+// Start flyEncounters
+//static void FieldCallback_FlyIntoMap(void)
+void FieldCallback_FlyIntoMap(void)
+// End flyEncounters
 {
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();

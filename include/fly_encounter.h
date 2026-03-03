@@ -1,26 +1,9 @@
 #ifndef GUARD_FLYENCOUNTER_H
 #define GUARD_FLYENCOUNTER_H
 
-enum
-{
-    FLY_ZONE_NORTH,
-    FLY_ZONE_WEST,
-    FLY_ZONE_CENTRAL,
-    FLY_ZONE_EAST,
-    FLY_ZONE_COUNT,
-};
+#include "constants/fly_encounter.h"
 
-enum FlyEncounterTypes
-{
-    FLY_ENCOUNTER_NONE,
-    FLY_ENCOUNTER_ATTACK,
-    FLY_ENCOUNTER_QUEST_APPROACH,
-    FLY_ENCOUNTER_QUEST_ATTACK,
-    FLY_ENCOUNTER_QUEST_BOSS,
-    FLY_ENCOUNTER_COUNT,
-};
-
-#define FLY_ENCOUNTER_RATE 16
+void TryFlyWildEncounter(u8 taskId, void *callback2, void *fieldCallback);
 
 #endif // GUARD_FLYENCOUNTER_H
 

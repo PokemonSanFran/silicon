@@ -59,6 +59,7 @@
 #include "little_cup.h" // littlecup
 #include "phenomenon.h" // phenomenon
 #include "fishing.h"
+#include "field_effect.h" // flyEncounters
 
 enum TransitionType
 {
@@ -606,8 +607,19 @@ static void CB2_EndWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
+        HandleBattleVariantEndParty(); // flyEncounter
         SetMainCallback2(CB2_WhiteOut);
     }
+    // Start flyEncounter
+    else if (FlagGet(B_FLAG_SKY_BATTLE))
+    {
+        HandleBattleVariantEndParty(); 
+        IncrementFogVariable(); 
+        SetMainCallback2(CB2_LoadMap);
+        DowngradeBadPoison();
+        gFieldCallback = FieldCallback_FlyIntoMap;
+    }
+    // End flyEncounter
     else
     {
         IncrementFogVariable(); // fogBattle

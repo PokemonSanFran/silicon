@@ -1,6 +1,8 @@
 #ifndef GUARD_QUESTLOGIC_H
 #define GUARD_QUESTLOGIC_H
 
+#include "constants/quest_logic.h"
+
 bool32 HasPlayerJoinedTheTide(void);
 u16 Quest_Generic_CountRemainingSubquests(u16);
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int);
@@ -45,6 +47,6 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_FlightPatterns_SetLastFlightEncounter(u32);
 u32 Quest_FlightPatterns_IsOnFlightPath(void);
 void Quest_FlightPatterns_SetFlightPath(u32);
-enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(void);
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32, bool32);
 
 #endif //GUARD_QUESTLOGIC_H
