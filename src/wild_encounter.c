@@ -398,7 +398,7 @@ static u32 ChooseWildMonIndex_Fly(void)
     if (swap)
         wildMonIndex = 4 - wildMonIndex;
 
-    if (Quest_FlightPatterns_IsOnFlightPath())
+    if (Quest_FlightPatterns_GetFlightPath())
         wildMonIndex = 5;
 
     return wildMonIndex;

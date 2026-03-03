@@ -24,7 +24,7 @@ enum FlyEncounterTypes GetFlyEncounterType(void)
     u16 steps = REPEL_LURE_STEPS(repelLureVar);
     bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
 
-    if (Quest_FlightPatterns_IsOnFlightPath())
+    if (Quest_FlightPatterns_GetFlightPath())
         return Quest_FlightPatterns_GetEncounterType(steps,isLure);
 
     u32 encounterType = FLY_ENCOUNTER_NONE;

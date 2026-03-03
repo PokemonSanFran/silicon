@@ -607,10 +607,10 @@ static void CB2_EndWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
-        HandleBattleVariantEndParty(); // flyEncounter
+        HandleBattleVariantEndParty(); // flyEncounters
         SetMainCallback2(CB2_WhiteOut);
     }
-    // Start flyEncounter
+    // Start flyEncounters
     else if (FlagGet(B_FLAG_SKY_BATTLE))
     {
         HandleBattleVariantEndParty(); 

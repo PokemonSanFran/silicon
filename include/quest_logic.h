@@ -45,7 +45,7 @@ void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 
 void Quest_FlightPatterns_SetLastFlightEncounter(u32);
-u32 Quest_FlightPatterns_IsOnFlightPath(void);
+u32 Quest_FlightPatterns_GetFlightPath(void);
 void Quest_FlightPatterns_SetFlightPath(u32);
 enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32, bool32);
 
