@@ -373,10 +373,12 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
-// FLY
+// flyEncounters
 
 static u32 ChooseWildMonIndex_Fly(void)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
+
     u32 wildMonIndex = 0;
     bool32 swap = FALSE;
     u32 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;

@@ -35,6 +35,7 @@ static bool32 IsFieldMoveUnlocked_Surf(void)
 
 static bool32 IsFieldMoveUnlocked_Fly(void)
 {
+    return QuestMenu_GetSetQuestState(QUEST_IBELIEVEICANFLY,FLAG_GET_ACTIVE); // flyEncounters
     return FlagGet(FLAG_BADGE06_GET);
 }
 
