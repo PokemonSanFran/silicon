@@ -232,7 +232,7 @@ Debug_EventScript_CheckIVs_End::
 
 Debug_EventScript_Script_1::
 # 145 "data/scripts/debug.pory"
-	giveitem ITEM_FLY_TOOL, 1
+	callnative DebugHiddenGrotto_SpawnMon
 	end
 
 
