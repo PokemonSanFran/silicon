@@ -4050,6 +4050,8 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ZENZU_ROUTE_11_13_100_NIGHT) \
     X(MUS_OKAY_LETS_FIX_IT) \
     X(MUS_PARENT_SCHOOLKID) \
+    X(MUS_TOUR_GUIDE_TOURIST) \
+    X(MUS_VS_CHARLOTTE) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
