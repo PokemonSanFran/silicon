@@ -1,12 +1,11 @@
 mapscripts Chasilla_MapScripts{
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(BreedingCenter_Script_SignifyEggReady)
         call(swagbag2_SetUp_Object_Script)
-        call(Quest_GetTheBand_HideBikerA_Script)
         call(SorryAboutMyFriends_Adaora_Visible_Script)
         call(Quest_StealTheAxe_UnlockDoor_Script)
     }

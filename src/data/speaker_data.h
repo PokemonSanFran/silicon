@@ -2402,4 +2402,60 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERA] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERB] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERC] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERD] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERE] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherE"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERF] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherF"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERG] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherG"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

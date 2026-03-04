@@ -1,16 +1,6 @@
-//Quest_GetTheBand_
+//Quest_GetTheBandBackTogether_
 
-const BIKER_A = 4
-const FLAG_HIDE_BIKER_A = FLAG_TEMP_2
-const BIKER_B = 7
-const FLAG_HIDE_BIKER_B = FLAG_TEMP_4
-const BIKER_C = 2
-const FLAG_HIDE_BIKER_C = FLAG_TEMP_2
-const BIKER_D = 6
-const FLAG_HIDE_BIKER_D = FLAG_TEMP_6
-const BIKER_E = 4
-const FLAG_HIDE_BIKER_E = FLAG_TEMP_2
-const TEDORE = 15 
+const TEDORE = 15
 const FLAG_HIDE_TEDORE = FLAG_TEMP_4
 
 script Quest_GetTheBand_HideTedore_Script{
@@ -18,43 +8,6 @@ script Quest_GetTheBand_HideTedore_Script{
 
     if(!var(VAR_RESULT)){
         setflag(FLAG_HIDE_TEDORE)
-    }
-}
-
-script Quest_GetTheBand_HideBikerA_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
-
-    if (var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BIKER_A)
-    }
-}
-
-script Quest_GetTheBand_HideBikerB_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
-
-    if (var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BIKER_B)
-    }
-}
-script Quest_GetTheBand_HideBikerC_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
-
-    if (var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BIKER_C)
-    }
-}
-script Quest_GetTheBand_HideBikerD_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
-
-    if (var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BIKER_D)
-    }
-}
-script Quest_GetTheBand_HideBikerE_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
-
-    if (var(VAR_RESULT)){
-        setflag(FLAG_HIDE_BIKER_E)
     }
 }
 
@@ -180,7 +133,7 @@ script Quest_GetTheBand_Active_Dialogue{
     switch (var(VAR_TEMP_0)){
         case 0: msgbox(format(""),MSGBOX_NPC)
         case 1: msgbox(format(""),MSGBOX_NPC)
-        case 2: 
+        case 2:
         case 3: msgbox(format(""),MSGBOX_NPC)
         case 4: msgbox(format(""),MSGBOX_NPC)
     }
@@ -205,3 +158,50 @@ script Quest_GetTheBand_Completed_Dialogue{
     msgbox(format(""),MSGBOX_NPC)
     end
 }
+script Quest_Getthebandbacktogher_Script_GeneratePedalPower
+{
+callnative(Script_Quest_Getthebandbacktogether_CountRemainingSubquests)
+switch (var(VAR_RESULT))
+{
+    case 0: msgbox(format("Pedal power!"),,SPEAKER_ALICIA)
+    case 1: msgbox(format("Pedal power!"),,SPEAKER_ALICIA)
+    case 2: msgbox(format("Pedal power…"),,SPEAKER_ALICIA)
+    case 3: msgbox(format("Pedal pride!"),,SPEAKER_ALICIA,,EMOTE_SWEAT)
+    case 4: msgbox(format("Pedal… power?"),,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_SWEAT)
+    default: return
+}
+return
+}
+
+script Quest_Getthebandbacktogher_Hide_GetthebandbacktogetherbikerA
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERA)
+}
+
+script Quest_Getthebandbacktogher_Complete_GetthebandbacktogetherbikerA
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
+    call(Quest_Getthebandbacktogher_Script_GeneratePedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+    msgbox(format("Are you new?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+    msgbox(format("Just joined."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("Oh finally! I’m gonna go check it out now."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERA, moves(walk_up * 6))
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_GETTHEBANDBACKTOGETHERBIKERA)
+    fadescreen(FADE_FROM_BLACK)
+    release
+    end
+}
+

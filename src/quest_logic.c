@@ -961,11 +961,6 @@ static bool8 Quest_Bodegaburnout_IsSubquestDeliveryType(enum SubQuestDefines sub
     return (Quest_Bodegaburnout_GetDeliveryItem(subQuestId) != ITEM_NONE);
 }
 
-
-void Script_Quest_Bodegaburnout_IsSubquestDeliveryType(void)
-{
-}
-
 static bool8 Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
 {
     if (QuestMenu_GetSetQuestState(QUEST_WAREHOUSEWARFARE,FLAG_GET_ACTIVE))
@@ -3031,3 +3026,11 @@ void Script_Quest_BetweenAStoneAndAHardPlaceHasRode7(void)
     gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >= 7);
 }
 
+// ***********************************************************************
+// Quest: Get the Band Back Together
+// ***********************************************************************
+
+void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_GETTHEBANDBACKTOGETHER);
+}

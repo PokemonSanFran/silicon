@@ -1,5 +1,5 @@
 mapscripts CresaltaVista_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
@@ -8,7 +8,6 @@ mapscripts CresaltaVista_MapScripts {
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
         call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
         call(Quest_Hang20_ResetCount_Script)
-        call(Quest_GetTheBand_HideBikerB_Script)
         call(Quest_Restorehodoucity_HideJames_CresaltaVista_Script)
         call(Quest_Hang20_HideLeader_Script)
         call(StressCup_Script_HideStresscuporganizer)

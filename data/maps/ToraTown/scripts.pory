@@ -1,11 +1,10 @@
 mapscripts ToraTown_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_HybridCulture_HideLeader_Script)
-        call(Quest_GetTheBand_HideBikerE_Script)
         call(WowYoureStrong_HideObject_Script)
     }
     MAP_SCRIPT_ON_LOAD{

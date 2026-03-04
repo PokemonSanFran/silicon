@@ -3,6 +3,7 @@ const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 mapscripts Route98_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Route98_RouteFlag_Script)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1,Quest_Getthebandbacktogher_Hide_GetthebandbacktogetherbikerA)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call(AngelDelivery_Script_HideBikers)
         goto(Route98_MapScripts_OnTransition)
@@ -43,4 +44,15 @@ script Route98_InteractMatthew_Event_Script {
         }
     release
         end
+}
+
+script Route98_Script_Interact_Quest_GetthebandbacktogetherbikerA
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA,format("How many bikers do you think are in the Resido region? The Gear Grind Gang rolls deep!"),format("Most of them aren’t as tough as you though."),Route98_Script_Interact_Quest_GetthebandbacktogetherbikerA)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogher_Complete_GetthebandbacktogetherbikerA)
+    msgbox(format("Biking is fairly popular, but not everybody is part of the Gear Grind Gang. We’re just the most passionate about the hobby."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+    closemessage
+    release
+    end
+    // PSF TODO Getthebandbacktogetherbiker: There are dozens of us! Dozens!
 }

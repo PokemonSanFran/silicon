@@ -1,7 +1,6 @@
 mapscripts Oroland_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
-            call(Quest_GetTheBand_HideBikerC_Script)
             call(Quest_Restaurantexpansion_HideObjects_Script)
     }
     MAP_SCRIPT_ON_RESUME{
