@@ -52,6 +52,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ANGELDELIVERYBIKERA",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 6,
       "y": 18,

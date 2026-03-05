@@ -23,21 +23,6 @@ script ToraTown_FashionDesigner_Script{
         end
 }
 
-script ToraTown_Biker_Interact_Script{
-    msgbox(format("i am a biker, and this is placeholder text."),MSGBOX_NPC)
-
-    call(Quest_GetTheBand_CheckQuestAndBike_Script)
-
-    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
-        goto(Quest_GetTheBand_Interact_BikerE_Dialogue)
-    }
-    end
-}
-
-text gText_ToraTown_PlaceholderBiker{
-    format("i am a biker, and this is placeholder text.")
-}
-
 text gText_ToraTown_ImAFashion{
     format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online.")
 }

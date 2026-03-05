@@ -3589,3 +3589,12 @@
 	.2byte \localId
 	.endm
 @ End setObjectFlag
+
+@ Start fadeRemoveLastTalked
+    .macro fadeandremovelasttalked
+    fadescreenswapbuffers FADE_TO_BLACK
+    removeobject VAR_LAST_TALKED
+    fadescreenswapbuffers FADE_FROM_BLACK
+    .endm
+@ End fadeRemoveLastTalked
+

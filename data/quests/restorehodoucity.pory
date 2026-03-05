@@ -292,7 +292,7 @@ script Quest_Restorehodoucity_Kevin_Interact_Script{
 script Quest_Restorehodoucity_FirstJames_Interact_Script{
     setvar(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER)
     msgbox(format("yeah I was the interim leader for hodoucity, guess I can go back."),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
+    fadeandremovelasttalked
     end
 }
 
@@ -363,7 +363,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_A_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_1)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -373,7 +373,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_B_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -383,7 +383,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_C_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -393,7 +393,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_D_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -403,7 +403,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_E_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -414,7 +414,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_F_Dialogue{
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
         call(Quest_Restorehodoucity_CheckProgress_Script)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -425,7 +425,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_G_Dialogue{
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
         call(Quest_Restorehodoucity_CheckProgress_Script)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end

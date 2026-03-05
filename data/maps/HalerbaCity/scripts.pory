@@ -1,10 +1,11 @@
 mapscripts HalerbaCity_MapScripts {
 
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION{
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerC)
         call(Vsdeoxys_Script_HideVsdeoguy_Gldngtepark)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
@@ -17,4 +18,15 @@ mapscripts HalerbaCity_MapScripts {
 
 text gText_Gldgtepark_PlaceholderOrolandFan{
     format("I wish i could wear my signed Champion's cape, but I know i'll just get it dirty")
+}
+
+script HalberbaWildsEast_Script_Interact_Quest_GetthebandbacktogetherbikerC
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC,format("Fixies for life!"),format("It’s worth the control!"),HalberbaWildsEast_Script_Interact_Quest_GetthebandbacktogetherbikerC)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerC)
+    msgbox(format("All bicycles are cool, but the Gear Grind Gang only rides fixed-gear bicycles."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerC: I’ll never coast, as long as I live!
 }

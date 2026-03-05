@@ -1,10 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const BIKER_A = 3 // Pioca Bridge
-const BIKER_B = 4 // Route 98
-const BIKER_C = 1 // Cureno Port
-const BIKER_D = 2 // Cureno Port
-const FLAG_HIDE_BIKER_A = FLAG_TEMP_5
-const FLAG_HIDE_BIKER_B = FLAG_TEMP_6
 
 //Quest_AngelDelivery
 
@@ -14,12 +8,12 @@ script AngelDelivery_Script_HideBikers
 
     if (var(VAR_RESULT) >= QUEST_MENU_SET_ACTIVE)
     {
-        setflag(FLAG_HIDE_BIKER_A)
+        setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERA)
     }
 
     if (var(VAR_RESULT) >= QUEST_MENU_SET_REWARD)
     {
-        setflag(FLAG_HIDE_BIKER_B)
+        setobjectflagfromlocalid(LOCALID_ANGELDELIVERYBIKERB)
     }
     return
 }
@@ -59,7 +53,7 @@ script AngelDelivery_Dialogue_StartQuest
         msgbox(format("And if I don’t get this package there in time, I’m not allowed to join!"),,SPEAKER_ANGELDELIVERYBIKERA)
         msgbox(format("Can you make the delivery for me instead? You can even use my top of the line Bike!"),,SPEAKER_ANGELDELIVERYBIKERA)
         closemessage
-    cueobjectplayer(BIKER_A)
+    cueobjectplayer(LOCALID_ANGELDELIVERYBIKERA)
         giveitem(ITEM_QUEST_ANGELDELIVERY_1, 1)
         giveitem(ITEM_QUEST_ANGELDELIVERY_2, 1)
         msgbox(format("I should probably go to a hospital…"),,SPEAKER_ANGELDELIVERYBIKERA)
@@ -76,19 +70,19 @@ script AngelDelivery_Script_BikerALeaves
         switch(var(VAR_TEMP_1))
         {
             case DIR_NORTH:
-                applymovement(BIKER_A, moves(walk_slow_right * 2, step_end))
+                applymovement(LOCALID_ANGELDELIVERYBIKERA, moves(walk_slow_right * 2, step_end))
                 turnobject(PLAYER, DIR_EAST)
                 waitmovement(0)
-                applymovement(BIKER_A, moves(walk_slow_down * 7, step_end))
+                applymovement(LOCALID_ANGELDELIVERYBIKERA, moves(walk_slow_down * 7, step_end))
                 turnobject(PLAYER, DIR_SOUTH)
             case DIR_SOUTH:
             case DIR_EAST:
             case DIR_WEST:
-                applymovement(BIKER_A, moves(walk_slow_down * 6, step_end))
+                applymovement(LOCALID_ANGELDELIVERYBIKERA, moves(walk_slow_down * 6, step_end))
                 turnobject(PLAYER, DIR_SOUTH)
         }
     waitmovement(PLAYER)
-    removeobject(BIKER_A)
+    removeobject(LOCALID_ANGELDELIVERYBIKERA)
 }
 
 script AngelDelivery_Script_GesturePlayerTakeItem
@@ -149,8 +143,8 @@ script AngelDelivery_Script_InteractBikerB
 
 script AngelDelivery_Dialogue_PreBattle
 {
-    applymovement(BIKER_C, moves(walk_right, face_down, step_end))
-    applymovement(BIKER_D, moves(walk_left, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, moves(walk_right, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, moves(walk_left, face_down, step_end))
     waitmovement(0)
     call(AngelDelivery_Dialogue_FirstTime)
     msgbox(format("And now for the final stage of your onboarding…"),,SPEAKER_ANGELDELIVERYBIKERC)
@@ -179,27 +173,27 @@ script AngelDelivery_Script_StartBattle
 
 script AngelDelivery_Script_CircleBikers
 {
-    applymovement(BIKER_C, Quest_AngelDelivery_BikersCDWalkToTheCenter)
-    applymovement(BIKER_D, Quest_AngelDelivery_BikersCDWalkToTheCenter)
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, Quest_AngelDelivery_BikersCDWalkToTheCenter)
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, Quest_AngelDelivery_BikersCDWalkToTheCenter)
     applymovement(PLAYER, moves(walk_up * 3, step_end))
     waitmovement(0)
     delay(15)
-    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
-    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
     applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
     waitmovement(0)
     msgbox(format("Gotta get to that 48:16 gear ratio…"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
     msgbox(format("This saddle height is too low, they’re not aero enough…"),,SPEAKER_ANGELDELIVERYBIKERD, TAIL_WHISPER)
     closemessage
-    applymovement(BIKER_C, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
-    applymovement(BIKER_D, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, AngelDelivery_Movement_BikerDCirclesAroundThePlayer)
     applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
     waitmovement(0)
     msgbox(format("Has this chain ever been lubed?"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
     msgbox(format("And gotta hook up the nitro…"),,SPEAKER_ANGELDELIVERYBIKERD, TAIL_WHISPER)
     closemessage
-    applymovement(BIKER_C, moves(walk_left, walk_down * 2, walk_right * 2, walk_up * 2, walk_left, face_down, step_end))
-    applymovement(BIKER_D, moves(walk_left * 2, walk_down * 2, walk_right * 2, walk_up * 2, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, moves(walk_left, walk_down * 2, walk_right * 2, walk_up * 2, walk_left, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, moves(walk_left * 2, walk_down * 2, walk_right * 2, walk_up * 2, face_down, step_end))
     applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
     waitmovement(0)
     closemessage

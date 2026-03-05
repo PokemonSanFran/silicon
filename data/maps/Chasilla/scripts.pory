@@ -43,16 +43,6 @@ script Chasilla_Stan_PostBattle_Script{
         end
 }
 
-script Chasilla_Biker_Interact_Script{
-    msgbox(format("i am a biker, and this is placeholder text."),MSGBOX_NPC)
-
-    call(Quest_GetTheBand_CheckQuestAndBike_Script)
-    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
-        goto(Quest_GetTheBand_Interact_BikerA_Dialogue)
-    }
-    end
-}
-
 script Chasilla_University_Locked_Door_Script{
     msgbox(format("The door is locked."),MSGBOX_SIGN)
     call(Quest_StealTheAxe_LockedDoor_Dialogue)

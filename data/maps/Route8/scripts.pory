@@ -1,5 +1,16 @@
 mapscripts Route8_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerB)
     }
 }
 
+script Route8_Script_Interact_Quest_GetthebandbacktogetherbikerB
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB,format("The headquarters of the Gear Grind Gang is in Cureno Port."),format("You’re certainly tough enough to join."),Route8_Script_Interact_Quest_GetthebandbacktogetherbikerB)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerB)
+    msgbox(format("The headquarters are there, but they don’t let anybody in else you’re a member of the Gear Grind Gang. It’s pretty exclusive."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerB: And I’m their strongest member!
+}

@@ -1,6 +1,7 @@
 mapscripts NongyuBridge_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerE)
     }
     MAP_SCRIPT_ON_RESUME{
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
@@ -17,4 +18,16 @@ script NongyuBridge_ConstructionWorker_Dialogue{
 
 text NongyuBridge_TheBridgeIs{
     format("The bridge is under construction.")
+}
+
+script NongyuBridge_Script_Interact_Quest_GetthebandbacktogetherbikerE
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE,format("Just because I’m in the Gear Grind Gang doesn’t also mean I work in tech."),format("We’re just bike enthusiasts!"),NongyuBridge_Script_Interact_Quest_GetthebandbacktogetherbikerE)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerE)
+    msgbox(format("There is a lot of overlap between tech workers and Gear Grind Gang."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+    msgbox(format("We’re blessed to have great jobs, and we try to use that to give back. A lot of us will fix or upgrade people’s bikes for free!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerE: There’s so much more to me anyways.
 }

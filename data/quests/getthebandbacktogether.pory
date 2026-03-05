@@ -1,164 +1,90 @@
-//Quest_GetTheBandBackTogether_
+//Quest_Getthebandbacktogether_
+const PLAYER = OBJ_EVENT_ID_PLAYER
 
-const TEDORE = 15
-const FLAG_HIDE_TEDORE = FLAG_TEMP_4
-
-script Quest_GetTheBand_HideTedore_Script{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_ANGELDELIVERY)
-
-    if(!var(VAR_RESULT)){
-        setflag(FLAG_HIDE_TEDORE)
-    }
-}
-
-script Quest_GetTheBand_RemoveBikers_Script{
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(VAR_LAST_TALKED)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-    return
-}
-
-script Quest_GetTheBand_CheckQuestAndBike_Script{
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_GETTHEBANDBACKTOGETHER)
-    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
-    return
-}
-
-script Quest_GetTheBand_Interact_BikerA_Dialogue{
-        msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
-        call(Quest_GetTheBand_RemoveBikers_Script)
-        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
-        call(Quest_GetTheBand_CheckProgress_Script)
-        end
-}
-
-script Quest_GetTheBand_Interact_BikerB_Dialogue{
-    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
-    if (var(VAR_TEMP_1) != 0){
-    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
-    call(Quest_GetTheBand_CheckProgress_Script)
-    end
-    }
-    end
-}
-
-script Quest_GetTheBand_Interact_BikerC_Dialogue{
-    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
-    call(Quest_GetTheBand_CheckProgress_Script)
-    end
-}
-
-script Quest_GetTheBand_Interact_BikerD_Dialogue{
-    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
-    call(Quest_GetTheBand_CheckProgress_Script)
-    end
-}
-
-script Quest_GetTheBand_Interact_BikerE_Dialogue{
-    msgbox(format("the bikers sent you to find me? oh snap, i'll go to the curenoport now"),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
-    call(Quest_GetTheBand_CheckProgress_Script)
-    end
-}
-
-script Quest_GetTheBand_CheckProgress_Script{
-    setvar(VAR_TEMP_0,0)
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
-
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
-
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
-
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
-
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
-
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-
-    if (var(VAR_TEMP_0) > 4){
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_GETTHEBANDBACKTOGETHER)
-    }
-    return
-}
-
-script Quest_GetTheBand_Interact_Tedore_Script{
+script Quest_Getthebandbacktogether_Script_Interact_AngeldeliverybikerC
+{
     lock
     faceplayer
-
-	returnqueststate(QUEST_GETTHEBANDBACKTOGETHER)
-
-	    switch(var(VAR_RESULT)){
-	        case QUEST_MENU_SET_ACTIVE: goto(Quest_GetTheBand_Active_Dialogue)
-	        case QUEST_MENU_SET_REWARD: goto(Quest_GetTheBand_Reward_Dialogue)
-	        case QUEST_MENU_COMPLETE_QUEST: goto(Quest_GetTheBand_Completed_Dialogue)
-	        default: goto(Quest_GetTheBand_StartQuest_Dialogue)
-	}
+    goto_if_quest_complete(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Dialogue_QuestComplete)
+    goto_if_quest_reward(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Dialogue_QuestReward)
+    goto_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Dialogue_QuestActive)
+    goto_if_quest_inactive(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Dialogue_QuestInactive)
 }
 
-script Quest_GetTheBand_StartQuest_Dialogue{
-    msgbox(format(""))
-    msgbox(format(""))
-    msgbox(format(""))
-    msgbox(format(""))
-    startquest(QUEST_GETTHEBANDBACKTOGETHER)
+script Quest_Getthebandbacktogether_Dialogue_QuestComplete
+{
+    msgbox(format("Pedal power!"),,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(format("I think they’re talking about building a bike rental program around the city. Bicycles aren't expensive here, but they are in high demand so they’re constantly out of stock. This will make sure that people have consistent access without needing full ownership."),,SPEAKER_ANGELDELIVERYBIKERC)
+    closemessage
     release
     end
 }
 
-script Quest_GetTheBand_Active_Dialogue{
-    call(Quest_GetTheBand_CheckProgress_Script)
-
-    switch (var(VAR_TEMP_0)){
-        case 0: msgbox(format(""),MSGBOX_NPC)
-        case 1: msgbox(format(""),MSGBOX_NPC)
-        case 2:
-        case 3: msgbox(format(""),MSGBOX_NPC)
-        case 4: msgbox(format(""),MSGBOX_NPC)
-    }
-    end
-}
-
-script Quest_GetTheBand_Reward_Dialogue{
-    msgbox(format(""))
-    msgbox(format(""))
-    msgbox(format(""))
-
-    giveitem(ITEM_UPGRADE,1)
-
-    msgbox(format(""),MSGBOX_NPC)
-
+script Quest_Getthebandbacktogether_Dialogue_QuestReward
+{
+    msgbox(format("Pedal power!"),,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(format("They’re all here! I’m so excited to see what everybody is going to do."),,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(format("I’ve been working on an experimental bike upgrade, and I think it’s ready for prime time!"),,SPEAKER_ANGELDELIVERYBIKERC)
+    closemessage
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    msgbox(format("Gotta adjust the gear ratio for hops…"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    closemessage
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    msgbox(format("Saddle needs to be a few cm back to prevent wheelie collapse…"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    closemessage
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    msgbox(format("Okay, the chain is lubed up like a Wooper…"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    closemessage
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, AngelDelivery_Movement_BikerCCirclesAroundThePlayer)
+    applymovement(PLAYER, AngelDelivery_Movement_PlayerLooksAtTheBikers)
+    waitmovement(0)
+    bufferspeciesname(STR_VAR_1,SPECIES_SPOINK)
+    msgbox(format("And finally the {STR_VAR_1} springs…"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    msgbox(format("All done. Your bike can do all kinds of tricks now!"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+    msgbox(format("Our members can tell you about all kinds of tricks."),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
+// PSF TODO redo movememnt once interior is done
+    closemessage
     completequest(QUEST_GETTHEBANDBACKTOGETHER)
     release
     end
 }
 
-script Quest_GetTheBand_Completed_Dialogue{
-    msgbox(format(""),MSGBOX_NPC)
+script Quest_Getthebandbacktogether_Dialogue_QuestActive
+{
+    msgbox(format("If you see another member of the Gear Grind Gang, can you let them know what we’re working on?"),,SPEAKER_ANGELDELIVERYBIKERC)
+    msgbox(format("Make sure you’re riding your bike when you talk to them. Your flag shows them you’re the real deal."),,SPEAKER_ANGELDELIVERYBIKERC)
+    closemessage
+    release
     end
 }
-script Quest_Getthebandbacktogher_Script_GeneratePedalPower
+
+script Quest_Getthebandbacktogether_Dialogue_QuestInactive
+{
+    msgbox(format("Pedal power!"),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("The newest member of the Gear Grind Gang! How’s the bike treating you?"),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("I wanna pick your brain for a second."),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("I’m installing dividers in the living room, so that each section can be a room."),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("Don’t worry! I’m not renting them out like some slumlord."),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("It’s not ideal, but I want to convert this place from just a clubhouse to a real hacker house."),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("A lot of our members have talked about being able to live together and work on building something together. We don’t know what that is yet… "),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("but this is the first step!"),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("I want to get the word out, but I don’t want suits getting their eyes or ears on this. I wanna keep it real grassroots and I can’t trust that our phones aren’t being monitored!"),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("You travel around the region a lot, right? "),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("If you see another member of the Gear Grind Gang, can you let them know what we’re working on? Word of mouth is the only secure form of communication."),,SPEAKER_ANGELDELIVERYBIKERC)
+        msgbox(format("Make sure you’re riding your bike when you talk to them. Your flag shows them you’re the real deal."),,SPEAKER_ANGELDELIVERYBIKERC)
+        closemessage
+    startquest(QUEST_GETTHEBANDBACKTOGETHER)
+        release
+        end
+}
+
+script Quest_Getthebandbacktogether_Dialogue_PedalPower
 {
 callnative(Script_Quest_Getthebandbacktogether_CountRemainingSubquests)
 switch (var(VAR_RESULT))
@@ -173,12 +99,47 @@ switch (var(VAR_RESULT))
 return
 }
 
-script Quest_Getthebandbacktogher_Hide_GetthebandbacktogetherbikerA
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerA
 {
     setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERA)
 }
 
-script Quest_Getthebandbacktogher_Complete_GetthebandbacktogetherbikerA
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerB
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERB)
+}
+
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerC
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERC)
+}
+
+
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerD
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERD)
+}
+
+
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerE
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERE)
+}
+
+
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerF
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERF)
+}
+
+
+script Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerG
+{
+    setobjectflagfromlocalid(LOCALID_GETTHEBANDBACKTOGETHERBIKERG)
+}
+
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerA
 {
     specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
     if (var(VAR_TEMP_1) == 0)
@@ -186,7 +147,8 @@ script Quest_Getthebandbacktogher_Complete_GetthebandbacktogetherbikerA
         return
     }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1)
-    call(Quest_Getthebandbacktogher_Script_GeneratePedalPower)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
     msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
     msgbox(format("Are you new?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
     msgbox(format("Just joined."),,SPEAKER_ALICIA)
@@ -198,10 +160,237 @@ script Quest_Getthebandbacktogher_Complete_GetthebandbacktogetherbikerA
     msgbox(format("Oh finally! I’m gonna go check it out now."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERA, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
-    removeobject(LOCALID_GETTHEBANDBACKTOGETHERBIKERA)
-    fadescreen(FADE_FROM_BLACK)
+    fadeandremovelasttalked
     release
     end
 }
 
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerB
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERB)
+    msgbox(format("I heard about you, {PLAYER}, right?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERB)
+    msgbox(format("That’s me."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    buffermapname(STR_VAR_1,MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE)
+    msgbox(format("I guess I’m heading to {STR_VAR_1}!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERB)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERB, moves(walk_up * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerC
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    msgbox(format("Nice fixie. Build it yourself?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    msgbox(format("No, it was a gift from one of your members, actually."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("Finally got the hacker house underway? Think about how many more fixies we can get out once we’re together!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERC, moves(walk_left * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerD
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    buffermapname(STR_VAR_1,MAP_ANBEH_BEND)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    msgbox(format("Hey there thrill seeker! Trying to hear more stories about {STR_VAR_1}?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    msgbox(format("Not quite."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("We’re getting the band back together!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    msgbox(format("Had the Gear Grind Gang broken up?"),,SPEAKER_ALICIA)
+    msgbox(format("No, but I’ve always wanted to say that."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERD, moves(walk_down * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerE
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+    msgbox(format("I haven’t met you. Do you also work in tech?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+    msgbox(format("It’s complicated.. But that’s not why I’m here."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("It’s going to be awesome to build something for the community, together."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERE, moves(walk_right * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerF
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_6)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
+    msgbox(format("Are you one of Dimu’s Gym Trainers? A few of them have started joining."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
+    msgbox(format("Not a Gym Trainer."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("I mean that sounds awesome, but living in the Halberba Gym would be even cooler…"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERF, moves(walk_up * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerG
+{
+    specialvar(VAR_TEMP_1, GetPlayerAvatarBike)
+    if (var(VAR_TEMP_1) == 0)
+    {
+        return
+    }
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7)
+    callnative(Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward)
+    call(Quest_Getthebandbacktogether_Dialogue_PedalPower)
+    msgbox(format("Pedal power!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+    msgbox(format("I don’t recognize you. Are you from the Poké Mart team?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+    msgbox(format("I am new, but that’s not why I’m here."),,SPEAKER_ALICIA)
+    msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("I know exactly how to get there!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+    closemessage
+    applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERG, moves(walk_right * 6))
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerA
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERA)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerB
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERB)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerC
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERC)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerD
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERD)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerE
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERE)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerF
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERF)
+}
+
+script Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerG
+{
+    setobjectflagfromlocalid(LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERG)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerA_Complete
+{
+    msgbox(format("It’s really cool that we’re all finally together, but we haven’t figured out what we want to do together."),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerB_Complete
+{
+    msgbox(format("I want to spin up a place where we can teach people how to repair their bikes, and people can borrow tools to make it happen."),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERB)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerC_Complete
+{
+    msgbox(format("GetthebandbacktogetherbikerB’s education center is great, but where are we gonna do the actual education? It’s already cramped in here."),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerD_Complete
+{
+    msgbox(format("I’m trying to get the others onboard with starting a bike building operation. We custom build bikes and then give them to people who otherwise can’t afford them around the region."),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerE_Complete
+{
+    msgbox(format("Programs like GetthebandbacktogetherbikerD’s idea is how we get more bikers in Resido. I love it!"),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerF_Complete
+{
+    msgbox(format("Do we have to do anything? Can’t we just chill and ride bikes like we always do?"),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
+}
+
+script Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerG_Complete
+{
+    buffermapname(STR_VAR_1,MAP_OROLAND)
+    msgbox(format("My sister used to own a bicycle cafe in {STR_VAR_1}. It closed down a few years ago but I wonder if we could make it work."),MSGBOX_NPC,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+}

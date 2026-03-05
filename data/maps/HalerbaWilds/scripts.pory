@@ -54,3 +54,14 @@ script HalerbaWilds_Script_Interact_BodegaburnoutDeliveryRockSmashF
     release
     end
 }
+
+script HalerbaWilds_Script_Interact_Quest_GetthebandbacktogetherbikerC
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC,format("Fixies for life!"),format("It’s worth the control!"),HalberbaWildsEast_Script_Interact_Quest_GetthebandbacktogetherbikerC)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerC)
+    msgbox(format("All bicycles are cool, but the Gear Grind Gang only rides fixed-gear bicycles."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerC: I’ll never coast, as long as I live!
+}

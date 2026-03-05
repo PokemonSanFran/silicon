@@ -171,6 +171,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_9"
+    },
+    {
+      "local_id": "LOCALID_GETTHEBANDBACKTOGETHERBIKERC",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERC",
+      "x": 17,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "HalerbaWilds_Script_Interact_Quest_GetthebandbacktogetherbikerC",
+      "flag": "FLAG_TEMP_11"
     }
   ],
   "warp_events": [

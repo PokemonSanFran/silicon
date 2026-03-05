@@ -3034,3 +3034,8 @@ void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
 {
     gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_GETTHEBANDBACKTOGETHER);
 }
+
+void Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_GETTHEBANDBACKTOGETHER);
+}

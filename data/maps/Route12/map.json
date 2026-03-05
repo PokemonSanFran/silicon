@@ -168,6 +168,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueRockSmashP",
       "flag": "FLAG_TEMP_1C"
+    },
+    {
+      "local_id": "LOCALID_GETTHEBANDBACKTOGETHERBIKERD",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERD",
+      "x": 14,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route12_Script_Interact_Quest_GetthebandbacktogetherbikerD",
+      "flag": "FLAG_TEMP_11"
     }
   ],
   "warp_events": [

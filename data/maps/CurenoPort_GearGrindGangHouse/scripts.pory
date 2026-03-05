@@ -1,12 +1,16 @@
-const BIKER_C = 1
-const BIKER_D = 2
-const BIKER_E = 3
-const BIKER_F = 4
-
 //CurenoPort_GearGrindGangHouse_
 //CurenoPort_GearGrindGangHouse_Text_
 
 mapscripts CurenoPort_GearGrindGangHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerA)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerB)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerC)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerD)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_5,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerE)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_6,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerF)
+        call_if_subquest_not_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7,Quest_Getthebandbacktogether_Script_HideUntilComplete_GetthebandbacktogetherbikerG)
+    }
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE
         [
             VAR_TEMP_0, 0: CurenoPort_GearGrindGangHouse_Script_TryToPutPlayerOnBike
@@ -45,10 +49,10 @@ script CurenoPort_GearGrindGangHouse_Script_CheckAcceptance
 }
 
 script CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor{
-    applymovement(BIKER_C, moves(face_left, face_right, face_up, face_down, step_end))
-    applymovement(BIKER_D, moves(face_left, face_right, face_up, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERC, moves(face_left, face_right, face_up, face_down, step_end))
+    applymovement(LOCALID_ANGELDELIVERYBIKERD, moves(face_left, face_right, face_up, face_down, step_end))
 
-    waitmovement(BIKER_D)
+    waitmovement(LOCALID_ANGELDELIVERYBIKERD)
     msgbox(format("Gear Grind Gang only."),,SPEAKER_ANGELDELIVERYBIKERC)
     msgbox(format("You'll have to leave."),,SPEAKER_ANGELDELIVERYBIKERD)
     closemessage
@@ -62,15 +66,5 @@ script CurenoPort_GearGrindGangHouse_Dialogue_KickOut
     warp(MAP_CURENO_PORT,2,21)
     release
     end
-}
-
-text CurenoPort_GearGrindGangHouse_Text_BikersOnly
-{
-    format("Gear Grind Gang only.")
-}
-
-text CurenoPort_GearGrindGangHouse_Text_YoullHaveToLeave
-{
-    format("You'll have to leave.")
 }
 

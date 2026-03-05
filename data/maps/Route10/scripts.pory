@@ -1,6 +1,8 @@
 mapscripts Route10_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(NewAssholeAppears_HideBaiya_Script)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerG)
+
     }
 }
 script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
@@ -11,4 +13,15 @@ script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
     closemessage
     release
     end
+}
+
+script Route10_Script_Interact_Quest_GetthebandbacktogetherbikerG
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG,format("I’m trying to memorize all the routes in the region. Resido is so much bigger than it seems!"),format("All this traveling and I still couldn’t beat you."),Route10_Script_Interact_Quest_GetthebandbacktogetherbikerG)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerG)
+    msgbox(format("Poké Marts are testing a new item delivery system, and the Gear Grind Gang has been in talks to help with delivery. It would be a fun challenge!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerG: All this traveling paid off!
 }

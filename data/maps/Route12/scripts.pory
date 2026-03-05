@@ -1,7 +1,19 @@
 mapscripts Route12_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_ArtisanBalls2_CheckTrainerB_Script)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerD)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_16,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashP)
     }
 }
 
+script Route12_Script_Interact_Quest_GetthebandbacktogetherbikerD
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD,format("If you’re looking for a real thrill, you should bike down Anbeh Bend at top speed."),format("Man, this battle is a disaster, kinda like the other people who tried."),Route12_Script_Interact_Quest_GetthebandbacktogetherbikerD)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerD)
+    msgbox(format("The Gear Grind Gang’s initiation used to be going down Anbeh Bend as fast as possible."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    msgbox(format("Too many people got really hurt so they stopped doing it for initiation. Some oldheads still run it from time to time, though."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerD: Maybe you can’t handle it…
+}
