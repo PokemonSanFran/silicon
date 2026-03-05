@@ -49,6 +49,7 @@ script Quest_Getthebandbacktogether_Dialogue_QuestReward
     msgbox(format("All done. Your bike can do all kinds of tricks now!"),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
     msgbox(format("Our members can tell you about all kinds of tricks."),,SPEAKER_ANGELDELIVERYBIKERC, TAIL_WHISPER)
 // PSF TODO redo movememnt once interior is done
+// PSF TODO Add flag for ACRO_BIKE once it is decided that the game will use the acro bike
     closemessage
     completequest(QUEST_GETTHEBANDBACKTOGETHER)
     release
