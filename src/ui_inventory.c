@@ -1149,14 +1149,17 @@ static void TrySortBag(void)
     }
 }
 
+#define HALF_SHOWN 3
+
 //Arrows
 static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
 {
+    u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
     u8 val = sprite->data[0];
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    if(gSaveBlock3Ptr->InventoryData.itemIdx == 0)
+    if(gSaveBlock3Ptr->InventoryData.itemIdx == 0 || numitems < INVENTORY_MAX_ITEMS_SHOWN || gSaveBlock3Ptr->InventoryData.yFirstItem == 0)
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
@@ -1165,11 +1168,19 @@ static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
 static void SpriteCallback_Inventory_DownArrow(struct Sprite *sprite)
 {
     u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
+    u16 itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u16 remainingItems = 0;
     u8 val = sprite->data[0] + 128;
     sprite->y2 = gSineTable[val] / 128;
     sprite->data[0] += 8;
 
-    if(gSaveBlock3Ptr->InventoryData.itemIdx >= numitems -1) //Because of the Exit Button
+    if((numitems - 1) >= itemIdx)
+        remainingItems = (numitems - 1) - itemIdx;
+
+    //mgba
+    DebugPrintf("SpriteCallback_Inventory_DownArrow remainingItems %d", remainingItems);
+
+    if(itemIdx >= numitems - 1 || numitems < INVENTORY_MAX_ITEMS_SHOWN || remainingItems < HALF_SHOWN) //Because of the Exit Button
         sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
