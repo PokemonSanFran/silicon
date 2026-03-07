@@ -1,12 +1,12 @@
 #ifndef GUARD_CONSTANTS_UI_MOVE_REMINDER_H
 #define GUARD_CONSTANTS_UI_MOVE_REMINDER_H
 
-enum MoveReminderModes
+enum MoveReminderPages
 {
-    MREMINDER_MODE_MAIN,
-    MREMINDER_MODE_FILTER,
+    MREMINDER_PAGE_MAIN,
+    MREMINDER_PAGE_FILTER,
 
-    NUM_MREMINDER_MODES
+    NUM_MREMINDER_PAGES
 };
 
 enum MoveReminderSetupSteps
@@ -51,12 +51,12 @@ enum MoveReminderTextColors
 
 struct MoveReminderResources
 {
-    enum MoveReminderModes mode;
+    enum MoveReminderPages page;
     MainCallback savedCallback;
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
 };
 
-struct MoveReminderModeInfo
+struct MoveReminderPageInfo
 {
     const u32 *tilemap;
 };
