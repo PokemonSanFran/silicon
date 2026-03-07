@@ -8,6 +8,7 @@ enum __attribute__((packed)) MonSummaryModes
     UI_SUMMARY_MODE_BOX,
     UI_SUMMARY_MODE_LOCK_EDIT, // player cannot edit EVs nor moves
     UI_SUMMARY_MODE_EDIT_IVS,
+    UI_SUMMARY_MODE_MOVE_MENU, // only used for moveReminder
 
     NUM_UI_SUMMARY_MODES
 };

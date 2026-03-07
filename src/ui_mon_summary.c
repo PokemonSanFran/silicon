@@ -37,6 +37,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "util.h"
+#include "ui_move_reminder.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -44,11 +45,20 @@
 #include "constants/party_menu.h"
 
 // ram
+
 static EWRAM_DATA struct MonSummaryResources *sMonSummaryDataPtr = NULL;
+static EWRAM_DATA struct {
+    void *mons;
+    u32 totalIdx:5;
+    u32 isBoxMon:1;
+    u32 currMoveSlot:3;
+    u32 pad:23;
+} sMonSummaryInitialBackup = {0}; // for moveReminder
 
 // declarations
 static void MonSummary_FreeResources(void);
 static void CB2_MonSummary(void);
+static void CB2_ReloadMonSummary(void);
 static void VBlankCB_MonSummary(void);
 static void Task_MonSummary_WaitFadeAndExit(u8);
 
@@ -78,6 +88,7 @@ static void Task_SummaryInput_InfosInput(u8);
 static void Task_SummaryInput_StatsInput(u8);
 static void Task_SummaryInput_MovesInput(u8);
 static void Task_SummaryInput_MovesOptionInput(u8);
+static void Task_SummaryInput_MovesOpenReminder(u8);
 static void Task_SummaryInput_MovesForgetInput(u8, s32);
 static void SummaryInput_TryStartReorderMode(void);
 
@@ -277,7 +288,18 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
         page = SUMMARY_PAGE_STATS;
         SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
+    case UI_SUMMARY_MODE_MOVE_MENU:
+        mode = UI_SUMMARY_MODE_DEFAULT;
+        page = SUMMARY_PAGE_MOVES;
+        sMonSummaryDataPtr->useBoxMon = sMonSummaryInitialBackup.isBoxMon;
+        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
+        MovesPageMisc_SetOptionIndex(SUMMARY_MOVES_OPTION_LEARN);
+        break;
     }
+
+    if (!gInitialSummaryScreenCallback)
+        gInitialSummaryScreenCallback = callback;
 
     sMonSummaryDataPtr->savedCallback = callback;
     sMonSummaryDataPtr->list.mons = mons;
@@ -312,6 +334,15 @@ static void CB2_MonSummary(void)
     UpdatePaletteFade();
 }
 
+static void CB2_ReloadMonSummary(void)
+{
+    MonSummary_Init(UI_SUMMARY_MODE_MOVE_MENU,
+        sMonSummaryInitialBackup.mons,
+        gLastViewedMonIndex,
+        sMonSummaryInitialBackup.totalIdx,
+        gInitialSummaryScreenCallback);
+}
+
 static void VBlankCB_MonSummary(void)
 {
     LoadOam();
@@ -324,6 +355,9 @@ static void Task_MonSummary_WaitFadeAndExit(u8 taskId)
     if (!gPaletteFade.active)
     {
         MainCallback cb = sMonSummaryDataPtr->savedCallback;
+
+        if (cb == gInitialSummaryScreenCallback)
+            gInitialSummaryScreenCallback = NULL;
 
         SetMainCallback2(cb);
         gLastViewedMonIndex = SummaryInput_GetIndex();
@@ -668,6 +702,8 @@ static bool32 SummaryInput_IsInputAdditive(s32 delta)
 
 static void Task_SummaryMode_DefaultInput(u8 taskId)
 {
+    if (SummaryInput_IsWithinSubMode()) goto SWITCH_TO_SUBMODE;
+
     if (JOY_NEW(DPAD_LEFT | L_BUTTON))
     {
         SummaryInput_UpdatePage(-1);
@@ -694,14 +730,20 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+    SWITCH_TO_SUBMODE:
         if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
-         && SummaryPage_GetValue() == SUMMARY_PAGE_STATS)
+         && SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
         {
+            SummaryInput_SetSubMode(FALSE);
             return;
         }
 
-        PlaySE(SE_SELECT);
-        SummaryInput_SetSubMode(TRUE);
+        if (!SummaryInput_IsWithinSubMode())
+        {
+            PlaySE(SE_SELECT);
+            SummaryInput_SetSubMode(TRUE);
+        }
+
         SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
         gTasks[taskId].func = SummaryPage_GetInputFunc(SummaryPage_GetValue());
         return;
@@ -1162,7 +1204,9 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         PlaySE(SE_SELECT);
         break;
     case SUMMARY_MOVES_OPTION_LEARN:
-        // add move_reminder feature here
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_SummaryInput_MovesOpenReminder;
+        PlaySE(SE_SELECT);
         break;
     case SUMMARY_MOVES_OPTION_REORDER:
         SummaryInput_TryStartReorderMode();
@@ -1186,6 +1230,23 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
     }
 
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+}
+
+static void Task_SummaryInput_MovesOpenReminder(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sMonSummaryInitialBackup.mons = sMonSummaryDataPtr->list.mons;
+        sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
+        sMonSummaryInitialBackup.isBoxMon = sMonSummaryDataPtr->useBoxMon;
+        sMonSummaryInitialBackup.totalIdx = SummaryInput_GetTotalIndex();
+
+        gLastViewedMonIndex = SummaryInput_GetIndex();
+
+        MoveReminder_Init(CB2_ReloadMonSummary);
+        MonSummary_FreeResources();
+        DestroyTask(taskId);
+    }
 }
 
 static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)
