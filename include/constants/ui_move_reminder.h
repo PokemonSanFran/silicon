@@ -1,0 +1,52 @@
+#ifndef GUARD_CONSTANTS_UI_MOVE_REMINDER_H
+#define GUARD_CONSTANTS_UI_MOVE_REMINDER_H
+
+enum MoveReminderSetupSteps
+{
+    MREMINDER_SETUP_RESET,
+    MREMINDER_SETUP_BACKGROUNDS,
+    MREMINDER_SETUP_GRAPHICS,
+    MREMINDER_SETUP_WINDOWS,
+    MREMINDER_SETUP_SPRITES,
+    MREMINDER_SETUP_FADE,
+    MREMINDER_SETUP_FINISH
+};
+
+enum MoveReminderBackgrounds
+{
+    MREMINDER_BG_TEXT,
+    MREMINDER_BG_TILEMAP,
+
+    NUM_MREMINDER_BACKGROUNDS
+};
+
+enum MoveReminderBackgroundBuffers
+{
+    MREMINDER_BGBUF_TILEMAP,
+
+    NUM_MREMINDER_BACKGROUND_BUFFERS
+};
+
+enum MoveReminderWindows
+{
+    MREMINDER_WINDOW_0,
+
+    NUM_MREMINDER_WINDOWS
+};
+
+enum MoveReminderTextColors
+{
+    MREMINDER_TXTCLR_DEFAULT,
+
+    NUM_MREMINDER_TXTCLRS
+};
+
+struct MoveReminderResources
+{
+    MainCallback savedCallback;
+    u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
+};
+
+typedef enum MoveRemindeTextColors testtypdef;
+
+#endif // GUARD_CONSTANTS_UI_MOVE_REMINDER_H
