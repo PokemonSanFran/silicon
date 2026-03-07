@@ -250,7 +250,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = 1,
+        .paletteNum = 0,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -274,6 +274,7 @@ static const u8 sInventoryFontColors[][3] =
 {
     [INVENTORY_FONT_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
     [INVENTORY_FONT_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_HELP_BAR]   = {TEXT_COLOR_TRANSPARENT,  1,  3},
     [INVENTORY_FONT_OUTLINE_COLOR] = {TEXT_COLOR_TRANSPARENT,  2, 1},
     [INVENTORY_FONT_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
     [INVENTORY_FONT_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
@@ -3099,7 +3100,7 @@ static void Inventory_PrintFooter(void)
             break;
     }
 
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_HELP_BAR], TEXT_SKIP_DRAW, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
         CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
