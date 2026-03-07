@@ -223,7 +223,12 @@ static bool32 MReminderSetup_InitBgs(void)
 
 static void MReminderSetup_InitGraphics(void)
 {
+    FreeTempTileDataBuffersIfPossible();
+    ResetTempTileDataBuffers();
 
+    DecompressAndCopyTileDataToVram(MREMINDER_BG_TILEMAP, sMoveReminder_Tiles, 0, 0, 0);
+    LoadPalette(sMoveReminder_Palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    MReminderMode_ReloadTilemap();
 }
 
 static void MReminderSetup_InitWindows(void)
