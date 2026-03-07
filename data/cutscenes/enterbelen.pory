@@ -1,45 +1,460 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BELEN = 1
+const BELEN = LOCALID_MERMEREZA_GYM_BELEN
 
-script EnterBelen_StartGymBattle_ObjectSetup_Script {
-    if (var (VAR_GYM_1_STATE)== GYM_SAVE_BEFORE_LEADER) {
-        setobjectxyperm(BELEN, 6, 5)
-        setobjectmovementtype(BELEN, MOVEMENT_TYPE_FACE_LEFT)
+script EnterBelen_StartGymBattle_ObjectSetup_Script
+{
+    if (var (VAR_GYM_1_STATE) != MERMEREZA_GYM_SAVE_BEFORE_LEADER)
+    {
+        return
     }
-    return
+    setobjectxyperm(LOCALID_MERMEREZA_GYM_BELEN, 6, 5)
+    setobjectmovementtype(LOCALID_MERMEREZA_GYM_BELEN, MOVEMENT_TYPE_FACE_LEFT)
+}
+
+script EnterBelen_Script_MoveSousChef
+{
+    setobjectxyperm(LOCALID_MERMEREZAGYMSOUSCHEF, 5, 3)
+    setobjectmovementtype(LOCALID_MERMEREZAGYMSOUSCHEF, MOVEMENT_TYPE_FACE_UP)
+}
+
+script EnterBelen_Script_HideSousChef
+{
+    setobjectflagfromlocalid(LOCALID_MERMEREZAGYMSOUSCHEF)
+}
+
+script EnterBelen_Script_InteractHost
+{
+    lock
+    faceplayer
+    call_if_ge(VAR_BELEN_STATE,QUEST_2_COMPLETE,EnterBelen_Dialogue_ExplainBelenRematch)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,EnterBelen_Dialogue_ExplainFlowers)
+    call_if_set(FLAG_BADGE01_GET,EnterBelen_Dialogue_HintBelenLocation)
+    call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_INTRODUCED,EnterBelen_Dialogue_ExplainGym)
+    call(EnterBelen_Dialogue_FirstIntroGym)
+}
+
+script EnterBelen_Dialogue_FirstIntroGym
+{
+    lock
+    faceplayer
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_INTRODUCED)
+    msgbox(format("Welcome to Needles! Do you have a reservation for just one today?"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("I'm not eating, I was looking for the Pokemon Lea -"),,SPEAKER_ALICIA)
+    closemessage
+
+    applymovement(LOCALID_MERMEREZAGYMHOST,moves(face_up))
+    waitmovement(LOCALID_MERMEREZAGYMHOST)
+    msgbox(format("One challenger!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Heard!"),,SPEAKER_MERMEREZAGYMSOUSCHEF)
+    closemessage
+
+    applymovement(LOCALID_MERMEREZAGYMHOST,moves(face_down))
+    waitmovement(LOCALID_MERMEREZAGYMHOST)
+    msgbox(format("Okay okay, challenger {PLAYER}! We've been expecting you."),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Behind me is the entrance to the kitchen. You'll have to defeat Belen's Gym Trainers to prove you're ready for the main dish."),,SPEAKER_MERMEREZAGYMHOST)
+    goto(EnterBelen_Dialogue_HowDefeatBelen)
+}
+
+script EnterBelen_Dialogue_SousChefExplain
+{
+    lock
+    faceplayer
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        msgbox(format("Executive Chef Belen is only taking orders from the cream of the crop."),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
+    }
+    elif (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_REMATCH_DEFEATED)
+    {
+        msgbox(format("I see you're ready to order the special. Good luck!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
+    }
+    else
+    {
+        msgbox(format("What a fantastic battle!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
+    }
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_ExplainGym
+{
+    buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY_GYM)
+    msgbox(format("Belen is the owner and head chef of Needles. She's also the Gym Leader of the {STR_VAR_1} Gym!"),,SPEAKER_MERMEREZAGYMHOST)
+    goto(EnterBelen_Dialogue_HowDefeatBelen)
+}
+
+script EnterBelen_Dialogue_HowDefeatBelen
+{
+    msgbox(format("Belen's cooking is built around Berries, so the Pokemon trained in this Gym all use powerful Berries."),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("It will be easier to defeat Belen if you can stop her from using Berries at all!"),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_HintBelenLocation
+{
+    buffermapname(STR_VAR_1,MAP_OROLAND)
+    msgbox(format("Congratulations on defeating Belen!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Sometimes, Belen is seen around the region trying new restaurants. I think there's something new opening in {STR_VAR_1} soon..."),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_ExplainFlowers
+{
+    msgbox(format("Belen's new restaurant certainly sounds interesting! I'm excited to see how it goes."),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_ExplainBelenRematch
+{
+    msgbox(format("Belen has been cooking up something fierce ever since Flowers was opened. I hope you can show her a good rematch!"),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Script_ResetPuzzle1
+{
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_MERMEREZA_GYM_1_1)
+    removeobject(LOCALID_MERMEREZA_GYM_1_2)
+    removeobject(LOCALID_MERMEREZA_GYM_1_3)
+    removeobject(LOCALID_MERMEREZA_GYM_1_4)
+    addobject(LOCALID_MERMEREZA_GYM_1_1)
+    addobject(LOCALID_MERMEREZA_GYM_1_2)
+    addobject(LOCALID_MERMEREZA_GYM_1_3)
+    addobject(LOCALID_MERMEREZA_GYM_1_4)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+    setobjectxy(LOCALID_PLAYER,6,9)
+    TeleportCamera(6,9)
+    fadescreen(FADE_FROM_BLACK)
+}
+
+script EnterBelen_Script_ResetPuzzle2
+{
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_MERMEREZA_GYM_2_1)
+    removeobject(LOCALID_MERMEREZA_GYM_2_2)
+    removeobject(LOCALID_MERMEREZA_GYM_2_3)
+    removeobject(LOCALID_MERMEREZA_GYM_2_4)
+    removeobject(LOCALID_MERMEREZA_GYM_2_5)
+    removeobject(LOCALID_MERMEREZA_GYM_2_6)
+    removeobject(LOCALID_MERMEREZA_GYM_2_7)
+    removeobject(LOCALID_MERMEREZA_GYM_2_8)
+    addobject(LOCALID_MERMEREZA_GYM_2_1)
+    addobject(LOCALID_MERMEREZA_GYM_2_2)
+    addobject(LOCALID_MERMEREZA_GYM_2_3)
+    addobject(LOCALID_MERMEREZA_GYM_2_4)
+    addobject(LOCALID_MERMEREZA_GYM_2_5)
+    addobject(LOCALID_MERMEREZA_GYM_2_6)
+    addobject(LOCALID_MERMEREZA_GYM_2_7)
+    addobject(LOCALID_MERMEREZA_GYM_2_8)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+    setobjectxy(LOCALID_PLAYER,6,7)
+    TeleportCamera(6,7)
+    fadescreen(FADE_FROM_BLACK)
+}
+
+script EnterBelen_Script_ResetPuzzle3
+{
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_MERMEREZA_GYM_3_1)
+    removeobject(LOCALID_MERMEREZA_GYM_3_2)
+    removeobject(LOCALID_MERMEREZA_GYM_3_3)
+    removeobject(LOCALID_MERMEREZA_GYM_3_4)
+    removeobject(LOCALID_MERMEREZA_GYM_3_5)
+    removeobject(LOCALID_MERMEREZA_GYM_3_6)
+    removeobject(LOCALID_MERMEREZA_GYM_3_7)
+    removeobject(LOCALID_MERMEREZA_GYM_3_8)
+    removeobject(LOCALID_MERMEREZA_GYM_3_9)
+    removeobject(LOCALID_MERMEREZA_GYM_3_10)
+    removeobject(LOCALID_MERMEREZA_GYM_3_11)
+    addobject(LOCALID_MERMEREZA_GYM_3_1)
+    addobject(LOCALID_MERMEREZA_GYM_3_2)
+    addobject(LOCALID_MERMEREZA_GYM_3_3)
+    addobject(LOCALID_MERMEREZA_GYM_3_4)
+    addobject(LOCALID_MERMEREZA_GYM_3_5)
+    addobject(LOCALID_MERMEREZA_GYM_3_6)
+    addobject(LOCALID_MERMEREZA_GYM_3_7)
+    addobject(LOCALID_MERMEREZA_GYM_3_8)
+    addobject(LOCALID_MERMEREZA_GYM_3_9)
+    addobject(LOCALID_MERMEREZA_GYM_3_10)
+    addobject(LOCALID_MERMEREZA_GYM_3_11)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
+    setobjectxy(LOCALID_PLAYER,8,7)
+    TeleportCamera(8,7)
+    fadescreen(FADE_FROM_BLACK)
+}
+
+script EnterBelen_Dialgoue_BlockProgressFrom1
+{
+    lock
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
+        addvar(VAR_TEMP_B,1)
+    }
+    else
+    {
+        msgbox(format("I need to find the Gym Trainer in the Plating Room first!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        applymovement(LOCALID_PLAYER,Common_Movement_WalkDown)
+        waitmovement(LOCALID_PLAYER)
+    }
+    release
+    end
+}
+
+script EnterBelen_Dialgoue_BlockProgressFrom2
+{
+    lock
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        addvar(VAR_TEMP_B,1)
+    }
+    else
+    {
+        msgbox(format("I need to find the Gym Trainer on the Line first!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        applymovement(LOCALID_PLAYER,Common_Movement_WalkDown)
+        waitmovement(LOCALID_PLAYER)
+    }
+    release
+    end
+}
+
+script EnterBelen_Script_InteractPuzzle1
+{
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
+        msgbox(format("Good luck on the Line!"),,SPEAKER_MERMEREZAGYMSERVER)
+        closemessage
+        release
+        end
+    }
+    elif (var(VAR_GYM_1_STATE) == MERMEREZA_GYM_PUZZLE_EXPLAINED_1)
+    {
+        call(EnterBelen_Script_ResetPuzzle1)
+        goto(EnterBelen_Script_StartPuzzle1)
+    }
+    else
+    {
+        goto(EnterBelen_Script_ExplainPuzzle1)
+    }
+}
+
+script EnterBelen_Script_ExplainPuzzle1
+{
+    lock
+    faceplayer
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_1)
+    msgbox(format("In the Needles Plating Room, our staff arranges the finest food in Resido, making sure every dish looks as good as it tastes."),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("It can be very hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    goto(EnterBelen_Script_StartPuzzle1)
+}
+
+script EnterBelen_Script_StartPuzzle1
+{
+    msgbox(format(" Our Gym Trainer is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    waitmessage
+    closemessage
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, moves(walk_up * 3))
+    waitmovement(OBJ_EVENT_ID_CAMERA)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_MERMEREZA_GYM_1_3,moves(jump_in_place_down * 2))
+    playse(SE_BIKE_HOP)
+    waitse
+    playse(SE_BIKE_HOP)
+    waitse
+    waitmovement(LOCALID_MERMEREZA_GYM_1_3)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    waitmessage
+    closemessage
+
+    applymovement(LOCALID_MERMEREZA_GYM_1_1, moves(walk_right * 2, walk_left, walk_right, walk_down * 3, walk_right * 4, walk_up * 3, walk_left * 3, walk_down * 3, walk_left * 3, face_up))
+    applymovement(LOCALID_MERMEREZA_GYM_1_2,     moves(walk_left, walk_right * 2, walk_up * 3, walk_left * 3, walk_down * 3, walk_left, walk_up * 2, walk_right, walk_down * 2, walk_right, face_up)
+)
+    applymovement(LOCALID_MERMEREZA_GYM_1_3, moves(walk_left, walk_down * 3, walk_left * 4, walk_up * 3, walk_right * 3, walk_down * 3, walk_up * 3, walk_right * 2, face_down))
+    applymovement(LOCALID_MERMEREZA_GYM_1_4, moves(walk_right, walk_up * 3, walk_right, walk_down * 3, walk_right * 3, walk_up * 3, walk_left * 6, face_down))
+    waitmovement(LOCALID_MERMEREZA_GYM_1_1)
+    waitmovement(LOCALID_MERMEREZA_GYM_1_2)
+    waitmovement(LOCALID_MERMEREZA_GYM_1_3)
+    waitmovement(LOCALID_MERMEREZA_GYM_1_4)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, moves(walk_down * 3))
+    waitmovement(OBJ_EVENT_ID_CAMERA)
+    special(RemoveCameraObject)
+    msgbox(format("But don't disturb our other staff!"),,SPEAKER_MERMEREZAGYMSERVER)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Script_InteractPuzzle2
+{
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        msgbox(format("Good luck in the Prep Kitchen!"),,SPEAKER_MERMEREZAGYMSERVER)
+        closemessage
+        release
+        end
+    }
+    elif (var(VAR_GYM_1_STATE) == MERMEREZA_GYM_PUZZLE_EXPLAINED_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+    }
+    else
+    {
+        goto(EnterBelen_Script_ExplainPuzzle2)
+    }
+}
+
+script EnterBelen_Script_ExplainPuzzle2
+{
+    lock
+    faceplayer
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_2)
+    msgbox(format("Here on the Line, the finest chefs in Resido create the dishes found on Needles' menu. This is where the magic happens."),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    closemessage
+    moveobjecttocoords(LOCALID_PLAYER,6,7,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Script_StartPuzzle2
+{
+    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    closemessage
+    applymovement(LOCALID_MERMEREZA_GYM_2_4,moves(jump_in_place_up * 2))
+    playse(SE_BIKE_HOP)
+    waitse
+    playse(SE_BIKE_HOP)
+    waitse
+    waitmovement(LOCALID_MERMEREZA_GYM_2_4)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    waitmessage
+    closemessage
+        applymovement(LOCALID_MERMEREZA_GYM_2_1, moves(face_down, walk_in_place_down * 3, walk_right * 4, walk_down, face_right, delay_16, walk_left * 2, walk_down * 5, face_left, walk_in_place_left * 5, walk_up * 5, face_left))
+        applymovement(LOCALID_MERMEREZA_GYM_2_2, moves(walk_up, walk_left, face_down, delay_16, walk_right, walk_down * 5, walk_right * 4, walk_in_place_down * 3, walk_right, walk_down * 3, walk_left * 2, face_up, delay_16))
+        applymovement(LOCALID_MERMEREZA_GYM_2_3, moves(walk_down * 2, walk_left, walk_in_place_up * 3, walk_left * 2, walk_up, walk_left * 2, delay_16 * 2, walk_down, walk_left * 2, face_up, face_down, jump_in_place_down, walk_left, walk_down * 4, face_right))
+        applymovement(LOCALID_MERMEREZA_GYM_2_4, moves(walk_down * 2, jump_in_place_down * 2, walk_left, face_down, delay_16, walk_left, walk_down * 3, walk_right * 2, face_up, delay_16 * 2, walk_left * 6, emote_exclamation_mark, walk_right * 2, walk_up, face_left))
+        applymovement(LOCALID_MERMEREZA_GYM_2_5, moves(walk_left * 2, walk_up * 2, face_right, jump_in_place_right_left * 2, walk_left * 2, walk_up * 2, face_right, face_left, walk_left * 2, walk_up, walk_left, walk_up * 2, emote_question_mark, face_right, walk_up, walk_right * 6, face_down))
+        applymovement(LOCALID_MERMEREZA_GYM_2_6, moves(walk_up * 3, jump_in_place_up * 2, walk_up * 4, walk_right, face_down, delay_16 * 2, walk_right * 2, walk_down * 3, walk_left, face_up, emote_exclamation_mark, walk_left * 1, walk_down * 2, walk_left * 3, walk_down, walk_right * 2, emote_exclamation_mark, walk_down, face_right))
+        applymovement(LOCALID_MERMEREZA_GYM_2_7, moves(walk_down, walk_right * 3, walk_up * 2, face_right, face_left, delay_16 * 2, walk_up, walk_left * 3, walk_down * 2, emote_exclamation_mark, jump_in_place_down_up, walk_up * 4, walk_right * 5, walk_up, face_right, delay_16 * 2, walk_left * 2))
+        applymovement(LOCALID_MERMEREZA_GYM_2_8, moves(emote_exclamation_mark, walk_right, face_down, emote_question_mark, walk_up * 2, walk_right * 3, walk_down * 3, face_right, delay_16 * 4, walk_up * 3, walk_right * 3, walk_up * 2, face_left, jump_in_place_left_right * 2, walk_down * 5, face_left))
+        waitmovement(LOCALID_MERMEREZA_GYM_2_1)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_2)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_3)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_4)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_5)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_6)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_7)
+        waitmovement(LOCALID_MERMEREZA_GYM_2_8)
+        release
+        end
+}
+
+script EnterBelen_Script_InteractPuzzle3
+{
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        msgbox(format("Good luck against Belen!"),,SPEAKER_MERMEREZAGYMSERVER)
+        closemessage
+        release
+        end
+    }
+    elif (var(VAR_GYM_1_STATE) == MERMEREZA_GYM_PUZZLE_EXPLAINED_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+    }
+    else
+    {
+        goto(EnterBelen_Script_ExplainPuzzle3)
+    }
+}
+
+script EnterBelen_Script_ExplainPuzzle3
+{
+    lock
+    faceplayer
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_3)
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    closemessage
+    goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Script_StartPuzzle3
+{
+    moveobjecttocoords(LOCALID_PLAYER,8,7,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    closemessage
+    applymovement(LOCALID_MERMEREZA_GYM_3_8,moves(jump_in_place_up * 2))
+    playse(SE_BIKE_HOP)
+    waitse
+    playse(SE_BIKE_HOP)
+    waitse
+    waitmovement(LOCALID_MERMEREZA_GYM_3_8)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_MERMEREZA_GYM_3_1, moves(walk_fast_down * 2, walk_fast_right * 2, face_up, delay_16 * 3, walk_fast_right, walk_fast_down * 2, walk_fast_left * 2, face_down, walk_right * 4, walk_up, emote_question_mark, face_left, face_right, walk_fast_up * 4, walk_fast_right * 3, walk_fast_down * 3, walk_fast_left, face_up, emote_exclamation_mark, walk_down * 2, walk_right, walk_down * 2, walk_right * 2, walk_up * 3, face_right))
+    applymovement(LOCALID_MERMEREZA_GYM_3_2, moves(walk_right * 3, walk_down * 2, face_right, emote_exclamation_mark, walk_fast_left * 2, walk_fast_down * 2, walk_fast_left * 3, walk_fast_down * 4, walk_fast_right * 3, walk_right * 2, face_up, delay_16 * 3, walk_left * 2, walk_fast_right * 8, face_up, emote_question_mark, delay_16 * 4, walk_fast_left, walk_fast_up * 3, walk_fast_left * 4, face_down))
+    applymovement(LOCALID_MERMEREZA_GYM_3_3, moves(walk_right * 2, walk_down * 2, face_left, walk_right * 2, walk_down * 3, walk_fast_down * 3, walk_fast_right * 3, walk_fast_up * 4, face_left, delay_16 * 3, walk_fast_down * 2, emote_exclamation_mark, walk_up * 5, face_left, emote_question_mark, walk_down * 2, walk_fast_up * 3, walk_fast_left * 3, walk_fast_down, face_right))
+    applymovement(LOCALID_MERMEREZA_GYM_3_4, moves(walk_fast_right * 2, walk_fast_down, walk_fast_left * 4, face_up, walk_left, walk_up * 3, walk_left, emote_question_mark, face_down, face_up, walk_fast_left * 4, walk_fast_down * 3, walk_fast_right, walk_fast_down * 2, walk_left, walk_down, face_right, emote_exclamation_mark, delay_16 * 6, walk_down * 2, walk_fast_right * 6, face_up))
+    applymovement(LOCALID_MERMEREZA_GYM_3_5, moves(walk_fast_down * 6, walk_left * 7, face_up, delay_16 * 4, walk_fast_right * 2, walk_fast_up * 2, walk_fast_right, walk_up * 2, jump_in_place_left_right, walk_fast_left * 2, walk_fast_up, walk_down * 2, emote_exclamation_mark, delay_16 * 2, walk_left * 5, face_down))
+    applymovement(LOCALID_MERMEREZA_GYM_3_6, moves(walk_up * 3, walk_left * 3, walk_fast_down, walk_fast_left * 2, emote_question_mark, delay_16 * 6, walk_up, walk_left * 4, walk_fast_left * 4, walk_fast_down * 3, walk_right * 3, emote_exclamation_mark, delay_16 * 2, walk_up, walk_right, walk_fast_down, walk_fast_right * 2, face_up))
+    applymovement(LOCALID_MERMEREZA_GYM_3_7, moves(walk_left * 3, walk_up, face_left, delay_16 * 6, walk_fast_down, walk_fast_left * 5, walk_left * 2, walk_right, jump_in_place_down_up, walk_left * 2, walk_fast_up * 3, walk_fast_right * 2, walk_fast_up * 2, emote_question_mark, delay_16 * 2, walk_right, walk_up * 3, walk_fast_left * 3, walk_fast_down, face_right))
+    applymovement(LOCALID_MERMEREZA_GYM_3_8, moves(walk_fast_left * 3, walk_fast_up * 2, emote_exclamation_mark, walk_right * 3, walk_up * 3, walk_left * 2, walk_fast_left * 3, walk_fast_down * 4, jump_in_place_left_right, walk_fast_left, jump_in_place_up_down, delay_16 * 4, walk_fast_up * 2, walk_left, walk_up, face_left))
+    applymovement(LOCALID_MERMEREZA_GYM_3_9, moves(walk_left * 3, face_down, delay_16 * 5, walk_fast_right * 3, walk_fast_up, walk_fast_right * 3, walk_up * 3, walk_left * 2, walk_up, walk_fast_right * 5, walk_down * 5, emote_question_mark, delay_16 * 5, walk_fast_down * 2, face_left))
+    applymovement(LOCALID_MERMEREZA_GYM_3_10, moves(walk_fast_right, walk_fast_up, walk_left * 4, jump_in_place_right_left, walk_fast_down, walk_fast_right * 7, walk_fast_down, walk_right, walk_down * 2, walk_right * 2, emote_exclamation_mark, delay_16 * 3, walk_fast_down * 2, walk_fast_right * 3, walk_fast_up * 4, face_left, delay_16 * 5, walk_down, walk_up * 3, walk_fast_left, face_left))
+    applymovement(LOCALID_MERMEREZA_GYM_3_11, moves(emote_double_exclamation_mark, walk_right * 2, face_up, jump_in_place_down_up, jump_in_place_right_left, face_up, delay_16 * 8, walk_left * 3, walk_up, face_right, emote_question_mark, delay_16 * 5, walk_down, walk_right, face_up))
+
+    waitmovement(LOCALID_MERMEREZA_GYM_3_1)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_2)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_3)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_4)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_5)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_6)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_7)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_8)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_9)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_10)
+    waitmovement(LOCALID_MERMEREZA_GYM_3_11)
+
+    release
+    end
 }
 
 script EnterBelen_PutMeatInOven_Dialogue {
   lockall
-  setvar(VAR_GYM_1_STATE,GYM_SAVE_BEFORE_LEADER)
+  setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_SAVE_BEFORE_LEADER)
   msgbox(format("Hold on! I've got one brushing of Pinap glaze, and then into the oven..."),,SPEAKER_BELEN)
     closemessage
-  applymovement(BELEN, Common_Movement_Delay48)
+  applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_Delay48)
   waitmovement(0)
-  applymovement(BELEN, Common_Movement_WalkInPlaceUp)
+  applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_WalkInPlaceUp)
   waitmovement(0)
   closemessage
   msgbox(format("Cake's in the oven, excellente!"), MSGBOX_NPC,SPEAKER_BELEN)
     closemessage
-  call(EnterBelen_DetermineMovementToBattlefield_Script)
+    applymovement(LOCALID_PLAYER,moves(walk_left * 4))
+    applymovement(LOCALID_MERMEREZA_GYM_BELEN,moves(walk_left * 4))
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    moveobjecttocoords(LOCALID_PLAYER,3,4,DIR_EAST)
+    moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,6,4,DIR_WEST)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    waitmovement(LOCALID_PLAYER)
   goto(EnterBelen_Intro_Dialogue)
-}
-
-script EnterBelen_DetermineMovementToBattlefield_Script {
-  getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-  if (var (VAR_TEMP_1) == 2) {
-    applymovement(BELEN, moves(walk_down * 3, walk_left * 2, face_left, step_end))
-
-    if (var (VAR_TEMP_0) == 7) {
-      applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 4, walk_down * 3, face_right, step_end))
-    } else {
-      applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 6, walk_down * 3, face_right, step_end))
-    }
-  } else {
-    applymovement(BELEN, moves(walk_left * 2, walk_down * 3, face_left, step_end))
-    applymovement(PLAYER, moves(delay_16, delay_16, delay_16, walk_left * 5, walk_down * 2, face_right, step_end))
-  }
-  waitmovement(0)
 }
 
 script EnterBelen_Intro_Dialogue
@@ -62,22 +477,24 @@ script EnterBelen_StartGymBattle_Script
     goto(EnterBelen_BelenDefeated_Script)
 }
 
-script EnterBelen_BelenDefeated_Script {
+script EnterBelen_BelenDefeated_Script
+{
     lockall
     setflag(FLAG_BADGE01_GET)
-    setvar(VAR_GYM_1_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_DEFEATED_LEADER)
     setvar(VAR_BELEN_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
     call(WowYoureStrong_CheckCutsceneScript)
     msgbox(format("That was delicious! I'm absolutely satiated."),,SPEAKER_BELEN)
     closemessage
-    call(EnterBelen_ExplainBuzzr_Dialogue)
+    special(GetNumberOfBadges)
+    call_if_eq(VAR_RESULT,1,EnterBelen_ExplainBuzzr_Dialogue)
     tweetfanfare(TWEET_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM01)
-    msgbox(format("Oh, the cake!"),,SPEAKER_BELEN)
+    msgbox(format("Oh, the food!"),,SPEAKER_BELEN)
     closemessage
-    call(EnterBelen_DetermineMovementBackToStove_Script)
-    waitmovement(0)
+    moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,8,2,DIR_NORTH)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)
     call(AaandWereBack_Monologue)
@@ -85,50 +502,35 @@ script EnterBelen_BelenDefeated_Script {
     end
 }
 
-script EnterBelen_ExplainBuzzr_Dialogue{
-    special(GetNumberOfBadges)
-
-    if(var(VAR_RESULT) != 1)
-    {
-        return
-    }
-
+script EnterBelen_ExplainBuzzr_Dialogue
+{
     msgbox(format("I'll serve up that tweet now!"),,SPEAKER_BELEN)
     msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
     msgbox(format("You haven't tasted the wonders of Buzzr?"),,SPEAKER_BELEN)
     msgbox(format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpRise Capital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_BELEN)
     call(EnterBelen_DownloadBuzzr_Dialogue)
     closemessage
-    return
 }
 
-script EnterBelen_DownloadBuzzr_Dialogue{
+script EnterBelen_DownloadBuzzr_Dialogue
+{
     msgbox(format("Let me download it real quick..."),,SPEAKER_ALICIA)
         closemessage
         fadescreen(FADE_TO_BLACK)
         call(EventScript_InstallBuzzrApp)
         fadescreen(FADE_FROM_BLACK)
         return
-}
 
-script EnterBelen_DetermineMovementBackToStove_Script {
-  getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-
-  if (var (VAR_TEMP_0) == 7) {
-    applymovement(BELEN, moves(emote_exclamation_mark, walk_up * 3, walk_right * 3, walk_right, face_up, walk_left, face_up, step_end))
-  } else {
-    applymovement(BELEN, moves(emote_exclamation_mark, walk_right * 3, walk_up * 3, walk_right, face_up, walk_left, face_up, step_end))
-  }
 }
 
 script EnterBelen_PostDefeat1_Dialogue {
   lockall
-  setvar(VAR_GYM_1_STATE,GYM_DEFEATED_LEADER)
+  setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_EXPLAIN_BADGE)
 	bufferitemname(STR_VAR_1,ITEM_TM01)
 	buffermovename(STR_VAR_2,MOVE_FLAMETHROWER)
-  msgbox(format("STR_VAR_1 is one of my most delicious moves, it allows your Pokémon to use STR_VAR_2."),MSGBOX_NPC,SPEAKER_BELEN)
-      applymovement(BELEN,Common_Movement_FaceUp)
-    waitmovement(0)
+  msgbox(format("{STR_VAR_1} has one of my most delicious moves, it allows your Pokémon to use {STR_VAR_2}."),MSGBOX_NPC,SPEAKER_BELEN)
+      applymovement(LOCALID_MERMEREZA_GYM_BELEN,Common_Movement_FaceUp)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
   closemessage
   releaseall
   end
@@ -142,3 +544,204 @@ script EnterBelen_PostDefeat2_Dialogue {
   end
 }
 
+script EnterBelen_Script_StartGymTrainerBattle1
+{
+    // PSF TODO Replace with TRAINER_032E8AC9
+    trainerbattle_single(TRAINER_CHEFA,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle1)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
+        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    }
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_032E8AC9)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_WrongExpo4
+{
+    msgbox(format("Cioppino needs the perfect garnish - and why is there a random Trainer distracting me?"),,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle1)
+        goto(EnterBelen_Script_StartPuzzle1)
+}
+
+script EnterBelen_Dialogue_WrongExpo1
+{
+    msgbox(format("You breathing over my shoulder broke my flow!"),,SPEAKER_MERMEREZAGYMEXPEDITORB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle1)
+        goto(EnterBelen_Script_StartPuzzle1)
+}
+
+script EnterBelen_Dialogue_WrongExpo2
+{
+    msgbox(format("If you're not bringing me more Berry glaze, get out!"),,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle1)
+        goto(EnterBelen_Script_StartPuzzle1)
+}
+
+script EnterBelen_Script_StartGymTrainerBattle2
+{
+    // PSF TODO Replace with TRAINER_0389363C
+    trainerbattle_single(TRAINER_CHEFB,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle2)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    }
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_0389363C)
+    closemessage
+    release
+    end
+}
+
+script EnterBelen_Dialogue_WrongLine1
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine8
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine2
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine7
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine5
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine3
+{
+        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongLine6
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+
+script EnterBelen_Dialogue_WrongPrep10
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep1
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep4
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep7
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep2
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep5
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep6
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep3
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep11
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Dialogue_WrongPrep9
+{
+    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    closemessage
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+
+script EnterBelen_Script_StartGymTrainerBattle3
+{
+    // PSF TODO Replace with TRAINER_040CEA33,
+    trainerbattle_single(TRAINER_CHEFC,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle3)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    }
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_040CEA33)
+    closemessage
+    release
+    end
+}

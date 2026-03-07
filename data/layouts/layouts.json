@@ -8484,6 +8484,42 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/Route16_Grotto/border.bin",
       "blockdata_filepath": "data/layouts/Route16_Grotto/map.bin"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN1",
+      "name": "MermerezaCity_Gym_Kitchen1_Layout",
+      "width": 11,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen1/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen1/map.bin"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN2",
+      "name": "MermerezaCity_Gym_Kitchen2_Layout",
+      "width": 11,
+      "height": 13,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen2/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen2/map.bin"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN3",
+      "name": "MermerezaCity_Gym_Kitchen3_Layout",
+      "width": 17,
+      "height": 13,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen3/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen3/map.bin"
     }
   ]
 }

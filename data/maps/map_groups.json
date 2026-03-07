@@ -257,7 +257,10 @@
     "MermerezaCity_Bar",
     "MermerezaCity_Gym",
     "MermerezaCity_PokemonCenter_1F",
-    "MermerezaCity_Consulting"
+    "MermerezaCity_Consulting",
+    "MermerezaCity_Gym_Kitchen1",
+    "MermerezaCity_Gym_Kitchen2",
+    "MermerezaCity_Gym_Kitchen3"
   ],
   "gMapGroup_IndoorToraTown": [
     "ToraTown_Gym",

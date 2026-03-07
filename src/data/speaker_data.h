@@ -2458,4 +2458,100 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_MERMEREZAGYMEXPEDITORA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorA"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorB"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookA"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookB"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefA"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefB"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSOUSCHEF] =
+    {
+        .name = COMPOUND_STRING("Mermerezagymsouschef"),
+        .title = COMPOUND_STRING("Needles Sous Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVER] =
+    {
+        .name = COMPOUND_STRING("Mermerezagymserver"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMHOST] =
+    {
+        .name = COMPOUND_STRING("Mermerezagymchefhost"),
+        .title = COMPOUND_STRING("Needles Host"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_032E8AC9] =
+    {
+        .name = COMPOUND_STRING("032E8AC9"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_0389363C] =
+    {
+        .name = COMPOUND_STRING("0389363C"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_040CEA33] =
+    {
+        .name = COMPOUND_STRING("040CEA33"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

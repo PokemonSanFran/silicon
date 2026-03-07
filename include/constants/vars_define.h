@@ -1,78 +1,7 @@
 //VAR_STORYLINE_STATE //0x40FC
-
-#define STORY_NOT_STARTED                        0
-#define STORY_WEST_RESIDO_ONLY                   1
-#define STORY_WEST_RESIDO_TASK_A                 2
-#define STORY_WEST_RESIDO_TASK_B                 3
-#define STORY_WEST_RESIDO_TASK_C                 4
-#define STORY_WEST_RESIDO_TASK_D                 5
-#define STORY_WEST_RESIDO_TASK_E                 6
-#define STORY_WEST_RESIDO_TASK_F                 7
-#define STORY_WEST_RESIDO_TASK_G                 8
-#define STORY_WEST_RESIDO_COMPLETE               9
-#define STORY_FERRY_FIXED                        10
-#define STORY_DEFEAT_BAIYA_HALAI_ISLAND            11
-#define STORY_DEFEAT_CHASILLA_PROTEST            12
-#define STORY_DEFEAT_PUA                       13
-#define STORY_COMPLETE_ARANTRAZ                  14
-#define STORY_EAST_RESIDO_TASK_H                 15 //Baiya
-#define STORY_EAST_RESIDO_TASK_I                 16 //Ami
-#define STORY_EAST_RESIDO_TASK_J                 17 //BD
-#define STORY_EAST_RESIDO_TASK_K                 18 //Dimu
-#define STORY_EAST_RESIDO_TASK_L                 19 //Charlotte
-#define STORY_EAST_RESIDO_TASK_M                 20 //Keiying
-#define STORY_EAST_RESIDO_COMPLETE               21
-#define STORY_CALLED_TO_CONSTRUCTION             22
-#define STORY_DEFEATED_GARBODOR                  23
-#define STORY_NEED_SLEEP_BEFORE_FRANK          24
-#define STORY_ASSIGNED_FRANK_QUESTS            25
-#define STORY_COMPLETED_NAVAL_BASE               26
-#define STORY_START_CHAMPIONSHIP                 27
-#define STORY_CHAMPIONSHIP_EXPLAINED             28
-#define STORY_CHARLOTTE_WON_GROUP                29
-#define STORY_READY_GROUP_STAGE                  30
-#define STORY_GROUP_STATE_COMPLETE               31
-#define STORY_SEMIFINAL_COMPLETE                 32
-#define STORY_WATCH_SEMIFINAL                    33
-#define STORY_READY_FINALS                       34
-#define STORY_SAVE_FINALS                        35
-#define STORY_WON_FINALS                         36
-#define STORY_EXPLORE_ZENZU_ISLAND               37
-#define STORY_SAVE_BAIYA_ZENZU_ISLAND              38
-#define STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND       39
-#define STORY_BAIYA_EXPLAIN_RESTORATION            40
-#define STORY_RESTORATION_1_COMPLETE             41
-#define STORY_POST_YOU_REALIZE_WERE_EVIL         42
-#define STORY_MORNING_OF_TIMELINE_SPLIT          43
-#define STORY_START_FALSE_TIMELINE               44
-#define STORY_1ST_THE_TIDE_TAKEDOWN               45
-#define STORY_2ND_THE_TIDE_TAKEDOWN               46
-#define STORY_3RD_THE_TIDE_TAKEDOWN               47
-#define STORY_THE_TIDE_FINISHED                   48
-#define STORY_SAVE_DIANTHA                       49
-#define STORY_POST_DIANTHA                       50
-#define STORY_CONGRATULATED_BY_LUCREZIA          51
-#define STORY_RECIEVED_BAMBOO_STAR               52
-#define STORY_BEGIN_LETS_FIX_IT                  53
-#define STORY_MORNING_AFTER_TIMETRAVEL           99
-#define STORY_START_TRUE_TIMELINE                100
-#define STORY_DEFEATED_VIGRIM                   101
-#define STORY_RECIVED_RAVE_INVITE                102
-#define STORY_RAVE_OR_SPEECH_COMPLETE            103
-#define STORY_RAVE_AND_SPEECH_COMPLETE           104
-#define STORY_1ST_TAKEDOWN                       105
-#define STORY_PRE_EARTHQUAKE                     106
-#define STORY_POST_EARTHQUAKE                    107
-#define STORY_POST_DYNAMAX_BOSS                  108
-#define STORY_BEFORE_RAMESH_BREAKIN              109
-#define STORY_WARP_TILE_ACCESSIBLE               110
-#define STORY_EPILOGUE                           111
-#define STORY_BEFORE_CREDITS                     112
-#define STORY_CLEAR                              113
-
-/*
 enum StorylineVarsDefines
 {
+    STORY_NOT_STARTED,
     STORY_WEST_RESIDO_ONLY,
     STORY_WEST_RESIDO_TASK_A,
     STORY_WEST_RESIDO_TASK_B,
@@ -138,10 +67,10 @@ enum StorylineVarsDefines
     STORY_POST_DYNAMAX_BOSS,
     STORY_BEFORE_RAMESH_BREAKIN,
     STORY_WARP_TILE_ACCESSIBLE,
+    STORY_EPILOGUE,
+    STORY_BEFORE_CREDITS,
     STORY_CLEAR,
 };
-// PSF TODO convert these defines to this enum
-*/
 
 //VAR_PLAYER_HOME_STATE 0x4092
 enum PlayerHomeState
@@ -155,6 +84,25 @@ enum PlayerHomeState
     FINISHED_1_1,
     POST_NAVAL_BASE_RAID,
     NEXT_DAY_CHAMPIONSHIP,
+};
+
+// VAR_GYM_1_STATE
+enum MermerezaGymState
+{
+    MERMEREZA_GYM_NOT_STARTED,
+    MERMEREZA_GYM_INTRODUCED,
+    MERMEREZA_GYM_PUZZLE_EXPLAINED_1,
+    MERMEREZA_GYM_PUZZLE_COMPLETE_1,
+    MERMEREZA_GYM_PUZZLE_EXPLAINED_2,
+    MERMEREZA_GYM_PUZZLE_COMPLETE_2,
+    MERMEREZA_GYM_PUZZLE_EXPLAINED_3,
+    MERMEREZA_GYM_PUZZLE_COMPLETE_3,
+    MERMEREZA_GYM_BELEN_ON_BATTLEFIELD,
+    MERMEREZA_GYM_SAVE_BEFORE_LEADER,
+    MERMEREZA_GYM_DEFEATED_LEADER,
+    MERMEREZA_GYM_EXPLAIN_BADGE,
+    MERMEREZA_GYM_REMATCH_SAVE_BEFORE_LEADER,
+    MERMEREZA_GYM_REMATCH_DEFEATED,
 };
 
 // VAR_GYM_1_STATE | VAR_GYM_3_STATE | VAR_GYM_4_STATE | VAR_GYM_5-STATE | VAR_GYM_6_STATE | VAR_GYM_7_STATE | VAR_GYM_8_STATE | VAR_GYM_2_STATE

@@ -7,6 +7,8 @@ mapscripts MermerezaCity_Gym_MapScripts {
         call(EnterBelen_StartGymBattle_ObjectSetup_Script)
         call(MermerezaCity_Gym_Leader_Visibility_Script)
         call(Quest_Restaurantexpansion2_HideEmployees_Script)
+        call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_DEFEATED_LEADER,EnterBelen_Script_HideSousChef)
+        call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_3,EnterBelen_Script_MoveSousChef)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
@@ -23,15 +25,13 @@ script MermerezaCity_Gym_Leader_Visibility_Script{
     return
 }
 
-script EnterBelen_Event_Script {
-  switch (var (VAR_GYM_1_STATE)) {
-  case 3:
-    goto(EnterBelen_StartGymBattle_Script)
-  case 4:
-    goto(EnterBelen_PostDefeat1_Dialogue)
-  case 5:
-    goto(EnterBelen_PostDefeat2_Dialogue)
-  default:
-    goto(EnterBelen_PutMeatInOven_Dialogue)
-  }
+script EnterBelen_Event_Script
+{
+    switch (var (VAR_GYM_1_STATE))
+    {
+        case MERMEREZA_GYM_SAVE_BEFORE_LEADER: goto(EnterBelen_StartGymBattle_Script)
+        case MERMEREZA_GYM_DEFEATED_LEADER: goto(EnterBelen_PostDefeat1_Dialogue)
+        case MERMEREZA_GYM_EXPLAIN_BADGE: goto(EnterBelen_PostDefeat2_Dialogue)
+        default: goto(EnterBelen_PutMeatInOven_Dialogue)
+    }
 }

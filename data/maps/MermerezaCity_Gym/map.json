@@ -10,11 +10,12 @@
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": true,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MERMEREZA_GYM_BELEN",
       "graphics_id": "OBJ_EVENT_GFX_BELEN",
       "x": 8,
       "y": 2,
@@ -29,8 +30,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
-      "x": 1,
-      "y": 2,
+      "x": 5,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -42,8 +43,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 2,
-      "y": 3,
+      "x": 6,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -55,8 +56,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
-      "x": 3,
-      "y": 4,
+      "x": 7,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -68,8 +69,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
-      "x": 4,
-      "y": 5,
+      "x": 8,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -77,12 +78,12 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_7"
+      "flag": "FLAG_TEMP_5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ROOFTOP_SALE_WOMAN",
-      "x": 5,
-      "y": 6,
+      "x": 9,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -91,6 +92,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_TEMP_6"
+    },
+    {
+      "local_id": "LOCALID_MERMEREZAGYMHOST",
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EnterBelen_Script_InteractHost",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_MERMEREZAGYMSOUSCHEF",
+      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
+      "x": 5,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EnterBelen_Dialogue_SousChefExplain",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -106,6 +135,13 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN1",
       "dest_warp_id": "0"
     }
   ],
