@@ -40,6 +40,9 @@ static void MReminderSetup_InitWindows(void);
 static void MReminderSetup_InitSprites(void);
 static void Task_MReminderSetup_WaitFade(u8);
 
+static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers, u8 *);
+static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers);
+
 #include "data/ui_move_reminder.h"
 
 void MoveReminder_Init(MainCallback callback)
@@ -75,9 +78,13 @@ static void VBlankCB_MoveReminder(void)
 static void MoveReminder_FreeResources(void)
 {
     for (enum MoveReminderBackgroundBuffers buf = 0; buf < NUM_MREMINDER_BACKGROUND_BUFFERS; buf++)
-        TRY_FREE_AND_SET_NULL(sMoveReminderResourcesPtr->tilemapBufs[buf]);
+    {
+        u8 *ptr = TilemapBuffer_GetPtr(buf);
+        TRY_FREE_AND_SET_NULL(ptr);
+    }
 
     TRY_FREE_AND_SET_NULL(sMoveReminderResourcesPtr);
+    FreeTempTileDataBuffersIfPossible();
     FreeAllWindowBuffers();
     ResetSpriteData();
 }
@@ -180,9 +187,9 @@ static bool32 MReminderSetup_InitBgs(void)
 
     for (enum MoveReminderBackgroundBuffers buf = 0; buf < NUM_MREMINDER_BACKGROUND_BUFFERS; buf++)
     {
-        sMoveReminderResourcesPtr->tilemapBufs[buf] = AllocZeroed(BG_SCREEN_SIZE);
+        TilemapBuffer_SetPtr(buf, AllocZeroed(BG_SCREEN_SIZE));
 
-        if (!sMoveReminderResourcesPtr->tilemapBufs[buf])
+        if (!TilemapBuffer_GetPtr(buf))
         {
             allocFail = TRUE;
             break;
@@ -241,4 +248,14 @@ static void Task_MReminderSetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_MReminderInput_Main;
+}
+
+static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers buf, u8 *addr)
+{
+    sMoveReminderResourcesPtr->tilemapBufs[buf] = addr;
+}
+
+static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers buf)
+{
+    return sMoveReminderResourcesPtr->tilemapBufs[buf];
 }
