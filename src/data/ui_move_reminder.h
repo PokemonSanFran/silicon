@@ -1,3 +1,18 @@
+static const u32 sMoveReminder_Tiles[] = INCBIN_U32("graphics/ui_menus/move_reminder/tiles.4bpp.smol");
+static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_reminder/tiles.gbapal");
+
+static const struct MoveReminderModeInfo sMoveReminder_ModesInfo[NUM_MREMINDER_MODES] =
+{
+    [MREMINDER_MODE_MAIN] =
+    {
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/main.bin.smolTM"),
+    },
+    [MREMINDER_MODE_FILTER] =
+    {
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
+    },
+};
+
 static const struct BgTemplate sMoveReminderBgTemplates[NUM_MREMINDER_BACKGROUNDS + 1] =
 {
     [MREMINDER_BG_TEXT] =

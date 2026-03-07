@@ -43,6 +43,12 @@ static void Task_MReminderSetup_WaitFade(u8);
 static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers, u8 *);
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers);
 
+static const struct MoveReminderModeInfo *MReminderMode_GetInfo(enum MoveReminderModes);
+static const u32 *MReminderMode_GetTilemap(enum MoveReminderModes);
+static void MReminderMode_ReloadTilemap(void);
+static enum MoveReminderModes MReminderMode_GetValue(void);
+static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
+
 #include "data/ui_move_reminder.h"
 
 void MoveReminder_Init(MainCallback callback)
@@ -55,6 +61,7 @@ void MoveReminder_Init(MainCallback callback)
     }
 
     sMoveReminderResourcesPtr->savedCallback = callback;
+    MReminderMode_SetValue(MREMINDER_MODE_MAIN);
 
     SetMainCallback2(CB2_MReminderSetup);
 }
@@ -258,4 +265,33 @@ static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers buf, u8 *add
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers buf)
 {
     return sMoveReminderResourcesPtr->tilemapBufs[buf];
+}
+
+static const struct MoveReminderModeInfo *MReminderMode_GetInfo(enum MoveReminderModes mode)
+{
+    return &sMoveReminder_ModesInfo[mode];
+}
+
+static const u32 *MReminderMode_GetTilemap(enum MoveReminderModes mode)
+{
+    return MReminderMode_GetInfo(mode)->tilemap;
+}
+
+static void MReminderMode_ReloadTilemap(void)
+{
+    DecompressDataWithHeaderWram(
+        MReminderMode_GetTilemap(MReminderMode_GetValue()),
+        TilemapBuffer_GetPtr(MREMINDER_BGBUF_TILEMAP));
+    CopyBgTilemapBufferToVram(MREMINDER_BG_TILEMAP);
+}
+
+static enum MoveReminderModes MReminderMode_GetValue(void)
+{
+    return sMoveReminderResourcesPtr->mode;
+}
+
+static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes mode)
+{
+    sMoveReminderResourcesPtr->mode = mode;
+    return MReminderMode_GetValue();
 }
