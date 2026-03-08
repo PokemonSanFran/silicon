@@ -309,51 +309,41 @@ const u8 *GetQuestDesc_GetTheBandBackTogether(void)
 
 const u8 *GetQuestDesc_RestaurantExpansion1(void)
 {
-    switch(Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1))
-    {
-        case 4:
-            CopyItemName(ITEM_QUEST_RESTAURANTEXPANSION1_1,gStringVar1);
-            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_1),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_1))->regionMapSectionId,0);
-            if (!CheckBagHasItem(ITEM_QUEST_RESTAURANTEXPANSION1_1,1))
-            {
-                GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId,0);
-                StringCopy(gStringVar4,COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
-                return gStringVar4;
-            }
-            break;
-        case 3:
-            CopyItemName(ITEM_QUEST_RESTAURANTEXPANSION1_2,gStringVar1);
-            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_2),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_2))->regionMapSectionId,0);
-            if (!CheckBagHasItem(ITEM_QUEST_RESTAURANTEXPANSION1_2,1))
-            {
-                GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId,0);
-                StringCopy(gStringVar4,COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
-                return gStringVar4;
-            }
-            break;
-        case 2:
-            CopyItemName(ITEM_QUEST_RESTAURANTEXPANSION1_3,gStringVar1);
-            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_3),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_3))->regionMapSectionId,0);
-            if (!CheckBagHasItem(ITEM_QUEST_RESTAURANTEXPANSION1_3,1))
-            {
-                GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId,0);
-                StringCopy(gStringVar4,COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
-                return gStringVar4;
-            }
-            break;
-        case 1:
-            CopyItemName(ITEM_QUEST_RESTAURANTEXPANSION1_4,gStringVar1);
-            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_4),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_4))->regionMapSectionId,0);
-            if (!CheckBagHasItem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1))
-            {
-                GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId,0);
-                StringCopy(gStringVar4,COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
-                return gStringVar4;
-            }
-            break;
-    }
+    u32 remaining = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
     u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
-    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
+
+    static const u16 sQuestItems[] =
+    {
+        ITEM_QUEST_RESTAURANTEXPANSION1_4,
+        ITEM_QUEST_RESTAURANTEXPANSION1_3,
+        ITEM_QUEST_RESTAURANTEXPANSION1_2,
+        ITEM_QUEST_RESTAURANTEXPANSION1_1
+    };
+
+    static const u16 sQuestMaps[] =
+    {
+        MAP_QUEST_RESTAURANTEXPANSION1_4,
+        MAP_QUEST_RESTAURANTEXPANSION1_3,
+        MAP_QUEST_RESTAURANTEXPANSION1_2,
+        MAP_QUEST_RESTAURANTEXPANSION1_1,
+    };
+
+
+    if (remaining >= 1 && remaining <= 4)
+    {
+        u32 index = remaining - 1;
+        u32 item = sQuestItems[index];
+
+        if (!CheckBagHasItem(item, 1))
+        {
+            GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId, 0);
+            return StringCopy(gStringVar4, COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
+        }
+
+        CopyItemName(item, gStringVar1);
+        GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(sQuestMaps[index]),MAP_NUM(sQuestMaps[index]))->regionMapSectionId, 0);
+    }
+
+    StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
     return gStringVar4;
 }
-

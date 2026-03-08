@@ -991,7 +991,7 @@ const u32* GetPictureTiles(u16 tweetId)
     return gTweets[tweetId].tiles;
 }
 
-static void UNUSED *GetCriteria(u16 tweetId)
+static void *GetCriteria(u16 tweetId)
 {
     return gTweets[tweetId].criteria;
 }
@@ -1710,7 +1710,7 @@ static bool32 IsTweetInTimeline(u32 tweetId)
 
 static bool32 IsTweetCriteriaMet(u16 tweetId)
 {
-    void (*tweetFunction)(void) = gTweets[tweetId].criteria;
+    void (*tweetFunction)(void) = GetCriteria(tweetId);
 
     if (tweetFunction == NULL)
         return FALSE;
@@ -2061,10 +2061,15 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
             break;
         case TWEET_QUEST_NPC_STONE:
             ConvertIntToDecimalStringN(gStringVar1,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES,STR_CONV_MODE_LEFT_ALIGN,2);
+            break;
         case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2:
             StringCopy(gStringVar2,GetSpeciesName(SPECIES_REVAVROOM));
+            break;
         case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4:
             GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),MAP_NUM(MAP_QUEST_BETWEENASTONEANDAHARDPLACE))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTAURANTEXPANSION1_2:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS))->regionMapSectionId,0);
             break;
     }
 }

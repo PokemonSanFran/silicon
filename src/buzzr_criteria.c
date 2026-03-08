@@ -255,3 +255,18 @@ void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void)
         return;
     }
 }
+
+void TweetCriteria_Quest_RestaurantExpansion1_1(void)
+{
+    gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 1));
+}
+
+void TweetCriteria_Quest_RestaurantExpansion1_2(void)
+{
+    gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 2));
+}
+
+void TweetCriteria_Quest_RestaurantExpansion1_3(void)
+{
+    gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 3));
+}

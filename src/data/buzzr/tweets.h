@@ -422,4 +422,34 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_RESTAURANTEXPANSION1_1] =
+    {
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("I’m making some changes in the coming weeks. I’ve had a palate-warping experience and I’m ready to share it all with you!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestaurantExpansion1_1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTAURANTEXPANSION1_2] =
+    {
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("I'm opening a new restaurant in {STR_VAR_1} called Flowers. Flowers will have a Pay-What-You-Can model. Resido is my home, and nobody in my home should ever go hungry."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestaurantExpansion1_2,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTAURANTEXPANSION1_3] =
+    {
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("Flowers will maintain my commitment to top-shelf ingredients and taste. Try our the menu and see for yourself!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestaurantExpansion1_3,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

@@ -35,5 +35,8 @@ void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times(void);
 void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times(void);
 void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times(void);
 void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void);
+void TweetCriteria_Quest_RestaurantExpansion1_1(void);
+void TweetCriteria_Quest_RestaurantExpansion1_2(void);
+void TweetCriteria_Quest_RestaurantExpansion1_3(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H
