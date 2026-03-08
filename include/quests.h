@@ -164,6 +164,7 @@ struct SideQuest
 {
 	const u8 *name;
 	const u8 *desc[QUEST_STATE_COUNT];
+    const u8* (*descFunc)(void);
 	const u8 *map;
 	const u16 sprite;
     const u8 spritetype;

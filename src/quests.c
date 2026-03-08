@@ -1785,55 +1785,18 @@ const u8 *GetQuestRewardDesc(s32 questId)
 
 const u8 *GetQuestDesc(s32 questId)
 {
-    switch (questId)
-    {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDesc_PlayersAdventure();
-        case QUEST_RABIESOUTBREAK:
-            return GetQuestDesc_RabiesOutbreak();
-        case QUEST_BETWEENASTONEANDAHARDPLACE:
-            return GetQuestDesc_BetweenAStoneAndAHardPlace();
-        case QUEST_FRESHWATEREVOLUTION:
-            return GetQuestDesc_FreshwaterEvolution();
-        case QUEST_SMOOTHIECRAFTING:
-            return GetQuestDesc_SmoothieCrafting();
-        case QUEST_HODOUTUNNELS:
-            return GetQuestDesc_Hodoutunnels();
-        case QUEST_PSYOP:
-            return GetQuestDesc_Psyop();
-        case QUEST_ROCKCOLLECTOR:
-            return GetQuestDesc_RockCollector();
-        case QUEST_BODEGABURNOUT:
-            return GetQuestDesc_BodegaBurnout();
-        case QUEST_GETTHEBANDBACKTOGETHER:
-            return GetQuestDesc_GetTheBandBackTogether();
-        case QUEST_RESTAURANTEXPANSION1:
-            return GetQuestDesc_RestaurantExpansion1();
-        default:
-            return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
+
+    return sSideQuests[questId].descFunc();
 }
 
 const u8 *GetQuestDoneDesc(s32 questId)
 {
-    switch (questId) {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDoneDesc_PlayersAdventure();
-        case QUEST_SMOOTHIECRAFTING:
-            return GetQuestDesc_SmoothieCrafting();
-        case QUEST_HODOUTUNNELS:
-            return GetQuestDesc_Hodoutunnels();
-        case QUEST_PSYOP:
-            return GetQuestDesc_Psyop();
-        case QUEST_ROCKCOLLECTOR:
-            return GetQuestDesc_RockCollector();
-        case QUEST_BODEGABURNOUT:
-            return GetQuestDesc_BodegaBurnout();
-        case QUEST_GETTHEBANDBACKTOGETHER:
-            return GetQuestDesc_GetTheBandBackTogether();
-        default:
-            return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
+
+    return sSideQuests[questId].descFunc();
 }
 
 void PrintQuestDescription(s32 questId)
