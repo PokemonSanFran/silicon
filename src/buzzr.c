@@ -721,7 +721,7 @@ static bool8 UpdatePosition(bool32 moveDown)
 
 static u32 GetTweetIdFromPosition(u32 position)
 {
-    if (position < 0)
+    if ((position < 0) || (position >= TWEET_COUNT))
         position = 0;
 
     return sBuzzrLists->Timeline[position];
