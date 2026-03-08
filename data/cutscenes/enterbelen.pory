@@ -436,7 +436,7 @@ script EnterBelen_Dialogue_StartPuzzle3
 script EnterBelen_Script_ExplainPuzzle3
 {
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_3)
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("Needles' Prep Kitchen is where all the ingredients are prepared. Every slice, measurement and stir is done with precision."),,SPEAKER_MERMEREZAGYMSERVER)
     msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
     closemessage
     goto(EnterBelen_Script_StartPuzzle3)
