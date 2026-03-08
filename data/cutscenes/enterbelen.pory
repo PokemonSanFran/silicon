@@ -595,204 +595,266 @@ script EnterBelen_PostDefeat2_Dialogue {
   end
 }
 
-script EnterBelen_Script_StartGymTrainerBattle1
-{
-    // PSF TODO Replace with TRAINER_032E8AC9
-    trainerbattle_single(TRAINER_CHEFA,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle1)
-    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
-    {
-        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_1)
-    }
-    msgbox(format(""),MSGBOX_NPC,SPEAKER_032E8AC9)
-    closemessage
-    release
-    end
-}
-
 script EnterBelen_Dialogue_WrongExpo4
 {
-    msgbox(format("Cioppino needs the perfect garnish - and why is there a random Trainer distracting me?"),,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
+    msgbox(format("Cioppino needs the perfect garnish - and why is there a random Trainer distracting me?"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
         call(EnterBelen_Script_ResetPuzzle1)
         goto(EnterBelen_Script_StartPuzzle1)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
 }
 
 script EnterBelen_Dialogue_WrongExpo1
 {
-    msgbox(format("You breathing over my shoulder broke my flow!"),,SPEAKER_MERMEREZAGYMEXPEDITORB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
+    msgbox(format("You breathing over my shoulder broke my buritto decoration flow!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
         call(EnterBelen_Script_ResetPuzzle1)
         goto(EnterBelen_Script_StartPuzzle1)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
 }
 
 script EnterBelen_Dialogue_WrongExpo2
 {
-    msgbox(format("If you're not bringing me more Berry glaze, get out!"),,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
+    msgbox(format("If you're not bringing me more Berry glaze, get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
         call(EnterBelen_Script_ResetPuzzle1)
         goto(EnterBelen_Script_StartPuzzle1)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine1
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
+    bufferspeciesname(STR_VAR_2,SPECIES_CLOYSTER)
+    msgbox(format("The {STR_VAR_1} and {STR_VAR_2} have to go in a different times... I need to concentrate!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
+    call(EnterBelen_Script_ResetPuzzle2)
+    goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine8
+{
+    msgbox(format("Cioppino only works if the temperature is perfect, both in and outside the pot. You're messsing that up!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine2
+{
+        msgbox(format("This broth needs constant attention. Get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine7
+{
+        msgbox(format("Perfect conchas mean no interruptions. Begone!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine5
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
+        msgbox(format("Overcooked {STR_VAR_1} strips are unacceptable - you need to get off the Line!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine3
+{
+        msgbox(format("Berry glaze sets instantly. Out of the kitchen!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongLine6
+{
+    msgbox(format("If these conchas bake for a second too long, they end up too dry. No hovering!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
+    {
+        call(EnterBelen_Script_ResetPuzzle2)
+        goto(EnterBelen_Script_StartPuzzle2)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep10
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
+    msgbox(format("These {STR_VAR_1} bones won't pull themselves. I'm busy, get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep1
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_CLOYSTER)
+    msgbox(format("{STR_VAR_1} shells have to be scrubbed before they're added to the pot. You're interruptting my zen."),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep4
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
+    msgbox(format("If {STR_VAR_1} isn't prepped perfectly, the Cioppino will be ruined. Outta my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep7
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
+    msgbox(format("The {STR_VAR_1} strips are marinating. No time to talk!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep2
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
+    msgbox(format("The spice mix for the {STR_VAR_1} burritos has to be perfect down to the gram. If you're not helping, you're hurting!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep5
+{
+    buffernumberstring(STR_VAR_2,40)
+    bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
+    msgbox(format("There's {STR_VAR_2} {STR_VAR_1} burritos that need to be prepped, and you're going to make it take even longer!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep6
+{
+    msgbox(format("Concha dough will collapse if the timing is wrong. Go away!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep3
+{
+    msgbox(format("The berry glaze needs to be perfectly mixed... and my mixing arm is going to hit you!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep11
+{
+    msgbox(format("These conchas needs to be proof, and I can't have you breathing on everything!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+}
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Dialogue_WrongPrep9
+{
+    msgbox(format("Pasty prep requires total focus. Out of my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        call(EnterBelen_Script_ResetPuzzle3)
+        goto(EnterBelen_Script_StartPuzzle3)
+    }
+    applymovement(VAR_LAST_TALKED,Common_Movement_FaceOriginalDirection)
+}
+
+script EnterBelen_Script_StartGymTrainerBattle1
+{
+    // PSF TODO Replace with TRAINER_032E8AC9
+    buffermovename(STR_VAR_1,MOVE_FLING)
+    trainerbattle_single(TRAINER_CHEFA,format("Gotta be prepared to catch whatever the Line happens to {STR_VAR_1} at you!"),format("You caught that way better than I would..."),EnterBelen_Script_StartGymTrainerBattle1)
+    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    {
+        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_1)
+    }
+    msgbox(format("You have to beat two more Gym Trainers before you can challenge Belen. The Line is way more difficult than this room!"),MSGBOX_NPC,SPEAKER_032E8AC9)
 }
 
 script EnterBelen_Script_StartGymTrainerBattle2
 {
     // PSF TODO Replace with TRAINER_0389363C
-    trainerbattle_single(TRAINER_CHEFB,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle2)
+    trainerbattle_single(TRAINER_CHEFB,format("Being in a kitchen requires solid teamwork!"),format("Your teamwork is on point."),EnterBelen_Script_StartGymTrainerBattle2)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     }
-    msgbox(format(""),MSGBOX_NPC,SPEAKER_0389363C)
-    closemessage
-    release
-    end
-}
-
-script EnterBelen_Dialogue_WrongLine1
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine8
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine2
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine7
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine5
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine3
-{
-        msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongLine6
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle2)
-        goto(EnterBelen_Script_StartPuzzle2)
-}
-
-script EnterBelen_Dialogue_WrongPrep10
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep1
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep4
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep7
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep2
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep5
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep6
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep3
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep11
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
-}
-
-script EnterBelen_Dialogue_WrongPrep9
-{
-    msgbox(format(""),,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
-    closemessage
-        call(EnterBelen_Script_ResetPuzzle3)
-        goto(EnterBelen_Script_StartPuzzle3)
+    msgbox(format("Just one more Gym Trainer before you can battle Belen. Good luck in the prep room!"),MSGBOX_NPC,SPEAKER_0389363C)
 }
 
 script EnterBelen_Script_StartGymTrainerBattle3
 {
     // PSF TODO Replace with TRAINER_040CEA33,
-    trainerbattle_single(TRAINER_CHEFC,format(""),format(""),EnterBelen_Script_StartGymTrainerBattle3)
+    trainerbattle_single(TRAINER_CHEFC,format("Knowing type matchups is like knowing kitchen fundamentals... but it won't always be useful!"),format("You know the fundamentals and a little more!"),EnterBelen_Script_StartGymTrainerBattle3)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     }
-    msgbox(format(""),MSGBOX_NPC,SPEAKER_040CEA33)
-    closemessage
-    release
-    end
+    msgbox(format("Beating me means you can challenge Belen. She's no slouch!"),MSGBOX_NPC,SPEAKER_040CEA33)
 }
