@@ -1807,6 +1807,8 @@ const u8 *GetQuestDesc(s32 questId)
             return GetQuestDesc_BodegaBurnout();
         case QUEST_GETTHEBANDBACKTOGETHER:
             return GetQuestDesc_GetTheBandBackTogether();
+        case QUEST_RESTAURANTEXPANSION1:
+            return GetQuestDesc_RestaurantExpansion1();
         default:
             return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
     }

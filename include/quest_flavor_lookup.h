@@ -13,5 +13,6 @@ const u8 *GetQuestDesc_Psyop(void);
 const u8 *GetQuestDesc_RockCollector(void);
 const u8 *GetQuestDesc_BodegaBurnout(void);
 const u8 *GetQuestDesc_GetTheBandBackTogether(void);
+const u8 *GetQuestDesc_RestaurantExpansion1(void);
 
 #endif // GUARD_QUEST_FLAVOR_LOOKUP

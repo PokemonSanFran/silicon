@@ -180,7 +180,7 @@ script Quest_Restaurantexpansion_StartQuest{
 
 script Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue{
     lock
-    bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub1_Map)
+    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub1_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
     msgbox(format("First, you're going to {STR_VAR_1}. A lot of my existing clients are there, and I want to whet their appetite for the grand re-opening."),MSGBOX_NPC,SPEAKER_BELEN)
     lock
@@ -194,7 +194,7 @@ script Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue{
 }
 script Quest_Restaurantexpansion_GiveFood_TirabudinPlace_Dialogue{
     lock
-    bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub2_Map)
+    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub2_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
     msgbox(format("Next on the menu is {STR_VAR_1}! Here you go."),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
@@ -206,7 +206,7 @@ script Quest_Restaurantexpansion_GiveFood_TirabudinPlace_Dialogue{
 }
 script Quest_Restaurantexpansion_GiveFood_PerlaciaCity_Dialogue{
     lock
-    bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub3_Map)
+    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub3_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
     msgbox(format("Okay, now go to {STR_VAR_1}. Gotta get those techies that work downtown, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
@@ -218,7 +218,7 @@ script Quest_Restaurantexpansion_GiveFood_PerlaciaCity_Dialogue{
 }
 script Quest_Restaurantexpansion_GiveFood_Chasilla_Dialogue{
     lock
-    bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub4_Map)
+    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub4_Map)
     call(Quest_Restaurantexpansion_FoodCold_Dialogue)
     msgbox(format("Last order for the night... {STR_VAR_1}! Students have to eat too, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
     giveitem(ITEM_TEA,1)
@@ -371,7 +371,7 @@ subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
     closemessage
     call(Quest_Restaurantexpansion_HangPoster_Script)
     msgbox(format("Chill vibes and good food? That's my kind of spot. I can talk this up all day. And yeah, right by the PC, good spot for that poster."),,SPEAKER_NURSE)
-    bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Map)
+    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Map)
     msgbox(format("The last one! Time to head back to {STR_VAR_1}, finally."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     applymovement(NURSE,Common_Movement_FaceDown)
     closemessage

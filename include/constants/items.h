@@ -1436,8 +1436,12 @@
 #define ITEM_ZYGARDITE 1242
 #define ITEM_DRAMPANITE 1243
 #define ITEM_FALINKSITE 1244
+#define ITEM_BELEN_CHE 1245
+#define ITEM_BELEN_KARIOKA 1246
+#define ITEM_BELEN_CHEBUREKI 1247
+#define ITEM_BELEN_JIANBING 1248
 
-#define ITEMS_COUNT 1245
+#define ITEMS_COUNT 1249
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

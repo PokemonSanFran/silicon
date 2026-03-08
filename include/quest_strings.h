@@ -68,11 +68,6 @@ extern const u8 gText_Quest_RecruitLocalArtists_Desc[];
 extern const u8 gText_Quest_RecruitLocalArtists_DoneDesc[];
 extern const u8 gText_Quest_RecruitLocalArtists_Map[];
 
-extern const u8 gText_Quest_RestaurantExpansion1_Name[];
-extern const u8 gText_Quest_RestaurantExpansion1_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion1_DoneDesc[];
-extern const u8 gText_Quest_RestaurantExpansion1_Map[];
-
 extern const u8 gText_Quest_RestaurantExpansion2_Name[];
 extern const u8 gText_Quest_RestaurantExpansion2_Desc[];
 extern const u8 gText_Quest_RestaurantExpansion2_DoneDesc[];
@@ -490,19 +485,6 @@ extern const u8 gText_Quest_InstallNatureProbes_Sub2_Map[];
 extern const u8 gText_Quest_InstallNatureProbes_Sub3_Name[];
 extern const u8 gText_Quest_InstallNatureProbes_Sub3_Desc[];
 extern const u8 gText_Quest_InstallNatureProbes_Sub3_Map[];
-
-extern const u8 gText_Quest_RestaurantExpansion1_Sub1_Name[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub1_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub1_Map[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub2_Name[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub2_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub2_Map[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub3_Name[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub3_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub3_Map[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub4_Name[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub4_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion1_Sub4_Map[];
 
 extern const u8 gText_Quest_RestaurantExpansion2_Sub1_Name[];
 extern const u8 gText_Quest_RestaurantExpansion2_Sub1_Desc[];

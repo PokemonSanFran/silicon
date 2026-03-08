@@ -69,38 +69,38 @@ static const struct SubQuest sInstallNatureProbes_Sub[QUEST_INSTALLNATUREPROBES_
 static const struct SubQuest sRestaurantExpansion1_Sub[QUEST_RESTAURANTEXPANSION1_SUB_COUNT] = {
     sub_quest(
             7,
-            gText_Quest_RestaurantExpansion1_Sub1_Name,
-            gText_Quest_RestaurantExpansion1_Sub1_Desc,
-            gText_Quest_RestaurantExpansion1_Sub1_Map,
-            OBJ_EVENT_GFX_NURSE,
-            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Che"),
+            COMPOUND_STRING("Delivered the food to the Receptionist!"),
+            gText_EspuleeOutskirts,
+            ITEM_BELEN_CHE,
+            QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Distributed")
             ),
     sub_quest(
             8,
-            gText_Quest_RestaurantExpansion1_Sub2_Name,
-            gText_Quest_RestaurantExpansion1_Sub2_Desc,
-            gText_Quest_RestaurantExpansion1_Sub2_Map,
-            OBJ_EVENT_GFX_NURSE,
-            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Karioka"),
+            COMPOUND_STRING("Delivered the food to the Receptionist!"),
+            gText_TirabudinPlace,
+            ITEM_BELEN_KARIOKA,
+            QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Distributed")
             ),
     sub_quest(
             9,
-            gText_Quest_RestaurantExpansion1_Sub3_Name,
-            gText_Quest_RestaurantExpansion1_Sub3_Desc,
-            gText_Quest_RestaurantExpansion1_Sub3_Map,
-            OBJ_EVENT_GFX_NURSE,
-            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Chebureki"),
+            COMPOUND_STRING("Delivered the food to the Receptionist!"),
+            gText_PerlaciaCity,
+            ITEM_BELEN_CHEBUREKI,
+            QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Distributed")
             ),
     sub_quest(
             10,
-            gText_Quest_RestaurantExpansion1_Sub4_Name,
-            gText_Quest_RestaurantExpansion1_Sub4_Desc,
-            gText_Quest_RestaurantExpansion1_Sub4_Map,
-            OBJ_EVENT_GFX_NURSE,
-            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Jianbing"),
+            COMPOUND_STRING("Delivered the food to the Receptionist!"),
+            gText_Chasilla,
+            ITEM_BELEN_JIANBING,
+            QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Distributed")
             ),
 };
@@ -2156,10 +2156,10 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_RESTAURANTEXPANSION1] =
     {
-        .name = gText_Quest_RestaurantExpansion1_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_RestaurantExpansion1_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_RestaurantExpansion1_DoneDesc,
-        .map = gText_Quest_RestaurantExpansion1_Map,
+        .name = COMPOUND_STRING("Restaurant Expansion"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Deliver the {STR_VAR_1} from Belen's new menu to the Pokemon Center Clerk in {STR_VAR_2}."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Word is getting out about Needles, even to clients that usually never went. Belen’s new strategy is slowly taking shape."),
+        .map = gText_CapheCity,
         .sprite = OBJ_EVENT_GFX_BELEN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestaurantExpansion1_Sub,

@@ -20715,6 +20715,54 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
+        [ITEM_BELEN_CHE] =
+        {
+            .name = ITEM_NAME("Che"),
+            .price = 0,
+            .description = COMPOUND_STRING("A icy cup of fruit cocktail with pudding and ice cream. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_KARIOKA] =
+        {
+            .name = ITEM_NAME("Karioka"),
+            .price = 0,
+            .description = COMPOUND_STRING("Small balls of deep fried glutinous rice covered in caramel. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_CHEBUREKI] =
+        {
+            .name = ITEM_NAME("Chebureki"),
+            .price = 0,
+            .description = COMPOUND_STRING("A soft yet crispy pocket of dough, filled with meat and vegetables. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_JIANBING] =
+        {
+            .name = ITEM_NAME("Jianbing"),
+            .price = 0,
+            .description = COMPOUND_STRING("A thin crepe folded around egg, crackers, spices, herbes, and tangy sauces. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
     // End siliconMerge
 };
 

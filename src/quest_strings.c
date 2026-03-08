@@ -68,11 +68,6 @@ const u8 gText_Quest_RecruitLocalArtists_Desc[] =_("Description");
 const u8 gText_Quest_RecruitLocalArtists_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_RecruitLocalArtists_Map[] =_("MermerezaCity");
 
-const u8 gText_Quest_RestaurantExpansion1_Name[] = _("Restaurant Expansion 1");
-const u8 gText_Quest_RestaurantExpansion1_Desc[] =_("Description");
-const u8 gText_Quest_RestaurantExpansion1_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_RestaurantExpansion1_Map[] =_("MermerezaCity");
-
 const u8 gText_Quest_RestaurantExpansion2_Name[] = _("Restaurant Expansion 2");
 const u8 gText_Quest_RestaurantExpansion2_Desc[] =_("Description");
 const u8 gText_Quest_RestaurantExpansion2_DoneDesc[] =_("DoneDescription");
@@ -462,19 +457,6 @@ const u8 gText_Quest_InstallNatureProbes_Sub2_Map[] = _("LeaverraForest");
 const u8 gText_Quest_InstallNatureProbes_Sub3_Name[] = _("Shore");
 const u8 gText_Quest_InstallNatureProbes_Sub3_Desc[] = _("You installed a probe for tracking\nPokemon by the lakeshore.");
 const u8 gText_Quest_InstallNatureProbes_Sub3_Map[] = _("LeaverraForest");
-
-const u8 gText_Quest_RestaurantExpansion1_Sub1_Name[] = _("Center 1");
-const u8 gText_Quest_RestaurantExpansion1_Sub1_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestaurantExpansion1_Sub1_Map[] = _("EspuleeOutskirts");
-const u8 gText_Quest_RestaurantExpansion1_Sub2_Name[] = _("Center 2");
-const u8 gText_Quest_RestaurantExpansion1_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestaurantExpansion1_Sub2_Map[] = _("TirabudinPlace");
-const u8 gText_Quest_RestaurantExpansion1_Sub3_Name[] = _("Center 3");
-const u8 gText_Quest_RestaurantExpansion1_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestaurantExpansion1_Sub3_Map[] = _("PerlaciaCity");
-const u8 gText_Quest_RestaurantExpansion1_Sub4_Name[] = _("Center 4");
-const u8 gText_Quest_RestaurantExpansion1_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestaurantExpansion1_Sub4_Map[] = _("Chasilla");
 
 const u8 gText_Quest_RestaurantExpansion2_Sub1_Name[] = _("Hostess");
 const u8 gText_Quest_RestaurantExpansion2_Sub1_Desc[] = _("Sub Lorem");
