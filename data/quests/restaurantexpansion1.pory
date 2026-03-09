@@ -1,101 +1,96 @@
 //gText_Restaurantexpansion_
 //Quest_Restaurantexpansion_
-const FLAG_HIDE_BELEN = FLAG_TEMP_4
-const FLAG_HIDE_JORIS = FLAG_TEMP_5
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BELEN = 8
-const BELEN_MERMEREZA_CITY = 7
-const JORIS = 7
-const JORIS_KID = 9
-const NURSE = 1
+const LOCALID_HUNGRYPARENT = (LOCALID_PLAYER - 2)
+const LOCALID_HUNGRYKID = (LOCALID_PLAYER - 3)
+const LOCALID_NURSE = 1
 
-const ESPULEE_OUTSKIRTS_NURSE= 0
-const TIRABUDIN_PLACE_NURSE= 1
-const PERLACIA_CITY_NURSE= 2
-const CHASILLA_NURSE= 3
-const ALL_NURSE = 4
-
-script Quest_Restaurantexpansion_HideObjects_Script{
-    setflag(FLAG_HIDE_JORIS)
-
-    if(var(VAR_BELEN_STATE) != BATTLE_1_COMPLETE){
-        setflag(FLAG_HIDE_BELEN)
+script Quest_Restaurantexpansion_Script_HideBelen
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ)
+    {
+        setobjectflagfromlocalid(LOCALID_OROLAND_BELEN)
     }
-    return
-}
 
-script Quest_Restaurantexpansion_MermerezaCity_Leader_Visibilty_Script{
-    switch(var(VAR_BELEN_STATE)){
-        case NO_BADGE:
-        case BATTLE_1_COMPLETE:
-        case QUEST_2_COMPLETE:
-        case BATTLE_2_COMPLETE: setflag(FLAG_HIDE_BELEN)
-        default: return
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_UNHOUSED_INSPIRED)
+    {
+        setobjectflagfromlocalid(LOCALID_OROLAND_BELEN)
     }
-    return
+
 }
-
-script Quest_Restaurantexpansion_MovePlayer_Script{
-    fadescreen(FADE_TO_BLACK)
-    setobjectxy(PLAYER,31,19)
-    applymovement(PLAYER,Common_Movement_FaceLeft)
-    TeleportCamera(31,19)
-    fadescreen(FADE_FROM_BLACK)
-}
-
-script Quest_Restaurantexpansion_Startcutscene_Script{
-    specialvar(VAR_RESULT,GetPlayerFacingDirection)
-
-    if (var(VAR_RESULT) != DIR_WEST){
-        call(Quest_Restaurantexpansion_MovePlayer_Script)
+script Quest_Restaurantexpansion_Script_HideBelenCaphe
+{
+    if (var(VAR_GYM_1_STATE) != MERMEREZA_GYM_UNHOUSED_INSPIRED)
+    {
+        setobjectflagfromlocalid(LOCALID_CAPHE_BELEN)
+        return
     }
-    return
+
+    returnqueststate(QUEST_RESTAURANTEXPANSION1)
+    if (var(VAR_RESULT) >= QUEST_MENU_SET_ACTIVE)
+    {
+        setobjectflagfromlocalid(LOCALID_CAPHE_BELEN)
+        return
+    }
 }
 
-script Quest_Restaurantexpansion_Meetup_Dialogue{
-    setvar(VAR_BELEN_STATE,CUTSCENE_COMPLETE)
-    call(Quest_Restaurantexpansion_Startcutscene_Script)
-    lock
-    msgbox(format("Hello {PLAYER}. What a delicious surprise!"),MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
-    msgbox(format("Are you here for the grand re-opening of the updated menu for Millenium Bakery?"),,SPEAKER_BELEN)
-    msgbox(format("I didn't even know that was a thing..."),,SPEAKER_ALICIA)
+script Quest_Restaurantexpansion_Meetup_Dialogue
+{
+    lockall
+    faceplayer
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_UNHOUSED_INSPIRED)
+    bufferabilityname(STR_VAR_1,ABILITY_GOOD_AS_GOLD)
+    msgbox(format("Hola {PLAYER}. What a delicious surprise!"),,SPEAKER_BELEN)
+    msgbox(format("Are you here for the grand re-opening of {STR_VAR_1} Bakery?"),,SPEAKER_BELEN)
+    msgbox(format("I didn't even know that was a thing…"),,SPEAKER_ALICIA)
     msgbox(format("Oh! Come on, we'll go together."),,SPEAKER_BELEN)
     closemessage
     call(Quest_Restaurantexpansion_StartWalk_Dialogue)
-    msgbox(format("If my restaurant is going to be at the peak of Residoculinary culture, there's a lot of work happening in the front of house to make that happen. I have to make sure I understand region's preferred palettes, while also making sure I can continually elevate the plates that leave my line."),,SPEAKER_BELEN)
-    msgbox(format("I try to stay ahead of the tickets, one resturant opening at a time."),,SPEAKER_BELEN)
-    msgbox(format("What do you mean by elevate?"),,SPEAKER_ALICIA)
-    msgbox(format("I'm not just trying to plate up Residocuisine, I'm serving the best cuts of Residocuisine. Freshest ingredients from the ground, finest Kalosian chefs, with no expense spared. I want my food to be the definitive dining experience of Resido!"),,SPEAKER_BELEN)
+    msgbox(format("If my restaurant is going to be at the peak of Resido culinary culture, I need to do a lot of work in the front of house. I have to make sure I understand the region's preferred palates, while also making sure I can continually elevate the plates that leave my line."),,SPEAKER_BELEN)
+msgbox(format("I try to stay ahead of the tickets, one restaurant opening at a time."),,SPEAKER_BELEN)
+msgbox(format("What do you mean by elevate?"),,SPEAKER_ALICIA)
+msgbox(format("I'm not just trying to plate-up Resido cuisine, I'm serving the best cuts of Resido cuisine. Freshest ingredients from the ground, finest Kalosian chefs, with no expense spared. I want my food to be the definitive dining experience of Resido!"),,SPEAKER_BELEN)
     closemessage
-    waitmovement(BELEN)
-    applymovement(BELEN,Common_Movement_FaceRight)
-    call(Quest_Restaurantexpansion_SpawnJoris_Script)
-    call(Quest_Restaurantexpansion_JorisWalkToPlayer_Script)
-    waitmovement(JORIS)
-    applymovement(BELEN,Common_Movement_FaceDown)
-    applymovement(PLAYER,Common_Movement_FaceDown)
-    msgbox(format("Hey man, you got a couple dollars for food."),,SPEAKER_JORIS)
+    waitmovement(LOCALID_OROLAND_BELEN)
+    call(Quest_Restaurantexpansion_SpawnHungryparent_Script)
+    call(Quest_Restaurantexpansion_HungryparentWalkToPlayer_Script)
+    applymovement(LOCALID_OROLAND_BELEN,Common_Movement_FaceDown)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceDown)
+    msgbox(format("Hey man, you got a couple dollars for food?"),,SPEAKER_HUNGRYPARENT)
     msgbox(format("Sorry, I don't have anything."),,SPEAKER_BELEN)
-    msgbox(format("Its cool. Come on, little man."),,SPEAKER_JORIS)
+    msgbox(format("Its cool."),,SPEAKER_HUNGRYPARENT)
     closemessage
-    applymovement(JORIS,Quest_Restaurantexpansion_WalkAway_Movement)
-    applymovement(JORIS_KID,Quest_Restaurantexpansion_WalkAway_Movement)
-    waitmovement(JORIS)
+    applymovement(LOCALID_HUNGRYPARENT,Common_Movement_FaceRight)
+    applymovement(LOCALID_HUNGRYKID,Common_Movement_FaceLeft)
+    waitmovement(LOCALID_HUNGRYPARENT)
+    msgbox(format("Come on, little man."),,SPEAKER_HUNGRYPARENT)
+    closemessage
+    moveobjecttocoords(LOCALID_HUNGRYPARENT,2,22,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_HUNGRYKID,3,22,DIR_SOUTH)
+    waitmovement(LOCALID_HUNGRYPARENT)
     msgbox(format("Wait! Hold on."),,SPEAKER_BELEN,TAIL_SHOUT)
     closemessage
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceDown)
     playse(SE_PIN)
-    applymovement(JORIS,Common_Movement_ExclamationMark)
-    applymovement(BELEN,Quest_Restaurantexpansion_WalkAway_Movement)
-    waitmovement(BELEN)
+    applymovement(LOCALID_HUNGRYPARENT,moves(emote_exclamation_mark, face_up))
+    applymovement(LOCALID_HUNGRYKID,moves(face_up))
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA,moves(walk_down *3))
+    moveobjecttocoords(LOCALID_OROLAND_BELEN,2,21,DIR_SOUTH)
+    waitmovement(LOCALID_CAMERA)
+    special(RemoveCameraObject)
     msgbox(format("Can I actually buy you dinner?"),,SPEAKER_BELEN)
-    applymovement(JORIS_KID, moves(jump_in_place_up, step_end))
-    msgbox(format("Wait, really? That's awful nice man."),,SPEAKER_JORIS)
+    msgbox(format("Thanks! That’s awful nice miss."),,SPEAKER_HUNGRYPARENT)
     msgbox(format("This restaurant is experimenting with a blend of flavors tonight, and I want - hold on."),,SPEAKER_BELEN)
     closemessage
-    call(Quest_Restaurantexpansion_GroupWalkDoor_Script)
-    waitmovement(BELEN)
-    applymovement(PLAYER,Common_Movement_FaceLeft)
-    msgbox(format("{PLAYER}, we'll have to take a raincheck. Come see me in MermerezaCity soon!"),,SPEAKER_BELEN)
+    special(SpawnCameraObject)
+    applymovement(LOCALID_CAMERA,moves(walk_up *3))
+    moveobjecttocoords(LOCALID_OROLAND_BELEN,2,19,DIR_EAST)
+    applymovement(LOCALID_HUNGRYPARENT,moves(walk_up * 2))
+    applymovement(LOCALID_HUNGRYKID,moves(walk_up * 2))
+    waitmovement(LOCALID_HUNGRYKID)
+    special(RemoveCameraObject)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceLeft)
+    msgbox(format("{PLAYER}, we'll have to take a raincheck. I'll see you around!"),,SPEAKER_BELEN)
     closemessage
     call(Quest_Restaurantexpansion_GoIntoShop_Script)
     release
@@ -103,578 +98,368 @@ script Quest_Restaurantexpansion_Meetup_Dialogue{
 }
 
 script Quest_Restaurantexpansion_StartWalk_Dialogue{
-    applymovement(BELEN,Quest_Restaurantexpansion_WalkToShop_Movement)
-    applymovement(PLAYER,Quest_Restaurantexpansion_WalkToShop_Movement)
-    return
+    moveobjecttocoords(LOCALID_PLAYER,31,19,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
+
+    moveobjecttocoords(LOCALID_OROLAND_BELEN,2,19,DIR_EAST)
+    applymovement(LOCALID_PLAYER,moves(walk_left * 28))
 }
 
-script Quest_Restaurantexpansion_SpawnJoris_Script{
-    clearflag(FLAG_HIDE_JORIS)
-    addobject(JORIS)
-    addobject(JORIS_KID)
-    return
+script Quest_Restaurantexpansion_SpawnHungryparent_Script
+{
+    spawnobject(OBJ_EVENT_GFX_MAN_1,LOCALID_HUNGRYPARENT,2,25,MOVEMENT_TYPE_FACE_UP)
+    spawnobject(OBJ_EVENT_GFX_BOY_1,LOCALID_HUNGRYKID,3,25,MOVEMENT_TYPE_FACE_UP)
 }
 
-script Quest_Restaurantexpansion_JorisWalkToPlayer_Script{
-    applymovement(JORIS,Quest_Restaurantexpansion_WalkToLeader_Movement)
-    applymovement(JORIS_KID,Quest_Restaurantexpansion_WalkToLeader_Movement)
-    return
-}
-
-script Quest_Restaurantexpansion_GroupWalkDoor_Script{
-    applymovement(BELEN, moves(walk_up * 2, face_player, step_end))
-    applymovement(JORIS,Quest_Restaurantexpansion_ReturnToDoor_Movement)
-    applymovement(JORIS_KID,Quest_Restaurantexpansion_ReturnToDoor_Movement)
-    return
+script Quest_Restaurantexpansion_HungryparentWalkToPlayer_Script
+{
+    moveobjecttocoords(LOCALID_HUNGRYPARENT,2,20,DIR_NORTH)
+    moveobjecttocoords(LOCALID_HUNGRYKID,3,20,DIR_NORTH)
+    waitmovement(LOCALID_HUNGRYPARENT)
 }
 
 script Quest_Restaurantexpansion_GoIntoShop_Script{
     opendoor(2,18)
     waitdooranim
-    applymovement(BELEN, moves(walk_up, step_end))
-    applymovement(JORIS, moves(walk_up * 2, step_end))
-    applymovement(JORIS_KID, moves(walk_left, walk_up * 2, step_end))
-    waitmovement(BELEN)
-    waitmovement(JORIS)
-    waitmovement(JORIS_KID)
-    removeobject(BELEN)
+    applymovement(LOCALID_OROLAND_BELEN, moves(walk_up, step_end))
+    applymovement(LOCALID_HUNGRYPARENT, moves(walk_up * 2, step_end))
+    applymovement(LOCALID_HUNGRYKID, moves(walk_left, walk_up * 2, step_end))
+    waitmovement(LOCALID_OROLAND_BELEN)
+    waitmovement(LOCALID_HUNGRYPARENT)
+    waitmovement(LOCALID_HUNGRYKID)
+    removeobject(LOCALID_OROLAND_BELEN)
     playse(SE_EXIT)
-    removeobject(JORIS)
+    removeobject(LOCALID_HUNGRYPARENT)
     playse(SE_EXIT)
-    removeobject(JORIS_KID)
+    removeobject(LOCALID_HUNGRYKID)
     playse(SE_EXIT)
     closedoor(2,18)
     return
 }
 
-script Quest_Restaurantexpansion_Leader_Interact_Script{
-    lock
-    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion2_Leader_Interact_Script)
-
-    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_Reward_Dialogue)
-    goto_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_Active_Dialogue)
-    goto(Quest_Restaurantexpansion_StartQuest)
-}
-
-script Quest_Restaurantexpansion_StartQuest{
-    msgbox(format("{PLAYER}, sorry about the restaurant in Oroland!"),MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(format("No problem! That was a really nice thing you did."),,SPEAKER_ALICIA,,EMOTE_HAPPY)
-    msgbox(format("They really expanded my palette."),,SPEAKER_BELEN)
-    msgbox(format("How can I serve the people of this region if the majority of the people can't afford our menu? That kid had never even heard of Cioppino. A good Cioppino? With Cloyster and Seaking? To die for!"),,SPEAKER_BELEN)
-    msgbox(format("That's why I'm making some changes. I'm reopening my restaurant, with a Pay What You Can model. Anybody can eat here and experience the best cuisine Residohas to offer."),,SPEAKER_BELEN)
-
-    msgbox(format("Wow! That's a huge change, congratulations!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
-
-    msgbox(format("I've been hard at work adjusting the menu and suppliers to make sure it'll all work, but I'm ready for the next step in the recipe. That's where you come in!"),,SPEAKER_BELEN)
-    msgbox(format("Me? But I can't really cook..."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+script Quest_Restaurantexpansion_Script_StartQuest
+{
+    buffermapname(STR_VAR_3,MAP_OROLAND)
+    bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
+    bufferspeciesname(STR_VAR_2,SPECIES_CLOYSTER)
+    msgbox(format("{PLAYER}, sorry about the restaurant in {STR_VAR_3}!"),,SPEAKER_BELEN,,EMOTE_SWEAT)
+    msgbox(format("No problem! That was a really nice thing you did."),,SPEAKER_ALICIA)
+    msgbox(format("They really expanded my palate."),,SPEAKER_BELEN)
+    msgbox(format("How can I serve the people of this region if the majority of the people can't afford our menu? That kid had never even heard of cioppino. A good cioppino? With {STR_VAR_1} and {STR_VAR_2}? To die for!"),,SPEAKER_BELEN,TAIL_SHOUT)
+    msgbox(format("That's why I'm making some changes. "),,SPEAKER_BELEN)
+    msgbox(format("I bought this abandoned nightclub a while ago, and I've been using it as a test kitchen for making new creations."),,SPEAKER_BELEN)
+    msgbox(format("I'm going to turn it into a Pay-What-You-Can model. Anybody can eat there and experience the best cuisine Resido has to offer."),,SPEAKER_BELEN)
+    msgbox(format("Wow! That's a huge change, congratulations!"),,SPEAKER_ALICIA,,EMOTE_HAPPY)
+    msgbox(format("I've been hard at work adjusting the menu and suppliers to make sure it'll all work, but I'm ready for the next step in the recipe. That's where you come in!"),,SPEAKER_BELEN,,EMOTE_HAPPY)
+    msgbox(format("Me? But I can't really cook..."),,SPEAKER_ALICIA,,EMOTE_SHOCK)
     msgbox(format("Not cooking. Outreach! You're a Trainer, and you've traveled around the region - you've met all the people that I wasn't serving before."),,SPEAKER_BELEN)
-    msgbox(format("Pokémon Centers are great places where people can gather, and the front of house there are all seen as members of their local communities. I want you to deliver meals to a few key nurses, and convince them to hang some flyers in their lobbies. What'd you say?"),,SPEAKER_BELEN)
-
-    msgbox(format("Kinda weird to be advertising food I've never eaten... but its for a good cause."),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(format("Sure, I'm happy to help."),,SPEAKER_ALICIA)
+    msgbox(format("Pokémon Centers are places where people gather, and their front of house staff are all seen as members of their local communities. I want you to deliver meals to a few key nurses and convince them to spread the word. What do you say?"),,SPEAKER_BELEN)
     closemessage
-
     startquest(QUEST_RESTAURANTEXPANSION1)
-    goto(Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue)
-}
-
-script Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue{
-    lock
-    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub1_Map)
-    call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(format("First, you're going to {STR_VAR_1}. A lot of my existing clients are there, and I want to whet their appetite for the grand re-opening."),MSGBOX_NPC,SPEAKER_BELEN)
-    lock
-    giveitem(ITEM_TEA,1)
-    msgbox(format("Wait, I thought you wanted to do a couple different places?"),,SPEAKER_ALICIA)
-    msgbox(format("Yeah, but I'm cooking the meals one at a time! I can't have you dragging soggy food around the region like Rapidoordash! Deliver that one, and then come back to me for the next one."),,SPEAKER_BELEN)
-    msgbox(format("...I regret this now."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+msgbox(format("I’ll start cooking the first dish. Come see me inside when you’re ready for the first delivery."),,SPEAKER_BELEN)
     closemessage
-    release
-    end
-}
-script Quest_Restaurantexpansion_GiveFood_TirabudinPlace_Dialogue{
-    lock
-    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub2_Map)
-    call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(format("Next on the menu is {STR_VAR_1}! Here you go."),MSGBOX_NPC,SPEAKER_BELEN)
-    giveitem(ITEM_TEA,1)
-    msgbox(format("Hey Belen, how are you paying for this new model?"),,SPEAKER_ALICIA)
-    msgbox(format("Well, my clients were in a top shelf price range - money was never an object. A lot of them won't notice if I double prices! I'll keep up the same service and excellent food... well, you get it."),,SPEAKER_BELEN)
-    closemessage
-    release
-    end
-}
-script Quest_Restaurantexpansion_GiveFood_PerlaciaCity_Dialogue{
-    lock
-    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub3_Map)
-    call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(format("Okay, now go to {STR_VAR_1}. Gotta get those techies that work downtown, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
-    giveitem(ITEM_TEA,1)
-    msgbox(format("How many of these are left?"),,SPEAKER_ALICIA)
-    msgbox(format("Just one more after this!"),,SPEAKER_BELEN)
-    closemessage
-    release
-    end
-}
-script Quest_Restaurantexpansion_GiveFood_Chasilla_Dialogue{
-    lock
-    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Sub4_Map)
-    call(Quest_Restaurantexpansion_FoodCold_Dialogue)
-    msgbox(format("Last order for the night... {STR_VAR_1}! Students have to eat too, you know?"),MSGBOX_NPC,SPEAKER_BELEN)
-    giveitem(ITEM_TEA,1)
-    msgbox(format("This is exhausting... I feel like I'm working in their kitchen!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
-    closemessage
+    applymovement(LOCALID_CAPHE_BELEN, moves(walk_up, step_end))
+    waitmovement(LOCALID_CAPHE_BELEN)
+    removeobject(LOCALID_CAPHE_BELEN)
+    playse(SE_EXIT)
+    waitse
     release
     end
 }
 
-script Quest_Restaurantexpansion_FoodCold_Dialogue{
-    checkitem(ITEM_TEA,1)
-        if (var(VAR_RESULT)){
-            msgbox(format("Okay, head to {STR_VAR_1}! The food is dying in the window, and I need delivery on the fly!"),MSGBOX_NPC,SPEAKER_BELEN,TAIL_SHOUT,EMOTE_ANGRY)
-            closemessage
-            release
-            end
-        }
-    return
+script Quest_Restaurantexpansion_Script_BlockPantry
+{
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_UNHOUSED_INSPIRED)
+    {
+        return
+    }
+
+    setmetatile(16,40,0x2A9,TRUE) // PSF TODO replace with proper boarded up tile
+    special(DrawWholeMapView)
 }
 
-script Quest_Restaurantexpansion_Active_Dialogue{
-    lock
-    call(Quest_Restaurantexpansion_CountProgress_Script)
+script Quest_Restaurantexpansion_Script_InteractBelen
+{
+    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION2,NULL)
+    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION2,NULL)
+    goto_if_quest_active(QUEST_RESTAURANTEXPANSION2,NULL)
+    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION1,NULL)
+    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion1_Dialogue_Reward)
+    goto_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_Dialogue_Active)
+}
 
-    switch(var(VAR_TEMP_0)){
-        case ESPULEE_OUTSKIRTS_NURSE: goto(Quest_Restaurantexpansion_GiveFood_EspuleeOutskirts_Dialogue)
-        case TIRABUDIN_PLACE_NURSE: goto(Quest_Restaurantexpansion_GiveFood_TirabudinPlace_Dialogue)
-        case PERLACIA_CITY_NURSE: goto(Quest_Restaurantexpansion_GiveFood_PerlaciaCity_Dialogue)
-        case CHASILLA_NURSE: goto(Quest_Restaurantexpansion_GiveFood_Chasilla_Dialogue)
+script Quest_Restaurantexpansion_Dialogue_Active
+{
+    lock
+    call(Quest_Restaurantexpansion_Script_CheckBag)
+    faceplayer
+    callnative(Script_Quest_Restaurantexpansion1_CountRemainingSubquests)
+    switch(var(VAR_RESULT))
+    {
+        case 4: goto(Quest_Restaurantexpansion_Dialogue_GiveFood1)
+        case 3: goto(Quest_Restaurantexpansion_Dialogue_GiveFood2)
+        case 2: goto(Quest_Restaurantexpansion_Dialogue_GiveFood3)
+        case 1: goto(Quest_Restaurantexpansion_Dialogue_GiveFood4)
     }
 }
 
-script Quest_Restaurantexpansion_Reward_Dialogue{
-    msgbox(format("{PLAYER}, this is excellent work, three stars!"),MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
+script Quest_Restaurantexpansion1_Dialogue_Reward
+{
+    setflag(FLAG_TEMP_12)
+    msgbox(format("{PLAYER}, this is three star work! I’m getting all sorts of new followers on Buzzr."),MSGBOX_NPC,SPEAKER_BELEN,,EMOTE_HAPPY)
     msgbox(format("It was good to help out."),,SPEAKER_ALICIA)
-    msgbox(format("Now to work on hiring..."),,SPEAKER_BELEN)
+    msgbox(format("As for your payment."),,SPEAKER_BELEN)
     closemessage
-    applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
-    setvar(VAR_BELEN_STATE,QUEST_1_COMPLETE)
+    cueobjectplayer(LOCALID_FLOWERS_BELEN)
+    giveitem(ITEM_QUEST_RESTAURANTEXPANSION1_REWARD,1)
     completequest(QUEST_RESTAURANTEXPANSION1)
-    fadescreen(FADE_TO_BLACK)
-    removeobject(BELEN_MERMEREZA_CITY)
-    fadescreen(FADE_FROM_BLACK)
+    goto(Quest_Restaurantexpansion1_Dialogue_FirstComplete)
+}
+
+script Quest_Restaurantexpansion1_Dialogue_FirstComplete
+{
+    lock
+    msgbox(format("Now to work on hiring…"),,SPEAKER_BELEN)
+    closemessage
     release
     end
 }
 
-script Quest_Restaurantexpansion_Nurse_Question_Script{
+script Quest_Restaurantexpansion1_Dialogue_Complete
+{
+    if (flag(FLAG_TEMP_12))
+    {
+        goto(Quest_Restaurantexpansion1_Dialogue_FirstComplete)
+    }
+    goto(Quest_Restaurantexpansion2_StartQuest)
+}
+
+script Quest_Restaurantexpansion_Dialogue_NoRoomForItem
+{
+    msgbox(format("I need hands, PLAYER, I got food dying in the window! Make room in your bag for something important."),MSGBOX_NPC,SPEAKER_BELEN)
+}
+
+script Quest_Restaurantexpansion_Script_CheckBag
+{
+    checkitemspace(ITEM_QUEST_RESTAURANTEXPANSION1_1,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restaurantexpansion_Dialogue_NoRoomForItem)
+
+    buffermapname(STR_VAR_1,MAP_QUEST_RESTAURANTEXPANSION1_1)
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_1,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restaurantexpansion_Dialogue_GetOverThere)
+    buffermapname(STR_VAR_1,MAP_QUEST_RESTAURANTEXPANSION1_2)
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_2,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restaurantexpansion_Dialogue_GetOverThere)
+    buffermapname(STR_VAR_1,MAP_QUEST_RESTAURANTEXPANSION1_3)
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_3,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restaurantexpansion_Dialogue_GetOverThere)
+    buffermapname(STR_VAR_1,MAP_QUEST_RESTAURANTEXPANSION1_4)
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restaurantexpansion_Dialogue_GetOverThere)
+}
+
+script Quest_Restaurantexpansion_Dialogue_GetOverThere
+{
+    msgbox(format("{PLAYER}, get over to the Pokémon Center in {STR_VAR_1}! This food has to get there at peak freshness, rapido!"),,SPEAKER_BELEN)
+
+    random(7)
+    switch(var(VAR_RESULT))
+    {
+        case 0:
+            bufferitemname(STR_VAR_1,ITEM_LIECHI_BERRY)
+            msgbox(format("I need to take the {STR_VAR_1} out of the syrup and then grind them into paste."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 1:
+            bufferitemname(STR_VAR_1,ITEM_GANLON_BERRY)
+            msgbox(format("The {STR_VAR_1} are small enough that I don’t need to cut them."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 2:
+            msgbox(format("I’ll do two sets. The first with chili paste and scallion and one with soybean paste! But how can I make the scallions more exciting?"),,SPEAKER_BELEN)
+        case 3:
+            bufferitemname(STR_VAR_1,ITEM_SHUCA_BERRY)
+            msgbox(format("I think {STR_VAR_1} oil is going to have the most favorable smoke point for these."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 4:
+            bufferspeciesname(STR_VAR_1,SPECIES_MILTANK)
+            bufferspeciesname(STR_VAR_2,SPECIES_LECHONK)
+            msgbox(format("I can keep costs down by using jackfruit instead of the usual {STR_VAR_1} {STR_VAR_2} blend… just need to make sure the umami is on point!"),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 5:
+            msgbox(format("Frying these feels so similar to empanadas!"),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 6:
+            msgbox(format("Oops, my rice flour ratio is a little off."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 7:
+            bufferitemname(STR_VAR_1,ITEM_NOMEL_BERRY)
+            bufferitemname(STR_VAR_2,ITEM_MAGOST_BERRY)
+            msgbox(format("{STR_VAR_1} - {STR_VAR_2} reduction just seems to simmer a little longer!"),,SPEAKER_BELEN,TAIL_WHISPER)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Restaurantexpansion_Dialogue_GiveFood1
+{
+msgbox(format("First, you're going to EspuleeOutskirts. A lot of my existing clients are there, and I want to whet their appetite for the grand re-opening."),,SPEAKER_BELEN)
+msgbox(format("Wait, I thought you wanted to do a couple different places?"),,SPEAKER_ALICIA)
+msgbox(format("Yeah, but I'm cooking the meals one at a time! I can't have you dragging soggy food around the region like Doordash! Deliver that one, and then come back to me for the next one."),,SPEAKER_BELEN)
+msgbox(format("...I regret this now."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+closemessage
+cueobjectplayer(LOCALID_FLOWERS_BELEN)
+giveitem(ITEM_QUEST_RESTAURANTEXPANSION1_1,1)
+setobjectmovementtype(LOCALID_FLOWERS_BELEN,MOVEMENT_TYPE_WALK_IN_PLACE_UP)
+release
+end
+}
+
+script Quest_Restaurantexpansion_Dialogue_GiveFood2
+{
+msgbox(format("Next on the menu is TirabudinPlace! Here you go."),,SPEAKER_BELEN)
+msgbox(format("Hey Belén, how are you paying for this new place?"),,SPEAKER_ALICIA)
+msgbox(format("Needles' clients were in a top shelf price range - money was never an object. "),,SPEAKER_BELEN)
+msgbox(format("A lot of them won't notice if I double prices!"),,SPEAKER_BELEN)
+msgbox(format("So I'll use the cashflow from there to fund this place!"),,SPEAKER_BELEN)
+closemessage
+cueobjectplayer(LOCALID_FLOWERS_BELEN)
+giveitem(ITEM_QUEST_RESTAURANTEXPANSION1_2,1)
+setobjectmovementtype(LOCALID_FLOWERS_BELEN,MOVEMENT_TYPE_WALK_IN_PLACE_UP)
+release
+end
+}
+
+script Quest_Restaurantexpansion_Dialogue_GiveFood3
+{
+msgbox(format("Okay, now go to Perlacia City. Gotta get those techies that work downtown, you know?"),,SPEAKER_BELEN)
+msgbox(format("How many of these are left?"),,SPEAKER_ALICIA)
+msgbox(format("Just one more after this!"),,SPEAKER_BELEN)
+closemessage
+cueobjectplayer(LOCALID_FLOWERS_BELEN)
+giveitem(ITEM_QUEST_RESTAURANTEXPANSION1_3,1)
+setobjectmovementtype(LOCALID_FLOWERS_BELEN,MOVEMENT_TYPE_WALK_IN_PLACE_UP)
+release
+end
+}
+
+script Quest_Restaurantexpansion_Dialogue_GiveFood4
+{
+msgbox(format("Last order for the night... Chasilla! Students have to eat too, you know?"),,SPEAKER_BELEN)
+msgbox(format("This is exhausting... I feel like I'm working in the kitchen!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+closemessage
+cueobjectplayer(LOCALID_FLOWERS_BELEN)
+giveitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
+setobjectmovementtype(LOCALID_FLOWERS_BELEN,MOVEMENT_TYPE_WALK_IN_PLACE_UP)
+release
+end
+}
+
+script Quest_Restaurantexpansion_Nurse_Question_Script
+{
     specialvar(VAR_0x8004,GetCurrentMap)
 
-        switch(var(VAR_0x8004)){
-            case MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_EspuleeOutskirts_Nurse_Dialogue)
-            case MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_TirabudinPlace_NurseDialogue)
-            case MAP_PERLACIA_CITY_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_PerlaciaCity_Nurse_Dialogue)
-            case MAP_CHASILLA_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue)
-            default: return
-        }
-    return
-}
-
-script Quest_Restaurantexpansion_EspuleeOutskirts_Nurse_Dialogue{
-    setvar(VAR_TEMP_0,0)
-
-    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_CountProgress_Script)
-
-    checkitem(ITEM_TEA,1)
-    if (!var(VAR_RESULT) || var(VAR_TEMP_0) != ESPULEE_OUTSKIRTS_NURSE){
-        return
-    }
-subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
-    removeitem(ITEM_TEA,1)
-
-    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
-    msgbox(format("Yes, I absolutely love their Tauros Burrito!"),,SPEAKER_NURSE)
-    msgbox(format("They're launching a new menu, and sent over a meal for you to try. And if you like it..."),,SPEAKER_ALICIA)
-    closemessage
-    call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(format("This is delicious wow! I'll absolutely tell people about this. And yeah, you can hang that right there."),,SPEAKER_NURSE,,EMOTE_LOVE)
-    closemessage
-    applymovement(NURSE,Common_Movement_FaceDown)
-    waitmovement(NURSE)
-    msgbox(format("That went well!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    closemessage
-    return
-}
-
-script Quest_Restaurantexpansion_TirabudinPlace_NurseDialogue{
-    setvar(VAR_TEMP_0,0)
-
-    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_CountProgress_Script)
-
-    checkitem(ITEM_TEA,1)
-    if (!var(VAR_RESULT) || var(VAR_TEMP_0) != TIRABUDIN_PLACE_NURSE){
-        return
-    }
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
-    removeitem(ITEM_TEA,1)
-
-    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
-    msgbox(format("Nah, that's some rich people food, you know?."),,SPEAKER_NURSE)
-    msgbox(format("The owner is moving to a Pay What You Can model, which is why I'm here! They want you to try some of their new menu items and see if you like..."),,SPEAKER_ALICIA)
-    closemessage
-    call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(format("Okay, this is pretty tight. And you said its cheaper now? Okay, I'll have to check it out soon. And yeah, that flyer right there is perfect."),,SPEAKER_NURSE,,EMOTE_LOVE)
-    msgbox(format("Two down!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    applymovement(NURSE,Common_Movement_FaceDown)
-    closemessage
-    return
-}
-
-script Quest_Restaurantexpansion_PerlaciaCity_Nurse_Dialogue{
-    setvar(VAR_TEMP_0,0)
-
-    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_CountProgress_Script)
-
-    checkitem(ITEM_TEA,1)
-    if (!var(VAR_RESULT) || var(VAR_TEMP_0) != PERLACIA_CITY_NURSE){
-        return
-    }
-subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
-    removeitem(ITEM_TEA,1)
-
-    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
-    msgbox(format("No, they never had salads and that's really what I'm into right now!"),,SPEAKER_NURSE)
-    msgbox(format("They're changing up their menu and expanding their options. I brought some, free of charge for you to try..."),,SPEAKER_ALICIA)
-    closemessage
-    call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(format("I don't know if its better than a salad, but its tasty for sure. I'll mention it to hungry Trainers. Put the flyers wherever you want!"),,SPEAKER_NURSE,,EMOTE_LOVE)
-    msgbox(format("I don't think Belen realizes what he's dealing with out here..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    applymovement(NURSE,Common_Movement_FaceDown)
-    closemessage
-    return
-}
-
-script Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue{
-    setvar(VAR_TEMP_0,0)
-
-    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_CountProgress_Script)
-
-    checkitem(ITEM_TEA,1)
-    if (!var(VAR_RESULT) || var(VAR_TEMP_0) != CHASILLA_NURSE){
-        return
-    }
-subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
-    removeitem(ITEM_TEA,1)
-
-    msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
-    msgbox(format("That place is too up tight, I just want somewhere casual I can eat between classes, you know?"),,SPEAKER_NURSE)
-    msgbox(format("They're doing a total makeover to be more relaxed, and I brought over a free meal! And I wanted to hand some posters..."),,SPEAKER_ALICIA)
-    closemessage
-    call(Quest_Restaurantexpansion_HangPoster_Script)
-    msgbox(format("Chill vibes and good food? That's my kind of spot. I can talk this up all day. And yeah, right by the PC, good spot for that poster."),,SPEAKER_NURSE)
-    //bufferstring(STR_VAR_1,gText_Quest_RestaurantExpansion1_Map)
-    msgbox(format("The last one! Time to head back to {STR_VAR_1}, finally."),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    applymovement(NURSE,Common_Movement_FaceDown)
-    closemessage
-    return
-}
-
-script Quest_Restaurantexpansion_ProgressToReward_Script{
-    call(Quest_Restaurantexpansion_CountProgress_Script)
-    if(var(VAR_TEMP_0) == ALL_NURSE){
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTAURANTEXPANSION1)
-    }
-    return
-}
-
-script Quest_Restaurantexpansion_HangPoster_Script{
-    call(Quest_Restaurantexpansion_ProgressToReward_Script)
-    fadescreen(FADE_TO_BLACK)
-    setobjectxy(PLAYER,12,2)
-    TeleportCamera(12,2)
-    applymovement(PLAYER,Common_Movement_FaceLeft)
-    applymovement(NURSE,Common_Movement_FaceRight)
-
-    specialvar(VAR_0x8004,GetCurrentMap)
-
-        switch(var(VAR_0x8004)){
-        case MAP_PERLACIA_CITY_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_PerlaciaCity_HangPosterTile_Script)
-        case MAP_CHASILLA_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_Chasilla_HangPosterTile_Script)
-        case MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_TirabudinPlace_HangPosterTile_Script)
-        case MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_EspuleeOutskirts_HangPosterTile_Script)
+    switch(var(VAR_0x8004))
+    {
+        case MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_EspuleeOutskirts_Nurse_Dialogue)
+        case MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_TirabudinPlace_NurseDialogue)
+        case MAP_PERLACIA_CITY_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_PerlaciaCity_Nurse_Dialogue)
+        case MAP_CHASILLA_POKEMON_CENTER_1F: call(Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue)
         default: return
     }
-    delay(8)
-    fadescreen(FADE_FROM_BLACK)
     return
 }
 
-script Quest_Restaurantexpansion_TirabudinPlace_HangPosterTile_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
-    if (var(VAR_RESULT)){
-    setmetatile(12,0,0x24D,TRUE)
-    setmetatile(12,1,0x255,TRUE)
-    special(DrawWholeMapView)
-    }
-    return
-}
-
-script Quest_Restaurantexpansion_EspuleeOutskirts_HangPosterTile_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
-    if (var(VAR_RESULT)){
-    setmetatile(12,0,0x24D,TRUE)
-    setmetatile(12,1,0x255,TRUE)
-    special(DrawWholeMapView)
-    }
-    return
-}
-
-script Quest_Restaurantexpansion_Chasilla_HangPosterTile_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
-    if (var(VAR_RESULT)){
-    setmetatile(12,0,0x24D,TRUE)
-    setmetatile(12,1,0x255,TRUE)
-    special(DrawWholeMapView)
-    }
-    return
-}
-
-script Quest_Restaurantexpansion_PerlaciaCity_HangPosterTile_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
-    if (var(VAR_RESULT)){
-    setmetatile(12,0,0x24D,TRUE)
-    setmetatile(12,1,0x255,TRUE)
-    special(DrawWholeMapView)
-    }
-    return
-}
-
-script Quest_Restaurantexpansion_CountProgress_Script{
-    setvar(VAR_TEMP_0,0)
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
-        if(var(VAR_RESULT)){
-            addvar(VAR_TEMP_0,1)
-        }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
-        if(var(VAR_RESULT)){
-            addvar(VAR_TEMP_0,1)
-        }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
-        if(var(VAR_RESULT)){
-            addvar(VAR_TEMP_0,1)
-        }
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
-        if(var(VAR_RESULT)){
-            addvar(VAR_TEMP_0,1)
-        }
+script Quest_Restaurantexpansion_EspuleeOutskirts_Nurse_Dialogue
+{
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_1,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
         return
+    }
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
+    callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
+    removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_1,1)
+bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
+msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+msgbox(format("Yes, I absolutely love their {STR_VAR_1} Burrito!"),,SPEAKER_NURSE)
+closemessage
+cueobjecttalking(LOCALID_PLAYER)
+msgbox(format("They're launching a new restaurant, and sent over a meal for you to try. And if you like it… "),,SPEAKER_ALICIA)
+fadescreen(FADE_TO_BLACK)
+fadescreen(FADE_FROM_BLACK)
+msgbox(format("This is delicious wow! I'll absolutely tell people about this."),,SPEAKER_NURSE)
+msgbox(format("That went well!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
+closemessage
+release
+end
 }
 
-movement Quest_Restaurantexpansion_WalkToShop_Movement{
-    walk_left * 28
-    step_end
+script Quest_Restaurantexpansion_TirabudinPlace_NurseDialogue
+{
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_2,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
+    callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
+    removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_2,1)
+msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+msgbox(format("Nah, that's some rich people's food, you know?"),,SPEAKER_NURSE)
+msgbox(format("The owner is opening another restaurant with a Pay-What-You-Can model, which is why I'm here! They want you to try some of their new menu items and see if you like."),,SPEAKER_ALICIA)
+closemessage
+cueobjecttalking(LOCALID_PLAYER)
+fadescreen(FADE_TO_BLACK)
+fadescreen(FADE_FROM_BLACK)
+msgbox(format("Okay, this is pretty tight. And you said it's cheaper than Needles? Okay, I'll have to check it out soon. I’ll talk it up!"),,SPEAKER_NURSE)
+msgbox(format("Two down!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
+closemessage
+release
+end
 }
 
-movement Quest_Restaurantexpansion_WalkToLeader_Movement{
-    walk_up * 5
-    step_end
-}
-movement Quest_Restaurantexpansion_WalkAway_Movement{
-    walk_down * 2
-    step_end
+script Quest_Restaurantexpansion_PerlaciaCity_Nurse_Dialogue
+{
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_3,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
+    callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
+    removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_3,1)
+msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+msgbox(format("No, they never had salads and that's really what I'm into right now!"),,SPEAKER_NURSE)
+closemessage
+cueobjecttalking(LOCALID_PLAYER)
+msgbox(format("They're opening another restaurant with a new menu and expanding their options. I brought some, free of charge for you to try… "),,SPEAKER_NURSE)
+fadescreen(FADE_TO_BLACK)
+fadescreen(FADE_FROM_BLACK)
+msgbox(format("I don't know if its better than a salad, but its tasty for sure. I'll mention it to hungry Trainers."),,SPEAKER_NURSE)
+closemessage
+release
+end
 }
 
-movement Quest_Restaurantexpansion_ReturnToDoor_Movement{
-    walk_up * 2
-    step_end
-}
+script Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue
+{
+    checkitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
 
-movement Quest_Restaurantexpansion_WalkInside_Movement{
-    walk_left * 8
-    step_end
-}
-
-text gText_Restaurantexpansion_HelloPlayer{
-    format("Hello {PLAYER}. What a delicious surprise!")
-}
-text gText_Restaurantexpansion_AreYouHere{
-    format("Are you here for the grand re-opening of the updated menu for Millenium Bakery?")
-}
-text gText_Restaurantexpansion_IDidntEven{
-    format("I didn't even know that was a thing...")
-}
-text gText_Restaurantexpansion_OhCome{
-    format("Oh! Come on, we'll go together.")
-}
-text gText_Restaurantexpansion_IfMyRestaurant{
-    format("If my restaurant is going to be at the peak of Residoculinary culture, there's a lot of work happening in the front of house to make that happen. I have to make sure I understand region's preferred palettes, while also making sure I can continually elevate the plates that leave my line.")
-}
-text gText_Restaurantexpansion_ITry{
-    format("I try to stay ahead of the tickets, one resturant opening at a time.")
-}
-text gText_Restaurantexpansion_WhatDoMeanByElevate{
-    format("What do you mean by elevate?")
-}
-text gText_Restaurantexpansion_TheBestCooksAndFreshest{
-    format("I'm not just trying to plate up Residocuisine, I'm serving the best cuts of Residocuisine. Freshest ingredients from the ground, finest Kalosian chefs, with no expense spared. I want my food to be the definitive dining experience of Resido!")
-}
-text gText_Restaurantexpansion_HeyManYouGot{
-    format("Hey man, you got a couple dollars for food.")
-}
-text gText_Restaurantexpansion_SorryIDont{
-    format("Sorry, I don't have anything.")
-}
-text gText_Restaurantexpansion_ItsCool{
-    format("Its cool. Come on, little man.")
-}
-text gText_Restaurantexpansion_WaitHoldOn{
-    format("Wait! Hold on.")
-}
-text gText_Restaurantexpansion_CanIActually{
-    format("Can I actually buy you dinner?")
-}
-text gText_Restaurantexpansion_WaitReally{
-    format("Wait, really? That's awful nice man.")
-}
-text gText_Restaurantexpansion_YeahThisPlaceJust{
-    format("This restaurant is experimenting with a blend of flavors tonight, and I want - hold on.")
-}
-text gText_Restaurantexpansion_PlayerComeTo{
-    format("{PLAYER}, we'll have to take a raincheck. Come see me in MermerezaCity soon!")
-}
-text gText_Restaurantexpansion_PlayerSorryAbout{
-	format("{PLAYER}, sorry about the restaurant in Oroland!")
-}
-text gText_Restaurantexpansion_NoProblemThat{
-	format("No problem! That was a really nice thing you did.")
-}
-text gText_Restaurantexpansion_TheyReallyOpened{
-	format("They really expanded my palette.")
-}
-text gText_Restaurantexpansion_HowCanI{
-	format("How can I serve the people of this region if the majority of the people can't afford our menu? That kid had never even heard of Cioppino. A good Cioppino? With Cloyster and Seaking? To die for!")
-}
-text gText_Restaurantexpansion_ThatsWhy{
-	format("That's why I'm making some changes. I'm reopening my restaurant, with a Pay What You Can model. Anybody can eat here and experience the best cuisine Residohas to offer.")
-}
-text gText_Restaurantexpansion_Wow{
-	format("Wow! That's a huge change, congratulations!")
-}
-text gText_Restaurantexpansion_IveBeenHardAtWork{
-	format("I've been hard at work adjusting the menu and suppliers to make sure it'll all work, but I'm ready for the next step in the recipe. That's where you come in!")
-}
-text gText_Restaurantexpansion_MeICant{
-	format("Me? But I can't really cook...")
-}
-text gText_Restaurantexpansion_NotCookingOutreach{
-	format("Not cooking. Outreach! You're a Trainer, and you've traveled around the region - you've met all the people that I wasn't serving before.")
-}
-text gText_Restaurantexpansion_IWantToWorkWith{
-	format("Pokémon Centers are great places where people can gather, and the front of house there are all seen as members of their local communities. I want you to deliver meals to a few key nurses, and convince them to hang some flyers in their lobbies. What'd you say?")
-}
-text gText_Restaurantexpansion_KindaWeird{
-	format("Kinda weird to be advertising food I've never eaten... but its for a good cause.")
-}
-text gText_Restaurantexpansion_SureICan{
-	format("Sure, I'm happy to help.")
-}
-text gText_Restaurantexpansion_FirstYoureGoing{
-	format("First, you're going to {STR_VAR_1}. A lot of my existing clients are there, and I want to whet their appetite for the grand re-opening.")
-}
-text gText_Restaurantexpansion_WaitOnlyOne{
-	format("Wait, I thought you wanted to do a couple different places?")
-}
-text gText_Restaurantexpansion_OfCourse{
-	format("Yeah, but I'm cooking the meals one at a time! I can't have you dragging soggy food around the region like Rapidoordash! Deliver that one, and then come back to me for the next one.")
-}
-text gText_Restaurantexpansion_IRegret{
-	format("...I regret this now.")
-}
-text gText_Restaurantexpansion_NextIs{
-	format("Next on the menu is {STR_VAR_1}! Here you go.")
-}
-text gText_Restaurantexpansion_HowAreYouPaying{
-	format("Hey Belen, how are you paying for this new model?")
-}
-text gText_Restaurantexpansion_WellMyClients{
-    format("Well, my clients were in a top shelf price range - money was never an object. A lot of them won't notice if I double prices! I'll keep up the same service and excellent food... well, you get it.")
-}
-text gText_Restaurantexpansion_NowGoTo{
-	format("Okay, now go to {STR_VAR_1}. Gotta get those techies that work downtown, you know?")
-}
-text gText_Restaurantexpansion_HowManyOf{
-	format("How many of these are left?")
-}
-text gText_Restaurantexpansion_JustOneMore{
-	format("Just one more after this!")
-}
-text gText_Restaurantexpansion_LastOne{
-	format("Last order for the night... {STR_VAR_1}! Students have to eat too, you know?")
-}
-
-text gText_Restaurantexpansion_ThisIsExhausting{
-	format("This is exhausting... I feel like I'm working in their kitchen!")
-}
-text gText_Restaurantexpansion_GottaGoBeforeIt{
-	format("Okay, head to {STR_VAR_1}! The food is dying in the window, and I need delivery on the fly!")
-}
-text gText_Restaurantexpansion_PlayerThisIs{
-	format("{PLAYER}, this is excellent work, three stars!")
-}
-text gText_Restaurantexpansion_Itwasgood{
-	format("It was good to help out.")
-}
-text gText_Restaurantexpansion_NowToWorkOnHiring{
-	format("Now to work on hiring...")
-}
-text gText_Restaurantexpansion_ActuallyQuestion{
-	format("Actually, I have a question. Have you eaten at Needles?")
-}
-text gText_Restaurantexpansion_YesILove{
-	format("Yes, I absolutely love their Tauros Burrito!")
-}
-text gText_Restaurantexpansion_TheyreLaunchingANew{
-	format("They're launching a new menu, and sent over a meal for you to try. And if you like it...")
-}
-text gText_Restaurantexpansion_ThisIsDelicious{
-	format("This is delicious wow! I'll absolutely tell people about this. And yeah, you can hang that right there.")
-}
-text gText_Restaurantexpansion_ThatWentWell{
-	format("That went well!")
-}
-text gText_Restaurantexpansion_NahThatsSomeRich{
-	format("Nah, that's some rich people food, you know?.")
-}
-text gText_Restaurantexpansion_TheOwnerIsMoving{
-	format("The owner is moving to a Pay What You Can model, which is why I'm here! They want you to try some of their new menu items and see if you like...")
-}
-text gText_Restaurantexpansion_OkayThisIs{
-	format("Okay, this is pretty tight. And you said its cheaper now? Okay, I'll have to check it out soon. And yeah, that flyer right there is perfect.")
-}
-text gText_Restaurantexpansion_TwoDown{
-	format("Two down!")
-}
-text gText_Restaurantexpansion_NoIDontReally{
-	format("No, they never had salads and that's really what I'm into right now!")
-}
-text gText_Restaurantexpansion_TheyreChangingTheir{
-	format("They're changing up their menu and expanding their options. I brought some, free of charge for you to try...")
-}
-text gText_Restaurantexpansion_FancyOrNot{
-	format("I don't know if its better than a salad, but its tasty for sure. I'll mention it to hungry Trainers. Put the flyers wherever you want!")
-}
-text gText_Restaurantexpansion_IDontThinkLeader{
-	format("I don't think Belen realizes what he's dealing with out here...")
-}
-text gText_Restaurantexpansion_TheyDontHaveMy{
-	format("That place is too up tight, I just want somewhere casual I can eat between classes, you know?")
-}
-text gText_Restaurantexpansion_TheyreAddingNew{
-	format("They're doing a total makeover to be more relaxed, and I brought over a free meal! And I wanted to hand some posters...")
-}
-text gText_Restaurantexpansion_ChillVibes{
-    format("Chill vibes and good food? That's my kind of spot. I can talk this up all day. And yeah, right by the PC, good spot for that poster.")
-}
-text gText_Restaurantexpansion_TheLastOne{
-    format("The last one! Time to head back to {STR_VAR_1}, finally.")
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
+    callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
+    removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
+    buffermapname(STR_VAR_1,MAP_CAPHE_CITY_PANTRY)
+msgbox(format("Actually, I have a question. Have you eaten at Needles?"),,SPEAKER_ALICIA)
+msgbox(format("That place is too uptight, I just want somewhere casual I can eat between classes, you know?"),,SPEAKER_NURSE)
+msgbox(format("They're opening a new restaurant that is going to be relaxed, and I brought over a free meal!"),,SPEAKER_ALICIA)
+closemessage
+cueobjecttalking(LOCALID_PLAYER)
+fadescreen(FADE_TO_BLACK)
+fadescreen(FADE_FROM_BLACK)
+msgbox(format("Chill vibes and good food? That's my kind of spot. I can talk this up all day."),,SPEAKER_NURSE)
+msgbox(format("The last one! Time to head back to {STR_VAR_1}."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
+closemessage
+release
+end
 }

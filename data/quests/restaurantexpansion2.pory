@@ -234,8 +234,8 @@ script Quest_Restaurantexpansion2_Reward_Dialogue{
     msgbox(format("Take this for all your help."),,SPEAKER_BELEN)
     msgbox(format("If you're ever looking for a rematch, come see me at the Gym. I'd love to go all out against you!"),,SPEAKER_BELEN)
     closemessage
-    applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
-    setvar(VAR_BELEN_STATE,QUEST_2_COMPLETE)
+    //applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2)
        setflag(FLAG_FACILITY_UNLOCK_BELEN)
     completequest(QUEST_RESTAURANTEXPANSION2)
     fadescreen(FADE_TO_BLACK)
