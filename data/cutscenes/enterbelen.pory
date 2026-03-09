@@ -273,7 +273,7 @@ script EnterBelen_Dialogue_StartPuzzle1
 {
     if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_1)
     {
-        msgbox(format("Good luck on the Line!"),,SPEAKER_MERMEREZAGYMSERVER)
+        msgbox(format("Good luck on the Line!"),,SPEAKER_MERMEREZAGYMSERVERA)
         closemessage
         release
         end
@@ -292,14 +292,14 @@ script EnterBelen_Dialogue_StartPuzzle1
 script EnterBelen_Script_ExplainPuzzle1
 {
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_1)
-    msgbox(format("In the Needles Plating Room, our staff arranges the finest food in Resido, making sure every dish looks as good as it tastes."),,SPEAKER_MERMEREZAGYMSERVER)
-    msgbox(format("It can be very hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("In the Needles Plating Room, our staff arranges the finest food in Resido, making sure every dish looks as good as it tastes."),,SPEAKER_MERMEREZAGYMSERVERA)
+    msgbox(format("It can be very hectic at times!"),,SPEAKER_MERMEREZAGYMSERVERA)
     goto(EnterBelen_Script_StartPuzzle1)
 }
 
 script EnterBelen_Script_StartPuzzle1
 {
-    msgbox(format(" Our Gym Trainer is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format(" Our Gym Trainer is here -"),,SPEAKER_MERMEREZAGYMSERVERA)
     waitmessage
     closemessage
     special(SpawnCameraObject)
@@ -312,7 +312,7 @@ script EnterBelen_Script_StartPuzzle1
     playse(SE_BIKE_HOP)
     waitse
     waitmovement(LOCALID_MERMEREZA_GYM_1_3)
-    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVERA)
     waitmessage
     closemessage
 
@@ -329,7 +329,7 @@ script EnterBelen_Script_StartPuzzle1
     applymovement(OBJ_EVENT_ID_CAMERA, moves(walk_down * 3))
     waitmovement(OBJ_EVENT_ID_CAMERA)
     special(RemoveCameraObject)
-    msgbox(format("But don't disturb our other staff!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("But don't disturb our other staff!"),,SPEAKER_MERMEREZAGYMSERVERA)
     closemessage
     release
     end
@@ -346,7 +346,7 @@ script EnterBelen_Dialogue_StartPuzzle2
 {
     if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
-        msgbox(format("Good luck in the Prep Kitchen!"),,SPEAKER_MERMEREZAGYMSERVER)
+        msgbox(format("Good luck in the Prep Kitchen!"),,SPEAKER_MERMEREZAGYMSERVERB)
         closemessage
         release
         end
@@ -365,8 +365,8 @@ script EnterBelen_Dialogue_StartPuzzle2
 script EnterBelen_Script_ExplainPuzzle2
 {
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_2)
-    msgbox(format("Here on the Line, the finest chefs in Resido create the dishes found on Needles' menu. This is where the magic happens."),,SPEAKER_MERMEREZAGYMSERVER)
-    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("Here on the Line, the finest chefs in Resido create the dishes found on Needles' menu. This is where the magic happens."),,SPEAKER_MERMEREZAGYMSERVERB)
+    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVERB)
     closemessage
     moveobjecttocoords(LOCALID_PLAYER,6,7,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
@@ -375,7 +375,7 @@ script EnterBelen_Script_ExplainPuzzle2
 
 script EnterBelen_Script_StartPuzzle2
 {
-    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVERB)
     closemessage
     applymovement(LOCALID_MERMEREZA_GYM_2_4,moves(jump_in_place_up * 2))
     playse(SE_BIKE_HOP)
@@ -383,7 +383,7 @@ script EnterBelen_Script_StartPuzzle2
     playse(SE_BIKE_HOP)
     waitse
     waitmovement(LOCALID_MERMEREZA_GYM_2_4)
-    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVERB)
     waitmessage
     closemessage
         applymovement(LOCALID_MERMEREZA_GYM_2_1, moves(face_down, walk_in_place_down * 3, walk_right * 4, walk_down, face_right, delay_16, walk_left * 2, walk_down * 5, face_left, walk_in_place_left * 5, walk_up * 5, face_left))
@@ -417,7 +417,7 @@ script EnterBelen_Dialogue_StartPuzzle3
 {
     if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
-        msgbox(format("Good luck against Belen!"),,SPEAKER_MERMEREZAGYMSERVER)
+        msgbox(format("Good luck against Belen!"),,SPEAKER_MERMEREZAGYMSERVERC)
         closemessage
         release
         end
@@ -436,8 +436,8 @@ script EnterBelen_Dialogue_StartPuzzle3
 script EnterBelen_Script_ExplainPuzzle3
 {
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_3)
-    msgbox(format("Needles' Prep Kitchen is where all the ingredients are prepared. Every slice, measurement and stir is done with precision."),,SPEAKER_MERMEREZAGYMSERVER)
-    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("Needles' Prep Kitchen is where all the ingredients are prepared. Every slice, measurement and stir is done with precision."),,SPEAKER_MERMEREZAGYMSERVERC)
+    msgbox(format("It can be really hectic at times!"),,SPEAKER_MERMEREZAGYMSERVERC)
     closemessage
     goto(EnterBelen_Script_StartPuzzle3)
 }
@@ -446,7 +446,7 @@ script EnterBelen_Script_StartPuzzle3
 {
     moveobjecttocoords(LOCALID_PLAYER,8,7,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
-    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVERC)
     closemessage
     applymovement(LOCALID_MERMEREZA_GYM_3_8,moves(jump_in_place_up * 2))
     playse(SE_BIKE_HOP)
@@ -454,7 +454,7 @@ script EnterBelen_Script_StartPuzzle3
     playse(SE_BIKE_HOP)
     waitse
     waitmovement(LOCALID_MERMEREZA_GYM_3_8)
-    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVER)
+    msgbox(format("- so just talk to them to battle them!"),,SPEAKER_MERMEREZAGYMSERVERC)
     waitmessage
     closemessage
     applymovement(LOCALID_MERMEREZA_GYM_3_1, moves(walk_fast_down * 2, walk_fast_right * 2, face_up, delay_16 * 3, walk_fast_right, walk_fast_down * 2, walk_fast_left * 2, face_down, walk_right * 4, walk_up, emote_question_mark, face_left, face_right, walk_fast_up * 4, walk_fast_right * 3, walk_fast_down * 3, walk_fast_left, face_up, emote_exclamation_mark, walk_down * 2, walk_right, walk_down * 2, walk_right * 2, walk_up * 3, face_right))
