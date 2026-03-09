@@ -238,6 +238,13 @@
       "elevation": 0,
       "dest_map": "MAP_CHASILLA",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 20,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_CHASILLA_MOCHI_SHOP",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
