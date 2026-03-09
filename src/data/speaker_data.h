@@ -2474,6 +2474,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+        [SPEAKER_MERMEREZAGYMEXPEDITORC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorC"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
     [SPEAKER_MERMEREZAGYMLINECOOKA] =
     {
         .name = COMPOUND_STRING("MermerezagymlinecookA"),
@@ -2490,6 +2498,46 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_MERMEREZAGYMLINECOOKC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookC"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookD"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookE"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookF"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookG"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
     [SPEAKER_MERMEREZAGYMPREPCHEFA] =
     {
         .name = COMPOUND_STRING("MermerezagymprepchefA"),
@@ -2501,6 +2549,70 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_MERMEREZAGYMPREPCHEFB] =
     {
         .name = COMPOUND_STRING("MermerezagymprepchefB"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefC"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefD"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefE"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefF"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefG"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFH] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefH"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFI] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefI"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFJ] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefJ"),
         .title = COMPOUND_STRING("Needles Prep Chef"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bill,

@@ -619,7 +619,7 @@ script EnterBelen_Dialogue_WrongExpo1
 
 script EnterBelen_Dialogue_WrongExpo2
 {
-    msgbox(format("If you're not bringing me more Berry glaze, get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("If you're not bringing me more Berry glaze, get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORC,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
     {
         call(EnterBelen_Script_ResetPuzzle1)
@@ -632,7 +632,7 @@ script EnterBelen_Dialogue_WrongLine1
 {
     bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
     bufferspeciesname(STR_VAR_2,SPECIES_CLOYSTER)
-    msgbox(format("The {STR_VAR_1} and {STR_VAR_2} have to go in a different times... I need to concentrate!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("The {STR_VAR_1} and {STR_VAR_2} have to go in a different times... I need to concentrate!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
     {
     call(EnterBelen_Script_ResetPuzzle2)
@@ -643,7 +643,7 @@ script EnterBelen_Dialogue_WrongLine1
 
 script EnterBelen_Dialogue_WrongLine8
 {
-    msgbox(format("Cioppino only works if the temperature is perfect, both in and outside the pot. You're messsing that up!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Cioppino only works if the temperature is perfect, both in and outside the pot. You're messsing that up!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -654,7 +654,7 @@ script EnterBelen_Dialogue_WrongLine8
 
 script EnterBelen_Dialogue_WrongLine2
 {
-        msgbox(format("This broth needs constant attention. Get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("This broth needs constant attention. Get out!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKC,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -665,7 +665,7 @@ script EnterBelen_Dialogue_WrongLine2
 
 script EnterBelen_Dialogue_WrongLine7
 {
-        msgbox(format("Perfect conchas mean no interruptions. Begone!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Perfect conchas mean no interruptions. Begone!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKD,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -677,7 +677,7 @@ script EnterBelen_Dialogue_WrongLine7
 script EnterBelen_Dialogue_WrongLine5
 {
     bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
-        msgbox(format("Overcooked {STR_VAR_1} strips are unacceptable - you need to get off the Line!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Overcooked {STR_VAR_1} strips are unacceptable - you need to get off the Line!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKE,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -688,7 +688,7 @@ script EnterBelen_Dialogue_WrongLine5
 
 script EnterBelen_Dialogue_WrongLine3
 {
-        msgbox(format("Berry glaze sets instantly. Out of the kitchen!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKA,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Berry glaze sets instantly. Out of the kitchen!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKF,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -699,7 +699,7 @@ script EnterBelen_Dialogue_WrongLine3
 
 script EnterBelen_Dialogue_WrongLine6
 {
-    msgbox(format("If these conchas bake for a second too long, they end up too dry. No hovering!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("If these conchas bake for a second too long, they end up too dry. No hovering!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMLINECOOKG,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
         call(EnterBelen_Script_ResetPuzzle2)
@@ -735,7 +735,7 @@ script EnterBelen_Dialogue_WrongPrep1
 script EnterBelen_Dialogue_WrongPrep4
 {
     bufferspeciesname(STR_VAR_1,SPECIES_SEAKING)
-    msgbox(format("If {STR_VAR_1} isn't prepped perfectly, the Cioppino will be ruined. Outta my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("If {STR_VAR_1} isn't prepped perfectly, the Cioppino will be ruined. Outta my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFC,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -747,7 +747,7 @@ script EnterBelen_Dialogue_WrongPrep4
 script EnterBelen_Dialogue_WrongPrep7
 {
     bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
-    msgbox(format("The {STR_VAR_1} strips are marinating. No time to talk!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("The {STR_VAR_1} strips are marinating. No time to talk!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFD,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -759,7 +759,7 @@ script EnterBelen_Dialogue_WrongPrep7
 script EnterBelen_Dialogue_WrongPrep2
 {
     bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
-    msgbox(format("The spice mix for the {STR_VAR_1} burritos has to be perfect down to the gram. If you're not helping, you're hurting!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("The spice mix for the {STR_VAR_1} burritos has to be perfect down to the gram. If you're not helping, you're hurting!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFE,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -772,7 +772,7 @@ script EnterBelen_Dialogue_WrongPrep5
 {
     buffernumberstring(STR_VAR_2,40)
     bufferspeciesname(STR_VAR_1,SPECIES_TAUROS)
-    msgbox(format("There's {STR_VAR_2} {STR_VAR_1} burritos that need to be prepped, and you're going to make it take even longer!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("There's {STR_VAR_2} {STR_VAR_1} burritos that need to be prepped, and you're going to make it take even longer!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFF,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -783,7 +783,7 @@ script EnterBelen_Dialogue_WrongPrep5
 
 script EnterBelen_Dialogue_WrongPrep6
 {
-    msgbox(format("Concha dough will collapse if the timing is wrong. Go away!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Concha dough will collapse if the timing is wrong. Go away!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFG,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -794,7 +794,7 @@ script EnterBelen_Dialogue_WrongPrep6
 
 script EnterBelen_Dialogue_WrongPrep3
 {
-    msgbox(format("The berry glaze needs to be perfectly mixed... and my mixing arm is going to hit you!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("The berry glaze needs to be perfectly mixed... and my mixing arm is going to hit you!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFH,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -805,7 +805,7 @@ script EnterBelen_Dialogue_WrongPrep3
 
 script EnterBelen_Dialogue_WrongPrep11
 {
-    msgbox(format("These conchas needs to be proof, and I can't have you breathing on everything!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFA,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("These conchas needs to be proof, and I can't have you breathing on everything!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFI,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
@@ -816,7 +816,7 @@ script EnterBelen_Dialogue_WrongPrep11
 
 script EnterBelen_Dialogue_WrongPrep9
 {
-    msgbox(format("Pasty prep requires total focus. Out of my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Pasty prep requires total focus. Out of my way!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMPREPCHEFJ,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {
         call(EnterBelen_Script_ResetPuzzle3)
