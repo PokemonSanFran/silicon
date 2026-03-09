@@ -1537,10 +1537,10 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
-    [SPEAKER_JORIS] =
+    [SPEAKER_HUNGRYPARENT] =
     {
-        .name = COMPOUND_STRING("Joris"),
-        .title = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Hungryparent"),
+        .title = COMPOUND_STRING("Adult"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
@@ -2626,9 +2626,25 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
-    [SPEAKER_MERMEREZAGYMSERVER] =
+    [SPEAKER_MERMEREZAGYMSERVERA] =
     {
-        .name = COMPOUND_STRING("Mermerezagymserver"),
+        .name = COMPOUND_STRING("MermerezagymserverA"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverB"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverC"),
         .title = COMPOUND_STRING("Needles Server"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bill,

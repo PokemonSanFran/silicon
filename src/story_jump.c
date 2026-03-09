@@ -762,8 +762,7 @@ void FlagsVarWarp_EnterFallkner()
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
     Buzzr_MarkTweetAsRead(TWEET_GYM_MERMEREZA_CITY_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_BELEN);
-    VarSet(VAR_BELEN_STATE, BATTLE_1_COMPLETE);
-    VarSet(VAR_GYM_1_STATE, GYM_DEFEATED_LEADER);
+    VarSet(VAR_GYM_1_STATE, MERMEREZA_GYM_DEFEATED_LEADER);
     IncrementStorylineVariable();
     WowYoureStrong_GetBadgesAndSetTowerState();
     SetWarpDestination(MAP_GROUP(MAP_MERMEREZA_CITY_GYM),MAP_NUM(MAP_MERMEREZA_CITY_GYM),0,USE_WARP_ID,USE_WARP_ID);

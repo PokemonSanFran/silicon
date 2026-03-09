@@ -170,7 +170,6 @@
 #define VAR_CHASILLA_STATE                               0x4080 // PSF Var
 #define VAR_CURENO_PORT_STATE                               0x4081 // PSF Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_BELEN_STATE                                0x4082 // PSF Var
 #define VAR_FERRYBUILDING_STATE                                0x4083 // PSF Var
 #define VAR_BIRCH_LAB_STATE                              0x4084
 #define VAR_WAREHOUSE_RAVE_STATE                         0x4084 // PSF Var

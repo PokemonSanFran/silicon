@@ -26,7 +26,7 @@ script EnterBelen_Script_InteractHost
 {
     lock
     faceplayer
-    call_if_ge(VAR_BELEN_STATE,QUEST_2_COMPLETE,EnterBelen_Dialogue_ExplainBelenRematch)
+    call_if_quest_complete(QUEST_RESTAURANTEXPANSION2,EnterBelen_Dialogue_ExplainBelenRematch)
     call_if_quest_active(QUEST_RESTAURANTEXPANSION1,EnterBelen_Dialogue_ExplainFlowers)
     call_if_set(FLAG_BADGE01_GET,EnterBelen_Dialogue_HintBelenLocation)
     call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_INTRODUCED,EnterBelen_Dialogue_ExplainGym)
@@ -45,7 +45,13 @@ script EnterBelen_Dialogue_FirstIntroGym
     applymovement(LOCALID_MERMEREZAGYMHOST,moves(face_up))
     waitmovement(LOCALID_MERMEREZAGYMHOST)
     msgbox(format("One challenger!"),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    applymovement(LOCALID_MERMEREZAGYMSOUSCHEF,moves(face_down))
+    waitmovement(LOCALID_MERMEREZAGYMSOUSCHEF)
     msgbox(format("Heard!"),,SPEAKER_MERMEREZAGYMSOUSCHEF)
+    closemessage
+    applymovement(LOCALID_MERMEREZAGYMSOUSCHEF,moves(face_up))
+    waitmovement(LOCALID_MERMEREZAGYMSOUSCHEF)
     closemessage
 
     applymovement(LOCALID_MERMEREZAGYMHOST,moves(face_down))
@@ -85,8 +91,8 @@ script EnterBelen_Dialogue_ExplainGym
 
 script EnterBelen_Dialogue_HowDefeatBelen
 {
-    msgbox(format("Belen's cooking is built around Berries, so the Pokemon trained in this Gym all use powerful Berries."),,SPEAKER_MERMEREZAGYMHOST)
-    msgbox(format("It will be easier to defeat Belen if you can stop her from using Berries at all!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Here at Mermereza Gym we pride ourselves on being resourceful. We’re all about using held items and berries in battle!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Some trainers who have beaten Belen in the past have been able to ensure her Pokemon can’t use their held items."),,SPEAKER_MERMEREZAGYMHOST)
     closemessage
     release
     end
@@ -95,7 +101,7 @@ script EnterBelen_Dialogue_HowDefeatBelen
 script EnterBelen_Dialogue_HintBelenLocation
 {
     buffermapname(STR_VAR_1,MAP_OROLAND)
-    msgbox(format("Congratulations on defeating Belen!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("You beat Belen? Congratulations! You may be the most resourceful one in the room!"),,SPEAKER_MERMEREZAGYMHOST)
     msgbox(format("Sometimes, Belen is seen around the region trying new restaurants. I think there's something new opening in {STR_VAR_1} soon..."),,SPEAKER_MERMEREZAGYMHOST)
     closemessage
     release
@@ -112,7 +118,7 @@ script EnterBelen_Dialogue_ExplainFlowers
 
 script EnterBelen_Dialogue_ExplainBelenRematch
 {
-    msgbox(format("Belen has been cooking up something fierce ever since Flowers was opened. I hope you can show her a good rematch!"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Welcome back! Gym Leader Belen has been cooking up something fierce. Are you ready for a taste?"),,SPEAKER_MERMEREZAGYMHOST)
     closemessage
     release
     end
@@ -533,7 +539,6 @@ script EnterBelen_BelenDefeated_Script
     lockall
     setflag(FLAG_BADGE01_GET)
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_DEFEATED_LEADER)
-    setvar(VAR_BELEN_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
     call(WowYoureStrong_CheckCutsceneScript)
     msgbox(format("That was delicious! I'm absolutely satiated."),,SPEAKER_BELEN)

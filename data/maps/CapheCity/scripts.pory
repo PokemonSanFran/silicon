@@ -8,9 +8,12 @@ mapscripts CapheCity_MapScripts {
         call(Quest_Manofmanyhats_Liidia_Attendant_Visibility_Script)
         call(RPS_Script_ControlMontyOppVisibility)
         call(RestoreZenzuIsland_Script_ControlCapheMontyVisibility)
+        call(Quest_Restaurantexpansion_Script_HideBelenCaphe)
     }
-    MAP_SCRIPT_ON_LOAD {
+    MAP_SCRIPT_ON_LOAD
+    {
         call(EnterAdaora_SetConeTiles_Script)
+        call(Quest_Restaurantexpansion_Script_BlockPantry)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

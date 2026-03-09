@@ -3039,3 +3039,17 @@ void Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward(void)
 {
     Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_GETTHEBANDBACKTOGETHER);
 }
+
+// ***********************************************************************
+// Quest: Restaurant Expansion 1
+// ***********************************************************************
+
+void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
+}
+
+void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
+}

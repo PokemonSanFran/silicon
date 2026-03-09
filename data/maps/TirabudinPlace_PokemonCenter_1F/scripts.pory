@@ -6,15 +6,11 @@ mapscripts TirabudinPlace_PokemonCenter_1F_MapScripts{
         setrespawn(HEAL_LOCATION_TIRABUDIN_PLACE)
         end
     }
-    MAP_SCRIPT_ON_LOAD{
-    call(Quest_Restaurantexpansion_TirabudinPlace_HangPosterTile_Script)
-    }
 }
 
 script TirabudinPlace_Pokemoncenter_1F_EventScript_Nurse{
 	setvar(VAR_0x800B, LOCALID_NURSE)
 	call(Common_EventScript_PkmnCenterNurse)
-    call(Quest_Restaurantexpansion_Nurse_Question_Script)
 	release
 	end
 }

@@ -337,7 +337,8 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
         if (!CheckBagHasItem(item, 1))
         {
             GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_0),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_0))->regionMapSectionId, 0);
-            return StringCopy(gStringVar4, COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Head to {STR_VAR_2} Gym to get the delivery from Belen!"));
+            return gStringVar4;
         }
 
         CopyItemName(item, gStringVar1);

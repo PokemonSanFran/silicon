@@ -6,7 +6,6 @@ mapscripts MermerezaCity_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterBelen_StartGymBattle_ObjectSetup_Script)
         call(MermerezaCity_Gym_Leader_Visibility_Script)
-        call(Quest_Restaurantexpansion2_HideEmployees_Script)
         call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_DEFEATED_LEADER,EnterBelen_Script_HideSousChef)
         call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_3,EnterBelen_Script_MoveSousChef)
     }
@@ -15,14 +14,19 @@ mapscripts MermerezaCity_Gym_MapScripts {
     ]
 }
 
-script MermerezaCity_Gym_Leader_Visibility_Script{
-    switch(var(VAR_BELEN_STATE)){
-        case NO_BADGE:
-        case QUEST_2_COMPLETE:
-        case BATTLE_2_COMPLETE: return
-        default: setflag(FLAG_HIDE_BELEN)
+script MermerezaCity_Gym_Leader_Visibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ)
+    {
+        return
     }
-    return
+
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_QUEST_COMPLETE_2)
+    {
+        return
+    }
+
+    setobjectflagfromlocalid(LOCALID_MERMEREZA_GYM_BELEN)
 }
 
 script EnterBelen_Event_Script
