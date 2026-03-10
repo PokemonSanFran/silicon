@@ -924,6 +924,14 @@ void ItemUseOutOfBattle_ResetEVs(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+// Start sherbetSurprise
+void ItemUseOutOfBattle_ResetEVsAndFriendship(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_ResetEVsAndFriendship;
+    SetUpItemUseCallback(taskId);
+}
+// End sherbetSurprise
+
 void ItemUseOutOfBattle_ReduceEV(u8 taskId)
 {
     gItemUseCB = ItemUseCB_ReduceEV;
