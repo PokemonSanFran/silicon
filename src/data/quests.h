@@ -1603,6 +1603,14 @@ sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
             COMPOUND_STRING("Caught")
             ),
 };
+
+static const struct SubQuest sDiggingUpAdaorasDirt_Sub[QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT] =
+{
+    sub_quest(168, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_DIGGINGINVESTIGATOR, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(169, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(170, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(171, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+};
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -3694,14 +3702,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_DIGGINGUPADAORASDIRT] =
     {
-        .name = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
+        .name = COMPOUND_STRING("Digging Up Adaora's Dirt"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Digginginvesttigator wants to know more about Adaora."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Digginginvesttigator didn’t find any worthwhile leads - maybe Adaora is just a stand up person."),
+        .map = gText_CurenoPort,
+        .sprite = OBJ_EVENT_GFX_DIGGINGINVESTIGATOR,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
-        .subquests = NULL,
-        .numSubquests = 0,
+        .subquests = sDiggingUpAdaorasDirt_Sub,
+        .numSubquests = QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT
     },
     [QUEST_FREETHEINNOCENT] =
     {

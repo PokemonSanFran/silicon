@@ -270,3 +270,8 @@ void TweetCriteria_Quest_RestaurantExpansion1_3(void)
 {
     gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 3));
 }
+
+void TweetCriteria_Quest_Diggingupadaorasdirt_1(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CURENO_PORT_STATE) >= POST_HOW_DO_WE_GET_HOME);
+}

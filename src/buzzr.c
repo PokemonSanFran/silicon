@@ -2071,5 +2071,9 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_RESTAURANTEXPANSION1_2:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_DIGGINGUPADAORASDIRT_2:
+        case TWEET_QUEST_DIGGINGUPADAORASDIRT_3:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
+            break;
     }
 }

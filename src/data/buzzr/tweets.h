@@ -374,7 +374,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
     {
-        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! &BallerOnABudget"), // PSF TODO replace & with #
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times,
@@ -384,7 +384,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2] =
     {
-        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("TIL how accessible G.R.U.N.T. is! I lost my leg in a {STR_VAR_1} accident, and I can still easily navigate in my wheelchair!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times,
@@ -394,7 +394,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_3] =
     {
-        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Yo I’m DYING in this traffic with all these tech workers! I’m taking G.R.U.N.T. from now on, that’s wayyyy smarter!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times,
@@ -404,7 +404,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4] =
     {
-        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("It’s fascinating how much {STR_VAR_1} resisted having a G.R.U.N.T. station. Access boosts property values, doesn’t it?"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times,
@@ -414,7 +414,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_5] =
     {
-        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Did anybody else do this &MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"), // PSF TODO replace & with #
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete,
@@ -448,6 +448,46 @@ const struct Tweet gTweets[] =
         .content = COMPOUND_STRING("Flowers will maintain my commitment to top-shelf ingredients and taste. Try our the menu and see for yourself!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_RestaurantExpansion1_3,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_DIGGINGUPADAORASDIRT_1] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER, // TODO Tide Member
+        .content = COMPOUND_STRING("Be mindful of this guy sniffin’ around asking questions about Adaora. I reckon he’s got “cop” written all over him."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Diggingupadaorasdirt_1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_DIGGINGUPADAORASDIRT_2] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("A fight broke out in {STR_VAR_1} a while ago, and Adaora broke it up just by appearing! It was like something out of a manga…"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Diggingupadaorasdirt_1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_DIGGINGUPADAORASDIRT_3] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("I’m sick of the thugs hangin’ around {STR_VAR_1} like they own the place! Somebody’s gonna have to take the trash out sooner or later…"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Diggingupadaorasdirt_1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_DIGGINGUPADAORASDIRT_4] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("I wonder how Adaora’s parents feel about their daughter having become a terrorist. Probably fled the region out of shame, that’s why you never hear about them."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,

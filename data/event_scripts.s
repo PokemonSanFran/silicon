@@ -1392,6 +1392,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/quests/rps.inc"
 .include "data/quests/compulsivehealingpeersupportgroup.inc"
 .include "data/quests/stresscup.inc"
+.include "data/quests/diggingupadaorasdirt.inc"
 ## SILICON MAPS
 .include "data/maps/AnbehBend/scripts.inc"
 .include "data/maps/Arantraz/scripts.inc"
