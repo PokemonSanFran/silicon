@@ -3097,8 +3097,7 @@
 3:
     .endm
 
-    .macro faderemoveobject objectId:req, movement:req
-    applymovement \objectId \movement
+    .macro faderemoveobject objectId:req
     fadescreen FADE_TO_BLACK
     removeobject \objectId
     fadescreen FADE_FROM_BLACK

@@ -1,0 +1,140 @@
+// Quest_Diggingupadaorasdirt
+
+script Quest_Diggingupadaorasdirt_Script_InteractDigginginvestigator
+{
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_DIGGINGUPADAORASDIRT,Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorReward)
+    goto_if_quest_active(QUEST_DIGGINGUPADAORASDIRT,Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorActive)
+    goto_if_quest_inactive(QUEST_DIGGINGUPADAORASDIRT,Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorStartQuest)
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorStartQuest
+{
+    lock
+    msgbox(format("That girl Adaora, the one who showed up and helped diffuse the fight here? She certainly seems impressive."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("Even with The Tide’s reputation, everyone thinks positively of her…"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("I don’t buy it, it’s all too convenient. I reckon there’s something more going on… Wanna find out with me? It’ll be like playing detective!"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("I’ll pay, too. Help me chase down some of the leads I have and I promise you’ll be rewarded."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    closemessage
+    startquest(QUEST_DIGGINGUPADAORASDIRT)
+    msgbox(format("Okay, here’s some of the leads I’ve got that you’ll want to chase up:"),,SPEAKER_DIGGINGINVESTTIGATOR)
+         call(Quest_Diggingupadaorasdirt_Dialogue_ExplainHodouGym)
+         call(Quest_Diggingupadaorasdirt_Dialogue_ExplainInfluence)
+         call(Quest_Diggingupadaorasdirt_Dialogue_ExplainLeadership)
+         call(Quest_Diggingupadaorasdirt_Dialogue_ExplainGrowingUp)
+    closemessage
+    cueobjectplayer(LOCALID_DIGGINGINVESTTIGATOR)
+    msgbox(format("The locations of my leads are now all in your Todo list."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("Come back if you ever need more details on a lead!"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    closemessage
+    release
+    end
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorActive
+{
+    msgbox(format("Well? What have you got for me? Any progress on those leads?"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    dynmultichoice(1,1,FALSE,4,0,NULL,format("Hodou Gym"),format("Influence"),format("Leadership"),format("Growing Up"),format("Never Mind"))
+    switch(var(VAR_RESULT))
+    {
+        case 0: call(Quest_Diggingupadaorasdirt_Dialogue_ExplainHodouGym)
+        case 1: call(Quest_Diggingupadaorasdirt_Dialogue_ExplainInfluence)
+        case 2: call(Quest_Diggingupadaorasdirt_Dialogue_ExplainLeadership)
+        case 3: call(Quest_Diggingupadaorasdirt_Dialogue_ExplainGrowingUp)
+        default:
+        msgbox(format("Hmm. Well, come back when you have something for me."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_ExplainHodouGym
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("Adaora used to be close friends with Kei-Ying. They often exchanged ideas about how to make Resido better for everyone."),,SPEAKER_ALICIA)
+        msgbox(format("I don’t think there was anything shady to it… And if it wasn’t for their relationship there wouldn’t have been enough proof to get Lucrezia arrested."),,SPEAKER_ALICIA)
+        msgbox(format("Hmm. Interesting. Well, thank you for following that up."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+    else
+    {
+    buffermapname(STR_VAR_1,MAP_HODOU_CITY_GYM)
+    msgbox(format("Adaora used to know the {STR_VAR_1} Gym Leader somehow before the Gym got torn down. Weirder still, I swear I saw them hanging around before she showed up at that fight…"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_ExplainInfluence
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_2)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("A lot of the members of The Tide joined up specifically because of Adaora’s actions and projects."),,SPEAKER_ALICIA)
+        msgbox(format("Nothing about what the lead told me suggested anything underhanded about what she does, though."),,SPEAKER_ALICIA)
+        msgbox(format("Alright then. Good work, I suppose."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+    else
+    {
+    buffermapname(STR_VAR_1,MAP_ROUTE2)
+    msgbox(format("There’s someone on {STR_VAR_1} who talks about Adaora a lot. Says she has a lot of influence over Resido’s youth."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_ExplainLeadership
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_3)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("Seems like Adaora and Vigrim split the work at the top somewhat."),,SPEAKER_ALICIA)
+        msgbox(format("Adaora’s high status isn’t a secret within the team. Doesn’t seem like it’s an intentional ploy to stay out of the spotlight and let Vigrim take all the credit, either."),,SPEAKER_ALICIA)
+        msgbox(format("Thank you. That’s valuable."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+    else
+    {
+    buffermapname(STR_VAR_1,MAP_ROUTE12)
+    msgbox(format("Get this, there’s someone on {STR_VAR_1} who has her pegged as the secret leader of The Tide as a whole…"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_ExplainGrowingUp
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_4)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        msgbox(format("Adaoraparent asked me not to reveal anything…"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("That lead of yours looked promising, but it didn't go anywhere after all. Kind of a nothingburger."),,SPEAKER_ALICIA)
+        msgbox(format("R-really!? I thought this would be the mother of all leads!"),,SPEAKER_DIGGINGINVESTTIGATOR,,EMOTE_SHOCK)
+        msgbox(format("Adaora used to live there, right? You'd think so, but the current occupants don't know her, and there's no trace of her left to find. I couldn't even tell you when she lived there."),,SPEAKER_ALICIA)
+        msgbox(format("How unfortunate… Regardless, I appreciate you looking into it."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+    else
+    {
+    buffermapname(STR_VAR_1,MAP_QIU_VILLAGE)
+    msgbox(format("I have a friend in {STR_VAR_1} who suspects one of the locals could have some serious dirt on Adaora’s past. Maybe you can get it out of them?"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    }
+}
+
+script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorReward
+{
+    msgbox(format("I did some digging of my own, and it certainly does seem that this Adaora by all metrics is on the up-and-up."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("Well! I’m a man of my word. Here’s your reward."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    showmoneybox(0, 0)
+    addmoney(QUEST_DIGGINGUPADAORASDIRT_REWARD)
+    waitbuttonpress
+    playse(SE_SHOP)
+    updatemoneybox
+    msgbox(format("I had hoped, perhaps naively, that I’d be able to get a grasp on who Vigrim really is…Alas."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    hidemoneybox
+    msgbox(format("I don’t think my sources are bad. What a mysterious character…"),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("Thank you for your time. I’ll need to inform my client we’ve nothing serious on Adaora as of now."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    msgbox(format("A client?... I didn’t know you were being hired to investigate."),,SPEAKER_ALICIA)
+    msgbox(format("Ha! Didn’t you now? Well, I can’t confirm anything. I suppose you’ll just have to guess."),,SPEAKER_DIGGINGINVESTTIGATOR)
+    closemessage
+    completequest(QUEST_DIGGINGUPADAORASDIRT)
+    moveobjecttocoords(LOCALID_DIGGINGINVESTTIGATOR,0,8,DIR_NORTH)
+    //faderemoveobject(LOCALID_DIGGINGINVESTTIGATOR)
+    release
+    end
+}
