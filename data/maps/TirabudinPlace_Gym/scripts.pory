@@ -3,22 +3,13 @@ const FLAG_HIDE_BD_GYM = FLAG_TEMP_3
 mapscripts TirabudinPlace_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_Inversehallucinogenic_ControlTrainerVisibility_Script)
-        call(TirabudinPlace_Gym_Leader_Visibility_Script)
+        call_if_eq(VAR_BD_STATE,BATTLE_1_COMPLETE,Quest_Restoretirabudinplace_Leader_Visibility_Script)
         call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,Quest_Restoretirabudinplace_Leader_Visibility_Script)
         goto(TirabudinPlace_Gym_MapScripts_OnTransition)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_0, 0: Quest_Inversehallucinogenic_ScreenDistortion_Script
     ]
-}
-
-script TirabudinPlace_Gym_Leader_Visibility_Script{
-    switch(var(VAR_BD_STATE)){
-        case BATTLE_1_COMPLETE: call(Quest_ShutDownMedicineMan_HideLeaderInGym_Script)
-        //case QUEST_1_COMPLETE: call(Quest_Inversehallucinogenic_HideLeaderInGym_Script)
-        default: return
-    }
-    return
 }
 
 script TirabudinPlace_Gym_MapScripts_OnTransition {
