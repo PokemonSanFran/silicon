@@ -37,7 +37,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_SMOOTHIE] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER,
+        .userId = BUZZR_USER_PLACEHOLDER, // PSF TODO a random shitty Trainer in the game needs a username to match this one, and their team just has to be awful
         .content = COMPOUND_STRING("I always go to the Marble Slab in {STR_VAR_1} before I start training with a new Pokémon. Their {STR_VAR_3} clears out a Pokémon’s toxins which makes them easier to train. It’s all natural too! Bring {STR_VAR_2} and they’ll make your first one free!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Ice,
