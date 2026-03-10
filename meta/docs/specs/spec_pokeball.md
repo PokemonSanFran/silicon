@@ -1,6 +1,6 @@
 # Assets
 
-![](https://files.catbox.moe/01ifvs.png)
+![image](https://gist.github.com/user-attachments/assets/f23e9403-7730-41d7-9461-bbaa8a71a5ec)
 
 We need 8 new sets of assets for new PokeBalls. Every new ball needs to answer the following questions. Examples of existing balls are provided, with screenshots and video.
 
