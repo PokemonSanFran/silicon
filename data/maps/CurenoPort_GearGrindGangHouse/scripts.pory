@@ -27,7 +27,11 @@ script CurenoPort_GearGrindGangHouse_Script_TryToPutPlayerOnBike
     returnqueststate(QUEST_ANGELDELIVERY)
     if (var(VAR_RESULT) >= QUEST_MENU_SET_REWARD)
     {
-        getonoffbike(FALSE)
+        specialvar(VAR_RESULT,GetPlayerAvatarBike)
+        if (var(VAR_RESULT) == 0)
+        {
+            getonoffbike(FALSE)
+        }
     }
 }
 
