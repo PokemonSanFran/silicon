@@ -2415,9 +2415,10 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
     {
         default:
         case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
-            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
             break;
         case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
+            FlagSet(FLAG_FACILITY_UNLOCK_BD);
             QuestMenu_ScriptSetComplete(QUEST_RESTORETIRABUDINGYM);
             break;
     }
@@ -3030,14 +3031,56 @@ void Script_Quest_BetweenAStoneAndAHardPlaceHasRode7(void)
 // Quest: Get the Band Back Together
 // ***********************************************************************
 
-void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
+static const u16 questBikerLUT[QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT] =
 {
-    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_GETTHEBANDBACKTOGETHER);
-}
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG),
+};
 
 void Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward(void)
 {
     Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_GETTHEBANDBACKTOGETHER);
+}
+
+void DebugQuest_Getthebandbacktogether(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_NOT_STARTED:
+            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_GETTHEBANDBACKTOGETHER);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_B:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_C:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_D:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_E:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_F:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_G:
+            u32 flag = (state - STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A);
+            QuestMenu_GetSetSubquestState(QUEST_GETTHEBANDBACKTOGETHER, FLAG_SET_COMPLETED, flag);
+            FlagSet(questBikerLUT[flag]);
+            Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_GETTHEBANDBACKTOGETHER);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_GETTHEBANDBACKTOGETHER);
+            // PSF TODO Add flag for ACRO_BIKE once it is decided that the game will use the acro bike
+            break;
+    }
+}
+void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_GETTHEBANDBACKTOGETHER);
 }
 
 // ***********************************************************************

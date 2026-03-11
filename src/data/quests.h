@@ -2353,6 +2353,90 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .numSubquests = QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT,
         .states =
         {
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A] =
+            {
+                .name = COMPOUND_STRING("Recruit A"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERA),
+                .x = 19,
+                .y = 5,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_B] =
+            {
+                .name = COMPOUND_STRING("Recruit B"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERB),
+                .x = 15,
+                .y = 4,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_C] =
+            {
+                .name = COMPOUND_STRING("Recruit C"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERC),
+                .x = 17,
+                .y = 13,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_D] =
+            {
+                .name = COMPOUND_STRING("Recruit D"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERD),
+                .x = 14,
+                .y = 4,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_E] =
+            {
+                .name = COMPOUND_STRING("Recruit E"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERE),
+                .x = 21,
+                .y = 3,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_F] =
+            {
+                .name = COMPOUND_STRING("Recruit F"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERF),
+                .x = 16,
+                .y = 15,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_G] =
+            {
+                .name = COMPOUND_STRING("Recruit G"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_QUEST_GETTHEBANDBACKTOGETHERBIKERG),
+                .x = 0,
+                .y = 4,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                .warpId = 0,
+            },
+            [STATE_QUEST_GETTHEBANDBACKTOGETHER_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Getthebandbacktogether,
+                side_quest_map(MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE),
+                .warpId = 0,
+            },
         },
     },
     [QUEST_FOODTRUCKBUREACRACY] =
@@ -3229,14 +3313,14 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .numSubquests = 0,
         .states =
         {
-            [0]=
+            [STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED]=
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_RestoreTirabudinGym,
                 side_quest_map(MAP_TIRABUDIN_PLACE),
                 .warpId = 1,
             },
-            [1]=
+            [STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED]=
             {
                 .name = COMPOUND_STRING("Completed"),
                 .setupFunc = DebugQuest_RestoreTirabudinGym,

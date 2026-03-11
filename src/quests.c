@@ -2766,7 +2766,9 @@ void QuestMenu_SetupQuestState(u8 questId, u8 state)
 void QuestMenu_JumpToQuestState(u8 questId, u8 state)
 {
     QuestMenu_SetupQuestState(questId, state);
-    SetWarpDestination(questState.mapGroup, questState.mapNum, questState.warpId, questState.x, questState.y);
+
+    s32 warpId = ((questState.y == 0) && (questState.x == 0)) ? questState.warpId : NO_WARP_ID;
+    SetWarpDestination(questState.mapGroup, questState.mapNum, warpId, questState.x, questState.y);
     DoWarp();
     ResetInitialPlayerAvatarState();
 }
