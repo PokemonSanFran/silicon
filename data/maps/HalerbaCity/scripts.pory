@@ -5,7 +5,6 @@ mapscripts HalerbaCity_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION{
-        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerC)
         call(Vsdeoxys_Script_HideVsdeoguy_Gldngtepark)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
