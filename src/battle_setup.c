@@ -613,8 +613,8 @@ static void CB2_EndWildBattle(void)
     // Start flyEncounters
     else if (FlagGet(B_FLAG_SKY_BATTLE))
     {
-        HandleBattleVariantEndParty(); 
-        IncrementFogVariable(); 
+        HandleBattleVariantEndParty();
+        IncrementFogVariable();
         SetMainCallback2(CB2_LoadMap);
         DowngradeBadPoison();
         gFieldCallback = FieldCallback_FlyIntoMap;
@@ -652,6 +652,11 @@ enum BattleEnvironments BattleSetup_GetEnvironmentId(void)
 {
     u16 tileBehavior;
     s16 x, y;
+
+    // Start flyEncounters
+    if (FlagGet(B_FLAG_SKY_BATTLE))
+        return BATTLE_ENVIRONMENT_SKY_BATTLE;
+    // End flyEncounters
 
     if (ShouldUseFishingEnvironmentInBattle())
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);

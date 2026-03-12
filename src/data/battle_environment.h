@@ -417,6 +417,22 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
         .secretPowerEffect = MOVE_EFFECT_DEF_MINUS_1,
         .camouflageType = TYPE_PSYCHIC,
     },
+    // Start flyEncounters
+    [BATTLE_ENVIRONMENT_SKY_BATTLE] =
+    {
+        .naturePower = MOVE_AIR_SLASH,
+        .secretPowerEffect = MOVE_EFFECT_SPD_MINUS_1,
+        .camouflageType = TYPE_FLYING,
+        .background =
+        {
+            .tileset = gBattleEnvironmentTiles_Rayquaza,
+            .tilemap = gBattleEnvironmentTilemap_Rayquaza,
+            .entryTileset = gBattleEnvironmentAnimTiles_Rayquaza,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Rayquaza,
+            .palette = gBattleEnvironmentPalette_Rayquaza,
+        },
+    },
+    // End flyEncounters
 };
 
 static const struct {
