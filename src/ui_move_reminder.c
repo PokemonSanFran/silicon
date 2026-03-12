@@ -49,9 +49,15 @@ static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
 
 static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages);
 static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages);
+static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages);
 static void MReminderPage_ReloadTilemap(void);
+static void MReminderPage_UpdateFrontEnd(void);
 static enum MoveReminderPages MReminderPage_GetValue(void);
 static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
+
+static void MainPage_UpdateFrontEnd(void);
+
+static void FilterPage_UpdateFrontEnd(void);
 
 #include "data/ui_move_reminder.h"
 
@@ -263,7 +269,7 @@ static void MReminderSetup_InitGraphics(void)
 
     DecompressAndCopyTileDataToVram(MREMINDER_BG_TILEMAP, sMoveReminder_Tiles, 0, 0, 0);
     LoadPalette(sMoveReminder_Palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    MReminderPage_ReloadTilemap();
+    // tilemap will be loaded with the front end later
 }
 
 static void MReminderSetup_InitWindows(void)
@@ -274,16 +280,17 @@ static void MReminderSetup_InitWindows(void)
 
     u32 baseBlock = 1;
 
-    for (enum MoveReminderWindows winId = 0; winId < NUM_MREMINDER_WINDOWS; winId++)
+    for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
     {
-        SetWindowAttribute(winId, WINDOW_BASE_BLOCK, baseBlock);
-        FillWindowPixelBuffer(winId, PIXEL_FILL(0));
-        PutWindowTilemap(winId);
-        // don't copy to VRAM yet
+        SetWindowAttribute(window, WINDOW_BASE_BLOCK, baseBlock);
+        FillWindowPixelBuffer(window, PIXEL_FILL(0));
+        PutWindowTilemap(window);
 
-        const struct WindowTemplate *template = &gWindows[winId].window;
+        const struct WindowTemplate *template = &gWindows[window].window;
         baseBlock += template->width * template->height;
     }
+
+    MReminderPage_UpdateFrontEnd();
 }
 
 static void MReminderSetup_InitSprites(void)
@@ -328,12 +335,36 @@ static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages page)
     return MReminderPage_GetInfo(page)->tilemap;
 }
 
+static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages page)
+{
+    return MReminderPage_GetInfo(page)->updateFrontEndFunc;
+}
+
 static void MReminderPage_ReloadTilemap(void)
 {
     DecompressDataWithHeaderWram(
         MReminderPage_GetTilemap(MReminderPage_GetValue()),
         TilemapBuffer_GetPtr(MREMINDER_BGBUF_TILEMAP));
-    CopyBgTilemapBufferToVram(MREMINDER_BG_TILEMAP);
+}
+
+static void MReminderPage_UpdateFrontEnd(void)
+{
+    for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
+    {
+        FillWindowPixelBuffer(window, PIXEL_FILL(0));
+        PutWindowTilemap(window);
+    }
+
+    MReminderPage_ReloadTilemap();
+
+    UpdateFrontEndFunc func = MReminderPage_GetUpdateFrontEndFunc(MReminderPage_GetValue());
+    func();
+
+    for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
+        CopyWindowToVram(window, COPYWIN_GFX);
+
+    for (enum MoveReminderBackgrounds bg = 0; bg < NUM_MREMINDER_BACKGROUNDS; bg++)
+        CopyBgTilemapBufferToVram(bg);
 }
 
 static enum MoveReminderPages MReminderPage_GetValue(void)
@@ -345,4 +376,14 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages page
 {
     sMoveReminderResourcesPtr->page = page;
     return MReminderPage_GetValue();
+}
+
+static void MainPage_UpdateFrontEnd(void)
+{
+
+}
+
+static void FilterPage_UpdateFrontEnd(void)
+{
+
 }

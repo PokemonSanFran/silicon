@@ -6,10 +6,12 @@ static const struct MoveReminderPageInfo sMoveReminder_PagesInfo[NUM_MREMINDER_P
     [MREMINDER_PAGE_MAIN] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/main.bin.smolTM"),
+        .updateFrontEndFunc = MainPage_UpdateFrontEnd,
     },
     [MREMINDER_PAGE_FILTER] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
+        .updateFrontEndFunc = FilterPage_UpdateFrontEnd,
     },
 };
 

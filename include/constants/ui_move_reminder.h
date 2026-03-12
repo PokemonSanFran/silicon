@@ -75,9 +75,12 @@ struct MoveReminderResources
     u8 moveSlot:7;
 };
 
+typedef void (*UpdateFrontEndFunc)(void);
+
 struct MoveReminderPageInfo
 {
     const u32 *tilemap;
+    UpdateFrontEndFunc updateFrontEndFunc;
 };
 
 #endif // GUARD_CONSTANTS_UI_MOVE_REMINDER_H
