@@ -17,6 +17,7 @@
 #include "battle_setup.h"
 #include "wild_encounter.h"
 #include "constants/item.h"
+#include "battle_util.h"
 
 const struct WildPokemonInfo *GetHeaderFlyMonsInfo(void)
 {
@@ -73,11 +74,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
         return;
     }
 
-    if (!DoesDestinationHaveFlyMons())
-    {
-        gSpecialVar_Result = FALSE;
-    }
-    else if (encounterType == FLY_ENCOUNTER_QUEST_ATTACK)
+    if (encounterType == FLY_ENCOUNTER_QUEST_ATTACK)
     {
         CreateWildMon(SPECIES_QUEST_FLIGHT_PATTERNS, LEVEL_QUEST_FLIGHT_PATTERNS);
         BattleSetup_StartWildBattle();
@@ -88,6 +85,10 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
         CreateWildMon(SPECIES_QUEST_FLIGHT_PATTERNS_BOSS, LEVEL_QUEST_FLIGHT_PATTERNS_BOSS);
         BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;
+    }
+    else if (!DoesDestinationHaveFlyMons())
+    {
+        gSpecialVar_Result = FALSE;
     }
     else if (TryGenerateWildMon(GetHeaderFlyMonsInfo(), 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
     {
@@ -178,4 +179,24 @@ void TryFlyWildEncounter(u8 taskId, void* callback2, void* fieldCallback)
     gTasks[taskId].func = Task_FlyEncounterMessage;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = encounterType;
+}
+
+bool8 IfSkyBattleAndOverworldTerrain(enum FieldEffectCases caseId, enum StartingStatus status)
+{
+    if ((caseId != FIELD_EFFECT_OVERWORLD_TERRAIN) && (caseId != FIELD_EFFECT_TRAINER_STATUSES))
+        return FALSE;
+
+    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
+        if (status == STARTING_STATUS_TRICK_ROOM)
+            return FALSE;
+
+    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
+        if (status == STARTING_STATUS_MAGIC_ROOM)
+            return FALSE;
+
+    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
+        if (status == STARTING_STATUS_WONDER_ROOM)
+            return FALSE;
+
+    return (FlagGet(B_FLAG_SKY_BATTLE));
 }

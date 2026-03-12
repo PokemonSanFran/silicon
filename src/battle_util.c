@@ -55,6 +55,7 @@
 #include "options_battle.h" // Battle Settings: Experience
 #include "ui_options_menu.h" // siliconMerge
 #include "little_cup.h" // littlecup
+#include "fly_encounter.h" // flyEncounters
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -3723,6 +3724,9 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     bool32 isTerrain = FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+        return FALSE;
+
+    if (IfSkyBattleAndOverworldTerrain(caseId, ((enum StartingStatus) gBattleStruct->startingStatus)))
         return FALSE;
 
     switch (caseId)
