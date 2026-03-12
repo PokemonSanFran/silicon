@@ -120,5 +120,6 @@ bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *
 void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId);
 bool32 IsRematchForbidden(s32 rematchTableId);
 // End rematch_action
+void HandleBattleVariantEndParty(void); // flyEncounters
 
 #endif // GUARD_BATTLE_SETUP_H

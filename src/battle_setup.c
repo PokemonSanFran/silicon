@@ -81,7 +81,7 @@ static void CB2_GiveStarter(void);
 static void CB2_StartFirstBattle(void);
 static void CB2_EndFirstBattle(void);
 static void SaveChangesToPlayerParty(void);
-static void HandleBattleVariantEndParty(void);
+//static void HandleBattleVariantEndParty(void) // flyEncounters
 static void CB2_EndTrainerBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 #if FREE_MATCH_CALL == FALSE
@@ -611,7 +611,8 @@ static void CB2_EndWildBattle(void)
         SetMainCallback2(CB2_WhiteOut);
     }
     // Start flyEncounters
-    else if (FlagGet(B_FLAG_SKY_BATTLE))
+    //else if (FlagGet(B_FLAG_SKY_BATTLE))
+    else if (gBattleStruct->isSkyBattle)
     {
         HandleBattleVariantEndParty();
         IncrementFogVariable();
@@ -1322,10 +1323,14 @@ static void SaveChangesToPlayerParty(void)
     }
 }
 
-static void HandleBattleVariantEndParty(void)
+// Start flyEncounters
+//static void HandleBattleVariantEndParty(void)
+void HandleBattleVariantEndParty(void)
+// End flyEncounters
 {
     // Start littlecup
     ResetTemporaryLittleCupVar();
+
     //if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
     if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()))
         return;
