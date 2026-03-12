@@ -1,4 +1,15 @@
 mapscripts Route18_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Route18_RouteFlag_Script)
+// PSF TODO need to refactor this so as that as soon flag A and flag B are obtained, the player can go to place C without having to go bakc to place C
     }
+}
+
+script Route18_RouteFlag_Script
+{
+	if(flag(FLAG_VISITED_HALERBAWILDS) && flag(FLAG_VISITED_QIU_VILLAGE))
+    {
+        setflag(FLAG_VISITED_ROUTE18)
+	}
 }

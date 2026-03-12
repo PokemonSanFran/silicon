@@ -1241,6 +1241,7 @@ EventScript_VsSeekerChargingDone::
 .include "data/scripts/surprise_trade.inc" @ surpriseTrade
 .include "data/scripts/save.inc" @ autoSave
 .include "data/scripts/phenomenon.inc" @ autoSave
+.include "data/scripts/pokemart.inc" @ shopMenu
 
 ## SILICON CUTSCENES
 .include "data/cutscenes/prologue.inc"

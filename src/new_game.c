@@ -189,6 +189,7 @@ void NewGameInitData(void)
 
     StartMenu_HoldPreviousSave();
     StartMenu_ResetAppData();
+    memset(gSaveBlock3Ptr->shopBuyAgainItems, ITEM_NONE, MAX_PRESTO_BUY_AGAIN_ITEMS * sizeof(u16));
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();

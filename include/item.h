@@ -8,6 +8,7 @@
 #include "constants/tms_hms.h"
 #include "constants/item_effects.h"
 #include "constants/hold_effects.h"
+#include "ui_shop_criterias.h" // shopMenu
 
 /* Expands to:
  * enum
@@ -545,6 +546,10 @@ struct Item
     u8 nativeItemGroup; // silconMerge
     const u32 *iconPic;
     const u16 *iconPalette;
+    // Start shopMenu
+    u32 criteriaGoal;
+    ShopCriteriaFunc criteriaFunc;
+    // End shopMenu
 };
 
 struct ALIGNED(2) BagPocket
@@ -669,6 +674,7 @@ void MoveItemSlotInPocket(enum Pocket pocketId, u32 from, u32 to);
 void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to);
 void ClearBag(void);
 u16 CountTotalItemQuantityInBag(u16 itemId);
+u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId);
 bool32 AddPyramidBagItem(u16 itemId, u16 count);
 bool32 RemovePyramidBagItem(u16 itemId, u16 count);
 u32 GetItemNativeGroup(u32 itemId); // siliconMerge
@@ -690,5 +696,12 @@ u32 GetItemStatus1Mask(u16 itemId);
 bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile volatile);
 u32 GetItemSellPrice(u32 itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
+
+// Start shopMenu
+enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId);
+enum ShopMenuCategories GetItemShopCategory(u16 itemId);
+u32 GetItemShopCriteriaGoal(u16 itemId);
+ShopCriteriaFunc GetItemShopCriteriaFunc(u16 itemId);
+// End shopMenu
 
 #endif // GUARD_ITEM_H
