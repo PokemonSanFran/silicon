@@ -18,6 +18,18 @@
 #include "wild_encounter.h"
 #include "constants/item.h"
 
+static bool8 DoesDestinationHaveFlyMons(void)
+{
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId == HEADER_NONE)
+        return FALSE;
+
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FLY_MONS);
+    const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+
+    return (wildPokemonInfo != NULL);
+}
+
 enum FlyEncounterTypes GetFlyEncounterType(void)
 {
     u32 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
@@ -35,8 +47,7 @@ enum FlyEncounterTypes GetFlyEncounterType(void)
     if (steps)
         encounterType = (isLure) ? FLY_ENCOUNTER_ATTACK : FLY_ENCOUNTER_NONE;
 
-    u32 headerId = GetCurrentMapWildMonHeaderId();
-    if (headerId == HEADER_NONE)
+    if (!DoesDestinationHaveFlyMons())
         encounterType = FLY_ENCOUNTER_NONE;
 
     if (encounterType != FLY_ENCOUNTER_NONE)
@@ -58,11 +69,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
         return;
     }
 
-    u32 headerId = GetCurrentMapWildMonHeaderId();
-    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FLY_MONS);
-    const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
-
-    if (wildPokemonInfo == NULL)
+    if (!DoesDestinationHaveFlyMons())
     {
         gSpecialVar_Result = FALSE;
     }
