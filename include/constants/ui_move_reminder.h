@@ -9,6 +9,14 @@ enum MoveReminderPages
     NUM_MREMINDER_PAGES
 };
 
+#ifndef TILE_TO_PIXELS
+#define TILE_TO_PIXELS(t) (t ? (t * 8) : 0)
+#define PIXEL_TO_TILES(p) (p ? (p / 8) : 0)
+#endif
+
+#define MREMINDER_HELPBAR_FOOTER_X      (10)
+#define MREMINDER_HELPBAR_FOOTER_Y      (1)
+
 enum MoveReminderSetupSteps
 {
     MREMINDER_SETUP_RESET,
@@ -38,7 +46,8 @@ enum MoveReminderBackgroundBuffers
 
 enum MoveReminderWindows
 {
-    MREMINDER_WINDOW_0,
+    MREMINDER_WINDOW_MAIN,
+    MREMINDER_WINDOW_FOOTER,
 
     NUM_MREMINDER_WINDOWS
 };
@@ -46,6 +55,7 @@ enum MoveReminderWindows
 enum MoveReminderTextColors
 {
     MREMINDER_TXTCLR_DEFAULT,
+    MREMINDER_TXTCLR_HELP_BAR,
 
     NUM_MREMINDER_TXTCLRS
 };
@@ -80,6 +90,7 @@ typedef void (*UpdateFrontEndFunc)(void);
 struct MoveReminderPageInfo
 {
     const u32 *tilemap;
+    const u8 *helpBarStr;
     UpdateFrontEndFunc updateFrontEndFunc;
 };
 

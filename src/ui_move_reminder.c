@@ -18,6 +18,8 @@
 #include "data.h"
 #include "gpu_regs.h"
 #include "overworld.h"
+#include "party_menu.h"
+#include "strings.h"
 #include "ui_move_reminder.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -49,11 +51,15 @@ static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
 
 static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages);
 static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages);
+static const u8 *MReminderPage_GetHelpBarStr(enum MoveReminderPages);
 static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages);
 static void MReminderPage_ReloadTilemap(void);
+static void MReminderPage_PrintHelpBar(void);
 static void MReminderPage_UpdateFrontEnd(void);
 static enum MoveReminderPages MReminderPage_GetValue(void);
 static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
+
+static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
 static void MainPage_UpdateFrontEnd(void);
 
@@ -335,6 +341,11 @@ static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages page)
     return MReminderPage_GetInfo(page)->tilemap;
 }
 
+static const u8 *MReminderPage_GetHelpBarStr(enum MoveReminderPages page)
+{
+    return MReminderPage_GetInfo(page)->helpBarStr;
+}
+
 static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages page)
 {
     return MReminderPage_GetInfo(page)->updateFrontEndFunc;
@@ -347,6 +358,17 @@ static void MReminderPage_ReloadTilemap(void)
         TilemapBuffer_GetPtr(MREMINDER_BGBUF_TILEMAP));
 }
 
+static void MReminderPage_PrintHelpBar(void)
+{
+    const u8 *str = MReminderPage_GetHelpBarStr(MReminderPage_GetValue());
+
+    if (str == NULL)
+        str = gText_EmptyString2;
+
+    MReminderWindow_Print(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
+        MREMINDER_HELPBAR_FOOTER_X, MREMINDER_HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
+}
+
 static void MReminderPage_UpdateFrontEnd(void)
 {
     for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
@@ -356,6 +378,7 @@ static void MReminderPage_UpdateFrontEnd(void)
     }
 
     MReminderPage_ReloadTilemap();
+    MReminderPage_PrintHelpBar();
 
     UpdateFrontEndFunc func = MReminderPage_GetUpdateFrontEndFunc(MReminderPage_GetValue());
     func();
@@ -376,6 +399,11 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages page
 {
     sMoveReminderResourcesPtr->page = page;
     return MReminderPage_GetValue();
+}
+
+static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
+{
+    AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
 }
 
 static void MainPage_UpdateFrontEnd(void)
