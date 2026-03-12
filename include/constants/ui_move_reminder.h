@@ -17,6 +17,21 @@ enum MoveReminderPages
 #define MREMINDER_HELPBAR_FOOTER_X      (10)
 #define MREMINDER_HELPBAR_FOOTER_Y      (1)
 
+#define PAGE_MAIN_HEADER_NAME_X         (2)
+#define PAGE_MAIN_HEADER_GENDER_X       (66)
+#define PAGE_MAIN_HEADER_LEVEL_X        (82)
+#define PAGE_MAIN_HEADER_Y              (0)
+
+#define PAGE_MAIN_STATS_1_NAME_X        (TILE_TO_PIXELS(1) - 6)     // HP, ATK, DEF
+#define PAGE_MAIN_STATS_1_VALUE_X       (TILE_TO_PIXELS(4) - 3)     // -> values
+#define PAGE_MAIN_STATS_2_NAME_X        (TILE_TO_PIXELS(7) - 2)     // SPATK, SPDEF
+#define PAGE_MAIN_STATS_2_VALUE_X       (TILE_TO_PIXELS(12) - 4)    // -> values
+#define PAGE_MAIN_STATS_3_NAME_X        (PAGE_MAIN_STATS_2_NAME_X)  // SPEED
+#define PAGE_MAIN_STATS_3_VALUE_X       (TILE_TO_PIXELS(10) - 1)    // -> values
+#define PAGE_MAIN_STATS_1_Y             (TILE_TO_PIXELS(2) - 2)     // HP,  SPATK
+#define PAGE_MAIN_STATS_2_Y             (TILE_TO_PIXELS(4) - 2)     // ATK, SPDEF
+#define PAGE_MAIN_STATS_3_Y             (TILE_TO_PIXELS(6) - 2)     // DEF, SPEED
+
 enum MoveReminderSetupSteps
 {
     MREMINDER_SETUP_RESET,
@@ -55,6 +70,8 @@ enum MoveReminderWindows
 enum MoveReminderTextColors
 {
     MREMINDER_TXTCLR_DEFAULT,
+    MREMINDER_TXTCLR_MALE,
+    MREMINDER_TXTCLR_FEMALE,
     MREMINDER_TXTCLR_HELP_BAR,
 
     NUM_MREMINDER_TXTCLRS

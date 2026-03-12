@@ -59,9 +59,14 @@ static void MReminderPage_UpdateFrontEnd(void);
 static enum MoveReminderPages MReminderPage_GetValue(void);
 static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
 
+static struct MoveReminderMon *MReminderMon_Get(void);
+
 static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
 static void MainPage_UpdateFrontEnd(void);
+static void MainPage_PrintMonGender(void);
+static void MainPage_PrintMonLevel(void);
+static void MainPage_PrintMonStat(enum Stat, u32, u32, u32, u32);
 
 static void FilterPage_UpdateFrontEnd(void);
 
@@ -401,6 +406,11 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages page
     return MReminderPage_GetValue();
 }
 
+static struct MoveReminderMon *MReminderMon_Get(void)
+{
+    return &sMoveReminderResourcesPtr->mon;
+}
+
 static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
 {
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
@@ -408,7 +418,61 @@ static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str
 
 static void MainPage_UpdateFrontEnd(void)
 {
+    struct MoveReminderMon *mon = MReminderMon_Get();
 
+    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, mon->nickname, FONT_OUTLINED, 2, 0, MREMINDER_TXTCLR_DEFAULT);
+    MainPage_PrintMonGender();
+    MainPage_PrintMonLevel();
+
+    MainPage_PrintMonStat(STAT_HP,  PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_1_Y);
+    MainPage_PrintMonStat(STAT_ATK, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_2_Y);
+    MainPage_PrintMonStat(STAT_DEF, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_3_Y);
+
+    MainPage_PrintMonStat(STAT_SPATK, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_1_Y);
+    MainPage_PrintMonStat(STAT_SPDEF, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_2_Y);
+
+    MainPage_PrintMonStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
+}
+
+static void MainPage_PrintMonGender(void)
+{
+    struct MoveReminderMon *mon = MReminderMon_Get();
+    u32 species = mon->species;
+    u32 gender = mon->gender;
+
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+     && gender == MON_GENDERLESS)
+    {
+        return;
+    }
+
+    bool32 femaleMon = gender == MON_FEMALE;
+    enum MoveReminderTextColors color = MREMINDER_TXTCLR_MALE + femaleMon;
+    const u8 *str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
+
+    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, str, FONT_OUTLINED, 66, 0, color);
+}
+
+static void MainPage_PrintMonLevel(void)
+{
+    struct MoveReminderMon *mon = MReminderMon_Get();
+
+    ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
+    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
+}
+
+// x/y1 for stat's name, x/y2 for stat's number
+static void MainPage_PrintMonStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
+{
+    u32 value = MReminderMon_Get()->stats[stat];
+
+    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, sMoveReminder_StatNames[stat],
+        FONT_OUTLINED, x1, y1, MREMINDER_TXTCLR_DEFAULT);
+
+    ConvertUIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, gStringVar1,
+        FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
 }
 
 static void FilterPage_UpdateFrontEnd(void)

@@ -1,6 +1,16 @@
 static const u32 sMoveReminder_Tiles[] = INCBIN_U32("graphics/ui_menus/move_reminder/tiles.4bpp.smol");
 static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_reminder/tiles.gbapal");
 
+static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
+{
+    [STAT_HP] = COMPOUND_STRING("HP:"),
+    [STAT_ATK] = COMPOUND_STRING("ATK:"),
+    [STAT_DEF] = COMPOUND_STRING("DEF:"),
+    [STAT_SPEED] = COMPOUND_STRING("SPD:"),
+    [STAT_SPATK] = COMPOUND_STRING("SPATK:"),
+    [STAT_SPDEF] = COMPOUND_STRING("SPDEF:"),
+};
+
 static const struct MoveReminderPageInfo sMoveReminder_PagesInfo[NUM_MREMINDER_PAGES] =
 {
     [MREMINDER_PAGE_MAIN] =
@@ -58,6 +68,8 @@ static const struct WindowTemplate sMoveReminderWindowTemplates[NUM_MREMINDER_WI
 
 static const u8 sMoveReminderTextColors[NUM_MREMINDER_TXTCLRS][3] =
 {
-    [MREMINDER_TXTCLR_DEFAULT]    = { TEXT_COLOR_TRANSPARENT,    TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY },
+    [MREMINDER_TXTCLR_DEFAULT]   = { 0, 2, 1 },
+    [MREMINDER_TXTCLR_MALE]      = { 0, 2, 15 },
+    [MREMINDER_TXTCLR_FEMALE]    = { 0, 2, 12 },
     [MREMINDER_TXTCLR_HELP_BAR]  = { 0, 1, 0 },
 };
