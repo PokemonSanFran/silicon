@@ -1,7 +1,8 @@
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 
 mapscripts Route98_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(Route98_RouteFlag_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call(AngelDelivery_Script_HideBikers)
@@ -13,8 +14,9 @@ mapscripts Route98_MapScripts {
 }
 
 script Route98_RouteFlag_Script{
-	if(flag(FLAG_VISITED_OROLAND_COLISEUM) && flag(FLAG_VISITED_OROLAND)){
-			setflag(FLAG_VISITED_ROUTE98)
+	if(flag(FLAG_VISITED_OROLAND_COLISEUM) && flag(FLAG_VISITED_OROLAND))
+    {
+        setflag(FLAG_VISITED_ROUTE98)
 	}
 	return
 }
