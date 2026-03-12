@@ -2611,6 +2611,7 @@ static void ResumeMap(bool32 a1)
     WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
+    ClearAllPhenomenonData(); // phenomenon
 }
 
 static void InitObjectEventsLink(void)
