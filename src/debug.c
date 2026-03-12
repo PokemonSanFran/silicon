@@ -4053,6 +4053,8 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_TOUR_GUIDE_TOURIST) \
     X(MUS_VS_CHARLOTTE) \
     X(MUS_CRESALTA_VISTA_NIGHT) \
+    X(MUS_HOBBYIST) \
+    X(MUS_CABBIE_ARRIBA) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
