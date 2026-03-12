@@ -34,6 +34,7 @@ static void Task_MReminderInput_Main(u8);
 static void Task_MReminderInput_WaitFadeAndExit(u8);
 
 static void CB2_MReminderSetup(void);
+static void MReminderSetup_InitMonData(void);
 static bool32 MReminderSetup_InitBgs(void);
 static void MReminderSetup_InitGraphics(void);
 static void MReminderSetup_InitWindows(void);
@@ -43,6 +44,9 @@ static void Task_MReminderSetup_WaitFade(u8);
 static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers, u8 *);
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers);
 
+static enum MoveReminderModes MReminderMode_GetValue(void);
+static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
+
 static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages);
 static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages);
 static void MReminderPage_ReloadTilemap(void);
@@ -51,7 +55,7 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
 
 #include "data/ui_move_reminder.h"
 
-void MoveReminder_Init(MainCallback callback)
+void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void *mon, u32 moveSlot)
 {
     sMoveReminderResourcesPtr = AllocZeroed(sizeof(struct MoveReminderResources));
     if (sMoveReminderResourcesPtr == NULL)
@@ -60,8 +64,11 @@ void MoveReminder_Init(MainCallback callback)
         return;
     }
 
-    sMoveReminderResourcesPtr->savedCallback = callback;
+    MReminderMode_SetValue(mode);
     MReminderPage_SetValue(MREMINDER_PAGE_MAIN);
+    sMoveReminderResourcesPtr->ptr.mon = mon;
+    sMoveReminderResourcesPtr->moveSlot = moveSlot;
+    sMoveReminderResourcesPtr->savedCallback = callback;
 
     SetMainCallback2(CB2_MReminderSetup);
 }
@@ -145,6 +152,10 @@ static void CB2_MReminderSetup(void)
         ResetTasks();
         gMain.state++;
         break;
+    case MREMINDER_SETUP_MONDATA:
+        MReminderSetup_InitMonData();
+        gMain.state++;
+        break;
     case MREMINDER_SETUP_BACKGROUNDS:
         if (!MReminderSetup_InitBgs())
         {
@@ -184,6 +195,30 @@ static void CB2_MReminderSetup(void)
         gMain.state++;
         break;
     }
+}
+
+static void MReminderSetup_InitMonData(void)
+{
+    struct Pokemon oldMon;
+
+    if (MReminderMode_GetValue() == MREMINDER_MODE_BOX)
+        BoxMonToMon(sMoveReminderResourcesPtr->ptr.boxMon, &oldMon);
+    else
+        CopyMon(&oldMon, sMoveReminderResourcesPtr->ptr.mon, sizeof(struct Pokemon));
+
+    struct MoveReminderMon *newMon = &sMoveReminderResourcesPtr->mon;
+
+    newMon->species = GetMonData(&oldMon, MON_DATA_SPECIES);
+
+    GetMonNickname(&oldMon, newMon->nickname);
+    newMon->gender = GetMonGender(&oldMon);
+    newMon->level = GetMonData(&oldMon, MON_DATA_LEVEL);
+
+    for (enum Stat stat = 0; stat < NUM_STATS; stat++)
+        newMon->stats[stat] = GetMonData(&oldMon, MON_DATA_MAX_HP + stat);
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        newMon->moves[i] = GetMonData(&oldMon, MON_DATA_MOVE1 + i);
 }
 
 static bool32 MReminderSetup_InitBgs(void)
@@ -270,6 +305,17 @@ static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers buf, u8 *add
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers buf)
 {
     return sMoveReminderResourcesPtr->tilemapBufs[buf];
+}
+
+static enum MoveReminderModes MReminderMode_GetValue(void)
+{
+    return sMoveReminderResourcesPtr->mode;
+}
+
+static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes mode)
+{
+    sMoveReminderResourcesPtr->mode = mode;
+    return MReminderMode_GetValue();
 }
 
 static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages page)

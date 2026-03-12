@@ -1240,10 +1240,18 @@ static void Task_SummaryInput_MovesOpenReminder(u8 taskId)
         sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
         sMonSummaryInitialBackup.isBoxMon = sMonSummaryDataPtr->useBoxMon;
         sMonSummaryInitialBackup.totalIdx = SummaryInput_GetTotalIndex();
-
         gLastViewedMonIndex = SummaryInput_GetIndex();
 
-        MoveReminder_Init(CB2_ReloadMonSummary);
+        enum MoveReminderModes mode = sMonSummaryDataPtr->useBoxMon ? MREMINDER_MODE_BOX : MREMINDER_MODE_PARTY;
+        u32 idx = SummaryInput_GetIndex();
+        void *mon;
+
+        if (sMonSummaryDataPtr->useBoxMon)
+            mon = &sMonSummaryDataPtr->list.boxMons[idx];
+        else
+            mon = &sMonSummaryDataPtr->list.mons[idx];
+
+        MoveReminder_Init(mode, CB2_ReloadMonSummary, mon, MovesPageMisc_GetSlotIndex());
         MonSummary_FreeResources();
         DestroyTask(taskId);
     }
