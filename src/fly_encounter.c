@@ -18,16 +18,20 @@
 #include "wild_encounter.h"
 #include "constants/item.h"
 
-static bool8 DoesDestinationHaveFlyMons(void)
+const struct WildPokemonInfo *GetHeaderFlyMonsInfo(void)
 {
     u32 headerId = GetCurrentMapWildMonHeaderId();
+
     if (headerId == HEADER_NONE)
-        return FALSE;
+        return NULL;
 
     enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FLY_MONS);
-    const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+    return gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+}
 
-    return (wildPokemonInfo != NULL);
+static bool8 DoesDestinationHaveFlyMons(void)
+{
+    return (GetHeaderFlyMonsInfo() != NULL);
 }
 
 enum FlyEncounterTypes GetFlyEncounterType(void)
@@ -85,7 +89,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
         BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;
     }
-    else if (TryGenerateWildMon(wildPokemonInfo, 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+    else if (TryGenerateWildMon(GetHeaderFlyMonsInfo(), 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
     {
         BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;

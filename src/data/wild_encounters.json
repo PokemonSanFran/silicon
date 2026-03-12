@@ -73191,6 +73191,111 @@
                 "species": "SPECIES_LEAVANNY"
               }
             ]
+          },
+          "fly_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PIDGEOTTO"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 66,
+                "max_level": 68,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_KILOWATTREL"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 68,
+                "max_level": 69,
+                "species": "SPECIES_PIDGEOT"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 79,
+                "max_level": 81,
+                "species": "SPECIES_TALONFLAME"
+              },
+              {
+                "min_level": 83,
+                "max_level": 84,
+                "species": "SPECIES_NOIVERN"
+              }
+            ]
           }
         },
         {
