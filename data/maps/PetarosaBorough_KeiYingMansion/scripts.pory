@@ -4,12 +4,12 @@ mapscripts PetarosaBorough_KeiYingMansion_MapScripts {
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_KEIYING_RAISON_DETRE_STATE, 0: KeiyingRaisonDetre_MoveIntoFoyer_Script
+        VAR_KEIYING_STATE, 0: KeiyingRaisonDetre_MoveIntoFoyer_Script
     ]
 }
 
 script PetarosaBorough_Mansion_MapScripts_OnTransition {
-    switch (var(VAR_KEIYING_RAISON_DETRE_STATE)){
+    switch (var(VAR_KEIYING_STATE)){
         case 1: call(KeiyingRaisonDetre_HideObjectKids_Script)
         case 2: call(KeiyingRaisonDetre_HideObjectKids_Script)
         case 3: call(KeiyingRaisonDetre_HideObjectKids_Script)

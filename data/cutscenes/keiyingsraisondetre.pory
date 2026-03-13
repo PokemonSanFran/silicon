@@ -21,7 +21,7 @@ script KeiyingRaisonDetre_ObjectCleanUp_Script {
 script KeiyingRaisonDetre_MoveIntoFoyer_Script {
     lock
         startcutscene(JUMPPLAYER_KEIYINGSRAISONDETRE)
-        setvar(VAR_KEIYING_RAISON_DETRE_STATE,MET_KEIYING_KIDS)
+        setvar(VAR_KEIYING_STATE,STATE_KEIYING_MET_KIDS)
         applymovement(ALEKSANDER, KeiyingRaisonDetre_ComeDownStairs)
         delay(48)
         applymovement(SUMMER, KeiyingRaisonDetre_ComeDownStairs)
@@ -96,7 +96,7 @@ script KeiyingRaisonDetre_CityDiscussion_Dialogue {
 script KeiyingRaisonDetre_ComeSit_Dialogue {
     lock
         msgbox(format("Over here!"), MSGBOX_NPC,SPEAKER_KEIYING)
-        setvar(VAR_KEIYING_RAISON_DETRE_STATE, START_KEIYING_WINE_SPEECH)
+        setvar(VAR_KEIYING_STATE, STATE_KEIYING_START_WINE_SPEECH)
         closemessage
         release
         end
@@ -160,7 +160,7 @@ script KeiyingRaisonDetre_Wine_Dialogue {
         release
         setobjectxy(KEIYING, 37, 5)
         setobjectxyperm(KEIYING, 37, 5)
-        setvar(VAR_KEIYING_RAISON_DETRE_STATE,POST_KEIYING_WINE_SPEECH)
+        setvar(VAR_KEIYING_STATE,STATE_KEIYING_START_DINNER)
         call(TryAutoSave)
         endcutscene
         end
@@ -291,8 +291,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
         removeobject(CRYING_MAID)
         removeobject(KEIYING)
         addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_KEIYING_RAISON_DETRE_STATE, POST_KEIYING_RAISON_DETRE)
-        setvar(VAR_KEIYING_MANSION_STATE,FINISHED_KEIYING_RAISON) //PSF TODO replace with a flag
+        setvar(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE)
         call(TryAutoSave)
         endcutscene
         release
@@ -300,7 +299,7 @@ script KeiyingRaisonDetre_NewsStory_Script {
 }
 
 script KeiyingRaisonDetre_PreventPlayerLeaving_Script {
-    if (var(VAR_KEIYING_RAISON_DETRE_STATE) < POST_KEIYING_RAISON_DETRE){
+    if (var(VAR_KEIYING_STATE) < STATE_KEIYING_POST_RAISON_DETRE){
         msgbox(format("Keiying has been so generous... I should stay."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
             closemessage
             applymovement(PLAYER, Common_Movement_WalkUp)

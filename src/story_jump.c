@@ -94,7 +94,6 @@ static void JumpPlayerTo_swagbag2(bool32);
 static void JumpPlayerTo_EnterPua(bool32);
 static void JumpPlayerTo_SorryAboutMyFriends(bool32);
 static void JumpPlayerTo_TheStorySoFar(bool32, u32);
-static void JumpPlayerTo_YoungPadawan(bool32);
 static void JumpPlayerTo_WaitYouWentWhere(bool32);
 static void JumpPlayerTo_EnterNeriene(bool32);
 static void JumpPlayerTo_FriendsForDinner(bool32);
@@ -124,7 +123,6 @@ static void JumpPlayerTo_Finals(bool32);
 static void JumpPlayerTo_WaitHeDidWhat(bool32);
 static void JumpPlayerTo_WelcometotheHallofFame(bool32);
 static void JumpPlayerTo_BeingChampionisHard(bool32);
-static void JumpPlayerTo_LetsGrabLunch(bool32);
 static void JumpPlayerTo_RestoreHodouCity(bool32);
 static void JumpPlayerTo_RestoreZenzuIsland(bool32);
 static void JumpPlayerTo_RestoreEspuleeOutskirts(bool32);
@@ -1277,8 +1275,7 @@ void FlagsVarWarp_Keiyingsraisondetre()
 {
     FlagSet(FLAG_VISITED_PETAROSA_BOROUGH);
     IncrementStorylineVariable();
-    VarSet(VAR_KEIYING_RAISON_DETRE_STATE, POST_KEIYING_RAISON_DETRE);
-    VarSet(VAR_KEIYING_MANSION_STATE, FINISHED_KEIYING_RAISON);
+    VarSet(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE);
     SetWarpDestination(MAP_GROUP(MAP_PETAROSA_BOROUGH),MAP_NUM(MAP_PETAROSA_BOROUGH),0,USE_WARP_ID,USE_WARP_ID);
 }
 

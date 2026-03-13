@@ -117,7 +117,6 @@
 #define VAR_PETALBURG_CITY_STATE                         0x4057
 #define VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE                   0x4057 // PSF Var
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
-#define VAR_KEIYING_MANSION_STATE                           0x4058 // PSF Var
 #define VAR_MSGBOX_TAIL                          0x4059 // PSF Var
 #define VAR_RUSTBORO_CITY_STATE                          0x405A
 #define VAR_MSGBOX_EMOTE                           0x405B // PSF Var
@@ -333,7 +332,7 @@
 #define VAR_MANHUNT_STATE                                   0x40FA // PSF Var
 #define VAR_GROUP_OF_ASSHOLES_STATE                                0x40FB // PSF Var
 #define VAR_HOWDISAPPOINTING_STATE                                0x40FC // PSF Var
-#define VAR_KEIYING_RAISON_DETRE_STATE                                0x40FD // PSF Var
+#define VAR_KEIYING_STATE                                0x40FD // PSF Var
 #define VAR_LAST_RESTORATION_TAKEDOWN_QUEST                                0x40FE // PSF Var
 #define VAR_LETSBURNTHISMOTHERSTATE                                0x40FF // PSF Var
 #define VAR_UBER_QUEST_EXCEPTION_DESTINATION						VAR_TAXI_DESTINATION

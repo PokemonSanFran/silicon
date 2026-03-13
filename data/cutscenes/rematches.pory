@@ -71,3 +71,163 @@ script Rematches_Script_AskEleanorRematch
 	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELEANOR)
 	goto(Rematches_Script_AskEleanorBattle)
 }
+
+script Quest_Rematches_Script_HideKeiYing
+{
+    setobjectflagfromlocalid(LOCALID_HODOUCITY_KEIYING)
+}
+
+script Rematches_Script_InteractKeiYing
+{
+    lock
+    faceplayer
+    goto_if_subquest_not_complete(QUEST_DIGGINGUPADAORASDIRT,SUB_QUEST_4,Quest_Diggingupadaorasdirt_Dialogue_ExplainAdaora)
+    goto_if_eq(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU,Rematches_Dialogue_FirstKeiYingBattle)
+    goto_if_lt(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECIEVED,Rematches_Script_GiveKubfu)
+    goto(Rematches_Script_DailyRematchKeiying)
+}
+
+script Rematches_Dialogue_FirstKeiYingBattle
+{
+    msgbox(format("The time is now, is it? Very well! This is how it should be, {PLAYER}! This is no longer Sharprise COO vs Sharprise Kickstart Applicant…No, this is the Hodou City Gym Leader VS the Resido Champion! Give me your best!"),,SPEAKER_KEIYING)
+    closemessage
+// PSF TODO Player loss: We of Resido take pride in our Gyms for a reason. They’re no joke.
+    call(Rematches_Script_BattleKeiYing)
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_BATTLE_WON)
+    msgbox(format("You did not disappoint."),,SPEAKER_KEIYING)
+    msgbox(format("Where I’m from, you need to pass three extreme tests to earn the right to train with the greatest armor."),,SPEAKER_KEIYING)
+    msgbox(format("I believe you’ve more than proven your strength and determination."),,SPEAKER_KEIYING)
+    goto(Rematches_Script_GiveKubfu)
+}
+
+script Rematches_Script_GiveKubfu
+{
+    switch(var(VAR_KEIYING_STATE))
+    {
+        case STATE_KEIYING_BATTLE_WON:
+            goto(Rematches_Script_GiveKubfu1)
+        case STATE_KEIYING_KUBFU_RECIEVED_1:
+            goto(Rematches_Script_GiveKubfu2)
+        case STATE_KEIYING_KUBFU_RECIEVED_2:
+            goto(Rematches_Script_GiveScrolls)
+        default:
+        case STATE_KEIYING_SCROLLS_RECIEVED:
+            goto(Rematches_Dialogue_AfterKubfu)
+    }
+}
+
+script Rematches_Script_GaveKubfu
+{
+    cueobjectplayer(LOCALID_HODOUCITY_KEIYING)
+    bufferspeciesname(STR_VAR_1,SPECIES_KUBFU)
+    bufferspeciesname(STR_VAR_2,SPECIES_KUBFU)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} recieved a Kubfu!"))
+    waitmessage
+    waitfanfare
+    msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)
+    goto_if_eq(VAR_TEMP_1,MON_GIVEN_TO_PARTY,Rematches_Script_NameKubfuParty)
+    goto_if_eq(VAR_TEMP_1,MON_GIVEN_TO_PC,Rematches_Script_NameKubfuPC)
+    closemessage
+    release
+    end
+}
+
+script Rematches_Script_NameKubfuParty
+{
+    goto_if_eq(VAR_RESULT,NO,Rematches_Script_GiveKubfu)
+	call(Common_EventScript_GetGiftMonPartySlot)
+	call(Common_EventScript_NameReceivedPartyMon)
+    goto(Rematches_Script_GiveKubfu)
+}
+
+script Rematches_Script_NameKubfuPC
+{
+    call_if_eq(VAR_RESULT,YES,Common_EventScript_NameReceivedBoxMon)
+	call(Common_EventScript_TransferredToPC)
+    goto(Rematches_Script_GiveKubfu)
+}
+
+script Rematches_Script_GiveKubfu1
+{
+    startmenu_savescreen
+    givemon(SPECIES_KUBFU,30,ITEM_NONE)
+    copyvar(VAR_TEMP_1,VAR_RESULT)
+    if (var(VAR_RESULT) == MON_CANT_GIVE)
+    {
+        msgbox(format("Make some room for two in your party or boxes, please."),,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+    }
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECIEVED_1)
+    goto(Rematches_Script_GaveKubfu)
+}
+
+script Rematches_Script_GiveKubfu2
+{
+    msgbox(format("This little Kubfu has a brother that needs a good home. If you will, please?"),,SPEAKER_KEIYING)
+    closemessage
+    startmenu_savescreen
+    givemon(SPECIES_KUBFU,30,ITEM_NONE)
+    copyvar(VAR_TEMP_1,VAR_RESULT)
+    if (var(VAR_RESULT) == MON_CANT_GIVE)
+    {
+        msgbox(format("Make some room for another in your party or boxes, please."),,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+    }
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_KUBFU_RECIEVED_2)
+    goto(Rematches_Script_GaveKubfu)
+}
+
+script Rematches_Script_GiveScrolls
+{
+    checkitemspace(ITEM_SCROLL_OF_DARKNESS,2)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Make some room in your bag, please."),,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+    }
+    setvar(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECIEVED)
+    msgbox(format("And these items will help you train those Kubfu to their best potential."),,SPEAKER_KEIYING)
+    closemessage
+    giveitem(ITEM_SCROLL_OF_DARKNESS,1)
+    giveitem(ITEM_SCROLL_OF_WATERS,1)
+    goto(Rematches_Script_GiveKubfu)
+}
+
+script Rematches_Dialogue_AfterKubfu
+{
+    msgbox(format("Take care of them, train well as I know you will…And come see me for a rematch one day."),,SPEAKER_KEIYING)
+    closemessage
+    release
+    end
+}
+
+script Rematches_Script_BattleKeiYing
+{
+    setflag(FLAG_DAILY_KEIYING_REMATCH)
+    trainerbattle_no_intro(TRAINER_KEI_YING,format("Excellent. I expected nothing less from our Champion."))
+}
+
+script Rematches_Script_DailyRematchKeiying
+{
+    if (flag(FLAG_DAILY_KEIYING_REMATCH))
+    {
+        msgbox(format("{PLAYER}, if you’re here for a rematch, can it wait for tomorrow? I am very worn out today."),,SPEAKER_KEIYING)
+        closemessage
+        release
+        end
+    }
+
+    msgbox(format("You’re back! For a rematch I assume? Magnificent."),,SPEAKER_KEIYING)
+    msgbox(format("I shan’t hold back! I know you wouldn’t forgive me."),,SPEAKER_KEIYING)
+    call(Rematches_Script_BattleKeiYing)
+    closemessage
+    release
+    end
+}
