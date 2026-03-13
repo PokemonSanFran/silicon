@@ -9,6 +9,7 @@ mapscripts CurenoPort_MapScripts {
         call(HowDoWeGetHome_FerryFixed_Script)
         call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
         call(WarehouseRave_HideObject_Script)
+        call(Quest_Diggingupadaorasdirt_Script_ControlVisibilityDigginginvestigator)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

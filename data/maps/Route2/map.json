@@ -355,6 +355,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK",
       "flag": "FLAG_TEMP_1F"
+    },
+    {
+      "local_id": "LOCALID_DIGGINGTIMEMEMBERA",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_3",
+      "x": 12,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "RouteA_Script_Interact_DiggingtidememberA",
+      "flag": "0"
     }
   ],
   "warp_events": [

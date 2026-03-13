@@ -1606,10 +1606,10 @@ sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
 
 static const struct SubQuest sDiggingUpAdaorasDirt_Sub[QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT] =
 {
-    sub_quest(168, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_DIGGINGINVESTIGATOR, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(169, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(170, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(171, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(168, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(169, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(170, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(171, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
 };
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -2179,7 +2179,103 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_BELEN,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestaurantExpansion1_Sub,
-        .numSubquests = QUEST_RESTAURANTEXPANSION1_SUB_COUNT
+        .numSubquests = QUEST_RESTAURANTEXPANSION1_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTAURANTEXPANSION1_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Restaurantexpansion1,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                .warpId = 0,
+            },
+            [STATE_QUEST_RESTAURANTEXPANSION1_HELPED_UNHOUSED] =
+            {
+                .name = COMPOUND_STRING("Helped Unhoused"),
+                .setupFunc = DebugQuest_Restaurantexpansion1,
+                side_quest_map(MAP_OROLAND),
+                .warpId = 0,
+                .x = 2,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTAURANTEXPANSION1_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Restaurantexpansion1,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                .warpId = 0,
+            },
+                [STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE] =
+                {
+                    .name = COMPOUND_STRING("Pickup Che"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE] =
+                {
+                    .name = COMPOUND_STRING("Deliver Che"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_1),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_KARIOKA] =
+                {
+                    .name = COMPOUND_STRING("Pickup Karioka"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA] =
+                {
+                    .name = COMPOUND_STRING("Deliver Karioka"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_2),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHEBUREKI] =
+                {
+                    .name = COMPOUND_STRING("Pickup Chebureki"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHEBUREKI] =
+                {
+                    .name = COMPOUND_STRING("Deliver Chebureki"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_3),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_JIANBING] =
+                {
+                    .name = COMPOUND_STRING("Pickup Jianbing"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_JIANBING] =
+                {
+                    .name = COMPOUND_STRING("Deliver Jianbing"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_4),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_REWARD] =
+                {
+                    .name = COMPOUND_STRING("Reward"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+                [STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE] =
+                {
+                    .name = COMPOUND_STRING("Complete"),
+                    .setupFunc = DebugQuest_Restaurantexpansion1,
+                    side_quest_map(MAP_QUEST_RESTAURANTEXPANSION1_0),
+                    .warpId = 0,
+                },
+        },
     },
     [QUEST_RESTAURANTEXPANSION2] =
     {

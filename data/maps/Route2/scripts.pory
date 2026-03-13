@@ -37,3 +37,10 @@ script Route2_Script_Interact_BodegaburnoutRescueK
     trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEK,format("If I beat you, will you tell me how to get back to Espulee Outskirts?"),format("Could you help me anyways?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK)
     // PSF TODO BodegaburnoutRescueK:  I’m trying to get back to Espulee Outskirts!
 }
+
+script RouteA_Script_Interact_DiggingtidememberA
+{
+    trainerbattle_single(TRAINER_DIGGINGTIMEMEMBERA,format("I’ve never looked up to someone like I do Adaora. I wanna be strong just like her!"),format("Aw man, I hope I didn’t disappoint Adaora…"),Quest_Diggingupadaorasdirt_Dialogue_DiggingtidememberA)
+    // PSF TODO Loss text DiggingtidememberA: This is a great start! Think she’ll be proud?
+    goto(Quest_Diggingupadaorasdirt_Dialogue_DiggingtidememberA)
+}

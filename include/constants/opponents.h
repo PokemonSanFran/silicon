@@ -1102,6 +1102,7 @@ enum ResidoTrainerIds
     TRAINER_CHEFA,
     TRAINER_CHEFB,
     TRAINER_CHEFC,
+    TRAINER_DIGGINGTIMEMEMBERA,
 };
 // End siliconMerge
 
