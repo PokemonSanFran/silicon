@@ -358,7 +358,7 @@
     },
     {
       "local_id": "LOCALID_DIGGINGTIMEMEMBERA",
-      "graphics_id": "OBJ_EVENT_GFX_COMRADE_3",
+      "graphics_id": "OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA",
       "x": 12,
       "y": 8,
       "elevation": 0,

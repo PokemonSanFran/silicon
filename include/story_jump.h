@@ -14,5 +14,7 @@ void JumpPlayerTo_WarehouseRave(bool32);
 void JumpPlayerTo_SpeechSpeechSpeech(bool32);
 void JumpPlayerTo_YoungPadawan(bool32);
 void JumpPlayerTo_LetsGrabLunch(bool32);
+void JumpPlayerTo_HowDoWeGetHome(bool32);
+void JumpPlayerTo_Epilogue(bool32);
 
 #endif // GUARD_STORYJUMP_H

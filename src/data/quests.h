@@ -3889,7 +3889,72 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_DIGGINGINVESTIGATOR,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sDiggingUpAdaorasDirt_Sub,
-        .numSubquests = QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT
+        .numSubquests = QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_CURENO_PORT),
+                .x = 2,
+                .y = 15,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_CURENO_PORT),
+                .x = 2,
+                .y = 15,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_INFLUENCE] =
+            {
+                .name = COMPOUND_STRING("Spoken Influence"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_INFLUENCE),
+                .x = 12,
+                .y = 9,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_LEADERSHIP] =
+            {
+                .name = COMPOUND_STRING("Spoken Leadership"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_LEADERSHIP),
+                .x = 13,
+                .y = 14,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_GROWING_UP] =
+            {
+                .name = COMPOUND_STRING("Spoken Growing Up"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_GROWING_UP),
+                .warpId = WARP_ID_QIUVILLAGE_APARTMENT_2F_ENTRANCE,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING] =
+            {
+                .name = COMPOUND_STRING("Spoken Keiying"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_QUEST_DIGGINGUPADAORASDIRT_KEIYING),
+                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_CURENO_PORT),
+                .x = 2,
+                .y = 15,
+            },
+            [STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Diggingupadaorasdirt,
+                side_quest_map(MAP_CURENO_PORT),
+                .x = 2,
+                .y = 15,
+            },
+        },
     },
     [QUEST_FREETHEINNOCENT] =
     {

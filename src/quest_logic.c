@@ -3164,4 +3164,42 @@ void Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward(void)
 
 void DebugQuest_Diggingupadaorasdirt(u8 state)
 {
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_STARTED_QUEST:
+            JumpPlayerTo_HowDoWeGetHome(JUMP_DEBUG);
+            QuestMenu_ScriptSetActive(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_INFLUENCE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_DIGGINGTIMEMEMBERA);
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_LEADERSHIP:
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_GROWING_UP:
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING:
+            JumpPlayerTo_Epilogue(JUMP_DEBUG);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM); // PSF TODO replace with quest debug
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            VarSet(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE:
+            AddMoney(&gSaveBlock1Ptr->money,QUEST_DIGGINGUPADAORASDIRT_REWARD);
+            QuestMenu_ScriptSetComplete(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+    }
 }

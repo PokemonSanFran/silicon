@@ -294,6 +294,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_HODOU_GYM_ENTRANCE",
       "x": 22,
       "y": 3,
       "elevation": 0,

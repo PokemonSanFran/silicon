@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ADAORAPARENT",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 3,
       "y": 2,
@@ -30,6 +31,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_QIUVILLAGE_APARTMENT_2F_ENTRANCE",
       "x": 1,
       "y": 1,
       "elevation": 0,
