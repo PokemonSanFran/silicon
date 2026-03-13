@@ -2,6 +2,7 @@
 #include "global.h"
 #include "strings.h"
 #include "quest_strings.h"
+#include "story_jump.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"

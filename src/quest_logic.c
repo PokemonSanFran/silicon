@@ -248,9 +248,10 @@ void DebugQuest_RockCollector(u8 state)
     switch (state)
     {
         case STATE_QUEST_ROCKCOLLECTOR_NOT_STARTED:
-            DebugQuest_BetweenAStoneAndAHardPlace(STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_ROCKCOLLECTOR_STARTED:
+            DebugQuest_BetweenAStoneAndAHardPlace(STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
             QuestMenu_ScriptSetActive(QUEST_ROCKCOLLECTOR);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_KIT,1);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_1,1);
@@ -1085,10 +1086,11 @@ void DebugQuest_BodegaBurnout(u8 state)
     switch (state)
     {
         case STATE_QUEST_BODEGABURNOUT_NOT_STARTED:
-            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
-            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_BODEGABURNOUT_STARTED_QUEST:
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
             QuestMenu_ScriptSetActive(QUEST_BODEGABURNOUT);
             break;
         case STATE_QUEST_BODEGABURNOUT_TALKED_TO_SHOPUNIONREP:
@@ -2415,6 +2417,9 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
     {
         default:
         case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            // PSF TODO use quest debug for both of the following
+            QuestMenu_ScriptSetComplete(QUEST_INVERSEHALLUCINOGENIC);
             QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
             break;
         case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
@@ -3052,9 +3057,10 @@ void DebugQuest_Getthebandbacktogether(u8 state)
     switch (state)
     {
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_NOT_STARTED:
-            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST:
+            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
             QuestMenu_ScriptSetActive(QUEST_GETTHEBANDBACKTOGETHER);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A:
@@ -3087,12 +3093,75 @@ void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
 // Quest: Restaurant Expansion 1
 // ***********************************************************************
 
+static const u16 questFoodLUT[QUEST_RESTAURANTEXPANSION1_SUB_COUNT] =
+{
+    ITEM_QUEST_RESTAURANTEXPANSION1_1,
+    ITEM_QUEST_RESTAURANTEXPANSION1_2,
+    ITEM_QUEST_RESTAURANTEXPANSION1_3,
+    ITEM_QUEST_RESTAURANTEXPANSION1_4,
+};
+
+void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
+}
+
+void DebugQuest_Restaurantexpansion1(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTAURANTEXPANSION1_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_HELPED_UNHOUSED:
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_UNHOUSED_INSPIRED);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_KARIOKA:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHEBUREKI:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_JIANBING:
+            u32 pickupProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE);
+            AddBagItem(questFoodLUT[pickupProgress],1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHEBUREKI:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_JIANBING:
+            u32 deliverProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE);
+            RemoveBagItem(questFoodLUT[deliverProgress],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, deliverProgress);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_RESTAURANTEXPANSION1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE:
+            AddBagItem(ITEM_QUEST_RESTAURANTEXPANSION1_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION1);
+            break;
+    }
+}
+
 void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
 {
     gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
 }
 
-void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
+// ***********************************************************************
+// Quest: Digging Up Adaora's Dirt
+// ***********************************************************************
+
+void Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward(void)
 {
-    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_DIGGINGUPADAORASDIRT);
+}
+
+
+void DebugQuest_Diggingupadaorasdirt(u8 state)
+{
 }

@@ -55,6 +55,7 @@ void DebugQuest_BetweenAStoneAndAHardPlace(u8);
 void DebugQuest_RockCollector(u8);
 void DebugQuest_BodegaBurnout(u8);
 void DebugQuest_Getthebandbacktogether(u8);
+void DebugQuest_Restaurantexpansion1(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
