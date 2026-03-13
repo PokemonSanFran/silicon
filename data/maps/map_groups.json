@@ -309,7 +309,8 @@
     "QiuVillage_Restaurant",
     "QiuVillage_RameshHouse",
     "QiuVillage_PokemonCenter_1F",
-    "QiuVillage_Apartment"
+    "QiuVillage_Apartment",
+    "QiuVillage_Apartment_2F"
   ],
   "gMapGroup_IndoorCapheCity": [
     "CapheCity_GRUNTOffice",

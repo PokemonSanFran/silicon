@@ -1681,3 +1681,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/MermerezaCity_Gym_Kitchen3/scripts.inc"
 
 	.include "data/maps/Chasilla_MochiShop/scripts.inc"
+
+	.include "data/maps/QiuVillage_Apartment_2F/scripts.inc"

@@ -1,7 +1,7 @@
 {
-  "id": "MAP_QIU_VILLAGE_APARTMENT",
-  "name": "QiuVillage_Apartment",
-  "layout": "LAYOUT_QIU_VILLAGE_APARTMENT",
+  "id": "MAP_QIU_VILLAGE_APARTMENT_2F",
+  "name": "QiuVillage_Apartment_2F",
+  "layout": "LAYOUT_QIU_VILLAGE_APARTMENT_2F",
   "music": "MUS_FALLARBOR",
   "region_map_section": "MAPSEC_QIU_VILLAGE",
   "requires_flash": false,
@@ -15,40 +15,26 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
-      "x": 4,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "x": 3,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "QiuVillage_Apartment_InteractAntone_Event_Script",
+      "script": "Quest_Diggingupadaorasdirt_Interact_Adaoraparent",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 2,
-      "y": 4,
-      "elevation": 0,
-      "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 3,
-      "y": 4,
-      "elevation": 0,
-      "dest_map": "MAP_QIU_VILLAGE",
-      "dest_warp_id": "0"
-    },
-    {
       "x": 1,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_QIU_VILLAGE_APARTMENT_2F",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_QIU_VILLAGE_APARTMENT",
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

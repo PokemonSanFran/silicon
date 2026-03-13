@@ -6412,8 +6412,8 @@
     {
       "id": "LAYOUT_QIU_VILLAGE_APARTMENT",
       "name": "QiuVillage_Apartment_Layout",
-      "width": 20,
-      "height": 10,
+      "width": 5,
+      "height": 5,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
@@ -8532,6 +8532,18 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/Chasilla_MochiShop/border.bin",
       "blockdata_filepath": "data/layouts/Chasilla_MochiShop/map.bin"
+    },
+    {
+      "id": "LAYOUT_QIU_VILLAGE_APARTMENT_2F",
+      "name": "QiuVillage_Apartment_2F_Layout",
+      "width": 5,
+      "height": 5,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/QiuVillage_Apartment_2F/border.bin",
+      "blockdata_filepath": "data/layouts/QiuVillage_Apartment_2F/map.bin"
     }
   ]
 }
