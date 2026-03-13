@@ -1670,7 +1670,7 @@
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
 #define FLAG_DAILY_ELEANOR_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag
 #define FLAG_DAILY_NOPOMOD_BATTLE                   (DAILY_FLAGS_START + 0x4)
-#define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
+#define FLAG_DAILY_KEIYING_REMATCH                  (DAILY_FLAGS_START + 0x5)
 #define FLAG_UNUSED_0x926                           (DAILY_FLAGS_START + 0x6)  // Unused Flag
 #define FLAG_UNUSED_0x927                           (DAILY_FLAGS_START + 0x7)  // Unused Flag
 #define FLAG_UNUSED_0x928                           (DAILY_FLAGS_START + 0x8)  // Unused Flag

@@ -10,6 +10,8 @@ mapscripts HodouCity_MapScripts{
         call(Quest_CulturalPurity_MoveGuard_Script)
         call(Quest_Restorehodoucity_HidePewfatOutside_Script)
         call(LetsGrabLunch_CheckRestorationProgress_Script)
+        call_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_Rematches_Script_HideKeiYing)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideKeiYing)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
