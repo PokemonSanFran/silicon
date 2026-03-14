@@ -12,41 +12,83 @@ script EventScript_UnhousedInteractPlayer
     end
 }
 
+script Unhoused_Script_BufferQuestion
+{
+    random(9)
+    switch(var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format("E-excuse me, you got ¥{STR_VAR_2} on ya? I, uh, got swindled by a loan shark…"))
+        case 1: bufferstring(STR_VAR_1,format("Spare ¥{STR_VAR_2} for a guy down on his luck?"))
+        case 2: bufferstring(STR_VAR_1,format("Hey, this is so embarrassing…I don’t suppose you have ¥{STR_VAR_2} to spare, do you? I just…I’m having a really hard time right now."))
+        case 3: bufferstring(STR_VAR_1,format("Aren’t you one of those hot shot Trainer kids? Hey, my Mom just died and didn’t leave me anything in her will. Give ¥{STR_VAR_2} back to the local community, will ya?"))
+        case 4: bufferstring(STR_VAR_1,format("I’m really sorry, I know I shouldn’t ask this but…I desperately need money. Do you have ¥{STR_VAR_2} you can give me? Know anyone who would?"))
+        case 5: bufferstring(STR_VAR_1,format("Rent went up big time last month, now I’m getting evicted and haven’t got the cash for anywhere else in the local area. I wouldn’t say no to ¥{STR_VAR_2} you got lying around."))
+        case 6: bufferstring(STR_VAR_1,format("I got laid off without warning last week and I can’t get an interview to save my life. Please, kid! I just ¥{STR_VAR_2} for a new suit to look presentable!"))
+        case 7: bufferstring(STR_VAR_1,format("Wanna throw ¥{STR_VAR_2} my way or somethin’? Could help me get an Arriba to see my old man…He ain’t doin’ so well at the moment."))
+        case 8: bufferstring(STR_VAR_1,format("Hey, stranger! Wanna see me and my Squawkabilly sing and dance? Just throw ¥{STR_VAR_2} in the pot, and maybe we can pay for the doc to fix up his wing! Don’t be a cheapskate now! P-please?"))
+        case 9: bufferstring(STR_VAR_1,format("Hi. Um…Do you have ¥{STR_VAR_2} lying around? Whatever money you don’t need, it’d mean the world to me. Just, I just - yeah."))
+    }
+}
+
+script Unhoused_Script_BufferThanks
+{
+    random(9)
+    switch(var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format(""))
+        case 1: bufferstring(STR_VAR_1,format(""))
+        case 2: bufferstring(STR_VAR_1,format(""))
+        case 3: bufferstring(STR_VAR_1,format(""))
+        case 4: bufferstring(STR_VAR_1,format(""))
+        case 5: bufferstring(STR_VAR_1,format(""))
+        case 6: bufferstring(STR_VAR_1,format(""))
+        case 7: bufferstring(STR_VAR_1,format(""))
+        case 8: bufferstring(STR_VAR_1,format(""))
+        case 9: bufferstring(STR_VAR_1,format(""))
+    }
+}
+
+script Unhoused_Script_BufferNo
+{
+    random(9)
+    switch(var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format(""))
+        case 1: bufferstring(STR_VAR_1,format(""))
+        case 2: bufferstring(STR_VAR_1,format(""))
+        case 3: bufferstring(STR_VAR_1,format(""))
+        case 4: bufferstring(STR_VAR_1,format(""))
+        case 5: bufferstring(STR_VAR_1,format(""))
+        case 6: bufferstring(STR_VAR_1,format(""))
+        case 7: bufferstring(STR_VAR_1,format(""))
+        case 8: bufferstring(STR_VAR_1,format(""))
+        case 9: bufferstring(STR_VAR_1,format(""))
+    }
+}
+
 script Unhoused_AskDonation_Dialogue
 {
     setflag(FLAG_UNHOUSED_REQUEST)
     lock
     showmoneybox(0,0)
-    buffernumberstring(STR_VAR_1,UNHOUSED_ASK_AMOUNT)
-    msgbox(format("Hey uh, spare ¥{STR_VAR_1} for an homie down on their luck?"),MSGBOX_YESNO,SPEAKER_UNHOUSED)
+    buffernumberstring(STR_VAR_2,UNHOUSED_ASK_AMOUNT)
+    call(Unhoused_Script_BufferQuestion)
+    msgbox(("{STR_VAR_1}"),MSGBOX_YESNO,SPEAKER_UNHOUSED)
     if (var(VAR_RESULT) == YES)
     {
         removemoney(UNHOUSED_ASK_AMOUNT,0)
         updatemoneybox(0)
         special(RandomlyBoostPartyMemberFriendship)
-        msgbox(format("Appreciate it. Good luck doing... whatever you're doing."),,SPEAKER_UNHOUSED)
+        call(Unhoused_Script_BufferThanks)
+        msgbox(("{STR_VAR_1}"),,SPEAKER_UNHOUSED)
     }
     else
     {
-        msgbox(format("I know, we're all hurtin' out here. Have a nice day, ya hear?"),,SPEAKER_UNHOUSED)
+        call(Unhoused_Script_BufferNo)
+        msgbox(("{STR_VAR_1}"),,SPEAKER_UNHOUSED)
     }
     hidemoneybox
     closemessage
     releaseall
     end
-}
-
-text gText_Unhoused_SpareChangeOldMan
-{
-    format("Hey uh, spare ¥{STR_VAR_1} for an homie down on their luck?")
-}
-
-text gText_Unhoused_AppreciateIt
-{
-    format("Appreciate it. Good luck doing... whatever you're doing.")
-}
-
-text gText_Unhoused_WereAllHurtin
-{
-    format("I know, we're all hurtin' out here. Have a nice day, ya hear?")
 }
