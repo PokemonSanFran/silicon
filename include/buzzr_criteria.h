@@ -39,5 +39,6 @@ void TweetCriteria_Quest_RestaurantExpansion1_1(void);
 void TweetCriteria_Quest_RestaurantExpansion1_2(void);
 void TweetCriteria_Quest_RestaurantExpansion1_3(void);
 void TweetCriteria_Quest_Diggingupadaorasdirt_1(void);
+void TweetCriteria_Quest_ReturnDollComplete(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H
