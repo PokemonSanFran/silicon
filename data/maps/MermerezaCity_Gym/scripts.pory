@@ -6,8 +6,6 @@ mapscripts MermerezaCity_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterBelen_StartGymBattle_ObjectSetup_Script)
         call(MermerezaCity_Gym_Leader_Visibility_Script)
-        call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_DEFEATED_LEADER,EnterBelen_Script_HideSousChef)
-        call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_COMPLETE_3,EnterBelen_Script_MoveSousChef)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

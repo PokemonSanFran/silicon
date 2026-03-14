@@ -5692,8 +5692,8 @@
     {
       "id": "LAYOUT_MERMEREZA_CITY_GYM",
       "name": "MermerezaCity_Gym_Layout",
-      "width": 11,
-      "height": 8,
+      "width": 14,
+      "height": 30,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
@@ -8500,8 +8500,8 @@
     {
       "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN2",
       "name": "MermerezaCity_Gym_Kitchen2_Layout",
-      "width": 11,
-      "height": 13,
+      "width": 13,
+      "height": 14,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
@@ -8512,8 +8512,8 @@
     {
       "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN3",
       "name": "MermerezaCity_Gym_Kitchen3_Layout",
-      "width": 17,
-      "height": 13,
+      "width": 19,
+      "height": 15,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",

@@ -100,8 +100,8 @@
       "dest_warp_id": "2"
     },
     {
-      "x": 1,
-      "y": 1,
+      "x": 0,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN2",
       "dest_warp_id": "0"
@@ -111,7 +111,25 @@
     {
       "type": "trigger",
       "x": 1,
-      "y": 2,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_B",
+      "var_value": "0",
+      "script": "EnterBelen_Dialgoue_BlockProgressFrom1"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_B",
+      "var_value": "0",
+      "script": "EnterBelen_Dialgoue_BlockProgressFrom1"
+    },
+    {
+      "type": "trigger",
+      "x": 0,
+      "y": 6,
       "elevation": 0,
       "var": "VAR_TEMP_B",
       "var_value": "0",

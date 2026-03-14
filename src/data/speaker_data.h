@@ -2618,14 +2618,6 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
-    [SPEAKER_MERMEREZAGYMSOUSCHEF] =
-    {
-        .name = COMPOUND_STRING("Mermerezagymsouschef"),
-        .title = COMPOUND_STRING("Needles Sous Chef"),
-        .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
     [SPEAKER_MERMEREZAGYMSERVERA] =
     {
         .name = COMPOUND_STRING("MermerezagymserverA"),

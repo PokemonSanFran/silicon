@@ -17,10 +17,10 @@
     {
       "local_id": "LOCALID_MERMEREZA_GYM_BELEN",
       "graphics_id": "OBJ_EVENT_GFX_BELEN",
-      "x": 8,
-      "y": 2,
+      "x": 3,
+      "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -29,75 +29,10 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
-      "x": 5,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 6,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_3"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
-      "x": 7,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_4"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_TEALA",
-      "x": 8,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_5"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROOFTOP_SALE_WOMAN",
-      "x": 9,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
       "local_id": "LOCALID_MERMEREZAGYMHOST",
       "graphics_id": "OBJ_EVENT_GFX_TEALA",
-      "x": 3,
-      "y": 6,
+      "x": 13,
+      "y": 27,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -106,42 +41,35 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EnterBelen_Script_InteractHost",
       "flag": "0"
-    },
-    {
-      "local_id": "LOCALID_MERMEREZAGYMSOUSCHEF",
-      "graphics_id": "OBJ_EVENT_GFX_BOY_3",
-      "x": 5,
-      "y": 2,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EnterBelen_Dialogue_SousChefExplain",
-      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [
     {
-      "x": 3,
-      "y": 7,
+      "x": 12,
+      "y": 29,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY",
       "dest_warp_id": "0"
     },
     {
-      "x": 4,
-      "y": 7,
+      "x": 13,
+      "y": 29,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY",
       "dest_warp_id": "0"
     },
     {
-      "x": 1,
+      "x": 5,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN3",
       "dest_warp_id": "0"
     }
   ],

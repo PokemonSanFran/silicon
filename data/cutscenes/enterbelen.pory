@@ -11,17 +11,6 @@ script EnterBelen_StartGymBattle_ObjectSetup_Script
     setobjectmovementtype(LOCALID_MERMEREZA_GYM_BELEN, MOVEMENT_TYPE_FACE_LEFT)
 }
 
-script EnterBelen_Script_MoveSousChef
-{
-    setobjectxyperm(LOCALID_MERMEREZAGYMSOUSCHEF, 5, 3)
-    setobjectmovementtype(LOCALID_MERMEREZAGYMSOUSCHEF, MOVEMENT_TYPE_FACE_UP)
-}
-
-script EnterBelen_Script_HideSousChef
-{
-    setobjectflagfromlocalid(LOCALID_MERMEREZAGYMSOUSCHEF)
-}
-
 script EnterBelen_Script_InteractHost
 {
     lock
@@ -46,12 +35,9 @@ script EnterBelen_Dialogue_FirstIntroGym
     waitmovement(LOCALID_MERMEREZAGYMHOST)
     msgbox(format("One challenger!"),,SPEAKER_MERMEREZAGYMHOST)
     closemessage
-    applymovement(LOCALID_MERMEREZAGYMSOUSCHEF,moves(face_down))
-    waitmovement(LOCALID_MERMEREZAGYMSOUSCHEF)
-    msgbox(format("Heard!"),,SPEAKER_MERMEREZAGYMSOUSCHEF)
-    closemessage
-    applymovement(LOCALID_MERMEREZAGYMSOUSCHEF,moves(face_up))
-    waitmovement(LOCALID_MERMEREZAGYMSOUSCHEF)
+    applymovement(LOCALID_MERMEREZA_GYM_BELEN,moves(face_up))
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    msgbox(format("Heard!"),,SPEAKER_BELEN)
     closemessage
 
     applymovement(LOCALID_MERMEREZAGYMHOST,moves(face_down))
@@ -59,27 +45,6 @@ script EnterBelen_Dialogue_FirstIntroGym
     msgbox(format("Okay okay, challenger {PLAYER}! We've been expecting you."),,SPEAKER_MERMEREZAGYMHOST)
     msgbox(format("Behind me is the entrance to the kitchen. You'll have to defeat Belen's Gym Trainers to prove you're ready for the main dish."),,SPEAKER_MERMEREZAGYMHOST)
     goto(EnterBelen_Dialogue_HowDefeatBelen)
-}
-
-script EnterBelen_Dialogue_SousChefExplain
-{
-    lock
-    faceplayer
-    if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
-    {
-        msgbox(format("Executive Chef Belen is only taking orders from the cream of the crop."),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
-    }
-    elif (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_REMATCH_DEFEATED)
-    {
-        msgbox(format("I see you're ready to order the special. Good luck!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
-    }
-    else
-    {
-        msgbox(format("What a fantastic battle!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMSOUSCHEF)
-    }
-    closemessage
-    release
-    end
 }
 
 script EnterBelen_Dialogue_ExplainGym
@@ -192,8 +157,8 @@ script EnterBelen_Script_ResetPuzzle3
     addobject(LOCALID_MERMEREZA_GYM_3_10)
     addobject(LOCALID_MERMEREZA_GYM_3_11)
     applymovement(LOCALID_PLAYER,Common_Movement_FaceUp)
-    setobjectxy(LOCALID_PLAYER,8,7)
-    TeleportCamera(8,7)
+    setobjectxy(LOCALID_PLAYER,8,9)
+    TeleportCamera(8,9)
     fadescreen(FADE_FROM_BLACK)
 }
 
@@ -206,10 +171,10 @@ script EnterBelen_Dialgoue_BlockProgressFrom1
     }
     else
     {
-        msgbox(format("I need to find the Gym Trainer in the Plating Room first!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("I need to find the Gym Trainer in the Expo Room first!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
-        applymovement(LOCALID_PLAYER,Common_Movement_WalkDown)
-        waitmovement(LOCALID_PLAYER)
+        moveobjecttocoords(LOCALID_PLAYER,2,5,DIR_EAST)
+    waitmovement(LOCALID_PLAYER)
     }
     release
     end
@@ -226,8 +191,26 @@ script EnterBelen_Dialgoue_BlockProgressFrom2
     {
         msgbox(format("I need to find the Gym Trainer on the Line first!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
-        applymovement(LOCALID_PLAYER,Common_Movement_WalkDown)
-        waitmovement(LOCALID_PLAYER)
+        moveobjecttocoords(LOCALID_PLAYER,7,12,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    }
+    release
+    end
+}
+
+script EnterBelen_Dialgoue_BlockProgressFrom3
+{
+    lock
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        addvar(VAR_TEMP_B,1)
+    }
+    else
+    {
+        msgbox(format("I need to find the Gym Trainer in the Prep Kitchen!"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        closemessage
+        moveobjecttocoords(LOCALID_PLAYER,17,6,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
     }
     release
     end
@@ -252,7 +235,7 @@ script EnterBelen_Script_EnterRoom2
     {
         return
     }
-    applymovement(LOCALID_PLAYER,Common_Movement_FaceRight)
+    applymovement(LOCALID_PLAYER,Common_Movement_FaceLeft)
     waitmovement(LOCALID_PLAYER)
     goto(EnterBelen_Dialogue_StartPuzzle2)
 }
@@ -298,7 +281,7 @@ script EnterBelen_Dialogue_StartPuzzle1
 script EnterBelen_Script_ExplainPuzzle1
 {
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_PUZZLE_EXPLAINED_1)
-    msgbox(format("In the Needles Plating Room, our staff arranges the finest food in Resido, making sure every dish looks as good as it tastes."),,SPEAKER_MERMEREZAGYMSERVERA)
+    msgbox(format("In the Needles Expo Room, our staff performs a final check on every single dish leaving the kitchen to make sure they live up to Belen's high standards."),,SPEAKER_MERMEREZAGYMSERVERA)
     msgbox(format("It can be very hectic at times!"),,SPEAKER_MERMEREZAGYMSERVERA)
     goto(EnterBelen_Script_StartPuzzle1)
 }
@@ -450,7 +433,7 @@ script EnterBelen_Script_ExplainPuzzle3
 
 script EnterBelen_Script_StartPuzzle3
 {
-    moveobjecttocoords(LOCALID_PLAYER,8,7,DIR_NORTH)
+    moveobjecttocoords(LOCALID_PLAYER,8,9,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
     msgbox(format("You need to defeat the Gym Trainer, who is here -"),,SPEAKER_MERMEREZAGYMSERVERC)
     closemessage
@@ -491,27 +474,42 @@ script EnterBelen_Script_StartPuzzle3
     end
 }
 
-script EnterBelen_PutMeatInOven_Dialogue {
-  lockall
-  setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_SAVE_BEFORE_LEADER)
-  msgbox(format("Hold on! I've got one brushing of Pinap glaze, and then into the oven..."),,SPEAKER_BELEN)
+script EnterBelen_PutMeatInOven_Dialogue
+{
+    lockall
+    call(EnterBelen_NotReady_Dialogue)
+    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_SAVE_BEFORE_LEADER)
+    msgbox(format("Hold on! I've got one brushing of Pinap glaze..."),,SPEAKER_BELEN)
     closemessage
-  applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_Delay48)
-  waitmovement(0)
-  applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_WalkInPlaceUp)
-  waitmovement(0)
-  closemessage
-  msgbox(format("Cake's in the oven, excellente!"), MSGBOX_NPC,SPEAKER_BELEN)
+    applymovement(LOCALID_MERMEREZA_GYM_BELEN, Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    delay(24)
+    msgbox(format("Excellente, all set! Follow me to the battlefield."), MSGBOX_NPC,SPEAKER_BELEN)
     closemessage
-    applymovement(LOCALID_PLAYER,moves(walk_left * 4))
-    applymovement(LOCALID_MERMEREZA_GYM_BELEN,moves(walk_left * 4))
-    waitmovement(LOCALID_PLAYER)
+    //applymovement(LOCALID_PLAYER,moves(walk_left * 4))
+    //applymovement(LOCALID_MERMEREZA_GYM_BELEN,moves(walk_left * 4))
+    //waitmovement(LOCALID_PLAYER)
+    //waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    moveobjecttocoords(LOCALID_PLAYER,4,7,DIR_EAST)
+    moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,9,7,DIR_WEST)
     waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
-    moveobjecttocoords(LOCALID_PLAYER,3,4,DIR_EAST)
-    moveobjecttocoords(LOCALID_MERMEREZA_GYM_BELEN,6,4,DIR_WEST)
-    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
     waitmovement(LOCALID_PLAYER)
-  goto(EnterBelen_Intro_Dialogue)
+    goto(EnterBelen_Intro_Dialogue)
+}
+
+script EnterBelen_NotReady_Dialogue
+{
+    faceplayer
+    if (var(VAR_GYM_1_STATE) >= MERMEREZA_GYM_PUZZLE_COMPLETE_3)
+    {
+        return
+    }
+    msgbox(format("Sorry, peque, I'm in in the middle of a seating and can only spare a moment if you've proved you can battle AND move through a kitchen."),,SPEAKER_BELEN)
+    applymovement(LOCALID_MERMEREZA_GYM_BELEN,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
+    closemessage
+    release
+    end
 }
 
 script EnterBelen_Intro_Dialogue
@@ -582,8 +580,8 @@ script EnterBelen_DownloadBuzzr_Dialogue
 script EnterBelen_PostDefeat1_Dialogue {
   lockall
   setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_EXPLAIN_BADGE)
-	bufferitemname(STR_VAR_1,ITEM_TM01)
-	buffermovename(STR_VAR_2,MOVE_FLAMETHROWER)
+    bufferitemname(STR_VAR_1,ITEM_TM01)
+    buffermovename(STR_VAR_2,MOVE_FLAMETHROWER)
   msgbox(format("{STR_VAR_1} has one of my most delicious moves, it allows your Pokémon to use {STR_VAR_2}."),MSGBOX_NPC,SPEAKER_BELEN)
       applymovement(LOCALID_MERMEREZA_GYM_BELEN,Common_Movement_FaceUp)
     waitmovement(LOCALID_MERMEREZA_GYM_BELEN)
@@ -613,7 +611,7 @@ script EnterBelen_Dialogue_WrongExpo4
 
 script EnterBelen_Dialogue_WrongExpo1
 {
-    msgbox(format("You breathing over my shoulder broke my buritto decoration flow!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORB,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("You breathing over my shoulder broke my burrito decoration flow!"),MSGBOX_NPC,SPEAKER_MERMEREZAGYMEXPEDITORB,TAIL_SHOUT,EMOTE_ANGRY)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
     {
         call(EnterBelen_Script_ResetPuzzle1)

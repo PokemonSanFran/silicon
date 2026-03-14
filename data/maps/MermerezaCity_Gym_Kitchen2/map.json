@@ -44,10 +44,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 7,
-      "y": 12,
+      "x": 11,
+      "y": 7,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -142,22 +142,22 @@
   ],
   "warp_events": [
     {
-      "x": 6,
-      "y": 12,
+      "x": 12,
+      "y": 6,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN1",
       "dest_warp_id": "2"
     },
     {
       "x": 5,
-      "y": 12,
+      "y": 13,
       "elevation": 0,
-      "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN1",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN3",
+      "dest_warp_id": "0"
     },
     {
-      "x": 1,
-      "y": 1,
+      "x": 6,
+      "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MERMEREZA_CITY_GYM_KITCHEN3",
       "dest_warp_id": "0"
@@ -166,8 +166,35 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 1,
-      "y": 2,
+      "x": 4,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_TEMP_B",
+      "var_value": "0",
+      "script": "EnterBelen_Dialgoue_BlockProgressFrom2"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_B",
+      "var_value": "0",
+      "script": "EnterBelen_Dialgoue_BlockProgressFrom2"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_B",
+      "var_value": "0",
+      "script": "EnterBelen_Dialgoue_BlockProgressFrom2"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 13,
       "elevation": 0,
       "var": "VAR_TEMP_B",
       "var_value": "0",
