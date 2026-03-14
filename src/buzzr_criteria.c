@@ -275,3 +275,8 @@ void TweetCriteria_Quest_Diggingupadaorasdirt_1(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CURENO_PORT_STATE) >= POST_HOW_DO_WE_GET_HOME);
 }
+
+void TweetCriteria_Quest_ReturnDollComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RETURNDOLL);
+}

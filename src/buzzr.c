@@ -2075,5 +2075,8 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_DIGGINGUPADAORASDIRT_3:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_RETURNDOLL:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RETURNDOLL_TARGET),MAP_NUM(MAP_QUEST_RETURNDOLL_TARGET))->regionMapSectionId,0);
+            break;
     }
 }

@@ -492,4 +492,14 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_RETURNDOLL] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Somehow, our child was reunited with her favorite doll we thought we’d lost in the move from {STR_VAR_1}! There really are some angels around these parts!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_ReturnDollComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };
