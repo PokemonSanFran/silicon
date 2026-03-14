@@ -46,7 +46,7 @@
 #define FLAG_SYS_NO_COLLISION 0x20 // Silicon Flag
 #define FLAG_SYS_NO_ENCOUNTER 0x21 // Silicon Flag
 #define FLAG_SYS_NO_TRAINER_SEE 0x22 // Silicon Flag
-#define FLAG_UNUSED_0x23        0x23
+#define FLAG_NO_RUNNING 0x23 // Silicon Flag
 #define FLAG_SYS_NO_CATCHING 0x24 // Silicon Flag
 #define FLAG_SAVED_DAVID 0x25 // Silicon Flag
 #define FLAG_LOCKEDOUT_PLAYED 0x26 // Silicon Flag
