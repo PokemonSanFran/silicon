@@ -366,4 +366,6 @@
 #define COPY_MOVE_EMPTY_1        9
 #define COPY_MOVE_EMPTY_2       10
 
+#define OBJECT_TRANSFORM_FRAME_LENGTH 16 // storyActionItems
+
 #endif // GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H

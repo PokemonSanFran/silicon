@@ -142,7 +142,7 @@ static bool8 IsCoordOutsideObjectEventMovementRange(struct ObjectEvent *, s16, s
 //static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u8);
 //static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u8, u8);
-static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16, u8); 
+static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16, u8);
 // End pathfinder
 static void UpdateObjectEventOffscreen(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
@@ -6562,28 +6562,28 @@ __attribute__((flatten)) u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent
         return COLLISION_IMPASSABLE;    //trying to move north onto top stair tile at same level from non-stair -> no
 
     // regular checks
-    // Start pathfinder 
+    // Start pathfinder
     // collision = GetVanillaCollision(objectEvent, x, y, dir);
     collision = GetVanillaCollision(objectEvent, x, y, elevation, dir, nextBehavior);
-    // End pathfinder 
+    // End pathfinder
 
     //sideways stairs direction change checks
     collision = GetSidewaysStairsCollision(objectEvent, dir, currentBehavior, nextBehavior, collision);
     switch (collision)
     {
     case COLLISION_SIDEWAYS_STAIRS_TO_LEFT:
-    // Start pathfinder 
+    // Start pathfinder
         if (ObjectEventOnLeftSideStair(objectEvent, x, y, elevation, dir))
         //if (ObjectEventOnLeftSideStair(objectEvent, x, y, dir))
-    // End pathfinder 
+    // End pathfinder
             return COLLISION_OBJECT_EVENT;
         objectEvent->directionOverwrite = GetLeftSideStairsDirection(dir);
         return COLLISION_NONE;
     case COLLISION_SIDEWAYS_STAIRS_TO_RIGHT:
-    // Start pathfinder 
+    // Start pathfinder
         if (ObjectEventOnRightSideStair(objectEvent, x, y, elevation, dir))
         //if (ObjectEventOnRightSideStair(objectEvent, x, y, dir))
-    // End pathfinder 
+    // End pathfinder
             return COLLISION_OBJECT_EVENT;
         objectEvent->directionOverwrite = GetRightSideStairsDirection(dir);
         return COLLISION_NONE;
@@ -11890,3 +11890,69 @@ static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16))
     }
 }
 // End setObjectFlag
+
+// Start storyActionItems
+void Task_ObjectTransformation(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 objectEventId = task->data[0];
+    u16 frame = task->data[1]++;
+
+    if (objectEventId >= OBJECT_EVENTS_COUNT || !gObjectEvents[objectEventId].active)
+    {
+        DestroyTask(taskId);
+        return;
+    }
+
+    struct ObjectEvent *obj = &gObjectEvents[objectEventId];
+    struct Sprite *sprite = &gSprites[obj->spriteId];
+
+    u8 stretch;
+    if (frame < OBJECT_TRANSFORM_FRAME_LENGTH)
+        stretch = frame >> 1;
+    else if (frame < (OBJECT_TRANSFORM_FRAME_LENGTH * 2))
+        stretch = ((OBJECT_TRANSFORM_FRAME_LENGTH * 2) - frame) >> 1;
+    else
+    {
+        sprite->oam.mosaic = FALSE;
+        SetGpuReg(REG_OFFSET_MOSAIC, 0);
+        DestroyTask(taskId);
+        return;
+    }
+
+    SetGpuReg(REG_OFFSET_MOSAIC, (stretch << 12) | (stretch << 8));
+
+    if (frame != OBJECT_TRANSFORM_FRAME_LENGTH)
+        return;
+
+    PlaySE(SE_M_MINIMIZE);
+    u16 graphicsId = task->data[2];
+    ObjectEventSetGraphicsId(obj, graphicsId);
+    sprite->inUse = FALSE;
+    FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+    sprite->inUse = TRUE;
+
+    u32 species = graphicsId & OBJ_EVENT_MON_SPECIES_MASK;
+    bool32 shiny = ((graphicsId & OBJ_EVENT_MON) && (graphicsId & OBJ_EVENT_MON_SHINY)) ? TRUE : FALSE;
+    bool32 female = ((graphicsId & OBJ_EVENT_MON) && (graphicsId & OBJ_EVENT_MON_FEMALE)) ? TRUE : FALSE;
+
+    sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
+}
+
+void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId)
+{
+    u32 objectEventId = GetObjectEventIdByLocalId(localId);
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+        return;
+
+    u8 taskId = CreateTask(Task_ObjectTransformation, 0);
+    struct Task *task = &gTasks[taskId];
+    task->data[0] = objectEventId;
+    task->data[1] = 0;
+    task->data[2] = graphicsId;
+
+    struct ObjectEvent *obj = &gObjectEvents[objectEventId];
+    struct Sprite *sprite = &gSprites[obj->spriteId];
+    sprite->oam.mosaic = TRUE;
+}
+// End storyActionItems

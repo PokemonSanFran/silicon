@@ -529,5 +529,8 @@ void ClearObjectFlagFromLocalId(u32 localId); // setObjectFlag
 u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);
 u8 GetLedgeJumpDirectionWithBehavior(u8 direction, u8 nextBehavior);
 // End pathfinder
-
+// Start storyActionItems
+void Task_ObjectTransformation(u8 taskId);
+void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId);
+// End storyActionItems
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H
