@@ -576,7 +576,6 @@ gSpecials::
     def_special KitchenvolunteeringFunc_GeneratePantryItem
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
-    def_special HiddenGrotto_LoadDiscoveredGrottoText
     def_special HiddenGrotto_LoadGrottoAndWarpPlayer
     def_special Quest_Hiddengrottomapping_CheckForJournalPage
     def_special Quest_Hiddengrottomapping_CountCompletedSubquests

@@ -1,5 +1,7 @@
 const UNHOUSED_ASK_AMOUNT = 1000
 
+// https://hackmd.io/@pkmnsnfrn/HJnTrmQ9We/edit
+
 script EventScript_UnhousedInteractPlayer
 {
     closemessage
