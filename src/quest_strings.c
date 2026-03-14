@@ -8,11 +8,6 @@ const u8 gText_Quest_PlayersAdventure_Desc[] = _("Get some sleep,\nyour big adve
 const u8 gText_Quest_PlayersAdventure_DoneDesc[] = _("Completed Quest 1");
 const u8 gText_Quest_PlayersAdventure_Map[] = _("Resido Region");
 
-const u8 gText_Quest_ReturnDoll_Name[] = _("Return Doll");
-const u8 gText_Quest_ReturnDoll_Desc[] = _("Help Abigayle find her lost doll. The\nlast time she saw it was in QiuVillage.");
-const u8 gText_Quest_ReturnDoll_DoneDesc[] = _("You found Abigayle's lost doll in QiuVillage\nand returned it to her.");
-const u8 gText_Quest_ReturnDoll_Map[] = _("MermerezaCity");
-
 const u8 gText_Quest_StolenTrade_Name[] = _("Stolen Trade");
 const u8 gText_Quest_StolenTrade_Desc[] = _("She wanted to trade with you to evolve\nher Swirlix and then trade back,\nbut she ran away with your Gurdurr!");
 const u8 gText_Quest_StolenTrade_DoneDesc[] = _("You hunted down the Trainer\nand got back your Conkeldurr.");

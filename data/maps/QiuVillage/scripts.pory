@@ -1,11 +1,12 @@
 mapscripts QiuVillage_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Quest_Returndoll_Script_DollVisibility)
         call(ImIn_HideObject_OutsideHouse_Script)
-        call(Quest_ReturnDoll_HideObject_Script)
         call(Quest_StolenTrade_HideObjectA_Script)
         call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
         call(Quest_ButOnlyIn_HideGunda_Script)

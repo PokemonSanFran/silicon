@@ -1,9 +1,12 @@
 #include "global.h"
 #include "battle.h"
+#include "fake_rtc.h"
 #include "constants/trainers.h"
 #include "constants/story_jump.h"
 #include "battle_anim.h"
 #include "tv.h"
+#include "field_effect.h"
+#include "gpu_regs.h"
 #include "buzzr.h"
 #include "script_menu.h"
 #include "battle_setup.h"
@@ -47,6 +50,7 @@
 #include "quests.h"
 #include "options_battle.h"
 #include "constants/trainer_types.h"
+#include "constants/songs.h"
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
@@ -3200,6 +3204,53 @@ void DebugQuest_Diggingupadaorasdirt(u8 state)
         case STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE:
             AddMoney(&gSaveBlock1Ptr->money,QUEST_DIGGINGUPADAORASDIRT_REWARD);
             QuestMenu_ScriptSetComplete(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Return Doll
+// ***********************************************************************
+
+static u32 Quest_Returndoll_GenerateDollMon(void)
+{
+    u32 species = SPECIES_QUEST_RETURNDOLL;
+    CreateWildMon(species, LEVEL_QUEST_RETURNDOLL);
+    u32 female = (IsOverworldMonFemale()) ? OBJ_EVENT_MON_FEMALE : 0;
+    u32 shiny = (IsOverworldMonShiny()) ? OBJ_EVENT_MON_SHINY : 0;
+    return (OBJ_EVENT_MON + species + female + shiny);
+}
+
+void TransformDollIntoGhostPokemon(void)
+{
+    u32 graphicsId = Quest_Returndoll_GenerateDollMon();
+    TransformObjectByLocalIdIntoGraphicsId(LOCALID_QUEST_RETURNDOLL_DOLL,graphicsId);
+}
+
+void DebugQuest_Returndoll(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RETURNDOLL_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RETURNDOLL_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RETURNDOLL);
+            break;
+        case STATE_QUEST_RETURNDOLL_BEFORE_BATTLE:
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            FakeRtc_ForwardTimeTo(NIGHT_HOUR_BEGIN, 0, 0);
+            break;
+        case STATE_QUEST_RETURNDOLL_REWARD:
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_QUEST_RETURNDOLL),FLAG_SET_SEEN);
+            AddBagItem(ITEM_QUEST_RETURNDOLL_DOLL,1);
+            QuestMenu_ScriptSetReward(QUEST_RETURNDOLL);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE:
+            RemoveBagItem(ITEM_QUEST_RETURNDOLL_DOLL,1);
+            AddBagItem(ITEM_QUEST_RETURNDOLL_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RETURNDOLL);
             break;
     }
 }

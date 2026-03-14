@@ -1635,14 +1635,57 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_RETURNDOLL] =
     {
-        .name = gText_Quest_ReturnDoll_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_ReturnDoll_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_ReturnDoll_DoneDesc,
-        .map = gText_Quest_ReturnDoll_Map,
-        .sprite = OBJ_EVENT_GFX_LITTLE_GIRL,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
+        .name = COMPOUND_STRING("Return Doll"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Help Returndollchild find her missing doll! They mentioned it would only show up at night..."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Returndollchild was reunited with her doll! Or, whatever that was!"),
+        .map = gText_MermerezaCity,
+        .sprite = ITEM_QUEST_RETURNDOLL_DOLL,
+        .spritetype = QUEST_SPRITE_TYPE_ITEM,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_RETURNDOLL_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not_Started"),
+                .setupFunc = DebugQuest_Returndoll,
+                side_quest_map(MAP_QUEST_RETURNDOLL_ORIGIN),
+                .x = 6,
+                .y = 22,
+            },
+            [STATE_QUEST_RETURNDOLL_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Returndoll,
+                side_quest_map(MAP_QUEST_RETURNDOLL_ORIGIN),
+                .x = 6,
+                .y = 22,
+            },
+            [STATE_QUEST_RETURNDOLL_BEFORE_BATTLE] =
+            {
+                .name = COMPOUND_STRING("Before Battle"),
+                .setupFunc = DebugQuest_Returndoll,
+                side_quest_map(MAP_QUEST_RETURNDOLL_TARGET),
+                .x = 12,
+                .y = 11,
+            },
+            [STATE_QUEST_RETURNDOLL_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Returndoll,
+                side_quest_map(MAP_QUEST_RETURNDOLL_TARGET),
+                .x = 12,
+                .y = 11,
+            },
+            [STATE_QUEST_RETURNDOLL_COMPLETE_QUEST] =
+            {
+                .name = COMPOUND_STRING("Complete Quest"),
+                .setupFunc = DebugQuest_Returndoll,
+                side_quest_map(MAP_QUEST_RETURNDOLL_ORIGIN),
+                .x = 6,
+                .y = 22,
+            },
+        },
     },
     [QUEST_STOLENTRADE] =
     {

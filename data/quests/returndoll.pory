@@ -1,126 +1,183 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const LOSDOL = 2
+// Quest_Returndoll_
 
-script Quest_ReturnDoll_HideObject_Script {
-    questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_RETURNDOLL)
-        if (!var(VAR_RESULT)){
-            setflag(FLAG_TEMP_3)
-        }
-
-    checkitem(ITEM_LOST_DOLL, 1)
-        if (var(VAR_RESULT)){
-            setflag(FLAG_TEMP_3)
-        }
-}
-
-script Quest_ReturnDoll_Interact_Script {
-	lock
-	faceplayer
-	questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RETURNDOLL)
-	if (var(VAR_RESULT))
-	{
-		goto(Quest_ReturnDoll_PostQuest_Script)
-	}
-
-	questmenu(QUEST_MENU_CHECK_REWARD, QUEST_RETURNDOLL)
-	if (var(VAR_RESULT))
-	{
-		goto(Quest_ReturnDoll_CheckPlayerBag_Script)
-	}
-
-	questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_RETURNDOLL)
-	if (var(VAR_RESULT))
-	{
-		goto(Quest_ReturnDoll_DuringQuest_Script)
-	}
-	else
-	{
-		goto (Quest_ReturnDoll_PreQuestScript)
-	}
-
-	closemessage
-	end
-}
-
-script Quest_ReturnDoll_PostQuest_Script {
-	msgbox(format("I heard Mommy tell her friend we got priced out of our old neighborhood. What does priced out mean?"), MSGBOX_NPC)
-	end
-}
-
-script Quest_ReturnDoll_CheckPlayerBag_Script
+script Quest_Returndoll_Script_DollVisibility
 {
-	checkitemspace(ITEM_CHOICE_BAND, 1)
-	if (var(VAR_RESULT))
-	{
-		call(Quest_ReturnDoll_PlayerBagHasSpace_Script)
-	}
-	else
-	{
-		call(Quest_ReturnDoll_PlayerBagFull_Script)
-	}
-	release
-	end
+    returnqueststate(QUEST_RETURNDOLL)
+    if (var(VAR_RESULT) != QUEST_MENU_SET_ACTIVE)
+    {
+        setobjectflagfromlocalid(LOCALID_QUEST_RETURNDOLL_DOLL)
+    }
+
+    gettimeofday
+    if (var(VAR_0x8000) != TIME_NIGHT)
+    {
+        setobjectflagfromlocalid(LOCALID_QUEST_RETURNDOLL_DOLL)
+    }
 }
 
-script Quest_ReturnDoll_PlayerBagHasSpace_Script
+script Quest_Returndoll_Script_HideDoll
 {
-	msgbox(format("You can have her headband! It matched her dress, but I want you to have it instead."), MSGBOX_DEFAULT)
-	closemessage
-	cueobjectplayer(LOSDOL)
-	giveitem(ITEM_CHOICE_BAND, 1)
-	completequest(QUEST_RETURNDOLL)
+    setobjectflagfromlocalid(LOCALID_QUEST_RETURNDOLL_DOLL)
 }
 
-script Quest_ReturnDoll_PlayerBagFull_Script
+
+script Quest_Returndoll_Script_InteractPokemon
 {
-	msgbox(format("YOU BAG IS FULL! Take some stuff out of your bag, I wanna give you something."), MSGBOX_NPC)
+    lock
+    faceplayer
+    checkitemspace(ITEM_QUEST_RETURNDOLL_DOLL,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        buffernumberstring(STR_VAR_1,1)
+        bufferitemname(STR_VAR_2,ITEM_QUEST_RETURNDOLL_DOLL)
+        msgbox(gText_ObtainedTheItem, MSGBOX_DEFAULT)
+        msgbox(gText_TooBadBagIsFull, MSGBOX_DEFAULT)
+        closemessage
+        release
+        end
+    }
+    playbgm(MUS_QUEST_RETURNDOLL_ENCOUNTER,FALSE)
+    msgbox(format("Obtained a -{PAUSE_UNTIL_PRESS} !"), MSGBOX_DEFAULT)
+    msgbox(format("What the - ?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    playmoncry(SPECIES_QUEST_RETURNDOLL,CRY_MODE_ENCOUNTER)
+    msgbox(format("Returndollchild..."))
+    waitmoncry
+    closemessage
+    startmenu_savescreen
+    playmoncry(SPECIES_QUEST_RETURNDOLL,CRY_MODE_ENCOUNTER)
+    callnative(TransformDollIntoGhostPokemon)
+    callnative(IsOverworldMonShiny)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        playse(SE_SHINY)
+        waitse
+    }
+    msgbox(format("The doll attacked!"), MSGBOX_DEFAULT)
+    waitmoncry
+    closemessage
+    goto(Quest_Returndoll_Script_DoBattle)
 }
 
-script Quest_ReturnDoll_DuringQuest_Script {
-	checkitem(ITEM_LOST_DOLL, 1)
-
-	if (var(VAR_RESULT)) {
-		goto(Quest_ReturnDoll_PlayerHasDoll_Script)
-	}
-	else {
-		msgbox(format("When I'm a grown up like you, I'm going to go back and get my doll!"), MSGBOX_NPC)
-		end
-	}
+script Quest_Returndoll_Script_DoBattle
+{
+    setflag(B_FLAG_NO_RUNNING)
+    dowildbattle
+    goto(Quest_Returndoll_Script_PostBattle)
 }
 
-script Quest_ReturnDoll_PlayerHasDoll_Script {
-	msgbox(format("That's my doll! MY DOLL! You found her! Thank you so much!"), MSGBOX_NPC)
-	removeitem(ITEM_LOST_DOLL, 1)
-	questmenu(QUEST_MENU_SET_REWARD, QUEST_RETURNDOLL)
-    goto(Quest_ReturnDoll_CheckPlayerBag_Script)
+script Quest_Returndoll_Script_RepeatBattle
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    switch (var(VAR_RESULT))
+    {
+        default: return
+        case B_OUTCOME_RAN:
+        goto(Quest_Returndoll_Dialogue_RepeatBattle)
+        case B_OUTCOME_PLAYER_TELEPORTED:
+        goto(Quest_Returndoll_Dialogue_RepeatBattle)
+        case B_OUTCOME_MON_FLED:
+        goto(Quest_Returndoll_Dialogue_RepeatBattle)
+    }
 }
 
-script Quest_ReturnDoll_PreQuestScript {
-	msgbox(format("Daddy and I moved here from QiuVillage. I like it here, but I miss my doll."), MSGBOX_NPC)
-	msgbox(format("When I'm a grown up like you, I'm going to go back and get my doll!"), MSGBOX_NPC)
-	startquest(QUEST_RETURNDOLL)
-    return
+script Quest_Returndoll_Dialogue_RepeatBattle
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RETURNDOLL)
+    msgbox(format("The {STR_VAR_1} won't let you get away!"))
+    closemessage
+    callnative(TransformDollIntoGhostPokemon)
+    goto(Quest_Returndoll_Script_DoBattle)
 }
 
-text gText_ReturnDoll_DaddyAndI {
-	format("Daddy and I moved here from QiuVillage. I like it here, but I miss my doll.")}
-
-text gText_ReturnDoll_WhenImGrownUp {
-	format("When I'm a grown up like you, I'm going to go back and get my doll!")
+script Quest_Returndoll_Script_PostBattle
+{
+    clearflag(B_FLAG_NO_RUNNING)
+    call(Quest_Returndoll_Script_RepeatBattle)
+    playmoncry(SPECIES_QUEST_RETURNDOLL,CRY_MODE_ENCOUNTER)
+	fadedefaultbgm
+    fadeandremovelasttalked
+    giveitem(ITEM_QUEST_RETURNDOLL_DOLL,1)
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_RETURNDOLL)
+    msgbox(format("That girl really sent me looking for a haunted doll…"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("How did nobody notice this? Are her parents walking around with their eyes closed?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+    release
+    end
 }
 
-text gText_ReturnDoll_ThatsMyDoll {
-	format("That's my doll! MY DOLL! You found her! Thank you so much!")
+script Quest_Returndoll_Interact_Returndollchild
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_RETURNDOLL,Quest_Returndoll_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_RETURNDOLL,Quest_Returndoll_Dialogue_Reward)
+    goto_if_quest_active(QUEST_RETURNDOLL,Quest_Returndoll_Dialogue_Active)
+    goto(Quest_Returndoll_Dialogue_StartQuest)
 }
 
-text gText_ReturnDoll_YouCanHave {
-	format("You can have her headband! It matched her dress, but I want you to have it instead.")
+script Quest_Returndoll_Dialogue_StartQuest
+{
+    msgbox(format("…I’m sad."),,SPEAKER_RETURNDOLLCHILD,,EMOTE_SAD)
+    msgbox(format("Moving houses sucks enough, but we lost my favorite doll in the move…I can’t sleep without it!"),,SPEAKER_RETURNDOLLCHILD)
+    msgbox(format("But…Sometimes it used to leave and come back…So…Maybe that’ll happen again? Hey, stranger! Keep an eye out for it, okay?"),,SPEAKER_RETURNDOLLCHILD)
+    closemessage
+    startquest(QUEST_RETURNDOLL)
+    msgbox(format("Leave and come back? How did it do that?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+    msgbox(format("Oh, the doll was never around during the day. But it’d always come back to watch over me at night!"),,SPEAKER_RETURNDOLLCHILD,,EMOTE_HAPPY)
+    closemessage
+    release
+    end
 }
 
-text gText_ReturnDoll_IHeardMommy {
-	format("I heard Mommy tell her friend we got priced out of our old neighborhood. What does priced out mean?")
+script Quest_Returndoll_Dialogue_Active
+{
+    msgbox(format("Hey, so…Can I just ask again…How did your doll leave and come back?"),,SPEAKER_ALICIA)
+    msgbox(format("It left during the day and came back during the night! I don’t know! That’s just how it worked!"),,SPEAKER_RETURNDOLLCHILD)
+    closemessage
+    release
+    end
 }
 
-text gText_ReturnDoll_YourBagLooks {
-	format("YOU BAG IS FULL! Take some stuff out of your bag, I wanna give you something.")
+script Quest_Returndoll_Script_CheckForItem
+{
+    checkitem(ITEM_QUEST_RETURNDOLL_DOLL,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        return
+    }
+    questmenu(QUEST_MENU_SET_ACTIVE,QUEST_RETURNDOLL)
+    goto(Quest_Returndoll_Dialogue_Active)
+}
+
+script Quest_Returndoll_Dialogue_Reward
+{
+    call(Quest_Returndoll_Script_CheckForItem)
+    checkitemspace(ITEM_QUEST_RETURNDOLL_REWARD,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("No way!! You got it back! Thanks trainer! Now I can finally sleep well again!"),,SPEAKER_RETURNDOLLCHILD)
+        msgbox(format("The doll had something stuck to it. I wanted you to have it but you’ve got too much stuff! Make some room, okay?"),,SPEAKER_RETURNDOLLCHILD)
+        closemessage
+        release
+        end
+    }
+    removeitem(ITEM_QUEST_RETURNDOLL_DOLL,1)
+    msgbox(format("Well, that certainly was an interesting doll alright. But hey, I tracked it down. Here."),,SPEAKER_ALICIA)
+    msgbox(format("No way!! You got it back! Thanks trainer! Now I can finally sleep well again!"),,SPEAKER_RETURNDOLLCHILD)
+    msgbox(format("Hmm…It’s not as heavy as before…Maybe it lost weight running around out there?"),,SPEAKER_RETURNDOLLCHILD)
+    msgbox(format("Looks like it had something stuck to it, but you can have it!"),,SPEAKER_RETURNDOLLCHILD)
+    closemessage
+    cueobjectplayer(LOCALID_RETURNDOLLCHILD)
+    giveitem(ITEM_QUEST_RETURNDOLL_REWARD,1)
+    completequest(QUEST_RETURNDOLL)
+}
+
+script Quest_Returndoll_Dialogue_Complete
+{
+    msgbox(format("Mom and Dad were talking to our friend Mr. Lewis about how they got “priced out” of a neighbourhood…I asked what that means and they said they’ll tell me when I’m older."),,SPEAKER_RETURNDOLLCHILD)
+    msgbox(format("I’m sick of not being old enough to know stuff! Someone speed up time so I can be old enough to know right now!"),,SPEAKER_RETURNDOLLCHILD)
+    closemessage
+    release
+    end
 }

@@ -104,16 +104,17 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_QUEST_RETURNDOLL_DOLL",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 11,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_LOST_DOLL",
-      "script": "Common_EventScript_FindItem",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Returndoll_Script_InteractPokemon",
       "flag": "FLAG_TEMP_3"
     },
     {
