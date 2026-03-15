@@ -43,7 +43,13 @@ void UNUSED MonitorHeap(struct MemBlock *head, u32 size, const char *location)
 
     u32 used = totalHeapSize - freeHeapSize;
     u32 percent = used * 100 / totalHeapSize;
+
     DebugPrintf("%s: %d bytes | Total Used: %d/%d (%d\%)",location,size,used,totalHeapSize,percent);
+    (void)location;
+    (void)size;
+    (void)used;
+    (void)totalHeapSize;
+    (void)percent;
 }
 
 void *AllocInternal(void *heapStart, u32 size, const char *location)
