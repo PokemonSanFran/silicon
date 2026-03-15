@@ -14,11 +14,6 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
-#include "blit.h"
-#include "menu.h"
-#include "dynamic_placeholder_text_util.h"
-#include "fonts.h"
-#include "options_visual.h" // siliconMerge
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/speaker_names.h"
@@ -290,7 +285,7 @@ static const struct FontInfo sFontInfos[] =
         .color.accent = 1,
         .color.shadow = 3,
     },
-    // Start outlineFont
+            // Start outlineFont
     [FONT_OUTLINED] =
     {
         .fontFunction = FontFunc_Outlined,
@@ -298,9 +293,9 @@ static const struct FontInfo sFontInfos[] =
         .maxLetterHeight = 15,
         .letterSpacing = -1,
         .lineSpacing = 0,
-        .fgColor = 2,
-        .bgColor = 1,
-        .shadowColor = 3,
+        .color.foreground = 2,
+        .color.background = 1,
+        .color.shadow = 3,
     },
     [FONT_OUTLINED_NARROW] =
     {
@@ -309,9 +304,9 @@ static const struct FontInfo sFontInfos[] =
         .maxLetterHeight = 15,
         .letterSpacing = -1,
         .lineSpacing = 0,
-        .fgColor = 2,
-        .bgColor = 1,
-        .shadowColor = 3,
+        .color.foreground = 2,
+        .color.background = 1,
+        .color.shadow = 3,
     },
     // End outlineFont
 };
@@ -1055,10 +1050,19 @@ static void PrintGlyph(struct TextPrinter *textPrinter)
         }
         else
         {
+            // Start outlineFont
+            if (textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW) 
+            {
+                textPrinter->printerTemplate.currentX += gCurGlyph.width + (-1);
+            }
+            else
+            {
+            // End outlineFont
             if (textPrinter->japanese)
                 textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
             else
                 textPrinter->printerTemplate.currentX += gCurGlyph.width;
+            } // outlineFont
         }
     }
 }
@@ -1214,13 +1218,13 @@ static u16 FontFunc_ShortNarrower(struct TextPrinter *textPrinter)
 static u16 FontFunc_Outlined(struct TextPrinter *textPrinter)
 {
     if (textPrinter->hasFontIdBeenSet == FALSE)
-    {
+     {
         textPrinter->fontId = FONT_OUTLINED;
         textPrinter->hasFontIdBeenSet = TRUE;
-    }
-    return RenderText(textPrinter);
-}
-
+     }
+     return RenderText(textPrinter);
+ }
+ 
 static u16 FontFunc_OutlinedNarrow(struct TextPrinter *textPrinter)
 {
     if (textPrinter->hasFontIdBeenSet == FALSE)
@@ -1399,11 +1403,9 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
 
 static u16 RenderText(struct TextPrinter *textPrinter)
 {
-    //u16 currChar;
-    u16 currChar, nextChar; // siliconMerge
+    u16 currChar;
     s32 width;
     s32 widthHelper;
-    u8 repeats = 0;	// siliconMerge
 
     switch (textPrinter->state)
     {
@@ -1414,10 +1416,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         if (textPrinter->delayCounter && textPrinter->textSpeed)
         {
             textPrinter->delayCounter--;
-            // Start siliconMerge
-			//if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
-            if ((gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON))))
-			// End siliconMerge
+            if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
             {
                 textPrinter->hasPrintBeenSpedUp = TRUE;
                 textPrinter->delayCounter = 0;
@@ -1430,24 +1429,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
 
-        // Start siliconMerge
-		switch (GetPlayerTextSpeed())
-        {
-            case OPTIONS_TEXT_SPEED_SLOW:
-            case OPTIONS_TEXT_SPEED_MID:
-            case OPTIONS_TEXT_SPEED_FAST:
-                repeats = 1;
-                break;
-            case OPTIONS_TEXT_SPEED_INSTANT:
-                repeats = 2;
-                break;
-        }
-
-        do {
-		// End siliconMerge
         currChar = *textPrinter->printerTemplate.currentChar;
         textPrinter->printerTemplate.currentChar++;
-        nextChar = *textPrinter->printerTemplate.currentChar; // siliconMerge
 
         switch (currChar)
         {
@@ -1717,54 +1700,6 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
         PrintGlyph(textPrinter);
 
-        if (textPrinter->minLetterSpacing)
-        {
-            textPrinter->printerTemplate.currentX += gCurGlyph.width;
-            width = textPrinter->minLetterSpacing - gCurGlyph.width;
-            if (width > 0)
-            {
-                ClearTextSpan(textPrinter, width);
-                textPrinter->printerTemplate.currentX += width;
-            }
-        }
-        else
-            {
-                // Start outlineFont
-                // merge together each chars
-                if ((textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW)
-                 && (currChar != CHAR_SPACE || currChar != CHAR_SPACER))
-                {
-                    textPrinter->printerTemplate.currentX += gCurGlyph.width + (-1);
-                }
-                else
-                {
-                // End outlineFont
-
-            if (textPrinter->japanese)
-                textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
-            else
-                textPrinter->printerTemplate.currentX += gCurGlyph.width;
-                } // outlineFont
-        }
-        // Start siliconMerge
-		if (repeats == 2)
-        {
-            switch (nextChar)
-            {
-            case CHAR_NEWLINE:
-            case PLACEHOLDER_BEGIN:
-            case EXT_CTRL_CODE_BEGIN:
-            case CHAR_PROMPT_CLEAR:
-            case CHAR_PROMPT_SCROLL:
-            case CHAR_KEYPAD_ICON:
-            case EOS:
-                repeats--;
-                break;
-            }
-        }
-        repeats--;
-        } while (repeats > 0);
-		// End siliconMerge
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))
@@ -2029,8 +1964,10 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 {
                     lineWidth += glyphWidth;
                     // Start outlineFont
-                    //if (isJapanese && str[1] != EOS)
-                    //    lineWidth += localLetterSpacing;
+                    /*
+                    if (isJapanese && str[1] != EOS)
+                        lineWidth += localLetterSpacing;
+                    */
                     if (str[1] != EOS)
                     {
                         if (isJapanese)
@@ -2117,8 +2054,10 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             {
                 lineWidth += glyphWidth;
                 // Start outlineFont
-                //if (isJapanese && str[1] != EOS)
-                //    lineWidth += localLetterSpacing;
+                /*
+                if (isJapanese && str[1] != EOS)
+                    lineWidth += localLetterSpacing;
+                */
                 if (str[1] != EOS)
                 {
                     if (isJapanese)
@@ -2144,8 +2083,10 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             {
                 lineWidth += glyphWidth;
                 // Start outlineFont
-                //if (isJapanese && str[1] != EOS)
-                //    lineWidth += localLetterSpacing;
+                /*
+                if (isJapanese && str[1] != EOS)
+                    lineWidth += localLetterSpacing;
+                */
                 if (str[1] != EOS)
                 {
                     if (isJapanese)
@@ -2159,16 +2100,6 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         }
         ++str;
     }
-
-    // Start outlineFont
-    // decrement the last character width as well
-    if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
-    {
-        lineWidth--;
-        if (width)
-            width--;
-    }
-    // End outlineFont
 
     if (lineWidth > width)
         return lineWidth;
@@ -2793,27 +2724,22 @@ static u32 GetGlyphWidth_ShortNarrower(u16 glyphId, bool32 isJapanese)
 static void DecompressGlyph_Outlined(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
-
     glyphs = gFontOutlinedLatinGlyphs + (0x20 * glyphId);
     gCurGlyph.width = gFontOutlinedLatinGlyphWidths[glyphId];
-
     if (gCurGlyph.width <= 8)
     {
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
     }
     else
-    {
+{
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-
         DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
         DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
     }
-
     gCurGlyph.height = 15;
 }
-
 static u32 GetGlyphWidth_Outlined(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
@@ -2821,31 +2747,25 @@ static u32 GetGlyphWidth_Outlined(u16 glyphId, bool32 isJapanese)
     else
         return gFontOutlinedLatinGlyphWidths[glyphId];
 }
-
 static void DecompressGlyph_OutlinedNarrow(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
-
     glyphs = gFontOutlinedNarrowLatinGlyphs + (0x20 * glyphId);
     gCurGlyph.width = gFontOutlinedNarrowLatinGlyphWidths[glyphId];
-
     if (gCurGlyph.width <= 8)
     {
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
     }
     else
-    {
+{
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-
         DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
         DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
     }
-
     gCurGlyph.height = 15;
 }
-
 static u32 GetGlyphWidth_OutlinedNarrow(u16 glyphId, bool32 isJapanese)
 {
     if (isJapanese == TRUE)
@@ -2853,12 +2773,10 @@ static u32 GetGlyphWidth_OutlinedNarrow(u16 glyphId, bool32 isJapanese)
     else
         return gFontOutlinedNarrowLatinGlyphWidths[glyphId];
 }
-
 u32 GetOutlineFontIdToFit(const u8 *str, u32 widthPx)
 {
     if (GetStringWidth(FONT_OUTLINED, str, -1) <= widthPx)
         return FONT_OUTLINED;
-
     return FONT_OUTLINED_NARROW;
 }
 // End outlineFont
@@ -2874,15 +2792,15 @@ static const s8 sNarrowerFontIds[] =
     [FONT_BRAILLE] = -1,
     [FONT_NARROW] = FONT_NARROWER,
     [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
-// Start outlineFont
-    [FONT_OUTLINED] = FONT_OUTLINED_NARROW, 
-    [FONT_OUTLINED_NARROW] = -1,
-// End outlineFont
     [FONT_BOLD] = -1,
     [FONT_NARROWER] = -1,
     [FONT_SMALL_NARROWER] = -1,
     [FONT_SHORT_NARROW] = FONT_SHORT_NARROWER,
     [FONT_SHORT_NARROWER] = -1,
+// Start outlineFont
+    [FONT_OUTLINED] = FONT_OUTLINED_NARROW, 
+    [FONT_OUTLINED_NARROW] = -1,
+// End outlineFont
 };
 
 // If the narrowest font ID doesn't fit the text, we still return that
