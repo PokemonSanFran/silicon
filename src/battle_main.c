@@ -1975,7 +1975,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             }
             // Start Battle Settings: Trainer Scaling
             //CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, personalityValue, otId);
-            CreateMon(&party[i], HandleScaledSpecies(partyData[monIndex].species), partyData[monIndex].lvl, personalityValue, otId);
+            CreateMon(&party[i], HandleScaledSpecies(partyData[monIndex].species), HandleScaledLevel(partyData[monIndex].lvl,monsCount), personalityValue, otId);
             // End Battle Settings: Trainer Scaling
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
 
