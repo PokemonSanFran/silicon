@@ -102,7 +102,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 pos->locationHi = ((uintptr_t)location) >> 14;
                 pos->locationLo = (uintptr_t)location;
 
-                MonitorHeap(head,size,location);
+                //MonitorHeap(head,size,location);
                 return pos->data;
             }
         }
