@@ -269,13 +269,12 @@ gScriptCmdTable::
     script_cmd_table_entry SCR_OP_CALLFUNC                           ScrCmd_callfunc,                             requests_effects=1   @ 0xf3 // callfunc
     script_cmd_table_entry SCR_OP_ISMONSHINY                         ScrCmd_ismonshiny,                           requests_effects=1   @ 0xf4
     script_cmd_table_entry SCR_OP_MAKEQUESTREWARDIFSUBQUESTSCOMPLETE ScrCmd_makequestrewardifsubquestscomplete,   requests_effects=1   @ 0xf5
-    script_cmd_table_entry SCR_OP_SETCUSTOMWILDMON                   ScrCmd_setcustomwildmon,                     requests_effects=1   @ 0xf6
-    script_cmd_table_entry SCR_OP_CHECKTRAINERDISCOVERED             ScrCmd_checktrainerdiscovered,               requests_effects=1   @ 0xf7
-    script_cmd_table_entry SCR_OP_QUESTOVERWORLD                     ScrCmd_startquestoverworld,                  requests_effects=1   @ 0xf8
-	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                   ScrCmd_variableaddmoney,                     requests_effects=1   @ 0xf9
-	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xfa
-	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfb
-    script_cmd_table_entry SCR_OP_PHENOMENON_DATA                    ScrCmd_setphenomenondata,                    requests_effects=1   @ 0xfc // phenomenon
+    script_cmd_table_entry SCR_OP_CHECKTRAINERDISCOVERED             ScrCmd_checktrainerdiscovered,               requests_effects=1   @ 0xf6
+    script_cmd_table_entry SCR_OP_QUESTOVERWORLD                     ScrCmd_startquestoverworld,                  requests_effects=1   @ 0xf7
+	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                   ScrCmd_variableaddmoney,                     requests_effects=1   @ 0xf8
+	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xf9
+	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfa
+    script_cmd_table_entry SCR_OP_PHENOMENON_DATA                    ScrCmd_setphenomenondata,                    requests_effects=1   @ 0xfb // phenomenon
 	@ End siliconMerge
 	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xfc
 

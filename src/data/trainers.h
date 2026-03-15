@@ -14,9 +14,7 @@
 #line 79
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 76
-        .trainerPic = TRAINER_PIC_SHINZO,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_SHINZO,
 #line 77
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 78
@@ -28,7 +26,7 @@
 #line 82
         .mapSec = MAPSEC_TORA_TOWN,
 #line 0
-        .trainerBackPic = TRAINER_PIC_SHINZO,
+        .trainerBackPic = TRAINER_PIC_FRONT_SHINZO,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -166,9 +164,7 @@
 #line 143
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 142
-        .trainerPic = TRAINER_PIC_BELEN,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_BELEN,
 #line 144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 146
@@ -180,7 +176,7 @@
 #line 148
         .mapSec = MAPSEC_MERMEREZA_CITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_BELEN,
+        .trainerBackPic = TRAINER_PIC_FRONT_BELEN,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -318,9 +314,7 @@
 #line 210
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 207
-        .trainerPic = TRAINER_PIC_EMRYS,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_EMRYS,
 #line 208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 209
@@ -332,7 +326,7 @@
 #line 213
         .mapSec = MAPSEC_PERLACIA_CITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_EMRYS,
+        .trainerBackPic = TRAINER_PIC_FRONT_EMRYS,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -469,9 +463,7 @@
 #line 273
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 272
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 275
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 277
@@ -487,7 +479,7 @@
 #line 280
         .mapSec = MAPSEC_ROUTE10,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -617,9 +609,7 @@
 #line 337
         .trainerName = _("Charlotte"),
 #line 338
-        .trainerPic = TRAINER_PIC_CHARLOTTE,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_CHARLOTTE,
 #line 339
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 340
@@ -631,7 +621,7 @@
 #line 343
         .mapSec = MAPSEC_ANBEH_BEND,
 #line 0
-        .trainerBackPic = TRAINER_PIC_CHARLOTTE,
+        .trainerBackPic = TRAINER_PIC_FRONT_CHARLOTTE,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -766,15 +756,13 @@
 #line 399
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 398
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 401
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -904,9 +892,7 @@
 #line 460
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 457
-        .trainerPic = TRAINER_PIC_KAUNA,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAUNA,
 #line 458
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 459
@@ -918,7 +904,7 @@
 #line 463
         .mapSec = MAPSEC_CHASILLA,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAUNA,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAUNA,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -1086,9 +1072,7 @@
 #line 537
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
 #line 533
-        .trainerPic = TRAINER_PIC_TALA,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_TALA,
 #line 535
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 534
@@ -1102,7 +1086,7 @@
 #line 540
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
-        .trainerBackPic = TRAINER_PIC_TALA,
+        .trainerBackPic = TRAINER_PIC_FRONT_TALA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -1302,9 +1286,7 @@
 #line 628
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 625
-        .trainerPic = TRAINER_PIC_NERIENE,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_NERIENE,
 #line 626
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 627
@@ -1316,7 +1298,7 @@
 #line 631
         .mapSec = MAPSEC_FORT_YOBU,
 #line 0
-        .trainerBackPic = TRAINER_PIC_NERIENE,
+        .trainerBackPic = TRAINER_PIC_FRONT_NERIENE,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -1485,9 +1467,7 @@
 #line 705
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 702
-        .trainerPic = TRAINER_PIC_DIMU,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_DIMU,
 #line 703
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 704
@@ -1499,7 +1479,7 @@
 #line 708
         .mapSec = MAPSEC_HALERBA_CITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_DIMU,
+        .trainerBackPic = TRAINER_PIC_FRONT_DIMU,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -1667,9 +1647,7 @@
 #line 781
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 778
-        .trainerPic = TRAINER_PIC_BD,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_BD,
 #line 779
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 780
@@ -1681,7 +1659,7 @@
 #line 784
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_BD,
+        .trainerBackPic = TRAINER_PIC_FRONT_BD,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -1850,9 +1828,7 @@
 #line 857
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 854
-        .trainerPic = TRAINER_PIC_AMI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_AMI,
 #line 855
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 856
@@ -1864,7 +1840,7 @@
 #line 860
         .mapSec = MAPSEC_IRISINA_TOWN,
 #line 0
-        .trainerBackPic = TRAINER_PIC_AMI,
+        .trainerBackPic = TRAINER_PIC_FRONT_AMI,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -2033,15 +2009,13 @@
 #line 935
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 934
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 937
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -2202,13 +2176,11 @@
 #line 1004
         .trainerName = _("Charlotte"),
 #line 1005
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1006
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -2408,9 +2380,7 @@
 #line 1094
         .trainerClass = TRAINER_CLASS_THE_TIDE_LEADER,
 #line 1090
-        .trainerPic = TRAINER_PIC_ALCMENE,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_ALCMENE,
 #line 1092
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1091
@@ -2424,7 +2394,7 @@
 #line 1097
         .mapSec = MAPSEC_NAVAL_BASE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ALCMENE,
+        .trainerBackPic = TRAINER_PIC_FRONT_ALCMENE,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -2624,15 +2594,13 @@
 #line 1180
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1179
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 1182
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1181
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -2824,13 +2792,11 @@
 #line 1263
         .trainerName = _("League1"),
 #line 1264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -2935,13 +2901,11 @@
 #line 1307
         .trainerName = _("League2"),
 #line 1308
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1309
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3044,13 +3008,11 @@
 #line 1353
         .trainerName = _("League3"),
 #line 1354
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1355
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3155,13 +3117,11 @@
 #line 1398
         .trainerName = _("League4"),
 #line 1399
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3261,13 +3221,11 @@
 #line 1441
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 1440
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 1442
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -3466,15 +3424,13 @@
 #line 1526
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1525
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 1528
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1527
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -3673,9 +3629,7 @@
 #line 1612
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 1611
-        .trainerPic = TRAINER_PIC_DOYLE,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_DOYLE,
 #line 1614
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1613
@@ -3689,7 +3643,7 @@
 #line 1618
         .mapSec = MAPSEC_ZENZU_ISLAND,
 #line 0
-        .trainerBackPic = TRAINER_PIC_DOYLE,
+        .trainerBackPic = TRAINER_PIC_FRONT_DOYLE,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -3856,9 +3810,7 @@
 #line 1692
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 1693
-        .trainerPic = TRAINER_PIC_IMELDA,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_IMELDA,
 #line 1695
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1694
@@ -3872,7 +3824,7 @@
 #line 1699
         .mapSec = MAPSEC_ESPULEE_OUTSKIRTS,
 #line 0
-        .trainerBackPic = TRAINER_PIC_IMELDA,
+        .trainerBackPic = TRAINER_PIC_FRONT_IMELDA,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -4039,9 +3991,7 @@
 #line 1777
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1773
-        .trainerPic = TRAINER_PIC_ADAORA,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_ADAORA,
 #line 1775
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1774
@@ -4055,7 +4005,7 @@
 #line 1780
         .mapSec = MAPSEC_HODOU_CITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ADAORA,
+        .trainerBackPic = TRAINER_PIC_FRONT_ADAORA,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -4253,15 +4203,13 @@
 #line 1865
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 1864
-        .trainerPic = TRAINER_PIC_KAI,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
 #line 1867
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 1866
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -4459,13 +4407,11 @@
 #line 1950
         .trainerName = _("Diantha"),
 #line 1951
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 1952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -4665,9 +4611,7 @@
 #line 2039
         .trainerClass = TRAINER_CLASS_SHARPRISE_COO,
 #line 2036
-        .trainerPic = TRAINER_PIC_KEI_YING,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KEI_YING,
 #line 2037
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 2038
@@ -4679,7 +4623,7 @@
 #line 2042
         .mapSec = MAPSEC_CURENO_PORT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KEI_YING,
+        .trainerBackPic = TRAINER_PIC_FRONT_KEI_YING,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -4803,13 +4747,11 @@
 #line 2089
         .trainerName = _("Arribaceo"),
 #line 2090
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2091
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -4945,13 +4887,11 @@
 #line 2147
         .trainerName = _("Arribaceo"),
 #line 2148
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2149
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -5087,13 +5027,11 @@
 #line 2206
         .trainerName = _("Buzzrceo"),
 #line 2207
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -5229,13 +5167,11 @@
 #line 2264
         .trainerName = _("Buzzrceo"),
 #line 2265
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2266
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -5401,13 +5337,11 @@
 #line 2334
         .trainerName = _("Prestoceo"),
 #line 2335
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -5574,13 +5508,11 @@
 #line 2407
         .trainerName = _("Prestoceo"),
 #line 2408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -5749,9 +5681,7 @@
 #line 2483
         .trainerClass = TRAINER_CLASS_MAGMA_ADMIN,
 #line 2480
-        .trainerPic = TRAINER_PIC_MAGMA_ADMIN,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_MAGMA_ADMIN,
 #line 2481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 2482
@@ -5763,7 +5693,7 @@
 #line 2486
         .mapSec = MAPSEC_SHARPRISESPIRE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_MAGMA_ADMIN,
+        .trainerBackPic = TRAINER_PIC_FRONT_MAGMA_ADMIN,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -5930,13 +5860,11 @@
 #line 2557
         .trainerName = _("Charlotte"),
 #line 2558
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2559
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6134,9 +6062,7 @@
 #line 2648
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
 #line 2645
-        .trainerPic = TRAINER_PIC_ADELAIDE,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_ADELAIDE,
 #line 2646
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 2647
@@ -6148,7 +6074,7 @@
 #line 2651
         .mapSec = MAPSEC_SHARPRISESPIRE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ADELAIDE,
+        .trainerBackPic = TRAINER_PIC_FRONT_ADELAIDE,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6344,15 +6270,13 @@
 #line 2737
         .trainerName = _("Adelaide"),
 #line 2738
-        .trainerPic = TRAINER_PIC_COOLTRAINER_F,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
 #line 2739
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 2740
         .mapSec = MAPSEC_SHARPRISESPIRE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_F,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6550,9 +6474,7 @@
 #line 2828
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
 #line 2824
-        .trainerPic = TRAINER_PIC_MAGNUS,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_MAGNUS,
 #line 2826
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 2825
@@ -6566,7 +6488,7 @@
 #line 2831
         .mapSec = MAPSEC_OROLAND_COLISEUM,
 #line 0
-        .trainerBackPic = TRAINER_PIC_MAGNUS,
+        .trainerBackPic = TRAINER_PIC_FRONT_MAGNUS,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6764,9 +6686,7 @@
 #line 2913
         .trainerName = _("Ellen"),
 #line 2914
-        .trainerPic = TRAINER_PIC_ELLEN,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_ELLEN,
 #line 2916
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 2915
@@ -6780,7 +6700,7 @@
 #line 2920
         .mapSec = MAPSEC_NAVAL_BASE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ELLEN,
+        .trainerBackPic = TRAINER_PIC_FRONT_ELLEN,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -6978,9 +6898,7 @@
 #line 3003
         .trainerName = _("Armando"),
 #line 3004
-        .trainerPic = TRAINER_PIC_ARMANDO,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_ARMANDO,
 #line 3006
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3005
@@ -6994,7 +6912,7 @@
 #line 3010
         .mapSec = MAPSEC_LEAVERRA_FOREST,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ARMANDO,
+        .trainerBackPic = TRAINER_PIC_FRONT_ARMANDO,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -7192,15 +7110,13 @@
 #line 3100
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 3097
-        .trainerPic = TRAINER_PIC_KEI_YING,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_KEI_YING,
 #line 3099
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3098
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KEI_YING,
+        .trainerBackPic = TRAINER_PIC_FRONT_KEI_YING,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -7398,15 +7314,13 @@
 #line 3182
         .trainerName = _("Melissa"),
 #line 3183
-        .trainerPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
 #line 3185
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
+        .trainerBackPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -7451,15 +7365,13 @@
 #line 3197
         .trainerName = _("Melissa"),
 #line 3198
-        .trainerPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
 #line 3200
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3199
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
+        .trainerBackPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -7515,15 +7427,13 @@
 #line 3215
         .trainerName = _("Melissa"),
 #line 3216
-        .trainerPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
 #line 3218
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
+        .trainerBackPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -7579,15 +7489,13 @@
 #line 3233
         .trainerName = _("Melissa"),
 #line 3234
-        .trainerPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
 #line 3236
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
 #line 3235
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_PIKE_QUEEN_LUCY,
+        .trainerBackPic = TRAINER_PIC_FRONT_PIKE_QUEEN_LUCY,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -7665,13 +7573,11 @@
 #line 3257
         .trainerName = _("Monty"),
 #line 3258
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3259
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7702,9 +7608,7 @@
 #line 3269
         .trainerName = _("Oliver"),
 #line 3270
-        .trainerPic = TRAINER_PIC_EXPERT_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_EXPERT_M,
 #line 3272
         .isNative = TRUE,
 #line 3271
@@ -7712,7 +7616,7 @@
 #line 3273
         .objectEventGraphicsId = OBJ_EVENT_GFX_PROF_BIRCH,
 #line 0
-        .trainerBackPic = TRAINER_PIC_EXPERT_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_EXPERT_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7735,13 +7639,11 @@
 #line 3279
         .trainerName = _("Blank"),
 #line 3280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7764,13 +7666,11 @@
 #line 3287
         .trainerName = _("Blank"),
 #line 3288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7793,13 +7693,11 @@
 #line 3295
         .trainerName = _("Blank"),
 #line 3296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7822,13 +7720,11 @@
 #line 3303
         .trainerName = _("Blank"),
 #line 3304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7851,13 +7747,11 @@
 #line 3311
         .trainerName = _("Blank"),
 #line 3312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7880,13 +7774,11 @@
 #line 3319
         .trainerName = _("Blank"),
 #line 3320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7909,13 +7801,11 @@
 #line 3327
         .trainerName = _("Blank"),
 #line 3328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7938,13 +7828,11 @@
 #line 3335
         .trainerName = _("Blank"),
 #line 3336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7967,13 +7855,11 @@
 #line 3343
         .trainerName = _("Blank"),
 #line 3344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7996,13 +7882,11 @@
 #line 3351
         .trainerName = _("Blank"),
 #line 3352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8025,13 +7909,11 @@
 #line 3359
         .trainerName = _("Blank"),
 #line 3360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8054,13 +7936,11 @@
 #line 3367
         .trainerName = _("Blank"),
 #line 3368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8083,13 +7963,11 @@
 #line 3375
         .trainerName = _("Blank"),
 #line 3376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8112,13 +7990,11 @@
 #line 3383
         .trainerName = _("Blank"),
 #line 3384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8141,13 +8017,11 @@
 #line 3391
         .trainerName = _("Blank"),
 #line 3392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8170,13 +8044,11 @@
 #line 3399
         .trainerName = _("Blank"),
 #line 3400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8199,13 +8071,11 @@
 #line 3407
         .trainerName = _("Blank"),
 #line 3408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8228,13 +8098,11 @@
 #line 3415
         .trainerName = _("Blank"),
 #line 3416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8257,13 +8125,11 @@
 #line 3423
         .trainerName = _("Blank"),
 #line 3424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8286,13 +8152,11 @@
 #line 3431
         .trainerName = _("Blank"),
 #line 3432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8315,13 +8179,11 @@
 #line 3439
         .trainerName = _("Blank"),
 #line 3440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8344,13 +8206,11 @@
 #line 3447
         .trainerName = _("Blank"),
 #line 3448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8373,13 +8233,11 @@
 #line 3455
         .trainerName = _("Blank"),
 #line 3456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8402,13 +8260,11 @@
 #line 3463
         .trainerName = _("Blank"),
 #line 3464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8431,13 +8287,11 @@
 #line 3471
         .trainerName = _("Blank"),
 #line 3472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8460,13 +8314,11 @@
 #line 3479
         .trainerName = _("Blank"),
 #line 3480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8489,13 +8341,11 @@
 #line 3487
         .trainerName = _("Blank"),
 #line 3488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8518,13 +8368,11 @@
 #line 3495
         .trainerName = _("Blank"),
 #line 3496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8547,13 +8395,11 @@
 #line 3503
         .trainerName = _("Blank"),
 #line 3504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8576,13 +8422,11 @@
 #line 3511
         .trainerName = _("Blank"),
 #line 3512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8605,13 +8449,11 @@
 #line 3519
         .trainerName = _("Blank"),
 #line 3520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8634,13 +8476,11 @@
 #line 3527
         .trainerName = _("Blank"),
 #line 3528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8663,13 +8503,11 @@
 #line 3535
         .trainerName = _("Blank"),
 #line 3536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8692,13 +8530,11 @@
 #line 3543
         .trainerName = _("Blank"),
 #line 3544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8721,13 +8557,11 @@
 #line 3551
         .trainerName = _("Blank"),
 #line 3552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8750,13 +8584,11 @@
 #line 3559
         .trainerName = _("Blank"),
 #line 3560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8779,13 +8611,11 @@
 #line 3567
         .trainerName = _("Blank"),
 #line 3568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8808,13 +8638,11 @@
 #line 3575
         .trainerName = _("Blank"),
 #line 3576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8837,13 +8665,11 @@
 #line 3583
         .trainerName = _("Blank"),
 #line 3584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8866,13 +8692,11 @@
 #line 3591
         .trainerName = _("Blank"),
 #line 3592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8895,13 +8719,11 @@
 #line 3599
         .trainerName = _("Blank"),
 #line 3600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8924,13 +8746,11 @@
 #line 3607
         .trainerName = _("Blank"),
 #line 3608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8953,13 +8773,11 @@
 #line 3615
         .trainerName = _("Blank"),
 #line 3616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8982,13 +8800,11 @@
 #line 3623
         .trainerName = _("Blank"),
 #line 3624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9011,13 +8827,11 @@
 #line 3631
         .trainerName = _("Blank"),
 #line 3632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9040,13 +8854,11 @@
 #line 3639
         .trainerName = _("Blank"),
 #line 3640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9069,13 +8881,11 @@
 #line 3647
         .trainerName = _("Blank"),
 #line 3648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9098,13 +8908,11 @@
 #line 3655
         .trainerName = _("Blank"),
 #line 3656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9127,13 +8935,11 @@
 #line 3663
         .trainerName = _("Blank"),
 #line 3664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9156,13 +8962,11 @@
 #line 3671
         .trainerName = _("Blank"),
 #line 3672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9185,13 +8989,11 @@
 #line 3679
         .trainerName = _("Blank"),
 #line 3680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9214,13 +9016,11 @@
 #line 3687
         .trainerName = _("Blank"),
 #line 3688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9243,13 +9043,11 @@
 #line 3695
         .trainerName = _("Blank"),
 #line 3696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9272,13 +9070,11 @@
 #line 3703
         .trainerName = _("Blank"),
 #line 3704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9301,13 +9097,11 @@
 #line 3711
         .trainerName = _("Blank"),
 #line 3712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9330,13 +9124,11 @@
 #line 3719
         .trainerName = _("Blank"),
 #line 3720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9359,13 +9151,11 @@
 #line 3727
         .trainerName = _("Blank"),
 #line 3728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9388,13 +9178,11 @@
 #line 3735
         .trainerName = _("Blank"),
 #line 3736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9417,13 +9205,11 @@
 #line 3743
         .trainerName = _("Blank"),
 #line 3744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9446,13 +9232,11 @@
 #line 3751
         .trainerName = _("Blank"),
 #line 3752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9475,13 +9259,11 @@
 #line 3759
         .trainerName = _("Blank"),
 #line 3760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9504,13 +9286,11 @@
 #line 3767
         .trainerName = _("Blank"),
 #line 3768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9533,13 +9313,11 @@
 #line 3775
         .trainerName = _("Blank"),
 #line 3776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9562,13 +9340,11 @@
 #line 3783
         .trainerName = _("Blank"),
 #line 3784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9591,13 +9367,11 @@
 #line 3791
         .trainerName = _("Blank"),
 #line 3792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9620,13 +9394,11 @@
 #line 3799
         .trainerName = _("Blank"),
 #line 3800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9649,13 +9421,11 @@
 #line 3807
         .trainerName = _("Blank"),
 #line 3808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9678,13 +9448,11 @@
 #line 3815
         .trainerName = _("Blank"),
 #line 3816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9707,13 +9475,11 @@
 #line 3823
         .trainerName = _("Blank"),
 #line 3824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9736,13 +9502,11 @@
 #line 3831
         .trainerName = _("Blank"),
 #line 3832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9765,13 +9529,11 @@
 #line 3839
         .trainerName = _("Blank"),
 #line 3840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9794,13 +9556,11 @@
 #line 3847
         .trainerName = _("Blank"),
 #line 3848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9823,13 +9583,11 @@
 #line 3855
         .trainerName = _("Blank"),
 #line 3856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9852,13 +9610,11 @@
 #line 3863
         .trainerName = _("Blank"),
 #line 3864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9881,13 +9637,11 @@
 #line 3871
         .trainerName = _("Blank"),
 #line 3872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9910,13 +9664,11 @@
 #line 3879
         .trainerName = _("Blank"),
 #line 3880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9939,13 +9691,11 @@
 #line 3887
         .trainerName = _("Blank"),
 #line 3888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9968,13 +9718,11 @@
 #line 3895
         .trainerName = _("Blank"),
 #line 3896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9997,13 +9745,11 @@
 #line 3903
         .trainerName = _("Blank"),
 #line 3904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10026,13 +9772,11 @@
 #line 3911
         .trainerName = _("Blank"),
 #line 3912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10055,13 +9799,11 @@
 #line 3919
         .trainerName = _("Blank"),
 #line 3920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10084,13 +9826,11 @@
 #line 3927
         .trainerName = _("Blank"),
 #line 3928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10113,13 +9853,11 @@
 #line 3935
         .trainerName = _("Blank"),
 #line 3936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10142,13 +9880,11 @@
 #line 3943
         .trainerName = _("Blank"),
 #line 3944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10171,13 +9907,11 @@
 #line 3951
         .trainerName = _("Blank"),
 #line 3952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10200,13 +9934,11 @@
 #line 3959
         .trainerName = _("Blank"),
 #line 3960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10229,13 +9961,11 @@
 #line 3967
         .trainerName = _("Blank"),
 #line 3968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10258,13 +9988,11 @@
 #line 3975
         .trainerName = _("Blank"),
 #line 3976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10287,13 +10015,11 @@
 #line 3983
         .trainerName = _("Blank"),
 #line 3984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10316,13 +10042,11 @@
 #line 3991
         .trainerName = _("Blank"),
 #line 3992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10345,13 +10069,11 @@
 #line 3999
         .trainerName = _("Blank"),
 #line 4000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10374,13 +10096,11 @@
 #line 4007
         .trainerName = _("Blank"),
 #line 4008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10403,13 +10123,11 @@
 #line 4015
         .trainerName = _("Blank"),
 #line 4016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10432,13 +10150,11 @@
 #line 4023
         .trainerName = _("Blank"),
 #line 4024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10461,13 +10177,11 @@
 #line 4031
         .trainerName = _("Blank"),
 #line 4032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10490,13 +10204,11 @@
 #line 4039
         .trainerName = _("Blank"),
 #line 4040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10519,13 +10231,11 @@
 #line 4047
         .trainerName = _("Blank"),
 #line 4048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10548,13 +10258,11 @@
 #line 4055
         .trainerName = _("Blank"),
 #line 4056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10577,13 +10285,11 @@
 #line 4063
         .trainerName = _("Blank"),
 #line 4064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10606,13 +10312,11 @@
 #line 4071
         .trainerName = _("Blank"),
 #line 4072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10635,13 +10339,11 @@
 #line 4079
         .trainerName = _("Blank"),
 #line 4080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10664,13 +10366,11 @@
 #line 4087
         .trainerName = _("Blank"),
 #line 4088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10693,13 +10393,11 @@
 #line 4095
         .trainerName = _("Blank"),
 #line 4096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10722,13 +10420,11 @@
 #line 4103
         .trainerName = _("Blank"),
 #line 4104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10751,13 +10447,11 @@
 #line 4111
         .trainerName = _("Blank"),
 #line 4112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10780,13 +10474,11 @@
 #line 4119
         .trainerName = _("Blank"),
 #line 4120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10809,13 +10501,11 @@
 #line 4127
         .trainerName = _("Blank"),
 #line 4128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10838,13 +10528,11 @@
 #line 4135
         .trainerName = _("Blank"),
 #line 4136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10867,13 +10555,11 @@
 #line 4143
         .trainerName = _("Blank"),
 #line 4144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10896,13 +10582,11 @@
 #line 4151
         .trainerName = _("Blank"),
 #line 4152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10925,13 +10609,11 @@
 #line 4159
         .trainerName = _("Blank"),
 #line 4160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10954,13 +10636,11 @@
 #line 4167
         .trainerName = _("Blank"),
 #line 4168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10983,13 +10663,11 @@
 #line 4175
         .trainerName = _("Blank"),
 #line 4176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11012,13 +10690,11 @@
 #line 4183
         .trainerName = _("Blank"),
 #line 4184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11041,13 +10717,11 @@
 #line 4191
         .trainerName = _("Blank"),
 #line 4192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11070,13 +10744,11 @@
 #line 4199
         .trainerName = _("Blank"),
 #line 4200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11099,13 +10771,11 @@
 #line 4207
         .trainerName = _("Blank"),
 #line 4208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11128,13 +10798,11 @@
 #line 4215
         .trainerName = _("Blank"),
 #line 4216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11157,13 +10825,11 @@
 #line 4223
         .trainerName = _("Blank"),
 #line 4224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11186,13 +10852,11 @@
 #line 4231
         .trainerName = _("Blank"),
 #line 4232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11215,13 +10879,11 @@
 #line 4239
         .trainerName = _("Blank"),
 #line 4240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11244,13 +10906,11 @@
 #line 4247
         .trainerName = _("Blank"),
 #line 4248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11273,13 +10933,11 @@
 #line 4255
         .trainerName = _("Blank"),
 #line 4256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11302,13 +10960,11 @@
 #line 4263
         .trainerName = _("Blank"),
 #line 4264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11331,13 +10987,11 @@
 #line 4271
         .trainerName = _("Blank"),
 #line 4272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11360,13 +11014,11 @@
 #line 4279
         .trainerName = _("Blank"),
 #line 4280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11389,13 +11041,11 @@
 #line 4287
         .trainerName = _("Blank"),
 #line 4288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11418,13 +11068,11 @@
 #line 4295
         .trainerName = _("Blank"),
 #line 4296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11447,13 +11095,11 @@
 #line 4303
         .trainerName = _("Blank"),
 #line 4304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11476,13 +11122,11 @@
 #line 4311
         .trainerName = _("Blank"),
 #line 4312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11505,13 +11149,11 @@
 #line 4319
         .trainerName = _("Blank"),
 #line 4320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11534,13 +11176,11 @@
 #line 4327
         .trainerName = _("Blank"),
 #line 4328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11563,13 +11203,11 @@
 #line 4335
         .trainerName = _("Blank"),
 #line 4336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11592,13 +11230,11 @@
 #line 4343
         .trainerName = _("Blank"),
 #line 4344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11621,13 +11257,11 @@
 #line 4351
         .trainerName = _("Blank"),
 #line 4352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11650,13 +11284,11 @@
 #line 4359
         .trainerName = _("Blank"),
 #line 4360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11679,13 +11311,11 @@
 #line 4367
         .trainerName = _("Blank"),
 #line 4368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11708,13 +11338,11 @@
 #line 4375
         .trainerName = _("Blank"),
 #line 4376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11737,13 +11365,11 @@
 #line 4383
         .trainerName = _("Blank"),
 #line 4384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11766,13 +11392,11 @@
 #line 4391
         .trainerName = _("Blank"),
 #line 4392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11795,13 +11419,11 @@
 #line 4399
         .trainerName = _("Blank"),
 #line 4400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11824,13 +11446,11 @@
 #line 4407
         .trainerName = _("Blank"),
 #line 4408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11853,13 +11473,11 @@
 #line 4415
         .trainerName = _("Blank"),
 #line 4416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11882,13 +11500,11 @@
 #line 4423
         .trainerName = _("Blank"),
 #line 4424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11911,13 +11527,11 @@
 #line 4431
         .trainerName = _("Blank"),
 #line 4432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11940,13 +11554,11 @@
 #line 4439
         .trainerName = _("Blank"),
 #line 4440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11969,13 +11581,11 @@
 #line 4447
         .trainerName = _("Blank"),
 #line 4448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11998,13 +11608,11 @@
 #line 4455
         .trainerName = _("Blank"),
 #line 4456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12027,13 +11635,11 @@
 #line 4463
         .trainerName = _("Blank"),
 #line 4464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12056,13 +11662,11 @@
 #line 4471
         .trainerName = _("Blank"),
 #line 4472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12085,13 +11689,11 @@
 #line 4479
         .trainerName = _("Blank"),
 #line 4480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12114,13 +11716,11 @@
 #line 4487
         .trainerName = _("Blank"),
 #line 4488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12143,13 +11743,11 @@
 #line 4495
         .trainerName = _("Blank"),
 #line 4496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12172,13 +11770,11 @@
 #line 4503
         .trainerName = _("Blank"),
 #line 4504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12201,13 +11797,11 @@
 #line 4511
         .trainerName = _("Blank"),
 #line 4512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12230,13 +11824,11 @@
 #line 4519
         .trainerName = _("Blank"),
 #line 4520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12259,13 +11851,11 @@
 #line 4527
         .trainerName = _("Blank"),
 #line 4528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12288,13 +11878,11 @@
 #line 4535
         .trainerName = _("Blank"),
 #line 4536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12317,13 +11905,11 @@
 #line 4543
         .trainerName = _("Blank"),
 #line 4544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12346,13 +11932,11 @@
 #line 4551
         .trainerName = _("Blank"),
 #line 4552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12375,13 +11959,11 @@
 #line 4559
         .trainerName = _("Blank"),
 #line 4560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12404,13 +11986,11 @@
 #line 4567
         .trainerName = _("Blank"),
 #line 4568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12433,13 +12013,11 @@
 #line 4575
         .trainerName = _("Blank"),
 #line 4576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12462,13 +12040,11 @@
 #line 4583
         .trainerName = _("Blank"),
 #line 4584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12491,13 +12067,11 @@
 #line 4591
         .trainerName = _("Blank"),
 #line 4592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12520,13 +12094,11 @@
 #line 4599
         .trainerName = _("Blank"),
 #line 4600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12549,13 +12121,11 @@
 #line 4607
         .trainerName = _("Blank"),
 #line 4608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12578,13 +12148,11 @@
 #line 4615
         .trainerName = _("Blank"),
 #line 4616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12607,13 +12175,11 @@
 #line 4623
         .trainerName = _("Blank"),
 #line 4624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12636,13 +12202,11 @@
 #line 4631
         .trainerName = _("Blank"),
 #line 4632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12665,13 +12229,11 @@
 #line 4639
         .trainerName = _("Blank"),
 #line 4640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12694,13 +12256,11 @@
 #line 4647
         .trainerName = _("Blank"),
 #line 4648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12723,13 +12283,11 @@
 #line 4655
         .trainerName = _("Blank"),
 #line 4656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12752,13 +12310,11 @@
 #line 4663
         .trainerName = _("Blank"),
 #line 4664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12781,13 +12337,11 @@
 #line 4671
         .trainerName = _("Blank"),
 #line 4672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12810,13 +12364,11 @@
 #line 4679
         .trainerName = _("Blank"),
 #line 4680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12839,13 +12391,11 @@
 #line 4687
         .trainerName = _("Blank"),
 #line 4688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12868,13 +12418,11 @@
 #line 4695
         .trainerName = _("Blank"),
 #line 4696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12897,13 +12445,11 @@
 #line 4703
         .trainerName = _("Blank"),
 #line 4704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12926,13 +12472,11 @@
 #line 4711
         .trainerName = _("Blank"),
 #line 4712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12955,13 +12499,11 @@
 #line 4719
         .trainerName = _("Blank"),
 #line 4720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12984,13 +12526,11 @@
 #line 4727
         .trainerName = _("Blank"),
 #line 4728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13013,13 +12553,11 @@
 #line 4735
         .trainerName = _("Blank"),
 #line 4736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13042,13 +12580,11 @@
 #line 4743
         .trainerName = _("Blank"),
 #line 4744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13071,13 +12607,11 @@
 #line 4751
         .trainerName = _("Blank"),
 #line 4752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13100,13 +12634,11 @@
 #line 4759
         .trainerName = _("Blank"),
 #line 4760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13129,13 +12661,11 @@
 #line 4767
         .trainerName = _("Blank"),
 #line 4768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13158,13 +12688,11 @@
 #line 4775
         .trainerName = _("Blank"),
 #line 4776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13187,13 +12715,11 @@
 #line 4783
         .trainerName = _("Blank"),
 #line 4784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13216,13 +12742,11 @@
 #line 4791
         .trainerName = _("Blank"),
 #line 4792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13245,13 +12769,11 @@
 #line 4799
         .trainerName = _("Blank"),
 #line 4800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13274,13 +12796,11 @@
 #line 4807
         .trainerName = _("Blank"),
 #line 4808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13303,13 +12823,11 @@
 #line 4815
         .trainerName = _("Blank"),
 #line 4816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13332,13 +12850,11 @@
 #line 4823
         .trainerName = _("Blank"),
 #line 4824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13361,13 +12877,11 @@
 #line 4831
         .trainerName = _("Blank"),
 #line 4832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13390,13 +12904,11 @@
 #line 4839
         .trainerName = _("Blank"),
 #line 4840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13419,13 +12931,11 @@
 #line 4847
         .trainerName = _("Blank"),
 #line 4848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13448,13 +12958,11 @@
 #line 4855
         .trainerName = _("Blank"),
 #line 4856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13477,13 +12985,11 @@
 #line 4863
         .trainerName = _("Blank"),
 #line 4864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13506,13 +13012,11 @@
 #line 4871
         .trainerName = _("Blank"),
 #line 4872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13535,13 +13039,11 @@
 #line 4879
         .trainerName = _("Blank"),
 #line 4880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13564,13 +13066,11 @@
 #line 4887
         .trainerName = _("Blank"),
 #line 4888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13593,13 +13093,11 @@
 #line 4895
         .trainerName = _("Blank"),
 #line 4896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13622,13 +13120,11 @@
 #line 4903
         .trainerName = _("Blank"),
 #line 4904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13651,13 +13147,11 @@
 #line 4911
         .trainerName = _("Blank"),
 #line 4912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13680,13 +13174,11 @@
 #line 4919
         .trainerName = _("Blank"),
 #line 4920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13709,13 +13201,11 @@
 #line 4927
         .trainerName = _("Blank"),
 #line 4928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13738,13 +13228,11 @@
 #line 4935
         .trainerName = _("Blank"),
 #line 4936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13767,13 +13255,11 @@
 #line 4943
         .trainerName = _("Blank"),
 #line 4944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13796,13 +13282,11 @@
 #line 4951
         .trainerName = _("Blank"),
 #line 4952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13825,13 +13309,11 @@
 #line 4959
         .trainerName = _("Blank"),
 #line 4960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13854,13 +13336,11 @@
 #line 4967
         .trainerName = _("Blank"),
 #line 4968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13883,13 +13363,11 @@
 #line 4975
         .trainerName = _("Blank"),
 #line 4976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13912,13 +13390,11 @@
 #line 4983
         .trainerName = _("Blank"),
 #line 4984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13941,13 +13417,11 @@
 #line 4991
         .trainerName = _("Blank"),
 #line 4992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 4993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13970,13 +13444,11 @@
 #line 4999
         .trainerName = _("Blank"),
 #line 5000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13999,13 +13471,11 @@
 #line 5007
         .trainerName = _("Blank"),
 #line 5008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14028,13 +13498,11 @@
 #line 5015
         .trainerName = _("Blank"),
 #line 5016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14057,13 +13525,11 @@
 #line 5023
         .trainerName = _("Blank"),
 #line 5024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14086,13 +13552,11 @@
 #line 5031
         .trainerName = _("Blank"),
 #line 5032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14115,13 +13579,11 @@
 #line 5039
         .trainerName = _("Blank"),
 #line 5040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14144,13 +13606,11 @@
 #line 5047
         .trainerName = _("Blank"),
 #line 5048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14173,13 +13633,11 @@
 #line 5055
         .trainerName = _("Blank"),
 #line 5056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14202,13 +13660,11 @@
 #line 5063
         .trainerName = _("Blank"),
 #line 5064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14231,13 +13687,11 @@
 #line 5071
         .trainerName = _("Blank"),
 #line 5072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14260,13 +13714,11 @@
 #line 5079
         .trainerName = _("Blank"),
 #line 5080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14289,13 +13741,11 @@
 #line 5087
         .trainerName = _("Blank"),
 #line 5088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14318,13 +13768,11 @@
 #line 5095
         .trainerName = _("Blank"),
 #line 5096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14347,13 +13795,11 @@
 #line 5103
         .trainerName = _("Blank"),
 #line 5104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14376,13 +13822,11 @@
 #line 5111
         .trainerName = _("Blank"),
 #line 5112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14405,13 +13849,11 @@
 #line 5119
         .trainerName = _("Blank"),
 #line 5120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14434,13 +13876,11 @@
 #line 5127
         .trainerName = _("Blank"),
 #line 5128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14463,13 +13903,11 @@
 #line 5135
         .trainerName = _("Blank"),
 #line 5136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14492,13 +13930,11 @@
 #line 5143
         .trainerName = _("Blank"),
 #line 5144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14521,13 +13957,11 @@
 #line 5151
         .trainerName = _("Blank"),
 #line 5152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14550,13 +13984,11 @@
 #line 5159
         .trainerName = _("Blank"),
 #line 5160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14579,13 +14011,11 @@
 #line 5167
         .trainerName = _("Blank"),
 #line 5168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14608,13 +14038,11 @@
 #line 5175
         .trainerName = _("Blank"),
 #line 5176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14637,13 +14065,11 @@
 #line 5183
         .trainerName = _("Blank"),
 #line 5184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14666,13 +14092,11 @@
 #line 5191
         .trainerName = _("Blank"),
 #line 5192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14695,13 +14119,11 @@
 #line 5199
         .trainerName = _("Blank"),
 #line 5200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14724,13 +14146,11 @@
 #line 5207
         .trainerName = _("Blank"),
 #line 5208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14753,13 +14173,11 @@
 #line 5215
         .trainerName = _("Blank"),
 #line 5216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14782,13 +14200,11 @@
 #line 5223
         .trainerName = _("Blank"),
 #line 5224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14811,13 +14227,11 @@
 #line 5231
         .trainerName = _("Blank"),
 #line 5232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14840,13 +14254,11 @@
 #line 5239
         .trainerName = _("Blank"),
 #line 5240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14869,13 +14281,11 @@
 #line 5247
         .trainerName = _("Blank"),
 #line 5248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14898,13 +14308,11 @@
 #line 5255
         .trainerName = _("Blank"),
 #line 5256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14927,13 +14335,11 @@
 #line 5263
         .trainerName = _("Blank"),
 #line 5264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14956,13 +14362,11 @@
 #line 5271
         .trainerName = _("Blank"),
 #line 5272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -14985,13 +14389,11 @@
 #line 5279
         .trainerName = _("Blank"),
 #line 5280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15014,13 +14416,11 @@
 #line 5287
         .trainerName = _("Blank"),
 #line 5288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15043,13 +14443,11 @@
 #line 5295
         .trainerName = _("Blank"),
 #line 5296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15072,13 +14470,11 @@
 #line 5303
         .trainerName = _("Blank"),
 #line 5304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15101,13 +14497,11 @@
 #line 5311
         .trainerName = _("Blank"),
 #line 5312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15130,13 +14524,11 @@
 #line 5319
         .trainerName = _("Blank"),
 #line 5320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15159,13 +14551,11 @@
 #line 5327
         .trainerName = _("Blank"),
 #line 5328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15188,13 +14578,11 @@
 #line 5335
         .trainerName = _("Blank"),
 #line 5336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15217,13 +14605,11 @@
 #line 5343
         .trainerName = _("Blank"),
 #line 5344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15246,13 +14632,11 @@
 #line 5351
         .trainerName = _("Blank"),
 #line 5352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15275,13 +14659,11 @@
 #line 5359
         .trainerName = _("Blank"),
 #line 5360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15304,13 +14686,11 @@
 #line 5367
         .trainerName = _("Blank"),
 #line 5368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15333,13 +14713,11 @@
 #line 5375
         .trainerName = _("Blank"),
 #line 5376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15362,13 +14740,11 @@
 #line 5383
         .trainerName = _("Blank"),
 #line 5384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15391,13 +14767,11 @@
 #line 5391
         .trainerName = _("Blank"),
 #line 5392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15420,13 +14794,11 @@
 #line 5399
         .trainerName = _("Blank"),
 #line 5400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15449,13 +14821,11 @@
 #line 5407
         .trainerName = _("Blank"),
 #line 5408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15478,13 +14848,11 @@
 #line 5415
         .trainerName = _("Blank"),
 #line 5416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15507,13 +14875,11 @@
 #line 5423
         .trainerName = _("Blank"),
 #line 5424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15536,13 +14902,11 @@
 #line 5431
         .trainerName = _("Blank"),
 #line 5432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15565,13 +14929,11 @@
 #line 5439
         .trainerName = _("Blank"),
 #line 5440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15594,13 +14956,11 @@
 #line 5447
         .trainerName = _("Blank"),
 #line 5448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15623,13 +14983,11 @@
 #line 5455
         .trainerName = _("Blank"),
 #line 5456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15652,13 +15010,11 @@
 #line 5463
         .trainerName = _("Blank"),
 #line 5464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15681,13 +15037,11 @@
 #line 5471
         .trainerName = _("Blank"),
 #line 5472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15710,13 +15064,11 @@
 #line 5479
         .trainerName = _("Blank"),
 #line 5480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15739,13 +15091,11 @@
 #line 5487
         .trainerName = _("Blank"),
 #line 5488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15768,13 +15118,11 @@
 #line 5495
         .trainerName = _("Blank"),
 #line 5496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15797,13 +15145,11 @@
 #line 5503
         .trainerName = _("Blank"),
 #line 5504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15826,13 +15172,11 @@
 #line 5511
         .trainerName = _("Blank"),
 #line 5512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15855,13 +15199,11 @@
 #line 5519
         .trainerName = _("Blank"),
 #line 5520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15884,13 +15226,11 @@
 #line 5527
         .trainerName = _("Blank"),
 #line 5528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15913,13 +15253,11 @@
 #line 5535
         .trainerName = _("Blank"),
 #line 5536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15942,13 +15280,11 @@
 #line 5543
         .trainerName = _("Blank"),
 #line 5544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15971,13 +15307,11 @@
 #line 5551
         .trainerName = _("Blank"),
 #line 5552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16000,13 +15334,11 @@
 #line 5559
         .trainerName = _("Blank"),
 #line 5560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16029,13 +15361,11 @@
 #line 5567
         .trainerName = _("Blank"),
 #line 5568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16058,13 +15388,11 @@
 #line 5575
         .trainerName = _("Blank"),
 #line 5576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16087,13 +15415,11 @@
 #line 5583
         .trainerName = _("Blank"),
 #line 5584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16116,13 +15442,11 @@
 #line 5591
         .trainerName = _("Blank"),
 #line 5592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16145,13 +15469,11 @@
 #line 5599
         .trainerName = _("Blank"),
 #line 5600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16174,13 +15496,11 @@
 #line 5607
         .trainerName = _("Blank"),
 #line 5608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16203,13 +15523,11 @@
 #line 5615
         .trainerName = _("Blank"),
 #line 5616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16232,13 +15550,11 @@
 #line 5623
         .trainerName = _("Blank"),
 #line 5624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16261,13 +15577,11 @@
 #line 5631
         .trainerName = _("Blank"),
 #line 5632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16290,13 +15604,11 @@
 #line 5639
         .trainerName = _("Blank"),
 #line 5640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16319,13 +15631,11 @@
 #line 5647
         .trainerName = _("Blank"),
 #line 5648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16348,13 +15658,11 @@
 #line 5655
         .trainerName = _("Blank"),
 #line 5656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16377,13 +15685,11 @@
 #line 5663
         .trainerName = _("Blank"),
 #line 5664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16406,13 +15712,11 @@
 #line 5671
         .trainerName = _("Blank"),
 #line 5672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16435,13 +15739,11 @@
 #line 5679
         .trainerName = _("Blank"),
 #line 5680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16464,13 +15766,11 @@
 #line 5687
         .trainerName = _("Blank"),
 #line 5688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16493,13 +15793,11 @@
 #line 5695
         .trainerName = _("Blank"),
 #line 5696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16522,13 +15820,11 @@
 #line 5703
         .trainerName = _("Blank"),
 #line 5704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16551,13 +15847,11 @@
 #line 5711
         .trainerName = _("Blank"),
 #line 5712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16580,13 +15874,11 @@
 #line 5719
         .trainerName = _("Blank"),
 #line 5720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16609,13 +15901,11 @@
 #line 5727
         .trainerName = _("Blank"),
 #line 5728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16638,13 +15928,11 @@
 #line 5735
         .trainerName = _("Blank"),
 #line 5736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16667,13 +15955,11 @@
 #line 5743
         .trainerName = _("Blank"),
 #line 5744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16696,13 +15982,11 @@
 #line 5751
         .trainerName = _("Blank"),
 #line 5752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16725,13 +16009,11 @@
 #line 5759
         .trainerName = _("Blank"),
 #line 5760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16754,13 +16036,11 @@
 #line 5767
         .trainerName = _("Blank"),
 #line 5768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16783,13 +16063,11 @@
 #line 5775
         .trainerName = _("Blank"),
 #line 5776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16812,13 +16090,11 @@
 #line 5783
         .trainerName = _("Blank"),
 #line 5784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16841,13 +16117,11 @@
 #line 5791
         .trainerName = _("Blank"),
 #line 5792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16870,13 +16144,11 @@
 #line 5799
         .trainerName = _("Blank"),
 #line 5800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16899,13 +16171,11 @@
 #line 5807
         .trainerName = _("Blank"),
 #line 5808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16928,13 +16198,11 @@
 #line 5815
         .trainerName = _("Blank"),
 #line 5816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16957,13 +16225,11 @@
 #line 5823
         .trainerName = _("Blank"),
 #line 5824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16986,13 +16252,11 @@
 #line 5831
         .trainerName = _("Blank"),
 #line 5832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17015,13 +16279,11 @@
 #line 5839
         .trainerName = _("Blank"),
 #line 5840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17044,13 +16306,11 @@
 #line 5847
         .trainerName = _("Blank"),
 #line 5848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17073,13 +16333,11 @@
 #line 5855
         .trainerName = _("Blank"),
 #line 5856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17102,13 +16360,11 @@
 #line 5863
         .trainerName = _("Blank"),
 #line 5864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17131,13 +16387,11 @@
 #line 5871
         .trainerName = _("Blank"),
 #line 5872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17160,13 +16414,11 @@
 #line 5879
         .trainerName = _("Blank"),
 #line 5880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17189,13 +16441,11 @@
 #line 5887
         .trainerName = _("Blank"),
 #line 5888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17218,13 +16468,11 @@
 #line 5895
         .trainerName = _("Blank"),
 #line 5896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17247,13 +16495,11 @@
 #line 5903
         .trainerName = _("Blank"),
 #line 5904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17276,13 +16522,11 @@
 #line 5911
         .trainerName = _("Blank"),
 #line 5912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17305,13 +16549,11 @@
 #line 5919
         .trainerName = _("Blank"),
 #line 5920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17334,13 +16576,11 @@
 #line 5927
         .trainerName = _("Blank"),
 #line 5928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17363,13 +16603,11 @@
 #line 5935
         .trainerName = _("Blank"),
 #line 5936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17392,13 +16630,11 @@
 #line 5943
         .trainerName = _("Blank"),
 #line 5944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17421,13 +16657,11 @@
 #line 5951
         .trainerName = _("Blank"),
 #line 5952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17450,13 +16684,11 @@
 #line 5959
         .trainerName = _("Blank"),
 #line 5960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17479,13 +16711,11 @@
 #line 5967
         .trainerName = _("Blank"),
 #line 5968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17508,13 +16738,11 @@
 #line 5975
         .trainerName = _("Blank"),
 #line 5976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17537,13 +16765,11 @@
 #line 5983
         .trainerName = _("Blank"),
 #line 5984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17566,13 +16792,11 @@
 #line 5991
         .trainerName = _("Blank"),
 #line 5992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17595,13 +16819,11 @@
 #line 5999
         .trainerName = _("Blank"),
 #line 6000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17624,13 +16846,11 @@
 #line 6007
         .trainerName = _("Blank"),
 #line 6008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17653,13 +16873,11 @@
 #line 6015
         .trainerName = _("Blank"),
 #line 6016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17682,13 +16900,11 @@
 #line 6023
         .trainerName = _("Blank"),
 #line 6024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17711,13 +16927,11 @@
 #line 6031
         .trainerName = _("Blank"),
 #line 6032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17740,13 +16954,11 @@
 #line 6039
         .trainerName = _("Blank"),
 #line 6040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17769,13 +16981,11 @@
 #line 6047
         .trainerName = _("Blank"),
 #line 6048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17798,13 +17008,11 @@
 #line 6055
         .trainerName = _("Blank"),
 #line 6056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17827,13 +17035,11 @@
 #line 6063
         .trainerName = _("Blank"),
 #line 6064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17856,13 +17062,11 @@
 #line 6071
         .trainerName = _("Blank"),
 #line 6072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17885,13 +17089,11 @@
 #line 6079
         .trainerName = _("Blank"),
 #line 6080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17914,13 +17116,11 @@
 #line 6087
         .trainerName = _("Blank"),
 #line 6088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17943,13 +17143,11 @@
 #line 6095
         .trainerName = _("Blank"),
 #line 6096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -17972,13 +17170,11 @@
 #line 6103
         .trainerName = _("Blank"),
 #line 6104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18001,13 +17197,11 @@
 #line 6111
         .trainerName = _("Blank"),
 #line 6112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18030,13 +17224,11 @@
 #line 6119
         .trainerName = _("Blank"),
 #line 6120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18059,13 +17251,11 @@
 #line 6127
         .trainerName = _("Blank"),
 #line 6128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18088,13 +17278,11 @@
 #line 6135
         .trainerName = _("Blank"),
 #line 6136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18117,13 +17305,11 @@
 #line 6143
         .trainerName = _("Blank"),
 #line 6144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18146,13 +17332,11 @@
 #line 6151
         .trainerName = _("Blank"),
 #line 6152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18175,13 +17359,11 @@
 #line 6159
         .trainerName = _("Blank"),
 #line 6160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18204,13 +17386,11 @@
 #line 6167
         .trainerName = _("Blank"),
 #line 6168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18233,13 +17413,11 @@
 #line 6175
         .trainerName = _("Blank"),
 #line 6176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18262,13 +17440,11 @@
 #line 6183
         .trainerName = _("Blank"),
 #line 6184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18291,13 +17467,11 @@
 #line 6191
         .trainerName = _("Blank"),
 #line 6192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18320,13 +17494,11 @@
 #line 6199
         .trainerName = _("Blank"),
 #line 6200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18349,13 +17521,11 @@
 #line 6207
         .trainerName = _("Blank"),
 #line 6208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18378,13 +17548,11 @@
 #line 6215
         .trainerName = _("Blank"),
 #line 6216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18407,13 +17575,11 @@
 #line 6223
         .trainerName = _("Blank"),
 #line 6224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18436,13 +17602,11 @@
 #line 6231
         .trainerName = _("Blank"),
 #line 6232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18465,13 +17629,11 @@
 #line 6239
         .trainerName = _("Blank"),
 #line 6240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18494,13 +17656,11 @@
 #line 6247
         .trainerName = _("Blank"),
 #line 6248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18523,13 +17683,11 @@
 #line 6255
         .trainerName = _("Blank"),
 #line 6256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18552,13 +17710,11 @@
 #line 6263
         .trainerName = _("Blank"),
 #line 6264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18581,13 +17737,11 @@
 #line 6271
         .trainerName = _("Blank"),
 #line 6272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18610,13 +17764,11 @@
 #line 6279
         .trainerName = _("Blank"),
 #line 6280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18639,13 +17791,11 @@
 #line 6287
         .trainerName = _("Blank"),
 #line 6288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18668,13 +17818,11 @@
 #line 6295
         .trainerName = _("Blank"),
 #line 6296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18697,13 +17845,11 @@
 #line 6303
         .trainerName = _("Blank"),
 #line 6304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18726,13 +17872,11 @@
 #line 6311
         .trainerName = _("Blank"),
 #line 6312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18755,13 +17899,11 @@
 #line 6319
         .trainerName = _("Blank"),
 #line 6320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18784,13 +17926,11 @@
 #line 6327
         .trainerName = _("Blank"),
 #line 6328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18813,13 +17953,11 @@
 #line 6335
         .trainerName = _("Blank"),
 #line 6336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18842,13 +17980,11 @@
 #line 6343
         .trainerName = _("Blank"),
 #line 6344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18871,13 +18007,11 @@
 #line 6351
         .trainerName = _("Blank"),
 #line 6352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18900,13 +18034,11 @@
 #line 6359
         .trainerName = _("Blank"),
 #line 6360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18929,13 +18061,11 @@
 #line 6367
         .trainerName = _("Blank"),
 #line 6368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18958,13 +18088,11 @@
 #line 6375
         .trainerName = _("Blank"),
 #line 6376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -18987,13 +18115,11 @@
 #line 6383
         .trainerName = _("Blank"),
 #line 6384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19016,13 +18142,11 @@
 #line 6391
         .trainerName = _("Blank"),
 #line 6392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19045,13 +18169,11 @@
 #line 6399
         .trainerName = _("Blank"),
 #line 6400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19074,13 +18196,11 @@
 #line 6407
         .trainerName = _("Blank"),
 #line 6408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19103,13 +18223,11 @@
 #line 6415
         .trainerName = _("Blank"),
 #line 6416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19132,13 +18250,11 @@
 #line 6423
         .trainerName = _("Blank"),
 #line 6424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19161,13 +18277,11 @@
 #line 6431
         .trainerName = _("Blank"),
 #line 6432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19190,13 +18304,11 @@
 #line 6439
         .trainerName = _("Blank"),
 #line 6440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19219,13 +18331,11 @@
 #line 6447
         .trainerName = _("Blank"),
 #line 6448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19248,13 +18358,11 @@
 #line 6455
         .trainerName = _("Blank"),
 #line 6456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19277,13 +18385,11 @@
 #line 6463
         .trainerName = _("Blank"),
 #line 6464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19306,13 +18412,11 @@
 #line 6471
         .trainerName = _("Blank"),
 #line 6472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19335,13 +18439,11 @@
 #line 6479
         .trainerName = _("Blank"),
 #line 6480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19364,13 +18466,11 @@
 #line 6487
         .trainerName = _("Blank"),
 #line 6488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19393,13 +18493,11 @@
 #line 6495
         .trainerName = _("Blank"),
 #line 6496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19422,13 +18520,11 @@
 #line 6503
         .trainerName = _("Blank"),
 #line 6504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19451,13 +18547,11 @@
 #line 6511
         .trainerName = _("Blank"),
 #line 6512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19480,13 +18574,11 @@
 #line 6519
         .trainerName = _("Blank"),
 #line 6520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19509,13 +18601,11 @@
 #line 6527
         .trainerName = _("Blank"),
 #line 6528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19538,13 +18628,11 @@
 #line 6535
         .trainerName = _("Blank"),
 #line 6536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19567,13 +18655,11 @@
 #line 6543
         .trainerName = _("Blank"),
 #line 6544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19596,13 +18682,11 @@
 #line 6551
         .trainerName = _("Blank"),
 #line 6552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19625,13 +18709,11 @@
 #line 6559
         .trainerName = _("Blank"),
 #line 6560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19654,13 +18736,11 @@
 #line 6567
         .trainerName = _("Blank"),
 #line 6568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19683,13 +18763,11 @@
 #line 6575
         .trainerName = _("Blank"),
 #line 6576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19712,13 +18790,11 @@
 #line 6583
         .trainerName = _("Blank"),
 #line 6584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19741,13 +18817,11 @@
 #line 6591
         .trainerName = _("Blank"),
 #line 6592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19770,13 +18844,11 @@
 #line 6599
         .trainerName = _("Blank"),
 #line 6600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19799,13 +18871,11 @@
 #line 6607
         .trainerName = _("Blank"),
 #line 6608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19828,13 +18898,11 @@
 #line 6615
         .trainerName = _("Blank"),
 #line 6616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19857,13 +18925,11 @@
 #line 6623
         .trainerName = _("Blank"),
 #line 6624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19886,13 +18952,11 @@
 #line 6631
         .trainerName = _("Blank"),
 #line 6632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19915,13 +18979,11 @@
 #line 6639
         .trainerName = _("Blank"),
 #line 6640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19944,13 +19006,11 @@
 #line 6647
         .trainerName = _("Blank"),
 #line 6648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19973,13 +19033,11 @@
 #line 6655
         .trainerName = _("Blank"),
 #line 6656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20002,13 +19060,11 @@
 #line 6663
         .trainerName = _("Blank"),
 #line 6664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20031,13 +19087,11 @@
 #line 6671
         .trainerName = _("Blank"),
 #line 6672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20060,13 +19114,11 @@
 #line 6679
         .trainerName = _("Blank"),
 #line 6680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20089,13 +19141,11 @@
 #line 6687
         .trainerName = _("Blank"),
 #line 6688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20118,13 +19168,11 @@
 #line 6695
         .trainerName = _("Blank"),
 #line 6696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20147,13 +19195,11 @@
 #line 6703
         .trainerName = _("Blank"),
 #line 6704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20176,13 +19222,11 @@
 #line 6711
         .trainerName = _("Blank"),
 #line 6712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20205,13 +19249,11 @@
 #line 6719
         .trainerName = _("Blank"),
 #line 6720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20234,13 +19276,11 @@
 #line 6727
         .trainerName = _("Blank"),
 #line 6728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20263,13 +19303,11 @@
 #line 6735
         .trainerName = _("Blank"),
 #line 6736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20292,13 +19330,11 @@
 #line 6743
         .trainerName = _("Blank"),
 #line 6744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20321,13 +19357,11 @@
 #line 6751
         .trainerName = _("Blank"),
 #line 6752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20350,13 +19384,11 @@
 #line 6759
         .trainerName = _("Blank"),
 #line 6760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20379,13 +19411,11 @@
 #line 6767
         .trainerName = _("Blank"),
 #line 6768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20408,13 +19438,11 @@
 #line 6775
         .trainerName = _("Blank"),
 #line 6776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20437,13 +19465,11 @@
 #line 6783
         .trainerName = _("Blank"),
 #line 6784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20466,13 +19492,11 @@
 #line 6791
         .trainerName = _("Blank"),
 #line 6792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20495,13 +19519,11 @@
 #line 6799
         .trainerName = _("Blank"),
 #line 6800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20524,13 +19546,11 @@
 #line 6807
         .trainerName = _("Blank"),
 #line 6808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20553,13 +19573,11 @@
 #line 6815
         .trainerName = _("Blank"),
 #line 6816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20582,13 +19600,11 @@
 #line 6823
         .trainerName = _("Blank"),
 #line 6824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20611,13 +19627,11 @@
 #line 6831
         .trainerName = _("Blank"),
 #line 6832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20640,13 +19654,11 @@
 #line 6839
         .trainerName = _("Blank"),
 #line 6840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20669,13 +19681,11 @@
 #line 6847
         .trainerName = _("Blank"),
 #line 6848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20698,13 +19708,11 @@
 #line 6855
         .trainerName = _("Blank"),
 #line 6856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20727,13 +19735,11 @@
 #line 6863
         .trainerName = _("Blank"),
 #line 6864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20756,13 +19762,11 @@
 #line 6871
         .trainerName = _("Blank"),
 #line 6872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20785,13 +19789,11 @@
 #line 6879
         .trainerName = _("Blank"),
 #line 6880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20814,13 +19816,11 @@
 #line 6887
         .trainerName = _("Blank"),
 #line 6888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20843,13 +19843,11 @@
 #line 6895
         .trainerName = _("Blank"),
 #line 6896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20872,13 +19870,11 @@
 #line 6903
         .trainerName = _("Blank"),
 #line 6904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20901,13 +19897,11 @@
 #line 6911
         .trainerName = _("Blank"),
 #line 6912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20930,13 +19924,11 @@
 #line 6919
         .trainerName = _("Blank"),
 #line 6920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20959,13 +19951,11 @@
 #line 6927
         .trainerName = _("Blank"),
 #line 6928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -20988,13 +19978,11 @@
 #line 6935
         .trainerName = _("Blank"),
 #line 6936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21017,13 +20005,11 @@
 #line 6943
         .trainerName = _("Blank"),
 #line 6944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21046,13 +20032,11 @@
 #line 6951
         .trainerName = _("Blank"),
 #line 6952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21075,13 +20059,11 @@
 #line 6959
         .trainerName = _("Blank"),
 #line 6960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21104,13 +20086,11 @@
 #line 6967
         .trainerName = _("Blank"),
 #line 6968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21133,13 +20113,11 @@
 #line 6975
         .trainerName = _("Blank"),
 #line 6976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21162,13 +20140,11 @@
 #line 6983
         .trainerName = _("Blank"),
 #line 6984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21191,13 +20167,11 @@
 #line 6991
         .trainerName = _("Blank"),
 #line 6992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 6993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21220,13 +20194,11 @@
 #line 6999
         .trainerName = _("Blank"),
 #line 7000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21249,13 +20221,11 @@
 #line 7007
         .trainerName = _("Blank"),
 #line 7008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21278,13 +20248,11 @@
 #line 7015
         .trainerName = _("Blank"),
 #line 7016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21307,13 +20275,11 @@
 #line 7023
         .trainerName = _("Blank"),
 #line 7024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21336,13 +20302,11 @@
 #line 7031
         .trainerName = _("Blank"),
 #line 7032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21365,13 +20329,11 @@
 #line 7039
         .trainerName = _("Blank"),
 #line 7040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21394,13 +20356,11 @@
 #line 7047
         .trainerName = _("Blank"),
 #line 7048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21423,13 +20383,11 @@
 #line 7055
         .trainerName = _("Blank"),
 #line 7056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21452,13 +20410,11 @@
 #line 7063
         .trainerName = _("Blank"),
 #line 7064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21481,13 +20437,11 @@
 #line 7071
         .trainerName = _("Blank"),
 #line 7072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21510,13 +20464,11 @@
 #line 7079
         .trainerName = _("Blank"),
 #line 7080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21539,13 +20491,11 @@
 #line 7087
         .trainerName = _("Blank"),
 #line 7088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21568,13 +20518,11 @@
 #line 7095
         .trainerName = _("Blank"),
 #line 7096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21597,13 +20545,11 @@
 #line 7103
         .trainerName = _("Blank"),
 #line 7104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21626,13 +20572,11 @@
 #line 7111
         .trainerName = _("Blank"),
 #line 7112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21655,13 +20599,11 @@
 #line 7119
         .trainerName = _("Blank"),
 #line 7120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21684,13 +20626,11 @@
 #line 7127
         .trainerName = _("Blank"),
 #line 7128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21713,13 +20653,11 @@
 #line 7135
         .trainerName = _("Blank"),
 #line 7136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21742,13 +20680,11 @@
 #line 7143
         .trainerName = _("Blank"),
 #line 7144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21771,13 +20707,11 @@
 #line 7151
         .trainerName = _("Blank"),
 #line 7152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21800,13 +20734,11 @@
 #line 7159
         .trainerName = _("Blank"),
 #line 7160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21829,13 +20761,11 @@
 #line 7167
         .trainerName = _("Blank"),
 #line 7168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21858,13 +20788,11 @@
 #line 7175
         .trainerName = _("Blank"),
 #line 7176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21887,13 +20815,11 @@
 #line 7183
         .trainerName = _("Blank"),
 #line 7184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21916,13 +20842,11 @@
 #line 7191
         .trainerName = _("Blank"),
 #line 7192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21945,13 +20869,11 @@
 #line 7199
         .trainerName = _("Blank"),
 #line 7200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21974,13 +20896,11 @@
 #line 7207
         .trainerName = _("Blank"),
 #line 7208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22003,13 +20923,11 @@
 #line 7215
         .trainerName = _("Blank"),
 #line 7216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22032,13 +20950,11 @@
 #line 7223
         .trainerName = _("Blank"),
 #line 7224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22061,13 +20977,11 @@
 #line 7231
         .trainerName = _("Blank"),
 #line 7232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22090,13 +21004,11 @@
 #line 7239
         .trainerName = _("Blank"),
 #line 7240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22119,13 +21031,11 @@
 #line 7247
         .trainerName = _("Blank"),
 #line 7248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22148,13 +21058,11 @@
 #line 7255
         .trainerName = _("Blank"),
 #line 7256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22177,13 +21085,11 @@
 #line 7263
         .trainerName = _("Blank"),
 #line 7264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22206,13 +21112,11 @@
 #line 7271
         .trainerName = _("Blank"),
 #line 7272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22235,13 +21139,11 @@
 #line 7279
         .trainerName = _("Blank"),
 #line 7280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22264,13 +21166,11 @@
 #line 7287
         .trainerName = _("Blank"),
 #line 7288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22293,13 +21193,11 @@
 #line 7295
         .trainerName = _("Blank"),
 #line 7296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22322,13 +21220,11 @@
 #line 7303
         .trainerName = _("Blank"),
 #line 7304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22351,13 +21247,11 @@
 #line 7311
         .trainerName = _("Blank"),
 #line 7312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22380,13 +21274,11 @@
 #line 7319
         .trainerName = _("Blank"),
 #line 7320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22409,13 +21301,11 @@
 #line 7327
         .trainerName = _("Blank"),
 #line 7328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22438,13 +21328,11 @@
 #line 7335
         .trainerName = _("Blank"),
 #line 7336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22467,13 +21355,11 @@
 #line 7343
         .trainerName = _("Blank"),
 #line 7344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22496,13 +21382,11 @@
 #line 7351
         .trainerName = _("Blank"),
 #line 7352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22525,13 +21409,11 @@
 #line 7359
         .trainerName = _("Blank"),
 #line 7360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22554,13 +21436,11 @@
 #line 7367
         .trainerName = _("Blank"),
 #line 7368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22583,13 +21463,11 @@
 #line 7375
         .trainerName = _("Blank"),
 #line 7376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22612,13 +21490,11 @@
 #line 7383
         .trainerName = _("Blank"),
 #line 7384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22641,13 +21517,11 @@
 #line 7391
         .trainerName = _("Blank"),
 #line 7392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22670,13 +21544,11 @@
 #line 7399
         .trainerName = _("Blank"),
 #line 7400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22699,13 +21571,11 @@
 #line 7407
         .trainerName = _("Blank"),
 #line 7408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22728,13 +21598,11 @@
 #line 7415
         .trainerName = _("Blank"),
 #line 7416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22757,13 +21625,11 @@
 #line 7423
         .trainerName = _("Blank"),
 #line 7424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22786,13 +21652,11 @@
 #line 7431
         .trainerName = _("Blank"),
 #line 7432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22815,13 +21679,11 @@
 #line 7439
         .trainerName = _("Blank"),
 #line 7440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22844,13 +21706,11 @@
 #line 7447
         .trainerName = _("Blank"),
 #line 7448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22873,13 +21733,11 @@
 #line 7455
         .trainerName = _("Blank"),
 #line 7456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22902,13 +21760,11 @@
 #line 7463
         .trainerName = _("Blank"),
 #line 7464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22931,13 +21787,11 @@
 #line 7471
         .trainerName = _("Blank"),
 #line 7472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22960,13 +21814,11 @@
 #line 7479
         .trainerName = _("Blank"),
 #line 7480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22989,13 +21841,11 @@
 #line 7487
         .trainerName = _("Blank"),
 #line 7488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23018,13 +21868,11 @@
 #line 7495
         .trainerName = _("Blank"),
 #line 7496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23047,13 +21895,11 @@
 #line 7503
         .trainerName = _("Blank"),
 #line 7504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23076,13 +21922,11 @@
 #line 7511
         .trainerName = _("Blank"),
 #line 7512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23105,13 +21949,11 @@
 #line 7519
         .trainerName = _("Blank"),
 #line 7520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23134,13 +21976,11 @@
 #line 7527
         .trainerName = _("Blank"),
 #line 7528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23163,13 +22003,11 @@
 #line 7535
         .trainerName = _("Blank"),
 #line 7536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23192,13 +22030,11 @@
 #line 7543
         .trainerName = _("Blank"),
 #line 7544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23221,13 +22057,11 @@
 #line 7551
         .trainerName = _("Blank"),
 #line 7552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23250,13 +22084,11 @@
 #line 7559
         .trainerName = _("Blank"),
 #line 7560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23279,13 +22111,11 @@
 #line 7567
         .trainerName = _("Blank"),
 #line 7568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23308,13 +22138,11 @@
 #line 7575
         .trainerName = _("Blank"),
 #line 7576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23337,13 +22165,11 @@
 #line 7583
         .trainerName = _("Blank"),
 #line 7584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23366,13 +22192,11 @@
 #line 7591
         .trainerName = _("Blank"),
 #line 7592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23395,13 +22219,11 @@
 #line 7599
         .trainerName = _("Blank"),
 #line 7600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23424,13 +22246,11 @@
 #line 7607
         .trainerName = _("Blank"),
 #line 7608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23453,13 +22273,11 @@
 #line 7615
         .trainerName = _("Blank"),
 #line 7616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23482,13 +22300,11 @@
 #line 7623
         .trainerName = _("Blank"),
 #line 7624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23511,13 +22327,11 @@
 #line 7631
         .trainerName = _("Blank"),
 #line 7632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23540,13 +22354,11 @@
 #line 7639
         .trainerName = _("Blank"),
 #line 7640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23569,13 +22381,11 @@
 #line 7647
         .trainerName = _("Blank"),
 #line 7648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23598,13 +22408,11 @@
 #line 7655
         .trainerName = _("Blank"),
 #line 7656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23627,13 +22435,11 @@
 #line 7663
         .trainerName = _("Blank"),
 #line 7664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23656,13 +22462,11 @@
 #line 7671
         .trainerName = _("Blank"),
 #line 7672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23685,13 +22489,11 @@
 #line 7679
         .trainerName = _("Blank"),
 #line 7680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23714,13 +22516,11 @@
 #line 7687
         .trainerName = _("Blank"),
 #line 7688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23743,13 +22543,11 @@
 #line 7695
         .trainerName = _("Blank"),
 #line 7696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23772,13 +22570,11 @@
 #line 7703
         .trainerName = _("Blank"),
 #line 7704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23801,13 +22597,11 @@
 #line 7711
         .trainerName = _("Blank"),
 #line 7712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23830,13 +22624,11 @@
 #line 7719
         .trainerName = _("Blank"),
 #line 7720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23859,13 +22651,11 @@
 #line 7727
         .trainerName = _("Blank"),
 #line 7728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23888,13 +22678,11 @@
 #line 7735
         .trainerName = _("Blank"),
 #line 7736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23917,13 +22705,11 @@
 #line 7743
         .trainerName = _("Blank"),
 #line 7744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23946,13 +22732,11 @@
 #line 7751
         .trainerName = _("Blank"),
 #line 7752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23975,13 +22759,11 @@
 #line 7759
         .trainerName = _("Blank"),
 #line 7760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24004,13 +22786,11 @@
 #line 7767
         .trainerName = _("Blank"),
 #line 7768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24033,13 +22813,11 @@
 #line 7775
         .trainerName = _("Blank"),
 #line 7776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24062,13 +22840,11 @@
 #line 7783
         .trainerName = _("Blank"),
 #line 7784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24091,13 +22867,11 @@
 #line 7791
         .trainerName = _("Blank"),
 #line 7792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24120,13 +22894,11 @@
 #line 7799
         .trainerName = _("Blank"),
 #line 7800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24149,13 +22921,11 @@
 #line 7807
         .trainerName = _("Blank"),
 #line 7808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24178,13 +22948,11 @@
 #line 7815
         .trainerName = _("Blank"),
 #line 7816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24207,13 +22975,11 @@
 #line 7823
         .trainerName = _("Blank"),
 #line 7824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24236,13 +23002,11 @@
 #line 7831
         .trainerName = _("Blank"),
 #line 7832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24265,13 +23029,11 @@
 #line 7839
         .trainerName = _("Blank"),
 #line 7840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24294,13 +23056,11 @@
 #line 7847
         .trainerName = _("Blank"),
 #line 7848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24323,13 +23083,11 @@
 #line 7855
         .trainerName = _("Blank"),
 #line 7856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24352,13 +23110,11 @@
 #line 7863
         .trainerName = _("Blank"),
 #line 7864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24381,13 +23137,11 @@
 #line 7871
         .trainerName = _("Blank"),
 #line 7872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24410,13 +23164,11 @@
 #line 7879
         .trainerName = _("Blank"),
 #line 7880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24439,13 +23191,11 @@
 #line 7887
         .trainerName = _("Blank"),
 #line 7888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24468,13 +23218,11 @@
 #line 7895
         .trainerName = _("Blank"),
 #line 7896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24497,13 +23245,11 @@
 #line 7903
         .trainerName = _("Blank"),
 #line 7904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24526,13 +23272,11 @@
 #line 7911
         .trainerName = _("Blank"),
 #line 7912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24555,13 +23299,11 @@
 #line 7919
         .trainerName = _("Blank"),
 #line 7920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24584,13 +23326,11 @@
 #line 7927
         .trainerName = _("Blank"),
 #line 7928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24613,13 +23353,11 @@
 #line 7935
         .trainerName = _("Blank"),
 #line 7936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24642,13 +23380,11 @@
 #line 7943
         .trainerName = _("Blank"),
 #line 7944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24671,13 +23407,11 @@
 #line 7951
         .trainerName = _("Blank"),
 #line 7952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24700,13 +23434,11 @@
 #line 7959
         .trainerName = _("Blank"),
 #line 7960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24729,13 +23461,11 @@
 #line 7967
         .trainerName = _("Blank"),
 #line 7968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24758,13 +23488,11 @@
 #line 7975
         .trainerName = _("Blank"),
 #line 7976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24787,13 +23515,11 @@
 #line 7983
         .trainerName = _("Blank"),
 #line 7984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24816,13 +23542,11 @@
 #line 7991
         .trainerName = _("Blank"),
 #line 7992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 7993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24845,13 +23569,11 @@
 #line 7999
         .trainerName = _("Blank"),
 #line 8000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24874,13 +23596,11 @@
 #line 8007
         .trainerName = _("Blank"),
 #line 8008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24903,13 +23623,11 @@
 #line 8015
         .trainerName = _("Blank"),
 #line 8016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24932,13 +23650,11 @@
 #line 8023
         .trainerName = _("Blank"),
 #line 8024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24961,13 +23677,11 @@
 #line 8031
         .trainerName = _("Blank"),
 #line 8032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24990,13 +23704,11 @@
 #line 8039
         .trainerName = _("Blank"),
 #line 8040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25019,13 +23731,11 @@
 #line 8047
         .trainerName = _("Blank"),
 #line 8048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25048,13 +23758,11 @@
 #line 8055
         .trainerName = _("Blank"),
 #line 8056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25077,13 +23785,11 @@
 #line 8063
         .trainerName = _("Blank"),
 #line 8064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25106,13 +23812,11 @@
 #line 8071
         .trainerName = _("Blank"),
 #line 8072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25135,13 +23839,11 @@
 #line 8079
         .trainerName = _("Blank"),
 #line 8080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25164,13 +23866,11 @@
 #line 8087
         .trainerName = _("Blank"),
 #line 8088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25193,13 +23893,11 @@
 #line 8095
         .trainerName = _("Blank"),
 #line 8096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25222,13 +23920,11 @@
 #line 8103
         .trainerName = _("Blank"),
 #line 8104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25251,13 +23947,11 @@
 #line 8111
         .trainerName = _("Blank"),
 #line 8112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25280,13 +23974,11 @@
 #line 8119
         .trainerName = _("Blank"),
 #line 8120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25309,13 +24001,11 @@
 #line 8127
         .trainerName = _("Blank"),
 #line 8128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25338,13 +24028,11 @@
 #line 8135
         .trainerName = _("Blank"),
 #line 8136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25367,13 +24055,11 @@
 #line 8143
         .trainerName = _("Blank"),
 #line 8144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25396,13 +24082,11 @@
 #line 8151
         .trainerName = _("Blank"),
 #line 8152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25425,13 +24109,11 @@
 #line 8159
         .trainerName = _("Blank"),
 #line 8160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25454,13 +24136,11 @@
 #line 8167
         .trainerName = _("Blank"),
 #line 8168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25483,13 +24163,11 @@
 #line 8175
         .trainerName = _("Blank"),
 #line 8176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25512,13 +24190,11 @@
 #line 8183
         .trainerName = _("Blank"),
 #line 8184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25541,13 +24217,11 @@
 #line 8191
         .trainerName = _("Blank"),
 #line 8192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25570,13 +24244,11 @@
 #line 8199
         .trainerName = _("Blank"),
 #line 8200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25599,13 +24271,11 @@
 #line 8207
         .trainerName = _("Blank"),
 #line 8208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25628,13 +24298,11 @@
 #line 8215
         .trainerName = _("Blank"),
 #line 8216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25657,13 +24325,11 @@
 #line 8223
         .trainerName = _("Blank"),
 #line 8224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25686,13 +24352,11 @@
 #line 8231
         .trainerName = _("Blank"),
 #line 8232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25715,13 +24379,11 @@
 #line 8239
         .trainerName = _("Blank"),
 #line 8240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25744,13 +24406,11 @@
 #line 8247
         .trainerName = _("Blank"),
 #line 8248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25773,13 +24433,11 @@
 #line 8255
         .trainerName = _("Blank"),
 #line 8256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25802,13 +24460,11 @@
 #line 8263
         .trainerName = _("Blank"),
 #line 8264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25831,13 +24487,11 @@
 #line 8271
         .trainerName = _("Blank"),
 #line 8272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25860,13 +24514,11 @@
 #line 8279
         .trainerName = _("Blank"),
 #line 8280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25889,13 +24541,11 @@
 #line 8287
         .trainerName = _("Blank"),
 #line 8288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25918,13 +24568,11 @@
 #line 8295
         .trainerName = _("Blank"),
 #line 8296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25947,13 +24595,11 @@
 #line 8303
         .trainerName = _("Blank"),
 #line 8304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25976,13 +24622,11 @@
 #line 8311
         .trainerName = _("Blank"),
 #line 8312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26005,13 +24649,11 @@
 #line 8319
         .trainerName = _("Blank"),
 #line 8320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26034,13 +24676,11 @@
 #line 8327
         .trainerName = _("Blank"),
 #line 8328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26063,13 +24703,11 @@
 #line 8335
         .trainerName = _("Blank"),
 #line 8336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26092,13 +24730,11 @@
 #line 8343
         .trainerName = _("Blank"),
 #line 8344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26121,13 +24757,11 @@
 #line 8351
         .trainerName = _("Blank"),
 #line 8352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26150,13 +24784,11 @@
 #line 8359
         .trainerName = _("Blank"),
 #line 8360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26179,13 +24811,11 @@
 #line 8367
         .trainerName = _("Blank"),
 #line 8368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26208,13 +24838,11 @@
 #line 8375
         .trainerName = _("Blank"),
 #line 8376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26237,13 +24865,11 @@
 #line 8383
         .trainerName = _("Blank"),
 #line 8384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26266,13 +24892,11 @@
 #line 8391
         .trainerName = _("Blank"),
 #line 8392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26295,13 +24919,11 @@
 #line 8399
         .trainerName = _("Blank"),
 #line 8400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26324,13 +24946,11 @@
 #line 8407
         .trainerName = _("Blank"),
 #line 8408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26353,13 +24973,11 @@
 #line 8415
         .trainerName = _("Blank"),
 #line 8416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26382,13 +25000,11 @@
 #line 8423
         .trainerName = _("Blank"),
 #line 8424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26411,13 +25027,11 @@
 #line 8431
         .trainerName = _("Blank"),
 #line 8432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26440,13 +25054,11 @@
 #line 8439
         .trainerName = _("Blank"),
 #line 8440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26469,13 +25081,11 @@
 #line 8447
         .trainerName = _("Blank"),
 #line 8448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26498,13 +25108,11 @@
 #line 8455
         .trainerName = _("Blank"),
 #line 8456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26527,13 +25135,11 @@
 #line 8463
         .trainerName = _("Blank"),
 #line 8464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26556,13 +25162,11 @@
 #line 8471
         .trainerName = _("Blank"),
 #line 8472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26585,13 +25189,11 @@
 #line 8479
         .trainerName = _("Blank"),
 #line 8480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26614,13 +25216,11 @@
 #line 8487
         .trainerName = _("Blank"),
 #line 8488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26643,13 +25243,11 @@
 #line 8495
         .trainerName = _("Blank"),
 #line 8496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26672,13 +25270,11 @@
 #line 8503
         .trainerName = _("Blank"),
 #line 8504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26701,13 +25297,11 @@
 #line 8511
         .trainerName = _("Blank"),
 #line 8512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26730,13 +25324,11 @@
 #line 8519
         .trainerName = _("Blank"),
 #line 8520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26759,13 +25351,11 @@
 #line 8527
         .trainerName = _("Blank"),
 #line 8528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26788,13 +25378,11 @@
 #line 8535
         .trainerName = _("Blank"),
 #line 8536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26817,13 +25405,11 @@
 #line 8543
         .trainerName = _("Blank"),
 #line 8544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26846,13 +25432,11 @@
 #line 8551
         .trainerName = _("Blank"),
 #line 8552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26875,13 +25459,11 @@
 #line 8559
         .trainerName = _("Blank"),
 #line 8560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26904,13 +25486,11 @@
 #line 8567
         .trainerName = _("Blank"),
 #line 8568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26933,13 +25513,11 @@
 #line 8575
         .trainerName = _("Blank"),
 #line 8576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26962,13 +25540,11 @@
 #line 8583
         .trainerName = _("Blank"),
 #line 8584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26991,13 +25567,11 @@
 #line 8591
         .trainerName = _("Blank"),
 #line 8592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27020,13 +25594,11 @@
 #line 8599
         .trainerName = _("Blank"),
 #line 8600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27049,13 +25621,11 @@
 #line 8607
         .trainerName = _("Blank"),
 #line 8608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27078,13 +25648,11 @@
 #line 8615
         .trainerName = _("Blank"),
 #line 8616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27107,13 +25675,11 @@
 #line 8623
         .trainerName = _("Blank"),
 #line 8624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27136,13 +25702,11 @@
 #line 8631
         .trainerName = _("Blank"),
 #line 8632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27165,13 +25729,11 @@
 #line 8639
         .trainerName = _("Blank"),
 #line 8640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27194,13 +25756,11 @@
 #line 8647
         .trainerName = _("Blank"),
 #line 8648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27223,13 +25783,11 @@
 #line 8655
         .trainerName = _("Blank"),
 #line 8656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27252,13 +25810,11 @@
 #line 8663
         .trainerName = _("Blank"),
 #line 8664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27281,13 +25837,11 @@
 #line 8671
         .trainerName = _("Blank"),
 #line 8672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27310,13 +25864,11 @@
 #line 8679
         .trainerName = _("Blank"),
 #line 8680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27339,13 +25891,11 @@
 #line 8687
         .trainerName = _("Blank"),
 #line 8688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27368,13 +25918,11 @@
 #line 8695
         .trainerName = _("Blank"),
 #line 8696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27397,13 +25945,11 @@
 #line 8703
         .trainerName = _("Blank"),
 #line 8704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27426,13 +25972,11 @@
 #line 8711
         .trainerName = _("Blank"),
 #line 8712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27455,13 +25999,11 @@
 #line 8719
         .trainerName = _("Blank"),
 #line 8720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27484,13 +26026,11 @@
 #line 8727
         .trainerName = _("Blank"),
 #line 8728
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8729
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27513,13 +26053,11 @@
 #line 8735
         .trainerName = _("Blank"),
 #line 8736
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27542,13 +26080,11 @@
 #line 8743
         .trainerName = _("Blank"),
 #line 8744
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8745
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27571,13 +26107,11 @@
 #line 8751
         .trainerName = _("Blank"),
 #line 8752
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27600,13 +26134,11 @@
 #line 8759
         .trainerName = _("Blank"),
 #line 8760
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27629,13 +26161,11 @@
 #line 8767
         .trainerName = _("Blank"),
 #line 8768
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8769
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27658,13 +26188,11 @@
 #line 8775
         .trainerName = _("Blank"),
 #line 8776
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8777
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27687,13 +26215,11 @@
 #line 8783
         .trainerName = _("Blank"),
 #line 8784
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8785
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27716,13 +26242,11 @@
 #line 8791
         .trainerName = _("Blank"),
 #line 8792
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8793
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27745,13 +26269,11 @@
 #line 8799
         .trainerName = _("Blank"),
 #line 8800
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27774,13 +26296,11 @@
 #line 8807
         .trainerName = _("Blank"),
 #line 8808
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27803,13 +26323,11 @@
 #line 8815
         .trainerName = _("Blank"),
 #line 8816
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27832,13 +26350,11 @@
 #line 8823
         .trainerName = _("Blank"),
 #line 8824
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8825
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27861,13 +26377,11 @@
 #line 8831
         .trainerName = _("Blank"),
 #line 8832
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8833
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27890,13 +26404,11 @@
 #line 8839
         .trainerName = _("Blank"),
 #line 8840
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8841
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27919,13 +26431,11 @@
 #line 8847
         .trainerName = _("Blank"),
 #line 8848
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8849
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27948,13 +26458,11 @@
 #line 8855
         .trainerName = _("Blank"),
 #line 8856
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8857
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27977,13 +26485,11 @@
 #line 8863
         .trainerName = _("Blank"),
 #line 8864
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8865
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28006,13 +26512,11 @@
 #line 8871
         .trainerName = _("Blank"),
 #line 8872
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8873
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28035,13 +26539,11 @@
 #line 8879
         .trainerName = _("Blank"),
 #line 8880
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28064,13 +26566,11 @@
 #line 8887
         .trainerName = _("Blank"),
 #line 8888
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28093,13 +26593,11 @@
 #line 8895
         .trainerName = _("Blank"),
 #line 8896
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28122,13 +26620,11 @@
 #line 8903
         .trainerName = _("Blank"),
 #line 8904
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28151,13 +26647,11 @@
 #line 8911
         .trainerName = _("Blank"),
 #line 8912
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8913
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28180,13 +26674,11 @@
 #line 8919
         .trainerName = _("Blank"),
 #line 8920
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8921
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28209,13 +26701,11 @@
 #line 8927
         .trainerName = _("Blank"),
 #line 8928
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8929
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28238,13 +26728,11 @@
 #line 8935
         .trainerName = _("Blank"),
 #line 8936
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8937
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28267,13 +26755,11 @@
 #line 8943
         .trainerName = _("Blank"),
 #line 8944
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28296,13 +26782,11 @@
 #line 8951
         .trainerName = _("Blank"),
 #line 8952
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28325,13 +26809,11 @@
 #line 8959
         .trainerName = _("Blank"),
 #line 8960
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28354,13 +26836,11 @@
 #line 8967
         .trainerName = _("Blank"),
 #line 8968
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28383,13 +26863,11 @@
 #line 8975
         .trainerName = _("Blank"),
 #line 8976
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8977
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28412,13 +26890,11 @@
 #line 8983
         .trainerName = _("Blank"),
 #line 8984
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8985
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28441,13 +26917,11 @@
 #line 8991
         .trainerName = _("Blank"),
 #line 8992
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 8993
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28470,13 +26944,11 @@
 #line 8999
         .trainerName = _("Blank"),
 #line 9000
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9001
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28499,13 +26971,11 @@
 #line 9007
         .trainerName = _("Blank"),
 #line 9008
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9009
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28528,13 +26998,11 @@
 #line 9015
         .trainerName = _("Blank"),
 #line 9016
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9017
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28557,13 +27025,11 @@
 #line 9023
         .trainerName = _("Blank"),
 #line 9024
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9025
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28586,13 +27052,11 @@
 #line 9031
         .trainerName = _("Blank"),
 #line 9032
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28615,13 +27079,11 @@
 #line 9039
         .trainerName = _("Blank"),
 #line 9040
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28644,13 +27106,11 @@
 #line 9047
         .trainerName = _("Blank"),
 #line 9048
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28673,13 +27133,11 @@
 #line 9055
         .trainerName = _("Blank"),
 #line 9056
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9057
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28702,13 +27160,11 @@
 #line 9063
         .trainerName = _("Blank"),
 #line 9064
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9065
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28731,13 +27187,11 @@
 #line 9071
         .trainerName = _("Blank"),
 #line 9072
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9073
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28760,13 +27214,11 @@
 #line 9079
         .trainerName = _("Blank"),
 #line 9080
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28789,13 +27241,11 @@
 #line 9087
         .trainerName = _("Blank"),
 #line 9088
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9089
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28818,13 +27268,11 @@
 #line 9095
         .trainerName = _("Blank"),
 #line 9096
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28847,13 +27295,11 @@
 #line 9103
         .trainerName = _("Blank"),
 #line 9104
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28876,13 +27322,11 @@
 #line 9111
         .trainerName = _("Blank"),
 #line 9112
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28905,13 +27349,11 @@
 #line 9119
         .trainerName = _("Blank"),
 #line 9120
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9121
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28934,13 +27376,11 @@
 #line 9127
         .trainerName = _("Blank"),
 #line 9128
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9129
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28963,13 +27403,11 @@
 #line 9135
         .trainerName = _("Blank"),
 #line 9136
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28992,13 +27430,11 @@
 #line 9143
         .trainerName = _("Blank"),
 #line 9144
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9145
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29021,13 +27457,11 @@
 #line 9151
         .trainerName = _("Blank"),
 #line 9152
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29050,13 +27484,11 @@
 #line 9159
         .trainerName = _("Blank"),
 #line 9160
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29079,13 +27511,11 @@
 #line 9167
         .trainerName = _("Blank"),
 #line 9168
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9169
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29108,13 +27538,11 @@
 #line 9175
         .trainerName = _("Blank"),
 #line 9176
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29137,13 +27565,11 @@
 #line 9183
         .trainerName = _("Blank"),
 #line 9184
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9185
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29166,13 +27592,11 @@
 #line 9191
         .trainerName = _("Blank"),
 #line 9192
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29195,13 +27619,11 @@
 #line 9199
         .trainerName = _("Blank"),
 #line 9200
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9201
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29224,13 +27646,11 @@
 #line 9207
         .trainerName = _("Blank"),
 #line 9208
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29253,13 +27673,11 @@
 #line 9215
         .trainerName = _("Blank"),
 #line 9216
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29282,13 +27700,11 @@
 #line 9223
         .trainerName = _("Blank"),
 #line 9224
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29311,13 +27727,11 @@
 #line 9231
         .trainerName = _("Blank"),
 #line 9232
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29340,13 +27754,11 @@
 #line 9239
         .trainerName = _("Blank"),
 #line 9240
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29369,13 +27781,11 @@
 #line 9247
         .trainerName = _("Blank"),
 #line 9248
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9249
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29398,13 +27808,11 @@
 #line 9255
         .trainerName = _("Blank"),
 #line 9256
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29427,13 +27835,11 @@
 #line 9263
         .trainerName = _("Blank"),
 #line 9264
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9265
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29456,13 +27862,11 @@
 #line 9271
         .trainerName = _("Blank"),
 #line 9272
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9273
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29485,13 +27889,11 @@
 #line 9279
         .trainerName = _("Blank"),
 #line 9280
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9281
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29514,13 +27916,11 @@
 #line 9287
         .trainerName = _("Blank"),
 #line 9288
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9289
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29543,13 +27943,11 @@
 #line 9295
         .trainerName = _("Blank"),
 #line 9296
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29572,13 +27970,11 @@
 #line 9303
         .trainerName = _("Blank"),
 #line 9304
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29601,13 +27997,11 @@
 #line 9311
         .trainerName = _("Blank"),
 #line 9312
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9313
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29630,13 +28024,11 @@
 #line 9319
         .trainerName = _("Blank"),
 #line 9320
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29659,13 +28051,11 @@
 #line 9327
         .trainerName = _("Blank"),
 #line 9328
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29688,13 +28078,11 @@
 #line 9335
         .trainerName = _("Blank"),
 #line 9336
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9337
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29717,13 +28105,11 @@
 #line 9343
         .trainerName = _("Blank"),
 #line 9344
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29746,13 +28132,11 @@
 #line 9351
         .trainerName = _("Blank"),
 #line 9352
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9353
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29775,13 +28159,11 @@
 #line 9359
         .trainerName = _("Blank"),
 #line 9360
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29804,13 +28186,11 @@
 #line 9367
         .trainerName = _("Blank"),
 #line 9368
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9369
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29833,13 +28213,11 @@
 #line 9375
         .trainerName = _("Blank"),
 #line 9376
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29862,13 +28240,11 @@
 #line 9383
         .trainerName = _("Blank"),
 #line 9384
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9385
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29891,13 +28267,11 @@
 #line 9391
         .trainerName = _("Blank"),
 #line 9392
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29920,13 +28294,11 @@
 #line 9399
         .trainerName = _("Blank"),
 #line 9400
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9401
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29949,13 +28321,11 @@
 #line 9407
         .trainerName = _("Blank"),
 #line 9408
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29978,13 +28348,11 @@
 #line 9415
         .trainerName = _("Blank"),
 #line 9416
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30007,13 +28375,11 @@
 #line 9423
         .trainerName = _("Blank"),
 #line 9424
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9425
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30036,13 +28402,11 @@
 #line 9431
         .trainerName = _("Blank"),
 #line 9432
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9433
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30065,13 +28429,11 @@
 #line 9439
         .trainerName = _("Blank"),
 #line 9440
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30094,13 +28456,11 @@
 #line 9447
         .trainerName = _("Blank"),
 #line 9448
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9449
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30123,13 +28483,11 @@
 #line 9455
         .trainerName = _("Blank"),
 #line 9456
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30152,13 +28510,11 @@
 #line 9463
         .trainerName = _("Blank"),
 #line 9464
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30181,13 +28537,11 @@
 #line 9471
         .trainerName = _("Blank"),
 #line 9472
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30210,13 +28564,11 @@
 #line 9479
         .trainerName = _("Blank"),
 #line 9480
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30239,13 +28591,11 @@
 #line 9487
         .trainerName = _("Blank"),
 #line 9488
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9489
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30268,13 +28618,11 @@
 #line 9495
         .trainerName = _("Blank"),
 #line 9496
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9497
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30297,13 +28645,11 @@
 #line 9503
         .trainerName = _("Blank"),
 #line 9504
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9505
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30326,13 +28672,11 @@
 #line 9511
         .trainerName = _("Blank"),
 #line 9512
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9513
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30355,13 +28699,11 @@
 #line 9519
         .trainerName = _("Blank"),
 #line 9520
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9521
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30384,13 +28726,11 @@
 #line 9527
         .trainerName = _("Blank"),
 #line 9528
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9529
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30413,13 +28753,11 @@
 #line 9535
         .trainerName = _("Blank"),
 #line 9536
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9537
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30442,13 +28780,11 @@
 #line 9543
         .trainerName = _("Blank"),
 #line 9544
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30471,13 +28807,11 @@
 #line 9551
         .trainerName = _("Blank"),
 #line 9552
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30500,13 +28834,11 @@
 #line 9559
         .trainerName = _("Blank"),
 #line 9560
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9561
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30529,13 +28861,11 @@
 #line 9567
         .trainerName = _("Blank"),
 #line 9568
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9569
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30558,13 +28888,11 @@
 #line 9575
         .trainerName = _("Blank"),
 #line 9576
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30587,13 +28915,11 @@
 #line 9583
         .trainerName = _("Blank"),
 #line 9584
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30616,13 +28942,11 @@
 #line 9591
         .trainerName = _("Blank"),
 #line 9592
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30645,13 +28969,11 @@
 #line 9599
         .trainerName = _("Blank"),
 #line 9600
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9601
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30674,13 +28996,11 @@
 #line 9607
         .trainerName = _("Blank"),
 #line 9608
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9609
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30703,13 +29023,11 @@
 #line 9615
         .trainerName = _("Blank"),
 #line 9616
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30732,13 +29050,11 @@
 #line 9623
         .trainerName = _("Blank"),
 #line 9624
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30761,13 +29077,11 @@
 #line 9631
         .trainerName = _("Blank"),
 #line 9632
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9633
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30790,13 +29104,11 @@
 #line 9639
         .trainerName = _("Blank"),
 #line 9640
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30819,13 +29131,11 @@
 #line 9647
         .trainerName = _("Blank"),
 #line 9648
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9649
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30848,13 +29158,11 @@
 #line 9655
         .trainerName = _("Blank"),
 #line 9656
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30877,13 +29185,11 @@
 #line 9663
         .trainerName = _("Blank"),
 #line 9664
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30906,13 +29212,11 @@
 #line 9671
         .trainerName = _("Blank"),
 #line 9672
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9673
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30935,13 +29239,11 @@
 #line 9679
         .trainerName = _("Blank"),
 #line 9680
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30964,13 +29266,11 @@
 #line 9687
         .trainerName = _("Blank"),
 #line 9688
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30993,13 +29293,11 @@
 #line 9695
         .trainerName = _("Blank"),
 #line 9696
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9697
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31022,13 +29320,11 @@
 #line 9703
         .trainerName = _("Blank"),
 #line 9704
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9705
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31051,13 +29347,11 @@
 #line 9711
         .trainerName = _("Blank"),
 #line 9712
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31080,13 +29374,11 @@
 #line 9719
         .trainerName = _("Blank"),
 #line 9720
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 9721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {

@@ -22,6 +22,7 @@
 #include "random.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/party_menu.h"
 #include "constants/map_groups.h"
 #include "constants/sound.h"
 #include "field_control_avatar.h"
@@ -1959,7 +1960,7 @@ u32 GetScraftyHint(u32 speciesId)
 {
     struct Pokemon *mon;
     mon = &gPlayerParty[gSpecialVar_0x8004];
-    u32 monCanLearn = CanTeachMove(mon, MOVE_ACID_SPRAY);
+    enum CanMoveBeLearned monCanLearn = CanTeachMove(mon, MOVE_ACID_SPRAY);
 
     if (gSpeciesInfo[speciesId].eggGroups[0] != EGG_GROUP_DRAGON && gSpeciesInfo[speciesId].eggGroups[1] != EGG_GROUP_DRAGON)
         return VAR_CUTE_POKEMON_SCRAFTY_HINT_0;
@@ -2041,7 +2042,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
     }
 
     for (u32 monIndex = 0; monIndex < numSidequests; monIndex++)
-        ScriptGiveMonParameterized(0,PARTY_SIZE,species[monIndex],50,ITEM_NONE,ITEM_POKE_BALL,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+        ScriptGiveMonParameterized(0,PARTY_SIZE,species[monIndex],50,ITEM_NONE,BALL_POKE,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 }
 
 void DebugQuest_CutePokemon(u8 state)
@@ -2317,15 +2318,12 @@ void ShowGarbodor(void)
     struct Pokemon *mon = &daycare->viewMon;
     u32 species = SPECIES_GARBODOR;
     u32 level = 40;
-    u32 fixedIv = USE_RANDOM_IVS;
-    u32 hasFixedPersonality = FALSE;
-    u32 fixedPersonality = 0;
-    u32 otIdType = OT_ID_PRESET;
+    u32 personality = GetMonPersonality(species, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
     u32 fixedOtId = 0;
     bool32 isShiny = TRUE;
     u32 item = ITEM_NORMAL_GEM;
 
-    CreateMon(mon, species, level, fixedIv, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
+    CreateMon(mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
     SetMonData(mon,MON_DATA_IS_SHINY,&isShiny);
     SetMonData(mon,MON_DATA_HELD_ITEM,&item);
 

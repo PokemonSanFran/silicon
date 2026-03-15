@@ -45,7 +45,7 @@ u8 DisplayPartyMenuMessage(const u8 *str, bool8 keepOpen);
 bool8 IsPartyMenuTextPrinterActive(void);
 void PartyMenuModifyHP(u8 taskId, u8 slot, s8 hpIncrement, s16 hpDifference, TaskFunc task);
 u8 GetAilmentFromStatus(u32 status);
-u8 CanTeachMove(struct Pokemon *mon, u16 move); //qol_field_moves
+enum CanMoveBeLearned CanTeachMove(struct Pokemon *, enum Move); // qol_field_moves
 u8 GetMonAilment(struct Pokemon *mon);
 void DisplayPartyMenuStdMessage(u32 stringId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
@@ -65,9 +65,9 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task);
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task);
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task);
-u16 ItemIdToBattleMoveId(u16 item);
-bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
-bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, u16 move);
+enum Move ItemIdToBattleMoveId(enum Item item);
+bool8 MonKnowsMove(struct Pokemon *mon, enum Move move);
+bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move);
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task);
@@ -78,7 +78,7 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task);
 void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task);
 void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task);
 void ItemUseCB_Fusion(u8 taskId, TaskFunc task);
-u8 GetItemEffectType(u16 item);
+enum ItemEffectType GetItemEffectType(enum Item item);
 void CB2_PartyMenuFromStartMenu(void);
 void CB2_ChooseMonToGiveItem(void);
 void ChooseMonToGiveMailFromMailbox(void);
@@ -90,8 +90,8 @@ void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 partyAction);
 void ChooseMonForInBattleItem(void);
 void BufferBattlePartyCurrentOrder(void);
-void BufferBattlePartyCurrentOrderBySide(u8 battler, u8 flankId);
-void SwitchPartyOrderLinkMulti(u8 battler, u8 slot, u8 slot2);
+void BufferBattlePartyCurrentOrderBySide(enum BattlerId battler, u8 flankId);
+void SwitchPartyOrderLinkMulti(enum BattlerId battler, u8 slot, u8 slot2);
 void SwitchPartyMonSlots(u8 slot, u8 slot2);
 u8 GetPartyIdFromBattlePartyId(u8 battlePartyId);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
@@ -115,13 +115,6 @@ void InitPartyMenuForPokevialFromField(u8 taskId); //Pokevial Branch
 // These are all moved from src/party_menu.c
 u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
 void CB2_TrashTrade(void); //PSF TODO replace with ChooseBoxMon
-
-enum {
-    CAN_LEARN_MOVE,
-    CANNOT_LEARN_MOVE,
-    ALREADY_KNOWS_MOVE,
-    CANNOT_LEARN_MOVE_IS_EGG
-};
 // End qol_field_moves
 
 // Start SameSwitchCancelsSwitch
@@ -137,7 +130,7 @@ enum {
 void ItemUseCB_UseHexorb(u8 taskId, TaskFunc task);
 void InitPartyMenuForHexorbFromField(u8 taskId);
 // End hexorb Branch
-void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom); // surpriseTrade
+void ShiftMoveSlot(struct BoxPokemon *mon, u8 slotTo, u8 slotFrom); // surpriseTrade
 bool32 SetUpFieldMove_Surf(void);
 bool32 SetUpFieldMove_Fly(void);
 bool32 SetUpFieldMove_Waterfall(void);

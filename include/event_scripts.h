@@ -731,4 +731,5 @@ extern const u8 ThisIsntRandom_CheckDoor_Script[];
 extern const u8 gText_YourPokemonMustHaveNickname[];
 // End Battle Settings: Nickname
 
+extern const u8 MoveTutor_AfterChooseBoxMon[];
 #endif // GUARD_EVENT_SCRIPTS_H

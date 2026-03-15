@@ -784,7 +784,7 @@ static void CreateTrainerSprites(){
 static void CreateTrainerFrontSprite()
 {
     u8 bodyType = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
-    u8 trainerFrontPic = TRAINER_PIC_SILICON_PLAYER_M1 + bodyType;
+    u8 trainerFrontPic = TRAINER_PIC_FRONT_SILICON_PLAYER_M1 + bodyType;
     u8 spriteID = SPRITE_TRAINER_FRONT_SPRITE;
 
     if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE)
@@ -1767,7 +1767,7 @@ void CustomizeCharacterFromOverworld(void)
 bool32 IsBackPicForSiliconPlayer(u32 picId)
 {
     for (u32 picIndex = 0; picIndex < NUM_BODY_TYPES; picIndex++)
-        if (picId == TRAINER_BACK_PIC_SILICON_PLAYER_M1 + picIndex)
+        if (picId == TRAINER_PIC_BACK_SILICON_PLAYER_M1 + picIndex)
             return TRUE;
 
     return FALSE;

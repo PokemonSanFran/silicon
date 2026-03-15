@@ -1,0 +1,29 @@
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[INFO] GBA Savedata: Savedata synced
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[INFO] GBA Savedata: Savedata synced
+[INFO] GBA Savedata: Savedata synced
+[INFO] GBA Savedata: Savedata synced
+[INFO] GBA Savedata: Savedata synced
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[INFO] GBA Savedata: Savedata synced
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800
+[ERROR] GBA Savedata: Savegame time offset set to -943948800

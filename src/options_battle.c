@@ -4,7 +4,9 @@
 #include "options_battle.h"
 #include "pokemon.h"
 #include "battle_tower.h"
+#include "frontier_util.h"
 #include "pokemon_storage_system.h"
+#include "pokerus.h"
 #include "ui_options_menu.h"
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
@@ -200,7 +202,7 @@ static u32 CalcNewEV(u32 statIndex, struct Pokemon tempMon,  u32 totalEVs, u32 e
     u32 heldItem, holdEffect, stat, bonus, evs;
     u32 evIncrease = 0, multiplier = 1;
 
-    if (CheckPartyHasHadPokerus(&tempMon, 0))
+    if (CheckMonHasHadPokerus(&tempMon))
         multiplier = 2;
 
     heldItem = GetMonData(&tempMon, MON_DATA_HELD_ITEM, 0);
@@ -416,7 +418,7 @@ static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)
         break;
     case 1:
         RunTextPrinters();
-        if (!IsTextPrinterActive(windowId))
+        if (!IsTextPrinterActiveOnWindow(windowId))
         {
             gTasks[taskId].tPrintState = 0;
             return TRUE;
@@ -1086,22 +1088,25 @@ static u32 GetBestBallForBattle(void)
 {
     u32 i;
     struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS - 1];
-    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE;
-    u8 leftAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_LEFT);
-    u8 rightAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_RIGHT);
-    u8 atkId = (IsBattlerAlive(leftAtkFlankId)) ? leftAtkFlankId : rightAtkFlankId;
+    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE, oldLastUsedItem = gLastUsedItem;
+    u8 atkId = GetCatchingAttacker();
     u8 defId = GetCatchingBattler();
 
     if (gMain.inBattle)
     {
         for (i = 0; i < ballsPocket->capacity; i++)
         {
-            if (ballsPocket->itemSlots[i].itemId == ITEM_NONE)
+            u32 ball = ballsPocket->itemSlots[i].itemId;
+
+            if (ball == ITEM_NONE)
                 break;
-            if (ballsPocket->itemSlots[i].itemId == ITEM_MASTER_BALL)
+
+            if (ball == ITEM_MASTER_BALL)
                 continue;
 
-            odds = GetCatchingOdds(atkId, defId, ballsPocket->itemSlots[i].itemId);
+            gLastUsedItem = ball;
+
+            odds = ComputeCaptureOdds(atkId,defId);
             if (odds > newOdds)
             {
                 newOdds = odds;
@@ -1109,6 +1114,7 @@ static u32 GetBestBallForBattle(void)
             }
         }
     }
+    gLastUsedItem = oldLastUsedItem;
 
     return bestBall;
 }

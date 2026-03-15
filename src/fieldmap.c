@@ -50,8 +50,8 @@ static void FillEastConnection(struct MapHeader const *mapHeader, struct MapHead
 static void InitBackupMapLayoutConnections(struct MapHeader *mapHeader);
 static void LoadSavedMapView(void);
 static bool8 SkipCopyingMetatileFromSavedMap(u16 *mapBlock, u16 mapWidth, u8 yMode);
-static const struct MapConnection *GetIncomingConnection(u8 direction, int x, int y);
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection);
+static const struct MapConnection *GetIncomingConnection(enum Connection direction, int x, int y);
+static bool8 IsPosInIncomingConnectingMap(enum Connection direction, int x, int y, const struct MapConnection *connection);
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset);
 
 static inline u16 GetBorderBlockAt(int x, int y)
@@ -534,7 +534,7 @@ static void LoadSavedMapView(void)
     }
 }
 
-static void MoveMapViewToBackup(u8 direction)
+static void MoveMapViewToBackup(enum Connection direction)
 {
     int width;
     u16 *mapView;
@@ -553,6 +553,7 @@ static void MoveMapViewToBackup(u8 direction)
     y0 = gSaveBlock1Ptr->pos.y;
     x2 = MAP_OFFSET_W;
     y2 = MAP_OFFSET_H;
+
     switch (direction)
     {
     case CONNECTION_NORTH:
@@ -571,7 +572,10 @@ static void MoveMapViewToBackup(u8 direction)
         r9 = 1;
         x2 = MAP_OFFSET_W - 1;
         break;
+    default:
+        break;
     }
+
     for (y = 0; y < y2; y++)
     {
         i = 0;
@@ -587,10 +591,11 @@ static void MoveMapViewToBackup(u8 direction)
             j++;
         }
     }
+
     ClearSavedMapView();
 }
 
-int GetMapBorderIdAt(int x, int y)
+enum Connection GetMapBorderIdAt(int x, int y)
 {
     if (GetMapGridBlockAt(x, y) == MAPGRID_UNDEFINED)
         return CONNECTION_INVALID;
@@ -629,12 +634,12 @@ int GetMapBorderIdAt(int x, int y)
     }
 }
 
-int GetPostCameraMoveMapBorderId(int x, int y)
+enum Connection GetPostCameraMoveMapBorderId(int x, int y)
 {
     return GetMapBorderIdAt(gSaveBlock1Ptr->pos.x + MAP_OFFSET + x, gSaveBlock1Ptr->pos.y + MAP_OFFSET + y);
 }
 
-bool32 CanCameraMoveInDirection(int direction)
+bool32 CanCameraMoveInDirection(enum Direction direction)
 {
     int x, y;
     x = gSaveBlock1Ptr->pos.x + MAP_OFFSET + gDirectionToVectors[direction].x;
@@ -646,7 +651,7 @@ bool32 CanCameraMoveInDirection(int direction)
     return TRUE;
 }
 
-static void SetPositionFromConnection(const struct MapConnection *connection, int direction, int x, int y)
+static void SetPositionFromConnection(const struct MapConnection *connection, enum Connection direction, int x, int y)
 {
     struct MapHeader const *mapHeader = GetMapHeaderFromConnection(connection);
 
@@ -669,14 +674,14 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
         gSaveBlock1Ptr->pos.y = mapHeader->mapLayout->height;
         break;
     default:
-        DebugPrintfLevel(MGBA_LOG_WARN, "SetPositionFromConnection was passed an invalid direction (%d)!", direction);
+        errorf("invalid direction: %d", direction);
         break;
     }
 }
 
 bool8 CameraMove(int x, int y)
 {
-    int direction;
+    enum Connection direction;
     const struct MapConnection *connection;
     int old_x, old_y;
     gCamera.active = FALSE;
@@ -693,27 +698,25 @@ bool8 CameraMove(int x, int y)
         old_x = gSaveBlock1Ptr->pos.x;
         old_y = gSaveBlock1Ptr->pos.y;
         connection = GetIncomingConnection(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
-        if (connection)
+        assertf(connection)
         {
-            SetPositionFromConnection(connection, direction, x, y);
-            LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
-            gCamera.active = TRUE;
-            gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
-            gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
-            gSaveBlock1Ptr->pos.x += x;
-            gSaveBlock1Ptr->pos.y += y;
-            MoveMapViewToBackup(direction);
-        }
-        else
-        {
-            DebugPrintfLevel(MGBA_LOG_WARN, "GetIncomingConnection returned an invalid connection inside CameraMove!");
+            return gCamera.active;
         }
 
+        SetPositionFromConnection(connection, direction, x, y);
+        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
+        gCamera.active = TRUE;
+        gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
+        gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
+        gSaveBlock1Ptr->pos.x += x;
+        gSaveBlock1Ptr->pos.y += y;
+        MoveMapViewToBackup(direction);
     }
+
     return gCamera.active;
 }
 
-static const struct MapConnection *GetIncomingConnection(u8 direction, int x, int y)
+static const struct MapConnection *GetIncomingConnection(enum Connection direction, int x, int y)
 {
     int count;
     int i;
@@ -734,7 +737,7 @@ static const struct MapConnection *GetIncomingConnection(u8 direction, int x, in
     return NULL;
 }
 
-static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const struct MapConnection *connection)
+static bool8 IsPosInIncomingConnectingMap(enum Connection direction, int x, int y, const struct MapConnection *connection)
 {
     struct MapHeader const *mapHeader;
     mapHeader = GetMapHeaderFromConnection(connection);
@@ -746,8 +749,9 @@ static bool8 IsPosInIncomingConnectingMap(u8 direction, int x, int y, const stru
     case CONNECTION_WEST:
     case CONNECTION_EAST:
         return IsCoordInIncomingConnectingMap(y, gMapHeader.mapLayout->height, mapHeader->mapLayout->height, connection->offset);
+    default:
+        return FALSE;
     }
-    return FALSE;
 }
 
 static bool8 IsCoordInIncomingConnectingMap(int coord, int srcMax, int destMax, int offset)
@@ -796,7 +800,7 @@ const struct MapConnection *GetMapConnectionAtPos(s16 x, s16 y)
     int count;
     const struct MapConnection *connection;
     int i;
-    u8 direction;
+    enum Connection direction;
     if (!gMapHeader.connections)
     {
         return NULL;

@@ -69,16 +69,16 @@ enum EncounterType
 #define DEXNAV_MASK_SPECIES         0x3FFF  // First 14 bits
 #define DEXNAV_MASK_ENVIRONMENT     0xC000  // Last two bit
 
-void EndDexNavSearch(u8 taskId);
+void EndDexNavSearch(void);
 void Task_OpenDexNavFromStartMenu(u8 taskId);
-void CB2_DexNavFromStartMenu(void);
-bool8 TryStartDexNavSearch(void);
+bool32 TryStartDexNavSearch(void);
 void TryIncrementSpeciesSearchLevel(void);
 void ResetDexNavSearch(void);
-bool8 TryFindHiddenPokemon(void);
+bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
 u8 GetEncounterLevelFromMapData(u16 species, enum EncounterType environment); // phenomenon
+bool32 OnStep_DexNavSearch(void);
 
 extern u16 gDexNavSpecies;
 

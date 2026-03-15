@@ -299,6 +299,17 @@ script Debug_EventScript_Steven_Multi
     end
 }
 
+script Debug_EventScript_WallyTutorial
+{
+	special(SavePlayerParty)
+	special(LoadWallyZigzagoon)
+	special(StartWallyTutorialBattle)
+	waitstate
+	special(LoadPlayerParty)
+	release
+	end
+}
+
 script Debug_BerryPestsDisabled
 {
 	msgbox(format("OW_BERRY_PESTS is disabled.\nUnable to force pests onto berry trees."), MSGBOX_DEFAULT)
@@ -366,6 +377,18 @@ script Debug_EventScript_InflictStatus1_Single
 	case 6: goto(Debug_EventScript_InflictStatus1_Close)
 	case MULTI_B_PRESSED: goto(Debug_EventScript_InflictStatus1_Close)
 	}
+	releaseall
+	end
+}
+
+script Debug_EventScript_KoPokemon
+{
+	special(ChoosePartyMon)
+	waitstate
+	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
+	specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+	goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
+	setko(VAR_0x8004)
 	releaseall
 	end
 }
@@ -441,6 +464,15 @@ script Debug_EventScript_SetFriendship
 	special(ChoosePartyMon)
 	waitstate
 	callnative(DebugNative_Party_SetFriendship)
+	releaseall
+	end
+}
+
+script Debug_EventScript_GivePokerus
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_Party_SetPokerus)
 	releaseall
 	end
 }
@@ -589,7 +621,10 @@ text Debug_EventScript_InflictStatus1_Text_Frostbite
     format("Frostbite")
 }
 
-
+text Debug_EventScript_InflictStatus1_Text_KO
+{
+    format("KO")
+}
 
 script Debug_EventScript_EWRAMCounters
 {

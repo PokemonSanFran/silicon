@@ -1,0 +1,19 @@
+{
+  "universalMoves":
+    [
+      "MOVE_MIMIC",
+      "MOVE_SUBSTITUTE",
+      "MOVE_TERA_BLAST"
+    ],
+  "signatureTeachables":
+    [
+      "MOVE_DRAGON_ASCENT",
+      "MOVE_RELIC_SONG",
+      "MOVE_SECRET_SWORD",
+      "MOVE_VOLT_TACKLE"
+    ],
+  "extraTutors":
+    [
+      
+    ]
+}

@@ -644,6 +644,10 @@
 		.endif
 	.endm
 
+	.macro waitmovementall
+	callnative Script_waitmovementall, requests_effects=1
+	.endm
+
 	@ Attempts to despawn the specified (localId) object on the specified map.
 	@ It also sets the object's visibility flag if it has one.
 	@ If no map is specified, then the current map is used.
@@ -1023,9 +1027,9 @@
 	.2byte \level
 	.ifnb \item; .set givemon_flags, givemon_flags | (1 << 0); .endif
 	.ifnb \ball; .set givemon_flags, givemon_flags | (1 << 1); .endif
-	.ifnb \nature; .set givemon_flags, givemon_flags | (1 << 2); .endif
+	.set givemon_flags, givemon_flags | (1 << 2);
 	.ifnb \abilityNum; .set givemon_flags, givemon_flags | (1 << 3); .endif
-	.ifnb \gender; .set givemon_flags, givemon_flags | (1 << 4); .endif
+	.set givemon_flags, givemon_flags | (1 << 4);
 	.ifnb \hpEv; .set givemon_flags, givemon_flags | (1 << 5); .endif
 	.ifnb \atkEv; .set givemon_flags, givemon_flags | (1 << 6); .endif
 	.ifnb \defEv; .set givemon_flags, givemon_flags | (1 << 7); .endif
@@ -1049,9 +1053,9 @@
 	.4byte givemon_flags
 	.ifnb \item; .2byte \item; .endif
 	.ifnb \ball; .2byte \ball; .endif
-	.ifnb \nature; .2byte \nature; .endif
+	.ifnb \nature; .2byte \nature; .else; .2byte NATURE_MAY_SYNCHRONIZE; .endif
 	.ifnb \abilityNum; .2byte \abilityNum; .endif
-	.ifnb \gender; .2byte \gender; .endif
+	.ifnb \gender; .2byte \gender; .else; .2byte MON_GENDER_MAY_CUTE_CHARM; .endif
 	.ifnb \hpEv; .2byte \hpEv; .endif
 	.ifnb \atkEv; .2byte \atkEv; .endif
 	.ifnb \defEv; .2byte \defEv; .endif
@@ -1696,123 +1700,6 @@
 	.2byte \box
 	.endm
 
-
-	@ Start siliconMerge
-	@ Allows to setup wild battles with a customized Pokémon. It should be used before calling dowildbattle.
-    .macro setcustomwildmon species:req, level:req, item, ball, nature, abilityNum, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
-    .byte SCR_OP_SETCUSTOMWILDMON
-    .2byte \species
-    .byte \level
-    .ifb \item
-        .2byte ITEM_NONE
-    .else
-        .2byte \item
-    .endif
-    .ifb \ball
-        .byte 0
-    .else
-        .byte \ball
-    .endif
-    .ifb \nature
-        .byte NUM_NATURES
-    .else
-        .byte \nature
-    .endif
-    .ifb \abilityNum
-        .byte 3
-    .else
-        .byte \abilityNum
-    .endif
-    @evs
-    .ifb \hpEv
-        .byte 0
-    .else
-        .byte \hpEv
-    .endif
-    .ifb \atkEv
-        .byte 0
-    .else
-        .byte \atkEv
-    .endif
-    .ifb \defEv
-        .byte 0
-    .else
-        .byte \defEv
-    .endif
-    .ifb \speedEv
-        .byte 0
-    .else
-        .byte \speedEv
-    .endif
-    .ifb \spAtkEv
-        .byte 0
-    .else
-        .byte \spAtkEv
-    .endif
-    .ifb \spDefEv
-        .byte 0
-    .else
-        .byte \spDefEv
-    .endif
-    @ivs
-    .ifb \hpIv
-        .byte 32
-    .else
-        .byte \hpIv
-    .endif
-    .ifb \atkIv
-        .byte 32
-    .else
-        .byte \atkIv
-    .endif
-    .ifb \defIv
-        .byte 32
-    .else
-        .byte \defIv
-    .endif
-    .ifb \speedIv
-        .byte 32
-    .else
-        .byte \speedIv
-    .endif
-    .ifb \spAtkIv
-        .byte 32
-    .else
-        .byte \spAtkIv
-    .endif
-    .ifb \spDefIv
-        .byte 32
-    .else
-        .byte \spDefIv
-    .endif
-    .ifb \move1
-        .2byte 0
-    .else
-        .2byte \move1
-    .endif
-    .ifb \move2
-        .2byte 0
-    .else
-        .2byte \move2
-    .endif
-    .ifb \move3
-        .2byte 0
-    .else
-        .2byte \move3
-    .endif
-    .ifb \move4
-        .2byte 0
-    .else
-        .2byte \move4
-    .endif
-    .ifb \isShiny
-        .byte 0
-    .else
-        .byte \isShiny
-    .endif
-    .endm
-	@ End siliconMerge
-
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro textcolor color:req
 	.byte SCR_OP_TEXTCOLOR
@@ -2270,6 +2157,11 @@
 
 	.macro setdynamicaifunc func:req
 	callnative ScriptSetDynamicAiFunc, requests_effects=1
+	.4byte \func
+	.endm
+
+	.macro setdynamicswitchaifunc func:req
+	callnative ScriptSetDynamicAiSwitchFunc, requests_effects=1
 	.4byte \func
 	.endm
 
@@ -2979,6 +2871,12 @@
     .endm
 	@ End siliconMerge
 
+	@ Sets the hp to 0 for the Pokémon in \slot.
+	.macro setko slot:req
+	callnative Script_SetKO, requests_effects=1
+	.2byte \slot
+	.endm
+
 	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
 	.macro checkteratype slot:req
 	callnative CheckTeraType, requests_effects=1
@@ -3404,6 +3302,68 @@
 	.endm
 	@ End variableMoney
 
+	.macro setmultitrainerbattle trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, partnerId:req
+	callnative SetMultiTrainerBattle
+	.2byte \trainer_a
+	.4byte \lose_text_a
+	.2byte \trainer_b
+	.4byte \lose_text_b
+	.2byte \partnerId
+	.endm
+
+	@ facility version of `trainerbattle` macro. Used in Battle Pyramid and Trainer Hill
+	.macro facilitytrainerbattle facility:req
+	callnative FacilityTrainerBattle
+	.byte \facility
+	.endm
+
+	@ immediately starts a battle of the given facility
+	.macro dofacilitytrainerbattle facility:req
+	callnative DoFacilityTrainerBattle
+	.byte \facility
+	.endm
+	
+	.macro ingame_trade tradeId:req wantTradeMsg:req, declineTradeJump:req, wrongMonJump:req, tradeCompleteMsg:req
+	setvar VAR_0x8005, \tradeId
+	specialvar VAR_0x8009, GetInGameTradeSpeciesInfo
+	msgbox \wantTradeMsg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, \declineTradeJump
+	chooseboxmon SELECT_PC_MON_TRADE
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, \declineTradeJump
+	specialvar VAR_0x800B, GetTradeSpecies
+	goto_if_ne VAR_0x800B, VAR_0x8009, \wrongMonJump
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox \tradeCompleteMsg, MSGBOX_DEFAULT
+	.endm
+
+	.macro move_tutor moveId:req, wantTeachingMsg:req, monSelectMsg:req, declinedJmp:req, taughtJmp:req, flagId=0
+	.if \flagId
+		goto_if_set \flagId, \taughtJmp
+	.endif
+	msgbox \wantTeachingMsg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, \declinedJmp
+	.if \flagId
+		call MoveTutor_EventScript_CanOnlyBeLearnedOnce
+		goto_if_eq VAR_RESULT, NO, \declinedJmp
+	.endif
+	msgbox \monSelectMsg, MSGBOX_DEFAULT
+	setvar VAR_0x8005, \moveId
+	call MoveTutor_EventScript_OpenBox
+	goto_if_eq VAR_RESULT, FALSE, \declinedJmp
+	.if \flagId
+		setflag \flagId
+	.endif
+	goto \taughtJmp
+	.endm
+
+	.macro chooseboxmon selectionType=SELECT_PC_MON_NORMAL
+	callnative ChooseBoxMon
+	.byte \selectionType
+	.endm
+
 @ Follower NPCs
 
 	@ Sets an existing NPC up to follow the player.
@@ -3548,4 +3508,10 @@
 	.macro istmrelearneractive destination:req
 	callnative ScrCmd_istmrelearneractive, requests_effects=1
 	.4byte \destination
+	.endm
+
+	@ Sets a starting status for the next battle. Can be stacked.
+	.macro setstartingstatus status:req
+	callnative ScrCmd_setstartingstatus
+	.byte \status
 	.endm

@@ -1,4 +1,5 @@
 #include "constants/abilities.h"
+#include "constants/teaching_types.h"
 #include "species_info/shared_dex_text.h"
 #include "species_info/shared_front_pic_anims.h"
 
@@ -63,7 +64,6 @@
     .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),                                                     \
     .anims = _anims,                                                                                                                    \
     .images = picTable,                                                                                                                 \
-    .affineAnims = gDummySpriteAffineAnimTable,                                                                                         \
 }
 
 #define OVERWORLD(objEventPic, _size, shadow, _tracks, _anims, ...)                                 \
@@ -100,7 +100,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_NONE] =
     {
         .speciesName = _("??????????"),
-        .cryId = CRY_NONE,
+        .cryId = CRY_PORYGON,
         .natDexNum = NATIONAL_DEX_NONE,
         .categoryName = _("Unknown"),
         .height = 0,
@@ -143,7 +143,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .subspriteTables = sOamTables_32x32,
             .anims = sAnimTable_Following,
             .images = sPicTable_Substitute,
-            .affineAnims = gDummySpriteAffineAnimTable,
         },
     #endif
         .levelUpLearnset = sNoneLevelUpLearnset,
@@ -248,7 +247,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
     */
 // Start siliconMerge
-    #if P_FAMILY_NIHILEGO
     [SPECIES_NIHILEGO_SHARPRISE] =
     {
         .baseHP        = 109,
@@ -311,9 +309,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sNihilegoLevelUpLearnset,
         .teachableLearnset = sNihilegoTeachableLearnset,
     },
-#endif //P_FAMILY_NIHILEGO
-
-#if P_FAMILY_BUZZWOLE
     [SPECIES_BUZZWOLE_SHARPRISE] =
     {
         .baseHP        = 107,
@@ -376,9 +371,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sBuzzwoleLevelUpLearnset,
         .teachableLearnset = sBuzzwoleTeachableLearnset,
     },
-#endif //P_FAMILY_BUZZWOLE
-
-#if P_FAMILY_PHEROMOSA
     [SPECIES_PHEROMOSA_SHARPRISE] =
     {
         .baseHP        = 71,
@@ -440,9 +432,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sPheromosaLevelUpLearnset,
         .teachableLearnset = sPheromosaTeachableLearnset,
     },
-#endif //P_FAMILY_PHEROMOSA
-
-#if P_FAMILY_XURKITREE
     [SPECIES_XURKITREE_SHARPRISE] =
     {
         .baseHP        = 83,
@@ -504,9 +493,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sXurkitreeLevelUpLearnset,
         .teachableLearnset = sXurkitreeTeachableLearnset,
     },
-#endif //P_FAMILY_XURKITREE
-
-#if P_FAMILY_CELESTEELA
     [SPECIES_CELESTEELA_SHARPRISE] =
     {
         .baseHP        = 97,
@@ -570,9 +556,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sCelesteelaLevelUpLearnset,
         .teachableLearnset = sCelesteelaTeachableLearnset,
     },
-#endif //P_FAMILY_CELESTEELA
-
-#if P_FAMILY_KARTANA
     [SPECIES_KARTANA_SHARPRISE] =
     {
         .baseHP        = 59,
@@ -635,9 +618,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sKartanaLevelUpLearnset,
         .teachableLearnset = sKartanaTeachableLearnset,
     },
-#endif //P_FAMILY_KARTANA
-
-#if P_FAMILY_GUZZLORD
     [SPECIES_GUZZLORD_SHARPRISE] =
     {
         .baseHP        = 223,
@@ -699,9 +679,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sGuzzlordLevelUpLearnset,
         .teachableLearnset = sGuzzlordTeachableLearnset,
     },
-#endif //P_FAMILY_GUZZLORD
-
-#if P_FAMILY_POIPOLE
     [SPECIES_POIPOLE_SHARPRISE] =
     {
         .baseHP        = 67,
@@ -764,7 +741,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .teachableLearnset = sPoipoleTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_NAGANADEL, CONDITIONS({IF_KNOWS_MOVE, MOVE_DRAGON_PULSE})}),
     },
-
     [SPECIES_NAGANADEL_SHARPRISE] =
     {
         .baseHP        = 73,
@@ -826,9 +802,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sNaganadelLevelUpLearnset,
         .teachableLearnset = sNaganadelTeachableLearnset,
     },
-#endif //P_FAMILY_POIPOLE
-
-#if P_FAMILY_STAKATAKA
     [SPECIES_STAKATAKA_SHARPRISE] =
     {
         .baseHP        = 61,
@@ -890,9 +863,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sStakatakaLevelUpLearnset,
         .teachableLearnset = sStakatakaTeachableLearnset,
     },
-#endif //P_FAMILY_STAKATAKA
-
-#if P_FAMILY_BLACEPHALON
     [SPECIES_BLACEPHALON_SHARPRISE] =
     {
         .baseHP        = 53,
@@ -954,7 +924,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .levelUpLearnset = sBlacephalonLevelUpLearnset,
         .teachableLearnset = sBlacephalonTeachableLearnset,
     },
-#endif //P_FAMILY_BLACEPHALON
     [SPECIES_FOG_UNKNOWN] =
     {
         .speciesName = _("??????????"),
@@ -993,4 +962,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOOTPRINT(QuestionMark)
     },
 	// End siliconMerge
+};
+
+const struct EggData gEggDatas[EGG_ID_COUNT] =
+{
+#include "egg_data.h"
 };
