@@ -13683,6 +13683,7 @@ const struct ItemInfo gItemsInfo[] =
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
+    */
 
     [ITEM_HM_STRENGTH] =
     {
@@ -13698,6 +13699,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
+/*
     [ITEM_HM_FLASH] =
     {
         .name = ITEM_NAME("HM05"),
