@@ -621,8 +621,9 @@ gSongTable::
 	song mus_vs_charlotte, MUSIC_PLAYER_BGM, 0
 	song mus_cresalta_vista_night, MUSIC_PLAYER_BGM, 0
 	song mus_hobbyist, MUSIC_PLAYER_BGM, 0
-	song mus_fancy_person, MUSIC_PLAYER_BGM, 0
 	song mus_cabbie_arriba, MUSIC_PLAYER_BGM, 0
+	song mus_fancy_person, MUSIC_PLAYER_BGM, 0
+	song mus_vs_game_director, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

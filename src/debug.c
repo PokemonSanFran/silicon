@@ -4054,8 +4054,9 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_VS_CHARLOTTE) \
     X(MUS_CRESALTA_VISTA_NIGHT) \
     X(MUS_HOBBYIST) \
-    X(MUS_FANCY_PERSON) \
     X(MUS_CABBIE_ARRIBA) \
+    X(MUS_FANCY_PERSON) \
+    X(MUS_VS_GAME_DIRECTOR) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
