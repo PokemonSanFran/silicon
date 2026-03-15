@@ -305,12 +305,12 @@ static void GiveDebugStarter(void);
 
 void GenerateDummyPartyMembers(void)
 {
-    u8 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u8 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
     u16 moves[4] = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE};
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        ScriptGiveMonParameterized(0,slot,SPECIES_SCYTHER,1,0,0,0,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
+        ScriptGiveMonParameterized(0,slot,SPECIES_SCYTHER,1,ITEM_NONE,BALL_POKE,NATURE_RANDOM,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
 
     CompactPartySlots();
 }
@@ -414,7 +414,7 @@ void GiveSiliconStarter(enum SiliconStarters slot)
     ScriptGiveMonParameterized(
             0, PARTY_SIZE, starter->species, starter->level, starter->item, starter->ball,
             starter->nature, starter->abilityNum, starter->gender,
-            (u8 *)starter->evs, (u8 *)starter->ivs, (u16 *)starter->moves,
+            (u16 *)starter->evs, (u16 *)starter->ivs, (u16 *)starter->moves,
             SHINY_MODE_RANDOM, FALSE, NUMBER_OF_MON_TYPES, 0
             );
 
@@ -434,8 +434,8 @@ static void GiveDebugStarter(void)
     return;
 #endif
 
-    u8 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u8 ivs[NUM_STATS] = {31,31,31,31,31,31};
+    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
     u16 moves[2][4] = {
         {MOVE_DIG,MOVE_SURF,0,0},
         {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,0,0}

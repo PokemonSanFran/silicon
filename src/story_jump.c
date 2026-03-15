@@ -559,8 +559,8 @@ void FlagsVarWarp_Prologue_Intro()
 
 void GiveItems_Prologue_Intro(bool32 jumpType)
 {
-    u8 evs[NUM_STATS] = {0,252,252,4,0,0};
-    u8 ivs[NUM_STATS] = {31,31,31,31,31,31};
+    u16 evs[NUM_STATS] = {0,252,252,4,0,0};
+    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
     u16 moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
 
     if (FlagGet(FLAG_SYS_APP_PROLOUGE_GET))

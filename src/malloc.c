@@ -27,9 +27,8 @@ void PutFirstMemBlockHeader(void *block, u32 size)
     PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
-void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
+void UNUSED MonitorHeap(struct MemBlock *head, u32 size, const char *location)
 {
-    return;
     u32 totalHeapSize = 0;
     u32 freeHeapSize = 0;
 

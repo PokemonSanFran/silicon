@@ -2008,8 +2008,8 @@ void DebugQuest_CutePokemon_GiveMon(void)
     u32 numSidequests = sSideQuests[QUEST_CUTEPOKEMON].numSubquests;
     u32 species[numSidequests];
     u16 moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
-    u8 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u8 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
 
     if (!QuestMenu_GetSetQuestState(QUEST_CUTEPOKEMON,FLAG_GET_ACTIVE))
         return;

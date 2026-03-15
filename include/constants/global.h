@@ -96,7 +96,7 @@ enum Language
 // Start siliconMerge
 //#define DECOR_MAX_SECRET_BASE 16
 //#define DECOR_MAX_PLAYERS_HOUSE 12
-#define DECOR_MAX_SECRET_BASE 1
+#define DECOR_MAX_SECRET_BASE 3
 #define DECOR_MAX_PLAYERS_HOUSE 1
 // End siliconMerge
 #define APPRENTICE_COUNT 4
