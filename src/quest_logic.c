@@ -2007,7 +2007,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
 #endif
     u32 numSidequests = sSideQuests[QUEST_CUTEPOKEMON].numSubquests;
     u32 species[numSidequests];
-    u16 moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
+    enum Move moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
     u16 evs[NUM_STATS] = {0,0,0,0,0,0};
     u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
 
@@ -2042,7 +2042,7 @@ void DebugQuest_CutePokemon_GiveMon(void)
     }
 
     for (u32 monIndex = 0; monIndex < numSidequests; monIndex++)
-        ScriptGiveMonParameterized(0,PARTY_SIZE,species[monIndex],50,ITEM_NONE,BALL_POKE,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,species[monIndex],50,ITEM_NONE,BALL_POKE,NATURE_RANDOM,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 }
 
 void DebugQuest_CutePokemon(u8 state)

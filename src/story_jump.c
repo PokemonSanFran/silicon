@@ -559,18 +559,18 @@ void FlagsVarWarp_Prologue_Intro()
 
 void GiveItems_Prologue_Intro(bool32 jumpType)
 {
-    u16 evs[NUM_STATS] = {0,252,252,4,0,0};
-    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
-    u16 moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
-
     if (FlagGet(FLAG_SYS_APP_PROLOUGE_GET))
         return;
+
+    u16 evs[NUM_STATS] = {0,252,252,4,0,0};
+    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
+    enum Move moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
 
     InitPlayerTrainerId();
     AssignDefaultPlayerName();
 
     VarSet(B_LEVEL_CAP_VARIABLE,27);
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,BALL_CHERISH,NATURE_ADAMANT,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,BALL_CHERISH,NATURE_ADAMANT,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 
     GivePlayerAllTechnicalMachines();
     GivePlayerHealingItems();
