@@ -389,6 +389,54 @@ const struct PokeBallSprite gPokeBalls[POKEBALL_COUNT] =
         POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
         .itemId = ITEM_CHERISH_BALL,
     },
+
+    [BALL_NEWA] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWA_BALL,
+    },
+
+    [BALL_NEWB] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWB_BALL,
+    },
+
+    [BALL_NEWC] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWC_BALL,
+    },
+
+    [BALL_NEWD] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWD_BALL,
+    },
+
+    [BALL_NEWE] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWE_BALL,
+    },
+
+    [BALL_NEWF] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWF_BALL,
+    },
+
+    [BALL_NEWG] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWG_BALL,
+    },
+
+    [BALL_NEWH] =
+    {
+        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        .itemId = ITEM_NEWH_BALL,
+    },
 };
 
 u8 DoPokeballSendOutAnimation(enum BattlerId battler, s16 pan, u8 kindOfThrow)

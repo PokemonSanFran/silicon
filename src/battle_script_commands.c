@@ -10642,40 +10642,6 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
     }
     switch (ballId)
     {
-// Start siliconNewBalls
-            case BALL_NEWA:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FIGHTING, TYPE_FIRE))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWB:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_PSYCHIC, TYPE_DARK))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWC:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_ROCK, TYPE_GRASS))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWD:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_STEEL, TYPE_ELECTRIC))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWE:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GROUND, TYPE_POISON))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWF:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FLYING, TYPE_ICE))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWG:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FAIRY, TYPE_DRAGON))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-            case BALL_NEWH:
-                if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GHOST, TYPE_NORMAL))
-                    ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-                break;
-// End siliconNewBalls
     case BALL_GREAT:
         ball->multiplier = 150;
         break;
@@ -10689,6 +10655,40 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_WATER, TYPE_BUG))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
+    // Start siliconNewBalls
+    case BALL_NEWA:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FIGHTING, TYPE_FIRE))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWB:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_PSYCHIC, TYPE_DARK))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWC:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_ROCK, TYPE_GRASS))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWD:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_STEEL, TYPE_ELECTRIC))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWE:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GROUND, TYPE_POISON))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWF:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FLYING, TYPE_ICE))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWG:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FAIRY, TYPE_DRAGON))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    case BALL_NEWH:
+        if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GHOST, TYPE_NORMAL))
+            ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
+        break;
+    // End siliconNewBalls
     case BALL_NEST:
         ball->multiplier = 100;
         if ((B_NEST_BALL_MODIFIER == GEN_5 && battleMon->level < 31)
