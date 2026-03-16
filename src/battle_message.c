@@ -24,6 +24,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "trainer_slide.h"
+#include "trainer_tower.h"
 #include "window.h"
 #include "line_break.h"
 #include "constants/abilities.h"
@@ -92,6 +93,8 @@ static const u8 sText_WildPkmnAppeared[] = _("You encountered a wild {B_OPPONENT
 static const u8 sText_LegendaryPkmnAppeared[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!\p");
 static const u8 sText_WildPkmnAppearedPause[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!{PAUSE 127}");
 static const u8 sText_TwoWildPkmnAppeared[] = _("Oh! A wild {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME} appeared!\p");
+static const u8 sText_GhostAppearedCantId[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p");
+static const u8 sText_TheGhostAppeared[] = _("The GHOST appeared!\p");
 static const u8 sText_Trainer1WantsToBattle[] = _("You are challenged by {B_TRAINER1_NAME_WITH_CLASS}!\p");
 static const u8 sText_LinkTrainerWantsToBattle[] = _("You are challenged by {B_LINK_OPPONENT1_NAME}!");
 static const u8 sText_TwoLinkTrainersWantToBattle[] = _("You are challenged by {B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
@@ -175,6 +178,7 @@ const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 
 static const u8 sText_Someones[] = _("someone's");
 static const u8 sText_Lanettes[] = _("LANETTE's"); //no decapitalize until it is everywhere
+static const u8 sText_Bills[] = _("BILL's");
 static const u8 sText_EnigmaBerry[] = _("ENIGMA BERRY"); //no decapitalize until it is everywhere
 static const u8 sText_BerrySuffix[] = _(" BERRY"); //no decapitalize until it is everywhere
 const u8 gText_EmptyString3[] = _("");
@@ -911,6 +915,15 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     // End Battle Settings: Nickname
     [STRINGID_PKMNGAINEDPOINTSBOOSTED]              = COMPOUND_STRING("{B_BUFF1} gained a boosted {B_BUFF2} Exp. Points and {B_BUFF3} {B_EFFORT_VALUE}!\p"), // printEVs
     [STRINGID_ABILITYSHIELDPROTECTS]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s Ability is protected by the effects of its {B_LAST_ITEM}!"),
+    [STRINGID_MONTOOSCAREDTOMOVE]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} is too scared to move!"),
+    [STRINGID_GHOSTGETOUTGETOUT]                    = COMPOUND_STRING("GHOST: Get out…… Get out……"),
+    [STRINGID_SILPHSCOPEUNVEILED]                   = COMPOUND_STRING("SILPH SCOPE unveiled the GHOST's\nidentity!"),
+    [STRINGID_GHOSTWASMAROWAK]                      = COMPOUND_STRING("The GHOST was MAROWAK!\p\n"),
+    [STRINGID_TRAINER1MON1COMEBACK]                 = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME}, come back!"),
+    [STRINGID_THREWROCK]                            = COMPOUND_STRING("{B_PLAYER_NAME} threw a ROCK\nat the {B_OPPONENT_MON1_NAME}!"),
+    [STRINGID_THREWBAIT]                            = COMPOUND_STRING("{B_PLAYER_NAME} threw some BAIT\nat the {B_OPPONENT_MON1_NAME}!"),
+    [STRINGID_PKMNANGRY]                            = COMPOUND_STRING("{B_OPPONENT_MON1_NAME} is angry!"),
+    [STRINGID_PKMNEATING]                           = COMPOUND_STRING("{B_OPPONENT_MON1_NAME} is eating!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1331,6 +1344,13 @@ const u16 gInobedientStringIds[] =
     [B_MSG_INCAPABLE_OF_POWER] = STRINGID_PKMNINCAPABLEOFPOWER
 };
 
+const u16 gSafariReactionStringIds[NUM_SAFARI_REACTIONS] =
+{
+    [B_MSG_MON_WATCHING] = STRINGID_PKMNWATCHINGCAREFULLY,
+    [B_MSG_MON_ANGRY]    = STRINGID_PKMNANGRY,
+    [B_MSG_MON_EATING]   = STRINGID_PKMNEATING
+};
+
 const u16 gSafariGetNearStringIds[] =
 {
     [B_MSG_CREPT_CLOSER]    = STRINGID_CREPTCLOSER,
@@ -1435,6 +1455,7 @@ const u8 gText_WhatWillWallyDo[] = _("What will\nWALLY do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
 const u8 gText_BattleMenu[] = _("Battle{CLEAR_TO 56}Bag\nPokémon{CLEAR_TO 56}Run");
 const u8 gText_SafariZoneMenu[] = _("Ball{CLEAR_TO 56}{POKEBLOCK}\nGo Near{CLEAR_TO 56}Run");
+const u8 gText_SafariZoneMenuFrlg[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN");
 const u8 gText_MoveInterfacePP[] = _("PP ");
 const u8 gText_MoveInterfaceType[] = _("TYPE/");
 const u8 gText_MoveInterfacePpType[] = _("{PALETTE 5}{BACKGROUND DYNAMIC_COLOR5}{TEXT_COLORS DYNAMIC_COLOR4 DYNAMIC_COLOR6 DYNAMIC_COLOR5}PP\nTYPE/");
@@ -1810,6 +1831,18 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .color.accent = TEXT_DYNAMIC_COLOR_5,
         .color.shadow = TEXT_DYNAMIC_COLOR_6,
     },
+    [B_WIN_OAK_OLD_MAN] = {
+        .fillValue = PIXEL_FILL(0x1),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 1,
+        .speed = 1,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
 };
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
@@ -2177,22 +2210,25 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
         }
         else
         {
+            if (gBattleTypeFlags & BATTLE_TYPE_GHOST && IsGhostBattleWithoutScope())
+                stringPtr = sText_GhostAppearedCantId;
             // Start fogBattle
-            if (IsFogBattle())
+            else if (IsFogBattle())
                 stringPtr = sText_AttackedFromFog;
-            else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
-            //if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
             // End fogBattle
+            else if (gBattleTypeFlags & BATTLE_TYPE_GHOST)
+                stringPtr = sText_TheGhostAppeared;
+            else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
                 // Start silicon_shine
                 //stringPtr = sText_LegendaryPkmnAppeared;
                 stringPtr = ReturnShinyAppearedText(FALSE,sText_WildPkmnAppeared);
                 // End silicon_shine
-            else if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]]))
+            else if (IsDoubleBattle() && IsValidForBattle(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))))
                 // Start silicon_shine
                 //stringPtr = sText_TwoWildPkmnAppeared;
                 stringPtr = ReturnShinyAppearedText(TRUE,sText_TwoWildPkmnAppeared);
                 // End silicon_shine
-            else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+            else if (gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
                 stringPtr = sText_WildPkmnAppearedPause;
             else
                 // Start silicon_shine
@@ -2716,6 +2752,11 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
         GetFrontierTrainerName(text, trainerId);
         toCpy = text;
     }
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+    {
+        GetTrainerTowerOpponentName(text);
+        toCpy = text;
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         GetTrainerHillTrainerName(text, trainerId);
@@ -2728,7 +2769,12 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     }
     else
     {
-        toCpy = GetTrainerNameFromId(trainerId);
+        enum TrainerClassID trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+
+        if (trainerClass == TRAINER_CLASS_RIVAL_EARLY_FRLG || trainerClass == TRAINER_CLASS_RIVAL_LATE_FRLG || trainerClass == TRAINER_CLASS_CHAMPION_FRLG)
+            toCpy = GetExpandedPlaceholder(PLACEHOLDER_ID_RIVAL);
+        else
+            toCpy = GetTrainerNameFromId(trainerId);
     }
 
     return toCpy;
@@ -2815,6 +2861,8 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
         toCpy = gTrainerClasses[GetFrontierBrainTrainerClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         toCpy = gTrainerClasses[GetFrontierOpponentClass(trainerId)].name;
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+        toCpy = gTrainerClasses[GetTrainerTowerOpponentClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         toCpy = gTrainerClasses[GetTrainerHillOpponentClass(trainerId)].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
@@ -3093,6 +3141,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, TRAINER_BATTLE_PARAM.opponentA);
                     toCpy = gStringVar4;
                 }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+                {
+                    GetTrainerTowerOpponentLoseText(gStringVar4, 0);
+                    toCpy = gStringVar4;
+                }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
                     CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_WON, TRAINER_BATTLE_PARAM.opponentA);
@@ -3109,10 +3162,19 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, TRAINER_BATTLE_PARAM.opponentA);
                     toCpy = gStringVar4;
                 }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+                {
+                    GetTrainerTowerOpponentWinText(gStringVar4, 0);
+                    toCpy = gStringVar4;
+                }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
                     CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_LOST, TRAINER_BATTLE_PARAM.opponentA);
                     toCpy = gStringVar4;
+                }
+                else
+                {
+                    toCpy = GetTrainerWonSpeech();
                 }
                 break;
             case B_TXT_26: // ?
@@ -3135,7 +3197,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
                 if (FlagGet(FLAG_SYS_PC_LANETTE))
-                    toCpy = sText_Lanettes;
+                    toCpy = IS_FRLG ? sText_Bills : sText_Lanettes;
                 else
                     toCpy = sText_Someones;
                 break;
@@ -3208,6 +3270,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, TRAINER_BATTLE_PARAM.opponentB);
                     toCpy = gStringVar4;
                 }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+                {
+                    GetTrainerTowerOpponentLoseText(gStringVar4, 1);
+                    toCpy = gStringVar4;
+                }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
                 {
                     CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_PLAYER_WON, TRAINER_BATTLE_PARAM.opponentB);
@@ -3222,6 +3289,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
                     CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, TRAINER_BATTLE_PARAM.opponentB);
+                    toCpy = gStringVar4;
+                }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+                {
+                    GetTrainerTowerOpponentWinText(gStringVar4, 1);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -3627,17 +3699,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         printerTemplate.x = printerTemplate.currentX = alignX;
     }
 
-    if (windowId == ARENA_WIN_JUDGMENT_TEXT)
+    if (windowId == ARENA_WIN_JUDGMENT_TEXT || windowId == B_WIN_OAK_OLD_MAN)
         gTextFlags.useAlternateDownArrow = FALSE;
     else
         gTextFlags.useAlternateDownArrow = TRUE;
 
-    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)) || gTestRunnerEnabled)
+    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)) || gTestRunnerEnabled || ((gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) && windowId != B_WIN_OAK_OLD_MAN))
         gTextFlags.autoScroll = TRUE;
     else
         gTextFlags.autoScroll = FALSE;
 
-    if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGMENT_TEXT)
+    if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGMENT_TEXT || windowId == B_WIN_OAK_OLD_MAN)
     {
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
             speed = 1;

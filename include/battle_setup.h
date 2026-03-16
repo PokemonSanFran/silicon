@@ -38,6 +38,7 @@ typedef union PACKED TrainerBattleParameter
         u8 *battleScriptRetAddrB;
         u8 *victoryText;
         u8 *cannotBattleText;
+        u8 rivalBattleFlags;
     } params;
     u8 data[sizeof(struct _TrainerBattleParameter)];
 } TrainerBattleParameter;
@@ -122,5 +123,6 @@ bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct RematchTrainer *
 void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId);
 bool32 IsRematchForbidden(s32 rematchTableId);
 // End rematch_action
+u8 GetRivalBattleFlags(void);
 
 #endif // GUARD_BATTLE_SETUP_H

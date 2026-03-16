@@ -1944,6 +1944,7 @@ ITEM_SWEETSCENT_TOOL,
 // Secondary IDs for bikes
 #define MACH_BIKE 0
 #define ACRO_BIKE 1
+#define STANDARD_BIKE 2
 
 // Item parameters for EXP Candies
 #define EXP_100   1

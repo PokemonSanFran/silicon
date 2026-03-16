@@ -202,7 +202,14 @@ enum OtIdMethod
 #define FRIENDSHIP_EVENT_FAINT_SMALL      6
 #define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
 #define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
-#define FRIENDSHIP_EVENT_MUTUAL_AID       9 // siliconMerge
+#define FRIENDSHIP_EVENT_MASSAGE          9
+
+// Start siliconMerge
+enum 
+{
+  FRIENDSHIP_EVENT_MUTUAL_AID = (FRIENDSHIP_EVENT_MASSAGE + 1),
+};
+// End siliconMerge
 
 // Constants for GetLeadMonFriendshipScore
 #define FRIENDSHIP_NONE        0

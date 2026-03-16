@@ -17,6 +17,8 @@ struct Fanfare
     u16 duration;
 };
 
+extern u8 gDisableMapMusicChangeOnMapLoad;
+
 EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
@@ -584,6 +586,8 @@ void PlaySE(u16 songNum)
 	else
 		m4aSongNumStart(songNum);
 	// End siliconMerge
+    if (gDisableMapMusicChangeOnMapLoad == 0)
+        m4aSongNumStart(songNum);
 }
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)

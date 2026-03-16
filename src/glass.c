@@ -311,7 +311,7 @@ static void EmptyTrainerList(void);
 static void PrintTrainerAndParty(u32);
 static u8 GetTrainerIdFromTrainerFromScreenRow(u32);
 static u8 GetListPositionFromScreenRow(u32);
-static u8 GetTrainerOWSpriteIfBattled(u32);
+static u16 GetTrainerOWSpriteIfBattled(u32);
 static void PrintTrainerSprite(u32, u32);
 static void PrintParty(u32, u32);
 static void SavePartySizeForRow(u32, u32);
@@ -3045,7 +3045,7 @@ u32 GetOverworldSpriteFromTrainerId(enum ResidoTrainerIds trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].objectEventGraphicsId;
 }
 
-static u8 GetTrainerOWSpriteIfBattled(u32 trainerId)
+static u16 GetTrainerOWSpriteIfBattled(u32 trainerId)
 {
     if (IsTrainerDiscovered(trainerId))
         return GetOverworldSpriteFromTrainerId(trainerId);
