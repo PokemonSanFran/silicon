@@ -27,7 +27,9 @@ script Unhoused_Script_BufferQuestion
         case 5: bufferstring(STR_VAR_1,format("Rent went up big time last month, now I’m getting evicted and haven’t got the cash for anywhere else in the local area. I wouldn’t say no to ¥{STR_VAR_2} you got lying around."))
         case 6: bufferstring(STR_VAR_1,format("I got laid off without warning last week and I can’t get an interview to save my life. Please, kid! I just ¥{STR_VAR_2} for a new suit to look presentable!"))
         case 7: bufferstring(STR_VAR_1,format("Wanna throw ¥{STR_VAR_2} my way or somethin’? Could help me get an Arriba to see my old man…He ain’t doin’ so well at the moment."))
-        case 8: bufferstring(STR_VAR_1,format("Hey, stranger! Wanna see me and my Squawkabilly sing and dance? Just throw ¥{STR_VAR_2} in the pot, and maybe we can pay for the doc to fix up his wing! Don’t be a cheapskate now! P-please?"))
+        case 8:
+        bufferspeciesname(STR_VAR_3,SPECIES_SQUAWKABILLY)
+        bufferstring(STR_VAR_1,format("Hey, stranger! Wanna see me and my Squawkabilly sing and dance? Just throw ¥{STR_VAR_2} in the pot, and maybe we can pay for the doc to fix up his wing! Don’t be a cheapskate now! P-please?"))
         case 9: bufferstring(STR_VAR_1,format("Hi. Um…Do you have ¥{STR_VAR_2} lying around? Whatever money you don’t need, it’d mean the world to me. Just, I just - yeah."))
     }
 }
@@ -37,16 +39,18 @@ script Unhoused_Script_BufferThanks
     random(9)
     switch(var(VAR_RESULT))
     {
-        case 0: bufferstring(STR_VAR_1,format(""))
-        case 1: bufferstring(STR_VAR_1,format(""))
-        case 2: bufferstring(STR_VAR_1,format(""))
-        case 3: bufferstring(STR_VAR_1,format(""))
-        case 4: bufferstring(STR_VAR_1,format(""))
-        case 5: bufferstring(STR_VAR_1,format(""))
-        case 6: bufferstring(STR_VAR_1,format(""))
-        case 7: bufferstring(STR_VAR_1,format(""))
-        case 8: bufferstring(STR_VAR_1,format(""))
-        case 9: bufferstring(STR_VAR_1,format(""))
+        case 0: bufferstring(STR_VAR_1,format("Hey, thanks so much! Maybe Resido ain’t so rotten after all."))
+        case 1: bufferstring(STR_VAR_1,format("Very kind. I won’t forget you."))
+        case 2: bufferstring(STR_VAR_1,format("Oh, I really didn’t expect anything…I — I won’t let this go to waste!"))
+        case 3: bufferstring(STR_VAR_1,format("Nice, a bit of corpo cash really softens the blow."))
+        case 4: bufferstring(STR_VAR_1,format("This means a lot. If everyone were this giving I’d be back on my feet already."))
+        case 5:
+        bufferspeciesname(STR_VAR_2,SPECIES_CHANSEY)
+    bufferstring(STR_VAR_1,format("You’re a good egg. A {STR_VAR_2}’d just bundle you right up!"))
+        case 6: bufferstring(STR_VAR_1,format("Never thought a kid’d be the one to come through for me. When I’m a bigwig at Presto, come see me for a job!"))
+        case 7: bufferstring(STR_VAR_1,format("Oh, whoa…That’s nice of you…Guess I gotta clean my shirt now."))
+        case 8: bufferstring(STR_VAR_1,format("Alright! We’ll get to it in just a moment! Need to gather an audience first…"))
+        case 9: bufferstring(STR_VAR_1,format("Th-thanks. Hey, don’t mention this to anyone, okay?"))
     }
 }
 
@@ -55,16 +59,18 @@ script Unhoused_Script_BufferNo
     random(9)
     switch(var(VAR_RESULT))
     {
-        case 0: bufferstring(STR_VAR_1,format(""))
-        case 1: bufferstring(STR_VAR_1,format(""))
-        case 2: bufferstring(STR_VAR_1,format(""))
-        case 3: bufferstring(STR_VAR_1,format(""))
-        case 4: bufferstring(STR_VAR_1,format(""))
-        case 5: bufferstring(STR_VAR_1,format(""))
-        case 6: bufferstring(STR_VAR_1,format(""))
-        case 7: bufferstring(STR_VAR_1,format(""))
-        case 8: bufferstring(STR_VAR_1,format(""))
-        case 9: bufferstring(STR_VAR_1,format(""))
+        case 0: bufferstring(STR_VAR_1,format("You don’t believe me, do ya? No one does…"))
+        case 1: bufferstring(STR_VAR_1,format("Pray people are nicer to you if you ever end up like me."))
+        case 2: bufferstring(STR_VAR_1,format("Of course, sorry I asked."))
+        case 3: bufferstring(STR_VAR_1,format("Yeah whatever, wouldn’t have expected you to have a conscience anyway."))
+        case 4: bufferstring(STR_VAR_1,format("This is so embarrassing…What has my life come to?"))
+        case 5: bufferstring(STR_VAR_1,format("How the hell’s anyone supposed to live around here nowadays?"))
+        case 6: bufferstring(STR_VAR_1,format("Yeah I — I didn’t mean it anyway, I was just asking as a prank."))
+        case 7: bufferstring(STR_VAR_1,format("Yeah, well… I didn’t really wanna see him anyway."))
+        case 8:
+        bufferspeciesname(STR_VAR_3,SPECIES_SQUAWKABILLY)
+bufferstring(STR_VAR_3,format("Not a kind soul or cheap Doctor in all the land, eh {STR_VAR_3}?"))
+        case 9: bufferstring(STR_VAR_1,format("Okay, yeah, not a problem…"))
     }
 }
 
