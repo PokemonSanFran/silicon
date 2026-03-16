@@ -798,7 +798,7 @@ bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
         return TRUE;
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_FIRST_ONLY:
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_DUPLICATE:
-        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup])
+        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gMapHeader.regionMapSectionId])
             return FALSE;
         break;
     }

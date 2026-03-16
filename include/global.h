@@ -35,6 +35,7 @@
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
 #include "constants/hidden_grotto.h" // hiddenGrotto 
+#include "constants/region_map_sections.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -332,7 +333,7 @@ struct SaveBlock3
     u8 playerPosesivePronoun[PLAYER_NAME_LENGTH + 1];
     u16 mazeLayoutSeed;
     u16 mazeItemsSeed;
-    u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
+    u16 firstPokemonCatchFlags[RESIDO_MAPSEC_COUNT];
     struct Waypoint waypoint; // Waypoint/MapSystem Branch
 // End siliconMerge
 #if OW_USE_FAKE_RTC
