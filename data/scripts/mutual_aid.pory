@@ -41,7 +41,7 @@ script Unhoused_Script_BufferThanks
     {
         case 0: bufferstring(STR_VAR_1,format("Hey, thanks so much! Maybe Resido ain’t so rotten after all."))
         case 1: bufferstring(STR_VAR_1,format("Very kind. I won’t forget you."))
-        case 2: bufferstring(STR_VAR_1,format("Oh, I really didn’t expect anything…I — I won’t let this go to waste!"))
+        case 2: bufferstring(STR_VAR_1,format("Oh, I really didn’t expect anything…I -I won’t let this go to waste!"))
         case 3: bufferstring(STR_VAR_1,format("Nice, a bit of corpo cash really softens the blow."))
         case 4: bufferstring(STR_VAR_1,format("This means a lot. If everyone were this giving I’d be back on my feet already."))
         case 5:
@@ -65,7 +65,7 @@ script Unhoused_Script_BufferNo
         case 3: bufferstring(STR_VAR_1,format("Yeah whatever, wouldn’t have expected you to have a conscience anyway."))
         case 4: bufferstring(STR_VAR_1,format("This is so embarrassing…What has my life come to?"))
         case 5: bufferstring(STR_VAR_1,format("How the hell’s anyone supposed to live around here nowadays?"))
-        case 6: bufferstring(STR_VAR_1,format("Yeah I — I didn’t mean it anyway, I was just asking as a prank."))
+        case 6: bufferstring(STR_VAR_1,format("Yeah I -I didn’t mean it anyway, I was just asking as a prank."))
         case 7: bufferstring(STR_VAR_1,format("Yeah, well… I didn’t really wanna see him anyway."))
         case 8:
         bufferspeciesname(STR_VAR_3,SPECIES_SQUAWKABILLY)
