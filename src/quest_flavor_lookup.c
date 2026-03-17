@@ -348,3 +348,40 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
     StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Freetheinnocent(void)
+{
+    u32 flag = ReturnQuestState(QUEST_FREETHEINNOCENT);
+    bool32 subQuestComplete[QUEST_FREETHEINNOCENT_SUB_COUNT + 1];
+
+    for (u32 subquest = SUB_QUEST_1; subquest < QUEST_FREETHEINNOCENT_SUB_COUNT; subquest++)
+        subQuestComplete[subquest] = QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, subquest);
+
+    bool32 factsLearned = ((subQuestComplete[SUB_QUEST_1]  != FALSE) && (subQuestComplete[SUB_QUEST_2]  != FALSE) && (subQuestComplete[SUB_QUEST_5]  != FALSE));
+    bool32 cupFound = (subQuestComplete[SUB_QUEST_6]  != FALSE);
+    bool32 cashierSpoken = (subQuestComplete[SUB_QUEST_7]  != FALSE);
+
+    if (cashierSpoken)
+    {
+        CopyItemNameHandlePlural(ITEM_QUEST_FREETHEINNOCENT_ALIBI,gStringVar1,2);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("If you can find the source of {STR_VAR_1}, you might be able to find an alibi for FindtheguiltyvictimB."));
+
+    }
+    else if (cupFound)
+    {
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Does FindtheguiltyvictimB’s empty boba cup have a clue?"));
+    }
+    else if (factsLearned)
+    {
+        GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_1),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_1))->regionMapSectionId,0);
+        GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_2),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_2))->regionMapSectionId,0);
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_3),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_3))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("FindtheguiltyvictimB started with a boba in {STR_VAR_1}, stopped in {STR_VAR_2}, and finished at {STR_VAR_3}."));
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_FREETHEINNOCENT].desc[flag]);
+    }
+
+    return gStringVar4;
+}

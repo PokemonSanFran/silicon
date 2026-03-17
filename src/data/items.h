@@ -20764,6 +20764,36 @@ const struct Item gItemsInfo[] =
             .iconPic = gItemIcon_QuestionMark,
             .iconPalette = gItemIconPalette_QuestionMark,
         },
+    [ITEM_SPIKED_CONCHA] =
+    {
+        .name = ITEM_NAME("Spiked Concha"),
+        .price = (I_PRICE >= GEN_7) ? 350 : 200,
+        .description = COMPOUND_STRING(
+                "A local specialty\n"
+                "that heals all\n"
+                "status problems."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
+        .flingPower = 30,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BOBA_CUP] =
+    {
+        .name = ITEM_NAME("Empty Boba Cup"),
+        .price = 0,
+        .description = COMPOUND_STRING("An empty plastic cup. It is sticky, and has a label with Cresalta Vista Boba printed onto the side."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
     // End siliconMerge
 };
 

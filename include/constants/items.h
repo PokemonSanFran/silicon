@@ -1440,8 +1440,10 @@
 #define ITEM_BELEN_KARIOKA 1246
 #define ITEM_BELEN_CHEBUREKI 1247
 #define ITEM_BELEN_JIANBING 1248
+#define ITEM_SPIKED_CONCHA 1249
+#define ITEM_BOBA_CUP 1250
 
-#define ITEMS_COUNT 1249
+#define ITEMS_COUNT 1251
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
