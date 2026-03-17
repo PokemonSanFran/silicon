@@ -4057,6 +4057,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_CABBIE_ARRIBA) \
     X(MUS_FANCY_PERSON) \
     X(MUS_VS_GAME_DIRECTOR) \
+    X(MUS_ROUTE6_NIGHT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
