@@ -160,7 +160,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
 
     text << "\t.2byte " << json_to_string(map_data, "music") << "\n"
          << "\t.2byte " << json_to_string(layout, "id") << "\n"
-         << "\t.2byte "  << json_to_string(map_data, "region_map_section") << "\n"
+         << "\t.byte "  << json_to_string(map_data, "region_map_section") << "\n"
          << "\t.byte "  << json_to_string(map_data, "requires_flash") << "\n"
          << "\t.byte "  << json_to_string(map_data, "weather") << "\n"
          << "\t.byte "  << json_to_string(map_data, "map_type") << "\n";
@@ -692,30 +692,28 @@ string generate_layout_headers_text(Json layouts_data) {
              << "\t.4byte " << blockdata_label << "\n"
              << "\t.4byte " << json_to_string(layout, "primary_tileset") << "\n"
              << "\t.4byte " << json_to_string(layout, "secondary_tileset") << "\n";
-    // Start siliconMerge
-            text << "\t.byte TRUE\n";
-            text << "\t.byte " << json_to_string(layout, "border_width") << "\n"
-                 << "\t.byte " << json_to_string(layout, "border_height") << "\n"
-                 << "\t.byte 0\n";
-    /* 
         if (layout_version == "frlg")
             text << "\t.byte TRUE\n";
         else
             text << "\t.byte FALSE\n";
 
+        // Start siliconMerge
+      /*
         if (layout_version == "frlg")
         {
+      */
             text << "\t.byte " << json_to_string(layout, "border_width") << "\n"
                  << "\t.byte " << json_to_string(layout, "border_height") << "\n"
                  << "\t.byte 0\n";
+      /*
         }
         else
         {
             text << "\t.2byte 0\n"
                  << "\t.byte 0\n";
         }
-    */
-    //End siliconMerge
+      */
+        // End siliconMerge
         text << "\n";
     }
 
