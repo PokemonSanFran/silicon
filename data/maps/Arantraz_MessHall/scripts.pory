@@ -110,3 +110,16 @@ script Arantraz_MessHall_Eleanor_Event_Script
         goto(Quest_Bodegaburnout_Dialouge_EleanorStart)
     }
 }
+
+script ArantrazMessHall_Script_InteractFreetheinnocentcomradeA
+{
+    lock
+    goto_if_quest_complete(QUEST_FINDTHEGUILTY,NULL)
+    goto_if_quest_reward(QUEST_FINDTHEGUILTY,NULL)
+    goto_if_quest_active(QUEST_FINDTHEGUILTY,NULL)
+    goto_if_quest_complete(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Reward)
+    goto_if_quest_active(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Active)
+    goto_if_quest_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_StartQuest)
+}
+

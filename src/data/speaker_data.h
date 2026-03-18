@@ -2474,7 +2474,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
-        [SPEAKER_MERMEREZAGYMEXPEDITORC] =
+    [SPEAKER_MERMEREZAGYMEXPEDITORC] =
     {
         .name = COMPOUND_STRING("MermerezagymexpeditorC"),
         .title = COMPOUND_STRING("Needles Expeditor"),
@@ -2718,6 +2718,70 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("Returndollchild"),
         .title = COMPOUND_STRING("Child"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTCOMRADEA] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentcomradea"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYVICTIMB] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyvictimb"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERC] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerc"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERD] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerd"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERF] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerf"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERG] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerg"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYPLANTH] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyplanth"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTBOBACASHIERI] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentbobacashieri"),
+        .title = COMPOUND_STRING("Shopkeeper"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,

@@ -68,5 +68,8 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_SmoothieCrafting_BufferRecipe(void);
 void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
 u32 Quest_BodegaBurnout_CountRemainingSubquests(void);
+bool8 Quest_Freetheinnocent_FactsLearned(void);
+bool8 Quest_Freetheinnocent_CupFound(void);
+bool8 Quest_Freetheinnocent_CashierSpoken(void);
 
 #endif //GUARD_QUESTLOGIC_H

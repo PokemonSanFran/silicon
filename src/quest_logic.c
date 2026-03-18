@@ -3254,3 +3254,46 @@ void DebugQuest_Returndoll(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Free The Innocent
+// ***********************************************************************
+
+bool8 Quest_Freetheinnocent_FactsLearned(void)
+{
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_1) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_2) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_5) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 Quest_Freetheinnocent_CupFound(void)
+{
+    return (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_6) != FALSE);
+}
+
+bool8 Quest_Freetheinnocent_CashierSpoken(void)
+{
+    return (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_7) != FALSE);
+}
+
+void Script_Quest_Freetheinnocent_FactsLearned(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_FactsLearned();
+}
+
+void Script_Quest_Freetheinnocent_CupFound(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_CupFound();
+}
+
+void Script_Quest_Freetheinnocent_CashierSpoken(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_CashierSpoken();
+}

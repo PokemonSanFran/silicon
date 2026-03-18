@@ -9,7 +9,6 @@ const VIGRIM = 7
 const ADAORA = 8
 const GRUNTA = 9
 const GRUNTB = 10
-const GRUNTC = 11
 const GRUNTD = 12
 
 const FLAG_HIDE_BAIYA = FLAG_TEMP_1
@@ -108,10 +107,8 @@ script SpeechSpeechSpeech_ProjectAssignment_ObjectSetUp_Script {
     setobjectxy(GRUNTB,17,16)
     setobjectxyperm(GRUNTB,17,16)
 
-    setobjectmovementtype(GRUNTC,MOVEMENT_TYPE_LOOK_AROUND)
-    setobjectnewmovementtype(GRUNTC,MOVEMENT_TYPE_LOOK_AROUND)
-    setobjectxy(GRUNTC,19,7)
-    setobjectxyperm(GRUNTC,19,7)
+    setobjectxy(LOCALID_FREETHEINNOCENTCOMRADEA,19,7)
+    setobjectxyperm(LOCALID_FREETHEINNOCENTCOMRADEA,19,7)
 
     setobjectmovementtype(GRUNTD,MOVEMENT_TYPE_LOOK_AROUND)
     setobjectnewmovementtype(GRUNTD,MOVEMENT_TYPE_LOOK_AROUND)
@@ -219,7 +216,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         playse(SE_PIN)
         applymovement(GRUNTA,Common_Movement_ExclamationMark)
         applymovement(GRUNTB,Common_Movement_ExclamationMark)
-        applymovement(GRUNTC,Common_Movement_ExclamationMark)
+        applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_ExclamationMark)
         applymovement(GRUNTD,Common_Movement_ExclamationMark)
         waitmovement(GRUNTD)
 
