@@ -180,9 +180,11 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     if (version == "firered")
         text << "\t.byte " << json_to_string(map_data, "floor_number") << "\n";
 
+  // Start siliconMerge
      //text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n";
     text << "\t.space 3" << "\n\n";
+  // End siliconMerge
 
     return text.str();
 }
