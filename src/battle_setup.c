@@ -1716,7 +1716,6 @@ static bool32 IsRematchTrainerIn_(const struct RematchTrainer *table, u16 mapGro
 static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
-
     if (tableId == -1)
         return FALSE;
     if (tableId >= MAX_REMATCH_ENTRIES)
@@ -1909,10 +1908,10 @@ static bool32 IsRematchStepCounterMaxed(void)
 
 void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
-    if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
+    UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum);
     // Start rematch_action
-        return;
     /*
+    if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
         gSaveBlock1Ptr->trainerRematchStepCounter = 0;
     */
     // End rematch_action
