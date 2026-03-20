@@ -1902,9 +1902,10 @@ void IncrementRematchStepCounter(void)
 }
 
 #if FREE_MATCH_CALL == FALSE
-static bool32 IsRematchStepCounterMaxed(void)
-{
     // Start rematch_action
+static bool32 UNUSED IsRematchStepCounterMaxed(void)
+//static bool32 IsRematchStepCounterMaxed(void)
+{
     /*
     if (HasEnoughBadgesForRematch() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
         return TRUE;
