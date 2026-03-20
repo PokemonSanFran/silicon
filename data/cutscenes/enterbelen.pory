@@ -11,17 +11,6 @@ script EnterBelen_StartGymBattle_ObjectSetup_Script
     setobjectmovementtype(LOCALID_MERMEREZA_GYM_BELEN, MOVEMENT_TYPE_FACE_LEFT)
 }
 
-script EnterBelen_Script_InteractHost
-{
-    lock
-    faceplayer
-    call_if_quest_complete(QUEST_RESTAURANTEXPANSION2,EnterBelen_Dialogue_ExplainBelenRematch)
-    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,EnterBelen_Dialogue_ExplainFlowers)
-    call_if_set(FLAG_BADGE01_GET,EnterBelen_Dialogue_HintBelenLocation)
-    call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_INTRODUCED,EnterBelen_Dialogue_ExplainGym)
-    call(EnterBelen_Dialogue_FirstIntroGym)
-}
-
 script EnterBelen_Dialogue_FirstIntroGym
 {
     lock

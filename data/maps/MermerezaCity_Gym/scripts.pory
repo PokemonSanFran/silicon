@@ -37,3 +37,18 @@ script EnterBelen_Event_Script
         default: goto(EnterBelen_PutMeatInOven_Dialogue)
     }
 }
+
+script MermerezaCity_Gym_Script_InteractHost
+{
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_HostReward)
+    callnative(Script_Quest_Freetheinnocent_ShouldHostSpeak)
+    call_if_eq(VAR_RESULT,TRUE,Quest_Freetheinnocent_Dialogue_HostActive)
+    call_if_quest_complete(QUEST_RESTAURANTEXPANSION2,EnterBelen_Dialogue_ExplainBelenRematch)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION1,EnterBelen_Dialogue_ExplainFlowers)
+    call_if_set(FLAG_BADGE01_GET,EnterBelen_Dialogue_HintBelenLocation)
+    call_if_ge(VAR_GYM_1_STATE,MERMEREZA_GYM_INTRODUCED,EnterBelen_Dialogue_ExplainGym)
+    call(EnterBelen_Dialogue_FirstIntroGym)
+}
+
