@@ -21,3 +21,28 @@ script Robinwilltunnel_B1F_MapScripts_OnTransition {
     }
 }
 
+script LanjingTunnel_B1F_Script_Freetheinnocenthikerd
+{
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERD,format("Have you ever thought about what happens to someone’s Pokemon when they go to prison? Gah, it’s a ghastly thought. Battle me and take my mind off it!"),format("Perhaps my Pokemon would be better off without me…"),LanjingTunnel_B1F_Dialogue_PostBattleFreetheinnocenthikerd)
+// PSF TODO: Freetheinnocenthikerd: Oh, I’m sorry. Did I distract you too?
+    handlerematch(LanjingTunnel_B1F_Script_RematchFreetheinnocenthikerd)
+    goto(LanjingTunnel_B1F_Dialogue_PostBattleFreetheinnocenthikerd)
+}
+
+script LanjingTunnel_B1F_Script_RematchFreetheinnocenthikerd
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERD,format("I’ve been staying out of trouble, but I want another shot at you!"),format("These old bones can barely hike! I can’t battle at the same time!"))
+// PSF TODO: Freetheinnocenthikerd: Ho ho! I’m an asset to my Pokemon after all!
+    goto(LanjingTunnel_B1F_Dialogue_PostBattleFreetheinnocenthikerd)
+}
+
+script LanjingTunnel_B1F_Dialogue_PostBattleFreetheinnocenthikerd
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerd)
+    buffermapname(STR_VAR_1,MAP_ARANTRAZ)
+    msgbox(format("When people were sent to {STR_VAR_1}, their Pokemon were rehomed…"),,SPEAKER_FREETHEINNOCENTHIKERD)
+    msgbox(format("Pokemon may be smart, but it’s good we’ve never imprisoned them! Ha! They just follow their trainers, after all."),,SPEAKER_FREETHEINNOCENTHIKERD)
+    closemessage
+    release
+    end
+}

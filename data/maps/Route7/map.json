@@ -77,6 +77,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route7_Script_Interact_BodegaburnoutRescueL",
       "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_FREETHEINNOCENTHIKERG",
+      "graphics_id": "OBJ_EVENT_GFX_FREETHEINNOCENTHIKERG",
+      "x": 28,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route7_Script_Freetheinnocenthikerg",
+      "flag": "0"
     }
   ],
   "warp_events": [

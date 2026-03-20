@@ -8,3 +8,28 @@ mapscripts Route9_MapScripts {
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
+
+script Route9_Script_Freetheinnocenthikerc
+{
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERC,format("It’s important to stay hydrated on hikes! Especially if you’re gonna be battling too!"),format("Well I sure hope there’s a spring nearby…"),Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+// PSF TODO: FreetheinnocenthikerC: That’s right! No energy drinks! No milk tea, no juice, just good old fashioned H2O!
+    handlerematch(Route9_Script_RematchFreetheinnocenthikerc)
+    goto(Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+}
+
+script Route9_Script_RematchFreetheinnocenthikerc
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERC,format("Hey again! Staying hydrated as I suggested?"),format("Your Pokemon look healthy and hydrated! Good job!"))
+// PSF TODO: FreetheinnocenthikerC: I drank a whole gallon of water before this battle! A shame the mountain doesn’t have bathrooms…
+    goto(Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+}
+
+script Route9_Dialogue_PostBattleFreetheinnocenthikerc
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerc)
+    bufferitemname(STR_VAR_1,ITEM_SODA_POP)
+    msgbox(format("Though water’s best for humans, {STR_VAR_1} is more cost-efficient and nutritionally it’s the same for Pokemon."),,SPEAKER_FREETHEINNOCENTHIKERC)
+    closemessage
+    release
+    end
+}

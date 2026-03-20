@@ -26,3 +26,15 @@ script ToraTown_FashionDesigner_Script{
 text gText_ToraTown_ImAFashion{
     format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online.")
 }
+
+script ToraTown_Dialogue_Trash
+{
+    lock
+    callnative(Script_Quest_Freetheinnocent_ShouldDiscoverCup)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Freetheinnocent_Dialogue_Trashcan)
+    msgbox(format("It’s a can. For trash."))
+    closemessage
+    release
+    end
+}
+

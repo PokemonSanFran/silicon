@@ -1,0 +1,322 @@
+// Quest_Freetheinnocent
+
+script Quest_Freetheinnocent_Dialogue_StartQuest
+{
+// PSF TODO FreetheinnocentcomradeA sohuld be facing a computer and always turn back to the computer when the player is done
+    faceplayer
+    msgbox(format("The new work that The Tide is doing is very exciting and all…But I can’t savor it if FindtheguiltyvictimB isn’t here…"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("They’re locked up for something they didn’t do!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("We were part of a club that hikes all over the region…"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("But the club HQ was broken into and a lot of expensive equipment was stolen."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("And somehow they found FindtheguiltyvictimB responsible and took him into custody."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("I don’t have any proof…But I know they’re innocent!! They’d never do anything like that!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("Please… I know there must be proof of an alibi that shows they weren’t at HQ at the time of the robbery, we just need someone to find it because the cops sure as hell won’t. "),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    call(Quest_Freetheinnocent_Dialogue_CopsEasy)
+    closemessage
+    startquest(QUEST_FREETHEINNOCENT)
+    cueobjectplayer(LOCALID_FREETHEINNOCENTCOMRADEA)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("Here. I’ve listed a bunch of places where the hikers who were out and about that day like to spend time."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    release
+    end
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_Active
+{
+    faceplayer
+    callnative(Script_Quest_Freetheinnocent_CashierSpoken)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        call(Quest_Freetheinnocent_Dialogue_AnyLeads)
+        buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY)
+        msgbox(format("The {STR_VAR_1} Gym! You should go there! Who knows what it could turn up?"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    release
+    end
+    }
+
+    callnative(Script_Quest_Freetheinnocent_CupFound)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        call(Quest_Freetheinnocent_Dialogue_AnyLeads)
+        msgbox(format("Hmm, perhaps going back to where this cup is from might help establish an alibi?"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    release
+    end
+    }
+
+    callnative(Script_Quest_Freetheinnocent_FactsLearned)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        call(Quest_Freetheinnocent_Dialogue_AnyLeads)
+        msgbox(format("It might be helpful to retrace the hikers’ journey that day from beginning to end. You might want to talk to them all to get a good sense of the journey."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    }
+    else
+    {
+        call(Quest_Freetheinnocent_Dialogue_CopsEasy)
+    }
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_CopsEasy
+{
+    msgbox(format("I know the cops are going to take the easy way out and just convict my friend… I hope we can find something to clear their name before they’re sentenced!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+}
+
+script Quest_Freetheinnocent_Dialogue_AnyLeads
+{
+    msgbox(format("You’re back! Have you uncovered any leads?"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+}
+
+script Quest_Freetheinnocent_Dialogue_Reward
+{
+    faceplayer
+    setflag(FLAG_TEMP_1)
+    call(Quest_Freetheinnocent_Dialogue_AnyLeads)
+    msgbox(format("Sharprise will have footage of the Gym battle that proves FindtheguiltyvictimB wasn’t at the scene of the crime! Think The Tide could help us get it?"),,SPEAKER_ALICIA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("A gym battle? That’s huge! The Tide might already have the footage as part of a data dump they grabbed from their latest big hack!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FacePlayer)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("If they do, this is surely enough evidence to free FindtheguiltyvictimB! This is wonderful!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    msgbox(format("Thank you so much! You’ve done an amazing thing today!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    closemessage
+    applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+    waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    completequest(QUEST_FREETHEINNOCENT)
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_Complete
+{
+    if (flag(FLAG_TEMP_1) == TRUE)
+    {
+        msgbox(format("Hmm, how would I get in touch with the police department?..."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+    }
+    else
+    {
+        faceplayer
+        msgbox(format("The police actually let FindtheguiltyvictimB free!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+        msgbox(format("They screwed this up badly but who's surprised at that?"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+        msgbox(format("You did a better job at investigating than they ever could."),,SPEAKER_FREETHEINNOCENTCOMRADEA)
+        applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
+        waitmovement(LOCALID_FREETHEINNOCENTCOMRADEA)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocenthikercNotComplete
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_1)
+    msgbox(format("Do you remember anything of interest from the hike on Thursday?"),,SPEAKER_ALICIA)
+    msgbox(format("Oh, clued in on that are you?"),,SPEAKER_FREETHEINNOCENTHIKERC)
+}
+
+script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerc
+{
+    lock
+    faceplayer
+    call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_1,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikercNotComplete)
+    msgbox(format("Hmm…All I remember is FindtheguiltyvictimB was talking a lot…"),,SPEAKER_FREETHEINNOCENTHIKERC)
+    msgbox(format("They had one of those fancy drinks that morning…A…Boba?"),,SPEAKER_FREETHEINNOCENTHIKERC)
+    msgbox(format("I wish they’d been drinking more water!"),,SPEAKER_FREETHEINNOCENTHIKERC)
+    msgbox(format("Still, I hope you can prove their innocence. I’d hate to believe they’d really do something like that."),,SPEAKER_FREETHEINNOCENTHIKERC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocenthikerdNotComplete
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_2)
+    msgbox(format("Do you remember anything of interest from the hike the day the clubhouse was robbed?"),,SPEAKER_ALICIA)
+    msgbox(format("Investigating, are we? Well I can’t say I remember anything unusual."),,SPEAKER_FREETHEINNOCENTHIKERD)
+}
+
+script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerd
+{
+    lock
+    faceplayer
+    call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_2,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikerdNotComplete)
+    buffermapname(STR_VAR_1,MAP_TORA_TOWN)
+    msgbox(format("We had to urgently stop in {STR_VAR_1} halfway through, but that’s normal. Sometimes people have trash they need to dispose of, and I really needed to use the restroom!"),,SPEAKER_FREETHEINNOCENTHIKERD)
+    msgbox(format("I hope FindtheguiltyvictimB is innocent…"),,SPEAKER_FREETHEINNOCENTHIKERD)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocenthikerfNotComplete
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_3)
+    msgbox(format("Do you remember anything suspicious on the hike the day the clubhouse was robbed?"),,SPEAKER_ALICIA)
+    msgbox(format("Nothing special, no."),,SPEAKER_FREETHEINNOCENTHIKERF)
+}
+
+script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerf
+{
+    lock
+    faceplayer
+    call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_3,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikerfNotComplete)
+    msgbox(format("I don’t remember anything special from that hike. We started at Torgeot Climb as usual."),,SPEAKER_FREETHEINNOCENTHIKERF)
+    msgbox(format("It’s a tough starting point, but it really gets the blood pumping!"),,SPEAKER_FREETHEINNOCENTHIKERF)
+    msgbox(format("The person they took into custody over the break-in…They didn’t really do it, right?"),,SPEAKER_FREETHEINNOCENTHIKERF)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocenthikergNotComplete
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_4)
+    msgbox(format("You were out hiking the day the HQ was robbed, right? Remember anything peculiar?"),,SPEAKER_ALICIA)
+    msgbox(format("Not really!"),,SPEAKER_FREETHEINNOCENTHIKERG)
+}
+
+script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerg
+{
+    lock
+    faceplayer
+    call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_4,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikergNotComplete)
+    buffermapname(STR_VAR_1,MAP_TORGEOT_CLIMB)
+    buffermapname(STR_VAR_2,MAP_CAPHE_CITY)
+    msgbox(format("I don’t remember anything peculiar. We ended at the top of {STR_VAR_1}!"),,SPEAKER_FREETHEINNOCENTHIKERG)
+    msgbox(format("I went to my favorite coffee spot in {STR_VAR_2}, too."),,SPEAKER_FREETHEINNOCENTHIKERG)
+    msgbox(format("If there’s anything fishy going on, I hope you get to the bottom of it."),,SPEAKER_FREETHEINNOCENTHIKERG)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FindtheguiltyplanthNotComplete
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_5)
+    msgbox(format("The day the clubhouse was stolen from - remember anything weird from it?"),,SPEAKER_ALICIA)
+    msgbox(format("N-nope!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+}
+
+script Quest_Freetheinnocent_Dialogue_Findtheguiltyplanth
+{
+    lock
+    faceplayer
+    call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_5,Quest_Freetheinnocent_Dialogue_FindtheguiltyplanthNotComplete)
+    msgbox(format("Don’t remember anything weird from that one hike!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("I just remember FindtheguiltyvictimB havin’ a boba and seeming really fired up!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("He might have been overcompensating, considering he robbed the club."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_Trashcan
+{
+    msgbox(format("Hey! There’s an empty boba cup with FindtheguiltyvictimB’s name on it!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    closemessage
+    checkitemspace(ITEM_QUEST_FREETHEINNOCENT_BOBA,1)
+    if (var(VAR_RESULT))
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_6)
+        giveitem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1)
+        buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA)
+        msgbox(format("Hmm…{STR_VAR_1} Boba…Maybe I should check in."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    }
+    else
+    {
+        msgbox(format("I don’t have space…One sec."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriComplete
+{
+    msgbox(format("I’m glad you found what you were looking for! And with clean hands no less!"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive
+{
+    callnative(Script_Quest_Freetheinnocent_CashierSpoken)
+    if (var(VAR_RESULT))
+    {
+        msgbox(format("I wish you luck with whatever you’re after, but for your own sake, stop digging around in the trash!"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+        closemessage
+        release
+        end
+    }
+
+    callnative(Script_Quest_Freetheinnocent_CupFound)
+    if (var(VAR_RESULT))
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_7)
+        removeitem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1)
+        bufferitemnameplural(STR_VAR_2,ITEM_SPIKED_CONCHA,2)
+        bufferitemnameplural(STR_VAR_3,ITEM_SPIKED_CONCHA,1)
+        msgbox(format("Welcome in! How can I help you, young one?"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+        closemessage
+        cueobject(LOCALID_PLAYER,DIR_FACING)
+        msgbox(format("Here. Can you look up the order number on this cup and tell me when this person was last here?"),,SPEAKER_ALICIA)
+        msgbox(format("Did you…Fetch this from the trash? How…Peculiar…"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+        msgbox(format("Well if you must know, the order time is on the cup, and it says 12pm."),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+        msgbox(format("{STR_VAR_2}…Yes, I remember this guy! They had a {STR_VAR_3}…and got their crumbs everywhere!"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+        buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY_GYM)
+        msgbox(format("{STR_VAR_2}…I think that’s a {STR_VAR_1} Gym thing…"),,SPEAKER_ALICIA)
+        goto(Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive)
+    }
+    else
+    {
+        return
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_HostActive
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_FREETHEINNOCENT)
+    msgbox(format("Say, have you ever heard of a Trainer named FindtheguiltyvictimB?"),,SPEAKER_ALICIA)
+    msgbox(format("I have! But only because I seem to recall them beating Belen recently…"),,SPEAKER_MERMEREZAGYMHOST)
+    msgbox(format("Is there any way to prove that they were here?"),,SPEAKER_ALICIA)
+    msgbox(format("Sharprise uses all the footage from gym battles for online content. It should have times and dates attached to it."),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    playse(SE_PIN)
+    applymovement(LOCALID_PLAYER,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_PLAYER)
+    waitse
+    msgbox(format("Sharprise surely won’t just give it up, but maybe The Tide could help me get it?..."),,SPEAKER_ALICIA,TAIL_WHISPER,EMOTE_SHOCK)
+    msgbox(format("Thank you! You’ve been a great help!"),,SPEAKER_ALICIA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Freetheinnocent_Dialogue_HostReward
+{
+    msgbox(format("Hey there! Were you able to help your friend in the end? Your situation sounded pretty serious if you don’t mind my saying."),,SPEAKER_MERMEREZAGYMHOST)
+    closemessage
+    release
+    end
+}

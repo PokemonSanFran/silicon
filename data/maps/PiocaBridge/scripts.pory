@@ -21,3 +21,20 @@ script PiocaBridge_Script_Interact_BodegaburnoutDeliveryA
     release
     end
 }
+
+script PiocaBridge_Script_Findtheguiltyplanth
+{
+    trainerbattle_single(TRAINER_QUEST_FINDTHEGUILTYPLANTH,format("I joined a hiking club just recently! Have you ever been hiking?"),format("Oh…I think my heart might explode out of my chest!"),PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth)
+// PSF TODO: Findtheguiltyplanth: Cardiovascular activities are important for staying healthy!
+    goto(PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth)
+}
+
+script PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Findtheguiltyplanth)
+    msgbox(format("My heartbeat has been elevated ever since I joined the hiking club!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("That’s a good thing, right?"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    closemessage
+    release
+    end
+}

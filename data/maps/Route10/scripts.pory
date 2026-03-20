@@ -25,3 +25,30 @@ script Route10_Script_Interact_Quest_GetthebandbacktogetherbikerG
     end
 // PSF TODO GetthebandbacktogetherbikerG: All this traveling paid off!
 }
+
+script Route10_Script_Freetheinnocenthikerf
+{
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERF,format("Stay curious! A diverse set of skills and interests makes you a better person! Having a diverse team makes you a better battler, too! Here, let me show you!"),format("Perhaps I’m focusing too much on battling…Back to hiking! Then, pottery!"),Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+// PSF TODO: Freetheinnocenthikerf: Hmm. Guess your skills aren’t quite diverse enough.
+    handlerematch(Route10_Script_RematchFreetheinnocenthikerf)
+    goto(Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+}
+
+script Route10_Script_RematchFreetheinnocenthikerf
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERF,format("I’ve been trying to flesh out the roles on my team. Wanna see?"),format("I don’t have a Pokemon with a role that can beat you!"))
+// PSF TODO: Freetheinnocenthikerf: Booyah! My training’s payin’ off!
+    goto(Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+}
+
+script Route10_Dialogue_PostBattleFreetheinnocenthikerf
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerf)
+    msgbox(format("There’s a lot of tribalists out there. People who just belong to one “group”. But The Tide seems to cut through that. They’ve got all people of all walks of life on their side."),,SPEAKER_FREETHEINNOCENTHIKERF)
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+    msgbox(format("I’m part of a hiking club with some Tide members, and even the students of {STR_VAR_1} seem to be involved with ‘em!"),,SPEAKER_FREETHEINNOCENTHIKERF)
+    msgbox(format("The Tide is the diversity we should all strive for at its finest, in my opinion."),,SPEAKER_FREETHEINNOCENTHIKERF)
+    closemessage
+    release
+    end
+}

@@ -9,3 +9,13 @@ mapscripts CresaltaVista_Gemhouse_MapScripts{
         ]
 }
 
+script CresaltaVista_Gemhouse_Dialogue_Freetheinnocentbobacashieri
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriComplete)
+    goto_if_quest_reward(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive)
+    goto_if_quest_active(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive)
+    msgbox(format("Welcome in! How can I help you, young one?"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
+    closemessage
+}

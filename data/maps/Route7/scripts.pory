@@ -20,3 +20,31 @@ script Route7_Script_Interact_BodegaburnoutRescueL
     trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEK,format("I have a bunch of deliveries to do, but I’m so out of it. Maybe a battle will wake me up!"),format("Woo! I’m raring to go now!"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueL)
     // PSF TODO BodegaburnoutRescueL: I’m still sleepy…
 }
+
+script Route7_Script_Freetheinnocenthikerg
+{
+// when the first macro is in this script is buffermapname, things work BUT the rematch action item doesn't appear over people's heads because that function needs the trainer ID to be the 0th argument in the script
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERG,format("Been to Caphe City? They have the best coffee. I get one from there every day!"),format("Just so you know, I lost because I haven’t had my coffee yet."),Route7_Dialogue_PostBattleFreetheinnocenthikerg)
+// PSF TODO: Freetheinnocenthikerg: Woo! 0 caffeine in my system, but one win!
+    handlerematch(Route7_Script_RematchFreetheinnocenthikerg)
+    goto(Route7_Dialogue_PostBattleFreetheinnocenthikerg)
+}
+
+script Route7_Script_RematchFreetheinnocenthikerg
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERG,format("I have caffeine in my system! I can definitely win now!"),format("It may be possible to have too much caffeine!"))
+// PSF TODO: Freetheinnocenthikerg: YEEESSS. I FEEL THE ALMIGHTY POWER OF ESPRESSO FLOWING THROUGH ME.
+    goto(Route7_Dialogue_PostBattleFreetheinnocenthikerg)
+}
+
+script Route7_Dialogue_PostBattleFreetheinnocenthikerg
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerg)
+    buffermapname(STR_VAR_1,MAP_CAPHE_CITY)
+    msgbox(format("I love {STR_VAR_1}, but sometimes walking through there’s a little sad…"),,SPEAKER_FREETHEINNOCENTHIKERG)
+    msgbox(format("It has the largest population of unhoused people in all of Resido, don’t you know."),,SPEAKER_FREETHEINNOCENTHIKERG)
+    msgbox(format("At a certain point, you have to wonder if it’s intentional."),,SPEAKER_FREETHEINNOCENTHIKERG)
+    closemessage
+    release
+    end
+}
