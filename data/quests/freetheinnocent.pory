@@ -33,7 +33,7 @@ script Quest_Freetheinnocent_Dialogue_Active
     if (var(VAR_RESULT) == TRUE)
     {
         call(Quest_Freetheinnocent_Dialogue_AnyLeads)
-        buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY)
+        buffermapname(STR_VAR_1,MAP_QUEST_FREETHEINNOCENT_GYM)
         msgbox(format("The {STR_VAR_1} Gym! You should go there! Who knows what it could turn up?"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
     closemessage
     applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_FaceOriginalDirection)
@@ -157,7 +157,7 @@ script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerd
     lock
     faceplayer
     call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_2,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikerdNotComplete)
-    buffermapname(STR_VAR_1,MAP_TORA_TOWN)
+    buffermapname(STR_VAR_1,MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_2)
     msgbox(format("We had to urgently stop in {STR_VAR_1} halfway through, but that’s normal. Sometimes people have trash they need to dispose of, and I really needed to use the restroom!"),,SPEAKER_FREETHEINNOCENTHIKERD)
     msgbox(format("I hope FindtheguiltyvictimB is innocent…"),,SPEAKER_FREETHEINNOCENTHIKERD)
     closemessage
@@ -197,7 +197,7 @@ script Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerg
     lock
     faceplayer
     call_if_subquest_not_complete(QUEST_FREETHEINNOCENT,SUB_QUEST_4,Quest_Freetheinnocent_Dialogue_FreetheinnocenthikergNotComplete)
-    buffermapname(STR_VAR_1,MAP_TORGEOT_CLIMB)
+    buffermapname(STR_VAR_1,MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_3)
     buffermapname(STR_VAR_2,MAP_CAPHE_CITY)
     msgbox(format("I don’t remember anything peculiar. We ended at the top of {STR_VAR_1}!"),,SPEAKER_FREETHEINNOCENTHIKERG)
     msgbox(format("I went to my favorite coffee spot in {STR_VAR_2}, too."),,SPEAKER_FREETHEINNOCENTHIKERG)
@@ -236,7 +236,7 @@ script Quest_Freetheinnocent_Dialogue_Trashcan
     {
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_FREETHEINNOCENT,SUB_QUEST_6)
         giveitem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1)
-        buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA)
+        buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA_GEMHOUSE)
         msgbox(format("Hmm…{STR_VAR_1} Boba…Maybe I should check in."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     }
     else
@@ -281,7 +281,7 @@ script Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive
         msgbox(format("Did you…Fetch this from the trash? How…Peculiar…"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
         msgbox(format("Well if you must know, the order time is on the cup, and it says 12pm."),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
         msgbox(format("{STR_VAR_2}…Yes, I remember this guy! They had a {STR_VAR_3}…and got their crumbs everywhere!"),,SPEAKER_FREETHEINNOCENTBOBACASHIERI)
-        buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY_GYM)
+        buffermapname(STR_VAR_1,MAP_QUEST_FREETHEINNOCENT_GYM)
         msgbox(format("{STR_VAR_2}…I think that’s a {STR_VAR_1} Gym thing…"),,SPEAKER_ALICIA)
         goto(Quest_Freetheinnocent_Dialogue_FreetheinnocentbobacashieriActive)
     }

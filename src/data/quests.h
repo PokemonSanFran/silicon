@@ -3854,6 +3854,181 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sFreeTheInnocent_Sub,
         .numSubquests = QUEST_FREETHEINNOCENT_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_FREETHEINNOCENT_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 19,
+                .y = 10,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 19,
+                .y = 10,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERC_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerc Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERC),
+                .warpId = NO_WARP_ID,
+                .x = 8,
+                .y = 4,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERC_AFTER] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerc After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERC),
+                .warpId = NO_WARP_ID,
+                .x = 8,
+                .y = 4,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERD_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerd Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERD),
+                .warpId = NO_WARP_ID,
+                .x = 17,
+                .y = 9,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERD_AFTER] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerd After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERD),
+                .warpId = NO_WARP_ID,
+                .x = 17,
+                .y = 9,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERF_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerf Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERF),
+                .warpId = NO_WARP_ID,
+                .x = 1,
+                .y = 10,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERF_AFTER] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerf After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERF),
+                .warpId = NO_WARP_ID,
+                .x = 1,
+                .y = 10,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERG_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerg Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERG),
+                .warpId = NO_WARP_ID,
+                .x = 27,
+                .y = 4,
+            },
+            [STATE_QUEST_FREETHEINNOCENTHIKERG_AFTER] =
+            {
+                .name = COMPOUND_STRING("Freetheinnocenthikerg After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_HIKERG),
+                .warpId = NO_WARP_ID,
+                .x = 27,
+                .y = 4,
+            },
+            [STATE_QUEST_FREETHEINNOCENTPLANTH_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Findtheguilityplanth Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_PLANTH),
+                .warpId = NO_WARP_ID,
+                .x = 27,
+                .y = 42,
+            },
+            [STATE_QUEST_FREETHEINNOCENTPLANTH_AFTER] =
+            {
+                .name = COMPOUND_STRING("Findtheguilityplanth After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_PLANTH),
+                .warpId = NO_WARP_ID,
+                .x = 27,
+                .y = 42,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_TRASH_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Trash Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_TRASH),
+                .warpId = NO_WARP_ID,
+                .x = 6,
+                .y = 8,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_TRASH_AFTER] =
+            {
+                .name = COMPOUND_STRING("Trash After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_TRASH),
+                .warpId = NO_WARP_ID,
+                .x = 6,
+                .y = 8,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Shopkeeper Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_BOBA),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_AFTER] =
+            {
+                .name = COMPOUND_STRING("Shopkeeper After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_BOBA),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_HOST_BEFORE] =
+            {
+                .name = COMPOUND_STRING("Host Before"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_GYM),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_HOST_AFTER] =
+            {
+                .name = COMPOUND_STRING("Host After"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_GYM),
+                .warpId = 0,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 19,
+                .y = 10,
+            },
+            [STATE_QUEST_FREETHEINNOCENT_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Freetheinnocent,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 19,
+                .y = 10,
+            },
+        },
     },
     [QUEST_FINDTHEGUILTY] =
     {

@@ -3332,3 +3332,69 @@ void Script_Quest_Freetheinnocent_ShouldHostSpeak(void)
     gSpecialVar_Result = Quest_Freetheinnocent_ShouldHostSpeak();
 }
 
+void DebugQuest_Freetheinnocent(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_FREETHEINNOCENT_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_FREETHEINNOCENT);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERC_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERC_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERC);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERD_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERD_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERD);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERF_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERF_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERF);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERG_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERG_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERG);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTPLANTH_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTPLANTH_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FINDTHEGUILTYPLANTH);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_TRASH_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_TRASH_AFTER:
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_6);
+            AddBagItem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_AFTER:
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_7);
+            RemoveBagItem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_HOST_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_HOST_AFTER:
+        case STATE_QUEST_FREETHEINNOCENT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_FREETHEINNOCENT);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_FREETHEINNOCENT);
+            break;
+    }
+}

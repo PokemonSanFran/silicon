@@ -363,9 +363,9 @@ const u8 *GetQuestDesc_Freetheinnocent(void)
     }
     else if (Quest_Freetheinnocent_FactsLearned())
     {
-        GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_1),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_1))->regionMapSectionId,0);
-        GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_2),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_2))->regionMapSectionId,0);
-        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_STOP_3),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_STOP_3))->regionMapSectionId,0);
+        GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_1),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_1))->regionMapSectionId,0);
+        GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_2),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_2))->regionMapSectionId,0);
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_3),MAP_NUM(MAP_QUEST_FREETHEINNOCENT_HIKE_STOP_3))->regionMapSectionId,0);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("FindtheguiltyvictimB started with a boba in {STR_VAR_1}, stopped in {STR_VAR_2}, and finished at {STR_VAR_3}."));
     }
     else
