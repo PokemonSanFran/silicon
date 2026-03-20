@@ -3297,3 +3297,38 @@ void Script_Quest_Freetheinnocent_CashierSpoken(void)
 {
     gSpecialVar_Result = Quest_Freetheinnocent_CashierSpoken();
 }
+
+bool32 Quest_Freetheinnocent_ShouldDiscoverCup(void)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT, FLAG_GET_ACTIVE))
+        return FALSE;
+
+    if (!Quest_Freetheinnocent_FactsLearned())
+        return FALSE;
+
+    return (!Quest_Freetheinnocent_CupFound());
+
+    return TRUE;
+}
+
+void Script_Quest_Freetheinnocent_ShouldDiscoverCup(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_ShouldDiscoverCup();
+}
+
+bool32 Quest_Freetheinnocent_ShouldHostSpeak(void)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT, FLAG_GET_ACTIVE))
+        return FALSE;
+
+    if (!Quest_Freetheinnocent_CashierSpoken())
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_Freetheinnocent_ShouldHostSpeak(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_ShouldHostSpeak();
+}
+
