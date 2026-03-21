@@ -27,6 +27,11 @@ static const struct MoveReminderPageInfo sMoveReminder_PagesInfo[NUM_MREMINDER_P
     },
 };
 
+static const SortListFunc sMoveReminder_SortListFuncs[NUM_MREMINDER_SORTS] =
+{
+    [MREMINDER_SORT_DEFAULT] = MReminderMoves_ProcessDefaultList
+};
+
 static const struct BgTemplate sMoveReminderBgTemplates[NUM_MREMINDER_BACKGROUNDS + 1] =
 {
     [MREMINDER_BG_TEXT] =
@@ -72,4 +77,5 @@ static const u8 sMoveReminderTextColors[NUM_MREMINDER_TXTCLRS][3] =
     [MREMINDER_TXTCLR_MALE]      = { 0, 2, 15 },
     [MREMINDER_TXTCLR_FEMALE]    = { 0, 2, 12 },
     [MREMINDER_TXTCLR_HELP_BAR]  = { 0, 1, 0 },
+    [MREMINDER_TXTCLR_TEXT_BOX]  = { 1, 2, 3 },
 };

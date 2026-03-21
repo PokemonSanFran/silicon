@@ -68,10 +68,14 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
 static struct MoveReminderMon *MReminderMon_Get(void);
 
 static void MReminderMoves_PopulateList(void);
+static SortListFunc MReminderMoves_GetSortListFunc(void);
+static void MReminderMoves_ProcessDefaultList(u32 *);
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
 static void MReminderMoves_ProcessEggLearnset(const u16 *, u32 *);
 static void MReminderMoves_ProcessMachineLearnset(const u16 *, u32 *);
+static bool32 MReminderMoves_CanMonLearnMove(const u16 *, u32, u32);
 static bool32 MReminderMoves_IsMoveAlreadyAdded(u32, u32);
+static u32 MReminderMoves_GetIdxFromMove(u32, u32);
 static void MReminderMoves_AddMoveToIdx(u32, enum MoveReminderMethod, u32 *);
 static void MReminderMoves_UpdateMoveInIdx(u32, enum MoveReminderMethod, u32);
 static void MReminderMoves_SetMoveToIdx(u32, u32);
@@ -80,6 +84,8 @@ static void MReminderMoves_SetMethodToIdx(u32, enum MoveReminderMethod);
 static u32 MReminderMoves_GetMethodFromIdx(u32);
 static void MReminderMoves_SetNumberOfMoves(u32);
 static u32 MReminderMoves_GetNumberOfMoves(void);
+static void MReminderMoves_SetMoveToList(u32, u32);
+static u32 MReminderMoves_GetMoveFromList(u32);
 
 static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
@@ -435,28 +441,50 @@ static struct MoveReminderMon *MReminderMon_Get(void)
     return &sMoveReminderResourcesPtr->mon;
 }
 
-// this will be filtered in a separate list
 static void MReminderMoves_PopulateList(void)
 {
     u32 numMoves = 0;
     u32 species = MReminderMon_Get()->species;
-    u32 eggSpecies = GetEggSpecies(species);
 
     MReminderMoves_ProcessLevelUpLearnset(GetSpeciesLevelUpLearnset(species), &numMoves);
-    MReminderMoves_ProcessEggLearnset(GetSpeciesEggMoves(eggSpecies), &numMoves);
+    MReminderMoves_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
     MReminderMoves_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
 
+    SortListFunc func = MReminderMoves_GetSortListFunc();
+
+    func(&numMoves);
     MReminderMoves_SetNumberOfMoves(numMoves);
+
+    for (u32 i = 0; i < numMoves; i++)
+        DebugPrintf("list[%d]: %S", i, GetMoveName(MReminderMoves_GetMoveFromList(i)));
+}
+
+static SortListFunc MReminderMoves_GetSortListFunc(void)
+{
+    return sMoveReminder_SortListFuncs[MREMINDER_SORT_DEFAULT];
+}
+
+static void MReminderMoves_ProcessDefaultList(u32 *numMoves)
+{
+    for (u32 i = 0; i < *numMoves; i++)
+    {
+        u32 move = MReminderMoves_GetMoveFromIdx(i);
+
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+            break;
+
+        MReminderMoves_SetMoveToList(i, move);
+    }
 }
 
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, u32 *numMoves)
 {
-    for (u32 idx = 0; idx < MAX_LEVEL_UP_MOVES; idx++)
+    for (u32 idx = MAX_LEVEL_UP_MOVES; idx > 0; idx--)
     {
         if (learnset[idx].move == MOVE_NONE || learnset[idx].move == MOVE_UNAVAILABLE)
-            break;
+            continue;
 
-        if (!IsMoveInSilicon(learnset[idx].move))
+        if (!IsMoveInSilicon(learnset[idx].move) || MReminderMon_Get()->level < learnset[idx].level)
             continue;
 
         if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx].move, *numMoves))
@@ -466,18 +494,22 @@ static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *lear
 
 static void MReminderMoves_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
 {
-    for (u32 idx = 0; idx < EGG_MOVES_ARRAY_COUNT; idx++)
+    for (u32 idx = 0; idx < MOVES_COUNT; idx++)
     {
-        if (learnset[idx] == MOVE_NONE || learnset[idx] == MOVE_UNAVAILABLE)
+        if (!QuestMenu_GetSetQuestState(0, FLAG_GET_COMPLETED) // TODO
+         || learnset[idx] == MOVE_NONE
+         || learnset[idx] == MOVE_UNAVAILABLE)
+        {
             break;
+        }
 
-        if (!IsMoveInSilicon(learnset[idx]))
+        if (!IsMoveInSilicon(idx) || !MReminderMoves_CanMonLearnMove(learnset, idx, EGG_MOVES_ARRAY_COUNT))
             continue;
 
         if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx], *numMoves))
             MReminderMoves_AddMoveToIdx(learnset[idx], MREMINDER_METHOD_EGG, numMoves);
         else
-            MReminderMoves_UpdateMoveInIdx(idx, MREMINDER_METHOD_EGG, *numMoves);
+            MReminderMoves_UpdateMoveInIdx(MReminderMoves_GetIdxFromMove(learnset[idx], *numMoves), MREMINDER_METHOD_EGG, *numMoves);
     }
 }
 
@@ -485,28 +517,49 @@ static void MReminderMoves_ProcessMachineLearnset(const u16 *learnset, u32 *numM
 {
     for (u32 idx = 0; idx < NUM_TECHNICAL_MACHINES; idx++)
     {
-        if (learnset[idx] == MOVE_NONE || learnset[idx] == MOVE_UNAVAILABLE)
-            break;
+        u32 move = GetTMHMMoveId(idx);
 
-        if (!IsMoveInSilicon(learnset[idx]))
+        if (!MReminderMoves_CanMonLearnMove(learnset, move, NUM_TECHNICAL_MACHINES)
+         || !CheckBagHasItem(GetTMHMItemIdFromMoveId(move), 1))
+        {
             continue;
+        }
 
-        if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx], *numMoves))
-            MReminderMoves_AddMoveToIdx(learnset[idx], MREMINDER_METHOD_MACHINE, numMoves);
+        if (!MReminderMoves_IsMoveAlreadyAdded(move, *numMoves))
+            MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_MACHINE, numMoves);
         else
-            MReminderMoves_UpdateMoveInIdx(idx, MREMINDER_METHOD_MACHINE, *numMoves);
+            MReminderMoves_UpdateMoveInIdx(MReminderMoves_GetIdxFromMove(move, *numMoves), MREMINDER_METHOD_MACHINE, *numMoves);
     }
 }
 
-static bool32 MReminderMoves_IsMoveAlreadyAdded(u32 move, u32 numMoves)
+static bool32 MReminderMoves_CanMonLearnMove(const u16 *learnset, u32 machineMove, u32 numMoves)
 {
-    for (u32 idx = 0; idx < numMoves; idx++)
+    for (u32 i = 0; i < numMoves; i++)
     {
-        if (MReminderMoves_GetMoveFromIdx(idx) == move)
+        if (learnset[i] == MOVE_NONE || learnset[i] == MOVE_UNAVAILABLE)
+            break;
+
+        if (learnset[i] == machineMove)
             return TRUE;
     }
 
     return FALSE;
+}
+
+static bool32 MReminderMoves_IsMoveAlreadyAdded(u32 move, u32 numMoves)
+{
+    return MReminderMoves_GetIdxFromMove(move, numMoves) != MOVE_UNAVAILABLE;
+}
+
+static u32 MReminderMoves_GetIdxFromMove(u32 move, u32 numMoves)
+{
+    for (u32 idx = 0; idx < numMoves; idx++)
+    {
+        if (MReminderMoves_GetMoveFromIdx(idx) == move)
+            return idx;
+    }
+
+    return MOVE_UNAVAILABLE;
 }
 
 static void MReminderMoves_AddMoveToIdx(u32 move, enum MoveReminderMethod method, u32 *numMoves)
@@ -529,7 +582,7 @@ static void MReminderMoves_UpdateMoveInIdx(u32 move, enum MoveReminderMethod new
             if (newMethod == MREMINDER_METHOD_EGG)
                 MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_LEVEL_EGG);
             else if (newMethod == MREMINDER_METHOD_MACHINE)
-                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_LEVEL_MACHINE);
+                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_MACHINE_LEVEL);
             break;
         case MREMINDER_METHOD_EGG:
             if (newMethod == MREMINDER_METHOD_MACHINE)
@@ -573,6 +626,16 @@ static void MReminderMoves_SetNumberOfMoves(u32 numMoves)
 static u32 MReminderMoves_GetNumberOfMoves(void)
 {
     return sMoveReminderResourcesPtr->numMoves;
+}
+
+static void MReminderMoves_SetMoveToList(u32 idx, u32 move)
+{
+    sMoveReminderResourcesPtr->movesList[idx] = move;
+}
+
+static u32 MReminderMoves_GetMoveFromList(u32 idx)
+{
+    return sMoveReminderResourcesPtr->movesList[idx];
 }
 
 static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)

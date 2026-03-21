@@ -32,6 +32,26 @@ enum MoveReminderPages
 #define PAGE_MAIN_STATS_2_Y             (TILE_TO_PIXELS(4) - 2)     // ATK, SPDEF
 #define PAGE_MAIN_STATS_3_Y             (TILE_TO_PIXELS(6) - 2)     // DEF, SPEED
 
+#define PAGE_MAIN_MOVES_LIST_TITLE_X    ()
+#define PAGE_MAIN_MOVES_LIST_FILTER_X   ()
+#define PAGE_MAIN_MOVES_LIST_TITLE_Y    ()
+#define PAGE_MAIN_MOVES_LIST_FILTER_Y   ()
+
+#define PAGE_MAIN_MOVE_BAR_X            ()
+#define PAGE_MAIN_MOVE_BAR_SPACER_X     ()
+#define PAGE_MAIN_MOVE_BAR_NAME_X       ()
+#define PAGE_MAIN_MOVE_BAR_TYPE_X       ()
+#define PAGE_MAIN_MOVE_BAR_Y            ()
+#define PAGE_MAIN_MOVE_BAR_NAME_Y       ()
+#define PAGE_MAIN_MOVE_BAR_TYPE_Y       ()
+
+#define PAGE_MAIN_MOVE_DETAILS_1_X      () // PP,  PWR
+#define PAGE_MAIN_MOVE_DETAILS_2_X      () // CAT, ACC
+#define PAGE_MAIN_MOVE_DETAILS_DESC_X   ()
+#define PAGE_MAIN_MOVE_DETAILS_1_Y      () // PP,  CAT
+#define PAGE_MAIN_MOVE_DETAILS_2_Y      () // PWR, ACC
+#define PAGE_MAIN_MOVE_DETAILS_DESC_Y   ()
+
 enum MoveReminderSetupSteps
 {
     MREMINDER_SETUP_RESET,
@@ -73,6 +93,7 @@ enum MoveReminderTextColors
     MREMINDER_TXTCLR_DEFAULT,
     MREMINDER_TXTCLR_MALE,
     MREMINDER_TXTCLR_FEMALE,
+    MREMINDER_TXTCLR_TEXT_BOX,
     MREMINDER_TXTCLR_HELP_BAR,
 
     NUM_MREMINDER_TXTCLRS
@@ -84,10 +105,26 @@ enum MoveReminderMethod
     MREMINDER_METHOD_EGG,
     MREMINDER_METHOD_MACHINE,
     MREMINDER_METHOD_LEVEL_EGG,
-    MREMINDER_METHOD_LEVEL_MACHINE,
+    MREMINDER_METHOD_MACHINE_LEVEL,
     MREMINDER_METHOD_EGG_MACHINE,
-    MREMINDER_METHOD_ALL,
+
+    MREMINDER_METHOD_ALL
 };
+
+enum MoveReminderSort
+{
+    MREMINDER_SORT_DEFAULT,
+    MREMINDER_SORT_MOVE_ID,
+    MREMINDER_SORT_ALPHABETICAL,
+    MREMINDER_SORT_PP,
+    MREMINDER_SORT_ACCURACY,
+    MREMINDER_SORT_BASE_POWER,
+
+    NUM_MREMINDER_SORTS
+};
+
+typedef void (*UpdateFrontEndFunc)(void);
+typedef void (*SortListFunc)(u32 *);
 
 struct MoveReminderLearnset
 {
@@ -110,7 +147,8 @@ struct MoveReminderResources
     enum MoveReminderModes mode;
     enum MoveReminderPages page;
     MainCallback savedCallback;
-    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL];
+    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL];    // ALL moves a pokemon can learn
+    u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {
@@ -121,8 +159,6 @@ struct MoveReminderResources
     u8 useBoxMon:1;
     u8 moveSlot:7;
 };
-
-typedef void (*UpdateFrontEndFunc)(void);
 
 struct MoveReminderPageInfo
 {
