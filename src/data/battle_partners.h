@@ -497,3 +497,97 @@
             },
         },
     },
+#line 178
+    [DIFFICULTY_NORMAL][PARTNER_OLIVER] =
+    {
+#line 179
+        .trainerName = _("Oliver"),
+#line 180
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+#line 181
+        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .encounterMusic_gender =
+#line 183
+            TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 184
+        .trainerBackPic = TRAINER_BACK_PIC_WALLY,
+        .partySize = 3,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 186
+            .species = SPECIES_TOGETIC,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 186
+            .heldItem = ITEM_WEAKNESS_POLICY,
+#line 189
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 4, 252, 252),
+#line 191
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 187
+            .ability = ABILITY_HUSTLE,
+#line 188
+            .lvl = 40,
+#line 190
+            .nature = NATURE_BRAVE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 191
+                MOVE_LAST_RESORT,
+                MOVE_PRESENT,
+                MOVE_LIFE_DEW,
+                MOVE_BATON_PASS,
+            },
+            },
+            {
+#line 196
+            .species = SPECIES_MAUSHOLD_FOUR,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 196
+            .heldItem = ITEM_FIGY_BERRY,
+#line 199
+            .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
+#line 201
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 197
+            .ability = ABILITY_FRIEND_GUARD,
+#line 198
+            .lvl = 40,
+#line 200
+            .nature = NATURE_TIMID,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 202
+                MOVE_BULLET_SEED,
+                MOVE_SUPER_FANG,
+                MOVE_SWITCHEROO,
+                MOVE_FOLLOW_ME,
+            },
+            },
+            {
+#line 207
+            .species = SPECIES_MEDICHAM,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 207
+            .heldItem = ITEM_BLUNDER_POLICY,
+#line 210
+            .ev = TRAINER_PARTY_EVS(0, 160, 80, 160, 0, 108),
+#line 212
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 208
+            .ability = ABILITY_TELEPATHY,
+#line 209
+            .lvl = 40,
+#line 211
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 212
+                MOVE_HIGH_JUMP_KICK,
+                MOVE_FAKE_OUT,
+                MOVE_REFLECT,
+                MOVE_LIGHT_SCREEN,
+            },
+            },
+        },
+    },
