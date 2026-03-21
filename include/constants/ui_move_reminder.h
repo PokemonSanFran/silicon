@@ -36,6 +36,7 @@ enum MoveReminderSetupSteps
 {
     MREMINDER_SETUP_RESET,
     MREMINDER_SETUP_MONDATA,
+    MREMINDER_SETUP_LEARNSET,
     MREMINDER_SETUP_BACKGROUNDS,
     MREMINDER_SETUP_GRAPHICS,
     MREMINDER_SETUP_WINDOWS,
@@ -77,6 +78,23 @@ enum MoveReminderTextColors
     NUM_MREMINDER_TXTCLRS
 };
 
+enum MoveReminderMethod
+{
+    MREMINDER_METHOD_LEVEL_UP,
+    MREMINDER_METHOD_EGG,
+    MREMINDER_METHOD_MACHINE,
+    MREMINDER_METHOD_LEVEL_EGG,
+    MREMINDER_METHOD_LEVEL_MACHINE,
+    MREMINDER_METHOD_EGG_MACHINE,
+    MREMINDER_METHOD_ALL,
+};
+
+struct MoveReminderLearnset
+{
+    u16 move:13;
+    enum MoveReminderMethod method:3;
+};
+
 struct MoveReminderMon
 {
     u16 species;
@@ -92,6 +110,8 @@ struct MoveReminderResources
     enum MoveReminderModes mode;
     enum MoveReminderPages page;
     MainCallback savedCallback;
+    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL];
+    u16 numMoves;
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {
         struct Pokemon *mon;

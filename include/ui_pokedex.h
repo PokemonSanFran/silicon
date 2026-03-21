@@ -269,5 +269,6 @@ bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
 bool8 SpeciesIsResidoDex(u32 speciesId);
 bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode);
+bool32 IsMoveInSilicon(u32 moveId);
 
 #endif // GUARD_UI_POKEDEX_H
