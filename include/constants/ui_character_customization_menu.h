@@ -27,7 +27,7 @@ enum OptionColorRGB
     NUM_COLOR_OPTIONS
 };
 
-enum
+enum BodyTypes
 {
     BODY_TYPE_M1,
     BODY_TYPE_M2,

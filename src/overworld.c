@@ -2763,8 +2763,10 @@ static void InitObjectEventsLocal(void)
     ResetObjectEvents();
     GetCameraFocusCoords(&x, &y);
     player = GetInitialPlayerAvatarState();
-    InitPlayerAvatar(x, y, player->direction, gSaveBlock2Ptr->playerGender);
-    SetPlayerAvatarTransitionFlags(player->transitionFlags);
+    // Start playerCustom
+    //InitPlayerAvatar(x, y, player->direction, gSaveBlock2Ptr->playerGender);
+    InitPlayerAvatar(x,y,player->direction,gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]);
+    // End playerCustom
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);
     FollowerNPC_HandleSprite();

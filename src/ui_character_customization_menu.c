@@ -413,7 +413,8 @@ void CB2_CustomizationFromStartMenu(void)
     Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
 
-void ResetCustomizationValuesData(void){
+void ResetCustomizationValuesData(void)
+{
     // PSF TODO Pick a single body type and then have one of our artists pick a canon set of colors for each artist
 
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]         = Random() % (NUM_BODY_TYPES); // Body type has no custom option
