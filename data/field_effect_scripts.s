@@ -79,10 +79,17 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_TracksSlither             @ FLDEFF_TRACKS_SLITHER
 	.4byte gFieldEffectScript_TracksSpot                @ FLDEFF_TRACKS_SPOT
 	.4byte gFieldEffectScript_TracksBug                 @ FLDEFF_TRACKS_BUG
+    .4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
+	.4byte gFieldEffectScript_Defog                     @ FLDEFF_DEFOG
+	.4byte gFieldEffectScript_UseRockClimb              @ FLDEFF_USE_ROCK_CLIMB
+	.4byte gFieldEffectScript_RockClimbDust             @ FLDEFF_ROCK_CLIMB_DUST
+	.4byte gFieldEffectScript_ORASDowse                 @ FLDEFF_ORAS_DOWSE
+	.4byte gFldEffScript_SmileyFaceIcon    		        @ FLDEFF_SMILEY_FACE_ICON
+	.4byte gFieldEffectScript_HallOfFameRecordFrlg      @ FLDEFF_HALL_OF_FAME_RECORD_FRLG
+	.4byte gFldEffScript_PhotoFlash      		        @ FLDEFF_PHOTO_FLASH
 @ Start qol_field_moves
 @ THESE NEED TO BE ALIGNED WITH THE VALUES IN include/constants/field_effects.h
 @ If FLDEFF_USE_SURF_TOOL is 74, it needs to be 73 in this list too
-
     .4byte gFieldEffectScript_UseSurfTool               @ FLDEFF_USE_SURF_TOOL
     .4byte gFieldEffectScript_UseWaterfallTool          @ FLDEFF_USE_WATERFALL_TOOL 
     .4byte gFieldEffectScript_UseDiveTool               @ FLDEFF_USE_DIVE_TOOL
@@ -91,16 +98,8 @@ gFieldEffectScriptPointers::
 @ Start rematch_action
     .4byte gFieldEffectScript_WantRematch               @ FLDEFF_WANT_REMATCH
 @ End rematch_action
-    .4byte gFieldEffectScript_CaveDust                  @ FLDEFF_CAVE_DUST
 @ Start autoSave
     .4byte gFieldEffectScript_Saving                    @ FLDEFF_SAVING
-	.4byte gFieldEffectScript_Defog                     @ FLDEFF_DEFOG
-	.4byte gFieldEffectScript_UseRockClimb              @ FLDEFF_USE_ROCK_CLIMB
-	.4byte gFieldEffectScript_RockClimbDust             @ FLDEFF_ROCK_CLIMB_DUST
-	.4byte gFieldEffectScript_ORASDowse                 @ FLDEFF_ORAS_DOWSE
-	.4byte gFldEffScript_SmileyFaceIcon    		        @ FLDEFF_SMILEY_FACE_ICON
-	.4byte gFieldEffectScript_HallOfFameRecordFrlg      @ FLDEFF_HALL_OF_FAME_RECORD_FRLG
-	.4byte gFldEffScript_PhotoFlash      		        @ FLDEFF_PHOTO_FLASH
 
 gFieldEffectScript_Saving::
     field_eff_loadfadedpal_callnative gSpritePalette_SavingFieldEffect, FldEff_Saving
