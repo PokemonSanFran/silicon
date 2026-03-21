@@ -633,7 +633,10 @@ Map Section: Fort Yobu
 Gliscor @ Toxic Orb
 Ability: Poison Heal
 Level: 49
+Tera Type: Ground
+EVs: 100 Atk/100 Def/1 SpD/100 Spe
 Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes
 - Protect
 - Earthquake
@@ -642,27 +645,34 @@ Jolly Nature
 Blissey @ Chople Berry
 Ability: Serene Grace
 Level: 51
+Tera Type: Normal
+EVs: 252 HP/45 Def/1 Spe
 Bold Nature
-IVs: 0 Atk
-- Wish
-- Teleport
-- Toxic
-- Flamethrower
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Soft-Boiled
+- Protect
+- Seismic Toss
+- Fire Blast
 
 Farigiraf @ Sitrus Berry
 Ability: Cud Chew
 Level: 50
+Tera Type: Normal
+EVs: 48 HP/252 SpA/1 Spe
 Modest Nature
-IVs: 0 Atk
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Psychic
 - Hyper Voice
-- Signal Beam
+- Dazzling Gleam
 - Future Sight
 
 Toxapex @ Black Sludge
 Ability: Merciless
 Level: 50
+Tera Type: Poison
+EVs: 252 HP/1 Def/48 SpD
 Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Poison Jab
 - Liquidation
 - Baneful Bunker
@@ -671,11 +681,14 @@ Adamant Nature
 Aegislash @ Steelium Z
 Ability: Stance Change
 Level: 52
+Tera Type: Steel
+EVs: 48 HP/252 Atk/1 Spe
 Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Iron Head
-- Hex
-- Autotomize
-- Kings Shield
+- Shadow Sneak
+- Swords Dance
+- King's Shield
 
 === TRAINER_DIMU ===
 Name: Dimu
