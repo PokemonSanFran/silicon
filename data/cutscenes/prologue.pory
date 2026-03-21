@@ -87,10 +87,9 @@ script Prologue_PostBattle_Script
     removeobject(MAGNUS)
     playse(SE_EXIT)
     fadeblackandsetremovewarpfadeflag
-    warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
     endcutscene
     msgbox(gText_Prologue_AFewDays)
-    closemessage
+    warpdoor(MAP_OROLAND_COLISEUM_HALL,9,9)
     waitstate
 }
 
