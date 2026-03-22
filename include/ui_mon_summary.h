@@ -13,6 +13,12 @@ enum __attribute__((packed)) MonSummaryModes
     NUM_UI_SUMMARY_MODES
 };
 
+extern const u8 gMonSummary_MoveBarGfx[];
+extern const u8 gMonSummary_MoveTypeGfx[];
+extern const struct SpritePalette gMonSummary_TypeSpritePalettes[];
+extern const struct SpriteTemplate gMonSummary_MoveBarSpriteTemplate;
+extern const struct SubspriteTable gMonSummary_128x16SubspriteTable[];
+
 void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, MainCallback);
 
 #endif // GUARD_UI_MON_SUMMARY_H

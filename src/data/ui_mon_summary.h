@@ -180,15 +180,6 @@ static const struct Subsprite sSummarySprite_128x16Subsprites[] =
     },
 };
 
-static const struct SubspriteTable sSummarySprite_128x16SubspriteTable[] =
-{
-    {
-        .subspriteCount = ARRAY_COUNT(sSummarySprite_128x16Subsprites),
-        .subsprites = sSummarySprite_128x16Subsprites
-    },
-    { 0, NULL }
-};
-
 // SpriteFrameImage does not work well with gDummySpriteAnimTable
 static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
 {
@@ -419,19 +410,6 @@ static const struct CompressedSpriteSheet sStatsPageHeader_TypeSpriteSheet =
     .tag = TAG_SUMMARY_TYPES,
 };
 
-static const struct SpritePalette sStatsPageHeader_TypeSpritePalettes[] =
-{
-    {
-        .data = (const u16[])INCBIN_U16("graphics/ui_menus/types/11x9/1.gbapal"),
-        .tag = TAG_SUMMARY_TYPE_1
-    },
-    {
-        .data = (const u16[])INCBIN_U16("graphics/ui_menus/types/11x9/2.gbapal"),
-        .tag = TAG_SUMMARY_TYPE_2
-    },
-    { NULL },
-};
-
 static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
 {
     [STAT_HP]    = COMPOUND_STRING("HP"),
@@ -519,51 +497,6 @@ static const u8 sStatsPageMisc_MonDataValuesOrders[][NUM_STATS] =
         MON_DATA_SPDEF_IV,
         MON_DATA_SPEED_IV,
     }
-};
-
-static const u8 sMovesPageGeneral_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");
-static const u8 sMovesPageGeneral_MoveTypeGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/move_type_icons.4bpp");
-
-static const struct SpriteTemplate sMovesPageGeneral_MoveBarSpriteTemplate =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
-    .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
-        .priority = 2,
-    },
-    .anims = (const union AnimCmd *const[]){
-        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(TYPE_ ##type, 1), ANIMCMD_END }
-        TYPE_ANIM(NONE),
-        TYPE_ANIM(NORMAL),
-        TYPE_ANIM(FIGHTING),
-        TYPE_ANIM(FLYING),
-        TYPE_ANIM(POISON),
-        TYPE_ANIM(GROUND),
-        TYPE_ANIM(ROCK),
-        TYPE_ANIM(BUG),
-        TYPE_ANIM(GHOST),
-        TYPE_ANIM(STEEL),
-        TYPE_ANIM(MYSTERY),
-        TYPE_ANIM(FIRE),
-        TYPE_ANIM(WATER),
-        TYPE_ANIM(GRASS),
-        TYPE_ANIM(ELECTRIC),
-        TYPE_ANIM(PSYCHIC),
-        TYPE_ANIM(ICE),
-        TYPE_ANIM(DRAGON),
-        TYPE_ANIM(DARK),
-        TYPE_ANIM(FAIRY),
-        TYPE_ANIM(STELLAR),
-        #undef TYPE_ANIM
-    },
-    .images = &(const struct SpriteFrameImage){
-        .data = sMovesPageGeneral_MoveBarGfx,
-        .size = (128 * 16) / 2,
-        .relativeFrames = TRUE
-    },
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct {
@@ -694,4 +627,71 @@ static const struct SpriteTemplate sMovesPageMisc_OptionCursorSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_MovesPageMisc_OptionCursor
+};
+
+const u8 gMonSummary_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/types/128x16/types.4bpp");
+const u8 gMonSummary_MoveTypeGfx[] = INCBIN_U8("graphics/ui_menus/mon_summary/move_type_icons.4bpp");
+
+const struct SpritePalette gMonSummary_TypeSpritePalettes[] =
+{
+    {
+        .data = (const u16[])INCBIN_U16("graphics/ui_menus/types/11x9/1.gbapal"),
+        .tag = TAG_SUMMARY_TYPE_1
+    },
+    {
+        .data = (const u16[])INCBIN_U16("graphics/ui_menus/types/11x9/2.gbapal"),
+        .tag = TAG_SUMMARY_TYPE_2
+    },
+    { NULL },
+};
+
+const struct SpriteTemplate gMonSummary_MoveBarSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = (const union AnimCmd *const[]){
+        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(TYPE_ ##type, 1), ANIMCMD_END }
+        TYPE_ANIM(NONE),
+        TYPE_ANIM(NORMAL),
+        TYPE_ANIM(FIGHTING),
+        TYPE_ANIM(FLYING),
+        TYPE_ANIM(POISON),
+        TYPE_ANIM(GROUND),
+        TYPE_ANIM(ROCK),
+        TYPE_ANIM(BUG),
+        TYPE_ANIM(GHOST),
+        TYPE_ANIM(STEEL),
+        TYPE_ANIM(MYSTERY),
+        TYPE_ANIM(FIRE),
+        TYPE_ANIM(WATER),
+        TYPE_ANIM(GRASS),
+        TYPE_ANIM(ELECTRIC),
+        TYPE_ANIM(PSYCHIC),
+        TYPE_ANIM(ICE),
+        TYPE_ANIM(DRAGON),
+        TYPE_ANIM(DARK),
+        TYPE_ANIM(FAIRY),
+        TYPE_ANIM(STELLAR),
+        #undef TYPE_ANIM
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = gMonSummary_MoveBarGfx,
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct SubspriteTable gMonSummary_128x16SubspriteTable[] =
+{
+    {
+        .subspriteCount = ARRAY_COUNT(sSummarySprite_128x16Subsprites),
+        .subsprites = sSummarySprite_128x16Subsprites
+    },
+    { 0, NULL }
 };

@@ -406,7 +406,7 @@ static void SummarySetup_Graphics(void)
     });
 
     LoadCompressedSpriteSheet(&sStatsPageHeader_TypeSpriteSheet);
-    LoadSpritePalettes(sStatsPageHeader_TypeSpritePalettes);
+    LoadSpritePalettes(gMonSummary_TypeSpritePalettes);
 
     // ensure neither of these gets overwritten by other sprite palettes
     AllocSpritePalette(TAG_SUMMARY_POKEMON_SLOT_1);
@@ -1938,7 +1938,7 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type type)
 
 static void SummarySprite_PrepareMonMovesGfx(void)
 {
-    SummarySprite_SetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR, &sMovesPageGeneral_MoveBarSpriteTemplate);
+    SummarySprite_SetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR, &gMonSummary_MoveBarSpriteTemplate);
 }
 
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
@@ -1956,7 +1956,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     u32 spriteId = CreateSprite(template, x, y, 2);
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
-    SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+    SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
     StartSpriteAnim(&gSprites[spriteId], GetMoveType(mon->moves[idx]));
 
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
@@ -2279,7 +2279,7 @@ static void SummaryPrint_BlitMoveType(u32 idx, u32 x, u32 y)
     if (move == MOVE_NONE || move >= MOVES_COUNT) return;
 
     enum Type type = GetMoveType(move);
-    BlitBitmapRectToWindow(SUMMARY_MAIN_WIN_PAGE_TEXT, sMovesPageGeneral_MoveTypeGfx,
+    BlitBitmapRectToWindow(SUMMARY_MAIN_WIN_PAGE_TEXT, gMonSummary_MoveTypeGfx,
         0, type * 16,
         16, 16 * NUMBER_OF_MON_TYPES,
         x, y,
@@ -2520,7 +2520,7 @@ static void InfosPageMisc_TrySpawnDescCursor(void)
     spriteId = CreateSprite(&sInfosPageMisc_CursorSpriteTemplate,
         SUMMARY_INFOS_MISC_DESC_CURSOR_X, SUMMARY_INFOS_MISC_DESC_CURSOR_Y, 0);
 
-    SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+    SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
     SummarySprite_SetDynamicSpriteId(SUMMARY_INFOS_SPRITE_DESC_CURSOR, spriteId);
 
     LoadCompressedSpriteSheetByTemplate(&sInfosPageMisc_ScrollIndicatorSpriteTemplate, 0);
@@ -2655,7 +2655,7 @@ static void StatsPageMisc_TrySpawnCursors(void)
     {
         spriteId = CreateSprite(&sStatsPageMisc_StatCursorSpriteTemplate, SUMMARY_STATS_MISC_CURSOR_X, SUMMARY_STATS_MISC_CURSOR_Y, 3);
 
-        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+        SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
     }
 
@@ -3052,7 +3052,7 @@ static void MovesPageMisc_TrySpawnCursors(void)
     {
         spriteId = CreateSprite(&sMovesPageMisc_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
 
-        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+        SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR, spriteId);
     }
 
@@ -3061,7 +3061,7 @@ static void MovesPageMisc_TrySpawnCursors(void)
     {
         spriteId = CreateSprite(&sMovesPageMisc_OptionCursorSpriteTemplate, SUMMARY_MOVES_MISC_OPTION_CURSOR_X, SUMMARY_MOVES_MISC_OPTION_Y, 0);
 
-        SetSubspriteTables(&gSprites[spriteId], sSummarySprite_128x16SubspriteTable);
+        SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_OPTION_CURSOR, spriteId);
     }
 
