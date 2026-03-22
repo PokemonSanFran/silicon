@@ -68,6 +68,7 @@ static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminde
 static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages);
 static const u8 *MReminderPage_GetHelpBarStr(enum MoveReminderPages);
 static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages);
+static HandleInputFunc MReminderPage_GetHandleInputFunc(enum MoveReminderPages);
 static void MReminderPage_ReloadTilemap(void);
 static void MReminderPage_PrintHelpBar(void);
 static void MReminderPage_UpdateFrontEnd(void);
@@ -99,11 +100,13 @@ static u32 MReminderMoves_GetMoveFromList(u32);
 
 static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
+static void MainPage_HandleInput(u8);
 static void MainPage_UpdateFrontEnd(void);
 static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
 static void MainPage_PrintMonStat(enum Stat, u32, u32, u32, u32);
 
+static void FilterPage_HandleInput(u8);
 static void FilterPage_UpdateFrontEnd(void);
 
 #include "data/ui_move_reminder.h"
@@ -158,19 +161,8 @@ static void MoveReminder_FreeResources(void)
 
 static void Task_MReminderInput_Main(u8 taskId)
 {
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MReminderInput_WaitFadeAndExit;
-        return;
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        return;
-    }
+    HandleInputFunc inputFunc = MReminderPage_GetHandleInputFunc(MReminderPage_GetValue());
+    inputFunc(taskId);
 }
 
 static void Task_MReminderInput_WaitFadeAndExit(u8 taskId)
@@ -487,6 +479,11 @@ static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderP
     return MReminderPage_GetInfo(page)->updateFrontEndFunc;
 }
 
+static HandleInputFunc MReminderPage_GetHandleInputFunc(enum MoveReminderPages page)
+{
+    return MReminderPage_GetInfo(page)->handleInputFunc;
+}
+
 static void MReminderPage_ReloadTilemap(void)
 {
     DecompressDataWithHeaderWram(
@@ -755,6 +752,23 @@ static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
 }
 
+static void MainPage_HandleInput(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MReminderInput_WaitFadeAndExit;
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        return;
+    }
+}
+
 static void MainPage_UpdateFrontEnd(void)
 {
     struct MoveReminderMon *mon = MReminderMon_Get();
@@ -814,6 +828,11 @@ static void MainPage_PrintMonStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2
     ConvertUIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 4);
     MReminderWindow_Print(MREMINDER_WINDOW_MAIN, gStringVar1,
         FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
+}
+
+static void FilterPage_HandleInput(u8 taskId)
+{
+
 }
 
 static void FilterPage_UpdateFrontEnd(void)

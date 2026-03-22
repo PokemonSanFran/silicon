@@ -145,6 +145,7 @@ enum MoveReminderSort
 
 typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*SortListFunc)(u32 *);
+typedef void (*HandleInputFunc)(u8);
 
 struct MoveReminderLearnset
 {
@@ -186,6 +187,7 @@ struct MoveReminderPageInfo
     const u32 *tilemap;
     const u8 *helpBarStr;
     UpdateFrontEndFunc updateFrontEndFunc;
+    HandleInputFunc handleInputFunc;
 };
 
 #endif // GUARD_CONSTANTS_UI_MOVE_REMINDER_H

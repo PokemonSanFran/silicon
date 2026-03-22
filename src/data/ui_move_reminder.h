@@ -18,12 +18,14 @@ static const struct MoveReminderPageInfo sMoveReminder_PagesInfo[NUM_MREMINDER_P
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/main.bin.smolTM"),
         .helpBarStr = COMPOUND_STRING("{A_BUTTON} Learn {B_BUTTON} Cancel {SELECT_BUTTON} Filter {START_BUTTON} Sort"),
         .updateFrontEndFunc = MainPage_UpdateFrontEnd,
+        .handleInputFunc = MainPage_HandleInput,
     },
     [MREMINDER_PAGE_FILTER] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
         .helpBarStr = COMPOUND_STRING("{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Filter"),
         .updateFrontEndFunc = FilterPage_UpdateFrontEnd,
+        .handleInputFunc = FilterPage_HandleInput,
     },
 };
 
