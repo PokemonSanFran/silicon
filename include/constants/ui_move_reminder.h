@@ -147,7 +147,7 @@ struct MoveReminderResources
     enum MoveReminderModes mode;
     enum MoveReminderPages page;
     MainCallback savedCallback;
-    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL];    // ALL moves a pokemon can learn
+    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL + 1];// ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];

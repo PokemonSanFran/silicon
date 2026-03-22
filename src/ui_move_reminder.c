@@ -68,6 +68,7 @@ static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
 static struct MoveReminderMon *MReminderMon_Get(void);
 
 static void MReminderMoves_PopulateList(void);
+static void MReminderMoves_SortList(void);
 static SortListFunc MReminderMoves_GetSortListFunc(void);
 static void MReminderMoves_ProcessDefaultList(u32 *);
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
@@ -450,13 +451,19 @@ static void MReminderMoves_PopulateList(void)
     MReminderMoves_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
     MReminderMoves_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
 
+    MReminderMoves_SortList();
+
+    for (u32 i = 0; MReminderMoves_GetMoveFromIdx(i) != MOVE_NONE; i++)
+        DebugPrintf("list[%d]: { %S, %d }", i, GetMoveName(MReminderMoves_GetMoveFromIdx(i)), MReminderMoves_GetMethodFromIdx(i));
+}
+
+static void MReminderMoves_SortList(void)
+{
     SortListFunc func = MReminderMoves_GetSortListFunc();
+    u32 numMoves = 0;
 
     func(&numMoves);
     MReminderMoves_SetNumberOfMoves(numMoves);
-
-    for (u32 i = 0; i < numMoves; i++)
-        DebugPrintf("list[%d]: %S", i, GetMoveName(MReminderMoves_GetMoveFromList(i)));
 }
 
 static SortListFunc MReminderMoves_GetSortListFunc(void)
@@ -466,14 +473,14 @@ static SortListFunc MReminderMoves_GetSortListFunc(void)
 
 static void MReminderMoves_ProcessDefaultList(u32 *numMoves)
 {
-    for (u32 i = 0; i < *numMoves; i++)
+    for (u32 i = 0; MReminderMoves_GetMoveFromIdx(i) != MOVE_NONE; i++)
     {
         u32 move = MReminderMoves_GetMoveFromIdx(i);
-
         if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
             break;
 
         MReminderMoves_SetMoveToList(i, move);
+        (*numMoves)++;
     }
 }
 
