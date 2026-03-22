@@ -37,13 +37,13 @@ enum MoveReminderPages
 #define PAGE_MAIN_MOVES_LIST_TITLE_Y    ()
 #define PAGE_MAIN_MOVES_LIST_FILTER_Y   ()
 
-#define PAGE_MAIN_MOVE_BAR_X            ()
-#define PAGE_MAIN_MOVE_BAR_SPACER_X     ()
-#define PAGE_MAIN_MOVE_BAR_NAME_X       ()
-#define PAGE_MAIN_MOVE_BAR_TYPE_X       ()
-#define PAGE_MAIN_MOVE_BAR_Y            ()
-#define PAGE_MAIN_MOVE_BAR_NAME_Y       ()
-#define PAGE_MAIN_MOVE_BAR_TYPE_Y       ()
+#define PAGE_MAIN_MOVE_BAR_X            (TILE_TO_PIXELS(17) + 3)
+#define PAGE_MAIN_MOVE_BAR_NAME_X       (TILE_TO_PIXELS(18) - 2)
+#define PAGE_MAIN_MOVE_BAR_TYPE_X       (TILE_TO_PIXELS(28) - 1)
+#define PAGE_MAIN_MOVE_BAR_Y            (TILE_TO_PIXELS(2))
+#define PAGE_MAIN_MOVE_BAR_SPACER_Y     (PAGE_MAIN_MOVE_BAR_Y)
+#define PAGE_MAIN_MOVE_BAR_NAME_Y       (PAGE_MAIN_MOVE_BAR_Y - 1)
+#define PAGE_MAIN_MOVE_BAR_TYPE_Y       (PAGE_MAIN_MOVE_BAR_Y)
 
 #define PAGE_MAIN_MOVE_DETAILS_1_X      () // PP,  PWR
 #define PAGE_MAIN_MOVE_DETAILS_2_X      () // CAT, ACC
@@ -80,6 +80,18 @@ enum MoveReminderBackgroundBuffers
     NUM_MREMINDER_BACKGROUND_BUFFERS
 };
 
+#define MAX_MREMINDER_BAR_SPRITES     (5)
+
+enum MoveReminderBarSpriteIds
+{
+    MREMINDER_BAR_SPRITE_ID_0,
+    MREMINDER_BAR_SPRITE_ID_CURSOR = MAX_MREMINDER_BAR_SPRITES,
+    NUM_MREMINDER_BAR_SPRITE_IDS,
+};
+
+// SpriteCB_MoveBar
+#define sMoveBar_Idx            data[0]
+
 enum MoveReminderWindows
 {
     MREMINDER_WINDOW_MAIN,
@@ -97,6 +109,14 @@ enum MoveReminderTextColors
     MREMINDER_TXTCLR_HELP_BAR,
 
     NUM_MREMINDER_TXTCLRS
+};
+
+enum MoveReminderSpriteTags
+{
+    MREMINDER_TAG_UNIVERSAL, // uses tiles.png's/summary screen palette
+    // move type palettes
+    MREMINDER_TAG_TYPE_PAL_1,
+    MREMINDER_TAG_TYPE_PAL_2,
 };
 
 enum MoveReminderMethod
@@ -150,6 +170,7 @@ struct MoveReminderResources
     struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL + 1];// ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
+    u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {
         struct Pokemon *mon;

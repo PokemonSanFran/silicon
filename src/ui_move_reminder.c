@@ -24,6 +24,7 @@
 #include "item.h"
 #include "daycare.h"
 #include "ui_pokedex.h"
+#include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -51,6 +52,14 @@ static void Task_MReminderSetup_WaitFade(u8);
 
 static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers, u8 *);
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers);
+
+static void MoveBar_Init(void);
+static void MoveBar_Update(void);
+static enum MoveReminderSpriteTags MoveBar_GetPalTagByType(enum Type);
+static u32 MoveBar_GetSpriteId(u32);
+static void MoveBar_SetSpriteId(u32, u32);
+static void SpriteCB_MoveBar(struct Sprite *);
+static void SpriteCB_MoveCursor(struct Sprite *);
 
 static enum MoveReminderModes MReminderMode_GetValue(void);
 static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
@@ -312,6 +321,12 @@ static void MReminderSetup_InitGraphics(void)
     DecompressAndCopyTileDataToVram(MREMINDER_BG_TILEMAP, sMoveReminder_Tiles, 0, 0, 0);
     LoadPalette(sMoveReminder_Palette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     // tilemap will be loaded with the front end later
+
+    LoadSpritePalettes((const struct SpritePalette[]){
+        { gMonSummary_TypeSpritePalettes[0].data, MREMINDER_TAG_TYPE_PAL_1 },
+        { gMonSummary_TypeSpritePalettes[1].data, MREMINDER_TAG_TYPE_PAL_2 },
+        { sMoveReminder_Palette, MREMINDER_TAG_UNIVERSAL },
+    });
 }
 
 static void MReminderSetup_InitWindows(void)
@@ -337,7 +352,8 @@ static void MReminderSetup_InitWindows(void)
 
 static void MReminderSetup_InitSprites(void)
 {
-
+    MoveBar_Init();
+    MoveBar_Update();
 }
 
 static void Task_MReminderSetup_WaitFade(u8 taskId)
@@ -354,6 +370,90 @@ static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers buf, u8 *add
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers buf)
 {
     return sMoveReminderResourcesPtr->tilemapBufs[buf];
+}
+
+// customized data e.g. palette/texts is handled in another function
+static void MoveBar_Init(void)
+{
+    const struct SpriteTemplate *template = &gMonSummary_MoveBarSpriteTemplate;
+    struct Sprite *sprite;
+
+    for (u32 i = 0, y = PAGE_MAIN_MOVE_BAR_Y; i < MAX_MREMINDER_BAR_SPRITES + 1; i++, y += PAGE_MAIN_MOVE_BAR_SPACER_Y)
+    {
+        // reset back for cursor
+        if (i == MREMINDER_BAR_SPRITE_ID_CURSOR)
+        {
+            y = PAGE_MAIN_MOVE_BAR_Y;
+            template = &gMonSummary_SlotCursorSpriteTemplate;
+        }
+
+        //                                                   set subpriority for move bars to be right below the cursor
+        u32 spriteId = CreateSprite(template, PAGE_MAIN_MOVE_BAR_X, y, i != MREMINDER_BAR_SPRITE_ID_CURSOR);
+        sprite = &gSprites[spriteId];
+
+        sprite->sMoveBar_Idx = i;
+        sprite->callback = SpriteCB_MoveBar;
+        SetSubspriteTables(sprite, gMonSummary_128x16SubspriteTable);
+        MoveBar_SetSpriteId(i, spriteId);
+    }
+
+    // cursor
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(MREMINDER_TAG_UNIVERSAL);
+    sprite->callback = SpriteCB_MoveCursor;
+}
+
+// TODO apply move list navigation code
+static void MoveBar_Update(void)
+{
+    enum MoveReminderWindows win = MREMINDER_WINDOW_MAIN;
+    u32 nameY = PAGE_MAIN_MOVE_BAR_NAME_Y, typeY = PAGE_MAIN_MOVE_BAR_TYPE_Y;
+
+    for (u32 i = 0; i < MAX_MREMINDER_BAR_SPRITES; i++, nameY += PAGE_MAIN_MOVE_BAR_SPACER_Y, typeY += PAGE_MAIN_MOVE_BAR_SPACER_Y)
+    {
+        u32 spriteId = MoveBar_GetSpriteId(i);
+        struct Sprite *sprite = &gSprites[spriteId];
+
+        u32 move = MReminderMoves_GetMoveFromList(i);
+        enum Type moveType = GetMoveType(move);
+
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(MoveBar_GetPalTagByType(moveType));
+        StartSpriteAnim(sprite, moveType);
+
+        if (move == MOVE_NONE)
+            continue;
+
+        MReminderWindow_Print(win, GetMoveName(move), FONT_OUTLINED, PAGE_MAIN_MOVE_BAR_NAME_X, nameY, MREMINDER_TXTCLR_DEFAULT);
+        BlitBitmapRectToWindow(win, gMonSummary_MoveTypeGfx,
+            0, moveType * 16,
+            16, 16 * NUMBER_OF_MON_TYPES,
+            PAGE_MAIN_MOVE_BAR_TYPE_X, typeY,
+            16, 16);
+    }
+}
+
+static enum MoveReminderSpriteTags MoveBar_GetPalTagByType(enum Type type)
+{
+    return MREMINDER_TAG_TYPE_PAL_1 + (type >= TYPE_MYSTERY);
+}
+
+static u32 MoveBar_GetSpriteId(u32 idx)
+{
+    return sMoveReminderResourcesPtr->moveBarSpriteIds[idx];
+}
+
+static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
+{
+    sMoveReminderResourcesPtr->moveBarSpriteIds[idx] = spriteId;
+}
+
+static void SpriteCB_MoveBar(struct Sprite *sprite)
+{
+    sprite->invisible = (MReminderPage_GetValue() != MREMINDER_PAGE_MAIN
+                         || sprite->sMoveBar_Idx >= MReminderMoves_GetNumberOfMoves());
+}
+
+static void SpriteCB_MoveCursor(struct Sprite *sprite)
+{
 }
 
 static enum MoveReminderModes MReminderMode_GetValue(void)
@@ -671,6 +771,8 @@ static void MainPage_UpdateFrontEnd(void)
     MainPage_PrintMonStat(STAT_SPDEF, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_2_Y);
 
     MainPage_PrintMonStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
+
+    MoveBar_Update();
 }
 
 static void MainPage_PrintMonGender(void)
