@@ -2974,7 +2974,7 @@ static void CB2_InitInGameTrade(void)
     {
     case 0:
         //If ChooseBoxMon points to a pc mon, we store it into gEnemyParty
-        if(gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
         {
             gSelectedTradeMonPositions[TRADE_PLAYER] = TRADEMON_FROM_PC;
             RemoveSelectedPcMon(&gEnemyParty[TRADEMON_FROM_PC]);

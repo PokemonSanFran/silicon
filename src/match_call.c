@@ -2041,3 +2041,38 @@ void DrawMatchCallTextBoxBorder(u32 windowId, u32 tileOffset, u32 paletteId)
 {
     DrawMatchCallTextBoxBorder_Internal(windowId, tileOffset, paletteId);
 }
+
+u32 GetTrainerRematchStepCounter(void)
+{
+#if FREE_MATCH_CALL == FALSE
+    // Start rematch_action
+    //return gSaveBlock1Ptr->trainerRematchStepCounter;
+    return 0;
+    // End rematch_action
+#else
+    return 0;
+#endif
+}
+
+void SetTrainerRematchStepCounter(u32 value)
+{
+#if FREE_MATCH_CALL == FALSE
+    //gSaveBlock1Ptr->trainerRematchStepCounter = value; // rematch_action
+#endif
+}
+
+u32 GetActiveTrainerRematches(u32 matchCallId)
+{
+#if FREE_MATCH_CALL == FALSE
+    return gSaveBlock1Ptr->trainerRematches[matchCallId];
+#else
+    return 0;
+#endif
+}
+
+void SetActiveTrainerRematches(u32 matchCallId, u32 value)
+{
+#if FREE_MATCH_CALL == FALSE
+    gSaveBlock1Ptr->trainerRematches[matchCallId] = value;
+#endif
+}

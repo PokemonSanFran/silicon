@@ -83,7 +83,6 @@
 #define FLDEFF_SMILEY_FACE_ICON          78
 #define FLDEFF_HALL_OF_FAME_RECORD_FRLG  79
 #define FLDEFF_PHOTO_FLASH               80
-
 enum  
 {
   // Start qol_field_moves

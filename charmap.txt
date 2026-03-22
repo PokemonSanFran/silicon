@@ -355,8 +355,9 @@ GROUDON        = FD 0D
 @ Start playerCustom
 SUBJECT        = FD 0E
 OBJECT         = FD 0F
-POSSESSIVE     = FD 10
+POSSESSIVE     = FE 10
 @ End playerCustom
+REGION         = FE 11
 
 @ battle string placeholders
 

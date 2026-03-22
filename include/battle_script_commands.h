@@ -55,6 +55,7 @@ void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(enum BattlerId battler);
 bool32 DoesSubstituteBlockMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 DoesDisguiseBlockMove(enum BattlerId battler, enum Move move);
+bool32 DoesIceFaceBlockMove(enum BattlerId battler, enum Move move);
 bool32 CanUseLastResort(enum BattlerId battlerId);
 u32 IsFlowerVeilProtected(enum BattlerId battler);
 u32 IsLeafGuardProtected(enum BattlerId battler, enum Ability ability);
@@ -71,6 +72,8 @@ void SaveBattlerTarget(enum BattlerId battler);
 void SaveBattlerAttacker(enum BattlerId battler);
 bool32 CanBurnHitThaw(enum Move move);
 u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler); // last_used_ball
+bool32 CanMoveThawTarget(enum Ability abilityAtk, enum Move move);
+bool32 CanFireMoveThawTarget(enum Move move);
 
 extern void (*const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

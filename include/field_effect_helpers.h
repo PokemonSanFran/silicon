@@ -44,4 +44,6 @@ void SetSpriteInvisible(u8 spriteId);
 void SavingSpriteCallback(struct Sprite *sprite); // autoSave
 void ShowWarpArrowSprite(u8 spriteId, enum Direction direction, s16 x, s16 y);
 
+u32 FldEff_TallGrass(void);
+
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

@@ -3491,7 +3491,7 @@ static u32 ShouldUseMiniorException(u32 listId, u32 speciesId)
     if (speciesId != SPECIES_MINIOR_CORE)
         return speciesId;
 
-    if (PageEvolution_GetMethod(listId) != FORM_CHANGE_BATTLE_HP_PERCENT)
+    if (PageEvolution_GetMethod(listId) != FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT)
         return speciesId;
 
     return SPECIES_EGG;
@@ -3984,7 +3984,7 @@ static void PageForms_GenerateTransformString(u32 method, u32 param1, u32 param2
         case FORM_CHANGE_BATTLE_BEFORE_MOVE:
             StringCopy(gStringVar1,GetMoveName(param1));
             break;
-        case FORM_CHANGE_BATTLE_HP_PERCENT:
+        case FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT:
             StringCopy(gStringVar1,GetAbilityName(param1));
             if (param2 == HP_HIGHER_THAN)
                 StringCopy(gStringVar2,COMPOUND_STRING("higher than"));

@@ -84,7 +84,7 @@ Map Section: Tora Town
 Tentacool @ Mystic Water
 Ability: Clear Body
 Level: 26  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 SpA / 100 Spe
@@ -98,7 +98,7 @@ IVs: 20 HP / 0 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Salandit @ Charcoal
 Ability: Corrosion
 Level: 27 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 SpA / 100 Spe
@@ -112,7 +112,7 @@ IVs: 20 HP / 0 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Nuzleaf @ Miracle Seed
 Ability: Chlorophyll
 Level: 26
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
@@ -126,7 +126,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Stunky @ Black Sludge
 Ability: Stench
 Level: 28 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 Atk / 100 Spe
@@ -150,7 +150,7 @@ Map Section: Mermereza City
 Swalot @ Aguav Berry
 Ability: Gluttony
 Level: 26 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Spe
@@ -164,7 +164,7 @@ IVs: 20 HP / 0 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Dachsbun @ Sitrus Berry
 Ability: Well-Baked Body
 Level: 27 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 50 Atk / 50 Def
@@ -177,7 +177,7 @@ Adamant Nature
 Tatsugiri @ Chesto Berry
 Ability: Storm Drain
 Level: 26  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Def
@@ -191,7 +191,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Greedent @ Liechi Berry
 Ability: Cheek Pouch
 Level: 28
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
@@ -215,7 +215,7 @@ Map Section: Perlacia City
 Politoed @ Damp Rock
 Ability: Drizzle
 Level: 26 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 SpA
@@ -229,7 +229,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Omanyte @ Focus Sash
 Ability: Swift Swim
 Level: 27
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 SpA / 100 Spe
@@ -243,7 +243,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 Bronzor @ Leftovers
 Ability: Levitate
 Level: 26 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
@@ -257,7 +257,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 0 Spe
 Dracovish @ Expert Belt
 Ability: Water Absorb
 Level: 28  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
@@ -282,7 +282,7 @@ Map Section: Route10
 Parasect (M)
 Ability: Effect Spore
 Level: 24
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 Def / 50 SpD
@@ -295,7 +295,7 @@ IVs: 0 Atk
 Rotom
 Ability: Levitate
 Level: 24
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 SpA / 50 Spe
@@ -309,7 +309,7 @@ IVs: 0 Atk
 Clamperl
 Ability: Rattled
 Level: 24
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 HP / 50 Def
@@ -322,7 +322,7 @@ Adamant Nature
 Dratini @ Oran Berry
 Ability: Shed Skin
 Level: 25
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 40 Atk / 10 SpA / 50 Spe
@@ -345,7 +345,7 @@ Map Section: Anbeh Bend
 Klefki @ Rocky Helmet
 Ability: Prankster
 Level: 25
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 50 SpA
@@ -358,7 +358,7 @@ IVs: 0 Atk
 Hitmontop @ Sitrus Berry
 Ability: Intimidate
 Level: 24 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 Atk
@@ -371,7 +371,7 @@ Adamant Nature
 Poliwrath @ Lum Berry
 Ability: Water Absorb
 Level: 25
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 Atk / 50 Spe 
@@ -383,7 +383,7 @@ EVs: 100 Atk / 50 Spe
 Oricorio @ Firium Z
 Ability: Dancer
 Level: 26
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 SpA / 50 Spe
@@ -403,7 +403,7 @@ Battle Type: Double
 Parasect
 Ability: Effect Spore
 Level: 37
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 75 Def / 75 SpD
@@ -415,7 +415,7 @@ EVs: 75 Def / 75 SpD
 Rotom-Fan
 Ability: Levitate
 Level: 39
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 75 SpA / 75 Spe
@@ -429,7 +429,7 @@ IVs: 0 Atk
 Buneary
 Ability: Run Away
 Level: 38
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 75 HP / 75 Spe
@@ -442,7 +442,7 @@ Quiet Nature
 Dragonair @ Oran Berry
 Ability: Shed Skin
 Level: 40
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 Atk / 15 SpA / 75 Spe
@@ -465,7 +465,7 @@ Map Section: Chasilla
 Abra @ Focus Sash
 Ability: Inner Focus
 Level: 5 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 SpA / 150 Spe
@@ -479,7 +479,7 @@ IVs: 0 Atk
 Mudbray @ Eviolite
 Ability: Stamina
 Level: 5
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 HP / 150 Atk
@@ -492,7 +492,7 @@ Adamant Nature
 Murkrow @ Scope Lens
 Ability: Super Luck
 Level: 5
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 Atk / 150 Spe
@@ -504,7 +504,7 @@ EVs: 150 Atk / 150 Spe
 Gimmighoul @ Eviolite
 Ability: Rattled
 Level: 5
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 75 Def / 150 SpA / 75 SpD
@@ -518,7 +518,7 @@ IVs: 0 Atk
 Meditite @ Eviolite
 Ability: Pure Power
 Level: 5 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 HP / 150 Atk / 25 Def / 25 SpD / 50 Spe
@@ -542,7 +542,7 @@ Map Section: Arantraz
 Kilowattrel @ Focus Sash
 Ability: Wind Power
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe
@@ -556,7 +556,7 @@ IVs: 0 Atk
 Shiftry @ Assault Vest
 Ability: Wind Rider
 Level: 88 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe
@@ -569,7 +569,7 @@ Adamant Nature
 Porygon-Z @ Normal Gem
 Ability: Adaptability
 Level: 87 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 156 SpA / 252 Spe
@@ -583,7 +583,7 @@ IVs: 0 Atk
 Dragonite @ Yache Berry
 Ability: Multiscale
 Level: 87 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 192 HP / 208 Atk / 4 Def / 104 Spe
@@ -596,7 +596,7 @@ Adamant Nature
 Corviknight @ Flyinium Z
 Ability: Mirror Armor
 Level: 88 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe
@@ -609,7 +609,7 @@ Adamant Nature
 Pidgeot @ Pidgeotite
 Ability: Keen Eye
 Level: 89
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe
@@ -633,7 +633,7 @@ Map Section: Fort Yobu
 Gliscor @ Toxic Orb
 Ability: Poison Heal
 Level: 49 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 Spe
@@ -646,7 +646,7 @@ Jolly Nature
 Toxapex @ Black Sludge
 Ability: Merciless
 Level: 50
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 250 HP / 150 Atk
@@ -659,7 +659,7 @@ Adamant Nature
 Farigiraf @ Sitrus Berry
 Ability: Cud Chew
 Level: 50 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 SpA
@@ -673,7 +673,7 @@ IVs: 0 Atk
 Blissey @ Leftovers
 Ability: Natural Cure
 Level: 51
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 250 Def / 150 SpD
@@ -687,7 +687,7 @@ IVs: 0 Atk
 Aegislash @ Steelium Z
 Ability: Stance Change
 Level: 52 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 Atk
@@ -710,7 +710,7 @@ Map Section: Halerba City
 Shiftry @ Focus Sash
 Ability: Wind Rider
 Level: 49
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 Atk / 200 Spe
@@ -723,7 +723,7 @@ Jolly Nature
 Florges @ Sitrus Berry
 Ability: Flower Veil
 Level: 50  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 SpA
@@ -737,7 +737,7 @@ IVs: 0 Atk
 Scovillain @ Leftovers
 Ability: Moody
 Level: 50  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 Atk
@@ -749,7 +749,7 @@ EVs: 200 HP / 200 Atk
 Wyrdeer @ Grassy Seed
 Ability: Intimidate
 Level: 51  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 200 Atk / 100 Spe
@@ -762,7 +762,7 @@ Jolly Nature
 Arboliva @ Grassium Z
 Ability: Seed Sower
 Level: 52 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 100 Def / 100 SpA
@@ -786,7 +786,7 @@ Map Section: Tirabudin Place
 Shiinotic @ Red Card
 Ability: Effect Spore
 Level: 49  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 SpA
@@ -800,7 +800,7 @@ IVs: 0 Atk
 Spinda @ Red Card
 Ability: Contrary
 Level: 50
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 Atk / 200 Spe
@@ -813,7 +813,7 @@ Jolly Nature
 Weezing @ Red Card
 Ability: Levitate
 Level: 50
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 100 Atk / 100 SpA
@@ -826,7 +826,7 @@ Brave Nature
 Grafaiai @ Poisonium Z
 Ability: Unburden
 Level: 51 
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 250 Atk / 50 Spe
@@ -839,7 +839,7 @@ Adamant Nature
 Annihilape @ Sitrus Berry
 Ability: Defiant
 Level: 52
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 Spe
@@ -862,7 +862,7 @@ Map Section: Irisina Town
 Slowbro @ Leftovers  
 Ability: Oblivious  
 Level: 49  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 100 Def / 100 SpA  
@@ -876,7 +876,7 @@ IVs: 0 Atk / 0 Spe
 Porygon2 @ Eviolite  
 Ability: Download  
 Level: 50   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 50 Def / 75 SpA / 75 SpD  
@@ -890,7 +890,7 @@ IVs: 0 Atk / 0 Spe
 Chandelure @ Rocky Helmet  
 Ability: Flame Body  
 Level: 50   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 75 Def / 50 SpA / 75 SpD  
@@ -904,7 +904,7 @@ IVs: 0 Atk / 0 Spe
 Copperajah @ Iron Ball  
 Ability: Sheer Force  
 Level: 51    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 Atk / 100 Def / 100 SpD  
@@ -918,7 +918,7 @@ IVs: 0 Spe
 Hatterene @ Fairium Z  
 Ability: Magic Bounce  
 Level: 52
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 SpA  
@@ -939,7 +939,7 @@ Battle Type: Double
 Parasect @ Focus Sash  
 Ability: Effect Spore  
 Level: 47  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 Def / 150 SpD  
@@ -951,7 +951,7 @@ EVs: 150 Def / 150 SpD
 Rotom-Heat  
 Ability: Levitate  
 Level: 49  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 150 SpA / 150 Spe  
@@ -965,7 +965,7 @@ IVs: 0 Atk
 Huntail @ Mystic Water  
 Ability: Water Veil  
 Level: 48  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk / 100 Def  
@@ -978,7 +978,7 @@ Adamant Nature
 Lopunny  
 Ability: Cute Charm  
 Level: 49  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 50 Atk / 150 Spe  
@@ -991,7 +991,7 @@ Jolly Nature
 Dragonair @ Dragonium Z  
 Ability: Shed Skin  
 Level: 51  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 175 Atk / 15 SpA / 100 Spe  
@@ -1008,7 +1008,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Palafin @ Choice Scarf  
 Ability: Zero to Hero  
 Level: 50  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 250 Atk / 150 Spe  
@@ -1021,7 +1021,7 @@ Adamant Nature
 Talonflame @ Sharp Beak  
 Ability: Gale Wings  
 Level: 49  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 Atk / 200 Spe  
@@ -1034,7 +1034,7 @@ Adamant Nature
 Doublade @ Eviolite  
 Ability: No Guard  
 Level: 50  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 HP / 250 Atk / 100 SpD  
@@ -1047,7 +1047,7 @@ Adamant Nature
 Toedscruel @ Groundium Z 
 Ability: Mycelium Might  
 Level: 51   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 SpA / 200 Spe  
@@ -1061,7 +1061,7 @@ IVs: 0 Atk
 Hydreigon @ Focus Sash  
 Ability: Levitate  
 Level: 52  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 250 SpA / 150 Spe  
@@ -1075,7 +1075,7 @@ IVs: 0 Atk
 Gallade @ Galladite  
 Ability: Sharpness  
 Level: 53  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 HP / 200 Atk  
@@ -1099,7 +1099,7 @@ Map Section: Naval Base
 Poliwrath @ Focus Sash  
 Ability: Swift Swim  
 Level: 76   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 12 HP / 248 Atk / 248 Spe  
@@ -1112,7 +1112,7 @@ Adamant Nature
 Gyarados @ Wacan Berry  
 Ability: Intimidate  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 132 HP / 132 Atk / 4 Def / 4 SpD / 236 Spe  
@@ -1125,7 +1125,7 @@ Adamant Nature
 Beartic @ Waterium Z  
 Ability: Swift Swim  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -1138,7 +1138,7 @@ Adamant Nature
 Mienshao @ Choice Band  
 Ability: Inner Focus  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -1151,7 +1151,7 @@ Jolly Nature
 Gliscor @ Flying Gem  
 Ability: Hyper Cutter  
 Level: 76  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 64 HP / 196 Atk / 248 Spe  
@@ -1164,7 +1164,7 @@ Adamant Nature
 Swampert @ Swampertite  
 Ability: Torrent  
 Level: 77  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 136 HP / 116 Atk / 4 Def / 4 SpD / 248 Spe  
@@ -1184,7 +1184,7 @@ Battle Type: Double
 Parasect @ Focus Sash  
 Ability: Effect Spore  
 Level: 67  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 Def / 200 SpD  
@@ -1196,7 +1196,7 @@ EVs: 200 Def / 200 SpD
 Rotom-Frost  
 Ability: Levitate  
 Level: 69  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 200 SpA / 200 Spe  
@@ -1210,7 +1210,7 @@ IVs: 0 Atk
 Ceruledge @ Charcoal  
 Ability: Flash Fire  
 Level: 68  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 50 HP / 150 Atk / 200 Spe  
@@ -1223,7 +1223,7 @@ Adamant Nature
 Nidoking @ Sitrus Berry  
 Ability: Sheer Force  
 Level: 68  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 150 SpA / 150 Spe  
@@ -1237,7 +1237,7 @@ IVs: 0 Atk
 Lopunny  
 Ability: Cute Charm  
 Level: 69  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 50 Atk / 25 Def / 25 SpD / 200 Spe  
@@ -1250,7 +1250,7 @@ Jolly Nature
 Dragonite @ Dragonium Z  
 Ability: Inner Focus  
 Level: 70  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 235 Atk / 15 SpA / 150 Spe  
@@ -1267,7 +1267,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Grafaiai @ Rocky Helmet  
 Ability: Prankster  
 Level: 72  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 240 Atk / 12 Def / 4 Spe  
@@ -1280,7 +1280,7 @@ Adamant Nature
 Zoroark @ Darkinium Z  
 Ability: Illusion  
 Level: 72   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 4 Atk / 252 SpA / 248 Spe  
@@ -1293,7 +1293,7 @@ Hasty Nature
 Scizor @ Scizorite  
 Ability: Technician  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 Atk / 4 SpD / 4 Spe  
@@ -1311,7 +1311,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Vanilluxe @ Icy Rock  
 Ability: Snow Warning  
 Level: 72  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 220 HP / 36 SpA / 252 Spe  
@@ -1325,7 +1325,7 @@ IVs: 0 Atk
 Cetitan @ Sitrus Berry  
 Ability: Slush Rush  
 Level: 72  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 112 Atk / 104 Def / 184 SpD / 100 Spe  
@@ -1339,7 +1339,7 @@ Adamant Nature
 Kingler
 Ability: Hyper Cutter  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 Atk / 8 SpD  
@@ -1357,7 +1357,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Toxapex @ Black Sludge  
 Ability: Merciless  
 Level: 72  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 12 Atk / 84 Def / 160 SpD  
@@ -1370,7 +1370,7 @@ Adamant Nature
 Ursaluna @ Chesto Berry  
 Ability: Unnerve  
 Level: 72  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 48 Atk / 212 SpD  
@@ -1383,7 +1383,7 @@ Careful Nature
 Slowbro @ Slowbronite  
 Ability: Oblivious  
 Level: 73    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 60 Def / 196 SpD  
@@ -1402,7 +1402,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Kilowattrel @ Flyinium Z  
 Ability: Competitive  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 SpA / 252 Spe  
@@ -1416,7 +1416,7 @@ IVs: 0 Atk
 Hypno @ Mental Herb  
 Ability: Inner Focus  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 156 HP / 100 Def / 252 Spe  
@@ -1444,7 +1444,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Klefki @ Light Clay  
 Ability: Prankster  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 32 Def / 196 SpA / 32 SpD  
@@ -1458,7 +1458,7 @@ IVs: 0 Atk
 Huntail @ Mystic Water  
 Ability: Water Veil  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 228 Atk / 100 Def / 80 Spe  
@@ -1471,7 +1471,7 @@ Adamant Nature
 Ceruledge @ Charcoal  
 Ability: Flash Fire  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 88 HP / 164 Atk / 4 Def / 252 Spe  
@@ -1484,7 +1484,7 @@ Adamant Nature
 Rotom-Mow @ Miracle Seed  
 Ability: Levitate  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 52 HP / 200 SpA / 4 SpD / 252 Spe  
@@ -1498,7 +1498,7 @@ IVs: 0 Atk
 Lopunny @ Lopunnite  
 Ability: Cute Charm  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 104 Atk / 28 Def / 28 SpD / 248 Spe  
@@ -1511,7 +1511,7 @@ Jolly Nature
 Dragonite @ Dragonium Z  
 Ability: Inner Focus  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 60 HP / 248 Atk / 200 Spe  
@@ -1530,7 +1530,7 @@ Battle Type: Double
 Klefki @ Light Clay  
 Ability: Prankster  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 32 Def / 196 SpA / 32 SpD  
@@ -1544,7 +1544,7 @@ IVs: 0 Atk
 Nidoking @ Life Orb  
 Ability: Sheer Force  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 196 SpA / 212 Spe  
@@ -1558,7 +1558,7 @@ IVs: 0 Atk
 Huntail @ Mystic Water  
 Ability: Water Veil  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 228 Atk / 100 Def / 80 Spe  
@@ -1571,7 +1571,7 @@ Adamant Nature
 Ceruledge @ Charcoal  
 Ability: Flash Fire  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 88 HP / 164 Atk / 4 Def / 252 Spe  
@@ -1584,7 +1584,7 @@ Adamant Nature
 Lopunny @ Lopunnite  
 Ability: Cute Charm  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 104 Atk / 28 Def / 28 SpD / 248 Spe  
@@ -1597,7 +1597,7 @@ Jolly Nature
 Dragonite @ Flyinium Z  
 Ability: Inner Focus  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 60 HP / 248 Atk / 200 Spe  
@@ -1620,7 +1620,7 @@ Map Section: Zenzu Island
 Nidoking @ Life Orb  
 Ability: Sheer Force  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 Def / 252 SpA / 252 Spe  
@@ -1634,7 +1634,7 @@ IVs: 0 Atk
 Tyranitar @ Chople Berry  
 Ability: Sand Stream  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 60 Atk / 52 Def / 144 SpD  
@@ -1647,7 +1647,7 @@ Adamant Nature
 Hydreigon @ Assault Vest  
 Ability: Levitate  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 148 SpA / 8 SpD / 252 Spe  
@@ -1661,7 +1661,7 @@ IVs: 0 Atk
 Volcarona @ Firium Z  
 Ability: Flame Body  
 Level: 76  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 128 HP / 120 Def / 8 SpA / 252 Spe  
@@ -1676,7 +1676,7 @@ IVs: 0 Atk
 Duraludon
 Ability: Stalwart  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 SpA / 252 SpD  
@@ -1701,7 +1701,7 @@ Map Section: Espulee Outskirts
 Revavroom @ Covert Cloak  
 Ability: Overcoat  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 4 Atk / 252 Spe  
@@ -1714,7 +1714,7 @@ Jolly Nature
 Polteageist @ White Herb  
 Ability: Weak Armor  
 Level: 74   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 140 HP / 100 Def / 16 SpA / 252 Spe  
@@ -1728,7 +1728,7 @@ IVs: 0 Atk
 Chandelure @ Psychium Z  
 Ability: Flash Fire  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 128 HP / 132 Def / 248 SpA  
@@ -1742,7 +1742,7 @@ IVs: 0 Atk / 0 Spe
 Dhelmise @ Assault Vest  
 Ability: Steelworker  
 Level: 75    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 SpD  
@@ -1757,7 +1757,7 @@ IVs: 0 Spe
 Garbodor
 Ability: Stench  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 248 Atk / 128 Def / 128 SpD  
@@ -1782,7 +1782,7 @@ Map Section: Hodou City
 Barraskewda @ Choice Band  
 Ability: Swift Swim  
 Level: 73   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -1795,7 +1795,7 @@ Adamant Nature
 Armaldo @ Rockium Z  
 Ability: Swift Swim  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 136 HP / 100 Atk / 8 Def / 12 SpD / 252 Spe  
@@ -1808,7 +1808,7 @@ Jolly Nature
 Grapploct @ Assault Vest  
 Ability: Technician  
 Level: 73  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 112 Atk / 132 Def / 12 SpD  
@@ -1821,7 +1821,7 @@ Adamant Nature
 Breloom @ Focus Sash  
 Ability: Technician  
 Level: 74   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 Atk / 252 Spe  
@@ -1834,7 +1834,7 @@ Jolly Nature
 Tentacruel @ Choice Specs  
 Ability: Rain Dish  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 248 SpA / 12 Spe  
@@ -1849,7 +1849,7 @@ IVs: 0 Atk
 Drednaw
 Ability: Swift Swim  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 SpD  
@@ -1869,7 +1869,7 @@ Battle Type: Double
 Klefki @ Light Clay  
 Ability: Prankster  
 Level: 74  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 32 Def / 196 SpA / 32 SpD  
@@ -1883,7 +1883,7 @@ IVs: 0 Atk
 Lopunny @ Lopunnite  
 Ability: Cute Charm  
 Level: 76  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 156 Atk / 252 Spe  
@@ -1896,7 +1896,7 @@ Jolly Nature
 Nidoking @ Life Orb  
 Ability: Sheer Force  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 Atk / 196 SpA / 212 Spe  
@@ -1909,7 +1909,7 @@ Hasty Nature
 Ceruledge @ Big Root  
 Ability: Flash Fire  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -1922,7 +1922,7 @@ Adamant Nature
 Rotom-Wash @ Sitrus Berry  
 Ability: Levitate  
 Level: 75  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 156 HP / 100 SpA / 252 Spe  
@@ -1936,7 +1936,7 @@ IVs: 0 Atk
 Dragonite @ Flyinium Z  
 Ability: Inner Focus  
 Level: 77  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 52 HP / 252 Atk / 4 SpD / 200 Spe  
@@ -1954,7 +1954,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Hawlucha @ Flying Gem  
 Ability: Unburden  
 Level: 77  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -1967,7 +1967,7 @@ Adamant Nature
 Tyrantrum @ Assault Vest  
 Ability: Rock Head  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Spe  
@@ -1980,7 +1980,7 @@ Adamant Nature
 Amoonguss @ Eject Button  
 Ability: Regenerator  
 Level: 76    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 244 HP / 80 Def / 172 SpA / 12 SpD  
@@ -1994,7 +1994,7 @@ IVs: 0 Atk
 Aegislash @ Life Orb  
 Ability: Stance Change  
 Level: 78   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 SpA / 8 Spe  
@@ -2007,7 +2007,7 @@ Modest Nature
 Baxcalibur @ Icium Z  
 Ability: Thermal Exchange  
 Level: 78  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 76 HP / 180 Atk / 252 Spe  
@@ -2020,7 +2020,7 @@ Adamant Nature
 Gardevoir @ Gardevoirite  
 Ability: Trace  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2044,7 +2044,7 @@ Map Section: Cureno Port
 Gardevoir @ Fairy Gem  
 Ability: Telepathy  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 52 HP / 252 SpA / 204 Spe  
@@ -2055,7 +2055,7 @@ IVs: 0 Atk
 Florges @ Fairy Gem  
 Ability: Flower Veil  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2066,7 +2066,7 @@ IVs: 0 Atk
 Hatterene @ Fairy Gem  
 Ability: Magic Bounce  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 SpA  
@@ -2077,7 +2077,7 @@ IVs: 0 Atk
 Bronzong @ Normal Gem  
 Ability: Levitate  
 Level: 81
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Def  
@@ -2093,7 +2093,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Revavroom @ Shuca Berry  
 Ability: Filter  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2106,7 +2106,7 @@ Jolly Nature
 Rotom-Fan @ Assault Vest  
 Ability: Levitate  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 128 HP / 252 SpA / 128 Spe  
@@ -2120,7 +2120,7 @@ IVs: 0 Atk
 Sharpedo @ Focus Sash  
 Ability: Speed Boost  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 Atk / 252 Spe  
@@ -2133,7 +2133,7 @@ Adamant Nature
 Hawlucha @ Fighting Gem  
 Ability: Unburden  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2151,7 +2151,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Squawkabilly-Blue @ Flame Orb  
 Ability: Guts  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 Atk / 252 Spe  
@@ -2164,7 +2164,7 @@ Jolly Nature
 Porygon-Z @ Psychic Seed  
 Ability: Adaptability  
 Level: 79   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 192 SpA / 4 SpD / 60 Spe  
@@ -2178,7 +2178,7 @@ IVs: 0 Atk
 Gallade @ Focus Sash  
 Ability: Sharpness  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2191,7 +2191,7 @@ Jolly Nature
 Armarouge @ Psychic Gem  
 Ability: Flash Fire  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 52 HP / 204 SpA / 252 Spe  
@@ -2210,7 +2210,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Dracozolt @ Blunder Policy  
 Ability: Hustle  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2223,7 +2223,7 @@ Jolly Nature
 Hitmonlee @ Electric Seed  
 Ability: Unburden  
 Level: 79   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 248 Atk / 4 Def / 4 SpD  
@@ -2236,7 +2236,7 @@ Adamant Nature
 Scizor @ Assault Vest  
 Ability: Technician  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 56 HP / 252 Atk / 4 Def / 4 SpD / 192 Spe  
@@ -2249,7 +2249,7 @@ Jolly Nature
 Vikavolt @ Electric Gem  
 Ability: Levitate  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
@@ -2268,7 +2268,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Revavroom @ Shuca Berry  
 Ability: Filter  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2281,7 +2281,7 @@ Jolly Nature
 Rotom-Fan @ Assault Vest  
 Ability: Levitate  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 128 HP / 252 SpA / 128 Spe  
@@ -2295,7 +2295,7 @@ IVs: 0 Atk
 Sharpedo @ Focus Sash  
 Ability: Speed Boost  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 Atk / 252 Spe  
@@ -2308,7 +2308,7 @@ Adamant Nature
 Hawlucha @ Fighting Gem  
 Ability: Unburden  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2321,7 +2321,7 @@ Adamant Nature
 Pheromosa @ Fightinium Z  
 Ability: Swift Ascent  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 28 Atk / 252 SpA / 128 Spe  
@@ -2338,7 +2338,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Squawkabilly-Blue @ Flame Orb  
 Ability: Guts  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 Atk / 252 Spe  
@@ -2351,7 +2351,7 @@ Jolly Nature
 Porygon-Z @ Psychic Seed  
 Ability: Adaptability  
 Level: 79   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 192 SpA / 4 SpD / 60 Spe  
@@ -2365,7 +2365,7 @@ IVs: 0 Atk
 Gallade @ Focus Sash  
 Ability: Sharpness  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2378,7 +2378,7 @@ Jolly Nature
 Armarouge @ Psychic Gem  
 Ability: Flash Fire  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 52 HP / 204 SpA / 252 Spe  
@@ -2392,7 +2392,7 @@ IVs: 0 Atk
 Blacephalon @ Psychium Z  
 Ability: Swift Ascent  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2411,7 +2411,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Dracozolt @ Blunder Policy  
 Ability: Hustle  
 Level: 80   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2424,7 +2424,7 @@ Jolly Nature
 Hitmonlee @ Electric Seed  
 Ability: Unburden  
 Level: 79   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 248 Atk / 4 Def / 4 SpD  
@@ -2437,7 +2437,7 @@ Adamant Nature
 Scizor @ Assault Vest  
 Ability: Technician  
 Level: 79  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 56 HP / 252 Atk / 4 Def / 4 SpD / 192 Spe  
@@ -2450,7 +2450,7 @@ Jolly Nature
 Vikavolt @ Electric Gem  
 Ability: Levitate  
 Level: 80  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
@@ -2464,7 +2464,7 @@ IVs: 0 Atk
 Xurkitree @ Electrium Z  
 Ability: Swift Ascent  
 Level: 81  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
@@ -2488,7 +2488,7 @@ Map Section: SharpriseSpire
 Gholdengo @ Steel Gem  
 Ability: Good as Gold  
 Level: 84  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 96 Def / 164 SpD  
@@ -2502,7 +2502,7 @@ IVs: 0 Atk
 Hydreigon @ Focus Sash  
 Ability: Levitate  
 Level: 83  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2516,7 +2516,7 @@ IVs: 0 Atk
 Relicanth @ Assault Vest  
 Ability: Rock Head  
 Level: 84  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 Atk / 4 Def / 252 SpD  
@@ -2529,7 +2529,7 @@ Careful Nature
 Buzzwole @ Buginium Z  
 Ability: Swift Ascent  
 Level: 85  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 SpD  
@@ -2542,7 +2542,7 @@ Adamant Nature
 Alakazam @ Alakazite  
 Ability: Synchronize  
 Level: 85  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 252 SpA / 248 Spe  
@@ -2561,7 +2561,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Armarouge @ Weakness Policy  
 Ability: Weak Armor  
 Level: 85    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
@@ -2575,7 +2575,7 @@ IVs: 0 Atk
 Haxorus @ Assault Vest  
 Ability: Mold Breaker  
 Level: 86   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 152 HP / 252 Atk / 4 Def / 100 Spe  
@@ -2588,7 +2588,7 @@ Adamant Nature
 Corviknight @ Wacan Berry  
 Ability: Mirror Armor  
 Level: 85    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 100 Atk / 56 SpD / 100 Spe  
@@ -2601,7 +2601,7 @@ Adamant Nature
 Gardevoir @ Fairy Gem  
 Ability: Synchronize  
 Level: 86   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2615,7 +2615,7 @@ IVs: 0 Atk
 Serperior @ Grassium Z  
 Ability: Contrary  
 Level: 86    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
@@ -2629,7 +2629,7 @@ Quirky Nature
 Lapras
 Ability: Water Absorb  
 Level: 87   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 176 HP / 252 SpA / 80 Spe  
@@ -2653,7 +2653,7 @@ Map Section: SharpriseSpire
 Salazzle @ Focus Sash  
 Ability: Oblivious  
 Level: 87   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 HP / 248 SpA / 252 Spe  
@@ -2667,7 +2667,7 @@ IVs: 0 Atk
 Tyranitar @ Chople Berry  
 Ability: Sand Stream  
 Level: 86  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Spe  
@@ -2680,7 +2680,7 @@ Adamant Nature
 Annihilape @ Fighting Gem  
 Ability: Defiant  
 Level: 86  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 144 Atk / 12 Def / 4 SpD / 96 Spe  
@@ -2693,7 +2693,7 @@ Adamant Nature
 Togekiss @ Scope Lens  
 Ability: Super Luck  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 116 HP / 144 SpA / 248 Spe  
@@ -2707,7 +2707,7 @@ IVs: 0 Atk
 Archaludon @ Dragonium Z  
 Ability: Stamina  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Def / 252 SpA  
@@ -2722,7 +2722,7 @@ IVs: 0 Atk
 Orbeetle
 Ability: Frisk  
 Level: 89  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 248 SpA / 8 Spe  
@@ -2742,7 +2742,7 @@ Map Section: SharpriseSpire
 Nihilego Sharprise @ Power Herb  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2756,7 +2756,7 @@ IVs: 0 Atk
 Celesteela Sharprise @ Leftovers  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 128 Def / 128 SpD  
@@ -2768,7 +2768,7 @@ EVs: 252 HP / 128 Def / 128 SpD
 Kartana Sharprise @ Assault Vest  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 8 Atk / 248 SpD / 252 Spe  
@@ -2781,7 +2781,7 @@ Adamant Nature
 Guzzlord Sharprise @ Roseli Berry  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 Atk / 252 SpA / 4 SpD  
@@ -2794,7 +2794,7 @@ IVs: 0 Spe
 Naganadel Sharprise @ Poisonium Z  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -2808,7 +2808,7 @@ IVs: 0 Atk
 Stakataka Sharprise @ Shuca Berry  
 Ability: Swift Ascent  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 96 Def / 160 SpD  
@@ -2833,7 +2833,7 @@ Map Section: Oroland Coliseum
 Dracovish @ Mystic Water  
 Ability: Sand Rush  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2846,7 +2846,7 @@ Adamant Nature
 Sandaconda @ Sitrus Berry  
 Ability: Sand Spit  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 80 Atk / 176 SpD  
@@ -2859,7 +2859,7 @@ Careful Nature
 Togekiss @ Scope Lens  
 Ability: Super Luck  
 Level: 87   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 156 HP / 100 SpA / 252 Spe  
@@ -2873,7 +2873,7 @@ IVs: 0 Atk
 Gliscor @ Flying Gem  
 Ability: Sand Veil  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2886,7 +2886,7 @@ Jolly Nature
 Excadrill @ Groundium Z  
 Ability: Sand Rush  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2899,7 +2899,7 @@ Adamant Nature
 Tyranitar @ Tyranitarite  
 Ability: Sand Stream  
 Level: 89  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 104 Atk / 76 SpD / 76 Spe  
@@ -2922,7 +2922,7 @@ Map Section: Naval Base
 Togekiss @ Sitrus Berry  
 Ability: Serene Grace  
 Level: 89    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 SpA / 8 SpD  
@@ -2936,7 +2936,7 @@ IVs: 0 Atk
 Swampert @ Swampertite  
 Ability: Torrent  
 Level: 91    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Spe  
@@ -2949,7 +2949,7 @@ Adamant Nature
 Dhelmise @ Grassium Z  
 Ability: Steelworker  
 Level: 89  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2962,7 +2962,7 @@ Jolly Nature
 Wyrdeer @ Normal Gem  
 Ability: Intimidate  
 Level: 90   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -2975,7 +2975,7 @@ Adamant Nature
 Toxapex @ Black Sludge  
 Ability: Merciless  
 Level: 89    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Spe  
@@ -2988,7 +2988,7 @@ Adamant Nature
 Archaludon @ Assault Vest  
 Ability: Stamina  
 Level: 90  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 SpA / 4 SpD  
@@ -3012,7 +3012,7 @@ Map Section: Leaverra Forest
 Scovillain @ Life Orb  
 Ability: Chlorophyll  
 Level: 87    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 100 HP / 232 SpA / 176 Spe  
@@ -3026,7 +3026,7 @@ IVs: 0 Atk
 Hydreigon @ Dragon Gem  
 Ability: Levitate  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -3040,7 +3040,7 @@ IVs: 0 Atk
 Musharna @ Leftovers  
 Ability: Telepathy  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 220 Def / 36 SpD  
@@ -3054,7 +3054,7 @@ IVs: 0 Atk
 Ursaluna @ Flame Orb  
 Ability: Guts  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -3067,7 +3067,7 @@ Adamant Nature
 Magmortar @ Firium Z  
 Ability: Flame Body  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 220 SpA / 36 Spe  
@@ -3082,7 +3082,7 @@ IVs: 0 Atk
 Centiskorch
 Ability: White Smoke  
 Level: 89  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  
@@ -3102,7 +3102,7 @@ Class: Ex Leader
 Urshifu-Rapid-Strike @ Urshifunite Rapid
 Ability: Unseen Fist  
 Level: 88  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 140 HP / 88 Atk / 4 Def / 252 SpD / 24 Spe  
@@ -3115,7 +3115,7 @@ Adamant Nature
 Pelipper @ Flying Gem  
 Ability: Drizzle  
 Level: 86    
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 SpA / 252 Spe  
@@ -3129,7 +3129,7 @@ IVs: 0 Atk
 Toxicroak @ Black Sludge  
 Ability: Dry Skin  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 112 Atk / 60 Def / 60 SpD / 24 Spe  
@@ -3142,7 +3142,7 @@ Adamant Nature
 Scizor @ Fightinium Z  
 Ability: Technician  
 Level: 86   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Spe  
@@ -3155,7 +3155,7 @@ Adamant Nature
 Pawmot @ Life Orb  
 Ability: Iron Fist  
 Level: 87  
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 16 HP / 240 Atk / 252 Spe  
@@ -3168,7 +3168,7 @@ Jolly Nature
 Urshifu @ Focus Sash  
 Ability: Unseen Fist  
 Level: 88   
-Ball: ITEM_MASTER_BALL
+Ball: Master
 Shiny: No
 Happiness: 1
 EVs: 4 HP / 252 Atk / 252 Spe  

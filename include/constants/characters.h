@@ -274,6 +274,7 @@
 #define PLACEHOLDER_ID_OBJECT        0xF
 #define PLACEHOLDER_ID_POSSESSIVE    0x10
 // End playerCustom
+#define PLACEHOLDER_ID_REGION        0x11
 
 // battle placeholders are located in battle_message.h
 
