@@ -486,12 +486,21 @@ static void MReminderMoves_ProcessDefaultList(u32 *numMoves)
 
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, u32 *numMoves)
 {
-    for (u32 idx = MAX_LEVEL_UP_MOVES; idx > 0; idx--)
+    u32 arrayCount = 0;
+
+    // not all mons has the maximum amount of level up moves
+    while (learnset[arrayCount].move != MOVE_UNAVAILABLE)
+        arrayCount++;
+
+    for (u32 idx = arrayCount; idx > 0; idx--)
     {
         if (learnset[idx].move == MOVE_NONE || learnset[idx].move == MOVE_UNAVAILABLE)
             continue;
 
-        if (!IsMoveInSilicon(learnset[idx].move) || MReminderMon_Get()->level < learnset[idx].level)
+        if (!IsMoveInSilicon(learnset[idx].move))
+            continue;
+
+        if (learnset[idx].level > MReminderMon_Get()->level)
             continue;
 
         if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx].move, *numMoves))
@@ -522,11 +531,11 @@ static void MReminderMoves_ProcessMachineLearnset(const u16 *learnset, u32 *numM
     {
         u32 move = GetTMHMMoveId(idx);
 
-        if (!MReminderMoves_CanMonLearnMove(learnset, move, NUM_TECHNICAL_MACHINES)
-         || !CheckBagHasItem(GetTMHMItemIdFromMoveId(move), 1))
-        {
+        if (!MReminderMoves_CanMonLearnMove(learnset, move, NUM_TECHNICAL_MACHINES))
             continue;
-        }
+
+        if (!CheckBagHasItem(GetTMHMItemIdFromMoveId(move), 1))
+            continue;
 
         if (!MReminderMoves_IsMoveAlreadyAdded(move, *numMoves))
             MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_MACHINE, numMoves);
