@@ -227,15 +227,22 @@ static const struct SiliconExpTestData sDimu_GymTrainers =
         TRAINER_NONE
     },
 };
+*/
 static const struct SiliconExpTestData sBd_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_10,
     .targetLevel = LEVEL_CAP_VALUE_11,
     .trainerIds =
     {
-        TRAINER_NONE
+        TRAINER_114EB3AD,
+        TRAINER_11EDE0DC,
+        TRAINER_120A20F6,
+        TRAINER_13113EC0,
+        TRAINER_1387ABBC,
+        TRAINER_148A3C6B,
     },
 };
+/*
 static const struct SiliconExpTestData sKai_Battle8Trainers =
 {
     .startLevel = LEVEL_CAP_VALUE_11,
@@ -443,7 +450,6 @@ static const struct SiliconExpTestData sAdelaide_WecanstopyouactuallyTrainers =
         TRAINER_NONE
     },
 };
-*/
 
 //  Actual tests here
 
@@ -518,12 +524,14 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Dimu Gym")
 
     SiliconExpTest(&sDimu_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+*/
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: BD Gym")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     SiliconExpTest(&sBd_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+/*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Battle8")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
