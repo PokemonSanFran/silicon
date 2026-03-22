@@ -503,12 +503,8 @@ static void MReminderMoves_ProcessEggLearnset(const u16 *learnset, u32 *numMoves
 {
     for (u32 idx = 0; idx < MOVES_COUNT; idx++)
     {
-        if (!QuestMenu_GetSetQuestState(0, FLAG_GET_COMPLETED) // TODO
-         || learnset[idx] == MOVE_NONE
-         || learnset[idx] == MOVE_UNAVAILABLE)
-        {
+        if (learnset[idx] == MOVE_NONE || learnset[idx] == MOVE_UNAVAILABLE)
             break;
-        }
 
         if (!IsMoveInSilicon(idx) || !MReminderMoves_CanMonLearnMove(learnset, idx, EGG_MOVES_ARRAY_COUNT))
             continue;
