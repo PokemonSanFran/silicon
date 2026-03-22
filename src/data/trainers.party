@@ -5676,56 +5676,286 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Purugly @ Focus Sash
+Ability: Defiant
+Level: 50
+EVs: 244 Atk/124 Def/28 SpD
+Jolly Nature
+- Fake Out
+- Double Team
+- Body Slam
+- Super Fang
+
+Breloom @ Muscle Band
+Ability: Technician
+Level: 48
+EVs: 248 Atk/148 SpD
+Jolly Nature
+- Mach Punch
+- Bullet Seed
+- Bulldoze
+- Rock Tomb
+
+Zoroark @ Red Card
+Ability: Illusion
+Level: 50
+EVs: 124 Atk/124 SpA/148 Spe
+Mild Nature
+- Night Daze
+- Flamethrower
+- Extrasensory
+- Sludge Bomb
+
+Granbull @ Toxic Orb
+Ability: Quick Feet
+Level: 49
+EVs: 248 Atk/52 Def/100 SpD
+Adamant Nature
+- Roar
+- Ice Punch
+- Fire Punch
+- Play Rough
 
 === TRAINER_11EDE0DC ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Swalot @ Payapa Berry
+Ability: Sticky Hold
+Level: 49
+EVs: 88 Def/216 SpA/96 SpD
+Modest Nature
+- Toxic Spikes
+- Sludge Wave
+- Giga Drain
+- Mud Shot
+
+Scrafty @ Roseli Berry
+Ability: Intimidate
+Level: 48
+EVs: 116 Atk/132 Def/148 SpD
+Adamant Nature
+- Dragon Tail
+- Zen Headbutt
+- Dragon Dance
+- Knock Off
+
+Nidoking @ Red Card
+Ability: Sheer Force
+Level: 49
+EVs: 136 HP/44 Def/136 SpA/76 SpD
+Modest Nature
+- Ice Beam
+- Venoshock
+- Earth Power
+- Toxic Spikes
+
+Honchkrow @ Scope Lens
+Ability: Super Luck
+Level: 50
+EVs: 148 SpA/252 Spe
+Modest Nature
+- Hex
+- Heat Wave
+- Air Cutter
+- Psychic Noise
 
 === TRAINER_120A20F6 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Klefki @ Red Card
+Ability: Prankster
+Level: 51
+EVs: 48 HP/84 Def/116 SpA/148 SpD
+Modest Nature
+- Spikes
+- Steel Beam
+- Misty Terrain
+- Draining Kiss
+
+Slurpuff @ Misty Seed
+Ability: Unburden
+Level: 50
+EVs: 116 HP/28 Def/252 Spe
+Timid Nature
+- Sticky Web
+- Surf
+- Flamethrower
+- Energy Ball
+
+Minior-Indigo @ Sitrus Berry
+Ability: Shields Down
+Level: 49
+EVs: 148 Atk/248 Spe
+Mild Nature
+- Stealth Rock
+- Ancient Power
+- Scorching Sands
+- Acrobatics
+
+Pangoro @ Liechi Berry
+Ability: Scrappy
+Level: 50
+EVs: 148 HP/116 Atk/36 Def/100 SpD
+Adamant Nature
+- Circle Throw
+- Low Kick
+- Earthquake
+- Darkest Lariat
 
 === TRAINER_13113EC0 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Vikavolt @ Quick Claw
+Ability: Levitate
+Level: 50
+EVs: 184 HP/208 SpA/8 SpD
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sticky Web
+- Volt Switch
+- Energy Ball
+- Bug Buzz
+
+Bronzong @ Red Card
+Ability: Heatproof
+Level: 51
+EVs: 248 HP/140 Def/8 SpD
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Stealth Rock
+- Zen Headbutt
+- Earthquake
+- Iron Head
+
+Ursaluna @ Berserk Gene
+Ability: Unnerve
+Level: 48
+EVs: 156 HP/124 Atk/116 Def
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Play Rough
+- Brick Break
+- Body Slam
+- Bulldoze
 
 === TRAINER_1387ABBC ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Orbeetle @ Red Card
+Ability: Swarm
+Level: 50
+EVs: 136 HP/40 Def/224 Spe
+Timid Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sticky Web
+- Hypnosis
+- Psychic Noise
+- Bug Buzz
+
+Primeape @ Eviolite
+Ability: Defiant
+Level: 48
+EVs: 184 HP/108 Def/104 SpD
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Stealth Rock
+- Stone Edge
+- Drain Punch
+- Poison Jab
 
 === TRAINER_148A3C6B ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Toedscruel @ Yache Berry
+Ability: Mycelium Might
+Level: 49
+EVs: 140 HP/72 Def/104 SpA/80 SpD
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Spore
+- Toxic Spikes
+- Earth Power
+- Giga Drain
+
+Noctowl @ Blunder Policy
+Ability: Insomnia
+Level: 51
+EVs: 80 HP/112 Def/152 SpA/52 Spe
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Hypnosis
+- Hurricane
+- Whirlwind
+- Extrasensory
 
 === TRAINER_14C5EE6C ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Shiinotic @ Red Card
+Ability: Effect Spore
+Level: 49
+EVs: 200 HP/200 SpA
+Modest Nature
+IVs: 0 Atk
+- Moonblast
+- Energy Ball
+- Spore
+- Moonlight
+
+Spinda @ Red Card
+Ability: Tangled Feet
+Level: 50
+EVs: 200 Atk/200 Spe
+Jolly Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Thrash
+- Fake Out
+- Sucker Punch
+
+Weezing @ Poisonium Z
+Ability: Levitate
+Level: 50
+EVs: 200 HP/100 Atk/100 SpA
+Brave Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Gunk Shot
+- Destiny Bond
+- Flamethrower
+- Dark Pulse
+
+Musharna @ Red Card
+Ability: Synchronize
+Level: 51
+EVs: 200 HP/100 Def/50 SpA/50 SpD
+Relaxed Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Dream Eater
+- Yawn
+- Alluring Voice
+- Psychic
+
+Annihilape @ Sitrus Berry
+Ability: Defiant
+Level: 52
+EVs: 200 HP/200 Spe
+Adamant Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Close Combat
+- Stomping Tantrum
+- Shadow Claw
+- Taunt
 
 === TRAINER_1508BB71 ===
 Name: Blank
