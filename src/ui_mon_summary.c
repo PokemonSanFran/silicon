@@ -3050,9 +3050,14 @@ static void MovesPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sMovesPageMisc_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
+        spriteId = CreateSprite(&gMonSummary_SlotCursorSpriteTemplate, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, SUMMARY_MOVES_GENERAL_Y, 0);
 
-        SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
+        struct Sprite *sprite = &gSprites[spriteId];
+
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(TAG_SUMMARY_UNIVERSAL_PAL);
+        sprite->callback = SpriteCB_MovesPageMisc_SlotCursor;
+        SetSubspriteTables(sprite, gMonSummary_128x16SubspriteTable);
+
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_SLOT_CURSOR, spriteId);
     }
 

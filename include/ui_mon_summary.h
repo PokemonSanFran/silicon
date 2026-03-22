@@ -18,6 +18,7 @@ extern const u8 gMonSummary_MoveTypeGfx[];
 extern const struct SpritePalette gMonSummary_TypeSpritePalettes[];
 extern const struct SpriteTemplate gMonSummary_MoveBarSpriteTemplate;
 extern const struct SubspriteTable gMonSummary_128x16SubspriteTable[];
+extern const struct SpriteTemplate gMonSummary_SlotCursorSpriteTemplate;
 
 void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, MainCallback);
 

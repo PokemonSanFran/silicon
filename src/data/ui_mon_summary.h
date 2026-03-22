@@ -593,24 +593,6 @@ static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =
     .callback = SpriteCB_MovesPageMisc_Arrows
 };
 
-static const struct SpriteTemplate sMovesPageMisc_SlotCursorSpriteTemplate =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
-    .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
-        .priority = 2,
-    },
-    .anims = sSummarySprite_FrameImageAnimTemplate,
-    .images = &(const struct SpriteFrameImage){
-        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/slot_cursor.4bpp"),
-        .size = (128 * 16) / 2,
-        .relativeFrames = TRUE
-    },
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_MovesPageMisc_SlotCursor
-};
-
 static const struct SpriteTemplate sMovesPageMisc_OptionCursorSpriteTemplate =
 {
     .tileTag = TAG_NONE,
@@ -694,4 +676,22 @@ const struct SubspriteTable gMonSummary_128x16SubspriteTable[] =
         .subsprites = sSummarySprite_128x16Subsprites
     },
     { 0, NULL }
+};
+
+const struct SpriteTemplate gMonSummary_SlotCursorSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = sSummarySprite_FrameImageAnimTemplate,
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/slot_cursor.4bpp"),
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
