@@ -545,6 +545,7 @@ enum
     MUS_VS_GAME_DIRECTOR,
     MUS_ROUTE6_NIGHT,
     MUS_GYM_HALERBA,
+    MUS_ROUTE_1_5_7,
     MUS_LAST,
 };
 #define END_MUS (MUS_LAST - 1)
