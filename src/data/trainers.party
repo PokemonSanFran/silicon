@@ -5962,24 +5962,97 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Mamoswine @ Leftovers  
+Ability: Snow Cloak  
+Level: 47  
+EVs: 208 HP / 184 Def / 8 SpA  
+Bold Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Snowscape  
+- Blizzard  
+- Rest  
+- Reflect  
+
+Beartic @ Starf Berry  
+Ability: Snow Cloak  
+Level: 46  
+EVs: 252 Atk / 72 Def / 72 SpD  
+Relaxed Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Snowscape  
+- Avalanche  
+- Sheer Cold  
 
 === TRAINER_1510C80A ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Mudsdale @ Smooth Rock
+Ability: Stamina
+Level: 44
+EVs: 156 HP/244 Def
+Impish Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Sandstorm
+- Body Press
+- Counter
+- Curse
+
+Sandaconda (M) @ Red Card
+Ability: Sand Spit
+Level: 44
+EVs: 152 HP/88 Atk/156 Def
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Hurricane
+- Drill Run
+- Fire Fang
+- Skitter Smack
+
+Kadabra @ Life Orb
+Ability: Magic Guard
+Level: 47
+EVs: 148 Def/252 SpA
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psychic
+- Thunder Punch
+- Shadow Ball
+- Energy Ball
 
 === TRAINER_15598A38 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Medicham @ Expert Belt  
+Ability: Pure Power  
+EVs: 252 Atk / 144 Spe  
+Jolly Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- High Jump Kick  
+- Poison Jab  
+- Zen Headbutt  
+- Fire Punch  
+
+Medicham @ Expert Belt  
+Ability: Pure Power  
+EVs: 252 Atk / 148 Spe  
+Lonely Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Ice Punch  
+- Thunder Punch  
+- Zen Headbutt  
+- Drain Punch  
+
+Lokix @ Expert Belt  
+Ability: Tinted Lens  
+EVs: 204 Atk / 196 Spe  
+Naughty Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bug Bite  
+- Aerial Ace  
+- Lash Out  
+- Double Kick  
 
 === TRAINER_15A66566 ===
 Name: Blank

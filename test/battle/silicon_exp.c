@@ -234,6 +234,9 @@ static const struct SiliconExpTestData sBd_GymTrainers =
     .targetLevel = LEVEL_CAP_VALUE_11,
     .trainerIds =
     {
+        TRAINER_1508BB71,
+        TRAINER_1510C80A,
+        TRAINER_15598A38,
         TRAINER_114EB3AD,
         TRAINER_11EDE0DC,
         TRAINER_120A20F6,
