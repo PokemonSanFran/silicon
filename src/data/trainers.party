@@ -6026,6 +6026,7 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 
 Medicham @ Expert Belt  
 Ability: Pure Power  
+Level: 44
 EVs: 252 Atk / 144 Spe  
 Jolly Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -6036,6 +6037,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Medicham @ Expert Belt  
 Ability: Pure Power  
+Level: 45
 EVs: 252 Atk / 148 Spe  
 Lonely Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
@@ -6046,6 +6048,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Lokix @ Expert Belt  
 Ability: Tinted Lens  
+Level: 45
 EVs: 204 Atk / 196 Spe  
 Naughty Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
