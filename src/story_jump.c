@@ -758,6 +758,7 @@ void JumpPlayerTo_CatchTutorial(bool32 jumpType)
 
 void FlagsVarWarp_EnterFallkner()
 {
+    FlagSet(FLAG_VISITED_ROUTE6);
     FlagSet(FLAG_VISITED_MERMEREZA_CITY);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     FlagSet(FLAG_BADGE01_GET);
