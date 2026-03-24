@@ -14873,169 +14873,113 @@
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
+        .partySize = 4,
         .party = (const struct TrainerMon[])
         {
             {
 #line 6135
-            .species = SPECIES_SPEWPA,
+            .species = SPECIES_VANILLUXE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6137
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6136
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+#line 6135
+            .heldItem = ITEM_ICY_ROCK,
 #line 6138
-    [DIFFICULTY_NORMAL][TRAINER_1710375D] =
-    {
-#line 6139
-        .trainerName = _("Blank"),
+            .ev = TRAINER_PARTY_EVS(132, 0, 76, 0, 172, 16),
 #line 6140
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 6136
+            .ability = ABILITY_SNOW_WARNING,
+#line 6137
+            .lvl = 42,
+#line 6139
+            .nature = NATURE_SASSY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
 #line 6141
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+                MOVE_MIST,
+                MOVE_BLIZZARD,
+                MOVE_EXPLOSION,
+            },
+            },
             {
-#line 6143
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6145
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6144
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 6146
-    [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
-    {
-#line 6147
-        .trainerName = _("Blank"),
+            .species = SPECIES_CHANSEY,
+#line 6145
+            .gender = TRAINER_MON_FEMALE,
+#line 6145
+            .heldItem = ITEM_NEVER_MELT_ICE,
 #line 6148
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+            .ev = TRAINER_PARTY_EVS(0, 0, 144, 0, 252, 0),
+#line 6150
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 6146
+            .ability = ABILITY_SERENE_GRACE,
+#line 6147
+            .lvl = 46,
 #line 6149
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
 #line 6151
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6153
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6152
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+                MOVE_SNOWSCAPE,
+                MOVE_BLIZZARD,
+                MOVE_HEALING_WISH,
+                MOVE_THUNDER_WAVE,
             },
-        },
-    },
-#line 6154
-    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
-    {
-#line 6155
-        .trainerName = _("Blank"),
-#line 6156
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6157
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+            },
             {
-#line 6159
-            .species = SPECIES_SPEWPA,
+#line 6156
+            .species = SPECIES_LAPRAS,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6156
+            .heldItem = ITEM_NEVER_MELT_ICE,
+#line 6159
+            .ev = TRAINER_PARTY_EVS(64, 0, 44, 0, 252, 40),
 #line 6161
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 6157
+            .ability = ABILITY_WATER_ABSORB,
+#line 6158
+            .lvl = 46,
 #line 6160
-            .lvl = 1,
-            .nature = NATURE_HARDY,
+            .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+            .moves = {
 #line 6162
-    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
-    {
-#line 6163
-        .trainerName = _("Blank"),
-#line 6164
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6165
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+                MOVE_SNOWSCAPE,
+                MOVE_BLIZZARD,
+                MOVE_PSYCHIC_NOISE,
+                MOVE_FREEZE_DRY,
+            },
+            },
             {
 #line 6167
-            .species = SPECIES_SPEWPA,
+            .species = SPECIES_GOREBYSS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6169
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6168
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+#line 6167
+            .heldItem = ITEM_NEVER_MELT_ICE,
 #line 6170
-    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
-    {
-#line 6171
-        .trainerName = _("Blank"),
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 148, 252, 0),
 #line 6172
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6173
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 6175
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6177
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6176
-            .lvl = 1,
-            .nature = NATURE_HARDY,
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 6168
+            .ability = ABILITY_SWIFT_SWIM,
+#line 6169
+            .lvl = 41,
+#line 6171
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 6173
+                MOVE_SNOWSCAPE,
+                MOVE_BLIZZARD,
+                MOVE_BOUNCE,
+                MOVE_SHELL_SMASH,
+            },
             },
         },
     },
 #line 6178
-    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
+    [DIFFICULTY_NORMAL][TRAINER_1710375D] =
     {
 #line 6179
         .trainerName = _("Blank"),
@@ -15064,7 +15008,7 @@
         },
     },
 #line 6186
-    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
+    [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
     {
 #line 6187
         .trainerName = _("Blank"),
@@ -15093,7 +15037,7 @@
         },
     },
 #line 6194
-    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
+    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
     {
 #line 6195
         .trainerName = _("Blank"),
@@ -15122,7 +15066,7 @@
         },
     },
 #line 6202
-    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
+    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
     {
 #line 6203
         .trainerName = _("Blank"),
@@ -15151,7 +15095,7 @@
         },
     },
 #line 6210
-    [DIFFICULTY_NORMAL][TRAINER_1A763631] =
+    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
     {
 #line 6211
         .trainerName = _("Blank"),
@@ -15180,7 +15124,7 @@
         },
     },
 #line 6218
-    [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
+    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
     {
 #line 6219
         .trainerName = _("Blank"),
@@ -15209,7 +15153,7 @@
         },
     },
 #line 6226
-    [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
+    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
     {
 #line 6227
         .trainerName = _("Blank"),
@@ -15238,7 +15182,7 @@
         },
     },
 #line 6234
-    [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
+    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
     {
 #line 6235
         .trainerName = _("Blank"),
@@ -15267,7 +15211,7 @@
         },
     },
 #line 6242
-    [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
+    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
     {
 #line 6243
         .trainerName = _("Blank"),
@@ -15296,7 +15240,7 @@
         },
     },
 #line 6250
-    [DIFFICULTY_NORMAL][TRAINER_1B616469] =
+    [DIFFICULTY_NORMAL][TRAINER_1A763631] =
     {
 #line 6251
         .trainerName = _("Blank"),
@@ -15325,7 +15269,7 @@
         },
     },
 #line 6258
-    [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
     {
 #line 6259
         .trainerName = _("Blank"),
@@ -15354,7 +15298,7 @@
         },
     },
 #line 6266
-    [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
     {
 #line 6267
         .trainerName = _("Blank"),
@@ -15383,7 +15327,7 @@
         },
     },
 #line 6274
-    [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
+    [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
     {
 #line 6275
         .trainerName = _("Blank"),
@@ -15412,7 +15356,7 @@
         },
     },
 #line 6282
-    [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
+    [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
     {
 #line 6283
         .trainerName = _("Blank"),
@@ -15441,7 +15385,7 @@
         },
     },
 #line 6290
-    [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
+    [DIFFICULTY_NORMAL][TRAINER_1B616469] =
     {
 #line 6291
         .trainerName = _("Blank"),
@@ -15470,7 +15414,7 @@
         },
     },
 #line 6298
-    [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
+    [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
     {
 #line 6299
         .trainerName = _("Blank"),
@@ -15499,7 +15443,7 @@
         },
     },
 #line 6306
-    [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
+    [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
     {
 #line 6307
         .trainerName = _("Blank"),
@@ -15528,7 +15472,7 @@
         },
     },
 #line 6314
-    [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
+    [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
     {
 #line 6315
         .trainerName = _("Blank"),
@@ -15557,7 +15501,7 @@
         },
     },
 #line 6322
-    [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
+    [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
     {
 #line 6323
         .trainerName = _("Blank"),
@@ -15586,7 +15530,7 @@
         },
     },
 #line 6330
-    [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
+    [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
     {
 #line 6331
         .trainerName = _("Blank"),
@@ -15615,7 +15559,7 @@
         },
     },
 #line 6338
-    [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
     {
 #line 6339
         .trainerName = _("Blank"),
@@ -15644,7 +15588,7 @@
         },
     },
 #line 6346
-    [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
     {
 #line 6347
         .trainerName = _("Blank"),
@@ -15673,7 +15617,7 @@
         },
     },
 #line 6354
-    [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
+    [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
     {
 #line 6355
         .trainerName = _("Blank"),
@@ -15702,7 +15646,7 @@
         },
     },
 #line 6362
-    [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
+    [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
     {
 #line 6363
         .trainerName = _("Blank"),
@@ -15731,7 +15675,7 @@
         },
     },
 #line 6370
-    [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
+    [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
     {
 #line 6371
         .trainerName = _("Blank"),
@@ -15760,7 +15704,7 @@
         },
     },
 #line 6378
-    [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
+    [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
     {
 #line 6379
         .trainerName = _("Blank"),
@@ -15789,7 +15733,7 @@
         },
     },
 #line 6386
-    [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
+    [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
     {
 #line 6387
         .trainerName = _("Blank"),
@@ -15818,7 +15762,7 @@
         },
     },
 #line 6394
-    [DIFFICULTY_NORMAL][TRAINER_200650CA] =
+    [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
     {
 #line 6395
         .trainerName = _("Blank"),
@@ -15847,7 +15791,7 @@
         },
     },
 #line 6402
-    [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
+    [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
     {
 #line 6403
         .trainerName = _("Blank"),
@@ -15876,7 +15820,7 @@
         },
     },
 #line 6410
-    [DIFFICULTY_NORMAL][TRAINER_20993B87] =
+    [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
     {
 #line 6411
         .trainerName = _("Blank"),
@@ -15905,7 +15849,7 @@
         },
     },
 #line 6418
-    [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
+    [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
     {
 #line 6419
         .trainerName = _("Blank"),
@@ -15934,7 +15878,7 @@
         },
     },
 #line 6426
-    [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
+    [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
     {
 #line 6427
         .trainerName = _("Blank"),
@@ -15963,7 +15907,7 @@
         },
     },
 #line 6434
-    [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
+    [DIFFICULTY_NORMAL][TRAINER_200650CA] =
     {
 #line 6435
         .trainerName = _("Blank"),
@@ -15992,7 +15936,7 @@
         },
     },
 #line 6442
-    [DIFFICULTY_NORMAL][TRAINER_2177173C] =
+    [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
     {
 #line 6443
         .trainerName = _("Blank"),
@@ -16021,7 +15965,7 @@
         },
     },
 #line 6450
-    [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
+    [DIFFICULTY_NORMAL][TRAINER_20993B87] =
     {
 #line 6451
         .trainerName = _("Blank"),
@@ -16050,7 +15994,7 @@
         },
     },
 #line 6458
-    [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
+    [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
     {
 #line 6459
         .trainerName = _("Blank"),
@@ -16079,7 +16023,7 @@
         },
     },
 #line 6466
-    [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
+    [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
     {
 #line 6467
         .trainerName = _("Blank"),
@@ -16108,7 +16052,7 @@
         },
     },
 #line 6474
-    [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
+    [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
     {
 #line 6475
         .trainerName = _("Blank"),
@@ -16137,7 +16081,7 @@
         },
     },
 #line 6482
-    [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
+    [DIFFICULTY_NORMAL][TRAINER_2177173C] =
     {
 #line 6483
         .trainerName = _("Blank"),
@@ -16166,7 +16110,7 @@
         },
     },
 #line 6490
-    [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
+    [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
     {
 #line 6491
         .trainerName = _("Blank"),
@@ -16195,7 +16139,7 @@
         },
     },
 #line 6498
-    [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
+    [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
     {
 #line 6499
         .trainerName = _("Blank"),
@@ -16224,7 +16168,7 @@
         },
     },
 #line 6506
-    [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
+    [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
     {
 #line 6507
         .trainerName = _("Blank"),
@@ -16253,7 +16197,7 @@
         },
     },
 #line 6514
-    [DIFFICULTY_NORMAL][TRAINER_245235C9] =
+    [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
     {
 #line 6515
         .trainerName = _("Blank"),
@@ -16282,7 +16226,7 @@
         },
     },
 #line 6522
-    [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
+    [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
     {
 #line 6523
         .trainerName = _("Blank"),
@@ -16311,7 +16255,7 @@
         },
     },
 #line 6530
-    [DIFFICULTY_NORMAL][TRAINER_247FE019] =
+    [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
     {
 #line 6531
         .trainerName = _("Blank"),
@@ -16340,7 +16284,7 @@
         },
     },
 #line 6538
-    [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
+    [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
     {
 #line 6539
         .trainerName = _("Blank"),
@@ -16369,7 +16313,7 @@
         },
     },
 #line 6546
-    [DIFFICULTY_NORMAL][TRAINER_24AC96DF] =
+    [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
     {
 #line 6547
         .trainerName = _("Blank"),
@@ -16398,7 +16342,7 @@
         },
     },
 #line 6554
-    [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
+    [DIFFICULTY_NORMAL][TRAINER_245235C9] =
     {
 #line 6555
         .trainerName = _("Blank"),
@@ -16427,7 +16371,7 @@
         },
     },
 #line 6562
-    [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
+    [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
     {
 #line 6563
         .trainerName = _("Blank"),
@@ -16456,7 +16400,7 @@
         },
     },
 #line 6570
-    [DIFFICULTY_NORMAL][TRAINER_265174A6] =
+    [DIFFICULTY_NORMAL][TRAINER_247FE019] =
     {
 #line 6571
         .trainerName = _("Blank"),
@@ -16485,7 +16429,7 @@
         },
     },
 #line 6578
-    [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
+    [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
     {
 #line 6579
         .trainerName = _("Blank"),
@@ -16514,7 +16458,7 @@
         },
     },
 #line 6586
-    [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
+    [DIFFICULTY_NORMAL][TRAINER_24AC96DF] =
     {
 #line 6587
         .trainerName = _("Blank"),
@@ -16543,7 +16487,7 @@
         },
     },
 #line 6594
-    [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
+    [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
     {
 #line 6595
         .trainerName = _("Blank"),
@@ -16572,7 +16516,7 @@
         },
     },
 #line 6602
-    [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
+    [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
     {
 #line 6603
         .trainerName = _("Blank"),
@@ -16601,7 +16545,7 @@
         },
     },
 #line 6610
-    [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
+    [DIFFICULTY_NORMAL][TRAINER_265174A6] =
     {
 #line 6611
         .trainerName = _("Blank"),
@@ -16630,7 +16574,7 @@
         },
     },
 #line 6618
-    [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
+    [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
     {
 #line 6619
         .trainerName = _("Blank"),
@@ -16659,7 +16603,7 @@
         },
     },
 #line 6626
-    [DIFFICULTY_NORMAL][TRAINER_292E386F] =
+    [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
     {
 #line 6627
         .trainerName = _("Blank"),
@@ -16688,7 +16632,7 @@
         },
     },
 #line 6634
-    [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
+    [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
     {
 #line 6635
         .trainerName = _("Blank"),
@@ -16717,7 +16661,7 @@
         },
     },
 #line 6642
-    [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
+    [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
     {
 #line 6643
         .trainerName = _("Blank"),
@@ -16746,7 +16690,7 @@
         },
     },
 #line 6650
-    [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
+    [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
     {
 #line 6651
         .trainerName = _("Blank"),
@@ -16775,7 +16719,7 @@
         },
     },
 #line 6658
-    [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
+    [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
     {
 #line 6659
         .trainerName = _("Blank"),
@@ -16804,7 +16748,7 @@
         },
     },
 #line 6666
-    [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
+    [DIFFICULTY_NORMAL][TRAINER_292E386F] =
     {
 #line 6667
         .trainerName = _("Blank"),
@@ -16833,7 +16777,7 @@
         },
     },
 #line 6674
-    [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
+    [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
     {
 #line 6675
         .trainerName = _("Blank"),
@@ -16862,7 +16806,7 @@
         },
     },
 #line 6682
-    [DIFFICULTY_NORMAL][TRAINER_2B163825] =
+    [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
     {
 #line 6683
         .trainerName = _("Blank"),
@@ -16891,7 +16835,7 @@
         },
     },
 #line 6690
-    [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
+    [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
     {
 #line 6691
         .trainerName = _("Blank"),
@@ -16920,7 +16864,7 @@
         },
     },
 #line 6698
-    [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
+    [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
     {
 #line 6699
         .trainerName = _("Blank"),
@@ -16949,7 +16893,7 @@
         },
     },
 #line 6706
-    [DIFFICULTY_NORMAL][TRAINER_2C040422] =
+    [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
     {
 #line 6707
         .trainerName = _("Blank"),
@@ -16978,7 +16922,7 @@
         },
     },
 #line 6714
-    [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
+    [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
     {
 #line 6715
         .trainerName = _("Blank"),
@@ -17007,7 +16951,7 @@
         },
     },
 #line 6722
-    [DIFFICULTY_NORMAL][TRAINER_2C398893] =
+    [DIFFICULTY_NORMAL][TRAINER_2B163825] =
     {
 #line 6723
         .trainerName = _("Blank"),
@@ -17036,7 +16980,7 @@
         },
     },
 #line 6730
-    [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
+    [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
     {
 #line 6731
         .trainerName = _("Blank"),
@@ -17065,7 +17009,7 @@
         },
     },
 #line 6738
-    [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
+    [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
     {
 #line 6739
         .trainerName = _("Blank"),
@@ -17094,7 +17038,7 @@
         },
     },
 #line 6746
-    [DIFFICULTY_NORMAL][TRAINER_2D203158] =
+    [DIFFICULTY_NORMAL][TRAINER_2C040422] =
     {
 #line 6747
         .trainerName = _("Blank"),
@@ -17123,7 +17067,7 @@
         },
     },
 #line 6754
-    [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
+    [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
     {
 #line 6755
         .trainerName = _("Blank"),
@@ -17152,7 +17096,7 @@
         },
     },
 #line 6762
-    [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
+    [DIFFICULTY_NORMAL][TRAINER_2C398893] =
     {
 #line 6763
         .trainerName = _("Blank"),
@@ -17181,7 +17125,7 @@
         },
     },
 #line 6770
-    [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
+    [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
     {
 #line 6771
         .trainerName = _("Blank"),
@@ -17210,7 +17154,7 @@
         },
     },
 #line 6778
-    [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
+    [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
     {
 #line 6779
         .trainerName = _("Blank"),
@@ -17239,7 +17183,7 @@
         },
     },
 #line 6786
-    [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
+    [DIFFICULTY_NORMAL][TRAINER_2D203158] =
     {
 #line 6787
         .trainerName = _("Blank"),
@@ -17268,7 +17212,7 @@
         },
     },
 #line 6794
-    [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
+    [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
     {
 #line 6795
         .trainerName = _("Blank"),
@@ -17297,7 +17241,7 @@
         },
     },
 #line 6802
-    [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
+    [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
     {
 #line 6803
         .trainerName = _("Blank"),
@@ -17326,7 +17270,7 @@
         },
     },
 #line 6810
-    [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
+    [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
     {
 #line 6811
         .trainerName = _("Blank"),
@@ -17355,7 +17299,7 @@
         },
     },
 #line 6818
-    [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
+    [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
     {
 #line 6819
         .trainerName = _("Blank"),
@@ -17384,7 +17328,7 @@
         },
     },
 #line 6826
-    [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
+    [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
     {
 #line 6827
         .trainerName = _("Blank"),
@@ -17413,7 +17357,7 @@
         },
     },
 #line 6834
-    [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
+    [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
     {
 #line 6835
         .trainerName = _("Blank"),
@@ -17442,7 +17386,7 @@
         },
     },
 #line 6842
-    [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
+    [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
     {
 #line 6843
         .trainerName = _("Blank"),
@@ -17471,7 +17415,7 @@
         },
     },
 #line 6850
-    [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
+    [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
     {
 #line 6851
         .trainerName = _("Blank"),
@@ -17500,7 +17444,7 @@
         },
     },
 #line 6858
-    [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
+    [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
     {
 #line 6859
         .trainerName = _("Blank"),
@@ -17529,7 +17473,7 @@
         },
     },
 #line 6866
-    [DIFFICULTY_NORMAL][TRAINER_317B8932] =
+    [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
     {
 #line 6867
         .trainerName = _("Blank"),
@@ -17558,7 +17502,7 @@
         },
     },
 #line 6874
-    [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
+    [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
     {
 #line 6875
         .trainerName = _("Blank"),
@@ -17587,7 +17531,7 @@
         },
     },
 #line 6882
-    [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
+    [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
     {
 #line 6883
         .trainerName = _("Blank"),
@@ -17616,7 +17560,7 @@
         },
     },
 #line 6890
-    [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
+    [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
     {
 #line 6891
         .trainerName = _("Blank"),
@@ -17645,7 +17589,7 @@
         },
     },
 #line 6898
-    [DIFFICULTY_NORMAL][TRAINER_3566F099] =
+    [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
     {
 #line 6899
         .trainerName = _("Blank"),
@@ -17674,7 +17618,7 @@
         },
     },
 #line 6906
-    [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
+    [DIFFICULTY_NORMAL][TRAINER_317B8932] =
     {
 #line 6907
         .trainerName = _("Blank"),
@@ -17703,7 +17647,7 @@
         },
     },
 #line 6914
-    [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
+    [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
     {
 #line 6915
         .trainerName = _("Blank"),
@@ -17732,7 +17676,7 @@
         },
     },
 #line 6922
-    [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
+    [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
     {
 #line 6923
         .trainerName = _("Blank"),
@@ -17761,7 +17705,7 @@
         },
     },
 #line 6930
-    [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
+    [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
     {
 #line 6931
         .trainerName = _("Blank"),
@@ -17790,7 +17734,7 @@
         },
     },
 #line 6938
-    [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
+    [DIFFICULTY_NORMAL][TRAINER_3566F099] =
     {
 #line 6939
         .trainerName = _("Blank"),
@@ -17819,7 +17763,7 @@
         },
     },
 #line 6946
-    [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
+    [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
     {
 #line 6947
         .trainerName = _("Blank"),
@@ -17848,7 +17792,7 @@
         },
     },
 #line 6954
-    [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
+    [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
     {
 #line 6955
         .trainerName = _("Blank"),
@@ -17877,7 +17821,7 @@
         },
     },
 #line 6962
-    [DIFFICULTY_NORMAL][TRAINER_3842496B] =
+    [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
     {
 #line 6963
         .trainerName = _("Blank"),
@@ -17906,7 +17850,7 @@
         },
     },
 #line 6970
-    [DIFFICULTY_NORMAL][TRAINER_387351C1] =
+    [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
     {
 #line 6971
         .trainerName = _("Blank"),
@@ -17935,7 +17879,7 @@
         },
     },
 #line 6978
-    [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
+    [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
     {
 #line 6979
         .trainerName = _("Blank"),
@@ -17964,7 +17908,7 @@
         },
     },
 #line 6986
-    [DIFFICULTY_NORMAL][TRAINER_3924756E] =
+    [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
     {
 #line 6987
         .trainerName = _("Blank"),
@@ -17993,7 +17937,7 @@
         },
     },
 #line 6994
-    [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
+    [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
     {
 #line 6995
         .trainerName = _("Blank"),
@@ -18022,7 +17966,7 @@
         },
     },
 #line 7002
-    [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
+    [DIFFICULTY_NORMAL][TRAINER_3842496B] =
     {
 #line 7003
         .trainerName = _("Blank"),
@@ -18051,7 +17995,7 @@
         },
     },
 #line 7010
-    [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
+    [DIFFICULTY_NORMAL][TRAINER_387351C1] =
     {
 #line 7011
         .trainerName = _("Blank"),
@@ -18080,7 +18024,7 @@
         },
     },
 #line 7018
-    [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
+    [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
     {
 #line 7019
         .trainerName = _("Blank"),
@@ -18109,7 +18053,7 @@
         },
     },
 #line 7026
-    [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
+    [DIFFICULTY_NORMAL][TRAINER_3924756E] =
     {
 #line 7027
         .trainerName = _("Blank"),
@@ -18138,7 +18082,7 @@
         },
     },
 #line 7034
-    [DIFFICULTY_NORMAL][TRAINER_3A840205] =
+    [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
     {
 #line 7035
         .trainerName = _("Blank"),
@@ -18167,7 +18111,7 @@
         },
     },
 #line 7042
-    [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
+    [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
     {
 #line 7043
         .trainerName = _("Blank"),
@@ -18196,7 +18140,7 @@
         },
     },
 #line 7050
-    [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
+    [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
     {
 #line 7051
         .trainerName = _("Blank"),
@@ -18225,7 +18169,7 @@
         },
     },
 #line 7058
-    [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
+    [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
     {
 #line 7059
         .trainerName = _("Blank"),
@@ -18254,7 +18198,7 @@
         },
     },
 #line 7066
-    [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
+    [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
     {
 #line 7067
         .trainerName = _("Blank"),
@@ -18283,7 +18227,7 @@
         },
     },
 #line 7074
-    [DIFFICULTY_NORMAL][TRAINER_3C621048] =
+    [DIFFICULTY_NORMAL][TRAINER_3A840205] =
     {
 #line 7075
         .trainerName = _("Blank"),
@@ -18312,7 +18256,7 @@
         },
     },
 #line 7082
-    [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
+    [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
     {
 #line 7083
         .trainerName = _("Blank"),
@@ -18341,7 +18285,7 @@
         },
     },
 #line 7090
-    [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
+    [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
     {
 #line 7091
         .trainerName = _("Blank"),
@@ -18370,7 +18314,7 @@
         },
     },
 #line 7098
-    [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
+    [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
     {
 #line 7099
         .trainerName = _("Blank"),
@@ -18399,7 +18343,7 @@
         },
     },
 #line 7106
-    [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
+    [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
     {
 #line 7107
         .trainerName = _("Blank"),
@@ -18428,7 +18372,7 @@
         },
     },
 #line 7114
-    [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
+    [DIFFICULTY_NORMAL][TRAINER_3C621048] =
     {
 #line 7115
         .trainerName = _("Blank"),
@@ -18457,7 +18401,7 @@
         },
     },
 #line 7122
-    [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
+    [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
     {
 #line 7123
         .trainerName = _("Blank"),
@@ -18486,7 +18430,7 @@
         },
     },
 #line 7130
-    [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
+    [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
     {
 #line 7131
         .trainerName = _("Blank"),
@@ -18515,7 +18459,7 @@
         },
     },
 #line 7138
-    [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
+    [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
     {
 #line 7139
         .trainerName = _("Blank"),
@@ -18544,7 +18488,7 @@
         },
     },
 #line 7146
-    [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
+    [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
     {
 #line 7147
         .trainerName = _("Blank"),
@@ -18573,7 +18517,7 @@
         },
     },
 #line 7154
-    [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
+    [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
     {
 #line 7155
         .trainerName = _("Blank"),
@@ -18602,7 +18546,7 @@
         },
     },
 #line 7162
-    [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
+    [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
     {
 #line 7163
         .trainerName = _("Blank"),
@@ -18631,7 +18575,7 @@
         },
     },
 #line 7170
-    [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
+    [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
     {
 #line 7171
         .trainerName = _("Blank"),
@@ -18660,7 +18604,7 @@
         },
     },
 #line 7178
-    [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
+    [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
     {
 #line 7179
         .trainerName = _("Blank"),
@@ -18689,7 +18633,7 @@
         },
     },
 #line 7186
-    [DIFFICULTY_NORMAL][TRAINER_403D932D] =
+    [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
     {
 #line 7187
         .trainerName = _("Blank"),
@@ -18718,7 +18662,7 @@
         },
     },
 #line 7194
-    [DIFFICULTY_NORMAL][TRAINER_408862C4] =
+    [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
     {
 #line 7195
         .trainerName = _("Blank"),
@@ -18747,7 +18691,7 @@
         },
     },
 #line 7202
-    [DIFFICULTY_NORMAL][TRAINER_419282AD] =
+    [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
     {
 #line 7203
         .trainerName = _("Blank"),
@@ -18776,7 +18720,7 @@
         },
     },
 #line 7210
-    [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
+    [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
     {
 #line 7211
         .trainerName = _("Blank"),
@@ -18805,7 +18749,7 @@
         },
     },
 #line 7218
-    [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
+    [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
     {
 #line 7219
         .trainerName = _("Blank"),
@@ -18834,7 +18778,7 @@
         },
     },
 #line 7226
-    [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
+    [DIFFICULTY_NORMAL][TRAINER_403D932D] =
     {
 #line 7227
         .trainerName = _("Blank"),
@@ -18863,7 +18807,7 @@
         },
     },
 #line 7234
-    [DIFFICULTY_NORMAL][TRAINER_4227B911] =
+    [DIFFICULTY_NORMAL][TRAINER_408862C4] =
     {
 #line 7235
         .trainerName = _("Blank"),
@@ -18892,7 +18836,7 @@
         },
     },
 #line 7242
-    [DIFFICULTY_NORMAL][TRAINER_4239B726] =
+    [DIFFICULTY_NORMAL][TRAINER_419282AD] =
     {
 #line 7243
         .trainerName = _("Blank"),
@@ -18921,7 +18865,7 @@
         },
     },
 #line 7250
-    [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
+    [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
     {
 #line 7251
         .trainerName = _("Blank"),
@@ -18950,7 +18894,7 @@
         },
     },
 #line 7258
-    [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
+    [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
     {
 #line 7259
         .trainerName = _("Blank"),
@@ -18979,7 +18923,7 @@
         },
     },
 #line 7266
-    [DIFFICULTY_NORMAL][TRAINER_42C68371] =
+    [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
     {
 #line 7267
         .trainerName = _("Blank"),
@@ -19008,7 +18952,7 @@
         },
     },
 #line 7274
-    [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
+    [DIFFICULTY_NORMAL][TRAINER_4227B911] =
     {
 #line 7275
         .trainerName = _("Blank"),
@@ -19037,7 +18981,7 @@
         },
     },
 #line 7282
-    [DIFFICULTY_NORMAL][TRAINER_437E553A] =
+    [DIFFICULTY_NORMAL][TRAINER_4239B726] =
     {
 #line 7283
         .trainerName = _("Blank"),
@@ -19066,7 +19010,7 @@
         },
     },
 #line 7290
-    [DIFFICULTY_NORMAL][TRAINER_4394141C] =
+    [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
     {
 #line 7291
         .trainerName = _("Blank"),
@@ -19095,7 +19039,7 @@
         },
     },
 #line 7298
-    [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
+    [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
     {
 #line 7299
         .trainerName = _("Blank"),
@@ -19124,7 +19068,7 @@
         },
     },
 #line 7306
-    [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
+    [DIFFICULTY_NORMAL][TRAINER_42C68371] =
     {
 #line 7307
         .trainerName = _("Blank"),
@@ -19153,7 +19097,7 @@
         },
     },
 #line 7314
-    [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
+    [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
     {
 #line 7315
         .trainerName = _("Blank"),
@@ -19182,7 +19126,7 @@
         },
     },
 #line 7322
-    [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
+    [DIFFICULTY_NORMAL][TRAINER_437E553A] =
     {
 #line 7323
         .trainerName = _("Blank"),
@@ -19211,7 +19155,7 @@
         },
     },
 #line 7330
-    [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
+    [DIFFICULTY_NORMAL][TRAINER_4394141C] =
     {
 #line 7331
         .trainerName = _("Blank"),
@@ -19240,7 +19184,7 @@
         },
     },
 #line 7338
-    [DIFFICULTY_NORMAL][TRAINER_44E68738] =
+    [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
     {
 #line 7339
         .trainerName = _("Blank"),
@@ -19269,7 +19213,7 @@
         },
     },
 #line 7346
-    [DIFFICULTY_NORMAL][TRAINER_44F86666] =
+    [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
     {
 #line 7347
         .trainerName = _("Blank"),
@@ -19298,7 +19242,7 @@
         },
     },
 #line 7354
-    [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
+    [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
     {
 #line 7355
         .trainerName = _("Blank"),
@@ -19327,7 +19271,7 @@
         },
     },
 #line 7362
-    [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
+    [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
     {
 #line 7363
         .trainerName = _("Blank"),
@@ -19356,7 +19300,7 @@
         },
     },
 #line 7370
-    [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
+    [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
     {
 #line 7371
         .trainerName = _("Blank"),
@@ -19385,7 +19329,7 @@
         },
     },
 #line 7378
-    [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
+    [DIFFICULTY_NORMAL][TRAINER_44E68738] =
     {
 #line 7379
         .trainerName = _("Blank"),
@@ -19414,7 +19358,7 @@
         },
     },
 #line 7386
-    [DIFFICULTY_NORMAL][TRAINER_460AB144] =
+    [DIFFICULTY_NORMAL][TRAINER_44F86666] =
     {
 #line 7387
         .trainerName = _("Blank"),
@@ -19443,7 +19387,7 @@
         },
     },
 #line 7394
-    [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
+    [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
     {
 #line 7395
         .trainerName = _("Blank"),
@@ -19472,7 +19416,7 @@
         },
     },
 #line 7402
-    [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
+    [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
     {
 #line 7403
         .trainerName = _("Blank"),
@@ -19501,7 +19445,7 @@
         },
     },
 #line 7410
-    [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
+    [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
     {
 #line 7411
         .trainerName = _("Blank"),
@@ -19530,7 +19474,7 @@
         },
     },
 #line 7418
-    [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
+    [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
     {
 #line 7419
         .trainerName = _("Blank"),
@@ -19559,7 +19503,7 @@
         },
     },
 #line 7426
-    [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
+    [DIFFICULTY_NORMAL][TRAINER_460AB144] =
     {
 #line 7427
         .trainerName = _("Blank"),
@@ -19588,7 +19532,7 @@
         },
     },
 #line 7434
-    [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
+    [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
     {
 #line 7435
         .trainerName = _("Blank"),
@@ -19617,7 +19561,7 @@
         },
     },
 #line 7442
-    [DIFFICULTY_NORMAL][TRAINER_4848801D] =
+    [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
     {
 #line 7443
         .trainerName = _("Blank"),
@@ -19646,7 +19590,7 @@
         },
     },
 #line 7450
-    [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
+    [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
     {
 #line 7451
         .trainerName = _("Blank"),
@@ -19675,7 +19619,7 @@
         },
     },
 #line 7458
-    [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
+    [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
     {
 #line 7459
         .trainerName = _("Blank"),
@@ -19704,7 +19648,7 @@
         },
     },
 #line 7466
-    [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
+    [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
     {
 #line 7467
         .trainerName = _("Blank"),
@@ -19733,7 +19677,7 @@
         },
     },
 #line 7474
-    [DIFFICULTY_NORMAL][TRAINER_494F5379] =
+    [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
     {
 #line 7475
         .trainerName = _("Blank"),
@@ -19762,7 +19706,7 @@
         },
     },
 #line 7482
-    [DIFFICULTY_NORMAL][TRAINER_49805D55] =
+    [DIFFICULTY_NORMAL][TRAINER_4848801D] =
     {
 #line 7483
         .trainerName = _("Blank"),
@@ -19791,7 +19735,7 @@
         },
     },
 #line 7490
-    [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
+    [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
     {
 #line 7491
         .trainerName = _("Blank"),
@@ -19820,7 +19764,7 @@
         },
     },
 #line 7498
-    [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
+    [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
     {
 #line 7499
         .trainerName = _("Blank"),
@@ -19849,7 +19793,7 @@
         },
     },
 #line 7506
-    [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
+    [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
     {
 #line 7507
         .trainerName = _("Blank"),
@@ -19878,7 +19822,7 @@
         },
     },
 #line 7514
-    [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
+    [DIFFICULTY_NORMAL][TRAINER_494F5379] =
     {
 #line 7515
         .trainerName = _("Blank"),
@@ -19907,7 +19851,7 @@
         },
     },
 #line 7522
-    [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
+    [DIFFICULTY_NORMAL][TRAINER_49805D55] =
     {
 #line 7523
         .trainerName = _("Blank"),
@@ -19936,7 +19880,7 @@
         },
     },
 #line 7530
-    [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
+    [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
     {
 #line 7531
         .trainerName = _("Blank"),
@@ -19965,7 +19909,7 @@
         },
     },
 #line 7538
-    [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
+    [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
     {
 #line 7539
         .trainerName = _("Blank"),
@@ -19994,7 +19938,7 @@
         },
     },
 #line 7546
-    [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
+    [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
     {
 #line 7547
         .trainerName = _("Blank"),
@@ -20023,7 +19967,7 @@
         },
     },
 #line 7554
-    [DIFFICULTY_NORMAL][TRAINER_4B431569] =
+    [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
     {
 #line 7555
         .trainerName = _("Blank"),
@@ -20052,7 +19996,7 @@
         },
     },
 #line 7562
-    [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
+    [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
     {
 #line 7563
         .trainerName = _("Blank"),
@@ -20081,7 +20025,7 @@
         },
     },
 #line 7570
-    [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
+    [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
     {
 #line 7571
         .trainerName = _("Blank"),
@@ -20110,7 +20054,7 @@
         },
     },
 #line 7578
-    [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
+    [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
     {
 #line 7579
         .trainerName = _("Blank"),
@@ -20139,7 +20083,7 @@
         },
     },
 #line 7586
-    [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
+    [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
     {
 #line 7587
         .trainerName = _("Blank"),
@@ -20168,7 +20112,7 @@
         },
     },
 #line 7594
-    [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
+    [DIFFICULTY_NORMAL][TRAINER_4B431569] =
     {
 #line 7595
         .trainerName = _("Blank"),
@@ -20197,7 +20141,7 @@
         },
     },
 #line 7602
-    [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
+    [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
     {
 #line 7603
         .trainerName = _("Blank"),
@@ -20226,7 +20170,7 @@
         },
     },
 #line 7610
-    [DIFFICULTY_NORMAL][TRAINER_4E072263] =
+    [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
     {
 #line 7611
         .trainerName = _("Blank"),
@@ -20255,7 +20199,7 @@
         },
     },
 #line 7618
-    [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
+    [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
     {
 #line 7619
         .trainerName = _("Blank"),
@@ -20284,7 +20228,7 @@
         },
     },
 #line 7626
-    [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
+    [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
     {
 #line 7627
         .trainerName = _("Blank"),
@@ -20313,7 +20257,7 @@
         },
     },
 #line 7634
-    [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
+    [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
     {
 #line 7635
         .trainerName = _("Blank"),
@@ -20342,7 +20286,7 @@
         },
     },
 #line 7642
-    [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
+    [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
     {
 #line 7643
         .trainerName = _("Blank"),
@@ -20371,7 +20315,7 @@
         },
     },
 #line 7650
-    [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
+    [DIFFICULTY_NORMAL][TRAINER_4E072263] =
     {
 #line 7651
         .trainerName = _("Blank"),
@@ -20400,7 +20344,7 @@
         },
     },
 #line 7658
-    [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
+    [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
     {
 #line 7659
         .trainerName = _("Blank"),
@@ -20429,7 +20373,7 @@
         },
     },
 #line 7666
-    [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
+    [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
     {
 #line 7667
         .trainerName = _("Blank"),
@@ -20458,7 +20402,7 @@
         },
     },
 #line 7674
-    [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
+    [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
     {
 #line 7675
         .trainerName = _("Blank"),
@@ -20487,7 +20431,7 @@
         },
     },
 #line 7682
-    [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
+    [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
     {
 #line 7683
         .trainerName = _("Blank"),
@@ -20516,7 +20460,7 @@
         },
     },
 #line 7690
-    [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
+    [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
     {
 #line 7691
         .trainerName = _("Blank"),
@@ -20545,7 +20489,7 @@
         },
     },
 #line 7698
-    [DIFFICULTY_NORMAL][TRAINER_538D052D] =
+    [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
     {
 #line 7699
         .trainerName = _("Blank"),
@@ -20574,7 +20518,7 @@
         },
     },
 #line 7706
-    [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
+    [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
     {
 #line 7707
         .trainerName = _("Blank"),
@@ -20603,7 +20547,7 @@
         },
     },
 #line 7714
-    [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
+    [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
     {
 #line 7715
         .trainerName = _("Blank"),
@@ -20632,7 +20576,7 @@
         },
     },
 #line 7722
-    [DIFFICULTY_NORMAL][TRAINER_54110A38] =
+    [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
     {
 #line 7723
         .trainerName = _("Blank"),
@@ -20661,7 +20605,7 @@
         },
     },
 #line 7730
-    [DIFFICULTY_NORMAL][TRAINER_549792BA] =
+    [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
     {
 #line 7731
         .trainerName = _("Blank"),
@@ -20690,7 +20634,7 @@
         },
     },
 #line 7738
-    [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
+    [DIFFICULTY_NORMAL][TRAINER_538D052D] =
     {
 #line 7739
         .trainerName = _("Blank"),
@@ -20719,7 +20663,7 @@
         },
     },
 #line 7746
-    [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
+    [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
     {
 #line 7747
         .trainerName = _("Blank"),
@@ -20748,7 +20692,7 @@
         },
     },
 #line 7754
-    [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
+    [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
     {
 #line 7755
         .trainerName = _("Blank"),
@@ -20777,7 +20721,7 @@
         },
     },
 #line 7762
-    [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
+    [DIFFICULTY_NORMAL][TRAINER_54110A38] =
     {
 #line 7763
         .trainerName = _("Blank"),
@@ -20806,7 +20750,7 @@
         },
     },
 #line 7770
-    [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
+    [DIFFICULTY_NORMAL][TRAINER_549792BA] =
     {
 #line 7771
         .trainerName = _("Blank"),
@@ -20835,7 +20779,7 @@
         },
     },
 #line 7778
-    [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
+    [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
     {
 #line 7779
         .trainerName = _("Blank"),
@@ -20864,7 +20808,7 @@
         },
     },
 #line 7786
-    [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
+    [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
     {
 #line 7787
         .trainerName = _("Blank"),
@@ -20893,7 +20837,7 @@
         },
     },
 #line 7794
-    [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
+    [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
     {
 #line 7795
         .trainerName = _("Blank"),
@@ -20922,7 +20866,7 @@
         },
     },
 #line 7802
-    [DIFFICULTY_NORMAL][TRAINER_56775C71] =
+    [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
     {
 #line 7803
         .trainerName = _("Blank"),
@@ -20951,7 +20895,7 @@
         },
     },
 #line 7810
-    [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
+    [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
     {
 #line 7811
         .trainerName = _("Blank"),
@@ -20980,7 +20924,7 @@
         },
     },
 #line 7818
-    [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
+    [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
     {
 #line 7819
         .trainerName = _("Blank"),
@@ -21009,7 +20953,7 @@
         },
     },
 #line 7826
-    [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
+    [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
     {
 #line 7827
         .trainerName = _("Blank"),
@@ -21038,7 +20982,7 @@
         },
     },
 #line 7834
-    [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
+    [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
     {
 #line 7835
         .trainerName = _("Blank"),
@@ -21067,7 +21011,7 @@
         },
     },
 #line 7842
-    [DIFFICULTY_NORMAL][TRAINER_5819E497] =
+    [DIFFICULTY_NORMAL][TRAINER_56775C71] =
     {
 #line 7843
         .trainerName = _("Blank"),
@@ -21096,7 +21040,7 @@
         },
     },
 #line 7850
-    [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
+    [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
     {
 #line 7851
         .trainerName = _("Blank"),
@@ -21125,7 +21069,7 @@
         },
     },
 #line 7858
-    [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
+    [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
     {
 #line 7859
         .trainerName = _("Blank"),
@@ -21154,7 +21098,7 @@
         },
     },
 #line 7866
-    [DIFFICULTY_NORMAL][TRAINER_58F43966] =
+    [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
     {
 #line 7867
         .trainerName = _("Blank"),
@@ -21183,7 +21127,7 @@
         },
     },
 #line 7874
-    [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
+    [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
     {
 #line 7875
         .trainerName = _("Blank"),
@@ -21212,7 +21156,7 @@
         },
     },
 #line 7882
-    [DIFFICULTY_NORMAL][TRAINER_598585C1] =
+    [DIFFICULTY_NORMAL][TRAINER_5819E497] =
     {
 #line 7883
         .trainerName = _("Blank"),
@@ -21241,7 +21185,7 @@
         },
     },
 #line 7890
-    [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
+    [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
     {
 #line 7891
         .trainerName = _("Blank"),
@@ -21270,7 +21214,7 @@
         },
     },
 #line 7898
-    [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
+    [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
     {
 #line 7899
         .trainerName = _("Blank"),
@@ -21299,7 +21243,7 @@
         },
     },
 #line 7906
-    [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
+    [DIFFICULTY_NORMAL][TRAINER_58F43966] =
     {
 #line 7907
         .trainerName = _("Blank"),
@@ -21328,7 +21272,7 @@
         },
     },
 #line 7914
-    [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
+    [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
     {
 #line 7915
         .trainerName = _("Blank"),
@@ -21357,7 +21301,7 @@
         },
     },
 #line 7922
-    [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
+    [DIFFICULTY_NORMAL][TRAINER_598585C1] =
     {
 #line 7923
         .trainerName = _("Blank"),
@@ -21386,7 +21330,7 @@
         },
     },
 #line 7930
-    [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
+    [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
     {
 #line 7931
         .trainerName = _("Blank"),
@@ -21415,7 +21359,7 @@
         },
     },
 #line 7938
-    [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
+    [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
     {
 #line 7939
         .trainerName = _("Blank"),
@@ -21444,7 +21388,7 @@
         },
     },
 #line 7946
-    [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
+    [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
     {
 #line 7947
         .trainerName = _("Blank"),
@@ -21473,7 +21417,7 @@
         },
     },
 #line 7954
-    [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
+    [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
     {
 #line 7955
         .trainerName = _("Blank"),
@@ -21502,7 +21446,7 @@
         },
     },
 #line 7962
-    [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
+    [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
     {
 #line 7963
         .trainerName = _("Blank"),
@@ -21531,7 +21475,7 @@
         },
     },
 #line 7970
-    [DIFFICULTY_NORMAL][TRAINER_5B983361] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
     {
 #line 7971
         .trainerName = _("Blank"),
@@ -21560,7 +21504,7 @@
         },
     },
 #line 7978
-    [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
     {
 #line 7979
         .trainerName = _("Blank"),
@@ -21589,7 +21533,7 @@
         },
     },
 #line 7986
-    [DIFFICULTY_NORMAL][TRAINER_5C315841] =
+    [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
     {
 #line 7987
         .trainerName = _("Blank"),
@@ -21618,7 +21562,7 @@
         },
     },
 #line 7994
-    [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
+    [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
     {
 #line 7995
         .trainerName = _("Blank"),
@@ -21647,7 +21591,7 @@
         },
     },
 #line 8002
-    [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
+    [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
     {
 #line 8003
         .trainerName = _("Blank"),
@@ -21676,7 +21620,7 @@
         },
     },
 #line 8010
-    [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
+    [DIFFICULTY_NORMAL][TRAINER_5B983361] =
     {
 #line 8011
         .trainerName = _("Blank"),
@@ -21705,7 +21649,7 @@
         },
     },
 #line 8018
-    [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
+    [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
     {
 #line 8019
         .trainerName = _("Blank"),
@@ -21734,7 +21678,7 @@
         },
     },
 #line 8026
-    [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
+    [DIFFICULTY_NORMAL][TRAINER_5C315841] =
     {
 #line 8027
         .trainerName = _("Blank"),
@@ -21763,7 +21707,7 @@
         },
     },
 #line 8034
-    [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
+    [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
     {
 #line 8035
         .trainerName = _("Blank"),
@@ -21792,7 +21736,7 @@
         },
     },
 #line 8042
-    [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
+    [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
     {
 #line 8043
         .trainerName = _("Blank"),
@@ -21821,7 +21765,7 @@
         },
     },
 #line 8050
-    [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
+    [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
     {
 #line 8051
         .trainerName = _("Blank"),
@@ -21850,7 +21794,7 @@
         },
     },
 #line 8058
-    [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
+    [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
     {
 #line 8059
         .trainerName = _("Blank"),
@@ -21879,7 +21823,7 @@
         },
     },
 #line 8066
-    [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
+    [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
     {
 #line 8067
         .trainerName = _("Blank"),
@@ -21908,7 +21852,7 @@
         },
     },
 #line 8074
-    [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
+    [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
     {
 #line 8075
         .trainerName = _("Blank"),
@@ -21937,7 +21881,7 @@
         },
     },
 #line 8082
-    [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
+    [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
     {
 #line 8083
         .trainerName = _("Blank"),
@@ -21966,7 +21910,7 @@
         },
     },
 #line 8090
-    [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
+    [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
     {
 #line 8091
         .trainerName = _("Blank"),
@@ -21995,7 +21939,7 @@
         },
     },
 #line 8098
-    [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
+    [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
     {
 #line 8099
         .trainerName = _("Blank"),
@@ -22024,7 +21968,7 @@
         },
     },
 #line 8106
-    [DIFFICULTY_NORMAL][TRAINER_5F858802] =
+    [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
     {
 #line 8107
         .trainerName = _("Blank"),
@@ -22053,7 +21997,7 @@
         },
     },
 #line 8114
-    [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
+    [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
     {
 #line 8115
         .trainerName = _("Blank"),
@@ -22082,7 +22026,7 @@
         },
     },
 #line 8122
-    [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
+    [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
     {
 #line 8123
         .trainerName = _("Blank"),
@@ -22111,7 +22055,7 @@
         },
     },
 #line 8130
-    [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
+    [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
     {
 #line 8131
         .trainerName = _("Blank"),
@@ -22140,7 +22084,7 @@
         },
     },
 #line 8138
-    [DIFFICULTY_NORMAL][TRAINER_6016A968] =
+    [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
     {
 #line 8139
         .trainerName = _("Blank"),
@@ -22169,7 +22113,7 @@
         },
     },
 #line 8146
-    [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
+    [DIFFICULTY_NORMAL][TRAINER_5F858802] =
     {
 #line 8147
         .trainerName = _("Blank"),
@@ -22198,7 +22142,7 @@
         },
     },
 #line 8154
-    [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
+    [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
     {
 #line 8155
         .trainerName = _("Blank"),
@@ -22227,7 +22171,7 @@
         },
     },
 #line 8162
-    [DIFFICULTY_NORMAL][TRAINER_60C56554] =
+    [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
     {
 #line 8163
         .trainerName = _("Blank"),
@@ -22256,7 +22200,7 @@
         },
     },
 #line 8170
-    [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
+    [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
     {
 #line 8171
         .trainerName = _("Blank"),
@@ -22285,7 +22229,7 @@
         },
     },
 #line 8178
-    [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
+    [DIFFICULTY_NORMAL][TRAINER_6016A968] =
     {
 #line 8179
         .trainerName = _("Blank"),
@@ -22314,7 +22258,7 @@
         },
     },
 #line 8186
-    [DIFFICULTY_NORMAL][TRAINER_61E76999] =
+    [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
     {
 #line 8187
         .trainerName = _("Blank"),
@@ -22343,7 +22287,7 @@
         },
     },
 #line 8194
-    [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
+    [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
     {
 #line 8195
         .trainerName = _("Blank"),
@@ -22372,7 +22316,7 @@
         },
     },
 #line 8202
-    [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
+    [DIFFICULTY_NORMAL][TRAINER_60C56554] =
     {
 #line 8203
         .trainerName = _("Blank"),
@@ -22401,7 +22345,7 @@
         },
     },
 #line 8210
-    [DIFFICULTY_NORMAL][TRAINER_62C33409] =
+    [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
     {
 #line 8211
         .trainerName = _("Blank"),
@@ -22430,7 +22374,7 @@
         },
     },
 #line 8218
-    [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
+    [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
     {
 #line 8219
         .trainerName = _("Blank"),
@@ -22459,7 +22403,7 @@
         },
     },
 #line 8226
-    [DIFFICULTY_NORMAL][TRAINER_63409A54] =
+    [DIFFICULTY_NORMAL][TRAINER_61E76999] =
     {
 #line 8227
         .trainerName = _("Blank"),
@@ -22488,7 +22432,7 @@
         },
     },
 #line 8234
-    [DIFFICULTY_NORMAL][TRAINER_6397B964] =
+    [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
     {
 #line 8235
         .trainerName = _("Blank"),
@@ -22517,7 +22461,7 @@
         },
     },
 #line 8242
-    [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
+    [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
     {
 #line 8243
         .trainerName = _("Blank"),
@@ -22546,7 +22490,7 @@
         },
     },
 #line 8250
-    [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
+    [DIFFICULTY_NORMAL][TRAINER_62C33409] =
     {
 #line 8251
         .trainerName = _("Blank"),
@@ -22575,7 +22519,7 @@
         },
     },
 #line 8258
-    [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
+    [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
     {
 #line 8259
         .trainerName = _("Blank"),
@@ -22604,7 +22548,7 @@
         },
     },
 #line 8266
-    [DIFFICULTY_NORMAL][TRAINER_64E30596] =
+    [DIFFICULTY_NORMAL][TRAINER_63409A54] =
     {
 #line 8267
         .trainerName = _("Blank"),
@@ -22633,7 +22577,7 @@
         },
     },
 #line 8274
-    [DIFFICULTY_NORMAL][TRAINER_6566F645] =
+    [DIFFICULTY_NORMAL][TRAINER_6397B964] =
     {
 #line 8275
         .trainerName = _("Blank"),
@@ -22662,7 +22606,7 @@
         },
     },
 #line 8282
-    [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
+    [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
     {
 #line 8283
         .trainerName = _("Blank"),
@@ -22691,7 +22635,7 @@
         },
     },
 #line 8290
-    [DIFFICULTY_NORMAL][TRAINER_656EC067] =
+    [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
     {
 #line 8291
         .trainerName = _("Blank"),
@@ -22720,7 +22664,7 @@
         },
     },
 #line 8298
-    [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
+    [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
     {
 #line 8299
         .trainerName = _("Blank"),
@@ -22749,7 +22693,7 @@
         },
     },
 #line 8306
-    [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
+    [DIFFICULTY_NORMAL][TRAINER_64E30596] =
     {
 #line 8307
         .trainerName = _("Blank"),
@@ -22778,7 +22722,7 @@
         },
     },
 #line 8314
-    [DIFFICULTY_NORMAL][TRAINER_66531C74] =
+    [DIFFICULTY_NORMAL][TRAINER_6566F645] =
     {
 #line 8315
         .trainerName = _("Blank"),
@@ -22807,7 +22751,7 @@
         },
     },
 #line 8322
-    [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
+    [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
     {
 #line 8323
         .trainerName = _("Blank"),
@@ -22836,7 +22780,7 @@
         },
     },
 #line 8330
-    [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
+    [DIFFICULTY_NORMAL][TRAINER_656EC067] =
     {
 #line 8331
         .trainerName = _("Blank"),
@@ -22865,7 +22809,7 @@
         },
     },
 #line 8338
-    [DIFFICULTY_NORMAL][TRAINER_675DA518] =
+    [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
     {
 #line 8339
         .trainerName = _("Blank"),
@@ -22894,7 +22838,7 @@
         },
     },
 #line 8346
-    [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
+    [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
     {
 #line 8347
         .trainerName = _("Blank"),
@@ -22923,7 +22867,7 @@
         },
     },
 #line 8354
-    [DIFFICULTY_NORMAL][TRAINER_6792B394] =
+    [DIFFICULTY_NORMAL][TRAINER_66531C74] =
     {
 #line 8355
         .trainerName = _("Blank"),
@@ -22952,7 +22896,7 @@
         },
     },
 #line 8362
-    [DIFFICULTY_NORMAL][TRAINER_683A2305] =
+    [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
     {
 #line 8363
         .trainerName = _("Blank"),
@@ -22981,7 +22925,7 @@
         },
     },
 #line 8370
-    [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
+    [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
     {
 #line 8371
         .trainerName = _("Blank"),
@@ -23010,7 +22954,7 @@
         },
     },
 #line 8378
-    [DIFFICULTY_NORMAL][TRAINER_698BB117] =
+    [DIFFICULTY_NORMAL][TRAINER_675DA518] =
     {
 #line 8379
         .trainerName = _("Blank"),
@@ -23039,7 +22983,7 @@
         },
     },
 #line 8386
-    [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
+    [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
     {
 #line 8387
         .trainerName = _("Blank"),
@@ -23068,7 +23012,7 @@
         },
     },
 #line 8394
-    [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
+    [DIFFICULTY_NORMAL][TRAINER_6792B394] =
     {
 #line 8395
         .trainerName = _("Blank"),
@@ -23097,7 +23041,7 @@
         },
     },
 #line 8402
-    [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
+    [DIFFICULTY_NORMAL][TRAINER_683A2305] =
     {
 #line 8403
         .trainerName = _("Blank"),
@@ -23126,7 +23070,7 @@
         },
     },
 #line 8410
-    [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
+    [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
     {
 #line 8411
         .trainerName = _("Blank"),
@@ -23155,7 +23099,7 @@
         },
     },
 #line 8418
-    [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
+    [DIFFICULTY_NORMAL][TRAINER_698BB117] =
     {
 #line 8419
         .trainerName = _("Blank"),
@@ -23184,7 +23128,7 @@
         },
     },
 #line 8426
-    [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
+    [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
     {
 #line 8427
         .trainerName = _("Blank"),
@@ -23213,7 +23157,7 @@
         },
     },
 #line 8434
-    [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
+    [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
     {
 #line 8435
         .trainerName = _("Blank"),
@@ -23242,7 +23186,7 @@
         },
     },
 #line 8442
-    [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
+    [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
     {
 #line 8443
         .trainerName = _("Blank"),
@@ -23271,7 +23215,7 @@
         },
     },
 #line 8450
-    [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
+    [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
     {
 #line 8451
         .trainerName = _("Blank"),
@@ -23300,7 +23244,7 @@
         },
     },
 #line 8458
-    [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
+    [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
     {
 #line 8459
         .trainerName = _("Blank"),
@@ -23329,7 +23273,7 @@
         },
     },
 #line 8466
-    [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
+    [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
     {
 #line 8467
         .trainerName = _("Blank"),
@@ -23358,7 +23302,7 @@
         },
     },
 #line 8474
-    [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
+    [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
     {
 #line 8475
         .trainerName = _("Blank"),
@@ -23387,7 +23331,7 @@
         },
     },
 #line 8482
-    [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
+    [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
     {
 #line 8483
         .trainerName = _("Blank"),
@@ -23416,7 +23360,7 @@
         },
     },
 #line 8490
-    [DIFFICULTY_NORMAL][TRAINER_6E663040] =
+    [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
     {
 #line 8491
         .trainerName = _("Blank"),
@@ -23445,7 +23389,7 @@
         },
     },
 #line 8498
-    [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
+    [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
     {
 #line 8499
         .trainerName = _("Blank"),
@@ -23474,7 +23418,7 @@
         },
     },
 #line 8506
-    [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
+    [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
     {
 #line 8507
         .trainerName = _("Blank"),
@@ -23503,7 +23447,7 @@
         },
     },
 #line 8514
-    [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
+    [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
     {
 #line 8515
         .trainerName = _("Blank"),
@@ -23532,7 +23476,7 @@
         },
     },
 #line 8522
-    [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
+    [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
     {
 #line 8523
         .trainerName = _("Blank"),
@@ -23561,7 +23505,7 @@
         },
     },
 #line 8530
-    [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
+    [DIFFICULTY_NORMAL][TRAINER_6E663040] =
     {
 #line 8531
         .trainerName = _("Blank"),
@@ -23590,7 +23534,7 @@
         },
     },
 #line 8538
-    [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
+    [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
     {
 #line 8539
         .trainerName = _("Blank"),
@@ -23619,7 +23563,7 @@
         },
     },
 #line 8546
-    [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
     {
 #line 8547
         .trainerName = _("Blank"),
@@ -23648,7 +23592,7 @@
         },
     },
 #line 8554
-    [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
     {
 #line 8555
         .trainerName = _("Blank"),
@@ -23677,7 +23621,7 @@
         },
     },
 #line 8562
-    [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
+    [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
     {
 #line 8563
         .trainerName = _("Blank"),
@@ -23706,7 +23650,7 @@
         },
     },
 #line 8570
-    [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
+    [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
     {
 #line 8571
         .trainerName = _("Blank"),
@@ -23735,7 +23679,7 @@
         },
     },
 #line 8578
-    [DIFFICULTY_NORMAL][TRAINER_7169C897] =
+    [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
     {
 #line 8579
         .trainerName = _("Blank"),
@@ -23764,7 +23708,7 @@
         },
     },
 #line 8586
-    [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
+    [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
     {
 #line 8587
         .trainerName = _("Blank"),
@@ -23793,7 +23737,7 @@
         },
     },
 #line 8594
-    [DIFFICULTY_NORMAL][TRAINER_7190E405] =
+    [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
     {
 #line 8595
         .trainerName = _("Blank"),
@@ -23822,7 +23766,7 @@
         },
     },
 #line 8602
-    [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
+    [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
     {
 #line 8603
         .trainerName = _("Blank"),
@@ -23851,7 +23795,7 @@
         },
     },
 #line 8610
-    [DIFFICULTY_NORMAL][TRAINER_7249425F] =
+    [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
     {
 #line 8611
         .trainerName = _("Blank"),
@@ -23880,7 +23824,7 @@
         },
     },
 #line 8618
-    [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
+    [DIFFICULTY_NORMAL][TRAINER_7169C897] =
     {
 #line 8619
         .trainerName = _("Blank"),
@@ -23909,7 +23853,7 @@
         },
     },
 #line 8626
-    [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
+    [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
     {
 #line 8627
         .trainerName = _("Blank"),
@@ -23938,7 +23882,7 @@
         },
     },
 #line 8634
-    [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
+    [DIFFICULTY_NORMAL][TRAINER_7190E405] =
     {
 #line 8635
         .trainerName = _("Blank"),
@@ -23967,7 +23911,7 @@
         },
     },
 #line 8642
-    [DIFFICULTY_NORMAL][TRAINER_732D4997] =
+    [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
     {
 #line 8643
         .trainerName = _("Blank"),
@@ -23996,7 +23940,7 @@
         },
     },
 #line 8650
-    [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
+    [DIFFICULTY_NORMAL][TRAINER_7249425F] =
     {
 #line 8651
         .trainerName = _("Blank"),
@@ -24025,7 +23969,7 @@
         },
     },
 #line 8658
-    [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
+    [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
     {
 #line 8659
         .trainerName = _("Blank"),
@@ -24054,7 +23998,7 @@
         },
     },
 #line 8666
-    [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
+    [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
     {
 #line 8667
         .trainerName = _("Blank"),
@@ -24083,7 +24027,7 @@
         },
     },
 #line 8674
-    [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
+    [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
     {
 #line 8675
         .trainerName = _("Blank"),
@@ -24112,7 +24056,7 @@
         },
     },
 #line 8682
-    [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
+    [DIFFICULTY_NORMAL][TRAINER_732D4997] =
     {
 #line 8683
         .trainerName = _("Blank"),
@@ -24141,7 +24085,7 @@
         },
     },
 #line 8690
-    [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
+    [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
     {
 #line 8691
         .trainerName = _("Blank"),
@@ -24170,7 +24114,7 @@
         },
     },
 #line 8698
-    [DIFFICULTY_NORMAL][TRAINER_783AB388] =
+    [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
     {
 #line 8699
         .trainerName = _("Blank"),
@@ -24199,7 +24143,7 @@
         },
     },
 #line 8706
-    [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
+    [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
     {
 #line 8707
         .trainerName = _("Blank"),
@@ -24228,7 +24172,7 @@
         },
     },
 #line 8714
-    [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
+    [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
     {
 #line 8715
         .trainerName = _("Blank"),
@@ -24257,7 +24201,7 @@
         },
     },
 #line 8722
-    [DIFFICULTY_NORMAL][TRAINER_78B73516] =
+    [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
     {
 #line 8723
         .trainerName = _("Blank"),
@@ -24286,7 +24230,7 @@
         },
     },
 #line 8730
-    [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
+    [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
     {
 #line 8731
         .trainerName = _("Blank"),
@@ -24315,7 +24259,7 @@
         },
     },
 #line 8738
-    [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
+    [DIFFICULTY_NORMAL][TRAINER_783AB388] =
     {
 #line 8739
         .trainerName = _("Blank"),
@@ -24344,7 +24288,7 @@
         },
     },
 #line 8746
-    [DIFFICULTY_NORMAL][TRAINER_793992D8] =
+    [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
     {
 #line 8747
         .trainerName = _("Blank"),
@@ -24373,7 +24317,7 @@
         },
     },
 #line 8754
-    [DIFFICULTY_NORMAL][TRAINER_797E296B] =
+    [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
     {
 #line 8755
         .trainerName = _("Blank"),
@@ -24402,7 +24346,7 @@
         },
     },
 #line 8762
-    [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
+    [DIFFICULTY_NORMAL][TRAINER_78B73516] =
     {
 #line 8763
         .trainerName = _("Blank"),
@@ -24431,7 +24375,7 @@
         },
     },
 #line 8770
-    [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
+    [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
     {
 #line 8771
         .trainerName = _("Blank"),
@@ -24460,7 +24404,7 @@
         },
     },
 #line 8778
-    [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
+    [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
     {
 #line 8779
         .trainerName = _("Blank"),
@@ -24489,7 +24433,7 @@
         },
     },
 #line 8786
-    [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
+    [DIFFICULTY_NORMAL][TRAINER_793992D8] =
     {
 #line 8787
         .trainerName = _("Blank"),
@@ -24518,7 +24462,7 @@
         },
     },
 #line 8794
-    [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
+    [DIFFICULTY_NORMAL][TRAINER_797E296B] =
     {
 #line 8795
         .trainerName = _("Blank"),
@@ -24547,7 +24491,7 @@
         },
     },
 #line 8802
-    [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
+    [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
     {
 #line 8803
         .trainerName = _("Blank"),
@@ -24576,7 +24520,7 @@
         },
     },
 #line 8810
-    [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
+    [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
     {
 #line 8811
         .trainerName = _("Blank"),
@@ -24605,7 +24549,7 @@
         },
     },
 #line 8818
-    [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
+    [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
     {
 #line 8819
         .trainerName = _("Blank"),
@@ -24634,7 +24578,7 @@
         },
     },
 #line 8826
-    [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
+    [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
     {
 #line 8827
         .trainerName = _("Blank"),
@@ -24663,7 +24607,7 @@
         },
     },
 #line 8834
-    [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
+    [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
     {
 #line 8835
         .trainerName = _("Blank"),
@@ -24692,7 +24636,7 @@
         },
     },
 #line 8842
-    [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
+    [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
     {
 #line 8843
         .trainerName = _("Blank"),
@@ -24721,7 +24665,7 @@
         },
     },
 #line 8850
-    [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
+    [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
     {
 #line 8851
         .trainerName = _("Blank"),
@@ -24750,7 +24694,7 @@
         },
     },
 #line 8858
-    [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
+    [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
     {
 #line 8859
         .trainerName = _("Blank"),
@@ -24779,7 +24723,7 @@
         },
     },
 #line 8866
-    [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
+    [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
     {
 #line 8867
         .trainerName = _("Blank"),
@@ -24808,7 +24752,7 @@
         },
     },
 #line 8874
-    [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
+    [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
     {
 #line 8875
         .trainerName = _("Blank"),
@@ -24837,7 +24781,7 @@
         },
     },
 #line 8882
-    [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
+    [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
     {
 #line 8883
         .trainerName = _("Blank"),
@@ -24866,7 +24810,7 @@
         },
     },
 #line 8890
-    [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
+    [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
     {
 #line 8891
         .trainerName = _("Blank"),
@@ -24895,7 +24839,7 @@
         },
     },
 #line 8898
-    [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
+    [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
     {
 #line 8899
         .trainerName = _("Blank"),
@@ -24924,7 +24868,7 @@
         },
     },
 #line 8906
-    [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
+    [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
     {
 #line 8907
         .trainerName = _("Blank"),
@@ -24953,7 +24897,7 @@
         },
     },
 #line 8914
-    [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
+    [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
     {
 #line 8915
         .trainerName = _("Blank"),
@@ -24982,7 +24926,7 @@
         },
     },
 #line 8922
-    [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
+    [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
     {
 #line 8923
         .trainerName = _("Blank"),
@@ -25011,7 +24955,7 @@
         },
     },
 #line 8930
-    [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
+    [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
     {
 #line 8931
         .trainerName = _("Blank"),
@@ -25040,7 +24984,7 @@
         },
     },
 #line 8938
-    [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
+    [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
     {
 #line 8939
         .trainerName = _("Blank"),
@@ -25069,7 +25013,7 @@
         },
     },
 #line 8946
-    [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
+    [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
     {
 #line 8947
         .trainerName = _("Blank"),
@@ -25098,7 +25042,7 @@
         },
     },
 #line 8954
-    [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
+    [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
     {
 #line 8955
         .trainerName = _("Blank"),
@@ -25127,7 +25071,7 @@
         },
     },
 #line 8962
-    [DIFFICULTY_NORMAL][TRAINER_80941A21] =
+    [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
     {
 #line 8963
         .trainerName = _("Blank"),
@@ -25156,7 +25100,7 @@
         },
     },
 #line 8970
-    [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
+    [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
     {
 #line 8971
         .trainerName = _("Blank"),
@@ -25185,7 +25129,7 @@
         },
     },
 #line 8978
-    [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
+    [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
     {
 #line 8979
         .trainerName = _("Blank"),
@@ -25214,7 +25158,7 @@
         },
     },
 #line 8986
-    [DIFFICULTY_NORMAL][TRAINER_811C7730] =
+    [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
     {
 #line 8987
         .trainerName = _("Blank"),
@@ -25243,7 +25187,7 @@
         },
     },
 #line 8994
-    [DIFFICULTY_NORMAL][TRAINER_814D0113] =
+    [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
     {
 #line 8995
         .trainerName = _("Blank"),
@@ -25272,7 +25216,7 @@
         },
     },
 #line 9002
-    [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
+    [DIFFICULTY_NORMAL][TRAINER_80941A21] =
     {
 #line 9003
         .trainerName = _("Blank"),
@@ -25301,7 +25245,7 @@
         },
     },
 #line 9010
-    [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
+    [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
     {
 #line 9011
         .trainerName = _("Blank"),
@@ -25330,7 +25274,7 @@
         },
     },
 #line 9018
-    [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
+    [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
     {
 #line 9019
         .trainerName = _("Blank"),
@@ -25359,7 +25303,7 @@
         },
     },
 #line 9026
-    [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
+    [DIFFICULTY_NORMAL][TRAINER_811C7730] =
     {
 #line 9027
         .trainerName = _("Blank"),
@@ -25388,7 +25332,7 @@
         },
     },
 #line 9034
-    [DIFFICULTY_NORMAL][TRAINER_831DE561] =
+    [DIFFICULTY_NORMAL][TRAINER_814D0113] =
     {
 #line 9035
         .trainerName = _("Blank"),
@@ -25417,7 +25361,7 @@
         },
     },
 #line 9042
-    [DIFFICULTY_NORMAL][TRAINER_8327758B] =
+    [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
     {
 #line 9043
         .trainerName = _("Blank"),
@@ -25446,7 +25390,7 @@
         },
     },
 #line 9050
-    [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
+    [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
     {
 #line 9051
         .trainerName = _("Blank"),
@@ -25475,7 +25419,7 @@
         },
     },
 #line 9058
-    [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
+    [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
     {
 #line 9059
         .trainerName = _("Blank"),
@@ -25504,7 +25448,7 @@
         },
     },
 #line 9066
-    [DIFFICULTY_NORMAL][TRAINER_83A26233] =
+    [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
     {
 #line 9067
         .trainerName = _("Blank"),
@@ -25533,7 +25477,7 @@
         },
     },
 #line 9074
-    [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
+    [DIFFICULTY_NORMAL][TRAINER_831DE561] =
     {
 #line 9075
         .trainerName = _("Blank"),
@@ -25562,7 +25506,7 @@
         },
     },
 #line 9082
-    [DIFFICULTY_NORMAL][TRAINER_840416CD] =
+    [DIFFICULTY_NORMAL][TRAINER_8327758B] =
     {
 #line 9083
         .trainerName = _("Blank"),
@@ -25591,7 +25535,7 @@
         },
     },
 #line 9090
-    [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
+    [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
     {
 #line 9091
         .trainerName = _("Blank"),
@@ -25620,7 +25564,7 @@
         },
     },
 #line 9098
-    [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
+    [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
     {
 #line 9099
         .trainerName = _("Blank"),
@@ -25649,7 +25593,7 @@
         },
     },
 #line 9106
-    [DIFFICULTY_NORMAL][TRAINER_8580525E] =
+    [DIFFICULTY_NORMAL][TRAINER_83A26233] =
     {
 #line 9107
         .trainerName = _("Blank"),
@@ -25678,7 +25622,7 @@
         },
     },
 #line 9114
-    [DIFFICULTY_NORMAL][TRAINER_866AE208] =
+    [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
     {
 #line 9115
         .trainerName = _("Blank"),
@@ -25707,7 +25651,7 @@
         },
     },
 #line 9122
-    [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
+    [DIFFICULTY_NORMAL][TRAINER_840416CD] =
     {
 #line 9123
         .trainerName = _("Blank"),
@@ -25736,7 +25680,7 @@
         },
     },
 #line 9130
-    [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
+    [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
     {
 #line 9131
         .trainerName = _("Blank"),
@@ -25765,7 +25709,7 @@
         },
     },
 #line 9138
-    [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
+    [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
     {
 #line 9139
         .trainerName = _("Blank"),
@@ -25794,7 +25738,7 @@
         },
     },
 #line 9146
-    [DIFFICULTY_NORMAL][TRAINER_872183CD] =
+    [DIFFICULTY_NORMAL][TRAINER_8580525E] =
     {
 #line 9147
         .trainerName = _("Blank"),
@@ -25823,7 +25767,7 @@
         },
     },
 #line 9154
-    [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
+    [DIFFICULTY_NORMAL][TRAINER_866AE208] =
     {
 #line 9155
         .trainerName = _("Blank"),
@@ -25852,7 +25796,7 @@
         },
     },
 #line 9162
-    [DIFFICULTY_NORMAL][TRAINER_885C781B] =
+    [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
     {
 #line 9163
         .trainerName = _("Blank"),
@@ -25881,7 +25825,7 @@
         },
     },
 #line 9170
-    [DIFFICULTY_NORMAL][TRAINER_8878003B] =
+    [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
     {
 #line 9171
         .trainerName = _("Blank"),
@@ -25910,7 +25854,7 @@
         },
     },
 #line 9178
-    [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
+    [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
     {
 #line 9179
         .trainerName = _("Blank"),
@@ -25939,7 +25883,7 @@
         },
     },
 #line 9186
-    [DIFFICULTY_NORMAL][TRAINER_8972F540] =
+    [DIFFICULTY_NORMAL][TRAINER_872183CD] =
     {
 #line 9187
         .trainerName = _("Blank"),
@@ -25968,7 +25912,7 @@
         },
     },
 #line 9194
-    [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
+    [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
     {
 #line 9195
         .trainerName = _("Blank"),
@@ -25997,7 +25941,7 @@
         },
     },
 #line 9202
-    [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
+    [DIFFICULTY_NORMAL][TRAINER_885C781B] =
     {
 #line 9203
         .trainerName = _("Blank"),
@@ -26026,7 +25970,7 @@
         },
     },
 #line 9210
-    [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
+    [DIFFICULTY_NORMAL][TRAINER_8878003B] =
     {
 #line 9211
         .trainerName = _("Blank"),
@@ -26055,7 +25999,7 @@
         },
     },
 #line 9218
-    [DIFFICULTY_NORMAL][TRAINER_8A829476] =
+    [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
     {
 #line 9219
         .trainerName = _("Blank"),
@@ -26084,7 +26028,7 @@
         },
     },
 #line 9226
-    [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
+    [DIFFICULTY_NORMAL][TRAINER_8972F540] =
     {
 #line 9227
         .trainerName = _("Blank"),
@@ -26113,7 +26057,7 @@
         },
     },
 #line 9234
-    [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
+    [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
     {
 #line 9235
         .trainerName = _("Blank"),
@@ -26142,7 +26086,7 @@
         },
     },
 #line 9242
-    [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
+    [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
     {
 #line 9243
         .trainerName = _("Blank"),
@@ -26171,7 +26115,7 @@
         },
     },
 #line 9250
-    [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
+    [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
     {
 #line 9251
         .trainerName = _("Blank"),
@@ -26200,7 +26144,7 @@
         },
     },
 #line 9258
-    [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
+    [DIFFICULTY_NORMAL][TRAINER_8A829476] =
     {
 #line 9259
         .trainerName = _("Blank"),
@@ -26229,7 +26173,7 @@
         },
     },
 #line 9266
-    [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
+    [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
     {
 #line 9267
         .trainerName = _("Blank"),
@@ -26258,7 +26202,7 @@
         },
     },
 #line 9274
-    [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
+    [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
     {
 #line 9275
         .trainerName = _("Blank"),
@@ -26287,7 +26231,7 @@
         },
     },
 #line 9282
-    [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
+    [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
     {
 #line 9283
         .trainerName = _("Blank"),
@@ -26316,7 +26260,7 @@
         },
     },
 #line 9290
-    [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
+    [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
     {
 #line 9291
         .trainerName = _("Blank"),
@@ -26345,7 +26289,7 @@
         },
     },
 #line 9298
-    [DIFFICULTY_NORMAL][TRAINER_8C853607] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
     {
 #line 9299
         .trainerName = _("Blank"),
@@ -26374,7 +26318,7 @@
         },
     },
 #line 9306
-    [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
     {
 #line 9307
         .trainerName = _("Blank"),
@@ -26403,7 +26347,7 @@
         },
     },
 #line 9314
-    [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
+    [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
     {
 #line 9315
         .trainerName = _("Blank"),
@@ -26432,7 +26376,7 @@
         },
     },
 #line 9322
-    [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
+    [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
     {
 #line 9323
         .trainerName = _("Blank"),
@@ -26461,7 +26405,7 @@
         },
     },
 #line 9330
-    [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
+    [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
     {
 #line 9331
         .trainerName = _("Blank"),
@@ -26490,7 +26434,7 @@
         },
     },
 #line 9338
-    [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
+    [DIFFICULTY_NORMAL][TRAINER_8C853607] =
     {
 #line 9339
         .trainerName = _("Blank"),
@@ -26519,7 +26463,7 @@
         },
     },
 #line 9346
-    [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
+    [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
     {
 #line 9347
         .trainerName = _("Blank"),
@@ -26548,7 +26492,7 @@
         },
     },
 #line 9354
-    [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
+    [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
     {
 #line 9355
         .trainerName = _("Blank"),
@@ -26577,7 +26521,7 @@
         },
     },
 #line 9362
-    [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
+    [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
     {
 #line 9363
         .trainerName = _("Blank"),
@@ -26606,7 +26550,7 @@
         },
     },
 #line 9370
-    [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
+    [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
     {
 #line 9371
         .trainerName = _("Blank"),
@@ -26635,7 +26579,7 @@
         },
     },
 #line 9378
-    [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
+    [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
     {
 #line 9379
         .trainerName = _("Blank"),
@@ -26664,7 +26608,7 @@
         },
     },
 #line 9386
-    [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
+    [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
     {
 #line 9387
         .trainerName = _("Blank"),
@@ -26693,7 +26637,7 @@
         },
     },
 #line 9394
-    [DIFFICULTY_NORMAL][TRAINER_8F988020] =
+    [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
     {
 #line 9395
         .trainerName = _("Blank"),
@@ -26722,7 +26666,7 @@
         },
     },
 #line 9402
-    [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
+    [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
     {
 #line 9403
         .trainerName = _("Blank"),
@@ -26751,7 +26695,7 @@
         },
     },
 #line 9410
-    [DIFFICULTY_NORMAL][TRAINER_90353D81] =
+    [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
     {
 #line 9411
         .trainerName = _("Blank"),
@@ -26780,7 +26724,7 @@
         },
     },
 #line 9418
-    [DIFFICULTY_NORMAL][TRAINER_9054973F] =
+    [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
     {
 #line 9419
         .trainerName = _("Blank"),
@@ -26809,7 +26753,7 @@
         },
     },
 #line 9426
-    [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
+    [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
     {
 #line 9427
         .trainerName = _("Blank"),
@@ -26838,7 +26782,7 @@
         },
     },
 #line 9434
-    [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
+    [DIFFICULTY_NORMAL][TRAINER_8F988020] =
     {
 #line 9435
         .trainerName = _("Blank"),
@@ -26867,7 +26811,7 @@
         },
     },
 #line 9442
-    [DIFFICULTY_NORMAL][TRAINER_918A1734] =
+    [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
     {
 #line 9443
         .trainerName = _("Blank"),
@@ -26896,7 +26840,7 @@
         },
     },
 #line 9450
-    [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
+    [DIFFICULTY_NORMAL][TRAINER_90353D81] =
     {
 #line 9451
         .trainerName = _("Blank"),
@@ -26925,7 +26869,7 @@
         },
     },
 #line 9458
-    [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
+    [DIFFICULTY_NORMAL][TRAINER_9054973F] =
     {
 #line 9459
         .trainerName = _("Blank"),
@@ -26954,7 +26898,7 @@
         },
     },
 #line 9466
-    [DIFFICULTY_NORMAL][TRAINER_922542C3] =
+    [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
     {
 #line 9467
         .trainerName = _("Blank"),
@@ -26983,7 +26927,7 @@
         },
     },
 #line 9474
-    [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
+    [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
     {
 #line 9475
         .trainerName = _("Blank"),
@@ -27012,7 +26956,7 @@
         },
     },
 #line 9482
-    [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
+    [DIFFICULTY_NORMAL][TRAINER_918A1734] =
     {
 #line 9483
         .trainerName = _("Blank"),
@@ -27041,7 +26985,7 @@
         },
     },
 #line 9490
-    [DIFFICULTY_NORMAL][TRAINER_9427896B] =
+    [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
     {
 #line 9491
         .trainerName = _("Blank"),
@@ -27070,7 +27014,7 @@
         },
     },
 #line 9498
-    [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
+    [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
     {
 #line 9499
         .trainerName = _("Blank"),
@@ -27099,7 +27043,7 @@
         },
     },
 #line 9506
-    [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
+    [DIFFICULTY_NORMAL][TRAINER_922542C3] =
     {
 #line 9507
         .trainerName = _("Blank"),
@@ -27128,7 +27072,7 @@
         },
     },
 #line 9514
-    [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
+    [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
     {
 #line 9515
         .trainerName = _("Blank"),
@@ -27157,7 +27101,7 @@
         },
     },
 #line 9522
-    [DIFFICULTY_NORMAL][TRAINER_963F893A] =
+    [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
     {
 #line 9523
         .trainerName = _("Blank"),
@@ -27186,7 +27130,7 @@
         },
     },
 #line 9530
-    [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
+    [DIFFICULTY_NORMAL][TRAINER_9427896B] =
     {
 #line 9531
         .trainerName = _("Blank"),
@@ -27215,7 +27159,7 @@
         },
     },
 #line 9538
-    [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
+    [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
     {
 #line 9539
         .trainerName = _("Blank"),
@@ -27244,7 +27188,7 @@
         },
     },
 #line 9546
-    [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
+    [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
     {
 #line 9547
         .trainerName = _("Blank"),
@@ -27273,7 +27217,7 @@
         },
     },
 #line 9554
-    [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
+    [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
     {
 #line 9555
         .trainerName = _("Blank"),
@@ -27302,7 +27246,7 @@
         },
     },
 #line 9562
-    [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
+    [DIFFICULTY_NORMAL][TRAINER_963F893A] =
     {
 #line 9563
         .trainerName = _("Blank"),
@@ -27331,7 +27275,7 @@
         },
     },
 #line 9570
-    [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
+    [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
     {
 #line 9571
         .trainerName = _("Blank"),
@@ -27360,7 +27304,7 @@
         },
     },
 #line 9578
-    [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
+    [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
     {
 #line 9579
         .trainerName = _("Blank"),
@@ -27389,7 +27333,7 @@
         },
     },
 #line 9586
-    [DIFFICULTY_NORMAL][TRAINER_98547A36] =
+    [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
     {
 #line 9587
         .trainerName = _("Blank"),
@@ -27418,7 +27362,7 @@
         },
     },
 #line 9594
-    [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
+    [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
     {
 #line 9595
         .trainerName = _("Blank"),
@@ -27447,7 +27391,7 @@
         },
     },
 #line 9602
-    [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
+    [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
     {
 #line 9603
         .trainerName = _("Blank"),
@@ -27476,7 +27420,7 @@
         },
     },
 #line 9610
-    [DIFFICULTY_NORMAL][TRAINER_99D74322] =
+    [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
     {
 #line 9611
         .trainerName = _("Blank"),
@@ -27505,7 +27449,7 @@
         },
     },
 #line 9618
-    [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
+    [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
     {
 #line 9619
         .trainerName = _("Blank"),
@@ -27534,7 +27478,7 @@
         },
     },
 #line 9626
-    [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
+    [DIFFICULTY_NORMAL][TRAINER_98547A36] =
     {
 #line 9627
         .trainerName = _("Blank"),
@@ -27563,7 +27507,7 @@
         },
     },
 #line 9634
-    [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
+    [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
     {
 #line 9635
         .trainerName = _("Blank"),
@@ -27592,7 +27536,7 @@
         },
     },
 #line 9642
-    [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
+    [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
     {
 #line 9643
         .trainerName = _("Blank"),
@@ -27621,7 +27565,7 @@
         },
     },
 #line 9650
-    [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
+    [DIFFICULTY_NORMAL][TRAINER_99D74322] =
     {
 #line 9651
         .trainerName = _("Blank"),
@@ -27650,7 +27594,7 @@
         },
     },
 #line 9658
-    [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
+    [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
     {
 #line 9659
         .trainerName = _("Blank"),
@@ -27679,7 +27623,7 @@
         },
     },
 #line 9666
-    [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
+    [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
     {
 #line 9667
         .trainerName = _("Blank"),
@@ -27708,7 +27652,7 @@
         },
     },
 #line 9674
-    [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
+    [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
     {
 #line 9675
         .trainerName = _("Blank"),
@@ -27737,7 +27681,7 @@
         },
     },
 #line 9682
-    [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
+    [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
     {
 #line 9683
         .trainerName = _("Blank"),
@@ -27766,7 +27710,7 @@
         },
     },
 #line 9690
-    [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
+    [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
     {
 #line 9691
         .trainerName = _("Blank"),
@@ -27795,7 +27739,7 @@
         },
     },
 #line 9698
-    [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
+    [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
     {
 #line 9699
         .trainerName = _("Blank"),
@@ -27824,7 +27768,7 @@
         },
     },
 #line 9706
-    [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
+    [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
     {
 #line 9707
         .trainerName = _("Blank"),
@@ -27853,7 +27797,7 @@
         },
     },
 #line 9714
-    [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
+    [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
     {
 #line 9715
         .trainerName = _("Blank"),
@@ -27882,7 +27826,7 @@
         },
     },
 #line 9722
-    [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
+    [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
     {
 #line 9723
         .trainerName = _("Blank"),
@@ -27911,7 +27855,7 @@
         },
     },
 #line 9730
-    [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
+    [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
     {
 #line 9731
         .trainerName = _("Blank"),
@@ -27940,7 +27884,7 @@
         },
     },
 #line 9738
-    [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
+    [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
     {
 #line 9739
         .trainerName = _("Blank"),
@@ -27969,7 +27913,7 @@
         },
     },
 #line 9746
-    [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
+    [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
     {
 #line 9747
         .trainerName = _("Blank"),
@@ -27998,7 +27942,7 @@
         },
     },
 #line 9754
-    [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
+    [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
     {
 #line 9755
         .trainerName = _("Blank"),
@@ -28027,7 +27971,7 @@
         },
     },
 #line 9762
-    [DIFFICULTY_NORMAL][TRAINER_A0852317] =
+    [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
     {
 #line 9763
         .trainerName = _("Blank"),
@@ -28056,7 +28000,7 @@
         },
     },
 #line 9770
-    [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
+    [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
     {
 #line 9771
         .trainerName = _("Blank"),
@@ -28085,7 +28029,7 @@
         },
     },
 #line 9778
-    [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
+    [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
     {
 #line 9779
         .trainerName = _("Blank"),
@@ -28114,7 +28058,7 @@
         },
     },
 #line 9786
-    [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
+    [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
     {
 #line 9787
         .trainerName = _("Blank"),
@@ -28143,7 +28087,7 @@
         },
     },
 #line 9794
-    [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
+    [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
     {
 #line 9795
         .trainerName = _("Blank"),
@@ -28172,7 +28116,7 @@
         },
     },
 #line 9802
-    [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
+    [DIFFICULTY_NORMAL][TRAINER_A0852317] =
     {
 #line 9803
         .trainerName = _("Blank"),
@@ -28201,7 +28145,7 @@
         },
     },
 #line 9810
-    [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
+    [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
     {
 #line 9811
         .trainerName = _("Blank"),
@@ -28230,7 +28174,7 @@
         },
     },
 #line 9818
-    [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
+    [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
     {
 #line 9819
         .trainerName = _("Blank"),
@@ -28259,7 +28203,7 @@
         },
     },
 #line 9826
-    [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
+    [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
     {
 #line 9827
         .trainerName = _("Blank"),
@@ -28288,7 +28232,7 @@
         },
     },
 #line 9834
-    [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
+    [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
     {
 #line 9835
         .trainerName = _("Blank"),
@@ -28317,7 +28261,7 @@
         },
     },
 #line 9842
-    [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
+    [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
     {
 #line 9843
         .trainerName = _("Blank"),
@@ -28346,7 +28290,7 @@
         },
     },
 #line 9850
-    [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
+    [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
     {
 #line 9851
         .trainerName = _("Blank"),
@@ -28375,7 +28319,7 @@
         },
     },
 #line 9858
-    [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
+    [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
     {
 #line 9859
         .trainerName = _("Blank"),
@@ -28404,7 +28348,7 @@
         },
     },
 #line 9866
-    [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
+    [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
     {
 #line 9867
         .trainerName = _("Blank"),
@@ -28433,7 +28377,7 @@
         },
     },
 #line 9874
-    [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
+    [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
     {
 #line 9875
         .trainerName = _("Blank"),
@@ -28462,7 +28406,7 @@
         },
     },
 #line 9882
-    [DIFFICULTY_NORMAL][TRAINER_A489434F] =
+    [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
     {
 #line 9883
         .trainerName = _("Blank"),
@@ -28491,7 +28435,7 @@
         },
     },
 #line 9890
-    [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
+    [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
     {
 #line 9891
         .trainerName = _("Blank"),
@@ -28520,7 +28464,7 @@
         },
     },
 #line 9898
-    [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
+    [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
     {
 #line 9899
         .trainerName = _("Blank"),
@@ -28549,7 +28493,7 @@
         },
     },
 #line 9906
-    [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
+    [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
     {
 #line 9907
         .trainerName = _("Blank"),
@@ -28578,7 +28522,7 @@
         },
     },
 #line 9914
-    [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
+    [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
     {
 #line 9915
         .trainerName = _("Blank"),
@@ -28607,7 +28551,7 @@
         },
     },
 #line 9922
-    [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
+    [DIFFICULTY_NORMAL][TRAINER_A489434F] =
     {
 #line 9923
         .trainerName = _("Blank"),
@@ -28636,7 +28580,7 @@
         },
     },
 #line 9930
-    [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
+    [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
     {
 #line 9931
         .trainerName = _("Blank"),
@@ -28665,7 +28609,7 @@
         },
     },
 #line 9938
-    [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
+    [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
     {
 #line 9939
         .trainerName = _("Blank"),
@@ -28694,7 +28638,7 @@
         },
     },
 #line 9946
-    [DIFFICULTY_NORMAL][TRAINER_A6328173] =
+    [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
     {
 #line 9947
         .trainerName = _("Blank"),
@@ -28723,7 +28667,7 @@
         },
     },
 #line 9954
-    [DIFFICULTY_NORMAL][TRAINER_A646F21E] =
+    [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
     {
 #line 9955
         .trainerName = _("Blank"),
@@ -28752,7 +28696,7 @@
         },
     },
 #line 9962
-    [DIFFICULTY_NORMAL][TRAINER_A685428F] =
+    [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
     {
 #line 9963
         .trainerName = _("Blank"),
@@ -28781,7 +28725,7 @@
         },
     },
 #line 9970
-    [DIFFICULTY_NORMAL][TRAINER_A686809A] =
+    [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
     {
 #line 9971
         .trainerName = _("Blank"),
@@ -28810,7 +28754,7 @@
         },
     },
 #line 9978
-    [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
+    [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
     {
 #line 9979
         .trainerName = _("Blank"),
@@ -28839,7 +28783,7 @@
         },
     },
 #line 9986
-    [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
+    [DIFFICULTY_NORMAL][TRAINER_A6328173] =
     {
 #line 9987
         .trainerName = _("Blank"),
@@ -28868,7 +28812,7 @@
         },
     },
 #line 9994
-    [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
+    [DIFFICULTY_NORMAL][TRAINER_A646F21E] =
     {
 #line 9995
         .trainerName = _("Blank"),
@@ -28897,7 +28841,7 @@
         },
     },
 #line 10002
-    [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
+    [DIFFICULTY_NORMAL][TRAINER_A685428F] =
     {
 #line 10003
         .trainerName = _("Blank"),
@@ -28926,7 +28870,7 @@
         },
     },
 #line 10010
-    [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
+    [DIFFICULTY_NORMAL][TRAINER_A686809A] =
     {
 #line 10011
         .trainerName = _("Blank"),
@@ -28955,7 +28899,7 @@
         },
     },
 #line 10018
-    [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
+    [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
     {
 #line 10019
         .trainerName = _("Blank"),
@@ -28984,7 +28928,7 @@
         },
     },
 #line 10026
-    [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
+    [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
     {
 #line 10027
         .trainerName = _("Blank"),
@@ -29013,7 +28957,7 @@
         },
     },
 #line 10034
-    [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
+    [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
     {
 #line 10035
         .trainerName = _("Blank"),
@@ -29042,7 +28986,7 @@
         },
     },
 #line 10042
-    [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
+    [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
     {
 #line 10043
         .trainerName = _("Blank"),
@@ -29071,7 +29015,7 @@
         },
     },
 #line 10050
-    [DIFFICULTY_NORMAL][TRAINER_A8413608] =
+    [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
     {
 #line 10051
         .trainerName = _("Blank"),
@@ -29100,7 +29044,7 @@
         },
     },
 #line 10058
-    [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
+    [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
     {
 #line 10059
         .trainerName = _("Blank"),
@@ -29129,7 +29073,7 @@
         },
     },
 #line 10066
-    [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
+    [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
     {
 #line 10067
         .trainerName = _("Blank"),
@@ -29158,7 +29102,7 @@
         },
     },
 #line 10074
-    [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
+    [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
     {
 #line 10075
         .trainerName = _("Blank"),
@@ -29187,7 +29131,7 @@
         },
     },
 #line 10082
-    [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
+    [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
     {
 #line 10083
         .trainerName = _("Blank"),
@@ -29216,7 +29160,7 @@
         },
     },
 #line 10090
-    [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
+    [DIFFICULTY_NORMAL][TRAINER_A8413608] =
     {
 #line 10091
         .trainerName = _("Blank"),
@@ -29245,7 +29189,7 @@
         },
     },
 #line 10098
-    [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
+    [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
     {
 #line 10099
         .trainerName = _("Blank"),
@@ -29274,7 +29218,7 @@
         },
     },
 #line 10106
-    [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
+    [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
     {
 #line 10107
         .trainerName = _("Blank"),
@@ -29303,7 +29247,7 @@
         },
     },
 #line 10114
-    [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
+    [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
     {
 #line 10115
         .trainerName = _("Blank"),
@@ -29332,7 +29276,7 @@
         },
     },
 #line 10122
-    [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
+    [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
     {
 #line 10123
         .trainerName = _("Blank"),
@@ -29361,7 +29305,7 @@
         },
     },
 #line 10130
-    [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
+    [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
     {
 #line 10131
         .trainerName = _("Blank"),
@@ -29390,7 +29334,7 @@
         },
     },
 #line 10138
-    [DIFFICULTY_NORMAL][TRAINER_AC004835] =
+    [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
     {
 #line 10139
         .trainerName = _("Blank"),
@@ -29419,7 +29363,7 @@
         },
     },
 #line 10146
-    [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
+    [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
     {
 #line 10147
         .trainerName = _("Blank"),
@@ -29448,7 +29392,7 @@
         },
     },
 #line 10154
-    [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
+    [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
     {
 #line 10155
         .trainerName = _("Blank"),
@@ -29477,7 +29421,7 @@
         },
     },
 #line 10162
-    [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
+    [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
     {
 #line 10163
         .trainerName = _("Blank"),
@@ -29506,7 +29450,7 @@
         },
     },
 #line 10170
-    [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
+    [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
     {
 #line 10171
         .trainerName = _("Blank"),
@@ -29535,7 +29479,7 @@
         },
     },
 #line 10178
-    [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
+    [DIFFICULTY_NORMAL][TRAINER_AC004835] =
     {
 #line 10179
         .trainerName = _("Blank"),
@@ -29564,7 +29508,7 @@
         },
     },
 #line 10186
-    [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
+    [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
     {
 #line 10187
         .trainerName = _("Blank"),
@@ -29593,7 +29537,7 @@
         },
     },
 #line 10194
-    [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
+    [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
     {
 #line 10195
         .trainerName = _("Blank"),
@@ -29622,7 +29566,7 @@
         },
     },
 #line 10202
-    [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
+    [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
     {
 #line 10203
         .trainerName = _("Blank"),
@@ -29651,7 +29595,7 @@
         },
     },
 #line 10210
-    [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
+    [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
     {
 #line 10211
         .trainerName = _("Blank"),
@@ -29680,7 +29624,7 @@
         },
     },
 #line 10218
-    [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
+    [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
     {
 #line 10219
         .trainerName = _("Blank"),
@@ -29709,7 +29653,7 @@
         },
     },
 #line 10226
-    [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
+    [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
     {
 #line 10227
         .trainerName = _("Blank"),
@@ -29738,7 +29682,7 @@
         },
     },
 #line 10234
-    [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
+    [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
     {
 #line 10235
         .trainerName = _("Blank"),
@@ -29767,7 +29711,7 @@
         },
     },
 #line 10242
-    [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
+    [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
     {
 #line 10243
         .trainerName = _("Blank"),
@@ -29796,7 +29740,7 @@
         },
     },
 #line 10250
-    [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
+    [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
     {
 #line 10251
         .trainerName = _("Blank"),
@@ -29825,7 +29769,7 @@
         },
     },
 #line 10258
-    [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
+    [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
     {
 #line 10259
         .trainerName = _("Blank"),
@@ -29854,7 +29798,7 @@
         },
     },
 #line 10266
-    [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
+    [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
     {
 #line 10267
         .trainerName = _("Blank"),
@@ -29883,7 +29827,7 @@
         },
     },
 #line 10274
-    [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
+    [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
     {
 #line 10275
         .trainerName = _("Blank"),
@@ -29912,7 +29856,7 @@
         },
     },
 #line 10282
-    [DIFFICULTY_NORMAL][TRAINER_B0FC622D] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
     {
 #line 10283
         .trainerName = _("Blank"),
@@ -29941,7 +29885,7 @@
         },
     },
 #line 10290
-    [DIFFICULTY_NORMAL][TRAINER_B1DA7383] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
     {
 #line 10291
         .trainerName = _("Blank"),
@@ -29970,7 +29914,7 @@
         },
     },
 #line 10298
-    [DIFFICULTY_NORMAL][TRAINER_B253DEF2] =
+    [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
     {
 #line 10299
         .trainerName = _("Blank"),
@@ -29999,7 +29943,7 @@
         },
     },
 #line 10306
-    [DIFFICULTY_NORMAL][TRAINER_B2925134] =
+    [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
     {
 #line 10307
         .trainerName = _("Blank"),
@@ -30028,7 +29972,7 @@
         },
     },
 #line 10314
-    [DIFFICULTY_NORMAL][TRAINER_B2A5CB2B] =
+    [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
     {
 #line 10315
         .trainerName = _("Blank"),
@@ -30057,7 +30001,7 @@
         },
     },
 #line 10322
-    [DIFFICULTY_NORMAL][TRAINER_B32A1E98] =
+    [DIFFICULTY_NORMAL][TRAINER_B0FC622D] =
     {
 #line 10323
         .trainerName = _("Blank"),
@@ -30086,7 +30030,7 @@
         },
     },
 #line 10330
-    [DIFFICULTY_NORMAL][TRAINER_B3B1644E] =
+    [DIFFICULTY_NORMAL][TRAINER_B1DA7383] =
     {
 #line 10331
         .trainerName = _("Blank"),
@@ -30115,7 +30059,7 @@
         },
     },
 #line 10338
-    [DIFFICULTY_NORMAL][TRAINER_B3CE95A4] =
+    [DIFFICULTY_NORMAL][TRAINER_B253DEF2] =
     {
 #line 10339
         .trainerName = _("Blank"),
@@ -30144,7 +30088,7 @@
         },
     },
 #line 10346
-    [DIFFICULTY_NORMAL][TRAINER_B3FB2F4B] =
+    [DIFFICULTY_NORMAL][TRAINER_B2925134] =
     {
 #line 10347
         .trainerName = _("Blank"),
@@ -30173,7 +30117,7 @@
         },
     },
 #line 10354
-    [DIFFICULTY_NORMAL][TRAINER_B42E7E27] =
+    [DIFFICULTY_NORMAL][TRAINER_B2A5CB2B] =
     {
 #line 10355
         .trainerName = _("Blank"),
@@ -30202,7 +30146,7 @@
         },
     },
 #line 10362
-    [DIFFICULTY_NORMAL][TRAINER_B42F5023] =
+    [DIFFICULTY_NORMAL][TRAINER_B32A1E98] =
     {
 #line 10363
         .trainerName = _("Blank"),
@@ -30231,7 +30175,7 @@
         },
     },
 #line 10370
-    [DIFFICULTY_NORMAL][TRAINER_B435B7EF] =
+    [DIFFICULTY_NORMAL][TRAINER_B3B1644E] =
     {
 #line 10371
         .trainerName = _("Blank"),
@@ -30260,7 +30204,7 @@
         },
     },
 #line 10378
-    [DIFFICULTY_NORMAL][TRAINER_B438F348] =
+    [DIFFICULTY_NORMAL][TRAINER_B3CE95A4] =
     {
 #line 10379
         .trainerName = _("Blank"),
@@ -30289,7 +30233,7 @@
         },
     },
 #line 10386
-    [DIFFICULTY_NORMAL][TRAINER_B489F821] =
+    [DIFFICULTY_NORMAL][TRAINER_B3FB2F4B] =
     {
 #line 10387
         .trainerName = _("Blank"),
@@ -30318,7 +30262,7 @@
         },
     },
 #line 10394
-    [DIFFICULTY_NORMAL][TRAINER_B490300F] =
+    [DIFFICULTY_NORMAL][TRAINER_B42E7E27] =
     {
 #line 10395
         .trainerName = _("Blank"),
@@ -30347,7 +30291,7 @@
         },
     },
 #line 10402
-    [DIFFICULTY_NORMAL][TRAINER_B53E1C28] =
+    [DIFFICULTY_NORMAL][TRAINER_B42F5023] =
     {
 #line 10403
         .trainerName = _("Blank"),
@@ -30376,7 +30320,7 @@
         },
     },
 #line 10410
-    [DIFFICULTY_NORMAL][TRAINER_B5E055E7] =
+    [DIFFICULTY_NORMAL][TRAINER_B435B7EF] =
     {
 #line 10411
         .trainerName = _("Blank"),
@@ -30405,7 +30349,7 @@
         },
     },
 #line 10418
-    [DIFFICULTY_NORMAL][TRAINER_B6330B06] =
+    [DIFFICULTY_NORMAL][TRAINER_B438F348] =
     {
 #line 10419
         .trainerName = _("Blank"),
@@ -30434,7 +30378,7 @@
         },
     },
 #line 10426
-    [DIFFICULTY_NORMAL][TRAINER_B66CAB9E] =
+    [DIFFICULTY_NORMAL][TRAINER_B489F821] =
     {
 #line 10427
         .trainerName = _("Blank"),
@@ -30463,7 +30407,7 @@
         },
     },
 #line 10434
-    [DIFFICULTY_NORMAL][TRAINER_B6E3D521] =
+    [DIFFICULTY_NORMAL][TRAINER_B490300F] =
     {
 #line 10435
         .trainerName = _("Blank"),
@@ -30492,7 +30436,7 @@
         },
     },
 #line 10442
-    [DIFFICULTY_NORMAL][TRAINER_B6F23A27] =
+    [DIFFICULTY_NORMAL][TRAINER_B53E1C28] =
     {
 #line 10443
         .trainerName = _("Blank"),
@@ -30521,7 +30465,7 @@
         },
     },
 #line 10450
-    [DIFFICULTY_NORMAL][TRAINER_B71419A1] =
+    [DIFFICULTY_NORMAL][TRAINER_B5E055E7] =
     {
 #line 10451
         .trainerName = _("Blank"),
@@ -30550,7 +30494,7 @@
         },
     },
 #line 10458
-    [DIFFICULTY_NORMAL][TRAINER_B77C014B] =
+    [DIFFICULTY_NORMAL][TRAINER_B6330B06] =
     {
 #line 10459
         .trainerName = _("Blank"),
@@ -30579,7 +30523,7 @@
         },
     },
 #line 10466
-    [DIFFICULTY_NORMAL][TRAINER_B791766D] =
+    [DIFFICULTY_NORMAL][TRAINER_B66CAB9E] =
     {
 #line 10467
         .trainerName = _("Blank"),
@@ -30608,7 +30552,7 @@
         },
     },
 #line 10474
-    [DIFFICULTY_NORMAL][TRAINER_B7998A66] =
+    [DIFFICULTY_NORMAL][TRAINER_B6E3D521] =
     {
 #line 10475
         .trainerName = _("Blank"),
@@ -30637,7 +30581,7 @@
         },
     },
 #line 10482
-    [DIFFICULTY_NORMAL][TRAINER_B7C2EB7F] =
+    [DIFFICULTY_NORMAL][TRAINER_B6F23A27] =
     {
 #line 10483
         .trainerName = _("Blank"),
@@ -30666,7 +30610,7 @@
         },
     },
 #line 10490
-    [DIFFICULTY_NORMAL][TRAINER_B7EFEE71] =
+    [DIFFICULTY_NORMAL][TRAINER_B71419A1] =
     {
 #line 10491
         .trainerName = _("Blank"),
@@ -30695,7 +30639,7 @@
         },
     },
 #line 10498
-    [DIFFICULTY_NORMAL][TRAINER_B84B3D2A] =
+    [DIFFICULTY_NORMAL][TRAINER_B77C014B] =
     {
 #line 10499
         .trainerName = _("Blank"),
@@ -30724,7 +30668,7 @@
         },
     },
 #line 10506
-    [DIFFICULTY_NORMAL][TRAINER_B8C5628C] =
+    [DIFFICULTY_NORMAL][TRAINER_B791766D] =
     {
 #line 10507
         .trainerName = _("Blank"),
@@ -30753,7 +30697,7 @@
         },
     },
 #line 10514
-    [DIFFICULTY_NORMAL][TRAINER_B94D66E3] =
+    [DIFFICULTY_NORMAL][TRAINER_B7998A66] =
     {
 #line 10515
         .trainerName = _("Blank"),
@@ -30782,7 +30726,7 @@
         },
     },
 #line 10522
-    [DIFFICULTY_NORMAL][TRAINER_B9C56D15] =
+    [DIFFICULTY_NORMAL][TRAINER_B7C2EB7F] =
     {
 #line 10523
         .trainerName = _("Blank"),
@@ -30811,7 +30755,7 @@
         },
     },
 #line 10530
-    [DIFFICULTY_NORMAL][TRAINER_BA12D98F] =
+    [DIFFICULTY_NORMAL][TRAINER_B7EFEE71] =
     {
 #line 10531
         .trainerName = _("Blank"),
@@ -30840,7 +30784,7 @@
         },
     },
 #line 10538
-    [DIFFICULTY_NORMAL][TRAINER_BA4155D3] =
+    [DIFFICULTY_NORMAL][TRAINER_B84B3D2A] =
     {
 #line 10539
         .trainerName = _("Blank"),
@@ -30869,7 +30813,7 @@
         },
     },
 #line 10546
-    [DIFFICULTY_NORMAL][TRAINER_BA4DFC3A] =
+    [DIFFICULTY_NORMAL][TRAINER_B8C5628C] =
     {
 #line 10547
         .trainerName = _("Blank"),
@@ -30898,7 +30842,7 @@
         },
     },
 #line 10554
-    [DIFFICULTY_NORMAL][TRAINER_BA60011F] =
+    [DIFFICULTY_NORMAL][TRAINER_B94D66E3] =
     {
 #line 10555
         .trainerName = _("Blank"),
@@ -30927,7 +30871,7 @@
         },
     },
 #line 10562
-    [DIFFICULTY_NORMAL][TRAINER_BA924FF7] =
+    [DIFFICULTY_NORMAL][TRAINER_B9C56D15] =
     {
 #line 10563
         .trainerName = _("Blank"),
@@ -30956,7 +30900,7 @@
         },
     },
 #line 10570
-    [DIFFICULTY_NORMAL][TRAINER_BB07DD1B] =
+    [DIFFICULTY_NORMAL][TRAINER_BA12D98F] =
     {
 #line 10571
         .trainerName = _("Blank"),
@@ -30985,7 +30929,7 @@
         },
     },
 #line 10578
-    [DIFFICULTY_NORMAL][TRAINER_BB531FBA] =
+    [DIFFICULTY_NORMAL][TRAINER_BA4155D3] =
     {
 #line 10579
         .trainerName = _("Blank"),
@@ -31014,7 +30958,7 @@
         },
     },
 #line 10586
-    [DIFFICULTY_NORMAL][TRAINER_BB6FD0A4] =
+    [DIFFICULTY_NORMAL][TRAINER_BA4DFC3A] =
     {
 #line 10587
         .trainerName = _("Blank"),
@@ -31043,7 +30987,7 @@
         },
     },
 #line 10594
-    [DIFFICULTY_NORMAL][TRAINER_BBBC4B4C] =
+    [DIFFICULTY_NORMAL][TRAINER_BA60011F] =
     {
 #line 10595
         .trainerName = _("Blank"),
@@ -31072,7 +31016,7 @@
         },
     },
 #line 10602
-    [DIFFICULTY_NORMAL][TRAINER_BBD56E26] =
+    [DIFFICULTY_NORMAL][TRAINER_BA924FF7] =
     {
 #line 10603
         .trainerName = _("Blank"),
@@ -31101,7 +31045,7 @@
         },
     },
 #line 10610
-    [DIFFICULTY_NORMAL][TRAINER_BC01A85B] =
+    [DIFFICULTY_NORMAL][TRAINER_BB07DD1B] =
     {
 #line 10611
         .trainerName = _("Blank"),
@@ -31130,7 +31074,7 @@
         },
     },
 #line 10618
-    [DIFFICULTY_NORMAL][TRAINER_BC74FA1D] =
+    [DIFFICULTY_NORMAL][TRAINER_BB531FBA] =
     {
 #line 10619
         .trainerName = _("Blank"),
@@ -31159,7 +31103,7 @@
         },
     },
 #line 10626
-    [DIFFICULTY_NORMAL][TRAINER_BC7E8D55] =
+    [DIFFICULTY_NORMAL][TRAINER_BB6FD0A4] =
     {
 #line 10627
         .trainerName = _("Blank"),
@@ -31188,7 +31132,7 @@
         },
     },
 #line 10634
-    [DIFFICULTY_NORMAL][TRAINER_BCDFD312] =
+    [DIFFICULTY_NORMAL][TRAINER_BBBC4B4C] =
     {
 #line 10635
         .trainerName = _("Blank"),
@@ -31217,7 +31161,7 @@
         },
     },
 #line 10642
-    [DIFFICULTY_NORMAL][TRAINER_BCEFD799] =
+    [DIFFICULTY_NORMAL][TRAINER_BBD56E26] =
     {
 #line 10643
         .trainerName = _("Blank"),
@@ -31246,7 +31190,7 @@
         },
     },
 #line 10650
-    [DIFFICULTY_NORMAL][TRAINER_BD01F8F4] =
+    [DIFFICULTY_NORMAL][TRAINER_BC01A85B] =
     {
 #line 10651
         .trainerName = _("Blank"),
@@ -31275,7 +31219,7 @@
         },
     },
 #line 10658
-    [DIFFICULTY_NORMAL][TRAINER_BDC38E1E] =
+    [DIFFICULTY_NORMAL][TRAINER_BC74FA1D] =
     {
 #line 10659
         .trainerName = _("Blank"),
@@ -31304,7 +31248,7 @@
         },
     },
 #line 10666
-    [DIFFICULTY_NORMAL][TRAINER_BE2AF14F] =
+    [DIFFICULTY_NORMAL][TRAINER_BC7E8D55] =
     {
 #line 10667
         .trainerName = _("Blank"),
@@ -31333,7 +31277,7 @@
         },
     },
 #line 10674
-    [DIFFICULTY_NORMAL][TRAINER_BEB2BD3E] =
+    [DIFFICULTY_NORMAL][TRAINER_BCDFD312] =
     {
 #line 10675
         .trainerName = _("Blank"),
@@ -31362,7 +31306,7 @@
         },
     },
 #line 10682
-    [DIFFICULTY_NORMAL][TRAINER_BF07B94F] =
+    [DIFFICULTY_NORMAL][TRAINER_BCEFD799] =
     {
 #line 10683
         .trainerName = _("Blank"),
@@ -31391,7 +31335,7 @@
         },
     },
 #line 10690
-    [DIFFICULTY_NORMAL][TRAINER_BF2827C0] =
+    [DIFFICULTY_NORMAL][TRAINER_BD01F8F4] =
     {
 #line 10691
         .trainerName = _("Blank"),
@@ -31420,7 +31364,7 @@
         },
     },
 #line 10698
-    [DIFFICULTY_NORMAL][TRAINER_BF74896F] =
+    [DIFFICULTY_NORMAL][TRAINER_BDC38E1E] =
     {
 #line 10699
         .trainerName = _("Blank"),
@@ -31449,7 +31393,7 @@
         },
     },
 #line 10706
-    [DIFFICULTY_NORMAL][TRAINER_BF8ADEF1] =
+    [DIFFICULTY_NORMAL][TRAINER_BE2AF14F] =
     {
 #line 10707
         .trainerName = _("Blank"),
@@ -31478,7 +31422,7 @@
         },
     },
 #line 10714
-    [DIFFICULTY_NORMAL][TRAINER_C0800804] =
+    [DIFFICULTY_NORMAL][TRAINER_BEB2BD3E] =
     {
 #line 10715
         .trainerName = _("Blank"),
@@ -31507,7 +31451,7 @@
         },
     },
 #line 10722
-    [DIFFICULTY_NORMAL][TRAINER_C091F2C5] =
+    [DIFFICULTY_NORMAL][TRAINER_BF07B94F] =
     {
 #line 10723
         .trainerName = _("Blank"),
@@ -31536,7 +31480,7 @@
         },
     },
 #line 10730
-    [DIFFICULTY_NORMAL][TRAINER_C10351D2] =
+    [DIFFICULTY_NORMAL][TRAINER_BF2827C0] =
     {
 #line 10731
         .trainerName = _("Blank"),
@@ -31565,7 +31509,7 @@
         },
     },
 #line 10738
-    [DIFFICULTY_NORMAL][TRAINER_C1C428F7] =
+    [DIFFICULTY_NORMAL][TRAINER_BF74896F] =
     {
 #line 10739
         .trainerName = _("Blank"),
@@ -31594,7 +31538,7 @@
         },
     },
 #line 10746
-    [DIFFICULTY_NORMAL][TRAINER_C1C621AC] =
+    [DIFFICULTY_NORMAL][TRAINER_BF8ADEF1] =
     {
 #line 10747
         .trainerName = _("Blank"),
@@ -31623,7 +31567,7 @@
         },
     },
 #line 10754
-    [DIFFICULTY_NORMAL][TRAINER_C203C024] =
+    [DIFFICULTY_NORMAL][TRAINER_C0800804] =
     {
 #line 10755
         .trainerName = _("Blank"),
@@ -31652,7 +31596,7 @@
         },
     },
 #line 10762
-    [DIFFICULTY_NORMAL][TRAINER_C2174D90] =
+    [DIFFICULTY_NORMAL][TRAINER_C091F2C5] =
     {
 #line 10763
         .trainerName = _("Blank"),
@@ -31681,7 +31625,7 @@
         },
     },
 #line 10770
-    [DIFFICULTY_NORMAL][TRAINER_C24EFC92] =
+    [DIFFICULTY_NORMAL][TRAINER_C10351D2] =
     {
 #line 10771
         .trainerName = _("Blank"),
@@ -31710,7 +31654,7 @@
         },
     },
 #line 10778
-    [DIFFICULTY_NORMAL][TRAINER_C290C9F5] =
+    [DIFFICULTY_NORMAL][TRAINER_C1C428F7] =
     {
 #line 10779
         .trainerName = _("Blank"),
@@ -31739,7 +31683,7 @@
         },
     },
 #line 10786
-    [DIFFICULTY_NORMAL][TRAINER_C29CDC34] =
+    [DIFFICULTY_NORMAL][TRAINER_C1C621AC] =
     {
 #line 10787
         .trainerName = _("Blank"),
@@ -31768,7 +31712,7 @@
         },
     },
 #line 10794
-    [DIFFICULTY_NORMAL][TRAINER_C3B3B17B] =
+    [DIFFICULTY_NORMAL][TRAINER_C203C024] =
     {
 #line 10795
         .trainerName = _("Blank"),
@@ -31797,7 +31741,7 @@
         },
     },
 #line 10802
-    [DIFFICULTY_NORMAL][TRAINER_C414BED0] =
+    [DIFFICULTY_NORMAL][TRAINER_C2174D90] =
     {
 #line 10803
         .trainerName = _("Blank"),
@@ -31826,7 +31770,7 @@
         },
     },
 #line 10810
-    [DIFFICULTY_NORMAL][TRAINER_C42A775B] =
+    [DIFFICULTY_NORMAL][TRAINER_C24EFC92] =
     {
 #line 10811
         .trainerName = _("Blank"),
@@ -31855,7 +31799,7 @@
         },
     },
 #line 10818
-    [DIFFICULTY_NORMAL][TRAINER_C4A167E0] =
+    [DIFFICULTY_NORMAL][TRAINER_C290C9F5] =
     {
 #line 10819
         .trainerName = _("Blank"),
@@ -31884,7 +31828,7 @@
         },
     },
 #line 10826
-    [DIFFICULTY_NORMAL][TRAINER_C4C98FC4] =
+    [DIFFICULTY_NORMAL][TRAINER_C29CDC34] =
     {
 #line 10827
         .trainerName = _("Blank"),
@@ -31913,7 +31857,7 @@
         },
     },
 #line 10834
-    [DIFFICULTY_NORMAL][TRAINER_C533F091] =
+    [DIFFICULTY_NORMAL][TRAINER_C3B3B17B] =
     {
 #line 10835
         .trainerName = _("Blank"),
@@ -31942,7 +31886,7 @@
         },
     },
 #line 10842
-    [DIFFICULTY_NORMAL][TRAINER_C6600959] =
+    [DIFFICULTY_NORMAL][TRAINER_C414BED0] =
     {
 #line 10843
         .trainerName = _("Blank"),
@@ -31971,7 +31915,7 @@
         },
     },
 #line 10850
-    [DIFFICULTY_NORMAL][TRAINER_C6666859] =
+    [DIFFICULTY_NORMAL][TRAINER_C42A775B] =
     {
 #line 10851
         .trainerName = _("Blank"),
@@ -32000,7 +31944,7 @@
         },
     },
 #line 10858
-    [DIFFICULTY_NORMAL][TRAINER_C690158D] =
+    [DIFFICULTY_NORMAL][TRAINER_C4A167E0] =
     {
 #line 10859
         .trainerName = _("Blank"),
@@ -32029,7 +31973,7 @@
         },
     },
 #line 10866
-    [DIFFICULTY_NORMAL][TRAINER_C6E61EDA] =
+    [DIFFICULTY_NORMAL][TRAINER_C4C98FC4] =
     {
 #line 10867
         .trainerName = _("Blank"),
@@ -32058,7 +32002,7 @@
         },
     },
 #line 10874
-    [DIFFICULTY_NORMAL][TRAINER_C7630112] =
+    [DIFFICULTY_NORMAL][TRAINER_C533F091] =
     {
 #line 10875
         .trainerName = _("Blank"),
@@ -32087,7 +32031,7 @@
         },
     },
 #line 10882
-    [DIFFICULTY_NORMAL][TRAINER_C789FBF5] =
+    [DIFFICULTY_NORMAL][TRAINER_C6600959] =
     {
 #line 10883
         .trainerName = _("Blank"),
@@ -32116,7 +32060,7 @@
         },
     },
 #line 10890
-    [DIFFICULTY_NORMAL][TRAINER_C7E06CB4] =
+    [DIFFICULTY_NORMAL][TRAINER_C6666859] =
     {
 #line 10891
         .trainerName = _("Blank"),
@@ -32145,7 +32089,7 @@
         },
     },
 #line 10898
-    [DIFFICULTY_NORMAL][TRAINER_C7F16F5B] =
+    [DIFFICULTY_NORMAL][TRAINER_C690158D] =
     {
 #line 10899
         .trainerName = _("Blank"),
@@ -32174,7 +32118,7 @@
         },
     },
 #line 10906
-    [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
+    [DIFFICULTY_NORMAL][TRAINER_C6E61EDA] =
     {
 #line 10907
         .trainerName = _("Blank"),
@@ -32203,7 +32147,7 @@
         },
     },
 #line 10914
-    [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
+    [DIFFICULTY_NORMAL][TRAINER_C7630112] =
     {
 #line 10915
         .trainerName = _("Blank"),
@@ -32232,7 +32176,7 @@
         },
     },
 #line 10922
-    [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
+    [DIFFICULTY_NORMAL][TRAINER_C789FBF5] =
     {
 #line 10923
         .trainerName = _("Blank"),
@@ -32261,7 +32205,7 @@
         },
     },
 #line 10930
-    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
+    [DIFFICULTY_NORMAL][TRAINER_C7E06CB4] =
     {
 #line 10931
         .trainerName = _("Blank"),
@@ -32290,7 +32234,7 @@
         },
     },
 #line 10938
-    [DIFFICULTY_NORMAL][TRAINER_RED] =
+    [DIFFICULTY_NORMAL][TRAINER_C7F16F5B] =
     {
 #line 10939
         .trainerName = _("Blank"),
@@ -32312,6 +32256,151 @@
 #line 10945
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 10944
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 10946
+    [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
+    {
+#line 10947
+        .trainerName = _("Blank"),
+#line 10948
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 10949
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 10951
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 10953
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 10952
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 10954
+    [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
+    {
+#line 10955
+        .trainerName = _("Blank"),
+#line 10956
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 10957
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 10959
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 10961
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 10960
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 10962
+    [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
+    {
+#line 10963
+        .trainerName = _("Blank"),
+#line 10964
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 10965
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 10967
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 10969
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 10968
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 10970
+    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
+    {
+#line 10971
+        .trainerName = _("Blank"),
+#line 10972
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 10973
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 10975
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 10977
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 10976
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 10978
+    [DIFFICULTY_NORMAL][TRAINER_RED] =
+    {
+#line 10979
+        .trainerName = _("Blank"),
+#line 10980
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 10981
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 10983
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 10985
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 10984
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

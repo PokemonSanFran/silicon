@@ -6132,8 +6132,48 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Vanilluxe @ Icy Rock
+Ability: Snow Warning
+Level: 42
+EVs: 132 HP/76 Def/172 SpA/16 SpD
+Sassy Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Mist
+- Blizzard
+- Explosion
+
+Chansey (F) @ Never-Melt Ice
+Ability: Serene Grace
+Level: 46
+EVs: 144 Def/252 SpA
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Snowscape
+- Blizzard
+- Healing Wish
+- Thunder Wave
+
+Lapras @ Never-Melt Ice
+Ability: Water Absorb
+Level: 46
+EVs: 64 HP/44 Def/252 SpA/40 SpD
+Quiet Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Snowscape
+- Blizzard
+- Psychic Noise
+- Freeze-Dry
+
+Gorebyss @ Never-Melt Ice
+Ability: Swift Swim
+Level: 41
+EVs: 252 SpA/148 Spe
+Modest Nature
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Snowscape
+- Blizzard
+- Bounce
+- Shell Smash
 
 === TRAINER_1710375D ===
 Name: Blank
