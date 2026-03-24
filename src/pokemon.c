@@ -3523,9 +3523,13 @@ enum TrainerClassID GetSecretBaseTrainerClass(void)
 bool8 IsPlayerPartyAndPokemonStorageFull(void)
 {
     s32 i;
+    struct Pokemon *party = FlagGet(B_FLAG_SKY_BATTLE) ? gSaveBlock1Ptr->playerParty : gPlayerParty; // flyEncounters
 
     for (i = 0; i < PARTY_SIZE; i++)
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+        // Start flyEncounters
+        //if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+        if (GetMonData(&party[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+        // End flyEncounters
             return FALSE;
 
     return IsPokemonStorageFull();
