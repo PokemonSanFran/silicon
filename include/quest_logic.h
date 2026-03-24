@@ -48,5 +48,6 @@ void Quest_FlightPatterns_SetLastFlightEncounter(u32);
 u32 Quest_FlightPatterns_GetFlightPath(void);
 void Quest_FlightPatterns_SetFlightPath(u32);
 enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32, bool32);
+void Quest_FlightPatterns_ClearFlightPath(void);
 
 #endif //GUARD_QUESTLOGIC_H
