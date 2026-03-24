@@ -2490,7 +2490,7 @@ void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
 
 bool32 Quest_FlightPatterns_OnLastLeg(void)
 {
-    return (Quest_FlightPatterns_GetFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT);
+    return (Quest_FlightPatterns_GetFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT - 1);
 }
 
 enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32 steps, bool32 isLure)
