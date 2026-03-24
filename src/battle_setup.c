@@ -611,9 +611,10 @@ static void CB2_EndWildBattle(void)
         SetMainCallback2(CB2_WhiteOut);
     }
     // Start flyEncounters
-    //else if (FlagGet(B_FLAG_SKY_BATTLE))
-    else if (gBattleStruct->isSkyBattle)
+    // else if (FlagGet(B_FLAG_SKY_BATTLE))
+    else if (FlagGet(FLAG_POST_SKY_BATTLE) || FlagGet(B_FLAG_SKY_BATTLE))
     {
+        FlagClear(FLAG_POST_SKY_BATTLE);
         HandleBattleVariantEndParty();
         IncrementFogVariable();
         SetMainCallback2(CB2_LoadMap);
@@ -1334,8 +1335,12 @@ void HandleBattleVariantEndParty(void)
     //if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
     if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()))
         return;
+
     if (FlagGet(B_FLAG_SKY_BATTLE))
+    { // flyEncounters
         SaveChangesToPlayerParty();
+        FlagSet(FLAG_POST_SKY_BATTLE); // flyEncounters
+    } // flyEncounters
 
     if (IsCurrentBattleLittleCup())
         SetTemporaryLittleCupVar();
