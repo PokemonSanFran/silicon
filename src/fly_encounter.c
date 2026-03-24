@@ -55,6 +55,9 @@ enum FlyEncounterTypes GetFlyEncounterType(void)
     if (!DoesDestinationHaveFlyMons())
         encounterType = FLY_ENCOUNTER_NONE;
 
+    if (TryGenerateWildMon(GetHeaderFlyMonsInfo(), 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == FALSE)
+        encounterType = FLY_ENCOUNTER_NONE;
+
     if (encounterType != FLY_ENCOUNTER_NONE)
     {
         TrySkyBattle();
@@ -90,7 +93,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
     {
         gSpecialVar_Result = FALSE;
     }
-    else if (TryGenerateWildMon(GetHeaderFlyMonsInfo(), 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+    else if (GetMonData(&gEnemyParty[0],MON_DATA_SPECIES) != SPECIES_NONE)
     {
         BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;
@@ -98,6 +101,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
     else
     {
         gSpecialVar_Result = FALSE;
+        return;
     }
 }
 
@@ -110,7 +114,6 @@ static void Task_FlyEncounterMessage(u8 taskId)
 
     switch (task->data[0])
     {
-        //  TODO update CB2_EndWildBattle to check for a 'attacked while flying' flag or task and if so, call the function that flys the player into the new map
         case 0:
             ShowFieldMessage(gStringVar4);
             task->data[0]++;
@@ -131,7 +134,7 @@ static void Task_FlyEncounterMessage(u8 taskId)
                 sFlyEncounterCallback2 = NULL;
                 sFlyEncounterFieldCallback = NULL;
                 FlyWildEncounter(task->data[1]);
-                if (!gSpecialVar_Result)
+                if (gSpecialVar_Result == FALSE)
                 {
                     SetMainCallback2(callback2);
                     gFieldCallback = fieldCb;
@@ -154,6 +157,7 @@ void TryFlyWildEncounter(u8 taskId, void* callback2, void* fieldCallback)
             gFieldCallback = fieldCallback;
             DestroyTask(taskId);
             return;
+            break;
         case FLY_ENCOUNTER_ATTACK:
             StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("After taking flight, a wild Pokémon attacked!"));
             break;
