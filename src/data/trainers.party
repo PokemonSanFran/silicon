@@ -6062,16 +6062,70 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Hawlucha @ Oran Berry  
+Ability: Unburden  
+Level: 45  
+EVs: 252 HP / 72 Def / 72 SpD  
+Impish Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Taunt  
+- Encore  
+- Helping Hand  
+- Brick Break  
+
+Trapinch @ King's Rock  
+Ability: Arena Trap  
+Level: 40  
+EVs: 76 HP / 252 Atk / 72 Def  
+Brave Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Quick Attack  
+- Bite  
+- Stone Edge  
+- Bulldoze  
+
+Trapinch @ Choice Band  
+Ability: Arena Trap  
+Level: 40  
+EVs: 76 HP / 252 Atk / 72 Def  
+Brave Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Quick Attack  
+- Bug Bite  
+- Stone Edge  
+- Bulldoze  
 
 === TRAINER_15C87858 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Swadloon  
+Ability: Overcoat  
+Level: 45  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Light Screen  
+- Substitute  
+- Protect  
+- Giga Drain  
+
+Gligar  
+Ability: Hyper Cutter  
+Level: 41  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Toxic  
+- Protect  
+- Substitute  
+- Earthquake  
+
+Toedscruel  
+Ability: Mycelium Might  
+Level: 44  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Substitute  
+- Leech Seed  
+- Protect  
+- Hex  
 
 === TRAINER_1648CE6E ===
 Name: Blank
