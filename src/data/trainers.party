@@ -1994,7 +1994,7 @@ EVs: 248 HP / 252 SpA / 8 Spe
 Modest Nature  
 - Flash Cannon  
 - Shadow Ball  
-- Kings Shield  
+- King's Shield
 - Shadow Sneak  
 
 Baxcalibur @ Icium Z  
@@ -6180,16 +6180,91 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Excadrill @ Air Balloon
+Ability: Mold Breaker
+Level: 45
+EVs: 104 HP/252 Atk/44 Def
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Earthquake
+- Swords Dance
+- Rapid Spin
+- Metal Claw
+
+Fraxure @ Sitrus Berry
+Ability: Mold Breaker
+Level: 40
+EVs: 92 HP/108 Atk/172 Def/28 SpD
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Stomping Tantrum
+- Swords Dance
+- Scale Shot
+- Breaking Swipe
+
+Pangoro @ Expert Belt
+Ability: Mold Breaker
+Level: 46
+EVs: 108 HP/248 Atk/44 Def
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Drain Punch
+- Thief
+- Ice Punch
+- Bullet Punch
+
+Hawlucha @ Payapa Berry
+Ability: Mold Breaker
+Level: 45
+EVs: 68 HP/248 Atk/80 SpD
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Swords Dance
+- Dual Wingbeat
+- Flying Press
+- Grass Knot
 
 === TRAINER_17DCC938 ===
 Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
-Level: 1
+Honedge @ Oran Berry
+Ability: No Guard
+Level: 35
+EVs: 80 HP/160 Atk/80 Def/80 SpD
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Rock Slide
+- Fury Cutter
+- Steel Beam
+
+Doublade @ Sitrus Berry
+Ability: No Guard
+Level: 40
+EVs: 172 HP/92 Atk/132 Def
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- Brick Break
+- Gyro Ball
+- Night Slash
+- Brutal Swing
+
+Aegislash @ Air Balloon
+Ability: Stance Change
+Level: 42
+EVs: 108 HP/252 Atk/36 Def
+Adamant Nature
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- King's Shield
+- Swords Dance
+- Shadow Sneak
+- Close Combat
+
+Aegislash @ Leftovers
+Ability: Stance Change
+Level: 42
+EVs: 108 HP/36 Def/252 SpA
+Modest Nature
+IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
+- King's Shield
+- Shadow Ball
+- Substitute
+- Attract
 
 === TRAINER_188A6F20 ===
 Name: Blank

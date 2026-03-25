@@ -14991,264 +14991,435 @@
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
+        .partySize = 4,
         .party = (const struct TrainerMon[])
         {
             {
 #line 6183
-            .species = SPECIES_SPEWPA,
+            .species = SPECIES_EXCADRILL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6185
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6183
+            .heldItem = ITEM_AIR_BALLOON,
+#line 6186
+            .ev = TRAINER_PARTY_EVS(104, 252, 44, 0, 0, 0),
+#line 6187
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
 #line 6184
-            .lvl = 1,
+            .ability = ABILITY_MOLD_BREAKER,
+#line 6185
+            .lvl = 45,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 6186
-    [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
-    {
-#line 6187
-        .trainerName = _("Blank"),
+            .moves = {
 #line 6188
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6189
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+                MOVE_EARTHQUAKE,
+                MOVE_SWORDS_DANCE,
+                MOVE_RAPID_SPIN,
+                MOVE_METAL_CLAW,
+            },
+            },
             {
-#line 6191
-            .species = SPECIES_SPEWPA,
+#line 6193
+            .species = SPECIES_FRAXURE,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 6193
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6192
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 6194
-    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
-    {
-#line 6195
-        .trainerName = _("Blank"),
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 6196
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+            .ev = TRAINER_PARTY_EVS(92, 108, 172, 0, 0, 28),
 #line 6197
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 6199
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6201
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6200
-            .lvl = 1,
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6194
+            .ability = ABILITY_MOLD_BREAKER,
+#line 6195
+            .lvl = 40,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 6198
+                MOVE_STOMPING_TANTRUM,
+                MOVE_SWORDS_DANCE,
+                MOVE_SCALE_SHOT,
+                MOVE_BREAKING_SWIPE,
             },
-        },
-    },
-#line 6202
-    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
-    {
+            },
+            {
 #line 6203
-        .trainerName = _("Blank"),
-#line 6204
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6205
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
+            .species = SPECIES_PANGORO,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6203
+            .heldItem = ITEM_EXPERT_BELT,
+#line 6206
+            .ev = TRAINER_PARTY_EVS(108, 248, 44, 0, 0, 0),
 #line 6207
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6209
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6204
+            .ability = ABILITY_MOLD_BREAKER,
+#line 6205
+            .lvl = 46,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
 #line 6208
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+                MOVE_DRAIN_PUNCH,
+                MOVE_THIEF,
+                MOVE_ICE_PUNCH,
+                MOVE_BULLET_PUNCH,
             },
-        },
-    },
-#line 6210
-    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
-    {
-#line 6211
-        .trainerName = _("Blank"),
-#line 6212
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
+            },
+            {
 #line 6213
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 6215
-            .species = SPECIES_SPEWPA,
+            .species = SPECIES_HAWLUCHA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6217
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6213
+            .heldItem = ITEM_PAYAPA_BERRY,
 #line 6216
-            .lvl = 1,
+            .ev = TRAINER_PARTY_EVS(68, 248, 0, 0, 0, 80),
+#line 6217
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6214
+            .ability = ABILITY_MOLD_BREAKER,
+#line 6215
+            .lvl = 45,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+            .moves = {
 #line 6218
-    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
-    {
-#line 6219
-        .trainerName = _("Blank"),
-#line 6220
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6221
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
+                MOVE_SWORDS_DANCE,
+                MOVE_DUAL_WINGBEAT,
+                MOVE_FLYING_PRESS,
+                MOVE_GRASS_KNOT,
+            },
+            },
+        },
+    },
 #line 6223
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6225
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+    [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
+    {
 #line 6224
-            .lvl = 1,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+        .trainerName = _("Blank"),
+#line 6225
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
 #line 6226
-    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
-    {
-#line 6227
-        .trainerName = _("Blank"),
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 4,
+        .party = (const struct TrainerMon[])
+        {
+            {
 #line 6228
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6229
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
+            .species = SPECIES_HONEDGE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6228
+            .heldItem = ITEM_ORAN_BERRY,
 #line 6231
-            .species = SPECIES_SPEWPA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6233
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .ev = TRAINER_PARTY_EVS(80, 160, 80, 0, 0, 80),
 #line 6232
-            .lvl = 1,
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6229
+            .ability = ABILITY_NO_GUARD,
+#line 6230
+            .lvl = 35,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 6233
+                MOVE_ROCK_SLIDE,
+                MOVE_FURY_CUTTER,
+                MOVE_STEEL_BEAM,
             },
-        },
-    },
-#line 6234
-    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
-    {
-#line 6235
-        .trainerName = _("Blank"),
-#line 6236
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6237
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+            },
             {
-#line 6239
-            .species = SPECIES_SPEWPA,
+#line 6237
+            .species = SPECIES_DOUBLADE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6241
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6237
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 6240
-            .lvl = 1,
+            .ev = TRAINER_PARTY_EVS(172, 92, 132, 0, 0, 0),
+#line 6241
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6238
+            .ability = ABILITY_NO_GUARD,
+#line 6239
+            .lvl = 40,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
+            .moves = {
 #line 6242
-    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
-    {
-#line 6243
-        .trainerName = _("Blank"),
-#line 6244
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-        .encounterMusic_gender =
-0,
-#line 6245
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
+                MOVE_BRICK_BREAK,
+                MOVE_GYRO_BALL,
+                MOVE_NIGHT_SLASH,
+                MOVE_BRUTAL_SWING,
+            },
+            },
             {
 #line 6247
+            .species = SPECIES_AEGISLASH,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6247
+            .heldItem = ITEM_AIR_BALLOON,
+#line 6250
+            .ev = TRAINER_PARTY_EVS(108, 252, 36, 0, 0, 0),
+#line 6252
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6248
+            .ability = ABILITY_STANCE_CHANGE,
+#line 6249
+            .lvl = 42,
+#line 6251
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 6253
+                MOVE_KINGS_SHIELD,
+                MOVE_SWORDS_DANCE,
+                MOVE_SHADOW_SNEAK,
+                MOVE_CLOSE_COMBAT,
+            },
+            },
+            {
+#line 6258
+            .species = SPECIES_AEGISLASH,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6258
+            .heldItem = ITEM_LEFTOVERS,
+#line 6261
+            .ev = TRAINER_PARTY_EVS(108, 0, 36, 0, 252, 0),
+#line 6263
+            .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
+#line 6259
+            .ability = ABILITY_STANCE_CHANGE,
+#line 6260
+            .lvl = 42,
+#line 6262
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 6264
+                MOVE_KINGS_SHIELD,
+                MOVE_SHADOW_BALL,
+                MOVE_SUBSTITUTE,
+                MOVE_ATTRACT,
+            },
+            },
+        },
+    },
+#line 6269
+    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
+    {
+#line 6270
+        .trainerName = _("Blank"),
+#line 6271
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6272
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6274
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6249
+#line 6276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6248
+#line 6275
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6250
+#line 6277
+    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
+    {
+#line 6278
+        .trainerName = _("Blank"),
+#line 6279
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6280
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6282
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6284
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6283
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6285
+    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
+    {
+#line 6286
+        .trainerName = _("Blank"),
+#line 6287
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6288
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6290
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6292
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6291
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6293
+    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
+    {
+#line 6294
+        .trainerName = _("Blank"),
+#line 6295
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6296
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6298
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6300
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6299
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6301
+    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
+    {
+#line 6302
+        .trainerName = _("Blank"),
+#line 6303
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6304
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6306
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6308
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6307
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6309
+    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
+    {
+#line 6310
+        .trainerName = _("Blank"),
+#line 6311
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6312
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6314
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6316
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6315
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6317
+    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
+    {
+#line 6318
+        .trainerName = _("Blank"),
+#line 6319
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .encounterMusic_gender =
+0,
+#line 6320
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 6322
+            .species = SPECIES_SPEWPA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 6324
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 6323
+            .lvl = 1,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 6325
     [DIFFICULTY_NORMAL][TRAINER_1A763631] =
     {
-#line 6251
+#line 6326
         .trainerName = _("Blank"),
-#line 6252
+#line 6327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6253
+#line 6328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15256,28 +15427,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6255
+#line 6330
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6257
+#line 6332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6256
+#line 6331
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6258
+#line 6333
     [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
     {
-#line 6259
+#line 6334
         .trainerName = _("Blank"),
-#line 6260
+#line 6335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6261
+#line 6336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15285,28 +15456,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6263
+#line 6338
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6265
+#line 6340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6264
+#line 6339
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6266
+#line 6341
     [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
     {
-#line 6267
+#line 6342
         .trainerName = _("Blank"),
-#line 6268
+#line 6343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6269
+#line 6344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15314,28 +15485,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6271
+#line 6346
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6273
+#line 6348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6272
+#line 6347
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6274
+#line 6349
     [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
     {
-#line 6275
+#line 6350
         .trainerName = _("Blank"),
-#line 6276
+#line 6351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6277
+#line 6352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15343,28 +15514,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6279
+#line 6354
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6281
+#line 6356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6280
+#line 6355
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6282
+#line 6357
     [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
     {
-#line 6283
+#line 6358
         .trainerName = _("Blank"),
-#line 6284
+#line 6359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6285
+#line 6360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15372,28 +15543,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6287
+#line 6362
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6289
+#line 6364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6288
+#line 6363
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6290
+#line 6365
     [DIFFICULTY_NORMAL][TRAINER_1B616469] =
     {
-#line 6291
+#line 6366
         .trainerName = _("Blank"),
-#line 6292
+#line 6367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6293
+#line 6368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15401,28 +15572,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6295
+#line 6370
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6297
+#line 6372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6296
+#line 6371
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6298
+#line 6373
     [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
     {
-#line 6299
+#line 6374
         .trainerName = _("Blank"),
-#line 6300
+#line 6375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6301
+#line 6376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15430,28 +15601,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6303
+#line 6378
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6305
+#line 6380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6304
+#line 6379
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6306
+#line 6381
     [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
     {
-#line 6307
+#line 6382
         .trainerName = _("Blank"),
-#line 6308
+#line 6383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6309
+#line 6384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15459,28 +15630,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6311
+#line 6386
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6313
+#line 6388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6312
+#line 6387
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6314
+#line 6389
     [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
     {
-#line 6315
+#line 6390
         .trainerName = _("Blank"),
-#line 6316
+#line 6391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6317
+#line 6392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15488,28 +15659,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6319
+#line 6394
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6321
+#line 6396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6320
+#line 6395
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6322
+#line 6397
     [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
     {
-#line 6323
+#line 6398
         .trainerName = _("Blank"),
-#line 6324
+#line 6399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6325
+#line 6400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15517,28 +15688,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6327
+#line 6402
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6329
+#line 6404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6328
+#line 6403
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6330
+#line 6405
     [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
     {
-#line 6331
+#line 6406
         .trainerName = _("Blank"),
-#line 6332
+#line 6407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6333
+#line 6408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15546,28 +15717,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6335
+#line 6410
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6337
+#line 6412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6336
+#line 6411
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6338
+#line 6413
     [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
     {
-#line 6339
+#line 6414
         .trainerName = _("Blank"),
-#line 6340
+#line 6415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6341
+#line 6416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15575,28 +15746,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6343
+#line 6418
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6345
+#line 6420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6344
+#line 6419
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6346
+#line 6421
     [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
     {
-#line 6347
+#line 6422
         .trainerName = _("Blank"),
-#line 6348
+#line 6423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6349
+#line 6424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15604,28 +15775,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6351
+#line 6426
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6353
+#line 6428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6352
+#line 6427
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6354
+#line 6429
     [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
     {
-#line 6355
+#line 6430
         .trainerName = _("Blank"),
-#line 6356
+#line 6431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6357
+#line 6432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15633,28 +15804,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6359
+#line 6434
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6361
+#line 6436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6360
+#line 6435
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6362
+#line 6437
     [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
     {
-#line 6363
+#line 6438
         .trainerName = _("Blank"),
-#line 6364
+#line 6439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6365
+#line 6440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15662,28 +15833,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6367
+#line 6442
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6369
+#line 6444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6368
+#line 6443
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6370
+#line 6445
     [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
     {
-#line 6371
+#line 6446
         .trainerName = _("Blank"),
-#line 6372
+#line 6447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6373
+#line 6448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15691,28 +15862,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6375
+#line 6450
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6377
+#line 6452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6376
+#line 6451
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6378
+#line 6453
     [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
     {
-#line 6379
+#line 6454
         .trainerName = _("Blank"),
-#line 6380
+#line 6455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6381
+#line 6456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15720,28 +15891,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6383
+#line 6458
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6385
+#line 6460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6384
+#line 6459
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6386
+#line 6461
     [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
     {
-#line 6387
+#line 6462
         .trainerName = _("Blank"),
-#line 6388
+#line 6463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6389
+#line 6464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15749,28 +15920,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6391
+#line 6466
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6393
+#line 6468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6392
+#line 6467
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6394
+#line 6469
     [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
     {
-#line 6395
+#line 6470
         .trainerName = _("Blank"),
-#line 6396
+#line 6471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6397
+#line 6472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15778,28 +15949,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6399
+#line 6474
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6401
+#line 6476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6400
+#line 6475
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6402
+#line 6477
     [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
     {
-#line 6403
+#line 6478
         .trainerName = _("Blank"),
-#line 6404
+#line 6479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6405
+#line 6480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15807,28 +15978,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6407
+#line 6482
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6409
+#line 6484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6408
+#line 6483
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6410
+#line 6485
     [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
     {
-#line 6411
+#line 6486
         .trainerName = _("Blank"),
-#line 6412
+#line 6487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6413
+#line 6488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15836,28 +16007,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6415
+#line 6490
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6417
+#line 6492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6416
+#line 6491
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6418
+#line 6493
     [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
     {
-#line 6419
+#line 6494
         .trainerName = _("Blank"),
-#line 6420
+#line 6495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6421
+#line 6496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15865,28 +16036,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6423
+#line 6498
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6425
+#line 6500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6424
+#line 6499
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6426
+#line 6501
     [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
     {
-#line 6427
+#line 6502
         .trainerName = _("Blank"),
-#line 6428
+#line 6503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6429
+#line 6504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15894,28 +16065,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6431
+#line 6506
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6433
+#line 6508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6432
+#line 6507
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6434
+#line 6509
     [DIFFICULTY_NORMAL][TRAINER_200650CA] =
     {
-#line 6435
+#line 6510
         .trainerName = _("Blank"),
-#line 6436
+#line 6511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6437
+#line 6512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15923,28 +16094,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6439
+#line 6514
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6441
+#line 6516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6440
+#line 6515
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6442
+#line 6517
     [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
     {
-#line 6443
+#line 6518
         .trainerName = _("Blank"),
-#line 6444
+#line 6519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6445
+#line 6520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15952,28 +16123,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6447
+#line 6522
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6449
+#line 6524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6448
+#line 6523
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6450
+#line 6525
     [DIFFICULTY_NORMAL][TRAINER_20993B87] =
     {
-#line 6451
+#line 6526
         .trainerName = _("Blank"),
-#line 6452
+#line 6527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6453
+#line 6528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -15981,28 +16152,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6455
+#line 6530
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6457
+#line 6532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6456
+#line 6531
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6458
+#line 6533
     [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
     {
-#line 6459
+#line 6534
         .trainerName = _("Blank"),
-#line 6460
+#line 6535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6461
+#line 6536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16010,28 +16181,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6463
+#line 6538
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6465
+#line 6540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6464
+#line 6539
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6466
+#line 6541
     [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
     {
-#line 6467
+#line 6542
         .trainerName = _("Blank"),
-#line 6468
+#line 6543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6469
+#line 6544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16039,28 +16210,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6471
+#line 6546
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6473
+#line 6548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6472
+#line 6547
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6474
+#line 6549
     [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
     {
-#line 6475
+#line 6550
         .trainerName = _("Blank"),
-#line 6476
+#line 6551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6477
+#line 6552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16068,28 +16239,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6479
+#line 6554
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6481
+#line 6556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6480
+#line 6555
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6482
+#line 6557
     [DIFFICULTY_NORMAL][TRAINER_2177173C] =
     {
-#line 6483
+#line 6558
         .trainerName = _("Blank"),
-#line 6484
+#line 6559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6485
+#line 6560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16097,28 +16268,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6487
+#line 6562
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6489
+#line 6564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6488
+#line 6563
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6490
+#line 6565
     [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
     {
-#line 6491
+#line 6566
         .trainerName = _("Blank"),
-#line 6492
+#line 6567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6493
+#line 6568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16126,28 +16297,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6495
+#line 6570
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6497
+#line 6572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6496
+#line 6571
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6498
+#line 6573
     [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
     {
-#line 6499
+#line 6574
         .trainerName = _("Blank"),
-#line 6500
+#line 6575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6501
+#line 6576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16155,28 +16326,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6503
+#line 6578
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6505
+#line 6580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6504
+#line 6579
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6506
+#line 6581
     [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
     {
-#line 6507
+#line 6582
         .trainerName = _("Blank"),
-#line 6508
+#line 6583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6509
+#line 6584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16184,28 +16355,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6511
+#line 6586
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6513
+#line 6588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6512
+#line 6587
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6514
+#line 6589
     [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
     {
-#line 6515
+#line 6590
         .trainerName = _("Blank"),
-#line 6516
+#line 6591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6517
+#line 6592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16213,28 +16384,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6519
+#line 6594
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6521
+#line 6596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6520
+#line 6595
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6522
+#line 6597
     [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
     {
-#line 6523
+#line 6598
         .trainerName = _("Blank"),
-#line 6524
+#line 6599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6525
+#line 6600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16242,28 +16413,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6527
+#line 6602
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6529
+#line 6604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6528
+#line 6603
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6530
+#line 6605
     [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
     {
-#line 6531
+#line 6606
         .trainerName = _("Blank"),
-#line 6532
+#line 6607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6533
+#line 6608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16271,28 +16442,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6535
+#line 6610
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6537
+#line 6612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6536
+#line 6611
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6538
+#line 6613
     [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
     {
-#line 6539
+#line 6614
         .trainerName = _("Blank"),
-#line 6540
+#line 6615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6541
+#line 6616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16300,28 +16471,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6543
+#line 6618
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6545
+#line 6620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6544
+#line 6619
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6546
+#line 6621
     [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
     {
-#line 6547
+#line 6622
         .trainerName = _("Blank"),
-#line 6548
+#line 6623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6549
+#line 6624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16329,28 +16500,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6551
+#line 6626
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6553
+#line 6628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6552
+#line 6627
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6554
+#line 6629
     [DIFFICULTY_NORMAL][TRAINER_245235C9] =
     {
-#line 6555
+#line 6630
         .trainerName = _("Blank"),
-#line 6556
+#line 6631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6557
+#line 6632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16358,28 +16529,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6559
+#line 6634
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6561
+#line 6636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6560
+#line 6635
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6562
+#line 6637
     [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
     {
-#line 6563
+#line 6638
         .trainerName = _("Blank"),
-#line 6564
+#line 6639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6565
+#line 6640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16387,28 +16558,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6567
+#line 6642
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6569
+#line 6644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6568
+#line 6643
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6570
+#line 6645
     [DIFFICULTY_NORMAL][TRAINER_247FE019] =
     {
-#line 6571
+#line 6646
         .trainerName = _("Blank"),
-#line 6572
+#line 6647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6573
+#line 6648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16416,28 +16587,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6575
+#line 6650
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6577
+#line 6652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6576
+#line 6651
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6578
+#line 6653
     [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
     {
-#line 6579
+#line 6654
         .trainerName = _("Blank"),
-#line 6580
+#line 6655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6581
+#line 6656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16445,28 +16616,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6583
+#line 6658
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6585
+#line 6660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6584
+#line 6659
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6586
+#line 6661
     [DIFFICULTY_NORMAL][TRAINER_24AC96DF] =
     {
-#line 6587
+#line 6662
         .trainerName = _("Blank"),
-#line 6588
+#line 6663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6589
+#line 6664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16474,28 +16645,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6591
+#line 6666
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6593
+#line 6668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6592
+#line 6667
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6594
+#line 6669
     [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
     {
-#line 6595
+#line 6670
         .trainerName = _("Blank"),
-#line 6596
+#line 6671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6597
+#line 6672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16503,28 +16674,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6599
+#line 6674
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6601
+#line 6676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6600
+#line 6675
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6602
+#line 6677
     [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
     {
-#line 6603
+#line 6678
         .trainerName = _("Blank"),
-#line 6604
+#line 6679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6605
+#line 6680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16532,28 +16703,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6607
+#line 6682
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6609
+#line 6684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6608
+#line 6683
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6610
+#line 6685
     [DIFFICULTY_NORMAL][TRAINER_265174A6] =
     {
-#line 6611
+#line 6686
         .trainerName = _("Blank"),
-#line 6612
+#line 6687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6613
+#line 6688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16561,28 +16732,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6615
+#line 6690
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6617
+#line 6692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6616
+#line 6691
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6618
+#line 6693
     [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
     {
-#line 6619
+#line 6694
         .trainerName = _("Blank"),
-#line 6620
+#line 6695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6621
+#line 6696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16590,28 +16761,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6623
+#line 6698
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6625
+#line 6700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6624
+#line 6699
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6626
+#line 6701
     [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
     {
-#line 6627
+#line 6702
         .trainerName = _("Blank"),
-#line 6628
+#line 6703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6629
+#line 6704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16619,28 +16790,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6631
+#line 6706
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6633
+#line 6708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6632
+#line 6707
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6634
+#line 6709
     [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
     {
-#line 6635
+#line 6710
         .trainerName = _("Blank"),
-#line 6636
+#line 6711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6637
+#line 6712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16648,28 +16819,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6639
+#line 6714
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6641
+#line 6716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6640
+#line 6715
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6642
+#line 6717
     [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
     {
-#line 6643
+#line 6718
         .trainerName = _("Blank"),
-#line 6644
+#line 6719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6645
+#line 6720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16677,28 +16848,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6647
+#line 6722
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6649
+#line 6724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6648
+#line 6723
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6650
+#line 6725
     [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
     {
-#line 6651
+#line 6726
         .trainerName = _("Blank"),
-#line 6652
+#line 6727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6653
+#line 6728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16706,28 +16877,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6655
+#line 6730
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6657
+#line 6732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6656
+#line 6731
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6658
+#line 6733
     [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
     {
-#line 6659
+#line 6734
         .trainerName = _("Blank"),
-#line 6660
+#line 6735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6661
+#line 6736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16735,28 +16906,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6663
+#line 6738
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6665
+#line 6740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6664
+#line 6739
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6666
+#line 6741
     [DIFFICULTY_NORMAL][TRAINER_292E386F] =
     {
-#line 6667
+#line 6742
         .trainerName = _("Blank"),
-#line 6668
+#line 6743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6669
+#line 6744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16764,28 +16935,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6671
+#line 6746
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6673
+#line 6748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6672
+#line 6747
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6674
+#line 6749
     [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
     {
-#line 6675
+#line 6750
         .trainerName = _("Blank"),
-#line 6676
+#line 6751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6677
+#line 6752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16793,28 +16964,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6679
+#line 6754
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6681
+#line 6756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6680
+#line 6755
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6682
+#line 6757
     [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
     {
-#line 6683
+#line 6758
         .trainerName = _("Blank"),
-#line 6684
+#line 6759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6685
+#line 6760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16822,28 +16993,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6687
+#line 6762
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6689
+#line 6764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6688
+#line 6763
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6690
+#line 6765
     [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
     {
-#line 6691
+#line 6766
         .trainerName = _("Blank"),
-#line 6692
+#line 6767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6693
+#line 6768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16851,28 +17022,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6695
+#line 6770
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6697
+#line 6772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6696
+#line 6771
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6698
+#line 6773
     [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
     {
-#line 6699
+#line 6774
         .trainerName = _("Blank"),
-#line 6700
+#line 6775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6701
+#line 6776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16880,28 +17051,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6703
+#line 6778
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6705
+#line 6780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6704
+#line 6779
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6706
+#line 6781
     [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
     {
-#line 6707
+#line 6782
         .trainerName = _("Blank"),
-#line 6708
+#line 6783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6709
+#line 6784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16909,28 +17080,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6711
+#line 6786
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6713
+#line 6788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6712
+#line 6787
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6714
+#line 6789
     [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
     {
-#line 6715
+#line 6790
         .trainerName = _("Blank"),
-#line 6716
+#line 6791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6717
+#line 6792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16938,28 +17109,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6719
+#line 6794
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6721
+#line 6796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6720
+#line 6795
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6722
+#line 6797
     [DIFFICULTY_NORMAL][TRAINER_2B163825] =
     {
-#line 6723
+#line 6798
         .trainerName = _("Blank"),
-#line 6724
+#line 6799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6725
+#line 6800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16967,28 +17138,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6727
+#line 6802
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6729
+#line 6804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6728
+#line 6803
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6730
+#line 6805
     [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
     {
-#line 6731
+#line 6806
         .trainerName = _("Blank"),
-#line 6732
+#line 6807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6733
+#line 6808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -16996,28 +17167,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6735
+#line 6810
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6737
+#line 6812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6736
+#line 6811
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6738
+#line 6813
     [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
     {
-#line 6739
+#line 6814
         .trainerName = _("Blank"),
-#line 6740
+#line 6815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6741
+#line 6816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17025,28 +17196,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6743
+#line 6818
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6745
+#line 6820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6744
+#line 6819
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6746
+#line 6821
     [DIFFICULTY_NORMAL][TRAINER_2C040422] =
     {
-#line 6747
+#line 6822
         .trainerName = _("Blank"),
-#line 6748
+#line 6823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6749
+#line 6824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17054,28 +17225,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6751
+#line 6826
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6753
+#line 6828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6752
+#line 6827
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6754
+#line 6829
     [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
     {
-#line 6755
+#line 6830
         .trainerName = _("Blank"),
-#line 6756
+#line 6831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6757
+#line 6832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17083,28 +17254,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6759
+#line 6834
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6761
+#line 6836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6760
+#line 6835
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6762
+#line 6837
     [DIFFICULTY_NORMAL][TRAINER_2C398893] =
     {
-#line 6763
+#line 6838
         .trainerName = _("Blank"),
-#line 6764
+#line 6839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6765
+#line 6840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17112,28 +17283,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6767
+#line 6842
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6769
+#line 6844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6768
+#line 6843
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6770
+#line 6845
     [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
     {
-#line 6771
+#line 6846
         .trainerName = _("Blank"),
-#line 6772
+#line 6847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6773
+#line 6848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17141,28 +17312,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6775
+#line 6850
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6777
+#line 6852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6776
+#line 6851
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6778
+#line 6853
     [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
     {
-#line 6779
+#line 6854
         .trainerName = _("Blank"),
-#line 6780
+#line 6855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6781
+#line 6856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17170,28 +17341,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6783
+#line 6858
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6785
+#line 6860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6784
+#line 6859
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6786
+#line 6861
     [DIFFICULTY_NORMAL][TRAINER_2D203158] =
     {
-#line 6787
+#line 6862
         .trainerName = _("Blank"),
-#line 6788
+#line 6863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6789
+#line 6864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17199,28 +17370,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6791
+#line 6866
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6793
+#line 6868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6792
+#line 6867
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6794
+#line 6869
     [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
     {
-#line 6795
+#line 6870
         .trainerName = _("Blank"),
-#line 6796
+#line 6871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6797
+#line 6872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17228,28 +17399,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6799
+#line 6874
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6801
+#line 6876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6800
+#line 6875
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6802
+#line 6877
     [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
     {
-#line 6803
+#line 6878
         .trainerName = _("Blank"),
-#line 6804
+#line 6879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6805
+#line 6880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17257,28 +17428,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6807
+#line 6882
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6809
+#line 6884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6808
+#line 6883
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6810
+#line 6885
     [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
     {
-#line 6811
+#line 6886
         .trainerName = _("Blank"),
-#line 6812
+#line 6887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6813
+#line 6888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17286,28 +17457,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6815
+#line 6890
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6817
+#line 6892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6816
+#line 6891
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6818
+#line 6893
     [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
     {
-#line 6819
+#line 6894
         .trainerName = _("Blank"),
-#line 6820
+#line 6895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6821
+#line 6896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17315,28 +17486,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6823
+#line 6898
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6825
+#line 6900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6824
+#line 6899
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6826
+#line 6901
     [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
     {
-#line 6827
+#line 6902
         .trainerName = _("Blank"),
-#line 6828
+#line 6903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6829
+#line 6904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17344,28 +17515,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6831
+#line 6906
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6833
+#line 6908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6832
+#line 6907
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6834
+#line 6909
     [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
     {
-#line 6835
+#line 6910
         .trainerName = _("Blank"),
-#line 6836
+#line 6911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6837
+#line 6912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17373,28 +17544,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6839
+#line 6914
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6841
+#line 6916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6840
+#line 6915
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6842
+#line 6917
     [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
     {
-#line 6843
+#line 6918
         .trainerName = _("Blank"),
-#line 6844
+#line 6919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6845
+#line 6920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17402,28 +17573,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6847
+#line 6922
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6849
+#line 6924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6848
+#line 6923
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6850
+#line 6925
     [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
     {
-#line 6851
+#line 6926
         .trainerName = _("Blank"),
-#line 6852
+#line 6927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6853
+#line 6928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17431,28 +17602,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6855
+#line 6930
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6857
+#line 6932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6856
+#line 6931
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6858
+#line 6933
     [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
     {
-#line 6859
+#line 6934
         .trainerName = _("Blank"),
-#line 6860
+#line 6935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6861
+#line 6936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17460,28 +17631,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6863
+#line 6938
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6865
+#line 6940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6864
+#line 6939
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6866
+#line 6941
     [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
     {
-#line 6867
+#line 6942
         .trainerName = _("Blank"),
-#line 6868
+#line 6943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6869
+#line 6944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17489,28 +17660,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6871
+#line 6946
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6873
+#line 6948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6872
+#line 6947
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6874
+#line 6949
     [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
     {
-#line 6875
+#line 6950
         .trainerName = _("Blank"),
-#line 6876
+#line 6951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6877
+#line 6952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17518,28 +17689,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6879
+#line 6954
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6881
+#line 6956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6880
+#line 6955
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6882
+#line 6957
     [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
     {
-#line 6883
+#line 6958
         .trainerName = _("Blank"),
-#line 6884
+#line 6959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6885
+#line 6960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17547,28 +17718,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6887
+#line 6962
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6889
+#line 6964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6888
+#line 6963
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6890
+#line 6965
     [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
     {
-#line 6891
+#line 6966
         .trainerName = _("Blank"),
-#line 6892
+#line 6967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6893
+#line 6968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17576,28 +17747,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6895
+#line 6970
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6897
+#line 6972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6896
+#line 6971
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6898
+#line 6973
     [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
     {
-#line 6899
+#line 6974
         .trainerName = _("Blank"),
-#line 6900
+#line 6975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6901
+#line 6976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17605,28 +17776,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6903
+#line 6978
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6905
+#line 6980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6904
+#line 6979
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6906
+#line 6981
     [DIFFICULTY_NORMAL][TRAINER_317B8932] =
     {
-#line 6907
+#line 6982
         .trainerName = _("Blank"),
-#line 6908
+#line 6983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6909
+#line 6984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17634,28 +17805,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6911
+#line 6986
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6913
+#line 6988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6912
+#line 6987
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6914
+#line 6989
     [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
     {
-#line 6915
+#line 6990
         .trainerName = _("Blank"),
-#line 6916
+#line 6991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6917
+#line 6992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17663,28 +17834,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6919
+#line 6994
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6921
+#line 6996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6920
+#line 6995
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6922
+#line 6997
     [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
     {
-#line 6923
+#line 6998
         .trainerName = _("Blank"),
-#line 6924
+#line 6999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6925
+#line 7000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17692,28 +17863,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6927
+#line 7002
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6929
+#line 7004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6928
+#line 7003
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6930
+#line 7005
     [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
     {
-#line 6931
+#line 7006
         .trainerName = _("Blank"),
-#line 6932
+#line 7007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6933
+#line 7008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17721,28 +17892,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6935
+#line 7010
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6937
+#line 7012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6936
+#line 7011
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6938
+#line 7013
     [DIFFICULTY_NORMAL][TRAINER_3566F099] =
     {
-#line 6939
+#line 7014
         .trainerName = _("Blank"),
-#line 6940
+#line 7015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6941
+#line 7016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17750,28 +17921,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6943
+#line 7018
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6945
+#line 7020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6944
+#line 7019
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6946
+#line 7021
     [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
     {
-#line 6947
+#line 7022
         .trainerName = _("Blank"),
-#line 6948
+#line 7023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6949
+#line 7024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17779,28 +17950,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6951
+#line 7026
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6953
+#line 7028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6952
+#line 7027
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6954
+#line 7029
     [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
     {
-#line 6955
+#line 7030
         .trainerName = _("Blank"),
-#line 6956
+#line 7031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6957
+#line 7032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17808,28 +17979,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6959
+#line 7034
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6961
+#line 7036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6960
+#line 7035
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6962
+#line 7037
     [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
     {
-#line 6963
+#line 7038
         .trainerName = _("Blank"),
-#line 6964
+#line 7039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6965
+#line 7040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17837,28 +18008,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6967
+#line 7042
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6969
+#line 7044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6968
+#line 7043
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6970
+#line 7045
     [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
     {
-#line 6971
+#line 7046
         .trainerName = _("Blank"),
-#line 6972
+#line 7047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6973
+#line 7048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17866,28 +18037,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6975
+#line 7050
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6977
+#line 7052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6976
+#line 7051
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6978
+#line 7053
     [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
     {
-#line 6979
+#line 7054
         .trainerName = _("Blank"),
-#line 6980
+#line 7055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6981
+#line 7056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17895,28 +18066,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6983
+#line 7058
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6985
+#line 7060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6984
+#line 7059
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6986
+#line 7061
     [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
     {
-#line 6987
+#line 7062
         .trainerName = _("Blank"),
-#line 6988
+#line 7063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6989
+#line 7064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17924,28 +18095,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6991
+#line 7066
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6993
+#line 7068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6992
+#line 7067
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6994
+#line 7069
     [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
     {
-#line 6995
+#line 7070
         .trainerName = _("Blank"),
-#line 6996
+#line 7071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 6997
+#line 7072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17953,28 +18124,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6999
+#line 7074
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7001
+#line 7076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7000
+#line 7075
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7002
+#line 7077
     [DIFFICULTY_NORMAL][TRAINER_3842496B] =
     {
-#line 7003
+#line 7078
         .trainerName = _("Blank"),
-#line 7004
+#line 7079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7005
+#line 7080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -17982,28 +18153,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7007
+#line 7082
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7009
+#line 7084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7008
+#line 7083
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7010
+#line 7085
     [DIFFICULTY_NORMAL][TRAINER_387351C1] =
     {
-#line 7011
+#line 7086
         .trainerName = _("Blank"),
-#line 7012
+#line 7087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7013
+#line 7088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18011,28 +18182,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7015
+#line 7090
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7017
+#line 7092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7016
+#line 7091
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7018
+#line 7093
     [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
     {
-#line 7019
+#line 7094
         .trainerName = _("Blank"),
-#line 7020
+#line 7095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7021
+#line 7096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18040,28 +18211,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7023
+#line 7098
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7025
+#line 7100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7024
+#line 7099
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7026
+#line 7101
     [DIFFICULTY_NORMAL][TRAINER_3924756E] =
     {
-#line 7027
+#line 7102
         .trainerName = _("Blank"),
-#line 7028
+#line 7103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7029
+#line 7104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18069,28 +18240,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7031
+#line 7106
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7033
+#line 7108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7032
+#line 7107
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7034
+#line 7109
     [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
     {
-#line 7035
+#line 7110
         .trainerName = _("Blank"),
-#line 7036
+#line 7111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7037
+#line 7112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18098,28 +18269,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7039
+#line 7114
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7041
+#line 7116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7040
+#line 7115
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7042
+#line 7117
     [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
     {
-#line 7043
+#line 7118
         .trainerName = _("Blank"),
-#line 7044
+#line 7119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7045
+#line 7120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18127,28 +18298,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7047
+#line 7122
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7049
+#line 7124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7048
+#line 7123
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7050
+#line 7125
     [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
     {
-#line 7051
+#line 7126
         .trainerName = _("Blank"),
-#line 7052
+#line 7127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7053
+#line 7128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18156,28 +18327,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7055
+#line 7130
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7057
+#line 7132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7056
+#line 7131
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7058
+#line 7133
     [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
     {
-#line 7059
+#line 7134
         .trainerName = _("Blank"),
-#line 7060
+#line 7135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7061
+#line 7136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18185,28 +18356,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7063
+#line 7138
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7065
+#line 7140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7064
+#line 7139
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7066
+#line 7141
     [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
     {
-#line 7067
+#line 7142
         .trainerName = _("Blank"),
-#line 7068
+#line 7143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7069
+#line 7144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18214,28 +18385,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7071
+#line 7146
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7073
+#line 7148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7072
+#line 7147
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7074
+#line 7149
     [DIFFICULTY_NORMAL][TRAINER_3A840205] =
     {
-#line 7075
+#line 7150
         .trainerName = _("Blank"),
-#line 7076
+#line 7151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7077
+#line 7152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18243,28 +18414,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7079
+#line 7154
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7081
+#line 7156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7080
+#line 7155
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7082
+#line 7157
     [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
     {
-#line 7083
+#line 7158
         .trainerName = _("Blank"),
-#line 7084
+#line 7159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7085
+#line 7160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18272,28 +18443,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7087
+#line 7162
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7089
+#line 7164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7088
+#line 7163
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7090
+#line 7165
     [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
     {
-#line 7091
+#line 7166
         .trainerName = _("Blank"),
-#line 7092
+#line 7167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7093
+#line 7168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18301,28 +18472,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7095
+#line 7170
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7097
+#line 7172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7096
+#line 7171
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7098
+#line 7173
     [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
     {
-#line 7099
+#line 7174
         .trainerName = _("Blank"),
-#line 7100
+#line 7175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7101
+#line 7176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18330,28 +18501,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7103
+#line 7178
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7105
+#line 7180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7104
+#line 7179
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7106
+#line 7181
     [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
     {
-#line 7107
+#line 7182
         .trainerName = _("Blank"),
-#line 7108
+#line 7183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7109
+#line 7184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18359,28 +18530,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7111
+#line 7186
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7113
+#line 7188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7112
+#line 7187
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7114
+#line 7189
     [DIFFICULTY_NORMAL][TRAINER_3C621048] =
     {
-#line 7115
+#line 7190
         .trainerName = _("Blank"),
-#line 7116
+#line 7191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7117
+#line 7192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18388,28 +18559,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7119
+#line 7194
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7121
+#line 7196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7120
+#line 7195
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7122
+#line 7197
     [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
     {
-#line 7123
+#line 7198
         .trainerName = _("Blank"),
-#line 7124
+#line 7199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7125
+#line 7200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18417,28 +18588,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7127
+#line 7202
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7129
+#line 7204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7128
+#line 7203
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7130
+#line 7205
     [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
     {
-#line 7131
+#line 7206
         .trainerName = _("Blank"),
-#line 7132
+#line 7207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7133
+#line 7208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18446,28 +18617,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7135
+#line 7210
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7137
+#line 7212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7136
+#line 7211
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7138
+#line 7213
     [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
     {
-#line 7139
+#line 7214
         .trainerName = _("Blank"),
-#line 7140
+#line 7215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7141
+#line 7216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18475,28 +18646,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7143
+#line 7218
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7145
+#line 7220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7144
+#line 7219
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7146
+#line 7221
     [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
     {
-#line 7147
+#line 7222
         .trainerName = _("Blank"),
-#line 7148
+#line 7223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7149
+#line 7224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18504,28 +18675,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7151
+#line 7226
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7153
+#line 7228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7152
+#line 7227
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7154
+#line 7229
     [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
     {
-#line 7155
+#line 7230
         .trainerName = _("Blank"),
-#line 7156
+#line 7231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7157
+#line 7232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18533,28 +18704,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7159
+#line 7234
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7161
+#line 7236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7160
+#line 7235
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7162
+#line 7237
     [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
     {
-#line 7163
+#line 7238
         .trainerName = _("Blank"),
-#line 7164
+#line 7239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7165
+#line 7240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18562,28 +18733,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7167
+#line 7242
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7169
+#line 7244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7168
+#line 7243
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7170
+#line 7245
     [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
     {
-#line 7171
+#line 7246
         .trainerName = _("Blank"),
-#line 7172
+#line 7247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7173
+#line 7248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18591,28 +18762,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7175
+#line 7250
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7177
+#line 7252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7176
+#line 7251
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7178
+#line 7253
     [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
     {
-#line 7179
+#line 7254
         .trainerName = _("Blank"),
-#line 7180
+#line 7255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7181
+#line 7256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18620,28 +18791,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7183
+#line 7258
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7185
+#line 7260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7184
+#line 7259
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7186
+#line 7261
     [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
     {
-#line 7187
+#line 7262
         .trainerName = _("Blank"),
-#line 7188
+#line 7263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7189
+#line 7264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18649,28 +18820,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7191
+#line 7266
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7193
+#line 7268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7192
+#line 7267
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7194
+#line 7269
     [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
     {
-#line 7195
+#line 7270
         .trainerName = _("Blank"),
-#line 7196
+#line 7271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7197
+#line 7272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18678,28 +18849,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7199
+#line 7274
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7201
+#line 7276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7200
+#line 7275
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7202
+#line 7277
     [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
     {
-#line 7203
+#line 7278
         .trainerName = _("Blank"),
-#line 7204
+#line 7279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7205
+#line 7280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18707,28 +18878,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7207
+#line 7282
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7209
+#line 7284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7208
+#line 7283
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7210
+#line 7285
     [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
     {
-#line 7211
+#line 7286
         .trainerName = _("Blank"),
-#line 7212
+#line 7287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7213
+#line 7288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18736,28 +18907,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7215
+#line 7290
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7217
+#line 7292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7216
+#line 7291
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7218
+#line 7293
     [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
     {
-#line 7219
+#line 7294
         .trainerName = _("Blank"),
-#line 7220
+#line 7295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7221
+#line 7296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18765,28 +18936,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7223
+#line 7298
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7225
+#line 7300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7224
+#line 7299
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7226
+#line 7301
     [DIFFICULTY_NORMAL][TRAINER_403D932D] =
     {
-#line 7227
+#line 7302
         .trainerName = _("Blank"),
-#line 7228
+#line 7303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7229
+#line 7304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18794,28 +18965,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7231
+#line 7306
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7233
+#line 7308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7232
+#line 7307
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7234
+#line 7309
     [DIFFICULTY_NORMAL][TRAINER_408862C4] =
     {
-#line 7235
+#line 7310
         .trainerName = _("Blank"),
-#line 7236
+#line 7311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7237
+#line 7312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18823,28 +18994,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7239
+#line 7314
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7241
+#line 7316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7240
+#line 7315
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7242
+#line 7317
     [DIFFICULTY_NORMAL][TRAINER_419282AD] =
     {
-#line 7243
+#line 7318
         .trainerName = _("Blank"),
-#line 7244
+#line 7319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7245
+#line 7320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18852,28 +19023,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7247
+#line 7322
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7249
+#line 7324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7248
+#line 7323
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7250
+#line 7325
     [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
     {
-#line 7251
+#line 7326
         .trainerName = _("Blank"),
-#line 7252
+#line 7327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7253
+#line 7328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18881,28 +19052,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7255
+#line 7330
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7257
+#line 7332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7256
+#line 7331
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7258
+#line 7333
     [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
     {
-#line 7259
+#line 7334
         .trainerName = _("Blank"),
-#line 7260
+#line 7335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7261
+#line 7336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18910,28 +19081,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7263
+#line 7338
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7265
+#line 7340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7264
+#line 7339
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7266
+#line 7341
     [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
     {
-#line 7267
+#line 7342
         .trainerName = _("Blank"),
-#line 7268
+#line 7343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7269
+#line 7344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18939,28 +19110,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7271
+#line 7346
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7273
+#line 7348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7272
+#line 7347
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7274
+#line 7349
     [DIFFICULTY_NORMAL][TRAINER_4227B911] =
     {
-#line 7275
+#line 7350
         .trainerName = _("Blank"),
-#line 7276
+#line 7351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7277
+#line 7352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18968,28 +19139,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7279
+#line 7354
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7281
+#line 7356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7280
+#line 7355
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7282
+#line 7357
     [DIFFICULTY_NORMAL][TRAINER_4239B726] =
     {
-#line 7283
+#line 7358
         .trainerName = _("Blank"),
-#line 7284
+#line 7359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7285
+#line 7360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -18997,28 +19168,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7287
+#line 7362
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7289
+#line 7364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7288
+#line 7363
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7290
+#line 7365
     [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
     {
-#line 7291
+#line 7366
         .trainerName = _("Blank"),
-#line 7292
+#line 7367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7293
+#line 7368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19026,28 +19197,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7295
+#line 7370
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7297
+#line 7372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7296
+#line 7371
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7298
+#line 7373
     [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
     {
-#line 7299
+#line 7374
         .trainerName = _("Blank"),
-#line 7300
+#line 7375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7301
+#line 7376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19055,28 +19226,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7303
+#line 7378
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7305
+#line 7380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7304
+#line 7379
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7306
+#line 7381
     [DIFFICULTY_NORMAL][TRAINER_42C68371] =
     {
-#line 7307
+#line 7382
         .trainerName = _("Blank"),
-#line 7308
+#line 7383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7309
+#line 7384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19084,28 +19255,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7311
+#line 7386
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7313
+#line 7388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7312
+#line 7387
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7314
+#line 7389
     [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
     {
-#line 7315
+#line 7390
         .trainerName = _("Blank"),
-#line 7316
+#line 7391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7317
+#line 7392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19113,28 +19284,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7319
+#line 7394
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7321
+#line 7396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7320
+#line 7395
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7322
+#line 7397
     [DIFFICULTY_NORMAL][TRAINER_437E553A] =
     {
-#line 7323
+#line 7398
         .trainerName = _("Blank"),
-#line 7324
+#line 7399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7325
+#line 7400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19142,28 +19313,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7327
+#line 7402
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7329
+#line 7404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7328
+#line 7403
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7330
+#line 7405
     [DIFFICULTY_NORMAL][TRAINER_4394141C] =
     {
-#line 7331
+#line 7406
         .trainerName = _("Blank"),
-#line 7332
+#line 7407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7333
+#line 7408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19171,28 +19342,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7335
+#line 7410
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7337
+#line 7412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7336
+#line 7411
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7338
+#line 7413
     [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
     {
-#line 7339
+#line 7414
         .trainerName = _("Blank"),
-#line 7340
+#line 7415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7341
+#line 7416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19200,28 +19371,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7343
+#line 7418
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7345
+#line 7420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7344
+#line 7419
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7346
+#line 7421
     [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
     {
-#line 7347
+#line 7422
         .trainerName = _("Blank"),
-#line 7348
+#line 7423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7349
+#line 7424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19229,28 +19400,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7351
+#line 7426
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7353
+#line 7428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7352
+#line 7427
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7354
+#line 7429
     [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
     {
-#line 7355
+#line 7430
         .trainerName = _("Blank"),
-#line 7356
+#line 7431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7357
+#line 7432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19258,28 +19429,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7359
+#line 7434
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7361
+#line 7436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7360
+#line 7435
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7362
+#line 7437
     [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
     {
-#line 7363
+#line 7438
         .trainerName = _("Blank"),
-#line 7364
+#line 7439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7365
+#line 7440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19287,28 +19458,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7367
+#line 7442
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7369
+#line 7444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7368
+#line 7443
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7370
+#line 7445
     [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
     {
-#line 7371
+#line 7446
         .trainerName = _("Blank"),
-#line 7372
+#line 7447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7373
+#line 7448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19316,28 +19487,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7375
+#line 7450
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7377
+#line 7452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7376
+#line 7451
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7378
+#line 7453
     [DIFFICULTY_NORMAL][TRAINER_44E68738] =
     {
-#line 7379
+#line 7454
         .trainerName = _("Blank"),
-#line 7380
+#line 7455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7381
+#line 7456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19345,28 +19516,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7383
+#line 7458
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7385
+#line 7460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7384
+#line 7459
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7386
+#line 7461
     [DIFFICULTY_NORMAL][TRAINER_44F86666] =
     {
-#line 7387
+#line 7462
         .trainerName = _("Blank"),
-#line 7388
+#line 7463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7389
+#line 7464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19374,28 +19545,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7391
+#line 7466
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7393
+#line 7468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7392
+#line 7467
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7394
+#line 7469
     [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
     {
-#line 7395
+#line 7470
         .trainerName = _("Blank"),
-#line 7396
+#line 7471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7397
+#line 7472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19403,28 +19574,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7399
+#line 7474
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7401
+#line 7476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7400
+#line 7475
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7402
+#line 7477
     [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
     {
-#line 7403
+#line 7478
         .trainerName = _("Blank"),
-#line 7404
+#line 7479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7405
+#line 7480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19432,28 +19603,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7407
+#line 7482
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7409
+#line 7484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7408
+#line 7483
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7410
+#line 7485
     [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
     {
-#line 7411
+#line 7486
         .trainerName = _("Blank"),
-#line 7412
+#line 7487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7413
+#line 7488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19461,28 +19632,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7415
+#line 7490
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7417
+#line 7492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7416
+#line 7491
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7418
+#line 7493
     [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
     {
-#line 7419
+#line 7494
         .trainerName = _("Blank"),
-#line 7420
+#line 7495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7421
+#line 7496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19490,28 +19661,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7423
+#line 7498
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7425
+#line 7500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7424
+#line 7499
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7426
+#line 7501
     [DIFFICULTY_NORMAL][TRAINER_460AB144] =
     {
-#line 7427
+#line 7502
         .trainerName = _("Blank"),
-#line 7428
+#line 7503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7429
+#line 7504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19519,28 +19690,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7431
+#line 7506
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7433
+#line 7508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7432
+#line 7507
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7434
+#line 7509
     [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
     {
-#line 7435
+#line 7510
         .trainerName = _("Blank"),
-#line 7436
+#line 7511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7437
+#line 7512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19548,28 +19719,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7439
+#line 7514
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7441
+#line 7516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7440
+#line 7515
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7442
+#line 7517
     [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
     {
-#line 7443
+#line 7518
         .trainerName = _("Blank"),
-#line 7444
+#line 7519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7445
+#line 7520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19577,28 +19748,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7447
+#line 7522
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7449
+#line 7524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7448
+#line 7523
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7450
+#line 7525
     [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
     {
-#line 7451
+#line 7526
         .trainerName = _("Blank"),
-#line 7452
+#line 7527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7453
+#line 7528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19606,28 +19777,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7455
+#line 7530
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7457
+#line 7532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7456
+#line 7531
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7458
+#line 7533
     [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
     {
-#line 7459
+#line 7534
         .trainerName = _("Blank"),
-#line 7460
+#line 7535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7461
+#line 7536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19635,28 +19806,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7463
+#line 7538
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7465
+#line 7540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7464
+#line 7539
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7466
+#line 7541
     [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
     {
-#line 7467
+#line 7542
         .trainerName = _("Blank"),
-#line 7468
+#line 7543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7469
+#line 7544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19664,28 +19835,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7471
+#line 7546
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7473
+#line 7548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7472
+#line 7547
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7474
+#line 7549
     [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
     {
-#line 7475
+#line 7550
         .trainerName = _("Blank"),
-#line 7476
+#line 7551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7477
+#line 7552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19693,28 +19864,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7479
+#line 7554
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7481
+#line 7556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7480
+#line 7555
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7482
+#line 7557
     [DIFFICULTY_NORMAL][TRAINER_4848801D] =
     {
-#line 7483
+#line 7558
         .trainerName = _("Blank"),
-#line 7484
+#line 7559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7485
+#line 7560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19722,28 +19893,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7487
+#line 7562
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7489
+#line 7564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7488
+#line 7563
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7490
+#line 7565
     [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
     {
-#line 7491
+#line 7566
         .trainerName = _("Blank"),
-#line 7492
+#line 7567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7493
+#line 7568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19751,28 +19922,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7495
+#line 7570
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7497
+#line 7572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7496
+#line 7571
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7498
+#line 7573
     [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
     {
-#line 7499
+#line 7574
         .trainerName = _("Blank"),
-#line 7500
+#line 7575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7501
+#line 7576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19780,28 +19951,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7503
+#line 7578
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7505
+#line 7580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7504
+#line 7579
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7506
+#line 7581
     [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
     {
-#line 7507
+#line 7582
         .trainerName = _("Blank"),
-#line 7508
+#line 7583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7509
+#line 7584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19809,28 +19980,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7511
+#line 7586
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7513
+#line 7588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7512
+#line 7587
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7514
+#line 7589
     [DIFFICULTY_NORMAL][TRAINER_494F5379] =
     {
-#line 7515
+#line 7590
         .trainerName = _("Blank"),
-#line 7516
+#line 7591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7517
+#line 7592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19838,28 +20009,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7519
+#line 7594
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7521
+#line 7596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7520
+#line 7595
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7522
+#line 7597
     [DIFFICULTY_NORMAL][TRAINER_49805D55] =
     {
-#line 7523
+#line 7598
         .trainerName = _("Blank"),
-#line 7524
+#line 7599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7525
+#line 7600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19867,28 +20038,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7527
+#line 7602
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7529
+#line 7604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7528
+#line 7603
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7530
+#line 7605
     [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
     {
-#line 7531
+#line 7606
         .trainerName = _("Blank"),
-#line 7532
+#line 7607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7533
+#line 7608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19896,28 +20067,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7535
+#line 7610
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7537
+#line 7612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7536
+#line 7611
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7538
+#line 7613
     [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
     {
-#line 7539
+#line 7614
         .trainerName = _("Blank"),
-#line 7540
+#line 7615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7541
+#line 7616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19925,28 +20096,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7543
+#line 7618
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7545
+#line 7620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7544
+#line 7619
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7546
+#line 7621
     [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
     {
-#line 7547
+#line 7622
         .trainerName = _("Blank"),
-#line 7548
+#line 7623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7549
+#line 7624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19954,28 +20125,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7551
+#line 7626
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7553
+#line 7628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7552
+#line 7627
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7554
+#line 7629
     [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
     {
-#line 7555
+#line 7630
         .trainerName = _("Blank"),
-#line 7556
+#line 7631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7557
+#line 7632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -19983,28 +20154,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7559
+#line 7634
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7561
+#line 7636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7560
+#line 7635
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7562
+#line 7637
     [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
     {
-#line 7563
+#line 7638
         .trainerName = _("Blank"),
-#line 7564
+#line 7639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7565
+#line 7640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20012,28 +20183,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7567
+#line 7642
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7569
+#line 7644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7568
+#line 7643
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7570
+#line 7645
     [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
     {
-#line 7571
+#line 7646
         .trainerName = _("Blank"),
-#line 7572
+#line 7647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7573
+#line 7648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20041,28 +20212,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7575
+#line 7650
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7577
+#line 7652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7576
+#line 7651
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7578
+#line 7653
     [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
     {
-#line 7579
+#line 7654
         .trainerName = _("Blank"),
-#line 7580
+#line 7655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7581
+#line 7656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20070,28 +20241,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7583
+#line 7658
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7585
+#line 7660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7584
+#line 7659
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7586
+#line 7661
     [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
     {
-#line 7587
+#line 7662
         .trainerName = _("Blank"),
-#line 7588
+#line 7663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7589
+#line 7664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20099,28 +20270,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7591
+#line 7666
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7593
+#line 7668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7592
+#line 7667
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7594
+#line 7669
     [DIFFICULTY_NORMAL][TRAINER_4B431569] =
     {
-#line 7595
+#line 7670
         .trainerName = _("Blank"),
-#line 7596
+#line 7671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7597
+#line 7672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20128,28 +20299,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7599
+#line 7674
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7601
+#line 7676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7600
+#line 7675
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7602
+#line 7677
     [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
     {
-#line 7603
+#line 7678
         .trainerName = _("Blank"),
-#line 7604
+#line 7679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7605
+#line 7680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20157,28 +20328,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7607
+#line 7682
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7609
+#line 7684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7608
+#line 7683
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7610
+#line 7685
     [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
     {
-#line 7611
+#line 7686
         .trainerName = _("Blank"),
-#line 7612
+#line 7687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7613
+#line 7688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20186,28 +20357,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7615
+#line 7690
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7617
+#line 7692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7616
+#line 7691
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7618
+#line 7693
     [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
     {
-#line 7619
+#line 7694
         .trainerName = _("Blank"),
-#line 7620
+#line 7695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7621
+#line 7696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20215,28 +20386,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7623
+#line 7698
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7625
+#line 7700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7624
+#line 7699
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7626
+#line 7701
     [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
     {
-#line 7627
+#line 7702
         .trainerName = _("Blank"),
-#line 7628
+#line 7703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7629
+#line 7704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20244,28 +20415,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7631
+#line 7706
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7633
+#line 7708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7632
+#line 7707
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7634
+#line 7709
     [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
     {
-#line 7635
+#line 7710
         .trainerName = _("Blank"),
-#line 7636
+#line 7711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7637
+#line 7712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20273,28 +20444,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7639
+#line 7714
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7641
+#line 7716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7640
+#line 7715
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7642
+#line 7717
     [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
     {
-#line 7643
+#line 7718
         .trainerName = _("Blank"),
-#line 7644
+#line 7719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7645
+#line 7720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20302,28 +20473,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7647
+#line 7722
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7649
+#line 7724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7648
+#line 7723
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7650
+#line 7725
     [DIFFICULTY_NORMAL][TRAINER_4E072263] =
     {
-#line 7651
+#line 7726
         .trainerName = _("Blank"),
-#line 7652
+#line 7727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7653
+#line 7728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20331,28 +20502,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7655
+#line 7730
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7657
+#line 7732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7656
+#line 7731
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7658
+#line 7733
     [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
     {
-#line 7659
+#line 7734
         .trainerName = _("Blank"),
-#line 7660
+#line 7735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7661
+#line 7736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20360,28 +20531,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7663
+#line 7738
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7665
+#line 7740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7664
+#line 7739
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7666
+#line 7741
     [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
     {
-#line 7667
+#line 7742
         .trainerName = _("Blank"),
-#line 7668
+#line 7743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7669
+#line 7744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20389,28 +20560,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7671
+#line 7746
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7673
+#line 7748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7672
+#line 7747
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7674
+#line 7749
     [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
     {
-#line 7675
+#line 7750
         .trainerName = _("Blank"),
-#line 7676
+#line 7751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7677
+#line 7752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20418,28 +20589,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7679
+#line 7754
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7681
+#line 7756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7680
+#line 7755
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7682
+#line 7757
     [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
     {
-#line 7683
+#line 7758
         .trainerName = _("Blank"),
-#line 7684
+#line 7759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7685
+#line 7760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20447,28 +20618,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7687
+#line 7762
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7689
+#line 7764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7688
+#line 7763
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7690
+#line 7765
     [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
     {
-#line 7691
+#line 7766
         .trainerName = _("Blank"),
-#line 7692
+#line 7767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7693
+#line 7768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20476,28 +20647,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7695
+#line 7770
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7697
+#line 7772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7696
+#line 7771
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7698
+#line 7773
     [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
     {
-#line 7699
+#line 7774
         .trainerName = _("Blank"),
-#line 7700
+#line 7775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7701
+#line 7776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20505,28 +20676,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7703
+#line 7778
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7705
+#line 7780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7704
+#line 7779
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7706
+#line 7781
     [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
     {
-#line 7707
+#line 7782
         .trainerName = _("Blank"),
-#line 7708
+#line 7783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7709
+#line 7784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20534,28 +20705,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7711
+#line 7786
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7713
+#line 7788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7712
+#line 7787
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7714
+#line 7789
     [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
     {
-#line 7715
+#line 7790
         .trainerName = _("Blank"),
-#line 7716
+#line 7791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7717
+#line 7792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20563,28 +20734,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7719
+#line 7794
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7721
+#line 7796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7720
+#line 7795
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7722
+#line 7797
     [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
     {
-#line 7723
+#line 7798
         .trainerName = _("Blank"),
-#line 7724
+#line 7799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7725
+#line 7800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20592,28 +20763,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7727
+#line 7802
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7729
+#line 7804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7728
+#line 7803
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7730
+#line 7805
     [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
     {
-#line 7731
+#line 7806
         .trainerName = _("Blank"),
-#line 7732
+#line 7807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7733
+#line 7808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20621,28 +20792,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7735
+#line 7810
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7737
+#line 7812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7736
+#line 7811
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7738
+#line 7813
     [DIFFICULTY_NORMAL][TRAINER_538D052D] =
     {
-#line 7739
+#line 7814
         .trainerName = _("Blank"),
-#line 7740
+#line 7815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7741
+#line 7816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20650,28 +20821,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7743
+#line 7818
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7745
+#line 7820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7744
+#line 7819
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7746
+#line 7821
     [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
     {
-#line 7747
+#line 7822
         .trainerName = _("Blank"),
-#line 7748
+#line 7823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7749
+#line 7824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20679,28 +20850,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7751
+#line 7826
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7753
+#line 7828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7752
+#line 7827
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7754
+#line 7829
     [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
     {
-#line 7755
+#line 7830
         .trainerName = _("Blank"),
-#line 7756
+#line 7831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7757
+#line 7832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20708,28 +20879,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7759
+#line 7834
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7761
+#line 7836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7760
+#line 7835
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7762
+#line 7837
     [DIFFICULTY_NORMAL][TRAINER_54110A38] =
     {
-#line 7763
+#line 7838
         .trainerName = _("Blank"),
-#line 7764
+#line 7839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7765
+#line 7840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20737,28 +20908,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7767
+#line 7842
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7769
+#line 7844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7768
+#line 7843
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7770
+#line 7845
     [DIFFICULTY_NORMAL][TRAINER_549792BA] =
     {
-#line 7771
+#line 7846
         .trainerName = _("Blank"),
-#line 7772
+#line 7847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7773
+#line 7848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20766,28 +20937,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7775
+#line 7850
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7777
+#line 7852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7776
+#line 7851
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7778
+#line 7853
     [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
     {
-#line 7779
+#line 7854
         .trainerName = _("Blank"),
-#line 7780
+#line 7855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7781
+#line 7856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20795,28 +20966,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7783
+#line 7858
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7785
+#line 7860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7784
+#line 7859
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7786
+#line 7861
     [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
     {
-#line 7787
+#line 7862
         .trainerName = _("Blank"),
-#line 7788
+#line 7863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7789
+#line 7864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20824,28 +20995,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7791
+#line 7866
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7793
+#line 7868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7792
+#line 7867
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7794
+#line 7869
     [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
     {
-#line 7795
+#line 7870
         .trainerName = _("Blank"),
-#line 7796
+#line 7871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7797
+#line 7872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20853,28 +21024,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7799
+#line 7874
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7801
+#line 7876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7800
+#line 7875
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7802
+#line 7877
     [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
     {
-#line 7803
+#line 7878
         .trainerName = _("Blank"),
-#line 7804
+#line 7879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7805
+#line 7880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20882,28 +21053,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7807
+#line 7882
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7809
+#line 7884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7808
+#line 7883
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7810
+#line 7885
     [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
     {
-#line 7811
+#line 7886
         .trainerName = _("Blank"),
-#line 7812
+#line 7887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7813
+#line 7888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20911,28 +21082,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7815
+#line 7890
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7817
+#line 7892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7816
+#line 7891
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7818
+#line 7893
     [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
     {
-#line 7819
+#line 7894
         .trainerName = _("Blank"),
-#line 7820
+#line 7895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7821
+#line 7896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20940,28 +21111,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7823
+#line 7898
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7825
+#line 7900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7824
+#line 7899
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7826
+#line 7901
     [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
     {
-#line 7827
+#line 7902
         .trainerName = _("Blank"),
-#line 7828
+#line 7903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7829
+#line 7904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20969,28 +21140,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7831
+#line 7906
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7833
+#line 7908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7832
+#line 7907
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7834
+#line 7909
     [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
     {
-#line 7835
+#line 7910
         .trainerName = _("Blank"),
-#line 7836
+#line 7911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7837
+#line 7912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -20998,28 +21169,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7839
+#line 7914
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7841
+#line 7916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7840
+#line 7915
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7842
+#line 7917
     [DIFFICULTY_NORMAL][TRAINER_56775C71] =
     {
-#line 7843
+#line 7918
         .trainerName = _("Blank"),
-#line 7844
+#line 7919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7845
+#line 7920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21027,28 +21198,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7847
+#line 7922
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7849
+#line 7924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7848
+#line 7923
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7850
+#line 7925
     [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
     {
-#line 7851
+#line 7926
         .trainerName = _("Blank"),
-#line 7852
+#line 7927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7853
+#line 7928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21056,28 +21227,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7855
+#line 7930
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7857
+#line 7932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7856
+#line 7931
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7858
+#line 7933
     [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
     {
-#line 7859
+#line 7934
         .trainerName = _("Blank"),
-#line 7860
+#line 7935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7861
+#line 7936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21085,28 +21256,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7863
+#line 7938
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7865
+#line 7940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7864
+#line 7939
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7866
+#line 7941
     [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
     {
-#line 7867
+#line 7942
         .trainerName = _("Blank"),
-#line 7868
+#line 7943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7869
+#line 7944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21114,28 +21285,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7871
+#line 7946
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7873
+#line 7948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7872
+#line 7947
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7874
+#line 7949
     [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
     {
-#line 7875
+#line 7950
         .trainerName = _("Blank"),
-#line 7876
+#line 7951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7877
+#line 7952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21143,28 +21314,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7879
+#line 7954
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7881
+#line 7956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7880
+#line 7955
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7882
+#line 7957
     [DIFFICULTY_NORMAL][TRAINER_5819E497] =
     {
-#line 7883
+#line 7958
         .trainerName = _("Blank"),
-#line 7884
+#line 7959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7885
+#line 7960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21172,28 +21343,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7887
+#line 7962
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7889
+#line 7964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7888
+#line 7963
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7890
+#line 7965
     [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
     {
-#line 7891
+#line 7966
         .trainerName = _("Blank"),
-#line 7892
+#line 7967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7893
+#line 7968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21201,28 +21372,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7895
+#line 7970
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7897
+#line 7972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7896
+#line 7971
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7898
+#line 7973
     [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
     {
-#line 7899
+#line 7974
         .trainerName = _("Blank"),
-#line 7900
+#line 7975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7901
+#line 7976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21230,28 +21401,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7903
+#line 7978
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7905
+#line 7980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7904
+#line 7979
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7906
+#line 7981
     [DIFFICULTY_NORMAL][TRAINER_58F43966] =
     {
-#line 7907
+#line 7982
         .trainerName = _("Blank"),
-#line 7908
+#line 7983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7909
+#line 7984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21259,28 +21430,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7911
+#line 7986
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7913
+#line 7988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7912
+#line 7987
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7914
+#line 7989
     [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
     {
-#line 7915
+#line 7990
         .trainerName = _("Blank"),
-#line 7916
+#line 7991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7917
+#line 7992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21288,28 +21459,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7919
+#line 7994
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7921
+#line 7996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7920
+#line 7995
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7922
+#line 7997
     [DIFFICULTY_NORMAL][TRAINER_598585C1] =
     {
-#line 7923
+#line 7998
         .trainerName = _("Blank"),
-#line 7924
+#line 7999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7925
+#line 8000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21317,28 +21488,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7927
+#line 8002
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7929
+#line 8004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7928
+#line 8003
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7930
+#line 8005
     [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
     {
-#line 7931
+#line 8006
         .trainerName = _("Blank"),
-#line 7932
+#line 8007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7933
+#line 8008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21346,28 +21517,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7935
+#line 8010
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7937
+#line 8012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7936
+#line 8011
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7938
+#line 8013
     [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
     {
-#line 7939
+#line 8014
         .trainerName = _("Blank"),
-#line 7940
+#line 8015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7941
+#line 8016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21375,28 +21546,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7943
+#line 8018
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7945
+#line 8020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7944
+#line 8019
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7946
+#line 8021
     [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
     {
-#line 7947
+#line 8022
         .trainerName = _("Blank"),
-#line 7948
+#line 8023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7949
+#line 8024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21404,28 +21575,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7951
+#line 8026
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7953
+#line 8028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7952
+#line 8027
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7954
+#line 8029
     [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
     {
-#line 7955
+#line 8030
         .trainerName = _("Blank"),
-#line 7956
+#line 8031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7957
+#line 8032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21433,28 +21604,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7959
+#line 8034
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7961
+#line 8036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7960
+#line 8035
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7962
+#line 8037
     [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
     {
-#line 7963
+#line 8038
         .trainerName = _("Blank"),
-#line 7964
+#line 8039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7965
+#line 8040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21462,28 +21633,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7967
+#line 8042
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7969
+#line 8044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7968
+#line 8043
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7970
+#line 8045
     [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
     {
-#line 7971
+#line 8046
         .trainerName = _("Blank"),
-#line 7972
+#line 8047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7973
+#line 8048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21491,28 +21662,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7975
+#line 8050
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7977
+#line 8052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7976
+#line 8051
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7978
+#line 8053
     [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
     {
-#line 7979
+#line 8054
         .trainerName = _("Blank"),
-#line 7980
+#line 8055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7981
+#line 8056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21520,28 +21691,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7983
+#line 8058
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7985
+#line 8060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7984
+#line 8059
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7986
+#line 8061
     [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
     {
-#line 7987
+#line 8062
         .trainerName = _("Blank"),
-#line 7988
+#line 8063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7989
+#line 8064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21549,28 +21720,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7991
+#line 8066
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7993
+#line 8068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7992
+#line 8067
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 7994
+#line 8069
     [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
     {
-#line 7995
+#line 8070
         .trainerName = _("Blank"),
-#line 7996
+#line 8071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 7997
+#line 8072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21578,28 +21749,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7999
+#line 8074
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8001
+#line 8076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8000
+#line 8075
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8002
+#line 8077
     [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
     {
-#line 8003
+#line 8078
         .trainerName = _("Blank"),
-#line 8004
+#line 8079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8005
+#line 8080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21607,28 +21778,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8007
+#line 8082
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8009
+#line 8084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8008
+#line 8083
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8010
+#line 8085
     [DIFFICULTY_NORMAL][TRAINER_5B983361] =
     {
-#line 8011
+#line 8086
         .trainerName = _("Blank"),
-#line 8012
+#line 8087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8013
+#line 8088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21636,28 +21807,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8015
+#line 8090
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8017
+#line 8092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8016
+#line 8091
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8018
+#line 8093
     [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
     {
-#line 8019
+#line 8094
         .trainerName = _("Blank"),
-#line 8020
+#line 8095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8021
+#line 8096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21665,28 +21836,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8023
+#line 8098
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8025
+#line 8100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8024
+#line 8099
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8026
+#line 8101
     [DIFFICULTY_NORMAL][TRAINER_5C315841] =
     {
-#line 8027
+#line 8102
         .trainerName = _("Blank"),
-#line 8028
+#line 8103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8029
+#line 8104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21694,28 +21865,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8031
+#line 8106
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8033
+#line 8108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8032
+#line 8107
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8034
+#line 8109
     [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
     {
-#line 8035
+#line 8110
         .trainerName = _("Blank"),
-#line 8036
+#line 8111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8037
+#line 8112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21723,28 +21894,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8039
+#line 8114
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8041
+#line 8116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8040
+#line 8115
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8042
+#line 8117
     [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
     {
-#line 8043
+#line 8118
         .trainerName = _("Blank"),
-#line 8044
+#line 8119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8045
+#line 8120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21752,28 +21923,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8047
+#line 8122
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8049
+#line 8124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8048
+#line 8123
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8050
+#line 8125
     [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
     {
-#line 8051
+#line 8126
         .trainerName = _("Blank"),
-#line 8052
+#line 8127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8053
+#line 8128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21781,28 +21952,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8055
+#line 8130
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8057
+#line 8132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8056
+#line 8131
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8058
+#line 8133
     [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
     {
-#line 8059
+#line 8134
         .trainerName = _("Blank"),
-#line 8060
+#line 8135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8061
+#line 8136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21810,28 +21981,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8063
+#line 8138
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8065
+#line 8140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8064
+#line 8139
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8066
+#line 8141
     [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
     {
-#line 8067
+#line 8142
         .trainerName = _("Blank"),
-#line 8068
+#line 8143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8069
+#line 8144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21839,28 +22010,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8071
+#line 8146
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8073
+#line 8148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8072
+#line 8147
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8074
+#line 8149
     [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
     {
-#line 8075
+#line 8150
         .trainerName = _("Blank"),
-#line 8076
+#line 8151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8077
+#line 8152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21868,28 +22039,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8079
+#line 8154
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8081
+#line 8156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8080
+#line 8155
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8082
+#line 8157
     [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
     {
-#line 8083
+#line 8158
         .trainerName = _("Blank"),
-#line 8084
+#line 8159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8085
+#line 8160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21897,28 +22068,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8087
+#line 8162
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8089
+#line 8164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8088
+#line 8163
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8090
+#line 8165
     [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
     {
-#line 8091
+#line 8166
         .trainerName = _("Blank"),
-#line 8092
+#line 8167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8093
+#line 8168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21926,28 +22097,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8095
+#line 8170
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8097
+#line 8172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8096
+#line 8171
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8098
+#line 8173
     [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
     {
-#line 8099
+#line 8174
         .trainerName = _("Blank"),
-#line 8100
+#line 8175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8101
+#line 8176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21955,28 +22126,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8103
+#line 8178
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8105
+#line 8180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8104
+#line 8179
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8106
+#line 8181
     [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
     {
-#line 8107
+#line 8182
         .trainerName = _("Blank"),
-#line 8108
+#line 8183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8109
+#line 8184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -21984,28 +22155,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8111
+#line 8186
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8113
+#line 8188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8112
+#line 8187
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8114
+#line 8189
     [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
     {
-#line 8115
+#line 8190
         .trainerName = _("Blank"),
-#line 8116
+#line 8191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8117
+#line 8192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22013,28 +22184,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8119
+#line 8194
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8121
+#line 8196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8120
+#line 8195
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8122
+#line 8197
     [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
     {
-#line 8123
+#line 8198
         .trainerName = _("Blank"),
-#line 8124
+#line 8199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8125
+#line 8200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22042,28 +22213,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8127
+#line 8202
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8129
+#line 8204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8128
+#line 8203
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8130
+#line 8205
     [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
     {
-#line 8131
+#line 8206
         .trainerName = _("Blank"),
-#line 8132
+#line 8207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8133
+#line 8208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22071,28 +22242,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8135
+#line 8210
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8137
+#line 8212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8136
+#line 8211
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8138
+#line 8213
     [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
     {
-#line 8139
+#line 8214
         .trainerName = _("Blank"),
-#line 8140
+#line 8215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8141
+#line 8216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22100,28 +22271,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8143
+#line 8218
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8145
+#line 8220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8144
+#line 8219
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8146
+#line 8221
     [DIFFICULTY_NORMAL][TRAINER_5F858802] =
     {
-#line 8147
+#line 8222
         .trainerName = _("Blank"),
-#line 8148
+#line 8223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8149
+#line 8224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22129,28 +22300,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8151
+#line 8226
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8153
+#line 8228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8152
+#line 8227
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8154
+#line 8229
     [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
     {
-#line 8155
+#line 8230
         .trainerName = _("Blank"),
-#line 8156
+#line 8231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8157
+#line 8232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22158,28 +22329,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8159
+#line 8234
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8161
+#line 8236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8160
+#line 8235
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8162
+#line 8237
     [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
     {
-#line 8163
+#line 8238
         .trainerName = _("Blank"),
-#line 8164
+#line 8239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8165
+#line 8240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22187,28 +22358,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8167
+#line 8242
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8169
+#line 8244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8168
+#line 8243
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8170
+#line 8245
     [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
     {
-#line 8171
+#line 8246
         .trainerName = _("Blank"),
-#line 8172
+#line 8247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8173
+#line 8248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22216,28 +22387,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8175
+#line 8250
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8177
+#line 8252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8176
+#line 8251
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8178
+#line 8253
     [DIFFICULTY_NORMAL][TRAINER_6016A968] =
     {
-#line 8179
+#line 8254
         .trainerName = _("Blank"),
-#line 8180
+#line 8255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8181
+#line 8256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22245,28 +22416,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8183
+#line 8258
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8185
+#line 8260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8184
+#line 8259
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8186
+#line 8261
     [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
     {
-#line 8187
+#line 8262
         .trainerName = _("Blank"),
-#line 8188
+#line 8263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8189
+#line 8264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22274,28 +22445,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8191
+#line 8266
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8193
+#line 8268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8192
+#line 8267
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8194
+#line 8269
     [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
     {
-#line 8195
+#line 8270
         .trainerName = _("Blank"),
-#line 8196
+#line 8271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8197
+#line 8272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22303,28 +22474,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8199
+#line 8274
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8201
+#line 8276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8200
+#line 8275
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8202
+#line 8277
     [DIFFICULTY_NORMAL][TRAINER_60C56554] =
     {
-#line 8203
+#line 8278
         .trainerName = _("Blank"),
-#line 8204
+#line 8279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8205
+#line 8280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22332,28 +22503,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8207
+#line 8282
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8209
+#line 8284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8208
+#line 8283
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8210
+#line 8285
     [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
     {
-#line 8211
+#line 8286
         .trainerName = _("Blank"),
-#line 8212
+#line 8287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8213
+#line 8288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22361,28 +22532,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8215
+#line 8290
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8217
+#line 8292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8216
+#line 8291
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8218
+#line 8293
     [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
     {
-#line 8219
+#line 8294
         .trainerName = _("Blank"),
-#line 8220
+#line 8295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8221
+#line 8296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22390,28 +22561,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8223
+#line 8298
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8225
+#line 8300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8224
+#line 8299
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8226
+#line 8301
     [DIFFICULTY_NORMAL][TRAINER_61E76999] =
     {
-#line 8227
+#line 8302
         .trainerName = _("Blank"),
-#line 8228
+#line 8303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8229
+#line 8304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22419,28 +22590,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8231
+#line 8306
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8233
+#line 8308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8232
+#line 8307
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8234
+#line 8309
     [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
     {
-#line 8235
+#line 8310
         .trainerName = _("Blank"),
-#line 8236
+#line 8311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8237
+#line 8312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22448,28 +22619,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8239
+#line 8314
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8241
+#line 8316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8240
+#line 8315
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8242
+#line 8317
     [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
     {
-#line 8243
+#line 8318
         .trainerName = _("Blank"),
-#line 8244
+#line 8319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8245
+#line 8320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22477,28 +22648,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8247
+#line 8322
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8249
+#line 8324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8248
+#line 8323
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8250
+#line 8325
     [DIFFICULTY_NORMAL][TRAINER_62C33409] =
     {
-#line 8251
+#line 8326
         .trainerName = _("Blank"),
-#line 8252
+#line 8327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8253
+#line 8328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22506,28 +22677,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8255
+#line 8330
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8257
+#line 8332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8256
+#line 8331
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8258
+#line 8333
     [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
     {
-#line 8259
+#line 8334
         .trainerName = _("Blank"),
-#line 8260
+#line 8335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8261
+#line 8336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22535,28 +22706,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8263
+#line 8338
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8265
+#line 8340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8264
+#line 8339
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8266
+#line 8341
     [DIFFICULTY_NORMAL][TRAINER_63409A54] =
     {
-#line 8267
+#line 8342
         .trainerName = _("Blank"),
-#line 8268
+#line 8343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8269
+#line 8344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22564,28 +22735,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8271
+#line 8346
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8273
+#line 8348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8272
+#line 8347
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8274
+#line 8349
     [DIFFICULTY_NORMAL][TRAINER_6397B964] =
     {
-#line 8275
+#line 8350
         .trainerName = _("Blank"),
-#line 8276
+#line 8351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8277
+#line 8352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22593,28 +22764,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8279
+#line 8354
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8281
+#line 8356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8280
+#line 8355
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8282
+#line 8357
     [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
     {
-#line 8283
+#line 8358
         .trainerName = _("Blank"),
-#line 8284
+#line 8359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8285
+#line 8360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22622,28 +22793,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8287
+#line 8362
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8289
+#line 8364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8288
+#line 8363
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8290
+#line 8365
     [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
     {
-#line 8291
+#line 8366
         .trainerName = _("Blank"),
-#line 8292
+#line 8367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8293
+#line 8368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22651,28 +22822,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8295
+#line 8370
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8297
+#line 8372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8296
+#line 8371
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8298
+#line 8373
     [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
     {
-#line 8299
+#line 8374
         .trainerName = _("Blank"),
-#line 8300
+#line 8375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8301
+#line 8376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22680,28 +22851,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8303
+#line 8378
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8305
+#line 8380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8304
+#line 8379
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8306
+#line 8381
     [DIFFICULTY_NORMAL][TRAINER_64E30596] =
     {
-#line 8307
+#line 8382
         .trainerName = _("Blank"),
-#line 8308
+#line 8383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8309
+#line 8384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22709,28 +22880,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8311
+#line 8386
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8313
+#line 8388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8312
+#line 8387
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8314
+#line 8389
     [DIFFICULTY_NORMAL][TRAINER_6566F645] =
     {
-#line 8315
+#line 8390
         .trainerName = _("Blank"),
-#line 8316
+#line 8391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8317
+#line 8392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22738,28 +22909,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8319
+#line 8394
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8321
+#line 8396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8320
+#line 8395
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8322
+#line 8397
     [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
     {
-#line 8323
+#line 8398
         .trainerName = _("Blank"),
-#line 8324
+#line 8399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8325
+#line 8400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22767,28 +22938,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8327
+#line 8402
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8329
+#line 8404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8328
+#line 8403
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8330
+#line 8405
     [DIFFICULTY_NORMAL][TRAINER_656EC067] =
     {
-#line 8331
+#line 8406
         .trainerName = _("Blank"),
-#line 8332
+#line 8407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8333
+#line 8408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22796,28 +22967,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8335
+#line 8410
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8337
+#line 8412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8336
+#line 8411
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8338
+#line 8413
     [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
     {
-#line 8339
+#line 8414
         .trainerName = _("Blank"),
-#line 8340
+#line 8415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8341
+#line 8416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22825,28 +22996,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8343
+#line 8418
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8345
+#line 8420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8344
+#line 8419
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8346
+#line 8421
     [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
     {
-#line 8347
+#line 8422
         .trainerName = _("Blank"),
-#line 8348
+#line 8423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8349
+#line 8424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22854,28 +23025,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8351
+#line 8426
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8353
+#line 8428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8352
+#line 8427
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8354
+#line 8429
     [DIFFICULTY_NORMAL][TRAINER_66531C74] =
     {
-#line 8355
+#line 8430
         .trainerName = _("Blank"),
-#line 8356
+#line 8431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8357
+#line 8432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22883,28 +23054,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8359
+#line 8434
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8361
+#line 8436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8360
+#line 8435
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8362
+#line 8437
     [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
     {
-#line 8363
+#line 8438
         .trainerName = _("Blank"),
-#line 8364
+#line 8439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8365
+#line 8440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22912,28 +23083,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8367
+#line 8442
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8369
+#line 8444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8368
+#line 8443
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8370
+#line 8445
     [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
     {
-#line 8371
+#line 8446
         .trainerName = _("Blank"),
-#line 8372
+#line 8447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8373
+#line 8448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22941,28 +23112,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8375
+#line 8450
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8377
+#line 8452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8376
+#line 8451
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8378
+#line 8453
     [DIFFICULTY_NORMAL][TRAINER_675DA518] =
     {
-#line 8379
+#line 8454
         .trainerName = _("Blank"),
-#line 8380
+#line 8455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8381
+#line 8456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22970,28 +23141,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8383
+#line 8458
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8385
+#line 8460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8384
+#line 8459
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8386
+#line 8461
     [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
     {
-#line 8387
+#line 8462
         .trainerName = _("Blank"),
-#line 8388
+#line 8463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8389
+#line 8464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -22999,28 +23170,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8391
+#line 8466
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8393
+#line 8468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8392
+#line 8467
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8394
+#line 8469
     [DIFFICULTY_NORMAL][TRAINER_6792B394] =
     {
-#line 8395
+#line 8470
         .trainerName = _("Blank"),
-#line 8396
+#line 8471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8397
+#line 8472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23028,28 +23199,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8399
+#line 8474
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8401
+#line 8476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8400
+#line 8475
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8402
+#line 8477
     [DIFFICULTY_NORMAL][TRAINER_683A2305] =
     {
-#line 8403
+#line 8478
         .trainerName = _("Blank"),
-#line 8404
+#line 8479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8405
+#line 8480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23057,28 +23228,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8407
+#line 8482
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8409
+#line 8484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8408
+#line 8483
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8410
+#line 8485
     [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
     {
-#line 8411
+#line 8486
         .trainerName = _("Blank"),
-#line 8412
+#line 8487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8413
+#line 8488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23086,28 +23257,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8415
+#line 8490
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8417
+#line 8492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8416
+#line 8491
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8418
+#line 8493
     [DIFFICULTY_NORMAL][TRAINER_698BB117] =
     {
-#line 8419
+#line 8494
         .trainerName = _("Blank"),
-#line 8420
+#line 8495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8421
+#line 8496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23115,28 +23286,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8423
+#line 8498
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8425
+#line 8500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8424
+#line 8499
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8426
+#line 8501
     [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
     {
-#line 8427
+#line 8502
         .trainerName = _("Blank"),
-#line 8428
+#line 8503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8429
+#line 8504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23144,28 +23315,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8431
+#line 8506
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8433
+#line 8508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8432
+#line 8507
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8434
+#line 8509
     [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
     {
-#line 8435
+#line 8510
         .trainerName = _("Blank"),
-#line 8436
+#line 8511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8437
+#line 8512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23173,28 +23344,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8439
+#line 8514
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8441
+#line 8516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8440
+#line 8515
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8442
+#line 8517
     [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
     {
-#line 8443
+#line 8518
         .trainerName = _("Blank"),
-#line 8444
+#line 8519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8445
+#line 8520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23202,28 +23373,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8447
+#line 8522
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8449
+#line 8524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8448
+#line 8523
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8450
+#line 8525
     [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
     {
-#line 8451
+#line 8526
         .trainerName = _("Blank"),
-#line 8452
+#line 8527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8453
+#line 8528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23231,28 +23402,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8455
+#line 8530
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8457
+#line 8532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8456
+#line 8531
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8458
+#line 8533
     [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
     {
-#line 8459
+#line 8534
         .trainerName = _("Blank"),
-#line 8460
+#line 8535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8461
+#line 8536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23260,28 +23431,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8463
+#line 8538
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8465
+#line 8540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8464
+#line 8539
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8466
+#line 8541
     [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
     {
-#line 8467
+#line 8542
         .trainerName = _("Blank"),
-#line 8468
+#line 8543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8469
+#line 8544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23289,28 +23460,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8471
+#line 8546
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8473
+#line 8548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8472
+#line 8547
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8474
+#line 8549
     [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
     {
-#line 8475
+#line 8550
         .trainerName = _("Blank"),
-#line 8476
+#line 8551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8477
+#line 8552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23318,28 +23489,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8479
+#line 8554
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8481
+#line 8556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8480
+#line 8555
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8482
+#line 8557
     [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
     {
-#line 8483
+#line 8558
         .trainerName = _("Blank"),
-#line 8484
+#line 8559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8485
+#line 8560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23347,28 +23518,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8487
+#line 8562
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8489
+#line 8564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8488
+#line 8563
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8490
+#line 8565
     [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
     {
-#line 8491
+#line 8566
         .trainerName = _("Blank"),
-#line 8492
+#line 8567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8493
+#line 8568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23376,28 +23547,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8495
+#line 8570
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8497
+#line 8572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8496
+#line 8571
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8498
+#line 8573
     [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
     {
-#line 8499
+#line 8574
         .trainerName = _("Blank"),
-#line 8500
+#line 8575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8501
+#line 8576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23405,28 +23576,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8503
+#line 8578
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8505
+#line 8580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8504
+#line 8579
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8506
+#line 8581
     [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
     {
-#line 8507
+#line 8582
         .trainerName = _("Blank"),
-#line 8508
+#line 8583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8509
+#line 8584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23434,28 +23605,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8511
+#line 8586
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8513
+#line 8588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8512
+#line 8587
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8514
+#line 8589
     [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
     {
-#line 8515
+#line 8590
         .trainerName = _("Blank"),
-#line 8516
+#line 8591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8517
+#line 8592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23463,28 +23634,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8519
+#line 8594
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8521
+#line 8596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8520
+#line 8595
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8522
+#line 8597
     [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
     {
-#line 8523
+#line 8598
         .trainerName = _("Blank"),
-#line 8524
+#line 8599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8525
+#line 8600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23492,28 +23663,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8527
+#line 8602
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8529
+#line 8604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8528
+#line 8603
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8530
+#line 8605
     [DIFFICULTY_NORMAL][TRAINER_6E663040] =
     {
-#line 8531
+#line 8606
         .trainerName = _("Blank"),
-#line 8532
+#line 8607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8533
+#line 8608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23521,28 +23692,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8535
+#line 8610
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8537
+#line 8612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8536
+#line 8611
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8538
+#line 8613
     [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
     {
-#line 8539
+#line 8614
         .trainerName = _("Blank"),
-#line 8540
+#line 8615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8541
+#line 8616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23550,28 +23721,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8543
+#line 8618
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8545
+#line 8620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8544
+#line 8619
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8546
+#line 8621
     [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
     {
-#line 8547
+#line 8622
         .trainerName = _("Blank"),
-#line 8548
+#line 8623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8549
+#line 8624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23579,28 +23750,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8551
+#line 8626
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8553
+#line 8628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8552
+#line 8627
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8554
+#line 8629
     [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
     {
-#line 8555
+#line 8630
         .trainerName = _("Blank"),
-#line 8556
+#line 8631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8557
+#line 8632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23608,28 +23779,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8559
+#line 8634
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8561
+#line 8636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8560
+#line 8635
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8562
+#line 8637
     [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
     {
-#line 8563
+#line 8638
         .trainerName = _("Blank"),
-#line 8564
+#line 8639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8565
+#line 8640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23637,28 +23808,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8567
+#line 8642
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8569
+#line 8644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8568
+#line 8643
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8570
+#line 8645
     [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
     {
-#line 8571
+#line 8646
         .trainerName = _("Blank"),
-#line 8572
+#line 8647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8573
+#line 8648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23666,28 +23837,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8575
+#line 8650
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8577
+#line 8652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8576
+#line 8651
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8578
+#line 8653
     [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
     {
-#line 8579
+#line 8654
         .trainerName = _("Blank"),
-#line 8580
+#line 8655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8581
+#line 8656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23695,28 +23866,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8583
+#line 8658
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8585
+#line 8660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8584
+#line 8659
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8586
+#line 8661
     [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
     {
-#line 8587
+#line 8662
         .trainerName = _("Blank"),
-#line 8588
+#line 8663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8589
+#line 8664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23724,28 +23895,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8591
+#line 8666
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8593
+#line 8668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8592
+#line 8667
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8594
+#line 8669
     [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
     {
-#line 8595
+#line 8670
         .trainerName = _("Blank"),
-#line 8596
+#line 8671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8597
+#line 8672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23753,28 +23924,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8599
+#line 8674
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8601
+#line 8676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8600
+#line 8675
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8602
+#line 8677
     [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
     {
-#line 8603
+#line 8678
         .trainerName = _("Blank"),
-#line 8604
+#line 8679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8605
+#line 8680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23782,28 +23953,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8607
+#line 8682
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8609
+#line 8684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8608
+#line 8683
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8610
+#line 8685
     [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
     {
-#line 8611
+#line 8686
         .trainerName = _("Blank"),
-#line 8612
+#line 8687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8613
+#line 8688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23811,28 +23982,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8615
+#line 8690
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8617
+#line 8692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8616
+#line 8691
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8618
+#line 8693
     [DIFFICULTY_NORMAL][TRAINER_7169C897] =
     {
-#line 8619
+#line 8694
         .trainerName = _("Blank"),
-#line 8620
+#line 8695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8621
+#line 8696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23840,28 +24011,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8623
+#line 8698
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8625
+#line 8700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8624
+#line 8699
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8626
+#line 8701
     [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
     {
-#line 8627
+#line 8702
         .trainerName = _("Blank"),
-#line 8628
+#line 8703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8629
+#line 8704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23869,28 +24040,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8631
+#line 8706
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8633
+#line 8708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8632
+#line 8707
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8634
+#line 8709
     [DIFFICULTY_NORMAL][TRAINER_7190E405] =
     {
-#line 8635
+#line 8710
         .trainerName = _("Blank"),
-#line 8636
+#line 8711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8637
+#line 8712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23898,28 +24069,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8639
+#line 8714
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8641
+#line 8716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8640
+#line 8715
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8642
+#line 8717
     [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
     {
-#line 8643
+#line 8718
         .trainerName = _("Blank"),
-#line 8644
+#line 8719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8645
+#line 8720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23927,28 +24098,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8647
+#line 8722
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8649
+#line 8724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8648
+#line 8723
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8650
+#line 8725
     [DIFFICULTY_NORMAL][TRAINER_7249425F] =
     {
-#line 8651
+#line 8726
         .trainerName = _("Blank"),
-#line 8652
+#line 8727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8653
+#line 8728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23956,28 +24127,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8655
+#line 8730
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8657
+#line 8732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8656
+#line 8731
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8658
+#line 8733
     [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
     {
-#line 8659
+#line 8734
         .trainerName = _("Blank"),
-#line 8660
+#line 8735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8661
+#line 8736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -23985,28 +24156,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8663
+#line 8738
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8665
+#line 8740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8664
+#line 8739
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8666
+#line 8741
     [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
     {
-#line 8667
+#line 8742
         .trainerName = _("Blank"),
-#line 8668
+#line 8743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8669
+#line 8744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24014,28 +24185,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8671
+#line 8746
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8673
+#line 8748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8672
+#line 8747
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8674
+#line 8749
     [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
     {
-#line 8675
+#line 8750
         .trainerName = _("Blank"),
-#line 8676
+#line 8751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8677
+#line 8752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24043,28 +24214,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8679
+#line 8754
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8681
+#line 8756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8680
+#line 8755
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8682
+#line 8757
     [DIFFICULTY_NORMAL][TRAINER_732D4997] =
     {
-#line 8683
+#line 8758
         .trainerName = _("Blank"),
-#line 8684
+#line 8759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8685
+#line 8760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24072,28 +24243,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8687
+#line 8762
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8689
+#line 8764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8688
+#line 8763
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8690
+#line 8765
     [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
     {
-#line 8691
+#line 8766
         .trainerName = _("Blank"),
-#line 8692
+#line 8767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8693
+#line 8768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24101,28 +24272,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8695
+#line 8770
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8697
+#line 8772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8696
+#line 8771
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8698
+#line 8773
     [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
     {
-#line 8699
+#line 8774
         .trainerName = _("Blank"),
-#line 8700
+#line 8775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8701
+#line 8776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24130,28 +24301,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8703
+#line 8778
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8705
+#line 8780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8704
+#line 8779
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8706
+#line 8781
     [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
     {
-#line 8707
+#line 8782
         .trainerName = _("Blank"),
-#line 8708
+#line 8783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8709
+#line 8784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24159,28 +24330,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8711
+#line 8786
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8713
+#line 8788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8712
+#line 8787
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8714
+#line 8789
     [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
     {
-#line 8715
+#line 8790
         .trainerName = _("Blank"),
-#line 8716
+#line 8791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8717
+#line 8792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24188,28 +24359,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8719
+#line 8794
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8721
+#line 8796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8720
+#line 8795
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8722
+#line 8797
     [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
     {
-#line 8723
+#line 8798
         .trainerName = _("Blank"),
-#line 8724
+#line 8799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8725
+#line 8800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24217,28 +24388,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8727
+#line 8802
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8729
+#line 8804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8728
+#line 8803
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8730
+#line 8805
     [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
     {
-#line 8731
+#line 8806
         .trainerName = _("Blank"),
-#line 8732
+#line 8807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8733
+#line 8808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24246,28 +24417,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8735
+#line 8810
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8737
+#line 8812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8736
+#line 8811
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8738
+#line 8813
     [DIFFICULTY_NORMAL][TRAINER_783AB388] =
     {
-#line 8739
+#line 8814
         .trainerName = _("Blank"),
-#line 8740
+#line 8815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8741
+#line 8816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24275,28 +24446,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8743
+#line 8818
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8745
+#line 8820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8744
+#line 8819
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8746
+#line 8821
     [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
     {
-#line 8747
+#line 8822
         .trainerName = _("Blank"),
-#line 8748
+#line 8823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8749
+#line 8824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24304,28 +24475,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8751
+#line 8826
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8753
+#line 8828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8752
+#line 8827
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8754
+#line 8829
     [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
     {
-#line 8755
+#line 8830
         .trainerName = _("Blank"),
-#line 8756
+#line 8831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8757
+#line 8832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24333,28 +24504,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8759
+#line 8834
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8761
+#line 8836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8760
+#line 8835
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8762
+#line 8837
     [DIFFICULTY_NORMAL][TRAINER_78B73516] =
     {
-#line 8763
+#line 8838
         .trainerName = _("Blank"),
-#line 8764
+#line 8839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8765
+#line 8840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24362,28 +24533,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8767
+#line 8842
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8769
+#line 8844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8768
+#line 8843
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8770
+#line 8845
     [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
     {
-#line 8771
+#line 8846
         .trainerName = _("Blank"),
-#line 8772
+#line 8847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8773
+#line 8848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24391,28 +24562,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8775
+#line 8850
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8777
+#line 8852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8776
+#line 8851
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8778
+#line 8853
     [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
     {
-#line 8779
+#line 8854
         .trainerName = _("Blank"),
-#line 8780
+#line 8855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8781
+#line 8856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24420,28 +24591,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8783
+#line 8858
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8785
+#line 8860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8784
+#line 8859
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8786
+#line 8861
     [DIFFICULTY_NORMAL][TRAINER_793992D8] =
     {
-#line 8787
+#line 8862
         .trainerName = _("Blank"),
-#line 8788
+#line 8863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8789
+#line 8864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24449,28 +24620,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8791
+#line 8866
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8793
+#line 8868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8792
+#line 8867
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8794
+#line 8869
     [DIFFICULTY_NORMAL][TRAINER_797E296B] =
     {
-#line 8795
+#line 8870
         .trainerName = _("Blank"),
-#line 8796
+#line 8871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8797
+#line 8872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24478,28 +24649,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8799
+#line 8874
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8801
+#line 8876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8800
+#line 8875
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8802
+#line 8877
     [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
     {
-#line 8803
+#line 8878
         .trainerName = _("Blank"),
-#line 8804
+#line 8879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8805
+#line 8880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24507,28 +24678,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8807
+#line 8882
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8809
+#line 8884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8808
+#line 8883
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8810
+#line 8885
     [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
     {
-#line 8811
+#line 8886
         .trainerName = _("Blank"),
-#line 8812
+#line 8887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8813
+#line 8888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24536,28 +24707,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8815
+#line 8890
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8817
+#line 8892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8816
+#line 8891
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8818
+#line 8893
     [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
     {
-#line 8819
+#line 8894
         .trainerName = _("Blank"),
-#line 8820
+#line 8895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8821
+#line 8896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24565,28 +24736,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8823
+#line 8898
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8825
+#line 8900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8824
+#line 8899
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8826
+#line 8901
     [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
     {
-#line 8827
+#line 8902
         .trainerName = _("Blank"),
-#line 8828
+#line 8903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8829
+#line 8904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24594,28 +24765,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8831
+#line 8906
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8833
+#line 8908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8832
+#line 8907
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8834
+#line 8909
     [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
     {
-#line 8835
+#line 8910
         .trainerName = _("Blank"),
-#line 8836
+#line 8911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8837
+#line 8912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24623,28 +24794,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8839
+#line 8914
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8841
+#line 8916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8840
+#line 8915
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8842
+#line 8917
     [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
     {
-#line 8843
+#line 8918
         .trainerName = _("Blank"),
-#line 8844
+#line 8919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8845
+#line 8920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24652,28 +24823,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8847
+#line 8922
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8849
+#line 8924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8848
+#line 8923
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8850
+#line 8925
     [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
     {
-#line 8851
+#line 8926
         .trainerName = _("Blank"),
-#line 8852
+#line 8927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8853
+#line 8928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24681,28 +24852,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8855
+#line 8930
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8857
+#line 8932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8856
+#line 8931
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8858
+#line 8933
     [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
     {
-#line 8859
+#line 8934
         .trainerName = _("Blank"),
-#line 8860
+#line 8935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8861
+#line 8936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24710,28 +24881,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8863
+#line 8938
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8865
+#line 8940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8864
+#line 8939
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8866
+#line 8941
     [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
     {
-#line 8867
+#line 8942
         .trainerName = _("Blank"),
-#line 8868
+#line 8943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8869
+#line 8944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24739,28 +24910,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8871
+#line 8946
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8873
+#line 8948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8872
+#line 8947
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8874
+#line 8949
     [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
     {
-#line 8875
+#line 8950
         .trainerName = _("Blank"),
-#line 8876
+#line 8951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8877
+#line 8952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24768,28 +24939,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8879
+#line 8954
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8881
+#line 8956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8880
+#line 8955
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8882
+#line 8957
     [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
     {
-#line 8883
+#line 8958
         .trainerName = _("Blank"),
-#line 8884
+#line 8959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8885
+#line 8960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24797,28 +24968,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8887
+#line 8962
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8889
+#line 8964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8888
+#line 8963
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8890
+#line 8965
     [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
     {
-#line 8891
+#line 8966
         .trainerName = _("Blank"),
-#line 8892
+#line 8967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8893
+#line 8968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24826,28 +24997,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8895
+#line 8970
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8897
+#line 8972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8896
+#line 8971
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8898
+#line 8973
     [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
     {
-#line 8899
+#line 8974
         .trainerName = _("Blank"),
-#line 8900
+#line 8975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8901
+#line 8976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24855,28 +25026,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8903
+#line 8978
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8905
+#line 8980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8904
+#line 8979
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8906
+#line 8981
     [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
     {
-#line 8907
+#line 8982
         .trainerName = _("Blank"),
-#line 8908
+#line 8983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8909
+#line 8984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24884,28 +25055,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8911
+#line 8986
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8913
+#line 8988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8912
+#line 8987
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8914
+#line 8989
     [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
     {
-#line 8915
+#line 8990
         .trainerName = _("Blank"),
-#line 8916
+#line 8991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8917
+#line 8992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24913,28 +25084,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8919
+#line 8994
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8921
+#line 8996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8920
+#line 8995
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8922
+#line 8997
     [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
     {
-#line 8923
+#line 8998
         .trainerName = _("Blank"),
-#line 8924
+#line 8999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8925
+#line 9000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24942,28 +25113,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8927
+#line 9002
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8929
+#line 9004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8928
+#line 9003
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8930
+#line 9005
     [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
     {
-#line 8931
+#line 9006
         .trainerName = _("Blank"),
-#line 8932
+#line 9007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8933
+#line 9008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -24971,28 +25142,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8935
+#line 9010
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8937
+#line 9012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8936
+#line 9011
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8938
+#line 9013
     [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
     {
-#line 8939
+#line 9014
         .trainerName = _("Blank"),
-#line 8940
+#line 9015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8941
+#line 9016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25000,28 +25171,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8943
+#line 9018
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8945
+#line 9020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8944
+#line 9019
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8946
+#line 9021
     [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
     {
-#line 8947
+#line 9022
         .trainerName = _("Blank"),
-#line 8948
+#line 9023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8949
+#line 9024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25029,28 +25200,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8951
+#line 9026
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8953
+#line 9028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8952
+#line 9027
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8954
+#line 9029
     [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
     {
-#line 8955
+#line 9030
         .trainerName = _("Blank"),
-#line 8956
+#line 9031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8957
+#line 9032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25058,28 +25229,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8959
+#line 9034
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8961
+#line 9036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8960
+#line 9035
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8962
+#line 9037
     [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
     {
-#line 8963
+#line 9038
         .trainerName = _("Blank"),
-#line 8964
+#line 9039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8965
+#line 9040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25087,28 +25258,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8967
+#line 9042
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8969
+#line 9044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8968
+#line 9043
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8970
+#line 9045
     [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
     {
-#line 8971
+#line 9046
         .trainerName = _("Blank"),
-#line 8972
+#line 9047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8973
+#line 9048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25116,28 +25287,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8975
+#line 9050
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8977
+#line 9052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8976
+#line 9051
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8978
+#line 9053
     [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
     {
-#line 8979
+#line 9054
         .trainerName = _("Blank"),
-#line 8980
+#line 9055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8981
+#line 9056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25145,28 +25316,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8983
+#line 9058
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8985
+#line 9060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8984
+#line 9059
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8986
+#line 9061
     [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
     {
-#line 8987
+#line 9062
         .trainerName = _("Blank"),
-#line 8988
+#line 9063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8989
+#line 9064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25174,28 +25345,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8991
+#line 9066
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8993
+#line 9068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8992
+#line 9067
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 8994
+#line 9069
     [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
     {
-#line 8995
+#line 9070
         .trainerName = _("Blank"),
-#line 8996
+#line 9071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 8997
+#line 9072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25203,28 +25374,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8999
+#line 9074
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9001
+#line 9076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9000
+#line 9075
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9002
+#line 9077
     [DIFFICULTY_NORMAL][TRAINER_80941A21] =
     {
-#line 9003
+#line 9078
         .trainerName = _("Blank"),
-#line 9004
+#line 9079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9005
+#line 9080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25232,28 +25403,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9007
+#line 9082
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9009
+#line 9084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9008
+#line 9083
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9010
+#line 9085
     [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
     {
-#line 9011
+#line 9086
         .trainerName = _("Blank"),
-#line 9012
+#line 9087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9013
+#line 9088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25261,28 +25432,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9015
+#line 9090
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9017
+#line 9092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9016
+#line 9091
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9018
+#line 9093
     [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
     {
-#line 9019
+#line 9094
         .trainerName = _("Blank"),
-#line 9020
+#line 9095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9021
+#line 9096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25290,28 +25461,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9023
+#line 9098
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9025
+#line 9100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9024
+#line 9099
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9026
+#line 9101
     [DIFFICULTY_NORMAL][TRAINER_811C7730] =
     {
-#line 9027
+#line 9102
         .trainerName = _("Blank"),
-#line 9028
+#line 9103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9029
+#line 9104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25319,28 +25490,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9031
+#line 9106
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9033
+#line 9108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9032
+#line 9107
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9034
+#line 9109
     [DIFFICULTY_NORMAL][TRAINER_814D0113] =
     {
-#line 9035
+#line 9110
         .trainerName = _("Blank"),
-#line 9036
+#line 9111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9037
+#line 9112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25348,28 +25519,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9039
+#line 9114
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9041
+#line 9116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9040
+#line 9115
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9042
+#line 9117
     [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
     {
-#line 9043
+#line 9118
         .trainerName = _("Blank"),
-#line 9044
+#line 9119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9045
+#line 9120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25377,28 +25548,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9047
+#line 9122
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9049
+#line 9124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9048
+#line 9123
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9050
+#line 9125
     [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
     {
-#line 9051
+#line 9126
         .trainerName = _("Blank"),
-#line 9052
+#line 9127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9053
+#line 9128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25406,28 +25577,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9055
+#line 9130
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9057
+#line 9132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9056
+#line 9131
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9058
+#line 9133
     [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
     {
-#line 9059
+#line 9134
         .trainerName = _("Blank"),
-#line 9060
+#line 9135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9061
+#line 9136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25435,28 +25606,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9063
+#line 9138
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9065
+#line 9140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9064
+#line 9139
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9066
+#line 9141
     [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
     {
-#line 9067
+#line 9142
         .trainerName = _("Blank"),
-#line 9068
+#line 9143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9069
+#line 9144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25464,28 +25635,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9071
+#line 9146
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9073
+#line 9148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9072
+#line 9147
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9074
+#line 9149
     [DIFFICULTY_NORMAL][TRAINER_831DE561] =
     {
-#line 9075
+#line 9150
         .trainerName = _("Blank"),
-#line 9076
+#line 9151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9077
+#line 9152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25493,28 +25664,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9079
+#line 9154
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9081
+#line 9156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9080
+#line 9155
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9082
+#line 9157
     [DIFFICULTY_NORMAL][TRAINER_8327758B] =
     {
-#line 9083
+#line 9158
         .trainerName = _("Blank"),
-#line 9084
+#line 9159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9085
+#line 9160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25522,28 +25693,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9087
+#line 9162
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9089
+#line 9164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9088
+#line 9163
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9090
+#line 9165
     [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
     {
-#line 9091
+#line 9166
         .trainerName = _("Blank"),
-#line 9092
+#line 9167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9093
+#line 9168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25551,28 +25722,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9095
+#line 9170
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9097
+#line 9172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9096
+#line 9171
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9098
+#line 9173
     [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
     {
-#line 9099
+#line 9174
         .trainerName = _("Blank"),
-#line 9100
+#line 9175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9101
+#line 9176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25580,28 +25751,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9103
+#line 9178
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9105
+#line 9180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9104
+#line 9179
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9106
+#line 9181
     [DIFFICULTY_NORMAL][TRAINER_83A26233] =
     {
-#line 9107
+#line 9182
         .trainerName = _("Blank"),
-#line 9108
+#line 9183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9109
+#line 9184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25609,28 +25780,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9111
+#line 9186
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9113
+#line 9188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9112
+#line 9187
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9114
+#line 9189
     [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
     {
-#line 9115
+#line 9190
         .trainerName = _("Blank"),
-#line 9116
+#line 9191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9117
+#line 9192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25638,28 +25809,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9119
+#line 9194
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9121
+#line 9196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9120
+#line 9195
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9122
+#line 9197
     [DIFFICULTY_NORMAL][TRAINER_840416CD] =
     {
-#line 9123
+#line 9198
         .trainerName = _("Blank"),
-#line 9124
+#line 9199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9125
+#line 9200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25667,28 +25838,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9127
+#line 9202
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9129
+#line 9204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9128
+#line 9203
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9130
+#line 9205
     [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
     {
-#line 9131
+#line 9206
         .trainerName = _("Blank"),
-#line 9132
+#line 9207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9133
+#line 9208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25696,28 +25867,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9135
+#line 9210
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9137
+#line 9212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9136
+#line 9211
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9138
+#line 9213
     [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
     {
-#line 9139
+#line 9214
         .trainerName = _("Blank"),
-#line 9140
+#line 9215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9141
+#line 9216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25725,28 +25896,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9143
+#line 9218
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9145
+#line 9220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9144
+#line 9219
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9146
+#line 9221
     [DIFFICULTY_NORMAL][TRAINER_8580525E] =
     {
-#line 9147
+#line 9222
         .trainerName = _("Blank"),
-#line 9148
+#line 9223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9149
+#line 9224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25754,28 +25925,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9151
+#line 9226
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9153
+#line 9228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9152
+#line 9227
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9154
+#line 9229
     [DIFFICULTY_NORMAL][TRAINER_866AE208] =
     {
-#line 9155
+#line 9230
         .trainerName = _("Blank"),
-#line 9156
+#line 9231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9157
+#line 9232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25783,28 +25954,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9159
+#line 9234
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9161
+#line 9236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9160
+#line 9235
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9162
+#line 9237
     [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
     {
-#line 9163
+#line 9238
         .trainerName = _("Blank"),
-#line 9164
+#line 9239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9165
+#line 9240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25812,28 +25983,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9167
+#line 9242
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9169
+#line 9244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9168
+#line 9243
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9170
+#line 9245
     [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
     {
-#line 9171
+#line 9246
         .trainerName = _("Blank"),
-#line 9172
+#line 9247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9173
+#line 9248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25841,28 +26012,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9175
+#line 9250
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9177
+#line 9252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9176
+#line 9251
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9178
+#line 9253
     [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
     {
-#line 9179
+#line 9254
         .trainerName = _("Blank"),
-#line 9180
+#line 9255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9181
+#line 9256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25870,28 +26041,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9183
+#line 9258
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9185
+#line 9260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9184
+#line 9259
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9186
+#line 9261
     [DIFFICULTY_NORMAL][TRAINER_872183CD] =
     {
-#line 9187
+#line 9262
         .trainerName = _("Blank"),
-#line 9188
+#line 9263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9189
+#line 9264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25899,28 +26070,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9191
+#line 9266
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9193
+#line 9268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9192
+#line 9267
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9194
+#line 9269
     [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
     {
-#line 9195
+#line 9270
         .trainerName = _("Blank"),
-#line 9196
+#line 9271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9197
+#line 9272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25928,28 +26099,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9199
+#line 9274
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9201
+#line 9276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9200
+#line 9275
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9202
+#line 9277
     [DIFFICULTY_NORMAL][TRAINER_885C781B] =
     {
-#line 9203
+#line 9278
         .trainerName = _("Blank"),
-#line 9204
+#line 9279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9205
+#line 9280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25957,28 +26128,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9207
+#line 9282
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9209
+#line 9284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9208
+#line 9283
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9210
+#line 9285
     [DIFFICULTY_NORMAL][TRAINER_8878003B] =
     {
-#line 9211
+#line 9286
         .trainerName = _("Blank"),
-#line 9212
+#line 9287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9213
+#line 9288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -25986,28 +26157,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9215
+#line 9290
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9217
+#line 9292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9216
+#line 9291
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9218
+#line 9293
     [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
     {
-#line 9219
+#line 9294
         .trainerName = _("Blank"),
-#line 9220
+#line 9295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9221
+#line 9296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26015,28 +26186,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9223
+#line 9298
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9225
+#line 9300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9224
+#line 9299
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9226
+#line 9301
     [DIFFICULTY_NORMAL][TRAINER_8972F540] =
     {
-#line 9227
+#line 9302
         .trainerName = _("Blank"),
-#line 9228
+#line 9303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9229
+#line 9304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26044,28 +26215,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9231
+#line 9306
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9233
+#line 9308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9232
+#line 9307
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9234
+#line 9309
     [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
     {
-#line 9235
+#line 9310
         .trainerName = _("Blank"),
-#line 9236
+#line 9311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9237
+#line 9312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26073,28 +26244,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9239
+#line 9314
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9241
+#line 9316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9240
+#line 9315
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9242
+#line 9317
     [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
     {
-#line 9243
+#line 9318
         .trainerName = _("Blank"),
-#line 9244
+#line 9319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9245
+#line 9320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26102,28 +26273,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9247
+#line 9322
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9249
+#line 9324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9248
+#line 9323
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9250
+#line 9325
     [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
     {
-#line 9251
+#line 9326
         .trainerName = _("Blank"),
-#line 9252
+#line 9327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9253
+#line 9328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26131,28 +26302,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9255
+#line 9330
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9257
+#line 9332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9256
+#line 9331
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9258
+#line 9333
     [DIFFICULTY_NORMAL][TRAINER_8A829476] =
     {
-#line 9259
+#line 9334
         .trainerName = _("Blank"),
-#line 9260
+#line 9335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9261
+#line 9336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26160,28 +26331,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9263
+#line 9338
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9265
+#line 9340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9264
+#line 9339
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9266
+#line 9341
     [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
     {
-#line 9267
+#line 9342
         .trainerName = _("Blank"),
-#line 9268
+#line 9343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9269
+#line 9344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26189,28 +26360,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9271
+#line 9346
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9273
+#line 9348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9272
+#line 9347
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9274
+#line 9349
     [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
     {
-#line 9275
+#line 9350
         .trainerName = _("Blank"),
-#line 9276
+#line 9351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9277
+#line 9352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26218,28 +26389,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9279
+#line 9354
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9281
+#line 9356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9280
+#line 9355
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9282
+#line 9357
     [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
     {
-#line 9283
+#line 9358
         .trainerName = _("Blank"),
-#line 9284
+#line 9359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9285
+#line 9360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26247,28 +26418,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9287
+#line 9362
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9289
+#line 9364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9288
+#line 9363
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9290
+#line 9365
     [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
     {
-#line 9291
+#line 9366
         .trainerName = _("Blank"),
-#line 9292
+#line 9367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9293
+#line 9368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26276,28 +26447,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9295
+#line 9370
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9297
+#line 9372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9296
+#line 9371
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9298
+#line 9373
     [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
     {
-#line 9299
+#line 9374
         .trainerName = _("Blank"),
-#line 9300
+#line 9375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9301
+#line 9376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26305,28 +26476,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9303
+#line 9378
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9305
+#line 9380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9304
+#line 9379
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9306
+#line 9381
     [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
     {
-#line 9307
+#line 9382
         .trainerName = _("Blank"),
-#line 9308
+#line 9383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9309
+#line 9384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26334,28 +26505,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9311
+#line 9386
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9313
+#line 9388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9312
+#line 9387
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9314
+#line 9389
     [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
     {
-#line 9315
+#line 9390
         .trainerName = _("Blank"),
-#line 9316
+#line 9391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9317
+#line 9392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26363,28 +26534,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9319
+#line 9394
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9321
+#line 9396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9320
+#line 9395
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9322
+#line 9397
     [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
     {
-#line 9323
+#line 9398
         .trainerName = _("Blank"),
-#line 9324
+#line 9399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9325
+#line 9400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26392,28 +26563,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9327
+#line 9402
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9329
+#line 9404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9328
+#line 9403
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9330
+#line 9405
     [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
     {
-#line 9331
+#line 9406
         .trainerName = _("Blank"),
-#line 9332
+#line 9407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9333
+#line 9408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26421,28 +26592,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9335
+#line 9410
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9337
+#line 9412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9336
+#line 9411
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9338
+#line 9413
     [DIFFICULTY_NORMAL][TRAINER_8C853607] =
     {
-#line 9339
+#line 9414
         .trainerName = _("Blank"),
-#line 9340
+#line 9415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9341
+#line 9416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26450,28 +26621,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9343
+#line 9418
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9345
+#line 9420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9344
+#line 9419
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9346
+#line 9421
     [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
     {
-#line 9347
+#line 9422
         .trainerName = _("Blank"),
-#line 9348
+#line 9423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9349
+#line 9424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26479,28 +26650,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9351
+#line 9426
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9353
+#line 9428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9352
+#line 9427
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9354
+#line 9429
     [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
     {
-#line 9355
+#line 9430
         .trainerName = _("Blank"),
-#line 9356
+#line 9431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9357
+#line 9432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26508,28 +26679,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9359
+#line 9434
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9361
+#line 9436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9360
+#line 9435
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9362
+#line 9437
     [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
     {
-#line 9363
+#line 9438
         .trainerName = _("Blank"),
-#line 9364
+#line 9439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9365
+#line 9440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26537,28 +26708,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9367
+#line 9442
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9369
+#line 9444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9368
+#line 9443
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9370
+#line 9445
     [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
     {
-#line 9371
+#line 9446
         .trainerName = _("Blank"),
-#line 9372
+#line 9447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9373
+#line 9448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26566,28 +26737,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9375
+#line 9450
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9377
+#line 9452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9376
+#line 9451
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9378
+#line 9453
     [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
     {
-#line 9379
+#line 9454
         .trainerName = _("Blank"),
-#line 9380
+#line 9455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9381
+#line 9456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26595,28 +26766,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9383
+#line 9458
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9385
+#line 9460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9384
+#line 9459
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9386
+#line 9461
     [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
     {
-#line 9387
+#line 9462
         .trainerName = _("Blank"),
-#line 9388
+#line 9463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9389
+#line 9464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26624,28 +26795,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9391
+#line 9466
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9393
+#line 9468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9392
+#line 9467
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9394
+#line 9469
     [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
     {
-#line 9395
+#line 9470
         .trainerName = _("Blank"),
-#line 9396
+#line 9471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9397
+#line 9472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26653,28 +26824,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9399
+#line 9474
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9401
+#line 9476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9400
+#line 9475
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9402
+#line 9477
     [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
     {
-#line 9403
+#line 9478
         .trainerName = _("Blank"),
-#line 9404
+#line 9479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9405
+#line 9480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26682,28 +26853,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9407
+#line 9482
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9409
+#line 9484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9408
+#line 9483
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9410
+#line 9485
     [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
     {
-#line 9411
+#line 9486
         .trainerName = _("Blank"),
-#line 9412
+#line 9487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9413
+#line 9488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26711,28 +26882,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9415
+#line 9490
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9417
+#line 9492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9416
+#line 9491
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9418
+#line 9493
     [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
     {
-#line 9419
+#line 9494
         .trainerName = _("Blank"),
-#line 9420
+#line 9495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9421
+#line 9496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26740,28 +26911,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9423
+#line 9498
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9425
+#line 9500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9424
+#line 9499
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9426
+#line 9501
     [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
     {
-#line 9427
+#line 9502
         .trainerName = _("Blank"),
-#line 9428
+#line 9503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9429
+#line 9504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26769,28 +26940,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9431
+#line 9506
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9433
+#line 9508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9432
+#line 9507
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9434
+#line 9509
     [DIFFICULTY_NORMAL][TRAINER_8F988020] =
     {
-#line 9435
+#line 9510
         .trainerName = _("Blank"),
-#line 9436
+#line 9511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9437
+#line 9512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26798,28 +26969,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9439
+#line 9514
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9441
+#line 9516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9440
+#line 9515
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9442
+#line 9517
     [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
     {
-#line 9443
+#line 9518
         .trainerName = _("Blank"),
-#line 9444
+#line 9519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9445
+#line 9520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26827,28 +26998,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9447
+#line 9522
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9449
+#line 9524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9448
+#line 9523
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9450
+#line 9525
     [DIFFICULTY_NORMAL][TRAINER_90353D81] =
     {
-#line 9451
+#line 9526
         .trainerName = _("Blank"),
-#line 9452
+#line 9527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9453
+#line 9528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26856,28 +27027,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9455
+#line 9530
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9457
+#line 9532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9456
+#line 9531
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9458
+#line 9533
     [DIFFICULTY_NORMAL][TRAINER_9054973F] =
     {
-#line 9459
+#line 9534
         .trainerName = _("Blank"),
-#line 9460
+#line 9535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9461
+#line 9536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26885,28 +27056,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9463
+#line 9538
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9465
+#line 9540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9464
+#line 9539
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9466
+#line 9541
     [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
     {
-#line 9467
+#line 9542
         .trainerName = _("Blank"),
-#line 9468
+#line 9543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9469
+#line 9544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26914,28 +27085,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9471
+#line 9546
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9473
+#line 9548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9472
+#line 9547
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9474
+#line 9549
     [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
     {
-#line 9475
+#line 9550
         .trainerName = _("Blank"),
-#line 9476
+#line 9551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9477
+#line 9552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26943,28 +27114,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9479
+#line 9554
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9481
+#line 9556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9480
+#line 9555
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9482
+#line 9557
     [DIFFICULTY_NORMAL][TRAINER_918A1734] =
     {
-#line 9483
+#line 9558
         .trainerName = _("Blank"),
-#line 9484
+#line 9559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9485
+#line 9560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -26972,28 +27143,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9487
+#line 9562
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9489
+#line 9564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9488
+#line 9563
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9490
+#line 9565
     [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
     {
-#line 9491
+#line 9566
         .trainerName = _("Blank"),
-#line 9492
+#line 9567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9493
+#line 9568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27001,28 +27172,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9495
+#line 9570
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9497
+#line 9572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9496
+#line 9571
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9498
+#line 9573
     [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
     {
-#line 9499
+#line 9574
         .trainerName = _("Blank"),
-#line 9500
+#line 9575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9501
+#line 9576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27030,28 +27201,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9503
+#line 9578
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9505
+#line 9580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9504
+#line 9579
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9506
+#line 9581
     [DIFFICULTY_NORMAL][TRAINER_922542C3] =
     {
-#line 9507
+#line 9582
         .trainerName = _("Blank"),
-#line 9508
+#line 9583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9509
+#line 9584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27059,28 +27230,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9511
+#line 9586
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9513
+#line 9588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9512
+#line 9587
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9514
+#line 9589
     [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
     {
-#line 9515
+#line 9590
         .trainerName = _("Blank"),
-#line 9516
+#line 9591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9517
+#line 9592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27088,28 +27259,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9519
+#line 9594
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9521
+#line 9596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9520
+#line 9595
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9522
+#line 9597
     [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
     {
-#line 9523
+#line 9598
         .trainerName = _("Blank"),
-#line 9524
+#line 9599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9525
+#line 9600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27117,28 +27288,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9527
+#line 9602
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9529
+#line 9604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9528
+#line 9603
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9530
+#line 9605
     [DIFFICULTY_NORMAL][TRAINER_9427896B] =
     {
-#line 9531
+#line 9606
         .trainerName = _("Blank"),
-#line 9532
+#line 9607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9533
+#line 9608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27146,28 +27317,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9535
+#line 9610
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9537
+#line 9612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9536
+#line 9611
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9538
+#line 9613
     [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
     {
-#line 9539
+#line 9614
         .trainerName = _("Blank"),
-#line 9540
+#line 9615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9541
+#line 9616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27175,28 +27346,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9543
+#line 9618
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9545
+#line 9620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9544
+#line 9619
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9546
+#line 9621
     [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
     {
-#line 9547
+#line 9622
         .trainerName = _("Blank"),
-#line 9548
+#line 9623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9549
+#line 9624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27204,28 +27375,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9551
+#line 9626
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9553
+#line 9628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9552
+#line 9627
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9554
+#line 9629
     [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
     {
-#line 9555
+#line 9630
         .trainerName = _("Blank"),
-#line 9556
+#line 9631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9557
+#line 9632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27233,28 +27404,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9559
+#line 9634
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9561
+#line 9636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9560
+#line 9635
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9562
+#line 9637
     [DIFFICULTY_NORMAL][TRAINER_963F893A] =
     {
-#line 9563
+#line 9638
         .trainerName = _("Blank"),
-#line 9564
+#line 9639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9565
+#line 9640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27262,28 +27433,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9567
+#line 9642
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9569
+#line 9644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9568
+#line 9643
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9570
+#line 9645
     [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
     {
-#line 9571
+#line 9646
         .trainerName = _("Blank"),
-#line 9572
+#line 9647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9573
+#line 9648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27291,28 +27462,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9575
+#line 9650
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9577
+#line 9652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9576
+#line 9651
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9578
+#line 9653
     [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
     {
-#line 9579
+#line 9654
         .trainerName = _("Blank"),
-#line 9580
+#line 9655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9581
+#line 9656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27320,28 +27491,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9583
+#line 9658
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9585
+#line 9660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9584
+#line 9659
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9586
+#line 9661
     [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
     {
-#line 9587
+#line 9662
         .trainerName = _("Blank"),
-#line 9588
+#line 9663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9589
+#line 9664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27349,28 +27520,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9591
+#line 9666
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9593
+#line 9668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9592
+#line 9667
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9594
+#line 9669
     [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
     {
-#line 9595
+#line 9670
         .trainerName = _("Blank"),
-#line 9596
+#line 9671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9597
+#line 9672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27378,28 +27549,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9599
+#line 9674
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9601
+#line 9676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9600
+#line 9675
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9602
+#line 9677
     [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
     {
-#line 9603
+#line 9678
         .trainerName = _("Blank"),
-#line 9604
+#line 9679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9605
+#line 9680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27407,28 +27578,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9607
+#line 9682
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9609
+#line 9684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9608
+#line 9683
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9610
+#line 9685
     [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
     {
-#line 9611
+#line 9686
         .trainerName = _("Blank"),
-#line 9612
+#line 9687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9613
+#line 9688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27436,28 +27607,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9615
+#line 9690
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9617
+#line 9692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9616
+#line 9691
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9618
+#line 9693
     [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
     {
-#line 9619
+#line 9694
         .trainerName = _("Blank"),
-#line 9620
+#line 9695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9621
+#line 9696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27465,28 +27636,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9623
+#line 9698
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9625
+#line 9700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9624
+#line 9699
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9626
+#line 9701
     [DIFFICULTY_NORMAL][TRAINER_98547A36] =
     {
-#line 9627
+#line 9702
         .trainerName = _("Blank"),
-#line 9628
+#line 9703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9629
+#line 9704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27494,28 +27665,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9631
+#line 9706
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9633
+#line 9708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9632
+#line 9707
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9634
+#line 9709
     [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
     {
-#line 9635
+#line 9710
         .trainerName = _("Blank"),
-#line 9636
+#line 9711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9637
+#line 9712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27523,28 +27694,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9639
+#line 9714
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9641
+#line 9716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9640
+#line 9715
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9642
+#line 9717
     [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
     {
-#line 9643
+#line 9718
         .trainerName = _("Blank"),
-#line 9644
+#line 9719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9645
+#line 9720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27552,28 +27723,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9647
+#line 9722
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9649
+#line 9724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9648
+#line 9723
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9650
+#line 9725
     [DIFFICULTY_NORMAL][TRAINER_99D74322] =
     {
-#line 9651
+#line 9726
         .trainerName = _("Blank"),
-#line 9652
+#line 9727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9653
+#line 9728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27581,28 +27752,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9655
+#line 9730
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9657
+#line 9732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9656
+#line 9731
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9658
+#line 9733
     [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
     {
-#line 9659
+#line 9734
         .trainerName = _("Blank"),
-#line 9660
+#line 9735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9661
+#line 9736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27610,28 +27781,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9663
+#line 9738
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9665
+#line 9740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9664
+#line 9739
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9666
+#line 9741
     [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
     {
-#line 9667
+#line 9742
         .trainerName = _("Blank"),
-#line 9668
+#line 9743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9669
+#line 9744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27639,28 +27810,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9671
+#line 9746
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9673
+#line 9748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9672
+#line 9747
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9674
+#line 9749
     [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
     {
-#line 9675
+#line 9750
         .trainerName = _("Blank"),
-#line 9676
+#line 9751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9677
+#line 9752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27668,28 +27839,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9679
+#line 9754
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9681
+#line 9756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9680
+#line 9755
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9682
+#line 9757
     [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
     {
-#line 9683
+#line 9758
         .trainerName = _("Blank"),
-#line 9684
+#line 9759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9685
+#line 9760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27697,28 +27868,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9687
+#line 9762
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9689
+#line 9764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9688
+#line 9763
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9690
+#line 9765
     [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
     {
-#line 9691
+#line 9766
         .trainerName = _("Blank"),
-#line 9692
+#line 9767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9693
+#line 9768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27726,28 +27897,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9695
+#line 9770
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9697
+#line 9772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9696
+#line 9771
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9698
+#line 9773
     [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
     {
-#line 9699
+#line 9774
         .trainerName = _("Blank"),
-#line 9700
+#line 9775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9701
+#line 9776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27755,28 +27926,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9703
+#line 9778
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9705
+#line 9780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9704
+#line 9779
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9706
+#line 9781
     [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
     {
-#line 9707
+#line 9782
         .trainerName = _("Blank"),
-#line 9708
+#line 9783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9709
+#line 9784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27784,28 +27955,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9711
+#line 9786
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9713
+#line 9788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9712
+#line 9787
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9714
+#line 9789
     [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
     {
-#line 9715
+#line 9790
         .trainerName = _("Blank"),
-#line 9716
+#line 9791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9717
+#line 9792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27813,28 +27984,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9719
+#line 9794
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9721
+#line 9796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9720
+#line 9795
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9722
+#line 9797
     [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
     {
-#line 9723
+#line 9798
         .trainerName = _("Blank"),
-#line 9724
+#line 9799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9725
+#line 9800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27842,28 +28013,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9727
+#line 9802
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9729
+#line 9804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9728
+#line 9803
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9730
+#line 9805
     [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
     {
-#line 9731
+#line 9806
         .trainerName = _("Blank"),
-#line 9732
+#line 9807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9733
+#line 9808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27871,28 +28042,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9735
+#line 9810
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9737
+#line 9812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9736
+#line 9811
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9738
+#line 9813
     [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
     {
-#line 9739
+#line 9814
         .trainerName = _("Blank"),
-#line 9740
+#line 9815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9741
+#line 9816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27900,28 +28071,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9743
+#line 9818
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9745
+#line 9820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9744
+#line 9819
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9746
+#line 9821
     [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
     {
-#line 9747
+#line 9822
         .trainerName = _("Blank"),
-#line 9748
+#line 9823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9749
+#line 9824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27929,28 +28100,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9751
+#line 9826
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9753
+#line 9828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9752
+#line 9827
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9754
+#line 9829
     [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
     {
-#line 9755
+#line 9830
         .trainerName = _("Blank"),
-#line 9756
+#line 9831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9757
+#line 9832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27958,28 +28129,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9759
+#line 9834
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9761
+#line 9836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9760
+#line 9835
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9762
+#line 9837
     [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
     {
-#line 9763
+#line 9838
         .trainerName = _("Blank"),
-#line 9764
+#line 9839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9765
+#line 9840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -27987,28 +28158,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9767
+#line 9842
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9769
+#line 9844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9768
+#line 9843
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9770
+#line 9845
     [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
     {
-#line 9771
+#line 9846
         .trainerName = _("Blank"),
-#line 9772
+#line 9847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9773
+#line 9848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28016,28 +28187,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9775
+#line 9850
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9777
+#line 9852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9776
+#line 9851
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9778
+#line 9853
     [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
     {
-#line 9779
+#line 9854
         .trainerName = _("Blank"),
-#line 9780
+#line 9855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9781
+#line 9856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28045,28 +28216,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9783
+#line 9858
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9785
+#line 9860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9784
+#line 9859
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9786
+#line 9861
     [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
     {
-#line 9787
+#line 9862
         .trainerName = _("Blank"),
-#line 9788
+#line 9863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9789
+#line 9864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28074,28 +28245,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9791
+#line 9866
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9793
+#line 9868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9792
+#line 9867
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9794
+#line 9869
     [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
     {
-#line 9795
+#line 9870
         .trainerName = _("Blank"),
-#line 9796
+#line 9871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9797
+#line 9872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28103,28 +28274,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9799
+#line 9874
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9801
+#line 9876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9800
+#line 9875
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9802
+#line 9877
     [DIFFICULTY_NORMAL][TRAINER_A0852317] =
     {
-#line 9803
+#line 9878
         .trainerName = _("Blank"),
-#line 9804
+#line 9879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9805
+#line 9880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28132,28 +28303,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9807
+#line 9882
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9809
+#line 9884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9808
+#line 9883
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9810
+#line 9885
     [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
     {
-#line 9811
+#line 9886
         .trainerName = _("Blank"),
-#line 9812
+#line 9887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9813
+#line 9888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28161,28 +28332,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9815
+#line 9890
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9817
+#line 9892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9816
+#line 9891
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9818
+#line 9893
     [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
     {
-#line 9819
+#line 9894
         .trainerName = _("Blank"),
-#line 9820
+#line 9895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9821
+#line 9896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28190,28 +28361,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9823
+#line 9898
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9825
+#line 9900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9824
+#line 9899
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9826
+#line 9901
     [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
     {
-#line 9827
+#line 9902
         .trainerName = _("Blank"),
-#line 9828
+#line 9903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9829
+#line 9904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28219,28 +28390,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9831
+#line 9906
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9833
+#line 9908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9832
+#line 9907
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9834
+#line 9909
     [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
     {
-#line 9835
+#line 9910
         .trainerName = _("Blank"),
-#line 9836
+#line 9911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9837
+#line 9912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28248,28 +28419,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9839
+#line 9914
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9841
+#line 9916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9840
+#line 9915
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9842
+#line 9917
     [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
     {
-#line 9843
+#line 9918
         .trainerName = _("Blank"),
-#line 9844
+#line 9919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9845
+#line 9920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28277,28 +28448,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9847
+#line 9922
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9849
+#line 9924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9848
+#line 9923
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9850
+#line 9925
     [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
     {
-#line 9851
+#line 9926
         .trainerName = _("Blank"),
-#line 9852
+#line 9927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9853
+#line 9928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28306,28 +28477,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9855
+#line 9930
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9857
+#line 9932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9856
+#line 9931
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9858
+#line 9933
     [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
     {
-#line 9859
+#line 9934
         .trainerName = _("Blank"),
-#line 9860
+#line 9935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9861
+#line 9936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28335,28 +28506,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9863
+#line 9938
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9865
+#line 9940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9864
+#line 9939
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9866
+#line 9941
     [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
     {
-#line 9867
+#line 9942
         .trainerName = _("Blank"),
-#line 9868
+#line 9943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9869
+#line 9944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28364,28 +28535,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9871
+#line 9946
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9873
+#line 9948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9872
+#line 9947
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9874
+#line 9949
     [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
     {
-#line 9875
+#line 9950
         .trainerName = _("Blank"),
-#line 9876
+#line 9951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9877
+#line 9952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28393,28 +28564,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9879
+#line 9954
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9881
+#line 9956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9880
+#line 9955
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9882
+#line 9957
     [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
     {
-#line 9883
+#line 9958
         .trainerName = _("Blank"),
-#line 9884
+#line 9959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9885
+#line 9960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28422,28 +28593,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9887
+#line 9962
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9889
+#line 9964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9888
+#line 9963
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9890
+#line 9965
     [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
     {
-#line 9891
+#line 9966
         .trainerName = _("Blank"),
-#line 9892
+#line 9967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9893
+#line 9968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28451,28 +28622,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9895
+#line 9970
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9897
+#line 9972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9896
+#line 9971
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9898
+#line 9973
     [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
     {
-#line 9899
+#line 9974
         .trainerName = _("Blank"),
-#line 9900
+#line 9975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9901
+#line 9976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28480,28 +28651,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9903
+#line 9978
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9905
+#line 9980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9904
+#line 9979
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9906
+#line 9981
     [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
     {
-#line 9907
+#line 9982
         .trainerName = _("Blank"),
-#line 9908
+#line 9983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9909
+#line 9984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28509,28 +28680,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9911
+#line 9986
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9913
+#line 9988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9912
+#line 9987
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9914
+#line 9989
     [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
     {
-#line 9915
+#line 9990
         .trainerName = _("Blank"),
-#line 9916
+#line 9991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9917
+#line 9992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28538,28 +28709,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9919
+#line 9994
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9921
+#line 9996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9920
+#line 9995
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9922
+#line 9997
     [DIFFICULTY_NORMAL][TRAINER_A489434F] =
     {
-#line 9923
+#line 9998
         .trainerName = _("Blank"),
-#line 9924
+#line 9999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9925
+#line 10000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28567,28 +28738,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9927
+#line 10002
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9929
+#line 10004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9928
+#line 10003
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9930
+#line 10005
     [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
     {
-#line 9931
+#line 10006
         .trainerName = _("Blank"),
-#line 9932
+#line 10007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9933
+#line 10008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28596,28 +28767,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9935
+#line 10010
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9937
+#line 10012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9936
+#line 10011
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9938
+#line 10013
     [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
     {
-#line 9939
+#line 10014
         .trainerName = _("Blank"),
-#line 9940
+#line 10015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9941
+#line 10016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28625,28 +28796,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9943
+#line 10018
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9945
+#line 10020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9944
+#line 10019
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9946
+#line 10021
     [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
     {
-#line 9947
+#line 10022
         .trainerName = _("Blank"),
-#line 9948
+#line 10023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9949
+#line 10024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28654,28 +28825,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9951
+#line 10026
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9953
+#line 10028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9952
+#line 10027
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9954
+#line 10029
     [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
     {
-#line 9955
+#line 10030
         .trainerName = _("Blank"),
-#line 9956
+#line 10031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9957
+#line 10032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28683,28 +28854,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9959
+#line 10034
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9961
+#line 10036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9960
+#line 10035
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9962
+#line 10037
     [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
     {
-#line 9963
+#line 10038
         .trainerName = _("Blank"),
-#line 9964
+#line 10039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9965
+#line 10040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28712,28 +28883,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9967
+#line 10042
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9969
+#line 10044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9968
+#line 10043
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9970
+#line 10045
     [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
     {
-#line 9971
+#line 10046
         .trainerName = _("Blank"),
-#line 9972
+#line 10047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9973
+#line 10048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28741,28 +28912,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9975
+#line 10050
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9977
+#line 10052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9976
+#line 10051
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9978
+#line 10053
     [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
     {
-#line 9979
+#line 10054
         .trainerName = _("Blank"),
-#line 9980
+#line 10055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9981
+#line 10056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28770,28 +28941,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9983
+#line 10058
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9985
+#line 10060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9984
+#line 10059
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9986
+#line 10061
     [DIFFICULTY_NORMAL][TRAINER_A6328173] =
     {
-#line 9987
+#line 10062
         .trainerName = _("Blank"),
-#line 9988
+#line 10063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9989
+#line 10064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28799,28 +28970,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9991
+#line 10066
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9993
+#line 10068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9992
+#line 10067
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 9994
+#line 10069
     [DIFFICULTY_NORMAL][TRAINER_A646F21E] =
     {
-#line 9995
+#line 10070
         .trainerName = _("Blank"),
-#line 9996
+#line 10071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 9997
+#line 10072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28828,28 +28999,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9999
+#line 10074
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10001
+#line 10076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10000
+#line 10075
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10002
+#line 10077
     [DIFFICULTY_NORMAL][TRAINER_A685428F] =
     {
-#line 10003
+#line 10078
         .trainerName = _("Blank"),
-#line 10004
+#line 10079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10005
+#line 10080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28857,28 +29028,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10007
+#line 10082
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10009
+#line 10084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10008
+#line 10083
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10010
+#line 10085
     [DIFFICULTY_NORMAL][TRAINER_A686809A] =
     {
-#line 10011
+#line 10086
         .trainerName = _("Blank"),
-#line 10012
+#line 10087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10013
+#line 10088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28886,28 +29057,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10015
+#line 10090
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10017
+#line 10092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10016
+#line 10091
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10018
+#line 10093
     [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
     {
-#line 10019
+#line 10094
         .trainerName = _("Blank"),
-#line 10020
+#line 10095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10021
+#line 10096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28915,28 +29086,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10023
+#line 10098
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10025
+#line 10100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10024
+#line 10099
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10026
+#line 10101
     [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
     {
-#line 10027
+#line 10102
         .trainerName = _("Blank"),
-#line 10028
+#line 10103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10029
+#line 10104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28944,28 +29115,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10031
+#line 10106
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10033
+#line 10108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10032
+#line 10107
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10034
+#line 10109
     [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
     {
-#line 10035
+#line 10110
         .trainerName = _("Blank"),
-#line 10036
+#line 10111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10037
+#line 10112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -28973,28 +29144,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10039
+#line 10114
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10041
+#line 10116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10040
+#line 10115
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10042
+#line 10117
     [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
     {
-#line 10043
+#line 10118
         .trainerName = _("Blank"),
-#line 10044
+#line 10119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10045
+#line 10120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29002,28 +29173,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10047
+#line 10122
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10049
+#line 10124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10048
+#line 10123
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10050
+#line 10125
     [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
     {
-#line 10051
+#line 10126
         .trainerName = _("Blank"),
-#line 10052
+#line 10127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10053
+#line 10128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29031,28 +29202,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10055
+#line 10130
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10057
+#line 10132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10056
+#line 10131
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10058
+#line 10133
     [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
     {
-#line 10059
+#line 10134
         .trainerName = _("Blank"),
-#line 10060
+#line 10135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10061
+#line 10136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29060,28 +29231,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10063
+#line 10138
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10065
+#line 10140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10064
+#line 10139
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10066
+#line 10141
     [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
     {
-#line 10067
+#line 10142
         .trainerName = _("Blank"),
-#line 10068
+#line 10143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10069
+#line 10144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29089,28 +29260,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10071
+#line 10146
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10073
+#line 10148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10072
+#line 10147
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10074
+#line 10149
     [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
     {
-#line 10075
+#line 10150
         .trainerName = _("Blank"),
-#line 10076
+#line 10151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10077
+#line 10152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29118,28 +29289,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10079
+#line 10154
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10081
+#line 10156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10080
+#line 10155
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10082
+#line 10157
     [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
     {
-#line 10083
+#line 10158
         .trainerName = _("Blank"),
-#line 10084
+#line 10159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10085
+#line 10160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29147,28 +29318,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10087
+#line 10162
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10089
+#line 10164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10088
+#line 10163
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10090
+#line 10165
     [DIFFICULTY_NORMAL][TRAINER_A8413608] =
     {
-#line 10091
+#line 10166
         .trainerName = _("Blank"),
-#line 10092
+#line 10167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10093
+#line 10168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29176,28 +29347,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10095
+#line 10170
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10097
+#line 10172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10096
+#line 10171
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10098
+#line 10173
     [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
     {
-#line 10099
+#line 10174
         .trainerName = _("Blank"),
-#line 10100
+#line 10175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10101
+#line 10176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29205,28 +29376,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10103
+#line 10178
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10105
+#line 10180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10104
+#line 10179
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10106
+#line 10181
     [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
     {
-#line 10107
+#line 10182
         .trainerName = _("Blank"),
-#line 10108
+#line 10183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10109
+#line 10184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29234,28 +29405,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10111
+#line 10186
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10113
+#line 10188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10112
+#line 10187
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10114
+#line 10189
     [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
     {
-#line 10115
+#line 10190
         .trainerName = _("Blank"),
-#line 10116
+#line 10191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10117
+#line 10192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29263,28 +29434,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10119
+#line 10194
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10121
+#line 10196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10120
+#line 10195
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10122
+#line 10197
     [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
     {
-#line 10123
+#line 10198
         .trainerName = _("Blank"),
-#line 10124
+#line 10199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10125
+#line 10200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29292,28 +29463,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10127
+#line 10202
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10129
+#line 10204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10128
+#line 10203
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10130
+#line 10205
     [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
     {
-#line 10131
+#line 10206
         .trainerName = _("Blank"),
-#line 10132
+#line 10207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10133
+#line 10208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29321,28 +29492,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10135
+#line 10210
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10137
+#line 10212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10136
+#line 10211
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10138
+#line 10213
     [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
     {
-#line 10139
+#line 10214
         .trainerName = _("Blank"),
-#line 10140
+#line 10215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10141
+#line 10216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29350,28 +29521,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10143
+#line 10218
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10145
+#line 10220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10144
+#line 10219
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10146
+#line 10221
     [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
     {
-#line 10147
+#line 10222
         .trainerName = _("Blank"),
-#line 10148
+#line 10223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10149
+#line 10224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29379,28 +29550,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10151
+#line 10226
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10153
+#line 10228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10152
+#line 10227
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10154
+#line 10229
     [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
     {
-#line 10155
+#line 10230
         .trainerName = _("Blank"),
-#line 10156
+#line 10231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10157
+#line 10232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29408,28 +29579,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10159
+#line 10234
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10161
+#line 10236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10160
+#line 10235
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10162
+#line 10237
     [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
     {
-#line 10163
+#line 10238
         .trainerName = _("Blank"),
-#line 10164
+#line 10239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10165
+#line 10240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29437,28 +29608,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10167
+#line 10242
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10169
+#line 10244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10168
+#line 10243
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10170
+#line 10245
     [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
     {
-#line 10171
+#line 10246
         .trainerName = _("Blank"),
-#line 10172
+#line 10247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10173
+#line 10248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29466,28 +29637,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10175
+#line 10250
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10177
+#line 10252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10176
+#line 10251
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10178
+#line 10253
     [DIFFICULTY_NORMAL][TRAINER_AC004835] =
     {
-#line 10179
+#line 10254
         .trainerName = _("Blank"),
-#line 10180
+#line 10255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10181
+#line 10256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29495,28 +29666,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10183
+#line 10258
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10185
+#line 10260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10184
+#line 10259
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10186
+#line 10261
     [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
     {
-#line 10187
+#line 10262
         .trainerName = _("Blank"),
-#line 10188
+#line 10263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10189
+#line 10264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29524,28 +29695,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10191
+#line 10266
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10193
+#line 10268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10192
+#line 10267
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10194
+#line 10269
     [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
     {
-#line 10195
+#line 10270
         .trainerName = _("Blank"),
-#line 10196
+#line 10271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10197
+#line 10272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29553,28 +29724,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10199
+#line 10274
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10201
+#line 10276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10200
+#line 10275
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10202
+#line 10277
     [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
     {
-#line 10203
+#line 10278
         .trainerName = _("Blank"),
-#line 10204
+#line 10279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10205
+#line 10280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29582,28 +29753,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10207
+#line 10282
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10209
+#line 10284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10208
+#line 10283
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10210
+#line 10285
     [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
     {
-#line 10211
+#line 10286
         .trainerName = _("Blank"),
-#line 10212
+#line 10287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10213
+#line 10288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29611,28 +29782,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10215
+#line 10290
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10217
+#line 10292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10216
+#line 10291
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10218
+#line 10293
     [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
     {
-#line 10219
+#line 10294
         .trainerName = _("Blank"),
-#line 10220
+#line 10295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10221
+#line 10296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29640,28 +29811,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10223
+#line 10298
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10225
+#line 10300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10224
+#line 10299
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10226
+#line 10301
     [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
     {
-#line 10227
+#line 10302
         .trainerName = _("Blank"),
-#line 10228
+#line 10303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10229
+#line 10304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29669,28 +29840,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10231
+#line 10306
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10233
+#line 10308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10232
+#line 10307
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10234
+#line 10309
     [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
     {
-#line 10235
+#line 10310
         .trainerName = _("Blank"),
-#line 10236
+#line 10311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10237
+#line 10312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29698,28 +29869,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10239
+#line 10314
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10241
+#line 10316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10240
+#line 10315
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10242
+#line 10317
     [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
     {
-#line 10243
+#line 10318
         .trainerName = _("Blank"),
-#line 10244
+#line 10319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10245
+#line 10320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29727,28 +29898,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10247
+#line 10322
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10249
+#line 10324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10248
+#line 10323
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10250
+#line 10325
     [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
     {
-#line 10251
+#line 10326
         .trainerName = _("Blank"),
-#line 10252
+#line 10327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10253
+#line 10328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29756,28 +29927,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10255
+#line 10330
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10257
+#line 10332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10256
+#line 10331
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10258
+#line 10333
     [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
     {
-#line 10259
+#line 10334
         .trainerName = _("Blank"),
-#line 10260
+#line 10335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10261
+#line 10336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29785,28 +29956,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10263
+#line 10338
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10265
+#line 10340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10264
+#line 10339
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10266
+#line 10341
     [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
     {
-#line 10267
+#line 10342
         .trainerName = _("Blank"),
-#line 10268
+#line 10343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10269
+#line 10344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29814,28 +29985,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10271
+#line 10346
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10273
+#line 10348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10272
+#line 10347
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10274
+#line 10349
     [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
     {
-#line 10275
+#line 10350
         .trainerName = _("Blank"),
-#line 10276
+#line 10351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10277
+#line 10352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29843,28 +30014,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10279
+#line 10354
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10281
+#line 10356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10280
+#line 10355
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10282
+#line 10357
     [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
     {
-#line 10283
+#line 10358
         .trainerName = _("Blank"),
-#line 10284
+#line 10359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10285
+#line 10360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29872,28 +30043,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10287
+#line 10362
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10289
+#line 10364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10288
+#line 10363
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10290
+#line 10365
     [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
     {
-#line 10291
+#line 10366
         .trainerName = _("Blank"),
-#line 10292
+#line 10367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10293
+#line 10368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29901,28 +30072,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10295
+#line 10370
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10297
+#line 10372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10296
+#line 10371
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10298
+#line 10373
     [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
     {
-#line 10299
+#line 10374
         .trainerName = _("Blank"),
-#line 10300
+#line 10375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10301
+#line 10376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29930,28 +30101,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10303
+#line 10378
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10305
+#line 10380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10304
+#line 10379
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10306
+#line 10381
     [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
     {
-#line 10307
+#line 10382
         .trainerName = _("Blank"),
-#line 10308
+#line 10383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10309
+#line 10384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29959,28 +30130,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10311
+#line 10386
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10313
+#line 10388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10312
+#line 10387
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10314
+#line 10389
     [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
     {
-#line 10315
+#line 10390
         .trainerName = _("Blank"),
-#line 10316
+#line 10391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10317
+#line 10392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -29988,28 +30159,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10319
+#line 10394
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10321
+#line 10396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10320
+#line 10395
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10322
+#line 10397
     [DIFFICULTY_NORMAL][TRAINER_B0FC622D] =
     {
-#line 10323
+#line 10398
         .trainerName = _("Blank"),
-#line 10324
+#line 10399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10325
+#line 10400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30017,28 +30188,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10327
+#line 10402
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10329
+#line 10404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10328
+#line 10403
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10330
+#line 10405
     [DIFFICULTY_NORMAL][TRAINER_B1DA7383] =
     {
-#line 10331
+#line 10406
         .trainerName = _("Blank"),
-#line 10332
+#line 10407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10333
+#line 10408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30046,28 +30217,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10335
+#line 10410
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10337
+#line 10412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10336
+#line 10411
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10338
+#line 10413
     [DIFFICULTY_NORMAL][TRAINER_B253DEF2] =
     {
-#line 10339
+#line 10414
         .trainerName = _("Blank"),
-#line 10340
+#line 10415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10341
+#line 10416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30075,28 +30246,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10343
+#line 10418
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10345
+#line 10420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10344
+#line 10419
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10346
+#line 10421
     [DIFFICULTY_NORMAL][TRAINER_B2925134] =
     {
-#line 10347
+#line 10422
         .trainerName = _("Blank"),
-#line 10348
+#line 10423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10349
+#line 10424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30104,28 +30275,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10351
+#line 10426
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10353
+#line 10428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10352
+#line 10427
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10354
+#line 10429
     [DIFFICULTY_NORMAL][TRAINER_B2A5CB2B] =
     {
-#line 10355
+#line 10430
         .trainerName = _("Blank"),
-#line 10356
+#line 10431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10357
+#line 10432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30133,28 +30304,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10359
+#line 10434
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10361
+#line 10436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10360
+#line 10435
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10362
+#line 10437
     [DIFFICULTY_NORMAL][TRAINER_B32A1E98] =
     {
-#line 10363
+#line 10438
         .trainerName = _("Blank"),
-#line 10364
+#line 10439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10365
+#line 10440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30162,28 +30333,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10367
+#line 10442
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10369
+#line 10444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10368
+#line 10443
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10370
+#line 10445
     [DIFFICULTY_NORMAL][TRAINER_B3B1644E] =
     {
-#line 10371
+#line 10446
         .trainerName = _("Blank"),
-#line 10372
+#line 10447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10373
+#line 10448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30191,28 +30362,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10375
+#line 10450
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10377
+#line 10452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10376
+#line 10451
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10378
+#line 10453
     [DIFFICULTY_NORMAL][TRAINER_B3CE95A4] =
     {
-#line 10379
+#line 10454
         .trainerName = _("Blank"),
-#line 10380
+#line 10455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10381
+#line 10456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30220,28 +30391,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10383
+#line 10458
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10385
+#line 10460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10384
+#line 10459
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10386
+#line 10461
     [DIFFICULTY_NORMAL][TRAINER_B3FB2F4B] =
     {
-#line 10387
+#line 10462
         .trainerName = _("Blank"),
-#line 10388
+#line 10463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10389
+#line 10464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30249,28 +30420,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10391
+#line 10466
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10393
+#line 10468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10392
+#line 10467
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10394
+#line 10469
     [DIFFICULTY_NORMAL][TRAINER_B42E7E27] =
     {
-#line 10395
+#line 10470
         .trainerName = _("Blank"),
-#line 10396
+#line 10471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10397
+#line 10472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30278,28 +30449,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10399
+#line 10474
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10401
+#line 10476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10400
+#line 10475
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10402
+#line 10477
     [DIFFICULTY_NORMAL][TRAINER_B42F5023] =
     {
-#line 10403
+#line 10478
         .trainerName = _("Blank"),
-#line 10404
+#line 10479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10405
+#line 10480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30307,28 +30478,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10407
+#line 10482
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10409
+#line 10484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10408
+#line 10483
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10410
+#line 10485
     [DIFFICULTY_NORMAL][TRAINER_B435B7EF] =
     {
-#line 10411
+#line 10486
         .trainerName = _("Blank"),
-#line 10412
+#line 10487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10413
+#line 10488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30336,28 +30507,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10415
+#line 10490
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10417
+#line 10492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10416
+#line 10491
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10418
+#line 10493
     [DIFFICULTY_NORMAL][TRAINER_B438F348] =
     {
-#line 10419
+#line 10494
         .trainerName = _("Blank"),
-#line 10420
+#line 10495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10421
+#line 10496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30365,28 +30536,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10423
+#line 10498
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10425
+#line 10500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10424
+#line 10499
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10426
+#line 10501
     [DIFFICULTY_NORMAL][TRAINER_B489F821] =
     {
-#line 10427
+#line 10502
         .trainerName = _("Blank"),
-#line 10428
+#line 10503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10429
+#line 10504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30394,28 +30565,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10431
+#line 10506
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10433
+#line 10508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10432
+#line 10507
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10434
+#line 10509
     [DIFFICULTY_NORMAL][TRAINER_B490300F] =
     {
-#line 10435
+#line 10510
         .trainerName = _("Blank"),
-#line 10436
+#line 10511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10437
+#line 10512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30423,28 +30594,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10439
+#line 10514
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10441
+#line 10516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10440
+#line 10515
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10442
+#line 10517
     [DIFFICULTY_NORMAL][TRAINER_B53E1C28] =
     {
-#line 10443
+#line 10518
         .trainerName = _("Blank"),
-#line 10444
+#line 10519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10445
+#line 10520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30452,28 +30623,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10447
+#line 10522
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10449
+#line 10524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10448
+#line 10523
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10450
+#line 10525
     [DIFFICULTY_NORMAL][TRAINER_B5E055E7] =
     {
-#line 10451
+#line 10526
         .trainerName = _("Blank"),
-#line 10452
+#line 10527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10453
+#line 10528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30481,28 +30652,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10455
+#line 10530
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10457
+#line 10532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10456
+#line 10531
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10458
+#line 10533
     [DIFFICULTY_NORMAL][TRAINER_B6330B06] =
     {
-#line 10459
+#line 10534
         .trainerName = _("Blank"),
-#line 10460
+#line 10535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10461
+#line 10536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30510,28 +30681,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10463
+#line 10538
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10465
+#line 10540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10464
+#line 10539
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10466
+#line 10541
     [DIFFICULTY_NORMAL][TRAINER_B66CAB9E] =
     {
-#line 10467
+#line 10542
         .trainerName = _("Blank"),
-#line 10468
+#line 10543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10469
+#line 10544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30539,28 +30710,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10471
+#line 10546
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10473
+#line 10548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10472
+#line 10547
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10474
+#line 10549
     [DIFFICULTY_NORMAL][TRAINER_B6E3D521] =
     {
-#line 10475
+#line 10550
         .trainerName = _("Blank"),
-#line 10476
+#line 10551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10477
+#line 10552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30568,28 +30739,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10479
+#line 10554
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10481
+#line 10556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10480
+#line 10555
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10482
+#line 10557
     [DIFFICULTY_NORMAL][TRAINER_B6F23A27] =
     {
-#line 10483
+#line 10558
         .trainerName = _("Blank"),
-#line 10484
+#line 10559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10485
+#line 10560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30597,28 +30768,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10487
+#line 10562
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10489
+#line 10564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10488
+#line 10563
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10490
+#line 10565
     [DIFFICULTY_NORMAL][TRAINER_B71419A1] =
     {
-#line 10491
+#line 10566
         .trainerName = _("Blank"),
-#line 10492
+#line 10567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10493
+#line 10568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30626,28 +30797,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10495
+#line 10570
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10497
+#line 10572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10496
+#line 10571
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10498
+#line 10573
     [DIFFICULTY_NORMAL][TRAINER_B77C014B] =
     {
-#line 10499
+#line 10574
         .trainerName = _("Blank"),
-#line 10500
+#line 10575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10501
+#line 10576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30655,28 +30826,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10503
+#line 10578
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10505
+#line 10580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10504
+#line 10579
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10506
+#line 10581
     [DIFFICULTY_NORMAL][TRAINER_B791766D] =
     {
-#line 10507
+#line 10582
         .trainerName = _("Blank"),
-#line 10508
+#line 10583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10509
+#line 10584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30684,28 +30855,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10511
+#line 10586
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10513
+#line 10588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10512
+#line 10587
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10514
+#line 10589
     [DIFFICULTY_NORMAL][TRAINER_B7998A66] =
     {
-#line 10515
+#line 10590
         .trainerName = _("Blank"),
-#line 10516
+#line 10591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10517
+#line 10592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30713,28 +30884,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10519
+#line 10594
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10521
+#line 10596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10520
+#line 10595
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10522
+#line 10597
     [DIFFICULTY_NORMAL][TRAINER_B7C2EB7F] =
     {
-#line 10523
+#line 10598
         .trainerName = _("Blank"),
-#line 10524
+#line 10599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10525
+#line 10600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30742,28 +30913,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10527
+#line 10602
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10529
+#line 10604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10528
+#line 10603
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10530
+#line 10605
     [DIFFICULTY_NORMAL][TRAINER_B7EFEE71] =
     {
-#line 10531
+#line 10606
         .trainerName = _("Blank"),
-#line 10532
+#line 10607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10533
+#line 10608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30771,28 +30942,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10535
+#line 10610
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10537
+#line 10612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10536
+#line 10611
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10538
+#line 10613
     [DIFFICULTY_NORMAL][TRAINER_B84B3D2A] =
     {
-#line 10539
+#line 10614
         .trainerName = _("Blank"),
-#line 10540
+#line 10615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10541
+#line 10616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30800,28 +30971,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10543
+#line 10618
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10545
+#line 10620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10544
+#line 10619
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10546
+#line 10621
     [DIFFICULTY_NORMAL][TRAINER_B8C5628C] =
     {
-#line 10547
+#line 10622
         .trainerName = _("Blank"),
-#line 10548
+#line 10623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10549
+#line 10624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30829,28 +31000,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10551
+#line 10626
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10553
+#line 10628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10552
+#line 10627
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10554
+#line 10629
     [DIFFICULTY_NORMAL][TRAINER_B94D66E3] =
     {
-#line 10555
+#line 10630
         .trainerName = _("Blank"),
-#line 10556
+#line 10631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10557
+#line 10632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30858,28 +31029,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10559
+#line 10634
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10561
+#line 10636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10560
+#line 10635
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10562
+#line 10637
     [DIFFICULTY_NORMAL][TRAINER_B9C56D15] =
     {
-#line 10563
+#line 10638
         .trainerName = _("Blank"),
-#line 10564
+#line 10639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10565
+#line 10640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30887,28 +31058,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10567
+#line 10642
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10569
+#line 10644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10568
+#line 10643
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10570
+#line 10645
     [DIFFICULTY_NORMAL][TRAINER_BA12D98F] =
     {
-#line 10571
+#line 10646
         .trainerName = _("Blank"),
-#line 10572
+#line 10647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10573
+#line 10648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30916,28 +31087,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10575
+#line 10650
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10577
+#line 10652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10576
+#line 10651
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10578
+#line 10653
     [DIFFICULTY_NORMAL][TRAINER_BA4155D3] =
     {
-#line 10579
+#line 10654
         .trainerName = _("Blank"),
-#line 10580
+#line 10655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10581
+#line 10656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30945,28 +31116,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10583
+#line 10658
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10585
+#line 10660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10584
+#line 10659
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10586
+#line 10661
     [DIFFICULTY_NORMAL][TRAINER_BA4DFC3A] =
     {
-#line 10587
+#line 10662
         .trainerName = _("Blank"),
-#line 10588
+#line 10663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10589
+#line 10664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -30974,28 +31145,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10591
+#line 10666
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10593
+#line 10668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10592
+#line 10667
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10594
+#line 10669
     [DIFFICULTY_NORMAL][TRAINER_BA60011F] =
     {
-#line 10595
+#line 10670
         .trainerName = _("Blank"),
-#line 10596
+#line 10671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10597
+#line 10672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31003,28 +31174,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10599
+#line 10674
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10601
+#line 10676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10600
+#line 10675
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10602
+#line 10677
     [DIFFICULTY_NORMAL][TRAINER_BA924FF7] =
     {
-#line 10603
+#line 10678
         .trainerName = _("Blank"),
-#line 10604
+#line 10679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10605
+#line 10680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31032,28 +31203,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10607
+#line 10682
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10609
+#line 10684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10608
+#line 10683
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10610
+#line 10685
     [DIFFICULTY_NORMAL][TRAINER_BB07DD1B] =
     {
-#line 10611
+#line 10686
         .trainerName = _("Blank"),
-#line 10612
+#line 10687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10613
+#line 10688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31061,28 +31232,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10615
+#line 10690
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10617
+#line 10692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10616
+#line 10691
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10618
+#line 10693
     [DIFFICULTY_NORMAL][TRAINER_BB531FBA] =
     {
-#line 10619
+#line 10694
         .trainerName = _("Blank"),
-#line 10620
+#line 10695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10621
+#line 10696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31090,28 +31261,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10623
+#line 10698
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10625
+#line 10700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10624
+#line 10699
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10626
+#line 10701
     [DIFFICULTY_NORMAL][TRAINER_BB6FD0A4] =
     {
-#line 10627
+#line 10702
         .trainerName = _("Blank"),
-#line 10628
+#line 10703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10629
+#line 10704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31119,28 +31290,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10631
+#line 10706
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10633
+#line 10708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10632
+#line 10707
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10634
+#line 10709
     [DIFFICULTY_NORMAL][TRAINER_BBBC4B4C] =
     {
-#line 10635
+#line 10710
         .trainerName = _("Blank"),
-#line 10636
+#line 10711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10637
+#line 10712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31148,28 +31319,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10639
+#line 10714
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10641
+#line 10716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10640
+#line 10715
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10642
+#line 10717
     [DIFFICULTY_NORMAL][TRAINER_BBD56E26] =
     {
-#line 10643
+#line 10718
         .trainerName = _("Blank"),
-#line 10644
+#line 10719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10645
+#line 10720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31177,28 +31348,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10647
+#line 10722
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10649
+#line 10724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10648
+#line 10723
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10650
+#line 10725
     [DIFFICULTY_NORMAL][TRAINER_BC01A85B] =
     {
-#line 10651
+#line 10726
         .trainerName = _("Blank"),
-#line 10652
+#line 10727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10653
+#line 10728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31206,28 +31377,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10655
+#line 10730
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10657
+#line 10732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10656
+#line 10731
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10658
+#line 10733
     [DIFFICULTY_NORMAL][TRAINER_BC74FA1D] =
     {
-#line 10659
+#line 10734
         .trainerName = _("Blank"),
-#line 10660
+#line 10735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10661
+#line 10736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31235,28 +31406,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10663
+#line 10738
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10665
+#line 10740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10664
+#line 10739
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10666
+#line 10741
     [DIFFICULTY_NORMAL][TRAINER_BC7E8D55] =
     {
-#line 10667
+#line 10742
         .trainerName = _("Blank"),
-#line 10668
+#line 10743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10669
+#line 10744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31264,28 +31435,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10671
+#line 10746
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10673
+#line 10748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10672
+#line 10747
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10674
+#line 10749
     [DIFFICULTY_NORMAL][TRAINER_BCDFD312] =
     {
-#line 10675
+#line 10750
         .trainerName = _("Blank"),
-#line 10676
+#line 10751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10677
+#line 10752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31293,28 +31464,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10679
+#line 10754
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10681
+#line 10756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10680
+#line 10755
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10682
+#line 10757
     [DIFFICULTY_NORMAL][TRAINER_BCEFD799] =
     {
-#line 10683
+#line 10758
         .trainerName = _("Blank"),
-#line 10684
+#line 10759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10685
+#line 10760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31322,28 +31493,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10687
+#line 10762
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10689
+#line 10764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10688
+#line 10763
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10690
+#line 10765
     [DIFFICULTY_NORMAL][TRAINER_BD01F8F4] =
     {
-#line 10691
+#line 10766
         .trainerName = _("Blank"),
-#line 10692
+#line 10767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10693
+#line 10768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31351,28 +31522,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10695
+#line 10770
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10697
+#line 10772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10696
+#line 10771
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10698
+#line 10773
     [DIFFICULTY_NORMAL][TRAINER_BDC38E1E] =
     {
-#line 10699
+#line 10774
         .trainerName = _("Blank"),
-#line 10700
+#line 10775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10701
+#line 10776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31380,28 +31551,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10703
+#line 10778
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10705
+#line 10780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10704
+#line 10779
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10706
+#line 10781
     [DIFFICULTY_NORMAL][TRAINER_BE2AF14F] =
     {
-#line 10707
+#line 10782
         .trainerName = _("Blank"),
-#line 10708
+#line 10783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10709
+#line 10784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31409,28 +31580,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10711
+#line 10786
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10713
+#line 10788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10712
+#line 10787
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10714
+#line 10789
     [DIFFICULTY_NORMAL][TRAINER_BEB2BD3E] =
     {
-#line 10715
+#line 10790
         .trainerName = _("Blank"),
-#line 10716
+#line 10791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10717
+#line 10792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31438,28 +31609,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10719
+#line 10794
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10721
+#line 10796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10720
+#line 10795
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10722
+#line 10797
     [DIFFICULTY_NORMAL][TRAINER_BF07B94F] =
     {
-#line 10723
+#line 10798
         .trainerName = _("Blank"),
-#line 10724
+#line 10799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10725
+#line 10800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31467,28 +31638,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10727
+#line 10802
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10729
+#line 10804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10728
+#line 10803
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10730
+#line 10805
     [DIFFICULTY_NORMAL][TRAINER_BF2827C0] =
     {
-#line 10731
+#line 10806
         .trainerName = _("Blank"),
-#line 10732
+#line 10807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10733
+#line 10808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31496,28 +31667,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10735
+#line 10810
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10737
+#line 10812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10736
+#line 10811
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10738
+#line 10813
     [DIFFICULTY_NORMAL][TRAINER_BF74896F] =
     {
-#line 10739
+#line 10814
         .trainerName = _("Blank"),
-#line 10740
+#line 10815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10741
+#line 10816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31525,28 +31696,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10743
+#line 10818
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10745
+#line 10820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10744
+#line 10819
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10746
+#line 10821
     [DIFFICULTY_NORMAL][TRAINER_BF8ADEF1] =
     {
-#line 10747
+#line 10822
         .trainerName = _("Blank"),
-#line 10748
+#line 10823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10749
+#line 10824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31554,28 +31725,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10751
+#line 10826
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10753
+#line 10828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10752
+#line 10827
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10754
+#line 10829
     [DIFFICULTY_NORMAL][TRAINER_C0800804] =
     {
-#line 10755
+#line 10830
         .trainerName = _("Blank"),
-#line 10756
+#line 10831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10757
+#line 10832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31583,28 +31754,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10759
+#line 10834
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10761
+#line 10836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10760
+#line 10835
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10762
+#line 10837
     [DIFFICULTY_NORMAL][TRAINER_C091F2C5] =
     {
-#line 10763
+#line 10838
         .trainerName = _("Blank"),
-#line 10764
+#line 10839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10765
+#line 10840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31612,28 +31783,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10767
+#line 10842
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10769
+#line 10844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10768
+#line 10843
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10770
+#line 10845
     [DIFFICULTY_NORMAL][TRAINER_C10351D2] =
     {
-#line 10771
+#line 10846
         .trainerName = _("Blank"),
-#line 10772
+#line 10847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10773
+#line 10848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31641,28 +31812,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10775
+#line 10850
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10777
+#line 10852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10776
+#line 10851
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10778
+#line 10853
     [DIFFICULTY_NORMAL][TRAINER_C1C428F7] =
     {
-#line 10779
+#line 10854
         .trainerName = _("Blank"),
-#line 10780
+#line 10855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10781
+#line 10856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31670,28 +31841,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10783
+#line 10858
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10785
+#line 10860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10784
+#line 10859
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10786
+#line 10861
     [DIFFICULTY_NORMAL][TRAINER_C1C621AC] =
     {
-#line 10787
+#line 10862
         .trainerName = _("Blank"),
-#line 10788
+#line 10863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10789
+#line 10864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31699,28 +31870,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10791
+#line 10866
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10793
+#line 10868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10792
+#line 10867
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10794
+#line 10869
     [DIFFICULTY_NORMAL][TRAINER_C203C024] =
     {
-#line 10795
+#line 10870
         .trainerName = _("Blank"),
-#line 10796
+#line 10871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10797
+#line 10872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31728,28 +31899,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10799
+#line 10874
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10801
+#line 10876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10800
+#line 10875
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10802
+#line 10877
     [DIFFICULTY_NORMAL][TRAINER_C2174D90] =
     {
-#line 10803
+#line 10878
         .trainerName = _("Blank"),
-#line 10804
+#line 10879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10805
+#line 10880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31757,28 +31928,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10807
+#line 10882
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10809
+#line 10884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10808
+#line 10883
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10810
+#line 10885
     [DIFFICULTY_NORMAL][TRAINER_C24EFC92] =
     {
-#line 10811
+#line 10886
         .trainerName = _("Blank"),
-#line 10812
+#line 10887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10813
+#line 10888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31786,28 +31957,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10815
+#line 10890
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10817
+#line 10892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10816
+#line 10891
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10818
+#line 10893
     [DIFFICULTY_NORMAL][TRAINER_C290C9F5] =
     {
-#line 10819
+#line 10894
         .trainerName = _("Blank"),
-#line 10820
+#line 10895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10821
+#line 10896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31815,28 +31986,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10823
+#line 10898
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10825
+#line 10900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10824
+#line 10899
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10826
+#line 10901
     [DIFFICULTY_NORMAL][TRAINER_C29CDC34] =
     {
-#line 10827
+#line 10902
         .trainerName = _("Blank"),
-#line 10828
+#line 10903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10829
+#line 10904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31844,28 +32015,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10831
+#line 10906
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10833
+#line 10908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10832
+#line 10907
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10834
+#line 10909
     [DIFFICULTY_NORMAL][TRAINER_C3B3B17B] =
     {
-#line 10835
+#line 10910
         .trainerName = _("Blank"),
-#line 10836
+#line 10911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10837
+#line 10912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31873,28 +32044,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10839
+#line 10914
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10841
+#line 10916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10840
+#line 10915
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10842
+#line 10917
     [DIFFICULTY_NORMAL][TRAINER_C414BED0] =
     {
-#line 10843
+#line 10918
         .trainerName = _("Blank"),
-#line 10844
+#line 10919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10845
+#line 10920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31902,28 +32073,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10847
+#line 10922
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10849
+#line 10924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10848
+#line 10923
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10850
+#line 10925
     [DIFFICULTY_NORMAL][TRAINER_C42A775B] =
     {
-#line 10851
+#line 10926
         .trainerName = _("Blank"),
-#line 10852
+#line 10927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10853
+#line 10928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31931,28 +32102,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10855
+#line 10930
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10857
+#line 10932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10856
+#line 10931
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10858
+#line 10933
     [DIFFICULTY_NORMAL][TRAINER_C4A167E0] =
     {
-#line 10859
+#line 10934
         .trainerName = _("Blank"),
-#line 10860
+#line 10935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10861
+#line 10936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31960,28 +32131,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10863
+#line 10938
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10865
+#line 10940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10864
+#line 10939
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10866
+#line 10941
     [DIFFICULTY_NORMAL][TRAINER_C4C98FC4] =
     {
-#line 10867
+#line 10942
         .trainerName = _("Blank"),
-#line 10868
+#line 10943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10869
+#line 10944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -31989,28 +32160,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10871
+#line 10946
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10873
+#line 10948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10872
+#line 10947
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10874
+#line 10949
     [DIFFICULTY_NORMAL][TRAINER_C533F091] =
     {
-#line 10875
+#line 10950
         .trainerName = _("Blank"),
-#line 10876
+#line 10951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10877
+#line 10952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32018,28 +32189,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10879
+#line 10954
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10881
+#line 10956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10880
+#line 10955
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10882
+#line 10957
     [DIFFICULTY_NORMAL][TRAINER_C6600959] =
     {
-#line 10883
+#line 10958
         .trainerName = _("Blank"),
-#line 10884
+#line 10959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10885
+#line 10960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32047,28 +32218,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10887
+#line 10962
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10889
+#line 10964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10888
+#line 10963
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10890
+#line 10965
     [DIFFICULTY_NORMAL][TRAINER_C6666859] =
     {
-#line 10891
+#line 10966
         .trainerName = _("Blank"),
-#line 10892
+#line 10967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10893
+#line 10968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32076,28 +32247,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10895
+#line 10970
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10897
+#line 10972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10896
+#line 10971
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10898
+#line 10973
     [DIFFICULTY_NORMAL][TRAINER_C690158D] =
     {
-#line 10899
+#line 10974
         .trainerName = _("Blank"),
-#line 10900
+#line 10975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10901
+#line 10976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32105,28 +32276,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10903
+#line 10978
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10905
+#line 10980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10904
+#line 10979
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10906
+#line 10981
     [DIFFICULTY_NORMAL][TRAINER_C6E61EDA] =
     {
-#line 10907
+#line 10982
         .trainerName = _("Blank"),
-#line 10908
+#line 10983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10909
+#line 10984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32134,28 +32305,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10911
+#line 10986
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10913
+#line 10988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10912
+#line 10987
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10914
+#line 10989
     [DIFFICULTY_NORMAL][TRAINER_C7630112] =
     {
-#line 10915
+#line 10990
         .trainerName = _("Blank"),
-#line 10916
+#line 10991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10917
+#line 10992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32163,28 +32334,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10919
+#line 10994
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10921
+#line 10996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10920
+#line 10995
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10922
+#line 10997
     [DIFFICULTY_NORMAL][TRAINER_C789FBF5] =
     {
-#line 10923
+#line 10998
         .trainerName = _("Blank"),
-#line 10924
+#line 10999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10925
+#line 11000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32192,28 +32363,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10927
+#line 11002
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10929
+#line 11004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10928
+#line 11003
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10930
+#line 11005
     [DIFFICULTY_NORMAL][TRAINER_C7E06CB4] =
     {
-#line 10931
+#line 11006
         .trainerName = _("Blank"),
-#line 10932
+#line 11007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10933
+#line 11008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32221,28 +32392,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10935
+#line 11010
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10937
+#line 11012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10936
+#line 11011
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10938
+#line 11013
     [DIFFICULTY_NORMAL][TRAINER_C7F16F5B] =
     {
-#line 10939
+#line 11014
         .trainerName = _("Blank"),
-#line 10940
+#line 11015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10941
+#line 11016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32250,28 +32421,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10943
+#line 11018
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10945
+#line 11020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10944
+#line 11019
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10946
+#line 11021
     [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
     {
-#line 10947
+#line 11022
         .trainerName = _("Blank"),
-#line 10948
+#line 11023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10949
+#line 11024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32279,28 +32450,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10951
+#line 11026
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10953
+#line 11028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10952
+#line 11027
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10954
+#line 11029
     [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
     {
-#line 10955
+#line 11030
         .trainerName = _("Blank"),
-#line 10956
+#line 11031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10957
+#line 11032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32308,28 +32479,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10959
+#line 11034
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10961
+#line 11036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10960
+#line 11035
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10962
+#line 11037
     [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
     {
-#line 10963
+#line 11038
         .trainerName = _("Blank"),
-#line 10964
+#line 11039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10965
+#line 11040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32337,28 +32508,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10967
+#line 11042
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10969
+#line 11044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10968
+#line 11043
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10970
+#line 11045
     [DIFFICULTY_NORMAL][TRAINER_LEAF] =
     {
-#line 10971
+#line 11046
         .trainerName = _("Blank"),
-#line 10972
+#line 11047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10973
+#line 11048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32366,28 +32537,28 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10975
+#line 11050
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10977
+#line 11052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10976
+#line 11051
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 10978
+#line 11053
     [DIFFICULTY_NORMAL][TRAINER_RED] =
     {
-#line 10979
+#line 11054
         .trainerName = _("Blank"),
-#line 10980
+#line 11055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender =
 0,
-#line 10981
+#line 11056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .trainerBackPic = TRAINER_PIC_COOLTRAINER_M,
@@ -32395,12 +32566,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10983
+#line 11058
             .species = SPECIES_SPEWPA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10985
+#line 11060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10984
+#line 11059
             .lvl = 1,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
