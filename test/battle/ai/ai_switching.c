@@ -1,6 +1,5 @@
 #include "global.h"
 #include "test/battle.h"
-#include "silicon_test_exp.h"
 
 AI_SINGLE_BATTLE_TEST("AI gets baited by Protect Switch tactics") // This behavior is to be fixed.
 {
@@ -334,7 +333,6 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI partner will not switch into a player Pokémon (2v
 AI_TWO_VS_ONE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 spots in a 2v1 battle (all bad moves)")
 {
     u32 flags;
-    gSiliconExpTestState.isExpTest = TRUE;
 
     PARAMETRIZE {flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING; }
     PARAMETRIZE {flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT; }
@@ -453,7 +451,6 @@ AI_SINGLE_BATTLE_TEST("When AI switches out due to having no move that affects t
 
 AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same Pokémon for 2 spots in a double battle (Wonder Guard)")
 {
-    gSiliconExpTestState.isExpTest = FALSE; // trainerBattles
     PASSES_RANDOMLY(SHOULD_SWITCH_WONDER_GUARD_PERCENTAGE, 100, RNG_AI_SWITCH_WONDER_GUARD);
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING);
@@ -2206,8 +2203,8 @@ AI_MULTI_BATTLE_TEST("AI will not switch out if the opposite battler is absent a
         MULTI_OPPONENT_B(SPECIES_WYNAUT) { Speed(2); HP(41); }
     } WHEN {
         TURN {
-            EXPECT_MOVE(opponentLeft, MOVE_BODY_SLAM, target: playerLeft);
-            EXPECT_MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_BODY_SLAM, target: playerLeft); 
+            EXPECT_MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentRight); 
         }
         TURN {
             EXPECT_MOVE(opponentLeft, MOVE_DRAGON_RAGE, target: playerRight);
