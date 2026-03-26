@@ -1858,28 +1858,28 @@ static enum CancelerResult CancellerFog(struct BattleContext *ctx)
     if (!IsFogBattle())
         return CANCELER_RESULT_SUCCESS;
 
-    gBattleScripting.battler = gBattlerAttacker;
-    CancelMultiTurnMoves(gBattlerAttacker, SKY_DROP_ATTACKCANCELER_CHECK);
-
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+    if (GetBattlerSide(ctx->battlerAtk) == B_SIDE_PLAYER)
     {
         gBattlescriptCurrInstr = BattleScript_FogIsTooDense;
+        return CANCELER_RESULT_FAILURE;
     }
     else
     {
+        gBattleCommunication[MULTISTRING_CHOOSER] = TRUE;
+        gBattlerTarget = B_BATTLER_0;
         struct BattleContext dmgCtx = {0};
-        gBattlerTarget = gBattlerAttacker;
-        dmgCtx.battlerAtk = dmgCtx.battlerDef = ctx->battlerAtk;
+        dmgCtx.battlerAtk = ctx->battlerAtk;
+        dmgCtx.battlerDef = ctx->battlerDef;
         dmgCtx.move = dmgCtx.chosenMove = MOVE_NONE;
         dmgCtx.moveType = TYPE_MYSTERY;
         dmgCtx.isCrit = FALSE;
         dmgCtx.randomFactor = FALSE;
         dmgCtx.updateFlags = TRUE;
-        dmgCtx.fixedBasePower = 250;
+        dmgCtx.fixedBasePower = 255;
+        gBattleStruct->moveDamage[ctx->battlerDef] = CalculateMoveDamage(&dmgCtx);
         gBattlescriptCurrInstr = BattleScript_EmboldenedAttackedFromFog;
     }
-
-    return CANCELER_RESULT_BREAK;
+        return CANCELER_RESULT_SUCCESS;
 }
 // End fogBattle
 
