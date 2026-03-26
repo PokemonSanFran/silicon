@@ -458,6 +458,7 @@ static const struct SiliconExpTestData sAdelaide_WecanstopyouactuallyTrainers =
         TRAINER_NONE
     },
 };
+}*/
 
 //  Actual tests here
 
@@ -480,13 +481,15 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Shinzo Gym")
 
     SiliconExpTest(&sShinzo_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
+
 /*
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Charlotte Oldassholeappears")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     SiliconExpTest(&sCharlotte_OldassholeappearsTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
-}*/
+
+    */
 
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Emrys Gym")
 {
