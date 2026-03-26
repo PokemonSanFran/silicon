@@ -42,7 +42,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  8,
         },
         .nature = NATURE_HASTY,
-        .ball = ITEM_POKE_BALL,
+        .ball = BALL_POKE,
         .moves = {MOVE_FURY_CUTTER, MOVE_FALSE_SWIPE, MOVE_WING_ATTACK, MOVE_DOUBLE_TEAM},
         .friendship = 71,
         .nextExpPercent = 19,
@@ -73,7 +73,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  7,
         },
         .nature = NATURE_NAIVE,
-        .ball = ITEM_DUSK_BALL,
+        .ball = BALL_DUSK,
         .moves = {MOVE_ASTONISH, MOVE_WILL_O_WISP, MOVE_CLEAR_SMOG, MOVE_EMBER},
         .friendship = 179,
         .nextExpPercent = 25,
@@ -104,7 +104,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  19,
         },
         .nature = NATURE_QUIET,
-        .ball = ITEM_GREAT_BALL,
+        .ball = BALL_GREAT,
         .moves = {MOVE_GIGA_DRAIN, MOVE_SLEEP_POWDER, MOVE_HELPING_HAND, MOVE_GROWTH},
         .friendship = 183,
         .nextExpPercent = 27,
@@ -135,7 +135,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  29,
         },
         .nature = NATURE_HASTY,
-        .ball = ITEM_POKE_BALL,
+        .ball = BALL_POKE,
         .moves = {MOVE_CHARGE, MOVE_THUNDER_WAVE, MOVE_THUNDER_SHOCK, MOVE_COTTON_SPORE},
         .friendship = 206,
         .nextExpPercent = 56,
@@ -166,7 +166,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  21,
         },
         .nature = NATURE_SASSY,
-        .ball = ITEM_NET_BALL,
+        .ball = BALL_NET,
         .moves = {MOVE_VENOSHOCK, MOVE_WIDE_GUARD, MOVE_POISON_STING, MOVE_PECK},
         .friendship = 205,
         .nextExpPercent = 33,
@@ -197,7 +197,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  29,
         },
         .nature = NATURE_RELAXED,
-        .ball = ITEM_HEAL_BALL,
+        .ball = BALL_HEAL,
         // PSF TODO change moves once SV learnset is created
         .moves = {MOVE_PROTECT, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
         .friendship = 173,
@@ -229,7 +229,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  25,
         },
         .nature = NATURE_SASSY,
-        .ball = ITEM_TIMER_BALL,
+        .ball = BALL_TIMER,
         .moves = {MOVE_ICE_SHARD, MOVE_FLAIL, MOVE_MUD_SLAP, MOVE_TACKLE},
         .friendship = 130,
         .nextExpPercent = 80,
@@ -260,7 +260,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  8,
         },
         .nature = NATURE_CALM,
-        .ball = ITEM_GREAT_BALL,
+        .ball = BALL_GREAT,
         .moves = {MOVE_DISARMING_VOICE, MOVE_CONFUSION, MOVE_LIFE_DEW, MOVE_AROMATIC_MIST},
         .friendship = 101,
         .nextExpPercent = 25,
@@ -291,7 +291,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
             [STAT_SPEED] =  0,
         },
         .nature = NATURE_CAREFUL,
-        .ball = ITEM_GREAT_BALL,
+        .ball = BALL_GREAT,
         // PSF TODO change moves once SV learnset is created
         .moves = {MOVE_WORK_UP, MOVE_LOW_SWEEP, MOVE_TAUNT, MOVE_CIRCLE_THROW},
         .friendship = 124,
@@ -306,12 +306,12 @@ static void GiveDebugStarter(void);
 
 void GenerateDummyPartyMembers(void)
 {
-    u8 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u8 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
     u16 moves[4] = {MOVE_SLEEP_POWDER,MOVE_NONE,MOVE_NONE,MOVE_NONE};
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        ScriptGiveMonParameterized(0,slot,SPECIES_SCYTHER,1,0,0,0,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
+        ScriptGiveMonParameterized(B_SIDE_PLAYER,slot,SPECIES_SCYTHER,1,ITEM_NONE,BALL_POKE,NATURE_RANDOM,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,0,0,0);
 
     CompactPartySlots();
 }
@@ -412,15 +412,37 @@ void GiveSiliconStarter(enum SiliconStarters slot)
     u32 boxSlot = 0;
     const struct StarterMonTemplate *starter = &sStarterMonTable[slot];
 
+    u16 species = starter->species;
+    u8 level = starter->level;
+    enum Item item = starter->item;
+    enum PokeBall ball = starter->ball;
+    u8 nature = starter->nature;
+    u8 abilityNum = starter->abilityNum;
+    u8 gender = starter->gender;
+    u8 friendship = starter->friendship;
+    u8 nextExpPercent = starter->nextExpPercent;
+    u16 evs[NUM_STATS];
+    u16 ivs[NUM_STATS];
+    enum Move moves[MAX_MON_MOVES];
+
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        evs[i] = starter->evs[i];
+        ivs[i] = starter->ivs[i];
+    }
+    
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        moves[i] = starter->moves[i];
+
     ScriptGiveMonParameterized(
-            0, PARTY_SIZE, starter->species, starter->level, starter->item, starter->ball,
-            starter->nature, starter->abilityNum, starter->gender,
-            (u8 *)starter->evs, (u8 *)starter->ivs, (u16 *)starter->moves,
+            B_SIDE_PLAYER, PARTY_SIZE, species, level, item, ball,
+            nature, abilityNum, gender,
+            evs, ivs, moves,
             SHINY_MODE_RANDOM, FALSE, NUMBER_OF_MON_TYPES, 0
             );
 
-    SetStarterExp(boxSlot, slot, starter->species, starter->level, starter->nextExpPercent);
-    SetStarterFriendship(boxSlot, slot, starter->friendship);
+    SetStarterExp(boxSlot, slot, species, level, nextExpPercent);
+    SetStarterFriendship(boxSlot, slot, friendship);
     RollForShiny(boxSlot, slot);
 
     BoxMonAtToMon(boxSlot, slot, &gPlayerParty[0]);
@@ -435,15 +457,15 @@ static void GiveDebugStarter(void)
     return;
 #endif
 
-    u8 evs[NUM_STATS] = {0,0,0,0,0,0};
-    u8 ivs[NUM_STATS] = {31,31,31,31,31,31};
-    u16 moves[2][4] = {
+    u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
+    enum Move moves[2][4] = {
         {MOVE_DIG,MOVE_SURF,0,0},
         {MOVE_DRAIN_PUNCH,MOVE_BULLET_PUNCH,0,0}
     };
 
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_MUDKIP,22,ITEM_NONE,ITEM_CHERISH_BALL,NATURE_BOLD,2,MON_FEMALE,evs,ivs,moves[0],SHINY_MODE_RANDOM,0,NUMBER_OF_MON_TYPES,0);
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_PANGORO,22,ITEM_NONE,ITEM_BEAST_BALL,NATURE_ADAMANT,2,MON_MALE,evs,ivs,moves[1],SHINY_MODE_ALWAYS,0,NUMBER_OF_MON_TYPES,0);
+    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_MUDKIP,22,ITEM_NONE,BALL_CHERISH,NATURE_BOLD,2,MON_FEMALE,evs,ivs,moves[0],SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_PANGORO,22,ITEM_NONE,BALL_BEAST,NATURE_ADAMANT,2,MON_MALE,evs,ivs,moves[1],SHINY_MODE_ALWAYS,FALSE,NUMBER_OF_MON_TYPES,0);
 }
 
 void MoveStarterToParty(void)

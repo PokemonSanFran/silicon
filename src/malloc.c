@@ -27,9 +27,8 @@ void PutFirstMemBlockHeader(void *block, u32 size)
     PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
-void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
+void UNUSED MonitorHeap(struct MemBlock *head, u32 size, const char *location)
 {
-    return;
     u32 totalHeapSize = 0;
     u32 freeHeapSize = 0;
 
@@ -44,7 +43,13 @@ void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
 
     u32 used = totalHeapSize - freeHeapSize;
     u32 percent = used * 100 / totalHeapSize;
+
     DebugPrintf("%s: %d bytes | Total Used: %d/%d (%d\%)",location,size,used,totalHeapSize,percent);
+    (void)location;
+    (void)size;
+    (void)used;
+    (void)totalHeapSize;
+    (void)percent;
 }
 
 void *AllocInternal(void *heapStart, u32 size, const char *location)
@@ -97,14 +102,14 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 pos->locationHi = ((uintptr_t)location) >> 14;
                 pos->locationLo = (uintptr_t)location;
 
-                MonitorHeap(head,size,location);
+                //MonitorHeap(head,size,location);
                 return pos->data;
             }
         }
 
+#if TESTING
         if (pos->next == head)
         {
-#if TESTING
             const struct MemBlock *head = HeapHead();
             const struct MemBlock *block = head;
             do
@@ -120,13 +125,10 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 block = block->next;
             }
             while (block != head);
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
+        }
 #endif
-            if (location)
-            {
-                DebugPrintfLevel(MGBA_LOG_ERROR, "%s: out of memory trying to allocate %d bytes", location, size);
-            }
-            AGB_ASSERT(FALSE);
+        assertf(pos->next != head, "%s: out of memory trying to allocate %d bytes", location, size)
+        {
             return NULL;
         }
 

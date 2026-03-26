@@ -413,9 +413,8 @@ void CB2_CustomizationFromStartMenu(void)
     Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
 
-void ResetCustomizationValuesData(void){
-    u8 i;
-
+void ResetCustomizationValuesData(void)
+{
     // PSF TODO Pick a single body type and then have one of our artists pick a canon set of colors for each artist
 
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]         = Random() % (NUM_BODY_TYPES); // Body type has no custom option
@@ -427,15 +426,9 @@ void ResetCustomizationValuesData(void){
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]    = Random() % NUM_PRONOUN_TYPES;
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN] = Random() % NUM_PRONOUN_TYPES;
 
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++){
-        gSaveBlock3Ptr->playerSubjectPronoun[i]  = gText_He[i];
-        gSaveBlock3Ptr->playerObjectPronoun[i]   = gText_Him[i];
-        gSaveBlock3Ptr->playerPosesivePronoun[i] = gText_His[i];
-    }
-
-    gSaveBlock3Ptr->playerSubjectPronoun[PLAYER_NAME_LENGTH] = EOS;
-    gSaveBlock3Ptr->playerObjectPronoun[PLAYER_NAME_LENGTH] = EOS;
-    gSaveBlock3Ptr->playerPosesivePronoun[PLAYER_NAME_LENGTH] = EOS;
+    StringCopy(gSaveBlock3Ptr->playerSubjectPronoun,gText_He);
+    StringCopy(gSaveBlock3Ptr->playerObjectPronoun,gText_Him);
+    StringCopy(gSaveBlock3Ptr->playerPosesivePronoun,gText_His);
 
     FlagSet(FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED);
 }
@@ -784,7 +777,7 @@ static void CreateTrainerSprites(){
 static void CreateTrainerFrontSprite()
 {
     u8 bodyType = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
-    u8 trainerFrontPic = TRAINER_PIC_SILICON_PLAYER_M1 + bodyType;
+    u8 trainerFrontPic = TRAINER_PIC_FRONT_SILICON_PLAYER_M1 + bodyType;
     u8 spriteID = SPRITE_TRAINER_FRONT_SPRITE;
 
     if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE)
@@ -1767,7 +1760,7 @@ void CustomizeCharacterFromOverworld(void)
 bool32 IsBackPicForSiliconPlayer(u32 picId)
 {
     for (u32 picIndex = 0; picIndex < NUM_BODY_TYPES; picIndex++)
-        if (picId == TRAINER_BACK_PIC_SILICON_PLAYER_M1 + picIndex)
+        if (picId == TRAINER_PIC_BACK_SILICON_PLAYER_M1 + picIndex)
             return TRUE;
 
     return FALSE;

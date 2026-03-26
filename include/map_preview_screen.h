@@ -3,7 +3,7 @@
 
 struct MapPreviewScreen
 {
-    u8 mapsec;
+    u16 mapsec;
     u8 type;
     u16 flagId;
     u8 image;
@@ -17,11 +17,15 @@ struct ImageData
 };
 
 bool32 ForestMapPreviewScreenIsRunning(void);
+void Script_MapPreview(void);
+bool32 IsMapPreviewTypeCave(u32 mapSecId);
+bool32 IsMapPreviewTypeBasic(u32 mapSecId);
+bool32 IsMapPreviewTypeFadeIn(mapsec_u16_t mapSecId);
 u32 GetFadeScreenModeFromMapPreviewType(void);
-bool32 IsMapPreviewTypeFadeIn(u8 mapsecId);
-void RunMapPreviewScreen(u8 mapsecId);
+void RunMapPreviewScreen(mapsec_u16_t mapSecId);
 bool32 ShouldRunCaveMapPreviewScreen(void);
 bool32 ShouldRunFadeInMapPreviewScreen(void);
 void RunFadeInMapPreviewScreen(void);
+void MapPreview_SetFlag(u16 flagId);
 
 #endif //GUARD_MAP_PREVIEW_SCREEN_H

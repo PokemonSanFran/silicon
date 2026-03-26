@@ -10,14 +10,14 @@ struct StarterMonTemplate
 {
     u16 species;
     u8 level;
-    u16 item;
-    u16 ball;
+    enum Item item;
+    enum PokeBall ball;
     u8 nature;
     u8 abilityNum;
     u8 gender;
-    u8 evs[NUM_STATS];
-    u8 ivs[NUM_STATS];
-    u16 moves[MAX_MON_MOVES];
+    u16 evs[NUM_STATS];
+    u16 ivs[NUM_STATS];
+    enum Move moves[MAX_MON_MOVES];
     u8 friendship;
     u8 nextExpPercent;
 };

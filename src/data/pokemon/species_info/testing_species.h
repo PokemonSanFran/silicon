@@ -85,7 +85,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        .tmIlliterate = TRUE,
+        .teachingType = TM_ILLITERATE,
         .levelUpLearnset = sTestingSpeciesLevelUpLearnset,
         .teachableLearnset = sWobbuffetTeachableLearnset,
     },
@@ -171,7 +171,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        .tmIlliterate = TRUE,
+        .teachingType = TM_ILLITERATE,
         .levelUpLearnset = sTestingSpeciesLevelUpLearnset,
         .teachableLearnset = sWobbuffetTeachableLearnset,
     },
@@ -257,7 +257,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        .tmIlliterate = TRUE,
+        .teachingType = TM_ILLITERATE,
         .levelUpLearnset = sTestingSpeciesLevelUpLearnset,
         .teachableLearnset = sWobbuffetTeachableLearnset,
     },
@@ -343,7 +343,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             TRACKS_FOOT,
             sAnimTable_Following
         )
-        .tmIlliterate = TRUE,
+        .teachingType = TM_ILLITERATE,
         .levelUpLearnset = sTestingSpeciesLevelUpLearnset,
         .teachableLearnset = sWobbuffetTeachableLearnset,
     },
