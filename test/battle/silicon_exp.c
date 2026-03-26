@@ -248,6 +248,8 @@ static const struct SiliconExpTestData sBd_GymTrainers =
         TRAINER_13113EC0,
         TRAINER_1387ABBC,
         TRAINER_148A3C6B,
+        TRAINER_14C5EE6C,
+        TRAINER_NONE,
     },
 };
 /*

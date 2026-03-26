@@ -81,3 +81,10 @@ script HalerbaWilds_EventScript_17DCC938
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
+
+script HalerbaWilds_EventScript_14C5EE6C
+{
+    trainerbattle_single(TRAINER_14C5EE6C,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

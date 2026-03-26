@@ -6003,7 +6003,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 148A3C6B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-Battle Type: Single
+Battle Type: Double
 Type: Regular
 Map Section: Tirabudin Place
 
@@ -6033,60 +6033,30 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Name: 14C5EE6C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Battle Type: Double
+Type: Regular
+Map Section: HalerbaWilds
 
-Shiinotic @ Red Card
-Ability: Effect Spore
-Level: 49
-EVs: 200 HP/200 SpA
-Modest Nature
-IVs: 0 Atk
-- Moonblast
-- Energy Ball
-- Spore
-- Moonlight
+Gyarados @ Wacan Berry  
+Ability: Moxie  
+Level: 46  
+EVs: 144 Atk / 4 SpD / 252 Spe  
+Adamant Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Dragon Dance  
+- Earthquake  
+- Aqua Tail  
+- Ice Fang  
 
-Spinda @ Red Card
-Ability: Tangled Feet
-Level: 50
-EVs: 200 Atk/200 Spe
-Jolly Nature
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Thrash
-- Fake Out
-- Sucker Punch
-
-Weezing @ Poisonium Z
-Ability: Levitate
-Level: 50
-EVs: 200 HP/100 Atk/100 SpA
-Brave Nature
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Gunk Shot
-- Destiny Bond
-- Flamethrower
-- Dark Pulse
-
-Musharna @ Red Card
-Ability: Synchronize
-Level: 51
-EVs: 200 HP/100 Def/50 SpA/50 SpD
-Relaxed Nature
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Dream Eater
-- Yawn
-- Alluring Voice
-- Psychic
-
-Annihilape @ Sitrus Berry
-Ability: Defiant
-Level: 52
-EVs: 200 HP/200 Spe
-Adamant Nature
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Close Combat
-- Stomping Tantrum
-- Shadow Claw
-- Taunt
+Clefable @ Sitrus Berry  
+Ability: Cute Charm  
+Level: 48  
+EVs: 252 HP / 88 Def / 60 SpD  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Follow Me  
+- Helping Hand  
+- Reflect  
+- Light Screen  
 
 === TRAINER_1508BB71 ===
 Name: 1508BB71
