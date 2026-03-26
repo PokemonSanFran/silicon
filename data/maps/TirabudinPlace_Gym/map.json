@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BD",
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TirabudinPlace_Gym_EventScript_Merril",
+      "script": "TirabudinGym_EventScript_11EDE0DC",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TirabudinPlace_Gym_EventScript_Kinsey",
+      "script": "TirabudinGym_EventScript_148A3C6B",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TirabudinPlace_Gym_EventScript_Kaley",
+      "script": "TirabudinGym_EventScript_13113EC0",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "TirabudinPlace_Gym_EventScript_Merril",
+      "script": "TirabudinGym_EventScript_120A20F6",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -130,6 +130,32 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Quest_Inversehallucinogenic_EventScript_Merril",
       "flag": "FLAG_TEMP_2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_COOK",
+      "x": 2,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TirabudinGym_EventScript_1387ABBC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_2",
+      "x": 1,
+      "y": 16,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TirabudinGym_EventScript_114EB3AD",
+      "flag": "0"
     }
   ],
   "warp_events": [

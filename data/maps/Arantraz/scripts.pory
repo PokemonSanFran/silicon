@@ -59,9 +59,10 @@ text gText_Arantraz_IveHealedYourParty {
     format("I've healed your party! You can battle these Trainers as often as you like.")
 }
 
-script Arantraz_EventScript_0A542D33
+script Route4_EventScript_0ED24EF1
 {
-    trainerbattle_single(TRAINER_0A542D33,format("I am a Route Trainer"),format("I lost!"))
+    trainerbattle_single(TRAINER_0ED24EF1,format("I am a Route Trainer"),format("I lost!"))
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
+
