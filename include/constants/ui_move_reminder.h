@@ -119,25 +119,23 @@ enum MoveReminderSpriteTags
     MREMINDER_TAG_TYPE_PAL_2,
 };
 
-enum MoveReminderMethods
+enum MovePoolMethods
 {
-    MREMINDER_METHOD_LEVEL_UP,
-    MREMINDER_METHOD_EGG,
-    MREMINDER_METHOD_MACHINE,
-
-    MREMINDER_METHOD_ALL
+    MP_METHOD_LEVEL_UP,
+    MP_METHOD_EGG,
+    MP_METHOD_MACHINE,
 };
 
-enum MoveReminderSort
+enum MovePoolSorts
 {
-    MREMINDER_SORT_DEFAULT,
-    MREMINDER_SORT_MOVE_ID,
-    MREMINDER_SORT_ALPHABETICAL,
-    MREMINDER_SORT_PP,
-    MREMINDER_SORT_ACCURACY,
-    MREMINDER_SORT_BASE_POWER,
+    MOVE_POOL_SORT_DEFAULT,
+    MOVE_POOL_SORT_MOVE_ID,
+    MOVE_POOL_SORT_ALPHABETICAL,
+    MOVE_POOL_SORT_PP,
+    MOVE_POOL_SORT_ACCURACY,
+    MOVE_POOL_SORT_BASE_POWER,
 
-    NUM_MREMINDER_SORTS
+    NUM_MOVE_POOL_SORTS
 };
 
 #define MREMINDER_INPUT_INC     (1)
@@ -147,13 +145,13 @@ enum MoveReminderSort
 #define MREMINDER_INPUT_PM_5    (4)
 
 typedef void (*UpdateFrontEndFunc)(void);
-typedef void (*SortListFunc)(u32 *);
+typedef void (*MovePoolSortFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
 
 struct MoveReminderLearnset
 {
     u16 move:13;
-    enum MoveReminderMethods method:3;
+    enum MovePoolMethods method:3;
 };
 
 struct MoveReminderMon

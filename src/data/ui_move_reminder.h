@@ -29,9 +29,9 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
     },
 };
 
-static const SortListFunc sMoveReminder_SortListFuncs[NUM_MREMINDER_SORTS] =
+static const MovePoolSortFunc sMovePoolSortFunctions[NUM_MOVE_POOL_SORTS] =
 {
-    [MREMINDER_SORT_DEFAULT] = MReminderMoves_ProcessDefaultList
+    [MOVE_POOL_SORT_DEFAULT] = MovePoolSort_Default
 };
 
 static const struct BgTemplate sMoveReminderBgTemplates[NUM_MREMINDER_BACKGROUNDS + 1] =
