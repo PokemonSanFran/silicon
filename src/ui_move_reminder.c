@@ -34,7 +34,7 @@
 #include "constants/ui_pokedex.h"
 #include "constants/ui_move_reminder.h"
 
-static EWRAM_DATA struct MoveReminderResources *sMoveReminderResourcesPtr = NULL;
+static EWRAM_DATA struct MoveReminderData *sMoveReminderDataPtr = NULL;
 
 static void CB2_MoveReminder(void);
 static void VBlankCB_MoveReminder(void);
@@ -123,8 +123,8 @@ static void FilterPage_UpdateFrontEnd(void);
 
 void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void *mon, u32 moveSlot)
 {
-    sMoveReminderResourcesPtr = AllocZeroed(sizeof(struct MoveReminderResources));
-    if (sMoveReminderResourcesPtr == NULL)
+    sMoveReminderDataPtr = AllocZeroed(sizeof(struct MoveReminderData));
+    if (sMoveReminderDataPtr == NULL)
     {
         SetMainCallback2(callback);
         return;
@@ -132,9 +132,9 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
 
     MReminderMode_SetValue(mode);
     MReminderPage_SetValue(MREMINDER_PAGE_MAIN);
-    sMoveReminderResourcesPtr->ptr.mon = mon;
-    sMoveReminderResourcesPtr->moveSlot = moveSlot;
-    sMoveReminderResourcesPtr->savedCallback = callback;
+    sMoveReminderDataPtr->ptr.mon = mon;
+    sMoveReminderDataPtr->moveSlot = moveSlot;
+    sMoveReminderDataPtr->savedCallback = callback;
 
     SetMainCallback2(CB2_MReminderSetup);
 }
@@ -163,7 +163,7 @@ static void MoveReminder_FreeResources(void)
         TRY_FREE_AND_SET_NULL(ptr);
     }
 
-    TRY_FREE_AND_SET_NULL(sMoveReminderResourcesPtr);
+    TRY_FREE_AND_SET_NULL(sMoveReminderDataPtr);
     FreeTempTileDataBuffersIfPossible();
     FreeAllWindowBuffers();
     ResetSpriteData();
@@ -179,7 +179,7 @@ static void Task_MReminderInput_WaitFadeAndExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(sMoveReminderResourcesPtr->savedCallback);
+        SetMainCallback2(sMoveReminderDataPtr->savedCallback);
         MoveReminder_FreeResources();
         DestroyTask(taskId);
     }
@@ -261,11 +261,11 @@ static void MReminderSetup_InitMonData(void)
     struct Pokemon oldMon;
 
     if (MReminderMode_GetValue() == MREMINDER_MODE_BOX)
-        BoxMonToMon(sMoveReminderResourcesPtr->ptr.boxMon, &oldMon);
+        BoxMonToMon(sMoveReminderDataPtr->ptr.boxMon, &oldMon);
     else
-        CopyMon(&oldMon, sMoveReminderResourcesPtr->ptr.mon, sizeof(struct Pokemon));
+        CopyMon(&oldMon, sMoveReminderDataPtr->ptr.mon, sizeof(struct Pokemon));
 
-    struct MoveReminderMon *newMon = &sMoveReminderResourcesPtr->mon;
+    struct MoveReminderMon *newMon = &sMoveReminderDataPtr->mon;
 
     newMon->species = GetMonData(&oldMon, MON_DATA_SPECIES);
 
@@ -304,7 +304,7 @@ static bool32 MReminderSetup_InitBgs(void)
     InitBgsFromTemplates(0, sMoveReminderBgTemplates, NUM_MREMINDER_BACKGROUNDS);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 
-    SetBgTilemapBuffer(MREMINDER_BG_TILEMAP, sMoveReminderResourcesPtr->tilemapBufs[MREMINDER_BGBUF_TILEMAP]);
+    SetBgTilemapBuffer(MREMINDER_BG_TILEMAP, sMoveReminderDataPtr->tilemapBufs[MREMINDER_BGBUF_TILEMAP]);
 
     for (enum MoveReminderBackgrounds bg = 0; bg < NUM_MREMINDER_BACKGROUNDS; bg++)
     {
@@ -366,12 +366,12 @@ static void Task_MReminderSetup_WaitFade(u8 taskId)
 
 static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers buf, u8 *addr)
 {
-    sMoveReminderResourcesPtr->tilemapBufs[buf] = addr;
+    sMoveReminderDataPtr->tilemapBufs[buf] = addr;
 }
 
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers buf)
 {
-    return sMoveReminderResourcesPtr->tilemapBufs[buf];
+    return sMoveReminderDataPtr->tilemapBufs[buf];
 }
 
 // customized data e.g. palette/texts is handled in another function
@@ -439,12 +439,12 @@ static enum MoveReminderSpriteTags MoveBar_GetPalTagByType(enum Type type)
 
 static u32 MoveBar_GetSpriteId(u32 idx)
 {
-    return sMoveReminderResourcesPtr->moveBarSpriteIds[idx];
+    return sMoveReminderDataPtr->moveBarSpriteIds[idx];
 }
 
 static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
 {
-    sMoveReminderResourcesPtr->moveBarSpriteIds[idx] = spriteId;
+    sMoveReminderDataPtr->moveBarSpriteIds[idx] = spriteId;
 }
 
 static void SpriteCB_MoveBar(struct Sprite *sprite)
@@ -460,12 +460,12 @@ static void SpriteCB_MoveCursor(struct Sprite *sprite)
 
 static enum MoveReminderModes MReminderMode_GetValue(void)
 {
-    return sMoveReminderResourcesPtr->mode;
+    return sMoveReminderDataPtr->mode;
 }
 
 static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes mode)
 {
-    sMoveReminderResourcesPtr->mode = mode;
+    sMoveReminderDataPtr->mode = mode;
     return MReminderMode_GetValue();
 }
 
@@ -535,18 +535,18 @@ static void MReminderPage_UpdateFrontEnd(void)
 
 static enum MoveReminderPages MReminderPage_GetValue(void)
 {
-    return sMoveReminderResourcesPtr->page;
+    return sMoveReminderDataPtr->page;
 }
 
 static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages page)
 {
-    sMoveReminderResourcesPtr->page = page;
+    sMoveReminderDataPtr->page = page;
     return MReminderPage_GetValue();
 }
 
 static struct MoveReminderMon *MReminderMon_Get(void)
 {
-    return &sMoveReminderResourcesPtr->mon;
+    return &sMoveReminderDataPtr->mon;
 }
 
 static void MReminderMoves_PopulateList(void)
@@ -696,17 +696,17 @@ static void MReminderMoves_UpdateMethodInIdx(u32 idx, enum MoveReminderMethods n
 
 static void MReminderMoves_SetMoveToIdx(u32 idx, u32 move)
 {
-    sMoveReminderResourcesPtr->learnsets[idx].move = move;
+    sMoveReminderDataPtr->learnsets[idx].move = move;
 }
 
 static u32 MReminderMoves_GetMoveFromIdx(u32 idx)
 {
-    return sMoveReminderResourcesPtr->learnsets[idx].move;
+    return sMoveReminderDataPtr->learnsets[idx].move;
 }
 
 static void MReminderMoves_SetMethodToIdx(u32 idx, enum MoveReminderMethods method)
 {
-    sMoveReminderResourcesPtr->learnsets[idx].method = 1 << method;
+    sMoveReminderDataPtr->learnsets[idx].method = 1 << method;
 }
 
 static bool32 MReminderMoves_IsMethodInIdx(u32 idx, enum MoveReminderMethods method)
@@ -716,27 +716,27 @@ static bool32 MReminderMoves_IsMethodInIdx(u32 idx, enum MoveReminderMethods met
 
 static u32 MReminderMoves_GetMethodFromIdx(u32 idx)
 {
-    return sMoveReminderResourcesPtr->learnsets[idx].method;
+    return sMoveReminderDataPtr->learnsets[idx].method;
 }
 
 static void MReminderMoves_SetNumberOfMoves(u32 numMoves)
 {
-    sMoveReminderResourcesPtr->numMoves = numMoves;
+    sMoveReminderDataPtr->numMoves = numMoves;
 }
 
 static u32 MReminderMoves_GetNumberOfMoves(void)
 {
-    return sMoveReminderResourcesPtr->numMoves;
+    return sMoveReminderDataPtr->numMoves;
 }
 
 static void MReminderMoves_SetMoveToList(u32 idx, u32 move)
 {
-    sMoveReminderResourcesPtr->movesList[idx] = move;
+    sMoveReminderDataPtr->movesList[idx] = move;
 }
 
 static u32 MReminderMoves_GetMoveFromList(u32 idx)
 {
-    return sMoveReminderResourcesPtr->movesList[idx];
+    return sMoveReminderDataPtr->movesList[idx];
 }
 
 static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
@@ -854,32 +854,32 @@ static bool32 MainPage_IsInputAdditive(s32 delta)
 
 static void MainPage_SetCurrListIdx(u32 idx)
 {
-    sMoveReminderResourcesPtr->pageData.main.currIdx = idx;
+    sMoveReminderDataPtr->pageData.main.currIdx = idx;
 }
 
 static u32 MainPage_GetCurrListIdx(void)
 {
-    return sMoveReminderResourcesPtr->pageData.main.currIdx;
+    return sMoveReminderDataPtr->pageData.main.currIdx;
 }
 
 static void MainPage_SetFirstListIdx(u32 idx)
 {
-    sMoveReminderResourcesPtr->pageData.main.firstIdx = idx;
+    sMoveReminderDataPtr->pageData.main.firstIdx = idx;
 }
 
 static u32 MainPage_GetFirstListIdx(void)
 {
-    return sMoveReminderResourcesPtr->pageData.main.firstIdx;
+    return sMoveReminderDataPtr->pageData.main.firstIdx;
 }
 
 static void MainPage_SetGridListIdx(u32 idx)
 {
-    sMoveReminderResourcesPtr->pageData.main.gridIdx = idx;
+    sMoveReminderDataPtr->pageData.main.gridIdx = idx;
 }
 
 static u32 MainPage_GetGridListIdx(void)
 {
-    return sMoveReminderResourcesPtr->pageData.main.gridIdx;
+    return sMoveReminderDataPtr->pageData.main.gridIdx;
 }
 
 static void MainPage_UpdateFrontEnd(void)

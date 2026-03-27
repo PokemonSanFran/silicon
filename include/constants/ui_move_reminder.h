@@ -166,7 +166,7 @@ struct MoveReminderMon
     u16 moves[MAX_MON_MOVES];
 };
 
-struct MoveReminderResources
+struct MoveReminderData
 {
     enum MoveReminderModes mode;
     enum MoveReminderPages page;
