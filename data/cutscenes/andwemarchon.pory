@@ -78,7 +78,7 @@ script AndWeMarchOn_StartParadeMovement_Script {
 }
 
 script AndWeMarchOn_Opening_Dialogue {
-    playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     applymovement(TALA, AndWeMarchOn_LookAroundCrowd_Movement)
         waitmovement(0)
         playse(SE_APPLAUSE)
@@ -275,7 +275,6 @@ script AndWeMarchOn_ParadeEnd_Script {
         setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
         special(ReturnCameraToPlayer)
         fadescreen(FADE_FROM_BLACK)
-        savebgm(MUS_DUMMY)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene

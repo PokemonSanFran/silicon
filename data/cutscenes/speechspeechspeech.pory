@@ -197,6 +197,7 @@ script SpeechSpeechSpeech_StartTransformation_Script {
 
 script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
+        playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
         addvar(VAR_STORYLINE_STATE,1)
 
         msgbox(gText_SpeechSpeechSpeech_Us,,SPEAKER_TALA)
@@ -317,6 +318,7 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
         applymovement(KAI,SpeechSpeechSpeech_LeaveScreen)
         waitmovement(KAI)
         removeobject(KAI)
+        fadedefaultbgm
     call(TryAutoSave)
         endcutscene
         release

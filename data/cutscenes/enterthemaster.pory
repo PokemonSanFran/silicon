@@ -154,6 +154,7 @@ script EnterTheMaster_CompleteMaze_Dialogue {
 script EnterTheMaster_ClearingIntro_Dialogue
 {
         startcutscene(JUMPPLAYER_ENTERTHEMASTER)
+        playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     setvar(VAR_LEAVERRA_FOREST_STATE,MET_ARMANDO)
 
         applymovement(PLAYER,EnterTheMaster_ApproachArmando)
@@ -272,6 +273,7 @@ script EnterTheMaster_ExplainRobots_Dialogue{
         msgbox(gText_EnterTheMaster_TheFirstStage,,SPEAKER_ARMANDO)
         closemessage
         goto_if_quest_not_active(QUEST_ARMANDOSTRAINING,Quest_Armandostraining_StartQuest_Script)
+    fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release

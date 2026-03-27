@@ -144,6 +144,7 @@ script MaskOff_Encounter_Alcmene_Dialogue
 script MaskOff_PostBattle_Dialogue
 {
     startcutscene(JUMPPLAYER_MASKOFF_ALCMENE)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     msgbox(gText_MaskOff_YouveMadeIncredible,,SPEAKER_ALCMENE)
     msgbox(gText_MaskOff_ItsNiceToNotGet,,SPEAKER_ALICIA)
     msgbox(gText_MaskOff_YouWontNeedTo,,SPEAKER_ALCMENE)
@@ -188,6 +189,7 @@ script MaskOff_End_Dialogue
     applymovement(ALCMENE,MaskOff_WalkOffScreen)
     waitmovement(ALCMENE)
     removeobject(ALCMENE)
+    fadedefaultbgm
     call(TryAutoSave)
     endcutscene
     release
