@@ -143,6 +143,12 @@ enum MoveReminderSort
     NUM_MREMINDER_SORTS
 };
 
+#define MREMINDER_INPUT_INC     (1)
+#define MREMINDER_INPUT_DEC     (-1)
+// i < count
+#define MREMINDER_INPUT_PM_1    (1)
+#define MREMINDER_INPUT_PM_5    (4)
+
 typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*SortListFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
@@ -171,6 +177,15 @@ struct MoveReminderResources
     struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL + 1];// ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
+    union {
+        u32 value;
+        struct PACKED {
+            u32 currIdx:10;     // 512
+            u32 firstIdx:10;    //
+            u32 gridIdx:3;      // MAX_MREMINDER_BAR_SPRITES
+            u32 pad:12;
+        } main;
+    } pageData;
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {

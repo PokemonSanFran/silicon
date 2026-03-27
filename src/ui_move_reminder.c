@@ -103,6 +103,15 @@ static u32 MReminderMoves_GetMoveFromList(u32);
 static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
 static void MainPage_HandleInput(u8);
+static void MainPage_NavigatePage(s32, u32);
+static void MainPage_UpdateListIdx(s32);
+static bool32 MainPage_IsInputAdditive(s32);
+static void MainPage_SetCurrListIdx(u32);
+static u32 MainPage_GetCurrListIdx(void);
+static void MainPage_SetFirstListIdx(u32);
+static u32 MainPage_GetFirstListIdx(void);
+static void MainPage_SetGridListIdx(u32);
+static u32 MainPage_GetGridListIdx(void);
 static void MainPage_UpdateFrontEnd(void);
 static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
@@ -396,7 +405,6 @@ static void MoveBar_Init(void)
     sprite->callback = SpriteCB_MoveCursor;
 }
 
-// TODO apply move list navigation code
 static void MoveBar_Update(void)
 {
     enum MoveReminderWindows win = MREMINDER_WINDOW_MAIN;
@@ -407,7 +415,7 @@ static void MoveBar_Update(void)
         u32 spriteId = MoveBar_GetSpriteId(i);
         struct Sprite *sprite = &gSprites[spriteId];
 
-        u32 move = MReminderMoves_GetMoveFromList(i);
+        u32 move = MReminderMoves_GetMoveFromList(i + MainPage_GetFirstListIdx());
         enum Type moveType = GetMoveType(move);
 
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(MoveBar_GetPalTagByType(moveType));
@@ -448,6 +456,7 @@ static void SpriteCB_MoveBar(struct Sprite *sprite)
 
 static void SpriteCB_MoveCursor(struct Sprite *sprite)
 {
+    sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
 }
 
 static enum MoveReminderModes MReminderMode_GetValue(void)
@@ -766,6 +775,30 @@ static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str
 
 static void MainPage_HandleInput(u8 taskId)
 {
+    if (JOY_NEW(DPAD_UP))
+    {
+        MainPage_NavigatePage(MREMINDER_INPUT_DEC, MREMINDER_INPUT_PM_1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        MainPage_NavigatePage(MREMINDER_INPUT_DEC, MREMINDER_INPUT_PM_5);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        MainPage_NavigatePage(MREMINDER_INPUT_INC, MREMINDER_INPUT_PM_1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        MainPage_NavigatePage(MREMINDER_INPUT_INC, MREMINDER_INPUT_PM_5);
+        return;
+    }
+
     if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
@@ -779,6 +812,103 @@ static void MainPage_HandleInput(u8 taskId)
         PlaySE(SE_SELECT);
         return;
     }
+}
+
+static void MainPage_NavigatePage(s32 delta, u32 count)
+{
+    u32 currIdx = MainPage_GetCurrListIdx();
+
+    for (u32 i = 0; i < count; i++)
+        MainPage_UpdateListIdx(delta);
+
+    if (currIdx == MainPage_GetCurrListIdx())
+        return;
+
+    PlaySE(SE_RG_BAG_CURSOR);
+    MReminderPage_UpdateFrontEnd();
+}
+
+static void MainPage_UpdateListIdx(s32 delta)
+{
+    bool32 isAdditive = MainPage_IsInputAdditive(delta);
+    u32 numMoves = MReminderMoves_GetNumberOfMoves() - 1;
+    u32 halfScreen = MAX_MREMINDER_BAR_SPRITES / 2;
+    bool32 scroll = (numMoves + 1) > MAX_MREMINDER_BAR_SPRITES;
+    u32 finalHalfScreen = numMoves - halfScreen;
+    s32 currIdx = MainPage_GetCurrListIdx();
+    s32 firstIdx = MainPage_GetFirstListIdx();
+    u32 gridIdx = MainPage_GetGridListIdx();
+
+    if (((currIdx >= halfScreen && currIdx < finalHalfScreen && isAdditive)
+        || (currIdx > halfScreen && currIdx <= finalHalfScreen && !isAdditive))
+        && scroll)
+    {
+        currIdx += delta;
+        firstIdx += delta;
+        gridIdx = halfScreen;
+    }
+    else if (currIdx >= numMoves && isAdditive)
+    {
+        currIdx = 0;
+        firstIdx = 0;
+        gridIdx = 0;
+    }
+    else if (!currIdx && !isAdditive)
+    {
+        currIdx = numMoves;
+
+        if (scroll)
+            firstIdx = numMoves - (MAX_MREMINDER_BAR_SPRITES - 1);
+
+        if (numMoves >= (MAX_MREMINDER_BAR_SPRITES - 1))
+            gridIdx = MAX_MREMINDER_BAR_SPRITES - 1;
+        else
+            gridIdx = numMoves;
+    }
+    else
+    {
+        currIdx += delta;
+        gridIdx += delta;
+    }
+
+    MainPage_SetCurrListIdx(currIdx);
+    MainPage_SetFirstListIdx(firstIdx);
+    MainPage_SetGridListIdx(gridIdx);
+}
+
+static bool32 MainPage_IsInputAdditive(s32 delta)
+{
+    return delta >= 1;
+}
+
+static void MainPage_SetCurrListIdx(u32 idx)
+{
+    sMoveReminderResourcesPtr->pageData.main.currIdx = idx;
+}
+
+static u32 MainPage_GetCurrListIdx(void)
+{
+    return sMoveReminderResourcesPtr->pageData.main.currIdx;
+}
+
+static void MainPage_SetFirstListIdx(u32 idx)
+{
+    sMoveReminderResourcesPtr->pageData.main.firstIdx = idx;
+}
+
+static u32 MainPage_GetFirstListIdx(void)
+{
+    return sMoveReminderResourcesPtr->pageData.main.firstIdx;
+}
+
+static void MainPage_SetGridListIdx(u32 idx)
+{
+    sMoveReminderResourcesPtr->pageData.main.gridIdx = idx;
+}
+
+static u32 MainPage_GetGridListIdx(void)
+{
+    return sMoveReminderResourcesPtr->pageData.main.gridIdx;
 }
 
 static void MainPage_UpdateFrontEnd(void)
