@@ -85,9 +85,7 @@ static void MReminderMoves_ProcessDefaultList(u32 *);
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
 static void MReminderMoves_ProcessMachineLearnset(const u16 *, u32 *);
 static void MReminderMoves_ProcessEggLearnset(const u16 *, u32 *);
-static bool32 MReminderMoves_MonHasMove(u32);
-static bool32 MReminderMoves_CanMonLearnMove(const u16 *, u32);
-static bool32 MReminderMoves_IsMoveAlreadyAdded(u32);
+static UNUSED bool32 MReminderMoves_MonHasMove(u32);
 static u32 MReminderMoves_GetIdxFromMove(u32);
 static void MReminderMoves_AddMoveToIdx(u32, enum MoveReminderMethods, u32 *);
 static void MReminderMoves_UpdateMethodInIdx(u32, enum MoveReminderMethods);
@@ -658,7 +656,8 @@ static void MReminderMoves_ProcessEggLearnset(const u16 *learnset, u32 *numMoves
     }
 }
 
-static bool32 MReminderMoves_MonHasMove(u32 move)
+// will be used to check when trying to teach
+static UNUSED bool32 MReminderMoves_MonHasMove(u32 move)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -667,25 +666,6 @@ static bool32 MReminderMoves_MonHasMove(u32 move)
     }
 
     return FALSE;
-}
-
-static bool32 MReminderMoves_CanMonLearnMove(const u16 *learnset, u32 machineMove)
-{
-    for (u32 i = 0; learnset[i] != MOVE_UNAVAILABLE; i++)
-    {
-        if (learnset[i] == MOVE_NONE || learnset[i] == MOVE_UNAVAILABLE)
-            break;
-
-        if (learnset[i] == machineMove)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool32 MReminderMoves_IsMoveAlreadyAdded(u32 move)
-{
-    return MReminderMoves_GetIdxFromMove(move) != MOVE_UNAVAILABLE;
 }
 
 static u32 MReminderMoves_GetIdxFromMove(u32 move)
