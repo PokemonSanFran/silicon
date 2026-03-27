@@ -14,8 +14,8 @@ enum PageInterfaces
 #define PIXEL_TO_TILES(p) (p ? (p / 8) : 0)
 #endif
 
-#define MREMINDER_HELPBAR_FOOTER_X      (10)
-#define MREMINDER_HELPBAR_FOOTER_Y      (1)
+#define HELPBAR_FOOTER_X      (10)
+#define HELPBAR_FOOTER_Y      (1)
 
 #define PAGE_MAIN_HEADER_NAME_X         (2)
 #define PAGE_MAIN_HEADER_GENDER_X       (66)
@@ -148,7 +148,7 @@ typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*MovePoolSortFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
 
-struct MoveReminderLearnset
+struct MovePool
 {
     u16 move:13;
     enum MovePoolMethods method:3;
@@ -169,8 +169,8 @@ struct MoveReminderData
     enum MoveReminderModes mode;
     enum PageInterfaces page;
     MainCallback savedCallback;
-    struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL + 1];// ALL moves a pokemon can learn + denominator
-    u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
+    struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
+    u16 movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
     union {
         u32 value;

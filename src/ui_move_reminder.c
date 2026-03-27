@@ -155,20 +155,6 @@ static void VBlankCB_MoveReminder(void)
     TransferPlttBuffer();
 }
 
-static void MiscUtil_FreeResources(void)
-{
-    for (enum MoveReminderBackgroundBuffers buf = 0; buf < NUM_MREMINDER_BACKGROUND_BUFFERS; buf++)
-    {
-        u8 *ptr = TilemapBuffer_GetPtr(buf);
-        TRY_FREE_AND_SET_NULL(ptr);
-    }
-
-    TRY_FREE_AND_SET_NULL(sMoveReminderDataPtr);
-    FreeTempTileDataBuffersIfPossible();
-    FreeAllWindowBuffers();
-    ResetSpriteData();
-}
-
 static void Task_MReminderInput_Main(u8 taskId)
 {
     HandleInputFunc inputFunc = PageInterface_GetHandleInputFunc(PageInterface_GetValue());
@@ -509,7 +495,7 @@ static void PageInterface_PrintHelpBar(void)
         str = gText_EmptyString2;
 
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
-        MREMINDER_HELPBAR_FOOTER_X, MREMINDER_HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
+        HELPBAR_FOOTER_X, HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
 }
 
 static void PageInterface_UpdateFrontEnd(void)
@@ -542,11 +528,6 @@ static enum PageInterfaces PageInterface_SetValue(enum PageInterfaces page)
 {
     sMoveReminderDataPtr->page = page;
     return PageInterface_GetValue();
-}
-
-static struct MoveReminderMon *MiscUtil_GetMon(void)
-{
-    return &sMoveReminderDataPtr->mon;
 }
 
 static void MovePool_PopulateList(void)
@@ -668,17 +649,17 @@ static void MovePool_UpdateMethodInIdx(u32 idx, enum MovePoolMethods newMethod)
 
 static void MovePool_SetMoveToIdx(u32 idx, u32 move)
 {
-    sMoveReminderDataPtr->learnsets[idx].move = move;
+    sMoveReminderDataPtr->movePool[idx].move = move;
 }
 
 static u32 MovePool_GetMoveFromIdx(u32 idx)
 {
-    return sMoveReminderDataPtr->learnsets[idx].move;
+    return sMoveReminderDataPtr->movePool[idx].move;
 }
 
 static void MovePool_SetMethodToIdx(u32 idx, enum MovePoolMethods method)
 {
-    sMoveReminderDataPtr->learnsets[idx].method = 1 << method;
+    sMoveReminderDataPtr->movePool[idx].method = 1 << method;
 }
 
 static bool32 MovePool_IsMethodInIdx(u32 idx, enum MovePoolMethods method)
@@ -688,7 +669,7 @@ static bool32 MovePool_IsMethodInIdx(u32 idx, enum MovePoolMethods method)
 
 static u32 MovePool_GetMethodFromIdx(u32 idx)
 {
-    return sMoveReminderDataPtr->learnsets[idx].method;
+    return sMoveReminderDataPtr->movePool[idx].method;
 }
 
 static void MovePool_SetNumberOfMoves(u32 numMoves)
@@ -737,6 +718,25 @@ static void MovePoolSort_Default(u32 *numMoves)
         MovePool_SetMoveToList(*numMoves, move);
         (*numMoves)++;
     }
+}
+
+static void MiscUtil_FreeResources(void)
+{
+    for (enum MoveReminderBackgroundBuffers buf = 0; buf < NUM_MREMINDER_BACKGROUND_BUFFERS; buf++)
+    {
+        u8 *ptr = TilemapBuffer_GetPtr(buf);
+        TRY_FREE_AND_SET_NULL(ptr);
+    }
+
+    TRY_FREE_AND_SET_NULL(sMoveReminderDataPtr);
+    FreeTempTileDataBuffersIfPossible();
+    FreeAllWindowBuffers();
+    ResetSpriteData();
+}
+
+static struct MoveReminderMon *MiscUtil_GetMon(void)
+{
+    return &sMoveReminderDataPtr->mon;
 }
 
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
