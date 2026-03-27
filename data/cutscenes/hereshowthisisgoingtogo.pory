@@ -98,7 +98,7 @@ callnative(DestroyVirtualObjects)
 script HeresHowThisIsGoingToGo_ExplainLeagueDialogue
 {
     lockall
-    playbgm(MUS_ACCEPT_LETTER)
+    playbgm(MUS_ACCEPT_LETTER,FALSE)
     startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
     applymovement(PLAYER,Common_Movement_FaceUp)
     applymovement(CHARLOTTE,Common_Movement_FaceUp)

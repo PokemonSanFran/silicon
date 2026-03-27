@@ -50,6 +50,7 @@ waitstate
 
 script YouRealizeWereEvilRight_Open_Dialogue {
     lockall
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
         setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_YOU_REALIZE_WERE_EVIL_RIGHT)
         setflag(FLAG_KAI_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
@@ -114,6 +115,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         msgbox(gText_YouRealizeWereEvilRight_IKnowThis,,SPEAKER_OLIVER)
 
         closemessage
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
 }

@@ -68,6 +68,7 @@ script WaitEvenThen_ObjectSetUp_Script {
 script WaitEvenThen_PrepareBossEncounter_Dialogue {
     lock
         call(WaitEvenThen_ObjectSetUp_Script)
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
 
         applymovement(PLAYER,WaitEvenThen_WalkToSleepingA)
         applymovement(KAI,WaitEvenThen_WalkToSleepingB)
@@ -124,6 +125,7 @@ script WaitEvenThen_MovePlayerToBoss {
 }
 
 script WaitEvenThen_BossEncounter_Script {
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
     //PSF TODO Rewrite to have two pokemon OR make it a 1v1 battle instead
                 goto(WaitEvenThen_ClearBossPokemon_Script)
     setwildbattle(SPECIES_EXCADRILL,70,ITEM_MUSCLE_BAND,SPECIES_NONE)
@@ -201,6 +203,7 @@ script WaitEvenThen_PostBossDialogue {
                 removeobject(MAGNUS)
                 removeobject(ADAORA)
         }
+        fadedefaultbgm
         call(TryAutoSave)
     endcutscene
     release
