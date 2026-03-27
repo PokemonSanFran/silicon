@@ -43,13 +43,13 @@ static void MoveReminder_FreeResources(void);
 static void Task_MReminderInput_Main(u8);
 static void Task_MReminderInput_WaitFadeAndExit(u8);
 
-static void CB2_MReminderSetup(void);
-static void MReminderSetup_InitMonData(void);
-static bool32 MReminderSetup_InitBgs(void);
-static void MReminderSetup_InitGraphics(void);
-static void MReminderSetup_InitWindows(void);
-static void MReminderSetup_InitSprites(void);
-static void Task_MReminderSetup_WaitFade(u8);
+static void CB2_InitSetup(void);
+static void InitSetup_MonData(void);
+static bool32 InitSetup_Backgrounds(void);
+static void InitSetup_Graphics(void);
+static void InitSetup_Windows(void);
+static void InitSetup_Sprites(void);
+static void Task_InitSetup_WaitFade(u8);
 
 static void TilemapBuffer_SetPtr(enum MoveReminderBackgroundBuffers, u8 *);
 static u8 *TilemapBuffer_GetPtr(enum MoveReminderBackgroundBuffers);
@@ -136,7 +136,7 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     sMoveReminderDataPtr->moveSlot = moveSlot;
     sMoveReminderDataPtr->savedCallback = callback;
 
-    SetMainCallback2(CB2_MReminderSetup);
+    SetMainCallback2(CB2_InitSetup);
 }
 
 static void CB2_MoveReminder(void)
@@ -185,13 +185,13 @@ static void Task_MReminderInput_WaitFadeAndExit(u8 taskId)
     }
 }
 
-static void CB2_MReminderSetup(void)
+static void CB2_InitSetup(void)
 {
-    enum MoveReminderSetupSteps steps = gMain.state;
+    enum InitSetupSteps steps = gMain.state;
 
     switch (steps)
     {
-    case MREMINDER_SETUP_RESET:
+    case INIT_SETUP_RESET:
         FillPalette(RGB_BLACK, 0, PLTT_SIZEOF(512));
         ResetVramOamAndBgCntRegs();
         ResetAllBgsCoordinatesAndBgCntRegs();
@@ -207,16 +207,16 @@ static void CB2_MReminderSetup(void)
         ResetTasks();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_MONDATA:
-        MReminderSetup_InitMonData();
+    case INIT_SETUP_MONDATA:
+        InitSetup_MonData();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_LEARNSET:
+    case INIT_SETUP_LEARNSET:
         MReminderMoves_PopulateList();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_BACKGROUNDS:
-        if (!MReminderSetup_InitBgs())
+    case INIT_SETUP_BACKGROUNDS:
+        if (!InitSetup_Backgrounds())
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             CreateTask(Task_MReminderInput_WaitFadeAndExit, 0);
@@ -226,25 +226,25 @@ static void CB2_MReminderSetup(void)
         }
         gMain.state++;
         break;
-    case MREMINDER_SETUP_GRAPHICS:
-        MReminderSetup_InitGraphics();
+    case INIT_SETUP_GRAPHICS:
+        InitSetup_Graphics();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_WINDOWS:
-        MReminderSetup_InitWindows();
+    case INIT_SETUP_WINDOWS:
+        InitSetup_Windows();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_SPRITES:
-        MReminderSetup_InitSprites();
+    case INIT_SETUP_SPRITES:
+        InitSetup_Sprites();
         gMain.state++;
         break;
-    case MREMINDER_SETUP_FADE:
+    case INIT_SETUP_FADE:
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        CreateTask(Task_MReminderSetup_WaitFade, 0);
+        CreateTask(Task_InitSetup_WaitFade, 0);
         gMain.state++;
         break;
-    case MREMINDER_SETUP_FINISH:
+    case INIT_SETUP_FINISH:
         SetVBlankCallback(VBlankCB_MoveReminder);
         SetMainCallback2(CB2_MoveReminder);
         gMain.state++;
@@ -256,7 +256,7 @@ static void CB2_MReminderSetup(void)
     }
 }
 
-static void MReminderSetup_InitMonData(void)
+static void InitSetup_MonData(void)
 {
     struct Pokemon oldMon;
 
@@ -280,7 +280,7 @@ static void MReminderSetup_InitMonData(void)
         newMon->moves[i] = GetMonData(&oldMon, MON_DATA_MOVE1 + i);
 }
 
-static bool32 MReminderSetup_InitBgs(void)
+static bool32 InitSetup_Backgrounds(void)
 {
     ResetAllBgsCoordinates();
 
@@ -315,7 +315,7 @@ static bool32 MReminderSetup_InitBgs(void)
     return TRUE;
 }
 
-static void MReminderSetup_InitGraphics(void)
+static void InitSetup_Graphics(void)
 {
     FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
@@ -331,7 +331,7 @@ static void MReminderSetup_InitGraphics(void)
     });
 }
 
-static void MReminderSetup_InitWindows(void)
+static void InitSetup_Windows(void)
 {
     InitWindows(sMoveReminderWindowTemplates);
     DeactivateAllTextPrinters();
@@ -352,13 +352,13 @@ static void MReminderSetup_InitWindows(void)
     MReminderPage_UpdateFrontEnd();
 }
 
-static void MReminderSetup_InitSprites(void)
+static void InitSetup_Sprites(void)
 {
     MoveBar_Init();
     MoveBar_Update();
 }
 
-static void Task_MReminderSetup_WaitFade(u8 taskId)
+static void Task_InitSetup_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
         gTasks[taskId].func = Task_MReminderInput_Main;
