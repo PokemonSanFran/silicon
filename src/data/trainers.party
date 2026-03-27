@@ -336,6 +336,7 @@ IVs: 0 Atk
 === TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS ===
 Name: Charlotte
 Pic: Charlotte
+Class: Charlotte
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Reveal: Charlotte
 Type: Boss
@@ -1029,8 +1030,13 @@ EVs: 175 Atk / 15 SpA / 100 Spe
 
 === TRAINER_CHARLOTTE_BEACHBATTLE ===
 Name: Charlotte
-Pic: Cooltrainer F
+Pic: Charlotte
+Class: Charlotte
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Reveal: Charlotte
+Type: Boss
+Overworld Sprite: Charlotte
+Map Section: Cresalta Vista
 
 Palafin @ Choice Scarf  
 Ability: Zero to Hero  
@@ -2582,8 +2588,13 @@ IVs: 0 Atk
 
 === TRAINER_CHARLOTTE_IMIN ===
 Name: Charlotte
-Pic: Cooltrainer F
+Pic: Charlotte
+Class: Charlotte
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Reveal: Charlotte
+Type: Boss
+Overworld Sprite: Charlotte
+Map Section: Cresalta Vista
 
 Armarouge @ Weakness Policy  
 Ability: Weak Armor  

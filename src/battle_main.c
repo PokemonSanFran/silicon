@@ -438,10 +438,14 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_PAINTER_FRLG] =         { _("PAINTER"), 4 },
     // start Silicon
     [TRAINER_CLASS_COMRADE] = { _("Comrade") },
+    [TRAINER_CLASS_COMRADE_BAIYA] = { _("Comrade") },
     [TRAINER_CLASS_THE_TIDE_LEADER] = { _("The Tide Leader") },
     [TRAINER_CLASS_EX_LEADER] = { _("Ex-Gym Leader") },
     [TRAINER_CLASS_SHARPRISE_COO] = { _("SharpRise Chief Operating Officer") },
     [TRAINER_CLASS_EX_ELITE_FOUR] = { _("Ex-Elite Four") },
+    [TRAINER_CLASS_SHARPRISE_ENFORCER] = {_("SharpRise Enforcer") },
+    [TRAINER_CLASS_CHARLOTTE] = {_("{PKMN} Trainer") },
+    [TRAINER_CLASS_BAIYA] = {_("{PKMN} Trainer") },
     // End Silicon
 };
 
