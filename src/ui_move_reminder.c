@@ -38,7 +38,6 @@ static EWRAM_DATA struct MoveReminderData *sMoveReminderDataPtr = NULL;
 
 static void CB2_MoveReminder(void);
 static void VBlankCB_MoveReminder(void);
-static void MoveReminder_FreeResources(void);
 
 static void Task_MReminderInput_Main(u8);
 static void Task_MReminderInput_WaitFadeAndExit(u8);
@@ -73,10 +72,8 @@ static HandleInputFunc PageInterface_GetHandleInputFunc(enum PageInterfaces);
 static void PageInterface_ReloadTilemap(void);
 static void PageInterface_PrintHelpBar(void);
 static void PageInterface_UpdateFrontEnd(void);
-static enum PageInterfaces PageInterface_Get(void);
-static enum PageInterfaces PageInterface_Set(enum PageInterfaces);
-
-static struct MoveReminderMon *MReminderMon_Get(void);
+static enum PageInterfaces PageInterface_GetValue(void);
+static enum PageInterfaces PageInterface_SetValue(enum PageInterfaces);
 
 static void MovePool_PopulateList(void);
 static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
@@ -100,7 +97,9 @@ static void MovePool_Sort(void);
 static MovePoolSortFunc MovePool_GetSortFunc(void);
 static void MovePoolSort_Default(u32 *);
 
-static void MReminderWindow_Print(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
+static void MiscUtil_FreeResources(void);
+static struct MoveReminderMon *MiscUtil_GetMon(void);
+static void MiscUtil_AddTextPrinter(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
 static void MainPage_HandleInput(u8);
 static void MainPage_NavigatePage(s32, u32);
@@ -132,7 +131,7 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     }
 
     MReminderMode_SetValue(mode);
-    PageInterface_Set(PAGE_INTERFACE_MAIN);
+    PageInterface_SetValue(PAGE_INTERFACE_MAIN);
     sMoveReminderDataPtr->ptr.mon = mon;
     sMoveReminderDataPtr->moveSlot = moveSlot;
     sMoveReminderDataPtr->savedCallback = callback;
@@ -156,7 +155,7 @@ static void VBlankCB_MoveReminder(void)
     TransferPlttBuffer();
 }
 
-static void MoveReminder_FreeResources(void)
+static void MiscUtil_FreeResources(void)
 {
     for (enum MoveReminderBackgroundBuffers buf = 0; buf < NUM_MREMINDER_BACKGROUND_BUFFERS; buf++)
     {
@@ -172,7 +171,7 @@ static void MoveReminder_FreeResources(void)
 
 static void Task_MReminderInput_Main(u8 taskId)
 {
-    HandleInputFunc inputFunc = PageInterface_GetHandleInputFunc(PageInterface_Get());
+    HandleInputFunc inputFunc = PageInterface_GetHandleInputFunc(PageInterface_GetValue());
     inputFunc(taskId);
 }
 
@@ -181,7 +180,7 @@ static void Task_MReminderInput_WaitFadeAndExit(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sMoveReminderDataPtr->savedCallback);
-        MoveReminder_FreeResources();
+        MiscUtil_FreeResources();
         DestroyTask(taskId);
     }
 }
@@ -424,7 +423,7 @@ static void MoveBar_Update(void)
         if (move == MOVE_NONE)
             continue;
 
-        MReminderWindow_Print(win, GetMoveName(move), FONT_OUTLINED, PAGE_MAIN_MOVE_BAR_NAME_X, nameY, MREMINDER_TXTCLR_DEFAULT);
+        MiscUtil_AddTextPrinter(win, GetMoveName(move), FONT_OUTLINED, PAGE_MAIN_MOVE_BAR_NAME_X, nameY, MREMINDER_TXTCLR_DEFAULT);
         BlitBitmapRectToWindow(win, gMonSummary_MoveTypeGfx,
             0, moveType * 16,
             16, 16 * NUMBER_OF_MON_TYPES,
@@ -450,7 +449,7 @@ static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
 
 static void SpriteCB_MoveBar(struct Sprite *sprite)
 {
-    sprite->invisible = (PageInterface_Get() != PAGE_INTERFACE_MAIN
+    sprite->invisible = (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
                          || sprite->sMoveBar_Idx >= MovePool_GetNumberOfMoves());
 }
 
@@ -498,18 +497,18 @@ static HandleInputFunc PageInterface_GetHandleInputFunc(enum PageInterfaces page
 static void PageInterface_ReloadTilemap(void)
 {
     DecompressDataWithHeaderWram(
-        PageInterface_GetTilemap(PageInterface_Get()),
+        PageInterface_GetTilemap(PageInterface_GetValue()),
         TilemapBuffer_GetPtr(MREMINDER_BGBUF_TILEMAP));
 }
 
 static void PageInterface_PrintHelpBar(void)
 {
-    const u8 *str = PageInterface_GetHelpBarStr(PageInterface_Get());
+    const u8 *str = PageInterface_GetHelpBarStr(PageInterface_GetValue());
 
     if (str == NULL)
         str = gText_EmptyString2;
 
-    MReminderWindow_Print(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
         MREMINDER_HELPBAR_FOOTER_X, MREMINDER_HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
 }
 
@@ -524,7 +523,7 @@ static void PageInterface_UpdateFrontEnd(void)
     PageInterface_ReloadTilemap();
     PageInterface_PrintHelpBar();
 
-    UpdateFrontEndFunc func = PageInterface_GetUpdateFrontEndFunc(PageInterface_Get());
+    UpdateFrontEndFunc func = PageInterface_GetUpdateFrontEndFunc(PageInterface_GetValue());
     func();
 
     for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
@@ -534,18 +533,18 @@ static void PageInterface_UpdateFrontEnd(void)
         CopyBgTilemapBufferToVram(bg);
 }
 
-static enum PageInterfaces PageInterface_Get(void)
+static enum PageInterfaces PageInterface_GetValue(void)
 {
     return sMoveReminderDataPtr->page;
 }
 
-static enum PageInterfaces PageInterface_Set(enum PageInterfaces page)
+static enum PageInterfaces PageInterface_SetValue(enum PageInterfaces page)
 {
     sMoveReminderDataPtr->page = page;
-    return PageInterface_Get();
+    return PageInterface_GetValue();
 }
 
-static struct MoveReminderMon *MReminderMon_Get(void)
+static struct MoveReminderMon *MiscUtil_GetMon(void)
 {
     return &sMoveReminderDataPtr->mon;
 }
@@ -553,7 +552,7 @@ static struct MoveReminderMon *MReminderMon_Get(void)
 static void MovePool_PopulateList(void)
 {
     u32 numMoves = 0;
-    u32 species = MReminderMon_Get()->species;
+    u32 species = MiscUtil_GetMon()->species;
 
     MovePool_ProcessLevelUpLearnset(GetSpeciesLevelUpLearnset(species), &numMoves);
     MovePool_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
@@ -582,7 +581,7 @@ static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, 
         if (!IsMoveInSilicon(move))
             continue;
 
-        if (MReminderMon_Get()->level < learnset[idx].level)
+        if (MiscUtil_GetMon()->level < learnset[idx].level)
             continue;
 
         MovePool_AddMoveToIdx(move, MP_METHOD_LEVEL_UP, numMoves);
@@ -595,7 +594,7 @@ static void MovePool_ProcessMachineLearnset(const u16 *learnset, u32 *numMoves)
     {
         u32 move = GetTMHMMoveId(idx);
 
-        if (!CanLearnTeachableMove(MReminderMon_Get()->species, move))
+        if (!CanLearnTeachableMove(MiscUtil_GetMon()->species, move))
             continue;
 
         if (!CheckBagHasItem(GetTMHMItemId(idx), 1))
@@ -617,7 +616,7 @@ static void MovePool_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
         if (!IsMoveInSilicon(move))
             continue;
 
-        if (!SpeciesCanLearnEggMove(MReminderMon_Get()->species, move))
+        if (!SpeciesCanLearnEggMove(MiscUtil_GetMon()->species, move))
             continue;
 
         u32 existingIdx = MovePool_GetIdxFromMove(move);
@@ -634,7 +633,7 @@ static UNUSED bool32 MovePool_MonHasMove(u32 move)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (MReminderMon_Get()->moves[i] == move)
+        if (MiscUtil_GetMon()->moves[i] == move)
             return TRUE;
     }
 
@@ -740,7 +739,7 @@ static void MovePoolSort_Default(u32 *numMoves)
     }
 }
 
-static void MReminderWindow_Print(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
+static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
 {
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
 }
@@ -885,9 +884,9 @@ static u32 MainPage_GetGridListIdx(void)
 
 static void MainPage_UpdateFrontEnd(void)
 {
-    struct MoveReminderMon *mon = MReminderMon_Get();
+    struct MoveReminderMon *mon = MiscUtil_GetMon();
 
-    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, mon->nickname, FONT_OUTLINED, 2, 0, MREMINDER_TXTCLR_DEFAULT);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, mon->nickname, FONT_OUTLINED, 2, 0, MREMINDER_TXTCLR_DEFAULT);
     MainPage_PrintMonGender();
     MainPage_PrintMonLevel();
 
@@ -905,7 +904,7 @@ static void MainPage_UpdateFrontEnd(void)
 
 static void MainPage_PrintMonGender(void)
 {
-    struct MoveReminderMon *mon = MReminderMon_Get();
+    struct MoveReminderMon *mon = MiscUtil_GetMon();
     u32 species = mon->species;
     u32 gender = mon->gender;
 
@@ -919,28 +918,28 @@ static void MainPage_PrintMonGender(void)
     enum MoveReminderTextColors color = MREMINDER_TXTCLR_MALE + femaleMon;
     const u8 *str = femaleMon ? gText_FemaleSymbol : gText_MaleSymbol;
 
-    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, str, FONT_OUTLINED, 66, 0, color);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, FONT_OUTLINED, 66, 0, color);
 }
 
 static void MainPage_PrintMonLevel(void)
 {
-    struct MoveReminderMon *mon = MReminderMon_Get();
+    struct MoveReminderMon *mon = MiscUtil_GetMon();
 
     ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
-    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
 }
 
 // x/y1 for stat's name, x/y2 for stat's number
 static void MainPage_PrintMonStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
 {
-    u32 value = MReminderMon_Get()->stats[stat];
+    u32 value = MiscUtil_GetMon()->stats[stat];
 
-    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, sMoveReminder_StatNames[stat],
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, sMoveReminder_StatNames[stat],
         FONT_OUTLINED, x1, y1, MREMINDER_TXTCLR_DEFAULT);
 
     ConvertUIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-    MReminderWindow_Print(MREMINDER_WINDOW_MAIN, gStringVar1,
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar1,
         FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
 }
 
