@@ -2,7 +2,7 @@
   "id": "MAP_SHARPRISE_SPIRE_PARK",
   "name": "SharpriseSpire_Park",
   "layout": "LAYOUT_SHARPRISE_SPIRE_PARK",
-  "music": "MUS_RG_SILPH",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_SHARPRISESPIRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

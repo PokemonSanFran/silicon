@@ -2,7 +2,7 @@
   "id": "MAP_IRISINA_TOWN",
   "name": "IrisinaTown",
   "layout": "LAYOUT_IRISINA_TOWN",
-  "music": "MUS_RG_CINNABAR",
+  "music": "MUS_IRISINA_TOWN",
   "region_map_section": "MAPSEC_IRISINA_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
