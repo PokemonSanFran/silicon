@@ -23,6 +23,7 @@
 #include "move.h"
 #include "item.h"
 #include "daycare.h"
+#include "qol_field_moves.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
@@ -82,13 +83,14 @@ static void MReminderMoves_SortList(void);
 static SortListFunc MReminderMoves_GetSortListFunc(void);
 static void MReminderMoves_ProcessDefaultList(u32 *);
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
-static void MReminderMoves_ProcessEggLearnset(const u16 *, u32 *);
 static void MReminderMoves_ProcessMachineLearnset(const u16 *, u32 *);
-static bool32 MReminderMoves_CanMonLearnMove(const u16 *, u32, u32);
-static bool32 MReminderMoves_IsMoveAlreadyAdded(u32, u32);
-static u32 MReminderMoves_GetIdxFromMove(u32, u32);
+static void MReminderMoves_ProcessEggLearnset(const u16 *, u32 *);
+static bool32 MReminderMoves_MonHasMove(u32);
+static bool32 MReminderMoves_CanMonLearnMove(const u16 *, u32);
+static bool32 MReminderMoves_IsMoveAlreadyAdded(u32);
+static u32 MReminderMoves_GetIdxFromMove(u32);
 static void MReminderMoves_AddMoveToIdx(u32, enum MoveReminderMethod, u32 *);
-static void MReminderMoves_UpdateMoveInIdx(u32, enum MoveReminderMethod, u32);
+static void MReminderMoves_UpdateMethodInIdx(u32, enum MoveReminderMethod);
 static void MReminderMoves_SetMoveToIdx(u32, u32);
 static u32 MReminderMoves_GetMoveFromIdx(u32);
 static void MReminderMoves_SetMethodToIdx(u32, enum MoveReminderMethod);
@@ -545,13 +547,9 @@ static void MReminderMoves_PopulateList(void)
     u32 species = MReminderMon_Get()->species;
 
     MReminderMoves_ProcessLevelUpLearnset(GetSpeciesLevelUpLearnset(species), &numMoves);
-    MReminderMoves_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
     MReminderMoves_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
-
+    MReminderMoves_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
     MReminderMoves_SortList();
-
-    for (u32 i = 0; MReminderMoves_GetMoveFromIdx(i) != MOVE_NONE; i++)
-        DebugPrintf("list[%d]: { %S, %d }", i, GetMoveName(MReminderMoves_GetMoveFromIdx(i)), MReminderMoves_GetMethodFromIdx(i));
 }
 
 static void MReminderMoves_SortList(void)
@@ -570,80 +568,100 @@ static SortListFunc MReminderMoves_GetSortListFunc(void)
 
 static void MReminderMoves_ProcessDefaultList(u32 *numMoves)
 {
-    for (u32 i = 0; MReminderMoves_GetMoveFromIdx(i) != MOVE_NONE; i++)
+    while (*numMoves < UI_MOVES_COUNT_TOTAL)
     {
-        u32 move = MReminderMoves_GetMoveFromIdx(i);
-        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+        u32 move = MReminderMoves_GetMoveFromIdx(*numMoves);
+
+        if (move == MOVE_NONE)
             break;
 
-        MReminderMoves_SetMoveToList(i, move);
+        MReminderMoves_SetMoveToList(*numMoves, move);
         (*numMoves)++;
     }
 }
 
 static void MReminderMoves_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, u32 *numMoves)
 {
-    u32 arrayCount = 0;
+    s32 idx = 0;
 
-    // not all mons has the maximum amount of level up moves
-    while (learnset[arrayCount].move != MOVE_UNAVAILABLE)
-        arrayCount++;
+    // is there a way to ARRAY_COUNT for pointers?
+    while (learnset[idx].move != LEVEL_UP_MOVE_END)
+        idx++;
 
-    for (u32 idx = arrayCount; idx > 0; idx--)
+    // no moves found
+    if (!idx)
+        return;
+
+    while (idx >= 0)
     {
-        if (learnset[idx].move == MOVE_NONE || learnset[idx].move == MOVE_UNAVAILABLE)
+        u32 move = learnset[idx].move;
+
+        idx--;
+
+        if (!IsMoveInSilicon(move))
             continue;
 
-        if (!IsMoveInSilicon(learnset[idx].move))
+        if (MReminderMon_Get()->level < learnset[idx].level)
             continue;
 
-        if (learnset[idx].level > MReminderMon_Get()->level)
-            continue;
-
-        if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx].move, *numMoves))
-            MReminderMoves_AddMoveToIdx(learnset[idx].move, MREMINDER_METHOD_LEVEL_UP, numMoves);
-    }
-}
-
-static void MReminderMoves_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
-{
-    for (u32 idx = 0; idx < MOVES_COUNT; idx++)
-    {
-        if (learnset[idx] == MOVE_NONE || learnset[idx] == MOVE_UNAVAILABLE)
-            break;
-
-        if (!IsMoveInSilicon(idx) || !MReminderMoves_CanMonLearnMove(learnset, idx, EGG_MOVES_ARRAY_COUNT))
-            continue;
-
-        if (!MReminderMoves_IsMoveAlreadyAdded(learnset[idx], *numMoves))
-            MReminderMoves_AddMoveToIdx(learnset[idx], MREMINDER_METHOD_EGG, numMoves);
-        else
-            MReminderMoves_UpdateMoveInIdx(MReminderMoves_GetIdxFromMove(learnset[idx], *numMoves), MREMINDER_METHOD_EGG, *numMoves);
+        MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_LEVEL_UP, numMoves);
     }
 }
 
 static void MReminderMoves_ProcessMachineLearnset(const u16 *learnset, u32 *numMoves)
 {
-    for (u32 idx = 0; idx < NUM_TECHNICAL_MACHINES; idx++)
+    for (enum TMHMIndex idx = 0; idx < NUM_TECHNICAL_MACHINES; idx++)
     {
         u32 move = GetTMHMMoveId(idx);
 
-        if (!MReminderMoves_CanMonLearnMove(learnset, move, NUM_TECHNICAL_MACHINES))
+        if (!CanLearnTeachableMove(MReminderMon_Get()->species, move))
             continue;
 
-        if (!CheckBagHasItem(GetTMHMItemIdFromMoveId(move), 1))
+        if (!CheckBagHasItem(GetTMHMItemId(idx), 1))
             continue;
 
-        if (!MReminderMoves_IsMoveAlreadyAdded(move, *numMoves))
-            MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_MACHINE, numMoves);
+        u32 existingIdx = MReminderMoves_GetIdxFromMove(move);
+
+        if (existingIdx != MOVE_UNAVAILABLE)
+            MReminderMoves_UpdateMethodInIdx(existingIdx, MREMINDER_METHOD_MACHINE);
         else
-            MReminderMoves_UpdateMoveInIdx(MReminderMoves_GetIdxFromMove(move, *numMoves), MREMINDER_METHOD_MACHINE, *numMoves);
+            MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_MACHINE, numMoves);
     }
 }
 
-static bool32 MReminderMoves_CanMonLearnMove(const u16 *learnset, u32 machineMove, u32 numMoves)
+static void MReminderMoves_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
 {
-    for (u32 i = 0; i < numMoves; i++)
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    {
+        if (!IsMoveInSilicon(move))
+            continue;
+
+        if (!SpeciesCanLearnEggMove(MReminderMon_Get()->species, move))
+            continue;
+
+        u32 existingIdx = MReminderMoves_GetIdxFromMove(move);
+
+        if (existingIdx != MOVE_UNAVAILABLE)
+            MReminderMoves_UpdateMethodInIdx(existingIdx, MREMINDER_METHOD_EGG);
+        else
+            MReminderMoves_AddMoveToIdx(move, MREMINDER_METHOD_EGG, numMoves);
+    }
+}
+
+static bool32 MReminderMoves_MonHasMove(u32 move)
+{
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (MReminderMon_Get()->moves[i] == move)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 MReminderMoves_CanMonLearnMove(const u16 *learnset, u32 machineMove)
+{
+    for (u32 i = 0; learnset[i] != MOVE_UNAVAILABLE; i++)
     {
         if (learnset[i] == MOVE_NONE || learnset[i] == MOVE_UNAVAILABLE)
             break;
@@ -655,14 +673,14 @@ static bool32 MReminderMoves_CanMonLearnMove(const u16 *learnset, u32 machineMov
     return FALSE;
 }
 
-static bool32 MReminderMoves_IsMoveAlreadyAdded(u32 move, u32 numMoves)
+static bool32 MReminderMoves_IsMoveAlreadyAdded(u32 move)
 {
-    return MReminderMoves_GetIdxFromMove(move, numMoves) != MOVE_UNAVAILABLE;
+    return MReminderMoves_GetIdxFromMove(move) != MOVE_UNAVAILABLE;
 }
 
-static u32 MReminderMoves_GetIdxFromMove(u32 move, u32 numMoves)
+static u32 MReminderMoves_GetIdxFromMove(u32 move)
 {
-    for (u32 idx = 0; idx < numMoves; idx++)
+    for (u32 idx = 0; MReminderMoves_GetMoveFromIdx(idx) != MOVE_NONE; idx++)
     {
         if (MReminderMoves_GetMoveFromIdx(idx) == move)
             return idx;
@@ -678,32 +696,26 @@ static void MReminderMoves_AddMoveToIdx(u32 move, enum MoveReminderMethod method
     (*numMoves)++;
 }
 
-static void MReminderMoves_UpdateMoveInIdx(u32 move, enum MoveReminderMethod newMethod, u32 numMoves)
+static void MReminderMoves_UpdateMethodInIdx(u32 idx, enum MoveReminderMethod newMethod)
 {
-    for (u32 idx = 0; idx < numMoves; idx++)
+    switch (MReminderMoves_GetMethodFromIdx(idx))
     {
-        if (MReminderMoves_GetMoveFromIdx(idx) != move)
-            continue;
-
-        switch (MReminderMoves_GetMethodFromIdx(idx))
-        {
-        case MREMINDER_METHOD_LEVEL_UP:
-            if (newMethod == MREMINDER_METHOD_EGG)
-                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_LEVEL_EGG);
-            else if (newMethod == MREMINDER_METHOD_MACHINE)
-                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_MACHINE_LEVEL);
-            break;
-        case MREMINDER_METHOD_EGG:
-            if (newMethod == MREMINDER_METHOD_MACHINE)
-                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
-            break;
-        case MREMINDER_METHOD_MACHINE:
-            if (newMethod == MREMINDER_METHOD_EGG)
-                MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
-            break;
-        default:
-            break;
-        }
+    case MREMINDER_METHOD_LEVEL_UP:
+        if (newMethod == MREMINDER_METHOD_EGG)
+            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_LEVEL_EGG);
+        else if (newMethod == MREMINDER_METHOD_MACHINE)
+            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_MACHINE_LEVEL);
+        break;
+    case MREMINDER_METHOD_EGG:
+        if (newMethod == MREMINDER_METHOD_MACHINE)
+            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
+        break;
+    case MREMINDER_METHOD_MACHINE:
+        if (newMethod == MREMINDER_METHOD_EGG)
+            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
+        break;
+    default:
+        break;
     }
 }
 
