@@ -39,6 +39,7 @@ script Prologue_LostToMagnus_Script{
 
 script Prologue_InteractMagnus_Script{
     lock
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
         msgbox(gText_Prologue_YouMadeIt,MSGBOX_NPC,SPEAKER_MAGNUS)
         msgbox(gText_Prologue_WeveBeenWatching,,SPEAKER_MAGNUS)
         msgbox(gText_Prologue_YoureGoingToBe,,SPEAKER_MAGNUS)

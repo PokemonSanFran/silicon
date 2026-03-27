@@ -95,49 +95,52 @@ removeobject(17)
 callnative(DestroyVirtualObjects)
 }
 
-script HeresHowThisIsGoingToGo_ExplainLeagueDialogue {
+script HeresHowThisIsGoingToGo_ExplainLeagueDialogue
+{
     lockall
+    playbgm(MUS_ACCEPT_LETTER)
     startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
     applymovement(PLAYER,Common_Movement_FaceUp)
     applymovement(CHARLOTTE,Common_Movement_FaceUp)
     applymovement(KAI,Common_Movement_FaceUp)
     waitmovement(0)
 
-msgbox(gText_HeresHowThisIsGoingToGo_CongratulationsOnAll,,SPEAKER_ADELAIDE)
+    msgbox(gText_HeresHowThisIsGoingToGo_CongratulationsOnAll,,SPEAKER_ADELAIDE)
 
 
-msgbox(gText_HeresHowThisIsGoingToGo_WooYay)
+    msgbox(gText_HeresHowThisIsGoingToGo_WooYay)
 
-msgbox(gText_HeresHowThisIsGoingToGo_ImSureNone,,SPEAKER_ADELAIDE)
+    msgbox(gText_HeresHowThisIsGoingToGo_ImSureNone,,SPEAKER_ADELAIDE)
 
-msgbox(gText_HeresHowThisIsGoingToGo_WaitIDid,,SPEAKER_CHARLOTTE)
-
-
-msgbox(gText_HeresHowThisIsGoingToGo_DotDotDot)
-
-msgbox(gText_HeresHowThisIsGoingToGo_SoIllGoOver,,SPEAKER_ADELAIDE)
-closemessage
+    msgbox(gText_HeresHowThisIsGoingToGo_WaitIDid,,SPEAKER_CHARLOTTE)
 
 
-applymovement(ADELAIDE,Common_Movement_FaceLeft)
-msgbox(gText_HeresHowThisIsGoingToGo_YourGroupsAnd,,SPEAKER_ADELAIDE)
+    msgbox(gText_HeresHowThisIsGoingToGo_DotDotDot)
 
-closemessage
+    msgbox(gText_HeresHowThisIsGoingToGo_SoIllGoOver,,SPEAKER_ADELAIDE)
+    closemessage
 
-fadescreen(FADE_TO_BLACK)
-setvar(VAR_STORYLINE_STATE,STORY_CHAMPIONSHIP_EXPLAINED)
-playse(SE_EXIT)
-waitse
-removeobject(ADELAIDE)
-removeobject(OLIVER)
-call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
-fadescreen(FADE_FROM_BLACK)
-applymovement(KAI,HeresHowThisIsGoingToGo_GoToBracket)
-waitmovement(KAI)
+
+    applymovement(ADELAIDE,Common_Movement_FaceLeft)
+    msgbox(gText_HeresHowThisIsGoingToGo_YourGroupsAnd,,SPEAKER_ADELAIDE)
+
+    closemessage
+
+    fadescreen(FADE_TO_BLACK)
+    setvar(VAR_STORYLINE_STATE,STORY_CHAMPIONSHIP_EXPLAINED)
+    playse(SE_EXIT)
+    waitse
+    removeobject(ADELAIDE)
+    removeobject(OLIVER)
+    call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
+    fadescreen(FADE_FROM_BLACK)
+    applymovement(KAI,HeresHowThisIsGoingToGo_GoToBracket)
+    waitmovement(KAI)
+    fadedefaultbgm
     call(TryAutoSave)
-endcutscene
-releaseall
-end
+    endcutscene
+    releaseall
+    end
 }
 
 text gText_HeresHowThisIsGoingToGo_CongratulationsOnAll {
