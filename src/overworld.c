@@ -89,6 +89,7 @@
 #include "options_battle.h" // Battle Settings
 #include "rematch.h" // siliconMerge
 #include "options_music.h" // siliconMerge
+#include "quest_logic.h" // firstMusicUpdate
 #include "map_preview_screen.h" // mapPreviews
 #include "ui_map_system.h"
 
@@ -1337,6 +1338,20 @@ static bool8 IsTirabudinGymRestored(struct WarpData *warp)
     return (warp->mapNum == MAP_NUM(MAP_TIRABUDIN_PLACE_GYM_LOBBY));
         return TRUE;
 }
+
+static bool8 IsOnHalaiIslandDuringConstruction(struct WarpData *warp)
+{
+    if (IsHalaiIslandUnderConstruction() == FALSE)
+        return FALSE;
+
+    if (Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->regionMapSectionId != MAPSEC_HALAI_ISLAND)
+        return FALSE;
+
+    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F)
+        return FALSE;
+
+    return TRUE;
+}
 // End firstMusicUpdate
 
 static bool16 NoMusicInSootopolisWithLegendaries(struct WarpData *warp)
@@ -1391,6 +1406,8 @@ u16 GetLocationMusic(struct WarpData *warp)
     // Start firstMusicUpdate
     else if (IsTirabudinGymRestored(warp) == TRUE)
         return MUS_RESTORED_TIRABUDIN_PLACE_GYM;
+    else if (IsOnHalaiIslandDuringConstruction(warp) == TRUE)
+        return MUS_HALAI_ISLAND_EARTHQUAKE;
     // End firstMusicUpdate
     else
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;

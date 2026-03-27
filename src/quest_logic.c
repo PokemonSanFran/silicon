@@ -2384,3 +2384,23 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
     rabiesPokerus = Random() % 2;
     SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
 }
+
+// ***********************************************************************
+// Cutscene: Earthquake
+// ***********************************************************************
+
+bool8 IsHalaiIslandUnderConstruction(void)
+{
+    if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
+        return FALSE;
+    if (VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_IsHalaiIslandUnderConstruction(void)
+{
+    gSpecialVar_Result = IsHalaiIslandUnderConstruction();
+}
+

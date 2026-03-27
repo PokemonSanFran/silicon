@@ -41,5 +41,6 @@ void DebugQuest_RestoreTirabudinGym(u8);
 u32 exponent(u32 y, u32 x);
 void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+bool8 IsHalaiIslandUnderConstruction(void);
 
 #endif //GUARD_QUESTLOGIC_H
