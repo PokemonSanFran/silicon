@@ -119,14 +119,11 @@ enum MoveReminderSpriteTags
     MREMINDER_TAG_TYPE_PAL_2,
 };
 
-enum MoveReminderMethod
+enum MoveReminderMethods
 {
     MREMINDER_METHOD_LEVEL_UP,
     MREMINDER_METHOD_EGG,
     MREMINDER_METHOD_MACHINE,
-    MREMINDER_METHOD_LEVEL_EGG,
-    MREMINDER_METHOD_MACHINE_LEVEL,
-    MREMINDER_METHOD_EGG_MACHINE,
 
     MREMINDER_METHOD_ALL
 };
@@ -156,7 +153,7 @@ typedef void (*HandleInputFunc)(u8);
 struct MoveReminderLearnset
 {
     u16 move:13;
-    enum MoveReminderMethod method:3;
+    enum MoveReminderMethods method:3;
 };
 
 struct MoveReminderMon

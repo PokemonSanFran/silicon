@@ -89,11 +89,12 @@ static bool32 MReminderMoves_MonHasMove(u32);
 static bool32 MReminderMoves_CanMonLearnMove(const u16 *, u32);
 static bool32 MReminderMoves_IsMoveAlreadyAdded(u32);
 static u32 MReminderMoves_GetIdxFromMove(u32);
-static void MReminderMoves_AddMoveToIdx(u32, enum MoveReminderMethod, u32 *);
-static void MReminderMoves_UpdateMethodInIdx(u32, enum MoveReminderMethod);
+static void MReminderMoves_AddMoveToIdx(u32, enum MoveReminderMethods, u32 *);
+static void MReminderMoves_UpdateMethodInIdx(u32, enum MoveReminderMethods);
 static void MReminderMoves_SetMoveToIdx(u32, u32);
 static u32 MReminderMoves_GetMoveFromIdx(u32);
-static void MReminderMoves_SetMethodToIdx(u32, enum MoveReminderMethod);
+static void MReminderMoves_SetMethodToIdx(u32, enum MoveReminderMethods);
+static bool32 MReminderMoves_IsMethodInIdx(u32, enum MoveReminderMethods);
 static u32 MReminderMoves_GetMethodFromIdx(u32);
 static void MReminderMoves_SetNumberOfMoves(u32);
 static u32 MReminderMoves_GetNumberOfMoves(void);
@@ -698,34 +699,19 @@ static u32 MReminderMoves_GetIdxFromMove(u32 move)
     return MOVE_UNAVAILABLE;
 }
 
-static void MReminderMoves_AddMoveToIdx(u32 move, enum MoveReminderMethod method, u32 *numMoves)
+static void MReminderMoves_AddMoveToIdx(u32 move, enum MoveReminderMethods method, u32 *numMoves)
 {
     MReminderMoves_SetMoveToIdx(*numMoves, move);
     MReminderMoves_SetMethodToIdx(*numMoves, method);
     (*numMoves)++;
 }
 
-static void MReminderMoves_UpdateMethodInIdx(u32 idx, enum MoveReminderMethod newMethod)
+static void MReminderMoves_UpdateMethodInIdx(u32 idx, enum MoveReminderMethods newMethod)
 {
-    switch (MReminderMoves_GetMethodFromIdx(idx))
-    {
-    case MREMINDER_METHOD_LEVEL_UP:
-        if (newMethod == MREMINDER_METHOD_EGG)
-            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_LEVEL_EGG);
-        else if (newMethod == MREMINDER_METHOD_MACHINE)
-            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_MACHINE_LEVEL);
-        break;
-    case MREMINDER_METHOD_EGG:
-        if (newMethod == MREMINDER_METHOD_MACHINE)
-            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
-        break;
-    case MREMINDER_METHOD_MACHINE:
-        if (newMethod == MREMINDER_METHOD_EGG)
-            MReminderMoves_SetMethodToIdx(idx, MREMINDER_METHOD_EGG_MACHINE);
-        break;
-    default:
-        break;
-    }
+    if (MReminderMoves_IsMethodInIdx(idx, newMethod))
+        return;
+
+    MReminderMoves_SetMethodToIdx(idx, newMethod);
 }
 
 static void MReminderMoves_SetMoveToIdx(u32 idx, u32 move)
@@ -738,9 +724,14 @@ static u32 MReminderMoves_GetMoveFromIdx(u32 idx)
     return sMoveReminderResourcesPtr->learnsets[idx].move;
 }
 
-static void MReminderMoves_SetMethodToIdx(u32 idx, enum MoveReminderMethod method)
+static void MReminderMoves_SetMethodToIdx(u32 idx, enum MoveReminderMethods method)
 {
-    sMoveReminderResourcesPtr->learnsets[idx].method = method;
+    sMoveReminderResourcesPtr->learnsets[idx].method = 1 << method;
+}
+
+static bool32 MReminderMoves_IsMethodInIdx(u32 idx, enum MoveReminderMethods method)
+{
+    return (MReminderMoves_GetMethodFromIdx(idx) & method) != 0;
 }
 
 static u32 MReminderMoves_GetMethodFromIdx(u32 idx)
