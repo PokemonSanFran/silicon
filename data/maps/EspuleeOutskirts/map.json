@@ -2,7 +2,7 @@
   "id": "MAP_ESPULEE_OUTSKIRTS",
   "name": "EspuleeOutskirts",
   "layout": "LAYOUT_ESPULEE_OUTSKIRTS",
-  "music": "MUS_LILYCOVE",
+  "music": "MUS_ESPULEE_OUTSKIRTS",
   "region_map_section": "MAPSEC_ESPULEE_OUTSKIRTS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
