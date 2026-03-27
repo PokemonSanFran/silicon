@@ -5891,6 +5891,8 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_SHARPRISE_ENFORCER:
         case TRAINER_CLASS_CHARLOTTE:
             return MUS_VS_CHARLOTTE;
+        case TRAINER_CLASS_SHARPRISE_CEO:
+            return MUS_VS_LUCREZIA;
 // End firstMusicUpdate
         default:
             if (GetCurrentRegion() == REGION_KANTO)

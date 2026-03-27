@@ -2683,7 +2683,7 @@ Name: Adelaide
 Pic: Adelaide
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 Reveal: Adelaide
-Class: Magma Leader
+Class: Sharprise CEO
 Type: Boss
 Overworld Sprite: Adelaide
 Map Section: SharpriseSpire
@@ -2773,8 +2773,12 @@ IVs: 0 Atk
 
 === TRAINER_ADELAIDE_B ===
 Name: Adelaide
-Pic: Cooltrainer F
+Pic: Adelaide
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+Reveal: Adelaide
+Class: Sharprise CEO
+Type: Boss
+Overworld Sprite: Adelaide
 Map Section: SharpriseSpire
 
 Nihilego Sharprise @ Power Herb  
