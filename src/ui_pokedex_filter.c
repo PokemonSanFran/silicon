@@ -37,7 +37,7 @@
 
 static void SpeciesFilter_ResetEntireOption(enum PokedexFilterList);
 static void SpeciesFilter_ResetFilterSingleOption(enum PokedexFilterList, u32);
-static void DebugPrintActiveFilters(void);
+static void UNUSED DebugPrintActiveFilters(void);
 bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 static bool32 SpeciesFilter_DoesSpeciesLearnFilteredMove(u32, u32);
 static bool32 SpeciesFilter_IsSpeciesStatWithinTier_Stat(u32, u32);
@@ -1647,9 +1647,8 @@ static void Task_SpeciesFilter_HandleTypeInput(u8 taskId)
     }
 }
 
-static void DebugPrintCoorindates(void)
+static void UNUSED DebugPrintCoorindates(void)
 {
-    return;
     u32 x = SpeciesFilter_EditPage_GetCursorCoordinate(0);
     u32 y = SpeciesFilter_EditPage_GetCursorCoordinate(1);
     u32 listPosition = SpeciesFilter_EditPage_GetListPosition();
@@ -1657,6 +1656,14 @@ static void DebugPrintCoorindates(void)
     u32 currentRowSize = SpeciesFilter_EditPage_GetSizeForRow(currentRowNumber);
     u32 totalRows = SpeciesFilter_EditPage_GetNumberRows();
     u32 numMons = SpeciesFilter_EditPage_GetNumberEntities();
+
+    (void)x;
+    (void)y;
+    (void)listPosition;
+    (void)currentRowNumber;
+    (void)currentRowSize;
+    (void)totalRows;
+    (void)numMons;
 
     DebugPrintf("x %d | y %d | listPosition %d | rowcurrentRow %d | currentRowSize %d | totalRows %d | nnumItems %d",
             x,
@@ -1674,7 +1681,7 @@ static void SpeciesFilter_EditPage_ChangeColumn(s32 delta)
     SpeciesFilter_EditPage_SanitizeCursorXCoordinate(delta);
     SpeciesFilter_EditPage_SetListPositionFromCoordinates();
     SpeciesFilter_EditPage_PrintInformation();
-    DebugPrintCoorindates();
+    //DebugPrintCoorindates();
 }
 
 static u32 SpeciesFilter_EditPage_GetNumberRows(void)
@@ -2106,7 +2113,7 @@ static void SpeciesFilter_EditPage_ChangeRow(s32 delta)
     SpeciesFilter_EditPage_SetListPositionFromCoordinates();
     SpeciesFilter_EditPage_UpdateEntitiesOnScreen();
     SpeciesFilter_EditPage_PrintInformation();
-    DebugPrintCoorindates();
+    //DebugPrintCoorindates();
 }
 
 static void SpeciesFilter_EditPage_SetListPositionFromCoordinates(void)
@@ -2426,7 +2433,7 @@ static bool32 SpeciesFilter_EditPage_ToggleSelectedOption(void)
         {
             SpeciesFilter_ResetFilterSingleOption(currentFilter,typeIndex);
             SpeciesFilter_EditPage_SetIndividualOptionCheckVisibility(currentPosition,TRUE);
-            DebugPrintActiveFilters();
+            //DebugPrintActiveFilters();
             return TRUE;
         }
     }
@@ -2436,7 +2443,7 @@ static bool32 SpeciesFilter_EditPage_ToggleSelectedOption(void)
         SpeciesFilter_EditPage_SetFilterOptionValue(currentFilter, unsetSpot, currentOption);
     }
     SpeciesFilter_EditPage_SetIndividualOptionCheckVisibility(currentPosition,FALSE);
-    DebugPrintActiveFilters();
+    //DebugPrintActiveFilters();
 
     if (!firstUnset)
         return FALSE;
@@ -2444,9 +2451,8 @@ static bool32 SpeciesFilter_EditPage_ToggleSelectedOption(void)
     return TRUE;
 }
 
-static void DebugPrintActiveFilters(void)
+static void UNUSED DebugPrintActiveFilters(void)
 {
-    return;
     enum PokedexFilterList currentFilter = SpeciesFilter_GetCurrentPositionInFilterList();
     u32 currentOption = 0, typeIndex = 0;
     for (typeIndex = 0; typeIndex < maxOptionLUT[currentFilter]; typeIndex++)
@@ -2454,6 +2460,8 @@ static void DebugPrintActiveFilters(void)
         currentOption = SpeciesFilter_EditPage_GetCurrentFilterValue(currentFilter,typeIndex);
         DebugPrintf("slot %d is entity %S (%d)",typeIndex,SpeciesFilter_EditPage_GetStringForEntity(currentFilter,currentOption),currentOption);
     }
+    (void) currentFilter;
+    (void) currentOption;
 }
 
 static void SpeciesFilter_SetUpStatFilterPage(enum PokedexFilterList currentFilter)

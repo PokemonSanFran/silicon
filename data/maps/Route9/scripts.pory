@@ -8,3 +8,59 @@ mapscripts Route9_MapScripts {
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
+
+script Route9_EventScript_068B06CE
+{
+    trainerbattle_single(TRAINER_068B06CE,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06BE2D1B
+{
+    trainerbattle_single(TRAINER_06BE2D1B,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06C68007
+{
+    trainerbattle_single(TRAINER_06C68007,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06D2BD08
+{
+    trainerbattle_single(TRAINER_06D2BD08,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_07D063A5
+{
+    trainerbattle_single(TRAINER_07D063A5,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_09AEC824
+{
+    trainerbattle_single(TRAINER_09AEC824,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_09B7B6C8
+{
+    trainerbattle_single(TRAINER_09B7B6C8,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_0A542D33
+{
+    trainerbattle_single(TRAINER_0A542D33,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

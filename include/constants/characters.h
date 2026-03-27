@@ -234,6 +234,9 @@
 #define EXT_CTRL_CODE_PAUSE_MUSIC            0x17
 #define EXT_CTRL_CODE_RESUME_MUSIC           0x18
 #define EXT_CTRL_CODE_SPEAKER                0x19
+#define EXT_CTRL_CODE_ACCENT                 0x1A
+#define EXT_CTRL_CODE_BACKGROUND             0x1B
+#define EXT_CTRL_CODE_TEXT_COLORS            0x1C
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -271,6 +274,7 @@
 #define PLACEHOLDER_ID_OBJECT        0xF
 #define PLACEHOLDER_ID_POSSESSIVE    0x10
 // End playerCustom
+#define PLACEHOLDER_ID_REGION        0x11
 
 // battle placeholders are located in battle_message.h
 

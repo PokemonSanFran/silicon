@@ -78,7 +78,7 @@ script EnterEmrys_StartBattle_Script {
 
 script EnterEmrys_Defeated_Script {
     lockall
-    setflag(FLAG_BADGE03_GET)
+    cleargymtrainersandgetbadge(GYM_EMRYS)
     setvar(VAR_GYM_3_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_EMRYS_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)

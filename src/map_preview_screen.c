@@ -17,21 +17,22 @@
 #include "constants/rgb.h"
 #include "constants/map_preview_screen.h"
 
+static EWRAM_DATA bool8 sHasVisitedMapBefore = FALSE;
 static EWRAM_DATA bool8 sAllocedBg0TilemapBuffer = FALSE;
 
-static u8 GetMapPreviewScreenIdx(u8 mapsec);
-static bool8 MapHasPreviewScreen(u8 mapsec, u8 type);
-static bool32 MapHasPreviewScreen_HandleQLState2(u8 mapsec, u8 type);
+static u8 GetMapPreviewScreenIdx(mapsec_u16_t mapsec);
+static bool8 MapHasPreviewScreen(mapsec_u16_t mapsec, u8 type);
+static bool32 MapHasPreviewScreen_HandleQLState2(mapsec_u16_t mapsec, u8 type);
 static void MapPreview_InitBgs(void);
-static void MapPreview_LoadGfx(u8 mapsec);
+static void MapPreview_LoadGfx(mapsec_u16_t mapsec);
 static void MapPreview_Unload(s32 windowIdA, s32 windowIdB);
 static bool32 MapPreview_IsGfxLoadFinished(void);
-static void MapPreview_StartForestTransition(u8 mapsec);
-static u16 MapPreview_CreateMapNameWindow(u8 mapsec);
+static void MapPreview_StartForestTransition(mapsec_u16_t mapsec);
+static u16 MapPreview_CreateMapNameWindow(mapsec_u16_t mapsec);
 static u32 MapPreview_CreateHelpBar(void);
 static void Task_RunMapPreviewScreenForest(u8 taskId);
-static const struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(u8 mapsec);
-static u16 MapPreview_GetDuration(u8 mapsec);
+static const UNUSED struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(mapsec_u16_t mapsec);
+static u16 MapPreview_GetDuration(mapsec_u16_t mapsec);
 static void VblankCB_MapPreviewScript(void);
 static void CB2_MapPreviewScript(void);
 static void Task_RunMapPreview_Script(u8 taskId);
@@ -761,7 +762,7 @@ static const struct BgTemplate sMapPreviewBgTemplate[1] = {
     }
 };
 
-static u8 GetMapPreviewScreenIdx(u8 mapsec)
+static u8 GetMapPreviewScreenIdx(mapsec_u16_t mapsec)
 {
     s32 i;
 
@@ -775,7 +776,7 @@ static u8 GetMapPreviewScreenIdx(u8 mapsec)
     return MPS_COUNT;
 }
 
-static bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
+static bool8 MapHasPreviewScreen(mapsec_u16_t mapsec, u8 type)
 {
     u8 idx;
 
@@ -801,7 +802,7 @@ static bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
     }
 }
 
-static bool32 MapHasPreviewScreen_HandleQLState2(u8 mapsec, u8 type)
+static bool32 MapHasPreviewScreen_HandleQLState2(mapsec_u16_t mapsec, u8 type)
 {
     return MapHasPreviewScreen(mapsec, type);
 }
@@ -812,7 +813,7 @@ static void MapPreview_InitBgs(void)
     ShowBg(0);
 }
 
-static void MapPreview_LoadGfx(u8 mapsec)
+static void MapPreview_LoadGfx(mapsec_u16_t mapsec)
 {
     u8 idx;
 
@@ -855,7 +856,7 @@ static bool32 MapPreview_IsGfxLoadFinished(void)
     return FreeTempTileDataBuffersIfPossible();
 }
 
-static void MapPreview_StartForestTransition(u8 mapsec)
+static void MapPreview_StartForestTransition(mapsec_u16_t mapsec)
 {
     u8 taskId;
 
@@ -879,7 +880,7 @@ static void MapPreview_StartForestTransition(u8 mapsec)
     LockPlayerFieldControls();
 }
 
-static u16 MapPreview_CreateMapNameWindow(u8 mapsec)
+static u16 MapPreview_CreateMapNameWindow(mapsec_u16_t mapsec)
 {
     u16 windowId;
     u32 xctr;
@@ -1023,7 +1024,7 @@ static void Task_RunMapPreviewScreenForest(u8 taskId)
     }
 }
 
-static const UNUSED struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(u8 mapsec)
+static const UNUSED struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(mapsec_u16_t mapsec)
 {
     u8 idx;
 
@@ -1038,7 +1039,7 @@ static const UNUSED struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(u8 
     }
 }
 
-static u16 MapPreview_GetDuration(u8 mapsec)
+static u16 MapPreview_GetDuration(mapsec_u16_t mapsec)
 {
     u8 idx;
     u16 flagId;
@@ -1169,9 +1170,9 @@ bool32 IsMapPreviewTypeBasic(u32 mapSecId)
     return (MapHasPreviewScreen_HandleQLState2(mapSecId, MPS_TYPE_CAVE));
 }
 
-bool32 IsMapPreviewTypeFadeIn(u8 mapsecId)
+bool32 IsMapPreviewTypeFadeIn(mapsec_u16_t mapSecId)
 {
-    return (MapHasPreviewScreen_HandleQLState2(mapsecId, MPS_TYPE_FADE_IN));
+    return (MapHasPreviewScreen_HandleQLState2(mapSecId, MPS_TYPE_FADE_IN));
 }
 
 u32 GetFadeScreenModeFromMapPreviewType(void)
@@ -1182,7 +1183,7 @@ u32 GetFadeScreenModeFromMapPreviewType(void)
         return FADE_TO_WHITE;
 }
 
-void RunMapPreviewScreen(u8 mapSecId)
+void RunMapPreviewScreen(mapsec_u16_t mapSecId)
 {
     u8 taskId = CreateTask(Task_MapPreviewScreen_0, 0);
     gTasks[taskId].data[3] = mapSecId;
@@ -1281,6 +1282,19 @@ void RunFadeInMapPreviewScreen(void)
 {
     MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
     MapPreview_StartForestTransition(gMapHeader.regionMapSectionId);
+}
+
+void MapPreview_SetFlag(u16 flagId)
+{
+    if (!FlagGet(flagId))
+    {
+        sHasVisitedMapBefore = TRUE;
+    }
+    else
+    {
+        sHasVisitedMapBefore = FALSE;
+    }
+    FlagSet(flagId);
 }
 
 #undef taskStep

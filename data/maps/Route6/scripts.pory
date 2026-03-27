@@ -29,3 +29,40 @@ script Route6_EventScript_DeliveryA{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         end
 }
+
+script Route6_EventScript_023957DE
+{
+    trainerbattle_single(TRAINER_023957DE,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script Route6_EventScript_022A53A0
+{
+    trainerbattle_single(TRAINER_022A53A0,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script Route6_EventScript_0092D526
+{
+    trainerbattle_single(TRAINER_0092D526,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script Route6_EventScript_01E7C79B
+{
+    trainerbattle_single(TRAINER_01E7C79B,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script Route6_EventScript_029E0EF0
+{
+    trainerbattle_single(TRAINER_029E0EF0,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script Route6_EventScript_00E46F7D
+{
+    trainerbattle_single(TRAINER_00E46F7D,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

@@ -197,6 +197,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_1",
       "x": 27,
       "y": 23,
       "elevation": 0,
@@ -239,6 +240,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_3",
       "x": 29,
       "y": 23,
       "elevation": 0,
@@ -246,6 +248,7 @@
       "dest_warp_id": "1"
     },
     {
+      "warp_id": "WARP_PERLACIA_CITY_TO_GYM_2",
       "x": 28,
       "y": 23,
       "elevation": 0,

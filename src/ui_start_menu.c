@@ -863,7 +863,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, NULL, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {

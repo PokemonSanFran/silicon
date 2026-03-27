@@ -26,22 +26,65 @@ script HalerbaWilds_EventScript_BlackbeltF{
         end
 }
 
-script HalerbaWilds_EventScript_Helen{
-    trainerbattle_single(TRAINER_HELEN,gText_HalerbaWilds_HaveYouEver,gText_HalerbaWilds_NotReadyForBattle)
-
-    msgbox(gText_HalerbaWilds_ImSupposedToBeGetting,MSGBOX_NPC,SPEAKER_HELEN)
-
+script HalerbaWilds_EventScript_1508BB71
+{
+    trainerbattle_single(TRAINER_1508BB71,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
 
-text gText_HalerbaWilds_HaveYouEver{
-    format("Have you ever gotten cold feet?")
+script HalerbaWilds_EventScript_1510C80A
+{
+    trainerbattle_single(TRAINER_1510C80A,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
 
-text gText_HalerbaWilds_NotReadyForBattle{
-    format("I'm not ready for battle or marriage...")
+script HalerbaWilds_EventScript_15598A38
+{
+    trainerbattle_single(TRAINER_15598A38,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
 
-text gText_HalerbaWilds_ImSupposedToBeGetting{
-    format("I'm supposed to be getting married today. But I don't think I can do it...")
+script HalerbaWilds_EventScript_15A66566
+{
+    trainerbattle_single(TRAINER_15A66566,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_15C87858
+{
+    trainerbattle_single(TRAINER_15C87858,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_1648CE6E
+{
+    trainerbattle_single(TRAINER_1648CE6E,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_1710375D
+{
+    trainerbattle_single(TRAINER_1710375D,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_17DCC938
+{
+    trainerbattle_single(TRAINER_17DCC938,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_14C5EE6C
+{
+    trainerbattle_single(TRAINER_14C5EE6C,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }

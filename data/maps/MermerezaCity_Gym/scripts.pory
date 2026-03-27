@@ -35,3 +35,23 @@ script EnterBelen_Event_Script {
     goto(EnterBelen_PutMeatInOven_Dialogue)
   }
 }
+
+script MermerezaGym_EventScript_032E8AC9
+{
+    trainerbattle_single(TRAINER_032E8AC9,format("I am a Belen Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script MermerezaGym_EventScript_0389363C
+{
+    trainerbattle_single(TRAINER_0389363C,format("I am a Belen Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script MermerezaGym_EventScript_040CEA33
+{
+    trainerbattle_single(TRAINER_040CEA33,format("I am a Belen Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+

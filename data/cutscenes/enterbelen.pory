@@ -62,9 +62,10 @@ script EnterBelen_StartGymBattle_Script
     goto(EnterBelen_BelenDefeated_Script)
 }
 
-script EnterBelen_BelenDefeated_Script {
+script EnterBelen_BelenDefeated_Script
+{
     lockall
-    setflag(FLAG_BADGE01_GET)
+    cleargymtrainersandgetbadge(GYM_BELEN)
     setvar(VAR_GYM_1_STATE,GYM_DEFEATED_LEADER)
     setvar(VAR_BELEN_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
