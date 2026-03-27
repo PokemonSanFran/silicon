@@ -2,7 +2,7 @@
   "id": "MAP_HALERBA_WILDS",
   "name": "HalerbaWilds",
   "layout": "LAYOUT_HALERBAWILDS",
-  "music": "MUS_PETALBURG_WOODS",
+  "music": "MUS_HALERBA_WILDS",
   "region_map_section": "MAPSEC_HALERBAWILDS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_HALERBA_CITY_GYM_C",
   "name": "HalerbaCity_GymC",
   "layout": "LAYOUT_HALERBA_CITY_GYM_C",
-  "music": "MUS_SAFARI_ZONE",
+  "music": "MUS_GYM_HALERBA",
   "region_map_section": "MAPSEC_HALERBA_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

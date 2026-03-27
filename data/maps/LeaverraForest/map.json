@@ -2,7 +2,7 @@
   "id": "MAP_LEAVERRA_FOREST",
   "name": "LeaverraForest",
   "layout": "LAYOUT_LEAVERRA_FOREST",
-  "music": "MUS_MT_PYRE",
+  "music": "MUS_HALERBA_WILDS",
   "region_map_section": "MAPSEC_LEAVERRA_FOREST",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
