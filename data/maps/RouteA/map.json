@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE_A",
   "name": "RouteA",
   "layout": "LAYOUT_ROUTE_A",
-  "music": "MUS_RG_SURF",
+  "music": "MUS_ROUTE_OCEAN_SILICON",
   "region_map_section": "MAPSEC_ROUTE_A",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

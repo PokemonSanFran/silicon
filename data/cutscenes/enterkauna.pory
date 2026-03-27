@@ -58,7 +58,7 @@ script EnterKauna_KaunaDefeated_Script {
     setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_KAUNA)
     msgbox(gText_EnterKauna_ThatBattleWasHype,,SPEAKER_KAUNA)
     closemessage
-    tweetfanfare(TWEET_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_CHASILLA_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM17)
     closemessage
     call(TryAutoSave)

@@ -86,7 +86,7 @@ script EnterEmrys_Defeated_Script {
     msgbox(gText_EnterEmrys_WowIllReallyNeed,,SPEAKER_EMRYS)
     closemessage
     call(EnterEmrys_ExplainBuzzr_Dialogue)
-    tweetfanfare(TWEET_GYM_PERLACIA_CITY_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_PERLACIA_CITY_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM34)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)

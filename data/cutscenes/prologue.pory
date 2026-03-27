@@ -39,6 +39,7 @@ script Prologue_LostToMagnus_Script{
 
 script Prologue_InteractMagnus_Script{
     lock
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
         msgbox(gText_Prologue_YouMadeIt,MSGBOX_NPC,SPEAKER_MAGNUS)
         msgbox(gText_Prologue_WeveBeenWatching,,SPEAKER_MAGNUS)
         msgbox(gText_Prologue_YoureGoingToBe,,SPEAKER_MAGNUS)
@@ -266,6 +267,7 @@ script Prologue_BeginAdventure_Dialogue
 script Prologue_FirstTimeCharacterCustomize_Dialogue
 {
     call(ThereCanOnlyBeOne_SetUpPlayer_Script)
+    playbgm(MUS_NAME_CHARACTER_OPTIONSFIRSTRUN_MYSTERYGIFT, FALSE)
     msgbox(Prologue_HowDoesTheWorld_Text)
     closemessage
     call(Prologue_FirstTimeCharacterCustomize_Script)

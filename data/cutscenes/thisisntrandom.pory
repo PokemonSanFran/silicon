@@ -162,6 +162,7 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 script ThisIsntRandom_WalkIntoLab_Dialogue
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         setvar(VAR_PARC_STATE,TEAM_INSIDE_LAB)
 
         msgbox(gText_ThisIsntRandom_LooksOldAsHell,,SPEAKER_KAI_TIDE)
@@ -190,6 +191,7 @@ script ThisIsntRandom_WalkIntoLab_Dialogue
         removeobject(KAI)
         removeobject(MAGNUS)
 
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release
@@ -287,6 +289,7 @@ script ThisIsntRandom_RemoveMon_Script
 script ThisIsntRandom_DefeatedFirst_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         startcutscene(JUMPPLAYER_THISISNTRANDOM_MON1)
         setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_1)
         msgbox(gText_ThisIsntRandom_AreYouGuysSeeing,,SPEAKER_ALICIA)
@@ -307,6 +310,7 @@ script ThisIsntRandom_DefeatedFirst_Script
 
         closemessage
 
+        fadedefaultbgm
         endcutscene
         release
         end
@@ -315,6 +319,7 @@ script ThisIsntRandom_DefeatedFirst_Script
 script ThisIsntRandom_DefeatedSecond_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         startcutscene(JUMPPLAYER_THISISNTRANDOM_MON2)
         setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_2)
         msgbox(gText_ThisIsntRandom_IFoundSomeAccessLogs,,SPEAKER_ADAORA)
@@ -350,6 +355,7 @@ script ThisIsntRandom_DefeatedSecond_Script
         msgbox(gText_ThisIsntRandom_LetsKeepGoing,,SPEAKER_ADAORA)
 
         closemessage
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release

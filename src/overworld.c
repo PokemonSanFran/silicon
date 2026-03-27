@@ -89,6 +89,7 @@
 #include "options_battle.h" // Battle Settings
 #include "rematch.h" // siliconMerge
 #include "options_music.h" // siliconMerge
+#include "quest_logic.h" // firstMusicUpdate
 #include "map_preview_screen.h" // mapPreviews
 #include "ui_map_system.h"
 
@@ -1327,6 +1328,32 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
     return FALSE;
 }
 
+// Start firstMusicUpdate
+static bool8 IsTirabudinGymRestored(struct WarpData *warp)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_RESTORETIRABUDINGYM,FLAG_GET_COMPLETED))
+        return FALSE;
+    else if (warp->mapGroup != MAP_GROUP(MAP_TIRABUDIN_PLACE_GYM_LOBBY))
+        return FALSE;
+    return (warp->mapNum == MAP_NUM(MAP_TIRABUDIN_PLACE_GYM_LOBBY));
+        return TRUE;
+}
+
+static bool8 IsOnHalaiIslandDuringConstruction(struct WarpData *warp)
+{
+    if (IsHalaiIslandUnderConstruction() == FALSE)
+        return FALSE;
+
+    if (Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->regionMapSectionId != MAPSEC_HALAI_ISLAND)
+        return FALSE;
+
+    if (GetCurrentMap() == MAP_HALAI_ISLAND_POKEMON_CENTER_1F)
+        return FALSE;
+
+    return TRUE;
+}
+// End firstMusicUpdate
+
 static bool16 NoMusicInSootopolisWithLegendaries(struct WarpData *warp)
 {
     if (VarGet(VAR_SKY_PILLAR_STATE) != 1)
@@ -1376,6 +1403,12 @@ u16 GetLocationMusic(struct WarpData *warp)
         return MUS_ENCOUNTER_MAGMA;
     else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
         return MUS_MT_CHIMNEY;
+    // Start firstMusicUpdate
+    else if (IsTirabudinGymRestored(warp) == TRUE)
+        return MUS_RESTORED_TIRABUDIN_PLACE_GYM;
+    else if (IsOnHalaiIslandDuringConstruction(warp) == TRUE)
+        return MUS_HALAI_ISLAND_EARTHQUAKE;
+    // End firstMusicUpdate
     else
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
@@ -1440,6 +1473,7 @@ u16 GetCorrectMusicForScenario(void)
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
             music = GetSurfMusicFromOption();
     }
+
     return music;
 }
 // End siliconMerge

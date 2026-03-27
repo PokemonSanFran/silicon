@@ -348,8 +348,12 @@ static void SetUpWarpExitTask(void)
 
 void FieldCB_DefaultWarpExit(void)
 {
+    // Start firstMusicUpdate
+    //Overworld_PlaySpecialMapMusic();
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
+        Overworld_PlaySpecialMapMusic();
+    // End firstMusicUpdate
     ResetSavedGrottoMon(); // hidden_grotto
-    Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     SetUpWarpExitTask();
     FollowerNPC_WarpSetEnd();

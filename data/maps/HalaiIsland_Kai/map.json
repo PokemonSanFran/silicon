@@ -2,7 +2,7 @@
   "id": "MAP_HALAI_ISLAND_KAI",
   "name": "HalaiIsland_Kai",
   "layout": "LAYOUT_HALAI_ISLAND_KAI",
-  "music": "MUS_BIRCH_LAB",
+  "music": "MUS_HALAI_ISLAND",
   "region_map_section": "MAPSEC_HALAI_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

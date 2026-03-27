@@ -186,6 +186,7 @@ script YouRealizeTheyreEvil_ReleaseGarbodor_Script {
 
 script YouRealizeTheyreEvilRight_PlayerArrived2F_Dialogue {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
         startcutscene(JUMPPLAYER_YOUREALIZETHEYREEVILRIGHT_ISLAND)
         applymovement(PLAYER,YouRealizeTheyreEvilRight_WalkToGroup)
         waitmovement(0)
@@ -334,6 +335,7 @@ script YouRealizeTheyreEvilRight_Confront_Dialogue{
     closemessage
     applymovement(PLAYER,Common_Movement_WalkDown)
         fadeblackandsetremovewarpfadeflag
+    fadedefaultbgm
     warp(MAP_ARANTRAZ,39,14)
     waitstate
     release

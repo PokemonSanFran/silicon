@@ -2,7 +2,7 @@
   "id": "MAP_FORT_YOBU_GYM",
   "name": "FortYobu_Gym",
   "layout": "LAYOUT_FORT_YOBU_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_FORT_YOBU_GYM",
   "region_map_section": "MAPSEC_FORT_YOBU",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

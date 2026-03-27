@@ -2,7 +2,7 @@
   "id": "MAP_GLAVEZ_HILL",
   "name": "GlavezHill",
   "layout": "LAYOUT_GLAVEZ_HILL",
-  "music": "MUS_RG_LAVENDER",
+  "music": "MUS_GLAVEZ_HILL",
   "region_map_section": "MAPSEC_GLAVEZ_HILL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

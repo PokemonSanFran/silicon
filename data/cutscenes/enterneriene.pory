@@ -51,7 +51,7 @@ script EnterNeriene_NerieneDefeated_Script {
     setvar(VAR_FORT_YOBU_STATE,DEFEATED_NERIENE)
     msgbox(gText_EnterNeriene_YoureNoJoke,MSGBOX_DEFAULT,SPEAKER_NERIENE)
     closemessage
-    tweetfanfare(TWEET_GYM_FORT_YOBU_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_FORT_YOBU_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM05)
     closemessage
     call(TryAutoSave)

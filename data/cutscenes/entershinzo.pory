@@ -40,7 +40,7 @@ script EnterShinzo_ShinzoDefeated_Script {
     closemessage
     call(EnterShinzo_ExplainBuzzr_Dialogue)
     //msgbox(gText_EnterShinzo_BadgeGet)
-    tweetfanfare(TWEET_GYM_TORA_TOWN_BADGE,MUS_OBTAIN_BADGE)
+    tweetfanfare(TWEET_GYM_TORA_TOWN_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM02)
     closemessage
     addvar(VAR_STORYLINE_STATE,1)

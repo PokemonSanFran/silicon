@@ -2,7 +2,7 @@
   "id": "MAP_SHARPRISE_STADIUM_ARENA",
   "name": "SharpriseStadium_Arena",
   "layout": "LAYOUT_SHARPRISE_STADIUM_ARENA",
-  "music": "MUS_VICTORY_ROAD",
+  "music": "MUS_SHARPRISE_STADIUM",
   "region_map_section": "MAPSEC_SHARPRISESTADIUM",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",

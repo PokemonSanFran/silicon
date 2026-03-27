@@ -40,7 +40,7 @@ script EnterDimu_PostGymBattle_Script {
         setvar(VAR_GYM_6_STATE,GYM_DEFEATED_LEADER)
         setvar(VAR_DIMU_STATE,BATTLE_1_COMPLETE)
         addvar(VAR_STORYLINE_STATE,1)
-        tweetfanfare(TWEET_GYM_HALERBA_CITY_BADGE,MUS_OBTAIN_BADGE)
+        tweetfanfare(TWEET_GYM_HALERBA_CITY_BADGE,MUS_GET_BADGE)
         giveitem(ITEM_TM06)
         closemessage
         call(TryAutoSave)

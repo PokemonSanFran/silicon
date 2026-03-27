@@ -24,6 +24,7 @@ script OkayLetsFixit_ReachTop_Script {
         }
 
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         startcutscene(JUMPPLAYER_OKAYLETSFIXIT)
         applymovement(PLAYER, OkayLetsFixit_WalkToPeak)
         waitmovement(PLAYER)
@@ -65,6 +66,7 @@ script OkayLetsFixit_ReachTop_Script {
 
 script OkayLetsFixit_StartFlashback_Script {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
         setvar(VAR_STORYLINE_STATE,STORY_BEGIN_LETS_FIX_IT)
 
         msgbox(gText_OkayLetsFixIt_ThisWasTheNight,,SPEAKER_ALICIA)
@@ -90,8 +92,10 @@ script OkayLetsFixit_StartFlashback_Script {
         end
 }
 
-script OkayLetsFixit_ReturnToPeak_Script {
+script OkayLetsFixit_ReturnToPeak_Script
+{
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         clearflag(FLAG_TEMP_1)
         addobject(HIKO)
 

@@ -47,7 +47,6 @@ script Epilogue_Script_SetPostGameValues
 script Epilogue_Script_TalaApproachesKai
 {
     call(Epilogue_Script_SetPostGameValues)
-    playbgm(MUS_ENCOUNTER_INTENSE,TRUE)
     call(Epilogue_Script_AddMalva)
     applymovement(TALA,moves(
     walk_up * 5
@@ -73,6 +72,7 @@ script Epilogue_Script_TalaApproachesKai
 
 script Epilogue_Dialogue_ConversationAboutProgress
 {
+    // PSF TODO make sure the MUS_SRC_GETTING_ARRESTED continues playing
     msgbox(text=Epilogue_Text_AreYouFeeling,speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=Epilogue_Text_AreYou,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_LAUGH)
     msgbox(text=Epilogue_Text_TheNewSharprise,speaker=SPEAKER_KAI,tail=TAIL_DEFAULT,emote=EMOTE_ANGRY)
@@ -121,6 +121,7 @@ script Epilogue_Dialogue_ConversationAboutProgress
 script Epilogue_Script_ShowTweetLeaveMap
 {
     fadescreenspeed(FADE_TO_BLACK,24)
+	clearflag(FLAG_DONT_TRANSITION_MUSIC)
     setflag(FLAG_REMOVE_WARP_FADE)
     setflag(FLAG_SPAWN_INVISIBLE)
     warpsilent(MAP_BLACK_MAP,0)
