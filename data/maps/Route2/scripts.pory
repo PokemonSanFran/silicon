@@ -32,3 +32,16 @@ script Route2_ConstructionVisibility_Script {
     return
 }
 
+script Route2_EventScript_0C543C80
+{
+    trainerbattle_single(TRAINER_0C543C80,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route2_EventScript_0A8B9F88
+{
+    trainerbattle_single(TRAINER_0A8B9F88,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

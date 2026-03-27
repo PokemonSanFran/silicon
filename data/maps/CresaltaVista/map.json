@@ -268,13 +268,5 @@
     }
   ],
   "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 12,
-      "y": 7,
-      "elevation": 0,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_TEMP_1"
-    }
   ]
 }

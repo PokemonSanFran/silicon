@@ -4,3 +4,44 @@ mapscripts TirabudinPlace_Gym_BattleRoom_MapScripts{
     ]
 }
 
+script TirabudinGym_EventScript_11EDE0DC
+{
+    trainerbattle_single(TRAINER_11EDE0DC,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_148A3C6B
+{
+    trainerbattle_single(TRAINER_148A3C6B,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_13113EC0
+{
+    trainerbattle_single(TRAINER_13113EC0,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_120A20F6
+{
+    trainerbattle_single(TRAINER_120A20F6,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_1387ABBC
+{
+    trainerbattle_single(TRAINER_1387ABBC,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_114EB3AD
+{
+    trainerbattle_single(TRAINER_114EB3AD,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

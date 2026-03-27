@@ -267,7 +267,7 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DoTowerBattle{
     frontier_set(FRONTIER_DATA_RECORD_DISABLED, FALSE)
 
     special(HealPlayerParty)
-    setvar(VAR_0x8004, SPECIAL_BATTLE_TOWER)
+    setvar(VAR_0x8004, FACILITY_BATTLE_TOWER)
     setvar(VAR_0x8005, 0)
     special(LevelUpAllPokemonTo100)
 

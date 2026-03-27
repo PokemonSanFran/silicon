@@ -50,7 +50,7 @@ script EnterKauna_StartGymBattle_Script
 script EnterKauna_KaunaDefeated_Script {
     lock
     startcutscene(JUMPPLAYER_ENTERKAUNA)
-    setflag(FLAG_BADGE04_GET)
+    cleargymtrainersandgetbadge(GYM_KAUNA)
     setvar(VAR_GYM_4_STATE, GYM_DEFEATED_LEADER)
     setvar(VAR_KAUNA_STATE,BATTLE_1_COMPLETE)
     setvar(VAR_CHASILLA_STATE,DEFEATED_KAUNA)

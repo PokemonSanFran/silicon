@@ -1,7 +1,6 @@
 #include "global.h"
 #include "battle.h"
 #include "daycare.h"
-#include "daycare.h"
 #include "event_data.h"
 #include "field_weather.h"
 #include "item.h"
@@ -75,8 +74,9 @@ void CreateWonderTradePokemon(void)
     u32 otGender = surpriseTradeTrainer[trainer].otGender;
 
     u32 metLocation = METLOC_IN_GAME_TRADE;
+    u32 personality = GetMonPersonality(wonderTradeSpecies, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
 
-    CreateMon(&gEnemyParty[0], wonderTradeSpecies, 1, USE_RANDOM_IVS, FALSE, 0, OT_ID_PRESET, otId);
+    CreateMon(&gEnemyParty[0], wonderTradeSpecies, 1, personality,OTID_STRUCT_PRESET(otId));
 
     bool32 isShiny = ShouldMonBeShiny(GetMonData(&gEnemyParty[0],MON_DATA_PERSONALITY),otId);
 
@@ -114,7 +114,7 @@ static u32 GenerateSurpriseTradeSpecies(void)
 
         const struct SpeciesInfo *info = &gSpeciesInfo[species];
 
-        if (info->isMegaEvolution || info->isLegendary || info->isMythical || info->isUltraBeast || info->isParadox)
+        if (info->isMegaEvolution || info->isSubLegendary || info->isMythical || info->isUltraBeast || info->isParadox || info->isRestrictedLegendary)
             continue;
 
         break;
@@ -278,7 +278,7 @@ static void CompactMoveSlots(struct Pokemon *mon)
         if (move == MOVE_NONE)
             continue;
 
-        ShiftMoveSlot(mon, i, i + 1);
+        ShiftMoveSlot(&mon->box, i, i + 1);
     }
 }
 
@@ -320,14 +320,23 @@ static u32 GenerateSurpriseTradeAbility(u32 species)
     return ability;
 }
 
-const u32 blockedHoldEffects[] =
+const enum ItemSortType blockedItemSortTypes[] = 
+{
+    ITEM_TYPE_EVOLUTION_STONE,
+    ITEM_TYPE_EVOLUTION_ITEM,
+    ITEM_TYPE_SPECIAL_HELD_ITEM,
+    ITEM_TYPE_MEGA_STONE,
+    ITEM_TYPE_Z_CRYSTAL,
+    ITEM_TYPE_TERA_SHARD,
+};
+
+const enum HoldEffect blockedHoldEffects[] =
 {
     HOLD_EFFECT_NONE,
     HOLD_EFFECT_REPEL,
     HOLD_EFFECT_SOUL_DEW,
     HOLD_EFFECT_DEEP_SEA_TOOTH,
     HOLD_EFFECT_DEEP_SEA_SCALE,
-    HOLD_EFFECT_DRAGON_SCALE,
     HOLD_EFFECT_LIGHT_BALL,
     HOLD_EFFECT_THICK_CLUB,
     HOLD_EFFECT_LEEK,
@@ -348,13 +357,17 @@ const u32 blockedHoldEffects[] =
 
 static bool32 IsItemBlocked(u32 item)
 {
-    u32 itemHoldEffect = GetItemHoldEffect(item);
-
     if (GetItemImportance(item))
         return TRUE;
 
+    enum HoldEffect itemHoldEffect = GetItemHoldEffect(item);
     for (u32 holdIndex = 0; holdIndex < ARRAY_COUNT(blockedHoldEffects); holdIndex++)
         if (itemHoldEffect == blockedHoldEffects[holdIndex])
+            return TRUE;
+
+    enum ItemSortType itemType = gItemsInfo[item].sortType;
+    for (u32 sortTypeIndex = 0; sortTypeIndex < ARRAY_COUNT(blockedItemSortTypes); sortTypeIndex++)
+        if (itemType == blockedItemSortTypes[sortTypeIndex])
             return TRUE;
 
     return FALSE;

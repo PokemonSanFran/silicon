@@ -221,7 +221,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_SETESCAPEWARP                 ScrCmd_setescapewarp,               requests_effects=1  @ 0xc4
 	script_cmd_table_entry SCR_OP_WAITMONCRY                    ScrCmd_waitmoncry,                  requests_effects=1  @ 0xc5
 	script_cmd_table_entry SCR_OP_BUFFERBOXNAME                 ScrCmd_bufferboxname,               requests_effects=1  @ 0xc6
-	script_cmd_table_entry SCR_OP_TEXTCOLOR                     ScrCmd_nop1,                        requests_effects=1  @ 0xc7
+	script_cmd_table_entry SCR_OP_TEXTCOLOR                     ScrCmd_textcolor,                   requests_effects=1  @ 0xc7
 	script_cmd_table_entry SCR_OP_LOADHELP                      ScrCmd_nop1,                        requests_effects=1  @ 0xc8
 	script_cmd_table_entry SCR_OP_UNLOADHELP                    ScrCmd_nop1,                        requests_effects=1  @ 0xc9
 	script_cmd_table_entry SCR_OP_SIGNMSG                       ScrCmd_nop1,                        requests_effects=1  @ 0xca
@@ -230,7 +230,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_SETMODERNFATEFULENCOUNTER     ScrCmd_setmodernfatefulencounter,   requests_effects=1  @ 0xcd
 	script_cmd_table_entry SCR_OP_CHECKMODERNFATEFULENCOUNTER   ScrCmd_checkmodernfatefulencounter, requests_effects=1  @ 0xce
 	script_cmd_table_entry SCR_OP_TRYWONDERCARDSCRIPT           ScrCmd_trywondercardscript,         requests_effects=1  @ 0xcf
-	script_cmd_table_entry SCR_OP_SETWORLDMAPFLAG               ScrCmd_nop1,                        requests_effects=1  @ 0xd0
+	script_cmd_table_entry SCR_OP_SETWORLDMAPFLAG               ScrCmd_setworldmapflag,             requests_effects=1  @ 0xd0
 	script_cmd_table_entry SCR_OP_WARPSPINENTER                 ScrCmd_warpspinenter,               requests_effects=1  @ 0xd1
 	script_cmd_table_entry SCR_OP_SETMONMETLOCATION             ScrCmd_setmonmetlocation,           requests_effects=1  @ 0xd2
 	script_cmd_table_entry SCR_OP_MOVEROTATINGTILEOBJECTS       ScrCmd_moverotatingtileobjects,     requests_effects=1  @ 0xd3
@@ -269,15 +269,15 @@ gScriptCmdTable::
     script_cmd_table_entry SCR_OP_CALLFUNC                           ScrCmd_callfunc,                             requests_effects=1   @ 0xf3 // callfunc
     script_cmd_table_entry SCR_OP_ISMONSHINY                         ScrCmd_ismonshiny,                           requests_effects=1   @ 0xf4
     script_cmd_table_entry SCR_OP_MAKEQUESTREWARDIFSUBQUESTSCOMPLETE ScrCmd_makequestrewardifsubquestscomplete,   requests_effects=1   @ 0xf5
-    script_cmd_table_entry SCR_OP_SETCUSTOMWILDMON                   ScrCmd_setcustomwildmon,                     requests_effects=1   @ 0xf6
-    script_cmd_table_entry SCR_OP_CHECKTRAINERDISCOVERED             ScrCmd_checktrainerdiscovered,               requests_effects=1   @ 0xf7
-    script_cmd_table_entry SCR_OP_QUESTOVERWORLD                     ScrCmd_startquestoverworld,                  requests_effects=1   @ 0xf8
-	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                   ScrCmd_variableaddmoney,                     requests_effects=1   @ 0xf9
-	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xfa
-	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfb
-    script_cmd_table_entry SCR_OP_PHENOMENON_DATA                    ScrCmd_setphenomenondata,                    requests_effects=1   @ 0xfc // phenomenon
+    script_cmd_table_entry SCR_OP_CHECKTRAINERDISCOVERED             ScrCmd_checktrainerdiscovered,               requests_effects=1   @ 0xf6
+    script_cmd_table_entry SCR_OP_QUESTOVERWORLD                     ScrCmd_startquestoverworld,                  requests_effects=1   @ 0xf7
+	script_cmd_table_entry SCR_OP_VARIABLEADDMONEY                   ScrCmd_variableaddmoney,                     requests_effects=1   @ 0xf8
+	script_cmd_table_entry SCR_OP_VARIABLEREMOVEMONEY                ScrCmd_variableremovemoney,                  requests_effects=1   @ 0xf9
+	script_cmd_table_entry SCR_OP_VARIABLECHECKMONEY                 ScrCmd_variablecheckmoney,                   requests_effects=1   @ 0xfa
+    script_cmd_table_entry SCR_OP_PHENOMENON_DATA                    ScrCmd_setphenomenondata,                    requests_effects=1   @ 0xfb // phenomenon
 	@ End siliconMerge
 	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xfc
+    script_cmd_table_entry SCR_OP_GETBRAILLESTRINGWIDTH         ScrCmd_getbraillestringwidth,       requests_effects=1  @ 0xfd
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::

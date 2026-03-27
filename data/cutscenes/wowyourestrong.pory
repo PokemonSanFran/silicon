@@ -66,15 +66,15 @@ script WowYoureStrong_WalkToPlayer_Script
 
 script WowYoureStrong_Intro_Dialogue
 {
-    msgbox(gText_WowYoureStrong_WhatAShow,,SPEAKER_ADELAIDE)
+    msgbox(gText_WowYoureStrong_WhatAShow,,SPEAKER_LUCREZIA_BEFORE)
 
     msgbox(gText_WowYoureStrong_OhUhThanksALot,,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_WhereMyManners,,SPEAKER_ADELAIDE)
+    msgbox(gText_WowYoureStrong_WhereMyManners,,SPEAKER_LUCREZIA_BEFORE)
 
     msgbox(gText_WowYoureStrong_ShouldHaveKnown,,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_DreamBig,,SPEAKER_ADELAIDE)
+    msgbox(gText_WowYoureStrong_DreamBig,,SPEAKER_LUCREZIA_BEFORE)
 
     goto(WowYoureStrong_ShowTower_Script)
 }
@@ -89,7 +89,7 @@ script WowYoureStrong_ShowTower_Script
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(gText_WowYoureStrong_YouShouldComeBy,,SPEAKER_ADELAIDE)
+    msgbox(gText_WowYoureStrong_YouShouldComeBy,,SPEAKER_LUCREZIA_BEFORE)
     closemessage
 
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
@@ -121,7 +121,7 @@ script WowYoureStrong_TakeCameraFromTower_Script
 
 script WowYoureStrong_End_Dialouge
 {
-    msgbox(gText_WowYoureStrong_RunToMeeting,,SPEAKER_ADELAIDE)
+    msgbox(gText_WowYoureStrong_RunToMeeting,,SPEAKER_LUCREZIA_BEFORE)
 
     closemessage
     applymovement(ADELAIDE,WowYoureStrong_WalkToMeeting_Movement)

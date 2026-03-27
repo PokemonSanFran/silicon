@@ -50,18 +50,20 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_PERLACIA_GYM_TO_CITY_1",
       "x": 9,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "8"
+      "dest_warp_id": "WARP_PERLACIA_CITY_TO_GYM_2"
     },
     {
+      "warp_id": "WARP_PERLACIA_GYM_TO_CITY_2",
       "x": 10,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "8"
+      "dest_warp_id": "WARP_PERLACIA_CITY_TO_GYM_2"
     }
   ],
   "coord_events": [],
