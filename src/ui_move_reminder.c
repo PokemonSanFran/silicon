@@ -65,16 +65,16 @@ static void SpriteCB_MoveCursor(struct Sprite *);
 static enum MoveReminderModes MReminderMode_GetValue(void);
 static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
 
-static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages);
-static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages);
-static const u8 *MReminderPage_GetHelpBarStr(enum MoveReminderPages);
-static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages);
-static HandleInputFunc MReminderPage_GetHandleInputFunc(enum MoveReminderPages);
-static void MReminderPage_ReloadTilemap(void);
-static void MReminderPage_PrintHelpBar(void);
-static void MReminderPage_UpdateFrontEnd(void);
-static enum MoveReminderPages MReminderPage_GetValue(void);
-static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages);
+static const struct PageInterfaceInfo *PageInterface_GetInfo(enum PageInterfaces);
+static const u32 *PageInterface_GetTilemap(enum PageInterfaces);
+static const u8 *PageInterface_GetHelpBarStr(enum PageInterfaces);
+static UpdateFrontEndFunc PageInterface_GetUpdateFrontEndFunc(enum PageInterfaces);
+static HandleInputFunc PageInterface_GetHandleInputFunc(enum PageInterfaces);
+static void PageInterface_ReloadTilemap(void);
+static void PageInterface_PrintHelpBar(void);
+static void PageInterface_UpdateFrontEnd(void);
+static enum PageInterfaces PageInterface_Get(void);
+static enum PageInterfaces PageInterface_Set(enum PageInterfaces);
 
 static struct MoveReminderMon *MReminderMon_Get(void);
 
@@ -131,7 +131,7 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     }
 
     MReminderMode_SetValue(mode);
-    MReminderPage_SetValue(MREMINDER_PAGE_MAIN);
+    PageInterface_Set(PAGE_INTERFACE_MAIN);
     sMoveReminderDataPtr->ptr.mon = mon;
     sMoveReminderDataPtr->moveSlot = moveSlot;
     sMoveReminderDataPtr->savedCallback = callback;
@@ -171,7 +171,7 @@ static void MoveReminder_FreeResources(void)
 
 static void Task_MReminderInput_Main(u8 taskId)
 {
-    HandleInputFunc inputFunc = MReminderPage_GetHandleInputFunc(MReminderPage_GetValue());
+    HandleInputFunc inputFunc = PageInterface_GetHandleInputFunc(PageInterface_Get());
     inputFunc(taskId);
 }
 
@@ -349,7 +349,7 @@ static void InitSetup_Windows(void)
         baseBlock += template->width * template->height;
     }
 
-    MReminderPage_UpdateFrontEnd();
+    PageInterface_UpdateFrontEnd();
 }
 
 static void InitSetup_Sprites(void)
@@ -449,7 +449,7 @@ static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
 
 static void SpriteCB_MoveBar(struct Sprite *sprite)
 {
-    sprite->invisible = (MReminderPage_GetValue() != MREMINDER_PAGE_MAIN
+    sprite->invisible = (PageInterface_Get() != PAGE_INTERFACE_MAIN
                          || sprite->sMoveBar_Idx >= MReminderMoves_GetNumberOfMoves());
 }
 
@@ -469,41 +469,41 @@ static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes mode
     return MReminderMode_GetValue();
 }
 
-static const struct MoveReminderPageInfo *MReminderPage_GetInfo(enum MoveReminderPages page)
+static const struct PageInterfaceInfo *PageInterface_GetInfo(enum PageInterfaces page)
 {
-    return &sMoveReminder_PagesInfo[page];
+    return &sPageInterfaceInfos[page];
 }
 
-static const u32 *MReminderPage_GetTilemap(enum MoveReminderPages page)
+static const u32 *PageInterface_GetTilemap(enum PageInterfaces page)
 {
-    return MReminderPage_GetInfo(page)->tilemap;
+    return PageInterface_GetInfo(page)->tilemap;
 }
 
-static const u8 *MReminderPage_GetHelpBarStr(enum MoveReminderPages page)
+static const u8 *PageInterface_GetHelpBarStr(enum PageInterfaces page)
 {
-    return MReminderPage_GetInfo(page)->helpBarStr;
+    return PageInterface_GetInfo(page)->helpBarStr;
 }
 
-static UpdateFrontEndFunc MReminderPage_GetUpdateFrontEndFunc(enum MoveReminderPages page)
+static UpdateFrontEndFunc PageInterface_GetUpdateFrontEndFunc(enum PageInterfaces page)
 {
-    return MReminderPage_GetInfo(page)->updateFrontEndFunc;
+    return PageInterface_GetInfo(page)->updateFrontEndFunc;
 }
 
-static HandleInputFunc MReminderPage_GetHandleInputFunc(enum MoveReminderPages page)
+static HandleInputFunc PageInterface_GetHandleInputFunc(enum PageInterfaces page)
 {
-    return MReminderPage_GetInfo(page)->handleInputFunc;
+    return PageInterface_GetInfo(page)->handleInputFunc;
 }
 
-static void MReminderPage_ReloadTilemap(void)
+static void PageInterface_ReloadTilemap(void)
 {
     DecompressDataWithHeaderWram(
-        MReminderPage_GetTilemap(MReminderPage_GetValue()),
+        PageInterface_GetTilemap(PageInterface_Get()),
         TilemapBuffer_GetPtr(MREMINDER_BGBUF_TILEMAP));
 }
 
-static void MReminderPage_PrintHelpBar(void)
+static void PageInterface_PrintHelpBar(void)
 {
-    const u8 *str = MReminderPage_GetHelpBarStr(MReminderPage_GetValue());
+    const u8 *str = PageInterface_GetHelpBarStr(PageInterface_Get());
 
     if (str == NULL)
         str = gText_EmptyString2;
@@ -512,7 +512,7 @@ static void MReminderPage_PrintHelpBar(void)
         MREMINDER_HELPBAR_FOOTER_X, MREMINDER_HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
 }
 
-static void MReminderPage_UpdateFrontEnd(void)
+static void PageInterface_UpdateFrontEnd(void)
 {
     for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
     {
@@ -520,10 +520,10 @@ static void MReminderPage_UpdateFrontEnd(void)
         PutWindowTilemap(window);
     }
 
-    MReminderPage_ReloadTilemap();
-    MReminderPage_PrintHelpBar();
+    PageInterface_ReloadTilemap();
+    PageInterface_PrintHelpBar();
 
-    UpdateFrontEndFunc func = MReminderPage_GetUpdateFrontEndFunc(MReminderPage_GetValue());
+    UpdateFrontEndFunc func = PageInterface_GetUpdateFrontEndFunc(PageInterface_Get());
     func();
 
     for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
@@ -533,15 +533,15 @@ static void MReminderPage_UpdateFrontEnd(void)
         CopyBgTilemapBufferToVram(bg);
 }
 
-static enum MoveReminderPages MReminderPage_GetValue(void)
+static enum PageInterfaces PageInterface_Get(void)
 {
     return sMoveReminderDataPtr->page;
 }
 
-static enum MoveReminderPages MReminderPage_SetValue(enum MoveReminderPages page)
+static enum PageInterfaces PageInterface_Set(enum PageInterfaces page)
 {
     sMoveReminderDataPtr->page = page;
-    return MReminderPage_GetValue();
+    return PageInterface_Get();
 }
 
 static struct MoveReminderMon *MReminderMon_Get(void)
@@ -796,7 +796,7 @@ static void MainPage_NavigatePage(s32 delta, u32 count)
         return;
 
     PlaySE(SE_RG_BAG_CURSOR);
-    MReminderPage_UpdateFrontEnd();
+    PageInterface_UpdateFrontEnd();
 }
 
 static void MainPage_UpdateListIdx(s32 delta)

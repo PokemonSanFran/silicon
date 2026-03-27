@@ -1,12 +1,12 @@
 #ifndef GUARD_CONSTANTS_UI_MOVE_REMINDER_H
 #define GUARD_CONSTANTS_UI_MOVE_REMINDER_H
 
-enum MoveReminderPages
+enum PageInterfaces
 {
-    MREMINDER_PAGE_MAIN,
-    MREMINDER_PAGE_FILTER,
+    PAGE_INTERFACE_MAIN,
+    PAGE_INTERFACE_FILTER,
 
-    NUM_MREMINDER_PAGES
+    NUM_PAGE_INTERFACES
 };
 
 #ifndef TILE_TO_PIXELS
@@ -169,7 +169,7 @@ struct MoveReminderMon
 struct MoveReminderData
 {
     enum MoveReminderModes mode;
-    enum MoveReminderPages page;
+    enum PageInterfaces page;
     MainCallback savedCallback;
     struct MoveReminderLearnset learnsets[UI_MOVES_COUNT_TOTAL + 1];// ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                            // what's actually possible to learn, e.g. have certain TM to be available
@@ -194,7 +194,7 @@ struct MoveReminderData
     u8 moveSlot:7;
 };
 
-struct MoveReminderPageInfo
+struct PageInterfaceInfo
 {
     const u32 *tilemap;
     const u8 *helpBarStr;

@@ -11,16 +11,16 @@ static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
     [STAT_SPDEF] = COMPOUND_STRING("SPDEF:"),
 };
 
-static const struct MoveReminderPageInfo sMoveReminder_PagesInfo[NUM_MREMINDER_PAGES] =
+static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
 {
-    [MREMINDER_PAGE_MAIN] =
+    [PAGE_INTERFACE_MAIN] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/main.bin.smolTM"),
         .helpBarStr = COMPOUND_STRING("{A_BUTTON} Learn {B_BUTTON} Cancel {SELECT_BUTTON} Filter {START_BUTTON} Sort"),
         .updateFrontEndFunc = MainPage_UpdateFrontEnd,
         .handleInputFunc = MainPage_HandleInput,
     },
-    [MREMINDER_PAGE_FILTER] =
+    [PAGE_INTERFACE_FILTER] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
         .helpBarStr = COMPOUND_STRING("{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Filter"),
