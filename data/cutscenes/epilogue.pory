@@ -47,7 +47,6 @@ script Epilogue_Script_SetPostGameValues
 script Epilogue_Script_TalaApproachesBaiya
 {
     call(Epilogue_Script_SetPostGameValues)
-    playbgm(MUS_ENCOUNTER_INTENSE,TRUE)
     call(Epilogue_Script_AddMalva)
     applymovement(TALA,moves(
     walk_up * 5
@@ -98,6 +97,7 @@ script Epilogue_Dialogue_ConversationAboutProgress
     msgbox(text=format("List finished quest three..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("List finished quest four..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("List finished quest five!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
+    // PSF TODO make sure the MUS_SRC_GETTING_ARRESTED continues playing
     closemessage
     applymovement(TALA,moves(
         face_up
@@ -120,6 +120,7 @@ script Epilogue_Dialogue_ConversationAboutProgress
 script Epilogue_Script_ShowTweetLeaveMap
 {
     fadescreenspeed(FADE_TO_BLACK,24)
+	clearflag(FLAG_DONT_TRANSITION_MUSIC)
     setflag(FLAG_REMOVE_WARP_FADE)
     setflag(FLAG_SPAWN_INVISIBLE)
     warpsilent(MAP_BLACK_MAP,0)

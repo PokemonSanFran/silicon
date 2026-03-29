@@ -19,6 +19,7 @@
 #include "event_data.h"
 #include "money.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "tv.h"
 #include "coins.h"
 #include "text.h"
@@ -39,6 +40,7 @@
 #include "pokemon_jump.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
+#include "string_util.h"
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
@@ -59,6 +61,7 @@
 #include "hidden_grotto.h" // hiddenGrotto
 
 extern const u8 EventScript_ResetAllMapFlags[];
+extern const u8 EventScript_ResetAllMapFlagsFrlg[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
@@ -155,6 +158,12 @@ static void WarpToTruck(void)
     // SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
     FlagSet(FLAG_SPAWN_INVISIBLE);
     SetWarpDestination(MAP_GROUP(MAP_OROLAND_COLISEUM_HALLWAY), MAP_NUM(MAP_OROLAND_COLISEUM_HALLWAY), WARP_ID_NONE, 5, 18);
+    /*
+    if (IS_FRLG)
+        SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+    else
+        SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    */
     // End bootSequence
     WarpIntoMap();
 }
@@ -177,6 +186,9 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
+#if IS_FRLG
+    u8 rivalName[PLAYER_NAME_LENGTH + 1];
+#endif
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
     {
         RtcReset();
@@ -189,6 +201,11 @@ void NewGameInitData(void)
 
     StartMenu_HoldPreviousSave();
     StartMenu_ResetAppData();
+    memset(gSaveBlock3Ptr->shopBuyAgainItems, ITEM_NONE, MAX_PRESTO_BUY_AGAIN_ITEMS * sizeof(u16));
+#if IS_FRLG
+    StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
+#endif
+    gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -234,7 +251,13 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
-    //RunScriptImmediately(EventScript_ResetAllMapFlags); // storyActionItems
+    if (IS_FRLG)
+        RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
+    else
+        //RunScriptImmediately(EventScript_ResetAllMapFlags); // storyActionItems
+#if IS_FRLG
+        StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
+#endif
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
@@ -244,6 +267,7 @@ void NewGameInitData(void)
     ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
+    ResetTrainerTowerResults();
     ResetContestLinkResults();
     // Start bootSequence
     QuestMenu_ResetMenuSaveData();

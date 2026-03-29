@@ -12,12 +12,13 @@
 #line 3
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
-        .trainerPic = TRAINER_PIC_BRENDAN,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_BRENDAN,
+#line 5
+        .gender = TRAINER_GENDER_MALE,
 #line 6
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 7
-        .trainerBackPic = TRAINER_BACK_PIC_BRENDAN,
+        .trainerBackPic = TRAINER_PIC_BACK_BRENDAN,
         .partySize = 0,
         .party = (const struct TrainerMon[])
         {
@@ -31,14 +32,15 @@
 #line 11
         .trainerClass = TRAINER_CLASS_RIVAL,
 #line 12
-        .trainerPic = TRAINER_PIC_STEVEN,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_STEVEN,
+#line 13
+        .gender = TRAINER_GENDER_MALE,
 #line 14
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 16
         .aiFlags = AI_FLAG_BASIC_TRAINER,
 #line 15
-        .trainerBackPic = TRAINER_BACK_PIC_STEVEN,
+        .trainerBackPic = TRAINER_PIC_BACK_STEVEN,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -52,6 +54,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 20
             .lvl = 42,
+            .ball = POKEBALL_COUNT,
 #line 19
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -73,6 +76,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 30
             .lvl = 43,
+            .ball = POKEBALL_COUNT,
 #line 29
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -94,6 +98,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 40
             .lvl = 44,
+            .ball = POKEBALL_COUNT,
 #line 39
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -115,12 +120,22 @@
 #line 50
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 51
+<<<<<<< HEAD
         .trainerPic = TRAINER_PIC_BAIYA,
         .encounterMusic_gender =
+=======
+        .trainerPic = TRAINER_PIC_FRONT_KAI,
+#line 52
+        .gender = TRAINER_GENDER_MALE,
+>>>>>>> main
 #line 53
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
+<<<<<<< HEAD
         .trainerBackPic = TRAINER_PIC_BAIYA,
+=======
+        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
+>>>>>>> main
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -132,6 +147,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 56
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -145,12 +161,13 @@
 #line 60
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 61
-        .trainerPic = TRAINER_PIC_ADAORA,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_ADAORA,
+#line 62
+        .gender = TRAINER_GENDER_MALE,
 #line 63
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_ADAORA,
+        .trainerBackPic = TRAINER_PIC_FRONT_ADAORA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -162,6 +179,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 66
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -175,12 +193,13 @@
 #line 70
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 71
-        .trainerPic = TRAINER_PIC_BD,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_BD,
+#line 72
+        .gender = TRAINER_GENDER_MALE,
 #line 73
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_BD,
+        .trainerBackPic = TRAINER_PIC_FRONT_BD,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -192,6 +211,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 76
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -205,12 +225,13 @@
 #line 80
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 81
-        .trainerPic = TRAINER_PIC_BELEN,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_BELEN,
+#line 82
+        .gender = TRAINER_GENDER_MALE,
 #line 83
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_BELEN,
+        .trainerBackPic = TRAINER_PIC_FRONT_BELEN,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -222,6 +243,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 86
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -235,12 +257,13 @@
 #line 90
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 91
-        .trainerPic = TRAINER_PIC_DIMU,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_DIMU,
+#line 92
+        .gender = TRAINER_GENDER_MALE,
 #line 93
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_DIMU,
+        .trainerBackPic = TRAINER_PIC_FRONT_DIMU,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -252,6 +275,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 96
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -265,12 +289,13 @@
 #line 100
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 101
-        .trainerPic = TRAINER_PIC_DOYLE,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_DOYLE,
+#line 102
+        .gender = TRAINER_GENDER_MALE,
 #line 103
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_DOYLE,
+        .trainerBackPic = TRAINER_PIC_FRONT_DOYLE,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -282,6 +307,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 106
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -295,12 +321,13 @@
 #line 110
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 111
-        .trainerPic = TRAINER_PIC_EMRYS,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_EMRYS,
+#line 112
+        .gender = TRAINER_GENDER_MALE,
 #line 113
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_EMRYS,
+        .trainerBackPic = TRAINER_PIC_FRONT_EMRYS,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -312,6 +339,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 116
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -325,12 +353,13 @@
 #line 120
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 121
-        .trainerPic = TRAINER_PIC_IMELDA,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_IMELDA,
+#line 122
+        .gender = TRAINER_GENDER_MALE,
 #line 123
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_IMELDA,
+        .trainerBackPic = TRAINER_PIC_FRONT_IMELDA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -342,6 +371,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 126
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -355,12 +385,22 @@
 #line 130
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 131
+<<<<<<< HEAD
         .trainerPic = TRAINER_PIC_PUA,
         .encounterMusic_gender =
+=======
+        .trainerPic = TRAINER_PIC_FRONT_KAUNA,
+#line 132
+        .gender = TRAINER_GENDER_MALE,
+>>>>>>> main
 #line 133
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
+<<<<<<< HEAD
         .trainerBackPic = TRAINER_PIC_PUA,
+=======
+        .trainerBackPic = TRAINER_PIC_FRONT_KAUNA,
+>>>>>>> main
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -372,6 +412,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 136
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -385,12 +426,13 @@
 #line 140
         .trainerClass = TRAINER_CLASS_EX_LEADER,
 #line 141
-        .trainerPic = TRAINER_PIC_KEI_YING,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_KEI_YING,
+#line 142
+        .gender = TRAINER_GENDER_MALE,
 #line 143
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_KEI_YING,
+        .trainerBackPic = TRAINER_PIC_FRONT_KEI_YING,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -402,6 +444,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 146
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -415,12 +458,13 @@
 #line 150
         .trainerClass = TRAINER_CLASS_EX_ELITE_FOUR,
 #line 151
-        .trainerPic = TRAINER_PIC_MAGNUS,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_MAGNUS,
+#line 152
+        .gender = TRAINER_GENDER_MALE,
 #line 153
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_MAGNUS,
+        .trainerBackPic = TRAINER_PIC_FRONT_MAGNUS,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -432,6 +476,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 156
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -445,12 +490,13 @@
 #line 160
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 161
-        .trainerPic = TRAINER_PIC_NERIENE,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_NERIENE,
+#line 162
+        .gender = TRAINER_GENDER_MALE,
 #line 163
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_NERIENE,
+        .trainerBackPic = TRAINER_PIC_FRONT_NERIENE,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -462,6 +508,7 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 166
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
@@ -475,12 +522,13 @@
 #line 170
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 171
-        .trainerPic = TRAINER_PIC_SHINZO,
-        .encounterMusic_gender =
+        .trainerPic = TRAINER_PIC_FRONT_SHINZO,
+#line 172
+        .gender = TRAINER_GENDER_MALE,
 #line 173
-            TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_SHINZO,
+        .trainerBackPic = TRAINER_PIC_FRONT_SHINZO,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -492,8 +540,107 @@
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 176
             .lvl = 1,
+            .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 178
+    [DIFFICULTY_NORMAL][PARTNER_OLIVER] =
+    {
+#line 179
+        .trainerName = _("Oliver"),
+#line 180
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+#line 181
+        .trainerPic = TRAINER_PIC_FRONT_EXPERT_M,
+#line 182
+        .gender = TRAINER_GENDER_MALE,
+#line 183
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 184
+        .trainerBackPic = TRAINER_PIC_BACK_WALLY,
+        .partySize = 3,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 186
+            .species = SPECIES_TOGETIC,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 186
+            .heldItem = ITEM_WEAKNESS_POLICY,
+#line 189
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 4, 252, 252),
+#line 191
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 187
+            .ability = ABILITY_HUSTLE,
+#line 188
+            .lvl = 40,
+            .ball = POKEBALL_COUNT,
+#line 190
+            .nature = NATURE_BRAVE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 191
+                MOVE_LAST_RESORT,
+                MOVE_PRESENT,
+                MOVE_LIFE_DEW,
+                MOVE_BATON_PASS,
+            },
+            },
+            {
+#line 196
+            .species = SPECIES_MAUSHOLD_FOUR,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 196
+            .heldItem = ITEM_FIGY_BERRY,
+#line 199
+            .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
+#line 201
+            .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
+#line 197
+            .ability = ABILITY_FRIEND_GUARD,
+#line 198
+            .lvl = 40,
+            .ball = POKEBALL_COUNT,
+#line 200
+            .nature = NATURE_TIMID,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 202
+                MOVE_BULLET_SEED,
+                MOVE_SUPER_FANG,
+                MOVE_SWITCHEROO,
+                MOVE_FOLLOW_ME,
+            },
+            },
+            {
+#line 207
+            .species = SPECIES_MEDICHAM,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 207
+            .heldItem = ITEM_BLUNDER_POLICY,
+#line 210
+            .ev = TRAINER_PARTY_EVS(0, 160, 80, 160, 0, 108),
+#line 212
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 208
+            .ability = ABILITY_TELEPATHY,
+#line 209
+            .lvl = 40,
+            .ball = POKEBALL_COUNT,
+#line 211
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 212
+                MOVE_HIGH_JUMP_KICK,
+                MOVE_FAKE_OUT,
+                MOVE_REFLECT,
+                MOVE_LIGHT_SCREEN,
+            },
             },
         },
     },

@@ -4,7 +4,9 @@
 #include "options_battle.h"
 #include "pokemon.h"
 #include "battle_tower.h"
+#include "frontier_util.h"
 #include "pokemon_storage_system.h"
+#include "pokerus.h"
 #include "ui_options_menu.h"
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
@@ -199,7 +201,7 @@ static u32 CalcNewEV(u32 statIndex, struct Pokemon tempMon,  u32 totalEVs, u32 e
     u32 heldItem, holdEffect, stat, bonus, evs;
     u32 evIncrease = 0, multiplier = 1;
 
-    if (CheckPartyHasHadPokerus(&tempMon, 0))
+    if (CheckMonHasHadPokerus(&tempMon))
         multiplier = 2;
 
     heldItem = GetMonData(&tempMon, MON_DATA_HELD_ITEM, 0);
@@ -415,7 +417,7 @@ static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)
         break;
     case 1:
         RunTextPrinters();
-        if (!IsTextPrinterActive(windowId))
+        if (!IsTextPrinterActiveOnWindow(windowId))
         {
             gTasks[taskId].tPrintState = 0;
             return TRUE;
@@ -643,33 +645,33 @@ u32 GetCurrentPSFLevelCap(void)
 
     switch (VarGet(B_LEVEL_CAP_VARIABLE))
     {
-        case 0: return 25;
-        case 1: return 28;
-        case 2: return 31;
-        case 3: return 34;
-        case 4: return 37;
-        case 5: return 40;
-        case 6: return 43;
-        case 7: return 46;
-        case 8: return 49;
-        case 9: return 52;
-        case 10: return 55;
-        case 11: return 58;
-        case 12: return 61;
-        case 13: return 64;
-        case 14: return 67;
-        case 15: return 70;
-        case 16: return 73;
-        case 17: return 74;
-        case 18: return 75;
-        case 19: return 76;
-        case 20: return 77;
-        case 21: return 79;
-        case 22: return 81;
-        case 23: return 83;
-        case 24: return 85;
-        case 25: return 87;
-        case 26: return 89;
+        case 0: return LEVEL_CAP_VALUE_0;
+        case 1: return LEVEL_CAP_VALUE_1;
+        case 2: return LEVEL_CAP_VALUE_2;
+        case 3: return LEVEL_CAP_VALUE_3;
+        case 4: return LEVEL_CAP_VALUE_4;
+        case 5: return LEVEL_CAP_VALUE_5;
+        case 6: return LEVEL_CAP_VALUE_6;
+        case 7: return LEVEL_CAP_VALUE_7;
+        case 8: return LEVEL_CAP_VALUE_8;
+        case 9: return LEVEL_CAP_VALUE_9;
+        case 10: return LEVEL_CAP_VALUE_10;
+        case 11: return LEVEL_CAP_VALUE_11;
+        case 12: return LEVEL_CAP_VALUE_12;
+        case 13: return LEVEL_CAP_VALUE_13;
+        case 14: return LEVEL_CAP_VALUE_14;
+        case 15: return LEVEL_CAP_VALUE_15;
+        case 16: return LEVEL_CAP_VALUE_16;
+        case 17: return LEVEL_CAP_VALUE_17;
+        case 18: return LEVEL_CAP_VALUE_18;
+        case 19: return LEVEL_CAP_VALUE_19;
+        case 20: return LEVEL_CAP_VALUE_20;
+        case 21: return LEVEL_CAP_VALUE_21;
+        case 22: return LEVEL_CAP_VALUE_22;
+        case 23: return LEVEL_CAP_VALUE_23;
+        case 24: return LEVEL_CAP_VALUE_24;
+        case 25: return LEVEL_CAP_VALUE_25;
+        case 26: return LEVEL_CAP_VALUE_26;
         default: return MAX_LEVEL;
     }
 }
@@ -795,7 +797,7 @@ bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
         return TRUE;
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_FIRST_ONLY:
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_DUPLICATE:
-        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup])
+        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gMapHeader.regionMapSectionId])
             return FALSE;
         break;
     }
@@ -1088,22 +1090,25 @@ static u32 GetBestBallForBattle(void)
 {
     u32 i;
     struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS - 1];
-    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE;
-    u8 leftAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_LEFT);
-    u8 rightAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_RIGHT);
-    u8 atkId = (IsBattlerAlive(leftAtkFlankId)) ? leftAtkFlankId : rightAtkFlankId;
+    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE, oldLastUsedItem = gLastUsedItem;
+    u8 atkId = GetCatchingAttacker();
     u8 defId = GetCatchingBattler();
 
     if (gMain.inBattle)
     {
         for (i = 0; i < ballsPocket->capacity; i++)
         {
-            if (ballsPocket->itemSlots[i].itemId == ITEM_NONE)
+            u32 ball = ballsPocket->itemSlots[i].itemId;
+
+            if (ball == ITEM_NONE)
                 break;
-            if (ballsPocket->itemSlots[i].itemId == ITEM_MASTER_BALL)
+
+            if (ball == ITEM_MASTER_BALL)
                 continue;
 
-            odds = GetCatchingOdds(atkId, defId, ballsPocket->itemSlots[i].itemId);
+            gLastUsedItem = ball;
+
+            odds = ComputeCaptureOdds(atkId,defId);
             if (odds > newOdds)
             {
                 newOdds = odds;
@@ -1111,6 +1116,7 @@ static u32 GetBestBallForBattle(void)
             }
         }
     }
+    gLastUsedItem = oldLastUsedItem;
 
     return bestBall;
 }

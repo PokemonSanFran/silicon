@@ -2,7 +2,7 @@
   "id": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F",
   "name": "EspuleeOutskirts_KomalaCabin_1F",
   "layout": "LAYOUT_ESPULEE_OUTSKIRTS_SHORTTERMRENTAL_1F",
-  "music": "MUS_SCHOOL",
+  "music": "MUS_ESPULEE_OUTSKIRTS",
   "region_map_section": "MAPSEC_ESPULEE_OUTSKIRTS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

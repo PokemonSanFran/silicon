@@ -89,6 +89,7 @@ script YoungPadawan_NoZRing_Dialogue
 
 script YoungPadawan_PostBattle_Dialogue
 {
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
     specialvar(VAR_RESULT,GetBattleOutcome)
 
     if (var(VAR_RESULT) == B_OUTCOME_WON)

@@ -23,4 +23,5 @@ script PetarosaBorough_Pokemoncenter_1F_EventScript_Clerk{
     closemessage
     release
     end
+
 }

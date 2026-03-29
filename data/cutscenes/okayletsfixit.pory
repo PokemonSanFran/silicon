@@ -21,7 +21,7 @@ script OkayLetsFixit_Object_Visibility_Script
 	setflag(FLAG_HIDE_HIKO)
 }
 
-script OkayLetsFixit_ReachTop_Script 
+script OkayLetsFixit_ReachTop_Script
 {
     setflag(FLAG_VISITED_TORGEOT_CLIMB)
 
@@ -32,7 +32,7 @@ script OkayLetsFixit_ReachTop_Script
         }
 
     lock
-        //startcutscene(JUMPPLAYER_OKAYLETSFIXIT)
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_START_CUTSCENE)
         applymovement(PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
         waitmovement(PLAYER)
@@ -73,6 +73,7 @@ script OkayLetsFixit_ReachTop_Script
 script OkayLetsFixit_StartFlashback_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_RETURN)
         msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
 
@@ -100,6 +101,7 @@ script OkayLetsFixit_StartFlashback_Script
 script OkayLetsFixit_ReturnToPeak_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         clearflag(FLAG_TEMP_1)
 
         applymovement(PLAYER, Common_Movement_FaceLeft)

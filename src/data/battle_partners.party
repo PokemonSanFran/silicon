@@ -175,3 +175,41 @@ Music: Male
 Raichu
 Level: 1
 
+=== PARTNER_OLIVER===
+Name: Oliver
+Class: Pkmn Trainer 1
+Pic: Expert M
+Gender: Male
+Music: Male
+Back Pic: Wally
+
+Togetic @ Weakness Policy  
+Ability: Hustle  
+Level: 40  
+EVs: 252 SpA / 252 SpD / 4 Spe  
+Brave Nature  
+- Last Resort  
+- Present  
+- Life Dew  
+- Baton Pass  
+
+Maushold-Four @ Figy Berry  
+Ability: Friend Guard  
+Level: 40  
+EVs: 4 HP / 252 SpA / 252 Spe  
+Timid Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bullet Seed  
+- Super Fang  
+- Switcheroo  
+- Follow Me  
+
+Medicham @ Blunder Policy  
+Ability: Telepathy  
+Level: 40  
+EVs: 160 Atk / 80 Def / 108 SpD / 160 Spe  
+Modest Nature  
+- High Jump Kick  
+- Fake Out  
+- Reflect  
+- Light Screen  

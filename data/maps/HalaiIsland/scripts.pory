@@ -1,5 +1,5 @@
 mapscripts HalaiIsland_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
@@ -41,8 +41,11 @@ script HalaiIsland_ObjectVisibility_Script {
     return
 }
 
-script HalaiIsland_LayoutSwap_Script {
-    if (var(VAR_HALAI_ISLAND_STATE) > START_CHAMPIONSHIP_CLEAN_RAID){
+script HalaiIsland_LayoutSwap_Script
+{
+    callnative(Script_IsHalaiIslandUnderConstruction)
+    if (var(VAR_RESULT) == TRUE)
+    {
         setmaplayoutindex(LAYOUT_HALAI_ISLAND_POST_EARTHQUAKE)
     }
 }

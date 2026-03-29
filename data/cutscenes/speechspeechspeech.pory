@@ -202,6 +202,7 @@ script SpeechSpeechSpeech_StartTransformation_Script {
 
 script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
+        playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
         addvar(VAR_STORYLINE_STATE,1)
 
         msgbox(format("… US! The Elite Four of Resido!"),,SPEAKER_TALA)

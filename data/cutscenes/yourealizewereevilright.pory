@@ -49,6 +49,7 @@ waitstate
 
 script YouRealizeWereEvilRight_Open_Dialogue {
     lockall
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
         setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_YOU_REALIZE_WERE_EVIL_RIGHT)
         setflag(FLAG_BAIYA_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
@@ -113,6 +114,7 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         msgbox(format("I know this is a lot to take in at once, {PLAYER}. I think you should go back to the Compound in PetarosaBorough, take a day, and think about this. You don't want to make any career ruining decisions in haste. When you're ready to help, just come back here tomorrow."),,SPEAKER_OLIVER)
 
         closemessage
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
 }

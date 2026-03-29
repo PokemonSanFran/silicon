@@ -192,26 +192,34 @@ bool32 NoMoreRoomDaycareEggs(void)
     return (GetEmptyEggIndex() == SILICON_DAYCARE_EGG_MAX);
 }
 
-void DebugPrintEggsAtDaycare(void)
+void UNUSED DebugPrintEggsAtDaycare(void)
 {
-    return;
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     for (u32 eggIndex = 0; eggIndex < SILICON_DAYCARE_EGG_MAX; eggIndex++)
     {
         u32 species = (GetBoxMonData(&daycare->daycareEgg[eggIndex].egg,MON_DATA_SPECIES));
         bool32 isEgg = (GetBoxMonData(&daycare->daycareEgg[eggIndex].egg,MON_DATA_IS_EGG));
+
+        (void)species;
+        (void)isEgg;
+
         DebugPrintf("index %d is egg %d has mon %S",eggIndex,isEgg,GetSpeciesName(species));
     }
 }
 
-void DebugPrintIvs(void)
+void UNUSED DebugPrintIvs(void)
 {
-    return;
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
 
     for (u32 eggIndex = 0; eggIndex < SILICON_DAYCARE_EGG_MAX; eggIndex++)
         for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
+        {
             DebugPrintf("egg %d | stat %d | value %d",eggIndex,statIndex,daycare->daycareEgg[eggIndex].originalIv[statIndex]);
+            (void)eggIndex;
+            (void)statIndex;
+            (void)daycare->daycareEgg[eggIndex].originalIv[statIndex];
+        }
+
 }
 
 

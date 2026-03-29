@@ -692,7 +692,7 @@
     {
         .originalSpecies = SPECIES_MINIOR_CORE,
         .targetSpecies = SPECIES_MINIOR_METEOR,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT,
         .param1 = ABILITY_SHIELDS_DOWN,
         .param2 = HP_HIGHER_THAN,
         .param3 = 50,
@@ -701,7 +701,7 @@
     {
         .originalSpecies = SPECIES_MINIOR_METEOR,
         .targetSpecies = SPECIES_MINIOR_CORE,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT,
         .param1 = ABILITY_SHIELDS_DOWN,
         .param2 = HP_LOWER_EQ_THAN,
         .param3 = 50,
@@ -815,7 +815,7 @@
     {
         .originalSpecies = SPECIES_CRAMORANT,
         .targetSpecies = SPECIES_CRAMORANT_GORGING,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE,
         .param1 = ABILITY_GULP_MISSILE,
         .param2 = HP_HIGHER_THAN,
         .param3 = 50,
@@ -825,7 +825,7 @@
     {
         .originalSpecies = SPECIES_CRAMORANT,
         .targetSpecies = SPECIES_CRAMORANT_GULPING,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE,
         .param1 = ABILITY_GULP_MISSILE,
         .param2 = HP_LOWER_EQ_THAN,
         .param3 = 50,
@@ -834,7 +834,7 @@
     },
     {
         .originalSpecies = SPECIES_ANY,
-        .method = FORM_CHANGE_HIT_BY_MOVE,
+        .method = FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY,
         .targetSpecies = SPECIES_CRAMORANT,
         .param1 = ABILITY_GULP_MISSILE,
         .description = COMPOUND_STRING("Transforms after being hit by a move."),
@@ -1017,13 +1017,13 @@
     {
         .originalSpecies = SPECIES_PALAFIN_ZERO,
         .targetSpecies = SPECIES_PALAFIN_HERO,
-        .method = FORM_CHANGE_BATTLE_SWITCH,
+        .method = FORM_CHANGE_BATTLE_SWITCH_OUT,
         .description = COMPOUND_STRING("Transforms when switched out."),
     },
     {
         .originalSpecies = SPECIES_PALAFIN_HERO,
         .targetSpecies = SPECIES_PALAFIN_ZERO,
-        .method = FORM_CHANGE_HIT_BY_MOVE,
+        .method = FORM_CHANGE_END_BATTLE,
         .description = COMPOUND_STRING("Transforms when fainted or the battle ends. "),
     },
 },

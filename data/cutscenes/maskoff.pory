@@ -145,6 +145,7 @@ script MaskOff_Encounter_Vigrim_Dialogue
 script MaskOff_PostBattle_Dialogue
 {
     startcutscene(JUMPPLAYER_MASKOFF_VIGRIM)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     msgbox(format("You’ve made incredible progress since we last battled. But of course, you’re the Champion, {PLAYER}. The Tide is lucky to have another powerful ally."),,SPEAKER_VIGRIM,TAIL_TALK)
     msgbox(format("Thank you! It’s nice to not get crushed as easily anymore… wait! I was following a lead looking for Eleanor. I think they train around here, and I want to try to convince them to work with us."),,SPEAKER_ALICIA)
     msgbox(format("You won’t need to do much convincing, actually."),,SPEAKER_VIGRIM)
@@ -191,6 +192,7 @@ script MaskOff_End_Dialogue
     applymovement(VIGRIM, moves(walk_up * 7, step_end))
     waitmovement(VIGRIM)
     removeobject(VIGRIM)
+    fadedefaultbgm
     call(TryAutoSave)
     endcutscene
     release

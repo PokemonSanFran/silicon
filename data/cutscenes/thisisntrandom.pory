@@ -161,6 +161,7 @@ script ThisIsntRandom_UndergroundDoor_Dialogue
 script ThisIsntRandom_WalkIntoLab_Dialogue
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         setvar(VAR_PARC_STATE,TEAM_INSIDE_LAB)
 
         msgbox(format("Looks old as hell. And empty. Let’s split up and see what we turn up."),,SPEAKER_BAIYA_TIDE)
@@ -189,6 +190,7 @@ script ThisIsntRandom_WalkIntoLab_Dialogue
         removeobject(BAIYA)
         removeobject(MAGNUS)
 
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release
@@ -285,6 +287,7 @@ script ThisIsntRandom_RemoveMon_Script
 script ThisIsntRandom_DefeatedFirst_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         startcutscene(JUMPPLAYER_THISISNTRANDOM_MON1)
         setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_1)
         msgbox(format("Are you guys seeing Pokémon strapped to machines?"),,SPEAKER_ALICIA)
@@ -305,6 +308,7 @@ script ThisIsntRandom_DefeatedFirst_Script
 
         closemessage
 
+        fadedefaultbgm
         endcutscene
         release
         end
@@ -313,6 +317,7 @@ script ThisIsntRandom_DefeatedFirst_Script
 script ThisIsntRandom_DefeatedSecond_Script
 {
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         startcutscene(JUMPPLAYER_THISISNTRANDOM_MON2)
         setvar(VAR_PARC_STATE,FREED_LAB_POKEMON_2)
         msgbox(format("I started messing around with this computer and found a system access table!  Each row has a date attached to it... a bunch in 1968... two in 1971... and then three in the last week."),,SPEAKER_ADAORA)
@@ -347,6 +352,7 @@ script ThisIsntRandom_DefeatedSecond_Script
         msgbox(format("…Let’s keep going."),,SPEAKER_ADAORA)
 
         closemessage
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release

@@ -479,12 +479,12 @@ static const u8* const sMainMenuDifficultyNameLUT[] =
 static const u8* const sMainMenuCompletionStatNameLUT[] =
 {
     [MAINMENU_COMPLETION_STORY] = COMPOUND_STRING("Story"),
-    [MAINMENU_COMPLETION_TRAINER] = gEasyChatGroupName_Trainer,
-    [MAINMENU_COMPLETION_POKEDEX] = gText_Pokedex,
+    [MAINMENU_COMPLETION_TRAINER] = COMPOUND_STRING("Trainer"),
+    [MAINMENU_COMPLETION_POKEDEX] = COMPOUND_STRING("Pokédex"),
     [MAINMENU_COMPLETION_QUESTS] = COMPOUND_STRING("Quests"),
     [MAINMENU_COMPLETION_GYMS] = COMPOUND_STRING("Gyms"),
     [MAINMENU_COMPLETION_OVERALL] = COMPOUND_STRING("Completion"),
-    [MAINMENU_COMPLETION_STAT_COUNT] = gText_Blank,
+    [MAINMENU_COMPLETION_STAT_COUNT] = COMPOUND_STRING(""),
 };
 
 static u32 (* const completionFuncs[])(void) =

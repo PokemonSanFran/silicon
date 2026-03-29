@@ -43,6 +43,21 @@ script ToraTown_Gym_Entrance_Guy_Script{
     end
 }
 
-text gText_ToraTown_Gym_ThePayapaBerry{
-    format("A lot of staff that train here to try stock up on Payapa and Shuca Berries. At first they were super expensive, since they don't really grow in Resido. But the trainers from Resido all give berries when defeated, and the trainers from Sinnoh all give berries from their homeland - which include the Payapa and the Shuca Berries! Needless to say, Trainers from Sinnoh became super popular super fast.")
+script ToraGym_EventScript_031A849F
+{
+    trainerbattle_single(TRAINER_031A849F,format("I am a Shinzo Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script ToraGym_EventScript_041FD20E
+{
+    trainerbattle_single(TRAINER_041FD20E,format("I am a Shinzo Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+script ToraGym_EventScript_045FDD44
+{
+    trainerbattle_single(TRAINER_045FDD44,format("I am a Shinzo Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }

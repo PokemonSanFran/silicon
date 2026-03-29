@@ -2,7 +2,7 @@
   "id": "MAP_GLAVEZ_HEIGHTS",
   "name": "GlavezHeights",
   "layout": "LAYOUT_GLAVEZ_HEIGHTS",
-  "music": "MUS_ROUTE101",
+  "music": "MUS_GLAVEZ_HILL",
   "region_map_section": "MAPSEC_GLAVEZ_HILL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

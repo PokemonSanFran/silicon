@@ -150,6 +150,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
 {
         startcutscene(JUMPPLAYER_ENTERTHEMASTER)
     setvar(VAR_LEAVERRA_FOREST_STATE,MET_FRANK)
+        playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
 
         applymovement(PLAYER, moves(walk_up * 1, step_end))
         waitmovement(0)
@@ -268,6 +269,7 @@ script EnterTheMaster_ExplainRobots_Dialogue{
     msgbox(format("If you talk to 'em, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         msgbox(format("The first stage needed you to work together, but this time, you're on your own."),,SPEAKER_FRANK)
         closemessage
+    fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release

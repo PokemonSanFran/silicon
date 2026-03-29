@@ -29,12 +29,12 @@ script ArantrazAttendant_HealPlayer_Script {
 
 script ResetArantrazExhibit_Script
 {
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A)
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_B)
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_C)
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_D)
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_E)
-    clearflag(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_F)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0D416B2C)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0D4BA0F1)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0DA021EF)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0E19F1A8)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0F03CF8D)
+    clearflag(TRAINER_FLAGS_START + TRAINER_0E42221A)
 
     if (var(VAR_ARANTRAZ_STATE) == FIRST_ARRIVED_ARANTRAZ)
     {
@@ -51,3 +51,11 @@ script Arantraz_Script_Interact_BodegaburnoutRescueDiveN
     trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN,format("Oh! I haven’t seen another human in so long. Keep me company?"),format("If my Pokémon are knocked out, will I be even more lonely?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueDiveN)
     // PSF TODO BodegaburnoutRescueDiveN: Thanks for not leaving!
 }
+
+script Route4_EventScript_0ED24EF1
+{
+    trainerbattle_single(TRAINER_0ED24EF1,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+

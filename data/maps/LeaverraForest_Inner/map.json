@@ -2,7 +2,7 @@
   "id": "MAP_LEAVERRA_FOREST_INNER",
   "name": "LeaverraForest_Inner",
   "layout": "LAYOUT_LEAVERRA_FOREST_INNER",
-  "music": "MUS_MT_PYRE_EXTERIOR",
+  "music": "MUS_HALERBA_WILDS",
   "region_map_section": "MAPSEC_LEAVERRA_FOREST",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

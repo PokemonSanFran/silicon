@@ -2,7 +2,7 @@
   "id": "MAP_TORA_TOWN",
   "name": "ToraTown",
   "layout": "LAYOUT_TORA_TOWN",
-  "music": "MUS_RG_CELADON",
+  "music": "MUS_TORA_TOWN",
   "region_map_section": "MAPSEC_TORA_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

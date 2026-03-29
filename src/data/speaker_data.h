@@ -1009,6 +1009,14 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
+    [SPEAKER_LUCREZIA_BEFORE] =
+    {
+        .name = COMPOUND_STRING("Lucrezia"),
+        .title = COMPOUND_STRING("League Commissioner"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Proton,
+        .speakerPal = sSpeakerPal_Proton,
+    },
     [SPEAKER_LUCREZIA] =
     {
         .name = COMPOUND_STRING("Lucrezia"),

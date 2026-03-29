@@ -1,0 +1,23 @@
+script PokeMart_BeforeDialogue_EventScript
+{
+    lock
+    faceplayer
+    call_if_quest_reward(QUEST_BODEGABURNOUT,Quest_Bodegaburnout_Reward_Dialogue)
+	// PSF TODO write unique text for every mart employee
+}
+
+script PokeMart_AfterDialogue_EventScript
+{
+    call(Quest_Bodegaburnout_CheckSubquestState_Script)
+    call(Quest_Bodegaburnout_CheckNextStage_Script)
+    release
+    end
+}
+
+script PrestoTerminal_EventScript
+{
+	lock
+	openprestoterminal
+	releaseall
+	end
+}

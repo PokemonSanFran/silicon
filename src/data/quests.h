@@ -1410,24 +1410,27 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             ),
 };
 static const struct SubQuest
-sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
-    sub_quest(165,
+    sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
+	sub_quest(
+	        160,
             gText_Quest_Recruitlocalartists_Sub1_Name,
             gText_Quest_Recruitlocalartists_Sub1_Desc,
             gText_Quest_Recruitlocalartists_Sub1_Map,
             SPECIES_SMEARGLE,
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
-            ),
-    sub_quest(166,
+	),
+	sub_quest(
+	        161,
             gText_Quest_Recruitlocalartists_Sub2_Name,
             gText_Quest_Recruitlocalartists_Sub2_Desc,
             gText_Quest_Recruitlocalartists_Sub2_Map,
             SPECIES_SMEARGLE,
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
-            ),
-    sub_quest(167,
+	),
+	sub_quest(
+	        162,
             gText_Quest_Recruitlocalartists_Sub3_Name,
             gText_Quest_Recruitlocalartists_Sub3_Desc,
             gText_Quest_Recruitlocalartists_Sub3_Map,

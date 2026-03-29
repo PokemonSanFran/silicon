@@ -2,7 +2,7 @@
   "id": "MAP_PETAROSA_BOROUGH_KEI_YING_MANSION",
   "name": "PetarosaBorough_KeiYingMansion",
   "layout": "LAYOUT_PETAROSA_BOROUGH_MANSION",
-  "music": "MUS_SLATEPORT",
+  "music": "MUS_PETAROSA_BOROUGH",
   "region_map_section": "MAPSEC_PETAROSA_BOROUGH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY_3",
@@ -161,7 +161,5 @@
       "script": "KeiyingRaisonDetre_PreventPlayerLeaving_Script"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

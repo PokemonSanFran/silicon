@@ -10,6 +10,7 @@ script LetsFixThis_HideObjectHouse_Script
 script LetsFixThis_EliteVideo_Dialogue
 {
     startcutscene(JUMPPLAYER_LETSFIXTHIS)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
     lock
         clearflag(FLAG_HIDE_BAIYA)
         addobject(BAIYA)
@@ -26,6 +27,7 @@ script LetsFixThis_EliteVideo_Dialogue
         closemessage
         fadescreen(FADE_FROM_BLACK)
 
+        fadedefaultbgm
         goto(LetsFixThis_GetMessage_Dialogue)
 }
 

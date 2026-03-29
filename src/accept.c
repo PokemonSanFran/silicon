@@ -25,6 +25,8 @@
 #include "ui_options_menu.h"
 #include "options_visual.h"
 #include "pc_screen_effect.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 u32 acceptFrameCounter;
 
@@ -357,6 +359,7 @@ static void Accept_SetupCallback(void)
             gMain.state++;
             break;
         case 8:
+            PlayBGM(MUS_ACCEPT_LETTER);
             SetVBlankCallback(Accept_VBlankCB);
             SetMainCallback2(Accept_MainCB);
             break;

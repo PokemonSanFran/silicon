@@ -2,7 +2,7 @@
   "id": "MAP_SHARPRISE_SPIRE_LAB",
   "name": "SharpriseSpire_Lab",
   "layout": "LAYOUT_SHARPRISE_SPIRE_LAB",
-  "music": "MUS_RG_OAK_LAB",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_SHARPRISESPIRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
