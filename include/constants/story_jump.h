@@ -132,7 +132,7 @@ enum GymLeaderIndex
     GYM_BELEN,
     GYM_SHINZO,
     GYM_EMRYS,
-    GYM_KAUNA,
+    GYM_PUA,
     GYM_NERIENE,
     GYM_DIMU,
     GYM_BD,

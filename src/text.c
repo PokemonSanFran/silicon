@@ -1052,7 +1052,7 @@ static void PrintGlyph(struct TextPrinter *textPrinter)
         else
         {
             // Start outlineFont
-            if (textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW) 
+            if (textPrinter->printerTemplate.fontId == FONT_OUTLINED || textPrinter->printerTemplate.fontId == FONT_OUTLINED_NARROW)
             {
                 textPrinter->printerTemplate.currentX += gCurGlyph.width + (-1);
             }
@@ -1225,7 +1225,7 @@ static u16 FontFunc_Outlined(struct TextPrinter *textPrinter)
      }
      return RenderText(textPrinter);
  }
- 
+
 static u16 FontFunc_OutlinedNarrow(struct TextPrinter *textPrinter)
 {
     if (textPrinter->hasFontIdBeenSet == FALSE)
@@ -2799,7 +2799,7 @@ static const s8 sNarrowerFontIds[] =
     [FONT_SHORT_NARROW] = FONT_SHORT_NARROWER,
     [FONT_SHORT_NARROWER] = -1,
 // Start outlineFont
-    [FONT_OUTLINED] = FONT_OUTLINED_NARROW, 
+    [FONT_OUTLINED] = FONT_OUTLINED_NARROW,
     [FONT_OUTLINED_NARROW] = -1,
 // End outlineFont
 };

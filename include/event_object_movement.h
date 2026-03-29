@@ -192,6 +192,7 @@ u8 GetWalkInPlaceSlowMovementAction(u32);
 enum Collision GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, enum Direction dir);
 // Start pathfinder
 //u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, bool32 addCoords);
+u32 GetObjectObjectCollidesWith(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, bool32 addCoords);
 // End pathfinder
 void MoveCoords(enum Direction direction, s16 *x, s16 *y);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *objectEvent);
@@ -534,7 +535,7 @@ void ClearObjectFlagFromLocalId(u32 localId); // setObjectFlag
 
 // Start pathfinder
 u8 GetCollisionWithBehaviorsAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 elevation, u32 dir, u8 currentBehavior, u8 nextBehavior);
-u8 GetLedgeJumpDirectionWithBehavior(u8 direction, u8 nextBehavior);
+u8 GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior);
 // End pathfinder
 // Start storyActionItems
 void Task_ObjectTransformation(u8 taskId);

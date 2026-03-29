@@ -45,9 +45,6 @@
 #include "constants/items.h"
 #include "constants/party_menu.h"
 
-#define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
-#define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
-
 #define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(3) + 3) + 4)
 #define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS(4) + 7) + 8)
 
@@ -245,7 +242,7 @@ void OpenPrestoTerminalWithinScript(struct ScriptContext *ctx)
 
 static u32 PrestoPurchase_GetDroneFee(void)
 {
-    s32 discount = (HasPlayerJoinedTheTide()) ? 0 : PRESTO_FEE_SHARP_RISE_DISCOUNT;
+    s32 discount = (HasPlayerJoinedThe_Tide()) ? 0 : PRESTO_FEE_SHARP_RISE_DISCOUNT;
     u32 recommended = (ShopGrid_CurrentCategoryRow() == SHOP_CATEGORY_RECOMMENDED) ? PRESTO_FEE_RECOMMENDED_BOOST : 0;
 
     return (PRESTO_FEE_BASE_DRONE - discount) + recommended;

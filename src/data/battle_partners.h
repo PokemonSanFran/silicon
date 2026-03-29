@@ -120,22 +120,13 @@
 #line 50
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 51
-<<<<<<< HEAD
-        .trainerPic = TRAINER_PIC_BAIYA,
-        .encounterMusic_gender =
-=======
-        .trainerPic = TRAINER_PIC_FRONT_KAI,
+        .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 52
         .gender = TRAINER_GENDER_MALE,
->>>>>>> main
 #line 53
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-<<<<<<< HEAD
-        .trainerBackPic = TRAINER_PIC_BAIYA,
-=======
-        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
->>>>>>> main
+        .trainerBackPic = TRAINER_PIC_FRONT_BAIYA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -385,22 +376,13 @@
 #line 130
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 131
-<<<<<<< HEAD
-        .trainerPic = TRAINER_PIC_PUA,
-        .encounterMusic_gender =
-=======
-        .trainerPic = TRAINER_PIC_FRONT_KAUNA,
+        .trainerPic = TRAINER_PIC_FRONT_PUA,
 #line 132
         .gender = TRAINER_GENDER_MALE,
->>>>>>> main
 #line 133
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-<<<<<<< HEAD
-        .trainerBackPic = TRAINER_PIC_PUA,
-=======
-        .trainerBackPic = TRAINER_PIC_FRONT_KAUNA,
->>>>>>> main
+        .trainerBackPic = TRAINER_PIC_FRONT_PUA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {

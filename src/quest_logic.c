@@ -2930,10 +2930,10 @@ void Quest_Psyop_TransformTarget(void)
 void DebugQuest_Psyop_GiveMon(u32 state)
 {
     u32 species[STATE_QUEST_PSYOP_COMPLETE+1] = {SPECIES_PANCHAM, SPECIES_QUEST_PSYOP_TARGET, SPECIES_QUEST_PSYOP_REWARD};
-    u16 moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
-    u8 evs[NUM_STATS] = {85,85,85,85,85,85};
-    u8 ivs[NUM_STATS] = {0,0,0,0,0,0};
-    u32 ball = ITEM_HEAL_BALL;
+    enum Move moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
+    u16 evs[NUM_STATS] = {85,85,85,85,85,85};
+    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    enum PokeBall ball = BALL_HEAL;
 
     ScriptGiveMonParameterized(0,PARTY_SIZE,species[state],50,ITEM_NONE,ball,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 }

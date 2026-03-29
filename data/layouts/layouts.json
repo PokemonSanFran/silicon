@@ -11468,16 +11468,16 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_HALAI_ISLAND_KAI",
-      "name": "HalaiIsland_Kai_Layout",
+      "id": "LAYOUT_HALAI_ISLAND_BAIYA",
+      "name": "HalaiIsland_Baiya_Layout",
       "width": 9,
       "height": 8,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BrendansMaysHouse",
-      "border_filepath": "data/layouts/HalaiIsland_Kai/border.bin",
-      "blockdata_filepath": "data/layouts/HalaiIsland_Kai/map.bin",
+      "border_filepath": "data/layouts/HalaiIsland_Baiya/border.bin",
+      "blockdata_filepath": "data/layouts/HalaiIsland_Baiya/map.bin",
       "layout_version": "emerald"
     },
     {
@@ -13663,6 +13663,66 @@
       "border_filepath": "data/layouts/Route16_Grotto/border.bin",
       "blockdata_filepath": "data/layouts/Route16_Grotto/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN1",
+      "name": "MermerezaCity_Gym_Kitchen1_Layout",
+      "width": 11,
+      "height": 10,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen1/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen1/map.bin"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN2",
+      "name": "MermerezaCity_Gym_Kitchen2_Layout",
+      "width": 13,
+      "height": 14,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen2/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen2/map.bin"
+    },
+    {
+      "id": "LAYOUT_MERMEREZA_CITY_GYM_KITCHEN3",
+      "name": "MermerezaCity_Gym_Kitchen3_Layout",
+      "width": 19,
+      "height": 15,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/MermerezaCity_Gym_Kitchen3/border.bin",
+      "blockdata_filepath": "data/layouts/MermerezaCity_Gym_Kitchen3/map.bin"
+    },
+    {
+      "id": "LAYOUT_CHASILLA_MOCHI_SHOP",
+      "name": "Chasilla_MochiShop_Layout",
+      "width": 10,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/Chasilla_MochiShop/border.bin",
+      "blockdata_filepath": "data/layouts/Chasilla_MochiShop/map.bin"
+    },
+    {
+      "id": "LAYOUT_QIU_VILLAGE_APARTMENT_2F",
+      "name": "QiuVillage_Apartment_2F_Layout",
+      "width": 5,
+      "height": 5,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/QiuVillage_Apartment_2F/border.bin",
+      "blockdata_filepath": "data/layouts/QiuVillage_Apartment_2F/map.bin"
     }
   ]
 }
