@@ -8,8 +8,8 @@ mapscripts CurenoPort_MapScripts {
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)
         call(HowDoWeGetHome_FerryFixed_Script)
         call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
-        call(WarehouseRave_HideObject_Script)
         call(Quest_Diggingupadaorasdirt_Script_ControlVisibilityDigginginvestigator)
+        call_if_eq(VAR_WAREHOUSE_RAVE_STATE,TOLD_BAIYA_ABOUT_KEIYING,WarehouseRave_Script_AddBaiya)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

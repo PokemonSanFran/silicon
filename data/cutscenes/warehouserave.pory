@@ -1,8 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KEIYING = 1
-const BAIYA = 23
-const FLAG_HIDE_KEIYING = FLAG_TEMP_1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_C
+const LOCALID_CURENO_BAIYA = (LOCALID_CAMERA + 1)
 
 script WarehouseRave_SetUpRave_Script
 {
@@ -11,19 +8,15 @@ script WarehouseRave_SetUpRave_Script
         playbgm(MUS_RG_GAME_CORNER,TRUE)
 }
 
-script WarehouseRave_HideObject_Script
+script WarehouseRave_Script_AddBaiya
 {
-    if (var(VAR_WAREHOUSE_RAVE_STATE) != DEFEATED_KEIYING_WAREHOUSE)
-    {
-        setflag(FLAG_HIDE_BAIYA)
-    }
-    setflag(FLAG_HIDE_KEIYING)
+
 }
 
 script WarehouseRave_MoveObject_Script
 {
-    setobjectxy(KEIYING,5,5)
-        setobjectxyperm(KEIYING,5,5)
+    setobjectxy(LOCALID_WAREHOUSE_KEI_YING,5,5)
+        setobjectxyperm(LOCALID_WAREHOUSE_KEI_YING,5,5)
 }
 
 script WarehouseRave_ControlExits_Script
@@ -80,9 +73,9 @@ script WarehouseRave_Intro_Dialogue
         msgbox(format("What the hell is going on?! "),,SPEAKER_ALICIA)
         closemessage
 
-        clearflag(FLAG_HIDE_KEIYING)
-        addobject(KEIYING)
-        applymovement(KEIYING, moves(walk_right * 4, step_end))
+        clearobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
+        addobject(LOCALID_WAREHOUSE_KEI_YING)
+        applymovement(LOCALID_WAREHOUSE_KEI_YING, moves(walk_right * 4, step_end))
         waitmovement(0)
 
         msgbox(format("I'm sorry we had to trick you, {PLAYER}."),,SPEAKER_KEIYING)
@@ -151,9 +144,9 @@ script WarehouseRave_OutsideWarehouse_Dialogue
         waitmovement(0)
         playse(SE_PIN)
         waitse
-        applymovement(BAIYA,Common_Movement_ExclamationMark)
+        applymovement(LOCALID_CURENO_BAIYA,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(BAIYA, moves(player_run_up * 6, walk_left, step_end))
+        applymovement(LOCALID_CURENO_BAIYA, moves(player_run_up * 6, walk_left, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
@@ -198,9 +191,9 @@ script WarehouseRave_OutsideWarehouse_Dialogue
         }
     closemessage
 
-        applymovement(BAIYA, moves(walk_up * 6, step_end))
+        applymovement(LOCALID_CURENO_BAIYA, moves(walk_up * 6, step_end))
         waitmovement(0)
-        removeobject(BAIYA)
+        removeobject(LOCALID_CURENO_BAIYA)
 
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_BAIYA_ABOUT_KEIYING)

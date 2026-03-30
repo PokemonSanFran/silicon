@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_CURENO_ADAORA",
       "graphics_id": "OBJ_EVENT_GFX_ADAORA",
       "x": 7,
       "y": 21,
@@ -91,6 +92,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_CURENO_MADISON",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 2,
       "y": 20,
@@ -104,6 +106,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_CURENO_JULIUS",
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 3,
       "y": 20,
@@ -157,6 +160,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_CURENO_CROWDWOMAN",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
       "x": 2,
       "y": 18,
@@ -287,6 +291,7 @@
       "flag": "FLAG_TEMP_B"
     },
     {
+      "local_id": "LOCALID_CURENO_KEI_YING",
       "graphics_id": "OBJ_EVENT_GFX_KEIYING",
       "x": 8,
       "y": 21,
@@ -311,19 +316,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Taxi_Interact_Dialogue",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
-      "x": 29,
-      "y": 34,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_C"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
