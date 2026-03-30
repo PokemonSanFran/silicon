@@ -2743,9 +2743,9 @@ static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
         {
             FLAG_BADGE01_GET,
             TRAINER_FLAGS_START + TRAINER_BELEN,
-            TRAINER_FLAGS_START + TRAINER_040CEA33,
-            TRAINER_FLAGS_START + TRAINER_0389363C,
-            TRAINER_FLAGS_START + TRAINER_032E8AC9,
+            TRAINER_FLAGS_START + TRAINER_CHEFA,
+            TRAINER_FLAGS_START + TRAINER_CHEFB,
+            TRAINER_FLAGS_START + TRAINER_CHEFC,
             TRAINER_NONE,
         },
         [GYM_SHINZO] =

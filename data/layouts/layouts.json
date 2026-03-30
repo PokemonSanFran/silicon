@@ -10638,8 +10638,8 @@
     {
       "id": "LAYOUT_MERMEREZA_CITY_GYM",
       "name": "MermerezaCity_Gym_Layout",
-      "width": 11,
-      "height": 8,
+      "width": 14,
+      "height": 30,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
