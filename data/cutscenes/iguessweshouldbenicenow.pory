@@ -227,13 +227,13 @@ script IGuessWeShouldBeNiceNow_PostBoss_Dialogue {
         waitmovement(0)
 
         buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in {STR_VAR_1} and then tackle the forest tomorrow?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        msgbox(format("Whew, that was exhausting. How about we crash at my place nearby in {STR_VAR_1} and then tackle the forest tomorrow?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
         setvar(VAR_ESPULEE_OUTSKIRTS_STATE,ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED)
 
         if (var(VAR_RESULT) == YES) {
-            msgbox(format("Great, see you in EspuleeOutskirts!"))
+            msgbox(format("Great, see you in EspuleeOutskirts!"),,SPEAKER_CHARLOTTE)
         } else {
-            msgbox(format("Well, the challenges need both of us… and I'm tired. So I'm going to crash - you're welcome to try LeaverraForest by yourself though."))
+            msgbox(format("Well, the challenges need both of us… and I'm tired. So I'm going to crash - you're welcome to try LeaverraForest by yourself though."),,SPEAKER_CHARLOTTE)
         }
         closemessage
 
