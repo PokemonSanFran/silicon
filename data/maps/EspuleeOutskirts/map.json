@@ -91,6 +91,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_ESPULEE_IMELDA",
       "graphics_id": "OBJ_EVENT_GFX_IMELDA",
       "x": 15,
       "y": 32,

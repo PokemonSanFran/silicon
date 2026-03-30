@@ -12,7 +12,7 @@ mapscripts EspuleeOutskirts_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(Quest_Restoreespuleeoutskirts_HideImelda_Script)
+        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_HideImelda_Script)
         call(Quest_Restoreespuleeoutskirts_MoveImelda_Script)
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)

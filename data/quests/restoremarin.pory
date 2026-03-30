@@ -1,6 +1,3 @@
-const IMELDA_ESPULEE_OUTSKIRTS = 7
-const FLAG_HIDE_IMELDA_ESPULEE_OUTSKIRTS = FLAG_TEMP_1
-
 //Quest_Restoreespuleeoutskirts_
 //gText_Restoreespuleeoutskirts_
 
@@ -17,20 +14,18 @@ script Quest_Restoreespuleeoutskirts_Debug_Script{
         end
 }
 
-script Quest_Restoreespuleeoutskirts_MoveImelda_Script{
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
-        setobjectxy(IMELDA_ESPULEE_OUTSKIRTS,12,18)
-        setobjectxyperm(IMELDA_ESPULEE_OUTSKIRTS,12,18)
-        setobjectmovementtype(IMELDA_ESPULEE_OUTSKIRTS,MOVEMENT_TYPE_FACE_DOWN)
+script Quest_Restoreespuleeoutskirts_MoveImelda_Script
+{
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND)
+    {
+        setobjectxy(LOCALID_ESPULEE_IMELDA,12,18)
+        setobjectxyperm(LOCALID_ESPULEE_IMELDA,12,18)
+        setobjectmovementtype(LOCALID_ESPULEE_IMELDA,MOVEMENT_TYPE_FACE_DOWN)
     }
-    return
 }
-script Quest_Restoreespuleeoutskirts_HideImelda_Script{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREESPULEEGYM)
-
-        if (var(VAR_RESULT)){
-            setflag(FLAG_HIDE_IMELDA_ESPULEE_OUTSKIRTS)
-        }
+script Quest_Restoreespuleeoutskirts_HideImelda_Script
+{
+    setobjectflagfromlocalid(LOCALID_ESPULEE_IMELDA)
 }
 
 script Quest_Restoreespuleeoutskirts_BufferStrings_Part1_Script{
@@ -257,9 +252,9 @@ script Quest_Restoreespuleeoutskirts_PostBattle_Dialogue{
 
         opendoor(12,17)
         waitdooranim
-        applymovement(IMELDA_ESPULEE_OUTSKIRTS,Common_Movement_WalkUp)
-        waitmovement(IMELDA_ESPULEE_OUTSKIRTS)
-        removeobject(IMELDA_ESPULEE_OUTSKIRTS)
+        applymovement(LOCALID_ESPULEE_IMELDA,Common_Movement_WalkUp)
+        waitmovement(LOCALID_ESPULEE_IMELDA)
+        removeobject(LOCALID_ESPULEE_IMELDA)
         playse(SE_EXIT)
         waitse
         closedoor(12,17)
