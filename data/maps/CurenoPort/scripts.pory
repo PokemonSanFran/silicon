@@ -9,8 +9,10 @@ mapscripts CurenoPort_MapScripts {
         call(HowDoWeGetHome_FerryFixed_Script)
         call(Quest_NeighborhoodCleanUp2_ObjectVisibility_Script)
         call(Quest_Diggingupadaorasdirt_Script_ControlVisibilityDigginginvestigator)
-        call_if_eq(VAR_WAREHOUSE_RAVE_STATE,TOLD_BAIYA_ABOUT_KEIYING,WarehouseRave_Script_AddBaiya)
     }
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_WAREHOUSE_RAVE_STATE, DEFEATED_KEIYING_WAREHOUSE: WarehouseRave_Script_AddBaiya
+    ]
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         FLAG_VISITED_CURENO_PORT, FALSE: Generic_Mappreview
