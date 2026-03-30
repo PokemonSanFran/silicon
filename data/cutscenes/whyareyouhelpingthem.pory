@@ -327,7 +327,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
 
         msgbox(format("Not bad in there. Oliver wants you kids back at CuconuTown Compound."))
 
-        msgbox(format("{PLAYER}, I'm gonna head over in a bit. Wanna come?"),MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        msgbox(format("{PLAYER}, I'm gonna head over in a bit. Wanna come?"),MSGBOX_YESNO,SPEAKER_CHARLOTTE)
         endcutscene
 
         if (var(VAR_RESULT) == YES){

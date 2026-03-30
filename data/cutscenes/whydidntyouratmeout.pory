@@ -124,7 +124,11 @@ script WhyDidntYouRatMeOut_ConversationInStands {
         endcutscene
         playse(SE_EXIT)
         fadeblackandsetremovewarpfadeflag
+        waitse
         warpsilent(MAP_SHARPRISE_STADIUM_SKYBOX,10,3)
+        waitstate
+        release
+        end
 }
 
 script WhyDidntYouRatMeOut_LookAround {

@@ -6,9 +6,9 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM)
     lock
     startcutscene(JUMPPLAYER_HAVEYOUSEENTHENEWS)
+    spawnobject(graphicsId=OBJ_EVENT_GFX_OLIVER,localId=LOCALID_LEAVERRA_OLIVER,x=9,y=18,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
     playse(SE_EXIT)
     waitse
-    spawnobject(graphicsId=OBJ_EVENT_GFX_OLIVER,localId=LOCALID_LEAVERRA_OLIVER,x=9,y=10,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
     applymovement(LOCALID_LEAVERRA_OLIVER,Common_Movement_WalkUp)
     waitmovement(LOCALID_LEAVERRA_OLIVER)
 
