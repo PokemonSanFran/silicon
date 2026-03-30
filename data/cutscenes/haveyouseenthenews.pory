@@ -1,7 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const FRANK = 2
-const OLIVER = 3
+const LOCALID_LEAVERRA_OLIVER = (OBJ_EVENT_ID_CAMERA + 1)
 
 script HaveYouSeenTheNews_AskHelp_Dialogue {
     setvar(VAR_LEAVERRA_FOREST_STATE, POST_HAVE_YOU_SEEN_THE_NEWS)
@@ -10,19 +8,19 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     startcutscene(JUMPPLAYER_HAVEYOUSEENTHENEWS)
     playse(SE_EXIT)
     waitse
-    addobject(OLIVER)
-    applymovement(OLIVER,Common_Movement_WalkUp)
-    waitmovement(OLIVER)
+    spawnobject(graphicsId=OBJ_EVENT_GFX_OLIVER,localId=LOCALID_LEAVERRA_OLIVER,x=9,y=10,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
+    applymovement(LOCALID_LEAVERRA_OLIVER,Common_Movement_WalkUp)
+    waitmovement(LOCALID_LEAVERRA_OLIVER)
 
     msgbox(format("{PLAYER}... Charlotte... We need.. oh I'm so out of breath..."),,SPEAKER_OLIVER,,EMOTE_SWEAT)
 
     playse(SE_PIN)
-    applymovement(CHARLOTTE, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_LEAVERRA_CHARLOTTE, Common_Movement_ExclamationMark)
     applymovement(PLAYER, Common_Movement_ExclamationMark)
     waitmovement(PLAYER)
     applymovement(PLAYER,Common_Movement_FaceDown)
-    applymovement(CHARLOTTE,Common_Movement_FaceDown)
-    waitmovement(CHARLOTTE)
+    applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceDown)
+    waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
     msgbox(format("Oliver? How did you get so deep in here? You can't battle worth shit!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
 
@@ -41,13 +39,13 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
         msgbox(format("Fine, but don't dawdle. Come to the second floor."),,SPEAKER_OLIVER)
         closemessage
 
-        applymovement(OLIVER, Common_Movement_WalkDown)
-        applymovement(CHARLOTTE, moves(walk_down * 2, step_end))
+        applymovement(LOCALID_LEAVERRA_OLIVER, Common_Movement_WalkDown)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_down * 2, step_end))
         waitmovement(0)
             playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
-        removeobject(OLIVER)
+        removeobject(LOCALID_LEAVERRA_CHARLOTTE)
+        removeobject(LOCALID_LEAVERRA_OLIVER)
     } else {
         closemessage
         playse(SE_EXIT)

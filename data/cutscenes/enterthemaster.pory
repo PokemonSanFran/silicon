@@ -1,7 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
 const FRANK = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
 const FLAG_HIDE_FRANK = FLAG_TEMP_2
 const FLAG_HIDE_OLIVER = FLAG_TEMP_3
 const FLAG_HIDE_ROBOTS = FLAG_TEMP_4
@@ -9,51 +7,55 @@ const FLAG_HIDE_ROBOTS = FLAG_TEMP_4
 script EnterTheMaster_LeaverraForest_Entrance_ObjectSetup_Script{
     if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_WAITING_LEAVERRA_FOREST)
 	{
-        setflag(FLAG_HIDE_CHARLOTTE)
+        call(EnterTheMaster_HideCharlotte_Script)
     }
 }
 
 script EnterTheMaster_LeaverraForest_ObjectSetup_Script{
     if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_ENTERED_LEAVERRA_FOREST)
 	{
-        setflag(FLAG_HIDE_CHARLOTTE)
+        call(EnterTheMaster_HideCharlotte_Script)
     }
 }
 
-script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script{
-    switch (var(VAR_LEAVERRA_FOREST_STATE)){
+script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script
+{
+    switch (var(VAR_LEAVERRA_FOREST_STATE))
+    {
 		default:
         case CHARLOTTE_WAITING_LEAVERRA_FOREST:
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case CHARLOTTE_ENTERED_LEAVERRA_FOREST:
-        case POST_HAVE_YOU_SEEN_THE_NEWS: call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
+        case POST_HAVE_YOU_SEEN_THE_NEWS:
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case LEAVERRA_FOREST_MAZE_COMPLETE:
+            return
         case MET_FRANK:
-		call(EnterTheMaster_RepositionCharlotte_Script)
-        case FINISHED_FRANK_PUZZLES: return
+            call(EnterTheMaster_RepositionCharlotteToRobot_Script)
+        case FINISHED_FRANK_PUZZLES:
+            return
     }
-    return
 }
 
-script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script{
-    setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_FRANK)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_ROBOTS)
-        return
-}
-
-script EnterTheMaster_RepositionCharlotte_Script
+script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script
 {
-    setflag(FLAG_HIDE_OLIVER)
-    setobjectxy(CHARLOTTE,2,5)
-        setobjectxyperm(CHARLOTTE,2,5)
-        turnobject(CHARLOTTE,DIR_NORTH)
-        return
+    call(EnterTheMaster_HideCharlotte_Script)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_FRANK)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_LEFT)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_RIGHT)
+}
+
+script EnterTheMaster_RepositionCharlotteToRobot_Script
+{
+    setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,2,5)
+    setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,2,5)
+    turnobject(LOCALID_LEAVERRA_CHARLOTTE,DIR_NORTH)
 }
 
 script EnterTheMaster_HideCharlotte_Script
 {
-    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
 }
 
 script EnterTheMaster_Interact_Script
@@ -84,11 +86,11 @@ script EnterTheMaster_Ready_Dialogue
         msgbox(format("Thanks… dad?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,EnterTheMaster_WalkIntoWoods)
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
+        removeobject(LOCALID_LEAVERRA_CHARLOTTE)
         call(TryAutoSave)
         release
         end
@@ -124,10 +126,6 @@ script EnterTheMaster_CompleteMaze_Dialogue {
 
     setvar(VAR_LEAVERRA_FOREST_STATE,LEAVERRA_FOREST_MAZE_COMPLETE)
         lock
-        addobject(CHARLOTTE)
-        setobjectxy(CHARLOTTE,24,22) //PSF TODO Remove when followers are implemented
-        setobjectxyperm(CHARLOTTE,24,22)
-
         faceplayer
         msgbox(format("I don't think there's anywhere else for them to be… they've gotta be in here."),,SPEAKER_CHARLOTTE)
 
@@ -136,11 +134,9 @@ script EnterTheMaster_CompleteMaze_Dialogue {
         msgbox(format("They're getting paid. "),,SPEAKER_CHARLOTTE)
         closemessage
 
-        applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
         call(TryAutoSave)
         release
         end
@@ -164,7 +160,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
         closemessage
 
         applymovement(FRANK,Common_Movement_FaceLeft)
-        applymovement(CHARLOTTE, moves(walk_up, face_right, delay_16, walk_in_place_slow_right, step_end))
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, face_right, delay_16, walk_in_place_slow_right, step_end))
         waitmovement(0)
 
 		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
@@ -179,7 +175,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
         call(EnterTheMaster_StartEarthquake_Script)
 
-        applymovement(CHARLOTTE, moves(walk_down, face_up, step_end))
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_down, face_up, step_end))
         waitmovement(0)
 
         applymovement(FRANK, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
@@ -195,7 +191,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
 
         msgbox(format("Sorry, didn't go to Battle prep school. Who is Scott and what are these principles?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        applymovement(CHARLOTTE,Common_Movement_FaceRight)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceRight)
         applymovement(PLAYER,Common_Movement_FaceLeft)
         waitmovement(0)
 
@@ -204,7 +200,7 @@ script EnterTheMaster_ClearingIntro_Dialogue
         delay(16)
         fadescreenswapbuffers(FADE_TO_BLACK)
         msgbox(format("One eternity later…"))
-        applymovement(CHARLOTTE,Common_Movement_FaceUp)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
         fadescreenswapbuffers(FADE_FROM_BLACK)
@@ -236,8 +232,8 @@ script EnterTheMaster_StartEarthquake_Script
     playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
     applymovement(FRANK,Common_Movement_ExclamationMark)
-    applymovement(CHARLOTTE,Common_Movement_ExclamationMark)
-    waitmovement(CHARLOTTE)
+    applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
     call(Earthquake_Natural_Aftershock)
 
@@ -269,7 +265,13 @@ script EnterTheMaster_ExplainRobots_Dialogue{
     msgbox(format("If you talk to 'em, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         msgbox(format("The first stage needed you to work together, but this time, you're on your own."),,SPEAKER_FRANK)
         closemessage
-    fadedefaultbgm
+        msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
+        closemessage
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        call(EnterTheMaster_RepositionCharlotteToRobot_Script)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release
@@ -279,16 +281,6 @@ script EnterTheMaster_ExplainRobots_Dialogue{
 movement EnterTheMaster_WalkIntoWoods {
     walk_up
         step_end
-}
-
-script EnterTheMaster_StartQuest_Script{
-        msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
-        closemessage
-        applymovement(CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        call(EnterTheMaster_RepositionCharlotte_Script)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-        end
 }
 
 script EnterTheMaster_Interact_Charlotte_Script{
@@ -438,8 +430,8 @@ script EnterTheMaster_Interact_CharlotteRobot_Script{
 
 script EnterTheMaster_SetUpCompletion_Script{
     fadescreenswapbuffers(FADE_TO_BLACK)
-    setobjectxy(CHARLOTTE,9,16)
-    setobjectxyperm(CHARLOTTE,9,16)
+    setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,9,16)
+    setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,9,16)
     setobjectxy(PLAYER,10,16)
     applymovement(PLAYER,Common_Movement_FaceUp)
     TeleportCamera(10,16)
