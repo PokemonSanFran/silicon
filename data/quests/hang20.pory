@@ -120,7 +120,7 @@ script Quest_Hang20_Secret_Dialogue
     msgbox(format("Here to catch some waves?"))
     msgbox(format("I'm from Orre! We're landlocked, so I never learned to Surf."))
     msgbox(format("Word? It's mad easy to learn though, hold on..."))
-    giveitem(ITEM_HM03,1)
+    giveitem(ITEM_SURF_TOOL,1)
     msgbox(format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!"))
     closemessage
     applymovement(PUA,Quest_Hang20_SurfAway_Movement)

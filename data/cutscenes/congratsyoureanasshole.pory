@@ -74,19 +74,19 @@ script CongratsYoureanAsshole_FalseTimelineSplit_Script
         setflag(FLAG_TIMELINE_FALSE)
         setvar(VAR_STORYLINE_STATE,STORY_START_FALSE_TIMELINE)
 
-        fadescreenswapbuffers(FADE_TO_BLACK)
+        fadescreen(FADE_TO_BLACK)
         showtweet(TWEET_STORY_FALSETIMELINE)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadescreen(FADE_FROM_BLACK)
 
         msgbox(format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity."),MSGBOX_DEFAULT,SPEAKER_RAMESH)
         msgbox(format("Things will take time."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
         msgbox(format("Oliver, Ramesh, and I all have different missions for you. Come talk to us our offices when you're ready."),MSGBOX_DEFAULT,SPEAKER_KEIYING)
         closemessage
 
-        fadescreenswapbuffers(FADE_TO_BLACK)
+        fadescreen(FADE_TO_BLACK)
         delay(30)
         call(CongratsYoureanAsshole_ObjectCleanUp_Script)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadescreen(FADE_FROM_BLACK)
 
         call(TryAutoSave)
         endcutscene

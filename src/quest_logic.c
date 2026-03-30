@@ -2543,19 +2543,25 @@ bool32 ShouldAskUnhoused(void)
 void ShowGarbodor(void)
 {
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
-    u32 species = SPECIES_GARBODOR;
-    u32 level = 40;
+    //struct Pokemon *mon = &daycare->viewMon;
+    struct Pokemon mon;
+    u16 species = SPECIES_GARBODOR;
+    u8 level = 40;
     u32 personality = GetMonPersonality(species, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
-    u32 fixedOtId = 0;
-    bool32 isShiny = TRUE;
-    u32 item = ITEM_NORMAL_GEM;
+    u32 fixedOtId = 38726;
+    bool8 isShiny = TRUE;
+    enum Item item = ITEM_NORMAL_GEM;
 
-    CreateMon(mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
-    SetMonData(mon,MON_DATA_IS_SHINY,&isShiny);
-    SetMonData(mon,MON_DATA_HELD_ITEM,&item);
+    CreateMon(&mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
+    SetMonData(&mon,MON_DATA_IS_SHINY,&isShiny);
+    SetMonData(&mon,MON_DATA_HELD_ITEM,&item);
+    CalculateMonStats(&mon);
+    GiveMonInitialMoveset(&mon);
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    CopyMon(&daycare->viewMon,&mon,sizeof(struct Pokemon));
+
+    // PSF TODO change OT to be Baiya
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, &daycare->viewMon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 // ***********************************************************************

@@ -296,7 +296,8 @@ script YouRealizeTheyreEvilRight_Framing_Dialogue {
         goto(YouRealizeTheyreEvilRight_InnerMonologue_Dialogue)
 }
 
-script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
+script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue
+{
     applymovement(BAIYA, moves(walk_left, walk_down * 2, face_right, step_end))
     waitmovement(0)
     applymovement(PLAYER,Common_Movement_FaceLeft)
@@ -305,7 +306,7 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
     msgbox(format("Look, I know this is a lot of information to take in. I know you're going to make the right decision..."),,SPEAKER_BAIYA_TIDE)
     closemessage
 
-    fadescreenswapbuffers(FADE_TO_BLACK)
+    fadescreen(FADE_TO_BLACK)
     msgbox(format("Fighting against Sharprise and…The literal government?..This is going off the rails. I'm no criminal. This isn't the right path."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
     msgbox(format("They're just asking for trouble. The protests, the hacking, the riots... is that really what I want? Adaora says The Tide doesn't condone violence, but can I even believe her?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     msgbox(format("They might think they're right. They do want to protect Resido and make a difference, but this isn't it."),,SPEAKER_ALICIA,TAIL_THOUGHT)
@@ -313,7 +314,7 @@ script YouRealizeTheyreEvilRight_InnerMonologue_Dialogue{
     msgbox(format("...No, I can't do it. I can't risk everything I've built. There must be another way. Is Baiya even telling the truth? SharpRise Capital wouldn't lie to me. That would get exposed! Is The Tide just manipulating me, like they tried with the social media stunt?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     msgbox(format("I'm making the right choice. I'm staying true to my principles, and that's the the way forward. I can find a better way to fight for justice."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
-    fadescreenswapbuffers(FADE_FROM_BLACK)
+    fadescreen(FADE_FROM_BLACK)
     goto(YouRealizeTheyreEvilRight_Confront_Dialogue)
 }
 
@@ -375,7 +376,7 @@ script YouRealizeTheyreEvilRight_CantSleep_Dialogue {
 }
 
 script YouRealizeTheyreEvilRight_NoIdea_Dialogue {
-    fadescreenswapbuffers(FADE_FROM_BLACK)
+    fadescreen(FADE_FROM_BLACK)
     setvar(VAR_STORYLINE_STATE,STORY_MORNING_OF_TIMELINE_SPLIT)
 
     applymovement(PLAYER, moves(walk_down, walk_left * 2, walk_right * 2, step_end))
