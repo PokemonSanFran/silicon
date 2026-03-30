@@ -10,7 +10,7 @@ script WarehouseRave_SetUpRave_Script
 
 script WarehouseRave_Script_AddBaiya
 {
-
+    spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=LOCALID_CURENO_BAIYA,x=29,y=33,movementType=MOVEMENT_TYPE_FACE_DOWN,elevation=3)
 }
 
 script WarehouseRave_MoveObject_Script

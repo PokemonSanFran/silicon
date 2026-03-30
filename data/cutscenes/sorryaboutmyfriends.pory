@@ -1,21 +1,20 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ADAORA = 5
-const FLAG_HIDE_ADAORA = FLAG_TEMP_5
+const LOCALID_CHASILLA_ADAORA = (OBJ_EVENT_ID_CAMERA + 1)
 
-script SorryAboutMyFriends_Adaora_Visible_Script{
-    if (var(VAR_CHASILLA_STATE) != DEFEATED_PUA){
-        setflag(FLAG_HIDE_ADAORA)
-    }
-    return
+script SorryAboutMyFriends_Adaora_Visible_Script
+{
+    spawnobject(graphicsId=OBJ_EVENT_GFX_ADAORA,localId=LOCALID_CHASILLA_ADAORA,x=17,y=11,movementType=MOVEMENT_TYPE_FACE_DOWN,elevation=3)
 }
 
-script SorryAboutMyFriends_CheckCutscene_Script{
+script SorryAboutMyFriends_CheckCutscene_Script
+{
     lock
-        if (!flag(FLAG_HIDE_ADAORA)){
-            goto(SorryAboutMyFriends_Intro_Dialogue)
-        }
+    if (var(VAR_CHASILLA_STATE) == DEFEATED_PUA)
+    {
+        goto(SorryAboutMyFriends_Intro_Dialogue)
+    }
     release
-        end
+    end
 }
 
 script SorryAboutMyFriends_Intro_Dialogue {
@@ -23,8 +22,10 @@ script SorryAboutMyFriends_Intro_Dialogue {
     startcutscene(JUMPPLAYER_SORRYABOUTMYFRIENDS)
         playbgm(MUS_RG_ENCOUNTER_ROCKET,FALSE)
 
-        applymovement(ADAORA, moves(emote_exclamation_mark, walk_left * 3, walk_up, step_end))
-        waitmovement(ADAORA)
+        applymovement(LOCALID_CHASILLA_ADAORA, moves(emote_exclamation_mark))
+        waitmovement(LOCALID_CHASILLA_ADAORA)
+        moveobjecttocoords(LOCALID_CHASILLA_ADAORA,15,10,DIR_NORTH)
+        waitmovement(LOCALID_CHASILLA_ADAORA)
 
         msgbox(format("{PLAYER}. How goes your Gym Challenge?"),,SPEAKER_ADAORA)
 
@@ -70,9 +71,9 @@ script SorryAboutMyFriends_UpgradeApp_Script
 }
 
 script SorryAboutMyFriends_GiveTicket_Script {
-        applymovement(ADAORA,Common_Movement_WalkInPlaceUp)
+        applymovement(LOCALID_CHASILLA_ADAORA,Common_Movement_WalkInPlaceUp)
         call(SorryAboutMyFriends_UpgradeApp_Script)
-        waitmovement(ADAORA)
+        waitmovement(LOCALID_CHASILLA_ADAORA)
 
         setvar(VAR_CHASILLA_STATE,GOT_ARANTRAZ_TICKET)
         setvar(VAR_FERRY_STATE,FERRY_ARANTRAZ_AVAILABLE)
@@ -96,9 +97,9 @@ script SorryAboutMyFriends_GiveTicket_Script {
         msgbox(format("Thank you {PLAYER}. Enjoy Arantraz."),,SPEAKER_ADAORA)
         closemessage
 
-        applymovement(ADAORA, moves(walk_down * 6, step_end))
-        waitmovement(ADAORA)
-        removeobject(ADAORA)
+        applymovement(LOCALID_CHASILLA_ADAORA, moves(walk_down * 6, step_end))
+        waitmovement(LOCALID_CHASILLA_ADAORA)
+        removeobject(LOCALID_CHASILLA_ADAORA)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene
