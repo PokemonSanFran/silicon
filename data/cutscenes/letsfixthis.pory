@@ -25,7 +25,7 @@ script LetsFixThis_EliteVideo_Dialogue
 
         msgbox(format("…but we will not sit quietly and wait for salvation to come to us! We must join together to save ourselves and fight to restore the glory of Resido!"),,SPEAKER_TALA)
         closemessage
-        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadescreen(FADE_FROM_BLACK)
 
         fadedefaultbgm
         goto(LetsFixThis_GetMessage_Dialogue)
