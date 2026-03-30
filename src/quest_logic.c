@@ -61,6 +61,11 @@ bool32 HasPlayerJoinedThe_Tide(void)
     return (FlagGet(FLAG_TIMELINE_TRUE));
 }
 
+void Script_HasPlayerJoinedThe_Tide(void)
+{
+    gSpecialVar_Result = HasPlayerJoinedThe_Tide();
+}
+
 u32 GetCurrentMap(void)
 {
     u32 currentMapGroup = gSaveBlock1Ptr->location.mapGroup;
