@@ -12,26 +12,20 @@ mapscripts WishaastLake_MapScripts {
 script WishaastLake_ObjectVisibility_Script {
     call(Manhunt_HideCharlotte_Script)
 
-	if (flag(FLAG_SYS_GAME_CLEAR))
+    if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR)
 	{
 		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ELEANOR)
-		return
 	}
 
     setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_VIGRIM)
-    specialvar(VAR_RESULT,ShouldShowVigrim)
-    if (!var(VAR_RESULT))
-    {
-        call(Manhunt_HideVigrim_Script)
-    }
-    return
-
+    callnative(Script_ShouldShowVigrim)
+    call_if_eq(VAR_RESULT,FALSE,Manhunt_HideVigrim_Script)
 }
 
 script WishaastLake_InteractEleanor_Event_Script {
     lock
         //PSF TODO figure out better pre / post battle speech
-		if (flag(FLAG_SYS_GAME_CLEAR)){
+        if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR){
 			goto(Rematches_Script_Eleanor)
 		} elif (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){
             goto(MaskOff_Encounter_Vigrim_Dialogue)

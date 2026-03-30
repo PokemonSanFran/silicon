@@ -1818,6 +1818,12 @@ bool32 ShouldShowVigrim(void)
     return FALSE;
 }
 
+void Script_ShouldShowVigrim(void)
+{
+    gSpecialVar_Result = ShouldShowVigrim();
+}
+
+
 // ***********************************************************************
 // Cutscene: False Timeline
 // ***********************************************************************

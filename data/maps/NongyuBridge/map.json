@@ -109,19 +109,6 @@
       "flag": "FLAG_IS_RESIDO_CHAMPION"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
-      "x": 30,
-      "y": 1,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Ultrawormholeresearch_StartTotemBattle_Script",
-      "flag": "FLAG_TEMP_1A"
-    },
-    {
       "local_id": "LOCALID_GETTHEBANDBACKTOGETHERBIKERE",
       "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERE",
       "x": 21,

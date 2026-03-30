@@ -23,9 +23,9 @@ script Manhunt_ShowRamesh_Script{
     }
 }
 
-script Manhunt_HideVigrim_Script {
-    setflag(FLAG_HIDE_VIGRIM)
-    return
+script Manhunt_HideVigrim_Script
+{
+    setobjectflagfromlocalid(LOCALID_LAKE_WISHAAST_VIGRIM)
 }
 
 script Manhunt_HideCharlotte_Script{

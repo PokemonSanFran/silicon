@@ -268,6 +268,5 @@
       "script": "Quest_Hang20_Debug_Script"
     }
   ],
-  "bg_events": [
-  ]
+  "bg_events": []
 }
