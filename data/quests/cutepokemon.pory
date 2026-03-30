@@ -254,9 +254,9 @@ script CutePokemon_Dialogue_RecognizeGoOutsideQiu
 	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with him a bit since you gave him to me. I’m about to go on my break. Let’s battle outside!"),MSGBOX_NPC,SPEAKER_MELISSA)
 	closemessage
 	applymovement(MELISSA_QIU_INSIDE,CutePokemon_WalkToExit_Movement)
-	fadescreen(FADE_TO_BLACK)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	removeobject(MELISSA_QIU_INSIDE)
-	fadescreen(FADE_FROM_BLACK)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 	release
 	end
 }
@@ -415,9 +415,9 @@ script CutePokemon_Dialogue_RecognizeGoOutsideCresalta
 	msgbox(format("Wait, didn’t you help me find {STR_VAR_1} in {STR_VAR_2}? I’ve trained with her a bit since you gave her to me. I’m about to go on my break. Let’s battle outside!"),,SPEAKER_MELISSA)
 	closemessage
 	applymovement(MELISSA_CRESALTA_INSIDE,CutePokemon_WalkToExit_Movement)
-	fadescreen(FADE_TO_BLACK)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	removeobject(MELISSA_CRESALTA_INSIDE)
-	fadescreen(FADE_FROM_BLACK)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 	release
 	end
 }

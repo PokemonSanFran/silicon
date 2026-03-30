@@ -380,8 +380,8 @@ msgbox(format("Yes, I absolutely love their {STR_VAR_1} Burrito!"),,SPEAKER_NURS
 closemessage
 cueobjecttalking(LOCALID_PLAYER)
 msgbox(format("They're launching a new restaurant, and sent over a meal for you to try. And if you like it… "),,SPEAKER_ALICIA)
-fadescreen(FADE_TO_BLACK)
-fadescreen(FADE_FROM_BLACK)
+fadescreenswapbuffers(FADE_TO_BLACK)
+fadescreenswapbuffers(FADE_FROM_BLACK)
 msgbox(format("This is delicious wow! I'll absolutely tell people about this."),,SPEAKER_NURSE)
 msgbox(format("That went well!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
 closemessage
@@ -405,8 +405,8 @@ msgbox(format("Nah, that's some rich people's food, you know?"),,SPEAKER_NURSE)
 msgbox(format("The owner is opening another restaurant with a Pay-What-You-Can model, which is why I'm here! They want you to try some of their new menu items and see if you like."),,SPEAKER_ALICIA)
 closemessage
 cueobjecttalking(LOCALID_PLAYER)
-fadescreen(FADE_TO_BLACK)
-fadescreen(FADE_FROM_BLACK)
+fadescreenswapbuffers(FADE_TO_BLACK)
+fadescreenswapbuffers(FADE_FROM_BLACK)
 msgbox(format("Okay, this is pretty tight. And you said it's cheaper than Needles? Okay, I'll have to check it out soon. I’ll talk it up!"),,SPEAKER_NURSE)
 msgbox(format("Two down!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
 closemessage
@@ -430,8 +430,8 @@ msgbox(format("No, they never had salads and that's really what I'm into right n
 closemessage
 cueobjecttalking(LOCALID_PLAYER)
 msgbox(format("They're opening another restaurant with a new menu and expanding their options. I brought some, free of charge for you to try… "),,SPEAKER_NURSE)
-fadescreen(FADE_TO_BLACK)
-fadescreen(FADE_FROM_BLACK)
+fadescreenswapbuffers(FADE_TO_BLACK)
+fadescreenswapbuffers(FADE_FROM_BLACK)
 msgbox(format("I don't know if its better than a salad, but its tasty for sure. I'll mention it to hungry Trainers."),,SPEAKER_NURSE)
 closemessage
 release
@@ -455,8 +455,8 @@ msgbox(format("That place is too uptight, I just want somewhere casual I can eat
 msgbox(format("They're opening a new restaurant that is going to be relaxed, and I brought over a free meal!"),,SPEAKER_ALICIA)
 closemessage
 cueobjecttalking(LOCALID_PLAYER)
-fadescreen(FADE_TO_BLACK)
-fadescreen(FADE_FROM_BLACK)
+fadescreenswapbuffers(FADE_TO_BLACK)
+fadescreenswapbuffers(FADE_FROM_BLACK)
 msgbox(format("Chill vibes and good food? That's my kind of spot. I can talk this up all day."),,SPEAKER_NURSE)
 msgbox(format("The last one! Time to head back to {STR_VAR_1}."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_HAPPY)
 closemessage

@@ -13,7 +13,7 @@ script OffYouGo_WarpPlayer_Script{
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
     if (var(VAR_TEMP_1) < 11 && (var(VAR_GOLDENGATEBRIDGE_STATE) < POST_OFF_YOU_GO)){
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         setobjectxy(PLAYER,16,11)
         turnobject(PLAYER,DIR_NORTH)
         TeleportCamera(16,11)

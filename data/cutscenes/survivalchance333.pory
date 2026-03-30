@@ -102,14 +102,14 @@ script SurvivalChance333_PostBattle_Script {
 }
 
 script SurvivalChance333_MoveCameraFreeze_Script {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         setvar(VAR_0x8004, 38)
         setvar(VAR_0x8005, 11)
         special(TeleportCamera)
         delay(16)
         addobject(10)
         addobject(9)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(SurvivalChance333_FreezeIce)
 }
 
@@ -136,7 +136,7 @@ script SurvivalChance333_FreezeIce {
 }
 
 script SurvivalChance333_MoveCameraLava_Script {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         special(ReturnCameraToPlayer)
         setvar(VAR_0x8004, 12)
         setvar(VAR_0x8005, 8)
@@ -144,7 +144,7 @@ script SurvivalChance333_MoveCameraLava_Script {
         delay(16)
         addobject(12)
         addobject(11)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(SurvivalChance333_SetLava)
 }
 
@@ -209,10 +209,10 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
 
         closemessage
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         call(SurvivalChance333_SetUpRaidObject_Script)
         TeleportCamera(24,11)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("They'll blow the wall, and we'll dive in!"),,SPEAKER_CHARLOTTE)
 

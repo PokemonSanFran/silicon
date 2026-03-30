@@ -34,12 +34,12 @@ script Quest_Redomugging_Hide_Muggers_Script{
 }
 
 script Quest_Redomugging_MovePlayer_Arantraz_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     setobjectxy(PLAYER,11,14)
     turnobject(PLAYER,DIR_NORTH)
     turnobject(MUGGER_B_ARANTRAZ,DIR_EAST)
     TeleportCamera(11,14)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     return
 }
 
@@ -135,13 +135,13 @@ script Quest_Redomugging_StealPhone_Dialogue{
     msgbox(format("While you're here, how about an interview? I see you're publicly supporting The Tide, and I'd love to pick your brain!"))
     closemessage
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(60)
     setobjectxy(PLAYER,12,15)
     TeleportCamera(12,15)
     turnobject(VICTIM,DIR_EAST)
     turnobject(PLAYER,DIR_WEST)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("Oh man, this is so juicy! Okay, I gotta run to the restroom, but don't go anywhere,okay?"))
     closemessage
@@ -178,11 +178,11 @@ script Quest_Redomugging_SpottedByReporter_Script{
                 msgbox(format("Hey, weren't you like, mid-interview?"))
                 closemessage
 
-                fadescreen(FADE_TO_BLACK)
+                fadescreenswapbuffers(FADE_TO_BLACK)
                 delay(30)
                 setobjectxy(PLAYER,12,15)
                 TeleportCamera(12,15)
-                fadescreen(FADE_FROM_BLACK)
+                fadescreenswapbuffers(FADE_FROM_BLACK)
 
                 msgbox(format("I need to get out of here without being seen..."))
         }

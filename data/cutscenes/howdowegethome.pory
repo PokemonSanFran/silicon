@@ -39,12 +39,12 @@ script HowDoWeGetHome_YellingDistance_Dialogue{
         closemessage
 
         applymovement(PLAYER,Common_Movement_WalkLeft)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         waitmovement(PLAYER)
         setobjectxy(PLAYER,7,22)
         turnobject(PLAYER,DIR_WEST)
         TeleportCamera(7,22)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,FALSE)
 
         msgbox(format("Losers? You wanna say that shit to my face?"),,SPEAKER_JULIUS)
@@ -104,14 +104,14 @@ script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
         waitmovement(LOCALID_CURENO_ADAORA)
         applymovement(LOCALID_CURENO_ADAORA,HowDoWeGetHome_LeaveFight_Movement)
         delay(60)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         delay(60)
         removeobject(LOCALID_CURENO_MADISON)
         removeobject(LOCALID_CURENO_ADAORA)
         removeobject(LOCALID_CURENO_KEI_YING)
         call(HowDoWeGetHome_SetCrowdMovementType_Script)
         call(HowDoWeGetHome_SetCrowdNewMovementType_Script)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_TEMP_0,0)
         fadedefaultbgm

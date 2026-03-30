@@ -206,7 +206,9 @@ script HousingProtest_StartBattle_PostSave_Script {
 
 script HousingScript_StartActualBattle_Script
 {
-    msgbox(format("Pfft, fine with me. Turtonator, Flamethrower!"),,SPEAKER_VITOMIR)
+    bufferspeciesname(STR_VAR_1,SPECIES_ARCANINE)
+    buffermovename(STR_VAR_1,MOVE_FLAMETHROWER)
+    msgbox(format("Pfft, fine with me. {STR_VAR_1}, {STR_VAR_2}!"),,SPEAKER_VITOMIR)
     closemessage
     trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET,format("Shit... this is not how this was supposed to go down."))
     goto(HousingProtest_PostBattle_Dialogue)

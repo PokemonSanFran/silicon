@@ -280,7 +280,7 @@ script Quest_Challengeof7Sisters_MarkLoss_Script{
 }
 
 script Quest_Challengeof7Sisters_WarpEverybodyBackToPlace_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         setobjectxy(PLAYER,11,3)
         TeleportCamera(11,3)
         applymovement(PLAYER,Common_Movement_FaceLeft)
@@ -300,7 +300,7 @@ script Quest_Challengeof7Sisters_WarpEverybodyBackToPlace_Script{
         applymovement(JO,Common_Movement_FaceUp)
         applymovement(HANNAH,Common_Movement_FaceUp)
         applymovement(RACHEL,Common_Movement_FaceUp)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 }
 
 script Quest_Challengeof7Sisters_ChallengeOver_Dialogue{

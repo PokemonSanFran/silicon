@@ -184,7 +184,7 @@ script Quest_CulturalPurity_Racist_Interact_Script{
 }
 
 script Quest_CulturalPurity_ObjectSetUp_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     call(Quest_CulturalPurity_MakeShinzoVisible_Script)
     call(Quest_CulturalPurity_MakeBackupVisible_Script)
 
@@ -195,7 +195,7 @@ script Quest_CulturalPurity_ObjectSetUp_Script{
     setobjectxyperm(BACKUP,14,19)
     setobjectxy(BACKUP,14,19)
 
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     goto(Quest_CulturalPurity_Battle_Script)
 }
 

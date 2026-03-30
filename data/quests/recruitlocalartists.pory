@@ -143,10 +143,10 @@ script Quest_Recruitlocalartists_StartQuest_Dialogue{
 
     applymovement(RAMESH_MERMEREZA_CITY, moves(walk_right * 2, walk_up * 9, step_end))
     startquest(QUEST_RECRUITLOCALARTISTS)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(RAMESH_MERMEREZA_CITY)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -168,10 +168,10 @@ script Quest_Recruitlocalartists_Second_Dialogue{
         msgbox(format("I saw one of those mural painters once. I'll tell you a secret... they're Pokémon!"))
         closemessage
         waitmovement(SMEARGLE)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         delay(60)
         call(Quest_Recruitlocalartists_SetSmearglePosition_Script)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         release
         end
 }

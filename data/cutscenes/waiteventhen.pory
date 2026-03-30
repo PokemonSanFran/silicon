@@ -42,7 +42,7 @@ script WaitEvenThen_BossSetUp_Script {
 }
 
 script WaitEvenThen_ObjectSetUp_Script {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
 
         setobjectxy(PLAYER,25,4)
         TeleportCamera(25,4)
@@ -62,7 +62,7 @@ script WaitEvenThen_ObjectSetUp_Script {
         setobjectxy(MAGNUS,24,5)
         applymovement(MAGNUS,Common_Movement_FaceRight)
 
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 }
 
 script WaitEvenThen_PrepareBossEncounter_Dialogue {
@@ -115,11 +115,11 @@ script WaitEvenThen_MovePlayerToBoss {
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
     if (var(VAR_TEMP_0) != 33 || (var(VAR_TEMP_1) != 6)){
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         setobjectxy(PLAYER,33,6)
         TeleportCamera(33,6)
         applymovement(PLAYER,Common_Movement_FaceUp)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
     }
         goto(WaitEvenThen_BossEncounter_Script)
 }

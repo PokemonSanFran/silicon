@@ -155,9 +155,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerA
     msgbox(format("Just joined."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Oh finally! I’m gonna go check it out now."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERA)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERA, moves(walk_up * 6))
@@ -181,9 +181,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerB
     msgbox(format("That’s me."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     buffermapname(STR_VAR_1,MAP_CURENO_PORT_GEAR_GRIND_GANG_HOUSE)
     msgbox(format("I guess I’m heading to {STR_VAR_1}!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERB)
     closemessage
@@ -207,9 +207,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerC
     msgbox(format("Nice fixie. Build it yourself?"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
     msgbox(format("No, it was a gift from one of your members, actually."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Finally got the hacker house underway? Think about how many more fixies we can get out once we’re together!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERC, moves(walk_left * 6))
@@ -234,9 +234,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerD
     msgbox(format("Not quite."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("We’re getting the band back together!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
     msgbox(format("Had the Gear Grind Gang broken up?"),,SPEAKER_ALICIA)
     msgbox(format("No, but I’ve always wanted to say that."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERD)
@@ -262,9 +262,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerE
     msgbox(format("It’s complicated.. But that’s not why I’m here."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("It’s going to be awesome to build something for the community, together."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERE)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERE, moves(walk_right * 6))
@@ -288,9 +288,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerF
     msgbox(format("Not a Gym Trainer."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("I mean that sounds awesome, but living in the Halberba Gym would be even cooler…"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERF, moves(walk_up * 6))
@@ -314,9 +314,9 @@ script Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerG
     msgbox(format("I am new, but that’s not why I’m here."),,SPEAKER_ALICIA)
     msgbox(format("AngeldeliverybikerC sent me to tell you about the new hacker house."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("I know exactly how to get there!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
     closemessage
     applymovement(LOCALID_GETTHEBANDBACKTOGETHERBIKERG, moves(walk_right * 6))

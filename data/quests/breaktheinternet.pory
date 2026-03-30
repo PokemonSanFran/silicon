@@ -135,9 +135,9 @@ script Quest_Breaktheinternet_EspuleeOutskirts_PostBattle_Script{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_1)
         msgbox(format("You should lay low. Seriously."))
 		closemessage
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(VAR_LAST_TALKED)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(Quest_Breaktheinternet_CallAfterFirst_Dialogue)
 }
 
@@ -156,9 +156,9 @@ script Quest_Breaktheinternet_QiuVillage_PostBattle_Script{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BREAKTHEINTERNET,SUB_QUEST_2)
         msgbox(format("I'm telling you, you should skip town."))
 		closemessage
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(VAR_LAST_TALKED)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(Quest_Breaktheinternet_CallAfterSecond_Dialogue)
 }
 
@@ -292,12 +292,12 @@ script Quest_Breaktheinternet_SetPlayerPosition_Script{
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) == 1){
-            fadescreen(FADE_TO_BLACK)
+            fadescreenswapbuffers(FADE_TO_BLACK)
             setobjectxy(PLAYER,2,8)
             TeleportCamera(2,8)
             applymovement(PLAYER,Common_Movement_FaceLeft)
             waitmovement(PLAYER)
-            fadescreen(FADE_FROM_BLACK)
+            fadescreenswapbuffers(FADE_FROM_BLACK)
         }
 return
 }
@@ -332,10 +332,10 @@ script Quest_Breaktheinternet_Wave2Battle2_Script{
 script Quest_Breaktheinternet_CompleteWave2_Script{
     lock
     msgbox(format("Our boss is tougher than us!"))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(WAREHOUSE_GRUNT4)
     removeobject(WAREHOUSE_GRUNT5)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -426,12 +426,12 @@ script Quest_Breaktheinternet_PostCEOBattle_Dialogue{
     msgbox(format("Where is Ismail?!?"),,SPEAKER_ALICIA)
     msgbox(format("Your friend won't be an issue anymore. He learned his lesson."),,SPEAKER_BUZZR_CEO)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(WAREHOUSE_BUZZR_CEO)
     removeobject(WAREHOUSE_ISMAIL)
     removeobject(WAREHOUSE_GRUNT4)
     removeobject(WAREHOUSE_GRUNT5)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     applymovement(PLAYER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
     goto(Quest_Breaktheinternet_GiveSlurpuff_Dialogue)

@@ -153,10 +153,10 @@ script MaskOff_PostBattle_Dialogue
     msgbox(format("Allow me to re-introduce myself. I am the leader of The Tide, member of the Elite Four,"),,SPEAKER_VIGRIM)
     closemessage
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     call(MaskOff_TransformObject_Script)
     lock
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("the one and only… Eleanor."),MSGBOX_NPC,SPEAKER_ELEANOR)
     reveal(REVEAL_ELEANOR)
@@ -173,9 +173,9 @@ script MaskOff_PostBattle_Dialogue
 
     closemessage
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(32)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("I see. If the Elite Four is going to present as a united front, I’ll need to give up leadership to Adaora. This will come as a shock to her, and she has some reservations about becoming the face of The Tide… but I know she can handle it."),,SPEAKER_ELEANOR)
     msgbox(format("... I'll have to face Frank again."),,SPEAKER_ELEANOR,TAIL_WHISPER)

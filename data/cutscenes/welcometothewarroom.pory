@@ -153,9 +153,9 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 
         applymovement(CHIEF, moves(walk_right, walk_down * 4, walk_left * 2, walk_down * 3, step_end))
         delay(30)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(CHIEF)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         call(WelcomeToTheWarRoom_FaceSpeakerLucrezia)
         msgbox(format("Charlotte, {PLAYER}, don't let the chief's attitude get in the way. You've all got orders, so let's get to it."),,SPEAKER_LUCREZIA)
@@ -166,11 +166,11 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
         applymovement(LUCREZIA, moves(walk_right * 3, walk_down * 5, step_end))
 
         delay(30)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(LUCREZIA)
         removeobject(ARNAV)
         removeobject(TECHIE)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         applymovement(OLIVER, moves(walk_left, walk_down, face_right, step_end))
         applymovement(CHARLOTTE,Common_Movement_FaceLeft)
@@ -182,9 +182,9 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 
         applymovement(OLIVER, moves(walk_down * 4, walk_right * 3, walk_down * 3, step_end))
         delay(30)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(OLIVER)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         applymovement(CHARLOTTE,Common_Movement_FaceDown)
         applymovement(PLAYER,Common_Movement_FaceUp)
@@ -198,9 +198,9 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
             closemessage
 
             applymovement(CHARLOTTE, moves(walk_left, walk_down * 4, step_end))
-            fadescreen(FADE_TO_BLACK)
+            fadescreenswapbuffers(FADE_TO_BLACK)
             removeobject(CHARLOTTE)
-            fadescreen(FADE_FROM_BLACK)
+            fadescreenswapbuffers(FADE_FROM_BLACK)
             release
             end
         } else {

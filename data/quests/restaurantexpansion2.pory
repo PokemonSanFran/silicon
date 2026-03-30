@@ -107,9 +107,9 @@ script Quest_Restaurantexpansion2_HideStaffE_Script{
 
 script Quest_Restaurantexpansion2_RemoveStaff_Script{
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     return
 }
@@ -238,9 +238,9 @@ script Quest_Restaurantexpansion2_Reward_Dialogue{
     setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2)
        setflag(FLAG_FACILITY_UNLOCK_BELEN)
     completequest(QUEST_RESTAURANTEXPANSION2)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(BELEN_MERMEREZA_CITY)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }

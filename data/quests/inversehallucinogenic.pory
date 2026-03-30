@@ -144,11 +144,11 @@ script Quest_Inversehallucinogenic_BD_Battle_Script{
 
 script Quest_Inversehallucinogenic_PostBattle_Script{
     msgbox(format("It's been three years, and I'm starting to see that maybe there was another way."),,SPEAKER_BD)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(20)
     applymovement(BD,Common_Movement_FaceAwayPlayer)
     waitmovement(BD)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Ugh man, I don't feel so good. What a wild trip! Thanks for your help testing, I'll review the footage later. Here, take this!"),,SPEAKER_BD)
 
     giveitem(ITEM_TM42)

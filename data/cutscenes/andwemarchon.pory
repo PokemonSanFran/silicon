@@ -49,11 +49,11 @@ script AndWeMarchOn_StartParadeMovement_Script {
         startcutscene(JUMPPLAYER_ANDWEMARCHON)
         applymovement(PLAYER, moves(face_down, step_end))
         waitmovement(0)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         call(AndWeMarchOn_MoveCameraToParade_Script)
         setobjectxyperm(PARADE_FLOAT_A, 26, 10)
         setobjectxy(PARADE_FLOAT_A, 26, 10)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         applymovement(CAMERA, moves(walk_right * 14, step_end))
         applymovement(TALA, AndWeMarchOn_ParadeProcession_Movement)
@@ -179,7 +179,7 @@ script AndWeMarchOn_CutsceneBattleScript {
         waitmovement(0)
 
         //PSF TODO figure out how to flash screen back
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         playse(SE_M_THUNDERBOLT)
         waitse
         setobjectxy(PKMN3, 21, 9)
@@ -191,7 +191,7 @@ script AndWeMarchOn_CutsceneBattleScript {
 		waitmovement(CAMERA)
 		waitmovement(PKMN1)
 		waitmovement(PKMN2)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("And with a supercharged Breaking Swipe, Tala ends the battle in one turn! The exhibition winner is the Elite Four's TALA!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
         goto(AndWeMarchOn_PostBattle_Dialogue)
@@ -266,7 +266,7 @@ script AndWeMarchOn_ParadeEnd_Script {
         playse(SE_APPLAUSE)
         playse(SE_APPLAUSE)
         waitse
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(TALA)
         removeobject(PARADE_FLOAT_A)
         removeobject(PARADE_FLOAT_B)
@@ -274,7 +274,7 @@ script AndWeMarchOn_ParadeEnd_Script {
         setflag(FLAG_HIDE_PARADE)
         setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
         special(ReturnCameraToPlayer)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         fadedefaultbgm
         call(TryAutoSave)
         endcutscene

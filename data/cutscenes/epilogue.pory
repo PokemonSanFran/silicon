@@ -133,7 +133,7 @@ script Epilogue_Script_GoToCredits
 {
     showtweet(TWEET_STORY_EPILOGUE)
     endcutscene
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     callnative(StartCredits)
     waitstate
     releaseall

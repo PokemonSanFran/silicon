@@ -189,10 +189,10 @@ script Quest_Alohafromalola_PostBattle_Script{
         msgbox(format("And now for some Alolan libations!"),,SPEAKER_EMRYS,,EMOTE_SWEAT)
         closemessage
         applymovement(EMRYS, moves(walk_up * 7, step_end))
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         delay(15)
         removeobject(EMRYS)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         setvar(VAR_EMRYS_STATE,QUEST_1_COMPLETE)
         completequest(QUEST_ALOHAFROMALOLA)

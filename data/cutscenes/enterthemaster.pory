@@ -202,12 +202,12 @@ script EnterTheMaster_ClearingIntro_Dialogue
         msgbox(format("Scott is the founder of an amusement park in Hoenn. Its attractions were designed to test what Scott believed were the qualities that all Master trainers require… "),,SPEAKER_CHARLOTTE)
 
         delay(16)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         msgbox(format("One eternity later…"))
         applymovement(CHARLOTTE,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles."),,SPEAKER_CHARLOTTE)
 
@@ -285,9 +285,9 @@ script EnterTheMaster_StartQuest_Script{
         msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
         closemessage
         applymovement(CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         call(EnterTheMaster_RepositionCharlotte_Script)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         end
 }
 
@@ -437,13 +437,13 @@ script EnterTheMaster_Interact_CharlotteRobot_Script{
 }
 
 script EnterTheMaster_SetUpCompletion_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     setobjectxy(CHARLOTTE,9,16)
     setobjectxyperm(CHARLOTTE,9,16)
     setobjectxy(PLAYER,10,16)
     applymovement(PLAYER,Common_Movement_FaceUp)
     TeleportCamera(10,16)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     return
 }
 

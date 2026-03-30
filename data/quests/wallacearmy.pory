@@ -158,11 +158,11 @@ script Quest_WallaceArmy_PostBattle_Script{
     msgbox(format("We really had nothing to do with this Wallace thing, I swear."),,SPEAKER_SHASHI,TAIL_SHOUT)
     closemessage
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     fadedefaultbgm
     delay(32)
     call(Quest_WallaceArmy_MoveAllObjects_Script)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("That's the whole story, see? Those are all the messages. I didn't know anything about Wallace or anything."),,SPEAKER_SHASHI)
 
@@ -212,14 +212,14 @@ script Quest_WallaceArmy_MoveAllObjects_Script{
 }
 
 script Quest_WallaceArmy_LeadStanAppearance_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     clearflag(FLAG_HIDE_LEAD_STAN)
     addobject(LEAD_STAN)
     delay(16)
     playse(SE_EXIT)
     waitse
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 }
 
 script Quest_WallaceArmy_ListRemainingLocations_Script{

@@ -135,10 +135,10 @@ script Quest_Theboywhocriedwithwolves_Reward_Dialogue{
     msgbox(format("My point was, I'm a healer! If I see you around the region, I'll try to help you."),,SPEAKER_AMBROGIO)
     closemessage
     applymovement(AMBROGIO, moves(walk_up * 3, step_end))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(16)
     removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     completequest(QUEST_THEBOYWHOCRIESWITHWOLVES)
     release
     end

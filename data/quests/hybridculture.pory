@@ -79,10 +79,10 @@ script Quest_HybridCulture_Reward_Dialogue{
     msgbox(format("Oh! What did you learn?"),MSGBOX_NPC,SPEAKER_SHINZO)
     closemessage
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     msgbox(format("{PLAYER} explained what they learned about ToraTown's food, traditions, and fashion."))
     closemessage
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("Thank you. In a way, it is beautiful to see my country appreciated in this new way. I'm glad the people here love my culture as much I do. Please, take this!"),MSGBOX_NPC,SPEAKER_SHINZO)
     closemessage

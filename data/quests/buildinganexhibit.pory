@@ -232,10 +232,10 @@ script Quest_BuildingAnExhibit_PersonD_Decline_Dialogue{
 script Quest_BuildingAnExhibit_Reward_Dialogue{
     msgbox(format("You tracked them all down? Well, let's hear the details!"))
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     msgbox(format("{PLAYER} explained their encounters with the owners of the items."))
     closemessage
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     msgbox(format("wow, all of them are unwilling to sell. increidible."))
     msgbox(format("no matter. this was educational, at least. a shame though."))

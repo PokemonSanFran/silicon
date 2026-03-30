@@ -357,15 +357,15 @@ script Route11_Script_Interact_BodegaburnoutRescueRockSmashO
     msgbox(format("I was delivering a package, and then I got caught in a battle with this snooty blonde… and after she left, my phone was dead!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
     buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
     msgbox(format("Which way is {STR_VAR_1}? I need to get back to work."),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("You’re a lifesaver. Thanks so much!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -383,15 +383,15 @@ script HalerbaWilds_Script_Interact_BodegaburnoutRescueCutM
     msgbox(format("…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
     buffermapname(STR_VAR_1,MAP_HALERBA_CITY)
     msgbox(format("Which way is {STR_VAR_1}?"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Oh man, I need to drop off this package…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_CUT_M, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_CUT_M)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -403,16 +403,16 @@ script Route14_Script_Interact_BodegaburnoutRescueStrengthQ
     msgbox(format("Oh thank you so much! A wild Pokémon knocked a boulder down and I was trapped over here!"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox(format("I need to deliver this Poké Mart package. Which way is {STR_VAR_1}?"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Man, I hope I don’t get in trouble…"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q)
 
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -424,14 +424,14 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueDiveN
     msgbox(format("I was out doing a Poké Mart Delivery and decided to go for a quick Dive."),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
     msgbox(format("I dove too deep and the pressure broke my phone."),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
     msgbox(format("Could you point me towards Halai Island? Thanks!"),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_DIVE_N, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_DIVE_N)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -443,15 +443,15 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK
     msgbox(format("I lost my phone on my way to a delivery, and I’m not good with directions!"),,SPEAKER_BODEGABURNOUTRESCUEK)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox(format("How do I get to {STR_VAR_1}? I want to make sure this package gets there."),,SPEAKER_BODEGABURNOUTRESCUEK)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Thanks!"),,SPEAKER_BODEGABURNOUTRESCUEK)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_K, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_K)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -466,9 +466,9 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueRockSmashP
     msgbox(format("See you around!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -480,9 +480,9 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueL
     msgbox(format("Okay, I think the brain fog is gone. Gotta start on those deliveries now."),,SPEAKER_BODEGABURNOUTRESCUEL)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_L, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_L)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -494,9 +494,9 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueWhirlpoolS
     msgbox(format("Oh man, I lost track of time! I was supposed to be delivering something from the Poké Mart to a Trainer out here. I should go find them..."),,SPEAKER_BODEGABURNOUTRESCUEWHIRLPOOLS)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -506,16 +506,16 @@ script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueStrengthR
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_19)
         callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
     msgbox(format("Hey, my phone’s dead. Where are we?"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHR)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     buffermapname(STR_VAR_1,MAP_ROUTE4)
     msgbox(format("{STR_VAR_1}? Oh perfect, I’m supposed to deliver a package at Anbeh Bend. Looks like I’m on the right track."),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHR)
     closemessage
     applymovement(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R, moves(walk_up * 6))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }

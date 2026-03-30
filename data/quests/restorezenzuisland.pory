@@ -320,15 +320,15 @@ script RestoreZenzuIsland_Dialogue_RecruitDrughelmettester
     msgbox(format("Yeah, that's how BD and I first met."),,SPEAKER_DRUG_HELMET_TESTER)
     msgbox(format("Doyle, the old Gym Leader from Zenzu Island is looking to work with somebody like you."),,SPEAKER_ALICIA)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(2)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Woah, a whole movie production? That's so much bigger than a rave or a Gym..."),,SPEAKER_DRUG_HELMET_TESTER)
     msgbox(format("But man, my mind is already racing with the possibilities!"),,SPEAKER_DRUG_HELMET_TESTER)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(DRUGHELMETTESTER_IRISNA)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     releaseall
     end
 }
@@ -340,15 +340,15 @@ script RestoreZenzuIsland_Dialogue_RecruitMonty
     msgbox(format("Monty, you said you've made a bunch of money doing this, right?"),,SPEAKER_PLAYER)
     msgbox(format("Hueh hue, I'm not gonna brag, but I've made a pretty penny seperating fools from their money!"),,SPEAKER_MONTY)
     msgbox(format("No, but I know somebody that would want to work with you..."),,SPEAKER_PLAYER,,EMOTE_LAUGH)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(2)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     msgbox(format("Fundraising, huh? And movies? I'm not sure if that's quite my vibe..."),,SPEAKER_MONTY)
     msgbox(format("But maybe you can teach an ol' dog new tricks, hueh hue! I can at least talk to Doyle."),,SPEAKER_MONTY)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(MONTY_CAPHE)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     releaseall
     end
 }

@@ -205,9 +205,9 @@ script Quest_Persuasivepassenger_PostBattle_Dialogue{
     closemessage
 
     applymovement(VAR_LAST_TALKED, moves(walk_left, step_end))
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -222,9 +222,9 @@ script Quest_Persuasivepassenger_Sibling_Dialogue{
     msgbox(format("Oh wow! My sibling drives for arriba. I should tell him!"),,SPEAKER_PERSUASIVE_SIBLING)
     msgbox(format("Thanks for letting me know!"),,SPEAKER_PERSUASIVE_SIBLING)
     closemessage
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -332,9 +332,9 @@ script Quest_Persuasivepassenger_Post_CEO_Battle_Script{
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_PERSUASIVEPASSENGER,SUB_QUEST_3)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_PERSUASIVEPASSENGER)
     msgbox(format("Watch your back..."),MSGBOX_NPC)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     call(TryAutoSave)
     end
 }

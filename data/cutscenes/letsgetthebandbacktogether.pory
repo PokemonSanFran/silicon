@@ -99,11 +99,11 @@ script LetsGettheBandBackTogether_TrueTimelineSplit_Script {
 
         closemessage
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         //PSF TODO Replace with Buzzr message
         msgbox(format("We’re sick of SharpRise Capital’s shit. We’re tired of the lies, the attacks, and the greed. Let’s take back our region, together."),,SPEAKER_BAIYA,TAIL_SHOUT,PHONE_ON)
         closemessage
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("Let’s split up. I’m going to talk to Adaora and try to convince them of the plan going forward. Can you see if you can get an idea where Eleanor might be?"),,SPEAKER_BAIYA)
 

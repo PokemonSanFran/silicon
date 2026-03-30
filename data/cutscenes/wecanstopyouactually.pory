@@ -9,14 +9,14 @@ script WeCanStopYouActually_FixPlayerPosition_Script {
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 15 || (var(VAR_TEMP_1) != 6)){
-            fadescreen(FADE_TO_BLACK)
+            fadescreenswapbuffers(FADE_TO_BLACK)
                 applymovement(LUCREZIA,Common_Movement_FaceDown)
                 waitmovement(LUCREZIA)
                 setobjectxy(LUCREZIA,15,5)
                 applymovement(PLAYER,Common_Movement_FaceUp)
                 setobjectxy(PLAYER,15,6)
                 TeleportCamera(15,6)
-                fadescreen(FADE_FROM_BLACK)
+                fadescreenswapbuffers(FADE_FROM_BLACK)
         }
 }
 
@@ -40,14 +40,14 @@ script WeCanStopYouActually_PostBattle_Dialogue {
         playse(SE_PC_LOGIN)
         special(TurnOnTVScreen)
         delay(30)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
 
         buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
         msgbox(format("I am Kei-Ying, the SharpRise Capital Chief Operating Officer. This is my confession. Two days ago, SharpRise Capital triggered a machine that is responsible for the devastating earthquake on {STR_VAR_1}. We did it to flush out and destroy …"),,SPEAKER_KEIYING)
 
         closemessage
 
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         msgbox(format("WHAT THE HELL ARE THEY DOING?"),,SPEAKER_LUCREZIA)
 

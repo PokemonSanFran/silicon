@@ -105,7 +105,7 @@ script Quest_DrugHelmetTest_Script_FirstTest
     playse(SE_PC_ON)
     waitse
     //PSF TODO add special to fill screen with terminal boot text
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_FIRSTPHASE)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
@@ -143,11 +143,11 @@ script Quest_DrugHelmetTest_Script_SecondTest
     waitmessage
     faceplayer
     locktarget
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     playse(SE_PC_ON)
     waitse
     //PSF TODO add special to fill screen with terminal boot text
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
     trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_2,format("We are nailing it!"))
@@ -186,7 +186,7 @@ script Quest_DrugHelmetTest_Script_ThirdTest
     playse(SE_PC_ON)
     waitse
     //PSF TODO add special to fill screen with terminal boot text
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
     trainerbattle_continue_after_lose(TRAINER_DRUGHELMETTESTER_3,format("Nailed it!"))

@@ -63,7 +63,7 @@ script Earthquake_ThatNight_Dialogue
 
     msgbox(format("That night…"))
     closemessage
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     call(Earthquake_PlayFake_EventScript)
 

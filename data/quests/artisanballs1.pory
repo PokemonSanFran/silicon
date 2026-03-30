@@ -407,9 +407,9 @@ script Quest_ArtisanBalls2_TrainerA_PostBattle_Script{
 
 	msgbox(format("Wait, really? I absolutely need a new gig, and that sounds amazing! Thank you so much."), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	fadescreen(FADE_TO_BLACK)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	removeobject(TRAINER_A)
-	fadescreen(FADE_FROM_BLACK)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 
 	release
 	end
@@ -432,9 +432,9 @@ script Quest_ArtisanBalls2_TrainerB_PostBattle_Script{
 
 	msgbox(format("Oh man, what? I gotta get over there right now!"), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	fadescreen(FADE_TO_BLACK)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	removeobject(TRAINER_B)
-	fadescreen(FADE_FROM_BLACK)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 
 	release
 	end
@@ -457,9 +457,9 @@ script Quest_ArtisanBalls2_TrainerC_PostBattle_Script{
 
 	msgbox(format("That would be amazing! I'll head over there now."), MSGBOX_NPC,SPEAKER_SERGEY)
 
-	fadescreen(FADE_TO_BLACK)
+	fadescreenswapbuffers(FADE_TO_BLACK)
 	removeobject(TRAINER_C)
-	fadescreen(FADE_FROM_BLACK)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
 
 	release
 	end
