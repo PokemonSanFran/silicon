@@ -16,18 +16,20 @@
   "object_events": [],
   "warp_events": [
     {
+      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_RIGHT",
       "x": 15,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER"
     },
     {
+      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT",
       "x": 14,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_PERLACIA_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER"
     },
     {
       "x": 8,
@@ -35,13 +37,6 @@
       "elevation": 0,
       "dest_map": "MAP_SALESORCETOWER_ELEVATOR",
       "dest_warp_id": "0"
-    },
-    {
-      "x": 14,
-      "y": 1,
-      "elevation": 0,
-      "dest_map": "MAP_SHARPRISE_SPIRE_2F",
-      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

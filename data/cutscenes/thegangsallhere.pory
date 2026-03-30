@@ -208,7 +208,7 @@ script TheGangsAllHere_GivePrestoApp_Dialogue{
 }
 
 script TheGangsAllHere_EndScene_Dialogue{
-    msgbox(format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?"))
+    msgbox(format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?"),,SPEAKER_LUCREZIA)
     closemessage
 
     applymovement(OLIVER,Common_Movement_FaceDown)
@@ -221,7 +221,7 @@ script TheGangsAllHere_EndScene_Dialogue{
     msgbox(format("Feel free to continue your tour without us, {PLAYER}. Greatly appreciate your help in the battles. Hopefully supporting me wasn't too exhausting!"),,SPEAKER_OLIVER)
 
     if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
-        msgbox(format("Ah, and if you haven't already visited Ramesh, go do so. They're on the Production Floor."))
+        msgbox(format("Ah, and if you haven't already visited Ramesh, go do so. They're on the Production Floor."),,SPEAKER_LUCREZIA)
     }
 
     closemessage

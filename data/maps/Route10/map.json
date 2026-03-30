@@ -32,7 +32,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BAIYA",
-      "x": 4,
+      "x": 11,
       "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -45,8 +45,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 0,
-      "y": 8,
+      "x": 17,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -58,8 +58,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 4,
-      "y": 10,
+      "x": 19,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -84,7 +84,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 4,
+      "x": 2,
       "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -98,8 +98,8 @@
     {
       "local_id": "LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_H",
       "graphics_id": "OBJ_EVENT_GFX_BODEGABURNOUTDELIVERY_STRENGTH_H",
-      "x": 4,
-      "y": 14,
+      "x": 19,
+      "y": 12,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -111,8 +111,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
-      "x": 4,
-      "y": 13,
+      "x": 18,
+      "y": 12,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -124,8 +124,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
-      "x": 3,
-      "y": 14,
+      "x": 19,
+      "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -137,8 +137,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
-      "x": 4,
-      "y": 15,
+      "x": 19,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -151,8 +151,8 @@
     {
       "local_id": "LOCALID_GETTHEBANDBACKTOGETHERBIKERG",
       "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERG",
-      "x": 0,
-      "y": 3,
+      "x": 2,
+      "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -165,8 +165,8 @@
     {
       "local_id": "LOCALID_FREETHEINNOCENTHIKERF",
       "graphics_id": "OBJ_EVENT_GFX_FREETHEINNOCENTHIKERF",
-      "x": 0,
-      "y": 10,
+      "x": 10,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -179,7 +179,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 0,
-      "y": 7,
+      "y": 4,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -191,8 +191,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 0,
-      "y": 9,
+      "x": 17,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -204,8 +204,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 0,
-      "y": 11,
+      "x": 3,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -217,8 +217,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 4,
-      "y": 7,
+      "x": 14,
+      "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -230,8 +230,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 4,
-      "y": 9,
+      "x": 19,
+      "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -244,7 +244,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 4,
-      "y": 11,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -256,8 +256,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 4,
-      "y": 13,
+      "x": 8,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -270,7 +270,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 0,
-      "y": 13,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -282,8 +282,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 4,
-      "y": 15,
+      "x": 11,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -296,7 +296,7 @@
   ],
   "warp_events": [
     {
-      "x": 0,
+      "x": 5,
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_ROUTE10_GROTTO",
@@ -306,7 +306,7 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 3,
+      "x": 9,
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -315,7 +315,7 @@
     },
     {
       "type": "trigger",
-      "x": 2,
+      "x": 8,
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -324,7 +324,7 @@
     },
     {
       "type": "trigger",
-      "x": 1,
+      "x": 7,
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -333,7 +333,7 @@
     },
     {
       "type": "trigger",
-      "x": 0,
+      "x": 6,
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -342,7 +342,7 @@
     },
     {
       "type": "trigger",
-      "x": 4,
+      "x": 10,
       "y": 6,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -351,7 +351,7 @@
     },
     {
       "type": "trigger",
-      "x": 0,
+      "x": 7,
       "y": 2,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -360,7 +360,7 @@
     },
     {
       "type": "trigger",
-      "x": 4,
+      "x": 11,
       "y": 2,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -369,7 +369,7 @@
     },
     {
       "type": "trigger",
-      "x": 3,
+      "x": 10,
       "y": 2,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -378,7 +378,7 @@
     },
     {
       "type": "trigger",
-      "x": 2,
+      "x": 9,
       "y": 2,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -387,7 +387,7 @@
     },
     {
       "type": "trigger",
-      "x": 1,
+      "x": 8,
       "y": 2,
       "elevation": 0,
       "var": "VAR_ROUTE10_STATE",
@@ -398,7 +398,7 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 0,
+      "x": 5,
       "y": 15,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -406,7 +406,7 @@
     },
     {
       "type": "sign",
-      "x": 0,
+      "x": 5,
       "y": 14,
       "elevation": 3,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",

@@ -206,25 +206,28 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_FROM_CITY_RIGHT",
       "x": 6,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
+      "warp_id": "WARPI_ID_SHARPRISE_SPIRE_FROM_CITY_LEFT",
       "x": 4,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
+      "warp_id": "WARP_ID_SHARPRISE_SPIRE_FROM_CITY_CENTER",
       "x": 5,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_SHARPRISE_SPIRE_1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARPI_ID_SHARPRISE_SPIRE_TO_CITY_LEFT"
     },
     {
       "warp_id": "WARP_PERLACIA_CITY_TO_GYM_3",

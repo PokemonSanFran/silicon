@@ -20,6 +20,11 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("Rank14Life"),
         .isVerified = FALSE,
     },
+    [BUZZR_USER_LUCREZIA] =
+    {
+        .username = COMPOUND_STRING("PathToThePeak"),
+        .isVerified = FALSE,
+    },
     [BUZZR_USER_FRANK] =
     {
         .username = COMPOUND_STRING("FrankEliteFour"),
