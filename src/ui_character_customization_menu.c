@@ -177,8 +177,8 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
-static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
+static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/siliconBg.4bpp.smol");
+static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/siliconBg.bin.smolTM");
 
 static const u32 shadowBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.4bpp.smol");
 static const u32 shadowBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.bin.smolTM");
