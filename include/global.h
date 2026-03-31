@@ -5,6 +5,7 @@
 #include <limits.h>
 #include "config/general.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
+#include "assertf.h"
 #include "gametypes.h"
 #include "siirtc.h"
 #include "fpmath.h"
@@ -24,14 +25,19 @@
 #include "constants/buzzr.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
+#include "waves.h" // wavesOfChange
 // End siliconMerge
-#include "hidden_grotto.h" // hiddenGrotto 
+#include "hidden_grotto.h" // hiddenGrotto
+#include "constants/trainer_tower.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "config/save.h"
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
-#include "constants/hidden_grotto.h" // hiddenGrotto 
+#include "constants/waves.h" // wavesOfChange
+#include "constants/hidden_grotto.h" // hiddenGrotto
+#include "constants/region_map_sections.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -95,6 +101,11 @@
 // intended, and a%n for powers of 2 isn't always optimized to use &.
 #define MOD(a, n) (((n) & ((n)-1)) ? ((a) % (n)) : ((a) & ((n)-1)))
 
+// Increments 'a' by 1, wrapping back to 0 when it reaches 'n'. If 'n' is a power of two,
+// the wrap is implemented using a bit mask: (a + 1) & (n - 1), which is slightly faster.
+// This is intended to be used when 'n' is known at compile time.
+#define INCREMENT_OR_WRAP(a, n) ((IS_POW_OF_TWO(n)) ? (((a) + 1) & ((n) - 1)) : (((a) + 1) >= (n) ? 0 : ((a) + 1)))
+
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
 
@@ -133,7 +144,7 @@
 ({                           \
     s16 v = (val);           \
     float f = (float)v;      \
-    if(v < 0) f += 65536.0f; \
+    if (v < 0) f += 65536.0f;\
     f;                       \
 })
 
@@ -147,11 +158,18 @@
 
 #define NUM_APRICORN_TREE_BYTES ROUND_BITS_TO_BYTES(APRICORN_TREE_COUNT)
 
+// Start siliconMerge
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+// End siliconMerge
+
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
 #define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
+
+#define READ_OTID_FROM_SAVE T1_READ_32(gSaveBlock2Ptr->playerTrainerId)
 
 // NOTE: This uses hardware timers 2 and 3; this will not work during active link connections or with the eReader
 static inline void CycleCountStart()
@@ -302,9 +320,6 @@ struct Glass
 struct SaveBlock3
 {
 // Start siliconMerge
-#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
-#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
-#define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
     struct QuestListProperties savedQuestListProperties;
     struct QuestListPosition savedQuestPositions;
     struct Pokevial pokevial; //Pokevial Branch
@@ -322,8 +337,9 @@ struct SaveBlock3
     u8 playerPosesivePronoun[PLAYER_NAME_LENGTH + 1];
     u16 mazeLayoutSeed;
     u16 mazeItemsSeed;
-    u16 firstPokemonCatchFlags[MAP_GROUPS_COUNT];
+    u16 firstPokemonCatchFlags[RESIDO_MAPSEC_COUNT];
     struct Waypoint waypoint; // Waypoint/MapSystem Branch
+    u8 wavesFunds[GOAL_PERCENT_COUNT][GOAL_COUNT];
 // End siliconMerge
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;
@@ -389,7 +405,7 @@ struct BerryPickingResults
 
 struct PyramidBag
 {
-    u16 itemId[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
+    enum Item itemId[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 quantity[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
 #else
@@ -407,8 +423,8 @@ struct BerryCrush
 struct ApprenticeMon
 {
     u16 species;
-    u16 moves[MAX_MON_MOVES];
-    u16 item;
+    enum Move moves[MAX_MON_MOVES];
+    enum Item item;
 };
 
 // This is for past players Apprentices or Apprentices received via Record Mix.
@@ -433,7 +449,7 @@ struct BattleTowerPokemon
 {
     u16 species;
     u16 heldItem;
-    u16 moves[MAX_MON_MOVES];
+    enum Move moves[MAX_MON_MOVES];
     u8 level;
     u8 ppBonuses;
     u8 hpEV;
@@ -498,7 +514,7 @@ struct BattleTowerEReaderTrainer
 // For displaying party information on the player's Battle Dome tourney page
 struct DomeMonData
 {
-    u16 moves[MAX_MON_MOVES];
+    enum Move moves[MAX_MON_MOVES];
     u8 evs[NUM_STATS];
     u8 nature;
     //u8 padding;
@@ -714,7 +730,7 @@ extern u8 UpdateSpritePaletteWithTime(u8);
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
-    u16 moves[PARTY_SIZE * MAX_MON_MOVES];
+    enum Move moves[PARTY_SIZE * MAX_MON_MOVES];
     u16 species[PARTY_SIZE];
     u16 heldItems[PARTY_SIZE];
     u8 levels[PARTY_SIZE];
@@ -757,7 +773,7 @@ struct WarpData
 
 struct ItemSlot
 {
-    u16 itemId;
+    enum Item itemId;
     u16 quantity;
 };
 
@@ -909,7 +925,7 @@ struct RecordMixingGiftData
 {
     u8 unk0;
     u8 quantity;
-    u16 itemId;
+    enum Item itemId;
     u8 filler4[8];
 };
 
@@ -938,7 +954,7 @@ struct Mail
     /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x1A*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x1E*/ u16 species;
-    /*0x20*/ u16 itemId;
+    /*0x20*/ enum Item itemId;
 };
 
 struct DaycareMail
@@ -1002,7 +1018,7 @@ struct LilycoveLadyFavor
     /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x00C*/ u8 favorId;
     /*0x00D*/ //u8 padding1;
-    /*0x00E*/ u16 itemId;
+    /*0x00E*/ enum Item itemId;
     /*0x010*/ u16 bestItem;
     /*0x012*/ u8 language;
     /*0x013*/ //u8 padding2;
@@ -1059,6 +1075,20 @@ struct TrainerHillSave
                u16 field_3D6E_0f:1;
                u16 mode:2; // HILL_MODE_*
                //u16 padding:8;
+};
+
+struct TrainerTower
+{
+    u32 timer;
+    u32 bestTime;
+    u8 floorsCleared;
+    u8 unk9;
+    bool8 receivedPrize:1;
+    bool8 checkedFinalTime:1;
+    bool8 spokeToOwner:1;
+    bool8 hasLost:1;
+    bool8 unkA_4:1;
+    bool8 validated:1;
 };
 
 struct WonderNewsMetadata
@@ -1283,6 +1313,14 @@ struct SaveBlock1
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     /*0x3???*/ struct Pokemon stolenTrade; // siliconMerge
+#if FREE_TRAINER_TOWER == FALSE && IS_FRLG
+    u32 towerChallengeId;
+    struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
+#endif //FREE_TRAINER_TOWER
+#if IS_FRLG
+    u8 rivalName[PLAYER_NAME_LENGTH + 1];
+    struct DaycareMon route5DayCareMon;
+#endif
     // sizeof: 0x3???
     /*0x??*/   struct Pokemon playerPartyBattleFrontier[PARTY_SIZE]; // siliconMerge
     struct Pokemon savedGrottoMon;

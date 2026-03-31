@@ -14,10 +14,10 @@ script Oroland_Warehouse_MapScripts_OnTransition {
     switch (var(VAR_WAREHOUSE_RAVE_STATE)){
         case 1:
             call(WarehouseRave_SetUpRave_Script)
-                call(WarehouseRave_HideObject_Script)
+            setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
         case 2:
                 call(WarehouseRave_MoveObject_Script)
                 call(WarehouseRave_SetUpRave_Script)
-        default: call(WarehouseRave_HideObject_Script)
+        default: setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
     }
 }

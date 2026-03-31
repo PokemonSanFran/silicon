@@ -76,6 +76,65 @@ script Debug_CheatStart
 	end
 }
 
+script Debug_CheatStartFrlg
+{
+	setflag(FLAG_SYS_POKEMON_GET)
+	setflag(FLAG_PALLET_LADY_NOT_BLOCKING_SIGN)
+	setflag(FLAG_OPENED_START_MENU)
+	setflag(FLAG_VISITED_OAKS_LAB)
+	setflag(FLAG_BEAT_RIVAL_IN_OAKS_LAB)
+	givemon(SPECIES_BULBASAUR, 20, ITEM_NONE)
+	givemon(SPECIES_CHARMANDER, 20, ITEM_NONE)
+	givemon(SPECIES_SQUIRTLE, 20, ITEM_NONE)
+	clearflag(FLAG_HIDE_OAK_IN_HIS_LAB)
+	setflag(FLAG_HIDE_RIVAL_IN_LAB)
+	setvar(VAR_MAP_SCENE_PALLET_TOWN_OAK, 1) // prevents Oak scene when trying to enter Route 1
+	setflag(FLAG_SYS_POKEDEX_GET)
+	special(SetUnlockedPokedexFlags)
+	setvar(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6) // state after handing in parcel and getting pokedex
+	setvar(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2)
+	setvar(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1)
+	setvar(VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1)
+	setvar(VAR_MAP_SCENE_ROUTE22, 1)
+	setvar(VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1) // end
+	setflag(FLAG_SYS_NATIONAL_DEX)
+	special(EnableNationalPokedex)
+	setflag(FLAG_SYS_B_DASH)
+	setflag(FLAG_BADGE01_GET)
+	setflag(FLAG_BADGE02_GET)
+	setflag(FLAG_BADGE03_GET)
+	setflag(FLAG_BADGE04_GET)
+	setflag(FLAG_BADGE05_GET)
+	setflag(FLAG_BADGE06_GET)
+	setflag(FLAG_BADGE07_GET)
+	setflag(FLAG_BADGE08_GET)
+	setflag(FLAG_GOT_BIKE_VOUCHER)
+	setflag(FLAG_GOT_BICYCLE)
+	additem(ITEM_BICYCLE)
+	setflag(FLAG_WORLD_MAP_PALLET_TOWN)
+	setflag(FLAG_WORLD_MAP_VIRIDIAN_CITY)
+	setflag(FLAG_WORLD_MAP_PEWTER_CITY)
+	setflag(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F)
+	setflag(FLAG_WORLD_MAP_CERULEAN_CITY)
+	setflag(FLAG_WORLD_MAP_VERMILION_CITY)
+	setflag(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F)
+	setflag(FLAG_WORLD_MAP_LAVENDER_TOWN)
+	setflag(FLAG_WORLD_MAP_CELADON_CITY)
+	setflag(FLAG_WORLD_MAP_FUCHSIA_CITY)
+	setflag(FLAG_WORLD_MAP_SAFFRON_CITY)
+	setflag(FLAG_WORLD_MAP_CINNABAR_ISLAND)
+	setflag(FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR)
+	setflag(FLAG_WORLD_MAP_ONE_ISLAND)
+	setflag(FLAG_WORLD_MAP_TWO_ISLAND)
+	setflag(FLAG_WORLD_MAP_THREE_ISLAND)
+	setflag(FLAG_WORLD_MAP_FOUR_ISLAND)
+	setflag(FLAG_WORLD_MAP_FIVE_ISLAND)
+	setflag(FLAG_WORLD_MAP_SIX_ISLAND)
+	setflag(FLAG_WORLD_MAP_SEVEN_ISLAND)
+	release
+	end
+}
+
 script Debug_VarsNotSetBattleConfigMessage
 {
 	message(format("Feature unavailable!\nPlease define a usable var in:\l'include/config/battle.h'!"))
@@ -109,9 +168,9 @@ script Debug_EventScript_CheckEVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End)
 	callnative(Script_GetChosenMonOffensiveEVs)
-	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveEVs)
-	msgbox(format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
     goto(Debug_EventScript_CheckEVs_End)
 }
 
@@ -129,9 +188,9 @@ script Debug_EventScript_CheckIVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End)
 	callnative(Script_GetChosenMonOffensiveIVs)
-	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveIVs)
-	msgbox(format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 }
 
 script Debug_EventScript_CheckIVs_End
@@ -301,6 +360,17 @@ script Debug_EventScript_Steven_Multi
     end
 }
 
+script Debug_EventScript_WallyTutorial
+{
+	special(SavePlayerParty)
+	special(LoadWallyZigzagoon)
+	special(StartWallyTutorialBattle)
+	waitstate
+	special(LoadPlayerParty)
+	release
+	end
+}
+
 script Debug_BerryPestsDisabled
 {
 	msgbox(format("OW_BERRY_PESTS is disabled.\nUnable to force pests onto berry trees."), MSGBOX_DEFAULT)
@@ -335,7 +405,6 @@ script Debug_EventScript_InflictStatus1
 	}
 }
 
-
 script Debug_EventScript_InflictStatus1_Close
 {
 	releaseall
@@ -368,6 +437,18 @@ script Debug_EventScript_InflictStatus1_Single
 	case 6: goto(Debug_EventScript_InflictStatus1_Close)
 	case MULTI_B_PRESSED: goto(Debug_EventScript_InflictStatus1_Close)
 	}
+	releaseall
+	end
+}
+
+script Debug_EventScript_KoPokemon
+{
+	special(ChoosePartyMon)
+	waitstate
+	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
+	specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
+	goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
+	setko(VAR_0x8004)
 	releaseall
 	end
 }
@@ -443,6 +524,15 @@ script Debug_EventScript_SetFriendship
 	special(ChoosePartyMon)
 	waitstate
 	callnative(DebugNative_Party_SetFriendship)
+	releaseall
+	end
+}
+
+script Debug_EventScript_GivePokerus
+{
+	special(ChoosePartyMon)
+	waitstate
+	callnative(DebugNative_Party_SetPokerus)
 	releaseall
 	end
 }
@@ -591,7 +681,10 @@ text Debug_EventScript_InflictStatus1_Text_Frostbite
     format("Frostbite")
 }
 
-
+text Debug_EventScript_InflictStatus1_Text_KO
+{
+    format("KO")
+}
 
 script Debug_EventScript_EWRAMCounters
 {

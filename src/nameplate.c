@@ -21,7 +21,7 @@ static void AddNameplatePhone(u32 windowId, u32 nameplateWidth, enum NameplatePh
 static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateTail tail);
 static void BufferSpeakerName(u32 speaker);
 static void BufferSpeakerTitle(u32 speaker);
-static enum PlayerGender GetSpeakerGender(void);
+static enum Gender GetSpeakerGender(void);
 static u32 CalculateNameplateOffset(u32 nameplateWidth);
 static u32 CalculateNameplateTileWidth(u32 nameplateWidth);
 static u32 CalculateNameplateWidth(u32 nameWidth, u32 titleWidth);
@@ -345,7 +345,7 @@ static void DestroyExistingWindow(void)
 
 u32 CreateNameplateWindow(void)
 {
-    enum PlayerGender gender = GetSpeakerGender();
+    enum Gender gender = GetSpeakerGender();
     struct WindowTemplate nameplateTemplate;
 
     SetWindowTemplateFields(&nameplateTemplate, 0, WINDOW_TILELEFT, WINDOW_TILETOP,DISPLAY_TILE_WIDTH, MSGBOX_TILE_HEIGHT, MUGSHOT_PALETTE_NUM, NAMEPLATE_WINDOW_TEMPLATE);
@@ -384,7 +384,7 @@ u32 GetSpeakerNameWidth(u32 speaker, u32 phone)
     return (phoneMargin + GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing));
 }
 
-static enum PlayerGender GetSpeakerGender(void)
+static enum Gender GetSpeakerGender(void)
 {
     return sSpeakerData[VarGet(VAR_MSGBOX_SPEAKER)].gender;
 }

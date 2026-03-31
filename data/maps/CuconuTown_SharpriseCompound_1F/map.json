@@ -2,7 +2,7 @@
   "id": "MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F",
   "name": "CuconuTown_SharpriseCompound_1F",
   "layout": "LAYOUT_CUCONU_TOWN_COMPOUND_1F",
-  "music": "MUS_BIRCH_LAB",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_CUCONU_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,9 +12,10 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "SHARPRISE_COMPOUND_1F_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
       "x": 4,
       "y": 6,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "SHARPRISE_COMPOUND_1F_OLIVER",
       "graphics_id": "OBJ_EVENT_GFX_OLIVER",
       "x": 7,
       "y": 4,

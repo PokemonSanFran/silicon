@@ -1,9 +1,9 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const ADELAIDE = 1 //FLAG_TEMP_1
+const LUCREZIA = 1 //FLAG_TEMP_1
 const CHARLOTTE = 2 //FLAG_TEMP_2
-const KAI = 3 //FLAG_TEMP_3
+const BAIYA = 3 //FLAG_TEMP_3
 const OLIVER = 4 //FLAG_TEMP_4
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 const FLAG_HIDE_ARCEHR = FLAG_TEMP_3
 const FLAG_HIDE_OLIVER = FLAG_TEMP_4
@@ -14,17 +14,17 @@ script HeresHowThisIsGoingToGo_ObjectSetUp_Script{
     return
 }
 
-script HeresHowThisIsGoingToGo_ShowKaiandCharlotte{
+script HeresHowThisIsGoingToGo_ShowBaiyaandCharlotte{
     setflag(FLAG_HIDE_RAMESH)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     setflag(FLAG_HIDE_OLIVER)
-    setobjectxy(KAI,4,5)
-    setobjectxyperm(KAI,4,5)
+    setobjectxy(BAIYA,4,5)
+    setobjectxyperm(BAIYA,4,5)
     return
 }
 
 script HeresHowThisIsGoingToGo_Lockers_ObjectCleanUp_Script {
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     setflag(FLAG_HIDE_OLIVER)
     return
 }
@@ -95,76 +95,48 @@ removeobject(17)
 callnative(DestroyVirtualObjects)
 }
 
-script HeresHowThisIsGoingToGo_ExplainLeagueDialogue {
+script HeresHowThisIsGoingToGo_ExplainLeagueDialogue
+{
     lockall
+    playbgm(MUS_ACCEPT_LETTER,FALSE)
     startcutscene(JUMPPLAYER_HERESHOWTHISISGOINGTOGO)
     applymovement(PLAYER,Common_Movement_FaceUp)
     applymovement(CHARLOTTE,Common_Movement_FaceUp)
-    applymovement(KAI,Common_Movement_FaceUp)
+    applymovement(BAIYA,Common_Movement_FaceUp)
     waitmovement(0)
 
-msgbox(gText_HeresHowThisIsGoingToGo_CongratulationsOnAll,,SPEAKER_ADELAIDE)
+msgbox(format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!"),,SPEAKER_LUCREZIA)
 
+msgbox(format("Woo! Yay!"))
 
-msgbox(gText_HeresHowThisIsGoingToGo_WooYay)
+msgbox(format("I'm sure none of you read the information email -"),,SPEAKER_LUCREZIA)
 
-msgbox(gText_HeresHowThisIsGoingToGo_ImSureNone,,SPEAKER_ADELAIDE)
+msgbox(format("Wait, I did! Did nobody else?"),,SPEAKER_CHARLOTTE)
 
-msgbox(gText_HeresHowThisIsGoingToGo_WaitIDid,,SPEAKER_CHARLOTTE)
+msgbox(format("…"))
 
-
-msgbox(gText_HeresHowThisIsGoingToGo_DotDotDot)
-
-msgbox(gText_HeresHowThisIsGoingToGo_SoIllGoOver,,SPEAKER_ADELAIDE)
+msgbox(format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right."),,SPEAKER_LUCREZIA)
 closemessage
 
+applymovement(LUCREZIA,Common_Movement_FaceLeft)
+msgbox(format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck."),,SPEAKER_LUCREZIA)
 
-applymovement(ADELAIDE,Common_Movement_FaceLeft)
-msgbox(gText_HeresHowThisIsGoingToGo_YourGroupsAnd,,SPEAKER_ADELAIDE)
+    closemessage
 
-closemessage
-
-fadescreen(FADE_TO_BLACK)
+fadescreenswapbuffers(FADE_TO_BLACK)
 setvar(VAR_STORYLINE_STATE,STORY_CHAMPIONSHIP_EXPLAINED)
 playse(SE_EXIT)
 waitse
-removeobject(ADELAIDE)
+removeobject(LUCREZIA)
 removeobject(OLIVER)
 call(HeresHowThisIsGoingToGo_CleanUpVObjects_Script)
-fadescreen(FADE_FROM_BLACK)
-applymovement(KAI,HeresHowThisIsGoingToGo_GoToBracket)
-waitmovement(KAI)
+fadescreenswapbuffers(FADE_FROM_BLACK)
+applymovement(BAIYA, moves(walk_down, walk_left * 7, walk_up * 2, step_end))
+waitmovement(BAIYA)
     call(TryAutoSave)
-endcutscene
-releaseall
-end
-}
-
-text gText_HeresHowThisIsGoingToGo_CongratulationsOnAll {
-	format("Congratulations on all of your hard work! Welcome to the first stage of the Resido League Championship!")
-}
-
-text gText_HeresHowThisIsGoingToGo_WooYay {
-	format("Woo! Yay!")
-}
-
-text gText_HeresHowThisIsGoingToGo_ImSureNone {
-	format("I'm sure none of you read the information email -")
-}
-
-text gText_HeresHowThisIsGoingToGo_WaitIDid {
-	format("Wait, I did! Did nobody else?")
-	}
-text gText_HeresHowThisIsGoingToGo_DotDotDot {
-	format("…")
-}
-
-text gText_HeresHowThisIsGoingToGo_SoIllGoOver {
-	format("So here's the simple explanation: Win five battles in a row, and you'll be the Champion! If you want the more detailed version, you can view the rules on the monitor to my right.")
-}
-
-text gText_HeresHowThisIsGoingToGo_YourGroupsAnd {
-	format("Your groups, and the eventual final bracket, can also be seen on the monitor. We'll be starting with Group A in two hours. Good luck.")
+    endcutscene
+    releaseall
+    end
 }
 
 movement HeresHowThisIsGoingToGo_LeaveLockersA {
@@ -181,9 +153,4 @@ movement HeresHowThisIsGoingToGo_LeaveLockersB {
     walk_down * 2
     step_end
 }
-movement HeresHowThisIsGoingToGo_GoToBracket {
-    walk_down
-    walk_left * 7
-    walk_up * 2
-    step_end
-}
+

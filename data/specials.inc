@@ -347,6 +347,7 @@ gSpecials::
 	def_special GetContestMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
+	def_special HasMovesToRelearn
 	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
@@ -501,7 +502,6 @@ gSpecials::
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
-	def_special ChangeBoxPokemonNickname
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
 	def_special SetMatchCallRegisteredFlag
@@ -576,12 +576,6 @@ gSpecials::
     def_special KitchenvolunteeringFunc_GeneratePantryItem
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
-    def_special Quest_Rockcollector_CheckTakenStoneFlags
-    def_special Quest_Rockcollector_TakeAllStonesFromBag
-    def_special Quest_Rockcollector_CountRemainingSubquests
-    def_special Quest_Rockcollector_CheckSubquestTakeStone
-    def_special Quest_Rockcollector_RespawnStones
-    def_special HiddenGrotto_LoadDiscoveredGrottoText
     def_special HiddenGrotto_LoadGrottoAndWarpPlayer
     def_special Quest_Hiddengrottomapping_CheckForJournalPage
     def_special Quest_Hiddengrottomapping_CountCompletedSubquests
@@ -600,17 +594,6 @@ gSpecials::
     def_special Quest_Taxicabturnaround_MarkSubquestComplete
     def_special Quest_Taxicabturnaround_CountRemainingSubquests
     def_special Quest_Taxicabturnaround_CheckReadyForNext
-    def_special Quest_Bodegaburnout_IsSubquestComplete
-    def_special Quest_Bodegaburnout_Catch_MarkSubquestComplete
-    def_special Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem
-    def_special Quest_Bodegaburnout_CountRemainingSubquests
-    def_special Quest_Bodegaburnout_CheckReadyForNext
-    def_special Quest_Bodegaburnout_LoadRequestText
-    def_special Quest_Bodegaburnout_GetQuestType
-    def_special Quest_Bodegaburnout_CheckLocationAndMatchItem
-    def_special Quest_Bodegaburnout_CheckRequiredPokemon
-    def_special Quest_Bodegaburnout_CheckAndSetRescueFlag
-    def_special Quest_Bodegaburnout_ClearRescueFlag
     def_special Quest_Breaktheinternet_Count_CompletedSocialMedia
     def_special Quest_Breaktheinternet_CountRemainingSubquests
     def_special Quest_Warehousewarfare_CountRemainingSubquests
@@ -620,19 +603,11 @@ gSpecials::
     def_special Quest_Persuasivepassenger_TakeNeededItems
     def_special Quest_Skilllibrary_StoreAndCompare
     def_special Quest_Skilllibrary_Debug
-    def_special Quest_Mutaidaidfund_CalculateMoneyAndText
-    def_special Quest_Mutualaidfund_CheckMoney
-    def_special Quest_Mutualaidfund_TakeDonation
-    def_special Quest_Brucelee_UpdateType
-    def_special Quest_Brucelee_BufferTypeName
-    def_special Quest_Brucelee_CheckIfPartyTypes
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType
-    def_special Quest_SmoothieCrafting_CheckNeededItems
     def_special YouRealizeTheyreEvilRight_GetMapForCompletedRestoration
     def_special VSGarbodor_ChooseGemBasedOnStarter
-    def_special ShouldShowAlcmene
 
 @ Restored Frontier
 
@@ -695,5 +670,76 @@ gSpecials::
 // End littlecup
 	def_special SetHiddenNature
 	def_special SetAbility
+	def_special CanTeachMoveBoxMon
 	def_special ObjectEventInteractionGetApricornTreeData
 	def_special ObjectEventInteractionPickApricornTree
+	def_special GetFrlgPokedexCount
+	def_special HasAllMons
+	def_special GetProfOaksRatingMessage
+	def_special UpdatePickStateFromSpecialVar8005
+	def_special SetFlavorTextFlagFromSpecialVars
+	def_special DisableMsgBoxWalkaway
+	def_special SetWalkingIntoSignVars
+	def_special StartOldManTutorialBattle
+	def_special DaisyMassageServices
+	def_special GetLeadMonFriendship
+	def_special OpenMuseumFossilPic
+	def_special CloseMuseumFossilPic
+	def_special CapeBrinkGetMoveToTeachLeadPokemon
+	def_special HasLearnedAllMovesFromCapeBrinkTutor
+	def_special SetSeenMon
+	def_special AnimateTeleporterHousing
+	def_special AnimateTeleporterCable
+	def_special IsThereMonInRoute5Daycare
+	def_special PutMonInRoute5Daycare
+	def_special GetNumLevelsGainedForRoute5DaycareMon
+	def_special TakePokemonFromRoute5Daycare
+	def_special GetCostToWithdrawRoute5DaycareMon
+	def_special DrawSeagallopDestinationMenu
+	def_special GetSelectedSeagallopDestination
+	def_special GetSeagallopNumber
+	def_special DoSeagallopFerryScene
+	def_special IsPlayerLeftOfVermilionSailor
+	def_special SetVermilionTrashCans
+	def_special DoSSAnneDepartureCutscene
+	def_special StartMarowakBattle
+	def_special DoesPlayerPartyContainSpecies
+	def_special GetMagikarpSizeRecordInfo
+	def_special CompareMagikarpSize
+	def_special GetHeracrossSizeRecordInfo
+	def_special CompareHeracrossSize
+	def_special GetRandomSlotMachineId
+	def_special HasAllKantoMons
+	def_special AnimateElevator
+	def_special InitElevatorFloorSelectMenuPos
+	def_special CloseElevatorCurrentFloorWindow
+	def_special DrawElevatorCurrentFloorWindow
+	def_special GetElevatorFloor
+	def_special ForcePlayerOntoBike
+	def_special Script_IsFanClubMemberFanOfPlayer
+	def_special Script_GetNumFansOfPlayerInTrainerFanClub
+	def_special Script_BufferFanClubTrainerName
+	def_special Script_TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special Script_TryLoseFansFromPlayTime
+	def_special Script_SetPlayerGotFirstFans
+	def_special Script_UpdateTrainerFanClubGameClear
+	def_special Script_TryGainNewFanFromCounterFrlg
+	def_special IsNationalPokedexEnabled
+	def_special SetPostgameFlags
+	def_special IsPlayerNotInTrainerTowerLobby
+	def_special BrailleCursorToggle
+	def_special EnterHallOfFame
+	def_special CB2_StartCreditsSequence
+	def_special DoPokemonLeagueLightingEffect
+	def_special GetStarterPokemon
+	def_special SetIcefallCaveCrackedIceMetatiles
+	def_special UpdateLoreleiDollCollection
+	def_special SampleResortGorgeousMonAndReward
+	def_special PlayerPartyContainsSpeciesWithPlayerID
+	def_special ShakeScreen
+	def_special CallTrainerTowerFunc
+	def_special ForcePlayerToStartSurfing
+	def_special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
+	def_special UpdateTrainerCardPhotoIcons
+	def_special StickerManGetBragFlags
+	def_special CheckAddCoins

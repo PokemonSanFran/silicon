@@ -1,8 +1,8 @@
-const ADELAIDE = VAR_LAST_TALKED
-const KAI = VAR_0x8006
+const LUCREZIA = VAR_LAST_TALKED
+const BAIYA = VAR_0x8006
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_1E
-const FLAG_HIDE_KAI = FLAG_TEMP_1F
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_1E
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1F
 
 script WowYourStrong_AssignObjectId_Script
 {
@@ -10,14 +10,14 @@ script WowYourStrong_AssignObjectId_Script
     switch (var(VAR_RESULT))
     {
         case MAP_TORA_TOWN:
-            setvar(ADELAIDE,6)
-            setvar(KAI,7)
+            setvar(LUCREZIA,6)
+            setvar(BAIYA,7)
         case MAP_PERLACIA_CITY:
-            setvar(ADELAIDE,1)
-            setvar(KAI,9)
+            setvar(LUCREZIA,1)
+            setvar(BAIYA,9)
         case MAP_MERMEREZA_CITY:
-            setvar(ADELAIDE,10)
-            setvar(KAI,11)
+            setvar(LUCREZIA,10)
+            setvar(BAIYA,11)
     }
     return
 }
@@ -27,13 +27,13 @@ script WowYoureStrong_HideObject_Script
     special(GetNumberOfBadges)
     if(var(VAR_RESULT)!= 3 || (var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) > DEFEATED_THIRD_LEADER))
     {
-        setflag(FLAG_HIDE_ADELAIDE)
-        setflag(FLAG_HIDE_KAI)
+        setflag(FLAG_HIDE_LUCREZIA)
+        setflag(FLAG_HIDE_BAIYA)
     }
 
-    if (var(VAR_ROUTE10_STATE) == SAVED_BEFORE_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == SAVED_BEFORE_BAIYA_ROUTE10)
     {
-        setflag(FLAG_HIDE_KAI)
+        setflag(FLAG_HIDE_BAIYA)
     }
 }
 
@@ -56,32 +56,32 @@ script WowYoureStrong_WalkToPlayer_Script
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_WOW_YOURE_STRONG)
     playse(SE_PIN)
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,TRUE)
-    applymovement(ADELAIDE,Common_Movement_ExclamationMark)
-    waitmovement(ADELAIDE)
-    applymovement(ADELAIDE,WowYoureStrong_WalkToPlayer_Movement)
-    waitmovement(ADELAIDE)
-    setobjectxyperm(ADELAIDE,28,25)
+    applymovement(LUCREZIA,Common_Movement_ExclamationMark)
+    waitmovement(LUCREZIA)
+    applymovement(LUCREZIA, moves(walk_up, walk_right * 5, face_up, step_end))
+    waitmovement(LUCREZIA)
+    setobjectxyperm(LUCREZIA,28,25)
     goto(WowYoureStrong_Intro_Dialogue)
 }
 
 script WowYoureStrong_Intro_Dialogue
 {
-    msgbox(gText_WowYoureStrong_WhatAShow,,SPEAKER_ADELAIDE)
+    msgbox(format("{PLAYER}! What a show! That was marvelous! Flying you in from Orre was absolutely worth it, for that battle alone."),,SPEAKER_LUCREZIA_BEFORE)
 
-    msgbox(gText_WowYoureStrong_OhUhThanksALot,,SPEAKER_ALICIA)
+    msgbox(format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpRise Capital…?"),,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_WhereMyManners,,SPEAKER_ADELAIDE)
+    msgbox(format("Hah! Oh my, I'm sorry. Where are my manners? My name is Lucrezia, and I'm the SharpRise Capital League Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba."),,SPEAKER_LUCREZIA_BEFORE)
 
-    msgbox(gText_WowYoureStrong_ShouldHaveKnown,,SPEAKER_ALICIA)
+    msgbox(format("Oh! I guess I should have known that. Well um, thanks so much for the opportunity! I'm excited to be the region's next Champion."),,SPEAKER_ALICIA)
 
-    msgbox(gText_WowYoureStrong_DreamBig,,SPEAKER_ADELAIDE)
+    msgbox(format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpRise Capital too. That's why we built the SharpRise  Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing."),,SPEAKER_LUCREZIA_BEFORE)
 
     goto(WowYoureStrong_ShowTower_Script)
 }
 
 script WowYoureStrong_ShowTower_Script
 {
-    bufferstring(STR_VAR_2,gText_PerlaciaCity)
+	buffermapname(STR_VAR_2,MAP_PERLACIA_CITY)
     specialvar(VAR_RESULT,GetCurrentMap)
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
     {
@@ -89,7 +89,7 @@ script WowYoureStrong_ShowTower_Script
         bufferstring(STR_VAR_2,"this city")
     }
 
-    msgbox(gText_WowYoureStrong_YouShouldComeBy,,SPEAKER_ADELAIDE)
+    msgbox(format("You should come by once you're done exploring! My office is on the 38th floor of the SharpRise Spire in {STR_VAR_2}."),,SPEAKER_LUCREZIA_BEFORE)
     closemessage
 
     if (var(VAR_RESULT) == MAP_PERLACIA_CITY)
@@ -105,7 +105,7 @@ script WowYoureStrong_MoveCameraToTower_Script
     TeleportCamera(7,14)
     special(SpawnCameraObject)
     fadescreen(FADE_FROM_BLACK)
-    applymovement(CAMERA,WowYoureStrong_PanCameraUp_Movement)
+    applymovement(CAMERA, moves(walk_up * 9, step_end))
     return
 }
 
@@ -121,76 +121,64 @@ script WowYoureStrong_TakeCameraFromTower_Script
 
 script WowYoureStrong_End_Dialouge
 {
-    msgbox(gText_WowYoureStrong_RunToMeeting,,SPEAKER_ADELAIDE)
+    msgbox(format("I have to run to a meeting. Again, excellent job in your Gym battle. I hope to see what else you can do!"),,SPEAKER_LUCREZIA_BEFORE)
 
     closemessage
-    applymovement(ADELAIDE,WowYoureStrong_WalkToMeeting_Movement)
-    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
+    applymovement(LUCREZIA,WowYoureStrong_WalkToMeeting_Movement)
+    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_BAIYA_ROUTE10)
     {
         delay(30)
-        applymovement(KAI,WowYoureStrong_KaiToPlayer_Movement)
+        applymovement(BAIYA, moves(walk_up * 2, walk_right * 2, face_up, step_end))
     }
     fadedefaultbgm
 
-    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) != SAVED_BEFORE_BAIYA_ROUTE10)
     {
-        goto(WowYourStrong_KaiConfrontation_Dialogue)
+        goto(WowYourStrong_BaiyaConfrontation_Dialogue)
     }
-    goto(WowYourStrong_RemoveAdelaide_Script)
+    goto(WowYourStrong_RemoveLucrezia_Script)
 }
 
-script WowYourStrong_RemoveAdelaide_Script
+script WowYourStrong_RemoveLucrezia_Script
 {
-    waitmovement(ADELAIDE)
-    removeobject(ADELAIDE)
+    waitmovement(LUCREZIA)
+    removeobject(LUCREZIA)
     release
     end
 }
 
-script WowYourStrong_KaiConfrontation_Dialogue
+script WowYourStrong_BaiyaConfrontation_Dialogue
 {
-    msgbox(gText_WowYoureStrong_IDontGetIt,,SPEAKER_KAI)
+    msgbox(format("I don't get it. Do all of you transplants just worship the ground these tycoons walk on?"),,SPEAKER_BAIYA)
 
-    if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == DEFEATED_BAIYA_ROUTE10)
     {
-        msgbox(gText_WowYoureStrong_YouAgain,,SPEAKER_ALICIA)
+        msgbox(format("You again? Are you following me? What is your deal?"),,SPEAKER_ALICIA)
     }
     else
     {
-        msgbox(gText_WowYoureStrong_WhatAreYouTalking,,SPEAKER_ALICIA)
+        msgbox(format("What are you talking about?"),,SPEAKER_ALICIA)
     }
-    msgbox(gText_WowYoureStrong_IJustCant,,SPEAKER_KAI)
+    msgbox(format("I just can't understand why you would willingly buy into a system that just makes these people more money. Do you think they need MORE money?"),,SPEAKER_BAIYA)
     closemessage
 
-    applymovement(KAI,WowYoureStrong_WalkToMeeting_Movement)
-    waitmovement(KAI)
-    removeobject(KAI)
+    applymovement(BAIYA,WowYoureStrong_WalkToMeeting_Movement)
+    waitmovement(BAIYA)
+    removeobject(BAIYA)
 
-    if (var(VAR_ROUTE10_STATE) == DEFEATED_KAI_ROUTE10)
+    if (var(VAR_ROUTE10_STATE) == DEFEATED_BAIYA_ROUTE10)
     {
-        msgbox(gText_WowYoureStrong_IHopeThats,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        msgbox(format("I hope that this isn't going to be a regular thing..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     }
     else
     {
-        msgbox(gText_WowYoureStrong_ThisRegionHasSome,,SPEAKER_ALICIA)
+        msgbox(format("The region has some... characters."),,SPEAKER_ALICIA)
     }
     closemessage
 
     endcutscene
     call(TryAutoSave)
-    goto(WowYourStrong_RemoveAdelaide_Script)
-}
-
-movement WowYoureStrong_WalkToPlayer_Movement {
-    walk_up
-    walk_right * 5
-    face_up
-    step_end
-}
-
-movement WowYoureStrong_PanCameraUp_Movement{
-    walk_up * 9
-        step_end
+    goto(WowYourStrong_RemoveLucrezia_Script)
 }
 
 movement WowYoureStrong_WalkToMeeting_Movement {
@@ -198,56 +186,3 @@ movement WowYoureStrong_WalkToMeeting_Movement {
     step_end
 }
 
-movement WowYoureStrong_KaiToPlayer_Movement{
-    walk_up * 2
-    walk_right * 2
-    face_up
-    step_end
-}
-
-text gText_WowYoureStrong_WhatAShow {
-    format("{PLAYER}! What a show! That was marvelous! Flying you in from Orre was absolutely worth it, for that battle alone.")
-}
-
-text gText_WowYoureStrong_OhUhThanksALot {
-    format("Oh uh, thanks a lot, that's very nice. I'm guessing you work at SharpriseCapital…?")
-}
-
-text gText_WowYoureStrong_WhereMyManners {
-    format("Hah! Oh my, I'm sorry. Where are my manners? My name is Adelaide, and I'm the SharpriseCapitalLeague Commissioner, appointed by our corporate sponsors, Buzzr, Presto, and Arriba.")
-}
-
-text gText_WowYoureStrong_ShouldHaveKnown {
-    format("Oh! I guess I should have known that. Well um, thanks so much for the opportunity! I'm excited to be the region's next Champion.")
-}
-
-text gText_WowYoureStrong_DreamBig {
-    format("Dream big {PLAYER}! That's the attitude we wanna see. We're big dreamers over at SharpriseCapitaltoo. That's why we built the Sharprise Spire! I wrote a stunning email introduction after it was completed... I'll have to forward it to you, it's really some of my best writing.")
-}
-
-text gText_WowYoureStrong_YouShouldComeBy {
-    format("You should come by once you're done exploring! My office is on the 38th floor of the SharpriseSpire in {STR_VAR_2}.")
-}
-
-text gText_WowYoureStrong_RunToMeeting {
-    format("I have to run to a meeting. Again, excellent job in your Gym battle. I hope to see what else you can do!")
-}
-
-text gText_WowYoureStrong_IDontGetIt{
-	format("I don't get it. Do all of you transplants just worship the ground these tycoons walk on?")
-}
-text gText_WowYoureStrong_YouAgain{
-	format("You again? Are you following me? What is your deal?")
-}
-text gText_WowYoureStrong_WhatAreYouTalking{
-	format("What are you talking about?")
-}
-text gText_WowYoureStrong_IJustCant{
-	format("I just can't understand why you would willingly buy into a system that just makes these people more money. Do you think they need MORE money?")
-}
-text gText_WowYoureStrong_IHopeThats{
-	format("I hope that this isn't going to be a regular thing...")
-}
-text gText_WowYoureStrong_ThisRegionHasSome{
-	format("The region has some... characters.")
-}

@@ -2,7 +2,7 @@
   "id": "MAP_OKAY_LETS_FIXIT_FLASHBACK",
   "name": "OkayLetsFixit_Flashback",
   "layout": "LAYOUT_OKAY_LETS_FIXIT_FLASHBACK",
-  "music": "MUS_HALL_OF_FAME_ROOM",
+  "music": "MUS_OKAY_LETS_FIX_IT",
   "region_map_section": "MAPSEC_NONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",

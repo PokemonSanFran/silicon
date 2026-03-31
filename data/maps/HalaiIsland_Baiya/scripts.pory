@@ -1,0 +1,16 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+mapscripts HalaiIsland_Baiya_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(HalaiIsland_Baiya_OnTransition)
+    }
+}
+
+script HalaiIsland_Baiya_OnTransition {
+    switch (var(VAR_STORYLINE_STATE))
+    {
+        default: call(LetsFixThis_HideObjectHouse_Script)
+    }
+    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_SetPostGameValues)
+}
+

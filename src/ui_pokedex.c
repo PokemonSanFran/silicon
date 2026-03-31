@@ -943,7 +943,7 @@ static void SpeciesGrid_PopulateList(void)
 
 static bool32 SpeciesFilter_ShouldShowUltraBeastLegendary(u32 species)
 {
-    if ((gSpeciesInfo[species].isUltraBeast == FALSE) && (gSpeciesInfo[species].isLegendary == FALSE))
+    if ((gSpeciesInfo[species].isUltraBeast == FALSE) && (gSpeciesInfo[species].isRestrictedLegendary== FALSE)&& (gSpeciesInfo[species].isMythical== FALSE)&& (gSpeciesInfo[species].isSubLegendary== FALSE))
         return TRUE;
 
     return (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_SEEN));

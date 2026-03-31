@@ -2,6 +2,7 @@
 #include "global.h"
 #include "strings.h"
 #include "quest_strings.h"
+#include "story_jump.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -44,6 +45,7 @@
 #include "dma3.h"
 #include "options_visual.h"
 #include "trig.h"
+#include "line_break.h"
 
 struct QuestSpriteInfo
 {
@@ -159,7 +161,6 @@ void CopyCursorTiles(u32 windowId, const void* tile1, const void* tile2, const v
 static void UpdateQuestDoneDesc(s32 questId);
 static void QuestMenu_UpdateQuestRewardDesc(s32 questId);
 const u8 *GetSubquestName(s32 questId);
-static const u8 *GetQuestDesc(s32 questId);
 static const u8 *GetQuestRewardDesc(s32 questId);
 static const u8 *GetQuestDoneDesc(s32 questId);
 static void PrintQuestDescription(s32 questId);
@@ -167,8 +168,6 @@ static void GenerateAndPrintDesc(s32 questId);
 static void GenerateQuestDescription(s32 questId);
 
 static bool8 IsQuestUnlocked(s32 questId);
-static bool8 IsQuestActiveState(s32 questId);
-static bool8 IsQuestRewardState(s32 questId);
 static bool8 IsSubquestCompletedState(s32 questId);
 
 static void GenerateStateAndPrint(u8 windowId, u32 itemId, u8 y);
@@ -1262,6 +1261,7 @@ u8 QuestMenu_GetSetQuestState(u8 quest, u8 caseId)
             return gSaveBlock3Ptr->questData[index] & mask;
         case FLAG_SET_ACTIVE:
             gSaveBlock3Ptr->questData[index] |= mask;
+            Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState();
             return 1;
         case FLAG_REMOVE_ACTIVE:
             gSaveBlock3Ptr->questData[index] &= ~mask;
@@ -1778,37 +1778,26 @@ const u8 *GetQuestMap(s32 questId)
 
 const u8 *GetQuestRewardDesc(s32 questId)
 {
-    if (sSideQuests[questId].rewardDesc == NULL)
+    if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
         return gText_Blank;
 
-    return sSideQuests[questId].rewardDesc;
+    return sSideQuests[questId].desc[FLAG_GET_REWARD];
 }
 
 const u8 *GetQuestDesc(s32 questId)
 {
-    switch (questId) {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDesc_PlayersAdventure();
-            break;
-        case QUEST_RABIESOUTBREAK:
-            return GetQuestDesc_RabiesOutbreak();
-            break;
-        case QUEST_BETWEENASTONEANDAHARDPLACE:
-            return GetQuestDesc_BetweenAStoneAndAHardPlace();
-            break;
-        default:
-            return sSideQuests[questId].desc;
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
+
+    return sSideQuests[questId].descFunc();
 }
 
 const u8 *GetQuestDoneDesc(s32 questId)
 {
-    switch (questId) {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDoneDesc_PlayersAdventure();
-        default:
-            return sSideQuests[questId].donedesc;
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
+
+    return sSideQuests[questId].descFunc();
 }
 
 void PrintQuestDescription(s32 questId)
@@ -1819,9 +1808,14 @@ void PrintQuestDescription(s32 questId)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 x = 4;
     u32 y = 0;
+    u32 maxWidth = (GetWindowAttribute(windowId, WINDOW_WIDTH) * TILE_WIDTH) - 2;
+    u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
+    u32 height = (GetWindowAttribute(windowId, WINDOW_HEIGHT) * TILE_WIDTH) / (letterHeight + lineSpacing);
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
+    StripLineBreaks(gStringVar3);
+    BreakStringNaive(gStringVar3, maxWidth, height, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sQuestMenuWindowFontColors[QUEST_FONT_COLOR_DESC], TEXT_SKIP_DRAW, gStringVar3);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -2051,6 +2045,8 @@ static void CropQuestIcons(u32 spriteId)
 
 static u32 GetQuestSpriteType(s32 questId)
 {
+    u32 parentQuest = sStateDataPtr->parentQuest;
+
     switch (questId)
     {
         case LIST_CANCEL:
@@ -2060,7 +2056,10 @@ static u32 GetQuestSpriteType(s32 questId)
             return QUEST_SPRITE_TYPE_EMPTY;
             break;
         default:
-            return sSideQuests[questId].spritetype;
+            if (GetCurrentQuestSubquestState())
+                return sSideQuests[parentQuest].subquests[questId].spritetype;
+            else
+                return sSideQuests[questId].spritetype;
             break;
     }
 }
@@ -2084,6 +2083,11 @@ static u32 GetQuestSpriteEntityId(s32 questId)
                 return sSideQuests[questId].sprite;
             break;
     }
+}
+
+u32 Quest_GetSubquestSpriteEntityId(enum QuestIdList parentQuest, enum SubQuestDefines questId)
+{
+    return sSideQuests[parentQuest].subquests[questId].sprite;
 }
 
 static const u8* const progressIndicatorLUT[] =
@@ -2763,7 +2767,9 @@ void QuestMenu_SetupQuestState(u8 questId, u8 state)
 void QuestMenu_JumpToQuestState(u8 questId, u8 state)
 {
     QuestMenu_SetupQuestState(questId, state);
-    SetWarpDestination(questState.mapGroup, questState.mapNum, questState.warpId, questState.x, questState.y);
+
+    s32 warpId = ((questState.y == 0) && (questState.x == 0)) ? questState.warpId : NO_WARP_ID;
+    SetWarpDestination(questState.mapGroup, questState.mapNum, warpId, questState.x, questState.y);
     DoWarp();
     ResetInitialPlayerAvatarState();
 }

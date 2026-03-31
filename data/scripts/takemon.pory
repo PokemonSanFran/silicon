@@ -1,39 +1,39 @@
 script TakeMon_Dialogue_Intro
 {
-    msgbox(TakeMon_Text_Hello)
+    msgbox(format("Hello. I need a Pokémon."))
 }
 
 script TakeMon_Dialogue_NotEnoughMons
 {
-    msgbox(TakeMon_Text_YouNeedTwo)
+    msgbox(format("You need two healthy mons."))
     closemessage
     end
 }
 
 script TakeMon_Dialogue_CancelSelection
 {
-    msgbox(TakeMon_Text_Cancelled)
+    msgbox(format("Cancelled? Okay."))
     closemessage
     end
 }
 
 script TakeMon_Dialogue_Special
 {
-    msgbox(TakeMon_Text_CantTakeTooSpecial)
+    msgbox(format("I can't take {STR_VAR_1} - it seems too special!"))
     closemessage
     end
 }
 
 script TakeMon_Dialogue_WrongMon
 {
-    msgbox(TakeMon_Text_ThisIsntRight)
+    msgbox(format("This {STR_VAR_1} isn't the right Pokémon!"))
     closemessage
     end
 }
 
 script TakeMon_Dialogue_ConfirmTake
 {
-    msgbox(TakeMon_Text_AreYouSure,MSGBOX_YESNO)
+    msgbox(format("Are you sure I can take {STR_VAR_1}? You won't get them back."),MSGBOX_YESNO)
 }
 
 text TakeMon_Text_Hello

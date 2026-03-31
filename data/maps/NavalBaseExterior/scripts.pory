@@ -1,2 +1,11 @@
 mapscripts NavalBaseExterior_MapScripts{
 }
+
+script NavalBaseExterior_Script_Interact_BodegaburnoutDeliveryCutC
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_4,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutC)
+    msgbox(format("I hope they’re able to iron out all the kinks. I’d much rather avoid Presto when possible."),,SPEAKER_BODEGABURNOUTDELIVERYCUTC)
+    closemessage
+    release
+    end
+}

@@ -192,26 +192,34 @@ bool32 NoMoreRoomDaycareEggs(void)
     return (GetEmptyEggIndex() == SILICON_DAYCARE_EGG_MAX);
 }
 
-void DebugPrintEggsAtDaycare(void)
+void UNUSED DebugPrintEggsAtDaycare(void)
 {
-    return;
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     for (u32 eggIndex = 0; eggIndex < SILICON_DAYCARE_EGG_MAX; eggIndex++)
     {
         u32 species = (GetBoxMonData(&daycare->daycareEgg[eggIndex].egg,MON_DATA_SPECIES));
         bool32 isEgg = (GetBoxMonData(&daycare->daycareEgg[eggIndex].egg,MON_DATA_IS_EGG));
+
+        (void)species;
+        (void)isEgg;
+
         DebugPrintf("index %d is egg %d has mon %S",eggIndex,isEgg,GetSpeciesName(species));
     }
 }
 
-void DebugPrintIvs(void)
+void UNUSED DebugPrintIvs(void)
 {
-    return;
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
 
     for (u32 eggIndex = 0; eggIndex < SILICON_DAYCARE_EGG_MAX; eggIndex++)
         for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
+        {
             DebugPrintf("egg %d | stat %d | value %d",eggIndex,statIndex,daycare->daycareEgg[eggIndex].originalIv[statIndex]);
+            (void)eggIndex;
+            (void)statIndex;
+            (void)daycare->daycareEgg[eggIndex].originalIv[statIndex];
+        }
+
 }
 
 
@@ -294,7 +302,7 @@ static const u32 perkEffortValueSpreads[NUM_STATS][NUM_STATS] =
 
 void MarkMonForEffortValuePerk(struct Pokemon *egg)
 {
-    bool32 getsPerk = (HasPlayerJoinedTheTide()) ? FALSE : TRUE;
+    bool32 getsPerk = (HasPlayerJoinedThe_Tide()) ? FALSE : TRUE;
 
     SetMonData(egg,MON_DATA_GETS_SILICON_BREEDING_PERKS,&getsPerk);
 }
@@ -339,7 +347,7 @@ void ApplyEffortValuePerk(struct Pokemon *temp, struct Pokemon *egg)
 
 void UpdateSiliconDaycareStepCounter(void)
 {
-    if (HasPlayerJoinedTheTide())
+    if (HasPlayerJoinedThe_Tide())
         return;
 
     u32 species, steps;
@@ -399,13 +407,13 @@ static void ApplySiliconSteps(struct DayCare *daycare, u32 eggIndex)
 
 static u32 CalculateEggCost(void)
 {
-    u32 multiplier = HasPlayerJoinedTheTide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
+    u32 multiplier = HasPlayerJoinedThe_Tide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
     return SILICON_DAYCARE_PER_EGG_COST * multiplier;
 }
 
 static u32 CalculateStatCost(void)
 {
-    u32 multiplier = HasPlayerJoinedTheTide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
+    u32 multiplier = HasPlayerJoinedThe_Tide() ? SILICON_DAYCARE_NO_PERK_MULTIPLIER : 1;
     return SILICON_DAYCARE_PER_IV_COST * multiplier;
 }
 
@@ -444,7 +452,7 @@ void Script_CountChangedIndividualValues(void)
 
 void Script_GetDaycareCostCode(void)
 {
-    bool32 isTide = HasPlayerJoinedTheTide();
+    bool32 isTide = HasPlayerJoinedThe_Tide();
     bool32 editedStats = (CountChangedIndividualValues() != 0);
 
     if (isTide && editedStats)
@@ -459,7 +467,7 @@ void Script_GetDaycareCostCode(void)
 
 void Script_GetGeneEditingCostCode(void)
 {
-    bool32 isTide = HasPlayerJoinedTheTide();
+    bool32 isTide = HasPlayerJoinedThe_Tide();
 
     if (isTide)
         gSpecialVar_Result = SILICON_DAYCARE_NO_DISCOUNT_YES_STATS;
@@ -526,7 +534,7 @@ void FinalizeIndividualValueChanges(void)
 void BufferStatPrices(void)
 {
     u32 statCost = CalculateStatCost();
-    ConvertIntToDecimalStringN(gStringVar2, statCost, STR_CONV_MODE_LEFT_ALIGN,CountDigits(statCost));
+    ConvertIntToDecimalStringN(gStringVar1, statCost, STR_CONV_MODE_LEFT_ALIGN,CountDigits(statCost));
 }
 
 void BufferEggPrices(void)

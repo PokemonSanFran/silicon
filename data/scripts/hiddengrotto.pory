@@ -1,13 +1,36 @@
 script Hiddengrotto_EnterGrotto_Dialogue{
     lock
-    special(HiddenGrotto_LoadDiscoveredGrottoText)
-    msgbox(gText_Hiddengrottomapping_Blank,MSGBOX_YESNO,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-
-    if(var(VAR_RESULT) == YES){
-        special(HiddenGrotto_LoadGrottoAndWarpPlayer)
+    returnqueststate(QUEST_HIDDENGROTTOMAPPING)
+    if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE)
+    {
+       msgbox(format("There’s a small hidden passage ahead…What is this place? Could there be something in there?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
     }
+    else
+    {
+        call(Hiddengrotto_Script_BufferDiscoverText)
+        msgbox("{STR_VAR_1}",,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    }
+
+    closemessage
+    special(HiddenGrotto_LoadGrottoAndWarpPlayer)
     release
     end
+}
+script Hiddengrotto_Script_BufferDiscoverText
+{
+    random(8)
+    switch(var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format("Oh! It’s one of those Hidden Grottos! I wonder what’s in it?"))
+        case 1: bufferstring(STR_VAR_1,format("There’s a dark opening just over there. I think it’s a Hidden Grotto!"))
+        case 2: bufferstring(STR_VAR_1,format("Score! I see a Hidden Grotto up ahead!"))
+        case 3: bufferstring(STR_VAR_1,format("Didn’t expect to find a Hidden Grotto around here, but that sure does look like one."))
+        case 4: bufferstring(STR_VAR_1,format("Oh! A Hidden Grotto! It looks a little ominous, but I bet it’s hiding something cool…"))
+        case 5: bufferstring(STR_VAR_1,format("Hmm…There’s a little recess in the environment here. A Hidden Grotto? I should take a look."))
+        case 6: bufferstring(STR_VAR_1,format("Nice. A Hidden Grotto right nearby. Hope you’ve got something good for me…"))
+        case 7: bufferstring(STR_VAR_1,format("I see an opening up ahead. Maybe I should check it out…Could be a Hidden Grotto."))
+        case 8: bufferstring(STR_VAR_1,format("Well, well, well! A Hidden Grotto just over there! What’ve you got for me?..."))
+    }
 }
 
 script HiddenGrotto_Script_HideSecret
@@ -70,91 +93,4 @@ script HiddenGrotto_Script_StartBattle
 			closemessage
 	}
 	callnative(ResetSavedGrottoMon)
-}
-
-text gText_Hiddengrottomapping_Blank{
-    "{STR_VAR_1}"    
-}
-
-text gText_Hiddengrottomapping_LookYouveFound{
-    format("Look!\NYou've found a narrow path!\pWill you follow it?")
-}
-text gText_LookIveFound{
-    format("Look! I've found a narrow path! Should I follow it?")
-}
-
-text gText_WowHiddenPath{
-    format("Wow! A hidden path! Shall I venture forth?")
-}
-
-text gText_OhWhatsThis{
-    format("Oh, what's this? A secret passage! Should I explore it?")
-}
-
-text gText_AmazingHiddenTrail{
-    format("Amazing! A hidden trail! Do I dare to investigate it?")
-}
-
-text gText_HmmConcealedPath{
-    format("Hmm, a concealed path. Should I find out where it leads?")
-}
-
-text gText_MysteriousRoute{
-    format("A mysterious route revealed! Should I brave its unknown depths?")
-}
-
-text gText_OhMyConcealedGrotto{
-    format("Oh my, a concealed grotto! Should I satisfy my curiosity and enter?")
-}
-
-text gText_IntriguingSecretPassage{
-    format("Intriguing! A secret passage discovered! Should I follow it and see what lies ahead?")
-}
-
-text gText_WhoaHiddenEntrance{
-    format("Whoa, a hidden entrance! Should I take the plunge and see where it leads?")
-}
-
-text gText_HiddenTrailEmerges{
-    format("A hidden trail emerges! Should I succumb to the allure of the unknown?")
-}
-
-text gText_OhWhatDoWeHave{
-    format("Oh, what do we have here? A covert path beckons me. Should I explore it?")
-}
-
-text gText_ConcealedPathwayAppears{
-    format("A concealed pathway appears! Do I feel the excitement building?")
-}
-
-text gText_MyCuriosityPiqued{
-    format("My curiosity is piqued! A hidden grotto stands before me. Should I step inside?")
-}
-
-text gText_LookClandestinePassage{
-    format("Look! A clandestine passage! Can I resist the chance to uncover its secrets?")
-}
-
-text gText_OhSecretRoute{
-    format("Oh, a secret route revealed! Can I resist the call of adventure?")
-}
-
-text gText_HmmObscuredPath{
-    format("Hmm, an obscured path. Does the thrill of the unknown compel me to follow it?")
-}
-
-text gText_ConcealedEntranceDiscovered{
-    format("A concealed entrance discovered! Can I resist the temptation to enter?")
-}
-
-text gText_WhatsThisCovertPathway{
-    format("What's this? A covert pathway opens up! Can I wait to see what awaits me?")
-}
-
-text gText_IntriguingHiddenTrail{
-    format("Intriguing! A hidden trail unraveled! Can I seize this opportunity to explore?")
-}
-
-text gText_HiddenGrottoMaterializes{
-    format("A hidden grotto materializes! Do I sense a thrilling journey ahead?")
 }

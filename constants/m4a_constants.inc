@@ -3,7 +3,7 @@
 
 	.equiv ID_NUMBER, 0x68736d53
 
-	.equiv PCM_DMA_BUF_SIZE, 1584
+	.equiv PCM_DMA_BUF_SIZE,3696
 	.equiv MAX_DIRECTSOUND_CHANNELS, 12
 
 	.equiv C_V, 0x40
@@ -181,7 +181,7 @@
 	struct_field o_MusicPlayerTrack_ToneData_sustain, 1
 	struct_field o_MusicPlayerTrack_ToneData_release, 1
 	struct_field o_MusicPlayerTrack_gap, 10
-	struct_field o_MusicPlayerTrack_unk_3A, 2
+	struct_field o_MusicPlayerTrack_timer, 2
 	struct_field o_MusicPlayerTrack_unk_3C, 4
 	struct_field o_MusicPlayerTrack_cmdPtr, 4
 	struct_field o_MusicPlayerTrack_patternStack, 12

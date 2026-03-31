@@ -479,12 +479,12 @@ static const u8* const sMainMenuDifficultyNameLUT[] =
 static const u8* const sMainMenuCompletionStatNameLUT[] =
 {
     [MAINMENU_COMPLETION_STORY] = COMPOUND_STRING("Story"),
-    [MAINMENU_COMPLETION_TRAINER] = gEasyChatGroupName_Trainer,
-    [MAINMENU_COMPLETION_POKEDEX] = gText_Pokedex,
+    [MAINMENU_COMPLETION_TRAINER] = COMPOUND_STRING("Trainer"),
+    [MAINMENU_COMPLETION_POKEDEX] = COMPOUND_STRING("Pokédex"),
     [MAINMENU_COMPLETION_QUESTS] = COMPOUND_STRING("Quests"),
     [MAINMENU_COMPLETION_GYMS] = COMPOUND_STRING("Gyms"),
     [MAINMENU_COMPLETION_OVERALL] = COMPOUND_STRING("Completion"),
-    [MAINMENU_COMPLETION_STAT_COUNT] = gText_Blank,
+    [MAINMENU_COMPLETION_STAT_COUNT] = COMPOUND_STRING(""),
 };
 
 static u32 (* const completionFuncs[])(void) =
@@ -1307,7 +1307,7 @@ static void PrintGymLeaders(void)
         TRAINER_BELEN,
         TRAINER_SHINZO,
         TRAINER_EMRYS,
-        TRAINER_KAUNA,
+        TRAINER_PUA,
         TRAINER_NERIENE,
         TRAINER_DIMU,
         TRAINER_BD,
@@ -1893,7 +1893,7 @@ static u32 GetMenuCursorSpriteId(void)
 
 static void LoadCompletionIconSprite(void)
 {
-    struct CompressedSpriteSheet sSpriteSheet_CompletionSharprise =
+    struct CompressedSpriteSheet sSpriteSheet_CompletionSharpRise =
     {
         sharpriseSprite,
         (16*16),
@@ -1907,10 +1907,10 @@ static void LoadCompletionIconSprite(void)
         MAINMENU_GFXTAG_COMPLETION,
     };
 
-    if (HasPlayerJoinedTheTide())
+    if (HasPlayerJoinedThe_Tide())
         LoadCompressedSpriteSheet(&sSpriteSheet_CompletionTide);
     else
-        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharprise);
+        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharpRise);
     LoadSpritePalette(&sMainMenuInterfaceSpritePalette);
 }
 
@@ -1921,7 +1921,7 @@ static void PrintCompletionIcon(void)
     u32 y = 67;
     u16 TileTag = MAINMENU_GFXTAG_COMPLETION;
 
-    if ((!HasPlayerJoinedTheTide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
+    if ((!HasPlayerJoinedThe_Tide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
         return;
 
     LoadCompletionIconSprite();

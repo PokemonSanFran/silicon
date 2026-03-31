@@ -6,7 +6,7 @@ mapscripts BlackMap_MapScripts {
 
 script BlackMap_Script_RunScript
 {
-    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_WarpToKai)
+    call_if_set(FLAG_SHOULD_SKIP_CREDITS,Epilogue_Script_WarpToBaiya)
     goto_if_eq(VAR_STORYLINE_STATE,STORY_EPILOGUE,WeCanActuallyStopYou_Script_GoToPerpWalk)
     goto_if_eq(VAR_STORYLINE_STATE,STORY_CLEAR,Epilogue_Script_GoToCredits)
     goto(ThereCanOnlyBeOne_LoadFromSave_Script)

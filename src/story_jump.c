@@ -86,15 +86,13 @@ static void JumpPlayerTo_WowYoureStrong(bool32);
 static void JumpPlayerTo_TheGangsAllHere(bool32);
 static void JumpPlayerTo_AlwaysWatchingWazokwski(bool32);
 static void JumpPlayerTo_EnterAdaora(bool32);
-static void JumpPlayerTo_HowDoWeGetHome(bool32);
 static void JumpPlayerTo_AaandWereBack(bool32);
 static void JumpPlayerTo_AssholesHome(bool32);
 static void JumpPlayerTo_HousingProtest(bool32);
 static void JumpPlayerTo_swagbag2(bool32);
-static void JumpPlayerTo_EnterKauna(bool32);
+static void JumpPlayerTo_EnterPua(bool32);
 static void JumpPlayerTo_SorryAboutMyFriends(bool32);
 static void JumpPlayerTo_TheStorySoFar(bool32, u32);
-static void JumpPlayerTo_YoungPadawan(bool32);
 static void JumpPlayerTo_WaitYouWentWhere(bool32);
 static void JumpPlayerTo_EnterNeriene(bool32);
 static void JumpPlayerTo_FriendsForDinner(bool32);
@@ -124,7 +122,6 @@ static void JumpPlayerTo_Finals(bool32);
 static void JumpPlayerTo_WaitHeDidWhat(bool32);
 static void JumpPlayerTo_WelcometotheHallofFame(bool32);
 static void JumpPlayerTo_BeingChampionisHard(bool32);
-static void JumpPlayerTo_LetsGrabLunch(bool32);
 static void JumpPlayerTo_RestoreHodouCity(bool32);
 static void JumpPlayerTo_RestoreZenzuIsland(bool32);
 static void JumpPlayerTo_RestoreEspuleeOutskirts(bool32);
@@ -141,7 +138,7 @@ static void JumpPlayerTo_Manhunt_News(bool32);
 static void JumpPlayerTo_Manhunt_Business(bool32);
 static void JumpPlayerTo_Manhunt_Ball(bool32);
 static void JumpPlayerTo_Manhunt_Route(bool32);
-static void JumpPlayerTo_Manhunt_Alcmene(bool32);
+static void JumpPlayerTo_Manhunt_Vigrim(bool32);
 static void JumpPlayerTo_ExhibitionBattle(bool32);
 static void JumpPlayerTo_MaybeIFuckedUp(bool32);
 static void JumpPlayerTo_OkayLetsFixit(bool32);
@@ -152,11 +149,9 @@ static void JumpPlayerTo_MaskOff_F(bool32);
 static void JumpPlayerTo_MaskOff_I(bool32);
 static void JumpPlayerTo_MaskOff_D(bool32);
 static void JumpPlayerTo_MaskOff_G(bool32);
-static void JumpPlayerTo_MaskOff_Alcmene(bool32);
+static void JumpPlayerTo_MaskOff_Vigrim(bool32);
 static void JumpPlayerTo_LetsFixThis(bool32);
 static void JumpPlayerTo_LockedOut(bool32);
-static void JumpPlayerTo_WarehouseRave(bool32);
-static void JumpPlayerTo_SpeechSpeechSpeech(bool32);
 static void JumpPlayerTo_Persuasivepassenger(bool32);
 static void JumpPlayerTo_Breaktheinternet(bool32);
 static void JumpPlayerTo_Warehousewarfare(bool32);
@@ -174,7 +169,7 @@ static void JumpPlayerTo_ImIn_Postrival(bool32);
 static void JumpPlayerTo_YouCantStopMe_Lastplea(bool32);
 static void JumpPlayerTo_YouCantStopMe_Postbattle(bool32);
 static void JumpPlayerTo_WeCanStopYouActually(bool32);
-static void JumpPlayerTo_Epilogue(bool32);
+static void ClearGymTrainers(enum GymLeaderIndex);
 
 // PSF TODO When story jumping from Prolouge to main game, the player's RNG is not properly seeded. This is because StartTimer1 doesn't have anywhere to be initalized before seeding the Rng, because that is reliant on player input and there is none when using a debug menu.
 
@@ -257,8 +252,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_SWAGBAG2:
             JumpPlayerTo_swagbag2(jumpType);
             break;
-        case JUMPPLAYER_ENTERKAUNA:
-            JumpPlayerTo_EnterKauna(jumpType);
+        case JUMPPLAYER_ENTERPUA:
+            JumpPlayerTo_EnterPua(jumpType);
             break;
         case JUMPPLAYER_SORRYABOUTMYFRIENDS:
             JumpPlayerTo_SorryAboutMyFriends(jumpType);
@@ -414,8 +409,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_MANHUNT_ROUTE:
             JumpPlayerTo_Manhunt_Route(jumpType);
             break;
-        case JUMPPLAYER_MANHUNT_ALCMENE:
-            JumpPlayerTo_Manhunt_Alcmene(jumpType);
+        case JUMPPLAYER_MANHUNT_VIGRIM:
+            JumpPlayerTo_Manhunt_Vigrim(jumpType);
             break;
         case JUMPPLAYER_EXHIBITIONBATTLE:
             JumpPlayerTo_ExhibitionBattle(jumpType);
@@ -447,8 +442,8 @@ void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
         case JUMPPLAYER_MASKOFF_G:
             JumpPlayerTo_MaskOff_G(jumpType);
             break;
-        case JUMPPLAYER_MASKOFF_ALCMENE:
-            JumpPlayerTo_MaskOff_Alcmene(jumpType);
+        case JUMPPLAYER_MASKOFF_VIGRIM:
+            JumpPlayerTo_MaskOff_Vigrim(jumpType);
             break;
         case JUMPPLAYER_LETSFIXTHIS:
             JumpPlayerTo_LetsFixThis(jumpType);
@@ -559,18 +554,18 @@ void FlagsVarWarp_Prologue_Intro()
 
 void GiveItems_Prologue_Intro(bool32 jumpType)
 {
-    u8 evs[NUM_STATS] = {0,252,252,4,0,0};
-    u8 ivs[NUM_STATS] = {31,31,31,31,31,31};
-    u16 moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
-
     if (FlagGet(FLAG_SYS_APP_PROLOUGE_GET))
         return;
+
+    u16 evs[NUM_STATS] = {0,252,252,4,0,0};
+    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
+    enum Move moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
 
     InitPlayerTrainerId();
     AssignDefaultPlayerName();
 
     VarSet(B_LEVEL_CAP_VARIABLE,27);
-    ScriptGiveMonParameterized(0,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,ITEM_CHERISH_BALL,NATURE_ADAMANT,0,0,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,BALL_CHERISH,NATURE_ADAMANT,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
 
     GivePlayerAllTechnicalMachines();
     GivePlayerHealingItems();
@@ -602,7 +597,7 @@ void JumpPlayerTo_Prologue_Champion(bool32 jumpType)
 
 void FlagsVarWarp_Prologue_Announcement(void)
 {
-    VarSet(VAR_PROLOGUE_STATE,ELLEN_ANNOUNCE);
+    VarSet(VAR_PROLOGUE_STATE,ELEANOR_ANNOUNCE);
     SetWarpDestination(MAP_GROUP(MAP_OROLAND_COLISEUM_HALL), MAP_NUM(MAP_OROLAND_COLISEUM_HALL), NO_WARP_ID, 9, 7);
 }
 
@@ -761,12 +756,11 @@ void FlagsVarWarp_EnterFallkner()
     FlagSet(FLAG_VISITED_ROUTE6);
     FlagSet(FLAG_VISITED_MERMEREZA_CITY);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
-    FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
     Buzzr_MarkTweetAsRead(TWEET_GYM_MERMEREZA_CITY_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_BELEN);
-    VarSet(VAR_BELEN_STATE, BATTLE_1_COMPLETE);
-    VarSet(VAR_GYM_1_STATE, GYM_DEFEATED_LEADER);
+    VarSet(VAR_GYM_1_STATE, MERMEREZA_GYM_DEFEATED_LEADER);
+    ClearGymTrainers(GYM_BELEN);
     IncrementStorylineVariable();
     WowYoureStrong_GetBadgesAndSetTowerState();
     SetWarpDestination(MAP_GROUP(MAP_MERMEREZA_CITY_GYM),MAP_NUM(MAP_MERMEREZA_CITY_GYM),0,USE_WARP_ID,USE_WARP_ID);
@@ -793,10 +787,13 @@ void FlagsVarWarp_EnterShinzo()
     FlagSet(FLAG_SYS_APP_TRAINER_CARD_GET);
     FlagSet(FLAG_VISITED_TORA_TOWN);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
-    FlagSet(FLAG_BADGE02_GET);
+    ClearGymTrainers(GYM_SHINZO);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
     Buzzr_MarkTweetAsRead(TWEET_GYM_TORA_TOWN_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_SHINZO);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_031A849F);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_045FDD44);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_041FD20E);
     VarSet(VAR_SHINZO_STATE, BATTLE_2_COMPLETE);
     VarSet(VAR_GYM_2_STATE, GYM_DEFEATED_LEADER);
     IncrementStorylineVariable();
@@ -829,10 +826,14 @@ void FlagsVarWarp_EnterEmrys()
 {
     FlagSet(FLAG_VISITED_PERLACIA_CITY);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
-    FlagSet(FLAG_BADGE03_GET);
+    ClearGymTrainers(GYM_EMRYS);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
     Buzzr_MarkTweetAsRead(TWEET_GYM_PERLACIA_CITY_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_EMRYS);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_0AF40D0B);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_0B48C7D0);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_0C95C833);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_0AAB38A6);
     VarSet(VAR_EMRYS_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_3_STATE, GYM_DEFEATED_LEADER);
     IncrementStorylineVariable();
@@ -851,8 +852,8 @@ void JumpPlayerTo_EnterEmrys(bool32 jumpType)
 void FlagsVarWarp_NewAssholeAppears()
 {
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
-    VarSet(VAR_ROUTE10_STATE, DEFEATED_KAI_ROUTE10);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_NEWASSHOLEAPPEARS);
+    VarSet(VAR_ROUTE10_STATE, DEFEATED_BAIYA_ROUTE10);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_NEWASSHOLEAPPEARS);
     IncrementStorylineVariable();
     SetWarpDestination(MAP_GROUP(MAP_ROUTE10),MAP_NUM(MAP_ROUTE10),NO_WARP_ID,2,4);
 }
@@ -888,7 +889,7 @@ void FlagsVarWarp_GroupofAssholesAppears()
 {
     FlagSet(FLAG_VISITED_POPIDORA_PIER);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
-    VarSet(VAR_GROUP_OF_ASSHOLES_STATE, PLAYER_HAS_DEFEATED_THETIDE);
+    VarSet(VAR_GROUP_OF_ASSHOLES_STATE, PLAYER_HAS_DEFEATED_THE_TIDE);
     IncrementStorylineVariable();
     FlagSet(TRAINER_FLAGS_START + TRAINER_IHSAN_AND_EMMITT);
     SetWarpDestination(MAP_GROUP(MAP_POPIDORA_PIER),MAP_NUM(MAP_POPIDORA_PIER),NO_WARP_ID,31,5);
@@ -896,7 +897,7 @@ void FlagsVarWarp_GroupofAssholesAppears()
 
 void GiveItems_GroupofAssoholesAppears(bool32 jumpType)
 {
-    if (VarGet(VAR_GROUP_OF_ASSHOLES_STATE) < PLAYER_HAS_DEFEATED_THETIDE)
+    if (VarGet(VAR_GROUP_OF_ASSHOLES_STATE) < PLAYER_HAS_DEFEATED_THE_TIDE)
         AddBagItem(ITEM_DOWSING_MACHINE, 1);
 }
 
@@ -1050,9 +1051,9 @@ void FlagsVarWarp_AssholesHome()
 {
     FlagSet(FLAG_VISITED_FERRYBUILDING);
     FlagSet(FLAG_VISITED_HALAI_ISLAND);
-    VarSet(VAR_HALAI_ISLAND_STATE, DEFEATED_KAI_HALAI_ISLAND);
-    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_KAI_HALAI_ISLAND);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_ASSHOLEHOME);
+    VarSet(VAR_HALAI_ISLAND_STATE, DEFEATED_BAIYA_HALAI_ISLAND);
+    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_BAIYA_HALAI_ISLAND);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_ASSHOLEHOME);
     SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND),MAP_NUM(MAP_HALAI_ISLAND),NO_WARP_ID,20,5);
 }
 
@@ -1068,7 +1069,7 @@ void FlagsVarWarp_HousingProtest()
 {
     FlagSet(FLAG_VISITED_OROLAND);
     VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_CHASILLA_PROTEST);
-    VarSet(VAR_ROUTE99_STATE, DEFEATED_THETIDE_ROUTE99);
+    VarSet(VAR_ROUTE99_STATE, DEFEATED_THE_TIDE_ROUTE99);
     FlagSet(TRAINER_FLAGS_START + TRAINER_HOUSINGPROTEST_ROCKET);
     SetWarpDestination(MAP_GROUP(MAP_ROUTE99),MAP_NUM(MAP_ROUTE99),NO_WARP_ID,7,14);
 
@@ -1098,31 +1099,31 @@ void JumpPlayerTo_swagbag2(bool32 jumpType)
     FlagsVarWarp_swagbag2();
 }
 
-void FlagsVarWarp_EnterKauna()
+void FlagsVarWarp_EnterPua()
 {
     FlagSet(FLAG_CONSTRUCTION_BREAKING_NEWS);
-    FlagSet(FLAG_BADGE04_GET);
+    ClearGymTrainers(GYM_PUA);
     Buzzr_MarkTweetAsRead(TWEET_GYM_CHASILLA_BADGE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAUNA);
-    VarSet(VAR_KAUNA_STATE, BATTLE_1_COMPLETE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_PUA);
+    VarSet(VAR_PUA_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_4_STATE, GYM_DEFEATED_LEADER);
-    VarSet(VAR_CHASILLA_STATE, DEFEATED_KAUNA);
-    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_KAUNA);
+    VarSet(VAR_CHASILLA_STATE, DEFEATED_PUA);
+    VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_PUA);
     SetWarpDestination(MAP_GROUP(MAP_CHASILLA_GYM),MAP_NUM(MAP_CHASILLA_GYM),0,USE_WARP_ID,USE_WARP_ID);
 }
 
-void GiveItems_EnterKauna(bool32 jumpType)
+void GiveItems_EnterPua(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE04_GET))
         AddBagItem(ITEM_TM04, 1);
 }
 
-void JumpPlayerTo_EnterKauna(bool32 jumpType)
+void JumpPlayerTo_EnterPua(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         JumpPlayerTo_swagbag2(jumpType);
 
-    FlagsVarWarp_EnterKauna();
+    FlagsVarWarp_EnterPua();
 }
 
 void FlagsVarWarp_SorryAboutMyFriends()
@@ -1135,7 +1136,7 @@ void FlagsVarWarp_SorryAboutMyFriends()
 void JumpPlayerTo_SorryAboutMyFriends(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_EnterKauna(jumpType);
+        JumpPlayerTo_EnterPua(jumpType);
 
     FlagsVarWarp_SorryAboutMyFriends();
 }
@@ -1146,36 +1147,36 @@ void FlagsVarWarp_TheStorySoFar(u32 trainer)
     switch(trainer)
     {
         case JUMPPLAYER_THESTORYSOFAR_A:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0D416B2C);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,29,60);
             break;
         case JUMPPLAYER_THESTORYSOFAR_B:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_B);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0D4BA0F1);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,37,13);
             break;
         case JUMPPLAYER_THESTORYSOFAR_C:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_C);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0DA021EF);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,25,10);
             break;
         case JUMPPLAYER_THESTORYSOFAR_D:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_D);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0E19F1A8);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,8,35);
             break;
         case JUMPPLAYER_THESTORYSOFAR_E:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_E);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0F03CF8D);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,27,22);
             break;
         case JUMPPLAYER_THESTORYSOFAR_F:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_F);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0E42221A);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,17,51);
             break;
         case JUMPPLAYER_THESTORYSOFAR_ALL:
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_A);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_B);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_C);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_D);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_E);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_ARANTRAZ_EXHIBIT_F);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0D416B2C);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0D4BA0F1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0DA021EF);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0E19F1A8);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0F03CF8D);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_0E42221A);
             SetWarpDestination(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ),NO_WARP_ID,29,60);
             break;
     }
@@ -1237,7 +1238,7 @@ void JumpPlayerTo_WaitYouWentWhere(bool32 jumpType)
 void FlagsVarWarp_EnterNeriene()
 {
     FlagSet(FLAG_VISITED_FORT_YOBU);
-    FlagSet(FLAG_BADGE05_GET);
+    ClearGymTrainers(GYM_NERIENE);
     Buzzr_MarkTweetAsRead(TWEET_GYM_FORT_YOBU_BADGE);
     VarSet(VAR_GYM_5_STATE, GYM_DEFEATED_LEADER);
     VarSet(VAR_NERIENE_STATE, BATTLE_1_COMPLETE);
@@ -1281,8 +1282,7 @@ void FlagsVarWarp_Keiyingsraisondetre()
 {
     FlagSet(FLAG_VISITED_PETAROSA_BOROUGH);
     IncrementStorylineVariable();
-    VarSet(VAR_KEIYING_RAISON_DETRE_STATE, POST_KEIYING_RAISON_DETRE);
-    VarSet(VAR_KEIYING_MANSION_STATE, FINISHED_KEIYING_RAISON);
+    VarSet(VAR_KEIYING_STATE, STATE_KEIYING_POST_RAISON_DETRE);
     SetWarpDestination(MAP_GROUP(MAP_PETAROSA_BOROUGH),MAP_NUM(MAP_PETAROSA_BOROUGH),0,USE_WARP_ID,USE_WARP_ID);
 }
 
@@ -1327,7 +1327,7 @@ void FlagsVarWarp_EnterDimu()
     FlagSet(FLAG_VISITED_HALERBAWILDS_SOUTH);
     FlagSet(FLAG_VISITED_HALERBAWILDS_WEST);
     IncrementStorylineVariable();
-    FlagSet(FLAG_BADGE06_GET);
+    ClearGymTrainers(GYM_DIMU);
     Buzzr_MarkTweetAsRead(TWEET_GYM_HALERBA_CITY_BADGE);
     VarSet(VAR_GYM_6_STATE, GYM_DEFEATED_LEADER);
     VarSet(VAR_DIMU_STATE, BATTLE_1_COMPLETE);
@@ -1384,11 +1384,17 @@ void FlagsVarWarp_EnterBD()
 {
 
     IncrementStorylineVariable();
-    FlagSet(FLAG_BADGE07_GET);
+    ClearGymTrainers(GYM_BD);
     Buzzr_MarkTweetAsRead(TWEET_GYM_TIRABUDIN_PLACE_BADGE);
     VarSet(VAR_BD_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_7_STATE, GYM_DEFEATED_LEADER);
     FlagSet(TRAINER_FLAGS_START + TRAINER_BD);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_11EDE0DC);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_148A3C6B);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_13113EC0);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_120A20F6);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_1387ABBC);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_114EB3AD);
     SetWarpDestination(MAP_GROUP(MAP_TIRABUDIN_PLACE_GYM_LOBBY), MAP_NUM(MAP_TIRABUDIN_PLACE_GYM_LOBBY), 1, USE_WARP_ID, USE_WARP_ID);
 }
 
@@ -1405,8 +1411,8 @@ void FlagsVarWarp_Battle8()
 {
     FlagSet(FLAG_VISITED_PINTILLONHOUSE);
     IncrementStorylineVariable();
-    VarSet(VAR_BATTLE_8_STATE, DEFEATED_KAI_PINTILLONHOUSE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_BATTLE8);
+    VarSet(VAR_BATTLE_8_STATE, DEFEATED_BAIYA_PINTILLONHOUSE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_BATTLE8);
     SetWarpDestination(MAP_GROUP(MAP_PINTILLON_HOUSE_EXTERIOR),MAP_NUM(MAP_PINTILLON_HOUSE_EXTERIOR),NO_WARP_ID,19,16);
 
 }
@@ -1429,7 +1435,7 @@ void FlagsVarWarp_EnterAmiArgento()
 {
     FlagSet(FLAG_VISITED_IRISINA_TOWN);
     IncrementStorylineVariable();
-    FlagSet(FLAG_BADGE08_GET);
+    ClearGymTrainers(GYM_AMI);
     Buzzr_MarkTweetAsRead(TWEET_GYM_IRISINA_TOWN_BADGE);
     VarSet(VAR_AMIARGENTO_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_8_STATE, GYM_DEFEATED_LEADER);
@@ -1477,19 +1483,19 @@ void JumpPlayerTo_TheStrikeStrikesBack(bool32 jumpType)
 
 void GiveItems_VSGarbodor(bool32 jumpType)
 {
-    if (VarGet(VAR_STORYLINE_STATE) < STORY_NEED_SLEEP_BEFORE_ARMANDO)
+    if (VarGet(VAR_STORYLINE_STATE) < STORY_NEED_SLEEP_BEFORE_FRANK)
         AddBagItem(VSGarbodor_GetGemFromType(),1);
 }
 
 void FlagsVarWarp_VSGarbodor()
 {
-    VarSet(VAR_CONSTRUCTION_STRIKE_STATE, THETIDE_ARRESTED);
+    VarSet(VAR_CONSTRUCTION_STRIKE_STATE, THE_TIDE_ARRESTED);
     VarSet(VAR_INNER_CONSTRUCTION_SITE_STATE, PLAYER_LEFT_SIDE);
     FlagSet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
     FlagSet(FLAG_DEFEATED_RIVAL_ROUTE_104);
     FlagSet(FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE);
     FlagSet(FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE);
-    VarSet(VAR_STORYLINE_STATE, STORY_NEED_SLEEP_BEFORE_ARMANDO);
+    VarSet(VAR_STORYLINE_STATE, STORY_NEED_SLEEP_BEFORE_FRANK);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F),MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F),0,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1505,7 +1511,7 @@ void JumpPlayerTo_VSGarbodor(bool32 jumpType)
 void FlagsVarWarp_OffYouGo_Phone()
 {
     VarSet(VAR_GOLDENGATEBRIDGE_STATE, CALLED_BY_CHARLOTTE);
-    VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_ARMANDO_QUESTS);
+    VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_FRANK_QUESTS);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F),MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_2F),0,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1522,7 +1528,7 @@ void FlagsVarWarp_OffYouGo_Bridge(void)
 {
     FlagSet(FLAG_VISITED_PIOCA_BRIDGE);
     VarSet(VAR_GOLDENGATEBRIDGE_STATE, POST_OFF_YOU_GO);
-    VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_ARMANDO_QUESTS);
+    VarSet(VAR_STORYLINE_STATE, STORY_ASSIGNED_FRANK_QUESTS);
     VarSet(VAR_ROBINWILLIAMSTUNNEL_STATE, CHARLOTTE_INSIDE_TUNNEL);
     SetWarpDestination(MAP_GROUP(MAP_PIOCA_BRIDGE),MAP_NUM(MAP_PIOCA_BRIDGE),0,USE_WARP_ID,USE_WARP_ID);
 
@@ -1542,7 +1548,7 @@ void FlagsVarWarp_IGuessWeShouldBeNiceNow()
     FlagSet(FLAG_VISITED_ESPULEE_OUTSKIRTS);
     VarSet(VAR_LEAVERRA_FOREST_STATE, CHARLOTTE_WAITING_LEAVERRA_FOREST);
     VarSet(VAR_ESPULEE_OUTSKIRTS_STATE, CHARLOTTE_STUDYING);
-    VarSet(VAR_ROBINWILLIAMSTUNNEL_STATE, ARMANDO_BOSS_DEFEATED);
+    VarSet(VAR_ROBINWILLIAMSTUNNEL_STATE, FRANK_BOSS_DEFEATED);
     SetWarpDestination(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F),MAP_NUM(MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_1F),2,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1558,9 +1564,7 @@ void JumpPlayerTo_IGuessWeShouldBeNiceNow(bool32 jumpType)
 void FlagsVarWarp_EntertheMaster()
 {
     FlagSet(FLAG_VISITED_LEAVERRA_FOREST);
-    VarSet(VAR_LEAVERRA_FOREST_STATE, MET_ARMANDO);
-    QuestMenu_GetSetQuestState(QUEST_ARMANDOSTRAINING, FLAG_SET_UNLOCKED);
-    QuestMenu_GetSetQuestState(QUEST_ARMANDOSTRAINING, FLAG_SET_ACTIVE);
+    VarSet(VAR_LEAVERRA_FOREST_STATE, MET_FRANK);
     SetWarpDestination(MAP_GROUP(MAP_LEAVERRA_FOREST_INNER),MAP_NUM(MAP_LEAVERRA_FOREST_INNER),2,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1578,9 +1582,10 @@ void FlagsVarWarp_HaveYouSeenTheNews()
 {
     VarSet(VAR_LEAVERRA_FOREST_STATE, POST_HAVE_YOU_SEEN_THE_NEWS);
     VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM);
-    Quest_Generic_CompleteSubquests(QUEST_ARMANDOSTRAINING);
-    QuestMenu_GetSetQuestState(QUEST_ARMANDOSTRAINING, FLAG_REMOVE_ACTIVE);
-    QuestMenu_GetSetQuestState(QUEST_ARMANDOSTRAINING, FLAG_SET_COMPLETED);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_FRANK_ROBOT_1);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_FRANK_ROBOT_2);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_FRANK_ROBOT_3);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_FRANK_ROBOT_4);
     SetWarpDestination(MAP_GROUP(MAP_LEAVERRA_FOREST_INNER),MAP_NUM(MAP_LEAVERRA_FOREST_INNER),1,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -1629,10 +1634,10 @@ void FlagsVarWarp_WhyAreYouHelpingThem()
 {
 
     FlagSet(FLAG_VISITED_NAVAL_BASE);
-    VarSet(VAR_NAVAL_BASE_STATE, DEFEATED_KAI_NAVAL_BASE);
+    VarSet(VAR_NAVAL_BASE_STATE, DEFEATED_BAIYA_NAVAL_BASE);
     VarSet(VAR_PLAYER_HOME_STATE, NEXT_DAY_CHAMPIONSHIP);
     VarSet(VAR_STORYLINE_STATE, STORY_COMPLETED_NAVAL_BASE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_WHYAREYOUHELPINGTHEM);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_WHYAREYOUHELPINGTHEM);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F),MAP_NUM(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F),NO_WARP_ID,11,4);
 }
 
@@ -1744,6 +1749,7 @@ void JumpPlayerTo_WaitHeDidWhat(bool32 jumpType)
 
 void FlagsVarWarp_WelcometotheHallofFame()
 {
+    AwardPartyMonChampionRibbon();
     VarSet(VAR_SHARPRISESTADIUM_TOURNAMENT_STATE, NO_TOURNAMENT);
     VarSet(VAR_STORYLINE_STATE, STORY_WON_FINALS);
     FlagClear(FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING);
@@ -1781,8 +1787,8 @@ void JumpPlayerTo_BeingChampionisHard(bool32 jumpType)
 void FlagsVarWarp_LetsGrabLunch()
 {
     FlagSet(FLAG_VISITED_ZENZU_ISLAND);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_LETSGRABLUNCH);
-    VarSet(VAR_STORYLINE_STATE, STORY_KAI_EXPLAIN_RESTORATION);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_LETSGRABLUNCH);
+    VarSet(VAR_STORYLINE_STATE, STORY_BAIYA_EXPLAIN_RESTORATION);
     SetWarpDestination(MAP_GROUP(MAP_ZENZU_ISLAND_RESTAURANT),MAP_NUM(MAP_ZENZU_ISLAND_RESTAURANT),NO_WARP_ID,14,9);
 }
 
@@ -1860,7 +1866,7 @@ void FlagsVarWarp_YouRealizeWereEvilRight()
 {
     VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,
             POST_YOU_REALIZE_WERE_EVIL_RIGHT);
-    FlagSet(FLAG_KAI_CALL_ARANTRAZ);
+    FlagSet(FLAG_BAIYA_CALL_ARANTRAZ);
     VarSet(VAR_STORYLINE_STATE, STORY_POST_YOU_REALIZE_WERE_EVIL);
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_LEAGUEOPS), MAP_NUM(MAP_SHARPRISE_SPIRE_LEAGUEOPS), NO_WARP_ID, 17, 29);
 }
@@ -1894,7 +1900,7 @@ void GiveItems_YouRealizeTheyreEvilRight_Phone(bool32 jumpType)
     if (!IsJumpTypeDebug(jumpType))
         return;
 
-    if (VarGet(VAR_ARANTRAZ_STATE) >= KAI_SUMMONED_ARANTRAZ)
+    if (VarGet(VAR_ARANTRAZ_STATE) >= BAIYA_SUMMONED_ARANTRAZ)
         return;
 
     AddBagItem(ITEM_TM345, 1);
@@ -1903,10 +1909,10 @@ void GiveItems_YouRealizeTheyreEvilRight_Phone(bool32 jumpType)
 
 void FlagsVarWarp_YouRealizeTheyreEvilRight_Phone(void)
 {
-    VarSet(VAR_ARANTRAZ_STATE, KAI_SUMMONED_ARANTRAZ);
+    VarSet(VAR_ARANTRAZ_STATE, BAIYA_SUMMONED_ARANTRAZ);
     QuestMenu_GetSetQuestState(QUEST_HANG20, FLAG_SET_UNLOCKED);
     QuestMenu_GetSetQuestState(QUEST_HANG20, FLAG_SET_COMPLETED);
-    FlagClear(FLAG_KAI_CALL_ARANTRAZ);
+    FlagClear(FLAG_BAIYA_CALL_ARANTRAZ);
     SetWarpDestination(MAP_GROUP(MAP_PERLACIA_CITY), MAP_NUM(MAP_PERLACIA_CITY), 0, USE_WARP_ID, USE_WARP_ID);
 }
 
@@ -2010,7 +2016,7 @@ void FlagsVarWarp_LetsBurnThisMotherDown()
     QuestMenu_GetSetQuestState(QUEST_LETSBURNTHISMOTHERDOWN,
             FLAG_SET_COMPLETED);
     VarSet(VAR_LETSBURNTHISMOTHERSTATE, BURN_MOTHER_COMPLETE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_KAI_LETSBURNTHISMOTHERDOWN);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN);
     IncrementStorylineVariable();
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_LEAGUEOPS), MAP_NUM(MAP_SHARPRISE_SPIRE_LEAGUEOPS), NO_WARP_ID, 34,5);
 
@@ -2082,35 +2088,35 @@ void JumpPlayerTo_Manhunt_Route(bool32 jumpType)
     FlagsVarWarp_Manhunt_Route();
 }
 
-void FlagsVarWarp_Manhunt_Alcmene()
+void FlagsVarWarp_Manhunt_Vigrim()
 {
     FlagSet(FLAG_VISITED_WISHAAST_LAKE);
     QuestMenu_GetSetQuestState(QUEST_MANHUNT, FLAG_REMOVE_ACTIVE);
     QuestMenu_GetSetQuestState(QUEST_MANHUNT, FLAG_SET_COMPLETED);
     VarSet(VAR_MANHUNT_STATE, MANHUNT_COMPLETE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_ALCMENE);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_VIGRIM);
     IncrementStorylineVariable();
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_LEAGUEOPS), MAP_NUM(MAP_SHARPRISE_SPIRE_LEAGUEOPS), NO_WARP_ID, 5,5);
 }
 
-void JumpPlayerTo_Manhunt_Alcmene(bool32 jumpType)
+void JumpPlayerTo_Manhunt_Vigrim(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         if (VarGet(VAR_STORYLINE_STATE) <= STORY_START_FALSE_TIMELINE)
             JumpPlayerTo_Manhunt_Route(jumpType);
 
-    FlagsVarWarp_Manhunt_Alcmene();
+    FlagsVarWarp_Manhunt_Vigrim();
 }
 
 void FlagsVarWarp_ExhibitionBattle()
 {
-    VarSet(VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_ADELAIDE);
+    VarSet(VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_LUCREZIA);
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_STADIUM_LOCKERS),MAP_NUM(MAP_SHARPRISE_STADIUM_LOCKERS),2,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_CompleteAllTideTakedown(bool32 jumpType)
 {
-    JumpPlayerTo_Manhunt_Alcmene(jumpType);
+    JumpPlayerTo_Manhunt_Vigrim(jumpType);
     JumpPlayerTo_LetsBurnThisMotherDown(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_YouHaveYourOrders(JUMP_CUTSCENE_SKIP);
     JumpPlayerTo_HowDisappointing_Arrest(JUMP_CUTSCENE_SKIP);
@@ -2156,6 +2162,7 @@ void FlagsVarWarp_OkayLetsFixit()
     VarSet(VAR_MANHUNT_STATE, NOT_ASSIGNED);
     VarSet(VAR_HOWDISAPPOINTING_STATE, NOT_ASSIGNED);
     VarSet(VAR_HOWDISAPPOINTING_STATE, NOT_ASSIGNED);
+    VarSet(VAR_TIME_TRAVEL_STATE, TIME_TRAVEL_SACRIFICE_COMPLETE);
 
     for (i = 0; i < USHRT_MAX ; i++)
         Buzzr_IncrementSteps();
@@ -2279,32 +2286,32 @@ void JumpPlayerTo_MaskOff_G(bool32 jumpType)
     FlagsVarWarp_MaskOff_G();
 }
 
-void FlagsVarWarp_MaskOff_Alcmene()
+void FlagsVarWarp_MaskOff_Vigrim()
 {
-    VarSet(VAR_MASK_OFF_STATE, DEFEATED_MASK_OFF_ALCMENE);
-    VarSet(VAR_STORYLINE_STATE, STORY_DEFEATED_ALCMENE);
+    VarSet(VAR_MASK_OFF_STATE, DEFEATED_MASK_OFF_VIGRIM);
+    VarSet(VAR_STORYLINE_STATE, STORY_DEFEATED_VIGRIM);
     SetWarpDestination(MAP_GROUP(MAP_WISHAAST_LAKE),MAP_NUM(MAP_WISHAAST_LAKE),NO_WARP_ID,22,26);
 }
 
-void JumpPlayerTo_MaskOff_Alcmene(bool32 jumpType)
+void JumpPlayerTo_MaskOff_Vigrim(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
         JumpPlayerTo_MaskOff_G(jumpType);
 
-    FlagsVarWarp_MaskOff_Alcmene();
+    FlagsVarWarp_MaskOff_Vigrim();
 }
 
 void FlagsVarWarp_LockedOut()
 {
     FlagSet(FLAG_LOCKEDOUT_PLAYED);
-    SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_KAI);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_KAI),MAP_NUM(MAP_HALAI_ISLAND_KAI),0,USE_WARP_ID,USE_WARP_ID);
+    SetLastHealLocationWarp(HEAL_LOCATION_HALAI_ISLAND_BAIYA);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LockedOut(bool32 jumpType)
 {
     if (IsJumpTypeDebug(jumpType))
-        JumpPlayerTo_MaskOff_Alcmene(jumpType);
+        JumpPlayerTo_MaskOff_Vigrim(jumpType);
 
     FlagsVarWarp_LockedOut();
 }
@@ -2322,7 +2329,7 @@ void FlagsVarWarp_LetsFixThis()
     PreventVariableFromReversion(VAR_WAREHOUSE_RAVE_STATE, warehouseState,
             GOT_RAVE_MESSAGE);
     Buzzr_MarkTweetAsRead(TWEET_STORY_WAREHOUSE_RAVE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_KAI),MAP_NUM(MAP_HALAI_ISLAND_KAI),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_LetsFixThis(bool32 jumpType)
@@ -2337,7 +2344,7 @@ void JumpPlayerTo_LetsFixThis(bool32 jumpType)
 void FlagsVarWarp_WarehouseRave()
 {
     IncrementStorylineVariable();
-    VarSet(VAR_WAREHOUSE_RAVE_STATE, TOLD_KAI_ABOUT_KEIYING);
+    VarSet(VAR_WAREHOUSE_RAVE_STATE, TOLD_BAIYA_ABOUT_KEIYING);
     SetWarpDestination(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT),4,USE_WARP_ID,USE_WARP_ID);
 
 }
@@ -2672,8 +2679,8 @@ void JumpPlayerTo_YouCantStopMe_Lastplea(bool32 jumpType)
 
 void FlagsVarWarp_YouCantStopMe_Postbattle()
 {
-    VarSet(VAR_TOWER_RAID_STATE, DEFEATED_FIRST_ADELAIDE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_ADELAIDE_A);
+    VarSet(VAR_TOWER_RAID_STATE, DEFEATED_FIRST_LUCREZIA);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_LUCREZIA_A);
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_TOP),MAP_NUM(MAP_SHARPRISE_SPIRE_TOP),NO_WARP_ID,15,6);
 
 }
@@ -2689,8 +2696,8 @@ void JumpPlayerTo_YouCantStopMe_Postbattle(bool32 jumpType)
 void FlagsVarWarp_WeCanStopYouActually()
 {
     VarSet(VAR_STORYLINE_STATE, STORY_EPILOGUE);
-    VarSet(VAR_TOWER_RAID_STATE, DEFEATED_SECOND_ADELAIDE);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_ADELAIDE_B);
+    VarSet(VAR_TOWER_RAID_STATE, DEFEATED_SECOND_LUCREZIA);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_LUCREZIA_B);
 
     SetWarpDestination(MAP_GROUP(MAP_SHARPRISE_SPIRE_TOP),MAP_NUM(MAP_SHARPRISE_SPIRE_TOP),NO_WARP_ID,15,6);
 }
@@ -2708,7 +2715,7 @@ void FlagsVarWarp_Epilogue(void)
     VarSet(VAR_STORYLINE_STATE, STORY_CLEAR);
     FlagSet(FLAG_SYS_GAME_CLEAR);
     Buzzr_MarkTweetAsRead(TWEET_STORY_EPILOGUE);
-    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_KAI),MAP_NUM(MAP_HALAI_ISLAND_KAI),0,USE_WARP_ID,USE_WARP_ID);
+    SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }
 
 void JumpPlayerTo_Epilogue(bool32 jumpType)
@@ -2717,4 +2724,75 @@ void JumpPlayerTo_Epilogue(bool32 jumpType)
         JumpPlayerTo_WeCanStopYouActually(jumpType);
 
     FlagsVarWarp_Epilogue();
+}
+
+void ClearGymTrainer_Script(void)
+{
+    enum GymLeaderIndex gym = VarGet(VAR_CURRENT_GYM);
+
+    if (gym >= GYM_COUNT)
+        return;
+
+    ClearGymTrainers(gym);
+}
+
+static void ClearGymTrainers(enum GymLeaderIndex gymIndex)
+{
+    static const u16 gymTrainerList[GYM_COUNT][MAX_GYM_TRAINER_COUNT] =
+    {
+        [GYM_BELEN] =
+        {
+            FLAG_BADGE01_GET,
+            TRAINER_FLAGS_START + TRAINER_BELEN,
+            TRAINER_FLAGS_START + TRAINER_CHEFA,
+            TRAINER_FLAGS_START + TRAINER_CHEFB,
+            TRAINER_FLAGS_START + TRAINER_CHEFC,
+            TRAINER_NONE,
+        },
+        [GYM_SHINZO] =
+        {
+            FLAG_BADGE02_GET,
+            TRAINER_FLAGS_START + TRAINER_SHINZO,
+            TRAINER_NONE,
+        },
+        [GYM_EMRYS] =
+        {
+            FLAG_BADGE03_GET,
+            TRAINER_FLAGS_START + TRAINER_EMRYS,
+            TRAINER_NONE,
+        },
+        [GYM_PUA] =
+        {
+            FLAG_BADGE04_GET,
+            TRAINER_FLAGS_START + TRAINER_PUA,
+            TRAINER_NONE,
+        },
+        [GYM_NERIENE] =
+        {
+            FLAG_BADGE05_GET,
+            TRAINER_FLAGS_START + TRAINER_NERIENE,
+            TRAINER_NONE,
+        },
+        [GYM_DIMU] =
+        {
+            FLAG_BADGE06_GET,
+            TRAINER_FLAGS_START + TRAINER_DIMU,
+            TRAINER_NONE,
+        },
+        [GYM_BD] =
+        {
+            FLAG_BADGE07_GET,
+            TRAINER_FLAGS_START + TRAINER_BD,
+            TRAINER_NONE,
+        },
+        [GYM_AMI] =
+        {
+            FLAG_BADGE08_GET,
+            TRAINER_FLAGS_START + TRAINER_AMIARGENTO,
+            TRAINER_NONE,
+        },
+    };
+
+    for (u32 trainerIndex = 0; gymTrainerList[gymIndex][trainerIndex] != TRAINER_NONE; trainerIndex++)
+        FlagSet(gymTrainerList[gymIndex][trainerIndex]);
 }

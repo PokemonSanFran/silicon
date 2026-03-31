@@ -3,16 +3,16 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 
-//PSF TODO Add awards on Adelaide's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
+//PSF TODO Add awards on Lucrezia's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
 
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -30,7 +30,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
             case START_FALSE_TIMELINE:
                 call(CongratsYoureanAsshole_ObjectCleanUp_Script)
                 call(YouHaveYourOrders_ObjectSetUp_Script)
-                call(LetsBurnThisMotherDown_ShowAdelaide_Script)
+                call(LetsBurnThisMotherDown_ShowLucrezia_Script)
                 call(Manhunt_ShowRamesh_Script)
             case TRUE_RAID_START:
                   call(SharpriseSpire_Leagueops_TrueTimeline_Objects_Script)
@@ -42,14 +42,14 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_WELCOME_TO_THE_WAR_ROOM: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, PRE_YOU_REALIZE_WERE_EVIL_RIGHT: SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, POST_WOW_YOURE_STRONG: TheGangsAllHere_OliverAppearStairs_Script
-        VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
+        VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_BAIYA_ARANTRAZ: LetsBurnThisMotherDown_MissionComplete_Dialogue
         VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY: HowDisappointing_MissionComplete_Dialogue
-        VAR_MANHUNT_STATE,DEFEATED_MANHUNT_ALCMENE: Manhunt_MissionComplete_Dialogue
-        VAR_STORYLINE_STATE,STORY_3RD_THETIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
-        VAR_STORYLINE_STATE,STORY_THETIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
+        VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM: Manhunt_MissionComplete_Dialogue
+        VAR_STORYLINE_STATE,STORY_3RD_THE_TIDE_TAKEDOWN: ExhibitionBattle_CheckMissionProgress_Script
+        VAR_STORYLINE_STATE,STORY_THE_TIDE_FINISHED: ExhibitionBattle_TimeSkip_Script
     ]
     MAP_SCRIPT_ON_LOAD {
-        call(ImIn_RevealAdelaideWarp_Script)
+        call(ImIn_RevealLucreziaWarp_Script)
     }
 }
 
@@ -66,7 +66,7 @@ script SharpriseSpire_Leagueops_EmptyConferenceRoomOffices{
         setflag(FLAG_HIDE_NERDS_COPS)
         setflag(FLAG_HIDE_OLIVER)
         setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_ADELAIDE)
+        setflag(FLAG_HIDE_LUCREZIA)
         setflag(FLAG_HIDE_RAMESH)
         setflag(FLAG_HIDE_KEIYING)
         return
@@ -94,8 +94,8 @@ script SharpriseSpire_Leagueops_Oliver_Event_Script{
     switch (var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Interact_Oliver_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: call(LetsBurnThisMotherDown_Interact_Oliver_Script)
     }
     release
     end
@@ -107,8 +107,8 @@ script SharpriseSpire_Leagueops_Keiying_Event_Script{
     switch(var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: call(YouHaveYourOrders_Interact_Keiying_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: call(YouHaveYourOrders_Interact_Keiying_Script)
 }
 release
 end
@@ -120,8 +120,8 @@ script SharpriseSpire_Leagueops_Ramesh_Event_Script{
     switch(var(VAR_STORYLINE_STATE)){
         case STORY_MORNING_OF_TIMELINE_SPLIT: return
         case STORY_START_FALSE_TIMELINE:
-        case STORY_1ST_THETIDE_TAKEDOWN:
-        case STORY_2ND_THETIDE_TAKEDOWN: goto(Manhunt_Interact_Ramesh_Script)
+        case STORY_1ST_THE_TIDE_TAKEDOWN:
+        case STORY_2ND_THE_TIDE_TAKEDOWN: goto(Manhunt_Interact_Ramesh_Script)
 }
 release
 end
@@ -166,9 +166,30 @@ script SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script{
     removeobject(TECHIE)
     removeobject(CHARLOTTE)
     removeobject(CHIEF)
-    removeobject(ADELAIDE)
+    removeobject(LUCREZIA)
     setflag(FLAG_HIDE_NERDS_COPS)
     setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_ADELAIDE)
+    setflag(FLAG_HIDE_LUCREZIA)
     return
 }
+
+script LeagueOps_LucreziaComputer_Script
+{
+    lock
+    msgbox(format("There is an open email draft on Lucrezia's screen."))
+    if (var(VAR_STORYLINE_STATE) >= STORY_WARP_TILE_ACCESSIBLE)
+    {
+        msgbox(format("I am disappointed in the Champion's recent behavior, as I know you are as well. Though, before {PLAYER} turned we extracted enough value from {SUBJECT} to cover our investment many times over so I consider this loss acceptable. PARC is now fully operational, The Tide is eliminated, and there is nothing that can sta"))
+    }
+    elif (var(VAR_STORYLINE_STATE) >= STORY_WON_FINALS)
+    {
+        msgbox(format("As predicted, our preferred candidate continues to succeed and show promise. We have begun Ramesh's second phase media tour and our approval ratings are slowly beginning to climb by using the Trainer as our public face.\nThey were instrumental in landing a blow against The Tide and we are making progress with reviving PARC."))
+    }
+    else
+    {
+        msgbox(format("We have identified two candidates from the Kickstart Program that we believe will be most malleable and guarentee our return on investment. There are no other League participants of note at this time."))
+    }
+    releaseall
+    end
+}
+

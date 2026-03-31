@@ -12,9 +12,10 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ANGELDELIVERYBIKERC",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F",
       "x": 5,
       "y": 5,
@@ -24,10 +25,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "Quest_Getthebandbacktogether_Script_Interact_AngeldeliverybikerC",
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ANGELDELIVERYBIKERD",
       "graphics_id": "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F",
       "x": 8,
       "y": 5,
@@ -65,6 +67,104 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERA",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERA",
+      "x": 14,
+      "y": 0,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerA_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERB",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERB",
+      "x": 14,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerB_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERC",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERC",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerC_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERD",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERD",
+      "x": 14,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerD_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERE",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERE",
+      "x": 14,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerE_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERF",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERF",
+      "x": 14,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerF_Complete",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_GEARGRINDGANGHOUSE_GETTHEBANDBACKTOGETHERBIKERG",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_GETTHEBANDBACKTOGETHERBIKERG",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Getthebandbacktogether_Dialogue_GetthebandbacktogetherbikerG_Complete",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -83,10 +183,6 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

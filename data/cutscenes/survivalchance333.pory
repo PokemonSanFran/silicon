@@ -2,7 +2,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 4
 const CHIEF = 3
 
-const FLAG_HIDE_KAI = FLAG_TEMP_1
+const FLAG_HIDE_BAIYA = FLAG_TEMP_1
 const FLAG_HIDE_ADAORA = FLAG_TEMP_3
 const FLAG_HIDE_ELITE4 = FLAG_TEMP_4
 
@@ -22,7 +22,7 @@ script SurvivalChance333_MovePlayerIntoPosition {
         getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
 
         if (var(VAR_TEMP_0) != 12){
-            applymovement(PLAYER, SurvivalChance333_WalkToChief)
+            applymovement(PLAYER, moves(walk_right, walk_up * 2, step_end))
                 waitmovement(0)
         }
 }
@@ -56,26 +56,24 @@ script SurvivalChance333_ExplainPlan_Dialogue {
         waitmovement(0)
 
         delay(25)
-        msgbox(gText_SurvivalChance333_HeresThe,,SPEAKER_CHIEF,,EMOTE_SWEAT)
+        msgbox(format("Here's the fuckin' plan. We're gonna -"),,SPEAKER_CHIEF,,EMOTE_SWEAT)
 
-        msgbox(gText_SurvivalChance333_IsSomethingWrong,,SPEAKER_ALICIA)
+        msgbox(format("Is something wrong Chief?"),,SPEAKER_ALICIA)
 
+        msgbox(format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
+        msgbox(format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job..."),,SPEAKER_CHIEF,,EMOTE_ANGRY)
+        msgbox(format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization."),,SPEAKER_CHIEF,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_SurvivalChance333_ISpent15Years,,SPEAKER_CHIEF,,EMOTE_ANGRY)
-        msgbox(gText_SurvivalChance333_Next,,SPEAKER_CHIEF,,EMOTE_ANGRY)
-        msgbox(gText_SurvivalChance333_Cherry,,SPEAKER_CHIEF,TAIL_SHOUT,EMOTE_ANGRY)
+        msgbox(format("Woah, we're plenty tough! You don't need to babysit us!"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_SurvivalChance333_WoahWerePlentyTough,,SPEAKER_CHARLOTTE)
+        msgbox(format("I think Charlotte missed the point and only heard that last part..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
 
-        msgbox(gText_SurvivalChance333_IThinkCharlotteMissed,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
+        msgbox(format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?"),,SPEAKER_CHIEF)
 
-        msgbox(gText_SurvivalChance333_RightKidsWithZero,,SPEAKER_CHIEF)
+        msgbox(format("Hey, we didn't ask to be here! "),,SPEAKER_ALICIA)
 
-        msgbox(gText_SurvivalChance333_HeyWeDidntAsk,,SPEAKER_ALICIA)
-
-
-        msgbox(gText_SurvivalChance333_AndIDidntAsk,,SPEAKER_CHIEF)
-        msgbox(gText_SurvivalChance333_IllProveIt,,SPEAKER_CHARLOTTE)
+        msgbox(format("And I didn't ask for you. But here we are."),,SPEAKER_CHIEF)
+        msgbox(format("I'll prove it then. Battle me."),,SPEAKER_CHARLOTTE)
         closemessage
         setvar(VAR_FERRYBUILDING_STATE,SAVE_SURVIVAL_CHANCE_BATTLE)
         startmenu_savescreen
@@ -83,21 +81,20 @@ script SurvivalChance333_ExplainPlan_Dialogue {
 }
 
 script SurvivalChance333_Battle_Script {
-        msgbox(gText_SurvivalChance333_WontEvenBeAFair,,SPEAKER_CHIEF)
+        msgbox(format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed."),,SPEAKER_CHIEF)
         closemessage
         choose_mons
         goto_if_eq(VAR_RESULT,0,SurvivalChance333_Battle_Script)
-        multi_2_vs_1(TRAINER_POLICECHIEF,gText_SurvivalChance333_Hmph,PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_STEVEN)
         goto(SurvivalChance333_PostBattle_Script)
 }
 
 script SurvivalChance333_PostBattle_Script {
     startcutscene(JUMPPLAYER_SURVIVALCHANCE333)
     setvar(VAR_FERRYBUILDING_STATE,DEFEATED_SURVIVAL_CHANCE_BATTLE)
-        msgbox(gText_SurvivalChance333_DoYouGetItNow,,SPEAKER_CHARLOTTE)
+        msgbox(format("Do you get it now? We're the real deal."),,SPEAKER_CHARLOTTE)
 
-
-        msgbox(gText_SurvivalChance333_YoureAPairOfKids,,SPEAKER_CHIEF)
+        msgbox(format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it."),,SPEAKER_CHIEF)
         closemessage
         setvar(VAR_HALAI_ISLAND_STATE,START_SURVIVAL_CHANCE)
         fadeblackandsetremovewarpfadeflag
@@ -105,14 +102,14 @@ script SurvivalChance333_PostBattle_Script {
 }
 
 script SurvivalChance333_MoveCameraFreeze_Script {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         setvar(VAR_0x8004, 38)
         setvar(VAR_0x8005, 11)
         special(TeleportCamera)
         delay(16)
         addobject(10)
         addobject(9)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(SurvivalChance333_FreezeIce)
 }
 
@@ -139,7 +136,7 @@ script SurvivalChance333_FreezeIce {
 }
 
 script SurvivalChance333_MoveCameraLava_Script {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         special(ReturnCameraToPlayer)
         setvar(VAR_0x8004, 12)
         setvar(VAR_0x8005, 8)
@@ -147,7 +144,7 @@ script SurvivalChance333_MoveCameraLava_Script {
         delay(16)
         addobject(12)
         addobject(11)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(SurvivalChance333_SetLava)
 }
 
@@ -191,34 +188,11 @@ script SurvivalChance333_ExplainOperation {
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
 
-        msgbox(gText_SurvivalChance333_SoThatsThePlan,,SPEAKER_CHIEF)
+        msgbox(format("So that's the plan. Any questions?"),,SPEAKER_CHIEF)
 
-        msgbox(gText_SurvivalChance333_OneProblemForUs,,SPEAKER_CHARLOTTE)
+        msgbox(format("NO sir."),,SPEAKER_POLICE)
 
-
-        msgbox(gText_SurvivalChance333_HereWeGo,,SPEAKER_CHIEF)
-
-        msgbox(gText_SurvivalChance333_IKnowWereSupposed,,SPEAKER_CHARLOTTE)
-
-
-        msgbox(gText_SurvivalChance333_OhHellThatsRight,,SPEAKER_CHIEF)
-        closemessage
-
-        applymovement(7,SurvivalChance333_GiveTM)
-        applymovement(8,SurvivalChance333_GiveTM)
-        waitmovement(0)
-        giveitem(ITEM_TM40)
-        closemessage
-
-        applymovement(7,SurvivalChance333_BackToPosition)
-        applymovement(8,SurvivalChance333_BackToPosition)
-        waitmovement(0)
-
-        msgbox(gText_SurvivalChance333_IAlwaysForget,,SPEAKER_CHIEF)
-
-        msgbox(gText_SurvivalChance333_NoSir,,SPEAKER_POLICE)
-
-        msgbox(gText_SurvivalChance333_LetsGetThisParty,,SPEAKER_CHIEF)
+        msgbox(format("Let's get this party started."),,SPEAKER_CHIEF)
         closemessage
         goto(SurvivalChance333_TacticalPlan_Cutscene_Script)
 }
@@ -226,21 +200,21 @@ script SurvivalChance333_ExplainOperation {
 script SurvivalChance333_TacticalPlan_Cutscene_Script {
     lock
         call(SurvivalChance333_MoveCameraFreeze_Script)
-        msgbox(gText_SurvivalChance333_ThoseRoutesFrozen,,SPEAKER_CHARLOTTE)
+        msgbox(format("Those routes frozen over seals off a water escape…"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
         call(SurvivalChance333_MoveCameraLava_Script)
-        msgbox(gText_SurvivalChance333_MeltingTheBedrock,,SPEAKER_CHARLOTTE)
+        msgbox(format("Melting the bedrock prevents an underground escape…"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         call(SurvivalChance333_SetUpRaidObject_Script)
         TeleportCamera(24,11)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        msgbox(gText_SurvivalChance333_TheyllBlowTheWall,,SPEAKER_CHARLOTTE)
+        msgbox(format("They'll blow the wall, and we'll dive in!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
@@ -254,12 +228,12 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
         waitstate
 
         call(SurvivalChance333_BlowOpenDoors)
-        msgbox(gText_SurvivalChance333_Showtime,,SPEAKER_CHARLOTTE)
+        msgbox(format("Showtime!"),,SPEAKER_CHARLOTTE)
 
         closemessage
 
         applymovement(4,SurvivalChance333_RunInsideA)
-        applymovement(5,SurvivalChance333_RunInsideB)
+        applymovement(5, moves(walk_right, walk_up, step_end))
         applymovement(6,SurvivalChance333_RunInsideA)
         applymovement(7,SurvivalChance333_RunInsideC)
         applymovement(8,SurvivalChance333_RunInsideC)
@@ -280,119 +254,6 @@ script SurvivalChance333_TacticalPlan_Cutscene_Script {
         end
 }
 
-text gText_SurvivalChance333_HeresThe {
-    format("Here's the fuckin' plan. We're gonna -")
-}
-
-text gText_SurvivalChance333_IsSomethingWrong {
-    format("Is something wrong Chief?")
-}
-
-text gText_SurvivalChance333_ISpent15Years {
-    format("First off, I spent 15 years in the military, dedicated my life to tactical warfare and I've never run a failed operation… and now somehow I'm doing the dirty work for some tech bros.")
-
-}
-text gText_SurvivalChance333_Next{
-    format("Next, I've got the same tech bros who won a contract for 'special defense operations in the public interest' telling me how to do my job...")
-}
-text gText_SurvivalChance333_Cherry{
-    format("And the cherry on top: I have to babysit two hotshots from nowhere as I try to infiltrate a terrorist organization.")
-}
-
-text gText_SurvivalChance333_WoahWerePlentyTough {
-    format("Woah, we're plenty tough! You don't need to babysit us!")
-}
-
-text gText_SurvivalChance333_IThinkCharlotteMissed{
-    format("I think Charlotte missed the point and only heard that last part...")
-}
-
-text gText_SurvivalChance333_RightKidsWithZero {
-    format("Right, kids with zero operations experience who battled some foot soldiers and Garbador are supposedly tactical masterminds?")
-}
-
-text gText_SurvivalChance333_HeyWeDidntAsk {
-    format("Hey, we didn't ask to be here! ")
-}
-
-text gText_SurvivalChance333_AndIDidntAsk {
-    format("And I didn't ask for you. But here we are.")
-}
-
-text gText_SurvivalChance333_IllProveIt {
-    format("I'll prove it then. Battle me.")
-}
-
-text gText_SurvivalChance333_WontEvenBeAFair {
-    format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed.")
-}
-
-text gText_SurvivalChance333_Hmph {
-    format("Hmph!")
-}
-
-text gText_SurvivalChance333_DoYouGetItNow {
-    format("Do you get it now? We're the real deal.")
-}
-
-text gText_SurvivalChance333_YoureAPairOfKids {
-    format("…look. You're a pair of kids that are in way over your heads, with absolutely no place in a police raid. But I'm stuck with you, and you're both obviously tough as all hell. Let's make the most of it.")
-
-}
-text gText_SurvivalChance333_SoThatsThePlan {
-    format("So that's the plan. Any questions?")
-}
-
-text gText_SurvivalChance333_OneProblemForUs {
-    format("One problem for us.")
-}
-
-text gText_SurvivalChance333_HereWeGo {
-    format("Here we go… what?")
-}
-
-text gText_SurvivalChance333_IKnowWereSupposed {
-    format("I know we're supposed to blast the walls to drive out the TheTide members, but {PLAYER} and I don't have the Self-Destruct TM.")
-}
-
-text gText_SurvivalChance333_OhHellThatsRight {
-    format("Oh hell, that's right. Not your fault. Marcus, Phillip, give ‘em yours.")
-}
-
-text gText_SurvivalChance333_IAlwaysForget {
-    format("I always forget - we took those out of circulation in Resido a few years ago. Criminals were using them for too many smash and grabs, so now they're for police use only. Any other questions?")
-
-}
-text gText_SurvivalChance333_NoSir {
-    format("NO sir.")
-}
-
-text gText_SurvivalChance333_LetsGetThisParty {
-    format("Let's get this party started.")
-}
-
-text gText_SurvivalChance333_ThoseRoutesFrozen {
-    format("Those routes frozen over seals off a water escape…")
-}
-
-text gText_SurvivalChance333_MeltingTheBedrock {
-    format("Melting the bedrock prevents an underground escape…")
-}
-
-text gText_SurvivalChance333_TheyllBlowTheWall {
-    format("They'll blow the wall, and we'll dive in!")
-}
-
-text gText_SurvivalChance333_Showtime {
-    format("Showtime!")
-}
-
-movement SurvivalChance333_WalkToChief {
-    walk_right
-        walk_up * 2
-        step_end
-}
-
 movement SurvivalChance333_GiveTM{
     walk_down * 2
         face_left
@@ -409,11 +270,7 @@ movement SurvivalChance333_RunInsideA {
     walk_up
         step_end
 }
-movement SurvivalChance333_RunInsideB {
-    walk_right
-        walk_up
-        step_end
-}
+
 movement SurvivalChance333_RunInsideC {
     walk_left
         walk_up

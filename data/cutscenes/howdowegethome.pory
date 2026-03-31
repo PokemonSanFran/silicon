@@ -1,17 +1,10 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CAMERA = OBJ_EVENT_ID_CAMERA
-const ADAORA = 1
-const KEIYING = 21
-const JULIUS = 7
-const MADISON = 6
-const FLAG_HIDE_ADAORA_KEIYING = FLAG_TEMP_1
-const FLAG_HIDE_MADISON = FLAG_TEMP_2
-const FLAG_HIDE_CROWD = FLAG_TEMP_5
 
 script HowDoWeGetHome_PostSceneObjectCleanUp_Script{
-    if (var(VAR_CURENO_PORT_STATE) > PRE_HOW_DO_WE_GET_HOME){
-        setflag(FLAG_HIDE_MADISON)
-        setflag(FLAG_HIDE_ADAORA_KEIYING)
+    if (var(VAR_CURENO_PORT_STATE) > PRE_HOW_DO_WE_GET_HOME)
+    {
+        setobjectflagfromlocalid(LOCALID_CURENO_MADISON)
+        setobjectflagfromlocalid(LOCALID_CURENO_KEI_YING)
         setobjectmovementtype(14,MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
         setobjectmovementtype(3,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
         setobjectmovementtype(11,MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
@@ -22,16 +15,16 @@ script HowDoWeGetHome_PostSceneObjectCleanUp_Script{
         setobjectmovementtype(5,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
         setobjectmovementtype(9,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
         setobjectmovementtype(13,MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-        setobjectmovementtype(JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+        setobjectmovementtype(LOCALID_CURENO_JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     }
     return
 }
 
 script HowDoWeGetHome_FerryFixed_Script{
     if (var(VAR_STORYLINE_STATE) > STORY_WEST_RESIDO_COMPLETE){
-        setflag(FLAG_HIDE_MADISON)
-        setflag(FLAG_HIDE_CROWD)
-        setflag(FLAG_HIDE_ADAORA_KEIYING)
+        setobjectflagfromlocalid(LOCALID_CURENO_CROWDWOMAN)
+        setobjectflagfromlocalid(LOCALID_CURENO_KEI_YING)
+        setobjectflagfromlocalid(LOCALID_CURENO_MADISON)
     }
     return
 }
@@ -41,38 +34,39 @@ script HowDoWeGetHome_YellingDistance_Dialogue{
         locktarget
         startcutscene(JUMPPLAYER_HOWDOWEGETHOME)
 
-        msgbox(gText_HowDoWeGetHome_LookWeDontWant,,SPEAKER_JULIUS)
-        msgbox(gText_HowDoWeGetHome_OrJustLeave,,SPEAKER_MADISON)
+        msgbox(format("Are you telling me our kids can't play here?! This is the only park in town!"),,SPEAKER_JULIUS)
+        msgbox(format("All I'm saying is, this park isn't for... you. And I don't want my little angels playing with your loser kids!"),,SPEAKER_MADISON)
         closemessage
 
         applymovement(PLAYER,Common_Movement_WalkLeft)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         waitmovement(PLAYER)
         setobjectxy(PLAYER,7,22)
         turnobject(PLAYER,DIR_WEST)
         TeleportCamera(7,22)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        playbgm(MUS_WELCOME_TO_THE_WAR_ROOM,FALSE)
 
-        msgbox(gText_HowDoWeGetHome_LosersYouWannaSay,,SPEAKER_JULIUS)
-        msgbox(gText_HowDoWeGetHome_YouThinkYouScareMe,,SPEAKER_MADISON)
+        msgbox(format("Losers? You wanna say that shit to my face?"),,SPEAKER_JULIUS)
+        msgbox(format("Absolutely. You think you scare me, pretty boy? I'll rearrange your face!"),,SPEAKER_MADISON)
         closemessage
         goto(HowDoWeGetHome_AdaoraGetsInvolved_Dialogue)
 }
 script HowDoWeGetHome_AdaoraGetsInvolved_Dialogue {
 
-        applymovement(KEIYING,HowDoWeGetHome_LeaveFight_Movement)
-        applymovement(ADAORA,Common_Movement_FaceLeft)
-        waitmovement(ADAORA)
+        applymovement(LOCALID_CURENO_KEI_YING,HowDoWeGetHome_LeaveFight_Movement)
+        applymovement(LOCALID_CURENO_ADAORA,Common_Movement_FaceLeft)
+        waitmovement(LOCALID_CURENO_ADAORA)
 
-        msgbox(gText_HowDoWeGetHome_YoChillOut,,SPEAKER_ADAORA)
+        msgbox(format("Hey!"),,SPEAKER_ADAORA)
 
         closemessage
 
         call(HowDoWeGetHome_AdaoraEntrance_Script)
-        msgbox(gText_HowDoWeGetHome_WereDoneWithThisBeef,,SPEAKER_ADAORA)
+        msgbox(format("This ends now. Lady, this park doesn't belong to you. These people are gonna play in it, just like you. These parks are for the public. Is that going to be a problem?"),,SPEAKER_ADAORA)
 
-        msgbox(gText_HowDoWeGetHome_ShouldntIMessYou,,SPEAKER_MADISON)
-        msgbox(gText_HowDoWeGetHome_TheWayYouThinkItIs,,SPEAKER_ADAORA)
+        msgbox(format("Yes it is a problem! Why the hell shouldn't I mess you up too?"),,SPEAKER_MADISON)
+        msgbox(format("That's not going to go the way you think it is."),,SPEAKER_ADAORA)
 
         goto(HowDoWeGetHome_CrowdRecgonizesAdaora_Dialogue)
 }
@@ -81,45 +75,46 @@ script HowDoWeGetHome_CrowdRecgonizesAdaora_Dialogue {
     applymovement(14,Common_Movement_FaceDown)
         applymovement(3,Common_Movement_FaceUp)
         applymovement(11,Common_Movement_FaceLeft)
-        msgbox(gText_HowDoWeGetHome_IThinkThats,,SPEAKER_STRANDED_A)
+        msgbox(format("I think that's Adaora, right? The The Tide Admin?"),,SPEAKER_STRANDED_A)
         applymovement(2,Common_Movement_FaceRight)
         applymovement(12,Common_Movement_FaceLeft)
         applymovement(4,Common_Movement_FaceRight)
         applymovement(10,Common_Movement_FaceLeft)
-        msgbox(gText_HowDoWeGetHome_BetterBackDown,,SPEAKER_RESIDENT_E)
+        msgbox(format("Yeah, Madison better back down."),,SPEAKER_RESIDENT_E)
         applymovement(5,Common_Movement_FaceDown)
-        msgbox(gText_HowDoWeGetHome_ThreeTrainersAtOnce,,SPEAKER_RESIDENT_F)
+        msgbox(format("Dude, I'm pretty sure they took down three trainers at once a few weeks ago."),,SPEAKER_RESIDENT_F)
         applymovement(13,Common_Movement_FaceDown)
         applymovement(9,Common_Movement_FaceUp)
-        msgbox(gText_HowDoWeGetHome_Worldstar,,SPEAKER_RESIDENT_B)
+        msgbox(format("Worldstarrrrrr!"),,SPEAKER_RESIDENT_B)
         closemessage
         goto(HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue)
 }
 
 script HowDoWeGetHome_MadisonHowDoWeGetHome_Dialogue {
-    applymovement(MADISON,Common_Movement_LookAround)
+    applymovement(LOCALID_CURENO_MADISON,Common_Movement_LookAround)
         waitmovement(0)
-        applymovement(MADISON,Common_Movement_FaceDown)
+        applymovement(LOCALID_CURENO_MADISON,Common_Movement_FaceDown)
         waitmovement(0)
-        msgbox(gText_HowDoWeGetHome_YouKnowWhatWhatever,,SPEAKER_MADISON)
+        msgbox(format("...Actually you know what, whatever."),,SPEAKER_MADISON)
         closemessage
-        applymovement(MADISON,HowDoWeGetHome_Madison_LeaveFight_Movement)
-        applymovement(PLAYER,HowDoWeGetHome_MoveOutOfWay_Movement)
+        applymovement(LOCALID_CURENO_MADISON, moves(walk_down * 2, walk_right * 13, step_end))
+        applymovement(PLAYER, moves(walk_left, walk_down, face_up, step_end))
         delay(120)
-        applymovement(ADAORA,Common_Movement_LookAround)
-        waitmovement(ADAORA)
-        applymovement(ADAORA,HowDoWeGetHome_LeaveFight_Movement)
+        applymovement(LOCALID_CURENO_ADAORA,Common_Movement_LookAround)
+        waitmovement(LOCALID_CURENO_ADAORA)
+        applymovement(LOCALID_CURENO_ADAORA,HowDoWeGetHome_LeaveFight_Movement)
         delay(60)
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         delay(60)
-        removeobject(MADISON)
-        removeobject(ADAORA)
-        removeobject(KEIYING)
+        removeobject(LOCALID_CURENO_MADISON)
+        removeobject(LOCALID_CURENO_ADAORA)
+        removeobject(LOCALID_CURENO_KEI_YING)
         call(HowDoWeGetHome_SetCrowdMovementType_Script)
         call(HowDoWeGetHome_SetCrowdNewMovementType_Script)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         addvar(VAR_STORYLINE_STATE,1)
         setvar(VAR_TEMP_0,0)
+        fadedefaultbgm
         call(TryAutoSave)
         call(AaandWereBack_Monologue)
         releaseall
@@ -141,10 +136,10 @@ script HowDoWeGetHome_AdaoraEntrance_Script{
         applymovement(4,HowDoWeGetHome_ExclaimUp)
         applymovement(12,HowDoWeGetHome_ExclaimUp)
         applymovement(10,HowDoWeGetHome_ExclaimUp)
-        applymovement(ADAORA,HowDoWeGetHome_WalkIntoFight_Movement)
+        applymovement(LOCALID_CURENO_ADAORA, moves(walk_left * 5, face_up, step_end))
         waitmovement(0)
-        applymovement(MADISON,Common_Movement_FaceDown)
-        applymovement(JULIUS,Common_Movement_FaceDown)
+        applymovement(LOCALID_CURENO_MADISON,Common_Movement_FaceDown)
+        applymovement(LOCALID_CURENO_JULIUS,Common_Movement_FaceDown)
         waitmovement(0)
 }
 
@@ -159,7 +154,7 @@ script HowDoWeGetHome_SetCrowdNewMovementType_Script{
     setobjectnewmovementtype(5,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     setobjectnewmovementtype(9,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     setobjectnewmovementtype(13,MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-    setobjectnewmovementtype(JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
+    setobjectnewmovementtype(LOCALID_CURENO_JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
 }
 
 script HowDoWeGetHome_SetCrowdMovementType_Script{
@@ -173,79 +168,7 @@ script HowDoWeGetHome_SetCrowdMovementType_Script{
     setobjectmovementtype(5,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     setobjectmovementtype(9,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
     setobjectmovementtype(13,MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
-    setobjectmovementtype(JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
-}
-
-text gText_HowDoWeGetHome_LookWeDontWant
-{
-    format("Are you telling me our kids can't play here?! This is the only park in town!")
-}
-
-text gText_HowDoWeGetHome_OrJustLeave
-{
-    format("All I'm saying is, this park isn't for... you. And I don't want my little angels playing with your loser kids!")
-}
-
-text gText_HowDoWeGetHome_LosersYouWannaSay
-{
-    format("Losers? You wanna say that shit to my face?")
-}
-
-text gText_HowDoWeGetHome_YouThinkYouScareMe
-{
-    format("Absolutely. You think you scare me, pretty boy? I'll rearrange your face!")
-}
-
-text gText_HowDoWeGetHome_YoChillOut
-{
-    format("Hey!")
-}
-
-text gText_HowDoWeGetHome_WereDoneWithThisBeef
-{
-    format("This ends now. Lady, this park doesn't belong to you. These people are gonna play in it, just like you. These parks are for the public. Is that going to be a problem?")
-}
-
-text gText_HowDoWeGetHome_ShouldntIMessYou
-{
-    format("Yes it is a problem! Why the hell shouldn't I mess you up too?")
-}
-
-text gText_HowDoWeGetHome_TheWayYouThinkItIs
-{
-    format("That's not going to go the way you think it is.")
-}
-
-text gText_HowDoWeGetHome_IThinkThats
-{
-    format("I think that's Adaora, right? The The Tide Admin?")
-}
-
-text gText_HowDoWeGetHome_BetterBackDown
-{
-    format("Yeah, Madison better back down.")
-}
-
-text gText_HowDoWeGetHome_ThreeTrainersAtOnce
-{
-    format("Dude, I'm pretty sure they took down three trainers at once a few weeks ago.")
-}
-
-text gText_HowDoWeGetHome_Worldstar
-{
-    format("Worldstarrrrrr!")
-}
-
-text gText_HowDoWeGetHome_YouKnowWhatWhatever
-{
-    format("...Actually you know what, whatever.")
-}
-
-movement HowDoWeGetHome_WalkIntoFight_Movement
-{
-    walk_left * 5
-        face_up
-        step_end
+    setobjectmovementtype(LOCALID_CURENO_JULIUS,MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT)
 }
 
 movement HowDoWeGetHome_ExclaimDown
@@ -271,13 +194,6 @@ movement HowDoWeGetHome_LeaveFight_Movement
     step_end
 }
 
-movement HowDoWeGetHome_Madison_LeaveFight_Movement
-{
-    walk_down * 2
-    walk_right * 13
-    step_end
-}
-
 movement HowDoWeGetHome_MovePlayerOffPath_South
 {
     walk_right
@@ -292,10 +208,3 @@ movement HowDoWeGetHome_MovePlayerOffPath_North
     step_end
 }
 
-movement HowDoWeGetHome_MoveOutOfWay_Movement
-{
-    walk_left
-    walk_down
-    face_up
-    step_end
-}

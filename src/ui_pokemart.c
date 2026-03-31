@@ -51,9 +51,6 @@
 // constants
 #define MART_KEEPER_ICON    FALSE // PSF TODO disable/remove related code if we decide to deprecate this
 
-#define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
-#define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
-
 #define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(14) + 0) + 4)
 #define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS( 1) + 0) + 8)
 

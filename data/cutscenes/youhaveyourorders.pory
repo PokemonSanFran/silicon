@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,7 +11,7 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -21,15 +21,14 @@ script YouHaveYourOrders_ObjectSetUp_Script
         setobjectxyperm(CHIEF,34,53)
         setobjectmovementtype(CHIEF,MOVEMENT_TYPE_FACE_DOWN)
 
-        setobjectxy(ADELAIDE,35,56)
-        setobjectxyperm(ADELAIDE,35,56)
-        setobjectmovementtype(ADELAIDE,MOVEMENT_TYPE_FACE_UP)
+        setobjectxy(LUCREZIA,35,56)
+        setobjectxyperm(LUCREZIA,35,56)
+        setobjectmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_UP)
 
         setobjectxy(CHARLOTTE,33,53)
         setobjectxyperm(CHARLOTTE,33,53)
         setobjectmovementtype(CHARLOTTE,MOVEMENT_TYPE_FACE_DOWN)
 }
-
 
 script YouHaveYourOrders_Interact_Keiying_Script
 {
@@ -45,13 +44,13 @@ script YouHaveYourOrders_Interact_Keiying_Script
 
 script YouHaveYourOrders_ActiveQuest_Dialogue
 {
-    msgbox(gText_YouHaveYourOrders_ICouldGoShut,MSGBOX_NPC)
+    msgbox(format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create."),MSGBOX_NPC)
     end
 }
 
 script YouHaveYourOrders_CompleteQuest_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,MSGBOX_NPC)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),MSGBOX_NPC)
     end
 }
 
@@ -71,16 +70,16 @@ script YouHaveYourOrders_Assignment_Dialogue
         case FALSE_TIMELINE_BURN_COMPLETE:
           msgbox(format("Not sure, actually. But I'm pretty sure I can handle it."),,SPEAKER_ALICIA)
         case FALSE_TIMELINE_MAN_COMPLETE:
-            msgbox(format("Without Alcmene, whatever this is should be easy, right?"),,SPEAKER_ALICIA)
+            msgbox(format("Without Vigrim, whatever this is should be easy, right?"),,SPEAKER_ALICIA)
         case FALSE_TIMELINE_MAN_BURN_COMPLETE:
             msgbox(format("The work I did with Ramesh and Oliver was... tough. But I know I can handle this. Let's hear it."),,SPEAKER_ALICIA)
       }
     closemessage
 
-    applymovement(KEIYING,YouHaveYourOrders_PaceInOffice)
+    applymovement(KEIYING, moves(walk_left * 2, walk_right * 2, walk_left * 2, walk_right * 2, face_player))
     waitmovement(0)
 
-    msgbox(format("Law enforcement has confirmed the old Gyms have been repurposed as TheTide recruitment and training centers.The city has loaned us enough officers to perform three simultaneous raids."),,SPEAKER_KEIYING)
+    msgbox(format("Law enforcement has confirmed the old Gyms have been repurposed as The Tide recruitment and training centers.The city has loaned us enough officers to perform three simultaneous raids."),,SPEAKER_KEIYING)
 
     msgbox(format("Why all at once?"),,SPEAKER_ALICIA)
 
@@ -122,7 +121,7 @@ script YouHaveYourOrders_Assignment_Dialogue
 
         msgbox(format("You were a Gym Leader?"),,SPEAKER_ALICIA)
 
-        msgbox(format("It was one of my greatest accomplishments. But when SharpriseCapital came along and I saw them beginning to usher in a new age for the region, I knew I wanted to help them. I made sure I was absolutely invaluable to them, and that's how I ended up in this spot now."),,SPEAKER_KEIYING)
+        msgbox(format("It was one of my greatest accomplishments. But when SharpRise Capital came along and I saw them beginning to usher in a new age for the region, I knew I wanted to help them. I made sure I was absolutely invaluable to them, and that's how I ended up in this spot now."),,SPEAKER_KEIYING)
 
         msgbox(format("Was that hard?"),,SPEAKER_ALICIA)
 
@@ -131,14 +130,14 @@ script YouHaveYourOrders_Assignment_Dialogue
         applymovement(KEIYING,Common_Movement_FaceDown)
         waitmovement(0)
 
-      msgbox(gText_YouHaveYourOrders_ICouldGoShut,,SPEAKER_KEIYING)
+      msgbox(format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create."),,SPEAKER_KEIYING)
 
       msgbox(format("Hopefully, you can accomplish what I can't bring myself to do."),,SPEAKER_KEIYING)
 
         startquest(QUEST_HOWDISAPPOINTING)
 
         buffermapname(STR_VAR_1,MAP_HODOU_CITY)
-    msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+    msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
         endcutscene
         if (var(VAR_RESULT)){
         fadeblackandsetremovewarpfadeflag
@@ -156,21 +155,3 @@ script YouHaveYourOrders_GymQuestionDialogue{
     return
 }
 
-movement YouHaveYourOrders_PaceInOffice {
-    walk_left * 2
-    walk_right * 2
-    walk_left * 2
-    walk_right * 2
-    face_player
-}
-
-
-text gText_YouHaveYourOrders_ICouldGoShut
-{
-    format("I could go shut down that Gym, but I'm a coward. I don't have the Nuggets to go and destroy what I helped create.")
-}
-
-text gText_YouHaveYourOrders_DoYouWantTo
-{
-    format("Do you want to go to {STR_VAR_1}?")
-}

@@ -135,7 +135,7 @@ Arcademini: No no… forget I mentioned it.
 Arcademini: We used to be a vibrant community of people that played games like this. 
 Arcademini: Building scenes like this was my pride and joy! 
 Arcademini: I created all of this myself - the lighting, the wiring, the sounds - all on my own. And this pales in comparison to what I was able to do before...
-Arcademini: Sadly, our meeting space in Meremeza was purchased and converted into Sharp Rise offices early last year, leaving us adrift.  
+Arcademini: Sadly, our meeting space in Meremeza was purchased and converted into Sharprise offices early last year, leaving us adrift.  
 Player: This was a great reminder of what once was. I hope I can rebuild that community again.  
 Arcademini: Please, return whenever you please, Lord PLAYER.  
 `QUEST_ARCADEMINI` completes.

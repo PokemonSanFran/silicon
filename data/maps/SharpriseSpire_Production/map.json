@@ -2,7 +2,7 @@
   "id": "MAP_SHARPRISE_SPIRE_PRODUCTION",
   "name": "SharpriseSpire_Production",
   "layout": "LAYOUT_SHARPRISE_SPIRE_PRODUCTION",
-  "music": "MUS_RG_SILPH",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_SHARPRISESPIRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

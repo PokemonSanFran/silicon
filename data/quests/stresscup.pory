@@ -1,0 +1,183 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+const STRESSCUPORGNANIZER = LOCALID_STRESSCUPORGNANIZER
+const FLAG_HIDE_STRESSCUPORGNANIZER = FLAG_TEMP_7
+const ITEM_STRESSCUP = ITEM_POTION
+
+// https://hackmd.io/sTWKSalsQVqKngA_lgfjyA
+
+script StressCup_Script_HideStresscuporganizer
+{
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_5)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+    setflag(FLAG_HIDE_STRESSCUPORGNANIZER)
+}
+
+script StressCup_Script_CheckQuestState
+{
+    lock
+    returnqueststate(QUEST_STRESSCUP)
+    switch(var(VAR_RESULT))
+    {
+        default: goto(StressCup_Dialogue_InteractQuestInactive)
+        case QUEST_MENU_SET_ACTIVE: goto(StressCup_Script_InteractQuestActive)
+        case QUEST_MENU_SET_REWARD: goto(StressCup_Script_InteractReward)
+        case QUEST_MENU_COMPLETE_QUEST: goto(StressCup_Script_InteractComplete)
+    }
+    releaseall
+    end
+}
+
+script StressCup_Dialogue_InteractQuestInactive
+{
+    faceplayer
+    msgbox(format("“Come to the beach” they said. “It'll be relaxing!” they said..."),,SPEAKER_STRESSCUPORGANIZER,TAIL_WHISPER,EMOTE_ANGRY)
+    msgbox(format("Oh. What's up?"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("My partner told me to come here to feel at peace. All I can feel is a buncha sand in my bu-"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Uh - I used to do, uh...Tournament organizing. I even worked with the League. But my job doesn't exist anymore, not since SharpRise moved in. This is my vacation, I guess."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("You don't sound thrilled about it."),,SPEAKER_ALICIA)
+    msgbox(format("My job was exhausting...Stressful...Gave me many a sleepless night."),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    delay(60)
+    msgbox(format("I loved it. I need it back."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Everything's been boring since then."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("I just wanna {COLOR RED}feel{COLOR DARK_GRAY} something again, y'know?"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("...Say, don't suppose you'd be down to help me, wouldja?"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("I'm not doing anything about that sand, if that's what you're asking."),,SPEAKER_ALICIA)
+    msgbox(format("Don't be cute with me, I'm talking about battle!"),MSGBOX_YESNO,SPEAKER_STRESSCUPORGANIZER)
+
+    if (var(VAR_RESULT) == YES)
+    {
+        startquest(QUEST_STRESSCUP)
+        goto(StressCup_Script_InteractQuestActive)
+    }
+    else
+    {
+        msgbox(format("I'll figure something out myself then."),,SPEAKER_STRESSCUPORGANIZER)
+        closemessage
+        end
+    }
+}
+
+script StressCup_Script_LoadStressCupParty
+{
+    special(SavePlayerParty)
+    setflag(FLAG_DISABLE_SCALING)
+    setflag(B_FLAG_NO_WHITEOUT)
+    callnative(StressCup_GivePlayerParty)
+}
+
+script StressCup_Script_PrepParty
+{
+    frontier_set(FRONTIER_DATA_LVL_MODE,FRONTIER_LVL_OPEN)
+    setvar(VAR_0x8005,4)
+    special(ChoosePartyForBattleFrontier)
+    waitstate
+    if(var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
+    {
+        msgbox(format("Pick four Pokemon to battle with. That's how my tournaments ran!"),,SPEAKER_STRESSCUPORGANIZER)
+        goto(StressCup_Script_PrepParty)
+    }
+    dome_reduceparty
+}
+
+script StressCup_Script_InteractQuestActive
+{
+    call(StressCup_Script_LoadStressCupParty)
+    msgbox(format("I'm gonna give you some Pokemon to battle with, alright? This is all part of the process."),MSGBOX_NPC,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    cueobjectplayer(STRESSCUPORGNANIZER)
+    msgbox(format("Pick four of those Pokemon to battle with. That's how my tournaments ran!"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("You'll notice that this ain't gonna be quite as easy as your standard, every day battle."),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    call(StressCup_Script_PrepParty)
+    msgbox(format("Good luck! Heh heh, you're really gonna need it!"),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+// PSF TODO Player loss text: Damn, couldn't hang? Gotta say I'm a little disappointed.
+    trainerbattle_no_intro(TRAINER_STRESSCUPORGNANIZER,format("Woo! Oh yeah, that's what I've been missing!"))
+    call(StressCup_Script_RestoreParty)
+    goto(StressCup_Dialogue_Battle2)
+}
+
+script StressCup_Dialogue_Battle2
+{
+    msgbox(format("Well done! You really pulled that one out of the bag!"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Are ya starting to understand the thrill of a good ol' high-risk high-reward battle?"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Heh, what do you mean starting?"),,SPEAKER_ALICIA)
+    msgbox(format("Ha! That's the attitude! But we're not done yet! Not by a long shot!"),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Let's run it back. But this time we're gonna really live life on the edge."),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    cueobjectplayer(STRESSCUPORGNANIZER)
+    msgbox(format("I'm not sure I can live on the edge quite as long as this guy..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    closemessage
+// PSF TODO Loss text
+// Pressure. That's what it really feels like.
+    call(StressCup_Script_LoadStressCupParty)
+    call(StressCup_Script_PrepParty)
+    trainerbattle_no_intro(TRAINER_STRESSCUPORGNANIZER,format("Phew. You've got nerves of steel."))
+    call(StressCup_Script_RestoreParty)
+    goto(StressCup_Dialogue_FinishBattles)
+}
+
+script StressCup_Script_RestoreParty
+{
+    lock
+    clearflag(FLAG_DISABLE_SCALING)
+    special(LoadPlayerParty)
+    call(StressCup_Script_EndQuestIfPlayerLost)
+}
+
+script StressCup_Dialogue_FinishBattles
+{
+    msgbox(format("Man, I feel great! I haven't felt this good in a while!"),,SPEAKER_STRESSCUPORGANIZER,,EMOTE_HAPPY)
+    msgbox(format("I'm glad you enjoyed it! Gotta be honest I was just playing along. What's so enjoyable about a battle like that?"),,SPEAKER_ALICIA)
+    msgbox(format("You don't like the adrenaline? Leaving it all up to chance? I guess it's not for everyone, but man I used to live for chaos like that."),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_STRESSCUP)
+    goto(StressCup_Script_InteractReward)
+}
+
+script StressCup_Script_InteractReward
+{
+    faceplayer
+    checkitemspace(ITEM_STRESSCUP,1)
+    goto_if_eq(VAR_RESULT,FALSE,StressCup_Dialogue_NotEnoughSpace)
+    cueobjectplayer(STRESSCUPORGNANIZER)
+    giveitem(ITEM_STRESSCUP,1)
+    completequest(QUEST_STRESSCUP)
+}
+
+
+script StressCup_Dialogue_NotEnoughSpace
+{
+    msgbox(format("Well, hey, I've got something for ya anyway."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Make some room in your bag, 'kay?"),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+    release
+    end
+}
+
+script StressCup_Script_InteractComplete
+{
+    msgbox(format("Hoo, after that high I can finally feel a calm. Like a real, real calm."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("Maybe the beach isn't so bad, y'know? I'd still rather be working."),,SPEAKER_STRESSCUPORGANIZER)
+    msgbox(format("In some high-execution, high-stress work environment...Ah, that's the life..."),,SPEAKER_STRESSCUPORGANIZER)
+    closemessage
+}
+
+script StressCup_Script_EndQuestIfPlayerLost
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    if (var(VAR_RESULT) != B_OUTCOME_LOST)
+    {
+        return
+    }
+
+    msgbox(format("That was a good taste... but it wasn't QUITE there, you know?"),,SPEAKER_STRESSCUPORGANIZER)
+        msgbox(format("I'd love to get the blood pumping again sometime!"),,SPEAKER_STRESSCUPORGANIZER)
+        closemessage
+        release
+        end
+}
