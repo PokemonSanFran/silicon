@@ -531,17 +531,16 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
     // Start flyEncounters
     [BATTLE_ENVIRONMENT_SKY_BATTLE] =
     {
+        .name = _("Skt"),
         .naturePower = MOVE_AIR_SLASH,
+        .secretPowerAnimation = gBattleAnimMove_Gust,
         .secretPowerEffect = MOVE_EFFECT_SPD_MINUS_1,
         .camouflageType = TYPE_FLYING,
-        .background =
-        {
-            .tileset = gBattleEnvironmentTiles_Rayquaza,
-            .tilemap = gBattleEnvironmentTilemap_Rayquaza,
-            .entryTileset = gBattleEnvironmentAnimTiles_Rayquaza,
-            .entryTilemap = gBattleEnvironmentAnimTilemap_Rayquaza,
-            .palette = gBattleEnvironmentPalette_Rayquaza,
-        },
+        .camouflageBlend = DEFAULT_CAMOUFLAGE_BLEND,
+        .entry = ENVIRONMENT_ENTRY(Rayquaza),
+        .background = ENVIRONMENT_BACKGROUND(Rayquaza),
+        .palette = gBattleEnvironmentPalette_Rayquaza,
+        .battleIntroSlide = PLAIN_BATTLE_INTRO_SLIDE,
     },
     // End flyEncounters
 };

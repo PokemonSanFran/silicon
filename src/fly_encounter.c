@@ -119,7 +119,7 @@ static void Task_FlyEncounterMessage(u8 taskId)
             task->data[0]++;
             break;
         case 1:
-            if (IsTextPrinterActive(0) || (!JOY_NEW(A_BUTTON)))
+            if (IsTextPrinterActiveOnWindow(0) || (!JOY_NEW(A_BUTTON)))
                 return;
 
             HideFieldMessageBox();
@@ -185,22 +185,25 @@ void TryFlyWildEncounter(u8 taskId, void* callback2, void* fieldCallback)
     gTasks[taskId].data[1] = encounterType;
 }
 
-bool8 IfSkyBattleAndOverworldTerrain(enum FieldEffectCases caseId, enum StartingStatus status)
+bool8 IfSkyBattleAndOverworldTerrain(enum FieldEffectCases caseId, struct StartingStatuses startingStatus)
 {
+    if (!FlagGet(B_FLAG_SKY_BATTLE))
+        return FALSE;
+
     if ((caseId != FIELD_EFFECT_OVERWORLD_TERRAIN) && (caseId != FIELD_EFFECT_TRAINER_STATUSES))
         return FALSE;
 
-    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
-        if (status == STARTING_STATUS_TRICK_ROOM)
-            return FALSE;
+    if (startingStatus.electricTerrain == TRUE)
+        return TRUE;
 
-    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
-        if (status == STARTING_STATUS_MAGIC_ROOM)
-            return FALSE;
+    if (startingStatus.mistyTerrain == TRUE)
+        return TRUE;
 
-    if (caseId == FIELD_EFFECT_TRAINER_STATUSES)
-        if (status == STARTING_STATUS_WONDER_ROOM)
-            return FALSE;
+    if  (startingStatus.grassyTerrain == TRUE)
+        return TRUE;
 
-    return (FlagGet(B_FLAG_SKY_BATTLE));
+    if (startingStatus.psychicTerrain == TRUE)
+        return TRUE;
+
+    return FALSE;
 }

@@ -2673,7 +2673,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;
 
-    if (IfSkyBattleAndOverworldTerrain(caseId, ((enum StartingStatus) gBattleStruct->startingStatus)))
+    if (IfSkyBattleAndOverworldTerrain(caseId, gStartingStatuses))
         return FALSE;
 
     switch (caseId)
