@@ -79,6 +79,7 @@ u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
 u8 GetEncounterLevelFromMapData(u16 species, enum EncounterType environment); // phenomenon
 bool32 OnStep_DexNavSearch(void);
+void CB2_DexNavFromStartMenu(void); // dexNav
 
 extern u16 gDexNavSpecies;
 

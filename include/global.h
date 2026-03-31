@@ -350,9 +350,14 @@ struct SaveBlock3
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
     u8 itemFlags[ITEM_FLAGS_COUNT];
 #endif
+    // Start dexNav
+    /*
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    u8 dexNavSearchLevels[NUM_SPECIES];
+    //u8 dexNavSearchLevels[NUM_SPECIES];
+    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
 #endif
+    */
+    // End dexNav
     u8 dexNavChain;
     u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
     u8 lastGrottoId;
@@ -721,6 +726,11 @@ struct SaveBlock2
     u8 optionsRandom[NUM_OPTIONS_RANDOM_SETTINGS];
     struct Buzzr buzzr; //Buzzr Branch
 	// End siliconMerge
+	// Start dexNav
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
+	// End dexNav
+#endif
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

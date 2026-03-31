@@ -59,6 +59,8 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
+#include "ui_pokedex.h" // dexNav
+#include "ui_start_menu.h" // dexNav
 
 #if DEXNAV_ENABLED
 STATIC_ASSERT(DN_FLAG_SEARCHING != 0, DNFlagSearching_Must_Not_Be_Zero);
@@ -779,6 +781,8 @@ static void LoadSearchIconData(void)
     LoadCompressedSpriteSheetUsingHeap(&sHiddenMonIconSpriteSheet);
 }
 
+// Start dexNav
+/*
 static u8 GetSearchLevel(u16 species)
 {
     u8 searchLevel;
@@ -789,6 +793,12 @@ static u8 GetSearchLevel(u16 species)
 #endif
     return searchLevel;
 }
+*/
+static u8 GetSearchLevel(u16 species)
+{
+    return gSaveBlock2Ptr->dexNavSearchLevels[species];
+}
+// End dexNav
 
 static void SetUpDexNavSearch(void)
 {
@@ -2320,7 +2330,10 @@ void Task_OpenDexNavFromStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        DexNavGuiInit(CB2_ReturnToFieldWithOpenMenu);
+        // Start dexNav
+        //DexNavGuiInit(CB2_ReturnToFieldWithOpenMenu);
+        DexNavGuiInit(CB2_StartMenu_ReturnToUI);
+        // End dexNav
         DestroyTask(taskId);
     }
 }
@@ -2662,6 +2675,8 @@ u32 CalculateDexNavShinyRolls(void)
     return chainBonus + rndBonus;
 }
 
+// Start dexNav
+/*
 void TryIncrementSpeciesSearchLevel()
 {
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
@@ -2669,6 +2684,14 @@ void TryIncrementSpeciesSearchLevel()
         gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies]++;
 #endif
 }
+*/
+
+void TryIncrementSpeciesSearchLevel()
+{
+    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
+        gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies]++;
+}
+// End dexNav
 
 void ResetDexNavSearch(void)
 {
