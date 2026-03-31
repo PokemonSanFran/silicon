@@ -3,7 +3,7 @@ mapscripts Route100_MapScripts
 	MAP_SCRIPT_ON_TRANSITION
 	{
 		call(Quest_ArtisanBalls2_CheckTrainerC_Script)
-			call(EnterTheMaster_LeaverraForest_Entrance_ObjectSetup_Script)
+		call_if_ne(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_WAITING_LEAVERRA_FOREST,EnterTheMaster_Script_HideCharlotteEntrance)
 			call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
 	}
 	MAP_SCRIPT_ON_RESUME

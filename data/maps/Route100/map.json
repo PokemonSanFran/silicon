@@ -21,6 +21,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE100_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 4,
       "y": 7,

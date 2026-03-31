@@ -44,6 +44,7 @@
 #include "secret_base.h"
 #include "region_map.h"
 #include "money.h"
+#include "follower_npc.h"
 #include "field_effect.h"
 #include "constants/heal_locations.h"
 #include "quest_logic.h"
@@ -3321,6 +3322,8 @@ static void Task_MapSystem_TrolleyMode_Warp(u8 taskId)
             {
                 IncrementGameStat(GAME_STAT_TROLLEY_RIDES);
                 MapSystem_FreeResources();
+                if(PlayerHasFollowerNPC())
+                    ClearFollowerNPCData();
                 ReturnToFieldFromRegionMapWarpSelect();
                 sRegionMap->warpCounter = 2;
             }
@@ -3724,6 +3727,8 @@ static u8 HandleWarpCloseMenu(void)
             if (!gPaletteFade.active)
             {
                 MapSystem_FreeResources();
+                if(PlayerHasFollowerNPC())
+                    ClearFollowerNPCData();
                 ReturnToFieldFromRegionMapWarpSelect();
                 sRegionMap->warpCounter = 2;
             }

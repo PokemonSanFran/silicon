@@ -4,18 +4,14 @@ const FLAG_HIDE_FRANK = FLAG_TEMP_2
 const FLAG_HIDE_OLIVER = FLAG_TEMP_3
 const FLAG_HIDE_ROBOTS = FLAG_TEMP_4
 
-script EnterTheMaster_LeaverraForest_Entrance_ObjectSetup_Script{
-    if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_WAITING_LEAVERRA_FOREST)
-	{
-        call(EnterTheMaster_HideCharlotte_Script)
-    }
+script EnterTheMaster_Script_HideCharlotteEntrance
+{
+	setobjectflagfromlocalid(LOCALID_ROUTE100_CHARLOTTE)
 }
 
-script EnterTheMaster_LeaverraForest_ObjectSetup_Script{
-    if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_ENTERED_LEAVERRA_FOREST)
-	{
-        call(EnterTheMaster_HideCharlotte_Script)
-    }
+script EnterTheMaster_Script_HideCharlotte
+{
+	setobjectflagfromlocalid(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
 }
 
 script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script
@@ -98,9 +94,19 @@ script EnterTheMaster_Ready_Dialogue
         //PSF TODO implement follow me nonsense
 }
 
+script EnterTheMaster_Script_StartFollow
+{
+	checkfollowernpc
+	if (var(VAR_RESULT) == TRUE)
+	{
+		release
+		end
+	}
+	setfollowernpc(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE,FNPC_ALL,EnterTheMaster_InteractFollower_Script,PARTNER_STEVEN)
+}
+
 script EnterTheMaster_InteractFollower_Script
 {
-    lock
 	random(4)
 
         switch(var(VAR_RESULT)){
@@ -115,28 +121,43 @@ script EnterTheMaster_InteractFollower_Script
         end
 }
 
-script EnterTheMaster_LeaveWoods_Script {
+script EnterTheMaster_LeaveWoods_Script 
+{
     lock
-        faceplayer
-        msgbox(format("Tired already? I'll be waiting here."),,SPEAKER_CHARLOTTE)
-        closemessage
+	checkfollowernpc
+	if (var(VAR_RESULT) == FALSE)
+	{
+		release
+		end
+	}
+	facefollowernpc
+	msgbox(format("Tired already? I'll be waiting here."),,SPEAKER_CHARLOTTE)
+	closemessage
+	moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,48,24,DIR_NORTH)
+	waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
+	destroyfollowernpc
+	clearobjectflagfromlocalid(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
+	addobject(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
+	release
+	end
 }
 
 script EnterTheMaster_CompleteMaze_Dialogue {
 
     setvar(VAR_LEAVERRA_FOREST_STATE,LEAVERRA_FOREST_MAZE_COMPLETE)
         lock
-        faceplayer
+		facefollowernpc
         msgbox(format("I don't think there's anywhere else for them to be… they've gotta be in here."),,SPEAKER_CHARLOTTE)
 
         msgbox(format("You think they've just been alone in here, waiting for us for Dialga knows how long?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         msgbox(format("They're getting paid. "),,SPEAKER_CHARLOTTE)
         closemessage
-
-        waitmovement(0)
+		moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,25,21,DIR_NORTH)
+        waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
         playse(SE_EXIT)
         waitse
+		destroyfollowernpc
         call(TryAutoSave)
         release
         end

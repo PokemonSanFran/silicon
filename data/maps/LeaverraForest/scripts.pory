@@ -1,6 +1,6 @@
 mapscripts LeaverraForest_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(EnterTheMaster_LeaverraForest_ObjectSetup_Script)
+		call_if_ne(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_ENTERED_LEAVERRA_FOREST,EnterTheMaster_Script_HideCharlotte)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
                 FLAG_VISITED_LEAVERRA_FOREST, FALSE: Generic_Mappreview
