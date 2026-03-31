@@ -32,7 +32,7 @@ script Taxi_Interact_Dialogue
     call(Quest_Taxicabturnaround_CheckNextStage_Script)
 
     callnative(BufferTaxiBaseFare)
-    msgbox(gText_Taxi_ThanksForChoosing)
+    msgbox(format("Thanks for choosing Taxicab! The base fare is ¥{STR_VAR_1}, do you want a ride?"))
     call(Taxi_ConstructMenu_Script)
     dynmultistack(0,0,TRUE,3,TRUE,1,NULL)
 
@@ -60,7 +60,7 @@ script Taxi_ConstructMenu_Script
 
 script Taxi_Refuse_Dialogue
 {
-    msgbox(gText_Taxi_ChangedYourMind)
+    msgbox(format("Changed your mind? That's fine. We'll be here!"))
     closemessage
     release
     end
@@ -83,8 +83,8 @@ script Taxi_StartBattle_Dialogue{
     fadescreen(FADE_TO_BLACK)
     showmoneybox(0,0)
     callnative(Taxi_BufferDestinationMapName)
-    msgbox(gText_Taxi_HereWeAre)
-    msgbox(gText_Taxi_WhatDoYouMean)
+    msgbox(format("Okay kid, here's your stop, {STR_VAR_1}."))
+    msgbox(format("Hey, just a minute there friend! You don't even have enough for the fare?! I come out to earn a living, don't I? So why you gotta tax me like this?"))
     closemessage
     hidemoneybox
 	setflag(FLAG_TEMP_1)

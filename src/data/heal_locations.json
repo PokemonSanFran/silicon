@@ -195,8 +195,8 @@
       "y": 27
     },
     {
-      "id": "HEAL_LOCATION_HALAI_ISLAND_KAI",
-      "map": "MAP_HALAI_ISLAND_KAI",
+      "id": "HEAL_LOCATION_HALAI_ISLAND_BAIYA",
+      "map": "MAP_HALAI_ISLAND_BAIYA",
       "x": 7,
       "y": 2
     },
@@ -263,8 +263,8 @@
     {
       "id": "HEAL_LOCATION_TIRABUDIN_PLACE",
       "map": "MAP_TIRABUDIN_PLACE",
-      "x": 34,
-      "y": 22
+      "x": 36,
+      "y": 4
     },
     {
       "id": "HEAL_LOCATION_TORA_TOWN",
@@ -521,7 +521,7 @@
     {
       "id": "HEAL_LOCATION_ROUTE10",
       "map": "MAP_ROUTE10",
-      "x": 2,
+      "x": 5,
       "y": 10
     },
     {

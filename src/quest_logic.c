@@ -1,8 +1,16 @@
 #include "global.h"
 #include "battle.h"
+#include "fake_rtc.h"
 #include "constants/trainers.h"
+#include "constants/story_jump.h"
 #include "battle_anim.h"
+#include "tv.h"
+#include "field_effect.h"
+#include "gpu_regs.h"
+#include "buzzr.h"
+#include "script_menu.h"
 #include "battle_setup.h"
+#include "story_jump.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "pokedex.h"
@@ -35,19 +43,27 @@
 #include "region_map.h"
 #include "battle_main.h"
 #include "quest_strings.h"
-#include "constants/quest_logic.h"
+#include "quest_logic.h"
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
 #include "battle_scripts.h"
 #include "quests.h"
+#include "options_battle.h"
 #include "constants/trainer_types.h"
+#include "constants/songs.h"
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 
-bool32 HasPlayerJoinedTheTide(void)
+bool32 HasPlayerJoinedThe_Tide(void)
 {
     return (FlagGet(FLAG_TIMELINE_TRUE));
+}
+
+void Script_HasPlayerJoinedThe_Tide(void)
+{
+    gSpecialVar_Result = HasPlayerJoinedThe_Tide();
 }
 
 u32 GetCurrentMap(void)
@@ -79,6 +95,13 @@ u32 Quest_Generic_CountAndBufferRemainingSubquests(u16 relevantQuest)
     return numRemainingQuests;
 }
 
+static void Quest_Generic_CountRemainingSubquestsTryProgressReward(enum QuestIdList questId)
+{
+    if (Quest_Generic_CountAndBufferRemainingSubquests(questId) != 0)
+        return;
+
+    QuestMenu_ScriptSetReward(questId);
+}
 
 void Quest_Generic_CompleteSubquests(u16 relevantQuest)
 {
@@ -101,6 +124,24 @@ void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest)
             return;
 
     QuestMenu_ScriptSetReward(relevantQuest);
+}
+
+void SetVariableBit(u32 varConst, u32 bit, bool32 bitValue)
+{
+    u32 var = VarGet(varConst);
+
+    if (bitValue)
+        var |= (1 << bit);
+    else
+        var &= ~(1 << bit);
+
+    VarSet(varConst,var);
+}
+
+bool8 GetVariableBit(u32 varConst, u32 bit)
+{
+    u32 var = VarGet(varConst);
+    return (var >> bit) & 1;
 }
 
 // ***********************************************************************
@@ -203,99 +244,139 @@ static void KitchenvolunteeringFunc_HidePantryItems(void)
 // Quest: Rock Collector
 // ***********************************************************************
 
-bool8 Quest_Rockcollector_CheckTakenStoneFlags(void)
+static const u16 questStoneLUT[QUEST_ROCKCOLLECTOR_SUB_COUNT] =
 {
-    u8 numTakenStones = 0;
-    u16 i;
+    [SUB_QUEST_1] = ITEM_QUEST_ROCKCOLLECTOR_NEED_1,
+    [SUB_QUEST_2] = ITEM_QUEST_ROCKCOLLECTOR_NEED_2,
+    [SUB_QUEST_3] = ITEM_QUEST_ROCKCOLLECTOR_NEED_3,
+    [SUB_QUEST_4] = ITEM_QUEST_ROCKCOLLECTOR_NEED_4,
+    [SUB_QUEST_5] = ITEM_QUEST_ROCKCOLLECTOR_NEED_5,
+};
 
-    for (i = 0; i < ROCKCOLLECTOR_STONES_COUNT; i++)
-    {
-        if (FlagGet(FLAG_ITEM_ROCKCOLLECTOR_STONE_START + i))
-        {
-            numTakenStones++;
-        }
-    }
-
-    gSpecialVar_Result = (numTakenStones == QUEST_ROCKCOLLECTOR_SUB_COUNT);
-    return gSpecialVar_Result;
-}
-
-bool8 Quest_Rockcollector_CheckBagAllStones(void)
+void DebugQuest_RockCollector(u8 state)
 {
-    u8 countNumStonesInBag = 0;
-    u8 i;
-
-    for (i = 0; i < QUEST_ROCKCOLLECTOR_SUB_COUNT; i++)
+    switch (state)
     {
-        if (CheckBagHasItem(FIRST_EVOLUTION_STONE_INDEX + i, 1))
-        {
-            countNumStonesInBag++;
-        }
-    }
-
-    gSpecialVar_Result = (countNumStonesInBag == QUEST_ROCKCOLLECTOR_SUB_COUNT);
-    return gSpecialVar_Result;
-}
-
-void Quest_Rockcollector_TakeAllStonesFromBag(void){
-    u8 i = 0;
-
-    if(Quest_Rockcollector_CheckBagAllStones()){
-        for (i = 0; i < QUEST_ROCKCOLLECTOR_SUB_COUNT; i++){
-            RemoveBagItem(FIRST_EVOLUTION_STONE_INDEX+i,1);
-            QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR,FLAG_SET_COMPLETED,(SUB_QUEST_1 + i));
-        }
-    }
-}
-
-void Quest_Rockcollector_CheckSubquestTakeStone(void)
-{
-    u8 numExternalStones = 0;
-    u8 numTakenStones = 0;
-    u8 currentQuest = 0;
-    u16 currentStone, currentFlag;
-
-    for (currentQuest = 0; currentQuest < QUEST_ROCKCOLLECTOR_SUB_COUNT; currentQuest++)
-    {
-        currentStone = FIRST_EVOLUTION_STONE_INDEX + currentQuest;
-        currentFlag = FLAG_ITEM_ROCKCOLLECTOR_STONE_START + currentQuest;
-
-        if (!QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_GET_COMPLETED, currentQuest) && CheckBagHasItem(currentStone, 1))
-        {
-            RemoveBagItem(currentStone, 1);
-            CopyItemName(currentStone, gStringVar1);
-            QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_SET_COMPLETED, currentQuest);
-            numTakenStones++;
-
-            if (!FlagGet(currentFlag))
+        case STATE_QUEST_ROCKCOLLECTOR_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_ROCKCOLLECTOR_STARTED:
+            DebugQuest_BetweenAStoneAndAHardPlace(STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
+            QuestMenu_ScriptSetActive(QUEST_ROCKCOLLECTOR);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_KIT,1);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_1,1);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_2,1);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_3,1);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_4,1);
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_5,1);
+            break;
+        case STATE_QUEST_ROCKCOLLECTOR_REWARD:
+            for (u32 stoneIndex = 0; stoneIndex < QUEST_ROCKCOLLECTOR_SUB_COUNT; stoneIndex++)
             {
-                numExternalStones++;
+                QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_SET_COMPLETED, stoneIndex);
+                RemoveBagItem(questStoneLUT[stoneIndex],1);
+            }
+            QuestMenu_ScriptSetReward(QUEST_ROCKCOLLECTOR);
+            break;
+        default:
+        case STATE_QUEST_ROCKCOLLECTOR_COMPLETE:
+            AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_ROCKCOLLECTOR);
+            break;
+    }
+}
+
+void Quest_RockCollector_ComposeList(void)
+{
+    u32 pendingStones[QUEST_ROCKCOLLECTOR_SUB_COUNT];
+    u32 pendingCount = 0;
+
+    for (u32 stoneIndex = 0; stoneIndex < QUEST_ROCKCOLLECTOR_SUB_COUNT; stoneIndex++)
+    {
+        if (QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_GET_COMPLETED, stoneIndex))
+            continue;
+
+        pendingStones[pendingCount] = questStoneLUT[stoneIndex];
+        pendingCount++;
+    }
+
+    StringCopy(gStringVar2, COMPOUND_STRING(""));
+
+    for (u32 stoneIndex = 0; stoneIndex < pendingCount; stoneIndex++)
+    {
+        CopyItemName(pendingStones[stoneIndex], gStringVar4);
+        StringAppend(gStringVar2, gStringVar4);
+
+        if (pendingCount <= 1)
+            continue;
+
+        if (stoneIndex == (pendingCount - 2))
+        {
+            if (pendingCount == 2)
+            {
+                StringAppend(gStringVar2, COMPOUND_STRING(" & "));
+            }
+            else
+            {
+                StringAppend(gStringVar2, COMPOUND_STRING(", & "));
             }
         }
-    }
-
-    VarSet(VAR_TEMP_1, numTakenStones);
-    VarSet(VAR_TEMP_2, numExternalStones);
-}
-
-u16 Quest_Rockcollector_CountRemainingSubquests(void)
-{
-    return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_ROCKCOLLECTOR);
-}
-
-void Quest_Rockcollector_RespawnStones(void)
-{
-    u16 flags[ROCKCOLLECTOR_STONES_COUNT];
-    u16 i;
-
-
-    if(QuestMenu_GetSetQuestState(QUEST_ROCKCOLLECTOR,FLAG_GET_COMPLETED)){
-        for (i = 0; i < ROCKCOLLECTOR_STONES_COUNT; i++)
+        else if (stoneIndex < (pendingCount - 2))
         {
-            flags[i] = FLAG_ITEM_ROCKCOLLECTOR_STONE_START + i;
-            FlagClear(flags[i]);
+            StringAppend(gStringVar2, COMPOUND_STRING(", "));
         }
     }
+}
+
+void Script_Quest_Rockcollector_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountAndBufferRemainingSubquests(QUEST_ROCKCOLLECTOR);
+}
+
+void Quest_Rockcollector_GenerateList(void)
+{
+    for (u32 stoneIndex = 0; stoneIndex < QUEST_ROCKCOLLECTOR_SUB_COUNT; stoneIndex++)
+    {
+        if (QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_GET_COMPLETED, stoneIndex))
+            continue;
+
+        u32 stone = questStoneLUT[stoneIndex];
+        if (!CheckBagHasItem(stone, 1))
+            continue;
+
+        u8 *nameBuffer = Alloc(100);
+        StringExpandPlaceholders(nameBuffer, GetItemName(stone));
+
+        struct ListMenuItem item;
+        item.name = nameBuffer;
+        item.id = stoneIndex;
+
+        MultichoiceDynamic_PushElement(item);
+    }
+}
+
+static u32 Quest_Rockcollector_CountNumberOfStonesToAsk(void)
+{
+    u32 numStones = 0;
+
+    for (u32 stoneIndex = 0; stoneIndex < QUEST_ROCKCOLLECTOR_SUB_COUNT; stoneIndex++)
+    {
+        if (QuestMenu_GetSetSubquestState(QUEST_ROCKCOLLECTOR, FLAG_GET_COMPLETED, stoneIndex))
+            continue;
+
+        u32 stone = questStoneLUT[stoneIndex];
+        if (!CheckBagHasItem(stone,1))
+            continue;
+
+        numStones++;
+    }
+
+    return numStones;
+}
+
+void Script_Quest_Rockcollector_CountNumberOfStonesToAsk(void)
+{
+    gSpecialVar_Result = Quest_Rockcollector_CountNumberOfStonesToAsk();
 }
 
 // ***********************************************************************
@@ -344,16 +425,16 @@ static const u32 TOTEM_POKEMON_LIST[NUM_TOTEM_MON][9]=
     {MAP_ROUTE9, TOTEM_POKEMON_8, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
     {MAP_ROUTE9, TOTEM_POKEMON_9, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
 };
-    //PSF TODO need to make new totem formes
-    //totem formes have larger heights and weights but don't follow any specific rule
-    //shiny locked off
-    //when bred, produces a normal species of that pokemon
-    //always have one specific ability
-    //spawn with three perfect IVs
-    //Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
-    //Not a unique form in the pokedex
-    //fixed natures and move sets and level
-    //wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
+//PSF TODO need to make new totem formes
+//totem formes have larger heights and weights but don't follow any specific rule
+//shiny locked off
+//when bred, produces a normal species of that pokemon
+//always have one specific ability
+//spawn with three perfect IVs
+//Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
+//Not a unique form in the pokedex
+//fixed natures and move sets and level
+//wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
 
 static const u32 ULTRA_BEAST_LIST[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT][9]=
 {
@@ -702,349 +783,470 @@ bool8 Quest_Taxicabturnaround_CheckReadyForNext(void){
 // Quest: Bodega Burnout
 // ***********************************************************************
 
-#define DELIVER 0
-#define RESCUE 1
-#define CATCH_STRONG 2
-#define CATCH_COLD  3
-#define CATCH_SMART 4
-#define CATCH_FAIRY 5
-
-static const u32 POKE_MART_MAP[QUEST_BODEGABURNOUT_SUB_COUNT][4]=
+struct BodegaBurnoutInfo
 {
-    {MAP_PERLACIA_CITY_POKEMON_CENTER_1F,SUB_QUEST_1,DELIVER,MAP_ROUTE6},
-    {MAP_QIU_VILLAGE_POKEMON_CENTER_1F,SUB_QUEST_2,DELIVER,MAP_TORGEOT_CLIMB},
-    {MAP_HALERBA_CITY_POKEMON_CENTER_1F,SUB_QUEST_3,DELIVER,MAP_ROUTE3},
-    {MAP_CAPHE_CITY_POKEMON_CENTER_1F,SUB_QUEST_4,DELIVER,MAP_ARANTRAZ},
-    {MAP_CRESALTA_VISTA_POKEMON_CENTER_1F,SUB_QUEST_5,DELIVER,MAP_CAPHE_CITY},
-    {MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,SUB_QUEST_6,DELIVER,MAP_PERLACIA_CITY},
-
-    {MAP_CURENO_PORT_POKEMON_CENTER_1F,SUB_QUEST_7,RESCUE,MAP_ROUTE14},
-    {MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,SUB_QUEST_8,RESCUE,MAP_ROUTE4},
-    {MAP_HODOU_CITY_POKEMON_CENTER_1F,SUB_QUEST_9,RESCUE,MAP_HODOU_CITY},
-    {MAP_TORA_TOWN_POKEMON_CENTER_1F,SUB_QUEST_10,RESCUE,MAP_ROUTE10},
-    {MAP_IRISINA_TOWN_POKEMON_CENTER_1F,SUB_QUEST_11,RESCUE,MAP_ROUTE11},
-    {MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,SUB_QUEST_12,RESCUE,MAP_NONGYU_BRIDGE},
-
-    {MAP_OROLAND_POKEMON_CENTER_1F,SUB_QUEST_13,CATCH_STRONG,},
-    {MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,SUB_QUEST_14,CATCH_STRONG,},
-    {MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,SUB_QUEST_15,CATCH_COLD,},
-    {MAP_ZENZU_ISLAND_POKEMON_CENTER_1F,SUB_QUEST_16,CATCH_COLD,},
-    {MAP_CUCONU_TOWN_POKEMON_CENTER_1F,SUB_QUEST_17,CATCH_SMART,},
-    {MAP_HALAI_ISLAND_POKEMON_CENTER_1F,SUB_QUEST_18,CATCH_SMART,},
-    {MAP_CHASILLA_POKEMON_CENTER_1F,SUB_QUEST_19,CATCH_FAIRY,},
+    u8 assigningLocalId;
+    u32 assignedMap;
+    u8 targetLocalId;
+    u16 deliveryItem;
+    u16 targetMap;
 };
 
-static const u8* const bodegaParametersTextArray[19][2]=
+static const struct BodegaBurnoutInfo bodegaBurnoutInfo[QUEST_BODEGABURNOUT_SUB_COUNT] =
 {
-    {gText_Bodegaburnout_PersonA,gText_Route6},
-    {gText_Bodegaburnout_PersonB,gText_TorgeotClimb},
-    {gText_Bodegaburnout_PersonC,gText_Route3},
-    {gText_Bodegaburnout_PersonD,gText_Arantraz},
-    {gText_Bodegaburnout_PersonE,gText_CapheCity},
-    {gText_Bodegaburnout_PersonF,gText_PerlaciaCity},
-    {gText_Bodegaburnout_PersonG,gText_Route14},
-    {gText_Bodegaburnout_PersonH,gText_Route4},
-    {gText_Bodegaburnout_PersonI,gText_HodouCity},
-    {gText_Bodegaburnout_PersonJ,gText_Route10},
-    {gText_Bodegaburnout_PersonK,gText_Route11},
-    {gText_Bodegaburnout_PersonL,gText_NongyuBridge},
-    {gText_Bodegaburnout_StrongMon,gText_Bodegaburnout_AssistWithStocking},
-    {gText_Bodegaburnout_StrongMon,gText_Bodegaburnout_AssistWithStocking},
-    {gText_Bodegaburnout_ColdMon,gText_Bodegaburnout_HelpKeepFood},
-    {gText_Bodegaburnout_ColdMon,gText_Bodegaburnout_HelpKeepFood},
-    {gText_Bodegaburnout_SmartMon,gText_Bodegaburnout_BalanceOurBooks},
-    {gText_Bodegaburnout_SmartMon,gText_Bodegaburnout_BalanceOurBooks},
-    {gText_Bodegaburnout_FairyMon,gText_Bodegaburnout_RaiseTheMood},
+    [SUB_QUEST_1] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CAPHE,
+        .assignedMap = MAP_CAPHE_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_H,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE,
+    },
+    [SUB_QUEST_2] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_QIU,
+        .assignedMap = MAP_QIU_VILLAGE_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_A,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU,
+    },
+    [SUB_QUEST_3] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HALAI,
+        .assignedMap = MAP_HALAI_ISLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_B,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI,
+    },
+    [SUB_QUEST_4] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_OROLAND,
+        .assignedMap = MAP_OROLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_C,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND,
+    },
+    [SUB_QUEST_5] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_TORA,
+        .assignedMap = MAP_TORA_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_STRENGTH_I,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA,
+    },
+    [SUB_QUEST_6] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HALERBA,
+        .assignedMap = MAP_HALERBA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_F,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA,
+    },
+    [SUB_QUEST_7] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CRESALTA,
+        .assignedMap = MAP_CRESALTA_VISTA_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_WHIRLPOOL_J,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA,
+    },
+    [SUB_QUEST_8] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_IRISINA,
+        .assignedMap = MAP_IRISINA_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_ROCK_SMASH_G,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA,
+    },
+    [SUB_QUEST_9] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_HODOU,
+        .assignedMap = MAP_HODOU_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_D,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU,
+    },
+    [SUB_QUEST_10] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_ZENZU,
+        .assignedMap = MAP_ZENZU_ISLAND_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTDELIVERY_CUT_E,
+        .deliveryItem = ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU,
+    },
+    [SUB_QUEST_11] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CUCONU,
+        .assignedMap = MAP_CUCONU_TOWN_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU,
+    },
+    [SUB_QUEST_12] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_GLAVEZ,
+        .assignedMap = MAP_GLAVEZ_HILL_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_CUT_M,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ,
+    },
+    [SUB_QUEST_13] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_PERLACIA,
+        .assignedMap = MAP_PERLACIA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA,
+    },
+    [SUB_QUEST_14] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_PETAROSA,
+        .assignedMap = MAP_PETAROSA_BOROUGH_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_DIVE_N,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA,
+    },
+    [SUB_QUEST_15] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_ESPULEE,
+        .assignedMap = MAP_ESPULEE_OUTSKIRTS_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_K,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE,
+    },
+    [SUB_QUEST_16] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_TIRABUDIN,
+        .assignedMap = MAP_TIRABUDIN_PLACE_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN,
+    },
+    [SUB_QUEST_17] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CHASILLA,
+        .assignedMap = MAP_CHASILLA_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_L,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA,
+    },
+    [SUB_QUEST_18] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_MERMEREZA,
+        .assignedMap = MAP_MERMEREZA_CITY_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA,
+    },
+    [SUB_QUEST_19] =
+    {
+        .assigningLocalId = LOCALID_POKE_MART_STAFF_CURENO,
+        .assignedMap = MAP_CURENO_PORT_POKEMON_CENTER_1F,
+        .targetLocalId = LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R,
+        .deliveryItem = ITEM_NONE,
+        .targetMap = MAP_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO,
+    },
 };
 
-u8 Quest_Bodegaburnout_LookUpCorrespondingSubquest(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            return i;
-        }
-    }
-    return 99;
+static u32 Quest_Bodegaburnout_GetAssignedMap(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].assignedMap);
+}
+static u16 Quest_Bodegaburnout_GetDeliveryItem(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].deliveryItem);
+}
+static u32 Quest_Bodegaburnout_GetTargetMap(enum SubQuestDefines subQuestId)
+{
+    return (bodegaBurnoutInfo[subQuestId].targetMap);
 }
 
-bool8 Quest_Bodegaburnout_IsSubquestComplete(void){
-    u8 index = Quest_Bodegaburnout_LookUpCorrespondingSubquest();
-    u8 subquest = POKE_MART_MAP[index][1];
+void Quest_Bodegaburnout_Complete(void)
+{
+    for (u32 subQuestIndex = 0; subQuestIndex < 1; subQuestIndex++)
+        (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED, subQuestIndex));
+}
 
-    if (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subquest)){
-        return TRUE;
-    }else{
+static bool8 Quest_Bodegaburnout_IsSubquestDeliveryType(enum SubQuestDefines subQuestId)
+{
+    return (Quest_Bodegaburnout_GetDeliveryItem(subQuestId) != ITEM_NONE);
+}
+
+static bool8 Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
+{
+    if (QuestMenu_GetSetQuestState(QUEST_WAREHOUSEWARFARE,FLAG_GET_ACTIVE))
         return FALSE;
+
+    u32 count[QUEST_BODEGABURNOUT_TYPE_COUNT] = {0};
+
+    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+    {
+        u32 typeIndex;
+        if (!QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subQuestIndex))
+            continue;
+
+        typeIndex = (Quest_Bodegaburnout_IsSubquestDeliveryType(subQuestIndex)) ? QUEST_BODEGABURNOUT_TYPE_DELIVERY : QUEST_BODEGABURNOUT_TYPE_RESCUE;
+
+        count[typeIndex]++;
     }
+
+    if (count[QUEST_BODEGABURNOUT_TYPE_DELIVERY] < NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS)
+        return FALSE;
+
+    return (count[QUEST_BODEGABURNOUT_TYPE_RESCUE] >= NUM_QUEST_BODEGABURNOUT_REQUIRED_SUBQUESTS);
 }
 
-void Quest_Bodegaburnout_Catch_MarkSubquestComplete(void){
-    u32 subquest = 0;
-    bool8 foundTaxi = FALSE;
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            subquest = POKE_MART_MAP[i][1];
-            foundTaxi = TRUE;
-            break;
-        }
-    }
-
-    if (foundTaxi) {
-        if (!QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subquest)) {
-            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED, subquest);
-        }
-    }
+void Script_Quest_Bodegaburnout_IsReadyForTakedownQuest(void)
+{
+    gSpecialVar_Result = Quest_Bodegaburnout_IsReadyForTakedownQuest();
 }
 
-u16 Quest_Bodegaburnout_CountRemainingSubquests(void){
+static enum SubQuestDefines Quest_Bodegaburnout_ConvertCurrentLocationToSubquest(void)
+{
+    u32 mapId = GetCurrentMap();
+
+    for (u32 subQuestIndex = 0; subQuestIndex < QUEST_BODEGABURNOUT_SUB_COUNT; subQuestIndex++)
+    {
+        DebugPrintf("mapId %d | assigned %d",mapId,Quest_Bodegaburnout_GetAssignedMap(subQuestIndex));
+        if (Quest_Bodegaburnout_GetAssignedMap(subQuestIndex) != mapId)
+            continue;
+
+        return subQuestIndex;
+    }
+    return SUB_QUEST_1;
+}
+
+static void Quest_Bodegaburnout_BufferDeliveryItemName(enum SubQuestDefines subquestId)
+{
+    u32 item = Quest_Bodegaburnout_GetDeliveryItem(subquestId);
+    StringCopy(gStringVar1,GetItemName(item));
+}
+
+void Script_Quest_Bodegaburnout_BufferDeliveryItemName(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    Quest_Bodegaburnout_BufferDeliveryItemName(subQuestId);
+}
+
+void Script_Quest_Bodegaburnout_LoadDeliveryItem(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_0x8000 = Quest_Bodegaburnout_GetDeliveryItem(subQuestId);
+    gSpecialVar_0x8001 = 1;
+}
+
+static void Quest_Bodegaburnout_BufferTargetLocationName(enum SubQuestDefines subquestId)
+{
+    u32 map = Quest_Bodegaburnout_GetTargetMap(subquestId);
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map),MAP_NUM(map))->regionMapSectionId,0);
+}
+
+void Script_Quest_Bodegaburnout_BufferTargetLocationName(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    Quest_Bodegaburnout_BufferTargetLocationName(subQuestId);
+}
+
+u32 Quest_BodegaBurnout_CountRemainingSubquests(void)
+{
     return Quest_Generic_CountAndBufferRemainingSubquests(QUEST_BODEGABURNOUT);
 }
 
-bool8 Quest_Bodegaburnout_CheckReadyForNext(void){
-    u8 currentSubQuest;
-    u8 questType;
-    u8 completedDeliver = 0, completedRescue = 0, completedCatch = 0;
-    u8 requiredComplete = 1;
-
-    for (currentSubQuest = 0; currentSubQuest < QUEST_BODEGABURNOUT_SUB_COUNT; currentSubQuest++)
-    {
-        if (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, currentSubQuest))
-        {
-            questType = POKE_MART_MAP[currentSubQuest][2];
-
-            switch(questType){
-                case CATCH_STRONG:
-                case CATCH_COLD:
-                case CATCH_SMART:
-                case CATCH_FAIRY:
-                    completedCatch++;
-                    break;
-                case DELIVER: completedDeliver++;
-                  break;
-                case RESCUE: completedRescue++;
-                 break;
-                default: break;
-            }
-        }
-    }
-
-    return (
-            (completedDeliver > requiredComplete) &&
-            (completedRescue > requiredComplete) &&
-            (completedCatch > requiredComplete)
-           );
+void Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_BODEGABURNOUT);
 }
 
-u32 Quest_Bodegaburnout_GetQuestType(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            return POKE_MART_MAP[i][2];
-        }
-    }
-    return 99;
+void Script_Quest_BodegaBurnout_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_BodegaBurnout_CountRemainingSubquests();
 }
 
-void Quest_Bodegaburnout_LoadRequestText(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            StringCopy(gStringVar1,bodegaParametersTextArray[i][0]);
-            StringCopy(gStringVar2,bodegaParametersTextArray[i][1]);
-            StringCopy(gStringVar3,gText_Pokemon);
-        }
-    }
-}
-
-bool8 Quest_Bodegaburnout_CheckStrongPokemon(void){
-    //Human-like egg group AND 12 decimeters
-    u32 species = 0, height = 0;
-    u32 eggGroup[2] = {0,0};
-    u32 requiredHeight = 12;
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    eggGroup[0] = gSpeciesInfo[species].eggGroups[0];
-    eggGroup[1] = gSpeciesInfo[species].eggGroups[1];
-    height = gSpeciesInfo[species].height;
-
-    if (
-            (
-             (eggGroup[0] != EGG_GROUP_HUMAN_LIKE) &&
-             (eggGroup[1] != EGG_GROUP_HUMAN_LIKE)
-            )
-            ||
-            (height < requiredHeight)
-       )
-            {
-                doesPokemonMatch = FALSE;
-            }
-    return doesPokemonMatch;
-}
-
-bool8 Quest_Bodegaburnout_CheckColdPokemon(void){
-    u32 species = 0;
-    u32 type[2] = {0,0};
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    type[0] = gSpeciesInfo[species].types[0];
-    type[1] = gSpeciesInfo[species].types[1];
-
-        if (
-             (type[0] != TYPE_ICE) &&
-             (type[1] != TYPE_ICE)
-           )
-            {
-                doesPokemonMatch = FALSE;
-            }
-    return doesPokemonMatch;
-}
-
-bool8 Quest_Bodegaburnout_CheckSmartPokemon(void){
-    //Pokemon that like Bitter food have an easier time becoming Smart in Contest Data, so only pokemon that like bitter flavors
-    u32 nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
-
-    if (
-        (nature != NATURE_GENTLE) &&
-        (nature != NATURE_SASSY) &&
-        (nature != NATURE_CALM) &&
-        (nature != NATURE_CAREFUL)
-       )
-    {
+static bool8 Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(enum SubQuestDefines subQuestId)
+{
+    if (QuestMenu_GetSetQuestState(QUEST_BODEGABURNOUT,FLAG_GET_ACTIVE) == FALSE)
         return FALSE;
-    }
 
-    return TRUE;
+        return (QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_GET_COMPLETED, subQuestId) == FALSE);
 }
 
-bool8 Quest_Bodegaburnout_CheckFairyPokemon(void){
-    u32 species = 0;
-    u32 eggGroup[2] = {0,0};
-    u32 type[2] = {0,0};
-    bool8 doesPokemonMatch = TRUE;
-
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
-    eggGroup[0] = gSpeciesInfo[species].eggGroups[0];
-    eggGroup[1] = gSpeciesInfo[species].eggGroups[1];
-    type[0] = gSpeciesInfo[species].types[0];
-    type[1] = gSpeciesInfo[species].types[1];
-
-        if (
-             (eggGroup[0] != EGG_GROUP_FAIRY) &&
-             (eggGroup[1] != EGG_GROUP_FAIRY)
-             &&
-             (type[0] != TYPE_FAIRY) &&
-             (type[1] != TYPE_FAIRY)
-           )
-            {
-                doesPokemonMatch = FALSE;
-            }
-    return doesPokemonMatch;
+void Script_Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_Result = Quest_Bodegaburnout_ShouldShopkeeperExplainQuest(subQuestId);
 }
 
-bool8 Quest_Bodegaburnout_CheckRequiredPokemon(void){
-    u8 index = Quest_Bodegaburnout_LookUpCorrespondingSubquest();
-    u8 neededType = POKE_MART_MAP[index][2];
+static enum BodegaBurnoutTypes Quest_Bodegaburnout_GetShopkeeperActiveCode(enum SubQuestDefines subQuestId)
+{
+    if (Quest_Bodegaburnout_IsSubquestDeliveryType(subQuestId) == FALSE)
+        return QUEST_BODEGABURNOUT_TYPE_RESCUE;
 
-    switch(neededType){
-        case CATCH_STRONG:
-            return Quest_Bodegaburnout_CheckStrongPokemon();
-        case CATCH_COLD:
-            return Quest_Bodegaburnout_CheckColdPokemon();
-        case CATCH_SMART:
-            return Quest_Bodegaburnout_CheckSmartPokemon();
-        case CATCH_FAIRY:
-            return Quest_Bodegaburnout_CheckFairyPokemon();
+    u32 item = Quest_Bodegaburnout_GetDeliveryItem(subQuestId);
+    return (CheckBagHasItem(item,1)) ? QUEST_BODEGABURNOUT_TYPE_DELIVERY: QUEST_BODEGABURNOUT_TYPE_DELIVERY_NO_ITEM;
+}
+
+void Script_Quest_Bodegaburnout_GetShopkeeperActiveCode(void)
+{
+    enum SubQuestDefines subQuestId = Quest_Bodegaburnout_ConvertCurrentLocationToSubquest();
+    gSpecialVar_Result = Quest_Bodegaburnout_GetShopkeeperActiveCode(subQuestId);
+}
+
+void DebugQuest_BodegaBurnout(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_BODEGABURNOUT_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_STARTED_QUEST:
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            QuestMenu_ScriptSetActive(QUEST_BODEGABURNOUT);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_TALKED_TO_SHOPUNIONREP:
+            VarSet(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CAPHE_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_1);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYA);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_QIU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYB);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALAI_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_OROLAND_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_TORA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HALERBA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_6);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_CRESALTA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_7);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_IRISINA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_8);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_HODOU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_9);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_ITEM_GIVEN:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_DELIVERY_TARGET_ZENZU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_10);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CUCONU_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_11);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_GLAVEZ_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_12);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PERLACIA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_13);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_PETAROSA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_14);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEK);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_ESPULEE_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_15);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_TIRABUDIN_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_16);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEL);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CHASILLA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_17);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_TRAINER_BATTLED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS);
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_MERMEREZA_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_18);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_RESCUE_TARGET_CURENO_COMPLETE:
+            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,SUB_QUEST_19);
+            Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_BODEGABURNOUT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_BODEGABURNOUT);
+            break;
         default:
-            return FALSE;
-    }
-}
-
-bool8 Quest_Bodegaburnout_CheckLocationAndMatchItem(void){
-    u8 i;
-    u16 bodegaPackage = ITEM_BODEGA_DELIVERY_FIRST;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][0] == GetCurrentMap()) {
-            bodegaPackage += i;
-            gSpecialVar_0x8000 = bodegaPackage;
-            gSpecialVar_0x8001 = 1;
+        case STATE_QUEST_BODEGABURNOUT_COMPLETE:
+            AddBagItem(ITEM_QUEST_BODEGABURNOUT_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_BODEGABURNOUT);
             break;
-        }
-    }
-    return CheckBagHasItem(bodegaPackage,1);
-}
-
-
-u8 Quest_Bodegaburnout_GetIndexFirstRescue(void){
-    u8 i;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][2] == RESCUE){
-            break;
-        }
-    }
-    return i;
-}
-
-void Quest_Bodegaburnout_CheckAndSetRescueFlag(void){
-    u8 j, k = 0;
-    u16 rescueFlag = FLAG_QUEST_BODEGA_RESCUE_FLAGS_START;
-    bool8 flagStatus;
-    bool8 questStatus = QuestMenu_GetSetQuestState(QUEST_BODEGABURNOUT, FLAG_GET_ACTIVE);
-
-    for (j = Quest_Bodegaburnout_GetIndexFirstRescue(); j < QUEST_BODEGABURNOUT_SUB_COUNT; j++) {
-        if (POKE_MART_MAP[k][3] == GetCurrentMap()) {
-            rescueFlag += k;
-
-            flagStatus = FlagGet(rescueFlag);
-            if (!flagStatus && !questStatus){
-                FlagSet(rescueFlag);
-                FlagSet(FLAG_QUEST_BODEGA_RESCUE1); //PSF TODO Is this a debug line?
-            }
-            break;
-        }
-        k++;
-    }
-}
-
-void Quest_Bodegaburnout_ClearRescueFlag(void){
-    u8 j, k = 0;
-    u16 rescueFlag = FLAG_QUEST_BODEGA_RESCUE_FLAGS_START;
-
-    for (j = Quest_Bodegaburnout_GetIndexFirstRescue(); j < QUEST_BODEGABURNOUT_SUB_COUNT; j++) {
-        if (POKE_MART_MAP[j][0] == GetCurrentMap()) {
-            rescueFlag += k;
-
-            if (FlagGet(rescueFlag)){
-                FlagClear(rescueFlag);
-            }
-            break;
-        }
-        k++;
-    }
-}
-
-void Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem(void){
-    u8 i;
-    u16 bodegaPackage = ITEM_BODEGA_DELIVERY_FIRST;
-
-    for (i = 0; i < QUEST_BODEGABURNOUT_SUB_COUNT; i++) {
-        if (POKE_MART_MAP[i][3] == GetCurrentMap()) {
-            QuestMenu_GetSetSubquestState(QUEST_BODEGABURNOUT, FLAG_SET_COMPLETED,POKE_MART_MAP[i][1]);
-
-            if (POKE_MART_MAP[i][2] == DELIVER) {
-                bodegaPackage += i;
-                RemoveBagItem(bodegaPackage,1);
-            }
-            break;
-        }
     }
 }
 
@@ -1229,118 +1431,75 @@ void Quest_Skilllibrary_Debug(void)
 }
 
 // ***********************************************************************
-// Quest: Mutual Aid Fund
+// Quest: Compulsive Healing Peer Support
 // ***********************************************************************
 
-u8 Quest_Mutualaidfund_CountDigits(u32 askAmount){
-    u8 digits = 0;
-    u32 temp = askAmount;
+bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void);
 
-    while (temp != 0){
-        temp /= 10;
-        digits++;
-    }
-    return digits;
-}
-
-u32 Quest_Mutaidaidfund_CalculateMoneyAndText(void){
-    u8 questProgress = VarGet(VAR_QUEST_MUTUALAIDFUND_AMOUNT);
-    u32 askAmount = 0, numDigits = 0;
-
-    switch(questProgress){
-        case 0: askAmount = 5000;
-            break;
-        case 1: askAmount = 10000;
-            break;
-        case 2: askAmount = 20000;
-            break;
-        case 3: askAmount = 30000;
-            break;
-        case 4: askAmount = 40000;
-            break;
-        case 5: askAmount = 50000;
-            break;
-        case 6: askAmount = 100000;
-            break;
-        case 7: askAmount = 200000;
-            break;
-        case 8: askAmount = 300000;
-            break;
-        case 9: askAmount = 400000;
-            break;
-        case 10: askAmount = 500000;
-            break;
-        case 11: askAmount = 800000;
-            break;
-        case 12: askAmount = 1000000;
-            break;
-        case 13: askAmount = 3280000;
-            break;
-    }
-
-    numDigits = Quest_Mutualaidfund_CountDigits(askAmount);
-    ConvertIntToDecimalStringN(gStringVar1,askAmount,STR_CONV_MODE_LEFT_ALIGN,numDigits);
-
-    return askAmount;
-}
-
-bool8 Quest_Mutualaidfund_CheckMoney(void){
-    u32 askAmount = Quest_Mutaidaidfund_CalculateMoneyAndText();
-
-    return (IsEnoughMoney(&gSaveBlock1Ptr->money,askAmount));
-}
-
-void Quest_Mutualaidfund_TakeDonation(void){
-    u32 askAmount = Quest_Mutaidaidfund_CalculateMoneyAndText();
-
-    RemoveMoney(&gSaveBlock1Ptr->money,askAmount);
-}
-
-// ***********************************************************************
-// Quest: Bruce Lee
-// ***********************************************************************
-void Quest_Brucelee_UpdateType(u16 days)
+void DebugQuest_CompulsiveHealingPeerSupport(u8 state)
 {
-    u16 randomType = Random() % NUMBER_OF_MON_TYPES;
-
-    if (days != 0){
-
-        while(randomType == TYPE_MYSTERY)
-            randomType = Random () % NUMBER_OF_MON_TYPES;
-
-        VarSet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE,randomType);
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP);
+            break;
+        case STATE_QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP_COMPLETE_QUEST:
+            FlagSet(FLAG_DAILY_NOPOMOD_BATTLE);
+            QuestMenu_ScriptSetComplete(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP);
+            break;
     }
 }
 
-void Quest_Brucelee_BufferTypeName(void)
+void Quest_CompulsiveHealingPeerSupport_UpdateType(void)
 {
-    u16 dailyType = VarGet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE);
+    u32 randomType = Random() % NUMBER_OF_MON_TYPES;
+    while(randomType == TYPE_MYSTERY || randomType == TYPE_NONE || randomType == TYPE_STELLAR)
+        randomType = Random () % NUMBER_OF_MON_TYPES;
+
+    VarSet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE,randomType);
+}
+
+void Quest_TryCompulsiveHealingPeerSupport_UpdateType(u16 days)
+{
+    if (days == 0)
+        return;
+
+    Quest_CompulsiveHealingPeerSupport_UpdateType();
+}
+
+void Quest_CompulsiveHealingPeerSupport_BufferTypeName(void)
+{
+    u32 dailyType = VarGet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE);
     StringCopy(gStringVar1,gTypesInfo[dailyType].name);
 }
 
-bool8 Quest_Brucelee_CheckIfPartyTypes(void)
+void Script_Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void)
 {
-    u8 i;
-    u16 species;
-    u16 dailyType = VarGet(VAR_QUEST_BRUCE_LEE_DAILY_TYPE);
+    gSpecialVar_Result = Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes();
+}
 
-    bool8 partyMatchesType = TRUE;
-
+bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void)
+{
+    u32 dailyType = VarGet(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE);
     struct Pokemon *pokemon;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
-            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            u32 species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (gSpeciesInfo[species].types[0] != dailyType && gSpeciesInfo[species].types[1] != dailyType)
             {
-                partyMatchesType = FALSE;
+                return FALSE;
             }
         }
     }
-    return partyMatchesType;
+    return TRUE;
 }
 // ***********************************************************************
 // Quest: Restore Treasure Island
@@ -1439,17 +1598,62 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void)
 // ***********************************************************************
 // Quest: Ice Cream Crafting
 // ***********************************************************************
-bool8 Quest_SmoothieCrafting_CheckNeededItems(void){
-    bool8 hasPecha = CheckBagHasItem(ITEM_PECHA_BERRY,3);
-    bool8 hasNanab = CheckBagHasItem(ITEM_NANAB_BERRY,2);
-    bool8 hasRabuta = CheckBagHasItem(ITEM_RABUTA_BERRY,1);
 
-    bool8 hasNeededItems = FALSE;
-
-    if (hasPecha && hasNanab && hasRabuta){
-        hasNeededItems = TRUE;
+void DebugQuest_Smoothiecrafting(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_SMOOTHIECRAFTING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS:
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_REWARD:
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+            RemoveBagItem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+            break;
+        case STATE_QUEST_SMOOTHIECRAFTING_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_SMOOTHIECRAFTING);
+            AddBagItem(QUEST_SMOOTHIE_CRAFTING_PRODUCT,6);
+            break;
     }
-    return hasNeededItems;
+}
+void Quest_SmoothieCrafting_BufferRecipe(void)
+{
+    StringCopy(gStringVar2,COMPOUND_STRING(""));
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_1));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_1,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(", "));
+
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_2));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_2,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(", & "));
+
+    ConvertIntToDecimalStringN(gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3,STR_CONV_MODE_LEFT_ALIGN,CountDigits(QUEST_SMOOTHIE_CRAFTING_QUANTITY_3));
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(" "));
+    CopyItemNameHandlePlural(QUEST_SMOOTHIE_CRAFTING_BERRY_3,gStringVar4,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3);
+    StringAppend(gStringVar2,gStringVar4);
+    StringAppend(gStringVar2,COMPOUND_STRING(""));
+}
+
+void Quest_SmoothieCrafting_ConstrctRemaining(void)
+{
 }
 
 // ***********************************************************************
@@ -1460,27 +1664,45 @@ bool8 Quest_SmoothieCrafting_CheckNeededItems(void){
 // The function stores the nickname of the last Octillery scanned inside of gStringVar1/STR_VAR_1.
 bool8 IsPartyFullOfShinyOctillery(void)
 {
-    u8 count = 0, partyCount = CalculatePlayerPartyCount();
-    u16 species = 0;
+    u32 partyCount = CalculatePlayerPartyCount();
 
     for (gSpecialVar_0x8004 = 0; gSpecialVar_0x8004 <= partyCount; gSpecialVar_0x8004++)
     {
-        species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES);
-        if (species == SPECIES_OCTILLERY)
-        {
-            if (IsMonShiny(&gPlayerParty[gSpecialVar_0x8004]))
-            {
-                count++;
-            }
-            else
-            {
-                GetMonNickname(&gPlayerParty[gSpecialVar_0x8004], gStringVar1);
-                break;
-            }
-        }
+        if(GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES) != QUEST_FRESHWATER_EVOLUTION_SPECIES)
+            continue;
+
+        if (IsMonShiny(&gPlayerParty[gSpecialVar_0x8004]))
+            continue;
+
+        GetMonNickname(&gPlayerParty[gSpecialVar_0x8004], gStringVar1);
+        return FALSE;
     }
 
-    return (count == partyCount) ? TRUE : FALSE;
+    return TRUE;
+}
+
+void DebugQuest_FreshwaterEvolution(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_FRESHWATER_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_FRESHWATER_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
+            QuestMenu_ScriptSetActive(QUEST_FRESHWATEREVOLUTION);
+            break;
+        case STATE_QUEST_FRESHWATER_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_FRESHWATEREVOLUTION);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_CAUGHT);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(QUEST_FRESHWATER_EVOLUTION_SPECIES),FLAG_SET_SEEN);
+            break;
+        case STATE_QUEST_FRESHWATER_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_FRESHWATEREVOLUTION);
+            AddBagItem(QUEST_FRESHWATER_EVOLUTION_ITEM,1);
+            break;
+    }
 }
 
 // ***********************************************************************
@@ -1563,31 +1785,31 @@ void VSGarbodor_ChooseGemBasedOnStarter(void)
 // Cutscene: MaskOff  / Manhunt
 // ***********************************************************************
 
-bool32 MaskOff_ShouldShowAlcmene(void)
+bool32 MaskOff_ShouldShowVigrim(void)
 {
     if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_4)
         return FALSE;
-    if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_ALCMENE)
+    if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;
-    return (HasPlayerJoinedTheTide());
+    return (HasPlayerJoinedThe_Tide());
 }
 
-bool32 Manhunt_ShouldShowAlcmene(void)
+bool32 Manhunt_ShouldShowVigrim(void)
 {
     if (VarGet(VAR_MANHUNT_STATE) < GOT_MANHUNT_CLUE_4)
         return FALSE;
-    if (VarGet(VAR_MANHUNT_STATE) >= DEFEATED_MANHUNT_ALCMENE)
+    if (VarGet(VAR_MANHUNT_STATE) >= DEFEATED_MANHUNT_VIGRIM)
         return FALSE;
-    return (!HasPlayerJoinedTheTide());
+    return (!HasPlayerJoinedThe_Tide());
 }
 
-bool32 ShouldShowAlcmene(void)
+bool32 ShouldShowVigrim(void)
 {
-    //if on the last stage of "MaskOff", OR the last stage of "Manhunt", OR before the raid on the Naval Base, then show Alcmene. otherwise, hide
-    if (MaskOff_ShouldShowAlcmene())
+    //if on the last stage of "MaskOff", OR the last stage of "Manhunt", OR before the raid on the Naval Base, then show Vigrim. otherwise, hide
+    if (MaskOff_ShouldShowVigrim())
         return TRUE;
 
-    if (Manhunt_ShouldShowAlcmene())
+    if (Manhunt_ShouldShowVigrim())
         return TRUE;
 
     if (VarGet(VAR_STORYLINE_STATE) < STORY_EAST_RESIDO_COMPLETE)
@@ -1595,6 +1817,12 @@ bool32 ShouldShowAlcmene(void)
 
     return FALSE;
 }
+
+void Script_ShouldShowVigrim(void)
+{
+    gSpecialVar_Result = ShouldShowVigrim();
+}
+
 
 // ***********************************************************************
 // Cutscene: False Timeline
@@ -1720,12 +1948,12 @@ bool32 CanMonMegaEvolve(u32 species)
 
 void WowYoureStrong_GetBadgesAndSetTowerState(void)
 {
-	GetNumberOfBadges();
+    GetNumberOfBadges();
 
-	if (gSpecialVar_Result != 3)
-		return;
+    if (gSpecialVar_Result != 3)
+        return;
 
-	VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
+    VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
 }
 
 // ***********************************************************************
@@ -1747,27 +1975,27 @@ void Quest_DrugHelmetTest_ForgetMoveByPhase(void)
         if(GetMonData(&gPlayerParty[i], MON_DATA_MOVE2, 0) != MOVE_NONE){
             switch (phaseNum)
             {
-            case 1:
-                for(k = 1; k < MAX_MON_MOVES - 1; k++){
-                    move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k + 1, 0);
+                case 1:
+                    for(k = 1; k < MAX_MON_MOVES - 1; k++){
+                        move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k + 1, 0);
+                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
+                    }
+                    move = MOVE_NONE;
                     SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
-                }
-                move = MOVE_NONE;
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
-                break;
-            case 2:
-                move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, 0);
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 1, &move);
-                move = MOVE_NONE;
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, &move);
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 3, &move);
-                break;
-            case 3:
-                move = MOVE_NONE;
-                for(l = 1; l < MAX_MON_MOVES; l++){
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + l, &move);
-                }
-                break;
+                    break;
+                case 2:
+                    move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, 0);
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 1, &move);
+                    move = MOVE_NONE;
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, &move);
+                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 3, &move);
+                    break;
+                case 3:
+                    move = MOVE_NONE;
+                    for(l = 1; l < MAX_MON_MOVES; l++){
+                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + l, &move);
+                    }
+                    break;
             }
         }
     }
@@ -1826,6 +2054,7 @@ void DebugQuest_RPS(u8 state)
     switch (state)
     {
         case STATE_QUEST_RPS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_RPS_STARTED:
             QuestMenu_ScriptSetActive(QUEST_RPS);
@@ -1910,14 +2139,14 @@ u32 GetHintFromMon(void)
     u32 remainingQuests = Quest_Generic_CountRemainingSubquests(QUEST_CUTEPOKEMON);
     u32 speciesId = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
-        switch(remainingQuests)
-        {
-            case 4: return GetEiscueHint(speciesId);
-            case 3: return GetCorsolaHint(speciesId);
-            case 2: return GetDuskullHint(speciesId);
-            default:
-            case 1: return GetScraftyHint(speciesId);
-        }
+    switch(remainingQuests)
+    {
+        case 4: return GetEiscueHint(speciesId);
+        case 3: return GetCorsolaHint(speciesId);
+        case 2: return GetDuskullHint(speciesId);
+        default:
+        case 1: return GetScraftyHint(speciesId);
+    }
 }
 
 u32 GetEiscueHint(u32 speciesId)
@@ -2150,6 +2379,7 @@ void DebugQuest_VSDeoxys(u8 state)
         default:
         case STATE_QUEST_VSDEOXYS_NOT_STARTED:
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
             QuestMenu_ScriptSetActive(QUEST_VSDEOXYS);
             break;
         case STATE_QUEST_VSDEOXYS_RECIVED_ROCK_SMASH_TM:
@@ -2201,13 +2431,17 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
 {
     switch (state)
     {
-    default:
-    case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
-        FlagSet(FLAG_SYS_STARTER_APPS_GET);
-        break;
-    case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
-        QuestMenu_ScriptSetComplete(QUEST_RESTORETIRABUDINGYM);
-        break;
+        default:
+        case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            // PSF TODO use quest debug for both of the following
+            QuestMenu_ScriptSetComplete(QUEST_INVERSEHALLUCINOGENIC);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
+            break;
+        case STATE_QUEST_RESTORETIRABUDINGYM_COMPLETED:
+            FlagSet(FLAG_FACILITY_UNLOCK_BD);
+            QuestMenu_ScriptSetComplete(QUEST_RESTORETIRABUDINGYM);
+            break;
     }
 }
 
@@ -2315,23 +2549,201 @@ bool32 ShouldAskUnhoused(void)
 void ShowGarbodor(void)
 {
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
-    struct Pokemon *mon = &daycare->viewMon;
-    u32 species = SPECIES_GARBODOR;
-    u32 level = 40;
+    //struct Pokemon *mon = &daycare->viewMon;
+    struct Pokemon mon;
+    u16 species = SPECIES_GARBODOR;
+    u8 level = 40;
     u32 personality = GetMonPersonality(species, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
-    u32 fixedOtId = 0;
-    bool32 isShiny = TRUE;
-    u32 item = ITEM_NORMAL_GEM;
+    u32 fixedOtId = 38726;
+    bool8 isShiny = TRUE;
+    enum Item item = ITEM_NORMAL_GEM;
 
-    CreateMon(mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
-    SetMonData(mon,MON_DATA_IS_SHINY,&isShiny);
-    SetMonData(mon,MON_DATA_HELD_ITEM,&item);
+    CreateMon(&mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
+    SetMonData(&mon,MON_DATA_IS_SHINY,&isShiny);
+    SetMonData(&mon,MON_DATA_HELD_ITEM,&item);
+    CalculateMonStats(&mon);
+    GiveMonInitialMoveset(&mon);
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    CopyMon(&daycare->viewMon,&mon,sizeof(struct Pokemon));
+
+    // PSF TODO change OT to be Baiya
+    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, &daycare->viewMon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+// ***********************************************************************
+// Cutscene: Okay Let's Fix It
+// ***********************************************************************
+
+void AwardPartyMonChampionRibbon(void)
+{
+    bool8 giveRibbon = TRUE;
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (IsMonInvalid(gPlayerParty[slot]))
+            continue;
+
+        SetMonData(&gPlayerParty[slot],MON_DATA_CHAMPION_RIBBON,&giveRibbon);
+    }
+}
+
+static bool8 DoesMonHaveChampionRibbon(struct Pokemon pokemon)
+{
+    return (GetMonData(&pokemon,MON_DATA_CHAMPION_RIBBON));
+}
+
+static bool8 DoesPartyMonHaveChampionRibbon(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (IsMonInvalid(gPlayerParty[slot]))
+            continue;
+
+        if (DoesMonHaveChampionRibbon(gPlayerParty[slot]))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 DoesBoxMonHaveChampionRibbon(void)
+{
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (IsMonInvalid(tempMon))
+                continue;
+
+            if (DoesMonHaveChampionRibbon(tempMon))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static bool8 DoesAnyMonHaveChampionRibbon(void)
+{
+    return (DoesPartyMonHaveChampionRibbon() || DoesBoxMonHaveChampionRibbon());
+}
+
+void Script_CheckIfAnyMonHasChampionRibbon(void)
+{
+    gSpecialVar_Result = DoesAnyMonHaveChampionRibbon();
+}
+
+void Script_CheckIfChosenMonHasChampionRibbon(void)
+{
+    gSpecialVar_Result = DoesMonHaveChampionRibbon(gPlayerParty[gSpecialVar_0x8004]);
+}
+
+static u8 DoesPlayerHaveOneOrTwoUsableMon(void)
+{
+    if (gPlayerPartyCount == 1)
+        return PLAYER_HAS_ONE_MON;
+
+    u32 aliveCount = 0;
+
+    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+                && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
+                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
+            aliveCount++;
+    }
+
+    return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
+}
+
+void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
+{
+    gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
+}
+
+// ***********************************************************************
+// Quest: Stress Cup
+// ***********************************************************************
+
+void StressCup_GivePlayerParty(void)
+{
+    ZeroPlayerPartyMons();
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], TRUE, BATTLE_TYPE_TRAINER);
+}
+
+void DebugQuest_StressCup(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_STRESSCUP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_STRESSCUP_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_STRESSCUP);
+            break;
+        case STATE_QUEST_STRESSCUP_COMPLETE_QUEST:
+            QuestMenu_ScriptSetComplete(QUEST_STRESSCUP);
+            break;
+    }
 }
 // ***********************************************************************
 // Quest: Rabies Outbreak
 // ***********************************************************************
+
+void DebugQuest_RabiesOutbreak(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_RABIES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RABIES_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_1:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,1);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_2:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,2);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_3:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,3);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_4:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,4);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_5:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,5);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_6:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,6);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_7:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,7);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_8:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,8);
+            break;
+        case STATE_QUEST_RABIES_DEFEATED_9:
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,9);
+            break;
+        case STATE_QUEST_RABIES_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
+            break;
+        case STATE_QUEST_RABIES_COMPLETE:
+            AddBagItem(ITEM_QUEST_RABIES_OUTBREAK_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RABIESOUTBREAK);
+            VarSet(VAR_DEFEATED_GLAMEOW_COUNT,QUEST_RABIES_OUTBREAK_COUNT);
+            break;
+    }
+}
 
 void CountDefeatedRabiesMon(void)
 {
@@ -2339,7 +2751,7 @@ void CountDefeatedRabiesMon(void)
        Iterate every spot in the enemy's party
        If one is Glameow AND you're in GlavezHill AND its not a Trainer battle, then increment the defeated Glameow count by one
        If the Glameow count is > 9, AND the Rabies Outbreak quest is active  change the Rabies Outbreak quest to Reward state
-   */
+       */
     if (GetCurrentMap() != QUEST_RABIES_OUTBREAK_MAP)
         return;
 
@@ -2386,6 +2798,623 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 }
 
 // ***********************************************************************
+// Quest: Hodou Tunnels
+// ***********************************************************************
+
+void Quest_Hodoutunnels_SetVariable_TalkedToElder(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_ELDER,TRUE);
+}
+
+void Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_SCROLL,TRUE);
+}
+
+void Quest_Hodoutunnels_SetVariable_HasDiscoveredTunnels(void)
+{
+    SetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_TUNNELS,TRUE);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_ELDER);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_SCROLL);
+}
+
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void)
+{
+    return GetVariableBit(VAR_QUEST_HODOUTUNNELS,QUEST_HODOUTUNNELS_BIT_TUNNELS);
+}
+
+void Quest_Hodoutunnels_GetVariable_TalkedToElder_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_TalkedToElder();
+}
+
+void Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll();
+}
+
+void Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels_Script(void)
+{
+    gSpecialVar_Result = Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels();
+}
+
+void DebugQuest_Hodoutunnels(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HODOUTUNNELS_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_TUNNELS);
+            QuestMenu_ScriptSetActive(QUEST_HODOUTUNNELS);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_TALKED_TO_ELDER:
+            Quest_Hodoutunnels_SetVariable_TalkedToElder();
+            break;
+        case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
+            QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
+            Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
+            break;
+        case STATE_QUEST_HODOUTUNNELS_HAS_TREASURE:
+            AddBagItem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_HODOUTUNNELS);
+            RemoveBagItem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1);
+            break;
+        case STATE_QUEST_HODOUTUNNELS_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HODOUTUNNELS);
+            AddBagItem(ITEM_QUEST_HODOUTUNNELS_REWARD,1);
+            break;
+    }
+}
+//
+// ***********************************************************************
+// Quest: Psyop
+// ***********************************************************************
+
+static bool8 Quest_Psyop_CheckPartyForTarget(void)
+{
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        u32 species = GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES,NULL);
+
+        if ((species == SPECIES_QUEST_PSYOP_TARGET) || (species == SPECIES_QUEST_PSYOP_REWARD))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static enum QuestPsyopErrors Quest_Psyop_CheckTargetAttributes(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u32 species = GetMonData(mon,MON_DATA_SPECIES,NULL);
+
+    if ((species != SPECIES_QUEST_PSYOP_TARGET) && (species != SPECIES_QUEST_PSYOP_REWARD))
+        return QUEST_PSYOP_NOT_SPECIES;
+
+    if (species == SPECIES_QUEST_PSYOP_REWARD)
+        return QUEST_PSYOP_IS_REWARD_SPECIES;
+
+    u32 totalEv = 0;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        totalEv += GetMonData(mon,(MON_DATA_HP_EV + stat));
+
+    bool32 hasMaxedEvs = (totalEv >= ADJUSTED_MAX_TOTAL_EVS);
+    bool32 isCorrectBall = (GetMonData(mon,MON_DATA_POKEBALL,NULL) == (ItemIdToBallId(ITEM_QUEST_PSYOP_TARGET_BALL)));
+
+    if (!hasMaxedEvs && !isCorrectBall)
+        return QUEST_PSYOP_NO_EFFORT_AND_BALL;
+
+    if (!hasMaxedEvs)
+        return QUEST_PSYOP_NO_EFFORT;
+
+    if (!isCorrectBall)
+        return QUEST_PSYOP_NO_BALL;
+
+    return QUEST_PSYOP_READY_TO_TRANSFORM;
+}
+
+void Script_Quest_Psyop_CheckTargetAttributes(void)
+{
+    gSpecialVar_Result = Quest_Psyop_CheckTargetAttributes();
+}
+
+void Script_Quest_Psyop_CheckPartyForTarget(void)
+{
+    gSpecialVar_Result = Quest_Psyop_CheckPartyForTarget();
+}
+
+void Quest_Psyop_TransformTarget(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u32 species = SPECIES_QUEST_PSYOP_REWARD;
+
+    SetMonData(mon,MON_DATA_SPECIES,&species);
+    CalculateMonStats(mon);
+}
+
+void DebugQuest_Psyop_GiveMon(u32 state)
+{
+    u32 species[STATE_QUEST_PSYOP_COMPLETE+1] = {SPECIES_PANCHAM, SPECIES_QUEST_PSYOP_TARGET, SPECIES_QUEST_PSYOP_REWARD};
+    enum Move moves[MAX_MON_MOVES] = {MOVE_CELEBRATE,0,0,0};
+    u16 evs[NUM_STATS] = {85,85,85,85,85,85};
+    u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
+    enum PokeBall ball = BALL_HEAL;
+
+    ScriptGiveMonParameterized(0,PARTY_SIZE,species[state],50,ITEM_NONE,ball,NUM_NATURES,NUM_ABILITY_PERSONALITY,MON_GENDERLESS,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+}
+
+void DebugQuest_Psyop(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_PSYOP_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_PSYOP_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            DebugQuest_Psyop_GiveMon(state);
+            QuestMenu_ScriptSetActive(QUEST_PSYOP);
+            break;
+        case STATE_QUEST_PSYOP_COMPLETE:
+            DebugQuest_Psyop_GiveMon(state);
+            QuestMenu_ScriptSetComplete(QUEST_PSYOP);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Between A Stone And A Hard Place
+// ***********************************************************************
+
+void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void)
+{
+    if(!IsQuestActiveState(QUEST_BETWEENASTONEANDAHARDPLACE))
+        return;
+
+    if(GetGameStat(GAME_STAT_TROLLEY_RIDES) < NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES)
+        return;
+
+    QuestMenu_ScriptSetReward(QUEST_BETWEENASTONEANDAHARDPLACE);
+}
+
+void DebugQuest_BetweenAStoneAndAHardPlace(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_STARTED:
+            VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_STONE);
+            QuestMenu_ScriptSetActive(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_1:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_2:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_3:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_4:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_5:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_6:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_7:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_8:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_9:
+            IncrementGameStat(GAME_STAT_TROLLEY_RIDES);
+            break;
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+        default:
+        case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE:
+            u32 stones[COUNT_EVOLUTION_STONES+1] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE, ITEM_LEAF_STONE, ITEM_ICE_STONE, ITEM_SUN_STONE, ITEM_MOON_STONE, ITEM_SHINY_STONE, ITEM_DUSK_STONE, ITEM_DAWN_STONE};
+            Shuffle(stones,COUNT_EVOLUTION_STONES+1,sizeof(stones[0]));
+            AddBagItem(stones[0],1);
+            QuestMenu_ScriptSetComplete(QUEST_BETWEENASTONEANDAHARDPLACE);
+            break;
+    }
+}
+static bool8 Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector(void)
+{
+    if (!IsQuestCompletedState(QUEST_BETWEENASTONEANDAHARDPLACE))
+        return FALSE;
+
+    if (FlagGet(FLAG_DELAY_ROCK_COLLECTOR))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector(void)
+{
+    gSpecialVar_Result = Quest_BetweenAStoneAndAHardPlace_ShouldStartRockCollector();
+}
+
+u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void)
+{
+    return GetGameStat(GAME_STAT_TROLLEY_RIDES);
+}
+
+void Script_Quest_BetweenAStoneAndAHardPlaceHasRode7(void)
+{
+    gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >= 7);
+}
+
+// ***********************************************************************
+// Quest: Get the Band Back Together
+// ***********************************************************************
+
+static const u16 questBikerLUT[QUEST_GETTHEBANDBACKTOGETHER_SUB_COUNT] =
+{
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF),
+    (TRAINER_FLAGS_START + TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG),
+};
+
+void Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_GETTHEBANDBACKTOGETHER);
+}
+
+void DebugQuest_Getthebandbacktogether(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST:
+            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
+            QuestMenu_ScriptSetActive(QUEST_GETTHEBANDBACKTOGETHER);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_B:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_C:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_D:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_E:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_F:
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_G:
+            u32 flag = (state - STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A);
+            QuestMenu_GetSetSubquestState(QUEST_GETTHEBANDBACKTOGETHER, FLAG_SET_COMPLETED, flag);
+            FlagSet(questBikerLUT[flag]);
+            Quest_Getthebandbacktogether_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_GETTHEBANDBACKTOGETHER);
+            break;
+        case STATE_QUEST_GETTHEBANDBACKTOGETHER_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_GETTHEBANDBACKTOGETHER);
+            // PSF TODO Add flag for ACRO_BIKE once it is decided that the game will use the acro bike
+            break;
+    }
+}
+void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_GETTHEBANDBACKTOGETHER);
+}
+
+// ***********************************************************************
+// Quest: Restaurant Expansion 1
+// ***********************************************************************
+
+static const u16 questFoodLUT[QUEST_RESTAURANTEXPANSION1_SUB_COUNT] =
+{
+    ITEM_QUEST_RESTAURANTEXPANSION1_1,
+    ITEM_QUEST_RESTAURANTEXPANSION1_2,
+    ITEM_QUEST_RESTAURANTEXPANSION1_3,
+    ITEM_QUEST_RESTAURANTEXPANSION1_4,
+};
+
+void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
+}
+
+void DebugQuest_Restaurantexpansion1(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTAURANTEXPANSION1_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_HELPED_UNHOUSED:
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_UNHOUSED_INSPIRED);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_KARIOKA:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHEBUREKI:
+        case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_JIANBING:
+            u32 pickupProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE);
+            AddBagItem(questFoodLUT[pickupProgress],1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHEBUREKI:
+        case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_JIANBING:
+            u32 deliverProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE);
+            RemoveBagItem(questFoodLUT[deliverProgress],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, deliverProgress);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_RESTAURANTEXPANSION1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE:
+            AddBagItem(ITEM_QUEST_RESTAURANTEXPANSION1_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION1);
+            break;
+    }
+}
+
+void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
+{
+    gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
+}
+
+// ***********************************************************************
+// Quest: Digging Up Adaora's Dirt
+// ***********************************************************************
+
+void Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_DIGGINGUPADAORASDIRT);
+}
+
+
+void DebugQuest_Diggingupadaorasdirt(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_STARTED_QUEST:
+            JumpPlayerTo_HowDoWeGetHome(JUMP_DEBUG);
+            QuestMenu_ScriptSetActive(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_INFLUENCE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_DIGGINGTIMEMEMBERA);
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_LEADERSHIP:
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_GROWING_UP:
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING:
+            JumpPlayerTo_Epilogue(JUMP_DEBUG);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM); // PSF TODO replace with quest debug
+            QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            VarSet(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU);
+            Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE:
+            AddMoney(&gSaveBlock1Ptr->money,QUEST_DIGGINGUPADAORASDIRT_REWARD);
+            QuestMenu_ScriptSetComplete(QUEST_DIGGINGUPADAORASDIRT);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Return Doll
+// ***********************************************************************
+
+static u32 Quest_Returndoll_GenerateDollMon(void)
+{
+    u32 species = SPECIES_QUEST_RETURNDOLL;
+    CreateWildMon(species, LEVEL_QUEST_RETURNDOLL);
+    u32 female = (IsOverworldMonFemale()) ? OBJ_EVENT_MON_FEMALE : 0;
+    u32 shiny = (IsOverworldMonShiny()) ? OBJ_EVENT_MON_SHINY : 0;
+    return (OBJ_EVENT_MON + species + female + shiny);
+}
+
+void TransformDollIntoGhostPokemon(void)
+{
+    u32 graphicsId = Quest_Returndoll_GenerateDollMon();
+    TransformObjectByLocalIdIntoGraphicsId(LOCALID_QUEST_RETURNDOLL_DOLL,graphicsId);
+}
+
+void DebugQuest_Returndoll(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RETURNDOLL_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            break;
+        case STATE_QUEST_RETURNDOLL_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RETURNDOLL);
+            break;
+        case STATE_QUEST_RETURNDOLL_BEFORE_BATTLE:
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            FakeRtc_ForwardTimeTo(NIGHT_HOUR_BEGIN, 0, 0);
+            break;
+        case STATE_QUEST_RETURNDOLL_REWARD:
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_QUEST_RETURNDOLL),FLAG_SET_SEEN);
+            AddBagItem(ITEM_QUEST_RETURNDOLL_DOLL,1);
+            QuestMenu_ScriptSetReward(QUEST_RETURNDOLL);
+            break;
+        case STATE_QUEST_DIGGINGUPADAORASDIRT_COMPLETE:
+            RemoveBagItem(ITEM_QUEST_RETURNDOLL_DOLL,1);
+            AddBagItem(ITEM_QUEST_RETURNDOLL_REWARD,1);
+            QuestMenu_ScriptSetComplete(QUEST_RETURNDOLL);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Free The Innocent
+// ***********************************************************************
+
+bool8 Quest_Freetheinnocent_FactsLearned(void)
+{
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_1) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_2) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_5) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 Quest_Freetheinnocent_CupFound(void)
+{
+    return (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_6) != FALSE);
+}
+
+bool8 Quest_Freetheinnocent_CashierSpoken(void)
+{
+    return (QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_7) != FALSE);
+}
+
+void Script_Quest_Freetheinnocent_FactsLearned(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_FactsLearned();
+}
+
+void Script_Quest_Freetheinnocent_CupFound(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_CupFound();
+}
+
+void Script_Quest_Freetheinnocent_CashierSpoken(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_CashierSpoken();
+}
+
+bool32 Quest_Freetheinnocent_ShouldDiscoverCup(void)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT, FLAG_GET_ACTIVE))
+        return FALSE;
+
+    if (!Quest_Freetheinnocent_FactsLearned())
+        return FALSE;
+
+    return (!Quest_Freetheinnocent_CupFound());
+
+    return TRUE;
+}
+
+void Script_Quest_Freetheinnocent_ShouldDiscoverCup(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_ShouldDiscoverCup();
+}
+
+bool32 Quest_Freetheinnocent_ShouldHostSpeak(void)
+{
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT, FLAG_GET_ACTIVE))
+        return FALSE;
+
+    if (!Quest_Freetheinnocent_CashierSpoken())
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_Freetheinnocent_ShouldHostSpeak(void)
+{
+    gSpecialVar_Result = Quest_Freetheinnocent_ShouldHostSpeak();
+}
+
+void DebugQuest_Freetheinnocent(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_FREETHEINNOCENT_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_FREETHEINNOCENT);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERC_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERC_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERC);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERD_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERD_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERD);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERF_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERF_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERF);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERG_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTHIKERG_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FREETHEINNOCENTHIKERG);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_FREETHEINNOCENTPLANTH_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENTPLANTH_AFTER:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FINDTHEGUILTYPLANTH);
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_TRASH_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_TRASH_AFTER:
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_6);
+            AddBagItem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_SHOPKEEPER_AFTER:
+            QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_SET_COMPLETED, SUB_QUEST_7);
+            RemoveBagItem(ITEM_QUEST_FREETHEINNOCENT_BOBA,1);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_HOST_BEFORE:
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_HOST_AFTER:
+        case STATE_QUEST_FREETHEINNOCENT_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_FREETHEINNOCENT);
+            break;
+        case STATE_QUEST_FREETHEINNOCENT_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_FREETHEINNOCENT);
+            break;
+    }
+}
+
+// ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************
 
@@ -2398,6 +3427,7 @@ bool8 IsHalaiIslandUnderConstruction(void)
 
     return TRUE;
 }
+
 
 void Script_IsHalaiIslandUnderConstruction(void)
 {

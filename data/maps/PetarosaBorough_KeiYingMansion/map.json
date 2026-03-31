@@ -102,7 +102,7 @@
       "x": 15,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var": "VAR_KEIYING_STATE",
       "var_value": "1",
       "script": "KeiyingRaisonDetre_ComeSit_Dialogue"
     },
@@ -111,7 +111,7 @@
       "x": 14,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var": "VAR_KEIYING_STATE",
       "var_value": "1",
       "script": "KeiyingRaisonDetre_ComeSit_Dialogue"
     },
@@ -120,7 +120,7 @@
       "x": 6,
       "y": 4,
       "elevation": 0,
-      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var": "VAR_KEIYING_STATE",
       "var_value": "2",
       "script": "KeiyingRaisonDetre_Wine_Dialogue"
     },
@@ -129,7 +129,7 @@
       "x": 37,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var": "VAR_KEIYING_STATE",
       "var_value": "3",
       "script": "KeiyingRaisonDetre_StartDinner_Script"
     },
@@ -138,7 +138,7 @@
       "x": 36,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_KEIYING_RAISON_DETRE_STATE",
+      "var": "VAR_KEIYING_STATE",
       "var_value": "3",
       "script": "KeiyingRaisonDetre_StartDinner_Script"
     },

@@ -11,7 +11,7 @@ script PerlaciaCity_Newspaper_InteractCherie_Event_Script {
         if (flag(FLAG_TIMELINE_FALSE)){
             switch(var(VAR_MANHUNT_STATE)){
                 case NOT_ASSIGNED: return
-                case ASSIGNED_FIND_ALCMENE: call(Manhunt_Cherie_Battle_Script)
+                case ASSIGNED_FIND_VIGRIM: call(Manhunt_Cherie_Battle_Script)
                 default: msgbox("...",MSGBOX_AUTOCLOSE)
             }
 

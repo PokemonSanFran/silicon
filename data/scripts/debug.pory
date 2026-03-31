@@ -168,9 +168,9 @@ script Debug_EventScript_CheckEVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End)
 	callnative(Script_GetChosenMonOffensiveEVs)
-	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveEVs)
-	msgbox(format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
     goto(Debug_EventScript_CheckEVs_End)
 }
 
@@ -188,9 +188,9 @@ script Debug_EventScript_CheckIVs
 	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End)
 	callnative(Script_GetChosenMonOffensiveIVs)
-	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 	callnative(Script_GetChosenMonDefensiveIVs)
-	msgbox(format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}"),MSGBOX_DEFAULT)
+	msgbox(format("HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
 }
 
 script Debug_EventScript_CheckIVs_End
@@ -201,7 +201,6 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-    giveitem(ITEM_MACH_BIKE,1)
 	end
 }
 
@@ -401,7 +400,6 @@ script Debug_EventScript_InflictStatus1
 	goto(Debug_EventScript_InflictStatus1_Close)
 	}
 }
-
 
 script Debug_EventScript_InflictStatus1_Close
 {

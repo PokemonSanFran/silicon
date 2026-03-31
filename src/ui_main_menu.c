@@ -1307,7 +1307,7 @@ static void PrintGymLeaders(void)
         TRAINER_BELEN,
         TRAINER_SHINZO,
         TRAINER_EMRYS,
-        TRAINER_KAUNA,
+        TRAINER_PUA,
         TRAINER_NERIENE,
         TRAINER_DIMU,
         TRAINER_BD,
@@ -1893,7 +1893,7 @@ static u32 GetMenuCursorSpriteId(void)
 
 static void LoadCompletionIconSprite(void)
 {
-    struct CompressedSpriteSheet sSpriteSheet_CompletionSharprise =
+    struct CompressedSpriteSheet sSpriteSheet_CompletionSharpRise =
     {
         sharpriseSprite,
         (16*16),
@@ -1907,10 +1907,10 @@ static void LoadCompletionIconSprite(void)
         MAINMENU_GFXTAG_COMPLETION,
     };
 
-    if (HasPlayerJoinedTheTide())
+    if (HasPlayerJoinedThe_Tide())
         LoadCompressedSpriteSheet(&sSpriteSheet_CompletionTide);
     else
-        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharprise);
+        LoadCompressedSpriteSheet(&sSpriteSheet_CompletionSharpRise);
     LoadSpritePalette(&sMainMenuInterfaceSpritePalette);
 }
 
@@ -1921,7 +1921,7 @@ static void PrintCompletionIcon(void)
     u32 y = 67;
     u16 TileTag = MAINMENU_GFXTAG_COMPLETION;
 
-    if ((!HasPlayerJoinedTheTide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
+    if ((!HasPlayerJoinedThe_Tide()) && (!FlagGet(FLAG_TIMELINE_FALSE)))
         return;
 
     LoadCompletionIconSprite();

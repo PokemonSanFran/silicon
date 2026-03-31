@@ -1839,7 +1839,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/cutscenes/assholeshome.inc"
 .include "data/cutscenes/housingprotest.inc"
 .include "data/cutscenes/swagbag2.inc"
-.include "data/cutscenes/enterkauna.inc"
+.include "data/cutscenes/enterpua.inc"
 .include "data/cutscenes/sorryaboutmyfriends.inc"
 .include "data/cutscenes/thestorysofar.inc"
 .include "data/cutscenes/youngpadawan.inc"
@@ -1896,6 +1896,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/cutscenes/youcantstopme.inc"
 .include "data/cutscenes/wecanstopyouactually.inc"
 .include "data/cutscenes/epilogue.inc"
+.include "data/cutscenes/rematches.inc"
 
 ## SILICON QUESTS
 .include "data/quests/playersadventure.inc"
@@ -1909,6 +1910,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/hodoucitytunnels.inc"
 .include "data/quests/freshwaterevolution.inc"
 .include "data/quests/betweenastoneandahardplace.inc"
+.include "data/quests/psyop.inc"
 .include "data/quests/breaktheinternet.inc"
 .include "data/quests/shutdownmedicineman.inc"
 .include "data/quests/buildingscope.inc"
@@ -1959,11 +1961,14 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/restorezenzuisland.inc"
 .include "data/quests/restoremarin.inc"
 .include "data/quests/restoretirabudinplace.inc"
-.include "data/quests/armandostraining.inc"
 .include "data/quests/skilllibrary.inc"
 .include "data/quests/miniarcade.inc"
 .include "data/quests/mutualaidfund.inc"
 .include "data/quests/rps.inc"
+.include "data/quests/compulsivehealingpeersupportgroup.inc"
+.include "data/quests/stresscup.inc"
+.include "data/quests/diggingupadaorasdirt.inc"
+.include "data/quests/freetheinnocent.inc"
 ## SILICON MAPS
 .include "data/maps/AnbehBend/scripts.inc"
 .include "data/maps/Arantraz/scripts.inc"
@@ -2022,7 +2027,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/GlavezHill_Taxiunion/scripts.inc"
 .include "data/maps/Gldntepark_Helebra_Research/scripts.inc"
 .include "data/maps/HalaiIsland/scripts.inc"
-.include "data/maps/HalaiIsland_Kai/scripts.inc"
+.include "data/maps/HalaiIsland_Baiya/scripts.inc"
 .include "data/maps/HalaiIsland_PokemonCenter_1F/scripts.inc"
 .include "data/maps/HalaiIsland_PostEarthquake/scripts.inc"
 .include "data/maps/HalerbaCity/scripts.inc"
@@ -2244,3 +2249,13 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/Route16_Grotto/scripts.inc"
 	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"
+
+	.include "data/maps/MermerezaCity_Gym_Kitchen1/scripts.inc"
+
+	.include "data/maps/MermerezaCity_Gym_Kitchen2/scripts.inc"
+
+	.include "data/maps/MermerezaCity_Gym_Kitchen3/scripts.inc"
+
+	.include "data/maps/Chasilla_MochiShop/scripts.inc"
+
+	.include "data/maps/QiuVillage_Apartment_2F/scripts.inc"

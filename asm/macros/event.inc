@@ -2559,6 +2559,7 @@
     @ shows that tweet on the screeen.
     @ after a button press, hides the tweet
     .macro showtweet tweetId:req
+    closemessage
     buzzr MARK_READ \tweetId
     setflag FLAG_SYS_APP_BUZZR_GET
 	buzzr SHOW_TWEET \tweetId
@@ -3015,8 +3016,7 @@
 3:
     .endm
 
-    .macro faderemoveobject objectId:req, movement:req
-    applymovement \objectId \movement
+    .macro faderemoveobject objectId:req
     fadescreen FADE_TO_BLACK
     removeobject \objectId
     fadescreen FADE_FROM_BLACK
@@ -3343,7 +3343,7 @@
 	callnative DoFacilityTrainerBattle
 	.byte \facility
 	.endm
-	
+
 	.macro ingame_trade tradeId:req wantTradeMsg:req, declineTradeJump:req, wrongMonJump:req, tradeCompleteMsg:req
 	setvar VAR_0x8005, \tradeId
 	specialvar VAR_0x8009, GetInGameTradeSpeciesInfo
@@ -3551,6 +3551,53 @@
 	callnative ScrCmd_istmrelearneractive, requests_effects=1
 	.4byte \destination
 	.endm
+
+@ Start pathfinder
+  @ Creates a movement script to the given coords by using Weighted A*.
+	@ This is meant to be used to remove branching in scripts,
+	@ since the algorithm can be slow.
+	.macro moveobjecttocoords localId:req, x:req, y:req, facingDirection:req, speed=1, maxnodes=256
+	callnative ScrCmd_moveobjecttocoords
+	.2byte \localId
+	.2byte \x
+	.2byte \y
+	.byte \facingDirection
+	.byte \speed
+	.4byte \maxnodes
+	.endm
+
+	@ Creates a movement script for approaching the given object by using Weighted A*.
+	@ This is meant to be used to remove branching in scripts,
+	@ since the algorithm can be slow.
+	.macro approachobject localId:req, targetLocalId:req, facingDirection:req, approachDirection:req, speed=1, maxnodes=256
+	callnative ScrCmd_approachobject
+	.2byte \localId
+	.2byte \targetLocalId
+	.byte \facingDirection
+	.byte \approachDirection
+	.byte \speed
+	.4byte \maxnodes
+	.endm
+@ End pathfinder
+@ Start setObjectFlag
+    .macro setobjectflagfromlocalid localId:req
+	.byte SCR_OP_SETOBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+
+    .macro clearobjectflagfromlocalid localId:req
+	.byte SCR_OP_CLEAROBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+@ End setObjectFlag
+
+@ Start fadeRemoveLastTalked
+    .macro fadeandremovelasttalked
+    fadescreenswapbuffers FADE_TO_BLACK
+    removeobject VAR_LAST_TALKED
+    fadescreenswapbuffers FADE_FROM_BLACK
+    .endm
+@ End fadeRemoveLastTalked
 
 	@ Sets a starting status for the next battle. Can be stacked.
 	.macro setstartingstatus status:req

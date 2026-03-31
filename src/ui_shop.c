@@ -49,9 +49,6 @@
 
 // constants
 
-#define TILE_TO_PIXELS(t)   ((t) ? ((t) * 8) : 1)
-#define PIXELS_TO_TILES(p)  ((p) ? ((p) / 8) : 1)
-
 #define LEFT_PRESS  (-1)
 #define RIGHT_PRESS (1)
 #define UP_PRESS    (-1)

@@ -44,6 +44,7 @@
 #include "secret_base.h"
 #include "region_map.h"
 #include "money.h"
+#include "follower_npc.h"
 #include "field_effect.h"
 #include "constants/heal_locations.h"
 #include "quest_logic.h"
@@ -1312,9 +1313,9 @@ static void MapSystem_VBlankCB(void)
 
 // UI Loading Functions
 
-void Script_OpenTrolley(void) 
-{     
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);     
+void Script_OpenTrolley(void)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_OpenTrolleyMapSystemFromStation,0);
 }
 
@@ -2476,7 +2477,7 @@ void CreateOverworldWaypointArrow(void)
 static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
     //if (FindTaskIdByFunc(Task_RunMapPreview_Script) != TASK_NONE)
-   if (ForestMapPreviewScreenIsRunning()) 
+   if (ForestMapPreviewScreenIsRunning())
         return;
 
     if (!gPaletteFade.active)
@@ -3296,7 +3297,7 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
         return fare;
 
     bool32 hasArribaDiscount = (VarGet(VAR_ANBEH_BEND_STATE) >= DEFEATED_CHARLOTTE_LOMBARD);
-    bool32 hasPlayerJoined = HasPlayerJoinedTheTide();
+    bool32 hasPlayerJoined = HasPlayerJoinedThe_Tide();
 
     if (hasPlayerJoined || !hasArribaDiscount)
         return fare;
@@ -3321,6 +3322,8 @@ static void Task_MapSystem_TrolleyMode_Warp(u8 taskId)
             {
                 IncrementGameStat(GAME_STAT_TROLLEY_RIDES);
                 MapSystem_FreeResources();
+                if(PlayerHasFollowerNPC())
+                    ClearFollowerNPCData();
                 ReturnToFieldFromRegionMapWarpSelect();
                 sRegionMap->warpCounter = 2;
             }
@@ -3724,6 +3727,8 @@ static u8 HandleWarpCloseMenu(void)
             if (!gPaletteFade.active)
             {
                 MapSystem_FreeResources();
+                if(PlayerHasFollowerNPC())
+                    ClearFollowerNPCData();
                 ReturnToFieldFromRegionMapWarpSelect();
                 sRegionMap->warpCounter = 2;
             }
@@ -4122,4 +4127,4 @@ void BufferTrolleyBaseFare(void)
 {
     ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TROLLEY,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TROLLEY));
 }
-    
+

@@ -1,2 +1,25 @@
 mapscripts CresaltaVista_ShopUnion_MapScripts {
 }
+
+script CresaltaVista_ShopUnion_Script_ShopUnionRep
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_WAREHOUSEWARFARE,NULL)
+    goto_if_quest_reward(QUEST_WAREHOUSEWARFARE,NULL)
+    goto_if_quest_active(QUEST_WAREHOUSEWARFARE,NULL)
+
+    callnative(Script_Quest_BodegaBurnout_CountRemainingSubquests)
+    goto_if_eq(VAR_RESULT,TRUE,NULL)
+
+    goto_if_quest_active(QUEST_BODEGABURNOUT,Quest_Bodegaburnout_Dialouge_FirstActive)
+    goto_if_quest_inactive(QUEST_BODEGABURNOUT,CresaltaVista_ShopUnion_Dialogue_ShopUnionRep)
+}
+
+script CresaltaVista_ShopUnion_Dialogue_ShopUnionRep
+{
+    msgbox(format("You know that fancy Presto delivery service? It’s convenient, but the service fees are insane! If you bought from the local Poké Mart and then set another quarter of your bill on fire you’d still be better off than ordering from those crooks!"),,SPEAKER_SHOPUNIONREP)
+    closemessage
+    release
+    end
+}

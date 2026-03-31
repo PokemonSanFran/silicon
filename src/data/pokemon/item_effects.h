@@ -329,6 +329,23 @@ const u8 gItemEffect_ResetMochi[11] = {
     [10] = 0,
 };
 
+// Start sherbetSurprise
+
+const u8 gItemEffect_SherbetSurprise[15] = {
+    [4] = ITEM4_EV_HP | ITEM4_EV_ATK,
+    [5] = ITEM5_EV_DEF | ITEM5_EV_SPEED | ITEM5_EV_SPATK | ITEM5_EV_SPDEF | ITEM5_FRIENDSHIP_ALL,
+    [6] = 0,
+    [7] = 0,
+    [8] = 0,
+    [9] = 0,
+    [10] = 0,
+    [11] = 0,
+    [12] = -30,
+    [13] = -30,
+    [14] = -30,
+};
+// End sherbetSurprise
+
 const u8 gItemEffect_RareCandy[10] = {
     [3] = ITEM3_LEVEL_UP,
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
@@ -453,10 +470,3 @@ const u8 gItemEffect_TamatoBerry[10] = {
     [6] = ITEM6_SUBTRACT_EV,
     EV_BERRY_FRIENDSHIP_CHANGE,
 };
-// Start siliconMerge
-const u8 gItemEffect_SherbetSurprise[10] = {
-    [5] = ITEM5_FRIENDSHIP_ALL,
-    [6] = ITEM6_RESET_EV | ITEM6_EV_ALL,
-    EV_BERRY_FRIENDSHIP_CHANGE,
-};
-// End siliconMerge

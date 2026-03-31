@@ -416,25 +416,25 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Fishing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiNormal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlcmeneWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigrimWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BdWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BelenWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DimuWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DoyleWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EmrysWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ImeldaWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaunaSurfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaWalking;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PuaSurfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KeiyingWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MagnusWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NerieneWalking;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ShinzoWalking;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFainted;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFainted;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraFainted;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KaiFieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaFieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Comrade_3;
@@ -738,25 +738,25 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN3Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN3FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN3Fishing,
-    [OBJ_EVENT_GFX_KAI] =                      &gObjectEventGraphicsInfo_KaiNormal,
+    [OBJ_EVENT_GFX_BAIYA] =                      &gObjectEventGraphicsInfo_BaiyaNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,
-    [OBJ_EVENT_GFX_ALCMENE] =                  &gObjectEventGraphicsInfo_AlcmeneWalking,
+    [OBJ_EVENT_GFX_VIGRIM] =                  &gObjectEventGraphicsInfo_VigrimWalking,
     [OBJ_EVENT_GFX_BD] =                       &gObjectEventGraphicsInfo_BdWalking,
     [OBJ_EVENT_GFX_BELEN] =                    &gObjectEventGraphicsInfo_BelenWalking,
     [OBJ_EVENT_GFX_DIMU] =                     &gObjectEventGraphicsInfo_DimuWalking,
     [OBJ_EVENT_GFX_DOYLE] =                    &gObjectEventGraphicsInfo_DoyleWalking,
     [OBJ_EVENT_GFX_EMRYS] =                    &gObjectEventGraphicsInfo_EmrysWalking,
     [OBJ_EVENT_GFX_IMELDA] =                   &gObjectEventGraphicsInfo_ImeldaWalking,
-    [OBJ_EVENT_GFX_KAUNA] =                    &gObjectEventGraphicsInfo_KaunaWalking,
-    [OBJ_EVENT_GFX_KAUNA_SURFING] =            &gObjectEventGraphicsInfo_KaunaSurfing,
+    [OBJ_EVENT_GFX_PUA] =                    &gObjectEventGraphicsInfo_PuaWalking,
+    [OBJ_EVENT_GFX_PUA_SURFING] =            &gObjectEventGraphicsInfo_PuaSurfing,
     [OBJ_EVENT_GFX_KEIYING] =                  &gObjectEventGraphicsInfo_KeiyingWalking,
     [OBJ_EVENT_GFX_MAGNUS] =                   &gObjectEventGraphicsInfo_MagnusWalking,
     [OBJ_EVENT_GFX_NERIENE] =                  &gObjectEventGraphicsInfo_NerieneWalking,
     [OBJ_EVENT_GFX_SHINZO] =                   &gObjectEventGraphicsInfo_ShinzoWalking,
-    [OBJ_EVENT_GFX_KAI_FAINTED] =              &gObjectEventGraphicsInfo_KaiFainted,
+    [OBJ_EVENT_GFX_BAIYA_FAINTED] =              &gObjectEventGraphicsInfo_BaiyaFainted,
     [OBJ_EVENT_GFX_ADAORA_FAINTED] =           &gObjectEventGraphicsInfo_AdaoraFainted,
-    [OBJ_EVENT_GFX_KAI_FIELD_MOVE] =           &gObjectEventGraphicsInfo_KaiFieldMove,
+    [OBJ_EVENT_GFX_BAIYA_FIELD_MOVE] =           &gObjectEventGraphicsInfo_BaiyaFieldMove,
     // End silicon
     [OBJ_EVENT_GFX_LIGHT_SPRITE] =             &gObjectEventGraphicsInfo_BallLight,
     [OBJ_EVENT_GFX_APRICORN_TREE] =            &gObjectEventGraphicsInfo_ApricornTree,

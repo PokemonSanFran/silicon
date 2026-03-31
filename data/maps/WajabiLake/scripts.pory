@@ -18,8 +18,8 @@ script WajabiLake_Membersonly_Dialogue{
         end
     }
     lock
-    msgbox(gText_WajabiLake_Accessdenied,,SPEAKER_SPEAKER)
-    msgbox(gText_WajabiLake_Firstplacethateven,,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("Access is denied. This area is members only."),,SPEAKER_SPEAKER)
+    msgbox(format("First place that even SharpriseCapital couldn't get me into..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkUp)
     waitmovement(PLAYER)

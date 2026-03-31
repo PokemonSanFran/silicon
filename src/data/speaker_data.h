@@ -38,8 +38,8 @@ static const u16 sSpeakerPal_Belen[]  = INCBIN_U16("graphics/ui_menus/msgbox/cha
 static const u32 gSpeakerIcon_Fisherman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/fisherman.4bpp");
 static const u16 sSpeakerPal_Fisherman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/fisherman.gbapal");
 
-static const u32 gSpeakerIcon_Alcmene[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/alcmene.4bpp");
-static const u16 sSpeakerPal_Alcmene[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/alcmene.gbapal");
+static const u32 gSpeakerIcon_Vigrim[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/vigrim.4bpp");
+static const u16 sSpeakerPal_Vigrim[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/vigrim.gbapal");
 
 static const u32 gSpeakerIcon_Girl[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/girl.4bpp");
 static const u16 sSpeakerPal_Girl[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/girl.gbapal");
@@ -77,8 +77,8 @@ static const u16 sSpeakerPal_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/chara
 static const u32 gSpeakerIcon_Misty[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/misty.4bpp");
 static const u16 sSpeakerPal_Misty[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/misty.gbapal");
 
-static const u32 gSpeakerIcon_Kauna[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kauna.4bpp");
-static const u16 sSpeakerPal_Kauna[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kauna.gbapal");
+static const u32 gSpeakerIcon_Pua[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/pua.4bpp");
+static const u16 sSpeakerPal_Pua[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/pua.gbapal");
 
 static const u32 gSpeakerIcon_Old_Man[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/old_man.4bpp");
 static const u16 sSpeakerPal_Old_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/old_man.gbapal");
@@ -132,8 +132,8 @@ static const u16 sSpeakerPal_Ace_Trainer_F[]  = INCBIN_U16("graphics/ui_menus/ms
 static const u32 gSpeakerIcon_Ace_Trainer_M[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.4bpp");
 static const u16 sSpeakerPal_Ace_Trainer_M[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.gbapal");
 
-static const u32 gSpeakerIcon_Kai[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kai.4bpp");
-static const u16 sSpeakerPal_Kai[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kai.gbapal");
+static const u32 gSpeakerIcon_Baiya[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/baiya.4bpp");
+static const u16 sSpeakerPal_Baiya[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/baiya.gbapal");
 
 static const u32 gSpeakerIcon_Adaora[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/adaora.4bpp");
 static const u16 sSpeakerPal_Adaora[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/adaora.gbapal");
@@ -329,21 +329,21 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
-    [SPEAKER_ALCMENE] =
+    [SPEAKER_VIGRIM] =
     {
-        .name = COMPOUND_STRING("Alcmene"),
+        .name = COMPOUND_STRING("Vigrim"),
         .title = COMPOUND_STRING("Tide Leader"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .gender = NON_BINARY,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
-    [SPEAKER_ALCMENE_UNKNOWN] =
+    [SPEAKER_VIGRIM_UNKNOWN] =
     {
         .name = COMPOUND_STRING("???"),
         .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .gender = NON_BINARY,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
     [SPEAKER_GIRL] =
     {
@@ -387,8 +387,8 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_KEIYING] =
     {
-        .name = COMPOUND_STRING("Keiying"),
-        .title = COMPOUND_STRING("Sharp Rise COO"),
+        .name = COMPOUND_STRING("Kei-Ying"),
+        .title = COMPOUND_STRING("SharpRise COO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Keiying,
         .speakerPal = sSpeakerPal_Keiying,
@@ -441,13 +441,13 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
-    [SPEAKER_KAUNA] =
+    [SPEAKER_PUA] =
     {
-        .name = COMPOUND_STRING("Kauna"),
+        .name = COMPOUND_STRING("Pua"),
         .title = COMPOUND_STRING("Gym Leader"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kauna,
-        .speakerPal = sSpeakerPal_Kauna,
+        .speakerIcon = gSpeakerIcon_Pua,
+        .speakerPal = sSpeakerPal_Pua,
     },
     [SPEAKER_OLD_MAN] =
     {
@@ -500,7 +500,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_RAMESH] =
     {
         .name = COMPOUND_STRING("Ramesh"),
-        .title = COMPOUND_STRING("Sharp Rise CMO"),
+        .title = COMPOUND_STRING("SharpRise CMO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Ramesh,
         .speakerPal = sSpeakerPal_Ramesh,
@@ -633,21 +633,21 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Adaora,
         .speakerPal = sSpeakerPal_Adaora,
     },
-    [SPEAKER_KAI] =
+    [SPEAKER_BAIYA] =
     {
-        .name = COMPOUND_STRING("Kai"),
+        .name = COMPOUND_STRING("Baiya"),
         .title = COMPOUND_STRING("{PKMN} Trainer"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kai,
-        .speakerPal = sSpeakerPal_Kai,
+        .speakerIcon = gSpeakerIcon_Baiya,
+        .speakerPal = sSpeakerPal_Baiya,
     },
-    [SPEAKER_KAI_TIDE] =
+    [SPEAKER_BAIYA_TIDE] =
     {
-        .name = COMPOUND_STRING("Kai"),
+        .name = COMPOUND_STRING("Baiya"),
         .title = COMPOUND_STRING("The Tide"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kai,
-        .speakerPal = sSpeakerPal_Kai,
+        .speakerIcon = gSpeakerIcon_Baiya,
+        .speakerPal = sSpeakerPal_Baiya,
     },
     [SPEAKER_COLLECTOR] =
     {
@@ -827,7 +827,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_GRUNT] =
     {
-        .name = COMPOUND_STRING("G.R.U.N.T."),
+        .name = COMPOUND_STRING("GRUNT"),
         .title = COMPOUND_STRING("???"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
@@ -945,9 +945,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
-    [SPEAKER_ARMANDO] =
+    [SPEAKER_FRANK] =
     {
-        .name = COMPOUND_STRING("Armando"),
+        .name = COMPOUND_STRING("Frank"),
         .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bruno,
@@ -995,17 +995,17 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_ROCKET_MEMBER_A] =
     {
-        .name = COMPOUND_STRING("TheTide Member"),
+        .name = COMPOUND_STRING("The Tide Member"),
         .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
+        .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
     [SPEAKER_ROCKET_MEMBER_B] =
     {
-        .name = COMPOUND_STRING("TheTide Member"),
+        .name = COMPOUND_STRING("The Tide Member"),
         .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
+        .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
@@ -1017,10 +1017,10 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
     },
-    [SPEAKER_ADELAIDE] =
+    [SPEAKER_LUCREZIA] =
     {
-        .name = COMPOUND_STRING("Adelaide"),
-        .title = COMPOUND_STRING("Sharp Rise CEO"),
+        .name = COMPOUND_STRING("Lucrezia"),
+        .title = COMPOUND_STRING("SharpRise CEO"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
@@ -1137,9 +1137,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
-    [SPEAKER_ELLEN] =
+    [SPEAKER_ELEANOR] =
     {
-        .name = COMPOUND_STRING("Ellen"),
+        .name = COMPOUND_STRING("Eleanor"),
         .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Karen,
@@ -1409,11 +1409,11 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
-    [SPEAKER_TROLLEY_GUY] =
+    [SPEAKER_TROLLEYWORKER] =
     {
-        .name = COMPOUND_STRING("Trolley Guy"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
+        .name = COMPOUND_STRING("Trolleyworker"),
+        .title = COMPOUND_STRING("GRUNT Employee"),
+        .gender = MALE,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
@@ -1427,9 +1427,9 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_SHARPRISECAPITAL_STAFF] =
     {
-        .name = COMPOUND_STRING("Sharp Rise Staff"),
+        .name = COMPOUND_STRING("SharpRise Staff"),
         .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
+        .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
@@ -1516,7 +1516,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_SHOPKEEPER] =
     {
         .name = COMPOUND_STRING("Shopkeeper"),
-        .title = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Pokemon Center Staff"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
@@ -1545,10 +1545,10 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
-    [SPEAKER_JORIS] =
+    [SPEAKER_HUNGRYPARENT] =
     {
-        .name = COMPOUND_STRING("Joris"),
-        .title = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Hungryparent"),
+        .title = COMPOUND_STRING("Adult"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
@@ -2110,5 +2110,688 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
+    },
+    [SPEAKER_ADAM_UNKNOWN] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title= COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
+        .speakerPal = sSpeakerPal_Ace_Trainer_M,
+    },
+    [SPEAKER_ELEANOR_PAST] =
+    {
+        .name = COMPOUND_STRING("Eleanor"),
+        .title = COMPOUND_STRING("Elite Four"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Karen,
+        .speakerPal = sSpeakerPal_Karen,
+    },
+    [SPEAKER_FRANK_PAST] =
+    {
+        .name = COMPOUND_STRING("Frank"),
+        .title = COMPOUND_STRING("Elite Four"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bruno,
+        .speakerPal = sSpeakerPal_Bruno,
+    },
+    [SPEAKER_NOPOMOD] =
+    {
+        .name = COMPOUND_STRING("NoPoMod"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_STRESSCUPORGANIZER] =
+    {
+        .name = COMPOUND_STRING("Stresscuporganizer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ASPCAOFFICER] =
+    {
+        .name = COMPOUND_STRING("Aspcaofficer"),
+        .title = COMPOUND_STRING("RSPCP"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SPRINGTRAINER] =
+    {
+        .name = COMPOUND_STRING("Springtrainer"),
+        .title = COMPOUND_STRING("Bystander"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SMOOTHIESHOPKEEPER] =
+    {
+        .name = COMPOUND_STRING("Marble Slab Barista"),
+        .title = COMPOUND_STRING("Smoothieshopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SMOOTHIECUSTOMER] =
+    {
+        .name = COMPOUND_STRING("Customer"),
+        .title = COMPOUND_STRING("Smoothiecustomer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TUNNELSPERSON] =
+    {
+        .name = COMPOUND_STRING("Customer"),
+        .title = COMPOUND_STRING("Smoothiecustomer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERA] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerA"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERB] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerB"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERC] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerC"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPTARGETA] =
+    {
+        .name = COMPOUND_STRING("{PKMN} Trainer"),
+        .title = COMPOUND_STRING("PsyoptargetA"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPTARGETC] =
+    {
+        .name = COMPOUND_STRING("{PKMN} Trainer"),
+        .title = COMPOUND_STRING("PsyoptargetC"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SHOPUNIONREP] =
+    {
+        .name = COMPOUND_STRING("Shopunionrep"),
+        .title = COMPOUND_STRING("Shop Union Leader"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthh"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYA] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverya"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYB] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryb"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTC] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutc"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthi"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashf"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverywhirlpoolj"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashg"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTD] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutd"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTE] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycute"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmasho"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUECUTM] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuecutm"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthq"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEDIVEN] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuediven"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEK] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuek"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmashp"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEL] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEWHIRLPOOLS] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuewhirlpools"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHR] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthr"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERA] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERB] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERC] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERD] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERE] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherE"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERF] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherF"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERG] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherG"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorA"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorB"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorC"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookA"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookB"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookC"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookD"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookE"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookF"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookG"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefA"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefB"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefC"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefD"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefE"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefF"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefG"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFH] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefH"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFI] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefI"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFJ] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefJ"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverA"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverB"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverC"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMHOST] =
+    {
+        .name = COMPOUND_STRING("Mermerezagymchefhost"),
+        .title = COMPOUND_STRING("Needles Host"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_032E8AC9] =
+    {
+        .name = COMPOUND_STRING("032E8AC9"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_0389363C] =
+    {
+        .name = COMPOUND_STRING("0389363C"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_040CEA33] =
+    {
+        .name = COMPOUND_STRING("040CEA33"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MOCHISHOPKEEPER] =
+    {
+        .name = COMPOUND_STRING("Mochishopkeeper"),
+        .title = COMPOUND_STRING("Shopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGINVESTTIGATOR] =
+    {
+        .name = COMPOUND_STRING("Digginginvesttigator"),
+        .title = COMPOUND_STRING("Private Investigator"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGTIDEMEMBERA] =
+    {
+        .name = COMPOUND_STRING("DiggingtidememberA"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGTIDEMEMBERB] =
+    {
+        .name = COMPOUND_STRING("DiggingtidememberB"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ADAORAPARENT] =
+    {
+        .name = COMPOUND_STRING("Adaoraparent"),
+        .title = COMPOUND_STRING("Adaora's Parent"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RETURNDOLLCHILD] =
+    {
+        .name = COMPOUND_STRING("Returndollchild"),
+        .title = COMPOUND_STRING("Child"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTCOMRADEA] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentcomradea"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYVICTIMB] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyvictimb"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERC] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerc"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERD] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerd"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERF] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerf"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERG] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerg"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYPLANTH] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyplanth"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTBOBACASHIERI] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentbobacashieri"),
+        .title = COMPOUND_STRING("Shopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
     },
 };

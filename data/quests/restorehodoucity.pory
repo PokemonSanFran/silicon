@@ -83,7 +83,7 @@ script Quest_Restorehodoucity_LockGymDoor_Script{
         addvar(VAR_TEMP_0,1)
     }
 
-    //if (var(VAR_STORYLINE_STATE) < STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    //if (var(VAR_STORYLINE_STATE) < STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         //subvar(VAR_TEMP_0,1)
     //}
 
@@ -110,7 +110,7 @@ script Quest_Restorehodoucity_CheckQuestCanStart_Script{
         addvar(VAR_TEMP_0,1)
     }
 
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         addvar(VAR_TEMP_0,1)
     }
     return
@@ -172,7 +172,6 @@ script Quest_Restorehodoucity_HideBlackbelt_Route7_Script{
     return
 }
 
-
 script Quest_Restorehodoucity_HideBlackbelt_Route14_Script{
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
         if (var(VAR_RESULT)){
@@ -225,7 +224,7 @@ script Quest_Restorehodoucity_PewfatWalkInside_Script{
         delay(30)
         opendoor(22,3)
         applymovement(KEVIN_HODOU_CITY,Common_Movement_WalkUp)
-        applymovement(ZAC_HODOU_CITY,Quest_Restorehodoucity_WalkInside_Movement)
+        applymovement(ZAC_HODOU_CITY, moves(walk_right, walk_up, step_end))
         waitmovement(ZAC_HODOU_CITY)
         playse(SE_EXIT)
         waitse
@@ -260,10 +259,10 @@ script Quest_Restorehodoucity_FirstTimeInside_Dialogue{
 }
 
 script Quest_Restorehodoucity_PostBattle_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
         removeobject(PKMN_A)
         removeobject(PKMN_B)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
         setvar(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER)
         msgbox(gText_ExpandedPlaceholder_Empty)
@@ -293,7 +292,7 @@ script Quest_Restorehodoucity_Kevin_Interact_Script{
 script Quest_Restorehodoucity_FirstJames_Interact_Script{
     setvar(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER)
     msgbox(format("yeah I was the interim leader for hodoucity, guess I can go back."),MSGBOX_NPC)
-    call(Quest_GetTheBand_RemoveBikers_Script)
+    fadeandremovelasttalked
     end
 }
 
@@ -347,7 +346,6 @@ script Quest_Restorehodoucity_Kevin_WaitingBlackbelt_Dialogue{
     msgbox(format("Did you find all the black belts? I think they're on Route 8, Route 1, Gldgtewilds, Route 12, Route 72, Route 17, and Route 43."),MSGBOX_AUTOCLOSE)
 }
 
-
 script Quest_Restorehodoucity_Waiting_DialogueA_Script{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
     release
@@ -365,7 +363,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_A_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_1)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -375,7 +373,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_B_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -385,7 +383,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_C_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -395,7 +393,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_D_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -405,7 +403,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_E_Dialogue{
         subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -416,7 +414,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_F_Dialogue{
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
         call(Quest_Restorehodoucity_CheckProgress_Script)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -427,7 +425,7 @@ script Quest_Restorehodoucity_Recruit_Blackbelt_G_Dialogue{
         addvar(VAR_QUEST_RESTOREHODOUGYM,1)
         call(Quest_Restorehodoucity_CheckProgress_Script)
         msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        call(Quest_GetTheBand_RemoveBikers_Script)
+        fadeandremovelasttalked
         call(Quest_Restorehodoucity_CheckProgress_Script)
         release
         end
@@ -458,11 +456,6 @@ script Quest_Restorehodoucity_Kevin_Complete_Dialogue{
 }
 script Quest_Restorehodoucity_James_Complete_Dialogue{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-}
-movement Quest_Restorehodoucity_WalkInside_Movement{
-    walk_right
-        walk_up
-        step_end
 }
 
 movement Quest_Restorehodoucity_ExclaimLookDown_Movement{

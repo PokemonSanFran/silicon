@@ -761,7 +761,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act1[] =
     {COMPOUND_STRING("AssholesHome"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ASSHOLESHOME},
     {COMPOUND_STRING("HousingProtest"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOUSINGPROTEST},
     {COMPOUND_STRING("swagbag2"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SWAGBAG2},
-    {COMPOUND_STRING("EnterKauna"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERKAUNA},
+    {COMPOUND_STRING("EnterPua"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_ENTERPUA},
     {COMPOUND_STRING("SorryAboutMyFriends"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_SORRYABOUTMYFRIENDS},
     {COMPOUND_STRING("TheStorySoFar"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_THESTORYSOFAR_ALL},
     {COMPOUND_STRING("YoungPadawan"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUNGPADAWAN},
@@ -819,7 +819,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
     {COMPOUND_STRING("YouHaveYourOrders"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_YOUHAVEYOURORDERS},
     {COMPOUND_STRING("HowDisappointing"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_HOWDISAPPOINTING_ARREST},
     {COMPOUND_STRING("LetsBurnThisMotherDown"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSBURNTHISMOTHERDOWN},
-    {COMPOUND_STRING("Manhunt"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MANHUNT_ALCMENE},
+    {COMPOUND_STRING("Manhunt"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MANHUNT_VIGRIM},
     {COMPOUND_STRING("ExhibitionBattle"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_EXHIBITIONBATTLE},
     {COMPOUND_STRING("MaybeIFuckedUp"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MAYBEIFUCKEDUP},
     {COMPOUND_STRING("OkayLetsFixit"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_OKAYLETSFIXIT},
@@ -828,7 +828,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Act5[] =
 static const struct DebugMenuOption sDebugMenu_Actions_Act6[] =
 {
     {COMPOUND_STRING("LetsGettheBandBackTogether"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSGETTHEBANDBACKTOGETHER_AFTER},
-    {COMPOUND_STRING("MaskOff"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MASKOFF_ALCMENE},
+    {COMPOUND_STRING("MaskOff"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_MASKOFF_VIGRIM},
     {COMPOUND_STRING("LetsFixThis"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LETSFIXTHIS},
     {COMPOUND_STRING("LockedOut"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_LOCKEDOUT},
     {COMPOUND_STRING("WarehouseRave"),DebugAction_Jump_JumpPlayerToStoryPoint, (void*) JUMPPLAYER_WAREHOUSERAVE},
@@ -4280,7 +4280,7 @@ static void DebugAction_Quest(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
     QuestMenu_CopyQuestName(gStringVar1, 0);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Quest_SelectQuest;
@@ -4322,7 +4322,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
         QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_QUESTS);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestID);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest ID: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -4337,7 +4337,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
         QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Quest_SelectState;
@@ -4385,7 +4385,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
         QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_STATES);
-        StringExpandPlaceholders(gStringVar4, sDebugText_QuestState);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Quest state: {STR_VAR_3}\n{STR_VAR_1}{CLEAR_TO 160}\n\n{STR_VAR_2}")); // siliconMerge
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
     }
 

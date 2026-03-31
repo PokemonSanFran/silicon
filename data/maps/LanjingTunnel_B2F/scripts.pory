@@ -1,2 +1,15 @@
 mapscripts LanjingTunnel_B2F_MapScripts {
 }
+
+script LanjingTunnel_B2F_Script_Interact_BodegaburnoutDeliveryRockSmashG
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG,format("I’ll battle you to pass the time. When I’m done, I hope this delivery person shows up."),format("Still nothing…"),LanjingTunnel_B2F_Script_Interact_BodegaburnoutDeliveryRockSmashG)
+// PSF TODO BodegaburnoutDeliveryRockSmashG: At least I got some training in!
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_8,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryRockSmashG)
+    bufferitemname(STR_VAR_1,ITEM_EJECT_BUTTON)
+    msgbox(format("I wonder if the {STR_VAR_1} I ordered will eject me out of the cave?"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG)
+    closemessage
+    release
+    end
+}
+

@@ -105,7 +105,7 @@ struct QuestListPosition
     u16 screenCursorPosition;
 };
 
-#define MAX_QUEST_STATES 20
+#define MAX_QUEST_STATES 50
 typedef void (*QuestStateFunc)(u8 state);
 
 struct QuestState
@@ -118,6 +118,29 @@ struct QuestState
     const s8 x;
     const s8 y;
 };
+
+enum QuestCases
+{
+	FLAG_GET_UNLOCKED,      // check if quest is unlocked
+	FLAG_GET_INACTIVE, //check if quest is unlocked but has no other state
+	FLAG_GET_ACTIVE,        // check if quest is active
+	FLAG_GET_REWARD,     // check if quest is ready for reward
+	FLAG_GET_COMPLETED,     // check if quest is completed
+    QUEST_STATE_COUNT,
+	FLAG_GET_FAVORITE = QUEST_STATE_COUNT, // check if quest is favorited
+	FLAG_SET_UNLOCKED,      // mark quest as unlocked
+	FLAG_SET_INACTIVE, //mark quest as inactive
+	FLAG_SET_ACTIVE,        // mark quest as active
+	FLAG_SET_REWARD,     // mark quest ready for reward
+	FLAG_SET_COMPLETED,     // mark completed quest
+	FLAG_SET_FAVORITE,     // mark quest as a favorite
+	FLAG_REMOVE_INACTIVE, //remove inactive flag from quest
+	FLAG_REMOVE_ACTIVE, //remove active flag from quest
+	FLAG_REMOVE_REWARD, //remove reward flag from quest
+	FLAG_REMOVE_FAVORITE, //remove favorite flag from quest
+    FLAG_REMOVE_COMPLETED, //remove completed flag from quest
+};
+
 
 void DummyStateFunc(void);
 
@@ -140,9 +163,8 @@ struct SubQuest
 struct SideQuest
 {
 	const u8 *name;
-	const u8 *desc;
-    const u8 *rewardDesc;
-	const u8 *donedesc;
+	const u8 *desc[QUEST_STATE_COUNT];
+    const u8* (*descFunc)(void);
 	const u8 *map;
 	const u16 sprite;
     const u8 spritetype;
@@ -153,27 +175,6 @@ struct SideQuest
 };
 
 extern const struct SideQuest sSideQuests[QUEST_COUNT];
-
-enum QuestCases
-{
-	FLAG_GET_UNLOCKED,      // check if quest is unlocked
-	FLAG_GET_INACTIVE, //check if quest is unlocked but has no other state
-	FLAG_GET_ACTIVE,        // check if quest is active
-	FLAG_GET_REWARD,     // check if quest is ready for reward
-	FLAG_GET_COMPLETED,     // check if quest is completed
-	FLAG_GET_FAVORITE,     // check if quest is favorited
-	FLAG_SET_UNLOCKED,      // mark quest as unlocked
-	FLAG_SET_INACTIVE, //mark quest as inactive
-	FLAG_SET_ACTIVE,        // mark quest as active
-	FLAG_SET_REWARD,     // mark quest ready for reward
-	FLAG_SET_COMPLETED,     // mark completed quest
-	FLAG_SET_FAVORITE,     // mark quest as a favorite
-	FLAG_REMOVE_INACTIVE, //remove inactive flag from quest
-	FLAG_REMOVE_ACTIVE, //remove active flag from quest
-	FLAG_REMOVE_REWARD, //remove reward flag from quest
-	FLAG_REMOVE_FAVORITE, //remove favorite flag from quest
-    FLAG_REMOVE_COMPLETED, //remove completed flag from quest
-};
 
 enum QuestIndicatorTypes
 {
@@ -259,7 +260,13 @@ u32 GetMaxQuestState(u16 questId);
 u32 CountCompletedQuests(void);
 enum QuestCases ReturnQuestState(enum QuestIdList questId);
 const u8 *GetQuestName(s32 questId);
+const u8 *GetQuestDesc(s32 questId);
 bool8 IsQuestInactiveState(s32 questId);
 u32 CountInactiveQuests(void);
+bool8 IsQuestRewardState(s32 questId);
+bool8 IsQuestInactiveState(s32 questId);
+bool8 IsQuestActiveState(s32 questId);
+bool8 IsQuestCompletedState(s32 questId);
+u32 Quest_GetSubquestSpriteEntityId(enum QuestIdList parentQuest, enum SubQuestDefines questId);
 
 #endif // GUARD_QUESTS_H

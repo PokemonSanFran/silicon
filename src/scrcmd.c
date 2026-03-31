@@ -3824,6 +3824,28 @@ bool8 ScrCmd_istmrelearneractive(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// Start setObjectFlag
+bool8 ScrCmd_setobjectflagfromlocalid(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+
+    SetObjectFlagFromLocalId(localId);
+    return FALSE;
+}
+
+bool8 ScrCmd_clearobjectflagfromlocalid(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
+
+    ClearObjectFlagFromLocalId(localId);
+    return FALSE;
+}
+// End setObjectFlag
+
 bool8 ScrCmd_setstartingstatus(struct ScriptContext *ctx)
 {
     enum StartingStatus status = ScriptReadByte(ctx);

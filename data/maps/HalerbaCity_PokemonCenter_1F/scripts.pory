@@ -15,9 +15,12 @@ script HalerbaCity_Pokemoncenter_1F_EventScript_Nurse{
 	end
 }
 
-script HalerbaCity_Pokemoncenter_1F_EventScript_Clerk
-{
-	call(PokeMart_BeforeDialogue_EventScript)
-	msgbox(format("Please speak to the Porygon if you'd like to purchase from the Presto Terminal."))
-	goto(PokeMart_AfterDialogue_EventScript)
+script HalerbaCity_Pokemoncenter_1F_EventScript_Clerk{
+    lock
+    faceplayer
+    call(Quest_Bodegaburnout_Script_HandleQuestDirection)
+    msgbox(format("Pokémon Centers around the world are not organized by a similar unifying body. Each region manages their own Pokémon Centers."),,SPEAKER_SHOPKEEPER)
+    closemessage
+    release
+    end
 }

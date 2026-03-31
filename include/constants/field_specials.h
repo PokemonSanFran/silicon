@@ -80,7 +80,7 @@ enum DeptStoreFloorNumber
     DEPT_STORE_FLOORNUM_ROOFTOP,
 };
 
-// SharpriseSpire Floor Numbers
+// SharpRise Spire Floor Numbers
 #define SHARPRISESPIRE_FLOORNUM_1F        1
 #define SHARPRISESPIRE_FLOORNUM_2F        2
 #define SHARPRISESPIRE_FLOORNUM_3F        3

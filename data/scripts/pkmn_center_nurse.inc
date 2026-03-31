@@ -129,6 +129,7 @@ EventScript_PkmnCenterNurse_AskForUsual::
 	return
     // Start Speedy Nurse
 EventScript_PkmnCenterNurse_PlayerTurn::
+    call Quest_Restaurantexpansion_Nurse_Question_Script // siliconMerge
   closemessage
   applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
   waitmovement 0

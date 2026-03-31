@@ -75,38 +75,38 @@ script Quest_NeighborhoodCleanUp3_Interact_Cop_Script{
 }
 
 script Quest_NeighborhoodCleanUp3_StartQuest_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp3_IHateToAskYou,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("I hate to ask you again, but those vagrants are still loitering around town. Could you help me get rid of them once more?"),MSGBOX_NPC,SPEAKER_POLICE)
     startquest(QUEST_NEIGHBORHOODCLEANUP3)
     end
 }
 
 script Quest_NeighborhoodCleanUp3_Active_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp3_SoHowsThe,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("So, how's the clean-up going? Have you managed to get rid of all the vagrants?"),MSGBOX_NPC,SPEAKER_POLICE)
     end
 }
 
 script Quest_NeighborhoodCleanUp3_Reward_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp3_ThankYouSoMuchFor,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("Thank you so much for your help! Here, take this as a token of my appreciation."),MSGBOX_NPC,SPEAKER_POLICE)
     giveitem(ITEM_MAX_REVIVE,5)
     completequest(QUEST_NEIGHBORHOODCLEANUP3)
     goto(Quest_NeighborhoodCleanUp3_Complete_Dialogue)
 }
 
 script Quest_NeighborhoodCleanUp3_Complete_Dialogue{
-    msgbox(gText_NeighborhoodCleanUp3_IReallyHopeThoseVagrants,MSGBOX_NPC,SPEAKER_POLICE)
+    msgbox(format("I really hope those vagrants don't come back. They've been causing trouble for too long."),MSGBOX_NPC,SPEAKER_POLICE)
     end
 }
 
 script Quest_NeighborhoodCleanUp3_Interact_PersonA_Script{
     trainerbattle_single(TRAINER_VAGRANT_1_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_WhatDoYouWantFrom,gText_NeighborhoodCleanUp3_UghYouGotMe)
-    msgbox(gText_NeighborhoodCleanUp3_ICameToThisTown,MSGBOX_NPC,SPEAKER_RUSTY)
+    msgbox(format("I came to this town looking for work, but no one would hire me because of my past. I had nowhere else to go."),MSGBOX_NPC,SPEAKER_RUSTY)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantA_Script)
     end
 }
 script Quest_NeighborhoodCleanUp3_RemoveVagrantA_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp3_FineIllGo,,SPEAKER_RUSTY)
+    msgbox(format("I'm sorry, but you can't stay here any longer. You're causing problems for the residents."),,SPEAKER_ALICIA)
+    msgbox(format("Fine, I'll go. But it's not like I have anywhere else to go."),,SPEAKER_RUSTY)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_1)
     call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
@@ -115,14 +115,14 @@ script Quest_NeighborhoodCleanUp3_RemoveVagrantA_Script{
 }
 script Quest_NeighborhoodCleanUp3_Interact_PersonB_Script{
     trainerbattle_single(TRAINER_VAGRANT_2_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_HeyWhatsYour,gText_NeighborhoodCleanUp3_ImJustPassingThrough)
-    msgbox(gText_NeighborhoodCleanUp3_OkayOkayI,MSGBOX_NPC,SPEAKER_WILLOW)
+    msgbox(format("Okay, okay, I'll leave. But don't expect me to thank you for it."),MSGBOX_NPC,SPEAKER_WILLOW)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantB_Script)
     end
 }
 script Quest_NeighborhoodCleanUp3_RemoveVagrantB_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut2,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp3_WhateverIllLeave,,SPEAKER_WILLOW)
+    msgbox(format("I'm sorry, but you can't hang around here anymore. You're causing trouble for the people who live here."),,SPEAKER_ALICIA)
+    msgbox(format("Whatever, I'll leave. But you're making a big mistake."),,SPEAKER_WILLOW)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_2)
     call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)
@@ -131,14 +131,14 @@ script Quest_NeighborhoodCleanUp3_RemoveVagrantB_Script{
 }
 script Quest_NeighborhoodCleanUp3_Interact_PersonC_Script{
     trainerbattle_single(TRAINER_VAGRANT_3_GLAVEZ_HILL,gText_NeighborhoodCleanUp3_WhyAreYouBotheringMe,gText_NeighborhoodCleanUp3_UghYoureStronger)
-    msgbox(gText_NeighborhoodCleanUp3_ICameToThisTown2,MSGBOX_NPC,SPEAKER_GRIFF)
+    msgbox(format("I came to this town to escape my past, but it seems like it's caught up with me."),MSGBOX_NPC,SPEAKER_GRIFF)
     goto_if_quest_active(QUEST_NEIGHBORHOODCLEANUP3,Quest_NeighborhoodCleanUp3_RemoveVagrantC_Script)
     end
 }
 script Quest_NeighborhoodCleanUp3_RemoveVagrantC_Script{
     lock
-    msgbox(gText_NeighborhoodCleanUp3_ImSorryBut3,,SPEAKER_ALICIA)
-    msgbox(gText_NeighborhoodCleanUp3_FineIllGo2,,SPEAKER_GRIFF)
+    msgbox(format("I'm sorry, but you have to leave this area. You're not welcome here."),,SPEAKER_ALICIA)
+    msgbox(format("Fine, I'll go. But I hope you realize what you're doing."),,SPEAKER_GRIFF)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_NEIGHBORHOODCLEANUP3,SUB_QUEST_3)
     call(Quest_NeighborhoodCleanUp3_ProgressToReward_Script)
     call(Quest_NeighborhoodCleanUp_GenericRemoveVagrant_Script)

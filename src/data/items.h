@@ -16089,6 +16089,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANTRY_A] =
     {
@@ -16097,6 +16099,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANTRY_B] =
     {
@@ -16105,6 +16109,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANTRY_C] =
     {
@@ -16113,6 +16119,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANTRY_D] =
     {
@@ -16121,6 +16129,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANTRY_E] =
     {
@@ -16129,15 +16139,20 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_SHERBET_SURPRISE] =
     {
-        .name = ITEM_NAME("ShrbtSrprise"),
-        .description = COMPOUND_STRING("Makes a Pokémon\n""friendly but resets\n""EVs to zero."),
+        .name = ITEM_NAME("Sherbet Surprise"),
+        .description = COMPOUND_STRING("A extremely unpleasant\ndrink that resets\nall base points of\na Pokémon."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
+        .fieldUseFunc = ItemUseOutOfBattle_ResetEVsAndFriendship,
+        .effect = gItemEffect_SherbetSurprise,
         .flingPower = 30,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANNEN_JOURNAL_PAGE_1] =
     {
@@ -16146,6 +16161,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANNEN_JOURNAL_PAGE_2] =
     {
@@ -16154,6 +16171,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_PANNEN_JOURNAL_PAGE_3] =
     {
@@ -16162,14 +16181,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    },
-    [ITEM_PANNEN_MACGUFFIN] =
-    {
-        .name = ITEM_NAME("PannenMcGuffn"),
-        .description = COMPOUND_STRING("?????"),
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_1] =
     {
@@ -16178,6 +16191,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_2] =
     {
@@ -16186,6 +16201,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_3] =
     {
@@ -16194,6 +16211,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_4] =
     {
@@ -16202,6 +16221,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_5] =
     {
@@ -16210,6 +16231,8 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     [ITEM_BODEGA_DELIVERY_6] =
     {
@@ -16218,14 +16241,48 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_BEACH_GLASS] =
+    [ITEM_BODEGA_DELIVERY_7] =
     {
-        .name = ITEM_NAME("BeachGlass"),
+        .name = ITEM_NAME("BodegaDelvry7"),
         .description = COMPOUND_STRING("?????"),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_8] =
+    {
+        .name = ITEM_NAME("BodegaDelvry8"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_9] =
+    {
+        .name = ITEM_NAME("BodegaDelvry9"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BODEGA_DELIVERY_10] =
+    {
+        .name = ITEM_NAME("BodegaDelvry10"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     //Start Pokevial Branch
     [ITEM_POKEVIAL] =
@@ -21906,6 +21963,84 @@ const struct ItemInfo gItemsInfo[] =
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_EXPLOSION,
+    },
+        [ITEM_BELEN_CHE] =
+        {
+            .name = ITEM_NAME("Che"),
+            .price = 0,
+            .description = COMPOUND_STRING("A icy cup of fruit cocktail with pudding and ice cream. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_KARIOKA] =
+        {
+            .name = ITEM_NAME("Karioka"),
+            .price = 0,
+            .description = COMPOUND_STRING("Small balls of deep fried glutinous rice covered in caramel. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_CHEBUREKI] =
+        {
+            .name = ITEM_NAME("Chebureki"),
+            .price = 0,
+            .description = COMPOUND_STRING("A soft yet crispy pocket of dough, filled with meat and vegetables. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+        [ITEM_BELEN_JIANBING] =
+        {
+            .name = ITEM_NAME("Jianbing"),
+            .price = 0,
+            .description = COMPOUND_STRING("A thin crepe folded around egg, crackers, spices, herbes, and tangy sauces. This was specically made by Belen."),
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
+            .type = ITEM_USE_BAG_MENU,
+            .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            .iconPic = gItemIcon_QuestionMark,
+            .iconPalette = gItemIconPalette_QuestionMark,
+        },
+    [ITEM_SPIKED_CONCHA] =
+    {
+        .name = ITEM_NAME("Spiked Concha"),
+        .price = (I_PRICE >= GEN_7) ? 350 : 200,
+        .description = COMPOUND_STRING(
+                "A local specialty\n"
+                "that heals all\n"
+                "status problems."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
+        .battleUsage = EFFECT_ITEM_CURE_STATUS,
+        .effect = gItemEffect_FullHeal,
+        .flingPower = 30,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_BOBA_CUP] =
+    {
+        .name = ITEM_NAME("Empty Boba Cup"),
+        .price = 0,
+        .description = COMPOUND_STRING("An empty plastic cup. It is sticky, and has a label with Cresalta Vista Boba printed onto the side."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
     },
     // End siliconMerge
 };

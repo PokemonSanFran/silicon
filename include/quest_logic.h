@@ -1,20 +1,21 @@
 #ifndef GUARD_QUESTLOGIC_H
 #define GUARD_QUESTLOGIC_H
 
-bool32 HasPlayerJoinedTheTide(void);
+#include "constants/quest_logic.h"
+
+bool32 HasPlayerJoinedThe_Tide(void);
 u16 Quest_Generic_CountRemainingSubquests(u16);
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int);
 void Quest_Kitchenvolunteering_CreatePantryMaze(void);
 u8 Quest_Kitchenvolunteering_CountRemainingItems(void);
-void Quest_Rockcollector_RespawnStones(void);
 u32 GetCurrentMap(void);
-void Quest_Brucelee_UpdateType(u16 days);
+void Quest_TryCompulsiveHealingPeerSupport_UpdateType(u16 days);
 void TryToUpdateArtisanBalls1SubQuestsState(u16);
 void Quest_ArtisanBalls3_CheckBallSetReward(u32 battler);
 void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void);
 void Quest_Generic_CompleteSubquests(u16 relevantQuest);
 void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest);
-void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstKai(void);
+void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstBaiya(void);
 u32 VSGarbodor_GetGemFromType(void);
 void WowYoureStrong_GetBadgesAndSetTowerState(void);
 bool32 GenerateAndStartWildFogBattle(u32 headerId, u32 area);
@@ -23,6 +24,11 @@ void SetFogVariableAfterLoss(void);
 bool32 ShouldWildBattleBeFog(void); // fogBattle
 u8* PrintUnknownLevel(u32 lvl, u32 battler, u8* text);
 u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void);
+bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void);
+u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void);
+void Quest_RockCollector_ComposeList(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);
@@ -38,9 +44,34 @@ void DebugQuest_VSDeoxys(u8);
 void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
+void DebugQuest_CompulsiveHealingPeerSupport(u8);
+void DebugQuest_StressCup(u8);
+void DebugQuest_RabiesOutbreak(u8);
+void DebugQuest_FreshwaterEvolution(u8);
+void DebugQuest_Smoothiecrafting(u8);
+void DebugQuest_Hodoutunnels(u8);
+void DebugQuest_Psyop(u8);
+void DebugQuest_BetweenAStoneAndAHardPlace(u8);
+void DebugQuest_RockCollector(u8);
+void DebugQuest_BodegaBurnout(u8);
+void DebugQuest_Getthebandbacktogether(u8);
+void DebugQuest_Restaurantexpansion1(u8 state);
+void DebugQuest_Diggingupadaorasdirt(u8 state);
+void DebugQuest_Returndoll(u8 state);
+void DebugQuest_Freetheinnocent(u8 state);
+
+void AwardPartyMonChampionRibbon(void);
+void Script_CheckIfAnyMonHasChampionRibbon(void);
+
 u32 exponent(u32 y, u32 x);
 void CountDefeatedRabiesMon(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+void Quest_SmoothieCrafting_BufferRecipe(void);
+void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
+u32 Quest_BodegaBurnout_CountRemainingSubquests(void);
+bool8 Quest_Freetheinnocent_FactsLearned(void);
+bool8 Quest_Freetheinnocent_CupFound(void);
+bool8 Quest_Freetheinnocent_CashierSpoken(void);
 bool8 IsHalaiIslandUnderConstruction(void);
 
 #endif //GUARD_QUESTLOGIC_H

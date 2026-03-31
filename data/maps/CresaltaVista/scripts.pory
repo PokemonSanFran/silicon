@@ -1,5 +1,5 @@
 mapscripts CresaltaVista_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
@@ -8,9 +8,9 @@ mapscripts CresaltaVista_MapScripts {
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
         call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
         call(Quest_Hang20_ResetCount_Script)
-        call(Quest_GetTheBand_HideBikerB_Script)
         call(Quest_Restorehodoucity_HideJames_CresaltaVista_Script)
         call(Quest_Hang20_HideLeader_Script)
+        call(StressCup_Script_HideStresscuporganizer)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
@@ -18,18 +18,6 @@ mapscripts CresaltaVista_MapScripts {
                 FLAG_VISITED_CRESALTA_VISTA, FALSE: Generic_Mappreview
     ]
 
-
-}
-
-script CresaltaVista_Biker_Interact_Script{
-    msgbox(gText_CresaltaVista_PlaceholderBiker,MSGBOX_NPC)
-
-    call(Quest_GetTheBand_CheckQuestAndBike_Script)
-
-    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
-        goto(Quest_GetTheBand_Interact_BikerB_Dialogue)
-    }
-    end
 }
 
 text gText_CresaltaVista_PlaceholderBiker{

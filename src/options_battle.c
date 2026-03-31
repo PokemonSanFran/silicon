@@ -20,7 +20,6 @@
 
 // Battle Settings: Experience
 static u32 GetBattleExperienceOption(void);
-static bool32 IsMonInvalid(struct Pokemon);
 static bool32 IsMonMaxLevel(struct Pokemon);
 static void CalcAndSetNewExp(struct BoxPokemon *, struct Pokemon,u32);
 static u32 GetEVYield(u32, u16);
@@ -91,7 +90,7 @@ bool32 IsExperienceOptionAll(void)
     return (GetBattleExperienceOption() == BATTLE_OPTION_EXPERIENCE_ALL);
 }
 
-static bool32 IsMonInvalid(struct Pokemon tempMon)
+bool32 IsMonInvalid(struct Pokemon tempMon)
 {
     if (GetMonData(&tempMon,MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
         return TRUE;
@@ -940,6 +939,9 @@ static u32 GetPartySizeDifference(u32 numPlayerMon, u32 numEnemyMon)
 
 static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
 {
+    if (FlagGet(FLAG_DISABLE_SCALING))
+        return enemyMonLevel;
+
     u32 numPlayerMon = 0, difference = 0;
     u32 playerMaxLevel = GetHighestLevelInPlayerParty();
     u32 average = AveragePlayerMaxEnemyMonLevels(enemyMonLevel,playerMaxLevel);

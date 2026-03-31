@@ -482,6 +482,10 @@ u8 (*const gMovementActionFuncs_WalkFastDiagonalUpLeft[])(struct ObjectEvent *, 
 u8 (*const gMovementActionFuncs_WalkFastDiagonalUpRight[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkFastDiagonalDownLeft[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_WalkFastDiagonalDownRight[])(struct ObjectEvent *, struct Sprite *);
+// Start pathfinder
+u8 (*const gMovementActionFuncs_GeneratedBegin[])(struct ObjectEvent *, struct Sprite *);
+u8 (*const gMovementActionFuncs_GeneratedEnd[])(struct ObjectEvent *, struct Sprite *);
+// End pathfinder
 
 u8 (*const gMovementActionFuncs_SpinDown[])(struct ObjectEvent *, struct Sprite *);
 u8 (*const gMovementActionFuncs_SpinUp[])(struct ObjectEvent *, struct Sprite *);
@@ -637,6 +641,10 @@ u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sprite *)
     [MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_UP_RIGHT] = gMovementActionFuncs_WalkSlowDiagonalUpRight,
     [MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_DOWN_LEFT] = gMovementActionFuncs_WalkSlowDiagonalDownLeft,
     [MOVEMENT_ACTION_WALK_SLOW_DIAGONAL_DOWN_RIGHT] = gMovementActionFuncs_WalkSlowDiagonalDownRight,
+    // Start pathfinder
+    [MOVEMENT_ACTION_GENERATED_BEGIN] = gMovementActionFuncs_GeneratedBegin,
+    [MOVEMENT_ACTION_GENERATED_END] = gMovementActionFuncs_GeneratedEnd,
+    // End pathfinder
     [MOVEMENT_ACTION_LOCK_ANIM] = gMovementActionFuncs_LockAnim,
     [MOVEMENT_ACTION_UNLOCK_ANIM] = gMovementActionFuncs_UnlockAnim,
     [MOVEMENT_ACTION_WALK_LEFT_AFFINE] = gMovementActionFuncs_WalkLeftAffine,
@@ -1734,6 +1742,15 @@ u8 (*const gMovementActionFuncs_WalkFastDiagonalDownRight[])(struct ObjectEvent 
     MovementAction_PauseSpriteAnim,
 };
 
+// Start pathfinder
+u8 (*const gMovementActionFuncs_GeneratedBegin[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_Finish,
+};
+
+u8 (*const gMovementActionFuncs_GeneratedEnd[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementAction_Finish,
+};
+// End pathfinder
 
 u8 (*const gMovementActionFuncs_SpinDown[])(struct ObjectEvent *, struct Sprite *) = {
     MovementAction_SpinDown_Step0,

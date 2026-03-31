@@ -38,36 +38,6 @@ static struct Pokemon* HiddenGrotto_GetSavedGrottoMon(void);
 static void HiddenGrotto_SetLastGrottoId(enum HiddenGrottoId grotto);
 static enum HiddenGrottoId HiddenGrotto_GetLastGrottoId(void);
 
-static const u8* const discoveredGrottoTextArray[] =
-    {
-        gText_LookIveFound,\
-        gText_WowHiddenPath,\
-        gText_OhWhatsThis,\
-        gText_AmazingHiddenTrail,\
-        gText_HmmConcealedPath,\
-        gText_MysteriousRoute,\
-        gText_OhMyConcealedGrotto,\
-        gText_IntriguingSecretPassage,\
-        gText_WhoaHiddenEntrance,\
-        gText_HiddenTrailEmerges,\
-        gText_OhWhatDoWeHave,\
-        gText_ConcealedPathwayAppears,\
-        gText_MyCuriosityPiqued,\
-        gText_LookClandestinePassage,\
-        gText_OhSecretRoute,\
-        gText_HmmObscuredPath,\
-        gText_ConcealedEntranceDiscovered,\
-        gText_WhatsThisCovertPathway,\
-        gText_IntriguingHiddenTrail,\
-        gText_HiddenGrottoMaterializes
-    };
-
-void HiddenGrotto_LoadDiscoveredGrottoText(void)
-{
-    u32 randomDialogIndex = Random() % (ARRAY_COUNT(discoveredGrottoTextArray));
-    StringCopy(gStringVar1,discoveredGrottoTextArray[randomDialogIndex]);
-}
-
 static u16 HiddenGrotto_GetRouteMap(enum HiddenGrottoId grottoId)
 {
     return hiddenGrottoData[grottoId].routeMap;
@@ -347,7 +317,7 @@ static enum HiddenGrottoId HiddenGrotto_GetLastGrottoId(void)
 }
 
 static struct Pokemon* HiddenGrotto_GetSavedGrottoMon(void)
-{   
+{
     return &gSaveBlock1Ptr->savedGrottoMon;
 };
 
@@ -366,7 +336,7 @@ static bool8 HiddenGrotto_LoadSavedMon(void)
     enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
     bool32 isNewGrotto = (HiddenGrotto_GetLastGrottoId() != grottoId);
 
-    if (isNewGrotto == TRUE) 
+    if (isNewGrotto == TRUE)
         return FALSE;
 
     if (isGrottoMonEmpty == TRUE)

@@ -10,7 +10,7 @@ mapscripts SharpriseStadium_Skybox_MapScripts {
             case STORY_WATCH_SEMIFINAL: return
             case STORY_READY_FINALS: call(WaitHeDidWhat_HideObject_Script)
             case STORY_SAVE_FINALS: call(WaitHeDidWhat_HideObject_Script)
-            case STORY_THETIDE_FINISHED: call(WaitHeDidWhat_HideObject_Script)
+            case STORY_THE_TIDE_FINISHED: call(WaitHeDidWhat_HideObject_Script)
             case STORY_SAVE_DIANTHA: call(WaitHeDidWhat_HideObject_Script)
             default: call(SharpriseStadium_Skybox_EmptySkybox_Script)
         }
@@ -18,7 +18,7 @@ mapscripts SharpriseStadium_Skybox_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_STORYLINE_STATE, STORY_CHAMPIONSHIP_EXPLAINED: WhyDidntYouRatMeOut_WatchCharlotteMatches
             VAR_STORYLINE_STATE, STORY_WATCH_SEMIFINAL: WaitHeDidWhat_WatchOtherSemifinal_Dialogue 
-            VAR_STORYLINE_STATE, STORY_THETIDE_FINISHED: ExhibitionBattle_PrepPlayer_Script
+            VAR_STORYLINE_STATE, STORY_THE_TIDE_FINISHED: ExhibitionBattle_PrepPlayer_Script
     ]
 }
 

@@ -298,7 +298,10 @@
     "MermerezaCity_Bar",
     "MermerezaCity_Gym",
     "MermerezaCity_PokemonCenter_1F",
-    "MermerezaCity_Consulting"
+    "MermerezaCity_Consulting",
+    "MermerezaCity_Gym_Kitchen1",
+    "MermerezaCity_Gym_Kitchen2",
+    "MermerezaCity_Gym_Kitchen3"
   ],
   "gMapGroup_IndoorToraTown": [
     "ToraTown_Gym",
@@ -313,7 +316,8 @@
     "Chasilla_Gym",
     "Chasilla_BreedingCenter",
     "Chasilla_IceCreamShop",
-    "Chasilla_University"
+    "Chasilla_University",
+    "Chasilla_MochiShop"
   ],
   "gMapGroup_IndoorFortYobu": [
     "FortYobu_Gym"
@@ -346,7 +350,8 @@
     "QiuVillage_Restaurant",
     "QiuVillage_RameshHouse",
     "QiuVillage_PokemonCenter_1F",
-    "QiuVillage_Apartment"
+    "QiuVillage_Apartment",
+    "QiuVillage_Apartment_2F"
   ],
   "gMapGroup_IndoorCapheCity": [
     "CapheCity_GRUNTOffice",
@@ -404,7 +409,7 @@
     "ZenzuIsland_SkillLibrary"
   ],
   "gMapGroup_IndoorHalaiIsland": [
-    "HalaiIsland_Kai",
+    "HalaiIsland_Baiya",
     "ZenzuIsland_Restaurant",
     "HalaiIsland_PokemonCenter_1F"
   ],

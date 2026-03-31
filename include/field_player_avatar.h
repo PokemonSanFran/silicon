@@ -8,7 +8,7 @@ void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 transitionFlag);
 // Start playerCustom
 //enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId);
 enum BodyTypes GetPlayerAvatarGenderByGraphicsId(u16 gfxId);
-// End playerCustom 
+// End playerCustom
 u8 TestPlayerAvatarFlags(u8 flag);
 u8 GetPlayerAvatarSpriteId(void);
 void PlayerGetDestCoords(s16 *x, s16 *y);
@@ -83,4 +83,5 @@ bool32 CanTriggerSpinEvolution();
 
 void SpawnParkRanger(void); // fishingUpdate
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender); // playerCustom
+bool8 ObjectMovingOnRockStairsWithBehaviors(struct ObjectEvent *objectEvent, u8 direction, u8 currentBehavior, u8 nextBehavior); // pathfinder
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

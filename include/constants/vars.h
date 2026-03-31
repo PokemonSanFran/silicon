@@ -115,9 +115,8 @@
 #define VAR_ALWAYS_ZERO                        0x4055 // PSF Var
 #define VAR_MSGBOX_SPEAKER                        0x4056 // PSF Var
 #define VAR_PETALBURG_CITY_STATE                         0x4057
-#define VAR_QUEST_BRUCE_LEE_DAILY_TYPE                   0x4057 // PSF Var
+#define VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE                   0x4057 // PSF Var
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
-#define VAR_KEIYING_MANSION_STATE                           0x4058 // PSF Var
 #define VAR_MSGBOX_TAIL                          0x4059 // PSF Var
 #define VAR_RUSTBORO_CITY_STATE                          0x405A
 #define VAR_MSGBOX_EMOTE                           0x405B // PSF Var
@@ -143,7 +142,7 @@
 #define VAR_FRONTIER_LAST_FOUGHT_BOSS                               0x406A // PSF Var
 #define VAR_SHINZO_STATE                               0x406B // PSF Var
 #define VAR_EMRYS_STATE                               0x406C // PSF Var
-#define VAR_KAUNA_STATE                               0x406D // PSF Var
+#define VAR_PUA_STATE                               0x406D // PSF Var
 #define VAR_NERIENE_STATE                               0x406E // PSF Var
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_HALAI_ISLAND_STATE                                0x406F // PSF Var
@@ -170,7 +169,6 @@
 #define VAR_CHASILLA_STATE                               0x4080 // PSF Var
 #define VAR_CURENO_PORT_STATE                               0x4081 // PSF Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_BELEN_STATE                                0x4082 // PSF Var
 #define VAR_FERRYBUILDING_STATE                                0x4083 // PSF Var
 #define VAR_BIRCH_LAB_STATE                              0x4084
 #define VAR_WAREHOUSE_RAVE_STATE                         0x4084 // PSF Var
@@ -292,9 +290,11 @@
 #define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8
+#define VAR_NO_BAG_USE                                   0x40D8 // PSF Var
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_EARTHQUAKE_COUNT                             0x40D9
 #define VAR_REGISTER_BIRCH_STATE                         0x40DA
+#define VAR_TIME_TRAVEL_STATE                            0x40DA // PSF Var
 #define VAR_ROUTE10_STATE                                0x40DB // PSF Var
 #define VAR_ROBINWILLIAMSTUNNEL_STATE                                0x40DC // PSF Var
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
@@ -321,7 +321,7 @@
 #define VAR_WALLY_CALL_STEP_COUNTER                      0x40F2
 #define VAR_ANEWSTRIKE_STEP_COUNTER                      0x40F2 // PSF Var
 #define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER              0x40F3
-#define VAR_KAI_CALL_ARANTRAZ_STEP_COUNTER                 0x40F3 // PSF Var
+#define VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER                 0x40F3 // PSF Var
 #define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
 #define VAR_BUZZR_STEP_COUNTER                         0x40F4 // PSF Var
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5
@@ -333,7 +333,7 @@
 #define VAR_MANHUNT_STATE                                   0x40FA // PSF Var
 #define VAR_GROUP_OF_ASSHOLES_STATE                                0x40FB // PSF Var
 #define VAR_HOWDISAPPOINTING_STATE                                0x40FC // PSF Var
-#define VAR_KEIYING_RAISON_DETRE_STATE                                0x40FD // PSF Var
+#define VAR_KEIYING_STATE                                0x40FD // PSF Var
 #define VAR_LAST_RESTORATION_TAKEDOWN_QUEST                                0x40FE // PSF Var
 #define VAR_LETSBURNTHISMOTHERSTATE                                0x40FF // PSF Var
 #define VAR_UBER_QUEST_EXCEPTION_DESTINATION						VAR_TAXI_DESTINATION

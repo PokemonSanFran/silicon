@@ -427,20 +427,20 @@ const u32 gObjectEventPic_siliconPlayerN3Decorating[] = INCBIN_U32("graphics/obj
 const u32 gObjectEventPic_siliconPlayerN3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/underwater.4bpp");
 
 
-const u32 gObjectEventPic_KaiNormal[] = INCBIN_U32("graphics/object_events/pics/people/kai/walking.4bpp", "graphics/object_events/pics/people/kai/running.4bpp");
-const u16 gObjectEventPal_KaiNormal[] = INCBIN_U16("graphics/object_events/palettes/kai.gbapal");
+const u32 gObjectEventPic_BaiyaNormal[] = INCBIN_U32("graphics/object_events/pics/people/baiya/walking.4bpp", "graphics/object_events/pics/people/baiya/running.4bpp");
+const u16 gObjectEventPal_BaiyaNormal[] = INCBIN_U16("graphics/object_events/palettes/baiya.gbapal");
 
-const u32 gObjectEventPic_KaiFainted[] = INCBIN_U32("graphics/object_events/pics/people/kai/fainted.4bpp");
+const u32 gObjectEventPic_BaiyaFainted[] = INCBIN_U32("graphics/object_events/pics/people/baiya/fainted.4bpp");
 
-const u32 gObjectEventPic_KaiFieldMove[] = INCBIN_U32("graphics/object_events/pics/people/kai/fieldMove.4bpp");
+const u32 gObjectEventPic_BaiyaFieldMove[] = INCBIN_U32("graphics/object_events/pics/people/baiya/fieldMove.4bpp");
 
 const u32 gObjectEventPic_AdaoraFainted[] = INCBIN_U32("graphics/object_events/pics/people/adaora/fainted.4bpp");
 
 const u32 gObjectEventPic_AdaoraWalking[] = INCBIN_U32("graphics/object_events/pics/people/adaora/walking.4bpp", "graphics/object_events/pics/people/adaora/running.4bpp");
 const u16 gObjectEventPal_AdaoraWalking[] = INCBIN_U16("graphics/object_events/palettes/adaora.gbapal");
 
-const u32 gObjectEventPic_AlcmeneWalking[] = INCBIN_U32("graphics/object_events/pics/people/alcmene/walking.4bpp", "graphics/object_events/pics/people/alcmene/running.4bpp");
-const u16 gObjectEventPal_AlcmeneWalking[] = INCBIN_U16("graphics/object_events/palettes/alcmene.gbapal");
+const u32 gObjectEventPic_VigrimWalking[] = INCBIN_U32("graphics/object_events/pics/people/vigrim/walking.4bpp", "graphics/object_events/pics/people/vigrim/running.4bpp");
+const u16 gObjectEventPal_VigrimWalking[] = INCBIN_U16("graphics/object_events/palettes/vigrim.gbapal");
 
 const u32 gObjectEventPic_BdWalking[] = INCBIN_U32("graphics/object_events/pics/people/bd.4bpp");
 const u16 gObjectEventPal_BdWalking[] = INCBIN_U16("graphics/object_events/palettes/bd.gbapal");
@@ -460,10 +460,10 @@ const u16 gObjectEventPal_EmrysWalking[] = INCBIN_U16("graphics/object_events/pa
 const u32 gObjectEventPic_ImeldaWalking[] = INCBIN_U32("graphics/object_events/pics/people/imelda.4bpp");
 const u16 gObjectEventPal_ImeldaWalking[] = INCBIN_U16("graphics/object_events/palettes/imelda.gbapal");
 
-const u32 gObjectEventPic_KaunaSurfing[] = INCBIN_U32("graphics/object_events/pics/people/kauna/surfing.4bpp");
+const u32 gObjectEventPic_PuaSurfing[] = INCBIN_U32("graphics/object_events/pics/people/pua/surfing.4bpp");
 
-const u32 gObjectEventPic_KaunaWalking[] = INCBIN_U32("graphics/object_events/pics/people/kauna/walking.4bpp");
-const u16 gObjectEventPal_KaunaWalking[] = INCBIN_U16("graphics/object_events/palettes/kauna.gbapal");
+const u32 gObjectEventPic_PuaWalking[] = INCBIN_U32("graphics/object_events/pics/people/pua/walking.4bpp");
+const u16 gObjectEventPal_PuaWalking[] = INCBIN_U16("graphics/object_events/palettes/pua.gbapal");
 
 const u32 gObjectEventPic_KeiyingWalking[] = INCBIN_U32("graphics/object_events/pics/people/keiying.4bpp");
 const u16 gObjectEventPal_KeiyingWalking[] = INCBIN_U16("graphics/object_events/palettes/keiying.gbapal");

@@ -145,7 +145,7 @@
       "flag": "FLAG_TEMP_8"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ADELAIDE",
+      "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
       "x": 8,
       "y": 16,
       "elevation": 3,
@@ -223,7 +223,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ARMANDO",
+      "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 0,
       "y": 4,
       "elevation": 3,
@@ -236,7 +236,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ELLEN",
+      "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 3,
       "y": 3,
       "elevation": 3,
@@ -249,7 +249,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KAI",
+      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 2,
       "y": 4,
       "elevation": 3,

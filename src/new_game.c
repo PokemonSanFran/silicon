@@ -254,7 +254,7 @@ void NewGameInitData(void)
     if (IS_FRLG)
         RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
     else
-        RunScriptImmediately(EventScript_ResetAllMapFlags);
+        //RunScriptImmediately(EventScript_ResetAllMapFlags); // storyActionItems
 #if IS_FRLG
         StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
 #endif

@@ -1,8 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KEIYING = 1
-const KAI = 23
-const FLAG_HIDE_KEIYING = FLAG_TEMP_1
-const FLAG_HIDE_KAI = FLAG_TEMP_C
+const LOCALID_CURENO_BAIYA = (LOCALID_CAMERA + 1)
 
 script WarehouseRave_SetUpRave_Script
 {
@@ -11,19 +8,15 @@ script WarehouseRave_SetUpRave_Script
         playbgm(MUS_RG_GAME_CORNER,TRUE)
 }
 
-script WarehouseRave_HideObject_Script
+script WarehouseRave_Script_AddBaiya
 {
-    if (var(VAR_WAREHOUSE_RAVE_STATE) != DEFEATED_KEIYING_WAREHOUSE)
-    {
-        setflag(FLAG_HIDE_KAI)
-    }
-    setflag(FLAG_HIDE_KEIYING)
+    spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=LOCALID_CURENO_BAIYA,x=29,y=33,movementType=MOVEMENT_TYPE_FACE_DOWN,elevation=3)
 }
 
 script WarehouseRave_MoveObject_Script
 {
-    setobjectxy(KEIYING,5,5)
-        setobjectxyperm(KEIYING,5,5)
+    setobjectxy(LOCALID_WAREHOUSE_KEI_YING,5,5)
+        setobjectxyperm(LOCALID_WAREHOUSE_KEI_YING,5,5)
 }
 
 script WarehouseRave_ControlExits_Script
@@ -32,7 +25,7 @@ script WarehouseRave_ControlExits_Script
     {
         case SAVE_KEIYING_WAREHOUSE: call(WarehouseRave_PostSaveUnlock)
         case DEFEATED_KEIYING_WAREHOUSE: call(WarehouseRave_MakeExplosionHole_Script)
-        case TOLD_KAI_ABOUT_KEIYING: call(WarehouseRave_MakeExplosionHole_Script)
+        case TOLD_BAIYA_ABOUT_KEIYING: call(WarehouseRave_MakeExplosionHole_Script)
     }
 }
 
@@ -66,42 +59,39 @@ script WarehouseRave_LockDoors_Script
         waitse
 }
 
-
 script WarehouseRave_Intro_Dialogue
 {
     lock
-        msgbox(gText_WarehouseRave_IsThisPlace,,SPEAKER_ALICIA)
+        msgbox(format("…is this place empty?"),,SPEAKER_ALICIA)
         closemessage
-
 
         call(WarehouseRave_LockDoors_Script)
         playse(SE_PIN)
         applymovement(PLAYER,Common_Movement_ExclamationMark)
         waitmovement(0)
 
-        msgbox(gText_WarehouseRave_WhatTheHell,,SPEAKER_ALICIA)
+        msgbox(format("What the hell is going on?! "),,SPEAKER_ALICIA)
         closemessage
 
-
-        clearflag(FLAG_HIDE_KEIYING)
-        addobject(KEIYING)
-        applymovement(KEIYING,WarehouseRave_WalkOutShadows)
+        clearobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
+        addobject(LOCALID_WAREHOUSE_KEI_YING)
+        applymovement(LOCALID_WAREHOUSE_KEI_YING, moves(walk_right * 4, step_end))
         waitmovement(0)
 
-        msgbox(gText_WarehouseRave_ImSorryWeHad,,SPEAKER_KEIYING)
+        msgbox(format("I'm sorry we had to trick you, {PLAYER}."),,SPEAKER_KEIYING)
 
-        msgbox(gText_WarehouseRave_WhyAmITrapped,,SPEAKER_ALICIA)
+        msgbox(format("Why am I trapped here?!"),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_HasBeenPredicting,,SPEAKER_KEIYING)
+        msgbox(format("SharpRise Capital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable."),,SPEAKER_KEIYING)
 
-        msgbox(gText_WarehouseRave_SoIDecideTo,,SPEAKER_ALICIA)
+        msgbox(format("So I decide to help people and you trap me in a warehouse?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_HasInstructed,,SPEAKER_KEIYING)
+        msgbox(format("SharpRise Capital has instructed me to neutralize this new threat."),,SPEAKER_KEIYING)
 
         closemessage
 
         setvar(VAR_WAREHOUSE_RAVE_STATE,SAVE_KEIYING_WAREHOUSE)
-        applymovement(PLAYER,WarehouseRave_WalkToBattle)
+        applymovement(PLAYER, moves(walk_up * 2, walk_left * 2, step_end))
         waitmovement(0)
         startmenu_savescreen
         goto(WarehouseRave_Battle_Script)
@@ -117,8 +107,8 @@ script Warehourse_Interact_Script
 script WarehouseRave_Battle_Script
 {
     lock
-        msgbox(gText_WarehouseRave_PrepareToFight,,SPEAKER_KEIYING)
-        trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,gText_WarehouseRave_YesTheyllBelieve)
+        msgbox(format("Prepare for the fight of your life!"),,SPEAKER_KEIYING)
+        trainerbattle_no_intro(TRAINER_KEI_YING_WAREHOUSE_RAVE,format("Yes… they'll believe I was overpowered by the Champion…"))
         closemessage
 
         goto(WarehouseRave_PostBattle_Script)
@@ -130,18 +120,18 @@ script WarehouseRave_PostBattle_Script
         startcutscene(JUMPPLAYER_WAREHOUSERAVE)
         setvar(VAR_WAREHOUSE_RAVE_STATE,DEFEATED_KEIYING_WAREHOUSE)
 
-        msgbox(gText_WarehouseRave_IFailedToKill,,SPEAKER_KEIYING)
+        msgbox(format("Once I report back my failure, you'll officially become SharpRise Capital enemy number one. Be careful out there, {PLAYER}."),,SPEAKER_KEIYING)
 
-        msgbox(gText_WarehouseRave_WaitWhyAreYou,,SPEAKER_ALICIA)
+        msgbox(format("Wait, why are you helping me?"),,SPEAKER_ALICIA)
         closemessage
 
         playse(SE_POKENAV_CALL)
-        msgbox(gText_WarehouseRave_PhoneIsRinging)
-        msgbox(gText_WarehouseRave_Now,,SPEAKER_KEIYING)
+        msgbox(format("Kei-ying's phone is ringing."))
+        msgbox(format("That's them calling for an update... we don't have time. You need to go!"),,SPEAKER_KEIYING)
 
         closemessage
 
-        applymovement(PLAYER,WarehouseRave_RunOutTheWarehouse)
+        applymovement(PLAYER, moves(player_run_right * 3, player_run_up * 3, step_end))
         waitmovement(0)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_CURENO_PORT,4)
@@ -150,235 +140,67 @@ script WarehouseRave_PostBattle_Script
 script WarehouseRave_OutsideWarehouse_Dialogue
 {
     lock
-        applymovement(PLAYER,WarehouseRave_ExitWarehouse)
+        applymovement(PLAYER, moves(face_up, step_end))
         waitmovement(0)
         playse(SE_PIN)
         waitse
-        applymovement(KAI,Common_Movement_ExclamationMark)
+        applymovement(LOCALID_CURENO_BAIYA,Common_Movement_ExclamationMark)
         waitmovement(0)
-        applymovement(KAI,WarehouseRave_RunToPlayer)
+        applymovement(LOCALID_CURENO_BAIYA, moves(player_run_up * 6, walk_left, step_end))
         waitmovement(0)
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        msgbox(gText_WarehouseRave_WhenIGotHere,,SPEAKER_KAI_TIDE)
+        msgbox(format("When I got here the front door was locked, and then the side blew open! What the hell happened?"),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(gText_WarehouseRave_ItWasATrap,,SPEAKER_ALICIA)
+        msgbox(format("It was a trap. Keiying tried to take me out! But… "),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_HolyShitThatWas,,SPEAKER_KAI_TIDE)
+        msgbox(format("That was fast! SharpRise Capital attacking you directly, already?"),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(gText_WarehouseRave_TheBattleFelt,,SPEAKER_ALICIA)
+        msgbox(format("The battle felt like they were trying to lose."),,SPEAKER_ALICIA)
 
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceDown)
         waitmovement(0)
 
-        msgbox(gText_WarehouseRave_AndThenHeToldMe,,SPEAKER_ALICIA)
+        msgbox(format("And then he told me to get out of here. He didn't call for backup or anything."),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_ThatDoesntMake,,SPEAKER_KAI_TIDE)
+        msgbox(format("That doesn't make any sense. You think that creep regrets selling us out?"),,SPEAKER_BAIYA_TIDE)
 
         closemessage
 
         applymovement(PLAYER,Common_Movement_FaceRight)
         waitmovement(0)
 
-        msgbox(gText_WarehouseRave_WhatDoYouMean,,SPEAKER_ALICIA)
+        msgbox(format("What do you mean?"),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_CameToTown,,SPEAKER_KAI_TIDE)
+        msgbox(format("He's like BD - once SharpRise Capital came to town, he jumped ship. He was playing both sides for a while, both working on SharpRise Capital's board and running the Gym in HodouCity."),,SPEAKER_BAIYA_TIDE)
 
-        msgbox(gText_WarehouseRave_MaybeItIsGuilt,,SPEAKER_ALICIA)
+        msgbox(format("Maybe it is guilt. So weird."),,SPEAKER_ALICIA)
 
-        msgbox(gText_WarehouseRave_WhateverImGlad,,SPEAKER_KAI_TIDE)
+        msgbox(format("Whatever. I'm glad you're okay, even if the reasoning is weird."),,SPEAKER_BAIYA_TIDE)
 
         if (var(VAR_STORYLINE_STATE) != STORY_RECIVED_RAVE_INVITE)
         {
-            msgbox(gText_WarehouseRave_ImHeadingIntoTheCity)
-                msgbox(gText_WarehouseRave_IllSeeYou)
+            msgbox(format("I'm heading into the city to start to get to work on our assignments. I'm so psyched about finally starting to chip away at these assholes, you know?"))
+                msgbox(format("I'll see you around."))
         }
         else
         {
-            msgbox(gText_WarehouseRave_GladYouDidnt,,SPEAKER_KAI_TIDE)
+            msgbox(format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz."),,SPEAKER_BAIYA_TIDE)
         }
     closemessage
 
-
-        applymovement(KAI,WarehouseRave_LeaveCity)
+        applymovement(LOCALID_CURENO_BAIYA, moves(walk_up * 6, step_end))
         waitmovement(0)
-        removeobject(KAI)
+        removeobject(LOCALID_CURENO_BAIYA)
 
         addvar(VAR_STORYLINE_STATE,1)
-        setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_KAI_ABOUT_KEIYING)
+        setvar(VAR_WAREHOUSE_RAVE_STATE,TOLD_BAIYA_ABOUT_KEIYING)
     call(TryAutoSave)
         endcutscene
         end
 }
 
-// Kai walks off screen. The player regains control.
-text gText_WarehouseRave_IsThisPlace
-{
-    format("…is this place empty?")
-}
+// Baiya walks off screen. The player regains control.
 
-text gText_WarehouseRave_WhatTheHell
-{
-    format("What the hell is going on?! ")
-}
-
-text gText_WarehouseRave_ImSorryWeHad
-{
-    format("I'm sorry we had to trick you, {PLAYER}.")
-}
-
-text gText_WarehouseRave_WhyAmITrapped
-{
-    format("Why am I trapped here?!")
-}
-
-text gText_WarehouseRave_HasBeenPredicting
-{
-    format("SharpriseCapital has been predicting this for a while now, unfortunately. We've always had a few plans in case your empathy became unmanageable.")
-}
-
-text gText_WarehouseRave_SoIDecideTo
-{
-    format("So I decide to help people and you trap me in a warehouse?")
-}
-
-text gText_WarehouseRave_HasInstructed
-{
-    format("SharpriseCapital has instructed me to neutralize this new threat.")
-}
-
-text gText_WarehouseRave_PrepareToFight
-{
-    format("Prepare to fight for your life!")
-}
-
-text gText_WarehouseRave_YesTheyllBelieve
-{
-    format("Yes… they'll believe I was overpowered by the Champion…")
-}
-
-text gText_WarehouseRave_IFailedToKill
-{
-    format("Once I report back my failure, you'll officially become SharpriseCapital enemy number one. Be careful out there, {PLAYER}.")
-}
-
-text gText_WarehouseRave_WaitWhyAreYou
-{
-    format("Wait, why are you helping me?")
-}
-
-text gText_WarehouseRave_PhoneIsRinging
-{
-    format("Kei-ying's phone is ringing.")
-}
-
-text gText_WarehouseRave_Now
-{
-    format("That's them calling for an update... we don't have time. You need to go!")
-}
-
-text gText_WarehouseRave_WhenIGotHere
-{
-    format("When I got here the front door was locked, and then the side blew open! What the hell happened?")
-}
-
-text gText_WarehouseRave_ItWasATrap
-{
-    format("It was a trap. Keiying tried to take me out! But… ")
-}
-
-text gText_WarehouseRave_HolyShitThatWas
-{
-    format("That was fast! SharpriseCapital attacking you directly, already?")
-}
-
-text gText_WarehouseRave_TheBattleFelt
-{
-    format("The battle felt like they were trying to lose.")
-}
-
-text gText_WarehouseRave_AndThenHeToldMe
-{
-    format("And then he told me to get out of here. He didn't call for backup or anything.")
-}
-
-text gText_WarehouseRave_ThatDoesntMake
-{
-    format("That doesn't make any sense. You think that creep regrets selling us out?")
-}
-
-text gText_WarehouseRave_WhatDoYouMean
-{
-    format("What do you mean?")
-}
-
-text gText_WarehouseRave_CameToTown
-{
-    format("He's like BD - once SharpriseCapital came to town, he jumped ship. He was playing both sides for a while, both working on SharpriseCapital's board and running the Gym in HodouCity.")
-}
-
-text gText_WarehouseRave_MaybeItIsGuilt
-{
-    format("Maybe it is guilt. So weird.")
-}
-
-text gText_WarehouseRave_WhateverImGlad
-{
-    format("Whatever. I'm glad you're okay, even if the reasoning is weird.")
-}
-
-text gText_WarehouseRave_ImHeadingIntoTheCity
-{
-    format("I'm heading into the city to start to get to work on our assignments. I'm so psyched about finally starting to chip away at these assholes, you know?")
-}
-
-text gText_WarehouseRave_GladYouDidnt
-{
-    format("Glad you didn't need me though! Damn, fighting the top brass now, you're still getting stronger. I'll see you at Arantraz.")
-}
-
-text gText_WarehouseRave_IllSeeYou
-{
-    format("I'll see you around.")
-}
-
-movement WarehouseRave_WalkOutShadows
-{
-    walk_right * 4
-        step_end
-}
-
-movement WarehouseRave_WalkToBattle
-{
-    walk_up * 2
-        walk_left * 2
-        step_end
-}
-
-movement WarehouseRave_RunOutTheWarehouse
-{
-    player_run_right * 3
-        player_run_up * 3
-        step_end
-}
-
-movement WarehouseRave_ExitWarehouse
-{
-    face_up
-        step_end
-}
-
-movement WarehouseRave_RunToPlayer
-{
-    player_run_up * 6
-        walk_left
-        step_end
-}
-
-movement WarehouseRave_LeaveCity
-{
-    walk_up * 6
-        step_end
-}

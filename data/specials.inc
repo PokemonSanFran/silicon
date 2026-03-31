@@ -576,12 +576,6 @@ gSpecials::
     def_special KitchenvolunteeringFunc_GeneratePantryItem
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem
-    def_special Quest_Rockcollector_CheckTakenStoneFlags
-    def_special Quest_Rockcollector_TakeAllStonesFromBag
-    def_special Quest_Rockcollector_CountRemainingSubquests
-    def_special Quest_Rockcollector_CheckSubquestTakeStone
-    def_special Quest_Rockcollector_RespawnStones
-    def_special HiddenGrotto_LoadDiscoveredGrottoText
     def_special HiddenGrotto_LoadGrottoAndWarpPlayer
     def_special Quest_Hiddengrottomapping_CheckForJournalPage
     def_special Quest_Hiddengrottomapping_CountCompletedSubquests
@@ -600,17 +594,6 @@ gSpecials::
     def_special Quest_Taxicabturnaround_MarkSubquestComplete
     def_special Quest_Taxicabturnaround_CountRemainingSubquests
     def_special Quest_Taxicabturnaround_CheckReadyForNext
-    def_special Quest_Bodegaburnout_IsSubquestComplete
-    def_special Quest_Bodegaburnout_Catch_MarkSubquestComplete
-    def_special Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem
-    def_special Quest_Bodegaburnout_CountRemainingSubquests
-    def_special Quest_Bodegaburnout_CheckReadyForNext
-    def_special Quest_Bodegaburnout_LoadRequestText
-    def_special Quest_Bodegaburnout_GetQuestType
-    def_special Quest_Bodegaburnout_CheckLocationAndMatchItem
-    def_special Quest_Bodegaburnout_CheckRequiredPokemon
-    def_special Quest_Bodegaburnout_CheckAndSetRescueFlag
-    def_special Quest_Bodegaburnout_ClearRescueFlag
     def_special Quest_Breaktheinternet_Count_CompletedSocialMedia
     def_special Quest_Breaktheinternet_CountRemainingSubquests
     def_special Quest_Warehousewarfare_CountRemainingSubquests
@@ -620,19 +603,11 @@ gSpecials::
     def_special Quest_Persuasivepassenger_TakeNeededItems
     def_special Quest_Skilllibrary_StoreAndCompare
     def_special Quest_Skilllibrary_Debug
-    def_special Quest_Mutaidaidfund_CalculateMoneyAndText
-    def_special Quest_Mutualaidfund_CheckMoney
-    def_special Quest_Mutualaidfund_TakeDonation
-    def_special Quest_Brucelee_UpdateType
-    def_special Quest_Brucelee_BufferTypeName
-    def_special Quest_Brucelee_CheckIfPartyTypes
     def_special Quest_Restorezenzugym_CheckRemainingSubquests
     def_special Quest_Restoreespuleeoutskirts_CheckRemainingSubquests
     def_special Quest_Taxicabturnaround_LookUpQuestType
-    def_special Quest_SmoothieCrafting_CheckNeededItems
     def_special YouRealizeTheyreEvilRight_GetMapForCompletedRestoration
     def_special VSGarbodor_ChooseGemBasedOnStarter
-    def_special ShouldShowAlcmene
 
 @ Restored Frontier
 

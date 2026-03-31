@@ -113,20 +113,20 @@
         },
     },
 #line 48
-    [DIFFICULTY_NORMAL][PARTNER_KAI] =
+    [DIFFICULTY_NORMAL][PARTNER_BAIYA] =
     {
 #line 49
-        .trainerName = _("Kai"),
+        .trainerName = _("Baiya"),
 #line 50
         .trainerClass = TRAINER_CLASS_COMRADE,
 #line 51
-        .trainerPic = TRAINER_PIC_FRONT_KAI,
+        .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 52
         .gender = TRAINER_GENDER_MALE,
 #line 53
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_KAI,
+        .trainerBackPic = TRAINER_PIC_FRONT_BAIYA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -369,20 +369,20 @@
         },
     },
 #line 128
-    [DIFFICULTY_NORMAL][PARTNER_KAUNA] =
+    [DIFFICULTY_NORMAL][PARTNER_PUA] =
     {
 #line 129
-        .trainerName = _("Kauna"),
+        .trainerName = _("Pua"),
 #line 130
         .trainerClass = TRAINER_CLASS_LEADER,
 #line 131
-        .trainerPic = TRAINER_PIC_FRONT_KAUNA,
+        .trainerPic = TRAINER_PIC_FRONT_PUA,
 #line 132
         .gender = TRAINER_GENDER_MALE,
 #line 133
         .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_KAUNA,
+        .trainerBackPic = TRAINER_PIC_FRONT_PUA,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {

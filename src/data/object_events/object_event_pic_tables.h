@@ -1572,18 +1572,18 @@ static const struct SpriteFrameImage sPicTable_siliconPlayerF2Fishing[] = {
     overworld_ascending_frames(gObjectEventPic_siliconPlayerF2Fishing, 4, 4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiNormal[] = {
-    overworld_ascending_frames(gObjectEventPic_KaiNormal,4,4),
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaNormal[] = {
+    overworld_ascending_frames(gObjectEventPic_BaiyaNormal,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiFainted[] =
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaFainted[] =
 {
-    obj_frame_tiles(gObjectEventPic_KaiFainted),
+    obj_frame_tiles(gObjectEventPic_BaiyaFainted),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaiFieldMove[] =
+const struct SpriteFrameImage gObjectEventPicTable_BaiyaFieldMove[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaiFieldMove, 4, 4),
+    overworld_ascending_frames(gObjectEventPic_BaiyaFieldMove, 4, 4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_AdaoraFainted[] =
@@ -1596,9 +1596,9 @@ const struct SpriteFrameImage gObjectEventPicTable_AdaoraWalking[] =
     overworld_ascending_frames(gObjectEventPic_AdaoraWalking,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_AlcmeneWalking[] =
+const struct SpriteFrameImage gObjectEventPicTable_VigrimWalking[] =
 {
-    overworld_ascending_frames(gObjectEventPic_AlcmeneWalking,4,4),
+    overworld_ascending_frames(gObjectEventPic_VigrimWalking,4,4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_BdWalking[] =
@@ -1631,14 +1631,14 @@ const struct SpriteFrameImage gObjectEventPicTable_ImeldaWalking[] =
     overworld_ascending_frames(gObjectEventPic_ImeldaWalking,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaunaSurfing[] =
+const struct SpriteFrameImage gObjectEventPicTable_PuaSurfing[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaunaSurfing,4,4),
+    overworld_ascending_frames(gObjectEventPic_PuaSurfing,4,4),
 };
 
-const struct SpriteFrameImage gObjectEventPicTable_KaunaWalking[] =
+const struct SpriteFrameImage gObjectEventPicTable_PuaWalking[] =
 {
-    overworld_ascending_frames(gObjectEventPic_KaunaWalking,4,4),
+    overworld_ascending_frames(gObjectEventPic_PuaWalking,4,4),
 };
 
 const struct SpriteFrameImage gObjectEventPicTable_KeiyingWalking[] =

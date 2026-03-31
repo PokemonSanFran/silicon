@@ -48,7 +48,7 @@
 #define FLAG_SYS_NO_COLLISION 0x20 // Silicon Flag
 #define FLAG_SYS_NO_ENCOUNTER 0x21 // Silicon Flag
 #define FLAG_SYS_NO_TRAINER_SEE 0x22 // Silicon Flag
-#define FLAG_SYS_NO_BAG_USE 0x23 // Silicon Flag
+#define FLAG_NO_RUNNING 0x23 // Silicon Flag
 #define FLAG_SYS_NO_CATCHING 0x24 // Silicon Flag
 #define FLAG_SAVED_DAVID 0x25 // Silicon Flag
 #define FLAG_LOCKEDOUT_PLAYED 0x26 // Silicon Flag
@@ -65,7 +65,7 @@
 #define FLAG_UNHOUSED_REQUEST 0x31 // Silicon Flag
 #define FLAG_QUEST_PERSUASIVE_SIBLING    0x32 // Silicon Flag
 #define FLAG_CONSTRUCTION_BREAKING_NEWS    0x33 // Silicon Flag
-#define FLAG_KAI_CALL_ARANTRAZ    0x34 // Silicon Flag
+#define FLAG_BAIYA_CALL_ARANTRAZ    0x34 // Silicon Flag
 #define FLAG_RECIEVED_LEFTOVERS    0x35 // Silicon Flag
 #define FLAG_QUEST_PERSUASIVE_PASSENGER_PLAYER_KIDNAPPED    0x36 // Silicon Flag
 #define FLAG_EDUCATED_FOG_ROUTE11 0x37 // Silicon Flag
@@ -151,6 +151,7 @@
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
+#define FLAG_DISABLE_SCALING                     0x50 // Silicon Flag
 #define FLAG_SET_WALL_CLOCK                      0x51
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
@@ -234,6 +235,7 @@
 #define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
 #define FLAG_DELIVERED_DEVON_GOODS           0x95
 #define FLAG_RECEIVED_CONTEST_PASS           0x96 // Unused, leftover from R/S
+#define FLAG_TALKED_TO_ELEANOR_POSTGAME        0x96 // Silicon Flag
 #define FLAG_RECEIVED_CASTFORM               0x97
 #define FLAG_RECEIVED_SUPER_ROD              0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
@@ -737,39 +739,36 @@
 
 #define FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST  0x26E // Silicon Flag
 
-#define FLAG_CRAFTED_NORMAL_GEM  0x26F // Silicon Flag
-#define FLAG_CRAFTED_FIGHTING_GEM  0x270 // Silicon Flag
-#define FLAG_CRAFTED_FLYING_GEM  0x271 // Silicon Flag
-#define FLAG_CRAFTED_POISON_GEM  0x272 // Silicon Flag
-#define FLAG_CRAFTED_GROUND_GEM  0x273 // Silicon Flag
-#define FLAG_CRAFTED_ROCK_GEM  0x274 // Silicon Flag
-#define FLAG_CRAFTED_BUG_GEM  0x275 // Silicon Flag
-#define FLAG_CRAFTED_GHOST_GEM  0x276 // Silicon Flag
-#define FLAG_CRAFTED_STEEL_GEM  0x277 // Silicon Flag
-#define FLAG_CRAFTED_FIRE_GEM  0x278 // Silicon Flag
-#define FLAG_CRAFTED_WATER_GEM  0x279 // Silicon Flag
-#define FLAG_CRAFTED_GRASS_GEM  0x27A // Silicon Flag
-#define FLAG_CRAFTED_ELECTRIC_GEM  0x27B // Silicon Flag
-#define FLAG_CRAFTED_PSYCHIC_GEM  0x27C // Silicon Flag
-#define FLAG_CRAFTED_ICE_GEM  0x27D // Silicon Flag
-#define FLAG_CRAFTED_DRAGON_GEM  0x27E // Silicon Flag
-#define FLAG_CRAFTED_DARK_GEM  0x27F // Silicon Flag
-#define FLAG_CRAFTED_FAIRY_GEM  0x280 // Silicon Flag
-#define FLAG_RECIEVED_GEMARTIST_MEGASTONE  0x281 // Silicon Flag
-#define FLAG_CRAFTED_FIRST_GEM                               FLAG_CRAFTED_NORMAL_GEM
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_FIRE_STONE  0x282 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_WATER_STONE  0x283 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_THUNDER_STONE  0x284 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_LEAF_STONE  0x285 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_ICE_STONE  0x286 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_SUN_STONE  0x287 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_MOON_STONE  0x288 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_SHINY_STONE  0x289 // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_DUSK_STONE  0x28A // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_CAVE_DAWN_STONE  0x28B // Silicon Flag
-#define FLAG_ITEM_ROCKCOLLECTOR_STONE_START                  FLAG_ITEM_ROCKCOLLECTOR_CAVE_FIRE_STONE
-#define FLAG_ITEM_ROCKCOLLECTOR_STONE_END                    FLAG_ITEM_ROCKCOLLECTOR_CAVE_DAWN_STONE
-#define ROCKCOLLECTOR_STONES_COUNT                           (FLAG_ITEM_ROCKCOLLECTOR_STONE_END - FLAG_ITEM_ROCKCOLLECTOR_STONE_START + 1)
+#define FLAG_UNUSED_0x26F  0x26F
+#define FLAG_UNUSED_0x270  0x270
+#define FLAG_UNUSED_0x271  0x271
+#define FLAG_UNUSED_0x272  0x272
+#define FLAG_UNUSED_0x273  0x273
+#define FLAG_UNUSED_0x274  0x274
+#define FLAG_UNUSED_0x275  0x275
+#define FLAG_UNUSED_0x276  0x276
+#define FLAG_UNUSED_0x277  0x277
+#define FLAG_UNUSED_0x278  0x278
+#define FLAG_UNUSED_0x279  0x279
+#define FLAG_UNUSED_0x27A  0x27A
+#define FLAG_UNUSED_0x27B  0x27B
+#define FLAG_UNUSED_0x27C  0x27C
+#define FLAG_UNUSED_0x27D  0x27D
+#define FLAG_UNUSED_0x27E  0x27E
+#define FLAG_UNUSED_0x27F  0x27F
+#define FLAG_UNUSED_0x280  0x280
+#define FLAG_UNUSED_0x281  0x281
+#define FLAG_UNUSED_0x282  0x282
+#define FLAG_UNUSED_0x283  0x283
+#define FLAG_UNUSED_0x284  0x284
+#define FLAG_UNUSED_0x285  0x285
+#define FLAG_UNUSED_0x286  0x286
+#define FLAG_UNUSED_0x287  0x287
+#define FLAG_UNUSED_0x288  0x288
+#define FLAG_UNUSED_0x289  0x289
+#define FLAG_UNUSED_0x28A  0x28A
+#define FLAG_UNUSED_0x28B  0x28B
+
 #define FLAG_QUEST_BODEGA_RESCUE1  0x28C // Silicon Flag
 #define FLAG_QUEST_BODEGA_RESCUE2  0x28D // Silicon Flag
 #define FLAG_QUEST_BODEGA_RESCUE3  0x28E // Silicon Flag
@@ -789,16 +788,16 @@
 #define FLAG_FACILITY_UNLOCK_EMRYS  0x299 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_MAGNUS  0x29A // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_BD  0x29B // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_KAI  0x29C // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_BAIYA  0x29C // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_NERIENE  0x29D // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_ARMANDO  0x29E // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_FRANK  0x29E // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_SHINZO  0x29F // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_KEI_YING  0x2A0 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_BELEN  0x2A1 // Silicon Flag
-#define FLAG_FACILITY_UNLOCK_ELLEN  0x2A2 // Silicon Flag
+#define FLAG_FACILITY_UNLOCK_ELEANOR  0x2A2 // Silicon Flag
 #define FLAG_FOUGHT_FIRST_FACILITY_BOSS  0x2A3 // Silicon Flag
 #define FLAG_FACILITY_UNLOCK_FLAGS_START                     FLAG_FACILITY_UNLOCK_LIKO
-#define FLAG_FACILITY_UNLOCK_FLAGS_END                       FLAG_FACILITY_UNLOCK_ELLEN
+#define FLAG_FACILITY_UNLOCK_FLAGS_END                       FLAG_FACILITY_UNLOCK_ELEANOR
 #define FACILITY_UNLOCK_FLAGS_COUNT                          (FLAG_FACILITY_UNLOCK_FLAGS_END - FLAG_FACILITY_UNLOCK_FLAGS_START + 1)
 #define FLAG_DEFEATED_CONSTRUCTION_ROCKET_A 0x2A4 // Silicon Flag
 #define FLAG_DEFEATED_CONSTRUCTION_ROCKET_B 0x2A5 // Silicon Flag
@@ -1715,12 +1714,12 @@
 // These flags are cleared once per day
 // The start and end are byte-aligned because the flags are cleared in byte increments
 #define DAILY_FLAGS_START                           (FLAG_UNUSED_0x91F + (8 - FLAG_UNUSED_0x91F % 8))
-#define FLAG_DAILY_KITCHEN_VOLUNTEER                (DAILY_FLAGS_START + 0x0)  // Unused Flag
+#define FLAG_DAILY_KITCHEN_VOLUNTEER                (DAILY_FLAGS_START + 0x0)
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
-#define FLAG_UNUSED_0x923                           (DAILY_FLAGS_START + 0x3)  // Unused Flag
-#define FLAG_UNUSED_0x924                           (DAILY_FLAGS_START + 0x4)  // Unused Flag
-#define FLAG_UNUSED_0x925                           (DAILY_FLAGS_START + 0x5)  // Unused Flag
+#define FLAG_DAILY_ELEANOR_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag
+#define FLAG_DAILY_NOPOMOD_BATTLE                   (DAILY_FLAGS_START + 0x4)
+#define FLAG_DAILY_KEIYING_REMATCH                  (DAILY_FLAGS_START + 0x5)
 #define FLAG_UNUSED_0x926                           (DAILY_FLAGS_START + 0x6)  // Unused Flag
 #define FLAG_UNUSED_0x927                           (DAILY_FLAGS_START + 0x7)  // Unused Flag
 #define FLAG_UNUSED_0x928                           (DAILY_FLAGS_START + 0x8)  // Unused Flag

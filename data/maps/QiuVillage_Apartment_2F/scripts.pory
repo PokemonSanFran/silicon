@@ -1,0 +1,10 @@
+mapscripts QiuVillage_Apartment_2F_MapScripts
+{
+}
+
+script QiuVillage_Apartment_2F_Dialogue_Adaoraparent
+{
+    closemessage
+    release
+    end
+}

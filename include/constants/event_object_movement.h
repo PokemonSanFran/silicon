@@ -271,6 +271,14 @@
 #define MOVEMENT_ACTION_SPIN_LEFT                       0xB4
 #define MOVEMENT_ACTION_SPIN_RIGHT                      0xB5
 
+// Start pathfinder
+enum
+{
+    MOVEMENT_ACTION_GENERATED_BEGIN = MOVEMENT_ACTION_SPIN_RIGHT + 1,
+    MOVEMENT_ACTION_GENERATED_END,
+};
+// End pathfinder
+
 #define MOVEMENT_ACTION_STEP_END 0xFE
 #define MOVEMENT_ACTION_NONE     0xFF
 
@@ -378,5 +386,7 @@ enum CopyMovement
 	COPY_MOVE_WALK_COLLIDE,
 	COPY_MOVE_WALK_COLLIDE_SLOW,
 };
+
+#define OBJECT_TRANSFORM_FRAME_LENGTH 16 // storyActionItems
 
 #endif // GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H

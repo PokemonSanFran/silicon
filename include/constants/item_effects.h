@@ -61,7 +61,6 @@
 #define ITEM6_HEAL_HP_LVL_UP  ((u8) -3)
 #define ITEM6_HEAL_HP_QUARTER ((u8) -4)
 
-#define ITEM6_EV_ALL         0x2 //Sherbet Surprise effect
 // Special PP recovery amounts for ITEM4_HEAL_PP
 #define ITEM6_HEAL_PP_FULL   0x7F
 

@@ -3,6 +3,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 mapscripts Arantraz_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(YouRealizeTheyreEvilRight_HideObject_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_14,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueDiveN)
     }
 
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
@@ -10,16 +11,16 @@ mapscripts Arantraz_MapScripts {
     ]
 
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_TalaApproachesKai
+        VAR_STORYLINE_STATE, STORY_EPILOGUE: Epilogue_Script_TalaApproachesBaiya
             FLAG_VISITED_ARANTRAZ, FALSE: Generic_Mappreview
-        VAR_ARANTRAZ_STATE, KAI_SUMMONED_ARANTRAZ: YouRealizeTheyreEvilRight_PlayerLandedDialogue
+        VAR_ARANTRAZ_STATE, BAIYA_SUMMONED_ARANTRAZ: YouRealizeTheyreEvilRight_PlayerLandedDialogue
     ]
 }
 
 script ArantrazAttendant_HealPlayer_Script {
         lock
         call(Common_EventScript_OutOfCenterPartyHeal)
-        msgbox(gText_Arantraz_IveHealedYourParty)
+        msgbox(format("I've healed your party! You can battle these Trainers as often as you like."))
         call(ResetArantrazExhibit_Script)
         closemessage
         release
@@ -45,18 +46,10 @@ script Arantraz_ChooseFerryDestination_Script {
     call(Ferry_Interact_Dialogue)
 }
 
-script Arantraz_EventScript_DeliveryD{
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryD_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
-}
-
-text gText_Arantraz_IveHealedYourParty {
-    format("I've healed your party! You can battle these Trainers as often as you like.")
+script Arantraz_Script_Interact_BodegaburnoutRescueDiveN
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN,format("Oh! I haven’t seen another human in so long. Keep me company?"),format("If my Pokémon are knocked out, will I be even more lonely?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueDiveN)
+    // PSF TODO BodegaburnoutRescueDiveN: Thanks for not leaving!
 }
 
 script Route4_EventScript_0ED24EF1

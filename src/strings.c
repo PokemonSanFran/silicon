@@ -1224,6 +1224,7 @@ const u8 gText_HodouCity[] = _("HodouCity");
 const u8 gText_ToraTown[] = _("ToraTown");
 const u8 gText_PerlaciaCity[] = _("PerlaciaCity");
 const u8 gText_GlavezHill[] = _("GlavezHill");
+const u8 gText_GlavezHeights[] = _("Glavez Heights");
 const u8 gText_HalaiIsland[] = _("HalaiIsland");
 const u8 gText_TirabudinPlace[] = _("TirabudinPlace");
 const u8 gText_TorgeotClimb[] = _("TorgeotClimb");
@@ -1239,7 +1240,7 @@ const u8 gText_Transpyramid[] = _("Transpyramid");
 const u8 gText_Ferrybuilding[] = _("Ferrybuilding");
 const u8 gText_Dragongate[] = _("Dragongate");
 const u8 gText_PopidoraPier[] = _("PopidoraPier");
-const u8 gText_SharpriseStadium[] = _("SharpriseStadium");
+const u8 gText_SharpriseStadium[] = _("SharpRise Stadium");
 const u8 gText_OrolandColiseum[] = _("OrolandColiseum");
 const u8 gText_Orolandferry[] = _("Orolandferry");
 const u8 gText_PiocaBridge[] = _("PiocaBridge");
@@ -1282,7 +1283,7 @@ const u8 gText_Route12[] = _("Route12");
 const u8 gText_RouteB[] = _("RouteB");
 const u8 gText_RouteE[] = _("RouteE");
 const u8 gText_HalerbaWilds[] = _("HalerbaWilds");
-const u8 gText_SharpriseSpire[] = _("SharpriseSpire");
+const u8 gText_SharpriseSpire[] = _("SharpRise Spire");
 const u8 gText_PARC[] = _("PARC");
 const u8 gText_Agatevillage[] = _("Agate Village");
 // End PSF Locations
@@ -1300,29 +1301,6 @@ const u8 gText_QuestComplete[] = _("complete");
 const u8 gText_PokemonPsychoShift[] = _("a Pokemon that knows \nthe move Psycho Shift");
 const u8 gText_PokemonEffectSpore[] = _("a Pokemon that has \nthe ability Effect Spore");
 // End Quest_Restorezenzugym
-// Start Quest_Bodegaburnout
-const u8 gText_Bodegaburnout_PersonA[] = _("person A");
-const u8 gText_Bodegaburnout_PersonB[] = _("person B");
-const u8 gText_Bodegaburnout_PersonC[] = _("person C");
-const u8 gText_Bodegaburnout_PersonD[] = _("person D");
-const u8 gText_Bodegaburnout_PersonE[] = _("person E");
-const u8 gText_Bodegaburnout_PersonF[] = _("person F");
-const u8 gText_Bodegaburnout_PersonG[] = _("person G");
-const u8 gText_Bodegaburnout_PersonH[] = _("person H");
-const u8 gText_Bodegaburnout_PersonI[] = _("person I");
-const u8 gText_Bodegaburnout_PersonJ[] = _("person J");
-const u8 gText_Bodegaburnout_PersonK[] = _("person K");
-const u8 gText_Bodegaburnout_PersonL[] = _("person L");
-const u8 gText_Bodegaburnout_StrongMon[] =_("strong");
-const u8 gText_Bodegaburnout_ColdMon[] =_("cold");
-const u8 gText_Bodegaburnout_SmartMon[] = _("smart");
-const u8 gText_Bodegaburnout_FairyMon[] =_("fairy");
-
-const u8 gText_Bodegaburnout_AssistWithStocking[] = _("assist with stocking the shelves");
-const u8 gText_Bodegaburnout_HelpKeepFood[] = _("help keep food cold");
-const u8 gText_Bodegaburnout_BalanceOurBooks[] = _("balance our books");
-const u8 gText_Bodegaburnout_RaiseTheMood[] = _("raise the mood and ambiance");
-// End Quest_Bodegaburnout
 // Start Debug Start
 const u8 gText_SelectPoint[] = _("Select a point in Act 0. You will go\nto directly after that point. Press B to cancel.");
 const u8 gText_ProlougeIntro[] = _("Prologue Intro");

@@ -25,8 +25,9 @@
 #include "constants/buzzr.h"
 #include "ui_start_menu.h"
 #include "ui_options_menu.h"
+#include "waves.h" // wavesOfChange
 // End siliconMerge
-#include "hidden_grotto.h" // hiddenGrotto 
+#include "hidden_grotto.h" // hiddenGrotto
 #include "constants/trainer_tower.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -34,7 +35,8 @@
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
-#include "constants/hidden_grotto.h" // hiddenGrotto 
+#include "constants/waves.h" // wavesOfChange
+#include "constants/hidden_grotto.h" // hiddenGrotto
 #include "constants/region_map_sections.h"
 
 // Prevent cross-jump optimization.
@@ -155,6 +157,11 @@
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
 
 #define NUM_APRICORN_TREE_BYTES ROUND_BITS_TO_BYTES(APRICORN_TREE_COUNT)
+
+// Start siliconMerge
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+// End siliconMerge
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
@@ -313,9 +320,6 @@ struct Glass
 struct SaveBlock3
 {
 // Start siliconMerge
-#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
-#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
-#define QUEST_STATES 5 //Number of different quest states tracked in the saveblock
     struct QuestListProperties savedQuestListProperties;
     struct QuestListPosition savedQuestPositions;
     struct Pokevial pokevial; //Pokevial Branch
@@ -335,6 +339,7 @@ struct SaveBlock3
     u16 mazeItemsSeed;
     u16 firstPokemonCatchFlags[RESIDO_MAPSEC_COUNT];
     struct Waypoint waypoint; // Waypoint/MapSystem Branch
+    u8 wavesFunds[GOAL_PERCENT_COUNT][GOAL_COUNT];
 // End siliconMerge
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;

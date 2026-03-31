@@ -5,7 +5,7 @@ mapscripts CapheCity_Pantry_MapScripts{
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
 script CapheCity_Pantry_CheckDoor_Script{
-    msgbox(gText_CapheCity_Pantry_TheDoorIsLocked,MSGBOX_AUTOCLOSE)
+    msgbox(format("The door is locked."),MSGBOX_AUTOCLOSE)
 
     checkitem(ITEM_STORAGE_KEY,1)
 
@@ -17,7 +17,7 @@ script CapheCity_Pantry_CheckDoor_Script{
 
 script CapheCity_Pantry_UnlockDoor_Script{
     bufferitemname(STR_VAR_1,ITEM_STORAGE_KEY)
-    msgbox(gText_CapheCity_Pantry_UseTheKeyTo,MSGBOX_YESNO)
+    msgbox(format("Use the {STR_VAR_1} to unlock the door?"),MSGBOX_YESNO)
 
     if(var(VAR_RESULT) == YES){
         closemessage
