@@ -25,6 +25,7 @@
 #include "daycare.h"
 #include "qol_field_moves.h"
 #include "line_break.h"
+#include "international_string_util.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
@@ -95,7 +96,10 @@ static void MovePool_SetMoveToList(u32, u32);
 static u32 MovePool_GetMoveFromList(u32);
 
 static void MovePool_Sort(void);
+static const struct MovePoolSortInfo *MovePool_GetSortInfo(enum MovePoolSorts);
 static MovePoolSortFunc MovePool_GetSortFunc(void);
+static const u8 *MovePool_GetSortTitle(void);
+static void MovePool_CopySortTitle(void);
 static void MovePoolSort_Default(u32 *);
 
 static void MiscUtil_FreeResources(void);
@@ -401,6 +405,20 @@ static void MoveBar_Init(void)
 static void MoveBar_Update(void)
 {
     enum MoveReminderWindows win = MREMINDER_WINDOW_MAIN;
+
+    MovePool_CopySortTitle();
+
+    u32 totalWidth = TILE_TO_PIXELS(10) + 2;
+    u32 fontId = GetFontIdToFit(gStringVar4, FONT_OUTLINED, 0, totalWidth);
+    u32 offsetX = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, totalWidth, -1);
+
+    MiscUtil_AddTextPrinter(win, gStringVar4, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
+
+    enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
+
+    if (sort != MOVE_POOL_SORT_DEFAULT)
+        BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
+
     u32 nameY = PAGE_MAIN_MOVE_BAR_NAME_Y, typeY = PAGE_MAIN_MOVE_BAR_TYPE_Y;
 
     for (u32 i = 0; i < MAX_MREMINDER_BAR_SPRITES; i++, nameY += PAGE_MAIN_MOVE_BAR_SPACER_Y, typeY += PAGE_MAIN_MOVE_BAR_SPACER_Y)
@@ -709,9 +727,35 @@ static void MovePool_Sort(void)
     MovePool_SetNumberOfMoves(numMoves);
 }
 
+static const struct MovePoolSortInfo *MovePool_GetSortInfo(enum MovePoolSorts sort)
+{
+    return &sMovePoolSortInfos[sort];
+}
+
 static MovePoolSortFunc MovePool_GetSortFunc(void)
 {
-    return sMovePoolSortFunctions[MOVE_POOL_SORT_DEFAULT];
+    return MovePool_GetSortInfo(MOVE_POOL_SORT_DEFAULT)->sortingFunc;
+}
+
+static const u8 *MovePool_GetSortTitle(void)
+{
+    return MovePool_GetSortInfo(MOVE_POOL_SORT_DEFAULT)->title;
+}
+
+static void MovePool_CopySortTitle(void)
+{
+    enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
+    const u8 *title = MovePool_GetSortTitle();
+    u8 *strbuf = gStringVar4;
+
+    if (sort == MOVE_POOL_SORT_DEFAULT)
+    {
+        StringCopy(strbuf, title);
+        return;
+    }
+
+    StringCopy(strbuf, COMPOUND_STRING("Sort: "));
+    StringAppend(strbuf, title);
 }
 
 static void MovePoolSort_Default(u32 *numMoves)

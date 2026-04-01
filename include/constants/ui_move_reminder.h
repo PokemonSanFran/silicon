@@ -32,10 +32,10 @@ enum PageInterfaces
 #define PAGE_MAIN_STATS_2_Y             (TILE_TO_PIXELS(4) - 2)     // ATK, SPDEF
 #define PAGE_MAIN_STATS_3_Y             (TILE_TO_PIXELS(6) - 2)     // DEF, SPEED
 
-#define PAGE_MAIN_MOVES_LIST_TITLE_X    ()
-#define PAGE_MAIN_MOVES_LIST_FILTER_X   ()
-#define PAGE_MAIN_MOVES_LIST_TITLE_Y    ()
-#define PAGE_MAIN_MOVES_LIST_FILTER_Y   ()
+#define PAGE_MAIN_MOVES_LIST_TITLE_X    (TILE_TO_PIXELS(20) - 3)
+#define PAGE_MAIN_MOVES_LIST_FILTER_X   (TILE_TO_PIXELS(17))
+#define PAGE_MAIN_MOVES_LIST_TITLE_Y    (0)
+#define PAGE_MAIN_MOVES_LIST_FILTER_Y   (PAGE_MAIN_MOVES_LIST_TITLE_Y)
 
 #define PAGE_MAIN_MOVE_BAR_X            (TILE_TO_PIXELS(17) + 3)
 #define PAGE_MAIN_MOVE_BAR_NAME_X       (TILE_TO_PIXELS(18) - 2)
@@ -156,6 +156,12 @@ struct MovePool
 {
     u16 move:13;
     enum MovePoolMethods method:3;
+};
+
+struct MovePoolSortInfo
+{
+    MovePoolSortFunc sortingFunc;
+    const u8 *title;
 };
 
 struct MoveReminderMon

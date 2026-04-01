@@ -3,6 +3,7 @@ static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_re
 
 // different by 1 (one) pixel truncated
 static const u8 sMoveReminder_CategoriesBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
+static const u8 sMoveReminder_FilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_indicator.4bpp");
 
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
 {
@@ -32,9 +33,38 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
     },
 };
 
-static const MovePoolSortFunc sMovePoolSortFunctions[NUM_MOVE_POOL_SORTS] =
+static const struct MovePoolSortInfo sMovePoolSortInfos[NUM_MOVE_POOL_SORTS] =
 {
-    [MOVE_POOL_SORT_DEFAULT] = MovePoolSort_Default
+    [MOVE_POOL_SORT_DEFAULT] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("Learnable Moves"),
+    },
+    [MOVE_POOL_SORT_MOVE_ID] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("Move IDs"),
+    },
+    [MOVE_POOL_SORT_ALPHABETICAL] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("Alphabets"),
+    },
+    [MOVE_POOL_SORT_PP] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("PP"),
+    },
+    [MOVE_POOL_SORT_ACCURACY] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("Accuracy"),
+    },
+    [MOVE_POOL_SORT_BASE_POWER] =
+    {
+        .sortingFunc = MovePoolSort_Default,
+        .title = COMPOUND_STRING("Base Power"),
+    },
 };
 
 static const struct BgTemplate sMoveReminderBgTemplates[NUM_MREMINDER_BACKGROUNDS + 1] =
