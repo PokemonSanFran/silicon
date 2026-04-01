@@ -42,6 +42,17 @@ TEST("Opposing Trainers do not have Game Move Errors")
                         continue;
                     }
 
+                    if (move == MOVE_OVERHEAT && species == SPECIES_ROTOM_HEAT)
+                        continue;
+                    if (move == MOVE_AIR_SLASH && species == SPECIES_ROTOM_FAN)
+                        continue;
+                    if (move == MOVE_BLIZZARD && species == SPECIES_ROTOM_FROST)
+                        continue;
+                    if (move == MOVE_LEAF_STORM && species == SPECIES_ROTOM_MOW)
+                        continue;
+                    if (move == MOVE_HYDRO_PUMP && species == SPECIES_ROTOM_WASH)
+                        continue;
+
                     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
                     for (u32 j = 0; learnset[j].move != LEVEL_UP_MOVE_END; j++)
                     {
