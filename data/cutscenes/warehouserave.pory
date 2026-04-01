@@ -4,8 +4,9 @@ const LOCALID_CURENO_BAIYA = (LOCALID_CAMERA + 1)
 script WarehouseRave_SetUpRave_Script
 {
     setweather(WEATHER_FOG_DIAGONAL)
-        doweather
-        playbgm(MUS_RG_GAME_CORNER,TRUE)
+    doweather
+    playbgm(MUS_WAREHOUSE_RAVE,TRUE)
+// PSF TODO find the muffled music posts in pokeemerald and use it to play the rave music when outside
 }
 
 script WarehouseRave_Script_AddBaiya
