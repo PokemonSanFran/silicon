@@ -24,6 +24,7 @@
 #include "item.h"
 #include "daycare.h"
 #include "qol_field_moves.h"
+#include "line_break.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
@@ -115,6 +116,12 @@ static void MainPage_UpdateFrontEnd(void);
 static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
 static void MainPage_PrintMonStats(void);
+static void MainPage_PrintMoveSummary(void);
+static void MainPage_PrintMovePP(u32, u32);
+static void MainPage_PrintMoveCategory(u32);
+static void MainPage_PrintMovePower(u32);
+static void MainPage_PrintMoveAccuracy(u32);
+static void MainPage_PrintMoveDescription(u32);
 static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
 
 static void FilterPage_HandleInput(u8);
@@ -890,8 +897,9 @@ static void MainPage_UpdateFrontEnd(void)
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, mon->nickname, FONT_OUTLINED, 2, 0, MREMINDER_TXTCLR_DEFAULT);
     MainPage_PrintMonGender();
     MainPage_PrintMonLevel();
-
     MainPage_PrintMonStats();
+
+    MainPage_PrintMoveSummary();
 
     MoveBar_Update();
 }
@@ -934,6 +942,87 @@ static void MainPage_PrintMonStats(void)
     MainPage_PrintMonIndividualStat(STAT_SPDEF, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_2_Y);
 
     MainPage_PrintMonIndividualStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
+}
+
+static void MainPage_PrintMoveSummary(void)
+{
+    u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
+
+    MainPage_PrintMovePP(move, PAGE_MAIN_MOVE_DETAILS_PP);
+    MainPage_PrintMoveCategory(move);
+    MainPage_PrintMovePower(move);
+    MainPage_PrintMoveAccuracy(move);
+    MainPage_PrintMoveDescription(move);
+}
+
+static void MainPage_PrintMovePP(u32 move, u32 remainingPP)
+{
+    u32 pp = GetMovePP(move);
+
+    if (remainingPP == PAGE_MAIN_MOVE_DETAILS_PP)
+        remainingPP = pp;
+
+    ConvertUIntToDecimalStringN(gStringVar1, remainingPP,   STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
+    ConvertUIntToDecimalStringN(gStringVar2, pp,            STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("PP: {STR_VAR_1}/{STR_VAR_2}"));
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL,
+        PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
+}
+
+static void MainPage_PrintMoveCategory(u32 move)
+{
+    enum DamageCategory category = GetMoveCategory(move);
+    const u8 *str = GetMoveCategoryName(move);
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(4));
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, fontId, PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
+    BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_Categories,
+        0, category * 16,
+        16, 16 * DAMAGE_CATEGORY_COUNT,
+        PAGE_MAIN_MOVE_DETAILS_CAT_X, PAGE_MAIN_MOVE_DETAILS_CAT_Y,
+        11, 9);
+}
+
+static void MainPage_PrintMovePower(u32 move)
+{
+    u32 pwr = GetMovePower(move);
+
+    if (pwr > 1)
+        ConvertUIntToDecimalStringN(gStringVar1, pwr, STR_CONV_MODE_LEFT_ALIGN, MAX_DIGITS(255));
+    else
+        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("PWR: {STR_VAR_1}"));
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
+}
+
+static void MainPage_PrintMoveAccuracy(u32 move)
+{
+    u32 accuracy = GetMoveAccuracy(move);
+
+    if (accuracy > 0)
+        ConvertUIntToDecimalStringN(gStringVar1, accuracy, STR_CONV_MODE_LEFT_ALIGN, MAX_DIGITS(255));
+    else
+        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("ACC: {STR_VAR_1}"));
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
+}
+
+static void MainPage_PrintMoveDescription(u32 move)
+{
+    StringCopy(gStringVar4, GetMoveDescription(move));
+
+    StripLineBreaks(gStringVar4);
+    BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        gStringVar4, FONT_SMALL,
+        PAGE_MAIN_MOVE_DETAILS_DESC_X, PAGE_MAIN_MOVE_DETAILS_DESC_Y,
+        MREMINDER_TXTCLR_TEXT_BOX);
 }
 
 // x/y1 for stat's name, x/y2 for stat's number

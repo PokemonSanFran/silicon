@@ -1,6 +1,9 @@
 static const u32 sMoveReminder_Tiles[] = INCBIN_U32("graphics/ui_menus/move_reminder/tiles.4bpp.smol");
 static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_reminder/tiles.gbapal");
 
+// different by 1 (one) pixel truncated
+static const u8 sMoveReminder_Categories[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
+
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
 {
     [STAT_HP] = COMPOUND_STRING("HP:"),
@@ -79,5 +82,5 @@ static const u8 sMoveReminderTextColors[NUM_MREMINDER_TXTCLRS][3] =
     [MREMINDER_TXTCLR_MALE]      = { 0, 2, 15 },
     [MREMINDER_TXTCLR_FEMALE]    = { 0, 2, 12 },
     [MREMINDER_TXTCLR_HELP_BAR]  = { 0, 1, 0 },
-    [MREMINDER_TXTCLR_TEXT_BOX]  = { 1, 2, 3 },
+    [MREMINDER_TXTCLR_TEXT_BOX]  = { 0, 2, 0 },
 };

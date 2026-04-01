@@ -45,12 +45,16 @@ enum PageInterfaces
 #define PAGE_MAIN_MOVE_BAR_NAME_Y       (PAGE_MAIN_MOVE_BAR_Y - 1)
 #define PAGE_MAIN_MOVE_BAR_TYPE_Y       (PAGE_MAIN_MOVE_BAR_Y)
 
-#define PAGE_MAIN_MOVE_DETAILS_1_X      () // PP,  PWR
-#define PAGE_MAIN_MOVE_DETAILS_2_X      () // CAT, ACC
-#define PAGE_MAIN_MOVE_DETAILS_DESC_X   ()
-#define PAGE_MAIN_MOVE_DETAILS_1_Y      () // PP,  CAT
-#define PAGE_MAIN_MOVE_DETAILS_2_Y      () // PWR, ACC
-#define PAGE_MAIN_MOVE_DETAILS_DESC_Y   ()
+#define PAGE_MAIN_MOVE_DETAILS_1_X      (3)                      // PP,  CAT
+#define PAGE_MAIN_MOVE_DETAILS_2_X      (TILE_TO_PIXELS(7) + 2)  // PWR, ACC
+#define PAGE_MAIN_MOVE_DETAILS_CAT_X    (TILE_TO_PIXELS(5) - 3)
+#define PAGE_MAIN_MOVE_DETAILS_DESC_X   (TILE_TO_PIXELS(1))
+#define PAGE_MAIN_MOVE_DETAILS_1_Y      (TILE_TO_PIXELS(9) + 3)  // PP,  PWR
+#define PAGE_MAIN_MOVE_DETAILS_2_Y      (TILE_TO_PIXELS(11) - 2) // CAT, ACC
+#define PAGE_MAIN_MOVE_DETAILS_CAT_Y    (TILE_TO_PIXELS(11) + 1)
+#define PAGE_MAIN_MOVE_DETAILS_DESC_Y   (TILE_TO_PIXELS(13))
+
+#define PAGE_MAIN_MOVE_DETAILS_PP       (0xFF)
 
 enum InitSetupSteps
 {
