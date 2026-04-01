@@ -2,7 +2,7 @@ static const u32 sMoveReminder_Tiles[] = INCBIN_U32("graphics/ui_menus/move_remi
 static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_reminder/tiles.gbapal");
 
 // different by 1 (one) pixel truncated
-static const u8 sMoveReminder_Categories[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
+static const u8 sMoveReminder_CategoriesBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
 
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
 {

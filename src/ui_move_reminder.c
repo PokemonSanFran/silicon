@@ -116,13 +116,13 @@ static void MainPage_UpdateFrontEnd(void);
 static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
 static void MainPage_PrintMonStats(void);
+static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
 static void MainPage_PrintMoveSummary(void);
 static void MainPage_PrintMovePP(u32, u32);
 static void MainPage_PrintMoveCategory(u32);
 static void MainPage_PrintMovePower(u32);
 static void MainPage_PrintMoveAccuracy(u32);
 static void MainPage_PrintMoveDescription(u32);
-static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
 
 static void FilterPage_HandleInput(u8);
 static void FilterPage_UpdateFrontEnd(void);
@@ -944,6 +944,19 @@ static void MainPage_PrintMonStats(void)
     MainPage_PrintMonIndividualStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
 }
 
+// x/y1 for stat's name, x/y2 for stat's number
+static void MainPage_PrintMonIndividualStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
+{
+    u32 value = MiscUtil_GetMon()->stats[stat];
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, sMoveReminder_StatNames[stat],
+        FONT_OUTLINED, x1, y1, MREMINDER_TXTCLR_DEFAULT);
+
+    ConvertUIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar1,
+        FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
+}
+
 static void MainPage_PrintMoveSummary(void)
 {
     u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
@@ -977,7 +990,7 @@ static void MainPage_PrintMoveCategory(u32 move)
     u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(4));
 
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, fontId, PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
-    BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_Categories,
+    BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_CategoriesBlit,
         0, category * 16,
         16, 16 * DAMAGE_CATEGORY_COUNT,
         PAGE_MAIN_MOVE_DETAILS_CAT_X, PAGE_MAIN_MOVE_DETAILS_CAT_Y,
@@ -1023,19 +1036,6 @@ static void MainPage_PrintMoveDescription(u32 move)
         gStringVar4, FONT_SMALL,
         PAGE_MAIN_MOVE_DETAILS_DESC_X, PAGE_MAIN_MOVE_DETAILS_DESC_Y,
         MREMINDER_TXTCLR_TEXT_BOX);
-}
-
-// x/y1 for stat's name, x/y2 for stat's number
-static void MainPage_PrintMonIndividualStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
-{
-    u32 value = MiscUtil_GetMon()->stats[stat];
-
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, sMoveReminder_StatNames[stat],
-        FONT_OUTLINED, x1, y1, MREMINDER_TXTCLR_DEFAULT);
-
-    ConvertUIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 4);
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar1,
-        FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
 }
 
 static void FilterPage_HandleInput(u8 taskId)
