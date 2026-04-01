@@ -114,7 +114,8 @@ static u32 MainPage_GetGridListIdx(void);
 static void MainPage_UpdateFrontEnd(void);
 static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
-static void MainPage_PrintMonStat(enum Stat, u32, u32, u32, u32);
+static void MainPage_PrintMonStats(void);
+static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
 
 static void FilterPage_HandleInput(u8);
 static void FilterPage_UpdateFrontEnd(void);
@@ -890,14 +891,7 @@ static void MainPage_UpdateFrontEnd(void)
     MainPage_PrintMonGender();
     MainPage_PrintMonLevel();
 
-    MainPage_PrintMonStat(STAT_HP,  PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_1_Y);
-    MainPage_PrintMonStat(STAT_ATK, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_2_Y);
-    MainPage_PrintMonStat(STAT_DEF, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_3_Y);
-
-    MainPage_PrintMonStat(STAT_SPATK, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_1_Y);
-    MainPage_PrintMonStat(STAT_SPDEF, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_2_Y);
-
-    MainPage_PrintMonStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
+    MainPage_PrintMonStats();
 
     MoveBar_Update();
 }
@@ -930,8 +924,20 @@ static void MainPage_PrintMonLevel(void)
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
 }
 
+static void MainPage_PrintMonStats(void)
+{
+    MainPage_PrintMonIndividualStat(STAT_HP,  PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_1_Y);
+    MainPage_PrintMonIndividualStat(STAT_ATK, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_2_Y);
+    MainPage_PrintMonIndividualStat(STAT_DEF, PAGE_MAIN_STATS_1_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_1_VALUE_X, PAGE_MAIN_STATS_3_Y);
+
+    MainPage_PrintMonIndividualStat(STAT_SPATK, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_1_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_1_Y);
+    MainPage_PrintMonIndividualStat(STAT_SPDEF, PAGE_MAIN_STATS_2_NAME_X, PAGE_MAIN_STATS_2_Y, PAGE_MAIN_STATS_2_VALUE_X, PAGE_MAIN_STATS_2_Y);
+
+    MainPage_PrintMonIndividualStat(STAT_SPEED, PAGE_MAIN_STATS_3_NAME_X, PAGE_MAIN_STATS_3_Y, PAGE_MAIN_STATS_3_VALUE_X, PAGE_MAIN_STATS_3_Y);
+}
+
 // x/y1 for stat's name, x/y2 for stat's number
-static void MainPage_PrintMonStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
+static void MainPage_PrintMonIndividualStat(enum Stat stat, u32 x1, u32 y1, u32 x2, u32 y2)
 {
     u32 value = MiscUtil_GetMon()->stats[stat];
 
