@@ -1912,6 +1912,10 @@
                 "Move": "MOVE_GIGA_DRAIN"
             },
             {
+                "Level": 59,
+                "Move": "MOVE_RAGE_POWDER"
+            },
+            {
                 "Level": 66,
                 "Move": "MOVE_X_SCISSOR"
             }
@@ -1946,6 +1950,7 @@
             "MOVE_SWAGGER",
             "MOVE_SLEEP_TALK",
             "MOVE_SUBSTITUTE",
+            "MOVE_BULLET_SEED",
             "MOVE_CONFIDE"
         ],
         "EggMoves":
@@ -2172,6 +2177,10 @@
                 "Move": "MOVE_THRASH"
             },
             {
+                "Level": 35,
+                "Move": "MOVE_RAGE_FIST"
+            },
+            {
                 "Level": 39,
                 "Move": "MOVE_CLOSE_COMBAT"
             },
@@ -2290,6 +2299,10 @@
                 "Move": "MOVE_MUD_SHOT"
             },
             {
+                "Level": 18,
+                "Move": "MOVE_BUBBLE_BEAM"
+            },
+            {
                 "Level": 24,
                 "Move": "MOVE_RAIN_DANCE"
             },
@@ -2389,6 +2402,10 @@
                 "Move": "MOVE_MUD_SHOT"
             },
             {
+                "Level": 18,
+                "Move": "MOVE_BUBBLE_BEAM"
+            },
+            {
                 "Level": 24,
                 "Move": "MOVE_RAIN_DANCE"
             },
@@ -2481,6 +2498,10 @@
             {
                 "Level": 0,
                 "Move": "MOVE_DYNAMIC_PUNCH"
+            },
+            {
+                "Level": 0,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 1,
@@ -2983,6 +3004,10 @@
                 "Move": "MOVE_SCREECH"
             },
             {
+                "Level": 24,
+                "Move": "MOVE_BUBBLE_BEAM"
+            },
+            {
                 "Level": 28,
                 "Move": "MOVE_HEX"
             },
@@ -3101,6 +3126,10 @@
             {
                 "Level": 20,
                 "Move": "MOVE_SCREECH"
+            },
+            {
+                "Level": 24,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 28,
@@ -7376,6 +7405,7 @@
             "MOVE_DISABLE",
             "MOVE_LUNGE",
             "MOVE_MEGAHORN",
+            "MOVE_RAGE_POWDER",
             "MOVE_NIGHT_SLASH"
         ],
         "TutorMoves":
@@ -8309,6 +8339,10 @@
             {
                 "Level": 0,
                 "Move": "MOVE_BOUNCE"
+            },
+            {
+                "Level": 0,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 1,
@@ -18155,6 +18189,7 @@
             "MOVE_SNOWSCAPE",
             "MOVE_ICE_SPINNER",
             "MOVE_CHILLING_WATER",
+            "MOVE_SNOWSCAPE",
             "MOVE_IRON_TAIL"
         ],
         "EggMoves":
@@ -18271,6 +18306,7 @@
             "MOVE_SNOWSCAPE",
             "MOVE_ICE_SPINNER",
             "MOVE_CHILLING_WATER",
+            "MOVE_SNOWSCAPE",
             "MOVE_IRON_TAIL"
         ],
         "EggMoves":
@@ -27120,6 +27156,7 @@
             "MOVE_TAUNT",
             "MOVE_HYPER_VOICE",
             "MOVE_IRON_DEFENSE",
+            "MOVE_FLASH_CANNON",
             "MOVE_ALLY_SWITCH"
         ],
         "EggMoves":
@@ -27216,6 +27253,7 @@
             "MOVE_TAUNT",
             "MOVE_HYPER_VOICE",
             "MOVE_IRON_DEFENSE",
+            "MOVE_FLASH_CANNON",
             "MOVE_ALLY_SWITCH"
         ],
         "EggMoves":
@@ -27328,6 +27366,7 @@
             "MOVE_TAUNT",
             "MOVE_HYPER_VOICE",
             "MOVE_IRON_DEFENSE",
+            "MOVE_FLASH_CANNON",
             "MOVE_ALLY_SWITCH"
         ],
         "EggMoves":
@@ -27388,6 +27427,10 @@
             {
                 "Level": 36,
                 "Move": "MOVE_TOXIC"
+            },
+            {
+                "Level": 40,
+                "Move": "MOVE_RAGE_POWDER"
             },
             {
                 "Level": 44,
@@ -27484,6 +27527,10 @@
             {
                 "Level": 36,
                 "Move": "MOVE_TOXIC"
+            },
+            {
+                "Level": 42,
+                "Move": "MOVE_RAGE_POWDER"
             },
             {
                 "Level": 48,
@@ -30209,6 +30256,7 @@
             "MOVE_PSYCH_UP",
             "MOVE_THROAT_CHOP",
             "MOVE_BREAKING_SWIPE",
+            "MOVE_FLASH_CANNON",
             "MOVE_DRAGON_CHEER"
         ],
         "EggMoves":
@@ -30413,6 +30461,10 @@
             {
                 "Level": 70,
                 "Move": "MOVE_FIRE_BLAST"
+            },
+            {
+                "Level": 78,
+                "Move": "MOVE_RAGE_POWDER"
             }
         ],
         "PreEvoMoves":
@@ -30838,6 +30890,7 @@
             "MOVE_STRUGGLE_BUG",
             "MOVE_POUNCE",
             "MOVE_TERA_BLAST",
+            "MOVE_RAGE_POWDER",
             "MOVE_BUG_BITE"
         ],
         "EggMoves":
@@ -33164,6 +33217,10 @@
                 "Move": "MOVE_IMPRISON"
             },
             {
+                "Level": 36,
+                "Move": "MOVE_FLASH_CANNON"
+            },
+            {
                 "Level": 40,
                 "Move": "MOVE_PLAY_ROUGH"
             },
@@ -33628,6 +33685,10 @@
                 "Move": "MOVE_SING"
             },
             {
+                "Level": 25,
+                "Move": "MOVE_BUBBLE_BEAM"
+            },
+            {
                 "Level": 30,
                 "Move": "MOVE_ENCORE"
             },
@@ -33731,6 +33792,10 @@
             {
                 "Level": 20,
                 "Move": "MOVE_SING"
+            },
+            {
+                "Level": 25,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 30,
@@ -34472,6 +34537,7 @@
             "MOVE_LUNGE",
             "MOVE_SUPERCELL_SLAM",
             "MOVE_ELECTROWEB",
+            "MOVE_FLASH_CANNON",
             "MOVE_SKITTER_SMACK"
         ],
         "EggMoves":
@@ -34497,6 +34563,10 @@
             {
                 "Level": 9,
                 "Move": "MOVE_LEER"
+            },
+            {
+                "Level": 13,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 17,
@@ -34612,6 +34682,10 @@
             {
                 "Level": 1,
                 "Move": "MOVE_ROCK_SMASH"
+            },
+            {
+                "Level": 13,
+                "Move": "MOVE_BUBBLE_BEAM"
             },
             {
                 "Level": 22,
@@ -41575,6 +41649,10 @@
                 "Move": "MOVE_DRAGON_CLAW"
             },
             {
+                "Level": 54,
+                "Move": "MOVE_FLASH_CANNON"
+            },
+            {
                 "Level": 60,
                 "Move": "MOVE_METAL_BURST"
             },
@@ -44916,6 +44994,7 @@
             "MOVE_MIRROR_COAT",
             "MOVE_RAPID_SPIN",
             "MOVE_TICKLE",
+            "MOVE_RAGE_POWDER",
             "MOVE_TOXIC"
         ],
         "TutorMoves":
@@ -45276,6 +45355,7 @@
             "MOVE_INGRAIN",
             "MOVE_LEECH_SEED",
             "MOVE_ROLLOUT",
+            "MOVE_RAGE_POWDER",
             "MOVE_WORRY_SEED"
         ],
         "TutorMoves":
@@ -46531,6 +46611,10 @@
                 "Move": "MOVE_THRASH"
             },
             {
+                "Level": 35,
+                "Move": "MOVE_RAGE_FIST"
+            },
+            {
                 "Level": 39,
                 "Move": "MOVE_CLOSE_COMBAT"
             },
@@ -47302,6 +47386,10 @@
             {
                 "Level": 48,
                 "Move": "MOVE_DRAGON_CLAW"
+            },
+            {
+                "Level": 54,
+                "Move": "MOVE_FLASH_CANNON"
             },
             {
                 "Level": 60,
