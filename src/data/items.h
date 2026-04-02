@@ -21964,6 +21964,28 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_EXPLOSION,
     },
+    [ITEM_TM437] =
+    {
+        .name = ITEM_NAME("TM 437"),
+        .price = 3000,
+        .description = NULL,
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_FLASH_CANNON,
+    },
+    [ITEM_TM438] =
+    {
+        .name = ITEM_NAME("TM 438"),
+        .price = 3000,
+        .description = NULL,
+        .importance = I_REUSABLE_TMS,
+        .pocket = POCKET_TM_HM,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = MOVE_FLASH_CANNON,
+    },
         [ITEM_BELEN_CHE] =
         {
             .name = ITEM_NAME("Che"),
