@@ -105,25 +105,346 @@
     "TutorMoves": []
   },
   "PIDGEY": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_TACKLE"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SAND_ATTACK"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_GUST"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_WHIRLWIND"
+      },
+      {
+        "Level": 21,
+        "Move": "MOVE_TWISTER"
+      },
+      {
+        "Level": 25,
+        "Move": "MOVE_FEATHER_DANCE"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 33,
+        "Move": "MOVE_WING_ATTACK"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_ROOST"
+      },
+      {
+        "Level": 41,
+        "Move": "MOVE_TAILWIND"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_MIRROR_MOVE"
+      },
+      {
+        "Level": 49,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 53,
+        "Move": "MOVE_HURRICANE"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_ROOST",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_STEEL_WING",
+      "MOVE_FLY",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AIR_CUTTER",
+      "MOVE_AIR_SLASH",
+      "MOVE_BRAVE_BIRD",
+      "MOVE_DEFOG",
+      "MOVE_FAINT_ATTACK",
+      "MOVE_FORESIGHT",
+      "MOVE_PURSUIT",
+      "MOVE_STEEL_WING",
+      "MOVE_UPROAR"
+    ],
+    "TutorMoves": [
+      "MOVE_DEFOG",
+      "MOVE_HEAT_WAVE",
+      "MOVE_SKY_ATTACK",
+      "MOVE_SNORE",
+      "MOVE_TAILWIND",
+      "MOVE_UPROAR"
+    ]
   },
   "PIDGEOTTO": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_TACKLE"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_SAND_ATTACK"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_GUST"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SAND_ATTACK"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_GUST"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_WHIRLWIND"
+      },
+      {
+        "Level": 22,
+        "Move": "MOVE_TWISTER"
+      },
+      {
+        "Level": 27,
+        "Move": "MOVE_FEATHER_DANCE"
+      },
+      {
+        "Level": 32,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_WING_ATTACK"
+      },
+      {
+        "Level": 42,
+        "Move": "MOVE_ROOST"
+      },
+      {
+        "Level": 47,
+        "Move": "MOVE_TAILWIND"
+      },
+      {
+        "Level": 52,
+        "Move": "MOVE_MIRROR_MOVE"
+      },
+      {
+        "Level": 57,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 62,
+        "Move": "MOVE_HURRICANE"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_ROOST",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_STEEL_WING",
+      "MOVE_FLY",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AIR_CUTTER",
+      "MOVE_AIR_SLASH",
+      "MOVE_BRAVE_BIRD",
+      "MOVE_DEFOG",
+      "MOVE_FAINT_ATTACK",
+      "MOVE_FORESIGHT",
+      "MOVE_PURSUIT",
+      "MOVE_STEEL_WING",
+      "MOVE_UPROAR"
+    ],
+    "TutorMoves": [
+      "MOVE_DEFOG",
+      "MOVE_HEAT_WAVE",
+      "MOVE_SKY_ATTACK",
+      "MOVE_SNORE",
+      "MOVE_TAILWIND",
+      "MOVE_UPROAR"
+    ]
   },
   "PIDGEOT": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_HURRICANE"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_TACKLE"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_SAND_ATTACK"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_GUST"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SAND_ATTACK"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_GUST"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_WHIRLWIND"
+      },
+      {
+        "Level": 22,
+        "Move": "MOVE_TWISTER"
+      },
+      {
+        "Level": 27,
+        "Move": "MOVE_FEATHER_DANCE"
+      },
+      {
+        "Level": 32,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 38,
+        "Move": "MOVE_WING_ATTACK"
+      },
+      {
+        "Level": 44,
+        "Move": "MOVE_ROOST"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_TAILWIND"
+      },
+      {
+        "Level": 56,
+        "Move": "MOVE_MIRROR_MOVE"
+      },
+      {
+        "Level": 62,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 68,
+        "Move": "MOVE_HURRICANE"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_HYPER_BEAM",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_ROOST",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_STEEL_WING",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_FLY",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AIR_CUTTER",
+      "MOVE_AIR_SLASH",
+      "MOVE_BRAVE_BIRD",
+      "MOVE_DEFOG",
+      "MOVE_FAINT_ATTACK",
+      "MOVE_FORESIGHT",
+      "MOVE_PURSUIT",
+      "MOVE_STEEL_WING",
+      "MOVE_UPROAR"
+    ],
+    "TutorMoves": [
+      "MOVE_DEFOG",
+      "MOVE_HEAT_WAVE",
+      "MOVE_LASER_FOCUS",
+      "MOVE_SKY_ATTACK",
+      "MOVE_SNORE",
+      "MOVE_TAILWIND",
+      "MOVE_UPROAR"
+    ]
   },
   "RATTATA": {
     "LevelMoves": [],
@@ -1494,18 +1815,249 @@
     "TutorMoves": []
   },
   "PARAS": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_SCRATCH"
+      },
+      {
+        "Level": 6,
+        "Move": "MOVE_STUN_SPORE"
+      },
+      {
+        "Level": 6,
+        "Move": "MOVE_POISON_POWDER"
+      },
+      {
+        "Level": 11,
+        "Move": "MOVE_ABSORB"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_FURY_CUTTER"
+      },
+      {
+        "Level": 22,
+        "Move": "MOVE_SPORE"
+      },
+      {
+        "Level": 27,
+        "Move": "MOVE_SLASH"
+      },
+      {
+        "Level": 33,
+        "Move": "MOVE_GROWTH"
+      },
+      {
+        "Level": 38,
+        "Move": "MOVE_GIGA_DRAIN"
+      },
+      {
+        "Level": 43,
+        "Move": "MOVE_AROMATHERAPY"
+      },
+      {
+        "Level": 49,
+        "Move": "MOVE_RAGE_POWDER"
+      },
+      {
+        "Level": 54,
+        "Move": "MOVE_X_SCISSOR"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_TOXIC",
+      "MOVE_VENOSHOCK",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_LIGHT_SCREEN",
+      "MOVE_PROTECT",
+      "MOVE_FRUSTRATION",
+      "MOVE_SOLAR_BEAM",
+      "MOVE_RETURN",
+      "MOVE_LEECH_LIFE",
+      "MOVE_BRICK_BREAK",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ENERGY_BALL",
+      "MOVE_FALSE_SWIPE",
+      "MOVE_SWORDS_DANCE",
+      "MOVE_X_SCISSOR",
+      "MOVE_GRASS_KNOT",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_NATURE_POWER",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AGILITY",
+      "MOVE_BUG_BITE",
+      "MOVE_COUNTER",
+      "MOVE_CROSS_POISON",
+      "MOVE_ENDURE",
+      "MOVE_FELL_STINGER",
+      "MOVE_FLAIL",
+      "MOVE_GRASSY_TERRAIN",
+      "MOVE_LEECH_SEED",
+      "MOVE_METAL_CLAW",
+      "MOVE_NATURAL_GIFT",
+      "MOVE_PSYBEAM",
+      "MOVE_PURSUIT",
+      "MOVE_ROTOTILLER",
+      "MOVE_SCREECH",
+      "MOVE_SWEET_SCENT",
+      "MOVE_WIDE_GUARD"
+    ],
+    "TutorMoves": [
+      "MOVE_AFTER_YOU",
+      "MOVE_BUG_BITE",
+      "MOVE_GIGA_DRAIN",
+      "MOVE_KNOCK_OFF",
+      "MOVE_SEED_BOMB",
+      "MOVE_SNORE",
+      "MOVE_SYNTHESIS",
+      "MOVE_WORRY_SEED"
+    ]
   },
   "PARASECT": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_CROSS_POISON"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_SCRATCH"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_STUN_SPORE"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_POISON_POWDER"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_ABSORB"
+      },
+      {
+        "Level": 6,
+        "Move": "MOVE_STUN_SPORE"
+      },
+      {
+        "Level": 6,
+        "Move": "MOVE_POISON_POWDER"
+      },
+      {
+        "Level": 11,
+        "Move": "MOVE_ABSORB"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_FURY_CUTTER"
+      },
+      {
+        "Level": 22,
+        "Move": "MOVE_SPORE"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_SLASH"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_GROWTH"
+      },
+      {
+        "Level": 44,
+        "Move": "MOVE_GIGA_DRAIN"
+      },
+      {
+        "Level": 51,
+        "Move": "MOVE_AROMATHERAPY"
+      },
+      {
+        "Level": 59,
+        "Move": "MOVE_RAGE_POWDER"
+      },
+      {
+        "Level": 66,
+        "Move": "MOVE_X_SCISSOR"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_TOXIC",
+      "MOVE_VENOSHOCK",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_HYPER_BEAM",
+      "MOVE_LIGHT_SCREEN",
+      "MOVE_PROTECT",
+      "MOVE_FRUSTRATION",
+      "MOVE_SOLAR_BEAM",
+      "MOVE_RETURN",
+      "MOVE_LEECH_LIFE",
+      "MOVE_BRICK_BREAK",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_SLUDGE_BOMB",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ENERGY_BALL",
+      "MOVE_FALSE_SWIPE",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_SWORDS_DANCE",
+      "MOVE_X_SCISSOR",
+      "MOVE_GRASS_KNOT",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_NATURE_POWER",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AGILITY",
+      "MOVE_BUG_BITE",
+      "MOVE_COUNTER",
+      "MOVE_CROSS_POISON",
+      "MOVE_ENDURE",
+      "MOVE_FELL_STINGER",
+      "MOVE_FLAIL",
+      "MOVE_GRASSY_TERRAIN",
+      "MOVE_LEECH_SEED",
+      "MOVE_METAL_CLAW",
+      "MOVE_NATURAL_GIFT",
+      "MOVE_PSYBEAM",
+      "MOVE_PURSUIT",
+      "MOVE_ROTOTILLER",
+      "MOVE_SCREECH",
+      "MOVE_SWEET_SCENT",
+      "MOVE_WIDE_GUARD"
+    ],
+    "TutorMoves": [
+      "MOVE_AFTER_YOU",
+      "MOVE_BUG_BITE",
+      "MOVE_GIGA_DRAIN",
+      "MOVE_KNOCK_OFF",
+      "MOVE_SEED_BOMB",
+      "MOVE_SNORE",
+      "MOVE_SYNTHESIS",
+      "MOVE_THROAT_CHOP",
+      "MOVE_WORRY_SEED"
+    ]
   },
   "VENONAT": {
     "LevelMoves": [],
@@ -13735,18 +14287,239 @@
     "TutorMoves": []
   },
   "TAILLOW": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_PECK"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_GROWL"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_FOCUS_ENERGY"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_WING_ATTACK"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_DOUBLE_TEAM"
+      },
+      {
+        "Level": 21,
+        "Move": "MOVE_AERIAL_ACE"
+      },
+      {
+        "Level": 25,
+        "Move": "MOVE_QUICK_GUARD"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 33,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_ENDEAVOR"
+      },
+      {
+        "Level": 41,
+        "Move": "MOVE_BRAVE_BIRD"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_REVERSAL"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_ROOST",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ECHOED_VOICE",
+      "MOVE_STEEL_WING",
+      "MOVE_FLY",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_BOOMBURST",
+      "MOVE_BRAVE_BIRD",
+      "MOVE_DEFOG",
+      "MOVE_HURRICANE",
+      "MOVE_MIRROR_MOVE",
+      "MOVE_PURSUIT",
+      "MOVE_RAGE",
+      "MOVE_REFRESH",
+      "MOVE_ROOST",
+      "MOVE_SKY_ATTACK",
+      "MOVE_STEEL_WING",
+      "MOVE_SUPERSONIC",
+      "MOVE_WHIRLWIND"
+    ],
+    "TutorMoves": [
+      "MOVE_DEFOG",
+      "MOVE_ENDEAVOR",
+      "MOVE_HEAT_WAVE",
+      "MOVE_SKY_ATTACK",
+      "MOVE_SNORE",
+      "MOVE_TAILWIND"
+    ]
   },
   "SWELLOW": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_BRAVE_BIRD"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_PLUCK"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_PECK"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_GROWL"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_FOCUS_ENERGY"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_FOCUS_ENERGY"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_QUICK_ATTACK"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_WING_ATTACK"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_DOUBLE_TEAM"
+      },
+      {
+        "Level": 21,
+        "Move": "MOVE_AERIAL_ACE"
+      },
+      {
+        "Level": 27,
+        "Move": "MOVE_QUICK_GUARD"
+      },
+      {
+        "Level": 33,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 39,
+        "Move": "MOVE_AIR_SLASH"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_ENDEAVOR"
+      },
+      {
+        "Level": 51,
+        "Move": "MOVE_BRAVE_BIRD"
+      },
+      {
+        "Level": 57,
+        "Move": "MOVE_REVERSAL"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_HYPER_BEAM",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_ROOST",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ECHOED_VOICE",
+      "MOVE_STEEL_WING",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_FLY",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_BOOMBURST",
+      "MOVE_BRAVE_BIRD",
+      "MOVE_DEFOG",
+      "MOVE_HURRICANE",
+      "MOVE_MIRROR_MOVE",
+      "MOVE_PURSUIT",
+      "MOVE_RAGE",
+      "MOVE_REFRESH",
+      "MOVE_ROOST",
+      "MOVE_SKY_ATTACK",
+      "MOVE_STEEL_WING",
+      "MOVE_SUPERSONIC",
+      "MOVE_WHIRLWIND"
+    ],
+    "TutorMoves": [
+      "MOVE_DEFOG",
+      "MOVE_ENDEAVOR",
+      "MOVE_HEAT_WAVE",
+      "MOVE_LASER_FOCUS",
+      "MOVE_SKY_ATTACK",
+      "MOVE_SNORE",
+      "MOVE_TAILWIND"
+    ]
   },
   "WINGULL": {
     "LevelMoves": [
@@ -16716,11 +17489,136 @@
     "TutorMoves": []
   },
   "SPINDA": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_TACKLE"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_COPYCAT"
+      },
+      {
+        "Level": 10,
+        "Move": "MOVE_FAINT_ATTACK"
+      },
+      {
+        "Level": 14,
+        "Move": "MOVE_PSYBEAM"
+      },
+      {
+        "Level": 19,
+        "Move": "MOVE_HYPNOSIS"
+      },
+      {
+        "Level": 23,
+        "Move": "MOVE_DIZZY_PUNCH"
+      },
+      {
+        "Level": 28,
+        "Move": "MOVE_SUCKER_PUNCH"
+      },
+      {
+        "Level": 32,
+        "Move": "MOVE_TEETER_DANCE"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_UPROAR"
+      },
+      {
+        "Level": 41,
+        "Move": "MOVE_PSYCH_UP"
+      },
+      {
+        "Level": 46,
+        "Move": "MOVE_DOUBLE_EDGE"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_FLAIL"
+      },
+      {
+        "Level": 55,
+        "Move": "MOVE_THRASH"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_CALM_MIND",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_SAFEGUARD",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_PSYCHIC",
+      "MOVE_SHADOW_BALL",
+      "MOVE_BRICK_BREAK",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_ROCK_TOMB",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_FLING",
+      "MOVE_PSYCH_UP",
+      "MOVE_ROCK_SLIDE",
+      "MOVE_DREAM_EATER",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_TRICK_ROOM",
+      "MOVE_WILD_CHARGE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_ASSIST",
+      "MOVE_BATON_PASS",
+      "MOVE_DISABLE",
+      "MOVE_ENCORE",
+      "MOVE_FAKE_OUT",
+      "MOVE_FAKE_TEARS",
+      "MOVE_GUARD_SPLIT",
+      "MOVE_ICY_WIND",
+      "MOVE_PSYCHO_CUT",
+      "MOVE_PSYCHO_SHIFT",
+      "MOVE_RAPID_SPIN",
+      "MOVE_ROLE_PLAY",
+      "MOVE_SMELLING_SALTS",
+      "MOVE_SPOTLIGHT",
+      "MOVE_TRICK",
+      "MOVE_WATER_PULSE",
+      "MOVE_WISH"
+    ],
+    "TutorMoves": [
+      "MOVE_COVET",
+      "MOVE_DRAIN_PUNCH",
+      "MOVE_FIRE_PUNCH",
+      "MOVE_FOCUS_PUNCH",
+      "MOVE_HELPING_HAND",
+      "MOVE_HYPER_VOICE",
+      "MOVE_ICE_PUNCH",
+      "MOVE_ICY_WIND",
+      "MOVE_LAST_RESORT",
+      "MOVE_LOW_KICK",
+      "MOVE_RECYCLE",
+      "MOVE_ROLE_PLAY",
+      "MOVE_SHOCK_WAVE",
+      "MOVE_SKILL_SWAP",
+      "MOVE_SNATCH",
+      "MOVE_SNORE",
+      "MOVE_STOMPING_TANTRUM",
+      "MOVE_THUNDER_PUNCH",
+      "MOVE_TRICK",
+      "MOVE_UPROAR",
+      "MOVE_WATER_PULSE",
+      "MOVE_ZEN_HEADBUTT"
+    ]
   },
   "TRAPINCH": {
     "LevelMoves": [
@@ -18464,25 +19362,315 @@
     ]
   },
   "CLAMPERL": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_CLAMP"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_WATER_GUN"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_WHIRLPOOL"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_IRON_DEFENSE"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_SHELL_SMASH"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_TOXIC",
+      "MOVE_HAIL",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_ICE_BEAM",
+      "MOVE_BLIZZARD",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_ROUND",
+      "MOVE_SCALD",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_SURF",
+      "MOVE_WATERFALL",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AQUA_RING",
+      "MOVE_BARRIER",
+      "MOVE_BODY_SLAM",
+      "MOVE_BRINE",
+      "MOVE_CONFUSE_RAY",
+      "MOVE_ENDURE",
+      "MOVE_MUD_SPORT",
+      "MOVE_MUDDY_WATER",
+      "MOVE_REFRESH",
+      "MOVE_SUPERSONIC",
+      "MOVE_WATER_PULSE"
+    ],
+    "TutorMoves": [
+      "MOVE_ICY_WIND",
+      "MOVE_IRON_DEFENSE",
+      "MOVE_SNORE",
+      "MOVE_WATER_PULSE"
+    ]
   },
   "HUNTAIL": {
-    "LevelMoves": [],
-    "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_WHIRLPOOL"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_BITE"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SCREECH"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_SCARY_FACE"
+      },
+      {
+        "Level": 11,
+        "Move": "MOVE_FAINT_ATTACK"
+      },
+      {
+        "Level": 14,
+        "Move": "MOVE_WATER_PULSE"
+      },
+      {
+        "Level": 16,
+        "Move": "MOVE_ICE_FANG"
+      },
+      {
+        "Level": 19,
+        "Move": "MOVE_BRINE"
+      },
+      {
+        "Level": 23,
+        "Move": "MOVE_SUCKER_PUNCH"
+      },
+      {
+        "Level": 26,
+        "Move": "MOVE_DIVE"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_BATON_PASS"
+      },
+      {
+        "Level": 34,
+        "Move": "MOVE_CRUNCH"
+      },
+      {
+        "Level": 39,
+        "Move": "MOVE_AQUA_TAIL"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_COIL"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_HYDRO_PUMP"
+      }
+    ],
+    "PreEvoMoves": [
+      "MOVE_CLAMP",
+      "MOVE_IRON_DEFENSE",
+      "MOVE_SHELL_SMASH",
+      "MOVE_WATER_GUN",
+      "MOVE_IRON_DEFENSE"
+    ],
+    "TMMoves": [
+      "MOVE_TOXIC",
+      "MOVE_HAIL",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_ICE_BEAM",
+      "MOVE_BLIZZARD",
+      "MOVE_HYPER_BEAM",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_ROCK_TOMB",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_ROUND",
+      "MOVE_SCALD",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_INFESTATION",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_SURF",
+      "MOVE_WATERFALL",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AQUA_RING",
+      "MOVE_BARRIER",
+      "MOVE_BODY_SLAM",
+      "MOVE_BRINE",
+      "MOVE_CONFUSE_RAY",
+      "MOVE_ENDURE",
+      "MOVE_MUD_SPORT",
+      "MOVE_MUDDY_WATER",
+      "MOVE_REFRESH",
+      "MOVE_SUPERSONIC",
+      "MOVE_WATER_PULSE"
+    ],
+    "TutorMoves": [
+      "MOVE_AQUA_TAIL",
+      "MOVE_BIND",
+      "MOVE_BOUNCE",
+      "MOVE_ICY_WIND",
+      "MOVE_SNATCH",
+      "MOVE_SNORE",
+      "MOVE_SUPER_FANG",
+      "MOVE_WATER_PULSE"
+    ]
   },
   "GOREBYSS": {
-    "LevelMoves": [],
-    "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_WHIRLPOOL"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_CONFUSION"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_WATER_SPORT"
+      },
+      {
+        "Level": 9,
+        "Move": "MOVE_AGILITY"
+      },
+      {
+        "Level": 11,
+        "Move": "MOVE_DRAINING_KISS"
+      },
+      {
+        "Level": 14,
+        "Move": "MOVE_WATER_PULSE"
+      },
+      {
+        "Level": 16,
+        "Move": "MOVE_AMNESIA"
+      },
+      {
+        "Level": 19,
+        "Move": "MOVE_AQUA_RING"
+      },
+      {
+        "Level": 23,
+        "Move": "MOVE_CAPTIVATE"
+      },
+      {
+        "Level": 26,
+        "Move": "MOVE_DIVE"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_BATON_PASS"
+      },
+      {
+        "Level": 34,
+        "Move": "MOVE_PSYCHIC"
+      },
+      {
+        "Level": 39,
+        "Move": "MOVE_AQUA_TAIL"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_COIL"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_HYDRO_PUMP"
+      }
+    ],
+    "PreEvoMoves": [
+      "MOVE_CLAMP",
+      "MOVE_IRON_DEFENSE",
+      "MOVE_SHELL_SMASH",
+      "MOVE_WATER_GUN",
+      "MOVE_IRON_DEFENSE"
+    ],
+    "TMMoves": [
+      "MOVE_TOXIC",
+      "MOVE_HAIL",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_ICE_BEAM",
+      "MOVE_BLIZZARD",
+      "MOVE_HYPER_BEAM",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_SAFEGUARD",
+      "MOVE_FRUSTRATION",
+      "MOVE_RETURN",
+      "MOVE_PSYCHIC",
+      "MOVE_SHADOW_BALL",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_ROUND",
+      "MOVE_SCALD",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_PSYCH_UP",
+      "MOVE_INFESTATION",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_SUBSTITUTE",
+      "MOVE_SURF",
+      "MOVE_WATERFALL",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_AQUA_RING",
+      "MOVE_BARRIER",
+      "MOVE_BODY_SLAM",
+      "MOVE_BRINE",
+      "MOVE_CONFUSE_RAY",
+      "MOVE_ENDURE",
+      "MOVE_MUD_SPORT",
+      "MOVE_MUDDY_WATER",
+      "MOVE_REFRESH",
+      "MOVE_SUPERSONIC",
+      "MOVE_WATER_PULSE"
+    ],
+    "TutorMoves": [
+      "MOVE_AQUA_TAIL",
+      "MOVE_BIND",
+      "MOVE_BOUNCE",
+      "MOVE_ICY_WIND",
+      "MOVE_SIGNAL_BEAM",
+      "MOVE_SNORE",
+      "MOVE_WATER_PULSE"
+    ]
   },
   "RELICANTH": {
     "LevelMoves": [],
@@ -20505,18 +21693,261 @@
     "TutorMoves": []
   },
   "GLAMEOW": {
-    "LevelMoves": [],
+    "LevelMoves": [
+      {
+        "Level": 1,
+        "Move": "MOVE_FAKE_OUT"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SCRATCH"
+      },
+      {
+        "Level": 8,
+        "Move": "MOVE_GROWL"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_HYPNOSIS"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_FAINT_ATTACK"
+      },
+      {
+        "Level": 20,
+        "Move": "MOVE_FURY_SWIPES"
+      },
+      {
+        "Level": 25,
+        "Move": "MOVE_CHARM"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_ASSIST"
+      },
+      {
+        "Level": 32,
+        "Move": "MOVE_CAPTIVATE"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_SLASH"
+      },
+      {
+        "Level": 41,
+        "Move": "MOVE_SUCKER_PUNCH"
+      },
+      {
+        "Level": 44,
+        "Move": "MOVE_ATTRACT"
+      },
+      {
+        "Level": 48,
+        "Move": "MOVE_HONE_CLAWS"
+      },
+      {
+        "Level": 50,
+        "Move": "MOVE_PLAY_ROUGH"
+      }
+    ],
     "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_TAUNT",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_FRUSTRATION",
+      "MOVE_THUNDERBOLT",
+      "MOVE_THUNDER",
+      "MOVE_RETURN",
+      "MOVE_SHADOW_BALL",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_TORMENT",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ECHOED_VOICE",
+      "MOVE_SHADOW_CLAW",
+      "MOVE_PAYBACK",
+      "MOVE_PSYCH_UP",
+      "MOVE_DREAM_EATER",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_ASSURANCE",
+      "MOVE_BITE",
+      "MOVE_FAKE_TEARS",
+      "MOVE_FLAIL",
+      "MOVE_LAST_RESORT",
+      "MOVE_QUICK_ATTACK",
+      "MOVE_SAND_ATTACK",
+      "MOVE_SNATCH",
+      "MOVE_TAIL_WHIP",
+      "MOVE_WAKE_UP_SLAP"
+    ],
+    "TutorMoves": [
+      "MOVE_COVET",
+      "MOVE_FOUL_PLAY",
+      "MOVE_HYPER_VOICE",
+      "MOVE_IRON_TAIL",
+      "MOVE_KNOCK_OFF",
+      "MOVE_LAST_RESORT",
+      "MOVE_SHOCK_WAVE",
+      "MOVE_SNATCH",
+      "MOVE_SNORE",
+      "MOVE_SUPER_FANG",
+      "MOVE_WATER_PULSE"
+    ]
   },
   "PURUGLY": {
-    "LevelMoves": [],
-    "PreEvoMoves": [],
-    "TMMoves": [],
-    "EggMoves": [],
-    "TutorMoves": []
+    "LevelMoves": [
+      {
+        "Level": 0,
+        "Move": "MOVE_SWAGGER"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_SWAGGER"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_FAKE_OUT"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_SCRATCH"
+      },
+      {
+        "Level": 1,
+        "Move": "MOVE_GROWL"
+      },
+      {
+        "Level": 5,
+        "Move": "MOVE_SCRATCH"
+      },
+      {
+        "Level": 8,
+        "Move": "MOVE_GROWL"
+      },
+      {
+        "Level": 13,
+        "Move": "MOVE_HYPNOSIS"
+      },
+      {
+        "Level": 17,
+        "Move": "MOVE_FAINT_ATTACK"
+      },
+      {
+        "Level": 20,
+        "Move": "MOVE_FURY_SWIPES"
+      },
+      {
+        "Level": 25,
+        "Move": "MOVE_CHARM"
+      },
+      {
+        "Level": 29,
+        "Move": "MOVE_ASSIST"
+      },
+      {
+        "Level": 32,
+        "Move": "MOVE_CAPTIVATE"
+      },
+      {
+        "Level": 37,
+        "Move": "MOVE_SLASH"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_BODY_SLAM"
+      },
+      {
+        "Level": 52,
+        "Move": "MOVE_ATTRACT"
+      },
+      {
+        "Level": 60,
+        "Move": "MOVE_HONE_CLAWS"
+      }
+    ],
+    "PreEvoMoves": [
+      "MOVE_PLAY_ROUGH",
+      "MOVE_SUCKER_PUNCH"
+    ],
+    "TMMoves": [
+      "MOVE_WORK_UP",
+      "MOVE_ROAR",
+      "MOVE_TOXIC",
+      "MOVE_HIDDEN_POWER",
+      "MOVE_SUNNY_DAY",
+      "MOVE_TAUNT",
+      "MOVE_HYPER_BEAM",
+      "MOVE_PROTECT",
+      "MOVE_RAIN_DANCE",
+      "MOVE_FRUSTRATION",
+      "MOVE_THUNDERBOLT",
+      "MOVE_THUNDER",
+      "MOVE_RETURN",
+      "MOVE_SHADOW_BALL",
+      "MOVE_DOUBLE_TEAM",
+      "MOVE_AERIAL_ACE",
+      "MOVE_TORMENT",
+      "MOVE_FACADE",
+      "MOVE_REST",
+      "MOVE_ATTRACT",
+      "MOVE_THIEF",
+      "MOVE_ROUND",
+      "MOVE_ECHOED_VOICE",
+      "MOVE_SHADOW_CLAW",
+      "MOVE_PAYBACK",
+      "MOVE_GIGA_IMPACT",
+      "MOVE_PSYCH_UP",
+      "MOVE_BULLDOZE",
+      "MOVE_DREAM_EATER",
+      "MOVE_SWAGGER",
+      "MOVE_SLEEP_TALK",
+      "MOVE_U_TURN",
+      "MOVE_SUBSTITUTE",
+      "MOVE_CONFIDE"
+    ],
+    "EggMoves": [
+      "MOVE_ASSURANCE",
+      "MOVE_BITE",
+      "MOVE_FAKE_TEARS",
+      "MOVE_FLAIL",
+      "MOVE_LAST_RESORT",
+      "MOVE_QUICK_ATTACK",
+      "MOVE_SAND_ATTACK",
+      "MOVE_SNATCH",
+      "MOVE_TAIL_WHIP",
+      "MOVE_WAKE_UP_SLAP"
+    ],
+    "TutorMoves": [
+      "MOVE_COVET",
+      "MOVE_FOUL_PLAY",
+      "MOVE_HYPER_VOICE",
+      "MOVE_IRON_TAIL",
+      "MOVE_KNOCK_OFF",
+      "MOVE_LAST_RESORT",
+      "MOVE_SHOCK_WAVE",
+      "MOVE_SNATCH",
+      "MOVE_SNORE",
+      "MOVE_STOMPING_TANTRUM",
+      "MOVE_SUPER_FANG",
+      "MOVE_THROAT_CHOP",
+      "MOVE_WATER_PULSE"
+    ]
   },
   "CHINGLING": {
     "LevelMoves": [],
