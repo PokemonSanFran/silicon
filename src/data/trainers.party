@@ -119,8 +119,6 @@ EVs: 100 HP / 100 Atk
 Careful Nature
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Razor Leaf
-- Feint Attack
-- Power-Up Punch
 - Rock Tomb
 
 Stunky @ Black Sludge
@@ -135,7 +133,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Sucker Punch
 - Poison Tail
 - Bite
-- Hone Claws
 
 === TRAINER_BELEN ===
 Name: Belen
@@ -224,7 +221,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Bubble Beam
 - Icy Wind
 - Hypnosis
-- Mud Bomb
 
 Omanyte @ Focus Sash
 Ability: Swift Swim
@@ -289,7 +285,6 @@ EVs: 50 Def / 50 SpD
 IVs: 0 Atk
 - Absorb
 - Poison Powder
-- Sleep Powder
 - Stun Spore
 
 Rotom
@@ -314,7 +309,6 @@ Shiny: No
 Happiness: 1
 EVs: 50 HP / 50 Def
 Adamant Nature
-- Clamp
 - Iron Defense
 - Water Gun
 - Whirlpool
@@ -379,7 +373,6 @@ EVs: 100 Atk / 50 Spe
 - Drain Punch
 - Waterfall
 - Ice Punch
-- Dual Chop
 
 Oricorio @ Firium Z
 Ability: Dancer
@@ -474,7 +467,6 @@ Timid Nature
 IVs: 0 Atk
 - Psyshock
 - Dazzling Gleam
-- Counter
 - Psychic
 
 Mudbray @ Eviolite
@@ -500,7 +492,6 @@ EVs: 150 Atk / 150 Spe
 - Sucker Punch
 - Drill Peck
 - Roost
-- Steel Wing
 
 Gimmighoul @ Eviolite
 Ability: Rattled
@@ -618,7 +609,6 @@ Modest Nature
 IVs: 0 Atk
 - Hurricane
 - Heat Wave
-- Razor Wind
 - Hyper Beam
 
 === TRAINER_NERIENE ===
@@ -819,9 +809,7 @@ Shiny: No
 Happiness: 1
 EVs: 200 Atk / 200 Spe
 Jolly Nature
-- Superpower
 - Double-Edge
-- Dizzy Punch
 - Sucker Punch
 
 Weezing @ Red Card
@@ -960,7 +948,7 @@ EVs: 150 Def / 150 SpD
 - Seed Bomb  
 - Leech Life  
 - Spore  
-- Rage Powder  
+- Rage Powder
 
 Rotom-Heat  
 Ability: Levitate  
@@ -987,7 +975,6 @@ Adamant Nature
 - Waterfall  
 - Ice Fang  
 - Aqua Ring  
-- Clamp  
 
 Lopunny  
 Ability: Cute Charm  
@@ -1089,7 +1076,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Dragon Pulse  
 - Flamethrower  
-- Flash Cannon  
+- Flash Cannon
 
 Gallade @ Galladite  
 Ability: Sharpness  
@@ -1137,7 +1124,6 @@ Happiness: 1
 EVs: 132 HP / 132 Atk / 4 Def / 4 SpD / 236 Spe  
 Adamant Nature  
 - Waterfall  
-- Power Whip  
 - Crunch  
 - Dragon Dance  
 
@@ -1210,7 +1196,6 @@ EVs: 200 Def / 200 SpD
 - Seed Bomb  
 - Leech Life  
 - Spore  
-- Rage Powder  
 
 Rotom-Frost  
 Ability: Levitate  
@@ -1251,7 +1236,6 @@ IVs: 0 Atk
 - Earth Power  
 - Sludge Bomb  
 - Ice Beam  
-- Roar  
 
 Lopunny  
 Ability: Cute Charm  
@@ -1338,7 +1322,6 @@ Timid Nature
 IVs: 0 Atk  
 - Blizzard  
 - Aurora Veil  
-- Flash Cannon  
 - Sheer Cold  
 
 Cetitan @ Sitrus Berry  
@@ -1354,8 +1337,7 @@ Adamant Nature
 - Belly Drum  
 - High Horsepower  
 
-/* Kingler @ Kinglerite */
-Kingler
+Kingler @ Kinglernite
 Ability: Hyper Cutter  
 Level: 73  
 Ball: Master
@@ -1408,7 +1390,6 @@ Happiness: 1
 EVs: 252 HP / 60 Def / 196 SpD  
 Calm Nature  
 IVs: 0 Atk  
-- Toxic  
 - Slack Off  
 - Psychic  
 - Surf  
@@ -1441,9 +1422,7 @@ Happiness: 1
 EVs: 156 HP / 100 Def / 252 Spe  
 Jolly Nature  
 IVs: 0 Atk  
-- Belly Drum  
 - Baton Pass  
-- Counter  
 
 Gyarados @ Gyaradosite  
 Ability: Intimidate  
@@ -1472,7 +1451,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Huntail @ Mystic Water  
 Ability: Water Veil  
@@ -1558,7 +1537,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Nidoking @ Life Orb  
 Ability: Sheer Force  
@@ -1675,7 +1654,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Draco Meteor  
 - Earth Power  
-- Flash Cannon  
+- Flash Cannon
 
 Volcarona @ Firium Z  
 Ability: Flame Body  
@@ -1689,10 +1668,9 @@ IVs: 0 Atk
 - Flamethrower  
 - Bug Buzz  
 - Giga Drain  
-- Rage Powder  
+- Rage Powder
 
-/* Duraludon @ Duraludonite */
-Duraludon
+Duraludon @ Duraludonnite
 Ability: Stalwart  
 Level: 76    
 Ball: Master
@@ -1701,10 +1679,10 @@ Happiness: 1
 EVs: 8 HP / 248 SpA / 252 SpD  
 Modest Nature  
 IVs: 0 Atk  
-- Flash Cannon  
 - Dragon Pulse  
 - Thunderbolt  
 - Dark Pulse  
+- Flash Cannon
 
 === TRAINER_IMELDA ===
 Name: Imelda
@@ -1772,8 +1750,7 @@ IVs: 0 Spe
 - Anchor Shot  
 - Liquidation  
 
-/* Garbodor @ Garbodorite */
-Garbodor
+Garbodor @ Garbodornite
 Ability: Stench  
 Level: 76    
 Ball: Master
@@ -1864,8 +1841,7 @@ IVs: 0 Atk
 - Dazzling Gleam  
 - Giga Drain  
 
-/* Drednaw @ Drednawite */
-Drednaw
+Drednaw @ Drednawnite
 Ability: Swift Swim  
 Level: 75  
 Ball: Master
@@ -1897,7 +1873,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Lopunny @ Lopunnite  
 Ability: Cute Charm  
@@ -2018,7 +1994,6 @@ Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 SpA / 8 Spe  
 Modest Nature  
-- Flash Cannon  
 - Shadow Ball  
 - King's Shield
 - Shadow Sneak  
@@ -2102,7 +2077,6 @@ Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Def  
 Brave Nature  
 IVs: 0 Spe  
-- Explosion  
 
 === TRAINER_ARRIBA_CEO ===
 Name: Arribaceo
@@ -2274,10 +2248,8 @@ Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
 Modest Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Bug Buzz  
-- Roost  
-- Flash Cannon  
+- Flash Cannon
 
 === TRAINER_ARRIBA_CEO_RAID ===
 Name: Buzzrceo
@@ -2475,10 +2447,8 @@ Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
 Modest Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Bug Buzz  
-- Roost  
-- Flash Cannon  
+- Flash Cannon
 
 Xurkitree @ Electrium Z  
 Ability: Swift Ascent  
@@ -2489,10 +2459,8 @@ Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
 Timid Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Dazzling Gleam  
 - Energy Ball  
-- Tail Glow  
 
 === TRAINER_RAMESH_IMIN ===
 Name: Ramesh
@@ -2530,7 +2498,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Dragon Pulse  
 - Flamethrower  
-- Flash Cannon  
+- Flash Cannon
 
 Relicanth @ Assault Vest  
 Ability: Rock Head  
@@ -2645,12 +2613,10 @@ Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
 Quirky Nature  
 - Leaf Storm  
-- Aqua Tail  
 - Dragon Pulse  
 - Frenzy Plant  
 
-/* Lapras @ Laprasite */
-Lapras
+Lapras @ Laprasnite
 Ability: Water Absorb  
 Level: 87   
 Ball: Master
@@ -2709,7 +2675,6 @@ Shiny: No
 Happiness: 1
 EVs: 252 HP / 144 Atk / 12 Def / 4 SpD / 96 Spe  
 Adamant Nature  
-- Rage Fist  
 - Drain Punch  
 - Bulk Up  
 - Close Combat  
@@ -2726,7 +2691,6 @@ IVs: 0 Atk
 - Air Slash  
 - Dazzling Gleam  
 - Heat Wave  
-- Tailwind  
 
 Archaludon @ Dragonium Z  
 Ability: Stamina  
@@ -2738,12 +2702,11 @@ EVs: 4 HP / 252 Def / 252 SpA
 Bold Nature  
 IVs: 0 Atk  
 - Draco Meteor  
-- Flash Cannon  
 - Body Press  
 - Thunderbolt  
+- Flash Cannon
 
-/* Orbeetle @ Orbeetleite */
-Orbeetle
+Orbeetle @ Orbeetlenite
 Ability: Frisk  
 Level: 89  
 Ball: Master
@@ -2894,8 +2857,6 @@ EVs: 156 HP / 100 SpA / 252 Spe
 Timid Nature  
 IVs: 0 Atk  
 - Dazzling Gleam  
-- Air Cutter  
-- Tailwind  
 - Follow Me  
 
 Gliscor @ Flying Gem  
@@ -3024,9 +2985,9 @@ EVs: 252 HP / 252 SpA / 4 SpD
 Modest Nature  
 IVs: 0 Atk  
 - Dragon Pulse  
-- Flash Cannon  
 - Body Press  
 - Thunderbolt  
+- Flash Cannon
 
 === TRAINER_FRANK ===
 Name: Frank
@@ -3064,7 +3025,7 @@ IVs: 0 Atk
 - Heat Wave  
 - Dark Pulse  
 - Draco Meteor  
-- Flash Cannon  
+- Flash Cannon
 
 Musharna @ Leftovers  
 Ability: Telepathy  
@@ -3107,8 +3068,7 @@ IVs: 0 Atk
 - Solar Beam  
 - Scorching Sands  
 
-/* Centiskorch @ Centiskorchinite   */
-Centiskorch
+Centiskorch @ Centiskorchnite
 Ability: White Smoke  
 Level: 89  
 Ball: Master
@@ -3119,7 +3079,6 @@ Jolly Nature
 - Flare Blitz  
 - Fire Lash  
 - Leech Life  
-- Dragon Tail  
 
 === TRAINER_KEI_YING ===
 Name: Kei-ying
@@ -5171,7 +5130,6 @@ EVs: 148 Atk
 Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Rage
-- Return
 - Aerial Ace
 - U-turn
 
@@ -5197,10 +5155,10 @@ Ability: Effect Spore
 Level: 20
 EVs: 84 Def/64 SpD
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Rage Powder
 - Poison Powder
 - Venoshock
 - Stun Spore
+- Rage Powder
 
 Capsakid
 Ability: Chlorophyll
@@ -5228,7 +5186,6 @@ Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Rollout
 - Snowscape
-- Ice Ball
 
 Sealeo @ Metronome
 Ability: Ice Body
@@ -5236,9 +5193,8 @@ Level: 24
 EVs: 44 HP/100 Atk
 Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Snowscape
 - Rollout
-- Ice Ball
+- Snowscape
 
 Jynx
 Ability: Oblivious
@@ -5246,9 +5202,9 @@ Level: 23
 EVs: 52 HP/104 SpA
 Calm Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Psychic Noise
 - Confusion
 - Icy Wind
+- Psychic Noise
 
 === TRAINER_01E7C79B ===
 Name: 01E7C79B
@@ -5424,7 +5380,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes  
 - Dig  
 - Poison Sting  
-- Trailblaze  
+- Trailblaze
 
 Tentacool  
 Ability: Clear Body  
@@ -5432,9 +5388,9 @@ Level: 25
 EVs: 24 HP / 120 SpA  
 Mild Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Bubble Beam  
 - Acid Spray  
 - Toxic  
+- Bubble Beam
 
 Gulpin @ Sitrus Berry  
 Ability: Gluttony  
@@ -5510,7 +5466,6 @@ Level: 25
 EVs: 136 Spe
 Hasty Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Trick
 - Poltergeist
 - Bitter Blade
 - Destiny Bond
@@ -5840,7 +5795,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Substitute  
 - Protect  
 - Bullet Seed  
-- Chilling Water  
+- Chilling Water
 
 Scovillain @ Oran Berry  
 Ability: Moody  
@@ -5987,7 +5942,6 @@ Careful Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Ancient Power
 - Play Rough
-- Pounce
 - Follow Me
 
 Cubchoo
@@ -6190,9 +6144,9 @@ EVs: 84 HP / 44 SpD
 Calm Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
 - Stun Spore  
-- Revival Blessing  
 - Draining Kiss  
 - Confuse Ray  
+- Revival Blessing
 
 === TRAINER_09B7B6C8 ===
 Name: 09B7B6C8
@@ -6278,7 +6232,7 @@ Level: 36
 EVs: 52 HP / 80 Atk  
 Adamant Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Ice Ball  
+- Rollout
 
 Anorith @ Passho Berry  
 Ability: Battle Armor  
@@ -6347,17 +6301,6 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Battle Type: Single
 Map Section: Route4
 Type: Regular
-
-Baltoy @ Eviolite  
-Ability: Levitate  
-Level: 35  
-EVs: 60 HP / 72 SpA  
-Bold Nature  
-IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Extrasensory  
-- Scorching Sands  
-- Hex  
-- Ancient Power  
 
 Klawf @ Air Balloon  
 Ability: Anger Shell  
@@ -6856,10 +6799,10 @@ Level: 46
 EVs: 80 Atk / 60 SpA  
 Hasty Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Dual Wingbeat  
 - Steel Wing  
 - Tailwind  
 - Uproar  
+- Dual Wingbeat
 
 Bombirdier @ Charti Berry  
 Ability: Rocky Payload  
@@ -7475,8 +7418,8 @@ Timid Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Sticky Web
 - Hypnosis
-- Psychic Noise
 - Bug Buzz
+- Psychic Noise
 
 Primeape @ Eviolite
 Ability: Defiant
@@ -7779,10 +7722,10 @@ Level: 41
 EVs: 252 SpA/148 Spe
 Modest Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Snowscape
 - Blizzard
 - Bounce
 - Shell Smash
+- Snowscape
 
 === TRAINER_1710375D ===
 Name: 1710375D
