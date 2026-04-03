@@ -768,7 +768,7 @@ void FlagsVarWarp_EnterFallkner()
 void GiveItems_EnterBelen(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE01_GET))
-        AddBagItem(ITEM_TM01, 1);
+        AddBagItem(ITEM_TM001, 1);
 }
 
 void JumpPlayerTo_EnterBelen(bool32 jumpType)
@@ -803,7 +803,7 @@ void FlagsVarWarp_EnterShinzo()
 void GiveItems_EnterShinzo(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE02_GET))
-        AddBagItem(ITEM_TM02, 1);
+        AddBagItem(ITEM_TM002, 1);
 }
 
 void JumpPlayerTo_EnterShinzo(bool32 jumpType)
@@ -818,7 +818,7 @@ void JumpPlayerTo_EnterShinzo(bool32 jumpType)
 void GiveItems_EnterEmrys(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE03_GET))
-        AddBagItem(ITEM_TM03,1);
+        AddBagItem(ITEM_TM003,1);
 }
 
 void FlagsVarWarp_EnterEmrys()
@@ -1114,7 +1114,7 @@ void FlagsVarWarp_EnterPua()
 void GiveItems_EnterPua(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE04_GET))
-        AddBagItem(ITEM_TM04, 1);
+        AddBagItem(ITEM_TM004, 1);
 }
 
 void JumpPlayerTo_EnterPua(bool32 jumpType)
@@ -1249,7 +1249,7 @@ void FlagsVarWarp_EnterNeriene()
 void GiveItems_EnterNeriene(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE05_GET))
-        AddBagItem(ITEM_TM05, 1);
+        AddBagItem(ITEM_TM005, 1);
 }
 
 void JumpPlayerTo_EnterNeriene(bool32 jumpType)
@@ -1314,7 +1314,7 @@ void JumpPlayerTo_BeachBattle(bool32 jumpType)
 void GiveItems_EnterDimu(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE06_GET))
-        AddBagItem(ITEM_TM06, 1);
+        AddBagItem(ITEM_TM006, 1);
 }
 
 void FlagsVarWarp_EnterDimu()
@@ -1376,7 +1376,7 @@ void JumpPlayerTo_AndWeMarchOn(bool32 jumpType)
 void GiveItems_EnterBD(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE07_GET))
-        AddBagItem(ITEM_TM07, 1);
+        AddBagItem(ITEM_TM007, 1);
 }
 
 void FlagsVarWarp_EnterBD()
@@ -1427,7 +1427,7 @@ void JumpPlayerTo_Battle8(bool32 jumpType)
 void GiveItems_EnterAmiArgento(bool32 jumpType)
 {
     if (!FlagGet(FLAG_BADGE08_GET))
-        AddBagItem(ITEM_TM08, 1);
+        AddBagItem(ITEM_TM008, 1);
 }
 
 void FlagsVarWarp_EnterAmiArgento()

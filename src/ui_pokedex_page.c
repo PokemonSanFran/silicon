@@ -2077,7 +2077,7 @@ void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32 fontId, 
 
     for (u32 machineIndex = 0; machineIndex < NUM_TECHNICAL_MACHINES; machineIndex++)
     {
-        u32 machineId = ITEM_TM01 + machineIndex;
+        u32 machineId = ITEM_TM001 + machineIndex;
 
         if (PageMoves_GetMoveIdFromPosition(currentPosition) != GetItemSecondaryId(machineId))
             continue;

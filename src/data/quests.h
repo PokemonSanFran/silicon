@@ -1388,7 +1388,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             gText_Quest_RestoreZenzuIsland_Sub2_Name,
             gText_Quest_RestoreZenzuIsland_Sub2_Desc,
             gText_Quest_RestoreZenzuIsland_Sub2_Map,
-            ITEM_TM27,
+            ITEM_TM027,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
