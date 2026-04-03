@@ -43,5 +43,6 @@ u8 GetDaycareCompatibilityScoreFromSave(void);
 void BufferUnhatchedMonEgg(void);
 // End siliconDaycare
 u16 GetEggSpecies(u16 species); // surpriseTrade
+bool8 IsMonInUndiscoveredOrGenderless(u32 species); // moveErrors
 
 #endif // GUARD_DAYCARE_H

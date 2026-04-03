@@ -119,8 +119,6 @@ EVs: 100 HP / 100 Atk
 Careful Nature
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Razor Leaf
-- Feint Attack
-- Power-Up Punch
 - Rock Tomb
 
 Stunky @ Black Sludge
@@ -135,7 +133,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Sucker Punch
 - Poison Tail
 - Bite
-- Hone Claws
 
 === TRAINER_BELEN ===
 Name: Belen
@@ -224,7 +221,6 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 - Bubble Beam
 - Icy Wind
 - Hypnosis
-- Mud Bomb
 
 Omanyte @ Focus Sash
 Ability: Swift Swim
@@ -262,7 +258,7 @@ Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
-- Fishious Rend
+- Waterfall
 - Dragon Breath
 - Bite
 - Rock Blast 
@@ -289,7 +285,6 @@ EVs: 50 Def / 50 SpD
 IVs: 0 Atk
 - Absorb
 - Poison Powder
-- Sleep Powder
 - Stun Spore
 
 Rotom
@@ -314,7 +309,6 @@ Shiny: No
 Happiness: 1
 EVs: 50 HP / 50 Def
 Adamant Nature
-- Clamp
 - Iron Defense
 - Water Gun
 - Whirlpool
@@ -379,7 +373,6 @@ EVs: 100 Atk / 50 Spe
 - Drain Punch
 - Waterfall
 - Ice Punch
-- Dual Chop
 
 Oricorio @ Firium Z
 Ability: Dancer
@@ -474,7 +467,6 @@ Timid Nature
 IVs: 0 Atk
 - Psyshock
 - Dazzling Gleam
-- Counter
 - Psychic
 
 Mudbray @ Eviolite
@@ -500,7 +492,6 @@ EVs: 150 Atk / 150 Spe
 - Sucker Punch
 - Drill Peck
 - Roost
-- Steel Wing
 
 Gimmighoul @ Eviolite
 Ability: Rattled
@@ -618,7 +609,6 @@ Modest Nature
 IVs: 0 Atk
 - Hurricane
 - Heat Wave
-- Razor Wind
 - Hyper Beam
 
 === TRAINER_NERIENE ===
@@ -819,9 +809,7 @@ Shiny: No
 Happiness: 1
 EVs: 200 Atk / 200 Spe
 Jolly Nature
-- Superpower
 - Double-Edge
-- Dizzy Punch
 - Sucker Punch
 
 Weezing @ Red Card
@@ -960,7 +948,7 @@ EVs: 150 Def / 150 SpD
 - Seed Bomb  
 - Leech Life  
 - Spore  
-- Rage Powder  
+- Rage Powder
 
 Rotom-Heat  
 Ability: Levitate  
@@ -987,7 +975,6 @@ Adamant Nature
 - Waterfall  
 - Ice Fang  
 - Aqua Ring  
-- Clamp  
 
 Lopunny  
 Ability: Cute Charm  
@@ -1089,7 +1076,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Dragon Pulse  
 - Flamethrower  
-- Flash Cannon  
+- Flash Cannon
 
 Gallade @ Galladite  
 Ability: Sharpness  
@@ -1137,7 +1124,6 @@ Happiness: 1
 EVs: 132 HP / 132 Atk / 4 Def / 4 SpD / 236 Spe  
 Adamant Nature  
 - Waterfall  
-- Power Whip  
 - Crunch  
 - Dragon Dance  
 
@@ -1210,7 +1196,6 @@ EVs: 200 Def / 200 SpD
 - Seed Bomb  
 - Leech Life  
 - Spore  
-- Rage Powder  
 
 Rotom-Frost  
 Ability: Levitate  
@@ -1251,7 +1236,6 @@ IVs: 0 Atk
 - Earth Power  
 - Sludge Bomb  
 - Ice Beam  
-- Roar  
 
 Lopunny  
 Ability: Cute Charm  
@@ -1338,7 +1322,6 @@ Timid Nature
 IVs: 0 Atk  
 - Blizzard  
 - Aurora Veil  
-- Flash Cannon  
 - Sheer Cold  
 
 Cetitan @ Sitrus Berry  
@@ -1354,8 +1337,7 @@ Adamant Nature
 - Belly Drum  
 - High Horsepower  
 
-/* Kingler @ Kinglerite */
-Kingler
+Kingler @ Kinglernite
 Ability: Hyper Cutter  
 Level: 73  
 Ball: Master
@@ -1408,7 +1390,6 @@ Happiness: 1
 EVs: 252 HP / 60 Def / 196 SpD  
 Calm Nature  
 IVs: 0 Atk  
-- Toxic  
 - Slack Off  
 - Psychic  
 - Surf  
@@ -1441,9 +1422,7 @@ Happiness: 1
 EVs: 156 HP / 100 Def / 252 Spe  
 Jolly Nature  
 IVs: 0 Atk  
-- Belly Drum  
 - Baton Pass  
-- Counter  
 
 Gyarados @ Gyaradosite  
 Ability: Intimidate  
@@ -1472,7 +1451,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Huntail @ Mystic Water  
 Ability: Water Veil  
@@ -1558,7 +1537,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Nidoking @ Life Orb  
 Ability: Sheer Force  
@@ -1675,7 +1654,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Draco Meteor  
 - Earth Power  
-- Flash Cannon  
+- Flash Cannon
 
 Volcarona @ Firium Z  
 Ability: Flame Body  
@@ -1689,10 +1668,9 @@ IVs: 0 Atk
 - Flamethrower  
 - Bug Buzz  
 - Giga Drain  
-- Rage Powder  
+- Rage Powder
 
-/* Duraludon @ Duraludonite */
-Duraludon
+Duraludon @ Duraludonnite
 Ability: Stalwart  
 Level: 76    
 Ball: Master
@@ -1701,10 +1679,10 @@ Happiness: 1
 EVs: 8 HP / 248 SpA / 252 SpD  
 Modest Nature  
 IVs: 0 Atk  
-- Flash Cannon  
 - Dragon Pulse  
 - Thunderbolt  
 - Dark Pulse  
+- Flash Cannon
 
 === TRAINER_IMELDA ===
 Name: Imelda
@@ -1772,8 +1750,7 @@ IVs: 0 Spe
 - Anchor Shot  
 - Liquidation  
 
-/* Garbodor @ Garbodorite */
-Garbodor
+Garbodor @ Garbodornite
 Ability: Stench  
 Level: 76    
 Ball: Master
@@ -1864,8 +1841,7 @@ IVs: 0 Atk
 - Dazzling Gleam  
 - Giga Drain  
 
-/* Drednaw @ Drednawite */
-Drednaw
+Drednaw @ Drednawnite
 Ability: Swift Swim  
 Level: 75  
 Ball: Master
@@ -1897,7 +1873,7 @@ IVs: 0 Atk
 - Light Screen  
 - Reflect  
 - Dazzling Gleam  
-- Flash Cannon  
+- Flash Cannon
 
 Lopunny @ Lopunnite  
 Ability: Cute Charm  
@@ -2018,7 +1994,6 @@ Shiny: No
 Happiness: 1
 EVs: 248 HP / 252 SpA / 8 Spe  
 Modest Nature  
-- Flash Cannon  
 - Shadow Ball  
 - King's Shield
 - Shadow Sneak  
@@ -2102,7 +2077,6 @@ Happiness: 1
 EVs: 252 HP / 252 Atk / 4 Def  
 Brave Nature  
 IVs: 0 Spe  
-- Explosion  
 
 === TRAINER_ARRIBA_CEO ===
 Name: Arribaceo
@@ -2274,10 +2248,8 @@ Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
 Modest Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Bug Buzz  
-- Roost  
-- Flash Cannon  
+- Flash Cannon
 
 === TRAINER_ARRIBA_CEO_RAID ===
 Name: Buzzrceo
@@ -2475,10 +2447,8 @@ Happiness: 1
 EVs: 252 HP / 252 SpA / 4 Spe  
 Modest Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Bug Buzz  
-- Roost  
-- Flash Cannon  
+- Flash Cannon
 
 Xurkitree @ Electrium Z  
 Ability: Swift Ascent  
@@ -2489,10 +2459,8 @@ Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
 Timid Nature  
 IVs: 0 Atk  
-- Rising Voltage  
 - Dazzling Gleam  
 - Energy Ball  
-- Tail Glow  
 
 === TRAINER_RAMESH_IMIN ===
 Name: Ramesh
@@ -2530,7 +2498,7 @@ IVs: 0 Atk
 - Dark Pulse  
 - Dragon Pulse  
 - Flamethrower  
-- Flash Cannon  
+- Flash Cannon
 
 Relicanth @ Assault Vest  
 Ability: Rock Head  
@@ -2645,12 +2613,10 @@ Happiness: 1
 EVs: 252 HP / 4 SpA / 252 Spe  
 Quirky Nature  
 - Leaf Storm  
-- Aqua Tail  
 - Dragon Pulse  
 - Frenzy Plant  
 
-/* Lapras @ Laprasite */
-Lapras
+Lapras @ Laprasnite
 Ability: Water Absorb  
 Level: 87   
 Ball: Master
@@ -2709,7 +2675,6 @@ Shiny: No
 Happiness: 1
 EVs: 252 HP / 144 Atk / 12 Def / 4 SpD / 96 Spe  
 Adamant Nature  
-- Rage Fist  
 - Drain Punch  
 - Bulk Up  
 - Close Combat  
@@ -2726,7 +2691,6 @@ IVs: 0 Atk
 - Air Slash  
 - Dazzling Gleam  
 - Heat Wave  
-- Tailwind  
 
 Archaludon @ Dragonium Z  
 Ability: Stamina  
@@ -2738,12 +2702,11 @@ EVs: 4 HP / 252 Def / 252 SpA
 Bold Nature  
 IVs: 0 Atk  
 - Draco Meteor  
-- Flash Cannon  
 - Body Press  
 - Thunderbolt  
+- Flash Cannon
 
-/* Orbeetle @ Orbeetleite */
-Orbeetle
+Orbeetle @ Orbeetlenite
 Ability: Frisk  
 Level: 89  
 Ball: Master
@@ -2894,8 +2857,6 @@ EVs: 156 HP / 100 SpA / 252 Spe
 Timid Nature  
 IVs: 0 Atk  
 - Dazzling Gleam  
-- Air Cutter  
-- Tailwind  
 - Follow Me  
 
 Gliscor @ Flying Gem  
@@ -3024,9 +2985,9 @@ EVs: 252 HP / 252 SpA / 4 SpD
 Modest Nature  
 IVs: 0 Atk  
 - Dragon Pulse  
-- Flash Cannon  
 - Body Press  
 - Thunderbolt  
+- Flash Cannon
 
 === TRAINER_FRANK ===
 Name: Frank
@@ -3064,7 +3025,7 @@ IVs: 0 Atk
 - Heat Wave  
 - Dark Pulse  
 - Draco Meteor  
-- Flash Cannon  
+- Flash Cannon
 
 Musharna @ Leftovers  
 Ability: Telepathy  
@@ -3107,8 +3068,7 @@ IVs: 0 Atk
 - Solar Beam  
 - Scorching Sands  
 
-/* Centiskorch @ Centiskorchinite   */
-Centiskorch
+Centiskorch @ Centiskorchnite
 Ability: White Smoke  
 Level: 89  
 Ball: Master
@@ -3119,7 +3079,6 @@ Jolly Nature
 - Flare Blitz  
 - Fire Lash  
 - Leech Life  
-- Dragon Tail  
 
 === TRAINER_KEI_YING ===
 Name: Kei-ying
@@ -3301,15 +3260,43 @@ Reveal: Oliver
 Native: Yes
 Overworld Sprite: Prof Birch
 
-Raichu
-Level: 1
+Togetic @ Weakness Policy  
+Ability: Hustle  
+Level: 40  
+EVs: 252 SpA / 252 SpD / 4 Spe  
+Brave Nature  
+- Last Resort  
+- Present  
+- Life Dew  
+- Baton Pass  
+
+Maushold-Four @ Figy Berry  
+Ability: Friend Guard  
+Level: 40  
+EVs: 4 HP / 252 SpA / 252 Spe  
+Timid Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Bullet Seed  
+- Super Fang  
+- Switcheroo  
+- Follow Me  
+
+Medicham @ Blunder Policy  
+Ability: Telepathy  
+Level: 40  
+EVs: 160 Atk / 80 Def / 108 SpD / 160 Spe  
+Modest Nature  
+- High Jump Kick  
+- Fake Out  
+- Reflect  
+- Light Screen  
 
 === TRAINER_IHSAN_AND_EMMITT ===
 Name: IHSAN_AND_EMMITT
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HOUSINGPROTEST_ROCKET ===
@@ -3317,7 +3304,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_STOLENTRADE_THIEF ===
@@ -3325,7 +3312,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_MUGGERA_MUGGERB ===
@@ -3333,7 +3320,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_A ===
@@ -3341,7 +3328,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_B ===
@@ -3349,7 +3336,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_C ===
@@ -3357,7 +3344,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_D ===
@@ -3365,7 +3352,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_E ===
@@ -3373,7 +3360,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_F ===
@@ -3381,7 +3368,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BLACKBELT_G ===
@@ -3389,7 +3376,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_TINA ===
@@ -3397,7 +3384,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_PAUL ===
@@ -3405,7 +3392,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_JON ===
@@ -3413,7 +3400,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_BRADLEY ===
@@ -3421,7 +3408,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_JO ===
@@ -3429,7 +3416,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_HANNAH ===
@@ -3437,7 +3424,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SEVENSISTERS_RACHEL ===
@@ -3445,7 +3432,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HOSTESS ===
@@ -3453,7 +3440,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CHEF ===
@@ -3461,7 +3448,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_JAINTOR ===
@@ -3469,7 +3456,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUSSER ===
@@ -3477,7 +3464,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CASHIER ===
@@ -3485,7 +3472,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FAKEROBBER ===
@@ -3493,7 +3480,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUG_MERRIL ===
@@ -3501,7 +3488,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUG_KINSEY ===
@@ -3509,7 +3496,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUG_KALEY ===
@@ -3517,7 +3504,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUG_TOREY ===
@@ -3525,7 +3512,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PEWFAT ===
@@ -3533,7 +3520,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUG_BD ===
@@ -3541,7 +3528,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HELEN ===
@@ -3549,7 +3536,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_1_ROUTE2 ===
@@ -3557,7 +3544,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_2_ROUTE2 ===
@@ -3565,7 +3552,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_3_ROUTE2 ===
@@ -3573,7 +3560,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_4_ROUTE2 ===
@@ -3581,7 +3568,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_5_ROUTE2 ===
@@ -3589,7 +3576,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_1_CURENO_PORT ===
@@ -3597,7 +3584,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_2_CURENO_PORT ===
@@ -3605,7 +3592,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_3_CURENO_PORT ===
@@ -3613,7 +3600,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_4_CURENO_PORT ===
@@ -3621,7 +3608,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_1_GLAVEZ_HILL ===
@@ -3629,7 +3616,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_2_GLAVEZ_HILL ===
@@ -3637,7 +3624,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_VAGRANT_3_GLAVEZ_HILL ===
@@ -3645,7 +3632,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FRANK_ROBOT_1 ===
@@ -3653,7 +3640,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FRANK_ROBOT_2 ===
@@ -3661,7 +3648,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FRANK_ROBOT_3 ===
@@ -3669,7 +3656,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FRANK_ROBOT_4 ===
@@ -3677,7 +3664,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_GERTRUDE ===
@@ -3685,7 +3672,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CABBIE_HALE ===
@@ -3693,7 +3680,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR1 ===
@@ -3701,7 +3688,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR2 ===
@@ -3709,7 +3696,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR3 ===
@@ -3717,7 +3704,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR4 ===
@@ -3725,7 +3712,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR5 ===
@@ -3733,7 +3720,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUZZR6 ===
@@ -3741,7 +3728,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_REAL_ROBBER ===
@@ -3749,7 +3736,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PRESTO_GRUNT1 ===
@@ -3757,7 +3744,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PRESTO_GRUNT2 ===
@@ -3765,7 +3752,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PRESTO_GRUNT3 ===
@@ -3773,7 +3760,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PERSUASIVE_LANDLORD ===
@@ -3781,7 +3768,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARRIBA_GRUNT1 ===
@@ -3789,7 +3776,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARRIBA_GRUNT2 ===
@@ -3797,7 +3784,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARRIBA_GRUNT3 ===
@@ -3805,7 +3792,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_IMPROV_1 ===
@@ -3813,7 +3800,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_IMPROV_2 ===
@@ -3821,7 +3808,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_IMPROV_3 ===
@@ -3829,7 +3816,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_MINI_ARCADE_CHRIS ===
@@ -3837,7 +3824,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_LEE_PYRON ===
@@ -3845,7 +3832,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_TIRABUDIN_PLACE_GYM_1 ===
@@ -3853,7 +3840,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ANGELDELIVERY_BIKERA ===
@@ -3861,7 +3848,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_INVERSEHALLUCINOGENIC_TRAINER_A ===
@@ -3869,7 +3856,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_INVERSEHALLUCINOGENIC_TRAINER_B ===
@@ -3877,7 +3864,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_INVERSEHALLUCINOGENIC_TRAINER_C ===
@@ -3885,7 +3872,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_INVERSEHALLUCINOGENIC_TRAINER_D ===
@@ -3893,7 +3880,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_INVERSEHALLUCINOGENIC_BD ===
@@ -3901,7 +3888,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CUTEPOKEMON_A ===
@@ -3909,7 +3896,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CUTEPOKEMON_B ===
@@ -3917,7 +3904,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CUTEPOKEMON_C ===
@@ -3925,7 +3912,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARTISANBALLS2_A ===
@@ -3933,7 +3920,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARTISANBALLS2_B ===
@@ -3941,7 +3928,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARTISANBALLS2_C ===
@@ -3949,7 +3936,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DANCEBATTLE_A ===
@@ -3957,7 +3944,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DANCEBATTLE_B ===
@@ -3965,7 +3952,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DANCEBATTLE_C ===
@@ -3973,7 +3960,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUILDINGSCOPE_A ===
@@ -3981,7 +3968,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUILDINGSCOPE_B ===
@@ -3989,7 +3976,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BUILDINGSCOPE_C ===
@@ -3997,7 +3984,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ALOHAFROMALOLA_EMRYS ===
@@ -4005,7 +3992,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUMCIRCLE_A ===
@@ -4013,7 +4000,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUMCIRCLE_B ===
@@ -4021,7 +4008,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUMCIRCLE_C ===
@@ -4029,7 +4016,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUMCIRCLE_D ===
@@ -4037,7 +4024,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CULTURALPURITY_A ===
@@ -4045,7 +4032,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CULTURALPURITY_B ===
@@ -4053,7 +4040,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_BRAWLY ===
@@ -4061,7 +4048,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_WALLACEARMY_LEAH ===
@@ -4069,7 +4056,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HALAI_ISLAND_STAN ===
@@ -4077,7 +4064,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_TIRABUDIN_PLACE_STAN ===
@@ -4085,7 +4072,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CHASILLA_STAN ===
@@ -4093,7 +4080,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_PERLACIA_CITY_STAN ===
@@ -4101,7 +4088,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ESPULEE_OUTSKIRTS_STAN ===
@@ -4109,7 +4096,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SHARPRISESTADIUM_SEMIFINALS ===
@@ -4117,7 +4104,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SHARPRISESTADIUM_A ===
@@ -4125,7 +4112,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SHARPRISESTADIUM_B ===
@@ -4133,7 +4120,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_SHARPRISESTADIUM_C ===
@@ -4141,7 +4128,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CHARLOTTE_IGUESSWESHOULDBENICE ===
@@ -4149,7 +4136,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_CHERIE ===
@@ -4157,7 +4144,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_POLICECHIEF ===
@@ -4165,7 +4152,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FAKEROCKET_A ===
@@ -4173,7 +4160,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_FAKEROCKET_B ===
@@ -4181,7 +4168,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARANTRAZ_GHOST_A ===
@@ -4189,7 +4176,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARANTRAZ_GHOST_B ===
@@ -4197,7 +4184,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARANTRAZ_GHOST_C ===
@@ -4205,7 +4192,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ARANTRAZ_GHOST_D ===
@@ -4213,7 +4200,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HOWDISAPPOINTING_GRUNT1 ===
@@ -4221,7 +4208,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_HOWDISAPPOINTING_GRUNT2 ===
@@ -4229,7 +4216,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ANGELDELIVERY_BIKERC ===
@@ -4237,7 +4224,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ANGELDELIVERY_BIKERD ===
@@ -4245,7 +4232,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUGHELMETTESTER_1 ===
@@ -4253,7 +4240,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUGHELMETTESTER_2 ===
@@ -4261,7 +4248,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DRUGHELMETTESTER_3 ===
@@ -4269,7 +4256,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_NORMAL_1 ===
@@ -4277,7 +4264,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FIGHTING_1 ===
@@ -4285,7 +4272,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FLYING_1 ===
@@ -4293,7 +4280,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_POISON_1 ===
@@ -4301,7 +4288,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GROUND_1 ===
@@ -4309,7 +4296,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ROCK_1 ===
@@ -4317,7 +4304,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_BUG_1 ===
@@ -4325,7 +4312,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GHOST_1 ===
@@ -4333,7 +4320,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_STEEL_1 ===
@@ -4341,7 +4328,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FIRE_1 ===
@@ -4349,7 +4336,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_WATER_1 ===
@@ -4357,7 +4344,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GRASS_1 ===
@@ -4365,7 +4352,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ELECTRIC_1 ===
@@ -4373,7 +4360,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_PSYCHIC_1 ===
@@ -4381,7 +4368,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ICE_1 ===
@@ -4389,7 +4376,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_DRAGON_1 ===
@@ -4397,7 +4384,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_DARK_1 ===
@@ -4405,7 +4392,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FAIRY_1 ===
@@ -4413,7 +4400,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_NORMAL_2 ===
@@ -4421,7 +4408,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FIGHTING_2 ===
@@ -4429,7 +4416,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FLYING_2 ===
@@ -4437,7 +4424,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_POISON_2 ===
@@ -4445,7 +4432,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GROUND_2 ===
@@ -4453,7 +4440,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ROCK_2 ===
@@ -4461,7 +4448,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_BUG_2 ===
@@ -4469,7 +4456,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GHOST_2 ===
@@ -4477,7 +4464,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_STEEL_2 ===
@@ -4485,7 +4472,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FIRE_2 ===
@@ -4493,7 +4480,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_WATER_2 ===
@@ -4501,7 +4488,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_GRASS_2 ===
@@ -4509,7 +4496,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ELECTRIC_2 ===
@@ -4517,7 +4504,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_PSYCHIC_2 ===
@@ -4525,7 +4512,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_ICE_2 ===
@@ -4533,7 +4520,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_DRAGON_2 ===
@@ -4541,7 +4528,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_DARK_2 ===
@@ -4549,7 +4536,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_NOPOMOD_FAIRY_2 ===
@@ -4557,7 +4544,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_STRESSCUPORGNANIZER ===
@@ -4565,7 +4552,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_STRESSCUPORGNANIZER_PLAYER ===
@@ -4573,7 +4560,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYA ===
@@ -4581,7 +4568,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYB ===
@@ -4589,7 +4576,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG ===
@@ -4597,7 +4584,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD ===
@@ -4605,7 +4592,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE ===
@@ -4613,7 +4600,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN ===
@@ -4621,7 +4608,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTRESCUEK ===
@@ -4629,7 +4616,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTRESCUEL ===
@@ -4637,7 +4624,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS ===
@@ -4645,7 +4632,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA ===
@@ -4653,7 +4640,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB ===
@@ -4661,7 +4648,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC ===
@@ -4669,7 +4656,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD ===
@@ -4677,7 +4664,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE ===
@@ -4685,7 +4672,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF ===
@@ -4693,7 +4680,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG ===
@@ -4701,7 +4688,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_DIGGINGTIMEMEMBERA ===
@@ -4709,7 +4696,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERC ===
@@ -4717,7 +4704,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERC_2 ===
@@ -4725,7 +4712,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERD ===
@@ -4733,7 +4720,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERD_2 ===
@@ -4741,7 +4728,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERF ===
@@ -4749,7 +4736,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERF_2 ===
@@ -4757,7 +4744,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERG ===
@@ -4765,7 +4752,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FREETHEINNOCENTHIKERG_2 ===
@@ -4773,7 +4760,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FINDTHEGUILTYPLANTH ===
@@ -4781,7 +4768,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_QUEST_FINDTHEGUILTYPLANTH_2 ===
@@ -4789,7 +4776,7 @@ Name: Blank
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_00317DFA ===
@@ -5171,7 +5158,6 @@ EVs: 148 Atk
 Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Rage
-- Return
 - Aerial Ace
 - U-turn
 
@@ -5197,10 +5183,10 @@ Ability: Effect Spore
 Level: 20
 EVs: 84 Def/64 SpD
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Rage Powder
 - Poison Powder
 - Venoshock
 - Stun Spore
+- Rage Powder
 
 Capsakid
 Ability: Chlorophyll
@@ -5228,7 +5214,6 @@ Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Rollout
 - Snowscape
-- Ice Ball
 
 Sealeo @ Metronome
 Ability: Ice Body
@@ -5236,9 +5221,8 @@ Level: 24
 EVs: 44 HP/100 Atk
 Adamant Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Snowscape
 - Rollout
-- Ice Ball
+- Snowscape
 
 Jynx
 Ability: Oblivious
@@ -5246,9 +5230,9 @@ Level: 23
 EVs: 52 HP/104 SpA
 Calm Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Psychic Noise
 - Confusion
 - Icy Wind
+- Psychic Noise
 
 === TRAINER_01E7C79B ===
 Name: 01E7C79B
@@ -5424,7 +5408,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Toxic Spikes  
 - Dig  
 - Poison Sting  
-- Trailblaze  
+- Trailblaze
 
 Tentacool  
 Ability: Clear Body  
@@ -5432,9 +5416,9 @@ Level: 25
 EVs: 24 HP / 120 SpA  
 Mild Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Bubble Beam  
 - Acid Spray  
 - Toxic  
+- Bubble Beam
 
 Gulpin @ Sitrus Berry  
 Ability: Gluttony  
@@ -5510,7 +5494,6 @@ Level: 25
 EVs: 136 Spe
 Hasty Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Trick
 - Poltergeist
 - Bitter Blade
 - Destiny Bond
@@ -5840,7 +5823,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Substitute  
 - Protect  
 - Bullet Seed  
-- Chilling Water  
+- Chilling Water
 
 Scovillain @ Oran Berry  
 Ability: Moody  
@@ -5987,7 +5970,6 @@ Careful Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Ancient Power
 - Play Rough
-- Pounce
 - Follow Me
 
 Cubchoo
@@ -6190,9 +6172,9 @@ EVs: 84 HP / 44 SpD
 Calm Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
 - Stun Spore  
-- Revival Blessing  
 - Draining Kiss  
 - Confuse Ray  
+- Revival Blessing
 
 === TRAINER_09B7B6C8 ===
 Name: 09B7B6C8
@@ -6278,7 +6260,7 @@ Level: 36
 EVs: 52 HP / 80 Atk  
 Adamant Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Ice Ball  
+- Rollout
 
 Anorith @ Passho Berry  
 Ability: Battle Armor  
@@ -6348,16 +6330,15 @@ Battle Type: Single
 Map Section: Route4
 Type: Regular
 
-Baltoy @ Eviolite  
-Ability: Levitate  
-Level: 35  
+Ninetales
+Ability: Flash Fire
+Level: 35
 EVs: 60 HP / 72 SpA  
 Bold Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
 - Extrasensory  
 - Scorching Sands  
 - Hex  
-- Ancient Power  
 
 Klawf @ Air Balloon  
 Ability: Anger Shell  
@@ -6856,10 +6837,10 @@ Level: 46
 EVs: 80 Atk / 60 SpA  
 Hasty Nature  
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
-- Dual Wingbeat  
 - Steel Wing  
 - Tailwind  
 - Uproar  
+- Dual Wingbeat
 
 Bombirdier @ Charti Berry  
 Ability: Rocky Payload  
@@ -7475,8 +7456,8 @@ Timid Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 - Sticky Web
 - Hypnosis
-- Psychic Noise
 - Bug Buzz
+- Psychic Noise
 
 Primeape @ Eviolite
 Ability: Defiant
@@ -7779,10 +7760,10 @@ Level: 41
 EVs: 252 SpA/148 Spe
 Modest Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
-- Snowscape
 - Blizzard
 - Bounce
 - Shell Smash
+- Snowscape
 
 === TRAINER_1710375D ===
 Name: 1710375D
@@ -7886,7 +7867,7 @@ Name: 188A6F20
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1932C509 ===
@@ -7894,7 +7875,7 @@ Name: 1932C509
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_19477C78 ===
@@ -7902,7 +7883,7 @@ Name: 19477C78
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_19C5BAD7 ===
@@ -7910,7 +7891,7 @@ Name: 19C5BAD7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_19CD0726 ===
@@ -7918,7 +7899,7 @@ Name: 19CD0726
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_19D7682B ===
@@ -7926,7 +7907,7 @@ Name: 19D7682B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1A2CA162 ===
@@ -7934,7 +7915,7 @@ Name: 1A2CA162
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1A763631 ===
@@ -7942,7 +7923,7 @@ Name: 1A763631
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1AE5CAF7 ===
@@ -7950,7 +7931,7 @@ Name: 1AE5CAF7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1AE89BEB ===
@@ -7958,7 +7939,7 @@ Name: 1AE89BEB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1AEA3CEA ===
@@ -7966,7 +7947,7 @@ Name: 1AEA3CEA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1B517ABD ===
@@ -7974,7 +7955,7 @@ Name: 1B517ABD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1B616469 ===
@@ -7982,7 +7963,7 @@ Name: 1B616469
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1BA35D11 ===
@@ -7990,7 +7971,7 @@ Name: 1BA35D11
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1BB1218F ===
@@ -7998,7 +7979,7 @@ Name: 1BB1218F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1BC45966 ===
@@ -8006,7 +7987,7 @@ Name: 1BC45966
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1C2B088C ===
@@ -8014,7 +7995,7 @@ Name: 1C2B088C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1C6CA7F6 ===
@@ -8022,7 +8003,7 @@ Name: 1C6CA7F6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1CBE4FB1 ===
@@ -8030,7 +8011,7 @@ Name: 1CBE4FB1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1CBFAF10 ===
@@ -8038,7 +8019,7 @@ Name: 1CBFAF10
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1CC4D5D6 ===
@@ -8046,7 +8027,7 @@ Name: 1CC4D5D6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1D63E5A1 ===
@@ -8054,7 +8035,7 @@ Name: 1D63E5A1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1D7A6DED ===
@@ -8062,7 +8043,7 @@ Name: 1D7A6DED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1D93B10D ===
@@ -8070,7 +8051,7 @@ Name: 1D93B10D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1DD07C78 ===
@@ -8078,7 +8059,7 @@ Name: 1DD07C78
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1E5E6E80 ===
@@ -8086,7 +8067,7 @@ Name: 1E5E6E80
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1EE34E30 ===
@@ -8094,7 +8075,7 @@ Name: 1EE34E30
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1F24A6B1 ===
@@ -8102,7 +8083,7 @@ Name: 1F24A6B1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1F2A70D3 ===
@@ -8110,7 +8091,7 @@ Name: 1F2A70D3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_1FD08020 ===
@@ -8118,7 +8099,7 @@ Name: 1FD08020
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_200650CA ===
@@ -8126,7 +8107,7 @@ Name: 200650CA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_20170FA5 ===
@@ -8134,7 +8115,7 @@ Name: 20170FA5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_20993B87 ===
@@ -8142,7 +8123,7 @@ Name: 20993B87
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_20A10A97 ===
@@ -8150,7 +8131,7 @@ Name: 20A10A97
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_20A6F3A6 ===
@@ -8158,7 +8139,7 @@ Name: 20A6F3A6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_20DC389D ===
@@ -8166,7 +8147,7 @@ Name: 20DC389D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2177173C ===
@@ -8174,7 +8155,7 @@ Name: 2177173C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2180E5CD ===
@@ -8182,7 +8163,7 @@ Name: 2180E5CD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_21EB8B2C ===
@@ -8190,7 +8171,7 @@ Name: 21EB8B2C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_22BA389B ===
@@ -8198,7 +8179,7 @@ Name: 22BA389B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_22DD5E2B ===
@@ -8206,7 +8187,7 @@ Name: 22DD5E2B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_22E7DE36 ===
@@ -8214,7 +8195,7 @@ Name: 22E7DE36
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_23C3170F ===
@@ -8222,7 +8203,7 @@ Name: 23C3170F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_23F50BC3 ===
@@ -8230,7 +8211,7 @@ Name: 23F50BC3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2434A25C ===
@@ -8238,7 +8219,7 @@ Name: 2434A25C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_245235C9 ===
@@ -8246,7 +8227,7 @@ Name: 245235C9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_246CBBD5 ===
@@ -8254,7 +8235,7 @@ Name: 246CBBD5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_247FE019 ===
@@ -8262,7 +8243,7 @@ Name: 247FE019
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_24AAFD0D ===
@@ -8270,7 +8251,7 @@ Name: 24AAFD0D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2561CB61 ===
@@ -8278,7 +8259,7 @@ Name: 2561CB61
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_26268FB4 ===
@@ -8286,7 +8267,7 @@ Name: 26268FB4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_265174A6 ===
@@ -8294,7 +8275,7 @@ Name: 265174A6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_272FA5B8 ===
@@ -8302,7 +8283,7 @@ Name: 272FA5B8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_27B23C10 ===
@@ -8310,7 +8291,7 @@ Name: 27B23C10
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_27CEF8F2 ===
@@ -8318,7 +8299,7 @@ Name: 27CEF8F2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_27E6F69F ===
@@ -8326,7 +8307,7 @@ Name: 27E6F69F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_28B294D2 ===
@@ -8334,7 +8315,7 @@ Name: 28B294D2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_28E0625E ===
@@ -8342,7 +8323,7 @@ Name: 28E0625E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_292E386F ===
@@ -8350,7 +8331,7 @@ Name: 292E386F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_29AE727B ===
@@ -8358,7 +8339,7 @@ Name: 29AE727B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2A305E88 ===
@@ -8366,7 +8347,7 @@ Name: 2A305E88
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2A3F43CA ===
@@ -8374,7 +8355,7 @@ Name: 2A3F43CA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2A7BF9FF ===
@@ -8382,7 +8363,7 @@ Name: 2A7BF9FF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2A83B15E ===
@@ -8390,7 +8371,7 @@ Name: 2A83B15E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2AD73BF3 ===
@@ -8398,7 +8379,7 @@ Name: 2AD73BF3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2B163825 ===
@@ -8406,7 +8387,7 @@ Name: 2B163825
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2B249E40 ===
@@ -8414,7 +8395,7 @@ Name: 2B249E40
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2BCA066C ===
@@ -8422,7 +8403,7 @@ Name: 2BCA066C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2C040422 ===
@@ -8430,7 +8411,7 @@ Name: 2C040422
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2C22CE48 ===
@@ -8438,7 +8419,7 @@ Name: 2C22CE48
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2C398893 ===
@@ -8446,7 +8427,7 @@ Name: 2C398893
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2C5FFA9F ===
@@ -8454,7 +8435,7 @@ Name: 2C5FFA9F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2D1A100A ===
@@ -8462,7 +8443,7 @@ Name: 2D1A100A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2D203158 ===
@@ -8470,7 +8451,7 @@ Name: 2D203158
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2D29DC23 ===
@@ -8478,7 +8459,7 @@ Name: 2D29DC23
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2D6DE246 ===
@@ -8486,7 +8467,7 @@ Name: 2D6DE246
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2D92F001 ===
@@ -8494,7 +8475,7 @@ Name: 2D92F001
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2DC29B9E ===
@@ -8502,7 +8483,7 @@ Name: 2DC29B9E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2E218A8E ===
@@ -8510,7 +8491,7 @@ Name: 2E218A8E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2E593FA9 ===
@@ -8518,7 +8499,7 @@ Name: 2E593FA9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2EC49459 ===
@@ -8526,7 +8507,7 @@ Name: 2EC49459
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2F0770D3 ===
@@ -8534,7 +8515,7 @@ Name: 2F0770D3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2F09421D ===
@@ -8542,7 +8523,7 @@ Name: 2F09421D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_2FF79A0B ===
@@ -8550,7 +8531,7 @@ Name: 2FF79A0B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3009CC76 ===
@@ -8558,7 +8539,7 @@ Name: 3009CC76
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_30522A9A ===
@@ -8566,7 +8547,7 @@ Name: 30522A9A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_30ACE135 ===
@@ -8574,7 +8555,7 @@ Name: 30ACE135
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_311B3EFC ===
@@ -8582,7 +8563,7 @@ Name: 311B3EFC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_317B8932 ===
@@ -8590,7 +8571,7 @@ Name: 317B8932
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_31D36FE6 ===
@@ -8598,7 +8579,7 @@ Name: 31D36FE6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_32C1F13D ===
@@ -8606,7 +8587,7 @@ Name: 32C1F13D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_33AB4856 ===
@@ -8614,7 +8595,7 @@ Name: 33AB4856
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3566F099 ===
@@ -8622,7 +8603,7 @@ Name: 3566F099
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_35E0E027 ===
@@ -8630,7 +8611,7 @@ Name: 35E0E027
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_36662EEF ===
@@ -8638,7 +8619,7 @@ Name: 36662EEF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3681E8DE ===
@@ -8646,7 +8627,7 @@ Name: 3681E8DE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3789DC6E ===
@@ -8654,7 +8635,7 @@ Name: 3789DC6E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_37B9EFB7 ===
@@ -8662,7 +8643,7 @@ Name: 37B9EFB7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_37EDB78E ===
@@ -8670,7 +8651,7 @@ Name: 37EDB78E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_382E2AB3 ===
@@ -8678,7 +8659,7 @@ Name: 382E2AB3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3842496B ===
@@ -8686,7 +8667,7 @@ Name: 3842496B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_387351C1 ===
@@ -8694,7 +8675,7 @@ Name: 387351C1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_38A47BDB ===
@@ -8702,7 +8683,7 @@ Name: 38A47BDB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3924756E ===
@@ -8710,7 +8691,7 @@ Name: 3924756E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3947ACC3 ===
@@ -8718,7 +8699,7 @@ Name: 3947ACC3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_39AD4606 ===
@@ -8726,7 +8707,7 @@ Name: 39AD4606
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_39E0AE4F ===
@@ -8734,7 +8715,7 @@ Name: 39E0AE4F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_39E78D45 ===
@@ -8742,7 +8723,7 @@ Name: 39E78D45
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3A11452B ===
@@ -8750,7 +8731,7 @@ Name: 3A11452B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3A840205 ===
@@ -8758,7 +8739,7 @@ Name: 3A840205
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3AD97475 ===
@@ -8766,7 +8747,7 @@ Name: 3AD97475
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3AEE4974 ===
@@ -8774,7 +8755,7 @@ Name: 3AEE4974
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3BAF0C60 ===
@@ -8782,7 +8763,7 @@ Name: 3BAF0C60
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3BDED445 ===
@@ -8790,7 +8771,7 @@ Name: 3BDED445
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3C621048 ===
@@ -8798,7 +8779,7 @@ Name: 3C621048
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3C74DAE2 ===
@@ -8806,7 +8787,7 @@ Name: 3C74DAE2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3C7AC359 ===
@@ -8814,7 +8795,7 @@ Name: 3C7AC359
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3CDE5F9E ===
@@ -8822,7 +8803,7 @@ Name: 3CDE5F9E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3CECE368 ===
@@ -8830,7 +8811,7 @@ Name: 3CECE368
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3CFF3841 ===
@@ -8838,7 +8819,7 @@ Name: 3CFF3841
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3D502E2F ===
@@ -8846,7 +8827,7 @@ Name: 3D502E2F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3D7FDE57 ===
@@ -8854,7 +8835,7 @@ Name: 3D7FDE57
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3DCD0BBC ===
@@ -8862,7 +8843,7 @@ Name: 3DCD0BBC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3E17924C ===
@@ -8870,7 +8851,7 @@ Name: 3E17924C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3EB6FA04 ===
@@ -8878,7 +8859,7 @@ Name: 3EB6FA04
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3EFCF1C8 ===
@@ -8886,7 +8867,7 @@ Name: 3EFCF1C8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_3F0BF52E ===
@@ -8894,7 +8875,7 @@ Name: 3F0BF52E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4000C8A0 ===
@@ -8902,7 +8883,7 @@ Name: 4000C8A0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_403D932D ===
@@ -8910,7 +8891,7 @@ Name: 403D932D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_408862C4 ===
@@ -8918,7 +8899,7 @@ Name: 408862C4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_419282AD ===
@@ -8926,7 +8907,7 @@ Name: 419282AD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_419FCBAE ===
@@ -8934,7 +8915,7 @@ Name: 419FCBAE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_41B8591B ===
@@ -8942,7 +8923,7 @@ Name: 41B8591B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_41DCF7BA ===
@@ -8950,7 +8931,7 @@ Name: 41DCF7BA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4227B911 ===
@@ -8958,7 +8939,7 @@ Name: 4227B911
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4239B726 ===
@@ -8966,7 +8947,7 @@ Name: 4239B726
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_42BC1D70 ===
@@ -8974,7 +8955,7 @@ Name: 42BC1D70
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_42BE3E94 ===
@@ -8982,7 +8963,7 @@ Name: 42BE3E94
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_42C68371 ===
@@ -8990,7 +8971,7 @@ Name: 42C68371
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_432F34FA ===
@@ -8998,7 +8979,7 @@ Name: 432F34FA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_437E553A ===
@@ -9006,7 +8987,7 @@ Name: 437E553A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4394141C ===
@@ -9014,7 +8995,7 @@ Name: 4394141C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_43B111AD ===
@@ -9022,7 +9003,7 @@ Name: 43B111AD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_43B30B5D ===
@@ -9030,7 +9011,7 @@ Name: 43B30B5D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_43D6557C ===
@@ -9038,7 +9019,7 @@ Name: 43D6557C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_44251BF9 ===
@@ -9046,7 +9027,7 @@ Name: 44251BF9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_44D28B98 ===
@@ -9054,7 +9035,7 @@ Name: 44D28B98
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_44E68738 ===
@@ -9062,7 +9043,7 @@ Name: 44E68738
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_44F86666 ===
@@ -9070,7 +9051,7 @@ Name: 44F86666
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_458C3B90 ===
@@ -9078,7 +9059,7 @@ Name: 458C3B90
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_45CBA787 ===
@@ -9086,7 +9067,7 @@ Name: 45CBA787
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_45E5EB22 ===
@@ -9094,7 +9075,7 @@ Name: 45E5EB22
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_45ECBA80 ===
@@ -9102,7 +9083,7 @@ Name: 45ECBA80
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_460AB144 ===
@@ -9110,7 +9091,7 @@ Name: 460AB144
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_46169EA5 ===
@@ -9118,7 +9099,7 @@ Name: 46169EA5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_464C4C44 ===
@@ -9126,7 +9107,7 @@ Name: 464C4C44
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_473EE9DE ===
@@ -9134,7 +9115,7 @@ Name: 473EE9DE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4787A98D ===
@@ -9142,7 +9123,7 @@ Name: 4787A98D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_479BBFEB ===
@@ -9150,7 +9131,7 @@ Name: 479BBFEB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_47EACF7E ===
@@ -9158,7 +9139,7 @@ Name: 47EACF7E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4848801D ===
@@ -9166,7 +9147,7 @@ Name: 4848801D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_487BEC6D ===
@@ -9174,7 +9155,7 @@ Name: 487BEC6D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_492E0A66 ===
@@ -9182,7 +9163,7 @@ Name: 492E0A66
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_494ECB35 ===
@@ -9190,7 +9171,7 @@ Name: 494ECB35
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_494F5379 ===
@@ -9198,7 +9179,7 @@ Name: 494F5379
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_49805D55 ===
@@ -9206,7 +9187,7 @@ Name: 49805D55
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_49EA8A40 ===
@@ -9214,7 +9195,7 @@ Name: 49EA8A40
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4A323E4A ===
@@ -9222,7 +9203,7 @@ Name: 4A323E4A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4A3EB696 ===
@@ -9230,7 +9211,7 @@ Name: 4A3EB696
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4ABDB43A ===
@@ -9238,7 +9219,7 @@ Name: 4ABDB43A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4AD6DB47 ===
@@ -9246,7 +9227,7 @@ Name: 4AD6DB47
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4AF51B8A ===
@@ -9254,7 +9235,7 @@ Name: 4AF51B8A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4B2BC403 ===
@@ -9262,7 +9243,7 @@ Name: 4B2BC403
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4B3B0356 ===
@@ -9270,7 +9251,7 @@ Name: 4B3B0356
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4B431569 ===
@@ -9278,7 +9259,7 @@ Name: 4B431569
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4B5B4954 ===
@@ -9286,7 +9267,7 @@ Name: 4B5B4954
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4C2D23EC ===
@@ -9294,7 +9275,7 @@ Name: 4C2D23EC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4CE97031 ===
@@ -9302,7 +9283,7 @@ Name: 4CE97031
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4CF43F23 ===
@@ -9310,7 +9291,7 @@ Name: 4CF43F23
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4D8F9D46 ===
@@ -9318,7 +9299,7 @@ Name: 4D8F9D46
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4D98F6C4 ===
@@ -9326,7 +9307,7 @@ Name: 4D98F6C4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4E072263 ===
@@ -9334,7 +9315,7 @@ Name: 4E072263
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4E0C1EFE ===
@@ -9342,7 +9323,7 @@ Name: 4E0C1EFE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4E226A6E ===
@@ -9350,7 +9331,7 @@ Name: 4E226A6E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4E5AAFAE ===
@@ -9358,7 +9339,7 @@ Name: 4E5AAFAE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_4F10DCA9 ===
@@ -9366,7 +9347,7 @@ Name: 4F10DCA9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_50AE78E5 ===
@@ -9374,7 +9355,7 @@ Name: 50AE78E5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_513A43EE ===
@@ -9382,7 +9363,7 @@ Name: 513A43EE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_51A32DCA ===
@@ -9390,7 +9371,7 @@ Name: 51A32DCA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_51F6B834 ===
@@ -9398,7 +9379,7 @@ Name: 51F6B834
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5209EDF0 ===
@@ -9406,7 +9387,7 @@ Name: 5209EDF0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_52CFC159 ===
@@ -9414,7 +9395,7 @@ Name: 52CFC159
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_538D052D ===
@@ -9422,7 +9403,7 @@ Name: 538D052D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_53A1A61A ===
@@ -9430,7 +9411,7 @@ Name: 53A1A61A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_53B06C7B ===
@@ -9438,7 +9419,7 @@ Name: 53B06C7B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_54110A38 ===
@@ -9446,7 +9427,7 @@ Name: 54110A38
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_549792BA ===
@@ -9454,7 +9435,7 @@ Name: 549792BA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_54BAC2DA ===
@@ -9462,7 +9443,7 @@ Name: 54BAC2DA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_54F170BE ===
@@ -9470,7 +9451,7 @@ Name: 54F170BE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_558F80F9 ===
@@ -9478,7 +9459,7 @@ Name: 558F80F9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_55CA00A1 ===
@@ -9486,7 +9467,7 @@ Name: 55CA00A1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_55D0BEAA ===
@@ -9494,7 +9475,7 @@ Name: 55D0BEAA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_55D90FA8 ===
@@ -9502,7 +9483,7 @@ Name: 55D90FA8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_55EBF949 ===
@@ -9510,7 +9491,7 @@ Name: 55EBF949
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_565DE3C4 ===
@@ -9518,7 +9499,7 @@ Name: 565DE3C4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_56775C71 ===
@@ -9526,7 +9507,7 @@ Name: 56775C71
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_56C1FE08 ===
@@ -9534,7 +9515,7 @@ Name: 56C1FE08
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_56E6EFAA ===
@@ -9542,7 +9523,7 @@ Name: 56E6EFAA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_57E254F5 ===
@@ -9550,7 +9531,7 @@ Name: 57E254F5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_57E7E83A ===
@@ -9558,7 +9539,7 @@ Name: 57E7E83A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5819E497 ===
@@ -9566,7 +9547,7 @@ Name: 5819E497
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_58A6A51E ===
@@ -9574,7 +9555,7 @@ Name: 58A6A51E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_58BEBECC ===
@@ -9582,7 +9563,7 @@ Name: 58BEBECC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_58F43966 ===
@@ -9590,7 +9571,7 @@ Name: 58F43966
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_59592DE4 ===
@@ -9598,7 +9579,7 @@ Name: 59592DE4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_598585C1 ===
@@ -9606,7 +9587,7 @@ Name: 598585C1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_59981F0D ===
@@ -9614,7 +9595,7 @@ Name: 59981F0D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_59E335AB ===
@@ -9622,7 +9603,7 @@ Name: 59E335AB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_59FFFCED ===
@@ -9630,7 +9611,7 @@ Name: 59FFFCED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5ABF4FA4 ===
@@ -9638,7 +9619,7 @@ Name: 5ABF4FA4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5AC61FE5 ===
@@ -9646,7 +9627,7 @@ Name: 5AC61FE5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5AD29FF8 ===
@@ -9654,7 +9635,7 @@ Name: 5AD29FF8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5AD4C218 ===
@@ -9662,7 +9643,7 @@ Name: 5AD4C218
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5B5F6AE8 ===
@@ -9670,7 +9651,7 @@ Name: 5B5F6AE8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5B6304FF ===
@@ -9678,7 +9659,7 @@ Name: 5B6304FF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5B75B30F ===
@@ -9686,7 +9667,7 @@ Name: 5B75B30F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5B983361 ===
@@ -9694,7 +9675,7 @@ Name: 5B983361
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5BD8EA81 ===
@@ -9702,7 +9683,7 @@ Name: 5BD8EA81
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5C315841 ===
@@ -9710,7 +9691,7 @@ Name: 5C315841
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5C573C11 ===
@@ -9718,7 +9699,7 @@ Name: 5C573C11
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5CAB03DD ===
@@ -9726,7 +9707,7 @@ Name: 5CAB03DD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5CBDB116 ===
@@ -9734,7 +9715,7 @@ Name: 5CBDB116
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D0C4B8F ===
@@ -9742,7 +9723,7 @@ Name: 5D0C4B8F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D2CCD41 ===
@@ -9750,7 +9731,7 @@ Name: 5D2CCD41
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D5F491E ===
@@ -9758,7 +9739,7 @@ Name: 5D5F491E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D81D8F9 ===
@@ -9766,7 +9747,7 @@ Name: 5D81D8F9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D86E702 ===
@@ -9774,7 +9755,7 @@ Name: 5D86E702
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5D9ABC58 ===
@@ -9782,7 +9763,7 @@ Name: 5D9ABC58
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5DA9F2AE ===
@@ -9790,7 +9771,7 @@ Name: 5DA9F2AE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5E13316C ===
@@ -9798,7 +9779,7 @@ Name: 5E13316C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5EA7A638 ===
@@ -9806,7 +9787,7 @@ Name: 5EA7A638
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5EB4C98F ===
@@ -9814,7 +9795,7 @@ Name: 5EB4C98F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5EF71DA1 ===
@@ -9822,7 +9803,7 @@ Name: 5EF71DA1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5F858802 ===
@@ -9830,7 +9811,7 @@ Name: 5F858802
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5FA4C80F ===
@@ -9838,7 +9819,7 @@ Name: 5FA4C80F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5FD48FB2 ===
@@ -9846,7 +9827,7 @@ Name: 5FD48FB2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_5FF1DEC5 ===
@@ -9854,7 +9835,7 @@ Name: 5FF1DEC5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6016A968 ===
@@ -9862,7 +9843,7 @@ Name: 6016A968
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6058C03B ===
@@ -9870,7 +9851,7 @@ Name: 6058C03B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_60C3BD24 ===
@@ -9878,7 +9859,7 @@ Name: 60C3BD24
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_60C56554 ===
@@ -9886,7 +9867,7 @@ Name: 60C56554
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_60D66B86 ===
@@ -9894,7 +9875,7 @@ Name: 60D66B86
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6102A0FC ===
@@ -9902,7 +9883,7 @@ Name: 6102A0FC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_61E76999 ===
@@ -9910,7 +9891,7 @@ Name: 61E76999
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_626AECE8 ===
@@ -9918,7 +9899,7 @@ Name: 626AECE8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_62851FFB ===
@@ -9926,7 +9907,7 @@ Name: 62851FFB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_62C33409 ===
@@ -9934,7 +9915,7 @@ Name: 62C33409
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_62D0F875 ===
@@ -9942,7 +9923,7 @@ Name: 62D0F875
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_63409A54 ===
@@ -9950,7 +9931,7 @@ Name: 63409A54
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6397B964 ===
@@ -9958,7 +9939,7 @@ Name: 6397B964
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_63DB05B6 ===
@@ -9966,7 +9947,7 @@ Name: 63DB05B6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_63DC02C9 ===
@@ -9974,7 +9955,7 @@ Name: 63DC02C9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6439D44C ===
@@ -9982,7 +9963,7 @@ Name: 6439D44C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_64E30596 ===
@@ -9990,7 +9971,7 @@ Name: 64E30596
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6566F645 ===
@@ -9998,7 +9979,7 @@ Name: 6566F645
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_656A39C8 ===
@@ -10006,7 +9987,7 @@ Name: 656A39C8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_656EC067 ===
@@ -10014,7 +9995,7 @@ Name: 656EC067
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_65CE4F87 ===
@@ -10022,7 +10003,7 @@ Name: 65CE4F87
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_662EBAAA ===
@@ -10030,7 +10011,7 @@ Name: 662EBAAA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_66531C74 ===
@@ -10038,7 +10019,7 @@ Name: 66531C74
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_66B16F22 ===
@@ -10046,7 +10027,7 @@ Name: 66B16F22
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_66D26AEC ===
@@ -10054,7 +10035,7 @@ Name: 66D26AEC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_675DA518 ===
@@ -10062,7 +10043,7 @@ Name: 675DA518
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_677A22D7 ===
@@ -10070,7 +10051,7 @@ Name: 677A22D7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6792B394 ===
@@ -10078,7 +10059,7 @@ Name: 6792B394
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_683A2305 ===
@@ -10086,7 +10067,7 @@ Name: 683A2305
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_692DD7CF ===
@@ -10094,7 +10075,7 @@ Name: 692DD7CF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_698BB117 ===
@@ -10102,7 +10083,7 @@ Name: 698BB117
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_69EE8132 ===
@@ -10110,7 +10091,7 @@ Name: 69EE8132
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6A35EE35 ===
@@ -10118,7 +10099,7 @@ Name: 6A35EE35
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6A3930E6 ===
@@ -10126,7 +10107,7 @@ Name: 6A3930E6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6A48F28F ===
@@ -10134,7 +10115,7 @@ Name: 6A48F28F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6A8EEC78 ===
@@ -10142,7 +10123,7 @@ Name: 6A8EEC78
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6AABC7EA ===
@@ -10150,7 +10131,7 @@ Name: 6AABC7EA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6ABE3EC1 ===
@@ -10158,7 +10139,7 @@ Name: 6ABE3EC1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6B14C259 ===
@@ -10166,7 +10147,7 @@ Name: 6B14C259
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6BEEE6BE ===
@@ -10174,7 +10155,7 @@ Name: 6BEEE6BE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6C7736F9 ===
@@ -10182,7 +10163,7 @@ Name: 6C7736F9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6CC913A2 ===
@@ -10190,7 +10171,7 @@ Name: 6CC913A2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6D45549A ===
@@ -10198,7 +10179,7 @@ Name: 6D45549A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6E1E82B2 ===
@@ -10206,7 +10187,7 @@ Name: 6E1E82B2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6E663040 ===
@@ -10214,7 +10195,7 @@ Name: 6E663040
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6ED2C120 ===
@@ -10222,7 +10203,7 @@ Name: 6ED2C120
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6F5C8078 ===
@@ -10230,7 +10211,7 @@ Name: 6F5C8078
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6F5E9CF9 ===
@@ -10238,7 +10219,7 @@ Name: 6F5E9CF9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6FC24896 ===
@@ -10246,7 +10227,7 @@ Name: 6FC24896
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_6FF3213D ===
@@ -10254,7 +10235,7 @@ Name: 6FF3213D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_701AC24E ===
@@ -10262,7 +10243,7 @@ Name: 701AC24E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_703B73C4 ===
@@ -10270,7 +10251,7 @@ Name: 703B73C4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_70C712D3 ===
@@ -10278,7 +10259,7 @@ Name: 70C712D3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_70EAAAF5 ===
@@ -10286,7 +10267,7 @@ Name: 70EAAAF5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_70F1A62B ===
@@ -10294,7 +10275,7 @@ Name: 70F1A62B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7169C897 ===
@@ -10302,7 +10283,7 @@ Name: 7169C897
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7178DF27 ===
@@ -10310,7 +10291,7 @@ Name: 7178DF27
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7190E405 ===
@@ -10318,7 +10299,7 @@ Name: 7190E405
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_71CE545E ===
@@ -10326,7 +10307,7 @@ Name: 71CE545E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7249425F ===
@@ -10334,7 +10315,7 @@ Name: 7249425F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_72641C9D ===
@@ -10342,7 +10323,7 @@ Name: 72641C9D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_729F2BBB ===
@@ -10350,7 +10331,7 @@ Name: 729F2BBB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_72F25B41 ===
@@ -10358,7 +10339,7 @@ Name: 72F25B41
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_732D4997 ===
@@ -10366,7 +10347,7 @@ Name: 732D4997
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_73A561CC ===
@@ -10374,7 +10355,7 @@ Name: 73A561CC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7420DB0C ===
@@ -10382,7 +10363,7 @@ Name: 7420DB0C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7435DE7C ===
@@ -10390,7 +10371,7 @@ Name: 7435DE7C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_75A2A667 ===
@@ -10398,7 +10379,7 @@ Name: 75A2A667
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_75D602F2 ===
@@ -10406,7 +10387,7 @@ Name: 75D602F2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_77DDBBAF ===
@@ -10414,7 +10395,7 @@ Name: 77DDBBAF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_783AB388 ===
@@ -10422,7 +10403,7 @@ Name: 783AB388
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_78564BE5 ===
@@ -10430,7 +10411,7 @@ Name: 78564BE5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7885ECAF ===
@@ -10438,7 +10419,7 @@ Name: 7885ECAF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_78B73516 ===
@@ -10446,7 +10427,7 @@ Name: 78B73516
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_78BD858D ===
@@ -10454,7 +10435,7 @@ Name: 78BD858D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7933DA6C ===
@@ -10462,7 +10443,7 @@ Name: 7933DA6C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_793992D8 ===
@@ -10470,7 +10451,7 @@ Name: 793992D8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_797E296B ===
@@ -10478,7 +10459,7 @@ Name: 797E296B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_79EF1DEB ===
@@ -10486,7 +10467,7 @@ Name: 79EF1DEB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7A03677D ===
@@ -10494,7 +10475,7 @@ Name: 7A03677D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7A0C086F ===
@@ -10502,7 +10483,7 @@ Name: 7A0C086F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7A89C403 ===
@@ -10510,7 +10491,7 @@ Name: 7A89C403
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7A8D30C6 ===
@@ -10518,7 +10499,7 @@ Name: 7A8D30C6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7ABC77C1 ===
@@ -10526,7 +10507,7 @@ Name: 7ABC77C1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7B5DF36F ===
@@ -10534,7 +10515,7 @@ Name: 7B5DF36F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7C3BD57C ===
@@ -10542,7 +10523,7 @@ Name: 7C3BD57C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7C4240E1 ===
@@ -10550,7 +10531,7 @@ Name: 7C4240E1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7C5056CA ===
@@ -10558,7 +10539,7 @@ Name: 7C5056CA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7C8BD62F ===
@@ -10566,7 +10547,7 @@ Name: 7C8BD62F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7C9308EF ===
@@ -10574,7 +10555,7 @@ Name: 7C9308EF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7CAF6877 ===
@@ -10582,7 +10563,7 @@ Name: 7CAF6877
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7CBB25EB ===
@@ -10590,7 +10571,7 @@ Name: 7CBB25EB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7CD1AAE1 ===
@@ -10598,7 +10579,7 @@ Name: 7CD1AAE1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7D0F1751 ===
@@ -10606,7 +10587,7 @@ Name: 7D0F1751
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7D28CB20 ===
@@ -10614,7 +10595,7 @@ Name: 7D28CB20
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7D536E72 ===
@@ -10622,7 +10603,7 @@ Name: 7D536E72
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7DC358C0 ===
@@ -10630,7 +10611,7 @@ Name: 7DC358C0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7DEC9A40 ===
@@ -10638,7 +10619,7 @@ Name: 7DEC9A40
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7E2F7EB8 ===
@@ -10646,7 +10627,7 @@ Name: 7E2F7EB8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7E7CD9D3 ===
@@ -10654,7 +10635,7 @@ Name: 7E7CD9D3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_7E8CCD84 ===
@@ -10662,7 +10643,7 @@ Name: 7E8CCD84
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8010F97E ===
@@ -10670,7 +10651,7 @@ Name: 8010F97E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_805C25F0 ===
@@ -10678,7 +10659,7 @@ Name: 805C25F0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_80941A21 ===
@@ -10686,7 +10667,7 @@ Name: 80941A21
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_80AAA333 ===
@@ -10694,7 +10675,7 @@ Name: 80AAA333
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_810A3F32 ===
@@ -10702,7 +10683,7 @@ Name: 810A3F32
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_811C7730 ===
@@ -10710,7 +10691,7 @@ Name: 811C7730
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_814D0113 ===
@@ -10718,7 +10699,7 @@ Name: 814D0113
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_822DC7A8 ===
@@ -10726,7 +10707,7 @@ Name: 822DC7A8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_827A5D21 ===
@@ -10734,7 +10715,7 @@ Name: 827A5D21
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_82A19B69 ===
@@ -10742,7 +10723,7 @@ Name: 82A19B69
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_83008F9D ===
@@ -10750,7 +10731,7 @@ Name: 83008F9D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_831DE561 ===
@@ -10758,7 +10739,7 @@ Name: 831DE561
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8327758B ===
@@ -10766,7 +10747,7 @@ Name: 8327758B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_834B75E7 ===
@@ -10774,7 +10755,7 @@ Name: 834B75E7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8365EA32 ===
@@ -10782,7 +10763,7 @@ Name: 8365EA32
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_83A26233 ===
@@ -10790,7 +10771,7 @@ Name: 83A26233
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_83B9A038 ===
@@ -10798,7 +10779,7 @@ Name: 83B9A038
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_840416CD ===
@@ -10806,7 +10787,7 @@ Name: 840416CD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_843DFC91 ===
@@ -10814,7 +10795,7 @@ Name: 843DFC91
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_857ACD94 ===
@@ -10822,7 +10803,7 @@ Name: 857ACD94
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8580525E ===
@@ -10830,7 +10811,7 @@ Name: 8580525E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_866AE208 ===
@@ -10838,7 +10819,7 @@ Name: 866AE208
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8677EFB3 ===
@@ -10846,7 +10827,7 @@ Name: 8677EFB3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_86D37FF1 ===
@@ -10854,7 +10835,7 @@ Name: 86D37FF1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_86F7AA4A ===
@@ -10862,7 +10843,7 @@ Name: 86F7AA4A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_872183CD ===
@@ -10870,7 +10851,7 @@ Name: 872183CD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_87B5E929 ===
@@ -10878,7 +10859,7 @@ Name: 87B5E929
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_885C781B ===
@@ -10886,7 +10867,7 @@ Name: 885C781B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8878003B ===
@@ -10894,7 +10875,7 @@ Name: 8878003B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_88864D1E ===
@@ -10902,7 +10883,7 @@ Name: 88864D1E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8972F540 ===
@@ -10910,7 +10891,7 @@ Name: 8972F540
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_898AF31D ===
@@ -10918,7 +10899,7 @@ Name: 898AF31D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8A0B40C0 ===
@@ -10926,7 +10907,7 @@ Name: 8A0B40C0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8A2C65A3 ===
@@ -10934,7 +10915,7 @@ Name: 8A2C65A3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8A829476 ===
@@ -10942,7 +10923,7 @@ Name: 8A829476
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8AC1B5C1 ===
@@ -10950,7 +10931,7 @@ Name: 8AC1B5C1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8AF40B23 ===
@@ -10958,7 +10939,7 @@ Name: 8AF40B23
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8B31AC38 ===
@@ -10966,7 +10947,7 @@ Name: 8B31AC38
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8B32317E ===
@@ -10974,7 +10955,7 @@ Name: 8B32317E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8B3657A9 ===
@@ -10982,7 +10963,7 @@ Name: 8B3657A9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8B3C49E3 ===
@@ -10990,7 +10971,7 @@ Name: 8B3C49E3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8B6D195D ===
@@ -10998,7 +10979,7 @@ Name: 8B6D195D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8BB65E5E ===
@@ -11006,7 +10987,7 @@ Name: 8BB65E5E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8C186D17 ===
@@ -11014,7 +10995,7 @@ Name: 8C186D17
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8C853607 ===
@@ -11022,7 +11003,7 @@ Name: 8C853607
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8D6D5B2C ===
@@ -11030,7 +11011,7 @@ Name: 8D6D5B2C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8D93124A ===
@@ -11038,7 +11019,7 @@ Name: 8D93124A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8DAF08C5 ===
@@ -11046,7 +11027,7 @@ Name: 8DAF08C5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8DE17D94 ===
@@ -11054,7 +11035,7 @@ Name: 8DE17D94
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8E60CF6E ===
@@ -11062,7 +11043,7 @@ Name: 8E60CF6E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8EA873A0 ===
@@ -11070,7 +11051,7 @@ Name: 8EA873A0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8EB76821 ===
@@ -11078,7 +11059,7 @@ Name: 8EB76821
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8ED15D51 ===
@@ -11086,7 +11067,7 @@ Name: 8ED15D51
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8F28F86A ===
@@ -11094,7 +11075,7 @@ Name: 8F28F86A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8F2EA270 ===
@@ -11102,7 +11083,7 @@ Name: 8F2EA270
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8F9579E4 ===
@@ -11110,7 +11091,7 @@ Name: 8F9579E4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8F988020 ===
@@ -11118,7 +11099,7 @@ Name: 8F988020
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_8FE817BA ===
@@ -11126,7 +11107,7 @@ Name: 8FE817BA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_90353D81 ===
@@ -11134,7 +11115,7 @@ Name: 90353D81
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9054973F ===
@@ -11142,7 +11123,7 @@ Name: 9054973F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_90A72ACF ===
@@ -11150,7 +11131,7 @@ Name: 90A72ACF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_90E1658C ===
@@ -11158,7 +11139,7 @@ Name: 90E1658C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_918A1734 ===
@@ -11166,7 +11147,7 @@ Name: 918A1734
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_91D249C3 ===
@@ -11174,7 +11155,7 @@ Name: 91D249C3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_91D48E4E ===
@@ -11182,7 +11163,7 @@ Name: 91D48E4E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_922542C3 ===
@@ -11190,7 +11171,7 @@ Name: 922542C3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_93009D3B ===
@@ -11198,7 +11179,7 @@ Name: 93009D3B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_93D9B506 ===
@@ -11206,7 +11187,7 @@ Name: 93D9B506
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9427896B ===
@@ -11214,7 +11195,7 @@ Name: 9427896B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9501C16B ===
@@ -11222,7 +11203,7 @@ Name: 9501C16B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9566DD87 ===
@@ -11230,7 +11211,7 @@ Name: 9566DD87
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_95A74E78 ===
@@ -11238,7 +11219,7 @@ Name: 95A74E78
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_963F893A ===
@@ -11246,7 +11227,7 @@ Name: 963F893A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_966F37E6 ===
@@ -11254,7 +11235,7 @@ Name: 966F37E6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_96859C9B ===
@@ -11262,7 +11243,7 @@ Name: 96859C9B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9695D7CC ===
@@ -11270,7 +11251,7 @@ Name: 9695D7CC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_96A60AED ===
@@ -11278,7 +11259,7 @@ Name: 96A60AED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_973C00CE ===
@@ -11286,7 +11267,7 @@ Name: 973C00CE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9784BB4E ===
@@ -11294,7 +11275,7 @@ Name: 9784BB4E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9834CDCC ===
@@ -11302,7 +11283,7 @@ Name: 9834CDCC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_98547A36 ===
@@ -11310,7 +11291,7 @@ Name: 98547A36
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_98C7143B ===
@@ -11318,7 +11299,7 @@ Name: 98C7143B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_992FCC96 ===
@@ -11326,7 +11307,7 @@ Name: 992FCC96
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_99D74322 ===
@@ -11334,7 +11315,7 @@ Name: 99D74322
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9A45ED29 ===
@@ -11342,7 +11323,7 @@ Name: 9A45ED29
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9AAFB9A8 ===
@@ -11350,7 +11331,7 @@ Name: 9AAFB9A8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9B4CAAEF ===
@@ -11358,7 +11339,7 @@ Name: 9B4CAAEF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9B92F975 ===
@@ -11366,7 +11347,7 @@ Name: 9B92F975
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9BA8D6B8 ===
@@ -11374,7 +11355,7 @@ Name: 9BA8D6B8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9BBA4D3E ===
@@ -11382,7 +11363,7 @@ Name: 9BBA4D3E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9BD745C1 ===
@@ -11390,7 +11371,7 @@ Name: 9BD745C1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9C9A9B43 ===
@@ -11398,7 +11379,7 @@ Name: 9C9A9B43
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9CC51698 ===
@@ -11406,7 +11387,7 @@ Name: 9CC51698
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9D0B799C ===
@@ -11414,7 +11395,7 @@ Name: 9D0B799C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9D2974CA ===
@@ -11422,7 +11403,7 @@ Name: 9D2974CA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9DE6AF69 ===
@@ -11430,7 +11411,7 @@ Name: 9DE6AF69
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9E9E96C3 ===
@@ -11438,7 +11419,7 @@ Name: 9E9E96C3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9EBDE860 ===
@@ -11446,7 +11427,7 @@ Name: 9EBDE860
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9F335F56 ===
@@ -11454,7 +11435,7 @@ Name: 9F335F56
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9FB07CC0 ===
@@ -11462,7 +11443,7 @@ Name: 9FB07CC0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_9FFBEDD1 ===
@@ -11470,7 +11451,7 @@ Name: 9FFBEDD1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A03F3B0B ===
@@ -11478,7 +11459,7 @@ Name: A03F3B0B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A0852317 ===
@@ -11486,7 +11467,7 @@ Name: A0852317
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A0CE2BCF ===
@@ -11494,7 +11475,7 @@ Name: A0CE2BCF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A122FEC6 ===
@@ -11502,7 +11483,7 @@ Name: A122FEC6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A1502FA5 ===
@@ -11510,7 +11491,7 @@ Name: A1502FA5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A173BD9E ===
@@ -11518,7 +11499,7 @@ Name: A173BD9E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A1B34299 ===
@@ -11526,7 +11507,7 @@ Name: A1B34299
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A226BBD6 ===
@@ -11534,7 +11515,7 @@ Name: A226BBD6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A26B64E5 ===
@@ -11542,7 +11523,7 @@ Name: A26B64E5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A2F2E8FF ===
@@ -11550,7 +11531,7 @@ Name: A2F2E8FF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A30D6A65 ===
@@ -11558,7 +11539,7 @@ Name: A30D6A65
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A33F468D ===
@@ -11566,7 +11547,7 @@ Name: A33F468D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A377CCDF ===
@@ -11574,7 +11555,7 @@ Name: A377CCDF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A393F9F0 ===
@@ -11582,7 +11563,7 @@ Name: A393F9F0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A39AB67C ===
@@ -11590,7 +11571,7 @@ Name: A39AB67C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A3EBD43B ===
@@ -11598,7 +11579,7 @@ Name: A3EBD43B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A489434F ===
@@ -11606,7 +11587,7 @@ Name: A489434F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A49FED84 ===
@@ -11614,7 +11595,7 @@ Name: A49FED84
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A4BDD551 ===
@@ -11622,7 +11603,7 @@ Name: A4BDD551
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A4D47D9E ===
@@ -11630,7 +11611,7 @@ Name: A4D47D9E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A4DC84A0 ===
@@ -11638,7 +11619,7 @@ Name: A4DC84A0
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A4EC97B5 ===
@@ -11646,7 +11627,7 @@ Name: A4EC97B5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A50CF67B ===
@@ -11654,7 +11635,7 @@ Name: A50CF67B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A62D49C6 ===
@@ -11662,7 +11643,7 @@ Name: A62D49C6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A6328173 ===
@@ -11670,7 +11651,7 @@ Name: A6328173
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A686809A ===
@@ -11678,7 +11659,7 @@ Name: A686809A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A7154C64 ===
@@ -11686,7 +11667,7 @@ Name: A7154C64
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A725F3F3 ===
@@ -11694,7 +11675,7 @@ Name: A725F3F3
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A7376C87 ===
@@ -11702,7 +11683,7 @@ Name: A7376C87
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A76F8352 ===
@@ -11710,7 +11691,7 @@ Name: A76F8352
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A783BCA8 ===
@@ -11718,7 +11699,7 @@ Name: A783BCA8
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A7D689F5 ===
@@ -11726,7 +11707,7 @@ Name: A7D689F5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A7DCD657 ===
@@ -11734,7 +11715,7 @@ Name: A7DCD657
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A80F3799 ===
@@ -11742,7 +11723,7 @@ Name: A80F3799
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A82FABFC ===
@@ -11750,7 +11731,7 @@ Name: A82FABFC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A8413608 ===
@@ -11758,7 +11739,7 @@ Name: A8413608
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A8BA94B6 ===
@@ -11766,7 +11747,7 @@ Name: A8BA94B6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A90E2D03 ===
@@ -11774,7 +11755,7 @@ Name: A90E2D03
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A968DBA5 ===
@@ -11782,7 +11763,7 @@ Name: A968DBA5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A990AE14 ===
@@ -11790,7 +11771,7 @@ Name: A990AE14
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_A9F2709A ===
@@ -11798,7 +11779,7 @@ Name: A9F2709A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AA81DD0B ===
@@ -11806,7 +11787,7 @@ Name: AA81DD0B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AB576C3B ===
@@ -11814,7 +11795,7 @@ Name: AB576C3B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ABD18218 ===
@@ -11822,7 +11803,7 @@ Name: ABD18218
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ABF9DAAF ===
@@ -11830,7 +11811,7 @@ Name: ABF9DAAF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ABFE6286 ===
@@ -11838,7 +11819,7 @@ Name: ABFE6286
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AC004835 ===
@@ -11846,7 +11827,7 @@ Name: AC004835
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ACB85CBA ===
@@ -11854,7 +11835,7 @@ Name: ACB85CBA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ACE2090A ===
@@ -11862,7 +11843,7 @@ Name: ACE2090A
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AD1AA26D ===
@@ -11870,7 +11851,7 @@ Name: AD1AA26D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AD70C4BA ===
@@ -11878,7 +11859,7 @@ Name: AD70C4BA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AD8C8210 ===
@@ -11886,7 +11867,7 @@ Name: AD8C8210
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_ADC94E2C ===
@@ -11894,7 +11875,7 @@ Name: ADC94E2C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AE0ED10D ===
@@ -11902,7 +11883,7 @@ Name: AE0ED10D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AE99A6E1 ===
@@ -11910,7 +11891,7 @@ Name: AE99A6E1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AE9CFA41 ===
@@ -11918,7 +11899,7 @@ Name: AE9CFA41
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AEDC9768 ===
@@ -11926,7 +11907,7 @@ Name: AEDC9768
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AF0898E7 ===
@@ -11934,7 +11915,7 @@ Name: AF0898E7
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AF765F9F ===
@@ -11942,7 +11923,7 @@ Name: AF765F9F
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AFA4A980 ===
@@ -11950,7 +11931,7 @@ Name: AFA4A980
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AFA5BAC9 ===
@@ -11958,7 +11939,7 @@ Name: AFA5BAC9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AFD8F2EF ===
@@ -11966,7 +11947,7 @@ Name: AFD8F2EF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AFE855B1 ===
@@ -11974,7 +11955,7 @@ Name: AFE855B1
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_AFFCC47E ===
@@ -11982,7 +11963,7 @@ Name: AFFCC47E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B0FC622D ===
@@ -11990,7 +11971,7 @@ Name: B0FC622D
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B1DA7383 ===
@@ -11998,7 +11979,7 @@ Name: B1DA7383
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B253DEF2 ===
@@ -12006,7 +11987,7 @@ Name: B253DEF2
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B2925134 ===
@@ -12014,7 +11995,7 @@ Name: B2925134
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B2A5CB2B ===
@@ -12022,7 +12003,7 @@ Name: B2A5CB2B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B32A1E98 ===
@@ -12030,7 +12011,7 @@ Name: B32A1E98
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B3B1644E ===
@@ -12038,7 +12019,7 @@ Name: B3B1644E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B3CE95A4 ===
@@ -12046,7 +12027,7 @@ Name: B3CE95A4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B3FB2F4B ===
@@ -12054,7 +12035,7 @@ Name: B3FB2F4B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B42E7E27 ===
@@ -12062,7 +12043,7 @@ Name: B42E7E27
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B42F5023 ===
@@ -12070,7 +12051,7 @@ Name: B42F5023
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_B53E1C28 ===
@@ -12078,7 +12059,7 @@ Name: B53E1C28
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C789FBF5 ===
@@ -12086,7 +12067,7 @@ Name: C789FBF5
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C7E06CB4 ===
@@ -12094,7 +12075,7 @@ Name: C7E06CB4
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C7F16F5B ===
@@ -12102,7 +12083,7 @@ Name: C7F16F5B
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C82E0F99 ===
@@ -12110,7 +12091,7 @@ Name: C82E0F99
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C84D5BA6 ===
@@ -12118,7 +12099,7 @@ Name: C84D5BA6
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_C8563FAA ===
@@ -12126,7 +12107,7 @@ Name: C8563FAA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_040CEA33===
@@ -12134,7 +12115,7 @@ Name: 040CEA33
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_0389363C ===
@@ -12142,7 +12123,7 @@ Name: 0389363C
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_032E8AC9===
@@ -12150,7 +12131,7 @@ Name: 032E8AC9
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_LEAF ===
@@ -12158,7 +12139,7 @@ Name: LEAF
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1
 
 === TRAINER_RED ===
@@ -12166,5 +12147,5 @@ Name: RED
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Spewpa
+Buneary
 Level: 1

@@ -437,7 +437,10 @@
     F(WATER_SPOUT) \
     F(FRENZY_PLANT) \
     F(SELF_DESTRUCT) \
-    F(EXPLOSION)
+    F(EXPLOSION) \
+    F(FLASH_CANNON) \
+    F(REVIVAL_BLESSING) \
+
 
 #define FOREACH_HM(F) \
     F(CUT) \
