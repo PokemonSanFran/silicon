@@ -83,28 +83,21 @@ const u32 gBallGfx_Cherish[] = INCBIN_U32("graphics/balls/cherish.4bpp.smol");
 const u16 gBallPal_Cherish[] = INCBIN_U16("graphics/balls/cherish.gbapal");
 
 // Start siliconNewBalls
-const u32 gBallGfx_Vitality[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_Vitality[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_Psyche[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_Psyche[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewC[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewC[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewD[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewD[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewE[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewE[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewF[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewF[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewG[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewG[] = INCBIN_U16("graphics/balls/net.gbapal");
-
-const u32 gBallGfx_NewH[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewH[] = INCBIN_U16("graphics/balls/net.gbapal");
+const u32 gBallGfx_Vitality[] = INCBIN_U32("graphics/balls/vitality.4bpp.smol");
+const u16 gBallPal_Vitality[] = INCBIN_U16("graphics/balls/vitality.gbapal");
+const u32 gBallGfx_Psyche[] = INCBIN_U32("graphics/balls/psyche.4bpp.smol");
+const u16 gBallPal_Psyche[] = INCBIN_U16("graphics/balls/psyche.gbapal");
+const u32 gBallGfx_Mineral[] = INCBIN_U32("graphics/balls/mineral.4bpp.smol");
+const u16 gBallPal_Mineral[] = INCBIN_U16("graphics/balls/mineral.gbapal");
+const u32 gBallGfx_Electro[] = INCBIN_U32("graphics/balls/electro.4bpp.smol");
+const u16 gBallPal_Electro[] = INCBIN_U16("graphics/balls/electro.gbapal");
+const u32 gBallGfx_Bog[] = INCBIN_U32("graphics/balls/bog.4bpp.smol");
+const u16 gBallPal_Bog[] = INCBIN_U16("graphics/balls/bog.gbapal");
+const u32 gBallGfx_Jetstream[] = INCBIN_U32("graphics/balls/jetstream.4bpp.smol");
+const u16 gBallPal_Jetstream[] = INCBIN_U16("graphics/balls/jetstream.gbapal");
+const u32 gBallGfx_Fable[] = INCBIN_U32("graphics/balls/fable.4bpp.smol");
+const u16 gBallPal_Fable[] = INCBIN_U16("graphics/balls/fable.gbapal");
+const u32 gBallGfx_Paradox[] = INCBIN_U32("graphics/balls/paradox.4bpp.smol");
+const u16 gBallPal_Paradox[] = INCBIN_U16("graphics/balls/paradox.gbapal");
 // End siliconNewBalls
 const u32 gOpenPokeballGfx[] = INCBIN_U32("graphics/balls/open.4bpp.smol");

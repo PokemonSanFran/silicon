@@ -34,12 +34,12 @@ enum PokeBall
 // Start siliconNewBalls
     BALL_VITALITY,
     BALL_PSYCHE,
-    BALL_NEWC,
-    BALL_NEWD,
-    BALL_NEWE,
-    BALL_NEWF,
-    BALL_NEWG,
-    BALL_NEWH,
+    BALL_MINERAL,
+  BALL_ELECTRO,
+  BALL_BOG,
+  BALL_JETSTREAM,
+  BALL_FABLE,
+  BALL_PARADOX,
 // End siliconNewBalls
     POKEBALL_COUNT
 };

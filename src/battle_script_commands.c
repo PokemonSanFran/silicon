@@ -10753,27 +10753,27 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_PSYCHIC, TYPE_DARK))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWC:
+    case BALL_MINERAL:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_ROCK, TYPE_GRASS))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWD:
+    case BALL_ELECTRO:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_STEEL, TYPE_ELECTRIC))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWE:
+    case BALL_BOG:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GROUND, TYPE_POISON))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWF:
+    case BALL_JETSTREAM:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FLYING, TYPE_ICE))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWG:
+    case BALL_FABLE:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FAIRY, TYPE_DRAGON))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWH:
+    case BALL_PARADOX:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_GHOST, TYPE_NORMAL))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;

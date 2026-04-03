@@ -617,12 +617,12 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
 // Start siliconNewBalls
     {gObjectEventPal_VitalityBall,               OBJ_EVENT_PAL_TAG_BALL_VITALITY},
     {gObjectEventPal_PsycheBall,               OBJ_EVENT_PAL_TAG_BALL_PSYCHE},
-    {gObjectEventPal_NewCBall,               OBJ_EVENT_PAL_TAG_BALL_NEWC},
-    {gObjectEventPal_NewDBall,               OBJ_EVENT_PAL_TAG_BALL_NEWD},
-    {gObjectEventPal_NewEBall,               OBJ_EVENT_PAL_TAG_BALL_NEWE},
-    {gObjectEventPal_NewFBall,               OBJ_EVENT_PAL_TAG_BALL_NEWF},
-    {gObjectEventPal_NewGBall,               OBJ_EVENT_PAL_TAG_BALL_NEWG},
-    {gObjectEventPal_NewHBall,               OBJ_EVENT_PAL_TAG_BALL_NEWH},
+    {gObjectEventPal_MineralBall,               OBJ_EVENT_PAL_TAG_BALL_MINERAL},
+    {gObjectEventPal_ElectroBall,               OBJ_EVENT_PAL_TAG_BALL_ELECTRO},
+    {gObjectEventPal_BogBall,               OBJ_EVENT_PAL_TAG_BALL_BOG},
+    {gObjectEventPal_JetstreamBall,               OBJ_EVENT_PAL_TAG_BALL_JETSTREAM},
+    {gObjectEventPal_FableBall,               OBJ_EVENT_PAL_TAG_BALL_FABLE},
+    {gObjectEventPal_ParadoxBall,               OBJ_EVENT_PAL_TAG_BALL_PARADOX},
 // End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
     {gObjectEventPal_Substitute,            OBJ_EVENT_PAL_TAG_SUBSTITUTE},

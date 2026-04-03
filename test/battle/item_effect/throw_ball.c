@@ -5,12 +5,12 @@
 SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations")
 {
     u16 ball = 0;
-    PARAMETRIZE { ball = BALL_NEWH;}
-    PARAMETRIZE { ball = BALL_NEWG;}
-    PARAMETRIZE { ball = BALL_NEWF;}
-    PARAMETRIZE { ball = BALL_NEWE;}
-    PARAMETRIZE { ball = BALL_NEWD;}
-    PARAMETRIZE { ball = BALL_NEWC;}
+    PARAMETRIZE { ball = BALL_PARADOX;}
+    PARAMETRIZE { ball = BALL_FABLE;}
+    PARAMETRIZE { ball = BALL_JETSTREAM;}
+    PARAMETRIZE { ball = BALL_BOG;}
+    PARAMETRIZE { ball = BALL_ELECTRO;}
+    PARAMETRIZE { ball = BALL_MINERAL;}
     PARAMETRIZE { ball = BALL_PSYCHE;}
     PARAMETRIZE { ball = BALL_VITALITY;}
     PARAMETRIZE { ball = BALL_CHERISH; }
@@ -56,12 +56,12 @@ SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations")
 DOUBLE_BATTLE_TEST("Ball Animations: Show all Doubles Ball animations")
 {
     u16 ball = 0;
-    PARAMETRIZE { ball = BALL_NEWH;}
-    PARAMETRIZE { ball = BALL_NEWG;}
-    PARAMETRIZE { ball = BALL_NEWF;}
-    PARAMETRIZE { ball = BALL_NEWE;}
-    PARAMETRIZE { ball = BALL_NEWD;}
-    PARAMETRIZE { ball = BALL_NEWC;}
+    PARAMETRIZE { ball = BALL_PARADOX;}
+    PARAMETRIZE { ball = BALL_FABLE;}
+    PARAMETRIZE { ball = BALL_JETSTREAM;}
+    PARAMETRIZE { ball = BALL_BOG;}
+    PARAMETRIZE { ball = BALL_ELECTRO;}
+    PARAMETRIZE { ball = BALL_MINERAL;}
     PARAMETRIZE { ball = BALL_PSYCHE;}
     PARAMETRIZE { ball = BALL_VITALITY;}
     PARAMETRIZE { ball = BALL_CHERISH; }
@@ -138,12 +138,12 @@ WILD_BATTLE_TEST("Ball Animations: Show all Ball catch animations")
     PARAMETRIZE { throw = ITEM_CHERISH_BALL;}
     PARAMETRIZE { throw = ITEM_VITALITY_BALL;}
     PARAMETRIZE { throw = ITEM_PSYCHE_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWC_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWD_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWE_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWF_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWG_BALL;}
-    PARAMETRIZE { throw = ITEM_NEWH_BALL;}
+    PARAMETRIZE { ball = BALL_MINERAL;}
+    PARAMETRIZE { ball = BALL_ELECTRO;}
+    PARAMETRIZE { ball = BALL_BOG;}
+    PARAMETRIZE { ball = BALL_JETSTREAM;}
+    PARAMETRIZE { ball = BALL_FABLE;}
+    PARAMETRIZE { ball = BALL_PARADOX;}
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
