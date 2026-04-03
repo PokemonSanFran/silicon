@@ -64,10 +64,10 @@ extern const u16 gBallPal_Beast[];
 extern const u32 gBallGfx_Cherish[];
 extern const u16 gBallPal_Cherish[];
 // Start siliconNewBalls
-extern const u32 gBallGfx_NewA[];
-extern const u16 gBallPal_NewA[];
-extern const u32 gBallGfx_NewB[];
-extern const u16 gBallPal_NewB[];
+extern const u32 gBallGfx_Vitality[];
+extern const u16 gBallPal_Vitality[];
+extern const u32 gBallGfx_Psyche[];
+extern const u16 gBallPal_Psyche[];
 extern const u32 gBallGfx_NewC[];
 extern const u16 gBallPal_NewC[];
 extern const u32 gBallGfx_NewD[];

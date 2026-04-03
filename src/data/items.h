@@ -192,7 +192,7 @@ const struct ItemInfo gItemsInfo[] =
 
     // Poké Balls
     // Start siliconNewBalls
-    [ITEM_NEWA_BALL] =
+    [ITEM_VITALITY_BALL] =
     {
         .name = ITEM_NAME("Vitality Ball"),
         .price = 1000,
@@ -203,11 +203,11 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_POKE_BALLS,
         .type = ITEM_USE_BAG_MENU,
         .battleUsage = EFFECT_ITEM_THROW_BALL,
-        .secondaryId = BALL_NEWA,
+        .secondaryId = BALL_VITALITY,
         .iconPic = gItemIcon_NetBall,
         .iconPalette = gItemIconPalette_NetBall,
     },
-    [ITEM_NEWB_BALL] =
+    [ITEM_PSYCHE_BALL] =
     {
         .name = ITEM_NAME("Psyche Ball"),
         .price = 1000,
@@ -218,7 +218,7 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_POKE_BALLS,
         .type = ITEM_USE_BAG_MENU,
         .battleUsage = EFFECT_ITEM_THROW_BALL,
-        .secondaryId = BALL_NEWB,
+        .secondaryId = BALL_PSYCHE,
         .iconPic = gItemIcon_NetBall,
         .iconPalette = gItemIconPalette_NetBall,
     },

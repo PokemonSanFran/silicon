@@ -1212,11 +1212,11 @@ static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
 };
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-static const struct SpriteFrameImage sPicTable_Ball_NEWA[] = {
-        POKEBALL_PIC_FRAMES(NewA),
+static const struct SpriteFrameImage sPicTable_Ball_VITALITY[] = {
+        POKEBALL_PIC_FRAMES(Vitality),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWB[] = {
-        POKEBALL_PIC_FRAMES(NewB),
+static const struct SpriteFrameImage sPicTable_Ball_PSYCHE[] = {
+        POKEBALL_PIC_FRAMES(Psyche),
 };
 static const struct SpriteFrameImage sPicTable_Ball_NEWC[] = {
         POKEBALL_PIC_FRAMES(NewC),

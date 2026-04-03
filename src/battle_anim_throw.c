@@ -472,15 +472,15 @@ static const struct PokeBallParticles sBallParticles[POKEBALL_COUNT] =
         .particleAnimationFunc = MasterBallOpenParticleAnimation,
     },
 
-    [BALL_NEWA] = 
+    [BALL_VITALITY] = 
     {
-        POKE_BALL_ANIMATION(TAG_PARTICLES_NEWA_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
-        .openFadeColor = RGB(25, 4, 3),
-        .animNums = 0,
-        .particleAnimationFunc = MasterBallOpenParticleAnimation,
+        POKE_BALL_ANIMATION(TAG_PARTICLES_NEWA_BALL, gBattleAnimSpriteGfx_Particles, gBattleAnimSpritePal_CircleImpact),
+        .openFadeColor = RGB(31, 17, 10),
+        .animNums = 2,
+        .particleAnimationFunc = DiveBallOpenParticleAnimation,
     },
 
-    [BALL_NEWB] = 
+    [BALL_PSYCHE] = 
     {
         POKE_BALL_ANIMATION(TAG_PARTICLES_NEWB_BALL, gBattleAnimSpriteGfx_Particles2, gBattleAnimSpritePal_Particles2),
         .openFadeColor = RGB(25, 4, 3),

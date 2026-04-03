@@ -615,8 +615,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_StrangeBall,           OBJ_EVENT_PAL_TAG_BALL_STRANGE},
     #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-    {gObjectEventPal_NewABall,               OBJ_EVENT_PAL_TAG_BALL_NEWA},
-    {gObjectEventPal_NewBBall,               OBJ_EVENT_PAL_TAG_BALL_NEWB},
+    {gObjectEventPal_VitalityBall,               OBJ_EVENT_PAL_TAG_BALL_VITALITY},
+    {gObjectEventPal_PsycheBall,               OBJ_EVENT_PAL_TAG_BALL_PSYCHE},
     {gObjectEventPal_NewCBall,               OBJ_EVENT_PAL_TAG_BALL_NEWC},
     {gObjectEventPal_NewDBall,               OBJ_EVENT_PAL_TAG_BALL_NEWD},
     {gObjectEventPal_NewEBall,               OBJ_EVENT_PAL_TAG_BALL_NEWE},

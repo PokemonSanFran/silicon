@@ -83,11 +83,11 @@ const u32 gBallGfx_Cherish[] = INCBIN_U32("graphics/balls/cherish.4bpp.smol");
 const u16 gBallPal_Cherish[] = INCBIN_U16("graphics/balls/cherish.gbapal");
 
 // Start siliconNewBalls
-const u32 gBallGfx_NewA[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewA[] = INCBIN_U16("graphics/balls/net.gbapal");
+const u32 gBallGfx_Vitality[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
+const u16 gBallPal_Vitality[] = INCBIN_U16("graphics/balls/net.gbapal");
 
-const u32 gBallGfx_NewB[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
-const u16 gBallPal_NewB[] = INCBIN_U16("graphics/balls/net.gbapal");
+const u32 gBallGfx_Psyche[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
+const u16 gBallPal_Psyche[] = INCBIN_U16("graphics/balls/net.gbapal");
 
 const u32 gBallGfx_NewC[] = INCBIN_U32("graphics/balls/net.4bpp.smol");
 const u16 gBallPal_NewC[] = INCBIN_U16("graphics/balls/net.gbapal");

@@ -32,8 +32,8 @@ enum PokeBall
     BALL_BEAST = 26,
     BALL_CHERISH = 27,
 // Start siliconNewBalls
-    BALL_NEWA,
-    BALL_NEWB,
+    BALL_VITALITY,
+    BALL_PSYCHE,
     BALL_NEWC,
     BALL_NEWD,
     BALL_NEWE,

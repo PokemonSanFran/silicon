@@ -10745,11 +10745,11 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
     // Start siliconNewBalls
-    case BALL_NEWA:
+    case BALL_VITALITY:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_FIGHTING, TYPE_FIRE))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;
-    case BALL_NEWB:
+    case BALL_PSYCHE:
         if (IS_BATTLER_ANY_TYPE(wildMonBattler, TYPE_PSYCHIC, TYPE_DARK))
             ball->multiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
         break;

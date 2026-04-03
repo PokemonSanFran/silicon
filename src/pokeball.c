@@ -78,8 +78,8 @@ static u16 GetBattlerPokeballItemId(enum BattlerId battler);
 #define GFX_TAG_BEAST_BALL   55026
 #define GFX_TAG_CHERISH_BALL 55027
 // Start siliconNewBalls
-#define GFX_TAG_NEWA_BALL GFX_TAG_NET_BALL
-#define GFX_TAG_NEWB_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_VITALITY_BALL GFX_TAG_NET_BALL
+#define GFX_TAG_PSYCHE_BALL GFX_TAG_NET_BALL
 #define GFX_TAG_NEWC_BALL GFX_TAG_NET_BALL
 #define GFX_TAG_NEWD_BALL GFX_TAG_NET_BALL
 #define GFX_TAG_NEWE_BALL GFX_TAG_NET_BALL
@@ -390,51 +390,51 @@ const struct PokeBallSprite gPokeBalls[POKEBALL_COUNT] =
         .itemId = ITEM_CHERISH_BALL,
     },
 
-    [BALL_NEWA] =
+    [BALL_VITALITY] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
-        .itemId = ITEM_NEWA_BALL,
+        POKE_BALL_SPRITE(GFX_TAG_VITALITY_BALL, gBallGfx_Vitality, gBallPal_Vitality),
+        .itemId = ITEM_VITALITY_BALL,
     },
 
-    [BALL_NEWB] =
+    [BALL_PSYCHE] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
-        .itemId = ITEM_NEWB_BALL,
+        POKE_BALL_SPRITE(GFX_TAG_PSYCHE_BALL, gBallGfx_Psyche, gBallPal_Psyche),
+        .itemId = ITEM_PSYCHE_BALL,
     },
 
     [BALL_NEWC] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWC_BALL, gBallGfx_NewC, gBallPal_NewC),
         .itemId = ITEM_NEWC_BALL,
     },
 
     [BALL_NEWD] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWD_BALL, gBallGfx_NewD, gBallPal_NewD),
         .itemId = ITEM_NEWD_BALL,
     },
 
     [BALL_NEWE] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWE_BALL, gBallGfx_NewE, gBallPal_NewE),
         .itemId = ITEM_NEWE_BALL,
     },
 
     [BALL_NEWF] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWF_BALL, gBallGfx_NewF, gBallPal_NewF),
         .itemId = ITEM_NEWF_BALL,
     },
 
     [BALL_NEWG] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWG_BALL, gBallGfx_NewG, gBallPal_NewG),
         .itemId = ITEM_NEWG_BALL,
     },
 
     [BALL_NEWH] =
     {
-        POKE_BALL_SPRITE(GFX_TAG_CHERISH_BALL, gBallGfx_Cherish, gBallPal_Cherish),
+        POKE_BALL_SPRITE(GFX_TAG_NEWH_BALL, gBallGfx_NewH, gBallPal_NewH),
         .itemId = ITEM_NEWH_BALL,
     },
 };
@@ -1469,7 +1469,7 @@ void LoadBallGfx(u8 ballId)
     case BALL_NET ... BALL_NEST:
     case BALL_REPEAT:
     case BALL_SAFARI:
-    case BALL_NEWA ... BALL_NEWH: // siliconNewBalls
+    case BALL_VITALITY ... BALL_NEWH: // siliconNewBalls
         var = GetSpriteTileStartByTag(gPokeBalls[ballId].pic.tag);
         DecompressDataWithHeaderVram(gOpenPokeballGfx, (void *)(OBJ_VRAM0 + 0x100 + var * 32));
         break;

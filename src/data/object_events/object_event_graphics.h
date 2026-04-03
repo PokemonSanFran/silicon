@@ -572,8 +572,8 @@ const u32 gObjectEventPic_BeastBall[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_StrangeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_strange.4bpp");
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-const u32 gObjectEventPic_NewABall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewBBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
+const u32 gObjectEventPic_VitalityBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
+const u32 gObjectEventPic_PsycheBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
 const u32 gObjectEventPic_NewCBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
 const u32 gObjectEventPic_NewDBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
 const u32 gObjectEventPic_NewEBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
@@ -621,8 +621,8 @@ const u16 gObjectEventPal_BeastBall[] = INCBIN_U16("graphics/object_events/pics/
 const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_strange.gbapal");
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-const u16 gObjectEventPal_NewABall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewBBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
+const u16 gObjectEventPal_VitalityBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
+const u16 gObjectEventPal_PsycheBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
 const u16 gObjectEventPal_NewCBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
 const u16 gObjectEventPal_NewDBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
 const u16 gObjectEventPal_NewEBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
