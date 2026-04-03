@@ -495,106 +495,104 @@
     "TutorMoves": []
   },
   "NIDORAN_F": {
-    "LevelMoves": [
-      {
-        "Level": 1,
-        "Move": "MOVE_GROWL"
-      },
-      {
-        "Level": 1,
-        "Move": "MOVE_POISON_STING"
-      },
-      {
-        "Level": 5,
-        "Move": "MOVE_SCRATCH"
-      },
-      {
-        "Level": 10,
-        "Move": "MOVE_TAIL_WHIP"
-      },
-      {
-        "Level": 15,
-        "Move": "MOVE_FURY_SWIPES"
-      },
-      {
-        "Level": 20,
-        "Move": "MOVE_TOXIC_SPIKES"
-      },
-      {
-        "Level": 25,
-        "Move": "MOVE_DOUBLE_KICK"
-      },
-      {
-        "Level": 30,
-        "Move": "MOVE_BITE"
-      },
-      {
-        "Level": 35,
-        "Move": "MOVE_HELPING_HAND"
-      },
-      {
-        "Level": 40,
-        "Move": "MOVE_TOXIC"
-      },
-      {
-        "Level": 45,
-        "Move": "MOVE_FLATTER"
-      },
-      {
-        "Level": 50,
-        "Move": "MOVE_CRUNCH"
-      },
-      {
-        "Level": 55,
-        "Move": "MOVE_EARTH_POWER"
-      }
-    ],
-    "PreEvoMoves": [],
-    "TMMoves": [
-      "MOVE_DIG",
-      "MOVE_REST",
-      "MOVE_THIEF",
-      "MOVE_SNORE",
-      "MOVE_PROTECT",
-      "MOVE_CHARM",
-      "MOVE_ATTRACT",
-      "MOVE_RAIN_DANCE",
-      "MOVE_SUNNY_DAY",
-      "MOVE_BEAT_UP",
-      "MOVE_FACADE",
-      "MOVE_HELPING_HAND",
-      "MOVE_SHADOW_CLAW",
-      "MOVE_VENOSHOCK",
-      "MOVE_ROUND",
-      "MOVE_BODY_SLAM",
-      "MOVE_ICE_BEAM",
-      "MOVE_BLIZZARD",
-      "MOVE_THUNDERBOLT",
-      "MOVE_THUNDER",
-      "MOVE_FOCUS_ENERGY",
-      "MOVE_SUBSTITUTE",
-      "MOVE_SLUDGE_BOMB",
-      "MOVE_ENDURE",
-      "MOVE_SLEEP_TALK",
-      "MOVE_IRON_TAIL",
-      "MOVE_CRUNCH",
-      "MOVE_TOXIC_SPIKES",
-      "MOVE_POISON_JAB",
-      "MOVE_EARTH_POWER",
-      "MOVE_TRAILBLAZE",
-      "MOVE_SUPERCELL_SLAM",
-      "MOVE_VENOM_DRENCH"
-    ],
-    "EggMoves": [
-      "MOVE_COUNTER",
-      "MOVE_DISABLE",
-      "MOVE_POISON_FANG",
-      "MOVE_POISON_TAIL",
-      "MOVE_SKULL_BASH",
-      "MOVE_SUPERSONIC",
-      "MOVE_TAKE_DOWN"
-    ],
-    "TutorMoves": []
+      "LevelMoves": [
+          {
+              "Level": 1,
+              "Move": "MOVE_GROWL"
+          },
+          {
+              "Level": 1,
+              "Move": "MOVE_POISON_STING"
+          },
+          {
+              "Level": 5,
+              "Move": "MOVE_SCRATCH"
+          },
+          {
+              "Level": 10,
+              "Move": "MOVE_TAIL_WHIP"
+          },
+          {
+              "Level": 15,
+              "Move": "MOVE_FURY_SWIPES"
+          },
+          {
+              "Level": 20,
+              "Move": "MOVE_TOXIC_SPIKES"
+          },
+          {
+              "Level": 25,
+              "Move": "MOVE_DOUBLE_KICK"
+          },
+          {
+              "Level": 30,
+              "Move": "MOVE_BITE"
+          },
+          {
+              "Level": 35,
+              "Move": "MOVE_HELPING_HAND"
+          },
+          {
+              "Level": 40,
+              "Move": "MOVE_TOXIC"
+          },
+          {
+              "Level": 45,
+              "Move": "MOVE_FLATTER"
+          },
+          {
+              "Level": 50,
+              "Move": "MOVE_CRUNCH"
+          },
+          {
+              "Level": 55,
+              "Move": "MOVE_EARTH_POWER"
+          }
+      ],
+      "PreEvoMoves": [],
+      "TMMoves": [
+          "MOVE_DIG",
+          "MOVE_REST",
+          "MOVE_THIEF",
+          "MOVE_SNORE",
+          "MOVE_PROTECT",
+          "MOVE_CHARM",
+          "MOVE_ATTRACT",
+          "MOVE_RAIN_DANCE",
+          "MOVE_SUNNY_DAY",
+          "MOVE_BEAT_UP",
+          "MOVE_FACADE",
+          "MOVE_HELPING_HAND",
+          "MOVE_SHADOW_CLAW",
+          "MOVE_VENOSHOCK",
+          "MOVE_ROUND",
+          "MOVE_BODY_SLAM",
+          "MOVE_ICE_BEAM",
+          "MOVE_BLIZZARD",
+          "MOVE_THUNDERBOLT",
+          "MOVE_THUNDER",
+          "MOVE_FOCUS_ENERGY",
+          "MOVE_SUBSTITUTE",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_ENDURE",
+          "MOVE_SLEEP_TALK",
+          "MOVE_IRON_TAIL",
+          "MOVE_CRUNCH",
+          "MOVE_TOXIC_SPIKES",
+          "MOVE_POISON_JAB",
+          "MOVE_EARTH_POWER",
+          "MOVE_TRAILBLAZE",
+          "MOVE_SUPERCELL_SLAM"
+      ],
+      "EggMoves": [
+          "MOVE_COUNTER",
+          "MOVE_DISABLE",
+          "MOVE_POISON_FANG",
+          "MOVE_POISON_TAIL",
+          "MOVE_SUPERSONIC",
+          "MOVE_TAKE_DOWN"
+      ],
+      "TutorMoves": []
   },
   "NIDORINA": {
     "LevelMoves": [
