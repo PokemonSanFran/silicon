@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "daycare.h"
 #include "ui_pokedex.h"
 //#include "constants/ui_resido_species.h"
 #include "test/battle.h"
@@ -63,9 +64,7 @@ TEST("Opposing Trainers do not have Game Move Errors")
             u32 partySize = trainer->partySize;
 
             if (partySize == 0)
-            {
                 continue;
-            }
 
             const struct TrainerMon *party = trainer->party;
 
@@ -73,31 +72,26 @@ TEST("Opposing Trainers do not have Game Move Errors")
             {
                 u32 species = party[monIndex].species;
 
-                if (species == SPECIES_NONE || species >= NUM_SPECIES)
-                {
+                if (!IsSpeciesEnabled(species))
                     continue;
-                }
 
                 for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
                 {
-                    bool32 retVal = FALSE;
-                    u32 wrongLevel = 0;
+                    bool32 canLearn = FALSE;
+                    u32 neededLevel = 0;
                     enum Move move = party[monIndex].moves[moveIndex];
 
                     if (move == MOVE_NONE)
-                    {
                         continue;
-                    }
-
-                    if (move == MOVE_OVERHEAT && species == SPECIES_ROTOM_HEAT)
+                    if ((move == MOVE_OVERHEAT) && (species == SPECIES_ROTOM_HEAT))
                         continue;
-                    if (move == MOVE_AIR_SLASH && species == SPECIES_ROTOM_FAN)
+                    if ((move == MOVE_AIR_SLASH) && (species == SPECIES_ROTOM_FAN))
                         continue;
-                    if (move == MOVE_BLIZZARD && species == SPECIES_ROTOM_FROST)
+                    if ((move == MOVE_BLIZZARD) && (species == SPECIES_ROTOM_FROST))
                         continue;
-                    if (move == MOVE_LEAF_STORM && species == SPECIES_ROTOM_MOW)
+                    if ((move == MOVE_LEAF_STORM) && (species == SPECIES_ROTOM_MOW))
                         continue;
-                    if (move == MOVE_HYDRO_PUMP && species == SPECIES_ROTOM_WASH)
+                    if ((move == MOVE_HYDRO_PUMP) && (species == SPECIES_ROTOM_WASH))
                         continue;
 
                     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
@@ -105,16 +99,16 @@ TEST("Opposing Trainers do not have Game Move Errors")
                     {
                         if (learnset[j].move == move)
                         {
-                            if (learnset[j].level <= party[monIndex].lvl)
+                            if ((learnset[j].level <= party[monIndex].lvl) || (!IsMonInUndiscoveredOrGenderless(species)))
                             {
-                                retVal = TRUE;
+                                canLearn = TRUE;
                                 break;
                             }
-                            wrongLevel = learnset[j].level;
+                            neededLevel = learnset[j].level;
                         }
                     }
 
-                    if (retVal)
+                    if (canLearn)
                         continue;
 
                     const u16 *teachables = GetSpeciesTeachableLearnset(species);
@@ -122,12 +116,12 @@ TEST("Opposing Trainers do not have Game Move Errors")
                     {
                         if (teachables[j] == move)
                         {
-                            retVal = TRUE;
+                            canLearn = TRUE;
                             break;
                         }
                     }
 
-                    if (retVal)
+                    if (canLearn)
                         continue;
 
                     const u16 *eggMoves = GetSpeciesEggMoves(species);
@@ -135,16 +129,16 @@ TEST("Opposing Trainers do not have Game Move Errors")
                     {
                         if (eggMoves[j] == move)
                         {
-                            retVal = TRUE;
+                            canLearn = TRUE;
                             break;
                         }
                     }
 
-                    if (retVal)
+                    if (canLearn)
                         continue;
 
                     u16 currentSpecies = species;
-                    for (u32 evoDepth = 0; evoDepth < 5 && !retVal; evoDepth++)
+                    for (u32 evoDepth = 0; evoDepth < 5 && !canLearn; evoDepth++)
                     {
                         bool32 foundPrevo = FALSE;
                         u16 prevoSpecies = SPECIES_NONE;
@@ -170,32 +164,32 @@ TEST("Opposing Trainers do not have Game Move Errors")
                                     {
                                         if (prevLearnset[j].move == move)
                                         {
-                                            retVal = TRUE;
+                                            canLearn = TRUE;
                                             break;
                                         }
                                     }
 
-                                    if (!retVal)
+                                    if (!canLearn)
                                     {
                                         const u16 *prevTeachables = GetSpeciesTeachableLearnset(prevoSpecies);
                                         for (u32 j = 0; prevTeachables[j] != MOVE_UNAVAILABLE; j++)
                                         {
                                             if (prevTeachables[j] == move)
                                             {
-                                                retVal = TRUE;
+                                                canLearn = TRUE;
                                                 break;
                                             }
                                         }
                                     }
 
-                                    if (!retVal)
+                                    if (!canLearn)
                                     {
                                         const u16 *prevEggMoves = GetSpeciesEggMoves(prevoSpecies);
                                         for (u32 j = 0; prevEggMoves[j] != MOVE_UNAVAILABLE; j++)
                                         {
                                             if (prevEggMoves[j] == move)
                                             {
-                                                retVal = TRUE;
+                                                canLearn = TRUE;
                                                 break;
                                             }
                                         }
@@ -209,7 +203,7 @@ TEST("Opposing Trainers do not have Game Move Errors")
                                 break;
                         }
 
-                        if (retVal)
+                        if (canLearn)
                             break;
 
                         if (!foundPrevo)
@@ -218,12 +212,12 @@ TEST("Opposing Trainers do not have Game Move Errors")
                         currentSpecies = prevoSpecies;
                     }
 
-                    if (retVal)
+                    if (canLearn)
                         continue;
 
-                    if (wrongLevel)
+                    if (neededLevel)
                         Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %S's %S (#%d) has invalid move %S (Lvl %d < Req %d).",
-                                gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species), monIndex, GetMoveName(move), party[monIndex].lvl, wrongLevel);
+                                gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species), monIndex, GetMoveName(move), party[monIndex].lvl, neededLevel);
                     else
                         Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %S's %S (#%d) has invalid move %S.",
                                 gTestRunnerState.test->filename, __LINE__, GetTrainerNameFromId(trainerId), GetSpeciesName(species), monIndex, GetMoveName(move));
