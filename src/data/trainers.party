@@ -258,7 +258,7 @@ Shiny: No
 Happiness: 1
 EVs: 100 HP / 100 Atk
 IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
-- Fishious Rend
+- Waterfall
 - Dragon Breath
 - Bite
 - Rock Blast 
@@ -6329,6 +6329,16 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Battle Type: Single
 Map Section: Route4
 Type: Regular
+
+Ninetales
+Ability: Flash Fire
+Level: 35
+EVs: 60 HP / 72 SpA  
+Bold Nature  
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe  
+- Extrasensory  
+- Scorching Sands  
+- Hex  
 
 Klawf @ Air Balloon  
 Ability: Anger Shell  
