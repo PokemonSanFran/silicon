@@ -4,6 +4,7 @@ static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_re
 // different by 1 (one) pixel truncated
 static const u8 sMoveReminder_CategoriesBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
 static const u8 sMoveReminder_FilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_indicator.4bpp");
+static const u8 sMoveReminder_ConfirmationBoxBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/confirmation_box.4bpp");
 
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
 {

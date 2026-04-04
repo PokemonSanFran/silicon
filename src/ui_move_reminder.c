@@ -81,7 +81,6 @@ static void MovePool_PopulateList(void);
 static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
 static void MovePool_ProcessMachineLearnset(const u16 *, u32 *);
 static void MovePool_ProcessEggLearnset(const u16 *, u32 *);
-static UNUSED bool32 MovePool_MonHasMove(u32);
 static u32 MovePool_GetIdxFromMove(u32);
 static void MovePool_AddMoveToIdx(u32, enum MovePoolMethods, u32 *);
 static void MovePool_UpdateMethodInIdx(u32, enum MovePoolMethods);
@@ -104,9 +103,16 @@ static void MovePoolSort_Default(u32 *);
 
 static void MiscUtil_FreeResources(void);
 static struct MoveReminderMon *MiscUtil_GetMon(void);
+static struct BoxPokemon *MiscUtil_GetBoxMon(void);
+static void MiscUtil_SetBoxMonMoveToSlot(struct BoxPokemon *, u32, u32);
+static void MiscUtil_RemoveBoxMonPPBonuses(struct BoxPokemon *, u32);
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 
 static void MainPage_HandleInput(u8);
+static void MainPage_TryTeachMonMove(u8);
+static void MainPage_WaitCloseMessage(u8);
+static void MainPage_ConfirmShouldOverwriteMove(u8);
+static void MainPage_UpdateConfirmationBox(u32);
 static void MainPage_NavigatePage(s32, u32);
 static void MainPage_UpdateListIdx(s32);
 static bool32 MainPage_IsInputAdditive(s32);
@@ -121,12 +127,12 @@ static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
 static void MainPage_PrintMonStats(void);
 static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
+static void MainPage_PrintTextBox(void);
 static void MainPage_PrintMoveSummary(void);
 static void MainPage_PrintMovePP(u32, u32);
 static void MainPage_PrintMoveCategory(u32);
 static void MainPage_PrintMovePower(u32);
 static void MainPage_PrintMoveAccuracy(u32);
-static void MainPage_PrintMoveDescription(u32);
 
 static void FilterPage_HandleInput(u8);
 static void FilterPage_UpdateFrontEnd(void);
@@ -409,10 +415,10 @@ static void MoveBar_Update(void)
     MovePool_CopySortTitle();
 
     u32 totalWidth = TILE_TO_PIXELS(10) + 2;
-    u32 fontId = GetFontIdToFit(gStringVar4, FONT_OUTLINED, 0, totalWidth);
-    u32 offsetX = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, totalWidth, -1);
+    u32 fontId = GetFontIdToFit(gStringVar1, FONT_OUTLINED, 0, totalWidth);
+    u32 offsetX = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, totalWidth, -1);
 
-    MiscUtil_AddTextPrinter(win, gStringVar4, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
+    MiscUtil_AddTextPrinter(win, gStringVar1, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
 
     enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
 
@@ -519,6 +525,12 @@ static void PageInterface_PrintHelpBar(void)
 
     if (str == NULL)
         str = gText_EmptyString2;
+
+    if (PageInterface_GetValue() == PAGE_INTERFACE_MAIN
+     && sMoveReminderDataPtr->pageData.main.printingDialogue)
+    {
+        str = gText_CancelOverwrite;
+    }
 
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
         HELPBAR_FOOTER_X, HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
@@ -635,18 +647,6 @@ static void MovePool_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
     }
 }
 
-// will be used to check when trying to teach
-static UNUSED bool32 MovePool_MonHasMove(u32 move)
-{
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (MiscUtil_GetMon()->moves[i] == move)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
 static u32 MovePool_GetIdxFromMove(u32 move)
 {
     for (u32 idx = 0; MovePool_GetMoveFromIdx(idx) != MOVE_NONE; idx++)
@@ -746,7 +746,7 @@ static void MovePool_CopySortTitle(void)
 {
     enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
     const u8 *title = MovePool_GetSortTitle();
-    u8 *strbuf = gStringVar4;
+    u8 *strbuf = gStringVar1;
 
     if (sort == MOVE_POOL_SORT_DEFAULT)
     {
@@ -791,6 +791,29 @@ static struct MoveReminderMon *MiscUtil_GetMon(void)
     return &sMoveReminderDataPtr->mon;
 }
 
+static struct BoxPokemon *MiscUtil_GetBoxMon(void)
+{
+    if (sMoveReminderDataPtr->useBoxMon)
+        return sMoveReminderDataPtr->ptr.boxMon;
+    else
+        return &sMoveReminderDataPtr->ptr.mon->box;
+}
+
+static void MiscUtil_SetBoxMonMoveToSlot(struct BoxPokemon *boxMon, u32 move, u32 slot)
+{
+    SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
+    u32 pp = GetMovePP(move);
+    SetBoxMonData(boxMon, MON_DATA_PP1 + slot, &pp);
+}
+
+static void MiscUtil_RemoveBoxMonPPBonuses(struct BoxPokemon *boxMon, u32 slot)
+{
+    u32 ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, NULL);
+    ppBonuses &= gPPUpClearMask[slot];
+
+    SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
 {
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
@@ -832,9 +855,146 @@ static void MainPage_HandleInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_SELECT);
+        gTasks[taskId].func = MainPage_TryTeachMonMove;
         return;
     }
+}
+
+static void MainPage_TryTeachMonMove(u8 taskId)
+{
+    u32 move = MovePool_GetMoveFromIdx(MainPage_GetCurrListIdx());
+    struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
+
+    StringCopy_Nickname(gStringVar1, MiscUtil_GetMon()->nickname);
+    StringCopy(gStringVar2, GetMoveName(move));
+
+    u32 moveStatus = GiveMoveToBoxMon(boxMon, move);
+
+    switch (moveStatus)
+    {
+    case MON_ALREADY_KNOWS_MOVE:
+        PlaySE(SE_FAILURE);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} already knew {STR_VAR_2}!"));
+        break;
+    case MON_HAS_MAX_MOVES:
+        PlaySE(SE_SELECT);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} already know 4 moves, would you like to overwrite a move for {STR_VAR_2}?"));
+        break;
+    default:
+        PlaySE(SE_SUCCESS);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} learns {STR_VAR_2}!"));
+        break;
+    }
+
+    sMoveReminderDataPtr->pageData.main.printingDialogue = TRUE;
+    PageInterface_UpdateFrontEnd();
+
+    if (moveStatus == MON_HAS_MAX_MOVES)
+    {
+        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+        MainPage_UpdateConfirmationBox(0);
+        gTasks[taskId].func = MainPage_ConfirmShouldOverwriteMove;
+        return;
+    }
+
+    gTasks[taskId].tMainPage_Timer = 0;
+    gTasks[taskId].func = MainPage_WaitCloseMessage;
+}
+
+static void MainPage_WaitCloseMessage(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if ((JOY_NEW(A_BUTTON | B_BUTTON) && tMainPage_Timer >= 15) || tMainPage_Timer >= 80)
+    {
+        tMainPage_Timer = 0;
+        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+
+        PageInterface_UpdateFrontEnd();
+        gTasks[taskId].func = Task_MReminderInput_Main;
+
+        return;
+    }
+
+    tMainPage_Timer++;
+}
+
+static void MainPage_ConfirmShouldOverwriteMove(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        if (!tMainPage_ConfirmationValue)
+            tMainPage_ConfirmationValue++;
+        else
+            tMainPage_ConfirmationValue = 0;
+
+        PlaySE(SE_SELECT);
+        MainPage_UpdateConfirmationBox(tMainPage_ConfirmationValue);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_UP))
+    {
+        if (tMainPage_ConfirmationValue)
+            tMainPage_ConfirmationValue--;
+        else
+            tMainPage_ConfirmationValue = 1;
+
+        PlaySE(SE_SELECT);
+        MainPage_UpdateConfirmationBox(tMainPage_ConfirmationValue);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+
+        if (tMainPage_ConfirmationValue == CONFIRMATION_BOX_YES)
+        {
+            // TODO selectable move slot
+            struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
+            u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
+            u32 moveSlot = sMoveReminderDataPtr->moveSlot;
+
+            MiscUtil_SetBoxMonMoveToSlot(boxMon, move, moveSlot);
+            MiscUtil_RemoveBoxMonPPBonuses(boxMon, moveSlot);
+            InitSetup_MonData();
+        }
+
+        PageInterface_UpdateFrontEnd();
+        gTasks[taskId].func = Task_MReminderInput_Main;
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PageInterface_UpdateFrontEnd();
+        gTasks[taskId].func = Task_MReminderInput_Main;
+        return;
+    }
+}
+
+static void MainPage_UpdateConfirmationBox(u32 target)
+{
+    enum MoveReminderWindows win = MREMINDER_WINDOW_MAIN;
+
+    // yes top, no bottom
+    BlitBitmapRectToWindow(win, sMoveReminder_ConfirmationBoxBlit,
+        0, (target == CONFIRMATION_BOX_YES) * TILE_TO_PIXELS(2),
+        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2),
+        CONFIRMATION_BOX_X, CONFIRMATION_BOX_YES_Y,
+        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2));
+    BlitBitmapRectToWindow(win, sMoveReminder_ConfirmationBoxBlit,
+        0, (target == CONFIRMATION_BOX_NO) * TILE_TO_PIXELS(2),
+        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2),
+        CONFIRMATION_BOX_X, CONFIRMATION_BOX_NO_Y,
+        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2));
+
+    MiscUtil_AddTextPrinter(win, gText_YesNo, FONT_OUTLINED, CONFIRMATION_BOX_TEXT_X, CONFIRMATION_BOX_TEXT_Y, MREMINDER_TXTCLR_DEFAULT);
+    CopyWindowToVram(win, COPYWIN_GFX);
 }
 
 static void MainPage_NavigatePage(s32 delta, u32 count)
@@ -942,9 +1102,8 @@ static void MainPage_UpdateFrontEnd(void)
     MainPage_PrintMonGender();
     MainPage_PrintMonLevel();
     MainPage_PrintMonStats();
-
+    MainPage_PrintTextBox();
     MainPage_PrintMoveSummary();
-
     MoveBar_Update();
 }
 
@@ -972,8 +1131,8 @@ static void MainPage_PrintMonLevel(void)
     struct MoveReminderMon *mon = MiscUtil_GetMon();
 
     ConvertUIntToDecimalStringN(gStringVar1, mon->level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
+    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("{SHADOW 13}{LV}{SHADOW 1}{STR_VAR_1}"));
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar2, FONT_OUTLINED, 82, 0, MREMINDER_TXTCLR_DEFAULT);
 }
 
 static void MainPage_PrintMonStats(void)
@@ -1001,6 +1160,28 @@ static void MainPage_PrintMonIndividualStat(enum Stat stat, u32 x1, u32 y1, u32 
         FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
 }
 
+static void MainPage_PrintTextBox(void)
+{
+    u32 scrollPrompt = SHOW_SCROLL_PROMPT;
+
+    // has gStringVar4 been buffered by MainPage_TryTeachMonMove?
+    if (!sMoveReminderDataPtr->pageData.main.printingDialogue)
+    {
+        u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
+
+        StringCopy(gStringVar4, GetMoveDescription(move));
+        scrollPrompt = HIDE_SCROLL_PROMPT;
+    }
+
+    StripLineBreaks(gStringVar4);
+    BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, FONT_SMALL, scrollPrompt);
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        gStringVar4, FONT_SMALL,
+        PAGE_MAIN_MOVE_DETAILS_DESC_X, PAGE_MAIN_MOVE_DETAILS_DESC_Y,
+        MREMINDER_TXTCLR_TEXT_BOX);
+}
+
 static void MainPage_PrintMoveSummary(void)
 {
     u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
@@ -1009,7 +1190,6 @@ static void MainPage_PrintMoveSummary(void)
     MainPage_PrintMoveCategory(move);
     MainPage_PrintMovePower(move);
     MainPage_PrintMoveAccuracy(move);
-    MainPage_PrintMoveDescription(move);
 }
 
 static void MainPage_PrintMovePP(u32 move, u32 remainingPP)
@@ -1021,9 +1201,9 @@ static void MainPage_PrintMovePP(u32 move, u32 remainingPP)
 
     ConvertUIntToDecimalStringN(gStringVar1, remainingPP,   STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
     ConvertUIntToDecimalStringN(gStringVar2, pp,            STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("PP: {STR_VAR_1}/{STR_VAR_2}"));
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("PP: {STR_VAR_1}/{STR_VAR_2}"));
 
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL,
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar3, FONT_SMALL,
         PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
@@ -1050,9 +1230,9 @@ static void MainPage_PrintMovePower(u32 move)
     else
         StringCopy(gStringVar1, COMPOUND_STRING("---"));
 
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("PWR: {STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("PWR: {STR_VAR_1}"));
 
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar2, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
 static void MainPage_PrintMoveAccuracy(u32 move)
@@ -1064,22 +1244,9 @@ static void MainPage_PrintMoveAccuracy(u32 move)
     else
         StringCopy(gStringVar1, COMPOUND_STRING("---"));
 
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("ACC: {STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("ACC: {STR_VAR_1}"));
 
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar4, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
-}
-
-static void MainPage_PrintMoveDescription(u32 move)
-{
-    StringCopy(gStringVar4, GetMoveDescription(move));
-
-    StripLineBreaks(gStringVar4);
-    BreakStringAutomatic(gStringVar4, TILE_TO_PIXELS(28), 3, FONT_SMALL, HIDE_SCROLL_PROMPT);
-
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
-        gStringVar4, FONT_SMALL,
-        PAGE_MAIN_MOVE_DETAILS_DESC_X, PAGE_MAIN_MOVE_DETAILS_DESC_Y,
-        MREMINDER_TXTCLR_TEXT_BOX);
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar2, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
 static void FilterPage_HandleInput(u8 taskId)

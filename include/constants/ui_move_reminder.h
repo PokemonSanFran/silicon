@@ -94,7 +94,13 @@ enum MoveReminderBarSpriteIds
 };
 
 // SpriteCB_MoveBar
-#define sMoveBar_Idx            data[0]
+#define sMoveBar_Idx                    data[0]
+
+// MainPage_WaitCloseMessage
+#define tMainPage_Timer                 data[15]
+
+// MainPage_ConfirmShouldOverwriteMove
+#define tMainPage_ConfirmationValue     data[15]
 
 enum MoveReminderWindows
 {
@@ -148,6 +154,15 @@ enum MovePoolSorts
 #define MREMINDER_INPUT_PM_1    (1)
 #define MREMINDER_INPUT_PM_5    (4)
 
+#define CONFIRMATION_BOX_YES    (0)
+#define CONFIRMATION_BOX_NO     (1)
+
+#define CONFIRMATION_BOX_X      (TILE_TO_PIXELS(19) + 3)
+#define CONFIRMATION_BOX_TEXT_X (TILE_TO_PIXELS(20))
+#define CONFIRMATION_BOX_YES_Y  (TILE_TO_PIXELS(13) + 5)
+#define CONFIRMATION_BOX_NO_Y   (TILE_TO_PIXELS(15) + 5)
+#define CONFIRMATION_BOX_TEXT_Y (TILE_TO_PIXELS(13) + 4)
+
 typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*MovePoolSortFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
@@ -188,7 +203,8 @@ struct MoveReminderData
             u32 currIdx:10;     // 512
             u32 firstIdx:10;    //
             u32 gridIdx:3;      // MAX_MREMINDER_BAR_SPRITES
-            u32 pad:12;
+            u32 printingDialogue:1;
+            u32 pad:11;
         } main;
     } pageData;
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
