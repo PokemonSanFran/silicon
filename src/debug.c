@@ -4685,6 +4685,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ROUTE_1_5_7_NIGHT) \
     X(MUS_PINTILLION_ROUTE_14_16) \
     X(MUS_WAREHOUSE_RAVE) \
+    X(MUS_BAKER_COOK_STREET_VENDOR_BARISTA) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
