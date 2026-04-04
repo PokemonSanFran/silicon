@@ -8080,9 +8080,12 @@ static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
             ball = GetMonData(mon, MON_DATA_POKEBALL);
     }
 
+    DebugPrintf("ball %d",ball);
+
     if (ball != BALL_POKE && ball < POKEBALL_COUNT)
     {
         const struct ObjectEventGraphicsInfo *info = &gPokeballGraphics[ball];
+        DebugPrintf("tileTag is %d",info->tileTag);
         if (info->tileTag == TAG_NONE)
         {
             ObjectEventSetGraphics(objEvent, info);
