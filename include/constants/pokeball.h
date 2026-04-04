@@ -32,14 +32,14 @@ enum PokeBall
     BALL_BEAST = 26,
     BALL_CHERISH = 27,
 // Start siliconNewBalls
-    BALL_NEWA,
-    BALL_NEWB,
-    BALL_NEWC,
-    BALL_NEWD,
-    BALL_NEWE,
-    BALL_NEWF,
-    BALL_NEWG,
-    BALL_NEWH,
+    BALL_VITALITY,
+    BALL_PSYCHE,
+    BALL_MINERAL,
+    BALL_ELECTRO,
+    BALL_BOG,
+    BALL_JETSTREAM,
+    BALL_FABLE,
+    BALL_PARADOX,
 // End siliconNewBalls
     POKEBALL_COUNT
 };
