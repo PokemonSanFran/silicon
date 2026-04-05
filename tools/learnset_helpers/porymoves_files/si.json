@@ -51244,5 +51244,26 @@
     "TMMoves": [],
     "EggMoves": [],
     "TutorMoves": []
+  },
+  "MR_RIME": {
+    "LevelMoves": [],
+    "PreEvoMoves": [],
+    "TMMoves": [],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
+  "MR_MIME_GALAR": {
+    "LevelMoves": [],
+    "PreEvoMoves": [],
+    "TMMoves": [],
+    "EggMoves": [],
+    "TutorMoves": []
+  },
+  "SIRFETCHD": {
+    "LevelMoves": [],
+    "PreEvoMoves": [],
+    "TMMoves": [],
+    "EggMoves": [],
+    "TutorMoves": []
   }
 }
