@@ -1,10 +1,28 @@
 #include "global.h"
-#include "pokemon.h"
 #include "daycare.h"
+#include "pokemon.h"
 #include "ui_pokedex.h"
-//#include "constants/ui_resido_species.h"
+#include "constants/teaching_types.h"
 #include "test/battle.h"
 #include "gba/isagbprint.h"
+
+TEST("All Resido Mons have learnsets")
+{
+    for (u32 monIndex = 0; monIndex < NUM_SPECIES; monIndex++)
+    {
+        enum ResidoDexNumbers residoId = ConvertSpeciesIdToResidoDex(monIndex);
+        if (residoId == RESIDO_DEX_NONE || residoId == RESIDO_DEX_COUNT)
+            continue;
+
+        if (gSpeciesInfo[monIndex].teachingType == TM_ILLITERATE)
+            continue;
+
+        const u16 *teachables = GetSpeciesTeachableLearnset(monIndex);
+        if (teachables[0] == MOVE_UNAVAILABLE || teachables[0] == MOVE_NONE)
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %d | %s has no level up moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
+    }
+}
+
 
 TEST("Opposing Trainers have Pokemon in the Resido Dex")
 {
