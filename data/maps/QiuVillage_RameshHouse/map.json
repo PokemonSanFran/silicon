@@ -2,7 +2,7 @@
   "id": "MAP_QIU_VILLAGE_RAMESH_HOUSE",
   "name": "QiuVillage_RameshHouse",
   "layout": "LAYOUT_QIU_VILLAGE_RAMESH_HOUSE",
-  "music": "MUS_DEWFORD",
+  "music": "MUS_RAMESH_HOUSE",
   "region_map_section": "MAPSEC_QIU_VILLAGE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
