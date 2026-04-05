@@ -2,177 +2,184 @@
 #define GUARD_CONSTANTS_TMS_HMS_H
 
 #define FOREACH_TM(F) \
-    F(GLARE) \
-    F(HARDEN) \
     F(DOUBLE_TEAM) \
-    F(TAIL_WHIP) \
-    F(LEER) \
-    F(CONFIDE) \
-    F(SMOKESCREEN) \
-    F(WHIRLWIND) \
-    F(ROAR) \
-    F(RECOVER) \
-    F(FOCUS_ENERGY) \
-    F(SUPERSONIC) \
-    F(TEETER_DANCE) \
+    F(SHED_TAIL) \
+    F(SHELL_SMASH) \
+    F(REFLECT_TYPE) \
+    F(ENDURE) \
+    F(BATON_PASS) \
+    F(BELLY_DRUM) \
+    F(TEARFUL_LOOK) \
     F(SWORDS_DANCE) \
+    F(REVIVAL_BLESSING) \
+    F(COPYCAT) \
+    F(RECYCLE) \
+    F(HARDEN) \
+    F(ACUPRESSURE) \
+    F(FORESIGHT) \
+    F(FOLLOW_ME) \
+    F(SAFEGUARD) \
+    F(STUFF_CHEEKS) \
+    F(SLEEP_TALK) \
+    F(ROAR) \
+    F(MEAN_LOOK) \
+    F(DEFENSE_CURL) \
+    F(METRONOME) \
+    F(WORK_UP) \
+    F(PROTECT) \
+    F(YAWN) \
+    F(SWALLOW) \
+    F(PSYCH_UP) \
+    F(GROWTH) \
+    F(BLOCK) \
+    F(MIMIC) \
+    F(PAIN_SPLIT) \
+    F(MORNING_SUN) \
+    F(TIDY_UP) \
+    F(RECOVER) \
+    F(SPLASH) \
+    F(WHIRLWIND) \
+    F(STOCKPILE) \
+    F(AFTER_YOU) \
+    F(SUBSTITUTE) \
+    F(FOCUS_ENERGY) \
+    F(CONFIDE) \
+    F(WISH) \
+    F(PERISH_SONG) \
+    F(HELPING_HAND) \
+    F(HOWL) \
+    F(HEAL_BELL) \
+    F(SUPERSONIC) \
+    F(SWAGGER) \
     F(SCREECH) \
     F(SCARY_FACE) \
-    F(SWEET_SCENT) \
-    F(SUBSTITUTE) \
-    F(MIMIC) \
-    F(METRONOME) \
-    F(SPLASH) \
-    F(DISABLE) \
+    F(TEETER_DANCE) \
     F(ENCORE) \
-    F(PAIN_SPLIT) \
-    F(SLEEP_TALK) \
-    F(HEAL_BELL) \
-    F(MEAN_LOOK) \
-    F(BLOCK) \
-    F(PROTECT) \
-    F(PERISH_SONG) \
-    F(ENDURE) \
-    F(SWAGGER) \
-    F(ATTRACT) \
-    F(SAFEGUARD) \
-    F(BATON_PASS) \
-    F(MORNING_SUN) \
-    F(BELLY_DRUM) \
-    F(PSYCH_UP) \
-    F(DEFENSE_CURL) \
-    F(STOCKPILE) \
-    F(SWALLOW) \
-    F(FOLLOW_ME) \
-    F(HELPING_HAND) \
-    F(WISH) \
-    F(RECYCLE) \
-    F(YAWN) \
+    F(SWEET_SCENT) \
+    F(DISABLE) \
+    F(SMOKESCREEN) \
+    F(TAIL_WHIP) \
     F(TICKLE) \
+    F(LEER) \
     F(SIMPLE_BEAM) \
     F(ENTRAINMENT) \
-    F(WORK_UP) \
-    F(REFLECT_TYPE) \
-    F(GROWTH) \
-    F(SHELL_SMASH) \
-    F(TEARFUL_LOOK) \
-    F(COPYCAT) \
-    F(AFTER_YOU) \
-    F(ACUPRESSURE) \
-    F(STUFF_CHEEKS) \
-    F(HOWL) \
-    F(DETECT) \
+    F(GLARE) \
+    F(ATTRACT) \
     F(QUICK_GUARD) \
-    F(BULK_UP) \
+    F(DETECT) \
     F(COACHING) \
-    F(FEATHER_DANCE) \
+    F(BULK_UP) \
     F(ROOST) \
     F(TAILWIND) \
     F(DEFOG) \
-    F(POISON_POWDER) \
-    F(TOXIC) \
+    F(FEATHER_DANCE) \
     F(ACID_ARMOR) \
     F(TOXIC_SPIKES) \
+    F(POISON_POWDER) \
+    F(TOXIC) \
+    F(CORROSIVE_GAS) \
     F(GASTRO_ACID) \
-    F(SAND_ATTACK) \
     F(SPIKES) \
+    F(SAND_ATTACK) \
     F(ROCK_POLISH) \
+    F(STEALTH_ROCK) \
     F(WIDE_GUARD) \
     F(SANDSTORM) \
-    F(STEALTH_ROCK) \
-    F(STICKY_WEB) \
     F(QUIVER_DANCE) \
-    F(CONFUSE_RAY) \
-    F(DESTINY_BOND) \
-    F(SPITE) \
+    F(RAGE_POWDER) \
+    F(STICKY_WEB) \
     F(CURSE) \
+    F(DESTINY_BOND) \
+    F(CONFUSE_RAY) \
+    F(SPITE) \
     F(IRON_DEFENSE) \
     F(METAL_SOUND) \
-    F(WILL_O_WISP) \
     F(SUNNY_DAY) \
-    F(RAIN_DANCE) \
-    F(AQUA_RING) \
-    F(SOAK) \
+    F(WILL_O_WISP) \
     F(LIFE_DEW) \
+    F(AQUA_RING) \
+    F(RAIN_DANCE) \
+    F(SOAK) \
+    F(INGRAIN) \
+    F(COTTON_GUARD) \
+    F(GRASSY_TERRAIN) \
+    F(SYNTHESIS) \
     F(STUN_SPORE) \
     F(LEECH_SEED) \
-    F(SYNTHESIS) \
     F(WORRY_SEED) \
-    F(INGRAIN) \
-    F(GRASSY_TERRAIN) \
-    F(COTTON_GUARD) \
     F(STRENGTH_SAP) \
+    F(ELECTRIC_TERRAIN) \
+    F(MAGNET_RISE) \
+    F(CHARGE) \
     F(THUNDER_WAVE) \
     F(EERIE_IMPULSE) \
-    F(CHARGE) \
-    F(MAGNET_RISE) \
-    F(ELECTRIC_TERRAIN) \
-    F(HYPNOSIS) \
-    F(LIGHT_SCREEN) \
+    F(GRAVITY) \
+    F(POWER_SWAP) \
+    F(TRICK_ROOM) \
+    F(PSYCHIC_TERRAIN) \
     F(REST) \
+    F(LIGHT_SCREEN) \
     F(AGILITY) \
-    F(AMNESIA) \
-    F(REFLECT) \
-    F(HEALING_WISH) \
-    F(TRICK) \
-    F(ROLE_PLAY) \
+    F(SPEED_SWAP) \
+    F(MAGIC_ROOM) \
     F(SKILL_SWAP) \
     F(IMPRISON) \
     F(COSMIC_POWER) \
-    F(CALM_MIND) \
-    F(GRAVITY) \
-    F(TRICK_ROOM) \
-    F(WONDER_ROOM) \
-    F(MAGIC_ROOM) \
-    F(POWER_SWAP) \
     F(GUARD_SWAP) \
-    F(POWER_SPLIT) \
     F(GUARD_SPLIT) \
+    F(CALM_MIND) \
+    F(HEALING_WISH) \
+    F(AMNESIA) \
+    F(ROLE_PLAY) \
     F(HEAL_PULSE) \
-    F(PSYCHIC_TERRAIN) \
-    F(SPEED_SWAP) \
+    F(REFLECT) \
     F(ALLY_SWITCH) \
-    F(HAZE) \
-    F(MIST) \
+    F(POWER_SPLIT) \
+    F(WONDER_ROOM) \
+    F(HYPNOSIS) \
+    F(TRICK) \
     F(AURORA_VEIL) \
     F(SNOWSCAPE) \
+    F(MIST) \
+    F(HAZE) \
     F(DRAGON_DANCE) \
     F(DRAGON_CHEER) \
     F(NASTY_PLOT) \
-    F(FAKE_TEARS) \
+    F(QUASH) \
+    F(TAUNT) \
     F(TORMENT) \
+    F(PARTING_SHOT) \
     F(FLATTER) \
     F(MEMENTO) \
-    F(TAUNT) \
+    F(FAKE_TEARS) \
     F(SWITCHEROO) \
-    F(QUASH) \
-    F(PARTING_SHOT) \
-    F(BABY_DOLL_EYES) \
+    F(AROMATIC_MIST) \
+    F(MISTY_TERRAIN) \
     F(SWEET_KISS) \
     F(CHARM) \
-    F(MISTY_TERRAIN) \
-    F(AROMATIC_MIST) \
+    F(BABY_DOLL_EYES) \
     F(HORN_DRILL) \
     F(SUPER_FANG) \
-    F(FLAIL) \
     F(PRESENT) \
+    F(FLAIL) \
     F(ENDEAVOR) \
     F(SPIT_UP) \
-    F(SEISMIC_TOSS) \
     F(COUNTER) \
-    F(REVERSAL) \
     F(LOW_KICK) \
+    F(SEISMIC_TOSS) \
+    F(REVERSAL) \
     F(FINAL_GAMBIT) \
     F(FISSURE) \
     F(NIGHT_SHADE) \
-    F(HEAVY_SLAM) \
     F(GYRO_BALL) \
+    F(HEAVY_SLAM) \
     F(HEAT_CRASH) \
     F(GRASS_KNOT) \
     F(ELECTRO_BALL) \
     F(MIRROR_COAT) \
-    F(BEAT_UP) \
+    F(COMEUPPANCE) \
     F(FLING) \
+    F(BEAT_UP) \
     F(BIND) \
     F(MUD_SLAP) \
     F(INFESTATION) \
@@ -191,8 +198,8 @@
     F(DOUBLE_KICK) \
     F(SMOG) \
     F(ROLLOUT) \
-    F(LICK) \
     F(ASTONISH) \
+    F(LICK) \
     F(DOUBLE_HIT) \
     F(PECK) \
     F(SAND_TOMB) \
@@ -205,7 +212,6 @@
     F(ECHOED_VOICE) \
     F(MACH_PUNCH) \
     F(ROCK_SMASH) \
-    F(POWER_UP_PUNCH) \
     F(VACUUM_WAVE) \
     F(DUAL_WINGBEAT) \
     F(GUST) \
@@ -219,8 +225,10 @@
     F(ICE_SHARD) \
     F(TWISTER) \
     F(DISARMING_VOICE) \
+    F(CUT) \
     F(RAPID_SPIN) \
     F(SNORE) \
+    F(TERRAIN_PULSE) \
     F(WEATHER_BALL) \
     F(POISON_FANG) \
     F(POISON_TAIL) \
@@ -230,6 +238,7 @@
     F(POUNCE) \
     F(FELL_STINGER) \
     F(STRUGGLE_BUG) \
+    F(LAST_RESPECTS) \
     F(METAL_CLAW) \
     F(FLAME_CHARGE) \
     F(CHILLING_WATER) \
@@ -248,8 +257,8 @@
     F(SWIFT) \
     F(ROUND) \
     F(CIRCLE_THROW) \
-    F(WING_ATTACK) \
     F(AERIAL_ACE) \
+    F(WING_ATTACK) \
     F(PLUCK) \
     F(AIR_CUTTER) \
     F(BULLDOZE) \
@@ -261,55 +270,55 @@
     F(MAGICAL_LEAF) \
     F(SHOCK_WAVE) \
     F(AVALANCHE) \
-    F(BREAKING_SWIPE) \
     F(DRAGON_TAIL) \
+    F(BREAKING_SWIPE) \
     F(DRAGON_BREATH) \
-    F(BITE) \
-    F(THIEF) \
-    F(FAINT_ATTACK) \
     F(BRUTAL_SWING) \
     F(ASSURANCE) \
+    F(BITE) \
+    F(THIEF) \
     F(STOMP) \
     F(LOW_SWEEP) \
     F(UPPER_HAND) \
-    F(SLUDGE) \
     F(VENOSHOCK) \
+    F(SLUDGE) \
     F(HEX) \
     F(FIRE_FANG) \
     F(OCTAZOOKA) \
+    F(BUBBLE_BEAM) \
     F(BRINE) \
     F(THUNDER_FANG) \
     F(PSYBEAM) \
     F(ICE_FANG) \
     F(AURORA_BEAM) \
     F(KNOCK_OFF) \
-    F(HEADBUTT) \
     F(SLASH) \
+    F(HEADBUTT) \
     F(FACADE) \
     F(RETALIATE) \
-    F(WAKE_UP_SLAP) \
     F(CROSS_POISON) \
     F(SCORCHING_SANDS) \
     F(SKITTER_SMACK) \
     F(U_TURN) \
     F(SHADOW_CLAW) \
-    F(STEEL_WING) \
     F(SMART_STRIKE) \
+    F(STEEL_WING) \
     F(BURNING_JEALOUSY) \
     F(AQUA_CUTTER) \
     F(VOLT_SWITCH) \
-    F(PSYCHO_CUT) \
+    F(RISING_VOLTAGE) \
     F(PSYSHIELD_BASH) \
+    F(PSYCHO_CUT) \
     F(FREEZE_DRY) \
     F(NIGHT_SLASH) \
     F(SUCKER_PUNCH) \
-    F(DRAIN_PUNCH) \
     F(BRICK_BREAK) \
+    F(DRAIN_PUNCH) \
     F(AIR_SLASH) \
     F(STOMPING_TANTRUM) \
     F(ROCK_SLIDE) \
-    F(FIRE_PUNCH) \
     F(TEMPER_FLARE) \
+    F(FIRE_PUNCH) \
     F(MYSTICAL_FIRE) \
     F(RAZOR_SHELL) \
     F(GIGA_DRAIN) \
@@ -317,9 +326,11 @@
     F(PSYCHIC_NOISE) \
     F(ICE_PUNCH) \
     F(LASH_OUT) \
-    F(MEGA_PUNCH) \
     F(SLAM) \
+    F(MEGA_PUNCH) \
+    F(STRENGTH) \
     F(EXTREME_SPEED) \
+    F(TERA_BLAST) \
     F(TRI_ATTACK) \
     F(BODY_PRESS) \
     F(AURA_SPHERE) \
@@ -328,29 +339,31 @@
     F(DRILL_RUN) \
     F(DIG) \
     F(POWER_GEM) \
-    F(X_SCISSOR) \
-    F(LUNGE) \
     F(LEECH_LIFE) \
+    F(LUNGE) \
+    F(X_SCISSOR) \
     F(SHADOW_BALL) \
     F(IRON_HEAD) \
-    F(WATERFALL) \
+    F(FLASH_CANNON) \
+    F(FIRE_PLEDGE) \
     F(DIVE) \
-    F(SCALD) \
+    F(WATERFALL) \
     F(WATER_PLEDGE) \
+    F(SCALD) \
     F(SEED_BOMB) \
     F(GRASS_PLEDGE) \
     F(DISCHARGE) \
     F(ZEN_HEADBUTT) \
     F(EXTRASENSORY) \
-    F(PSYSHOCK) \
     F(EXPANDING_FORCE) \
+    F(PSYSHOCK) \
     F(ICE_SPINNER) \
     F(DRAGON_CLAW) \
     F(CRUNCH) \
     F(THROAT_CHOP) \
     F(DARK_PULSE) \
-    F(DAZZLING_GLEAM) \
     F(ALLURING_VOICE) \
+    F(DAZZLING_GLEAM) \
     F(BODY_SLAM) \
     F(BOUNCE) \
     F(LIQUIDATION) \
@@ -365,16 +378,16 @@
     F(SLUDGE_BOMB) \
     F(EARTH_POWER) \
     F(FIRST_IMPRESSION) \
-    F(BUG_BUZZ) \
     F(POLLEN_PUFF) \
+    F(BUG_BUZZ) \
     F(PHANTOM_FORCE) \
     F(FLAMETHROWER) \
     F(AQUA_TAIL) \
-    F(SURF) \
     F(MUDDY_WATER) \
     F(SPARKLING_ARIA) \
-    F(LEAF_BLADE) \
+    F(SURF) \
     F(PETAL_BLIZZARD) \
+    F(LEAF_BLADE) \
     F(ENERGY_BALL) \
     F(WILD_CHARGE) \
     F(THUNDERBOLT) \
@@ -407,6 +420,7 @@
     F(MEGA_KICK) \
     F(THRASH) \
     F(DOUBLE_EDGE) \
+    F(AXE_KICK) \
     F(SUPERPOWER) \
     F(CLOSE_COMBAT) \
     F(FOCUS_BLAST) \
@@ -416,12 +430,14 @@
     F(METEOR_BEAM) \
     F(MEGAHORN) \
     F(FLARE_BLITZ) \
+    F(WAVE_CRASH) \
     F(POWER_WHIP) \
     F(SOLAR_BEAM) \
     F(FUTURE_SIGHT) \
     F(OUTRAGE) \
     F(SOLAR_BLADE) \
     F(HIGH_JUMP_KICK) \
+    F(STEEL_ROLLER) \
     F(OVERHEAT) \
     F(LEAF_STORM) \
     F(DRACO_METEOR) \
@@ -438,14 +454,11 @@
     F(FRENZY_PLANT) \
     F(SELF_DESTRUCT) \
     F(EXPLOSION) \
-    F(FLASH_CANNON) \
-    F(REVIVAL_BLESSING) \
-
 
 #define FOREACH_HM(F) \
+/*
     F(CUT) \
     F(STRENGTH)
-/*
     F(FLY) \
     F(SURF) \
     F(FLASH) \
@@ -461,18 +474,48 @@
 // Start pokedexUpdate
 // PSF TODO moves are ordered by type > power > category > effect > id
 // These defines are simply to make sure Emerald can still compile
-#define ITEM_TM_HIDDEN_POWER ITEM_TM01
-#define ITEM_TM_RETURN ITEM_TM01
-#define ITEM_TM_FRUSTRATION ITEM_TM01
-#define ITEM_TM_SNATCH ITEM_TM01
-#define ITEM_TM_SECRET_POWER ITEM_TM01
-#define ITEM_TM_HAIL ITEM_TM01
+#define ITEM_TM_HIDDEN_POWER ITEM_TM001
+#define ITEM_TM_RETURN ITEM_TM001
+#define ITEM_TM_FRUSTRATION ITEM_TM001
+#define ITEM_TM_SNATCH ITEM_TM001
+#define ITEM_TM_SECRET_POWER ITEM_TM001
+#define ITEM_TM_HAIL ITEM_TM001
+
+#define ITEM_HM_CUT ITEM_TM_CUT
 #define ITEM_HM_FLY ITEM_TM_FLY
 #define ITEM_HM_SURF ITEM_TM_SURF
-#define ITEM_HM_FLASH ITEM_TM01
+#define ITEM_HM_STRENGTH ITEM_TM_STRENGTH
+#define ITEM_HM_FLASH ITEM_TM001
 #define ITEM_HM_ROCK_SMASH ITEM_TM_ROCK_SMASH
 #define ITEM_HM_WATERFALL ITEM_TM_WATERFALL
 #define ITEM_HM_DIVE ITEM_TM_DIVE
 // End pokedexUpdate
+// Start moveErrors
+#define ITEM_HM01 ITEM_TM_CUT
+#define ITEM_HM02 ITEM_TM_FLY
+#define ITEM_HM03 ITEM_TM_SURF
+#define ITEM_HM04 ITEM_TM_STRENGTH
+#define ITEM_HM05 ITEM_TM001
+#define ITEM_HM06 ITEM_TM_ROCK_SMASH
+#define ITEM_HM07 ITEM_TM_WATERFALL
+#define ITEM_HM08 ITEM_TM_DIVE
+
+#define ITEM_TM01 ITEM_TM001
+#define ITEM_TM02 ITEM_TM002
+#define ITEM_TM34 ITEM_TM034
+#define ITEM_TM03 ITEM_TM003
+#define ITEM_TM17 ITEM_TM017
+#define ITEM_TM05 ITEM_TM005
+#define ITEM_TM06 ITEM_TM006
+#define ITEM_TM07 ITEM_TM007
+#define ITEM_TM08 ITEM_TM008
+#define ITEM_TM49 ITEM_TM049
+#define ITEM_TM42 ITEM_TM042
+#define ITEM_TM43 ITEM_TM043
+#define ITEM_TM27 ITEM_TM027
+#define ITEM_TM47 ITEM_TM047
+#define ITEM_TM25 ITEM_TM025
+#define ITEM_TM14 ITEM_TM014
+// End moveErrors
 
 #endif
