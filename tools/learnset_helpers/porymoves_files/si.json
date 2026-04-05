@@ -5798,6 +5798,7 @@
       "MOVE_TRAILBLAZE",
       "MOVE_ALLURING_VOICE",
       "MOVE_ICE_SPINNER",
+      "MOVE_PSYCHIC_NOISE",
       "MOVE_ALLY_SWITCH"
     ],
     "EggMoves": [
@@ -41114,6 +41115,7 @@
       "MOVE_ALLY_SWITCH",
       "MOVE_TRAILBLAZE",
       "MOVE_POUNCE",
+      "MOVE_PSYCHIC_NOISE",
       "MOVE_BODY_PRESS"
     ],
     "EggMoves": [
