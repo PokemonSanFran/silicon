@@ -19,7 +19,7 @@ TEST("All Resido Mons have learnsets")
 
         const u16 *teachables = GetSpeciesTeachableLearnset(monIndex);
         if (teachables[0] == MOVE_UNAVAILABLE || teachables[0] == MOVE_NONE)
-            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %d | %s has no level up moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: %d | %s has no teachables moves!",gTestRunnerState.test->filename, __LINE__,monIndex,GetSpeciesName(monIndex));
     }
 }
 
@@ -70,7 +70,6 @@ TEST("Opposing Trainers have Pokemon in the Resido Dex")
 
 static bool8 CanSpeciesLearnMove(u32 species, u32 move, u32 level, u32 *neededLevel)
 {
-
     if ((move == MOVE_OVERHEAT   && species == SPECIES_ROTOM_HEAT)  ||
             (move == MOVE_AIR_SLASH  && species == SPECIES_ROTOM_FAN)   ||
             (move == MOVE_BLIZZARD   && species == SPECIES_ROTOM_FROST) ||
