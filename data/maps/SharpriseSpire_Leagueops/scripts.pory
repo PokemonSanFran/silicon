@@ -19,7 +19,6 @@ const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 mapscripts SharpriseSpire_Leagueops_MapScripts{
     MAP_SCRIPT_ON_TRANSITION
     {
-        callnative(YeahBoi)
         switch(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE))
         {
             case POST_WOW_YOURE_STRONG: call(TheGangsAllHere_ObjectSetup_Script)
