@@ -1,7 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const ARNAV = 1
 const TECHIE = 2
-const OLIVER = 3
 const CHARLOTTE = 4
 const LUCREZIA = 5
 const CHIEF = 6
@@ -15,65 +14,62 @@ const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
-script TheGangsAllHere_ObjectCleanUp_Script {
+script TheGangsAllHere_ObjectCleanUp_Script
+{
     call(SharpriseSpire_Leagueops_EmptyConferenceRoomOffices)
     return
 }
 
-script TheGangsAllHere_MidMission_Object_Script{
+script TheGangsAllHere_MidMission_Object_Script
+{
+    call(TheGangsAllHere_ObjectSetup_Script)
+    clearobjectflagfromlocalid(LOCALID_SHARPRISE_OLIVER)
+    addobject(LOCALID_SHARPRISE_OLIVER)
+    setobjectxy(LOCALID_SHARPRISE_OLIVER,20,10)
+    setobjectxyperm(LOCALID_SHARPRISE_OLIVER,20,10)
+}
+
+script TheGangsAllHere_ObjectSetup_Script
+{
     setflag(FLAG_HIDE_NERDS_COPS)
     setflag(FLAG_HIDE_CHARLOTTE)
     setflag(FLAG_HIDE_RAMESH)
     setflag(FLAG_HIDE_KEIYING)
-    setobjectxy(OLIVER,6,46)
     setobjectxy(LUCREZIA,5,56)
     setobjectxyperm(LUCREZIA,5,56)
-    return
 }
 
-script TheGangsAllHere_ObjectSetup_Script{
-    setflag(FLAG_HIDE_NERDS_COPS)
-    setflag(FLAG_HIDE_CHARLOTTE)
-    setflag(FLAG_HIDE_RAMESH)
-    setflag(FLAG_HIDE_KEIYING)
-    setobjectxy(LUCREZIA,5,56)
-    setobjectxyperm(LUCREZIA,5,56)
+script TheGangsAllHere_MoveOliverToStairs_Script
+{
+    addobject(LOCALID_SHARPRISE_OLIVER)
+    setobjectmovementtype(LOCALID_SHARPRISE_OLIVER,MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(LOCALID_SHARPRISE_OLIVER,16,9)
+    setobjectxyperm(LOCALID_SHARPRISE_OLIVER,16,9)
     return
-}
-
-script TheGangsAllHere_MoveOliverToStairs_Script{
-        addobject(OLIVER) //PSF TODO why is oliver invisible without this
-        setobjectmovementtype(OLIVER,MOVEMENT_TYPE_FACE_DOWN)
-        setobjectxy(OLIVER,16,9)
-        setobjectxyperm(OLIVER,16,9)
-        return
 }
 
 script TheGangsAllHere_OliverAppearStairs_Script{
     lock
+    moveobjecttocoords(PLAYER,18,12,DIR_SOUTH)
+    waitmovement(PLAYER)
+    call(TheGangsAllHere_MoveOliverToStairs_Script)
     playse(SE_EXIT)
     waitse
-
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-    if (var(VAR_TEMP_0) == 16){
-        applymovement(PLAYER, moves(walk_down, walk_right, face_left, step_end))
-        waitmovement(PLAYER)
-        call(TheGangsAllHere_MoveOliverToStairs_Script)
-        applymovement(OLIVER, moves(walk_down * 2, emote_exclamation_mark, face_right, step_end))
-        waitmovement(OLIVER)
-    }else{
-        call(TheGangsAllHere_MoveOliverToStairs_Script)
-        playse(SE_PIN)
-        applymovement(PLAYER,Common_Movement_FaceLeft)
-        applymovement(OLIVER, moves(walk_down, walk_right * 2, step_end))
-        waitmovement(OLIVER)
-    }
-
+    moveobjecttocoords(LOCALID_SHARPRISE_OLIVER,17,12,DIR_EAST)
+    waitmovement(LOCALID_SHARPRISE_OLIVER)
+    playse(SE_PIN)
+    applymovement(PLAYER,Common_Movement_FaceLeft)
+    waitmovement(PLAYER)
     goto(TheGangsAllHere_WhatBringsYou_Dialogue)
 }
 
-script TheGangsAllHere_WhatBringsYou_Dialogue{
+script TheGangsAllHere_InteractFollower_Script
+{
+    return
+}
+
+script TheGangsAllHere_WhatBringsYou_Dialogue
+{
     lock
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,START_THE_GANGS_ALL_HERE)
     playbgm(MUS_RG_FOLLOW_ME,FALSE)
@@ -83,70 +79,99 @@ script TheGangsAllHere_WhatBringsYou_Dialogue{
     msgbox(format("My office is on this floor, yeah! This is League Ops, and everybody here is solely dedicated to making sure the SharpRise Capital Pokemon League is a success."),,SPEAKER_OLIVER)
     msgbox(format("I've an important delivery for the C.E.O., but the workers here in League Ops can be a little... rowdy. Do you mind if I tag along on your tour? I'll keep you in tip-top shape!"),,SPEAKER_OLIVER)
     msgbox(format("Of course not!"),,SPEAKER_ALICIA)
-
     closemessage
-    special(HealPlayerParty)
-    applymovement(OLIVER, moves(walk_left, walk_down * 20, step_end))
-    waitmovement(OLIVER)
-    setobjectxy(OLIVER,6,46)
-    setobjectxyperm(OLIVER,6,46)
     fadedefaultbgm
-    //loadword(0,NewScript)
-    //setfollower(OLIVER,0x100) //PSF TODO hook up FollowMe scripts
-    //https://www.pokecommunity.com/showthread.php?t=432529
+    call(TheGangsAllHere_Script_StartFollow)
     call(TryAutoSave)
     releaseall
     end
 }
 
-script TheGangsAllHere_OfficeIsntThatWay_Script{
-    lockall
-    startcutscene(JUMPPLAYER_THEGANGSALLHERE)
-    msgbox(format("Hey {PLAYER}, the office isn't that way!"),,SPEAKER_OLIVER)
+script TheGangsAllHere_Script_StartFollow
+{
+	checkfollowernpc
+	if (var(VAR_RESULT) == TRUE)
+	{
+		release
+        return
+	}
+    special(HealPlayerParty)
+	setfollowernpc(LOCALID_SHARPRISE_OLIVER,FNPC_ALL,TheGangsAllHere_InteractFollower_Script,PARTNER_OLIVER)
+}
 
+script TheGangsAllHere_Script_LeaveFloor
+{
+    lock
+	checkfollowernpc
+	if (var(VAR_RESULT) == FALSE)
+	{
+		release
+		end
+	}
+	facefollowernpc
+	msgbox(format("League Ops too much to handle? I'll be waiting here."),,SPEAKER_OLIVER)
+	closemessage
+    moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,20,10,DIR_SOUTH)
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
+	destroyfollowernpc
+	clearobjectflagfromlocalid(LOCALID_SHARPRISE_OLIVER)
+    addobject(LOCALID_SHARPRISE_OLIVER)
+    setobjectxy(LOCALID_SHARPRISE_OLIVER,20,10)
+    setobjectxyperm(LOCALID_SHARPRISE_OLIVER,20,10)
+	release
+	end
+}
+
+script TheGangsAllHere_OfficeIsntThatWay_Script
+{
+    lockall
+    msgbox(format("Hey {PLAYER}, the office isn't that way!"),,SPEAKER_OLIVER)
     closemessage
     applymovement(PLAYER, moves(walk_down, step_end))
+    waitmovement(LOCALID_SHARPRISE_OLIVER)
 }
 
-script TheGangsAllHere_WalkHallway_Script{
-    applymovement(OLIVER,Common_Movement_WalkDown)
-    applymovement(PLAYER,Common_Movement_WalkDown)
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    delay(30)
-    setobjectxy(PLAYER,5,52)
-    setobjectxy(OLIVER,6,52)
-    TeleportCamera(5,52)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-    return
-}
-
-script TheGangsAllHere_ThisIsOffice_Script{
+script TheGangsAllHere_ThisIsOffice_Script
+{
     lock
+    moveobjecttocoords(PLAYER,5,46,DIR_SOUTH)
+    waitmovement(PLAYER)
+    moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,6,46,DIR_SOUTH)
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
     faceplayer
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,moves(face_left))
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
+    applymovement(PLAYER,moves(face_right))
+    waitmovement(PLAYER)
     msgbox(format("This is Lucrezia's office. After you."),,SPEAKER_OLIVER)
     closemessage
-
-    call(TheGangsAllHere_WalkHallway_Script)
+    moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,6,52,DIR_SOUTH)
+    moveobjecttocoords(PLAYER,5,52,DIR_SOUTH)
     goto(TheGangsAllHere_ComeOnIn_Dialogue)
 }
 
-script TheGangsAllHere_ComeOnIn_Dialogue{
+script TheGangsAllHere_ComeOnIn_Dialogue
+{
+    startcutscene(JUMPPLAYER_THEGANGSALLHERE)
     setvar(VAR_SHARPRISESPIRE_CONFERENCE_STATE,POST_THE_GANGS_ALL_HERE)
     playbgm(MUS_RG_ENCOUNTER_DEOXYS,FALSE)
     playse(SE_PIN)
 
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
+    waitmovement(PLAYER)
     applymovement(LUCREZIA,Common_Movement_ExclamationMark)
     waitmovement(LUCREZIA)
     applymovement(LUCREZIA, moves(walk_right * 2, walk_up * 3, walk_left, face_up, step_end))
 
-    msgbox(format("{PLAYER}! Oliver! Come on in, I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA)
+    msgbox(format("{PLAYER}! Oliver! I just finished an email! Glad you're both here, and excellent timing that you ran into each other."),,SPEAKER_LUCREZIA)
     closemessage
+    waitmovement(LUCREZIA)
 
     msgbox(format("As you asked, I have your package from Emrys."),,SPEAKER_OLIVER)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceRight)
-    applymovement(OLIVER,Common_Movement_FaceLeft)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_FaceLeft)
     waitmovement(PLAYER)
 
     msgbox(format("I thought you said you had a delivery for the C.E.O.?"),,SPEAKER_ALICIA)
@@ -167,10 +192,10 @@ script TheGangsAllHere_NotIntentionally_Dialogue{
     msgbox(format("I heard wonderful things on the way over here, but I'll be certain to observe later."),,SPEAKER_OLIVER)
     }
 
-    msgbox(format("In any case, your package, Lucrezia."))
+    msgbox(format("In any case, your package, Lucrezia."),,SPEAKER_OLIVER)
 
-    applymovement(OLIVER,Common_Movement_WalkInPlaceDown)
-    waitmovement(OLIVER)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_WalkInPlaceDown)
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
 
     bufferitemname(STR_VAR_1,ITEM_DRAGONIUM_Z)
     msgbox(format("Ah, my {STR_VAR_1}, wonderful.\nI've also got something for you, {PLAYER}! Let me see your phone..."),,SPEAKER_LUCREZIA)
@@ -184,7 +209,9 @@ script TheGangsAllHere_GivePrestoApp_Script{
     applymovement(PLAYER,Common_Movement_FaceDown)
     applymovement(LUCREZIA, moves(walk_left, face_up, walk_in_place_up, step_end))
     waitmovement(LUCREZIA)
+    fadescreen(FADE_TO_BLACK)
     call(EventScript_InstallPrestoApp)
+    fadescreen(FADE_FROM_BLACK)
     goto(TheGangsAllHere_GivePrestoApp_Dialogue)
     end
 }
@@ -192,8 +219,8 @@ script TheGangsAllHere_GivePrestoApp_Script{
 script TheGangsAllHere_GivePrestoApp_Dialogue{
     msgbox(format("As a member of the SharpRise family, I've just granted you special access to Presto's drone delivery service. If you select that app while you're outdoors, you can have items delievered to you instantly! I'm excited to see how you use our tools."),,SPEAKER_LUCREZIA)
 
-    applymovement(OLIVER,Common_Movement_FacePlayer)
-    waitmovement(OLIVER)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_FacePlayer)
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
     applymovement(PLAYER,Common_Movement_FaceRight)
 
     msgbox(format("Not to place any undue pressure on you, but we personally reviewed all of the applicants to our little program. You were exceptionally popular among the team, so we're very excited to see you perform well!"),,SPEAKER_OLIVER)
@@ -211,16 +238,16 @@ script TheGangsAllHere_EndScene_Dialogue{
     msgbox(format("Time for my seventh Boomers coffee for the day. Shall we, Oliver?"),,SPEAKER_LUCREZIA)
     closemessage
 
-    applymovement(OLIVER,Common_Movement_FaceDown)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_FaceDown)
 
     msgbox(format("We shall."),,SPEAKER_OLIVER)
 
-    applymovement(OLIVER,Common_Movement_FacePlayer)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER,Common_Movement_FacePlayer)
     applymovement(PLAYER,Common_Movement_FaceRight)
 
     msgbox(format("Feel free to continue your tour without us, {PLAYER}. Greatly appreciate your help in the battles. Hopefully supporting me wasn't too exhausting!"),,SPEAKER_OLIVER)
 
-    if(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
+    if(var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
         msgbox(format("Ah, and if you haven't already visited Ramesh, go do so. They're on the Production Floor."),,SPEAKER_LUCREZIA)
     }
 
@@ -228,11 +255,11 @@ script TheGangsAllHere_EndScene_Dialogue{
 
     applymovement(PLAYER, moves(delay_16 * 2, face_up, step_end))
     applymovement(LUCREZIA, moves(walk_right, walk_up * 8, step_end))
-    applymovement(OLIVER, moves(walk_up * 8, step_end))
-    waitmovement(OLIVER)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER, moves(walk_up * 8, step_end))
+    waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
     fadedefaultbgm
     removeobject(LUCREZIA)
-    removeobject(OLIVER)
+    destroyfollowernpc
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)
     endcutscene
