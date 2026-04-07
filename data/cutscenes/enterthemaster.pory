@@ -90,8 +90,6 @@ script EnterTheMaster_Ready_Dialogue
         call(TryAutoSave)
         release
         end
-
-        //PSF TODO implement follow me nonsense
 }
 
 script EnterTheMaster_Script_StartFollow
@@ -102,6 +100,7 @@ script EnterTheMaster_Script_StartFollow
 		release
 		end
 	}
+    special(HealPlayerParty)
 	setfollowernpc(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE,FNPC_ALL,EnterTheMaster_InteractFollower_Script,PARTNER_STEVEN)
 }
 
@@ -121,7 +120,7 @@ script EnterTheMaster_InteractFollower_Script
         end
 }
 
-script EnterTheMaster_LeaveWoods_Script 
+script EnterTheMaster_LeaveWoods_Script
 {
     lock
 	checkfollowernpc

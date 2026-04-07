@@ -17,8 +17,11 @@ const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
 mapscripts SharpriseSpire_Leagueops_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
-        switch(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE)){
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        callnative(YeahBoi)
+        switch(var(VAR_SHARPRISESPIRE_CONFERENCE_STATE))
+        {
             case POST_WOW_YOURE_STRONG: call(TheGangsAllHere_ObjectSetup_Script)
             case START_THE_GANGS_ALL_HERE: call(TheGangsAllHere_MidMission_Object_Script)
             case POST_THE_GANGS_ALL_HERE: call(TheGangsAllHere_ObjectCleanUp_Script)
@@ -91,7 +94,8 @@ script SharpriseSpire_Leagueops_MovePlayerIntoPosition_Script{
 script SharpriseSpire_Leagueops_Oliver_Event_Script{
     lock
     faceplayer
-    switch (var(VAR_STORYLINE_STATE)){
+    switch (var(VAR_STORYLINE_STATE))
+{
         case STORY_MORNING_OF_TIMELINE_SPLIT: call(CongratsYoureAnAsshole_Intro_Dialogue)
         case STORY_START_FALSE_TIMELINE:
         case STORY_1ST_THE_TIDE_TAKEDOWN:
