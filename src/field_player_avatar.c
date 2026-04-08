@@ -1979,6 +1979,7 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
     u8 i;
     u8 flags = gPlayerAvatar.flags;
+    gPlayerAvatar.gender = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]; // playerCustom
 
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
