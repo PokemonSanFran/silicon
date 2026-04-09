@@ -1,0 +1,165 @@
+// Quest_Findtheguilty
+// Quest_Findtheguilty_Script
+// Quest_Findtheguilty_Dialogue
+const LOCALID_PIOCA_FINDTHEGUILTYFRIENDI = (LOCALID_CAMERA + 1)
+const PLAYER = LOCALID_PLAYER
+
+script Quest_Findtheguilty_Script_InteractFindtheguiltyB
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Dialogue_Reward)
+    goto_if_quest_active(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Dialogue_Active)
+    goto_if_quest_inactive(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_Start)
+}
+
+script Quest_Findtheguilty_Script_Start
+{
+    msgbox(format("Yo! Are you the detective I need to thank for clearing my name?"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    msgbox(format("I'm hardly a detective, just another trainer."),,SPEAKER_ALICIA)
+msgbox(format("W-wait a minute…I think I detect a familiar face…"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+msgbox(format("Holy smokes! You're the Champion! You went through all this trouble to free me? You really are the real deal! Thanks so much, Champ!"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+msgbox(format("Somethin' stickin' in my craw, though…The real robber's still out there…"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+msgbox(format("There was some grainy CCTV footage of the robbery."),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+    bufferspeciesname(STR_VAR_1,SPECIES_PALAFIN)
+msgbox(format("It shows a guy that - I guess kinda looks like me bustin' the door down with a super strong {STR_VAR_1}. That's why there was so much water at the scene."),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+msgbox(format("Only I don't have a {STR_VAR_1}. A couple Water types, sure, but not a {STR_VAR_1}. You'd think the cops'd have checked but maybe that's expecting too much."),,SPEAKER_FINDTHEGUILTYVICTIMB)
+
+msgbox(format("I wish we could find the guy who got me wound up in this and nab 'em! Maybe I should just be thankful to be free."),,SPEAKER_FINDTHEGUILTYVICTIMB)
+closemessage
+startquest(QUEST_FINDTHEGUILTY)
+goto(Quest_Findtheguilty_Dialogue_Active)
+}
+
+script Quest_Findtheguilty_Dialogue_Active
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_PALAFIN)
+msgbox(format("Who even cares about the hiking club who has a {STR_VAR_1}?"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Findtheguilty_Dialogue_Reward
+{
+    msgbox(format("Yo! I heard the news!"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    msgbox(format("The guy's really sayin' he's a plant!? How weird is that?"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    msgbox(format("Who would hire someone to frame a random-ass member of the hiking club?"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    msgbox(format("Whatever. I'm only gonna stress myself out more the more I think about it. Thanks again for the help, Champ! You're a real one!"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    closemessage
+    completequest(QUEST_FINDTHEGUILTY)
+    release
+    end
+}
+
+script Quest_Findtheguilty_Dialogue_Complete
+{
+    msgbox(format("What if the target wasn't the hiking club…But the folks at The Tide?…"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    msgbox(format("A lot of the corpos seem to have it out for 'em, could make sense…"),,SPEAKER_FINDTHEGUILTYVICTIMB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Findtheguilty_Dialogue_InterrogatePlant
+{
+    lock
+    bufferspeciesname(STR_VAR_1,SPECIES_PALAFIN)
+    msgbox(format("Hey, are you a member of the hiking club?"),,SPEAKER_ALICIA)
+    msgbox(format("Yes!! Yes I am!!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("I remember from our battle before that you have a {STR_VAR_1}."),,SPEAKER_ALICIA)
+    msgbox(format("Do you know anyone else with the same Pokemon?"),,SPEAKER_ALICIA)
+    msgbox(format("Ack! I-I didn't do anything!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("Go away! {STR_VAR_1}, get 'em!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    closemessage
+    trainerbattle_no_intro(TRAINER_QUEST_FINDTHEGUILTYPLANTH_2,format("I…I can't take feeling guilty anymore!"))
+    // PSF LOSS TODO  I didn't do anything wrong! Just leave me alone!
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_FINDTHEGUILTY)
+    goto(Quest_Findtheguilty_Dialogue_PostBattle)
+}
+
+script Quest_Findtheguilty_Dialogue_PostBattle
+{
+    spawnobject(OBJ_EVENT_GFX_MAN_4,LOCALID_PIOCA_FINDTHEGUILTYFRIENDI,26,38,MOVEMENT_TYPE_FACE_DOWN,3)
+    msgbox(format("Ahhhh!! No no no no no!! No way! Ack!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+
+    msgbox(format("FINE!! I did it! I robbed the hiker's clubhouse, okay!?"),,SPEAKER_FINDTHEGUILTYPLANTH)
+
+    msgbox(format("I was hired to frame FindtheguiltyvictimB…They…They were offering so much money…"),,SPEAKER_FINDTHEGUILTYPLANTH)
+
+    msgbox(format("I - I'm sorry! I'm sorry I have to go!"),,SPEAKER_FINDTHEGUILTYPLANTH,EMOTE_SAD)
+    closemessage
+    applymovement(LOCALID_FINDTHEGUILTYPLANTH,moves(face_up))
+    waitmovement(LOCALID_FINDTHEGUILTYPLANTH)
+    applymovement(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI,moves(walk_down))
+    waitmovement(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI)
+    msgbox(format("FindtheguiltyfriendI!.."),,SPEAKER_FINDTHEGUILTYPLANTH,,EMOTE_SHOCK)
+    applymovement(PLAYER,moves(face_up))
+
+    msgbox(format("Hmm. Did I hear all that right?"),,SPEAKER_FINDTHEGUILTYFRIENDI)
+
+    msgbox(format("Wonder if I should be worried about our triathlon club too, eh FindtheguiltyplantH?"),,SPEAKER_FINDTHEGUILTYFRIENDI)
+
+    msgbox(format("I can't believe this is all going on. Is that what you've been missing practice for?"),,SPEAKER_FINDTHEGUILTYFRIENDI)
+    closemessage
+
+    applymovement(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI,moves(walk_right, face_down))
+    waitmovement(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI)
+    moveobjecttocoords(PLAYER,27,42,DIR_NORTH)
+    waitmovement(PLAYER)
+
+    msgbox(format("Thank you for helping us get to the bottom of this."),,SPEAKER_FINDTHEGUILTYFRIENDI)
+
+    msgbox(format("I want to figure out how we get justice from this."),,SPEAKER_FINDTHEGUILTYFRIENDI)
+
+    msgbox(format("Am I…sniffle going to jail?"),,SPEAKER_FINDTHEGUILTYPLANTH)
+
+    msgbox(format("Not up to me, but I'm off now. Are you gonna sit there crying all day or are you coming with?"),,SPEAKER_FINDTHEGUILTYFRIENDI)
+    closemessage
+    moveobjecttocoords(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI,26,22,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_FINDTHEGUILTYPLANTH,25,22,DIR_NORTH)
+    delay(16)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    returnqueststate(QUEST_FINDTHEGUILTY)
+    if (var(VAR_RESULT) < QUEST_MENU_SET_REWARD)
+    {
+        return
+    }
+    removeobject(LOCALID_PIOCA_FINDTHEGUILTYFRIENDI)
+    removeobject(LOCALID_FINDTHEGUILTYPLANTH)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Findtheguilty_Script_HideTorgeotFindtheguilityplantH
+{
+    setobjectflagfromlocalid(LOCALID_TORGEOT_FINDTHEGUILTYPLANTH)
+}
+
+script Quest_Findtheguilty_Script_HidePiocaFindtheguilityplantH
+{
+    setobjectflagfromlocalid(LOCALID_FINDTHEGUILTYPLANTH)
+}
+
+script Quest_Findtheguilty_Dialogue_PostQuestFindtheguilityplantH
+{
+    lock
+    msgbox(format("Ah! It's - it's you!"),,SPEAKER_FINDTHEGUILTYPLANTH)
+    buffernumberstring(STR_VAR_1,1000)
+    buffermapname(STR_VAR_2,MAP_TORGEOT_CLIMB)
+    msgbox(format("I'm banned from the running club until I do {STR_VAR_1} hours of community service picking up trash on {STR_VAR_2}."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("And the hiking club…Honestly I'm glad they didn't move to have me arrested."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("I'm impressed by the system they had in place to deal with situations like this if I'm honest."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("You should know - and I hope you believe me when I say this; I am genuinely sorry."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    msgbox(format("I also wish there were more ways for people to get justice than to just have eachother thrown in jail. Ah, I guess beggars can't be choosers."),,SPEAKER_FINDTHEGUILTYPLANTH)
+    closemessage
+    release
+    end
+}

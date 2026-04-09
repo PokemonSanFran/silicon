@@ -2,6 +2,7 @@ mapscripts TorgeotClimb_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_IBelieveICanFly_Gertrude_Visibility_Script)
         call(OkayLetsFixit_Object_Visibility_Script)
+        call_if_quest_not_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HideTorgeotFindtheguilityplantH)
     }
 
     MAP_SCRIPT_ON_LOAD {

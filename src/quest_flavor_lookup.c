@@ -351,7 +351,12 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
 
 const u8 *GetQuestDesc_Freetheinnocent(void)
 {
-    if (Quest_Freetheinnocent_CashierSpoken())
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT,FLAG_GET_ACTIVE))
+    {
+        u32 flag = ReturnQuestState(QUEST_FREETHEINNOCENT);
+        StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_FREETHEINNOCENT].desc[flag]);
+    }
+    else if (Quest_Freetheinnocent_CashierSpoken())
     {
         CopyItemNameHandlePlural(ITEM_QUEST_FREETHEINNOCENT_ALIBI,gStringVar1,2);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("If you can find the source of {STR_VAR_1}, you might be able to find an alibi for FindtheguiltyvictimB."));

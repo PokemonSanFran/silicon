@@ -1,5 +1,10 @@
 // Quest_Freetheinnocent
 
+script Quest_Freetheinnocent_Script_HideFindtheguiltyvictimB
+{
+    setobjectflagfromlocalid(LOCALID_FINDTHEGUILTYVICTIMB)
+}
+
 script Quest_Freetheinnocent_Dialogue_StartQuest
 {
 // PSF TODO FreetheinnocentcomradeA sohuld be facing a computer and always turn back to the computer when the player is done

@@ -3198,7 +3198,6 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
     gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
     //gPlayerAvatar.gender = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
     // End playerCustom
-    DebugPrintf("SetPlayerAvatarObjectEventIdAndObjectId %d",gPlayerAvatar.gender);
     SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_CONTROLLABLE);
 }
 
