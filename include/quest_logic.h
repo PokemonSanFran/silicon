@@ -59,6 +59,7 @@ void DebugQuest_Restaurantexpansion1(u8 state);
 void DebugQuest_Diggingupadaorasdirt(u8 state);
 void DebugQuest_Returndoll(u8 state);
 void DebugQuest_Freetheinnocent(u8 state);
+void DebugQuest_Findtheguilty(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

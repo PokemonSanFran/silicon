@@ -555,7 +555,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_FINDTHEGUILTY_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Sharprise meddling in the affairs of a hiking club of all things now. Reeks of fear if you ask me!"),
+        .content = COMPOUND_STRING("SharpRise meddling in the affairs of a hiking club of all things now. Reeks of fear if you ask me!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_Findtheguilty1,
         .quest = 0,
