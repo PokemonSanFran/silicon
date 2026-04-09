@@ -21,16 +21,33 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
     [PAGE_INTERFACE_MAIN] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/main.bin.smolTM"),
-        .helpBarStr = COMPOUND_STRING("{A_BUTTON} Learn {B_BUTTON} Cancel {SELECT_BUTTON} Filter {START_BUTTON} Sort"),
+        .helpBarStr = {
+            [SUBPAGE_INTERFACE_MAIN_DEFAULT] = COMPOUND_STRING(
+                "{A_BUTTON} Learn {B_BUTTON} Cancel {SELECT_BUTTON} Filter {START_BUTTON} Sort"),
+            [SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE] = COMPOUND_STRING(
+                "{A_BUTTON} Teach {B_BUTTON} Cancel"),
+            [SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH ... SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH] = COMPOUND_STRING(
+                "{A_BUTTON} Confirm {B_BUTTON} Cancel"),
+        },
         .updateFrontEndFunc = MainPage_UpdateFrontEnd,
-        .handleInputFunc = MainPage_HandleInput,
+        .handleInputFunc = {
+            [SUBPAGE_INTERFACE_MAIN_DEFAULT]            = MainPage_ChooseMoveToTeach,
+            [SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE]        = MainPage_ChooseMoveToForget,
+            [SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH]      = MainPage_ConfirmForgetMove,
+            [SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH]       = MainPage_CancelForgetMove,
+        },
     },
     [PAGE_INTERFACE_FILTER] =
     {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
-        .helpBarStr = COMPOUND_STRING("{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Filter"),
+        .helpBarStr = {
+            [SUBPAGE_INTERFACE_MAIN_DEFAULT] = COMPOUND_STRING(
+                "{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Filter"),
+        },
         .updateFrontEndFunc = FilterPage_UpdateFrontEnd,
-        .handleInputFunc = FilterPage_HandleInput,
+        .handleInputFunc = {
+            [SUBPAGE_INTERFACE_FILTER_DEFAULT] = FilterPage_HandleInput,
+        },
     },
 };
 

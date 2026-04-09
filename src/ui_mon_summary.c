@@ -62,6 +62,7 @@ static void CB2_MonSummary(void);
 static void CB2_ReloadMonSummary(void);
 static void VBlankCB_MonSummary(void);
 static void Task_MonSummary_WaitFadeAndExit(u8);
+static void Task_MonSummary_OpenMoveReminder(u8);
 
 static void SummarySetup_Backgrounds(void);
 static void SummarySetup_Graphics(void);
@@ -89,7 +90,6 @@ static void Task_SummaryInput_InfosInput(u8);
 static void Task_SummaryInput_StatsInput(u8);
 static void Task_SummaryInput_MovesInput(u8);
 static void Task_SummaryInput_MovesOptionInput(u8);
-static void Task_SummaryInput_MovesOpenReminder(u8);
 static void Task_SummaryInput_MovesForgetInput(u8, s32);
 static void SummaryInput_TryStartReorderMode(void);
 
@@ -364,6 +364,33 @@ static void Task_MonSummary_WaitFadeAndExit(u8 taskId)
         MonSummary_FreeResources();
         DestroyTask(taskId);
     }
+}
+
+static void Task_MonSummary_OpenMoveReminder(u8 taskId)
+{
+    if (gPaletteFade.active) return;
+
+    if (SummaryInput_IsWithinSubMode())
+        sMonSummaryInitialBackup.mode = UI_SUMMARY_MODE_MOVE_MENU;
+    else
+        sMonSummaryInitialBackup.mode = UI_SUMMARY_MODE_MOVES_PAGE;
+
+    sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
+    sMonSummaryInitialBackup.mons = sMonSummaryDataPtr->list.mons;
+    sMonSummaryInitialBackup.totalIdx = SummaryInput_GetTotalIndex();
+    sMonSummaryInitialBackup.useBoxMon = sMonSummaryDataPtr->useBoxMon;
+    gLastViewedMonIndex = SummaryInput_GetIndex();
+
+    void *mon;
+
+    if (sMonSummaryDataPtr->useBoxMon)
+        mon = &sMonSummaryDataPtr->list.boxMons[gLastViewedMonIndex];
+    else
+        mon = &sMonSummaryDataPtr->list.mons[gLastViewedMonIndex];
+
+    MoveReminder_Init(MREMINDER_MODE_DEFAULT, CB2_ReloadMonSummary, mon, sMonSummaryDataPtr->useBoxMon);
+    MonSummary_FreeResources();
+    DestroyTask(taskId);
 }
 
 static void SummarySetup_Backgrounds(void)
@@ -1205,7 +1232,7 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
         break;
     case SUMMARY_MOVES_OPTION_LEARN:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_SummaryInput_MovesOpenReminder;
+        gTasks[taskId].func = Task_MonSummary_OpenMoveReminder;
         PlaySE(SE_SELECT);
         break;
     case SUMMARY_MOVES_OPTION_REORDER:
@@ -1230,31 +1257,6 @@ static void Task_SummaryInput_MovesOptionInput(u8 taskId)
     }
 
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-}
-
-static void Task_SummaryInput_MovesOpenReminder(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        sMonSummaryInitialBackup.mons = sMonSummaryDataPtr->list.mons;
-        sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
-        sMonSummaryInitialBackup.isBoxMon = sMonSummaryDataPtr->useBoxMon;
-        sMonSummaryInitialBackup.totalIdx = SummaryInput_GetTotalIndex();
-        gLastViewedMonIndex = SummaryInput_GetIndex();
-
-        enum MoveReminderModes mode = sMonSummaryDataPtr->useBoxMon ? MREMINDER_MODE_BOX : MREMINDER_MODE_PARTY;
-        u32 idx = SummaryInput_GetIndex();
-        void *mon;
-
-        if (sMonSummaryDataPtr->useBoxMon)
-            mon = &sMonSummaryDataPtr->list.boxMons[idx];
-        else
-            mon = &sMonSummaryDataPtr->list.mons[idx];
-
-        MoveReminder_Init(mode, CB2_ReloadMonSummary, mon, MovesPageMisc_GetSlotIndex());
-        MonSummary_FreeResources();
-        DestroyTask(taskId);
-    }
 }
 
 static void Task_SummaryInput_MovesForgetInput(u8 taskId, s32 delta)

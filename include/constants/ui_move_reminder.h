@@ -9,6 +9,20 @@ enum PageInterfaces
     NUM_PAGE_INTERFACES
 };
 
+enum SubPageInterfaces
+{
+    // PAGE_INTERFACE_MAIN
+    SUBPAGE_INTERFACE_MAIN_DEFAULT = 0,
+    SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE,
+    SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH,
+    SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH,
+
+    // PAGE_INTERFACE_FILTER
+    SUBPAGE_INTERFACE_FILTER_DEFAULT = 0,
+
+    NUM_SUBPAGE_INTERFACES = 5
+};
+
 #ifndef TILE_TO_PIXELS
 #define TILE_TO_PIXELS(t) (t ? (t * 8) : 0)
 #define PIXEL_TO_TILES(p) (p ? (p / 8) : 0)
@@ -97,10 +111,7 @@ enum MoveReminderBarSpriteIds
 #define sMoveBar_Idx                    data[0]
 
 // MainPage_WaitCloseMessage
-#define tMainPage_Timer                 data[15]
-
-// MainPage_ConfirmShouldOverwriteMove
-#define tMainPage_ConfirmationValue     data[15]
+#define tMainPage_Timer                 data[0]
 
 enum MoveReminderWindows
 {
@@ -154,8 +165,9 @@ enum MovePoolSorts
 #define MREMINDER_INPUT_PM_1    (1)
 #define MREMINDER_INPUT_PM_5    (4)
 
-#define CONFIRMATION_BOX_YES    (0)
-#define CONFIRMATION_BOX_NO     (1)
+#define CONFIRMATION_BOX_YES        (0)
+#define CONFIRMATION_BOX_NO         (1)
+#define CONFIRMATION_BOX_INACTIVE   (2)
 
 #define CONFIRMATION_BOX_X      (TILE_TO_PIXELS(19) + 3)
 #define CONFIRMATION_BOX_TEXT_X (TILE_TO_PIXELS(20))
@@ -187,26 +199,33 @@ struct MoveReminderMon
     u8 level;
     u16 stats[NUM_STATS];
     u16 moves[MAX_MON_MOVES];
+    u8 PP[MAX_MON_MOVES];
+    u8 remainingPP[MAX_MON_MOVES];
 };
 
 struct MoveReminderData
 {
     enum MoveReminderModes mode;
     enum PageInterfaces page;
-    u8 padding:7;
+    enum SubPageInterfaces subPage:7;
     u8 useBoxMon:1;
     MainCallback savedCallback;
     struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
     u16 numMoves;
     union {
-        u32 value;
+        u32 value[2];
         struct PACKED {
             u32 currIdx:10;     // 512
             u32 firstIdx:10;    //
             u32 gridIdx:3;      // MAX_MREMINDER_BAR_SPRITES
             u32 printingDialogue:1;
-            u32 pad:11;
+            u32 moveSlot:4;
+            u32 confirmationBoxRes:2;
+            u32 pad:5;
+
+            u16 moveToTeach:12;
+            u32 pad2:20;
         } main;
     } pageData;
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
@@ -222,9 +241,9 @@ struct MoveReminderData
 struct PageInterfaceInfo
 {
     const u32 *tilemap;
-    const u8 *helpBarStr;
+    const u8 *helpBarStr[NUM_SUBPAGE_INTERFACES];
     UpdateFrontEndFunc updateFrontEndFunc;
-    HandleInputFunc handleInputFunc;
+    HandleInputFunc handleInputFunc[NUM_SUBPAGE_INTERFACES];
 };
 
 #endif // GUARD_CONSTANTS_UI_MOVE_REMINDER_H

@@ -480,13 +480,13 @@ struct MonSummaryResources
             u32 pad:17;
         } stats;
         struct PACKED {
-            u32 slotIdx:2;
+            u32 slotIdx:3;
             u32 optionIdx:2;
             u32 subMode:8;    // backup for reorder
             u32 forgetState:3;
             u32 yesNoIdx:1;
             u32 reorderFail:1;
-            u32 forgottenMove:14;
+            u32 forgottenMove:13;
         } moves;
     } arg;
 };
