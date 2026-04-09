@@ -50,9 +50,10 @@ static EWRAM_DATA struct MonSummaryResources *sMonSummaryDataPtr = NULL;
 static EWRAM_DATA struct {
     void *mons;
     u32 totalIdx:5;
-    u32 isBoxMon:1;
+    u32 useBoxMon:1;
     u32 currMoveSlot:3;
-    u32 pad:23;
+    enum MonSummaryModes mode:5;
+    u32 pad:18;
 } sMonSummaryInitialBackup = {0}; // for moveReminder
 
 // declarations
@@ -240,7 +241,7 @@ void Task_MonSummary_WaitFadeAndInit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, gTasks[taskId].data[0], 0, CB2_ReturnToFieldContinueScript);
+        MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, gTasks[taskId].data[0], 0, FALSE, CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
@@ -252,7 +253,7 @@ void MonSummary_EditMonIVs(struct ScriptContext *ctx)
     gTasks[taskId].data[0] = VarGet(ScriptReadHalfword(ctx));
 }
 
-void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, MainCallback callback)
+void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, bool32 useBoxMon, MainCallback callback)
 {
     sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
     void *gfx = NULL;
@@ -280,27 +281,25 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
     {
     default:
         break;
-    case UI_SUMMARY_MODE_BOX:
-        sMonSummaryDataPtr->useBoxMon = TRUE;
-        mode = UI_SUMMARY_MODE_DEFAULT;
-        break;
     case UI_SUMMARY_MODE_EDIT_IVS:
         page = SUMMARY_PAGE_STATS;
         SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
     case UI_SUMMARY_MODE_MOVE_MENU:
-        mode = UI_SUMMARY_MODE_DEFAULT;
-        page = SUMMARY_PAGE_MOVES;
-        sMonSummaryDataPtr->useBoxMon = sMonSummaryInitialBackup.isBoxMon;
         MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
         MovesPageMisc_SetOptionIndex(SUMMARY_MOVES_OPTION_LEARN);
+        // fallthrough
+    case UI_SUMMARY_MODE_MOVES_PAGE:
+        mode = UI_SUMMARY_MODE_DEFAULT;
+        page = SUMMARY_PAGE_MOVES;
         break;
     }
 
     if (!gInitialSummaryScreenCallback)
         gInitialSummaryScreenCallback = callback;
 
+    sMonSummaryDataPtr->useBoxMon = useBoxMon;
     sMonSummaryDataPtr->savedCallback = callback;
     sMonSummaryDataPtr->list.mons = mons;
 
@@ -336,10 +335,11 @@ static void CB2_MonSummary(void)
 
 static void CB2_ReloadMonSummary(void)
 {
-    MonSummary_Init(UI_SUMMARY_MODE_MOVE_MENU,
+    MonSummary_Init(sMonSummaryInitialBackup.mode,
         sMonSummaryInitialBackup.mons,
         gLastViewedMonIndex,
         sMonSummaryInitialBackup.totalIdx,
+        sMonSummaryInitialBackup.useBoxMon,
         gInitialSummaryScreenCallback);
 }
 

@@ -3,12 +3,11 @@
 
 enum MoveReminderModes
 {
-    MREMINDER_MODE_PARTY,
-    MREMINDER_MODE_BOX,
+    MREMINDER_MODE_DEFAULT,
 
     NUM_MREMINDER_MODES
 };
 
-void MoveReminder_Init(enum MoveReminderModes, MainCallback, void *, u32);
+void MoveReminder_Init(enum MoveReminderModes, MainCallback, void *, bool32);
 
 #endif // GUARD_UI_MOVE_REMINDER_H

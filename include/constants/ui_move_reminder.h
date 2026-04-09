@@ -193,6 +193,8 @@ struct MoveReminderData
 {
     enum MoveReminderModes mode;
     enum PageInterfaces page;
+    u8 padding:7;
+    u8 useBoxMon:1;
     MainCallback savedCallback;
     struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
@@ -210,12 +212,11 @@ struct MoveReminderData
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {
+        void *ptr;
         struct Pokemon *mon;
         struct BoxPokemon *boxMon;
-    } ptr;
+    } target;
     struct MoveReminderMon mon;
-    u8 useBoxMon:1;
-    u8 moveSlot:7;
 };
 
 struct PageInterfaceInfo

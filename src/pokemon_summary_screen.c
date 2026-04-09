@@ -1179,6 +1179,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
 {
     // Start monSummary
     enum MonSummaryModes newMode = UI_SUMMARY_MODE_DEFAULT;
+    bool32 useBoxMon = FALSE;
 
     switch (mode)
     {
@@ -1192,11 +1193,12 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         break;
     case SUMMARY_MODE_BOX:
     case SUMMARY_MODE_BOX_CURSOR: // mon is being moved in PC
-        newMode = UI_SUMMARY_MODE_BOX;
+        newMode = UI_SUMMARY_MODE_DEFAULT;
+        useBoxMon = TRUE;
         break;
     }
 
-    MonSummary_Init(newMode, mons, monIndex, maxMonIndex, callback);
+    MonSummary_Init(newMode, mons, monIndex, maxMonIndex, useBoxMon, callback);
     return;
     // End monSummary
 

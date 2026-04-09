@@ -65,6 +65,7 @@ static void SpriteCB_MoveCursor(struct Sprite *);
 
 static enum MoveReminderModes MReminderMode_GetValue(void);
 static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
+static bool32 MReminderMode_UseBoxMon(void);
 
 static const struct PageInterfaceInfo *PageInterface_GetInfo(enum PageInterfaces);
 static const u32 *PageInterface_GetTilemap(enum PageInterfaces);
@@ -139,7 +140,7 @@ static void FilterPage_UpdateFrontEnd(void);
 
 #include "data/ui_move_reminder.h"
 
-void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void *mon, u32 moveSlot)
+void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void *mon, bool32 useBoxMon)
 {
     sMoveReminderDataPtr = AllocZeroed(sizeof(struct MoveReminderData));
     if (sMoveReminderDataPtr == NULL)
@@ -150,9 +151,10 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
 
     MReminderMode_SetValue(mode);
     PageInterface_SetValue(PAGE_INTERFACE_MAIN);
-    sMoveReminderDataPtr->ptr.mon = mon;
-    sMoveReminderDataPtr->moveSlot = moveSlot;
+    sMoveReminderDataPtr->target.mon = mon;
+    sMoveReminderDataPtr->useBoxMon = useBoxMon;
     sMoveReminderDataPtr->savedCallback = callback;
+    ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
 
     SetMainCallback2(CB2_InitSetup);
 }
@@ -264,10 +266,10 @@ static void InitSetup_MonData(void)
 {
     struct Pokemon oldMon;
 
-    if (MReminderMode_GetValue() == MREMINDER_MODE_BOX)
-        BoxMonToMon(sMoveReminderDataPtr->ptr.boxMon, &oldMon);
+    if (MReminderMode_UseBoxMon())
+        BoxMonToMon(sMoveReminderDataPtr->target.boxMon, &oldMon);
     else
-        CopyMon(&oldMon, sMoveReminderDataPtr->ptr.mon, sizeof(struct Pokemon));
+        CopyMon(&oldMon, sMoveReminderDataPtr->target.mon, sizeof(struct Pokemon));
 
     struct MoveReminderMon *newMon = &sMoveReminderDataPtr->mon;
 
@@ -485,6 +487,11 @@ static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes mode
 {
     sMoveReminderDataPtr->mode = mode;
     return MReminderMode_GetValue();
+}
+
+static bool32 MReminderMode_UseBoxMon(void)
+{
+    return sMoveReminderDataPtr->useBoxMon;
 }
 
 static const struct PageInterfaceInfo *PageInterface_GetInfo(enum PageInterfaces page)
