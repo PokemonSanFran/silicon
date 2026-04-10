@@ -258,9 +258,9 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         .name = COMPOUND_STRING("Moves"),
         .helpBar = (const u8 *const[]){
             [SUMMARY_MOVES_SUB_MODE_NONE]       = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
-            [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Options {B_BUTTON} Cancel"),
-            [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{DPAD_UPDOWN} Move {A_BUTTON} Select {B_BUTTON} Cancel"),
-            [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{A_BUTTON} Swap Moves {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Explore Move {START_BUTTON} Learn Moves {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{A_BUTTON} Choose {B_BUTTON} Cancel"),
+            [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_FORGET]     = COMPOUND_STRING(""),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),

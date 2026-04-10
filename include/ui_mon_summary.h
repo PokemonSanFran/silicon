@@ -10,7 +10,7 @@ enum __attribute__((packed)) MonSummaryModes
 
     // only used for moveReminder
     UI_SUMMARY_MODE_MOVE_MENU,
-    UI_SUMMARY_MODE_MOVES_PAGE,
+    UI_SUMMARY_MODE_MOVE_DETAILS,
 
     NUM_UI_SUMMARY_MODES
 };

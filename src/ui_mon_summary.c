@@ -286,11 +286,16 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
         SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
     case UI_SUMMARY_MODE_MOVE_MENU:
-        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
         MovesPageMisc_SetOptionIndex(SUMMARY_MOVES_OPTION_LEARN);
-        // fallthrough
-    case UI_SUMMARY_MODE_MOVES_PAGE:
+        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
+        mode = UI_SUMMARY_MODE_DEFAULT;
+        page = SUMMARY_PAGE_MOVES;
+        break;
+    case UI_SUMMARY_MODE_MOVE_DETAILS:
+        SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_DETAILS);
+        MovesPageMisc_SetOptionIndex(0);
+        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
         mode = UI_SUMMARY_MODE_DEFAULT;
         page = SUMMARY_PAGE_MOVES;
         break;
@@ -370,10 +375,10 @@ static void Task_MonSummary_OpenMoveReminder(u8 taskId)
 {
     if (gPaletteFade.active) return;
 
-    if (SummaryInput_IsWithinSubMode())
+    if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS)
         sMonSummaryInitialBackup.mode = UI_SUMMARY_MODE_MOVE_MENU;
     else
-        sMonSummaryInitialBackup.mode = UI_SUMMARY_MODE_MOVES_PAGE;
+        sMonSummaryInitialBackup.mode = UI_SUMMARY_MODE_MOVE_DETAILS;
 
     sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
     sMonSummaryInitialBackup.mons = sMonSummaryDataPtr->list.mons;
@@ -1216,6 +1221,16 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
 
         SummaryInput_TryStartReorderMode();
         SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+        return;
+    }
+
+    if (JOY_NEW(START_BUTTON))
+    {
+        if (subMode != SUMMARY_MOVES_SUB_MODE_DETAILS) return;
+
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MonSummary_OpenMoveReminder;
+        PlaySE(SE_SELECT);
         return;
     }
 }
