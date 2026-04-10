@@ -90,6 +90,25 @@ const u16 gItemIconPalette_BeastBall[] = INCBIN_U16("graphics/items/icon_palette
 const u32 gItemIcon_CherishBall[] = INCBIN_U32("graphics/items/icons/cherish_ball.4bpp.smol");
 const u16 gItemIconPalette_CherishBall[] = INCBIN_U16("graphics/items/icon_palettes/cherish_ball.gbapal");
 
+// Start newBall
+const u32 gItemIcon_VitalityBall[] = INCBIN_U32("graphics/items/icons/vitality_ball.4bpp.smol");
+const u16 gItemIconPalette_VitalityBall[] = INCBIN_U16("graphics/items/icon_palettes/vitality_ball.gbapal");
+const u32 gItemIcon_PsycheBall[] = INCBIN_U32("graphics/items/icons/psyche_ball.4bpp.smol");
+const u16 gItemIconPalette_PsycheBall[] = INCBIN_U16("graphics/items/icon_palettes/psyche_ball.gbapal");
+const u32 gItemIcon_MineralBall[] = INCBIN_U32("graphics/items/icons/mineral_ball.4bpp.smol");
+const u16 gItemIconPalette_MineralBall[] = INCBIN_U16("graphics/items/icon_palettes/mineral_ball.gbapal");
+const u32 gItemIcon_ElectroBall[] = INCBIN_U32("graphics/items/icons/electro_ball.4bpp.smol");
+const u16 gItemIconPalette_ElectroBall[] = INCBIN_U16("graphics/items/icon_palettes/electro_ball.gbapal");
+const u32 gItemIcon_BogBall[] = INCBIN_U32("graphics/items/icons/bog_ball.4bpp.smol");
+const u16 gItemIconPalette_BogBall[] = INCBIN_U16("graphics/items/icon_palettes/bog_ball.gbapal");
+const u32 gItemIcon_JetstreamBall[] = INCBIN_U32("graphics/items/icons/jetstream_ball.4bpp.smol");
+const u16 gItemIconPalette_JetstreamBall[] = INCBIN_U16("graphics/items/icon_palettes/jetstream_ball.gbapal");
+const u32 gItemIcon_FableBall[] = INCBIN_U32("graphics/items/icons/fable_ball.4bpp.smol");
+const u16 gItemIconPalette_FableBall[] = INCBIN_U16("graphics/items/icon_palettes/fable_ball.gbapal");
+const u32 gItemIcon_ParadoxBall[] = INCBIN_U32("graphics/items/icons/paradox_ball.4bpp.smol");
+const u16 gItemIconPalette_ParadoxBall[] = INCBIN_U16("graphics/items/icon_palettes/paradox_ball.gbapal");
+// End newBall
+
 // Medicine
 
 const u32 gItemIcon_Potion[] = INCBIN_U32("graphics/items/icons/potion.4bpp.smol");

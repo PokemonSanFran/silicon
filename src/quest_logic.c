@@ -1387,9 +1387,9 @@ void Quest_Persuasivepassenger_TakeNeededItems(void){
 u32 Quest_Skilllibrary_CountObtainedTechnicalMachines(void)
 {
     u32 count = 0, machineIndex = 0;
-    u32 machineRange = (ITEM_TM01 + NUM_TECHNICAL_MACHINES);
+    u32 machineRange = (ITEM_TM001 + NUM_TECHNICAL_MACHINES);
 
-    for (machineIndex = ITEM_TM01; machineIndex < machineRange; machineIndex++)
+    for (machineIndex = ITEM_TM001; machineIndex < machineRange; machineIndex++)
         if (CheckBagHasItem(machineIndex,1))
             count++;
 
@@ -1423,9 +1423,9 @@ u32 Quest_Skilllibrary_GetPercentage(void)
 void Quest_Skilllibrary_Debug(void)
 {
     u32 machineIndex = 0;
-    u32 machineRange = (ITEM_TM01 + NUM_TECHNICAL_MACHINES);
+    u32 machineRange = (ITEM_TM001 + NUM_TECHNICAL_MACHINES);
 
-    for (machineIndex = ITEM_TM01; machineIndex < machineRange; machineIndex++)
+    for (machineIndex = ITEM_TM001; machineIndex < machineRange; machineIndex++)
         if (!CheckBagHasItem(machineIndex,1))
             AddBagItem(machineIndex,1);
 }

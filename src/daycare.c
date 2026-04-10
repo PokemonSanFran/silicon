@@ -1719,3 +1719,19 @@ u16 TakePokemonFromRoute5Daycare(void)
     return SPECIES_NONE;
 #endif
 }
+
+bool8 IsMonInUndiscoveredOrGenderless(u32 species)
+{
+    if (gSpeciesInfo[species].genderRatio == MON_GENDERLESS)
+        return TRUE;
+
+    for (u32 eggGroupIndex = 0; eggGroupIndex < EGG_GROUPS_PER_MON; eggGroupIndex++)
+    {
+        u32 group = gSpeciesInfo[species].eggGroups[eggGroupIndex];
+
+        if (group == EGG_GROUP_NONE || group == EGG_GROUP_DITTO || group == EGG_GROUP_NO_EGGS_DISCOVERED)
+            return TRUE;
+    }
+
+    return FALSE;
+}

@@ -1212,29 +1212,29 @@ static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
 };
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-static const struct SpriteFrameImage sPicTable_Ball_NEWA[] = {
-        POKEBALL_PIC_FRAMES(NewA),
+static const struct SpriteFrameImage sPicTable_Ball_VITALITY[] = {
+        POKEBALL_PIC_FRAMES(Vitality),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWB[] = {
-        POKEBALL_PIC_FRAMES(NewB),
+static const struct SpriteFrameImage sPicTable_Ball_PSYCHE[] = {
+        POKEBALL_PIC_FRAMES(Psyche),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWC[] = {
-        POKEBALL_PIC_FRAMES(NewC),
+static const struct SpriteFrameImage sPicTable_Ball_MINERAL[] = {
+        POKEBALL_PIC_FRAMES(Mineral),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWD[] = {
-        POKEBALL_PIC_FRAMES(NewD),
+static const struct SpriteFrameImage sPicTable_Ball_ELECTRO[] = {
+        POKEBALL_PIC_FRAMES(Electro),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWE[] = {
-        POKEBALL_PIC_FRAMES(NewE),
+static const struct SpriteFrameImage sPicTable_Ball_BOG[] = {
+        POKEBALL_PIC_FRAMES(Bog),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWF[] = {
-        POKEBALL_PIC_FRAMES(NewF),
+static const struct SpriteFrameImage sPicTable_Ball_JETSTREAM[] = {
+        POKEBALL_PIC_FRAMES(Jetstream),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWG[] = {
-        POKEBALL_PIC_FRAMES(NewG),
+static const struct SpriteFrameImage sPicTable_Ball_FABLE[] = {
+        POKEBALL_PIC_FRAMES(Fable),
 };
-static const struct SpriteFrameImage sPicTable_Ball_NEWH[] = {
-        POKEBALL_PIC_FRAMES(NewH),
+static const struct SpriteFrameImage sPicTable_Ball_PARADOX[] = {
+        POKEBALL_PIC_FRAMES(Paradox),
 };
 // End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
