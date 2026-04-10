@@ -3078,7 +3078,9 @@ static void MovesPageMisc_TrySpawnCursors(void)
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_ARROWS);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sMovesPageMisc_ArrowsSpriteTemplate, SUMMARY_MOVES_GENERAL_ARROWS_X, SUMMARY_MOVES_GENERAL_ARROWS_Y, 0);
+        spriteId = CreateSprite(&gMonSummary_CursorArrowsSpriteTemplate, SUMMARY_MOVES_GENERAL_ARROWS_X, SUMMARY_MOVES_GENERAL_ARROWS_Y, 0);
+
+        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(TAG_SUMMARY_UNIVERSAL_PAL);
         SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_ARROWS, spriteId);
     }
 }

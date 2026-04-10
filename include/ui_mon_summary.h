@@ -21,6 +21,7 @@ extern const struct SpritePalette gMonSummary_TypeSpritePalettes[];
 extern const struct SpriteTemplate gMonSummary_MoveBarSpriteTemplate;
 extern const struct SubspriteTable gMonSummary_128x16SubspriteTable[];
 extern const struct SpriteTemplate gMonSummary_SlotCursorSpriteTemplate;
+extern const struct SpriteTemplate gMonSummary_CursorArrowsSpriteTemplate;
 
 void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, bool32, MainCallback);
 

@@ -569,30 +569,6 @@ static const u16 *const sMovesPageMisc_MenuTilemaps[] =
 
 static const u8 sMovesPageMisc_ForgetConfirmationBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/moves/confirmation_box.4bpp");
 
-static const struct SpriteTemplate sMovesPageMisc_ArrowsSpriteTemplate =
-{
-    .tileTag = TAG_NONE,
-    .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
-    .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
-        .priority = 1
-    },
-    .anims = (const union AnimCmd *const[]){
-        (const union AnimCmd[]){
-            ANIMCMD_FRAME(0, 30),
-            ANIMCMD_FRAME(1, 30),
-            ANIMCMD_JUMP(0)
-        },
-    },
-    .images = &(const struct SpriteFrameImage){
-        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/arrows.4bpp"),
-        .size = (16 * 16) / 2,
-        .relativeFrames = TRUE,
-    },
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_MovesPageMisc_Arrows
-};
-
 static const struct SpriteTemplate sMovesPageMisc_OptionCursorSpriteTemplate =
 {
     .tileTag = TAG_NONE,
@@ -694,4 +670,28 @@ const struct SpriteTemplate gMonSummary_SlotCursorSpriteTemplate =
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gMonSummary_CursorArrowsSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16),
+        .priority = 1
+    },
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){
+            ANIMCMD_FRAME(0, 30),
+            ANIMCMD_FRAME(1, 30),
+            ANIMCMD_JUMP(0)
+        },
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/moves/arrows.4bpp"),
+        .size = (16 * 16) / 2,
+        .relativeFrames = TRUE,
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MovesPageMisc_Arrows
 };

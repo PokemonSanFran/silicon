@@ -62,6 +62,7 @@ static u32 MoveBar_GetSpriteId(u32);
 static void MoveBar_SetSpriteId(u32, u32);
 static void SpriteCB_MoveBar(struct Sprite *);
 static void SpriteCB_MoveCursor(struct Sprite *);
+static void SpriteCB_MoveCursorArrows(struct Sprite *);
 
 static void ConfirmationBox_SetResult(u32);
 static bool32 ConfirmationBox_Input();
@@ -396,6 +397,7 @@ static void MoveBar_Init(void)
 {
     const struct SpriteTemplate *template = &gMonSummary_MoveBarSpriteTemplate;
     struct Sprite *sprite;
+    u32 spriteId;
 
     for (u32 i = 0, y = PAGE_MAIN_MOVE_BAR_Y; i < MAX_MREMINDER_BAR_SPRITES + 1; i++, y += PAGE_MAIN_MOVE_BAR_SPACER_Y)
     {
@@ -406,8 +408,8 @@ static void MoveBar_Init(void)
             template = &gMonSummary_SlotCursorSpriteTemplate;
         }
 
-        //                                                   set subpriority for move bars to be right below the cursor
-        u32 spriteId = CreateSprite(template, PAGE_MAIN_MOVE_BAR_X, y, i != MREMINDER_BAR_SPRITE_ID_CURSOR);
+        // set subpriority for move bars to be right below the cursor
+        spriteId = CreateSprite(template, PAGE_MAIN_MOVE_BAR_X, y, i != MREMINDER_BAR_SPRITE_ID_CURSOR);
         sprite = &gSprites[spriteId];
 
         sprite->sMoveBar_Idx = i;
@@ -419,6 +421,13 @@ static void MoveBar_Init(void)
     // cursor
     sprite->oam.paletteNum = IndexOfSpritePaletteTag(MREMINDER_TAG_UNIVERSAL);
     sprite->callback = SpriteCB_MoveCursor;
+
+    // vertical arrows notating the cursor for extra visual clarity
+    spriteId = CreateSprite(&gMonSummary_CursorArrowsSpriteTemplate, PAGE_MAIN_MOVE_BAR_ARROWS_X, PAGE_MAIN_MOVE_BAR_ARROWS_Y, 0);
+    sprite = &gSprites[spriteId];
+
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(MREMINDER_TAG_UNIVERSAL);
+    sprite->callback = SpriteCB_MoveCursorArrows;
 }
 
 static void MoveBar_Update(void)
@@ -490,6 +499,11 @@ static void SpriteCB_MoveBar(struct Sprite *sprite)
 }
 
 static void SpriteCB_MoveCursor(struct Sprite *sprite)
+{
+    sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
+}
+
+static void SpriteCB_MoveCursorArrows(struct Sprite *sprite)
 {
     sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
 }
