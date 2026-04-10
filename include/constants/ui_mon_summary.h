@@ -431,7 +431,7 @@ struct MonSummary
     u8 totalMoves;
     u16 totalValues[NUM_SUMMARY_TOTAL_VALUES];
     u8 gender;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 nickname[min(10, POKEMON_NAME_LENGTH)];
     enum PokeBall ball;
     u8 flavors[TOTAL_MON_NATURE_FLAVORS];
 };

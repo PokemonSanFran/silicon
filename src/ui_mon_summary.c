@@ -1315,7 +1315,7 @@ static void SummaryMon_SetStruct(void)
     struct MonSummaryResources *res = sMonSummaryDataPtr;
     struct Pokemon *mon = &res->mon;
 
-    res->summary.species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    res->summary.species = SanitizeSpeciesId(GetMonData(mon, MON_DATA_SPECIES_OR_EGG));
     res->summary.exp = GetMonData(mon, MON_DATA_EXP);
     res->summary.level = GetMonData(mon, MON_DATA_LEVEL);
     res->summary.abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
@@ -1814,7 +1814,8 @@ static void SummarySprite_InjectPokemon(void)
         LoadPalette(GetValidMonIconPalettePtr(mon->species), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
-    SetMultiuseSpriteTemplateToPokemon(TAG_NONE, position);
+    SetMultiuseSpriteTemplateToPokemon(mon->species, position);
+    gMultiuseSpriteTemplate.paletteTag = TAG_NONE;              // manually setting this bc TAG_NONE throws an assertf (for a good reason)
 
     if (SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
     {
@@ -1885,12 +1886,14 @@ static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)
     if (SummarySprite_GetDynamicSpriteId(spriteArrId) != SPRITE_NONE) return;
 
     LoadBallGfx(ball);
-    u32 spriteId = CreateSprite(&gBallSpriteTemplates[ball], x, y, 0);
+
+    const struct SpriteTemplate *template = &gPokeBalls[ball].spriteTemplate;
+    u32 spriteId = CreateSprite(template, x, y, 0);
 
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].sTileTag = gBallSpriteTemplates[ball].tileTag;
-    gSprites[spriteId].sPaletteTag = gBallSpriteTemplates[ball].paletteTag;
+    gSprites[spriteId].sTileTag = template->tileTag;
+    gSprites[spriteId].sPaletteTag = template->paletteTag;
 
     SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
 }
@@ -3213,7 +3216,7 @@ static void MovesPageMisc_UpdateSlot(s32 delta)
         idx += delta;
 
     PlaySE(SE_SELECT);
-    ShiftMoveSlot(&sMonSummaryDataPtr->mon, MovesPageMisc_GetSlotIndex(), idx);
+    ShiftMoveSlot(&sMonSummaryDataPtr->mon.box, MovesPageMisc_GetSlotIndex(), idx);
     MovesPageMisc_SetSlotIndex(idx);
     SummaryMon_CopyChanges();
     SummaryMon_SetStruct();
@@ -3236,7 +3239,7 @@ static void MovesPageMisc_ForgetMove(void)
     RemoveMonPPBonus(mon, firstSlotIdx);
 
     for (u32 i = firstSlotIdx; i < MAX_MON_MOVES - 1; i++)
-        ShiftMoveSlot(mon, i, i + 1);
+        ShiftMoveSlot(&mon->box, i, i + 1);
 
     SummaryMon_CopyChanges();
     SummaryMon_SetStruct();
