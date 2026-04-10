@@ -562,4 +562,14 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_RESTAURANTEXPANSION2] =
+    {
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("Looking for busboys, servers, chefs and line cooks - My new resturants wants to hire more Resido residents. DM me if you’re interested!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

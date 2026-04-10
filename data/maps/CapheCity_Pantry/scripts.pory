@@ -1,6 +1,14 @@
 mapscripts CapheCity_Pantry_MapScripts{
     MAP_SCRIPT_ON_LOAD{
     }
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_quest_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Script_HideFlowersBelen)
+        call_if_subquest_not_complete(QUEST_RESTAURANTEXPANSION2,SUB_QUEST_1,Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionhostess)
+        call_if_subquest_not_complete(QUEST_RESTAURANTEXPANSION2,SUB_QUEST_2,Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionchef)
+        call_if_subquest_not_complete(QUEST_RESTAURANTEXPANSION2,SUB_QUEST_3,Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionlinecook)
+        call_if_subquest_not_complete(QUEST_RESTAURANTEXPANSION2,SUB_QUEST_4,Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionbusser)
+    }
 }
 const PLAYER = OBJ_EVENT_ID_PLAYER
 

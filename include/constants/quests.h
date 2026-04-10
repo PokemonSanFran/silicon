@@ -674,6 +674,24 @@ enum
 };
 
 // ***********************************************************************
+// Quest: Restaurant Expansion 2
+// ***********************************************************************
+
+#define MAP_QUEST_RESTAURANTEXPANSION2_1 MAP_ROUTE1
+#define MAP_QUEST_RESTAURANTEXPANSION2_2 MAP_ROUTE99
+#define MAP_QUEST_RESTAURANTEXPANSION2_3 MAP_ROUTE4
+#define MAP_QUEST_RESTAURANTEXPANSION2_4 MAP_ROUTE9
+#define MAP_QUEST_RESTAURANTEXPANSION2_0 MAP_CAPHE_CITY_PANTRY
+#define MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS MAP_QUEST_RESTAURANTEXPANSION1_0
+
+#define OBJ_EVENT_GFX_RESTAURANTEXPANSIONHOSTESS OBJ_EVENT_GFX_MAN_4
+#define OBJ_EVENT_GFX_RESTAURANTEXPANSIONCHEF OBJ_EVENT_GFX_GIRL_1
+#define OBJ_EVENT_GFX_RESTAURANTEXPANSIONLINECOOK OBJ_EVENT_GFX_BOY_1
+#define OBJ_EVENT_GFX_RESTAURANTEXPANSIONBUSSER OBJ_EVENT_GFX_LASS
+
+#define ITEM_QUEST_RESTAURANTEXPANSION2_REWARD ITEM_POTION
+
+// ***********************************************************************
 // Quest: Digging Up Adaora's Dirt
 // ***********************************************************************
 

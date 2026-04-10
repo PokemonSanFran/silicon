@@ -1,4 +1,4 @@
-const KITVOL = 1
+const RESTAURANTEXPANSIONBUSSER = 1
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
 script Kitchenvolunteering_Script_FirstInteractKitvol
@@ -14,15 +14,15 @@ script Kitchenvolunteering_Dialogue_StartQuest
 {
     lock
     faceplayer
-    msgbox(format("Oh you're here! Finally. Okay let's see..."),,SPEAKER_KITVOL)
+    msgbox(format("Oh you're here! Finally. Okay let's see..."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
 
     call(Kitchenvolunteering_Script_BufferItemNameA)
-    msgbox(format("I need you to head down into the basement and grab some items for me. {STR_VAR_1}, {STR_VAR_2}, and {STR_VAR_3}."),,SPEAKER_KITVOL)
+    msgbox(format("I need you to head down into the basement and grab some items for me. {STR_VAR_1}, {STR_VAR_2}, and {STR_VAR_3}."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
 
     call(Kitchenvolunteering_Script_BufferItemNameB)
-    msgbox(format("Oh, and I need {STR_VAR_1} and {STR_VAR_2} too."),,SPEAKER_KITVOL)
+    msgbox(format("Oh, and I need {STR_VAR_1} and {STR_VAR_2} too."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
 
-    msgbox(format("Come back when you've got all five."),,SPEAKER_KITVOL)
+    msgbox(format("Come back when you've got all five."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     call(Kitchenvolunteering_Script_GiveKey)
     msgbox(format("I don't think they realize that I'm the wrong person..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT)
     closemessage
@@ -32,8 +32,8 @@ script Kitchenvolunteering_Dialogue_StartQuest
 
 script Kitchenvolunteering_Script_ReturnToWork
 {
-    applymovement(KITVOL,Common_Movement_FaceOriginalDirection)
-    waitmovement(KITVOL)
+    applymovement(RESTAURANTEXPANSIONBUSSER,Common_Movement_FaceOriginalDirection)
+    waitmovement(RESTAURANTEXPANSIONBUSSER)
     release
 }
 
@@ -41,7 +41,7 @@ script Kitchenvolunteering_Dialogue_YoureNotDone
 {
     lock
     faceplayer
-    msgbox(format("Oh you're not done? Let me know when you are."),,SPEAKER_KITVOL)
+    msgbox(format("Oh you're not done? Let me know when you are."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     call(Kitchenvolunteering_Script_ReturnToWork)
     end
 }
@@ -98,11 +98,11 @@ script Kitchenvolunteering_Dialogue_ThankPlayer
 {
     lock
     faceplayer
-    msgbox(format("Oh thank God! I'll take those. Thank you so much!"),,SPEAKER_KITVOL)
-    msgbox(format("Oh! And the key. I'll take that."),,SPEAKER_KITVOL)
+    msgbox(format("Oh thank God! I'll take those. Thank you so much!"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+    msgbox(format("Oh! And the key. I'll take that."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     closemessage
     cueobjectplayer(PLAYER)
-    msgbox(format("You did good today. Come back tomorrow if you're willing to help out again."),,SPEAKER_KITVOL)
+    msgbox(format("You did good today. Come back tomorrow if you're willing to help out again."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     call(Kitchenvolunteering_Script_ReturnToWork)
 }
 
@@ -142,7 +142,7 @@ script Kitchenvolunteering_Dialogue_TooBusy
 {
     lock
     faceplayer
-    msgbox(format("Did you see where I put that ladle?"),,SPEAKER_KITVOL,TAIL_WHISPER)
+    msgbox(format("Did you see where I put that ladle?"),,SPEAKER_RESTAURANTEXPANSIONBUSSER,TAIL_WHISPER)
     closemessage
     release
     end
@@ -172,8 +172,8 @@ script Kitchenvolunteering_Dialogue_RepeatQuest
     lock
     faceplayer
     special(KitchenvolunteeringFunc_ChooseRandomPantryItem)
-    msgbox(format("Oh wow! They never come back."),,SPEAKER_KITVOL)
-    msgbox(format("Okay, today I just need you to grab a {STR_VAR_1}."),,SPEAKER_KITVOL)
+    msgbox(format("Oh wow! They never come back."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+    msgbox(format("Okay, today I just need you to grab a {STR_VAR_1}."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     call(Kitchenvolunteering_Script_GiveKey)
     release
     end
@@ -181,9 +181,9 @@ script Kitchenvolunteering_Dialogue_RepeatQuest
 
 script Kitchenvolunteering_Script_GiveKey
 {
-    msgbox(format("Oh right! You need the key. Here you go."),,SPEAKER_KITVOL)
+    msgbox(format("Oh right! You need the key. Here you go."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     closemessage
-    cueobjectplayer(KITVOL)
+    cueobjectplayer(RESTAURANTEXPANSIONBUSSER)
     giveitem(ITEM_STORAGE_KEY,1)
 }
 

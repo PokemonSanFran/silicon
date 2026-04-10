@@ -3109,7 +3109,7 @@ void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
 }
 
 // ***********************************************************************
-// Quest: Restaurant Expansion 1
+// Quest: Restaurant Expansion 1 and 2
 // ***********************************************************************
 
 static const u16 questFoodLUT[QUEST_RESTAURANTEXPANSION1_SUB_COUNT] =
@@ -3125,6 +3125,10 @@ void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
     Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
 }
 
+void Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION2);
+}
 void DebugQuest_Restaurantexpansion1(u8 state)
 {
     switch (state)
@@ -3141,19 +3145,34 @@ void DebugQuest_Restaurantexpansion1(u8 state)
             QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION1);
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE:
+            AddBagItem(questFoodLUT[SUB_QUEST_1],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_KARIOKA:
+            AddBagItem(questFoodLUT[SUB_QUEST_2],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHEBUREKI:
+            AddBagItem(questFoodLUT[SUB_QUEST_3],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_JIANBING:
-            u32 pickupProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE);
-            AddBagItem(questFoodLUT[pickupProgress],1);
+            AddBagItem(questFoodLUT[SUB_QUEST_4],1);
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_1],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_2],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHEBUREKI:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_3],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_JIANBING:
-            u32 deliverProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE);
-            RemoveBagItem(questFoodLUT[deliverProgress],1);
-            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, deliverProgress);
+            RemoveBagItem(questFoodLUT[SUB_QUEST_4],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_4);
             Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_REWARD:
@@ -3170,6 +3189,8 @@ void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
 {
     gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
 }
+
+
 
 // ***********************************************************************
 // Quest: Digging Up Adaora's Dirt
