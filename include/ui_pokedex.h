@@ -37,6 +37,7 @@ struct FiltersSet
     struct Types filterTypes[TYPES_PER_MON];
     u16 filterAbility[MAX_MON_MOVES];
     struct Moves filterMoves[MAX_MON_MOVES];
+    u8 filterAlola[ALOLA_COUNT];
 };
 
 struct SpeciesMenu
@@ -176,6 +177,7 @@ bool32 SpeciesFilter_IsSpeciesInEggGroups(u32);
 bool32 SpeciesFilter_CheckSpeciesTypesAgainstFilters(u32);
 bool32 SpeciesFilter_DoesSpeciesHaveAbility(u32);
 bool32 SpeciesFilter_DoesSpeciesLearnMoves(u32);
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 void FreeBackgrounds(void);
 void Pokedex_SetupCallback(void);
 void SpeciesFilter_SwitchToFromGrid(u8);

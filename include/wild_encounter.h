@@ -38,6 +38,11 @@ struct WildEncounterTypes
     const struct WildPokemonInfo *rockSmashMonsInfo;
     const struct WildPokemonInfo *fishingMonsInfo;
     const struct WildPokemonInfo *hiddenMonsInfo;
+    // Start wildEncounters
+    const struct WildPokemonInfo *phenomenonMonsInfo;
+    const struct WildPokemonInfo *berryMonsInfo;
+    const struct WildPokemonInfo *flyMonsInfo;
+    // End wildEncounters
 };
 
 struct WildPokemonHeader
@@ -54,7 +59,6 @@ extern bool8 gIsSurfingEncounter;
 extern u8 gChainFishingDexNavStreak;
 
 void DisableWildEncounters(bool8 disabled);
-u8 PickWildMonNature(void);
 bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior);
 bool8 SweetScentWildEncounter(void);
 bool8 DoesCurrentMapHaveFishingMons(void);
@@ -75,5 +79,8 @@ bool32 MapHasNoEncounterData(void);
 bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags); // fogBattle
 void UpdateChainFishingStreak(void); // fishingUpdate
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
+u16 GenerateBerryMon(void); // wildEncounters
+bool8 IsOverworldMonShiny(void); // hidden_grotto
+bool8 IsOverworldMonFemale(void); //hidden_grotto
 
 #endif // GUARD_WILD_ENCOUNTER_H

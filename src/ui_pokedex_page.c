@@ -102,7 +102,7 @@ struct PokedexLocationPageData
 static struct PokedexMovesPageData *sPokedexMovesPageData = NULL;
 static struct PokedexEvolutionPageData *sPokedexEvolutionPageData = NULL;
 static struct PokedexLocationPageData *sPokedexLocationPageData = NULL;
-extern const u8 residoMovesAZ[POKEDEX_FILTER_ALPHABET_COUNT][MAX_MOVES_PER_LETTER];
+extern const u16 residoMovesAZ[POKEDEX_FILTER_ALPHABET_COUNT][MAX_MOVES_PER_LETTER];
 
 static const struct WindowTemplate sPokedexPageMovesWindowTemplates[] =
 {
@@ -2076,7 +2076,7 @@ void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32 fontId, 
 
     for (u32 machineIndex = 0; machineIndex < NUM_TECHNICAL_MACHINES; machineIndex++)
     {
-        u32 machineId = ITEM_TM01 + machineIndex;
+        u32 machineId = ITEM_TM001 + machineIndex;
 
         if (PageMoves_GetMoveIdFromPosition(currentPosition) != GetItemSecondaryId(machineId))
             continue;
@@ -2296,7 +2296,7 @@ static void ParentDisplay_CreateMenu(void)
 
     CopyWindowToVram(windowId,COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(BG0_POKEDEX_TEXT_CONTENT); //without this box doesn't appear at all
-    DebugParentPrintCoorindates();
+    //DebugParentPrintCoorindates();
 }
 
 static void ParentDisplay_PrintAllParents(void)
@@ -2685,7 +2685,7 @@ static void ParentDisplay_ChangeRow(s32 delta)
     ParentDisplay_SetListPositionFromCoordinates();
     ParentDisplay_ReloadMons();
     ParentDisplay_SetFutureSpeciesId(PageMoves_GetParentSpecies(ParentDisplay_GetListPosition()));
-    DebugParentPrintCoorindates();
+    //DebugParentPrintCoorindates();
 }
 
 static void ParentDisplay_ChangeColumn(s32 delta)
@@ -2694,7 +2694,7 @@ static void ParentDisplay_ChangeColumn(s32 delta)
     ParentDisplay_SanitizeCursorXCoordinate(delta);
     ParentDisplay_SetListPositionFromCoordinates();
     ParentDisplay_SetFutureSpeciesId(PageMoves_GetParentSpecies(ParentDisplay_GetListPosition()));
-    DebugParentPrintCoorindates();
+    //DebugParentPrintCoorindates();
 }
 
 static void ParentDisplay_ResetCoordinates(void)
@@ -2864,9 +2864,8 @@ static void ParentDisplay_FixCursorXCoorindate(void)
         ParentDisplay_SetCursorCoordinate(AXIS_X,--x);
 }
 
-static void DebugParentPrintCoorindates(void)
+static void UNUSED DebugParentPrintCoorindates(void)
 {
-    return;
     u32 x = ParentDisplay_GetCursorCoordinate(AXIS_X);
     u32 y = ParentDisplay_GetCursorCoordinate(AXIS_Y);
     u32 listPosition = ParentDisplay_GetListPosition();
@@ -2876,6 +2875,16 @@ static void DebugParentPrintCoorindates(void)
     u32 numMons = PageMoves_GetNumParents();
     u32 mon = ParentDisplay_GetFutureSpeciesId();
     u32 cursorMon = PageMoves_GetParentSpecies(ParentDisplay_GetListPosition());
+
+    (void)x;
+    (void)y;
+    (void)listPosition;
+    (void)currentRowNumber;
+    (void)currentRowSize;
+    (void)totalRows;
+    (void)numMons;
+    (void)mon;
+    (void)cursorMon;
 
     DebugPrintf("x %d | y %d | listPosition %d | rowcurrentRow %d | currentRowSize %d | totalRows %d | nnumItems %d | futureSpeciesId %d | cursorMon %d",
             x,
@@ -3188,6 +3197,8 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_POLTEAGEIST;
         case SPECIES_HATTERENE:
             return POKEDEX_FORM_HATTERENE;
+        case SPECIES_EISCUE:
+            return POKEDEX_FORM_EISCUE;
         case SPECIES_COPPERAJAH:
             return POKEDEX_FORM_COPPERAJAH;
         case SPECIES_DURALUDON:
@@ -3372,12 +3383,11 @@ static void PageEvolutions_ChangeListPosition(s32 delta)
     PageEvolution_ChangeCursorPosition();
     PageEvolutions_PrintEvolution(page);
     PrintHelpBar(PAGE_EVOLUTION_WINDOW_FOOTER);
-    DebugEvolutionPrintCoorindates();
+    //DebugEvolutionPrintCoorindates();
 }
 
-static void DebugEvolutionPrintCoorindates(void)
+static void UNUSED DebugEvolutionPrintCoorindates(void)
 {
-    return;
     u32 numMons = PageEvolution_GetNumMons();
     u32 monListPosition = PageEvolution_GetMonListPosition();
     u32 monCursorCoordinate = PageEvolution_GetMonCursorCoordinate();
@@ -3385,6 +3395,14 @@ static void DebugEvolutionPrintCoorindates(void)
     u32 cursorMon = PageEvolution_GetMonList(monListPosition);
     u32 maxListPosition = numMons - 1;
     u32 pen = maxListPosition - 1;
+
+    (void) numMons;
+    (void) monListPosition;
+    (void) monCursorCoordinate;
+    (void) futureMon;
+    (void) cursorMon;
+    (void) maxListPosition;
+    (void) pen;
 
     DebugPrintf("numMons %d |monListPosition %d |monCursorCoordinate %d |futureMon %S |futureMon %d |cursorMon %S |cursorMon %d |maxListPosition %d |pen %d |",numMons,monListPosition,monCursorCoordinate,GetSpeciesName(futureMon),futureMon,GetSpeciesName(cursorMon),cursorMon,maxListPosition,pen);
 }
@@ -3474,7 +3492,7 @@ static u32 ShouldUseMiniorException(u32 listId, u32 speciesId)
     if (speciesId != SPECIES_MINIOR_CORE)
         return speciesId;
 
-    if (PageEvolution_GetMethod(listId) != FORM_CHANGE_BATTLE_HP_PERCENT)
+    if (PageEvolution_GetMethod(listId) != FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT)
         return speciesId;
 
     return SPECIES_EGG;
@@ -3934,8 +3952,10 @@ static void BufferWeatherName(u32 weather, u8* string)
                                      break;
         case ~B_WEATHER_STRONG_WINDS: StringCopy(string,COMPOUND_STRING("not windy"));
                                       break;
+        case B_WEATHER_ICY_ANY:
         case B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("snowing"));
                              break;
+        case ~B_WEATHER_ICY_ANY:
         case ~B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("not snowing"));
                               break;
         case B_WEATHER_FOG: StringCopy(string,COMPOUND_STRING("foggy"));
@@ -3967,7 +3987,7 @@ static void PageForms_GenerateTransformString(u32 method, u32 param1, u32 param2
         case FORM_CHANGE_BATTLE_BEFORE_MOVE:
             StringCopy(gStringVar1,GetMoveName(param1));
             break;
-        case FORM_CHANGE_BATTLE_HP_PERCENT:
+        case FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT:
             StringCopy(gStringVar1,GetAbilityName(param1));
             if (param2 == HP_HIGHER_THAN)
                 StringCopy(gStringVar2,COMPOUND_STRING("higher than"));
@@ -3980,6 +4000,9 @@ static void PageForms_GenerateTransformString(u32 method, u32 param1, u32 param2
             CopyItemName(param1,gStringVar1);
             break;
         default:
+            StringCopy(gStringVar1,COMPOUND_STRING("REPLACE"));
+            StringCopy(gStringVar2,COMPOUND_STRING("REPLACE"));
+            StringCopy(gStringVar3,COMPOUND_STRING("REPLACE"));
             break;
     }
 }
@@ -4593,7 +4616,7 @@ static void PageStats_ChangeListPosition(s32 delta)
     PageEvolution_SetMonListPosition(newPosition);
     PageEvolution_SetMonCursorCoordinate(newPosition);
     PageStats_PrintAbilitiesAndDesc();
-    DebugEvolutionPrintCoorindates();
+    //DebugEvolutionPrintCoorindates();
 }
 
 static void PageStats_PrintCursor(enum PokedexPageStatsWindows windowId)

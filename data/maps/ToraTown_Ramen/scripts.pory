@@ -9,7 +9,7 @@ script ToraTown_Ramen_InteractFanny_Event_Script {
             case NOT_ASSIGNED:
             case ASSIGNED_MASK_OFF:
             case GOT_MASK_OFF_CLUE_1:
-            case DEFEATED_MASK_OFF_ALCMENE: return
+            case DEFEATED_MASK_OFF_VIGRIM: return
             default: call(MaskOff_QuestI_Dialogue)
         }
     release
@@ -17,7 +17,7 @@ script ToraTown_Ramen_InteractFanny_Event_Script {
 }
 
 script ToraTown_Ramen_FoodCulture_Script{
-    msgbox(gText_ToraTown_Ramen_TheRamenIsGreat,MSGBOX_NPC)
+    msgbox(format("The ramen is great, but my favorite item on the menu are the Poffins! Poffins are a Sinnoh dessert, but here they use all sorts of flavors you can't find overseas! The tastiest are the yellow Poke Bean! Or wait, is it the Casteliacone flavor...?"),MSGBOX_NPC)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_1)
     call(Quest_HybridCulture_CheckSubquests_Script)
     end

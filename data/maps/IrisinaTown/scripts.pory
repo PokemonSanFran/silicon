@@ -1,5 +1,9 @@
 mapscripts IrisinaTown_MapScripts
 {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION
     {
         call(RestoreZenzuIsland_Script_ControlIrisinaDrughelmettesterVisibility)

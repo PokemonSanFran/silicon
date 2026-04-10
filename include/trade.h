@@ -4,6 +4,8 @@
 #include "link_rfu.h"
 #include "constants/trade.h"
 
+#define TRADEMON_FROM_PC 1
+
 extern struct Mail gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
@@ -20,5 +22,9 @@ void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
 void LoadTradeAnimGfx(void);
 void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed);
+// Start surpriseTrade
+void SetSurpriseTradeFlag(bool32);
+bool8 GetSurpriseTradeFlag(void);
+// End surpriseTrade
 
 #endif //GUARD_TRADE_H

@@ -2,7 +2,7 @@
   "id": "MAP_HODOU_CITY_TUNNEL",
   "name": "HodouCity_Tunnel",
   "layout": "LAYOUT_HODOU_CITY_TUNNEL",
-  "music": "MUS_DEWFORD",
+  "music": "MUS_HODOU_CITY",
   "region_map_section": "MAPSEC_HODOU_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -23,22 +23,35 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_HodouCityTunnels_Treasure_Script",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_HODOUTUNNELS_TREASURE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 6,
-      "y": 11,
-      "elevation": 3,
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_1F"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
+      "x": 7,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_1E"
     }
   ],
   "warp_events": [

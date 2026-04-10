@@ -10,14 +10,14 @@ struct StarterMonTemplate
 {
     u16 species;
     u8 level;
-    u16 item;
-    u16 ball;
+    enum Item item;
+    enum PokeBall ball;
     u8 nature;
     u8 abilityNum;
     u8 gender;
-    u8 evs[NUM_STATS];
-    u8 ivs[NUM_STATS];
-    u16 moves[MAX_MON_MOVES];
+    u16 evs[NUM_STATS];
+    u16 ivs[NUM_STATS];
+    enum Move moves[MAX_MON_MOVES];
     u8 friendship;
     u8 nextExpPercent;
 };
@@ -30,5 +30,6 @@ void MoveStarterToParty(void);
 void GenerateDummyPartyMembers(void);
 void AddStartersToBox(void);
 bool32 ShouldMonBeShiny(u32 personality, u32 trainerId);
+u8 GetLowestLevelStarter(void);
 
 #endif // GUARD_SILICON_STARTER_H

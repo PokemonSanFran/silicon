@@ -18,13 +18,9 @@ script GlavezHill_Pokemoncenter_1F_EventScript_Nurse{
 script GlavezHill_Pokemoncenter_1F_EventScript_Clerk{
     lock
     faceplayer
-    call_if_quest_reward(QUEST_BODEGABURNOUT,Quest_Bodegaburnout_Reward_Dialogue)
-    message(gText_HowMayIServeYou)
-    waitmessage
-    pokemart(OldaleTown_Mart_Pokemart_Basic)
-    msgbox(gText_PleaseComeAgain)
-    call(Quest_Bodegaburnout_CheckSubquestState_Script)
-    call(Quest_Bodegaburnout_CheckNextStage_Script)
+    call(Quest_Bodegaburnout_Script_HandleQuestDirection)
+    msgbox(format("Gems boost the power of one attack, once per battle, by 30%. They were deemed too strong for battle and banned from the Pokémon League. Sharp Rise bought the entire stock and they're impossible to get ahold of now."),,SPEAKER_SHOPKEEPER)
+    closemessage
     release
     end
 }

@@ -27,14 +27,14 @@ script TwoHoursAgo_GiveFashionCase_Script{
 }
 
 script TwoHoursAgo_TheyreEager_Dialogue {
-    msgbox(gText_TwoHoursAgo_LooksLikeWokeUp, MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("Looks like Charlotte woke up early and already left! They're eager, I'll give them that. I guess they didn't need the explanation... or breakfast."), MSGBOX_NPC,SPEAKER_OLIVER)
 
         goto(TwoHoursAgo_ExplainLeague_ObjectSetUp_Script)
 }
 
 script TwoHoursAgo_ExplainLeague_ObjectSetUp_Script {
         lock
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
         setobjectxy(OLIVER, 4, 6)
         turnobject(OLIVER, DIR_WEST)
         setobjectnewmovementtype(OLIVER, MOVEMENT_TYPE_FACE_LEFT)
@@ -49,17 +49,17 @@ script TwoHoursAgo_ExplainLeague_Script {
         setflag(FLAG_TEMP_1F)
         lockall
         //PSF TODO write special for league explain cutscene
-        msgbox(gText_TwoHoursAgo_YoureInARace,,SPEAKER_OLIVER)
-        msgbox(gText_TwoHoursAgo_TheTouranemtnWillTest,,SPEAKER_OLIVER)
-        msgbox(gText_TwoHoursAgo_WeExpectTheBest,,SPEAKER_OLIVER)
+        msgbox(format("You're in a race against hundreds of other Pokémon Trainers, to see who can beat our 8 Gym Leaders first. The first 16 Trainers to do so, will qualify for the Championship Tournament, held in a few weeks."),,SPEAKER_OLIVER)
+        msgbox(format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpRise Capital-sponsored career Pokémon Trainer."),,SPEAKER_OLIVER)
+        msgbox(format("We expect the best from you and Charlotte! If you fail to qualify for the Championship, we'll be terminating your contract, and you'll be on your own... but we know that won't be the case! So don't worry."),,SPEAKER_OLIVER)
         closemessage
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         goto(TwoHoursAgo_LeftoversPokeballs_Dialogue)
 }
 
 script TwoHoursAgo_LeftoversPokeballs_Dialogue {
     setflag(FLAG_TEMP_1F)
-        msgbox(gText_TwoHoursAgo_CafeIsAlwaysSoDelicious,SPEAKER_OLIVER)
+        msgbox(format("Needles is always so delicious! Too bad Charlotte didn't eat with us. I guess you can take their portion of the food, and I bought you both PokéBalls, but you can have theirs too!"),SPEAKER_OLIVER)
         lockall
         giveitem(ITEM_LEFTOVERS)
         giveitem(ITEM_POKE_BALL, 5)
@@ -70,37 +70,7 @@ script TwoHoursAgo_LeftoversPokeballs_Dialogue {
 
 script TwoHoursAgo_ExplainLeftovers_Dialouge {
         bufferleadmonspeciesname(0)
-        msgbox(gText_TwoHoursAgo_CanHoldThose, MSGBOX_NPC,,SPEAKER_OLIVER)
+        msgbox(format("Your {STR_VAR_1} can hold those Leftovers to restore HP during battle. Now, you should get a move on! Don't let Charlotte get too far ahead of you!"), MSGBOX_NPC,,SPEAKER_OLIVER)
 
 }
 
-
-text gText_WhatOutfitDoYou {
-    format("Oh, I should get dressed!")
-}
-text gText_YouCanChangeYourOutfit {
-    format("You can change your outfit whenever you like by using the Fashion Case, found in your Bag's Key Items pocket.")
-}
-
-text gText_TwoHoursAgo_LooksLikeWokeUp {
-    format("Looks like Charlotte woke up early and already left! They're eager, I'll give them that. I guess they didn't need the explanation... or breakfast.")
-}
-
-text gText_TwoHoursAgo_YoureInARace {
-    format("You're in a race against hundreds of other Pokémon Trainers, to see who can beat our 8 Gym Leaders first. The first 16 Trainers to do so, will qualify for the Championship Tournament, held in a few weeks.")
-}
-
-text gText_TwoHoursAgo_TheTouranemtnWillTest {
-    format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpriseCapital-sponsored career Pokémon Trainer.")
-}
-
-text gText_TwoHoursAgo_WeExpectTheBest {
-    format("We expect the best from you and Charlotte! If you fail to qualify for the Championship, we'll be terminating your contract, and you'll be on your own... but we know that won't be the case! So don't worry.")
-}
-text gText_TwoHoursAgo_CafeIsAlwaysSoDelicious {
-    format("Needles is always so delicious! Too bad Charlotte didn't eat with us. I guess you can take their portion of the food, and I bought you both PokéBalls, but you can have theirs too!")
-}
-
-text gText_TwoHoursAgo_CanHoldThose {
-    format("Your {STR_VAR_1} can hold those Leftovers to restore HP during battle. Now, you should get a move on! Don't let Charlotte get too far ahead of you!")
-}

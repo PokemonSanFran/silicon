@@ -2,6 +2,10 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 mapscripts CuconuTown_MapScripts
 {
+	MAP_SCRIPT_ON_RESUME 
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION
     {
         call(AngelDelivery_Script_HideBikers)
@@ -25,7 +29,7 @@ script Champion_TurnPlayerAwayHome_Script
     }
 
     lockall
-    msgbox(gText_RemindPlayerNewHome)
+    msgbox(format("You don't live here anymore!"))
     closemessage
     applymovement(PLAYER,swagbag_WalkBackwards)
     waitmovement(0)

@@ -2,7 +2,7 @@
   "id": "MAP_TORA_TOWN_RAMEN",
   "name": "ToraTown_Ramen",
   "layout": "LAYOUT_TORA_TOWN_RAMEN",
-  "music": "MUS_VERDANTURF",
+  "music": "MUS_TORA_TOWN",
   "region_map_section": "MAPSEC_TORA_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
@@ -96,10 +96,6 @@
       "dest_warp_id": "1"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

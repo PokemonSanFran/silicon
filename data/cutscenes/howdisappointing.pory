@@ -18,7 +18,7 @@ script HowDisappointing_ManageObject_Script
     switch (var(VAR_HOWDISAPPOINTING_STATE))
 
    {
-        case MISSION_ASSIGNED: call(HowDisappointing_HideTheTide_Script)
+        case MISSION_ASSIGNED: call(HowDisappointing_HideThe_Tide_Script)
         case GRUNT1_ARRESTED:
         case GRUNT2_ARRESTED:
         case GYM_RAID_STARTED: call(HowDisappointing_MidMission_HideObjects_Script)
@@ -92,11 +92,11 @@ script HowDisappointing_HideAll_Script
 {
     setflag(FLAG_HIDE_POLICE)
     setflag(FLAG_HIDE_CHIEF)
-    call(HowDisappointing_HideTheTide_Script)
+    call(HowDisappointing_HideThe_Tide_Script)
     return
 }
 
-script HowDisappointing_HideTheTide_Script
+script HowDisappointing_HideThe_Tide_Script
 {
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_MEW)
     call(HowDisappointing_HideAdaora_Script)
@@ -105,7 +105,7 @@ script HowDisappointing_HideTheTide_Script
     return
 }
 
-script HowDisappointing_ShowTheTide_Script
+script HowDisappointing_ShowThe_Tide_Script
 {
     call(HowDisappointing_ShowAdaora_Script)
     call(HowDisappointing_ShowGruntA_Script)
@@ -158,12 +158,12 @@ script HowDisappointing_DeterminePlayerPath_Script
         {
             applymovement(PLAYER,Common_Movement_WalkDown)
         }
-        fadescreen(FADE_TO_BLACK)
+        fadescreenswapbuffers(FADE_TO_BLACK)
     waitmovement(PLAYER)
         setobjectxy(PLAYER,28,9)
         turnobject(PLAYER,DIR_NORTH)
         TeleportCamera(28,9)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
         return
 }
 
@@ -188,11 +188,9 @@ msgbox(format("Oh, and Champion?"))
 
 msgbox(format("Yeah?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-
 msgbox(format("Try to not let the leaders go this time, okay?"))
 
 msgbox(format("…yeah."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
 
 msgbox(format("Hehehehehe."))
 closemessage
@@ -216,23 +214,23 @@ return
 }
 script HowDisappointing_RaidMovement_Script
 {
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     call(HowDisappointing_MoveRaidIntoPosition_Script)
     delay(16)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
 
     setvar(VAR_HOWDISAPPOINTING_STATE,GYM_RAID_STARTED)
     opendoor(5,8)
     waitdooranim
 
-    applymovement(CHIEF,HowDisappointing_RunIntoGymD)
+    applymovement(CHIEF, moves(walk_up, step_end))
     waitmovement(CHIEF)
     playse(SE_EXIT)
     removeobject(CHIEF)
 
-    applymovement(POLICEA,HowDisappointing_RunIntoGymA)
-    applymovement(POLICEB,HowDisappointing_RunIntoGymB)
-    applymovement(POLICE_MON,HowDisappointing_RunIntoGymC)
+    applymovement(POLICEA, moves(walk_up, walk_right * 2, walk_up, step_end))
+    applymovement(POLICEB, moves(walk_up, walk_right, walk_up, step_end))
+    applymovement(POLICE_MON, moves(walk_up, walk_left, walk_up, step_end))
     waitmovement(POLICEB)
     playse(SE_EXIT)
     playse(SE_EXIT)
@@ -254,19 +252,19 @@ script HowDisappointing_RaidMovement_Script
     call(HowDisappointing_ClearRocketFlags_Script)
     playse(SE_EXIT)
     addobject(GRUNTA)
-    applymovement(GRUNTA,HowDisappointing_EscapeA)
+    applymovement(GRUNTA, moves(delay_16, walk_down * 3, face_left, emote_exclamation_mark, walk_up * 4, walk_right * 2, walk_faster_right* 4, step_end))
     waitmovement(GRUNTA)
 
     playse(SE_EXIT)
     waitse
     addobject(GRUNTB)
-    applymovement(GRUNTB,HowDisappointing_EscapeB)
+    applymovement(GRUNTB, moves(delay_16, walk_faster_down * 3, walk_faster_left * 9, walk_faster_down * 6, step_end))
     waitmovement(GRUNTB)
 
     playse(SE_EXIT)
     waitse
     addobject(ADAORA)
-    applymovement(ADAORA,HowDisappointing_Escape)
+    applymovement(ADAORA, moves(delay_16, walk_faster_down * 3, walk_faster_right * 3, walk_faster_down * 4, walk_faster_right * 4, walk_faster_right * 5, step_end))
     waitmovement(0)
 
     playse(SE_PIN)
@@ -301,12 +299,12 @@ script HowDisappointing_Interfact_Adaora_Script
 
     case FALSE_TIMELINE_MAN_COMPLETE:
     case FALSE_TIMELINE_MAN_BURN_COMPLETE:
-      msgbox(format("Alcmene wasn't enough for you? Didn't you get who you were looking for, and leave the rest of us alone?"),MSGBOX_NPC,SPEAKER_ADAORA)
+      msgbox(format("Vigrim wasn't enough for you? You got who you were looking for. Leave the rest of us alone!"),MSGBOX_NPC,SPEAKER_ADAORA)
       msgbox(format("We're not done until The Tide is finished, and we both know that."),,SPEAKER_ALICIA)
   }
 
-    msgbox(format("I know how you want to it end. Kai told me all about your meltdown. It doesn't matter how you try to spin this - this problem just won't go away."),,SPEAKER_ADAORA)
-    msgbox(format("Kai doesn't know what he's talking about. None of you do!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("I know how you want it to end. Baiya told me all about your little meltdown. It doesn't matter how you try and spin it - this isn't going to just go away."),,SPEAKER_ADAORA)
+    msgbox(format("Baiya doesn't know what he's talking about. None of you do!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("We all know that these companies don’t care about you. Champion? You're a tool for them. Why is this that so hard to see?"),,SPEAKER_ADAORA)
     msgbox(format("I'm done talking. You can come quietly, or I can make you."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     startmenu_savescreen
@@ -342,10 +340,12 @@ script HowDisappointing_ArrestScene_Dialogue
     msgbox(format("All right officers, {PLAYER} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA) // PSF TODO Replace PLAYER with OBJECT pronoun
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
-    msgbox(gText_HowDisappointing_PokemonUse,,SPEAKER_POLICEMAN)
+    //PSF TODO Luxray uses Shock Wave first time
+    //PSF TODO Mightyena uses Take Down against Adaora
+    msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
     //PSF TODO Adaora is knocked down, need animation here
-    applymovement(POLICE_MON,HowDisappointing_UseTakeDown_Movement)
+    applymovement(POLICE_MON, moves(lock_facing_direction, walk_faster_down, walk_up, step_end))
     delay(8)
     applymovement(ADAORA,HowDisappointing_FallDown_Movement)
     waitmovement(ADAORA)
@@ -363,13 +363,13 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF2 = 6
 
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
@@ -379,17 +379,17 @@ script HowDisappointing_MissionComplete_Dialogue
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_HOWDISAPPOINTING_STATE,HOWDISAPPOINTING_COMPLETE)
 
-    msgbox(format("Excellent work everybody! Imelda, Doyle, and Adaora have all been arrested, and all of the Gyms were successfully shut down. The region will see how quickly we’re responding to these threats, and hopefully, this will slow their efforts. Maybe I'll send a region wide email..."),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+    msgbox(format("Excellent work everybody! Imelda, Doyle, and Adaora have all been arrested, and all of the Gyms were successfully shut down. The region will see how quickly we’re responding to these threats, and hopefully, this will slow their efforts. Maybe I'll send a region wide email..."),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
 
     closemessage
     applymovement(CHARLOTTE,Common_Movement_WalkUp)
     applymovement(CHIEF2,Common_Movement_WalkUp)
-    applymovement(ADELAIDE,Common_Movement_WalkRight)
+    applymovement(LUCREZIA,Common_Movement_WalkRight)
 
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     delay(30)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     completequest(QUEST_HOWDISAPPOINTING)
     call(HowDisappointing_HandleDebrief_Dialogue)
 
@@ -422,29 +422,28 @@ script HowDisappointing_HandleDebrief_Dialogue
 
 script HowDisappointing_DebriefAfterManhuntHowDisappointing_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),,SPEAKER_KEIYING)
 
     msgbox(format("The police were really agressive."),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
-    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+    msgbox(format("They were attacking members of the The Tide directly, even though they were coming quietly."),,SPEAKER_ALICIA)
 
     msgbox(format("How are we okay with this? Attacking people with Pokémon? Interogating ordinary people? This isn't what I signed up for!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
 
     msgbox(format("I know this doesn't look good. And, in my opinion, the police WERE a little too rough, but when you look at how much chaos and harm The Tide have caused in the region, taking them out as quickly and efficiently as possible is the right thing to do right? Take it from someone who's been in your shoes - doing the right thing will test your resolve. But we have to push forward if we really want to help the region!"),,SPEAKER_KEIYING)
 }
 
-
 script HowDisappointing_Debrief_Dialogue
 {
-    msgbox(gText_HowDisappointing_IAppreciate,,SPEAKER_KEIYING)
+    msgbox(format("I appreciate you handling that, {PLAYER}."),,SPEAKER_KEIYING)
 
     msgbox(format("I'm glad to have helped but... the police were really agressive about it."),,SPEAKER_ALICIA)
 
-    msgbox(gText_HowDisappointing_TheyWereAttacking,,SPEAKER_ALICIA)
+    msgbox(format("They were attacking members of the The Tide directly, even though they were coming quietly."),,SPEAKER_ALICIA)
 
     msgbox(format("That's not cool!"),,SPEAKER_ALICIA)
 
-    msgbox(format("I'm sorry you had to see that, but I'm also not particularly surprised, {PLAYER}. But the goal is ultimately... peace. SharpriseCapital and police are fully aligned on setting an example with The Tide, and terrorists won't be tolerated."),,SPEAKER_KEIYING)
+    msgbox(format("I'm sorry you had to see that, but I'm also not particularly surprised, {PLAYER}. But the goal is ultimately... peace. SharpRise Capital and police are fully aligned on setting an example with The Tide, and terrorists won't be tolerated."),,SPEAKER_KEIYING)
 
     msgbox(format("...Terrorists."),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
@@ -481,8 +480,8 @@ script HowDisappointing_GiveNextDirection_Script
 script HowDisappointing_GruntABattle_Script
 {
     lock
-    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
-    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT1,gText_Blank)
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT1,format(""))
     goto(HowDisappointing_GruntA_Arrest_Script)
 }
 
@@ -500,10 +499,10 @@ script HowDisappointing_GruntA_Arrest_Script
     waitmovement(PLAYER)
     msgbox(format("Good work {PLAYER}."))
     call(HowDisappointing_GiveNextDirection_Script)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(GRUNTA)
     removeobject(POLICEA)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
@@ -511,8 +510,8 @@ script HowDisappointing_GruntA_Arrest_Script
 script HowDisappointing_GruntBBattle_Script
 {
     lock
-    msgbox(gText_Blank,MSGBOX_NPC,SPEAKER_GRUNT)
-    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT2,gText_Blank)
+    msgbox(format(""),MSGBOX_NPC,SPEAKER_GRUNT)
+    trainerbattle_no_intro(TRAINER_HOWDISAPPOINTING_GRUNT2,format(""))
     goto(HowDisappointing_GruntB_Arrest_Script)
 }
 
@@ -533,7 +532,7 @@ script HowDisappointing_GruntB_Arrest_Script
 
     msgbox(format("Screw this, I'm outta here!"),MSGBOX_DEFAULT,SPEAKER_GRUNT,TAIL_SHOUT,EMOTE_ANGRY)
     closemessage
-    applymovement(GRUNTB,HowDisappointing_RunAway_Movement1)
+    applymovement(GRUNTB, moves(walk_faster_right * 5, face_up, face_down, step_end))
     applymovement(PLAYER,Common_Movement_FaceRight)
     waitmovement(PLAYER)
     waitmovement(POLICEA)
@@ -542,7 +541,7 @@ script HowDisappointing_GruntB_Arrest_Script
     //PSF TODO field effect using shock wave and then the grunt laying down
     bufferspeciesname(STR_VAR_1,SPECIES_LUXRAY)
     buffermovename(STR_VAR_2,MOVE_SHOCK_WAVE)
-    msgbox(gText_HowDisappointing_PokemonUse,MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)
+    msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)
 
     msgbox(format("Aaarrggghh!"),,SPEAKER_ROCKET_MEMBER_B)
 
@@ -554,25 +553,13 @@ script HowDisappointing_GruntB_Arrest_Script
 
     closemessage
     call(HowDisappointing_GiveNextDirection_Script)
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(GRUNTB)
     removeobject(POLICEA)
     removeobject(POLICE_MON)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
-}
-
-text gText_HowDisappointing_PokemonUse
-{
-    //PSF TODO Luxray uses Shock Wave first time
-    //PSF TODO Mightyena uses Take Down against Adaora
-    format("{STR_VAR_1}, use {STR_VAR_2}!")
-}
-
-text gText_HowDisappointing_IAppreciate
-{
-    format("I appreciate you handling that, {PLAYER}.")
 }
 
 movement HowDisappointing_WalkIntoFormationNorthLeft_Movement
@@ -610,67 +597,6 @@ movement HowDisappointing_WalkToPlayer
     step_end
 }
 
-movement HowDisappointing_RunIntoGymA
-{
-    walk_up
-    walk_right * 2
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymB
-{
-    walk_up
-    walk_right
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymC
-{
-    walk_up
-    walk_left
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_RunIntoGymD
-{
-    walk_up
-    step_end
-}
-
-movement HowDisappointing_Escape
-{
-    delay_16
-    walk_faster_down * 3
-    walk_faster_right * 3
-    walk_faster_down * 4
-    walk_faster_right * 4
-    walk_faster_right * 5
-    step_end
-}
-
-movement HowDisappointing_EscapeA
-{
-    delay_16
-    walk_down * 3
-    face_left
-    emote_exclamation_mark
-    walk_up * 4
-    walk_right * 2
-    walk_faster_right* 4
-    step_end
-}
-movement HowDisappointing_EscapeB
-{
-    delay_16
-    walk_faster_down * 3
-    walk_faster_left * 9
-    walk_faster_down * 6
-    step_end
-}
-
 movement HowDisappointing_WalkUp5_Movement
 {
 	walk_up
@@ -681,25 +607,9 @@ movement HowDisappointing_WalkUp5_Movement
 	step_end
 }
 
-movement HowDisappointing_RunAway_Movement1
-{
-    walk_faster_right * 5
-    face_up
-    face_down
-    step_end
-}
-
 movement HowDisappointing_WalkToArrest
 {
     walk_down * 5
-    step_end
-}
-
-movement HowDisappointing_UseTakeDown_Movement
-{
-    lock_facing_direction
-    walk_faster_down
-    walk_up
     step_end
 }
 
@@ -726,7 +636,3 @@ movement HowDisappointing_LeaveRoomB
     step_end
 }
 
-text gText_HowDisappointing_TheyWereAttacking
-{
-    format("They were attacking members of the The Tide directly, even though they were coming quietly.")
-}

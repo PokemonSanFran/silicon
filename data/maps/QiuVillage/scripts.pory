@@ -1,7 +1,12 @@
 mapscripts QiuVillage_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+	MAP_SCRIPT_ON_RESUME
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Quest_Returndoll_Script_DollVisibility)
         call(ImIn_HideObject_OutsideHouse_Script)
-        call(Quest_ReturnDoll_HideObject_Script)
         call(Quest_StolenTrade_HideObjectA_Script)
         call(CutePokemon_Script_ControlMelissaQiuOutsideVisibility)
         call(Quest_ButOnlyIn_HideGunda_Script)
@@ -18,12 +23,12 @@ mapscripts QiuVillage_MapScripts {
 }
 
 script Ramesh_House_LockedDoor_Script {
-    msgbox(gText_QiuVillage_LockedDoor,MSGBOX_SIGN)
+    msgbox(format("The front door is locked."),MSGBOX_SIGN)
     end
 }
 
 script Waite_Interact_Script{
-    msgbox(gText_QiuVillage_ICantBelieve,,SPEAKER_WAITE,TAIL_WHISPER)
+    msgbox(format("I can't believe this shit!"),,SPEAKER_WAITE,TAIL_WHISPER)
     special(GetNumberOfBadges)
     goto_if_set(FLAG_BADGE05_GET,Quest_Foodtruckbureaucracy_Food_Interact_Script)
     end
@@ -42,5 +47,4 @@ text gText_QiuVillage_ICantBelieve{
 text gText_QiuVillage_LockedDoor {
     format("The front door is locked.")
 }
-
 

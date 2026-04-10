@@ -3,6 +3,8 @@
 mapscripts HalerbaWilds_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_12,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueCutM)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerC)
     }
 MAP_SCRIPT_ON_FRAME_TABLE [
                 //FLAG_VISITED_HALERBAWILDS_NORTH, FALSE: Generic_Mappreview
@@ -11,9 +13,6 @@ MAP_SCRIPT_ON_FRAME_TABLE [
                 //FLAG_VISITED_HALERBAWILDS_SOUTH, FALSE: Generic_Mappreview
                 FLAG_VISITED_HALERBAWILDS, FALSE: Generic_Mappreview
 ]
-
-
-
 
 }
 script HalerbaWilds_EventScript_BlackbeltF{
@@ -26,22 +25,87 @@ script HalerbaWilds_EventScript_BlackbeltF{
         end
 }
 
-script HalerbaWilds_EventScript_Helen{
-    trainerbattle_single(TRAINER_HELEN,gText_HalerbaWilds_HaveYouEver,gText_HalerbaWilds_NotReadyForBattle)
-
-    msgbox(gText_HalerbaWilds_ImSupposedToBeGetting,MSGBOX_NPC,SPEAKER_HELEN)
-
+script HalerbaWilds_EventScript_1508BB71
+{
+    trainerbattle_single(TRAINER_1508BB71,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
 
-text gText_HalerbaWilds_HaveYouEver{
-    format("Have you ever gotten cold feet?")
+script HalerbaWilds_EventScript_1510C80A
+{
+    trainerbattle_single(TRAINER_1510C80A,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
 
-text gText_HalerbaWilds_NotReadyForBattle{
-    format("I'm not ready for battle or marriage...")
+script HalerbaWilds_EventScript_15598A38
+{
+    trainerbattle_single(TRAINER_15598A38,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
 
-text gText_HalerbaWilds_ImSupposedToBeGetting{
-    format("I'm supposed to be getting married today. But I don't think I can do it...")
+script HalerbaWilds_EventScript_15A66566
+{
+    trainerbattle_single(TRAINER_15A66566,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_15C87858
+{
+    trainerbattle_single(TRAINER_15C87858,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_1648CE6E
+{
+    trainerbattle_single(TRAINER_1648CE6E,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_1710375D
+{
+    trainerbattle_single(TRAINER_1710375D,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_17DCC938
+{
+    trainerbattle_single(TRAINER_17DCC938,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_EventScript_14C5EE6C
+{
+    trainerbattle_single(TRAINER_14C5EE6C,format("I am a Random route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HalerbaWilds_Script_Interact_BodegaburnoutDeliveryRockSmashF
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_6,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryRockSmashF)
+    bufferitemname(STR_VAR_1,ITEM_DRAGON_FANG)
+    msgbox(format("I can’t believe I was waiting this long for just a {STR_VAR_1}! You’d think it’d be easy to get here!"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF)
+    msgbox(format("You have got to be kidding me."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
+    closemessage
+    release
+    end
+}
+
+script HalerbaWilds_Script_Interact_Quest_GetthebandbacktogetherbikerC
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC,format("Fixies for life!"),format("It’s worth the control!"),HalberbaWildsEast_Script_Interact_Quest_GetthebandbacktogetherbikerC)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerC)
+    msgbox(format("All bicycles are cool, but the Gear Grind Gang only rides fixed-gear bicycles."),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERC)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerC: I’ll never coast, as long as I live!
 }

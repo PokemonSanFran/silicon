@@ -7,6 +7,7 @@ u64 ApplyExpMultipliers(struct Pokemon,s32);
 u32 GetMonItemHoldEffect(u16);
 void ApplyPointsBoxMons(u32, u16);
 void PrintExpShareMessage(void);
+bool32 IsMonInvalid(struct Pokemon tempMon);
 
 // Battle Settings: Multiplier
 u32 GetExperienceExpMultiplerValue(void);

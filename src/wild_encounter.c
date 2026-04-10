@@ -11,6 +11,7 @@
 #include "link.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "ow_synchronize.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "random.h"
@@ -36,6 +37,7 @@
 #include "battle.h"
 #include "constants/battle.h"
 // End fishingUpdate
+#include "constants/phenomenon.h" // phenomenon
 
 extern const u8 EventScript_SprayWoreOff[];
 
@@ -198,9 +200,30 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
+// Start wildEncounters
+u8 ChooseWildMonIndex_Silicon(void)
+{
+    u32 rand = Random() % (ENCOUNTER_SLOT_CHANCE * ENCOUNTER_SLOT_MAX);
+    bool32 swap = (LURE_STEP_COUNT != 0 && (Random() % 10 < 2));
+    enum EncounterSlots wildMonIndex = 0;
+
+    for (enum EncounterSlots monIndex = ENCOUNTER_SLOT_1; monIndex < ENCOUNTER_SLOT_COUNT; monIndex++)
+    {
+        if ((rand >= (monIndex * ENCOUNTER_SLOT_CHANCE)) && (rand < (monIndex + 1) * ENCOUNTER_SLOT_CHANCE))
+        {
+            wildMonIndex = monIndex;
+            break;
+        }
+    }
+
+    return (swap) ? ENCOUNTER_SLOT_MAX - wildMonIndex : wildMonIndex;
+}
+// End wildEncounters
+
 // LAND_WILD_COUNT
 u32 ChooseWildMonIndex_Land(void)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u8 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
@@ -242,6 +265,7 @@ u32 ChooseWildMonIndex_Land(void)
 // WATER_WILD_COUNT
 u32 ChooseWildMonIndex_Water(void)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u32 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
@@ -296,6 +320,7 @@ u32 ChooseWildMonIndex_Rocks(void)
 // FISH_WILD_COUNT
 static u32 ChooseWildMonIndex_Fishing(u8 rod)
 {
+    return ChooseWildMonIndex_Silicon(); // wildEncounters
     u8 wildMonIndex = 0;
     bool8 swap = FALSE;
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
@@ -437,22 +462,35 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
 
     switch (area)
     {
-    default:
-    case WILD_AREA_LAND:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
-        break;
-    case WILD_AREA_WATER:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
-        break;
-    case WILD_AREA_ROCKS:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
-        break;
-    case WILD_AREA_FISHING:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
-        break;
-    case WILD_AREA_HIDDEN:
-        wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
-        break;
+        default:
+        case WILD_AREA_LAND:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+            break;
+        case WILD_AREA_WATER:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+            break;
+        case WILD_AREA_ROCKS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+            break;
+        case WILD_AREA_FISHING:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+            break;
+        case WILD_AREA_HIDDEN:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+            break;
+        // Start phenomenon
+        case WILD_AREA_PHENOMENON:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
+            break;
+        // End phenomenon
+        // Start wildEncounters
+        case WILD_AREA_BERRY_TREES:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo;
+            break;
+        case WILD_AREA_FLY_MONS:
+            wildMonInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+            break;
+        // End wildEncounters
     }
 
     if (wildMonInfo == NULL && !OW_TIME_OF_DAY_DISABLE_FALLBACK)
@@ -461,7 +499,7 @@ enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area
         return GenConfigTimeOfDay(timeOfDay);
 }
 
-u8 PickWildMonNature(void)
+static u8 PickWildMonNature(u32 species)
 {
     u8 i;
     struct Pokeblock *safariPokeblock;
@@ -482,54 +520,18 @@ u8 PickWildMonNature(void)
             }
         }
     }
-    // check synchronize for a Pokémon with the same ability
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
-        && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
-        && (OW_SYNCHRONIZE_NATURE >= GEN_8 || Random() % 2 == 0))
-    {
-        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES;
-    }
 
-    // random nature
-    return Random() % NUM_NATURES;
+    return GetSynchronizedNature(WILDMON_ORIGIN, species);
 }
 
 void CreateWildMon(u16 species, u8 level)
 {
-    bool32 checkCuteCharm = TRUE;
-
     ZeroEnemyPartyMons();
-
-    switch (gSpeciesInfo[species].genderRatio)
-    {
-    case MON_MALE:
-    case MON_FEMALE:
-    case MON_GENDERLESS:
-        checkCuteCharm = FALSE;
-        break;
-    }
-
-    if (checkCuteCharm
-        && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
-        && GetMonAbility(&gPlayerParty[0]) == ABILITY_CUTE_CHARM
-        && Random() % 3 != 0)
-    {
-        u16 leadingMonSpecies = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
-        u32 leadingMonPersonality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
-        u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonSpecies, leadingMonPersonality);
-
-        // misses mon is genderless check, although no genderless mon can have cute charm as ability
-        if (gender == MON_FEMALE)
-            gender = MON_MALE;
-        else
-            gender = MON_FEMALE;
-
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
-        return;
-    }
-
-    CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(&gEnemyParty[0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    GiveMonInitialMoveset(&gEnemyParty[0]);
 }
+
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)
 #else
@@ -1287,3 +1289,25 @@ bool32 MapHasNoEncounterData(void)
 {
     return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
 }
+
+u16 TryGenerateFlyMon(void)
+{
+    u32 header = GetCurrentMapWildMonHeaderId();
+    u32 wildMonIndex = ChooseWildMonIndex_Silicon();
+    const struct WildPokemonInfo *wildMonInfo = gWildMonHeaders[header].encounterTypes[GetTimeOfDayForEncounters(header, WILD_AREA_FLY_MONS)].flyMonsInfo;
+    return wildMonInfo->wildPokemon[wildMonIndex].species;
+}
+
+// Start hiddenGrotto
+bool8 IsOverworldMonShiny(void)
+{
+    gSpecialVar_Result = (GetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY));
+    return gSpecialVar_Result;
+}
+
+bool8 IsOverworldMonFemale(void)
+{
+    u32 gender = GetMonGender(&gEnemyParty[0]);
+    return (gender = MON_FEMALE);
+}
+// End hiddenGrotto

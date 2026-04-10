@@ -1,0 +1,225 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+script Quest_Psyop_Script_Interact_PsyopworkerA
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_PSYOP,Quest_Psyop_Dialogue_Complete)
+    goto_if_quest_active(QUEST_PSYOP,Quest_Psyop_Dialogue_Active)
+
+    msgbox(format("Keep your eyes on Buzzr for the &AuthenticHustle challenge! We’re going to take the internet by storm!"),,SPEAKER_PSYOPWORKERA) // PSF TODO make & into #
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Dialogue_Complete
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("How's your authentic {STR_VAR_1} treating you? Spread the word about the challenge to your friends!"),,SPEAKER_PSYOPWORKERA)
+    release
+    closemessage
+    end
+}
+script Quest_Psyop_Dialogue_Active
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+
+    callnative(Script_Quest_Psyop_CheckPartyForTarget)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        goto(Quest_Psyop_Script_JudgePokemon)
+    }
+    msgbox(format("I’m running the &AuthetnicHustle challenge. Trainers who are willing to put in the work can have their {STR_VAR_1} upgraded!"),,SPEAKER_PSYOPWORKERA) // PSF TODO use # here
+    msgbox(format("Come back with a Phony {STR_VAR_1} with maximum Effort Values and in a {STR_VAR_2}, and let’s see what you’ve got!"),,SPEAKER_PSYOPWORKERA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Script_JudgePokemon
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("Welcome to the &AuthenticHustle challenge. Show me your {STR_VAR_1} as proof of your grind!"),,SPEAKER_PSYOPWORKERA) // PSF TODO use #
+    closemessage
+    special(ChoosePartyMon)
+    waitstate
+
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
+    {
+        bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+        bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+        msgbox(format("How serious are you about the grind?"),,SPEAKER_PSYOPWORKERA)
+        msgbox(format("Come back with a Phony {STR_VAR_1} with maximum Effort Values and in a {STR_VAR_2}, and let’s see what you’ve got!"),,SPEAKER_PSYOPWORKERA)
+        closemessage
+        release
+        end
+    }
+
+    callnative(Script_Quest_Psyop_CheckTargetAttributes)
+    switch (var(VAR_RESULT))
+    {
+        default:
+        case QUEST_PSYOP_NOT_SPECIES: goto(Quest_Psyop_Dialogue_MissingSpecies)
+        case QUEST_PSYOP_IS_REWARD_SPECIES: goto(Quest_Psyop_Dialogue_MissingTargetSpecies)
+        case QUEST_PSYOP_NO_EFFORT_AND_BALL: goto(Quest_Psyop_Dialogue_MissingEffortAndBall)
+        case QUEST_PSYOP_NO_EFFORT: goto(Quest_Psyop_Dialogue_MissingEffort)
+        case QUEST_PSYOP_NO_BALL: goto(Quest_Psyop_Dialogue_MissingBall)
+        case QUEST_PSYOP_READY_TO_TRANSFORM: goto(Quest_Psyop_Dialogue_Ready)
+    }
+}
+
+script Quest_Psyop_Dialogue_MissingSpecies
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+    msgbox(format("Are you serious?"),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("Come back with a Phony {STR_VAR_1} with maximum Effort Values and in a {STR_VAR_2}, and let’s see what you’ve got!"),,SPEAKER_PSYOPWORKERA)
+    closemessage
+    release
+    end
+}
+script Quest_Psyop_Dialogue_MissingTargetSpecies
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+    msgbox(format("This {STR_VAR_1} is already authentic! You’ve already hustled once, so you can do it again, right?"),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("Come back with a Phony {STR_VAR_1} with maximum Effort Values and in a {STR_VAR_2}, and let’s see what you’ve got!"),,SPEAKER_PSYOPWORKERA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Dialogue_MissingEffortAndBall
+{
+    bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+    msgbox(format("You’re on the hustle path, but you need some work."),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("Go catch another in a {STR_VAR_2}, and get those Effort Values up."),,SPEAKER_PSYOPWORKERA)
+    bufferitemnameplural(STR_VAR_2,ITEM_HEAL_BALL,2)
+    msgbox(format("You can buy Vitamins or {STR_VAR_2} on Presto."),,SPEAKER_PSYOPWORKERA)
+    goto(Quest_Psyop_Dialogue_Serious)
+}
+
+script Quest_Psyop_Dialogue_Serious
+{
+    msgbox(format("Come back when you're serious."),,SPEAKER_PSYOPWORKERA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Dialogue_MissingEffort
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("You’re not dedicated enough."),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("Max out your {STR_VAR_1} ’s Effort Values."),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("You can buy Vitamins on Presto."),,SPEAKER_PSYOPWORKERA)
+    goto(Quest_Psyop_Dialogue_Serious)
+}
+script Quest_Psyop_Dialogue_MissingBall
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_PSYOP_TARGET_BALL)
+    msgbox(format("You’re not detail-oriented enough."),,SPEAKER_PSYOPWORKERA)
+    msgbox(format("Get your {STR_VAR_1} in a {STR_VAR_2}."),,SPEAKER_PSYOPWORKERA)
+    bufferitemnameplural(STR_VAR_2,ITEM_HEAL_BALL,2)
+    msgbox(format("You can buy {STR_VAR_2} on Presto."),,SPEAKER_PSYOPWORKERA)
+    goto(Quest_Psyop_Dialogue_Serious)
+}
+script Quest_Psyop_Dialogue_Ready
+{
+    callnative(Quest_Psyop_TransformTarget)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("You’re absolutely on your grindset! Give me your {STR_VAR_1} for a moment."),,SPEAKER_PSYOPWORKERA)
+    closemessage
+
+    applymovement(LOCALID_PSYOPWORKERA,moves(walk_up * 2))
+    waitmovement(LOCALID_PSYOPWORKERA)
+    delay(60)
+    playmoncry(SPECIES_QUEST_PSYOP_TARGET,CRY_MODE_NORMAL)
+    waitmoncry
+    delay(60)
+    playse(SE_PC_ON)
+    waitse
+    delay(60)
+    playmoncry(SPECIES_QUEST_PSYOP_TARGET,CRY_MODE_NORMAL)
+    waitmoncry
+    delay(60)
+    applymovement(LOCALID_PSYOPWORKERA,moves(walk_down * 2, face_player))
+    waitmovement(LOCALID_PSYOPWORKERA)
+    msgbox(format("Congratulations! Your {STR_VAR_1} is now authentic."),,SPEAKER_PSYOPWORKERA)
+    closemessage
+    completequest(QUEST_PSYOP)
+    call_if_quest_not_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_CountQuestsAndProgress_Script)
+    release
+    end
+}
+
+script Quest_Psyop_Script_Interact_Psyopworker
+{
+    lock
+    goto_if_quest_complete(QUEST_PSYOP,Quest_Psyop_Script_Complete_Psyopworker)
+    bufferitemnameplural(STR_VAR_2,ITEM_HEAL_BALL,2)
+    buffermapname(STR_VAR_3,MAP_ROUTE_A)
+    cueobject(LOCALID_PSYOPWORKERB,DIR_EAST)
+    msgbox(format("I have to be honest - I don’t think this is going to work. People are going to see right through this challenge. It feels like we’re trying to trick them!"),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    cueobject(LOCALID_PSYOPWORKERC,DIR_WEST)
+    msgbox(format("Tell me about it. Coming out to the middle of {STR_VAR_3} was quite the ordeal. And now, I have to explain why {STR_VAR_2} and Vitamin sales didn’t change. Not exactly thrilled about that conversation, but I’ll handle it."),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    cueobject(LOCALID_PSYOPWORKERB,DIR_EAST)
+    msgbox(format("Well at least we got a great deal on the teacup stickers to keep our costs low."),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Script_Complete_Psyopworker
+{
+    cueobject(LOCALID_PSYOPWORKERB,DIR_EAST)
+    bufferitemname(STR_VAR_1,ITEM_CARBOS)
+    msgbox(format("In-region {STR_VAR_1} sales have skyrocketed by 1000%!"),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    msgbox(format("It’s incredible how many Trainers are willing to venture out here just for a social media challenge."),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    msgbox(format("Our planning and execution really paid off!"),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    cueobject(LOCALID_PSYOPWORKERC,DIR_WEST)
+    msgbox(format("I can’t wait to report back to Ramesh our success! In my quarterly assessment I’m absolutely going to highlight my administration and management skills and how I -erm, we, hustled for impact."),,SPEAKER_PSYOPWORKERB,TAIL_WHISPER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Script_Interact_PsyoptargetA
+{
+    lock
+    faceplayer
+    msgbox(format("I am in quite the predicament. "),,SPEAKER_PSYOPTARGETA)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("I’ve invested quite a bit of money in Vitamins, and a considerable amount of training time, but my {STR_VAR_1} is in the wrong ball!"),,SPEAKER_PSYOPTARGETA)
+    msgbox(format("What ever shall I do?"),,SPEAKER_PSYOPTARGETA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Psyop_Script_Interact_PsyoptargetC
+{
+    lock
+    faceplayer
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    msgbox(format("I’ve been trying to get an Antique {STR_VAR_1} , but I’m not having any luck so far."),,SPEAKER_PSYOPTARGETC)
+    msgbox(format("Did you know you can tell which ones are Antique Form by looking for a sticker on their underside? It’s a detail that’s very easy to miss."),,SPEAKER_PSYOPTARGETC)
+
+    istweetread(TWEET_QUEST_NPC_PSYOP)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        closemessage
+        release
+        end
+    }
+
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
+    bufferitemnameplural(STR_VAR_2,ITEM_HEAL_BALL,2)
+    msgbox(format("I heard on Buzzr that there’s a way to transform a Phony {STR_VAR_1} into an Antique one. Do you think I should go buy some {STR_VAR_2} and give it a try?"))
+    closemessage
+    release
+    end
+}

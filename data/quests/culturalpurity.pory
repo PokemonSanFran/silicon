@@ -6,7 +6,6 @@ const BACKUP =  12
 const FLAG_HIDE_BACKUP = FLAG_TEMP_3
 const FLAG_HIDE_SHINZO = FLAG_TEMP_2
 
-//gText_CulturalPurity_
 //Quest_CulturalPurity_
 
 //PSF TODO The text that appears when the quest is active should change for every mahjong tile that the player recieves
@@ -63,10 +62,10 @@ script Quest_CulturalPurity_Interact_Event_Script{
 }
 
 script Quest_CulturalPurity_QuestStart_Dialogue{
-    msgbox(gText_CulturalPurity_Player,,SPEAKER_SHINZO)
-    msgbox(gText_CulturalPurity_IReadOnline,,SPEAKER_SHINZO)
-    msgbox(gText_CulturalPurity_TheSaidToStart,,SPEAKER_SHINZO)
-    applymovement(SHINZO,Quest_CulturalPurity_LeaderWalkAway_Movement)
+    msgbox(format("{PLAYER} Hello!"),,SPEAKER_SHINZO)
+    msgbox(format("i read online about a group of people in hodoucity who have stayed tru"),,SPEAKER_SHINZO)
+    msgbox(format("they said start at the center... what does that mean?"),,SPEAKER_SHINZO)
+    applymovement(SHINZO, moves(walk_down * 6, step_end))
     waitmovement(SHINZO)
     removeobject(SHINZO)
     startquest(QUEST_CULTURALPURITY)
@@ -112,13 +111,13 @@ script Quest_CulturalPurity_CheckProgress_Script{
 script Quest_CulturalPurity_BackroomA_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 1){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA)
 
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_1,1)
     }
     release
@@ -128,14 +127,13 @@ script Quest_CulturalPurity_BackroomA_Interact_Script{
 script Quest_CulturalPurity_BackroomB_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 2){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA)
 
-
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_2,1)
     }
     release
@@ -145,14 +143,13 @@ script Quest_CulturalPurity_BackroomB_Interact_Script{
 script Quest_CulturalPurity_BackroomC_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 3){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
 
-
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_4,1)
     }
     release
@@ -162,14 +159,13 @@ script Quest_CulturalPurity_BackroomC_Interact_Script{
 script Quest_CulturalPurity_BackroomD_Interact_Script{
     lock
     faceplayer
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 4){
-        msgbox(gText_CulturalPurity_WaitIKnowThePassword,,SPEAKER_ALICIA,,SPEAKER_ALICIA)
+        msgbox(format("wait i know the password"),,SPEAKER_ALICIA,,SPEAKER_ALICIA)
 
-
-        msgbox(gText_CulturalPurity_OhHereYouGo,,SPEAKER_DEFAULT)
+        msgbox(format("oh here you go"),,SPEAKER_DEFAULT)
         giveitem(ITEM_KEY_TO_ROOM_6,1)
     }
     release
@@ -188,7 +184,7 @@ script Quest_CulturalPurity_Racist_Interact_Script{
 }
 
 script Quest_CulturalPurity_ObjectSetUp_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     call(Quest_CulturalPurity_MakeShinzoVisible_Script)
     call(Quest_CulturalPurity_MakeBackupVisible_Script)
 
@@ -199,12 +195,12 @@ script Quest_CulturalPurity_ObjectSetUp_Script{
     setobjectxyperm(BACKUP,14,19)
     setobjectxy(BACKUP,14,19)
 
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     goto(Quest_CulturalPurity_Battle_Script)
 }
 
 script Quest_CulturalPurity_Racist_FirstGuard_Dialogue{
-    msgbox(gText_CulturalPurity_GoAway,,SPEAKER_DEFAULT)
+    msgbox(format("go away."),,SPEAKER_DEFAULT)
     call(Quest_CulturalPurity_CheckProgress_Script)
 
     if (var(VAR_TEMP_0) == 5){
@@ -227,24 +223,21 @@ script Quest_CulturalPurity_MakeBackupVisible_Script{
 }
 
 script Quest_CulturalPurity_ShinzoJoin_Dialogue{
-        msgbox(gText_CulturalPurity_IFiguredItOut,,SPEAKER_SHINZO)
-
+        msgbox(format("i figured it out!"),,SPEAKER_SHINZO)
 
         call(Quest_CulturalPurity_MakeShinzoVisible_Script)
-        applymovement(SHINZO,Quest_CulturalPurity_ShinzoWalkToGuard_Movement)
+        applymovement(SHINZO, moves(walk_down * 2, walk_right * 5))
         waitmovement(SHINZO)
 
-        msgbox(gText_CulturalPurity_IHaveTheCodeButWeNeed,,SPEAKER_SHINZO)
+        msgbox(format("i have the code word, but need all the tiles"),,SPEAKER_SHINZO)
 
+        msgbox(format("yep got em here"),,SPEAKER_ALICIA)
 
-        msgbox(gText_CulturalPurity_YepGotEm,,SPEAKER_ALICIA)
-
-
-        msgbox(gText_CulturalPurity_LetMeSee,,SPEAKER_DEFAULT)
+        msgbox(format("let me see your tiles."),,SPEAKER_DEFAULT)
 
         call(Quest_CulturalPurity_LoseTiles_Script)
 
-        msgbox(gText_CulturalPurity_HeyCleetus,,SPEAKER_DEFAULT)
+        msgbox(format("hey cleetus!"),,SPEAKER_DEFAULT)
         call(Quest_CulturalPurity_BackupWalkOut_Script)
 
         questmenu(QUEST_MENU_SET_REWARD,QUEST_CULTURALPURITY)
@@ -263,7 +256,7 @@ script Quest_CulturalPurity_BackupWalkOut_Script{
     opendoor(15,18)
     waitdooranim
     call(Quest_CulturalPurity_MakeBackupVisible_Script)
-    applymovement(BACKUP,Quest_CulturalPurity_BackupWalkOutside_Movement)
+    applymovement(BACKUP, moves(walk_down, walk_left, face_down, step_end))
     waitmovement(BACKUP)
     closedoor(15,18)
     applymovement(SHINZO,Common_Movement_FaceUp)
@@ -272,21 +265,21 @@ script Quest_CulturalPurity_BackupWalkOut_Script{
 }
 
 script Quest_CulturalPurity_Battle_Script{
-        msgbox(gText_CulturalPurity_WellThenItsTimeForYourInitation,,SPEAKER_DEFAULT)
+        msgbox(format("Well then, its time for your initation!"),,SPEAKER_DEFAULT)
         //PSF TODO replace Brawly and Wally
         multi_fixed_2_vs_2(TRAINER_CULTURALPURITY_A,gText_CulturalPurity_OneOfUs,TRAINER_CULTURALPURITY_B,gText_CulturalPurity_OneOfUs,PARTNER_STEVEN)
         goto(Quest_CulturalPurity_PostBattle_Script)
 }
 
 script Quest_CulturalPurity_PostBattle_Script{
-    msgbox(gText_CulturalPurity_WowWelcomeInside,,SPEAKER_DEFAULT)
+    msgbox(format("wow welcome inside"),,SPEAKER_DEFAULT)
     closemessage
-    applymovement(GUARD,Quest_CulturalPurity_StepAside_Movement)
+    applymovement(GUARD, moves(lock_facing_direction, walk_right, step_end))
     waitmovement(GUARD)
 
     opendoor(15,18)
-    applymovement(SHINZO,Quest_CulturalPurity_WalkInside_Movement)
-    applymovement(PLAYER,Quest_CulturalPurity_FollowShinzo_Movement)
+    applymovement(SHINZO, moves(walk_right, walk_up * 2, step_end))
+    applymovement(PLAYER, moves(walk_up * 2, step_end))
     waitmovement(PLAYER)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_HODOU_CITY_RACISTHOUSE,0)
@@ -302,16 +295,16 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
             end
         }
 
-    applymovement(SHINZO_2,Quest_CulturalPurity_WalkToPlayer_Movement)
+    applymovement(SHINZO_2, moves(walk_left, walk_down, step_end))
     waitmovement(SHINZO_2)
-    msgbox(gText_CulturalPurity_NeverMind,,SPEAKER_SHINZO)
+    msgbox(format("never mind. they're just nationalists."),,SPEAKER_SHINZO)
 
     closemessage
     giveitem(ITEM_ORAN_BERRY,1)
-    msgbox(gText_CulturalPurity_IHaveSomeThiking,,SPEAKER_SHINZO)
+    msgbox(format("i have some thinking to do."),,SPEAKER_SHINZO)
 
     closemessage
-    applymovement(SHINZO_2,Quest_CulturalPurity_LeaveClubhouse_Movement)
+    applymovement(SHINZO_2, moves(walk_left, walk_down, step_end))
     waitmovement(SHINZO_2)
     playse(SE_EXIT)
     removeobject(SHINZO_2)
@@ -321,92 +314,7 @@ script Quest_CulturalPurity_InsideClubhouse_Dialogue{
     release
     end
 }
-movement Quest_CulturalPurity_LeaderWalkAway_Movement{
-    walk_down * 6
-    step_end
-}
 
-movement Quest_CulturalPurity_ShinzoWalkToGuard_Movement{
-    walk_down * 2
-    walk_right * 5
-}
-
-movement Quest_CulturalPurity_BackupWalkOutside_Movement{
-    walk_down
-    walk_left
-    face_down
-    step_end
-}
-movement Quest_CulturalPurity_StepAside_Movement{
-    lock_facing_direction
-    walk_right
-    step_end
-}
-movement Quest_CulturalPurity_WalkInside_Movement{
-    walk_right
-    walk_up * 2
-    step_end
-}
-movement Quest_CulturalPurity_FollowShinzo_Movement{
-    walk_up * 2
-    step_end
-}
-movement Quest_CulturalPurity_WalkToPlayer_Movement{
-    walk_left
-    walk_down
-    step_end
-}
-movement Quest_CulturalPurity_LeaveClubhouse_Movement{
-    walk_left
-    walk_down
-    step_end
-}
-
-text gText_CulturalPurity_Player{
-    format("{PLAYER} Hello!")
-}
-text gText_CulturalPurity_IReadOnline{
-    format("i read online about a group of people in hodoucity who have stayed tru")
-}
-text gText_CulturalPurity_TheSaidToStart{
-    format("they said start at the center... what does that mean?")
-}
-text gText_CulturalPurity_GoAway{
-    format("go away.")
-}
-text gText_CulturalPurity_WaitIKnowThePassword{
-    format("wait i know the password")
-}
-text gText_CulturalPurity_OhHereYouGo{
-    format("oh here you go")
-}
-text gText_CulturalPurity_IFiguredItOut{
-    format("i figured it out!")
-}
-text gText_CulturalPurity_IHaveTheCodeButWeNeed{
-    format("i have the code word, but need all the tiles")
-}
-text gText_CulturalPurity_YepGotEm{
-    format("yep got em here")
-}
-text gText_CulturalPurity_LetMeSee{
-    format("let me see your tiles.")
-}
-text gText_CulturalPurity_HeyCleetus{
-    format("hey cleetus!")
-}
-text gText_CulturalPurity_WellThenItsTimeForYourInitation{
-    format("Well then, its time for your initation!")
-}
 text gText_CulturalPurity_OneOfUs{
     format("one of us one of us")
-}
-text gText_CulturalPurity_WowWelcomeInside{
-    format("wow welcome inside")
-}
-text gText_CulturalPurity_NeverMind{
-    format("never mind. they're just nationalists.")
-}
-text gText_CulturalPurity_IHaveSomeThiking{
-    format("i have some thinking to do.")
 }

@@ -1,4 +1,16 @@
 mapscripts Route18_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_6,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerF)
     }
+}
+
+script Route18_Script_Interact_Quest_GetthebandbacktogetherbikerF
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF,format("Have you seen Dimu’s bike? It’s motorized, but runs entirely on bio fuel!"),format("I need a ride like that…"),Route18_Script_Interact_Quest_GetthebandbacktogetherbikerF)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerF)
+    msgbox(format("Dimu’s not a member of the Gear Grind Gang but she goes on rides with us all the time. We care about the planet too - gotta have cool places to ride!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERF)
+    closemessage
+    release
+    end
+// PSF TODO GetthebandbacktogetherbikerF: Maybe if I can beat her she’ll let me ride it.
 }

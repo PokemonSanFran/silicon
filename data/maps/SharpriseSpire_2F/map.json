@@ -2,7 +2,7 @@
   "id": "MAP_SHARPRISE_SPIRE_2F",
   "name": "SharpriseSpire_2F",
   "layout": "LAYOUT_SHARPRISE_SPIRE_2F",
-  "music": "MUS_RG_SILPH",
+  "music": "MUS_CUCUNO_TOWN",
   "region_map_section": "MAPSEC_SHARPRISESPIRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
@@ -145,7 +145,7 @@
       "flag": "FLAG_TEMP_8"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ADELAIDE",
+      "graphics_id": "OBJ_EVENT_GFX_LUCREZIA",
       "x": 8,
       "y": 16,
       "elevation": 3,
@@ -223,7 +223,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ARMANDO",
+      "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 0,
       "y": 4,
       "elevation": 3,
@@ -236,7 +236,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ELLEN",
+      "graphics_id": "OBJ_EVENT_GFX_ELEANOR",
       "x": 3,
       "y": 3,
       "elevation": 3,
@@ -249,7 +249,7 @@
       "flag": "FLAG_TEMP_9"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_KAI",
+      "graphics_id": "OBJ_EVENT_GFX_BAIYA",
       "x": 2,
       "y": 4,
       "elevation": 3,

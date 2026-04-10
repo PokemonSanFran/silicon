@@ -23,6 +23,10 @@ extern struct HallofFameTeam *gHoFSaveBuffer;
 void CB2_DoHallOfFameScreen(void);
 void CB2_DoHallOfFameScreenDontSaveData(void);
 void CB2_DoHallOfFamePC(void);
+// Start wavesOfChange
+void DoDomeConfetti(void);
+void StopDomeConfetti(void);
+// End wavesOfChange
 
 // hof_pc.c
 void ReturnFromHallOfFamePC(void);

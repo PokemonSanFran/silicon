@@ -4,3 +4,12 @@ mapscripts RouteE_MapScripts{
     }
 }
 
+script RouteE_Script_Interact_BodegaburnoutDeliveryWhirlpoolJ
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_7,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryWhirlpoolJ)
+    msgbox(format("I’m glad the Poké Mart delivery service is willing to deliver anywhere. I was afraid I’d have to get out of the water!"),,SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ)
+    closemessage
+    release
+    end
+}
+

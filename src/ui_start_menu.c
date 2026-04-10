@@ -34,12 +34,14 @@
 #include "fake_rtc.h"
 #include "region_map.h"
 #include "sprite.h"
+#include "surprise_trade.h"
 #include "pokemon_icon.h"
 #include "util.h"
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
 #include "dexnav.h"
+#include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
@@ -141,9 +143,6 @@
 
 #define STRBUF_SIZE         64
 
-#define TILE_TO_PIXELS(t)   (t ? t * 8 : 1)
-#define PIXELS_TO_TILES(p)  (p ? p / 8 : 1)
-
 #define X_CENTER_ALIGN      (-1)
 #define Y_CENTER_ALIGN      1
 
@@ -223,27 +222,6 @@ enum StartMenuCursorModes
     START_CURSOR_MOVE,
 
     NUM_START_CURSORS
-};
-
-enum StartMenuHelpSymbols
-{
-    // Time Of Day
-    START_HELP_SYMBOL_TOD_M = 0, // Morning
-    START_HELP_SYMBOL_TOD_D,     // Day
-    START_HELP_SYMBOL_TOD_E,     // Evening
-    START_HELP_SYMBOL_TOD_N,     // Night
-
-    START_HELP_SYMBOL_MAP,
-
-    // Cellular Signal
-    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
-    START_HELP_SYMBOL_SIG_0A,
-    START_HELP_SYMBOL_SIG_1,
-    START_HELP_SYMBOL_SIG_2,
-
-    START_HELP_SYMBOL_SWAP,
-
-    NUM_START_HELP_SYMBOLS
 };
 
 enum StartMenuEggInfoSymbols
@@ -483,10 +461,8 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
 static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
@@ -877,7 +853,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_ARRIBA] =
     {
-        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_NONE
     },
     [START_APP_TODOS] =
     {
@@ -885,7 +861,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, NULL, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {
@@ -903,15 +879,15 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     // second row
     [START_APP_TRAINER_CARD] =
     {
-        COMPOUND_STRING("Trainer Card"), 0, NULL
+        COMPOUND_STRING("Trainer Card"), FLAG_SYS_APP_QUEST_GET, CB2_InitUiMainMenuFromStartMenu
     },
     [START_APP_PRESTO] =
     {
         COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
-    [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
+    [START_APP_WAVES_OF_CHANGE] =
     {
-        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, CB2_WavesFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_CUSTOMIZE] =
     {
@@ -921,9 +897,9 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Save"), 0, NULL
     },
-    [START_APP_SURPRISE_TRADE] = // PSF TODO ui
+    [START_APP_SURPRISE_TRADE] =
     {
-        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, CB2_StartSurpriseTrade, START_SIGNAL_STRONG
     },
     [START_APP_GOOGLE_GLASS] =
     {
@@ -1589,7 +1565,7 @@ static void StartPrint_HelpTopText(void)
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
 
-    // TIME OF DAY, 
+    // TIME OF DAY,
     enum TimeOfDay time = GetTimeOfDay();
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));
@@ -1895,9 +1871,6 @@ static void AppData_InsertNewApps(void)
 {
     for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
-        if (app == START_APP_TRAINER_CARD) //  PSF TODO Trainer Card disabled
-            continue;
-
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
             u32 freeSlot = AppData_GetFirstEmptyIndex();
@@ -1948,9 +1921,7 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)
 {
-    u32 app = gSaveBlock3Ptr->startMenuAppIndex[idx];
-
-    return (app == START_APP_TRAINER_CARD) ? START_APP_NONE : app; //  PSF TODO Trainer Card disabled
+    return gSaveBlock3Ptr->startMenuAppIndex[idx];
 }
 
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
@@ -2213,7 +2184,7 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
+void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, y, 16, 16);
 }
@@ -2239,7 +2210,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOf
     }
 }
 
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
+enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
 {
     return BlitSymbol_ConvertTimeToHelp(GetTimeOfDay());
 }

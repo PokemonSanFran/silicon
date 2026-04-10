@@ -34,7 +34,7 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
 u8 GetEggMovesBySpecies(u16 species, u16 *eggMoves);
-bool8 SpeciesCanLearnEggMove(u16 species, u16 move);
+bool8 SpeciesCanLearnEggMove(u16 species, enum Move move);
 void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon);
 u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 // Start siliconDaycare
@@ -43,5 +43,6 @@ u8 GetDaycareCompatibilityScoreFromSave(void);
 void BufferUnhatchedMonEgg(void);
 // End siliconDaycare
 u16 GetEggSpecies(u16 species); // surpriseTrade
+bool8 IsMonInUndiscoveredOrGenderless(u32 species); // moveErrors
 
 #endif // GUARD_DAYCARE_H

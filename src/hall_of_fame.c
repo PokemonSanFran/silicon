@@ -310,8 +310,6 @@ static const struct SpriteTemplate sSpriteTemplate_HofConfetti =
     .paletteTag = TAG_CONFETTI,
     .oam = &sOamData_Confetti,
     .anims = sAnims_Confetti,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_HofConfetti
 };
 
@@ -1449,7 +1447,10 @@ void DoDomeConfetti(void)
     }
 }
 
-static void StopDomeConfetti(void)
+// Start wavesOfChange
+//static void StopDomeConfetti(void)
+void StopDomeConfetti(void)
+// End wavesOfChange
 {
     u8 taskId;
 

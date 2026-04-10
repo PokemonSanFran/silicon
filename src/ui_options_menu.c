@@ -1346,7 +1346,7 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             },
         .optionDescription = {
             COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will proceed to the Main Menu."),
-            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to {PLAYER}'s adventure."),
+            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to the saved adventure."),
             },
         .numOptions = GAME_OPTION_SAVE_BOOT_COUNT,
     },

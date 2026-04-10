@@ -7,12 +7,15 @@ const FLAG_HIDE_LIIDIA = FLAG_TEMP_4
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
 
 mapscripts EspuleeOutskirts_MapScripts {
+	MAP_SCRIPT_ON_RESUME
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(Quest_Restoreespuleeoutskirts_HideImelda_Script)
+        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_HideImelda_Script)
         call(Quest_Restoreespuleeoutskirts_MoveImelda_Script)
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
-        call(Quest_GetTheBand_HideBikerD_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
         call(LetsGrabLunch_CheckRestorationProgress_Script)
         call(Quest_Manofmanyhats_CheckDoorLock_Script)
@@ -52,14 +55,14 @@ script EspuleeOutskirts_LockRangerDoor_Script{
 
 script EspuleeOutskirts_RangerStationDoor_Script{
     lock
-        msgbox(gText_EspuleeOutskirts_TheDoorIsLocked,MSGBOX_SIGN)
+        msgbox(format("The door is locked."),MSGBOX_SIGN)
         goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_EnterDoorCombination_Dialogue)
 }
 
 script EspuleeOutskirts_Stan_Interact_Script{
     lock
         call(Quest_WallaceArmy_LoadStanSpeech_Script)
-        msgbox(gText_WallaceArmy_OhWallaceSama,MSGBOX_NPC)
+        msgbox(format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough."),MSGBOX_NPC)
         call(Quest_WallaceArmy_PreBattleStan_Script)
 
         trainerbattle_single(TRAINER_ESPULEE_OUTSKIRTS_STAN,gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke,gText_WallaceArmy_MyLord,EspuleeOutskirts_Stan_PostBattle_Script)
@@ -72,9 +75,9 @@ script EspuleeOutskirts_Stan_PostBattle_Script{
         call(Quest_WallaceArmy_CheckCompletionRate_Script)
         questmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_WALLACEARMY)
         if (!var(VAR_RESULT)){
-            msgbox(gText_WallaceArmy_PostBattlePlaceholder1)
+            msgbox(format("PostBattlePlaceholder1"))
         }else {
-            msgbox(gText_WallaceArmy_PostQuestPlaceholder1)
+            msgbox(format("PostQuestPlaceholder1"))
         }
 
     release
@@ -84,17 +87,6 @@ script EspuleeOutskirts_Stan_PostBattle_Script{
 script EspuleeOutskirts_HideMapNamePopup_Script{
     setflag(FLAG_HIDE_MAP_NAME_POPUP)
         return
-}
-
-script EspuleeOutskirts_Biker_Interact_Script{
-    msgbox(gText_EspuleeOutskirts_PlaceholderBiker,MSGBOX_NPC)
-
-    call(Quest_GetTheBand_CheckQuestAndBike_Script)
-
-    if(var(VAR_RESULT) && (var(VAR_TEMP_1) != 0)){
-            goto(Quest_GetTheBand_Interact_BikerD_Dialogue)
-        }
-    end
 }
 
 script EspuleeOutskirts_Imelda_Interact_Script{
@@ -110,7 +102,7 @@ script EspuleeOutskirts_Imelda_Interact_Script{
 }
 
 script EspuleeOutskirts_Imelda_PreQuest_Dialogue{
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_KAI_ZENZU_ISLAND){
+    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
         goto(Quest_Restoreespuleeoutskirts_StartQuest_Dialogue)
     }
     else{
@@ -119,7 +111,7 @@ script EspuleeOutskirts_Imelda_PreQuest_Dialogue{
 }
 
 script EspuleeOutskirts_Imelda_Dialogue{
-    msgbox(gText_EspuleeOutskirts_IUsedToBe,MSGBOX_NPC)
+    msgbox(format("i used to be the leader of the gym in town!"),MSGBOX_NPC)
         end
 }
 
