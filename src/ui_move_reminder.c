@@ -704,16 +704,19 @@ static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, 
     if (!idx)
         return;
 
+    u32 monLevel = MiscUtil_GetMon()->level;
+
     while (idx >= 0)
     {
         u32 move = learnset[idx].move;
+        u32 level = learnset[idx].level;
 
         idx--;
 
         if (!IsMoveInSilicon(move))
             continue;
 
-        if (MiscUtil_GetMon()->level < learnset[idx].level)
+        if (monLevel < level)
             continue;
 
         MovePool_AddMoveToIdx(move, MP_METHOD_LEVEL_UP, numMoves);
