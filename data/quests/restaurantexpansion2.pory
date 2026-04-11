@@ -72,7 +72,8 @@ script Quest_Restaurantexpansion2_Complete_Restaurantexpansionchef
 {
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_2)
     callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
-    msgbox(format("I used to be the head chef over at the Oroland Coliseum! Ever since it closed I’ve been out of work and out on the streets. I think it’s been ten years now…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    buffermapname(STR_VAR_1,MAP_OROLAND_COLISEUM_HALL)
+    msgbox(format("I used to be the head chef over at the {STR_VAR_1}! Ever since it closed I’ve been out of work and out on the streets. I think it’s been ten years now…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
     msgbox(format("Flowers is looking for a chef. Belén said she found you on Buzzr!"),,SPEAKER_ALICIA)
     msgbox(format("Wait, people are actually reading those crazy zaps? Man, just to be back doing what I loved would mean everything!"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
     closemessage
@@ -84,12 +85,13 @@ script Quest_Restaurantexpansion2_Complete_Restaurantexpansionchef
 
 script Quest_Restaurantexpansion2_Complete_Restaurantexpansionlinecook
 {
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_3)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_2)
     callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
     msgbox(format("Belén got famous off bringing different street foods from around the world to her restaurant. It’s an awesome way for so many people to get to try things from new cultures! I’m becoming a line cook so I can do the same thing."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
     msgbox(format("Flowers is looking for a line cook. Belén said she found you on Buzzr!"),,SPEAKER_ALICIA)
     msgbox(format("Do you want to work under Belén?"),,SPEAKER_ALICIA)
-    msgbox(format("Me? At Flowers? This sounds insane! I’ll be able to try Buneary Chow, work on my Currywurst…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    bufferspeciesname(STR_VAR_1,SPECIES_BUNEARY)
+    msgbox(format("Me? At Flowers? This sounds insane! I’ll be able to try {STR_VAR_1} Chow, work on my Currywurst…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
     closemessage
     moveobjecttocoords(LOCALID_ROUTE4_RESTAURANTEXPANSIONLINECOOK,1,3,DIR_WEST)
     fadeandremovelasttalked

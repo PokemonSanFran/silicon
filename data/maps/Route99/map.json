@@ -258,7 +258,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route99_Script_Interact_Quest_Restaurantexpansionchef",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_4"
     }
   ],
   "warp_events": [

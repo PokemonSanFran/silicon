@@ -3160,6 +3160,7 @@ void DebugQuest_Restaurantexpansion1(u8 state)
             RemoveBagItem(questFoodLUT[SUB_QUEST_1],1);
             QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_1);
             Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA:
             RemoveBagItem(questFoodLUT[SUB_QUEST_2],1);
             QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_2);

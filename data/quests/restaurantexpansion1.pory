@@ -446,7 +446,7 @@ script Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue
         return
     }
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
     callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
     removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
     buffermapname(STR_VAR_1,MAP_CAPHE_CITY_PANTRY)

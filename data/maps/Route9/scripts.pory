@@ -92,7 +92,7 @@ script Route9_EventScript_0A542D33
 
 script Route9_Script_Interact_Quest_Restaurantexpansionbusser
 {
-    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONBUSSER,format("How am I supposed to land a gig when every job is askin' for 10 years of experience?"),format("Man, if you’re that tough, you could waltz into any job you wanted."))
+    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONBUSSER,format("How am I supposed to land a gig when every job is askin' for 10 years of experience?"),format("Man, if you’re that tough, you could waltz into any job you wanted."),Route9_Script_Interact_Quest_Restaurantexpansionbusser)
     call_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Complete_Restaurantexpansionbusser)
     msgbox(format("A simple gig would be nice, you know? Like bussing tables! Nobody needs experience to grab plates, right?"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     closemessage
