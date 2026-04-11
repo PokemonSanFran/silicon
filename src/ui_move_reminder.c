@@ -928,7 +928,6 @@ static void MiscUtil_TeachMove(void)
     SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &bonuses);
 
     InitSetup_MonData();
-    sMoveReminderDataPtr->pageData.main.moveSlot = 0;
 }
 
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
@@ -989,6 +988,7 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
             break;
         case MON_HAS_MAX_MOVES:
             PlaySE(SE_SELECT);
+            sMoveReminderDataPtr->pageData.main.moveSlot = 0;
             sMoveReminderDataPtr->pageData.main.moveToTeach = move;
             PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
             break;
@@ -1097,7 +1097,6 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
 
         MiscUtil_TeachMove();
         gTasks[taskId].tMainPage_Timer = 0;
-        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
         SetTaskFuncWithFollowupFunc(taskId, MainPage_WaitCloseMessage, Task_MReminderInput_Main);
         return;
     }
@@ -1157,6 +1156,7 @@ static void MainPage_WaitCloseMessage(u8 taskId)
 
     if (JOY_NEW(A_BUTTON | B_BUTTON) || tMainPage_Timer == 100)
     {
+        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
         sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
         PageInterface_UpdateFrontEnd();
         SwitchTaskToFollowupFunc(taskId);
