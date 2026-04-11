@@ -161,6 +161,10 @@ enum MovePoolSorts
     NUM_MOVE_POOL_SORTS
 };
 
+#define MP_FILTER_FLAG_TYPE     (1 << 0)
+#define MP_FILTER_FLAG_CATEGORY (1 << 1)
+#define MP_FILTER_FLAG_METHOD   (1 << 2)
+
 #define MREMINDER_INPUT_INC     (1)
 #define MREMINDER_INPUT_DEC     (-1)
 // i < count
@@ -181,10 +185,15 @@ typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*MovePoolSortFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
 
-struct MovePool
+struct PACKED MovePool
 {
+    // u16
     u16 move:13;
     enum MovePoolMethods method:3;
+
+    // u8
+    enum DamageCategory category:3;
+    enum Type type:5;
 };
 
 struct MovePoolSortInfo
@@ -210,27 +219,28 @@ struct MoveReminderData
     enum MoveReminderModes mode:2;
     enum PageInterfaces page:2;
     enum MovePoolSorts sort:4;
+
     enum SubPageInterfaces subPage:7;
     u8 useBoxMon:1;
+
     MainCallback savedCallback;
     struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
     u16 movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
-    u16 numMoves;
-    union {
-        u32 value[2];
-        struct PACKED {
-            u32 currIdx:10;     // 512
-            u32 firstIdx:10;    //
-            u32 gridIdx:3;      // MAX_MREMINDER_BAR_SPRITES
-            u32 printingDialogue:1;
-            u32 moveSlot:4;
-            u32 confirmationBoxRes:2;
-            u32 pad:2;
 
-            u16 moveToTeach:12;
-            u32 pad2:20;
-        } main;
-    } pageData;
+    u32 currListIdx:10;     // 512
+    u32 firstListIdx:10;    //
+    u32 gridListIdx:3;      // MAX_MREMINDER_BAR_SPRITES
+    u32 printingDialogue:1;
+    u32 moveSlot:4;
+    u32 confirmationBoxRes:2;
+    u32 methodFilter:2;
+
+    u32 moveToTeach:12;
+    u32 typeFilter:20;      // 1 << TYPE_XXX
+
+    u16 categoryFilter:2;
+    u16 numMoves:14;
+
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {

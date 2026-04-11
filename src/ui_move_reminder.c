@@ -97,10 +97,23 @@ static u32 MovePool_GetMoveFromIdx(u32);
 static void MovePool_SetMethodToIdx(u32, enum MovePoolMethods);
 static bool32 MovePool_IsMethodInIdx(u32, enum MovePoolMethods);
 static u32 MovePool_GetMethodFromIdx(u32);
+static void MovePool_SetCategoryToIdx(u32, enum DamageCategory);
+static enum DamageCategory MovePool_GetCategoryFromIdx(u32);
+static void MovePool_SetTypeToIdx(u32, enum Type);
+static enum Type MovePool_GetTypeFromIdx(u32);
 static void MovePool_SetNumberOfMoves(u32);
 static u32 MovePool_GetNumberOfMoves(void);
 static void MovePool_SetMoveToList(u32, u32);
 static u32 MovePool_GetMoveFromList(u32);
+static u32 MovePool_SanitizeTypeFlag(enum Type);
+static void MovePool_ToggleTypeFilter(enum Type);
+static bool32 MovePool_IsTypeFilterActive(enum Type);
+static void MovePool_ToggleCategoryFilter(enum DamageCategory);
+static bool32 MovePool_IsCategoryFilterActive(enum DamageCategory);
+static void MovePool_ToggleMethodFilter(enum MovePoolMethods);
+static bool32 MovePool_IsMethodFilterActive(enum MovePoolMethods);
+static bool32 MovePool_IsAnyFilterActive(void);
+static bool32 MovePool_DoMoveMatchFilter(u32);
 
 static void MovePool_SetSort(enum MovePoolSorts sort);
 static enum MovePoolSorts MovePool_GetSort(void);
@@ -449,10 +462,7 @@ static void MoveBar_Update(void)
     u32 offsetX = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, totalWidth, -1);
 
     MiscUtil_AddTextPrinter(win, gStringVar1, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
-
-    enum MovePoolSorts sort = MovePool_GetSort();
-
-    if (sort != MOVE_POOL_SORT_DEFAULT)
+    if (MovePool_IsAnyFilterActive())
         BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
 
     u32 nameY = PAGE_MAIN_MOVE_BAR_NAME_Y, typeY = PAGE_MAIN_MOVE_BAR_TYPE_Y;
@@ -464,7 +474,7 @@ static void MoveBar_Update(void)
         u32 move;
 
         if (PageInterface_GetSubValue() != SUBPAGE_INTERFACE_MAIN_DEFAULT)
-            move = (i == MAX_MON_MOVES) ? sMoveReminderDataPtr->pageData.main.moveToTeach : MiscUtil_GetMon()->moves[i];
+            move = (i == MAX_MON_MOVES) ? sMoveReminderDataPtr->moveToTeach : MiscUtil_GetMon()->moves[i];
         else
             move = MovePool_GetMoveFromList(i + MainPage_GetFirstListIdx());
 
@@ -518,12 +528,12 @@ static void SpriteCB_MoveCursorArrows(struct Sprite *sprite)
 
 static void ConfirmationBox_SetResult(u32 option)
 {
-    sMoveReminderDataPtr->pageData.main.confirmationBoxRes = option;
+    sMoveReminderDataPtr->confirmationBoxRes = option;
 }
 
 static bool32 ConfirmationBox_Input(void)
 {
-    u32 res = sMoveReminderDataPtr->pageData.main.confirmationBoxRes;
+    u32 res = sMoveReminderDataPtr->confirmationBoxRes;
 
     if (JOY_NEW(DPAD_DOWN))
     {
@@ -629,7 +639,7 @@ static void PageInterface_PrintHelpBar(void)
         str = gText_EmptyString2;
 
     if (PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT
-     && sMoveReminderDataPtr->pageData.main.printingDialogue)
+     && sMoveReminderDataPtr->printingDialogue)
     {
         str = gText_CancelOverwrite;
     }
@@ -778,6 +788,8 @@ static void MovePool_AddMoveToIdx(u32 move, enum MovePoolMethods method, u32 *nu
 {
     MovePool_SetMoveToIdx(*numMoves, move);
     MovePool_SetMethodToIdx(*numMoves, method);
+    MovePool_SetCategoryToIdx(*numMoves, GetMoveCategory(move));
+    MovePool_SetTypeToIdx(*numMoves, GetMoveType(move));
     (*numMoves)++;
 }
 
@@ -814,6 +826,26 @@ static u32 MovePool_GetMethodFromIdx(u32 idx)
     return sMoveReminderDataPtr->movePool[idx].method;
 }
 
+static void MovePool_SetCategoryToIdx(u32 idx, enum DamageCategory category)
+{
+    sMoveReminderDataPtr->movePool[idx].category = category;
+}
+
+static enum DamageCategory MovePool_GetCategoryFromIdx(u32 idx)
+{
+    return sMoveReminderDataPtr->movePool[idx].category;
+}
+
+static void MovePool_SetTypeToIdx(u32 idx, enum Type type)
+{
+    sMoveReminderDataPtr->movePool[idx].type = type;
+}
+
+static enum Type MovePool_GetTypeFromIdx(u32 idx)
+{
+    return sMoveReminderDataPtr->movePool[idx].type;
+}
+
 static void MovePool_SetNumberOfMoves(u32 numMoves)
 {
     sMoveReminderDataPtr->numMoves = numMoves;
@@ -832,6 +864,101 @@ static void MovePool_SetMoveToList(u32 idx, u32 move)
 static u32 MovePool_GetMoveFromList(u32 idx)
 {
     return sMoveReminderDataPtr->movesList[idx];
+}
+
+static u32 MovePool_SanitizeTypeFlag(enum Type type)
+{
+    return type - 1; // exclude TYPE_NONE
+}
+
+static void MovePool_ToggleTypeFilter(enum Type type)
+{
+    type = MovePool_SanitizeTypeFlag(type);
+    if (type == (-1))
+        return;
+
+    sMoveReminderDataPtr->typeFilter ^= (1 << type);
+}
+
+static bool32 MovePool_IsTypeFilterActive(enum Type type)
+{
+    type = MovePool_SanitizeTypeFlag(type);
+    if (type == (-1))
+        return FALSE;
+
+    return sMoveReminderDataPtr->typeFilter & (1 << type);
+}
+
+static void MovePool_ToggleCategoryFilter(enum DamageCategory category)
+{
+    sMoveReminderDataPtr->categoryFilter ^= (1 << category);
+}
+
+static bool32 MovePool_IsCategoryFilterActive(enum DamageCategory category)
+{
+    return sMoveReminderDataPtr->categoryFilter & (1 << category);
+}
+
+static void MovePool_ToggleMethodFilter(enum MovePoolMethods method)
+{
+    sMoveReminderDataPtr->methodFilter ^= (1 << method);
+}
+
+static bool32 MovePool_IsMethodFilterActive(enum MovePoolMethods method)
+{
+    return sMoveReminderDataPtr->methodFilter & (1 << method);
+}
+
+static bool32 MovePool_IsAnyFilterActive(void)
+{
+    u32 score = 0;
+
+    if (sMoveReminderDataPtr->typeFilter)
+        score |= MP_FILTER_FLAG_TYPE;
+
+    if (sMoveReminderDataPtr->methodFilter)
+        score |= MP_FILTER_FLAG_METHOD;
+
+    if (sMoveReminderDataPtr->categoryFilter)
+        score |= MP_FILTER_FLAG_CATEGORY;
+
+    return score;
+}
+
+static bool32 MovePool_DoMoveMatchFilter(u32 move)
+{
+    u32 idx = MovePool_GetIdxFromMove(move);
+    u32 filter = MovePool_IsAnyFilterActive();
+    u32 score = 0;
+
+    if (idx == MOVE_UNAVAILABLE)
+        return FALSE;
+
+    if (!filter)
+        return TRUE;
+
+    if (filter & MP_FILTER_FLAG_TYPE
+     && MovePool_IsTypeFilterActive(MovePool_GetTypeFromIdx(idx)))
+    {
+        score |= MP_FILTER_FLAG_TYPE;
+    }
+
+    if (filter & MP_FILTER_FLAG_CATEGORY
+     && MovePool_IsCategoryFilterActive(MovePool_GetCategoryFromIdx(idx)))
+    {
+        score |= MP_FILTER_FLAG_CATEGORY;
+    }
+
+    if (filter & MP_FILTER_FLAG_METHOD
+     && MovePool_IsMethodFilterActive(MovePool_GetMethodFromIdx(idx)))
+    {
+        score |= MP_FILTER_FLAG_METHOD;
+    }
+
+    if (score == filter)
+        return TRUE;
+
+    return FALSE;
 }
 
 static void MovePool_SetSort(enum MovePoolSorts sort)
@@ -960,11 +1087,11 @@ static void MovePoolSort_Name(u32 *numMoves)
 {
     for (u32 idx = 0; idx < MOVES_COUNT; idx++)
     {
-        if (MovePool_GetMoveFromIdx(*numMoves) == MOVE_NONE)
+        if (*numMoves == UI_MOVES_COUNT_TOTAL)
             break;
 
         u32 move = residoMovesAZ[POKEDEX_FILTER_ALPHABET_ALL][idx];
-        if (MovePool_GetIdxFromMove(move) == MOVE_UNAVAILABLE)
+        if (!MovePool_DoMoveMatchFilter(move))
             continue;
 
         MovePool_SetMoveToList(*numMoves, move);
@@ -976,10 +1103,10 @@ static void MovePoolSort_MoveID(u32 *numMoves)
 {
     for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
     {
-        if (MovePool_GetMoveFromIdx(*numMoves) == MOVE_NONE)
+        if (*numMoves == UI_MOVES_COUNT_TOTAL)
             break;
 
-        if (MovePool_GetIdxFromMove(move) == MOVE_UNAVAILABLE)
+        if (!MovePool_DoMoveMatchFilter(move))
             continue;
 
         MovePool_SetMoveToList(*numMoves, move);
@@ -989,14 +1116,21 @@ static void MovePoolSort_MoveID(u32 *numMoves)
 
 static void MovePoolSort_Default(u32 *numMoves)
 {
-    while (*numMoves < UI_MOVES_COUNT_TOTAL)
+    u32 idx = 0;
+
+    while (idx < UI_MOVES_COUNT_TOTAL)
     {
-        u32 move = MovePool_GetMoveFromIdx(*numMoves);
+        u32 move = MovePool_GetMoveFromIdx(idx);
         if (move == MOVE_NONE)
             break;
 
-        MovePool_SetMoveToList(*numMoves, move);
-        (*numMoves)++;
+        if (MovePool_DoMoveMatchFilter(move))
+        {
+            MovePool_SetMoveToList(*numMoves, move);
+            (*numMoves)++;
+        }
+
+        idx++;
     }
 }
 
@@ -1032,8 +1166,8 @@ static void MiscUtil_TeachMove(void)
     PlaySE(SE_SUCCESS);
 
     struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
-    u32 move = sMoveReminderDataPtr->pageData.main.moveToTeach;
-    u32 slot = sMoveReminderDataPtr->pageData.main.moveSlot;
+    u32 move = sMoveReminderDataPtr->moveToTeach;
+    u32 slot = sMoveReminderDataPtr->moveSlot;
 
     SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
 
@@ -1105,8 +1239,8 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
             break;
         case MON_HAS_MAX_MOVES:
             PlaySE(SE_SELECT);
-            sMoveReminderDataPtr->pageData.main.moveSlot = 0;
-            sMoveReminderDataPtr->pageData.main.moveToTeach = move;
+            sMoveReminderDataPtr->moveSlot = 0;
+            sMoveReminderDataPtr->moveToTeach = move;
             PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
             break;
         default:
@@ -1165,7 +1299,7 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
             struct MoveReminderMon *mon = MiscUtil_GetMon();
 
             StringCopy_Nickname(gStringVar1, mon->nickname);
-            StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->pageData.main.moveToTeach));
+            StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->moveToTeach));
             MainPage_PrepareDialogue(COMPOUND_STRING(
                 "{STR_VAR_1} will not learn {STR_VAR_2}. Are you sure?"));
             ConfirmationBox_SetResult(CONFIRMATION_BOX_NO);
@@ -1178,7 +1312,7 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
 
         StringCopy_Nickname(gStringVar1, mon->nickname);
         StringCopy(gStringVar2, GetMoveName(mon->moves[MainPage_GetCurrListIdx()]));
-        StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->pageData.main.moveToTeach));
+        StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->moveToTeach));
         MainPage_PrepareDialogue(COMPOUND_STRING(
             "{STR_VAR_1} will forget {STR_VAR_2} "
             "and learn {STR_VAR_3}. Are you sure?"));
@@ -1193,7 +1327,7 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
         struct MoveReminderMon *mon = MiscUtil_GetMon();
 
         StringCopy_Nickname(gStringVar1, mon->nickname);
-        StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->pageData.main.moveToTeach));
+        StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->moveToTeach));
         MainPage_PrepareDialogue(COMPOUND_STRING(
             "{STR_VAR_1} will not learn {STR_VAR_2}. Are you sure?"));
         ConfirmationBox_SetResult(CONFIRMATION_BOX_NO);
@@ -1213,7 +1347,7 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
         {
             PlaySE(SE_SELECT);
             ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-            sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+            sMoveReminderDataPtr->printingDialogue = FALSE;
             PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
             PageInterface_UpdateFrontEnd();
             return;
@@ -1224,7 +1358,7 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
 
         StringCopy_Nickname(gStringVar1, mon->nickname);
         StringCopy(gStringVar2, GetMoveName(mon->moves[moveSlot]));
-        StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->pageData.main.moveToTeach));
+        StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->moveToTeach));
         MainPage_PrepareDialogue(COMPOUND_STRING(
             "{STR_VAR_1} forgot {STR_VAR_2} and learned {STR_VAR_3}!"));
         ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
@@ -1240,7 +1374,7 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
     {
         PlaySE(SE_SELECT);
         ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+        sMoveReminderDataPtr->printingDialogue = FALSE;
         PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
         PageInterface_UpdateFrontEnd();
         return;
@@ -1265,7 +1399,7 @@ static void MainPage_CancelForgetMove(u8 taskId)
         }
 
         ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+        sMoveReminderDataPtr->printingDialogue = FALSE;
         PageInterface_UpdateFrontEnd();
         return;
     }
@@ -1274,7 +1408,7 @@ static void MainPage_CancelForgetMove(u8 taskId)
     {
         PlaySE(SE_SELECT);
         ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+        sMoveReminderDataPtr->printingDialogue = FALSE;
         PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
         PageInterface_UpdateFrontEnd();
         return;
@@ -1292,7 +1426,7 @@ static void MainPage_WaitCloseMessage(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON) || tMainPage_Timer == 100)
     {
         PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
-        sMoveReminderDataPtr->pageData.main.printingDialogue = FALSE;
+        sMoveReminderDataPtr->printingDialogue = FALSE;
         PageInterface_UpdateFrontEnd();
         SwitchTaskToFollowupFunc(taskId);
         return;
@@ -1301,12 +1435,12 @@ static void MainPage_WaitCloseMessage(u8 taskId)
 
 static void MainPage_NavigateList(s32 delta, u32 count)
 {
-    u32 currIdx = MainPage_GetCurrListIdx();
+    u32 currListIdx = MainPage_GetCurrListIdx();
 
     for (u32 i = 0; i < count; i++)
         MainPage_UpdateListIdx(delta);
 
-    if (currIdx == MainPage_GetCurrListIdx())
+    if (currListIdx == MainPage_GetCurrListIdx())
         return;
 
     PlaySE(SE_RG_BAG_CURSOR);
@@ -1320,45 +1454,45 @@ static void MainPage_UpdateListIdx(s32 delta)
     u32 halfScreen = MAX_MREMINDER_BAR_SPRITES / 2;
     bool32 scroll = (numItems + 1) > MAX_MREMINDER_BAR_SPRITES;
     u32 finalHalfScreen = numItems - halfScreen;
-    s32 currIdx = MainPage_GetCurrListIdx();
-    s32 firstIdx = MainPage_GetFirstListIdx();
-    u32 gridIdx = MainPage_GetGridListIdx();
+    s32 currListIdx = MainPage_GetCurrListIdx();
+    s32 firstListIdx = MainPage_GetFirstListIdx();
+    u32 gridListIdx = MainPage_GetGridListIdx();
 
-    if (((currIdx >= halfScreen && currIdx < finalHalfScreen && isAdditive)
-        || (currIdx > halfScreen && currIdx <= finalHalfScreen && !isAdditive))
+    if (((currListIdx >= halfScreen && currListIdx < finalHalfScreen && isAdditive)
+        || (currListIdx > halfScreen && currListIdx <= finalHalfScreen && !isAdditive))
         && scroll)
     {
-        currIdx += delta;
-        firstIdx += delta;
-        gridIdx = halfScreen;
+        currListIdx += delta;
+        firstListIdx += delta;
+        gridListIdx = halfScreen;
     }
-    else if (currIdx >= numItems && isAdditive)
+    else if (currListIdx >= numItems && isAdditive)
     {
-        currIdx = 0;
-        firstIdx = 0;
-        gridIdx = 0;
+        currListIdx = 0;
+        firstListIdx = 0;
+        gridListIdx = 0;
     }
-    else if (!currIdx && !isAdditive)
+    else if (!currListIdx && !isAdditive)
     {
-        currIdx = numItems;
+        currListIdx = numItems;
 
         if (scroll)
-            firstIdx = numItems - (MAX_MREMINDER_BAR_SPRITES - 1);
+            firstListIdx = numItems - (MAX_MREMINDER_BAR_SPRITES - 1);
 
         if (numItems >= (MAX_MREMINDER_BAR_SPRITES - 1))
-            gridIdx = MAX_MREMINDER_BAR_SPRITES - 1;
+            gridListIdx = MAX_MREMINDER_BAR_SPRITES - 1;
         else
-            gridIdx = numItems;
+            gridListIdx = numItems;
     }
     else
     {
-        currIdx += delta;
-        gridIdx += delta;
+        currListIdx += delta;
+        gridListIdx += delta;
     }
 
-    MainPage_SetCurrListIdx(currIdx);
-    MainPage_SetFirstListIdx(firstIdx);
-    MainPage_SetGridListIdx(gridIdx);
+    MainPage_SetCurrListIdx(currListIdx);
+    MainPage_SetFirstListIdx(firstListIdx);
+    MainPage_SetGridListIdx(gridListIdx);
 }
 
 static bool32 MainPage_IsInputAdditive(s32 delta)
@@ -1382,10 +1516,10 @@ static void MainPage_SetCurrListIdx(u32 idx)
     switch (PageInterface_GetSubValue())
     {
     default:
-        sMoveReminderDataPtr->pageData.main.moveSlot = idx;
+        sMoveReminderDataPtr->moveSlot = idx;
         break;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        sMoveReminderDataPtr->pageData.main.currIdx = idx;
+        sMoveReminderDataPtr->currListIdx = idx;
         break;
     }
 }
@@ -1395,9 +1529,9 @@ static u32 MainPage_GetCurrListIdx(void)
     switch (PageInterface_GetSubValue())
     {
     default:
-        return sMoveReminderDataPtr->pageData.main.moveSlot;
+        return sMoveReminderDataPtr->moveSlot;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        return sMoveReminderDataPtr->pageData.main.currIdx;
+        return sMoveReminderDataPtr->currListIdx;
     }
 }
 
@@ -1408,7 +1542,7 @@ static void MainPage_SetFirstListIdx(u32 idx)
     default:
         return;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        sMoveReminderDataPtr->pageData.main.firstIdx = idx;
+        sMoveReminderDataPtr->firstListIdx = idx;
         break;
     }
 }
@@ -1420,7 +1554,7 @@ static u32 MainPage_GetFirstListIdx(void)
     default:
         return 0;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        return sMoveReminderDataPtr->pageData.main.firstIdx;
+        return sMoveReminderDataPtr->firstListIdx;
     }
 }
 
@@ -1431,7 +1565,7 @@ static void MainPage_SetGridListIdx(u32 idx)
     default:
         return;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        sMoveReminderDataPtr->pageData.main.gridIdx = idx;
+        sMoveReminderDataPtr->gridListIdx = idx;
         break;
     }
 }
@@ -1441,9 +1575,9 @@ static u32 MainPage_GetGridListIdx(void)
     switch (PageInterface_GetSubValue())
     {
     default:
-        return sMoveReminderDataPtr->pageData.main.moveSlot;
+        return sMoveReminderDataPtr->moveSlot;
     case SUBPAGE_INTERFACE_MAIN_DEFAULT:
-        return sMoveReminderDataPtr->pageData.main.gridIdx;
+        return sMoveReminderDataPtr->gridListIdx;
     }
 }
 
@@ -1457,17 +1591,17 @@ static void MainPage_UpdateFrontEnd(void)
     MainPage_PrintMonStats();
 
     u32 move;
-    u32 currIdx = MainPage_GetCurrListIdx();
+    u32 currListIdx = MainPage_GetCurrListIdx();
 
     if (PageInterface_GetSubValue() != SUBPAGE_INTERFACE_MAIN_DEFAULT)
-        move = (currIdx == MAX_MON_MOVES) ? sMoveReminderDataPtr->pageData.main.moveToTeach : MiscUtil_GetMon()->moves[currIdx];
+        move = (currListIdx == MAX_MON_MOVES) ? sMoveReminderDataPtr->moveToTeach : MiscUtil_GetMon()->moves[currListIdx];
     else
-        move = MovePool_GetMoveFromList(currIdx);
+        move = MovePool_GetMoveFromList(currListIdx);
 
     MainPage_PrintTextBox(move);
     MainPage_PrintMoveSummary(move);
 
-    ConfirmationBox_Update(sMoveReminderDataPtr->pageData.main.confirmationBoxRes);
+    ConfirmationBox_Update(sMoveReminderDataPtr->confirmationBoxRes);
 
     MoveBar_Update();
 }
@@ -1530,7 +1664,7 @@ static void MainPage_PrintTextBox(u32 move)
     u32 scrollPrompt = SHOW_SCROLL_PROMPT;
     u32 maxWidth = TILE_TO_PIXELS(18);
 
-    if (!sMoveReminderDataPtr->pageData.main.printingDialogue)
+    if (!sMoveReminderDataPtr->printingDialogue)
     {
         StringCopy(gStringVar4, GetMoveDescription(move));
         scrollPrompt = HIDE_SCROLL_PROMPT;
@@ -1549,7 +1683,7 @@ static void MainPage_PrintTextBox(u32 move)
 static void MainPage_PrepareDialogue(const u8 *dialogue)
 {
     StringExpandPlaceholders(gStringVar4, dialogue);
-    sMoveReminderDataPtr->pageData.main.printingDialogue = TRUE;
+    sMoveReminderDataPtr->printingDialogue = TRUE;
 }
 
 static void MainPage_PrintMoveSummary(u32 move)
@@ -1561,7 +1695,7 @@ static void MainPage_PrintMoveSummary(u32 move)
         u32 moveSlot = MainPage_GetCurrListIdx();
         if (moveSlot == MAX_MON_MOVES)
         {
-            move = sMoveReminderDataPtr->pageData.main.moveToTeach;
+            move = sMoveReminderDataPtr->moveToTeach;
             PP = GetMovePP(move);
             remainingPP = PP;
         }
