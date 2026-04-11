@@ -151,12 +151,12 @@ enum MovePoolMethods
 
 enum MovePoolSorts
 {
-    MOVE_POOL_SORT_DEFAULT,
-    MOVE_POOL_SORT_MOVE_ID,
-    MOVE_POOL_SORT_ALPHABETICAL,
-    MOVE_POOL_SORT_PP,
-    MOVE_POOL_SORT_ACCURACY,
     MOVE_POOL_SORT_BASE_POWER,
+    MOVE_POOL_SORT_ACCURACY,
+    MOVE_POOL_SORT_PP,
+    MOVE_POOL_SORT_NAME,
+    MOVE_POOL_SORT_MOVE_ID,
+    MOVE_POOL_SORT_DEFAULT,
 
     NUM_MOVE_POOL_SORTS
 };
@@ -207,8 +207,9 @@ struct MoveReminderMon
 
 struct MoveReminderData
 {
-    enum MoveReminderModes mode;
-    enum PageInterfaces page;
+    enum MoveReminderModes mode:2;
+    enum PageInterfaces page:2;
+    enum MovePoolSorts sort:4;
     enum SubPageInterfaces subPage:7;
     u8 useBoxMon:1;
     MainCallback savedCallback;
@@ -224,7 +225,7 @@ struct MoveReminderData
             u32 printingDialogue:1;
             u32 moveSlot:4;
             u32 confirmationBoxRes:2;
-            u32 pad:5;
+            u32 pad:2;
 
             u16 moveToTeach:12;
             u32 pad2:20;

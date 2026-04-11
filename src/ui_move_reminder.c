@@ -102,11 +102,18 @@ static u32 MovePool_GetNumberOfMoves(void);
 static void MovePool_SetMoveToList(u32, u32);
 static u32 MovePool_GetMoveFromList(u32);
 
+static void MovePool_SetSort(enum MovePoolSorts sort);
+static enum MovePoolSorts MovePool_GetSort(void);
 static void MovePool_Sort(void);
 static const struct MovePoolSortInfo *MovePool_GetSortInfo(enum MovePoolSorts);
 static MovePoolSortFunc MovePool_GetSortFunc(void);
 static const u8 *MovePool_GetSortTitle(void);
 static void MovePool_CopySortTitle(void);
+static void MovePoolSort_BasePower(u32 *);
+static void MovePoolSort_Accuracy(u32 *);
+static void MovePoolSort_PP(u32 *);
+static void MovePoolSort_Name(u32 *);
+static void MovePoolSort_MoveID(u32 *);
 static void MovePoolSort_Default(u32 *);
 
 static void MiscUtil_FreeResources(void);
@@ -163,6 +170,7 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     sMoveReminderDataPtr->useBoxMon = useBoxMon;
     sMoveReminderDataPtr->savedCallback = callback;
     ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
+    MovePool_SetSort(MOVE_POOL_SORT_DEFAULT);
 
     SetMainCallback2(CB2_InitSetup);
 }
@@ -442,7 +450,7 @@ static void MoveBar_Update(void)
 
     MiscUtil_AddTextPrinter(win, gStringVar1, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
 
-    enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
+    enum MovePoolSorts sort = MovePool_GetSort();
 
     if (sort != MOVE_POOL_SORT_DEFAULT)
         BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
@@ -823,6 +831,16 @@ static u32 MovePool_GetMoveFromList(u32 idx)
     return sMoveReminderDataPtr->movesList[idx];
 }
 
+static void MovePool_SetSort(enum MovePoolSorts sort)
+{
+    sMoveReminderDataPtr->sort = sort;
+}
+
+static enum MovePoolSorts MovePool_GetSort(void)
+{
+    return sMoveReminderDataPtr->sort;
+}
+
 static void MovePool_Sort(void)
 {
     MovePoolSortFunc func = MovePool_GetSortFunc();
@@ -839,17 +857,17 @@ static const struct MovePoolSortInfo *MovePool_GetSortInfo(enum MovePoolSorts so
 
 static MovePoolSortFunc MovePool_GetSortFunc(void)
 {
-    return MovePool_GetSortInfo(MOVE_POOL_SORT_DEFAULT)->sortingFunc;
+    return MovePool_GetSortInfo(MovePool_GetSort())->sortingFunc;
 }
 
 static const u8 *MovePool_GetSortTitle(void)
 {
-    return MovePool_GetSortInfo(MOVE_POOL_SORT_DEFAULT)->title;
+    return MovePool_GetSortInfo(MovePool_GetSort())->title;
 }
 
 static void MovePool_CopySortTitle(void)
 {
-    enum MovePoolSorts sort = MOVE_POOL_SORT_DEFAULT;
+    enum MovePoolSorts sort = MovePool_GetSort();
     const u8 *title = MovePool_GetSortTitle();
     u8 *strbuf = gStringVar1;
 
@@ -869,12 +887,108 @@ static void MovePool_CopySortTitle(void)
     StringAppend(strbuf, title);
 }
 
+static void MovePoolSort_BasePower(u32 *numMoves)
+{
+    MovePoolSort_Default(numMoves);
+    if (*numMoves <= 1)
+        return;
+
+    for (u32 i = 0; i < (*numMoves) - 1; i++)
+    {
+        for (u32 j = i + 1; j < *numMoves; j++)
+        {
+            u32 iMove = MovePool_GetMoveFromList(i);
+            u32 jMove = MovePool_GetMoveFromList(j);
+
+            if (GetMovePower(iMove) < GetMovePower(jMove))
+            {
+                MovePool_SetMoveToList(i, jMove);
+                MovePool_SetMoveToList(j, iMove);
+            }
+        }
+    }
+}
+
+static void MovePoolSort_Accuracy(u32 *numMoves)
+{
+    MovePoolSort_Default(numMoves);
+    if (*numMoves <= 1)
+        return;
+
+    for (u32 i = 0; i < (*numMoves) - 1; i++)
+    {
+        for (u32 j = i + 1; j < *numMoves; j++)
+        {
+            u32 iMove = MovePool_GetMoveFromList(i);
+            u32 jMove = MovePool_GetMoveFromList(j);
+
+            if (GetMoveAccuracy(iMove) < GetMoveAccuracy(jMove))
+            {
+                MovePool_SetMoveToList(i, jMove);
+                MovePool_SetMoveToList(j, iMove);
+            }
+        }
+    }
+}
+
+static void MovePoolSort_PP(u32 *numMoves)
+{
+    MovePoolSort_Default(numMoves);
+    if (*numMoves <= 1)
+        return;
+
+    for (u32 i = 0; i < (*numMoves) - 1; i++)
+    {
+        for (u32 j = i + 1; j < *numMoves; j++)
+        {
+            u32 iMove = MovePool_GetMoveFromList(i);
+            u32 jMove = MovePool_GetMoveFromList(j);
+
+            if (GetMovePP(iMove) < GetMovePP(jMove))
+            {
+                MovePool_SetMoveToList(i, jMove);
+                MovePool_SetMoveToList(j, iMove);
+            }
+        }
+    }
+}
+
+static void MovePoolSort_Name(u32 *numMoves)
+{
+    for (u32 idx = 0; idx < MOVES_COUNT; idx++)
+    {
+        if (MovePool_GetMoveFromIdx(*numMoves) == MOVE_NONE)
+            break;
+
+        u32 move = residoMovesAZ[POKEDEX_FILTER_ALPHABET_ALL][idx];
+        if (MovePool_GetIdxFromMove(move) == MOVE_UNAVAILABLE)
+            continue;
+
+        MovePool_SetMoveToList(*numMoves, move);
+        (*numMoves)++;
+    }
+}
+
+static void MovePoolSort_MoveID(u32 *numMoves)
+{
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    {
+        if (MovePool_GetMoveFromIdx(*numMoves) == MOVE_NONE)
+            break;
+
+        if (MovePool_GetIdxFromMove(move) == MOVE_UNAVAILABLE)
+            continue;
+
+        MovePool_SetMoveToList(*numMoves, move);
+        (*numMoves)++;
+    }
+}
+
 static void MovePoolSort_Default(u32 *numMoves)
 {
     while (*numMoves < UI_MOVES_COUNT_TOTAL)
     {
         u32 move = MovePool_GetMoveFromIdx(*numMoves);
-
         if (move == MOVE_NONE)
             break;
 
@@ -1005,6 +1119,24 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
 
         gTasks[taskId].tMainPage_Timer = 0;
         SetTaskFuncWithFollowupFunc(taskId, MainPage_WaitCloseMessage, Task_MReminderInput_Main);
+        return;
+    }
+
+    if (JOY_NEW(START_BUTTON))
+    {
+        enum MovePoolSorts sort = MovePool_GetSort();
+
+        if (sort == (NUM_MOVE_POOL_SORTS - 1))
+            MovePool_SetSort(0);
+        else
+            MovePool_SetSort(sort + 1);
+
+        MovePool_Sort();
+        PlaySE(SE_SUCCESS);
+        MainPage_SetCurrListIdx(0);
+        MainPage_SetFirstListIdx(0);
+        MainPage_SetGridListIdx(0);
+        PageInterface_UpdateFrontEnd();
         return;
     }
 }

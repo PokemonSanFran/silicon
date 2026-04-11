@@ -53,35 +53,35 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
 
 static const struct MovePoolSortInfo sMovePoolSortInfos[NUM_MOVE_POOL_SORTS] =
 {
+    [MOVE_POOL_SORT_BASE_POWER] =
+    {
+        .sortingFunc = MovePoolSort_BasePower,
+        .title = COMPOUND_STRING("Base Power"),
+    },
+    [MOVE_POOL_SORT_ACCURACY] =
+    {
+        .sortingFunc = MovePoolSort_Accuracy,
+        .title = COMPOUND_STRING("Accuracy"),
+    },
+    [MOVE_POOL_SORT_PP] =
+    {
+        .sortingFunc = MovePoolSort_PP,
+        .title = COMPOUND_STRING("PP"),
+    },
+    [MOVE_POOL_SORT_NAME] =
+    {
+        .sortingFunc = MovePoolSort_Name,
+        .title = COMPOUND_STRING("Name"),
+    },
+    [MOVE_POOL_SORT_MOVE_ID] =
+    {
+        .sortingFunc = MovePoolSort_MoveID,
+        .title = COMPOUND_STRING("Move IDs"),
+    },
     [MOVE_POOL_SORT_DEFAULT] =
     {
         .sortingFunc = MovePoolSort_Default,
         .title = COMPOUND_STRING("Learnable Moves"),
-    },
-    [MOVE_POOL_SORT_MOVE_ID] =
-    {
-        .sortingFunc = MovePoolSort_Default,
-        .title = COMPOUND_STRING("Move IDs"),
-    },
-    [MOVE_POOL_SORT_ALPHABETICAL] =
-    {
-        .sortingFunc = MovePoolSort_Default,
-        .title = COMPOUND_STRING("Alphabets"),
-    },
-    [MOVE_POOL_SORT_PP] =
-    {
-        .sortingFunc = MovePoolSort_Default,
-        .title = COMPOUND_STRING("PP"),
-    },
-    [MOVE_POOL_SORT_ACCURACY] =
-    {
-        .sortingFunc = MovePoolSort_Default,
-        .title = COMPOUND_STRING("Accuracy"),
-    },
-    [MOVE_POOL_SORT_BASE_POWER] =
-    {
-        .sortingFunc = MovePoolSort_Default,
-        .title = COMPOUND_STRING("Base Power"),
     },
 };
 
@@ -132,3 +132,5 @@ static const u8 sMoveReminderTextColors[NUM_MREMINDER_TXTCLRS][3] =
     [MREMINDER_TXTCLR_HELP_BAR]  = { 0, 1, 0 },
     [MREMINDER_TXTCLR_TEXT_BOX]  = { 0, 2, 0 },
 };
+
+extern const u16 residoMovesAZ[POKEDEX_FILTER_ALPHABET_COUNT][MAX_MOVES_PER_LETTER];
