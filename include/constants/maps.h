@@ -26,5 +26,6 @@ enum
 // Used to indicate an invalid warp id, for dummy warps or when a warp should
 // use the given coordinates rather than the coordinates of a target warp.
 #define WARP_ID_NONE (-1)
+#define USE_WARP_ID 255 // siliconMerge
 
 #endif  // GUARD_CONSTANTS_MAPS_H

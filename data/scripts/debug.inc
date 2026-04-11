@@ -344,25 +344,25 @@ Debug_EventScript_CheckIVs_End::
 
 Debug_EventScript_Script_1::
 # 204 "data/scripts/debug.pory"
-	warpsilent MAP_ROUTE9
+	completesubquest QUEST_RESTAURANTEXPANSION1, SUB_QUEST_1
 	end
 
 
 Debug_EventScript_Script_2::
 # 210 "data/scripts/debug.pory"
-	warpsilent MAP_ROUTE1
+	completesubquest QUEST_RESTAURANTEXPANSION1, SUB_QUEST_2
 	end
 
 
 Debug_EventScript_Script_3::
 # 216 "data/scripts/debug.pory"
-	warpsilent MAP_ROUTE99
+	completesubquest QUEST_RESTAURANTEXPANSION1, SUB_QUEST_3
 	end
 
 
 Debug_EventScript_Script_4::
 # 222 "data/scripts/debug.pory"
-	warpsilent MAP_ROUTE4
+	completesubquest QUEST_RESTAURANTEXPANSION1, SUB_QUEST_4
 	end
 
 

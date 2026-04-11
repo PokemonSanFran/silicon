@@ -3125,10 +3125,6 @@ void Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward(void)
     Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION1);
 }
 
-void Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward(void)
-{
-    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION2);
-}
 void DebugQuest_Restaurantexpansion1(u8 state)
 {
     switch (state)
@@ -3191,7 +3187,66 @@ void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
     gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
 }
 
+void Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION2);
+}
 
+void DebugQuest_Restaurantexpansion2(u8 state)
+{
+    switch(state)
+    {
+        case STATE_QUEST_RESTAURANTEXPANSION2_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_1);
+            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION1);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION2);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_HOSTESS_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_CHEF_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_LINECOOK_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_BUSSER_BATTLE:
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_HOSTESS_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONHOSTESS);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_HOSTESS:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_CHEF_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONCHEF);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_CHEF:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_LINECOOK_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONLINECOOK);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_LINECOOK:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_BUSSER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONBUSSER);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_BUSSER:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_RESTAURANTEXPANSION2);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_COMPLETE:
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2);
+            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION2);
+            break;
+    }
+}
 
 // ***********************************************************************
 // Quest: Digging Up Adaora's Dirt
