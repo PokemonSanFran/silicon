@@ -937,25 +937,25 @@ static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *s
 
 static void MainPage_ChooseMoveToTeach(u8 taskId)
 {
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         MainPage_NavigateList(MREMINDER_INPUT_DEC, MREMINDER_INPUT_PM_1);
         return;
     }
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_REPEAT(DPAD_LEFT))
     {
         MainPage_NavigateList(MREMINDER_INPUT_DEC, MREMINDER_INPUT_PM_5);
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_REPEAT(DPAD_DOWN))
     {
         MainPage_NavigateList(MREMINDER_INPUT_INC, MREMINDER_INPUT_PM_1);
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (JOY_REPEAT(DPAD_RIGHT))
     {
         MainPage_NavigateList(MREMINDER_INPUT_INC, MREMINDER_INPUT_PM_5);
         return;
