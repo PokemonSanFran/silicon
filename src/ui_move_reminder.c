@@ -512,17 +512,40 @@ static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
 
 static void SpriteCB_MoveBar(struct Sprite *sprite)
 {
-    sprite->invisible = (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
-                         || sprite->sMoveBar_Idx >= MovePool_GetNumberOfMoves());
+    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
+     || !MovePool_GetNumberOfMoves()
+     || sprite->sMoveBar_Idx >= MovePool_GetNumberOfMoves())
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    sprite->invisible = FALSE;
 }
 
 static void SpriteCB_MoveCursor(struct Sprite *sprite)
 {
+    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
+     || !MovePool_GetNumberOfMoves())
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    sprite->invisible = FALSE;
     sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
 }
 
 static void SpriteCB_MoveCursorArrows(struct Sprite *sprite)
 {
+    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
+     || !MovePool_GetNumberOfMoves())
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    sprite->invisible = FALSE;
     sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
 }
 
@@ -1222,6 +1245,12 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        if (!MovePool_GetNumberOfMoves())
+        {
+            PlaySE(SE_FAILURE);
+            return;
+        }
+
         u32 move = MovePool_GetMoveFromIdx(MainPage_GetCurrListIdx());
         struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
 
@@ -1261,6 +1290,12 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
 
     if (JOY_NEW(START_BUTTON))
     {
+        if (!MovePool_GetNumberOfMoves())
+        {
+            PlaySE(SE_FAILURE);
+            return;
+        }
+
         enum MovePoolSorts sort = MovePool_GetSort();
 
         if (sort == (NUM_MOVE_POOL_SORTS - 1))
@@ -1435,6 +1470,12 @@ static void MainPage_WaitCloseMessage(u8 taskId)
 
 static void MainPage_NavigateList(s32 delta, u32 count)
 {
+    if (!MovePool_GetNumberOfMoves())
+    {
+        PlaySE(SE_FAILURE);
+        return;
+    }
+
     u32 currListIdx = MainPage_GetCurrListIdx();
 
     for (u32 i = 0; i < count; i++)
@@ -1666,7 +1707,11 @@ static void MainPage_PrintTextBox(u32 move)
 
     if (!sMoveReminderDataPtr->printingDialogue)
     {
-        StringCopy(gStringVar4, GetMoveDescription(move));
+        if (!MovePool_GetNumberOfMoves())
+            StringCopy(gStringVar4, COMPOUND_STRING("No moves to teach can be found."));
+        else
+            StringCopy(gStringVar4, GetMoveDescription(move));
+
         scrollPrompt = HIDE_SCROLL_PROMPT;
         maxWidth = TILE_TO_PIXELS(28);
     }
