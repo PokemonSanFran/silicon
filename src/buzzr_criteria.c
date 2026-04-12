@@ -281,12 +281,17 @@ void TweetCriteria_Quest_ReturnDollComplete(void)
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RETURNDOLL);
 }
 
-void TweetCriteria_Quest_Findtheguilty1(void)
+void TweetCriteria_Quest_Freetheinnocent1(void)
 {
     gSpecialVar_Result = TRUE;
 }
 
-void TweetCriteria_Quest_Findtheguilty5(void)
+void TweetCriteria_Quest_Freetheinnocent5(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_6);
+}
+
+void TweetCriteria_Quest_Findtheguilty1(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_FINDTHEGUILTY);
 }

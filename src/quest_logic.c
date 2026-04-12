@@ -3414,6 +3414,34 @@ void DebugQuest_Freetheinnocent(u8 state)
     }
 }
 
+void DebugQuest_Findtheguilty(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_FINDTHEGUILTY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            QuestMenu_ScriptSetComplete(QUEST_FREETHEINNOCENT);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_FINDTHEGUILTY);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_BEFORE_BATTLE:
+        case STATE_QUEST_FINDTHEGUILTY_BEFORE_COMPLETE:
+        case STATE_QUEST_FINDTHEGUILTY_REWARD:
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_AFTER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FINDTHEGUILTYPLANTH_2);
+            QuestMenu_ScriptSetReward(QUEST_FINDTHEGUILTY);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_FINDTHEGUILTY);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************

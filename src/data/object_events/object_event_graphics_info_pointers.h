@@ -395,13 +395,6 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Fishing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Normal;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3MachBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3AcroBike;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Surfing;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3FieldMove;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Underwater;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Normal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2MachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2AcroBike;
@@ -409,6 +402,27 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Normal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3MachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3AcroBike;
@@ -416,6 +430,27 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3FieldMove;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Underwater;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN3Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM2Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerM3Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BaiyaNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnknownNormal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AdaoraWalking;
@@ -717,13 +752,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF1Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF1FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F1_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF1Fishing,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF3Normal,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF3MachBike,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF3AcroBike,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerF3Surfing,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF3Underwater,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF3FieldMove,
-    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF3Fishing,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF2Normal,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF2MachBike,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF2AcroBike,
@@ -731,6 +759,27 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF2Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF2FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_F2_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF2Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF3Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF3MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF3AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerF3Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF3Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF3FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_F3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF3Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerN1Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerN1MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerN1AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerN1Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN1Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN1FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N1_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN1Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerN2Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerN2MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerN2AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerN2Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN2Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN2FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_N2_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN2Fishing,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerN3Normal,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerN3MachBike,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerN3AcroBike,
@@ -738,6 +787,27 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerN3Underwater,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerN3FieldMove,
     [OBJ_EVENT_GFX_SILICON_PLAYER_N3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerN3Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerF1Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerF1MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerF1AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerF1Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerF1Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerF1FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M1_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerF1Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerM2Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerM2MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerM2AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerM2Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerM2Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerM2FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M2_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerM2Fishing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_NORMAL] =           &gObjectEventGraphicsInfo_siliconPlayerM3Normal,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_MACH_BIKE] =        &gObjectEventGraphicsInfo_siliconPlayerM3MachBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_ACRO_BIKE] = &gObjectEventGraphicsInfo_siliconPlayerM3AcroBike,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_SURFING] =          &gObjectEventGraphicsInfo_siliconPlayerM3Surfing,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_UNDERWATER] = &gObjectEventGraphicsInfo_siliconPlayerM3Underwater,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_FIELD_MOVE] =       &gObjectEventGraphicsInfo_siliconPlayerM3FieldMove,
+    [OBJ_EVENT_GFX_SILICON_PLAYER_M3_FISHING] = &gObjectEventGraphicsInfo_siliconPlayerM3Fishing,
     [OBJ_EVENT_GFX_BAIYA] =                      &gObjectEventGraphicsInfo_BaiyaNormal,
     [OBJ_EVENT_GFX_UNKNOWN] =                  &gObjectEventGraphicsInfo_UnknownNormal,
     [OBJ_EVENT_GFX_ADAORA] =                   &gObjectEventGraphicsInfo_AdaoraWalking,

@@ -4035,14 +4035,80 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_FINDTHEGUILTY] =
     {
-        .name = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Find The Guilty"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Figure out who is responsible for the hiking club robbery."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Turns out FindtheguiltyplantH was hired to frame FindtheguiltyvictimB, but who?"),
         .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
-        .spritetype = QUEST_SPRITE_TYPE_OBJECT,
+        .sprite = SPECIES_QUEST_FINDTHEGUILTYPLANTH_ACE,
+        .spritetype = QUEST_SPRITE_TYPE_PKMN,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_FINDTHEGUILTY_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not_Started"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 18,
+                .y = 8,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_STARTED] =
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 18,
+                .y = 8,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_BEFORE_BATTLE] =
+            {
+                .name = COMPOUND_STRING("Before Battle"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_PLANTH),
+                .warpId = NO_WARP_ID,
+                .x = 26,
+                .y = 43,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_AFTER_BATTLE] =
+            {
+                .name = COMPOUND_STRING("After Battle"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_PLANTH),
+                .warpId = NO_WARP_ID,
+                .x = 26,
+                .y = 43,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 18,
+                .y = 8,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_BEFORE_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Before Complete"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 18,
+                .y = 8,
+            },
+            [STATE_QUEST_FINDTHEGUILTY_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Findtheguilty,
+                side_quest_map(MAP_QUEST_FREETHEINNOCENT_ORIGIN),
+                .warpId = NO_WARP_ID,
+                .x = 18,
+                .y = 8,
+            },
+        },
     },
     [QUEST_FLIGHTPATTERNS] =
     {

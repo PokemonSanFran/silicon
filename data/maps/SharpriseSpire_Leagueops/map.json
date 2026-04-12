@@ -41,6 +41,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_SHARPRISE_OLIVER",
       "graphics_id": "OBJ_EVENT_GFX_OLIVER",
       "x": 17,
       "y": 27,
@@ -178,6 +179,132 @@
       "var": "VAR_TOWER_RAID_STATE",
       "var_value": "TEAM_ENTERED_SHARPRISESPIRE",
       "script": "ImIn_OfficeReveal_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_StartFollow"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SHARPRISESPIRE_CONFERENCE_STATE",
+      "var_value": "START_THE_GANGS_ALL_HERE",
+      "script": "TheGangsAllHere_Script_LeaveFloor"
     }
   ],
   "bg_events": [
