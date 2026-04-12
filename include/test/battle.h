@@ -788,6 +788,7 @@ struct BattleTestData
     enum Ability forcedAbilities[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 chosenGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 forcedEnvironment;
+    struct StartingStatuses forcedStartingStatuses[PARTY_SIZE];
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
     u8 turnState;
@@ -1057,6 +1058,7 @@ struct moveWithPP {
 #define Shadow(isShadow) Shadow_(__LINE__, isShadow)
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
 #define Environment(environment) Environment_(__LINE__, environment)
+#define StartingStatus(status, index) StartingStatus_(__LINE__, status, index)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
@@ -1109,6 +1111,7 @@ void Shadow_(u32 sourceLine, bool32 isShadow);
 void Ball_(u32 sourceLine, enum PokeBall ball); // siliconNewBalls
 void Shiny_(u32 sourceLine, bool32 isShiny);
 void Environment_(u32 sourceLine, u32 environment);
+void StartingStatus_(u32 sourceLine, enum StartingStatus startingStatus, u32 index);
 
 static inline bool8 IsMultibattleTest(void)
 {

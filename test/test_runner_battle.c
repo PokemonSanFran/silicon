@@ -2497,6 +2497,17 @@ void Environment_(u32 sourceLine, u32 environment)
     DATA.forcedEnvironment = environment + 1;
 }
 
+#define UNPACK_STARTING_STATUS_TO_TEST_DATA(_enum, _fieldName, ...) case _enum: DATA.forcedStartingStatuses[index]._fieldName = TRUE; break;
+
+void StartingStatus_(u32 sourceLine, enum StartingStatus status, u32 index)
+{
+    switch (status)
+    {
+    STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_TEST_DATA);
+    }
+}
+
+
 static const char *const sBattlerIdentifiersSingles[] =
 {
     "player",
@@ -3518,6 +3529,11 @@ u32 TestRunner_Battle_GetForcedAbility(enum BattleTrainer trainer, u32 partyInde
 u32 TestRunner_Battle_GetForcedEnvironment(void)
 {
     return DATA.forcedEnvironment;
+}
+
+void TestRunner_Battle_GetForcedStaringStatuses(u32 index)
+{
+    gStartingStatuses = DATA.forcedStartingStatuses[index];
 }
 
 u32 TestRunner_Battle_GetChosenGimmick(enum BattleTrainer trainer, u32 partyIndex)

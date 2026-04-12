@@ -17,6 +17,7 @@
 #define MAX_TRAINER_AI_FLAGS 64
 #define MAX_TRAINER_ITEMS 4
 #define PARTY_SIZE 255
+#define BATTLE_PARTY_SIZE 6
 #define MAX_MON_MOVES 4
 #define MAX_MON_TAGS 32
 #define STARTING_STATUS_COUNT 64
@@ -43,6 +44,13 @@ enum BattleType
 {
     BATTLE_TYPE_SINGLE,
     BATTLE_TYPE_DOUBLE,
+};
+
+struct StartingStatus
+{
+    int line;
+    int count;
+    struct String statuses[STARTING_STATUS_COUNT];
 };
 
 // TODO: Support Hidden Power.
@@ -133,9 +141,8 @@ struct Trainer
     struct String mugshot;
     int mugshot_line;
 
-    struct String starting_status[STARTING_STATUS_COUNT];
-    int starting_status_n;
-    int starting_status_line;
+    struct StartingStatus starting_status[BATTLE_PARTY_SIZE];
+    bool has_starting_status;
 
     // Start siliconMerge
 	struct String reveal;
@@ -1166,6 +1173,14 @@ static const struct {
     { NULL, NULL, NULL }
 };
 
+#define PARSE_STARTING_STATUS(index)                                                                                                                     \
+    if (trainer->starting_status[index].line)                                                                                                            \
+        any_error = !set_show_parse_error(p, key.location, "duplicate 'Starting Status " #index "'");                                                    \
+    trainer->starting_status[index].line = value.location.line;                                                                                          \
+    trainer->has_starting_status = true;                                                                                                                 \
+    if (!token_human_identifiers(p, &value, trainer->starting_status[index].statuses, &trainer->starting_status[index].count, STARTING_STATUS_COUNT))    \
+        any_error = !show_parse_error(p);                                                                                                                \
+
 static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct Trainer *trainer)
 {
     bool any_error = false;
@@ -1266,11 +1281,35 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
         }
         else if (is_literal_token(&key, "Starting Status"))
         {
-            if (trainer->starting_status_line)
-                any_error = !set_show_parse_error(p, key.location, "duplicate 'Starting Status'");
-            trainer->starting_status_line = value.location.line;
-            if (!token_human_identifiers(p, &value, trainer->starting_status, &trainer->starting_status_n, STARTING_STATUS_COUNT))
-                any_error = !show_parse_error(p);
+            PARSE_STARTING_STATUS(0)
+        }
+        else if (is_literal_token(&key, "Starting Status Last"))
+        {
+            PARSE_STARTING_STATUS(BATTLE_PARTY_SIZE - 1)
+        }
+        else if (is_literal_token(&key, "Starting Status 1"))
+        {
+            PARSE_STARTING_STATUS(0)
+        }
+        else if (is_literal_token(&key, "Starting Status 2"))
+        {
+            PARSE_STARTING_STATUS(1)
+        }
+        else if (is_literal_token(&key, "Starting Status 3"))
+        {
+            PARSE_STARTING_STATUS(2)
+        }
+        else if (is_literal_token(&key, "Starting Status 4"))
+        {
+            PARSE_STARTING_STATUS(3)
+        }
+        else if (is_literal_token(&key, "Starting Status 5"))
+        {
+            PARSE_STARTING_STATUS(4)
+        }
+        else if (is_literal_token(&key, "Starting Status 6"))
+        {
+            PARSE_STARTING_STATUS(5)
         }
         // Start siliconMerge
 		else if (is_literal_token(&key, "Reveal"))
@@ -1947,15 +1986,30 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
-        if (trainer->starting_status_n > 0)
+
+        if (trainer->has_starting_status)
         {
-            fprintf(f, "#line %d\n", trainer->starting_status_line);
-            fprintf(f, "        .startingStatus = { ");
-            for (int i = 0; i < trainer->starting_status_n; i++)
+            fprintf(f, "        .startingStatus = {\n");
+            for (int i = 0; i < BATTLE_PARTY_SIZE; i++)
             {
-                fprintf(f, ".");
-                fprint_symbol(f, trainer->starting_status[i]);
-                fprintf(f, " = TRUE, ");
+                struct StartingStatus starting_status = trainer->starting_status[i];
+                if (starting_status.count > 0)
+                {
+                    fprintf(f, "#line %d\n", starting_status.line);
+                    fprintf(f, "            { ");
+                    for (int j = 0; j < starting_status.count; j++)
+                    {
+                        fprintf(f, ".");
+                        fprint_symbol(f, starting_status.statuses[j]);
+                        fprintf(f, " = TRUE, ");
+                    }
+                    fprintf(f, "},\n");
+                }
+                else
+                {
+                    fprintf(f, "            {0},\n");
+                }
+
             }
             fprintf(f, "},\n");
         }
