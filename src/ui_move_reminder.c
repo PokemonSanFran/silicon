@@ -834,7 +834,7 @@ static u32 MovePool_GetMoveFromIdx(u32 idx)
 
 static void MovePool_SetMethodToIdx(u32 idx, enum MovePoolMethods method)
 {
-    sMoveReminderDataPtr->movePool[idx].method = 1 << method;
+    sMoveReminderDataPtr->movePool[idx].method |= (1 << method);
 }
 
 static bool32 MovePool_IsMethodInIdx(u32 idx, enum MovePoolMethods method)
