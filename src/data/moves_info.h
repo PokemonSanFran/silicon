@@ -523,6 +523,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboStarterId = 0,
         .contestComboMoves = {COMBO_STARTER_SWORDS_DANCE},
         .battleAnimScript = gBattleAnimMove_Cut,
+        // Start moveReminder
+        .criteriaFunc = MoveCriteria_ByQuestId,
+        .criteriaGoal = {
+            .quest = {
+                .id = QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP,     // PSF TODO apply correct quest id once implemented proper
+                .state = FLAG_GET_COMPLETED,
+            },
+        },
+        // End moveReminder
     },
 
     [MOVE_GUST] =
@@ -1979,6 +1988,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {0},
         .battleAnimScript = gBattleAnimMove_Strength,
         .validApprenticeMove = TRUE,
+        // Start moveReminder
+        .criteriaFunc = MoveCriteria_ByQuestId,
+        .criteriaGoal = {
+            .quest = {
+                .id = QUEST_RABIESOUTBREAK,     // PSF TODO apply correct quest id once implemented proper
+                .state = FLAG_GET_COMPLETED,
+            },
+        },
+        // End moveReminder
     },
 
     [MOVE_ABSORB] =
@@ -6796,6 +6814,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {COMBO_STARTER_RAIN_DANCE},
         .battleAnimScript = gBattleAnimMove_Whirlpool,
         .validApprenticeMove = TRUE,
+        // Start moveReminder
+        .criteriaFunc = MoveCriteria_ByQuestId,
+        .criteriaGoal = {
+            .quest = {
+                .id = QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP,     // PSF TODO apply correct quest id once implemented proper
+                .state = FLAG_GET_COMPLETED,
+            },
+        },
+        // End moveReminder
     },
 
     [MOVE_BEAT_UP] =
@@ -7881,6 +7908,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {COMBO_STARTER_RAIN_DANCE, COMBO_STARTER_SURF},
         .battleAnimScript = gBattleAnimMove_Dive,
         .validApprenticeMove = TRUE,
+        // Start moveReminder
+        .criteriaFunc = MoveCriteria_ByQuestId,
+        .criteriaGoal = {
+            .quest = {
+                .id = QUEST_RABIESOUTBREAK,     // PSF TODO apply correct quest id once implemented proper
+                .state = FLAG_GET_COMPLETED,
+            },
+        },
+        // End moveReminder
     },
 
     [MOVE_ARM_THRUST] =

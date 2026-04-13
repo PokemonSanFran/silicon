@@ -3,6 +3,7 @@
 
 #include "generational_changes.h"
 #include "contest_effect.h"
+#include "move_criterias.h"
 #include "constants/battle.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_move_effects.h"
@@ -201,6 +202,11 @@ struct MoveInfo
     u8 contestComboStarterId;
     u8 contestComboMoves[MAX_COMBO_MOVES];
     const u8 *battleAnimScript;
+
+    // Start moveReminder
+    MoveCriteriaFunc criteriaFunc;
+    union MoveCriteriaGoal criteriaGoal;
+    // End moveReminder
 };
 
 extern const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL];
@@ -798,5 +804,23 @@ static inline const u8 *GetMoveBattleScript(enum Move moveId)
     }
     return gBattleMoveEffects[GetMoveEffect(moveId)].battleScript;
 }
+
+// Start moveReminder
+static inline MoveCriteriaFunc GetMoveCriteriaFunc(enum Move moveId)
+{
+    moveId = SanitizeMoveId(moveId);
+
+    // Don't assert over no explicit criteria func.
+    if (!gMovesInfo[moveId].criteriaFunc)
+        return MoveCriteria_ByNothing;
+
+    return gMovesInfo[moveId].criteriaFunc;
+}
+
+static inline union MoveCriteriaGoal GetMoveCriteriaGoal(enum Move moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].criteriaGoal;
+}
+// End moveReminder
 
 #endif // GUARD_MOVES_H

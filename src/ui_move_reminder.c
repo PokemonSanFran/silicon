@@ -27,7 +27,7 @@
 #include "line_break.h"
 #include "international_string_util.h"
 #include "battle_main.h"
-#include "random.h"
+#include "quests.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
@@ -94,8 +94,9 @@ static enum SubPageInterfaces PageInterface_SetSubValue(enum SubPageInterfaces);
 
 static void MovePool_PopulateList(void);
 static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
-static void MovePool_ProcessMachineLearnset(const u16 *, u32 *);
-static void MovePool_ProcessEggLearnset(const u16 *, u32 *);
+static void MovePool_ProcessMachineLearnset(u32, u32 *);
+static void MovePool_ProcessEggLearnset(u32, u32 *);
+static void MovePool_ProcessMoveCriterias(u32, u32 *);
 static u32 MovePool_GetIdxFromMove(u32);
 static void MovePool_AddMoveToIdx(u32, enum MovePoolMethods, u32 *);
 static void MovePool_UpdateMethodInIdx(u32, enum MovePoolMethods);
@@ -815,8 +816,9 @@ static void MovePool_PopulateList(void)
     u32 species = MiscUtil_GetMon()->species;
 
     MovePool_ProcessLevelUpLearnset(GetSpeciesLevelUpLearnset(species), &numMoves);
-    MovePool_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
-    MovePool_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
+    MovePool_ProcessMachineLearnset(species, &numMoves);
+    MovePool_ProcessEggLearnset(species, &numMoves);
+    MovePool_ProcessMoveCriterias(species, &numMoves);
 
     /*
     for (u32 i = 0; i < numMoves; i++)
@@ -863,13 +865,13 @@ static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, 
     }
 }
 
-static void MovePool_ProcessMachineLearnset(const u16 *learnset, u32 *numMoves)
+static void MovePool_ProcessMachineLearnset(u32 species, u32 *numMoves)
 {
     for (enum TMHMIndex idx = 0; idx < NUM_TECHNICAL_MACHINES; idx++)
     {
         u32 move = GetTMHMMoveId(idx);
 
-        if (!CanLearnTeachableMove(MiscUtil_GetMon()->species, move))
+        if (!CanLearnTeachableMove(species, move))
             continue;
 
         if (!CheckBagHasItem(GetTMHMItemId(idx), 1))
@@ -884,14 +886,14 @@ static void MovePool_ProcessMachineLearnset(const u16 *learnset, u32 *numMoves)
     }
 }
 
-static void MovePool_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
+static void MovePool_ProcessEggLearnset(u32 species, u32 *numMoves)
 {
     for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
     {
         if (!IsMoveInSilicon(move))
             continue;
 
-        if (!SpeciesCanLearnEggMove(MiscUtil_GetMon()->species, move))
+        if (!SpeciesCanLearnEggMove(species, move))
             continue;
 
         u32 existingIdx = MovePool_GetIdxFromMove(move);
@@ -900,6 +902,27 @@ static void MovePool_ProcessEggLearnset(const u16 *learnset, u32 *numMoves)
             MovePool_UpdateMethodInIdx(existingIdx, MP_METHOD_EGG);
         else
             MovePool_AddMoveToIdx(move, MP_METHOD_EGG, numMoves);
+    }
+}
+
+static void MovePool_ProcessMoveCriterias(u32 species, u32 *numMoves)
+{
+    for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    {
+        MoveCriteriaFunc func = GetMoveCriteriaFunc(move);
+        if (!func(move))
+            continue;
+
+        if (!CanMonEverLearnMove(species, move))
+            continue;
+
+        u32 existingIdx = MovePool_GetIdxFromMove(move);
+
+        // Set as machine method so that its filter-able.
+        if (existingIdx != MOVE_UNAVAILABLE)
+            MovePool_UpdateMethodInIdx(existingIdx, MP_METHOD_MACHINE);
+        else
+            MovePool_AddMoveToIdx(move, MP_METHOD_MACHINE, numMoves);
     }
 }
 
@@ -2308,4 +2331,18 @@ static void FilterPage_PrintCursor(void)
 static u32 FilterPage_ConvertGridPosToTypeIdx(void)
 {
     return FilterPage_GetGridX() + (FilterPage_GetGridY() == FILTER_GRID_Y_TYPE_2 ? NUM_FILTER_GRID_X : 0);
+}
+
+bool32 MoveCriteria_ByNothing(enum Move move)
+{
+    return FALSE;
+}
+
+bool32 MoveCriteria_ByQuestId(enum Move move)
+{
+    union MoveCriteriaGoal goal = GetMoveCriteriaGoal(move);
+    if (ReturnQuestState(goal.quest.id) == goal.quest.state)
+        return TRUE;
+
+    return FALSE;
 }
