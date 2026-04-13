@@ -2804,7 +2804,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_RESTAURANTEXPANSIONHOSTESS] =
     {
-        .name = COMPOUND_STRING("Restaurantexpansionbusser"),
+        .name = COMPOUND_STRING("Restaurantexpansionhostess"),
         .title = COMPOUND_STRING("???"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
@@ -2812,7 +2812,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_RESTAURANTEXPANSIONCHEF] =
     {
-        .name = COMPOUND_STRING("Restaurantexpansionbusser"),
+        .name = COMPOUND_STRING("Restaurantexpansionchef"),
         .title = COMPOUND_STRING("???"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
@@ -2820,7 +2820,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_RESTAURANTEXPANSIONLINECOOK] =
     {
-        .name = COMPOUND_STRING("Restaurantexpansionbusser"),
+        .name = COMPOUND_STRING("Restaurantexpansionlinecook"),
         .title = COMPOUND_STRING("???"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
