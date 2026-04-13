@@ -2967,7 +2967,7 @@ static void MovesPageMisc_PrintDetails(u32 move)
     if (val)
         ConvertUIntToDecimalStringN(gStringVar1, val, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
-        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+        StringCopy(gStringVar1, gText_ThreeDashes);
 
     x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH, -1);
     SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_NAME_X, SUMMARY_MOVES_MISC_POWER_Y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Pwr:"));
@@ -2977,7 +2977,7 @@ static void MovesPageMisc_PrintDetails(u32 move)
     if (val)
         ConvertUIntToDecimalStringN(gStringVar1, val, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
-        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+        StringCopy(gStringVar1, gText_ThreeDashes);
 
     x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, SUMMARY_MOVES_MISC_VALUE_TEXT_WIDTH, -1);
     SummaryPrint_AddText(windowId, fontId, SUMMARY_MOVES_MISC_NAME_X, SUMMARY_MOVES_MISC_ACCURACY_Y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Acc:"));
