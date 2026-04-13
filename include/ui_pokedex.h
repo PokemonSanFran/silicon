@@ -120,6 +120,9 @@ extern const u8 sPokedexWindowFontColors[][3];
 extern const u8 *const sFilterListTexts[];
 
 extern const struct PokemonFormTable pokemonFormTable[POKEDEX_FORM_COUNT][NUMBER_OF_MON_TYPES];
+extern const u32 gTypes_Gfx13x11[];
+extern const u16 gTypes_Palettes[];
+extern const struct SpriteTemplate gSpriteTemplate_Type13x11;
 
 static const u16 pokedexPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/palettes/default.gbapal");
 
