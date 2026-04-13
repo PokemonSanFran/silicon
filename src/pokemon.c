@@ -7354,7 +7354,7 @@ const u8 *GetMoveDesc(u32 moveId)
     return gMovesInfo[moveId].description;
 }
 
-static const u8* const categoryNames[] =
+const u8* const gDamageCategoryNames[] =
 {
     [DAMAGE_CATEGORY_PHYSICAL] = COMPOUND_STRING("Physical"),
     [DAMAGE_CATEGORY_SPECIAL] = COMPOUND_STRING("Special"),
@@ -7364,7 +7364,7 @@ static const u8* const categoryNames[] =
 const u8* GetMoveCategoryName(u32 moveId)
 {
     u32 category = GetMoveCategory(moveId);
-    return categoryNames[category];
+    return gDamageCategoryNames[category];
 }
 // End pokedex
 void UpdateDaysPassedSinceFormChange(u16 days)
