@@ -267,8 +267,8 @@ typedef void (*HandleInputFunc)(u8);
 struct PACKED MovePool
 {
     // u16
-    u16 move:13;
-    u16 method:3;
+    enum Move move:13;
+    u16 method:3;       // bitflags
 
     // u8
     enum DamageCategory category:3;
@@ -288,7 +288,7 @@ struct MoveReminderMon
     u8 gender;
     u8 level;
     u16 stats[NUM_STATS];
-    u16 moves[MAX_MON_MOVES];
+    enum Move moves[MAX_MON_MOVES];
     u8 PP[MAX_MON_MOVES];
     u8 remainingPP[MAX_MON_MOVES];
 };
@@ -305,7 +305,7 @@ struct MoveReminderData
 
     MainCallback savedCallback;
     struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
-    u16 movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
+    enum Move movesList[UI_MOVES_COUNT_TOTAL];                    // what's actually possible to learn, e.g. have certain TM to be available
 
     u32 currListIdx:10;     // 512
     u32 firstListIdx:10;    //
@@ -315,7 +315,7 @@ struct MoveReminderData
     u32 confirmationBoxRes:2;
     u32 pad:2;
 
-    u32 moveToTeach:12;
+    enum Move moveToTeach:12;
     u32 typeFilter:20;      // 1 << TYPE_XXX
 
     u16 categoryFilter:4;

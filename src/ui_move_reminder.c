@@ -97,10 +97,10 @@ static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *, u32 *);
 static void MovePool_ProcessMachineLearnset(u32, u32 *);
 static void MovePool_ProcessEggLearnset(u32, u32 *);
 static void MovePool_ProcessMoveCriterias(u32, u32 *);
-static u32 MovePool_GetIdxFromMove(u32);
-static void MovePool_AddMoveToIdx(u32, enum MovePoolMethods, u32 *);
+static u32 MovePool_GetIdxFromMove(enum Move);
+static void MovePool_AddMoveToIdx(enum Move, enum MovePoolMethods, u32 *);
 static void MovePool_UpdateMethodInIdx(u32, enum MovePoolMethods);
-static void MovePool_SetMoveToIdx(u32, u32);
+static void MovePool_SetMoveToIdx(u32, enum Move);
 static u32 MovePool_GetMoveFromIdx(u32);
 static void MovePool_SetMethodToIdx(u32, enum MovePoolMethods);
 static bool32 MovePool_IsMethodInIdx(u32, enum MovePoolMethods);
@@ -111,14 +111,14 @@ static void MovePool_SetTypeToIdx(u32, enum Type);
 static enum Type MovePool_GetTypeFromIdx(u32);
 static void MovePool_SetNumberOfMoves(u32);
 static u32 MovePool_GetNumberOfMoves(void);
-static void MovePool_SetMoveToList(u32, u32);
+static void MovePool_SetMoveToList(u32, enum Move);
 static u32 MovePool_GetMoveFromList(u32);
 static u32 MovePool_SanitizeTypeFlag(enum Type);
 static bool32 MovePool_DoTypeFilterMatch(enum Type);
 static bool32 MovePool_DoCategoryFilterMatch(enum DamageCategory);
 static bool32 MovePool_DoMethodFilterMatch(enum MovePoolMethods);
 static bool32 MovePool_IsAnyFilterActive(void);
-static bool32 MovePool_DoMoveMatchFilter(u32);
+static bool32 MovePool_DoMoveMatchFilter(enum Move);
 
 static void MovePool_SetSort(enum MovePoolSorts sort);
 static enum MovePoolSorts MovePool_GetSort(void);
@@ -161,13 +161,13 @@ static void MainPage_PrintMonGender(void);
 static void MainPage_PrintMonLevel(void);
 static void MainPage_PrintMonStats(void);
 static void MainPage_PrintMonIndividualStat(enum Stat, u32, u32, u32, u32);
-static void MainPage_PrintTextBox(u32);
+static void MainPage_PrintTextBox(enum Move);
 static void MainPage_PrepareDialogue(const u8 *);
-static void MainPage_PrintMoveSummary(u32);
+static void MainPage_PrintMoveSummary(enum Move);
 static void MainPage_PrintMovePP(u32, u32);
-static void MainPage_PrintMoveCategory(u32);
-static void MainPage_PrintMovePower(u32);
-static void MainPage_PrintMoveAccuracy(u32);
+static void MainPage_PrintMoveCategory(enum Move);
+static void MainPage_PrintMovePower(enum Move);
+static void MainPage_PrintMoveAccuracy(enum Move);
 
 static void FilterPage_Init(void);
 static void FilterPage_Reset(void);
@@ -523,7 +523,7 @@ static void MoveBar_Update(void)
 
         u32 spriteId = MoveBar_GetSpriteId(i);
         struct Sprite *sprite = &gSprites[spriteId];
-        u32 move;
+        enum Move move;
 
         if (!isMain)
             move = (i == MAX_MON_MOVES) ? sMoveReminderDataPtr->moveToTeach : MiscUtil_GetMon()->moves[i];
@@ -850,7 +850,7 @@ static void MovePool_ProcessLevelUpLearnset(const struct LevelUpMove *learnset, 
 
     while (idx >= 0)
     {
-        u32 move = learnset[idx].move;
+        enum Move move = learnset[idx].move;
         u32 level = learnset[idx].level;
 
         idx--;
@@ -869,7 +869,7 @@ static void MovePool_ProcessMachineLearnset(u32 species, u32 *numMoves)
 {
     for (enum TMHMIndex idx = 0; idx < NUM_TECHNICAL_MACHINES; idx++)
     {
-        u32 move = GetTMHMMoveId(idx);
+        enum Move move = GetTMHMMoveId(idx);
 
         if (!CanLearnTeachableMove(species, move))
             continue;
@@ -888,7 +888,7 @@ static void MovePool_ProcessMachineLearnset(u32 species, u32 *numMoves)
 
 static void MovePool_ProcessEggLearnset(u32 species, u32 *numMoves)
 {
-    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
     {
         if (!IsMoveInSilicon(move))
             continue;
@@ -926,7 +926,7 @@ static void MovePool_ProcessMoveCriterias(u32 species, u32 *numMoves)
     }
 }
 
-static u32 MovePool_GetIdxFromMove(u32 move)
+static u32 MovePool_GetIdxFromMove(enum Move move)
 {
     for (u32 idx = 0; MovePool_GetMoveFromIdx(idx) != MOVE_NONE; idx++)
     {
@@ -937,7 +937,7 @@ static u32 MovePool_GetIdxFromMove(u32 move)
     return MOVE_UNAVAILABLE;
 }
 
-static void MovePool_AddMoveToIdx(u32 move, enum MovePoolMethods method, u32 *numMoves)
+static void MovePool_AddMoveToIdx(enum Move move, enum MovePoolMethods method, u32 *numMoves)
 {
     MovePool_SetMoveToIdx(*numMoves, move);
     MovePool_SetMethodToIdx(*numMoves, method);
@@ -954,7 +954,7 @@ static void MovePool_UpdateMethodInIdx(u32 idx, enum MovePoolMethods newMethod)
     MovePool_SetMethodToIdx(idx, newMethod);
 }
 
-static void MovePool_SetMoveToIdx(u32 idx, u32 move)
+static void MovePool_SetMoveToIdx(u32 idx, enum Move move)
 {
     sMoveReminderDataPtr->movePool[idx].move = move;
 }
@@ -1009,7 +1009,7 @@ static u32 MovePool_GetNumberOfMoves(void)
     return sMoveReminderDataPtr->numMoves;
 }
 
-static void MovePool_SetMoveToList(u32 idx, u32 move)
+static void MovePool_SetMoveToList(u32 idx, enum Move move)
 {
     sMoveReminderDataPtr->movesList[idx] = move;
 }
@@ -1059,7 +1059,7 @@ static bool32 MovePool_IsAnyFilterActive(void)
     return score;
 }
 
-static bool32 MovePool_DoMoveMatchFilter(u32 move)
+static bool32 MovePool_DoMoveMatchFilter(enum Move move)
 {
     u32 idx = MovePool_GetIdxFromMove(move);
     u32 filter = MovePool_IsAnyFilterActive();
@@ -1224,7 +1224,7 @@ static void MovePoolSort_Name(u32 *numMoves)
         if (*numMoves == UI_MOVES_COUNT_TOTAL)
             break;
 
-        u32 move = residoMovesAZ[POKEDEX_FILTER_ALPHABET_ALL][idx];
+        enum Move move = residoMovesAZ[POKEDEX_FILTER_ALPHABET_ALL][idx];
         if (!MovePool_DoMoveMatchFilter(move))
             continue;
 
@@ -1235,7 +1235,7 @@ static void MovePoolSort_Name(u32 *numMoves)
 
 static void MovePoolSort_MoveID(u32 *numMoves)
 {
-    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
     {
         if (*numMoves == UI_MOVES_COUNT_TOTAL)
             break;
@@ -1254,7 +1254,7 @@ static void MovePoolSort_Default(u32 *numMoves)
 
     while (idx < UI_MOVES_COUNT_TOTAL)
     {
-        u32 move = MovePool_GetMoveFromIdx(idx);
+        enum Move move = MovePool_GetMoveFromIdx(idx);
         if (move == MOVE_NONE)
             break;
 
@@ -1300,7 +1300,7 @@ static void MiscUtil_TeachMove(void)
     PlaySE(SE_SUCCESS);
 
     struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
-    u32 move = sMoveReminderDataPtr->moveToTeach;
+    enum Move move = sMoveReminderDataPtr->moveToTeach;
     u32 slot = sMoveReminderDataPtr->moveSlot;
 
     SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
@@ -1367,7 +1367,7 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
             return;
         }
 
-        u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
+        enum Move move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
         sMoveReminderDataPtr->moveToTeach = move;
 
         struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
@@ -1755,7 +1755,7 @@ static void MainPage_UpdateFrontEnd(void)
     MainPage_PrintMonLevel();
     MainPage_PrintMonStats();
 
-    u32 move;
+    enum Move move;
     u32 currListIdx = MainPage_GetCurrListIdx();
 
     if (PageInterface_GetSubValue() != SUBPAGE_INTERFACE_MAIN_DEFAULT)
@@ -1824,7 +1824,7 @@ static void MainPage_PrintMonIndividualStat(enum Stat stat, u32 x1, u32 y1, u32 
         FONT_OUTLINED, x2, y2, MREMINDER_TXTCLR_DEFAULT);
 }
 
-static void MainPage_PrintTextBox(u32 move)
+static void MainPage_PrintTextBox(enum Move move)
 {
     u32 scrollPrompt = SHOW_SCROLL_PROMPT;
     u32 maxWidth = TILE_TO_PIXELS(18);
@@ -1855,7 +1855,7 @@ static void MainPage_PrepareDialogue(const u8 *dialogue)
     sMoveReminderDataPtr->printingDialogue = TRUE;
 }
 
-static void MainPage_PrintMoveSummary(u32 move)
+static void MainPage_PrintMoveSummary(enum Move move)
 {
     u32 PP = 0, remainingPP = 0;
 
@@ -1908,7 +1908,7 @@ static void MainPage_PrintMovePP(u32 pp, u32 remainingPP)
         PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
-static void MainPage_PrintMoveCategory(u32 move)
+static void MainPage_PrintMoveCategory(enum Move move)
 {
     enum DamageCategory category;
     const u8 *str;
@@ -1934,7 +1934,7 @@ static void MainPage_PrintMoveCategory(u32 move)
         11, 9);
 }
 
-static void MainPage_PrintMovePower(u32 move)
+static void MainPage_PrintMovePower(enum Move move)
 {
     u32 pwr = GetMovePower(move);
 
@@ -1948,7 +1948,7 @@ static void MainPage_PrintMovePower(u32 move)
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar2, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
-static void MainPage_PrintMoveAccuracy(u32 move)
+static void MainPage_PrintMoveAccuracy(enum Move move)
 {
     u32 accuracy = GetMoveAccuracy(move);
 

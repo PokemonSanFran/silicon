@@ -421,7 +421,7 @@ struct MonSummary
     u16 moves[MAX_MON_MOVES];
     u8 pp[MAX_MON_MOVES];
     u16 currHp;
-    u16 item;
+    enum Item item;
     u8 friendship;
     u8 nature;
     u8 ppBonuses;

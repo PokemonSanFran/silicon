@@ -211,7 +211,7 @@ static void MovesPage_HandleHeader(void);
 static void MovesPage_HandleGeneral(void);
 static void MovesPage_HandleMisc(void);
 static void MovesPageMisc_PutMenuTilemap(enum MonSummaryMovesSubModes);
-static void MovesPageMisc_PrintDetails(u32);
+static void MovesPageMisc_PrintDetails(enum Move);
 static void MovesPageMisc_PrintOptions(void);
 static void MovesPageMisc_PrintForgetConfirmation(void);
 static void MovesPageMisc_PrintDescription(void);
@@ -1856,7 +1856,7 @@ static void SummarySprite_PlayPokemonCry(void)
 static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(spriteArrId);
+    enum Item itemId = mon->item, spriteId = SummarySprite_GetDynamicSpriteId(spriteArrId);
 
     if (spriteId == SPRITE_NONE)
     {
@@ -1966,7 +1966,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     idx %= MAX_MON_MOVES;
 
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 move = mon->moves[idx];
+    enum Move move = mon->moves[idx];
     enum Type type = GetMoveType(move);
 
     if (move == MOVE_NONE || move >= MOVES_COUNT
@@ -2180,7 +2180,7 @@ static void SummaryPrint_MonLevel(u32 x, u32 y)
 static void SummaryPrint_MonHeldItem(u32 x, u32 y, u32 maxWidth)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 itemId = mon->item;
+    enum Item itemId = mon->item;
 
     if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
 
@@ -2279,7 +2279,7 @@ static void SummaryPrint_MoveName(u32 idx, u32 x, u32 y)
     idx %= MAX_MON_MOVES;
 
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 move = mon->moves[idx];
+    enum Move move = mon->moves[idx];
 
     if (move == MOVE_NONE || move >= MOVES_COUNT) return;
 
@@ -2294,7 +2294,7 @@ static void SummaryPrint_BlitMoveType(u32 idx, u32 x, u32 y)
     idx %= MAX_MON_MOVES;
 
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 move = mon->moves[idx];
+    enum Move move = mon->moves[idx];
 
     if (move == MOVE_NONE || move >= MOVES_COUNT) return;
 
@@ -2506,7 +2506,7 @@ static void InfosPageMisc_PrintTextBox(void)
 
         if (sMonSummaryDataPtr->arg.infosDescState)
         {
-            u32 itemId = mon->item;
+            enum Item itemId = mon->item;
             u32 fontId = FONT_NORMAL;
 
             if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT)
@@ -2956,7 +2956,7 @@ static void MovesPageMisc_PutMenuTilemap(enum MonSummaryMovesSubModes subMode)
     CopyToBgTilemapBufferRect(SUMMARY_BG_PAGE_1, sMovesPageMisc_MenuTilemaps[subMode], 1, 4, 16, 8);
 }
 
-static void MovesPageMisc_PrintDetails(u32 move)
+static void MovesPageMisc_PrintDetails(enum Move move)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
