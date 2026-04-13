@@ -136,6 +136,7 @@ script Quest_Restaurantexpansion2_Reward_Dialogue
         msgbox(format("When you come back to the Gym, let’s battle again! Gracias!"),,SPEAKER_BELEN)
         closemessage
         setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2)
+        setflag(FLAG_TEMP_1A)
         setflag(FLAG_FACILITY_UNLOCK_BELEN)
         completequest(QUEST_RESTAURANTEXPANSION2)
     }
@@ -184,4 +185,56 @@ script Quest_Restaurantexpansion2_Dialogue_Complete
 {
     msgbox(format("I need to marinate in my last loss, but I’ll be ready to jump into the frying pan with you soon!"),MSGBOX_NPC,SPEAKER_BELEN)
 }
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete
+{
+    msgbox(format("Belén’s new thing is about impressing the world with her high end dishes. And now to be a part of that after ten years away… I’m so happy!"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONCHEF)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestComplete
+{
+    lock
+    faceplayer
+    msgbox(format("Belén left me to run Flowers so she can handle Needles."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("Flowers runs entirely off the profit margins from Needles, which limits how many people we can serve."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("I love what we're doing here, but it breaks my heart to see that we can't help more people."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    release
+    end
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef
+{
+    goto_if_quest_not_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete)
+    goto_if_set(FLAG_TEMP_1A,Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete)
+    goto(Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestComplete)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser
+{
+    goto_if_quest_not_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete)
+    goto_if_set(FLAG_TEMP_1A,Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete)
+    goto(Kitchenvolunteering_Script_Interact_Restaurantexpansionbusser)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete
+{
+    msgbox(format("Belén is always going on about showing, not telling, and really making it happen. Her dishes speak for themselves, but how do I show her I want to start moving up?"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionhostess
+{
+    lock
+    faceplayer
+    msgbox(format("Belén is really great at handling pressure in the kitchen and battles! Whenever things don’t go her away, she doesn’t ever lose her cool."),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    msgbox(format("A lot of people could learn from her!"),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionlinecook
+{
+    msgbox(format("Watching Belén is amazing. Somehow, she’s able to perfectly split her focus between Gym Battles and cooking, and does them both perfectly!"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONLINECOOK)
+}
+
 

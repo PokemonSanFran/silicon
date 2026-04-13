@@ -1,7 +1,7 @@
 const RESTAURANTEXPANSIONBUSSER = 1
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-script Kitchenvolunteering_Script_FirstInteractKitvol
+script Kitchenvolunteering_Script_Interact_Restaurantexpansionbusser
 {
     locktarget
     goto_if_quest_complete(QUEST_KITCHENVOLUNTEERING,Kitchenvolunteering_Script_SecondInteract)
