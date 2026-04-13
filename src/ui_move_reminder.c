@@ -1834,7 +1834,7 @@ static void MainPage_PrepareDialogue(const u8 *dialogue)
 
 static void MainPage_PrintMoveSummary(u32 move)
 {
-    u32 PP, remainingPP;
+    u32 PP = 0, remainingPP = 0;
 
     if (PageInterface_GetSubValue() != SUBPAGE_INTERFACE_MAIN_DEFAULT)
     {
@@ -1851,6 +1851,10 @@ static void MainPage_PrintMoveSummary(u32 move)
             remainingPP = MiscUtil_GetMon()->remainingPP[moveSlot];
         }
     }
+    else if (!MovePool_GetNumberOfMoves())
+    {
+        move = MOVE_NONE;
+    }
     else
     {
         PP = GetMovePP(move);
@@ -1865,21 +1869,41 @@ static void MainPage_PrintMoveSummary(u32 move)
 
 static void MainPage_PrintMovePP(u32 pp, u32 remainingPP)
 {
-    ConvertUIntToDecimalStringN(gStringVar1, remainingPP,   STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
-    ConvertUIntToDecimalStringN(gStringVar2, pp,            STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
-    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("PP: {STR_VAR_1}/{STR_VAR_2}"));
+    if (pp == 0)
+    {
+        StringCopy(gStringVar1, gText_TwoDashes);
+        StringCopy(gStringVar2, gText_TwoDashes);
+    }
+    else
+    {
+        ConvertUIntToDecimalStringN(gStringVar1, remainingPP,   STR_CONV_MODE_RIGHT_ALIGN, MAX_DIGITS(99));
+        ConvertUIntToDecimalStringN(gStringVar2, pp,            STR_CONV_MODE_LEFT_ALIGN, MAX_DIGITS(99));
+    }
 
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("PP: {STR_VAR_1}/{STR_VAR_2}"));
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar3, FONT_SMALL,
         PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_1_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
 static void MainPage_PrintMoveCategory(u32 move)
 {
-    enum DamageCategory category = GetMoveCategory(move);
-    const u8 *str = GetMoveCategoryName(move);
-    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(4));
+    enum DamageCategory category;
+    const u8 *str;
 
+    if (move != MOVE_NONE)
+    {
+        category = GetMoveCategory(move);
+        str = GetMoveCategoryName(move);
+    }
+    else
+    {
+        str = gText_ThreeDashes;
+    }
+
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, TILE_TO_PIXELS(4));
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, fontId, PAGE_MAIN_MOVE_DETAILS_1_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
+    if (move == MOVE_NONE) return;
+
     BlitBitmapRectToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_CategoriesBlit,
         0, category * 16,
         16, 16 * DAMAGE_CATEGORY_COUNT,
@@ -1894,7 +1918,7 @@ static void MainPage_PrintMovePower(u32 move)
     if (pwr > 1)
         ConvertUIntToDecimalStringN(gStringVar1, pwr, STR_CONV_MODE_LEFT_ALIGN, MAX_DIGITS(255));
     else
-        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+        StringCopy(gStringVar1, gText_ThreeDashes);
 
     StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("PWR: {STR_VAR_1}"));
 
@@ -1908,7 +1932,7 @@ static void MainPage_PrintMoveAccuracy(u32 move)
     if (accuracy > 0)
         ConvertUIntToDecimalStringN(gStringVar1, accuracy, STR_CONV_MODE_LEFT_ALIGN, MAX_DIGITS(255));
     else
-        StringCopy(gStringVar1, COMPOUND_STRING("---"));
+        StringCopy(gStringVar1, gText_ThreeDashes);
 
     StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("ACC: {STR_VAR_1}"));
 
