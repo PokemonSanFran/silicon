@@ -29,7 +29,7 @@ enum SubPageInterfaces
 #endif
 
 #define HELPBAR_FOOTER_X      (10)
-#define HELPBAR_FOOTER_Y      (1)
+#define HELPBAR_FOOTER_Y      (TILE_TO_PIXELS(18) + 1)
 
 #define PAGE_MAIN_HEADER_NAME_X         (2)
 #define PAGE_MAIN_HEADER_GENDER_X       (66)
@@ -118,7 +118,6 @@ enum MoveReminderBarSpriteIds
 enum MoveReminderWindows
 {
     MREMINDER_WINDOW_MAIN,
-    MREMINDER_WINDOW_FOOTER,
 
     NUM_MREMINDER_WINDOWS
 };

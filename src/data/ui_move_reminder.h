@@ -111,15 +111,7 @@ static const struct WindowTemplate sMoveReminderWindowTemplates[NUM_MREMINDER_WI
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = DISPLAY_TILE_WIDTH,
-        .height = DISPLAY_TILE_HEIGHT - 2,
-    },
-    [MREMINDER_WINDOW_FOOTER] =
-    {
-        .bg = MREMINDER_BG_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 18,
-        .width = DISPLAY_TILE_WIDTH,
-        .height = 2,
+        .height = DISPLAY_TILE_HEIGHT,
     },
     DUMMY_WIN_TEMPLATE
 };

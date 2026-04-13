@@ -667,7 +667,7 @@ static void PageInterface_PrintHelpBar(void)
         str = gText_CancelOverwrite;
     }
 
-    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_FOOTER, str, FONT_SMALL,
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, FONT_SMALL,
         HELPBAR_FOOTER_X, HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
 }
 
@@ -685,9 +685,7 @@ static void PageInterface_UpdateFrontEnd(void)
     UpdateFrontEndFunc func = PageInterface_GetUpdateFrontEndFunc(PageInterface_GetValue());
     func();
 
-    for (enum MoveReminderWindows window = 0; window < NUM_MREMINDER_WINDOWS; window++)
-        CopyWindowToVram(window, COPYWIN_GFX);
-
+    CopyWindowToVram(MREMINDER_WINDOW_MAIN, COPYWIN_GFX);
     for (enum MoveReminderBackgrounds bg = 0; bg < NUM_MREMINDER_BACKGROUNDS; bg++)
         CopyBgTilemapBufferToVram(bg);
 }
