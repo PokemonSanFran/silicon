@@ -2964,7 +2964,7 @@ static void MovesPageMisc_PrintDetails(enum Move move)
     u32 x, val;
 
     val = GetMovePower(move);
-    if (val)
+    if (val > 1)
         ConvertUIntToDecimalStringN(gStringVar1, val, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
         StringCopy(gStringVar1, gText_ThreeDashes);
