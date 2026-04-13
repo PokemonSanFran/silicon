@@ -72,6 +72,51 @@ enum SubPageInterfaces
 
 #define PAGE_MAIN_MOVE_DETAILS_PP       (0xFF)
 
+#define PAGE_FILTER_HEADER_X                        (3)
+#define PAGE_FILTER_HEADER_MODE_X                   (TILE_TO_PIXELS(22) + 1)
+#define PAGE_FILTER_HEADER_Y                        (0)
+#define PAGE_FILTER_HEADER_TYPE_Y                   (PAGE_FILTER_HEADER_Y)
+#define PAGE_FILTER_HEADER_CLASSIFICATION_Y         (TILE_TO_PIXELS(7) - 2)
+#define PAGE_FILTER_HEADER_METHOD_Y                 (TILE_TO_PIXELS(12))
+
+#define PAGE_FILTER_TYPE_X_0                        (TILE_TO_PIXELS(2) - 1)
+#define PAGE_FILTER_TYPE_X_1                        (TILE_TO_PIXELS(5))
+#define PAGE_FILTER_TYPE_X_2                        (TILE_TO_PIXELS(8) + 2)
+#define PAGE_FILTER_TYPE_X_3                        (TILE_TO_PIXELS(11) + 4)
+#define PAGE_FILTER_TYPE_X_4                        (TILE_TO_PIXELS(15) - 2)
+#define PAGE_FILTER_TYPE_X_5                        (TILE_TO_PIXELS(18) - 1)
+#define PAGE_FILTER_TYPE_X_6                        (TILE_TO_PIXELS(21) + 1)
+#define PAGE_FILTER_TYPE_X_7                        (TILE_TO_PIXELS(24) + 3)
+#define PAGE_FILTER_TYPE_X_8                        (TILE_TO_PIXELS(28) - 3)
+#define PAGE_FILTER_TYPE_Y_0                        (TILE_TO_PIXELS(3) - 2)
+#define PAGE_FILTER_TYPE_Y_1                        (TILE_TO_PIXELS(5) - 3)
+
+#define PAGE_FILTER_CLASSIFICATION_BASE_X           (TILE_TO_PIXELS(4) + 3)
+#define PAGE_FILTER_CLASSIFICATION_BASE_Y           (TILE_TO_PIXELS(9) + 3)
+#define PAGE_FILTER_CLASSIFICATION_BASE_PADDING     (TILE_TO_PIXELS(8) + 4)
+
+#define PAGE_FILTER_METHOD_BASE_X                   (TILE_TO_PIXELS(5) + 5)
+#define PAGE_FILTER_METHOD_BASE_Y                   (TILE_TO_PIXELS(14) + 3)
+#define PAGE_FILTER_METHOD_BASE_PADDING             (TILE_TO_PIXELS(7) + 2)
+#define PAGE_FILTER_METHOD_BASE_PADDING2            (TILE_TO_PIXELS(2) - 2) // PAGE_FILTER_METHOD_BASE_PADDING + PAGE_FILTER_METHOD_BASE_PADDING2 = 69 (nice)
+
+#define PAGE_FILTER_OPTION_RESET_X                  (TILE_TO_PIXELS(19) + 4)
+#define PAGE_FILTER_OPTION_OK_X                     (TILE_TO_PIXELS(26) + 2)
+#define PAGE_FILTER_OPTION_Y                        (TILE_TO_PIXELS(16) + 3)
+
+#define PAGE_FILTER_CURSOR_TYPE_OFFSET_X            (TILE_TO_PIXELS(1) + 3)
+#define PAGE_FILTER_CURSOR_CLASSIFICATION_BASE_X    (TILE_TO_PIXELS(3) + 1)
+#define PAGE_FILTER_CURSOR_CLASSIFICATION_PADDING   (TILE_TO_PIXELS(8) + 4)
+#define PAGE_FILTER_CURSOR_METHOD_EGG_X             (TILE_TO_PIXELS(4) + 3)
+#define PAGE_FILTER_CURSOR_METHOD_MACHINE_X         (TILE_TO_PIXELS(12) - 3)
+#define PAGE_FILTER_CURSOR_METHOD_LEVEL_X           (TILE_TO_PIXELS(20) + 5)
+#define PAGE_FILTER_CURSOR_OPTION_RESET_X           (TILE_TO_PIXELS(18) - 3)
+#define PAGE_FILTER_CURSOR_OPTION_OK_X              (TILE_TO_PIXELS(23) + 4)
+#define PAGE_FILTER_CURSOR_TYPE_OFFSET_Y            (1)
+#define PAGE_FILTER_CURSOR_CLASSIFICATION_Y         (TILE_TO_PIXELS(10) - 3)
+#define PAGE_FILTER_CURSOR_METHOD_Y                 (TILE_TO_PIXELS(15) - 3)
+#define PAGE_FILTER_CURSOR_OPTION_Y                 (TILE_TO_PIXELS(17) - 3)
+
 enum InitSetupSteps
 {
     INIT_SETUP_RESET,
@@ -127,6 +172,7 @@ enum MoveReminderTextColors
     MREMINDER_TXTCLR_DEFAULT,
     MREMINDER_TXTCLR_MALE,
     MREMINDER_TXTCLR_FEMALE,
+    MREMINDER_TXTCLR_FILTER = MREMINDER_TXTCLR_FEMALE,
     MREMINDER_TXTCLR_TEXT_BOX,
     MREMINDER_TXTCLR_HELP_BAR,
 
@@ -139,13 +185,16 @@ enum MoveReminderSpriteTags
     // move type palettes
     MREMINDER_TAG_TYPE_PAL_1,
     MREMINDER_TAG_TYPE_PAL_2,
+    MREMINDER_TAG_TYPE_FILTER,
 };
 
 enum MovePoolMethods
 {
-    MP_METHOD_LEVEL_UP,
     MP_METHOD_EGG,
     MP_METHOD_MACHINE,
+    MP_METHOD_LEVEL_UP,
+
+    NUM_MP_METHODS
 };
 
 enum MovePoolSorts
@@ -170,6 +219,8 @@ enum MovePoolSorts
 #define MREMINDER_INPUT_PM_1    (1)
 #define MREMINDER_INPUT_PM_5    (4)
 
+#define NUM_TYPE_ICONS          (18) // excludes TYPE_NONE, TYPE_MYSTERY, and TYPE_STELLAR. the filter field may include TYPE_MYSTERY but it'll be unused
+
 #define CONFIRMATION_BOX_YES        (0)
 #define CONFIRMATION_BOX_NO         (1)
 #define CONFIRMATION_BOX_INACTIVE   (2)
@@ -180,6 +231,35 @@ enum MovePoolSorts
 #define CONFIRMATION_BOX_NO_Y   (TILE_TO_PIXELS(15) + 5)
 #define CONFIRMATION_BOX_TEXT_Y (TILE_TO_PIXELS(13) + 4)
 
+enum FilterPageGridX
+{
+    FILTER_GRID_X_0,
+    FILTER_GRID_X_1,
+    FILTER_GRID_X_2,    // this is what most other filters maximized at, the rest below are for the type filter
+    FILTER_GRID_X_3,
+    FILTER_GRID_X_4,
+    FILTER_GRID_X_5,
+    FILTER_GRID_X_6,
+    FILTER_GRID_X_7,
+    FILTER_GRID_X_8,
+
+    NUM_FILTER_GRID_X,
+};
+
+enum FilterPageGridY
+{
+    FILTER_GRID_Y_TYPE_1,
+    FILTER_GRID_Y_TYPE_2,
+
+    FILTER_GRID_Y_CATEGORY,
+
+    FILTER_GRID_Y_METHOD,
+
+    FILTER_GRID_Y_OPTIONS,  // Reset / OK
+
+    MAX_FILTER_GRID_Y = FILTER_GRID_Y_OPTIONS
+};
+
 typedef void (*UpdateFrontEndFunc)(void);
 typedef void (*MovePoolSortFunc)(u32 *);
 typedef void (*HandleInputFunc)(u8);
@@ -188,7 +268,7 @@ struct PACKED MovePool
 {
     // u16
     u16 move:13;
-    enum MovePoolMethods method:3;
+    u16 method:3;
 
     // u8
     enum DamageCategory category:3;
@@ -219,8 +299,9 @@ struct MoveReminderData
     enum PageInterfaces page:2;
     enum MovePoolSorts sort:4;
 
-    enum SubPageInterfaces subPage:7;
+    enum SubPageInterfaces subPage:3;
     u8 useBoxMon:1;
+    u8 methodFilter:4;
 
     MainCallback savedCallback;
     struct MovePool movePool[UI_MOVES_COUNT_TOTAL + 1];     // ALL moves a pokemon can learn + denominator
@@ -232,15 +313,30 @@ struct MoveReminderData
     u32 printingDialogue:1;
     u32 moveSlot:4;
     u32 confirmationBoxRes:2;
-    u32 methodFilter:2;
+    u32 pad:2;
 
     u32 moveToTeach:12;
     u32 typeFilter:20;      // 1 << TYPE_XXX
 
-    u16 categoryFilter:2;
-    u16 numMoves:14;
+    u16 categoryFilter:4;
+    u16 numMoves:12;
+
+    struct PACKED {
+        u32 typeFilter:20;
+        u32 categoryFilter:6;
+        u32 methodFilter:6;
+
+        u8 gridX:4;
+        u8 gridY:4;
+    } filterPage;
 
     u8 moveBarSpriteIds[NUM_MREMINDER_BAR_SPRITE_IDS];
+
+    struct {
+        struct SpriteTemplate template;
+        u8 spriteId;
+    } typeIcons[NUM_TYPE_ICONS];
+
     u8 *tilemapBufs[NUM_MREMINDER_BACKGROUND_BUFFERS];
     union {
         void *ptr;

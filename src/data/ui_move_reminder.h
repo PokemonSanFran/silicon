@@ -4,6 +4,8 @@ static const u16 sMoveReminder_Palette[] = INCBIN_U16("graphics/ui_menus/move_re
 // different by 1 (one) pixel truncated
 static const u8 sMoveReminder_CategoriesBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/categories.4bpp");
 static const u8 sMoveReminder_FilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_indicator.4bpp");
+static const u8 sMoveReminder_TypeFilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/type_filter_indicator.4bpp");
+static const u8 sMoveReminder_FilterCursorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_cursor.4bpp");
 static const u8 sMoveReminder_ConfirmationBoxBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/confirmation_box.4bpp");
 
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
@@ -42,7 +44,7 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/move_reminder/filter.bin.smolTM"),
         .helpBarStr = {
             [SUBPAGE_INTERFACE_MAIN_DEFAULT] = COMPOUND_STRING(
-                "{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Filter"),
+                "{A_BUTTON} Select {B_BUTTON} Back {SELECT_BUTTON} Reset"),
         },
         .updateFrontEndFunc = FilterPage_UpdateFrontEnd,
         .handleInputFunc = {
@@ -125,4 +127,38 @@ static const u8 sMoveReminderTextColors[NUM_MREMINDER_TXTCLRS][3] =
     [MREMINDER_TXTCLR_TEXT_BOX]  = { 0, 2, 0 },
 };
 
+static const u8 *const sFilterPageMethodNames[] =
+{
+    [MP_METHOD_EGG]         = COMPOUND_STRING("Egg"),
+    [MP_METHOD_MACHINE]     = COMPOUND_STRING("Machine"),
+    [MP_METHOD_LEVEL_UP]    = COMPOUND_STRING("Level"),
+};
+
+static const struct {
+    u32 x, y;
+    enum Type type;
+} sMoveReminderFilterPageTypesInfo[NUM_TYPE_ICONS] =
+{
+    { PAGE_FILTER_TYPE_X_0, PAGE_FILTER_TYPE_Y_0, TYPE_NORMAL },
+    { PAGE_FILTER_TYPE_X_1, PAGE_FILTER_TYPE_Y_0, TYPE_FIRE },
+    { PAGE_FILTER_TYPE_X_2, PAGE_FILTER_TYPE_Y_0, TYPE_FIGHTING },
+    { PAGE_FILTER_TYPE_X_3, PAGE_FILTER_TYPE_Y_0, TYPE_WATER },
+    { PAGE_FILTER_TYPE_X_4, PAGE_FILTER_TYPE_Y_0, TYPE_FLYING },
+    { PAGE_FILTER_TYPE_X_5, PAGE_FILTER_TYPE_Y_0, TYPE_GRASS },
+    { PAGE_FILTER_TYPE_X_6, PAGE_FILTER_TYPE_Y_0, TYPE_POISON },
+    { PAGE_FILTER_TYPE_X_7, PAGE_FILTER_TYPE_Y_0, TYPE_ELECTRIC },
+    { PAGE_FILTER_TYPE_X_8, PAGE_FILTER_TYPE_Y_0, TYPE_GROUND },
+
+    { PAGE_FILTER_TYPE_X_0, PAGE_FILTER_TYPE_Y_1, TYPE_PSYCHIC },
+    { PAGE_FILTER_TYPE_X_1, PAGE_FILTER_TYPE_Y_1, TYPE_ROCK },
+    { PAGE_FILTER_TYPE_X_2, PAGE_FILTER_TYPE_Y_1, TYPE_ICE },
+    { PAGE_FILTER_TYPE_X_3, PAGE_FILTER_TYPE_Y_1, TYPE_BUG },
+    { PAGE_FILTER_TYPE_X_4, PAGE_FILTER_TYPE_Y_1, TYPE_DRAGON },
+    { PAGE_FILTER_TYPE_X_5, PAGE_FILTER_TYPE_Y_1, TYPE_GHOST },
+    { PAGE_FILTER_TYPE_X_6, PAGE_FILTER_TYPE_Y_1, TYPE_DARK },
+    { PAGE_FILTER_TYPE_X_7, PAGE_FILTER_TYPE_Y_1, TYPE_STEEL },
+    { PAGE_FILTER_TYPE_X_8, PAGE_FILTER_TYPE_Y_1, TYPE_FAIRY },
+};
+
 extern const u16 residoMovesAZ[POKEDEX_FILTER_ALPHABET_COUNT][MAX_MOVES_PER_LETTER];
+extern const u8 *const gDamageCategoryNames[];

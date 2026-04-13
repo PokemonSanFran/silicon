@@ -26,6 +26,8 @@
 #include "qol_field_moves.h"
 #include "line_break.h"
 #include "international_string_util.h"
+#include "battle_main.h"
+#include "random.h"
 #include "ui_pokedex.h"
 #include "ui_mon_summary.h"
 #include "ui_move_reminder.h"
@@ -63,6 +65,11 @@ static void MoveBar_SetSpriteId(u32, u32);
 static void SpriteCB_MoveBar(struct Sprite *);
 static void SpriteCB_MoveCursor(struct Sprite *);
 static void SpriteCB_MoveCursorArrows(struct Sprite *);
+
+static void TypeIcon_Init(void);
+static void TypeIcon_Update(void);
+static void TypeIcon_SetSpriteId(u32, u32);
+static void SpriteCB_TypeIcon(struct Sprite *);
 
 static void ConfirmationBox_SetResult(u32);
 static bool32 ConfirmationBox_Input();
@@ -106,12 +113,9 @@ static u32 MovePool_GetNumberOfMoves(void);
 static void MovePool_SetMoveToList(u32, u32);
 static u32 MovePool_GetMoveFromList(u32);
 static u32 MovePool_SanitizeTypeFlag(enum Type);
-static void MovePool_ToggleTypeFilter(enum Type);
-static bool32 MovePool_IsTypeFilterActive(enum Type);
-static void MovePool_ToggleCategoryFilter(enum DamageCategory);
-static bool32 MovePool_IsCategoryFilterActive(enum DamageCategory);
-static void MovePool_ToggleMethodFilter(enum MovePoolMethods);
-static bool32 MovePool_IsMethodFilterActive(enum MovePoolMethods);
+static bool32 MovePool_DoTypeFilterMatch(enum Type);
+static bool32 MovePool_DoCategoryFilterMatch(enum DamageCategory);
+static bool32 MovePool_DoMethodFilterMatch(enum MovePoolMethods);
 static bool32 MovePool_IsAnyFilterActive(void);
 static bool32 MovePool_DoMoveMatchFilter(u32);
 
@@ -134,15 +138,16 @@ static struct MoveReminderMon *MiscUtil_GetMon(void);
 static struct BoxPokemon *MiscUtil_GetBoxMon(void);
 static void MiscUtil_TeachMove(void);
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
+static bool32 MiscUtil_IsInputAdditive(s32);
 
 static void MainPage_ChooseMoveToTeach(u8);
 static void MainPage_ChooseMoveToForget(u8);
 static void MainPage_ConfirmForgetMove(u8);
 static void MainPage_CancelForgetMove(u8);
 static void MainPage_WaitCloseMessage(u8);
+static void MainPage_ResetListIdx(void);
 static void MainPage_NavigateList(s32, u32);
 static void MainPage_UpdateListIdx(s32);
-static bool32 MainPage_IsInputAdditive(s32);
 static u32 MainPage_GetNumberOfItems(void);
 static void MainPage_SetCurrListIdx(u32);
 static u32 MainPage_GetCurrListIdx(void);
@@ -163,8 +168,33 @@ static void MainPage_PrintMoveCategory(u32);
 static void MainPage_PrintMovePower(u32);
 static void MainPage_PrintMoveAccuracy(u32);
 
+static void FilterPage_Init(void);
+static void FilterPage_Reset(void);
+static void FilterPage_Save(void);
 static void FilterPage_HandleInput(u8);
+static void FilterPage_NavigateGrid(s32, s32);
+static void FilterPage_UpdateGridX(s32);
+static void FilterPage_UpdateGridY(s32);
+static void FilterPage_FixGridX(void);
+static void FilterPage_SetGridX(u32);
+static u32 FilterPage_GetGridX(void);
+static void FilterPage_SetGridY(u32);
+static u32 FilterPage_GetGridY(void);
+static u32 FilterPage_GetMaxGridX(void);
+static u32 FilterPage_GetMaxGridY(void);
+static void FilterPage_ToggleTypeFilter(enum Type);
+static bool32 FilterPage_IsTypeFilterActive(enum Type);
+static void FilterPage_ToggleCategoryFilter(enum DamageCategory);
+static bool32 FilterPage_IsCategoryFilterActive(enum DamageCategory);
+static void FilterPage_ToggleMethodFilter(enum MovePoolMethods);
+static bool32 FilterPage_IsMethodFilterActive(enum MovePoolMethods);
 static void FilterPage_UpdateFrontEnd(void);
+static void FilterPage_PrintType(void);
+static void FilterPage_PrintCategory(void);
+static void FilterPage_PrintMethod(void);
+static void FilterPage_PrintOption(void);
+static void FilterPage_PrintCursor(void);
+static u32 FilterPage_ConvertGridPosToTypeIdx(void);
 
 #include "data/ui_move_reminder.h"
 
@@ -368,6 +398,14 @@ static void InitSetup_Graphics(void)
         { gMonSummary_TypeSpritePalettes[1].data, MREMINDER_TAG_TYPE_PAL_2 },
         { sMoveReminder_Palette, MREMINDER_TAG_UNIVERSAL },
     });
+
+    LoadCompressedSpriteSheet(&(const struct CompressedSpriteSheet){
+        .data = gTypes_Gfx13x11,
+        .size = NUMBER_OF_MON_TYPES * (16 * 16),
+        .tag = MREMINDER_TAG_TYPE_FILTER
+    });
+
+    LoadPalette(gTypes_Palettes, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
 }
 
 static void InitSetup_Windows(void)
@@ -395,6 +433,9 @@ static void InitSetup_Sprites(void)
 {
     MoveBar_Init();
     MoveBar_Update();
+
+    // don't update now since we're not in the Filter page by default
+    TypeIcon_Init();
 }
 
 static void Task_InitSetup_WaitFade(u8 taskId)
@@ -465,15 +506,25 @@ static void MoveBar_Update(void)
     if (MovePool_IsAnyFilterActive())
         BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
 
+    bool32 isMain = PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT;
+
+    if (isMain && !MovePool_GetNumberOfMoves())
+    {
+        return;
+    }
+
     u32 nameY = PAGE_MAIN_MOVE_BAR_NAME_Y, typeY = PAGE_MAIN_MOVE_BAR_TYPE_Y;
 
     for (u32 i = 0; i < MAX_MREMINDER_BAR_SPRITES; i++, nameY += PAGE_MAIN_MOVE_BAR_SPACER_Y, typeY += PAGE_MAIN_MOVE_BAR_SPACER_Y)
     {
+        if (isMain && i >= MovePool_GetNumberOfMoves())
+            break;
+
         u32 spriteId = MoveBar_GetSpriteId(i);
         struct Sprite *sprite = &gSprites[spriteId];
         u32 move;
 
-        if (PageInterface_GetSubValue() != SUBPAGE_INTERFACE_MAIN_DEFAULT)
+        if (!isMain)
             move = (i == MAX_MON_MOVES) ? sMoveReminderDataPtr->moveToTeach : MiscUtil_GetMon()->moves[i];
         else
             move = MovePool_GetMoveFromList(i + MainPage_GetFirstListIdx());
@@ -482,9 +533,6 @@ static void MoveBar_Update(void)
 
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(MoveBar_GetPalTagByType(moveType));
         StartSpriteAnim(sprite, moveType);
-
-        if (move == MOVE_NONE)
-            continue;
 
         MiscUtil_AddTextPrinter(win, GetMoveName(move), FONT_OUTLINED, PAGE_MAIN_MOVE_BAR_NAME_X, nameY, MREMINDER_TXTCLR_DEFAULT);
         BlitBitmapRectToWindow(win, gMonSummary_MoveTypeGfx,
@@ -512,9 +560,9 @@ static void MoveBar_SetSpriteId(u32 idx, u32 spriteId)
 
 static void SpriteCB_MoveBar(struct Sprite *sprite)
 {
-    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
-     || !MovePool_GetNumberOfMoves()
-     || sprite->sMoveBar_Idx >= MovePool_GetNumberOfMoves())
+    if ((PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT
+     && sprite->sMoveBar_Idx >= MovePool_GetNumberOfMoves())
+     || PageInterface_GetValue() == PAGE_INTERFACE_FILTER)
     {
         sprite->invisible = TRUE;
         return;
@@ -525,8 +573,8 @@ static void SpriteCB_MoveBar(struct Sprite *sprite)
 
 static void SpriteCB_MoveCursor(struct Sprite *sprite)
 {
-    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
-     || !MovePool_GetNumberOfMoves())
+    if ((PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT && !MovePool_GetNumberOfMoves())
+     || PageInterface_GetValue() == PAGE_INTERFACE_FILTER)
     {
         sprite->invisible = TRUE;
         return;
@@ -538,8 +586,8 @@ static void SpriteCB_MoveCursor(struct Sprite *sprite)
 
 static void SpriteCB_MoveCursorArrows(struct Sprite *sprite)
 {
-    if (PageInterface_GetValue() != PAGE_INTERFACE_MAIN
-     || !MovePool_GetNumberOfMoves())
+    if ((PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT && MovePool_GetNumberOfMoves() <= 1)
+     || PageInterface_GetValue() == PAGE_INTERFACE_FILTER)
     {
         sprite->invisible = TRUE;
         return;
@@ -547,6 +595,55 @@ static void SpriteCB_MoveCursorArrows(struct Sprite *sprite)
 
     sprite->invisible = FALSE;
     sprite->y2 = PAGE_MAIN_MOVE_BAR_SPACER_Y * MainPage_GetGridListIdx();
+}
+
+static void TypeIcon_Init(void)
+{
+    for (u32 i = 0; i < NUM_TYPE_ICONS; i++)
+    {
+        s32 x = sMoveReminderFilterPageTypesInfo[i].x, y = sMoveReminderFilterPageTypesInfo[i].y;
+        enum Type type = sMoveReminderFilterPageTypesInfo[i].type;
+
+        sMoveReminderDataPtr->typeIcons[i].template = gSpriteTemplate_Type13x11;
+        sMoveReminderDataPtr->typeIcons[i].template.tileTag = MREMINDER_TAG_TYPE_FILTER;
+        sMoveReminderDataPtr->typeIcons[i].template.paletteTag = TAG_NONE;
+
+        u32 spriteId = CreateSprite(&sMoveReminderDataPtr->typeIcons[i].template, x + 8, y + 8, 0);
+        struct Sprite *sprite = &gSprites[spriteId];
+
+        StartSpriteAnim(sprite, type);
+        sprite->oam.paletteNum = gTypesInfo[type].palette;
+        sprite->callback = SpriteCB_TypeIcon;
+
+        TypeIcon_SetSpriteId(i, spriteId);
+    }
+}
+
+static void TypeIcon_Update(void)
+{
+    for (u32 i = 0; i < NUM_TYPE_ICONS; i++)
+    {
+        enum Type type = sMoveReminderFilterPageTypesInfo[i].type;
+        u32 filter = FilterPage_IsTypeFilterActive(type);
+
+        if (!filter)
+            continue;
+
+        u32 x = sMoveReminderFilterPageTypesInfo[i].x - 1;
+        u32 y = sMoveReminderFilterPageTypesInfo[i].y - 1;
+
+        BlitBitmapToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_TypeFilterIndicatorBlit, x, y, 16, 16);
+    }
+}
+
+static void TypeIcon_SetSpriteId(u32 idx, u32 spriteId)
+{
+    sMoveReminderDataPtr->typeIcons[idx].spriteId = spriteId;
+}
+
+static void SpriteCB_TypeIcon(struct Sprite *sprite)
+{
+    sprite->invisible = PageInterface_GetValue() != PAGE_INTERFACE_FILTER;
 }
 
 static void ConfirmationBox_SetResult(u32 option)
@@ -720,6 +817,18 @@ static void MovePool_PopulateList(void)
     MovePool_ProcessLevelUpLearnset(GetSpeciesLevelUpLearnset(species), &numMoves);
     MovePool_ProcessMachineLearnset(GetSpeciesTeachableLearnset(species), &numMoves);
     MovePool_ProcessEggLearnset(GetSpeciesEggMoves(GetEggSpecies(species)), &numMoves);
+
+    /*
+    for (u32 i = 0; i < numMoves; i++)
+    {
+        DebugPrintf("move: %S, method: %d, category: %S, type: %S",
+            GetMoveName(MovePool_GetMoveFromIdx(i)),
+            MovePool_GetMethodFromIdx(i),
+            gDamageCategoryNames[MovePool_GetCategoryFromIdx(i)],
+            gTypesInfo[MovePool_GetTypeFromIdx(i)].name);
+    }
+    */
+
     MovePool_Sort();
 }
 
@@ -892,16 +1001,7 @@ static u32 MovePool_SanitizeTypeFlag(enum Type type)
     return type - 1; // exclude TYPE_NONE
 }
 
-static void MovePool_ToggleTypeFilter(enum Type type)
-{
-    type = MovePool_SanitizeTypeFlag(type);
-    if (type == (-1))
-        return;
-
-    sMoveReminderDataPtr->typeFilter ^= (1 << type);
-}
-
-static bool32 MovePool_IsTypeFilterActive(enum Type type)
+static bool32 MovePool_DoTypeFilterMatch(enum Type type)
 {
     type = MovePool_SanitizeTypeFlag(type);
     if (type == (-1))
@@ -910,24 +1010,14 @@ static bool32 MovePool_IsTypeFilterActive(enum Type type)
     return sMoveReminderDataPtr->typeFilter & (1 << type);
 }
 
-static void MovePool_ToggleCategoryFilter(enum DamageCategory category)
-{
-    sMoveReminderDataPtr->categoryFilter ^= (1 << category);
-}
-
-static bool32 MovePool_IsCategoryFilterActive(enum DamageCategory category)
+static bool32 MovePool_DoCategoryFilterMatch(enum DamageCategory category)
 {
     return sMoveReminderDataPtr->categoryFilter & (1 << category);
 }
 
-static void MovePool_ToggleMethodFilter(enum MovePoolMethods method)
+static bool32 MovePool_DoMethodFilterMatch(enum MovePoolMethods method)
 {
-    sMoveReminderDataPtr->methodFilter ^= (1 << method);
-}
-
-static bool32 MovePool_IsMethodFilterActive(enum MovePoolMethods method)
-{
-    return sMoveReminderDataPtr->methodFilter & (1 << method);
+    return sMoveReminderDataPtr->methodFilter & method;
 }
 
 static bool32 MovePool_IsAnyFilterActive(void)
@@ -959,19 +1049,19 @@ static bool32 MovePool_DoMoveMatchFilter(u32 move)
         return TRUE;
 
     if (filter & MP_FILTER_FLAG_TYPE
-     && MovePool_IsTypeFilterActive(MovePool_GetTypeFromIdx(idx)))
+     && MovePool_DoTypeFilterMatch(MovePool_GetTypeFromIdx(idx)))
     {
         score |= MP_FILTER_FLAG_TYPE;
     }
 
     if (filter & MP_FILTER_FLAG_CATEGORY
-     && MovePool_IsCategoryFilterActive(MovePool_GetCategoryFromIdx(idx)))
+     && MovePool_DoCategoryFilterMatch(MovePool_GetCategoryFromIdx(idx)))
     {
         score |= MP_FILTER_FLAG_CATEGORY;
     }
 
     if (filter & MP_FILTER_FLAG_METHOD
-     && MovePool_IsMethodFilterActive(MovePool_GetMethodFromIdx(idx)))
+     && MovePool_DoMethodFilterMatch(MovePool_GetMethodFromIdx(idx)))
     {
         score |= MP_FILTER_FLAG_METHOD;
     }
@@ -1207,6 +1297,11 @@ static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *s
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
 }
 
+static bool32 MiscUtil_IsInputAdditive(s32 delta)
+{
+    return delta >= 1;
+}
+
 static void MainPage_ChooseMoveToTeach(u8 taskId)
 {
     if (JOY_REPEAT(DPAD_UP))
@@ -1249,7 +1344,9 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
             return;
         }
 
-        u32 move = MovePool_GetMoveFromIdx(MainPage_GetCurrListIdx());
+        u32 move = MovePool_GetMoveFromList(MainPage_GetCurrListIdx());
+        sMoveReminderDataPtr->moveToTeach = move;
+
         struct BoxPokemon *boxMon = MiscUtil_GetBoxMon();
 
         StringCopy_Nickname(gStringVar1, MiscUtil_GetMon()->nickname);
@@ -1267,7 +1364,6 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
         case MON_HAS_MAX_MOVES:
             PlaySE(SE_SELECT);
             sMoveReminderDataPtr->moveSlot = 0;
-            sMoveReminderDataPtr->moveToTeach = move;
             PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
             break;
         default:
@@ -1303,10 +1399,15 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
 
         MovePool_Sort();
         PlaySE(SE_SUCCESS);
-        MainPage_SetCurrListIdx(0);
-        MainPage_SetFirstListIdx(0);
-        MainPage_SetGridListIdx(0);
+        MainPage_ResetListIdx();
         PageInterface_UpdateFrontEnd();
+        return;
+    }
+
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        FilterPage_Init();
         return;
     }
 }
@@ -1423,7 +1524,7 @@ static void MainPage_CancelForgetMove(u8 taskId)
         PlaySE(SE_SELECT);
         if (res == CONFIRMATION_BOX_YES)
         {
-            MainPage_SetCurrListIdx(0);
+            MainPage_SetCurrListIdx(0); // resets moveSlot
             PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
         }
         else
@@ -1466,6 +1567,13 @@ static void MainPage_WaitCloseMessage(u8 taskId)
     }
 }
 
+static void MainPage_ResetListIdx(void)
+{
+    MainPage_SetCurrListIdx(0);
+    MainPage_SetFirstListIdx(0);
+    MainPage_SetGridListIdx(0);
+}
+
 static void MainPage_NavigateList(s32 delta, u32 count)
 {
     if (!MovePool_GetNumberOfMoves())
@@ -1488,7 +1596,7 @@ static void MainPage_NavigateList(s32 delta, u32 count)
 
 static void MainPage_UpdateListIdx(s32 delta)
 {
-    bool32 isAdditive = MainPage_IsInputAdditive(delta);
+    bool32 isAdditive = MiscUtil_IsInputAdditive(delta);
     u32 numItems = MainPage_GetNumberOfItems();
     u32 halfScreen = MAX_MREMINDER_BAR_SPRITES / 2;
     bool32 scroll = (numItems + 1) > MAX_MREMINDER_BAR_SPRITES;
@@ -1532,11 +1640,6 @@ static void MainPage_UpdateListIdx(s32 delta)
     MainPage_SetCurrListIdx(currListIdx);
     MainPage_SetFirstListIdx(firstListIdx);
     MainPage_SetGridListIdx(gridListIdx);
-}
-
-static bool32 MainPage_IsInputAdditive(s32 delta)
-{
-    return delta >= 1;
 }
 
 static u32 MainPage_GetNumberOfItems(void)
@@ -1812,12 +1915,373 @@ static void MainPage_PrintMoveAccuracy(u32 move)
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gStringVar2, FONT_SMALL, PAGE_MAIN_MOVE_DETAILS_2_X, PAGE_MAIN_MOVE_DETAILS_2_Y, MREMINDER_TXTCLR_TEXT_BOX);
 }
 
+static void FilterPage_Init(void)
+{
+    sMoveReminderDataPtr->filterPage.typeFilter = sMoveReminderDataPtr->typeFilter;
+    sMoveReminderDataPtr->filterPage.categoryFilter = sMoveReminderDataPtr->categoryFilter;
+    sMoveReminderDataPtr->filterPage.methodFilter = sMoveReminderDataPtr->methodFilter;
+
+    FilterPage_SetGridX(0);
+    FilterPage_SetGridY(0);
+
+    PageInterface_SetValue(PAGE_INTERFACE_FILTER);
+    PageInterface_UpdateFrontEnd();
+}
+
+static void FilterPage_Reset(void)
+{
+    sMoveReminderDataPtr->filterPage.typeFilter = 0;
+    sMoveReminderDataPtr->filterPage.categoryFilter = 0;
+    sMoveReminderDataPtr->filterPage.methodFilter = 0;
+}
+
+static void FilterPage_Save(void)
+{
+   sMoveReminderDataPtr->typeFilter = sMoveReminderDataPtr->filterPage.typeFilter;
+   sMoveReminderDataPtr->categoryFilter = sMoveReminderDataPtr->filterPage.categoryFilter;
+   sMoveReminderDataPtr->methodFilter = sMoveReminderDataPtr->filterPage.methodFilter;
+
+   MovePool_Sort();
+   MainPage_ResetListIdx();
+   PageInterface_SetValue(PAGE_INTERFACE_MAIN);
+}
+
 static void FilterPage_HandleInput(u8 taskId)
 {
+    if (JOY_REPEAT(DPAD_DOWN))
+    {
+        FilterPage_NavigateGrid(0, MREMINDER_INPUT_INC);
+        return;
+    }
 
+    if (JOY_REPEAT(DPAD_UP))
+    {
+        FilterPage_NavigateGrid(0, MREMINDER_INPUT_DEC);
+        return;
+    }
+
+    if (JOY_REPEAT(DPAD_RIGHT))
+    {
+        FilterPage_NavigateGrid(MREMINDER_INPUT_INC, 0);
+        return;
+    }
+
+    if (JOY_REPEAT(DPAD_LEFT))
+    {
+        FilterPage_NavigateGrid(MREMINDER_INPUT_DEC, 0);
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        FilterPage_Save();
+        PlaySE(SE_SUCCESS);
+        PageInterface_UpdateFrontEnd();
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        switch (FilterPage_GetGridY())
+        {
+        case FILTER_GRID_Y_TYPE_1:
+        case FILTER_GRID_Y_TYPE_2:
+            u32 idx = FilterPage_ConvertGridPosToTypeIdx();
+            enum Type type = sMoveReminderFilterPageTypesInfo[idx].type;
+            FilterPage_ToggleTypeFilter(type);
+            break;
+        case FILTER_GRID_Y_CATEGORY:
+            FilterPage_ToggleCategoryFilter(FilterPage_GetGridX());
+            break;
+        case FILTER_GRID_Y_METHOD:
+            FilterPage_ToggleMethodFilter(FilterPage_GetGridX());
+            break;
+        case FILTER_GRID_Y_OPTIONS:
+            if (FilterPage_GetGridX())
+                FilterPage_Save();
+            else
+                FilterPage_Reset();
+            PlaySE(SE_SUCCESS);
+            PageInterface_UpdateFrontEnd();
+            return;
+        default:
+            return;
+        }
+
+        PlaySE(SE_SELECT);
+        PageInterface_UpdateFrontEnd();
+        return;
+    }
+
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        PlaySE(SE_SUCCESS);
+        FilterPage_Reset();
+        PageInterface_UpdateFrontEnd();
+        return;
+    }
+}
+
+static void FilterPage_NavigateGrid(s32 deltaX, s32 deltaY)
+{
+    if (deltaX != 0)
+        FilterPage_UpdateGridX(deltaX);
+
+    if (deltaY != 0)
+        FilterPage_UpdateGridY(deltaY);
+
+    PlaySE(SE_RG_BAG_CURSOR);
+    PageInterface_UpdateFrontEnd();
+}
+
+static void FilterPage_UpdateGridX(s32 delta)
+{
+    bool32 isAdditive = MiscUtil_IsInputAdditive(delta);
+    u32 maxGrid = FilterPage_GetMaxGridX();
+    u32 gridIdx = FilterPage_GetGridX();
+
+    if (gridIdx >= maxGrid && isAdditive)
+        gridIdx = 0;
+    else if (!gridIdx && !isAdditive)
+        gridIdx = maxGrid;
+    else
+        gridIdx += delta;
+
+    FilterPage_SetGridX(gridIdx);
+}
+
+static void FilterPage_UpdateGridY(s32 delta)
+{
+    bool32 isAdditive = MiscUtil_IsInputAdditive(delta);
+    u32 maxGrid = FilterPage_GetMaxGridY();
+    u32 gridIdx = FilterPage_GetGridY();
+
+    if (gridIdx >= maxGrid && isAdditive)
+        gridIdx = 0;
+    else if (!gridIdx && !isAdditive)
+        gridIdx = maxGrid;
+    else
+        gridIdx += delta;
+
+    FilterPage_SetGridY(gridIdx);
+    FilterPage_FixGridX();
+}
+
+static void FilterPage_FixGridX(void)
+{
+    u32 maxGrid = FilterPage_GetMaxGridX();
+    u32 gridIdx = FilterPage_GetGridX();
+
+    while (gridIdx > maxGrid)
+        gridIdx--;
+
+    FilterPage_SetGridX(gridIdx);
+}
+
+static void FilterPage_SetGridX(u32 x)
+{
+    sMoveReminderDataPtr->filterPage.gridX = x;
+}
+
+static u32 FilterPage_GetGridX(void)
+{
+    return sMoveReminderDataPtr->filterPage.gridX;
+}
+
+static void FilterPage_SetGridY(u32 y)
+{
+    sMoveReminderDataPtr->filterPage.gridY = y;
+}
+
+static u32 FilterPage_GetGridY(void)
+{
+    return sMoveReminderDataPtr->filterPage.gridY;
+}
+
+static u32 FilterPage_GetMaxGridX(void)
+{
+    switch (FilterPage_GetGridY())
+    {
+    case FILTER_GRID_Y_TYPE_1:
+    case FILTER_GRID_Y_TYPE_2:
+        return FILTER_GRID_X_8;
+    case FILTER_GRID_Y_OPTIONS:
+        return FILTER_GRID_X_1;
+    default:
+        return FILTER_GRID_X_2;
+    }
+}
+
+static u32 FilterPage_GetMaxGridY(void)
+{
+    return MAX_FILTER_GRID_Y;
+}
+
+static void FilterPage_ToggleTypeFilter(enum Type type)
+{
+    type = MovePool_SanitizeTypeFlag(type);
+    if (type == (-1))
+        return;
+
+    sMoveReminderDataPtr->filterPage.typeFilter ^= (1 << type);
+}
+
+static bool32 FilterPage_IsTypeFilterActive(enum Type type)
+{
+    type = MovePool_SanitizeTypeFlag(type);
+    if (type == (-1))
+        return FALSE;
+
+    return sMoveReminderDataPtr->filterPage.typeFilter & (1 << type);
+}
+
+static void FilterPage_ToggleCategoryFilter(enum DamageCategory category)
+{
+    sMoveReminderDataPtr->filterPage.categoryFilter ^= (1 << category);
+}
+
+static bool32 FilterPage_IsCategoryFilterActive(enum DamageCategory category)
+{
+    return sMoveReminderDataPtr->filterPage.categoryFilter & (1 << category);
+}
+
+static void FilterPage_ToggleMethodFilter(enum MovePoolMethods method)
+{
+    sMoveReminderDataPtr->filterPage.methodFilter ^= (1 << method);
+}
+
+static bool32 FilterPage_IsMethodFilterActive(enum MovePoolMethods method)
+{
+    return sMoveReminderDataPtr->filterPage.methodFilter & (1 << method);
 }
 
 static void FilterPage_UpdateFrontEnd(void)
 {
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("Filter Mode"), FONT_OUTLINED,
+        PAGE_FILTER_HEADER_MODE_X, PAGE_FILTER_HEADER_Y,
+        MREMINDER_TXTCLR_DEFAULT);
 
+    FilterPage_PrintType();
+    FilterPage_PrintCategory();
+    FilterPage_PrintMethod();
+    FilterPage_PrintOption();
+    FilterPage_PrintCursor();
+}
+
+static void FilterPage_PrintType(void)
+{
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("Type"), FONT_OUTLINED,
+        PAGE_FILTER_HEADER_X, PAGE_FILTER_HEADER_TYPE_Y,
+        MREMINDER_TXTCLR_DEFAULT);
+
+    TypeIcon_Update();
+}
+
+static void FilterPage_PrintCategory(void)
+{
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("Classification"), FONT_OUTLINED,
+        PAGE_FILTER_HEADER_X, PAGE_FILTER_HEADER_CLASSIFICATION_Y,
+        MREMINDER_TXTCLR_DEFAULT);
+
+    u32 x = PAGE_FILTER_CLASSIFICATION_BASE_X, y = PAGE_FILTER_CLASSIFICATION_BASE_Y;
+    for (enum DamageCategory category = 0; category < DAMAGE_CATEGORY_COUNT; category++)
+    {
+        bool32 filter = FilterPage_IsCategoryFilterActive(category);
+        enum MoveReminderTextColors txtClr = filter ? MREMINDER_TXTCLR_FILTER : MREMINDER_TXTCLR_DEFAULT;
+
+        MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, gDamageCategoryNames[category], FONT_OUTLINED, x, y, txtClr);
+
+        x += PAGE_FILTER_CLASSIFICATION_BASE_PADDING;
+        if (category) x += category;
+    }
+}
+
+static void FilterPage_PrintMethod(void)
+{
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("Method"), FONT_OUTLINED,
+        PAGE_FILTER_HEADER_X, PAGE_FILTER_HEADER_METHOD_Y,
+        MREMINDER_TXTCLR_DEFAULT);
+
+    u32 x = PAGE_FILTER_METHOD_BASE_X, y = PAGE_FILTER_METHOD_BASE_Y;
+    for (enum MovePoolMethods method = 0; method < NUM_MP_METHODS; method++)
+    {
+        bool32 filter = FilterPage_IsMethodFilterActive(method);
+        enum MoveReminderTextColors txtClr = filter ? MREMINDER_TXTCLR_FILTER : MREMINDER_TXTCLR_DEFAULT;
+
+        MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, sFilterPageMethodNames[method], FONT_OUTLINED, x, y, txtClr);
+
+        x += PAGE_FILTER_METHOD_BASE_PADDING;
+        if (method) x += PAGE_FILTER_METHOD_BASE_PADDING2;
+    }
+}
+
+static void FilterPage_PrintOption(void)
+{
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("Reset"), FONT_OUTLINED,
+        PAGE_FILTER_OPTION_RESET_X, PAGE_FILTER_OPTION_Y,
+        MREMINDER_TXTCLR_DEFAULT);
+
+    MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN,
+        COMPOUND_STRING("OK"), FONT_OUTLINED,
+        PAGE_FILTER_OPTION_OK_X, PAGE_FILTER_OPTION_Y,
+        MREMINDER_TXTCLR_DEFAULT);
+}
+
+static void FilterPage_PrintCursor(void)
+{
+    u32 x, y;
+
+    switch (FilterPage_GetGridY())
+    {
+    case FILTER_GRID_Y_TYPE_1:
+    case FILTER_GRID_Y_TYPE_2:
+        u32 idx = FilterPage_ConvertGridPosToTypeIdx();
+        x = sMoveReminderFilterPageTypesInfo[idx].x - PAGE_FILTER_CURSOR_TYPE_OFFSET_X;
+        y = sMoveReminderFilterPageTypesInfo[idx].y - PAGE_FILTER_CURSOR_TYPE_OFFSET_Y;
+        break;
+    case FILTER_GRID_Y_CATEGORY:
+        u32 gridX = FilterPage_GetGridX();
+        x = PAGE_FILTER_CURSOR_CLASSIFICATION_BASE_X + (PAGE_FILTER_CURSOR_CLASSIFICATION_PADDING * gridX);
+        if (gridX)
+            x += gridX - 1;
+        y = PAGE_FILTER_CURSOR_CLASSIFICATION_Y;
+        break;
+    case FILTER_GRID_Y_METHOD:
+        switch (FilterPage_GetGridX())
+        {
+        default:
+        case MP_METHOD_EGG:
+            x = PAGE_FILTER_CURSOR_METHOD_EGG_X;
+            break;
+        case MP_METHOD_MACHINE:
+            x = PAGE_FILTER_CURSOR_METHOD_MACHINE_X;
+            break;
+        case MP_METHOD_LEVEL_UP:
+            x = PAGE_FILTER_CURSOR_METHOD_LEVEL_X;
+            break;
+        }
+        y = PAGE_FILTER_CURSOR_METHOD_Y;
+        break;
+    case FILTER_GRID_Y_OPTIONS:
+        if (FilterPage_GetGridX())
+            x = PAGE_FILTER_CURSOR_OPTION_OK_X;
+        else
+            x = PAGE_FILTER_CURSOR_OPTION_RESET_X;
+        y = PAGE_FILTER_CURSOR_OPTION_Y;
+        break;
+    default:
+        return;
+    }
+
+    BlitBitmapToWindow(MREMINDER_WINDOW_MAIN, sMoveReminder_FilterCursorBlit, x, y, 16, 16);
+}
+
+static u32 FilterPage_ConvertGridPosToTypeIdx(void)
+{
+    return FilterPage_GetGridX() + (FilterPage_GetGridY() == FILTER_GRID_Y_TYPE_2 ? NUM_FILTER_GRID_X : 0);
 }
