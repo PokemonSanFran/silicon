@@ -2638,9 +2638,20 @@ static u32 GetFirstBattlerOnSide(enum BattleSide side)
     return GetBattlerAtPosition(side == B_SIDE_PLAYER ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
 }
 
-static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer, u16 time)
+static bool32 ShouldApplyFieldStatus(u32 flag, u16 *timer, u16 time)
 {
     if (!(gFieldStatuses & flag))
+        return TRUE;
+    if (time == 0 && *timer > 0)
+        return TRUE;
+    if (time > *timer)
+        return TRUE;
+    return FALSE;
+}
+
+static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer, u16 time)
+{
+    if (ShouldApplyFieldStatus(flag, timer, time))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = message;
         if (STATUS_FIELD_TERRAIN_ANY & flag)
@@ -2655,9 +2666,20 @@ static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16
     return FALSE;
 }
 
-static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 message, u32 anim, u16 *timer, u16 time)
+static bool32 ShouldApplySideStatus(u32 flag, enum BattleSide side, u16 *timer, u16 time)
 {
     if (!(gSideStatuses[side] & flag))
+        return TRUE;
+    if (time == 0 && *timer > 0)
+        return TRUE;
+    if (time > *timer)
+        return TRUE;
+    return FALSE;
+}
+
+static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 message, u32 anim, u16 *timer, u16 time)
+{
+    if (ShouldApplySideStatus(flag, side, timer, time))
     {
         gBattlerAttacker = gBattlerTarget = (enum BattlerId)side;
         gBattleCommunication[MULTISTRING_CHOOSER] = message;
