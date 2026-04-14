@@ -232,6 +232,7 @@ static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
 static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16));
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction);
+static bool8 ShouldProgressDespiteCollision(u32 movementType, u32 index); // siliconQuests
 
 const u8 gReflectionEffectPaletteMap[16] = {
         [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,
@@ -12289,6 +12290,22 @@ bool8 MovementAction_SpinRight_Step1(struct ObjectEvent *objectEvent, struct Spr
 }
 
 // Start siliconQuests
+static const struct DirectionSequence sMovementSequences[] =
+{
+    [MOVEMENT_TYPE_BUS_TABLES] = {gBusTableDirections, ARRAY_COUNT(gBusTableDirections)},
+};
+
+static bool8 ShouldProgressDespiteCollision(u32 movementType, u32 index)
+{
+    if (movementType != MOVEMENT_TYPE_BUS_TABLES)
+        return FALSE;
+
+    if (index != 0 && index != 16)
+        return FALSE;
+
+    return TRUE;
+}
+
 movement_type_def(MovementType_BusTables, gMovementTypeFuncs_BusTables)
 
 bool8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -12302,10 +12319,11 @@ bool8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct 
     return TRUE;
 }
 
-bool8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementType_CustomMovement_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u32 index = objectEvent->directionSequenceIndex;
-    enum Direction dir = gBusTableDirections[index];
+    u32 movementType = objectEvent->movementType;
+    enum Direction dir = sMovementSequences[movementType].directions[index];
 
     SetObjectEventDirection(objectEvent, dir);
     u32 collision = GetCollisionInDirection(objectEvent,dir);
@@ -12313,8 +12331,7 @@ bool8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprit
     ObjectEventSetSingleMovement(objectEvent, sprite, movementActionId);
     objectEvent->singleMovementActive = TRUE;
 
-    // For these specific indexes, the NPC should walk in place but continue forward anyways.
-    if (index == 0 || index == 16)
+    if (ShouldProgressDespiteCollision(movementType,index))
         collision = FALSE;
 
     sprite->sTypeFuncId = collision ? 2 : 3;
@@ -12326,7 +12343,11 @@ bool8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct 
     if (!ObjectEventExecSingleMovementAction(objectEvent, sprite))
         return FALSE;
 
-    u32 count = ARRAY_COUNT(gBusTableDirections);
+    u32 movementType = objectEvent->movementType;
+    if (movementType >= ARRAY_COUNT(sMovementSequences) || sMovementSequences[movementType].directions == NULL)
+        return FALSE;
+
+    u32 count = sMovementSequences[movementType].count;
     objectEvent->singleMovementActive = FALSE;
 
     objectEvent->directionSequenceIndex++;
@@ -12336,5 +12357,4 @@ bool8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct 
     sprite->sTypeFuncId = 1;
     return FALSE;
 }
-
 // End siliconQuests

@@ -93,6 +93,14 @@ enum FollowerTransformTypes
 #define sCamera_MoveX          data[2]
 #define sCamera_MoveY          data[3]
 
+// Start siliconQuests
+struct DirectionSequence
+{
+    const enum Direction *directions;
+    u8 count;
+};
+// End siliconQuests
+
 struct StepAnimTable
 {
     const union AnimCmd *const *anims;
@@ -470,7 +478,7 @@ u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct ObjectEvent *objectEven
 u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 // Start siliconQuests
 u8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-u8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_CustomMovement_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 // End siliconQuests
 u8 MovementType_CopyPlayer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);

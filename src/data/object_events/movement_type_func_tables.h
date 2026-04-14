@@ -471,7 +471,7 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct ObjectEvent *, struct Sprite *
 u8 (*const gMovementTypeFuncs_BusTables[])(struct ObjectEvent *, struct Sprite *) =
 {
     MovementType_CustomMovement_Step0,
-    MovementType_BusTables_Step1,
+    MovementType_CustomMovement_Step1,
     MovementType_WanderAround_Step6,
     MovementType_CustomMovement_Step3,
 };
