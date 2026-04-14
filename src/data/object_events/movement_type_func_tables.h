@@ -470,10 +470,10 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct ObjectEvent *, struct Sprite *
 // Start siliconQuests
 u8 (*const gMovementTypeFuncs_BusTables[])(struct ObjectEvent *, struct Sprite *) =
 {
-    MovementType_BusTables_Step0,
+    MovementType_CustomMovement_Step0,
     MovementType_BusTables_Step1,
     MovementType_WanderAround_Step6,
-    MovementType_BusTables_Step3,
+    MovementType_CustomMovement_Step3,
 };
 
 const enum Direction gBusTableDirections[] =

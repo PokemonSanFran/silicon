@@ -12291,7 +12291,7 @@ bool8 MovementAction_SpinRight_Step1(struct ObjectEvent *objectEvent, struct Spr
 // Start siliconQuests
 movement_type_def(MovementType_BusTables, gMovementTypeFuncs_BusTables)
 
-bool8 MovementType_BusTables_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
 
@@ -12321,7 +12321,7 @@ bool8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprit
     return TRUE;
 }
 
-bool8 MovementType_BusTables_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     if (!ObjectEventExecSingleMovementAction(objectEvent, sprite))
         return FALSE;

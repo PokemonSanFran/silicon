@@ -469,9 +469,9 @@ u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct ObjectEvent *objectEven
 u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 // Start siliconQuests
-u8 MovementType_BusTables_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-u8 MovementType_BusTables_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 // End siliconQuests
 u8 MovementType_CopyPlayer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_CopyPlayer_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
