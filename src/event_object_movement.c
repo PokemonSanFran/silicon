@@ -355,6 +355,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_FOLLOW_PLAYER] = MovementType_FollowPlayer,
+    [MOVEMENT_TYPE_BUS_TABLES] = MovementType_BusTables, // siliconQuests
 };
 
 static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
@@ -399,6 +400,7 @@ static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_BUS_TABLES] = TRUE, // siliconQuests
 };
 
 const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
@@ -484,6 +486,7 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
     [MOVEMENT_TYPE_FOLLOW_PLAYER] = DIR_SOUTH,
+    [MOVEMENT_TYPE_BUS_TABLES] = DIR_SOUTH, //siliconQuests
 };
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -12284,3 +12287,54 @@ bool8 MovementAction_SpinRight_Step1(struct ObjectEvent *objectEvent, struct Spr
     }
     return FALSE;
 }
+
+// Start siliconQuests
+movement_type_def(MovementType_BusTables, gMovementTypeFuncs_BusTables)
+
+bool8 MovementType_BusTables_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    ClearObjectEventMovement(objectEvent, sprite);
+
+    if (objectEvent->directionSequenceIndex >= ARRAY_COUNT(gBusTableDirections))
+        objectEvent->directionSequenceIndex = 0;
+
+    sprite->sTypeFuncId = 1;
+    return TRUE;
+}
+
+bool8 MovementType_BusTables_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u32 index = objectEvent->directionSequenceIndex;
+    enum Direction dir = gBusTableDirections[index];
+
+    SetObjectEventDirection(objectEvent, dir);
+    u32 collision = GetCollisionInDirection(objectEvent,dir);
+    u32 movementActionId = collision ? GetWalkInPlaceNormalMovementAction(dir) : GetWalkNormalMovementAction(dir);
+    ObjectEventSetSingleMovement(objectEvent, sprite, movementActionId);
+    objectEvent->singleMovementActive = TRUE;
+
+    // For these specific indexes, the NPC should walk in place but continue forward anyways.
+    if (index == 0 || index == 16)
+        collision = FALSE;
+
+    sprite->sTypeFuncId = collision ? 2 : 3;
+    return TRUE;
+}
+
+bool8 MovementType_BusTables_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (!ObjectEventExecSingleMovementAction(objectEvent, sprite))
+        return FALSE;
+
+    u32 count = ARRAY_COUNT(gBusTableDirections);
+    objectEvent->singleMovementActive = FALSE;
+
+    objectEvent->directionSequenceIndex++;
+    if (objectEvent->directionSequenceIndex >= count)
+        objectEvent->directionSequenceIndex = 0;
+
+    sprite->sTypeFuncId = 1;
+    return FALSE;
+}
+
+// End siliconQuests

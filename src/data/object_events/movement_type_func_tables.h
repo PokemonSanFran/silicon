@@ -466,3 +466,49 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct ObjectEvent *, struct Sprite *
     MovementType_Invisible_Step1,
     MovementType_Invisible_Step2,
 };
+
+// Start siliconQuests
+u8 (*const gMovementTypeFuncs_BusTables[])(struct ObjectEvent *, struct Sprite *) =
+{
+    MovementType_BusTables_Step0,
+    MovementType_BusTables_Step1,
+    MovementType_WanderAround_Step6,
+    MovementType_BusTables_Step3,
+};
+
+const enum Direction gBusTableDirections[] =
+{
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_EAST,
+    DIR_EAST,
+    DIR_EAST,
+    DIR_EAST,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_WEST,
+    DIR_WEST,
+    DIR_WEST,
+    DIR_WEST,
+};
+// End siliconQuests

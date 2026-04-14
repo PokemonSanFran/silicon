@@ -101,7 +101,7 @@ script Kitchenvolunteering_Dialogue_ThankPlayer
     msgbox(format("Oh thank God! I'll take those. Thank you so much!"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     msgbox(format("Oh! And the key. I'll take that."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     closemessage
-    cueobjectplayer(PLAYER)
+    cueobjecttalking(PLAYER)
     msgbox(format("You did good today. Come back tomorrow if you're willing to help out again."),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
     call(Kitchenvolunteering_Script_ReturnToWork)
 }

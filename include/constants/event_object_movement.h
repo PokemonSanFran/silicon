@@ -85,7 +85,14 @@
 #define MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT       0x50
 #define MOVEMENT_TYPE_FOLLOW_PLAYER                    0x51
 #define MOVEMENT_TYPE_WANDER_AROUND_SLOWER             0x52
-#define NUM_MOVEMENT_TYPES                             0x53
+// Start siliconQuests
+//#define NUM_MOVEMENT_TYPES                             0x53
+enum
+{
+    MOVEMENT_TYPE_BUS_TABLES = (MOVEMENT_TYPE_WANDER_AROUND_SLOWER + 1),
+    NUM_MOVEMENT_TYPES,
+};
+// End siliconQuests
 
 #define MOVEMENT_ACTION_FACE_DOWN                       0x0
 #define MOVEMENT_ACTION_FACE_UP                         0x1
