@@ -34,7 +34,7 @@ void TestRunner_Battle_CheckBattleRecordActionType(enum BattlerId battlerId, u32
 u32 TestRunner_Battle_GetForcedAbility(enum BattleTrainer trainer, u32 partyIndex);
 u32 TestRunner_Battle_GetChosenGimmick(enum BattleTrainer trainer, u32 partyIndex);
 u32 TestRunner_Battle_GetForcedEnvironment(void);
-void TestRunner_Battle_GetForcedStaringStatuses(u32 index);
+void TestRunner_Battle_GetForcedStaringStatuses(u32 index); // bdHazards
 
 #else
 
@@ -61,8 +61,7 @@ void TestRunner_Battle_GetForcedStaringStatuses(u32 index);
 
 #define TestRunner_Battle_GetForcedEnvironment(...) (u8)0
 
-#define TestRunner_Battle_GetForcedStaringStatuses(...) (void)0
-
+#define TestRunner_Battle_GetForcedStaringStatuses(...) (void)0 // bdHazards
 #endif
 
 #endif

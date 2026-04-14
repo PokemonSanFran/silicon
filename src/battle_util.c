@@ -1853,6 +1853,7 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
     return TRUE;
 }
 
+// Start bdHazards
 static bool32 StartingStatusIsNotNull(struct StartingStatuses statuses)
 {
     bool32 result = FALSE;
@@ -1882,6 +1883,7 @@ static u32 GetDeadMonsIndex(u32 battler)
         return PARTY_SIZE - 1;
     return deadMons;
 }
+// End bdHazards
 
 bool32 HandleFaintedMonActions(void)
 {
@@ -1945,6 +1947,7 @@ bool32 HandleFaintedMonActions(void)
             gBattleStruct->eventState.faintedActionBattler = 0;
             gBattleStruct->eventState.faintedAction++;
             // fall through
+// Start bdHazards
         case FAINTED_ACTIONS_HANDLE_GET_STARTING_STATUS:
             ResetStartingStatuses();
             do
@@ -1987,6 +1990,7 @@ bool32 HandleFaintedMonActions(void)
                 return TRUE;
             gBattleStruct->eventState.faintedActionBattler = 0;
             gBattleStruct->eventState.faintedAction++;
+// End bdHazards
         case FAINTED_ACTIONS_HANDLE_FAINTED_MON:
             do
             {
@@ -2638,6 +2642,7 @@ static u32 GetFirstBattlerOnSide(enum BattleSide side)
     return GetBattlerAtPosition(side == B_SIDE_PLAYER ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
 }
 
+// Start bdHazards
 static bool32 ShouldApplyFieldStatus(u32 flag, u16 *timer, u16 time)
 {
     if (!(gFieldStatuses & flag))
@@ -2676,6 +2681,7 @@ static bool32 ShouldApplySideStatus(u32 flag, enum BattleSide side, u16 *timer, 
         return TRUE;
     return FALSE;
 }
+// End bdHazards
 
 static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 message, u32 anim, u16 *timer, u16 time)
 {
@@ -2701,6 +2707,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     switch (hazard)
     {
     case HAZARDS_SPIKES:
+        //if (layers != 0) // bdHazards
         if (layers != 0 && layers >= gSideTimers[targetSide].spikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_SPIKES))
@@ -2710,6 +2717,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
         }
         break;
     case HAZARDS_TOXIC_SPIKES:
+        //if (layers != 0) // bdHazards
         if (layers != 0 && layers >= gSideTimers[targetSide].toxicSpikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_TOXIC_SPIKES))
@@ -2758,6 +2766,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     return effect;
 }
 
+// Start bdHazards
 bool32 TryStartingStatuses(void)
 {
     bool32 effect = FALSE;
@@ -3051,6 +3060,7 @@ bool32 TryStartingStatuses(void)
         }
         return effect;
 }
+// End bdHazards
 
 bool32 TryFieldEffects(enum FieldEffectCases caseId)
 {
