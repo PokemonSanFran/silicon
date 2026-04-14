@@ -785,6 +785,10 @@ Class: Leader
 Type: Boss
 Overworld Sprite: BD
 Map Section: Tirabudin Place
+Starting Status: Toxic Spikes Player L1
+Starting Status 2: Sticky Web Player
+Starting Status 3: Stealth Rock Player
+Starting Status 4: Spikes Player L3
 
 Shiinotic @ Red Card
 Ability: Effect Spore
