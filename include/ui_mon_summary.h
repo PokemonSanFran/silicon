@@ -7,6 +7,7 @@ enum __attribute__((packed)) MonSummaryModes
     UI_SUMMARY_MODE_DEFAULT,
     UI_SUMMARY_MODE_LOCK_EDIT, // player cannot edit EVs nor moves
     UI_SUMMARY_MODE_EDIT_IVS,
+    UI_SUMMARY_MODE_SELECT_MOVE, // evo scene/learn move after leveling up
 
     // only used for moveReminder
     UI_SUMMARY_MODE_MOVE_MENU,

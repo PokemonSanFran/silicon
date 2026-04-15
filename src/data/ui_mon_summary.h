@@ -206,10 +206,16 @@ static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
     {
         .inputFunc = Task_SummaryMode_EditIVsInput,
     },
+    [UI_SUMMARY_MODE_SELECT_MOVE] =
+    {
+        .helpTxtFunc = SummaryMode_GetSelectMoveHelpText,
+        .inputFunc = Task_SummaryMode_SelectMoveInput,
+    },
 };
 
 static const u8 sSummaryMode_StatsExitOnly[] = _("{B_BUTTON} Exit");
 static const u8 sSummaryMode_MoveDetailsCancelOnly[] = _("{B_BUTTON} Cancel");
+static const u8 sSummaryMode_MoveDetailsConfirmCancelOnly[] = _("{A_BUTTON} Confirm {B_BUTTON} Cancel");
 
 static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
 {

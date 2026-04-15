@@ -105,8 +105,10 @@ static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum MonSummaryModes
 static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes);
 static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
 static const u8 *SummaryMode_GetLockEditHelpText(u32);
+static const u8 *SummaryMode_GetSelectMoveHelpText(u32);
 static void Task_SummaryMode_DefaultInput(u8);
 static void Task_SummaryMode_EditIVsInput(u8);
+static void Task_SummaryMode_SelectMoveInput(u8);
 
 static void SummaryPage_SetValue(enum MonSummaryPages);
 static enum MonSummaryPages SummaryPage_GetValue(void);
@@ -293,10 +295,13 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
         page = SUMMARY_PAGE_MOVES;
         break;
     case UI_SUMMARY_MODE_MOVE_DETAILS:
+        mode = UI_SUMMARY_MODE_DEFAULT;
+        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
+        // fallthrough
+    case UI_SUMMARY_MODE_SELECT_MOVE:
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_DETAILS);
         MovesPageMisc_SetOptionIndex(0);
-        MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
-        mode = UI_SUMMARY_MODE_DEFAULT;
+        // slot index is always zero thanks to AllocZeroed
         page = SUMMARY_PAGE_MOVES;
         break;
     }
@@ -544,7 +549,7 @@ static void CB2_SummarySetup(void)
         ResetPaletteFade();
         FreeAllWindowBuffers();
         ResetSpriteData();
-        ResetTasks();
+        //ResetTasks();         // evo scene needs to be available apparently..
         break;
     case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
@@ -938,6 +943,42 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         }
 
         PlaySE(SE_SELECT);
+        return;
+    }
+}
+
+// a copy of Task_SummaryInput_MovesInput but exits when A/B is pressed
+static void Task_SummaryMode_SelectMoveInput(u8 taskId)
+{
+    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
+
+    if (JOY_NEW(DPAD_DOWN))
+    {
+        MovesPageMisc_UpdateIndex(1);
+        return;
+    }
+
+    if (JOY_NEW(DPAD_UP))
+    {
+        MovesPageMisc_UpdateIndex(-1);
+        return;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        SetMoveSlotToReplace(MovesPageMisc_GetSlotIndex());
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        return;
+    }
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_PC_OFF);
+        SetMoveSlotToReplace(MAX_MON_MOVES);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
         return;
     }
 }
@@ -1483,6 +1524,11 @@ static const u8 *SummaryMode_GetLockEditHelpText(u32 page)
     }
 
     return SummaryPage_GetInfo(page)->helpBar[subMode];
+}
+
+static const u8 *SummaryMode_GetSelectMoveHelpText(u32 page)
+{
+    return sSummaryMode_MoveDetailsConfirmCancelOnly;
 }
 
 static void SummaryPage_SetValue(enum MonSummaryPages page)

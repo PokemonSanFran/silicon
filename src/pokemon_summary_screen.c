@@ -1213,6 +1213,9 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         newMode = UI_SUMMARY_MODE_DEFAULT;
         useBoxMon = TRUE;
         break;
+    case SUMMARY_MODE_SELECT_MOVE:
+        newMode = UI_SUMMARY_MODE_SELECT_MOVE;
+        break;
     }
 
     MonSummary_Init(newMode, mons, monIndex, maxMonIndex, useBoxMon, callback);
@@ -2885,6 +2888,13 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
         }
     }
 }
+
+// Start monSummary
+void SetMoveSlotToReplace(u8 slot)
+{
+    sMoveSlotToReplace = slot;
+}
+// End monSummary
 
 u8 GetMoveSlotToReplace(void)
 {
