@@ -1201,7 +1201,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     switch (mode)
     {
     default:
-        DebugPrintf("WARNING mode %d used but not handled on the new MonSummary");
+        assertf(FALSE, "summary mode %d is used but not handled in the new MonSummary", mode);
         // fallthrough
     case SUMMARY_MODE_NORMAL:
         break;
