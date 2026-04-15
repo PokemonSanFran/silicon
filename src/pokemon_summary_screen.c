@@ -1218,6 +1218,14 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         break;
     }
 
+    if (monIndex == PC_MON_CHOSEN)
+    {
+        useBoxMon = TRUE;
+        mons = GetBoxedMonPtr(gSpecialVar_MonBoxId, 0);
+        monIndex = gSpecialVar_MonBoxPos;
+        maxMonIndex = IN_BOX_COUNT - 1;
+    }
+
     MonSummary_Init(newMode, mons, monIndex, maxMonIndex, useBoxMon, callback);
     return;
     // End monSummary
