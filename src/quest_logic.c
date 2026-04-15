@@ -170,7 +170,7 @@ void Quest_Kitchenvolunteering_CreatePantryMaze(void)
 
 void KitchenvolunteeringFunc_GeneratePantryItem(void)
 {
-    gSpecialVar_0x8000 = ((ITEM_PANTRY_A - 1) + VarGet(VAR_LAST_TALKED));
+    gSpecialVar_0x8000 = ((ITEM_QUEST_KITCHENVOLUNTEERING_A - 1) + VarGet(VAR_LAST_TALKED));
     gSpecialVar_0x8001 = 1;
 
     KitchenvolunteeringFunc_CompleteSubquest();
@@ -209,22 +209,31 @@ u8 Quest_Kitchenvolunteering_CountRemainingItems(void)
     return (QUEST_KITCHENVOLUNTEERING_SUB_COUNT - numItems);
 }
 
+void Quest_Kitchenvolunteering_BufferRandomPantryItemName(void)
+{
+    CopyItemName(VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS), gStringVar1);
+}
+
 void KitchenvolunteeringFunc_ChooseRandomPantryItem(void)
 {
-    u32 randomItem = (Random() % (ITEM_PANTRY_END - ITEM_PANTRY_START) + ITEM_PANTRY_START);
+    u32 randomItem = (Random() % (ITEM_QUEST_KITCHENVOLUNTEERING_END - ITEM_QUEST_KITCHENVOLUNTEERING_START) + ITEM_QUEST_KITCHENVOLUNTEERING_START);
 
-    CopyItemName(randomItem, gStringVar1);
     VarSet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS,randomItem);
+    Quest_Kitchenvolunteering_BufferRandomPantryItemName();
 }
 
 static void KitchenvolunteeringFunc_RestoreChosenPantryItem(void)
 {
     u32 chosenItem = (VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS));
-    u32 itemOffset = chosenItem - ITEM_PANTRY_A;
+    u32 itemOffset = chosenItem - ITEM_QUEST_KITCHENVOLUNTEERING_A;
 
-    if (QuestMenu_GetSetQuestState(QUEST_KITCHENVOLUNTEERING,FLAG_GET_COMPLETED))
-        if (!CheckBagHasItem(chosenItem,1))
-            FlagClear(FLAG_TEMP_1 + itemOffset);
+    if (!QuestMenu_GetSetQuestState(QUEST_KITCHENVOLUNTEERING,FLAG_GET_COMPLETED))
+        return;
+
+    if (CheckBagHasItem(chosenItem,1))
+        return;
+
+    FlagClear(FLAG_TEMP_1 + itemOffset);
 }
 
 static void KitchenvolunteeringFunc_HidePantryItems(void)
@@ -238,6 +247,18 @@ static void KitchenvolunteeringFunc_HidePantryItems(void)
 
         FlagSet(FLAG_TEMP_1 + itemIndex);
     }
+}
+
+void Quest_Kitchenvolunteering_BufferNumberOfKitchenItems(void)
+{
+    u32 count = ITEM_QUEST_KITCHENVOLUNTEERING_END - ITEM_QUEST_KITCHENVOLUNTEERING_START + 1;
+    ConvertIntToDecimalStringN(gStringVar3, count, STR_CONV_MODE_LEFT_ALIGN, CountDigits(count));
+}
+
+void Quest_Kitchenvolunteering_CheckForDailyItem(void)
+{
+   enum Item dailyItem = VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS);
+   gSpecialVar_Result = CheckBagHasItem(dailyItem,1);
 }
 
 // ***********************************************************************

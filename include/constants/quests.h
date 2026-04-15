@@ -711,6 +711,21 @@ enum
 };
 
 // ***********************************************************************
+// Quest: Kitchen Volunteering
+// ***********************************************************************
+// QUEST_KITCHENVOLUNTEERING_
+
+#define ITEM_QUEST_KITCHENVOLUNTEERING_A ITEM_RICE
+#define ITEM_QUEST_KITCHENVOLUNTEERING_B ITEM_ARBOLIVA_OIL
+#define ITEM_QUEST_KITCHENVOLUNTEERING_C ITEM_SEASONING_MIX
+#define ITEM_QUEST_KITCHENVOLUNTEERING_D ITEM_TAHINI
+#define ITEM_QUEST_KITCHENVOLUNTEERING_E ITEM_LENTILS
+#define ITEM_QUEST_KITCHENVOLUNTEERING_KEY ITEM_STORAGE_KEY
+
+#define ITEM_QUEST_KITCHENVOLUNTEERING_START ITEM_QUEST_KITCHENVOLUNTEERING_A
+#define ITEM_QUEST_KITCHENVOLUNTEERING_END ITEM_QUEST_KITCHENVOLUNTEERING_E
+
+// ***********************************************************************
 // Quest: Digging Up Adaora's Dirt
 // ***********************************************************************
 
