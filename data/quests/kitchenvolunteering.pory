@@ -133,7 +133,7 @@ script Kitchenvolunteering_Script_SetFlagsMoveItems
 {
     setflag(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING)
     call(Kitchenvolunteering_Script_RemoveItem)
-    special(RandomlyBoostPartyMemberFriendship)
+    callnative(RandomlyBoostPartyMemberFriendship)
 }
 
 script Kitchenvolunteering_Dialogue_DailyReward

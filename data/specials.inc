@@ -568,7 +568,6 @@ gSpecials::
 	def_special Script_GetCurrentMapName
 	def_special CopyMonToStolenTradeStorage
 	def_special CopyMonFromStolenTradeStorage
-    def_special RandomlyBoostPartyMemberFriendship
     def_special CheckPartyHasOneMon
     def_special ConvertChallengeTurnsToRank
     def_special Quest_Wildfirerisk_GetPercentage
