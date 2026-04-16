@@ -197,6 +197,7 @@ script Kitchenvolunteering_Dialogue_RepeatQuest
 script Kitchenvolunteering_Script_GiveKey
 {
     cueobjectplayer(LOCALID_FLOWERS_RESTAURANTEXPANSIONBUSSER)
+    callnative(GenerateMazeLayoutSeed)
     giveitem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1)
 }
 
