@@ -43,5 +43,7 @@ void TweetCriteria_Quest_ReturnDollComplete(void);
 void TweetCriteria_Quest_Freetheinnocent1(void);
 void TweetCriteria_Quest_Freetheinnocent5(void);
 void TweetCriteria_Quest_Findtheguilty1(void);
+void TweetCriteria_Quest_Restaurantexpansion1(void);
+void TweetCriteria_Quest_Kitchenvolunteering(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H
