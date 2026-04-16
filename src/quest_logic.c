@@ -261,6 +261,70 @@ void Quest_Kitchenvolunteering_CheckForDailyItem(void)
    gSpecialVar_Result = CheckBagHasItem(dailyItem,1);
 }
 
+void DebugQuest_KitchenVolunteering(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_KITCHENVOLUNTEERING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_1);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION1,STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION2,STATE_QUEST_RESTAURANTEXPANSION2_COMPLETE);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_KITCHENVOLUNTEERING);
+            GenerateMazeLayoutSeed();
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_A_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_A,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_B_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_C_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_D_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_D,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_E_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_COMPLETE:
+            FlagSet(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            RandomlyBoostPartyMemberFriendship();
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_A,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_B,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_C,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_D,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_E,1);
+            QuestMenu_ScriptSetComplete(QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_RESET_DAY:
+            FlagClear(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_START_DAILY:
+            GenerateMazeLayoutSeed();
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_FINISH_DAILY:
+            FlagSet(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            RandomlyBoostPartyMemberFriendship();
+            break;
+    }
+}
+
 // ***********************************************************************
 // Quest: Rock Collector
 // ***********************************************************************
@@ -282,7 +346,7 @@ void DebugQuest_RockCollector(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_ROCKCOLLECTOR_STARTED:
-            DebugQuest_BetweenAStoneAndAHardPlace(STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
+            QuestMenu_SetupQuestState(QUEST_BETWEENASTONEANDAHARDPLACE,STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
             QuestMenu_ScriptSetActive(QUEST_ROCKCOLLECTOR);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_KIT,1);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_1,1);
@@ -2883,6 +2947,7 @@ void DebugQuest_Hodoutunnels(u8 state)
             Quest_Hodoutunnels_SetVariable_TalkedToElder();
             break;
         case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
+            // PSF TODO: replace with debug quest when this is done
             QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
             Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
             break;
@@ -3100,7 +3165,7 @@ void DebugQuest_Getthebandbacktogether(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST:
-            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
+            QuestMenu_SetupQuestState(QUEST_ANGELDELIVERY,STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
             QuestMenu_ScriptSetActive(QUEST_GETTHEBANDBACKTOGETHER);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A:
@@ -3221,7 +3286,7 @@ void DebugQuest_Restaurantexpansion2(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
             VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_1);
-            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION1);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION1,STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE);
             break;
         case STATE_QUEST_RESTAURANTEXPANSION2_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION2);
@@ -3521,7 +3586,7 @@ void DebugQuest_Findtheguilty(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
             JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
-            QuestMenu_ScriptSetComplete(QUEST_FREETHEINNOCENT);
+            QuestMenu_SetupQuestState(QUEST_FREETHEINNOCENT,STATE_QUEST_FREETHEINNOCENT_COMPLETE);
             break;
         case STATE_QUEST_FINDTHEGUILTY_STARTED:
             QuestMenu_ScriptSetActive(QUEST_FINDTHEGUILTY);

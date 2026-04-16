@@ -438,42 +438,42 @@ static const struct SubQuest sDexCompletion_Sub[QUEST_DEXCOMPLETION_SUB_COUNT] =
 
 static const struct SubQuest sKitchenVolunteering_Sub[QUEST_KITCHENVOLUNTEERING_SUB_COUNT] = {
     sub_quest(49,
-            gText_Quest_KitchenVolunteering_Sub1_Name,
-            gText_Quest_KitchenVolunteering_Sub1_Desc,
-            gText_Quest_KitchenVolunteering_Sub1_Map,
-            ITEM_BIG_MALASADA,
+            COMPOUND_STRING("Rice"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Flowers Basement"),
+            ITEM_QUEST_KITCHENVOLUNTEERING_A,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(50,
-            gText_Quest_KitchenVolunteering_Sub2_Name,
-            gText_Quest_KitchenVolunteering_Sub2_Desc,
-            gText_Quest_KitchenVolunteering_Sub2_Map,
-            ITEM_BIG_MALASADA,
+            COMPOUND_STRING("Seasoning Mix"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Flowers Basement"),
+            ITEM_QUEST_KITCHENVOLUNTEERING_B,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(51,
-            gText_Quest_KitchenVolunteering_Sub3_Name,
-            gText_Quest_KitchenVolunteering_Sub3_Desc,
-            gText_Quest_KitchenVolunteering_Sub3_Map,
-            ITEM_BIG_MALASADA,
+            COMPOUND_STRING("Arboliva Oil"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Flowers Basement"),
+            ITEM_QUEST_KITCHENVOLUNTEERING_C,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(52,
-            gText_Quest_KitchenVolunteering_Sub4_Name,
-            gText_Quest_KitchenVolunteering_Sub4_Desc,
-            gText_Quest_KitchenVolunteering_Sub4_Map,
-            ITEM_BIG_MALASADA,
+            COMPOUND_STRING("Tahini"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Flowers Basement"),
+            ITEM_QUEST_KITCHENVOLUNTEERING_D,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
     sub_quest(53,
-            gText_Quest_KitchenVolunteering_Sub5_Name,
-            gText_Quest_KitchenVolunteering_Sub5_Desc,
-            gText_Quest_KitchenVolunteering_Sub5_Map,
-            ITEM_BIG_MALASADA,
+            COMPOUND_STRING("Lentils"),
+            COMPOUND_STRING(""),
+            COMPOUND_STRING("Flowers Basement"),
+            ITEM_QUEST_KITCHENVOLUNTEERING_E,
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
@@ -3153,14 +3153,101 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_KITCHENVOLUNTEERING] =
     {
-        .name = gText_Quest_KitchenVolunteering_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_KitchenVolunteering_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_KitchenVolunteering_DoneDesc,
-        .map = gText_Quest_KitchenVolunteering_Map,
-        .sprite = OBJ_EVENT_GFX_SCIENTIST_1,
+        .name = COMPOUND_STRING("Kitchen Volunteering"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Restaurantexpansionbusser needs help gathering food from the basement of Flowers."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Restaurantexpansionbusser is grateful for your help, but will likely need more in the future…"),
+        .map = COMPOUND_STRING("Caphe City"),
+        .sprite = OBJ_EVENT_GFX_RESTAURANTEXPANSIONBUSSER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sKitchenVolunteering_Sub,
-        .numSubquests = QUEST_KITCHENVOLUNTEERING_SUB_COUNT
+        .numSubquests = QUEST_KITCHENVOLUNTEERING_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_KITCHENVOLUNTEERING_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_ITEM_A_COLLECTED]=
+            {
+                .name = COMPOUND_STRING("Item A Collected"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_ITEM_B_COLLECTED]=
+            {
+                .name = COMPOUND_STRING("Item B Collected"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_ITEM_C_COLLECTED]=
+            {
+                .name = COMPOUND_STRING("Item C Collected"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_ITEM_D_COLLECTED]=
+            {
+                .name = COMPOUND_STRING("Item D Collected"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_ITEM_E_COLLECTED]=
+            {
+                .name = COMPOUND_STRING("Item E Collected"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_REWARD]=
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_COMPLETE]=
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_RESET_DAY]=
+            {
+                .name = COMPOUND_STRING("Reset Day"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_START_DAILY]=
+            {
+                .name = COMPOUND_STRING("Start Daily"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+            [STATE_QUEST_KITCHENVOLUNTEERING_FINISH_DAILY]=
+            {
+                .name = COMPOUND_STRING("Finish Daily"),
+                .setupFunc = DebugQuest_KitchenVolunteering,
+                side_quest_map(MAP_QUEST_RESTAURANTEXPANSION2_FLOWERS),
+                .warpId = 1,
+            },
+        },
     },
     [QUEST_ARTISANBALLS1] =
     {
