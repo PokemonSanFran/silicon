@@ -149,15 +149,6 @@ static const struct WindowTemplate sDexnavWindows[] =
         .height = 5,
         .paletteNum = WAVES_PALETTE_TEXT_ID,
     },
-    [WIN_DEXNAV_MAIN_WINDOW] =
-    {
-        .bg = BG0_WAVES_TEXT,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = 21,
-        .height = 16,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
-    },
     [WIN_DEXNAV_HELP_BAR] =
     {
         .bg = BG0_WAVES_TEXT,
