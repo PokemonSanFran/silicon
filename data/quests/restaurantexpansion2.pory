@@ -9,351 +9,232 @@ const FLAG_HIDE_BELEN_MERMEREZA_CITY = FLAG_TEMP_4
 
 //gText_Restaurantexpansion2_
 //Quest_Restaurantexpansion2_
-script Quest_Restaurantexpansion2_Leader_Interact_Script{
-    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Reward_Dialogue)
-    goto_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Active_Dialogue)
-    goto(Quest_Restaurantexpansion2_StartQuest)
-}
-
-script Quest_Restaurantexpansion2_StartQuest{
-    msgbox(format("{PLAYER}! Things have been coming together al dente!"),MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(format("I think that's good. Awesome!"),,SPEAKER_ALICIA)
-    msgbox(format("I think its time to elevate our offerings though."),,SPEAKER_BELEN)
-    msgbox(format("I wasn't throughout enough in my remastering of our ethos - I can serve more people now, so now the people of the region can enjoy it... but is this food really the soul if its not made BY the people? I want tohire some people that are native to Resido, but I need help sourcing the components..."),,SPEAKER_BELEN)
-    msgbox(format("Let me guess - you need me to send people from around the region who might have restaurant experience back to you?"),,SPEAKER_ALICIA)
-    msgbox(format("You don't have to go back and forth this time!"),,SPEAKER_BELEN,,EMOTE_SWEAT)
-    msgbox(format("And don't go out of your way either. If you battle or talk to somebody and they're from the restaurant industry, just send them to the back of house."),,SPEAKER_BELEN)
+script Quest_Restaurantexpansion2_StartQuest
+{
+    faceplayer
+    msgbox(format("{PLAYER}, did you see my zap?"),,SPEAKER_BELEN)
+    closemessage
+    showtweet(TWEET_QUEST_RESTAURANTEXPANSION2)
+    msgbox(format("The new model has been three stars, but I need to hire more!"),,SPEAKER_BELEN)
+    msgbox(format("I went through my DMs and made a list of people who pass the freshness check. My staff needs to be as diverse as my menu!"),,SPEAKER_BELEN)
+    msgbox(format("Can you go sniff them out, see if they’re ripe, and send them back here?"),,SPEAKER_BELEN)
+    closemessage
+    cueobjecttalking(LOCALID_FLOWERS_BELEN)
+    msgbox(format("There’s a list of locations in your Todo. Come back when you’ve found me a waitress, a chef, a line cook, and a busser."),,SPEAKER_BELEN)
+    closemessage
     startquest(QUEST_RESTAURANTEXPANSION2)
+    applymovement(LOCALID_FLOWERS_BELEN,moves(face_original_direction))
+    waitmovement(LOCALID_FLOWERS_BELEN)
     end
 }
 
-script Quest_Restaurantexpansion2_HideEmployees_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_1)
-        if (!var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_HOSTESS)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
-        if (!var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_CHEF)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
-        if (!var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_JAINTOR)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
-        if (!var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_BUSSER)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
-        if (!var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_CASHIER)
-        }
-    return
+script Quest_Restaurantexpansion2_Script_HideFlowersBelen
+{
+    setobjectflagfromlocalid(LOCALID_FLOWERS_BELEN)
 }
 
-script Quest_Restaurantexpansion2_HideStaffA_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_1)
-        if (var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_HOSTESS)
-        }
-    return
+script Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionhostess
+{
+    setobjectflagfromlocalid(LOCALID_FLOWERS_RESTAURANTEXPANSIONHOSTESS)
 }
 
-script Quest_Restaurantexpansion2_HideStaffB_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
-        if (var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_CHEF)
-        }
-    return
+script Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionchef
+{
+    setobjectflagfromlocalid(LOCALID_FLOWERS_RESTAURANTEXPANSIONCHEF)
 }
 
-script Quest_Restaurantexpansion2_HideStaffC_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
-        if (var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_JAINTOR)
-        }
-    return
+script Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionlinecook
+{
+    setobjectflagfromlocalid(LOCALID_FLOWERS_RESTAURANTEXPANSIONLINECOOK)
 }
 
-script Quest_Restaurantexpansion2_HideStaffD_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
-        if (var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_BUSSER)
-        }
-    return
+script Quest_Restaurantexpansion2_Script_HideFlowersRestaurantexpansionbusser
+{
+    setobjectflagfromlocalid(LOCALID_FLOWERS_RESTAURANTEXPANSIONBUSSER)
 }
 
-script Quest_Restaurantexpansion2_HideStaffE_Script{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
-        if (var(VAR_RESULT))
-        {
-            setflag(FLAG_HIDE_CASHIER)
-        }
-    return
-}
-
-script Quest_Restaurantexpansion2_RemoveStaff_Script{
+script Quest_Restaurantexpansion2_Complete_Restaurantexpansionhostess
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_1)
+    callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Haha, I’m so silly! I used to work as a server, but those days are long gone."),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    msgbox(format("Flowers is looking for a hostess. Belén said she found you on Buzzr!"),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    msgbox(format("Are you still interested?"),,SPEAKER_ALICIA)
+    msgbox(format("Oh my gosh, like I didn’t think anybody was reading that, how embarrassing… but like, I can at least drop by. Thanks!"),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
     closemessage
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(VAR_LAST_TALKED)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
+    moveobjecttocoords(LOCALID_ROUTE1_RESTAURANTEXPANSIONHOSTESS,67,7,DIR_NORTH)
+    fadeandremovelasttalked
     release
-    return
+    end
 }
 
-script Quest_Restaurantexpansion2_CancelIfNotActive_Script{
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RESTAURANTEXPANSION2)
-    if (!var(VAR_RESULT)){
+script Quest_Restaurantexpansion2_Complete_Restaurantexpansionchef
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_2)
+    callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
+    buffermapname(STR_VAR_1,MAP_OROLAND_COLISEUM_HALL)
+    msgbox(format("I used to be the head chef over at the {STR_VAR_1}! Ever since it closed I’ve been out of work and out on the streets. I think it’s been ten years now…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("Flowers is looking for a chef. Belén said she found you on Buzzr!"),,SPEAKER_ALICIA)
+    msgbox(format("Wait, people are actually reading those crazy zaps? Man, just to be back doing what I loved would mean everything!"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE99_RESTAURANTEXPANSIONCHEF,5,36,DIR_SOUTH)
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Restaurantexpansion2_Complete_Restaurantexpansionlinecook
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_2)
+    callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Belén got famous off bringing different street foods from around the world to her restaurant. It’s an awesome way for so many people to get to try things from new cultures! I’m becoming a line cook so I can do the same thing."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("Flowers is looking for a line cook. Belén said she found you on Buzzr!"),,SPEAKER_ALICIA)
+    msgbox(format("Do you want to work under Belén?"),,SPEAKER_ALICIA)
+    bufferspeciesname(STR_VAR_1,SPECIES_BUNEARY)
+    msgbox(format("Me? At Flowers? This sounds insane! I’ll be able to try {STR_VAR_1} Chow, work on my Currywurst…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE4_RESTAURANTEXPANSIONLINECOOK,1,3,DIR_WEST)
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Restaurantexpansion2_Complete_Restaurantexpansionbusser
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION2,SUB_QUEST_4)
+    callnative(Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("A simple gig would be nice, you know? Like bussing tables! Nobody needs experience to grab plates, right?"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+    msgbox(format("Flowers is looking for a busser. Belén said she found you on Buzzr!"),,SPEAKER_ALICIA)
+    msgbox(format("Hey, if she's not checking resumes for university degrees in plate-clearing, I'm there!"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+    closemessage
+    moveobjecttocoords(LOCALID_ROUTE9_RESTAURANTEXPANSIONBUSSER,19,1,DIR_EAST)
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script Quest_Restaurantexpansion2_Reward_Dialogue
+{
+    faceplayer
+    checkitemspace(ITEM_QUEST_RESTAURANTEXPANSION2_REWARD,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I can’t let you clock out until I pay you! Make some room in your bag."),,SPEAKER_BELEN)
         closemessage
-        release
-        end
+        applymovement(LOCALID_FLOWERS_BELEN,moves(face_original_direction))
+        waitmovement(LOCALID_FLOWERS_BELEN)
     }
-    return
-}
-
-//PSF TODO learn to use the fancy msgbox stuff
-//SPEAKER_AUGUSTE
-script Quest_Restaurantexpansion2_TrainerA_PostBattle_Script{
-	lock
-    msgbox(format("I wish battling was as fun as being a hostess!"),,SPEAKER_AUGUSTE)
-    call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
-	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_1)
-    call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(format("Wait you said you were a hostess?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
-    msgbox(format("Needles is looking for poeple in the restaurant industry. Are you looking?"),,SPEAKER_ALICIA)
-    msgbox(format("I'll check it out! I'm out of work and this would be huge. Thanks!"),,SPEAKER_AUGUSTE)
-    call(Quest_Restaurantexpansion2_RemoveStaff_Script)
-    end
-}
-//SPEAKER_JULIA
-script Quest_Restaurantexpansion2_TrainerB_PostBattle_Script{
-	lock
-    msgbox(format("Out of the frying pan... and out to dry."),,SPEAKER_JULIA)
-    call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
-	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
-    call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(format("Wait, do all chefs talk only about food?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
-    msgbox(format("You're a chef? Where do you work?"),,SPEAKER_ALICIA)
-    msgbox(format("Nowhere. I got laid off a few years ago, and trying to make it happen on my own has been... difficult."),,SPEAKER_JULIA)
-    msgbox(format("Needles is looking for a chef right now."),,SPEAKER_ALICIA)
-    msgbox(format("Really?!?! Working there would be a dream!"),,SPEAKER_JULIA)
-    call(Quest_Restaurantexpansion2_RemoveStaff_Script)
-    end
-}
-//SPEAKER_ALICE
-script Quest_Restaurantexpansion2_TrainerC_PostBattle_Script{
-	lock
-    msgbox(format("I like doing this, but man, I wish I could make some more doing it. It's good work, but I got bills to pay!"),,SPEAKER_ALICE)
-    call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
-	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
-    call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(format("I don't know what they're paying, but Needles is looking for new people."),,SPEAKER_ALICIA)
-    msgbox(format("Oh really? I'll check it out."),,SPEAKER_ALICE)
-    call(Quest_Restaurantexpansion2_RemoveStaff_Script)
-    end
-}
-//SPEAKER_FERRAN
-script Quest_Restaurantexpansion2_TrainerD_PostBattle_Script{
-	lock
-    msgbox(format("I'd be better at battling if I had some extra cash for items..."),,SPEAKER_FERRAN)
-    call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
-	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
-    call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(format("If you need a job, Needles is looking for new bodies."),,SPEAKER_ALICIA)
-    msgbox(format("Seriously? I gotta get down there!"),,SPEAKER_FERRAN)
-    call(Quest_Restaurantexpansion2_RemoveStaff_Script)
-    end
-}
-//define SPEAKER_ANTHONY
-script Quest_Restaurantexpansion2_TrainerE_PostBattle_Script{
-	lock
-    msgbox(format("I love working in cafes! I get to work with people, but I also get tons of snacks!"),,SPEAKER_ANTHONY)
-    call(Quest_Restaurantexpansion2_CancelIfNotActive_Script)
-	subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
-    call(Quest_Restaurantexpansion2_CheckReward_Script)
-    msgbox(format("If you want to eat and work, you should check out Needles. They're hiring!"),,SPEAKER_ALICIA)
-    msgbox(format("I could try that! Thanks!"),,SPEAKER_ANTHONY)
-    call(Quest_Restaurantexpansion2_RemoveStaff_Script)
+    else
+    {
+        msgbox(format("These new hires are top notch, PLAYER! Thanks for sourcing them for me."),,SPEAKER_BELEN,,EMOTE_HAPPY)
+        msgbox(format("And of course, we pay out all the help…"),,SPEAKER_BELEN,,EMOTE_HAPPY)
+        closemessage
+        cueobjectplayer(LOCALID_FLOWERS_BELEN)
+        giveitem(ITEM_QUEST_RESTAURANTEXPANSION2_REWARD,1)
+        msgbox(format("I’ve been so focused on opening the new restaurant and my battling skills are starting to stale."),,SPEAKER_BELEN)
+        msgbox(format("Needles is still going to be my top focus, since its cashflow is what will keep the lights on here. I'm going to head back there and let Restaurantexpansionchef hold down the fort."),,SPEAKER_BELEN)
+        msgbox(format("When you come back to the Gym, let’s battle again! Gracias!"),,SPEAKER_BELEN)
+        closemessage
+        setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2)
+        setflag(FLAG_TEMP_1A)
+        setflag(FLAG_FACILITY_UNLOCK_BELEN)
+        completequest(QUEST_RESTAURANTEXPANSION2)
+    }
+    release
     end
 }
 
-script Quest_Restaurantexpansion2_CheckReward_Script{
-    setvar(VAR_TEMP_0,0)
-        subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_1)
-        if (var(VAR_RESULT))
-        {
-            addvar(VAR_TEMP_0,1)
-        }
+script Quest_Restaurantexpansion2_Active_Dialogue
+{
+    msgbox(format("{PLAYER}, did you greet those tables yet?"),,SPEAKER_BELEN,TAIL_SHOUT)
+    msgbox(format("The locations are in your Todo, but I need help now!"),,SPEAKER_BELEN,TAIL_SHOUT)
+    random(8)
 
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_2)
-        if (var(VAR_RESULT))
-        {
-            addvar(VAR_TEMP_0,1)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_3)
-        if (var(VAR_RESULT))
-        {
-            addvar(VAR_TEMP_0,1)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_4)
-        if (var(VAR_RESULT))
-        {
-            addvar(VAR_TEMP_0,1)
-        }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_RESTAURANTEXPANSION2, SUB_QUEST_5)
-        if (var(VAR_RESULT))
-        {
-            addvar(VAR_TEMP_0,1)
-        }
-
-        if (var(VAR_TEMP_0) == 5){
-            questmenu(QUEST_MENU_SET_REWARD, QUEST_RESTAURANTEXPANSION2)
-        }
-    return
-}
-
-script Quest_Restaurantexpansion2_Reward_Dialogue{
-    msgbox(format("{PLAYER}, these new staff are so great! Thank you for your help!"),MSGBOX_NPC,SPEAKER_BELEN)
-    msgbox(format("They really give my dish the acid that it needs to stand out!"),,SPEAKER_BELEN)
-    msgbox(format("Take this for all your help."),,SPEAKER_BELEN)
-    msgbox(format("If you're ever looking for a rematch, come see me at the Gym. I'd love to go all out against you!"),,SPEAKER_BELEN)
+    switch (var(VAR_RESULT))
+    {
+        case 0:
+bufferitemname(STR_VAR_1,ITEM_LIECHI_BERRY)
+msgbox(format("I need to take the {STR_VAR_1} out of the syrup and then grind them into paste."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 1:
+bufferitemname(STR_VAR_1,ITEM_GANLON_BERRY)
+msgbox(format("The {STR_VAR_1} are small enough that I don’t need to cut them."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 2:
+bufferitemname(STR_VAR_1,ITEM_SHUCA_BERRY)
+msgbox(format("I think {STR_VAR_1} oil is going to have the most favorable smoke point for these."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 3:
+bufferspeciesname(STR_VAR_1,SPECIES_MILTANK)
+bufferspeciesname(STR_VAR_2,SPECIES_LECHONK)
+msgbox(format("I can keep costs down by using jackfruit instead of the usual {STR_VAR_1} {STR_VAR_2} blend… just need to make sure the umami is on point!"),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 4:
+msgbox(format("Frying these feels so similar to empanadas!"),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 5:
+msgbox(format("Oops, my rice flour ratio is a little off."),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 6:
+bufferitemname(STR_VAR_1,ITEM_NOMEL_BERRY)
+bufferitemname(STR_VAR_2,ITEM_MAGOST_BERRY)
+msgbox(format("{STR_VAR_1} - {STR_VAR_2} reduction just seems to simmer a little longer!"),,SPEAKER_BELEN,TAIL_WHISPER)
+        case 7:
+msgbox(format("I’ll do two sets. The first with chili paste and scallion and one with soybean paste! But how can I make the scallions more exciting?"),,SPEAKER_BELEN,TAIL_WHISPER)
+    }
     closemessage
-    //applymovement(BELEN_MERMEREZA_CITY,Quest_Restaurantexpansion_WalkInside_Movement)
-    setvar(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2)
-       setflag(FLAG_FACILITY_UNLOCK_BELEN)
-    completequest(QUEST_RESTAURANTEXPANSION2)
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    removeobject(BELEN_MERMEREZA_CITY)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
 
-script Quest_Restaurantexpansion2_Active_Dialogue{
-    switch(var(VAR_RESULT)){
-        case 0: msgbox(format("Have you had any luck finding people out there?"),MSGBOX_NPC,SPEAKER_BELEN)
-        default: msgbox(format("I talked to a few people and they seem great. Keep up the seasoning!"),MSGBOX_NPC,SPEAKER_BELEN)
-    }
+script Quest_Restaurantexpansion2_Dialogue_Complete
+{
+    msgbox(format("I need to marinate in my last loss, but I’ll be ready to jump into the frying pan with you soon!"),MSGBOX_NPC,SPEAKER_BELEN)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete
+{
+    msgbox(format("Belén’s new thing is about impressing the world with her high end dishes. And now to be a part of that after ten years away… I’m so happy!"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONCHEF)
+}
+
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestComplete
+{
+    lock
+    faceplayer
+    msgbox(format("Belén left me to run Flowers so she can handle Needles."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("Flowers runs entirely off the profit margins from Needles, which limits how many people we can serve."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    msgbox(format("I love what we're doing here, but it breaks my heart to see that we can't help more people."),,SPEAKER_RESTAURANTEXPANSIONCHEF)
     release
-        end
+    end
 }
 
-text gText_Restaurantexpansion2_PlayerThings{
-    format("{PLAYER}! Things have been coming together al dente!")
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef
+{
+    goto_if_quest_not_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete)
+    goto_if_set(FLAG_TEMP_1A,Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete)
+    goto(Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestComplete)
 }
 
-text gText_Restaurantexpansion2_Awesome{
-    format("I think that's good. Awesome!")
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser
+{
+    goto_if_quest_not_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete)
+    goto_if_set(FLAG_TEMP_1A,Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete)
+    goto(Kitchenvolunteering_Script_Interact_Restaurantexpansionbusser)
 }
 
-text gText_Restaurantexpansion2_IWantToTake{
-    format("I think its time to elevate our offerings though.")
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser_Incomplete
+{
+    msgbox(format("Belén is always going on about showing, not telling, and really making it happen. Her dishes speak for themselves, but how do I show her I want to start moving up?"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONBUSSER)
 }
 
-text gText_Restaurantexpansion2_ActuallyIWasnt{
-    format("I wasn't throughout enough in my remastering of our ethos - I can serve more people now, so now the people of the region can enjoy it... but is this food really the soul if its not made BY the people? I want tohire some people that are native to Resido, but I need help sourcing the components...")
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionhostess
+{
+    lock
+    faceplayer
+    msgbox(format("Belén is really great at handling pressure in the kitchen and battles! Whenever things don’t go her away, she doesn’t ever lose her cool."),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    msgbox(format("A lot of people could learn from her!"),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    closemessage
+    release
+    end
 }
 
-text gText_Restaurantexpansion2_LetMeGuess{
-    format("Let me guess - you need me to send people from around the region who might have restaurant experience back to you?")
+script Quest_Restaurantexpansion2_Interact_Restaurantexpansionlinecook
+{
+    msgbox(format("Watching Belén is amazing. Somehow, she’s able to perfectly split her focus between Gym Battles and cooking, and does them both perfectly!"),MSGBOX_NPC,SPEAKER_RESTAURANTEXPANSIONLINECOOK)
 }
 
-text gText_Restaurantexpansion2_YouDontHaveToGoBack{
-    format("You don't have to go back and forth this time!")
-}
 
-text gText_Restaurantexpansion2_IfYouHappenToBattle{
-    format("And don't go out of your way either. If you battle or talk to somebody and they're from the restaurant industry, just send them to the back of house.")
-}
-
-text gText_Restaurantexpansion2_IWishBattling{
-	format("I wish battling was as fun as being a hostess!")
-}
-text gText_Restaurantexpansion2_WaitYouSaid{
-	format("Wait you said you were a hostess?")
-}
-text gText_Restaurantexpansion2_NeedlesIsLooking{
-	format("Needles is looking for poeple in the restaurant industry. Are you looking?")
-}
-text gText_Restaurantexpansion2_IllCheckItAge{
-	format("I'll check it out! I'm out of work and this would be huge. Thanks!")
-}
-text gText_Restaurantexpansion2_OutOfTheFryingPan{
-	format("Out of the frying pan... and out to dry.")
-}
-text gText_Restaurantexpansion2_WaitDoAllChefs{
-	format("Wait, do all chefs talk only about food?")
-}
-text gText_Restaurantexpansion2_YoureAChefWhere{
-	format("You're a chef? Where do you work?")
-}
-text gText_Restaurantexpansion2_NowhereIGotLaid{
-	format("Nowhere. I got laid off a few years ago, and trying to make it happen on my own has been... difficult.")
-}
-text gText_Restaurantexpansion2_NeedlesNeeds{
-	format("Needles is looking for a chef right now.")
-}
-text gText_Restaurantexpansion2_REally{
-	format("Really?!?! Working there would be a dream!")
-}
-text gText_Restaurantexpansion2_ILikeDoingThisBut{
-	format("I like doing this, but man, I wish I could make some more doing it. It's good work, but I got bills to pay!")
-}
-text gText_Restaurantexpansion2_IDontknowWhat{
-	format("I don't know what they're paying, but Needles is looking for new people.")
-}
-text gText_Restaurantexpansion2_OhReally{
-	format("Oh really? I'll check it out.")
-}
-text gText_Restaurantexpansion2_IdBeBetterIf{
-	format("I'd be better at battling if I had some extra cash for items...")
-}
-text gText_Restaurantexpansion2_IfYouNeedAJob{
-	format("If you need a job, Needles is looking for new bodies.")
-}
-text gText_Restaurantexpansion2_SeriouslyIGottaGet{
-	format("Seriously? I gotta get down there!")
-}
-text gText_Restaurantexpansion2_ILoveWorkingInCafes{
-	format("I love working in cafes! I get to work with people, but I also get tons of snacks!")
-}
-text gText_Restaurantexpansion2_YouWantToEat{
-	format("If you want to eat and work, you should check out Needles. They're hiring!")
-}
-text gText_Restaurantexpansion2_ICouldTryThat{
-	format("I could try that! Thanks!")
-}
-text gText_Restaurantexpansion2_PlayerTheseNewStaff{
-	format("{PLAYER}, these new staff are so great! Thank you for your help!")
-}
-text gText_Restaurantexpansion2_TheyReallyGiveMyDish{
-	format("They really give my dish the acid that it needs to stand out!")
-}
-text gText_Restaurantexpansion2_TakeThis{
-	format("Take this for all your help.")
-}
-text gText_Restaurantexpansion2_IfYouEverWant{
-	format("If you're ever looking for a rematch, come see me at the Gym. I'd love to go all out against you!")
-}
-text gText_Restaurantexpansion2_HaveYouHadAny{
-	format("Have you had any luck finding people out there?")
-}
-text gText_Restaurantexpansion2_ITalkedToAFew{
-	format("I talked to a few people and they seem great. Keep up the seasoning!")
-}

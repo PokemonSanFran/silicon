@@ -93,6 +93,14 @@ enum FollowerTransformTypes
 #define sCamera_MoveX          data[2]
 #define sCamera_MoveY          data[3]
 
+// Start siliconQuests
+struct DirectionSequence
+{
+    const enum Direction *directions;
+    u8 count;
+};
+// End siliconQuests
+
 struct StepAnimTable
 {
     const union AnimCmd *const *anims;
@@ -329,6 +337,7 @@ void MovementType_RunInPlace(struct Sprite *sprite);
 void MovementType_Invisible(struct Sprite *sprite);
 void MovementType_WalkSlowlyInPlace(struct Sprite *sprite);
 void MovementType_FollowPlayer(struct Sprite *sprite);
+void MovementType_BusTables(struct Sprite *sprite); // siliconQuests
 u8 GetSlideMovementAction(u32);
 u8 GetJump2MovementAction(u32);
 u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority);
@@ -467,6 +476,11 @@ u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct ObjectEvent *objectEven
 u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+// Start siliconQuests
+u8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_CustomMovement_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+// End siliconQuests
 u8 MovementType_CopyPlayer_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_CopyPlayer_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_CopyPlayer_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);

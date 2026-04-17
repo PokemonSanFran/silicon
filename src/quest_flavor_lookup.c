@@ -310,7 +310,6 @@ const u8 *GetQuestDesc_GetTheBandBackTogether(void)
 const u8 *GetQuestDesc_RestaurantExpansion1(void)
 {
     u32 remaining = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
-    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
 
     static const u16 sQuestItems[] =
     {
@@ -345,6 +344,7 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(sQuestMaps[index]),MAP_NUM(sQuestMaps[index]))->regionMapSectionId, 0);
     }
 
+    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
     StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
     return gStringVar4;
 }

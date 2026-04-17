@@ -295,3 +295,13 @@ void TweetCriteria_Quest_Findtheguilty1(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_FINDTHEGUILTY);
 }
+
+void TweetCriteria_Quest_Restaurantexpansion1(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTAURANTEXPANSION1);
+}
+
+void TweetCriteria_Quest_Kitchenvolunteering(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTAURANTEXPANSION2);
+}

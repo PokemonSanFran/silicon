@@ -13,6 +13,17 @@ mapscripts Route1_MapScripts {
     }
 }
 
+script Route1_Script_Interact_Quest_Restaurantexpansionhostess
+{
+    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONHOSTESS,format("What can I get you to eat today?"),format("I think the kitchen 86'd a win!!"),Route1_Script_Interact_Quest_Restaurantexpansionhostess)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Complete_Restaurantexpansionhostess)
+    msgbox(format("Haha, I’m so silly! I used to work as a server, but those days are long gone."),,SPEAKER_RESTAURANTEXPANSIONHOSTESS)
+    closemessage
+    release
+    end
+// PSF TODO Oh wow, extra spicy I see!
+}
+
 script Route1_Script_Interact_BodegaburnoutDeliveryB
 {
     trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYB,format("Argh! Until my stuff gets here, I’m taking it out on you!"),format("How embarrassing…"),Route1_Script_Interact_BodegaburnoutDeliveryB)
