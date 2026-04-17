@@ -63,25 +63,25 @@ static const struct BgTemplate sDexnavBgTemplates[] =
     [BG1_DEXNAV_WHEEL] =
     {
         .bg = BG1_DEXNAV_WHEEL,
-        .charBaseIndex = 2,
+        .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .priority = 1,
     },
-        /*
     [BG2_DEXNAV_UI] =
     {
         .bg = BG2_DEXNAV_UI,
-        .charBaseIndex = 3,
+        .charBaseIndex = 2,
         .mapBaseIndex = 28,
-        .priority = 1,
+        .priority = 2,
     },
     [BG3_DEXNAV_BACKGROUNDS] =
     {
         .bg = BG3_DEXNAV_BACKGROUNDS,
         .charBaseIndex = 3,
-        .mapBaseIndex = 27,
+        .mapBaseIndex = 26,
         .priority = 2,
     },
+        /*
         */
 };
 
@@ -102,13 +102,13 @@ static const struct {
     },
     [BG2_DEXNAV_UI] =
     {
-        //.tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface.4bpp.smol"),
-        //.tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface.bin.smolTM"),
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface.4bpp.smol"),
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface.bin.smolTM"),
     },
     [BG3_DEXNAV_BACKGROUNDS] =
     {
-        //.tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.4bpp.smol"),
-        //.tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.bin.smolTM"),
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.4bpp.smol"),
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.bin.smolTM"),
     },
 };
 static const struct WindowTemplate sDexnavWindows[] =
