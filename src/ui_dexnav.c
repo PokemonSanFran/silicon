@@ -2,6 +2,7 @@
 #include "dexnav.h"
 #include "wild_encounter.h"
 #include "string_util.h"
+#include "pokedex.h"
 #include "window.h"
 #include "palette.h"
 #include "task.h"
@@ -58,6 +59,8 @@ static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
+static bool8 Dexnav_ShouldHideCompletionMark(void);
+static u8 Dexnav_CreateCompletionSprite(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -122,6 +125,7 @@ static const struct {
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.bin.smolTM"),
     },
 };
+
 static const struct WindowTemplate sDexnavWindows[] =
 {
     [WIN_DEXNAV_HEADER] =
@@ -177,6 +181,116 @@ const u8 sDexnavWindowFontColors[DEXNAV_FONT_COLOR_COUNT][3] =
     [DEXNAV_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [DEXNAV_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
 };
+
+static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT] = 
+{
+    [DEXNAV_SPRITEID_COMPLETION_MARK] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/completion.4bpp"),
+            .size = TILE_OFFSET_4BPP(4),
+            .tag = DEXNAV_SPRITETAG_COMPLETION,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/completion.gbapal"),
+            .tag = DEXNAV_PALTAG_COMPLETION,
+        },
+    },
+    [DEXNAV_SPRITEID_INSIGHT_POSITION_0] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/star.4bpp"),
+            .size = TILE_OFFSET_4BPP(32),
+            .tag = DEXNAV_SPRITETAG_STAR,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/star.gbapal"),
+            .tag = DEXNAV_PALTAG_STAR,
+        },
+    },
+    [DEXNAV_SPRITEID_INDICATOR_ABILITY] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/indicators.4bpp"),
+            .size = TILE_OFFSET_4BPP(16),
+            .tag = DEXNAV_SPRITETAG_INDICATOR,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/indicators.gbapal"),
+            .tag = DEXNAV_PALTAG_INDICATOR,
+        },
+    },
+    [DEXNAV_SPRITEID_ARROW_UP] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/arrows.4bpp"),
+            .size = TILE_OFFSET_4BPP(64),
+            .tag = DEXNAV_SPRITETAG_ARROW,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/arrows.gbapal"),
+            .tag = DEXNAV_PALTAG_ARROW,
+        },
+    },
+    [DEXNAV_SPRITEID_FAB] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fab.4bpp"),
+            .size = TILE_OFFSET_4BPP(32),
+            .tag = DEXNAV_SPRITETAG_FAB,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fab.gbapal"),
+            .tag = DEXNAV_PALTAG_FAB,
+        },
+    },
+    [DEXNAV_SPRITEID_INDICATOR_IV_0] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/iv.4bpp"),
+            .size = TILE_OFFSET_4BPP(64),
+            .tag = DEXNAV_SPRITETAG_IV,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/iv.gbapal"),
+            .tag = DEXNAV_PALTAG_IV,
+        },
+    },
+};
+
+static u8 Dexnav_CreateCompletionSprite(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_COMPLETION;
+    TempSpriteTemplate.callback = SpriteCallbackDummy;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_COMPLETION;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 8, 4, 0);
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].invisible = Dexnav_ShouldHideCompletionMark();
+    return spriteId;
+}
+
+static bool8 Dexnav_ShouldHideCompletionMark(void)
+{
+    for (enum DexnavHabitats habitat = 0; habitat < DEXNAV_HABITAT_COUNT; habitat++)
+    {
+        for (u32 speciesIndex = 0; speciesIndex < 20; speciesIndex++)
+        {
+            u32 species = sDexnavState->dexnavSpecies[habitat][speciesIndex];
+
+            if (species == SPECIES_NONE)
+                return FALSE;
+
+            if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT) == FALSE)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 static void Dexnav_VBlankCB(void)
 {
@@ -282,6 +396,18 @@ static void LoadGraphics(void)
         CopyToBgTilemapBuffer(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tilemap,0,0);
     }
     LoadDexnavPalettes();
+
+    for (u32 spriteId = 0; spriteId < DEXNAV_SPRITEIDS_COUNT; spriteId++)
+    {
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
+            continue;
+
+        DebugPrintf("spriteId %d",spriteId);
+        DebugPrintf("limit is %d",DEXNAV_SPRITEIDS_COUNT);
+
+        LoadSpriteSheets(&sDexnavSpriteSheets[spriteId].spriteSheet);
+        LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
+    }
 }
 
 static void LoadDexnavPalettes(void)
@@ -419,6 +545,7 @@ void Dexnav_SetupCallback(void)
             CreateTask(Task_HandleInput,0);
             Dexnav_LoadEncounterData();
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
+            Dexnav_CreateCompletionSprite();
             gMain.state++;
             break;
         case 3:

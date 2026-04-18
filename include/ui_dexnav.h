@@ -19,4 +19,10 @@ struct DexnavState
     u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][20];
 };
 
+struct DexnavSpriteSheet
+{
+  const struct SpriteSheet spriteSheet;
+  const struct SpritePalette palette;
+};
+
 #endif // GUARD_UI_DEXNAV_H
