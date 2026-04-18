@@ -2973,18 +2973,23 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BOTTLE_CAP] =
     {
         .name = ITEM_NAME("Bottle Cap"),
-        .price = (I_PRICE >= GEN_9) ? 20000 : 5000,
+        //.price = (I_PRICE >= GEN_9) ? 20000 : 5000,
         .description = COMPOUND_STRING(
                 "A beautiful bottle\n"
                 "cap that gives off\n"
                 "a silver gleam."),
-        .pocket = POCKET_ITEMS,
+        //.pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
         .iconPic = gItemIcon_BottleCap,
         .iconPalette = gItemIconPalette_BottleCap,
+        // Start siliconQuests
+        .price = 0,
+        .pocket = POCKET_KEY_ITEMS,
+        .importance = 1,
+        // End siliconQuests
     },
 
     [ITEM_GOLD_BOTTLE_CAP] =
@@ -22214,6 +22219,42 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Empty Boba Cup"),
         .price = 0,
         .description = COMPOUND_STRING("An empty plastic cup. It is sticky, and has a label with Cresalta Vista Boba printed onto the side."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_RED_SCALE] =
+    {
+        .name = ITEM_NAME("Red Scale"),
+        .price = 0,
+        .description = COMPOUND_STRING("A scale from a red Gyarados. It glows red like a flame."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_RedScale,
+        .iconPalette = gItemIconPalette_RedScale,
+    },
+    [ITEM_BLUESKY_MAIL] =
+    {
+        .name = ITEM_NAME("Bluesky Mail"),
+        .price = 0,
+        .description = COMPOUND_STRING("A fancy piece of stationery. It is bright blue with clouds and Pokemon on it."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_EGG_TICKET] =
+    {
+        .name = ITEM_NAME("Egg Ticket"),
+        .price = 0,
+        .description = COMPOUND_STRING("A worn out piece of paper with a picture of a Pokemon Egg on it."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
