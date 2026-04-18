@@ -2,6 +2,7 @@
 #define GUARD_UI_DEXNAV_H
 
 #include "constants/ui_dexnav.h"
+#include "constants/wild_encounter.h"
 
 void CB2_DexnavFromStartMenu(void);
 void Dexnav_FadescreenAndExitGracefully(void);
@@ -14,6 +15,8 @@ struct DexnavState
     enum DexnavMode mode;
     u8 spriteId[DEXNAV_SPRITEIDS_COUNT];
     u8 cursorSpriteId;
+    u8 numHabitatMons[DEXNAV_HABITAT_COUNT];
+    u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][20];
 };
 
 #endif // GUARD_UI_DEXNAV_H

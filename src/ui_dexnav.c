@@ -1,5 +1,7 @@
 #include "global.h"
 #include "dexnav.h"
+#include "wild_encounter.h"
+#include "string_util.h"
 #include "window.h"
 #include "palette.h"
 #include "task.h"
@@ -10,6 +12,7 @@
 #include "frontier_pass.h"
 #include "scanline_effect.h"
 #include "menu_helpers.h"
+#include "gpu_regs.h"
 #include "ui_start_menu.h"
 #include "options_visual.h"
 #include "sound.h"
@@ -31,6 +34,7 @@ static void Dexnav_SaveSpriteId(enum DexnavSpriteIds spriteId, u32 id);
 static u32 Dexnav_GetSpriteId(enum DexnavSpriteIds spriteId);
 static void Dexnav_ResetAllSpriteIds(void);
 static void HandleAndShowBgs(void);
+static void SetBackgroundTransparency(void);
 static void SetScheduleBgs(enum DexnavBackgrounds backgroundId);
 static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId);
 static void LoadGraphics(void);
@@ -46,7 +50,14 @@ static void Dexnav_InitializeAndSaveCallback(MainCallback callback);
 static void SaveCallbackToDexnav(MainCallback callback);
 static void Dexnav_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
+static void DisplayHelpBar(enum DexnavWindows windowId);
+static void Dexnav_SetMode(enum DexnavMode mode);
+static enum DexnavMode Dexnav_GetMode(void);
+static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId);
+static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
+static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
+static void Dexnav_LoadEncounterData(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -161,6 +172,12 @@ static const struct WindowTemplate sDexnavWindows[] =
     DUMMY_WIN_TEMPLATE
 };
 
+const u8 sDexnavWindowFontColors[DEXNAV_FONT_COLOR_COUNT][3] =
+{
+    [DEXNAV_FONT_COLOR_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
+    [DEXNAV_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
+};
+
 static void Dexnav_VBlankCB(void)
 {
     LoadOam();
@@ -213,6 +230,15 @@ static void HandleAndShowBgs(void)
         SetScheduleBgs(backgroundId);
         ShowBg(backgroundId);
     }
+    SetBackgroundTransparency();
+}
+
+static void SetBackgroundTransparency(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT1_BG1);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 6));
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
+    ShowBg(BG1_DEXNAV_WHEEL);
 }
 
 static void SetScheduleBgs(enum DexnavBackgrounds backgroundId)
@@ -391,11 +417,13 @@ void Dexnav_SetupCallback(void)
             break;
         case 2:
             CreateTask(Task_HandleInput,0);
+            Dexnav_LoadEncounterData();
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
             gMain.state++;
             break;
         case 3:
             Dexnav_InitWindows();
+            DisplayHelpBar(WIN_DEXNAV_HELP_BAR);
             gMain.state++;
             break;
         case 4:
@@ -498,4 +526,115 @@ static void Task_HandleInput(u8 taskId)
     {
         return;
     }
+}
+
+static void DisplayHelpBar(enum DexnavWindows windowId)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintHelpBarText(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static enum DexnavMode Dexnav_GetMode(void)
+{
+    return sDexnavState->mode;
+}
+
+static void Dexnav_SetMode(enum DexnavMode mode)
+{
+    sDexnavState->mode = mode;
+}
+
+static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
+{
+    u32 x = 4;
+    u32 y = 0;
+    u32 fontId = FONT_DEXNAV_HELPBAR;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+    bool32 isScanMode = (Dexnav_GetMode() == DEXNAV_MODE_SCAN);
+
+    if (isScanMode)
+        StringCopy(gStringVar4, COMPOUND_STRING("{A_BUTTON} Cancel Search {START_BUTTON} Return"));
+    else
+        StringCopy(gStringVar4, COMPOUND_STRING("{L_BUTTON} Pokedex {R_BUTTON} Register"));
+
+    if (Dexnav_HasMultipleHabitats())
+        StringAppend(gStringVar4,COMPOUND_STRING(" {SELECT_BUTTON} Switch Habitat"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static bool8 Dexnav_HasMultipleHabitats(void)
+{
+    u32 land = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND);
+    u32 water = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER);
+    
+    return ((land > 0) && (water > 0));
+}
+
+static void Dexnav_SaveNumberHabitatMons(enum DexnavHabitats habitat, u32 count)
+{
+    sDexnavState->numHabitatMons[habitat] = count;
+}
+
+static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat)
+{
+    return sDexnavState->numHabitatMons[habitat];
+}
+
+static bool32 Dexnav_SpeciesAlreadyInHabitat(u32 species, u32 habitat, u32 count)
+{
+    for (u32 i = 0; i < count; i++)
+    {
+        if (sDexnavState->dexnavSpecies[habitat][i] == species)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static u32 Dexnav_PopulateHabitat(const struct WildPokemonInfo *monsInfo, u32 wildCount, u32 habitat, u32 startCount)
+{
+    if (monsInfo == NULL || monsInfo->encounterRate == 0)
+        return startCount;
+
+    for (u32 i = 0; i < wildCount; i++)
+    {
+        u32 species = monsInfo->wildPokemon[i].species;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        if (Dexnav_SpeciesAlreadyInHabitat(species, habitat, startCount))
+            continue;
+
+        sDexnavState->dexnavSpecies[habitat][startCount++] = species;
+    }
+
+    return startCount;
+}
+
+static void Dexnav_LoadEncounterData(void)
+{
+    memset(sDexnavState->dexnavSpecies, 0, sizeof(sDexnavState->dexnavSpecies));
+
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
+    const struct WildPokemonInfo *monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+    u32 count = Dexnav_PopulateHabitat(monsInfo, LAND_WILD_COUNT, DEXNAV_HABITAT_LAND, 0);
+    Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, count);
+
+    timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER);
+    monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+    count = Dexnav_PopulateHabitat(monsInfo, WATER_WILD_COUNT, DEXNAV_HABITAT_WATER, 0);
+
+    if (QuestMenu_GetSetQuestState(QUEST_TEACHATRAINERTOFISH,FLAG_GET_INACTIVE) == FALSE)
+    {
+        timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING);
+        monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+        count = Dexnav_PopulateHabitat(monsInfo, FISH_WILD_COUNT, DEXNAV_HABITAT_WATER, count);
+    }
+    Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_WATER, count);
 }
