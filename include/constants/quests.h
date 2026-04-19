@@ -855,5 +855,16 @@ enum
     STATE_QUEST_FINDTHEGUILTY_COMPLETE,
 };
 
+// ***********************************************************************
+// Quest: Restore EspuleeOutskirts Gym
+// ***********************************************************************
+//#define QUEST_RESTOREESPULEEGYM_
+
+#define ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A ITEM_RED_SCALE
+#define ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B ITEM_BLUESKY_MAIL
+#define ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C ITEM_TEA
+#define ITEM_QUEST_RESTOREESPULEEGYM_ITEM_D ITEM_EGG_TICKET
+#define ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E ITEM_BOTTLE_CAP
+
 
 #endif // GUARD_CONSTANTS_QUESTS_H

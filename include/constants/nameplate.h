@@ -429,4 +429,6 @@ enum NameplatePhone
 #define NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET            60
 #define NAMEPLATE_MIDDLE_THIRD_ROW_TILE_OFFSET         (NAMEPLATE_TOP_THIRD_ROW_TILE_OFFSET +1)
 
+#define SPEAKER_PLAYER                                  SPEAKER_ALICIA
+
 #endif

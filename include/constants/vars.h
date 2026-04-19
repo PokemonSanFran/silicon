@@ -245,7 +245,6 @@
 #define VAR_WEATHER_INSTITUTE_STATE                      0x40B3
 #define VAR_QUEST_RESTOREHODOUGYM                      0x40B3 // PSF Var
 #define VAR_SS_TIDAL_STATE                               0x40B4
-#define VAR_QUEST_RESTOREESPULEEGYM                               0x40B4 // PSF Var
 #define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR              0x40B5
 #define VAR_QUEST_RESTOREZENZUGYM              0x40B5 // PSF Var
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2                 0x40B6 // Leftover from RS, never set

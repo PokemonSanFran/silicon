@@ -3625,3 +3625,11 @@ void Script_IsHalaiIslandUnderConstruction(void)
     gSpecialVar_Result = IsHalaiIslandUnderConstruction();
 }
 
+
+// ***********************************************************************
+// Quest: Restore Espulee Outskirts
+// ***********************************************************************
+
+static void Script_Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+{
+}
