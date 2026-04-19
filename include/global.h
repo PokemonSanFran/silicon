@@ -352,9 +352,9 @@ struct SaveBlock3
 #endif
     // Start dexNav
     /*
+     * Moved to SaveBlock2
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    //u8 dexNavSearchLevels[NUM_SPECIES];
-    u8 dexNavSearchLevels[RESIDO_DEX_COUNT];
+    u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
     */
     // End dexNav

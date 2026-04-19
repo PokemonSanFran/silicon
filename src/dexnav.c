@@ -794,8 +794,9 @@ static u8 GetSearchLevel(u16 species)
     return searchLevel;
 }
 */
-static u8 GetSearchLevel(u16 species)
+u8 GetSearchLevel(u32 species)
 {
+    species = ConvertSpeciesIdToResidoDex(species);
     return gSaveBlock2Ptr->dexNavSearchLevels[species];
 }
 // End dexNav

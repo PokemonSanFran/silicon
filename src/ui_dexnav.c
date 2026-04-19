@@ -1,5 +1,7 @@
 #include "global.h"
 #include "dexnav.h"
+#include "region_map.h"
+#include "text.h"
 #include "wild_encounter.h"
 #include "item_use.h"
 #include "string_util.h"
@@ -8,7 +10,9 @@
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
+#include "tv.h"
 #include "menu.h"
+#include "dexnav.h"
 #include "dma3.h"
 #include "bg.h"
 #include "frontier_pass.h"
@@ -64,6 +68,16 @@ static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
 static u8 Dexnav_CreateCompletionSprite(void);
 static void Dexnav_HandleHabitatHeader(void);
+static void DisplayHeaderName(enum DexnavWindows windowId);
+static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId);
+static u32 Dexnav_GetInsight(void);
+static void Dexnav_DisplayInsight(void);
+static void Dexnav_PrintInsight(enum DexnavWindows windowId);
+static void Dexnav_PrintStreak(enum DexnavWindows windowId);
+static void Dexnav_DisplayStreak(void);
+static void Dexnav_DisplayStarsInsight(void);
+static void Dexnav_DisplayStarsStreak(void);
+static void SpriteCB_Star(struct Sprite *sprite);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -160,7 +174,7 @@ static const struct WindowTemplate sDexnavWindows[] =
     {
         .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = 14,
+        .tilemapTop = 13,
         .width = 8,
         .height = 3,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
@@ -573,7 +587,12 @@ void Dexnav_SetupCallback(void)
         case 3:
             Dexnav_InitWindows();
             Dexnav_HandleHabitatHeader();
+            DisplayHeaderName(WIN_DEXNAV_HEADER);
             DisplayHelpBar(WIN_DEXNAV_HELP_BAR);
+            Dexnav_DisplayInsight();
+            Dexnav_DisplayStarsInsight();
+            Dexnav_DisplayStreak();
+            Dexnav_DisplayStarsStreak();
             gMain.state++;
             break;
         case 4:
@@ -710,7 +729,7 @@ static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
     else
         StringCopy(gStringVar4, COMPOUND_STRING("{L_BUTTON} Pokedex {R_BUTTON} Register"));
 
-    if (Dexnav_HasMultipleHabitats())
+    if ((Dexnav_HasMultipleHabitats()) && (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE))
         StringAppend(gStringVar4,COMPOUND_STRING(" {SELECT_BUTTON} Switch Habitat"));
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
@@ -832,3 +851,275 @@ static void Dexnav_HandleHabitatHeader(void)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
+static void DisplayHeaderName(enum DexnavWindows windowId)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintHeaderNameText(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId)
+{
+    u32 x = 27;
+    u32 y = 0;
+    u32 fontId = FONT_DEXNAV_HELPBAR;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    
+    if (Dexnav_ShouldHideCompletionMark())
+        x = 4;
+
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - x;
+
+    GetMapName(gStringVar4, gMapHeader.regionMapSectionId, 0);
+    fontId = GetFontIdToFit(gStringVar4,FONT_DEXNAV_HELPBAR,letterSpacing,windowWidth);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static u32 Dexnav_GetInsight(void)
+{
+// PSF TODO get mon highlighted by cursor, convert to resido species dex, return searchLevel
+    //
+    // prob write a function for getmonundercursor OR get currently scanned mon
+    return 255;
+    return GetSearchLevel(SPECIES_EISCUE);
+}
+
+static u32 Dexnav_GetStreak(void)
+{
+    return gSaveBlock3Ptr->dexNavChain;
+}
+
+static void Dexnav_DisplayInsight(void)
+{
+    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_INSIGHT;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintInsight(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void Dexnav_PrintInsight(enum DexnavWindows windowId)
+{
+    u32 x = 8;
+    u32 y = 8;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("INSIGHT"));
+    u32 insight = Dexnav_GetInsight();
+    x = 47;
+    y = 5;
+    
+    if (insight < UCHAR_MAX)
+        ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
+    else
+        StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static void Dexnav_DisplayStreak(void)
+{
+    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_STREAK;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintStreak(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void Dexnav_PrintStreak(enum DexnavWindows windowId)
+{
+    u32 x = 8;
+    u32 y = 4;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("STREAK"));
+    u32 streak = Dexnav_GetStreak();
+    x = 47;
+    y = 2;
+
+    if (streak < UCHAR_MAX)
+        ConvertIntToDecimalStringN(gStringVar4, streak, STR_CONV_MODE_LEFT_ALIGN, CountDigits(streak));
+    else
+        StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static const union AnimCmd sAnim_StarSmallEmpty[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_EMPTY,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarSmallHalf[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_HALF,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarSmallFull[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarSmallSparkle[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,24),
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_SPARKLE,24),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_StarSmallSparkle_Mid[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_SPARKLE,24),
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,24),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_StarBigEmpty[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_EMPTY,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarBigHalf[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_HALF,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarBigFull[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_StarBigSparkle[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,24),
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_SPARKLE,24),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_StarBigSparkle_Mid[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_SPARKLE,24),
+    ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,24),
+    ANIMCMD_JUMP(0),
+};
+
+
+static const union AnimCmd * const sAnims_Star[] =
+{
+    sAnim_StarSmallEmpty,
+    sAnim_StarSmallHalf,
+    sAnim_StarSmallFull,
+    sAnim_StarSmallSparkle,
+    sAnim_StarBigEmpty,
+    sAnim_StarBigHalf,
+    sAnim_StarBigFull,
+    sAnim_StarBigSparkle,
+    sAnim_StarSmallSparkle_Mid,
+    sAnim_StarBigSparkle_Mid,
+};
+
+static void SpriteCB_Star(struct Sprite *sprite)
+{
+    bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
+
+    s32 insight = sprite->data[0];
+    bool32 insightMax = (insight == UCHAR_MAX);
+
+    u32 position = sprite->data[1];
+    bool32 isCenter = (position == DEXNAV_STAR_CENTER);
+
+    u32 targetAnim;
+
+    if (insightMax && isCenter)
+    {
+        targetAnim = isBig ? DEXNAV_STAR_BIG_SPARKLE_MID : DEXNAV_STAR_SMALL_SPARKLE_MID;
+        StartSpriteAnimIfDifferent(sprite, targetAnim);
+        return;
+    }
+
+    if (insightMax)
+    {
+        targetAnim = isBig ? DEXNAV_STAR_BIG_SPARKLE : DEXNAV_STAR_SMALL_SPARKLE;
+        StartSpriteAnimIfDifferent(sprite, targetAnim);
+        return;
+    }
+
+    insight = (insight - (85 * position));
+
+    if (isBig)
+    {
+        if (insight > 84)
+            targetAnim = DEXNAV_STAR_BIG_FULL;
+        else if (insight < 1)
+            targetAnim = DEXNAV_STAR_BIG_EMPTY;
+        else
+            targetAnim = DEXNAV_STAR_BIG_HALF;
+    }
+    else
+    {
+        if (insight > 84)
+            targetAnim = DEXNAV_STAR_SMALL_FULL;
+        else if (insight < 1)
+            targetAnim = DEXNAV_STAR_SMALL_EMPTY;
+        else
+            targetAnim = DEXNAV_STAR_SMALL_HALF;
+    }
+
+    StartSpriteAnimIfDifferent(sprite, targetAnim);
+}
+
+static void Dexnav_DisplayStarsInsight(void)
+{
+    u32 state = DEXNAV_STAR_BIG_EMPTY;
+
+    for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
+    {
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+        TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
+        TempSpriteTemplate.callback = SpriteCB_Star;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
+        TempSpriteTemplate.anims = sAnims_Star;
+
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (14 * position)), 42, 0);
+        gSprites[spriteId].data[0] = Dexnav_GetInsight();
+        gSprites[spriteId].data[1] = position;
+        gSprites[spriteId].data[2] = state;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+        gSprites[spriteId].oam.priority = 0;
+    }
+}
+
+static void Dexnav_DisplayStarsStreak(void)
+{
+    u32 state = DEXNAV_STAR_BIG_EMPTY;
+
+    for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
+    {
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+        TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
+        TempSpriteTemplate.callback = SpriteCB_Star;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
+        TempSpriteTemplate.anims = sAnims_Star;
+
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (14 * position)), 129, 0);
+        gSprites[spriteId].data[0] = Dexnav_GetStreak();
+        gSprites[spriteId].data[1] = position;
+        gSprites[spriteId].data[2] = state;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+        gSprites[spriteId].oam.priority = 0;
+    }
+}
