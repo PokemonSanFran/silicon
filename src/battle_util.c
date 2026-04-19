@@ -1946,6 +1946,11 @@ bool32 HandleFaintedMonActions(void)
             gBattleStruct->eventState.faintedAction++;
             // fall through
         case FAINTED_ACTIONS_HANDLE_GET_STARTING_STATUS:
+            if (NoAliveMonsForEitherParty())
+            {
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_FAINTED_MON;
+                break;
+            }
             ResetStartingStatuses();
             do
             {
