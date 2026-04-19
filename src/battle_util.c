@@ -2701,7 +2701,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     switch (hazard)
     {
     case HAZARDS_SPIKES:
-        if (layers != 0 && layers >= gSideTimers[targetSide].spikesAmount)
+        if (layers != 0 && layers > gSideTimers[targetSide].spikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_SPIKES);
@@ -2710,7 +2710,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
         }
         break;
     case HAZARDS_TOXIC_SPIKES:
-        if (layers != 0 && layers >= gSideTimers[targetSide].toxicSpikesAmount)
+        if (layers != 0 && layers > gSideTimers[targetSide].toxicSpikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_TOXIC_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_TOXIC_SPIKES);
