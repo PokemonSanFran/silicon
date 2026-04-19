@@ -1,6 +1,7 @@
 #include "global.h"
 #include "dexnav.h"
 #include "wild_encounter.h"
+#include "item_use.h"
 #include "string_util.h"
 #include "pokedex.h"
 #include "window.h"
@@ -59,8 +60,10 @@ static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
+static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
 static u8 Dexnav_CreateCompletionSprite(void);
+static void Dexnav_HandleHabitatHeader(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -85,18 +88,16 @@ static const struct BgTemplate sDexnavBgTemplates[] =
     {
         .bg = BG2_DEXNAV_UI,
         .charBaseIndex = 2,
-        .mapBaseIndex = 28,
+        .mapBaseIndex = 29,
         .priority = 2,
     },
     [BG3_DEXNAV_BACKGROUNDS] =
     {
         .bg = BG3_DEXNAV_BACKGROUNDS,
         .charBaseIndex = 3,
-        .mapBaseIndex = 26,
+        .mapBaseIndex = 28,
         .priority = 2,
     },
-        /*
-        */
 };
 
 static const struct {
@@ -130,48 +131,57 @@ static const struct WindowTemplate sDexnavWindows[] =
 {
     [WIN_DEXNAV_HEADER] =
     {
-        .bg = BG0_WAVES_TEXT,
+        .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = 14,
         .height = 2,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_INTERFACE_INSIGHT] =
     {
-        .bg = BG0_WAVES_TEXT,
+        .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 2,
-        .width = 9,
-        .height = 5,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .width = 8,
+        .height = 3,
+        .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_INTERFACE_MON_INFO] =
     {
-        .bg = BG0_WAVES_TEXT,
+        .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = 7,
+        .tilemapTop = 8,
         .width = 9,
-        .height = 5,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .height = 2,
+        .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_INTERFACE_STREAK] =
     {
-        .bg = BG0_WAVES_TEXT,
+        .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
-        .tilemapTop = 12,
-        .width = 9,
-        .height = 5,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .tilemapTop = 14,
+        .width = 8,
+        .height = 3,
+        .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_HELP_BAR] =
     {
-        .bg = BG0_WAVES_TEXT,
+        .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 30,
         .height = 2,
-        .paletteNum = WAVES_PALETTE_TEXT_ID,
+        .paletteNum = DEXNAV_PALETTE_TEXT_ID,
+    },
+    [WIN_DEXNAV_HABITAT_HEADER] =
+    {
+        .bg = BG3_DEXNAV_BACKGROUNDS,
+        .tilemapLeft = 13,
+        .tilemapTop = 0,
+        .width = 17,
+        .height = 2,
+        .paletteNum = DEXNAV_PALETTE_HABITAT_ID,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -292,6 +302,16 @@ static bool8 Dexnav_ShouldHideCompletionMark(void)
     return FALSE;
 }
 
+static void Dexnav_SetHabitat(enum DexnavHabitats habitat)
+{
+    sDexnavState->habitat = habitat;
+}
+
+static enum DexnavHabitats Dexnav_GetHabitat(void)
+{
+    return sDexnavState->habitat;
+}
+
 static void Dexnav_VBlankCB(void)
 {
     LoadOam();
@@ -361,6 +381,8 @@ static void SetScheduleBgs(enum DexnavBackgrounds backgroundId)
     ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
+static const u32 sHabitatBackgounds[] = INCBIN_U32("graphics/ui_menus/dexnav/habitatHeader.4bpp");
+
 static const u16* const sDexnavPalettesLUT[] = 
 {
     [VISUAL_OPTION_COLOR_RED] = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/palettes/red.gbapal"),
@@ -377,6 +399,7 @@ static const u16* const sDexnavPalettesLUT[] =
 };
 
 static const u16 dexnavPalettesText[] = INCBIN_U16("graphics/ui_menus/dexnav/palettes/text.gbapal");
+static const u16 dexnavPalettesHabitat[] = INCBIN_U16("graphics/ui_menus/dexnav/habitatHeader.gbapal");
 
 static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId)
 {
@@ -402,9 +425,6 @@ static void LoadGraphics(void)
         if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
             continue;
 
-        DebugPrintf("spriteId %d",spriteId);
-        DebugPrintf("limit is %d",DEXNAV_SPRITEIDS_COUNT);
-
         LoadSpriteSheets(&sDexnavSpriteSheets[spriteId].spriteSheet);
         LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
     }
@@ -414,6 +434,7 @@ static void LoadDexnavPalettes(void)
 {
     LoadPalette(sDexnavPalettesLUT[GetVisualColor()], DEXNAV_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
     LoadPalette(dexnavPalettesText, DEXNAV_PALETTE_TEXT_SLOT, PLTT_SIZE_4BPP);
+    LoadPalette(dexnavPalettesHabitat, DEXNAV_PALETTE_HABITAT_SLOT, PLTT_SIZE_4BPP);
 }
 
 static void ClearWindowCopyToVram(enum DexnavWindows windowId)
@@ -544,12 +565,14 @@ void Dexnav_SetupCallback(void)
         case 2:
             CreateTask(Task_HandleInput,0);
             Dexnav_LoadEncounterData();
+            Dexnav_SetHabitat(Dexnav_CalculateInitialHabitat());
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
             Dexnav_CreateCompletionSprite();
             gMain.state++;
             break;
         case 3:
             Dexnav_InitWindows();
+            Dexnav_HandleHabitatHeader();
             DisplayHelpBar(WIN_DEXNAV_HELP_BAR);
             gMain.state++;
             break;
@@ -701,6 +724,23 @@ static bool8 Dexnav_HasMultipleHabitats(void)
     return ((land > 0) && (water > 0));
 }
 
+static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void)
+{
+    u32 land = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND);
+    u32 water = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER);
+
+    if (land > 0)
+        return DEXNAV_HABITAT_LAND;
+
+    if (water == 0)
+        return DEXNAV_HABITAT_NONE;
+
+    if (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE)
+        return DEXNAV_HABITAT_WATER;
+    else
+        return DEXNAV_HABITAT_NONE;
+}
+
 static void Dexnav_SaveNumberHabitatMons(enum DexnavHabitats habitat, u32 count)
 {
     sDexnavState->numHabitatMons[habitat] = count;
@@ -748,6 +788,14 @@ static void Dexnav_LoadEncounterData(void)
 
     u32 headerId = GetCurrentMapWildMonHeaderId();
 
+    if (headerId == HEADER_NONE)
+    {
+        u32 count = 0;
+        Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_WATER, count);
+        Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, count);
+        return;
+    }
+
     enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
     const struct WildPokemonInfo *monsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
     u32 count = Dexnav_PopulateHabitat(monsInfo, LAND_WILD_COUNT, DEXNAV_HABITAT_LAND, 0);
@@ -765,3 +813,22 @@ static void Dexnav_LoadEncounterData(void)
     }
     Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_WATER, count);
 }
+
+static void Dexnav_HandleHabitatHeader(void)
+{
+    enum DexnavWindows windowId = WIN_DEXNAV_HABITAT_HEADER;
+    u32 habitat = Dexnav_GetHabitat();
+
+    if ((habitat == DEXNAV_HABITAT_LAND) && (CanUseDigOrEscapeRopeOnCurMap()))
+        habitat = 3;
+
+    u32 tileOffset = habitat * DEXNAV_HABITAT_HEADER_WIDTH;
+
+    const u8* baseGfx = ((const u8*)sHabitatBackgounds) + tileOffset;
+
+    CopyToWindowPixelBuffer(windowId, baseGfx, DEXNAV_HABITAT_HEADER_WIDTH, 0);
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+

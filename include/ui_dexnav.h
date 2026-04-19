@@ -13,6 +13,7 @@ struct DexnavState
     void* savedCallback;
     u8 position;
     enum DexnavMode mode;
+    enum DexnavHabitats habitat;
     u8 spriteId[DEXNAV_SPRITEIDS_COUNT];
     u8 cursorSpriteId;
     u8 numHabitatMons[DEXNAV_HABITAT_COUNT];
