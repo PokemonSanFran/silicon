@@ -70,5 +70,6 @@ extern struct Cell **gMazeEndpoints;
 extern const struct TemplateSet gMazeTemplates[];
 
 void GenerateMazeLayoutSeed(void);
+void GenerateMazeItemsSeed(void);
 
 #endif // GUARD_MAZEGEN_H

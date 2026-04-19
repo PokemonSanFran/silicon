@@ -2077,7 +2077,7 @@ void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32 fontId, 
 
     for (u32 machineIndex = 0; machineIndex < NUM_TECHNICAL_MACHINES; machineIndex++)
     {
-        u32 machineId = ITEM_TM01 + machineIndex;
+        u32 machineId = ITEM_TM001 + machineIndex;
 
         if (PageMoves_GetMoveIdFromPosition(currentPosition) != GetItemSecondaryId(machineId))
             continue;
@@ -3198,6 +3198,8 @@ enum PokedexFormId ConvertSpeciesToFormTableEnum(u32 species)
             return POKEDEX_FORM_POLTEAGEIST;
         case SPECIES_HATTERENE:
             return POKEDEX_FORM_HATTERENE;
+        case SPECIES_EISCUE:
+            return POKEDEX_FORM_EISCUE;
         case SPECIES_COPPERAJAH:
             return POKEDEX_FORM_COPPERAJAH;
         case SPECIES_DURALUDON:
@@ -3951,8 +3953,10 @@ static void BufferWeatherName(u32 weather, u8* string)
                                      break;
         case ~B_WEATHER_STRONG_WINDS: StringCopy(string,COMPOUND_STRING("not windy"));
                                       break;
+        case B_WEATHER_ICY_ANY:
         case B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("snowing"));
                              break;
+        case ~B_WEATHER_ICY_ANY:
         case ~B_WEATHER_SNOW: StringCopy(string,COMPOUND_STRING("not snowing"));
                               break;
         case B_WEATHER_FOG: StringCopy(string,COMPOUND_STRING("foggy"));
@@ -3997,6 +4001,9 @@ static void PageForms_GenerateTransformString(u32 method, u32 param1, u32 param2
             CopyItemName(param1,gStringVar1);
             break;
         default:
+            StringCopy(gStringVar1,COMPOUND_STRING("REPLACE"));
+            StringCopy(gStringVar2,COMPOUND_STRING("REPLACE"));
+            StringCopy(gStringVar3,COMPOUND_STRING("REPLACE"));
             break;
     }
 }

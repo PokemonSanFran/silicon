@@ -1,10 +1,9 @@
 mapscripts GlavezHill_MapScripts {
-	MAP_SCRIPT_ON_RESUME 
+	MAP_SCRIPT_ON_RESUME
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restaurantexpansion2_HideStaffB_Script)
         call(Quest_NeighborhoodCleanUp3_ObjectVisibility_Script)
 		call(Quest_GardenCleanUp_HideObjects_Script)
     }
@@ -16,19 +15,6 @@ mapscripts GlavezHill_MapScripts {
 script GlavezHill_Mapreview
 {
     mappreview
-}
-
-script GlavezHeights_EventScript_Julia_Script
-{
-    trainerbattle_single(TRAINER_CHEF,gText_Julia_PreBattle,gText_Julia_PostBattle, Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
-       call(Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
-}
-
-text gText_Julia_PreBattle{
-	format("")
-}
-text gText_Julia_PostBattle{
-	format("")
 }
 
 script GlavezHeights_EventScript_006E7EFD

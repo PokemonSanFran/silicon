@@ -385,8 +385,39 @@ const u32 gObjectEventPic_RayquazaCutscene[] = INCBIN_U32("graphics/object_event
 const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
 
 // Start silicon
-const u32 gObjectEventPic_siliconPlayerF1NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f1/running.4bpp");
 const u16 gObjectEventPal_siliconPlayer[] = INCBIN_U16("graphics/object_events/palettes/siliconPlayer.gbapal");
+
+const u32 gObjectEventPic_siliconPlayerM1NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/m1/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerM1Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m1/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerM2NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/m2/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerM2Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m2/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerM3NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/m3/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerM3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/m3/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerF1NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f1/running.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/field_move.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/surfing.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/mach_bike.4bpp");
@@ -395,6 +426,16 @@ const u32 gObjectEventPic_siliconPlayerF1Fishing[] = INCBIN_U32("graphics/object
 const u32 gObjectEventPic_siliconPlayerF1Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/watering.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
 const u32 gObjectEventPic_siliconPlayerF1Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f1/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerF2NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f2/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerF2Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/underwater.4bpp");
 
 const u32 gObjectEventPic_siliconPlayerF3NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f3/running.4bpp");
 const u32 gObjectEventPic_siliconPlayerF3FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/field_move.4bpp");
@@ -406,15 +447,25 @@ const u32 gObjectEventPic_siliconPlayerF3Watering[] = INCBIN_U32("graphics/objec
 const u32 gObjectEventPic_siliconPlayerF3Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
 const u32 gObjectEventPic_siliconPlayerF3Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f3/underwater.4bpp");
 
-const u32 gObjectEventPic_siliconPlayerF2NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/f2/running.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/field_move.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/surfing.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/mach_bike.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/mach_bike.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/fishing.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/watering.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
-const u32 gObjectEventPic_siliconPlayerF2Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/f2/underwater.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/n1/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerN1Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n1/underwater.4bpp");
+
+const u32 gObjectEventPic_siliconPlayerN2NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/n2/running.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/field_move.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2Surfing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/surfing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2MachBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2AcroBike[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/mach_bike.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2Fishing[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/fishing.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2Watering[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/watering.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2Decorating[] = INCBIN_U32("graphics/object_events/pics/people/brendan/decorating.4bpp");
+const u32 gObjectEventPic_siliconPlayerN2Underwater[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n2/underwater.4bpp");
 
 const u32 gObjectEventPic_siliconPlayerN3NormalRunning[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/walking.4bpp", "graphics/object_events/pics/people/siliconPlayer/n3/running.4bpp");
 const u32 gObjectEventPic_siliconPlayerN3FieldMove[] = INCBIN_U32("graphics/object_events/pics/people/siliconPlayer/n3/field_move.4bpp");
@@ -572,14 +623,14 @@ const u32 gObjectEventPic_BeastBall[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_StrangeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_strange.4bpp");
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-const u32 gObjectEventPic_NewABall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewBBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewCBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewDBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewEBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewFBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewGBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
-const u32 gObjectEventPic_NewHBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_net.4bpp");
+const u32 gObjectEventPic_VitalityBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_vitality.4bpp");
+const u32 gObjectEventPic_PsycheBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_psyche.4bpp");
+const u32 gObjectEventPic_MineralBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_mineral.4bpp");
+const u32 gObjectEventPic_ElectroBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_electro.4bpp");
+const u32 gObjectEventPic_BogBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_bog.4bpp");
+const u32 gObjectEventPic_JetstreamBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_jetstream.4bpp");
+const u32 gObjectEventPic_FableBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_fable.4bpp");
+const u32 gObjectEventPic_ParadoxBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_paradox.4bpp");
 // End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
 
@@ -621,14 +672,14 @@ const u16 gObjectEventPal_BeastBall[] = INCBIN_U16("graphics/object_events/pics/
 const u16 gObjectEventPal_StrangeBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_strange.gbapal");
 #endif //ITEM_STRANGE_BALL
 // Start siliconNewBalls
-const u16 gObjectEventPal_NewABall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewBBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewCBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewDBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewEBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewFBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewGBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
-const u16 gObjectEventPal_NewHBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_net.gbapal");
+const u16 gObjectEventPal_VitalityBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_vitality.gbapal");
+const u16 gObjectEventPal_PsycheBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_psyche.gbapal");
+const u16 gObjectEventPal_MineralBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_mineral.gbapal");
+const u16 gObjectEventPal_ElectroBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_electro.gbapal");
+const u16 gObjectEventPal_BogBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_bog.gbapal");
+const u16 gObjectEventPal_JetstreamBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_jetstream.gbapal");
+const u16 gObjectEventPal_FableBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_fable.gbapal");
+const u16 gObjectEventPal_ParadoxBall[] = INCBIN_U16("graphics/object_events/pics/misc/ball_paradox.gbapal");
 // End siliconNewBalls
 #endif //OW_FOLLOWERS_POKEBALLS
 

@@ -1,6 +1,5 @@
 mapscripts Route14_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restaurantexpansion2_HideStaffA_Script)
         call(Quest_Restorehodoucity_HideBlackbelt_Route14_Script)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_13,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthQ)
     }
@@ -14,15 +13,4 @@ script Route14_EventScript_BlackbeltD{
         }
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
         end
-}
-
-script Route14_EventScript_Auguste_Script{
-    trainerbattle_single(TRAINER_HOSTESS,gText_Auguste_PreBattle,gText_Auguste_PostBattle,Quest_Restaurantexpansion2_TrainerA_PostBattle_Script)
-        call(Quest_Restaurantexpansion2_TrainerA_PostBattle_Script)
-}
-text gText_Auguste_PreBattle{
-	format("")
-}
-text gText_Auguste_PostBattle{
-	format("")
 }

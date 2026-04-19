@@ -1,6 +1,5 @@
 script EventScript_InstallWavesOfChangeApp
 {
-    //setflag(FLAG_SYS_APP_FUND)
     bufferstring(STR_VAR_1,"Waves of Change")
     call(EventScript_ObtainNewApp)
     return

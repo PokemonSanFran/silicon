@@ -64,22 +64,22 @@ extern const u16 gBallPal_Beast[];
 extern const u32 gBallGfx_Cherish[];
 extern const u16 gBallPal_Cherish[];
 // Start siliconNewBalls
-extern const u32 gBallGfx_NewA[];
-extern const u16 gBallPal_NewA[];
-extern const u32 gBallGfx_NewB[];
-extern const u16 gBallPal_NewB[];
-extern const u32 gBallGfx_NewC[];
-extern const u16 gBallPal_NewC[];
-extern const u32 gBallGfx_NewD[];
-extern const u16 gBallPal_NewD[];
-extern const u32 gBallGfx_NewE[];
-extern const u16 gBallPal_NewE[];
-extern const u32 gBallGfx_NewF[];
-extern const u16 gBallPal_NewF[];
-extern const u32 gBallGfx_NewG[];
-extern const u16 gBallPal_NewG[];
-extern const u32 gBallGfx_NewH[];
-extern const u16 gBallPal_NewH[];
+extern const u32 gBallGfx_Vitality[];
+extern const u16 gBallPal_Vitality[];
+extern const u32 gBallGfx_Psyche[];
+extern const u16 gBallPal_Psyche[];
+extern const u32 gBallGfx_Mineral[];
+extern const u16 gBallPal_Mineral[];
+extern const u32 gBallGfx_Electro[];
+extern const u16 gBallPal_Electro[];
+extern const u32 gBallGfx_Bog[];
+extern const u16 gBallPal_Bog[];
+extern const u32 gBallGfx_Jetstream[];
+extern const u16 gBallPal_Jetstream[];
+extern const u32 gBallGfx_Fable[];
+extern const u16 gBallPal_Fable[];
+extern const u32 gBallGfx_Paradox[];
+extern const u16 gBallPal_Paradox[];
 // End siliconNewBalls
 extern const u32 gOpenPokeballGfx[];
 
@@ -436,6 +436,24 @@ extern const u32 gItemIcon_BeastBall[];
 extern const u16 gItemIconPalette_BeastBall[];
 extern const u32 gItemIcon_CherishBall[];
 extern const u16 gItemIconPalette_CherishBall[];
+// Start siliconNewBalls
+extern const u32 gItemIcon_VitalityBall[];
+extern const u16 gItemIconPalette_VitalityBall[];
+extern const u32 gItemIcon_PsycheBall[];
+extern const u16 gItemIconPalette_PsycheBall[];
+extern const u32 gItemIcon_MineralBall[];
+extern const u16 gItemIconPalette_MineralBall[];
+extern const u32 gItemIcon_ElectroBall[];
+extern const u16 gItemIconPalette_ElectroBall[];
+extern const u32 gItemIcon_BogBall[];
+extern const u16 gItemIconPalette_BogBall[];
+extern const u32 gItemIcon_JetstreamBall[];
+extern const u16 gItemIconPalette_JetstreamBall[];
+extern const u32 gItemIcon_FableBall[];
+extern const u16 gItemIconPalette_FableBall[];
+extern const u32 gItemIcon_ParadoxBall[];
+extern const u16 gItemIconPalette_ParadoxBall[];
+// End siliconNewBalls
 // Medicine
 extern const u32 gItemIcon_Potion[];
 extern const u16 gItemIconPalette_Potion[];

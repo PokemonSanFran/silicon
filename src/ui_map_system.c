@@ -3729,18 +3729,18 @@ static u8 HandleWarpCloseMenu(void)
         case 1:
             if (!gPaletteFade.active)
             {
-            if (sCurrentMapMode == MAP_MODE_FLY_POKEMON)
-                ReturnToFieldFromFlyMapSelect();
-            else
-                MapSystem_FreeResources();
+                if (sCurrentMapMode == MAP_MODE_FLY_POKEMON)
+                    ReturnToFieldFromFlyMapSelect();
+                else
+                {
+                    if (PlayerHasFollowerNPC())
+                        ClearFollowerNPCData();
 
-            if (PlayerHasFollowerNPC())
-                ClearFollowerNPCData();
+                    ReturnToFieldFromRegionMapWarpSelect();
 
-            ReturnToFieldFromRegionMapWarpSelect();
-
-                MapSystem_FreeResources();
-                sRegionMap->warpCounter = 2;
+                    MapSystem_FreeResources();
+                    sRegionMap->warpCounter = 2;
+                }
             }
             break;
     }

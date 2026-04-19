@@ -1,5 +1,7 @@
-mapscripts Route8_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
+mapscripts Route8_MapScripts
+    {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_2,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerB)
     }
 }

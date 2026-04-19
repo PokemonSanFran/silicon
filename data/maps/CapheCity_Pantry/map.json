@@ -16,7 +16,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
-      "x": 1,
+      "x": 5,
       "y": 1,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
@@ -40,26 +40,82 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Restaurantexpansion_Script_InteractBelen",
       "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_FLOWERS_RESTAURANTEXPANSIONHOSTESS",
+      "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONHOSTESS",
+      "x": 13,
+      "y": 27,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Restaurantexpansion2_Interact_Restaurantexpansionhostess",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_FLOWERS_RESTAURANTEXPANSIONCHEF",
+      "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONCHEF",
+      "x": 10,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Restaurantexpansion2_Interact_Restaurantexpansionchef_QuestIncomplete",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_FLOWERS_RESTAURANTEXPANSIONLINECOOK",
+      "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONLINECOOK",
+      "x": 3,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Restaurantexpansion2_Interact_Restaurantexpansionlinecook",
+      "flag": "FLAG_TEMP_4"
+    },
+    {
+      "local_id": "LOCALID_FLOWERS_RESTAURANTEXPANSIONBUSSER",
+      "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONBUSSER",
+      "x": 3,
+      "y": 12,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_BUS_TABLES",
+      "movement_range_x": 15,
+      "movement_range_y": 15,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Restaurantexpansion2_Interact_Restaurantexpansionbusser",
+      "flag": "FLAG_TEMP_5"
     }
   ],
   "warp_events": [
     {
-      "x": 3,
-      "y": 7,
+      "x": 12,
+      "y": 29,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
       "dest_warp_id": "2"
     },
     {
-      "x": 1,
-      "y": 1,
+      "x": 5,
+      "y": 2,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY_PANTRY_MAZE",
       "dest_warp_id": "0"
     },
     {
-      "x": 4,
-      "y": 7,
+      "x": 13,
+      "y": 29,
       "elevation": 0,
       "dest_map": "MAP_CAPHE_CITY",
       "dest_warp_id": "2"

@@ -46,5 +46,6 @@ bool32 CheckPartyHasSpecies(u32);
 u16 GetFrontierBattlePoints(void); // siliconMerge
 bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);
+void RandomlyBoostPartyMemberFriendship(void); // siliconQuests
 
 #endif // GUARD_FIELD_SPECIALS_H

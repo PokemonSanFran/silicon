@@ -1970,6 +1970,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/stresscup.inc"
 .include "data/quests/diggingupadaorasdirt.inc"
 .include "data/quests/freetheinnocent.inc"
+.include "data/quests/findtheguilty.inc"
 ## SILICON MAPS
 .include "data/maps/AnbehBend/scripts.inc"
 .include "data/maps/Arantraz/scripts.inc"

@@ -6022,6 +6022,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggMoveLearnset = sEiscueEggMoveLearnset,
         .formSpeciesIdTable = sEiscueFormSpeciesIdTable,
         .formChangeTable = sEiscueFormChangeTable,
+        .residoDexNum = RESIDO_DEX_EISCUE,
     },
 
     [SPECIES_EISCUE_NOICE] =
@@ -6079,6 +6080,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .eggMoveLearnset = sEiscueEggMoveLearnset,
         .formSpeciesIdTable = sEiscueFormSpeciesIdTable,
         .formChangeTable = sEiscueFormChangeTable,
+        .residoDexNum = RESIDO_DEX_EISCUE,
     },
 #endif //P_FAMILY_EISCUE
 
@@ -8160,7 +8162,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .levelUpLearnset = sUrshifuRapidStrikeLevelUpLearnset,
         .teachableLearnset = sUrshifuRapidStrikeTeachableLearnset,
         .formSpeciesIdTable = sUrshifuFormSpeciesIdTable,
-        .formChangeTable = sUrshifuRapidStrikeFormChangeTable, 
+        .formChangeTable = sUrshifuRapidStrikeFormChangeTable,
     },
 #endif //P_MEGA_EVOLUTIONS
 // End siliconMerge

@@ -46207,19 +46207,19 @@
             "encounter_rate": 30,
             "mons": [
               {
-                "min_level": 67,
-                "max_level": 67,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 67,
-                "max_level": 67,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 67,
-                "max_level": 67,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 67,
@@ -46267,14 +46267,14 @@
                 "species": "SPECIES_SEALEO"
               },
               {
-                "min_level": 68,
-                "max_level": 68,
-                "species": "SPECIES_SEALEO"
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 68,
-                "max_level": 68,
-                "species": "SPECIES_SEALEO"
+                "min_level": 69,
+                "max_level": 69,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 69,
@@ -46304,7 +46304,7 @@
               {
                 "min_level": 69,
                 "max_level": 69,
-                "species": "SPECIES_CRAMORANT"
+                "species": "SPECIES_EISCUE"
               }
             ]
           },
@@ -55833,19 +55833,19 @@
             "encounter_rate": 30,
             "mons": [
               {
-                "min_level": 73,
-                "max_level": 75,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 79,
+                "max_level": 80,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 73,
-                "max_level": 75,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 79,
+                "max_level": 80,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 73,
-                "max_level": 75,
-                "species": "SPECIES_SPHEAL"
+                "min_level": 79,
+                "max_level": 80,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 73,
@@ -55898,9 +55898,9 @@
                 "species": "SPECIES_SEALEO"
               },
               {
-                "min_level": 76,
-                "max_level": 78,
-                "species": "SPECIES_SEALEO"
+                "min_level": 79,
+                "max_level": 80,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 79,
@@ -55930,7 +55930,7 @@
               {
                 "min_level": 79,
                 "max_level": 80,
-                "species": "SPECIES_CRAMORANT"
+                "species": "SPECIES_EISCUE"
               }
             ]
           },
@@ -61373,64 +61373,64 @@
             "encounter_rate": 4,
             "mons": [
               {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 40,
-                "max_level": 42,
-                "species": "SPECIES_SEEL"
-              },
-              {
-                "min_level": 43,
+                "min_level": 44,
                 "max_level": 45,
-                "species": "SPECIES_DEWGONG"
+                "species": "SPECIES_EISCUE"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_EISCUE"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_EISCUE"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_EISCUE"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_SEEL"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 43,
@@ -80920,19 +80920,19 @@
             "encounter_rate": 4,
             "mons": [
               {
-                "min_level": 61,
-                "max_level": 63,
-                "species": "SPECIES_VANILLITE"
+                "min_level": 67,
+                "max_level": 68,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 61,
-                "max_level": 63,
-                "species": "SPECIES_VANILLITE"
+                "min_level": 67,
+                "max_level": 68,
+                "species": "SPECIES_EISCUE"
               },
               {
-                "min_level": 61,
-                "max_level": 63,
-                "species": "SPECIES_VANILLITE"
+                "min_level": 67,
+                "max_level": 68,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 61,
@@ -80990,9 +80990,9 @@
                 "species": "SPECIES_VANILLISH"
               },
               {
-                "min_level": 64,
-                "max_level": 66,
-                "species": "SPECIES_VANILLISH"
+                "min_level": 67,
+                "max_level": 68,
+                "species": "SPECIES_EISCUE"
               },
               {
                 "min_level": 61,
