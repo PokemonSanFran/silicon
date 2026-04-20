@@ -44,16 +44,20 @@ enum FlyEncounterTypes GetFlyEncounterType(void)
     if (Quest_FlightPatterns_GetFlightPath())
         return Quest_FlightPatterns_GetEncounterType(steps,isLure);
 
-    if (!DoesDestinationHaveFlyMons())
-        return FLY_ENCOUNTER_NONE;
+    enum FlyEncounterTypes encounterType = FLY_ENCOUNTER_NONE;
+    gSpecialVar_Result = encounterType;
 
-    u32 encounterType = FLY_ENCOUNTER_NONE;
+    if (!DoesDestinationHaveFlyMons())
+        return encounterType;
+
+    if (steps && !isLure)
+        return encounterType;
 
     if ((Random() % 100) < FLY_ENCOUNTER_RATE)
         encounterType = FLY_ENCOUNTER_ATTACK;
 
-    if (steps)
-        encounterType = (isLure) ? FLY_ENCOUNTER_ATTACK : FLY_ENCOUNTER_NONE;
+    if (steps && isLure)
+        encounterType = FLY_ENCOUNTER_ATTACK;
 
     if (TryGenerateWildMon(GetHeaderFlyMonsInfo(), 5, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == FALSE)
         encounterType = FLY_ENCOUNTER_NONE;
