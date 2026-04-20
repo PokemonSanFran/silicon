@@ -13,7 +13,7 @@ mapscripts EspuleeOutskirts_MapScripts {
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_HideImelda)
-        call_if_eg(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_MoveImelda)
+        call_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_MoveImelda)
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
@@ -95,7 +95,7 @@ script EspuleeOutskirts_Script_InteractImelda
     faceplayer
     goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_ImeldaReward)
     goto_if_quest_active(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_ImeldaActive)
-    goto_if_eg(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_StartQuest)
+    goto_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_StartQuest)
     goto(EspuleeOutskirts_Dialogue_Imelda)
 }
 

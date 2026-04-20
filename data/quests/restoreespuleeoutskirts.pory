@@ -15,7 +15,7 @@ script Quest_Restoreespuleeoutskirts_Script_MoveImelda
 script Quest_Restoreespuleeoutskirts_Script_StartQuest
 {
     msgbox(format("Hello. Kai said you'd be along."),,SPEAKER_IMELDA)
-    checkitemspace(ITEM_RED_SCALE,1)
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
     if (var(VAR_RESULT) == FALSE)
     {
         msgbox(format("Make some space in your bag for something important, please."),,SPEAKER_IMELDA)
@@ -26,9 +26,9 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
     msgbox(format("Hi! Imelda, right? I'm helping Kai with his project."),,SPEAKER_PLAYER)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop! ... But - that doesn't matter right now."),,SPEAKER_IMELDA)
-    msgbox(format("I was quite serious about what I told Kai. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the Sharprise acquisition."),,SPEAKER_IMELDA)
+    msgbox(format("I was quite serious about what I told Kai. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the SharpRise acquisition."),,SPEAKER_IMELDA)
     msgbox(format("Oh, uh - I think we wanted to improve the current system certainly -"),,SPEAKER_PLAYER)
-    msgbox(format("Building on top of Sharprise's monstrosity won't be progress at all. A crude sort of bricolage without any of the grace."),,SPEAKER_IMELDA)
+    msgbox(format("Building on top of SharpRise's monstrosity won't be progress at all. A crude sort of bricolage without any of the grace."),,SPEAKER_IMELDA)
     msgbox(format("Y-you wouldn't want to just start helping as soon as possible?"),,SPEAKER_PLAYER)
     msgbox(format("Kai has a plan to help trainers today!"),,SPEAKER_PLAYER)
     msgbox(format("I know we can make it happen with or without you, but I think your help would go a long way."),,SPEAKER_PLAYER)
@@ -43,20 +43,22 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
     waitmovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
     msgbox(format("I'm still not sure I have a place in this new world order."),,SPEAKER_IMELDA)
     msgbox(format("I'll never let go of my roots. But do my roots have a place in the current climate? ..."),,SPEAKER_IMELDA)
-    bufferspeciesname(STR_VAR_1,SPECIES_WYRDEER)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("Are you familiar with the Pokemon {STR_VAR_1}? I want you to bring one to me."),,SPEAKER_IMELDA)
     closemessage
-    cueobjectplayer(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
-    giveitem(ITEM_RED_SCALE,1)
-    bufferitemplural(STR_VAR_3,ITEM_RED_SCALE,2)
+    call(Quest_Restoreespuleeoutskirts_Script_GiveRedScale)
+    bufferitemnameplural(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,2)
     msgbox(format("{STR_VAR_3} used to be rare, but now that we have a better understanding of Shiny Pokemon, they're rather common."),,SPEAKER_IMELDA)
-    bufferitemname(STR_VAR_3,ITEM_RED_SCALE)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("Use that {STR_VAR_3} to come back to me with a {STR_VAR_1}."),,SPEAKER_IMELDA)
     bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("Uh, this is from a {STR_VAR_2}. How is this gonna help me find a {STR_VAR_1}?"),,SPEAKER_PLAYER)
     msgbox(format("Resido used to be a place where trainers could make something from nothing. If that's still true, this should be easy."),,SPEAKER_IMELDA)
     closemessage
     startquest(QUEST_RESTOREESPULEEGYM)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("... And any {STR_VAR_1} will do?"),,SPEAKER_ALICIA)
     msgbox(format("Yes."),,SPEAKER_IMELDA)
     msgbox(format("Alright then..."),,SPEAKER_PLAYER)
@@ -73,9 +75,183 @@ script Quest_Restoreespuleeoutskirts_Dialogue_DiscussSwap
 
 script Quest_Restoreespuleeoutskirts_Script_ImeldaActive
 {
+    callnative(Script_DoesBoxMonOrPartyHaveWyrdeer)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        goto(Quest_Restoreespuleeoutskirts_Dialogue_AskWyrdeer)
+    }
+
     callnative(Script_Quest_Restoreespuleeoutskirts_CheckForAllItems)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(Quest_Restoreespuleeoutskirts_Script_OfferRedScale)
+    }
+
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    msgbox(format("Use that {STR_VAR_1} to come back to me with a {STR_VAR_2}."),,SPEAKER_IMELDA)
+    msgbox(format("Resido used to be a place where trainers could make something from nothing. If that's still true, this should be easy."),,SPEAKER_IMELDA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Script_OfferRedScale
+{
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    msgbox(format("Are you in need of an additional {STR_VAR_1}?"),,SPEAKER_IMELDA)
+    msgbox(format("It's no matter. They're easy to come by."),,SPEAKER_IMELDA)
+
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Make some room in your bag for me, please."),,SPEAKER_IMELDA)
+    }
+    else
+    {
+        call(Quest_Restoreespuleeoutskirts_Script_GiveRedScale)
+    }
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Script_GiveRedScale
+{
+    cueobjectplayer(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_AskWyrdeer
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+   callnative(Script_CanPlayerGiveUpWrydeer)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I'm impressed with your exploits! But I want the {STR_VAR_1} for myself."),,SPEAKER_IMELDA)
+        msgbox(format("Come back to me when you have more healthy Pokemon in your party than just the {STR_VAR_1}."),,SPEAKER_IMELDA)
+        closemessage
+        release
+        end
+    }
+    msgbox(format("So, completed the trades and got a {STR_VAR_1}, did you? Let's see it."),,SPEAKER_IMELDA)
+    goto(Quest_Restoreespuleeoutskirts_Script_StartEval)
+}
+
+script Quest_Restoreespuleeoutskirts_Script_StartEval
+{
+    closemessage
+    setvar(VAR_0x8009,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    goto(Quest_Restoreespuleeoutskirts_Script_JudgeWrydeer)
+}
+
+script Quest_Restoreespuleeoutskirts_Script_JudgeWrydeer
+{
+    callnative(Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN: goto(Quest_Restoreespuleeoutskirts_Dialogue_Cancel)
+        case QUEST_RESTOREESPULEEGYM_INVALID_MON: goto(Quest_Restoreespuleeoutskirts_Dialogue_WrongFamily)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER: goto(Quest_Restoreespuleeoutskirts_Dialogue_IsStantler)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH: goto(Quest_Restoreespuleeoutskirts_Dialogue_IsStantlerWithPsyshieldBash)
+        case QUEST_RESTOREESPULEEGYM_IS_WYRDEER: goto(Quest_Restoreespuleeoutskirts_Dialogue_AskForMon)
+    }
+    goto(Quest_Restoreespuleeoutskirts_Dialogue_Cancel)
+
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_WrongFamily
+{
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    msgbox(format("N-no…This is not a {STR_VAR_2}. I thought you were a Pokémon trainer?"),,SPEAKER_IMELDA,,EMOTE_CONFUSE)
+    goto(Quest_Restoreespuleeoutskirts_Script_StartEval)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_IsStantler
+{
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    msgbox(format("Ha…Hahahahaha! Oh I'd be insulted if I weren't so amused! Nice try. Bring me back an actual {STR_VAR_2} or don't bother."),,SPEAKER_IMELDA,,EMOTE_LAUGH)
+    goto(Quest_Restoreespuleeoutskirts_Script_StartEval)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_IsStantlerWithPsyshieldBash
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    msgbox(format("Hm, nice try. You're actually close, but the ancient 'Agile Style' has been lost to time…I need a {STR_VAR_2}, not a {STR_VAR_1}."),,SPEAKER_IMELDA)
+    goto(Quest_Restoreespuleeoutskirts_Script_StartEval)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_AskForMon
+{
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    askplayermon(format("I'm impressed with your exploits! But I want the {STR_VAR_2} for myself. May I take {STR_VAR_1} off you in perpetuity?"),format("Come back when the time is right, then."),format("Come back to me when you have more healthy Pokemon than just the {STR_VAR_2}."),SPEAKER_IMELDA)
+    goto(Quest_Restoreespuleeoutskirts_Dialogue_ImeldaReward)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_Cancel
+{
+    msgbox(format("Come back when the time is right, then."),,SPEAKER_IMELDA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_ImeldaReward
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTOREESPULEEGYM)
+    msgbox(format("Well, well, well. For a few reasons, I didn't think you'd pull through!"),,SPEAKER_IMELDA)
+    msgbox(format("I wasn't sure this region could still support such an evolution…"),,SPEAKER_IMELDA)
+    msgbox(format("Wyrdeer have been all but extinct in Resido for some time now."),,SPEAKER_IMELDA)
+    msgbox(format("You should know I haven't been doing nothing while you've been gone."),,SPEAKER_IMELDA)
+    msgbox(format("In fact, I've been making some calls to my old network."),,SPEAKER_IMELDA)
+    msgbox(format("To my surprise, everyone's been rather receptive to the idea…"),,SPEAKER_IMELDA)
+    msgbox(format("Between that and your trading prowess, it seems Resido still has some surprises left in it…"),,SPEAKER_IMELDA)
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("Therefore, I think the Espulee Outskirts Gym may still have some life in it as well! As the {STR_VAR_1} Swap Meet!"),,SPEAKER_IMELDA)
+    msgbox(format("Of course, I won't be 100% sure until I can test myself against you… Battler's instincts, I'm sure you understand."),,SPEAKER_IMELDA)
+    msgbox(format("So let's have a battle, shall we? Come talk to me when you're ready."),,SPEAKER_IMELDA)
+    closemessage
+    release
+    end
 }
 
 script Quest_Restoreespuleeoutskirts_Script_ImeldaReward
 {
+    msgbox(format("As our region's Champion, I'm sure you know…"),,SPEAKER_IMELDA)
+    msgbox(format(" In the old Resido League, all would-be champions would have to go through me!"),,SPEAKER_IMELDA)
+    closemessage
+    trainerbattle_no_intro(TRAINER_IMELDA,format("Ha, this new generation may not be so bad after all."))
+    goto(Quest_Restoreespuleeoutskirts_Dialogue_PostBattle)
+// PSF TODO Ahh, now it feels like the good old days…
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_PostBattle
+{
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("What a fine Champion you are indeed. That you're backing this reform gives it a lot of legitimacy, I think."),,SPEAKER_IMELDA)
+    msgbox(format("Heh, well, ironically you gotta hand it to SharpRise on that front. I think it's the Kickstart program that made me like this."),,SPEAKER_PLAYER)
+    msgbox(format("And all that power will be turned against them as we usher in all the things they destroyed back into Resido."),,SPEAKER_IMELDA)
+    msgbox(format("Yeah. I mean things don't have to be exactly as they were, though…"),,SPEAKER_PLAYER)
+    msgbox(format("Well, the {STR_VAR_1} Gym is now the Swap Meet. Is that not change enough? Do you not suspect the other Gym Leaders will want things as they used to be?"),,SPEAKER_IMELDA)
+    msgbox(format("I can't speak for them, and I'm glad you're willing to at least tinker with the format a little, but I just think your expectations might be a little stale."),,SPEAKER_PLAYER)
+    msgbox(format("The Gym Leaders are wise. They'll see value in tradition I'm sure. That there's nothing to be gained from building atop SharpRise's rotten foundations."),,SPEAKER_IMELDA)
+    msgbox(format("You weren't here, {PLAYER}, you wouldn't know what the Resido league was like, how distinguished its competition was."),,SPEAKER_IMELDA)
+    msgbox(format("I wasn't here, but I'm here now. I see the value in both the old and the new. I think maybe the Gym Leaders might too. I hope you won't push back if any of them want to retain any of SharpRise's ideas."),,SPEAKER_PLAYER)
+    msgbox(format("To be frank, the idea disgusts me, and it'll be hard to hold my tongue."),,SPEAKER_IMELDA)
+    msgbox(format("But I respect you, and I trust you."),,SPEAKER_IMELDA)
+    msgbox(format("So I shall get to work establishing the Swap Meet for now. I'll focus on myself. I'll see you around, I'm sure."),,SPEAKER_IMELDA)
+    closemessage
+    completequest(QUEST_RESTOREESPULEEGYM)
+    opendoor(12,17)
+    moveobjecttocoords(LOCALID_ESPULEE_OUTSKIRTS_IMELDA,12,17,DIR_NORTH)
+    waitmovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
+    playse(SE_EXIT)
+    removeobject(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
+    waitse
+    closedoor(12,17)
+    release
+    end
 }

@@ -3630,6 +3630,87 @@ void Script_IsHalaiIslandUnderConstruction(void)
 // Quest: Restore Espulee Outskirts
 // ***********************************************************************
 
-static void Script_Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+static const u16 questRestoreEspuleeGymItems[] =
 {
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A ,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_D,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,
+};
+
+static bool8 Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+{
+    for (u32 questItemIndex = 0; questItemIndex < ARRAY_COUNT(questRestoreEspuleeGymItems) ; questItemIndex++)
+    {
+        if (CheckBagHasItem(questRestoreEspuleeGymItems[questItemIndex],1))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void Script_Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+{
+    gSpecialVar_Result = Quest_Restoreespuleeoutskirts_CheckForAllItems();
+}
+
+static bool8 DoesBoxMonOrPartyHaveWyrdeer(void)
+{
+    if (CheckPartyHasSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        return TRUE;
+
+    return (CheckBoxesForSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+}
+
+void Script_DoesBoxMonOrPartyHaveWyrdeer(void)
+{
+    gSpecialVar_Result = DoesBoxMonOrPartyHaveWyrdeer();
+}
+
+static bool8 CanPlayerGiveUpWrydeer(void)
+{
+    if (CheckBoxesForSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        return TRUE;
+
+    return (GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS);
+}
+
+void Script_CanPlayerGiveUpWrydeer(void)
+{
+    gSpecialVar_Result = CanPlayerGiveUpWrydeer();
+}
+
+u8 Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
+{
+    struct Pokemon *pokemon = NULL;
+    struct Pokemon tempMon;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        BoxMonToMon(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &tempMon);
+        pokemon = &tempMon;
+    }
+    else
+    {
+        pokemon = &gPlayerParty[gSpecialVar_0x8004];
+    }
+
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
+    else if (GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        return QUEST_RESTOREESPULEEGYM_INVALID_MON;
+    else if (GetMonData(pokemon, MON_DATA_SPECIES) == SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+        return QUEST_RESTOREESPULEEGYM_IS_WYRDEER;
+
+    else if (GetMonData(pokemon, MON_DATA_SPECIES) != SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+        return QUEST_RESTOREESPULEEGYM_INVALID_MON;
+    else if (MonKnowsMove(pokemon, MOVE_PSYSHIELD_BASH))
+        return QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH;
+    else
+        return QUEST_RESTOREESPULEEGYM_IS_STANTLER;
+}
+
+void Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
+{
+    gSpecialVar_Result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
 }
