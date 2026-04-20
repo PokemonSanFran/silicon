@@ -1949,6 +1949,11 @@ bool32 HandleFaintedMonActions(void)
             // fall through
 // Start bdHazards
         case FAINTED_ACTIONS_HANDLE_GET_STARTING_STATUS:
+            if (NoAliveMonsForEitherParty())
+            {
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_FAINTED_MON;
+                break;
+            }
             ResetStartingStatuses();
             do
             {
@@ -2707,8 +2712,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     switch (hazard)
     {
     case HAZARDS_SPIKES:
-        //if (layers != 0) // bdHazards
-        if (layers != 0 && layers >= gSideTimers[targetSide].spikesAmount)
+        if (layers != 0 && layers > gSideTimers[targetSide].spikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_SPIKES);
@@ -2717,8 +2721,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
         }
         break;
     case HAZARDS_TOXIC_SPIKES:
-        //if (layers != 0) // bdHazards
-        if (layers != 0 && layers >= gSideTimers[targetSide].toxicSpikesAmount)
+        if (layers != 0 && layers > gSideTimers[targetSide].toxicSpikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_TOXIC_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_TOXIC_SPIKES);
