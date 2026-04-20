@@ -245,13 +245,17 @@ script Quest_Restoreespuleeoutskirts_Dialogue_PostBattle
     msgbox(format("So I shall get to work establishing the Swap Meet for now. I'll focus on myself. I'll see you around, I'm sure."),,SPEAKER_IMELDA)
     closemessage
     completequest(QUEST_RESTOREESPULEEGYM)
+    applymovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA,moves(face_up))
     opendoor(12,17)
+    waitdooranim
+    waitmovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
     moveobjecttocoords(LOCALID_ESPULEE_OUTSKIRTS_IMELDA,12,17,DIR_NORTH)
     waitmovement(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
-    playse(SE_EXIT)
     removeobject(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
+    playse(SE_EXIT)
     waitse
     closedoor(12,17)
+    waitdooranim
     release
     end
 }
