@@ -2,6 +2,7 @@
 #include "dexnav.h"
 #include "region_map.h"
 #include "text.h"
+#include "trainer_pokemon_sprites.h"
 #include "wild_encounter.h"
 #include "item_use.h"
 #include "string_util.h"
@@ -21,6 +22,7 @@
 #include "gpu_regs.h"
 #include "ui_start_menu.h"
 #include "options_visual.h"
+#include "pokemon_icon.h"
 #include "sound.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -29,6 +31,7 @@
 #include "ui_dexnav.h"
 #include "ui_adventure_guide.h"
 #include "event_data.h"
+#include "battle.h"
 
 static void Dexnav_VBlankCB(void);
 static void Dexnav_MainCB(void);
@@ -71,13 +74,26 @@ static void Dexnav_HandleHabitatHeader(void);
 static void DisplayHeaderName(enum DexnavWindows windowId);
 static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId);
 static u32 Dexnav_GetInsight(void);
+static u32 Dexnav_GetCurrentlySelectedSpecies(void);
 static void Dexnav_DisplayInsight(void);
 static void Dexnav_PrintInsight(enum DexnavWindows windowId);
 static void Dexnav_PrintStreak(enum DexnavWindows windowId);
 static void Dexnav_DisplayStreak(void);
 static void Dexnav_DisplayStarsInsight(void);
 static void Dexnav_DisplayStarsStreak(void);
+static void Dexnav_DisplayMonInfo(void);
+static void Dexnav_PrintMonInfo(enum DexnavWindows windowId);
 static void SpriteCB_Star(struct Sprite *sprite);
+static void Dexnav_PrintMonTypes(void);
+static void Dexnav_PrintFishingIcon(void);
+static u32 Dexnav_GetCursorPosition(void);
+static bool8 Dexnav_IsSelectedMonNotFishingMon(void);
+static void SpriteCB_DexnavFishing(struct Sprite *sprite);
+static void Dexnav_DisplaySelectedMon(void);
+static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex);
+static void Dexnav_PrintFloatingActionButton(void);
+static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex);
+static void Dexnav_DisplayAllHabitatPokemon(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -148,7 +164,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 14,
+        .width = 30,
         .height = 2,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
@@ -280,6 +296,26 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_PALTAG_IV,
         },
     },
+    [DEXNAV_SPRITEID_TYPE_0] =
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/types/19x16/types.4bpp"),
+            .size = TILE_OFFSET_4BPP(NUMBER_OF_MON_TYPES * 8 * 2),
+            .tag = DEXNAV_SPRITETAG_TYPES,
+        },
+    },
+    [DEXNAV_SPRITEID_INDICATOR_FISHING] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fishing.4bpp"),
+            .size = TILE_OFFSET_4BPP(4),
+            .tag = DEXNAV_SPRITETAG_FISHING,
+        },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fishing.gbapal"),
+            .tag = DEXNAV_PALTAG_FISHING,
+        },
+    },
 };
 
 static u8 Dexnav_CreateCompletionSprite(void)
@@ -302,7 +338,7 @@ static bool8 Dexnav_ShouldHideCompletionMark(void)
 {
     for (enum DexnavHabitats habitat = 0; habitat < DEXNAV_HABITAT_COUNT; habitat++)
     {
-        for (u32 speciesIndex = 0; speciesIndex < 20; speciesIndex++)
+        for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
         {
             u32 species = sDexnavState->dexnavSpecies[habitat][speciesIndex];
 
@@ -414,6 +450,7 @@ static const u16* const sDexnavPalettesLUT[] =
 
 static const u16 dexnavPalettesText[] = INCBIN_U16("graphics/ui_menus/dexnav/palettes/text.gbapal");
 static const u16 dexnavPalettesHabitat[] = INCBIN_U16("graphics/ui_menus/dexnav/habitatHeader.gbapal");
+static const u16 dexnavPalettesTypes[] = INCBIN_U16("graphics/types/types.gbapal");
 
 static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId)
 {
@@ -432,6 +469,7 @@ static void LoadGraphics(void)
         DecompressAndLoadBgGfxUsingHeap(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tiles,0,0,0);
         CopyToBgTilemapBuffer(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tilemap,0,0);
     }
+
     LoadDexnavPalettes();
 
     for (u32 spriteId = 0; spriteId < DEXNAV_SPRITEIDS_COUNT; spriteId++)
@@ -439,16 +477,22 @@ static void LoadGraphics(void)
         if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
             continue;
 
-        LoadSpriteSheets(&sDexnavSpriteSheets[spriteId].spriteSheet);
+        LoadSpriteSheet(&sDexnavSpriteSheets[spriteId].spriteSheet);
+
+        if (sDexnavSpriteSheets[spriteId].palette.tag == 0)
+            continue;
+
         LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
     }
 }
 
 static void LoadDexnavPalettes(void)
 {
+    LoadMonIconPalettes();
     LoadPalette(sDexnavPalettesLUT[GetVisualColor()], DEXNAV_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
     LoadPalette(dexnavPalettesText, DEXNAV_PALETTE_TEXT_SLOT, PLTT_SIZE_4BPP);
     LoadPalette(dexnavPalettesHabitat, DEXNAV_PALETTE_HABITAT_SLOT, PLTT_SIZE_4BPP);
+    LoadPalette(dexnavPalettesTypes, DEXNAV_PALETTE_TYPE_SLOT, 3 * PLTT_SIZE_4BPP);
 }
 
 static void ClearWindowCopyToVram(enum DexnavWindows windowId)
@@ -586,6 +630,9 @@ void Dexnav_SetupCallback(void)
             break;
         case 3:
             Dexnav_InitWindows();
+            Dexnav_DisplaySelectedMon();
+            Dexnav_DisplayAllHabitatPokemon();
+            Dexnav_PrintFloatingActionButton();
             Dexnav_HandleHabitatHeader();
             DisplayHeaderName(WIN_DEXNAV_HEADER);
             DisplayHelpBar(WIN_DEXNAV_HELP_BAR);
@@ -593,6 +640,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStarsInsight();
             Dexnav_DisplayStreak();
             Dexnav_DisplayStarsStreak();
+            Dexnav_DisplayMonInfo();
             gMain.state++;
             break;
         case 4:
@@ -796,6 +844,7 @@ static u32 Dexnav_PopulateHabitat(const struct WildPokemonInfo *monsInfo, u32 wi
             continue;
 
         sDexnavState->dexnavSpecies[habitat][startCount++] = species;
+        sDexnavState->fishingMons[startCount] = TRUE;
     }
 
     return startCount;
@@ -804,6 +853,24 @@ static u32 Dexnav_PopulateHabitat(const struct WildPokemonInfo *monsInfo, u32 wi
 static void Dexnav_LoadEncounterData(void)
 {
     memset(sDexnavState->dexnavSpecies, 0, sizeof(sDexnavState->dexnavSpecies));
+
+    /*
+    u32 counta = 0;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_CRABOMINABLE;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_QUAQUAVAL;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_WAILORD;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_FERALIGATR;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_DRACOVISH;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GOLISOPOD;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_WALKING_WAKE;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_BASCULEGION;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_ARCTOVISH;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GYARADOS;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GRENINJA;
+    sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GOODRA;
+    Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, counta);
+    return;
+    */
 
     u32 headerId = GetCurrentMapWildMonHeaderId();
 
@@ -877,13 +944,17 @@ static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static u32 Dexnav_GetInsight(void)
+static u32 Dexnav_GetCurrentlySelectedSpecies(void)
 {
 // PSF TODO get mon highlighted by cursor, convert to resido species dex, return searchLevel
-    //
     // prob write a function for getmonundercursor OR get currently scanned mon
-    return 255;
-    return GetSearchLevel(SPECIES_EISCUE);
+    return sDexnavState->dexnavSpecies[Dexnav_GetHabitat()][Dexnav_GetCursorPosition()];
+}
+
+static u32 Dexnav_GetInsight(void)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    return GetSearchLevel(species);
 }
 
 static u32 Dexnav_GetStreak(void)
@@ -902,7 +973,7 @@ static void Dexnav_DisplayInsight(void)
 static void Dexnav_PrintInsight(enum DexnavWindows windowId)
 {
     u32 x = 8;
-    u32 y = 8;
+    u32 y = 5;
     u32 fontId = FONT_DEXNAV_STAT_HEADER;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
@@ -910,7 +981,7 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("INSIGHT"));
     u32 insight = Dexnav_GetInsight();
     x = 47;
-    y = 5;
+    y = 2;
     
     if (insight < UCHAR_MAX)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
@@ -930,7 +1001,7 @@ static void Dexnav_DisplayStreak(void)
 
 static void Dexnav_PrintStreak(enum DexnavWindows windowId)
 {
-    u32 x = 8;
+    u32 x = 9;
     u32 y = 4;
     u32 fontId = FONT_DEXNAV_STAT_HEADER;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
@@ -938,7 +1009,7 @@ static void Dexnav_PrintStreak(enum DexnavWindows windowId)
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("STREAK"));
     u32 streak = Dexnav_GetStreak();
-    x = 47;
+    x = 48;
     y = 2;
 
     if (streak < UCHAR_MAX)
@@ -1091,7 +1162,7 @@ static void Dexnav_DisplayStarsInsight(void)
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
         TempSpriteTemplate.anims = sAnims_Star;
 
-        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (14 * position)), 42, 0);
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 41, 0);
         gSprites[spriteId].data[0] = Dexnav_GetInsight();
         gSprites[spriteId].data[1] = position;
         gSprites[spriteId].data[2] = state;
@@ -1114,7 +1185,7 @@ static void Dexnav_DisplayStarsStreak(void)
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
         TempSpriteTemplate.anims = sAnims_Star;
 
-        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (14 * position)), 129, 0);
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 128, 0);
         gSprites[spriteId].data[0] = Dexnav_GetStreak();
         gSprites[spriteId].data[1] = position;
         gSprites[spriteId].data[2] = state;
@@ -1122,4 +1193,459 @@ static void Dexnav_DisplayStarsStreak(void)
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
         gSprites[spriteId].oam.priority = 0;
     }
+}
+
+static void Dexnav_DisplayMonInfo(void)
+{
+    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_MON_INFO;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintMonInfo(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+    Dexnav_PrintMonTypes();
+    Dexnav_PrintFishingIcon();
+}
+
+static void Dexnav_PrintMonInfo(enum DexnavWindows windowId)
+{
+    u32 x = 7;
+    u32 y = 0;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - x;
+
+    StringCopy(gStringVar4,GetSpeciesName(Dexnav_GetCurrentlySelectedSpecies()));
+    fontId = GetFontIdToFit(gStringVar4,fontId,letterSpacing,windowWidth);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static const union AnimCmd sSpriteAnim_TypeNone[] =
+{
+    ANIMCMD_FRAME(TYPE_NONE * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeNormal[] =
+{
+    ANIMCMD_FRAME(TYPE_NORMAL * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFighting[] =
+{
+    ANIMCMD_FRAME(TYPE_FIGHTING * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFlying[] =
+{
+    ANIMCMD_FRAME(TYPE_FLYING * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypePoison[] =
+{
+    ANIMCMD_FRAME(TYPE_POISON * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGround[] =
+{
+    ANIMCMD_FRAME(TYPE_GROUND * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeRock[] =
+{
+    ANIMCMD_FRAME(TYPE_ROCK * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeBug[] =
+{
+    ANIMCMD_FRAME(TYPE_BUG * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGhost[] =
+{
+    ANIMCMD_FRAME(TYPE_GHOST * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeSteel[] =
+{
+    ANIMCMD_FRAME(TYPE_STEEL * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeMystery[] =
+{
+    ANIMCMD_FRAME(TYPE_MYSTERY * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFire[] =
+{
+    ANIMCMD_FRAME(TYPE_FIRE * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeWater[] =
+{
+    ANIMCMD_FRAME(TYPE_WATER * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGrass[] =
+{
+    ANIMCMD_FRAME(TYPE_GRASS * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeElectric[] =
+{
+    ANIMCMD_FRAME(TYPE_ELECTRIC * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypePsychic[] =
+{
+    ANIMCMD_FRAME(TYPE_PSYCHIC * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeIce[] =
+{
+    ANIMCMD_FRAME(TYPE_ICE * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeDragon[] =
+{
+    ANIMCMD_FRAME(TYPE_DRAGON * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeDark[] =
+{
+    ANIMCMD_FRAME(TYPE_DARK * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFairy[] =
+{
+    ANIMCMD_FRAME(TYPE_FAIRY * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeStellar[] =
+{
+    ANIMCMD_FRAME(TYPE_STELLAR * 16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_Type[NUMBER_OF_MON_TYPES] =
+{
+    [TYPE_NONE] = sSpriteAnim_TypeNone,
+    [TYPE_NORMAL] = sSpriteAnim_TypeNormal,
+    [TYPE_FIGHTING] = sSpriteAnim_TypeFighting,
+    [TYPE_FLYING] = sSpriteAnim_TypeFlying,
+    [TYPE_POISON] = sSpriteAnim_TypePoison,
+    [TYPE_GROUND] = sSpriteAnim_TypeGround,
+    [TYPE_ROCK] = sSpriteAnim_TypeRock,
+    [TYPE_BUG] = sSpriteAnim_TypeBug,
+    [TYPE_GHOST] = sSpriteAnim_TypeGhost,
+    [TYPE_STEEL] = sSpriteAnim_TypeSteel,
+    [TYPE_MYSTERY] = sSpriteAnim_TypeNone,
+    [TYPE_FIRE] = sSpriteAnim_TypeFire,
+    [TYPE_WATER] = sSpriteAnim_TypeWater,
+    [TYPE_GRASS] = sSpriteAnim_TypeGrass,
+    [TYPE_ELECTRIC] = sSpriteAnim_TypeElectric,
+    [TYPE_PSYCHIC] = sSpriteAnim_TypePsychic,
+    [TYPE_ICE] = sSpriteAnim_TypeIce,
+    [TYPE_DRAGON] = sSpriteAnim_TypeDragon,
+    [TYPE_DARK] = sSpriteAnim_TypeDark,
+    [TYPE_FAIRY] = sSpriteAnim_TypeFairy,
+    [TYPE_STELLAR] = sSpriteAnim_TypeNone,
+};
+
+static void SpriteCB_DexnavTypes(struct Sprite *sprite)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if ((sprite->animNum != 0) && (species == sprite->data[0]))
+        return;
+
+    u32 typeNum = sprite->data[1];
+    enum Type type = GetSpeciesType(species,typeNum);
+    sprite->oam.paletteNum = gTypesInfo[type].palette;
+
+    if (typeNum == 1)
+    {
+        if (GetSpeciesType(species,0) == GetSpeciesType(species,1))
+        {
+            sprite->invisible = TRUE;
+        }
+    }
+
+    StartSpriteAnimIfDifferent(sprite,type);
+}
+
+static void Dexnav_PrintMonTypes(void)
+{
+    for (u32 typeNum = 0; typeNum < 2; typeNum++)
+    {
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+        TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_TYPES;
+        TempSpriteTemplate.callback = SpriteCB_DexnavTypes;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_TYPES;
+        TempSpriteTemplate.anims = sSpriteAnimTable_Type;
+
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (20 * typeNum)), 85, 0);
+        gSprites[spriteId].data[0] = Dexnav_GetCurrentlySelectedSpecies();
+        gSprites[spriteId].data[1] = typeNum;
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
+        gSprites[spriteId].oam.priority = 0;
+    }
+}
+
+static void SpriteCB_DexnavFishing(struct Sprite *sprite)
+{
+    sprite->invisible = Dexnav_IsSelectedMonNotFishingMon();
+}
+
+static bool8 Dexnav_IsSelectedMonNotFishingMon(void)
+{
+    if (Dexnav_GetHabitat() != DEXNAV_HABITAT_WATER)
+        return TRUE;
+
+    return !sDexnavState->fishingMons[Dexnav_GetCursorPosition()];
+}
+
+static u32 Dexnav_GetCursorPosition(void)
+{
+    return sDexnavState->position;
+}
+
+static void Dexnav_SetCursorPosition(u32 value)
+{
+    sDexnavState->position = value;
+}
+
+static void Dexnav_PrintFishingIcon(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_FISHING;
+    TempSpriteTemplate.callback = SpriteCB_DexnavFishing;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_FISHING;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 50, 82, 0);
+    gSprites[spriteId].data[0] = Dexnav_GetCursorPosition();
+    gSprites[spriteId].invisible = Dexnav_IsSelectedMonNotFishingMon();
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 0;
+}
+
+static void Dexnav_DisplaySelectedMon(void)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    u32 x = 149, y = 80, personality = 0;
+    bool32 isShiny = FALSE, isFrontPic = TRUE;
+    u32 spriteId = CreateMonPicSprite(species,isShiny,personality,isFrontPic,x, y, DEXNAV_PALETTE_MAIN_MON_ID, TAG_NONE);
+    FreeSpriteOamMatrix(&gSprites[spriteId]);
+}
+
+static void Dexnav_DisplayAllHabitatPokemon(void)
+{
+    enum DexnavHabitats habitat = Dexnav_GetHabitat();
+    
+    if (habitat == DEXNAV_HABITAT_NONE)
+        return;
+
+    for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
+        Dexnav_DisplayHabitatPokemon(habitat, speciesIndex);
+}
+
+static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
+{
+    [0] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+    },
+    [1] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 201, [AXIS_Y] = 76},
+    },
+    [2] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 176, [AXIS_Y] = 30},
+        [2] = {[AXIS_X] = 176, [AXIS_Y] = 122},
+    },
+    [3] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 75},
+        [1] = {[AXIS_X] = 150, [AXIS_Y] = 20},
+        [2] = {[AXIS_X] = 148, [AXIS_Y] = 128},
+        [3] = {[AXIS_X] = 200, [AXIS_Y] = 76},
+    },
+    [4] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 135, [AXIS_Y] = 22},
+        [2] = {[AXIS_X] = 192, [AXIS_Y] = 44},
+        [3] = {[AXIS_X] = 192, [AXIS_Y] = 103},
+        [4] = {[AXIS_X] = 132, [AXIS_Y] = 124},
+    },
+    [5] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [2] = {[AXIS_X] = 201, [AXIS_Y] = 72},
+        [3] = {[AXIS_X] = 176, [AXIS_Y] = 121},
+        [4] = {[AXIS_X] = 122, [AXIS_Y] = 122},
+        [5] = {[AXIS_X] = 123, [AXIS_Y] = 28},
+    },
+    [6] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 116, [AXIS_Y] = 31},
+        [2] = {[AXIS_X] = 161, [AXIS_Y] = 23},
+        [3] = {[AXIS_X] = 196, [AXIS_Y] = 49},
+        [4] = {[AXIS_X] = 198, [AXIS_Y] = 98},
+        [5] = {[AXIS_X] = 161, [AXIS_Y] = 124},
+        [6] = {[AXIS_X] = 115, [AXIS_Y] = 116},
+    },
+    [7] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 149, [AXIS_Y] = 22},
+        [2] = {[AXIS_X] = 186, [AXIS_Y] = 38},
+        [3] = {[AXIS_X] = 201, [AXIS_Y] = 73},
+        [4] = {[AXIS_X] = 186, [AXIS_Y] = 112},
+        [5] = {[AXIS_X] = 149, [AXIS_Y] = 125},
+        [6] = {[AXIS_X] = 111, [AXIS_Y] = 113},
+        [7] = {[AXIS_X] = 96, [AXIS_Y] = 24},
+    },
+    [8] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 108, [AXIS_Y] = 39},
+        [2] = {[AXIS_X] = 140, [AXIS_Y] = 23},
+        [3] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [4] = {[AXIS_X] = 199, [AXIS_Y] = 56},
+        [5] = {[AXIS_X] = 198, [AXIS_Y] = 91},
+        [6] = {[AXIS_X] = 176, [AXIS_Y] = 122},
+        [7] = {[AXIS_X] = 140, [AXIS_Y] = 125},
+        [8] = {[AXIS_X] = 107, [AXIS_Y] = 110},
+    },
+    [9] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 133, [AXIS_Y] = 26},
+        [2] = {[AXIS_X] = 164, [AXIS_Y] = 26},
+        [3] = {[AXIS_X] = 192, [AXIS_Y] = 41},
+        [4] = {[AXIS_X] = 200, [AXIS_Y] = 73},
+        [5] = {[AXIS_X] = 192, [AXIS_Y] = 106},
+        [6] = {[AXIS_X] = 165, [AXIS_Y] = 126},
+        [7] = {[AXIS_X] = 133, [AXIS_Y] = 124},
+        [8] = {[AXIS_X] = 105, [AXIS_Y] = 108},
+        [9] = {[AXIS_X] = 106, [AXIS_Y] = 41},
+    },
+    [10] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 105, [AXIS_Y] = 43},
+        [2] = {[AXIS_X] = 126, [AXIS_Y] = 26},
+        [3] = {[AXIS_X] = 157, [AXIS_Y] = 24},
+        [4] = {[AXIS_X] = 186, [AXIS_Y] = 32},
+        [5] = {[AXIS_X] = 200, [AXIS_Y] = 59},
+        [6] = {[AXIS_X] = 200, [AXIS_Y] = 90},
+        [7] = {[AXIS_X] = 184, [AXIS_Y] = 114},
+        [8] = {[AXIS_X] = 157, [AXIS_Y] = 122},
+        [9] = {[AXIS_X] = 126, [AXIS_Y] = 121},
+        [10] = {[AXIS_X] = 104, [AXIS_Y] = 108},
+    },
+    [11] =
+    {
+        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [1] = {[AXIS_X] = 103, [AXIS_Y] = 45},
+        [2] = {[AXIS_X] = 122, [AXIS_Y] = 28},
+        [3] = {[AXIS_X] = 148, [AXIS_Y] = 23},
+        [4] = {[AXIS_X] = 176, [AXIS_Y] = 28},
+        [5] = {[AXIS_X] = 195, [AXIS_Y] = 44},
+        [6] = {[AXIS_X] = 200, [AXIS_Y] = 73},
+        [7] = {[AXIS_X] = 196, [AXIS_Y] = 102},
+        [8] = {[AXIS_X] = 176, [AXIS_Y] = 121},
+        [9] = {[AXIS_X] = 147, [AXIS_Y] = 127},
+        [10] = {[AXIS_X] = 121, [AXIS_Y] = 121},
+        [11] = {[AXIS_X] = 102, [AXIS_Y] = 104},
+    },
+};
+
+static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex)
+{
+    u32 species = Dexnav_GetSpeciesFromHabitatAndIndex(habitat,speciesIndex);
+    u32 num = Dexnav_GetNumberHabitatMons(habitat);
+
+    if (num == 0)
+        return;
+    
+    if (species == SPECIES_NONE)
+        return;
+
+    u32 x = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_X];
+    u32 y = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_Y];
+
+    CreateMonIcon(species,SpriteCallbackDummy,x,y,0,0);
+}
+
+static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex)
+{
+    return sDexnavState->dexnavSpecies[habitat][speciesIndex];
+}
+
+static void SpriteCB_FAB(struct Sprite *sprite)
+{
+    enum DexnavMode mode = Dexnav_GetMode();
+    StartSpriteAnimIfDifferent(sprite,mode);
+}
+
+static const union AnimCmd sAnim_FAB_Scan[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_FAB_FRAME_SCAN,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_FAB_Cancel[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_FAB_FRAME_CANCEL,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const sSpriteAnimTable_FAB[] =
+{
+    sAnim_FAB_Scan,
+    sAnim_FAB_Cancel,
+};
+
+static void Dexnav_PrintFloatingActionButton(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_FAB;
+    TempSpriteTemplate.callback = SpriteCB_FAB;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_FAB;
+    TempSpriteTemplate.anims = sSpriteAnimTable_FAB;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 205, 111, 0);
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
+    gSprites[spriteId].oam.priority = 0;
 }

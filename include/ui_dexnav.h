@@ -17,7 +17,8 @@ struct DexnavState
     u8 spriteId[DEXNAV_SPRITEIDS_COUNT];
     u8 cursorSpriteId;
     u8 numHabitatMons[DEXNAV_HABITAT_COUNT];
-    u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][20];
+    u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][DEXNAV_MAX_SHOWN_MONS];
+    bool8 fishingMons[DEXNAV_MAX_SHOWN_MONS];
 };
 
 struct DexnavSpriteSheet
