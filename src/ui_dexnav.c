@@ -69,7 +69,7 @@ static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
-static u8 Dexnav_CreateCompletionSprite(void);
+static void Dexnav_CreateCompletionSprite(void);
 static void Dexnav_HandleHabitatHeader(void);
 static void DisplayHeaderName(enum DexnavWindows windowId);
 static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId);
@@ -88,12 +88,17 @@ static void Dexnav_PrintMonTypes(void);
 static void Dexnav_PrintFishingIcon(void);
 static u32 Dexnav_GetCursorPosition(void);
 static bool8 Dexnav_IsSelectedMonNotFishingMon(void);
+static u32 Dexnav_GetCursorPosition(void);
+static void Dexnav_SetCursorPosition(u32 value);
+static void Dexnav_MoveCursor(s32 direction);
 static void SpriteCB_DexnavFishing(struct Sprite *sprite);
 static void Dexnav_DisplaySelectedMon(void);
 static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex);
 static void Dexnav_PrintFloatingActionButton(void);
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex);
 static void Dexnav_DisplayAllHabitatPokemon(void);
+static void Dexnav_DisplayMovementArrows(void);
+static void Dexnav_DisplayCursors(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -233,7 +238,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
         },
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/completion.gbapal"),
-            .tag = DEXNAV_PALTAG_COMPLETION,
+            .tag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING,
         },
     },
     [DEXNAV_SPRITEID_INSIGHT_POSITION_0] = 
@@ -242,10 +247,6 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/star.4bpp"),
             .size = TILE_OFFSET_4BPP(32),
             .tag = DEXNAV_SPRITETAG_STAR,
-        },
-        {
-            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/star.gbapal"),
-            .tag = DEXNAV_PALTAG_STAR,
         },
     },
     [DEXNAV_SPRITEID_INDICATOR_ABILITY] = 
@@ -260,16 +261,12 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_PALTAG_INDICATOR,
         },
     },
-    [DEXNAV_SPRITEID_ARROW_UP] = 
+    [DEXNAV_SPRITEID_ARROW] = 
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/arrows.4bpp"),
             .size = TILE_OFFSET_4BPP(64),
             .tag = DEXNAV_SPRITETAG_ARROW,
-        },
-        {
-            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/arrows.gbapal"),
-            .tag = DEXNAV_PALTAG_ARROW,
         },
     },
     [DEXNAV_SPRITEID_FAB] = 
@@ -278,10 +275,6 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fab.4bpp"),
             .size = TILE_OFFSET_4BPP(32),
             .tag = DEXNAV_SPRITETAG_FAB,
-        },
-        {
-            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fab.gbapal"),
-            .tag = DEXNAV_PALTAG_FAB,
         },
     },
     [DEXNAV_SPRITEID_INDICATOR_IV_0] = 
@@ -311,27 +304,32 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .size = TILE_OFFSET_4BPP(4),
             .tag = DEXNAV_SPRITETAG_FISHING,
         },
+    },
+    [DEXNAV_SPRITEID_CURSOR] = 
+    {
         {
-            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fishing.gbapal"),
-            .tag = DEXNAV_PALTAG_FISHING,
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/cursor.4bpp"),
+            .size = TILE_OFFSET_4BPP(192),
+            .tag = DEXNAV_SPRITETAG_CURSOR,
         },
     },
 };
 
-static u8 Dexnav_CreateCompletionSprite(void)
+static void Dexnav_CreateCompletionSprite(void)
 {
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_COMPLETION;
     TempSpriteTemplate.callback = SpriteCallbackDummy;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_COMPLETION;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
 
     u32 spriteId = CreateSprite(&TempSpriteTemplate, 8, 4, 0);
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
     gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].invisible = Dexnav_ShouldHideCompletionMark();
-    return spriteId;
+
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_COMPLETION_MARK,spriteId);
 }
 
 static bool8 Dexnav_ShouldHideCompletionMark(void)
@@ -488,11 +486,13 @@ static void LoadGraphics(void)
 
 static void LoadDexnavPalettes(void)
 {
+    FillPalette(RGB_DEXNAV_GRAY, DEXNAV_PALETTE_ALL_BLACK_SLOT, PLTT_SIZE_4BPP);
     LoadMonIconPalettes();
+    LoadPalette(dexnavPalettesTypes, DEXNAV_PALETTE_TYPE_SLOT, 3 * PLTT_SIZE_4BPP);
+
     LoadPalette(sDexnavPalettesLUT[GetVisualColor()], DEXNAV_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
     LoadPalette(dexnavPalettesText, DEXNAV_PALETTE_TEXT_SLOT, PLTT_SIZE_4BPP);
     LoadPalette(dexnavPalettesHabitat, DEXNAV_PALETTE_HABITAT_SLOT, PLTT_SIZE_4BPP);
-    LoadPalette(dexnavPalettesTypes, DEXNAV_PALETTE_TYPE_SLOT, 3 * PLTT_SIZE_4BPP);
 }
 
 static void ClearWindowCopyToVram(enum DexnavWindows windowId)
@@ -630,7 +630,6 @@ void Dexnav_SetupCallback(void)
             break;
         case 3:
             Dexnav_InitWindows();
-            Dexnav_DisplaySelectedMon();
             Dexnav_DisplayAllHabitatPokemon();
             Dexnav_PrintFloatingActionButton();
             Dexnav_HandleHabitatHeader();
@@ -641,6 +640,8 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStreak();
             Dexnav_DisplayStarsStreak();
             Dexnav_DisplayMonInfo();
+            Dexnav_DisplayMovementArrows();
+            Dexnav_DisplayCursors();
             gMain.state++;
             break;
         case 4:
@@ -693,53 +694,57 @@ static void Dexnav_InitWindows(void)
 
 static void Task_HandleInput(u8 taskId)
 {
-    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON) )
+    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON))
     {
         PlaySoundStartFadeQuitApp(taskId);
         return;
     }
 
-    if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON) )
+    if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON))
     {
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) )
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
+    {
+        Dexnav_MoveCursor(DEXNAV_INCREMENT_POSITION);
+        Dexnav_DisplayMonInfo();
+    }
+
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
+    {
+        Dexnav_MoveCursor(DEXNAV_DECREMENT_POSITION);
+        Dexnav_DisplayMonInfo();
+    }
+
+    if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT))
+    {
+        Dexnav_MoveCursor(DEXNAV_DECREMENT_POSITION);
+        Dexnav_DisplayMonInfo();
+    }
+
+    if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT))
+    {
+        Dexnav_MoveCursor(DEXNAV_INCREMENT_POSITION);
+        Dexnav_DisplayMonInfo();
+    }
+
+    if (JOY_NEW(L_BUTTON) || JOY_REPEAT(L_BUTTON))
     {
         return;
     }
 
-    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP) )
+    if (JOY_NEW(R_BUTTON) || JOY_REPEAT(R_BUTTON))
     {
         return;
     }
 
-    if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT) )
+    if (JOY_NEW(START_BUTTON) || JOY_REPEAT(START_BUTTON))
     {
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT) || JOY_REPEAT(DPAD_RIGHT) )
-    {
-        return;
-    }
-
-    if (JOY_NEW(L_BUTTON) || JOY_REPEAT(L_BUTTON) )
-    {
-        return;
-    }
-
-    if (JOY_NEW(R_BUTTON) || JOY_REPEAT(R_BUTTON) )
-    {
-        return;
-    }
-
-    if (JOY_NEW(START_BUTTON) || JOY_REPEAT(START_BUTTON) )
-    {
-        return;
-    }
-
-    if (JOY_NEW(SELECT_BUTTON) || JOY_REPEAT(SELECT_BUTTON) )
+    if (JOY_NEW(SELECT_BUTTON) || JOY_REPEAT(SELECT_BUTTON))
     {
         return;
     }
@@ -854,7 +859,6 @@ static void Dexnav_LoadEncounterData(void)
 {
     memset(sDexnavState->dexnavSpecies, 0, sizeof(sDexnavState->dexnavSpecies));
 
-    /*
     u32 counta = 0;
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_CRABOMINABLE;
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_QUAQUAVAL;
@@ -870,6 +874,7 @@ static void Dexnav_LoadEncounterData(void)
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GOODRA;
     Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, counta);
     return;
+    /*
     */
 
     u32 headerId = GetCurrentMapWildMonHeaderId();
@@ -946,8 +951,6 @@ static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId)
 
 static u32 Dexnav_GetCurrentlySelectedSpecies(void)
 {
-// PSF TODO get mon highlighted by cursor, convert to resido species dex, return searchLevel
-    // prob write a function for getmonundercursor OR get currently scanned mon
     return sDexnavState->dexnavSpecies[Dexnav_GetHabitat()][Dexnav_GetCursorPosition()];
 }
 
@@ -1159,7 +1162,7 @@ static void Dexnav_DisplayStarsInsight(void)
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
         TempSpriteTemplate.callback = SpriteCB_Star;
-        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
 
         u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 41, 0);
@@ -1169,6 +1172,7 @@ static void Dexnav_DisplayStarsInsight(void)
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
         gSprites[spriteId].oam.priority = 0;
+        Dexnav_SaveSpriteId(DEXNAV_SPRITEID_INSIGHT_POSITION_0 + position,spriteId);
     }
 }
 
@@ -1182,7 +1186,7 @@ static void Dexnav_DisplayStarsStreak(void)
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
         TempSpriteTemplate.callback = SpriteCB_Star;
-        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_STAR;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
 
         u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 128, 0);
@@ -1192,6 +1196,7 @@ static void Dexnav_DisplayStarsStreak(void)
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
         gSprites[spriteId].oam.priority = 0;
+        Dexnav_SaveSpriteId(DEXNAV_SPRITEID_STREAK_POSITION_0 + position,spriteId);
     }
 }
 
@@ -1203,6 +1208,7 @@ static void Dexnav_DisplayMonInfo(void)
     CopyWindowToVram(windowId, COPYWIN_GFX);
     Dexnav_PrintMonTypes();
     Dexnav_PrintFishingIcon();
+    Dexnav_DisplaySelectedMon();
 }
 
 static void Dexnav_PrintMonInfo(enum DexnavWindows windowId)
@@ -1374,20 +1380,13 @@ static const union AnimCmd * const sSpriteAnimTable_Type[NUMBER_OF_MON_TYPES] =
 static void SpriteCB_DexnavTypes(struct Sprite *sprite)
 {
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
-    if ((sprite->animNum != 0) && (species == sprite->data[0]))
-        return;
-
     u32 typeNum = sprite->data[1];
     enum Type type = GetSpeciesType(species,typeNum);
+
     sprite->oam.paletteNum = gTypesInfo[type].palette;
 
     if (typeNum == 1)
-    {
-        if (GetSpeciesType(species,0) == GetSpeciesType(species,1))
-        {
-            sprite->invisible = TRUE;
-        }
-    }
+        sprite->invisible = (GetSpeciesType(species,0) == GetSpeciesType(species,1));
 
     StartSpriteAnimIfDifferent(sprite,type);
 }
@@ -1396,6 +1395,9 @@ static void Dexnav_PrintMonTypes(void)
 {
     for (u32 typeNum = 0; typeNum < 2; typeNum++)
     {
+        if (Dexnav_GetSpriteId(DEXNAV_SPRITEID_TYPE_0 + typeNum) != SPRITE_NONE)
+            continue;
+
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_TYPES;
@@ -1409,6 +1411,7 @@ static void Dexnav_PrintMonTypes(void)
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
         gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
         gSprites[spriteId].oam.priority = 0;
+        Dexnav_SaveSpriteId(DEXNAV_SPRITEID_TYPE_0 + typeNum,spriteId);
     }
 }
 
@@ -1435,13 +1438,29 @@ static void Dexnav_SetCursorPosition(u32 value)
     sDexnavState->position = value;
 }
 
+static void Dexnav_MoveCursor(s32 direction)
+{
+    s32 future = Dexnav_GetCursorPosition() + direction;
+    s32 maxPosition = min(Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()),DEXNAV_MAX_SHOWN_MONS);
+
+    if (future >= maxPosition)
+        future = 0;
+    else if (future < 0)
+        future = (maxPosition-1);
+
+    Dexnav_SetCursorPosition(future);
+}
+
 static void Dexnav_PrintFishingIcon(void)
 {
+    if (Dexnav_GetSpriteId(DEXNAV_SPRITEID_INDICATOR_FISHING) != SPRITE_NONE)
+        return;
+
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_FISHING;
     TempSpriteTemplate.callback = SpriteCB_DexnavFishing;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_FISHING;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
 
     u32 spriteId = CreateSprite(&TempSpriteTemplate, 50, 82, 0);
     gSprites[spriteId].data[0] = Dexnav_GetCursorPosition();
@@ -1449,15 +1468,30 @@ static void Dexnav_PrintFishingIcon(void)
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
     gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
     gSprites[spriteId].oam.priority = 0;
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_INDICATOR_FISHING,spriteId);
+}
+
+static void Dexnav_RemoveSelectedMonSprite(void)
+{
+    u32 spriteId = Dexnav_GetSpriteId(DEXNAV_SPRITEID_MON_MAIN);
+
+   if (spriteId == SPRITE_NONE)
+        return;
+
+    FreeSpriteOamMatrix(&gSprites[spriteId]);
+    FreeAndDestroyMonPicSprite(spriteId);
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_MAIN,SPRITE_NONE);
 }
 
 static void Dexnav_DisplaySelectedMon(void)
 {
+    Dexnav_RemoveSelectedMonSprite();
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     u32 x = 149, y = 80, personality = 0;
     bool32 isShiny = FALSE, isFrontPic = TRUE;
     u32 spriteId = CreateMonPicSprite(species,isShiny,personality,isFrontPic,x, y, DEXNAV_PALETTE_MAIN_MON_ID, TAG_NONE);
     FreeSpriteOamMatrix(&gSprites[spriteId]);
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_MAIN,spriteId);
 }
 
 static void Dexnav_DisplayAllHabitatPokemon(void)
@@ -1475,119 +1509,127 @@ static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
 {
     [0] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
     },
     [1] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 201, [AXIS_Y] = 76},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 186, [AXIS_Y] = 60},
     },
     [2] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 176, [AXIS_Y] = 30},
-        [2] = {[AXIS_X] = 176, [AXIS_Y] = 122},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [2] = {[AXIS_X] = 160, [AXIS_Y] = 106},
     },
     [3] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 75},
-        [1] = {[AXIS_X] = 150, [AXIS_Y] = 20},
-        [2] = {[AXIS_X] = 148, [AXIS_Y] = 128},
-        [3] = {[AXIS_X] = 200, [AXIS_Y] = 76},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [2] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [3] = {[AXIS_X] = 133, [AXIS_Y] = 113},
     },
     [4] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 135, [AXIS_Y] = 22},
-        [2] = {[AXIS_X] = 192, [AXIS_Y] = 44},
-        [3] = {[AXIS_X] = 192, [AXIS_Y] = 103},
-        [4] = {[AXIS_X] = 132, [AXIS_Y] = 124},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [2] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [3] = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [4] = {[AXIS_X] = 117, [AXIS_Y] = 110},
     },
     [5] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [2] = {[AXIS_X] = 201, [AXIS_Y] = 72},
-        [3] = {[AXIS_X] = 176, [AXIS_Y] = 121},
-        [4] = {[AXIS_X] = 122, [AXIS_Y] = 122},
-        [5] = {[AXIS_X] = 123, [AXIS_Y] = 28},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [2] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [3] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [4] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [5] = {[AXIS_X] = 106, [AXIS_Y] = 106},
     },
     [6] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 116, [AXIS_Y] = 31},
-        [2] = {[AXIS_X] = 161, [AXIS_Y] = 23},
-        [3] = {[AXIS_X] = 196, [AXIS_Y] = 49},
-        [4] = {[AXIS_X] = 198, [AXIS_Y] = 98},
-        [5] = {[AXIS_X] = 161, [AXIS_Y] = 124},
-        [6] = {[AXIS_X] = 115, [AXIS_Y] = 116},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 100, [AXIS_Y] = 19},
+        [2] = {[AXIS_X] = 145, [AXIS_Y] = 8},
+        [3] = {[AXIS_X] = 181, [AXIS_Y] = 37},
+        [4] = {[AXIS_X] = 181, [AXIS_Y] = 83},
+        [5] = {[AXIS_X] = 145, [AXIS_Y] = 112},
+        [6] = {[AXIS_X] = 100, [AXIS_Y] = 101},
     },
     [7] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 149, [AXIS_Y] = 22},
-        [2] = {[AXIS_X] = 186, [AXIS_Y] = 38},
-        [3] = {[AXIS_X] = 201, [AXIS_Y] = 73},
-        [4] = {[AXIS_X] = 186, [AXIS_Y] = 112},
-        [5] = {[AXIS_X] = 149, [AXIS_Y] = 125},
-        [6] = {[AXIS_X] = 111, [AXIS_Y] = 113},
-        [7] = {[AXIS_X] = 96, [AXIS_Y] = 24},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 96, [AXIS_Y] = 23},
+        [2] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [3] = {[AXIS_X] = 170, [AXIS_Y] = 23},
+        [4] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [5] = {[AXIS_X] = 170, [AXIS_Y] = 97},
+        [6] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [7] = {[AXIS_X] = 96, [AXIS_Y] = 97},
     },
     [8] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 108, [AXIS_Y] = 39},
-        [2] = {[AXIS_X] = 140, [AXIS_Y] = 23},
-        [3] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [4] = {[AXIS_X] = 199, [AXIS_Y] = 56},
-        [5] = {[AXIS_X] = 198, [AXIS_Y] = 91},
-        [6] = {[AXIS_X] = 176, [AXIS_Y] = 122},
-        [7] = {[AXIS_X] = 140, [AXIS_Y] = 125},
-        [8] = {[AXIS_X] = 107, [AXIS_Y] = 110},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 92, [AXIS_Y] = 26},
+        [2] = {[AXIS_X] = 124, [AXIS_Y] = 8},
+        [3] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [4] = {[AXIS_X] = 183, [AXIS_Y] = 42},
+        [5] = {[AXIS_X] = 183, [AXIS_Y] = 78},
+        [6] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [7] = {[AXIS_X] = 124, [AXIS_Y] = 112},
+        [8] = {[AXIS_X] = 92, [AXIS_Y] = 94},
     },
     [9] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 133, [AXIS_Y] = 26},
-        [2] = {[AXIS_X] = 164, [AXIS_Y] = 26},
-        [3] = {[AXIS_X] = 192, [AXIS_Y] = 41},
-        [4] = {[AXIS_X] = 200, [AXIS_Y] = 73},
-        [5] = {[AXIS_X] = 192, [AXIS_Y] = 106},
-        [6] = {[AXIS_X] = 165, [AXIS_Y] = 126},
-        [7] = {[AXIS_X] = 133, [AXIS_Y] = 124},
-        [8] = {[AXIS_X] = 105, [AXIS_Y] = 108},
-        [9] = {[AXIS_X] = 106, [AXIS_Y] = 41},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 90, [AXIS_Y] = 29},
+        [2] = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [3] = {[AXIS_X] = 149, [AXIS_Y] = 10},
+        [4] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [5] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [6] = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [7] = {[AXIS_X] = 149, [AXIS_Y] = 110},
+        [8] = {[AXIS_X] = 117, [AXIS_Y] = 110},
+        [9] = {[AXIS_X] = 90, [AXIS_Y] = 91},
     },
     [10] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 105, [AXIS_Y] = 43},
-        [2] = {[AXIS_X] = 126, [AXIS_Y] = 26},
-        [3] = {[AXIS_X] = 157, [AXIS_Y] = 24},
-        [4] = {[AXIS_X] = 186, [AXIS_Y] = 32},
-        [5] = {[AXIS_X] = 200, [AXIS_Y] = 59},
-        [6] = {[AXIS_X] = 200, [AXIS_Y] = 90},
-        [7] = {[AXIS_X] = 184, [AXIS_Y] = 114},
-        [8] = {[AXIS_X] = 157, [AXIS_Y] = 122},
-        [9] = {[AXIS_X] = 126, [AXIS_Y] = 121},
-        [10] = {[AXIS_X] = 104, [AXIS_Y] = 108},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 88, [AXIS_Y] = 31},
+        [2] = {[AXIS_X] = 111, [AXIS_Y] = 12},
+        [3] = {[AXIS_X] = 141, [AXIS_Y] = 8},
+        [4] = {[AXIS_X] = 168, [AXIS_Y] = 20},
+        [5] = {[AXIS_X] = 184, [AXIS_Y] = 45},
+        [6] = {[AXIS_X] = 184, [AXIS_Y] = 75},
+        [7] = {[AXIS_X] = 168, [AXIS_Y] = 97},
+        [8] = {[AXIS_X] = 141, [AXIS_Y] = 109},
+        [9] = {[AXIS_X] = 111, [AXIS_Y] = 105},
+        [10] = {[AXIS_X] = 88, [AXIS_Y] = 86},
     },
     [11] =
     {
-        [0] = {[AXIS_X] = 96, [AXIS_Y] = 76},
-        [1] = {[AXIS_X] = 103, [AXIS_Y] = 45},
-        [2] = {[AXIS_X] = 122, [AXIS_Y] = 28},
-        [3] = {[AXIS_X] = 148, [AXIS_Y] = 23},
-        [4] = {[AXIS_X] = 176, [AXIS_Y] = 28},
-        [5] = {[AXIS_X] = 195, [AXIS_Y] = 44},
-        [6] = {[AXIS_X] = 200, [AXIS_Y] = 73},
-        [7] = {[AXIS_X] = 196, [AXIS_Y] = 102},
-        [8] = {[AXIS_X] = 176, [AXIS_Y] = 121},
-        [9] = {[AXIS_X] = 147, [AXIS_Y] = 127},
-        [10] = {[AXIS_X] = 121, [AXIS_Y] = 121},
-        [11] = {[AXIS_X] = 102, [AXIS_Y] = 104},
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 87, [AXIS_Y] = 33},
+        [2] = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [3] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [4] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [5] = {[AXIS_X] = 179, [AXIS_Y] = 33},
+        [6] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [7] = {[AXIS_X] = 179, [AXIS_Y] = 87},
+        [8] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [9] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [10] = {[AXIS_X] = 106, [AXIS_Y] = 106},
+        [11] = {[AXIS_X] = 87, [AXIS_Y] = 87},
     },
 };
+
+static void SpriteCB_MonIconDexnav(struct Sprite *sprite)
+{
+    if (sprite->data[0] == Dexnav_GetCursorPosition() && (sprite->data[1]))
+        UpdateMonIconFrame(sprite);
+    else
+        return;
+}
 
 static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex)
 {
@@ -1600,10 +1642,18 @@ static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 specie
     if (species == SPECIES_NONE)
         return;
 
-    u32 x = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_X];
-    u32 y = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_Y];
+    u32 x = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_X] + 16;
+    u32 y = dexnavMonIconCoordinates[num-1][speciesIndex][AXIS_Y] + 16;
 
-    CreateMonIcon(species,SpriteCallbackDummy,x,y,0,0);
+    u32 spriteId = CreateMonIcon(species,SpriteCB_MonIconDexnav,x,y,0,0);
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0 + speciesIndex,spriteId);
+
+    bool32 hasCaught = (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species),FLAG_GET_CAUGHT));
+    gSprites[spriteId].data[0] = speciesIndex;
+    gSprites[spriteId].data[1] = hasCaught;
+
+    if (hasCaught == FALSE)
+        gSprites[spriteId].oam.paletteNum = DEXNAV_PALETTE_ALL_BLACK_ID;
 }
 
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex)
@@ -1641,11 +1691,120 @@ static void Dexnav_PrintFloatingActionButton(void)
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_FAB;
     TempSpriteTemplate.callback = SpriteCB_FAB;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_FAB;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
     TempSpriteTemplate.anims = sSpriteAnimTable_FAB;
 
-    u32 spriteId = CreateSprite(&TempSpriteTemplate, 205, 111, 0);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 210, 116, 0);
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
     gSprites[spriteId].oam.priority = 0;
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_FAB,spriteId);
+}
+
+static bool8 Dexnav_ShouldHideMovementArrows(void)
+{
+    if (Dexnav_GetMode() != DEXNAV_MODE_MAIN)
+        return TRUE;
+
+    enum DexnavHabitats habitat = Dexnav_GetHabitat();
+
+    if (habitat == DEXNAV_HABITAT_NONE)
+        return TRUE;
+
+    u32 numMons = Dexnav_GetNumberHabitatMons(habitat);
+    if (numMons < 2)
+        return TRUE;
+
+    return FALSE;
+}
+
+static const union AnimCmd sSpriteAnim_MoveArrows[] =
+{
+    ANIMCMD_FRAME(DEXNAV_ARROW_FRAME_OUT,16),
+    ANIMCMD_FRAME(DEXNAV_ARROW_FRAME_IN,16),
+    ANIMCMD_JUMP(0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_Arrow[] =
+{
+    sSpriteAnim_MoveArrows,
+};
+
+static void Dexnav_DisplayMovementArrows(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_ARROW;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+    TempSpriteTemplate.anims = sSpriteAnimTable_Arrow;
+    TempSpriteTemplate.callback = SpriteCallbackDummy;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 217, 25, 0);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x64);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(32x64);
+    gSprites[spriteId].invisible = Dexnav_ShouldHideMovementArrows();
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_ARROW,spriteId);
+}
+
+static const union AnimCmd sSpriteAnim_Cursors[] =
+{
+    ANIMCMD_FRAME(DEXNAV_CURSOR_FRAME_0,16),
+    ANIMCMD_FRAME(DEXNAV_CURSOR_FRAME_1,8),
+    ANIMCMD_FRAME(DEXNAV_CURSOR_FRAME_2,16),
+    ANIMCMD_FRAME(DEXNAV_CURSOR_FRAME_1,8),
+    ANIMCMD_JUMP(0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_Cursor[] =
+{
+    sSpriteAnim_Cursors,
+};
+
+static bool8 Dexnav_ShouldHideCursors(void)
+{
+    if (Dexnav_GetMode() != DEXNAV_MODE_MAIN)
+        return TRUE;
+
+    return FALSE;
+}
+
+static void SpriteCB_Cursor(struct Sprite *sprite)
+{
+    u32 position = Dexnav_GetCursorPosition();
+    if (position == sprite->data[0])
+        return;
+
+    sprite->data[0] = position;
+    u32 num = sprite->data[1];
+
+    sprite->x = (dexnavMonIconCoordinates[num][position][AXIS_X]);
+    sprite->y = (dexnavMonIconCoordinates[num][position][AXIS_Y]);
+}
+
+static void Dexnav_DisplayCursors(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_CURSOR;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+    TempSpriteTemplate.anims = sSpriteAnimTable_Cursor;
+    TempSpriteTemplate.callback = SpriteCB_Cursor;
+
+    u32 position = Dexnav_GetCursorPosition();
+    u32 num = Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()) - 1;
+
+    u32 x = dexnavMonIconCoordinates[num][position][AXIS_X];
+    u32 y = dexnavMonIconCoordinates[num][position][AXIS_Y];
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x64);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(64x64);
+    gSprites[spriteId].invisible = Dexnav_ShouldHideCursors();
+    gSprites[spriteId].data[0] = position;
+    gSprites[spriteId].data[1] = num;
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_CURSOR,spriteId);
 }
