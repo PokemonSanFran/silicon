@@ -54,6 +54,7 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId);
 static void FreeSpritePalettesResetSpriteData(void);
 static void Dexnav_FreeResources(void);
 static void Dexnav_FreeStructs(void);
+static bool8 Dexnav_SwitchHabitat(void);
 static void Dexnav_FreeBackgrounds(void);
 static void Dexnav_InitializeAndSaveCallback(MainCallback callback);
 static void SaveCallbackToDexnav(MainCallback callback);
@@ -63,6 +64,7 @@ static void DisplayHelpBar(enum DexnavWindows windowId);
 static void Dexnav_SetMode(enum DexnavMode mode);
 static enum DexnavMode Dexnav_GetMode(void);
 static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId);
+static enum DexnavHabitats Dexnav_GetHabitat(void);
 static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
@@ -82,7 +84,7 @@ static void Dexnav_DisplayStreak(void);
 static void Dexnav_DisplayStarsInsight(void);
 static void Dexnav_DisplayStarsStreak(void);
 static void Dexnav_DisplayMonInfo(void);
-static void Dexnav_PrintMonInfo(enum DexnavWindows windowId);
+static void Dexnav_PrintMonName(enum DexnavWindows windowId);
 static void SpriteCB_Star(struct Sprite *sprite);
 static void Dexnav_PrintMonTypes(void);
 static void Dexnav_PrintFishingIcon(void);
@@ -93,6 +95,7 @@ static void Dexnav_SetCursorPosition(u32 value);
 static void Dexnav_MoveCursor(s32 direction);
 static void SpriteCB_DexnavFishing(struct Sprite *sprite);
 static void Dexnav_DisplaySelectedMon(void);
+static void Dexnav_RemoveSelectedMonSprite(void);
 static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex);
 static void Dexnav_PrintFloatingActionButton(void);
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex);
@@ -334,6 +337,9 @@ static void Dexnav_CreateCompletionSprite(void)
 
 static bool8 Dexnav_ShouldHideCompletionMark(void)
 {
+    if ((Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND) == 0) && (Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER) == 0))
+        return TRUE;
+
     for (enum DexnavHabitats habitat = 0; habitat < DEXNAV_HABITAT_COUNT; habitat++)
     {
         for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
@@ -353,6 +359,27 @@ static bool8 Dexnav_ShouldHideCompletionMark(void)
 static void Dexnav_SetHabitat(enum DexnavHabitats habitat)
 {
     sDexnavState->habitat = habitat;
+}
+
+static bool8 Dexnav_SwitchHabitat(void)
+{
+    enum DexnavHabitats habitat = Dexnav_GetHabitat();
+
+    if (habitat == DEXNAV_HABITAT_NONE)
+        return FALSE;
+
+    if (Dexnav_HasMultipleHabitats() == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == TRUE)
+        return FALSE;
+
+    if (habitat == DEXNAV_HABITAT_LAND)
+        Dexnav_SetHabitat(DEXNAV_HABITAT_WATER);
+    else if (habitat == DEXNAV_HABITAT_WATER)
+        Dexnav_SetHabitat(DEXNAV_HABITAT_LAND);
+
+    return TRUE;
 }
 
 static enum DexnavHabitats Dexnav_GetHabitat(void)
@@ -631,6 +658,7 @@ void Dexnav_SetupCallback(void)
         case 3:
             Dexnav_InitWindows();
             Dexnav_DisplayAllHabitatPokemon();
+            Dexnav_DisplayMonInfo();
             Dexnav_PrintFloatingActionButton();
             Dexnav_HandleHabitatHeader();
             DisplayHeaderName(WIN_DEXNAV_HEADER);
@@ -639,7 +667,6 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStarsInsight();
             Dexnav_DisplayStreak();
             Dexnav_DisplayStarsStreak();
-            Dexnav_DisplayMonInfo();
             Dexnav_DisplayMovementArrows();
             Dexnav_DisplayCursors();
             gMain.state++;
@@ -746,6 +773,14 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(SELECT_BUTTON) || JOY_REPEAT(SELECT_BUTTON))
     {
+        if(Dexnav_SwitchHabitat())
+        {
+            if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
+                Dexnav_SetCursorPosition(0);
+            Dexnav_DisplayMonInfo();
+            Dexnav_DisplayAllHabitatPokemon();
+            Dexnav_HandleHabitatHeader();
+        }
         return;
     }
 }
@@ -785,6 +820,9 @@ static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
     if ((Dexnav_HasMultipleHabitats()) && (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE))
         StringAppend(gStringVar4,COMPOUND_STRING(" {SELECT_BUTTON} Switch Habitat"));
 
+    if ((Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND) == 0) && (Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER) == 0))
+        StringCopy(gStringVar4, COMPOUND_STRING("No Pokemon found."));
+
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
@@ -792,7 +830,7 @@ static bool8 Dexnav_HasMultipleHabitats(void)
 {
     u32 land = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND);
     u32 water = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER);
-    
+
     return ((land > 0) && (water > 0));
 }
 
@@ -838,6 +876,8 @@ static u32 Dexnav_PopulateHabitat(const struct WildPokemonInfo *monsInfo, u32 wi
     if (monsInfo == NULL || monsInfo->encounterRate == 0)
         return startCount;
 
+    bool32 isFishing = (startCount > 0);
+
     for (u32 i = 0; i < wildCount; i++)
     {
         u32 species = monsInfo->wildPokemon[i].species;
@@ -849,7 +889,9 @@ static u32 Dexnav_PopulateHabitat(const struct WildPokemonInfo *monsInfo, u32 wi
             continue;
 
         sDexnavState->dexnavSpecies[habitat][startCount++] = species;
-        sDexnavState->fishingMons[startCount] = TRUE;
+
+        if (habitat == DEXNAV_HABITAT_WATER)
+            sDexnavState->fishingMons[startCount-1] = isFishing;
     }
 
     return startCount;
@@ -859,6 +901,7 @@ static void Dexnav_LoadEncounterData(void)
 {
     memset(sDexnavState->dexnavSpecies, 0, sizeof(sDexnavState->dexnavSpecies));
 
+    /*
     u32 counta = 0;
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_CRABOMINABLE;
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_QUAQUAVAL;
@@ -874,7 +917,6 @@ static void Dexnav_LoadEncounterData(void)
     sDexnavState->dexnavSpecies[DEXNAV_HABITAT_LAND][counta++] = SPECIES_GOODRA;
     Dexnav_SaveNumberHabitatMons(DEXNAV_HABITAT_LAND, counta);
     return;
-    /*
     */
 
     u32 headerId = GetCurrentMapWildMonHeaderId();
@@ -975,6 +1017,10 @@ static void Dexnav_DisplayInsight(void)
 
 static void Dexnav_PrintInsight(enum DexnavWindows windowId)
 {
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if (species == SPECIES_NONE)
+        return;
+
     u32 x = 8;
     u32 y = 5;
     u32 fontId = FONT_DEXNAV_STAT_HEADER;
@@ -1004,6 +1050,10 @@ static void Dexnav_DisplayStreak(void)
 
 static void Dexnav_PrintStreak(enum DexnavWindows windowId)
 {
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if (species == SPECIES_NONE)
+        return;
+
     u32 x = 9;
     u32 y = 4;
     u32 fontId = FONT_DEXNAV_STAT_HEADER;
@@ -1104,6 +1154,11 @@ static const union AnimCmd * const sAnims_Star[] =
 
 static void SpriteCB_Star(struct Sprite *sprite)
 {
+    if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+
     bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
 
     s32 insight = sprite->data[0];
@@ -1204,15 +1259,20 @@ static void Dexnav_DisplayMonInfo(void)
 {
     enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_MON_INFO;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Dexnav_PrintMonInfo(windowId);
+    Dexnav_PrintMonName(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
+
     Dexnav_PrintMonTypes();
     Dexnav_PrintFishingIcon();
     Dexnav_DisplaySelectedMon();
 }
 
-static void Dexnav_PrintMonInfo(enum DexnavWindows windowId)
+static void Dexnav_PrintMonName(enum DexnavWindows windowId)
 {
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if (species == SPECIES_NONE)
+        return;
+
     u32 x = 7;
     u32 y = 0;
     u32 fontId = FONT_DEXNAV_STAT_HEADER;
@@ -1220,7 +1280,7 @@ static void Dexnav_PrintMonInfo(enum DexnavWindows windowId)
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - x;
 
-    StringCopy(gStringVar4,GetSpeciesName(Dexnav_GetCurrentlySelectedSpecies()));
+    StringCopy(gStringVar4,GetSpeciesName(species));
     fontId = GetFontIdToFit(gStringVar4,fontId,letterSpacing,windowWidth);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
@@ -1387,6 +1447,9 @@ static void SpriteCB_DexnavTypes(struct Sprite *sprite)
 
     if (typeNum == 1)
         sprite->invisible = (GetSpeciesType(species,0) == GetSpeciesType(species,1));
+    
+    if (typeNum == 0)
+        sprite->invisible = (GetSpeciesType(species,typeNum) == TYPE_NONE);
 
     StartSpriteAnimIfDifferent(sprite,type);
 }
@@ -1487,6 +1550,10 @@ static void Dexnav_DisplaySelectedMon(void)
 {
     Dexnav_RemoveSelectedMonSprite();
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
+
+    if (species == SPECIES_NONE)
+        return;
+
     u32 x = 149, y = 80, personality = 0;
     bool32 isShiny = FALSE, isFrontPic = TRUE;
     u32 spriteId = CreateMonPicSprite(species,isShiny,personality,isFrontPic,x, y, DEXNAV_PALETTE_MAIN_MON_ID, TAG_NONE);
@@ -1503,6 +1570,7 @@ static void Dexnav_DisplayAllHabitatPokemon(void)
 
     for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
         Dexnav_DisplayHabitatPokemon(habitat, speciesIndex);
+
 }
 
 static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
@@ -1631,10 +1699,23 @@ static void SpriteCB_MonIconDexnav(struct Sprite *sprite)
         return;
 }
 
+static void Dexnav_RemoveMonIcon(u32 spriteId)
+{
+    u32 oldSpriteId = Dexnav_GetSpriteId(spriteId);
+
+    if (oldSpriteId == SPRITE_NONE)
+        return;
+
+    Dexnav_SaveSpriteId(spriteId,SPRITE_NONE);
+    FreeAndDestroyMonIconSprite(&gSprites[oldSpriteId]);
+}
+
 static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex)
 {
     u32 species = Dexnav_GetSpeciesFromHabitatAndIndex(habitat,speciesIndex);
     u32 num = Dexnav_GetNumberHabitatMons(habitat);
+
+    Dexnav_RemoveMonIcon(DEXNAV_SPRITEID_MON_0 + speciesIndex);
 
     if (num == 0)
         return;
@@ -1654,6 +1735,8 @@ static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 specie
 
     if (hasCaught == FALSE)
         gSprites[spriteId].oam.paletteNum = DEXNAV_PALETTE_ALL_BLACK_ID;
+
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0 + speciesIndex,spriteId);
 }
 
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex)
@@ -1774,12 +1857,13 @@ static bool8 Dexnav_ShouldHideCursors(void)
 static void SpriteCB_Cursor(struct Sprite *sprite)
 {
     u32 position = Dexnav_GetCursorPosition();
-    if (position == sprite->data[0])
+    u32 num = Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()) - 1;
+
+    if ((position == sprite->data[0]) && (num == sprite->data[1]))
         return;
 
     sprite->data[0] = position;
-    u32 num = sprite->data[1];
-
+    sprite->data[1] = num;
     sprite->x = (dexnavMonIconCoordinates[num][position][AXIS_X]);
     sprite->y = (dexnavMonIconCoordinates[num][position][AXIS_Y]);
 }
