@@ -8,6 +8,13 @@ void CB2_DexnavFromStartMenu(void);
 void Dexnav_FadescreenAndExitGracefully(void);
 void Dexnav_SetupCallback(void);
 
+struct DexnavSavedData
+{
+    enum DexnavHabitats habitat;
+    u8 cursorPosition;
+    u16 species;
+};
+
 struct DexnavState
 {
     void* savedCallback;
@@ -19,6 +26,7 @@ struct DexnavState
     u8 numHabitatMons[DEXNAV_HABITAT_COUNT];
     u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][DEXNAV_MAX_SHOWN_MONS];
     bool8 fishingMons[DEXNAV_MAX_SHOWN_MONS];
+    struct DexnavSavedData savedData;
 };
 
 struct DexnavSpriteSheet

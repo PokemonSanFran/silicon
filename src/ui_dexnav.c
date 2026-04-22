@@ -33,6 +33,11 @@
 #include "event_data.h"
 #include "battle.h"
 
+static void Dexnav_RestoreFromSave(struct DexnavSavedData savedData);
+static bool8 Dexnav_IsThereSavedData(void);
+static enum DexnavHabitats Dexnav_GetSavedHabitat(void);
+static u8 Dexnav_GetSavedCursorPosition(void);
+static u16 Dexnav_GetSavedSpecies(void);
 static void Dexnav_VBlankCB(void);
 static void Dexnav_MainCB(void);
 static bool8 Dexnav_InitalizeBackgrounds(void);
@@ -56,7 +61,7 @@ static void Dexnav_FreeResources(void);
 static void Dexnav_FreeStructs(void);
 static bool8 Dexnav_SwitchHabitat(void);
 static void Dexnav_FreeBackgrounds(void);
-static void Dexnav_InitializeAndSaveCallback(MainCallback callback);
+static void Dexnav_InitializeAndSaveCallback(MainCallback callback, struct DexnavSavedData savedData);
 static void SaveCallbackToDexnav(MainCallback callback);
 static void Dexnav_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
@@ -586,10 +591,11 @@ static void Dexnav_FreeBackgrounds(void)
 
 void CB2_DexnavFromStartMenu(void)
 {
-    Dexnav_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI);
+    struct DexnavSavedData savedData = {DEXNAV_HABITAT_NONE, 0, SPECIES_NONE};
+    Dexnav_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI, savedData);
 }
 
-static void Dexnav_InitializeAndSaveCallback(MainCallback callback)
+static void Dexnav_InitializeAndSaveCallback(MainCallback callback, struct DexnavSavedData savedData)
 {
     enum AdventureGuideList targetGuide = GUIDE_DEXNAV;
 
@@ -607,12 +613,44 @@ static void Dexnav_InitializeAndSaveCallback(MainCallback callback)
         return;
     }
     SaveCallbackToDexnav(callback);
+    Dexnav_RestoreFromSave(savedData);
     SetMainCallback2(Dexnav_SetupCallback);
+}
+
+static void Dexnav_RestoreFromSave(struct DexnavSavedData savedData)
+{
+    memcpy(&sDexnavState->savedData,&savedData,sizeof(struct DexnavSavedData));
+}
+
+static bool8 Dexnav_IsThereSavedData(void)
+{
+    return (Dexnav_GetSavedSpecies() != SPECIES_NONE);
+}
+
+static u16 Dexnav_GetSavedSpecies(void)
+{
+    return sDexnavState->savedData.species;
+}
+
+static u8 Dexnav_GetSavedCursorPosition(void)
+{
+    return sDexnavState->savedData.cursorPosition;
+}
+
+static enum DexnavHabitats Dexnav_GetSavedHabitat(void)
+{
+    return sDexnavState->savedData.habitat;
+}
+
+void Dexnav_InitalizeFromPokedex(MainCallback callback)
+{
+
 }
 
 static void Dexnav_ReturnFromAdventureGuide(void)
 {
-    Dexnav_InitializeAndSaveCallback(gMain.savedCallback);
+    struct DexnavSavedData savedData = {DEXNAV_HABITAT_NONE, 0, SPECIES_NONE};
+    Dexnav_InitializeAndSaveCallback(gMain.savedCallback,savedData);
 }
 
 static bool8 Dexnav_AllocateStructs(void)
@@ -651,6 +689,7 @@ void Dexnav_SetupCallback(void)
             CreateTask(Task_HandleInput,0);
             Dexnav_LoadEncounterData();
             Dexnav_SetHabitat(Dexnav_CalculateInitialHabitat());
+            Dexnav_SetCursorPosition(Dexnav_GetSavedCursorPosition());
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
             Dexnav_CreateCompletionSprite();
             gMain.state++;
@@ -836,6 +875,9 @@ static bool8 Dexnav_HasMultipleHabitats(void)
 
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void)
 {
+    if (Dexnav_IsThereSavedData())
+        return Dexnav_GetSavedHabitat();
+
     u32 land = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND);
     u32 water = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER);
 
