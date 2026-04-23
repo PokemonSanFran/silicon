@@ -950,8 +950,6 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
 // a copy of Task_SummaryInput_MovesInput but exits when A/B is pressed
 static void Task_SummaryMode_SelectMoveInput(u8 taskId)
 {
-    enum MonSummaryMovesSubModes subMode = SummaryInput_IsWithinSubMode();
-
     if (JOY_NEW(DPAD_DOWN))
     {
         MovesPageMisc_UpdateIndex(1);
