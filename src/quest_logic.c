@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
 #include "constants/story_jump.h"
@@ -3651,14 +3652,152 @@ static const u16 babyPokemon[] =
     SPECIES_HAPPINY,
 };
 
+struct OddEggCandidates
+{
+    u16 species;
+    u8 stats[NUM_STATS];
+    bool8 isShiny;
+    u8 chance;
+};
+
+static const struct OddEggCandidates oddEggCandidates[] =
+{
+    [ODD_EGG_PICHU_SHINY] =
+    {
+        .species = SPECIES_PICHU,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 1,
+    },
+    [ODD_EGG_TYROGUE_SHINY] =
+    {
+        .species = SPECIES_TYROGUE,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 1,
+    },
+    [ODD_EGG_SMOOCHUM_SHINY] =
+    {
+        .species = SPECIES_SMOOCHUM,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_ELEKID_SHINY] =
+    {
+        .species = SPECIES_ELEKID,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_MAGBY_SHINY] =
+    {
+        .species = SPECIES_MAGBY,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_CLEFFA_SHINY] =
+    {
+        .species = SPECIES_CLEFFA,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 3,
+    },
+    [ODD_EGG_IGGLYBUFF_SHINY] =
+    {
+        .species = SPECIES_IGGLYBUFF,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 3,
+    },
+
+    [ODD_EGG_PICHU_NOT_SHINY] =
+    {
+        .species = SPECIES_PICHU,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 8,
+    },
+    [ODD_EGG_TYROGUE_NOT_SHINY] =
+    {
+        .species = SPECIES_TYROGUE,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 10,
+    },
+    [ODD_EGG_MAGBY_NOT_SHINY] =
+    {
+        .species = SPECIES_MAGBY,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 10,
+    },
+    [ODD_EGG_ELEKID_NOT_SHINY] =
+    {
+        .species = SPECIES_ELEKID,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 12,
+    },
+    [ODD_EGG_SMOOCHUM_NOT_SHINY] =
+    {
+        .species = SPECIES_SMOOCHUM,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 14,
+    },
+    [ODD_EGG_CLEFFA_NOT_SHINY] =
+    {
+        .species = SPECIES_CLEFFA,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 16,
+    },
+    [ODD_EGG_IGGLYBUFF_NOT_SHINY] =
+    {
+        .species = SPECIES_IGGLYBUFF,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 16,
+    },
+};
+
 static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
+
+static enum OddEggPokemon ChooseOddEggIndex(void)
+{
+    u16 weights[ODD_EGG_COUNT];
+    u32 indices[ODD_EGG_COUNT];
+    u32 count = 0, sum = 0;
+
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
+    {
+        u32 species = oddEggCandidates[i].species;
+
+        if (ConvertSpeciesIdToResidoDex(species) == 0)
+            continue;
+
+        indices[count] = i;
+        weights[count] = oddEggCandidates[i].chance;
+
+        sum += weights[count];
+        count++;
+    }
+
+    if (count == 0)
+        return ODD_EGG_CLEFFA_NOT_SHINY;
+
+    u32 filteredIndex = RandomWeightedArray(RNG_NONE,sum,count,weights);
+    return indices[filteredIndex];
+}
 
 static u32 GenerateAndGiveOddEgg(void)
 {
     struct Pokemon mon;
-    bool32 heads = ((Random() % 2) == 0);
+    u32 chosenIndex = ChooseOddEggIndex();
+    u32 species = oddEggCandidates[chosenIndex].species;
 
-    u32 species = babyPokemon[Random() % ARRAY_COUNT(babyPokemon)];
     enum PokeBall ball = BALL_POKE;
     enum Language language = LANGUAGE_JAPANESE;
 
@@ -3669,27 +3808,23 @@ static u32 GenerateAndGiveOddEgg(void)
 
     SetMonData(&mon, MON_DATA_POKEBALL, &ball);
     SetMonData(&mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
-    SetMonData(&mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
+
+    u8 eggCycles = ODD_EGG_DEFAULT_CYCLES;
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &eggCycles);
     SetMonData(&mon, MON_DATA_LANGUAGE, &language);
 
     bool8 isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
-    u8 stats[NUM_STATS] = {0};
-    stats[STAT_HP]  =   Random() % MAX_PER_STAT_IVS;
-    stats[STAT_ATK] =   (heads) ? 2  : 0;
-    stats[STAT_DEF] =   (heads) ? 10 : 0;
-    stats[STAT_SPATK] = (heads) ? 10 : 0;
-    stats[STAT_SPDEF] = (heads) ? 10 : 0;
-    stats[STAT_SPEED] = (heads) ? 10 : 0;
+    u8 hp = Random() % MAX_PER_STAT_IVS;
+    SetMonData(&mon, (MON_DATA_HP_IV), &hp);
 
-    for (u32 statIndex = STAT_HP; statIndex < NUM_STATS; statIndex++)
-        SetMonData(&mon, (MON_DATA_HP_IV + statIndex), &stats[statIndex]);
+    for (u32 statIndex = STAT_ATK; statIndex < NUM_STATS; statIndex++)
+        SetMonData(&mon, (MON_DATA_HP_IV + statIndex), &oddEggCandidates[chosenIndex].stats[statIndex]);
 
     CalculateMonStats(&mon);
 
-    bool8 isShiny     = (heads) ? FALSE : TRUE;
-    SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
+    SetMonData(&mon, MON_DATA_IS_SHINY, &oddEggCandidates[chosenIndex].isShiny);
     // PSF TODO this is apparently broken but Jamie says he'll fix it in an upcoming expansion release, right now the shininess get re-rolled on hatch and Jamie agrees that this should be preserved if it is set here
 
     return GiveCapturedMonToPlayer(&mon);
@@ -3718,9 +3853,12 @@ u32 CheckIfMonIsOddEgg(void)
 
     u32 species = GetMonData(mon, MON_DATA_SPECIES);
     bool32 foundMatch = FALSE;
-    for (u32 i = 0; i < ARRAY_COUNT(babyPokemon); i++)
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
     {
-        if (babyPokemon[i] != species)
+        if (oddEggCandidates[i].species != species)
+            continue;
+
+        if (ConvertSpeciesIdToResidoDex(species) == 0)
             continue;
 
         foundMatch = TRUE;
@@ -3732,33 +3870,29 @@ u32 CheckIfMonIsOddEgg(void)
     if ((GetMonGender(mon) == MON_MALE) && (species != SPECIES_TYROGUE))
         return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
 
-    u32 stats[NUM_STATS] = {0};
-    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
-        stats[statIndex] = GetMonData(mon, MON_DATA_HP_IV + statIndex, NULL);
-
     bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+    u32 chosenIndex = ODD_EGG_COUNT;
 
-    if (!isShiny
-            && stats[STAT_ATK] == 2
-            && stats[STAT_DEF] == 10
-            && stats[STAT_SPATK] == 10
-            && stats[STAT_SPDEF] == 10
-            && stats[STAT_SPEED] == 10)
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
     {
-        return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
+        if (oddEggCandidates[i].species != species)
+            continue;
+
+        if (oddEggCandidates[i].isShiny != isShiny)
+            continue;
+
+        chosenIndex = i;
+        break;
     }
 
-    if (isShiny
-            && stats[STAT_ATK] == 0
-            && stats[STAT_DEF] == 0
-            && stats[STAT_SPATK] == 0
-            && stats[STAT_SPDEF] == 0
-            && stats[STAT_SPEED] == 0)
-    {
-        return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
-    }
+    if (chosenIndex == ODD_EGG_COUNT)
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
 
-    return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+    for (u32 statIndex = STAT_ATK; statIndex < NUM_STATS; statIndex++)
+        if (oddEggCandidates[chosenIndex].stats[statIndex] != GetMonData(mon, MON_DATA_HP_IV + statIndex))
+            return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
 }
 
 void Script_CheckIfMonIsOddEgg(void)
