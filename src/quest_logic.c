@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "daycare.h"
 #include "constants/trainers.h"
 #include "constants/story_jump.h"
 #include "battle_anim.h"
@@ -3632,12 +3633,143 @@ void Script_IsHalaiIslandUnderConstruction(void)
 
 static const u16 questRestoreEspuleeGymItems[] =
 {
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A ,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,
+    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,
     ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,
     ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_D,
     ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,
 };
+
+static const u16 babyPokemon[] =
+{
+    SPECIES_CLEFFA,
+    SPECIES_TOGEPI,
+    SPECIES_TYROGUE,
+    SPECIES_SMOOCHUM,
+    SPECIES_MAGBY,
+    SPECIES_MIME_JR,
+    SPECIES_HAPPINY,
+};
+
+static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
+
+static u32 GenerateAndGiveOddEgg(void)
+{
+    struct Pokemon mon;
+    bool32 heads = ((Random() % 2) == 0);
+
+    u32 species = babyPokemon[Random() % ARRAY_COUNT(babyPokemon)];
+    enum PokeBall ball = BALL_POKE;
+    enum Language language = LANGUAGE_JAPANESE;
+
+    u32 gender = (species == SPECIES_TYROGUE) ? MON_MALE : MON_FEMALE;
+    u32 personality = GetMonPersonality(species,gender,NATURE_RANDOM,RANDOM_UNOWN_LETTER);
+    CreateMonWithIVsPersonality(&mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, personality);
+    GiveMonInitialMoveset(&mon);
+
+    SetMonData(&mon, MON_DATA_POKEBALL, &ball);
+    SetMonData(&mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
+    SetMonData(&mon, MON_DATA_LANGUAGE, &language);
+
+    bool8 isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+
+    u8 stats[NUM_STATS] = {0};
+    stats[STAT_HP]  =   Random() % MAX_PER_STAT_IVS;
+    stats[STAT_ATK] =   (heads) ? 2  : 0;
+    stats[STAT_DEF] =   (heads) ? 10 : 0;
+    stats[STAT_SPATK] = (heads) ? 10 : 0;
+    stats[STAT_SPDEF] = (heads) ? 10 : 0;
+    stats[STAT_SPEED] = (heads) ? 10 : 0;
+
+    for (u32 statIndex = STAT_HP; statIndex < NUM_STATS; statIndex++)
+        SetMonData(&mon, (MON_DATA_HP_IV + statIndex), &stats[statIndex]);
+
+    CalculateMonStats(&mon);
+
+    bool8 isShiny     = (heads) ? FALSE : TRUE;
+    SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
+    // PSF TODO this is apparently broken but Jamie says he'll fix it in an upcoming expansion release, right now the shininess get re-rolled on hatch and Jamie agrees that this should be preserved if it is set here
+
+    return GiveCapturedMonToPlayer(&mon);
+}
+
+u32 CheckIfMonIsOddEgg(void)
+{
+    struct Pokemon *mon = NULL;
+    struct Pokemon tempMon;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        BoxMonToMon(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &tempMon);
+        mon = &tempMon;
+    }
+    else
+    {
+        mon = &gPlayerParty[gSpecialVar_0x8004];
+    }
+
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
+
+    if(GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+        return QUEST_RESTOREESPULEEGYM_IS_NOT_EGG;
+
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
+    bool32 foundMatch = FALSE;
+    for (u32 i = 0; i < ARRAY_COUNT(babyPokemon); i++)
+    {
+        if (babyPokemon[i] != species)
+            continue;
+
+        foundMatch = TRUE;
+        break;
+    }
+    if (foundMatch == FALSE)
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    if ((GetMonGender(mon) == MON_MALE) && (species != SPECIES_TYROGUE))
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    u32 stats[NUM_STATS] = {0};
+    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
+        stats[statIndex] = GetMonData(mon, MON_DATA_HP_IV + statIndex, NULL);
+
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+
+    if (!isShiny
+            && stats[STAT_ATK] == 2
+            && stats[STAT_DEF] == 10
+            && stats[STAT_SPATK] == 10
+            && stats[STAT_SPDEF] == 10
+            && stats[STAT_SPEED] == 10)
+    {
+        return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
+    }
+
+    if (isShiny
+            && stats[STAT_ATK] == 0
+            && stats[STAT_DEF] == 0
+            && stats[STAT_SPATK] == 0
+            && stats[STAT_SPDEF] == 0
+            && stats[STAT_SPEED] == 0)
+    {
+        return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
+    }
+
+    return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+}
+
+void Script_CheckIfMonIsOddEgg(void)
+{
+    gSpecialVar_Result = CheckIfMonIsOddEgg();
+}
+
+void Script_GenerateAndGiveOddEgg(void)
+{
+    gSpecialVar_Result = GenerateAndGiveOddEgg();
+}
 
 static bool8 Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
 {
