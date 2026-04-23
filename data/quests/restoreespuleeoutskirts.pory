@@ -903,7 +903,222 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_ExclaimHatchedMon
     end
 }
 
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleepet
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    playmoncry(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET,CRY_MODE_NORMAL)
+    msgbox(format("The {STR_VAR_1} looks calm and content."),MSGBOX_NPC)
+    waitmoncry
+}
+
 script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonF
 {
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve)
+    goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve)
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_6,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_6,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete)
+}
 
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
+    msgbox(format("Ho there, ever heard of a Pokemon called {STR_VAR_1}? Back in Ancient Sinnoh, they used to have a special way of training {STR_VAR_2} to make them evolve into {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
+    msgbox(format("But that doesn't happen in Resido anymore. Anyone who knew the method here has long since passed."),,SPEAKER_ESPULEETRADEPERSONF)
+    msgbox(format("Yet you've stumbled upon me just as I've made a breakthrough! You may be the first to witness a new day in history! I believe I've uncovered the method."),,SPEAKER_ESPULEETRADEPERSONF)
+    msgbox(format("If you wish to see this in action, I have but one simple request: a {STR_VAR_3}. I need one."),,SPEAKER_ESPULEETRADEPERSONF)
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete_AskItem)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete_AskItem
+{
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    msgbox(format("Here to evolve your {STR_VAR_2}, friend?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_TradeItem
+{
+    setvar(VAR_0x8009,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    setvar(VAR_0x8008,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    chooseboxmon(SELECT_PC_MON_SPECIES_AND_MOVE)
+    waitstate
+    goto(Quest_Restoreespuleeoutskirts_Script_JudgeStantler)
+}
+
+script Quest_Restoreespuleeoutskirts_Script_JudgeStantler
+{
+    callnative(Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
+        case QUEST_RESTOREESPULEEGYM_INVALID_MON: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_WrongFamily)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsStantler)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_StartEvo)
+        case QUEST_RESTOREESPULEEGYM_IS_WYRDEER: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsWyrdeer)
+    }
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_WrongFamily
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    msgbox(format("You think this is a {STR_VAR_1}? Your eyesight must be worse than mine, little one!"),MSGBOX_NPC,SPEAKER_ESPULEETRADEPERSONF)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsStantler
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+    buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    msgbox(format("Ah, you're missing a trick. Only {STR_VAR_1} that know the move {STR_VAR_3} can evolve into {STR_VAR_2}."),,SPEAKER_ESPULEETRADEPERSONF)
+    msgbox(format("Come back to me when your {STR_VAR_1} knows the move!"),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_StartEvo
+{
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_6)
+    cueobjecttalking(LOCALID_PLAYER)
+   special(BufferMonNickname)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    // PSF TODO this has been broken in expansion but there is an update to fix it  soon, need
+    //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
+    //waitstate
+    givemon(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET,30,ITEM_NONE) // remove this one tryspecialevo is working
+    msgbox(format("Huzzah! History has been made! You have bore witness!"),,SPEAKER_ESPULEETRADEPERSONF)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
+    msgbox(format("And it can be made again, y'know? All's you need to do is bring me another {STR_VAR_1}, traveler!"),MSGBOX_NPC,SPEAKER_ESPULEETRADEPERSONF)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsWyrdeer
+{
+   special(BufferMonNickname)
+   msgbox(format("Ha! I've already trained {STR_VAR_1}!"),MSGBOX_NPC,SPEAKER_ESPULEETRADEPERSONF)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade
+{
+    goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_CompleteDenyTrade)
+    goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_CompleteDenyTrade)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
+    msgbox(format("Darn! I got all excited for a moment thinking I was about to add another {STR_VAR_3} to my glorious collection."),,SPEAKER_ESPULEETRADEPERSONF)
+
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolveStillWants)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_DiscussItem
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
+    msgbox(format("Welcome back!"),,SPEAKER_ESPULEETRADEPERSONF)
+    msgbox(format("I'm still helping people evolve their {STR_VAR_1}. Bring me a {STR_VAR_3} should you ever be so inclined!"),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolveStillWants
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    msgbox(format("Here to evolve your {STR_VAR_1}?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    msgbox(format("Here to evolve your {STR_VAR_1}?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_AskItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_CompleteDenyTrade
+{
+    msgbox(format("No? I won't even charge anymore!"),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_AskItem
+{
+    setvar(VAR_0x8009,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    setvar(VAR_0x8008,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    chooseboxmon(SELECT_PC_MON_SPECIES_AND_MOVE)
+    waitstate
+    goto(Quest_Restoreespuleeoutskirts_Script_JudgeStantlerComplete)
+}
+
+script Quest_Restoreespuleeoutskirts_Script_JudgeStantlerComplete
+{
+    callnative(Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_CompleteDenyTrade)
+        case QUEST_RESTOREESPULEEGYM_INVALID_MON: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_WrongFamily)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteIsStantler)
+        case QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartEvo)
+        case QUEST_RESTOREESPULEEGYM_IS_WYRDEER: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsWyrdeer)
+    }
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteIsStantler
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    msgbox(format("You should know how this works by now! Your {STR_VAR_1} can't evolve if it doesn't know {STR_VAR_3}!"),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartEvo
+{
+    cueobjecttalking(LOCALID_PLAYER)
+    special(BufferMonNickname)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+    buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    // PSF TODO this has been broken in expansion but there is an update to fix it  soon, need
+    //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
+    //waitstate
+    givemon(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET,30,ITEM_NONE) // remove this one tryspecialevo is working
+    bufferitemnameplural(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,2)
+    buffermovename(STR_VAR_1,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
+    msgbox(format("Alas…{STR_VAR_3} no longer excite me."),,SPEAKER_ESPULEETRADEPERSONF)
+msgbox(format("But helping people's trusty {STR_VAR_2} reach their full potential does!"),,SPEAKER_ESPULEETRADEPERSONF)
+msgbox(format("Little one, if you ever have a {STR_VAR_2} that knows the move {STR_VAR_1}, I'll help you evolve it, free of charge!"),,SPEAKER_ESPULEETRADEPERSONF)
+    closemessage
+    release
+    end
 }
