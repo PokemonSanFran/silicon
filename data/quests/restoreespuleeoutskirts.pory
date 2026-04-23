@@ -15,7 +15,7 @@ script Quest_Restoreespuleeoutskirts_Script_MoveImelda
 script Quest_Restoreespuleeoutskirts_Script_StartQuest
 {
     msgbox(format("Hello. Kai said you'd be along."),,SPEAKER_IMELDA)
-    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
     if (var(VAR_RESULT) == FALSE)
     {
         msgbox(format("Make some space in your bag for something important, please."),,SPEAKER_IMELDA)
@@ -47,9 +47,9 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
     msgbox(format("Are you familiar with the Pokemon {STR_VAR_1}? I want you to bring one to me."),,SPEAKER_IMELDA)
     closemessage
     call(Quest_Restoreespuleeoutskirts_Script_GiveRedScale)
-    bufferitemnameplural(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,2)
+    bufferitemnameplural(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,2)
     msgbox(format("{STR_VAR_3} used to be rare, but now that we have a better understanding of Shiny Pokemon, they're rather common."),,SPEAKER_IMELDA)
-    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
     bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("Use that {STR_VAR_3} to come back to me with a {STR_VAR_1}."),,SPEAKER_IMELDA)
     bufferspeciesname(STR_VAR_2,SPECIES_GYARADOS)
@@ -87,7 +87,7 @@ script Quest_Restoreespuleeoutskirts_Script_ImeldaActive
         goto(Quest_Restoreespuleeoutskirts_Script_OfferRedScale)
     }
 
-    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
     bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
     msgbox(format("Use that {STR_VAR_1} to come back to me with a {STR_VAR_2}."),,SPEAKER_IMELDA)
     msgbox(format("Resido used to be a place where trainers could make something from nothing. If that's still true, this should be easy."),,SPEAKER_IMELDA)
@@ -98,8 +98,8 @@ script Quest_Restoreespuleeoutskirts_Script_ImeldaActive
 
 script Quest_Restoreespuleeoutskirts_Script_OfferRedScale
 {
-    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
-    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
     msgbox(format("Are you in need of an additional {STR_VAR_1}?"),,SPEAKER_IMELDA)
     msgbox(format("It's no matter. They're easy to come by."),,SPEAKER_IMELDA)
 
@@ -119,7 +119,7 @@ script Quest_Restoreespuleeoutskirts_Script_OfferRedScale
 script Quest_Restoreespuleeoutskirts_Script_GiveRedScale
 {
     cueobjectplayer(LOCALID_ESPULEE_OUTSKIRTS_IMELDA)
-    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
 }
 
 script Quest_Restoreespuleeoutskirts_Dialogue_AskWyrdeer
@@ -258,4 +258,652 @@ script Quest_Restoreespuleeoutskirts_Dialogue_PostBattle
     waitdooranim
     release
     end
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonA
+{
+    lock
+    faceplayer
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_1,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_1,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete_DiscussItem
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_GYARADOS)
+    msgbox(format("I'm not a trainer, but I wanna see the legendary Red {STR_VAR_1}!"),,SPEAKER_ESPULEETRADEPERSONA)
+    bufferitemnameplural(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,2)
+    msgbox(format("Those {STR_VAR_1} are absolutely stunning! I have to have some!"),,SPEAKER_ESPULEETRADEPERSONA)
+    msgbox(format("Hey, if ya ever come across one, you'll let me know, won't ya?"),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Incomplete_AskItem
+{
+    msgbox(format("That glimmer coming from your bag…Could it be?…"),,SPEAKER_ESPULEETRADEPERSONA)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
+    msgbox(format("It is! A {STR_VAR_1}! Man, oh man! Boy, oh boy! Could I have it? Please, oh please!?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_TradeItem
+{
+    cueobjectplayer(LOCALID_WAJABI_ESPUELEETRADEPERSONA)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_1)
+    msgbox(format("YEEEEEEEHAW!! Thank ya so much, stranger!"),,SPEAKER_ESPULEETRADEPERSONA)
+    msgbox(format("Here, it's not much but my partner works in stationery - I hope ya can find a use for it."),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    cueobjectplayer(LOCALID_WAJABI_ESPUELEETRADEPERSONA)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_DenyTrade
+{
+    msgbox(format("Aww, shucks, but I understand - if I had one of them beauties I'd wanna keep it for myself too!"),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete_DiscussItem
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
+    msgbox(format("Hey, y'know I'm not gonna stop at just one {STR_VAR_1}! If ya ever get anymore, come let me know!"),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_Complete_AskItem
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START)
+    bufferitemname(STR_VAR_2,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    msgbox(format("Ready for another trade? A {STR_VAR_1} for some {STR_VAR_2}?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_CompleteTradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonA_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_CompleteTradeItem
+{
+    cueobjectplayer(LOCALID_WAJABI_ESPUELEETRADEPERSONA)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,1)
+    msgbox(format("Another for the collection! Somehow this'un's more beautiful than the last!"),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    cueobjectplayer(LOCALID_WAJABI_ESPUELEETRADEPERSONA)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonA_CompleteDenyTrade
+{
+    msgbox(format("Heh, well I guess I should be happy with the one I have."),,SPEAKER_ESPULEETRADEPERSONA)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonB
+{
+    lock
+    faceplayer
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_2,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_2,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete_DiscussItem
+{
+
+    msgbox(format("Back in the day, trainers used to give their Pokemon mail to hold! Doesn't it sound cute?"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("Usually they travelled with them, delivered messages for other trainers…"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("That was a time when communication platforms weren't so readily available, of course."),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("The mail has fallen out of favor since, but I still collect it! There were so many nifty little prints and designs!"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("If you come across any of the interesting stationery from that time, I'd love to see it!"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Incomplete_AskItem
+{
+    msgbox(format("Back in the day, trainers used to give their Pokemon mail to hold! Doesn't it sound cute?"),,SPEAKER_ESPULEETRADEPERSONB)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A)
+    msgbox(format("Oh, I think I have something like that. Uh… {STR_VAR_1}?"),,SPEAKER_PLAYER)
+    msgbox(format("Hmm, I've never seen that one before… It must be super old!"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("Would you perhaps be willing to part with it?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_TradeItem
+{
+    cueobjectplayer(LOCALID_QIU_ESPUELEETRADEPERSONB)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_2)
+    msgbox(format("It's pretty! What a vibrant shade of blue!"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("Here, I just got done brewing some tea. Take some with you as you go, my way of saying thanks!"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    cueobjectplayer(LOCALID_QIU_ESPUELEETRADEPERSONB)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_DenyTrade
+{
+    msgbox(format("That's a shame. Let me know if you change your mind!"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete_DiscussItem
+{
+    msgbox(format("I'm always making more tea! As long as you've got mail, I've got tea!"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_Complete_AskItem
+{
+    msgbox(format("It's you! Your timing's perfect. I just got done brewing more tea!"),,SPEAKER_ESPULEETRADEPERSONB)
+    msgbox(format("I'd be willing to part with it for some more of that fancy mail…"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_CompleteTradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonB_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_CompleteTradeItem
+{
+    cueobjectplayer(LOCALID_QIU_ESPUELEETRADEPERSONB)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1)
+    msgbox(format("Thanks again!"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    cueobjectplayer(LOCALID_QIU_ESPUELEETRADEPERSONB)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonB_CompleteDenyTrade
+{
+    msgbox(format("Was there something wrong with my tea?"),,SPEAKER_ESPULEETRADEPERSONB)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonC
+{
+    lock
+    faceplayer
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_3,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_3,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete_DiscussItem
+{
+
+    msgbox(format("Boy, I'm parched."),,SPEAKER_ESPULEETRADEPERSONC)
+    bufferitemname(STR_VAR_1,ITEM_SODA_POP)
+    bufferitemname(STR_VAR_2,ITEM_LEMONADE)
+    msgbox(format("Well, perhaps parched is the wrong word. I could get some {STR_VAR_1} or {STR_VAR_1} easily, but I'm after something a little… Homier… Tanninier."),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Incomplete_AskItem
+{
+    msgbox(format("Something smells real good in your bag…"),,SPEAKER_ESPULEETRADEPERSONC)
+    msgbox(format("Is that tea!? Can I have it?? You're a trainer, right? I have something I could give you in return!"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_TradeItem
+{
+    cueobjectplayer(LOCALID_HODOU_ESPUELEETRADEPERSONC)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_3)
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+    msgbox(format("I used to work at the {STR_VAR_1} Breeding Centre, I've got heaps of leftover tickets."),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    cueobjectplayer(LOCALID_HODOU_ESPUELEETRADEPERSONC)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_DenyTrade
+{
+    msgbox(format("Oh!.. Forgive my, uh, moan. It smells very good."),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete_DiscussItem
+{
+    msgbox(format("It's incredible! My heart is about to Bounce out of my chest!"),,SPEAKER_ESPULEETRADEPERSONC)
+    bufferitemnameplural(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,2)
+    msgbox(format("Come back with more tea like that and I've got all the {STR_VAR_1} you could ever ask for."),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_Complete_AskItem
+{
+    msgbox(format("Oh yeah. I know that scent."),,SPEAKER_ESPULEETRADEPERSONC)
+    msgbox(format("You've got more of that tea, haven't you? Is it for me?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_CompleteTradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonC_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_CompleteTradeItem
+{
+    cueobjectplayer(LOCALID_HODOU_ESPUELEETRADEPERSONC)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1)
+    msgbox(format("I'm always happy to make this trade."),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    cueobjectplayer(LOCALID_HODOU_ESPUELEETRADEPERSONC)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonC_CompleteDenyTrade
+{
+    msgbox(format(" Gah…I haven't been able to stop thinking about that tea since I tried it…"),,SPEAKER_ESPULEETRADEPERSONC)
+    closemessage
+    release
+    end
+}
+
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonD
+{
+    lock
+    faceplayer
+    goto_if_unset(FLAG_RECIEVED_NURSERY_EGG,Quest_Restoreespuleeoutskirts_Dialogue_EspuleetradepersonD_FirstEggOffer)
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_4,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_4,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_EspuleetradepersonD_FirstEggOffer
+{
+    msgbox(format("Lots of trainers opt not to take eggs if they find out that they're breedjects."),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("It's truly saddening. I wish every egg could have a good home."),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("I'm sensing you have a good heart. Perhaps you'd be willing to adopt an Egg?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggAccept)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggDeny)
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_NoRoomForEgg
+{
+    msgbox(format("Oh! But you don't have room for any new Pokemon! Come back when you do!"),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggAccept
+{
+    startmenu_savescreen
+    callnative(Script_GenerateAndGiveOddEgg)
+    copyvar(VAR_TEMP_3,VAR_RESULT)
+    setflag(FLAG_RECIEVED_NURSERY_EGG)
+    goto_if_eq(VAR_RESULT,MON_CANT_GIVE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_NoRoomForEgg)
+    msgbox(format("Wonderful! How nice it is to see this egg get a happy home."),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    cueobjectplayer(LOCALID_CHASILLA_BREEDING_ESPUELEETRADEPERSOND)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} recieved an Egg!"))
+    waitmessage
+    waitfanfare
+    call_if_eq(VAR_TEMP_3,MON_GIVEN_TO_PC,BreedingCenter_Text_EggTransferredToPC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggDeny
+{
+    msgbox(format("I understand. It's a big responsibility."),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_DiscussItem
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C)
+    msgbox(format("The Daycare used to have a program wherein trainers from under-served communities would take in an Odd Egg in exchange for an {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("But I haven't seen those tickets in a long time. I think they went away when Sharprise popped up."),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_AskItem
+{
+    bufferitemnameplural(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,2)
+    msgbox(format("Hey! Got one of those nifty little {STR_VAR_1}?"),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("Would you…Perhaps give it to me? I would of course give you an Odd Egg now."),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_TradeItem
+{
+    startmenu_savescreen
+    callnative(Script_GenerateAndGiveOddEgg)
+    copyvar(VAR_TEMP_3,VAR_RESULT)
+    removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_4)
+    goto_if_eq(VAR_RESULT,MON_CANT_GIVE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_NoRoomForEgg)
+    msgbox(format("Egg-cellent! Hehehe, another good home for what I'm sure is a good egg."),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    cueobjectplayer(LOCALID_CHASILLA_BREEDING_ESPUELEETRADEPERSOND)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} recieved an Egg!"))
+    waitmessage
+    waitfanfare
+    call_if_eq(VAR_TEMP_3,MON_GIVEN_TO_PC,BreedingCenter_Text_EggTransferredToPC)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_DenyTrade
+{
+    msgbox(format("No? How strange. The tickets don't serve any other purpose."),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete
+{
+    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1)
+    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete_DiscussItem)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete_DiscussItem
+{
+    msgbox(format("If you find any more of those tickets, we have so many Odd Eggs that could use a home!"),,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Complete_AskItem
+{
+    msgbox(format("Another Odd Egg, then? We'd thank you very kindly!"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSOND)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonE
+{
+    lock
+    faceplayer
+    goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_5,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Incomplete_AskItem)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_5,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Complete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Incomplete_AskItem
+{
+    msgbox(format("Lil' baby Pokemon are the best! Who cares if they aren't strong?"),,SPEAKER_ESPULEETRADEPERSONE)
+    buffermapname(STR_VAR_3,MAP_CHASILLA)
+    msgbox(format("I'd love to hatch a Shiny one day, but the {STR_VAR_3} Breeding Services are too pricey."),,SPEAKER_ESPULEETRADEPERSONE)
+    msgbox(format("Apparently those 'breedjects' they get are lucky. I want some of those!"),,SPEAKER_ESPULEETRADEPERSONE)
+    msgbox(format("Hey, do you happen to have any?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_TradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_TradeItem
+{
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    if(var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("If you make some space in your bag, I can give you something that'll power up certain Pokemon."),,SPEAKER_ESPULEETRADEPERSONE)
+        closemessage
+        release
+        end
+    }
+    setvar(VAR_0x8009,SPECIES_EGG)
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    cueobjecttalking(LOCALID_PLAYER)
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg
+{
+    callnative(Script_CheckIfMonIsOddEgg)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_RegularEgg)
+        case QUEST_RESTOREESPULEEGYM_IS_ODD_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_AskEgg)
+        case QUEST_RESTOREESPULEEGYM_IS_NOT_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_NotEgg)
+    }
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_DenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_RegularEgg
+{
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+    msgbox(format("Hmm…"),,SPEAKER_ESPULEETRADEPERSONE)
+    msgbox(format("This egg might be from {STR_VAR_1}, but it ain't one of the weird ones I'm looking for."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_AskEgg
+{
+    askplayermon(format("Yes! This is the one! Can I have it?"),format("Aww. Come back when you've got one you're happy for me to have."),format("Come back to me when you have more healthy Pokemon."),SPEAKER_ESPULEETRADEPERSONE)
+    goto_if_eq(VAR_TEMP_3,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_GiveEggUp)
+    goto_if_eq(VAR_TEMP_3,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDeny)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_NotEgg
+{
+    msgbox(format("This… Is not an egg."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_DenyTrade
+{
+    msgbox(format("Fine! But if you get one, don't hatch it! Bring it here!"),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_GiveEggUp
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_5)
+    msgbox(format("Ooh I can't wait to hatch this little guy!"),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    cueobjectplayer(LOCALID_CURENO_ESPUELEETRADEPERSONE)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    bufferitemname(STR_VAR_1,ITEM_BOTTLE_CAP)
+    buffermapname(STR_VAR_2,MAP_HALERBA_CITY)
+    msgbox(format("Y'know there's a researcher in {STR_VAR_2} who'll make certain Pokemon stronger if you bring them a {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDeny
+{
+    msgbox(format("Aww. Come back when you've got one you're happy for me to have."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Complete
+{
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Complete_AskItem)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Complete_AskItem
+{
+    msgbox(format("I'd be overjoyed to take more of those Odd Eggs if you have them!"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteTradeItem)
+    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteTradeItem
+{
+    goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_ExclaimHatchedMon)
+    goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_ExclaimHatchedMon)
+
+    checkitemspace(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    if(var(VAR_RESULT) == FALSE)
+    {
+        bufferitemname(STR_VAR_1,ITEM_BOTTLE_CAP)
+        msgbox(format("Hey! I'll give you another {STR_VAR_1} for another of those Odd Eggs!"),,SPEAKER_ESPULEETRADEPERSONE)
+        msgbox(format("Somehow you don't have room in your bag for a {STR_VAR_1}. You gotta clean this thing out everyone once in a while, y'know!"),,SPEAKER_ESPULEETRADEPERSONE)
+        closemessage
+        release
+        end
+    }
+    setvar(VAR_0x8009,SPECIES_EGG)
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    cueobjecttalking(LOCALID_PLAYER)
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEggComplete)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDenyTrade
+{
+    msgbox(format("Fine! But if you get one, don't hatch it! Bring it here!"),,SPEAKER_ESPULEETRADEPERSONE)
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+    msgbox(format("I hope one day the {STR_VAR_1} Breeding Services will be a little more affordable."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEggComplete
+{
+    callnative(Script_CheckIfMonIsOddEgg)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_RegularEgg)
+        case QUEST_RESTOREESPULEEGYM_IS_ODD_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_AskEggComplete)
+        case QUEST_RESTOREESPULEEGYM_IS_NOT_EGG: goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_NotEgg)
+    }
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDenyTrade)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_JudgeEgg_AskEggComplete
+{
+    buffermapname(STR_VAR_3,MAP_CHASILLA)
+    askplayermon(format("Yes! This is the one! Can I have it?"),format("Fine! But if you get one, don't hatch it! Bring it here! I hope one day the {STR_VAR_3} Breeding Services will be a little more affordable."),format("Come back to me when you have more healthy Pokemon."),SPEAKER_ESPULEETRADEPERSONE)
+    goto_if_eq(VAR_TEMP_3,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_GiveEggUpComplete)
+    goto_if_eq(VAR_TEMP_3,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_CompleteDeny)
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_GiveEggUpComplete
+{
+    msgbox(format("I can't wait to see what this hatches into!"),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    cueobjectplayer(LOCALID_CURENO_ESPUELEETRADEPERSONE)
+    giveitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_ExclaimHatchedMon
+{
+    bufferspeciesname(STR_VAR_1,SPECIES_MAGBY)
+    msgbox(format("You're not gonna believe it! That Odd Egg you gave me yieleded… Wait for it… A Shiny {STR_VAR_1}!"),,SPEAKER_ESPULEETRADEPERSONE)
+    msgbox(format("Look how cute this lil' fella is. His little snout and his little claws… My life is complete."),,SPEAKER_ESPULEETRADEPERSONE)
+    closemessage
+    release
+    end
+}
+
+script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonF
+{
+
 }
