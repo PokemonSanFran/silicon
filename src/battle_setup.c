@@ -685,8 +685,8 @@ static void CB2_EndWildBattle(void)
     // else if (FlagGet(B_FLAG_SKY_BATTLE))
     else if (FlagGet(FLAG_POST_SKY_BATTLE) || FlagGet(B_FLAG_SKY_BATTLE))
     {
-        FlagClear(FLAG_POST_SKY_BATTLE);
         HandleBattleVariantEndParty();
+        FlagClear(FLAG_POST_SKY_BATTLE);
         IncrementFogVariable();
         SetMainCallback2(CB2_LoadMap);
         DowngradeBadPoison();
