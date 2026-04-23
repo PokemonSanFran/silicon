@@ -180,10 +180,10 @@ script Quest_Restaurantexpansion_Script_BlockPantry
 
 script Quest_Restaurantexpansion_Script_InteractBelen
 {
-    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION2,NULL)
-    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION2,NULL)
-    goto_if_quest_active(QUEST_RESTAURANTEXPANSION2,NULL)
-    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION1,NULL)
+    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Dialogue_Complete)
+    goto_if_quest_reward(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Reward_Dialogue)
+    goto_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Active_Dialogue)
+    goto_if_quest_complete(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion1_Dialogue_Complete)
     goto_if_quest_reward(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion1_Dialogue_Reward)
     goto_if_quest_active(QUEST_RESTAURANTEXPANSION1,Quest_Restaurantexpansion_Dialogue_Active)
 }
@@ -446,7 +446,7 @@ script Quest_Restaurantexpansion_Chasilla_Nurse_Dialogue
         return
     }
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
     callnative(Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward)
     removeitem(ITEM_QUEST_RESTAURANTEXPANSION1_4,1)
     buffermapname(STR_VAR_1,MAP_CAPHE_CITY_PANTRY)

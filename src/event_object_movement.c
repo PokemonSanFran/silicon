@@ -232,6 +232,7 @@ static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
 static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16));
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction);
+static bool8 ShouldProgressDespiteCollision(u32 movementType, u32 index); // siliconQuests
 
 const u8 gReflectionEffectPaletteMap[16] = {
         [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,
@@ -355,6 +356,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = MovementType_WalkSlowlyInPlace,
     [MOVEMENT_TYPE_FOLLOW_PLAYER] = MovementType_FollowPlayer,
+    [MOVEMENT_TYPE_BUS_TABLES] = MovementType_BusTables, // siliconQuests
 };
 
 static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
@@ -399,6 +401,7 @@ static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = TRUE,
     [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_BUS_TABLES] = TRUE, // siliconQuests
 };
 
 const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
@@ -484,6 +487,7 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_EAST,
     [MOVEMENT_TYPE_FOLLOW_PLAYER] = DIR_SOUTH,
+    [MOVEMENT_TYPE_BUS_TABLES] = DIR_SOUTH, //siliconQuests
 };
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -3195,8 +3199,8 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = spriteId;
     // Start playerCustom
-    //gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
-    gPlayerAvatar.gender = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
+    gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gObjectEvents[objectEventId].graphicsId);
+    //gPlayerAvatar.gender = gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE];
     // End playerCustom
     SetPlayerAvatarExtraStateTransition(gObjectEvents[objectEventId].graphicsId, PLAYER_AVATAR_FLAG_CONTROLLABLE);
 }
@@ -12284,3 +12288,73 @@ bool8 MovementAction_SpinRight_Step1(struct ObjectEvent *objectEvent, struct Spr
     }
     return FALSE;
 }
+
+// Start siliconQuests
+static const struct DirectionSequence sMovementSequences[] =
+{
+    [MOVEMENT_TYPE_BUS_TABLES] = {gBusTableDirections, ARRAY_COUNT(gBusTableDirections)},
+};
+
+static bool8 ShouldProgressDespiteCollision(u32 movementType, u32 index)
+{
+    if (movementType != MOVEMENT_TYPE_BUS_TABLES)
+        return FALSE;
+
+    if (index != 0 && index != 16)
+        return FALSE;
+
+    return TRUE;
+}
+
+movement_type_def(MovementType_BusTables, gMovementTypeFuncs_BusTables)
+
+bool8 MovementType_CustomMovement_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    ClearObjectEventMovement(objectEvent, sprite);
+
+    if (objectEvent->directionSequenceIndex >= ARRAY_COUNT(gBusTableDirections))
+        objectEvent->directionSequenceIndex = 0;
+
+    sprite->sTypeFuncId = 1;
+    return TRUE;
+}
+
+bool8 MovementType_CustomMovement_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u32 index = objectEvent->directionSequenceIndex;
+    u32 movementType = objectEvent->movementType;
+    enum Direction dir = sMovementSequences[movementType].directions[index];
+
+    SetObjectEventDirection(objectEvent, dir);
+    u32 collision = GetCollisionInDirection(objectEvent,dir);
+    u32 movementActionId = collision ? GetWalkInPlaceNormalMovementAction(dir) : GetWalkNormalMovementAction(dir);
+    ObjectEventSetSingleMovement(objectEvent, sprite, movementActionId);
+    objectEvent->singleMovementActive = TRUE;
+
+    if (ShouldProgressDespiteCollision(movementType,index))
+        collision = FALSE;
+
+    sprite->sTypeFuncId = collision ? 2 : 3;
+    return TRUE;
+}
+
+bool8 MovementType_CustomMovement_Step3(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (!ObjectEventExecSingleMovementAction(objectEvent, sprite))
+        return FALSE;
+
+    u32 movementType = objectEvent->movementType;
+    if (movementType >= ARRAY_COUNT(sMovementSequences) || sMovementSequences[movementType].directions == NULL)
+        return FALSE;
+
+    u32 count = sMovementSequences[movementType].count;
+    objectEvent->singleMovementActive = FALSE;
+
+    objectEvent->directionSequenceIndex++;
+    if (objectEvent->directionSequenceIndex >= count)
+        objectEvent->directionSequenceIndex = 0;
+
+    sprite->sTypeFuncId = 1;
+    return FALSE;
+}
+// End siliconQuests

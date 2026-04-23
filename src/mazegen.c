@@ -12,6 +12,7 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/map_groups.h"
+#include "constants/map_event_ids.h"
 
 // ***********************************************************************
 // mazegen.c
@@ -343,57 +344,32 @@ static void PlaceStairs(u8 mazeWidth, u8 mazeHeight){
     }
 }
 
-static void PlaceItemBall(u8 mazeWidth, u8 mazeHeight)
+static void PlaceItemBall(u8 mazeWidth, u8 mazeHeight, u8 cellWidth, u8 cellHeight, u16 chunkWidth, u16 chunkHeight)
 {
-    u32 mazeSize = Sqrt(mazeWidth * mazeHeight);
-    u32 minDistance = mazeSize / 3;
+    struct Cell *endpoints[cellWidth * cellHeight];
+    u32 numEndpoints = 0;
 
-    u32 objectId = 1;
+    for (u32 i = 0; i < cellWidth; i++)
+        for (u32 j = 0; j < cellHeight; j++)
+            if (gMazeStruct->cells[i][j].endpoint)
+                endpoints[numEndpoints++] = &gMazeStruct->cells[i][j];
 
-    u32 collision = 0, itemIndex = 0, dx = 0, dy = 0, numPlaced = 1, itemPlacementAttempts = 0;
-
-    u32 itemCoords[QUEST_KITCHENVOLUNTEERING_SUB_COUNT+1][2];
+    u32 numItems = (numEndpoints < QUEST_KITCHENVOLUNTEERING_SUB_COUNT) ? numEndpoints : QUEST_KITCHENVOLUNTEERING_SUB_COUNT;
 
     SeedRng(gSaveBlock3Ptr->mazeItemsSeed);
-
-    itemCoords[MAZE_PLAYER_START_POSITION][0] = MAZE_PLAYER_SPAWN_X;
-    itemCoords[MAZE_PLAYER_START_POSITION][1] = MAZE_PLAYER_SPAWN_Y;
-
-    // Generate random item coordinates until all items are placed
-    while (numPlaced < QUEST_KITCHENVOLUNTEERING_SUB_COUNT + 1)
+    for (u32 i = (numEndpoints - 1); i > 0; i--)
     {
-        u32 itemX = (Random() % mazeSize) + MAP_OFFSET;
-        u32 itemY = (Random() % mazeSize) + MAP_OFFSET;
+        u32 j = Random() % (i + 1);
+        struct Cell *temp = endpoints[i];
+        endpoints[i] = endpoints[j];
+        endpoints[j] = temp;
+    }
 
-        /*
-         * PSF TODO
-         * The items need to spawn exclusively at endpoints, use gMazeEndpoints in Agustin's branch
-         * Occasionally, when leaving the maze and returning, the game will crash. I need to test this on a machine with gdb access. I suspect it is something to do with GenerateMazeItemsSeed, which moves the location of the set item everytime the player enters the maze. To repro:
-         * Go to MAP_CAPHE_CITY_PANTRY, get the STORAGE_KEY, go into the maze. Leave and come back a few times, and the game should crash.
-         */
-        // Check if the item collides with the maze or with another item
-        collision = MapGridGetCollisionAt(itemX, itemY);
-        for (itemIndex = 0; itemIndex < numPlaced; itemIndex++)
-        {
-            dx = abs(itemCoords[itemIndex][0] - itemX);
-            dy = abs(itemCoords[itemIndex][1] - itemY);
-            if (dx < minDistance && dy < minDistance)
-            {
-                collision = 1;
-                itemPlacementAttempts++;
-                if (itemPlacementAttempts > MAX_ITEM_PLACEMENT_ATTEMPTS)
-                    Quest_Kitchenvolunteering_CreatePantryMaze();
-                break;
-            }
-        }
-
-        if (collision)
-            continue;
-
-        // Add the item to the list and mark the cell as occupied
-        itemCoords[numPlaced][0] = itemX;
-        itemCoords[numPlaced++][1] = itemY;
-
+    u32 objectId = LOCALID_QUEST_KITCHENVOLUNTEERING_1;
+    for (u32 i = 0; i < numItems; i++)
+    {
+        u32 itemX = endpoints[i]->x * chunkWidth + MAP_OFFSET + chunkWidth / 2;
+        u32 itemY = endpoints[i]->y * chunkHeight + MAP_OFFSET + chunkHeight / 2;
         SetObjEventTemplateCoords(objectId, itemX - MAP_OFFSET, itemY - MAP_OFFSET);
         objectId++;
     }
@@ -412,6 +388,8 @@ struct Maze *GenerateMazeMap(u16 width, u16 height, const struct TemplateSet *te
 
     GenerateMaze(&maze, width, height, templateSet);
 
+    gMazeStruct = &maze;
+
     for (x = 0; x < width; ++x)
     {
         for (y = 0; y < height; ++y)
@@ -426,19 +404,22 @@ struct Maze *GenerateMazeMap(u16 width, u16 height, const struct TemplateSet *te
             PasteMapChunk(x * templateSet->chunkWidth, y * templateSet->chunkHeight, &chunk);
         }
     }
-    PlaceStairs(width * templateSet->chunkWidth,height * templateSet->chunkHeight);
-    PlaceItemBall(width * templateSet->chunkWidth,height * templateSet->chunkHeight);
+
+    PlaceStairs(width * templateSet->chunkWidth, height * templateSet->chunkHeight);
+    PlaceItemBall(width * templateSet->chunkWidth, height * templateSet->chunkHeight, width, height, templateSet->chunkWidth, templateSet->chunkHeight);
+
     return &maze;
 }
 
-void GenerateMazeLayoutSeed(void){
+void GenerateMazeLayoutSeed(void)
+{
     gSaveBlock3Ptr->mazeLayoutSeed = Random();
 }
 
-void GenerateMazeItemsSeed(void){
+void GenerateMazeItemsSeed(void)
+{
     gSaveBlock3Ptr->mazeItemsSeed = Random();
 
-    while (gSaveBlock3Ptr->mazeItemsSeed == gSaveBlock3Ptr->mazeLayoutSeed) {
+    while (gSaveBlock3Ptr->mazeItemsSeed == gSaveBlock3Ptr->mazeLayoutSeed)
         gSaveBlock3Ptr->mazeItemsSeed = Random();
-    }
 }

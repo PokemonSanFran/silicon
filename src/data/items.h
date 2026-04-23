@@ -16088,9 +16088,9 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANTRY_A] =
+    [ITEM_RICE] =
     {
-        .name = ITEM_NAME("Tin of Beans"),
+        .name = ITEM_NAME("Rice"),
         .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -16098,9 +16098,9 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANTRY_B] =
+    [ITEM_SEASONING_MIX] =
     {
-        .name = ITEM_NAME("Pasta"),
+        .name = ITEM_NAME("Seasoning Mix"),
         .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -16108,9 +16108,9 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANTRY_C] =
+    [ITEM_ARBOLIVA_OIL] =
     {
-        .name = ITEM_NAME("Peanut Butter"),
+        .name = ITEM_NAME("Arboliva Oil"),
         .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -16118,9 +16118,9 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANTRY_D] =
+    [ITEM_TAHINI] =
     {
-        .name = ITEM_NAME("Apple Sauce"),
+        .name = ITEM_NAME("Tahini"),
         .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -16128,9 +16128,9 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
-    [ITEM_PANTRY_E] =
+    [ITEM_LENTILS] =
     {
-        .name = ITEM_NAME("Granola"),
+        .name = ITEM_NAME("Lentils"),
         .description = COMPOUND_STRING("An ingredient used for making meals at Belen's restaurant."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -16423,6 +16423,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_InfiniteSpray,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
+        .holdEffectParam = UCHAR_MAX,
     },
     //End siliconMerge
     [ITEM_FAIRY_FEATHER] =

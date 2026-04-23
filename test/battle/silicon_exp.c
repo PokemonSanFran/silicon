@@ -464,6 +464,8 @@ static const struct SiliconExpTestData sAdelaide_WecanstopyouactuallyTrainers =
 
 //  Actual tests here
 
+#if TRAINERCHECK
+
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Belen")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
@@ -684,3 +686,5 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Adelaide Wecanstopyouactually")
     SiliconExpTest(&sAdelaide_WecanstopyouactuallyTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
 */
+
+#endif // TRAINERCHECK

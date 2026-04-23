@@ -502,52 +502,82 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_1] =
+    [TWEET_QUEST_FREETHEINNOCENT_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("A suspect has been taken into custody over the robbery of the Resido Hiking Club: a member of The Tide known as FindtheguiltyvictimB."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_2] =
+    [TWEET_QUEST_FREETHEINNOCENT_2] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("FindtheguiltyvictimB would never steal anything! The cops need to step their game up!"),
+        .content = COMPOUND_STRING("FreetheinnocentvictimB would never steal anything! The cops need to step their game up!"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_3] =
+    [TWEET_QUEST_FREETHEINNOCENT_3] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("The police aren’t being aggressive enough. This hiker thief is a small fry. Gotta lock the rest of those Tide weirdos up too."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_4] =
+    [TWEET_QUEST_FREETHEINNOCENT_4] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("The Tide shouldn’t be allowed to just get away with robbing an enthusiast club with no consequences. Glad one of ‘em finally got put in their place."),
         .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_FREETHEINNOCENT_5] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Somebody brought a boba cup back to the counter today straight from out of the garbage! Just another day in the life!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Freetheinnocent5,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_FINDTHEGUILTY_1] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("SharpRise meddling in the affairs of a hiking club of all things now. Reeks of fear if you ask me!"),
+        .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_Findtheguilty1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_5] =
+    [TWEET_QUEST_RESTAURANTEXPANSION2] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Somebody brought a boba cup back to the counter today straight from out of the garbage! Just another day in the life!"),
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("Looking for busboys, servers, chefs and line cooks - My new resturants wants to hire more Resido residents. DM me if you’re interested!"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty5,
+        .criteria = TweetCriteria_Quest_Restaurantexpansion1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_KITCHENVOLUNTEERING] =
+    {
+        .userId = BUZZR_USER_RESTAURANTEXPANSIONBUSSER,
+        .content = COMPOUND_STRING("We need staff at Flowers, the joint’s overflowing! As long as ya show up, we don’t care who ya are!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Kitchenvolunteering,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,

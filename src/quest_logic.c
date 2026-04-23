@@ -170,7 +170,7 @@ void Quest_Kitchenvolunteering_CreatePantryMaze(void)
 
 void KitchenvolunteeringFunc_GeneratePantryItem(void)
 {
-    gSpecialVar_0x8000 = ((ITEM_PANTRY_A - 1) + VarGet(VAR_LAST_TALKED));
+    gSpecialVar_0x8000 = ((ITEM_QUEST_KITCHENVOLUNTEERING_A - 1) + VarGet(VAR_LAST_TALKED));
     gSpecialVar_0x8001 = 1;
 
     KitchenvolunteeringFunc_CompleteSubquest();
@@ -209,22 +209,31 @@ u8 Quest_Kitchenvolunteering_CountRemainingItems(void)
     return (QUEST_KITCHENVOLUNTEERING_SUB_COUNT - numItems);
 }
 
+void Quest_Kitchenvolunteering_BufferRandomPantryItemName(void)
+{
+    CopyItemName(VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS), gStringVar1);
+}
+
 void KitchenvolunteeringFunc_ChooseRandomPantryItem(void)
 {
-    u32 randomItem = (Random() % (ITEM_PANTRY_END - ITEM_PANTRY_START) + ITEM_PANTRY_START);
+    u32 randomItem = (Random() % (ITEM_QUEST_KITCHENVOLUNTEERING_END - ITEM_QUEST_KITCHENVOLUNTEERING_START) + ITEM_QUEST_KITCHENVOLUNTEERING_START);
 
-    CopyItemName(randomItem, gStringVar1);
     VarSet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS,randomItem);
+    Quest_Kitchenvolunteering_BufferRandomPantryItemName();
 }
 
 static void KitchenvolunteeringFunc_RestoreChosenPantryItem(void)
 {
     u32 chosenItem = (VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS));
-    u32 itemOffset = chosenItem - ITEM_PANTRY_A;
+    u32 itemOffset = chosenItem - ITEM_QUEST_KITCHENVOLUNTEERING_A;
 
-    if (QuestMenu_GetSetQuestState(QUEST_KITCHENVOLUNTEERING,FLAG_GET_COMPLETED))
-        if (!CheckBagHasItem(chosenItem,1))
-            FlagClear(FLAG_TEMP_1 + itemOffset);
+    if (!QuestMenu_GetSetQuestState(QUEST_KITCHENVOLUNTEERING,FLAG_GET_COMPLETED))
+        return;
+
+    if (CheckBagHasItem(chosenItem,1))
+        return;
+
+    FlagClear(FLAG_TEMP_1 + itemOffset);
 }
 
 static void KitchenvolunteeringFunc_HidePantryItems(void)
@@ -237,6 +246,82 @@ static void KitchenvolunteeringFunc_HidePantryItems(void)
             continue;
 
         FlagSet(FLAG_TEMP_1 + itemIndex);
+    }
+}
+
+void Quest_Kitchenvolunteering_BufferNumberOfKitchenItems(void)
+{
+    u32 count = ITEM_QUEST_KITCHENVOLUNTEERING_END - ITEM_QUEST_KITCHENVOLUNTEERING_START + 1;
+    ConvertIntToDecimalStringN(gStringVar3, count, STR_CONV_MODE_LEFT_ALIGN, CountDigits(count));
+}
+
+void Quest_Kitchenvolunteering_CheckForDailyItem(void)
+{
+   enum Item dailyItem = VarGet(VAR_QUEST_KITCHEN_ASSIGNED_ITEMS);
+   gSpecialVar_Result = CheckBagHasItem(dailyItem,1);
+}
+
+void DebugQuest_KitchenVolunteering(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_KITCHENVOLUNTEERING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_1);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION1,STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION2,STATE_QUEST_RESTAURANTEXPANSION2_COMPLETE);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_KITCHENVOLUNTEERING);
+            GenerateMazeLayoutSeed();
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_A_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_A,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_B_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_C_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_D_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_D,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_ITEM_E_COLLECTED:
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_KITCHENVOLUNTEERING, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_COMPLETE:
+            FlagSet(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            RandomlyBoostPartyMemberFriendship();
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_A,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_B,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_C,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_D,1);
+            RemoveBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_E,1);
+            QuestMenu_ScriptSetComplete(QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_RESET_DAY:
+            FlagClear(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_START_DAILY:
+            GenerateMazeLayoutSeed();
+            AddBagItem(ITEM_QUEST_KITCHENVOLUNTEERING_KEY,1);
+            break;
+        case STATE_QUEST_KITCHENVOLUNTEERING_FINISH_DAILY:
+            FlagSet(FLAG_DAILY_QUEST_KITCHENVOLUNTEERING);
+            RandomlyBoostPartyMemberFriendship();
+            break;
     }
 }
 
@@ -261,7 +346,7 @@ void DebugQuest_RockCollector(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_ROCKCOLLECTOR_STARTED:
-            DebugQuest_BetweenAStoneAndAHardPlace(STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
+            QuestMenu_SetupQuestState(QUEST_BETWEENASTONEANDAHARDPLACE,STATE_QUEST_BETWEENASTONEANDAHARDPLACE_COMPLETE);
             QuestMenu_ScriptSetActive(QUEST_ROCKCOLLECTOR);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_KIT,1);
             AddBagItem(ITEM_QUEST_ROCKCOLLECTOR_NEED_1,1);
@@ -2862,6 +2947,7 @@ void DebugQuest_Hodoutunnels(u8 state)
             Quest_Hodoutunnels_SetVariable_TalkedToElder();
             break;
         case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
+            // PSF TODO: replace with debug quest when this is done
             QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
             Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
             break;
@@ -3079,7 +3165,7 @@ void DebugQuest_Getthebandbacktogether(u8 state)
             FlagSet(FLAG_SYS_STARTER_APPS_GET);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_STARTED_QUEST:
-            DebugQuest_AngelDelivery(STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
+            QuestMenu_SetupQuestState(QUEST_ANGELDELIVERY,STATE_QUEST_ANGELDELIVERY_COMPLETED_QUEST);
             QuestMenu_ScriptSetActive(QUEST_GETTHEBANDBACKTOGETHER);
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_RECRUIT_A:
@@ -3109,7 +3195,7 @@ void Script_Quest_Getthebandbacktogether_CountRemainingSubquests(void)
 }
 
 // ***********************************************************************
-// Quest: Restaurant Expansion 1
+// Quest: Restaurant Expansion 1 and 2
 // ***********************************************************************
 
 static const u16 questFoodLUT[QUEST_RESTAURANTEXPANSION1_SUB_COUNT] =
@@ -3141,19 +3227,35 @@ void DebugQuest_Restaurantexpansion1(u8 state)
             QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION1);
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE:
+            AddBagItem(questFoodLUT[SUB_QUEST_1],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_KARIOKA:
+            AddBagItem(questFoodLUT[SUB_QUEST_2],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHEBUREKI:
+            AddBagItem(questFoodLUT[SUB_QUEST_3],1);
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_JIANBING:
-            u32 pickupProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_PICKUP_CHE);
-            AddBagItem(questFoodLUT[pickupProgress],1);
+            AddBagItem(questFoodLUT[SUB_QUEST_4],1);
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_1],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_KARIOKA:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_2],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHEBUREKI:
+            RemoveBagItem(questFoodLUT[SUB_QUEST_3],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
+            break;
         case STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_JIANBING:
-            u32 deliverProgress = (state - STATE_QUEST_RESTAURANTEXPANSION1_DELIVER_CHE);
-            RemoveBagItem(questFoodLUT[deliverProgress],1);
-            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, deliverProgress);
+            RemoveBagItem(questFoodLUT[SUB_QUEST_4],1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION1, FLAG_SET_COMPLETED, SUB_QUEST_4);
             Quest_Restaurantexpansion1_CountRemainingSubquestsTryProgressReward();
             break;
         case STATE_QUEST_RESTAURANTEXPANSION1_REWARD:
@@ -3169,6 +3271,67 @@ void DebugQuest_Restaurantexpansion1(u8 state)
 void Script_Quest_Restaurantexpansion1_CountRemainingSubquests(void)
 {
     gSpecialVar_Result = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
+}
+
+void Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTAURANTEXPANSION2);
+}
+
+void DebugQuest_Restaurantexpansion2(u8 state)
+{
+    switch(state)
+    {
+        case STATE_QUEST_RESTAURANTEXPANSION2_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_1);
+            QuestMenu_SetupQuestState(QUEST_RESTAURANTEXPANSION1,STATE_QUEST_RESTAURANTEXPANSION1_COMPLETE);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTAURANTEXPANSION2);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_HOSTESS_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_CHEF_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_LINECOOK_BATTLE:
+        case STATE_QUEST_RESTAURANTEXPANSION2_BEFORE_BUSSER_BATTLE:
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_HOSTESS_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONHOSTESS);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_HOSTESS:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_CHEF_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONCHEF);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_CHEF:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_LINECOOK_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONLINECOOK);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_LINECOOK:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_AFTER_BUSSER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_RESTAURANTEXPANSIONBUSSER);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_RECRUITED_BUSSER:
+            QuestMenu_GetSetSubquestState(QUEST_RESTAURANTEXPANSION2, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            Quest_Restaurantexpansion2_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_RESTAURANTEXPANSION2);
+            break;
+        case STATE_QUEST_RESTAURANTEXPANSION2_COMPLETE:
+            VarSet(VAR_GYM_1_STATE,MERMEREZA_GYM_QUEST_COMPLETE_2);
+            QuestMenu_ScriptSetComplete(QUEST_RESTAURANTEXPANSION2);
+            break;
+    }
 }
 
 // ***********************************************************************
@@ -3410,6 +3573,34 @@ void DebugQuest_Freetheinnocent(u8 state)
             break;
         case STATE_QUEST_FREETHEINNOCENT_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_FREETHEINNOCENT);
+            break;
+    }
+}
+
+void DebugQuest_Findtheguilty(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_FINDTHEGUILTY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_SpeechSpeechSpeech(JUMP_DEBUG);
+            JumpPlayerTo_WarehouseRave(JUMP_DEBUG);
+            QuestMenu_SetupQuestState(QUEST_FREETHEINNOCENT,STATE_QUEST_FREETHEINNOCENT_COMPLETE);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_FINDTHEGUILTY);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_BEFORE_BATTLE:
+        case STATE_QUEST_FINDTHEGUILTY_BEFORE_COMPLETE:
+        case STATE_QUEST_FINDTHEGUILTY_REWARD:
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_AFTER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_QUEST_FINDTHEGUILTYPLANTH_2);
+            QuestMenu_ScriptSetReward(QUEST_FINDTHEGUILTY);
+            break;
+        case STATE_QUEST_FINDTHEGUILTY_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_FINDTHEGUILTY);
             break;
     }
 }

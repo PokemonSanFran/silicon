@@ -310,7 +310,6 @@ const u8 *GetQuestDesc_GetTheBandBackTogether(void)
 const u8 *GetQuestDesc_RestaurantExpansion1(void)
 {
     u32 remaining = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
-    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
 
     static const u16 sQuestItems[] =
     {
@@ -345,13 +344,19 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(sQuestMaps[index]),MAP_NUM(sQuestMaps[index]))->regionMapSectionId, 0);
     }
 
+    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
     StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
     return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Freetheinnocent(void)
 {
-    if (Quest_Freetheinnocent_CashierSpoken())
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT,FLAG_GET_ACTIVE))
+    {
+        u32 flag = ReturnQuestState(QUEST_FREETHEINNOCENT);
+        StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_FREETHEINNOCENT].desc[flag]);
+    }
+    else if (Quest_Freetheinnocent_CashierSpoken())
     {
         CopyItemNameHandlePlural(ITEM_QUEST_FREETHEINNOCENT_ALIBI,gStringVar1,2);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("If you can find the source of {STR_VAR_1}, you might be able to find an alibi for FindtheguiltyvictimB."));

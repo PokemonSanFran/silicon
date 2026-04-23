@@ -1122,8 +1122,7 @@ u8 GenerateList(void)
 {
     u32 mode = GetCurrentQuestFilter();
     u32 numFavorites = CountFavoriteQuests();
-    u8 numRow = 0, offset = 0, newRow = 0, countQuest = 0,
-       selectedQuestId = 0;
+    u32 numRow = 0, offset = 0, newRow = 0, countQuest = 0, selectedQuestId = 0;
     u8 *sortedQuestList;
 
     sortedQuestList = DefineQuestOrder();
@@ -1261,7 +1260,6 @@ u8 QuestMenu_GetSetQuestState(u8 quest, u8 caseId)
             return gSaveBlock3Ptr->questData[index] & mask;
         case FLAG_SET_ACTIVE:
             gSaveBlock3Ptr->questData[index] |= mask;
-            Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState();
             return 1;
         case FLAG_REMOVE_ACTIVE:
             gSaveBlock3Ptr->questData[index] &= ~mask;
@@ -1529,7 +1527,7 @@ void GenerateQuestLocation(s32 questId)
 {
     u8 *end;
 
-    if (questId < QUEST_PLAYERSADVENTURE)
+    if (questId < QUEST_PLAYERSADVENTURE || questId >= QUEST_COUNT)
         return;
 
     if (!GetCurrentQuestSubquestState())
@@ -2768,7 +2766,7 @@ void QuestMenu_JumpToQuestState(u8 questId, u8 state)
 {
     QuestMenu_SetupQuestState(questId, state);
 
-    s32 warpId = ((questState.y == 0) && (questState.x == 0)) ? questState.warpId : NO_WARP_ID;
+    s32 warpId = ((questState.y == 0) && (questState.x == 0)) ? questState.warpId : WARP_ID_NONE;
     SetWarpDestination(questState.mapGroup, questState.mapNum, warpId, questState.x, questState.y);
     DoWarp();
     ResetInitialPlayerAvatarState();
