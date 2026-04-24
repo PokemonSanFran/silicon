@@ -136,6 +136,7 @@ bool8 shouldShowRegisteredItems(void);
 void ForceReloadInventory(void);
 static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message);
 static void RecalculateCalculateCursorInventoryData(void);
+bool8 shouldSkipPocket(u32 pocket);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -309,6 +310,9 @@ void InitializeInventoryData(void)
 
     for(u32 i = 0; i < NUM_INVENTORY_SPRITES; i++)
         sMenuDataPtr->spriteIDs[i] = 0xFF;
+
+    if(shouldSkipPocket(gSaveBlock3Ptr->InventoryData.pocketNum))
+        gSaveBlock3Ptr->InventoryData.pocketNum = POCKET_MEDICINE;
 
     ForceReloadInventory();
     RecalculateCalculateCursorInventoryData();
@@ -1179,7 +1183,7 @@ static void SpriteCallback_Inventory_DownArrow(struct Sprite *sprite)
         remainingItems = (numitems - 1) - itemIdx;
 
     //mgba
-    DebugPrintf("SpriteCallback_Inventory_DownArrow remainingItems %d", remainingItems);
+    //DebugPrintf("SpriteCallback_Inventory_DownArrow remainingItems %d", remainingItems);
 
     if(itemIdx >= numitems - 1 || numitems < INVENTORY_MAX_ITEMS_SHOWN || remainingItems < HALF_SHOWN) //Because of the Exit Button
         sprite->invisible = TRUE;
@@ -2389,10 +2393,14 @@ static u32 Inventory_CalculateWidestBagPocketTitle(void)
 static void Inventory_PrintHeaderCursor(enum Pocket pocketId)
 {
     u32 x = Inventory_CalculateWidestBagPocketTitle() + 23;
+    u8 currentDrawnPocket = 0;
     for(enum Pocket pocketIndex = 0; pocketIndex < NUM_INVENTORY_POCKETS; pocketIndex++)
     {
-        const u8* pixels = ((pocketId == pocketIndex) ? sInventoryPocketIcon1_Gfx : sInventoryPocketIcon0_Gfx);
-        BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, (const u8*) pixels, (x + (pocketIndex * TILE_WIDTH)), 4, TILE_WIDTH, TILE_WIDTH);
+        if(!shouldSkipPocket(pocketIndex)){
+            const u8* pixels = ((pocketId == pocketIndex) ? sInventoryPocketIcon1_Gfx : sInventoryPocketIcon0_Gfx);
+            BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, (const u8*) pixels, (x + (currentDrawnPocket * TILE_WIDTH)), 4, TILE_WIDTH, TILE_WIDTH);
+            currentDrawnPocket++;
+        }
     }
 }
 
@@ -3823,6 +3831,25 @@ void RemoveEmptyRegisteredItems(void){
     }
 }
 
+bool8 shouldSkipPocket(u32 pocket){
+    DebugPrintf("shouldSkipPocket pocket %d", pocket);
+
+    if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_BATTLE){
+        switch(pocket){
+            case POCKET_MEDICINE:
+            case POCKET_POKE_BALLS:
+            case POCKET_BATTLE_ITEMS:
+            case POCKET_BERRIES:
+            case POCKET_FAVORITE_ITEMS:
+                return FALSE;
+            default:
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
@@ -3929,11 +3956,13 @@ static void Task_MenuMain(u8 taskId)
         if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
             return;
 
-        if(gSaveBlock3Ptr->InventoryData.pocketNum >= NUM_INVENTORY_POCKETS - 1)
-
-            gSaveBlock3Ptr->InventoryData.pocketNum = 0;
-        else
-            gSaveBlock3Ptr->InventoryData.pocketNum++;
+        do{
+            if(gSaveBlock3Ptr->InventoryData.pocketNum >= NUM_INVENTORY_POCKETS - 1)
+                gSaveBlock3Ptr->InventoryData.pocketNum = 0;
+            else
+                gSaveBlock3Ptr->InventoryData.pocketNum++;
+        }
+        while(shouldSkipPocket(gSaveBlock3Ptr->InventoryData.pocketNum));
 
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
@@ -3947,10 +3976,13 @@ static void Task_MenuMain(u8 taskId)
         if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
             return;
 
-        if(gSaveBlock3Ptr->InventoryData.pocketNum == 0)
-            gSaveBlock3Ptr->InventoryData.pocketNum = NUM_INVENTORY_POCKETS - 1;
-        else
-            gSaveBlock3Ptr->InventoryData.pocketNum--;
+        do{
+            if(gSaveBlock3Ptr->InventoryData.pocketNum == 0)
+                gSaveBlock3Ptr->InventoryData.pocketNum = NUM_INVENTORY_POCKETS - 1;
+            else
+                gSaveBlock3Ptr->InventoryData.pocketNum--;
+        }
+        while(shouldSkipPocket(gSaveBlock3Ptr->InventoryData.pocketNum));
 
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
