@@ -202,6 +202,12 @@ script Quest_Restoreespuleeoutskirts_Dialogue_Cancel
 script Quest_Restoreespuleeoutskirts_Dialogue_ImeldaReward
 {
     questmenu(QUEST_MENU_SET_REWARD,QUEST_RESTOREESPULEEGYM)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_2)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_3)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_4)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_5)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_6)
     msgbox(format("Well, well, well. For a few reasons, I didn't think you'd pull through!"),,SPEAKER_IMELDA)
     msgbox(format("I wasn't sure this region could still support such an evolution…"),,SPEAKER_IMELDA)
     msgbox(format("Wyrdeer have been all but extinct in Resido for some time now."),,SPEAKER_IMELDA)
@@ -643,7 +649,8 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_FirstEggDeny
 script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_DiscussItem
 {
     bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C)
-    msgbox(format("The Daycare used to have a program wherein trainers from under-served communities would take in an Odd Egg in exchange for an {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("The Daycare used to have a program wherein trainers from under-served communities would take in an Egg in exchange for an {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("Instead of breedjects, I'm gonna call them Odd Eggs."),,SPEAKER_ESPULEETRADEPERSOND)
     msgbox(format("But I haven't seen those tickets in a long time. I think they went away when Sharprise popped up."),,SPEAKER_ESPULEETRADEPERSOND)
     closemessage
     release
@@ -654,7 +661,7 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonD_Incomplete_AskItem
 {
     bufferitemnameplural(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,2)
     msgbox(format("Hey! Got one of those nifty little {STR_VAR_1}?"),,SPEAKER_ESPULEETRADEPERSOND)
-    msgbox(format("Would you…Perhaps give it to me? I would of course give you an Odd Egg now."),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSOND)
+    msgbox(format("Would you…Perhaps give it to me? I would of course give you a breedj- Odd Egg now."),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSOND)
     closemessage
     goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_TradeItem)
     goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonD_DenyTrade)
@@ -725,7 +732,7 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonE_Incomplete_AskItem
     msgbox(format("Lil' baby Pokemon are the best! Who cares if they aren't strong?"),,SPEAKER_ESPULEETRADEPERSONE)
     buffermapname(STR_VAR_3,MAP_CHASILLA)
     msgbox(format("I'd love to hatch a Shiny one day, but the {STR_VAR_3} Breeding Services are too pricey."),,SPEAKER_ESPULEETRADEPERSONE)
-    msgbox(format("Apparently those 'breedjects' they get are lucky. I want some of those!"),,SPEAKER_ESPULEETRADEPERSONE)
+    msgbox(format("Apparently the Breeding Center gives away Odd Eggs that Trainer don't want... and sometimes they are lucky. I want some of those!"),,SPEAKER_ESPULEETRADEPERSONE)
     msgbox(format("Hey, do you happen to have any?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONE)
     closemessage
     goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonE_TradeItem)
@@ -915,10 +922,8 @@ script Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonF
 {
     lock
     faceplayer
-    goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve)
-    goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve)
     goto_if_subquest_not_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_6,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete)
-    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_6,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete)
+    goto_if_subquest_complete(QUEST_RESTOREESPULEEGYM,SUB_QUEST_6,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve)
 }
 
 script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Incomplete
@@ -991,19 +996,7 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_StartEvo
 {
     removeitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREESPULEEGYM,SUB_QUEST_6)
-    cueobjecttalking(LOCALID_PLAYER)
-   special(BufferMonNickname)
-    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
-    buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
-    msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
-    closemessage
-    // PSF TODO this has been broken in expansion but there is an update to fix it  soon, need
-    //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
-    //waitstate
-    givemon(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET,30,ITEM_NONE) // remove this one tryspecialevo is working
-    msgbox(format("Huzzah! History has been made! You have bore witness!"),,SPEAKER_ESPULEETRADEPERSONF)
-    bufferitemname(STR_VAR_1,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
-    msgbox(format("And it can be made again, y'know? All's you need to do is bring me another {STR_VAR_1}, traveler!"),MSGBOX_NPC,SPEAKER_ESPULEETRADEPERSONF)
+    goto(Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartEvo)
 }
 
 script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_IsWyrdeer
@@ -1022,33 +1015,6 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade
     closemessage
     release
     end
-}
-
-script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete
-{
-    checkitem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1)
-    goto_if_eq(VAR_RESULT,FALSE,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_DiscussItem)
-    goto_if_eq(VAR_RESULT,TRUE,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolveStillWants)
-}
-
-script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Complete_DiscussItem
-{
-    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
-    bufferitemname(STR_VAR_3,ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E)
-    msgbox(format("Welcome back!"),,SPEAKER_ESPULEETRADEPERSONF)
-    msgbox(format("I'm still helping people evolve their {STR_VAR_1}. Bring me a {STR_VAR_3} should you ever be so inclined!"),,SPEAKER_ESPULEETRADEPERSONF)
-    closemessage
-    release
-    end
-}
-
-script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolveStillWants
-{
-    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
-    msgbox(format("Here to evolve your {STR_VAR_1}?"),MSGBOX_YESNO,SPEAKER_ESPULEETRADEPERSONF)
-    closemessage
-    goto_if_eq(VAR_RESULT,YES,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_TradeItem)
-    goto_if_eq(VAR_RESULT,NO,Quest_Restoreespuleeoutskirts_EspuleetradepersonF_DenyTrade)
 }
 
 script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_OfferEvolve
