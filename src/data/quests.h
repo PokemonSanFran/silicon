@@ -1543,8 +1543,9 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     [QUEST_RESTOREESPULEEGYM] =
     {
         .name = COMPOUND_STRING("Restore Espulee Outskirts Gym"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Keep trading the {STR_VAR_1} until you get a {STR_VAR_3}."),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You traded up the {STR_VAR_1} until you got a {STR_VAR_3}."),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Take the {STR_VAR_1} from Imelda and return to her with a {STR_VAR_3}."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("{PLAYER} gave Imelda their {STR_VAR_3}, and the {STR_VAR_2} Swap Meet is in business
+                "),
         .descFunc = GetQuestDesc_RestoreEspuleeOutskirts,
         .map = COMPOUND_STRING("Espulee Outskirts"),
         .sprite = OBJ_EVENT_GFX_IMELDA,

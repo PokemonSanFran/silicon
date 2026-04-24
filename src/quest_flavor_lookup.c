@@ -385,6 +385,7 @@ const u8 *GetQuestDesc_Freetheinnocent(void)
 const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
 {
     CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,gStringVar1);
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
     StringCopy(gStringVar3,GetSpeciesName(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
     u32 flag = ReturnQuestState(QUEST_RESTOREESPULEEGYM);
     StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RESTOREESPULEEGYM].desc[flag]);
