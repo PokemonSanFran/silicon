@@ -56,7 +56,6 @@ static const u32* GetRelevantTilemap(u32);
 static void LoadPokedexPalettes(void);
 static void PlaySoundStartFadeQuitApp(u8);
 static void Task_WaitFadeAndExitGracefully(u8);
-static void FreeResources(void);
 static void FreeStructs(void);
 
 static void SpeciesGrid_ChangeSortAndReload(void);
@@ -422,7 +421,7 @@ static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
         return;
     }
     firstOpen = TRUE;
-    SaveCallbackToPokedex(CB2_StartMenu_ReturnToUI);
+    SaveCallbackToPokedex(callback);
     SetMainCallback2(Pokedex_SetupCallback);
 }
 
@@ -753,7 +752,7 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId)
     SetMainCallback2(sPokedexState->savedCallback);
     SpeciesGrid_SetSavedSpecies(SpeciesGrid_GetCurrentSpecies());
     SpeciesGrid_SetSavedSort(SpeciesGrid_GetSort());
-    FreeResources();
+    Pokedex_FreeResources();
     DestroyTask(taskId);
 }
 
@@ -765,7 +764,7 @@ void Pokedex_FadescreenAndExitGracefully(void)
     SetMainCallback2(Pokedex_MainCB);
 }
 
-static void FreeResources(void)
+void Pokedex_FreeResources(void)
 {
     SpeciesGrid_RemoveMonCursorSprite();
     SpeciesGrid_RemoveScrollbarSpriteId();
@@ -3178,6 +3177,30 @@ void SpeciesGrid_SetShouldPlayCry(bool32 value)
 bool32 SpeciesGrid_GetShouldPlayCry(void)
 {
     return sPokedexState->shouldPlayCry;
+}
+
+void Pokedex_SaveDexnavData(struct DexnavSavedData savedData)
+{
+    memcpy(&sPokedexState->dexnavSavedData,&savedData,sizeof(struct DexnavSavedData));
+}
+
+void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId)
+{
+    if (AllocateStructs())
+    {
+        SetMainCallback2(savedData.savedCallback);
+        return;
+    }
+
+    SpeciesGrid_ResetInterfaceSpriteIds();
+    SpeciesData_ResetTypeSpriteId();
+
+    Pokedex_SaveDexnavData(savedData);
+    ParentDisplay_SetFutureSpeciesId(savedData.species);
+    SaveCallbackToPokedex(savedData.savedCallback);
+    gTasks[taskId].tTargetPageId = POKEDEX_PAGE_INFORMATION;
+    LoadPokedexPalettes();
+    Page_SwitchFromGrid(taskId);
 }
 
 /*

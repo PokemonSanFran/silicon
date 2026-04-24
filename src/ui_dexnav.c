@@ -1,5 +1,7 @@
 #include "global.h"
 #include "dexnav.h"
+#include "ui_pokedex.h"
+#include "overworld.h"
 #include "region_map.h"
 #include "text.h"
 #include "trainer_pokemon_sprites.h"
@@ -42,6 +44,11 @@ static void Dexnav_VBlankCB(void);
 static void Dexnav_MainCB(void);
 static bool8 Dexnav_InitalizeBackgrounds(void);
 static void Dexnav_ReturnFromAdventureGuide(void);
+static void Dexnav_SetSavedHabitat(enum DexnavHabitats habitat);
+static void Dexnav_SetSavedCursorPosition(u32 cursorPosition);
+static void Dexnav_RegisterCurrentlySelectedMon(void);
+static void Dexnav_SetSavedSpecies(u32 species);
+static void Dexnav_SetSavedCallback(void* callback);
 static bool8 Dexnav_AllocateStructs(void);
 static bool8 AllocZeroedTilemapBuffers(void);
 static void Dexnav_SaveSpriteId(enum DexnavSpriteIds spriteId, u32 id);
@@ -52,11 +59,11 @@ static void SetBackgroundTransparency(void);
 static void SetScheduleBgs(enum DexnavBackgrounds backgroundId);
 static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId);
 static void LoadGraphics(void);
+static struct DexnavSavedData Dexnav_GetSavedData(void);
+static void Dexnav_LaunchPokedex(u8 taskId);
 static void LoadDexnavPalettes(void);
-static void ClearWindowCopyToVram(enum DexnavWindows windowId);
 static void PlaySoundStartFadeQuitApp(u8 taskId);
 static void Task_WaitFadeAndExitGracefully(u8 taskId);
-static void FreeSpritePalettesResetSpriteData(void);
 static void Dexnav_FreeResources(void);
 static void Dexnav_FreeStructs(void);
 static bool8 Dexnav_SwitchHabitat(void);
@@ -76,7 +83,9 @@ static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
+static void Task_DexnavFadeToPokedex(u8 taskId);
 static void Dexnav_CreateCompletionSprite(void);
+static void Dexnav_CreateRegisterSprite(void);
 static void Dexnav_HandleHabitatHeader(void);
 static void DisplayHeaderName(enum DexnavWindows windowId);
 static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId);
@@ -107,9 +116,129 @@ static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32
 static void Dexnav_DisplayAllHabitatPokemon(void);
 static void Dexnav_DisplayMovementArrows(void);
 static void Dexnav_DisplayCursors(void);
+void Dexnav_StartOverworldSearch(u8 taskId);
+static void Task_BeginDexnavOverworld(u8 taskId);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
+
+static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
+{
+    [0] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+    },
+    [1] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+    },
+    [2] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [2] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+    },
+    [3] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [2] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [3] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+    },
+    [4] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [2] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [3] = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [4] = {[AXIS_X] = 117, [AXIS_Y] = 110},
+    },
+    [5] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [2] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [3] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [4] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [5] = {[AXIS_X] = 106, [AXIS_Y] = 106},
+    },
+    [6] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 100, [AXIS_Y] = 19},
+        [2] = {[AXIS_X] = 145, [AXIS_Y] = 8},
+        [3] = {[AXIS_X] = 181, [AXIS_Y] = 37},
+        [4] = {[AXIS_X] = 181, [AXIS_Y] = 83},
+        [5] = {[AXIS_X] = 145, [AXIS_Y] = 112},
+        [6] = {[AXIS_X] = 100, [AXIS_Y] = 101},
+    },
+    [7] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 96, [AXIS_Y] = 23},
+        [2] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [3] = {[AXIS_X] = 170, [AXIS_Y] = 23},
+        [4] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [5] = {[AXIS_X] = 170, [AXIS_Y] = 97},
+        [6] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [7] = {[AXIS_X] = 96, [AXIS_Y] = 97},
+    },
+    [8] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 92, [AXIS_Y] = 26},
+        [2] = {[AXIS_X] = 124, [AXIS_Y] = 8},
+        [3] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [4] = {[AXIS_X] = 183, [AXIS_Y] = 42},
+        [5] = {[AXIS_X] = 183, [AXIS_Y] = 78},
+        [6] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [7] = {[AXIS_X] = 124, [AXIS_Y] = 112},
+        [8] = {[AXIS_X] = 92, [AXIS_Y] = 94},
+    },
+    [9] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 90, [AXIS_Y] = 29},
+        [2] = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [3] = {[AXIS_X] = 149, [AXIS_Y] = 10},
+        [4] = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [5] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [6] = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [7] = {[AXIS_X] = 149, [AXIS_Y] = 110},
+        [8] = {[AXIS_X] = 117, [AXIS_Y] = 110},
+        [9] = {[AXIS_X] = 90, [AXIS_Y] = 91},
+    },
+    [10] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 88, [AXIS_Y] = 31},
+        [2] = {[AXIS_X] = 111, [AXIS_Y] = 12},
+        [3] = {[AXIS_X] = 141, [AXIS_Y] = 8},
+        [4] = {[AXIS_X] = 168, [AXIS_Y] = 20},
+        [5] = {[AXIS_X] = 184, [AXIS_Y] = 45},
+        [6] = {[AXIS_X] = 184, [AXIS_Y] = 75},
+        [7] = {[AXIS_X] = 168, [AXIS_Y] = 97},
+        [8] = {[AXIS_X] = 141, [AXIS_Y] = 109},
+        [9] = {[AXIS_X] = 111, [AXIS_Y] = 105},
+        [10] = {[AXIS_X] = 88, [AXIS_Y] = 86},
+    },
+    [11] =
+    {
+        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [1] = {[AXIS_X] = 87, [AXIS_Y] = 33},
+        [2] = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [3] = {[AXIS_X] = 133, [AXIS_Y] = 7},
+        [4] = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [5] = {[AXIS_X] = 179, [AXIS_Y] = 33},
+        [6] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [7] = {[AXIS_X] = 179, [AXIS_Y] = 87},
+        [8] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [9] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [10] = {[AXIS_X] = 106, [AXIS_Y] = 106},
+        [11] = {[AXIS_X] = 87, [AXIS_Y] = 87},
+    },
+};
 
 static const struct BgTemplate sDexnavBgTemplates[] = 
 {
@@ -321,7 +450,72 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_CURSOR,
         },
     },
+    [DEXNAV_SPRITEID_REGISTER] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/register.4bpp"),
+            .size = TILE_OFFSET_4BPP(8),
+            .tag = DEXNAV_SPRITETAG_REGISTER,
+        },
+    },
 };
+
+static void SpriteCB_Register(struct Sprite *sprite)
+{
+    u16 rawValue = VarGet(DN_VAR_SPECIES);
+    u32 species = rawValue & DEXNAV_MASK_SPECIES;
+    enum DexnavHabitats habitat = rawValue >> 14;
+
+    if (species == SPECIES_NONE)
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    if (habitat != Dexnav_GetHabitat())
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    u32 monIndex = 0;
+    for (monIndex = 0; monIndex < DEXNAV_MAX_SHOWN_MONS; monIndex++)
+    {
+        if (sDexnavState->dexnavSpecies[habitat][monIndex] != species)
+            continue;
+
+        break;
+    }
+
+    if (monIndex == DEXNAV_MAX_SHOWN_MONS)
+    {
+        sprite->invisible = TRUE;
+        return;
+    }
+
+    sprite->invisible = FALSE;
+
+    u32 num = Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()) - 1;
+
+    sprite->x = (dexnavMonIconCoordinates[num][monIndex][AXIS_X] + 18);
+    sprite->y = (dexnavMonIconCoordinates[num][monIndex][AXIS_Y] + 30);
+}
+
+static void Dexnav_CreateRegisterSprite(void)
+{
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_REGISTER;
+    TempSpriteTemplate.callback = SpriteCB_Register;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, 0, 0, 0);
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
+    gSprites[spriteId].oam.priority = 1;
+
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_REGISTER,spriteId);
+}
 
 static void Dexnav_CreateCompletionSprite(void)
 {
@@ -527,13 +721,6 @@ static void LoadDexnavPalettes(void)
     LoadPalette(dexnavPalettesHabitat, DEXNAV_PALETTE_HABITAT_SLOT, PLTT_SIZE_4BPP);
 }
 
-static void ClearWindowCopyToVram(enum DexnavWindows windowId)
-{
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-}
-
 static void PlaySoundStartFadeQuitApp(u8 taskId)
 {
     PlaySE(SE_PC_OFF);
@@ -557,14 +744,6 @@ void Dexnav_FadescreenAndExitGracefully(void)
     CreateTask(Task_WaitFadeAndExitGracefully,0);
     SetVBlankCallback(Dexnav_VBlankCB);
     SetMainCallback2(Dexnav_MainCB);
-}
-
-static void FreeSpritePalettesResetSpriteData(void)
-{
-    ResetSpriteData();
-    FreeSpriteTileRanges();
-    FreeAllSpritePalettes();
-    ClearDma3Requests();
 }
 
 static void Dexnav_FreeResources(void)
@@ -642,15 +821,40 @@ static enum DexnavHabitats Dexnav_GetSavedHabitat(void)
     return sDexnavState->savedData.habitat;
 }
 
-void Dexnav_InitalizeFromPokedex(MainCallback callback)
+static struct DexnavSavedData Dexnav_GetSavedData(void)
 {
+    return sDexnavState->savedData;
+}
 
+static void Dexnav_SetSavedSpecies(u32 species)
+{
+    sDexnavState->savedData.species = species;
+}
+
+static void Dexnav_SetSavedCallback(void* callback)
+{
+    sDexnavState->savedCallback = callback;
+}
+
+static void Dexnav_SetSavedCursorPosition(u32 cursorPosition)
+{
+    sDexnavState->savedData.cursorPosition = cursorPosition;
+}
+
+static void Dexnav_SetSavedHabitat(enum DexnavHabitats habitat)
+{
+    sDexnavState->savedData.habitat = habitat;
 }
 
 static void Dexnav_ReturnFromAdventureGuide(void)
 {
     struct DexnavSavedData savedData = {DEXNAV_HABITAT_NONE, 0, SPECIES_NONE};
     Dexnav_InitializeAndSaveCallback(gMain.savedCallback,savedData);
+}
+
+void Dexnav_ReturnFromPokedex(struct DexnavSavedData savedData)
+{
+    Dexnav_InitializeAndSaveCallback(savedData.savedCallback,savedData);
 }
 
 static bool8 Dexnav_AllocateStructs(void)
@@ -692,6 +896,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_SetCursorPosition(Dexnav_GetSavedCursorPosition());
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
             Dexnav_CreateCompletionSprite();
+            Dexnav_CreateRegisterSprite();
             gMain.state++;
             break;
         case 3:
@@ -768,6 +973,7 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON))
     {
+        Dexnav_StartOverworldSearch(taskId);
         return;
     }
 
@@ -797,11 +1003,13 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(L_BUTTON) || JOY_REPEAT(L_BUTTON))
     {
+        Dexnav_LaunchPokedex(taskId);
         return;
     }
 
     if (JOY_NEW(R_BUTTON) || JOY_REPEAT(R_BUTTON))
     {
+        Dexnav_RegisterCurrentlySelectedMon();
         return;
     }
 
@@ -1615,124 +1823,6 @@ static void Dexnav_DisplayAllHabitatPokemon(void)
 
 }
 
-static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
-{
-    [0] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-    },
-    [1] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-    },
-    [2] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [2] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-    },
-    [3] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [2] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [3] = {[AXIS_X] = 133, [AXIS_Y] = 113},
-    },
-    [4] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 117, [AXIS_Y] = 10},
-        [2] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [3] = {[AXIS_X] = 176, [AXIS_Y] = 91},
-        [4] = {[AXIS_X] = 117, [AXIS_Y] = 110},
-    },
-    [5] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 106, [AXIS_Y] = 14},
-        [2] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [3] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [4] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [5] = {[AXIS_X] = 106, [AXIS_Y] = 106},
-    },
-    [6] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 100, [AXIS_Y] = 19},
-        [2] = {[AXIS_X] = 145, [AXIS_Y] = 8},
-        [3] = {[AXIS_X] = 181, [AXIS_Y] = 37},
-        [4] = {[AXIS_X] = 181, [AXIS_Y] = 83},
-        [5] = {[AXIS_X] = 145, [AXIS_Y] = 112},
-        [6] = {[AXIS_X] = 100, [AXIS_Y] = 101},
-    },
-    [7] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 96, [AXIS_Y] = 23},
-        [2] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [3] = {[AXIS_X] = 170, [AXIS_Y] = 23},
-        [4] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [5] = {[AXIS_X] = 170, [AXIS_Y] = 97},
-        [6] = {[AXIS_X] = 133, [AXIS_Y] = 113},
-        [7] = {[AXIS_X] = 96, [AXIS_Y] = 97},
-    },
-    [8] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 92, [AXIS_Y] = 26},
-        [2] = {[AXIS_X] = 124, [AXIS_Y] = 8},
-        [3] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [4] = {[AXIS_X] = 183, [AXIS_Y] = 42},
-        [5] = {[AXIS_X] = 183, [AXIS_Y] = 78},
-        [6] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [7] = {[AXIS_X] = 124, [AXIS_Y] = 112},
-        [8] = {[AXIS_X] = 92, [AXIS_Y] = 94},
-    },
-    [9] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 90, [AXIS_Y] = 29},
-        [2] = {[AXIS_X] = 117, [AXIS_Y] = 10},
-        [3] = {[AXIS_X] = 149, [AXIS_Y] = 10},
-        [4] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [5] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [6] = {[AXIS_X] = 176, [AXIS_Y] = 91},
-        [7] = {[AXIS_X] = 149, [AXIS_Y] = 110},
-        [8] = {[AXIS_X] = 117, [AXIS_Y] = 110},
-        [9] = {[AXIS_X] = 90, [AXIS_Y] = 91},
-    },
-    [10] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 88, [AXIS_Y] = 31},
-        [2] = {[AXIS_X] = 111, [AXIS_Y] = 12},
-        [3] = {[AXIS_X] = 141, [AXIS_Y] = 8},
-        [4] = {[AXIS_X] = 168, [AXIS_Y] = 20},
-        [5] = {[AXIS_X] = 184, [AXIS_Y] = 45},
-        [6] = {[AXIS_X] = 184, [AXIS_Y] = 75},
-        [7] = {[AXIS_X] = 168, [AXIS_Y] = 97},
-        [8] = {[AXIS_X] = 141, [AXIS_Y] = 109},
-        [9] = {[AXIS_X] = 111, [AXIS_Y] = 105},
-        [10] = {[AXIS_X] = 88, [AXIS_Y] = 86},
-    },
-    [11] =
-    {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 87, [AXIS_Y] = 33},
-        [2] = {[AXIS_X] = 106, [AXIS_Y] = 14},
-        [3] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [4] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [5] = {[AXIS_X] = 179, [AXIS_Y] = 33},
-        [6] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [7] = {[AXIS_X] = 179, [AXIS_Y] = 87},
-        [8] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [9] = {[AXIS_X] = 133, [AXIS_Y] = 113},
-        [10] = {[AXIS_X] = 106, [AXIS_Y] = 106},
-        [11] = {[AXIS_X] = 87, [AXIS_Y] = 87},
-    },
-};
-
 static void SpriteCB_MonIconDexnav(struct Sprite *sprite)
 {
     if (sprite->data[0] == Dexnav_GetCursorPosition() && (sprite->data[1]))
@@ -1933,4 +2023,83 @@ static void Dexnav_DisplayCursors(void)
     gSprites[spriteId].data[0] = position;
     gSprites[spriteId].data[1] = num;
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_CURSOR,spriteId);
+}
+
+static void Dexnav_LaunchPokedex(u8 taskId)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if (species == SPECIES_NONE)
+        return;
+
+    Dexnav_SetSavedSpecies(species);
+    Dexnav_SetSavedCallback(sDexnavState->savedCallback);
+    Dexnav_SetSavedHabitat(Dexnav_GetHabitat());
+    Dexnav_SetSavedCursorPosition(Dexnav_GetCursorPosition());
+
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_DexnavFadeToPokedex;
+}
+
+static void Task_DexnavFadeToPokedex(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    struct DexnavSavedData tempData = Dexnav_GetSavedData();
+    tempData.savedCallback = sDexnavState->savedCallback;
+    Dexnav_FreeResources();
+    Pokedex_InitFromDexnav(tempData,taskId);
+}
+
+void Dexnav_StartOverworldSearch(u8 taskId)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+        if (species == SPECIES_NONE)
+        {
+            PlaySE(SE_FAILURE);
+            return;
+        }
+
+    gSpecialVar_0x8000 = species;
+    gSpecialVar_0x8001 = Dexnav_GetHabitat();
+    gSpecialVar_0x8002 = FALSE;
+
+    PlaySE(SE_DEX_SEARCH);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_BeginDexnavOverworld;
+}
+
+static void Task_BeginDexnavOverworld(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    Dexnav_FreeResources();
+    DestroyTask(taskId);
+    SetMainCallback1(CB1_DexNavSearchCallback);
+    SetMainCallback2(CB2_ReturnToField);
+}
+
+static void Dexnav_RegisterCurrentlySelectedMon(void)
+{
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+
+    u16 rawValue = VarGet(DN_VAR_SPECIES);
+    u32 oldSpecies = rawValue & DEXNAV_MASK_SPECIES;
+
+    if (species == SPECIES_NONE)
+    {
+        PlaySE(SE_FAILURE);
+        return;
+    }
+
+    if (oldSpecies == species) 
+    {
+        VarSet(DN_VAR_SPECIES,0);
+        return;
+    }
+
+    enum DexnavHabitats habitat = Dexnav_GetHabitat();
+    VarSet(DN_VAR_SPECIES,((habitat << 14) | species));
+    PlayCry_Script(species, 0);
 }

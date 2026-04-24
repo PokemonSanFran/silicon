@@ -395,7 +395,6 @@ static const struct WindowTemplate sPokedexPageLocationWindowTemplates[] =
 };
 
 static void Task_PrepareScreen_GridToPage(u8 taskId);
-static void Page_SetUp(u8 taskId);
 static void Task_PageMoves_LoadParent(u8 taskId);
 static bool32 AllocatePageStructs(enum PokedexPages page);
 static void PageMoves_InitWindows(void);
@@ -438,6 +437,7 @@ static void PageMoves_CreatePage(void);
 static void PageEvolution_CreatePage(void);
 static void PageMoves_SwitchToSpeciesGrid(u8 taskId);
 static void Task_PreapreScreenPageToGrid(u8 taskId);
+static void Page_SetUp(u8 taskId);
 static void FreePageStructs(void);
 
 static void PageMoves_CreateCategorySprite(void);
@@ -630,6 +630,7 @@ static void Task_PrepareScreenPageToPage(u8 taskId);
 static enum PokedexPages CalculateTargetPage(s32 delta);
 static void ClearPageData(void);
 void SetAndSetUpCurrentPage(u8 taskId);
+static void Task_ReturnToDexnav(u8 taskId);
 
 static const u16 pokedexPalettesFootprint[] = INCBIN_U16("graphics/pokedex/ui/palettes/footprint.gbapal");
 static const u32 speciesListMonCursor[] = INCBIN_U32("graphics/pokedex/ui/species_list/mon.4bpp.smol");
@@ -1001,6 +1002,12 @@ static enum PokedexPages CalculateTargetPage(s32 delta)
 
 static void PageMoves_SwitchToSpeciesGrid(u8 taskId)
 {
+    if (sPokedexState->dexnavSavedData.species != SPECIES_NONE)
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gTasks[taskId].func = Task_ReturnToDexnav;
+        return;
+    }
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_PreapreScreenPageToGrid;
 }
@@ -5207,4 +5214,13 @@ void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride)
         SpeciesGrid_SetShouldPlayCry(FALSE);
     }
 }
+static void Task_ReturnToDexnav(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
 
+    DestroyTask(taskId);
+    struct DexnavSavedData tempData = sPokedexState->dexnavSavedData;
+    Pokedex_FreeResources();
+    Dexnav_ReturnFromPokedex(tempData);
+}

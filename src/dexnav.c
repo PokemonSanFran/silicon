@@ -1070,6 +1070,8 @@ bool32 OnStep_DexNavSearch(void)
         }
     }
 
+    // Start dexnav
+    /*
     if (sDexNavSearchDataPtr->proximity <= CREEPING_PROXIMITY && !gPlayerAvatar.creeping && frameCount > 60)
     { //should be creeping but player walks normally
         if (sDexNavSearchDataPtr->hiddenSearch)
@@ -1083,6 +1085,8 @@ bool32 OnStep_DexNavSearch(void)
             return TRUE;
         }
     }
+    */
+    // End dexnav
 
     if (sDexNavSearchDataPtr->proximity <= SNEAKING_PROXIMITY && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_BIKE))
     { // running/biking too close
@@ -1852,7 +1856,10 @@ static void CB1_InitDexNavSearch(void)
     }
 }
 
-static void CB1_DexNavSearchCallback(void)
+// Start dexnav
+void CB1_DexNavSearchCallback(void)
+//static void CB1_DexNavSearchCallback(void)
+// End dexnav
 {
     CB1_InitDexNavSearch();
 }
