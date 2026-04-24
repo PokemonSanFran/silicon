@@ -305,3 +305,13 @@ void TweetCriteria_Quest_Kitchenvolunteering(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTAURANTEXPANSION2);
 }
+
+void TweetCriteria_Quest_RestoreespuleegymActive(void)
+{
+    gSpecialVar_Result = IsQuestActiveState(QUEST_RESTOREESPULEEGYM);
+}
+
+void TweetCriteria_Quest_RestoreespuleegymComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREESPULEEGYM);
+}

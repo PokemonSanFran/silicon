@@ -582,4 +582,34 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_RESTOREESPULEEGYM_ACTIVE] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Did I just see Imelda getting ready to battle out in {STR_VAR_1}? Is something happening?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymActive,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA] =
+    {
+        .userId = BUZZR_USER_BAIYA,
+        .content = COMPOUND_STRING("Yo! Check out the {STR_VAR_1} Swap Meet some time, trainers! It's a great place to level up!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA] =
+    {
+        .userId = BUZZR_USER_IMELDA,
+        .content = COMPOUND_STRING("The {STR_VAR_1} Antique Shop has become the {STR_VAR_1} Swap Meet! Please do come by for some quality battling some time."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };
