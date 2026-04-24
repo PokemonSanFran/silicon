@@ -381,3 +381,42 @@ const u8 *GetQuestDesc_Freetheinnocent(void)
 
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
+{
+    CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,gStringVar1);
+    StringCopy(gStringVar3,GetSpeciesName(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+    u32 flag = ReturnQuestState(QUEST_RESTOREESPULEEGYM);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RESTOREESPULEEGYM].desc[flag]);
+
+    if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants a {STR_VAR_1}!"));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_6))
+    {
+        StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Show Imelda your {STR_VAR_1}!"));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_4))
+    {
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You recieved an Odd Egg, but will somebody want it?"));
+    }
+    return gStringVar4;
+}
