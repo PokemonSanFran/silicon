@@ -1,6 +1,7 @@
 #ifndef GUARD_UI_DEXNAV_H
 #define GUARD_UI_DEXNAV_H
 
+#include "dexnav_accessors.h"
 #include "constants/ui_dexnav.h"
 #include "constants/wild_encounter.h"
 
@@ -36,6 +37,8 @@ void CB2_DexnavFromStartMenu(void);
 void Dexnav_FadescreenAndExitGracefully(void);
 void Dexnav_SetupCallback(void);
 void Dexnav_ReturnFromPokedex(struct DexnavSavedData savedData);
+void Dexnav_DrawOverworldSearchIcon(void);
+void Dexnav_FreeOverworldSpriteResources(void);
 
 
 #endif // GUARD_UI_DEXNAV_H

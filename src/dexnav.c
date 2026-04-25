@@ -86,6 +86,8 @@ enum Statuses
     STATUS_INCORRECT_AREA,
 };
 
+// Start dexnav
+/*
 struct DexNavSearch
 {
     u16 species;
@@ -115,6 +117,8 @@ struct DexNavSearch
     u8 unk:6;
     u16 palBuffer[16];
 };
+*/
+// End dexnav
 
 struct DexNavGUI
 {
@@ -134,7 +138,10 @@ struct DexNavGUI
 
 // RAM
 
-EWRAM_DATA static struct DexNavSearch *sDexNavSearchDataPtr = NULL;
+// Start dexnav
+//EWRAM_DATA static struct DexNavSearch *sDexNavSearchDataPtr = NULL;
+EWRAM_DATA struct DexNavSearch *sDexNavSearchDataPtr = NULL;
+// End dexnav
 EWRAM_DATA static struct DexNavGUI *sDexNavUiDataPtr = NULL;
 EWRAM_DATA static u8 *sBg1TilemapBuffer = NULL;
 EWRAM_DATA u16 gDexNavSpecies = SPECIES_NONE;
@@ -523,7 +530,10 @@ static void DrawSearchWindow(u16 species, u8 potential, bool8 hidden)
 
 #undef SEARCH_WINDOW_WIDTH
 
-static void RemoveDexNavWindowAndGfx(void)
+// Start dexnav
+//static void RemoveDexNavWindowAndGfx(void)
+static void UNUSED RemoveDexNavWindowAndGfx(void)
+// End dexnav
 {
     u32 i;
 
@@ -935,6 +945,10 @@ static void DexNavUpdateDirectionArrow(void)
 
 static void DexNavDrawIcons(void)
 {
+    // Start dexnav
+    Dexnav_DrawOverworldSearchIcon();
+    return;
+    // End dexnav
     u16 species = sDexNavSearchDataPtr->species;
 
     DrawSearchWindow(species, sDexNavSearchDataPtr->potential, FALSE);
@@ -981,7 +995,10 @@ void EndDexNavSearch(void)
 {
     if (!FlagGet(DN_FLAG_SEARCHING))
         return;
-    RemoveDexNavWindowAndGfx();
+    // Start dexnav
+    //RemoveDexNavWindowAndGfx(); 
+    Dexnav_FreeOverworldSpriteResources();
+    // End dexnav
     FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
     FREE_AND_SET_NULL(sDexNavSearchDataPtr);
     FlagClear(DN_FLAG_SEARCHING);

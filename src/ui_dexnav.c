@@ -1,39 +1,40 @@
 #include "global.h"
+#include "battle.h"
+#include "bg.h"
 #include "dexnav.h"
-#include "ui_pokedex.h"
-#include "overworld.h"
-#include "region_map.h"
-#include "text.h"
-#include "trainer_pokemon_sprites.h"
-#include "wild_encounter.h"
-#include "item_use.h"
-#include "string_util.h"
-#include "pokedex.h"
-#include "window.h"
-#include "palette.h"
-#include "task.h"
-#include "sprite.h"
-#include "tv.h"
-#include "menu.h"
 #include "dexnav.h"
 #include "dma3.h"
-#include "bg.h"
+#include "event_data.h"
+#include "fieldmap.h"
 #include "frontier_pass.h"
-#include "scanline_effect.h"
-#include "menu_helpers.h"
 #include "gpu_regs.h"
-#include "ui_start_menu.h"
+#include "item_use.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
 #include "options_visual.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokedex.h"
 #include "pokemon_icon.h"
+#include "region_map.h"
+#include "scanline_effect.h"
 #include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
+#include "trainer_pokemon_sprites.h"
+#include "tv.h"
+#include "ui_adventure_guide.h"
+#include "ui_dexnav.h"
+#include "ui_pokedex.h"
+#include "ui_start_menu.h"
+#include "wild_encounter.h"
+#include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "malloc.h"
 #include "constants/ui_adventure_guide.h"
-#include "ui_dexnav.h"
-#include "ui_adventure_guide.h"
-#include "event_data.h"
-#include "battle.h"
 
 static void Dexnav_RestoreFromSave(struct DexnavSavedData savedData);
 static bool8 Dexnav_IsThereSavedData(void);
@@ -456,6 +457,14 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/register.4bpp"),
             .size = TILE_OFFSET_4BPP(8),
             .tag = DEXNAV_SPRITETAG_REGISTER,
+        },
+    },
+    [DEXNAV_SPRITEID_OVERWORLD] = 
+    {
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/ow_dexnav_arrow.4bpp"),
+            .size = TILE_OFFSET_4BPP(144),
+            .tag = DEXNAV_SPRITETAG_OVERWORLD,
         },
     },
 };
@@ -2103,3 +2112,154 @@ static void Dexnav_RegisterCurrentlySelectedMon(void)
     VarSet(DN_VAR_SPECIES,((habitat << 14) | species));
     PlayCry_Script(species, 0);
 }
+
+static void Dexnav_LoadOverworld(void)
+{
+    LoadSpriteSheet(&sDexnavSpriteSheets[DEXNAV_SPRITEID_OVERWORLD].spriteSheet);
+    LoadSpritePalette(&sDexnavSpriteSheets[DEXNAV_SPRITEID_COMPLETION_MARK].palette);
+}
+
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld0[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld1[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_1, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld2[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_2, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld3[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_3, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld4[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld5[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_5, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld6[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_6, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld7[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_7, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnimTable_DexnavOverworld8[] =
+{
+    ANIMCMD_FRAME(DEXNAV_OVERWORLD_FRAME_8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_DexnavOverworld[] =
+{
+    sSpriteAnimTable_DexnavOverworld0,
+    sSpriteAnimTable_DexnavOverworld1,
+    sSpriteAnimTable_DexnavOverworld2,
+    sSpriteAnimTable_DexnavOverworld3,
+    sSpriteAnimTable_DexnavOverworld4,
+    sSpriteAnimTable_DexnavOverworld5,
+    sSpriteAnimTable_DexnavOverworld6,
+    sSpriteAnimTable_DexnavOverworld7,
+    sSpriteAnimTable_DexnavOverworld8,
+};
+
+static void SpriteCB_DexnavOverworld(struct Sprite *sprite)
+{
+    sprite->invisible = (Dexnav_IsSearchActive() == FALSE);
+
+    s32 tileX = Dexnav_GetOverworldTileX();
+    s32 tileY = Dexnav_GetOverworldTileY();
+
+    s32 playerX = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
+    s32 playerY = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
+
+    s32 dx = tileX - playerX;
+    s32 dy = tileY - playerY;
+
+    enum Direction direction;
+
+    if (dx > 0)
+    {
+        if (dy > 0)
+            direction = DIR_SOUTHEAST;
+        else if (dy < 0)
+            direction = DIR_NORTHEAST;
+        else
+            direction = DIR_EAST;
+    }
+    else if (dx < 0)
+    {
+        if (dy > 0)
+            direction = DIR_SOUTHWEST;
+        else if (dy < 0)
+            direction = DIR_NORTHWEST;
+        else
+            direction = DIR_WEST;
+    }
+    else
+    {
+        if (dy > 0)
+            direction = DIR_SOUTH;
+        else if (dy < 0)
+            direction = DIR_NORTH;
+        else
+        {
+            sprite->invisible = TRUE;
+            direction = DIR_NONE; 
+        }
+    }
+
+    StartSpriteAnimIfDifferent(sprite, direction);
+}
+
+void Dexnav_DrawOverworldSearchIcon(void)
+{
+    Dexnav_LoadOverworld();
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_OVERWORLD;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+    TempSpriteTemplate.anims = sSpriteAnimTable_DexnavOverworld;
+    TempSpriteTemplate.callback = SpriteCB_DexnavOverworld;
+
+    u32 x = DEXNAV_OVERWORLD_SPRITE_X;
+    u32 y = DEXNAV_OVERWORLD_SPRITE_Y;
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
+
+    Dexnav_SetOverworldIconSpriteId(spriteId);
+}
+
+void Dexnav_FreeOverworldSpriteResources(void)
+{
+    u32 spriteId = Dexnav_GetOverworldIconSpriteId(); 
+
+    if (spriteId != MAX_SPRITES)
+        DestroySprite(&gSprites[spriteId]);
+
+    Dexnav_SetOverworldIconSpriteId(MAX_SPRITES);
+
+    FreeSpriteTilesByTag(DEXNAV_SPRITETAG_OVERWORLD);
+    FreeSpritePaletteByTag(DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING);
+}
+

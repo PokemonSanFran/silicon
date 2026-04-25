@@ -2,6 +2,39 @@
 #define GUARD_DEXNAV_H
 
 #include "config/dexnav.h"
+// Start dexnav
+#include "dexnav_accessors.h"
+
+struct DexNavSearch
+{
+    u16 species;
+    u16 moves[MAX_MON_MOVES];
+    u16 heldItem;
+    u8 abilityNum;
+    u8 potential;
+    u8 searchLevel;
+    u8 monLevel;
+    u8 proximity;
+    u8 environment;
+    s16 tileX;
+    s16 tileY;
+    u8 fldEffSpriteId;
+    u8 fldEffId;
+    u8 movementCount;
+    u8 windowId;
+    u8 iconSpriteId;
+    u8 eyeSpriteId;
+    u8 itemSpriteId;
+    u8 starSpriteIds[3];
+    u8 ownedIconSpriteId;
+    u8 exclamationSpriteId;
+    u32 startingTime;
+    u8 hiddenSearch:1;
+    u8 isHiddenMon:1;
+    u8 unk:6;
+    u16 palBuffer[16];
+};
+// End dexnav
 
 // GUI Info
 enum RowGUIInfo

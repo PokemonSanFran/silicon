@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ui_map_system.h"
+#include "dexnav_accessors.h"
 #include "tv.h"
 #include "strings.h"
 #include "bg.h"
@@ -2416,6 +2417,8 @@ void CreateOWWaypointArrowSprite(void)
 #define WAYPOINT_FOUND_DURATION ((60 * 3) + UPDATE_WAYPOINT_INTERVAL)
 static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
 {
+    sprite->invisible = Dexnav_IsSearchActive();
+
     if(sprite->data[4] == OWARROW_NO_SIGNAL_ANIM)
         return;
 
