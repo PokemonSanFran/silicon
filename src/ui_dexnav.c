@@ -115,7 +115,6 @@ static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 specie
 static void Dexnav_PrintFloatingActionButton(void);
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex);
 static void Dexnav_DisplayAllHabitatPokemon(void);
-static void Dexnav_DisplayMovementArrows(void);
 static void Dexnav_DisplayCursors(void);
 void Dexnav_StartOverworldSearch(u8 taskId);
 static void Task_BeginDexnavOverworld(u8 taskId);
@@ -397,14 +396,6 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/indicators.gbapal"),
             .tag = DEXNAV_PALTAG_INDICATOR,
-        },
-    },
-    [DEXNAV_SPRITEID_ARROW] = 
-    {
-        {
-            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/arrows.4bpp"),
-            .size = TILE_OFFSET_4BPP(64),
-            .tag = DEXNAV_SPRITETAG_ARROW,
         },
     },
     [DEXNAV_SPRITEID_FAB] = 
@@ -920,7 +911,6 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStarsInsight();
             Dexnav_DisplayStreak();
             Dexnav_DisplayStarsStreak();
-            Dexnav_DisplayMovementArrows();
             Dexnav_DisplayCursors();
             gMain.state++;
             break;
@@ -986,16 +976,17 @@ static void Task_HandleInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN) || JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
     {
-        Dexnav_MoveCursor(DEXNAV_INCREMENT_POSITION);
-        Dexnav_DisplayMonInfo();
-    }
-
-    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
-    {
-        Dexnav_MoveCursor(DEXNAV_DECREMENT_POSITION);
-        Dexnav_DisplayMonInfo();
+        if(Dexnav_SwitchHabitat())
+        {
+            if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
+                Dexnav_SetCursorPosition(0);
+            Dexnav_DisplayMonInfo();
+            Dexnav_DisplayAllHabitatPokemon();
+            Dexnav_HandleHabitatHeader();
+        }
+        return;
     }
 
     if (JOY_NEW(DPAD_LEFT) || JOY_REPEAT(DPAD_LEFT))
@@ -1024,19 +1015,6 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(START_BUTTON) || JOY_REPEAT(START_BUTTON))
     {
-        return;
-    }
-
-    if (JOY_NEW(SELECT_BUTTON) || JOY_REPEAT(SELECT_BUTTON))
-    {
-        if(Dexnav_SwitchHabitat())
-        {
-            if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
-                Dexnav_SetCursorPosition(0);
-            Dexnav_DisplayMonInfo();
-            Dexnav_DisplayAllHabitatPokemon();
-            Dexnav_HandleHabitatHeader();
-        }
         return;
     }
 }
@@ -1074,7 +1052,7 @@ static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
         StringCopy(gStringVar4, COMPOUND_STRING("{L_BUTTON} Pokedex {R_BUTTON} Register"));
 
     if ((Dexnav_HasMultipleHabitats()) && (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE))
-        StringAppend(gStringVar4,COMPOUND_STRING(" {SELECT_BUTTON} Switch Habitat"));
+        StringAppend(gStringVar4,COMPOUND_STRING(" {DPAD_UPDOWN} Switch Habitat"));
 
     if ((Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND) == 0) && (Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER) == 0))
         StringCopy(gStringVar4, COMPOUND_STRING("No Pokemon found."));
@@ -1925,53 +1903,6 @@ static void Dexnav_PrintFloatingActionButton(void)
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_FAB,spriteId);
 }
 
-static bool8 Dexnav_ShouldHideMovementArrows(void)
-{
-    if (Dexnav_GetMode() != DEXNAV_MODE_MAIN)
-        return TRUE;
-
-    enum DexnavHabitats habitat = Dexnav_GetHabitat();
-
-    if (habitat == DEXNAV_HABITAT_NONE)
-        return TRUE;
-
-    u32 numMons = Dexnav_GetNumberHabitatMons(habitat);
-    if (numMons < 2)
-        return TRUE;
-
-    return FALSE;
-}
-
-static const union AnimCmd sSpriteAnim_MoveArrows[] =
-{
-    ANIMCMD_FRAME(DEXNAV_ARROW_FRAME_OUT,16),
-    ANIMCMD_FRAME(DEXNAV_ARROW_FRAME_IN,16),
-    ANIMCMD_JUMP(0),
-    ANIMCMD_END
-};
-
-static const union AnimCmd * const sSpriteAnimTable_Arrow[] =
-{
-    sSpriteAnim_MoveArrows,
-};
-
-static void Dexnav_DisplayMovementArrows(void)
-{
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
-    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_ARROW;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
-    TempSpriteTemplate.anims = sSpriteAnimTable_Arrow;
-    TempSpriteTemplate.callback = SpriteCallbackDummy;
-
-    u32 spriteId = CreateSprite(&TempSpriteTemplate, 217, 25, 0);
-    gSprites[spriteId].oam.priority = 0;
-    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x64);
-    gSprites[spriteId].oam.size = SPRITE_SIZE(32x64);
-    gSprites[spriteId].invisible = Dexnav_ShouldHideMovementArrows();
-    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_ARROW,spriteId);
-}
-
 static const union AnimCmd sSpriteAnim_Cursors[] =
 {
     ANIMCMD_FRAME(DEXNAV_CURSOR_FRAME_0,16),
@@ -1990,6 +1921,10 @@ static const union AnimCmd * const sSpriteAnimTable_Cursor[] =
 static bool8 Dexnav_ShouldHideCursors(void)
 {
     if (Dexnav_GetMode() != DEXNAV_MODE_MAIN)
+        return TRUE;
+
+    u32 num = (Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()));
+    if (num < 1)
         return TRUE;
 
     return FALSE;
