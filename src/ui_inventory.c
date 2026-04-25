@@ -62,6 +62,7 @@ struct MenuResources
     u8 PartyPokemonIcon[PARTY_SIZE];
     u16 FavoritePocketItems[POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS][NUM_FAVORITE_ITEMS_ARRAY_SIZE];
     u8 inventoryMode;
+    u8 partyDisplayMode;
 };
 
 struct InventoryListMenuStruct
@@ -112,12 +113,17 @@ static void Menu_FreeResourcesAndCallback(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void Inventory_CreateMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y);
+static void Inventory_CreateMonExpBar(u32 partyIndex, u32 species, u8 level,u32 expPercentage, u32 x, u32 y);
 static void Inventory_LoadBackgroundPalette(void);
 static void removeTransparentBackground(void);
 static void Inventory_PartyDisplay(void);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
 static void Inventory_CreateHeldItemSprite(u32 partyIndex, struct Pokemon *mon, u32 x, u32 y);
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
+static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite);
+static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite);
+static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite);
+static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
 static u16 Inventory_GetItemIdCurrentlySelected(void);
 static u8 getItemOptionNum(u16 item, u8 num);
@@ -137,6 +143,7 @@ void ForceReloadInventory(void);
 static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message);
 static void RecalculateCalculateCursorInventoryData(void);
 bool8 shouldSkipPocket(u32 pocket);
+static bool8 ShouldHideSprite(u8 spriteID);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -334,6 +341,7 @@ void Inventory_Init(MainCallback callback, u8 mode)
     inventorySavedCallback = callback;
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
     sMenuDataPtr->inventoryMode     = mode;
+    sMenuDataPtr->partyDisplayMode  = INVENTORY_PARTY_DISPLAY_MODE_DEFAULT;
 
     InitializeInventoryData();
 
@@ -583,6 +591,10 @@ static const struct {
             TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS
         },
         {
+            (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/hpShadow.4bpp"),
+            TILE_OFFSET_4BPP(INVENTORY_SPRITE_HP_BAR_PLATFORMS_SIZE), TAG_ITEM_INVENTORY_HP_BAR_PLATFORMS
+        },
+        {
             (const u16[])INCBIN_U16("graphics/ui_menus/inventory/backgrounds/sprites/itemPlatform.4bpp"),
             TILE_OFFSET_4BPP(INVENTORY_SPRITE_PLATFORM_ITEM_SIZE), TAG_ITEM_INVENTORY_PLATFORMS_ITEM
         },
@@ -614,7 +626,7 @@ static const struct SpriteTemplate sInventory_HeldItemTemplate =
     .images = NULL,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Species_Icon_Dummy,
+    .callback = SpriteCB_Held_Item_Icon_Dummy,
 };
 
 static const struct OamData sInventory_MonPlatformNormalOamData  =
@@ -657,6 +669,19 @@ static const struct SpriteTemplate sMonStatus_PlatformSpriteTemplate =
     .callback = SpriteCB_Species_Icon_Dummy,
 };
 
+static const struct SpriteTemplate sMonStatus_HPPlatformSpriteTemplate =
+{
+    .tileTag = TAG_ITEM_INVENTORY_HP_BAR_PLATFORMS,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sInventory_MonPlatformOamData ,
+    .images = NULL,
+    .anims = (const union AnimCmd *const[]){
+        (const union AnimCmd[]){ ANIMCMD_FRAME(16, 1), ANIMCMD_END },
+        (const union AnimCmd[]){ ANIMCMD_FRAME(0, 1), ANIMCMD_END },
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Mon_Shadow_Bar_Icon_Dummy,
+};
 static const struct OamData sInventory_ItemPlatformOamData  =
 {
     .shape = SPRITE_SHAPE(32x32),
@@ -717,12 +742,22 @@ static void Inventory_AddMonPlatforms(bool32 firstColumn, u32 partyIndex, u32 x,
     if (spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex] != SPRITE_NONE)
         return;
 
+    //Mon Platform
     spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex] = CreateSprite(&sMonStatus_PlatformSpriteTemplate, 0, 0, 2);
 
     sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_PLATFORM_SHADOW_1 + partyIndex]];
     sprite->x2 = x;
     sprite->y2 = y;
 
+    StartSpriteAnim(sprite, firstColumn);
+
+    //HP Platform
+    spriteIds[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex] = CreateSprite(&sMonStatus_HPPlatformSpriteTemplate, 0, 0, 2);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]];
+    sprite->x2 = x;
+    sprite->y2 = y;
+    
     StartSpriteAnim(sprite, firstColumn);
 }
 
@@ -1316,16 +1351,52 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
         sprite->invisible = FALSE;
 }
 
-static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
-    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u16 itemId = Inventory_GetItemIdCurrentlySelected();
-    enum Pocket itemPocket = GetItemPocket(itemId);
-
-    if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
-    {
-        return TRUE;
-    }
+static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite)
+{
+    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1))
+        sprite->invisible = TRUE;
     else
+        sprite->invisible = FALSE;
+}
+
+static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
+{
+    //if(shouldShowRegisteredItems() || (ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1) && ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1)))
+    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+}
+
+static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
+{
+    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+}
+
+static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite)
+{
+    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1))
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+}
+
+enum{
+    ELIGIBILITY_CANNOT,
+    ELIGIBILITY_USABLE,
+    ELIGIBILITY_ALREADY_USED,
+};
+
+static u8 GetItemEligibility(u8 partyIndex, u16 itemId){
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    enum Pocket itemPocket = GetItemPocket(itemId);
+    bool8 isItemTypeTMHM = (pocketId == POCKET_TM_HM   || itemPocket == POCKET_TM_HM);
+    bool8 isItemUsable   = (pocketId == POCKET_POWERUP || itemPocket == POCKET_POWERUP);
+
+    if(isItemTypeTMHM)
     {
         struct Pokemon *mon = &gPlayerParty[partyIndex];
         u16 move = ItemIdToBattleMoveId(itemId);
@@ -1333,16 +1404,34 @@ static bool8 canMonLearnCurrentTMHM(u8 partyIndex){
         switch(CanTeachMove(mon, move)){
             case CANNOT_LEARN_MOVE_IS_EGG:
             case CANNOT_LEARN_MOVE:
-                return FALSE;
+                return ELIGIBILITY_CANNOT;
+                break;
+            case ALREADY_KNOWS_MOVE:
+                return ELIGIBILITY_ALREADY_USED;
                 break;
             case CAN_LEARN_MOVE:
-            case ALREADY_KNOWS_MOVE:
-                return TRUE;
+                return ELIGIBILITY_USABLE;
                 break;
         }
     }
+    else if(isItemUsable){
+        switch(itemId){
+            case ITEM_ABILITY_CAPSULE:
+                return ELIGIBILITY_ALREADY_USED;
+            break;
+        }
+    }
 
-    return FALSE; //Fallback
+    return ELIGIBILITY_USABLE;
+}
+
+static bool8 ShouldUpdateMonFrame(u8 partyIndex){
+    u8 eligibility = GetItemEligibility(partyIndex, Inventory_GetItemIdCurrentlySelected());
+
+    if(eligibility == ELIGIBILITY_CANNOT)
+        return FALSE;
+
+    return TRUE;
 }
 
 void SpriteCB_MonIconCropped(struct Sprite *sprite)
@@ -1355,7 +1444,7 @@ void SpriteCB_MonIconCropped(struct Sprite *sprite)
     else
         sprite->invisible = FALSE;
 
-    if(canMonLearnCurrentTMHM(partyNum))
+    if(ShouldUpdateMonFrame(partyNum))
         UpdateMonIconFrameCropped(sprite);
 }
 
@@ -1377,6 +1466,24 @@ static u32 GetHPEggCyclePercent(u32 partyIndex)
     }
     else
         return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles));
+}
+
+static u32 GetExpPercent(u32 partyIndex)
+{
+    struct Pokemon *mon = &gPlayerParty[partyIndex];
+
+    if (!GetMonData(mon, MON_DATA_IS_EGG)){
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+        u8 level = GetMonData(mon, MON_DATA_LEVEL);
+        s32 currentExp  = GetMonData(mon, MON_DATA_EXP);
+        u8 growthRate = growthRate = gSpeciesInfo[species].growthRate;
+        u32 expBetweenLevels  = gExperienceTables[growthRate][level + 1] - gExperienceTables[growthRate][level];
+        u32 expSinceLastLevel = currentExp - gExperienceTables[growthRate][level];
+        
+        return (expSinceLastLevel * 100) / expBetweenLevels;
+    }
+    else
+        return 0; //((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon,MON_DATA_SPECIES)].eggCycles));
 }
 
 static void UpdateEggIconFrame(u8 SpriteID){
@@ -1427,22 +1534,23 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
     u32 species = ReturnTransformationIfConditionMet(mon);
-
+    u8 displayMode = sMenuDataPtr->partyDisplayMode;
     u32 SpriteID = SPRITE_NONE;
 
     if (!IsMonNotEmpty(slot))
         return SpriteID;
 
     u32 percent = GetHPEggCyclePercent(slot);
+    u32 expPercent = GetExpPercent(slot);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
     u16 currentHP = GetMonData(mon, MON_DATA_HP);
+    u16 level = GetMonData(mon, MON_DATA_LEVEL);
     bool32 isEgg = (species == SPECIES_EGG);
     u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
     u32 currentStatus = GetAilmentFromStatus(status);
     u8 palette = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, slot + MON_STARTING_PALETTE_NUM);
 
     sMenuDataPtr->PartyPokemonIcon[slot] = SpriteID;
-
 
     y -= 8;
 
@@ -1466,7 +1574,9 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 
     gSprites[SpriteID].invisible = FALSE;
     Inventory_CreateMonBar(slot, species, status, percent, x, y);
+    Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
     Inventory_CreateHeldItemSprite(slot, mon, x, y);
+
     return SpriteID;
 }
 
@@ -1483,7 +1593,7 @@ static void Inventory_CreateHeldItemSprite(u32 partyIndex, struct Pokemon *mon, 
     sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_ITEM_1 + partyIndex]];
     sprite->x2 = x + 16;
     sprite->y2 = y + 12;
-    sprite->callback = SpriteCB_Species_Icon_Dummy;
+    sprite->callback = SpriteCB_Held_Item_Icon_Dummy;
 }
 
 static const u8 sBlankGfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
@@ -1506,6 +1616,23 @@ static const struct SpriteTemplate sMonStatus_SpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
+static const struct OamData sMonExpBar_OamData =
+{
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+};
+
+static const struct SpriteTemplate sMonStatus_ExpBarSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_ITEM_INVENTORY_SPRITE_PALETTE,
+    .oam = &sMonExpBar_OamData,
+    .anims = gDummySpriteAnimTable,
+    .images = sInventoryDummyFrames,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 static void Inventory_CreateMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y)
 {
     u8 *spriteIds = sMenuDataPtr->spriteIDs;
@@ -1517,7 +1644,86 @@ static void Inventory_CreateMonBar(u32 partyIndex, u32 species, u32 status,u32 h
     MonStatus_InjectStatusGraphics(sprite, status, healthPercentage);
     sprite->x2 = x - 17;
     sprite->y2 = y + 12;
-    sprite->callback = SpriteCB_Species_Icon_Dummy;
+    sprite->callback = SpriteCB_Mon_HP_Bar_Icon_Dummy;
+}
+// mon status
+#define INVENTORY_PAL_SLOT_TEXT    15
+static const u8 sInventoryMenuSymbols_ExpBar[] = INCBIN_U8("graphics/ui_menus/inventory/exp_bar.4bpp");
+
+enum InventoryMenuExpBarPercentage
+{
+    INVENTORY_EXP_BAR_PERCENTAGE_0 = 0,
+
+    // red
+    INVENTORY_EXP_BAR_PERCENTAGE_1,
+    INVENTORY_EXP_BAR_PERCENTAGE_2,
+
+    // yellow
+    INVENTORY_EXP_BAR_PERCENTAGE_3,
+    INVENTORY_EXP_BAR_PERCENTAGE_4,
+
+    // green
+    INVENTORY_EXP_BAR_PERCENTAGE_5,
+    INVENTORY_EXP_BAR_PERCENTAGE_6,
+    INVENTORY_EXP_BAR_PERCENTAGE_7,
+    INVENTORY_EXP_BAR_PERCENTAGE_8,
+    INVENTORY_EXP_BAR_PERCENTAGE_9,
+
+    NUM_INVENTORY_EXP_BAR_PERCENTAGES
+};
+
+static inline u32 Inventory_ConvertPercentageIntoExpBarFrame(u32 expPercentage)
+{
+    // - 1 is required, otherwise we'll get NUM_INVENTORY_EXP_BAR_PERCENTAGES at full hp
+    enum InventoryMenuExpBarPercentage barExpPercentage = (expPercentage / 10) - 1;
+    s32 realFrame = barExpPercentage * 8;
+
+    if (!expPercentage)
+        realFrame = INVENTORY_EXP_BAR_PERCENTAGE_0 * 8;
+
+    if (!barExpPercentage)
+        realFrame = INVENTORY_EXP_BAR_PERCENTAGE_1 * 8;
+
+    if(realFrame < 0 && expPercentage != 0)
+        realFrame = INVENTORY_EXP_BAR_PERCENTAGE_1 * 8;
+
+    return realFrame;
+}
+
+void MonStatus_InjectExpBarGraphics(struct Sprite *sprite, u8 level, u32 expPercentage)
+{
+    struct WindowTemplate template = { .width = 4, .height = 4, .paletteNum = INVENTORY_PAL_SLOT_TEXT };
+    u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
+    u8 font = INVENTORY_FONT_LIST;
+    s32 posX = 9;
+    s32 posY = 6;
+    u32 lineSpacing   = GetFontAttribute(font, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
+
+    BlitBitmapRectToWindow(window, sInventoryMenuSymbols_ExpBar, 0, Inventory_ConvertPercentageIntoExpBarFrame(expPercentage), 16, 80, posX, posY, 16, 8);
+
+    ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
+    AddTextPrinterParameterized4(window, font, posX, posY + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+
+    u8 *tileData = (u8 *)GetWindowAttribute(window, WINDOW_TILE_DATA);
+    CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
+
+    RemoveWindow(window);
+}
+
+static void Inventory_CreateMonExpBar(u32 partyIndex, u32 species, u8 level, u32 expPercentage, u32 x, u32 y)
+{
+    u8 *spriteIds = sMenuDataPtr->spriteIDs;
+    struct Sprite *sprite = NULL;
+
+    spriteIds[INVENTORY_SPRITE_MON_EXP_BAR_1 + partyIndex] = CreateSprite(&sMonStatus_ExpBarSpriteTemplate, 16, 0, 0);
+
+    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_EXP_BAR_1 + partyIndex]];
+    MonStatus_InjectExpBarGraphics(sprite, level, expPercentage);
+    sprite->x2 = x - 17;
+    sprite->y2 = y + 12;
+    sprite->callback = SpriteCB_Mon_Exp_Bar_Icon_Dummy;
 }
 
 static void Inventory_LoadBackgroundPalette(void)
@@ -2419,19 +2625,6 @@ static void Inventory_PrintHeader(void)
     PutWindowTilemap(INVENTORY_WINDOW_HEADER);
     CopyWindowToVram(INVENTORY_WINDOW_HEADER ,COPYWIN_FULL);
 }
-
-//Hp Bar Stuff
-static const u8 sStartMenu_HPBar_Full_Gfx[]         = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_full.4bpp");
-static const u8 sStartMenu_HPBar_90_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_90_percent.4bpp");
-static const u8 sStartMenu_HPBar_80_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_80_percent.4bpp");
-static const u8 sStartMenu_HPBar_70_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_70_percent.4bpp");
-static const u8 sStartMenu_HPBar_60_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_60_percent.4bpp");
-static const u8 sStartMenu_HPBar_50_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_50_percent.4bpp");
-static const u8 sStartMenu_HPBar_40_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_40_percent.4bpp");
-static const u8 sStartMenu_HPBar_30_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_30_percent.4bpp");
-static const u8 sStartMenu_HPBar_20_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_20_percent.4bpp");
-static const u8 sStartMenu_HPBar_10_Percent_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_10_percent.4bpp");
-static const u8 sStartMenu_HPBar_Fainted_Gfx[]      = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar_fainted.4bpp");
 
 static bool32 IsMonNotEmpty(u32 partyIndex)
 {
@@ -3850,6 +4043,57 @@ bool8 shouldSkipPocket(u32 pocket){
     return FALSE;
 }
 
+static bool8 ShouldHideSprite(u8 spriteID){
+    u8 displayMode = sMenuDataPtr->partyDisplayMode;
+
+    switch(spriteID){
+        case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+        {
+            switch(displayMode){
+                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
+                case INVENTORY_PARTY_DISPLAY_ELEGIBILITY:
+                case INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY:
+                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
+                    return FALSE;
+                break;
+                default:
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+        case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+        {
+            switch(displayMode){
+                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
+                case INVENTORY_PARTY_DISPLAY_ELEGIBILITY:
+                case INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY:
+                case INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM:
+                    return FALSE;
+                break;
+                default:
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+        case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+        {
+            switch(displayMode){
+                case INVENTORY_PARTY_DISPLAY_EXP_AND_LEVEL:
+                    return FALSE;
+                break;
+                default:
+                    return TRUE;
+                break;
+            }
+        }
+        break;
+    }
+
+    return FALSE;
+}
+
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
@@ -4032,7 +4276,7 @@ static void Task_MenuMain(u8 taskId)
 
     if ((JOY_NEW(R_BUTTON)) || (JOY_REPEAT(R_BUTTON)))
     {
-        u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] - 1;
+        /*u16 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum] - 1;
         if (sMenuDataPtr->currentSelectMode != INVENTORY_MODE_DEFAULT)
             return;
 
@@ -4046,7 +4290,14 @@ static void Task_MenuMain(u8 taskId)
         }
         while(numPress != 0);
         DebugPrintf("R_BUTTON itemIdx %d yFirstItem %d numitems %d numPress %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, numPress);
-        Inventory_PrintToAllWindows();
+        Inventory_PrintToAllWindows();*/
+        sMenuDataPtr->partyDisplayMode++;
+
+        if(sMenuDataPtr->partyDisplayMode >= INVENTORY_PARTY_DISPLAY_COUNT)
+            sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_DEFAULT;
+        DebugPrintf("R_BUTTON partyDisplayMode %d", sMenuDataPtr->partyDisplayMode);
+
+        //Inventory_PrintToAllWindows();
     }
 
 
