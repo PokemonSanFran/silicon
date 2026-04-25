@@ -2973,23 +2973,18 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BOTTLE_CAP] =
     {
         .name = ITEM_NAME("Bottle Cap"),
-        //.price = (I_PRICE >= GEN_9) ? 20000 : 5000,
+        .price = (I_PRICE >= GEN_9) ? 20000 : 5000,
         .description = COMPOUND_STRING(
                 "A beautiful bottle\n"
                 "cap that gives off\n"
                 "a silver gleam."),
-        //.pocket = POCKET_ITEMS,
+        .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
         .iconPic = gItemIcon_BottleCap,
         .iconPalette = gItemIconPalette_BottleCap,
-        // Start siliconQuests
-        .price = 0,
-        .pocket = POCKET_KEY_ITEMS,
-        .importance = 1,
-        // End siliconQuests
     },
 
     [ITEM_GOLD_BOTTLE_CAP] =
