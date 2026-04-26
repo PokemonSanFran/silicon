@@ -36,6 +36,16 @@ u32 Dexnav_GetOverworldStartingTime(void);
 void Dexnav_SetOverworldStartingTime(u32 startingTime);
 u16 Dexnav_GetMove(u8 index);
 void Dexnav_SetMove(u8 index, u16 value);
+void Dexnav_ClearAbilityFlag(void);
+void Dexnav_SetAbilityFlag(void);
+void Dexnav_ClearItemFlag(void);
+void Dexnav_SetItemFlag(void);
+void Dexnav_ClearMoveFlag(void);
+void Dexnav_SetMoveFlag(void);
+void Dexnav_ClearLevelFlag(void);
+void Dexnav_SetLevelFlag(void);
+void Dexnav_ClearStatFlag(void);
+void Dexnav_SetStatFlag(void);
 
 u16 *Dexnav_GetPalBuffer(void);
 

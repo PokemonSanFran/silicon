@@ -49,6 +49,6 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
 enum Item Dexnav_CalculateItem(u32 species, u32 insight);
 u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight);
 u8 Dexnav_CalculatePotential(u32 insight);
-
-
+void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies);
+  
 #endif // GUARD_UI_DEXNAV_H

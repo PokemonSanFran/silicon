@@ -2714,21 +2714,16 @@ u32 CalculateDexNavShinyRolls(void)
     return chainBonus + rndBonus;
 }
 
-// Start dexNav
-/*
 void TryIncrementSpeciesSearchLevel()
 {
+// Start dexNav
+    Dexnav_IncrementSpeciesSearchLevel(gDexNavSpecies);
+/*
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
     if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
         gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies]++;
 #endif
-}
 */
-
-void TryIncrementSpeciesSearchLevel()
-{
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
-        gSaveBlock2Ptr->dexNavSearchLevels[gDexNavSpecies]++;
 }
 // End dexNav
 

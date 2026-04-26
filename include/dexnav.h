@@ -31,7 +31,15 @@ struct DexNavSearch
     u32 startingTime;
     u8 hiddenSearch:1;
     u8 isHiddenMon:1;
-    u8 unk:6;
+  // Start dexnav
+    u8 statFlag:1;
+    u8 abilityFlag:1;
+    u8 itemFlag:1;
+    u8 moveFlag:1;
+    u8 levelFlag:1;
+    u8 unk:1;
+    //u8 unk:6;
+  // End dexnav
     u16 palBuffer[16];
 };
 // End dexnav

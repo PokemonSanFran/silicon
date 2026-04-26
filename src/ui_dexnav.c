@@ -1269,7 +1269,7 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId)
     x = 47;
     y = 2;
     
-    if (insight < UCHAR_MAX)
+    if (insight < DEXNAV_MAX_INSIGHT)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
     else
         StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
@@ -1302,7 +1302,7 @@ static void Dexnav_PrintStreak(enum DexnavWindows windowId)
     x = 48;
     y = 2;
 
-    if (streak < UCHAR_MAX)
+    if (streak < DEXNAV_MAX_STREAK)
         ConvertIntToDecimalStringN(gStringVar4, streak, STR_CONV_MODE_LEFT_ALIGN, CountDigits(streak));
     else
         StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
@@ -1328,7 +1328,7 @@ static const union AnimCmd sAnim_StarSmallFull[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarSmallSparkle[] = 
+static const union AnimCmd sAnim_StarSmallSparkle[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,24),
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_SPARKLE,24),
@@ -1399,7 +1399,7 @@ static void SpriteCB_Star(struct Sprite *sprite)
     bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
 
     s32 insight = sprite->data[0];
-    bool32 insightMax = (insight == UCHAR_MAX);
+    bool32 insightMax = (insight == DEXNAV_MAX_INSIGHT);
 
     u32 position = sprite->data[1];
     bool32 isCenter = (position == DEXNAV_STAR_CENTER);
@@ -2200,11 +2200,11 @@ void Dexnav_FreeOverworldSpriteResources(void)
 
 u8 Dexnav_CalculatePotential(u32 insight)
 {
-    if (insight < 20)
+    if (insight < DEXNAV_INSIGHT_PERCENT_10) 
         return insight / 20;
-    else if (insight < 100)
+    else if (insight < DEXNAV_INSIGHT_PERCENT_50)
         return ((insight + 60) / 80);
-    else if (insight < 200)
+    else if (insight < DEXNAV_MAX_INSIGHT)
         return ((insight - 50) / 25);
     else
         return NUM_STATS;
@@ -2212,72 +2212,206 @@ u8 Dexnav_CalculatePotential(u32 insight)
 
 u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight)
 {
-    return 0;
+    Dexnav_ClearAbilityFlag();
+    bool32 hasSecondAbility = (GetSpeciesAbility(species, 1) != ABILITY_NONE);
+    bool32 hasHiddenAbility = (GetSpeciesAbility(species, 2) != ABILITY_NONE);
+
+    if (hasSecondAbility == FALSE && hasHiddenAbility == FALSE)
+        return 0;
+
+    u32 rand = Random() % 100;
+
+    if (hasHiddenAbility == FALSE)
+        return (rand < 50) ? 0 : 1;
+
+    u64 chance = 0;
+
+    if (insight < DEXNAV_INSIGHT_PERCENT_5)
+    {
+        chance = 0;
+    }
+    else if (insight < DEXNAV_INSIGHT_PERCENT_12_5)
+    {
+        chance = (insight - 10);
+    }
+    else if (insight < DEXNAV_INSIGHT_PERCENT_50)
+    {
+        u64 val = (6222 * (u64)insight * insight) / 10000;
+        u64 sub_term = (3111 * (u64)insight) / 100;
+        u64 add_term = 18888;
+
+        if ((val + add_term) > sub_term)
+            chance = (val + add_term - sub_term) / 1000;
+        else
+            chance = 0;
+    }
+    else
+    {
+        chance = DEXNAV_MAX_ITEM_ABILITY_CHANCE;
+    }
+
+    if (chance > DEXNAV_MAX_ITEM_ABILITY_CHANCE)
+        chance = DEXNAV_MAX_ITEM_ABILITY_CHANCE;
+
+    if (rand < (u32)chance)
+    {
+        Dexnav_SetAbilityFlag();
+        return 2;
+    }
+
+    if (hasSecondAbility == FALSE)
+        return 0;
+
+    return (Random() % 2);
 }
 
 enum Item Dexnav_CalculateItem(u32 species, u32 insight)
 {
-   return ITEM_NONE; 
+    enum Item item1 = gSpeciesInfo[species].itemCommon;
+    enum Item item2 = gSpeciesInfo[species].itemRare;
+
+    Dexnav_ClearItemFlag();
+
+    if (item1 == ITEM_NONE && item2 == ITEM_NONE)
+        return ITEM_NONE;
+
+    u32 rand = Random() % 100;
+    enum Item selectedItem = ITEM_NONE;
+
+    if (rand < 50) 
+        selectedItem = item1;
+    else if (rand < 55) 
+        selectedItem = item2;
+
+    if (selectedItem != ITEM_NONE)
+        return selectedItem;
+
+    u32 itemChance = 0;
+    u32 extraChance = 0;
+    if (insight < 10)
+        itemChance = insight;
+    else if (insight < 100)
+        itemChance = ((4 * insight) + 50) / 9;
+    else
+        itemChance = DEXNAV_MAX_ITEM_ABILITY_CHANCE;
+
+    if (itemChance > DEXNAV_MAX_ITEM_ABILITY_CHANCE)
+        itemChance = DEXNAV_MAX_ITEM_ABILITY_CHANCE;
+
+    if ((Random() % 100) < itemChance)
+        extraChance = 1; 
+
+    if (extraChance == 0)
+        return selectedItem;
+
+    if (item1 != ITEM_NONE && item2 != ITEM_NONE)
+    {
+        rand = Random() % 100;
+        if (rand < 90)
+            selectedItem = item1;
+        else 
+            selectedItem = item2;
+    }
+    else if (item1 == ITEM_NONE && item2 != ITEM_NONE)
+    {
+        rand = Random() % 100;
+        if (rand < 55) 
+            selectedItem = item2;
+        else 
+            selectedItem = ITEM_NONE;
+    }
+    else if (item1 != ITEM_NONE && item2 == ITEM_NONE)
+    {
+        selectedItem = item1;
+    }
+
+    if (selectedItem != ITEM_NONE)
+        Dexnav_SetItemFlag();
+
+    return selectedItem;
 }
 
 void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *moves)
 {
-    bool8 genMove = FALSE;
-    u16 randVal = Random() % 100;
-    u16 i;
-    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    Dexnav_ClearMoveFlag();
+    CreateWildMon(species, level);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        moves[i] = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i);
 
-    // see if first move slot should be an egg move
-    if (insight < 5)
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u32 numEggMoves = GetEggMoves(&gEnemyParty[0], eggMoveBuffer);
+
+    if (numEggMoves == 0)
+        return;
+
+    u32 chance = 0;
+
+    if (insight < 10)
     {
-        if (SEARCHLEVEL0_MOVECHANCE != 0 && randVal < SEARCHLEVEL0_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (insight < 10)
-    {
-        if (SEARCHLEVEL5_MOVECHANCE != 0 && randVal < SEARCHLEVEL5_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (insight < 25)
-    {
-        if (SEARCHLEVEL10_MOVECHANCE != 0 && randVal < SEARCHLEVEL10_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (insight < 50)
-    {
-        if (SEARCHLEVEL25_MOVECHANCE != 0 && randVal < SEARCHLEVEL25_MOVECHANCE)
-            genMove = TRUE;
+        chance = (3 * insight) + 20;
     }
     else if (insight < 100)
     {
-        if (SEARCHLEVEL50_MOVECHANCE != 0 && randVal < SEARCHLEVEL50_MOVECHANCE)
-            genMove = TRUE;
+        u64 insight64 = (u64)insight;
+        
+        u64 term1 = (insight64 * insight64) / 162;
+        u64 term2 = (10 * insight64) / 81;
+        u64 term3 = 4100 / 81;
+
+        if ((term1 + term3) > term2)
+            chance = (u32)(term1 + term3 - term2);
+        else
+            chance = 0;
     }
     else
     {
-        if (SEARCHLEVEL100_MOVECHANCE != 0 && randVal < SEARCHLEVEL100_MOVECHANCE)
-            genMove = TRUE;
+        chance = 100;
     }
 
-    // Generate a wild mon just to get the initial moveset (later overwritten by CreateDexNavWildMon)
-    CreateWildMon(species, level);
+    if (chance > 100)
+        chance = 100;
+    
+    if (chance < 1)
+        chance = 1;
 
-    // Store generated mon moves into Dex Nav Struct
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        moves[i] = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i);
+    if (Random() % 100 >= chance)
+        return;
 
-    // set first move slot to a random egg move if search level is good enough
-    if (genMove)
-    {
-        u8 numEggMoves = GetEggMoves(&gEnemyParty[0], eggMoveBuffer);
-        if (numEggMoves != 0)
-            moves[0] = eggMoveBuffer[Random() % numEggMoves];
-    }
+    Dexnav_SetMoveFlag();
+    moves[0] = eggMoveBuffer[Random() % numEggMoves];
 }
 
 u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment)
 {
-    return 1;
+    Dexnav_ClearLevelFlag();
+    u32 levelBase = GetEncounterLevelFromMapData(species, environment);
+
+    if (levelBase == MON_LEVEL_NONEXISTENT)
+        return MON_LEVEL_NONEXISTENT;
+
+    u32 chance = 0;
+    u32 insight = gSaveBlock3Ptr->dexNavChain;
+
+    if (insight < DEXNAV_INSIGHT_PERCENT_12_5)
+        chance = 0;
+    else if (insight < DEXNAV_INSIGHT_PERCENT_75)
+        chance = (4 * (insight - 25)) / 5;
+    else
+        chance = 100;
+
+    if (chance > 100)
+        chance = 100;
+
+    u32 levelBonus = insight / 5;
+
+    if ((Random() % 100) < chance)
+        levelBonus += 10;
+
+    if (levelBonus > 0)
+        Dexnav_SetLevelFlag();
+
+    u32 newLevel = levelBase + levelBonus;
+    return (newLevel > MAX_LEVEL) ? MAX_LEVEL : newLevel;
 }
 
 bool8 Dexnav_CalculateShinyRolls(u32 streak)
@@ -2287,39 +2421,58 @@ bool8 Dexnav_CalculateShinyRolls(u32 streak)
 
 void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves)
 {
+    Dexnav_ClearStatFlag();
     struct Pokemon *mon = &gEnemyParty[0];
-    u8 iv[3] = {NUM_STATS};
-    u8 i;
-    u8 perfectIv = 31;
+    CreateWildMon(species, level);
+    u8 ivs[NUM_STATS] = {0};
+    u8 oldIvs[NUM_STATS] = {0};
+    u32 statIndices[NUM_STATS] = 
+    {
+        STAT_HP,
+        STAT_ATK,
+        STAT_DEF,
+        STAT_SPEED,
+        STAT_SPATK,
+        STAT_SPDEF
+    };
 
-    CreateWildMon(species, level);  // shiny rate bonus handled in CreateBoxMon
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        ivs[i] = GetMonData(mon, MON_DATA_HP_IV + i);
+        oldIvs[i] = ivs[i];
+    }
 
-    // Pick random, unique IVs to set to 31. The number of perfect IVs that are assigned is equal to the potential
-    iv[0] = Random() % NUM_STATS;               // choose 1st perfect stat
-    do {
-        iv[1] = Random() % NUM_STATS;
-        iv[2] = Random() % NUM_STATS;
-    } while ((iv[1] == iv[0])                   // unique 2nd perfect stat
-    || (iv[2] == iv[0] || iv[2] == iv[1]));   // unique 3rd perfect stat
+    Shuffle8(statIndices, NUM_STATS);
 
-    if (potential > 2 && iv[2] != NUM_STATS)
-        SetMonData(mon, MON_DATA_HP_IV + iv[2], &perfectIv);
-    if (potential > 1 && iv[1] != NUM_STATS)
-        SetMonData(mon, MON_DATA_HP_IV + iv[1], &perfectIv);
-    if (potential > 0 && iv[0] != NUM_STATS)
-        SetMonData(mon, MON_DATA_HP_IV + iv[0], &perfectIv);
+    for (u32 i = 0; i < potential && i < NUM_STATS; i++)
+        ivs[statIndices[i]] = MAX_PER_STAT_IVS;
 
-    //Set ability
+    for (u32 i = 0; i < NUM_STATS; i++)
+        if (oldIvs[i] != ivs[i])
+            Dexnav_SetStatFlag();
+
+    for (u32 i = 0; i < NUM_STATS; i++)
+        SetMonData(mon, MON_DATA_HP_IV + i, &ivs[i]);
+
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
 
-    // Set Held Item
-    if (item)
-        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-
-    //Set moves
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, moves[i], i);
 
     CalculateMonStats(mon);
+}
+
+void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies)
+{
+    u32 searchLevel = GetSearchLevel(origSpecies);
+    
+    if (searchLevel >= DEXNAV_MAX_INSIGHT)
+        return;
+
+    searchLevel++;
+    
+    u32 species = ConvertSpeciesIdToResidoDex(origSpecies);
+    gSaveBlock2Ptr->dexNavSearchLevels[species] = searchLevel;
 }
 

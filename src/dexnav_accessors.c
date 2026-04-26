@@ -189,3 +189,53 @@ u16 *Dexnav_GetPalBuffer(void)
 {
     return sDexNavSearchDataPtr->palBuffer;
 }
+
+void Dexnav_ClearAbilityFlag(void)
+{
+    sDexNavSearchDataPtr->abilityFlag = FALSE;
+}
+
+void Dexnav_SetAbilityFlag(void)
+{
+    sDexNavSearchDataPtr->abilityFlag = TRUE;
+}
+
+void Dexnav_ClearItemFlag(void)
+{
+    sDexNavSearchDataPtr->itemFlag = FALSE;
+}
+
+void Dexnav_SetItemFlag(void)
+{
+    sDexNavSearchDataPtr->itemFlag = TRUE;
+}
+
+void Dexnav_ClearMoveFlag(void)
+{
+    sDexNavSearchDataPtr->moveFlag = FALSE;
+}
+
+void Dexnav_SetMoveFlag(void)
+{
+    sDexNavSearchDataPtr->moveFlag = TRUE;
+}
+
+void Dexnav_ClearLevelFlag(void)
+{
+    sDexNavSearchDataPtr->levelFlag = FALSE;
+}
+
+void Dexnav_SetLevelFlag(void)
+{
+    sDexNavSearchDataPtr->levelFlag = TRUE;
+}
+
+void Dexnav_ClearStatFlag(void)
+{
+    sDexNavSearchDataPtr->statFlag = FALSE;
+}
+
+void Dexnav_SetStatFlag(void)
+{
+    sDexNavSearchDataPtr->statFlag = TRUE;
+}
