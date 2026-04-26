@@ -6,6 +6,7 @@
 #include "dma3.h"
 #include "event_data.h"
 #include "fieldmap.h"
+#include "field_effect.h"
 #include "frontier_pass.h"
 #include "gpu_regs.h"
 #include "item_use.h"
@@ -2057,11 +2058,13 @@ static void Task_DexnavFadeToPokedex(u8 taskId)
 void Dexnav_StartOverworldSearch(u8 taskId)
 {
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
-        if (species == SPECIES_NONE)
-        {
-            PlaySE(SE_FAILURE);
-            return;
-        }
+    if (species == SPECIES_NONE)
+    {
+        PlaySE(SE_FAILURE);
+        return;
+    }
+
+    EndDexNavSearch();
 
     gSpecialVar_0x8000 = species;
     gSpecialVar_0x8001 = Dexnav_GetHabitat();
@@ -2521,3 +2524,19 @@ void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies)
     gSaveBlock2Ptr->dexNavSearchLevels[species] = searchLevel;
 }
 
+void Dexnav_StartFieldEffect(void)
+{
+    u32 oldSpriteId = Dexnav_GetOverworldFldEffSpriteId();
+    if (oldSpriteId == MAX_SPRITES)
+        return;
+
+    u32 fieldEffect = Dexnav_GetOverworldFldEffId();
+    if (fieldEffect == 0)
+        return;
+
+    gFieldEffectArguments[0] = Dexnav_GetOverworldTileX();
+    gFieldEffectArguments[1] = Dexnav_GetOverworldTileY();
+    gFieldEffectArguments[2] = 0xFF;
+    gFieldEffectArguments[3] = 2;
+    Dexnav_SetOverworldFldEffSpriteId(FieldEffectStart(fieldEffect));
+}

@@ -141,7 +141,9 @@ struct DexNavGUI
 
 // Start dexnav
 //EWRAM_DATA static struct DexNavSearch *sDexNavSearchDataPtr = NULL;
+EWRAM_DATA static struct DexNavSearch sDexNavSearchData = {0};
 EWRAM_DATA struct DexNavSearch *sDexNavSearchDataPtr = NULL;
+EWRAM_DATA static bool8 sDexNavSearchPaused = FALSE;
 // End dexnav
 EWRAM_DATA static struct DexNavGUI *sDexNavUiDataPtr = NULL;
 EWRAM_DATA static u8 *sBg1TilemapBuffer = NULL;
@@ -854,7 +856,10 @@ static void SetUpDexNavSearch(void)
 
 static void DexNavSearchBail(const u8 *script)
 {
-    TRY_FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+    // Start dexnav
+    //TRY_FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+    sDexNavSearchDataPtr = NULL;
+    // End dexnav
     FlagClear(DN_FLAG_SEARCHING);
     FreeMonIconPalettes();
     ScriptContext_SetupScript(script);
@@ -862,7 +867,10 @@ static void DexNavSearchBail(const u8 *script)
 
 static bool8 InitDexNavSearch(u32 species, u32 environment)
 {
-    sDexNavSearchDataPtr = AllocZeroed(sizeof(struct DexNavSearch));
+    // Start dexnav
+    sDexNavSearchDataPtr = &sDexNavSearchData;
+    memset(sDexNavSearchDataPtr, 0, sizeof(struct DexNavSearch));
+    // End dexnav
     if (sDexNavSearchDataPtr == NULL)
     {
         DexNavSearchBail(EventScript_NotFoundNearby);
@@ -1002,7 +1010,10 @@ void EndDexNavSearch(void)
     Dexnav_FreeOverworldSpriteResources();
     // End dexnav
     FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
-    FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+    // Start dexnav
+    //FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+    sDexNavSearchDataPtr = NULL;
+    // End dexnav
     FlagClear(DN_FLAG_SEARCHING);
 }
 
@@ -1136,7 +1147,10 @@ bool32 OnStep_DexNavSearch(void)
                             sDexNavSearchDataPtr->abilityNum, sDexNavSearchDataPtr->heldItem, sDexNavSearchDataPtr->moves);
 
         ScriptContext_SetupScript(EventScript_StartDexNavBattle);
-        FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+        // Start dexnav
+        //FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+        sDexNavSearchDataPtr = NULL;
+        // End dexnav
         FlagClear(DN_FLAG_SEARCHING);
         return TRUE;
     }
@@ -2620,7 +2634,10 @@ bool32 TryFindHiddenPokemon(void)
         if (species == SPECIES_NONE)
             return FALSE;
 
-        sDexNavSearchDataPtr = AllocZeroed(sizeof(struct DexNavSearch));
+        // Start dexnav
+        sDexNavSearchDataPtr = &sDexNavSearchData;
+        memset(sDexNavSearchDataPtr, 0, sizeof(struct DexNavSearch));
+        // End dexnav
         FlagSet(DN_FLAG_SEARCHING);
         // init search data
         sDexNavSearchDataPtr->isHiddenMon = isHiddenMon;
@@ -2630,7 +2647,10 @@ bool32 TryFindHiddenPokemon(void)
         sDexNavSearchDataPtr->monLevel = DexNavTryGenerateMonLevel(species, environment);
         if (sDexNavSearchDataPtr->monLevel == MON_LEVEL_NONEXISTENT)
         {
-            FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+            // Start dexnav
+            //FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+            sDexNavSearchDataPtr = NULL;
+            // End dexnav
             FlagClear(DN_FLAG_SEARCHING);
             return FALSE;
         }
@@ -2638,7 +2658,10 @@ bool32 TryFindHiddenPokemon(void)
         // find tile for hidden mon and start effect if possible
         if (!TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 8, 8, TRUE))
         {
-            FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+            // Start dexnav
+            //FREE_AND_SET_NULL(sDexNavSearchDataPtr);
+            sDexNavSearchDataPtr = NULL;
+            // End dexnav
             FlagClear(DN_FLAG_SEARCHING);
             return FALSE;
         }
@@ -2739,4 +2762,32 @@ void IncrementDexNavChain(void)
 {
     if (gSaveBlock3Ptr->dexNavChain < DEXNAV_CHAIN_MAX)
         gSaveBlock3Ptr->dexNavChain++;
+}
+
+void PauseDexNavSearch(void)
+{
+    if (sDexNavSearchDataPtr == NULL)
+        return;
+
+    u32 spriteId = Dexnav_GetOverworldIconSpriteId();
+
+    if (spriteId != MAX_SPRITES)
+    {
+        DestroySprite(&gSprites[spriteId]);
+        FreeSpriteTilesByTag(DEXNAV_SPRITETAG_OVERWORLD);
+    }
+
+    sDexNavSearchPaused = TRUE;
+}
+
+void ResumeDexNavSearch(void)
+{
+    if (!sDexNavSearchPaused || sDexNavSearchDataPtr == NULL)
+        return;
+
+    FlagSet(DN_FLAG_SEARCHING);
+    Dexnav_SetOverworldStartingTime(gMain.vblankCounter1);
+    Dexnav_DrawOverworldSearchIcon();
+    Dexnav_StartFieldEffect();
+    sDexNavSearchPaused = FALSE;
 }

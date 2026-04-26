@@ -123,6 +123,8 @@ bool32 OnStep_DexNavSearch(void);
 void CB2_DexNavFromStartMenu(void); // dexnav
 u8 GetSearchLevel(u32 species); // dexnav
 void CB1_DexNavSearchCallback(void);
+void PauseDexNavSearch(void); // dexnav
+void ResumeDexNavSearch(void); // dexnav
 
 extern u16 gDexNavSpecies;
 
