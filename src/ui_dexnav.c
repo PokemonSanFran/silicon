@@ -100,7 +100,8 @@ static void Dexnav_DisplayStarsInsight(void);
 static void Dexnav_DisplayStarsStreak(void);
 static void Dexnav_DisplayMonInfo(void);
 static void Dexnav_PrintMonName(enum DexnavWindows windowId);
-static void SpriteCB_Star(struct Sprite *sprite);
+static void SpriteCB_StarInsight(struct Sprite *sprite);
+static void SpriteCB_StarStreak(struct Sprite *sprite);
 static void Dexnav_PrintMonTypes(void);
 static void Dexnav_PrintFishingIcon(void);
 static u32 Dexnav_GetCursorPosition(void);
@@ -1389,7 +1390,7 @@ static const union AnimCmd * const sAnims_Star[] =
     sAnim_StarBigSparkle_Mid,
 };
 
-static void SpriteCB_Star(struct Sprite *sprite)
+static void SpriteCB_StarStreak(struct Sprite *sprite)
 {
     if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
         sprite->invisible = TRUE;
@@ -1398,7 +1399,62 @@ static void SpriteCB_Star(struct Sprite *sprite)
 
     bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
 
-    s32 insight = sprite->data[0];
+    s32 streak = sprite->data[0];
+    bool32 streakMax = (streak == DEXNAV_MAX_STREAK);
+
+    u32 position = sprite->data[1];
+    bool32 isCenter = (position == DEXNAV_STAR_CENTER);
+
+    u32 targetAnim;
+
+    if (streakMax && isCenter)
+    {
+        targetAnim = isBig ? DEXNAV_STAR_BIG_SPARKLE_MID : DEXNAV_STAR_SMALL_SPARKLE_MID;
+        StartSpriteAnimIfDifferent(sprite, targetAnim);
+        return;
+    }
+
+    if (streakMax)
+    {
+        targetAnim = isBig ? DEXNAV_STAR_BIG_SPARKLE : DEXNAV_STAR_SMALL_SPARKLE;
+        StartSpriteAnimIfDifferent(sprite, targetAnim);
+        return;
+    }
+
+    streak = (streak - ((DEXNAV_MAX_STREAK / 3) - 1) * position);
+
+    if (isBig)
+    {
+        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))            
+            targetAnim = DEXNAV_STAR_BIG_FULL;
+        else if (streak < 1)
+            targetAnim = DEXNAV_STAR_BIG_EMPTY;
+        else
+            targetAnim = DEXNAV_STAR_BIG_HALF;
+    }
+    else
+    {
+        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))            
+            targetAnim = DEXNAV_STAR_SMALL_FULL;
+        else if (streak < 1)
+            targetAnim = DEXNAV_STAR_SMALL_EMPTY;
+        else
+            targetAnim = DEXNAV_STAR_SMALL_HALF;
+    }
+
+    StartSpriteAnimIfDifferent(sprite, targetAnim);
+}
+
+static void SpriteCB_StarInsight(struct Sprite *sprite)
+{
+    if (Dexnav_GetCurrentlySelectedSpecies() == SPECIES_NONE)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+
+    bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
+
+    s32 insight = Dexnav_GetInsight();
     bool32 insightMax = (insight == DEXNAV_MAX_INSIGHT);
 
     u32 position = sprite->data[1];
@@ -1420,11 +1476,11 @@ static void SpriteCB_Star(struct Sprite *sprite)
         return;
     }
 
-    insight = (insight - (85 * position));
+    insight = (insight - ((DEXNAV_MAX_INSIGHT / 3) - 1) * position);
 
     if (isBig)
     {
-        if (insight > 84)
+        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))            
             targetAnim = DEXNAV_STAR_BIG_FULL;
         else if (insight < 1)
             targetAnim = DEXNAV_STAR_BIG_EMPTY;
@@ -1433,7 +1489,7 @@ static void SpriteCB_Star(struct Sprite *sprite)
     }
     else
     {
-        if (insight > 84)
+        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))            
             targetAnim = DEXNAV_STAR_SMALL_FULL;
         else if (insight < 1)
             targetAnim = DEXNAV_STAR_SMALL_EMPTY;
@@ -1453,12 +1509,11 @@ static void Dexnav_DisplayStarsInsight(void)
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
-        TempSpriteTemplate.callback = SpriteCB_Star;
+        TempSpriteTemplate.callback = SpriteCB_StarInsight;
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
 
         u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 41, 0);
-        gSprites[spriteId].data[0] = Dexnav_GetInsight();
         gSprites[spriteId].data[1] = position;
         gSprites[spriteId].data[2] = state;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
@@ -1477,7 +1532,7 @@ static void Dexnav_DisplayStarsStreak(void)
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
-        TempSpriteTemplate.callback = SpriteCB_Star;
+        TempSpriteTemplate.callback = SpriteCB_StarStreak;
     TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
 
@@ -1502,6 +1557,10 @@ static void Dexnav_DisplayMonInfo(void)
     Dexnav_PrintMonTypes();
     Dexnav_PrintFishingIcon();
     Dexnav_DisplaySelectedMon();
+    Dexnav_DisplayInsight();
+    Dexnav_DisplayStarsInsight();
+    Dexnav_DisplayStreak();
+    Dexnav_DisplayStarsStreak();
 }
 
 static void Dexnav_PrintMonName(enum DexnavWindows windowId)
@@ -2427,14 +2486,14 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
     u8 ivs[NUM_STATS] = {0};
     u8 oldIvs[NUM_STATS] = {0};
     u32 statIndices[NUM_STATS] = 
-    {
-        STAT_HP,
-        STAT_ATK,
-        STAT_DEF,
-        STAT_SPEED,
-        STAT_SPATK,
-        STAT_SPDEF
-    };
+        {
+            STAT_HP,
+            STAT_ATK,
+            STAT_DEF,
+            STAT_SPEED,
+            STAT_SPATK,
+            STAT_SPDEF
+        };
 
     for (u32 i = 0; i < NUM_STATS; i++)
     {
