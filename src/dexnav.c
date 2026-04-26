@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "battle_setup.h"
+#include "phenomenon.h" // phenomenon
 #include "bg.h"
 #include "data.h"
 #include "daycare.h"
@@ -843,6 +844,7 @@ static void SetUpDexNavSearch(void)
         DexNavDrawIcons();
         DexNavUpdateSearchWindow(sDexNavSearchDataPtr->proximity, searchLevel);
     }
+    ClearAllPhenomenonData(); // phenomenon
 
     gPlayerAvatar.creeping = TRUE;  //initialize as true in case mon appears beside you
     sDexNavSearchDataPtr->proximity = gSprites[gPlayerAvatar.spriteId].x;
