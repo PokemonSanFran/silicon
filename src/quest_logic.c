@@ -58,6 +58,53 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 
+void DebugQuest_EvolveMon(u32 old, u32 species)
+{
+    struct Pokemon *mon = NULL;
+    u32 zero = 0;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        BoxMonAtToMon(gSpecialVar_MonBoxId,gSpecialVar_MonBoxPos, mon);
+    else
+        mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    SetMonData(mon, MON_DATA_SPECIES, &species);
+    SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
+    CalculateMonStats(mon);
+    EvolutionRenameMon(mon, old, species);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT);
+    IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+}
+
+static bool8 DebugQuest_MarkSpeciesForDeletion(u32 species)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        if (GetMonData(mon, MON_DATA_SPECIES) != species)
+            continue;
+        gSpecialVar_0x8004 = i;
+        return TRUE;
+    }
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES) != species)
+                continue;
+
+            gSpecialVar_0x8004 = PC_MON_CHOSEN;
+            gSpecialVar_MonBoxId = boxId;
+            gSpecialVar_MonBoxPos = boxPosition;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 bool32 HasPlayerJoinedThe_Tide(void)
 {
     return (FlagGet(FLAG_TIMELINE_TRUE));
@@ -3634,11 +3681,11 @@ void Script_IsHalaiIslandUnderConstruction(void)
 
 static const u16 questRestoreEspuleeGymItems[] =
 {
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_START,
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_A,
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_B,
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_C,
-    ITEM_QUEST_RESTOREESPULEEGYM_ITEM_E,
+    ITEM_QUEST_RESTOREESPULEEGYM_START,
+    ITEM_QUEST_RESTOREESPULEEGYM_A,
+    ITEM_QUEST_RESTOREESPULEEGYM_B,
+    ITEM_QUEST_RESTOREESPULEEGYM_C,
+    ITEM_QUEST_RESTOREESPULEEGYM_E,
 };
 
 static const u16 babyPokemon[] =
@@ -3835,6 +3882,9 @@ u32 CheckIfMonIsOddEgg(void)
     struct Pokemon *mon = NULL;
     struct Pokemon tempMon;
 
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
+
     if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
     {
         BoxMonToMon(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &tempMon);
@@ -3845,10 +3895,7 @@ u32 CheckIfMonIsOddEgg(void)
         mon = &gPlayerParty[gSpecialVar_0x8004];
     }
 
-    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
-        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
-
-    if(GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+    if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
         return QUEST_RESTOREESPULEEGYM_IS_NOT_EGG;
 
     u32 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -3979,4 +4026,132 @@ u8 Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
 void Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
 {
     gSpecialVar_Result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+}
+
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymRemoveWrydeerIfFound(void)
+{
+    if (DebugQuest_MarkSpeciesForDeletion(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        DeleteChosenPartyMon();
+}
+
+static bool8 DebugQuest_RestoreEsupleeOutskirtsGymMarkOddEgg(void)
+{
+    u32 result = 0;
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        gSpecialVar_0x8004 = partyIndex;
+        result = CheckIfMonIsOddEgg();
+        if (result == QUEST_RESTOREESPULEEGYM_IS_ODD_EGG)
+            return TRUE;
+    }
+
+    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    result = CheckIfMonIsOddEgg();
+
+    return (result == QUEST_RESTOREESPULEEGYM_IS_ODD_EGG);
+}
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound(void)
+{
+    if (DebugQuest_RestoreEsupleeOutskirtsGymMarkOddEgg())
+        DeleteChosenPartyMon();
+}
+
+static bool8 DebugQuest_ResstoreEspuleeOutskirtsGymFindStantler(void)
+{
+    u32 result = 0;
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        gSpecialVar_0x8004 = partyIndex;
+        result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+        if (result == QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH)
+            return TRUE;
+    }
+
+    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+    return (result == QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH);
+}
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound(void)
+{
+    if (DebugQuest_ResstoreEspuleeOutskirtsGymFindStantler() == FALSE)
+        return;
+
+    DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
+}
+
+void Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon(void)
+{
+    DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
+}
+
+void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            FlagSet(FLAG_RECIEVED_NURSERY_EGG);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTOREESPULEEGYM);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_B:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            GenerateAndGiveOddEgg();
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E:
+            DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound();
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
+            u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+            u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
+            enum Move moves[MAX_MON_MOVES] = {MOVE_PSYSHIELD_BASH,0,0,0};
+            ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,30,ITEM_NONE,BALL_POKE,NATURE_RANDOM,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound();
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_BATTLE:
+        case STATE_QUEST_RESTOREESPULEEGYM_REWARD:
+            DebugQuest_ResstoreEspuleeOutskirtsGymRemoveWrydeerIfFound();
+            QuestMenu_ScriptSetReward(QUEST_RESTOREESPULEEGYM);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_BATTLE:
+        case STATE_QUEST_RESTOREESPULEEGYM_COMPLETE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMELDA);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
+            break;
+    }
 }

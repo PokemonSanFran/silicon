@@ -1353,48 +1353,48 @@ static const struct SubQuest
 sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
     sub_quest(157,
             COMPOUND_STRING("EspuleetradepersonA"),
-            COMPOUND_STRING("You traded a Red Scale for Bluesky Mail."),
-            COMPOUND_STRING("Wajabi Lake"),
+            COMPOUND_STRING("You traded a Red Scale for Bluesky Mail at Wajabi Lake."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSONA,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(158,
             COMPOUND_STRING("EspuleetradepersonB"),
-            COMPOUND_STRING("You traded a Bluesky Mail for some Tea."),
-            COMPOUND_STRING("Qiu Village"),
+            COMPOUND_STRING("You traded a Bluesky Mail for some Tea in Qiu Village."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSONB,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(159,
             COMPOUND_STRING("EspuleetradepersonC"),
-            COMPOUND_STRING("You traded Tea for an Egg Ticket."),
-            COMPOUND_STRING("Hodou City"),
+            COMPOUND_STRING("You traded Tea for an Egg Ticket in Hodou City."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSONC,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(160,
             COMPOUND_STRING("EspuleetradepersonD"),
-            COMPOUND_STRING("You traded an Egg Ticket for an Odd Egg."),
-            COMPOUND_STRING("Chasilla Breeding Center"),
+            COMPOUND_STRING("You traded an Egg Ticket for an Odd Egg at Chasilla Breeding Center."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSOND,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(161,
             COMPOUND_STRING("EspuleetradepersonE"),
-            COMPOUND_STRING("You traded an Odd Egg for a Bottle Cap."),
-            COMPOUND_STRING("Cureno Port"),
+            COMPOUND_STRING("You traded an Odd Egg for a Bottle Cap in Cureno Port."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSONE,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(162,
             COMPOUND_STRING("EspuleetradepersonF"),
-            COMPOUND_STRING("EspuleetradepersonF helped evolved Stantler in exchange for a Bottle Cap."),
-            COMPOUND_STRING("Halerba City"),
+            COMPOUND_STRING("EspuleetradepersonF helped evolved Stantler in exchange for a Bottle Cap in Halerba City."),
+            COMPOUND_STRING("???"),
             OBJ_EVENT_GFX_ESPULEETRADEPERSONF,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
@@ -1544,14 +1544,188 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     {
         .name = COMPOUND_STRING("Restore Espulee Outskirts Gym"),
         .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Take the {STR_VAR_1} from Imelda and return to her with a {STR_VAR_3}."),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("{PLAYER} gave Imelda their {STR_VAR_3}, and the {STR_VAR_2} Swap Meet is in business
-                "),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("{PLAYER} gave Imelda their {STR_VAR_3}, and the {STR_VAR_2} Swap Meet is in business!"),
         .descFunc = GetQuestDesc_RestoreEspuleeOutskirts,
         .map = COMPOUND_STRING("Espulee Outskirts"),
         .sprite = OBJ_EVENT_GFX_IMELDA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestoreEspuleeOutskirts_Sub,
         .numSubquests = QUEST_RESTOREESPULEEGYM_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A]=
+            {
+                .name = COMPOUND_STRING("Before Trade A"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_A),
+                .warpId = WARP_ID_NONE,
+                .x = 52,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A]=
+            {
+                .name = COMPOUND_STRING("After Trade A"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_A),
+                .warpId = WARP_ID_NONE,
+                .x = 52,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_B]=
+            {
+                .name = COMPOUND_STRING("Before Trade B"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_B),
+                .warpId = WARP_ID_NONE,
+                .x = 0,
+                .y = 1,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B]=
+            {
+                .name = COMPOUND_STRING("After Trade B"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_B),
+                .warpId = WARP_ID_NONE,
+                .x = 0,
+                .y = 1,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C]=
+            {
+                .name = COMPOUND_STRING("Before Trade C"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_C),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 6,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C]=
+            {
+                .name = COMPOUND_STRING("After Trade C"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_C),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 6,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D]=
+            {
+                .name = COMPOUND_STRING("Before Trade D"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_D),
+                .warpId = WARP_ID_NONE,
+                .x = 9,
+                .y = 7,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D]=
+            {
+                .name = COMPOUND_STRING("After Trade D"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_D),
+                .warpId = WARP_ID_NONE,
+                .x = 9,
+                .y = 7,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E]=
+            {
+                .name = COMPOUND_STRING("Before Trade E"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_E),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 22,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E]=
+            {
+                .name = COMPOUND_STRING("After Trade E"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_E),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 22,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F]=
+            {
+                .name = COMPOUND_STRING("Before Trade F"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_F),
+                .warpId = WARP_ID_NONE,
+                .x = 43,
+                .y = 15,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F]=
+            {
+                .name = COMPOUND_STRING("After Trade F"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_F),
+                .warpId = WARP_ID_NONE,
+                .x = 43,
+                .y = 15,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD]=
+            {
+                .name = COMPOUND_STRING("Before Reward"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_BATTLE]=
+            {
+                .name = COMPOUND_STRING("Before Battle"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_BATTLE]=
+            {
+                .name = COMPOUND_STRING("After Battle"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_REWARD]=
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_COMPLETE]=
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+
+        },
     },
     [QUEST_RESTOREZENZUGYM] =
     {
