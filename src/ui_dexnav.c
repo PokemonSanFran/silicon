@@ -127,117 +127,117 @@ static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
 {
     [0] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
     },
     [1] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
     },
     [2] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [2] = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [2]  = {[AXIS_X] = 160, [AXIS_Y] = 106},
     },
     [3] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [2] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [3] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 133, [AXIS_Y] = 7 },
+        [2]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [3]  = {[AXIS_X] = 133, [AXIS_Y] = 113},
     },
     [4] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 117, [AXIS_Y] = 10},
-        [2] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [3] = {[AXIS_X] = 176, [AXIS_Y] = 91},
-        [4] = {[AXIS_X] = 117, [AXIS_Y] = 110},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [2]  = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [3]  = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [4]  = {[AXIS_X] = 117, [AXIS_Y] = 110},
     },
     [5] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 106, [AXIS_Y] = 14},
-        [2] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [3] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [4] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [5] = {[AXIS_X] = 106, [AXIS_Y] = 106},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [2]  = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [3]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [4]  = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [5]  = {[AXIS_X] = 106, [AXIS_Y] = 106},
     },
     [6] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 100, [AXIS_Y] = 19},
-        [2] = {[AXIS_X] = 145, [AXIS_Y] = 8},
-        [3] = {[AXIS_X] = 181, [AXIS_Y] = 37},
-        [4] = {[AXIS_X] = 181, [AXIS_Y] = 83},
-        [5] = {[AXIS_X] = 145, [AXIS_Y] = 112},
-        [6] = {[AXIS_X] = 100, [AXIS_Y] = 101},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 100, [AXIS_Y] = 19},
+        [2]  = {[AXIS_X] = 145, [AXIS_Y] = 8 },
+        [3]  = {[AXIS_X] = 181, [AXIS_Y] = 37},
+        [4]  = {[AXIS_X] = 181, [AXIS_Y] = 83},
+        [5]  = {[AXIS_X] = 145, [AXIS_Y] = 112},
+        [6]  = {[AXIS_X] = 100, [AXIS_Y] = 101},
     },
     [7] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 96, [AXIS_Y] = 23},
-        [2] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [3] = {[AXIS_X] = 170, [AXIS_Y] = 23},
-        [4] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [5] = {[AXIS_X] = 170, [AXIS_Y] = 97},
-        [6] = {[AXIS_X] = 133, [AXIS_Y] = 113},
-        [7] = {[AXIS_X] = 96, [AXIS_Y] = 97},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 96,  [AXIS_Y] = 23},
+        [2]  = {[AXIS_X] = 133, [AXIS_Y] = 7 },
+        [3]  = {[AXIS_X] = 170, [AXIS_Y] = 23},
+        [4]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [5]  = {[AXIS_X] = 170, [AXIS_Y] = 97},
+        [6]  = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [7]  = {[AXIS_X] = 96,  [AXIS_Y] = 97},
     },
     [8] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 92, [AXIS_Y] = 26},
-        [2] = {[AXIS_X] = 124, [AXIS_Y] = 8},
-        [3] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [4] = {[AXIS_X] = 183, [AXIS_Y] = 42},
-        [5] = {[AXIS_X] = 183, [AXIS_Y] = 78},
-        [6] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [7] = {[AXIS_X] = 124, [AXIS_Y] = 112},
-        [8] = {[AXIS_X] = 92, [AXIS_Y] = 94},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 92,  [AXIS_Y] = 26},
+        [2]  = {[AXIS_X] = 124, [AXIS_Y] = 8 },
+        [3]  = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [4]  = {[AXIS_X] = 183, [AXIS_Y] = 42},
+        [5]  = {[AXIS_X] = 183, [AXIS_Y] = 78},
+        [6]  = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [7]  = {[AXIS_X] = 124, [AXIS_Y] = 112},
+        [8]  = {[AXIS_X] = 92,  [AXIS_Y] = 94},
     },
     [9] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 90, [AXIS_Y] = 29},
-        [2] = {[AXIS_X] = 117, [AXIS_Y] = 10},
-        [3] = {[AXIS_X] = 149, [AXIS_Y] = 10},
-        [4] = {[AXIS_X] = 176, [AXIS_Y] = 29},
-        [5] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [6] = {[AXIS_X] = 176, [AXIS_Y] = 91},
-        [7] = {[AXIS_X] = 149, [AXIS_Y] = 110},
-        [8] = {[AXIS_X] = 117, [AXIS_Y] = 110},
-        [9] = {[AXIS_X] = 90, [AXIS_Y] = 91},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 90,  [AXIS_Y] = 29},
+        [2]  = {[AXIS_X] = 117, [AXIS_Y] = 10},
+        [3]  = {[AXIS_X] = 149, [AXIS_Y] = 10},
+        [4]  = {[AXIS_X] = 176, [AXIS_Y] = 29},
+        [5]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [6]  = {[AXIS_X] = 176, [AXIS_Y] = 91},
+        [7]  = {[AXIS_X] = 149, [AXIS_Y] = 110},
+        [8]  = {[AXIS_X] = 117, [AXIS_Y] = 110},
+        [9]  = {[AXIS_X] = 90,  [AXIS_Y] = 91},
     },
     [10] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 88, [AXIS_Y] = 31},
-        [2] = {[AXIS_X] = 111, [AXIS_Y] = 12},
-        [3] = {[AXIS_X] = 141, [AXIS_Y] = 8},
-        [4] = {[AXIS_X] = 168, [AXIS_Y] = 20},
-        [5] = {[AXIS_X] = 184, [AXIS_Y] = 45},
-        [6] = {[AXIS_X] = 184, [AXIS_Y] = 75},
-        [7] = {[AXIS_X] = 168, [AXIS_Y] = 97},
-        [8] = {[AXIS_X] = 141, [AXIS_Y] = 109},
-        [9] = {[AXIS_X] = 111, [AXIS_Y] = 105},
-        [10] = {[AXIS_X] = 88, [AXIS_Y] = 86},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 88,  [AXIS_Y] = 31},
+        [2]  = {[AXIS_X] = 111, [AXIS_Y] = 12},
+        [3]  = {[AXIS_X] = 141, [AXIS_Y] = 8 },
+        [4]  = {[AXIS_X] = 168, [AXIS_Y] = 20},
+        [5]  = {[AXIS_X] = 184, [AXIS_Y] = 45},
+        [6]  = {[AXIS_X] = 184, [AXIS_Y] = 75},
+        [7]  = {[AXIS_X] = 168, [AXIS_Y] = 97},
+        [8]  = {[AXIS_X] = 141, [AXIS_Y] = 109},
+        [9]  = {[AXIS_X] = 111, [AXIS_Y] = 105},
+        [10] = {[AXIS_X] = 88,  [AXIS_Y] = 86},
     },
     [11] =
     {
-        [0] = {[AXIS_X] = 80, [AXIS_Y] = 60},
-        [1] = {[AXIS_X] = 87, [AXIS_Y] = 33},
-        [2] = {[AXIS_X] = 106, [AXIS_Y] = 14},
-        [3] = {[AXIS_X] = 133, [AXIS_Y] = 7},
-        [4] = {[AXIS_X] = 160, [AXIS_Y] = 14},
-        [5] = {[AXIS_X] = 179, [AXIS_Y] = 33},
-        [6] = {[AXIS_X] = 186, [AXIS_Y] = 60},
-        [7] = {[AXIS_X] = 179, [AXIS_Y] = 87},
-        [8] = {[AXIS_X] = 160, [AXIS_Y] = 106},
-        [9] = {[AXIS_X] = 133, [AXIS_Y] = 113},
+        [0]  = {[AXIS_X] = 80,  [AXIS_Y] = 60},
+        [1]  = {[AXIS_X] = 87,  [AXIS_Y] = 33},
+        [2]  = {[AXIS_X] = 106, [AXIS_Y] = 14},
+        [3]  = {[AXIS_X] = 133, [AXIS_Y] = 7 },
+        [4]  = {[AXIS_X] = 160, [AXIS_Y] = 14},
+        [5]  = {[AXIS_X] = 179, [AXIS_Y] = 33},
+        [6]  = {[AXIS_X] = 186, [AXIS_Y] = 60},
+        [7]  = {[AXIS_X] = 179, [AXIS_Y] = 87},
+        [8]  = {[AXIS_X] = 160, [AXIS_Y] = 106},
+        [9]  = {[AXIS_X] = 133, [AXIS_Y] = 113},
         [10] = {[AXIS_X] = 106, [AXIS_Y] = 106},
-        [11] = {[AXIS_X] = 87, [AXIS_Y] = 87},
+        [11] = {[AXIS_X] = 87,  [AXIS_Y] = 87},
     },
 };
 
@@ -2295,14 +2295,8 @@ u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight)
     }
     else if (insight < DEXNAV_INSIGHT_PERCENT_50)
     {
-        u64 val = (6222 * (u64)insight * insight) / 10000;
-        u64 sub_term = (3111 * (u64)insight) / 100;
-        u64 add_term = 18888;
-
-        if ((val + add_term) > sub_term)
-            chance = (val + add_term - sub_term) / 1000;
-        else
-            chance = 0;
+        u64 x = (u64)insight;
+        chance = ((7 * x * x) - (350 * x) + 21250) / 1125;
     }
     else
     {
@@ -2411,16 +2405,8 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
     }
     else if (insight < 100)
     {
-        u64 insight64 = (u64)insight;
-        
-        u64 term1 = (insight64 * insight64) / 162;
-        u64 term2 = (10 * insight64) / 81;
-        u64 term3 = 4100 / 81;
-
-        if ((term1 + term3) > term2)
-            chance = (u32)(term1 + term3 - term2);
-        else
-            chance = 0;
+        u64 x = (u64)insight;
+        chance = (u32)((x * x) - (20 * x) + 8200) / 162;
     }
     else
     {
