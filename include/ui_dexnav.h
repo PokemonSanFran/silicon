@@ -2,6 +2,9 @@
 #define GUARD_UI_DEXNAV_H
 
 #include "dexnav_accessors.h"
+#include "move.h"
+#include "item.h"
+#include "dexnav.h"
 #include "constants/ui_dexnav.h"
 #include "constants/wild_encounter.h"
 
@@ -39,6 +42,13 @@ void Dexnav_SetupCallback(void);
 void Dexnav_ReturnFromPokedex(struct DexnavSavedData savedData);
 void Dexnav_DrawOverworldSearchIcon(void);
 void Dexnav_FreeOverworldSpriteResources(void);
+void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves);
+bool8 Dexnav_CalculateShinyRolls(u32 streak);
+u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment);
+void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *moves);
+enum Item Dexnav_CalculateItem(u32 species, u32 insight);
+u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight);
+u8 Dexnav_CalculatePotential(u32 insight);
 
 
 #endif // GUARD_UI_DEXNAV_H

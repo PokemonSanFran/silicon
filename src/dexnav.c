@@ -1215,6 +1215,10 @@ static void DexNavUpdateSearchWindow(u8 proximity, u8 searchLevel)
 //////////////////////////////
 static void CreateDexNavWildMon(u16 species, u8 potential, u8 level, u8 abilityNum, enum Item item, enum Move *moves)
 {
+    // Start dexnav
+    CreateDexnavWildMon(species,potential,level,abilityNum,item,moves);
+    return;
+    // End dexnav
     struct Pokemon *mon = &gEnemyParty[0];
     u8 iv[3] = {NUM_STATS};
     u8 i;
@@ -1255,6 +1259,7 @@ static void CreateDexNavWildMon(u16 species, u8 potential, u8 level, u8 abilityN
 //if it was a hidden encounter, updates the environment it is to be found from the wildheader encounterRate
 static u8 DexNavTryGenerateMonLevel(u16 species, enum EncounterType environment)
 {
+    return Dexnav_CalculateLevel(species,environment); //dexnav
     u8 levelBase = GetEncounterLevelFromMapData(species, environment);
     u8 levelBonus = gSaveBlock3Ptr->dexNavChain / 5;
 
@@ -1272,6 +1277,10 @@ static u8 DexNavTryGenerateMonLevel(u16 species, enum EncounterType environment)
 
 static void DexNavGenerateMoveset(u16 species, u8 searchLevel, u8 encounterLevel, u16 *moveDst)
 {
+    // Start dexnav
+    Dexnav_GenerateMoveset(species, searchLevel, encounterLevel, moveDst);
+    return;
+    // End dexnav
     bool8 genMove = FALSE;
     u16 randVal = Random() % 100;
     u16 i;
@@ -1327,6 +1336,7 @@ static void DexNavGenerateMoveset(u16 species, u8 searchLevel, u8 encounterLevel
 
 static u16 DexNavGenerateHeldItem(u16 species, u8 searchLevel)
 {
+    return Dexnav_CalculateItem(species,searchLevel); // dexnav
     u16 randVal = Random() % 100;
     u8 searchLevelInfluence = searchLevel >> 1;
     enum Item item1 = gSpeciesInfo[species].itemCommon;
@@ -1355,6 +1365,7 @@ static u16 DexNavGenerateHeldItem(u16 species, u8 searchLevel)
 
 static u8 DexNavGetAbilityNum(u16 species, u8 searchLevel)
 {
+    return Dexnav_CalculateAbilityNum(species,searchLevel); // dexnav
     bool8 genAbility = FALSE;
     u16 randVal = Random() % 100;
     u8 abilityNum = 0;
@@ -2694,6 +2705,7 @@ static void DexNavDrawHiddenIcons(void)
 /////////////////////////
 u32 CalculateDexNavShinyRolls(void)
 {
+    return Dexnav_CalculateShinyRolls(gSaveBlock3Ptr->dexNavChain); //dexnav
     u32 chainBonus, rndBonus;
     u8 chain = gSaveBlock3Ptr->dexNavChain;
 

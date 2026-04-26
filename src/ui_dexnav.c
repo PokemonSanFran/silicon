@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "bg.h"
-#include "dexnav.h"
+#include "daycare.h"
 #include "dexnav.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -2196,5 +2196,130 @@ void Dexnav_FreeOverworldSpriteResources(void)
 
     FreeSpriteTilesByTag(DEXNAV_SPRITETAG_OVERWORLD);
     FreeSpritePaletteByTag(DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING);
+}
+
+u8 Dexnav_CalculatePotential(u32 insight)
+{
+    if (insight < 20)
+        return insight / 20;
+    else if (insight < 100)
+        return ((insight + 60) / 80);
+    else if (insight < 200)
+        return ((insight - 50) / 25);
+    else
+        return NUM_STATS;
+}
+
+u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight)
+{
+    return 0;
+}
+
+enum Item Dexnav_CalculateItem(u32 species, u32 insight)
+{
+   return ITEM_NONE; 
+}
+
+void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *moves)
+{
+    bool8 genMove = FALSE;
+    u16 randVal = Random() % 100;
+    u16 i;
+    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+
+    // see if first move slot should be an egg move
+    if (insight < 5)
+    {
+        if (SEARCHLEVEL0_MOVECHANCE != 0 && randVal < SEARCHLEVEL0_MOVECHANCE)
+            genMove = TRUE;
+    }
+    else if (insight < 10)
+    {
+        if (SEARCHLEVEL5_MOVECHANCE != 0 && randVal < SEARCHLEVEL5_MOVECHANCE)
+            genMove = TRUE;
+    }
+    else if (insight < 25)
+    {
+        if (SEARCHLEVEL10_MOVECHANCE != 0 && randVal < SEARCHLEVEL10_MOVECHANCE)
+            genMove = TRUE;
+    }
+    else if (insight < 50)
+    {
+        if (SEARCHLEVEL25_MOVECHANCE != 0 && randVal < SEARCHLEVEL25_MOVECHANCE)
+            genMove = TRUE;
+    }
+    else if (insight < 100)
+    {
+        if (SEARCHLEVEL50_MOVECHANCE != 0 && randVal < SEARCHLEVEL50_MOVECHANCE)
+            genMove = TRUE;
+    }
+    else
+    {
+        if (SEARCHLEVEL100_MOVECHANCE != 0 && randVal < SEARCHLEVEL100_MOVECHANCE)
+            genMove = TRUE;
+    }
+
+    // Generate a wild mon just to get the initial moveset (later overwritten by CreateDexNavWildMon)
+    CreateWildMon(species, level);
+
+    // Store generated mon moves into Dex Nav Struct
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        moves[i] = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i);
+
+    // set first move slot to a random egg move if search level is good enough
+    if (genMove)
+    {
+        u8 numEggMoves = GetEggMoves(&gEnemyParty[0], eggMoveBuffer);
+        if (numEggMoves != 0)
+            moves[0] = eggMoveBuffer[Random() % numEggMoves];
+    }
+}
+
+u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment)
+{
+    return 1;
+}
+
+bool8 Dexnav_CalculateShinyRolls(u32 streak)
+{
+    return streak;
+}
+
+void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves)
+{
+    struct Pokemon *mon = &gEnemyParty[0];
+    u8 iv[3] = {NUM_STATS};
+    u8 i;
+    u8 perfectIv = 31;
+
+    CreateWildMon(species, level);  // shiny rate bonus handled in CreateBoxMon
+
+    // Pick random, unique IVs to set to 31. The number of perfect IVs that are assigned is equal to the potential
+    iv[0] = Random() % NUM_STATS;               // choose 1st perfect stat
+    do {
+        iv[1] = Random() % NUM_STATS;
+        iv[2] = Random() % NUM_STATS;
+    } while ((iv[1] == iv[0])                   // unique 2nd perfect stat
+    || (iv[2] == iv[0] || iv[2] == iv[1]));   // unique 3rd perfect stat
+
+    if (potential > 2 && iv[2] != NUM_STATS)
+        SetMonData(mon, MON_DATA_HP_IV + iv[2], &perfectIv);
+    if (potential > 1 && iv[1] != NUM_STATS)
+        SetMonData(mon, MON_DATA_HP_IV + iv[1], &perfectIv);
+    if (potential > 0 && iv[0] != NUM_STATS)
+        SetMonData(mon, MON_DATA_HP_IV + iv[0], &perfectIv);
+
+    //Set ability
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+
+    // Set Held Item
+    if (item)
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+
+    //Set moves
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, moves[i], i);
+
+    CalculateMonStats(mon);
 }
 
