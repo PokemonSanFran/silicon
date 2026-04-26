@@ -225,7 +225,6 @@ void UnlockPlayerFieldControls(void)
     sLockFieldControls = FALSE;
     ResumeDexNavSearch(); // dexnav
 }
-}
 
 bool8 ArePlayerFieldControlsLocked(void)
 {
