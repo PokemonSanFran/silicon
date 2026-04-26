@@ -86,7 +86,7 @@ script Unhoused_AskDonation_Dialogue
     {
         removemoney(UNHOUSED_ASK_AMOUNT,0)
         updatemoneybox(0)
-        special(RandomlyBoostPartyMemberFriendship)
+        callnative(RandomlyBoostPartyMemberFriendship)
         call(Unhoused_Script_BufferThanks)
         msgbox(("{STR_VAR_1}"),,SPEAKER_UNHOUSED)
     }

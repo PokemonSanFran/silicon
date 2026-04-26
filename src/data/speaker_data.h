@@ -1807,14 +1807,6 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
-    [SPEAKER_KITVOL] =
-    {
-        .name = COMPOUND_STRING("Kitvol"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
     [SPEAKER_NANCY] =
     {
         .name = COMPOUND_STRING("Nancy"),
@@ -2799,6 +2791,38 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .name = COMPOUND_STRING("FindtheguilityfriendI"),
         .title = COMPOUND_STRING("Triathlete"),
         .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONBUSSER] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionbusser"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONHOSTESS] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionhostess"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONCHEF] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionchef"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONLINECOOK] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionlinecook"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },

@@ -42,3 +42,14 @@ script Route4_EventScript_0AAB38A6
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
+
+script Route4_Script_Interact_Quest_Restaurantexpansionlinecook
+{
+    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONLINECOOK,format("Last night I tried to make an Arepa like Belén… and it was a culinary disaster. Am I cut out to be a line cook?"),format("I’m not even cut out to battle!"),Route4_Script_Interact_Quest_Restaurantexpansionlinecook)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Complete_Restaurantexpansionlinecook)
+    msgbox(format("Belén got famous off bringing different street foods from around the world to her restaurant. It’s an awesome way for so many people to get to try things from new cultures! I’m becoming a line cook so I can do the same thing."),,SPEAKER_RESTAURANTEXPANSIONLINECOOK)
+    closemessage
+    release
+    end
+// PSF TODO: Maybe I’m not so bad after all.
+}

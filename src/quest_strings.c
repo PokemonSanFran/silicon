@@ -168,11 +168,6 @@ const u8 gText_Quest_DexCompletion_Desc[] =_("Description");
 const u8 gText_Quest_DexCompletion_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_DexCompletion_Map[] =_("Chasilla");
 
-const u8 gText_Quest_KitchenVolunteering_Name[] = _("Kitchen Volunteering");
-const u8 gText_Quest_KitchenVolunteering_Desc[] =_("Description");
-const u8 gText_Quest_KitchenVolunteering_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_KitchenVolunteering_Map[] =_("CapheCity");
-
 const u8 gText_Quest_ArtisanBalls1_Name[] = _("Artisan Balls");
 const u8 gText_Quest_ArtisanBalls1_Desc[] =_("Help test the craftman's Pokeballs.\nCatch a Pokemon in each one, & talk to\nhim if you need more.");
 const u8 gText_Quest_ArtisanBalls1_DoneDesc[] =_("The craft Balls are a success! You can\nbuy these balls to make catching\neasier.");

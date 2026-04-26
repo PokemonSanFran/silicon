@@ -56,10 +56,12 @@ void DebugQuest_RockCollector(u8);
 void DebugQuest_BodegaBurnout(u8);
 void DebugQuest_Getthebandbacktogether(u8);
 void DebugQuest_Restaurantexpansion1(u8 state);
+void DebugQuest_Restaurantexpansion2(u8 state);
 void DebugQuest_Diggingupadaorasdirt(u8 state);
 void DebugQuest_Returndoll(u8 state);
 void DebugQuest_Freetheinnocent(u8 state);
 void DebugQuest_Findtheguilty(u8 state);
+void DebugQuest_KitchenVolunteering(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

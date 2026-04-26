@@ -201,21 +201,25 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_1)
 	end
 }
 
 script Debug_EventScript_Script_2
 {
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_2)
 	end
 }
 
 script Debug_EventScript_Script_3
 {
-	end
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
+    end
 }
 
 script Debug_EventScript_Script_4
 {
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
 	end
 }
 
