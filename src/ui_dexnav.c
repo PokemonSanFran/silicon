@@ -352,7 +352,7 @@ static const struct WindowTemplate sDexnavWindows[] =
     },
     [WIN_DEXNAV_HABITAT_HEADER] =
     {
-        .bg = BG3_DEXNAV_BACKGROUNDS,
+        .bg = BG2_DEXNAV_UI,
         .tilemapLeft = 13,
         .tilemapTop = 0,
         .width = 17,
