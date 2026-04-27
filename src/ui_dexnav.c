@@ -320,7 +320,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .tilemapLeft = 0,
         .tilemapTop = 2,
         .width = 8,
-        .height = 3,
+        .height = 5,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_INTERFACE_MON_INFO] =
@@ -329,7 +329,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .tilemapLeft = 0,
         .tilemapTop = 8,
         .width = 9,
-        .height = 2,
+        .height = 5,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_INTERFACE_STREAK] =
@@ -338,7 +338,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 8,
-        .height = 3,
+        .height = 5,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
     [WIN_DEXNAV_HELP_BAR] =
