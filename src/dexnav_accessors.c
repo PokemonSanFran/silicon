@@ -264,3 +264,4 @@ void Dexnav_ClearStatFlag(enum Stat statId)
 {
     sDexNavSearchDataPtr->statFlags &= ~(1 << statId);
 }
+

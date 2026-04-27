@@ -127,8 +127,12 @@ static bool8 Dexnav_ShouldHideAbilityIndicator(void);
 static bool8 Dexnav_ShouldDisplayAbilityName(void);
 static enum Ability Dexnav_GetSearchingAbility(void);
 static void Dexnav_PrintAbility(enum DexnavWindows windowId);
-void Dexnav_ScanMode_DisplayMonInfo(void);
-void Dexnav_ScanMode_DisplayFirstMove(void);
+static void Dexnav_ScanMode_DisplayMonInfo(void);
+static void Dexnav_ScanMode_DisplayFirstMove(void);
+static bool8 Dexnav_ShouldHideMoveIndicator(void);
+static bool8 Dexnav_ShouldDisplayMoveName(void);
+static enum Move Dexnav_GetSearchingMove(void);
+static void Dexnav_PrintMove(enum DexnavWindows windowId);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -964,6 +968,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStarsStreak();
             Dexnav_DisplayCursors();
             Dexnav_ScanMode_DisplayAbility();
+            Dexnav_ScanMode_DisplayFirstMove();
             gMain.state++;
             break;
         case 4:
@@ -2647,12 +2652,15 @@ static void Dexnav_ScanMode_DisplayAbility(void)
 
 static bool8 Dexnav_ShouldHideAbilityIndicator(void)
 {
-    return TRUE;
+    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
+        return TRUE;
+
+    return (Dexnav_GetAbilityFlag() == FALSE);
 }
 
 static bool8 Dexnav_ShouldDisplayAbilityName(void)
 {
-    return TRUE;
+    return (Dexnav_GetOverworldProximity() <= SNEAKING_PROXIMITY);
 }
 
 static enum Ability Dexnav_GetSearchingAbility(void)
@@ -2679,8 +2687,7 @@ static void Dexnav_PrintAbility(enum DexnavWindows windowId)
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_WIDTH));
 
     if (Dexnav_ShouldDisplayAbilityName())
-        //StringCopy(gStringVar4, GetAbilityName(Dexnav_GetSearchingAbility()));
-        StringCopy(gStringVar4, GetAbilityName(ABILITY_POWER_OF_ALCHEMY));
+        StringCopy(gStringVar4, GetAbilityName(Dexnav_GetSearchingAbility()));
     else
         StringCopy(gStringVar4, COMPOUND_STRING("???"));
 
@@ -2690,13 +2697,65 @@ static void Dexnav_PrintAbility(enum DexnavWindows windowId)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-void Dexnav_ScanMode_DisplayMonInfo(void)
+static bool8 Dexnav_ShouldHideMoveIndicator(void)
+{
+    if (Dexnav_ShouldDisplayMoveName() == FALSE)
+        return TRUE;
+
+    return (Dexnav_GetMoveFlag() == FALSE);
+}
+
+static bool8 Dexnav_ShouldDisplayMoveName(void)
+{
+    return (Dexnav_GetOverworldProximity() <= SNEAKING_PROXIMITY);
+}
+
+static enum Move Dexnav_GetSearchingMove(void)
+{
+    return Dexnav_GetMove(0);
+}
+
+static void Dexnav_PrintMove(enum DexnavWindows windowId)
+{
+    bool32 hideMoveIndicator = Dexnav_ShouldHideMoveIndicator();
+    u32 x = hideMoveIndicator ? 8 : 23;
+    u32 y = 3;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    s32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+    StringCopy(gStringVar4, COMPOUND_STRING("FIRST MOVE"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+
+    x = 8;
+    y = 17;
+    fontId = FONT_DEXNAV_STAT_NAME;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_WIDTH));
+
+    if (Dexnav_ShouldDisplayMoveName())
+        StringCopy(gStringVar4, GetMoveName(Dexnav_GetSearchingMove()));
+    else
+        StringCopy(gStringVar4, COMPOUND_STRING("???"));
+
+    letterSpacing -= 2;
+    fontId = GetFontIdToFit(gStringVar4,fontId,letterSpacing,windowWidth);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+static void Dexnav_ScanMode_DisplayFirstMove(void)
 {
     if (Dexnav_IsCurrentModeScan() == FALSE)
         return;
+
+    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_MOVE;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintMove(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-void Dexnav_ScanMode_DisplayFirstMove(void)
+static void Dexnav_ScanMode_DisplayMonInfo(void)
 {
     if (Dexnav_IsCurrentModeScan() == FALSE)
         return;
