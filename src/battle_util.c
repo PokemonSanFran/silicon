@@ -1853,6 +1853,38 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
     return TRUE;
 }
 
+// Start bdHazards
+static bool32 StartingStatusIsNotNull(struct StartingStatuses statuses)
+{
+    bool32 result = FALSE;
+    #define UNPACK_STARTING_STATUS_IS_NOT_NULL(_enum, _fieldName, ...) if (statuses._fieldName) {result = TRUE;};
+    STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_IS_NOT_NULL);
+    return result;
+}
+
+static u32 GetDeadMonsIndex(u32 battler)
+{
+    s32 firstId, lastId;
+    u32 validMons = 0;
+    u32 deadMons = 0;
+    GetAIPartyIndexes(battler, &firstId, &lastId);
+
+    for (s32 i = firstId; i < lastId; i++)
+    {
+        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG);
+        if (species != SPECIES_NONE && species != SPECIES_EGG)
+        {
+            validMons++;
+            if (gEnemyParty[i].hp == 0)
+                deadMons++;
+        }
+    }
+    if (validMons == deadMons + 1)
+        return PARTY_SIZE - 1;
+    return deadMons;
+}
+// End bdHazards
+
 bool32 HandleFaintedMonActions(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
@@ -1915,6 +1947,55 @@ bool32 HandleFaintedMonActions(void)
             gBattleStruct->eventState.faintedActionBattler = 0;
             gBattleStruct->eventState.faintedAction++;
             // fall through
+// Start bdHazards
+        case FAINTED_ACTIONS_HANDLE_GET_STARTING_STATUS:
+            if (NoAliveMonsForEitherParty())
+            {
+                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_FAINTED_MON;
+                break;
+            }
+            ResetStartingStatuses();
+            do
+            {
+                if (gBattleMons[gBattleStruct->eventState.faintedActionBattler].hp != 0 
+                    || IsOnPlayerSide(gBattleStruct->eventState.faintedActionBattler))
+                {
+                    continue;
+                }
+
+                u32 index = GetDeadMonsIndex(gBattleStruct->eventState.faintedActionBattler);
+                if (TESTING)
+                {
+                    TestRunner_Battle_GetForcedStaringStatuses(index);
+                    break;
+                }
+
+                struct StartingStatuses statuses = {0};
+                if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF && GetBattlerPosition(gBattleStruct->eventState.faintedActionBattler) == B_POSITION_OPPONENT_RIGHT)
+                    statuses = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB, index);
+                else
+                    statuses = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA, index);
+                if (StartingStatusIsNotNull(statuses) && ShouldDoTrainerSlide(gBattleStruct->eventState.faintedActionBattler, TRAINER_SLIDE_STARTING_STATUS))
+                {
+                    if (GetBattlerPosition(gBattleStruct->eventState.faintedActionBattler) == B_POSITION_OPPONENT_LEFT)
+                        BattleScriptExecute(BattleScript_TrainerASlideMsgEnd2);
+                    else
+                        BattleScriptExecute(BattleScript_TrainerBSlideMsgEnd2);
+                    return TRUE;
+                }
+
+                #define UNPACK_STARTING_STATUS_TO_BATTLE(_enum, _fieldName, ...) gStartingStatuses._fieldName = (statuses._fieldName || gStartingStatuses._fieldName);
+                STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
+
+            } while (++gBattleStruct->eventState.faintedActionBattler != gBattlersCount);
+            gBattleStruct->eventState.faintedActionBattler = 0;
+            gBattleStruct->eventState.faintedAction++;
+        case FAINTED_ACTIONS_HANDLE_SET_STARTING_STATUS:
+            if (TryStartingStatuses())
+                return TRUE;
+            gBattleStruct->eventState.faintedActionBattler = 0;
+            gBattleStruct->eventState.faintedAction++;
+// End bdHazards
         case FAINTED_ACTIONS_HANDLE_FAINTED_MON:
             do
             {
@@ -2566,9 +2647,21 @@ static u32 GetFirstBattlerOnSide(enum BattleSide side)
     return GetBattlerAtPosition(side == B_SIDE_PLAYER ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
 }
 
-static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer, u16 time)
+// Start bdHazards
+static bool32 ShouldApplyFieldStatus(u32 flag, u16 *timer, u16 time)
 {
     if (!(gFieldStatuses & flag))
+        return TRUE;
+    if (time == 0 && *timer > 0)
+        return TRUE;
+    if (time > *timer)
+        return TRUE;
+    return FALSE;
+}
+
+static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16 *timer, u16 time)
+{
+    if (ShouldApplyFieldStatus(flag, timer, time))
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = message;
         if (STATUS_FIELD_TERRAIN_ANY & flag)
@@ -2583,9 +2676,21 @@ static inline bool32 SetStartingFieldStatus(u32 flag, u32 message, u32 anim, u16
     return FALSE;
 }
 
-static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 message, u32 anim, u16 *timer, u16 time)
+static bool32 ShouldApplySideStatus(u32 flag, enum BattleSide side, u16 *timer, u16 time)
 {
     if (!(gSideStatuses[side] & flag))
+        return TRUE;
+    if (time == 0 && *timer > 0)
+        return TRUE;
+    if (time > *timer)
+        return TRUE;
+    return FALSE;
+}
+// End bdHazards
+
+static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 message, u32 anim, u16 *timer, u16 time)
+{
+    if (ShouldApplySideStatus(flag, side, timer, time))
     {
         gBattlerAttacker = gBattlerTarget = (enum BattlerId)side;
         gBattleCommunication[MULTISTRING_CHOOSER] = message;
@@ -2607,7 +2712,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     switch (hazard)
     {
     case HAZARDS_SPIKES:
-        if (layers != 0)
+        if (layers != 0 && layers > gSideTimers[targetSide].spikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_SPIKES);
@@ -2616,7 +2721,7 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
         }
         break;
     case HAZARDS_TOXIC_SPIKES:
-        if (layers != 0)
+        if (layers != 0 && layers > gSideTimers[targetSide].toxicSpikesAmount)
         {
             if (!IsHazardOnSide(targetSide, HAZARDS_TOXIC_SPIKES))
                 PushHazardTypeToQueue(targetSide, HAZARDS_TOXIC_SPIKES);
@@ -2664,18 +2769,13 @@ static bool32 SetStartingHazardStatus(enum Hazards hazard, u32 targetSide, u8 la
     return effect;
 }
 
-bool32 TryFieldEffects(enum FieldEffectCases caseId)
+// Start bdHazards
+bool32 TryStartingStatuses(void)
 {
     bool32 effect = FALSE;
     bool32 isTerrain = FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        return FALSE;
-
-    switch (caseId)
-    {
-    case FIELD_EFFECT_TRAINER_STATUSES:  // starting field/side/etc statuses with a variable
-        if (gStartingStatuses.electricTerrain || gStartingStatuses.electricTerrainTemporary)
+    if (gStartingStatuses.electricTerrain || gStartingStatuses.electricTerrainTemporary)
         {
             effect = SetStartingFieldStatus(
                         STATUS_FIELD_ELECTRIC_TERRAIN,
@@ -2961,7 +3061,22 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
             else
                 BattleScriptPushCursorAndCallback(BattleScript_OverworldStatusStarts);
         }
+        return effect;
+}
+// End bdHazards
 
+bool32 TryFieldEffects(enum FieldEffectCases caseId)
+{
+    bool32 effect = FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+        return FALSE;
+
+    switch (caseId)
+    {
+    case FIELD_EFFECT_TRAINER_STATUSES:  // starting field/side/etc statuses with a variable
+        if (TryStartingStatuses())
+            return TRUE;
         break;
     case FIELD_EFFECT_OVERWORLD_TERRAIN:   // terrain starting from overworld weather
         if (B_THUNDERSTORM_TERRAIN == TRUE

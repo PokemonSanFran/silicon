@@ -3947,11 +3947,25 @@ static void DoBattleIntro(void)
             struct StartingStatuses statusesOpponentB = {0};
 
             // Try to set a status to start the battle with
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            // Start bdHazards
+            if (TESTING)
             {
-                statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
+                statusesOpponentA = gStartingStatuses;
+                TestRunner_Battle_GetForcedStaringStatuses(0);
+            }
+            //if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            // End bdHazards
+            {
+            // Start bdHazards
+                //statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
+                statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA, 0);
+            // End bdHazards
                 if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
-                    statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+            // Start bdHazards
+                    //statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+                    statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB, 0);
+            // End bdHazards
             }
             STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;

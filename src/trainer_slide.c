@@ -341,6 +341,7 @@ enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum Train
     case TRAINER_SLIDE_LAST_LOW_HP:
         shouldRun = ShouldRunTrainerSlideLastLowHp(firstId, lastId, side, battler);
         break;
+    case TRAINER_SLIDE_STARTING_STATUS: // bdHazards
     case TRAINER_SLIDE_BEFORE_FIRST_TURN:
     case TRAINER_SLIDE_MEGA_EVOLUTION:
     case TRAINER_SLIDE_Z_MOVE:
