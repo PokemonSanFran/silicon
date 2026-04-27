@@ -1404,12 +1404,12 @@
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
 #define FLAG_UNUSED_0x4E8                                           0x4E8 // Unused Flag
 #define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag
-#define FLAG_UNUSED_0x4EA                                           0x4EA // Unused Flag
-#define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
-#define FLAG_UNUSED_0x4EC                                           0x4EC // Unused Flag
-#define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag
-#define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
-#define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_1                                           0x4EA // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_2                                           0x4EB // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_3                                           0x4EC // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_4                                           0x4ED // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_5                                           0x4EE // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_6                                           0x4EF // Silicon Flag
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1

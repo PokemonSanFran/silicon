@@ -3493,4 +3493,9 @@ extern const u16 gBattleIcons_Pal2[];
 extern const u32 gGhostFrontPic[];
 extern const u16 gGhostPalette[];
 
+// Start siliconQuests
+extern const u32 gItemIcon_RedScale[];
+extern const u16 gItemIconPalette_RedScale[];
+// End siliconQuests
+
 #endif //GUARD_GRAPHICS_H

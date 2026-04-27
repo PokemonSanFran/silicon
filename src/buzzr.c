@@ -2078,5 +2078,10 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_RETURNDOLL:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RETURNDOLL_TARGET),MAP_NUM(MAP_QUEST_RETURNDOLL_TARGET))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_RESTOREESPULEEGYM_ACTIVE:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
+            break;
     }
 }

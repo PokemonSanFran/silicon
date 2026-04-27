@@ -2150,3 +2150,8 @@ const u16 gItemIconPalette_TwiceSpicedRadish[] = INCBIN_U16("graphics/items/icon
 const u32 gItemIcon_Hexorb[] = INCBIN_U32("graphics/items/icons/hexorb.4bpp.smol");
 const u16 gItemIconPalette_Hexorb[] = INCBIN_U16("graphics/items/icon_palettes/hexorb.gbapal");
 // End hexorb branch
+
+// Start siliconQuests
+const u32 gItemIcon_RedScale[] = INCBIN_U32("graphics/items/icons/red_scale.4bpp.smol");
+const u16 gItemIconPalette_RedScale[] = INCBIN_U16("graphics/items/icon_palettes/red_scale.gbapal");
+// End siliconQuests

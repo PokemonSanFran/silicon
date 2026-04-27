@@ -1290,27 +1290,8 @@ static const struct SubQuest sWarehouseWarfare_Sub[QUEST_WAREHOUSEWARFARE_SUB_CO
             ),
 };
 
-static const struct SubQuest
-sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
-    sub_quest(150,
-            gText_Quest_RestoreEspuleeOutskirts_Sub1_Name,
-            gText_Quest_RestoreEspuleeOutskirts_Sub1_Desc,
-            gText_Quest_RestoreEspuleeOutskirts_Sub1_Map,
-            SPECIES_KRABBY,
-            QUEST_SPRITE_TYPE_PKMN,
-            COMPOUND_STRING("Caught")
-            ),
-    sub_quest(151,
-            gText_Quest_RestoreEspuleeOutskirts_Sub2_Name,
-            gText_Quest_RestoreEspuleeOutskirts_Sub2_Desc,
-            gText_Quest_RestoreEspuleeOutskirts_Sub2_Map,
-            SPECIES_COPPERAJAH,
-            QUEST_SPRITE_TYPE_PKMN,
-            COMPOUND_STRING("Caught")
-            ),
-};
 static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COUNT] = {
-    sub_quest(152,
+    sub_quest(150,
             gText_Quest_RestoreHodouCity_Sub1_Name,
             gText_Quest_RestoreHodouCity_Sub1_Desc,
             gText_Quest_RestoreHodouCity_Sub1_Map,
@@ -1318,7 +1299,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(153,
+    sub_quest(151,
             gText_Quest_RestoreHodouCity_Sub2_Name,
             gText_Quest_RestoreHodouCity_Sub2_Desc,
             gText_Quest_RestoreHodouCity_Sub2_Map,
@@ -1326,7 +1307,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(154,
+    sub_quest(152,
             gText_Quest_RestoreHodouCity_Sub3_Name,
             gText_Quest_RestoreHodouCity_Sub3_Desc,
             gText_Quest_RestoreHodouCity_Sub3_Map,
@@ -1334,7 +1315,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(155,
+    sub_quest(153,
             gText_Quest_RestoreHodouCity_Sub4_Name,
             gText_Quest_RestoreHodouCity_Sub4_Desc,
             gText_Quest_RestoreHodouCity_Sub4_Map,
@@ -1342,7 +1323,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(156,
+    sub_quest(154,
             gText_Quest_RestoreHodouCity_Sub5_Name,
             gText_Quest_RestoreHodouCity_Sub5_Desc,
             gText_Quest_RestoreHodouCity_Sub5_Map,
@@ -1350,7 +1331,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(157,
+    sub_quest(155,
             gText_Quest_RestoreHodouCity_Sub6_Name,
             gText_Quest_RestoreHodouCity_Sub6_Desc,
             gText_Quest_RestoreHodouCity_Sub6_Map,
@@ -1358,7 +1339,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(158,
+    sub_quest(156,
             gText_Quest_RestoreHodouCity_Sub7_Name,
             gText_Quest_RestoreHodouCity_Sub7_Desc,
             gText_Quest_RestoreHodouCity_Sub7_Map,
@@ -1367,9 +1348,62 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
 };
+
+static const struct SubQuest
+sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
+    sub_quest(157,
+            COMPOUND_STRING("EspuleetradepersonA"),
+            COMPOUND_STRING("You traded a Red Scale for Bluesky Mail at Wajabi Lake."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSONA,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(158,
+            COMPOUND_STRING("EspuleetradepersonB"),
+            COMPOUND_STRING("You traded a Bluesky Mail for some Tea in Qiu Village."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSONB,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(159,
+            COMPOUND_STRING("EspuleetradepersonC"),
+            COMPOUND_STRING("You traded Tea for an Egg Ticket in Hodou City."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSONC,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(160,
+            COMPOUND_STRING("EspuleetradepersonD"),
+            COMPOUND_STRING("You traded an Egg Ticket for an Odd Egg at Chasilla Breeding Center."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSOND,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(161,
+            COMPOUND_STRING("EspuleetradepersonE"),
+            COMPOUND_STRING("You traded an Odd Egg for a Bottle Cap in Cureno Port."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSONE,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(162,
+            COMPOUND_STRING("EspuleetradepersonF"),
+            COMPOUND_STRING("EspuleetradepersonF helped evolved Stantler in exchange for a Bottle Cap in Halerba City."),
+            COMPOUND_STRING("???"),
+            OBJ_EVENT_GFX_ESPULEETRADEPERSONF,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+};
+
 static const struct SubQuest
 sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
-    sub_quest(159,
+    sub_quest(163,
             gText_Quest_RestoreZenzuIsland_Sub1_Name,
             gText_Quest_RestoreZenzuIsland_Sub1_Desc,
             gText_Quest_RestoreZenzuIsland_Sub1_Map,
@@ -1377,7 +1411,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(160,
+    sub_quest(164,
             gText_Quest_RestoreZenzuIsland_Sub2_Name,
             gText_Quest_RestoreZenzuIsland_Sub2_Desc,
             gText_Quest_RestoreZenzuIsland_Sub2_Map,
@@ -1385,7 +1419,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_ITEM,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(161,
+    sub_quest(165,
             gText_Quest_RestoreZenzuIsland_Sub3_Name,
             gText_Quest_RestoreZenzuIsland_Sub3_Desc,
             gText_Quest_RestoreZenzuIsland_Sub3_Map,
@@ -1393,7 +1427,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(162,
+    sub_quest(166,
             gText_Quest_RestoreZenzuIsland_Sub4_Name,
             gText_Quest_RestoreZenzuIsland_Sub4_Desc,
             gText_Quest_RestoreZenzuIsland_Sub4_Map,
@@ -1404,7 +1438,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
 };
 static const struct SubQuest
     sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
-    sub_quest(163,
+    sub_quest(167,
             gText_Quest_Recruitlocalartists_Sub1_Name,
             gText_Quest_Recruitlocalartists_Sub1_Desc,
             gText_Quest_Recruitlocalartists_Sub1_Map,
@@ -1412,7 +1446,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(164,
+    sub_quest(168,
             gText_Quest_Recruitlocalartists_Sub2_Name,
             gText_Quest_Recruitlocalartists_Sub2_Desc,
             gText_Quest_Recruitlocalartists_Sub2_Map,
@@ -1420,7 +1454,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(165,
+    sub_quest(169,
             gText_Quest_Recruitlocalartists_Sub3_Name,
             gText_Quest_Recruitlocalartists_Sub3_Desc,
             gText_Quest_Recruitlocalartists_Sub3_Map,
@@ -1432,21 +1466,21 @@ static const struct SubQuest
 
 static const struct SubQuest sDiggingUpAdaorasDirt_Sub[QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT] =
 {
-    sub_quest(166, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(167, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(168, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(169, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(170, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(171, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(172, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(173, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
 };
 
 static const struct SubQuest sFreeTheInnocent_Sub[QUEST_FREETHEINNOCENT_SUB_COUNT] =
 {
-    sub_quest(170, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(171, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(172, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(173, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(174, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(175, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
-    sub_quest(176, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(174, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(175, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(176, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(177, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(178, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(179, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(180, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
 };
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -1508,14 +1542,190 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_RESTOREESPULEEGYM] =
     {
-        .name = gText_Quest_RestoreEspuleeOutskirts_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_RestoreEspuleeOutskirts_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_RestoreEspuleeOutskirts_DoneDesc,
-        .map = gText_Quest_RestoreEspuleeOutskirts_Map,
+        .name = COMPOUND_STRING("Restore Espulee Outskirts Gym"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Take the {STR_VAR_1} from Imelda and return to her with a {STR_VAR_3}."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("{PLAYER} gave Imelda their {STR_VAR_3}, and the {STR_VAR_2} Swap Meet is in business!"),
+        .descFunc = GetQuestDesc_RestoreEspuleeOutskirts,
+        .map = COMPOUND_STRING("Espulee Outskirts"),
         .sprite = OBJ_EVENT_GFX_IMELDA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestoreEspuleeOutskirts_Sub,
-        .numSubquests = QUEST_RESTOREESPULEEGYM_SUB_COUNT
+        .numSubquests = QUEST_RESTOREESPULEEGYM_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A]=
+            {
+                .name = COMPOUND_STRING("Before Trade A"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_A),
+                .warpId = WARP_ID_NONE,
+                .x = 52,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A]=
+            {
+                .name = COMPOUND_STRING("After Trade A"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_A),
+                .warpId = WARP_ID_NONE,
+                .x = 52,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_B]=
+            {
+                .name = COMPOUND_STRING("Before Trade B"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_B),
+                .warpId = WARP_ID_NONE,
+                .x = 0,
+                .y = 1,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B]=
+            {
+                .name = COMPOUND_STRING("After Trade B"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_B),
+                .warpId = WARP_ID_NONE,
+                .x = 0,
+                .y = 1,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C]=
+            {
+                .name = COMPOUND_STRING("Before Trade C"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_C),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 6,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C]=
+            {
+                .name = COMPOUND_STRING("After Trade C"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_C),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 6,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D]=
+            {
+                .name = COMPOUND_STRING("Before Trade D"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_D),
+                .warpId = WARP_ID_NONE,
+                .x = 9,
+                .y = 7,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D]=
+            {
+                .name = COMPOUND_STRING("After Trade D"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_D),
+                .warpId = WARP_ID_NONE,
+                .x = 9,
+                .y = 7,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E]=
+            {
+                .name = COMPOUND_STRING("Before Trade E"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_E),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 22,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E]=
+            {
+                .name = COMPOUND_STRING("After Trade E"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_E),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 22,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F]=
+            {
+                .name = COMPOUND_STRING("Before Trade F"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_F),
+                .warpId = WARP_ID_NONE,
+                .x = 43,
+                .y = 15,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F]=
+            {
+                .name = COMPOUND_STRING("After Trade F"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_F),
+                .warpId = WARP_ID_NONE,
+                .x = 43,
+                .y = 15,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD]=
+            {
+                .name = COMPOUND_STRING("Before Reward"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_BEFORE_BATTLE]=
+            {
+                .name = COMPOUND_STRING("Before Battle"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_AFTER_BATTLE]=
+            {
+                .name = COMPOUND_STRING("After Battle"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_REWARD]=
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREESPULEEGYM_COMPLETE]=
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RestoreEsupleeOutskirtsGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 19,
+            },
+
+        },
     },
     [QUEST_RESTOREZENZUGYM] =
     {

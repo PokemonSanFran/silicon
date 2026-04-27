@@ -1846,7 +1846,6 @@ void JumpPlayerTo_RestoreZenzuIsland(bool32 jumpType)
 
 void FlagsVarWarp_RestoreEspuleeOutskirts()
 {
-    VarSet(VAR_QUEST_RESTOREESPULEEGYM, DEFEATED_IMELDA);
     QuestMenu_GetSetQuestState(QUEST_RESTOREESPULEEGYM, FLAG_SET_UNLOCKED);
     Quest_Generic_CompleteSubquests(QUEST_RESTOREESPULEEGYM);
     QuestMenu_GetSetQuestState(QUEST_RESTOREESPULEEGYM, FLAG_SET_COMPLETED);

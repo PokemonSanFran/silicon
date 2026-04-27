@@ -28,7 +28,7 @@ struct PcMonSelection
     u32       (*isMonInvalid)(struct BoxPokemon *);
     const u8* postSelectionScript;
     u32 isStrict:1;
-    u32 padding:31; 
+    u32 padding:31;
 };
 
 static EWRAM_DATA u8 sSelectionType = 0;
@@ -37,6 +37,7 @@ static EWRAM_DATA u8 sSelectionType = 0;
 static u32 NoFilter(struct BoxPokemon *boxmon);
 static u32 IsNotEgg(struct BoxPokemon *boxmon);
 static u32 IsMatchingSpecies(struct BoxPokemon *boxmon);
+static u32 IsMatchingSpeciesAndMove(struct BoxPokemon *boxmon);
 static u32 CanMonDeleteMove(struct BoxPokemon *boxmon);
 static u32 CanMonLearnMove(struct BoxPokemon *boxmon);
 static u32 CanRelearnMoves(struct BoxPokemon *boxmon);
@@ -48,7 +49,8 @@ static const struct PcMonSelection sPcMonSelectionTypes[] =
     [SELECT_PC_MON_DAYCARE] = {ChooseSendDaycareMon, IsNotEgg, NULL, TRUE},
     [SELECT_PC_MON_MOVE_TUTOR] = {ChooseMonForMoveTutor, CanMonLearnMove, MoveTutor_AfterChooseBoxMon, FALSE},
     [SELECT_PC_MON_MOVE_DELETER] = {ChoosePartyMon, CanMonDeleteMove, NULL, FALSE},
-    [SELECT_PC_MON_MOVE_RELEARNER] = {ChooseMonForMoveRelearner, CanRelearnMoves, NULL, FALSE}
+    [SELECT_PC_MON_MOVE_RELEARNER] = {ChooseMonForMoveRelearner, CanRelearnMoves, NULL, FALSE},
+    [SELECT_PC_MON_SPECIES_AND_MOVE] = {ChoosePartyMon, IsMatchingSpeciesAndMove, NULL, FALSE},
 };
 
 static u32 NoFilter(struct BoxPokemon *boxmon)
@@ -77,6 +79,17 @@ static u32 IsMatchingSpecies(struct BoxPokemon *boxmon)
     if (GetBoxMonData(boxmon, MON_DATA_SPECIES_OR_EGG) == gSpecialVar_0x8009)
         return VALID_MON;
     return INVALID_MON;
+}
+
+static u32 IsMatchingSpeciesAndMove(struct BoxPokemon *boxmon)
+{
+    if (GetBoxMonData(boxmon, MON_DATA_SPECIES_OR_EGG) != gSpecialVar_0x8009)
+        return INVALID_MON;
+
+    if (BoxMonKnowsMove(boxmon, gSpecialVar_0x8008) == FALSE)
+        return INVALID_MON;
+
+    return VALID_MON;
 }
 
 static u32 CanMonDeleteMove(struct BoxPokemon *boxmon)
