@@ -4104,6 +4104,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             break;
@@ -4112,24 +4113,28 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
             GenerateAndGiveOddEgg();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E:
             DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound();
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
             u16 evs[NUM_STATS] = {0,0,0,0,0,0};
@@ -4140,6 +4145,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
             DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD:
             break;
