@@ -263,11 +263,9 @@ u8 LoadMonIconPaletteWithAilment(u16 species, u32 personality, u32 ailment, u16 
     LoadPalette(gMonIconPalettes[palIndex], paletteIndex, 32);
 
     if(species == SPECIES_EGG){
-
         return paletteNum;
     }
     else if(currentHP == 0){
-
         BlendPalette(paletteIndex, 16, 6, RGB_BLACK);
     }
     else{
@@ -294,6 +292,26 @@ u8 LoadMonIconPaletteWithAilment(u16 species, u32 personality, u32 ailment, u16 
         }
 
     }
+
+    CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
+    return paletteNum;
+}
+
+u8 LoadMonIconPaletteWithRGBValue(u16 species, u32 personality, u32 blendColor, u16 currentHP, u8 paletteNum)
+{
+    u8 palIndex;
+    u16 paletteIndex = (16 + paletteNum) * 16;
+
+    species = SanitizeSpeciesId(species);
+
+    if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
+        palIndex = gSpeciesInfo[species].iconPalIndexFemale;
+    else
+        palIndex = gSpeciesInfo[species].iconPalIndex;
+
+    LoadPalette(gMonIconPalettes[palIndex], paletteIndex, 32);
+
+    BlendPalette(paletteIndex, 16, 6, blendColor);
 
     CpuCopy32(&gPlttBufferFaded[paletteIndex], &gPlttBufferUnfaded[paletteIndex], PLTT_SIZEOF(16));
     return paletteNum;
