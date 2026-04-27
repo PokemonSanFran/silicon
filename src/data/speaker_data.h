@@ -2826,4 +2826,52 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_ESPULEETRADEPERSONA] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONB] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONC] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSOND] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONE] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonE"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONF] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonF"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

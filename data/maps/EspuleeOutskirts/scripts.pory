@@ -12,8 +12,8 @@ mapscripts EspuleeOutskirts_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_HideImelda_Script)
-        call(Quest_Restoreespuleeoutskirts_MoveImelda_Script)
+        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_HideImelda)
+        call_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_MoveImelda)
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
@@ -89,30 +89,25 @@ script EspuleeOutskirts_HideMapNamePopup_Script{
         return
 }
 
-script EspuleeOutskirts_Imelda_Interact_Script{
+script EspuleeOutskirts_Script_InteractImelda
+{
     lock
-        faceplayer
-        returnqueststate(QUEST_RESTOREESPULEEGYM)
-
-        switch(var(VAR_RESULT)){
-            case QUEST_MENU_SET_ACTIVE: call(Quest_Restoreespuleeoutskirts_Active_Script)
-            case QUEST_MENU_SET_REWARD: call(Quest_Restoreespuleeoutskirts_Reward_Dialogue)
-            default: call(EspuleeOutskirts_Imelda_PreQuest_Dialogue)
-        }
+    faceplayer
+    goto_if_quest_reward(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_ImeldaReward)
+    goto_if_quest_active(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_ImeldaActive)
+    goto_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_StartQuest)
+    goto(EspuleeOutskirts_Dialogue_Imelda)
 }
 
-script EspuleeOutskirts_Imelda_PreQuest_Dialogue{
-    if (var(VAR_STORYLINE_STATE) > STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND){
-        goto(Quest_Restoreespuleeoutskirts_StartQuest_Dialogue)
-    }
-    else{
-        call(EspuleeOutskirts_Imelda_Dialogue)
-    }
-}
-
-script EspuleeOutskirts_Imelda_Dialogue{
-    msgbox(format("i used to be the leader of the gym in town!"),MSGBOX_NPC)
-        end
+script EspuleeOutskirts_Dialogue_Imelda
+{
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("I used to run the most beautiful antique shop in {STR_VAR_1}."),,SPEAKER_IMELDA)
+    msgbox(format("Everything we stocked had a story, a purpose; as did so many things others brought in. I loved hearing those stories."),,SPEAKER_IMELDA)
+    msgbox(format("How times change."),,SPEAKER_IMELDA,TAIL_WHISPER)
+    closemessage
+    release
+    end
 }
 
 script EspuleeOutskirts_Girl_Interact_Script{

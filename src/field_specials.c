@@ -2,6 +2,7 @@
 #include "debug.h"
 #include "malloc.h"
 #include "battle.h"
+#include "pokemon_storage_system.h" // siliconQuests
 #include "battle_special.h"
 #include "cable_club.h"
 #include "data.h"
@@ -80,6 +81,7 @@
 #include "palette.h"
 #include "pokemon_storage_system.h" // siliconMerge
 #include "options_visual.h" // siliconMerge
+#include "options_battle.h" // siliconQuests
 
 #include "battle_util.h"
 #include "naming_screen.h"
@@ -4618,9 +4620,15 @@ void CheckSpecies(void)
 
 void DeleteChosenPartyMon(void)
 {
-    struct Pokemon *pokemon = &gPlayerParty[gSpecialVar_0x8004];
-    ZeroMonData(pokemon);
-    CompactPartySlots();
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        ZeroBoxMonAt(gSpecialVar_MonBoxId,gSpecialVar_MonBoxPos);
+    }
+    else
+    {
+        ZeroMonData(&gPlayerParty[gSpecialVar_0x8004]);
+        CompactPartySlots();
+    }
 }
 
 u32 Script_GetGameStat(void)
@@ -4847,6 +4855,26 @@ bool32 CheckPartyHasSpecies(u32 givenSpecies)
         if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) == givenSpecies)
             return TRUE;
 
+    return FALSE;
+}
+
+bool32 CheckBoxesForSpecies(u32 species)
+{
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (IsMonInvalid(tempMon))
+                continue;
+
+            if (GetMonData(&tempMon, MON_DATA_SPECIES) == species)
+                return TRUE;
+        }
+    }
     return FALSE;
 }
 

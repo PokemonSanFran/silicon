@@ -1959,7 +1959,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/warehousewarfare.inc"
 .include "data/quests/restorehodoucity.inc"
 .include "data/quests/restorezenzuisland.inc"
-.include "data/quests/restoremarin.inc"
+.include "data/quests/restoreespuleeoutskirts.inc"
 .include "data/quests/restoretirabudinplace.inc"
 .include "data/quests/skilllibrary.inc"
 .include "data/quests/miniarcade.inc"

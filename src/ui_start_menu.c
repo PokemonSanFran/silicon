@@ -2325,7 +2325,13 @@ static inline u32 MonStatus_GetHealthPercentage(struct Pokemon *mon)
     if (!GetMonData(mon, MON_DATA_IS_EGG))
         return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon, MON_DATA_MAX_HP)));
     else
-        return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].eggCycles));
+    {
+        u32 friendship = GetMonData(mon,MON_DATA_FRIENDSHIP);
+        u32 totalCycles = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].eggCycles;
+        u32 denominator = (friendship > totalCycles) ? (friendship + totalCycles) : totalCycles;
+
+        return friendship * 100 / denominator;
+    }
 }
 
 static inline s32 MonStatus_GetXIconCoord(u32 idx)
