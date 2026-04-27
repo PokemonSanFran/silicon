@@ -76,6 +76,7 @@ static void Dexnav_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
 static void DisplayHelpBar(enum DexnavWindows windowId);
 static void Dexnav_SetMode(enum DexnavMode mode);
+static bool8 Dexnav_IsCurrentModeScan(void);
 static enum DexnavMode Dexnav_GetMode(void);
 static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId);
 static enum DexnavHabitats Dexnav_GetHabitat(void);
@@ -84,18 +85,19 @@ static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
+static enum DexnavMode Dexnav_CalculateInitialMode(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
 static void Task_DexnavFadeToPokedex(u8 taskId);
 static void Dexnav_CreateCompletionSprite(void);
 static void Dexnav_CreateRegisterSprite(void);
 static void Dexnav_HandleHabitatHeader(void);
-static void DisplayHeaderName(enum DexnavWindows windowId);
+static void Dexnav_DisplayHeader(enum DexnavWindows windowId);
 static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId);
 static u32 Dexnav_GetInsight(void);
 static u32 Dexnav_GetCurrentlySelectedSpecies(void);
 static void Dexnav_DisplayInsight(void);
-static void Dexnav_PrintInsight(enum DexnavWindows windowId);
-static void Dexnav_PrintStreak(enum DexnavWindows windowId);
+static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode);
+static void Dexnav_PrintStreak(enum DexnavWindows windowId, bool32 isScanMode);
 static void Dexnav_DisplayStreak(void);
 static void Dexnav_DisplayStarsInsight(void);
 static void Dexnav_DisplayStarsStreak(void);
@@ -895,6 +897,7 @@ void Dexnav_SetupCallback(void)
             CreateTask(Task_HandleInput,0);
             Dexnav_LoadEncounterData();
             Dexnav_SetHabitat(Dexnav_CalculateInitialHabitat());
+            Dexnav_SetMode(Dexnav_CalculateInitialMode());
             Dexnav_SetCursorPosition(Dexnav_GetSavedCursorPosition());
             Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics();
             Dexnav_CreateCompletionSprite();
@@ -907,7 +910,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayMonInfo();
             Dexnav_PrintFloatingActionButton();
             Dexnav_HandleHabitatHeader();
-            DisplayHeaderName(WIN_DEXNAV_HEADER);
+            Dexnav_DisplayHeader(WIN_DEXNAV_HEADER);
             DisplayHelpBar(WIN_DEXNAV_HELP_BAR);
             Dexnav_DisplayInsight();
             Dexnav_DisplayStarsInsight();
@@ -1028,6 +1031,11 @@ static void DisplayHelpBar(enum DexnavWindows windowId)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
+static bool8 Dexnav_IsCurrentModeScan(void)
+{
+    return (Dexnav_GetMode() == DEXNAV_MODE_SCAN);
+}
+
 static enum DexnavMode Dexnav_GetMode(void)
 {
     return sDexnavState->mode;
@@ -1046,18 +1054,22 @@ static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
-    bool32 isScanMode = (Dexnav_GetMode() == DEXNAV_MODE_SCAN);
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
 
     if (isScanMode)
-        StringCopy(gStringVar4, COMPOUND_STRING("{A_BUTTON} Cancel Search {START_BUTTON} Return"));
+    {
+        StringCopy(gStringVar4, COMPOUND_STRING("{A_BUTTON} Overworld {START_BUTTON} Start Menu {B_BUTTON} Cancel Search"));
+    }
     else
+    {
         StringCopy(gStringVar4, COMPOUND_STRING("{L_BUTTON} Pokedex {R_BUTTON} Register"));
 
-    if ((Dexnav_HasMultipleHabitats()) && (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE))
-        StringAppend(gStringVar4,COMPOUND_STRING(" {DPAD_UPDOWN} Switch Habitat"));
+        if ((Dexnav_HasMultipleHabitats()) && (QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_INACTIVE) == FALSE))
+            StringAppend(gStringVar4,COMPOUND_STRING(" {DPAD_UPDOWN} Switch Habitat"));
 
-    if ((Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND) == 0) && (Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER) == 0))
-        StringCopy(gStringVar4, COMPOUND_STRING("No Pokemon found."));
+        if ((Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_LAND) == 0) && (Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER) == 0))
+            StringCopy(gStringVar4, COMPOUND_STRING("No Pokemon found."));
+    }
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
@@ -1068,6 +1080,14 @@ static bool8 Dexnav_HasMultipleHabitats(void)
     u32 water = Dexnav_GetNumberHabitatMons(DEXNAV_HABITAT_WATER);
 
     return ((land > 0) && (water > 0));
+}
+
+static enum DexnavMode Dexnav_CalculateInitialMode(void)
+{
+    if (FlagGet(DN_FLAG_SEARCHING) == FALSE)
+        return DEXNAV_MODE_MAIN;
+
+    return DEXNAV_MODE_SCAN;
 }
 
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void)
@@ -1191,7 +1211,9 @@ static void Dexnav_HandleHabitatHeader(void)
     enum DexnavWindows windowId = WIN_DEXNAV_HABITAT_HEADER;
     u32 habitat = Dexnav_GetHabitat();
 
-    if ((habitat == DEXNAV_HABITAT_LAND) && (CanUseDigOrEscapeRopeOnCurMap()))
+    if (Dexnav_IsCurrentModeScan())
+        habitat = DEXNAV_HABITAT_NONE;
+    else if ((habitat == DEXNAV_HABITAT_LAND) && (CanUseDigOrEscapeRopeOnCurMap()))
         habitat = 3;
 
     u32 tileOffset = habitat * DEXNAV_HABITAT_HEADER_WIDTH;
@@ -1204,10 +1226,13 @@ static void Dexnav_HandleHabitatHeader(void)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
-static void DisplayHeaderName(enum DexnavWindows windowId)
+static void Dexnav_DisplayHeader(enum DexnavWindows windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Dexnav_PrintHeaderNameText(windowId);
+
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        Dexnav_PrintHeaderNameText(windowId);
+
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -1248,28 +1273,31 @@ static u32 Dexnav_GetStreak(void)
 
 static void Dexnav_DisplayInsight(void)
 {
-    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_INSIGHT;
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
+    enum DexnavWindows windowId = (isScanMode ? WIN_DEXNAV_HEADER : WIN_DEXNAV_INTERFACE_INSIGHT);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Dexnav_PrintInsight(windowId);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    Dexnav_PrintInsight(windowId, isScanMode);
+
+    if (isScanMode == FALSE)
+        CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void Dexnav_PrintInsight(enum DexnavWindows windowId)
+static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode)
 {
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     if (species == SPECIES_NONE)
         return;
 
-    u32 x = 8;
-    u32 y = 5;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 x = isScanMode ? 8 : 8;
+    u32 y = isScanMode ? 1 : 5;
+    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("INSIGHT"));
     u32 insight = Dexnav_GetInsight();
-    x = 47;
-    y = 2;
+    x = isScanMode ? 43 : 47;
+    y = isScanMode ? 0 : (y - 3);
     
     if (insight < DEXNAV_MAX_INSIGHT)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
@@ -1281,28 +1309,34 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId)
 
 static void Dexnav_DisplayStreak(void)
 {
-    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_STREAK;
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    Dexnav_PrintStreak(windowId);
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
+
+    enum DexnavWindows windowId = (isScanMode ? WIN_DEXNAV_HEADER : WIN_DEXNAV_INTERFACE_STREAK);
+
+    if (isScanMode == FALSE)
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    Dexnav_PrintStreak(windowId,isScanMode);
+
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void Dexnav_PrintStreak(enum DexnavWindows windowId)
+static void Dexnav_PrintStreak(enum DexnavWindows windowId, bool32 isScanMode)
 {
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     if (species == SPECIES_NONE)
         return;
 
-    u32 x = 9;
-    u32 y = 4;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 x = isScanMode ? 203 : 9 ;
+    u32 y = isScanMode ? 0 : 4;
+    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("STREAK"));
     u32 streak = Dexnav_GetStreak();
-    x = 48;
-    y = 2;
+    x = isScanMode ? 184 : 48;
+    y = isScanMode ? 0   : y - 2;
 
     if (streak < DEXNAV_MAX_STREAK)
         ConvertIntToDecimalStringN(gStringVar4, streak, STR_CONV_MODE_LEFT_ALIGN, CountDigits(streak));
@@ -1503,7 +1537,8 @@ static void SpriteCB_StarInsight(struct Sprite *sprite)
 
 static void Dexnav_DisplayStarsInsight(void)
 {
-    u32 state = DEXNAV_STAR_BIG_EMPTY;
+    u32 state = Dexnav_GetMode();
+    bool32 isScanMode = (state == DEXNAV_MODE_SCAN);
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
@@ -1513,8 +1548,10 @@ static void Dexnav_DisplayStarsInsight(void)
         TempSpriteTemplate.callback = SpriteCB_StarInsight;
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
+        u32 x = isScanMode ? 66 + (12 * position) : 15 + (14 * position);
+        u32 y = isScanMode ? 6 : 41;
 
-        u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 41, 0);
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
         gSprites[spriteId].data[1] = position;
         gSprites[spriteId].data[2] = state;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
@@ -1526,7 +1563,8 @@ static void Dexnav_DisplayStarsInsight(void)
 
 static void Dexnav_DisplayStarsStreak(void)
 {
-    u32 state = DEXNAV_STAR_BIG_EMPTY;
+    u32 state = Dexnav_GetMode();
+    bool32 isScanMode = (state == DEXNAV_MODE_SCAN);
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
@@ -1536,8 +1574,10 @@ static void Dexnav_DisplayStarsStreak(void)
         TempSpriteTemplate.callback = SpriteCB_StarStreak;
     TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
+        u32 x = isScanMode ? 149 + (12 * position) : 15 + (14 * position);
+        u32 y = isScanMode ? 6 : 128;
 
-        u32 spriteId = CreateSprite(&TempSpriteTemplate, (15 + (14 * position)), 128, 0);
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
         gSprites[spriteId].data[0] = Dexnav_GetStreak();
         gSprites[spriteId].data[1] = position;
         gSprites[spriteId].data[2] = state;
@@ -1980,7 +2020,7 @@ static const union AnimCmd * const sSpriteAnimTable_Cursor[] =
 
 static bool8 Dexnav_ShouldHideCursors(void)
 {
-    if (Dexnav_GetMode() != DEXNAV_MODE_MAIN)
+    if (Dexnav_IsCurrentModeScan())
         return TRUE;
 
     u32 num = (Dexnav_GetNumberHabitatMons(Dexnav_GetHabitat()));
