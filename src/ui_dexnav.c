@@ -59,7 +59,7 @@ static void Dexnav_ResetAllSpriteIds(void);
 static void HandleAndShowBgs(void);
 static void SetBackgroundTransparency(void);
 static void SetScheduleBgs(enum DexnavBackgrounds backgroundId);
-static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId);
+static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId, bool32 isScanMode);
 static void LoadGraphics(void);
 static struct DexnavSavedData Dexnav_GetSavedData(void);
 static void Dexnav_LaunchPokedex(u8 taskId);
@@ -122,6 +122,13 @@ static void Dexnav_DisplayAllHabitatPokemon(void);
 static void Dexnav_DisplayCursors(void);
 void Dexnav_StartOverworldSearch(u8 taskId);
 static void Task_BeginDexnavOverworld(u8 taskId);
+static void Dexnav_ScanMode_DisplayAbility(void);
+static bool8 Dexnav_ShouldHideAbilityIndicator(void);
+static bool8 Dexnav_ShouldDisplayAbilityName(void);
+static enum Ability Dexnav_GetSearchingAbility(void);
+static void Dexnav_PrintAbility(enum DexnavWindows windowId);
+void Dexnav_ScanMode_DisplayMonInfo(void);
+void Dexnav_ScanMode_DisplayFirstMove(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -303,6 +310,33 @@ static const struct {
     },
 };
 
+static const struct {
+    const u32 *tiles;
+    const u32 *tilemap;
+} sDexnav_BackgroundScanGraphics[BG_DEXNAV_COUNT] =
+{
+    [BG0_DEXNAV_TEXT] =
+    {
+        .tiles = NULL,
+        .tilemap = NULL,
+    },
+    [BG1_DEXNAV_WHEEL] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/wheel_scan.4bpp.smol"),
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/wheel_scan.bin.smolTM"),
+    },
+    [BG2_DEXNAV_UI] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface_scan.4bpp.smol"),
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/interface_scan.bin.smolTM"),
+    },
+    [BG3_DEXNAV_BACKGROUNDS] =
+    {
+        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.4bpp.smol"),
+        .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/dexnav/background.bin.smolTM"),
+    },
+};
+
 static const struct WindowTemplate sDexnavWindows[] =
 {
     [WIN_DEXNAV_HEADER] =
@@ -319,7 +353,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 2,
-        .width = 8,
+        .width = 11,
         .height = 5,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
@@ -337,7 +371,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 0,
         .tilemapTop = 13,
-        .width = 8,
+        .width = 11,
         .height = 5,
         .paletteNum = DEXNAV_PALETTE_TEXT_ID,
     },
@@ -680,22 +714,34 @@ static const u16 dexnavPalettesText[] = INCBIN_U16("graphics/ui_menus/dexnav/pal
 static const u16 dexnavPalettesHabitat[] = INCBIN_U16("graphics/ui_menus/dexnav/habitatHeader.gbapal");
 static const u16 dexnavPalettesTypes[] = INCBIN_U16("graphics/types/types.gbapal");
 
-static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId)
+static bool8 AreTilesOrTilemapEmpty(enum DexnavBackgrounds backgroundId, bool32 isScanMode)
 {
-    return (sDexnav_BackgroundGraphics[backgroundId].tiles == NULL || sDexnav_BackgroundGraphics[backgroundId].tilemap== NULL);
+    if (isScanMode)
+        return (sDexnav_BackgroundScanGraphics[backgroundId].tiles == NULL || sDexnav_BackgroundScanGraphics[backgroundId].tilemap== NULL);
+    else
+        return (sDexnav_BackgroundGraphics[backgroundId].tiles == NULL || sDexnav_BackgroundGraphics[backgroundId].tilemap== NULL);
 }
 
 static void LoadGraphics(void)
 {
     ResetTempTileDataBuffers();
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
 
     for (enum DexnavBackgrounds backgroundId = BG0_DEXNAV_TEXT; backgroundId < BG_DEXNAV_COUNT; backgroundId++)
     {
-        if (AreTilesOrTilemapEmpty(backgroundId))
+        if (AreTilesOrTilemapEmpty(backgroundId,isScanMode))
             continue;
 
-        DecompressAndLoadBgGfxUsingHeap(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tiles,0,0,0);
-        CopyToBgTilemapBuffer(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tilemap,0,0);
+        if (isScanMode)
+        {
+            DecompressAndLoadBgGfxUsingHeap(backgroundId, sDexnav_BackgroundScanGraphics[backgroundId].tiles,0,0,0);
+            CopyToBgTilemapBuffer(backgroundId, sDexnav_BackgroundScanGraphics[backgroundId].tilemap,0,0);
+        }
+        else
+    {
+            DecompressAndLoadBgGfxUsingHeap(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tiles,0,0,0);
+            CopyToBgTilemapBuffer(backgroundId, sDexnav_BackgroundGraphics[backgroundId].tilemap,0,0);
+        }
     }
 
     LoadDexnavPalettes();
@@ -917,6 +963,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayStreak();
             Dexnav_DisplayStarsStreak();
             Dexnav_DisplayCursors();
+            Dexnav_ScanMode_DisplayAbility();
             gMain.state++;
             break;
         case 4:
@@ -2515,7 +2562,6 @@ bool8 Dexnav_CalculateShinyRolls(u32 streak)
 
 void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves)
 {
-    Dexnav_ClearStatFlag();
     struct Pokemon *mon = &gEnemyParty[0];
     CreateWildMon(species, level);
     u8 ivs[NUM_STATS] = {0};
@@ -2532,6 +2578,7 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
 
     for (u32 i = 0; i < NUM_STATS; i++)
     {
+        Dexnav_ClearStatFlag(i);
         ivs[i] = GetMonData(mon, MON_DATA_HP_IV + i);
         oldIvs[i] = ivs[i];
     }
@@ -2543,7 +2590,7 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
 
     for (u32 i = 0; i < NUM_STATS; i++)
         if (oldIvs[i] != ivs[i])
-            Dexnav_SetStatFlag();
+            Dexnav_SetStatFlag(i);
 
     for (u32 i = 0; i < NUM_STATS; i++)
         SetMonData(mon, MON_DATA_HP_IV + i, &ivs[i]);
@@ -2585,4 +2632,72 @@ void Dexnav_StartFieldEffect(void)
     gFieldEffectArguments[2] = 0xFF;
     gFieldEffectArguments[3] = 2;
     Dexnav_SetOverworldFldEffSpriteId(FieldEffectStart(fieldEffect));
+}
+
+static void Dexnav_ScanMode_DisplayAbility(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+
+    enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_ABILITY;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    Dexnav_PrintAbility(windowId);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static bool8 Dexnav_ShouldHideAbilityIndicator(void)
+{
+    return TRUE;
+}
+
+static bool8 Dexnav_ShouldDisplayAbilityName(void)
+{
+    return TRUE;
+}
+
+static enum Ability Dexnav_GetSearchingAbility(void)
+{
+    return GetSpeciesAbility(Dexnav_GetCurrentlySelectedSpecies(),Dexnav_GetOverworldAbilityNum());
+}
+
+static void Dexnav_PrintAbility(enum DexnavWindows windowId)
+{
+    bool32 hideAbilityIndicator = Dexnav_ShouldHideAbilityIndicator();
+    u32 x = hideAbilityIndicator ? 8 : 23;
+    u32 y = 8;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    s32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+    StringCopy(gStringVar4, COMPOUND_STRING("ABILITY"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+
+    x = 8;
+    y = 23;
+    fontId = FONT_DEXNAV_STAT_NAME;
+    u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_WIDTH));
+
+    if (Dexnav_ShouldDisplayAbilityName())
+        //StringCopy(gStringVar4, GetAbilityName(Dexnav_GetSearchingAbility()));
+        StringCopy(gStringVar4, GetAbilityName(ABILITY_POWER_OF_ALCHEMY));
+    else
+        StringCopy(gStringVar4, COMPOUND_STRING("???"));
+
+    letterSpacing -= 2;
+    fontId = GetFontIdToFit(gStringVar4,fontId,letterSpacing,windowWidth);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
+void Dexnav_ScanMode_DisplayMonInfo(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+}
+
+void Dexnav_ScanMode_DisplayFirstMove(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
 }

@@ -200,6 +200,11 @@ void Dexnav_SetAbilityFlag(void)
     sDexNavSearchDataPtr->abilityFlag = TRUE;
 }
 
+bool8 Dexnav_GetAbilityFlag(void)
+{
+    return sDexNavSearchDataPtr->abilityFlag;
+}
+
 void Dexnav_ClearItemFlag(void)
 {
     sDexNavSearchDataPtr->itemFlag = FALSE;
@@ -208,6 +213,11 @@ void Dexnav_ClearItemFlag(void)
 void Dexnav_SetItemFlag(void)
 {
     sDexNavSearchDataPtr->itemFlag = TRUE;
+}
+
+bool8 Dexnav_GetItemFlag(void)
+{
+    return sDexNavSearchDataPtr->itemFlag;
 }
 
 void Dexnav_ClearMoveFlag(void)
@@ -220,6 +230,11 @@ void Dexnav_SetMoveFlag(void)
     sDexNavSearchDataPtr->moveFlag = TRUE;
 }
 
+bool8 Dexnav_GetMoveFlag(void)
+{
+    return sDexNavSearchDataPtr->moveFlag;
+}
+
 void Dexnav_ClearLevelFlag(void)
 {
     sDexNavSearchDataPtr->levelFlag = FALSE;
@@ -230,12 +245,22 @@ void Dexnav_SetLevelFlag(void)
     sDexNavSearchDataPtr->levelFlag = TRUE;
 }
 
-void Dexnav_ClearStatFlag(void)
+bool8 Dexnav_GetLevelFlag(void)
 {
-    sDexNavSearchDataPtr->statFlag = FALSE;
+    return sDexNavSearchDataPtr->levelFlag;
 }
 
-void Dexnav_SetStatFlag(void)
+void Dexnav_SetStatFlag(enum Stat statId)
 {
-    sDexNavSearchDataPtr->statFlag = TRUE;
+    sDexNavSearchDataPtr->statFlags |= (1 << statId);
+}
+
+u8 Dexnav_GetStatFlag(enum Stat statId)
+{
+    return (sDexNavSearchDataPtr->statFlags >> statId) & 1;
+}
+
+void Dexnav_ClearStatFlag(enum Stat statId)
+{
+    sDexNavSearchDataPtr->statFlags &= ~(1 << statId);
 }

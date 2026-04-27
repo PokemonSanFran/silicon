@@ -545,8 +545,10 @@ static void UNUSED RemoveDexNavWindowAndGfx(void)
         DestroySprite(&gSprites[sDexNavSearchDataPtr->iconSpriteId]);
     if (sDexNavSearchDataPtr->itemSpriteId != MAX_SPRITES)
         DestroySprite(&gSprites[sDexNavSearchDataPtr->itemSpriteId]);
-    if (sDexNavSearchDataPtr->eyeSpriteId != MAX_SPRITES)
-        DestroySprite(&gSprites[sDexNavSearchDataPtr->eyeSpriteId]);
+    // Start dexnav
+    //if (sDexNavSearchDataPtr->eyeSpriteId != MAX_SPRITES)
+        //DestroySprite(&gSprites[sDexNavSearchDataPtr->eyeSpriteId]);
+    // End dexnav
     if (sDexNavSearchDataPtr->ownedIconSpriteId != MAX_SPRITES)
         DestroySprite(&gSprites[sDexNavSearchDataPtr->ownedIconSpriteId]);
     if (sDexNavSearchDataPtr->exclamationSpriteId != MAX_SPRITES)
@@ -822,7 +824,9 @@ static void SetUpDexNavSearch(void)
     // init sprites
     sDexNavSearchDataPtr->iconSpriteId = MAX_SPRITES;
     sDexNavSearchDataPtr->itemSpriteId = MAX_SPRITES;
-    sDexNavSearchDataPtr->eyeSpriteId = MAX_SPRITES;
+    // Start dexnav
+    //sDexNavSearchDataPtr->eyeSpriteId = MAX_SPRITES;
+    // End dexnav
     sDexNavSearchDataPtr->starSpriteIds[0] = MAX_SPRITES;
     sDexNavSearchDataPtr->starSpriteIds[1] = MAX_SPRITES;
     sDexNavSearchDataPtr->starSpriteIds[2] = MAX_SPRITES;

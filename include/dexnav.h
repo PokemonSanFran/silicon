@@ -23,7 +23,7 @@ struct DexNavSearch
     u8 movementCount;
     u8 windowId;
     u8 iconSpriteId;
-    u8 eyeSpriteId;
+    //u8 eyeSpriteId; // dexnav
     u8 itemSpriteId;
     u8 starSpriteIds[3];
     u8 ownedIconSpriteId;
@@ -32,7 +32,7 @@ struct DexNavSearch
     u8 hiddenSearch:1;
     u8 isHiddenMon:1;
   // Start dexnav
-    u8 statFlag:1;
+    u8 statFlags;
     u8 abilityFlag:1;
     u8 itemFlag:1;
     u8 moveFlag:1;

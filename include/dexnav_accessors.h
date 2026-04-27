@@ -44,8 +44,9 @@ void Dexnav_ClearMoveFlag(void);
 void Dexnav_SetMoveFlag(void);
 void Dexnav_ClearLevelFlag(void);
 void Dexnav_SetLevelFlag(void);
-void Dexnav_ClearStatFlag(void);
-void Dexnav_SetStatFlag(void);
+void Dexnav_SetStatFlag(enum Stat statId);
+u8 Dexnav_GetStatFlag(enum Stat statId);
+void Dexnav_ClearStatFlag(enum Stat statId);
 
 u16 *Dexnav_GetPalBuffer(void);
 
