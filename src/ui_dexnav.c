@@ -1540,8 +1540,12 @@ static void Dexnav_DisplayStarsInsight(void)
     u32 state = Dexnav_GetMode();
     bool32 isScanMode = (state == DEXNAV_MODE_SCAN);
 
+
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
+        if(Dexnav_GetSpriteId(DEXNAV_SPRITEID_INSIGHT_POSITION_0 + position) != SPRITE_NONE)
+            continue;
+
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
@@ -1568,6 +1572,8 @@ static void Dexnav_DisplayStarsStreak(void)
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
+        if(Dexnav_GetSpriteId(DEXNAV_SPRITEID_INSIGHT_POSITION_0 + position) != SPRITE_NONE)
+            continue;
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
