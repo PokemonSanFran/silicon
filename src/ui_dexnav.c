@@ -1572,7 +1572,7 @@ static void Dexnav_DisplayStarsStreak(void)
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
-        if(Dexnav_GetSpriteId(DEXNAV_SPRITEID_INSIGHT_POSITION_0 + position) != SPRITE_NONE)
+        if(Dexnav_GetSpriteId(DEXNAV_SPRITEID_STREAK_POSITION_0 + position) != SPRITE_NONE)
             continue;
         struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
