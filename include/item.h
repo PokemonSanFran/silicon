@@ -533,11 +533,22 @@ enum PACKED ItemSortType
 
 typedef void (*ItemUseFunc)(u8);
 
+enum ItemEligibility
+{
+    ELIGIBILITY_CANNOT,
+    ELIGIBILITY_USABLE,
+    ELIGIBILITY_ALREADY_USED,
+};
+
+struct Pokemon;
+typedef u8 (*ItemEligibilityFunc)(struct Pokemon *mon, u16 itemId);
+
 struct Item
 {
     u32 price;
     u16 secondaryId;
     ItemUseFunc fieldUseFunc;
+    ItemEligibilityFunc eligibilityFunc;
     const u8 *description;
     const u8 *effect;
     const u8 *name;
@@ -692,6 +703,7 @@ u8 GetItemConsumability(u16 itemId);
 enum Pocket GetItemPocket(u16 itemId);
 u8 GetItemType(u16 itemId);
 ItemUseFunc GetItemFieldFunc(u16 itemId);
+ItemEligibilityFunc GetItemEligibilityFunc(u16 itemId);
 u8 GetItemBattleUsage(u16 itemId);
 u32 GetItemSecondaryId(u32 itemId);
 u32 GetItemFlingPower(u32 itemId);

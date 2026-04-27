@@ -1396,60 +1396,12 @@ static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite)
         sprite->invisible = FALSE;
 }
 
-enum{
-    ELIGIBILITY_CANNOT,
-    ELIGIBILITY_USABLE,
-    ELIGIBILITY_ALREADY_USED,
-};
-
-static bool8 MonHasAnyPPToRestore(struct Pokemon *mon)
-{
-    u32 i;
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        u16 move = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-
-        if (move != MOVE_NONE
-         && GetMonData(mon, MON_DATA_PP1 + i, NULL) < CalculatePPWithBonus(move, ppBonuses, i))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static u8 GetPPUpEligibility(struct Pokemon *mon)
-{
-    u32 i;
-    bool8 hasMoveThatCanReceivePPUps = FALSE;
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        u16 move = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-        u8 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
-        u8 ppUpCount = (ppBonuses & gPPUpGetMask[i]) >> (i * 2);
-
-        if (move == MOVE_NONE || maxPP < 5)
-            continue;
-
-        hasMoveThatCanReceivePPUps = TRUE;
-        if (ppUpCount < 3)
-            return ELIGIBILITY_USABLE;
-    }
-
-    return hasMoveThatCanReceivePPUps ? ELIGIBILITY_ALREADY_USED : ELIGIBILITY_CANNOT;
-}
-
 static u8 GetItemEligibility(u8 partyIndex, u16 itemId){
     struct Pokemon *mon = &gPlayerParty[partyIndex];
-    u8 species    = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    bool32 isEgg = (species == SPECIES_EGG);
-    bool32 isSpeciesInvalid = (species == SPECIES_NONE || isEgg);
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     enum Pocket itemPocket = GetItemPocket(itemId);
     bool8 isItemTypeTMHM = (pocketId == POCKET_TM_HM   || itemPocket == POCKET_TM_HM);
+    ItemEligibilityFunc eligibilityFunc = GetItemEligibilityFunc(itemId);
     u8 displayMode = sMenuDataPtr->partyDisplayMode;
 
     if(displayMode == INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY && isItemTypeTMHM)
@@ -1469,60 +1421,9 @@ static u8 GetItemEligibility(u8 partyIndex, u16 itemId){
                 break;
         }
     }
-    else if(displayMode == INVENTORY_PARTY_DISPLAY_ELEGIBILITY){
-        switch(itemId){
-            case ITEM_ABILITY_CAPSULE:
-            {
-                u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
 
-                if (isSpeciesInvalid 
-                    || GetSpeciesAbility(species, 0) == GetSpeciesAbility(species, 1)
-                    || GetSpeciesAbility(species, 1) == 0
-                    || abilityNum > 1)
-                    return ELIGIBILITY_CANNOT;
-                else
-                    return ELIGIBILITY_USABLE;
-            }
-            break;
-            case ITEM_ABILITY_PATCH:
-            {
-                u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-
-                if (isSpeciesInvalid || GetSpeciesAbility(species, abilityNum) == ABILITY_NONE)
-                    return ELIGIBILITY_CANNOT;
-                else
-                    return ELIGIBILITY_USABLE;
-            }
-            break;
-            case ITEM_RARE_CANDY:
-            {
-                u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-                if(level < MAX_LEVEL && !isSpeciesInvalid)
-                    return ELIGIBILITY_USABLE;
-                else
-                    return ELIGIBILITY_CANNOT;
-            }
-            break;
-            case ITEM_PP_UP:
-            case ITEM_PP_MAX:
-            {
-                if (isSpeciesInvalid)
-                    return ELIGIBILITY_CANNOT;
-                else
-                    return GetPPUpEligibility(mon);
-            }
-            break;
-            case ITEM_ELIXIR:
-            case ITEM_MAX_ELIXIR:
-            {
-                if (isSpeciesInvalid || !MonHasAnyPPToRestore(mon))
-                    return ELIGIBILITY_CANNOT;
-                else
-                    return ELIGIBILITY_USABLE;
-            }
-            break;
-        }
-    }
+    if(displayMode == INVENTORY_PARTY_DISPLAY_ELEGIBILITY && eligibilityFunc != NULL)
+        return eligibilityFunc(mon, itemId);
 
     return ELIGIBILITY_USABLE;
 }
@@ -1771,7 +1672,7 @@ static void UpdateMonIconsPalettes(void){
             u32 currentStatus = GetAilmentFromStatus(status);
             u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
             u16 currentHP = GetMonData(mon, MON_DATA_HP);
-            u8 newPaletteNum;
+            u8 newPaletteNum = paletteNum;
 
             switch(displayMode){
                 case INVENTORY_PARTY_DISPLAY_ELEGIBILITY:
@@ -1788,6 +1689,8 @@ static void UpdateMonIconsPalettes(void){
                         break;
                         case ELIGIBILITY_ALREADY_USED:
                             newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_GREEN, currentHP, paletteNum);
+                        break;
+                        default:
                         break;
                     }
 

@@ -12,6 +12,7 @@
 #include "strings.h"
 #include "load_save.h"
 #include "item_use.h"
+#include "item_usability.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "graphics.h"
@@ -953,6 +954,11 @@ u8 GetItemType(u16 itemId)
 ItemUseFunc GetItemFieldFunc(u16 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
+}
+
+ItemEligibilityFunc GetItemEligibilityFunc(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].eligibilityFunc;
 }
 
 // Start inventory
