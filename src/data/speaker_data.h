@@ -2874,4 +2874,52 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_MONTY] =
+    {
+        .name = COMPOUND_STRING("Monty"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MONTYOPP] =
+    {
+        .name = COMPOUND_STRING("Montyopp"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_THEATER_IMPROVTROUPEA] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_THEATER_IMPROVTROUPEB] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_THEATER_IMPROVTROUPEC] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ARCADEMINI] =
+    {
+        .name = COMPOUND_STRING("Arcademini"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

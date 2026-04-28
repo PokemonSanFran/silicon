@@ -4161,3 +4161,12 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Restore Zenzu Gym
+// ***********************************************************************
+
+void Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREZENZUGYM);
+}

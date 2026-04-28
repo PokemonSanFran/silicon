@@ -3,14 +3,15 @@ mapscripts CresaltaVista_MapScripts {
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(BeachBattle_ObjectVisibility_Script)
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
         call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
         call(Quest_Hang20_ResetCount_Script)
         call(Quest_Restorehodoucity_HideJames_CresaltaVista_Script)
         call(Quest_Hang20_HideLeader_Script)
-        call(StressCup_Script_HideStresscuporganizer)
+        call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_5,RestoreZenzuIsland_Script_HideStresscuporgnanizer)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

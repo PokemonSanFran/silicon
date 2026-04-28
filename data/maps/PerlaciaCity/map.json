@@ -246,6 +246,7 @@
       "dest_warp_id": "1"
     },
     {
+      "warp_id": "WARP_PERLACIA_CITY_TO_CENTER",
       "x": 25,
       "y": 30,
       "elevation": 0,

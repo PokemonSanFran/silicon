@@ -57,6 +57,7 @@ script Quest_Improvbattling_Active_Script{
 }
 
 script Quest_Improvbattling_Complete_Script{
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA)
     msgbox(format("Our favorite improv performer! Let's put on a show."),,MSGBOX_NPC,SPEAKER_IMPROV_1)
     goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
 }

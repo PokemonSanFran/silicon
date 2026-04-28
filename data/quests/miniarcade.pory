@@ -1,9 +1,7 @@
 //Quest_Battlearcademiniquest_
 
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHRIS = 1
-
-script Quest_Battlearcademiniquest_Event_Script{
+script Quest_Battlearcademiniquest_Event_Script
+{
     goto_if_quest_complete(QUEST_BATTLEARCADEMINIQUEST,Quest_Battlearcademiniquest_Complete_Script)
     goto_if_quest_active(QUEST_BATTLEARCADEMINIQUEST,Quest_Battlearcademiniquest_Active_Script)
     goto(Quest_Battlearcademiniquest_StartQuest_Script)
@@ -46,7 +44,9 @@ script Quest_Battlearcademiniquest_Active_Script{
     goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
 }
 
-script Quest_Battlearcademiniquest_Complete_Script{
+script Quest_Battlearcademiniquest_Complete_Script
+{
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitArcademini)
     msgbox(format("Itching for more? I'm always down to play."),,SPEAKER_CHRIS)
     goto(Quest_Battlearcademiniquest_SaveBeforeChallenge_Script)
 }

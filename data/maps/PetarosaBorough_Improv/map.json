@@ -15,7 +15,8 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEA",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_3",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -25,9 +26,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Improvbattling_Event_Script",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEC",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
       "x": 1,
       "y": 1,
@@ -38,9 +40,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEB",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 3,
       "y": 1,
@@ -51,7 +54,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_TEMP_3"
     }
   ],
   "warp_events": [

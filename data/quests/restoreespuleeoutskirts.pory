@@ -25,7 +25,10 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
     }
     msgbox(format("Hi! Imelda, right? I'm helping Kai with his project."),,SPEAKER_PLAYER)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-    msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop! ... But - that doesn't matter right now."),,SPEAKER_IMELDA)
+    msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop!"),,SPEAKER_IMELDA)
+    closemessage
+    reveal(REVEAL_IMELDA)
+    msgbox(format("But - that doesn't matter right now."),,SPEAKER_IMELDA)
     msgbox(format("I was quite serious about what I told Kai. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the SharpRise acquisition."),,SPEAKER_IMELDA)
     msgbox(format("Oh, uh - I think we wanted to improve the current system certainly -"),,SPEAKER_PLAYER)
     msgbox(format("Building on top of SharpRise's monstrosity won't be progress at all. A crude sort of bricolage without any of the grace."),,SPEAKER_IMELDA)
