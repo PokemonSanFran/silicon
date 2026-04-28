@@ -106,6 +106,8 @@ static void Dexnav_PrintMonName(enum DexnavWindows windowId);
 static void SpriteCB_StarInsight(struct Sprite *sprite);
 static void SpriteCB_StarStreak(struct Sprite *sprite);
 static void Dexnav_PrintMonTypes(void);
+static void Dexnav_PrintMonLevel(enum DexnavWindows windowId);
+static bool8 Dexnav_ShouldHideLevelIndicator(void);
 static void Dexnav_PrintFishingIcon(void);
 static u32 Dexnav_GetCursorPosition(void);
 static bool8 Dexnav_IsSelectedMonNotFishingMon(void);
@@ -1651,6 +1653,7 @@ static void Dexnav_DisplayMonInfo(void)
     enum DexnavWindows windowId = WIN_DEXNAV_INTERFACE_MON_INFO;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     Dexnav_PrintMonName(windowId);
+    Dexnav_PrintMonLevel(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 
     Dexnav_PrintMonTypes();
@@ -1849,8 +1852,44 @@ static void SpriteCB_DexnavTypes(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite,type);
 }
 
+static bool8 Dexnav_ShouldHideLevelIndicator(void)
+{
+    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
+        return TRUE;
+
+    return (Dexnav_GetLevelFlag() == FALSE);
+}
+
+static void Dexnav_PrintMonLevel(enum DexnavWindows windowId)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+
+    u32 species = Dexnav_GetCurrentlySelectedSpecies();
+    if (species == SPECIES_NONE)
+        return;
+
+    bool32 isLevelModified = (Dexnav_ShouldHideLevelIndicator() == FALSE);
+
+    u32 x = isLevelModified ? 15 : 7;
+    u32 y = 16;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+
+
+    u32 level = Dexnav_GetOverworldMonLevel();
+    ConvertIntToDecimalStringN(gStringVar1,level,STR_CONV_MODE_LEFT_ALIGN,CountDigits(MAX_LEVEL));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV} {STR_VAR_1}"));
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
+}
+
 static void Dexnav_PrintMonTypes(void)
 {
+    if (Dexnav_IsCurrentModeScan())
+        return;
+
     for (u32 typeNum = 0; typeNum < 2; typeNum++)
     {
         if (Dexnav_GetSpriteId(DEXNAV_SPRITEID_TYPE_0 + typeNum) != SPRITE_NONE)
