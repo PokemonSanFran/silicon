@@ -31,6 +31,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_ARCADE_TO_POPIDORA_LEFT",
       "x": 11,
       "y": 10,
       "elevation": 0,
@@ -38,6 +39,7 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_ARCADE_TO_POPIDORA_RIGHT",
       "x": 12,
       "y": 10,
       "elevation": 0,
