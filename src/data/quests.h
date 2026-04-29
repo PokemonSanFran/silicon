@@ -1732,19 +1732,180 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .x = 12,
                 .y = 19,
             },
-
         },
     },
     [QUEST_RESTOREZENZUGYM] =
     {
-        .name = gText_Quest_RestoreZenzuIsland_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_RestoreZenzuIsland_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_RestoreZenzuIsland_DoneDesc,
-        .map = gText_Quest_RestoreZenzuIsland_Map,
+        .name = COMPOUND_STRING("Restore Zenzu Island Gym"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Doyle needs to be convinced that Resido is worth fighting for!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Doyle is going to set up his studio in Resido!"),
+        .map = COMPOUND_STRING("Zenzu Island"),
         .sprite = OBJ_EVENT_GFX_DOYLE,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestoreZenzuIsland_Sub,
-        .numSubquests = QUEST_RESTOREZENZUGYM_SUB_COUNT
+        .numSubquests = QUEST_RESTOREZENZUGYM_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_RPS] =
+            {
+                .name = COMPOUND_STRING("Before Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_RPS] =
+            {
+                .name = COMPOUND_STRING("Complete Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_RPS] =
+            {
+                .name = COMPOUND_STRING("Recruit From Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Before Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Complete Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Recruit From Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Before Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3_OUTSIDE),
+                .warpId = WARP_ID_PETAROSA_TO_THEATER,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Complete Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Recruit From Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Before Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Complete Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Recruit From Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Before Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Complete Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Recruit From Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+        },
     },
     [QUEST_RESTOREHODOUGYM] =
     {
