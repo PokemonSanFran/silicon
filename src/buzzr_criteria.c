@@ -315,3 +315,14 @@ void TweetCriteria_Quest_RestoreespuleegymComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREESPULEEGYM);
 }
+
+void TweetCriteria_Quest_RestorezenzugymActive(void)
+{
+    gSpecialVar_Result = IsQuestActiveState(QUEST_RESTOREZENZUGYM);
+}
+
+void TweetCriteria_Quest_RestorezenzugymComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREZENZUGYM);
+}
+

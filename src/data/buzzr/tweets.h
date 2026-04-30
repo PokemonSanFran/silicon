@@ -612,4 +612,34 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_RESTOREZENZUISLAND_ACTIVE] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Just heard what sounded like some crazy monster noises coming from {STR_VAR_1}. Is Doyle back to battling again?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymActive,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA] =
+    {
+        .userId = BUZZR_USER_BAIYA,
+        .content = COMPOUND_STRING("Looking for a new place to level up, trainers? Check out {STR_VAR_1}'s new Battle Studio!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE] =
+    {
+        .userId = BUZZR_USER_IMELDA,
+        .content = COMPOUND_STRING(""),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

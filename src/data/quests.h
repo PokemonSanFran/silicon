@@ -1404,41 +1404,49 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
 static const struct SubQuest
 sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
     sub_quest(163,
-            gText_Quest_RestoreZenzuIsland_Sub1_Name,
-            gText_Quest_RestoreZenzuIsland_Sub1_Desc,
-            gText_Quest_RestoreZenzuIsland_Sub1_Map,
-            ITEM_FLAME_ORB,
-            QUEST_SPRITE_TYPE_ITEM,
+            COMPOUND_STRING("Fundraiser"),
+            COMPOUND_STRING("Montyopp agreed to help with Doyle's movie efforts."),
+            COMPOUND_STRING("Caphe City"),
+            OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_1,
+            QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(164,
-            gText_Quest_RestoreZenzuIsland_Sub2_Name,
-            gText_Quest_RestoreZenzuIsland_Sub2_Desc,
-            gText_Quest_RestoreZenzuIsland_Sub2_Map,
-            ITEM_TM027,
-            QUEST_SPRITE_TYPE_ITEM,
+            COMPOUND_STRING("Visual Effects"),
+            COMPOUND_STRING("Drughelmettester agreed to help with Doyle's movie efforts."),
+            COMPOUND_STRING("Irisina Town"),
+            OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_2,
+            QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(165,
-            gText_Quest_RestoreZenzuIsland_Sub3_Name,
-            gText_Quest_RestoreZenzuIsland_Sub3_Desc,
-            gText_Quest_RestoreZenzuIsland_Sub3_Map,
-            SPECIES_BEHEEYEM,
-            QUEST_SPRITE_TYPE_PKMN,
+            COMPOUND_STRING("Actors"),
+            COMPOUND_STRING("ImprovtroupeA agreed to help with Doyle's movie efforts."),
+            COMPOUND_STRING("Petarosa Borough"),
+            OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_3,
+            QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
     sub_quest(166,
-            gText_Quest_RestoreZenzuIsland_Sub4_Name,
-            gText_Quest_RestoreZenzuIsland_Sub4_Desc,
-            gText_Quest_RestoreZenzuIsland_Sub4_Map,
-            SPECIES_SHROOMISH,
-            QUEST_SPRITE_TYPE_PKMN,
+            COMPOUND_STRING("Lighting"),
+            COMPOUND_STRING("Arcademini agreed to help with Doyle's movie efforts."),
+            COMPOUND_STRING("Popidora Pier"),
+            OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_4,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Found")
+            ),
+    sub_quest(167,
+            COMPOUND_STRING("Producer"),
+            COMPOUND_STRING("Stresscuporganizer agreed to help with Doyle's movie efforts."),
+            COMPOUND_STRING("Cresalta Vista"),
+            OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_5,
+            QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
 };
 static const struct SubQuest
     sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
-    sub_quest(167,
+    sub_quest(168,
             gText_Quest_Recruitlocalartists_Sub1_Name,
             gText_Quest_Recruitlocalartists_Sub1_Desc,
             gText_Quest_Recruitlocalartists_Sub1_Map,
@@ -1446,7 +1454,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(168,
+    sub_quest(169,
             gText_Quest_Recruitlocalartists_Sub2_Name,
             gText_Quest_Recruitlocalartists_Sub2_Desc,
             gText_Quest_Recruitlocalartists_Sub2_Map,
@@ -1454,7 +1462,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(169,
+    sub_quest(170,
             gText_Quest_Recruitlocalartists_Sub3_Name,
             gText_Quest_Recruitlocalartists_Sub3_Desc,
             gText_Quest_Recruitlocalartists_Sub3_Map,
@@ -1466,21 +1474,21 @@ static const struct SubQuest
 
 static const struct SubQuest sDiggingUpAdaorasDirt_Sub[QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT] =
 {
-    sub_quest(170, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(171, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(172, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(173, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(171, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(172, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(173, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(174, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
 };
 
 static const struct SubQuest sFreeTheInnocent_Sub[QUEST_FREETHEINNOCENT_SUB_COUNT] =
 {
-    sub_quest(174, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(175, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(176, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(177, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(178, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(179, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
-    sub_quest(180, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(175, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(176, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(177, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(178, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(179, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(180, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(181, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
 };
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -1724,19 +1732,180 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
                 .x = 12,
                 .y = 19,
             },
-
         },
     },
     [QUEST_RESTOREZENZUGYM] =
     {
-        .name = gText_Quest_RestoreZenzuIsland_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_RestoreZenzuIsland_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_RestoreZenzuIsland_DoneDesc,
-        .map = gText_Quest_RestoreZenzuIsland_Map,
+        .name = COMPOUND_STRING("Restore Zenzu Island Gym"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Doyle needs to be convinced that Resido is worth fighting for!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Doyle is going to set up his studio in Resido!"),
+        .map = COMPOUND_STRING("Zenzu Island"),
         .sprite = OBJ_EVENT_GFX_DOYLE,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestoreZenzuIsland_Sub,
-        .numSubquests = QUEST_RESTOREZENZUGYM_SUB_COUNT
+        .numSubquests = QUEST_RESTOREZENZUGYM_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_RPS] =
+            {
+                .name = COMPOUND_STRING("Before Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_RPS] =
+            {
+                .name = COMPOUND_STRING("Complete Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_RPS] =
+            {
+                .name = COMPOUND_STRING("Recruit From Rps"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_1),
+                .warpId = WARP_ID_NONE,
+                .x = 10,
+                .y = 19,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Before Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Complete Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_DRUGHELMET] =
+            {
+                .name = COMPOUND_STRING("Recruit From Drughelmet"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_2),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 21,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Before Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3_OUTSIDE),
+                .warpId = WARP_ID_PETAROSA_TO_THEATER,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Complete Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING] =
+            {
+                .name = COMPOUND_STRING("Recruit From Improv Battling"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_3),
+                .warpId = WARP_ID_THEATER_TO_PETAROSA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Before Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Complete Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE] =
+            {
+                .name = COMPOUND_STRING("Recruit From Miniarcade"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_4),
+                .warpId = WARP_ID_ARCADE_TO_POPIDORA_LEFT,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Before Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Complete Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_STRESSCUP] =
+            {
+                .name = COMPOUND_STRING("Recruit From Stresscup"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUISLAND_5),
+                .warpId = WARP_ID_NONE,
+                .x = 35,
+                .y = 35,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RestoreZenzuIslandGym,
+                side_quest_map(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 14,
+            },
+        },
     },
     [QUEST_RESTOREHODOUGYM] =
     {

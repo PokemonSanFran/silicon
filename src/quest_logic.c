@@ -4104,6 +4104,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             break;
@@ -4112,24 +4113,28 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
             GenerateAndGiveOddEgg();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E:
             DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound();
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
             u16 evs[NUM_STATS] = {0,0,0,0,0,0};
@@ -4140,6 +4145,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
             DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD:
             break;
@@ -4152,6 +4158,87 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_COMPLETE:
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMELDA);
             QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Restore Zenzu Gym
+// ***********************************************************************
+
+void Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREZENZUGYM);
+}
+
+void DebugQuest_RestoreZenzuIslandGym(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTOREZENZUGYM);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_DOYLE_ZENZU_ISLAND);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_RPS:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_RPS:
+            QuestMenu_SetupQuestState(QUEST_RPS,STATE_QUEST_RPS_DICE_GIVEN);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_RPS:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_DRUGHELMET:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_DRUGHELMET:
+            QuestMenu_SetupQuestState(QUEST_DRUGHELMETTEST,STATE_QUEST_DRUGHELMETTEST_COMPLETED_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_DRUGHELMET:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING:
+            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            // PSF TODO Replace with QuestMenu_SetupQuestState
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE:
+            QuestMenu_ScriptSetComplete(QUEST_BATTLEARCADEMINIQUEST);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_MINI_ARCADE_CHRIS);
+            // PSF TODO Replace with QuestMenu_SetupQuestState
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_STRESSCUP:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_STRESSCUP:
+            QuestMenu_SetupQuestState(QUEST_STRESSCUP,STATE_QUEST_STRESSCUP_COMPLETE_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_STRESSCUP:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_REWARD:
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREZENZUGYM);
             break;
     }
 }

@@ -63,6 +63,7 @@ void DebugQuest_Freetheinnocent(u8 state);
 void DebugQuest_Findtheguilty(u8 state);
 void DebugQuest_KitchenVolunteering(u8 state);
 void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state);
+void DebugQuest_RestoreZenzuIslandGym(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
