@@ -43,10 +43,12 @@ static enum DexnavHabitats Dexnav_GetSavedHabitat(void);
 static u8 Dexnav_GetSavedCursorPosition(void);
 static u16 Dexnav_GetSavedSpecies(void);
 static void Dexnav_VBlankCB(void);
+static void Dexnav_PrintOverworldIndicators(void);
 static void Dexnav_MainCB(void);
 static bool8 Dexnav_InitalizeBackgrounds(void);
 static void Dexnav_ReturnFromAdventureGuide(void);
 static void Dexnav_SetSavedHabitat(enum DexnavHabitats habitat);
+static void Dexnav_RemoveStatIndicator(u32 position);
 static void Dexnav_SetSavedCursorPosition(u32 cursorPosition);
 static void Dexnav_RegisterCurrentlySelectedMon(void);
 static void Dexnav_SetSavedSpecies(u32 species);
@@ -74,12 +76,14 @@ static void Dexnav_InitializeAndSaveCallback(MainCallback callback, struct Dexna
 static void SaveCallbackToDexnav(MainCallback callback);
 static void Dexnav_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
+static void Dexnav_DisplayStatIndicator(u32 count, u32 position);
 static void DisplayHelpBar(enum DexnavWindows windowId);
 static void Dexnav_SetMode(enum DexnavMode mode);
 static bool8 Dexnav_IsCurrentModeScan(void);
 static enum DexnavMode Dexnav_GetMode(void);
 static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId);
 static enum DexnavHabitats Dexnav_GetHabitat(void);
+static void Dexnav_DisplayOverworldPokemon(void);
 static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
@@ -135,6 +139,7 @@ static bool8 Dexnav_ShouldHideMoveIndicator(void);
 static bool8 Dexnav_ShouldDisplayMoveName(void);
 static enum Move Dexnav_GetSearchingMove(void);
 static void Dexnav_PrintMove(enum DexnavWindows windowId);
+static void Dexnav_DisplayAllStatIndicator(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
@@ -547,6 +552,9 @@ static void SpriteCB_Register(struct Sprite *sprite)
 
 static void Dexnav_CreateRegisterSprite(void)
 {
+    if (Dexnav_IsCurrentModeScan())
+        return;
+
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_REGISTER;
@@ -958,7 +966,9 @@ void Dexnav_SetupCallback(void)
             break;
         case 3:
             Dexnav_InitWindows();
+            Dexnav_DisplayOverworldPokemon();
             Dexnav_DisplayAllHabitatPokemon();
+            Dexnav_DisplayAllStatIndicator();
             Dexnav_DisplayMonInfo();
             Dexnav_PrintFloatingActionButton();
             Dexnav_HandleHabitatHeader();
@@ -971,6 +981,7 @@ void Dexnav_SetupCallback(void)
             Dexnav_DisplayCursors();
             Dexnav_ScanMode_DisplayAbility();
             Dexnav_ScanMode_DisplayFirstMove();
+            Dexnav_PrintOverworldIndicators();
             gMain.state++;
             break;
         case 4:
@@ -1871,16 +1882,16 @@ static void Dexnav_PrintMonLevel(enum DexnavWindows windowId)
 
     bool32 isLevelModified = (Dexnav_ShouldHideLevelIndicator() == FALSE);
 
-    u32 x = isLevelModified ? 15 : 7;
-    u32 y = 16;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 x = isLevelModified ? 16 : 7;
+    u32 y = 17;
+    u32 fontId = FONT_DEXNAV_STAT_NAME;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-
+    s32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING) + 1;
 
     u32 level = Dexnav_GetOverworldMonLevel();
+
     ConvertIntToDecimalStringN(gStringVar1,level,STR_CONV_MODE_LEFT_ALIGN,CountDigits(MAX_LEVEL));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV} {STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV}{STR_VAR_1}"));
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
@@ -1989,22 +2000,14 @@ static void Dexnav_DisplaySelectedMon(void)
         return;
 
     u32 x = 149, y = 80, personality = 0;
+
+    if (Dexnav_IsCurrentModeScan())
+        x += 20;
+
     bool32 isShiny = FALSE, isFrontPic = TRUE;
     u32 spriteId = CreateMonPicSprite(species,isShiny,personality,isFrontPic,x, y, DEXNAV_PALETTE_MAIN_MON_ID, TAG_NONE);
     FreeSpriteOamMatrix(&gSprites[spriteId]);
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_MAIN,spriteId);
-}
-
-static void Dexnav_DisplayAllHabitatPokemon(void)
-{
-    enum DexnavHabitats habitat = Dexnav_GetHabitat();
-    
-    if (habitat == DEXNAV_HABITAT_NONE)
-        return;
-
-    for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
-        Dexnav_DisplayHabitatPokemon(habitat, speciesIndex);
-
 }
 
 static void SpriteCB_MonIconDexnav(struct Sprite *sprite)
@@ -2024,6 +2027,346 @@ static void Dexnav_RemoveMonIcon(u32 spriteId)
 
     Dexnav_SaveSpriteId(spriteId,SPRITE_NONE);
     FreeAndDestroyMonIconSprite(&gSprites[oldSpriteId]);
+}
+
+static void Dexnav_DisplayOverworldPokemon(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+
+    u32 species = Dexnav_GetOverworldSpecies();
+    u32 x = dexnavMonIconCoordinates[DEXNAV_MAX_SHOWN_MONS - 1][0][AXIS_X] + 36;
+    u32 y = dexnavMonIconCoordinates[DEXNAV_MAX_SHOWN_MONS - 1][0][AXIS_Y] + 16;
+
+    u32 spriteId = CreateMonIcon(species,SpriteCB_MonIcon,x,y,0,0);
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0,spriteId);
+}
+
+static const union AnimCmd sAnim_Stat5Position6[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Stat6Position1[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_RED_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_Stat6Position2[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_Stat6Position3[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_Stat6Position4[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_Stat6Position5[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_Stat6Position6[] =
+{
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_0,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_1,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_2,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_3,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_4,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_5,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_6,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_FRAME(DEXNAV_STAT_INDICATOR_STAT_BLUE_FRAME_7,7.8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const sSpriteAnimTable_Stat[][DEXNAV_STAT_POSITIONS] =
+{
+    [0] =
+    {
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+    },
+    [1] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+    },
+    [2] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat6Position2,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+    },
+    [3] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat6Position2,
+        sAnim_Stat6Position3,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+    },
+    [4] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat6Position2,
+        sAnim_Stat6Position3,
+        sAnim_Stat6Position4,
+        sAnim_Stat5Position6,
+        sAnim_Stat5Position6,
+    },
+    [5] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat6Position2,
+        sAnim_Stat6Position3,
+        sAnim_Stat6Position4,
+        sAnim_Stat6Position5,
+        sAnim_Stat5Position6,
+    },
+    [6] =
+    {
+        sAnim_Stat6Position1,
+        sAnim_Stat6Position2,
+        sAnim_Stat6Position3,
+        sAnim_Stat6Position4,
+        sAnim_Stat6Position5,
+        sAnim_Stat6Position6,
+    },
+};
+
+static void Dexnav_DisplayAllStatIndicator(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+
+    u32 count = Dexnav_GetStatFlag();
+
+    for (u32 position = 1; position < DEXNAV_MAX_SHOWN_MONS; position++)
+        Dexnav_DisplayStatIndicator(count, position);
+}
+
+static void Dexnav_DisplayStatIndicator(u32 count, u32 position)
+{
+    Dexnav_RemoveStatIndicator(position);
+    u32 column = (position > DEXNAV_STAT_POSITIONS) ? (DEXNAV_MAX_SHOWN_MONS - position): position;
+        column--;
+
+    u32 x = dexnavMonIconCoordinates[11][position][AXIS_X] + 36;
+    u32 y = dexnavMonIconCoordinates[11][position][AXIS_Y] + 16;
+
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_IV;
+    TempSpriteTemplate.callback = SpriteCallbackDummy;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_IV;
+    TempSpriteTemplate.anims = &sSpriteAnimTable_Stat[count][column];
+
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+    gSprites[spriteId].oam.priority = 0;
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0 + position,spriteId);
+}
+
+static void Dexnav_RemoveStatIndicator(u32 position)
+{
+    u32 spriteId = Dexnav_GetSpriteId(DEXNAV_SPRITEID_MON_0 + position);
+
+    if (spriteId != MAX_SPRITES)
+        DestroySprite(&gSprites[spriteId]);
+
+    Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0 + position,SPRITE_NONE);
+}
+
+static void Dexnav_DisplayAllHabitatPokemon(void)
+{
+    if (Dexnav_IsCurrentModeScan() == TRUE)
+        return;
+
+    enum DexnavHabitats habitat = Dexnav_GetHabitat();
+    
+    if (habitat == DEXNAV_HABITAT_NONE)
+        return;
+
+    for (u32 speciesIndex = 0; speciesIndex < DEXNAV_MAX_SHOWN_MONS; speciesIndex++)
+        Dexnav_DisplayHabitatPokemon(habitat, speciesIndex);
+
 }
 
 static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 speciesIndex)
@@ -2080,8 +2423,8 @@ static const union AnimCmd sAnim_FAB_Cancel[] =
 
 static const union AnimCmd * const sSpriteAnimTable_FAB[] =
 {
-    sAnim_FAB_Scan,
     sAnim_FAB_Cancel,
+    sAnim_FAB_Scan,
 };
 
 static void Dexnav_PrintFloatingActionButton(void)
@@ -2620,9 +2963,9 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
             STAT_SPDEF
         };
 
+    Dexnav_ClearStatFlag();
     for (u32 i = 0; i < NUM_STATS; i++)
     {
-        Dexnav_ClearStatFlag(i);
         ivs[i] = GetMonData(mon, MON_DATA_HP_IV + i);
         oldIvs[i] = ivs[i];
     }
@@ -2632,9 +2975,13 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
     for (u32 i = 0; i < potential && i < NUM_STATS; i++)
         ivs[statIndices[i]] = MAX_PER_STAT_IVS;
 
+    u32 count = 0;
     for (u32 i = 0; i < NUM_STATS; i++)
+    {
         if (oldIvs[i] != ivs[i])
-            Dexnav_SetStatFlag(i);
+            count++;
+    }
+    Dexnav_SetStatFlag(count);
 
     for (u32 i = 0; i < NUM_STATS; i++)
         SetMonData(mon, MON_DATA_HP_IV + i, &ivs[i]);
@@ -2687,6 +3034,14 @@ static void Dexnav_ScanMode_DisplayAbility(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     Dexnav_PrintAbility(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static bool8 Dexnav_ShouldHideItemIndicator(void)
+{
+    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
+        return TRUE;
+
+    return (Dexnav_GetItemFlag() == FALSE);
 }
 
 static bool8 Dexnav_ShouldHideAbilityIndicator(void)
@@ -2798,4 +3153,90 @@ static void Dexnav_ScanMode_DisplayMonInfo(void)
 {
     if (Dexnav_IsCurrentModeScan() == FALSE)
         return;
+}
+
+static const union AnimCmd sAnim_InidicatorAbility[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_ABILITY,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_InidicatorLevel[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_LEVEL,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_InidicatorItem[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_ITEM,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_InidicatorMove[] = 
+{
+    ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_MOVE,4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd * const sSpriteAnimTable_OverworldIndicators[] =
+{
+    sAnim_InidicatorAbility,
+    sAnim_InidicatorLevel,
+    sAnim_InidicatorItem,
+    sAnim_InidicatorMove,
+};
+
+static const struct {
+    u8 axis[AXIS_COUNT];
+    bool8 (*visibility)(void);
+} sIndicatorData[] =
+{
+    [DEXNAV_INDICATOR_ABILITY] =
+    {
+        .axis = {11, 30},
+        .visibility = Dexnav_ShouldHideAbilityIndicator,
+    },
+    [DEXNAV_INDICATOR_LEVEL] =
+    {
+        .axis = {11, 86},
+        .visibility = Dexnav_ShouldHideLevelIndicator,
+    },
+    [DEXNAV_INDICATOR_ITEM] =
+    {
+        .axis = {73, 76},
+        .visibility = Dexnav_ShouldHideItemIndicator,
+    },
+    [DEXNAV_INDICATOR_MOVE] =
+    {
+        .axis = {11, 113},
+        .visibility = Dexnav_ShouldHideMoveIndicator,
+    },
+};
+
+static void Dexnav_PrintOverworldIndicators(void)
+{
+    if (Dexnav_IsCurrentModeScan() == FALSE)
+        return;
+
+    u32 start = DEXNAV_SPRITEID_INDICATOR_START - DEXNAV_SPRITEID_INDICATOR_START;
+    u32 end = DEXNAV_SPRITEID_INDICATOR_END - DEXNAV_SPRITEID_INDICATOR_START + 1;
+
+    for (u32 indicator = start; indicator < end; indicator++)
+    {
+        struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+        TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_INDICATOR;
+        TempSpriteTemplate.callback = SpriteCallbackDummy;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_INDICATOR;
+        TempSpriteTemplate.anims = sSpriteAnimTable_OverworldIndicators;
+
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, sIndicatorData[indicator].axis[AXIS_X], sIndicatorData[indicator].axis[AXIS_Y], 0);
+        gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
+        gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
+        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].invisible = sIndicatorData[indicator].visibility();
+        Dexnav_SaveSpriteId(DEXNAV_SPRITEID_INDICATOR_START + indicator,spriteId);
+        StartSpriteAnimIfDifferent(&gSprites[spriteId], indicator);
+    }
 }

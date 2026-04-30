@@ -250,18 +250,18 @@ bool8 Dexnav_GetLevelFlag(void)
     return sDexNavSearchDataPtr->levelFlag;
 }
 
-void Dexnav_SetStatFlag(enum Stat statId)
+void Dexnav_SetStatFlag(u32 value)
 {
-    sDexNavSearchDataPtr->statFlags |= (1 << statId);
+    sDexNavSearchDataPtr->statFlags = value;
 }
 
-u8 Dexnav_GetStatFlag(enum Stat statId)
+u8 Dexnav_GetStatFlag(void)
 {
-    return (sDexNavSearchDataPtr->statFlags >> statId) & 1;
+    return sDexNavSearchDataPtr->statFlags;
 }
 
-void Dexnav_ClearStatFlag(enum Stat statId)
+void Dexnav_ClearStatFlag(void)
 {
-    sDexNavSearchDataPtr->statFlags &= ~(1 << statId);
+    sDexNavSearchDataPtr->statFlags = 0;
 }
 
