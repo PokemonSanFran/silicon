@@ -1452,6 +1452,7 @@ static u8 DexNavGetAbilityNum(u16 species, u8 searchLevel)
 
 static u8 DexNavGeneratePotential(u8 searchLevel)
 {
+    return Dexnav_CalculatePotential(searchLevel); //dexnav
     u8 genChance = 0;
     int randVal = Random() % 100;
 

@@ -2742,14 +2742,20 @@ void Dexnav_FreeOverworldSpriteResources(void)
 
 u8 Dexnav_CalculatePotential(u32 insight)
 {
+    Dexnav_ClearStatFlag();
+    u32 potential = 0;
+
     if (insight < DEXNAV_INSIGHT_PERCENT_10) 
-        return insight / 20;
+        potential = insight / 20;
     else if (insight < DEXNAV_INSIGHT_PERCENT_50)
-        return ((insight + 60) / 80);
+        potential = ((insight + 60) / 80);
     else if (insight < DEXNAV_MAX_INSIGHT)
-        return ((insight - 50) / 25);
+        potential = ((insight - 50) / 25);
     else
-        return NUM_STATS;
+        potential = NUM_STATS;
+
+    Dexnav_SetStatFlag(potential);
+    return potential;
 }
 
 u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight)
