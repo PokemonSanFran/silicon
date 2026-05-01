@@ -58,6 +58,16 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 
+void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
+{
+    const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+    u32 species = mon.species;
+    u32 female = (mon.gender == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
+    u32 shiny = (mon.isShiny == TRUE) ? OBJ_EVENT_MON_SHINY: 0;
+    VarSet(var,(OBJ_EVENT_MON + species + female + shiny));
+}
+
 void DebugQuest_EvolveMon(u32 old, u32 species)
 {
     struct Pokemon *mon = NULL;
@@ -4241,4 +4251,37 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state)
             QuestMenu_ScriptSetComplete(QUEST_RESTOREZENZUGYM);
             break;
     }
+}
+
+// ***********************************************************************
+// Quest: Restore Hodou Gym
+// ***********************************************************************
+
+bool8 Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    if (FlagGet(FLAG_TIMELINE_FALSE))
+        return FALSE;
+
+    if (VarGet(VAR_STORYLINE_STATE) <= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND)
+        return FALSE;
+
+    if (QuestMenu_GetSetQuestState(QUEST_RESTOREHODOUGYM,FLAG_GET_INACTIVE) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    gSpecialVar_Result = Quest_RestoreHodouGym_CheckIfQuestShouldStart();
+}
+
+void Quest_Restorehodoucity_LoadZacPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0);
+}
+
+void Quest_Restorehodoucity_LoadKevinPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
 }
