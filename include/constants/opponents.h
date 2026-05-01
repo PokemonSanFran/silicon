@@ -175,7 +175,7 @@
 #define TRAINER_SANTIAGO                    168
 #define TRAINER_GILBERT                     169
 #define TRAINER_FRANKLIN                    170
-#define TRAINER_KEVIN                       171
+//#define TRAINER_KEVIN                       171
 #define TRAINER_JACK                        172
 #define TRAINER_DUDLEY                      173
 #define TRAINER_CHAD                        174
@@ -954,7 +954,6 @@ enum ResidoTrainerIds
     TRAINER_DRUG_KINSEY,
     TRAINER_DRUG_KALEY,
     TRAINER_DRUG_TOREY,
-    TRAINER_PEWFAT,
     TRAINER_DRUG_BD,
     TRAINER_HELEN,
     TRAINER_VAGRANT_1_ROUTE2,
@@ -1727,7 +1726,8 @@ enum ResidoTrainerIds
     TRAINER_B3FB2F4B,
     TRAINER_B42E7E27,
     TRAINER_B42F5023,
-    TRAINER_B53E1C28,
+    TRAINER_ZAC,
+    TRAINER_KEVIN,
     // PSF TODO Don't add more fuckin Trainers because the test systems needs 851 and 852 to be named RED and LEAF for now
     TRAINER_RED,
     TRAINER_LEAF,
