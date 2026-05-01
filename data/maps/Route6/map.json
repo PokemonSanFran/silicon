@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE6_DAJUAN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 6,
       "y": 9,

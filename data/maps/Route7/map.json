@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE7_JUSTIN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 20,
       "y": 2,

@@ -75,6 +75,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ROUTE4_ANDREAS",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 6,
       "y": 13,

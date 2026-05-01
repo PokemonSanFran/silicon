@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE14_JEFFREY",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 3,
       "y": 16,

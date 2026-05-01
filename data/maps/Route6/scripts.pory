@@ -1,6 +1,8 @@
-mapscripts Route6_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restorehodoucity_HideBlackbelt_Route6_Script)
+mapscripts Route6_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_6,Quest_Restorehodoucity_HideBlackbelt_Route6_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
         call(CatchTutorial_HideProfessor_Script)
     }

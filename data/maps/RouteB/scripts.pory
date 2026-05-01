@@ -1,7 +1,8 @@
 mapscripts RouteB_MapScripts{
-   MAP_SCRIPT_ON_TRANSITION{
-       call(Quest_Restorehodoucity_HideBlackbelt_RouteB_Script)
-}
+   MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Quest_Restorehodoucity_HideBlackbelt_RouteB_Script)
+    }
 }
 
 script RouteB_EventScript_BlackbeltA{

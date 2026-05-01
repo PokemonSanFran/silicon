@@ -1,8 +1,10 @@
 //PSF TODO GGW layout: https://i.imgur.com/B1PeWTU.png, each side if 72x72
 
-mapscripts HalerbaWilds_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script)
+mapscripts HalerbaWilds_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_8,Quest_Restorehodoucity_HideBlackbelt_HalerbaWilds_Script)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_12,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueCutM)
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_3,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerC)
     }
