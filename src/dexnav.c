@@ -659,13 +659,19 @@ static bool8 DexNavPickTile(enum EncounterType environment, u8 areaX, u8 areaY, 
                             break; //occurs at same z coord
 
                         scale = 440 - (smallScan * 200) - (GetPlayerDistance(topX, topY) / 2)  - (2 * (topX + topY));
-                        weight = ((Random() % scale) < 1) && !MapGridGetCollisionAt(topX, topY);
+                        // Start dexnav
+                        weight = (scale > 0) && !MapGridGetCollisionAt(topX, topY);
+                        //weight = ((Random() % scale) < 1) && !MapGridGetCollisionAt(topX, topY);
+                        // End dexnav
                     }
                     else
                     {
                         // outdoors: grass
                         scale = 100 - (GetPlayerDistance(topX, topY) * 2);
-                        weight = (Random() % scale <= 5) && !MapGridGetCollisionAt(topX, topY);
+                        // Start dexnav
+                        weight = (scale > 5) && !MapGridGetCollisionAt(topX, topY);
+                        //weight = (Random() % scale <= 5) && !MapGridGetCollisionAt(topX, topY);
+                        // End dexnav
                     }
                 }
                 break;
@@ -676,7 +682,10 @@ static bool8 DexNavPickTile(enum EncounterType environment, u8 areaX, u8 areaY, 
                     if (IsElevationMismatchAt(gObjectEvents[gPlayerAvatar.spriteId].currentElevation, topX, topY))
                         break;
 
-                    weight = (Random() % scale <= 1) && !MapGridGetCollisionAt(topX, topY);
+                    // Start dexnav
+                    weight = (scale > 1) && !MapGridGetCollisionAt(topX, topY);
+                    //weight = (Random() % scale <= 1) && !MapGridGetCollisionAt(topX, topY);
+                    // End dexnav
                 }
                 break;
             default:
