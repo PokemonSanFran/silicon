@@ -1890,7 +1890,11 @@ static void Dexnav_PrintMonLevel(enum DexnavWindows windowId)
 
     u32 level = Dexnav_GetOverworldMonLevel();
 
-    ConvertIntToDecimalStringN(gStringVar1,level,STR_CONV_MODE_LEFT_ALIGN,CountDigits(MAX_LEVEL));
+    if (Dexnav_ShouldDisplayAbilityName())
+        ConvertIntToDecimalStringN(gStringVar1,level,STR_CONV_MODE_LEFT_ALIGN,CountDigits(MAX_LEVEL));
+    else 
+        StringCopy(gStringVar1,COMPOUND_STRING("???"));
+
     StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV}{STR_VAR_1}"));
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
