@@ -1,12 +1,19 @@
 mapscripts HodouCity_Gym_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM: Quest_Restorehodoucity_FirstTimeInside_Dialogue
-        VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJames_Dialogue 
+        VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJames_Dialogue
         VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS: Quest_Restorehodoucity_Reward_Dialogue
     ]
-    MAP_SCRIPT_ON_TRANSITION{
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(Quest_Restorehodoucity_HidePokemnon_Script)
-        call(Quest_Restorehodoucity_HideTrainers_Inside_Script)
-        call(Quest_Restorehodoucity_HideJames_HodouCity_Script)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Restorehodoucity_Script_HideGymTrainer_James)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Restorehodoucity_Script_HideGymTrainer_Adam)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_3,Restorehodoucity_Script_HideGymTrainer_Andreas)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_4,Restorehodoucity_Script_HideGymTrainer_Justin)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_5,Restorehodoucity_Script_HideGymTrainer_Jeffrey)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_6,Restorehodoucity_Script_HideGymTrainer_DaJuan)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_7,Restorehodoucity_Script_HideGymTrainer_Juan)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_8,Restorehodoucity_Script_HideGymTrainer_Jason)
     }
 }
