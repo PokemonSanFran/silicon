@@ -6010,7 +6010,12 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
             TryIncrementSpeciesSearchLevel();
         }
         else
+        // Start dexnav
+        {
+            EndDexNavSearch();
             gSaveBlock3Ptr->dexNavChain = 0;
+        }
+        // End dexnav
 
         ClearCurrentTrainerWantRematchVsSeeker();
         gDexNavSpecies = SPECIES_NONE;
