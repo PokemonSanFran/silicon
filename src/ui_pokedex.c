@@ -434,12 +434,12 @@ static bool32 AllocateStructs(void)
     sFilterSet = AllocZeroed(sizeof(struct FiltersSet));
     sFilterSetTemp = AllocZeroed(sizeof(struct FiltersSet));
 
-    return (sPokedexState == NULL
-            && sPokedexLists == NULL
-            && sPokedexGridResources == NULL
-            && sSpeciesListMenu == NULL
-            && sFilterSet == NULL
-            && sFilterSetTemp == NULL
+        return (sPokedexState == NULL
+            || sPokedexLists == NULL
+            || sPokedexGridResources == NULL
+            || sSpeciesListMenu == NULL
+            || sFilterSet == NULL
+            || sFilterSetTemp == NULL
             );
 }
 
