@@ -5208,13 +5208,11 @@ static void Task_ReturnToDexnav(u8 taskId)
     DestroyTask(taskId);
     struct DexnavSavedData tempData = sPokedexState->dexnavSavedData;
 
-    FreeAndDestroyMonPicSprite(SpeciesData_GetMonSpriteId());
-    FreeAndDestroyMonPicSprite(SpeciesData_GetShinyMonSpriteId());
     FreeSpritePalettesResetSpriteData();
+    FreeBackgrounds();
+    FreeAllWindowBuffers();
     FreePageStructs();
     FreePokedexStructs();
-    FreeAllWindowBuffers();
-    FreeBackgrounds();
-    FreeSpritePalettesResetSpriteData();
+    SpeciesData_RemoveMonSprite();
     Dexnav_ReturnFromPokedex(tempData);
 }
