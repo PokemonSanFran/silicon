@@ -56,7 +56,6 @@ static const u32* GetRelevantTilemap(u32);
 static void LoadPokedexPalettes(void);
 static void PlaySoundStartFadeQuitApp(u8);
 static void Task_WaitFadeAndExitGracefully(u8);
-static void FreeStructs(void);
 
 static void SpeciesGrid_ChangeSortAndReload(void);
 static u32 SpeciesGrid_IncrementSort(void);
@@ -778,18 +777,19 @@ void Pokedex_FreeResources(void)
     FreeSpritePalettesResetSpriteData();
 
     SpeciesFilter_ResetToDefault();
-    FreeStructs();
+    FreePokedexStructs();
     FreeBackgrounds();
     FreeAllWindowBuffers();
 }
 
-static void FreeStructs(void)
+void FreePokedexStructs(void)
 {
     TRY_FREE_AND_SET_NULL(sPokedexState);
     TRY_FREE_AND_SET_NULL(sPokedexLists);
     TRY_FREE_AND_SET_NULL(sPokedexGridResources);
     TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
     TRY_FREE_AND_SET_NULL(sFilterSet);
+    TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 void FreeBackgrounds(void)
@@ -798,7 +798,7 @@ void FreeBackgrounds(void)
 
     for (backgroundId = 0; backgroundId < BG_POKEDEX_COUNT; backgroundId++)
         if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
+            TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 }
 
 static void SpeciesGrid_ChangeSortAndReload(void)
@@ -2010,7 +2010,7 @@ static void SpeciesData_PrintCaught(enum PokedexPageWindows windowId, u32 fontId
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Caught {STR_VAR_1}/{STR_VAR_2}"));
     StringCopy(dexString, gStringVar4);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,dexString);
-    Free(dexString);
+    TRY_FREE_AND_SET_NULL(dexString);
 }
 
 static void SpeciesData_PrintFormName(u32 species, u32* padding)

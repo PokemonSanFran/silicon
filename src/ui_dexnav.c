@@ -828,7 +828,7 @@ static void Dexnav_FreeBackgrounds(void)
 {
     for (enum DexnavBackgrounds backgroundId = 0; backgroundId < BG_DEXNAV_COUNT; backgroundId++)
         if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
+            TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 }
 
 void CB2_DexnavFromStartMenu(void)
@@ -2514,7 +2514,6 @@ static void Dexnav_DisplayCursors(void)
 
 static void Dexnav_LaunchPokedex(u8 taskId)
 {
-    DebugPrintf("Dexnav_LaunchPokedex");
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     if (species == SPECIES_NONE)
         return;

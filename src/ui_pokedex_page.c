@@ -3848,7 +3848,7 @@ static void PageEvolution_PrintEvolutionDetails(void)
 
     BreakStringNaive(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
-    Free(string);
+    TRY_FREE_AND_SET_NULL(string);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -4734,7 +4734,7 @@ static void PageInformation_PrintHeight(u32 species, enum PokedexPageInformation
     x = POKEDEX_INFO_MEASUREMENT_VALUE_X_STARTING;
 
     PageMoves_BufferMoveNameToString(heightString, gStringVar1, fontId, PAGE_INFORMATION_WINDOW_DATA);
-    Free(heightString);
+    TRY_FREE_AND_SET_NULL(heightString);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
 }
 
@@ -4751,7 +4751,7 @@ static void PageInformation_PrintWeight(u32 species, enum PokedexPageInformation
     x = POKEDEX_INFO_MEASUREMENT_VALUE_X_STARTING;
 
     PageMoves_BufferMoveNameToString(weightString, gStringVar1, fontId, PAGE_INFORMATION_WINDOW_DATA);
-    Free(weightString);
+    TRY_FREE_AND_SET_NULL(weightString);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
 }
 
@@ -5134,7 +5134,7 @@ static void PageWeaknesses_PrintLegendText(void)
     PrependFontIdToFit(string, end, fontId, windowWidth);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, colors, TEXT_SKIP_DRAW,string);
-    Free(string);
+    TRY_FREE_AND_SET_NULL(string);
 }
 
 static void PageWeaknesses_DrawWindowFrame(u32 windowId)
@@ -5207,6 +5207,14 @@ static void Task_ReturnToDexnav(u8 taskId)
 
     DestroyTask(taskId);
     struct DexnavSavedData tempData = sPokedexState->dexnavSavedData;
-    Pokedex_FreeResources();
+
+    FreeAndDestroyMonPicSprite(SpeciesData_GetMonSpriteId());
+    FreeAndDestroyMonPicSprite(SpeciesData_GetShinyMonSpriteId());
+    FreeSpritePalettesResetSpriteData();
+    FreePageStructs();
+    FreePokedexStructs();
+    FreeAllWindowBuffers();
+    FreeBackgrounds();
+    FreeSpritePalettesResetSpriteData();
     Dexnav_ReturnFromPokedex(tempData);
 }

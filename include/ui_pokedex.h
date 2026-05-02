@@ -276,6 +276,7 @@ bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheck
 void Pokedex_SaveDexnavData(struct DexnavSavedData savedData);
 void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId);
 void Pokedex_FreeResources(void);
+void FreePokedexStructs(void);
 
 
 #endif // GUARD_UI_POKEDEX_H
