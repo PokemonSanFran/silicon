@@ -2533,6 +2533,7 @@ static void Task_DexnavFadeToPokedex(u8 taskId)
     if (gPaletteFade.active)
         return;
 
+    ResetGpuRegsAndBgs();
     struct DexnavSavedData tempData = Dexnav_GetSavedData();
     tempData.savedCallback = sDexnavState->savedCallback;
     Dexnav_FreeResources();
