@@ -6,7 +6,8 @@ mapscripts HodouCity_Gym_MapScripts{
     ]
     MAP_SCRIPT_ON_TRANSITION
     {
-        call(Quest_Restorehodoucity_HidePokemnon_Script)
+        call(Quest_Restorehodoucity_Script_LoadPewfatMons)
+        call_if_ne(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM,Quest_Restorehodoucity_HidePokemnon_Script)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Restorehodoucity_Script_HideGymTrainer_James)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Restorehodoucity_Script_HideGymTrainer_Adam)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_3,Restorehodoucity_Script_HideGymTrainer_Andreas)
