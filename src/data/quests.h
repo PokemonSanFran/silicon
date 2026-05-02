@@ -1300,6 +1300,14 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             COMPOUND_STRING("Recruited")
             ),
     sub_quest(151,
+            gText_Quest_RestoreHodouCity_Sub1_Name,
+            gText_Quest_RestoreHodouCity_Sub1_Desc,
+            gText_Quest_RestoreHodouCity_Sub1_Map,
+            OBJ_EVENT_GFX_BLACK_BELT,
+            QUEST_SPRITE_TYPE_OBJECT,
+            COMPOUND_STRING("Recruited")
+            ),
+    sub_quest(152,
             gText_Quest_RestoreHodouCity_Sub2_Name,
             gText_Quest_RestoreHodouCity_Sub2_Desc,
             gText_Quest_RestoreHodouCity_Sub2_Map,
@@ -1307,7 +1315,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(152,
+    sub_quest(153,
             gText_Quest_RestoreHodouCity_Sub3_Name,
             gText_Quest_RestoreHodouCity_Sub3_Desc,
             gText_Quest_RestoreHodouCity_Sub3_Map,
@@ -1315,7 +1323,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(153,
+    sub_quest(154,
             gText_Quest_RestoreHodouCity_Sub4_Name,
             gText_Quest_RestoreHodouCity_Sub4_Desc,
             gText_Quest_RestoreHodouCity_Sub4_Map,
@@ -1323,7 +1331,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(154,
+    sub_quest(155,
             gText_Quest_RestoreHodouCity_Sub5_Name,
             gText_Quest_RestoreHodouCity_Sub5_Desc,
             gText_Quest_RestoreHodouCity_Sub5_Map,
@@ -1331,7 +1339,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(155,
+    sub_quest(156,
             gText_Quest_RestoreHodouCity_Sub6_Name,
             gText_Quest_RestoreHodouCity_Sub6_Desc,
             gText_Quest_RestoreHodouCity_Sub6_Map,
@@ -1339,7 +1347,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Recruited")
             ),
-    sub_quest(156,
+    sub_quest(157,
             gText_Quest_RestoreHodouCity_Sub7_Name,
             gText_Quest_RestoreHodouCity_Sub7_Desc,
             gText_Quest_RestoreHodouCity_Sub7_Map,
@@ -1351,7 +1359,7 @@ static const struct SubQuest sRestoreHodouCity_Sub[QUEST_RESTOREHODOUGYM_SUB_COU
 
 static const struct SubQuest
 sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
-    sub_quest(157,
+    sub_quest(158,
             COMPOUND_STRING("EspuleetradepersonA"),
             COMPOUND_STRING("You traded a Red Scale for Bluesky Mail at Wajabi Lake."),
             COMPOUND_STRING("???"),
@@ -1359,7 +1367,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(158,
+    sub_quest(159,
             COMPOUND_STRING("EspuleetradepersonB"),
             COMPOUND_STRING("You traded a Bluesky Mail for some Tea in Qiu Village."),
             COMPOUND_STRING("???"),
@@ -1367,7 +1375,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(159,
+    sub_quest(160,
             COMPOUND_STRING("EspuleetradepersonC"),
             COMPOUND_STRING("You traded Tea for an Egg Ticket in Hodou City."),
             COMPOUND_STRING("???"),
@@ -1375,7 +1383,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(160,
+    sub_quest(161,
             COMPOUND_STRING("EspuleetradepersonD"),
             COMPOUND_STRING("You traded an Egg Ticket for an Odd Egg at Chasilla Breeding Center."),
             COMPOUND_STRING("???"),
@@ -1383,7 +1391,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(161,
+    sub_quest(162,
             COMPOUND_STRING("EspuleetradepersonE"),
             COMPOUND_STRING("You traded an Odd Egg for a Bottle Cap in Cureno Port."),
             COMPOUND_STRING("???"),
@@ -1391,7 +1399,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(162,
+    sub_quest(163,
             COMPOUND_STRING("EspuleetradepersonF"),
             COMPOUND_STRING("EspuleetradepersonF helped evolved Stantler in exchange for a Bottle Cap in Halerba City."),
             COMPOUND_STRING("???"),
@@ -1403,7 +1411,7 @@ sRestoreEspuleeOutskirts_Sub[QUEST_RESTOREESPULEEGYM_SUB_COUNT] = {
 
 static const struct SubQuest
 sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
-    sub_quest(163,
+    sub_quest(164,
             COMPOUND_STRING("Fundraiser"),
             COMPOUND_STRING("Montyopp agreed to help with Doyle's movie efforts."),
             COMPOUND_STRING("Caphe City"),
@@ -1411,7 +1419,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(164,
+    sub_quest(165,
             COMPOUND_STRING("Visual Effects"),
             COMPOUND_STRING("Drughelmettester agreed to help with Doyle's movie efforts."),
             COMPOUND_STRING("Irisina Town"),
@@ -1419,7 +1427,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(165,
+    sub_quest(166,
             COMPOUND_STRING("Actors"),
             COMPOUND_STRING("ImprovtroupeA agreed to help with Doyle's movie efforts."),
             COMPOUND_STRING("Petarosa Borough"),
@@ -1427,7 +1435,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(166,
+    sub_quest(167,
             COMPOUND_STRING("Lighting"),
             COMPOUND_STRING("Arcademini agreed to help with Doyle's movie efforts."),
             COMPOUND_STRING("Popidora Pier"),
@@ -1435,7 +1443,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Found")
             ),
-    sub_quest(167,
+    sub_quest(168,
             COMPOUND_STRING("Producer"),
             COMPOUND_STRING("Stresscuporganizer agreed to help with Doyle's movie efforts."),
             COMPOUND_STRING("Cresalta Vista"),
@@ -1446,7 +1454,7 @@ sRestoreZenzuIsland_Sub[QUEST_RESTOREZENZUGYM_SUB_COUNT] = {
 };
 static const struct SubQuest
     sRecruitLocalArtists_Sub[QUEST_RECRUITLOCALARTISTS_SUB_COUNT] = {
-    sub_quest(168,
+    sub_quest(169,
             gText_Quest_Recruitlocalartists_Sub1_Name,
             gText_Quest_Recruitlocalartists_Sub1_Desc,
             gText_Quest_Recruitlocalartists_Sub1_Map,
@@ -1454,7 +1462,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(169,
+    sub_quest(170,
             gText_Quest_Recruitlocalartists_Sub2_Name,
             gText_Quest_Recruitlocalartists_Sub2_Desc,
             gText_Quest_Recruitlocalartists_Sub2_Map,
@@ -1462,7 +1470,7 @@ static const struct SubQuest
             QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Caught")
 	),
-    sub_quest(170,
+    sub_quest(171,
             gText_Quest_Recruitlocalartists_Sub3_Name,
             gText_Quest_Recruitlocalartists_Sub3_Desc,
             gText_Quest_Recruitlocalartists_Sub3_Map,
@@ -1474,21 +1482,21 @@ static const struct SubQuest
 
 static const struct SubQuest sDiggingUpAdaorasDirt_Sub[QUEST_DIGGINGUPADAORASDIRT_SUB_COUNT] =
 {
-    sub_quest(171, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(172, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(173, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(174, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(172, COMPOUND_STRING("Influence"), COMPOUND_STRING("A member of The Tide told us that they were inspired to join The Tide because of Adaora's public work."), gText_Route2, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERA, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(173, COMPOUND_STRING("Leadership"), COMPOUND_STRING("Adaora and Vigrim work in intandem to decide how The Tide will act."), gText_Route12, OBJ_EVENT_GFX_DIGGINGTIDEMEMBERB, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(174, COMPOUND_STRING("Growing Up"), COMPOUND_STRING("Adaora's mom explained that Adaora always had a passion for battles but they could never afford it. Adaora's mom asked us to keep their identity a secret."), gText_QiuVillage, OBJ_EVENT_GFX_ADAORAPARENT, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(175, COMPOUND_STRING("Hodou Gym"), COMPOUND_STRING("Kei-Ying told us about his connection to Adaora."), gText_HodouCity, OBJ_EVENT_GFX_UNKNOWN, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
 };
 
 static const struct SubQuest sFreeTheInnocent_Sub[QUEST_FREETHEINNOCENT_SUB_COUNT] =
 {
-    sub_quest(175, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(176, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(177, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(178, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(179, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
-    sub_quest(180, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
-    sub_quest(181, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(176, COMPOUND_STRING("FreetheinnocenthikerC"), COMPOUND_STRING("FreetheinnocenthikerC recalled that FindtheguiltyvictimB was drinking boba the morning of the incident."), gText_Route9, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERC, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(177, COMPOUND_STRING("FreetheinnocenthikerD"), COMPOUND_STRING("FreetheinnocenthikerD explained that during the hike, people stopped in Tora Town for a break."), gText_Robinwilltunnel, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(178, COMPOUND_STRING("FreetheinnocenthikerF"), COMPOUND_STRING("FreetheinnocenthikerF doesn't remember much beyond starting at Torgeot Climb."), gText_Route10, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(179, COMPOUND_STRING("FreetheinnocenthikerG"), COMPOUND_STRING("FreetheinnocenthikerG says the hike ended at the top of Anbeh Bend."), gText_Route7, OBJ_EVENT_GFX_FREETHEINNOCENTHIKERD, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(180, COMPOUND_STRING("FindtheguiltyplantH"), COMPOUND_STRING("FindtheguiltyplantH remembers that FindtheguiltyvictimB had a boba that day and was really amped the day of the incident."), gText_PiocaBridge, OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH, QUEST_SPRITE_TYPE_OBJECT, COMPOUND_STRING("")),
+    sub_quest(181, COMPOUND_STRING("Boba in Trash"), COMPOUND_STRING("FindtheguiltyvictimB's cup of boba was in the trash. It's from the shop in Cresalta Vista!"), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_BOBA, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
+    sub_quest(182, COMPOUND_STRING("Cresalta Boba"), COMPOUND_STRING("Freetheinnocentbobacashier remembers FindtheguiltyvictimB eating a Spiked Concha that day."), COMPOUND_STRING("???"), ITEM_QUEST_FREETHEINNOCENT_ALIBI, QUEST_SPRITE_TYPE_ITEM, COMPOUND_STRING("")),
 };
 ////////////////////////END SUBQUEST CUSTOMIZATION/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
