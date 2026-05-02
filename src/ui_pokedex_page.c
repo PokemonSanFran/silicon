@@ -1041,23 +1041,9 @@ static void Task_PreapreScreenPageToGrid(u8 taskId)
 
 static void FreePageStructs(void)
 {
-    enum PokedexPages page = GetCurrentPage();
-
-    if (page == POKEDEX_PAGE_MOVES)
-    {
-        if (sPokedexMovesPageData != NULL)
-            Free(sPokedexMovesPageData);
-    }
-    else if (page == POKEDEX_PAGE_EVOLUTION || page == POKEDEX_PAGE_FORMS || page == POKEDEX_PAGE_STATS)
-    {
-        if (sPokedexEvolutionPageData != NULL)
-            Free(sPokedexEvolutionPageData);
-    }
-    else if (page == POKEDEX_PAGE_LOCATION)
-    {
-        if (sPokedexLocationPageData != NULL)
-            Free(sPokedexLocationPageData);
-    }
+    TRY_FREE_AND_SET_NULL(sPokedexMovesPageData);
+    TRY_FREE_AND_SET_NULL(sPokedexEvolutionPageData);
+    TRY_FREE_AND_SET_NULL(sPokedexLocationPageData);
 }
 
 u8* GetMovePageHelpText(void)
