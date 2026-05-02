@@ -821,8 +821,7 @@ static void Dexnav_FreeResources(void)
 
 static void Dexnav_FreeStructs(void)
 {
-    if (sDexnavState != NULL)
-        Free(sDexnavState);
+    TRY_FREE_AND_SET_NULL(sDexnavState);
 }
 
 static void Dexnav_FreeBackgrounds(void)
@@ -2515,6 +2514,7 @@ static void Dexnav_DisplayCursors(void)
 
 static void Dexnav_LaunchPokedex(u8 taskId)
 {
+    DebugPrintf("Dexnav_LaunchPokedex");
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     if (species == SPECIES_NONE)
         return;
