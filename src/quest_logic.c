@@ -4285,3 +4285,41 @@ void Quest_Restorehodoucity_LoadKevinPokemon(void)
 {
     Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
 }
+
+// ***********************************************************************
+// Cutscene: Housing Protest
+// ***********************************************************************
+
+void HousingProtest_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_FLAMETHROWER;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_ARCANINE, trainer = TRAINER_HOUSINGPROTEST_B;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        species = mon.species;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}

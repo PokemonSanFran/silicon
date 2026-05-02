@@ -169,8 +169,9 @@ script HousingProtest_LandlordTalkToCrowd_Dialogue {
     playse(SE_BALL_OPEN)
     waitse
     clearflag(FLAG_TEMP_2)
+    callnative(HousingProtest_BufferMostPowerfulAttackAndMove)
     addobject(ARCANINE)
-    playmoncry(SPECIES_ARCANINE, CRY_MODE_ENCOUNTER)
+    playmoncry(VAR_TEMP_0, CRY_MODE_ENCOUNTER)
     waitmoncry
     msgbox(format("Look, I'm just the super. I don't own this building, but I am responsible for making sure you don't trash it. I'm trying to reason with you and you're threatening me?"),,SPEAKER_LANDLORD)
     msgbox(format("I don't care if you're the landlord or working for the landlord, and I promise if you don't get out of the way, we're gonna have a problem."),,SPEAKER_VITOMIR)
@@ -206,11 +207,10 @@ script HousingProtest_StartBattle_PostSave_Script {
 
 script HousingScript_StartActualBattle_Script
 {
-    bufferspeciesname(STR_VAR_1,SPECIES_ARCANINE)
-    buffermovename(STR_VAR_1,MOVE_FLAMETHROWER)
+    callnative(HousingProtest_BufferMostPowerfulAttackAndMove)
     msgbox(format("Pfft, fine with me. {STR_VAR_1}, {STR_VAR_2}!"),,SPEAKER_VITOMIR)
     closemessage
-    trainerbattle_no_intro(TRAINER_HOUSINGPROTEST_ROCKET,format("Shit... this is not how this was supposed to go down."))
+    trainerbattle_two_trainers(TRAINER_HOUSINGPROTEST_A,format("Shit..."),TRAINER_HOUSINGPROTEST_B,format("This is not how this was supposed to go down."))
     goto(HousingProtest_PostBattle_Dialogue)
 }
 
