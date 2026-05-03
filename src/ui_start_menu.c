@@ -279,15 +279,6 @@ enum StartMenuHpBarPercentage
     NUM_START_HP_BAR_PERCENTAGES
 };
 
-enum StartMenuCellularSignals
-{
-    START_SIGNAL_NONE,
-    START_SIGNAL_OKAY,
-    START_SIGNAL_STRONG,
-
-    NUM_START_SIGNALS
-};
-
 enum StartMenuSetupSteps
 {
     START_SETUP_RESET = 0,
@@ -481,7 +472,6 @@ static void StartMoveMode_Exit(void);
 static bool32 StartMoveMode_SwapApps(void);
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
 static void CellularSignal_StrengthError(u8);
 static void Task_StrengthError_Init(u8);
 
@@ -2462,7 +2452,7 @@ static bool32 StartMoveMode_SwapApps(void)
 
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
+enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
 {
     u32 mapType = GetCurrentMapType();
 
