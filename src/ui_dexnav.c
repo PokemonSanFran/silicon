@@ -2514,6 +2514,9 @@ static void Dexnav_DisplayCursors(void)
 
 static void Dexnav_LaunchPokedex(u8 taskId)
 {
+    // PSF TODO
+    // 1) when switching to this screen, the screen flashes white and pink and I have no idea why
+    // 2) when switching to dexnav, if you go back and forth between the dex and the dexnav, SOMETHING is not correctly being freed after an Alloc. this can be seen by uncommenting the MonitorHeapOnAlloc and MonitorHeapOnFree and after 5 switches, pokemon sprites stop building
     u32 species = Dexnav_GetCurrentlySelectedSpecies();
     if (species == SPECIES_NONE)
         return;
