@@ -139,7 +139,6 @@ static bool8 Dexnav_ShouldHideAbilityIndicator(void);
 static bool8 Dexnav_ShouldDisplayAbilityName(void);
 static enum Ability Dexnav_GetSearchingAbility(void);
 static void Dexnav_PrintAbility(enum DexnavWindows windowId);
-static void Dexnav_ScanMode_DisplayMonInfo(void);
 static void Dexnav_ScanMode_DisplayFirstMove(void);
 static bool8 Dexnav_ShouldHideMoveIndicator(void);
 static bool8 Dexnav_ShouldDisplayMoveName(void);
@@ -2484,42 +2483,17 @@ static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32
     return sDexnavState->dexnavSpecies[habitat][speciesIndex];
 }
 
-static void SpriteCB_FAB(struct Sprite *sprite)
-{
-    enum DexnavMode mode = Dexnav_GetMode();
-    StartSpriteAnimIfDifferent(sprite,mode);
-}
-
-static const union AnimCmd sAnim_FAB_Scan[] = 
-{
-    ANIMCMD_FRAME(DEXNAV_FAB_FRAME_SCAN,4),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_FAB_Cancel[] = 
-{
-    ANIMCMD_FRAME(DEXNAV_FAB_FRAME_CANCEL,4),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd * const sSpriteAnimTable_FAB[] =
-{
-    sAnim_FAB_Cancel,
-    sAnim_FAB_Scan,
-};
-
 static void Dexnav_PrintFloatingActionButton(void)
 {
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_FAB;
-    TempSpriteTemplate.callback = SpriteCB_FAB;
     TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
-    TempSpriteTemplate.anims = sSpriteAnimTable_FAB;
 
     u32 spriteId = CreateSprite(&TempSpriteTemplate, 210, 116, 0);
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
+    gSprites[spriteId].invisible = Dexnav_IsCurrentModeScan();
     gSprites[spriteId].oam.priority = 0;
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_FAB,spriteId);
 }
@@ -3238,12 +3212,6 @@ static void Dexnav_ScanMode_DisplayFirstMove(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     Dexnav_PrintMove(windowId);
     CopyWindowToVram(windowId, COPYWIN_GFX);
-}
-
-static void Dexnav_ScanMode_DisplayMonInfo(void)
-{
-    if (Dexnav_IsCurrentModeScan() == FALSE)
-        return;
 }
 
 static const union AnimCmd sAnim_InidicatorAbility[] = 
