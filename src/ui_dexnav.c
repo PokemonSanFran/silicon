@@ -2993,7 +2993,7 @@ u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment)
     if (chance > 100)
         chance = 100;
 
-    u32 levelBonus = insight / 5;
+    u32 levelBonus = insight / (DEXNAV_MAX_INSIGHT / DEXNAV_MAX_LEVEL_BONUS_FROM_INSIGHT);
 
     if ((Random() % 100) < chance)
         levelBonus += 10;
