@@ -1,0 +1,32 @@
+script EventScript_AskRestoreScript
+{
+	lock
+	callnative(Script_Dexnav_CalculateRestoreStreakCost)
+	variablecheckmoney(VAR_TEMP_1)
+	if (var(VAR_RESULT) == FALSE)
+	{
+		callnative(TryStartDexNavSearch)
+		release
+		end
+	}
+
+    showmoneybox(0,0)
+	callnative(Dexnav_BufferPreviousStreakAndCost)
+	msgbox(format("Do you want to restore your previous Dexnav streak of {STR_VAR_1}? It will cost ¥{STR_VAR_2}."),MSGBOX_YESNO)
+
+	if (var(VAR_RESULT) == YES)
+	{
+		callnative(Dexnav_RestorePreviousChain)
+		callnative(Dexnav_ResetPreviousChain)
+	}
+	
+	variableremovemoney(VAR_TEMP_1)
+	updatemoneybox
+	playse(SE_SHOP)
+	waitse
+	hidemoneybox
+	callnative(TryStartDexNavSearch)
+	closemessage
+	release
+	end
+}

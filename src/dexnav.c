@@ -997,6 +997,13 @@ static void RevealHiddenSearch(void)
 
 bool32 TryStartDexNavSearch(void)
 {
+    // Start dexnav
+    if (Dexnav_IsPreviousChainGreaterThanCurrent())
+    {
+        ScriptContext_SetupScript(EventScript_AskRestoreScript);
+        return TRUE;
+    }
+    // End dexnav
     u16 val = VarGet(DN_VAR_SPECIES);
 
     if (FlagGet(DN_FLAG_SEARCHING) && sDexNavSearchDataPtr->hiddenSearch)
@@ -2767,7 +2774,6 @@ void TryIncrementSpeciesSearchLevel()
 
 void ResetDexNavSearch(void)
 {
-    Dexnav_SavePreviousChain();
     gSaveBlock3Ptr->dexNavChain = 0;    //reset dex nav chaining on new map
     VarSet(DN_VAR_STEP_COUNTER, 0); //reset hidden pokemon step counter
     if (FlagGet(DN_FLAG_SEARCHING))

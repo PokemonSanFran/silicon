@@ -1792,6 +1792,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/scripts/dexnav.inc"
+	.include "data/scripts/ui_dexnav.inc" @ dexnav
 @ Start siliconMerge
 ## SILICON COMMON
 .include "data/scripts/overworld.inc"

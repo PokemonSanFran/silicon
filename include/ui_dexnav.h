@@ -43,6 +43,7 @@ void Dexnav_SetupCallback(void);
 void Dexnav_ReturnFromPokedex(struct DexnavSavedData savedData);
 void Dexnav_DrawOverworldSearchIcon(void);
 void Dexnav_FreeOverworldSpriteResources(void);
+bool8 Dexnav_IsPreviousChainGreaterThanCurrent(void);
 void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves);
 bool8 Dexnav_CalculateShinyRolls(u32 streak);
 u32 Dexnav_CalculateLevel(u32 species, enum EncounterType environment);

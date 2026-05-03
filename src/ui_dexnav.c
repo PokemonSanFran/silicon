@@ -49,6 +49,7 @@ static void Dexnav_VBlankCB(void);
 static void Dexnav_PrintOverworldIndicators(void);
 static void Dexnav_MainCB(void);
 static bool8 Dexnav_InitalizeBackgrounds(void);
+static u32 Dexnav_CalculateRestoreStreakCost(void);
 static void Dexnav_ReturnFromAdventureGuide(void);
 static void Dexnav_SetSavedHabitat(enum DexnavHabitats habitat);
 static void Dexnav_RemoveStatIndicator(u32 position);
@@ -3306,6 +3307,19 @@ void Dexnav_RestorePreviousChain(void)
     gSaveBlock3Ptr->dexNavChain = Dexnav_GetPreviousChain();
 }
 
+void Dexnav_ResetPreviousChain(void)
+{
+    Dexnav_SetPreviousChain(0);
+}
+
+void Dexnav_BufferPreviousStreakAndCost(void)
+{
+    u32 streak = Dexnav_GetPreviousChain();
+    u32 cost = Dexnav_CalculateRestoreStreakCost();
+    ConvertIntToDecimalStringN(gStringVar1,streak,STR_CONV_MODE_LEFT_ALIGN,CountDigits(streak));
+    ConvertIntToDecimalStringN(gStringVar2,cost,STR_CONV_MODE_LEFT_ALIGN,CountDigits(cost));
+}
+
 static void Dexnav_SetPreviousChain(u32 chain)
 {
     gSaveBlock3Ptr->previousDexNavChain = chain;
@@ -3314,4 +3328,20 @@ static void Dexnav_SetPreviousChain(u32 chain)
 static u32 Dexnav_GetPreviousChain(void)
 {
     return gSaveBlock3Ptr->previousDexNavChain;
+}
+
+bool8 Dexnav_IsPreviousChainGreaterThanCurrent(void)
+{
+    return (Dexnav_GetPreviousChain() > gSaveBlock3Ptr->dexNavChain);
+}
+
+static u32 Dexnav_CalculateRestoreStreakCost(void)
+{
+    u32 streak = Dexnav_GetPreviousChain();
+    return (DEXNAV_RESTORE_STREAK_COST * streak);
+}
+
+void Script_Dexnav_CalculateRestoreStreakCost(void)
+{
+    VarSet(VAR_TEMP_1,Dexnav_CalculateRestoreStreakCost());
 }
