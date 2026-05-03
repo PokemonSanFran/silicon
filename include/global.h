@@ -359,6 +359,7 @@ struct SaveBlock3
     */
     // End dexNav
     u8 dexNavChain;
+    u8 previousDexNavChain;
     u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
     u8 lastGrottoId;
 #if APRICORN_TREE_COUNT > 0

@@ -1032,6 +1032,7 @@ void EndDexNavSearch(void)
 
 static void EndDexNavSearchSetupScript(const u8 *script)
 {
+    Dexnav_SavePreviousChain();
     gSaveBlock3Ptr->dexNavChain = 0;   //reset chain
     EndDexNavSearch();
     ScriptContext_SetupScript(script);
@@ -2766,6 +2767,7 @@ void TryIncrementSpeciesSearchLevel()
 
 void ResetDexNavSearch(void)
 {
+    Dexnav_SavePreviousChain();
     gSaveBlock3Ptr->dexNavChain = 0;    //reset dex nav chaining on new map
     VarSet(DN_VAR_STEP_COUNTER, 0); //reset hidden pokemon step counter
     if (FlagGet(DN_FLAG_SEARCHING))

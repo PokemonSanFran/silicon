@@ -77,6 +77,8 @@ static bool8 Dexnav_SwitchHabitat(void);
 static void Dexnav_FreeBackgrounds(void);
 static void Dexnav_InitializeAndSaveCallback(MainCallback callback, struct DexnavSavedData savedData);
 static void SaveCallbackToDexnav(MainCallback callback);
+static void Dexnav_SetPreviousChain(u32 chain);
+static u32 Dexnav_GetPreviousChain(void);
 static void Dexnav_InitWindows(void);
 static void Task_HandleInput(u8 taskId);
 static void Dexnav_DisplayStatIndicator(u32 count, u32 position);
@@ -3292,4 +3294,24 @@ static void Dexnav_PrintOverworldIndicators(void)
         Dexnav_SaveSpriteId(DEXNAV_SPRITEID_INDICATOR_START + indicator,spriteId);
         StartSpriteAnimIfDifferent(&gSprites[spriteId], indicator);
     }
+}
+
+void Dexnav_SavePreviousChain(void)
+{
+    Dexnav_SetPreviousChain(gSaveBlock3Ptr->dexNavChain);
+}
+
+void Dexnav_RestorePreviousChain(void)
+{
+    gSaveBlock3Ptr->dexNavChain = Dexnav_GetPreviousChain();
+}
+
+static void Dexnav_SetPreviousChain(u32 chain)
+{
+    gSaveBlock3Ptr->previousDexNavChain = chain;
+}
+
+static u32 Dexnav_GetPreviousChain(void)
+{
+    return gSaveBlock3Ptr->previousDexNavChain;
 }

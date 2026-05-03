@@ -54,5 +54,7 @@ void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies);
 void Dexnav_StartFieldEffect(void);
 void Task_Dexnav_Init(u8 taskId);
 bool32 Dexnav_OpenScanMode(void);
+void Dexnav_SavePreviousChain(void);
+void Dexnav_RestorePreviousChain(void);
   
 #endif // GUARD_UI_DEXNAV_H
