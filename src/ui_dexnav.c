@@ -43,6 +43,7 @@ static void Dexnav_RestoreFromSave(struct DexnavSavedData savedData);
 static bool8 Dexnav_IsThereSavedData(void);
 static enum DexnavHabitats Dexnav_GetSavedHabitat(void);
 static u8 Dexnav_GetSavedCursorPosition(void);
+static bool8 Dexnav_ShouldDisplayStats(void);
 static u16 Dexnav_GetSavedSpecies(void);
 static void Dexnav_VBlankCB(void);
 static void Dexnav_PrintOverworldIndicators(void);
@@ -1941,9 +1942,6 @@ static void SpriteCB_DexnavTypes(struct Sprite *sprite)
 
 static bool8 Dexnav_ShouldHideLevelIndicator(void)
 {
-    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
-        return TRUE;
-
     return (Dexnav_GetLevelFlag() == FALSE);
 }
 
@@ -2395,7 +2393,7 @@ static void Dexnav_DisplayAllStatIndicator(void)
     if (Dexnav_IsCurrentModeScan() == FALSE)
         return;
 
-    u32 count = Dexnav_GetStatFlag();
+    u32 count = (Dexnav_ShouldDisplayStats()) ? Dexnav_GetStatFlag() : 0;
 
     for (u32 position = 1; position < DEXNAV_MAX_SHOWN_MONS; position++)
         Dexnav_DisplayStatIndicator(count, position);
@@ -3103,21 +3101,20 @@ static void Dexnav_ScanMode_DisplayAbility(void)
 
 static bool8 Dexnav_ShouldHideItemIndicator(void)
 {
-    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
-        return TRUE;
-
     return (Dexnav_GetItemFlag() == FALSE);
 }
 
 static bool8 Dexnav_ShouldHideAbilityIndicator(void)
 {
-    if (Dexnav_ShouldDisplayAbilityName() == FALSE)
-        return TRUE;
-
     return (Dexnav_GetAbilityFlag() == FALSE);
 }
 
 static bool8 Dexnav_ShouldDisplayAbilityName(void)
+{
+    return (Dexnav_GetOverworldProximity() <= SNEAKING_PROXIMITY);
+}
+
+static bool8 Dexnav_ShouldDisplayStats(void)
 {
     return (Dexnav_GetOverworldProximity() <= SNEAKING_PROXIMITY);
 }
@@ -3158,9 +3155,6 @@ static void Dexnav_PrintAbility(enum DexnavWindows windowId)
 
 static bool8 Dexnav_ShouldHideMoveIndicator(void)
 {
-    if (Dexnav_ShouldDisplayMoveName() == FALSE)
-        return TRUE;
-
     return (Dexnav_GetMoveFlag() == FALSE);
 }
 
