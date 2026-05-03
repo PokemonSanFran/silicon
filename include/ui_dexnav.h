@@ -28,6 +28,7 @@ struct DexnavState
     u16 dexnavSpecies[DEXNAV_HABITAT_COUNT][DEXNAV_MAX_SHOWN_MONS];
     bool8 fishingMons[DEXNAV_MAX_SHOWN_MONS];
     struct DexnavSavedData savedData;
+    bool8 shouldReturnToOverworld;
 };
 
 struct DexnavSpriteSheet
@@ -51,5 +52,7 @@ u8 Dexnav_CalculateAbilityNum(u32 species, u32 insight);
 u8 Dexnav_CalculatePotential(u32 insight);
 void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies);
 void Dexnav_StartFieldEffect(void);
+void Task_Dexnav_Init(u8 taskId);
+bool32 Dexnav_OpenScanMode(void);
   
 #endif // GUARD_UI_DEXNAV_H

@@ -6,6 +6,7 @@
 #include "daycare.h"
 #include "debug.h"
 #include "dexnav.h"
+#include "ui_dexnav.h" // dexnav
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -317,6 +318,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
+
+    //Start dexnav
+    if (input->pressedStartButton && FlagGet(DN_FLAG_SEARCHING) && Dexnav_OpenScanMode())
+        return TRUE;
+    //End dexnav
 
 // Start siliconMerge
     if (input->pressedStartButton && StartMenu_OpenNormalMode())

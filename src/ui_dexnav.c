@@ -2,6 +2,8 @@
 #include "battle.h"
 #include "bg.h"
 #include "daycare.h"
+#include "field_player_avatar.h"
+#include "event_object_movement.h"
 #include "dexnav.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -86,8 +88,12 @@ static enum DexnavHabitats Dexnav_GetHabitat(void);
 static void Dexnav_DisplayOverworldPokemon(void);
 static bool8 Dexnav_HasMultipleHabitats(void);
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void);
+static void Dexnav_CreateHandleTask(void);
 static u8 Dexnav_GetNumberHabitatMons(enum DexnavHabitats habitat);
 static void Dexnav_LoadEncounterData(void);
+static void Dexnav_SetFlagToReturnToOverworld(bool32 state);
+static bool8 Dexnav_GetFlagToReturnToOverworld(void);
+static void Task_HandleScanInput(u8 taskId);
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void);
 static enum DexnavMode Dexnav_CalculateInitialMode(void);
 static bool8 Dexnav_ShouldHideCompletionMark(void);
@@ -797,7 +803,11 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    SetMainCallback2(sDexnavState->savedCallback);
+    if (Dexnav_GetFlagToReturnToOverworld())
+        SetMainCallback2(CB2_ReturnToField);
+    else
+        SetMainCallback2(sDexnavState->savedCallback);
+
     Dexnav_FreeResources();
     DestroyTask(taskId);
 }
@@ -835,6 +845,40 @@ void CB2_DexnavFromStartMenu(void)
 {
     struct DexnavSavedData savedData = {DEXNAV_HABITAT_NONE, 0, SPECIES_NONE};
     Dexnav_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI, savedData);
+}
+
+void Task_Dexnav_Init(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+
+    CleanupOverworldWindowsAndTilemaps();
+    struct DexnavSavedData savedData = {DEXNAV_HABITAT_NONE, 0, SPECIES_NONE};
+    Dexnav_InitializeAndSaveCallback(CB2_StartMenu_ReturnToUI, savedData);
+    DestroyTask(taskId);
+}
+
+bool32 Dexnav_OpenScanMode(void)
+{
+    if (gPlayerAvatar.preventStep)
+        return FALSE;
+
+    if (ArePlayerFieldControlsLocked())
+        return FALSE;
+
+    if (!IsOverworldLinkActive())
+    {
+        FreezeObjectEvents();
+        PlayerFreeze();
+        StopPlayerAvatar();
+    }
+
+    PlaySE(SE_WIN_OPEN);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    CreateTask(Task_Dexnav_Init, 0);
+    LockPlayerFieldControls();
+
+    return TRUE;
 }
 
 static void Dexnav_InitializeAndSaveCallback(MainCallback callback, struct DexnavSavedData savedData)
@@ -953,7 +997,6 @@ void Dexnav_SetupCallback(void)
             gMain.state++;
             break;
         case 2:
-            CreateTask(Task_HandleInput,0);
             Dexnav_LoadEncounterData();
             Dexnav_SetHabitat(Dexnav_CalculateInitialHabitat());
             Dexnav_SetMode(Dexnav_CalculateInitialMode());
@@ -984,11 +1027,20 @@ void Dexnav_SetupCallback(void)
             gMain.state++;
             break;
         case 4:
+            Dexnav_CreateHandleTask();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             SetVBlankCallback(Dexnav_VBlankCB);
             SetMainCallback2(Dexnav_MainCB);
             break;
     }
+}
+
+static void Dexnav_CreateHandleTask(void)
+{
+    if (Dexnav_IsCurrentModeScan())
+        CreateTask(Task_HandleScanInput,0);
+    else
+        CreateTask(Task_HandleInput,0);
 }
 
 static void Dexnav_InitializeBackgroundsAndLoadBackgroundGraphics(void)
@@ -1029,6 +1081,32 @@ static void Dexnav_InitWindows(void)
         baseBlock += (templates[windowId].width * templates[windowId].height);
     }
     DeactivateAllTextPrinters();
+}
+
+static void Dexnav_SetFlagToReturnToOverworld(bool32 state)
+{
+    sDexnavState->shouldReturnToOverworld = state;
+}
+
+static bool8 Dexnav_GetFlagToReturnToOverworld(void)
+{
+    return sDexnavState->shouldReturnToOverworld;
+}
+
+static void Task_HandleScanInput(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON))
+    {
+        Dexnav_SetFlagToReturnToOverworld(TRUE);
+        PlaySoundStartFadeQuitApp(taskId);
+        return;
+    }
+
+    if (JOY_NEW(START_BUTTON) || JOY_REPEAT(START_BUTTON))
+    {
+        PlaySoundStartFadeQuitApp(taskId);
+        return;
+    }
 }
 
 static void Task_HandleInput(u8 taskId)
@@ -1122,7 +1200,7 @@ static void Dexnav_PrintHelpBarText(enum DexnavWindows windowId)
 
     if (isScanMode)
     {
-        StringCopy(gStringVar4, COMPOUND_STRING("{A_BUTTON} Overworld {START_BUTTON} Start Menu {B_BUTTON} Cancel Search"));
+        StringCopy(gStringVar4, COMPOUND_STRING("{B_BUTTON} Overworld {START_BUTTON} Start Menu"));
     }
     else
     {
