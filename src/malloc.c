@@ -27,7 +27,7 @@ void PutFirstMemBlockHeader(void *block, u32 size)
     PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
-void MonitorHeapOnAlloc(struct MemBlock *head, u32 size, const char *location, void *ptr)
+void UNUSED MonitorHeapOnAlloc(struct MemBlock *head, u32 size, const char *location, void *ptr)
 {
     u32 totalHeapSize = 0;
     u32 freeHeapSize = 0;
@@ -53,7 +53,7 @@ void MonitorHeapOnAlloc(struct MemBlock *head, u32 size, const char *location, v
     (void)percent;
 }
 
-void MonitorHeapOnFree(struct MemBlock *head, void *pointer, const char *location)
+void UNUSED MonitorHeapOnFree(struct MemBlock *head, void *pointer, const char *location)
 {
     u32 totalHeapSize = 0;
     u32 freeHeapSize = 0;
@@ -131,7 +131,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 pos->locationHi = ((uintptr_t)location) >> 14;
                 pos->locationLo = (uintptr_t)location;
 
-                MonitorHeapOnAlloc(head, size, location, pos->data);
+                //MonitorHeapOnAlloc(head, size, location, pos->data);
                 return pos->data;
             }
         }
@@ -175,7 +175,7 @@ void FreeInternal(void *heapStart, void *pointer)
         AGB_ASSERT(block->allocated == TRUE);
         block->allocated = FALSE;
 
-        MonitorHeapOnFree(head, pointer, (const char *)(ROM_START | (block->locationHi << 14) | block->locationLo));
+        //MonitorHeapOnFree(head, pointer, (const char *)(ROM_START | (block->locationHi << 14) | block->locationLo));
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.
