@@ -20,8 +20,20 @@ script Earthquake_HideObject_Script {
         turnobject(BAIYA,DIR_NORTH)
 }
 
-script Earthquake_HideTransport_Script{
-    if (var(VAR_HALAI_ISLAND_STATE) > START_CHAMPIONSHIP_CLEAN_RAID && var(VAR_HALAI_ISLAND_STATE) < MEET_AT_ROUTE4){
+script Earthquake_Script_PlayCrisisMusic
+{
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))
+    {
+        playbgm(MUS_EARTHQUAKE,TRUE)
+    }
+}
+
+script Earthquake_HideTransport_Script
+{
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT))
+    {
         setflag(FLAG_HIDE_TRANSPORT)
     }
 }
@@ -63,7 +75,7 @@ script Earthquake_ThatNight_Dialogue
 
     msgbox(format("That night…"))
     closemessage
-    fadescreenswapbuffers(FADE_FROM_BLACK)
+    fadescreen(FADE_FROM_BLACK)
 
     call(Earthquake_PlayFake_EventScript)
 
@@ -76,6 +88,7 @@ script Earthquake_ThatNight_Dialogue
     msgbox(format("{PLAYER}, are you okay?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
             closemessage
 
+    playbgm(MUS_EARTHQUAKE,FALSE)
     msgbox(format("Oh no!"),MSGBOX_DEFAULT,SPEAKER_RESIDENT_A,TAIL_SHOUT)
     closemessage
 

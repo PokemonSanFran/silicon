@@ -3658,6 +3658,22 @@ void DebugQuest_Findtheguilty(u8 state)
 // Cutscene: Earthquake
 // ***********************************************************************
 
+bool8 IsHalaiIslandUnderCrisis(void)
+{
+    if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
+        return FALSE;
+
+    if (VarGet(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_IsHalaiIslandUnderCrisis(void)
+{
+    gSpecialVar_Result = IsHalaiIslandUnderCrisis();
+}
+
 bool8 IsHalaiIslandUnderConstruction(void)
 {
     if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
@@ -3667,7 +3683,6 @@ bool8 IsHalaiIslandUnderConstruction(void)
 
     return TRUE;
 }
-
 
 void Script_IsHalaiIslandUnderConstruction(void)
 {
