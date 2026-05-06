@@ -219,7 +219,7 @@
 #define TRAINER_BEAU                        212
 #define TRAINER_LARRY                       213
 #define TRAINER_SHANE                       214
-#define TRAINER_JUSTIN                      215
+//#define TRAINER_JUSTIN                      215
 #define TRAINER_ETHAN_1                     216
 #define TRAINER_AUTUMN                      217
 #define TRAINER_TRAVIS                      218
@@ -930,13 +930,13 @@ enum ResidoTrainerIds
     TRAINER_IHSAN_AND_EMMITT,
     TRAINER_STOLENTRADE_THIEF,
     TRAINER_MUGGERA_MUGGERB,
-    TRAINER_BLACKBELT_A,
-    TRAINER_BLACKBELT_B,
-    TRAINER_BLACKBELT_C,
-    TRAINER_BLACKBELT_D,
-    TRAINER_BLACKBELT_E,
-    TRAINER_BLACKBELT_F,
-    TRAINER_BLACKBELT_G,
+    TRAINER_ADAM,
+    TRAINER_ANDREAS,
+    TRAINER_JUSTIN,
+    TRAINER_JEFFREY,
+    TRAINER_DAJUAN,
+    TRAINER_JUAN,
+    TRAINER_JASON,
     TRAINER_SEVENSISTERS_TINA,
     TRAINER_SEVENSISTERS_PAUL,
     TRAINER_SEVENSISTERS_JON,
