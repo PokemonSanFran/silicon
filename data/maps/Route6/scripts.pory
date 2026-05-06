@@ -10,14 +10,16 @@ mapscripts Route6_MapScripts
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
-script Route6_EventScript_BlackbeltE{
-    trainerbattle_single(TRAINER_BLACKBELT_E,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
 
-        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-            goto(Quest_Restorehodoucity_Recruit_Blackbelt_E_Dialogue)
-        }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
+script Route6_Script_Interact_Dajuan
+{
+    trainerbattle_single(TRAINER_DAJUAN,format("Prediction is a crucial skill for battling. You need to quickly understand the opponent’s tendencies if you want to hone that skill."),format("I wasn’t evaluating risk and reward properly…"),Route6_Script_Interact_Dajuan)
+    msgbox(format("As the battle’s state changes and evolves, you’ll want to make sure your predictions evolve with it. My old dojo was constantly switching things up to make sure we were adapting."),,SPEAKER_DAJUAN)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Dajuan)
+    closemessage
+    release
+    end
+    // PSF TODO Dajuan: Don’t overpredict!
 }
 
 script Route6_EventScript_023957DE

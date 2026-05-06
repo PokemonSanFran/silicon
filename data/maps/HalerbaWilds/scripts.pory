@@ -17,14 +17,16 @@ MAP_SCRIPT_ON_FRAME_TABLE [
 ]
 
 }
-script HalerbaWilds_EventScript_BlackbeltF{
-    trainerbattle_single(TRAINER_BLACKBELT_F,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
 
-        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-            goto(Quest_Restorehodoucity_Recruit_Blackbelt_F_Dialogue)
-        }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
+script HalerbaWilds_Script_Interact_Jason
+{
+    trainerbattle_single(TRAINER_JASON,format("You need to better balance the value of keeping a weakened party member in the fight vs. strategically swapping out!"),format("I didn’t find any good opportunities to switch my weakened party members back in."),HalerbaWilds_Script_Interact_Jason)
+    msgbox(format("My old Dojo had a motto - 1 HP is infinitely more than 0 HP!"),,SPEAKER_JASON)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Jason)
+    closemessage
+    release
+    end
+    // PSF TODO Jason: You need to better balance the value of keeping a weakened party member in the fight vs. strategically swapping out!
 }
 
 script HalerbaWilds_EventScript_1508BB71

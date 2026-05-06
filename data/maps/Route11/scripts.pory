@@ -13,14 +13,15 @@ mapscripts Route11_MapScripts
     ]
 }
 
-script Route11_EventScript_BlackbeltG{
-    trainerbattle_single(TRAINER_BLACKBELT_G,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-            goto(Quest_Restorehodoucity_Recruit_Blackbelt_G_Dialogue)
-        }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
+script Route11_Script_Interact_Juan
+{
+    trainerbattle_single(TRAINER_JUAN,format("Knowing when to switch Pokémon is a fundamental skill."),format("I need to better look at the best and worst case scenarios…"),Route11_Script_Interact_Juan)
+    msgbox(format("Sifu Ying also told us that switching Pokémon strategically can completely change the course of battle."),,SPEAKER_JUAN)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Juan)
+    closemessage
+    release
+    end
+    // PSF TODO Juan: Even the best players can switch unsuccessfully. It's not foolproof!
 }
 
 script Route11_InteractHomeless_Script
