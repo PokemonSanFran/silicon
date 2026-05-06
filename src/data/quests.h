@@ -1924,7 +1924,205 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_BLACK_BELT,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sRestoreHodouCity_Sub,
-        .numSubquests = QUEST_RESTOREHODOUGYM_SUB_COUNT
+        .numSubquests = QUEST_RESTOREHODOUGYM_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_RESTOREHODOUGYM_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_OUTSIDE),
+                .warpId = WARP_ID_NONE,
+                .x = 16,
+                .y = 7,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_OUTSIDE),
+                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLE]=
+            {
+                .name = COMPOUND_STRING("After Battle"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
+                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_FINDING_JOHNNY]=
+            {
+                .name = COMPOUND_STRING("Before Finding Johnny"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_1),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 18,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_FINDING_JOHNNY]=
+            {
+                .name = COMPOUND_STRING("After Finding Johnny"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_1),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 18,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_ASKED_TO_FIND_BLACKBELTS]=
+            {
+                .name = COMPOUND_STRING("Asked To Find Blackbelts"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_OUTSIDE),
+                .warpId = WARP_ID_HODOU_GYM_ENTRANCE,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_ASKED_TO_FIND_BLACKBELTS]=
+            {
+                .name = COMPOUND_STRING("Asked To Find Blackbelts"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
+                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ADAM]=
+            {
+                .name = COMPOUND_STRING("Before Battled Adam"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_2),
+                .warpId = WARP_ID_NONE,
+                .x = 1,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ADAM]=
+            {
+                .name = COMPOUND_STRING("After Battled Adam"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_2),
+                .warpId = WARP_ID_NONE,
+                .x = 1,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ANDREAS]=
+            {
+                .name = COMPOUND_STRING("Before Battled Andreas"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_3),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ANDREAS]=
+            {
+                .name = COMPOUND_STRING("After Battled Andreas"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_3),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 14,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUSTIN]=
+            {
+                .name = COMPOUND_STRING("Before Battled Justin"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_4),
+                .warpId = WARP_ID_NONE,
+                .x = 20,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUSTIN]=
+            {
+                .name = COMPOUND_STRING("After Battled Justin"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_4),
+                .warpId = WARP_ID_NONE,
+                .x = 20,
+                .y = 3,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JEFFREY]=
+            {
+                .name = COMPOUND_STRING("Before Battled Jeffrey"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_5),
+                .warpId = WARP_ID_NONE,
+                .x = 3,
+                .y = 17,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JEFFREY]=
+            {
+                .name = COMPOUND_STRING("After Battled Jeffrey"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_5),
+                .warpId = WARP_ID_NONE,
+                .x = 3,
+                .y = 17,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_DAJUAN]=
+            {
+                .name = COMPOUND_STRING("Before Battled Dajuan"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_6),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 10,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_DAJUAN]=
+            {
+                .name = COMPOUND_STRING("After Battled Dajuan"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_6),
+                .warpId = WARP_ID_NONE,
+                .x = 6,
+                .y = 10,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUAN]=
+            {
+                .name = COMPOUND_STRING("Before Battled Juan"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_7),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 11,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUAN]=
+            {
+                .name = COMPOUND_STRING("After Battled Juan"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_7),
+                .warpId = WARP_ID_NONE,
+                .x = 23,
+                .y = 11,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JASON]=
+            {
+                .name = COMPOUND_STRING("Before Battled Jason"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_8),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 26,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JASON]=
+            {
+                .name = COMPOUND_STRING("After Battled Jason"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_8),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 26,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_REWARD]=
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
+                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+            },
+            [STATE_QUEST_RESTOREHODOUGYM_COMPLETE]=
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_RestoreHodouCityGym,
+                side_quest_map(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),
+                .warpId = WARP_ID_HODOU_GYM_TO_CITY_RIGHT,
+            },
+        },
     },
     [QUEST_RESTORETIRABUDINGYM] =
     {

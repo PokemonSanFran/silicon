@@ -436,13 +436,7 @@ enum KeiyingState
 //Number of times you have incorrectly brought a pokemon to the girl in the Quest Cute Pokemon
 //resets after a subquest is completed
 
-
-//VAR_QUEST_RESTOREESPULEEGYM
-#define SAVE_BEFORE_IMELDA_BATTLE 1
-#define DEFEATED_IMELDA 2
-
 //VAR_QUEST_RESTOREHODOUGYM 0x40FF
-
 enum
 {
     PRE_PEWFAT_INTO_GYM,
@@ -453,11 +447,6 @@ enum
     FOUND_ALL_BLACKBELTS,
     RESTOREHODOU_CITY_COMPLETE,
 };
-
-//VAR_QUEST_RESTOREZENZUGYM
-#define RESTOREZENZU_ISLAND_NOT_STARTED   0
-#define SAVE_BEFORE_DOYLE_BATTLE 1
-#define DEFEATED_DOYLE 2
 
 //VAR_QUEST_RECRUITLOLCAARTISTS
 #define SMEARGLE_NO_LOCALS  0

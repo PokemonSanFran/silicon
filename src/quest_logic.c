@@ -4291,6 +4291,94 @@ void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
     Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREHODOUGYM);
 }
 
+void DebugQuest_RestoreHodouCityGym(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTOREHODOUGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_STARTED_QUEST:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM);
+            QuestMenu_ScriptSetActive(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ZAC);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_KEVIN);
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_FINDING_JOHNNY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_FINDING_JOHNNY:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_ASKED_TO_FIND_BLACKBELTS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_ASKED_TO_FIND_BLACKBELTS:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ADAM:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ADAM:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ADAM);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ANDREAS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ANDREAS:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_ANDREAS);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUSTIN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUSTIN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JUSTIN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JEFFREY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JEFFREY:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JEFFREY);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_DAJUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_DAJUAN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_DAJUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUAN:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_JUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_7);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JASON:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JASON:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JASON);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_8);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_REWARD:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS);
+            QuestMenu_ScriptSetReward(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Housing Protest
 // ***********************************************************************
