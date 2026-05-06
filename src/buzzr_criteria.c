@@ -326,3 +326,18 @@ void TweetCriteria_Quest_RestorezenzugymComplete(void)
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREZENZUGYM);
 }
 
+void TweetCriteria_Quest_RestorehodoucityFoundLeader(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_QUEST_RESTOREHODOUGYM) >= FOUND_HODOU_CITY_LEADER);
+}
+
+void TweetCriteria_Quest_RestorehodoucityAssigned(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND);
+}
+
+void TweetCriteria_Quest_RestorehodoucityComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREHODOUGYM);
+}
+

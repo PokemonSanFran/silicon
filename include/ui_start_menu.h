@@ -61,6 +61,14 @@ enum StartMenuHelpSymbols
     NUM_START_HELP_SYMBOLS
 };
 
+enum StartMenuCellularSignals
+{
+    START_SIGNAL_NONE,
+    START_SIGNAL_OKAY,
+    START_SIGNAL_STRONG,
+
+    NUM_START_SIGNALS
+};
 
 void StartMenu_Init(enum StartMenuModes);
 void Task_StartMenu_Init(u8);
@@ -70,5 +78,6 @@ void StartMenu_HoldPreviousSave(void);
 void StartMenu_ResetAppData(void);
 enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
+enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
 
 #endif // GUARD_UI_START_MENU_H

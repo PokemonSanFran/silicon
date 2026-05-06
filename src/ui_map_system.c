@@ -123,6 +123,7 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     u8 waypointSpriteId;
     u8 waypointSpriteInL2Id;
     u16 currentTrolley;
+    bool8 canUseFastTravel;
 };
 
 enum CursorState {
@@ -205,6 +206,7 @@ static void CreateL2WaypointSprite(void);
 static void DestroyJustL2WaypointSprite(void);
 
 static u8 HandleWarpFailedNoCash(void);
+static u8 HandleWarpFailedInside(void);
 static u8 HandleAttemptWarpInput(void);
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId);
 static u8 HandleWarpConfirmInput(void);
@@ -1326,7 +1328,7 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TROLLEY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToFieldContinueScript);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript,TRUE);
         DestroyTask(taskId);
     }
 }
@@ -1338,9 +1340,15 @@ void Task_OpenFlyMapSystemFromPartyMenu(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_FLY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_StartMenu_ReturnToUI);
+        MapSystem_Init(CB2_StartMenu_ReturnToUI,TRUE);
         DestroyTask(taskId);
     }
+}
+
+static bool8 MapSystem_DoesCurrentMapAllowFastTravel(void)
+{
+    enum StartMenuCellularSignals signal = CellularSignal_GetCurrentStrength();
+    return (signal == START_SIGNAL_STRONG);
 }
 
 void CB2_OpenFlyMapSystem(MainCallback callback)
@@ -1349,7 +1357,7 @@ void CB2_OpenFlyMapSystem(MainCallback callback)
     {
         sCurrentMapMode = MAP_MODE_FLY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(callback);
+        MapSystem_Init(callback,MapSystem_DoesCurrentMapAllowFastTravel());
     }
 }
 
@@ -1383,7 +1391,7 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TAXI;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToFieldContinueScript);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript,MapSystem_DoesCurrentMapAllowFastTravel());
         DestroyTask(taskId);
     }
 }
@@ -1391,11 +1399,11 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 void CB2_MapSystemFromStartMenu(void)
 {
     sCurrentMapMode = MAP_MODE_DEFAULT;
-    MapSystem_Init(CB2_StartMenu_ReturnToUI);
+    MapSystem_Init(CB2_StartMenu_ReturnToUI, MapSystem_DoesCurrentMapAllowFastTravel());
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
-void MapSystem_Init(MainCallback callback)
+void MapSystem_Init(MainCallback callback, bool32 canUseFastTravel)
 {
     if ((sRegionMap = AllocZeroed(sizeof(struct SFRegionMap))) == NULL)
     {
@@ -1404,6 +1412,7 @@ void MapSystem_Init(MainCallback callback)
     }
 
     sRegionMap->savedCallback = callback;
+    sRegionMap->canUseFastTravel = canUseFastTravel;
 
     InitSFRegionMapData();
 
@@ -2650,7 +2659,11 @@ static void PrintHeaderTitleToWindow()
     {
         case MAP_MODE_DEFAULT:
             {
-                if(CheckIfHoverLocationIsMapSecNone())
+            if ((sRegionMap->warpCounter == WARP_FAILED_PAUSE_START) && (sRegionMap->canUseFastTravel) == FALSE)
+            {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You can't use Arriba indoors!"));
+            }
+            else if(CheckIfHoverLocationIsMapSecNone())
                 {
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an Arriba destination."));
                 }
@@ -2665,7 +2678,7 @@ static void PrintHeaderTitleToWindow()
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 else
-            {
+                {
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet."));
                 }
                 break;
@@ -3577,6 +3590,11 @@ static u8 HandleAttemptWarpInput(void)
             sRegionMap->inputCallback = HandleWarpFailedNoCash;
             sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
         }
+        else if(sRegionMap->canUseFastTravel == FALSE)
+        {
+            sRegionMap->inputCallback = HandleWarpFailedInside;
+            sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
+        }
         else
         {
             sRegionMap->warpCounter = 0;
@@ -3764,6 +3782,43 @@ static void SwapBackCursorGraphics()
     PrintWarpPriceOnTooltip_AllFrames();
 }
 
+static u8 HandleWarpFailedInside(void)
+{
+    switch(sRegionMap->warpCounter)
+    {
+        case WARP_FAILED_PAUSE_START:
+            PlaySE(SE_BOO);
+            PrintHeaderTitleToWindow();
+            SwapFailedCursorGraphics();
+            sRegionMap->warpCounter--;
+            break;
+        case WARP_FAILED_PAUSE_END:
+            SwapBackCursorGraphics();
+            if(GetMenuL2State())
+                sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
+            else
+                sRegionMap->inputCallback = ProcessRegionMapInput_Full;
+            GetSFMapName(sRegionMap->mapSecName, sRegionMap->mapSecId, MAP_NAME_LENGTH);
+            PrintHeaderTitleToWindow();
+            return MAP_INPUT_NONE;
+        default:
+            sRegionMap->warpCounter--;
+            break;
+    }
+
+    switch (sRegionMap->warpCounter % 8)
+    {
+        case 0:
+            sRegionMap->cursorSpriteLOC->x += 2;
+            break;
+        case 7:
+            sRegionMap->cursorSpriteLOC->x -= 2;
+            break;
+    }
+
+    return MAP_INPUT_NONE;
+
+}
 
 static u8 HandleWarpFailedNoCash(void)
 {

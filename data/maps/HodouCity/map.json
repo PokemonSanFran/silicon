@@ -165,6 +165,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_KEVIN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 22,
       "y": 4,
@@ -178,6 +179,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_ZAC",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 21,
       "y": 4,

@@ -17,7 +17,7 @@ mapscripts EspuleeOutskirts_MapScripts {
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
-        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_Manofmanyhats_CheckDoorLock_Script)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
     }

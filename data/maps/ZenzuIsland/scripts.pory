@@ -7,7 +7,7 @@ mapscripts ZenzuIsland_MapScripts {
         call(LetsGrabLunch_HideBaiya_Outside_Script)
         call(Restorezenzugym_Script_HideDoyleOutside)
         call_if_lt(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Restorezenzugym_Script_MoveDoyle)
-        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        callnative(LetsGrabLunch_IncrementStoryVariable)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

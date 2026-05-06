@@ -15,48 +15,38 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
+      "local_id": "LOCALID_HODOU_CITY_GYM_KEVIN",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_KEVIN",
       "x": 3,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Restorehodoucity_Kevin_Interact_Script",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
-      "x": 6,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Restorehodoucity_Zac_Interact_Script",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_2",
-      "x": 4,
-      "y": 5,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_8"
+      "script": "HodouDojo_Script_Kevin_Interact",
+      "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_2",
-      "x": 5,
-      "y": 5,
+      "local_id": "LOCALID_HODOU_CITY_GYM_ZAC",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_ZAC",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HodouDojo_Script_Zac_Interact",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HODOU_CITY_GYM_PKMNA",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+      "x": 4,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
       "movement_range_x": 0,
@@ -67,6 +57,21 @@
       "flag": "FLAG_TEMP_8"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_PKMNB",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 5,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_8"
+    },
+    {
+      "local_id": "LOCALID_HODOU_CITY_GYM_ADAM",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 1,
       "y": 1,
@@ -76,10 +81,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractAdam",
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_ANDREAS",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 2,
       "y": 1,
@@ -89,10 +95,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractAndreas",
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_JUSTIN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 3,
       "y": 1,
@@ -102,10 +109,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractJustin",
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_JEFFREY",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 4,
       "y": 1,
@@ -115,10 +123,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractJeffrey",
       "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_DAJUAN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 5,
       "y": 1,
@@ -128,10 +137,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractDajuan",
       "flag": "FLAG_TEMP_5"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_JUAN",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 6,
       "y": 1,
@@ -141,10 +151,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractJuan",
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_HODOU_CITY_GYM_JASON",
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 7,
       "y": 1,
@@ -154,25 +165,27 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "HodouDojo_Dialogue_InteractJason",
       "flag": "FLAG_TEMP_7"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "local_id": "LOCALID_HODOU_CITY_GYM_JOHNNY",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_JOHNNY",
       "x": 4,
-      "y": 4,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Restorehodoucity_James_Interact_Script",
+      "script": "Quest_Restorehodoucity_Johnny_Interact_Script",
       "flag": "FLAG_TEMP_9"
     }
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_LEFT",
       "x": 4,
       "y": 9,
       "elevation": 0,
@@ -180,6 +193,7 @@
       "dest_warp_id": "5"
     },
     {
+      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_RIGHT",
       "x": 5,
       "y": 9,
       "elevation": 0,
