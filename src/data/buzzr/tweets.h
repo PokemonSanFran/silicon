@@ -635,9 +635,50 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE] =
     {
         .userId = BUZZR_USER_IMELDA,
-        .content = COMPOUND_STRING(""),
+        .content = COMPOUND_STRING("I'll soon be building up an independent film and battle studio on {STR_VAR_1}! Swing by sometime if you'd like to get involved!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_RestorezenzugymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_ASSIGNED_RESTORATION] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("I thought {STR_VAR_1} Gym was donezo, but I keep hearing strange banging sounds from over there. I went to go look, but the lights are always off!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityAssigned,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_FOUND_LEADER] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("It hasn’t been the same since the {STR_VAR_1} Gym closed. I saw Johnny around town today, and it brought back some real memories."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityFoundLeader,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        // PSF TODO replace & with #
+        .content = COMPOUND_STRING("I went to {STR_VAR_1} Dojo and got totally wrecked! I need to focus on type specialization… &BackToTheLab"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY] =
+    {
+        .userId = BUZZR_USER_JOHNNY,
+        .content = COMPOUND_STRING("Trainers! I’m Johnny, the new leader of {STR_VAR_1} Dojo. Come test your skills with our Restricted Sparring. I’m excited to meet the new battle community of {STR_VAR_1}!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityComplete,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
