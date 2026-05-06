@@ -1806,6 +1806,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/qol_field_move_scripts.inc" @ qol_field_moves 
 .include "data/scripts/restored_battle_frontier/tower_lobby.inc"
 .include "data/scripts/restored_battle_frontier/tower_battleroom.inc"
+.include "data/scripts/restored_battle_frontier/dojo_lobby.inc"
 .include "data/scripts/buzzr.inc"
 .include "data/scripts/apps.inc"
 .include "data/scripts/nickname.inc" @ Battle Settings: Nickname

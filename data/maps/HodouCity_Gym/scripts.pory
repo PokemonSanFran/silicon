@@ -1,14 +1,14 @@
 mapscripts HodouCity_Gym_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM: Quest_Restorehodoucity_FirstTimeInside_Dialogue
-        VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJames_Dialogue
+        VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER: Quest_Restorehodoucity_FoundJohnny_Dialogue
         VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS: Quest_Restorehodoucity_Reward_Dialogue
     ]
     MAP_SCRIPT_ON_TRANSITION
     {
         call(Quest_Restorehodoucity_Script_LoadPewfatMons)
         call_if_ne(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM,Quest_Restorehodoucity_HidePokemnon_Script)
-        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Restorehodoucity_Script_HideGymTrainer_James)
+        call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Restorehodoucity_Script_HideGymTrainer_Johnny)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Restorehodoucity_Script_HideGymTrainer_Adam)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_3,Restorehodoucity_Script_HideGymTrainer_Andreas)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_4,Restorehodoucity_Script_HideGymTrainer_Justin)
@@ -17,4 +17,101 @@ mapscripts HodouCity_Gym_MapScripts{
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_7,Restorehodoucity_Script_HideGymTrainer_Juan)
         call_if_subquest_not_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_8,Restorehodoucity_Script_HideGymTrainer_Jason)
     }
+}
+
+script HodouCityGym_Dialogue_GreetPlayer
+{
+    msgbox(format("This is placeholder text."),MSGBOX_NPC,SPEAKER_JOHNNY)
+}
+
+script HodouDojo_Dialogue_InteractAdam
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Adam)
+    lock
+   faceplayer
+msgbox(format("I’ve been working on better manipulating luck to my advantage."),,SPEAKER_ADAM)
+msgbox(format("Does your team have enough ways to deal with unlucky scenarios? "),,SPEAKER_ADAM)
+msgbox(format("You should invest in held items, moves, or Pokémon that are immune to unlucky breaks."),,SPEAKER_ADAM)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractAndreas
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Andreas)
+    lock
+   faceplayer
+msgbox(format("When a battle starts, you’re usually working with incomplete information."),,SPEAKER_ANDREAS)
+msgbox(format("As a Trainer, you need to quickly figure out what your opponent’s best moves are, and use that information to plan your next move."),,SPEAKER_ANDREAS)
+msgbox(format("Even at the beginning of a battle, knowing what a Pokémon species’ strengths and weaknesses are can help you understand its role on a team."),,SPEAKER_ANDREAS)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractJustin
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Justin)
+    lock
+   faceplayer
+msgbox(format("Making a game plan is impossible if you don’t understand your party inside and out!"),,SPEAKER_JUSTIN)
+msgbox(format("As the battle progresses, you’ll want to better understand your opponent too, and use that information to update your game plan."),,SPEAKER_JUSTIN)
+msgbox(format("All sides need to think about their offensive pressure, defensive capabilities, and end game scenarios. It’s a lot to keep track of!"),,SPEAKER_JUSTIN)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractJeffrey
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Jeffrey)
+    lock
+   faceplayer
+msgbox(format("Pressure starts by contrasting proactive and reactive actions."),,SPEAKER_JEFFREY)
+msgbox(format("Proactive actions are things like dealing damage, or setting up your Pokémon."),,SPEAKER_JEFFREY)
+msgbox(format("Reactive actions are responding to your opponents’ threats."),,SPEAKER_JEFFREY)
+msgbox(format("Applying pressure means increasing your proactive actions and forcing your opponent to take more reactive actions. This helps you advance your game plan!"),,SPEAKER_JEFFREY)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractDajuan
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Dajuan)
+    lock
+   faceplayer
+msgbox(format("A common mistake is trying to predict every single one of your opponent’s moves."),,SPEAKER_DAJUAN)
+msgbox(format("You should focus on the predictions that will swing the battle in your favor. When you’re behind, catching the opponent off guard is a perfect way to turn the tide!"),,SPEAKER_DAJUAN)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractJuan
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Juan)
+    lock
+   faceplayer
+msgbox(format("Understanding when your opponent might want to switch is important."),,SPEAKER_JUAN)
+msgbox(format("Both sides can use switching to preserve a key team member for later."),,SPEAKER_JUAN)
+msgbox(format("But there's a risk too. How will a switch impact the battle’s state? If switching is the obvious move, your opponent could predict that."),,SPEAKER_JUAN)
+    closemessage
+    release
+    end
+}
+
+script HodouDojo_Dialogue_InteractJason
+{
+    goto_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_RestoreHodouCityGym_DialogueInsideGym_Jason)
+    lock
+   faceplayer
+msgbox(format("Sometimes I’ll switch in a Pokémon that I know will faint."),,SPEAKER_JASON)
+msgbox(format("It seems harsh, but it means another teammate can switch in without being punished, which can be crucial. Or even stall out an unfavorable field condition, like Trick Room or weather."),,SPEAKER_JASON)
+msgbox(format("It’s a huge strategy bump."),,SPEAKER_JASON)
+msgbox(format("You have to assess the context of a battle when deciding to save or sacrifice a Pokémon."),,SPEAKER_JASON)
+    closemessage
+    release
+    end
 }
