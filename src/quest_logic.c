@@ -4286,6 +4286,11 @@ void Quest_Restorehodoucity_LoadKevinPokemon(void)
     Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
 }
 
+void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREHODOUGYM);
+}
+
 // ***********************************************************************
 // Cutscene: Housing Protest
 // ***********************************************************************
@@ -4323,3 +4328,17 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
     StringCopy(gStringVar1,GetSpeciesName(species));
     StringCopy(gStringVar2,GetMoveName(move));
 }
+
+// ***********************************************************************
+// Cutscene: Let's Grab Lunch
+// ***********************************************************************
+
+void LetsGrabLunch_IncrementStoryVariable(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) != STORY_BAIYA_EXPLAIN_RESTORATION)
+        return;
+
+    if (IsQuestCompletedState(QUEST_RESTOREZENZUGYM) || IsQuestCompletedState(QUEST_RESTOREESPULEEGYM) ||IsQuestCompletedState(QUEST_RESTOREHODOUGYM))
+        VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
+}
+
