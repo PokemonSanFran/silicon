@@ -185,6 +185,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_LEFT",
       "x": 4,
       "y": 9,
       "elevation": 0,
@@ -192,6 +193,7 @@
       "dest_warp_id": "5"
     },
     {
+      "warp_id": "WARP_ID_HODOU_GYM_TO_CITY_RIGHT",
       "x": 5,
       "y": 9,
       "elevation": 0,
