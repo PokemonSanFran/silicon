@@ -12,21 +12,26 @@ script EventScript_AskRestoreScript
 
     showmoneybox(0,0)
 	callnative(Dexnav_BufferPreviousStreakAndCost)
-	msgbox(format("Do you want to restore your previous Dexnav streak of {STR_VAR_1}? It will cost ¥{STR_VAR_2}."),MSGBOX_YESNO)
+	msgbox(gText_AskRestoreStreak,MSGBOX_YESNO)
 
 	if (var(VAR_RESULT) == YES)
 	{
 		callnative(Dexnav_RestorePreviousChain)
-		callnative(Dexnav_ResetPreviousChain)
+		variableremovemoney(VAR_TEMP_1)
+		updatemoneybox
+		playse(SE_SHOP)
+		waitse
 	}
 	
-	variableremovemoney(VAR_TEMP_1)
-	updatemoneybox
-	playse(SE_SHOP)
-	waitse
 	hidemoneybox
+	callnative(Dexnav_ResetPreviousChain)
 	callnative(TryStartDexNavSearch)
 	closemessage
 	release
 	end
+}
+
+text gText_AskRestoreStreak
+{
+	format("Do you want to restore your previous Dexnav streak of {STR_VAR_1}? It will cost ¥{STR_VAR_2}.")
 }
