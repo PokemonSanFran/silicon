@@ -163,6 +163,7 @@ static void Dexnav_DisplayAllStatIndicator(void);
 
 struct DexnavState *sDexnavState = NULL;
 static u8 *sBgTilemapBuffer[BG_DEXNAV_COUNT] = {NULL};
+EWRAM_DATA u8 gDexnavStatFlags = 0;
 
 static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
 {
@@ -3128,6 +3129,7 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
         SetMonMoveSlot(mon, moves[i], i);
 
     CalculateMonStats(mon);
+    gDexnavStatFlags = Dexnav_CountFlags();
 }
 
 void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies)
@@ -3449,4 +3451,30 @@ static void Dexnav_PrintRestoreStreakMessage(void)
     // This means that this looks incorrect for the Dexnav since the tiles are not in those hardcoded places
     // The money boxes and yesno boxes from the overworld still use the default border. They need to be updated to use the new msgbox style, and then the ones in this menu must be updated to match
     // When changing CreateYesNoMenuParameterized, the border looks correct when WindowFunc_DrawDialogueFrame is used in the dexnav, but it looks broken in the overworld
+}
+
+u32 Dexnav_CountFlags(void)
+{
+    u32 count = 0;
+
+    if (Dexnav_GetAbilityFlag())
+        count++;
+
+    if (Dexnav_GetItemFlag())
+        count++;
+
+    if (Dexnav_GetMoveFlag())
+        count++;
+
+    if (Dexnav_GetLevelFlag())
+        count++;
+
+    count += Dexnav_GetStatFlag();
+
+    return count;
+}
+
+u32 Dexnav_CalculateNewFriendship(u32 friendship)
+{
+    return friendship - (friendship * gDexnavStatFlags / 10);
 }

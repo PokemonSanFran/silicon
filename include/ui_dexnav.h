@@ -8,6 +8,8 @@
 #include "constants/ui_dexnav.h"
 #include "constants/wild_encounter.h"
 
+extern u8 gDexnavStatFlags;
+
 struct DexnavSavedData
 {
     enum DexnavHabitats habitat;
@@ -57,5 +59,7 @@ void Task_Dexnav_Init(u8 taskId);
 bool32 Dexnav_OpenScanMode(void);
 void Dexnav_SavePreviousChain(void);
 void Dexnav_RestorePreviousChain(void);
+u32 Dexnav_CalculateNewFriendship(u32 friendship);
+u32 Dexnav_CountFlags(void);
   
 #endif // GUARD_UI_DEXNAV_H
