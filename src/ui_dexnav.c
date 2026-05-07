@@ -7,14 +7,19 @@
 #include "dexnav.h"
 #include "dma3.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "frontier_pass.h"
 #include "gpu_regs.h"
 #include "item_use.h"
+#include "line_break.h"
+#include "main_menu.h"
 #include "malloc.h"
+#include "math_util.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "money.h"
 #include "options_visual.h"
 #include "overworld.h"
 #include "palette.h"
@@ -27,6 +32,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
 #include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "ui_adventure_guide.h"
@@ -46,7 +52,11 @@ static u8 Dexnav_GetSavedCursorPosition(void);
 static bool8 Dexnav_ShouldDisplayStats(void);
 static u16 Dexnav_GetSavedSpecies(void);
 static void Dexnav_VBlankCB(void);
+static void Dexnav_BeginOverworldScan(u8 taskId, u32 species);
+void Dexnav_ResetPreviousChain(void);
 static void Dexnav_PrintOverworldIndicators(void);
+void Dexnav_BufferPreviousStreakAndCost(void);
+static void Dexnav_PrintRestoreStreakMessage(void);
 static void Dexnav_MainCB(void);
 static bool8 Dexnav_InitalizeBackgrounds(void);
 static u32 Dexnav_CalculateRestoreStreakCost(void);
@@ -56,6 +66,7 @@ static void Dexnav_RemoveStatIndicator(u32 position);
 static void Dexnav_SetSavedCursorPosition(u32 cursorPosition);
 static void Dexnav_RegisterCurrentlySelectedMon(void);
 static void Dexnav_SetSavedSpecies(u32 species);
+static void Task_DexnavRestoreStreak(u8 taskId);
 static void Dexnav_SetSavedCallback(void* callback);
 static bool8 Dexnav_AllocateStructs(void);
 static bool8 AllocZeroedTilemapBuffers(void);
@@ -413,6 +424,15 @@ static const struct WindowTemplate sDexnavWindows[] =
         .height = 2,
         .paletteNum = DEXNAV_PALETTE_HABITAT_ID,
     },
+    [WIN_DEXNAV_MSGBOX] = 
+    {
+        .bg = BG0_DEXNAV_TEXT,
+        .tilemapLeft = 1,
+        .tilemapTop = 11,
+        .width = DISPLAY_TILE_WIDTH - 2,
+        .height = 6,
+        .paletteNum = DEXNAV_PALETTE_MSGBOX_ID,
+    },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -574,6 +594,7 @@ static void Dexnav_CreateRegisterSprite(void)
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x16);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x16);
     gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].subpriority = 1;
 
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_REGISTER,spriteId);
 }
@@ -1077,13 +1098,23 @@ static void Dexnav_InitWindows(void)
     InitWindows(templates);
 
     u32 baseBlock = 1;
-    for (enum DexnavWindows windowId = 0; windowId < ARRAY_COUNT(sDexnavWindows); windowId++)
+    for (enum DexnavWindows windowId = 0; windowId < WIN_DEXNAV_STANDARD_COUNT; windowId++)
     {
         SetWindowAttribute(windowId, WINDOW_BASE_BLOCK, baseBlock);
         ClearWindowCopyToVram(windowId);
         baseBlock += (templates[windowId].width * templates[windowId].height);
     }
     DeactivateAllTextPrinters();
+}
+
+static void Dexnav_InitMsgboxWindow(void)
+{
+    AddWindow(&sDexnavWindows[WIN_DEXNAV_MSGBOX]);
+    LoadMessageBoxGfx(WIN_DEXNAV_MSGBOX,DEXNAV_MSGBOX_BASE_TILE,DEXNAV_PALETTE_MSGBOX_SLOT);
+    u32 baseBlock = GetWindowAttribute(WIN_DEXNAV_HABITAT_HEADER,WINDOW_BASE_BLOCK);
+    baseBlock += (sDexnavWindows[WIN_DEXNAV_HABITAT_HEADER].width * sDexnavWindows[WIN_DEXNAV_HABITAT_HEADER].height);
+    SetWindowAttribute(WIN_DEXNAV_MSGBOX, WINDOW_BASE_BLOCK, baseBlock);
+    ClearWindowCopyToVram(WIN_DEXNAV_MSGBOX);
 }
 
 static void Dexnav_SetFlagToReturnToOverworld(bool32 state)
@@ -1122,6 +1153,7 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON))
     {
+        DebugPrintf("Dexnav_StartOverworldSearch");
         Dexnav_StartOverworldSearch(taskId);
         return;
     }
@@ -1734,7 +1766,7 @@ static void Dexnav_DisplayStarsStreak(void)
         gSprites[spriteId].data[2] = state;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
-        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].oam.priority = 1;
         Dexnav_SaveSpriteId(DEXNAV_SPRITEID_STREAK_POSITION_0 + position,spriteId);
     }
 }
@@ -1999,7 +2031,7 @@ static void Dexnav_PrintMonTypes(void)
         gSprites[spriteId].data[1] = typeNum;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
         gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
-        gSprites[spriteId].oam.priority = 0;
+        gSprites[spriteId].oam.priority = 1;
         Dexnav_SaveSpriteId(DEXNAV_SPRITEID_TYPE_0 + typeNum,spriteId);
     }
 }
@@ -2088,6 +2120,7 @@ static void Dexnav_DisplaySelectedMon(void)
     bool32 isShiny = FALSE, isFrontPic = TRUE;
     u32 spriteId = CreateMonPicSprite(species,isShiny,personality,isFrontPic,x, y, DEXNAV_PALETTE_MAIN_MON_ID, TAG_NONE);
     FreeSpriteOamMatrix(&gSprites[spriteId]);
+    gSprites[spriteId].oam.priority = 1;
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_MAIN,spriteId);
 }
 
@@ -2477,6 +2510,8 @@ static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 specie
         gSprites[spriteId].oam.paletteNum = DEXNAV_PALETTE_ALL_BLACK_ID;
 
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_MON_0 + speciesIndex,spriteId);
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].subpriority = 2;
 }
 
 static u32 Dexnav_GetSpeciesFromHabitatAndIndex(enum DexnavHabitats habitat, u32 speciesIndex)
@@ -2495,7 +2530,7 @@ static void Dexnav_PrintFloatingActionButton(void)
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
     gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
     gSprites[spriteId].invisible = Dexnav_IsCurrentModeScan();
-    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.priority = 1;
     Dexnav_SaveSpriteId(DEXNAV_SPRITEID_FAB,spriteId);
 }
 
@@ -2556,7 +2591,8 @@ static void Dexnav_DisplayCursors(void)
     u32 y = dexnavMonIconCoordinates[num][position][AXIS_Y];
 
     u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
-    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.priority = 1;
+    gSprites[spriteId].subpriority = 0;
     gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x64);
     gSprites[spriteId].oam.size = SPRITE_SIZE(64x64);
     gSprites[spriteId].invisible = Dexnav_ShouldHideCursors();
@@ -2604,6 +2640,39 @@ void Dexnav_StartOverworldSearch(u8 taskId)
         return;
     }
 
+    if (Dexnav_IsPreviousChainGreaterThanCurrent())
+    {
+        Dexnav_BufferPreviousStreakAndCost();
+        Dexnav_PrintRestoreStreakMessage();
+        gTasks[taskId].func = Task_DexnavRestoreStreak;
+        return;
+    }
+
+    Dexnav_RestorePreviousChain();
+    Dexnav_ResetPreviousChain();
+    Dexnav_BeginOverworldScan(taskId,species);
+}
+
+static void Task_DexnavRestoreStreak(u8 taskId)
+{
+    s8 input = Menu_ProcessInputNoWrapClearOnChoose();
+    if (input == 1 || input == MENU_B_PRESSED)
+    {
+        u32 species = Dexnav_GetCurrentlySelectedSpecies();
+        Dexnav_BeginOverworldScan(taskId,species);
+    }
+    else if (input == 0)
+    {
+        Dexnav_RestorePreviousChain();
+        Dexnav_ResetPreviousChain();
+        RemoveMoney(&gSaveBlock1Ptr->money,Dexnav_CalculateRestoreStreakCost());
+        u32 species = Dexnav_GetCurrentlySelectedSpecies();
+        Dexnav_BeginOverworldScan(taskId,species);
+    }
+}
+
+static void Dexnav_BeginOverworldScan(u8 taskId, u32 species)
+{
     EndDexNavSearch();
 
     gSpecialVar_0x8000 = species;
@@ -3338,10 +3407,46 @@ bool8 Dexnav_IsPreviousChainGreaterThanCurrent(void)
 static u32 Dexnav_CalculateRestoreStreakCost(void)
 {
     u32 streak = Dexnav_GetPreviousChain();
-    return (DEXNAV_RESTORE_STREAK_COST * streak);
+
+    // PSF TODO ask Marlux for another formula where the first 30 or so are very reasonable prices and then it massively jumps, capping out at 200K to restore a max streak
+    if (streak < 31)
+        return 50 + (67 * (streak - 1));
+    else if (streak < 151)
+        return 2000 + (817 * (streak - 32));
+    else
+        return 100000 + (1000 * (streak - 152));
 }
 
 void Script_Dexnav_CalculateRestoreStreakCost(void)
 {
     VarSet(VAR_TEMP_1,Dexnav_CalculateRestoreStreakCost());
+}
+
+static void Dexnav_PrintRestoreStreakMessage(void)
+{
+    u32 windowId = WIN_DEXNAV_MSGBOX;
+    u32 fontId = FONT_DEXNAV_SCAN_HEADER;
+    u32 x = 0, y = 0;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
+    u32 oldBaseBlock = GetWindowAttribute(windowId, WINDOW_BASE_BLOCK);
+    u32 oldHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
+    u32 oldWidth = GetWindowAttribute(windowId, WINDOW_WIDTH);
+    u32 baseBlock = oldBaseBlock + (oldHeight * oldWidth);
+    u32 maxLines = (TILE_TO_PIXELS(oldHeight)+ lineSpacing) / (letterHeight + lineSpacing);
+    Dexnav_InitMsgboxWindow();
+    DrawDialogFrameWithCustomTileAndPalette(windowId, TRUE, DEXNAV_MSGBOX_BASE_TILE, DEXNAV_PALETTE_MSGBOX_ID);
+
+    StringExpandPlaceholders(gStringVar4,gText_AskRestoreStreak);
+    StripLineBreaks(gStringVar4);
+    BreakStringNaive(gStringVar4,TILE_TO_PIXELS(oldWidth),maxLines,fontId,HIDE_SCROLL_PROMPT);
+
+    AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_BLACK], TEXT_SKIP_DRAW, gStringVar4);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CreateYesNoMenuParameterized(22, 5, DEXNAV_MSGBOX_BASE_TILE, baseBlock, DEXNAV_PALETTE_MSGBOX_ID, DEXNAV_PALETTE_MSGBOX_ID);
+    // PSF TODO CreateYesNoMenuParameterized uses WindowFunc_DrawStandardFrame, which uses hard coded tiles, assuming that the overworld loaded those tiles into the right place
+    // This means that this looks incorrect for the Dexnav since the tiles are not in those hardcoded places
+    // The money boxes and yesno boxes from the overworld still use the default border. They need to be updated to use the new msgbox style, and then the ones in this menu must be updated to match
+    // When changing CreateYesNoMenuParameterized, the border looks correct when WindowFunc_DrawDialogueFrame is used in the dexnav, but it looks broken in the overworld
 }
