@@ -46,6 +46,7 @@
 #include "options_battle.h" // siliconMerge
 #include "constants/pokemon_icon.h"
 #include "color_variation.h" // colorVariation
+#include "surprise_trade.h" // surpriseTrade
 #include "chooseboxmon.h"
 #include "party_menu.h"
 
@@ -75,7 +76,11 @@ enum {
     OPTION_MOVE_ITEMS,
     OPTION_EXIT,
     OPTIONS_COUNT,
-    OPTION_SELECT_MON
+    // Start surpriseTrade
+    //OPTION_SELECT_MON
+    OPTION_SELECT_MON,
+    OPTION_SELECT_SURPRISE_TRADE,
+    // End surpriseTrade
 };
 
 // IDs for messages to print with PrintMessage
@@ -1973,6 +1978,13 @@ static void CB2_PokeStorage(void)
     BuildOamBuffer();
 }
 
+// Start surpriseTrade
+void EnterPokeStorageSurpriseTrade(void)
+{
+    EnterPokeStorage(OPTION_SELECT_SURPRISE_TRADE);
+}
+// End surpriseTrade
+
 static void EnterPokeStorage(u8 boxOption)
 {
     ResetTasks();
@@ -1982,6 +1994,10 @@ static void EnterPokeStorage(u8 boxOption)
     {
         if (boxOption == OPTION_SELECT_MON)
             SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        // Start surpriseTrade
+        else if (boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            SurpriseTrade_SetSurpriseTradeCallback();
+        // End surpriseTrade
         else
             SetMainCallback2(CB2_ExitPokeStorage);
     }
@@ -2005,6 +2021,10 @@ static void CB2_ReturnToPokeStorage(void)
     {
         if (sStorage->boxOption == OPTION_SELECT_MON)
             SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        // Start surpriseTrade
+        else if (sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            SurpriseTrade_SetSurpriseTradeCallback();
+        // End surpriseTrade
         else
             SetMainCallback2(CB2_ExitPokeStorage);
     }
@@ -2264,7 +2284,10 @@ static void Task_PokeStorageMain(u8 taskId)
             sStorage->state = MSTATE_MOVE_CURSOR;
             break;
         case INPUT_SHOW_PARTY:
-            if (sStorage->boxOption != OPTION_MOVE_MONS && sStorage->boxOption != OPTION_MOVE_ITEMS && sStorage->boxOption != OPTION_SELECT_MON)
+            // Start surpriseTrade
+            //if (sStorage->boxOption != OPTION_MOVE_MONS && sStorage->boxOption != OPTION_MOVE_ITEMS && sStorage->boxOption != OPTION_SELECT_MON)
+            if (sStorage->boxOption != OPTION_MOVE_MONS && sStorage->boxOption != OPTION_MOVE_ITEMS && sStorage->boxOption != OPTION_SELECT_MON && sStorage->boxOption != OPTION_SELECT_SURPRISE_TRADE)
+            // End surpriseTrade
             {
                 PrintMessage(MSG_WHICH_ONE_WILL_TAKE);
                 sStorage->state = MSTATE_WAIT_MSG;
@@ -2276,7 +2299,10 @@ static void Task_PokeStorageMain(u8 taskId)
             }
             break;
         case INPUT_HIDE_PARTY:
-            if (sStorage->boxOption == OPTION_MOVE_MONS || sStorage->boxOption == OPTION_SELECT_MON)
+            // Start surpriseTrade
+            //if (sStorage->boxOption == OPTION_MOVE_MONS || sStorage->boxOption == OPTION_SELECT_MON)
+            if (sStorage->boxOption == OPTION_MOVE_MONS || sStorage->boxOption == OPTION_SELECT_MON || sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            // End surpriseTrade
             {
                 if (IsMonBeingMoved() && ItemIsMail(sStorage->displayMonItemId))
                     sStorage->state = MSTATE_ERROR_HAS_MAIL;
@@ -3705,7 +3731,10 @@ static void Task_OnCloseBoxPressed(u8 taskId)
         {
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
-            if (sStorage->boxOption == OPTION_SELECT_MON)
+            // Start surpriseTrade
+            //if (sStorage->boxOption == OPTION_SELECT_MON)
+            if (sStorage->boxOption == OPTION_SELECT_MON || sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            // End surpriseTrade
             {
                 gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
                 gSpecialVar_Result = FALSE;
@@ -3783,7 +3812,10 @@ static void Task_OnBPressed(u8 taskId)
         {
             UpdateBoxToSendMons();
             gPlayerPartyCount = CalculatePlayerPartyCount();
-            if (sStorage->boxOption == OPTION_SELECT_MON)
+            // Start surpriseTrade
+            //if (sStorage->boxOption == OPTION_SELECT_MON)
+            if (sStorage->boxOption == OPTION_SELECT_MON || sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            // End surpriseTrade
             {
                 gSpecialVar_0x8004  = PARTY_NOTHING_CHOSEN;
                 gSpecialVar_Result  = FALSE;
@@ -3812,6 +3844,10 @@ static void Task_ChangeScreen(u8 taskId)
     default:
         if (sStorage->boxOption == OPTION_SELECT_MON)
             SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        // Start surpriseTrade
+        else if (sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+            SurpriseTrade_SetSurpriseTradeCallback();
+        // End surpriseTrade
         else
             SetMainCallback2(CB2_ExitPokeStorage);
         FreePokeStorageData();
@@ -4517,7 +4553,10 @@ static bool32 ShouldBoxmonSpriteBeTransparent(u32 boxId, u32 boxPosition)
     if (sStorage->boxOption == OPTION_MOVE_ITEMS
      && GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
         return TRUE;
-    if (sStorage->boxOption == OPTION_SELECT_MON
+    // Start surpriseTrade
+    //if (sStorage->boxOption == OPTION_SELECT_MON
+    if ((sStorage->boxOption == OPTION_SELECT_MON || sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+    // End surpriseTrade
      && IsBoxMonExcluded(GetBoxedMonPtr(boxId, boxPosition)))
         return TRUE;
     // Start siliconMerge
@@ -4840,7 +4879,10 @@ static void CreatePartyMonsSprites(bool8 visible)
         }
     }
 
-    if (sStorage->boxOption == OPTION_SELECT_MON)
+    // Start surpriseTrade
+    //if (sStorage->boxOption == OPTION_SELECT_MON)
+    if (sStorage->boxOption == OPTION_SELECT_MON || sStorage->boxOption == OPTION_SELECT_SURPRISE_TRADE)
+    // End surpriseTrade
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
@@ -7828,6 +7870,9 @@ static bool8 SetMenuTexts_Mon(void)
         }
         break;
     case OPTION_SELECT_MON:
+    // Start surpriseTrade
+    case OPTION_SELECT_SURPRISE_TRADE:
+    // End surpriseTrade
         if (species != SPECIES_NONE && CanBoxMonBeSelected(GetCursorBoxMon()))
             SetMenuText(MENU_SELECT);
         else
@@ -7848,7 +7893,10 @@ static bool8 SetMenuTexts_Mon(void)
     }
 
     SetMenuText(MENU_MARK);
-    if (sStorage->boxOption != OPTION_SELECT_MON)
+    // Start surpriseTrade
+    //if (sStorage->boxOption != OPTION_SELECT_MON)
+    if (sStorage->boxOption != OPTION_SELECT_MON || sStorage->boxOption != OPTION_SELECT_SURPRISE_TRADE)
+    // End surpriseTrade
         SetMenuText(MENU_RELEASE);
     SetMenuText(MENU_CANCEL);
     return TRUE;

@@ -560,7 +560,6 @@ static void Task_FirstBattleEnterParty_StartPrintMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_RunPrinterMsg2(u8 taskId);
 static void Task_FirstBattleEnterParty_FadeNormal(u8 taskId);
 static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId);
-static void BufferMonSelectionSurpriseTrade(void); //surpriseTrade
 
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
@@ -8792,20 +8791,4 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
     }
 }
 
-// Start surpriseTrade
-void CB2_TrashTrade(void)
-{
-// PSF TODO replace with ChooseBoxMon
-        InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelectionSurpriseTrade);
-}
-
-static void BufferMonSelectionSurpriseTrade(void)
-{
-    gSpecialVar_0x8004 = GetCursorSelectionMonId();
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
-    gFieldCallback2 = CB2_FadeFromPartyMenu;
-    SetMainCallback2(CB2_ContinueSurpriseTrade);
-}
-// End surpriseTrade
 

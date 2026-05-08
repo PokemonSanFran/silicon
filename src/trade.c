@@ -4568,6 +4568,7 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void BufferInGameTradeMonName(void)
 {
+    return; // surpriseTrade
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8005];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
@@ -4916,6 +4917,7 @@ void Task_SurpriseTrade(u8 taskId)
         return;
 
     SetSurpriseTradeFlag(TRUE);
+    CreateWonderTradePokemon();
     SetMainCallback2(CB2_InitInGameTrade);
     gFieldCallback = ShowTradedMonReturnToStartMenu;
     DestroyTask(taskId);
