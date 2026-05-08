@@ -1957,7 +1957,7 @@ bool32 HandleFaintedMonActions(void)
             ResetStartingStatuses();
             do
             {
-                if (gBattleMons[gBattleStruct->eventState.faintedActionBattler].hp != 0 
+                if (gBattleMons[gBattleStruct->eventState.faintedActionBattler].hp != 0
                     || IsOnPlayerSide(gBattleStruct->eventState.faintedActionBattler))
                 {
                     continue;
@@ -5847,6 +5847,12 @@ enum Obedience GetAttackerObedienceForAction(void)
     calc = (levelReferenced + obedienceLevel) * (rnd & 255) >> 8;
     if (calc < obedienceLevel)
         return OBEYS;
+
+    // Start siliconMerge
+#ifndef RELEASE
+    return OBEYS;
+#endif
+    // End siliconMerge
 
     //  Clear the Z-Move flags if the battler is disobedient as to not waste the Z-Move
     if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE)
