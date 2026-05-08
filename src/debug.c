@@ -4690,6 +4690,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_INFIELDER) \
     X(MUS_IRISNA_TOWN_GYM) \
     X(MUS_EARTHQUAKE) \
+    X(MUS_VS_THE_TIDE) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \

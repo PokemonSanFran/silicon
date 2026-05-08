@@ -5888,6 +5888,8 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_PYRAMID_KING:
             return MUS_VS_FRONTIER_BRAIN;
 // Start firstMusicUpdate
+        case TRAINER_CLASS_COMRADE:
+            return MUS_VS_THE_TIDE;
         case TRAINER_CLASS_SHARPRISE_ENFORCER:
         case TRAINER_CLASS_CHARLOTTE:
             return MUS_VS_CHARLOTTE;

@@ -553,6 +553,7 @@ enum
     MUS_INFIELDER,
     MUS_IRISNA_TOWN_GYM,
     MUS_EARTHQUAKE,
+    MUS_VS_THE_TIDE,
     MUS_LAST,
 };
 #define END_MUS (MUS_LAST - 1)
