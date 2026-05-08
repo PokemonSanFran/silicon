@@ -14721,10 +14721,10 @@
         },
     },
 #line 5497
-    [DIFFICULTY_NORMAL][TRAINER_CHEFC] =
+    [DIFFICULTY_NORMAL][TRAINER_040CEA33] =
     {
 #line 5498
-        .trainerName = _("Chefc"),
+        .trainerName = _("040CEA33"),
 #line 5499
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5500
@@ -14791,10 +14791,10 @@
         },
     },
 #line 5524
-    [DIFFICULTY_NORMAL][TRAINER_CHEFB] =
+    [DIFFICULTY_NORMAL][TRAINER_0389363C] =
     {
 #line 5525
-        .trainerName = _("Chefb"),
+        .trainerName = _("0389363C"),
 #line 5526
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5528
@@ -14839,10 +14839,10 @@
         },
     },
 #line 5543
-    [DIFFICULTY_NORMAL][TRAINER_CHEFA] =
+    [DIFFICULTY_NORMAL][TRAINER_032E8AC9] =
     {
 #line 5544
-        .trainerName = _("Chefa"),
+        .trainerName = _("TRAINER_032E8AC9"),
 #line 5545
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 5547
@@ -35591,10 +35591,10 @@
         },
     },
 #line 12120
-    [DIFFICULTY_NORMAL][TRAINER_040CEA33] =
+    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
     {
 #line 12121
-        .trainerName = _("040CEA33"),
+        .trainerName = _("LEAF"),
 #line 12122
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12123
@@ -35619,10 +35619,10 @@
         },
     },
 #line 12128
-    [DIFFICULTY_NORMAL][TRAINER_0389363C] =
+    [DIFFICULTY_NORMAL][TRAINER_RED] =
     {
 #line 12129
-        .trainerName = _("0389363C"),
+        .trainerName = _("RED"),
 #line 12130
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12131
@@ -35639,90 +35639,6 @@
 #line 12135
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 12134
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 12136
-    [DIFFICULTY_NORMAL][TRAINER_032E8AC9] =
-    {
-#line 12137
-        .trainerName = _("032E8AC9"),
-#line 12138
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-#line 12139
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 12141
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12143
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12142
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 12144
-    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
-    {
-#line 12145
-        .trainerName = _("LEAF"),
-#line 12146
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-#line 12147
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 12149
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12151
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12150
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 12152
-    [DIFFICULTY_NORMAL][TRAINER_RED] =
-    {
-#line 12153
-        .trainerName = _("RED"),
-#line 12154
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-#line 12155
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 12157
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12159
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12158
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
