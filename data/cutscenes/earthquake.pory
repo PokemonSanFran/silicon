@@ -11,8 +11,6 @@ const FLAG_HIDE_BAIYA_HOUSE = FLAG_TEMP_1
 
 const FLAG_HIDE_TRANSPORT = FLAG_TEMP_1F
 
-// PSF TODO if the player has not completed the elite four's takedown quest, they don't appear after the earthquake or looking into the secret lab, and otherwise still at arantraz
-
 script Earthquake_HideObject_Script {
         setflag(FLAG_TEMP_4)
         setflag(FLAG_TEMP_2)
@@ -148,7 +146,6 @@ script Earthquake_ShowDestroyedCity_Script {
 }
 
 script Earthquake_StartRescue_Dialogue {
-    //PSF TODO Prevent player leaving the city during this mission
 
     special(RemoveCameraObject)
 

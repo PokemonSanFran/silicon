@@ -2294,7 +2294,6 @@
 	.endm
 
 @ Completes the specified quest.
-// PSF TODO this does not properly unallocate resources when done, because running 5 in a row and then opening start menu crashes the game
 	.macro completequest quest:req
 	closemessage
 	playfanfare MUS_LEVEL_UP
