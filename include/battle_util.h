@@ -104,7 +104,6 @@ enum ImmunityHealStatusOutcome
 
 extern const struct TypePower gNaturalGiftTable[];
 
-#include "constants/hold_effects.h" // siliconMerge // PSF TODO i have no idea why this needs to be here but as of 1.13, it does.
 struct BattleContext
 {
     enum BattlerId battlerAtk:3;
