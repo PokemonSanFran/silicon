@@ -6,9 +6,7 @@ script Chasilla_MochiShop_Script_Buy
 {
     msgbox(format("Welcome to Buddy's Mochi!"),,SPEAKER_MOCHISHOPKEEPER)
     closemessage
-    // PSF TODO reimplement once presto is merged
-    // openpokemart(BuddyMochiShop)
-    // waitstate
+    openpokemart(BuddyMochiShop)
     release
     end
 }
