@@ -50,6 +50,7 @@
 #include "quest_logic.h"
 #include "heal_location.h"
 #include "map_preview_screen.h"
+#include "qol_field_moves.h"
 
 /*
 
@@ -173,6 +174,8 @@ static void UpdateCursorPositionOnAnimChange();
 static void ResetCursorPositionBeforeAnimChange();
 
 static void InitMapBasedOnPlayerLocation(void);
+static bool8 IsCurrentMapMode_Flying(u32 mapMode);
+static bool8 IsCurrentMapMode_FlyPokemon(u32 mapMode);
 static u8 *GetSFMapName(u8 *dest, u16 regionMapId, u16 padLength);
 static u8 GetMapsecTypeHasVisited(u16 mapSecId);
 static u16 GetMapSecIdAt(u16 x, u16 y);
@@ -1333,29 +1336,17 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
     }
 }
 
-void Task_OpenFlyMapSystemFromPartyMenu(u8 taskId)
-{
-    //s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
-    {
-        sCurrentMapMode = MAP_MODE_FLY;
-        CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_StartMenu_ReturnToUI,TRUE);
-        DestroyTask(taskId);
-    }
-}
-
 static bool8 MapSystem_DoesCurrentMapAllowFastTravel(void)
 {
     enum StartMenuCellularSignals signal = CellularSignal_GetCurrentStrength();
     return (signal == START_SIGNAL_STRONG);
 }
 
-void CB2_OpenFlyMapSystem(MainCallback callback)
+void CB2_OpenFlyMapSystem(MainCallback callback, enum MapModes mode)
 {
     if (!gPaletteFade.active)
     {
-        sCurrentMapMode = MAP_MODE_FLY;
+        sCurrentMapMode = mode,
         CleanupOverworldWindowsAndTilemaps();
         MapSystem_Init(callback,MapSystem_DoesCurrentMapAllowFastTravel());
     }
@@ -1363,19 +1354,17 @@ void CB2_OpenFlyMapSystem(MainCallback callback)
 
 void CB2_OpenFlyMapSystemReturnToPartyMenu(void)
 {
-    CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap);
+    CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap,MAP_MODE_FLY_POKEMON);
 }
-
-#include "qol_field_moves.h"
 
 void CB2_OpenFlyMapSystemReturnToBag(void)
 {
-    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool,MAP_MODE_FLY_TOOL_BAG);
 }
 
 void CB2_OpenFlyMapSystemReturnToField(void)
 {
-    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool,MAP_MODE_FLY_TOOL_FIELD);
 }
 
 void Script_OpenTaxi(void)
@@ -1386,7 +1375,6 @@ void Script_OpenTaxi(void)
 
 void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 {
-    //s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         sCurrentMapMode = MAP_MODE_TAXI;
@@ -1458,8 +1446,8 @@ static void Task_MapSystemWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        MapSystem_FreeResources();
         SetMainCallback2(sRegionMap->savedCallback);
+        MapSystem_FreeResources();
         DestroyTask(taskId);
     }
 }
@@ -1793,7 +1781,9 @@ static void PrintWarpPriceOnTooltip_AllFrames(void)
             PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (2 * 0x800) + (26 * TILE_SIZE_4BPP));
             PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (3 * 0x800) + (26 * TILE_SIZE_4BPP));
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             break;
     }
 }
@@ -1841,7 +1831,9 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         case MAP_MODE_TAXI:
             LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipTaxiGfx);
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipFlyGfx);
             break;
         default:
@@ -2727,7 +2719,9 @@ static void PrintHeaderTitleToWindow()
                 }
                 break;
             }
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             {
                 if(CheckIfHoverLocationIsMapSecNone())
                 {
@@ -2810,7 +2804,7 @@ static void PrintHeaderWarpConfirmToWindow(void)
 
     StringAppend(gStringVar1, sText_QuestionMark);
 
-    if (sCurrentMapMode == MAP_MODE_FLY)
+    if (IsCurrentMapMode_Flying(sCurrentMapMode))
         return;
 
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar1);
@@ -3276,7 +3270,6 @@ static u16 fareTable[MAP_MODE_COUNT][FARE_TYPE_COUNT] =
     [MAP_MODE_ARRIBA] = {FARE_BASE_ARRIBA, FARE_DISTANCE_ARRIBA},
     [MAP_MODE_TAXI] = {FARE_BASE_TAXI, FARE_DISTANCE_TAXI},
     [MAP_MODE_TROLLEY] = {FARE_BASE_TROLLEY, FARE_DISTANCE_TROLLEY},
-    [MAP_MODE_FLY] = {FARE_BASE_FLY, FARE_DISTANCE_FLY},
 };
 
 static u32 CalculateDistance(u32 nextLocation)
@@ -3300,6 +3293,9 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
         if (!GetMenuL2State() || (!index))
             return 0;
     }
+
+    if (IsCurrentMapMode_Flying(type))
+        return 0;
 
     if (IsCurrentIndexLastInL2List(index) && GetMenuL2State())
         return 0;
@@ -3572,7 +3568,14 @@ static u8 HandleAttemptWarpInput(void)
 
         //DebugPrintf("Quest Exception: %d", questException);
 
-        if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
+        if (IsCurrentMapMode_Flying(sCurrentMapMode))
+        {
+            sRegionMap->warpCounter = 0;
+            Quest_FlightPatterns_SetFlightPath(sRegionMap->mapSecId);
+            PlaySE(SE_SELECT);
+            sRegionMap->inputCallback = HandleWarpCloseMenu;
+        }
+        else if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
@@ -3744,11 +3747,18 @@ static u8 HandleWarpCloseMenu(void)
         case 1:
             if (!gPaletteFade.active)
             {
-                MapSystem_FreeResources();
-                if(PlayerHasFollowerNPC())
-                    ClearFollowerNPCData();
-                ReturnToFieldFromRegionMapWarpSelect();
-                sRegionMap->warpCounter = 2;
+                if (sCurrentMapMode == MAP_MODE_FLY_POKEMON)
+                    ReturnToFieldFromFlyMapSelect();
+                else
+                {
+                    if (PlayerHasFollowerNPC())
+                        ClearFollowerNPCData();
+
+                    ReturnToFieldFromRegionMapWarpSelect();
+
+                    MapSystem_FreeResources();
+                    sRegionMap->warpCounter = 2;
+                }
             }
             break;
     }
@@ -3771,7 +3781,9 @@ static void SwapBackCursorGraphics()
         case MAP_MODE_TAXI:
             CpuCopy32(sRegionMapCursorTooltipTaxiGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             CpuCopy32(sRegionMapCursorTooltipFlyGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
         default:
@@ -4183,3 +4195,33 @@ void BufferTrolleyBaseFare(void)
     ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TROLLEY,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TROLLEY));
 }
 
+enum MapModes GetCurrentMapMode(void)
+{
+    return sCurrentMapMode;
+}
+
+static bool8 IsCurrentMapMode_Flying(u32 mapMode)
+{
+    if (IsCurrentMapMode_FlyToolFromBag(mapMode))
+        return TRUE;
+
+    if (IsCurrentMapMode_FlyToolFromField(mapMode))
+        return TRUE;
+
+    return (IsCurrentMapMode_FlyPokemon(mapMode));
+}
+
+static bool8 IsCurrentMapMode_FlyPokemon(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_POKEMON);
+}
+
+bool8 IsCurrentMapMode_FlyToolFromBag(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_TOOL_BAG);
+}
+
+bool8 IsCurrentMapMode_FlyToolFromField(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_TOOL_FIELD);
+}

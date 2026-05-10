@@ -235,8 +235,9 @@
 #define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
 #define FLAG_DELIVERED_DEVON_GOODS           0x95
 #define FLAG_RECEIVED_CONTEST_PASS           0x96 // Unused, leftover from R/S
-#define FLAG_TALKED_TO_ELEANOR_POSTGAME        0x96 // Silicon Flag
+#define FLAG_SKY_BATTLE                      0x96 // Silicon Flag
 #define FLAG_RECEIVED_CASTFORM               0x97
+#define FLAG_TALKED_TO_ELEANOR_POSTGAME      0x97 // Silicon Flag
 #define FLAG_RECEIVED_SUPER_ROD              0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
 #define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED  0x9A
@@ -805,7 +806,7 @@
 #define FLAG_DEFEATED_CONSTRUCTION_MON_B 0x2A7 // Silicon Flag
 #define FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT 0x2A8 // Silicon Flag
 #define FLAG_LITTLE_CUP_BATTLE                                      0x2A9 // Silicon Flag
-#define FLAG_UNUSED_0x2AA  0x2AA // Unused Flag
+#define FLAG_POST_SKY_BATTLE 0x2AA // Silicon Flag
 #define FLAG_UNUSED_0x2AB  0x2AB // Unused Flag
 #define FLAG_UNUSED_0x2AC  0x2AC // Unused Flag
 #define FLAG_UNUSED_0x2B0  0x2B0 // Unused Flag

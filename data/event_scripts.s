@@ -93,6 +93,7 @@
 #include "constants/ui_adventure_guide.h" @ adventureGuide
 #include "constants/ui_map_system.h"
 @ End siliconMerge
+#include "constants/fly_encounter.h" @ flyEncounters
 #include "constants/speaker_names.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

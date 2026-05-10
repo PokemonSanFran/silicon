@@ -302,7 +302,6 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] =
         .flagId = FLAG_VISITED_OROLAND,
         .image = IMG_VIRIDIAN_FOREST,
     },
-    /*
     [MPS_OROLAND_COLISEUM] =
     {
         .mapsec = MAPSEC_OROLAND_COLISEUM,
@@ -317,7 +316,6 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] =
         .flagId = FLAG_VISITED_ROUTE98,
         .image = IMG_VIRIDIAN_FOREST,
     },
-    */
     [MPS_CHASILLA] =
     {
         .mapsec = MAPSEC_CHASILLA,
@@ -1273,6 +1271,9 @@ bool32 ShouldRunCaveMapPreviewScreen(void)
 bool32 ShouldRunFadeInMapPreviewScreen(void)
 {
     if (GetLastUsedWarpMapSectionId() == gMapHeader.regionMapSectionId)
+        return FALSE;
+
+    if (VarGet(VAR_PROLOGUE_STATE) != START_ADVENTURE)
         return FALSE;
 
     return (IsMapPreviewTypeFadeIn(gMapHeader.regionMapSectionId));

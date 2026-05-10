@@ -102,7 +102,7 @@
 #define VAR_POKELOT_RND1                                 0x404B
 #define VAR_POKELOT_RND2                                 0x404C
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
-#define VAR_FLY_TOOL_SOURCE                              0x404E // PSF Var
+#define VAR_SKY_BATTLE                                   0x404E
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_FIRSTRUNEXPERIENCE 0x4050 // PSF Var
@@ -214,6 +214,7 @@
 #define VAR_TIRABUDIN_PLACE_STATE                                0x409D // PSF Var
 #define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE      0x409E
 #define VAR_MOSSDEEP_SPACE_CENTER_STATE                  0x409F
+#define VAR_FLIGHT_PATH                                  0x409F // PSF Var
 #define VAR_SLATEPORT_HARBOR_STATE                       0x40A0
 #define VAR_INNER_CONSTRUCTION_SITE_STATE                                0x40A1 // PSF Var
 #define VAR_SEAFLOOR_CAVERN_STATE                        0x40A2

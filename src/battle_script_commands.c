@@ -11151,6 +11151,8 @@ static void Cmd_givecaughtmon(void)
     if (IsNPCFollowerWildBattle())
         LoadPlayerParty();
 
+    HandleBattleVariantEndParty(); // flyEncounters
+
     switch (state)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:

@@ -49,6 +49,7 @@
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
+#include "fly_encounter.h"
 #include "battle_scripts.h"
 #include "quests.h"
 #include "options_battle.h"
@@ -2939,6 +2940,134 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 
     rabiesPokerus = Random() % 2;
     SetBoxMonData(boxMon, MON_DATA_POKERUS, &rabiesPokerus);
+}
+
+// ***********************************************************************
+// Quest: Flight Patterns
+// ***********************************************************************
+
+static const u32 flyLookUpTable[QUEST_FLIGHTPATTERNS_SUB_COUNT][3]=
+{
+    [SUB_QUEST_1] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_NONE,
+    },
+    [SUB_QUEST_2] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+    },
+    [SUB_QUEST_3] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+    },
+    [SUB_QUEST_4] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+    },
+    [SUB_QUEST_5] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+    },
+    [SUB_QUEST_6] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+    },
+    [SUB_QUEST_7] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+    },
+};
+
+u32 Quest_FlightPatterns_GetFlightPath(void)
+{
+    return (VarGet(VAR_FLIGHT_PATH));
+}
+
+void Quest_FlightPatterns_IncrementFlightPath(void)
+{
+    u32 oldVar = VarGet(VAR_FLIGHT_PATH);
+    VarSet(VAR_FLIGHT_PATH,oldVar+1);
+}
+
+void Quest_FlightPatterns_ClearFlightPath(void)
+{
+    VarSet(VAR_FLIGHT_PATH,0);
+}
+
+void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
+{
+    u32 currentLocation = gMapHeader.regionMapSectionId;
+    u32 nextLocation = mapSecId;
+    u32 locationIndex;
+
+    //DebugPrintf("currentLocation %d\n lastLocation %d\n",currentLocation,nextLocation);
+
+    for (locationIndex = 0; locationIndex < QUEST_FLIGHTPATTERNS_SUB_COUNT; locationIndex++)
+    {
+        if (currentLocation != flyLookUpTable[locationIndex][0])
+            continue;
+
+        if (nextLocation != flyLookUpTable[locationIndex][1])
+            continue;
+
+        if (flyLookUpTable[locationIndex][2] == MAPSEC_QUEST_FLIGHT_PATTERNS_NONE)
+            continue;
+
+        //DebugPrintf("locationIndex %d",locationIndex);
+        //DebugPrintf("flight apth%d",Quest_FlightPatterns_GetFlightPath());
+
+        if (locationIndex != Quest_FlightPatterns_GetFlightPath()+1)
+            continue;
+
+        //if (lastLocation != flyLookUpTable[locationIndex][2])
+            //continue;
+
+        Quest_FlightPatterns_IncrementFlightPath();
+        return;
+    }
+    Quest_FlightPatterns_ClearFlightPath();
+}
+
+bool32 Quest_FlightPatterns_OnLastLeg(void)
+{
+    return (Quest_FlightPatterns_GetFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT - 1);
+}
+
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32 steps, bool32 isLure)
+{
+    bool32 lastLeg = Quest_FlightPatterns_OnLastLeg();
+
+    if (!isLure && steps && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!isLure && steps)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    TrySkyBattle();
+    if (!gSpecialVar_Result && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!gSpecialVar_Result)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    if (lastLeg)
+        return FLY_ENCOUNTER_QUEST_BOSS;
+
+    return FLY_ENCOUNTER_QUEST_ATTACK;
 }
 
 // ***********************************************************************

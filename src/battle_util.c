@@ -55,6 +55,7 @@
 #include "options_battle.h" // Battle Settings: Experience
 #include "ui_options_menu.h" // siliconMerge
 #include "little_cup.h" // littlecup
+#include "fly_encounter.h" // flyEncounters
 
 static bool32 TryRemoveScreens(enum BattlerId battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(enum BattlerId battler);
@@ -3071,6 +3072,11 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;
+
+    // Start flyEncounters
+    if (IfSkyBattleAndOverworldTerrain(caseId, gStartingStatuses))
+        return FALSE;
+    // End flyEncounters
 
     switch (caseId)
     {

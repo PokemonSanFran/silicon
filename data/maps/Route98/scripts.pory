@@ -1,7 +1,8 @@
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
 
 mapscripts Route98_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_1,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerA)
         call(Route98_RouteFlag_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
@@ -14,8 +15,9 @@ mapscripts Route98_MapScripts {
 }
 
 script Route98_RouteFlag_Script{
-	if(flag(FLAG_VISITED_OROLAND_COLISEUM) && flag(FLAG_VISITED_OROLAND)){
-			setflag(FLAG_VISITED_ROUTE98)
+	if(flag(FLAG_VISITED_OROLAND_COLISEUM) && flag(FLAG_VISITED_OROLAND))
+    {
+        setflag(FLAG_VISITED_ROUTE98)
 	}
 	return
 }

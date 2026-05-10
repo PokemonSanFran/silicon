@@ -1,6 +1,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
+#include "quest_logic.h" // flyEncounters
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "berry.h"
@@ -500,6 +501,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
     FollowerNPC_TryRemoveFollowerOnWhiteOut();
+    Quest_FlightPatterns_ClearFlightPath(); // flyEncounters
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -2779,6 +2781,7 @@ static void ResumeMap(bool32 a1)
     WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
+    ClearAllPhenomenonData(); // phenomenon
 }
 
 static void InitObjectEventsLink(void)
