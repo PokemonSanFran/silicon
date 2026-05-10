@@ -485,7 +485,7 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
 
     if (proximity <= SNEAKING_PROXIMITY)
     {
-        PlaySE(SE_POKENAV_ON);
+        //PlaySE(SE_POKENAV_ON); // dexnav
         // move
         if (searchLevel > 1 && sDexNavSearchDataPtr->moves[0])
         {
@@ -870,6 +870,7 @@ static void SetUpDexNavSearch(void)
 static void DexNavSearchBail(const u8 *script)
 {
     // Start dexnav
+    Dexnav_StopOverworldFieldEffect();
     //TRY_FREE_AND_SET_NULL(sDexNavSearchDataPtr);
     sDexNavSearchDataPtr = NULL;
     // End dexnav
@@ -1028,9 +1029,8 @@ void EndDexNavSearch(void)
     // Start dexnav
     //RemoveDexNavWindowAndGfx(); 
     Dexnav_FreeOverworldSpriteResources();
-    // End dexnav
-    FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
-    // Start dexnav
+    Dexnav_StopOverworldFieldEffect();
+    //FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
     //FREE_AND_SET_NULL(sDexNavSearchDataPtr);
     sDexNavSearchDataPtr = NULL;
     // End dexnav
@@ -1039,6 +1039,7 @@ void EndDexNavSearch(void)
 
 static void EndDexNavSearchSetupScript(const u8 *script)
 {
+    Dexnav_StopOverworldFieldEffect();
     Dexnav_SavePreviousChain();
     gSaveBlock3Ptr->dexNavChain = 0;   //reset chain
     EndDexNavSearch();
@@ -1163,6 +1164,7 @@ bool32 OnStep_DexNavSearch(void)
 
     if (sDexNavSearchDataPtr->proximity < 1)
     {
+        Dexnav_StopOverworldFieldEffect();
         gDexNavSpecies = sDexNavSearchDataPtr->species;
         CreateDexNavWildMon(sDexNavSearchDataPtr->species, sDexNavSearchDataPtr->potential, sDexNavSearchDataPtr->monLevel,
                             sDexNavSearchDataPtr->abilityNum, sDexNavSearchDataPtr->heldItem, sDexNavSearchDataPtr->moves);
@@ -1187,7 +1189,10 @@ bool32 OnStep_DexNavSearch(void)
         && sDexNavSearchDataPtr->proximity < GetMovementProximityBySearchLevel() && sDexNavSearchDataPtr->movementCount < 2
         && !sDexNavSearchDataPtr->hiddenSearch)
     {
-        FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
+    // Start dexnav
+        Dexnav_StopOverworldFieldEffect();
+        //FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
+    // End dexnav
 
         if (!TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 10, 10, TRUE))
         {
@@ -2813,3 +2818,14 @@ void ResumeDexNavSearch(void)
     Dexnav_StartFieldEffect();
     sDexNavSearchPaused = FALSE;
 }
+
+// Start dexnav
+void Dexnav_StopOverworldFieldEffect(void)
+{
+    if (sDexNavSearchDataPtr == NULL)
+        return;
+
+    StopSE();
+    FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
+}
+// End dexnav

@@ -125,6 +125,7 @@ u8 GetSearchLevel(u32 species); // dexnav
 void CB1_DexNavSearchCallback(void);
 void PauseDexNavSearch(void); // dexnav
 void ResumeDexNavSearch(void); // dexnav
+void Dexnav_StopOverworldFieldEffect(void); // dexnav
 
 extern u16 gDexNavSpecies;
 
