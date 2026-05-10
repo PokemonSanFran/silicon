@@ -20,5 +20,8 @@
 #define PARTNER_OLIVER 15
 #define PARTNER_RED 16
 #define PARTNER_COUNT 17
+//#define PARTNER_DUMMY 2
+//#define PARTNER_COUNT 3
+//Tests need PARTNER_COUNT to be at least 3 so we add a dummy partner
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

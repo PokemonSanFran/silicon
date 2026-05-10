@@ -330,7 +330,6 @@ $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal \
 
 $(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/old_pal5.gbapal \
                                     $(UNUSEDGFXDIR)/old_pal6.gbapal \
-                                    $(UNUSEDGFXDIR)/old_pal7.gbapal
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur.4bpp \
