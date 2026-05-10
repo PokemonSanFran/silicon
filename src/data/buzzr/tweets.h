@@ -61,9 +61,9 @@ const struct Tweet gTweets[] =
         .quest = QUEST_VSDEOXYS,
         .dislikeCount = 24,
         .likeCount = 46,
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/3.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/buzzr/tweet_pics/3.png", ".4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.gbapal"),
+        .pal = (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/tweet_pics/3.png", ".gbapal"),
     },
     [TWEET_QUEST_NPC_TUNNELS] =
     {

@@ -269,22 +269,22 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
-static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
+static const u32 sZapBackgrounds[] = INCGFX_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.png", ".4bpp");
 
-static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.4bpp.smol");
+static const u32 sLogomarkAllTiles[] = INCGFX_U32("graphics/ui_menus/buzzr/buzzr_background.png", ".4bpp.smol");
 static const u16 sLogomarkAllTilemap[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
 
-static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr.gbapal");
+static const u16 sLogomarkAllPalette[] = INCGFX_U16("graphics/ui_menus/buzzr/buzzr.pal", ".gbapal");
 
-static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
-static const u8 sPrivate_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/private.4bpp");
-static const u8 sMetrics_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/metrics_long.4bpp");
-static const u8 sUnread_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/unread.4bpp");
-static const u8 sPicture_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/picture.4bpp");
+static const u8 sVerified_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/verified.png", ".4bpp");
+static const u8 sPrivate_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/private.png", ".4bpp");
+static const u8 sMetrics_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/metrics_long.png", ".4bpp");
+static const u8 sUnread_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/unread.png", ".4bpp");
+static const u8 sPicture_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/picture.png", ".4bpp");
 
-static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.smol");
-static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
-static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.smol");
+static const u32 BuzzrUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/buzzr/up_arrow.png", ".4bpp.smol");
+static const u32 BuzzrDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/down_arrow.png", ".4bpp.smol");
+static const u32 BuzzrCursor_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/cursor.png", ".4bpp.smol");
 
 static const struct {
     const struct SpriteSheet sheets[NUM_BUZZR_SPRITE_TAGS];
@@ -293,7 +293,7 @@ static const struct {
 {
     {
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/icons.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/icons.png", ".4bpp"),
             TILE_OFFSET_4BPP(32), BUZZR_SPRITE_HEADER_TAG,
         },
     },
@@ -1992,7 +1992,7 @@ static void CreateQuestSprite(void)
 
     struct SpriteSheet sSpriteSheet_Quest =
     {
-        (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/quest.4bpp"),
+        (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/quest.png", ".4bpp"),
         TILE_OFFSET_4BPP(32), SpriteTag,
     };
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;

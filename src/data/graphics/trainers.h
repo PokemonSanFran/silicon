@@ -467,96 +467,96 @@ const u32 gTrainerFrontPic_PainterFrlg[] = INCGFX_U32("graphics/trainers/front_p
 const u16 gTrainerPalette_PainterFrlg[] = INCGFX_U16("graphics/trainers/palettes/painter_frlg.pal", ".gbapal");
 
 // Start silicon
-const u32 gTrainerFrontPic_SiliconPlayerM1[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerM2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerM3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerN1[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerN2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerN3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerN3.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerF1[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF1.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF2.4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerF3[] = INCBIN_U32("graphics/trainers/front_pics/siliconPlayerF3.4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerN1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerN2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerN3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerN3.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerF1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF2.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerF3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF3.png", ".4bpp.smol");
 
-const u32 gTrainerFrontPic_Baiya[] = INCBIN_U32("graphics/trainers/front_pics/baiya.4bpp.smol");
-const u16 gTrainerFrontPalette_Baiya[] = INCBIN_U16("graphics/trainers/front_pics/baiya.gbapal");
+const u32 gTrainerFrontPic_Baiya[] = INCGFX_U32("graphics/trainers/front_pics/baiya.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Baiya[] = INCGFX_U16("graphics/trainers/front_pics/baiya.png", ".gbapal");
 
-const u32 gTrainerFrontPic_Adaora[] = INCBIN_U32("graphics/trainers/front_pics/adaora.4bpp.smol");
-const u16 gTrainerFrontPalette_Adaora[] = INCBIN_U16("graphics/trainers/front_pics/adaora.gbapal");
+const u32 gTrainerFrontPic_Adaora[] = INCGFX_U32("graphics/trainers/front_pics/adaora.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Adaora[] = INCGFX_U16("graphics/trainers/front_pics/adaora.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Vigrim[] = INCBIN_U32("graphics/trainers/front_pics/vigrim.4bpp.smol");
-const u16 gTrainerFrontPalette_Vigrim[] = INCBIN_U16("graphics/trainers/front_pics/vigrim.gbapal");
+const u32 gTrainerFrontPic_Vigrim[] = INCGFX_U32("graphics/trainers/front_pics/vigrim.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Vigrim[] = INCGFX_U16("graphics/trainers/front_pics/vigrim.png", ".gbapal");
 
-const u32 gTrainerFrontPic_Bd[] = INCBIN_U32("graphics/trainers/front_pics/bd.4bpp.smol");
-const u16 gTrainerFrontPalette_Bd[] = INCBIN_U16("graphics/trainers/front_pics/bd.gbapal");
+const u32 gTrainerFrontPic_Bd[] = INCGFX_U32("graphics/trainers/front_pics/bd.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Bd[] = INCGFX_U16("graphics/trainers/front_pics/bd.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Belen[] = INCBIN_U32("graphics/trainers/front_pics/belen.4bpp.smol");
-const u16 gTrainerFrontPalette_Belen[] = INCBIN_U16("graphics/trainers/front_pics/belen.gbapal");
+const u32 gTrainerFrontPic_Belen[] = INCGFX_U32("graphics/trainers/front_pics/belen.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Belen[] = INCGFX_U16("graphics/trainers/front_pics/belen.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Dimu[] = INCBIN_U32("graphics/trainers/front_pics/dimu.4bpp.smol");
-const u16 gTrainerFrontPalette_Dimu[] = INCBIN_U16("graphics/trainers/front_pics/dimu.gbapal");
+const u32 gTrainerFrontPic_Dimu[] = INCGFX_U32("graphics/trainers/front_pics/dimu.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Dimu[] = INCGFX_U16("graphics/trainers/front_pics/dimu.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Doyle[] = INCBIN_U32("graphics/trainers/front_pics/doyle.4bpp.smol");
-const u16 gTrainerFrontPalette_Doyle[] = INCBIN_U16("graphics/trainers/front_pics/doyle.gbapal");
+const u32 gTrainerFrontPic_Doyle[] = INCGFX_U32("graphics/trainers/front_pics/doyle.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Doyle[] = INCGFX_U16("graphics/trainers/front_pics/doyle.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Emrys[] = INCBIN_U32("graphics/trainers/front_pics/emrys.4bpp.smol");
-const u16 gTrainerFrontPalette_Emrys[] = INCBIN_U16("graphics/trainers/front_pics/emrys.gbapal");
+const u32 gTrainerFrontPic_Emrys[] = INCGFX_U32("graphics/trainers/front_pics/emrys.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Emrys[] = INCGFX_U16("graphics/trainers/front_pics/emrys.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Imelda[] = INCBIN_U32("graphics/trainers/front_pics/imelda.4bpp.smol");
-const u16 gTrainerFrontPalette_Imelda[] = INCBIN_U16("graphics/trainers/front_pics/imelda.gbapal");
+const u32 gTrainerFrontPic_Imelda[] = INCGFX_U32("graphics/trainers/front_pics/imelda.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Imelda[] = INCGFX_U16("graphics/trainers/front_pics/imelda.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Pua[] = INCBIN_U32("graphics/trainers/front_pics/pua.4bpp.smol");
-const u16 gTrainerFrontPalette_Pua[] = INCBIN_U16("graphics/trainers/front_pics/pua.gbapal");
+const u32 gTrainerFrontPic_Pua[] = INCGFX_U32("graphics/trainers/front_pics/pua.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Pua[] = INCGFX_U16("graphics/trainers/front_pics/pua.png", ".gbapal");
 
-const u32 gTrainerFrontPic_Keiying[] = INCBIN_U32("graphics/trainers/front_pics/keiying.4bpp.smol");
-const u16 gTrainerFrontPalette_Keiying[] = INCBIN_U16("graphics/trainers/front_pics/keiying.gbapal");
+const u32 gTrainerFrontPic_Keiying[] = INCGFX_U32("graphics/trainers/front_pics/keiying.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Keiying[] = INCGFX_U16("graphics/trainers/front_pics/keiying.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Magnus[] = INCBIN_U32("graphics/trainers/front_pics/magnus.4bpp.smol");
-const u16 gTrainerFrontPalette_Magnus[] = INCBIN_U16("graphics/trainers/front_pics/magnus.gbapal");
+const u32 gTrainerFrontPic_Magnus[] = INCGFX_U32("graphics/trainers/front_pics/magnus.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Magnus[] = INCGFX_U16("graphics/trainers/front_pics/magnus.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Neriene[] = INCBIN_U32("graphics/trainers/front_pics/neriene.4bpp.smol");
-const u16 gTrainerFrontPalette_Neriene[] = INCBIN_U16("graphics/trainers/front_pics/neriene.gbapal");
+const u32 gTrainerFrontPic_Neriene[] = INCGFX_U32("graphics/trainers/front_pics/neriene.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Neriene[] = INCGFX_U16("graphics/trainers/front_pics/neriene.pal", ".gbapal");
 
-const u32 gTrainerFrontPic_Shinzo[] = INCBIN_U32("graphics/trainers/front_pics/shinzo.4bpp.smol");
-const u16 gTrainerFrontPalette_Shinzo[] = INCBIN_U16("graphics/trainers/front_pics/shinzo.gbapal");
+const u32 gTrainerFrontPic_Shinzo[] = INCGFX_U32("graphics/trainers/front_pics/shinzo.png", ".4bpp.smol");
+const u16 gTrainerFrontPalette_Shinzo[] = INCGFX_U16("graphics/trainers/front_pics/shinzo.pal", ".gbapal");
 
-const u8 gTrainerBackPic_SiliconPlayerM1[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerM2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerM3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerN1[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerN2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerN3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerN3.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerF1[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF1.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerF2[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF2.4bpp");
-const u8 gTrainerBackPic_SiliconPlayerF3[] = INCBIN_U8("graphics/trainers/back_pics/siliconPlayerF3.4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerN1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerN2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerN3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerN3.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerF1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerF2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF2.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerF3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF3.png", ".4bpp");
 
-const u8 gTrainerBackPic_Baiya[] = INCBIN_U8("graphics/trainers/back_pics/baiya.4bpp");
-const u8 gTrainerBackPic_Adaora[] = INCBIN_U8("graphics/trainers/back_pics/adaora.4bpp");
-const u8 gTrainerBackPic_Bd[] = INCBIN_U8("graphics/trainers/back_pics/bd.4bpp");
-const u8 gTrainerBackPic_Belen[] = INCBIN_U8("graphics/trainers/back_pics/belen.4bpp");
-const u8 gTrainerBackPic_Dimu[] = INCBIN_U8("graphics/trainers/back_pics/dimu.4bpp");
-const u8 gTrainerBackPic_Doyle[] = INCBIN_U8("graphics/trainers/back_pics/doyle.4bpp");
-const u8 gTrainerBackPic_Emrys[] = INCBIN_U8("graphics/trainers/back_pics/emrys.4bpp");
-const u8 gTrainerBackPic_Imelda[] = INCBIN_U8("graphics/trainers/back_pics/imelda.4bpp");
-const u8 gTrainerBackPic_Pua[] = INCBIN_U8("graphics/trainers/back_pics/pua.4bpp");
-const u8 gTrainerBackPic_Keiying[] = INCBIN_U8("graphics/trainers/back_pics/keiying.4bpp");
-const u8 gTrainerBackPic_Magnus[] = INCBIN_U8("graphics/trainers/back_pics/magnus.4bpp");
-const u8 gTrainerBackPic_Neriene[] = INCBIN_U8("graphics/trainers/back_pics/neriene.4bpp");
-const u8 gTrainerBackPic_Shinzo[] = INCBIN_U8("graphics/trainers/back_pics/shinzo.4bpp");
+const u8 gTrainerBackPic_Baiya[] = INCGFX_U8("graphics/trainers/back_pics/baiya.png", ".4bpp");
+const u8 gTrainerBackPic_Adaora[] = INCGFX_U8("graphics/trainers/back_pics/adaora.png", ".4bpp");
+const u8 gTrainerBackPic_Bd[] = INCGFX_U8("graphics/trainers/back_pics/bd.png", ".4bpp");
+const u8 gTrainerBackPic_Belen[] = INCGFX_U8("graphics/trainers/back_pics/belen.png", ".4bpp");
+const u8 gTrainerBackPic_Dimu[] = INCGFX_U8("graphics/trainers/back_pics/dimu.png", ".4bpp");
+const u8 gTrainerBackPic_Doyle[] = INCGFX_U8("graphics/trainers/back_pics/doyle.png", ".4bpp");
+const u8 gTrainerBackPic_Emrys[] = INCGFX_U8("graphics/trainers/back_pics/emrys.png", ".4bpp");
+const u8 gTrainerBackPic_Imelda[] = INCGFX_U8("graphics/trainers/back_pics/imelda.png", ".4bpp");
+const u8 gTrainerBackPic_Pua[] = INCGFX_U8("graphics/trainers/back_pics/pua.png", ".4bpp");
+const u8 gTrainerBackPic_Keiying[] = INCGFX_U8("graphics/trainers/back_pics/keiying.png", ".4bpp");
+const u8 gTrainerBackPic_Magnus[] = INCGFX_U8("graphics/trainers/back_pics/magnus.png", ".4bpp");
+const u8 gTrainerBackPic_Neriene[] = INCGFX_U8("graphics/trainers/back_pics/neriene.png", ".4bpp");
+const u8 gTrainerBackPic_Shinzo[] = INCGFX_U8("graphics/trainers/back_pics/shinzo.png", ".4bpp");
 
-const u16 gTrainerBackPicPalette_SiliconPlayerM1[] = INCBIN_U16("graphics/trainers/palettes/siliconPlayer.gbapal");
-const u16 gTrainerBackPicPalette_Baiya[] = INCBIN_U16("graphics/trainers/palettes/baiya.gbapal");
-const u16 gTrainerBackPicPalette_Adaora[] = INCBIN_U16("graphics/trainers/palettes/adaora.gbapal");
-const u16 gTrainerBackPicPalette_Bd[] = INCBIN_U16("graphics/trainers/palettes/bd.gbapal");
-const u16 gTrainerBackPicPalette_Belen[] = INCBIN_U16("graphics/trainers/palettes/belen.gbapal");
-const u16 gTrainerBackPicPalette_Dimu[] = INCBIN_U16("graphics/trainers/palettes/dimu.gbapal");
-const u16 gTrainerBackPicPalette_Doyle[] = INCBIN_U16("graphics/trainers/palettes/doyle.gbapal");
-const u16 gTrainerBackPicPalette_Emrys[] = INCBIN_U16("graphics/trainers/palettes/emrys.gbapal");
-const u16 gTrainerBackPicPalette_Imelda[] = INCBIN_U16("graphics/trainers/palettes/imelda.gbapal");
-const u16 gTrainerBackPicPalette_Pua[] = INCBIN_U16("graphics/trainers/palettes/pua.gbapal");
-const u16 gTrainerBackPicPalette_Keiying[] = INCBIN_U16("graphics/trainers/palettes/keiying.gbapal");
-const u16 gTrainerBackPicPalette_Magnus[] = INCBIN_U16("graphics/trainers/palettes/magnus.gbapal");
-const u16 gTrainerBackPicPalette_Neriene[] = INCBIN_U16("graphics/trainers/palettes/neriene.gbapal");
-const u16 gTrainerBackPicPalette_Shinzo[] = INCBIN_U16("graphics/trainers/palettes/shinzo.gbapal");
+const u16 gTrainerBackPicPalette_SiliconPlayerM1[] = INCGFX_U16("graphics/trainers/palettes/siliconPlayer.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Baiya[] = INCGFX_U16("graphics/trainers/palettes/baiya.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Adaora[] = INCGFX_U16("graphics/trainers/palettes/adaora.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Bd[] = INCGFX_U16("graphics/trainers/palettes/bd.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Belen[] = INCGFX_U16("graphics/trainers/palettes/belen.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Dimu[] = INCGFX_U16("graphics/trainers/palettes/dimu.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Doyle[] = INCGFX_U16("graphics/trainers/palettes/doyle.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Emrys[] = INCGFX_U16("graphics/trainers/palettes/emrys.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Imelda[] = INCGFX_U16("graphics/trainers/palettes/imelda.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Pua[] = INCGFX_U16("graphics/trainers/palettes/pua.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Keiying[] = INCGFX_U16("graphics/trainers/palettes/keiying.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Magnus[] = INCGFX_U16("graphics/trainers/palettes/magnus.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Neriene[] = INCGFX_U16("graphics/trainers/palettes/neriene.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Shinzo[] = INCGFX_U16("graphics/trainers/palettes/shinzo.pal", ".gbapal");
 // End silicon
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");

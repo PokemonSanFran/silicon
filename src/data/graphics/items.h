@@ -1,7 +1,7 @@
 const u32 gItemIcon_QuestionMark[] = INCGFX_U32("graphics/items/icons/question_mark.png", ".4bpp.smol");
 const u16 gItemIconPalette_QuestionMark[] = INCGFX_U16("graphics/items/icon_palettes/question_mark.pal", ".gbapal");
 
-const u32 gItemIcon_NoItem[] = INCBIN_U32("graphics/items/icons/no_item.4bpp.smol"); // siliconMerge
+const u32 gItemIcon_NoItem[] = INCGFX_U32("graphics/items/icons/no_item.png", ".4bpp.smol"); // siliconMerge
 const u32 gItemIcon_ReturnToFieldArrow[] = INCGFX_U32("graphics/items/icons/return_to_field_arrow.png", ".4bpp.smol");
 const u16 gItemIconPalette_ReturnToFieldArrow[] = INCGFX_U16("graphics/items/icon_palettes/return_to_field_arrow.pal", ".gbapal");
 
@@ -91,22 +91,22 @@ const u32 gItemIcon_CherishBall[] = INCGFX_U32("graphics/items/icons/cherish_bal
 const u16 gItemIconPalette_CherishBall[] = INCGFX_U16("graphics/items/icon_palettes/cherish_ball.pal", ".gbapal");
 
 // Start newBall
-const u32 gItemIcon_VitalityBall[] = INCBIN_U32("graphics/items/icons/vitality_ball.4bpp.smol");
-const u16 gItemIconPalette_VitalityBall[] = INCBIN_U16("graphics/items/icon_palettes/vitality_ball.gbapal");
-const u32 gItemIcon_PsycheBall[] = INCBIN_U32("graphics/items/icons/psyche_ball.4bpp.smol");
-const u16 gItemIconPalette_PsycheBall[] = INCBIN_U16("graphics/items/icon_palettes/psyche_ball.gbapal");
-const u32 gItemIcon_MineralBall[] = INCBIN_U32("graphics/items/icons/mineral_ball.4bpp.smol");
-const u16 gItemIconPalette_MineralBall[] = INCBIN_U16("graphics/items/icon_palettes/mineral_ball.gbapal");
-const u32 gItemIcon_ElectroBall[] = INCBIN_U32("graphics/items/icons/electro_ball.4bpp.smol");
-const u16 gItemIconPalette_ElectroBall[] = INCBIN_U16("graphics/items/icon_palettes/electro_ball.gbapal");
-const u32 gItemIcon_BogBall[] = INCBIN_U32("graphics/items/icons/bog_ball.4bpp.smol");
-const u16 gItemIconPalette_BogBall[] = INCBIN_U16("graphics/items/icon_palettes/bog_ball.gbapal");
-const u32 gItemIcon_JetstreamBall[] = INCBIN_U32("graphics/items/icons/jetstream_ball.4bpp.smol");
-const u16 gItemIconPalette_JetstreamBall[] = INCBIN_U16("graphics/items/icon_palettes/jetstream_ball.gbapal");
-const u32 gItemIcon_FableBall[] = INCBIN_U32("graphics/items/icons/fable_ball.4bpp.smol");
-const u16 gItemIconPalette_FableBall[] = INCBIN_U16("graphics/items/icon_palettes/fable_ball.gbapal");
-const u32 gItemIcon_ParadoxBall[] = INCBIN_U32("graphics/items/icons/paradox_ball.4bpp.smol");
-const u16 gItemIconPalette_ParadoxBall[] = INCBIN_U16("graphics/items/icon_palettes/paradox_ball.gbapal");
+const u32 gItemIcon_VitalityBall[] = INCGFX_U32("graphics/items/icons/vitality_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_VitalityBall[] = INCGFX_U16("graphics/items/icon_palettes/vitality_ball.pal", ".gbapal");
+const u32 gItemIcon_PsycheBall[] = INCGFX_U32("graphics/items/icons/psyche_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_PsycheBall[] = INCGFX_U16("graphics/items/icon_palettes/psyche_ball.pal", ".gbapal");
+const u32 gItemIcon_MineralBall[] = INCGFX_U32("graphics/items/icons/mineral_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_MineralBall[] = INCGFX_U16("graphics/items/icon_palettes/mineral_ball.pal", ".gbapal");
+const u32 gItemIcon_ElectroBall[] = INCGFX_U32("graphics/items/icons/electro_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_ElectroBall[] = INCGFX_U16("graphics/items/icon_palettes/electro_ball.pal", ".gbapal");
+const u32 gItemIcon_BogBall[] = INCGFX_U32("graphics/items/icons/bog_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_BogBall[] = INCGFX_U16("graphics/items/icon_palettes/bog_ball.pal", ".gbapal");
+const u32 gItemIcon_JetstreamBall[] = INCGFX_U32("graphics/items/icons/jetstream_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_JetstreamBall[] = INCGFX_U16("graphics/items/icon_palettes/jetstream_ball.pal", ".gbapal");
+const u32 gItemIcon_FableBall[] = INCGFX_U32("graphics/items/icons/fable_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_FableBall[] = INCGFX_U16("graphics/items/icon_palettes/fable_ball.pal", ".gbapal");
+const u32 gItemIcon_ParadoxBall[] = INCGFX_U32("graphics/items/icons/paradox_ball.png", ".4bpp.smol");
+const u16 gItemIconPalette_ParadoxBall[] = INCGFX_U16("graphics/items/icon_palettes/paradox_ball.pal", ".gbapal");
 // End newBall
 
 // Medicine
@@ -2097,19 +2097,19 @@ const u32 gItemIcon_BerserkGene[] = INCGFX_U32("graphics/items/icons/berserk_gen
 const u16 gItemIconPalette_BerserkGene[] = INCGFX_U16("graphics/items/icon_palettes/berserk_gene.pal", ".gbapal");
 
 // Start Pokevial Branch
-const u32 gItemIcon_Pokevial0[] = INCBIN_U32("graphics/items/icons/pokevial0.4bpp.smol");
-const u32 gItemIcon_Pokevial1[] = INCBIN_U32("graphics/items/icons/pokevial1.4bpp.smol");
-const u32 gItemIcon_Pokevial2[] = INCBIN_U32("graphics/items/icons/pokevial2.4bpp.smol");
-const u32 gItemIcon_Pokevial3[] = INCBIN_U32("graphics/items/icons/pokevial3.4bpp.smol");
-const u32 gItemIcon_Pokevial4[] = INCBIN_U32("graphics/items/icons/pokevial4.4bpp.smol");
-const u32 gItemIcon_Pokevial5[] = INCBIN_U32("graphics/items/icons/pokevial5.4bpp.smol");
-const u32 gItemIcon_Pokevial6[] = INCBIN_U32("graphics/items/icons/pokevial6.4bpp.smol");
-const u32 gItemIcon_Pokevial7[] = INCBIN_U32("graphics/items/icons/pokevial7.4bpp.smol");
-const u32 gItemIcon_Pokevial8[] = INCBIN_U32("graphics/items/icons/pokevial8.4bpp.smol");
-const u32 gItemIcon_Pokevial9[] = INCBIN_U32("graphics/items/icons/pokevial9.4bpp.smol");
-const u32 gItemIcon_Pokevial[] = INCBIN_U32("graphics/items/icons/pokevial.4bpp.smol");
+const u32 gItemIcon_Pokevial0[] = INCGFX_U32("graphics/items/icons/pokevial0.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial1[] = INCGFX_U32("graphics/items/icons/pokevial1.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial2[] = INCGFX_U32("graphics/items/icons/pokevial2.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial3[] = INCGFX_U32("graphics/items/icons/pokevial3.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial4[] = INCGFX_U32("graphics/items/icons/pokevial4.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial5[] = INCGFX_U32("graphics/items/icons/pokevial5.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial6[] = INCGFX_U32("graphics/items/icons/pokevial6.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial7[] = INCGFX_U32("graphics/items/icons/pokevial7.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial8[] = INCGFX_U32("graphics/items/icons/pokevial8.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial9[] = INCGFX_U32("graphics/items/icons/pokevial9.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial[] = INCGFX_U32("graphics/items/icons/pokevial.png", ".4bpp.smol");
 
-const u16 gItemIconPalette_Pokevial[] = INCBIN_U16("graphics/items/icon_palettes/pokevial.gbapal");
+const u16 gItemIconPalette_Pokevial[] = INCGFX_U16("graphics/items/icon_palettes/pokevial.pal", ".gbapal");
 //End Pokevial Branch
 const u32 gItemIcon_FairyFeather[] = INCGFX_U32("graphics/items/icons/fairy_feather.png", ".4bpp.smol");
 const u16 gItemIconPalette_FairyFeather[] = INCGFX_U16("graphics/items/icon_palettes/fairy_feather.pal", ".gbapal");
@@ -2144,13 +2144,13 @@ const u32 gItemIcon_SwapSnack[] = INCGFX_U32("graphics/items/icons/swap_snack.pn
 const u16 gItemIconPalette_SwapSnack[] = INCGFX_U16("graphics/items/icon_palettes/swap_snack.pal", ".gbapal");
 
 // Start hexorb branch
-const u32 gItemIcon_Hexorb[] = INCBIN_U32("graphics/items/icons/hexorb.4bpp.smol");
-const u16 gItemIconPalette_Hexorb[] = INCBIN_U16("graphics/items/icon_palettes/hexorb.gbapal");
+const u32 gItemIcon_Hexorb[] = INCGFX_U32("graphics/items/icons/hexorb.png", ".4bpp.smol");
+const u16 gItemIconPalette_Hexorb[] = INCGFX_U16("graphics/items/icon_palettes/hexorb.pal", ".gbapal");
 // End hexorb branch
 
 // Start siliconQuests
-const u32 gItemIcon_RedScale[] = INCBIN_U32("graphics/items/icons/red_scale.4bpp.smol");
-const u16 gItemIconPalette_RedScale[] = INCBIN_U16("graphics/items/icon_palettes/red_scale.gbapal");
+const u32 gItemIcon_RedScale[] = INCGFX_U32("graphics/items/icons/red_scale.png", ".4bpp.smol");
+const u16 gItemIconPalette_RedScale[] = INCGFX_U16("graphics/items/icon_palettes/red_scale.pal", ".gbapal");
 // End siliconQuests
 const u32 gItemIcon_TwiceSpicedRadish[] = INCGFX_U32("graphics/items/icons/twice_spiced_radish.png", ".4bpp.smol");
 const u16 gItemIconPalette_TwiceSpicedRadish[] = INCGFX_U16("graphics/items/icon_palettes/twice_spiced_radish.pal", ".gbapal");

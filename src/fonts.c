@@ -438,7 +438,7 @@ ALIGNED(4) const u8 gFontShortJapaneseGlyphWidths[] = {
 
 // Start outlineFont
 // Credit to Archie/TeamAquasHideout
-ALIGNED(4) const u16 gFontOutlinedLatinGlyphs[] = INCBIN_U16("graphics/fonts/outlined.latfont");
+ALIGNED(4) const u16 gFontOutlinedLatinGlyphs[] = INCGFX_U16("graphics/fonts/latin_outlined.png", ".latfont");
 ALIGNED(4) const u8 gFontOutlinedLatinGlyphWidths[] = {
     [CHAR_SPACE] = 3,
     [CHAR_A_GRAVE] = 6,
@@ -686,7 +686,7 @@ ALIGNED(4) const u8 gFontOutlinedLatinGlyphWidths[] = {
     */
 };
 
-ALIGNED(4) const u16 gFontOutlinedNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/outlined_narrow.latfont");
+ALIGNED(4) const u16 gFontOutlinedNarrowLatinGlyphs[] = INCGFX_U16("graphics/fonts/latin_outlined_narrow.png", ".latfont");
 ALIGNED(4) const u8 gFontOutlinedNarrowLatinGlyphWidths[] = {
     [CHAR_SPACE] = 3,
     [CHAR_A_GRAVE] = 6,

@@ -346,8 +346,8 @@ static const struct SpriteTemplate sSpriteTemplate_RedArrowCursor =
 };
 
 // Start google_glass
-static const u32 sCrimCursor_Gfx[]   = INCBIN_U32("graphics/interface/crim_cursor.4bpp.smol");
-static const u16 sCrimInterface_Pal[]    = INCBIN_U16("graphics/interface/crim.gbapal");
+static const u32 sCrimCursor_Gfx[]   = INCGFX_U32("graphics/interface/crim_cursor.png", ".4bpp.smol");
+static const u16 sCrimInterface_Pal[]    = INCGFX_U16("graphics/interface/crim.pal", ".gbapal");
 // End google_glass
 static const u16 sRedInterface_Pal[]    = INCGFX_U16("graphics/interface/red.pal", ".gbapal"); // Shared by all of the below gfx
 static const u32 sScrollIndicator_Gfx[] = INCGFX_U32("graphics/interface/scroll_indicator.png", ".4bpp.smol");

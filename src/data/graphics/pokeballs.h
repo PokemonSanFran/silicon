@@ -83,21 +83,21 @@ const u32 gBallGfx_Cherish[] = INCGFX_U32("graphics/balls/cherish.png", ".4bpp.s
 const u16 gBallPal_Cherish[] = INCGFX_U16("graphics/balls/cherish.png", ".gbapal");
 
 // Start siliconNewBalls
-const u32 gBallGfx_Vitality[] = INCBIN_U32("graphics/balls/vitality.4bpp.smol");
-const u16 gBallPal_Vitality[] = INCBIN_U16("graphics/balls/vitality.gbapal");
-const u32 gBallGfx_Psyche[] = INCBIN_U32("graphics/balls/psyche.4bpp.smol");
-const u16 gBallPal_Psyche[] = INCBIN_U16("graphics/balls/psyche.gbapal");
-const u32 gBallGfx_Mineral[] = INCBIN_U32("graphics/balls/mineral.4bpp.smol");
-const u16 gBallPal_Mineral[] = INCBIN_U16("graphics/balls/mineral.gbapal");
-const u32 gBallGfx_Electro[] = INCBIN_U32("graphics/balls/electro.4bpp.smol");
-const u16 gBallPal_Electro[] = INCBIN_U16("graphics/balls/electro.gbapal");
-const u32 gBallGfx_Bog[] = INCBIN_U32("graphics/balls/bog.4bpp.smol");
-const u16 gBallPal_Bog[] = INCBIN_U16("graphics/balls/bog.gbapal");
-const u32 gBallGfx_Jetstream[] = INCBIN_U32("graphics/balls/jetstream.4bpp.smol");
-const u16 gBallPal_Jetstream[] = INCBIN_U16("graphics/balls/jetstream.gbapal");
-const u32 gBallGfx_Fable[] = INCBIN_U32("graphics/balls/fable.4bpp.smol");
-const u16 gBallPal_Fable[] = INCBIN_U16("graphics/balls/fable.gbapal");
-const u32 gBallGfx_Paradox[] = INCBIN_U32("graphics/balls/paradox.4bpp.smol");
-const u16 gBallPal_Paradox[] = INCBIN_U16("graphics/balls/paradox.gbapal");
+const u32 gBallGfx_Vitality[] = INCGFX_U32("graphics/balls/vitality.png", ".4bpp.smol");
+const u16 gBallPal_Vitality[] = INCGFX_U16("graphics/balls/vitality.png", ".gbapal");
+const u32 gBallGfx_Psyche[] = INCGFX_U32("graphics/balls/psyche.png", ".4bpp.smol");
+const u16 gBallPal_Psyche[] = INCGFX_U16("graphics/balls/psyche.png", ".gbapal");
+const u32 gBallGfx_Mineral[] = INCGFX_U32("graphics/balls/mineral.png", ".4bpp.smol");
+const u16 gBallPal_Mineral[] = INCGFX_U16("graphics/balls/mineral.png", ".gbapal");
+const u32 gBallGfx_Electro[] = INCGFX_U32("graphics/balls/electro.png", ".4bpp.smol");
+const u16 gBallPal_Electro[] = INCGFX_U16("graphics/balls/electro.png", ".gbapal");
+const u32 gBallGfx_Bog[] = INCGFX_U32("graphics/balls/bog.png", ".4bpp.smol");
+const u16 gBallPal_Bog[] = INCGFX_U16("graphics/balls/bog.png", ".gbapal");
+const u32 gBallGfx_Jetstream[] = INCGFX_U32("graphics/balls/jetstream.png", ".4bpp.smol");
+const u16 gBallPal_Jetstream[] = INCGFX_U16("graphics/balls/jetstream.png", ".gbapal");
+const u32 gBallGfx_Fable[] = INCGFX_U32("graphics/balls/fable.png", ".4bpp.smol");
+const u16 gBallPal_Fable[] = INCGFX_U16("graphics/balls/fable.png", ".gbapal");
+const u32 gBallGfx_Paradox[] = INCGFX_U32("graphics/balls/paradox.png", ".4bpp.smol");
+const u16 gBallPal_Paradox[] = INCGFX_U16("graphics/balls/paradox.png", ".gbapal");
 // End siliconNewBalls
 const u32 gOpenPokeballGfx[] = INCGFX_U32("graphics/balls/open.png", ".4bpp.smol");

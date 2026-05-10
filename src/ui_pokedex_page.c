@@ -631,26 +631,26 @@ static enum PokedexPages CalculateTargetPage(s32 delta);
 static void ClearPageData(void);
 void SetAndSetUpCurrentPage(u8 taskId);
 
-static const u16 pokedexPalettesFootprint[] = INCBIN_U16("graphics/pokedex/ui/palettes/footprint.gbapal");
-static const u32 speciesListMonCursor[] = INCBIN_U32("graphics/pokedex/ui/species_list/mon.4bpp.smol");
-static const u32 PageMoves_UpArrow_Gfx[] = INCBIN_U32("graphics/pokedex/ui/page/upArrow.4bpp.smol");
-static const u32 PageMoves_DownArrow_Gfx[] = INCBIN_U32("graphics/pokedex/ui/page/downArrow.4bpp.smol");
-static const u8 moveListCursor[] = INCBIN_U8("graphics/pokedex/ui/page/moveList_cursor_bmp.4bpp");
-static const u8 evoListCursor[] = INCBIN_U8("graphics/pokedex/ui/page/evoList_cursor_bmp.4bpp");
-static const u8 abilityListCursor[] = INCBIN_U8("graphics/pokedex/ui/page/abilityList_cursor_bmp.4bpp");
-static const u32 sCategory_Gfx[] = INCBIN_U32("graphics/ui_menus/category/categories.4bpp.smol");
-static const u16 sCategory_Palettes[] = INCBIN_U16("graphics/ui_menus/category/categories.gbapal");
+static const u16 pokedexPalettesFootprint[] = INCGFX_U16("graphics/pokedex/ui/palettes/footprint.pal", ".gbapal");
+static const u32 speciesListMonCursor[] = INCGFX_U32("graphics/pokedex/ui/species_list/mon.png", ".4bpp.smol");
+static const u32 PageMoves_UpArrow_Gfx[] = INCGFX_U32("graphics/pokedex/ui/page/upArrow.png", ".4bpp.smol");
+static const u32 PageMoves_DownArrow_Gfx[] = INCGFX_U32("graphics/pokedex/ui/page/downArrow.png", ".4bpp.smol");
+static const u8 moveListCursor[] = INCGFX_U8("graphics/pokedex/ui/page/moveList_cursor_bmp.png", ".4bpp");
+static const u8 evoListCursor[] = INCGFX_U8("graphics/pokedex/ui/page/evoList_cursor_bmp.png", ".4bpp");
+static const u8 abilityListCursor[] = INCGFX_U8("graphics/pokedex/ui/page/abilityList_cursor_bmp.png", ".4bpp");
+static const u32 sCategory_Gfx[] = INCGFX_U32("graphics/ui_menus/category/categories.png", ".4bpp.smol");
+static const u16 sCategory_Palettes[] = INCGFX_U16("graphics/ui_menus/category/categories.pal", ".gbapal");
 static const u32 sTypes_Gfx15x14[] = INCBIN_U32("graphics/ui_menus/types/15x14/types.4bpp.smol");
 static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
 
-static const u8 NEbackground[] = INCBIN_U8("graphics/pokedex/ui/page/ne_background_bmp.4bpp");
-static const u8 SEbackground[] = INCBIN_U8("graphics/pokedex/ui/page/se_background_bmp.4bpp");
+static const u8 NEbackground[] = INCGFX_U8("graphics/pokedex/ui/page/ne_background_bmp.png", ".4bpp");
+static const u8 SEbackground[] = INCGFX_U8("graphics/pokedex/ui/page/se_background_bmp.png", ".4bpp");
 
-static const u8 learnIconMachine[] = INCBIN_U8("graphics/pokedex/ui/page/learnIconMachine.4bpp");
-static const u8 learnIconLevel[] = INCBIN_U8("graphics/pokedex/ui/page/learnIconLevel.4bpp");
-static const u8 learnIconEgg[] = INCBIN_U8("graphics/pokedex/ui/page/learnIconEgg.4bpp");
+static const u8 learnIconMachine[] = INCGFX_U8("graphics/pokedex/ui/page/learnIconMachine.png", ".4bpp");
+static const u8 learnIconLevel[] = INCGFX_U8("graphics/pokedex/ui/page/learnIconLevel.png", ".4bpp");
+static const u8 learnIconEgg[] = INCGFX_U8("graphics/pokedex/ui/page/learnIconEgg.png", ".4bpp");
 
-static const u8 speciesItemIcon[] = INCBIN_U8("graphics/pokedex/ui/page/statsItem_bmp.4bpp");
+static const u8 speciesItemIcon[] = INCGFX_U8("graphics/pokedex/ui/page/statsItem_bmp.png", ".4bpp");
 
 static const struct SpritePalette sPokedexInterfaceSpriteFootprintPalette =
 {

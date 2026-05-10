@@ -341,58 +341,58 @@ static const u8 sMenuWindowFontColors[][3] =
 //
 //  Graphics Pointers for RegionMap Geography, Roads, L2 Window, Sprites, Palettes, Etc
 //
-static const u32 sRegionGeographyTiles[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tiles.4bpp.smol");
+static const u32 sRegionGeographyTiles[] = INCGFX_U32("graphics/ui_menus/map_system/geography_tiles.png", ".4bpp.smol");
 static const u32 sRegionGeographyTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tilemap.bin.smolTM");
-static const u16 sRegionGeographyPalette[] = INCBIN_U16("graphics/ui_menus/map_system/geography.gbapal");
+static const u16 sRegionGeographyPalette[] = INCGFX_U16("graphics/ui_menus/map_system/geography.pal", ".gbapal");
 
-static const u32 sRegionTrolleyBackgroundTiles[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.4bpp.smol");
+static const u32 sRegionTrolleyBackgroundTiles[] = INCGFX_U32("graphics/ui_menus/map_system/trolley_tiles.png", ".4bpp.smol");
 static const u32 sRegionTrolleyBackgroundTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.bin.smolTM");
-static const u16 sRegionTrolleyBackgroundPalette[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_tiles.gbapal");
+static const u16 sRegionTrolleyBackgroundPalette[] = INCGFX_U16("graphics/ui_menus/map_system/trolley_tiles.png", ".gbapal");
 
-static const u32 sRouteTiles[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.4bpp.smol");
+static const u32 sRouteTiles[] = INCGFX_U32("graphics/ui_menus/map_system/route_tiles.png", ".4bpp.smol");
 static const u32 sRouteTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.bin.smolTM");
-static const u16 sRoutePalette[] = INCBIN_U16("graphics/ui_menus/map_system/route_tiles.gbapal");
+static const u16 sRoutePalette[] = INCGFX_U16("graphics/ui_menus/map_system/route_tiles.pal", ".gbapal");
 
-static const u32 sTrolleyRailTiles[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.4bpp.smol");
+static const u32 sTrolleyRailTiles[] = INCGFX_U32("graphics/ui_menus/map_system/rail_tiles.png", ".4bpp.smol");
 static const u32 sTrolleyRailTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.bin.smolTM");
-static const u16 sTrolleyRailPalette[] = INCBIN_U16("graphics/ui_menus/map_system/rail_tiles.gbapal");
+static const u16 sTrolleyRailPalette[] = INCGFX_U16("graphics/ui_menus/map_system/rail_tiles.png", ".gbapal");
 
-static const u32 sL2WindowTiles[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tiles.4bpp.smol");
+static const u32 sL2WindowTiles[] = INCGFX_U32("graphics/ui_menus/map_system/l2_window_tiles.png", ".4bpp.smol");
 static const u32 sL2WindowTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tilemap.bin.smolTM");
-static const u16 sL2WindowPalette[] = INCBIN_U16("graphics/ui_menus/map_system/l2_window_tiles.gbapal");
+static const u16 sL2WindowPalette[] = INCGFX_U16("graphics/ui_menus/map_system/l2_window_tiles.pal", ".gbapal");
 
-static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
-static const u32 sRegionMapCursorSmallGfx[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
+static const u16 sRegionMapCursorPal[] = INCGFX_U16("graphics/ui_menus/map_system/cursor_small.pal", ".gbapal");
+static const u32 sRegionMapCursorSmallGfx[] = INCGFX_U32("graphics/ui_menus/map_system/cursor_small.png", ".4bpp");
 
-static const u16 sRegionMapCursorTooltipPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
-static const u32 sRegionMapCursorTooltipGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
-static const u32 sRegionMapCursorTooltipTaxiGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
-static const u32 sRegionMapCursorTooltipFlyGfx[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
-static const u32 sRegionMapCursorTooltipError1Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_1.4bpp");
-static const u32 sRegionMapCursorTooltipError2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_2.4bpp");
+static const u16 sRegionMapCursorTooltipPal[] = INCGFX_U16("graphics/ui_menus/map_system/L2_cursor_test.png", ".gbapal");
+static const u32 sRegionMapCursorTooltipGfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_test.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipTaxiGfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_taxi.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipFlyGfx[] = INCGFX_U32("graphics/ui_menus/map_system/Fly_icon.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipError1Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_error_1.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipError2Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_error_2.png", ".4bpp");
 
-static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
-static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
-static const u8 sSelect_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/select_button.4bpp");
-static const u8 sStart_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/start_button.4bpp");
+static const u8 sA_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/a_button.png", ".4bpp");
+static const u8 sB_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/b_button.png", ".4bpp");
+static const u8 sSelect_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/select_button.png", ".4bpp");
+static const u8 sStart_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/start_button.png", ".4bpp");
 
-static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
-static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
 
-static const u32 sGrayPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/gray_poi_sprites.4bpp");
-static const u16 sGrayPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/gray_poi_sprites.gbapal");
+static const u32 sGrayPOI_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/gray_poi_sprites.png", ".4bpp");
+static const u16 sGrayPOI_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/gray_poi_sprites.pal", ".gbapal");
 
-static const u32 sTrolleyPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_location_icon.4bpp");
-static const u16 sTrolleyPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_location_icon.gbapal");
+static const u32 sTrolleyPOI_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/trolley_location_icon.png", ".4bpp");
+static const u16 sTrolleyPOI_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/trolley_location_icon.png", ".gbapal");
 
-static const u32 sWayPoint_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/waypoint_icon.4bpp");
-static const u16 sWayPoint_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/waypoint_icon.gbapal");
+static const u32 sWayPoint_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/waypoint_icon.png", ".4bpp");
+static const u16 sWayPoint_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/waypoint_icon.pal", ".gbapal");
 
-static const u32 sOwWaypointArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.4bpp");
-static const u16 sOwWaypointArrow_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/ow_waypoint_arrow.gbapal");
+static const u32 sOwWaypointArrow_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.png", ".4bpp");
+static const u16 sOwWaypointArrow_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/ow_waypoint_arrow.pal", ".gbapal");
 
-static const u32 sL2Selector_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/Selector.4bpp");
-static const u16 sL2Selector_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/Selector.gbapal");
+static const u32 sL2Selector_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/Selector.png", ".4bpp");
+static const u16 sL2Selector_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/Selector.png", ".gbapal");
 
 //
 //  Sprite Data for Cursors and Player Icon

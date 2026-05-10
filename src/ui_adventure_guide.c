@@ -181,28 +181,28 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u8 sCursor[]         = INCBIN_U8("graphics/ui_menus/adventure_guide/cursor.4bpp");
-static const u32 gAdventureGuideUpArrow_Gfx[]    = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_up.4bpp.smol");
-static const u32 gAdventureGuideDownArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_down.4bpp.smol");
-static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_left.4bpp.smol");
-static const u32 gAdventureGuideRightArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/adventure_guide/arrow_right.4bpp.smol");
+static const u8 sCursor[]         = INCGFX_U8("graphics/ui_menus/adventure_guide/cursor.png", ".4bpp");
+static const u32 gAdventureGuideUpArrow_Gfx[]    = INCGFX_U32("graphics/ui_menus/adventure_guide/arrow_up.png", ".4bpp.smol");
+static const u32 gAdventureGuideDownArrow_Gfx[]  = INCGFX_U32("graphics/ui_menus/adventure_guide/arrow_down.png", ".4bpp.smol");
+static const u32 gAdventureGuideLeftArrow_Gfx[]  = INCGFX_U32("graphics/ui_menus/adventure_guide/arrow_left.png", ".4bpp.smol");
+static const u32 gAdventureGuideRightArrow_Gfx[] = INCGFX_U32("graphics/ui_menus/adventure_guide/arrow_right.png", ".4bpp.smol");
 
-static const u32 sListBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.4bpp.smol");
+static const u32 sListBgTiles[]   = INCGFX_U32("graphics/ui_menus/adventure_guide/listBg.png", ".4bpp.smol");
 static const u32 sListBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/listBg.bin.smolTM");
 
-static const u32 sMenuBgTiles[]   = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.4bpp.smol");
+static const u32 sMenuBgTiles[]   = INCGFX_U32("graphics/ui_menus/adventure_guide/menuBg.png", ".4bpp.smol");
 static const u32 sMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/adventure_guide/menuBg.bin.smolTM");
 
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
-static const u16 adventurePalettesText[] = INCBIN_U16("graphics/ui_menus/adventure_guide/palettes/text.gbapal");
+static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
+static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
+static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
+static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sMenuPalette_Violet[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
+static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
+static const u16 adventurePalettesText[] = INCGFX_U16("graphics/ui_menus/adventure_guide/palettes/text.pal", ".gbapal");
 static const u8 sBlackTile[32] =
 {
     [0 ... 31] = (PLTT_SIZE_4BPP + 2)
