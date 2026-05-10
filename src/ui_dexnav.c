@@ -2958,7 +2958,7 @@ enum Item Dexnav_CalculateItem(u32 species, u32 insight)
         return selectedItem;
 
     u32 itemChance = 0;
-    u32 extraChance = 0;
+
     if (insight < 10)
         itemChance = insight;
     else if (insight < 100)
@@ -2969,10 +2969,7 @@ enum Item Dexnav_CalculateItem(u32 species, u32 insight)
     if (itemChance > DEXNAV_MAX_ITEM_ABILITY_CHANCE)
         itemChance = DEXNAV_MAX_ITEM_ABILITY_CHANCE;
 
-    if ((Random() % 100) < itemChance)
-        extraChance = 1; 
-
-    if (extraChance == 0)
+    if ((Random() % 100) >= itemChance)
         return selectedItem;
 
     if (item1 != ITEM_NONE && item2 != ITEM_NONE)
