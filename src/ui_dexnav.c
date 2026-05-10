@@ -2616,7 +2616,7 @@ static void Dexnav_LaunchPokedex(u8 taskId)
     Dexnav_SetSavedHabitat(Dexnav_GetHabitat());
     Dexnav_SetSavedCursorPosition(Dexnav_GetCursorPosition());
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
     gTasks[taskId].func = Task_DexnavFadeToPokedex;
 }
 
