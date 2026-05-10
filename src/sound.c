@@ -655,3 +655,10 @@ bool8 IsSpecialSEPlaying(void)
         return FALSE;
     return TRUE;
 }
+
+void StopSE(void)
+{
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE3);
+}
