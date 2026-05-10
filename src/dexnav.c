@@ -1039,7 +1039,7 @@ void EndDexNavSearch(void)
 
 static void EndDexNavSearchSetupScript(const u8 *script)
 {
-    Dexnav_StopOverworldFieldEffect();
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     Dexnav_SavePreviousChain();
     gSaveBlock3Ptr->dexNavChain = 0;   //reset chain
     EndDexNavSearch();
@@ -2827,5 +2827,6 @@ void Dexnav_StopOverworldFieldEffect(void)
 
     StopSE();
     FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
+    sDexNavSearchDataPtr->fldEffSpriteId = MAX_SPRITES;
 }
 // End dexnav
