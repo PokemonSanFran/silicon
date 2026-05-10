@@ -2673,8 +2673,10 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;
 
+    // Start flyEncounters
     if (IfSkyBattleAndOverworldTerrain(caseId, gStartingStatuses))
         return FALSE;
+    // End flyEncounters
 
     switch (caseId)
     {

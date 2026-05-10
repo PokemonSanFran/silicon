@@ -501,7 +501,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
     FollowerNPC_TryRemoveFollowerOnWhiteOut();
-    Quest_FlightPatterns_ClearFlightPath();
+    Quest_FlightPatterns_ClearFlightPath(); // flyEncounters
 }
 
 static void UpdateMiscOverworldStates(void)
