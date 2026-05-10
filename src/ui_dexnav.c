@@ -1154,7 +1154,6 @@ static void Task_HandleInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON) || JOY_REPEAT(A_BUTTON))
     {
-        DebugPrintf("Dexnav_StartOverworldSearch");
         Dexnav_StartOverworldSearch(taskId);
         return;
     }
