@@ -2321,6 +2321,7 @@ void CB2_ContinueSavedGame(void)
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;
     InitMatchCallCounters();
+    EndDexNavSearch(); // dexnav
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();
