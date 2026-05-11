@@ -21,9 +21,6 @@ script Quest_Hang20_Debug_Script
 {
     addvar(VAR_TEMP_0,1)
     setvar(VAR_DEFEATED_CRESALTA_VISTA_COUNT,47)
-    //PSF TODO this count needs to reset if the user
-    //changes the pokemon in their party
-    //uses a healing item
     callnative(CountDefeatedCresaltaVista)
     release
 }

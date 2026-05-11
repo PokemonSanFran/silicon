@@ -472,7 +472,6 @@
     FOREACH_HM(F)
 
 // Start pokedexUpdate
-// PSF TODO moves are ordered by type > power > category > effect > id
 // These defines are simply to make sure Emerald can still compile
 #define ITEM_TM_HIDDEN_POWER ITEM_TM001
 #define ITEM_TM_RETURN ITEM_TM001

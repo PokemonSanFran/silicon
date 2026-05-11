@@ -107,5 +107,4 @@ void BS_GetPrizeNativeItem(void)
     AddBagItem(itemId, itemAmount);
     PREPARE_ITEM_BUFFER(gBattleTextBuff1, itemId);
     gBattlescriptCurrInstr = cmd->nextInstr;
-    // PSF TODO this should change to the plural version if itemAount is > 1
 }

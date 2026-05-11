@@ -34,7 +34,6 @@ script Quest_Restorezenzygym_Script_StartBattle
     }
     closemessage
     trainerbattle_no_intro(TRAINER_DOYLE_ZENZU_ISLAND,format("Wow, it's really been some time since my kaiju and I got to go all out!"))
-// PSF TODO Doyle: Even after all this time, I've still got it!
     goto(Quest_Restorezenzygym_Script_StartQuest)
 }
 

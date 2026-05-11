@@ -1986,7 +1986,6 @@ static void Task_Buzzr_StartQuestAnimation(u8 taskId)
 
 static void CreateQuestSprite(void)
 {
-    // PSF TODO once text sprite printing is working, print the words "New Task" onto this sprite
     u32 SpriteTag = BUZZR_SPRITE_QUEST_TAG;
     s32 x = BUZZR_QUEST_SPRITE_INITAL_POSITION, y = CalculateCursorHeight();
 

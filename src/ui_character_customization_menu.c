@@ -415,8 +415,6 @@ void CB2_CustomizationFromStartMenu(void)
 
 void ResetCustomizationValuesData(void)
 {
-    // PSF TODO Pick a single body type and then have one of our artists pick a canon set of colors for each artist
-
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]         = Random() % (NUM_BODY_TYPES); // Body type has no custom option
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]        = Random() % (NUM_SKIN_COLOR - 1);
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]        = Random() % (NUM_HAIR_COLOR - 1);
@@ -1598,7 +1596,6 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
     };
 
     u32 cursor = sMenuDataPtr->cursorPlace;
-    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
     DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
     Menu_FreeResources();
 }
@@ -1782,7 +1779,6 @@ void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite)
 {
     if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
         RecolorPlayerCharacters(sprite->oam.paletteNum);
-    // PSF TODO this should only happen in the overworld... how?
     //UpdatePalettesWithTime(PALETTES_ALL);
 }
 

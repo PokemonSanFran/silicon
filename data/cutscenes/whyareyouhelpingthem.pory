@@ -263,7 +263,7 @@ script WhyAreYouHelpingThem_InteractBattle_Script {
 script WhyAreYouHelpingThem_StartBattle_Script{
     msgbox(format("Always have been."),,SPEAKER_BAIYA_TIDE)
     closemessage
-    trainerbattle_no_intro(TRAINER_BAIYA_WHYAREYOUHELPINGTHEM,format("Another victory for the establishment.")) //PSF TODO EMOTE sigh
+    trainerbattle_no_intro(TRAINER_BAIYA_WHYAREYOUHELPINGTHEM,format("Another victory for the establishment."))
     goto(WhyAreYouHelpingThem_PostBattle_Dialogue)
 }
 

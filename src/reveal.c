@@ -317,7 +317,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_EMRYS,
         .buzzrId = BUZZR_USER_EMRYS,
         .quote = COMPOUND_STRING("Perlacia Museum will be an institute for culture, history, and battles!"),
-        .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"), // PSF TODO I need another idea here help
+        .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"),
         .accentColor = RGB(14,19,31),
     },
     [REVEAL_RAMESH] =

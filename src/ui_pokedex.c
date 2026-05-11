@@ -1977,7 +1977,6 @@ static void SpeciesData_PrintSpeciesNumAndDesc(u32 shownSpecies, u32* padding)
     CopyMonCategoryText(shownSpecies,gStringVar2);
 
     end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1} {STR_VAR_2}"));
-    //PSF TODO replace yen with octhorpe
 
     BreakStringNaive(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, GetWindowAttribute(windowId, WINDOW_WIDTH));
@@ -3144,7 +3143,6 @@ static void SpeciesGrid_SetCursorPositionFromSavedSpecies(void)
         if (speciesList[listIndex] != species)
             continue;
 
-        // PSF TODO I have no idea why this is required, but removing it introduces an issue where the saved species is always one ahead of the actual species
         if (listIndex)
             listIndex--;
 
@@ -3179,8 +3177,3 @@ bool32 SpeciesGrid_GetShouldPlayCry(void)
 {
     return sPokedexState->shouldPlayCry;
 }
-
-/*
- * TODO for pages
-    POKEDEX_PAGE_LOCATION,
-*/

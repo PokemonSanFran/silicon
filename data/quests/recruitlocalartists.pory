@@ -123,8 +123,6 @@ script Quest_Recruitlocalartists_ProgressReward_Script{
 
 script Quest_Recruitlocalartists_StartQuest_Dialogue{
     lock
-    //PSF TODO move player if in ramesh's walking path
-
     if (var(VAR_SHARPRISE_SPIRE_PRODUCTION_STATE) != POST_ALWAYS_WATCHING_WAZOWSKI){
         faceplayer
         msgbox(format("Hello {PLAYER}. We haven't formerly met yet, but I'm Ramesh, VP of Marketing for SharpRise Capital. We've always been very impressed with your work."))
@@ -198,8 +196,6 @@ script Quest_Recruitlocalartists_CoreEncounter_Script{
 }
 
 script Quest_Recruitlocalartists_SetSmeargle_Script{
-    //PSF TODO figure out how to set other attributes of Smeargle
-    //https://pokepast.es/df4fe2c9b4dbcdde
     call(Quest_Recruitlocalartists_CountSubquest_Script)
         switch (var(VAR_TEMP_0)){
             case 0: setwildbattle(SPECIES_SMEARGLE,25,ITEM_NONE)

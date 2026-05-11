@@ -56,8 +56,6 @@ script YouRealizeWereEvilRight_Open_Dialogue {
 
         applymovement(PLAYER,Common_Movement_FaceRight)
 
-        //Oliver and the player walk to the conference table. Ramesh is already at the table. The screens behind Ramesh light up as they all sit, showing Baiya, the player, and the “Leader” of whatever Gym was restored first. PSF TODO
-
         setflag(FLAG_BAIYA_CALL_ARANTRAZ)
         setvar(VAR_STORYLINE_STATE,STORY_POST_YOU_REALIZE_WERE_EVIL)
 
@@ -91,8 +89,6 @@ script YouRealizeWereEvilRight_Open_Dialogue {
         setobjectxyperm(KEIYING,21,29)
 
         msgbox(format("Excellent timing."),,SPEAKER_OLIVER)
-
-        //One of the monitors changes to show The Tide members marching. PSF TODO
 
         msgbox(format("I think your kindness is being manipulated, {PLAYER}. Our data suggests that the very Gyms that you're turning into “community centers” are actually being used as recruitment and training hubs for The Tide."),,SPEAKER_KEIYING)
 

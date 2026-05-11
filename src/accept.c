@@ -345,7 +345,6 @@ static void Accept_SetupCallback(void)
             gMain.state++;
             break;
         case 5:
-            //PSF TODO figure out why this flashes pink when fading in
             BeginPCScreenEffect_TurnOn(0, 0, 0);
             gMain.state++;
             break;
@@ -1079,7 +1078,6 @@ static void PrintAcceptHelpBar(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     BufferHelpBarText(gStringVar4);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
-    // PSF TODO following two lines will actually show the help bar, but some pixels are broken when in DevMode
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }

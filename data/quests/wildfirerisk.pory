@@ -38,7 +38,6 @@ script Quest_Wildfirerisk_StartQuest_Dialogue{
 script Quest_Wildfirerisk_Secret_Dialogue{
     lock
     msgbox(format("Now that I think about it, I'm pretty sure I've already defeated that many Pokémon."),,SPEAKER_ALICIA)
-    //PSF TODO replace with a fire/flying/electric mon on a nearby route
     random(NUM_SPECIES)
     bufferspeciesname(STR_VAR_1,VAR_RESULT)
     msgbox(format("Huh. Now that I think about it, I've been seeing way less {STR_VAR_1} around..."),,SPEAKER_FILIP,,EMOTE_SHOCK)

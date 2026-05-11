@@ -114,8 +114,6 @@ script Quest_Alohafromalola_CheckTime_Script{
 script Quest_Alohafromalola_CheckParty_Script{
     specialvar(VAR_RESULT, AlohaFromAlolaCheck)
 
-    //PSF TODO figure out a way to inform players about who is in the alola dex
-
         if (var(VAR_RESULT) == TRUE){
             goto(Quest_Alohafromalola_MoveToExhibition_Dialogue)
         }
@@ -152,14 +150,12 @@ script Quest_Alohafromalola_SetLeaderPosition_Battle_Script{
 }
 
 script Quest_Alohafromalola_StartBattle_Dialogue{
-    //PSF TODO implement a fade FROM black before and after the warp
         call(Quest_Alohafromalola_CreateCrowd_Script)
         msgbox(format("Thank you all for attending our exhibition! For our finale, {PLAYER} has graceiously offered to battle against the Alolan might of Z-Moves!"),,SPEAKER_EMRYS,TAIL_SHOUT,EMOTE_HAPPY)
         closemessage
         applymovement(PLAYER,Common_Movement_WalkRight)
         applymovement(EMRYS,Common_Movement_WalkLeft)
         waitmovement(EMRYS)
-        //PSF TODO make sure they use a Z-Move here
         setvar(VAR_EMRYS_STATE,EXHIBITION_COMPLETE)
 		trainerbattle_continue_after_lose(TRAINER_ALOHAFROMALOLA_EMRYS,format("Not even Z-Moves can stop you!"))
         delay(60)

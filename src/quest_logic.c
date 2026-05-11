@@ -569,16 +569,6 @@ static const u32 TOTEM_POKEMON_LIST[NUM_TOTEM_MON][9]=
     {MAP_ROUTE9, TOTEM_POKEMON_8, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
     {MAP_ROUTE9, TOTEM_POKEMON_9, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
 };
-//PSF TODO need to make new totem formes
-//totem formes have larger heights and weights but don't follow any specific rule
-//shiny locked off
-//when bred, produces a normal species of that pokemon
-//always have one specific ability
-//spawn with three perfect IVs
-//Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
-//Not a unique form in the pokedex
-//fixed natures and move sets and level
-//wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
 
 static const u32 ULTRA_BEAST_LIST[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT][9]=
 {
@@ -638,8 +628,6 @@ void Quest_Ultrawormholeresearch_SetTotemBoost(u8 type, u8 i) {
     for (j = 0; j < 5; j++) {
         *(&gSpecialVar_0x8001 + j) = boostList[j];
     }
-
-    //ScriptSetTotemBoost(); PSF TODO need to convert this back to C to be used here, or refactor how boosts are applied for the Wormhole Quests
 }
 
 void Quest_Ultrawormholeresearch_SetTotemBattle(void) {
@@ -1874,7 +1862,6 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
-//PSF TODO rewrite this to make a table of starters and VAR_CHOSEN_PSF_STARTER, and look at the types of that pokemon and randomly pick one
 u32 VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
     u32 type = Random() % 2;
@@ -2189,8 +2176,6 @@ void Quest_RPS_StopMoneyLoss(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
     else
         gBattleTypeFlags |= BATTLE_TYPE_FRONTIER;
-
-    //PSF TODO fix so that this random frontier trainer doesn't slide in
 }
 
 void DebugQuest_RPS(u8 state)
@@ -2337,7 +2322,6 @@ u32 GetScraftyHint(u32 speciesId)
 
     if (gSpeciesInfo[speciesId].eggGroups[0] != EGG_GROUP_DRAGON && gSpeciesInfo[speciesId].eggGroups[1] != EGG_GROUP_DRAGON)
         return VAR_CUTE_POKEMON_SCRAFTY_HINT_0;
-    //PSF TODO make sure acid spray is properly distributed when learnsets are done
     if (monCanLearn == CANNOT_LEARN_MOVE || monCanLearn == CANNOT_LEARN_MOVE)
         return VAR_CUTE_POKEMON_SCRAFTY_HINT_1;
     if (speciesId != SPECIES_SCRAFTY)
@@ -2578,7 +2562,6 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
         default:
         case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
             JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
-            // PSF TODO use quest debug for both of the following
             QuestMenu_ScriptSetComplete(QUEST_INVERSEHALLUCINOGENIC);
             QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
             break;
@@ -2710,7 +2693,6 @@ void ShowGarbodor(void)
 
     CopyMon(&daycare->viewMon,&mon,sizeof(struct Pokemon));
 
-    // PSF TODO change OT to be Baiya
     ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, &daycare->viewMon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -3006,7 +2988,6 @@ void DebugQuest_Hodoutunnels(u8 state)
             Quest_Hodoutunnels_SetVariable_TalkedToElder();
             break;
         case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
-            // PSF TODO: replace with debug quest when this is done
             QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
             Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
             break;
@@ -3244,7 +3225,6 @@ void DebugQuest_Getthebandbacktogether(u8 state)
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_GETTHEBANDBACKTOGETHER);
-            // PSF TODO Add flag for ACRO_BIKE once it is decided that the game will use the acro bike
             break;
     }
 }
@@ -3430,7 +3410,7 @@ void DebugQuest_Diggingupadaorasdirt(u8 state)
             break;
         case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING:
             JumpPlayerTo_Epilogue(JUMP_DEBUG);
-            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM); // PSF TODO replace with quest debug
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM);
             QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_4);
             VarSet(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU);
             Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
@@ -3897,7 +3877,6 @@ static u32 GenerateAndGiveOddEgg(void)
     CalculateMonStats(&mon);
 
     SetMonData(&mon, MON_DATA_IS_SHINY, &oddEggCandidates[chosenIndex].isShiny);
-    // PSF TODO this is apparently broken but Jamie says he'll fix it in an upcoming expansion release, right now the shininess get re-rolled on hatch and Jamie agrees that this should be preserved if it is set here
 
     return GiveCapturedMonToPlayer(&mon);
 }
@@ -4233,7 +4212,6 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state)
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
-            // PSF TODO Replace with QuestMenu_SetupQuestState
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
             QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
@@ -4244,7 +4222,6 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state)
         case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE:
             QuestMenu_ScriptSetComplete(QUEST_BATTLEARCADEMINIQUEST);
             FlagSet(TRAINER_FLAGS_START + TRAINER_MINI_ARCADE_CHRIS);
-            // PSF TODO Replace with QuestMenu_SetupQuestState
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE:
             QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);

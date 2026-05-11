@@ -2810,7 +2810,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_PSYOP] =
     {
-        .name = COMPOUND_STRING("& Psyop"), // PSF TODO Change & to a hashtag once we have the char
+        .name = COMPOUND_STRING("& Psyop"),
         .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Bring a Phony {STR_VAR_1} to {STR_VAR_2}. Make sure it has maximum Effort Values and is in a {STR_VAR_3}."),
         .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("The transformation worked - {STR_VAR_1} was made Antique!"),
         .descFunc = GetQuestDesc_Psyop,

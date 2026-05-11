@@ -27,7 +27,6 @@ script Chasilla_Gym_Attendant_CheckDialogue_Script
         release
         end
     }
-    // if has battled anybody in the gym, then release and end PSF TODO
     goto(Chasilla_Gym_Attendant_Inform_Script)
 }
 

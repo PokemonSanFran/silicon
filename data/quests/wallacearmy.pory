@@ -1,6 +1,5 @@
 //Quest_WallaceArmy_
 //gText_WallaceArmy_
-//PSF TODO Change Wallace to Lisia? maybe?
 //
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
@@ -223,7 +222,6 @@ script Quest_WallaceArmy_LeadStanAppearance_Script{
 }
 
 script Quest_WallaceArmy_ListRemainingLocations_Script{
-    //PSF TODO write a C special to handle this list - she lists out all the cities where there are still stans, and I should use StringAppend / Copy to modifiy this string on the fly
     if (var(VAR_TEMP_1) == 0){
         bufferstring(STR_VAR_1,gText_HalaiIsland)
     }
@@ -323,7 +321,7 @@ text gText_WallaceArmy_TheLeagueDidntSend{
     format("The League didn't send me! Why did you think so?")
 }
 text gText_WallaceArmy_SighWereEspuleeOutskirtsSolar{
-    format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!") //PSF TODO EMOTE sigh
+    format("We're EspuleeOutskirts Solar. We were working with the League to provide solar power for their fancy new statement. They had it all buttoned up, they signed a deal, and then a lawyer pulled a fast one and pulled out of the deal right after I got the materials and staff together. They said some shit about a better option. But I'm absolutely screwed! So I went online and wrote a nasty post about them... and the next thing I know, some kids called the 'Wallace Army' are blowing up my phone, leaving bad reviews, and attacking my servers. We can't even get online! The League sent them!")
 }
 text gText_WallaceArmy_YouThinkTheLeague{
     format("...You think the League sent Wallace stans after you?")
@@ -391,7 +389,6 @@ text gText_WallaceArmy_ThankYouForStopping{
 text gText_WallaceArmy_OhWallaceSama{
     format("Oh Wallace-sama... so dreamy! The {STR_VAR_1}of his {STR_VAR_2}...oh! I can't get enough.")
 }
-        //PSF TODO write unique text for each stan
 text gText_WallaceArmy_EspuleeOutskirtsSolarTheySpoke{
     format("EspuleeOutskirts Solar? They spoke against our Lord, so we're taking them down! Anybody who gets in our way... is getting taken out!")
 }

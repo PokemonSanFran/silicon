@@ -1,4 +1,3 @@
-//PSF TODO If a player recives a 2nd quest via startquest and the player has still never opened the questlog and done the tutorial, force the tutorial
 #include "global.h"
 #include "strings.h"
 #include "quest_strings.h"
@@ -1900,7 +1899,6 @@ static void PrintAllQuestSprites(void)
 
 static void RemoveAllQuestSprites(void)
 {
-    //PSF TODO the menu will run out of palettes after 20 scrolls and I have no idea why.
     for (enum QuestMenuRows rowIndex = 0; rowIndex < QUEST_MENU_UX_ROW_COUNT; rowIndex++)
     {
         struct Sprite *sprite = &gSprites[GetQuestSpriteId(rowIndex)];
@@ -2788,9 +2786,5 @@ u32 GetMaxQuestState(u16 questId)
 
     return MAX_QUEST_STATES;
 }
-
-// PSF TODO sprites jump when switching between filters
-// I assume this is because we are freeing the sprites too early
-// when scrolling the menu and first menu WAS a parent and then no longer is, it takes a frame or so to make the arrow disappear
 
 #undef questState

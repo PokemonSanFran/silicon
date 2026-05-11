@@ -285,7 +285,6 @@ script CutePokemon_Script_BattleQiu
 	msgbox(format("Do you mind if I smoke?"),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_QIU,CutePokemon_Text_INeedToTrain)
-	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_QIU_COMPLETE)
 	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find another cute Pokémon?"),,SPEAKER_MELISSA)
 
@@ -441,7 +440,6 @@ script CutePokemon_Script_BattleCresalta
 	msgbox(format("Do you mind if I smoke?"),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_CRESALTA,CutePokemon_Text_INeedToTrain)
-	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_CRESALTA_COMPLETE)
 	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find another cute Pokémon?"),,SPEAKER_MELISSA)
 
@@ -537,7 +535,6 @@ script CutePokemon_Script_BattleHalai
 	msgbox(format("Hey {PLAYER}. We have to battle because the game designer said so."),,SPEAKER_MELISSA)
 	closemessage
 	trainerbattle_no_intro(TRAINER_MELISSA_HALAI,CutePokemon_Text_INeedToTrain)
-	//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 	setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_BATTLE_HALAI_COMPLETE)
 	msgbox(format("Good work {PLAYER}. Do you, by chance, have time to help me find one last cute Pokémon?"),,SPEAKER_MELISSA)
 
@@ -619,7 +616,6 @@ script CutePokemon_Dialogue_Rematch
 		msgbox(format("Hey {PLAYER}. Thanks again for helping me catch those cute Pokémon. Do you have time to battle?"),,SPEAKER_MELISSA)
 		closemessage
 		trainerbattle_no_intro(TRAINER_MELISSA_REMATCH,CutePokemon_Text_INeedToTrain)
-		//PSF TODO need battle slide for every loss "Honestly? I’m surprised."
 		setvar(VAR_CUTE_POKEMON_GUESS,VAR_CUTE_POKEMON_REMATCH_COMPLETE)
 	}
 

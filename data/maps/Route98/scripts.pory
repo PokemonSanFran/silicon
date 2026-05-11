@@ -54,5 +54,4 @@ script Route98_Script_Interact_Quest_GetthebandbacktogetherbikerA
     closemessage
     release
     end
-    // PSF TODO Getthebandbacktogetherbiker: There are dozens of us! Dozens!
 }

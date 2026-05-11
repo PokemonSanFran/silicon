@@ -51,8 +51,6 @@ SINGLE_BATTLE_TEST("Ball Animations: Show all Ball animations")
     }
 }
 
-// https://files.catbox.moe/uha7mn.mp4 PSF TODO fix offset Brendan throw
-// There is a bug that I cannot consistently repro where the battle against keiying in the gym will always crash because both of his lead mons are in master balls
 DOUBLE_BATTLE_TEST("Ball Animations: Show all Doubles Ball animations")
 {
     u16 ball = 0;
