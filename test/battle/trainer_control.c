@@ -14,35 +14,16 @@
 #include "constants/battle_ai.h"
 #include "options_battle.h" // Battle Settings: Trainer Scaling
 
-#define NUM_TEST_TRAINERS 12
-
-static const struct Trainer sTestTrainers[DIFFICULTY_COUNT][NUM_TEST_TRAINERS] =
-{
-#include "trainer_control.h"
-};
-
-enum DifficultyLevel GetTrainerDifficultyLevelTest(u16 trainerId)
-{
-    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
-
-    if (difficulty == DIFFICULTY_NORMAL)
-        return DIFFICULTY_NORMAL;
-
-    if (sTestTrainers[difficulty][trainerId].party == NULL)
-        return DIFFICULTY_NORMAL;
-
-    return difficulty;
-}
-
 // Start Battle Settings: Trainer Scaling
 u32 TrainerScalingGetLevel(u32 trainerId, u32 slot)
 {
-    return sTestTrainers[GetTrainerDifficultyLevelTest(trainerId)][trainerId].party[slot].lvl;
+    const struct Trainer *trainer = GetTrainerStructFromId(trainerId);
+    return trainer->party[slot].lvl;
 }
 
 u32 TrainerScalingGetPartySize(u32 trainerId)
 {
-    return sTestTrainers[GetTrainerDifficultyLevelTest(trainerId)][trainerId].partySize;
+    return GetTrainerStructFromId(trainerId)->partySize;
 }
 // End Battle Settings: Trainer Scaling
 
@@ -217,11 +198,14 @@ TEST("Difficulty changes which party is used for enemy trainer if defined for th
 {
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
-    // Start Battle Settings: Trainer Scaling
     u32 currTrainer = 5;
     CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_MEWTWO);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 50);
+    // Start Battle Settings: Trainer Scaling
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 50);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
 }
 
@@ -255,7 +239,11 @@ TEST("Difficulty changes which party is used for partner if defined for the diff
     u32 currTrainer = TRAINER_PARTNER(2);
     CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_ARCEUS);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 99);
+    //Start Battle Settings: Trainer Scaling
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 99);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
 }
@@ -267,6 +255,7 @@ TEST("Difficulty changes which party is used for partner if defined for the diff
     u32 currTrainer = TRAINER_PARTNER(2);
     CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_MEWTWO);
+    //Start Battle Settings: Trainer Scaling
     //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 50);
     u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
     EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
