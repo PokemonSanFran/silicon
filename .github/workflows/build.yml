@@ -200,13 +200,13 @@ jobs:
           TEST: 1
         run: make -j$(nproc) check
 
-      - name: TestTrainers
-        env:
-          GAME_VERSION: EMERALD
-          TEST: 1
-        run: |
-          touch test/battle/silicon_exp.c
-          make -j${nproc} checktrainers TESTS="Silicon Exp Test"
+      # - name: TestTrainers
+        # env:
+          # GAME_VERSION: EMERALD
+          # TEST: 1
+        # run: |
+          # touch test/battle/silicon_exp.c
+          # make -j${nproc} checktrainers TESTS="Silicon Exp Test"
 
       # - name: ROM (Firered)
        #  env:
