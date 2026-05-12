@@ -1466,7 +1466,7 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode)
         return;
 
     u32 x = isScanMode ? 8 : 8;
-    u32 y = isScanMode ? 1 : 5;
+    u32 y = isScanMode ? 0 : 4;
     u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
@@ -1796,7 +1796,7 @@ static void Dexnav_PrintMonName(enum DexnavWindows windowId)
 
     u32 x = 7;
     u32 y = 0;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 fontId = FONT_DEXNAV_SPECIES_NAME;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 windowWidth = TILE_TO_PIXELS(GetWindowAttribute(windowId, WINDOW_WIDTH)) - x;
