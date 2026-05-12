@@ -1210,7 +1210,7 @@ static void DisplayHelpBar(enum DexnavWindows windowId)
 
 static bool8 Dexnav_IsCurrentModeScan(void)
 {
-    return (Dexnav_GetMode() == DEXNAV_MODE_SCAN);
+    return (Dexnav_GetMode() != DEXNAV_MODE_MAIN);
 }
 
 static enum DexnavMode Dexnav_GetMode(void)
@@ -1264,7 +1264,10 @@ static enum DexnavMode Dexnav_CalculateInitialMode(void)
     if (FlagGet(DN_FLAG_SEARCHING) == FALSE)
         return DEXNAV_MODE_MAIN;
 
-    return DEXNAV_MODE_SCAN;
+    if (Dexnav_ShouldDisplayAbilityName())
+        return DEXNAV_MODE_SCAN_INSIDE;
+
+    return DEXNAV_MODE_SCAN_OUTSIDE;
 }
 
 static enum DexnavHabitats Dexnav_CalculateInitialHabitat(void)
@@ -1714,9 +1717,7 @@ static void SpriteCB_StarInsight(struct Sprite *sprite)
 
 static void Dexnav_DisplayStarsInsight(void)
 {
-    u32 state = Dexnav_GetMode();
-    bool32 isScanMode = (state == DEXNAV_MODE_SCAN);
-
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
@@ -1734,7 +1735,7 @@ static void Dexnav_DisplayStarsInsight(void)
 
         u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
         gSprites[spriteId].data[1] = position;
-        gSprites[spriteId].data[2] = state;
+        gSprites[spriteId].data[2] = Dexnav_GetMode();
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
         gSprites[spriteId].oam.priority = 0;
@@ -1744,8 +1745,7 @@ static void Dexnav_DisplayStarsInsight(void)
 
 static void Dexnav_DisplayStarsStreak(void)
 {
-    u32 state = Dexnav_GetMode();
-    bool32 isScanMode = (state == DEXNAV_MODE_SCAN);
+    bool32 isScanMode = Dexnav_IsCurrentModeScan();
 
     for (enum DexnavStarPosition position = 0; position < DEXNAV_STAR_POSITION_COUNT; position++)
     {
@@ -1763,7 +1763,7 @@ static void Dexnav_DisplayStarsStreak(void)
         u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
         gSprites[spriteId].data[0] = Dexnav_GetStreak();
         gSprites[spriteId].data[1] = position;
-        gSprites[spriteId].data[2] = state;
+        gSprites[spriteId].data[2] = Dexnav_GetMode();
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(16x16);
         gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
         gSprites[spriteId].oam.priority = 1;
