@@ -1609,7 +1609,7 @@ static void SpriteCB_StarStreak(struct Sprite *sprite)
     else
         sprite->invisible = FALSE;
 
-    bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
+    bool32 isBig = (sprite->data[2] == DEXNAV_MODE_MAIN);
 
     s32 streak = sprite->data[0];
     bool32 streakMax = (streak == DEXNAV_MAX_STREAK);
@@ -1664,7 +1664,7 @@ static void SpriteCB_StarInsight(struct Sprite *sprite)
     else
         sprite->invisible = FALSE;
 
-    bool32 isBig = (sprite->data[2] == DEXNAV_STAR_BIG_EMPTY);
+    bool32 isBig = (sprite->data[2] == DEXNAV_MODE_MAIN);
 
     s32 insight = Dexnav_GetInsight();
     bool32 insightMax = (insight == DEXNAV_MAX_INSIGHT);
@@ -1755,7 +1755,7 @@ static void Dexnav_DisplayStarsStreak(void)
 
         TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_STAR;
         TempSpriteTemplate.callback = SpriteCB_StarStreak;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+        TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
         u32 x = isScanMode ? 149 + (12 * position) : 15 + (14 * position);
         u32 y = isScanMode ? 6 : 128;
@@ -2441,8 +2441,8 @@ static void Dexnav_DisplayStatIndicator(u32 count, u32 position)
     u32 column = (position > DEXNAV_STAT_POSITIONS) ? (DEXNAV_MAX_SHOWN_MONS - position): position;
         column--;
 
-    u32 x = dexnavMonIconCoordinates[11][position][AXIS_X] + 36;
-    u32 y = dexnavMonIconCoordinates[11][position][AXIS_Y] + 16;
+    u32 x = dexnavMonIconCoordinates[11][position][AXIS_X] + 33;
+    u32 y = dexnavMonIconCoordinates[11][position][AXIS_Y] + 18;
 
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
