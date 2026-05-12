@@ -1794,7 +1794,7 @@ static void Dexnav_PrintMonName(enum DexnavWindows windowId)
     if (species == SPECIES_NONE)
         return;
 
-    u32 x = 7;
+    u32 x = 8;
     u32 y = 0;
     u32 fontId = FONT_DEXNAV_SPECIES_NAME;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
@@ -2004,7 +2004,7 @@ static void Dexnav_PrintMonLevel(enum DexnavWindows windowId)
     else 
         StringCopy(gStringVar1,COMPOUND_STRING("???"));
 
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV}{STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV} {STR_VAR_1}"));
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
@@ -2026,7 +2026,7 @@ static void Dexnav_PrintMonTypes(void)
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_TYPES;
         TempSpriteTemplate.anims = sSpriteAnimTable_Type;
 
-        u32 spriteId = CreateSprite(&TempSpriteTemplate, (11 + (20 * typeNum)), 85, 0);
+        u32 spriteId = CreateSprite(&TempSpriteTemplate, (12 + (20 * typeNum)), 85, 0);
         gSprites[spriteId].data[0] = Dexnav_GetCurrentlySelectedSpecies();
         gSprites[spriteId].data[1] = typeNum;
         gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
