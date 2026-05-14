@@ -457,7 +457,7 @@
 #line 267
         .trainerName = _("Baiya"),
 #line 269
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .trainerClass = TRAINER_CLASS_BAIYA,
 #line 268
         .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 271
@@ -749,7 +749,7 @@
 #line 391
         .trainerName = _("Baiya"),
 #line 393
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .trainerClass = TRAINER_CLASS_BAIYA,
 #line 392
         .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 395
@@ -2033,7 +2033,7 @@
 #line 938
         .trainerName = _("Baiya"),
 #line 940
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .trainerClass = TRAINER_CLASS_BAIYA,
 #line 939
         .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 942
@@ -3250,7 +3250,7 @@
 #line 1440
         .trainerName = _("Baiya"),
 #line 1442
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .trainerClass = TRAINER_CLASS_FINALIST,
 #line 1441
         .trainerPic = TRAINER_PIC_FRONT_BAIYA,
 #line 1443
