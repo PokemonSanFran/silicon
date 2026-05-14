@@ -560,7 +560,6 @@ enum
     MUS_CHASILLA,
     MUS_MASTER_DOJO,
     MUS_VS_BAIYA,
-    MUS_PERLACIA_CITY,
     MUS_LAST,
 };
 #define END_MUS (MUS_LAST - 1)
