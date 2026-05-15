@@ -2927,9 +2927,9 @@
 	.endm
 
 	@ Buffers the nickname of the first alive party member.
-	.macro bufferlivemonnickname out:req
+	.macro bufferlivemonnickname stringVarId:req
 	callnative BufferFirstLiveMonNickname, requests_effects=1
-	.byte \out
+	stringvar \stringVarId
 	.endm
 
 	@ Executes Follower actions
@@ -2993,25 +2993,31 @@
     .2byte \dest
 	.endm
 
-    .macro askplayermon askText:req, denyText:req, notEnoughText:req, speakerId:req
-	special BufferMonNickname
-	msgbox \askText, MSGBOX_YESNO, \speakerId
+    .macro askplayermon askText:req, denyText:req, notEnoughText:req, speakerId:req, partyCheck=FALSE
+    special BufferMonNickname
+    msgbox \askText, MSGBOX_YESNO, \speakerId
+    copyvar VAR_TEMP_3,VAR_RESULT
     goto_if_eq VAR_RESULT, NO, 1f
-	special HasEnoughMonsForDoubleBattle
+    .if \partyCheck
+    compare VAR_0x8004, PC_MON_CHOSEN
+    goto_if_eq 4f
+    special HasEnoughMonsForDoubleBattle
     goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, 2f
-	special DeleteChosenPartyMon
+4:
+    .endif
+    special DeleteChosenPartyMon
     goto 3f
 
 1:
-	msgbox \denyText, , \speakerId
-	closemessage
-	release
+    msgbox \denyText, , \speakerId
+    closemessage
+    release
     end
 
 2:
-	msgbox \notEnoughText, , \speakerId
-	closemessage
-	release
+    msgbox \notEnoughText, , \speakerId
+    closemessage
+    release
     end
 3:
     .endm
@@ -3357,6 +3363,7 @@
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	waitstate
+	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox \tradeCompleteMsg, MSGBOX_DEFAULT
 	.endm
 

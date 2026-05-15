@@ -122,7 +122,7 @@ script Rematches_Script_GaveKubfu
     bufferspeciesname(STR_VAR_1,SPECIES_KUBFU)
     bufferspeciesname(STR_VAR_2,SPECIES_KUBFU)
     playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(format("{PLAYER} recieved a Kubfu!"))
+    msgbox(format("{PLAYER} recieved a {STR_VAR_1}!"))
     waitmessage
     waitfanfare
     msgbox(gText_NicknameThisPokemon,MSGBOX_YESNO)

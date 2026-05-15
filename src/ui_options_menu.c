@@ -206,22 +206,22 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.smol");
+static const u32 sTMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tTiles.png", ".4bpp.smol");
 static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.smolTM");
 
-static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.smol");
+static const u32 sMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tiles.png", ".4bpp.smol");
 static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.smolTM");
-static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
+static const u16 sMenuPalette[] = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
 
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
+static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
+static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
+static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
+static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sMenuPalette_Violet[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
+static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
 enum Colors
 {
 	FONT_BLACK,
@@ -617,19 +617,19 @@ struct OptionData
 };
 
 //Graphics
-static const u8 sOptionMenuIcon_Game_Settings[]     = INCBIN_U8("graphics/ui_menus/options_menu/icon_game_settings.4bpp");
-static const u8 sOptionMenuIcon_Battle_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_battle_settings.4bpp");
-static const u8 sOptionMenuIcon_Visual_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_visual_settings.4bpp");
-static const u8 sOptionMenuIcon_Music_Settings[]    = INCBIN_U8("graphics/ui_menus/options_menu/icon_music_settings.4bpp");
-static const u8 sOptionMenuIcon_Random_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_random_settings.4bpp");
+static const u8 sOptionMenuIcon_Game_Settings[]     = INCGFX_U8("graphics/ui_menus/options_menu/icon_game_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Battle_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_battle_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Visual_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_visual_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Music_Settings[]    = INCGFX_U8("graphics/ui_menus/options_menu/icon_music_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Random_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_random_settings.png", ".4bpp");
 
 //Arrows
-static const u8 sOptionMenuArrow_Up[]       = INCBIN_U8("graphics/ui_menus/options_menu/arrow_up.4bpp");
-static const u8 sOptionMenuArrow_Down[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_down.4bpp");
-static const u8 sOptionMenuArrow_Left[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_left.4bpp");
-static const u8 sOptionMenuArrow_Right[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_right.4bpp");
+static const u8 sOptionMenuArrow_Up[]       = INCGFX_U8("graphics/ui_menus/options_menu/arrow_up.png", ".4bpp");
+static const u8 sOptionMenuArrow_Down[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_down.png", ".4bpp");
+static const u8 sOptionMenuArrow_Left[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_left.png", ".4bpp");
+static const u8 sOptionMenuArrow_Right[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_right.png", ".4bpp");
 
-static const u8 sOptionMenuSelector[]       = INCBIN_U8("graphics/ui_menus/options_menu/selector.4bpp");
+static const u8 sOptionMenuSelector[]       = INCGFX_U8("graphics/ui_menus/options_menu/selector.png", ".4bpp");
 
 //Text
 static const u8 sText_Title_Settings_Hub[]  = COMPOUND_STRING("Settings Hub");

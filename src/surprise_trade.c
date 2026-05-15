@@ -14,6 +14,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "region_map.h"
 #include "scanline_effect.h"
@@ -56,11 +57,22 @@ static u32 GenerateSurpriseTradeBall(void);
 static void SurpriseTrade_MainCB(void);
 static void SurpriseTrade_VBlankCB(void);
 static void SurpriseTrade_SetupCB(void);
+static void BufferMonSelectionSurpriseTrade(void);
 
 void CreateWonderTradePokemon(void)
 {
     u32 wonderTradeSpecies = GenerateSurpriseTradeSpecies();
-    u32 playerMonLevel = GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_LEVEL);
+    u32 playerMonLevel = 0;
+
+    if (gSpecialVar_0x8005 == PC_MON_CHOSEN)
+    {
+        playerMonLevel = GetBoxMonDataAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, MON_DATA_EXP);
+    }
+    else
+    {
+        playerMonLevel = GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_EXP);
+    }
+
     u32 experience = CalculateSurpriseTradeExperience(playerMonLevel, wonderTradeSpecies);
     u32 newHeldItem = GenerateSurpriseTradeItem();
     u32 abilityNum = GenerateSurpriseTradeAbility(wonderTradeSpecies);
@@ -78,7 +90,7 @@ void CreateWonderTradePokemon(void)
 
     CreateMon(&gEnemyParty[0], wonderTradeSpecies, 1, personality,OTID_STRUCT_PRESET(otId));
 
-    bool32 isShiny = ShouldMonBeShiny(GetMonData(&gEnemyParty[0],MON_DATA_PERSONALITY),otId);
+    bool8 isShiny = ShouldMonBeShiny(GetMonData(&gEnemyParty[0],MON_DATA_PERSONALITY),otId);
 
     SetMonData(&gEnemyParty[0], MON_DATA_EXP, &experience);
     SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &newHeldItem);
@@ -122,20 +134,34 @@ static u32 GenerateSurpriseTradeSpecies(void)
     return GetEggSpecies(species);
 }
 
-static u32 CalculateSurpriseTradeExperience(u32 level, u32 species)
+static u32 CalculateSurpriseTradeExperience(u32 currentLevelExp, u32 species)
 {
     u32 growthRate = gSpeciesInfo[species].growthRate;
-    u32 expLimit = gExperienceTables[growthRate][level + 1];
-    u32 topLimit = gExperienceTables[growthRate][MAX_LEVEL];
+    u32 tradedMonExp = currentLevelExp;
+    u32 level = 0, newMonExp = 0;
 
-    u32 exp = Random() % expLimit;
+    for (level = 0; level < (MAX_LEVEL + 1); level++)
+    {
 
-    if (exp == 0)
-        exp = 1;
-    else if (exp > topLimit)
-        exp = topLimit;
+        newMonExp = gExperienceTables[growthRate][level];
+        tradedMonExp -= newMonExp;
 
-    return exp;
+        if (tradedMonExp < 1)
+            break;
+    }
+
+    u32 maxExp = gExperienceTables[growthRate][MAX_LEVEL];
+
+    if (currentLevelExp > maxExp)
+        return maxExp;
+
+    if (++level > MAX_LEVEL)
+        return currentLevelExp;
+
+    u32 exp = Random() % (newMonExp - currentLevelExp);
+    u32 targetExp = currentLevelExp + exp;
+
+    return ((targetExp) > maxExp) ? maxExp : targetExp;
 }
 
 void AddSurpriseTradeMoves(struct Pokemon *mon)
@@ -320,7 +346,7 @@ static u32 GenerateSurpriseTradeAbility(u32 species)
     return ability;
 }
 
-const enum ItemSortType blockedItemSortTypes[] = 
+const enum ItemSortType blockedItemSortTypes[] =
 {
     ITEM_TYPE_EVOLUTION_STONE,
     ITEM_TYPE_EVOLUTION_ITEM,
@@ -409,7 +435,10 @@ static u32 GenerateSurpriseTradeBall(void)
 void ShowTradedMonReturnToStartMenu(void)
 {
     SetSurpriseTradeFlag(FALSE);
-    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gEnemyParty[TRADEMON_FROM_PC], 0, 0, CB2_StartMenu_ReturnToUI);
+    else
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }
 
 void CB2_StartSurpriseTrade(void)
@@ -422,7 +451,7 @@ void CB2_StartSurpriseTrade(void)
         Adventure_Guide_Init(CB2_StartSurpriseTrade);
         return;
     }
-    SetMainCallback2(CB2_TrashTrade);
+    EnterPokeStorageSurpriseTrade();
 }
 
 void CB2_ContinueSurpriseTrade(void)
@@ -439,7 +468,6 @@ void SurpriseTrade_Continue(MainCallback callback)
     }
 
     gSpecialVar_0x8005 = gSpecialVar_0x8004;
-    CreateWonderTradePokemon();
     SetMainCallback2(SurpriseTrade_SetupCB);
 }
 
@@ -485,4 +513,15 @@ static void SurpriseTrade_MainCB(void)
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
+}
+
+static void BufferMonSelectionSurpriseTrade(void)
+{
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
+    SetMainCallback2(CB2_ContinueSurpriseTrade);
+}
+
+void SurpriseTrade_SetSurpriseTradeCallback(void)
+{
+    SetMainCallback2(BufferMonSelectionSurpriseTrade);
 }

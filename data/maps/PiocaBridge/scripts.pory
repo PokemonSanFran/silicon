@@ -1,12 +1,16 @@
-mapscripts PiocaBridge_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
+mapscripts PiocaBridge_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(OffYouGo_ObjectCleanUp_Script)
         call(AngelDelivery_Script_HideBikers)
+        call_if_quest_reward(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HidePiocaFindtheguilityplantH)
+        call_if_quest_complete(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Script_HidePiocaFindtheguilityplantH)
     }
-    MAP_SCRIPT_ON_FRAME_TABLE[
-                FLAG_VISITED_PIOCA_BRIDGE, FALSE: Generic_Mappreview
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        FLAG_VISITED_PIOCA_BRIDGE, FALSE: Generic_Mappreview
     ]
-
 }
 
 script PiocaBridge_Script_Interact_BodegaburnoutDeliveryA
@@ -31,6 +35,7 @@ script PiocaBridge_Script_Findtheguiltyplanth
 
 script PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth
 {
+    goto_if_quest_active(QUEST_FINDTHEGUILTY,Quest_Findtheguilty_Dialogue_InterrogatePlant)
     goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Findtheguiltyplanth)
     msgbox(format("My heartbeat has been elevated ever since I joined the hiking club!"),,SPEAKER_FINDTHEGUILTYPLANTH)
     msgbox(format("That’s a good thing, right?"),,SPEAKER_FINDTHEGUILTYPLANTH)

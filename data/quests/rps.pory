@@ -1,21 +1,6 @@
-const SPEAKER_MONTY = SPEAKER_BLAINE
-const MONTY_CAPHE = 20
-
-const SPEAKER_MONTYOPP = SPEAKER_DIMU
-const MONTYOPP = 21
-
-const SPEAKER_PLAYER = SPEAKER_ALICIA
-const PLAYER = OBJ_EVENT_ID_PLAYER
-
-const FLAG_HIDE_MONTY_OPP = FLAG_TEMP_5
-
-script RPS_Script_ControlMontyOppVisibility
+script RPS_Script_HideMontyopp
 {
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_RPS)
-    if(var(VAR_RESULT))
-    {
-        setflag(FLAG_HIDE_MONTY_OPP)
-    }
+    setobjectflagfromlocalid(LOCALID_RPS_MONTYOPP)
 }
 
 script RPS_Script_SaveAndDeleteParty
@@ -75,8 +60,8 @@ script RPS_Dialogue_StartQuest
     msgbox(format("You beat me again Monty! I can't keep losing money like this. My wife will have my head!"),MSGBOX_DEFAULT,SPEAKER_MONTYOPP)
     msgbox(format("Hueh heuh heuh, don't worry, you'll taste victory soon enough MontyOpp. Just come back when your pockets are a little heavier."),MSGBOX_AUTOCLOSE, SPEAKER_MONTY)
     call (RPS_Script_MontyOppLeaveScreen)
-    waitmovement(MONTY_CAPHE)
-    applymovement(MONTY_CAPHE, moves(face_player, step_end))
+    waitmovement(LOCALID_RPS_MONTY)
+    applymovement(LOCALID_RPS_MONTY, moves(face_player, step_end))
     msgbox(format("Heyo! You there! New around these parts?"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
     msgbox(format("Who, me?"),MSGBOX_AUTOCLOSE,SPEAKER_PLAYER)
     msgbox(format("Hueh heuh heuh, yeah you!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
@@ -298,9 +283,9 @@ script RPS_Dialogue_DenyFirstWagerBattle
 
 script RPS_Script_MontyOppLeaveScreen
 {
-    applymovement(MONTYOPP, moves(face_up, walk_fast_up *2, walk_fast_left *3, walk_fast_up *4, step_end))
-    waitmovement(MONTYOPP)
-    removeobject(MONTYOPP)
+    applymovement(LOCALID_RPS_MONTYOPP, moves(face_up, walk_fast_up *2, walk_fast_left *3, walk_fast_up *4, step_end))
+    waitmovement(LOCALID_RPS_MONTYOPP)
+    removeobject(LOCALID_RPS_MONTYOPP)
     return
 }
 
@@ -379,17 +364,8 @@ script RPS_Dialogue_CompletedStreak
 
 script RPS_Dialogue_PostStreak
 {
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
-    if(var(VAR_RESULT))
-    {
-        msgbox(format("Hueh hueh, I think this studio gig really suits me!"),,SPEAKER_MONTY)
-        msgbox(format("I'm still taking money from folks with heavy pockets... but now we're fueling this here production! I'm havin' a great time usin' my hustlin' powers for good."),,SPEAKER_MONTY)
-        msgbox(format("Thanks for setting me up!"),MSGBOX_AUTOCLOSE,SPEAKER_MONTY)
-    }
-    else
-    {
-        msgbox(format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling."),MSGBOX_AUTOCLOSE,SPEAKER_MONTYOPP)
-    }
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitMonty)
+    msgbox(format("Might be done with Mach-Focus-Hand... I think I need to find a bigger hustle, something more fufilling."),MSGBOX_AUTOCLOSE,SPEAKER_MONTYOPP)
 }
 
 movement Monty_FacePlayer

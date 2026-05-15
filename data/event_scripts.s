@@ -93,6 +93,7 @@
 #include "constants/ui_adventure_guide.h" @ adventureGuide
 #include "constants/ui_map_system.h"
 @ End siliconMerge
+#include "constants/fly_encounter.h" @ flyEncounters
 #include "constants/speaker_names.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
@@ -1084,7 +1085,7 @@ EventScript_AfterWhiteOutHeal::
 	lockall
 	msgbox gText_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	call_if_unset FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsgPreRoxanne
+	call_if_unset FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsgPreFirstBoss
 	call_if_set FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsg
 	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
@@ -1092,7 +1093,7 @@ EventScript_AfterWhiteOutHeal::
 	releaseall
 	end
 
-EventScript_AfterWhiteOutHealMsgPreRoxanne::
+EventScript_AfterWhiteOutHealMsgPreFirstBoss::
 	msgbox gText_MonsHealedShouldBuyPotions
 	return
 
@@ -1102,6 +1103,7 @@ EventScript_AfterWhiteOutHealMsg::
 
 EventScript_AfterWhiteOutMomHeal::
 	lockall
+	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox gText_HadQuiteAnExperienceTakeRest
@@ -1467,7 +1469,7 @@ gText_HadQuiteAnExperienceTakeRest::
 gText_MomExplainHPGetPotions::
 	.string "MOM: Oh, good! You and your\n"
 	.string "POKéMON are looking great.\p"
-	.string "I just heard from PROF. BIRCH.\p"
+	.string "I just heard from {STR_VAR_1}.\p"
 	.string "He said that POKéMON's energy is\n"
 	.string "measured in HP.\p"
 	.string "If your POKéMON lose their HP,\n"
@@ -1806,6 +1808,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/qol_field_move_scripts.inc" @ qol_field_moves 
 .include "data/scripts/restored_battle_frontier/tower_lobby.inc"
 .include "data/scripts/restored_battle_frontier/tower_battleroom.inc"
+.include "data/scripts/restored_battle_frontier/dojo_lobby.inc"
 .include "data/scripts/buzzr.inc"
 .include "data/scripts/apps.inc"
 .include "data/scripts/nickname.inc" @ Battle Settings: Nickname
@@ -1959,7 +1962,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/warehousewarfare.inc"
 .include "data/quests/restorehodoucity.inc"
 .include "data/quests/restorezenzuisland.inc"
-.include "data/quests/restoremarin.inc"
+.include "data/quests/restoreespuleeoutskirts.inc"
 .include "data/quests/restoretirabudinplace.inc"
 .include "data/quests/skilllibrary.inc"
 .include "data/quests/miniarcade.inc"
@@ -1969,6 +1972,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/quests/stresscup.inc"
 .include "data/quests/diggingupadaorasdirt.inc"
 .include "data/quests/freetheinnocent.inc"
+.include "data/quests/findtheguilty.inc"
 ## SILICON MAPS
 .include "data/maps/AnbehBend/scripts.inc"
 .include "data/maps/Arantraz/scripts.inc"

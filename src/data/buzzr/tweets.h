@@ -61,9 +61,9 @@ const struct Tweet gTweets[] =
         .quest = QUEST_VSDEOXYS,
         .dislikeCount = 24,
         .likeCount = 46,
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/buzzr/tweet_pics/3.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/buzzr/tweet_pics/3.png", ".4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.bin.smolTM"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/tweet_pics/3.gbapal"),
+        .pal = (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/tweet_pics/3.png", ".gbapal"),
     },
     [TWEET_QUEST_NPC_TUNNELS] =
     {
@@ -502,52 +502,183 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_1] =
+    [TWEET_QUEST_FREETHEINNOCENT_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("A suspect has been taken into custody over the robbery of the Resido Hiking Club: a member of The Tide known as FindtheguiltyvictimB."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_2] =
+    [TWEET_QUEST_FREETHEINNOCENT_2] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("FindtheguiltyvictimB would never steal anything! The cops need to step their game up!"),
+        .content = COMPOUND_STRING("FreetheinnocentvictimB would never steal anything! The cops need to step their game up!"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_3] =
+    [TWEET_QUEST_FREETHEINNOCENT_3] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("The police aren’t being aggressive enough. This hiker thief is a small fry. Gotta lock the rest of those Tide weirdos up too."),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty1,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_4] =
+    [TWEET_QUEST_FREETHEINNOCENT_4] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("The Tide shouldn’t be allowed to just get away with robbing an enthusiast club with no consequences. Glad one of ‘em finally got put in their place."),
         .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Freetheinnocent1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_FREETHEINNOCENT_5] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Somebody brought a boba cup back to the counter today straight from out of the garbage! Just another day in the life!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Freetheinnocent5,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_FINDTHEGUILTY_1] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("SharpRise meddling in the affairs of a hiking club of all things now. Reeks of fear if you ask me!"),
+        .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_Findtheguilty1,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,
     },
-    [TWEET_QUEST_FINDTHEGUILTY_5] =
+    [TWEET_QUEST_RESTAURANTEXPANSION2] =
+    {
+        .userId = BUZZR_USER_BELEN,
+        .content = COMPOUND_STRING("Looking for busboys, servers, chefs and line cooks - My new resturants wants to hire more Resido residents. DM me if you’re interested!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Restaurantexpansion1,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_KITCHENVOLUNTEERING] =
+    {
+        .userId = BUZZR_USER_RESTAURANTEXPANSIONBUSSER,
+        .content = COMPOUND_STRING("We need staff at Flowers, the joint’s overflowing! As long as ya show up, we don’t care who ya are!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Kitchenvolunteering,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREESPULEEGYM_ACTIVE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Somebody brought a boba cup back to the counter today straight from out of the garbage! Just another day in the life!"),
+        .content = COMPOUND_STRING("Did I just see Imelda getting ready to battle out in {STR_VAR_1}? Is something happening?"),
         .isPrivate = FALSE,
-        .criteria = TweetCriteria_Quest_Findtheguilty5,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymActive,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA] =
+    {
+        .userId = BUZZR_USER_BAIYA,
+        .content = COMPOUND_STRING("Yo! Check out the {STR_VAR_1} Swap Meet some time, trainers! It's a great place to level up!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA] =
+    {
+        .userId = BUZZR_USER_IMELDA,
+        .content = COMPOUND_STRING("The {STR_VAR_1} Antique Shop has become the {STR_VAR_1} Swap Meet! Please do come by for some quality battling some time."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestoreespuleegymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREZENZUISLAND_ACTIVE] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Just heard what sounded like some crazy monster noises coming from {STR_VAR_1}. Is Doyle back to battling again?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymActive,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA] =
+    {
+        .userId = BUZZR_USER_BAIYA,
+        .content = COMPOUND_STRING("Looking for a new place to level up, trainers? Check out {STR_VAR_1}'s new Battle Studio!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE] =
+    {
+        .userId = BUZZR_USER_IMELDA,
+        .content = COMPOUND_STRING("I'll soon be building up an independent film and battle studio on {STR_VAR_1}! Swing by sometime if you'd like to get involved!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorezenzugymComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_ASSIGNED_RESTORATION] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("I thought {STR_VAR_1} Gym was donezo, but I keep hearing strange banging sounds from over there. I went to go look, but the lights are always off!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityAssigned,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_FOUND_LEADER] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("It hasn’t been the same since the {STR_VAR_1} Gym closed. I saw Johnny around town today, and it brought back some real memories."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityFoundLeader,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        // PSF TODO replace & with #
+        .content = COMPOUND_STRING("I went to {STR_VAR_1} Dojo and got totally wrecked! I need to focus on type specialization… &BackToTheLab"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY] =
+    {
+        .userId = BUZZR_USER_JOHNNY,
+        .content = COMPOUND_STRING("Trainers! I’m Johnny, the new leader of {STR_VAR_1} Dojo. Come test your skills with our Restricted Sparring. I’m excited to meet the new battle community of {STR_VAR_1}!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_RestorehodoucityComplete,
         .quest = 0,
         .dislikeCount = 72,
         .likeCount = 4,

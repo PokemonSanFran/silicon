@@ -157,68 +157,68 @@ static bool8 Waves_RemoveDonation(void);
 static void Waves_DoConfettiComplete(void);
 static bool8 Waves_CheckIfGoalComplete(void);
 
-static const u8 wavesSinglePixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/bar.4bpp");
-static const u8 wavesEmptyPixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/emptyBar.4bpp");
-static const u8 wavesDonatePixel[] = INCBIN_U8("graphics/ui_menus/waves/assets/donateBar.4bpp");
+static const u8 wavesSinglePixel[] = INCGFX_U8("graphics/ui_menus/waves/assets/bar.png", ".4bpp");
+static const u8 wavesEmptyPixel[] = INCGFX_U8("graphics/ui_menus/waves/assets/emptyBar.png", ".4bpp");
+static const u8 wavesDonatePixel[] = INCGFX_U8("graphics/ui_menus/waves/assets/donateBar.png", ".4bpp");
 
 static const u32* const meterLeftLUT[] =
 {
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/leftGoalBar7.4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar0.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar1.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar2.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar3.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar4.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar5.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar6.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/leftGoalBar7.png", ".4bpp.smol"),
 };
 
 static const u32* const meterCenterLUT[] =
 {
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar7.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/centerGoalBar8.4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar0.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar1.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar2.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar3.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar4.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar5.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar6.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar7.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/centerGoalBar8.png", ".4bpp.smol"),
 };
 
 static const u32* const meterRightLUT[] =
 {
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar1.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar2.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar3.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar4.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar5.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar6.4bpp.smol"),
-    (const u32[])INCBIN_U32("graphics/ui_menus/waves/assets/player/rightGoalBar7.4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar0.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar1.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar2.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar3.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar4.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar5.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar6.png", ".4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/waves/assets/player/rightGoalBar7.png", ".4bpp.smol"),
 };
 
-static const u16 wavesPalettesDefault[] = INCBIN_U16("graphics/ui_menus/waves/palettes/default.gbapal");
-static const u16 wavesPalettesBlack[] = INCBIN_U16("graphics/ui_menus/waves/palettes/black.gbapal");
-static const u16 wavesPalettesBlue[] = INCBIN_U16("graphics/ui_menus/waves/palettes/blue.gbapal");
-static const u16 wavesPalettesGreen[] = INCBIN_U16("graphics/ui_menus/waves/palettes/green.gbapal");
-static const u16 wavesPalettesPlatinum[] = INCBIN_U16("graphics/ui_menus/waves/palettes/platinum.gbapal");
-static const u16 wavesPalettesRed[] = INCBIN_U16("graphics/ui_menus/waves/palettes/red.gbapal");
-static const u16 wavesPalettesScarlet[] = INCBIN_U16("graphics/ui_menus/waves/palettes/scarlet.gbapal");
-static const u16 wavesPalettesViolet[] = INCBIN_U16("graphics/ui_menus/waves/palettes/violet.gbapal");
-static const u16 wavesPalettesWhite[] = INCBIN_U16("graphics/ui_menus/waves/palettes/white.gbapal");
-static const u16 wavesPalettesYellow[] = INCBIN_U16("graphics/ui_menus/waves/palettes/yellow.gbapal");
-static const u16 wavesPalettesText[] = INCBIN_U16("graphics/ui_menus/waves/palettes/text.gbapal");
+static const u16 wavesPalettesDefault[] = INCGFX_U16("graphics/ui_menus/waves/palettes/default.pal", ".gbapal");
+static const u16 wavesPalettesBlack[] = INCGFX_U16("graphics/ui_menus/waves/palettes/black.pal", ".gbapal");
+static const u16 wavesPalettesBlue[] = INCGFX_U16("graphics/ui_menus/waves/palettes/blue.pal", ".gbapal");
+static const u16 wavesPalettesGreen[] = INCGFX_U16("graphics/ui_menus/waves/palettes/green.pal", ".gbapal");
+static const u16 wavesPalettesPlatinum[] = INCGFX_U16("graphics/ui_menus/waves/palettes/platinum.pal", ".gbapal");
+static const u16 wavesPalettesRed[] = INCGFX_U16("graphics/ui_menus/waves/palettes/red.pal", ".gbapal");
+static const u16 wavesPalettesScarlet[] = INCGFX_U16("graphics/ui_menus/waves/palettes/scarlet.pal", ".gbapal");
+static const u16 wavesPalettesViolet[] = INCGFX_U16("graphics/ui_menus/waves/palettes/violet.pal", ".gbapal");
+static const u16 wavesPalettesWhite[] = INCGFX_U16("graphics/ui_menus/waves/palettes/white.pal", ".gbapal");
+static const u16 wavesPalettesYellow[] = INCGFX_U16("graphics/ui_menus/waves/palettes/yellow.pal", ".gbapal");
+static const u16 wavesPalettesText[] = INCGFX_U16("graphics/ui_menus/waves/palettes/text.pal", ".gbapal");
 
-static const u32 wavesInterfaceTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.4bpp.smol");
+static const u32 wavesInterfaceTiles[] = INCGFX_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.png", ".4bpp.smol");
 static const u32 wavesInterfaceTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_inferface.bin.smolTM");
 
-static const u32 wavesBgTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.4bpp.smol");
+static const u32 wavesBgTiles[] = INCGFX_U32("graphics/ui_menus/waves/backgrounds/bg.png", ".4bpp.smol");
 static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/bg.bin.smolTM");
 
-static const u32 wavesGoalTiles[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_goal.4bpp.smol");
+static const u32 wavesGoalTiles[] = INCGFX_U32("graphics/ui_menus/waves/backgrounds/waves_goal.png", ".4bpp.smol");
 static const u32 wavesGoalTilemap[] = INCBIN_U32("graphics/ui_menus/waves/backgrounds/waves_goal.bin.smolTM");
 
 struct WavesState *sWavesState = NULL;
@@ -1263,14 +1263,14 @@ static void Waves_PrintCursor(void)
 
     struct SpriteSheet sSpriteSheet_Cursor =
     {
-        (const u16[])INCBIN_U16("graphics/ui_menus/waves/assets/cursor.4bpp"),
+        (const u16[])INCGFX_U16("graphics/ui_menus/waves/assets/cursor.png", ".4bpp"),
         (64 * 64 / 2),
         spriteTag,
     };
 
     const struct SpritePalette sWavesSpritePalette =
     {
-        .data = (const u16[])INCBIN_U16("graphics/ui_menus/waves/palettes/sprite.gbapal"),
+        .data = (const u16[])INCGFX_U16("graphics/ui_menus/waves/palettes/sprite.pal", ".gbapal"),
         .tag = WAVES_PAL_SPRITE_TAG,
     };
 

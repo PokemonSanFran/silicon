@@ -79,9 +79,6 @@ script ExhibitionBattle_BattleDiantha_Script {
         setvar(VAR_STORYLINE_STATE,STORY_POST_DIANTHA)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,9,5)
-
-        //PSF TODO Add crowd booing
-        //The crowd goes wild with booes and jeering. The screen cuts to black the player is warped back to the locker room. Lucrezia, Keiying, and Charlotte are in the locker room. Lucrezia approaches the player as they walk in.
 }
 
 script ExhibitionBattle_PostBattle_Dialogue

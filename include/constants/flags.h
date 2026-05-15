@@ -235,8 +235,9 @@
 #define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
 #define FLAG_DELIVERED_DEVON_GOODS           0x95
 #define FLAG_RECEIVED_CONTEST_PASS           0x96 // Unused, leftover from R/S
-#define FLAG_TALKED_TO_ELEANOR_POSTGAME        0x96 // Silicon Flag
+#define FLAG_SKY_BATTLE                      0x96 // Silicon Flag
 #define FLAG_RECEIVED_CASTFORM               0x97
+#define FLAG_TALKED_TO_ELEANOR_POSTGAME      0x97 // Silicon Flag
 #define FLAG_RECEIVED_SUPER_ROD              0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
 #define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED  0x9A
@@ -805,7 +806,7 @@
 #define FLAG_DEFEATED_CONSTRUCTION_MON_B 0x2A7 // Silicon Flag
 #define FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT 0x2A8 // Silicon Flag
 #define FLAG_LITTLE_CUP_BATTLE                                      0x2A9 // Silicon Flag
-#define FLAG_UNUSED_0x2AA  0x2AA // Unused Flag
+#define FLAG_POST_SKY_BATTLE 0x2AA // Silicon Flag
 #define FLAG_UNUSED_0x2AB  0x2AB // Unused Flag
 #define FLAG_UNUSED_0x2AC  0x2AC // Unused Flag
 #define FLAG_UNUSED_0x2B0  0x2B0 // Unused Flag
@@ -1403,12 +1404,12 @@
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
 #define FLAG_UNUSED_0x4E8                                           0x4E8 // Unused Flag
 #define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag
-#define FLAG_UNUSED_0x4EA                                           0x4EA // Unused Flag
-#define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
-#define FLAG_UNUSED_0x4EC                                           0x4EC // Unused Flag
-#define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag
-#define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
-#define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_1                                           0x4EA // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_2                                           0x4EB // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_3                                           0x4EC // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_4                                           0x4ED // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_5                                           0x4EE // Silicon Flag
+#define FLAG_QUEST_RESTORE_ESPULEE_OUTSKIRTS_GYM_TRADE_6                                           0x4EF // Silicon Flag
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1
@@ -1714,7 +1715,7 @@
 // These flags are cleared once per day
 // The start and end are byte-aligned because the flags are cleared in byte increments
 #define DAILY_FLAGS_START                           (FLAG_UNUSED_0x91F + (8 - FLAG_UNUSED_0x91F % 8))
-#define FLAG_DAILY_KITCHEN_VOLUNTEER                (DAILY_FLAGS_START + 0x0)
+#define FLAG_DAILY_QUEST_KITCHENVOLUNTEERING                (DAILY_FLAGS_START + 0x0)
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
 #define FLAG_DAILY_ELEANOR_REMATCH                    (DAILY_FLAGS_START + 0x3)  // Unused Flag

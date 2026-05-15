@@ -40,8 +40,8 @@ script FriendsForDinner_WalkToKeiying_Script {
     waitmovement(0)
 }
 
-script FriendsForDinner_Intro_Dialogue {
-    //PSF TODO change this str_var the player's favorite food, which is defined in the character creation process
+script FriendsForDinner_Intro_Dialogue
+{
     lock
     startcutscene(JUMPPLAYER_FRIENDSFORDINNER)
     bufferitemname(STR_VAR_1,ITEM_LAVA_COOKIE)

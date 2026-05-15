@@ -201,30 +201,27 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-	getpartysize
-	goto_if_eq(VAR_RESULT, 0, Debug_NoPokemon)
-	special(ChoosePartyMon)
-	waitstate
-	goto_if_ge(VAR_0x8004, PARTY_SIZE, exit)
-	editmonivs(VAR_0x8004)
-	waitstate
-
-exit:
-	end
+	startquest(QUEST_IBELIEVEICANFLY)
+	givemon(species=SPECIES_PIKACHU,level=50,item=0,move1=MOVE_FLY)
+  end
 }
+
 
 script Debug_EventScript_Script_2
 {
+	startquest(QUEST_FLIGHTPATTERNS)
 	end
 }
 
 script Debug_EventScript_Script_3
 {
-	end
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
+    end
 }
 
 script Debug_EventScript_Script_4
 {
+    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
 	end
 }
 

@@ -2,7 +2,7 @@
 #define GUARD_MONEY_H
 
 // Start siliconMerge
-#define STARTING_MONEY 2891 // PSF TODO Balance this to be correct
+#define STARTING_MONEY 2891
 #define MAX_MONEY 99999999 // Can be increased to INT_MAX
 // #define MAX_MONEY 999999 // Can be increased to INT_MAX
 #define CHARLOTTE_MONEY (MAX_MONEY / 10) * 7

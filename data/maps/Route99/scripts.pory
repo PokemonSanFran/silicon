@@ -1,7 +1,6 @@
 mapscripts Route99_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(Route99_MapScripts_OnTransition)
-        call(Quest_Restaurantexpansion2_HideStaffD_Script)
     }
 
     MAP_SCRIPT_ON_RESUME {
@@ -10,7 +9,7 @@ mapscripts Route99_MapScripts {
 }
 
 script Route99_MapScripts_OnResume {
-        if (defeated(TRAINER_HOUSINGPROTEST_ROCKET)){
+        if (defeated(TRAINER_HOUSINGPROTEST_A)){
             goto(HousingProtest_CleanUp_Script)
         }
 }
@@ -24,13 +23,13 @@ script Route99_MapScripts_OnTransition {
     }
 }
 
-script Route99_EventScript_Ferran_Script{
-    trainerbattle_single(TRAINER_BUSSER,gText_Ferran_PreBattle,gText_Ferran_PostBattle, Quest_Restaurantexpansion2_TrainerD_PostBattle_Script)
-    call(Quest_Restaurantexpansion2_TrainerE_PostBattle_Script)
-}
-text gText_Ferran_PreBattle{
-	format("")
-}
-text gText_Ferran_PostBattle{
-	format("")
+script Route99_Script_Interact_Quest_Restaurantexpansionchef
+{
+    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONCHEF,format("You think a battle will take my mind off food?"),format("Now I’m hungry and I lost?"),Route99_Script_Interact_Quest_Restaurantexpansionchef)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Complete_Restaurantexpansionlinecook)
+    msgbox(format("I used to be the head chef over at the Oroland Coliseum! Ever since it closed I’ve been out of work and out on the streets. I think it’s been ten years now…"),,SPEAKER_RESTAURANTEXPANSIONCHEF)
+    closemessage
+    release
+    end
+// PSF TODO Man, something flame grilled would really hit that spot.
 }

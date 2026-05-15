@@ -312,32 +312,32 @@ extern const u16 gResidoPokedexOrder_Weight[];
 extern const u8 maxOptionLUT[];
 extern const u8 nullOptionLUT[];
 
-static const u8 sSpeciesListMenuFrameGfx[] = INCBIN_U8("graphics/pokedex/ui/species_list/menu_frame.4bpp");
+static const u8 sSpeciesListMenuFrameGfx[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_frame.png", ".4bpp");
 
 const u16 gTypes_Palettes[] = INCBIN_U16("graphics/types/types.gbapal");
-static const u16 pokedexPalettesText[] = INCBIN_U16("graphics/pokedex/ui/palettes/text.gbapal");
+static const u16 pokedexPalettesText[] = INCGFX_U16("graphics/pokedex/ui/palettes/text.pal", ".gbapal");
 
-static const u32 pokedexSpeciesListTiles[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.4bpp.smol");
+static const u32 pokedexSpeciesListTiles[] = INCGFX_U32("graphics/pokedex/ui/species_list_screen.png", ".4bpp.smol");
 static const u32 pokedexSpeciesListTilemap[] = INCBIN_U32("graphics/pokedex/ui/species_list_screen.bin.smolTM");
-static const u32 pokedexFilterListTiles[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.4bpp.smol");
+static const u32 pokedexFilterListTiles[] = INCGFX_U32("graphics/pokedex/ui/filter/filter_list_screen.png", ".4bpp.smol");
 static const u32 pokedexFilterListTilemap[] = INCBIN_U32("graphics/pokedex/ui/filter/filter_list_screen.bin.smolTM");
-static const u32 pokedexPageMovesTiles[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageMovesTiles[] = INCGFX_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.png", ".4bpp.smol");
 static const u32 pokedexPageMovesTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/movesBgModifiedTiles.bin.smolTM");
-static const u32 pokedexPageEvolutionTiles[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageEvolutionTiles[] = INCGFX_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.png", ".4bpp.smol");
 static const u32 pokedexPageEvolutionTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/evoBgModifiedTiles.bin.smolTM");
-static const u32 pokedexPageStatsTiles[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageStatsTiles[] = INCGFX_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.png", ".4bpp.smol");
 static const u32 pokedexPageStatsTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/statsBgModifiedTiles.bin.smolTM");
-static const u32 pokedexPageInformationTiles[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.4bpp.smol");
+static const u32 pokedexPageInformationTiles[] = INCGFX_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.png", ".4bpp.smol");
 static const u32 pokedexPageInformationTilemap[] = INCBIN_U32("graphics/pokedex/ui/page/informationBgModifiedTiles.bin.smolTM");
-static const u32 speciesListMonCursor[] = INCBIN_U32("graphics/pokedex/ui/species_list/mon.4bpp.smol");
-static const u32 speciesListScrollbar[] = INCBIN_U32("graphics/pokedex/ui/species_list/scrollbar.4bpp.smol");
-static const u32 pageScrollbar[] = INCBIN_U32("graphics/pokedex/ui/page/scrollbar.4bpp.smol");
-static const u32 speciesListCaptureIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder.4bpp.smol");
-static const u32 speciesListUncaughtIndicator[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder.4bpp.smol");
-static const u32 speciesListCaptureIndicator_Alola[] = INCBIN_U32("graphics/pokedex/ui/species_list/folder_alola.4bpp.smol");
-static const u32 speciesListUncaughtIndicator_Alola[] = INCBIN_U32("graphics/pokedex/ui/species_list/emptyfolder_alola.4bpp.smol");
-static const u32 speciesListFileIcon[] = INCBIN_U32("graphics/pokedex/ui/species_list/file.4bpp.smol");
-static const u8 speciesListMenuCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.4bpp");
+static const u32 speciesListMonCursor[] = INCGFX_U32("graphics/pokedex/ui/species_list/mon.png", ".4bpp.smol");
+static const u32 speciesListScrollbar[] = INCGFX_U32("graphics/pokedex/ui/species_list/scrollbar.png", ".4bpp.smol");
+static const u32 pageScrollbar[] = INCGFX_U32("graphics/pokedex/ui/page/scrollbar.png", ".4bpp.smol");
+static const u32 speciesListCaptureIndicator[] = INCGFX_U32("graphics/pokedex/ui/species_list/folder.png", ".4bpp.smol");
+static const u32 speciesListUncaughtIndicator[] = INCGFX_U32("graphics/pokedex/ui/species_list/emptyfolder.png", ".4bpp.smol");
+static const u32 speciesListCaptureIndicator_Alola[] = INCGFX_U32("graphics/pokedex/ui/species_list/folder_alola.png", ".4bpp.smol");
+static const u32 speciesListUncaughtIndicator_Alola[] = INCGFX_U32("graphics/pokedex/ui/species_list/emptyfolder_alola.png", ".4bpp.smol");
+static const u32 speciesListFileIcon[] = INCGFX_U32("graphics/pokedex/ui/species_list/file.png", ".4bpp.smol");
+static const u8 speciesListMenuCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.png", ".4bpp");
 const u32 gTypes_Gfx13x11[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_Type13x11 =

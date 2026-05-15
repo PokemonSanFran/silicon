@@ -337,14 +337,11 @@ script HowDisappointing_ArrestScene_Dialogue
     applymovement(POLICE_MON,HowDisappointing_WalkToArrest)
     applymovement(ADAORA,Common_Movement_FaceUp)
     waitmovement(POLICEA)
-    msgbox(format("All right officers, {PLAYER} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA) // PSF TODO Replace PLAYER with OBJECT pronoun
+    msgbox(format("All right officers. {SUBJECT} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA)
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
-    //PSF TODO Luxray uses Shock Wave first time
-    //PSF TODO Mightyena uses Take Down against Adaora
     msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),,SPEAKER_POLICEMAN)
     closemessage
-    //PSF TODO Adaora is knocked down, need animation here
     applymovement(POLICE_MON, moves(lock_facing_direction, walk_faster_down, walk_up, step_end))
     delay(8)
     applymovement(ADAORA,HowDisappointing_FallDown_Movement)
@@ -538,7 +535,6 @@ script HowDisappointing_GruntB_Arrest_Script
     waitmovement(POLICEA)
     waitmovement(POLICE_MON)
     msgbox(format("Nice try."),MSGBOX_DEFAULT,SPEAKER_POLICEMAN)
-    //PSF TODO field effect using shock wave and then the grunt laying down
     bufferspeciesname(STR_VAR_1,SPECIES_LUXRAY)
     buffermovename(STR_VAR_2,MOVE_SHOCK_WAVE)
     msgbox(format("{STR_VAR_1}, use {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_POLICEMAN,TAIL_SHOUT)

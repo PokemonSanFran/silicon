@@ -310,7 +310,6 @@ const u8 *GetQuestDesc_GetTheBandBackTogether(void)
 const u8 *GetQuestDesc_RestaurantExpansion1(void)
 {
     u32 remaining = Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1);
-    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
 
     static const u16 sQuestItems[] =
     {
@@ -345,13 +344,19 @@ const u8 *GetQuestDesc_RestaurantExpansion1(void)
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(sQuestMaps[index]),MAP_NUM(sQuestMaps[index]))->regionMapSectionId, 0);
     }
 
+    u32 flag = ReturnQuestState(QUEST_RESTAURANTEXPANSION1);
     StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_RESTAURANTEXPANSION1].desc[flag]);
     return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Freetheinnocent(void)
 {
-    if (Quest_Freetheinnocent_CashierSpoken())
+    if (!QuestMenu_GetSetQuestState(QUEST_FREETHEINNOCENT,FLAG_GET_ACTIVE))
+    {
+        u32 flag = ReturnQuestState(QUEST_FREETHEINNOCENT);
+        StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_FREETHEINNOCENT].desc[flag]);
+    }
+    else if (Quest_Freetheinnocent_CashierSpoken())
     {
         CopyItemNameHandlePlural(ITEM_QUEST_FREETHEINNOCENT_ALIBI,gStringVar1,2);
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("If you can find the source of {STR_VAR_1}, you might be able to find an alibi for FindtheguiltyvictimB."));
@@ -374,5 +379,45 @@ const u8 *GetQuestDesc_Freetheinnocent(void)
         StringExpandPlaceholders(gStringVar4, sSideQuests[QUEST_FREETHEINNOCENT].desc[flag]);
     }
 
+    return gStringVar4;
+}
+
+const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
+{
+    CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_START,gStringVar1);
+    GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
+    StringCopy(gStringVar3,GetSpeciesName(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+    u32 flag = ReturnQuestState(QUEST_RESTOREESPULEEGYM);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RESTOREESPULEEGYM].desc[flag]);
+
+    if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_A,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_B,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_C,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants {STR_VAR_1}!"));
+    }
+    else if (CheckBagHasItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1))
+    {
+        CopyItemName(ITEM_QUEST_RESTOREESPULEEGYM_E,gStringVar1);
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Find somebody in Resido who wants a {STR_VAR_1}!"));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_6))
+    {
+        StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Show Imelda your {STR_VAR_1}!"));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_GET_COMPLETED,SUB_QUEST_4))
+    {
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You recieved an Odd Egg, but will somebody want it?"));
+    }
     return gStringVar4;
 }

@@ -15,7 +15,8 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
+      "local_id": "LOCALID_HALERBAWILDS_JASON",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_JASON",
       "x": 14,
       "y": 25,
       "elevation": 3,
@@ -23,8 +24,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "HalerbaWilds_EventScript_BlackbeltF",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "HalerbaWilds_Script_Interact_Jason",
       "flag": "FLAG_TEMP_1"
     },
     {

@@ -140,4 +140,15 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("KPIXNews"),
         .isVerified = FALSE,
     },
+    [BUZZR_USER_RESTAURANTEXPANSIONBUSSER] =
+    {
+        .username = COMPOUND_STRING("???"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_JOHNNY] =
+    {
+        // PSF TODO need a better username
+        .username = COMPOUND_STRING("Johnny"),
+        .isVerified = FALSE,
+    },
 };

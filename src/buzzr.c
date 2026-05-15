@@ -269,22 +269,22 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .baseBlock = 1
 };
 
-static const u32 sZapBackgrounds[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.4bpp");
+static const u32 sZapBackgrounds[] = INCGFX_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.png", ".4bpp");
 
-static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/buzzr_background.4bpp.smol");
+static const u32 sLogomarkAllTiles[] = INCGFX_U32("graphics/ui_menus/buzzr/buzzr_background.png", ".4bpp.smol");
 static const u16 sLogomarkAllTilemap[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
 
-static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr.gbapal");
+static const u16 sLogomarkAllPalette[] = INCGFX_U16("graphics/ui_menus/buzzr/buzzr.pal", ".gbapal");
 
-static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
-static const u8 sPrivate_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/private.4bpp");
-static const u8 sMetrics_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/metrics_long.4bpp");
-static const u8 sUnread_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/unread.4bpp");
-static const u8 sPicture_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/picture.4bpp");
+static const u8 sVerified_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/verified.png", ".4bpp");
+static const u8 sPrivate_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/private.png", ".4bpp");
+static const u8 sMetrics_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/metrics_long.png", ".4bpp");
+static const u8 sUnread_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/unread.png", ".4bpp");
+static const u8 sPicture_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/picture.png", ".4bpp");
 
-static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.smol");
-static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
-static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.smol");
+static const u32 BuzzrUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/buzzr/up_arrow.png", ".4bpp.smol");
+static const u32 BuzzrDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/down_arrow.png", ".4bpp.smol");
+static const u32 BuzzrCursor_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/cursor.png", ".4bpp.smol");
 
 static const struct {
     const struct SpriteSheet sheets[NUM_BUZZR_SPRITE_TAGS];
@@ -293,7 +293,7 @@ static const struct {
 {
     {
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/icons.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/icons.png", ".4bpp"),
             TILE_OFFSET_4BPP(32), BUZZR_SPRITE_HEADER_TAG,
         },
     },
@@ -1992,7 +1992,7 @@ static void CreateQuestSprite(void)
 
     struct SpriteSheet sSpriteSheet_Quest =
     {
-        (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/quest.4bpp"),
+        (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/quest.png", ".4bpp"),
         TILE_OFFSET_4BPP(32), SpriteTag,
     };
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
@@ -2077,6 +2077,21 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
             break;
         case TWEET_QUEST_RETURNDOLL:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RETURNDOLL_TARGET),MAP_NUM(MAP_QUEST_RETURNDOLL_TARGET))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREESPULEEGYM_ACTIVE:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE:
+        case TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREZENZUGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREHODOUCITY_ASSIGNED_RESTORATION:
+        case TWEET_QUEST_RESTOREHODOUCITY_FOUND_LEADER:
+        case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM:
+        case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREHODOUGYM_ORIGIN))->regionMapSectionId,0);
             break;
     }
 }

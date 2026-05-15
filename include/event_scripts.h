@@ -658,6 +658,8 @@ extern const u8 EventScript_SelectWithoutRegisteredItem[];
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_AfterWhiteOutMomHeal[];
 extern const u8 EventScript_AfterWhiteOutHeal[];
+extern const u8 EventScript_AfterWhiteOutHeal_Frlg[];
+extern const u8 EventScript_AfterWhiteOutHealMsgPreFirstBoss[];
 extern const u8 EventScript_ResetMrBriney[];
 extern const u8 EventScript_DoLinkRoomExit[];
 extern const u8 CableClub_EventScript_TooBusyToNotice[];
@@ -688,6 +690,8 @@ extern const u8 TheStorySoFar_CheckNumberDefeated_Script[];
 extern const u8 Route4_UncoverSecretLab_Script[];
 extern const u8 Earthquake_Natural_EventScript[];
 extern const u8 Phenomenon_StartEncounter[]; // phenomenon
+extern const u8 FlyEncounter_Script_GetEncounterType[]; // flyEncounters
+  
 // End siliconMerge
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
