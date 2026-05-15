@@ -4710,6 +4710,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_MASTER_DOJO) \
     X(MUS_VS_BAIYA) \
     X(MUS_HALERBA_WILDS_LEAVERRA_FOREST_NIGHT) \
+    X(MUS_BALLER) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
