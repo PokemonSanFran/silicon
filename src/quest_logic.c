@@ -2093,9 +2093,7 @@ bool32 CanMonMegaEvolve(u32 species)
 
 void WowYoureStrong_GetBadgesAndSetTowerState(void)
 {
-    GetNumberOfBadges();
-
-    if (gSpecialVar_Result != 3)
+    if (GetNumberOfBadges() != 3)
         return;
 
     VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
