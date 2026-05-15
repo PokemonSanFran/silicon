@@ -2,7 +2,7 @@
   "id": "MAP_TIRABUDIN_PLACE",
   "name": "TirabudinPlace",
   "layout": "LAYOUT_TIRABUDIN_PLACE",
-  "music": "MUS_FALLARBOR",
+  "music": "MUS_TIRABUDIN_PLACE",
   "region_map_section": "MAPSEC_TIRABUDIN_PLACE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
