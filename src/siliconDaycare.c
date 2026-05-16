@@ -22,8 +22,6 @@
 #include "tv.h"
 #include "constants/siliconDaycare.h"
 
-static void Debug_RandomizeBoxMonInidividualValues(struct BoxPokemon *mon);
-static void Debug_RandomizeMonInidividualValues(struct Pokemon *mon);
 static s16 CompactDaycareEggSlots(void);
 static u32 GetFirstPopulatedEggIndex(void);
 static s16 CompactDaycareEggSlots(void);
@@ -497,8 +495,6 @@ void CompareOldNewIndividualValues(void)
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     struct Pokemon *mon = &daycare->viewMon;
     struct Pokemon *old = &gPlayerParty[gSpecialVar_0x8004];
-    //Debug_RandomizeMonInidividualValues(mon);
-    // PSF TODO remove Debug_RandomizeMonInidividualValues once ShowPokemonSummaryScreen can actually edit IVs
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
@@ -571,8 +567,6 @@ void ViewEggContents(void)
 void EditEggContents(void)
 {
     LoadEggContents(SUMMARY_MODE_LOCK_MOVES);
-    //Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
-    //PSF TODO change this to edit IV mode and remove Debug_RandomizeBoxMonInidividualValues
 }
 
 static void LoadEggContents(u32 mode)
@@ -624,24 +618,6 @@ void ResetUnhatchedMonEgg(void)
     {
          stat = daycare->daycareEgg[eggIndex].originalIv[statIndex];
          SetBoxMonData(mon,MON_DATA_HP_IV + statIndex, &stat);
-    }
-}
-
-static void Debug_RandomizeMonInidividualValues(struct Pokemon *mon)
-{
-    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
-    {
-        u32 stat = Random() % MAX_PER_STAT_IVS;
-        SetMonData(mon,MON_DATA_HP_IV + statIndex,&stat);
-    }
-}
-
-static void Debug_RandomizeBoxMonInidividualValues(struct BoxPokemon *mon)
-{
-    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
-    {
-        u32 stat = Random() % MAX_PER_STAT_IVS;
-        SetBoxMonData(mon,MON_DATA_HP_IV + statIndex,&stat);
     }
 }
 
