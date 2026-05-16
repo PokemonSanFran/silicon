@@ -1160,6 +1160,9 @@ static void Task_HandleScanInput(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
+    if (gPaletteFade.active)
+        return;
+
     if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON))
     {
         PlaySoundStartFadeQuitApp(taskId);
