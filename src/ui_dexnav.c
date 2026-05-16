@@ -815,6 +815,7 @@ static void LoadGraphics(void)
 
         LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
     }
+    CpuFill32(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
 
 static void LoadDexnavPalettes(void)
@@ -868,6 +869,7 @@ static void Dexnav_FreeResources(void)
 
 static void Dexnav_FreeStructs(void)
 {
+    Dexnav_RemoveSelectedMonSprite();
     TRY_FREE_AND_SET_NULL(sDexnavState);
 }
 
@@ -1158,6 +1160,9 @@ static void Task_HandleScanInput(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
+    if (gPaletteFade.active)
+        return;
+
     if (JOY_NEW(B_BUTTON) || JOY_REPEAT(B_BUTTON))
     {
         PlaySoundStartFadeQuitApp(taskId);

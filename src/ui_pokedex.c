@@ -3199,8 +3199,7 @@ void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId)
     ParentDisplay_SetFutureSpeciesId(savedData.species);
     SaveCallbackToPokedex(savedData.savedCallback);
     gTasks[taskId].tTargetPageId = POKEDEX_PAGE_INFORMATION;
-    LoadPokedexPalettes();
-    Page_SwitchFromGrid(taskId);
+    SetAndSetUpCurrentPage(taskId);
 }
 
 /*

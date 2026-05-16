@@ -277,6 +277,7 @@ void Pokedex_SaveDexnavData(struct DexnavSavedData savedData);
 void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId);
 void Pokedex_FreeResources(void);
 void FreePokedexStructs(void);
+void SetAndSetUpCurrentPage(u8 taskId);
 
 
 #endif // GUARD_UI_POKEDEX_H
