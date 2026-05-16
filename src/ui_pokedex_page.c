@@ -4783,7 +4783,7 @@ static void PageInformation_PrintTypes(u32 species, enum PokedexPageInformationW
         u32 fontColor = PageMoves_GetContrastColor(types[typeIndex]);
 
         //FillPalette(gTypesInfo[types[typeIndex]].siliconRGBValue,POKEDEX_INFO_TYPE_WINDOW_COLOR_ADDRESS+typeIndex, 2);
-        // Only fill the unfaded palette to avoid showing colors before fadign away from white
+        // Only fill the unfaded palette to avoid showing colors before fading away from white
         CpuFill16(gTypesInfo[types[typeIndex]].siliconRGBValue, &gPlttBufferUnfaded[POKEDEX_INFO_TYPE_WINDOW_COLOR_ADDRESS+typeIndex], 2);
 
         PageMoves_EditPage_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x13,0,0,2));
