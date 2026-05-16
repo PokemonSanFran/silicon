@@ -868,6 +868,7 @@ static void Dexnav_FreeResources(void)
 
 static void Dexnav_FreeStructs(void)
 {
+    Dexnav_RemoveSelectedMonSprite();
     TRY_FREE_AND_SET_NULL(sDexnavState);
 }
 
