@@ -815,6 +815,7 @@ static void LoadGraphics(void)
 
         LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
     }
+    CpuFill32(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
 
 static void LoadDexnavPalettes(void)
