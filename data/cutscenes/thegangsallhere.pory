@@ -65,7 +65,16 @@ script TheGangsAllHere_OliverAppearStairs_Script{
 
 script TheGangsAllHere_InteractFollower_Script
 {
-    return
+    random(4)
+    switch (var(VAR_RESULT))
+    {
+        case 0: msgbox(format("I'm not so much of a Trainer as most of you guys. And boy, am I glad! This looks stressful."),MSGBOX_NPC,SPEAKER_OLIVER)
+        case 1: msgbox(format("It's a miracle we've never taken any structural damage given how often the folk here like to test battle strategies against eachother! Speaks to that Sharprise infrastructure, I guess."),MSGBOX_NPC,SPEAKER_OLIVER)
+        case 2: msgbox(format("If our League's gonna be the best in the world, its natural that our Trainers should too. That's why even Sharprise employees take it seriously!"),MSGBOX_NPC,SPEAKER_OLIVER)
+        case 3: msgbox(format("We do follow pretty strict rules and regulations for battles inside the building for what its worth. You're not subject to those, though! So uh, let 'er rip - as they say! ...Is that what they say?"),MSGBOX_NPC,SPEAKER_OLIVER)
+    }
+    closemessage
+    end
 }
 
 script TheGangsAllHere_WhatBringsYou_Dialogue
