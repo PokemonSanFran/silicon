@@ -13,6 +13,7 @@
 #include "frontier_pass.h"
 #include "gpu_regs.h"
 #include "item_use.h"
+#include "international_string_util.h"
 #include "line_break.h"
 #include "main_menu.h"
 #include "malloc.h"
@@ -1489,21 +1490,22 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode)
     if (species == SPECIES_NONE)
         return;
 
+    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER_LEFT;
     u32 x = isScanMode ? 8 : 8;
-    u32 y = isScanMode ? 0 : 4;
-    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER;
+    u32 y = isScanMode ? 1 : 4;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("INSIGHT"));
     u32 insight = Dexnav_GetInsight();
-    x = isScanMode ? 43 : 47;
     y = isScanMode ? 0 : (y - 3);
     
     if (insight < DEXNAV_MAX_INSIGHT)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
     else
         StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
+
+    x = isScanMode ? GetStringRightAlignXOffset(fontId,gStringVar4,DEXNAV_INSIGHT_HEADER_RIGHT_ALIGN_WIDTH) : 43;
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
@@ -1529,14 +1531,14 @@ static void Dexnav_PrintStreak(enum DexnavWindows windowId, bool32 isScanMode)
         return;
 
     u32 x = isScanMode ? 203 : 9 ;
-    u32 y = isScanMode ? 0 : 4;
-    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER;
+    u32 y = isScanMode ? 1 : 4;
+    u32 fontId = isScanMode ? FONT_DEXNAV_SCAN_HEADER : FONT_DEXNAV_STAT_HEADER_LEFT;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("STREAK"));
     u32 streak = Dexnav_GetStreak();
-    x = isScanMode ? 184 : 48;
+    x = isScanMode ? 184 : 44;
     y = isScanMode ? 0   : y - 2;
 
     if (streak < DEXNAV_MAX_STREAK)
@@ -1751,7 +1753,7 @@ static void Dexnav_DisplayStarsInsight(void)
         TempSpriteTemplate.callback = SpriteCB_StarInsight;
         TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
         TempSpriteTemplate.anims = sAnims_Star;
-        u32 x = isScanMode ? 66 + (12 * position) : 15 + (14 * position);
+        u32 x = isScanMode ? DEXNAV_INSIGHT_STAR_HEADER_X_POSITION + (12 * position) : 15 + (14 * position);
         u32 y = isScanMode ? 6 : 41;
 
         u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
@@ -2166,7 +2168,7 @@ static void Dexnav_RemoveMonIcon(u32 spriteId)
 
 static void Dexnav_DisplayOverworldPokemon(void)
 {
-    if (Dexnav_IsCurrentModeScan() == FALSE)
+    if (Dexnav_IsCurrentModeWithinProximity() == FALSE)
         return;
 
     u32 species = Dexnav_GetOverworldSpecies();
@@ -2670,9 +2672,10 @@ static void Dexnav_DisplayAllStatIndicator(void)
     if (Dexnav_IsCurrentModeScan() == FALSE)
         return;
 
+    u32 startPosition = Dexnav_IsCurrentModeWithinProximity() ? 1 : 0;
     u32 count = (Dexnav_ShouldDisplayStats()) ? Dexnav_GetStatFlag() : 0;
 
-    for (u32 position = 1; position < DEXNAV_MAX_SHOWN_MONS; position++)
+    for (u32 position = startPosition; position < DEXNAV_MAX_SHOWN_MONS; position++)
         Dexnav_DisplayStatIndicator(count, position);
 }
 
@@ -2680,7 +2683,7 @@ static void Dexnav_DisplayStatIndicator(u32 count, u32 position)
 {
     Dexnav_RemoveStatIndicator(position);
     u32 column = (position > DEXNAV_STAT_POSITIONS) ? (DEXNAV_MAX_SHOWN_MONS - position): position;
-        column--;
+    column--;
 
     u32 x = dexnavMonIconCoordinates[11][position][AXIS_X] + 33;
     u32 y = dexnavMonIconCoordinates[11][position][AXIS_Y] + 18;
@@ -2705,7 +2708,7 @@ static void Dexnav_DisplayStatIndicator(u32 count, u32 position)
     Dexnav_SaveSpriteId(baseSpriteId + position,spriteId);
 
     if (isWithinProximity == FALSE)
-        StartSpriteAnimIfDifferent(&gSprites[spriteId],DEXNAV_MAX_SHOWN_MONS - position);
+        StartSpriteAnimIfDifferent(&gSprites[spriteId],position);
 }
 
 static void Dexnav_RemoveStatIndicator(u32 position)
@@ -3452,7 +3455,7 @@ static void Dexnav_PrintAbility(enum DexnavWindows windowId)
     bool32 hideAbilityIndicator = Dexnav_ShouldHideAbilityIndicator();
     u32 x = hideAbilityIndicator ? 8 : 23;
     u32 y = 8;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER_LEFT;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     s32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
@@ -3496,7 +3499,7 @@ static void Dexnav_PrintMove(enum DexnavWindows windowId)
     bool32 hideMoveIndicator = Dexnav_ShouldHideMoveIndicator();
     u32 x = hideMoveIndicator ? 8 : 23;
     u32 y = 3;
-    u32 fontId = FONT_DEXNAV_STAT_HEADER;
+    u32 fontId = FONT_DEXNAV_STAT_HEADER_LEFT;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     s32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
 
