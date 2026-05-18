@@ -1459,6 +1459,9 @@ static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId)
 
 static u32 Dexnav_GetCurrentlySelectedSpecies(void)
 {
+    if (Dexnav_IsCurrentModeScan())
+        return Dexnav_GetOverworldSpecies();
+
     return sDexnavState->dexnavSpecies[Dexnav_GetHabitat()][Dexnav_GetCursorPosition()];
 }
 
