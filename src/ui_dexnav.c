@@ -809,6 +809,9 @@ static void LoadGraphics(void)
         if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == 0)
             continue;
 
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_SPRITETAG_OVERWORLD)
+            continue;
+
         LoadSpriteSheet(&sDexnavSpriteSheets[spriteId].spriteSheet);
 
         if (sDexnavSpriteSheets[spriteId].palette.tag == 0)
