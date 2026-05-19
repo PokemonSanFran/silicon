@@ -9,8 +9,6 @@ const FLAG_HIDE_NERDS_COPS_SHARPRISESPIRE = FLAG_TEMP_1
 const FLAG_HIDE_CHARLOTTE_SHARPRISESPIRE = FLAG_TEMP_3
 const FLAG_HIDE_RAMESH_SHARPRISESPIRE = FLAG_TEMP_5
 
-//PSF TODO the quest text for Manhunt needs to update with the last recieved clue
-
 script Manhunt_HideCharlotte_Newspaper_Script{
     setflag(FLAG_HIDE_CHARLOTTE)
     return
@@ -172,7 +170,6 @@ script Manhunt_StartBattle2_Script
         msgbox(format("The only thing I can think of is that they buy Balls in bulk from that Speciality Ball Shop…"),,SPEAKER_TEODORO)
 
         msgbox(format("That's in IrisinaTown. Let's move... Champ."),,SPEAKER_CHARLOTTE_SHARPRISE)
-// PSF TODO make sure all the NPCs here repeat themselves
 
         msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
         applymovement(CHARLOTTE, moves(walk_down, jump_down, walk_down * 2, step_end))
@@ -241,7 +238,6 @@ script Manhunt_StartBattle3_Script
         addobject(CHARLOTTE_MON)
         playmoncry(SPECIES_GROWLITHE,CRY_MODE_ENCOUNTER)
         waitmoncry
-        //PSF TODO change to charlotte's ace
 
         applymovement(PLAYER,Common_Movement_FaceRight)
         msgbox(format("Woah, Charlotte, do we really need… -"),,SPEAKER_ALICIA)
@@ -383,7 +379,7 @@ script Manhunt_StartVigrimBattle_Script
         addvar(VAR_STORYLINE_STATE,1)
         startcutscene(JUMPPLAYER_MANHUNT_VIGRIM)
 
-        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD) //PSF TODO EMOTE sniff
+        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))

@@ -2,8 +2,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const BAIYA = 1
 const FLAG_HIDE_BAIYA = FLAG_TEMP_2
 
-//PSF TODO if the player starts these quests and then goes to the false timeline, it needs to be impossible to finish them until you're back in the true timeline
-
 //the quest log should also reflect this
 
 script LetsGrabLunch_HideBaiya_Outside_Script{

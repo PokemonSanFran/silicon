@@ -29,5 +29,4 @@ script NongyuBridge_Script_Interact_Quest_GetthebandbacktogetherbikerE
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerE: There’s so much more to me anyways.
 }

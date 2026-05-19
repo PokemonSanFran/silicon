@@ -206,7 +206,7 @@ script OkayLetsFixit_StartTimeTravel_Script
 	msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
 	closemessage
 	playse(SE_ORB)
-	fadescreen(FADE_TO_WHITE) //PSF TODO Implement glowing with Hiko as source, mimic "DoOrbEffect"
+	fadescreen(FADE_TO_WHITE)
 	delay(150)
 	removeobject(HIKO)
 	clearflag(FLAG_TEMP_2)
@@ -233,11 +233,6 @@ script OkayLetsFixit_TimelineReset_Script {
         setvar(VAR_LETSBURNTHISMOTHERSTATE,NOT_ASSIGNED)
         setvar(VAR_HOWDISAPPOINTING_STATE,MISSION_NOT_ASSIGNED)
         removeitem(ITEM_WISH_TAG,1)
-
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_MANHUNT)
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_HOWDISAPPOINTING)
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_LETSBURNTHISMOTHERDOWN)
-        //PSF TODO need to write text for the true timeline for when these quests are completed
 }
 
 movement OkayLetsFixit_PaceNightmare {

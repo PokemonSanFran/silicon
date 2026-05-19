@@ -44,8 +44,6 @@ script Quest_Inversehallucinogenic_ControlTrainerVisibility_Script{
     return
 }
 
-//PSF TODO how do we handle trainers that see you AGAIN after you leave the gym and come back?
-
 script Quest_Inversehallucinogenic_StartQuest_Script{
     lock
     msgbox(format("{PLAYER} good timing! I'm testing new aerosol drug, and I need somebody who I know can actually battle well. Can you come inside and rechallenge our Gym? We'll all be under the effects of the new variant. It's totally safe, but I think it changes how you battle. I think. Anyways, see you in there!"),MSGBOX_NPC,SPEAKER_BD,,EMOTE_HAPPY)

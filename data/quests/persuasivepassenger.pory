@@ -54,7 +54,6 @@ script Quest_Persuasivepassenger_Active_Dialogue{
         default:
             msgbox(format("There's another driver that came out of nowhere, but we're not certain we know where they drive out of... I guess we'll have to try a few different places!"))
     }
-    //PSF TODO remove debug
     closemessage
     release
     end

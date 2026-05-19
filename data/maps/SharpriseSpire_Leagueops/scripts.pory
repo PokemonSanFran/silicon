@@ -7,8 +7,6 @@ const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 
-//PSF TODO Add awards on Lucrezia's wall about the different awards he's won for sending great emails, having inbox zero, most organized email
-
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3

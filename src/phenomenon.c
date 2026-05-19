@@ -61,7 +61,7 @@ struct Phenomenon{
 EWRAM_DATA struct Phenomenon sPhenomenonData[NUM_MAX_PHENOMENONS] = {0};
 
 static bool8 MetatileBehavior_IsBridgeTile(u16 tileBehaviour){
-    switch(tileBehaviour){ //PSF TODO To be configured
+    switch(tileBehaviour){
         case MB_BRIDGE_OVER_OCEAN:
         case MB_BRIDGE_OVER_POND_LOW:
         case MB_BRIDGE_OVER_POND_MED:
@@ -696,50 +696,18 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
         phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
     }
 
-    // PSF TODO update with Dexnav coordinates
-
     u32 sound = MUS_DUMMY, delay = 0;
     s16 playerX, playerY;
     PlayerGetDestCoords(&playerX, &playerY);
     u32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
     u32 volume = 65535 * distance / MAX_PHENOMENON_DISTANCE;
 
-    // PSF TODO figure out how to adjust volume
     m4aMPlayVolumeControl(&gMPlayInfo_SE1,TRACKS_ALL,volume);
     m4aMPlayVolumeControl(&gMPlayInfo_SE2,TRACKS_ALL,volume);
     m4aMPlayVolumeControl(&gMPlayInfo_SE3,TRACKS_ALL,volume);
 
     switch (fieldEffectId)
     {
-        //PSF TODO figure out if these are the best sound effects
-        /*
-         * DIRT
-         * fu zaku 37
-         * lavaridge fall warp
-         * truck unload
-         * mud ball
-         * sand attack
-         * sandstorm
-         *
-         * GRASS
-         * switch
-         * click
-         * sudowoodo shake
-         *
-         * WATER
-         * puddle
-         * balloon blue > red > yellow
-         * bubble / bubbl3
-         * crabhammer
-         *
-         * BRIDGE
-         * jump kick
-         * wing attack
-         * bridge walk
-         * door
-         * */
-        //PSF TODO figure out how to change volume based on distance
-        //PSF add bridge shadow effect
         default:
         case FLDEFF_SHAKING_GRASS:
         case FLDEFF_SHAKING_LONG_GRASS:

@@ -71,7 +71,6 @@ script BattleTower_EventScript_GiveRibbons{
 }
 
 script BattleTower_EventScript_GiveBattlePoints{
-    //PSF TODO needs a show BP box
     msgbox(format("In recognition of your infinite talent, we award you these Battle Point(s)."), MSGBOX_DEFAULT)
     buffernumberstring(STR_VAR_1,10)
     givefrontierbattlepoints(10)

@@ -83,7 +83,6 @@ script StressCup_Script_InteractQuestActive
     call(StressCup_Script_PrepParty)
     msgbox(format("Good luck! Heh heh, you're really gonna need it!"),,SPEAKER_STRESSCUPORGANIZER)
     closemessage
-// PSF TODO Player loss text: Damn, couldn't hang? Gotta say I'm a little disappointed.
     trainerbattle_no_intro(TRAINER_STRESSCUPORGNANIZER,format("Woo! Oh yeah, that's what I've been missing!"))
     call(StressCup_Script_RestoreParty)
     goto(StressCup_Dialogue_Battle2)
@@ -100,8 +99,6 @@ script StressCup_Dialogue_Battle2
     cueobjectplayer(STRESSCUPORGNANIZER)
     msgbox(format("I'm not sure I can live on the edge quite as long as this guy..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
     closemessage
-// PSF TODO Loss text
-// Pressure. That's what it really feels like.
     call(StressCup_Script_LoadStressCupParty)
     call(StressCup_Script_PrepParty)
     trainerbattle_no_intro(TRAINER_STRESSCUPORGNANIZER,format("Phew. You've got nerves of steel."))

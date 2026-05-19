@@ -944,8 +944,6 @@ enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
     return SHOP_CAROUSEL_RANDOM;
 }
 
-// PSF TODO should these be determined by map type (e.g. MAP_TYPE_ROUTE) instead?
-
 static bool32 ShopInventory_IsPlayerWithinAForest(void)
 {
     s32 mapNum = gSaveBlock1Ptr->location.mapNum;
@@ -967,13 +965,10 @@ static bool32 ShopInventory_IsPlayerOnWater(void)
         || (mapNum == MAP_NUM(MAP_ROUTE20) && mapGroup == MAP_GROUP(MAP_ROUTE20))
         || (mapNum == MAP_NUM(MAP_ROUTE98) && mapGroup == MAP_GROUP(MAP_ROUTE98))
         || (mapNum == MAP_NUM(MAP_ROUTE_B) && mapGroup == MAP_GROUP(MAP_ROUTE_B));
-    // PSF TODO Uncomment relevant lines when routes are created
-    /*
         || (mapNum == MAP_NUM(MAP_ROUTE_D) && mapGroup == MAP_GROUP(MAP_ROUTE_D))
         || (mapNum == MAP_NUM(MAP_ROUTE_C) && mapGroup == MAP_GROUP(MAP_ROUTE_C))
         || (mapNum == MAP_NUM(MAP_ROUTE_A) && mapGroup == MAP_GROUP(MAP_ROUTE_A))
         || (mapNum == MAP_NUM(MAP_ROUTE_E) && mapGroup == MAP_GROUP(MAP_ROUTE_E));
-    */
 }
 
 static bool32 ShopInventory_IsPlayerWithinARoute(void)

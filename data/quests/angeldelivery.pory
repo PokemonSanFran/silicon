@@ -154,7 +154,6 @@ script AngelDelivery_Dialogue_PreBattle
 
 script AngelDelivery_Dialogue_FirstTime
 {
-    //PSF TODO fix bug where when on a bike and going inside, player is forced off bike
     checktrainerdiscovered(TRAINER_ANGELDELIVERY_BIKERC)
     if (var(VAR_RESULT) == TRUE)
     {

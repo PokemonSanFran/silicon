@@ -58,5 +58,3 @@ script WelcometotheHallofFame_GameClear_Script{
         return
 }
 
-//PSF TODO add reference to emails here, maybe pitch the whole crowd on email notifications?
-

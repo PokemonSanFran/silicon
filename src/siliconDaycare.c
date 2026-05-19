@@ -497,7 +497,6 @@ void CompareOldNewIndividualValues(void)
     struct Pokemon *mon = &daycare->viewMon;
     struct Pokemon *old = &gPlayerParty[gSpecialVar_0x8004];
     Debug_RandomizeMonInidividualValues(mon);
-    // PSF TODO remove Debug_RandomizeMonInidividualValues once ShowPokemonSummaryScreen can actually edit IVs
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
@@ -571,7 +570,6 @@ void EditEggContents(void)
 {
     LoadEggContents(SUMMARY_MODE_LOCK_MOVES);
     Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
-    //PSF TODO change this to edit IV mode and remove Debug_RandomizeBoxMonInidividualValues
 }
 
 static void LoadEggContents(u32 mode)

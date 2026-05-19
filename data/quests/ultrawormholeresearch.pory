@@ -78,7 +78,6 @@ script Quest_Ultrawormholeresearch_StartQuest_Dialogue{
         end
     }
 
-    //PSF TODO add dialogue and movement here
 
     setflag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_0)
     startquest(QUEST_ULTRAWORMHOLERESEARCH)
@@ -201,7 +200,7 @@ script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     setflag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)
     special(Quest_Ultrawormholeresearch_SetTotemBattle)
-    special(StartRegiBattle) //PSF TODO should be start totem battle
+    special(StartRegiBattle)
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
@@ -276,7 +275,7 @@ script Quest_Ultrawormholeresearch_StartUltraBeast_Script{
     waitmoncry
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     special(Quest_Ultrawormholeresearch_SetUltraBeastBattle)
-    special(StartRegiBattle) //PSF TODO should be start UB battle
+    special(StartRegiBattle)
     waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
@@ -314,7 +313,6 @@ script Quest_Ultrawormholeresearch_ControlUltraBeastVisibility_Script{
     return
 }
 
-//PSF TODO once maps are built, need to make sure this actually works. Ultra Beasts should not spawn after battling them until the player goes back to the Lab
 
 script Quest_Ultrawormholeresearch_ResetUltraBeastVisbility{
     if (flag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)){
