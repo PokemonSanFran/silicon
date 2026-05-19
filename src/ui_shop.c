@@ -964,7 +964,7 @@ static bool32 ShopInventory_IsPlayerOnWater(void)
     return (mapNum == MAP_NUM(MAP_NONGYU_BRIDGE) && mapGroup == MAP_GROUP(MAP_NONGYU_BRIDGE))
         || (mapNum == MAP_NUM(MAP_ROUTE20) && mapGroup == MAP_GROUP(MAP_ROUTE20))
         || (mapNum == MAP_NUM(MAP_ROUTE98) && mapGroup == MAP_GROUP(MAP_ROUTE98))
-        || (mapNum == MAP_NUM(MAP_ROUTE_B) && mapGroup == MAP_GROUP(MAP_ROUTE_B));
+        || (mapNum == MAP_NUM(MAP_ROUTE_B) && mapGroup == MAP_GROUP(MAP_ROUTE_B))
         || (mapNum == MAP_NUM(MAP_ROUTE_D) && mapGroup == MAP_GROUP(MAP_ROUTE_D))
         || (mapNum == MAP_NUM(MAP_ROUTE_C) && mapGroup == MAP_GROUP(MAP_ROUTE_C))
         || (mapNum == MAP_NUM(MAP_ROUTE_A) && mapGroup == MAP_GROUP(MAP_ROUTE_A))
