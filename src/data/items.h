@@ -22221,6 +22221,42 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
+    [ITEM_RED_SCALE] =
+    {
+        .name = ITEM_NAME("Red Scale"),
+        .price = 0,
+        .description = COMPOUND_STRING("A scale from a red Gyarados. It glows red like a flame."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_RedScale,
+        .iconPalette = gItemIconPalette_RedScale,
+    },
+    [ITEM_BLUESKY_MAIL] =
+    {
+        .name = ITEM_NAME("Bluesky Mail"),
+        .price = 0,
+        .description = COMPOUND_STRING("A fancy piece of stationery. It is bright blue with clouds and Pokemon on it."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_EGG_TICKET] =
+    {
+        .name = ITEM_NAME("Egg Ticket"),
+        .price = 0,
+        .description = COMPOUND_STRING("A worn out piece of paper with a picture of a Pokemon Egg on it."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
     // End siliconMerge
 };
 

@@ -9,6 +9,7 @@ void Task_SurpriseTrade(u8 taskId);
 void CB2_ContinueSurpriseTrade(void);
 void SurpriseTrade_Continue(MainCallback callback);
 void CB2_StartSurpriseTrade(void);
+void SurpriseTrade_SetSurpriseTradeCallback(void); // surpriseTrade
 
 struct SurpriseTradeTrainer
 {

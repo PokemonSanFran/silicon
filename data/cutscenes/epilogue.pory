@@ -13,7 +13,6 @@ script Epilogue_Script_AddBaiya
     }
 
     spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=BAIYA,x=8,y=13,movementType=MOVEMENT_TYPE_FACE_UP,elevation=3)
-//PSF TODO need to pair a new song for this scenario
 }
 
 script Epilogue_Script_AddMalva
@@ -97,7 +96,6 @@ script Epilogue_Dialogue_ConversationAboutProgress
     msgbox(text=format("List finished quest three..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("List finished quest four..."),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     msgbox(text=format("List finished quest five!"),speaker=SPEAKER_TALA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
-    // PSF TODO make sure the MUS_SRC_GETTING_ARRESTED continues playing
     closemessage
     applymovement(TALA,moves(
         face_up

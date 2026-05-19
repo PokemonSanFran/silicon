@@ -39,19 +39,19 @@ static void SpriteCB_SiliconShine_RenderShineAnimation(struct Sprite*);
 #define SHINE_FRAME_SOUND_PLAY 7
 #define SHINE_ANIM_LINGER 2
 
-static const u32 gBattleAnimSpriteGfx_SiliconShine0[] = INCBIN_U32("graphics/siliconshine/silicon_shine0.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine1[] = INCBIN_U32("graphics/siliconshine/silicon_shine1.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine2[] = INCBIN_U32("graphics/siliconshine/silicon_shine2.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine3[] = INCBIN_U32("graphics/siliconshine/silicon_shine3.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine4[] = INCBIN_U32("graphics/siliconshine/silicon_shine4.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine5[] = INCBIN_U32("graphics/siliconshine/silicon_shine5.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine6[] = INCBIN_U32("graphics/siliconshine/silicon_shine6.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine7[] = INCBIN_U32("graphics/siliconshine/silicon_shine7.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine8[] = INCBIN_U32("graphics/siliconshine/silicon_shine8.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine9[] = INCBIN_U32("graphics/siliconshine/silicon_shine9.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine10[] = INCBIN_U32("graphics/siliconshine/silicon_shine10.4bpp");
-static const u32 gBattleAnimSpriteGfx_SiliconShine11[] = INCBIN_U32("graphics/siliconshine/silicon_shine11.4bpp");
-static const u16 gBattleAnimSpritePal_SiliconShine[] = INCBIN_U16("graphics/siliconshine/silicon_shine.gbapal");
+static const u32 gBattleAnimSpriteGfx_SiliconShine0[] = INCGFX_U32("graphics/siliconshine/silicon_shine0.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine1[] = INCGFX_U32("graphics/siliconshine/silicon_shine1.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine2[] = INCGFX_U32("graphics/siliconshine/silicon_shine2.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine3[] = INCGFX_U32("graphics/siliconshine/silicon_shine3.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine4[] = INCGFX_U32("graphics/siliconshine/silicon_shine4.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine5[] = INCGFX_U32("graphics/siliconshine/silicon_shine5.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine6[] = INCGFX_U32("graphics/siliconshine/silicon_shine6.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine7[] = INCGFX_U32("graphics/siliconshine/silicon_shine7.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine8[] = INCGFX_U32("graphics/siliconshine/silicon_shine8.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine9[] = INCGFX_U32("graphics/siliconshine/silicon_shine9.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine10[] = INCGFX_U32("graphics/siliconshine/silicon_shine10.png", ".4bpp");
+static const u32 gBattleAnimSpriteGfx_SiliconShine11[] = INCGFX_U32("graphics/siliconshine/silicon_shine11.png", ".4bpp");
+static const u16 gBattleAnimSpritePal_SiliconShine[] = INCGFX_U16("graphics/siliconshine/silicon_shine.pal", ".gbapal");
 
 static const u32 *const sSiliconShineFrames[] =
 {

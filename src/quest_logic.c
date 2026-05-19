@@ -1,6 +1,8 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "ui_pokedex.h"
+#include "daycare.h"
 #include "constants/trainers.h"
 #include "constants/story_jump.h"
 #include "battle_anim.h"
@@ -47,6 +49,7 @@
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
+#include "fly_encounter.h"
 #include "battle_scripts.h"
 #include "quests.h"
 #include "options_battle.h"
@@ -55,6 +58,63 @@
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+
+void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
+{
+    const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+    u32 species = mon.species;
+    u32 female = (mon.gender == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
+    u32 shiny = (mon.isShiny == TRUE) ? OBJ_EVENT_MON_SHINY: 0;
+    VarSet(var,(OBJ_EVENT_MON + species + female + shiny));
+}
+
+void DebugQuest_EvolveMon(u32 old, u32 species)
+{
+    struct Pokemon *mon = NULL;
+    u32 zero = 0;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        BoxMonAtToMon(gSpecialVar_MonBoxId,gSpecialVar_MonBoxPos, mon);
+    else
+        mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    SetMonData(mon, MON_DATA_SPECIES, &species);
+    SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
+    CalculateMonStats(mon);
+    EvolutionRenameMon(mon, old, species);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT);
+    IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+}
+
+static bool8 DebugQuest_MarkSpeciesForDeletion(u32 species)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        if (GetMonData(mon, MON_DATA_SPECIES) != species)
+            continue;
+        gSpecialVar_0x8004 = i;
+        return TRUE;
+    }
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES) != species)
+                continue;
+
+            gSpecialVar_0x8004 = PC_MON_CHOSEN;
+            gSpecialVar_MonBoxId = boxId;
+            gSpecialVar_MonBoxPos = boxPosition;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
 
 bool32 HasPlayerJoinedThe_Tide(void)
 {
@@ -2033,9 +2093,7 @@ bool32 CanMonMegaEvolve(u32 species)
 
 void WowYoureStrong_GetBadgesAndSetTowerState(void)
 {
-    GetNumberOfBadges();
-
-    if (gSpecialVar_Result != 3)
+    if (GetNumberOfBadges() != 3)
         return;
 
     VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
@@ -2883,6 +2941,134 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 }
 
 // ***********************************************************************
+// Quest: Flight Patterns
+// ***********************************************************************
+
+static const u32 flyLookUpTable[QUEST_FLIGHTPATTERNS_SUB_COUNT][3]=
+{
+    [SUB_QUEST_1] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_NONE,
+    },
+    [SUB_QUEST_2] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+    },
+    [SUB_QUEST_3] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+    },
+    [SUB_QUEST_4] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+    },
+    [SUB_QUEST_5] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+    },
+    [SUB_QUEST_6] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+    },
+    [SUB_QUEST_7] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+    },
+};
+
+u32 Quest_FlightPatterns_GetFlightPath(void)
+{
+    return (VarGet(VAR_FLIGHT_PATH));
+}
+
+void Quest_FlightPatterns_IncrementFlightPath(void)
+{
+    u32 oldVar = VarGet(VAR_FLIGHT_PATH);
+    VarSet(VAR_FLIGHT_PATH,oldVar+1);
+}
+
+void Quest_FlightPatterns_ClearFlightPath(void)
+{
+    VarSet(VAR_FLIGHT_PATH,0);
+}
+
+void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
+{
+    u32 currentLocation = gMapHeader.regionMapSectionId;
+    u32 nextLocation = mapSecId;
+    u32 locationIndex;
+
+    //DebugPrintf("currentLocation %d\n lastLocation %d\n",currentLocation,nextLocation);
+
+    for (locationIndex = 0; locationIndex < QUEST_FLIGHTPATTERNS_SUB_COUNT; locationIndex++)
+    {
+        if (currentLocation != flyLookUpTable[locationIndex][0])
+            continue;
+
+        if (nextLocation != flyLookUpTable[locationIndex][1])
+            continue;
+
+        if (flyLookUpTable[locationIndex][2] == MAPSEC_QUEST_FLIGHT_PATTERNS_NONE)
+            continue;
+
+        //DebugPrintf("locationIndex %d",locationIndex);
+        //DebugPrintf("flight apth%d",Quest_FlightPatterns_GetFlightPath());
+
+        if (locationIndex != Quest_FlightPatterns_GetFlightPath()+1)
+            continue;
+
+        //if (lastLocation != flyLookUpTable[locationIndex][2])
+            //continue;
+
+        Quest_FlightPatterns_IncrementFlightPath();
+        return;
+    }
+    Quest_FlightPatterns_ClearFlightPath();
+}
+
+bool32 Quest_FlightPatterns_OnLastLeg(void)
+{
+    return (Quest_FlightPatterns_GetFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT - 1);
+}
+
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32 steps, bool32 isLure)
+{
+    bool32 lastLeg = Quest_FlightPatterns_OnLastLeg();
+
+    if (!isLure && steps && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!isLure && steps)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    TrySkyBattle();
+    if (!gSpecialVar_Result && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!gSpecialVar_Result)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    if (lastLeg)
+        return FLY_ENCOUNTER_QUEST_BOSS;
+
+    return FLY_ENCOUNTER_QUEST_ATTACK;
+}
+
+// ***********************************************************************
 // Quest: Hodou Tunnels
 // ***********************************************************************
 
@@ -3609,6 +3795,22 @@ void DebugQuest_Findtheguilty(u8 state)
 // Cutscene: Earthquake
 // ***********************************************************************
 
+bool8 IsHalaiIslandUnderCrisis(void)
+{
+    if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
+        return FALSE;
+
+    if (VarGet(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_IsHalaiIslandUnderCrisis(void)
+{
+    gSpecialVar_Result = IsHalaiIslandUnderCrisis();
+}
+
 bool8 IsHalaiIslandUnderConstruction(void)
 {
     if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
@@ -3619,9 +3821,754 @@ bool8 IsHalaiIslandUnderConstruction(void)
     return TRUE;
 }
 
-
 void Script_IsHalaiIslandUnderConstruction(void)
 {
     gSpecialVar_Result = IsHalaiIslandUnderConstruction();
+}
+
+
+// ***********************************************************************
+// Quest: Restore Espulee Outskirts
+// ***********************************************************************
+
+static const u16 questRestoreEspuleeGymItems[] =
+{
+    ITEM_QUEST_RESTOREESPULEEGYM_START,
+    ITEM_QUEST_RESTOREESPULEEGYM_A,
+    ITEM_QUEST_RESTOREESPULEEGYM_B,
+    ITEM_QUEST_RESTOREESPULEEGYM_C,
+    ITEM_QUEST_RESTOREESPULEEGYM_E,
+};
+
+static const u16 babyPokemon[] =
+{
+    SPECIES_CLEFFA,
+    SPECIES_TOGEPI,
+    SPECIES_TYROGUE,
+    SPECIES_SMOOCHUM,
+    SPECIES_MAGBY,
+    SPECIES_MIME_JR,
+    SPECIES_HAPPINY,
+};
+
+struct OddEggCandidates
+{
+    u16 species;
+    u8 stats[NUM_STATS];
+    bool8 isShiny;
+    u8 chance;
+};
+
+static const struct OddEggCandidates oddEggCandidates[] =
+{
+    [ODD_EGG_PICHU_SHINY] =
+    {
+        .species = SPECIES_PICHU,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 1,
+    },
+    [ODD_EGG_TYROGUE_SHINY] =
+    {
+        .species = SPECIES_TYROGUE,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 1,
+    },
+    [ODD_EGG_SMOOCHUM_SHINY] =
+    {
+        .species = SPECIES_SMOOCHUM,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_ELEKID_SHINY] =
+    {
+        .species = SPECIES_ELEKID,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_MAGBY_SHINY] =
+    {
+        .species = SPECIES_MAGBY,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 2,
+    },
+    [ODD_EGG_CLEFFA_SHINY] =
+    {
+        .species = SPECIES_CLEFFA,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 3,
+    },
+    [ODD_EGG_IGGLYBUFF_SHINY] =
+    {
+        .species = SPECIES_IGGLYBUFF,
+        .stats = {99, 2, 10, 10, 10, 10},
+        .isShiny = TRUE,
+        .chance = 3,
+    },
+
+    [ODD_EGG_PICHU_NOT_SHINY] =
+    {
+        .species = SPECIES_PICHU,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 8,
+    },
+    [ODD_EGG_TYROGUE_NOT_SHINY] =
+    {
+        .species = SPECIES_TYROGUE,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 10,
+    },
+    [ODD_EGG_MAGBY_NOT_SHINY] =
+    {
+        .species = SPECIES_MAGBY,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 10,
+    },
+    [ODD_EGG_ELEKID_NOT_SHINY] =
+    {
+        .species = SPECIES_ELEKID,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 12,
+    },
+    [ODD_EGG_SMOOCHUM_NOT_SHINY] =
+    {
+        .species = SPECIES_SMOOCHUM,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 14,
+    },
+    [ODD_EGG_CLEFFA_NOT_SHINY] =
+    {
+        .species = SPECIES_CLEFFA,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 16,
+    },
+    [ODD_EGG_IGGLYBUFF_NOT_SHINY] =
+    {
+        .species = SPECIES_IGGLYBUFF,
+        .stats = {99, 0, 0, 0, 0, 0},
+        .isShiny = FALSE,
+        .chance = 16,
+    },
+};
+
+static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
+
+static enum OddEggPokemon ChooseOddEggIndex(void)
+{
+    u16 weights[ODD_EGG_COUNT];
+    u32 indices[ODD_EGG_COUNT];
+    u32 count = 0, sum = 0;
+
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
+    {
+        u32 species = oddEggCandidates[i].species;
+
+        if (ConvertSpeciesIdToResidoDex(species) == 0)
+            continue;
+
+        indices[count] = i;
+        weights[count] = oddEggCandidates[i].chance;
+
+        sum += weights[count];
+        count++;
+    }
+
+    if (count == 0)
+        return ODD_EGG_CLEFFA_NOT_SHINY;
+
+    u32 filteredIndex = RandomWeightedArray(RNG_NONE,sum,count,weights);
+    return indices[filteredIndex];
+}
+
+static u32 GenerateAndGiveOddEgg(void)
+{
+    struct Pokemon mon;
+    u32 chosenIndex = ChooseOddEggIndex();
+    u32 species = oddEggCandidates[chosenIndex].species;
+
+    enum PokeBall ball = BALL_POKE;
+    enum Language language = LANGUAGE_JAPANESE;
+
+    u32 gender = (species == SPECIES_TYROGUE) ? MON_MALE : MON_FEMALE;
+    u32 personality = GetMonPersonality(species,gender,NATURE_RANDOM,RANDOM_UNOWN_LETTER);
+    CreateMonWithIVsPersonality(&mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, personality);
+    GiveMonInitialMoveset(&mon);
+
+    SetMonData(&mon, MON_DATA_POKEBALL, &ball);
+    SetMonData(&mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
+
+    u8 eggCycles = ODD_EGG_DEFAULT_CYCLES;
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &eggCycles);
+    SetMonData(&mon, MON_DATA_LANGUAGE, &language);
+
+    bool8 isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+
+    u8 hp = Random() % MAX_PER_STAT_IVS;
+    SetMonData(&mon, (MON_DATA_HP_IV), &hp);
+
+    for (u32 statIndex = STAT_ATK; statIndex < NUM_STATS; statIndex++)
+        SetMonData(&mon, (MON_DATA_HP_IV + statIndex), &oddEggCandidates[chosenIndex].stats[statIndex]);
+
+    CalculateMonStats(&mon);
+
+    SetMonData(&mon, MON_DATA_IS_SHINY, &oddEggCandidates[chosenIndex].isShiny);
+    // PSF TODO this is apparently broken but Jamie says he'll fix it in an upcoming expansion release, right now the shininess get re-rolled on hatch and Jamie agrees that this should be preserved if it is set here
+
+    return GiveCapturedMonToPlayer(&mon);
+}
+
+u32 CheckIfMonIsOddEgg(void)
+{
+    struct Pokemon *mon = NULL;
+    struct Pokemon tempMon;
+
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        BoxMonToMon(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &tempMon);
+        mon = &tempMon;
+    }
+    else
+    {
+        mon = &gPlayerParty[gSpecialVar_0x8004];
+    }
+
+    if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+        return QUEST_RESTOREESPULEEGYM_IS_NOT_EGG;
+
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
+    bool32 foundMatch = FALSE;
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
+    {
+        if (oddEggCandidates[i].species != species)
+            continue;
+
+        if (ConvertSpeciesIdToResidoDex(species) == 0)
+            continue;
+
+        foundMatch = TRUE;
+        break;
+    }
+    if (foundMatch == FALSE)
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    if ((GetMonGender(mon) == MON_MALE) && (species != SPECIES_TYROGUE))
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
+    u32 chosenIndex = ODD_EGG_COUNT;
+
+    for (u32 i = 0; i < ODD_EGG_COUNT; i++)
+    {
+        if (oddEggCandidates[i].species != species)
+            continue;
+
+        if (oddEggCandidates[i].isShiny != isShiny)
+            continue;
+
+        chosenIndex = i;
+        break;
+    }
+
+    if (chosenIndex == ODD_EGG_COUNT)
+        return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    for (u32 statIndex = STAT_ATK; statIndex < NUM_STATS; statIndex++)
+        if (oddEggCandidates[chosenIndex].stats[statIndex] != GetMonData(mon, MON_DATA_HP_IV + statIndex))
+            return QUEST_RESTOREESPULEEGYM_IS_REGULAR_EGG;
+
+    return QUEST_RESTOREESPULEEGYM_IS_ODD_EGG;
+}
+
+void Script_CheckIfMonIsOddEgg(void)
+{
+    gSpecialVar_Result = CheckIfMonIsOddEgg();
+}
+
+void Script_GenerateAndGiveOddEgg(void)
+{
+    gSpecialVar_Result = GenerateAndGiveOddEgg();
+}
+
+static bool8 Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+{
+    for (u32 questItemIndex = 0; questItemIndex < ARRAY_COUNT(questRestoreEspuleeGymItems) ; questItemIndex++)
+    {
+        if (CheckBagHasItem(questRestoreEspuleeGymItems[questItemIndex],1))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void Script_Quest_Restoreespuleeoutskirts_CheckForAllItems(void)
+{
+    gSpecialVar_Result = Quest_Restoreespuleeoutskirts_CheckForAllItems();
+}
+
+static bool8 DoesBoxMonOrPartyHaveWyrdeer(void)
+{
+    if (CheckPartyHasSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        return TRUE;
+
+    return (CheckBoxesForSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET));
+}
+
+void Script_DoesBoxMonOrPartyHaveWyrdeer(void)
+{
+    gSpecialVar_Result = DoesBoxMonOrPartyHaveWyrdeer();
+}
+
+static bool8 CanPlayerGiveUpWrydeer(void)
+{
+    if (CheckBoxesForSpecies(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        return TRUE;
+
+    return (GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS);
+}
+
+void Script_CanPlayerGiveUpWrydeer(void)
+{
+    gSpecialVar_Result = CanPlayerGiveUpWrydeer();
+}
+
+u8 Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
+{
+    struct Pokemon *pokemon = NULL;
+    struct Pokemon tempMon;
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        BoxMonToMon(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos), &tempMon);
+        pokemon = &tempMon;
+    }
+    else
+    {
+        pokemon = &gPlayerParty[gSpecialVar_0x8004];
+    }
+
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+        return QUEST_RESTOREESPULEEGYM_NOTHING_CHOSEN;
+    else if (GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+        return QUEST_RESTOREESPULEEGYM_INVALID_MON;
+    else if (GetMonData(pokemon, MON_DATA_SPECIES) == SPECIES_QUEST_RESTOREESPULEEGYM_TARGET)
+        return QUEST_RESTOREESPULEEGYM_IS_WYRDEER;
+
+    else if (GetMonData(pokemon, MON_DATA_SPECIES) != SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO)
+        return QUEST_RESTOREESPULEEGYM_INVALID_MON;
+    else if (MonKnowsMove(pokemon, MOVE_PSYSHIELD_BASH))
+        return QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH;
+    else
+        return QUEST_RESTOREESPULEEGYM_IS_STANTLER;
+}
+
+void Script_Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
+{
+    gSpecialVar_Result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+}
+
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymRemoveWrydeerIfFound(void)
+{
+    if (DebugQuest_MarkSpeciesForDeletion(SPECIES_QUEST_RESTOREESPULEEGYM_TARGET))
+        DeleteChosenPartyMon();
+}
+
+static bool8 DebugQuest_RestoreEsupleeOutskirtsGymMarkOddEgg(void)
+{
+    u32 result = 0;
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        gSpecialVar_0x8004 = partyIndex;
+        result = CheckIfMonIsOddEgg();
+        if (result == QUEST_RESTOREESPULEEGYM_IS_ODD_EGG)
+            return TRUE;
+    }
+
+    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    result = CheckIfMonIsOddEgg();
+
+    return (result == QUEST_RESTOREESPULEEGYM_IS_ODD_EGG);
+}
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound(void)
+{
+    if (DebugQuest_RestoreEsupleeOutskirtsGymMarkOddEgg())
+        DeleteChosenPartyMon();
+}
+
+static bool8 DebugQuest_ResstoreEspuleeOutskirtsGymFindStantler(void)
+{
+    u32 result = 0;
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        gSpecialVar_0x8004 = partyIndex;
+        result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+        if (result == QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH)
+            return TRUE;
+    }
+
+    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    result = Quest_Restoreespuleeoutskirts_EvaluateChosenMon();
+    return (result == QUEST_RESTOREESPULEEGYM_IS_STANTLER_AND_PSYSHIELD_BASH);
+}
+
+static void DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound(void)
+{
+    if (DebugQuest_ResstoreEspuleeOutskirtsGymFindStantler() == FALSE)
+        return;
+
+    DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
+}
+
+void Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon(void)
+{
+    DebugQuest_EvolveMon(SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,SPECIES_QUEST_RESTOREESPULEEGYM_TARGET);
+}
+
+void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTOREESPULEEGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            FlagSet(FLAG_RECIEVED_NURSERY_EGG);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTOREESPULEEGYM);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_B:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            GenerateAndGiveOddEgg();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E:
+            DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound();
+            AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
+            u16 evs[NUM_STATS] = {0,0,0,0,0,0};
+            u16 ivs[NUM_STATS] = {0,0,0,0,0,0};
+            enum Move moves[MAX_MON_MOVES] = {MOVE_PSYSHIELD_BASH,0,0,0};
+            ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_QUEST_RESTOREESPULEEGYM_PREEVO,30,ITEM_NONE,BALL_POKE,NATURE_RANDOM,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
+            RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD:
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_BATTLE:
+        case STATE_QUEST_RESTOREESPULEEGYM_REWARD:
+            DebugQuest_ResstoreEspuleeOutskirtsGymRemoveWrydeerIfFound();
+            QuestMenu_ScriptSetReward(QUEST_RESTOREESPULEEGYM);
+            break;
+        case STATE_QUEST_RESTOREESPULEEGYM_AFTER_BATTLE:
+        case STATE_QUEST_RESTOREESPULEEGYM_COMPLETE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMELDA);
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Restore Zenzu Gym
+// ***********************************************************************
+
+void Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREZENZUGYM);
+}
+
+void DebugQuest_RestoreZenzuIslandGym(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTOREZENZUGYM);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_DOYLE_ZENZU_ISLAND);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_RPS:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_RPS:
+            QuestMenu_SetupQuestState(QUEST_RPS,STATE_QUEST_RPS_DICE_GIVEN);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_RPS:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_DRUGHELMET:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_DRUGHELMET:
+            QuestMenu_SetupQuestState(QUEST_DRUGHELMETTEST,STATE_QUEST_DRUGHELMETTEST_COMPLETED_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_DRUGHELMET:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING:
+            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            // PSF TODO Replace with QuestMenu_SetupQuestState
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE:
+            QuestMenu_ScriptSetComplete(QUEST_BATTLEARCADEMINIQUEST);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_MINI_ARCADE_CHRIS);
+            // PSF TODO Replace with QuestMenu_SetupQuestState
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_STRESSCUP:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_STRESSCUP:
+            QuestMenu_SetupQuestState(QUEST_STRESSCUP,STATE_QUEST_STRESSCUP_COMPLETE_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_STRESSCUP:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_REWARD:
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREZENZUGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Restore Hodou Gym
+// ***********************************************************************
+
+bool8 Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    if (FlagGet(FLAG_TIMELINE_FALSE))
+        return FALSE;
+
+    if (VarGet(VAR_STORYLINE_STATE) <= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND)
+        return FALSE;
+
+    if (QuestMenu_GetSetQuestState(QUEST_RESTOREHODOUGYM,FLAG_GET_INACTIVE) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    gSpecialVar_Result = Quest_RestoreHodouGym_CheckIfQuestShouldStart();
+}
+
+void Quest_Restorehodoucity_LoadZacPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0);
+}
+
+void Quest_Restorehodoucity_LoadKevinPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
+}
+
+void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREHODOUGYM);
+}
+
+void DebugQuest_RestoreHodouCityGym(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTOREHODOUGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_STARTED_QUEST:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM);
+            QuestMenu_ScriptSetActive(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ZAC);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_KEVIN);
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_FINDING_JOHNNY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_FINDING_JOHNNY:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_ASKED_TO_FIND_BLACKBELTS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_ASKED_TO_FIND_BLACKBELTS:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ADAM:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ADAM:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ADAM);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ANDREAS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ANDREAS:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_ANDREAS);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUSTIN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUSTIN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JUSTIN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JEFFREY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JEFFREY:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JEFFREY);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_DAJUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_DAJUAN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_DAJUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUAN:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_JUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_7);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JASON:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JASON:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JASON);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_8);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_REWARD:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS);
+            QuestMenu_ScriptSetReward(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Cutscene: Housing Protest
+// ***********************************************************************
+
+void HousingProtest_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_FLAMETHROWER;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_ARCANINE, trainer = TRAINER_HOUSINGPROTEST_B;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        species = mon.species;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}
+
+// ***********************************************************************
+// Cutscene: Let's Grab Lunch
+// ***********************************************************************
+
+void LetsGrabLunch_IncrementStoryVariable(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) != STORY_BAIYA_EXPLAIN_RESTORATION)
+        return;
+
+    if (IsQuestCompletedState(QUEST_RESTOREZENZUGYM) || IsQuestCompletedState(QUEST_RESTOREESPULEEGYM) ||IsQuestCompletedState(QUEST_RESTOREHODOUGYM))
+        VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
 }
 

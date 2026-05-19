@@ -62,6 +62,9 @@ void DebugQuest_Returndoll(u8 state);
 void DebugQuest_Freetheinnocent(u8 state);
 void DebugQuest_Findtheguilty(u8 state);
 void DebugQuest_KitchenVolunteering(u8 state);
+void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state);
+void DebugQuest_RestoreZenzuIslandGym(u8 state);
+void DebugQuest_RestoreHodouCityGym(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -76,5 +79,11 @@ bool8 Quest_Freetheinnocent_FactsLearned(void);
 bool8 Quest_Freetheinnocent_CupFound(void);
 bool8 Quest_Freetheinnocent_CashierSpoken(void);
 bool8 IsHalaiIslandUnderConstruction(void);
+
+void Quest_FlightPatterns_SetLastFlightEncounter(u32);
+u32 Quest_FlightPatterns_GetFlightPath(void);
+void Quest_FlightPatterns_SetFlightPath(u32);
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32, bool32);
+void Quest_FlightPatterns_ClearFlightPath(void);
 
 #endif //GUARD_QUESTLOGIC_H

@@ -460,6 +460,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SHARPRISE_ENFORCER] = {_("SharpRise Enforcer") },
     [TRAINER_CLASS_CHARLOTTE] = {_("{PKMN} Trainer") },
     [TRAINER_CLASS_BAIYA] = {_("{PKMN} Trainer") },
+    [TRAINER_CLASS_FINALIST] = {_("Finalist") },
     [TRAINER_CLASS_ACE_TRAINER]         = {_("Ace Trainer") },
     [TRAINER_CLASS_ARRIBA_DRIVER]       = {_("Arriba Driver") },
     [TRAINER_CLASS_BACKPACKER]          = {_("Backpacker") },
@@ -3340,11 +3341,9 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         {
             if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
                 gBattleMons[i].volatiles.escapePrevention = FALSE;
-            if (gBattleMons[i].volatiles.lockOn && gBattleMons[i].volatiles.battlerWithSureHit == battler)
-            {
-                gBattleMons[i].volatiles.lockOn = 0;
+
+            if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
                 gBattleMons[i].volatiles.battlerWithSureHit = 0;
-            }
         }
     }
     if (effect != EFFECT_BATON_PASS || GetConfig(B_BATON_PASS_TRAPPING) >= GEN_5)
@@ -3370,17 +3369,11 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
          */
 
         enum BattlerId i;
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (!IsBattlerAlly(battler, i)
-             && gBattleMons[i].volatiles.lockOn != 0
-             && (gBattleMons[i].volatiles.battlerWithSureHit == battler))
-            {
-                gBattleMons[i].volatiles.lockOn = 0;
-            }
-        }
         if (gBattleMons[battler].volatiles.powerTrick)
             SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, i);
+
+        if (gBattleMons[battler].volatiles.gastroAcid && gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
+            gBattleMons[battler].volatiles.gastroAcid = FALSE;
     }
 
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
@@ -3404,7 +3397,6 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
     if (effect == EFFECT_BATON_PASS)
     {
         gBattleMons[battler].volatiles.substituteHP = volatilesCopy->substituteHP;
-        gBattleMons[battler].volatiles.battlerWithSureHit = volatilesCopy->battlerWithSureHit;
         gBattleMons[battler].volatiles.perishSongTimer = volatilesCopy->perishSongTimer;
         gBattleMons[battler].volatiles.battlerPreventingEscape = volatilesCopy->battlerPreventingEscape;
         gBattleMons[battler].volatiles.embargoTimer = volatilesCopy->embargoTimer;
@@ -3498,6 +3490,8 @@ const u8* FaintClearSetData(enum BattlerId battler)
 
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
     {
+        if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
+            gBattleMons[i].volatiles.battlerWithSureHit = 0;
         if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
             gBattleMons[i].volatiles.escapePrevention = FALSE;
         if (gBattleMons[i].volatiles.infatuation == INFATUATED_WITH(battler))
@@ -3553,11 +3547,14 @@ const u8* FaintClearSetData(enum BattlerId battler)
         enum BattlerId partner = BATTLE_PARTNER(battler);
         // Clear commander state immediately so a replacement doesn't inherit it.
         gBattleStruct->battlerState[battler].commanderSpecies = SPECIES_NONE;
-        gBattleMons[partner].volatiles.semiInvulnerable = STATE_NONE;
-        if (IsBattlerAlive(partner))
+        if (gBattleMons[partner].volatiles.semiInvulnerable == STATE_COMMANDER)
         {
-            BtlController_EmitSpriteInvisibility(partner, B_COMM_TO_CONTROLLER, FALSE);
-            MarkBattlerForControllerExec(partner);
+            gBattleMons[partner].volatiles.semiInvulnerable = STATE_NONE;
+            if (IsBattlerAlive(partner))
+            {
+                BtlController_EmitSpriteInvisibility(partner, B_COMM_TO_CONTROLLER, FALSE);
+                MarkBattlerForControllerExec(partner);
+            }
         }
     }
 
@@ -3947,11 +3944,25 @@ static void DoBattleIntro(void)
             struct StartingStatuses statusesOpponentB = {0};
 
             // Try to set a status to start the battle with
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            // Start bdHazards
+            if (TESTING)
             {
-                statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
+                statusesOpponentA = gStartingStatuses;
+                TestRunner_Battle_GetForcedStaringStatuses(0);
+            }
+            //if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            // End bdHazards
+            {
+            // Start bdHazards
+                //statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
+                statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA, 0);
+            // End bdHazards
                 if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
-                    statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+            // Start bdHazards
+                    //statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+                    statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB, 0);
+            // End bdHazards
             }
             STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;
@@ -5031,24 +5042,22 @@ s32 GetWhichBattlerFasterArgs(struct BattleCalcValues *calcValues, bool32 ignore
     if (priority1 == priority2)
     {
         // Quick Claw / Quick Draw / Custap Berry - always first
-        // Stall / Mycelium Might - last but before Lagging Tail
-        // Lagging Tail - always last
+        // Stall / Mycelium Might / Lagging Tail / Full Incense - always last
+        // If both battlers are affected by one of these effects, order is determined by Speed.
         bool32 battler1HasQuickEffect = gProtectStructs[calcValues->battlerAtk].quickDraw || gProtectStructs[calcValues->battlerAtk].usedCustapBerry;
         bool32 battler2HasQuickEffect = gProtectStructs[calcValues->battlerDef].quickDraw || gProtectStructs[calcValues->battlerDef].usedCustapBerry;
         bool32 battler1HasStallingAbility = calcValues->abilities[calcValues->battlerAtk] == ABILITY_STALL || gProtectStructs[calcValues->battlerAtk].myceliumMight;
         bool32 battler2HasStallingAbility = calcValues->abilities[calcValues->battlerDef] == ABILITY_STALL || gProtectStructs[calcValues->battlerDef].myceliumMight;
+        bool32 battler1HasSlowEffect = battler1HasStallingAbility || gProtectStructs[calcValues->battlerAtk].laggingTail;
+        bool32 battler2HasSlowEffect = battler2HasStallingAbility || gProtectStructs[calcValues->battlerDef].laggingTail;
 
         if (battler1HasQuickEffect && !battler2HasQuickEffect)
             strikesFirst = 1;
         else if (battler2HasQuickEffect && !battler1HasQuickEffect)
             strikesFirst = -1;
-        else if (gProtectStructs[calcValues->battlerAtk].laggingTail && !gProtectStructs[calcValues->battlerDef].laggingTail)
+        else if (battler1HasSlowEffect && !battler2HasSlowEffect)
             strikesFirst = -1;
-        else if (gProtectStructs[calcValues->battlerDef].laggingTail && !gProtectStructs[calcValues->battlerAtk].laggingTail)
-            strikesFirst = 1;
-        else if (battler1HasStallingAbility && !battler2HasStallingAbility)
-            strikesFirst = -1;
-        else if (battler2HasStallingAbility && !battler1HasStallingAbility)
+        else if (battler2HasSlowEffect && !battler1HasSlowEffect)
             strikesFirst = 1;
         else
         {
@@ -5894,6 +5903,9 @@ static void HandleEndTurn_FinishBattle(void)
             }
             TryPutPokemonTodayOnAir();
         }
+
+        if (gIsFishingEncounter && IsMonShiny(&gEnemyParty[0]))
+            gChainFishingDexNavStreak = 0;
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_EREADER_TRAINER

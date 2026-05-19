@@ -2,7 +2,7 @@
   "id": "MAP_CHASILLA_RESEARCH",
   "name": "Chasilla_Research",
   "layout": "LAYOUT_CHASILLA_RESEARCH",
-  "music": "MUS_RG_CINNABAR",
+  "music": "MUS_CHASILLA",
   "region_map_section": "MAPSEC_CHASILLA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -95,7 +95,7 @@ script CatchTutorial_StartCatchingScene_Script
     closemessage
     special(SavePlayerParty)
     special(LoadWallyZigzagoon)
-    special(StartWallyTutorialBattle) // PSF TODO update this to use the professor's backsprite and a gen 9 pokemon
+    special(StartWallyTutorialBattle)
     waitstate
     goto(CatchTutorial_PostCatching_Script)
 }

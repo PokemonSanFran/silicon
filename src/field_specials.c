@@ -2,6 +2,7 @@
 #include "debug.h"
 #include "malloc.h"
 #include "battle.h"
+#include "pokemon_storage_system.h" // siliconQuests
 #include "battle_special.h"
 #include "cable_club.h"
 #include "data.h"
@@ -80,6 +81,7 @@
 #include "palette.h"
 #include "pokemon_storage_system.h" // siliconMerge
 #include "options_visual.h" // siliconMerge
+#include "options_battle.h" // siliconQuests
 
 #include "battle_util.h"
 #include "naming_screen.h"
@@ -3492,17 +3494,17 @@ void DoDeoxysRockInteraction(void)
 }
 
 static const u16 sDeoxysRockPalettes[DEOXYS_ROCK_LEVELS][16] = {
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_1.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_2.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_3.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_4.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_5.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_6.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_7.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_8.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_9.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_10.gbapal"),
-    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_11.gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_8.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_9.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_10.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_11.pal", ".gbapal"),
 };
 
 static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {
@@ -4618,9 +4620,15 @@ void CheckSpecies(void)
 
 void DeleteChosenPartyMon(void)
 {
-    struct Pokemon *pokemon = &gPlayerParty[gSpecialVar_0x8004];
-    ZeroMonData(pokemon);
-    CompactPartySlots();
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+    {
+        ZeroBoxMonAt(gSpecialVar_MonBoxId,gSpecialVar_MonBoxPos);
+    }
+    else
+    {
+        ZeroMonData(&gPlayerParty[gSpecialVar_0x8004]);
+        CompactPartySlots();
+    }
 }
 
 u32 Script_GetGameStat(void)
@@ -4847,6 +4855,26 @@ bool32 CheckPartyHasSpecies(u32 givenSpecies)
         if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) == givenSpecies)
             return TRUE;
 
+    return FALSE;
+}
+
+bool32 CheckBoxesForSpecies(u32 species)
+{
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (IsMonInvalid(tempMon))
+                continue;
+
+            if (GetMonData(&tempMon, MON_DATA_SPECIES) == species)
+                return TRUE;
+        }
+    }
     return FALSE;
 }
 
@@ -5782,8 +5810,8 @@ void ForcePlayerOntoBike(void)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT)
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
-    Overworld_SetSavedMusic(MUS_CYCLING);
-    Overworld_ChangeMusicTo(MUS_CYCLING);
+    Overworld_SetSavedMusic(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
+    Overworld_ChangeMusicTo(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
 }
 
 bool8 IsPlayerNotInTrainerTowerLobby(void)
@@ -5808,30 +5836,30 @@ void BrailleCursorToggle(void)
 }
 
 static const u16 sEliteFourLightingPalettes[][16] = {
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_0.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_1.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_2.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_3.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_4.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_5.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_6.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_7.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_8.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_9.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_10.gbapal"),
-    INCBIN_U16("graphics/field_specials/elite_four_lighting_11.gbapal")
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_8.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_9.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_10.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_11.pal", ".gbapal")
 };
 
 static const u16 sChampionRoomLightingPalettes[][16] = {
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_0.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_1.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_2.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_3.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_4.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_5.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_6.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_7.gbapal"),
-    INCBIN_U16("graphics/field_specials/champion_room_lighting_8.gbapal")
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_8.pal", ".gbapal")
 };
 
 static const u8 sEliteFourLightingTimers[] = {

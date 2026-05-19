@@ -276,6 +276,7 @@ static void CB2_CheckMail(void)
 {
     struct Mail mail;
     mail.itemId = gSpecialVar_ItemId;
+    mail.species = SPECIES_NONE;
     ReadMail(&mail, CB2_ReturnToBagMenuPocket, FALSE);
 }
 
@@ -1699,7 +1700,6 @@ void ItemUseOutOfBattle_FlyTool(u8 taskId)
 }
 static void CB2_OpenFlyToolFromBag(void)
 {
-    VarSet(VAR_FLY_TOOL_SOURCE,FLY_SOURCE_BAG);
     // Start mapSystem
     //CB2_OpenFlyMap();
     CB2_OpenFlyMapSystemReturnToBag();
@@ -1707,7 +1707,6 @@ static void CB2_OpenFlyToolFromBag(void)
 }
 static void Task_OpenRegisteredFlyTool(u8 taskId)
 {
-    VarSet(VAR_FLY_TOOL_SOURCE,FLY_SOURCE_FIELD);
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();

@@ -39,9 +39,11 @@ void GiveFrontierBattlePoints(u32 amount);
 void DeleteChosenPartyMon(void);
 // End siliconMerge
 void PreparePartyForSkyBattle(void);
+void TrySkyBattle(void); // flyEncounters
 void GetObjectPosition(u16*, u16*, u32, u32);
 bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(u32);
+bool32 CheckBoxesForSpecies(u32); // siliconQuests
 u16 GetFrontierBattlePoints(void); // siliconMerge
 bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);

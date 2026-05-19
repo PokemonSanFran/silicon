@@ -43,19 +43,19 @@ static void PrintCTA(u32, u32);
 static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 taskId, bool32 eggMode);
 static void Task_DoQuestOverworldSlide(u8 taskId);
 
-static const u16 questOverworldPalette[] = INCBIN_U16("graphics/quest_menu/palettes/questOverworld.gbapal");
+static const u16 questOverworldPalette[] = INCGFX_U16("graphics/quest_menu/palettes/questOverworld.pal", ".gbapal");
 
-static const u32 sQuestOverworldA[] = INCBIN_U32("graphics/quest_menu/ow/tileA.4bpp.smol");
-static const u32 sQuestOverworldB[] = INCBIN_U32("graphics/quest_menu/ow/tileB.4bpp.smol");
-static const u32 sQuestOverworldC[] = INCBIN_U32("graphics/quest_menu/ow/tileC.4bpp.smol");
-static const u32 sQuestOverworldD[] = INCBIN_U32("graphics/quest_menu/ow/tileD.4bpp.smol");
-static const u32 sQuestOverworldE[] = INCBIN_U32("graphics/quest_menu/ow/tileE.4bpp.smol");
-static const u32 sQuestOverworldF[] = INCBIN_U32("graphics/quest_menu/ow/tileF.4bpp.smol");
-static const u32 sQuestOverworldG[] = INCBIN_U32("graphics/quest_menu/ow/tileG.4bpp.smol");
-static const u32 sQuestOverworldH[] = INCBIN_U32("graphics/quest_menu/ow/tileH.4bpp.smol");
-static const u32 sQuestOverworldI[] = INCBIN_U32("graphics/quest_menu/ow/tileI.4bpp.smol");
+static const u32 sQuestOverworldA[] = INCGFX_U32("graphics/quest_menu/ow/tileA.png", ".4bpp.smol");
+static const u32 sQuestOverworldB[] = INCGFX_U32("graphics/quest_menu/ow/tileB.png", ".4bpp.smol");
+static const u32 sQuestOverworldC[] = INCGFX_U32("graphics/quest_menu/ow/tileC.png", ".4bpp.smol");
+static const u32 sQuestOverworldD[] = INCGFX_U32("graphics/quest_menu/ow/tileD.png", ".4bpp.smol");
+static const u32 sQuestOverworldE[] = INCGFX_U32("graphics/quest_menu/ow/tileE.png", ".4bpp.smol");
+static const u32 sQuestOverworldF[] = INCGFX_U32("graphics/quest_menu/ow/tileF.png", ".4bpp.smol");
+static const u32 sQuestOverworldG[] = INCGFX_U32("graphics/quest_menu/ow/tileG.png", ".4bpp.smol");
+static const u32 sQuestOverworldH[] = INCGFX_U32("graphics/quest_menu/ow/tileH.png", ".4bpp.smol");
+static const u32 sQuestOverworldI[] = INCGFX_U32("graphics/quest_menu/ow/tileI.png", ".4bpp.smol");
 
-const u32 gQuestIcon_Gfx[] = INCBIN_U32("graphics/quest_menu/ow/pokeball_sheet.4bpp.smol");
+const u32 gQuestIcon_Gfx[] = INCGFX_U32("graphics/quest_menu/ow/pokeball_sheet.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_QuestIcon[] =
 {

@@ -5,6 +5,7 @@
 #include "item.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
+#include "ui_mon_summary.h"
 #include "pokedex.h"
 #include "script_pokemon_util.h"
 #include "random.h"
@@ -335,7 +336,7 @@ static void ShowSiliconStarter(u32 slot)
     struct BoxPokemon *boxMons = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
     u32 maxMonIndex = IN_BOX_COUNT - 1;
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_BOX, boxMons, slot, maxMonIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    ShowPokemonSummaryScreen(UI_SUMMARY_MODE_LOCK_EDIT, boxMons, slot, maxMonIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 u32 GetStarterFromSlot(enum SiliconStarters starterSlot)

@@ -2,6 +2,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 mapscripts HalaiIsland_Baiya_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
+        call(Earthquake_Script_PlayCrisisMusic)
         call(HalaiIsland_Baiya_OnTransition)
     }
 }

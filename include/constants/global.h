@@ -101,7 +101,6 @@ enum Language
 //#define SECRET_BASES_COUNT 20
 // End siliconMerge
 #define POKE_NEWS_COUNT 16
-// PSF TODO Update all of these values to match the max size of the pockets
 #define PC_ITEMS_COUNT 1 // siliconMerge
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 // Start siliconMerge

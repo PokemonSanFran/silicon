@@ -219,7 +219,7 @@ static const u32 sPokeMart_ExtraTilemap[] = INCBIN_U32("graphics/ui_menus/mart/t
 
 static const struct CompressedSpriteSheet sPokeMart_CategoryArrowSpriteSheet =
 {
-    (const u32[])INCBIN_U32("graphics/ui_menus/mart/category_arrow.4bpp.smol"),
+    (const u32[])INCGFX_U32("graphics/ui_menus/mart/category_arrow.png", ".4bpp.smol"),
     ((8 * 16) / 2),
     TAG_MART_CATEGORY_ARROW
 };
@@ -248,8 +248,8 @@ static const struct {
 {
     {
         .gfxId = OBJ_EVENT_GFX_MART_EMPLOYEE,
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/shopkeeper.4bpp.smol"),
-        .pal = (const u16[])INCBIN_U16("graphics/ui_menus/mart/shopkeeper.gbapal"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/shopkeeper.png", ".4bpp.smol"),
+        .pal = (const u16[])INCGFX_U16("graphics/ui_menus/mart/shopkeeper.png", ".gbapal"),
     },
 };
 
@@ -304,49 +304,49 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
 {
     [SHOP_SPRITE_BUY_ICON] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/cursor.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/cursor.png", ".4bpp.smol"),
         .x = (TILE_TO_PIXELS(14)) + 16,
         .y = (TILE_TO_PIXELS(1)) + 16,
         .callback = SpriteCB_BuyIcon,
     },
     [SHOP_SPRITE_UP_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_up.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_up.png", ".4bpp.smol"),
         .x = SHOP_UP_ARROW_X,
         .y = SHOP_UP_ARROW_Y,
         .callback = SpriteCB_UpArrow,
     },
     [SHOP_SPRITE_DOWN_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_down.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_down.png", ".4bpp.smol"),
         .x = SHOP_DOWN_ARROW_X,
         .y = SHOP_DOWN_ARROW_Y,
         .callback = SpriteCB_DownArrow,
     },
     [SHOP_SPRITE_LEFT_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_left.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_left.png", ".4bpp.smol"),
         .x = SHOP_LEFT_ARROW_X,
         .y = SHOP_LEFT_ARROW_Y,
         .callback = SpriteCB_LeftArrow,
     },
     [SHOP_SPRITE_RIGHT_ARROW] = // used for category selector
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_right.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_right.png", ".4bpp.smol"),
         .x = SHOP_RIGHT_ARROW_X,
         .y = SHOP_RIGHT_ARROW_Y,
         .callback = SpriteCB_RightArrow,
     },
     [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_up_small.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_up_small.png", ".4bpp.smol"),
         .x = (TILE_TO_PIXELS(26) + 4) + 8,
         .y = (TILE_TO_PIXELS(12) + 4) + 4,
         .callback = SpriteCB_UpArrowSmall,
     },
     [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/mart/arrow_down_small.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/mart/arrow_down_small.png", ".4bpp.smol"),
         .x = (TILE_TO_PIXELS(26) + 4) + 8,
         .y = (TILE_TO_PIXELS(16) + 4) + 4,
         .callback = SpriteCB_DownArrowSmall,
@@ -356,11 +356,11 @@ static const struct ShopSpriteConfigs sPokeMartShopSprites[] =
 static const struct ShopMenuConfigs sPokeMartShopConfigs =
 {
     .sprites = sPokeMartShopSprites,
-    .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.4bpp.smol"),
+    .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/mart/bg.png", ".4bpp.smol"),
     .map = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"),
     .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/mart/bg.bin.smolTM"), // nothing happens
-    .palette = (const u16[])INCBIN_U16("graphics/ui_menus/mart/bg.gbapal"),
-    .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/mart/categories.4bpp"),
+    .palette = (const u16[])INCGFX_U16("graphics/ui_menus/mart/bg.png", ".gbapal"),
+    .categoryBlit = (const u8[])INCGFX_U8("graphics/ui_menus/mart/categories.png", ".4bpp"),
     .fontColors = (const u8[][3]){
         [SHOP_FNTCLR_PRIMARY]    = {TEXT_COLOR_TRANSPARENT,  15,   TEXT_COLOR_TRANSPARENT},
         [SHOP_FNTCLR_SECONDARY]  = {TEXT_COLOR_TRANSPARENT,   8,   TEXT_COLOR_TRANSPARENT},

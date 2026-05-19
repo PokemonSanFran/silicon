@@ -185,42 +185,42 @@ struct MainMenuLists
     u8 cursorPosition;
 };
 
-static const u16 mainMenuPalettesBlack[] = INCBIN_U16("graphics/ui_menus/glass/palettes/black.gbapal");
-static const u16 mainMenuPalettesBlue[] = INCBIN_U16("graphics/ui_menus/glass/palettes/blue.gbapal");
-static const u16 mainMenuPalettesDefault[] = INCBIN_U16("graphics/ui_menus/glass/palettes/default.gbapal");
-static const u16 mainMenuPalettesGreen[] = INCBIN_U16("graphics/ui_menus/glass/palettes/green.gbapal");
-static const u16 mainMenuPalettesPlatinum[] = INCBIN_U16("graphics/ui_menus/glass/palettes/platinum.gbapal");
-static const u16 mainMenuPalettesRed[] = INCBIN_U16("graphics/ui_menus/glass/palettes/red.gbapal");
-static const u16 mainMenuPalettesScarlet[] = INCBIN_U16("graphics/ui_menus/glass/palettes/scarlet.gbapal");
-static const u16 mainMenuPalettesViolet[] = INCBIN_U16("graphics/ui_menus/glass/palettes/violet.gbapal");
-static const u16 mainMenuPalettesWhite[] = INCBIN_U16("graphics/ui_menus/glass/palettes/white.gbapal");
-static const u16 mainMenuPalettesYellow[] = INCBIN_U16("graphics/ui_menus/glass/palettes/yellow.gbapal");
-//static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/glass/palettes/text.gbapal");
-static const u16 mainMenuPalettesText[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
+static const u16 mainMenuPalettesBlack[] = INCGFX_U16("graphics/ui_menus/glass/palettes/black.pal", ".gbapal");
+static const u16 mainMenuPalettesBlue[] = INCGFX_U16("graphics/ui_menus/glass/palettes/blue.pal", ".gbapal");
+static const u16 mainMenuPalettesDefault[] = INCGFX_U16("graphics/ui_menus/glass/palettes/default.pal", ".gbapal");
+static const u16 mainMenuPalettesGreen[] = INCGFX_U16("graphics/ui_menus/glass/palettes/green.pal", ".gbapal");
+static const u16 mainMenuPalettesPlatinum[] = INCGFX_U16("graphics/ui_menus/glass/palettes/platinum.pal", ".gbapal");
+static const u16 mainMenuPalettesRed[] = INCGFX_U16("graphics/ui_menus/glass/palettes/red.pal", ".gbapal");
+static const u16 mainMenuPalettesScarlet[] = INCGFX_U16("graphics/ui_menus/glass/palettes/scarlet.pal", ".gbapal");
+static const u16 mainMenuPalettesViolet[] = INCGFX_U16("graphics/ui_menus/glass/palettes/violet.pal", ".gbapal");
+static const u16 mainMenuPalettesWhite[] = INCGFX_U16("graphics/ui_menus/glass/palettes/white.pal", ".gbapal");
+static const u16 mainMenuPalettesYellow[] = INCGFX_U16("graphics/ui_menus/glass/palettes/yellow.pal", ".gbapal");
+//static const u16 mainMenuPalettesText[] = INCGFX_U16("graphics/ui_menus/glass/palettes/text.pal", ".gbapal");
+static const u16 mainMenuPalettesText[] = INCGFX_U16("graphics/ui_menus/start_menu/text.pal", ".gbapal");
 
-static const u32 statsBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.4bpp.smol");
+static const u32 statsBgTiles[] = INCGFX_U32("graphics/ui_menus/main_menu/statsbackground.png", ".4bpp.smol");
 static const u32 statsBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/statsbackground.bin.smolTM");
 
-static const u32 mainMenuLocationBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
+static const u32 mainMenuLocationBgTiles[] = INCGFX_U32("graphics/ui_menus/main_menu/siliconBg.png", ".4bpp.smol");
 static const u32 mainMenuLocationBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
 
-static const u32 mainMenuContinueMenuBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.4bpp.smol");
+static const u32 mainMenuContinueMenuBgTiles[] = INCGFX_U32("graphics/ui_menus/main_menu/menu/bg.png", ".4bpp.smol");
 static const u32 mainMenuContinueMenuBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/menu/bg.bin.smolTM");
 
-static const u8 mainMenuContinueOptionBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/non-selector.4bpp");
-static const u8 mainMenuContinueSelectedBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/selector.4bpp");
-static const u8 mainMenuEraseOptionBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/eraseNon-selector.4bpp");
-static const u8 mainMenuEraseSelectedBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/eraseSelector.4bpp");
-static const u8 mainMenuTrainerCardBg[] = INCBIN_U8("graphics/ui_menus/main_menu/menu/trainercardBg.4bpp");
-static const u8 eraseBgBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/eraseBg.4bpp");
-static const u8 morningBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/sun.4bpp");
-static const u8 dayBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/sun.4bpp");
-static const u8 eveningBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
-static const u8 nightBitmap[] = INCBIN_U8("graphics/ui_menus/main_menu/night.4bpp");
-static const u32 mainMenuContinueCursor[] = INCBIN_U32("graphics/ui_menus/main_menu/cursor.4bpp.smol");
+static const u8 mainMenuContinueOptionBg[] = INCGFX_U8("graphics/ui_menus/main_menu/menu/non-selector.png", ".4bpp");
+static const u8 mainMenuContinueSelectedBg[] = INCGFX_U8("graphics/ui_menus/main_menu/menu/selector.png", ".4bpp");
+static const u8 mainMenuEraseOptionBg[] = INCGFX_U8("graphics/ui_menus/main_menu/menu/eraseNon-selector.png", ".4bpp");
+static const u8 mainMenuEraseSelectedBg[] = INCGFX_U8("graphics/ui_menus/main_menu/menu/eraseSelector.png", ".4bpp");
+static const u8 mainMenuTrainerCardBg[] = INCGFX_U8("graphics/ui_menus/main_menu/menu/trainercardBg.png", ".4bpp");
+static const u8 eraseBgBitmap[] = INCGFX_U8("graphics/ui_menus/main_menu/eraseBg.png", ".4bpp");
+static const u8 morningBitmap[] = INCGFX_U8("graphics/ui_menus/main_menu/sun.png", ".4bpp");
+static const u8 dayBitmap[] = INCGFX_U8("graphics/ui_menus/main_menu/sun.png", ".4bpp");
+static const u8 eveningBitmap[] = INCGFX_U8("graphics/ui_menus/main_menu/night.png", ".4bpp");
+static const u8 nightBitmap[] = INCGFX_U8("graphics/ui_menus/main_menu/night.png", ".4bpp");
+static const u32 mainMenuContinueCursor[] = INCGFX_U32("graphics/ui_menus/main_menu/cursor.png", ".4bpp.smol");
 
-static const u32 sharpriseSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/sharprise.4bpp.smol");
-static const u32 tideSprite[] = INCBIN_U32("graphics/ui_menus/main_menu/thetide.4bpp.smol");
+static const u32 sharpriseSprite[] = INCGFX_U32("graphics/ui_menus/main_menu/sharprise.png", ".4bpp.smol");
+static const u32 tideSprite[] = INCGFX_U32("graphics/ui_menus/main_menu/thetide.png", ".4bpp.smol");
 
 static const u8 sMainMenuWindowFontColors[][3] =
 {

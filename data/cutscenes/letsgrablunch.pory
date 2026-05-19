@@ -214,22 +214,3 @@ script LetsGrabLunch_TirabudinPlace{
     closemessage
     goto(LetsGrabLunch_ShowGymList_Dialogue)
 }
-
-script LetsGrabLunch_CheckRestorationProgress_Script{
-    setvar(VAR_TEMP_0,0)
-
-        call_if_quest_complete(QUEST_RESTOREHODOUGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTOREZENZUGYM,LetsGrabLunch_IncrementCount_Script)
-
-        if (var(VAR_TEMP_0) > 0 && var(VAR_STORYLINE_STATE) == STORY_BAIYA_EXPLAIN_RESTORATION){
-            setvar(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE)
-        }
-}
-
-script LetsGrabLunch_IncrementCount_Script{
-    addvar(VAR_TEMP_0,1)
-        return
-}
-

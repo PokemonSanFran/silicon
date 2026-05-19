@@ -62,8 +62,12 @@ enum {
 };
 */
 // End fogBattle
+// Start flyEncounters
+/*
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
+*/
+// End flyEncounters
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
@@ -370,6 +374,13 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
+// Start flyEncounters
+static u32 ChooseWildMonIndex_Fly(void)
+{
+    return ChooseWildMonIndex_Silicon(); 
+}
+// End flyEncounters
+
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
 {
     u8 min;
@@ -583,6 +594,9 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     case WILD_AREA_ROCKS:
         wildMonIndex = ChooseWildMonIndex_Rocks();
         break;
+    case WILD_AREA_FLY_MONS:
+        wildMonIndex = ChooseWildMonIndex_Fly();
+        break;
     default:
     case WILD_AREA_FISHING:
     case WILD_AREA_HIDDEN:
@@ -645,7 +659,10 @@ static bool8 EncounterOddsCheck(u16 encounterRate)
 }
 
 // Returns true if it will try to create a wild encounter.
-static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+// Start flyEncounters
+//static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
+// End flyEncounters
 {
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))

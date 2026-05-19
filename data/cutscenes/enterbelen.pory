@@ -819,7 +819,6 @@ script EnterBelen_Dialogue_WrongPrep9
 
 script EnterBelen_Script_StartGymTrainerBattle1
 {
-    // PSF TODO Replace with TRAINER_032E8AC9
     buffermovename(STR_VAR_1,MOVE_FLING)
     trainerbattle_single(TRAINER_CHEFA,format("Gotta be prepared to catch whatever the Line happens to {STR_VAR_1} at you!"),format("You caught that way better than I would..."),EnterBelen_Script_StartGymTrainerBattle1)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_1)
@@ -831,7 +830,6 @@ script EnterBelen_Script_StartGymTrainerBattle1
 
 script EnterBelen_Script_StartGymTrainerBattle2
 {
-    // PSF TODO Replace with TRAINER_0389363C
     trainerbattle_single(TRAINER_CHEFB,format("Being in a kitchen requires solid teamwork!"),format("Your teamwork is on point."),EnterBelen_Script_StartGymTrainerBattle2)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_2)
     {
@@ -842,7 +840,6 @@ script EnterBelen_Script_StartGymTrainerBattle2
 
 script EnterBelen_Script_StartGymTrainerBattle3
 {
-    // PSF TODO Replace with TRAINER_040CEA33,
     trainerbattle_single(TRAINER_CHEFC,format("Knowing type matchups is like knowing kitchen fundamentals... but it won't always be useful!"),format("You know the fundamentals and a little more!"),EnterBelen_Script_StartGymTrainerBattle3)
     if (var(VAR_GYM_1_STATE) < MERMEREZA_GYM_PUZZLE_COMPLETE_3)
     {

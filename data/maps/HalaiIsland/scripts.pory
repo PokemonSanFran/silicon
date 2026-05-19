@@ -3,12 +3,14 @@ mapscripts HalaiIsland_MapScripts {
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
-    MAP_SCRIPT_ON_TRANSITION {
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(HalaiIsland_LayoutSwap_Script)
         call(Quest_StealTheAxe_HideLeader_Script)
         call(HalaiIsland_ObjectVisibility_Script)
         call(CutePokemon_Script_ControlMelissaHalaiOutsideVisibility)
         call(Earthquake_HideTransport_Script)
+        call(Earthquake_Script_PlayCrisisMusic)
     }
     MAP_SCRIPT_ON_LOAD {
         goto(HalaiIsland_MapScripts_OnLoad)

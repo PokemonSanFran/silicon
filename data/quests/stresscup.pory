@@ -1,19 +1,7 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const STRESSCUPORGNANIZER = LOCALID_STRESSCUPORGNANIZER
-const FLAG_HIDE_STRESSCUPORGNANIZER = FLAG_TEMP_7
-const ITEM_STRESSCUP = ITEM_POTION
 
 // https://hackmd.io/sTWKSalsQVqKngA_lgfjyA
-
-script StressCup_Script_HideStresscuporganizer
-{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTOREZENZUGYM,SUB_QUEST_5)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        return
-    }
-    setflag(FLAG_HIDE_STRESSCUPORGNANIZER)
-}
 
 script StressCup_Script_CheckQuestState
 {
@@ -142,10 +130,10 @@ script StressCup_Dialogue_FinishBattles
 script StressCup_Script_InteractReward
 {
     faceplayer
-    checkitemspace(ITEM_STRESSCUP,1)
+    checkitemspace(ITEM_QUEST_STRESSCUP_REWARD,1)
     goto_if_eq(VAR_RESULT,FALSE,StressCup_Dialogue_NotEnoughSpace)
     cueobjectplayer(STRESSCUPORGNANIZER)
-    giveitem(ITEM_STRESSCUP,1)
+    giveitem(ITEM_QUEST_STRESSCUP_REWARD,1)
     completequest(QUEST_STRESSCUP)
 }
 
@@ -161,10 +149,13 @@ script StressCup_Dialogue_NotEnoughSpace
 
 script StressCup_Script_InteractComplete
 {
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitStresscuporgnanizer)
     msgbox(format("Hoo, after that high I can finally feel a calm. Like a real, real calm."),,SPEAKER_STRESSCUPORGANIZER)
     msgbox(format("Maybe the beach isn't so bad, y'know? I'd still rather be working."),,SPEAKER_STRESSCUPORGANIZER)
     msgbox(format("In some high-execution, high-stress work environment...Ah, that's the life..."),,SPEAKER_STRESSCUPORGANIZER)
     closemessage
+    release
+    end
 }
 
 script StressCup_Script_EndQuestIfPlayerLost
