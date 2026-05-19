@@ -32,5 +32,6 @@ void ExpTest_SetBackMonToNext(void);
 u32 ExpTest_GetSlowestMonForBracket(u32 startLevel, u32 endLevel);
 
 u32 ExpTest_GetTargetExp(u32 species, u32 targetLevel);
+const struct Trainer *GetTrainerFromGame(u16 trainerId, u32 difficulty);
 
 #endif
