@@ -70,7 +70,7 @@ script SharpriseSpire_ElevatorAttendant_Script {
         }
     copyvar(VAR_0x8005,VAR_TOWER_FLOOR)
 
-        special(ShowSharpriseSpireElevatorFloorSelect) // PSF TODO Figure out why the floor does not display correctly when you walk from 2F to 1F and then use the elevator
+        special(ShowSharpriseSpireElevatorFloorSelect)
         message(gText_WhichFloorWouldYouLike)
         waitmessage
         setvar(VAR_0x8004,0) //don't know what purpose this serves
