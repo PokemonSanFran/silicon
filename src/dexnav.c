@@ -884,9 +884,11 @@ static bool8 InitDexNavSearch(u32 species, u32 environment)
     // Start dexnav
     sDexNavSearchDataPtr = &sDexNavSearchData;
     memset(sDexNavSearchDataPtr, 0, sizeof(struct DexNavSearch));
+    sDexNavSearchDataPtr->fldEffSpriteId = MAX_SPRITES;
     // End dexnav
     if (sDexNavSearchDataPtr == NULL)
     {
+        StringCopy(gStringVar1,COMPOUND_STRING("It")); // dexnav
         DexNavSearchBail(EventScript_NotFoundNearby);
         return TRUE;
     }
@@ -906,6 +908,7 @@ static bool8 InitDexNavSearch(u32 species, u32 environment)
 
     if (sDexNavSearchDataPtr->monLevel == MON_LEVEL_NONEXISTENT || !TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 12, 12, FALSE))
     {
+        StringCopy(gStringVar1,GetSpeciesName(species)); // dexnav
         DexNavSearchBail(EventScript_NotFoundNearby);
         return TRUE;
     }
