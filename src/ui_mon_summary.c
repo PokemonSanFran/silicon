@@ -2482,7 +2482,7 @@ static void InfosPageGeneral_PrintNeededExperience(struct MonSummary *mon)
 static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 {
     u32 windowId = SUMMARY_MAIN_WIN_PAGE_TEXT;
-    u32 winWidth = WindowWidthPx(windowId);
+    u32 winWidth = TILE_TO_PIXELS(13);
     u32 fontId = FONT_OUTLINED;
 
     StringCopy(gStringVar1, gNaturesInfo[mon->nature].name);
@@ -2504,9 +2504,7 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
         StringCopy(gStringVar2, COMPOUND_STRING(" "));
     }
 
-    const u8 *strTemplate = COMPOUND_STRING("{STR_VAR_1} Nature {STR_VAR_2}");
-
-    StringExpandPlaceholders(gStringVar4, strTemplate);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1} Nature {STR_VAR_2}"));
     fontId = GetOutlineFontIdToFit(gStringVar4, winWidth);
 
     FillWindowPixelRect(windowId, PIXEL_FILL(0), SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y5, winWidth, 16);
