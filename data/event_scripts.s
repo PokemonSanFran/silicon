@@ -2162,7 +2162,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/RouteD_Grotto/scripts.inc"
 .include "data/maps/RouteE/scripts.inc"
 .include "data/maps/RouteE_Grotto/scripts.inc"
-.include "data/maps/Salesorcetower_Elevator/scripts.inc"
 .include "data/maps/SecretPath/scripts.inc"
 .include "data/maps/SharpriseSpire_10F/scripts.inc"
 .include "data/maps/SharpriseSpire_1F/scripts.inc"
