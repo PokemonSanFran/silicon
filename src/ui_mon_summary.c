@@ -2264,15 +2264,18 @@ static void SummaryPrint_MonStat(enum Stat statIdx, u32 flag, u32 y)
         enum MonSummaryFontColors color = SUMMARY_FNTCLR_NEU_STAT;
         u32 x2 = SUMMARY_STATS_GENERAL_NATURE_X;
 
-        if (statIdx == gNaturesInfo[mon->nature].statUp)
+        if (gNaturesInfo[mon->nature].statUp != gNaturesInfo[mon->nature].statDown)
         {
-            color = SUMMARY_FNTCLR_POS_STAT;
-            SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("+"));
-        }
-        else if (statIdx == gNaturesInfo[mon->nature].statDown)
-        {
-            color = SUMMARY_FNTCLR_NEG_STAT;
-            SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("-"));
+            if (statIdx == gNaturesInfo[mon->nature].statUp)
+            {
+                color = SUMMARY_FNTCLR_POS_STAT;
+                SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("+"));
+            }
+            else if (statIdx == gNaturesInfo[mon->nature].statDown)
+            {
+                color = SUMMARY_FNTCLR_NEG_STAT;
+                SummaryPrint_AddText(windowId, FONT_OUTLINED, x2, y, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("-"));
+            }
         }
 
         SummaryPrint_AddText(windowId, FONT_OUTLINED,
