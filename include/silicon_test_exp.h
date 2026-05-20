@@ -30,6 +30,7 @@ u32 ExpTest_CountTrainers(const struct SiliconExpTestData *data);
 u32 ExpTest_GetNumMonsForTrainer(u32 trainerId);
 void ExpTest_SetBackMonToNext(void);
 u32 ExpTest_GetSlowestMonForBracket(u32 startLevel, u32 endLevel);
+void ExpTest_ZeroData(void);
 
 u32 ExpTest_GetTargetExp(u32 species, u32 targetLevel);
 const struct Trainer *GetTrainerFromGame(u16 trainerId, u32 difficulty);

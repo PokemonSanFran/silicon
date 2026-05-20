@@ -56,6 +56,7 @@ void _SiliconExpTest(const struct SiliconExpTestData *data, struct BattlePokemon
             u32 fracProgress = 100 * (finalExpBack - ExpTest_GetTargetExp(species, startLevel)) / expToGet;
             Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Benched Pokemon need %d more exp (0.%d to goal of 0.%d of level %d to %d)", gTestRunnerState.test->filename, __LINE__, missingExp, fracProgress, benchPercent, startLevel, data->targetLevel);
         }
+        ExpTest_ZeroData();
     }
 }
 

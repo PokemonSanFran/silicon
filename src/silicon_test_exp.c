@@ -111,3 +111,16 @@ u32 ExpTest_GetTargetExp(u32 species, u32 targetLevel)
 {
     return gExperienceTables[gSpeciesInfo[species].growthRate][targetLevel];
 }
+
+void ExpTest_ZeroData(void)
+{
+    gSiliconExpTestState.expTestExp = 0;
+    gSiliconExpTestState.isFinalTurn = FALSE;
+    gSiliconExpTestState.currentMon = 0;
+    gSiliconExpTestState.trainerIndex = 0;
+    gSiliconExpTestState.numMons = 0;
+    gSiliconExpTestState.backExp = 0;
+    gSiliconExpTestState.useBackMon = FALSE;
+    gSiliconExpTestState.isExpTest = FALSE;
+    gSiliconExpTestState.data = NULL;
+}
