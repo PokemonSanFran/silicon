@@ -1756,14 +1756,18 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
 
     LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
 
-    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_LEFT_ALIGN, 4);
-    ConvertUIntToDecimalStringN(gStringVar2, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}/{STR_VAR_2}"));
+    u32 fontId = FONT_OUTLINED;
 
-    u32 width = TILE_TO_PIXELS(7) - 1; // 55
-    u32 fontId = GetOutlineFontIdToFit(gStringVar4, width);
-    u32 x = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar4, width, -1);
-    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar4);
+    ConvertUIntToDecimalStringN(gStringVar1, currHp, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    u32 x = GetStringRightAlignXOffset(fontId, gStringVar1, TILE_TO_PIXELS(3) + 1);
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
+
+    x = TILE_TO_PIXELS(3) + 1;
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("/"));
+
+    x = TILE_TO_PIXELS(4) - 2;
+    ConvertUIntToDecimalStringN(gStringVar1, maxHp, STR_CONV_MODE_LEFT_ALIGN, 4);
+    SummaryPrint_AddText(windowId, fontId, x, 0, SUMMARY_FNTCLR_INTERFACE, gStringVar1);
 
     u8 *tileData = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum);
