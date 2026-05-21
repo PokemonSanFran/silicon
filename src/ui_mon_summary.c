@@ -770,7 +770,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     {
     SWITCH_TO_SUBMODE:
         if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
-         && SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
+         && SummaryPage_GetValue() == SUMMARY_PAGE_STATS)
         {
             SummaryInput_SetSubMode(FALSE);
             return;

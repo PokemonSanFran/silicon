@@ -214,7 +214,7 @@ static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
     },
 };
 
-static const u8 sSummaryMode_StatsExitOnly[] = _("{B_BUTTON} Exit");
+static const u8 sSummaryMode_StatsExitOnly[] = _("{DPAD_LEFTRIGHT} Change Page {B_BUTTON} Exit");
 static const u8 sSummaryMode_MoveDetailsCancelOnly[] = _("{B_BUTTON} Cancel");
 static const u8 sSummaryMode_MoveDetailsConfirmCancelOnly[] = _("{A_BUTTON} Confirm {B_BUTTON} Cancel");
 
