@@ -1941,13 +1941,9 @@ static void Task_Saving(u8 taskId)
 }
 
 
-static const u8 sText_Unk[] = _("???");
-
 static bool8 Saving_Init(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    //s16 x = playerObjEvent->currentCoords.x;
-    //s16 y = playerObjEvent->currentCoords.y;
     s16 x2;
     s16 y2;
     s16 x_diff;
@@ -1987,7 +1983,7 @@ static bool8 Saving_Init(struct Task *task)
         TEXT_COLOR_WHITE,
     };
 
-    AddSpriteTextPrinterParameterized3(spriteId,fontId,x,y,color,TEXT_SKIP_DRAW,sText_Unk);
+    AddSpriteTextPrinterParameterized3(spriteId,fontId,x,y,color,TEXT_SKIP_DRAW,COMPOUND_STRING("Saving..."));
 
     task->eSavingAnimFrame = 0;
     task->eState++;
