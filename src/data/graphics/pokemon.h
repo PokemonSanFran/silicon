@@ -27501,8 +27501,8 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
 #endif //P_FAMILY_PECHARUNT
 
 // Start fogBattle
-const u16 gMonPalette_Fog[] = INCGFX_U16("graphics/pokemon/fog/front.png", ".gbapal");
-const u32 gMonFrontPic_Fog[] = INCGFX_U32("graphics/pokemon/fog/front.png", ".4bpp.smol");
+const u16 gMonPalette_Fog[] = INCGFX_U16("graphics/pokemon/fog/anim_front.png", ".gbapal");
+const u32 gMonFrontPic_Fog[] = INCGFX_U32("graphics/pokemon/fog/anim_front.png", ".4bpp.smol");
 // End fogBattle
     const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.smol");
     const u16 gMonPalette_Egg[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
