@@ -688,7 +688,7 @@ const u16 gFieldEffectObjectPalette_CaveDust[] = INCGFX_U16("graphics/field_effe
 
 // Start autoSave
 const u32 gFieldEffectObjectPic_Saving[]    = INCGFX_U32("graphics/field_effects/pics/saving.png", ".4bpp", "-mwidth 8 -mheight 8");
-const u16 gFieldEffectObjectPaletteSaving[] = INCGFX_U16("graphics/field_effects/palettes/saving.pal", ".gbapal");
+const u16 gFieldEffectObjectPaletteSaving[] = INCGFX_U16("graphics/field_effects/pics/saving.png", ".gbapal");
 // End autoSave
 const u32 gObjectEventPic_ApricornTree[] = INCGFX_U32("graphics/object_events/pics/misc/apricorn_tree.png", ".4bpp", "-mwidth 2 -mheight 2");
 
