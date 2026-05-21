@@ -223,7 +223,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Info"),
         .helpBar = (const u8 *const[NUM_SUMMARY_INFOS_SUB_MODES]){
-            [SUMMARY_INFOS_SUB_MODE_NONE]           = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
+            [SUMMARY_INFOS_SUB_MODE_NONE]           = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Page {A_BUTTON} Details {B_BUTTON} Exit"),
             [SUMMARY_INFOS_SUB_MODE_DESC_SWITCH]    = COMPOUND_STRING("{DPAD_NONE} Cycle {B_BUTTON} Cancel"),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/infos.bin.smolTM"),
@@ -242,7 +242,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Stats"),
         .helpBar = (const u8 *const[NUM_SUMMARY_STATS_SUB_MODES]){
-            [SUMMARY_STATS_SUB_MODE_NONE]           = COMPOUND_STRING("{A_BUTTON} Edit {B_BUTTON} Exit"),
+            [SUMMARY_STATS_SUB_MODE_NONE]           = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Page {A_BUTTON} Edit {B_BUTTON} Exit"),
             [SUMMARY_STATS_SUB_MODE_SELECT_ROW]     = COMPOUND_STRING("{DPAD_UPDOWN} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
             [SUMMARY_STATS_SUB_MODE_ADJUST_VALUE]   = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +10/-10 {L_BUTTON} Min {R_BUTTON} Max {B_BUTTON} Cancel"),
             [SUMMARY_STATS_SUB_MODE_ERROR]          = COMPOUND_STRING("Press any buttons to continue."),
@@ -263,7 +263,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
     {
         .name = COMPOUND_STRING("Moves"),
         .helpBar = (const u8 *const[]){
-            [SUMMARY_MOVES_SUB_MODE_NONE]       = COMPOUND_STRING("{A_BUTTON} Details {B_BUTTON} Exit"),
+            [SUMMARY_MOVES_SUB_MODE_NONE]       = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Page {A_BUTTON} Details {B_BUTTON} Exit"),
             [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Explore Move {START_BUTTON} Learn Moves {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{A_BUTTON} Choose {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{B_BUTTON} Cancel"),
