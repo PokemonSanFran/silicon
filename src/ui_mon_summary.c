@@ -2364,7 +2364,7 @@ static void SummaryPrint_BlitMoveType(u32 idx, u32 x, u32 y)
 
 static void Task_SummaryPrint_UpdateText(u8 taskId)
 {
-    if ((++gTasks[taskId].tUpdateText % 600) == 0)
+    if ((++gTasks[taskId].tUpdateText % 180) == 0)
     {
         SummaryInput_SetUpdateText(SummaryInput_GetUpdateText() ^ 1);
         void (*updateTextFunc)(void) = SummaryPage_GetHandleUpdateTextFunc(SummaryPage_GetValue());
