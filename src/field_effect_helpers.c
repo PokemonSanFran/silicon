@@ -17,6 +17,7 @@
 #include "constants/songs.h"
 // Start autoSave
 #include "task.h"
+#include "text.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 // End autoSave
@@ -1939,6 +1940,9 @@ static void Task_Saving(u8 taskId)
         ;
 }
 
+
+static const u8 sText_Unk[] = _("???");
+
 static bool8 Saving_Init(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -1971,6 +1975,19 @@ static bool8 Saving_Init(struct Task *task)
     sprite->y = y2 + 8;
     sprite->data[0] = playerObjEvent->currentCoords.x;
     sprite->data[1] = playerObjEvent->currentCoords.y;
+
+    u32 fontId = FONT_NORMAL;
+    u32 x = 0;
+    u32 y = 0;
+
+    const u8 color[] =
+    {
+        TEXT_COLOR_TRANSPARENT,
+        TEXT_COLOR_DARK_GRAY,
+        TEXT_COLOR_WHITE,
+    };
+
+    AddSpriteTextPrinterParameterized3(spriteId,fontId,x,y,color,TEXT_SKIP_DRAW,sText_Unk);
 
     task->eSavingAnimFrame = 0;
     task->eState++;
