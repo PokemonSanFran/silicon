@@ -144,11 +144,8 @@ static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
-static void SummarySprite_PrepareMonMovesGfx(void);
 static void SummarySprite_MonMove(u32, s32, s32);
 static u8 *SummarySprite_GetSpritePtr(u8 position);
-static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8);
-static void SummarySprite_SetTemplatePtr(u8, const struct SpriteTemplate *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -329,6 +326,8 @@ static void MonSummary_FreeResources(void)
     ResetTempTileDataBuffers();
     DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->tilemapBuf);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->monSpritePics);
+    TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr->monSpriteGfx);
     TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
     FreeItemIconTemporaryBuffers();
     FreeAllWindowBuffers();
@@ -501,6 +500,8 @@ static void SummarySetup_Sprites(void)
         }
     }
 
+    sMonSummaryDataPtr->monSpriteGfx = AllocZeroed(0x1000);
+    sMonSummaryDataPtr->monSpritePics = AllocZeroed(sizeof(*sMonSummaryDataPtr->monSpritePics));
     SummarySprite_CreateMonSprite();
 }
 
@@ -1895,7 +1896,7 @@ static void SummarySprite_CreateMonSprite(void)
 // switch between buffers
 static void SummarySprite_InjectPokemon(void)
 {
-    u32 position = SUMMARY_GFX_MAN_MON; // B_POSITION_OPPONENT_LEFT
+    u32 position = SUMMARY_GFX_MAN_MON;
     struct MonSummary *mon = SummaryMon_GetStruct();
     u8 *gfx = SummarySprite_GetSpritePtr(position);
 
@@ -1905,6 +1906,9 @@ static void SummarySprite_InjectPokemon(void)
     if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
     {
         HandleLoadSpecialPokePic(TRUE, gfx, mon->species, mon->personality);
+        sMonSummaryDataPtr->monSpritePics->data = gfx;
+        sMonSummaryDataPtr->monSpritePics->size = 64 * 64 / 2;
+        sMonSummaryDataPtr->monSpritePics->relativeFrames = TRUE;
 
         LoadPalette(
             GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
@@ -1916,10 +1920,16 @@ static void SummarySprite_InjectPokemon(void)
     else
     {
         CpuCopy32(GetMonIconTiles(mon->species, mon->personality), gfx, 512);
+        sMonSummaryDataPtr->monSpritePics->data = gfx;
+        sMonSummaryDataPtr->monSpritePics->size = 32 * 32 / 2;
+        sMonSummaryDataPtr->monSpritePics->relativeFrames = TRUE;
+
         LoadPalette(GetValidMonIconPalettePtr(mon->species), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     }
 
-    SetMultiuseSpriteTemplateToPokemon(mon->species, position);
+    gMultiuseSpriteTemplate = gBattlerSpriteTemplates[position];
+    gMultiuseSpriteTemplate.anims = sSummarySprite_FrameImageAnimTemplate;
+    gMultiuseSpriteTemplate.images = sMonSummaryDataPtr->monSpritePics;
     gMultiuseSpriteTemplate.paletteTag = TAG_NONE;              // manually setting this bc TAG_NONE throws an assertf (for a good reason)
 
     if (SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
@@ -2046,11 +2056,6 @@ static u32 SummarySprite_GetTypePaletteTag(enum Type type)
     return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
 }
 
-static void SummarySprite_PrepareMonMovesGfx(void)
-{
-    SummarySprite_SetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR, &gMonSummary_MoveBarSpriteTemplate);
-}
-
 static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
 {
     idx %= MAX_MON_MOVES;
@@ -2062,8 +2067,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     if (move == MOVE_NONE || move >= MOVES_COUNT
      || SummarySprite_GetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx) != SPRITE_NONE) return;
 
-    struct SpriteTemplate *template = SummarySprite_GetTemplatePtr(SUMMARY_GFX_MAN_MOVE_BAR);
-    u32 spriteId = CreateSprite(template, x, y, 2);
+    u32 spriteId = CreateSprite(&gMonSummary_MoveBarSpriteTemplate, x, y, 2);
 
     gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(type));
     SetSubspriteTables(&gSprites[spriteId], gMonSummary_128x16SubspriteTable);
@@ -2074,26 +2078,7 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
 
 static u8 *SummarySprite_GetSpritePtr(u8 position)
 {
-    if (gMonSpritesGfxPtr == NULL)
-        return MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, position);
-    else
-        return gMonSpritesGfxPtr->spritesGfx[position];
-}
-
-static struct SpriteTemplate *SummarySprite_GetTemplatePtr(u8 position)
-{
-    if (gMonSpritesGfxPtr == NULL)
-        return &sMonSummaryDataPtr->gfx.man->templates[position];
-    else
-        return &sMonSummaryDataPtr->gfx.ptr->templates[position];
-}
-
-static void SummarySprite_SetTemplatePtr(u8 position, const struct SpriteTemplate *template)
-{
-    if (gMonSpritesGfxPtr == NULL)
-        sMonSummaryDataPtr->gfx.man->templates[position] = *template;
-    else
-        sMonSummaryDataPtr->gfx.ptr->templates[position] = *template;
+    return sMonSummaryDataPtr->monSpriteGfx;
 }
 
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)
@@ -2976,8 +2961,6 @@ static void MovesPage_HandleHeader(void)
 
 static void MovesPage_HandleGeneral(void)
 {
-    SummarySprite_PrepareMonMovesGfx();
-
     for (u32 i = 0, y = SUMMARY_MOVES_GENERAL_Y; i < MAX_MON_MOVES; i++, y += SUMMARY_MOVES_GENERAL_ADDITIVE_Y)
     {
         SummarySprite_MonMove(i, SUMMARY_MOVES_GENERAL_SPRITE_BAR_X, y);

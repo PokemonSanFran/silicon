@@ -397,8 +397,8 @@ enum __attribute__((packed)) MonSummaryReloadModes
 
 enum MonSummaryGfxManagerIdx
 {
-    SUMMARY_GFX_MAN_MON = B_POSITION_OPPONENT_LEFT,
-    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_OPPONENT_RIGHT,
+    SUMMARY_GFX_MAN_MON = B_POSITION_PLAYER_LEFT,
+    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_OPPONENT_LEFT,
 };
 
 typedef const u8 *(*HelpBarTextFunc)(u32);  // we can't directly attach the enum sadly
@@ -445,6 +445,8 @@ struct MonSummaryResources
         struct MonSpritesGfxManager *man;   // default
         struct MonSpritesGfx *ptr;          // battle-only
     } gfx;
+    u8 *monSpriteGfx;
+    struct SpriteFrameImage *monSpritePics;
     MainCallback savedCallback;
     u8 *tilemapBuf;
     u8 spriteIds[NUM_SUMMARY_MAIN_SPRITES + TOTAL_SUMMARY_DYNAMIC_SPRITES];
