@@ -1580,7 +1580,8 @@ static void MainPage_WaitCloseMessage(u8 taskId)
     if (tMainPage_Timer < 20)
         return;
 
-    if (JOY_NEW(A_BUTTON | B_BUTTON) || tMainPage_Timer == 100)
+    #define PROGRESS_BUTTONS (A_BUTTON | B_BUTTON | L_BUTTON | R_BUTTON | START_BUTTON | SELECT_BUTTON)
+    if (JOY_NEW(PROGRESS_BUTTONS) || tMainPage_Timer == 100)
     {
         PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
         sMoveReminderDataPtr->printingDialogue = FALSE;
@@ -1588,6 +1589,7 @@ static void MainPage_WaitCloseMessage(u8 taskId)
         SwitchTaskToFollowupFunc(taskId);
         return;
     }
+    #undef PROGRESS_BUTTONS
 }
 
 static void MainPage_ResetListIdx(void)
