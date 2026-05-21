@@ -4712,6 +4712,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_HALERBA_WILDS_LEAVERRA_FOREST_NIGHT) \
     X(MUS_BALLER) \
     X(MUS_DOGWALKER_GARDENER_BELLHOP_JANITOR) \
+    X(MUS_TIRABUDIN_PLACE_NIGHT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
