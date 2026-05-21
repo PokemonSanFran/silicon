@@ -37,7 +37,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "util.h"
-#include "mon_markings.h"
+#include "battle_interface.h"
 #include "ui_move_reminder.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
@@ -1744,16 +1744,57 @@ static void SummarySprite_InjectHpBar(struct Sprite *sprite)
     struct WindowTemplate template = { .width = 8, .height  = 4 }; // 64x32
     u32 windowId = AddWindow(&template);
 
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    s32 currHp = mon->currHp;
+    s32 maxHp = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP);
+
     const u8 *blit = SummarySprite_GetMainStruct(SUMMARY_MAIN_SPRITE_HP_BAR)->gfx;
     BlitBitmapToWindow(windowId, blit, 0, 0, TILE_TO_PIXELS(template.width), TILE_TO_PIXELS(template.height));
 
-    struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 currHp = mon->currHp;
-    u32 maxHp = GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_MAX_HP);
+    u8 array[7];
+    blit = sSummarySprite_HpBarAnims;
 
-    u32 hpPercentage = (currHp * 100) / maxHp;
-    enum MonSummaryHpBarColors color = hpPercentage / 33;
-    if (color > SUMMARY_HP_BAR_CLR_GREEN) color = SUMMARY_HP_BAR_CLR_GREEN;
+    bool32 fill = CalcBarFilledPixels(maxHp, currHp, 0, &currHp, array, 7);
+    for (u32 i = 0; i < 7; i++)
+    {
+        u32 x, y;
+
+        if (currHp == maxHp && fill == 1)
+            x = 8;
+        else
+            x = array[i];
+
+        x *= 8;
+
+        if (i < 3)
+            y = 0;
+        else if (i == 3)
+            y = 1;
+        else
+            y = 2;
+
+        y *= 16;
+        BlitBitmapRectToWindow(windowId, blit, x, y, TILE_TO_PIXELS(9), TILE_TO_PIXELS(6), i * 8, 0, TILE_TO_PIXELS(1), TILE_TO_PIXELS(2));
+    }
+
+    enum MonSummaryHpBarColors color;
+    switch (GetHPBarLevel(currHp, maxHp))
+    {
+    case HP_BAR_FULL:
+    case HP_BAR_GREEN:
+        color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    case HP_BAR_YELLOW:
+        color = SUMMARY_HP_BAR_CLR_YELLOW;
+        break;
+    case HP_BAR_RED:
+    default:
+        if (maxHp > 1)
+            color = SUMMARY_HP_BAR_CLR_RED;
+        else
+            color = SUMMARY_HP_BAR_CLR_GREEN;
+        break;
+    }
 
     LoadPalette(&sSummarySprite_HpBarColors[1 + (color * 2)], OBJ_PLTT_ID(sprite->oam.paletteNum) + 6, PLTT_SIZEOF(2));
 

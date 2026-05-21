@@ -151,6 +151,7 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[] =
 };
 
 static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
+static const u8 sSummarySprite_HpBarAnims[] = INCBIN_U8("graphics/ui_menus/mon_summary/hp_bar_anims.4bpp");
 
 static const struct Subsprite sSummarySprite_128x16Subsprites[] =
 {
