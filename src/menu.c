@@ -340,10 +340,7 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 left, u8 top, u8 width, u8 he
 
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
 {
-    //Top Bar
-    FillMenuTilemapBufferRect(bg, 14, left - 1, top - 1, 1, 1);
-    FillMenuTilemapBufferRect(bg, 15, left, top - 1, width, 1);
-    FillMenuTilemapBufferRect(bg, 16, left + width, top - 1, 1, 1);
+    // PSF TODO handle drawing top tiles for menus that uses the dialogue frame, e.g. ui_mon_summary
     //Top Left
     FillMenuTilemapBufferRect(bg, 5, left - 1, top, 1, 1);
     //Left Bar
