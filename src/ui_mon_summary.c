@@ -37,6 +37,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "util.h"
+#include "mon_markings.h"
 #include "ui_move_reminder.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
@@ -158,7 +159,7 @@ static const struct WindowTemplate *SummaryPrint_GetMainWindowTemplate(u32);
 static void SummaryPrint_Header(void);
 static void SummaryPrint_BlitPageTabs(u32, u32, u32);
 static void SummaryPrint_BlitStatusSymbol(u32, u32);
-static UNUSED void SummaryPrint_BlitMonMarkings(u32, u32, u32);
+static void SummaryPrint_BlitMonMarkings(u32, u32);
 static void SummaryPrint_HelpBar(void);
 static void SummaryPrint_TextBox(const u8 *);
 static void SummaryPrint_MonName(u32, u32, u32);
@@ -2148,9 +2149,13 @@ static void SummaryPrint_BlitStatusSymbol(u32 x, u32 y)
         24, 8);
 }
 
-static UNUSED void SummaryPrint_BlitMonMarkings(u32 windowId, u32 x, u32 y)
+static void SummaryPrint_BlitMonMarkings(u32 x, u32 y)
 {
-
+    BlitBitmapRectToWindow(SUMMARY_MAIN_WIN_PAGE_TEXT, sSummaryPrint_MonMarkingsBlit,
+        0, SummaryMon_GetStruct()->markings * 8,
+        48, 128,
+        x, y,
+        48, 8);
 }
 
 static void SummaryPrint_HelpBar(void)
@@ -2521,7 +2526,7 @@ static void InfosPageGeneral_PrintNatureInfo(struct MonSummary *mon)
 
 static void InfosPage_HandleMisc(void)
 {
-    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
+    SummaryPrint_BlitMonMarkings(SUMMARY_INFOS_MISC_MON_MARKINGS_X, SUMMARY_INFOS_MISC_MON_MARKINGS_Y);
 
     SummaryPrint_MonHeldItem(SUMMARY_INFOS_MISC_ITEM_NAME_X, SUMMARY_INFOS_MISC_ITEM_NAME_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonAbilityName(SUMMARY_INFOS_MISC_ABILITY_NAME_X, SUMMARY_INFOS_MISC_ABILITY_NAME_Y, TILE_TO_PIXELS(10));
@@ -2666,7 +2671,7 @@ static void StatsPage_HandleGeneral(void)
 
 static void StatsPage_HandleMisc(void)
 {
-    // PSF TODO update and use SummaryPrint_BlitMonMarkings once all 6 markings are implemented
+    SummaryPrint_BlitMonMarkings(SUMMARY_STATS_MISC_MON_MARKINGS_X, SUMMARY_STATS_MISC_MON_MARKINGS_Y);
 
     StatsPageMisc_MonTotalEVs();
 
