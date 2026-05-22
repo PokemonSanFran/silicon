@@ -4553,13 +4553,16 @@ void LetsGrabLunch_IncrementStoryVariable(void)
 // Cutscene: Swagbag Continued
 // ***********************************************************************
 
-void u32 ReturnBadgeFromMap(void)
+static u32 ReturnBadgeFromMap(void)
 {
     switch (GetCurrentMap())
     {
         default: return 0;
+        case MAP_MERMEREZA_CITY:
         case MAP_MERMEREZA_CITY_GYM:         return FLAG_BADGE01_GET;
+        case MAP_TORA_TOWN:
         case MAP_TORA_TOWN_GYM:              return FLAG_BADGE02_GET;
+        case MAP_PERLACIA_CITY:
         case MAP_PERLACIA_CITY_GYM_ENTRANCE: return FLAG_BADGE03_GET;
     }
 }
@@ -4577,6 +4580,24 @@ void SpawnOliverForSwagbag(void)
     switch (GetCurrentMap())
     {
         default: return;
+        case MAP_MERMEREZA_CITY:
+                 x = 30;
+                 y = 25;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
+        case MAP_TORA_TOWN:
+                 x = 17;
+                 y = 13;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
+        case MAP_PERLACIA_CITY:
+                 x = 20;
+                 y = 25;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
         case MAP_MERMEREZA_CITY_GYM:
                  x = 4;
                  y = 28;
@@ -4613,4 +4634,17 @@ static bool8 ShouldPlayerGetGoldPotion(void)
 void Script_ShouldPlayerGetGoldPotion(void)
 {
     gSpecialVar_Result = ShouldPlayerGetGoldPotion();
+}
+
+static bool8 ShouldPlayerGetDexnav(void)
+{
+    if (FlagGet(FLAG_SYS_APP_DEXNAV_GET))
+        return FALSE;
+
+    return (GetNumberOfBadges() == 2);
+}
+
+void Script_ShouldPlayerGetDexnav(void)
+{
+    gSpecialVar_Result = ShouldPlayerGetDexnav();
 }
