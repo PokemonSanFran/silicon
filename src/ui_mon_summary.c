@@ -2262,12 +2262,19 @@ static void SummaryPrint_MonLevel(u32 x, u32 y)
 
 static void SummaryPrint_MonHeldItem(u32 x, u32 y, u32 maxWidth)
 {
-    struct MonSummary *mon = SummaryMon_GetStruct();
-    enum Item itemId = mon->item;
+    enum Item itemId = SummaryMon_GetStruct()->item;
+    const u8 *str;
 
-    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT) return;
+    if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT)
+    {
+        StringCopy(gStringVar1, COMPOUND_STRING("No Held Item"));
+        str = gStringVar1;
+    }
+    else
+    {
+        str = GetItemName(itemId);
+    }
 
-    const u8 *str = GetItemName(itemId);
     u32 fontId = GetOutlineFontIdToFit(str, maxWidth);
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, fontId, x, y, SUMMARY_FNTCLR_INTERFACE, str);
