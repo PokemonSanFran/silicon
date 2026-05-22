@@ -2848,8 +2848,8 @@ static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 
     values = res;
     SetMonData(&sMonSummaryDataPtr->mon, trueRow, &values);
-    CalculateMonStats(&sMonSummaryDataPtr->mon);
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+    SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(1)]);
 
     if (availableValues != StatsPageMisc_CalculateAvailableValues())
     {
