@@ -221,7 +221,7 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_HEADER_HP_BAR_X           (32 + 32)
 #define SUMMARY_STATS_HEADER_EXP_BAR_X          (34)
 #define SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X   (89)
-#define SUMMARY_STATS_HEADER_TYPINGS_X          (88 + 8)
+#define SUMMARY_STATS_HEADER_TYPINGS_X          (89 + 8)
 
 #define SUMMARY_STATS_HEADER_Y                  (0)
 #define SUMMARY_STATS_HEADER_SHINY_Y            (20 + 8)
