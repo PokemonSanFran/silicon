@@ -1824,6 +1824,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/cutscenes/improbablybetterthanyou.inc"
 .include "data/cutscenes/swagbag.inc"
 .include "data/cutscenes/readysetistarted2hoursago.inc"
+.include "data/cutscenes/swagbag_continued.inc" 
 .include "data/cutscenes/catchtutorial.inc"
 .include "data/cutscenes/enterbelen.inc"
 .include "data/cutscenes/entershinzo.inc"

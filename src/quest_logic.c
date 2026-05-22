@@ -4549,3 +4549,68 @@ void LetsGrabLunch_IncrementStoryVariable(void)
         VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
 }
 
+// ***********************************************************************
+// Cutscene: Swagbag Continued
+// ***********************************************************************
+
+void u32 ReturnBadgeFromMap(void)
+{
+    switch (GetCurrentMap())
+    {
+        default: return 0;
+        case MAP_MERMEREZA_CITY_GYM:         return FLAG_BADGE01_GET;
+        case MAP_TORA_TOWN_GYM:              return FLAG_BADGE02_GET;
+        case MAP_PERLACIA_CITY_GYM_ENTRANCE: return FLAG_BADGE03_GET;
+    }
+}
+
+void Script_ReturnBadgeFromMap(void)
+{
+    gSpecialVar_Result = ReturnBadgeFromMap();
+}
+
+void SpawnOliverForSwagbag(void)
+{
+    u32 localIdOliver = LOCALID_PLAYER - 2;
+    u32 x = 0, y = 0, movementBehavior = 0, elevation = 0;
+
+    switch (GetCurrentMap())
+    {
+        default: return;
+        case MAP_MERMEREZA_CITY_GYM:
+                 x = 4;
+                 y = 28;
+                 movementBehavior = MOVEMENT_TYPE_FACE_DOWN;
+                 elevation = 3;
+                 break;
+        case MAP_TORA_TOWN_GYM:
+                 x = 9;
+                 y = 12;
+                 movementBehavior = MOVEMENT_TYPE_FACE_DOWN;
+                 elevation = 4;
+                 break;
+        case MAP_PERLACIA_CITY_GYM_ENTRANCE:
+                 x = 9;
+                 y = 9;
+                 movementBehavior = MOVEMENT_TYPE_FACE_LEFT;
+                 elevation = 3;
+                 break;
+    }
+    SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_OLIVER, movementBehavior, localIdOliver, x+MAP_OFFSET, y+MAP_OFFSET, elevation);
+}
+
+static bool8 ShouldPlayerGetGoldPotion(void)
+{
+    if (FlagGet(ReturnBadgeFromMap()) == TRUE)
+        return FALSE;
+
+    if (CheckBagHasItem(ITEM_POKEVIAL,1))
+        return FALSE;
+
+    return (GetNumberOfBadges() == 2);
+}
+
+void Script_ShouldPlayerGetGoldPotion(void)
+{
+    gSpecialVar_Result = ShouldPlayerGetGoldPotion();
+}
