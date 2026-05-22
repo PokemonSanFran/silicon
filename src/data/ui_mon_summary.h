@@ -296,6 +296,13 @@ static const struct OamData sSummaryPage_MonIconOam =
     .paletteNum = 0,
 };
 
+static const struct CompressedSpriteSheet sSummaryPage_TypeSpriteSheet =
+{
+    .data = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),
+    .size = TILE_OFFSET_4BPP(4 * NUMBER_OF_MON_TYPES),
+    .tag = TAG_SUMMARY_TYPES,
+};
+
 static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/tiles.4bpp.smol");
 static const u32 sMonSummary_MainTilemap[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/blank.bin");
 static const u16 sMonSummary_MainPalette[] = INCBIN_U16("graphics/ui_menus/mon_summary/pages/tiles.gbapal");
@@ -372,7 +379,7 @@ static const struct SpriteTemplate sInfosPageMisc_ScrollIndicatorSpriteTemplate 
 };
 
 // 11x9
-static const struct SpriteTemplate sStatsPageHeader_TypeSpriteTemplate =
+static const struct SpriteTemplate sSummarySprite_TypeIconTemplate =
 {
     .tileTag = TAG_SUMMARY_TYPES,
     .paletteTag = TAG_NONE,
@@ -408,13 +415,6 @@ static const struct SpriteTemplate sStatsPageHeader_TypeSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
-};
-
-static const struct CompressedSpriteSheet sStatsPageHeader_TypeSpriteSheet =
-{
-    .data = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),
-    .size = TILE_OFFSET_4BPP(4 * NUMBER_OF_MON_TYPES),
-    .tag = TAG_SUMMARY_TYPES,
 };
 
 static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =

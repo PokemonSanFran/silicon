@@ -121,6 +121,8 @@ enum MonSummaryInfosSprites
     SUMMARY_INFOS_SPRITE_POKE_BALL,
     SUMMARY_INFOS_SPRITE_DESC_CURSOR,       // for switching between ability and held item description for the textbox
     SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR,  // this is a seperate sprite from above to achieve smoother animation
+    SUMMARY_INFOS_SPRITE_TYPE_ICON_1,
+    SUMMARY_INFOS_SPRITE_TYPE_ICON_2,
 
     NUM_SUMMARY_INFOS_SPRITES
 };
