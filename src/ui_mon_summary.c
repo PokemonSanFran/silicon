@@ -201,6 +201,8 @@ static u32 StatsPageMisc_CalculateAvailableValues(void);
 static u32 StatsPageMisc_UpdateTotalValues(void);
 static u32 StatsPageMisc_GetTotalValuesType(void);
 static u32 StatsPageMisc_GetMaxValuesPerStat(void);
+static void StatsPageMisc_ProcessValuesChanges(u8);
+static bool32 StatsPageMisc_IsStatArrowsInvisible(struct Sprite *);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
 static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
 static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
@@ -797,12 +799,11 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     }
 }
 
-// basically a copy of the edit EV sub mode
 static void Task_SummaryMode_EditIVsInput(u8 taskId)
 {
     enum MonSummaryStatsSubModes subMode = SummaryInput_IsWithinSubMode();
 
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         switch (subMode)
         {
@@ -810,6 +811,31 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             StatsPageMisc_UpdateRow(-1);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_REPEAT(DPAD_DOWN))
+    {
+        switch (subMode)
+        {
+        default:
+            break;
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            StatsPageMisc_UpdateRow(1);
+            break;
+        }
+
+        return;
+    }
+
+    if (JOY_NEW(DPAD_UP) || JOY_HELD(DPAD_UP))
+    {
+        switch (subMode)
+        {
+        default:
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(1);
@@ -819,14 +845,11 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_HELD(DPAD_DOWN))
     {
         switch (subMode)
         {
         default:
-            break;
-        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
-            StatsPageMisc_UpdateRow(1);
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(-1);
@@ -844,6 +867,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MIN_VALUES);
+            PlaySE(SE_SELECT);
             break;
         }
 
@@ -858,13 +882,14 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MAX_VALUES);
+            PlaySE(SE_SELECT);
             break;
         }
 
         return;
     }
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_REPEAT(DPAD_LEFT))
     {
         switch (subMode)
         {
@@ -878,7 +903,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (JOY_REPEAT(DPAD_RIGHT))
     {
         switch (subMode)
         {
@@ -1013,7 +1038,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
 {
     u32 subMode = SummaryInput_IsWithinSubMode();
 
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         switch (subMode)
         {
@@ -1022,15 +1047,12 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             StatsPageMisc_UpdateRow(-1);
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowValues(1);
-            break;
         }
 
         return;
     }
 
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_REPEAT(DPAD_DOWN))
     {
         switch (subMode)
         {
@@ -1038,9 +1060,6 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             StatsPageMisc_UpdateRow(1);
-            break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowValues(-1);
             break;
         }
 
@@ -1053,8 +1072,9 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         {
         default:
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MIN_VALUES);
+            StatsPageMisc_ProcessValuesChanges(taskId);
             break;
         }
 
@@ -1067,36 +1087,37 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         {
         default:
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MAX_VALUES);
+            StatsPageMisc_ProcessValuesChanges(taskId);
             break;
         }
 
         return;
     }
 
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_LEFT) || JOY_HELD(DPAD_LEFT))
     {
         switch (subMode)
         {
         default:
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowValues(-10);
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            StatsPageMisc_UpdateCurrentRowValues(-1);
             break;
         }
 
         return;
     }
 
-    if (JOY_NEW(DPAD_RIGHT))
+    if (JOY_NEW(DPAD_RIGHT) || JOY_HELD(DPAD_RIGHT))
     {
         switch (subMode)
         {
         default:
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
-            StatsPageMisc_UpdateCurrentRowValues(10);
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            StatsPageMisc_UpdateCurrentRowValues(1);
             break;
         }
 
@@ -1114,7 +1135,7 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
         case SUMMARY_STATS_SUB_MODE_ERROR:
             SummaryInput_SetSubMode(sMonSummaryDataPtr->arg.stats.subMode);
             break;
-        case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
+        case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             return; // don't play the sound effect below
         }
 
@@ -1137,22 +1158,8 @@ static void Task_SummaryInput_StatsInput(u8 taskId)
             SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
-            if (StatsPageMisc_CalculateAvailableValues())
-            {
-                PlaySE(SE_BOO);
-                sMonSummaryDataPtr->arg.stats.subMode = subMode;
-                SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_ERROR);
-                SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-                return;
-            }
-
-            SummaryMon_CopyChanges();
-            SummaryMon_SetStruct();
-            SummaryInput_SetSubMode(FALSE);
-            sMonSummaryDataPtr->arg.value = 0;
-            SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
-            gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
-            break;
+            StatsPageMisc_ProcessValuesChanges(taskId);
+            return;
         }
 
         PlaySE(SE_SELECT);
@@ -2851,7 +2858,8 @@ static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
     SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
     SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(1)]);
 
-    if (availableValues != StatsPageMisc_CalculateAvailableValues())
+    if (availableValues != StatsPageMisc_CalculateAvailableValues()
+     && (delta == SUMMARY_STATS_MIN_VALUES || delta == SUMMARY_STATS_MAX_VALUES) != TRUE)
     {
         PlaySE(SE_SELECT);
     }
@@ -2899,6 +2907,44 @@ static u32 StatsPageMisc_GetMaxValuesPerStat(void)
     return MAX_PER_STAT_EVS;
 }
 
+static void StatsPageMisc_ProcessValuesChanges(u8 taskId)
+{
+    if (StatsPageMisc_CalculateAvailableValues())
+    {
+        PlaySE(SE_BOO);
+        sMonSummaryDataPtr->arg.stats.subMode = SummaryInput_IsWithinSubMode();
+        SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_ERROR);
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
+        return;
+    }
+
+    SummaryMon_CopyChanges();
+    SummaryMon_SetStruct();
+    SummaryInput_SetSubMode(FALSE);
+    sMonSummaryDataPtr->arg.value = 0;
+    SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
+    gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
+    PlaySE(SE_SELECT);
+}
+
+static bool32 StatsPageMisc_IsStatArrowsInvisible(struct Sprite *sprite)
+{
+    bool32 res = TRUE;
+
+    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_DEFAULT
+     && SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_SELECT_ROW)
+    {
+        res = FALSE;
+    }
+    else if (SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE)
+    {
+        res = FALSE;
+    }
+
+    sprite->invisible = res;
+    return res;
+}
+
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
 {
     u32 subMode = SummaryInput_IsWithinSubMode();
@@ -2912,6 +2958,11 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
         animId++;
         if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) animId++;
     }
+    else if (SummaryMode_GetValue() == UI_SUMMARY_MODE_DEFAULT
+         && subMode >= SUMMARY_STATS_SUB_MODE_SELECT_ROW)
+    {
+        animId = 1;
+    }
 
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
     StartSpriteAnimIfDifferent(sprite, animId);
@@ -2919,8 +2970,7 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
 
 static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
 {
-    bool32 notAdjustValue = SummaryInput_IsWithinSubMode() != SUMMARY_STATS_SUB_MODE_ADJUST_VALUE;
-    sprite->invisible = notAdjustValue;
+    bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
     sprite->invisible = !StatsPageMisc_CalculateAvailableValues();
@@ -2930,8 +2980,7 @@ static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
 
 static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
 {
-    bool32 notAdjustValue = SummaryInput_IsWithinSubMode() != SUMMARY_STATS_SUB_MODE_ADJUST_VALUE;
-    sprite->invisible = notAdjustValue;
+    bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
     sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
