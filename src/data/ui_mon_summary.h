@@ -520,7 +520,7 @@ static const struct {
 } sMovesPageMisc_OptionInfo[] =
 {
     {
-        .name = COMPOUND_STRING("Inspect"),
+        .name = COMPOUND_STRING("See Move"),
         .desc = COMPOUND_STRING("Check the details of this move.")
     },
     {
