@@ -2,7 +2,7 @@
   "id": "MAP_HODOU_CITY_GYM",
   "name": "HodouCity_Gym",
   "layout": "LAYOUT_HODOU_CITY_GYM",
-  "music": "MUS_RG_GYM",
+  "music": "MUS_MASTER_DOJO",
   "region_map_section": "MAPSEC_HODOU_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

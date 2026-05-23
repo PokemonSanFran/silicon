@@ -460,6 +460,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SHARPRISE_ENFORCER] = {_("SharpRise Enforcer") },
     [TRAINER_CLASS_CHARLOTTE] = {_("{PKMN} Trainer") },
     [TRAINER_CLASS_BAIYA] = {_("{PKMN} Trainer") },
+    [TRAINER_CLASS_FINALIST] = {_("Finalist") },
     [TRAINER_CLASS_ACE_TRAINER]         = {_("Ace Trainer") },
     [TRAINER_CLASS_ARRIBA_DRIVER]       = {_("Arriba Driver") },
     [TRAINER_CLASS_BACKPACKER]          = {_("Backpacker") },
@@ -4193,7 +4194,7 @@ void BattleTurnPassed(void)
     {
         if (gSideTimers[i].retaliateTimer > 0)
             gSideTimers[i].retaliateTimer--;
-    }    
+    }
 
     gFieldStatuses &= ~STATUS_FIELD_ION_DELUGE;
 

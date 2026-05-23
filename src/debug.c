@@ -4704,6 +4704,14 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_EARTHQUAKE) \
     X(MUS_VS_THE_TIDE) \
     X(MUS_HALAI_ISLAND_NIGHT) \
+    X(MUS_MERMEREZA_CITY_NIGHT) \
+    X(MUS_CAPHE_CITY) \
+    X(MUS_CHASILLA) \
+    X(MUS_MASTER_DOJO) \
+    X(MUS_VS_BAIYA) \
+    X(MUS_HALERBA_WILDS_LEAVERRA_FOREST_NIGHT) \
+    X(MUS_BALLER) \
+    X(MUS_DOGWALKER_GARDENER_BELLHOP_JANITOR) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \

@@ -80270,111 +80270,6 @@
               }
             ]
           },
-          "phenomenon_mons": {
-            "encounter_rate": 0,
-            "mons": [
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              },
-              {
-                "min_level": 67,
-                "max_level": 70,
-                "species": "SPECIES_LEAVANNY"
-              }
-            ]
-          },
           "fly_mons": {
             "encounter_rate": 1,
             "mons": [
@@ -80477,6 +80372,111 @@
                 "min_level": 83,
                 "max_level": 84,
                 "species": "SPECIES_NOIVERN"
+              }
+            ]
+          },
+          "phenomenon_mons": {
+            "encounter_rate": 0,
+            "mons": [
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
+              },
+              {
+                "min_level": 67,
+                "max_level": 70,
+                "species": "SPECIES_LEAVANNY"
               }
             ]
           }
