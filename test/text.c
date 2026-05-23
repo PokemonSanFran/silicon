@@ -26,7 +26,6 @@ TEST("Move names fit on Pokemon Summary Screen")
     {
         PARAMETRIZE_LABEL("%S", GetMoveName(i)) { move = i; }
     }
-    //DebugPrintf("Move %d: %S", GetStringWidth(fontId, GetMoveName(move), 0), GetMoveName(move));
     EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
 }
 
@@ -215,6 +214,7 @@ TEST("Item names fit on Pokemon Storage System")
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
         break;
     }
+    //DebugPrintf("Item num %d | string %d: %S", item,GetStringWidth(fontId, GetItemName(item), 0), GetItemName(item));
 }
 
 TEST("Item names fit on Pokemon Summary Screen")
@@ -237,6 +237,7 @@ TEST("Item names fit on Pokemon Summary Screen")
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
         break;
     }
+    //DebugPrintf("Item num %d | string %d: %S", item,GetStringWidth(fontId, GetItemName(item), 0), GetItemName(item));
 }
 
 TEST("Item names fit on Shop Screen")
@@ -248,6 +249,7 @@ TEST("Item names fit on Shop Screen")
     {
         PARAMETRIZE_LABEL("%S", gItemsInfo[i].name) { item = i; }
     }
+    //DebugPrintf("Item num %d | string %d: %S", item,GetStringWidth(fontId, GetItemName(item), 0), GetItemName(item));
     EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
 }
 
@@ -854,7 +856,7 @@ TEST("Battle strings fit on the battle message window")
     }
     EXPECT(gBattleStringsTable[battleStringId] != NULL);
     BattleStringExpandPlaceholders(gBattleStringsTable[battleStringId], battleString, BATTLE_STRING_BUFFER_SIZE);
-    DebugPrintf("Battle String ID %d: %S", battleStringId, battleString);
+    //DebugPrintf("Battle String ID %d: %S", battleStringId, battleString);
     for (j = 1;; j++)
     {
         strWidth = GetStringLineWidth(fontId, battleString, 0, j, BATTLE_STRING_BUFFER_SIZE);
