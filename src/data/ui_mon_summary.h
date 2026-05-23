@@ -525,7 +525,7 @@ static const struct {
     },
     {
         .name = COMPOUND_STRING("Learn Moves"),
-        .desc = COMPOUND_STRING("Replace this move with another move within the Pokémon's learnset.")
+        // desc at sMovesPageMisc_LearnTexts
     },
     {
         .name = COMPOUND_STRING("Reorder Moves"),
@@ -535,6 +535,12 @@ static const struct {
         .name = COMPOUND_STRING("Forget Move"),
         .desc = COMPOUND_STRING("Remove {STR_VAR_2} from {STR_VAR_1}'s moveset.")
     },
+};
+
+static const u8 *const sMovesPageMisc_LearnTexts[] =
+{
+    COMPOUND_STRING("Replace {STR_VAR_2} with another move that {STR_VAR_3} can learn."),
+    COMPOUND_STRING("Teach {STR_VAR_1} a new move."),
 };
 
 static const struct {

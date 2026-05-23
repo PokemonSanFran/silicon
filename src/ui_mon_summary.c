@@ -3255,6 +3255,7 @@ static void MovesPageMisc_PrintDescription(void)
     struct MonSummary *mon = SummaryMon_GetStruct();
 
     StringCopy_Nickname(gStringVar1, mon->nickname);
+    StringCopy_Nickname(gStringVar3, GetSpeciesName(mon->species));
 
     if (sMonSummaryDataPtr->arg.moves.forgottenMove)
         StringCopy(gStringVar2, GetMoveName(sMonSummaryDataPtr->arg.moves.forgottenMove));
@@ -3269,7 +3270,11 @@ static void MovesPageMisc_PrintDescription(void)
         str = GetMoveDescription(mon->moves[MovesPageMisc_GetSlotIndex()]);
         break;
     case SUMMARY_MOVES_SUB_MODE_OPTIONS:
-        str = sMovesPageMisc_OptionInfo[MovesPageMisc_GetOptionIndex()].desc;
+        u32 optIdx = MovesPageMisc_GetOptionIndex();
+        if (optIdx == SUMMARY_MOVES_OPTION_LEARN)
+            str = sMovesPageMisc_LearnTexts[mon->totalMoves < MAX_MON_MOVES];
+        else
+            str = sMovesPageMisc_OptionInfo[optIdx].desc;
         break;
     case SUMMARY_MOVES_SUB_MODE_REORDER:
         str = sMovesPageMisc_ReorderTexts[sMonSummaryDataPtr->arg.moves.reorderFail].desc;
