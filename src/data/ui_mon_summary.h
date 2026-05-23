@@ -268,7 +268,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MOVES_SUB_MODE_DETAILS]    = COMPOUND_STRING("{A_BUTTON} Explore Move {START_BUTTON} Learn Moves {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_OPTIONS]    = COMPOUND_STRING("{A_BUTTON} Choose {B_BUTTON} Cancel"),
             [SUMMARY_MOVES_SUB_MODE_REORDER]    = COMPOUND_STRING("{B_BUTTON} Cancel"),
-            [SUMMARY_MOVES_SUB_MODE_FORGET]     = COMPOUND_STRING(""),
+            [SUMMARY_MOVES_SUB_MODE_FORGET]     = COMPOUND_STRING("Press any button to continue."),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/moves.bin.smolTM"),
         .mainSpriteCoords =
@@ -559,25 +559,11 @@ static const struct {
     },
 };
 
-static const struct {
-    const u8 *desc, *help;
-} sMovesPageMisc_ForgetStateTexts[] =
+static const u8 *const sMovesPageMisc_ForgetStateDesc[] =
 {
-    [SUMMARY_MOVES_FORGET_STATE_CONFIRM] =
-    {
-        .desc = COMPOUND_STRING("{STR_VAR_1} will forget the move {STR_VAR_2}. Are you sure?"),
-        .help = COMPOUND_STRING("{A_BUTTON} Confirm {B_BUTTON} Cancel")
-    },
-    [SUMMARY_MOVES_FORGET_STATE_SUCCESS] =
-    {
-        .desc = COMPOUND_STRING("{STR_VAR_1} forgot {STR_VAR_2}!"),
-        .help = COMPOUND_STRING("Press any button to continue.")
-    },
-    [SUMMARY_MOVES_FORGET_STATE_FAILURE] =
-    {
-        .desc = COMPOUND_STRING("{STR_VAR_2} is the only move that {STR_VAR_1} knows. It can't be forgotten."),
-        .help = COMPOUND_STRING("Press any button to continue.")
-    }
+    [SUMMARY_MOVES_FORGET_STATE_NONE]    = gText_EmptyString2,
+    [SUMMARY_MOVES_FORGET_STATE_SUCCESS] = COMPOUND_STRING("{STR_VAR_1} forgot {STR_VAR_2}!"),
+    [SUMMARY_MOVES_FORGET_STATE_FAILURE] = COMPOUND_STRING("{STR_VAR_2} is the only move that {STR_VAR_1} knows. It can't be forgotten."),
 };
 
 static const u16 *const sMovesPageMisc_MenuTilemaps[] =
@@ -586,7 +572,7 @@ static const u16 *const sMovesPageMisc_MenuTilemaps[] =
     [SUMMARY_MOVES_SUB_MODE_DETAILS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_details.bin"),
     [SUMMARY_MOVES_SUB_MODE_OPTIONS] = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_options.bin"),
     [SUMMARY_MOVES_SUB_MODE_REORDER] = NULL,
-    [SUMMARY_MOVES_SUB_MODE_FORGET]  = (const u16[])INCBIN_U16("graphics/ui_menus/mon_summary/moves/menu_confirm.bin"),
+    [SUMMARY_MOVES_SUB_MODE_FORGET]  = NULL,
 };
 
 static const u8 sMovesPageMisc_ForgetConfirmationBlit[] = INCBIN_U8("graphics/ui_menus/mon_summary/moves/confirmation_box.4bpp");
