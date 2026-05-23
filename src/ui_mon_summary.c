@@ -656,8 +656,12 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
     if (!gPaletteFade.active && ++gTasks[taskId].tDelay >= 5)
     {
         CreateTask(Task_SummaryPrint_UpdateText, 10);
-        SummarySprite_PlayPokemonCry();
-        gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = FALSE;
+        if (!SummaryInput_IsWithinSubMode())
+        {
+            SummarySprite_PlayPokemonCry();
+            gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = FALSE;
+        }
+
         gTasks[taskId].tDelay = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
