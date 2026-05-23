@@ -1505,13 +1505,14 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("INSIGHT"));
     u32 insight = Dexnav_GetInsight();
     y = isScanMode ? 0 : (y - 3);
+    fontId = isScanMode ? fontId : FONT_DEXNAV_STAT_VALUE_LEFT;
     
     if (insight < DEXNAV_MAX_INSIGHT)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
     else
         StringCopy(gStringVar4,COMPOUND_STRING("MAX"));
 
-    x = isScanMode ? GetStringRightAlignXOffset(fontId,gStringVar4,DEXNAV_INSIGHT_HEADER_RIGHT_ALIGN_WIDTH) : 43;
+    x = isScanMode ? GetStringRightAlignXOffset(fontId,gStringVar4,DEXNAV_INSIGHT_HEADER_RIGHT_ALIGN_WIDTH) : 44;
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
@@ -1546,6 +1547,7 @@ static void Dexnav_PrintStreak(enum DexnavWindows windowId, bool32 isScanMode)
     u32 streak = Dexnav_GetStreak();
     x = isScanMode ? 184 : 44;
     y = isScanMode ? 0   : y - 2;
+    fontId = isScanMode ? fontId : FONT_DEXNAV_STAT_VALUE_LEFT;
 
     if (streak < DEXNAV_MAX_STREAK)
         ConvertIntToDecimalStringN(gStringVar4, streak, STR_CONV_MODE_LEFT_ALIGN, CountDigits(streak));
