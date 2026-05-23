@@ -533,7 +533,7 @@ static const struct {
     },
     {
         .name = COMPOUND_STRING("Forget Move"),
-        .desc = COMPOUND_STRING("Remove this move from the Pokémon's moveset.")
+        .desc = COMPOUND_STRING("Remove {STR_VAR_2} from {STR_VAR_1}'s moveset.")
     },
 };
 
