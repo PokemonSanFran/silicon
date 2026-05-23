@@ -1524,7 +1524,7 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
         },
-        .numOptions = 4,
+        .numOptions = BATTLE_OPTION_MULTIPLIER_COUNT,
     },
     [BATTLE_OPTIONS_EFFORT_VALUES] =
     {
