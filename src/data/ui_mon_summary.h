@@ -529,7 +529,7 @@ static const struct {
     },
     {
         .name = COMPOUND_STRING("Reorder Moves"),
-        .desc = COMPOUND_STRING("Swap this move with another move within this Pokémon's moveset.")
+        .desc = COMPOUND_STRING("Change the slot that {STR_VAR_1}'s {STR_VAR_2} is in."),
     },
     {
         .name = COMPOUND_STRING("Forget Move"),
@@ -543,8 +543,8 @@ static const struct {
 {
     [0] =
     {
-        .desc = COMPOUND_STRING("Swap with which move?"),
-        .help = COMPOUND_STRING("{A_BUTTON} Swap {B_BUTTON} Cancel"),
+        .desc = COMPOUND_STRING("Use {DPAD_UPDOWN} to move {STR_VAR_2} to the desired slot."),
+        .help = COMPOUND_STRING("{B_BUTTON} Cancel"),
     },
     [1] =
     {
