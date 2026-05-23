@@ -657,7 +657,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
     {
         CreateTask(Task_SummaryPrint_UpdateText, 10);
         SummarySprite_PlayPokemonCry();
-        gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = TRUE;
+        gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = FALSE;
         gTasks[taskId].tDelay = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
@@ -1748,7 +1748,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     SummaryPrint_HelpBar();
 
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
-    bool32 animate = FALSE;
+    bool32 animate = TRUE;
 
     switch (mode)
     {
@@ -1759,7 +1759,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         SummaryScreen_DestroyAnimDelayTask();
         SummaryMon_SetStruct();
         SummarySprite_PlayPokemonCry();
-        animate = TRUE;
+        animate = FALSE;
         break;
     case SUMMARY_RELOAD_PAGE:
         {
@@ -1975,6 +1975,9 @@ static void SummarySprite_CreateMonSprite(void)
 
     FreeSpriteOamMatrix(sprite);
     sprite->oam.priority = 0;
+    sprite->data[0] = SummaryMon_GetStruct()->species;
+    sprite->data[1] = 0;
+    sprite->data[2] = TRUE;
     if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
         sprite->callback = SpriteCB_SummarySprite_Mon;
     else
@@ -2180,10 +2183,10 @@ static u8 *SummarySprite_GetSpritePtr(void)
 
 static void SpriteCB_SummarySprite_Mon(struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && sprite->data[2] == TRUE)
+    if (!gPaletteFade.active && sprite->data[2] != TRUE)
     {
-        struct MonSummary *mon = SummaryMon_GetStruct();
-        PokemonSummaryDoMonAnimation(sprite, mon->species, mon->isEgg);
+        sprite->data[1] = IsMonSpriteNotFlipped(sprite->data[0]);
+        PokemonSummaryDoMonAnimation(sprite, sprite->data[0], FALSE);
     }
 }
 
