@@ -171,8 +171,6 @@ static void JumpPlayerTo_YouCantStopMe_Postbattle(bool32);
 static void JumpPlayerTo_WeCanStopYouActually(bool32);
 static void ClearGymTrainers(enum GymLeaderIndex);
 
-// PSF TODO When story jumping from Prolouge to main game, the player's RNG is not properly seeded. This is because StartTimer1 doesn't have anywhere to be initalized before seeding the Rng, because that is reliant on player input and there is none when using a debug menu.
-
 void JumpPlayerToStoryPoint(u32 chosenStoryPoint, bool32 jumpType)
 {
     switch (chosenStoryPoint)
@@ -753,6 +751,7 @@ void JumpPlayerTo_CatchTutorial(bool32 jumpType)
 
 void FlagsVarWarp_EnterFallkner()
 {
+    FlagSet(FLAG_VISITED_ROUTE6);
     FlagSet(FLAG_VISITED_MERMEREZA_CITY);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
@@ -1069,7 +1068,8 @@ void FlagsVarWarp_HousingProtest()
     FlagSet(FLAG_VISITED_OROLAND);
     VarSet(VAR_STORYLINE_STATE, STORY_DEFEAT_CHASILLA_PROTEST);
     VarSet(VAR_ROUTE99_STATE, DEFEATED_THE_TIDE_ROUTE99);
-    FlagSet(TRAINER_FLAGS_START + TRAINER_HOUSINGPROTEST_ROCKET);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_HOUSINGPROTEST_A);
+    FlagSet(TRAINER_FLAGS_START + TRAINER_HOUSINGPROTEST_B);
     SetWarpDestination(MAP_GROUP(MAP_ROUTE99),MAP_NUM(MAP_ROUTE99),WARP_ID_NONE,7,14);
 
 }
@@ -1845,9 +1845,7 @@ void JumpPlayerTo_RestoreZenzuIsland(bool32 jumpType)
 
 void FlagsVarWarp_RestoreEspuleeOutskirts()
 {
-    QuestMenu_GetSetQuestState(QUEST_RESTOREESPULEEGYM, FLAG_SET_UNLOCKED);
-    Quest_Generic_CompleteSubquests(QUEST_RESTOREESPULEEGYM);
-    QuestMenu_GetSetQuestState(QUEST_RESTOREESPULEEGYM, FLAG_SET_COMPLETED);
+    QuestMenu_SetupQuestState(QUEST_RESTOREESPULEEGYM,STATE_QUEST_RESTOREESPULEEGYM_COMPLETE);
     SetWarpDestination(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS),MAP_NUM(MAP_ESPULEE_OUTSKIRTS),WARP_ID_NONE,8,18);
 
 }

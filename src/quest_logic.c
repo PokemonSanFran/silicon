@@ -49,6 +49,7 @@
 #include "battle_util.h"
 #include "pokemon.h"
 #include "field_specials.h"
+#include "fly_encounter.h"
 #include "battle_scripts.h"
 #include "quests.h"
 #include "options_battle.h"
@@ -57,6 +58,16 @@
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+
+void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
+{
+    const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+    u32 species = mon.species;
+    u32 female = (mon.gender == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
+    u32 shiny = (mon.isShiny == TRUE) ? OBJ_EVENT_MON_SHINY: 0;
+    VarSet(var,(OBJ_EVENT_MON + species + female + shiny));
+}
 
 void DebugQuest_EvolveMon(u32 old, u32 species)
 {
@@ -559,16 +570,6 @@ static const u32 TOTEM_POKEMON_LIST[NUM_TOTEM_MON][9]=
     {MAP_ROUTE9, TOTEM_POKEMON_8, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
     {MAP_ROUTE9, TOTEM_POKEMON_9, ITEM_LEFTOVERS, 1, 4, 6, 2, 3, (FLAG_QUEST_ULTRAWORMHOLE_FIRST_TOTEM + 9)},
 };
-//PSF TODO need to make new totem formes
-//totem formes have larger heights and weights but don't follow any specific rule
-//shiny locked off
-//when bred, produces a normal species of that pokemon
-//always have one specific ability
-//spawn with three perfect IVs
-//Compared to their non-Totem counterparts, every Totem Pokémon's weight is increased less than appropriately to its height. If a Pokémon's density were to remain the same between its Totem and non-Totem variants, a Totem Pokémon twice the height should be eight times the weight.
-//Not a unique form in the pokedex
-//fixed natures and move sets and level
-//wild map, totem species, held item, totem atk, totem def, totem speed, totem spatk, totem spdef, totem flag
 
 static const u32 ULTRA_BEAST_LIST[QUEST_ULTRAWORMHOLERESEARCH_SUB_COUNT][9]=
 {
@@ -628,8 +629,6 @@ void Quest_Ultrawormholeresearch_SetTotemBoost(u8 type, u8 i) {
     for (j = 0; j < 5; j++) {
         *(&gSpecialVar_0x8001 + j) = boostList[j];
     }
-
-    //ScriptSetTotemBoost(); PSF TODO need to convert this back to C to be used here, or refactor how boosts are applied for the Wormhole Quests
 }
 
 void Quest_Ultrawormholeresearch_SetTotemBattle(void) {
@@ -1864,7 +1863,6 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
-//PSF TODO rewrite this to make a table of starters and VAR_CHOSEN_PSF_STARTER, and look at the types of that pokemon and randomly pick one
 u32 VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
     u32 type = Random() % 2;
@@ -2082,9 +2080,7 @@ bool32 CanMonMegaEvolve(u32 species)
 
 void WowYoureStrong_GetBadgesAndSetTowerState(void)
 {
-    GetNumberOfBadges();
-
-    if (gSpecialVar_Result != 3)
+    if (GetNumberOfBadges() != 3)
         return;
 
     VarSet(VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER);
@@ -2179,8 +2175,6 @@ void Quest_RPS_StopMoneyLoss(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
     else
         gBattleTypeFlags |= BATTLE_TYPE_FRONTIER;
-
-    //PSF TODO fix so that this random frontier trainer doesn't slide in
 }
 
 void DebugQuest_RPS(u8 state)
@@ -2327,7 +2321,6 @@ u32 GetScraftyHint(u32 speciesId)
 
     if (gSpeciesInfo[speciesId].eggGroups[0] != EGG_GROUP_DRAGON && gSpeciesInfo[speciesId].eggGroups[1] != EGG_GROUP_DRAGON)
         return VAR_CUTE_POKEMON_SCRAFTY_HINT_0;
-    //PSF TODO make sure acid spray is properly distributed when learnsets are done
     if (monCanLearn == CANNOT_LEARN_MOVE || monCanLearn == CANNOT_LEARN_MOVE)
         return VAR_CUTE_POKEMON_SCRAFTY_HINT_1;
     if (speciesId != SPECIES_SCRAFTY)
@@ -2568,7 +2561,6 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
         default:
         case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
             JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
-            // PSF TODO use quest debug for both of the following
             QuestMenu_ScriptSetComplete(QUEST_INVERSEHALLUCINOGENIC);
             QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
             break;
@@ -2700,7 +2692,6 @@ void ShowGarbodor(void)
 
     CopyMon(&daycare->viewMon,&mon,sizeof(struct Pokemon));
 
-    // PSF TODO change OT to be Baiya
     ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, &daycare->viewMon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -2932,6 +2923,134 @@ void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species)
 }
 
 // ***********************************************************************
+// Quest: Flight Patterns
+// ***********************************************************************
+
+static const u32 flyLookUpTable[QUEST_FLIGHTPATTERNS_SUB_COUNT][3]=
+{
+    [SUB_QUEST_1] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_NONE,
+    },
+    [SUB_QUEST_2] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+    },
+    [SUB_QUEST_3] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_2,
+    },
+    [SUB_QUEST_4] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_3,
+    },
+    [SUB_QUEST_5] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_4,
+    },
+    [SUB_QUEST_6] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_5,
+    },
+    [SUB_QUEST_7] =
+    {
+        MAPSEC_QUEST_FLIGHT_PATTERNS_7,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_1,
+        MAPSEC_QUEST_FLIGHT_PATTERNS_6,
+    },
+};
+
+u32 Quest_FlightPatterns_GetFlightPath(void)
+{
+    return (VarGet(VAR_FLIGHT_PATH));
+}
+
+void Quest_FlightPatterns_IncrementFlightPath(void)
+{
+    u32 oldVar = VarGet(VAR_FLIGHT_PATH);
+    VarSet(VAR_FLIGHT_PATH,oldVar+1);
+}
+
+void Quest_FlightPatterns_ClearFlightPath(void)
+{
+    VarSet(VAR_FLIGHT_PATH,0);
+}
+
+void Quest_FlightPatterns_SetFlightPath(u32 mapSecId)
+{
+    u32 currentLocation = gMapHeader.regionMapSectionId;
+    u32 nextLocation = mapSecId;
+    u32 locationIndex;
+
+    //DebugPrintf("currentLocation %d\n lastLocation %d\n",currentLocation,nextLocation);
+
+    for (locationIndex = 0; locationIndex < QUEST_FLIGHTPATTERNS_SUB_COUNT; locationIndex++)
+    {
+        if (currentLocation != flyLookUpTable[locationIndex][0])
+            continue;
+
+        if (nextLocation != flyLookUpTable[locationIndex][1])
+            continue;
+
+        if (flyLookUpTable[locationIndex][2] == MAPSEC_QUEST_FLIGHT_PATTERNS_NONE)
+            continue;
+
+        //DebugPrintf("locationIndex %d",locationIndex);
+        //DebugPrintf("flight apth%d",Quest_FlightPatterns_GetFlightPath());
+
+        if (locationIndex != Quest_FlightPatterns_GetFlightPath()+1)
+            continue;
+
+        //if (lastLocation != flyLookUpTable[locationIndex][2])
+            //continue;
+
+        Quest_FlightPatterns_IncrementFlightPath();
+        return;
+    }
+    Quest_FlightPatterns_ClearFlightPath();
+}
+
+bool32 Quest_FlightPatterns_OnLastLeg(void)
+{
+    return (Quest_FlightPatterns_GetFlightPath() == QUEST_FLIGHTPATTERNS_SUB_COUNT - 1);
+}
+
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32 steps, bool32 isLure)
+{
+    bool32 lastLeg = Quest_FlightPatterns_OnLastLeg();
+
+    if (!isLure && steps && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!isLure && steps)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    TrySkyBattle();
+    if (!gSpecialVar_Result && lastLeg)
+        return FLY_ENCOUNTER_QUEST_APPROACH_BOSS;
+
+    if (!gSpecialVar_Result)
+        return FLY_ENCOUNTER_QUEST_APPROACH;
+
+    if (lastLeg)
+        return FLY_ENCOUNTER_QUEST_BOSS;
+
+    return FLY_ENCOUNTER_QUEST_ATTACK;
+}
+
+// ***********************************************************************
 // Quest: Hodou Tunnels
 // ***********************************************************************
 
@@ -2996,7 +3115,6 @@ void DebugQuest_Hodoutunnels(u8 state)
             Quest_Hodoutunnels_SetVariable_TalkedToElder();
             break;
         case STATE_QUEST_HODOUTUNNELS_DISCOVERED_SCROLL:
-            // PSF TODO: replace with debug quest when this is done
             QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
             Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll();
             break;
@@ -3234,7 +3352,6 @@ void DebugQuest_Getthebandbacktogether(u8 state)
             break;
         case STATE_QUEST_GETTHEBANDBACKTOGETHER_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_GETTHEBANDBACKTOGETHER);
-            // PSF TODO Add flag for ACRO_BIKE once it is decided that the game will use the acro bike
             break;
     }
 }
@@ -3420,7 +3537,7 @@ void DebugQuest_Diggingupadaorasdirt(u8 state)
             break;
         case STATE_QUEST_DIGGINGUPADAORASDIRT_SPOKEN_KEIYING:
             JumpPlayerTo_Epilogue(JUMP_DEBUG);
-            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM); // PSF TODO replace with quest debug
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM);
             QuestMenu_GetSetSubquestState(QUEST_DIGGINGUPADAORASDIRT, FLAG_SET_COMPLETED, SUB_QUEST_4);
             VarSet(VAR_KEIYING_STATE,STATE_KEIYING_TALKED_IN_HODOU);
             Quest_Diggingupadaorasdirt_CountRemainingSubquestsTryProgressReward();
@@ -3658,6 +3775,22 @@ void DebugQuest_Findtheguilty(u8 state)
 // Cutscene: Earthquake
 // ***********************************************************************
 
+bool8 IsHalaiIslandUnderCrisis(void)
+{
+    if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
+        return FALSE;
+
+    if (VarGet(VAR_HALAI_ISLAND_STATE) >= MEET_AT_ROUTE4)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_IsHalaiIslandUnderCrisis(void)
+{
+    gSpecialVar_Result = IsHalaiIslandUnderCrisis();
+}
+
 bool8 IsHalaiIslandUnderConstruction(void)
 {
     if (VarGet(VAR_HALAI_ISLAND_STATE) < POST_EARTHQUAKE)
@@ -3667,7 +3800,6 @@ bool8 IsHalaiIslandUnderConstruction(void)
 
     return TRUE;
 }
-
 
 void Script_IsHalaiIslandUnderConstruction(void)
 {
@@ -3872,7 +4004,6 @@ static u32 GenerateAndGiveOddEgg(void)
     CalculateMonStats(&mon);
 
     SetMonData(&mon, MON_DATA_IS_SHINY, &oddEggCandidates[chosenIndex].isShiny);
-    // PSF TODO this is apparently broken but Jamie says he'll fix it in an upcoming expansion release, right now the shininess get re-rolled on hatch and Jamie agrees that this should be preserved if it is set here
 
     return GiveCapturedMonToPlayer(&mon);
 }
@@ -4104,6 +4235,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_A:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_A:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_START,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             break;
@@ -4112,24 +4244,28 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_B:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_A,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_C:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_C:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_B,1);
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_D:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_D:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_C,1);
             GenerateAndGiveOddEgg();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_E:
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_E:
             DebugQuest_ResstoreEspuleeOutskirtsGymRemoveOddEggIfFound();
             AddBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_TRADE_F:
             u16 evs[NUM_STATS] = {0,0,0,0,0,0};
@@ -4140,6 +4276,7 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
         case STATE_QUEST_RESTOREESPULEEGYM_AFTER_TRADE_F:
             RemoveBagItem(ITEM_QUEST_RESTOREESPULEEGYM_E,1);
             DebugQuest_ResstoreEspuleeOutskirtsGymEvolveStantlerIfFound();
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREESPULEEGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
             break;
         case STATE_QUEST_RESTOREESPULEEGYM_BEFORE_REWARD:
             break;
@@ -4155,3 +4292,260 @@ void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Restore Zenzu Gym
+// ***********************************************************************
+
+void Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREZENZUGYM);
+}
+
+void DebugQuest_RestoreZenzuIslandGym(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_RESTOREZENZUGYM);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_DOYLE_ZENZU_ISLAND);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_RPS:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_RPS:
+            QuestMenu_SetupQuestState(QUEST_RPS,STATE_QUEST_RPS_DICE_GIVEN);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_RPS:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_DRUGHELMET:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_DRUGHELMET:
+            QuestMenu_SetupQuestState(QUEST_DRUGHELMETTEST,STATE_QUEST_DRUGHELMETTEST_COMPLETED_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_DRUGHELMET:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING:
+            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_MINIARCADE:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_MINIARCADE:
+            QuestMenu_ScriptSetComplete(QUEST_BATTLEARCADEMINIQUEST);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_MINI_ARCADE_CHRIS);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_MINIARCADE:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_STRESSCUP:
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_STRESSCUP:
+            QuestMenu_SetupQuestState(QUEST_STRESSCUP,STATE_QUEST_STRESSCUP_COMPLETE_QUEST);
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_STRESSCUP:
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_REWARD:
+            Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREZENZUGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Restore Hodou Gym
+// ***********************************************************************
+
+bool8 Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    if (FlagGet(FLAG_TIMELINE_FALSE))
+        return FALSE;
+
+    if (VarGet(VAR_STORYLINE_STATE) <= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND)
+        return FALSE;
+
+    if (QuestMenu_GetSetQuestState(QUEST_RESTOREHODOUGYM,FLAG_GET_INACTIVE) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
+{
+    gSpecialVar_Result = Quest_RestoreHodouGym_CheckIfQuestShouldStart();
+}
+
+void Quest_Restorehodoucity_LoadZacPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0);
+}
+
+void Quest_Restorehodoucity_LoadKevinPokemon(void)
+{
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
+}
+
+void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_RESTOREHODOUGYM);
+}
+
+void DebugQuest_RestoreHodouCityGym(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_RESTOREHODOUGYM_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_STARTED_QUEST:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM);
+            QuestMenu_ScriptSetActive(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLE:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ZAC);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_KEVIN);
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_FINDING_JOHNNY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_FINDING_JOHNNY:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_HODOU_CITY_LEADER);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_1);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_ASKED_TO_FIND_BLACKBELTS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_ASKED_TO_FIND_BLACKBELTS:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ADAM:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ADAM:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_ADAM);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_2);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_ANDREAS:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_ANDREAS:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_ANDREAS);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUSTIN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUSTIN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JUSTIN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_4);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JEFFREY:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JEFFREY:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JEFFREY);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_5);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_DAJUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_DAJUAN:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_DAJUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_6);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JUAN:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JUAN:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_JUAN);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_7);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_BEFORE_BATTLED_JASON:
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_AFTER_BATTLED_JASON:
+            FlagSet(TRAINER_FLAGS_START +  TRAINER_JASON);
+            QuestMenu_GetSetSubquestState(QUEST_RESTOREHODOUGYM,FLAG_SET_COMPLETED,SUB_QUEST_8);
+            Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_REWARD:
+            VarSet(VAR_QUEST_RESTOREHODOUGYM,FOUND_ALL_BLACKBELTS);
+            QuestMenu_ScriptSetReward(QUEST_RESTOREHODOUGYM);
+            break;
+        case STATE_QUEST_RESTOREHODOUGYM_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_RESTOREHODOUGYM);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Cutscene: Housing Protest
+// ***********************************************************************
+
+void HousingProtest_BufferMostPowerfulAttackAndMove(void)
+{
+    enum Move move = MOVE_FLAMETHROWER;
+    u32 movePower = GetMovePower(MOVE_NONE), usedIndex = 0, species = SPECIES_ARCANINE, trainer = TRAINER_HOUSINGPROTEST_B;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        species = mon.species;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+            usedIndex = index;
+        }
+    }
+
+    VarSet(VAR_TEMP_0,species);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}
+
+// ***********************************************************************
+// Cutscene: Let's Grab Lunch
+// ***********************************************************************
+
+void LetsGrabLunch_IncrementStoryVariable(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) != STORY_BAIYA_EXPLAIN_RESTORATION)
+        return;
+
+    if (IsQuestCompletedState(QUEST_RESTOREZENZUGYM) || IsQuestCompletedState(QUEST_RESTOREESPULEEGYM) ||IsQuestCompletedState(QUEST_RESTOREHODOUGYM))
+        VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
+}
+

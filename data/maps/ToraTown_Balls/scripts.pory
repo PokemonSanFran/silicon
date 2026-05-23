@@ -1,4 +1,3 @@
-//PSF TODO implement buying stuff scripts
 const SILPH = 2
 
 mapscripts ToraTown_Balls_MapScripts {

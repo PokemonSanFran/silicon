@@ -25,7 +25,10 @@ script Quest_Restoreespuleeoutskirts_Script_StartQuest
     }
     msgbox(format("Hi! Imelda, right? I'm helping Kai with his project."),,SPEAKER_PLAYER)
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-    msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop! ... But - that doesn't matter right now."),,SPEAKER_IMELDA)
+    msgbox(format("The very same! Once the leader of the {STR_VAR_1} gym and owner of its most revered antique shop!"),,SPEAKER_IMELDA)
+    closemessage
+    reveal(REVEAL_IMELDA)
+    msgbox(format("But - that doesn't matter right now."),,SPEAKER_IMELDA)
     msgbox(format("I was quite serious about what I told Kai. I'm happy to help on the strict condition that there's a plan to return the Resido League to what it was before the SharpRise acquisition."),,SPEAKER_IMELDA)
     msgbox(format("Oh, uh - I think we wanted to improve the current system certainly -"),,SPEAKER_PLAYER)
     msgbox(format("Building on top of SharpRise's monstrosity won't be progress at all. A crude sort of bricolage without any of the grace."),,SPEAKER_IMELDA)
@@ -231,7 +234,6 @@ script Quest_Restoreespuleeoutskirts_Script_ImeldaReward
     closemessage
     trainerbattle_no_intro(TRAINER_IMELDA,format("Ha, this new generation may not be so bad after all."))
     goto(Quest_Restoreespuleeoutskirts_Dialogue_PostBattle)
-// PSF TODO Ahh, now it feels like the good old days…
 }
 
 script Quest_Restoreespuleeoutskirts_Dialogue_PostBattle
@@ -1075,7 +1077,6 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartE
     buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
     msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
     closemessage
-    // PSF TODO this has been broken in expansion but there is an update to fix it  soon, need
     //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
     //waitstate
     callnative(Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon) // remove this once tryspecialevo is fixed

@@ -528,6 +528,21 @@ const struct BattleEnvironment gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] 
         .camouflageType = TYPE_PSYCHIC,
         .camouflageBlend = DEFAULT_CAMOUFLAGE_BLEND,
     },
+    // Start flyEncounters
+    [BATTLE_ENVIRONMENT_SKY_BATTLE] =
+    {
+        .name = _("Skt"),
+        .naturePower = MOVE_AIR_SLASH,
+        .secretPowerAnimation = gBattleAnimMove_Gust,
+        .secretPowerEffect = MOVE_EFFECT_SPD_MINUS_1,
+        .camouflageType = TYPE_FLYING,
+        .camouflageBlend = DEFAULT_CAMOUFLAGE_BLEND,
+        .entry = ENVIRONMENT_ENTRY(Rayquaza),
+        .background = ENVIRONMENT_BACKGROUND(Rayquaza),
+        .palette = gBattleEnvironmentPalette_Rayquaza,
+        .battleIntroSlide = PLAIN_BATTLE_INTRO_SLIDE,
+    },
+    // End flyEncounters
 };
 
 static const struct {

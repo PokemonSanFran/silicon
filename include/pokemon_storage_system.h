@@ -74,5 +74,6 @@ void PurgeMonOrBoxMon(u8 boxId, u8 position); // siliconMerge
 void ChooseMonFromStorage();
 u32 CountPartyNonEggMons(void);
 void RemoveSelectedPcMon(struct Pokemon *mon);
+void EnterPokeStorageSurpriseTrade(void); // surpriseTrade
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

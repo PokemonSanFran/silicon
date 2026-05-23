@@ -62,6 +62,7 @@
 #include "phenomenon.h" // phenomenon
 #include "ui_dexnav.h" // dexnav
 #include "fishing.h"
+#include "field_effect.h" // flyEncounters
 
 enum TransitionType
 {
@@ -85,7 +86,7 @@ static void CB2_GiveStarter(void);
 static void CB2_StartFirstBattle(void);
 static void CB2_EndFirstBattle(void);
 static void SaveChangesToPlayerParty(void);
-static void HandleBattleVariantEndParty(void);
+//static void HandleBattleVariantEndParty(void) // flyEncounters
 static void CB2_EndTrainerBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 #if FREE_MATCH_CALL == FALSE
@@ -688,8 +689,21 @@ static void CB2_EndWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
+        HandleBattleVariantEndParty(); // flyEncounters
         SetMainCallback2(CB2_WhiteOut);
     }
+    // Start flyEncounters
+    // else if (FlagGet(B_FLAG_SKY_BATTLE))
+    else if (FlagGet(FLAG_POST_SKY_BATTLE) || FlagGet(B_FLAG_SKY_BATTLE))
+    {
+        HandleBattleVariantEndParty();
+        FlagClear(FLAG_POST_SKY_BATTLE);
+        IncrementFogVariable();
+        SetMainCallback2(CB2_LoadMap);
+        DowngradeBadPoison();
+        gFieldCallback = FieldCallback_FlyIntoMap;
+    }
+    // End flyEncounter
     else
     {
         IncrementFogVariable(); // fogBattle
@@ -743,6 +757,11 @@ enum BattleEnvironments BattleSetup_GetEnvironmentId(void)
 {
     u16 tileBehavior;
     s16 x, y;
+
+    // Start flyEncounters
+    if (FlagGet(B_FLAG_SKY_BATTLE))
+        return BATTLE_ENVIRONMENT_SKY_BATTLE;
+    // End flyEncounters
 
     if (ShouldUseFishingEnvironmentInBattle())
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -1448,15 +1467,23 @@ static void SaveChangesToPlayerParty(void)
     }
 }
 
-static void HandleBattleVariantEndParty(void)
+// Start flyEncounters
+//static void HandleBattleVariantEndParty(void)
+void HandleBattleVariantEndParty(void)
+// End flyEncounters
 {
     // Start littlecup
     ResetTemporaryLittleCupVar();
+
     //if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
     if (!FlagGet(B_FLAG_SKY_BATTLE) && !(IsCurrentBattleLittleCup()))
         return;
+
     if (FlagGet(B_FLAG_SKY_BATTLE))
+    { // flyEncounters
         SaveChangesToPlayerParty();
+        FlagSet(FLAG_POST_SKY_BATTLE); // flyEncounters
+    } // flyEncounters
 
     if (IsCurrentBattleLittleCup())
         SetTemporaryLittleCupVar();

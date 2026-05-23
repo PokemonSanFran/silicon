@@ -73,24 +73,24 @@ static void CropTrainerSpriteBottom(void);
 static void RestoreOBJLayerInWindow0(void);
 
 static u8 *sBgTilemapBuffer[BG_REVEAL_COUNT] = {NULL};
-static const u16 revealPalette[] = INCBIN_U16("graphics/reveal/palettes/reveal.gbapal");
-static const u8 revealAnim0[]  = INCBIN_U8("graphics/reveal/frame0.4bpp");
-static const u8 revealAnim1[]  = INCBIN_U8("graphics/reveal/frame1.4bpp");
-static const u8 revealAnim2[]  = INCBIN_U8("graphics/reveal/frame2.4bpp");
-static const u8 revealAnim3[]  = INCBIN_U8("graphics/reveal/frame3.4bpp");
-static const u8 revealAnim4[]  = INCBIN_U8("graphics/reveal/frame4.4bpp");
-static const u8 revealAnim5[]  = INCBIN_U8("graphics/reveal/frame5.4bpp");
-static const u8 revealAnim6[]  = INCBIN_U8("graphics/reveal/frame6.4bpp");
-static const u8 revealAnim7[]  = INCBIN_U8("graphics/reveal/frame7.4bpp");
-static const u8 revealAnim8[]  = INCBIN_U8("graphics/reveal/frame8.4bpp");
-static const u8 revealAnim9[]  = INCBIN_U8("graphics/reveal/frame9.4bpp");
-static const u8 revealAnim10[] = INCBIN_U8("graphics/reveal/frame10.4bpp");
-static const u8 revealAnim11[] = INCBIN_U8("graphics/reveal/frame11.4bpp");
-static const u8 revealAnim12[] = INCBIN_U8("graphics/reveal/frame12.4bpp");
-static const u8 revealAnim13[] = INCBIN_U8("graphics/reveal/frame13.4bpp");
+static const u16 revealPalette[] = INCGFX_U16("graphics/reveal/palettes/reveal.pal", ".gbapal");
+static const u8 revealAnim0[]  = INCGFX_U8("graphics/reveal/frame0.png", ".4bpp");
+static const u8 revealAnim1[]  = INCGFX_U8("graphics/reveal/frame1.png", ".4bpp");
+static const u8 revealAnim2[]  = INCGFX_U8("graphics/reveal/frame2.png", ".4bpp");
+static const u8 revealAnim3[]  = INCGFX_U8("graphics/reveal/frame3.png", ".4bpp");
+static const u8 revealAnim4[]  = INCGFX_U8("graphics/reveal/frame4.png", ".4bpp");
+static const u8 revealAnim5[]  = INCGFX_U8("graphics/reveal/frame5.png", ".4bpp");
+static const u8 revealAnim6[]  = INCGFX_U8("graphics/reveal/frame6.png", ".4bpp");
+static const u8 revealAnim7[]  = INCGFX_U8("graphics/reveal/frame7.png", ".4bpp");
+static const u8 revealAnim8[]  = INCGFX_U8("graphics/reveal/frame8.png", ".4bpp");
+static const u8 revealAnim9[]  = INCGFX_U8("graphics/reveal/frame9.png", ".4bpp");
+static const u8 revealAnim10[] = INCGFX_U8("graphics/reveal/frame10.png", ".4bpp");
+static const u8 revealAnim11[] = INCGFX_U8("graphics/reveal/frame11.png", ".4bpp");
+static const u8 revealAnim12[] = INCGFX_U8("graphics/reveal/frame12.png", ".4bpp");
+static const u8 revealAnim13[] = INCGFX_U8("graphics/reveal/frame13.png", ".4bpp");
 
-static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
-static const u32 glassTrainerBgTiles[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.4bpp.smol");
+static const u8 sVerified_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/verified.png", ".4bpp");
+static const u32 glassTrainerBgTiles[] = INCGFX_U32("graphics/ui_menus/glass/trainer/bg.png", ".4bpp.smol");
 static const u32 glassTrainerBgTilemap[] = INCBIN_U32("graphics/ui_menus/glass/trainer/bg.bin.smolTM");
 
 static const u8* const sRevealAnimationLUT[] =
@@ -317,7 +317,7 @@ const struct RevealCharacterStruct sRevealCharacters[REVEAL_COUNT] =
         .trainerId = TRAINER_EMRYS,
         .buzzrId = BUZZR_USER_EMRYS,
         .quote = COMPOUND_STRING("Perlacia Museum will be an institute for culture, history, and battles!"),
-        .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"), // PSF TODO I need another idea here help
+        .bio = COMPOUND_STRING("- It's so hard to understand what they're saying...\n- ???"),
         .accentColor = RGB(14,19,31),
     },
     [REVEAL_RAMESH] =

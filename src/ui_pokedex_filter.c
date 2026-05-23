@@ -358,11 +358,11 @@ static const struct WindowTemplate sSpeciesFilterMoveWindowTemplates[] =
 };
 
 bool8 filtersHaveChanged;
-static const u8 filterPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/filter_page_cursor_bmp.4bpp");
-static const u8 typeEditPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/type_edit_cursor_bmp.4bpp");
-static const u8 moveAbilityEditPageCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/moveability_edit_cursor_bmp.4bpp");
-static const u8 alphabetCursor[] = INCBIN_U8("graphics/pokedex/ui/species_list/alphabet_cursor_bmp.4bpp");
-static const u32 editPageFilterCheck[] = INCBIN_U32("graphics/pokedex/ui/filter/check.4bpp.smol");
+static const u8 filterPageCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/filter_page_cursor_bmp.png", ".4bpp");
+static const u8 typeEditPageCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/type_edit_cursor_bmp.png", ".4bpp");
+static const u8 moveAbilityEditPageCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/moveability_edit_cursor_bmp.png", ".4bpp");
+static const u8 alphabetCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/alphabet_cursor_bmp.png", ".4bpp");
+static const u32 editPageFilterCheck[] = INCGFX_U32("graphics/pokedex/ui/filter/check.png", ".4bpp.smol");
 static const u32 sTypes_Gfx13x13[] = INCBIN_U32("graphics/ui_menus/types/13x13/types.4bpp.smol");
 static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
 
@@ -3074,7 +3074,7 @@ static void SpeciesFilter_EditPage_LoadCheckSprite(void)
 
 static void SpeciesFilter_SetUp(u8 taskId)
 {
-    HideBg(BG2_POKEDEX_LIST_BG); //PSF TODO why does this bg get filled with garbage after SpeciesFilter_PrintFilterProperties
+    HideBg(BG2_POKEDEX_LIST_BG);
 
     LoadFilterTypeSpritesAndPalettes();
     SpeciesFilter_EditPage_LoadCheckSprite();

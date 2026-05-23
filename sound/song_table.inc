@@ -624,14 +624,28 @@ gSongTable::
 	song mus_cabbie_arriba, MUSIC_PLAYER_BGM, 0
 	song mus_fancy_person, MUSIC_PLAYER_BGM, 0
 	song mus_vs_game_director, MUSIC_PLAYER_BGM, 0
-	song mus_gym_halerba, MUSIC_PLAYER_BGM, 0
 	song mus_route6_night, MUSIC_PLAYER_BGM, 0
+	song mus_gym_halerba, MUSIC_PLAYER_BGM, 0
 	song mus_route_1_5_7_night, MUSIC_PLAYER_BGM, 0
 	song mus_pintillion_route_14_16, MUSIC_PLAYER_BGM, 0
 	song mus_warehouse_rave, MUSIC_PLAYER_BGM, 0
 	song mus_baker_cook_street_vendor_barista, MUSIC_PLAYER_BGM, 0
 	song mus_ramesh_house, MUSIC_PLAYER_BGM, 0
 	song mus_infielder, MUSIC_PLAYER_BGM, 0
+	song mus_irisna_town_gym, MUSIC_PLAYER_BGM, 0
+	song mus_earthquake, MUSIC_PLAYER_BGM, 0
+	song mus_vs_the_tide, MUSIC_PLAYER_BGM, 0
+	song mus_halai_island_night, MUSIC_PLAYER_BGM, 0
+	song mus_mermereza_city_night, MUSIC_PLAYER_BGM, 0
+	song mus_caphe_city, MUSIC_PLAYER_BGM, 0
+	song mus_chasilla, MUSIC_PLAYER_BGM, 0
+	song mus_master_dojo, MUSIC_PLAYER_BGM, 0
+	song mus_vs_baiya, MUSIC_PLAYER_BGM, 0
+	song mus_halerba_wilds_leaverra_forest_night, MUSIC_PLAYER_BGM, 0
+	song mus_baller, MUSIC_PLAYER_BGM, 0
+	song mus_dogwalker_gardener_bellhop_janitor, MUSIC_PLAYER_BGM, 0
+	song mus_tirabudin_place, MUSIC_PLAYER_BGM, 0
+	song mus_tirabudin_place_night, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

@@ -2768,7 +2768,6 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         {
              // Start siliconMerge
              /*
-            // PSF TODO Update this with flavor text depending on location
         case MAPSEC_RUSTBORO_CITY:
         case MAPSEC_PEWTER_CITY:
             multi = TYPE_ROCK;
@@ -3830,8 +3829,6 @@ void SetObjectEventDirection(struct ObjectEvent *objectEvent, enum Direction dir
 
 static const u8 *GetObjectEventScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    if (localId == OBJ_EVENT_ID_FOLLOWER)
-        return EventScript_Follower;
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->script;
 }
 

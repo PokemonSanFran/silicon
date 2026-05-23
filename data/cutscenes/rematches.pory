@@ -46,7 +46,6 @@ script Rematches_Script_AskEleanorBattle
 	msgbox(format("Let's see if I remember this...\pI'm Eleanor of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELEANOR)
 	closemessage
 	trainerbattle_no_intro(TRAINER_ELEANOR,format("{PLAYER}, your strength knows no bounds!"))
-	// PSF TODO create a cursed chain of if else statement to handle rematches
 	setflag(FLAG_DAILY_ELEANOR_REMATCH)
     goto(Rematches_Dialogue_EleanorComeBack)
 }
@@ -91,7 +90,6 @@ script Rematches_Dialogue_FirstKeiYingBattle
 {
     msgbox(format("The time is now, is it? Very well! This is how it should be, {PLAYER}! This is no longer Sharprise COO vs Sharprise Kickstart Applicant…No, this is the Hodou City Gym Leader VS the Resido Champion! Give me your best!"),,SPEAKER_KEIYING)
     closemessage
-// PSF TODO Player loss: We of Resido take pride in our Gyms for a reason. They’re no joke.
     call(Rematches_Script_BattleKeiYing)
     setvar(VAR_KEIYING_STATE,STATE_KEIYING_BATTLE_WON)
     msgbox(format("You did not disappoint."),,SPEAKER_KEIYING)

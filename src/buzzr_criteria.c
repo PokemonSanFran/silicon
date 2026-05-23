@@ -78,7 +78,6 @@ static bool32 TweetCriteria_HasTalkedReporter(void)
 
 static bool32 TweetCriteria_SocialMedia(void)
 {
-    // PSF TODO is the rate at which social media quests unlocked good? They are basically all unlocked as soon as the quest starts, flooding the timeline. is that okay?
     bool32 talkedReporter = TweetCriteria_HasTalkedReporter();
     bool32 hasSteps = TweetCriteria_CheckSteps(TWEET_SOCIAL_MEDIA_STEPS);
     return (talkedReporter && hasSteps);
@@ -315,3 +314,29 @@ void TweetCriteria_Quest_RestoreespuleegymComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREESPULEEGYM);
 }
+
+void TweetCriteria_Quest_RestorezenzugymActive(void)
+{
+    gSpecialVar_Result = IsQuestActiveState(QUEST_RESTOREZENZUGYM);
+}
+
+void TweetCriteria_Quest_RestorezenzugymComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREZENZUGYM);
+}
+
+void TweetCriteria_Quest_RestorehodoucityFoundLeader(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_QUEST_RESTOREHODOUGYM) >= FOUND_HODOU_CITY_LEADER);
+}
+
+void TweetCriteria_Quest_RestorehodoucityAssigned(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND);
+}
+
+void TweetCriteria_Quest_RestorehodoucityComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREHODOUGYM);
+}
+

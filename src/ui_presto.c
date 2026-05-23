@@ -109,56 +109,56 @@ static void SpriteCB_RightArrow(struct Sprite *);
 static void SpriteCB_UpArrowSmall(struct Sprite *);
 static void SpriteCB_DownArrowSmall(struct Sprite *);
 
-static const u8 sOrderWindow[]         = INCBIN_U8("graphics/ui_menus/presto/orderwindow.4bpp");
-static const u8 sItemSelector[]        = INCBIN_U8("graphics/ui_menus/presto/item_selector.4bpp");
+static const u8 sOrderWindow[]         = INCGFX_U8("graphics/ui_menus/presto/orderwindow.png", ".4bpp");
+static const u8 sItemSelector[]        = INCGFX_U8("graphics/ui_menus/presto/item_selector.png", ".4bpp");
 
 static const struct ShopSpriteConfigs sPrestoShopSprites[] =
 {
     [SHOP_SPRITE_BUY_ICON] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/buyicon.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/buyicon.png", ".4bpp.smol"),
         .x = (TILE_TO_PIXELS(4) + 1) + 16,
         .y = (TILE_TO_PIXELS(3) - 1) + 16,
         .callback = SpriteCB_BuyIcon,
     },
     [SHOP_SPRITE_UP_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_up.png", ".4bpp.smol"),
         .x = SHOP_UP_ARROW_X,
         .y = SHOP_UP_ARROW_Y,
         .callback = SpriteCB_UpArrow,
     },
     [SHOP_SPRITE_DOWN_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_down.png", ".4bpp.smol"),
         .x = SHOP_DOWN_ARROW_X,
         .y = SHOP_DOWN_ARROW_Y,
         .callback = SpriteCB_DownArrow,
     },
     [SHOP_SPRITE_LEFT_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_left.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_left.png", ".4bpp.smol"),
         .x = SHOP_LEFT_ARROW_X,
         .y = SHOP_LEFT_ARROW_Y,
         .callback = SpriteCB_LeftArrow,
     },
     [SHOP_SPRITE_RIGHT_ARROW] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_right.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_right.png", ".4bpp.smol"),
         .x = SHOP_RIGHT_ARROW_X,
         .y = SHOP_RIGHT_ARROW_Y,
         .callback = SpriteCB_RightArrow,
     },
     [SHOP_SPRITE_UP_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_up_small.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_up_small.png", ".4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(11) + 2) + 4,
         .callback = SpriteCB_UpArrowSmall,
     },
     [SHOP_SPRITE_DOWN_ARROW_SMALL] =
     {
-        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/presto/arrow_down_small.4bpp.smol"),
+        .gfx = (const u32[])INCGFX_U32("graphics/ui_menus/presto/arrow_down_small.png", ".4bpp.smol"),
         .x = TILE_TO_PIXELS(12) + 8,
         .y = (TILE_TO_PIXELS(13) + 6) + 4,
         .callback = SpriteCB_DownArrowSmall,
@@ -168,11 +168,11 @@ static const struct ShopSpriteConfigs sPrestoShopSprites[] =
 static const struct ShopMenuConfigs sPrestoShopConfigs =
 {
     .sprites = sPrestoShopSprites,
-    .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tiles.4bpp.smol"),
+    .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/presto/tiles.png", ".4bpp.smol"),
     .map = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap.bin.smolTM"),
     .mapBuy = (const u32[])INCBIN_U32("graphics/ui_menus/presto/tilemap_buy.bin.smolTM"),
-    .palette = (const u16[])INCBIN_U16("graphics/ui_menus/presto/palette.gbapal"),
-    .categoryBlit = (const u8[])INCBIN_U8("graphics/ui_menus/presto/categories.4bpp"),
+    .palette = (const u16[])INCGFX_U16("graphics/ui_menus/presto/palette.pal", ".gbapal"),
+    .categoryBlit = (const u8[])INCGFX_U8("graphics/ui_menus/presto/categories.png", ".4bpp"),
     .fontColors = (const u8[][3]){
         [SHOP_FNTCLR_PRIMARY]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY,   TEXT_COLOR_TRANSPARENT},
         [SHOP_FNTCLR_SECONDARY]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
@@ -217,7 +217,6 @@ static const u8 *const sText_PurchaseCodeErrors[] =
 {
     [SHOP_CODE_SUCCESS]          = gText_EmptyString2,
     [SHOP_CODE_NOT_ENOUGH_MONEY] = COMPOUND_STRING("Your account has been declined for insufficient funds!"),
-    // PSF TODO create better error text
     [SHOP_CODE_NOT_ENOUGH_SPACE] = COMPOUND_STRING("Your account has been declined for insufficient item space!"),
 };
 

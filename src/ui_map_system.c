@@ -51,6 +51,7 @@
 #include "quest_logic.h"
 #include "heal_location.h"
 #include "map_preview_screen.h"
+#include "qol_field_moves.h"
 
 /*
 
@@ -124,6 +125,7 @@ struct SFRegionMap // Second Struct Mirroring the Region Map, Can Be Combined wi
     u8 waypointSpriteId;
     u8 waypointSpriteInL2Id;
     u16 currentTrolley;
+    bool8 canUseFastTravel;
 };
 
 enum CursorState {
@@ -173,6 +175,8 @@ static void UpdateCursorPositionOnAnimChange();
 static void ResetCursorPositionBeforeAnimChange();
 
 static void InitMapBasedOnPlayerLocation(void);
+static bool8 IsCurrentMapMode_Flying(u32 mapMode);
+static bool8 IsCurrentMapMode_FlyPokemon(u32 mapMode);
 static u8 *GetSFMapName(u8 *dest, u16 regionMapId, u16 padLength);
 static u8 GetMapsecTypeHasVisited(u16 mapSecId);
 static u16 GetMapSecIdAt(u16 x, u16 y);
@@ -206,6 +210,7 @@ static void CreateL2WaypointSprite(void);
 static void DestroyJustL2WaypointSprite(void);
 
 static u8 HandleWarpFailedNoCash(void);
+static u8 HandleWarpFailedInside(void);
 static u8 HandleAttemptWarpInput(void);
 u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId);
 static u8 HandleWarpConfirmInput(void);
@@ -337,58 +342,58 @@ static const u8 sMenuWindowFontColors[][3] =
 //
 //  Graphics Pointers for RegionMap Geography, Roads, L2 Window, Sprites, Palettes, Etc
 //
-static const u32 sRegionGeographyTiles[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tiles.4bpp.smol");
+static const u32 sRegionGeographyTiles[] = INCGFX_U32("graphics/ui_menus/map_system/geography_tiles.png", ".4bpp.smol");
 static const u32 sRegionGeographyTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/geography_tilemap.bin.smolTM");
-static const u16 sRegionGeographyPalette[] = INCBIN_U16("graphics/ui_menus/map_system/geography.gbapal");
+static const u16 sRegionGeographyPalette[] = INCGFX_U16("graphics/ui_menus/map_system/geography.pal", ".gbapal");
 
-static const u32 sRegionTrolleyBackgroundTiles[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.4bpp.smol");
+static const u32 sRegionTrolleyBackgroundTiles[] = INCGFX_U32("graphics/ui_menus/map_system/trolley_tiles.png", ".4bpp.smol");
 static const u32 sRegionTrolleyBackgroundTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_tiles.bin.smolTM");
-static const u16 sRegionTrolleyBackgroundPalette[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_tiles.gbapal");
+static const u16 sRegionTrolleyBackgroundPalette[] = INCGFX_U16("graphics/ui_menus/map_system/trolley_tiles.png", ".gbapal");
 
-static const u32 sRouteTiles[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.4bpp.smol");
+static const u32 sRouteTiles[] = INCGFX_U32("graphics/ui_menus/map_system/route_tiles.png", ".4bpp.smol");
 static const u32 sRouteTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/route_tiles.bin.smolTM");
-static const u16 sRoutePalette[] = INCBIN_U16("graphics/ui_menus/map_system/route_tiles.gbapal");
+static const u16 sRoutePalette[] = INCGFX_U16("graphics/ui_menus/map_system/route_tiles.pal", ".gbapal");
 
-static const u32 sTrolleyRailTiles[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.4bpp.smol");
+static const u32 sTrolleyRailTiles[] = INCGFX_U32("graphics/ui_menus/map_system/rail_tiles.png", ".4bpp.smol");
 static const u32 sTrolleyRailTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/rail_tiles.bin.smolTM");
-static const u16 sTrolleyRailPalette[] = INCBIN_U16("graphics/ui_menus/map_system/rail_tiles.gbapal");
+static const u16 sTrolleyRailPalette[] = INCGFX_U16("graphics/ui_menus/map_system/rail_tiles.png", ".gbapal");
 
-static const u32 sL2WindowTiles[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tiles.4bpp.smol");
+static const u32 sL2WindowTiles[] = INCGFX_U32("graphics/ui_menus/map_system/l2_window_tiles.png", ".4bpp.smol");
 static const u32 sL2WindowTilemap[] = INCBIN_U32("graphics/ui_menus/map_system/l2_window_tilemap.bin.smolTM");
-static const u16 sL2WindowPalette[] = INCBIN_U16("graphics/ui_menus/map_system/l2_window_tiles.gbapal");
+static const u16 sL2WindowPalette[] = INCGFX_U16("graphics/ui_menus/map_system/l2_window_tiles.pal", ".gbapal");
 
-static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/ui_menus/map_system/cursor_small.gbapal");
-static const u32 sRegionMapCursorSmallGfx[] = INCBIN_U32("graphics/ui_menus/map_system/cursor_small.4bpp");
+static const u16 sRegionMapCursorPal[] = INCGFX_U16("graphics/ui_menus/map_system/cursor_small.pal", ".gbapal");
+static const u32 sRegionMapCursorSmallGfx[] = INCGFX_U32("graphics/ui_menus/map_system/cursor_small.png", ".4bpp");
 
-static const u16 sRegionMapCursorTooltipPal[] = INCBIN_U16("graphics/ui_menus/map_system/L2_cursor_test.gbapal");
-static const u32 sRegionMapCursorTooltipGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_test.4bpp");
-static const u32 sRegionMapCursorTooltipTaxiGfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_taxi.4bpp");
-static const u32 sRegionMapCursorTooltipFlyGfx[] = INCBIN_U32("graphics/ui_menus/map_system/Fly_icon.4bpp");
-static const u32 sRegionMapCursorTooltipError1Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_1.4bpp");
-static const u32 sRegionMapCursorTooltipError2Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/L2_cursor_error_2.4bpp");
+static const u16 sRegionMapCursorTooltipPal[] = INCGFX_U16("graphics/ui_menus/map_system/L2_cursor_test.png", ".gbapal");
+static const u32 sRegionMapCursorTooltipGfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_test.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipTaxiGfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_taxi.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipFlyGfx[] = INCGFX_U32("graphics/ui_menus/map_system/Fly_icon.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipError1Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_error_1.png", ".4bpp");
+static const u32 sRegionMapCursorTooltipError2Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/L2_cursor_error_2.png", ".4bpp");
 
-static const u8 sA_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/a_button.4bpp");
-static const u8 sB_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/b_button.4bpp");
-static const u8 sSelect_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/select_button.4bpp");
-static const u8 sStart_ButtonGfx[]         = INCBIN_U8("graphics/ui_menus/map_system/start_button.4bpp");
+static const u8 sA_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/a_button.png", ".4bpp");
+static const u8 sB_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/b_button.png", ".4bpp");
+static const u8 sSelect_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/select_button.png", ".4bpp");
+static const u8 sStart_ButtonGfx[]         = INCGFX_U8("graphics/ui_menus/map_system/start_button.png", ".4bpp");
 
-static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
-static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
 
-static const u32 sGrayPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/gray_poi_sprites.4bpp");
-static const u16 sGrayPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/gray_poi_sprites.gbapal");
+static const u32 sGrayPOI_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/gray_poi_sprites.png", ".4bpp");
+static const u16 sGrayPOI_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/gray_poi_sprites.pal", ".gbapal");
 
-static const u32 sTrolleyPOI_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/trolley_location_icon.4bpp");
-static const u16 sTrolleyPOI_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/trolley_location_icon.gbapal");
+static const u32 sTrolleyPOI_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/trolley_location_icon.png", ".4bpp");
+static const u16 sTrolleyPOI_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/trolley_location_icon.png", ".gbapal");
 
-static const u32 sWayPoint_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/waypoint_icon.4bpp");
-static const u16 sWayPoint_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/waypoint_icon.gbapal");
+static const u32 sWayPoint_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/waypoint_icon.png", ".4bpp");
+static const u16 sWayPoint_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/waypoint_icon.pal", ".gbapal");
 
-static const u32 sOwWaypointArrow_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.4bpp");
-static const u16 sOwWaypointArrow_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/ow_waypoint_arrow.gbapal");
+static const u32 sOwWaypointArrow_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/ow_waypoint_arrow.png", ".4bpp");
+static const u16 sOwWaypointArrow_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/ow_waypoint_arrow.pal", ".gbapal");
 
-static const u32 sL2Selector_Gfx[] = INCBIN_U32("graphics/ui_menus/map_system/Selector.4bpp");
-static const u16 sL2Selector_Pal[] = INCBIN_U16("graphics/ui_menus/map_system/Selector.gbapal");
+static const u32 sL2Selector_Gfx[] = INCGFX_U32("graphics/ui_menus/map_system/Selector.png", ".4bpp");
+static const u16 sL2Selector_Pal[] = INCGFX_U16("graphics/ui_menus/map_system/Selector.png", ".gbapal");
 
 //
 //  Sprite Data for Cursors and Player Icon
@@ -1327,48 +1332,40 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
     {
         sCurrentMapMode = MAP_MODE_TROLLEY;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToFieldContinueScript);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript,TRUE);
         DestroyTask(taskId);
     }
 }
 
-void Task_OpenFlyMapSystemFromPartyMenu(u8 taskId)
+static bool8 MapSystem_DoesCurrentMapAllowFastTravel(void)
 {
-    //s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
-    {
-        sCurrentMapMode = MAP_MODE_FLY;
-        CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_StartMenu_ReturnToUI);
-        DestroyTask(taskId);
-    }
+    enum StartMenuCellularSignals signal = CellularSignal_GetCurrentStrength();
+    return (signal == START_SIGNAL_STRONG);
 }
 
-void CB2_OpenFlyMapSystem(MainCallback callback)
+void CB2_OpenFlyMapSystem(MainCallback callback, enum MapModes mode)
 {
     if (!gPaletteFade.active)
     {
-        sCurrentMapMode = MAP_MODE_FLY;
+        sCurrentMapMode = mode,
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(callback);
+        MapSystem_Init(callback,MapSystem_DoesCurrentMapAllowFastTravel());
     }
 }
 
 void CB2_OpenFlyMapSystemReturnToPartyMenu(void)
 {
-    CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap);
+    CB2_OpenFlyMapSystem(CB2_ReturnToPartyMenuFromFlyMap,MAP_MODE_FLY_POKEMON);
 }
-
-#include "qol_field_moves.h"
 
 void CB2_OpenFlyMapSystemReturnToBag(void)
 {
-    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool,MAP_MODE_FLY_TOOL_BAG);
 }
 
 void CB2_OpenFlyMapSystemReturnToField(void)
 {
-    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool);
+    CB2_OpenFlyMapSystem(ReturnToFieldOrBagFromFlyTool,MAP_MODE_FLY_TOOL_FIELD);
 }
 
 void Script_OpenTaxi(void)
@@ -1379,12 +1376,11 @@ void Script_OpenTaxi(void)
 
 void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 {
-    //s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
         sCurrentMapMode = MAP_MODE_TAXI;
         CleanupOverworldWindowsAndTilemaps();
-        MapSystem_Init(CB2_ReturnToFieldContinueScript);
+        MapSystem_Init(CB2_ReturnToFieldContinueScript,MapSystem_DoesCurrentMapAllowFastTravel());
         DestroyTask(taskId);
     }
 }
@@ -1392,11 +1388,11 @@ void Task_OpenTaxiMapSystemFromScript(u8 taskId)
 void CB2_MapSystemFromStartMenu(void)
 {
     sCurrentMapMode = MAP_MODE_DEFAULT;
-    MapSystem_Init(CB2_StartMenu_ReturnToUI);
+    MapSystem_Init(CB2_StartMenu_ReturnToUI, MapSystem_DoesCurrentMapAllowFastTravel());
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
-void MapSystem_Init(MainCallback callback)
+void MapSystem_Init(MainCallback callback, bool32 canUseFastTravel)
 {
     if ((sRegionMap = AllocZeroed(sizeof(struct SFRegionMap))) == NULL)
     {
@@ -1405,6 +1401,7 @@ void MapSystem_Init(MainCallback callback)
     }
 
     sRegionMap->savedCallback = callback;
+    sRegionMap->canUseFastTravel = canUseFastTravel;
 
     InitSFRegionMapData();
 
@@ -1450,8 +1447,8 @@ static void Task_MapSystemWaitFadeAndBail(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        MapSystem_FreeResources();
         SetMainCallback2(sRegionMap->savedCallback);
+        MapSystem_FreeResources();
         DestroyTask(taskId);
     }
 }
@@ -1785,7 +1782,9 @@ static void PrintWarpPriceOnTooltip_AllFrames(void)
             PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (2 * 0x800) + (26 * TILE_SIZE_4BPP));
             PrintWarpPriceOnTooltip(2, (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP) + (3 * 0x800) + (26 * TILE_SIZE_4BPP));
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             break;
     }
 }
@@ -1833,7 +1832,9 @@ void CreateSFRegionMapCursor(u16 tileTag, u16 paletteTag) // Loads spritesheets 
         case MAP_MODE_TAXI:
             LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipTaxiGfx);
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             LoadSpriteSheet(&sSpriteSheet_RegionMapCursorTooltipFlyGfx);
             break;
         default:
@@ -2653,7 +2654,11 @@ static void PrintHeaderTitleToWindow()
     {
         case MAP_MODE_DEFAULT:
             {
-                if(CheckIfHoverLocationIsMapSecNone())
+            if ((sRegionMap->warpCounter == WARP_FAILED_PAUSE_START) && (sRegionMap->canUseFastTravel) == FALSE)
+            {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You can't use Arriba indoors!"));
+            }
+            else if(CheckIfHoverLocationIsMapSecNone())
                 {
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an Arriba destination."));
                 }
@@ -2668,7 +2673,7 @@ static void PrintHeaderTitleToWindow()
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 else
-            {
+                {
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet."));
                 }
                 break;
@@ -2717,7 +2722,9 @@ static void PrintHeaderTitleToWindow()
                 }
                 break;
             }
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             {
                 if(CheckIfHoverLocationIsMapSecNone())
                 {
@@ -2800,7 +2807,7 @@ static void PrintHeaderWarpConfirmToWindow(void)
 
     StringAppend(gStringVar1, sText_QuestionMark);
 
-    if (sCurrentMapMode == MAP_MODE_FLY)
+    if (IsCurrentMapMode_Flying(sCurrentMapMode))
         return;
 
     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar1);
@@ -3266,7 +3273,6 @@ static u16 fareTable[MAP_MODE_COUNT][FARE_TYPE_COUNT] =
     [MAP_MODE_ARRIBA] = {FARE_BASE_ARRIBA, FARE_DISTANCE_ARRIBA},
     [MAP_MODE_TAXI] = {FARE_BASE_TAXI, FARE_DISTANCE_TAXI},
     [MAP_MODE_TROLLEY] = {FARE_BASE_TROLLEY, FARE_DISTANCE_TROLLEY},
-    [MAP_MODE_FLY] = {FARE_BASE_FLY, FARE_DISTANCE_FLY},
 };
 
 static u32 CalculateDistance(u32 nextLocation)
@@ -3290,6 +3296,9 @@ u32 GetWarpPriceAtMapSecByMapType(u16 mapSecId)
         if (!GetMenuL2State() || (!index))
             return 0;
     }
+
+    if (IsCurrentMapMode_Flying(type))
+        return 0;
 
     if (IsCurrentIndexLastInL2List(index) && GetMenuL2State())
         return 0;
@@ -3562,7 +3571,14 @@ static u8 HandleAttemptWarpInput(void)
 
         //DebugPrintf("Quest Exception: %d", questException);
 
-        if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
+        if (IsCurrentMapMode_Flying(sCurrentMapMode))
+        {
+            sRegionMap->warpCounter = 0;
+            Quest_FlightPatterns_SetFlightPath(sRegionMap->mapSecId);
+            PlaySE(SE_SELECT);
+            sRegionMap->inputCallback = HandleWarpCloseMenu;
+        }
+        else if ((warpPrice == 0) && PASSES_QUEST_EXCEPTION)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
@@ -3578,6 +3594,11 @@ static u8 HandleAttemptWarpInput(void)
         else if((warpPrice > GetMoney(&gSaveBlock1Ptr->money)) && !QUEST_EXCEPTION_NO_PAY)
         {
             sRegionMap->inputCallback = HandleWarpFailedNoCash;
+            sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
+        }
+        else if(sRegionMap->canUseFastTravel == FALSE)
+        {
+            sRegionMap->inputCallback = HandleWarpFailedInside;
             sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
         }
         else
@@ -3729,11 +3750,18 @@ static u8 HandleWarpCloseMenu(void)
         case 1:
             if (!gPaletteFade.active)
             {
-                MapSystem_FreeResources();
-                if(PlayerHasFollowerNPC())
-                    ClearFollowerNPCData();
-                ReturnToFieldFromRegionMapWarpSelect();
-                sRegionMap->warpCounter = 2;
+                if (sCurrentMapMode == MAP_MODE_FLY_POKEMON)
+                    ReturnToFieldFromFlyMapSelect();
+                else
+                {
+                    if (PlayerHasFollowerNPC())
+                        ClearFollowerNPCData();
+
+                    ReturnToFieldFromRegionMapWarpSelect();
+
+                    MapSystem_FreeResources();
+                    sRegionMap->warpCounter = 2;
+                }
             }
             break;
     }
@@ -3756,7 +3784,9 @@ static void SwapBackCursorGraphics()
         case MAP_MODE_TAXI:
             CpuCopy32(sRegionMapCursorTooltipTaxiGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
-        case MAP_MODE_FLY:
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
             CpuCopy32(sRegionMapCursorTooltipFlyGfx, (void *)(OBJ_VRAM0) + (sRegionMap->cursorSpriteLOC->sheetTileStart * TILE_SIZE_4BPP), 64 * 4 * TILE_SIZE_4BPP);
             break;
         default:
@@ -3767,6 +3797,43 @@ static void SwapBackCursorGraphics()
     PrintWarpPriceOnTooltip_AllFrames();
 }
 
+static u8 HandleWarpFailedInside(void)
+{
+    switch(sRegionMap->warpCounter)
+    {
+        case WARP_FAILED_PAUSE_START:
+            PlaySE(SE_BOO);
+            PrintHeaderTitleToWindow();
+            SwapFailedCursorGraphics();
+            sRegionMap->warpCounter--;
+            break;
+        case WARP_FAILED_PAUSE_END:
+            SwapBackCursorGraphics();
+            if(GetMenuL2State())
+                sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
+            else
+                sRegionMap->inputCallback = ProcessRegionMapInput_Full;
+            GetSFMapName(sRegionMap->mapSecName, sRegionMap->mapSecId, MAP_NAME_LENGTH);
+            PrintHeaderTitleToWindow();
+            return MAP_INPUT_NONE;
+        default:
+            sRegionMap->warpCounter--;
+            break;
+    }
+
+    switch (sRegionMap->warpCounter % 8)
+    {
+        case 0:
+            sRegionMap->cursorSpriteLOC->x += 2;
+            break;
+        case 7:
+            sRegionMap->cursorSpriteLOC->x -= 2;
+            break;
+    }
+
+    return MAP_INPUT_NONE;
+
+}
 
 static u8 HandleWarpFailedNoCash(void)
 {
@@ -4131,3 +4198,33 @@ void BufferTrolleyBaseFare(void)
     ConvertIntToDecimalStringN(gStringVar1,FARE_BASE_TROLLEY,STR_CONV_MODE_LEFT_ALIGN,CountDigits(FARE_BASE_TROLLEY));
 }
 
+enum MapModes GetCurrentMapMode(void)
+{
+    return sCurrentMapMode;
+}
+
+static bool8 IsCurrentMapMode_Flying(u32 mapMode)
+{
+    if (IsCurrentMapMode_FlyToolFromBag(mapMode))
+        return TRUE;
+
+    if (IsCurrentMapMode_FlyToolFromField(mapMode))
+        return TRUE;
+
+    return (IsCurrentMapMode_FlyPokemon(mapMode));
+}
+
+static bool8 IsCurrentMapMode_FlyPokemon(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_POKEMON);
+}
+
+bool8 IsCurrentMapMode_FlyToolFromBag(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_TOOL_BAG);
+}
+
+bool8 IsCurrentMapMode_FlyToolFromField(u32 mapMode)
+{
+    return (mapMode == MAP_MODE_FLY_TOOL_FIELD);
+}

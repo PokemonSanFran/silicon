@@ -17,7 +17,7 @@ mapscripts EspuleeOutskirts_MapScripts {
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
-        call(LetsGrabLunch_CheckRestorationProgress_Script)
+        callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_Manofmanyhats_CheckDoorLock_Script)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
     }
@@ -114,16 +114,4 @@ script EspuleeOutskirts_Girl_Interact_Script{
     msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_NPC)
     goto_if_quest_active(QUEST_BREAKTHEINTERNET,Quest_Breaktheinternet_EspuleeOutskirts_Script)
     end
-}
-
-text gText_EspuleeOutskirts_PlaceholderBiker{
-    format("i am a biker, and this is placeholder text.")
-}
-
-text gText_EspuleeOutskirts_TheDoorIsLocked{
-    format("The door is locked.")
-}
-
-text gText_EspuleeOutskirts_IUsedToBe{
-    format("i used to be the leader of the gym in town!")
 }

@@ -5,8 +5,6 @@ const IMPROV_3 = 3
 
 //Quest_Improvbattling_
 
-//PSF TODO implement mini factory
-
 script Quest_Improvbattling_Event_Script{
     goto_if_quest_complete(QUEST_IMPROVBATTLING,Quest_Improvbattling_Complete_Script)
     goto_if_quest_active(QUEST_IMPROVBATTLING,Quest_Improvbattling_Active_Script)
@@ -57,6 +55,7 @@ script Quest_Improvbattling_Active_Script{
 }
 
 script Quest_Improvbattling_Complete_Script{
+    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA)
     msgbox(format("Our favorite improv performer! Let's put on a show."),,MSGBOX_NPC,SPEAKER_IMPROV_1)
     goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
 }
@@ -182,7 +181,6 @@ script Quest_Improvbattling_Reward_Dialogue{
 
 script Quest_Improvbattling_RestoreParty_Script{
     return
-// PSF TODO remove this once actual Battle Frontier part is working
     fadescreenswapbuffers(FADE_TO_BLACK)
     special(LoadPlayerPartyBattleFrontier)
     special(HealPlayerParty)

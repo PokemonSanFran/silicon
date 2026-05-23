@@ -25,7 +25,6 @@ script OffYouGo_WarpPlayer_Script{
 }
 
 script OffYouGo_WakeUp_Dialogue {
-    //PSF TODO alter clock so that the screen stays black
         startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
         setvar(VAR_GOLDENGATEBRIDGE_STATE,CALLED_BY_CHARLOTTE)
         setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_FRANK_QUESTS)
@@ -45,7 +44,6 @@ script OffYouGo_WakeUp_Dialogue {
 
         closemessage
 
-        //TODO PSF Mockup a SMS on the screen
         msgbox(format("Oliver: {PLAYER} and Charlotte, please meet me on the northern side of PiocaBridge. (32 mins ago)"))
 
         msgbox(format("Charlotte: I'll be right over! (31 mins ago)"),,SPEAKER_CHARLOTTE,,PHONE_ON)

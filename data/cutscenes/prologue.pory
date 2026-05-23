@@ -24,7 +24,6 @@ script Prologue_SetUp_Script
         callnative(GiveItems_Prologue_Intro)
         call(Prologue_FlagsVars_Script)
         call(Prologue_IntroTime_Dialogue)
-//PSF TODO open modal to tell player about teaching their pokemon new moves
         end
 }
 
@@ -201,8 +200,6 @@ script Prologue_Announcement_ObjectSetup_Script
         call(Prologue_PostWarp_PositionObjects_Script)
         call(Prologue_Announcement_PostObjectSetup_Script)
 }
-
-//PSF TODO use characters intro TWEWY style to introduce each character, use modified flavor text since this happens 10 years earlier
 
 script Prologue_SetUpSeechCrowd_Script{
     getplayerxy(VAR_TEMP_0,VAR_TEMP_1)

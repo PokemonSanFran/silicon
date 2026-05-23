@@ -35,8 +35,9 @@ test_rom:
   script:
     - make -j$(nproc) > /dev/null
     - make -j$(nproc) check
-    - touch test/battle/silicon_exp.c
-    - make -j$(nproc) checktrainers TESTS="Silicon Exp Test"
+     - touch test/battle/silicon_exp.c
+     - make -j$(nproc) checktrainers TESTS="Silicon Exp Test"
+     - make -j$(nproc) checktrainers TESTS="All Resido"
   artifacts:
     paths:
       - silicon.gba

@@ -15,7 +15,6 @@ mapscripts PiocaBridge_MapScripts
 
 script PiocaBridge_Script_Interact_BodegaburnoutDeliveryA
 {
-    // PSF TODO BodegaburnoutDeliveryA: I feel a little better…
     trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYA,format("Man, I’m so bummed. Maybe a battle will cheer me up!"),format("Now I feel worse!"),PiocaBridge_Script_Interact_BodegaburnoutDeliveryA)
     call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_2,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryA)
     bufferitemname(STR_VAR_1,ITEM_SODA_POP)
@@ -29,7 +28,6 @@ script PiocaBridge_Script_Interact_BodegaburnoutDeliveryA
 script PiocaBridge_Script_Findtheguiltyplanth
 {
     trainerbattle_single(TRAINER_QUEST_FINDTHEGUILTYPLANTH,format("I joined a hiking club just recently! Have you ever been hiking?"),format("Oh…I think my heart might explode out of my chest!"),PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth)
-// PSF TODO: Findtheguiltyplanth: Cardiovascular activities are important for staying healthy!
     goto(PiocaBridge_Dialogue_PostBattleFindtheguiltyplanth)
 }
 

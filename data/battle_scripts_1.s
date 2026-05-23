@@ -918,6 +918,7 @@ BattleScript_MoveEffectCoreEnforcer::
 	trytoclearprimalweather
 	call BattleScript_TryRevertWeatherform
 	flushtextbox
+	tryendneutralizinggas
 BattleScript_CoreEnforcerRet:
 	return
 
@@ -4605,7 +4606,7 @@ BattleScript_SafeguardProtected::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNUSEDSAFEGUARD
 	waitmessage B_WAIT_TIME_LONG
-	end2
+	goto BattleScript_MoveEnd
 
 BattleScript_SafeguardEnds::
 	pause B_WAIT_TIME_SHORT
@@ -7113,6 +7114,13 @@ BattleScript_MentalHerbCureRet::
 	removeitem BS_SCRIPTING
 	return
 
+BattleScript_MentalHerbCureFling::
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT
+	printfromtable gMentalHerbCureStringIds
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_SCRIPTING
+	return
+
 BattleScript_MentalHerbCureEnd2::
 	call BattleScript_MentalHerbCureRet
 	end2
@@ -7126,6 +7134,12 @@ BattleScript_WhiteHerbRet::
 	printstring STRINGID_PKMNSITEMRESTOREDSTATUS
 	waitmessage B_WAIT_TIME_LONG
 	removeitem BS_SCRIPTING
+	return
+
+BattleScript_WhiteHerbFling::
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT
+	printstring STRINGID_PKMNSITEMRESTOREDSTATUS
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_ItemHealHP_RemoveItem::
@@ -7766,6 +7780,8 @@ BattleScript_DoesntAffectTargetAtkString::
 	setmoveresultflags MOVE_RESULT_NO_EFFECT
 	goto BattleScript_MoveEnd
 
+BattleScript_NoEffectivenessAbility::
+	call BattleScript_AbilityPopUp
 BattleScript_DoesntAffectScripting::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_SCR_ITDOESNTAFFECT
@@ -7805,23 +7821,19 @@ BattleScript_PastelVeilEnd:
 	return
 
 BattleScript_NeutralizingGasExits::
-	saveattacker
 	savetarget
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_NEUTRALIZINGGASOVER
 	waitmessage B_WAIT_TIME_LONG
-	setbyte gBattlerAttacker, 0
+	setbyte gBattlerTarget, 0
 	sortbattlers
 BattleScript_NeutralizingGasExitsLoop:
-	copyarraywithindex gBattlerTarget, gBattlersBySpeed, gBattlerAttacker, 1
-	jumpifabilitycantbereactivated BS_TARGET, BattleScript_NeutralizingGasExitsLoopIncrement
-	saveattacker
-	switchinabilities BS_TARGET
-	restoreattacker
+	copyarraywithindex gEffectBattler, gBattlersBySpeed, gBattlerTarget, 1
+	jumpifabilitycantbereactivated BS_EFFECT_BATTLER, BattleScript_NeutralizingGasExitsLoopIncrement
+	switchinabilities BS_EFFECT_BATTLER
 BattleScript_NeutralizingGasExitsLoopIncrement:
-	addbyte gBattlerAttacker, 1
-	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_NeutralizingGasExitsLoop
-	restoreattacker
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_NeutralizingGasExitsLoop
 	restoretarget
 	return
 
@@ -8225,7 +8237,6 @@ BattleScript_FogIsTooDense::
 	goto BattleScript_MoveEnd
 
 BattleScript_EmboldenedAttackedFromFog::
-@ PSF TODO before the attack, the name of the attack that WOULD be used, and I'm not sure why
 	waitmessage B_WAIT_TIME_SHORTEST
 	cancelmultiturnmoves 
 	printstring STRINGID_EMBOLDENEDATTACKEDFROMFOG
@@ -8369,4 +8380,3 @@ BattleScript_SilphScopeUnveiled::
 	printstring STRINGID_GHOSTWASMAROWAK
 	waitmessage B_WAIT_TIME_LONG
 	end2
-

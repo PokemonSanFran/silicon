@@ -1,6 +1,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
+#include "quest_logic.h" // flyEncounters
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "berry.h"
@@ -500,6 +501,7 @@ static void Overworld_ResetStateAfterWhiteOut(void)
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE);
     }
     FollowerNPC_TryRemoveFollowerOnWhiteOut();
+    Quest_FlightPatterns_ClearFlightPath(); // flyEncounters
 }
 
 static void UpdateMiscOverworldStates(void)
@@ -1500,7 +1502,7 @@ void Overworld_PlaySpecialMapMusic(void)
         else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
             music = MUS_UNDERWATER;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            music = MUS_SURF;
+            music = (IS_FRLG ? MUS_RG_SURF : MUS_SURF);
     }
 
     if (music != GetCurrentMapMusic())
@@ -1533,10 +1535,10 @@ static void TransitionMapMusic(void)
         u16 currentMusic = GetCurrentMapMusic();
         if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != MUS_NONE)
         {
-            if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
+            if (currentMusic == MUS_UNDERWATER || currentMusic == (IS_FRLG ? MUS_RG_SURF : MUS_SURF))
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-                newMusic = MUS_SURF;
+                newMusic = (IS_FRLG ? MUS_RG_SURF : MUS_SURF);
         }
         if (newMusic != currentMusic)
         {
@@ -2780,6 +2782,7 @@ static void ResumeMap(bool32 a1)
     WaterBerriesIfRaining(); // autoWater
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
+    ClearAllPhenomenonData(); // phenomenon
 }
 
 static void InitObjectEventsLink(void)

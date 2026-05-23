@@ -178,7 +178,6 @@ script AndWeMarchOn_CutsceneBattleScript {
         applymovement(PKMN2, AndWeMarchOn_Attack_Movement)
         waitmovement(0)
 
-        //PSF TODO figure out how to flash screen back
         fadescreenswapbuffers(FADE_TO_BLACK)
         playse(SE_M_THUNDERBOLT)
         waitse
@@ -223,7 +222,7 @@ script AndWeMarchOn_PostBattleSpeech_Dialogue {
         msgbox(format("It's been a wild year, hasn't it? Who's loving our new Pokémon League? The League that's too good for the likes of young Rupert."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
         closemessage
 
-        playse(SE_APPLAUSE) //PSF TODO: change to booing sound
+        playse(SE_APPLAUSE)
         waitse
 
         applymovement(TALA, moves(walk_right * 3, step_end))

@@ -27,5 +27,4 @@ script HalberbaWildsEast_Script_Interact_Quest_GetthebandbacktogetherbikerC
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerC: I’ll never coast, as long as I live!
 }

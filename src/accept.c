@@ -89,36 +89,36 @@ static void PrintAcceptHelpBar(void);
 static u32 GetDevMode(void);
 static void SetDevMode(bool32);
 
-static const u16 acceptPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
-static const u16 acceptPalettesBlue[] = INCBIN_U16("graphics/accept/palettes/blue.gbapal");
-static const u16 acceptPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
-static const u16 acceptPalettesGreen[] = INCBIN_U16("graphics/accept/palettes/green.gbapal");
-static const u16 acceptPalettesPlatinum[] = INCBIN_U16("graphics/accept/palettes/platinum.gbapal");
-static const u16 acceptPalettesRed[] = INCBIN_U16("graphics/accept/palettes/red.gbapal");
-static const u16 acceptPalettesScarlet[] = INCBIN_U16("graphics/accept/palettes/scarlet.gbapal");
-static const u16 acceptPalettesViolet[] = INCBIN_U16("graphics/accept/palettes/violet.gbapal");
-static const u16 acceptPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/white.gbapal");
-static const u16 acceptPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
-static const u16 acceptPalettesEmail[] = INCBIN_U16("graphics/accept/palettes/email.gbapal");
-static const u16 acceptPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
+static const u16 acceptPalettesBlack[] = INCGFX_U16("graphics/accept/palettes/black.pal", ".gbapal");
+static const u16 acceptPalettesBlue[] = INCGFX_U16("graphics/accept/palettes/blue.pal", ".gbapal");
+static const u16 acceptPalettesDefault[] = INCGFX_U16("graphics/accept/palettes/default.pal", ".gbapal");
+static const u16 acceptPalettesGreen[] = INCGFX_U16("graphics/accept/palettes/green.pal", ".gbapal");
+static const u16 acceptPalettesPlatinum[] = INCGFX_U16("graphics/accept/palettes/platinum.pal", ".gbapal");
+static const u16 acceptPalettesRed[] = INCGFX_U16("graphics/accept/palettes/red.pal", ".gbapal");
+static const u16 acceptPalettesScarlet[] = INCGFX_U16("graphics/accept/palettes/scarlet.pal", ".gbapal");
+static const u16 acceptPalettesViolet[] = INCGFX_U16("graphics/accept/palettes/violet.pal", ".gbapal");
+static const u16 acceptPalettesWhite[] = INCGFX_U16("graphics/accept/palettes/white.pal", ".gbapal");
+static const u16 acceptPalettesYellow[] = INCGFX_U16("graphics/accept/palettes/yellow.pal", ".gbapal");
+static const u16 acceptPalettesEmail[] = INCGFX_U16("graphics/accept/palettes/email.pal", ".gbapal");
+static const u16 acceptPalettesText[] = INCGFX_U16("graphics/accept/palettes/text.pal", ".gbapal");
 
-static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.smol");
+static const u32 desktopBgTiles[] = INCGFX_U32("graphics/accept/desktopbg.png", ".4bpp.smol");
 static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.smolTM");
 
-static const u8 windowAnim0[] = INCBIN_U8("graphics/accept/frame0.4bpp");
-static const u8 windowAnim1[] = INCBIN_U8("graphics/accept/frame1.4bpp");
-static const u8 windowAnim2[] = INCBIN_U8("graphics/accept/frame2.4bpp");
-static const u8 windowAnim3[] = INCBIN_U8("graphics/accept/frame3.4bpp");
+static const u8 windowAnim0[] = INCGFX_U8("graphics/accept/frame0.png", ".4bpp");
+static const u8 windowAnim1[] = INCGFX_U8("graphics/accept/frame1.png", ".4bpp");
+static const u8 windowAnim2[] = INCGFX_U8("graphics/accept/frame2.png", ".4bpp");
+static const u8 windowAnim3[] = INCGFX_U8("graphics/accept/frame3.png", ".4bpp");
 
-static const u8 devAnim0[] = INCBIN_U8("graphics/accept/devFrame0.4bpp");
-static const u8 devAnim1[] = INCBIN_U8("graphics/accept/devFrame1.4bpp");
-static const u8 devAnim2[] = INCBIN_U8("graphics/accept/devFrame2.4bpp");
-static const u8 devAnim3[] = INCBIN_U8("graphics/accept/devFrame3.4bpp");
+static const u8 devAnim0[] = INCGFX_U8("graphics/accept/devFrame0.png", ".4bpp");
+static const u8 devAnim1[] = INCGFX_U8("graphics/accept/devFrame1.png", ".4bpp");
+static const u8 devAnim2[] = INCGFX_U8("graphics/accept/devFrame2.png", ".4bpp");
+static const u8 devAnim3[] = INCGFX_U8("graphics/accept/devFrame3.png", ".4bpp");
 
-static const u8 emailSelector[] = INCBIN_U8("graphics/accept/selector.4bpp");
+static const u8 emailSelector[] = INCGFX_U8("graphics/accept/selector.png", ".4bpp");
 
-static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.smol");
-static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.smol");
+static const u32 desktopMouseSprite[] = INCGFX_U32("graphics/accept/mouse.png", ".4bpp.smol");
+static const u32 acceptScrollbar[] = INCGFX_U32("graphics/accept/scrollbar.png", ".4bpp.smol");
 
 static const u8 sAcceptWindowFontColors[][3] =
 {
@@ -345,7 +345,6 @@ static void Accept_SetupCallback(void)
             gMain.state++;
             break;
         case 5:
-            //PSF TODO figure out why this flashes pink when fading in
             BeginPCScreenEffect_TurnOn(0, 0, 0);
             gMain.state++;
             break;
@@ -1079,7 +1078,6 @@ static void PrintAcceptHelpBar(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     BufferHelpBarText(gStringVar4);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
-    // PSF TODO following two lines will actually show the help bar, but some pixels are broken when in DevMode
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }

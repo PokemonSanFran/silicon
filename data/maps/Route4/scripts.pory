@@ -2,6 +2,7 @@ mapscripts Route4_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call(ThisIsntRandom_HideObject_AboveGround_Script)
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_3,Quest_Restorehodoucity_HideBlackbelt_Route4_Script)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_19,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthR)
     }
     MAP_SCRIPT_ON_LOAD
@@ -19,13 +20,14 @@ script Route4_MapScripts_OnLoad
     callnative(UncoverDoorsLab)
 }
 
-script Route4_EventScript_BlackbeltB{
-    trainerbattle_single(TRAINER_BLACKBELT_B,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-    if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-        goto(Quest_Restorehodoucity_Recruit_Blackbelt_B_Dialogue)
-    }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+script Route4_Script_Interact_Andreas
+{
+    trainerbattle_single(TRAINER_ANDREAS,format("I can see the future of our battle…"),format("Maybe I need more experience after all."),Route4_Script_Interact_Andreas)
+    msgbox(format("I don’t have the ability to see the future, but I’ve done enough battles to recognize common patterns."),,SPEAKER_ANDREAS)
+    msgbox(format("With enough battles, it becomes easy to prepare for things and predict what’s coming next."),,SPEAKER_ANDREAS)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Andreas)
+    closemessage
+    release
     end
 }
 
@@ -51,5 +53,4 @@ script Route4_Script_Interact_Quest_Restaurantexpansionlinecook
     closemessage
     release
     end
-// PSF TODO: Maybe I’m not so bad after all.
 }

@@ -279,15 +279,6 @@ enum StartMenuHpBarPercentage
     NUM_START_HP_BAR_PERCENTAGES
 };
 
-enum StartMenuCellularSignals
-{
-    START_SIGNAL_NONE,
-    START_SIGNAL_OKAY,
-    START_SIGNAL_STRONG,
-
-    NUM_START_SIGNALS
-};
-
 enum StartMenuSetupSteps
 {
     START_SETUP_RESET = 0,
@@ -481,7 +472,6 @@ static void StartMoveMode_Exit(void);
 static bool32 StartMoveMode_SwapApps(void);
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
 static void CellularSignal_StrengthError(u8);
 static void Task_StrengthError_Init(u8);
 
@@ -578,7 +568,7 @@ static const struct WindowTemplate sStartMenu_MainWindowTemplates[] =
 };
 
 // universal palette
-static const u16 sStartMenu_Palette[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
+static const u16 sStartMenu_Palette[] = INCGFX_U16("graphics/ui_menus/start_menu/text.pal", ".gbapal");
 
 static const struct {
     const u32 *tiles;
@@ -597,12 +587,12 @@ static const struct {
     },
     [START_BG_CAUTIONBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/save_overwrite_modal.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/start_menu/save_overwrite_modal.png", ".4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/save_overwrite_modal.bin"),
     },
     [START_BG_TEXTBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/tiles.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/start_menu/tiles.png", ".4bpp.smol"),
         // .palette set by the visual color option
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/textbox.bin"),
     },
@@ -616,23 +606,23 @@ static const struct {
 
 static const u16 *const sStartMenu_WallpaperPalettes[VISUAL_OPTION_COLOR_COUNT] =
 {
-    [VISUAL_OPTION_COLOR_RED]      = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal"),
-    [VISUAL_OPTION_COLOR_GREEN]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal"),
-    [VISUAL_OPTION_COLOR_BLUE]     = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal"),
-    [VISUAL_OPTION_COLOR_YELLOW]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal"),
-    [VISUAL_OPTION_COLOR_BLACK]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal"),
-    [VISUAL_OPTION_COLOR_WHITE]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal"),
-    [VISUAL_OPTION_COLOR_PLATINUM] = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal"),
-    [VISUAL_OPTION_COLOR_SCARLET]  = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal"),
-    [VISUAL_OPTION_COLOR_VIOLET]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal"),
-    [VISUAL_OPTION_COLOR_CUSTOM]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal"),
+    [VISUAL_OPTION_COLOR_RED]      = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_GREEN]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_BLUE]     = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_YELLOW]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_BLACK]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_WHITE]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_PLATINUM] = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_SCARLET]  = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_VIOLET]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_CUSTOM]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal"),
 };
 
 // blit graphics
-static const u8 sStartMenuSymbols_Help[] = INCBIN_U8("graphics/ui_menus/start_menu/help_symbols.4bpp");
-static const u8 sStartMenuSymbols_EggInfo[] = INCBIN_U8("graphics/ui_menus/start_menu/daycare_symbols.4bpp");
-static const u8 sStartMenuSymbols_MonStatus[] = INCBIN_U8("graphics/ui_menus/start_menu/mon_status.4bpp");
-static const u8 sStartMenuSymbols_HpBar[] = INCBIN_U8("graphics/ui_menus/start_menu/hp_bar.4bpp");
+static const u8 sStartMenuSymbols_Help[] = INCGFX_U8("graphics/ui_menus/start_menu/help_symbols.png", ".4bpp");
+static const u8 sStartMenuSymbols_EggInfo[] = INCGFX_U8("graphics/ui_menus/start_menu/daycare_symbols.png", ".4bpp");
+static const u8 sStartMenuSymbols_MonStatus[] = INCGFX_U8("graphics/ui_menus/start_menu/mon_status.png", ".4bpp");
+static const u8 sStartMenuSymbols_HpBar[] = INCGFX_U8("graphics/ui_menus/start_menu/hp_bar.png", ".4bpp");
 
 static const struct {
     const struct SpriteSheet sheets[NUM_START_TAGS];
@@ -641,15 +631,15 @@ static const struct {
 {
     {
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/app_cursor.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/app_cursor.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_APP_CURSOR_SIZE), START_TAG_APP_CURSOR
         },
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/apps.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/apps.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_APPS_SIZE), START_TAG_APPS
         },
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/mon_platform.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/mon_platform.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_MON_PLATFORMS_SIZE), START_TAG_MON_PLATFORMS
         },
         { NULL }
@@ -801,7 +791,7 @@ static const struct OamData sMonStatus_OamData =
     .size = SPRITE_SIZE(32x8),
 };
 
-static const u8 sBlankGfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
+static const u8 sBlankGfx[] = INCGFX_U8("graphics/interface/blank.png", ".4bpp");
 static const struct SpriteFrameImage sStartMenuDummyFrames[] = { obj_frame_tiles(sBlankGfx) };
 
 static const struct SpriteTemplate sMonStatus_SpriteTemplate =
@@ -2462,7 +2452,7 @@ static bool32 StartMoveMode_SwapApps(void)
 
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
+enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
 {
     u32 mapType = GetCurrentMapType();
 

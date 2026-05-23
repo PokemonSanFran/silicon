@@ -198,7 +198,6 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_RELAXED,
         .ball = BALL_HEAL,
-        // PSF TODO change moves once SV learnset is created
         .moves = {MOVE_PROTECT, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
         .friendship = 173,
         .nextExpPercent = 32,
@@ -292,7 +291,6 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_CAREFUL,
         .ball = BALL_GREAT,
-        // PSF TODO change moves once SV learnset is created
         .moves = {MOVE_WORK_UP, MOVE_LOW_SWEEP, MOVE_TAUNT, MOVE_CIRCLE_THROW},
         .friendship = 124,
         .nextExpPercent = 55,
@@ -430,7 +428,7 @@ void GiveSiliconStarter(enum SiliconStarters slot)
         evs[i] = starter->evs[i];
         ivs[i] = starter->ivs[i];
     }
-    
+
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         moves[i] = starter->moves[i];
 

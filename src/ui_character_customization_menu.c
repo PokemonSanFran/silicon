@@ -177,25 +177,25 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/siliconBg.4bpp.smol");
+static const u32 siliconBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/siliconBg.png", ".4bpp.smol");
 static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/siliconBg.bin.smolTM");
 
-static const u32 shadowBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.4bpp.smol");
+static const u32 shadowBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/shadowBg.png", ".4bpp.smol");
 static const u32 shadowBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.bin.smolTM");
 
-static const u32 boxesBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.4bpp.smol");
+static const u32 boxesBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/boxesBg.png", ".4bpp.smol");
 static const u32 boxesBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.bin.smolTM");
 
-static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
+static const u16 sMenuPalette[] = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
+static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
+static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
+static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
+static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sMenuPalette_Violet[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
+static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
 
 static const u8 sMenuWindowFontColors[][3] =
 {
@@ -205,10 +205,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 
 
-static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/character_customization/up_arrow.4bpp.smol");
-static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/down_arrow.4bpp.smol");
-static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/left_arrow.4bpp.smol");
-static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/character_customization/right_arrow.4bpp.smol");
+static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/character_customization/up_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/down_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/left_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCGFX_U32("graphics/ui_menus/character_customization/right_arrow.png", ".4bpp.smol");
 
 static void SpriteCallback_UpArrow(struct Sprite *sprite)
 {
@@ -415,8 +415,6 @@ void CB2_CustomizationFromStartMenu(void)
 
 void ResetCustomizationValuesData(void)
 {
-    // PSF TODO Pick a single body type and then have one of our artists pick a canon set of colors for each artist
-
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]         = Random() % (NUM_BODY_TYPES); // Body type has no custom option
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]        = Random() % (NUM_SKIN_COLOR - 1);
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]        = Random() % (NUM_HAIR_COLOR - 1);
@@ -1396,7 +1394,7 @@ const struct CustomizationData Custom_Color_Options[NUM_COLOR_OPTIONS] =
     },
 };
 
-static const u8 sMenuSelector[] = INCBIN_U8("graphics/ui_menus/character_customization/selector.4bpp");
+static const u8 sMenuSelector[] = INCGFX_U8("graphics/ui_menus/character_customization/selector.png", ".4bpp");
 
 static const u8 sText_Title_Text[] = _("Character Customization");
 static const u8 sText_Custom[] = _("Custom");
@@ -1598,7 +1596,6 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
     };
 
     u32 cursor = sMenuDataPtr->cursorPlace;
-    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
     DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
     Menu_FreeResources();
 }
@@ -1782,7 +1779,6 @@ void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite)
 {
     if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
         RecolorPlayerCharacters(sprite->oam.paletteNum);
-    // PSF TODO this should only happen in the overworld... how?
     //UpdatePalettesWithTime(PALETTES_ALL);
 }
 

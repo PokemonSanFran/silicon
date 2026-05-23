@@ -2,8 +2,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const BAIYA = 1
 const FLAG_HIDE_BAIYA = FLAG_TEMP_2
 
-//PSF TODO if the player starts these quests and then goes to the false timeline, it needs to be impossible to finish them until you're back in the true timeline
-
 //the quest log should also reflect this
 
 script LetsGrabLunch_HideBaiya_Outside_Script{
@@ -214,22 +212,3 @@ script LetsGrabLunch_TirabudinPlace{
     closemessage
     goto(LetsGrabLunch_ShowGymList_Dialogue)
 }
-
-script LetsGrabLunch_CheckRestorationProgress_Script{
-    setvar(VAR_TEMP_0,0)
-
-        call_if_quest_complete(QUEST_RESTOREHODOUGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTORETIRABUDINGYM,LetsGrabLunch_IncrementCount_Script)
-        call_if_quest_complete(QUEST_RESTOREZENZUGYM,LetsGrabLunch_IncrementCount_Script)
-
-        if (var(VAR_TEMP_0) > 0 && var(VAR_STORYLINE_STATE) == STORY_BAIYA_EXPLAIN_RESTORATION){
-            setvar(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE)
-        }
-}
-
-script LetsGrabLunch_IncrementCount_Script{
-    addvar(VAR_TEMP_0,1)
-        return
-}
-

@@ -80,6 +80,3 @@ script AssholesHome_PostBattle_Dialogue {
 
         end
 }
-
-// PSF TODO make sure Baiya is visible at all times
-

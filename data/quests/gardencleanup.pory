@@ -28,7 +28,6 @@ script Quest_GardenCleanUp_HideObjects_Script{
 script Quest_GardenCleanUp_ClearGarden_Script{
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_GARDENCLEANUP)
         if (var(VAR_RESULT)){
-            //PSF TODO clear the entire grassy patch
             special(DrawWholeMapView)
         }
     return

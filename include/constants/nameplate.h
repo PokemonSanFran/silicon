@@ -346,6 +346,22 @@ enum NameplateSpeaker
     SPEAKER_ESPULEETRADEPERSOND,
     SPEAKER_ESPULEETRADEPERSONE,
     SPEAKER_ESPULEETRADEPERSONF,
+    SPEAKER_MONTY,
+    SPEAKER_MONTYOPP,
+    SPEAKER_THEATER_IMPROVTROUPEA,
+    SPEAKER_THEATER_IMPROVTROUPEB,
+    SPEAKER_THEATER_IMPROVTROUPEC,
+    SPEAKER_ARCADEMINI,
+    SPEAKER_KEVIN,
+    SPEAKER_ZAC,
+    SPEAKER_JOHNNY,
+    SPEAKER_ADAM,
+    SPEAKER_ANDREAS,
+    SPEAKER_JUSTIN,
+    SPEAKER_JEFFREY,
+    SPEAKER_DAJUAN,
+    SPEAKER_JUAN,
+    SPEAKER_JASON,
     NUM_SPEAKERS,
 };
 
@@ -409,7 +425,7 @@ enum NameplatePhone
 #define SPEAKER_NAME_X                                 4
 #define SPEAKER_NAME_Y                                 12
 #define SPEAKER_TITLE_Y                                1
-#define MAX_TITLE_LENGTH                               68 // PSF TODO write automated test to catch the correct length
+#define MAX_TITLE_LENGTH                               68
 
 #define GFXTAG_SPEAKER_ICON                            10019
 #define SPEAKER_ICON_PAL_NUM                           5

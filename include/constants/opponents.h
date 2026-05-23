@@ -175,7 +175,7 @@
 #define TRAINER_SANTIAGO                    168
 #define TRAINER_GILBERT                     169
 #define TRAINER_FRANKLIN                    170
-#define TRAINER_KEVIN                       171
+//#define TRAINER_KEVIN                       171
 #define TRAINER_JACK                        172
 #define TRAINER_DUDLEY                      173
 #define TRAINER_CHAD                        174
@@ -219,7 +219,7 @@
 #define TRAINER_BEAU                        212
 #define TRAINER_LARRY                       213
 #define TRAINER_SHANE                       214
-#define TRAINER_JUSTIN                      215
+//#define TRAINER_JUSTIN                      215
 #define TRAINER_ETHAN_1                     216
 #define TRAINER_AUTUMN                      217
 #define TRAINER_TRAVIS                      218
@@ -928,16 +928,15 @@ enum ResidoTrainerIds
     TRAINER_MELISSA_REMATCH,
     TRAINER_MONTY,
     TRAINER_IHSAN_AND_EMMITT,
-    TRAINER_HOUSINGPROTEST_ROCKET,
     TRAINER_STOLENTRADE_THIEF,
     TRAINER_MUGGERA_MUGGERB,
-    TRAINER_BLACKBELT_A,
-    TRAINER_BLACKBELT_B,
-    TRAINER_BLACKBELT_C,
-    TRAINER_BLACKBELT_D,
-    TRAINER_BLACKBELT_E,
-    TRAINER_BLACKBELT_F,
-    TRAINER_BLACKBELT_G,
+    TRAINER_ADAM,
+    TRAINER_ANDREAS,
+    TRAINER_JUSTIN,
+    TRAINER_JEFFREY,
+    TRAINER_DAJUAN,
+    TRAINER_JUAN,
+    TRAINER_JASON,
     TRAINER_SEVENSISTERS_TINA,
     TRAINER_SEVENSISTERS_PAUL,
     TRAINER_SEVENSISTERS_JON,
@@ -954,7 +953,6 @@ enum ResidoTrainerIds
     TRAINER_DRUG_KINSEY,
     TRAINER_DRUG_KALEY,
     TRAINER_DRUG_TOREY,
-    TRAINER_PEWFAT,
     TRAINER_DRUG_BD,
     TRAINER_HELEN,
     TRAINER_VAGRANT_1_ROUTE2,
@@ -1107,9 +1105,6 @@ enum ResidoTrainerIds
     TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE,
     TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF,
     TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG,
-    TRAINER_CHEFA,
-    TRAINER_CHEFB,
-    TRAINER_CHEFC,
     TRAINER_DIGGINGTIMEMEMBERA,
     TRAINER_QUEST_FREETHEINNOCENTHIKERC,
     TRAINER_QUEST_FREETHEINNOCENTHIKERC_2,
@@ -1726,9 +1721,13 @@ enum ResidoTrainerIds
     TRAINER_B3CE95A4,
     TRAINER_B3FB2F4B,
     TRAINER_B42E7E27,
-    TRAINER_B42F5023,
-    TRAINER_B53E1C28,
-    // PSF TODO Don't add more fuckin Trainers because the test systems needs 851 and 852 to be named RED and LEAF for now
+    TRAINER_ZAC,
+    TRAINER_KEVIN,
+    TRAINER_HOUSINGPROTEST_A,
+    TRAINER_HOUSINGPROTEST_B,
+    // START WARNING
+    // Do not add more Trainers here. The test system needs the last two to (851 and 852) be named RED and LEAF.
+    // END WARNING
     TRAINER_RED,
     TRAINER_LEAF,
     TRAINERS_COUNT_EMERALD,
