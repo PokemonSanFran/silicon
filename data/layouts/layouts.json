@@ -10716,8 +10716,8 @@
     {
       "id": "LAYOUT_PSFROUTE7E17FDD1",
       "name": "Psfroute7e17fdd1_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 80,
+      "height": 40,
       "primary_tileset": "gTileset_GeneralSilicon",
       "secondary_tileset": "gTileset_FortreeGym",
       "border_filepath": "data/layouts/Psfroute7e17fdd1/border.bin",
