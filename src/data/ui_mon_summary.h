@@ -539,7 +539,7 @@ static const struct {
 
 static const u8 *const sMovesPageMisc_LearnTexts[] =
 {
-    COMPOUND_STRING("Replace {STR_VAR_2} with another move that {STR_VAR_3} can learn."),
+    COMPOUND_STRING("Replace a move with different move that {STR_VAR_3} can learn."),
     COMPOUND_STRING("Teach {STR_VAR_1} a new move."),
 };
 
