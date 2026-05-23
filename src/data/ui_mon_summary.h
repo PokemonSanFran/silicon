@@ -296,6 +296,15 @@ static const struct OamData sSummaryPage_MonIconOam =
     .paletteNum = 0,
 };
 
+static const union AnimCmd *const sSummaryPage_MonIconAnims[] =
+{
+    (const union AnimCmd[]){
+        ANIMCMD_FRAME(0, 14),
+        ANIMCMD_FRAME(1, 14),
+        ANIMCMD_JUMP(0),
+    },
+};
+
 static const struct CompressedSpriteSheet sSummaryPage_TypeSpriteSheet =
 {
     .data = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),

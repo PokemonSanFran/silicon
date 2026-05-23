@@ -316,7 +316,7 @@ static void SpriteCB_MoveSelector(struct Sprite *);
 static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
-static void SummaryScreen_DestroyAnimDelayTask(void);
+//static void SummaryScreen_DestroyAnimDelayTask(void); // monSummary
 static bool32 ShouldShowMoveRelearner(void);
 static bool32 ShouldShowRename(void);
 static bool32 ShouldShowIvEvPrompt(void);
@@ -4700,7 +4700,10 @@ void SummaryScreen_SetAnimDelayTaskId(u8 taskId)
     sAnimDelayTaskId = taskId;
 }
 
-static void SummaryScreen_DestroyAnimDelayTask(void)
+// start monSummary
+//static void SummaryScreen_DestroyAnimDelayTask(void)
+void SummaryScreen_DestroyAnimDelayTask(void)
+// end monSummary
 {
     if (sAnimDelayTaskId != TASK_NONE)
     {

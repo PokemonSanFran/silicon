@@ -38,6 +38,7 @@
 #include "field_weather.h"
 #include "util.h"
 #include "battle_interface.h"
+#include "m4a.h"
 #include "ui_move_reminder.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
@@ -58,6 +59,7 @@ static EWRAM_DATA struct {
 } sMonSummaryInitialBackup = {0}; // for moveReminder
 
 // declarations
+static void MonSummary_FadeAndExit(u8);
 static void MonSummary_FreeResources(void);
 static void CB2_MonSummary(void);
 static void CB2_ReloadMonSummary(void);
@@ -139,13 +141,15 @@ static void SummarySprite_CreateMonSprite(void);
 static void SummarySprite_InjectPokemon(void);
 static u32 SummarySprite_GetPokemonPaletteSlot(void);
 static void SummarySprite_PlayPokemonCry(void);
+static void SummarySprite_StopPokemonAnim(void);
 static void SummarySprite_MonHeldItem(u32, s32, s32);
 static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
 static void SummarySprite_MonTypes(u32, s32, s32);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SummarySprite_MonMove(u32, s32, s32);
-static u8 *SummarySprite_GetSpritePtr(u8 position);
+static u8 *SummarySprite_GetSpritePtr(void);
+static void SpriteCB_SummarySprite_Mon(struct Sprite *);
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *);
 static void SpriteCB_SummarySprite_HpBar(struct Sprite *);
 static void SpriteCB_SummarySprite_ExpBar(struct Sprite *);
@@ -322,8 +326,18 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
     SetMainCallback2(CB2_SummarySetup);
 }
 
+static void MonSummary_FadeAndExit(u8 taskId)
+{
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    SummarySprite_StopPokemonAnim();
+    StopCryAndClearCrySongs();
+    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+    gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+}
+
 static void MonSummary_FreeResources(void)
 {
+    SummaryScreen_DestroyAnimDelayTask();
     FreeTempTileDataBuffersIfPossible();
     ResetTempTileDataBuffers();
     DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
@@ -553,6 +567,7 @@ static void CB2_SummarySetup(void)
         ResetPaletteFade();
         FreeAllWindowBuffers();
         ResetSpriteData();
+        SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
         //ResetTasks();         // evo scene needs to be available apparently..
         break;
     case SUMMARY_SETUP_MONDATA:
@@ -593,6 +608,7 @@ static void Task_SummarySetup_WaitFade(u8 taskId)
     {
         CreateTask(Task_SummaryPrint_UpdateText, 10);
         SummarySprite_PlayPokemonCry();
+        gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = TRUE;
         gTasks[taskId].tDelay = 0;
         gTasks[taskId].func = SummaryMode_GetInputFunc(SummaryMode_GetValue());
     }
@@ -790,11 +806,10 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(B_BUTTON) && IsCryFinished())
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_PC_OFF);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        MonSummary_FadeAndExit(taskId);
         return;
     }
 }
@@ -937,7 +952,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
         return;
     }
 
-    if (JOY_NEW(B_BUTTON) && IsCryFinished())
+    if (JOY_NEW(B_BUTTON))
     {
         switch (subMode)
         {
@@ -964,8 +979,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             SummaryMon_CopyChanges();
             SummaryMon_SetStruct();
             SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+            MonSummary_FadeAndExit(taskId);
             return;
         }
 
@@ -993,8 +1007,7 @@ static void Task_SummaryMode_SelectMoveInput(u8 taskId)
     {
         PlaySE(SE_SELECT);
         SetMoveSlotToReplace(MovesPageMisc_GetSlotIndex());
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        MonSummary_FadeAndExit(taskId);
         return;
     }
 
@@ -1002,8 +1015,7 @@ static void Task_SummaryMode_SelectMoveInput(u8 taskId)
     {
         PlaySE(SE_PC_OFF);
         SetMoveSlotToReplace(MAX_MON_MOVES);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
+        MonSummary_FadeAndExit(taskId);
         return;
     }
 }
@@ -1409,6 +1421,7 @@ static void SummaryMon_SetStruct(void)
     res->summary.metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
     res->summary.friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
     res->summary.isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+    res->summary.isEgg = GetMonData(mon, MON_DATA_IS_EGG);
 
     res->summary.totalValues[SUMMARY_TOTAL_IVS] = 0;
 
@@ -1672,14 +1685,18 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     SummaryPrint_HelpBar();
 
     void (*handleFrontEnd)(void) = SummaryPage_GetHandleFrontEndFunc(SummaryPage_GetValue());
+    bool32 animate = FALSE;
 
     switch (mode)
     {
     default:
         break;
     case SUMMARY_RELOAD_MON:
+        StopCryAndClearCrySongs();
+        SummaryScreen_DestroyAnimDelayTask();
         SummaryMon_SetStruct();
         SummarySprite_PlayPokemonCry();
+        animate = TRUE;
         break;
     case SUMMARY_RELOAD_PAGE:
         {
@@ -1712,6 +1729,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
     }
 
     SummarySprite_CreateMonSprite();
+    gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = animate;
     SummaryPage_UnloadDynamicSprites();
 
     handleFrontEnd();
@@ -1879,6 +1897,7 @@ static void SummarySprite_CreateMonSprite(void)
 {
     if (SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON) != SPRITE_NONE)
     {
+        SummarySprite_StopPokemonAnim();
         DestroySpriteAndFreeResources(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)]);
     }
 
@@ -1893,54 +1912,53 @@ static void SummarySprite_CreateMonSprite(void)
 
     FreeSpriteOamMatrix(sprite);
     sprite->oam.priority = 0;
-    sprite->callback = SpriteCallbackDummy;
-    sprite->hFlip = IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species);
-    sprite->oam.paletteNum = SummarySprite_GetPokemonPaletteSlot();
+    if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
+        sprite->callback = SpriteCB_SummarySprite_Mon;
+    else
+        sprite->callback = SpriteCB_MonIcon;
 
+    if (!IsMonSpriteNotFlipped(SummaryMon_GetStruct()->species))
+        sprite->hFlip = TRUE;
+    else
+        sprite->hFlip = FALSE;
+
+    sprite->oam.paletteNum = SummarySprite_GetPokemonPaletteSlot();
     sprite->invisible = FALSE;
 }
 
 // switch between buffers
 static void SummarySprite_InjectPokemon(void)
 {
-    u32 position = SUMMARY_GFX_MAN_MON;
     struct MonSummary *mon = SummaryMon_GetStruct();
-    u8 *gfx = SummarySprite_GetSpritePtr(position);
-
+    u8 *gfx = SummarySprite_GetSpritePtr();
     u32 index = SummarySprite_GetPokemonPaletteSlot();
-    CpuFill32(0, gfx, 512);
 
     if (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS)
     {
         HandleLoadSpecialPokePic(TRUE, gfx, mon->species, mon->personality);
-        sMonSummaryDataPtr->monSpritePics->data = gfx;
-        sMonSummaryDataPtr->monSpritePics->size = 64 * 64 / 2;
-        sMonSummaryDataPtr->monSpritePics->relativeFrames = TRUE;
-
         LoadPalette(
             GetMonSpritePalFromSpeciesAndPersonality(mon->species, mon->isShiny, mon->personality),
             OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
         UniquePalette(OBJ_PLTT_ID(index), &sMonSummaryDataPtr->mon.box);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZEOF(16));
-
+        sMonSummaryDataPtr->monSpritePics->size = 64 * 64 / 2;
     }
     else
     {
-        CpuCopy32(GetMonIconTiles(mon->species, mon->personality), gfx, 512);
-        sMonSummaryDataPtr->monSpritePics->data = gfx;
-        sMonSummaryDataPtr->monSpritePics->size = 32 * 32 / 2;
-        sMonSummaryDataPtr->monSpritePics->relativeFrames = TRUE;
-
+        CpuCopy32(GetMonIconTiles(mon->species, mon->personality), gfx, 0x400);
         LoadPalette(GetValidMonIconPalettePtr(mon->species), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        sMonSummaryDataPtr->monSpritePics->size = 32 * 32 / 2;
     }
 
-    gMultiuseSpriteTemplate = gBattlerSpriteTemplates[position];
-    gMultiuseSpriteTemplate.anims = sSummarySprite_FrameImageAnimTemplate;
+    SetMultiuseSpriteTemplateToPokemon(mon->species, B_POSITION_OPPONENT_LEFT);
+    sMonSummaryDataPtr->monSpritePics->data = gfx;
+    sMonSummaryDataPtr->monSpritePics->relativeFrames = TRUE;
     gMultiuseSpriteTemplate.images = sMonSummaryDataPtr->monSpritePics;
-    gMultiuseSpriteTemplate.paletteTag = TAG_NONE;              // manually setting this bc TAG_NONE throws an assertf (for a good reason)
+    gMultiuseSpriteTemplate.paletteTag = TAG_NONE; // manually setting this bc TAG_NONE throws an assertf (for a good reason)
 
     if (SummaryPage_GetValue() != SUMMARY_PAGE_INFOS)
     {
+        gMultiuseSpriteTemplate.anims = sSummaryPage_MonIconAnims;
         gMultiuseSpriteTemplate.oam = &sSummaryPage_MonIconOam;
     }
 }
@@ -1958,6 +1976,18 @@ static void SummarySprite_PlayPokemonCry(void)
         ShouldPlayNormalMonCry(&sMonSummaryDataPtr->mon) ? CRY_MODE_NORMAL : CRY_MODE_WEAK;
 
     PlayCry_ByMode(mon->species, 0, cryMode);
+}
+
+static void SummarySprite_StopPokemonAnim(void)
+{
+    struct Sprite *sprite = &gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)];
+
+    sprite->animPaused = TRUE;
+    sprite->callback = SpriteCallbackDummy;
+    StopPokemonAnimationDelayTask();
+
+    u32 index = OBJ_PLTT_ID(sprite->oam.paletteNum);
+    CpuCopy32(&gPlttBufferFaded[index], &gPlttBufferUnfaded[index], PLTT_SIZEOF(16));
 }
 
 static void SummarySprite_MonHeldItem(u32 spriteArrId, s32 x, s32 y)
@@ -2080,9 +2110,18 @@ static void SummarySprite_MonMove(u32 idx, s32 x, s32 y)
     SummarySprite_SetDynamicSpriteId(SUMMARY_MOVES_SPRITE_MOVE_1 + idx, spriteId);
 }
 
-static u8 *SummarySprite_GetSpritePtr(u8 position)
+static u8 *SummarySprite_GetSpritePtr(void)
 {
     return sMonSummaryDataPtr->monSpriteGfx;
+}
+
+static void SpriteCB_SummarySprite_Mon(struct Sprite *sprite)
+{
+    if (!gPaletteFade.active && sprite->data[2] == TRUE)
+    {
+        struct MonSummary *mon = SummaryMon_GetStruct();
+        PokemonSummaryDoMonAnimation(sprite, mon->species, mon->isEgg);
+    }
 }
 
 static void SpriteCB_SummarySprite_ShinySymbol(struct Sprite *sprite)

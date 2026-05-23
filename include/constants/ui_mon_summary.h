@@ -397,12 +397,6 @@ enum __attribute__((packed)) MonSummaryReloadModes
 #define SUMMARY_STATS_FLAG_STATS (1 << 3) // XXXX
 #define SUMMARY_STATS_FLAG_ALL   (SUMMARY_STATS_FLAG_NAME | SUMMARY_STATS_FLAG_EVS | SUMMARY_STATS_FLAG_IVS | SUMMARY_STATS_FLAG_STATS)
 
-enum MonSummaryGfxManagerIdx
-{
-    SUMMARY_GFX_MAN_MON = B_POSITION_PLAYER_LEFT,
-    SUMMARY_GFX_MAN_MOVE_BAR = B_POSITION_OPPONENT_LEFT,
-};
-
 typedef const u8 *(*HelpBarTextFunc)(u32);  // we can't directly attach the enum sadly
 
 // structs
@@ -415,7 +409,8 @@ struct MonSummary
     u8 isShiny:1;
     u8 abilityNum:1;
     u8 markings:4;
-    u8 padding:2;
+    u8 isEgg:1;
+    u8 padding:1;
     u8 level;
     u8 ailment;
     metloc_u8_t metLocation;
