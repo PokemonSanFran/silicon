@@ -126,11 +126,9 @@ script WaitEvenThen_MovePlayerToBoss {
 
 script WaitEvenThen_BossEncounter_Script {
         playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
-    //PSF TODO Rewrite to have two pokemon OR make it a 1v1 battle instead
                 goto(WaitEvenThen_ClearBossPokemon_Script)
     setwildbattle(SPECIES_EXCADRILL,70,ITEM_MUSCLE_BAND,SPECIES_NONE)
         playmoncry(SPECIES_EXCADRILL,CRY_MODE_ENCOUNTER)
-        msgbox(format("ROAR"),MSGBOX_AUTOCLOSE)
         delay(40)
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)

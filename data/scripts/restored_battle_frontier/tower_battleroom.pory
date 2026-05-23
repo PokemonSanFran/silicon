@@ -154,7 +154,6 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DefeatedOpponent{
     playse(MUS_LEVEL_UP)
     buffernumberstring(STR_VAR_1,3)
     msgbox(format("You've also earned {STR_VAR_1} Battle Points!"), MSGBOX_DEFAULT)
-    //PSF TODO needs a show BP box
     givefrontierbattlepoints(3)
     waitse
 

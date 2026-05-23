@@ -1109,9 +1109,6 @@ void SetCallbackFromSaveStatus(void)
             break;
         case SAVE_STATUS_CORRUPT:
             callback = CB2_GoToUIMainMenu;
-            //PSF TODO need to merge in the latest expansion which has the save type error screen
-            //once that is merged, write a variant of those screens to tell the user about the error message and then boot them either to the continue game callback OR the new game callback
-            //do the same for SAVE_STATUS_ERROR, which is the default case
             //callback = CB2_GoToCorruptSaveMessage;
             //const u8 gText_SaveFileCorrupted[] = _("The save file is corrupted. The\nprevious save file will be loaded.";
             break;

@@ -170,7 +170,6 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     msgbox(format("{PLAYER}'s Pokédex was upgraded with Habitat Mode!"))
     waitmessage
     waitfanfare
-    //PSF TODO find a different rewards for this app and update the text
     closemessage
 
     playse(SE_POKENAV_CALL)

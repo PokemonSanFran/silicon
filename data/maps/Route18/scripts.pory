@@ -4,7 +4,6 @@ mapscripts Route18_MapScripts
     {
         call(Route18_RouteFlag_Script)
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_6,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerF)
-        // PSF TODO need to refactor this so as that as soon flag A and flag B are obtained, the player can go to place C without having to go bakc to place C
     }
 }
 
@@ -24,5 +23,4 @@ script Route18_Script_Interact_Quest_GetthebandbacktogetherbikerF
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerF: Maybe if I can beat her she’ll let me ride it.
 }

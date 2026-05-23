@@ -21,7 +21,6 @@ script Route11_Script_Interact_Juan
     closemessage
     release
     end
-    // PSF TODO Juan: Even the best players can switch unsuccessfully. It's not foolproof!
 }
 
 script Route11_InteractHomeless_Script

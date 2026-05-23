@@ -22121,7 +22121,6 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Box of Disaster"),
         .price = 0,
         .description = COMPOUND_STRING(
-                //PSF TODO rewrite when larger description box is implemented
                 "Gives a Pokémon\n"
                 "a status condition\n"
                 "outside of battle."),

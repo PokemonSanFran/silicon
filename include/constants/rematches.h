@@ -7,7 +7,6 @@ enum {
     REMATCH_FREETHEINNOCENTHIKERD,
     REMATCH_FREETHEINNOCENTHIKERF,
     REMATCH_FREETHEINNOCENTHIKERG,
-    // PSF TODO the following are just placeholders, they can be removed as more trainers are added
     REMATCH_1,
     REMATCH_2,
     REMATCH_3,

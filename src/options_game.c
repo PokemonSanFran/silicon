@@ -149,12 +149,6 @@ static bool32 UNUSED IsCutsceneFrameCounterEmpty(void)
 
 void HoldButtonToSkipCutscene(u16 heldKeys)
 {
-    /*
-     * PSF TODO Current thinking is that the player can alwaays do this and therefore doesn't need to be enabled.
-    if(GetCutsceneOptionValue() != GAME_OPTION_CUTSCENE_HOLD)
-        return;
-        */
-
     u32 cutscene = VarGet(VAR_CUTSCENE_SKIP);
 
     if (!IsCutscenePlaying(cutscene))

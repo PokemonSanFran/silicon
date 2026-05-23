@@ -104,7 +104,6 @@ script Quest_DrugHelmetTest_Script_FirstTest
     locktarget
     playse(SE_PC_ON)
     waitse
-    //PSF TODO add special to fill screen with terminal boot text
     fadescreenswapbuffers(FADE_TO_BLACK)
     setvar(VAR_PHASE_NUMBER, DRUGHELMETTEST_FIRSTPHASE)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
@@ -127,7 +126,6 @@ script Quest_DrugHelmetTest_Script_PostFirstTestBattle
     }
     else
     {
-    //PSF TODO make this text to be shown when player loses in battle, and change the battle to be a normal trainer battle where player will white out
         msgbox(format("Did we juice it up too much?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     releaseall
@@ -146,7 +144,6 @@ script Quest_DrugHelmetTest_Script_SecondTest
     fadescreenswapbuffers(FADE_TO_BLACK)
     playse(SE_PC_ON)
     waitse
-    //PSF TODO add special to fill screen with terminal boot text
     fadescreenswapbuffers(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)
@@ -185,7 +182,6 @@ script Quest_DrugHelmetTest_Script_ThirdTest
     locktarget
     playse(SE_PC_ON)
     waitse
-    //PSF TODO add special to fill screen with terminal boot text
     fadescreenswapbuffers(FADE_TO_BLACK)
     special(Quest_DrugHelmetTest_ForgetMoveByPhase)
     special(HealPlayerParty)

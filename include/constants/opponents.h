@@ -1725,7 +1725,9 @@ enum ResidoTrainerIds
     TRAINER_KEVIN,
     TRAINER_HOUSINGPROTEST_A,
     TRAINER_HOUSINGPROTEST_B,
-    // PSF TODO Don't add more fuckin Trainers because the test systems needs 851 and 852 to be named RED and LEAF for now
+    // START WARNING
+    // Do not add more Trainers here. The test system needs the last two to (851 and 852) be named RED and LEAF.
+    // END WARNING
     TRAINER_RED,
     TRAINER_LEAF,
     TRAINERS_COUNT_EMERALD,

@@ -37,7 +37,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_SMOOTHIE] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER, // PSF TODO a random shitty Trainer in the game needs a username to match this one, and their team just has to be awful
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("I always go to the Marble Slab in {STR_VAR_1} before I start training with a new Pokémon. Their {STR_VAR_3} clears out a Pokémon’s toxins which makes them easier to train. It’s all natural too! Bring {STR_VAR_2} and they’ll make your first one free!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Ice,
@@ -88,7 +88,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_STONE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Take the &MegaTrolleyChallenge and experience the best way to travel in Resido! Complete {STR_VAR_1} Mega rides, and visit the Mega G.R.U.N.T. HQ for a way to unlock your Pokémon’s Mega potential!"), // PSF TODO change & to #
+        .content = COMPOUND_STRING("Take the &MegaTrolleyChallenge and experience the best way to travel in Resido! Complete {STR_VAR_1} Mega rides, and visit the Mega G.R.U.N.T. HQ for a way to unlock your Pokémon’s Mega potential!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Stone,
         .quest = QUEST_BETWEENASTONEANDAHARDPLACE,
@@ -329,7 +329,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_PSYOP_ACTIVE_B] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I did the &AuthenticHustle Challenge, and now my {STR_VAR_1} is super legit! Buckle down, unlock that {STR_VAR_2} mindset, and you can achieve the same. Keep pushing!"), // PSF TODO replace & with #
+        .content = COMPOUND_STRING("I did the &AuthenticHustle Challenge, and now my {STR_VAR_1} is super legit! Buckle down, unlock that {STR_VAR_2} mindset, and you can achieve the same. Keep pushing!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopActive,
         .quest = 0,
@@ -349,7 +349,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_PSYOP_COMPLETE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Working three jobs just to save up for {STR_VAR_2} and {STR_VAR_3} - that’s the grind! My {STR_VAR_1} is going to be maxed out, and nothing will stop me. Haters don’t + me."), // PSF TODO replace + with @
+        .content = COMPOUND_STRING("Working three jobs just to save up for {STR_VAR_2} and {STR_VAR_3} - that’s the grind! My {STR_VAR_1} is going to be maxed out, and nothing will stop me. Haters don’t + me."),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopComplete,
         .quest = 0,
@@ -375,7 +375,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! &BallerOnABudget"), // PSF TODO replace & with #
+        .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! &BallerOnABudget"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times,
         .quest = 0,
@@ -415,7 +415,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_5] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Did anybody else do this &MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"), // PSF TODO replace & with #
+        .content = COMPOUND_STRING("Did anybody else do this &MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete,
         .quest = 0,
@@ -454,7 +454,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_DIGGINGUPADAORASDIRT_1] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER, // TODO Tide Member
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("Be mindful of this guy sniffin’ around asking questions about Adaora. I reckon he’s got “cop” written all over him."),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_Diggingupadaorasdirt_1,
@@ -665,7 +665,6 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        // PSF TODO replace & with #
         .content = COMPOUND_STRING("I went to {STR_VAR_1} Dojo and got totally wrecked! I need to focus on type specialization… &BackToTheLab"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_RestorehodoucityComplete,

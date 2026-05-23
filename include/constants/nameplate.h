@@ -425,7 +425,7 @@ enum NameplatePhone
 #define SPEAKER_NAME_X                                 4
 #define SPEAKER_NAME_Y                                 12
 #define SPEAKER_TITLE_Y                                1
-#define MAX_TITLE_LENGTH                               68 // PSF TODO write automated test to catch the correct length
+#define MAX_TITLE_LENGTH                               68
 
 #define GFXTAG_SPEAKER_ICON                            10019
 #define SPEAKER_ICON_PAL_NUM                           5

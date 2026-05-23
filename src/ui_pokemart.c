@@ -49,7 +49,7 @@
 #include "constants/party_menu.h"
 
 // constants
-#define MART_KEEPER_ICON    FALSE // PSF TODO disable/remove related code if we decide to deprecate this
+#define MART_KEEPER_ICON    FALSE
 
 #define SHOP_LEFT_ARROW_X  ((TILE_TO_PIXELS(14) + 0) + 4)
 #define SHOP_LEFT_ARROW_Y  ((TILE_TO_PIXELS( 1) + 0) + 8)
@@ -399,7 +399,6 @@ static const struct MenuAction sPokeMart_MenuActions[] =
 // appended to MART_KEEPER_DIALOGUE_SUCCESS.
 static const u8 sPokeMart_KeeperPremierBallDialogue[] = _("I'll throw in {STR_VAR_2} {STR_VAR_3} there, too.");
 
-// PSF TODO write new dialogues
 static const u8 *const sPokeMart_KeeperDialogues[] =
 {
     [MART_KEEPER_DIALOGUE_NONE] = COMPOUND_STRING("ERROR"),
