@@ -383,6 +383,7 @@ static const TaskFunc sContextMenuFuncs[] = {
     [ITEMMENULOCATION_WALLY] =                  NULL,
     [ITEMMENULOCATION_PCBOX] =                  Task_ItemContext_GiveToPC,
     [ITEMMENULOCATION_BERRY_TREE_MULCH] =       Task_FadeAndCloseBagMenuIfMulch,
+    [ITEMMENULOCATION_SUMMARY] =                Task_ItemContext_GiveToParty, // monSummary
 };
 
 static const struct YesNoFuncTable sYesNoTossFunctions = {ConfirmToss, CancelToss};
@@ -1670,6 +1671,7 @@ static void OpenContextMenu(u8 taskId)
     case ITEMMENULOCATION_BERRY_TREE:
     case ITEMMENULOCATION_ITEMPC:
     case ITEMMENULOCATION_BERRY_TREE_MULCH:
+    case ITEMMENULOCATION_SUMMARY: // monSummary
     default:
         if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
         {

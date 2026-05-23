@@ -13,6 +13,9 @@ enum __attribute__((packed)) MonSummaryModes
     UI_SUMMARY_MODE_MOVE_MENU,
     UI_SUMMARY_MODE_MOVE_DETAILS,
 
+    // bag
+    UI_SUMMARY_MODE_HELD_ITEM_DESC,
+
     NUM_UI_SUMMARY_MODES
 };
 
