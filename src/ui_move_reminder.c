@@ -498,10 +498,10 @@ static void MoveBar_Update(void)
     u32 offsetX = GetStringCenterAlignXOffsetWithLetterSpacing(fontId, gStringVar1, totalWidth, -1);
 
     MiscUtil_AddTextPrinter(win, gStringVar1, fontId, PAGE_MAIN_MOVES_LIST_TITLE_X + offsetX, PAGE_MAIN_MOVES_LIST_TITLE_Y, MREMINDER_TXTCLR_DEFAULT);
-    if (MovePool_IsAnyFilterActive())
-        BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
 
     bool32 isMain = PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT;
+    if (MovePool_IsAnyFilterActive() && isMain)
+        BlitBitmapToWindow(win, sMoveReminder_FilterIndicatorBlit, PAGE_MAIN_MOVES_LIST_FILTER_X, PAGE_MAIN_MOVES_LIST_FILTER_Y, 24, 16);
 
     if (isMain && !MovePool_GetNumberOfMoves())
     {
