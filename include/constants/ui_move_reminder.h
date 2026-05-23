@@ -14,8 +14,6 @@ enum SubPageInterfaces
     // PAGE_INTERFACE_MAIN
     SUBPAGE_INTERFACE_MAIN_DEFAULT = 0,
     SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE,
-    SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH,
-    SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH,
 
     // PAGE_INTERFACE_FILTER
     SUBPAGE_INTERFACE_FILTER_DEFAULT = 0,
@@ -221,16 +219,6 @@ enum MovePoolSorts
 
 #define NUM_TYPE_ICONS          (18) // excludes TYPE_NONE, TYPE_MYSTERY, and TYPE_STELLAR. the filter field may include TYPE_MYSTERY but it'll be unused
 
-#define CONFIRMATION_BOX_YES        (0)
-#define CONFIRMATION_BOX_NO         (1)
-#define CONFIRMATION_BOX_INACTIVE   (2)
-
-#define CONFIRMATION_BOX_X      (TILE_TO_PIXELS(19) + 3)
-#define CONFIRMATION_BOX_TEXT_X (TILE_TO_PIXELS(20))
-#define CONFIRMATION_BOX_YES_Y  (TILE_TO_PIXELS(13) + 5)
-#define CONFIRMATION_BOX_NO_Y   (TILE_TO_PIXELS(15) + 5)
-#define CONFIRMATION_BOX_TEXT_Y (TILE_TO_PIXELS(13) + 4)
-
 enum FilterPageGridX
 {
     FILTER_GRID_X_0,
@@ -312,8 +300,7 @@ struct MoveReminderData
     u32 gridListIdx:3;      // MAX_MREMINDER_BAR_SPRITES
     u32 printingDialogue:1;
     u32 moveSlot:4;
-    u32 confirmationBoxRes:2;
-    u32 pad:2;
+    u32 pad:4;
 
     enum Move moveToTeach:12;
     u32 typeFilter:20;      // 1 << TYPE_XXX

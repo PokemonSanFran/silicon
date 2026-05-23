@@ -71,10 +71,6 @@ static void TypeIcon_Update(void);
 static void TypeIcon_SetSpriteId(u32, u32);
 static void SpriteCB_TypeIcon(struct Sprite *);
 
-static void ConfirmationBox_SetResult(u32);
-static bool32 ConfirmationBox_Input();
-static void ConfirmationBox_Update(u32);
-
 static enum MoveReminderModes MReminderMode_GetValue(void);
 static enum MoveReminderModes MReminderMode_SetValue(enum MoveReminderModes);
 static bool32 MReminderMode_UseBoxMon(void);
@@ -138,13 +134,12 @@ static void MiscUtil_FreeResources(void);
 static struct MoveReminderMon *MiscUtil_GetMon(void);
 static struct BoxPokemon *MiscUtil_GetBoxMon(void);
 static void MiscUtil_TeachMove(void);
+static void MiscUtil_CancelTeachMove(void);
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows, const u8 *, u32, u32, u32, enum MoveReminderTextColors);
 static bool32 MiscUtil_IsInputAdditive(s32);
 
 static void MainPage_ChooseMoveToTeach(u8);
 static void MainPage_ChooseMoveToForget(u8);
-static void MainPage_ConfirmForgetMove(u8);
-static void MainPage_CancelForgetMove(u8);
 static void MainPage_WaitCloseMessage(u8);
 static void MainPage_ResetListIdx(void);
 static void MainPage_NavigateList(s32, u32);
@@ -213,7 +208,6 @@ void MoveReminder_Init(enum MoveReminderModes mode, MainCallback callback, void 
     sMoveReminderDataPtr->target.mon = mon;
     sMoveReminderDataPtr->useBoxMon = useBoxMon;
     sMoveReminderDataPtr->savedCallback = callback;
-    ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
     MovePool_SetSort(MOVE_POOL_SORT_DEFAULT);
 
     SetMainCallback2(CB2_InitSetup);
@@ -647,63 +641,6 @@ static void SpriteCB_TypeIcon(struct Sprite *sprite)
     sprite->invisible = PageInterface_GetValue() != PAGE_INTERFACE_FILTER;
 }
 
-static void ConfirmationBox_SetResult(u32 option)
-{
-    sMoveReminderDataPtr->confirmationBoxRes = option;
-}
-
-static bool32 ConfirmationBox_Input(void)
-{
-    u32 res = sMoveReminderDataPtr->confirmationBoxRes;
-
-    if (JOY_NEW(DPAD_DOWN))
-    {
-        if (!res)
-            res++;
-        else
-            res = CONFIRMATION_BOX_YES;
-
-        PlaySE(SE_SELECT);
-        ConfirmationBox_SetResult(res);
-        PageInterface_UpdateFrontEnd();
-    }
-    else if (JOY_NEW(DPAD_UP))
-    {
-        if (res)
-            res--;
-        else
-            res = CONFIRMATION_BOX_NO;
-
-        PlaySE(SE_SELECT);
-        ConfirmationBox_SetResult(res);
-        PageInterface_UpdateFrontEnd();
-    }
-
-    return res;
-}
-
-static void ConfirmationBox_Update(u32 target)
-{
-    if (target == CONFIRMATION_BOX_INACTIVE)
-        return;
-
-    enum MoveReminderWindows win = MREMINDER_WINDOW_MAIN;
-
-    // yes top, no bottom
-    BlitBitmapRectToWindow(win, sMoveReminder_ConfirmationBoxBlit,
-        0, (target == CONFIRMATION_BOX_YES) * TILE_TO_PIXELS(2),
-        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2),
-        CONFIRMATION_BOX_X, CONFIRMATION_BOX_YES_Y,
-        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2));
-    BlitBitmapRectToWindow(win, sMoveReminder_ConfirmationBoxBlit,
-        0, (target == CONFIRMATION_BOX_NO) * TILE_TO_PIXELS(2),
-        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2),
-        CONFIRMATION_BOX_X, CONFIRMATION_BOX_NO_Y,
-        TILE_TO_PIXELS(11), TILE_TO_PIXELS(2));
-
-    MiscUtil_AddTextPrinter(win, gText_YesNo, FONT_OUTLINED, CONFIRMATION_BOX_TEXT_X, CONFIRMATION_BOX_TEXT_Y, MREMINDER_TXTCLR_DEFAULT);
-}
-
 static enum MoveReminderModes MReminderMode_GetValue(void)
 {
     return sMoveReminderDataPtr->mode;
@@ -759,11 +696,8 @@ static void PageInterface_PrintHelpBar(void)
     if (str == NULL)
         str = gText_EmptyString2;
 
-    if (PageInterface_GetSubValue() == SUBPAGE_INTERFACE_MAIN_DEFAULT
-     && sMoveReminderDataPtr->printingDialogue)
-    {
+    if (sMoveReminderDataPtr->printingDialogue)
         str = gText_CancelOverwrite;
-    }
 
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, FONT_SMALL,
         HELPBAR_FOOTER_X, HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);
@@ -1315,6 +1249,15 @@ static void MiscUtil_TeachMove(void)
     InitSetup_MonData();
 }
 
+static void MiscUtil_CancelTeachMove(void)
+{
+    PlaySE(SE_SELECT);
+    MainPage_SetCurrListIdx(0); // resets moveSlot
+    PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
+    sMoveReminderDataPtr->printingDialogue = FALSE;
+    PageInterface_UpdateFrontEnd();
+}
+
 static void MiscUtil_AddTextPrinter(enum MoveReminderWindows window, const u8 *str, u32 fontId, u32 x, u32 y, enum MoveReminderTextColors color)
 {
     AddTextPrinterParameterized4(window, fontId, x, y, 0, 0, sMoveReminderTextColors[color], TEXT_SKIP_DRAW, str);
@@ -1453,60 +1396,7 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
     {
         if (MainPage_GetCurrListIdx() == MAX_MON_MOVES)
         {
-            struct MoveReminderMon *mon = MiscUtil_GetMon();
-
-            StringCopy_Nickname(gStringVar1, mon->nickname);
-            StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->moveToTeach));
-            MainPage_PrepareDialogue(COMPOUND_STRING(
-                "{STR_VAR_1} will not learn {STR_VAR_2}. Are you sure?"));
-            ConfirmationBox_SetResult(CONFIRMATION_BOX_NO);
-            PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH);
-            PageInterface_UpdateFrontEnd();
-            return;
-        }
-
-        struct MoveReminderMon *mon = MiscUtil_GetMon();
-
-        StringCopy_Nickname(gStringVar1, mon->nickname);
-        StringCopy(gStringVar2, GetMoveName(mon->moves[MainPage_GetCurrListIdx()]));
-        StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->moveToTeach));
-        MainPage_PrepareDialogue(COMPOUND_STRING(
-            "{STR_VAR_1} will forget {STR_VAR_2} "
-            "and learn {STR_VAR_3}. Are you sure?"));
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_YES);
-        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH);
-        PageInterface_UpdateFrontEnd();
-        return;
-    }
-
-    if (JOY_NEW(B_BUTTON))
-    {
-        struct MoveReminderMon *mon = MiscUtil_GetMon();
-
-        StringCopy_Nickname(gStringVar1, mon->nickname);
-        StringCopy(gStringVar2, GetMoveName(sMoveReminderDataPtr->moveToTeach));
-        MainPage_PrepareDialogue(COMPOUND_STRING(
-            "{STR_VAR_1} will not learn {STR_VAR_2}. Are you sure?"));
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_NO);
-        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH);
-        PageInterface_UpdateFrontEnd();
-        return;
-    }
-}
-
-static void MainPage_ConfirmForgetMove(u8 taskId)
-{
-    u32 res = ConfirmationBox_Input();
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        if (res == CONFIRMATION_BOX_NO)
-        {
-            PlaySE(SE_SELECT);
-            ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-            sMoveReminderDataPtr->printingDialogue = FALSE;
-            PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
-            PageInterface_UpdateFrontEnd();
+            MiscUtil_CancelTeachMove();
             return;
         }
 
@@ -1518,7 +1408,6 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
         StringCopy(gStringVar3, GetMoveName(sMoveReminderDataPtr->moveToTeach));
         MainPage_PrepareDialogue(COMPOUND_STRING(
             "{STR_VAR_1} forgot {STR_VAR_2} and learned {STR_VAR_3}!"));
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
         PageInterface_UpdateFrontEnd();
 
         MiscUtil_TeachMove();
@@ -1529,45 +1418,7 @@ static void MainPage_ConfirmForgetMove(u8 taskId)
 
     if (JOY_NEW(B_BUTTON))
     {
-        PlaySE(SE_SELECT);
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->printingDialogue = FALSE;
-        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
-        PageInterface_UpdateFrontEnd();
-        return;
-    }
-}
-
-static void MainPage_CancelForgetMove(u8 taskId)
-{
-    u32 res = ConfirmationBox_Input();
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        if (res == CONFIRMATION_BOX_YES)
-        {
-            MainPage_SetCurrListIdx(0); // resets moveSlot
-            PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
-        }
-        else
-        {
-            PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
-        }
-
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->printingDialogue = FALSE;
-        PageInterface_UpdateFrontEnd();
-        return;
-    }
-
-    if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        ConfirmationBox_SetResult(CONFIRMATION_BOX_INACTIVE);
-        sMoveReminderDataPtr->printingDialogue = FALSE;
-        PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE);
-        PageInterface_UpdateFrontEnd();
+        MiscUtil_CancelTeachMove();
         return;
     }
 }
@@ -1767,8 +1618,6 @@ static void MainPage_UpdateFrontEnd(void)
 
     MainPage_PrintTextBox(move);
     MainPage_PrintMoveSummary(move);
-
-    ConfirmationBox_Update(sMoveReminderDataPtr->confirmationBoxRes);
 
     MoveBar_Update();
 }

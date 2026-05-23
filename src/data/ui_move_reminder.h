@@ -6,7 +6,6 @@ static const u8 sMoveReminder_CategoriesBlit[] = INCBIN_U8("graphics/ui_menus/mo
 static const u8 sMoveReminder_FilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_indicator.4bpp");
 static const u8 sMoveReminder_TypeFilterIndicatorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/type_filter_indicator.4bpp");
 static const u8 sMoveReminder_FilterCursorBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/filter_cursor.4bpp");
-static const u8 sMoveReminder_ConfirmationBoxBlit[] = INCBIN_U8("graphics/ui_menus/move_reminder/confirmation_box.4bpp");
 
 static const u8 *const sMoveReminder_StatNames[NUM_STATS] =
 {
@@ -28,15 +27,11 @@ static const struct PageInterfaceInfo sPageInterfaceInfos[NUM_PAGE_INTERFACES] =
                 "{A_BUTTON} Learn {B_BUTTON} Cancel {SELECT_BUTTON} Filter {START_BUTTON} Sort"),
             [SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE] = COMPOUND_STRING(
                 "{A_BUTTON} Teach {B_BUTTON} Cancel"),
-            [SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH ... SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH] = COMPOUND_STRING(
-                "{A_BUTTON} Confirm {B_BUTTON} Cancel"),
         },
         .updateFrontEndFunc = MainPage_UpdateFrontEnd,
         .handleInputFunc = {
             [SUBPAGE_INTERFACE_MAIN_DEFAULT]            = MainPage_ChooseMoveToTeach,
             [SUBPAGE_INTERFACE_MAIN_CHOOSE_MOVE]        = MainPage_ChooseMoveToForget,
-            [SUBPAGE_INTERFACE_MAIN_CONFIRM_TEACH]      = MainPage_ConfirmForgetMove,
-            [SUBPAGE_INTERFACE_MAIN_CANCEL_TEACH]       = MainPage_CancelForgetMove,
         },
     },
     [PAGE_INTERFACE_FILTER] =
