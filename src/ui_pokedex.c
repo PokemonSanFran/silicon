@@ -789,7 +789,7 @@ void FreePokedexStructs(void)
     TRY_FREE_AND_SET_NULL(sPokedexGridResources);
     TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
     TRY_FREE_AND_SET_NULL(sFilterSet);
-    TRY_FREE_AND_SET_NULL(sFilterSetTemp);
+    //TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 void FreeBackgrounds(void)
