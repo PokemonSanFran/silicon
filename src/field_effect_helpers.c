@@ -1940,51 +1940,37 @@ static void Task_Saving(u8 taskId)
         ;
 }
 
-
 static bool8 Saving_Init(struct Task *task)
 {
-    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    s16 x2;
-    s16 y2;
-    s16 x_diff;
-    s16 y_diff;
-
-    u8 spriteId;
-    struct Sprite *sprite;
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
+    LoadSpriteSheetByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0);
+    u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
     task->eSavingSpriteID = spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
+
     if (spriteId != MAX_SPRITES)
     {
-        sprite = &gSprites[spriteId];
         sprite->oam.priority = 0;
         sprite->invisible = FALSE;
         sprite->coordOffsetEnabled = TRUE;
     }
-    sprite = &gSprites[spriteId];
 
-    y_diff = 1;
-    x_diff = 0;
+    s16 y_diff = 1;
+    s16 x_diff = 0;
+    s16 x2;
+    s16 y2;
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetSpritePosToMapCoords((playerObjEvent->currentCoords.x + x_diff), (playerObjEvent->currentCoords.y + y_diff), &x2, &y2);
-    StartSpriteAnim(sprite, 0);
     sprite->x = x2 + 8;
     sprite->y = y2 + 8;
     sprite->data[0] = playerObjEvent->currentCoords.x;
     sprite->data[1] = playerObjEvent->currentCoords.y;
 
-    u32 fontId = FONT_NORMAL;
-    u32 x = 0;
+    u32 fontId = FONT_OUTLINED;
+    u32 x = 2;
     u32 y = 0;
-
-    const u8 color[] =
-    {
-        TEXT_COLOR_TRANSPARENT,
-        TEXT_COLOR_DARK_GRAY,
-        TEXT_COLOR_WHITE,
-    };
-
-    AddSpriteTextPrinterParameterized3(spriteId,fontId,x,y,color,TEXT_SKIP_DRAW,COMPOUND_STRING("Saving..."));
-
+    static const union TextColor color = {.background = 0, .foreground = 1, .shadow = 7, .accent = 0};
+    AddSpriteTextPrinterParameterized6(spriteId, fontId, x, y, 0, 0, color, 0, COMPOUND_STRING("SAVING…"));
     task->eSavingAnimFrame = 0;
     task->eState++;
     return FALSE;
