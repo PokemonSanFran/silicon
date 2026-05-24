@@ -477,7 +477,8 @@ struct MonSummaryResources
             u32 row:3;
             u32 totalValues:10;
             u32 subMode:2;
-            u32 pad:17;
+            u32 ogTotalValues:10;
+            u32 pad:7;
         } stats;
         struct PACKED {
             u32 slotIdx:3;

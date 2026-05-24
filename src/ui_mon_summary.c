@@ -617,6 +617,8 @@ static void CB2_SummarySetup(void)
         break;
     case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
+        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+            sMonSummaryDataPtr->arg.stats.ogTotalValues = SummaryMon_GetStruct()->totalValues[SUMMARY_TOTAL_IVS];
         break;
     case SUMMARY_SETUP_BACKGROUNDS:
         SummarySetup_Backgrounds();
@@ -848,6 +850,8 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
         {
             PlaySE(SE_SELECT);
             SummaryInput_SetSubMode(TRUE);
+            if (SummaryPage_GetValue() == SUMMARY_PAGE_STATS)
+                sMonSummaryDataPtr->arg.stats.ogTotalValues = SummaryMon_GetStruct()->totalValues[SUMMARY_TOTAL_EVS];
         }
 
         SummaryPage_Reload(SUMMARY_RELOAD_PAGE);
@@ -931,6 +935,8 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MIN_VALUES);
+            SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
+            SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             PlaySE(SE_SELECT);
             break;
         }
@@ -946,6 +952,8 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_ADJUST_VALUE:
             StatsPageMisc_UpdateCurrentRowValues(SUMMARY_STATS_MAX_VALUES);
+            SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
+            SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             PlaySE(SE_SELECT);
             break;
         }
@@ -1015,6 +1023,7 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
+            SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
             if (StatsPageMisc_CalculateAvailableValues())
             {
                 PlaySE(SE_BOO);
@@ -2811,7 +2820,11 @@ static void StatsPageMisc_MonTotalEVs(void)
     }
 
     ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
+    if (SummaryInput_IsWithinSubMode())
+        ConvertUIntToDecimalStringN(gStringVar2, sMonSummaryDataPtr->arg.stats.ogTotalValues, STR_CONV_MODE_LEFT_ALIGN, 3);
+    else
+        ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
+
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
@@ -2921,22 +2934,21 @@ static void StatsPageMisc_UpdateCurrentRowValues(s32 delta)
 
     values = res;
     SetMonData(&sMonSummaryDataPtr->mon, trueRow, &values);
-    SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-    SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(1)]);
+    SummaryMon_CopyChanges();
+    SummaryMon_SetStruct();
 
     if (availableValues != StatsPageMisc_CalculateAvailableValues()
      && (delta == SUMMARY_STATS_MIN_VALUES || delta == SUMMARY_STATS_MAX_VALUES) != TRUE)
     {
         PlaySE(SE_SELECT);
+        SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
+        SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
     }
 }
 
-// only "useable" when within the evs changing mode
-// since we're comparing the OG evs _and_ the edited evs that are stored by the UI
 static u32 StatsPageMisc_CalculateAvailableValues(void)
 {
-    struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 ogTotalValues = mon->totalValues[StatsPageMisc_GetTotalValuesType()];
+    u32 ogTotalValues = sMonSummaryDataPtr->arg.stats.ogTotalValues;
     u32 totalValues = StatsPageMisc_UpdateTotalValues();
 
     if (totalValues == ogTotalValues) return 0;
@@ -2944,7 +2956,6 @@ static u32 StatsPageMisc_CalculateAvailableValues(void)
     return ogTotalValues - totalValues;
 }
 
-// fills using the evs array
 static u32 StatsPageMisc_UpdateTotalValues(void)
 {
     sMonSummaryDataPtr->arg.stats.totalValues = 0;
@@ -2975,6 +2986,8 @@ static u32 StatsPageMisc_GetMaxValuesPerStat(void)
 
 static void StatsPageMisc_ProcessValuesChanges(u8 taskId)
 {
+    SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
+
     if (StatsPageMisc_CalculateAvailableValues())
     {
         PlaySE(SE_BOO);
