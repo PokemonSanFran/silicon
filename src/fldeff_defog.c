@@ -17,7 +17,6 @@
 
 static void UNUSED ReturnFogAfterClearing(u8 taskId)
 {
-    //PSF TODO hook this up to run when ShouldWildBattleBeFog returns TRUE during the actual field effect script
     gTasks[taskId].data[0] = 0;
 
     if (gPaletteFade.active)

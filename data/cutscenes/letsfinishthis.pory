@@ -91,7 +91,6 @@ script LetsFinishThis_Debrief_Dialogue
 
 script LetsFinishThis_GoToFlashback_Script {
     fadescreen(FADE_TO_BLACK)
-        //PSF TODO Flashback
         msgbox(format("this is a flashback to Oliver's kids explaining the warp panels."),MSGBOX_AUTOCLOSE)
         fadescreen(FADE_FROM_BLACK)
         goto(LetsFinishThis_StartPlanning_Dialogue)

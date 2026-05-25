@@ -8,9 +8,6 @@ const FLAG_HIDE_SHINZO = FLAG_TEMP_2
 
 //Quest_CulturalPurity_
 
-//PSF TODO The text that appears when the quest is active should change for every mahjong tile that the player recieves
-//PSF TODO replace key item with mahjong tile
-
 script Quest_CulturalPurity_HideBackUp_Script{
     setflag(FLAG_HIDE_BACKUP)
     return
@@ -266,7 +263,6 @@ script Quest_CulturalPurity_BackupWalkOut_Script{
 
 script Quest_CulturalPurity_Battle_Script{
         msgbox(format("Well then, its time for your initation!"),,SPEAKER_DEFAULT)
-        //PSF TODO replace Brawly and Wally
         multi_fixed_2_vs_2(TRAINER_CULTURALPURITY_A,gText_CulturalPurity_OneOfUs,TRAINER_CULTURALPURITY_B,gText_CulturalPurity_OneOfUs,PARTNER_STEVEN)
         goto(Quest_CulturalPurity_PostBattle_Script)
 }

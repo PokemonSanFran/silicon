@@ -65,8 +65,6 @@ script Quest_Warehousewarfare_IntroBarges_Dialogue{
     goto(Quest_Warehousewarfare_ExplainBarge_Dialogue)
 }
 
-//PSF TODO get GetAbnormalWeatherMapNameAndType working to move the barges on the water routes
-
 script Quest_Warehousewarfare_ExplainBarge1_Dialogue{
     msgbox(format("We got somebody on the inside, who is able to let you in, and we're hoping from there, you're able to help slow down the operations inside."))
     msgbox(format("Head on over to RouteA, the guard shouldn't be at the door."))
@@ -236,11 +234,6 @@ script Quest_Warehousewarfare_PostRaid_CEO_Dialogue{
     msgbox(format("I should have guessed you'd be behind these... disruptions."),MSGBOX_NPC,SPEAKER_PRESTO_CEO)
     goto(Quest_Warehousewarfare_CEO_Battle_Script)
 }
-
-//PSF TODO
-// barge 1 you free the workers and turn off the engine in the same room
-// barge 2 you free the workers and turn off the engine seperately, but can be done in any order
-// barge 3 you turn off the engine which turns off the door trapping the workers, but there are no workers
 
 text gText_Warehousewarfare_WelcomeTo{
     format("Welcome to the Shopkeepers Union!")

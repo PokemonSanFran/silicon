@@ -25,7 +25,6 @@ script Quest_IBelieveICanFly_Active_Dialogue{
         goto(Quest_IBelieveICanFly_DenyBattle_Script)
     }
     //special(TrySkyBattle)
-    //PSF TODO merge Sky Battles
     setvar(VAR_RESULT,TRUE)
 
     if (var(VAR_RESULT)){

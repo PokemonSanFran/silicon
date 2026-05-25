@@ -6,7 +6,7 @@ mapscripts TorgeotClimb_MapScripts {
     }
 
     MAP_SCRIPT_ON_LOAD {
-        call(Script_RemoveTint) // PSF TODO gray scale tint stopped working
+        call(Script_RemoveTint)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

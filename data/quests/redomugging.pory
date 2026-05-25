@@ -111,9 +111,6 @@ script Quest_Redomugging_TooBusy_Dialogue{
     return
 }
 
-//PSF TODO When the office workers see you and you have the FameChecker, warp you back to the interview chair
-//https://github.com/pret/pokeemerald/wiki/Trainer-Scripts
-
 script Quest_Redomugging_StealPhone_Dialogue{
     faceplayer
     msgbox(format("Hey there, how can I -"))

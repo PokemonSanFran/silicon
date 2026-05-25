@@ -234,7 +234,6 @@ script Quest_Restoreespuleeoutskirts_Script_ImeldaReward
     closemessage
     trainerbattle_no_intro(TRAINER_IMELDA,format("Ha, this new generation may not be so bad after all."))
     goto(Quest_Restoreespuleeoutskirts_Dialogue_PostBattle)
-// PSF TODO Ahh, now it feels like the good old days…
 }
 
 script Quest_Restoreespuleeoutskirts_Dialogue_PostBattle
@@ -1078,7 +1077,6 @@ script Quest_Restoreespuleeoutskirts_EspuleetradepersonF_Dialogue_CompleteStartE
     buffermovename(STR_VAR_3,MOVE_QUEST_RESTOREESPULEEGYM_REQUIREMENT)
     msgbox(format("Excellent. This {STR_VAR_2} can use {STR_VAR_3}… Thus I shall now plant the Seed Of Mastery within {STR_VAR_1}."),,SPEAKER_ESPULEETRADEPERSONF)
     closemessage
-    // PSF TODO this has been broken in expansion but there is an update to fix it  soon, need
     //tryspecialevo(EVO_SCRIPT_TRIGGER,FALSE,FALSE)
     //waitstate
     callnative(Script_DebugQuest_RestoreEspuleeOutskirtsGymEvolveMon) // remove this once tryspecialevo is fixed

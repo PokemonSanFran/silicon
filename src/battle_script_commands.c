@@ -11572,7 +11572,6 @@ static void Cmd_trygivecaughtmonnick(void)
             {
                 PrepareStringBattle(STRINGID_POKEMONMUSTHAVEANICKNAME, gBattlerTarget);
                 gBattleCommunication[MSG_DISPLAY] = 1;
-                // PSF TODO how do I insert a pause here?
                 gBattleCommunication[MULTIUSE_STATE] = 2;
                 return;
             }

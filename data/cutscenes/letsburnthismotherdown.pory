@@ -219,7 +219,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     msgbox(format("{STR_VAR_1}!"),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
-    playse(SE_M_HYPER_BEAM) //PSF TODO update to use armor cannon once that attack anim exists
+    playse(SE_M_HYPER_BEAM)
     waitse
     fadescreenswapbuffers(FADE_TO_WHITE)
     applymovement(BAIYA, moves(walk_up, walk_right))

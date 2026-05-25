@@ -460,6 +460,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SHARPRISE_ENFORCER] = {_("SharpRise Enforcer") },
     [TRAINER_CLASS_CHARLOTTE] = {_("{PKMN} Trainer") },
     [TRAINER_CLASS_BAIYA] = {_("{PKMN} Trainer") },
+    [TRAINER_CLASS_FINALIST] = {_("Finalist") },
     [TRAINER_CLASS_ACE_TRAINER]         = {_("Ace Trainer") },
     [TRAINER_CLASS_ARRIBA_DRIVER]       = {_("Arriba Driver") },
     [TRAINER_CLASS_BACKPACKER]          = {_("Backpacker") },
@@ -4193,7 +4194,7 @@ void BattleTurnPassed(void)
     {
         if (gSideTimers[i].retaliateTimer > 0)
             gSideTimers[i].retaliateTimer--;
-    }    
+    }
 
     gFieldStatuses &= ~STATUS_FIELD_ION_DELUGE;
 
@@ -5745,14 +5746,11 @@ void CountDefeatedBackyard(void)
     {
         s32 enemySpecies = GetMonData(&gEnemyParty[i],MON_DATA_SPECIES);
 
-        //PSF TODO The following line currently checks if the map is correct AND its not a trainer battle, but it needs to also check if the enemy type (either of them) is flying type
         if ((GetCurrentMap() == MAP_ROUTE18 || GetCurrentMap() == MAP_ROUTE20) && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) && (enemySpecies)){
             defeatedBackyardCount++;
         }
     }
 
-    //PSF TODO the second half of the quest related "count" quests need to all be split into two seperate functions, one for the battle increments and one for the actual counts
-    //for example, this should be something like CheckBackyardQuestState(defeatedBackyardCount) and should live in a new file like quests_psf.c
     if ((defeatedBackyardCount > 26) && QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_GET_ACTIVE)){
         QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_SET_REWARD);
         QuestMenu_GetSetQuestState(QUEST_BUTONLYINMYBACKYARD,FLAG_REMOVE_ACTIVE);

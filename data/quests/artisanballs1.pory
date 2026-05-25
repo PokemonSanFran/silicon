@@ -270,7 +270,6 @@ script Quest_ArtisanBalls2_ShopQuestChoiceChoosePrompt_Script{
 }
 
 script Quest_ArtisanBalls2_ShopQuestChoice_Script {
-	//PSF TODO  this should not be a yes or no question, it should be "I want to shop" or "I want to hear the latest"
 
     faceplayer
     questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_ARTISANBALLS2)
@@ -288,7 +287,6 @@ script Quest_ArtisanBalls2_ShopQuestChoice_Script {
 script Quest_ArtisanBalls2_GenerateDailyBall_Script {
 	random(6)
 
-	//PSF TODO change this random to happen once daily
 	copyvar(VAR_TEMP_1, VAR_RESULT)
 
 	switch (var(VAR_RESULT))
@@ -530,8 +528,6 @@ script Quest_ArtisanBalls3_GenerateMart_Script {
 	release
 }
 
-//PSF TODO set apriballs sell price to 0, but buy price is 1300
-
 mart ArtisanBallsShop{
 	ITEM_FAST_BALL
 	ITEM_LEVEL_BALL
@@ -562,8 +558,6 @@ script Quest_ArtisanBalls3_Start_Dialogue {
     release
     end
 }
-
-//PSF TODO When battling any of the Gym Leaders, check if the player has a pokemon in their party with the riht ball. if they do AND they win the battle, mark ArtisanQuest3 as complete
 
 script Quest_ArtisanBalls3_Active_Dialogue {
     msgbox(format("I can't wait to see your battle!"),MSGBOX_NPC,SPEAKER_SERGEY)
@@ -659,7 +653,6 @@ script Quest_ArtisanBalls_ReadBook_Dialogue{
         case ITEM_LOVE_BALL: msgbox(format("The Love Ball works best when the user's Pokémon is the opposite gender of the wild Pokémon being captured."))
         case ITEM_FRIEND_BALL: msgbox(format("Pokémon captured with the Friend Ball will initally be more friendly to the Trainer that captured it."))
         case ITEM_MOON_BALL: msgbox(format("If the Pokémon being captured is part of an evolutionary family that uses a Moon Stone to evolve, the Moon Ball will be more effective."))
-        //PSF TODO Why doesn't pressing B work here?
         case MULTI_B_PRESSED:
         case ITEMS_COUNT: end
     }

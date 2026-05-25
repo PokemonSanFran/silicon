@@ -19,7 +19,6 @@ script Route6_Script_Interact_Dajuan
     closemessage
     release
     end
-    // PSF TODO Dajuan: Don’t overpredict!
 }
 
 script Route6_EventScript_023957DE

@@ -1131,7 +1131,6 @@ u32 BufferGameModeTitleGetWidth(u8 *dest)
 
 u32 CalculateDifficultyStars(void)
 {
-    //PSF TODO replace with real star calculation by adding up the percived difficulty of all options and putting it over total possible difficulty
     return (Random() % 5) + 1;
 }
 
@@ -1828,7 +1827,6 @@ static void PrintMenuCursor(void)
     if (MainMenu_GetMode() == MAINMENU_MODE_TRAINER_CARD)
         return;
 
-    // PSF TODO when the player does the Erase Save Data, the cursor appears on the screen for a frame and I don't know why
     u32 spriteId;
     u32 x = 57;
     u32 y = 34;

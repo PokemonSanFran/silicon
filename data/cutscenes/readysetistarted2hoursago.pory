@@ -48,7 +48,6 @@ script TwoHoursAgo_ExplainLeague_Script {
         setflag(FLAG_RECIEVED_LEFTOVERS)
         setflag(FLAG_TEMP_1F)
         lockall
-        //PSF TODO write special for league explain cutscene
         msgbox(format("You're in a race against hundreds of other Pokémon Trainers, to see who can beat our 8 Gym Leaders first. The first 16 Trainers to do so, will qualify for the Championship Tournament, held in a few weeks."),,SPEAKER_OLIVER)
         msgbox(format("The tournament will test all of your skills as a Trainer, but the winner will become a SharpRise Capital-sponsored career Pokémon Trainer."),,SPEAKER_OLIVER)
         msgbox(format("We expect the best from you and Charlotte! If you fail to qualify for the Championship, we'll be terminating your contract, and you'll be on your own... but we know that won't be the case! So don't worry."),,SPEAKER_OLIVER)

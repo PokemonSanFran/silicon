@@ -30,10 +30,6 @@ script Quest_Restorehodoucity_HidePokemnon_Script
 
 script Quest_Restorehodoucity_LockGymDoor_Script
 {
-// PSF TODO door needs three states
-// - door should have wooden planks over it and is locked
-// - door should have no wooden planks and is not locked
-// - door should have no wooden planks and is locked
     setmetatile(22,3,0x2B7,TRUE)
     special(DrawWholeMapView)
 }
@@ -168,9 +164,6 @@ script Quest_Restorehodoucity_FirstTimeInside_Dialogue
     waitmovement(LOCALID_HODOU_CITY_GYM_PKMNA)
 
     trainerbattle_two_trainers(TRAINER_ZAC,format("We’re too out of practice…"),TRAINER_KEVIN,(format("We’ve been found out!")))
-    //Kevin: And don’t come back! PSF TODO win text
-    //Zac: That was close…
-
     goto(Quest_Restorehodoucity_PostBattle_Script)
 }
 
@@ -231,7 +224,6 @@ script Quest_Restorehodoucity_PostBattle_Script
     applymovement(LOCALID_HODOU_CITY_GYM_KEVIN,moves(walk_right * 1))
     waitmovement(LOCALID_HODOU_CITY_GYM_ZAC)
     waitmovement(LOCALID_HODOU_CITY_GYM_KEVIN)
-    // PSF TODO I want both Zac and Kevin to resume walking in place after this cutscene ends
     release
     end
 }

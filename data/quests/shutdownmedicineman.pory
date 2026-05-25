@@ -66,7 +66,6 @@ script Quest_ShutDownMedicineMan_MakePurchase_Dialogue{
         msgbox(format("hey can i get a selfie?"),,SPEAKER_ALICIA)
 
         msgbox(format("absolutely yes! i hope you enjoy!"),,SPEAKER_DEFAULT)
-        //PSF TODO add camera flash and camera sound effect
         closemessage
         release
         end

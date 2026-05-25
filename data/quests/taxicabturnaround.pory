@@ -162,8 +162,6 @@ text gText_Taxicabturnaround_HaveSky{
 text gText_Taxicabturnaround_HaveLand{
     format("I'm trying to get a hold of a Pokémon in the Field egg group, something from the land, you know? And its gonna need some bulk, like 32kg.")
 }
-//PSF TODO need to change units based on the player's setting
-//PSF TODO once pokedex is done, should use the egg group strings
 text gText_Taxicabturnaround_DoYouHave{
     format("Do you have one you can give us??")
 }

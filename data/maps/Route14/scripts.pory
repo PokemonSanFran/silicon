@@ -15,6 +15,5 @@ script Route14_Script_Interact_Jeffrey
     closemessage
     release
     end
-    // PSF TODO Jeffrey: You need to understand pressure if you want to understand strategy!
 }
 

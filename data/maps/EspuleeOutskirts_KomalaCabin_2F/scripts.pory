@@ -7,7 +7,6 @@ script EspuleeOutskirts_KomalaCabin_2F_PreventPlayerBedroom_Script
     callnative(Script_HasPlayerJoinedThe_Tide)
     if ((var(VAR_ESPULEE_OUTSKIRTS_STATE) >= CHARLOTTE_INVITED_KOMALACABIN) && (var(VAR_RESULT) == FALSE))
     {
-        // PSF TODO the player should not even be able to get into this house until Charlotte opens it
         release
         end
     }

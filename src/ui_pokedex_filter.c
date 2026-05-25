@@ -3074,7 +3074,7 @@ static void SpeciesFilter_EditPage_LoadCheckSprite(void)
 
 static void SpeciesFilter_SetUp(u8 taskId)
 {
-    HideBg(BG2_POKEDEX_LIST_BG); //PSF TODO why does this bg get filled with garbage after SpeciesFilter_PrintFilterProperties
+    HideBg(BG2_POKEDEX_LIST_BG);
 
     LoadFilterTypeSpritesAndPalettes();
     SpeciesFilter_EditPage_LoadCheckSprite();

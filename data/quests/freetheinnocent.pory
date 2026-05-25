@@ -7,7 +7,6 @@ script Quest_Freetheinnocent_Script_HideFindtheguiltyvictimB
 
 script Quest_Freetheinnocent_Dialogue_StartQuest
 {
-// PSF TODO FreetheinnocentcomradeA sohuld be facing a computer and always turn back to the computer when the player is done
     faceplayer
     msgbox(format("The new work that The Tide is doing is very exciting and all…But I can’t savor it if FindtheguiltyvictimB isn’t here…"),,SPEAKER_FREETHEINNOCENTCOMRADEA)
     msgbox(format("They’re locked up for something they didn’t do!"),,SPEAKER_FREETHEINNOCENTCOMRADEA)

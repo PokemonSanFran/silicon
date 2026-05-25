@@ -905,7 +905,6 @@ u32 HandleScaledLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 
    //if (IsPlayerUsingGlassOnDefeatedTrainer())
        //return origEnemyLevel;
-    // PSF TODO when player is accessing the Google Glass but has already beaten the Trainer, their original unsacled level should show, otherwise show the scaled level. We can acheieve this with a temp var/flag or maybe even a new battleTypeFlags
 
    return CalculatedScaledTrainerLevel(origEnemyLevel, origNumEnemyMon);
 }
@@ -920,7 +919,6 @@ u32 HandleScaledSpecies(u32 origSpecies)
 
 static u32 GetScaledSpecies(u32 origSpecies)
 {
-    // PSF TODO Update with formula to figure out when to evolve the Pokemonn
     return origSpecies;
 }
 
@@ -1001,7 +999,6 @@ bool32 IsPointsMessagesOptionOn(void)
 
 void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
         return;
 
