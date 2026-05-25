@@ -92,7 +92,6 @@ script CompulsiveHealingPeerSupportGroup_Dialogue_StartBattle
 script CompulsiveHealingPeerSupportGroup_Script_StartBattle
 {
     setvar(VAR_NO_BAG_USE,NO_BAG_IN_BATTLE)
-// PSF TODO Player loss text: It’ll be a while before you can match my newfound power…
     switch (var(VAR_QUEST_COMPULSIVE_HEALING_PEER_SUPPORT_GROUP_DAILY_TYPE))
     {
         default:
@@ -144,7 +143,6 @@ text CompulsiveHealingPeerSupportGroup_Text_JustWarmingUp
 script CompulsiveHealingPeerSupportGroup_Dialogue_StartSecondBattle
 {
     setvar(VAR_NO_BAG_USE,NO_BAG_IN_BATTLE)
-// PSF TODO Player loss text: It’ll be a while before you can match my newfound power…
     msgbox(format("This is where real strength comes from. Do you feel the pressure that’s built up? The lack of release?"),,SPEAKER_NOPOMOD)
     msgbox(format("Use that! Focus on that. Another round!"),,SPEAKER_NOPOMOD)
     call(CompulsiveHealingPeerSupportGroup_Script_StartSecondBattle)

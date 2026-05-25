@@ -31,5 +31,4 @@ script Route99_Script_Interact_Quest_Restaurantexpansionchef
     closemessage
     release
     end
-// PSF TODO Man, something flame grilled would really hit that spot.
 }

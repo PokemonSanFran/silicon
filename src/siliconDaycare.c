@@ -495,6 +495,7 @@ void CompareOldNewIndividualValues(void)
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     struct Pokemon *mon = &daycare->viewMon;
     struct Pokemon *old = &gPlayerParty[gSpecialVar_0x8004];
+    //Debug_RandomizeMonInidividualValues(mon);
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
@@ -567,6 +568,7 @@ void ViewEggContents(void)
 void EditEggContents(void)
 {
     LoadEggContents(SUMMARY_MODE_LOCK_MOVES);
+    //Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
 }
 
 static void LoadEggContents(u32 mode)

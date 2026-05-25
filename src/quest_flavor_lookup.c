@@ -41,11 +41,6 @@
 
 #include "random.h"
 
-//PSF TODO we should rewrite this whole function to be cleaner
-//PSF TODO need to make sure we can reflect the quest states of the takedown quests and the false timeline quests
-
-//PSF TODO for eastern and western SF portions, we should show an objective that you haven't completed... maybe randomly choose every time you open?
-
 const u8 *GetQuestDesc_PlayersAdventure(void)
 {
     u8 storyline = VarGet(VAR_STORYLINE_STATE);

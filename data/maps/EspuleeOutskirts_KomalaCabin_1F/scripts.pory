@@ -92,7 +92,7 @@ script EspuleeOutskirts_Shorttermrental_ReadBaiyaDossier_Script
 script EspuleeOutskirts_Shorttermrental_ReadPlayerDossier_Script
 {
 	bufferspeciesname(STR_VAR_1,VAR_STARTER_MON)
-	bufferstring(STR_VAR_2,gText_ThreeQuestionMarks) // PSF TODO Replace with strings from customization menu
+	bufferstring(STR_VAR_2,gText_ThreeQuestionMarks)
 	msgbox(EspuleeOutskirts_Shorttermrental_PlayerDossier)
 	bufferstring(STR_VAR_3,"your")
 	msgbox(format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles..."))

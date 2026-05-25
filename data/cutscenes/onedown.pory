@@ -29,7 +29,6 @@ script OneDown_SetUpObject_Script {
 
 script OneDown_StartCutscene_Script {
         startcutscene(JUMPPLAYER_ONEDOWN)
-    //PSF TODO Adaora should now begin using Vigrim's theme as her character theme instead of the generic The Tide one
         msgbox(format("I just got filled in… that was absolutely incredible!"),,SPEAKER_ADAORA)
 
         msgbox(format("Thanks. And you've been an awesome leader too. These people love you."),,SPEAKER_ALICIA)

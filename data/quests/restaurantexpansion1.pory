@@ -174,7 +174,7 @@ script Quest_Restaurantexpansion_Script_BlockPantry
         return
     }
 
-    setmetatile(16,40,0x2A9,TRUE) // PSF TODO replace with proper boarded up tile
+    setmetatile(16,40,0x2A9,TRUE)
     special(DrawWholeMapView)
 }
 

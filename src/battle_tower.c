@@ -2158,25 +2158,6 @@ void PSF_UnlockCharlotteInBattleFacility(u32 money)
         FlagSet(FLAG_FACILITY_UNLOCK_CHARLOTTE);
 }
 
-    /*
-
-       FLAG_FACILITY_UNLOCK_ADAORA //after her character quest
-       FLAG_FACILITY_UNLOCK_CHARLOTTE //after you reach a certain amount of money...?
-                                      //
-       FLAG_FACILITY_UNLOCK_LIKO //after his 2nd quest
-       FLAG_FACILITY_UNLOCK_NERIENE //after her 2nd quest
-       FLAG_FACILITY_UNLOCK_AMI_ARGENTO //after his 2nd quest
-                                        //
-       FLAG_FACILITY_UNLOCK_FRANK //after post game E4 battle
-       FLAG_FACILITY_UNLOCK_ELEANOR //after post game E4 battle
-       FLAG_FACILITY_UNLOCK_MAGNUS //after post game E4 battle
-       FLAG_FACILITY_UNLOCK_TALA //after post game E4 battle
-                                 //
-       FLAG_FACILITY_UNLOCK_KEI_YING //after post game battle
-
-       //PSF TODO If a flag is on this list, it hasn't been assigned to a script in game yet!
-       */
-
 typedef struct {
     u16 trainerID;
     u16 unlockFlag;

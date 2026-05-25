@@ -34,7 +34,6 @@ script TirabudinPlace_Gym_EventScript_Torey{
 }
 
 script TirabudinPlace_Gym_BDRematch_Script{
-    //PSF TODO replace with a new method for judging if its rematch time
     goto_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoretirabudinplace_Dialogue)
     specialvar(VAR_RESULT,ShouldTryRematchBattle)
 

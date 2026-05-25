@@ -982,7 +982,6 @@ enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId)
     return pocketToCategoryTable[pocketId];
 }
 
-// PSF TODO apply new bag pockets into each respective categories
 enum ShopMenuCategories GetItemShopCategory(u16 itemId)
 {
     return ConvertPocketToCategory(GetItemPocket(itemId));

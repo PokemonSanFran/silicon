@@ -1,5 +1,3 @@
-//PSF TODO GGW layout: https://i.imgur.com/B1PeWTU.png, each side if 72x72
-
 mapscripts HalerbaWilds_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
@@ -26,7 +24,6 @@ script HalerbaWilds_Script_Interact_Jason
     closemessage
     release
     end
-    // PSF TODO Jason: You need to better balance the value of keeping a weakened party member in the fight vs. strategically swapping out!
 }
 
 script HalerbaWilds_EventScript_1508BB71
@@ -111,5 +108,4 @@ script HalerbaWilds_Script_Interact_Quest_GetthebandbacktogetherbikerC
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerC: I’ll never coast, as long as I live!
 }

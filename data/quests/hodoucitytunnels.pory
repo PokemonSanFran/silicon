@@ -1,8 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const FLAG_HIDE_TREASURE = FLAG_TEMP_1
 
-// PSF TODO it should be "obvious" that there is more tunnel behind the treasure where player can go to get encounters
-
 script Quest_Hodoucitytunnels_Script_TryHideTreasure
 {
     checkitem(ITEM_QUEST_HODOUTUNNELS_TREASURE,1)

@@ -93,7 +93,6 @@ script IGuessWeShouldBeNiceNow_StartPuzzle_Script {
             setobjectxyperm(CHARLOTTE,15,19)
 
         release
-        //PSF TODO add cutscene skips after the puzzles are finalized
         end
 }
 
@@ -166,7 +165,6 @@ script IGuessWeShouldBeNiceNow_CoreEncounter_Script {
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)
         multi_fixed_wild(PARTNER_STEVEN)
-        //PSF TODO make sure you can't catch Frank's ace
         clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
         specialvar(VAR_RESULT, GetBattleOutcome)
         switch (var (VAR_RESULT)) {

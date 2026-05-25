@@ -29,7 +29,6 @@ script Route4_Script_Interact_Andreas
     closemessage
     release
     end
-    // PSF TODO Andreas: Don’t worry - with enough practice, you’ll be able to see the future too!
 }
 
 script Route4_EventScript_0A8FC005
@@ -54,5 +53,4 @@ script Route4_Script_Interact_Quest_Restaurantexpansionlinecook
     closemessage
     release
     end
-// PSF TODO: Maybe I’m not so bad after all.
 }

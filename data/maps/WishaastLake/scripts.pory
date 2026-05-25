@@ -24,7 +24,6 @@ script WishaastLake_ObjectVisibility_Script {
 
 script WishaastLake_InteractEleanor_Event_Script {
     lock
-        //PSF TODO figure out better pre / post battle speech
         if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR){
 			goto(Rematches_Script_Eleanor)
 		} elif (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){

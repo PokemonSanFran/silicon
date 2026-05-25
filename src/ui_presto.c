@@ -217,7 +217,6 @@ static const u8 *const sText_PurchaseCodeErrors[] =
 {
     [SHOP_CODE_SUCCESS]          = gText_EmptyString2,
     [SHOP_CODE_NOT_ENOUGH_MONEY] = COMPOUND_STRING("Your account has been declined for insufficient funds!"),
-    // PSF TODO create better error text
     [SHOP_CODE_NOT_ENOUGH_SPACE] = COMPOUND_STRING("Your account has been declined for insufficient item space!"),
 };
 

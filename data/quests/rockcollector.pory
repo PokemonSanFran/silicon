@@ -104,7 +104,7 @@ script Quest_Rockcollector_Dialogue_PlayerHasNoStones
     if (var(VAR_RESULT) == 1)
     {
         bufferitemname(STR_VAR_1,ITEM_QUEST_ROCKCOLLECTOR_KIT)
-        msgbox(format("If you spot a bump in a cave wall, press the {A_BUTTON} while facing it to use the {STR_VAR_1}."),,SPEAKER_TROLLEYWORKER) // PSF TODO when this line is first said, A BUTTON does not transform into the button and sprites stop working
+        msgbox(format("If you spot a bump in a cave wall, press the {A_BUTTON} while facing it to use the {STR_VAR_1}."),,SPEAKER_TROLLEYWORKER)
     }
     else
     {
