@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install binutils
         run: |
@@ -32,6 +34,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
+            tools/poryscript
             tools/bin2c/bin2c
             tools/gbafix/gbafix
             tools/gbagfx/gbagfx
@@ -129,6 +132,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install binutils
         run: |
@@ -139,6 +144,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
+            tools/poryscript
             tools/bin2c/bin2c
             tools/gbafix/gbafix
             tools/gbagfx/gbagfx
@@ -166,6 +172,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install binutils
         run: |
@@ -200,13 +208,14 @@ jobs:
           TEST: 1
         run: make -j$(nproc) check
 
-      # - name: TestTrainers
-        # env:
-          # GAME_VERSION: EMERALD
-          # TEST: 1
-        # run: |
-          # touch test/battle/silicon_exp.c
-          # make -j${nproc} checktrainers TESTS="Silicon Exp Test"
+      - name: TestTrainers
+        env:
+          GAME_VERSION: EMERALD
+          TEST: 1
+        run: |
+          touch test/battle/silicon_exp.c
+          make -j${nproc} checktrainers TESTS="Silicon Exp Test"
+          make -j${nproc} checktrainers TESTS="All Resido Mons"
 
       # - name: ROM (Firered)
        #  env:

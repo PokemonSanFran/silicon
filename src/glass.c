@@ -530,7 +530,6 @@ static const u32 glassMarksGym[] = INCGFX_U32("graphics/ui_menus/glass/marks/gym
 static const u32 glassMarksGymComplete[] = INCGFX_U32("graphics/ui_menus/glass/marks/gymComplete.png", ".4bpp.smol");
 static const u32 glassMarksGymCompleteHover[] = INCGFX_U32("graphics/ui_menus/glass/marks/gymCompleteHover.png", ".4bpp.smol");
 static const u32 glassMarksGymRematch[] = INCGFX_U32("graphics/ui_menus/glass/marks/gymRematch.png", ".4bpp.smol");
-// PSF TODO this sprite is broken on the trainer page - just this one, don't know why
 static const u32 glassMarksRegularComplete[] = INCGFX_U32("graphics/ui_menus/glass/marks/regularComplete.png", ".4bpp.smol");
 static const u32 glassMarksRegularCompleteHover[] = INCGFX_U32("graphics/ui_menus/glass/marks/regularCompleteHover.png", ".4bpp.smol");
 static const u32 glassMarksRegularRematchComplete[] = INCGFX_U32("graphics/ui_menus/glass/marks/regularRematchComplete.png", ".4bpp.smol");
@@ -2609,7 +2608,6 @@ static void ChangeTrainerRow(u32 direction)
 
 static void HandleSprites(u32 direction, u32 row, u32 numListElements)
 {
-    //PSF TODO when a map only has one or two Trainers, sprites do not print correctly
     u32 originalTrainerId[GLASS_TRAINER_MAX_SHOWED];
     u32 newTrainerId[GLASS_TRAINER_MAX_SHOWED];
     u32 rowMovementRecord[GLASS_TRAINER_MAX_SHOWED][2];

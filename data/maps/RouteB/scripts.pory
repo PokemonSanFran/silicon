@@ -13,6 +13,5 @@ script RouteB_Script_Interact_Adam
     closemessage
     release
     end
-    // PSF TODO Adam: Unlucky breaks require mental resilience!
 }
 

@@ -25,7 +25,6 @@ script CuconuTown_Compound_2F_Bed_Script {
 }
 
 script BedScript_SetNewTime_Script{
-//PSF TODO replace with call to check the current time of day
     random(4)
     switch(var(VAR_RESULT))
     {
@@ -41,7 +40,6 @@ script BedScript_SetNewTime_Script{
     closemessage
     switch(var(VAR_RESULT))
     {
-//PSF TODO replace with call to advance time to next occurance of this time
         case TIME_MORNING: initclock(MORNING_HOUR_BEGIN,0)
         case TIME_DAY: initclock(DAY_HOUR_BEGIN,0)
         case TIME_EVENING: initclock(EVENING_HOUR_BEGIN,0)

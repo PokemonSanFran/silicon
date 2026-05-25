@@ -59,7 +59,7 @@ script YouCantStopMe_LastChance_Dialogue {
 
         msgbox(format("People on HalaiIsland died, Oliver! We can’t fix that."),,SPEAKER_ALICIA)
 
-        msgbox(format("Look, it's unfortunate that there was some collateral damage, but it’s for the better! The region will be better! We’re going to usher in a new age!"),,SPEAKER_OLIVER) //PSF TODO EMOTE sigh
+        msgbox(format("Look, it's unfortunate that there was some collateral damage, but it’s for the better! The region will be better! We’re going to usher in a new age!"),,SPEAKER_OLIVER)
 
         msgbox(format("Do you all really think you did the right thing? Don’t you get that this is insane?!"),,SPEAKER_ALICIA)
 

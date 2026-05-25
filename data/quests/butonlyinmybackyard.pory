@@ -68,7 +68,6 @@ script Quest_ButOnlyIn_Complete_Dialogue{
     end
 }
 
-//PSF TODO create a bar on the east side of Resido for this conversation to happen in
 //also use Quest_ButOnlyIn_HideNimby_Script there
 script Quest_ButOnlyIn_Bar_Dialogue{
     lock

@@ -14,7 +14,6 @@ script Route8_Script_Interact_Quest_GetthebandbacktogetherbikerB
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerB: And I’m their strongest member!
 }
 
 script Route8_EventScript_0049EFE8

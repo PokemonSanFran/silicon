@@ -15,5 +15,4 @@ script Route12_Script_Interact_Quest_GetthebandbacktogetherbikerD
     closemessage
     release
     end
-// PSF TODO GetthebandbacktogetherbikerD: Maybe you can’t handle it…
 }

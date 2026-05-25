@@ -1,3 +1,4 @@
 [submodule "tools/poryscript"]
 	path = tools/poryscript
 	url = https://github.com/PokemonSanFran/poryscript
+    branch = feature/siliconSettings

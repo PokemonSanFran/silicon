@@ -7,7 +7,7 @@ script Quest_Psyop_Script_Interact_PsyopworkerA
     goto_if_quest_complete(QUEST_PSYOP,Quest_Psyop_Dialogue_Complete)
     goto_if_quest_active(QUEST_PSYOP,Quest_Psyop_Dialogue_Active)
 
-    msgbox(format("Keep your eyes on Buzzr for the &AuthenticHustle challenge! We’re going to take the internet by storm!"),,SPEAKER_PSYOPWORKERA) // PSF TODO make & into #
+    msgbox(format("Keep your eyes on Buzzr for the &AuthenticHustle challenge! We’re going to take the internet by storm!"),,SPEAKER_PSYOPWORKERA)
     closemessage
     release
     end
@@ -31,7 +31,7 @@ script Quest_Psyop_Dialogue_Active
     {
         goto(Quest_Psyop_Script_JudgePokemon)
     }
-    msgbox(format("I’m running the &AuthetnicHustle challenge. Trainers who are willing to put in the work can have their {STR_VAR_1} upgraded!"),,SPEAKER_PSYOPWORKERA) // PSF TODO use # here
+    msgbox(format("I’m running the &AuthetnicHustle challenge. Trainers who are willing to put in the work can have their {STR_VAR_1} upgraded!"),,SPEAKER_PSYOPWORKERA)
     msgbox(format("Come back with a Phony {STR_VAR_1} with maximum Effort Values and in a {STR_VAR_2}, and let’s see what you’ve got!"),,SPEAKER_PSYOPWORKERA)
     closemessage
     release
@@ -41,7 +41,7 @@ script Quest_Psyop_Dialogue_Active
 script Quest_Psyop_Script_JudgePokemon
 {
     bufferspeciesname(STR_VAR_1,SPECIES_QUEST_PSYOP_TARGET)
-    msgbox(format("Welcome to the &AuthenticHustle challenge. Show me your {STR_VAR_1} as proof of your grind!"),,SPEAKER_PSYOPWORKERA) // PSF TODO use #
+    msgbox(format("Welcome to the &AuthenticHustle challenge. Show me your {STR_VAR_1} as proof of your grind!"),,SPEAKER_PSYOPWORKERA)
     closemessage
     special(ChoosePartyMon)
     waitstate

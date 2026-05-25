@@ -788,7 +788,6 @@ static void AdventureGuide_PrintGuideList(void)
 {
     u32 font = FONT_NORMAL;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
-    // PSF TODO use Crim font here
     u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE_2;
 
     FillPalette(ADVENTURE_CURSOR_COLOR,PAL_INDEX_CURSOR,2);
@@ -1189,11 +1188,3 @@ static void AdventureGuide_HandleAnyPageInput(u8 taskId, u32 optionNum)
             AdventureGuide_LeaveGuideReturnToMenu();
     }
 }
-
-// PSF TODO
-// Determine the list of adventure guides that should appear
-// Find places in game to put all adventure guides
-// Insert them into the game
-// Write text for all adventure guides
-// Test all the different kinds
-// meta/docs/adventure_guide.md

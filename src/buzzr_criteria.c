@@ -78,7 +78,6 @@ static bool32 TweetCriteria_HasTalkedReporter(void)
 
 static bool32 TweetCriteria_SocialMedia(void)
 {
-    // PSF TODO is the rate at which social media quests unlocked good? They are basically all unlocked as soon as the quest starts, flooding the timeline. is that okay?
     bool32 talkedReporter = TweetCriteria_HasTalkedReporter();
     bool32 hasSteps = TweetCriteria_CheckSteps(TWEET_SOCIAL_MEDIA_STEPS);
     return (talkedReporter && hasSteps);

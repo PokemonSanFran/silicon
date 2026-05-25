@@ -694,9 +694,6 @@ void SetAndSetUpCurrentPage(u8 taskId)
     SetCurrentPage(pageId);
     InitializeBackgroundsAndLoadBackgroundGraphics();
     BeginNormalPaletteFade(PALETTES_ALL,0,16,0,RGB_WHITE);
-    // PSF TODO
-    // When loading assets on the pages, the following issues are visible during the palette fade
-    // Use of FillPalette in Stats / Moves / Evo / Info (with colors appearing on the edges)
     Page_SetUp(taskId);
 }
 
@@ -2072,7 +2069,7 @@ void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32 fontId, 
     BlitBitmapToWindow(windowId,learnIconMachine,x,y,TILE_SIZE_1BPP,TILE_SIZE_1BPP);
     x+=POKEDEX_PAGE_MOVES_LEARN_ICON_RIGHT_PADDING;
 
-    CopyItemName(ITEM_NONE,gStringVar1); // PSF TODO Gen 3 TMs need to be removed from learnsets because some moves like Pidgeot Steel Wing are showing up but don't have a matching TM
+    CopyItemName(ITEM_NONE,gStringVar1);
 
     for (u32 machineIndex = 0; machineIndex < NUM_TECHNICAL_MACHINES; machineIndex++)
     {
@@ -4075,7 +4072,6 @@ static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, u32 windowId)
 
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,4);
     StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1}"));
-    //PSF TODO replace yen with octhorpe
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar3);
 }
 

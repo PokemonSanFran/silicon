@@ -3,11 +3,6 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const OCTILLERY = (LOCALID_CAMERA + 1)
 
 script Quest_FreshwaterEvolution_CheckPartyAndQuest_Script{
-#if RELEASE == FALSE
-    call_if_quest_active(QUEST_FRESHWATEREVOLUTION,Quest_FreshwaterEvolution_Debug_Script)
-#endif
-//PSF TODO remove this when ready or get preproc working
-
     setvar(VAR_0x8005,QUEST_FRESHWATER_EVOLUTION_SPECIES)
     special(CheckSpecies)
 
@@ -28,12 +23,6 @@ script Quest_FreshwaterEvolution_AlreadyShiny_Dialogue{
         waitmovement(PLAYER)
         release
         end
-}
-
-script Quest_FreshwaterEvolution_Debug_Script{
-    givemon(QUEST_FRESHWATER_EVOLUTION_SPECIES,1)
-    msgbox(format("you now have an octillery. might be in your boxes."))
-    return
 }
 
 script Quest_FreshwaterEvolution_GoOctillery_Script

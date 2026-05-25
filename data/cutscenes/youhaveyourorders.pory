@@ -101,9 +101,7 @@ script YouHaveYourOrders_Assignment_Dialogue
     applymovement(KEIYING,Common_Movement_FaceDown)
         waitmovement(0)
 
-        msgbox(format("Thank you, as usual. I sometimes wonder who is actually benefiting from this relationship."),,SPEAKER_KEIYING) //PSF TODO EMOTE sigh
-
-// PSF TODO how do we handle sighing? a new emoji? an overworld animation?
+        msgbox(format("Thank you, as usual. I sometimes wonder who is actually benefiting from this relationship."),,SPEAKER_KEIYING)
 
         msgbox(format("I still feel like it's me! I'll do anything to help protect what we've built."),,SPEAKER_ALICIA)
 

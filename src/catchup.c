@@ -147,8 +147,6 @@ void DoCatchUpEffortValues(u32 partyIndex)
 {
     u32 statIndex, stat, effortValue;
 
-    //PSF TODO replace this for loop with just giving the mon an unallocated EV
-
     for (statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
         stat = MON_DATA_HP_EV + statIndex;
