@@ -70,6 +70,8 @@ enum MonSummaryMainSprites
     SUMMARY_MAIN_SPRITE_HP_BAR,
     SUMMARY_MAIN_SPRITE_EXP_BAR,
     SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
+    SUMMARY_MAIN_SPRITE_TYPE_1,
+    SUMMARY_MAIN_SPRITE_TYPE_2,
 
     // uses its own function to be spawned
     SUMMARY_MAIN_SPRITE_POKEMON,
@@ -121,8 +123,6 @@ enum MonSummaryInfosSprites
     SUMMARY_INFOS_SPRITE_POKE_BALL,
     SUMMARY_INFOS_SPRITE_DESC_CURSOR,       // for switching between ability and held item description for the textbox
     SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR,  // this is a seperate sprite from above to achieve smoother animation
-    SUMMARY_INFOS_SPRITE_TYPE_ICON_1,
-    SUMMARY_INFOS_SPRITE_TYPE_ICON_2,
 
     NUM_SUMMARY_INFOS_SPRITES
 };
@@ -143,6 +143,8 @@ enum MonSummaryInfosSubModes
 #define SUMMARY_INFOS_HEADER_HP_BAR_X           (66 + 32)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_X          (67)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X   (79)
+#define SUMMARY_INFOS_HEADER_TYPE_1_X           (1 + 8)
+#define SUMMARY_INFOS_HEADER_TYPE_2_X           (1 + 8)
 
 #define SUMMARY_INFOS_HEADER_NAME_Y             (1)
 #define SUMMARY_INFOS_HEADER_GENDER_Y           SUMMARY_INFOS_HEADER_NAME_Y
@@ -152,6 +154,7 @@ enum MonSummaryInfosSubModes
 #define SUMMARY_INFOS_HEADER_HP_BAR_Y           (28 + 16)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
+#define SUMMARY_INFOS_HEADER_TYPINGS_Y          (1 + 8)
 
 #define SUMMARY_INFOS_GENERAL_X      (TILE_TO_PIXELS(15) + 7)     // type:
 #define SUMMARY_INFOS_GENERAL_X2     (TILE_TO_PIXELS(15) + 42)    // elec
@@ -184,8 +187,6 @@ enum MonSummaryInfosSubModes
 enum MonSummaryStatsSprites
 {
     SUMMARY_STATS_SPRITE_HELD_ITEM,
-    SUMMARY_STATS_SPRITE_TYPE_1,
-    SUMMARY_STATS_SPRITE_TYPE_2,
     SUMMARY_STATS_SPRITE_STAT_CURSOR,
     SUMMARY_STATS_SPRITE_UP_ARROW,
     SUMMARY_STATS_SPRITE_DOWN_ARROW,
@@ -221,7 +222,8 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_HEADER_HP_BAR_X           (32 + 32)
 #define SUMMARY_STATS_HEADER_EXP_BAR_X          (34)
 #define SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X   (89)
-#define SUMMARY_STATS_HEADER_TYPINGS_X          (89 + 8)
+#define SUMMARY_STATS_HEADER_TYPE_1_X           (89 + 8)
+#define SUMMARY_STATS_HEADER_TYPE_2_X           (101 + 8)
 
 #define SUMMARY_STATS_HEADER_Y                  (0)
 #define SUMMARY_STATS_HEADER_SHINY_Y            (20 + 8)
@@ -261,8 +263,6 @@ enum MonSummaryTotalValues
 
 enum MonSummaryMovesSprites
 {
-    SUMMARY_MOVES_SPRITE_TYPE_1,
-    SUMMARY_MOVES_SPRITE_TYPE_2,
     SUMMARY_MOVES_SPRITE_MOVE_1,
     SUMMARY_MOVES_SPRITE_MOVE_2,
     SUMMARY_MOVES_SPRITE_MOVE_3,
@@ -322,6 +322,8 @@ enum MonSummaryMovesForgetConfirmation
 #define SUMMARY_MOVES_HEADER_EXP_BAR_X             SUMMARY_STATS_HEADER_EXP_BAR_X
 #define SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_X      SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X
 #define SUMMARY_MOVES_HEADER_TYPINGS_X             SUMMARY_STATS_HEADER_TYPINGS_X
+#define SUMMARY_MOVES_HEADER_TYPE_1_X              SUMMARY_STATS_HEADER_TYPE_1_X
+#define SUMMARY_MOVES_HEADER_TYPE_2_X              SUMMARY_STATS_HEADER_TYPE_2_X
 
 #define SUMMARY_MOVES_HEADER_Y                     SUMMARY_STATS_HEADER_Y
 #define SUMMARY_MOVES_HEADER_SHINY_Y               SUMMARY_STATS_HEADER_SHINY_Y
