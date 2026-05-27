@@ -334,7 +334,7 @@ static void ShowSiliconStarter(u32 slot)
     struct BoxPokemon *boxMons = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
     u32 maxMonIndex = IN_BOX_COUNT - 1;
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, boxMons, slot, maxMonIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, boxMons, slot, maxMonIndex, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 u32 GetStarterFromSlot(enum SiliconStarters starterSlot)
