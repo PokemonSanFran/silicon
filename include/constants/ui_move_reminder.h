@@ -155,9 +155,6 @@ enum MoveReminderBarSpriteIds
 // SpriteCB_MoveBar
 #define sMoveBar_Idx                    data[0]
 
-// MainPage_WaitCloseMessage
-#define tMainPage_Timer                 data[0]
-
 enum MoveReminderWindows
 {
     MREMINDER_WINDOW_MAIN,

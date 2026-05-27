@@ -1343,7 +1343,6 @@ static void MainPage_ChooseMoveToTeach(u8 taskId)
         PageInterface_UpdateFrontEnd();
         if (moveStatus == MON_HAS_MAX_MOVES) return;
 
-        gTasks[taskId].tMainPage_Timer = 0;
         SetTaskFuncWithFollowupFunc(taskId, MainPage_WaitCloseMessage, Task_MReminderInput_Main);
         return;
     }
@@ -1411,7 +1410,6 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
         PageInterface_UpdateFrontEnd();
 
         MiscUtil_TeachMove();
-        gTasks[taskId].tMainPage_Timer = 0;
         SetTaskFuncWithFollowupFunc(taskId, MainPage_WaitCloseMessage, Task_MReminderInput_Main);
         return;
     }
@@ -1425,14 +1423,8 @@ static void MainPage_ChooseMoveToForget(u8 taskId)
 
 static void MainPage_WaitCloseMessage(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-
-    tMainPage_Timer++;
-    if (tMainPage_Timer < 20)
-        return;
-
     #define PROGRESS_BUTTONS (A_BUTTON | B_BUTTON | L_BUTTON | R_BUTTON | START_BUTTON | SELECT_BUTTON)
-    if (JOY_NEW(PROGRESS_BUTTONS) || tMainPage_Timer == 100)
+    if (JOY_NEW(PROGRESS_BUTTONS))
     {
         PageInterface_SetSubValue(SUBPAGE_INTERFACE_MAIN_DEFAULT);
         sMoveReminderDataPtr->printingDialogue = FALSE;
