@@ -526,7 +526,7 @@ struct MonSummaryPageInfo
     const u8 *name;
     const u8 *const *helpBar;
     const u32 *tilemap;
-    struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
+    struct Coords16 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
     void (*handleUpdateText)(void); // only updates certain parts of the page's interface

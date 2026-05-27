@@ -122,7 +122,7 @@ static u32 SummaryPage_GetPageSlot(void);
 static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages);
 static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
-static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
+static struct Coords16 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
 static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages);
@@ -522,7 +522,7 @@ static void SummarySetup_Sprites(void)
     for (u32 i = 0; i < SUMMARY_MAIN_SPRITE_POKEMON; i++)
     {
         const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
-        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), config->id);
+        struct Coords16 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), config->id);
         struct SpriteTemplate template =
         {
             .tileTag = config->tileTag,
@@ -1637,11 +1637,11 @@ static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages page)
     return info->tilemap;
 }
 
-static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page, enum MonSummaryMainSprites sprite)
+static struct Coords16 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page, enum MonSummaryMainSprites sprite)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
 
-    if (!info) return (struct Coords8){ DISPLAY_WIDTH, DISPLAY_HEIGHT };
+    if (!info) return (struct Coords16){ DISPLAY_WIDTH, DISPLAY_HEIGHT };
 
     return info->mainSpriteCoords[sprite];
 }
@@ -1745,7 +1745,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         {
             for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
             {
-                struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
+                struct Coords16 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
                 u32 spriteId = SummarySprite_GetSpriteId(i);
 
                 gSprites[spriteId].x = coords.x;
