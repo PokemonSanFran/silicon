@@ -2100,14 +2100,20 @@ static void SummarySprite_UpdateMonTypes(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Type types[2] = { GetSpeciesType(mon->species, 0), GetSpeciesType(mon->species, 1) };
+    struct Sprite *sprite;
 
     u32 spriteId = SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_TYPE_1);
     if (spriteId != SPRITE_NONE)
     {
-        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[0]));
-        gSprites[spriteId].callback = SpriteCallbackDummy;
-        gSprites[spriteId].oam.priority = 0;
-        StartSpriteAnim(&gSprites[spriteId], types[0]);
+        sprite = &gSprites[spriteId];
+
+        u32 width = GetStringWidth(FONT_OUTLINED, gTypesInfo[types[0]].shortName, 0);
+        sprite->x2 = width + 3;
+
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[0]));
+        sprite->callback = SpriteCallbackDummy;
+        sprite->oam.priority = 0;
+        StartSpriteAnim(sprite, types[0]);
     }
 
     spriteId = SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_TYPE_2);
@@ -2120,11 +2126,16 @@ static void SummarySprite_UpdateMonTypes(void)
 
     if (spriteId != SPRITE_NONE)
     {
-        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[1]));
-        gSprites[spriteId].callback = SpriteCallbackDummy;
-        gSprites[spriteId].oam.priority = 0;
-        gSprites[spriteId].invisible = FALSE;
-        StartSpriteAnim(&gSprites[spriteId], types[1]);
+        sprite = &gSprites[spriteId];
+
+        u32 width = GetStringWidth(FONT_OUTLINED, gTypesInfo[types[1]].shortName, 0);
+        sprite->x2 = width + 3;
+
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[1]));
+        sprite->callback = SpriteCallbackDummy;
+        sprite->oam.priority = 0;
+        sprite->invisible = FALSE;
+        StartSpriteAnim(sprite, types[1]);
     }
 }
 
@@ -2535,6 +2546,20 @@ static void InfosPageGeneral_PrintMonTyping(struct MonSummary *mon)
     SummaryPrint_AddText(windowId, fontId,
         SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Type:"));
+
+    u32 species = mon->species;
+    enum Type types[2] = { GetSpeciesType(species, 0), GetSpeciesType(species, 1) };
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y,
+        SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[0]].shortName);
+
+    if (types[1] != types[0])
+    {
+        SummaryPrint_AddText(windowId, fontId,
+            SUMMARY_INFOS_GENERAL_X3, SUMMARY_INFOS_GENERAL_Y,
+            SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[1]].shortName);
+    }
 }
 
 static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *mon)
