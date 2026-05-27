@@ -1738,7 +1738,6 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         SummaryScreen_DestroyAnimDelayTask();
         SummaryMon_SetStruct();
         SummarySprite_PlayPokemonCry();
-        SummarySprite_UpdateMonTypes();
         animate = FALSE;
         break;
     case SUMMARY_RELOAD_PAGE:
@@ -1771,6 +1770,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         }
     }
 
+    SummarySprite_UpdateMonTypes();
     SummarySprite_CreateMonSprite();
     gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = animate;
     SummaryPage_UnloadDynamicSprites();
@@ -2107,9 +2107,7 @@ static void SummarySprite_UpdateMonTypes(void)
     {
         sprite = &gSprites[spriteId];
 
-        u32 width = GetStringWidth(FONT_OUTLINED, gTypesInfo[types[0]].shortName, 0);
-        sprite->x2 = width + 3;
-
+        sprite->x2 = (GetStringWidth(FONT_OUTLINED, gTypesInfo[types[0]].shortName, 0) + 3) * (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS);
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[0]));
         sprite->callback = SpriteCallbackDummy;
         sprite->oam.priority = 0;
@@ -2128,9 +2126,7 @@ static void SummarySprite_UpdateMonTypes(void)
     {
         sprite = &gSprites[spriteId];
 
-        u32 width = GetStringWidth(FONT_OUTLINED, gTypesInfo[types[1]].shortName, 0);
-        sprite->x2 = width + 3;
-
+        sprite->x2 = (GetStringWidth(FONT_OUTLINED, gTypesInfo[types[1]].shortName, 0) + 3) * (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS);
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[1]));
         sprite->callback = SpriteCallbackDummy;
         sprite->oam.priority = 0;
