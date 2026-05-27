@@ -1,23 +1,7 @@
 #ifndef GUARD_UI_MON_SUMMARY_H
 #define GUARD_UI_MON_SUMMARY_H
 
-// needs to be put here for future uses
-enum __attribute__((packed)) MonSummaryModes
-{
-    UI_SUMMARY_MODE_DEFAULT,
-    UI_SUMMARY_MODE_LOCK_EDIT, // player cannot edit EVs nor moves
-    UI_SUMMARY_MODE_EDIT_IVS,
-    UI_SUMMARY_MODE_SELECT_MOVE, // evo scene/learn move after leveling up
-
-    // only used for moveReminder
-    UI_SUMMARY_MODE_MOVE_MENU,
-    UI_SUMMARY_MODE_MOVE_DETAILS,
-
-    // bag
-    UI_SUMMARY_MODE_HELD_ITEM_DESC,
-
-    NUM_UI_SUMMARY_MODES
-};
+#include "pokemon_summary_screen.h"
 
 extern const u8 gMonSummary_MoveBarGfx[];
 extern const u8 gMonSummary_MoveTypeGfx[];
@@ -27,6 +11,6 @@ extern const struct SubspriteTable gMonSummary_128x16SubspriteTable[];
 extern const struct SpriteTemplate gMonSummary_SlotCursorSpriteTemplate;
 extern const struct SpriteTemplate gMonSummary_CursorArrowsSpriteTemplate;
 
-void MonSummary_Init(enum MonSummaryModes, void *, u8, u8, bool32, MainCallback);
+void MonSummary_Init(enum PokemonSummaryScreenMode, void *, u8, u8, bool32, MainCallback);
 
 #endif // GUARD_UI_MON_SUMMARY_H

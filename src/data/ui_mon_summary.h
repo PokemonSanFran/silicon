@@ -235,22 +235,22 @@ static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
 
 static const s8 sSummaryInput_MultiPartyOrder[] = {0, 2, 3, 1, 4, 5};
 
-static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
+static const struct MonSummaryModeInfo sSummaryMode_Info[] =
 {
-    [UI_SUMMARY_MODE_DEFAULT] =
+    [SUMMARY_MODE_NORMAL] =
     {
         .inputFunc = Task_SummaryMode_DefaultInput,
     },
-    [UI_SUMMARY_MODE_LOCK_EDIT] =
+    [SUMMARY_MODE_LOCK_MOVES] =
     {
         .helpTxtFunc = SummaryMode_GetLockEditHelpText,
         .inputFunc = Task_SummaryMode_DefaultInput,
     },
-    [UI_SUMMARY_MODE_EDIT_IVS] =
+    [SUMMARY_MODE_EDIT_IVS] =
     {
         .inputFunc = Task_SummaryMode_EditIVsInput,
     },
-    [UI_SUMMARY_MODE_SELECT_MOVE] =
+    [SUMMARY_MODE_SELECT_MOVE] =
     {
         .helpTxtFunc = SummaryMode_GetSelectMoveHelpText,
         .inputFunc = Task_SummaryMode_SelectMoveInput,

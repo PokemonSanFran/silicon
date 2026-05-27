@@ -1195,27 +1195,12 @@ u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
 {
     // Start monSummary
-    enum MonSummaryModes newMode = UI_SUMMARY_MODE_DEFAULT;
     bool32 useBoxMon = FALSE;
 
-    switch (mode)
+    if (mode == SUMMARY_MODE_BOX || mode == SUMMARY_MODE_BOX_CURSOR)
     {
-    default:
-        assertf(FALSE, "summary mode %d is used but not handled in the new MonSummary", mode);
-        // fallthrough
-    case SUMMARY_MODE_NORMAL:
-        break;
-    case SUMMARY_MODE_LOCK_MOVES:
-        newMode = UI_SUMMARY_MODE_LOCK_EDIT;
-        break;
-    case SUMMARY_MODE_BOX:
-    case SUMMARY_MODE_BOX_CURSOR: // mon is being moved in PC
-        newMode = UI_SUMMARY_MODE_DEFAULT;
+        mode = SUMMARY_MODE_NORMAL;
         useBoxMon = TRUE;
-        break;
-    case SUMMARY_MODE_SELECT_MOVE:
-        newMode = UI_SUMMARY_MODE_SELECT_MOVE;
-        break;
     }
 
     if (monIndex == PC_MON_CHOSEN)
@@ -1226,7 +1211,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         maxMonIndex = IN_BOX_COUNT - 1;
     }
 
-    MonSummary_Init(newMode, mons, monIndex, maxMonIndex, useBoxMon, callback);
+    MonSummary_Init(mode, mons, monIndex, maxMonIndex, useBoxMon, callback);
     return;
     // End monSummary
 

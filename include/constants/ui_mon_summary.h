@@ -462,7 +462,7 @@ struct MonSummaryResources
     u32 pad:5;
 
     // set when opening, usually help determines where to get a mon info.
-    enum MonSummaryModes mode;
+    enum PokemonSummaryScreenMode mode;
 
     // set when pressing horizontal dpads, determines what information to
     // load that the player wants.
