@@ -476,12 +476,17 @@ static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
     .tileTag = TAG_NONE,
     .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
     .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(16x8),
-        .size = SPRITE_SIZE(16x8),
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
         .priority = 0
     },
     .anims = (const union AnimCmd *const[]){
-        (const union AnimCmd[]){
+        (const union AnimCmd[]){ // EV arrow (horizontal)
+            ANIMCMD_FRAME(2, 30),
+            ANIMCMD_FRAME(3, 30),
+            ANIMCMD_JUMP(0)
+        },
+        (const union AnimCmd[]){ // IV arrow (vertical)
             ANIMCMD_FRAME(0, 30),
             ANIMCMD_FRAME(1, 30),
             ANIMCMD_JUMP(0)
@@ -490,7 +495,7 @@ static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/stats/arrow.4bpp"),
         .relativeFrames = TRUE,
-        .size = (16 * 8) / 2
+        .size = (16 * 16) / 2
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
@@ -516,6 +521,20 @@ static const u8 sStatsPageMisc_MonDataValuesOrders[][NUM_STATS] =
         MON_DATA_SPDEF_IV,
         MON_DATA_SPEED_IV,
     }
+};
+
+static const struct Coords16 sStatsPageMisc_ArrowSpritePos[][2] =
+{
+    [SUMMARY_TOTAL_EVS] =
+    {
+        { SUMMARY_STATS_MISC_LEFT_ARROW_X,   SUMMARY_STATS_MISC_LEFT_ARROW_Y },
+        { SUMMARY_STATS_MISC_RIGHT_ARROW_X,  SUMMARY_STATS_MISC_RIGHT_ARROW_Y },
+    },
+    [SUMMARY_TOTAL_IVS] =
+    {
+        { SUMMARY_STATS_MISC_UP_ARROW_X,   SUMMARY_STATS_MISC_UP_ARROW_Y },
+        { SUMMARY_STATS_MISC_DOWN_ARROW_X, SUMMARY_STATS_MISC_DOWN_ARROW_Y },
+    },
 };
 
 static const struct {

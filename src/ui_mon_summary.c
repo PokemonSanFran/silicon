@@ -210,8 +210,8 @@ static u32 StatsPageMisc_GetMaxValuesPerStat(void);
 static void StatsPageMisc_ProcessValuesChanges(u8);
 static bool32 StatsPageMisc_IsStatArrowsInvisible(struct Sprite *);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
-static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
-static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
+static void SpriteCB_StatsPageMisc_FirstArrow(struct Sprite *);
+static void SpriteCB_StatsPageMisc_SecondArrow(struct Sprite *);
 
 static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
@@ -2859,22 +2859,32 @@ static void StatsPageMisc_TrySpawnCursors(void)
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
     }
 
+    u32 totalValuesType = StatsPageMisc_GetTotalValuesType();
+    const struct Coords16 *coords = sStatsPageMisc_ArrowSpritePos[totalValuesType];
+
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_UP_ARROW_X, SUMMARY_STATS_MISC_UP_ARROW_Y, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, coords[0].x, coords[0].y, 0);
 
-        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_UpArrow;
+        if (!totalValuesType)
+            gSprites[spriteId].hFlip = TRUE;
+
+        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_FirstArrow;
+        StartSpriteAnim(&gSprites[spriteId], totalValuesType);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW, spriteId);
     }
 
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_DOWN_ARROW_X, SUMMARY_STATS_MISC_DOWN_ARROW_Y, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, coords[1].x, coords[1].y, 0);
 
-        gSprites[spriteId].vFlip = TRUE;
-        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_DownArrow;
+        if (totalValuesType)
+            gSprites[spriteId].vFlip = TRUE;
+
+        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_SecondArrow;
+        StartSpriteAnim(&gSprites[spriteId], totalValuesType);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW, spriteId);
     }
 }
@@ -3061,22 +3071,32 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite, animId);
 }
 
-static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
+static void SpriteCB_StatsPageMisc_FirstArrow(struct Sprite *sprite)
 {
     bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
-    sprite->invisible = !StatsPageMisc_CalculateAvailableValues();
+    u32 value = GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
+    if (StatsPageMisc_GetTotalValuesType() == SUMMARY_TOTAL_IVS)
+        sprite->invisible = !(StatsPageMisc_CalculateAvailableValues() && value < StatsPageMisc_GetMaxValuesPerStat());
+    else
+        sprite->invisible = !value;
+
     sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
-static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
+static void SpriteCB_StatsPageMisc_SecondArrow(struct Sprite *sprite)
 {
     bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
-    sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
+    u32 value = GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
+    if (StatsPageMisc_GetTotalValuesType() == SUMMARY_TOTAL_IVS)
+        sprite->invisible = !value;
+    else
+        sprite->invisible = !(StatsPageMisc_CalculateAvailableValues() && value < StatsPageMisc_GetMaxValuesPerStat());
+
     sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
