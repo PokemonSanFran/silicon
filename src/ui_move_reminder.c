@@ -691,13 +691,14 @@ static void PageInterface_ReloadTilemap(void)
 
 static void PageInterface_PrintHelpBar(void)
 {
+    const u8 sText_CancelOverwrite[] = _("Press any button to continue.");
     const u8 *str = PageInterface_GetHelpBarStr(PageInterface_GetValue());
 
     if (str == NULL)
         str = gText_EmptyString2;
 
     if (sMoveReminderDataPtr->printingDialogue)
-        str = gText_CancelOverwrite;
+        str = sText_CancelOverwrite;
 
     MiscUtil_AddTextPrinter(MREMINDER_WINDOW_MAIN, str, FONT_SMALL,
         HELPBAR_FOOTER_X, HELPBAR_FOOTER_Y, MREMINDER_TXTCLR_HELP_BAR);

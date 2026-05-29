@@ -625,7 +625,7 @@ void ResetUnhatchedMonEgg(void)
 
 static void SetupEggMon(struct Pokemon *mon)
 {
-    DebugPrintf("SetupEggMon");
+    //DebugPrintf("SetupEggMon");
     struct Pokemon *temp = &gEnemyParty[1];
     CreateHatchedMon(mon, temp);
 

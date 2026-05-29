@@ -291,7 +291,7 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_STATS_SUB_MODE_NONE]           = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change Page {A_BUTTON} Edit {B_BUTTON} Exit"),
             [SUMMARY_STATS_SUB_MODE_SELECT_ROW]     = COMPOUND_STRING("{DPAD_UPDOWN} Navigate {A_BUTTON} Select {B_BUTTON} Cancel"),
             [SUMMARY_STATS_SUB_MODE_ADJUST_VALUE]   = COMPOUND_STRING("{DPAD_UPDOWN} +1/-1 {DPAD_LEFTRIGHT} +10/-10 {L_BUTTON} Min {R_BUTTON} Max {B_BUTTON} Cancel"),
-            [SUMMARY_STATS_SUB_MODE_ERROR]          = COMPOUND_STRING("Press any buttons to continue."),
+            [SUMMARY_STATS_SUB_MODE_ERROR]          = COMPOUND_STRING("Press any button to continue."),
         },
         .tilemap = (const u32[])INCBIN_U32("graphics/ui_menus/mon_summary/pages/stats.bin.smolTM"),
         .mainSpriteCoords =
