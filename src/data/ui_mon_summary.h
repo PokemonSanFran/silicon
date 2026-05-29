@@ -63,6 +63,33 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
     DUMMY_WIN_TEMPLATE
 };
 
+static const union AnimCmd *const sSummarySprite_TypeIconAnims[] =
+{
+    #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(4 * TYPE_ ##type, 1), ANIMCMD_END }
+    TYPE_ANIM(NONE),
+    TYPE_ANIM(NORMAL),
+    TYPE_ANIM(FIGHTING),
+    TYPE_ANIM(FLYING),
+    TYPE_ANIM(POISON),
+    TYPE_ANIM(GROUND),
+    TYPE_ANIM(ROCK),
+    TYPE_ANIM(BUG),
+    TYPE_ANIM(GHOST),
+    TYPE_ANIM(STEEL),
+    TYPE_ANIM(MYSTERY),
+    TYPE_ANIM(FIRE),
+    TYPE_ANIM(WATER),
+    TYPE_ANIM(GRASS),
+    TYPE_ANIM(ELECTRIC),
+    TYPE_ANIM(PSYCHIC),
+    TYPE_ANIM(ICE),
+    TYPE_ANIM(DRAGON),
+    TYPE_ANIM(DARK),
+    TYPE_ANIM(FAIRY),
+    TYPE_ANIM(STELLAR),
+    #undef TYPE_ANIM
+};
+
 static const struct MonSummarySprite sSummarySetup_MainSprites[] =
 {
     {
@@ -148,6 +175,22 @@ static const struct MonSummarySprite sSummarySetup_MainSprites[] =
         .anims = gDummySpriteAnimTable,
         .callback = SpriteCB_SummarySprite_FriendshipBar
     },
+    {
+        .id = SUMMARY_MAIN_SPRITE_TYPE_1,
+        .oam = &(const struct OamData){ .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16) },
+        .tileTag = TAG_SUMMARY_TYPES,
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),
+        .anims = sSummarySprite_TypeIconAnims,
+        .callback = SpriteCallbackDummy
+    },
+    {
+        .id = SUMMARY_MAIN_SPRITE_TYPE_2,
+        .oam = &(const struct OamData){ .shape = SPRITE_SHAPE(16x16), .size = SPRITE_SIZE(16x16) },
+        .tileTag = TAG_SUMMARY_TYPES,
+        .gfx = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),
+        .anims = sSummarySprite_TypeIconAnims,
+        .callback = SpriteCallbackDummy
+    },
 };
 
 static const u16 sSummarySprite_HpBarColors[] = INCBIN_U16("graphics/ui_menus/mon_summary/hp_bar_states.gbapal");
@@ -192,22 +235,22 @@ static const union AnimCmd *const sSummarySprite_FrameImageAnimTemplate[] =
 
 static const s8 sSummaryInput_MultiPartyOrder[] = {0, 2, 3, 1, 4, 5};
 
-static const struct MonSummaryModeInfo sSummaryMode_Info[NUM_UI_SUMMARY_MODES] =
+static const struct MonSummaryModeInfo sSummaryMode_Info[] =
 {
-    [UI_SUMMARY_MODE_DEFAULT] =
+    [SUMMARY_MODE_NORMAL] =
     {
         .inputFunc = Task_SummaryMode_DefaultInput,
     },
-    [UI_SUMMARY_MODE_LOCK_EDIT] =
+    [SUMMARY_MODE_LOCK_MOVES] =
     {
         .helpTxtFunc = SummaryMode_GetLockEditHelpText,
         .inputFunc = Task_SummaryMode_DefaultInput,
     },
-    [UI_SUMMARY_MODE_EDIT_IVS] =
+    [SUMMARY_MODE_EDIT_IVS] =
     {
         .inputFunc = Task_SummaryMode_EditIVsInput,
     },
-    [UI_SUMMARY_MODE_SELECT_MOVE] =
+    [SUMMARY_MODE_SELECT_MOVE] =
     {
         .helpTxtFunc = SummaryMode_GetSelectMoveHelpText,
         .inputFunc = Task_SummaryMode_SelectMoveInput,
@@ -234,6 +277,8 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_HP_BAR]         = { SUMMARY_INFOS_HEADER_HP_BAR_X,         SUMMARY_INFOS_HEADER_HP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_EXP_BAR]        = { SUMMARY_INFOS_HEADER_EXP_BAR_X,        SUMMARY_INFOS_HEADER_EXP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_1]         = { SUMMARY_INFOS_HEADER_TYPE_1_X,         SUMMARY_INFOS_HEADER_TYPINGS_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_2]         = { SUMMARY_INFOS_HEADER_TYPE_2_X,         SUMMARY_INFOS_HEADER_TYPINGS_Y },
         },
         .input = Task_SummaryInput_InfosInput,
         .handleFrontEnd = InfosPage_HandleFrontEnd,
@@ -255,6 +300,8 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
             [SUMMARY_MAIN_SPRITE_HP_BAR]         = { SUMMARY_STATS_HEADER_HP_BAR_X,         SUMMARY_STATS_HEADER_HP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_EXP_BAR]        = { SUMMARY_STATS_HEADER_EXP_BAR_X,        SUMMARY_STATS_HEADER_EXP_BAR_Y },
             [SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR] = { SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X, SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_1]         = { SUMMARY_STATS_HEADER_TYPE_1_X,         SUMMARY_STATS_HEADER_TYPINGS_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_2]         = { SUMMARY_STATS_HEADER_TYPE_2_X,         SUMMARY_MOVES_HEADER_TYPINGS_Y },
         },
         .input = Task_SummaryInput_StatsInput,
         .handleFrontEnd = StatsPage_HandleFrontEnd,
@@ -275,6 +322,8 @@ static const struct MonSummaryPageInfo sSummaryPage_Info[NUM_SUMMARY_PAGES] =
         {
             [SUMMARY_MAIN_SPRITE_SHINY_SYMBOL]   = { SUMMARY_MOVES_HEADER_SHINY_X,          SUMMARY_MOVES_HEADER_SHINY_Y },
             [SUMMARY_MAIN_SPRITE_HP_BAR]         = { SUMMARY_MOVES_HEADER_HP_BAR_X,         SUMMARY_MOVES_HEADER_HP_BAR_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_1]         = { SUMMARY_MOVES_HEADER_TYPE_1_X,         SUMMARY_MOVES_HEADER_TYPINGS_Y },
+            [SUMMARY_MAIN_SPRITE_TYPE_2]         = { SUMMARY_MOVES_HEADER_TYPE_2_X,         SUMMARY_MOVES_HEADER_TYPINGS_Y },
         },
         .input = Task_SummaryInput_MovesInput,
         .handleFrontEnd = MovesPage_HandleFrontEnd,
@@ -303,13 +352,6 @@ static const union AnimCmd *const sSummaryPage_MonIconAnims[] =
         ANIMCMD_FRAME(1, 14),
         ANIMCMD_JUMP(0),
     },
-};
-
-static const struct CompressedSpriteSheet sSummaryPage_TypeSpriteSheet =
-{
-    .data = (const u32[])INCBIN_U32("graphics/ui_menus/types/11x9/types.4bpp.smol"),
-    .size = TILE_OFFSET_4BPP(4 * NUMBER_OF_MON_TYPES),
-    .tag = TAG_SUMMARY_TYPES,
 };
 
 static const u32 sMonSummary_MainTiles[] = INCBIN_U32("graphics/ui_menus/mon_summary/pages/tiles.4bpp.smol");
@@ -387,45 +429,6 @@ static const struct SpriteTemplate sInfosPageMisc_ScrollIndicatorSpriteTemplate 
     .callback = SpriteCB_InfosPageMisc_ScrollIndicator
 };
 
-// 11x9
-static const struct SpriteTemplate sSummarySprite_TypeIconTemplate =
-{
-    .tileTag = TAG_SUMMARY_TYPES,
-    .paletteTag = TAG_NONE,
-    .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(16x16),
-        .size = SPRITE_SIZE(16x16),
-    },
-    .anims = (const union AnimCmd *const[]){
-        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(4 * TYPE_ ##type, 1), ANIMCMD_END }
-        TYPE_ANIM(NONE),
-        TYPE_ANIM(NORMAL),
-        TYPE_ANIM(FIGHTING),
-        TYPE_ANIM(FLYING),
-        TYPE_ANIM(POISON),
-        TYPE_ANIM(GROUND),
-        TYPE_ANIM(ROCK),
-        TYPE_ANIM(BUG),
-        TYPE_ANIM(GHOST),
-        TYPE_ANIM(STEEL),
-        TYPE_ANIM(MYSTERY),
-        TYPE_ANIM(FIRE),
-        TYPE_ANIM(WATER),
-        TYPE_ANIM(GRASS),
-        TYPE_ANIM(ELECTRIC),
-        TYPE_ANIM(PSYCHIC),
-        TYPE_ANIM(ICE),
-        TYPE_ANIM(DRAGON),
-        TYPE_ANIM(DARK),
-        TYPE_ANIM(FAIRY),
-        TYPE_ANIM(STELLAR),
-        #undef TYPE_ANIM
-    },
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
 static const u8 *const sStatsPageGeneral_StatsNames[NUM_STATS] =
 {
     [STAT_HP]    = COMPOUND_STRING("HP"),
@@ -473,12 +476,17 @@ static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
     .tileTag = TAG_NONE,
     .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
     .oam = &(const struct OamData){
-        .shape = SPRITE_SHAPE(16x8),
-        .size = SPRITE_SIZE(16x8),
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
         .priority = 0
     },
     .anims = (const union AnimCmd *const[]){
-        (const union AnimCmd[]){
+        (const union AnimCmd[]){ // EV arrow (horizontal)
+            ANIMCMD_FRAME(2, 30),
+            ANIMCMD_FRAME(3, 30),
+            ANIMCMD_JUMP(0)
+        },
+        (const union AnimCmd[]){ // IV arrow (vertical)
             ANIMCMD_FRAME(0, 30),
             ANIMCMD_FRAME(1, 30),
             ANIMCMD_JUMP(0)
@@ -487,7 +495,7 @@ static const struct SpriteTemplate sStatsPageMisc_ArrowSpriteTemplate =
     .images = &(const struct SpriteFrameImage){
         .data = (const u8[])INCBIN_U8("graphics/ui_menus/mon_summary/stats/arrow.4bpp"),
         .relativeFrames = TRUE,
-        .size = (16 * 8) / 2
+        .size = (16 * 16) / 2
     },
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
@@ -513,6 +521,20 @@ static const u8 sStatsPageMisc_MonDataValuesOrders[][NUM_STATS] =
         MON_DATA_SPDEF_IV,
         MON_DATA_SPEED_IV,
     }
+};
+
+static const struct Coords16 sStatsPageMisc_ArrowSpritePos[][2] =
+{
+    [SUMMARY_TOTAL_EVS] =
+    {
+        { SUMMARY_STATS_MISC_LEFT_ARROW_X,   SUMMARY_STATS_MISC_LEFT_ARROW_Y },
+        { SUMMARY_STATS_MISC_RIGHT_ARROW_X,  SUMMARY_STATS_MISC_RIGHT_ARROW_Y },
+    },
+    [SUMMARY_TOTAL_IVS] =
+    {
+        { SUMMARY_STATS_MISC_UP_ARROW_X,   SUMMARY_STATS_MISC_UP_ARROW_Y },
+        { SUMMARY_STATS_MISC_DOWN_ARROW_X, SUMMARY_STATS_MISC_DOWN_ARROW_Y },
+    },
 };
 
 static const struct {

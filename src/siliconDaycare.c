@@ -486,7 +486,7 @@ void EditPokemonIndividualValues(void)
     if (GetMonData(mon,MON_DATA_IS_EGG) == TRUE)
         SetupEggMon(mon);
 
-    ShowPokemonSummaryScreen(UI_SUMMARY_MODE_EDIT_IVS, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_EDIT_IVS, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void CompareOldNewIndividualValues(void)

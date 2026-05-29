@@ -55,13 +55,13 @@ static EWRAM_DATA struct {
     u32 totalIdx:5;
     u32 useBoxMon:1;
     u32 currMoveSlot:3;
-    enum MonSummaryModes mode:5;
-    u32 pad:18;
+    enum PokemonSummaryScreenMode mode:8;
+    u32 pad:15;
 } sMonSummaryInitialBackup = {0}; // for moveReminder
 
 // declarations
 static void MonSummary_FadeAndExit(u8);
-static void MonSummary_BackupUIState(enum MonSummaryModes);
+static void MonSummary_BackupUIState(enum PokemonSummaryScreenMode);
 static void MonSummary_FreeResources(void);
 static void CB2_MonSummary(void);
 static void CB2_ReloadMonSummary(void);
@@ -104,11 +104,11 @@ static void SummaryMon_CopyCurrentRawMon(void);
 static void SummaryMon_GetNatureFlavors(u8 *);
 static void SummaryMon_CopyChanges(void);
 
-static void SummaryMode_SetValue(enum MonSummaryModes);
-static enum MonSummaryModes SummaryMode_GetValue(void);
-static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum MonSummaryModes);
-static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes);
-static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes);
+static void SummaryMode_SetValue(enum PokemonSummaryScreenMode);
+static enum PokemonSummaryScreenMode SummaryMode_GetValue(void);
+static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum PokemonSummaryScreenMode);
+static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum PokemonSummaryScreenMode);
+static TaskFunc SummaryMode_GetInputFunc(enum PokemonSummaryScreenMode);
 static const u8 *SummaryMode_GetLockEditHelpText(u32);
 static const u8 *SummaryMode_GetSelectMoveHelpText(u32);
 static void Task_SummaryMode_DefaultInput(u8);
@@ -122,7 +122,7 @@ static u32 SummaryPage_GetPageSlot(void);
 static const struct MonSummaryPageInfo *SummaryPage_GetInfo(enum MonSummaryPages);
 static const u8 *SummaryPage_GetName(enum MonSummaryPages);
 static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages);
-static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
+static struct Coords16 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages, enum MonSummaryMainSprites);
 static TaskFunc SummaryPage_GetInputFunc(enum MonSummaryPages);
 static void *SummaryPage_GetHandleFrontEndFunc(enum MonSummaryPages);
 static void *SummaryPage_GetHandleUpdateTextFunc(enum MonSummaryPages);
@@ -147,7 +147,7 @@ static void SummarySprite_StopPokemonAnim(void);
 static void SummarySprite_MonHeldItem(u32, s32, s32);
 static u32 SummarySprite_GetHeldItemTag(void);
 static void SummarySprite_MonPokeBall(u32, s32, s32);
-static void SummarySprite_MonTypes(u32, s32, s32);
+static void SummarySprite_UpdateMonTypes(void);
 static u32 SummarySprite_GetTypePaletteTag(enum Type);
 static void SummarySprite_MonMove(u32, s32, s32);
 static u8 *SummarySprite_GetSpritePtr(void);
@@ -197,7 +197,7 @@ static void StatsPage_HandleUpdateText(void);
 static void StatsPage_HandleHeader(void);
 static void StatsPage_HandleGeneral(void);
 static void StatsPage_HandleMisc(void);
-static void StatsPageMisc_MonTotalEVs(void);
+static void StatsPageMisc_MonTotalValues(void);
 static void StatsPageMisc_TrySpawnCursors(void);
 static void StatsPageMisc_SetRow(u32);
 static u32 StatsPageMisc_GetRow(void);
@@ -210,8 +210,8 @@ static u32 StatsPageMisc_GetMaxValuesPerStat(void);
 static void StatsPageMisc_ProcessValuesChanges(u8);
 static bool32 StatsPageMisc_IsStatArrowsInvisible(struct Sprite *);
 static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *);
-static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *);
-static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *);
+static void SpriteCB_StatsPageMisc_FirstArrow(struct Sprite *);
+static void SpriteCB_StatsPageMisc_SecondArrow(struct Sprite *);
 
 static void MovesPage_HandleFrontEnd(void);
 static void MovesPage_HandleUpdateText(void);
@@ -246,7 +246,7 @@ void Task_MonSummary_WaitFadeAndInit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        MonSummary_Init(UI_SUMMARY_MODE_EDIT_IVS, gPlayerParty, gTasks[taskId].data[0], 0, FALSE, CB2_ReturnToFieldContinueScript);
+        MonSummary_Init(SUMMARY_MODE_EDIT_IVS, gPlayerParty, gTasks[taskId].data[0], 0, FALSE, CB2_ReturnToFieldContinueScript);
         DestroyTask(taskId);
     }
 }
@@ -258,7 +258,7 @@ void MonSummary_EditMonIVs(struct ScriptContext *ctx)
     gTasks[taskId].data[0] = VarGet(ScriptReadHalfword(ctx));
 }
 
-void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 totalIdx, bool32 useBoxMon, MainCallback callback)
+void MonSummary_Init(enum PokemonSummaryScreenMode mode, void *mons, u8 currIdx, u8 totalIdx, bool32 useBoxMon, MainCallback callback)
 {
     sMonSummaryDataPtr = AllocZeroed(sizeof(struct MonSummaryResources));
     void *gfx = NULL;
@@ -268,9 +268,7 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
     else
         gfx = gMonSpritesGfxPtr;
 
-    if (!sMonSummaryDataPtr
-     || !gfx
-     || mode >= NUM_UI_SUMMARY_MODES)
+    if (!sMonSummaryDataPtr || !gfx)
     {
         DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
         TRY_FREE_AND_SET_NULL(sMonSummaryDataPtr);
@@ -286,29 +284,29 @@ void MonSummary_Init(enum MonSummaryModes mode, void *mons, u8 currIdx, u8 total
     {
     default:
         break;
-    case UI_SUMMARY_MODE_EDIT_IVS:
+    case SUMMARY_MODE_EDIT_IVS:
         page = SUMMARY_PAGE_STATS;
         SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_SELECT_ROW);
         break;
-    case UI_SUMMARY_MODE_MOVE_MENU:
+    case SUMMARY_MODE_MOVE_MENU:
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
         MovesPageMisc_SetOptionIndex(SUMMARY_MOVES_OPTION_LEARN);
         MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
-        mode = UI_SUMMARY_MODE_DEFAULT;
+        mode = SUMMARY_MODE_NORMAL;
         page = SUMMARY_PAGE_MOVES;
         break;
-    case UI_SUMMARY_MODE_MOVE_DETAILS:
-        mode = UI_SUMMARY_MODE_DEFAULT;
+    case SUMMARY_MODE_MOVE_DETAILS:
+        mode = SUMMARY_MODE_NORMAL;
         MovesPageMisc_SetSlotIndex(sMonSummaryInitialBackup.currMoveSlot);
         // fallthrough
-    case UI_SUMMARY_MODE_SELECT_MOVE:
+    case SUMMARY_MODE_SELECT_MOVE:
         SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_DETAILS);
         MovesPageMisc_SetOptionIndex(0);
         // slot index is always zero thanks to AllocZeroed
         page = SUMMARY_PAGE_MOVES;
         break;
-    case UI_SUMMARY_MODE_HELD_ITEM_DESC:
-        mode = UI_SUMMARY_MODE_DEFAULT;
+    case SUMMARY_MODE_HELD_ITEM_DESC:
+        mode = SUMMARY_MODE_NORMAL;
         SummaryInput_SetSubMode(TRUE);
         sMonSummaryDataPtr->arg.infosDescState = TRUE;
         // SUMMARY_PAGE_INFOS by default
@@ -340,7 +338,7 @@ static void MonSummary_FadeAndExit(u8 taskId)
     gTasks[taskId].func = Task_MonSummary_WaitFadeAndExit;
 }
 
-static void MonSummary_BackupUIState(enum MonSummaryModes mode)
+static void MonSummary_BackupUIState(enum PokemonSummaryScreenMode mode)
 {
     sMonSummaryInitialBackup.mode = mode;
     sMonSummaryInitialBackup.currMoveSlot = MovesPageMisc_GetSlotIndex();
@@ -376,7 +374,7 @@ static void CB2_MonSummary(void)
 
 static void CB2_ReloadMonSummary(void)
 {
-    if (sMonSummaryInitialBackup.mode == UI_SUMMARY_MODE_HELD_ITEM_DESC
+    if (sMonSummaryInitialBackup.mode == SUMMARY_MODE_HELD_ITEM_DESC
      && gSpecialVar_ItemId != ITEM_NONE)
     {
         union {
@@ -436,11 +434,11 @@ static void Task_MonSummary_OpenMoveReminder(u8 taskId)
 {
     if (gPaletteFade.active) return;
 
-    enum MonSummaryModes mode;
+    enum PokemonSummaryScreenMode mode;
     if (SummaryInput_IsWithinSubMode() == SUMMARY_MOVES_SUB_MODE_OPTIONS)
-        mode = UI_SUMMARY_MODE_MOVE_MENU;
+        mode = SUMMARY_MODE_MOVE_MENU;
     else
-        mode = UI_SUMMARY_MODE_MOVE_DETAILS;
+        mode = SUMMARY_MODE_MOVE_DETAILS;
 
     MonSummary_BackupUIState(mode);
     void *mon;
@@ -458,7 +456,7 @@ static void Task_MonSummary_OpenBagMenu(u8 taskId)
 {
     if (gPaletteFade.active) return;
 
-    MonSummary_BackupUIState(UI_SUMMARY_MODE_HELD_ITEM_DESC);
+    MonSummary_BackupUIState(SUMMARY_MODE_HELD_ITEM_DESC);
     GoToBagMenu(ITEMMENULOCATION_SUMMARY, POCKETS_COUNT, CB2_ReloadMonSummary);
     MonSummary_FreeResources();
     DestroyTask(taskId);
@@ -502,8 +500,6 @@ static void SummarySetup_Graphics(void)
         .data = sMonSummary_MainPalette,
         .tag = TAG_SUMMARY_UNIVERSAL_PAL
     });
-
-    LoadCompressedSpriteSheet(&sSummaryPage_TypeSpriteSheet);
     LoadSpritePalettes(gMonSummary_TypeSpritePalettes);
 
     // ensure neither of these gets overwritten by other sprite palettes
@@ -521,14 +517,14 @@ static void SummarySetup_Graphics(void)
 static void SummarySetup_Sprites(void)
 {
     // excludes e.g. mon sprite
-    for (u32 i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
+    for (u32 i = 0; i < SUMMARY_MAIN_SPRITE_POKEMON; i++)
     {
         const struct MonSummarySprite *config = SummarySprite_GetMainStruct(i);
-        struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), config->id);
+        struct Coords16 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), config->id);
         struct SpriteTemplate template =
         {
             .tileTag = config->tileTag,
-            .paletteTag = TAG_SUMMARY_UNIVERSAL_PAL,
+            .paletteTag = (config->id >= SUMMARY_MAIN_SPRITE_TYPE_1) ? TAG_NONE : TAG_SUMMARY_UNIVERSAL_PAL,
             .oam = config->oam,
             .anims = config->anims,
             .images = NULL,
@@ -537,7 +533,6 @@ static void SummarySetup_Sprites(void)
         };
 
         struct CompressedSpriteSheet sheet = { .tag = config->tileTag };
-
         if (IsCompressedData(config->gfx))
         {
             sheet.data = config->gfx;
@@ -564,6 +559,7 @@ static void SummarySetup_Sprites(void)
     sMonSummaryDataPtr->monSpriteGfx = AllocZeroed(0x1000);
     sMonSummaryDataPtr->monSpritePics = AllocZeroed(sizeof(*sMonSummaryDataPtr->monSpritePics));
     SummarySprite_CreateMonSprite();
+    SummarySprite_UpdateMonTypes();
 }
 
 static void SummarySetup_Windows(void)
@@ -617,7 +613,7 @@ static void CB2_SummarySetup(void)
         break;
     case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+        if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS)
             sMonSummaryDataPtr->arg.stats.ogTotalValues = SummaryMon_GetStruct()->totalValues[SUMMARY_TOTAL_IVS];
         break;
     case SUMMARY_SETUP_BACKGROUNDS:
@@ -839,7 +835,7 @@ static void Task_SummaryMode_DefaultInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
     SWITCH_TO_SUBMODE:
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
+        if (SummaryMode_GetValue() == SUMMARY_MODE_LOCK_MOVES
          && SummaryPage_GetValue() == SUMMARY_PAGE_STATS)
         {
             SummaryInput_SetSubMode(FALSE);
@@ -1092,7 +1088,7 @@ static void Task_SummaryInput_InfosInput(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT
+        if (SummaryMode_GetValue() == SUMMARY_MODE_LOCK_MOVES
          || !sMonSummaryDataPtr->arg.infosDescState)
         {
             return;
@@ -1298,7 +1294,7 @@ static void Task_SummaryInput_MovesInput(u8 taskId)
         default:
             return;
         case SUMMARY_MOVES_SUB_MODE_DETAILS:
-            if (SummaryMode_GetValue() == UI_SUMMARY_MODE_LOCK_EDIT) return;
+            if (SummaryMode_GetValue() == SUMMARY_MODE_LOCK_MOVES) return;
             SummaryInput_SetSubMode(SUMMARY_MOVES_SUB_MODE_OPTIONS);
             break;
         case SUMMARY_MOVES_SUB_MODE_OPTIONS:
@@ -1537,24 +1533,22 @@ static void SummaryMon_CopyChanges(void)
     }
 }
 
-static void SummaryMode_SetValue(enum MonSummaryModes mode)
+static void SummaryMode_SetValue(enum PokemonSummaryScreenMode mode)
 {
     sMonSummaryDataPtr->mode = mode;
 }
 
-static enum MonSummaryModes SummaryMode_GetValue(void)
+static enum PokemonSummaryScreenMode SummaryMode_GetValue(void)
 {
     return sMonSummaryDataPtr->mode;
 }
 
-static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum MonSummaryModes mode)
+static const struct MonSummaryModeInfo *SummaryMode_GetInfo(enum PokemonSummaryScreenMode mode)
 {
-    if (mode >= NUM_UI_SUMMARY_MODES) return NULL;
-
     return &sSummaryMode_Info[mode];
 }
 
-static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes mode)
+static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum PokemonSummaryScreenMode mode)
 {
     const struct MonSummaryModeInfo *info = SummaryMode_GetInfo(mode);
     HelpBarTextFunc func = info->helpTxtFunc;
@@ -1564,7 +1558,7 @@ static HelpBarTextFunc SummaryMode_GetHelpBarTextFunc(enum MonSummaryModes mode)
     return info->helpTxtFunc;
 }
 
-static TaskFunc SummaryMode_GetInputFunc(enum MonSummaryModes mode)
+static TaskFunc SummaryMode_GetInputFunc(enum PokemonSummaryScreenMode mode)
 {
     const struct MonSummaryModeInfo *info = SummaryMode_GetInfo(mode);
     TaskFunc func = info->inputFunc;
@@ -1639,11 +1633,11 @@ static const u32 *SummaryPage_GetTilemap(enum MonSummaryPages page)
     return info->tilemap;
 }
 
-static struct Coords8 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page, enum MonSummaryMainSprites sprite)
+static struct Coords16 SummaryPage_GetMainSpriteCoords(enum MonSummaryPages page, enum MonSummaryMainSprites sprite)
 {
     const struct MonSummaryPageInfo *info = SummaryPage_GetInfo(page);
 
-    if (!info) return (struct Coords8){ DISPLAY_WIDTH, DISPLAY_HEIGHT };
+    if (!info) return (struct Coords16){ DISPLAY_WIDTH, DISPLAY_HEIGHT };
 
     return info->mainSpriteCoords[sprite];
 }
@@ -1746,7 +1740,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         {
             for (enum MonSummaryMainSprites i = 0; i < ARRAY_COUNT(sSummarySetup_MainSprites); i++)
             {
-                struct Coords8 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
+                struct Coords16 coords = SummaryPage_GetMainSpriteCoords(SummaryPage_GetValue(), i);
                 u32 spriteId = SummarySprite_GetSpriteId(i);
 
                 gSprites[spriteId].x = coords.x;
@@ -1772,6 +1766,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         }
     }
 
+    SummarySprite_UpdateMonTypes();
     SummarySprite_CreateMonSprite();
     gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_POKEMON)].data[2] = animate;
     SummaryPage_UnloadDynamicSprites();
@@ -2097,38 +2092,42 @@ static void SummarySprite_MonPokeBall(u32 spriteArrId, s32 x, s32 y)
     SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
 }
 
-static void SummarySprite_MonTypes(u32 spriteArrId, s32 x, s32 y)
+static void SummarySprite_UpdateMonTypes(void)
 {
     struct MonSummary *mon = SummaryMon_GetStruct();
     enum Type types[2] = { GetSpeciesType(mon->species, 0), GetSpeciesType(mon->species, 1) };
-    const struct SpriteTemplate *template = &sSummarySprite_TypeIconTemplate;
-    u32 spriteId = 0;
+    struct Sprite *sprite;
 
-    if (SummarySprite_GetDynamicSpriteId(spriteArrId) == SPRITE_NONE)
+    u32 spriteId = SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_TYPE_1);
+    if (spriteId != SPRITE_NONE)
     {
-        spriteId = CreateSprite(template, x, y, 0);
+        sprite = &gSprites[spriteId];
 
-        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[0]));
-        gSprites[spriteId].callback = SpriteCallbackDummy;
-        gSprites[spriteId].oam.priority = 0;
-
-        SummarySprite_SetDynamicSpriteId(spriteArrId, spriteId);
-        StartSpriteAnim(&gSprites[spriteId], types[0]);
+        sprite->x2 = (GetStringWidth(FONT_OUTLINED, gTypesInfo[types[0]].shortName, 0) + 3) * (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS);
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[0]));
+        sprite->callback = SpriteCallbackDummy;
+        sprite->oam.priority = 0;
+        StartSpriteAnim(sprite, types[0]);
     }
 
-    if (types[1] == types[0]) return;
-
-    if (SummarySprite_GetDynamicSpriteId(spriteArrId + 1) == SPRITE_NONE)
+    spriteId = SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_TYPE_2);
+    if (types[1] == types[0])
     {
-        x += 12;
-        spriteId = CreateSprite(template, x, y, 0);
+        if (spriteId != SPRITE_NONE)
+            gSprites[spriteId].invisible = TRUE;
+        return;
+    }
 
-        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[1]));
-        gSprites[spriteId].callback = SpriteCallbackDummy;
-        gSprites[spriteId].oam.priority = 0;
+    if (spriteId != SPRITE_NONE)
+    {
+        sprite = &gSprites[spriteId];
 
-        SummarySprite_SetDynamicSpriteId(spriteArrId + 1, spriteId);
-        StartSpriteAnim(&gSprites[spriteId], types[1]);
+        sprite->x2 = (GetStringWidth(FONT_OUTLINED, gTypesInfo[types[1]].shortName, 0) + 3) * (SummaryPage_GetValue() == SUMMARY_PAGE_INFOS);
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(SummarySprite_GetTypePaletteTag(types[1]));
+        sprite->callback = SpriteCallbackDummy;
+        sprite->oam.priority = 0;
+        sprite->invisible = FALSE;
+        StartSpriteAnim(sprite, types[1]);
     }
 }
 
@@ -2540,7 +2539,19 @@ static void InfosPageGeneral_PrintMonTyping(struct MonSummary *mon)
         SUMMARY_INFOS_GENERAL_X, SUMMARY_INFOS_GENERAL_Y,
         SUMMARY_FNTCLR_INTERFACE, COMPOUND_STRING("Type:"));
 
-    SummarySprite_MonTypes(SUMMARY_INFOS_SPRITE_TYPE_ICON_1, SUMMARY_INFOS_GENERAL_X2 + 8, SUMMARY_INFOS_GENERAL_Y + 12);
+    u32 species = mon->species;
+    enum Type types[2] = { GetSpeciesType(species, 0), GetSpeciesType(species, 1) };
+
+    SummaryPrint_AddText(windowId, fontId,
+        SUMMARY_INFOS_GENERAL_X2, SUMMARY_INFOS_GENERAL_Y,
+        SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[0]].shortName);
+
+    if (types[1] != types[0])
+    {
+        SummaryPrint_AddText(windowId, fontId,
+            SUMMARY_INFOS_GENERAL_X3, SUMMARY_INFOS_GENERAL_Y,
+            SUMMARY_FNTCLR_INTERFACE, gTypesInfo[types[1]].shortName);
+    }
 }
 
 static void InfosPageGeneral_PrintTrainerInfo(struct MonSummary *mon)
@@ -2752,7 +2763,6 @@ static void StatsPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_STATS_HEADER_NAME_X, SUMMARY_STATS_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_STATS_HEADER_GENDER_X, SUMMARY_STATS_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_STATS_HEADER_LEVEL_X, SUMMARY_STATS_HEADER_Y);
-    SummarySprite_MonTypes(SUMMARY_STATS_SPRITE_TYPE_1, SUMMARY_STATS_HEADER_TYPINGS_X, SUMMARY_STATS_HEADER_TYPINGS_Y);
 }
 
 // thanks middle speed..
@@ -2781,7 +2791,7 @@ static void StatsPage_HandleMisc(void)
 {
     SummaryPrint_BlitMonMarkings(SUMMARY_STATS_MISC_MON_MARKINGS_X, SUMMARY_STATS_MISC_MON_MARKINGS_Y);
 
-    StatsPageMisc_MonTotalEVs();
+    StatsPageMisc_MonTotalValues();
 
     SummaryPrint_MonHeldItem(
         SUMMARY_STATS_MISC_ITEM_NAME_X, SUMMARY_STATS_MISC_ITEM_NAME_Y,
@@ -2797,7 +2807,7 @@ static void StatsPage_HandleMisc(void)
     if (SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_ERROR)
     {
         ConvertUIntToDecimalStringN(gStringVar1, StatsPageMisc_CalculateAvailableValues(), STR_CONV_MODE_LEFT_ALIGN, 3);
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+        if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS)
             StringCopy(gStringVar2, COMPOUND_STRING("Individual"));
         else
             StringCopy(gStringVar2, COMPOUND_STRING("Effort"));
@@ -2809,26 +2819,29 @@ static void StatsPage_HandleMisc(void)
     StatsPageMisc_TrySpawnCursors();
 }
 
-static void StatsPageMisc_MonTotalEVs(void)
+static void StatsPageMisc_MonTotalValues(void)
 {
-    struct MonSummary *mon = SummaryMon_GetStruct();
-    u32 usedEVs = 0;
+    u32 usedValues = 0;
+    u32 totalValuesType = StatsPageMisc_GetTotalValuesType();
 
     for (enum Stat statIdx = 0; statIdx < NUM_STATS; statIdx++)
     {
-        usedEVs += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + statIdx);
+        usedValues += GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[totalValuesType][statIdx]);
     }
 
-    ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertUIntToDecimalStringN(gStringVar1, usedValues, STR_CONV_MODE_LEFT_ALIGN, 3);
     if (SummaryInput_IsWithinSubMode())
         ConvertUIntToDecimalStringN(gStringVar2, sMonSummaryDataPtr->arg.stats.ogTotalValues, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
-        ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertUIntToDecimalStringN(gStringVar2, SummaryMon_GetStruct()->totalValues[totalValuesType], STR_CONV_MODE_LEFT_ALIGN, 3);
 
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
+    if (totalValuesType == SUMMARY_TOTAL_IVS)
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("IVs: {STR_VAR_1}/{STR_VAR_2}"));
+    else
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
-        SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
+        SUMMARY_STATS_MISC_TOTAL_VALUES_X, SUMMARY_STATS_MISC_TOTAL_VALUES_Y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
@@ -2845,22 +2858,32 @@ static void StatsPageMisc_TrySpawnCursors(void)
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_STAT_CURSOR, spriteId);
     }
 
+    u32 totalValuesType = StatsPageMisc_GetTotalValuesType();
+    const struct Coords16 *coords = sStatsPageMisc_ArrowSpritePos[totalValuesType];
+
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_UP_ARROW_X, SUMMARY_STATS_MISC_UP_ARROW_Y, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, coords[0].x, coords[0].y, 0);
 
-        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_UpArrow;
+        if (!totalValuesType)
+            gSprites[spriteId].hFlip = TRUE;
+
+        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_FirstArrow;
+        StartSpriteAnim(&gSprites[spriteId], totalValuesType);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_UP_ARROW, spriteId);
     }
 
     spriteId = SummarySprite_GetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW);
     if (spriteId == SPRITE_NONE)
     {
-        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, SUMMARY_STATS_MISC_DOWN_ARROW_X, SUMMARY_STATS_MISC_DOWN_ARROW_Y, 0);
+        spriteId = CreateSprite(&sStatsPageMisc_ArrowSpriteTemplate, coords[1].x, coords[1].y, 0);
 
-        gSprites[spriteId].vFlip = TRUE;
-        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_DownArrow;
+        if (totalValuesType)
+            gSprites[spriteId].vFlip = TRUE;
+
+        gSprites[spriteId].callback = SpriteCB_StatsPageMisc_SecondArrow;
+        StartSpriteAnim(&gSprites[spriteId], totalValuesType);
         SummarySprite_SetDynamicSpriteId(SUMMARY_STATS_SPRITE_DOWN_ARROW, spriteId);
     }
 }
@@ -2971,7 +2994,7 @@ static u32 StatsPageMisc_UpdateTotalValues(void)
 
 static u32 StatsPageMisc_GetTotalValuesType(void)
 {
-    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS)
+    if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS)
         return SUMMARY_TOTAL_IVS;
 
     return SUMMARY_TOTAL_EVS;
@@ -2979,7 +3002,7 @@ static u32 StatsPageMisc_GetTotalValuesType(void)
 
 static u32 StatsPageMisc_GetMaxValuesPerStat(void)
 {
-    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) return MAX_PER_STAT_IVS;
+    if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS) return MAX_PER_STAT_IVS;
 
     return MAX_PER_STAT_EVS;
 }
@@ -3010,7 +3033,7 @@ static bool32 StatsPageMisc_IsStatArrowsInvisible(struct Sprite *sprite)
 {
     bool32 res = TRUE;
 
-    if (SummaryMode_GetValue() == UI_SUMMARY_MODE_DEFAULT
+    if (SummaryMode_GetValue() == SUMMARY_MODE_NORMAL
      && SummaryInput_IsWithinSubMode() == SUMMARY_STATS_SUB_MODE_SELECT_ROW)
     {
         res = FALSE;
@@ -3035,9 +3058,9 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     if (subMode == SUMMARY_STATS_SUB_MODE_ADJUST_VALUE)
     {
         animId++;
-        if (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) animId++;
+        if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS) animId++;
     }
-    else if (SummaryMode_GetValue() == UI_SUMMARY_MODE_DEFAULT
+    else if (SummaryMode_GetValue() == SUMMARY_MODE_NORMAL
          && subMode >= SUMMARY_STATS_SUB_MODE_SELECT_ROW)
     {
         animId = 1;
@@ -3047,23 +3070,33 @@ static void SpriteCB_StatsPageMisc_StatCursor(struct Sprite *sprite)
     StartSpriteAnimIfDifferent(sprite, animId);
 }
 
-static void SpriteCB_StatsPageMisc_UpArrow(struct Sprite *sprite)
+static void SpriteCB_StatsPageMisc_FirstArrow(struct Sprite *sprite)
 {
     bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
-    sprite->invisible = !StatsPageMisc_CalculateAvailableValues();
-    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
+    u32 value = GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
+    if (StatsPageMisc_GetTotalValuesType() == SUMMARY_TOTAL_IVS)
+        sprite->invisible = !(StatsPageMisc_CalculateAvailableValues() && value < StatsPageMisc_GetMaxValuesPerStat());
+    else
+        sprite->invisible = !value;
+
+    sprite->x2 = (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
-static void SpriteCB_StatsPageMisc_DownArrow(struct Sprite *sprite)
+static void SpriteCB_StatsPageMisc_SecondArrow(struct Sprite *sprite)
 {
     bool32 notAdjustValue = StatsPageMisc_IsStatArrowsInvisible(sprite);
     if (notAdjustValue) return;
 
-    sprite->invisible = !GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
-    sprite->x2 = (SummaryMode_GetValue() == UI_SUMMARY_MODE_EDIT_IVS) * 26;
+    u32 value = GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[StatsPageMisc_GetTotalValuesType()][StatsPageMisc_GetRow()]);
+    if (StatsPageMisc_GetTotalValuesType() == SUMMARY_TOTAL_IVS)
+        sprite->invisible = !value;
+    else
+        sprite->invisible = !(StatsPageMisc_CalculateAvailableValues() && value < StatsPageMisc_GetMaxValuesPerStat());
+
+    sprite->x2 = (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS) * 26;
     sprite->y2 = SUMMARY_STATS_GENERAL_ADDITIVE_Y * sMonSummaryDataPtr->arg.stats.row;
 }
 
@@ -3084,7 +3117,6 @@ static void MovesPage_HandleHeader(void)
     SummaryPrint_MonName(SUMMARY_MOVES_HEADER_NAME_X, SUMMARY_MOVES_HEADER_Y, TILE_TO_PIXELS(8));
     SummaryPrint_MonGender(SUMMARY_MOVES_HEADER_GENDER_X, SUMMARY_MOVES_HEADER_Y);
     SummaryPrint_MonLevel(SUMMARY_MOVES_HEADER_LEVEL_X, SUMMARY_MOVES_HEADER_Y);
-    SummarySprite_MonTypes(SUMMARY_MOVES_SPRITE_TYPE_1, SUMMARY_MOVES_HEADER_TYPINGS_X, SUMMARY_MOVES_HEADER_TYPINGS_Y);
 }
 
 static void MovesPage_HandleGeneral(void)

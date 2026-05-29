@@ -70,6 +70,8 @@ enum MonSummaryMainSprites
     SUMMARY_MAIN_SPRITE_HP_BAR,
     SUMMARY_MAIN_SPRITE_EXP_BAR,
     SUMMARY_MAIN_SPRITE_FRIENDSHIP_BAR,
+    SUMMARY_MAIN_SPRITE_TYPE_1,
+    SUMMARY_MAIN_SPRITE_TYPE_2,
 
     // uses its own function to be spawned
     SUMMARY_MAIN_SPRITE_POKEMON,
@@ -121,8 +123,6 @@ enum MonSummaryInfosSprites
     SUMMARY_INFOS_SPRITE_POKE_BALL,
     SUMMARY_INFOS_SPRITE_DESC_CURSOR,       // for switching between ability and held item description for the textbox
     SUMMARY_INFOS_SPRITE_SCROLL_INDICATOR,  // this is a seperate sprite from above to achieve smoother animation
-    SUMMARY_INFOS_SPRITE_TYPE_ICON_1,
-    SUMMARY_INFOS_SPRITE_TYPE_ICON_2,
 
     NUM_SUMMARY_INFOS_SPRITES
 };
@@ -143,6 +143,8 @@ enum MonSummaryInfosSubModes
 #define SUMMARY_INFOS_HEADER_HP_BAR_X           (66 + 32)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_X          (67)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_X   (79)
+#define SUMMARY_INFOS_HEADER_TYPE_1_X           (SUMMARY_INFOS_GENERAL_X2 + 8)
+#define SUMMARY_INFOS_HEADER_TYPE_2_X           (SUMMARY_INFOS_GENERAL_X3 + 8)
 
 #define SUMMARY_INFOS_HEADER_NAME_Y             (1)
 #define SUMMARY_INFOS_HEADER_GENDER_Y           SUMMARY_INFOS_HEADER_NAME_Y
@@ -152,6 +154,7 @@ enum MonSummaryInfosSubModes
 #define SUMMARY_INFOS_HEADER_HP_BAR_Y           (28 + 16)
 #define SUMMARY_INFOS_HEADER_EXP_BAR_Y          (44)
 #define SUMMARY_INFOS_HEADER_FRIENDSHIP_BAR_Y   (51)
+#define SUMMARY_INFOS_HEADER_TYPINGS_Y          (SUMMARY_INFOS_GENERAL_Y + 12)
 
 #define SUMMARY_INFOS_GENERAL_X      (TILE_TO_PIXELS(15) + 7)     // type:
 #define SUMMARY_INFOS_GENERAL_X2     (TILE_TO_PIXELS(15) + 42)    // elec
@@ -184,8 +187,6 @@ enum MonSummaryInfosSubModes
 enum MonSummaryStatsSprites
 {
     SUMMARY_STATS_SPRITE_HELD_ITEM,
-    SUMMARY_STATS_SPRITE_TYPE_1,
-    SUMMARY_STATS_SPRITE_TYPE_2,
     SUMMARY_STATS_SPRITE_STAT_CURSOR,
     SUMMARY_STATS_SPRITE_UP_ARROW,
     SUMMARY_STATS_SPRITE_DOWN_ARROW,
@@ -221,7 +222,8 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_HEADER_HP_BAR_X           (32 + 32)
 #define SUMMARY_STATS_HEADER_EXP_BAR_X          (34)
 #define SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X   (89)
-#define SUMMARY_STATS_HEADER_TYPINGS_X          (89 + 8)
+#define SUMMARY_STATS_HEADER_TYPE_1_X           (89 + 8)
+#define SUMMARY_STATS_HEADER_TYPE_2_X           (101 + 8)
 
 #define SUMMARY_STATS_HEADER_Y                  (0)
 #define SUMMARY_STATS_HEADER_SHINY_Y            (20 + 8)
@@ -240,7 +242,7 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_GENERAL_ADDITIVE_Y    (TILE_TO_PIXELS(2) + 3)
 
 #define SUMMARY_STATS_MISC_MON_MARKINGS_X   (60)
-#define SUMMARY_STATS_MISC_TOTAL_EVS_X      (TILE_TO_PIXELS(4) + 1)
+#define SUMMARY_STATS_MISC_TOTAL_VALUES_X   (TILE_TO_PIXELS(4) + 1)
 #define SUMMARY_STATS_MISC_ITEM_NAME_X      (TILE_TO_PIXELS(4) - 2)
 #define SUMMARY_STATS_MISC_ABILITY_NAME_X   (TILE_TO_PIXELS(1) - 4)
 #define SUMMARY_STATS_MISC_TEXT_BOX_X       (SUMMARY_INFOS_MISC_TEXT_BOX_X)
@@ -248,21 +250,23 @@ enum MonSummaryTotalValues
 #define SUMMARY_STATS_MISC_CURSOR_X         (126)
 #define SUMMARY_STATS_MISC_UP_ARROW_X       (167 + 8)
 #define SUMMARY_STATS_MISC_DOWN_ARROW_X     (SUMMARY_STATS_MISC_UP_ARROW_X)
+#define SUMMARY_STATS_MISC_LEFT_ARROW_X     (152 + 8)
+#define SUMMARY_STATS_MISC_RIGHT_ARROW_X    (183 + 8)
 
 #define SUMMARY_STATS_MISC_MON_MARKINGS_Y   (TILE_TO_PIXELS(8) - 5)
-#define SUMMARY_STATS_MISC_TOTAL_EVS_Y      (TILE_TO_PIXELS(8) + 1)
+#define SUMMARY_STATS_MISC_TOTAL_VALUES_Y   (TILE_TO_PIXELS(8) + 1)
 #define SUMMARY_STATS_MISC_ITEM_NAME_Y      (TILE_TO_PIXELS(10))
 #define SUMMARY_STATS_MISC_ABILITY_NAME_Y   (TILE_TO_PIXELS(14) - 2)
 #define SUMMARY_STATS_MISC_TEXT_BOX_Y       (TILE_TO_PIXELS(16) + 1)
 #define SUMMARY_STATS_MISC_HELD_ITEM_Y      (SUMMARY_INFOS_MISC_HELD_ITEM_Y + 1)
 #define SUMMARY_STATS_MISC_CURSOR_Y         (37)
-#define SUMMARY_STATS_MISC_UP_ARROW_Y       (30 + 4)
-#define SUMMARY_STATS_MISC_DOWN_ARROW_Y     (51 + 4)
+#define SUMMARY_STATS_MISC_UP_ARROW_Y       (26 + 8)
+#define SUMMARY_STATS_MISC_DOWN_ARROW_Y     (47 + 8)
+#define SUMMARY_STATS_MISC_LEFT_ARROW_Y     (40 + 8)
+#define SUMMARY_STATS_MISC_RIGHT_ARROW_Y    (SUMMARY_STATS_MISC_LEFT_ARROW_Y)
 
 enum MonSummaryMovesSprites
 {
-    SUMMARY_MOVES_SPRITE_TYPE_1,
-    SUMMARY_MOVES_SPRITE_TYPE_2,
     SUMMARY_MOVES_SPRITE_MOVE_1,
     SUMMARY_MOVES_SPRITE_MOVE_2,
     SUMMARY_MOVES_SPRITE_MOVE_3,
@@ -322,6 +326,8 @@ enum MonSummaryMovesForgetConfirmation
 #define SUMMARY_MOVES_HEADER_EXP_BAR_X             SUMMARY_STATS_HEADER_EXP_BAR_X
 #define SUMMARY_MOVES_HEADER_FRIENDSHIP_BAR_X      SUMMARY_STATS_HEADER_FRIENDSHIP_BAR_X
 #define SUMMARY_MOVES_HEADER_TYPINGS_X             SUMMARY_STATS_HEADER_TYPINGS_X
+#define SUMMARY_MOVES_HEADER_TYPE_1_X              SUMMARY_STATS_HEADER_TYPE_1_X
+#define SUMMARY_MOVES_HEADER_TYPE_2_X              SUMMARY_STATS_HEADER_TYPE_2_X
 
 #define SUMMARY_MOVES_HEADER_Y                     SUMMARY_STATS_HEADER_Y
 #define SUMMARY_MOVES_HEADER_SHINY_Y               SUMMARY_STATS_HEADER_SHINY_Y
@@ -456,7 +462,7 @@ struct MonSummaryResources
     u32 pad:5;
 
     // set when opening, usually help determines where to get a mon info.
-    enum MonSummaryModes mode;
+    enum PokemonSummaryScreenMode mode;
 
     // set when pressing horizontal dpads, determines what information to
     // load that the player wants.
@@ -524,7 +530,7 @@ struct MonSummaryPageInfo
     const u8 *name;
     const u8 *const *helpBar;
     const u32 *tilemap;
-    struct Coords8 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
+    struct Coords16 mainSpriteCoords[NUM_SUMMARY_MAIN_SPRITES];
     TaskFunc input;
     void (*handleFrontEnd)(void);
     void (*handleUpdateText)(void); // only updates certain parts of the page's interface
