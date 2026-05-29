@@ -614,7 +614,7 @@ static void CB2_SummarySetup(void)
     case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
         if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS)
-            sMonSummaryDataPtr->arg.stats.ogTotalValues = SummaryMon_GetStruct()->totalValues[SUMMARY_TOTAL_IVS];
+            sMonSummaryDataPtr->arg.stats.ogTotalValues = MAX_PER_STAT_IVS * NUM_STATS;
         break;
     case SUMMARY_SETUP_BACKGROUNDS:
         SummarySetup_Backgrounds();
@@ -1020,15 +1020,6 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
-            if (StatsPageMisc_CalculateAvailableValues())
-            {
-                PlaySE(SE_BOO);
-                sMonSummaryDataPtr->arg.stats.subMode = subMode;
-                SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_ERROR);
-                SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-                return;
-            }
-
             PlaySE(SE_PC_OFF);
             SummaryMon_CopyChanges();
             SummaryMon_SetStruct();
@@ -2830,7 +2821,7 @@ static void StatsPageMisc_MonTotalEVs(void)
     }
 
     ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
-    if (SummaryInput_IsWithinSubMode())
+    if (SummaryInput_IsWithinSubMode() && SummaryMode_GetValue() != SUMMARY_MODE_EDIT_IVS)
         ConvertUIntToDecimalStringN(gStringVar2, sMonSummaryDataPtr->arg.stats.ogTotalValues, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
         ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
