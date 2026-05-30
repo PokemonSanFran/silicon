@@ -11783,7 +11783,7 @@
       "id": "LAYOUT_PETAROSA_BOROUGH_IMPROV",
       "name": "PetarosaBorough_Improv_Layout",
       "width": 5,
-      "height": 6,
+      "height": 13,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",

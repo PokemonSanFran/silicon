@@ -18,14 +18,14 @@
       "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEA",
       "graphics_id": "OBJ_EVENT_GFX_QUEST_RESTOREZENZUISLAND_3",
       "x": 2,
-      "y": 2,
+      "y": 1,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Improvbattling_Event_Script",
+      "script": "NULL",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -40,7 +40,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_1"
     },
     {
       "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEB",
@@ -54,27 +54,149 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_3"
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVAUDIENCED",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 2,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Improvbattling_Dialogue_ImprovaudienceD",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEE",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 3,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Improvbattling_Dialogue_ImprovaudienceE",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEF",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 1,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Improvbattling_Dialogue_ImprovaudienceF",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEG",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 3,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Improvbattling_Dialogue_ImprovaudienceG",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEH",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Improvbattling_Dialogue_ImprovaudienceH",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEX",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "x": 1,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEY",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
+      "x": 2,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
+      "x": 3,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [
     {
       "warp_id": "WARP_ID_THEATER_TO_PETAROSA_LEFT",
-      "x": 1,
-      "y": 5,
+      "x": 3,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
       "dest_warp_id": "3"
     },
     {
       "warp_id": "WARP_ID_THEATER_TO_PETAROSA_RIGHT",
-      "x": 2,
-      "y": 5,
+      "x": 4,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_PETAROSA_BOROUGH",
       "dest_warp_id": "3"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "Improvbattling_Script_RoutePlayer"
+    }
+  ],
   "bg_events": []
 }
