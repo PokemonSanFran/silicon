@@ -35423,10 +35423,10 @@
         },
     },
 #line 12072
-    [DIFFICULTY_NORMAL][TRAINER_C789FBF5] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_4] =
     {
 #line 12073
-        .trainerName = _("C789FBF5"),
+        .trainerName = _("IMPROV_4"),
 #line 12074
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12075
@@ -35451,10 +35451,10 @@
         },
     },
 #line 12080
-    [DIFFICULTY_NORMAL][TRAINER_C7E06CB4] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_5] =
     {
 #line 12081
-        .trainerName = _("C7E06CB4"),
+        .trainerName = _("IMPROV_5"),
 #line 12082
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12083
@@ -35479,10 +35479,10 @@
         },
     },
 #line 12088
-    [DIFFICULTY_NORMAL][TRAINER_C7F16F5B] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_6] =
     {
 #line 12089
-        .trainerName = _("C7F16F5B"),
+        .trainerName = _("IMPROV_6"),
 #line 12090
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12091
