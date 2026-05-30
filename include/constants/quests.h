@@ -1044,4 +1044,16 @@ enum
 #define MAP_QUEST_RESTOREHODOUGYM_7 MAP_ROUTE11
 #define MAP_QUEST_RESTOREHODOUGYM_8 MAP_HALERBA_WILDS
 
+// ***********************************************************************
+// Quest: Improv Battling
+// ***********************************************************************
+//#define QUEST_IMPROVBATTLING
+
+enum
+{
+    CHECK_QUEST_IMPROVBATTLING_HAS_NOT_BEATEN_NERIENE,
+    CHECK_QUEST_IMPROVBATTLING_HAS_BEATEN_NERIENE,
+    CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION,
+};
+
 #endif // GUARD_CONSTANTS_QUESTS_H

@@ -4549,3 +4549,41 @@ void LetsGrabLunch_IncrementStoryVariable(void)
         VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
 }
 
+// ***********************************************************************
+// Quest: Improv Battling
+// ***********************************************************************
+
+static bool8 Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    if (IsQuestCompletedState(QUEST_IMPROVBATTLING) == FALSE)
+        return FALSE;
+
+    if (IsQuestActiveState(QUEST_RESTOREZENZUGYM) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM, FLAG_GET_COMPLETED, SUB_QUEST_3))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    gSpecialVar_Result = Improvbattling_ShouldLeaderMoveOffStage();
+}
+
+static u32 Improvbattling_ReturnValueFromProgress(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS)
+        return CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION;
+
+    if (FlagGet(FLAG_BADGE05_GET))
+        return CHECK_QUEST_IMPROVBATTLING_HAS_BEATEN_NERIENE;
+
+    return CHECK_QUEST_IMPROVBATTLING_HAS_NOT_BEATEN_NERIENE;
+}
+
+void Script_Improvbattling_ReturnValueFromProgress(void)
+{
+    gSpecialVar_Result = Improvbattling_ReturnValueFromProgress();
+}
