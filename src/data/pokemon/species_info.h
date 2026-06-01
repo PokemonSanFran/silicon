@@ -949,7 +949,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             ANIMCMD_FRAME(1, 30),
             ANIMCMD_FRAME(0, 1),
         ),
-        .frontAnimId = ANIM_FLICKER,
+        .frontAnimId = ANIM_H_SHAKE_FAST,
         .backPicSize = MON_COORDS_SIZE(40, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,

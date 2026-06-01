@@ -1527,7 +1527,6 @@ void DoAutoSave(void)
     SaveMapView();
     sSavingComplete = FALSE;
     IncrementGameStat(GAME_STAT_SAVED_GAME);
-    //u8 saveStatus = TrySavingData(SAVE_NORMAL);
     TrySavingData(SAVE_NORMAL);
     gDifferentSaveFile = FALSE;
     return;
