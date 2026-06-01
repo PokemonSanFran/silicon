@@ -41,6 +41,7 @@
 #include "m4a.h"
 #include "item_menu.h"
 #include "ui_move_reminder.h"
+#include "nameplate.h"
 #include "ui_mon_summary.h"
 #include "constants/ui_mon_summary.h"
 #include "constants/rgb.h"
@@ -495,6 +496,7 @@ static void SummarySetup_Graphics(void)
 
     DecompressAndCopyTileDataToVram(SUMMARY_BG_PAGE_1, sMonSummary_MainTiles, 0, 0, 0);
     LoadPalette(sMonSummary_MainPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadNameplatePalette(0);
 
     LoadSpritePalette(&(const struct SpritePalette){
         .data = sMonSummary_MainPalette,
@@ -1717,6 +1719,7 @@ static void SummaryPage_Reload(enum MonSummaryReloadModes mode)
         PutWindowTilemap(i);
     }
 
+    ClearDialogWindowAndFrameToTransparent(SUMMARY_MAIN_WIN_TEXT_NAMEPLATE, FALSE);
     ClearDialogWindowAndFrameToTransparent(SUMMARY_MAIN_WIN_TEXT_BOX, FALSE);
 
     SummaryPrint_Header();
@@ -2299,6 +2302,10 @@ static void SummaryPrint_TextBox(const u8 *str)
     DrawDialogFrameWithCustomTileAndPalette(SUMMARY_MAIN_WIN_TEXT_BOX, FALSE, SUMMARY_TEXT_BOX_BASE_TILE, SUMMARY_TEXT_BOX_PALETTE);
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_TEXT_BOX, FONT_NORMAL, 0, 1, SUMMARY_FNTCLR_TEXT_BOX, str);
     CopyWindowToVram(SUMMARY_MAIN_WIN_TEXT_BOX, COPYWIN_GFX);
+
+    DrawTopMessageBoxTiles(SUMMARY_MAIN_WIN_TEXT_NAMEPLATE,SUMMARY_NAMEPLATE_FIRST_BASE_TILE,SUMMARY_NAMEPLATE_MIDDLE_BASE_TILE,SUMMARY_NAMEPLATE_LAST_BASE_TILE);
+    PutWindowTilemap(SUMMARY_MAIN_WIN_TEXT_NAMEPLATE);
+    CopyWindowToVram(SUMMARY_MAIN_WIN_TEXT_NAMEPLATE, COPYWIN_FULL);
 }
 
 static void SummaryPrint_MonName(u32 x, u32 y, u32 maxWidth)

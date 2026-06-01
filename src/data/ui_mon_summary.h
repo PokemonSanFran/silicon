@@ -59,6 +59,15 @@ static const struct WindowTemplate sSummarySetup_MainWindows[NUM_SUMMARY_MAIN_WI
         .height = 6,
         .paletteNum = SUMMARY_TEXT_BOX_PALETTE
     },
+    [SUMMARY_MAIN_WIN_TEXT_NAMEPLATE] =
+    {
+        .bg = SUMMARY_BG_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 10,
+        .width = DISPLAY_TILE_WIDTH,
+        .height = 1,
+        .paletteNum = MUGSHOT_PALETTE_NUM,
+    },
 
     DUMMY_WIN_TEMPLATE
 };
