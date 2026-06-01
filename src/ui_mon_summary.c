@@ -198,7 +198,7 @@ static void StatsPage_HandleUpdateText(void);
 static void StatsPage_HandleHeader(void);
 static void StatsPage_HandleGeneral(void);
 static void StatsPage_HandleMisc(void);
-static void StatsPageMisc_MonTotalValues(void);
+static void StatsPageMisc_MonTotalEVs(void);
 static void StatsPageMisc_TrySpawnCursors(void);
 static void StatsPageMisc_SetRow(u32);
 static u32 StatsPageMisc_GetRow(void);
@@ -616,7 +616,7 @@ static void CB2_SummarySetup(void)
     case SUMMARY_SETUP_MONDATA:
         SummaryMon_SetStruct();
         if (SummaryMode_GetValue() == SUMMARY_MODE_EDIT_IVS)
-            sMonSummaryDataPtr->arg.stats.ogTotalValues = SummaryMon_GetStruct()->totalValues[SUMMARY_TOTAL_IVS];
+            sMonSummaryDataPtr->arg.stats.ogTotalValues = MAX_PER_STAT_IVS * NUM_STATS;
         break;
     case SUMMARY_SETUP_BACKGROUNDS:
         SummarySetup_Backgrounds();
@@ -1022,15 +1022,6 @@ static void Task_SummaryMode_EditIVsInput(u8 taskId)
             break;
         case SUMMARY_STATS_SUB_MODE_SELECT_ROW:
             SummarySprite_InjectHpBar(&gSprites[SummarySprite_GetSpriteId(SUMMARY_MAIN_SPRITE_HP_BAR)]);
-            if (StatsPageMisc_CalculateAvailableValues())
-            {
-                PlaySE(SE_BOO);
-                sMonSummaryDataPtr->arg.stats.subMode = subMode;
-                SummaryInput_SetSubMode(SUMMARY_STATS_SUB_MODE_ERROR);
-                SummaryPage_Reload(SUMMARY_RELOAD_FRONT_END);
-                return;
-            }
-
             PlaySE(SE_PC_OFF);
             SummaryMon_CopyChanges();
             SummaryMon_SetStruct();
@@ -2798,7 +2789,7 @@ static void StatsPage_HandleMisc(void)
 {
     SummaryPrint_BlitMonMarkings(SUMMARY_STATS_MISC_MON_MARKINGS_X, SUMMARY_STATS_MISC_MON_MARKINGS_Y);
 
-    StatsPageMisc_MonTotalValues();
+    StatsPageMisc_MonTotalEVs();
 
     SummaryPrint_MonHeldItem(
         SUMMARY_STATS_MISC_ITEM_NAME_X, SUMMARY_STATS_MISC_ITEM_NAME_Y,
@@ -2826,29 +2817,26 @@ static void StatsPage_HandleMisc(void)
     StatsPageMisc_TrySpawnCursors();
 }
 
-static void StatsPageMisc_MonTotalValues(void)
+static void StatsPageMisc_MonTotalEVs(void)
 {
-    u32 usedValues = 0;
-    u32 totalValuesType = StatsPageMisc_GetTotalValuesType();
+    struct MonSummary *mon = SummaryMon_GetStruct();
+    u32 usedEVs = 0;
 
     for (enum Stat statIdx = 0; statIdx < NUM_STATS; statIdx++)
     {
-        usedValues += GetMonData(&sMonSummaryDataPtr->mon, sStatsPageMisc_MonDataValuesOrders[totalValuesType][statIdx]);
+        usedEVs += GetMonData(&sMonSummaryDataPtr->mon, MON_DATA_HP_EV + statIdx);
     }
 
-    ConvertUIntToDecimalStringN(gStringVar1, usedValues, STR_CONV_MODE_LEFT_ALIGN, 3);
-    if (SummaryInput_IsWithinSubMode())
+    ConvertUIntToDecimalStringN(gStringVar1, usedEVs, STR_CONV_MODE_LEFT_ALIGN, 3);
+    if (SummaryInput_IsWithinSubMode() && SummaryMode_GetValue() != SUMMARY_MODE_EDIT_IVS)
         ConvertUIntToDecimalStringN(gStringVar2, sMonSummaryDataPtr->arg.stats.ogTotalValues, STR_CONV_MODE_LEFT_ALIGN, 3);
     else
-        ConvertUIntToDecimalStringN(gStringVar2, SummaryMon_GetStruct()->totalValues[totalValuesType], STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertUIntToDecimalStringN(gStringVar2, mon->totalValues[SUMMARY_TOTAL_EVS], STR_CONV_MODE_LEFT_ALIGN, 3);
 
-    if (totalValuesType == SUMMARY_TOTAL_IVS)
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("IVs: {STR_VAR_1}/{STR_VAR_2}"));
-    else
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("EVs: {STR_VAR_1}/{STR_VAR_2}"));
 
     SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_OUTLINED,
-        SUMMARY_STATS_MISC_TOTAL_VALUES_X, SUMMARY_STATS_MISC_TOTAL_VALUES_Y,
+        SUMMARY_STATS_MISC_TOTAL_EVS_X, SUMMARY_STATS_MISC_TOTAL_EVS_Y,
         SUMMARY_FNTCLR_INTERFACE, gStringVar4);
 }
 
