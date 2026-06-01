@@ -549,6 +549,10 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .size = TILE_OFFSET_4BPP(144),
             .tag = DEXNAV_SPRITETAG_OVERWORLD,
         },
+        {
+            .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/ow_dexnav_arrow.gbapal"),
+            .tag = DEXNAV_PALTAG_OVERWORLD,
+        },
     },
 };
 
@@ -815,6 +819,9 @@ static void LoadGraphics(void)
         LoadSpriteSheet(&sDexnavSpriteSheets[spriteId].spriteSheet);
 
         if (sDexnavSpriteSheets[spriteId].palette.tag == 0)
+            continue;
+
+        if (sDexnavSpriteSheets[spriteId].spriteSheet.tag == DEXNAV_PALTAG_OVERWORLD)
             continue;
 
         LoadSpritePalette(&sDexnavSpriteSheets[spriteId].palette);
@@ -2983,7 +2990,7 @@ static void Dexnav_RegisterCurrentlySelectedMon(void)
 static void Dexnav_LoadOverworld(void)
 {
     LoadSpriteSheet(&sDexnavSpriteSheets[DEXNAV_SPRITEID_OVERWORLD].spriteSheet);
-    LoadSpritePalette(&sDexnavSpriteSheets[DEXNAV_SPRITEID_COMPLETION_MARK].palette);
+    LoadSpritePalette(&sDexnavSpriteSheets[DEXNAV_SPRITEID_OVERWORLD].palette);
 }
 
 static const union AnimCmd sSpriteAnimTable_DexnavOverworld0[] =
@@ -3102,7 +3109,7 @@ void Dexnav_DrawOverworldSearchIcon(void)
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = DEXNAV_SPRITETAG_OVERWORLD;
-    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING;
+    TempSpriteTemplate.paletteTag = DEXNAV_PALTAG_OVERWORLD;
     TempSpriteTemplate.anims = sSpriteAnimTable_DexnavOverworld;
     TempSpriteTemplate.callback = SpriteCB_DexnavOverworld;
 
