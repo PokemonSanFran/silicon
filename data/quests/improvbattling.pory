@@ -23,7 +23,8 @@ script Improvbattling_Dialogue_ImprovaudienceD
 {
     lock
     faceplayer
-    msgbox(format(""),,SPEAKER_IMPROVAUDIENCED)
+    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH)
+    msgbox(format("How're you finding {STR_VAR_1}, youngster? Maybe when you grow up, you'll be successful enough to buy a house here too! Gotta be ready to put the work in though, mine cost me 9 figures! Hohohoho!"),,SPEAKER_IMPROVAUDIENCED)
     closemessage
     applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCED,moves(face_original_direction))
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCED)
@@ -34,7 +35,8 @@ script Improvbattling_Dialogue_ImprovaudienceE
 {
     lock
     faceplayer
-    msgbox(format(""),,SPEAKER_IMPROVAUDIENCEE)
+    buffermapname(STR_VAR_1,MAP_TIRABUDIN_PLACE)
+    msgbox(format("BD, the Gym Leader of {STR_VAR_1} lives here. I feel for her, still having to deal with all the rabble every day. They hate her over there, and for what? Doing the right thing? You simply can't reason with some people. They think with their hearts, not their heads."),,SPEAKER_IMPROVAUDIENCEE)
     closemessage
     applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEE,moves(face_original_direction))
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEE)
@@ -69,7 +71,9 @@ script Improvbattling_Dialogue_ImprovaudienceH
 {
     lock
     faceplayer
-    msgbox(format(""),,SPEAKER_IMPROVAUDIENCEH)
+    buffermovename(STR_VAR_2,MOVE_FIRE_PUNCH)
+    buffermovename(STR_VAR_3,MOVE_FLARE_BLITZ)
+    msgbox(format("Freeze is one of the worst status conditions you can be on the receiving end of, but here's a tip; if you have a physical Fire-type move like {STR_VAR_2} or {STR_VAR_3}, you should use that! You'll ALWAYS thaw out if you do that!"),,SPEAKER_IMPROVAUDIENCEH)
     closemessage
     applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEH,moves(face_original_direction))
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEH)
@@ -145,7 +149,7 @@ script Improvbattling_Script_ContinueChallenge
 
 script Improvbattling_Script_PostQuestChallenge
 {
-    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH_IMPROV)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
     msgbox(format("And now for a special {STR_VAR_1} Improv legend, {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
     msgbox(format("Give it up for {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
     call(Improvbattling_Script_MovePlayerToStage)
@@ -170,7 +174,7 @@ script Improvbattling_Script_StartSwapEvent
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
     moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC,2,1,DIR_SOUTH)
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC)
-    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH_IMPROV)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
     msgbox(format("Welcome to {STR_VAR_1} Improv, {PLAYER}. Let's put on a good show!"),,SPEAKER_IMPROVTROUPEC)
     closemessage
     goto(Improvbattling_Script_StartBattle1)
@@ -380,7 +384,7 @@ script Improvbattling_Script_PlayerLost
 
 script Improvbattling_Script_PostQuestChallenge_PostRecruit
 {
-    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH_IMPROV)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
     msgbox(format("Welcome back the {STR_VAR_1} Improv legend, {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
     msgbox(format("Let's hear it for {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
     call(Improvbattling_Script_MovePlayerToStage)
@@ -402,7 +406,7 @@ script Improvbattling_Script_StartSwapEvent_PostRecruit
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
     moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,2,1,DIR_SOUTH)
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
-    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH_IMPROV)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
     msgbox(format("I hope your stardom continues to attact people here, {PLAYER}."),,SPEAKER_IMPROVTROUPEZ)
     msgbox(format("Let's put on a good show!"),,SPEAKER_IMPROVTROUPEZ)
     closemessage
