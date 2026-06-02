@@ -2156,14 +2156,102 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_IMPROVBATTLING] =
     {
-        .name = gText_Quest_ImprovBattling_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_ImprovBattling_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_ImprovBattling_DoneDesc,
-        .map = gText_Quest_ImprovBattling_Map,
-        .sprite = OBJ_EVENT_GFX_RICH_BOY,
+        .name = COMPOUND_STRING("Improv Battling"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Win three battles in a row in the {STR_VAR_1} Improv show without using your own Pokémon!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You joined and conquered the {STR_VAR_1} Improv show!"),
+        .descFunc = GetQuestDesc_Improvbattling,
+        .map = COMPOUND_STRING("Petarosa Borough Improv"),
+        .sprite = OBJ_EVENT_GFX_QUEST_IMPROVBATTLING_A,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_IMPROVBATTLING_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_DEFEATED_A]=
+            {
+                .name = COMPOUND_STRING("Defeated A"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_DEFEATED_B]=
+            {
+                .name = COMPOUND_STRING("Defeated B"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_COMPLETED]=
+            {
+                .name = COMPOUND_STRING("Completed"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_BEFORE_ZENZU_RECRUIT]=
+            {
+                .name = COMPOUND_STRING("Before Zenzu Recruit"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_AFTER_ZENZU_RECRUIT]=
+            {
+                .name = COMPOUND_STRING("After Zenzu Recruit"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Not Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_STARTED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_X]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Defeated X"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_Y]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Defeated Y"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_COMPLETED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Completed"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+        },
     },
     [QUEST_BATTLEARCADEMINIQUEST] =
     {
