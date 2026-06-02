@@ -319,7 +319,7 @@ script Improvbattling_Script_BeforeBattle3
 
 script Improvbattling_Script_StartBattle3
 {
-    trainerbattle_continue_after_lose(TRAINER_IMPROV_3,format("You got the best of us!"))
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_6,format("You got the best of us!"))
     specialvar(VAR_RESULT,GetBattleOutcome)
     goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost)
     goto(Improvbattling_Script_AfterBattle3)
@@ -375,43 +375,6 @@ script Improvbattling_Script_PlayerLost
     moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,2,1,DIR_SOUTH)
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
     release
-    end
-}
-
-script Improvbattling_Dialogue_ImprovtroupeX
-{
-    lock
-    faceplayer
-    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-    msgbox(format("Oh! You must be {PLAYER}. The last cohort told us about you."),,SPEAKER_IMPROVTROUPEX)
-    msgbox(format("We're still getting ourselves ready to perform with somebody of your caliber!"),,SPEAKER_IMPROVTROUPEX)
-    msgbox(format("I have heard that there were something similar cooking at {STR_VAR_1}'s old Gym..."),,SPEAKER_IMPROVTROUPEX)
-    closemessage
-    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,moves(face_original_direction))
-    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
-    end
-}
-
-script Improvbattling_Dialogue_ImprovtroupeY
-{
-    lock
-    faceplayer
-    msgbox(format("I hope I can fill the shoes of ImprovtroupeB..."),,SPEAKER_IMPROVTROUPEY,TAIL_WHISPER)
-    closemessage
-    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,moves(face_original_direction))
-    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
-    end
-}
-
-script Improvbattling_Dialogue_ImprovtroupeZ
-{
-    lock
-    faceplayer
-    msgbox(format("I'm sad that ImprovtroupeC and ImprovtroupeA are gone, but it s awesome that more new talent will get highlighted at this theater."),,SPEAKER_IMPROVTROUPEZ)
-    msgbox(format("I hope your stardom continues to attract people here!"),,SPEAKER_IMPROVTROUPEZ)
-    closemessage
-    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,moves(face_original_direction))
-    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
     end
 }
 
@@ -522,14 +485,14 @@ script Improvbattling_Script_BeforeBattle2_PostRecruit
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
     moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,2,1,DIR_SOUTH)
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
-    msgbox(format("I hope I can fill the shoes of ImprovtroupeB"),,SPEAKER_IMPROVTROUPEY)
+    msgbox(format("I hope I can fill the shoes of ImprovtroupeB..."),,SPEAKER_IMPROVTROUPEY)
     closemessage
     goto(Improvbattling_Script_StartBattle2_PostRecruit)
 }
 
 script Improvbattling_Script_StartBattle2_PostRecruit
 {
-    trainerbattle_continue_after_lose(TRAINER_IMPROV_2,format("Did we live up to expectations?"))
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_5,format("Did we live up to expectations?"))
     specialvar(VAR_RESULT,GetBattleOutcome)
     goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost_PostRecruit)
     goto(Improvbattling_Script_AfterBattle2_PostRecruit)
@@ -595,10 +558,10 @@ script Improvbattling_Script_PlayerLost_PostRecruit
     setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,4,2)
     waitse
     fadescreen(FADE_FROM_BLACK)
-    msgbox(format("You're always welcome, here {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
+    msgbox(format("You're always welcome here {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
     closemessage
     cueobjecttalking(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
-    msgbox(format("Here are your Pokemon, {PLAYER}."),,SPEAKER_IMPROVTROUPEX)
+    msgbox(format("Here are your Pokemon."),,SPEAKER_IMPROVTROUPEX)
     closemessage
     moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_NORTH)
     waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)

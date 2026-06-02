@@ -9455,7 +9455,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_1] =
     {
 #line 3778
-        .trainerName = _("Blank"),
+        .trainerName = _("ImprovtroupeA"),
 #line 3779
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3780
@@ -9483,7 +9483,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_2] =
     {
 #line 3786
-        .trainerName = _("Blank"),
+        .trainerName = _("ImprovtroupeB"),
 #line 3787
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3788
@@ -9511,7 +9511,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_3] =
     {
 #line 3794
-        .trainerName = _("Blank"),
+        .trainerName = _("ImprovtroupeC"),
 #line 3795
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 3796
@@ -35426,7 +35426,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_4] =
     {
 #line 12073
-        .trainerName = _("IMPROV_4"),
+        .trainerName = _("ImprovtroupeX"),
 #line 12074
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12075
@@ -35454,7 +35454,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_5] =
     {
 #line 12081
-        .trainerName = _("IMPROV_5"),
+        .trainerName = _("ImprovtroupeY"),
 #line 12082
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12083
@@ -35482,7 +35482,7 @@
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_6] =
     {
 #line 12089
-        .trainerName = _("IMPROV_6"),
+        .trainerName = _("ImprovtroupeZ"),
 #line 12090
         .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M,
 #line 12091
