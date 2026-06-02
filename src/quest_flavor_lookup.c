@@ -416,3 +416,11 @@ const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
     }
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Improvbattling(void)
+{
+    u32 flag = ReturnQuestState(QUEST_IMPROVBATTLING);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_IMPROVBATTLING].desc[flag]);
+	return gStringVar4;
+}

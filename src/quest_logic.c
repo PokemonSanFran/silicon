@@ -4335,10 +4335,7 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state)
         case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING:
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING:
-            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            QuestMenu_SetupQuestState(QUEST_IMPROVBATTLING,STATE_QUEST_IMPROVBATTLING_COMPLETED);
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
             QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
@@ -4549,3 +4546,85 @@ void LetsGrabLunch_IncrementStoryVariable(void)
         VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
 }
 
+// ***********************************************************************
+// Quest: Improv Battling
+// ***********************************************************************
+
+static bool8 Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    if (IsQuestCompletedState(QUEST_IMPROVBATTLING) == FALSE)
+        return FALSE;
+
+    if (IsQuestActiveState(QUEST_RESTOREZENZUGYM) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM, FLAG_GET_COMPLETED, SUB_QUEST_3))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    gSpecialVar_Result = Improvbattling_ShouldLeaderMoveOffStage();
+}
+
+static u32 Improvbattling_ReturnValueFromProgress(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS)
+        return CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION;
+
+    if (FlagGet(FLAG_BADGE05_GET))
+        return CHECK_QUEST_IMPROVBATTLING_HAS_BEATEN_NERIENE;
+
+    return CHECK_QUEST_IMPROVBATTLING_HAS_NOT_BEATEN_NERIENE;
+}
+
+void Script_Improvbattling_ReturnValueFromProgress(void)
+{
+    gSpecialVar_Result = Improvbattling_ReturnValueFromProgress();
+}
+
+void DebugQuest_ImprovBattling(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_IMPROVBATTLING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_IMPROVBATTLING);
+            SetTrainerDiscovered(TRAINER_IMPROV_1);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_DEFEATED_A:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_DEFEATED_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_COMPLETED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_BEFORE_ZENZU_RECRUIT:
+            QuestMenu_SetupQuestState(QUEST_RESTOREZENZUGYM,STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_AFTER_ZENZU_RECRUIT:
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_NOT_STARTED:
+            QuestMenu_SetupQuestState(QUEST_RESTOREZENZUGYM,STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_STARTED:
+            SetTrainerDiscovered(TRAINER_IMPROV_4);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_X:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_4);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_Y:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_5);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_COMPLETED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_6);
+            break;
+    }
+}
