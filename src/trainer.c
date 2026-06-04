@@ -1,8 +1,14 @@
 #include "global.h"
 #include "constants/trainers.h"
 
+static enum TrainerPicID GetSiliconTrainerPic(enum BodyTypes bodyType)
+{
+    return TRAINER_PIC_SILICON_PLAYER + bodyType;
+}
+
 static enum TrainerPicID GetEmeraldTrainerPic(enum Gender gender)
 {
+    return GetSiliconTrainerPic(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]);
     return gender == MALE ? TRAINER_PIC_BRENDAN : TRAINER_PIC_MAY;
 }
 static enum TrainerPicID GetRSTrainerPic(enum Gender gender)
