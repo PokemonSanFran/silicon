@@ -24,7 +24,6 @@
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
-#include "map_preview_screen.h" // mapPreviews
 #include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"

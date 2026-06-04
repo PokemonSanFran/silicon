@@ -6,7 +6,6 @@
 #include "field_effect.h"
 #include "fldeff.h"
 #include "gpu_regs.h"
-#include "map_preview_screen.h" // mapPreviews
 #include "main.h"
 #include "map_preview_screen.h"
 #include "overworld.h"

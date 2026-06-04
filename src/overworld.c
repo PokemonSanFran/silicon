@@ -1058,7 +1058,14 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     RunOnResumeMapScript();
     ClearAllPhenomenonData(); // phenomenon
 
-    if (OW_HIDE_REPEAT_MAP_POPUP)
+    // Start mapPreviews
+    if (ShouldRunOutdoorMapPreview())
+    {
+        RunOutdoorMapPreview();
+    }
+    else if (OW_HIDE_REPEAT_MAP_POPUP)
+    //if (OW_HIDE_REPEAT_MAP_POPUP)
+    // End mapPreviews
     {
         if (gMapHeader.regionMapSectionId != sLastMapSectionId)
             ShowMapNamePopup();
@@ -1744,7 +1751,6 @@ enum MapType GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-// start mapPreviews
 mapsec_u16_t GetLastUsedWarpMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gLastUsedWarp.mapGroup, gLastUsedWarp.mapNum)->regionMapSectionId;
@@ -1754,7 +1760,6 @@ mapsec_u16_t GetDestinationWarpMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum)->regionMapSectionId;
 }
-// end mapPreviews
 bool8 IsMapTypeOutdoors(enum MapType mapType)
 {
     if (mapType == MAP_TYPE_ROUTE

@@ -31,6 +31,47 @@ enum MapPreviewScreenId
     MPS_SCUFIB_CHAMBER,
     MPS_RIXY_CHAMBER,
     MPS_VIAPOIS_CHAMBER,
+    // Start mapPreviews
+    MPS_CUCONU_TOWN,
+    MPS_GLAVEZ_HILL,
+    MPS_MERMEREZA_CITY,
+    MPS_CAPHE_CITY,
+    MPS_TORA_TOWN,
+    MPS_ANBEH_BEND,
+    MPS_POPIDORA_PIER,
+    MPS_HODOU_CITY,
+    MPS_FERRYBUILDING,
+    MPS_PERLACIA_CITY,
+    MPS_SHARPRISESPIRE,
+    MPS_CURENO_PORT,
+    MPS_HALAI_ISLAND,
+    MPS_NAVAL_BASE,
+    MPS_OROLAND,
+    MPS_OROLAND_COLISEUM,
+    MPS_CHASILLA,
+    MPS_WISHAAST_LAKE,
+    MPS_ARANTRAZ,
+    MPS_FORT_YOBU,
+    MPS_PETAROSA_BOROUGH,
+    MPS_CRESALTA_VISTA,
+    MPS_HALERBA_CITY,
+    MPS_HALERBAWILDS,
+    MPS_TIRABUDIN_PLACE,
+    MPS_PINTILLONHOUSE,
+    MPS_IRISINA_TOWN,
+    MPS_PIOCA_BRIDGE,
+    MPS_ROBINWILLTUNNEL,
+    MPS_ESPULEE_OUTSKIRTS,
+    MPS_LEAVERRA_FOREST,
+    MPS_SHARPRISESTADIUM,
+    MPS_NONGYU_BRIDGE,
+    MPS_ZENZU_ISLAND,
+    MPS_TORGEOT_CLIMB,
+    MPS_SECRET_PATH,
+    MPS_PARC,
+    MPS_QIU_VILLAGE,
+    MPS_WAJABI_LAKE,
+    // End mapPreviews
     MPS_COUNT
 };
 
@@ -43,7 +84,7 @@ enum MapPreviewScreenId
 
 struct MapPreviewScreen
 {
-    mapsec_u8_t mapsec;
+    mapsec_u16_t mapsec;
     u8 type;
     u8 usesAllPalettes;
     u16 flagId;
@@ -53,17 +94,19 @@ struct MapPreviewScreen
 };
 
 bool32 ShouldRunMapPreview(void);
-u16 MapPreview_CreateMapNameWindow(u8 id);
-u16 MapPreview_GetDuration(u8 id);
+u16 MapPreview_CreateMapNameWindow(mapsec_u16_t mapsec);
+u16 MapPreview_GetDuration(mapsec_u16_t mapsec);
 bool32 CurrentMapHasPreviewScreen(u8 type);
 bool32 FadeInMapPreviewScreenIsRunning(void);
 void MapPreview_InitBgs(void);
-void MapPreview_LoadGfx(mapsec_u8_t mapsec);
+void MapPreview_LoadGfx(mapsec_u16_t mapsec);
 bool32 MapPreview_IsGfxLoadFinished(void);
 void MapPreview_Unload(s32 windowId);
 void RunMapPreviewScreenNonFade(u8 mapSecId);
-void RunMapPreviewScreenFadeIn(mapsec_u8_t mapsec);
+void RunMapPreviewScreenFadeIn(mapsec_u16_t mapsec);
 void Task_MapPreviewScreen_NonFade(u8 taskId);
 void MapPreview_SetFlag(u16 flagId);
+bool8 ShouldRunOutdoorMapPreview(void); // mapPreviews
+void RunOutdoorMapPreview(void); // mapPreviews
 
 #endif //GUARD_MAP_PREVIEW_SCREEN_H

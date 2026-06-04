@@ -8,6 +8,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "map_preview_screen.h"
+#include "map_name_popup.h" // mapPreviews
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
@@ -310,7 +311,361 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
         .palptr = sMoneanChamberMapPreviewPalette
-    }
+    },
+    // Start mapPreviews
+    [MPS_CUCONU_TOWN] =
+    {
+        .mapsec = MAPSEC_CUCONU_TOWN,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_CUCONU_TOWN,
+        .tilesptr = sViridianForestMapPreviewTiles,
+        .tilemapptr = sViridianForestMapPreviewTilemap,
+        .palptr = sViridianForestMapPreviewPalette
+    },
+    [MPS_GLAVEZ_HILL] =
+    {
+        .mapsec = MAPSEC_GLAVEZ_HILL,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_GLAVEZ_HILL,
+        .tilesptr = sMtMoonMapPreviewTiles,
+        .tilemapptr = sMtMoonMapPreviewTilemap,
+        .palptr = sMtMoonMapPreviewPalette
+    },
+    [MPS_MERMEREZA_CITY] =
+    {
+        .mapsec = MAPSEC_MERMEREZA_CITY,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_MERMEREZA_CITY,
+        .tilesptr = sDiglettsCaveMapPreviewTiles,
+        .tilemapptr = sDiglettsCaveMapPreviewTilemap,
+        .palptr = sDiglettsCaveMapPreviewPalette
+    },
+    [MPS_CAPHE_CITY] =
+    {
+        .mapsec = MAPSEC_CAPHE_CITY,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_CAPHE_CITY,
+        .tilesptr = sRockTunnelMapPreviewTiles,
+        .tilemapptr = sRockTunnelMapPreviewTilemap,
+        .palptr = sRockTunnelMapPreviewPalette
+    },
+    [MPS_TORA_TOWN] =
+    {
+        .mapsec = MAPSEC_TORA_TOWN,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_TORA_TOWN,
+        .tilesptr = sPokemonTowerMapPreviewTiles,
+        .tilemapptr = sPokemonTowerMapPreviewTilemap,
+        .palptr = sPokemonTowerMapPreviewPalette
+    },
+    [MPS_ANBEH_BEND] =
+    {
+        .mapsec = MAPSEC_ANBEH_BEND,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_ANBEH_BEND,
+        .tilesptr = sSafariZoneMapPreviewTiles,
+        .tilemapptr = sSafariZoneMapPreviewTilemap,
+        .palptr = sSafariZoneMapPreviewPalette
+    },
+    [MPS_POPIDORA_PIER] =
+    {
+        .mapsec = MAPSEC_POPIDORA_PIER,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_POPIDORA_PIER,
+        .tilesptr = sSeafoamIslandsMapPreviewTiles,
+        .tilemapptr = sSeafoamIslandsMapPreviewTilemap,
+        .palptr = sSeafoamIslandsMapPreviewPalette
+    },
+    [MPS_HODOU_CITY] =
+    {
+        .mapsec = MAPSEC_HODOU_CITY,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_HODOU_CITY,
+        .tilesptr = sPokemonMansionMapPreviewTiles,
+        .tilemapptr = sPokemonMansionMapPreviewTilemap,
+        .palptr = sPokemonMansionMapPreviewPalette
+    },
+    [MPS_FERRYBUILDING] =
+    {
+        .mapsec = MAPSEC_FERRYBUILDING,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_FERRYBUILDING,
+        .tilesptr = sRocketHideoutMapPreviewTiles,
+        .tilemapptr = sRocketHideoutMapPreviewTilemap,
+        .palptr = sRocketHideoutMapPreviewPalette
+    },
+    [MPS_PERLACIA_CITY] =
+    {
+        .mapsec = MAPSEC_PERLACIA_CITY,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_PERLACIA_CITY,
+        .tilesptr = sSilphCoMapPreviewTiles,
+        .tilemapptr = sSilphCoMapPreviewTilemap,
+        .palptr = sSilphCoMapPreviewPalette
+    },
+    [MPS_SHARPRISESPIRE] =
+    {
+        .mapsec = MAPSEC_SHARPRISESPIRE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_SHARPRISESPIRE,
+        .tilesptr = sVictoryRoadMapPreviewTiles,
+        .tilemapptr = sVictoryRoadMapPreviewTilemap,
+        .palptr = sVictoryRoadMapPreviewPalette
+    },
+    [MPS_CURENO_PORT] =
+    {
+        .mapsec = MAPSEC_CURENO_PORT,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_CURENO_PORT,
+        .tilesptr = sCeruleanCaveMapPreviewTiles,
+        .tilemapptr = sCeruleanCaveMapPreviewTilemap,
+        .palptr = sCeruleanCaveMapPreviewPalette
+    },
+    [MPS_HALAI_ISLAND] =
+    {
+        .mapsec = MAPSEC_HALAI_ISLAND,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_HALAI_ISLAND,
+        .tilesptr = sPowerPlantMapPreviewTiles,
+        .tilemapptr = sPowerPlantMapPreviewTilemap,
+        .palptr = sPowerPlantMapPreviewPalette
+    },
+    [MPS_NAVAL_BASE] =
+    {
+        .mapsec = MAPSEC_NAVAL_BASE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_NAVAL_BASE,
+        .tilesptr = sMtEmberMapPreviewTiles,
+        .tilemapptr = sMtEmberMapPreviewTilemap,
+        .palptr = sMtEmberMapPreviewPalette
+    },
+    [MPS_OROLAND] =
+    {
+        .mapsec = MAPSEC_OROLAND,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_OROLAND,
+        .tilesptr = sRocketWarehouseMapPreviewTiles,
+        .tilemapptr = sRocketWarehouseMapPreviewTilemap,
+        .palptr = sRocketWarehouseMapPreviewPalette
+    },
+    [MPS_OROLAND_COLISEUM] =
+    {
+        .mapsec = MAPSEC_OROLAND_COLISEUM,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_OROLAND_COLISEUM,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+
+    [MPS_CHASILLA] =
+    {
+        .mapsec = MAPSEC_CHASILLA,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_CHASILLA,
+        .tilesptr = sDottedHoleMapPreviewTiles,
+        .tilemapptr = sDottedHoleMapPreviewTilemap,
+        .palptr = sDottedHoleMapPreviewPalette
+    },
+    [MPS_WISHAAST_LAKE] =
+    {
+        .mapsec = MAPSEC_WISHAAST_LAKE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_WISHAAST_LAKE,
+        .tilesptr = sBerryForestMapPreviewTiles,
+        .tilemapptr = sBerryForestMapPreviewTilemap,
+        .palptr = sBerryForestMapPreviewPalette
+    },
+    [MPS_ARANTRAZ] =
+    {
+        .mapsec = MAPSEC_ARANTRAZ,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_ARANTRAZ,
+        .tilesptr = sIcefallCaveMapPreviewTiles,
+        .tilemapptr = sIcefallCaveMapPreviewTilemap,
+        .palptr = sIcefallCaveMapPreviewPalette
+    },
+    [MPS_FORT_YOBU] =
+    {
+        .mapsec = MAPSEC_FORT_YOBU,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_FORT_YOBU,
+        .tilesptr = sLostCaveMapPreviewTiles,
+        .tilemapptr = sLostCaveMapPreviewTilemap,
+        .palptr = sLostCaveMapPreviewPalette
+    },
+    [MPS_PETAROSA_BOROUGH] =
+    {
+        .mapsec = MAPSEC_PETAROSA_BOROUGH,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_PETAROSA_BOROUGH,
+        .tilesptr = sAlteringCaveMapPreviewTiles,
+        .tilemapptr = sAlteringCaveMapPreviewTilemap,
+        .palptr = sAlteringCaveMapPreviewPalette
+    },
+    [MPS_CRESALTA_VISTA] =
+    {
+        .mapsec = MAPSEC_CRESALTA_VISTA,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_CRESALTA_VISTA,
+        .tilesptr = sViridianForestMapPreviewTiles,
+        .tilemapptr = sViridianForestMapPreviewTilemap,
+        .palptr = sViridianForestMapPreviewPalette
+    },
+    [MPS_HALERBA_CITY] =
+    {
+        .mapsec = MAPSEC_HALERBA_CITY,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_HALERBA_CITY,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_HALERBAWILDS] =
+    {
+        .mapsec = MAPSEC_HALERBAWILDS,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_HALERBAWILDS,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_TIRABUDIN_PLACE] =
+    {
+        .mapsec = MAPSEC_TIRABUDIN_PLACE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_TIRABUDIN_PLACE,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_PINTILLONHOUSE] =
+    {
+        .mapsec = MAPSEC_PINTILLONHOUSE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_PINTILLONHOUSE,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_IRISINA_TOWN] =
+    {
+        .mapsec = MAPSEC_IRISINA_TOWN,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_IRISINA_TOWN,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_PIOCA_BRIDGE] =
+    {
+        .mapsec = MAPSEC_PIOCA_BRIDGE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_PIOCA_BRIDGE,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_ROBINWILLTUNNEL] =
+    {
+        .mapsec = MAPSEC_ROBINWILLTUNNEL,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_ROBINWILLTUNNEL,
+        .tilesptr = sMoneanChamberMapPreviewTiles,
+        .tilemapptr = sMoneanChamberMapPreviewTilemap,
+        .palptr = sMoneanChamberMapPreviewPalette
+    },
+    [MPS_ESPULEE_OUTSKIRTS] =
+    {
+        .mapsec = MAPSEC_ESPULEE_OUTSKIRTS,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_ESPULEE_OUTSKIRTS,
+        .tilesptr = sViridianForestMapPreviewTiles,
+        .tilemapptr = sViridianForestMapPreviewTilemap,
+        .palptr = sViridianForestMapPreviewPalette
+    },
+    [MPS_LEAVERRA_FOREST] =
+    {
+        .mapsec = MAPSEC_LEAVERRA_FOREST,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_LEAVERRA_FOREST,
+        .tilesptr = sMtMoonMapPreviewTiles,
+        .tilemapptr = sMtMoonMapPreviewTilemap,
+        .palptr = sMtMoonMapPreviewPalette
+    },
+    [MPS_SHARPRISESTADIUM] =
+    {
+        .mapsec = MAPSEC_SHARPRISESTADIUM,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_SHARPRISESTADIUM,
+        .tilesptr = sDiglettsCaveMapPreviewTiles,
+        .tilemapptr = sDiglettsCaveMapPreviewTilemap,
+        .palptr = sDiglettsCaveMapPreviewPalette
+    },
+    [MPS_NONGYU_BRIDGE] =
+    {
+        .mapsec = MAPSEC_NONGYU_BRIDGE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_NONGYU_BRIDGE,
+        .tilesptr = sRockTunnelMapPreviewTiles,
+        .tilemapptr = sRockTunnelMapPreviewTilemap,
+        .palptr = sRockTunnelMapPreviewPalette
+    },
+    [MPS_ZENZU_ISLAND] =
+    {
+        .mapsec = MAPSEC_ZENZU_ISLAND,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_ZENZU_ISLAND,
+        .tilesptr = sPokemonTowerMapPreviewTiles,
+        .tilemapptr = sPokemonTowerMapPreviewTilemap,
+        .palptr = sPokemonTowerMapPreviewPalette
+    },
+    [MPS_TORGEOT_CLIMB] =
+    {
+        .mapsec = MAPSEC_TORGEOT_CLIMB,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_TORGEOT_CLIMB_BASE,
+        .tilesptr = sSafariZoneMapPreviewTiles,
+        .tilemapptr = sSafariZoneMapPreviewTilemap,
+        .palptr = sSafariZoneMapPreviewPalette
+    },
+    [MPS_SECRET_PATH] =
+    {
+        .mapsec = MAPSEC_SECRET_PATH,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_SECRET_PATH,
+        .tilesptr = sSeafoamIslandsMapPreviewTiles,
+        .tilemapptr = sSeafoamIslandsMapPreviewTilemap,
+        .palptr = sSeafoamIslandsMapPreviewPalette
+    },
+    [MPS_PARC] =
+    {
+        .mapsec = MAPSEC_PARC,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_PARC,
+        .tilesptr = sPokemonMansionMapPreviewTiles,
+        .tilemapptr = sPokemonMansionMapPreviewTilemap,
+        .palptr = sPokemonMansionMapPreviewPalette
+    },
+    [MPS_QIU_VILLAGE] =
+    {
+        .mapsec = MAPSEC_QIU_VILLAGE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_QIU_VILLAGE,
+        .tilesptr = sRocketHideoutMapPreviewTiles,
+        .tilemapptr = sRocketHideoutMapPreviewTilemap,
+        .palptr = sRocketHideoutMapPreviewPalette
+    },
+    [MPS_WAJABI_LAKE] =
+    {
+        .mapsec = MAPSEC_WAJABI_LAKE,
+        .type = MPS_TYPE_FADE_IN,
+        .flagId = FLAG_VISITED_WAJABI_LAKE,
+        .tilesptr = sSilphCoMapPreviewTiles,
+        .tilemapptr = sSilphCoMapPreviewTilemap,
+        .palptr = sSilphCoMapPreviewPalette
+    },
+    // End mapPreviews
 };
 
 static const struct WindowTemplate sMapNameWindow = {
@@ -347,7 +702,7 @@ bool32 ShouldRunMapPreview(void)
     return FALSE;
 }
 
-static u8 GetMapPreviewScreenIdx(mapsec_u8_t mapsec)
+static u8 GetMapPreviewScreenIdx(mapsec_u16_t mapsec)
 {
     s32 i;
 
@@ -385,7 +740,7 @@ void MapPreview_InitBgs(void)
     ShowBg(0);
 }
 
-void MapPreview_LoadGfx(mapsec_u8_t mapsec)
+void MapPreview_LoadGfx(mapsec_u16_t mapsec)
 {
     u8 idx;
 
@@ -427,7 +782,7 @@ bool32 MapPreview_IsGfxLoadFinished(void)
     return FreeTempTileDataBuffersIfPossible();
 }
 
-u16 MapPreview_CreateMapNameWindow(mapsec_u8_t mapsec)
+u16 MapPreview_CreateMapNameWindow(mapsec_u16_t mapsec)
 {
     u16 windowId;
     u32 xctr;
@@ -559,7 +914,7 @@ void Task_MapPreviewScreen_NonFade(u8 taskId)
 #define tDuration       data[10]
 #define tWindowId       data[11]
 
-void RunMapPreviewScreenFadeIn(mapsec_u8_t mapsec)
+void RunMapPreviewScreenFadeIn(mapsec_u16_t mapsec)
 {
     u8 taskId;
 
@@ -678,7 +1033,7 @@ static void Task_MapPreviewScreen_FadeIn(u8 taskId)
 #undef tDuration
 #undef tWindowId
 
-u16 MapPreview_GetDuration(mapsec_u8_t mapsec)
+u16 MapPreview_GetDuration(mapsec_u16_t mapsec)
 {
     u8 idx;
     u16 flagId;
@@ -805,3 +1160,23 @@ void MapPreviewScript(struct ScriptContext *ctx)
     taskId = CreateTask(Task_MapPreviewScreen_Script, 0);
     gTasks[taskId].tDuration = duration;
 }
+
+// Start mapPreviews
+bool8 ShouldRunOutdoorMapPreview(void)
+{
+    if (ShouldRunMapPreview() == FALSE)
+        return FALSE;
+
+    if (CurrentMapHasPreviewScreen(MPS_TYPE_FADE_IN) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void RunOutdoorMapPreview(void)
+{
+    AccelerateMapPopUp();
+    MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
+    RunMapPreviewScreenFadeIn(gMapHeader.regionMapSectionId);
+}
+// End mapPreviews

@@ -40,7 +40,6 @@
 #include "constants/heal_locations.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
-#include "map_preview_screen.h" // mapPreviews
 #include "trainer_hill.h"
 #include "fldeff.h"
 #include "options_game.h" // autoSave

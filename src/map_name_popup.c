@@ -804,4 +804,19 @@ void Script_MapPopUp(void)
 {
     ShowMapNamePopup();
 }
+
+void AccelerateMapPopUp(void)
+{
+    u32 taskId = FindTaskIdByFunc(Task_MapNamePopUpWindow);
+    if (taskId == TASK_NONE)
+        return;
+
+    struct Task *task = &gTasks[taskId];
+    DestroyTask(taskId);
+
+    ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
+    ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
+    HideMapNamePopUpWindow();
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
+}
 // end mapPreviews
