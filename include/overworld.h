@@ -198,8 +198,8 @@ bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 // start mapPreviews
-u8 GetLastUsedWarpMapSectionId(void);
-u8 GetDestinationWarpMapSectionId(void);
+mapsec_u16_t GetLastUsedWarpMapSectionId(void);
+mapsec_u16_t GetDestinationWarpMapSectionId(void);
 // end mapPreviews
 bool16 SetTimeOfDay(u16 hours);
 bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior);

@@ -491,7 +491,7 @@ static bool32 TryToMoveMonFromStorageSystem(void)
              && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
              && !IsFaintedBoxMon(&gPokemonStoragePtr->boxes[i][j]))
             {
-                BoxMonAtToMon(i, j, &gPlayerParty[0]);
+                BoxMonAtToMon(i, j, &gParties[B_TRAINER_PLAYER][0]);
                 ZeroBoxMonAt(i, j);
                 return TRUE;
             }
@@ -947,7 +947,7 @@ static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
     if (enemyMonLevel > playerMaxLevel)
         return average;
 
-    numPlayerMon = CalculatePartyCount(gPlayerParty);
+    numPlayerMon = CalculatePartyCount(B_TRAINER_PLAYER);
     difference = GetPartySizeDifference(numPlayerMon, numEnemyMon);
 
     if ((playerMaxLevel - enemyMonLevel) <= TRAINER_SCALING_THRESHOLD)
@@ -1284,5 +1284,5 @@ bool32 IsMonNicknamed(struct Pokemon *mon)
 
 bool32 IsChosenMonNicknamed(void)
 {
-    return IsMonNicknamed(&gPlayerParty[gSpecialVar_0x8004]);
+    return IsMonNicknamed(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
 }

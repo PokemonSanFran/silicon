@@ -135,7 +135,6 @@ script OkayLetsFixit_ChooseMon_Script
 {
 	msgbox(format("You must leave behind a Pokemon with the spirit of a Champion to anchor this end."),,SPEAKER_HIKO)
 	special(ChoosePartyMon)
-	waitstate
 
 	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
 	{

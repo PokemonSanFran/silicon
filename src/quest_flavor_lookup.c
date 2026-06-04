@@ -186,7 +186,7 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
             if (storyline > 0)
                 return gText_PlayersAdventure_Flavor1;
             else
-                return gText_Blank;
+                return gText_ExpandedPlaceholder_Empty;
     }
 }
 

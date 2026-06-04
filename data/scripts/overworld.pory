@@ -1,6 +1,6 @@
 script Generic_Mappreview
 {
-    mappreview
+    mappreview(2)
 }
 
 script RunAdventureGuideScript

@@ -258,7 +258,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcherF
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SittingBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LassFrlg;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1Frlg;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BattleGirl;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrushGirl;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rocker;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatManFrlg;
@@ -286,9 +286,9 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GBAKid;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeManiacFrlg;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Biker;
-extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blackbelt;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBeltFrlg;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HikerFrlg;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisher;
@@ -418,6 +418,76 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlay
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Fishing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Normal;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Poliwrath;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Clefairy;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgeot;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Jigglypuff;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pidgey;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chansey;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Omanyte;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kangaskhan;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PikachuFrlg;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Psyduck;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NidoranM;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nidorino;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Meowth;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seel;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Voltorb;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowpoke;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Slowbro;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machop;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wigglytuff;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Doduo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fearow;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Machoke;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lapras;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zapdos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Moltres;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Articuno;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mewtwo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Entei;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Suicune;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Raikou;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celebi;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Kabuto;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysD;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysA;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysN;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne;
+// // Start silicon
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF2Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerF3Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1MachBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1AcroBike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Surfing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1FieldMove;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Underwater;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN1Fishing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Normal;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2MachBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2AcroBike;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2Surfing;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_siliconPlayerN2FieldMove;
@@ -488,7 +558,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Founder_2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Product_Manager_2;
 // End silicon
-// Begin pokemon event objects
+// Begin Pokémon event objects
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallLight;
@@ -852,7 +922,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BUG_CATCHER_FRLG]         = &gObjectEventGraphicsInfo_BugCatcherFrlg,
     [OBJ_EVENT_GFX_LASS_FRLG]                = &gObjectEventGraphicsInfo_LassFrlg,
     [OBJ_EVENT_GFX_WOMAN_1_FRLG]             = &gObjectEventGraphicsInfo_Woman1Frlg,
-    [OBJ_EVENT_GFX_BATTLE_GIRL]              = &gObjectEventGraphicsInfo_BattleGirl,
+    [OBJ_EVENT_GFX_CRUSH_GIRL]               = &gObjectEventGraphicsInfo_CrushGirl,
     [OBJ_EVENT_GFX_MAN]                      = &gObjectEventGraphicsInfo_Man,
     [OBJ_EVENT_GFX_ROCKER]                   = &gObjectEventGraphicsInfo_Rocker,
     [OBJ_EVENT_GFX_FAT_MAN_FRLG]             = &gObjectEventGraphicsInfo_FatManFrlg,
@@ -880,9 +950,9 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ROCKET_M]                 = &gObjectEventGraphicsInfo_RocketM,
     [OBJ_EVENT_GFX_ROCKET_F]                 = &gObjectEventGraphicsInfo_RocketF,
     [OBJ_EVENT_GFX_GBA_KID]                  = &gObjectEventGraphicsInfo_GBAKid,
-    [OBJ_EVENT_GFX_SUPER_NERD]               = &gObjectEventGraphicsInfo_SuperNerd,
+    [OBJ_EVENT_GFX_POKE_MANIAC_FRLG]         = &gObjectEventGraphicsInfo_PokeManiacFrlg,
     [OBJ_EVENT_GFX_BIKER]                    = &gObjectEventGraphicsInfo_Biker,
-    [OBJ_EVENT_GFX_BLACKBELT]                = &gObjectEventGraphicsInfo_Blackbelt,
+    [OBJ_EVENT_GFX_BLACK_BELT_FRLG]          = &gObjectEventGraphicsInfo_BlackBeltFrlg,
     [OBJ_EVENT_GFX_SCIENTIST]                = &gObjectEventGraphicsInfo_Scientist,
     [OBJ_EVENT_GFX_HIKER_FRLG]               = &gObjectEventGraphicsInfo_HikerFrlg,
     [OBJ_EVENT_GFX_FISHER]                   = &gObjectEventGraphicsInfo_Fisher,
