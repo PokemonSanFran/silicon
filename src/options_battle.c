@@ -1224,7 +1224,7 @@ bool32 IsBarOptionInstant(u8 whichBar)
 #define B_HEALTHBAR_PIXELS 48
 #define B_EXPBAR_PIXELS 64
 
-u32 GetHPFraction(u8 battlerId)
+u32 GetHPFraction(enum BattlerId battlerId)
 {
     if (IsHPSpeedFast())
         return max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
