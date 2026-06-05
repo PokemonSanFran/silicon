@@ -1138,10 +1138,12 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
         if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
             PlayerRunSlow(direction);
         else
+        // Start siliconMerge
             PlayerWalkNormal(direction);
             //PlayerRun(direction);
-
-        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
+        // gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        // End siliconMerge
         return;
     }
     else if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & A_BUTTON))

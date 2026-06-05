@@ -3,6 +3,7 @@
 
 #include "gba/types.h"
 #include "list_menu.h"
+#include "ui_dexnav.h"
 #include "main.h"
 #include "constants/ui_pokedex.h"
 #include "constants/characters.h"
@@ -77,6 +78,7 @@ struct PokedexState
     u16 futureMonSpeciesId;
     bool8 firstPageLoad;
     bool8 shouldPlayCry;
+    struct DexnavSavedData dexnavSavedData;
 };
 
 struct PokedexGridStaticResources
@@ -271,5 +273,11 @@ bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
 bool8 SpeciesIsResidoDex(enum Species speciesId);
 bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode);
+void Pokedex_SaveDexnavData(struct DexnavSavedData savedData);
+void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId);
+void Pokedex_FreeResources(void);
+void FreePokedexStructs(void);
+void SetAndSetUpCurrentPage(u8 taskId);
+
 
 #endif // GUARD_UI_POKEDEX_H

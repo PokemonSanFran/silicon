@@ -1375,7 +1375,7 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             },
         .optionDescription = {
             COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
-            COMPOUND_STRING("Pressing the {R_BUTTON} will change the player's behavior betweeen always walking and always running."),
+            COMPOUND_STRING("Pressing the {L_BUTTON} will change the player's behavior betweeen always walking and always running."),
             COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
             },
         .numOptions = 3,

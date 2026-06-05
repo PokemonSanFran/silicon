@@ -721,6 +721,10 @@ extern const u8 EventScript_CancelMessageBox[];
 extern const u8 Common_EventScript_ShowPokemonCenterSign[];
 extern const u8 Common_EventScript_ShowPokemartSign[];
 // DexNav
+// Start dexnav
+extern const u8 EventScript_AskRestoreScript[]; 
+extern const u8 gText_AskRestoreStreak[]; 
+// End dexnav
 extern const u8 EventScript_StartDexNavBattle[];
 extern const u8 EventScript_NotFoundNearby[];
 extern const u8 EventScript_PokemonGotAway[];

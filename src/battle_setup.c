@@ -61,6 +61,7 @@
 #include "quest_logic.h" // fogBattle
 #include "little_cup.h" // littlecup
 #include "phenomenon.h" // phenomenon
+#include "ui_dexnav.h" // dexnav
 #include "fishing.h"
 #include "field_effect.h" // flyEncounters
 
@@ -388,6 +389,7 @@ static void DoStandardWildBattle(bool32 isDouble)
         VarSet(VAR_TEMP_E, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -407,6 +409,7 @@ void DoStandardWildBattle_Debug(void)
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
     //IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     //IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -421,6 +424,7 @@ void BattleSetup_StartRoamerBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -435,6 +439,7 @@ static void DoSafariBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
@@ -445,6 +450,7 @@ static void DoGhostBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_GHOST;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
@@ -458,6 +464,7 @@ static void DoBattlePikeWildBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -509,6 +516,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -521,6 +529,7 @@ void BattleSetup_StartScriptedDoubleWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -541,6 +550,7 @@ void StartMarowakBattle(void)
         CreateMonWithIVsPersonality(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_MAROWAK, 30, 31, personality);
     }
 
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
@@ -552,6 +562,7 @@ void BattleSetup_StartLatiBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -2212,6 +2223,7 @@ static void DoFogBattle(bool32 isDouble)
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
     gBattleTypeFlags |= BATTLE_TYPE_FOG;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     u32 fogMon = SPECIES_FOG_UNKNOWN;
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &fogMon);
