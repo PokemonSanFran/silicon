@@ -28,7 +28,6 @@ void CB2_DoChangeMap(void);
 bool8 GetMapPairFadeToType(u8 _fromType, u8 _toType);
 bool8 GetMapPairFadeFromType(u8 _fromType, u8 _toType);
 void FldEff_UseFlash(void); // qol_field_moves
-void Task_EnterCaveTransition2(u8 taskId); // mapPreviews
 
 // strength
 bool32 SetUpFieldMove_Strength(void);
@@ -58,5 +57,7 @@ void Task_DoFieldMove_RunFunc(u8 taskId); // qol_field_moves
 // defog
 bool32 SetUpFieldMove_Defog(void);
 bool8 FldEff_Defog(void);
+
+void Task_EnterCaveTransition2(u8 taskId);
 
 #endif // GUARD_FLDEFF_H

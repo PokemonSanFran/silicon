@@ -33,6 +33,8 @@ script swagbag2_Intro_Dialogue {
 
     if (flag(FLAG_RECIEVED_NURSERY_EGG)){
         goto(swagbag2_DiscussCosts_Dialogue)
+    } elif (flag(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT)) {
+        goto(swagbag2_DiscussCosts_Dialogue)
     } else {
         goto(swagbag2_BringToCenter_Dialogue)
     }
@@ -52,9 +54,9 @@ script swagbag2_DiscussCosts_Dialogue {
 
     msgbox(format("Hmm... that's too bad. But awesome that they're working on it!"),,SPEAKER_ALICIA)
 
-    msgbox(format("Yes, hopefully they'll have it all smoothed out in the next year or ten. Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
+    msgbox(format("Yes, hopefully they'll have it all smoothed out in the next year or ten."),,SPEAKER_OLIVER)
 
-    goto(swagbag2_Scene_End_Script)
+    goto(swagbag2_Dialogue_GiveGoldPotion)
 }
 
 script swagbag2_BringToCenter_Dialogue {
@@ -78,14 +80,27 @@ script swagbag2_BringToCenter_Dialogue {
     msgbox(format("You should really talk to the staff. They're obsessed with delighting Trainers like you, and I'm sure they're expecting you."),,SPEAKER_OLIVER)
 
     msgbox(format("I will. Thanks for the tip!"),,SPEAKER_ALICIA)
+    goto(swagbag2_Dialogue_GiveGoldPotion)
+}
 
-    msgbox(format("Happy to help!"),,SPEAKER_OLIVER)
-
+script swagbag2_Dialogue_GiveGoldPotion
+{
+    msgbox(format("One more thing!"),,SPEAKER_OLIVER)
+    msgbox(format("This is a conversation between Oliver and the player where Oliver gives the player the Gold Potion."),,SPEAKER_OLIVER)
+    msgbox(format("The Gold Potion is a key item that can only be used outside of battle."),,SPEAKER_PLAYER)
+    msgbox(format("When used, the Gold Potion performs the function of the Pokemon Center - fully healing the entire party."),,SPEAKER_OLIVER)
+    closemessage
+    cueobjectplayer(OLIVER)
+    waitmovement(OLIVER)
+    giveitem(ITEM_POKEVIAL,1)
+    msgbox(format("The Gold Potion only works once and then must be refilled at the Pokemon Center."),,SPEAKER_PLAYER)
+    msgbox(format("The Gold Potion can only hold one charge at a time but thhis limit can be increaed."),,SPEAKER_OLIVER)
+    msgbox(format("This scene plays before the player challenges the 4th gym. If anybody asks, Sharp Rise didn't give this to the player sooner because they're very expensive and wanted to make sure the player was serious about the Gym Challenge."),,SPEAKER_PLAYER)
+    msgbox(format("I'd also be fine with any other made up reason."),,SPEAKER_OLIVER)
+    closemessage
     applymovement(OLIVER, swagbag2_LookAwayAndBack)
     waitmovement(0)
-
-    msgbox(format("Now, I've gotta run. Good luck in there!"),,SPEAKER_OLIVER)
-
+    msgbox(format("Oliver then leaves and wishes the player good luck."),,SPEAKER_PLAYER)
     goto(swagbag2_Scene_End_Script)
 }
 

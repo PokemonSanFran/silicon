@@ -75,15 +75,15 @@ void ExpTest_SetBackMonToNext(void)
         species = SPECIES_WYNAUT;
         level = MAX_LEVEL;
         u32 move = MOVE_CELEBRATE;
-        SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_MOVE1, &move);
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_MOVE1, &move);
     }
 
-    SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_NICKNAME, gSpeciesInfo[species].speciesName);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_NICKNAME, gSpeciesInfo[species].speciesName);
 
-    SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_SPECIES, &species);
-    SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
-    SetMonData(&gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_LEVEL, &level);
-    gEnemyParty[(1 + gSiliconExpTestState.currentMon) % 2].level = level;
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_SPECIES, &species);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2], MON_DATA_LEVEL, &level);
+    gParties[B_TRAINER_OPPONENT_A][(1 + gSiliconExpTestState.currentMon) % 2].level = level;
     gSiliconExpTestState.currentMon++;
 #endif
 }

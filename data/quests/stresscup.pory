@@ -62,7 +62,6 @@ script StressCup_Script_PrepParty
     frontier_set(FRONTIER_DATA_LVL_MODE,FRONTIER_LVL_OPEN)
     setvar(VAR_0x8005,4)
     special(ChoosePartyForBattleFrontier)
-    waitstate
     if(var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
     {
         msgbox(format("Pick four Pokemon to battle with. That's how my tournaments ran!"),,SPEAKER_STRESSCUPORGANIZER)
