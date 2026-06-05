@@ -85,11 +85,17 @@
 #define MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT       0x50
 #define MOVEMENT_TYPE_FOLLOW_PLAYER                    0x51
 #define MOVEMENT_TYPE_WANDER_AROUND_SLOWER             0x52
+#define MOVEMENT_TYPE_WANDER_AROUND_OWE                0x53
+#define MOVEMENT_TYPE_CHASE_PLAYER_OWE                 0x54
+#define MOVEMENT_TYPE_FLEE_PLAYER_OWE                  0x55
+#define MOVEMENT_TYPE_WATCH_PLAYER_OWE                 0x56
+#define MOVEMENT_TYPE_APPROACH_PLAYER_OWE              0x57
+#define MOVEMENT_TYPE_DESPAWN_OWE                      0x58
 // Start siliconQuests
-//#define NUM_MOVEMENT_TYPES                             0x53
+//#define NUM_MOVEMENT_TYPES                             0x59
 enum
 {
-    MOVEMENT_TYPE_BUS_TABLES = (MOVEMENT_TYPE_WANDER_AROUND_SLOWER + 1),
+    MOVEMENT_TYPE_BUS_TABLES = (MOVEMENT_TYPE_DESPAWN_OWE + 1),
     NUM_MOVEMENT_TYPES,
 };
 // End siliconQuests

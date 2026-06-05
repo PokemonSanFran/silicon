@@ -201,7 +201,6 @@ script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
     setflag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)
     special(Quest_Ultrawormholeresearch_SetTotemBattle)
     special(StartRegiBattle)
-    waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
     switch(var(VAR_RESULT)){
@@ -276,7 +275,6 @@ script Quest_Ultrawormholeresearch_StartUltraBeast_Script{
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     special(Quest_Ultrawormholeresearch_SetUltraBeastBattle)
     special(StartRegiBattle)
-    waitstate
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
     switch(var(VAR_RESULT)){

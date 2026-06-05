@@ -692,7 +692,7 @@ bool32 PartyHasMonLearnsKnowsFieldMove(u16 moveId)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        mon = &gPlayerParty[i];
+        mon = &gParties[B_TRAINER_PLAYER][i];
         if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) || GetMonData(mon, MON_DATA_IS_EGG))
             continue;
 

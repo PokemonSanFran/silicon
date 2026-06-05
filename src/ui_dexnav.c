@@ -284,7 +284,7 @@ static const u8 dexnavMonIconCoordinates[][DEXNAV_MAX_SHOWN_MONS][AXIS_COUNT] =
     },
 };
 
-static const struct BgTemplate sDexnavBgTemplates[] = 
+static const struct BgTemplate sDexnavBgTemplates[] =
 {
     [BG0_DEXNAV_TEXT] =
     {
@@ -426,7 +426,7 @@ static const struct WindowTemplate sDexnavWindows[] =
         .height = 2,
         .paletteNum = DEXNAV_PALETTE_HABITAT_ID,
     },
-    [WIN_DEXNAV_MSGBOX] = 
+    [WIN_DEXNAV_MSGBOX] =
     {
         .bg = BG0_DEXNAV_TEXT,
         .tilemapLeft = 1,
@@ -444,9 +444,9 @@ const u8 sDexnavWindowFontColors[DEXNAV_FONT_COLOR_COUNT][3] =
     [DEXNAV_FONT_COLOR_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
 };
 
-static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT] = 
+static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT] =
 {
-    [DEXNAV_SPRITEID_COMPLETION_MARK] = 
+    [DEXNAV_SPRITEID_COMPLETION_MARK] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/completion.4bpp"),
@@ -458,7 +458,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_PALTAG_ARROW_COMPLETION_STAR_FAB_FISHING,
         },
     },
-    [DEXNAV_SPRITEID_INSIGHT_POSITION_0] = 
+    [DEXNAV_SPRITEID_INSIGHT_POSITION_0] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/star.4bpp"),
@@ -466,7 +466,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_STAR,
         },
     },
-    [DEXNAV_SPRITEID_INDICATOR_ABILITY] = 
+    [DEXNAV_SPRITEID_INDICATOR_ABILITY] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/indicators.4bpp"),
@@ -478,7 +478,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_PALTAG_INDICATOR,
         },
     },
-    [DEXNAV_SPRITEID_FAB] = 
+    [DEXNAV_SPRITEID_FAB] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fab.4bpp"),
@@ -486,7 +486,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_FAB,
         },
     },
-    [DEXNAV_SPRITEID_INDICATOR_IV_0] = 
+    [DEXNAV_SPRITEID_INDICATOR_IV_0] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/iv.4bpp"),
@@ -498,7 +498,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_PALTAG_IV,
         },
     },
-    [DEXNAV_SPRITEID_INDICATOR_LOADING_0] = 
+    [DEXNAV_SPRITEID_INDICATOR_LOADING_0] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/loading.4bpp"),
@@ -518,7 +518,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_TYPES,
         },
     },
-    [DEXNAV_SPRITEID_INDICATOR_FISHING] = 
+    [DEXNAV_SPRITEID_INDICATOR_FISHING] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/fishing.4bpp"),
@@ -526,7 +526,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_FISHING,
         },
     },
-    [DEXNAV_SPRITEID_CURSOR] = 
+    [DEXNAV_SPRITEID_CURSOR] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/cursor.4bpp"),
@@ -534,7 +534,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_CURSOR,
         },
     },
-    [DEXNAV_SPRITEID_REGISTER] = 
+    [DEXNAV_SPRITEID_REGISTER] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/register.4bpp"),
@@ -542,7 +542,7 @@ static const struct DexnavSpriteSheet sDexnavSpriteSheets[DEXNAV_SPRITEIDS_COUNT
             .tag = DEXNAV_SPRITETAG_REGISTER,
         },
     },
-    [DEXNAV_SPRITEID_OVERWORLD] = 
+    [DEXNAV_SPRITEID_OVERWORLD] =
     {
         {
             .data = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/ow_dexnav_arrow.4bpp"),
@@ -757,7 +757,7 @@ static void SetScheduleBgs(enum DexnavBackgrounds backgroundId)
 
 static const u32 sHabitatBackgounds[] = INCBIN_U32("graphics/ui_menus/dexnav/habitatHeader.4bpp");
 
-static const u16* const sDexnavPalettesLUT[] = 
+static const u16* const sDexnavPalettesLUT[] =
 {
     [VISUAL_OPTION_COLOR_RED] = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/palettes/red.gbapal"),
     [VISUAL_OPTION_COLOR_GREEN] = (const u16[])INCBIN_U16("graphics/ui_menus/dexnav/palettes/green.gbapal"),
@@ -1455,7 +1455,7 @@ static void Dexnav_PrintHeaderNameText(enum DexnavWindows windowId)
     u32 fontId = FONT_DEXNAV_HELPBAR;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    
+
     if (Dexnav_ShouldHideCompletionMark())
         x = 4;
 
@@ -1513,7 +1513,7 @@ static void Dexnav_PrintInsight(enum DexnavWindows windowId, bool32 isScanMode)
     u32 insight = Dexnav_GetInsight();
     y = isScanMode ? 0 : (y - 3);
     fontId = isScanMode ? fontId : FONT_DEXNAV_STAT_VALUE_LEFT;
-    
+
     if (insight < DEXNAV_MAX_INSIGHT)
         ConvertIntToDecimalStringN(gStringVar4, insight, STR_CONV_MODE_LEFT_ALIGN, CountDigits(insight));
     else
@@ -1564,19 +1564,19 @@ static void Dexnav_PrintStreak(enum DexnavWindows windowId, bool32 isScanMode)
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sDexnavWindowFontColors[DEXNAV_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar4);
 }
 
-static const union AnimCmd sAnim_StarSmallEmpty[] = 
+static const union AnimCmd sAnim_StarSmallEmpty[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_EMPTY,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarSmallHalf[] = 
+static const union AnimCmd sAnim_StarSmallHalf[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_HALF,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarSmallFull[] = 
+static const union AnimCmd sAnim_StarSmallFull[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,4),
     ANIMCMD_END,
@@ -1589,39 +1589,39 @@ static const union AnimCmd sAnim_StarSmallSparkle[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_StarSmallSparkle_Mid[] = 
+static const union AnimCmd sAnim_StarSmallSparkle_Mid[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_SPARKLE,24),
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_SMALL_FULL,24),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_StarBigEmpty[] = 
+static const union AnimCmd sAnim_StarBigEmpty[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_EMPTY,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarBigHalf[] = 
+static const union AnimCmd sAnim_StarBigHalf[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_HALF,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarBigFull[] = 
+static const union AnimCmd sAnim_StarBigFull[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_StarBigSparkle[] = 
+static const union AnimCmd sAnim_StarBigSparkle[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,24),
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_SPARKLE,24),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sAnim_StarBigSparkle_Mid[] = 
+static const union AnimCmd sAnim_StarBigSparkle_Mid[] =
 {
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_SPARKLE,24),
     ANIMCMD_FRAME(DEXNAV_STAR_FRAME_BIG_FULL,24),
@@ -1678,7 +1678,7 @@ static void SpriteCB_StarStreak(struct Sprite *sprite)
 
     if (isBig)
     {
-        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))            
+        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))
             targetAnim = DEXNAV_STAR_BIG_FULL;
         else if (streak < 1)
             targetAnim = DEXNAV_STAR_BIG_EMPTY;
@@ -1687,7 +1687,7 @@ static void SpriteCB_StarStreak(struct Sprite *sprite)
     }
     else
     {
-        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))            
+        if (streak > ((DEXNAV_MAX_STREAK / 3) - 1))
             targetAnim = DEXNAV_STAR_SMALL_FULL;
         else if (streak < 1)
             targetAnim = DEXNAV_STAR_SMALL_EMPTY;
@@ -1733,7 +1733,7 @@ static void SpriteCB_StarInsight(struct Sprite *sprite)
 
     if (isBig)
     {
-        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))            
+        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))
             targetAnim = DEXNAV_STAR_BIG_FULL;
         else if (insight < 1)
             targetAnim = DEXNAV_STAR_BIG_EMPTY;
@@ -1742,7 +1742,7 @@ static void SpriteCB_StarInsight(struct Sprite *sprite)
     }
     else
     {
-        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))            
+        if (insight > ((DEXNAV_MAX_INSIGHT / 3) - 1))
             targetAnim = DEXNAV_STAR_SMALL_FULL;
         else if (insight < 1)
             targetAnim = DEXNAV_STAR_SMALL_EMPTY;
@@ -2006,7 +2006,7 @@ static void SpriteCB_DexnavTypes(struct Sprite *sprite)
 
     if (typeNum == 1)
         sprite->invisible = (GetSpeciesType(species,0) == GetSpeciesType(species,1));
-    
+
     if (typeNum == 0)
         sprite->invisible = (GetSpeciesType(species,typeNum) == TYPE_NONE);
 
@@ -2039,7 +2039,7 @@ static void Dexnav_PrintMonLevel(enum DexnavWindows windowId)
 
     if (Dexnav_ShouldDisplayAbilityName())
         ConvertIntToDecimalStringN(gStringVar1,level,STR_CONV_MODE_LEFT_ALIGN,CountDigits(MAX_LEVEL));
-    else 
+    else
         StringCopy(gStringVar1,COMPOUND_STRING("???"));
 
     StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{LV} {STR_VAR_1}"));
@@ -2708,7 +2708,7 @@ static void Dexnav_DisplayStatIndicator(u32 count, u32 position)
     u32 paletteTag = isWithinProximity ? DEXNAV_PALTAG_IV : DEXNAV_PALTAG_LOADING;
     const union AnimCmd *const *anims = isWithinProximity ? &sSpriteAnimTable_Stat[count][column] : sSpriteAnimTable_Loading;
     u32 baseSpriteId = isWithinProximity ? DEXNAV_SPRITEID_MON_0 : DEXNAV_SPRITEID_INDICATOR_LOADING_0;
-    
+
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
 
     TempSpriteTemplate.tileTag = tileTag;
@@ -2742,7 +2742,7 @@ static void Dexnav_DisplayAllHabitatPokemon(void)
         return;
 
     enum DexnavHabitats habitat = Dexnav_GetHabitat();
-    
+
     if (habitat == DEXNAV_HABITAT_NONE)
         return;
 
@@ -2760,7 +2760,7 @@ static void Dexnav_DisplayHabitatPokemon(enum DexnavHabitats habitat, u32 specie
 
     if (num == 0)
         return;
-    
+
     if (species == SPECIES_NONE)
         return;
 
@@ -2976,7 +2976,7 @@ static void Dexnav_RegisterCurrentlySelectedMon(void)
         return;
     }
 
-    if (oldSpecies == species) 
+    if (oldSpecies == species)
     {
         VarSet(DN_VAR_SPECIES,0);
         return;
@@ -3096,7 +3096,7 @@ static void SpriteCB_DexnavOverworld(struct Sprite *sprite)
         else
         {
             sprite->invisible = TRUE;
-            direction = DIR_NONE; 
+            direction = DIR_NONE;
         }
     }
 
@@ -3126,7 +3126,7 @@ void Dexnav_DrawOverworldSearchIcon(void)
 
 void Dexnav_FreeOverworldSpriteResources(void)
 {
-    u32 spriteId = Dexnav_GetOverworldIconSpriteId(); 
+    u32 spriteId = Dexnav_GetOverworldIconSpriteId();
 
     if (spriteId != MAX_SPRITES)
         DestroySprite(&gSprites[spriteId]);
@@ -3142,7 +3142,7 @@ u8 Dexnav_CalculatePotential(u32 insight)
     Dexnav_ClearStatFlag();
     u32 potential = 0;
 
-    if (insight < DEXNAV_INSIGHT_PERCENT_10) 
+    if (insight < DEXNAV_INSIGHT_PERCENT_10)
         potential = insight / 20;
     else if (insight < DEXNAV_INSIGHT_PERCENT_50)
         potential = ((insight + 60) / 80);
@@ -3217,9 +3217,9 @@ enum Item Dexnav_CalculateItem(u32 species, u32 insight)
     u32 rand = Random() % 100;
     enum Item selectedItem = ITEM_NONE;
 
-    if (rand < 50) 
+    if (rand < 50)
         selectedItem = item1;
-    else if (rand < 55) 
+    else if (rand < 55)
         selectedItem = item2;
 
     if (selectedItem != ITEM_NONE)
@@ -3245,15 +3245,15 @@ enum Item Dexnav_CalculateItem(u32 species, u32 insight)
         rand = Random() % 100;
         if (rand < 90)
             selectedItem = item1;
-        else 
+        else
             selectedItem = item2;
     }
     else if (item1 == ITEM_NONE && item2 != ITEM_NONE)
     {
         rand = Random() % 100;
-        if (rand < 55) 
+        if (rand < 55)
             selectedItem = item2;
-        else 
+        else
             selectedItem = ITEM_NONE;
     }
     else if (item1 != ITEM_NONE && item2 == ITEM_NONE)
@@ -3272,10 +3272,10 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
     Dexnav_ClearMoveFlag();
     CreateWildMon(species, level);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        moves[i] = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i);
+        moves[i] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + i);
 
     u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
-    u32 numEggMoves = GetEggMoves(&gEnemyParty[0], eggMoveBuffer);
+    u32 numEggMoves = GetEggMoves(&gParties[B_TRAINER_OPPONENT_A][0], eggMoveBuffer);
 
     if (numEggMoves == 0)
         return;
@@ -3298,7 +3298,7 @@ void Dexnav_GenerateMoveset(u32 species, u32 insight, u32 level, enum Move *move
 
     if (chance > 100)
         chance = 100;
-    
+
     if (chance < 1)
         chance = 1;
 
@@ -3352,11 +3352,11 @@ bool8 Dexnav_CalculateShinyRolls(u32 streak)
 
 void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, enum Item item, enum Move *moves)
 {
-    struct Pokemon *mon = &gEnemyParty[0];
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
     CreateWildMon(species, level);
     u8 ivs[NUM_STATS] = {0};
     u8 oldIvs[NUM_STATS] = {0};
-    u32 statIndices[NUM_STATS] = 
+    u32 statIndices[NUM_STATS] =
         {
             STAT_HP,
             STAT_ATK,
@@ -3402,12 +3402,12 @@ void CreateDexnavWildMon(u32 species, u32 potential, u32 level, u32 abilityNum, 
 void Dexnav_IncrementSpeciesSearchLevel(u32 origSpecies)
 {
     u32 searchLevel = GetSearchLevel(origSpecies);
-    
+
     if (searchLevel >= DEXNAV_MAX_INSIGHT)
         return;
 
     searchLevel++;
-    
+
     u32 species = ConvertSpeciesIdToResidoDex(origSpecies);
     gSaveBlock2Ptr->dexNavSearchLevels[species] = searchLevel;
 }
@@ -3549,25 +3549,25 @@ static void Dexnav_ScanMode_DisplayFirstMove(void)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static const union AnimCmd sAnim_InidicatorAbility[] = 
+static const union AnimCmd sAnim_InidicatorAbility[] =
 {
     ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_ABILITY,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_InidicatorLevel[] = 
+static const union AnimCmd sAnim_InidicatorLevel[] =
 {
     ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_LEVEL,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_InidicatorItem[] = 
+static const union AnimCmd sAnim_InidicatorItem[] =
 {
     ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_ITEM,4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_InidicatorMove[] = 
+static const union AnimCmd sAnim_InidicatorMove[] =
 {
     ANIMCMD_FRAME(DEXNAV_INDICATOR_FRAME_MOVE,4),
     ANIMCMD_END,

@@ -898,15 +898,15 @@ enum ShopMenuCarousels ShopInventory_GetRecommendedCarousel(void)
     }
 
     u32 currentHP = 0, maxHP = 0, partyStatus = 0, partyHP = 0;
-    u32 partySize = gPlayerPartyCount;
+    u32 partySize = gPartiesCount[B_TRAINER_PLAYER];
 
     // Merge all mon's hp in the party.
     for (u32 i = 0; i < partySize; i++)
     {
-        currentHP += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        maxHP += GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+        currentHP += GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HP);
+        maxHP += GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MAX_HP);
 
-        u32 ailment = GetMonAilment(&gPlayerParty[i]);
+        u32 ailment = GetMonAilment(&gParties[B_TRAINER_PLAYER][i]);
 
         if (ailment != AILMENT_NONE && ailment != AILMENT_PKRS)
             partyStatus++;

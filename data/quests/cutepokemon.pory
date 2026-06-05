@@ -115,7 +115,6 @@ script CutePokemon_Script_SelectOptionCheckPokemon
 	msgbox(format("That was fast! Show me!"),MSGBOX_NPC,SPEAKER_MELISSA)
 
 	special(ChoosePartyMon)
-	waitstate
 
 	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
 	{

@@ -104,7 +104,7 @@ bool8 CheckPlayerLittleCupEligibility(void)
 
     for(i = 0; i < PARTY_SIZE; i++)
     {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
         if (species == SPECIES_NONE || species == SPECIES_EGG)
             continue;
         if (GetEggSpecies(species) != species)
@@ -135,7 +135,7 @@ void PreparePartyForLittleCupBattle(void)
 
     for (i = 0; i < partyCount; i++)
     {
-        struct Pokemon* pokemon = &gPlayerParty[i];
+        struct Pokemon* pokemon = &gParties[B_TRAINER_PLAYER][i];
         species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         species2 = GetEggSpecies(species);
 

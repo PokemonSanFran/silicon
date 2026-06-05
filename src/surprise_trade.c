@@ -70,7 +70,7 @@ void CreateWonderTradePokemon(void)
     }
     else
     {
-        playerMonLevel = GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_EXP);
+        playerMonLevel = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_EXP);
     }
 
     u32 experience = CalculateSurpriseTradeExperience(playerMonLevel, wonderTradeSpecies);
@@ -88,25 +88,25 @@ void CreateWonderTradePokemon(void)
     u32 metLocation = METLOC_IN_GAME_TRADE;
     u32 personality = GetMonPersonality(wonderTradeSpecies, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
 
-    CreateMon(&gEnemyParty[0], wonderTradeSpecies, 1, personality,OTID_STRUCT_PRESET(otId));
+    CreateMon(&gParties[B_TRAINER_OPPONENT_A][0], wonderTradeSpecies, 1, personality,OTID_STRUCT_PRESET(otId));
 
-    bool8 isShiny = ShouldMonBeShiny(GetMonData(&gEnemyParty[0],MON_DATA_PERSONALITY),otId);
+    bool8 isShiny = ShouldMonBeShiny(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_PERSONALITY),otId);
 
-    SetMonData(&gEnemyParty[0], MON_DATA_EXP, &experience);
-    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &newHeldItem);
-    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
-    SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &isShiny);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_EXP, &experience);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &newHeldItem);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &abilityNum);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_IS_SHINY, &isShiny);
 
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, name);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_ID, &otId);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_GENDER, &otGender);
-    SetMonData(&gEnemyParty[0], MON_DATA_MET_LOCATION, &metLocation);
-    SetMonData(&gEnemyParty[0], MON_DATA_POKEBALL, &ball);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_NAME, name);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_ID, &otId);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_GENDER, &otGender);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_POKEBALL, &ball);
 
-    AddSurpriseTradeEffortValues(&gEnemyParty[0]);
-    AddSurpriseTradeMoves(&gEnemyParty[0]);
+    AddSurpriseTradeEffortValues(&gParties[B_TRAINER_OPPONENT_A][0]);
+    AddSurpriseTradeMoves(&gParties[B_TRAINER_OPPONENT_A][0]);
 
-    CalculateMonStats(&gEnemyParty[0]);
+    CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
     Free(name);
 }
 
@@ -436,9 +436,9 @@ void ShowTradedMonReturnToStartMenu(void)
 {
     SetSurpriseTradeFlag(FALSE);
     if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
-        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gEnemyParty[TRADEMON_FROM_PC], 0, 0, CB2_StartMenu_ReturnToUI);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC], 0, 0, CB2_StartMenu_ReturnToUI);
     else
-        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
 }
 
 void CB2_StartSurpriseTrade(void)

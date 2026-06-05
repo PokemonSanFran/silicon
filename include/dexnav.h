@@ -118,7 +118,7 @@ void ResetDexNavSearch(void);
 bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
-u8 GetEncounterLevelFromMapData(u16 species, enum EncounterType environment); // phenomenon
+u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment); // phenomenon
 bool32 OnStep_DexNavSearch(void);
 void CB2_DexNavFromStartMenu(void); // dexnav
 u8 GetSearchLevel(u32 species); // dexnav
@@ -127,6 +127,6 @@ void PauseDexNavSearch(void); // dexnav
 void ResumeDexNavSearch(void); // dexnav
 void Dexnav_StopOverworldFieldEffect(void); // dexnav
 
-extern u16 gDexNavSpecies;
+extern enum Species gDexNavSpecies;
 
 #endif // GUARD_DEXNAV_H
