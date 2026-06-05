@@ -4620,22 +4620,6 @@ void SpawnOliverForSwagbag(void)
     SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_OLIVER, movementBehavior, localIdOliver, x+MAP_OFFSET, y+MAP_OFFSET, elevation);
 }
 
-static bool8 ShouldPlayerGetGoldPotion(void)
-{
-    if (FlagGet(ReturnBadgeFromMap()) == TRUE)
-        return FALSE;
-
-    if (CheckBagHasItem(ITEM_POKEVIAL,1))
-        return FALSE;
-
-    return (GetNumberOfBadges() == 2);
-}
-
-void Script_ShouldPlayerGetGoldPotion(void)
-{
-    gSpecialVar_Result = ShouldPlayerGetGoldPotion();
-}
-
 static bool8 ShouldPlayerGetDexnav(void)
 {
     if (FlagGet(FLAG_SYS_APP_DEXNAV_GET))
