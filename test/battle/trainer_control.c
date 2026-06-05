@@ -216,7 +216,11 @@ TEST("Difficulty default to Normal if the partner doesn't have a member for the 
     u32 currTrainer = TRAINER_PARTNER(1);
     CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_METANG);
-    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 42);
+    // Start Battle Settings: Trainer Scaling
+    //EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == 42);
+    u32 expectedLevel = HandleScaledLevel(TrainerScalingGetLevel(currTrainer,0),TrainerScalingGetPartySize(currTrainer));
+    EXPECT(GetMonData(&testParty[0], MON_DATA_LEVEL) == expectedLevel);
+    // End Battle Settings: Trainer Scaling
     Free(testParty);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
 }
