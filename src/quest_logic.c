@@ -2238,10 +2238,10 @@ void DebugQuest_RPS(u8 state)
 // ***********************************************************************
 // Quest:Cute Pokémon
 // ***********************************************************************
-u32 GetEiscueHint(u32 speciesId);
-u32 GetCorsolaHint(u32 speciesId);
-u32 GetDuskullHint(u32 speciesId);
-u32 GetScraftyHint(u32 speciesId);
+u32 GetEiscueHint(enum Species speciesId);
+u32 GetCorsolaHint(enum Species speciesId);
+u32 GetDuskullHint(enum Species speciesId);
+u32 GetScraftyHint(enum Species speciesId);
 void DebugQuest_CutePokemon_GiveMon(void);
 
 #define FLAG_SCRIPT_USE FLAG_TEMP_1
@@ -2265,7 +2265,7 @@ void BufferEiscueHeightPlusOne(void)
 u32 GetHintFromMon(void)
 {
     u32 remainingQuests = Quest_Generic_CountRemainingSubquests(QUEST_CUTEPOKEMON);
-    u32 speciesId = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    enum Species speciesId = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
     switch(remainingQuests)
     {
@@ -2277,7 +2277,7 @@ u32 GetHintFromMon(void)
     }
 }
 
-u32 GetEiscueHint(u32 speciesId)
+u32 GetEiscueHint(enum Species speciesId)
 {
     if (gSpeciesInfo[speciesId].types[0] != TYPE_ICE && gSpeciesInfo[speciesId].types[1] != TYPE_ICE)
         return VAR_CUTE_POKEMON_EISCUE_HINT_0;
@@ -2289,7 +2289,7 @@ u32 GetEiscueHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_PERLACIA;
 }
 
-u32 GetCorsolaHint(u32 speciesId)
+u32 GetCorsolaHint(enum Species speciesId)
 {
     if (GetSpeciesColor(speciesId) != BODY_COLOR_PINK)
         return VAR_CUTE_POKEMON_CORSOLA_HINT_0;
@@ -2301,7 +2301,7 @@ u32 GetCorsolaHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_QIU;
 }
 
-u32 GetDuskullHint(u32 speciesId)
+u32 GetDuskullHint(enum Species speciesId)
 {
     if (GetMonAbility(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004])!= ABILITY_LEVITATE)
         return VAR_CUTE_POKEMON_DUSKULL_HINT_0;
@@ -2313,7 +2313,7 @@ u32 GetDuskullHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_CRESALTA;
 }
 
-u32 GetScraftyHint(u32 speciesId)
+u32 GetScraftyHint(enum Species speciesId)
 {
     struct Pokemon *mon;
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];

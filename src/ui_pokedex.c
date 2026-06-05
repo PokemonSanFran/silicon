@@ -2393,12 +2393,12 @@ static void SpeciesGrid_PrintMonNumber(u32 rowIndex, u32 columnIndex, u32 specie
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), (GetFontAttribute(fontId, FONTATTR_LINE_SPACING)), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar4);
 }
 
-u32 ConvertSpeciesIdToResidoDex(u32 speciesId)
+u32 ConvertSpeciesIdToResidoDex(enum Species speciesId)
 {
     return gSpeciesInfo[speciesId].residoDexNum;
 }
 
-bool8 SpeciesIsResidoDex(u32 speciesId)
+bool8 SpeciesIsResidoDex(enum Species speciesId)
 {
     for (enum ResidoDexNumbers speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
         if (speciesId == gResidoPokedexOrder_Numerical[speciesIndex])

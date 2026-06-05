@@ -3485,7 +3485,7 @@ static const u8 *GetFormOrSpeciesName(u32 species)
     return GetFormName(species);
 }
 
-static u32 ShouldUseMiniorException(u32 listId, u32 speciesId)
+static u32 ShouldUseMiniorException(u32 listId, enum Species speciesId)
 {
     if (speciesId != SPECIES_MINIOR_CORE)
         return speciesId;
@@ -3510,7 +3510,7 @@ static void PageEvolution_PrintEvolutionList(void)
 
     for (u32 listId = 0; listId < NUM_EVOLUTIONS_LIST_ROWS; listId++)
     {
-        u32 speciesId = PageEvolution_GetMonList(startingId + listId);
+        enum Species speciesId = PageEvolution_GetMonList(startingId + listId);
 
         if (speciesId == SPECIES_NONE)
             continue;

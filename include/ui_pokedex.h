@@ -154,7 +154,7 @@ static const u8 sText_MegaEvolution[] =_("Mega Evolution");
 
 void Task_OpenPokedexFromStartMenu(u8);
 void CB2_PokedexFromStartMenu(void);
-u32 ConvertSpeciesIdToResidoDex(u32 speciesId);
+u32 ConvertSpeciesIdToResidoDex(enum Species speciesId);
 u32 GetPokedexPercentage(void);
 bool32 SpeciesFilter_GetFilterChangeFlag(void);
 void Task_SpeciesFilter_Input(u8);
@@ -269,7 +269,7 @@ u32 SpeciesData_ConvertSpeciesToCosmeticFormId(u32 species);
 void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride);
 bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
-bool8 SpeciesIsResidoDex(u32 speciesId);
+bool8 SpeciesIsResidoDex(enum Species speciesId);
 bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode);
 
 #endif // GUARD_UI_POKEDEX_H
