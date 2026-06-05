@@ -320,7 +320,6 @@ static enum Species FastPickRandomSpecies(const struct RandomSpeciesGeneratorOpt
 static bool32 IsRandomItemAllowed(const struct RandomItemGeneratorOptions *options, enum Item item, const struct FilterFuncArgs *filterFuncArgs)
 {
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
-    DebugPrintf("item %d",item);
 
     if (GetItemPocket(item) == POCKET_KEY_ITEMS)
         return FALSE;

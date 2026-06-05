@@ -10511,7 +10511,6 @@ static void Cmd_trysetcaughtmondexflags(void)
 
     struct Pokemon *caughtMon = GetBattlerMon(GetCatchingBattler());
     enum Species species = GetMonData(caughtMon, MON_DATA_SPECIES);
-    SpeciesData_SetSavedLastForm(species); // pokedex
     u32 personality = GetMonData(caughtMon, MON_DATA_PERSONALITY);
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))

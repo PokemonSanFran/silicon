@@ -2266,7 +2266,6 @@ SINGLE_BATTLE_TEST("Move Animations work 1")
         variationsNumber = GetVariationsNumber(j, FALSE);
         for (k = 0; k < variationsNumber; k++) {
             ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
-
             tempFriendship = ParametrizeFriendship(j, k);
             PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship;}
         }
