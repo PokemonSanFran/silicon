@@ -4268,7 +4268,7 @@ static void DebugAction_Quest_SelectQuest(u8 taskId)
     if (JOY_NEW(DPAD_ANY))
     {
         PlaySE(SE_SELECT);
-        Debug_HandleInput_Numeric(taskId, 0, QUEST_COUNT, CountDigits(QUEST_COUNT));
+        Debug_HandleInput_Numeric(taskId, 0, QUEST_COUNT-1, CountDigits(100));
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         QuestMenu_CopyQuestName(gStringVar1, gTasks[taskId].tInput);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
@@ -4306,8 +4306,9 @@ static void DebugAction_Quest_SelectState(u8 taskId)
 
     if (JOY_NEW(DPAD_ANY))
     {
+        u32 maxQuestStates = GetMaxQuestState(gTasks[taskId].tQuestID)-1;
         PlaySE(SE_SELECT);
-        Debug_HandleInput_Numeric(taskId, 0, MAX_QUEST_STATES, 3);
+        Debug_HandleInput_Numeric(taskId, 0, maxQuestStates, 3);
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].tDigit]);
         QuestMenu_CopyQuestStateName(gStringVar1, gTasks[taskId].tQuestID, gTasks[taskId].tInput);
