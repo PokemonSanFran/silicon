@@ -151,6 +151,7 @@ enum MapType GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 enum MapType GetMapTypeByWarpData(struct WarpData *warp);
 enum MapType GetCurrentMapType(void);
 enum MapType GetLastUsedWarpMapType(void);
+mapsec_u16_t GetLastUsedWarpMapSectionId(void);
 bool8 IsMapTypeOutdoors(enum MapType mapType);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(enum MapType mapType);
 bool8 IsMapTypeIndoors(enum MapType mapType);
@@ -198,8 +199,7 @@ bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 // start mapPreviews
-u8 GetLastUsedWarpMapSectionId(void);
-u8 GetDestinationWarpMapSectionId(void);
+mapsec_u16_t GetDestinationWarpMapSectionId(void);
 // end mapPreviews
 bool16 SetTimeOfDay(u16 hours);
 bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior);

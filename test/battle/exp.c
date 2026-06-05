@@ -119,8 +119,8 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
         MESSAGE("The wild Blissey fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } THEN {
-        EXPECT(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL) > 1);
-        EXPECT(GetMonData(&gPlayerParty[0], MON_DATA_EXP) > 1);
+        EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL) > 1);
+        EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP) > 1);
     } FINALLY {
         EXPECT_GT(results[1].exp, results[0].exp);
         EXPECT_GT(results[2].exp, results[1].exp);
@@ -152,10 +152,10 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
         NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");
     } THEN {
         if (item == ITEM_EXP_SHARE)
-            EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
+            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
         else
-            EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
-            //EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
+            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
+            //EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]); // Battle Settings: Experience
     }
 }
 
@@ -204,14 +204,14 @@ WILD_BATTLE_TEST("Points Messages: Gains Exp")
              }
         }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
 
         if (bigEV == MAX_PER_STAT_EVS)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV);
         else if (item == ITEM_POWER_WEIGHT)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
         else
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
     }
 
 }
@@ -260,14 +260,14 @@ WILD_BATTLE_TEST("Points Messages: Gains Boosted Exp")
              }
         }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
 
         if (bigEV == MAX_PER_STAT_EVS)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV);
         else if (item == ITEM_POWER_WEIGHT)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
         else
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
     }
 
 }
@@ -314,11 +314,11 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs")
         }
     } THEN {
         if (bigEV == MAX_PER_STAT_EVS)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV);
         else if (item == ITEM_POWER_WEIGHT)
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP) + 8);
         else
-            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), bigEV + (gSpeciesInfo[SPECIES_CATERPIE].evYield_HP));
     }
 
 }

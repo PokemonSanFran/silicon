@@ -1700,7 +1700,7 @@ static void GenerateQuestDescription(s32 questId)
 {
     if (questId == LIST_CANCEL)
     {
-        StringCopy(gStringVar1,gText_Blank);
+        StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
     }
     else if (GetCurrentQuestSubquestState() == FALSE) {
         if (IsQuestInactiveState(questId) == TRUE) {
@@ -1720,7 +1720,7 @@ static void GenerateQuestDescription(s32 questId)
             StringCopy(gStringVar1,
                     sSideQuests[sStateDataPtr->parentQuest].subquests[questId].desc);
         } else {
-            StringCopy(gStringVar1, gText_Blank);
+            StringCopy(gStringVar1, gText_ExpandedPlaceholder_Empty);
         }
     }
 
@@ -1776,7 +1776,7 @@ const u8 *GetQuestMap(s32 questId)
 const u8 *GetQuestRewardDesc(s32 questId)
 {
     if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
-        return gText_Blank;
+        return gText_ExpandedPlaceholder_Empty;
 
     return sSideQuests[questId].desc[FLAG_GET_REWARD];
 }
@@ -2244,7 +2244,7 @@ static void GenerateFilterAmountName(void)
         }
         else
         {
-            StringCopy(gStringVar1,gText_Blank);
+            StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
         }
 
         ConvertIntToDecimalStringN(gStringVar2, GetDenominatorQuests(), STR_CONV_MODE_LEFT_ALIGN,digits);

@@ -2477,8 +2477,7 @@ void CreateOverworldWaypointArrow(void)
 
 static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
-    //if (FindTaskIdByFunc(Task_RunMapPreview_Script) != TASK_NONE)
-   if (ForestMapPreviewScreenIsRunning())
+    if (FadeInMapPreviewScreenIsRunning())
         return;
 
     if (!gPaletteFade.active)

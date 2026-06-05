@@ -326,7 +326,7 @@ static void HiddenGrotto_SaveGrottoMon(void)
     enum HiddenGrottoId grottoId = HiddenGrotto_GetGrottoIdFromCurrentMap();
     HiddenGrotto_SetLastGrottoId(grottoId);
     struct Pokemon *mon = HiddenGrotto_GetSavedGrottoMon();
-    CopyMon(mon,&gEnemyParty[0],sizeof(struct Pokemon));
+    CopyMon(mon,&gParties[B_TRAINER_OPPONENT_A][0],sizeof(struct Pokemon));
 }
 
 static bool8 HiddenGrotto_LoadSavedMon(void)
@@ -342,7 +342,7 @@ static bool8 HiddenGrotto_LoadSavedMon(void)
     if (isGrottoMonEmpty == TRUE)
         return FALSE;
 
-    CopyMon(&gEnemyParty[0],mon,sizeof(struct Pokemon));
+    CopyMon(&gParties[B_TRAINER_OPPONENT_A][0],mon,sizeof(struct Pokemon));
     return TRUE;
 }
 
