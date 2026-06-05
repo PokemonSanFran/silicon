@@ -122,11 +122,18 @@ extern const u8 *const sFilterListTexts[];
 extern const struct PokemonFormTable pokemonFormTable[POKEDEX_FORM_COUNT][NUMBER_OF_MON_TYPES];
 
 static const u16 pokedexPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/palettes/default.gbapal");
+static const u16 alolaPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/species_list/emptyfolder_alola.gbapal");
 
 static const struct SpritePalette sPokedexInterfaceSpritePalette =
 {
     .data = pokedexPalettesDefault,
     .tag = PAL_POKEDEX_UI_SPRITES,
+};
+
+static const struct SpritePalette sAlolaSpritePalette =
+{
+    .data = alolaPalettesDefault,
+    .tag = PAL_POKEDEX_ALOLA_SPRITES,
 };
 
 static const u8 *const sEggGroupTexts[] =
