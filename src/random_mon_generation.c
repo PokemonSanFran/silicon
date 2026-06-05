@@ -320,11 +320,16 @@ static enum Species FastPickRandomSpecies(const struct RandomSpeciesGeneratorOpt
 static bool32 IsRandomItemAllowed(const struct RandomItemGeneratorOptions *options, enum Item item, const struct FilterFuncArgs *filterFuncArgs)
 {
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
+    DebugPrintf("item %d",item);
 
     if (GetItemPocket(item) == POCKET_KEY_ITEMS)
         return FALSE;
     if (GetItemPocket(item) == POCKET_TM_HM && GetItemPrice(item) == 0)
         return FALSE;
+    // Start siliconMerge
+    if (GetItemPocket(item) == POCKET_TM_HM && GetItemImportance(item) == TRUE)
+        return FALSE;
+    // End siliconMerge
     for (u32 i = 0; i < options->bannedHoldEffectsCount; i++)
     {
         if (options->bannedHoldEffects[i] == holdEffect)
