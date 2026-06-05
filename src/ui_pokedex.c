@@ -385,7 +385,7 @@ static const u8 *const sSpeciesMenuTexts[] =
 
 static const u8 *const sortOrderNames[] =
 {
-    [ORDER_NUMERICAL]    = gText_Blank,
+    [ORDER_NUMERICAL]    = gText_ExpandedPlaceholder_Empty,
     [ORDER_ALPHABETICAL] = COMPOUND_STRING("&sort=alpha"),
     [ORDER_HEAVIEST]     = COMPOUND_STRING("&sort=heavy"),
     [ORDER_LIGHTEST]     = COMPOUND_STRING("&sort=light"),

@@ -64,7 +64,6 @@ script Quest_Taxicabturnaround_NoRefusePokemon_Dialogue{
 
 script Quest_Taxicabturnaround_EvaluatePokemon_Script{
     special(ChoosePartyMon)
-    waitstate
 
     if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
         goto(Quest_Taxicabturnaround_NoRefusePokemon_Dialogue)

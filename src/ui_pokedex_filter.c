@@ -2040,7 +2040,7 @@ static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFil
     switch(currentFilter)
     {
         default:
-            return gText_Blank;
+            return gText_ExpandedPlaceholder_Empty;
         case FILTER_LIST_TYPE1:
         case FILTER_LIST_TYPE2:
             return gTypesInfo[optionIndex].name;

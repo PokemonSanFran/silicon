@@ -444,9 +444,9 @@ void GiveSiliconStarter(enum SiliconStarters slot)
     SetStarterFriendship(boxSlot, slot, friendship);
     RollForShiny(boxSlot, slot);
 
-    BoxMonAtToMon(boxSlot, slot, &gPlayerParty[0]);
-    CalculateMonStats(&gPlayerParty[0]);
-    SetBoxMonAt(boxSlot, slot, &gPlayerParty[0].box);
+    BoxMonAtToMon(boxSlot, slot, &gParties[B_TRAINER_PLAYER][0]);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    SetBoxMonAt(boxSlot, slot, &gParties[B_TRAINER_PLAYER][0].box);
     CompactPartySlots();
 }
 
@@ -471,7 +471,7 @@ void MoveStarterToParty(void)
 {
     u32 species = VarGet(VAR_CHOSEN_PSF_STARTER);
     u32 starterSlot = GetSlotFromStarter(species);
-    BoxMonAtToMon(0,starterSlot,&gPlayerParty[0]);
+    BoxMonAtToMon(0,starterSlot,&gParties[B_TRAINER_PLAYER][0]);
 
     ResetPokemonStorageSystem();
     ResetPokedex();

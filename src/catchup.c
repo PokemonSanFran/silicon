@@ -34,13 +34,13 @@ void CatchUpStepExperience(void)
 
 u32 GetMonLevel(u32 partyIndex)
 {
-    if (!GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP))
+    if (!GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_HP))
         return 0;
 
-    if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG))
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_EGG))
         return 0;
 
-    return GetMonData(&gPlayerParty[partyIndex], MON_DATA_LEVEL);
+    return GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_LEVEL);
 }
 
 bool32 ShouldGainCatchUpStepExperience(u32 highestLevel, u32 partyIndex)
@@ -61,13 +61,13 @@ bool32 ShouldGainCatchUpStepExperience(u32 highestLevel, u32 partyIndex)
 
 u32 GetRequriedExperience(u32 partyIndex)
 {
-    u32 level = GetMonData(&gPlayerParty[partyIndex], MON_DATA_LEVEL);
+    u32 level = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_LEVEL);
     u32 species;
-    //u32 exp = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EXP);
+    //u32 exp = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_EXP);
 
     if (level >= MAX_LEVEL)
         return 0;
-    species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
+    species = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SPECIES);
 
     return gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - gExperienceTables[gSpeciesInfo[species].growthRate][level];
     //return gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - exp; //used to return the experience remaining now it just returns total EXP needed for this level
@@ -75,7 +75,7 @@ u32 GetRequriedExperience(u32 partyIndex)
 
 u32 ConvertGrowthRateToConstant(u32 partyIndex)
 {
-    u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
+    u32 species = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SPECIES);
     u32 growthRate = gSpeciesInfo[species].growthRate;
     u32 maxEXP = gExperienceTables[growthRate][MAX_LEVEL];
 
@@ -104,7 +104,7 @@ u32 GetHighestLevelMonInParty(void)
 
     for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
     {
-        currentLevel = GetMonData(&gPlayerParty[partyIndex], MON_DATA_LEVEL);
+        currentLevel = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_LEVEL);
         if (currentLevel > highestLevel)
             highestLevel = currentLevel;
     }
@@ -121,16 +121,16 @@ u32 CalculateExperienceToAdd(u32 partyIndex)
 
 void DoCatchUpStepExperience(u32 partyIndex)
 {
-    u32 originalExp = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EXP);
+    u32 originalExp = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_EXP);
     u32 newExp = originalExp + CalculateExperienceToAdd(partyIndex);
 
-    SetMonData(&gPlayerParty[partyIndex], MON_DATA_EXP, &newExp);
-    CalculateMonStats(&gPlayerParty[partyIndex]);
+    SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_EXP, &newExp);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][partyIndex]);
 }
 
 bool32 ShouldGainCatchUpEffortValues(u32 partyIndex)
 {
-    u32 currentTotal = GetMonEVCount(&gPlayerParty[partyIndex]);
+    u32 currentTotal = GetMonEVCount(&gParties[B_TRAINER_PLAYER][partyIndex]);
 
     return (currentTotal < MAX_TOTAL_EVS);
 }
@@ -151,15 +151,15 @@ void DoCatchUpEffortValues(u32 partyIndex)
     {
         stat = MON_DATA_HP_EV + statIndex;
 
-        effortValue = GetMonData(&gPlayerParty[partyIndex], stat);
+        effortValue = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], stat);
 
         if (effortValue >= MAX_PER_STAT_EVS)
             continue;
 
         effortValue++;
 
-        SetMonData(&gPlayerParty[partyIndex], stat, &effortValue);
-        CalculateMonStats(&gPlayerParty[partyIndex]);
+        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], stat, &effortValue);
+        CalculateMonStats(&gParties[B_TRAINER_PLAYER][partyIndex]);
         break;
     }
 }

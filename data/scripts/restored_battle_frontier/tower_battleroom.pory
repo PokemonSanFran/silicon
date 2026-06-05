@@ -270,7 +270,6 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_DoTowerBattle{
     special(LevelUpAllPokemonTo100)
 
     special(DoSpecialTrainerBattle)
-    waitstate
     copyvar(VAR_0x8004, VAR_FRONTIER_BATTLE_MODE)
 
     if(var(VAR_0x8004) != FRONTIER_MODE_LINK_MULTIS){

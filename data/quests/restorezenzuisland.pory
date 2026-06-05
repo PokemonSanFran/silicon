@@ -224,16 +224,16 @@ script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA
     lock
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
-    msgbox(format("{PLAYER}! We're just taking a break - are you here to get some practice in?"),,SPEAKER_THEATER_IMPROVTROUPEA)
+    msgbox(format("{PLAYER}! We're just taking a break - are you here to get some practice in?"),,SPEAKER_IMPROVTROUPEA)
     msgbox(format("No! I actually wanted to talk to you."),,SPEAKER_PLAYER)
     msgbox(format("After we battled you mentioned you wanted to get into acting, right?"),,SPEAKER_PLAYER)
-    msgbox(format("It's what we all want to do! It's all we all want to do!"),,SPEAKER_THEATER_IMPROVTROUPEA)
+    msgbox(format("It's what we all want to do! It's all we all want to do!"),,SPEAKER_IMPROVTROUPEA)
     closemessage
     fadescreen(FADE_TO_BLACK)
     delay(2)
     fadescreen(FADE_FROM_BLACK)
-    msgbox(format("That sounds like an insane opportunity!"),,SPEAKER_THEATER_IMPROVTROUPEA)
-    msgbox(format("We'll go talk to Doyle."),,SPEAKER_THEATER_IMPROVTROUPEA)
+    msgbox(format("That sounds like an insane opportunity!"),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("We'll go talk to Doyle."),,SPEAKER_IMPROVTROUPEA)
     closemessage
     fadescreen(FADE_TO_BLACK)
     removeobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
