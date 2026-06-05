@@ -33,6 +33,8 @@ script swagbag2_Intro_Dialogue {
 
     if (flag(FLAG_RECIEVED_NURSERY_EGG)){
         goto(swagbag2_DiscussCosts_Dialogue)
+    } elif (flag(FLAG_RECEIVED_BREEDING_CENTER_WELCOME_KIT)) {
+        goto(swagbag2_DiscussCosts_Dialogue)
     } else {
         goto(swagbag2_BringToCenter_Dialogue)
     }
