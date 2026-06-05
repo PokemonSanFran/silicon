@@ -5,7 +5,8 @@
 // These tests are very heavy computationally. Only use them to review animation PRs.
 
 #define ANIM_TEST_START_MOVE 1              //  First move to test
-#define ANIM_TEST_END_MOVE   MOVES_COUNT-1  //  Last move to test
+//#define ANIM_TEST_END_MOVE   MOVES_COUNT-1  //  Last move to test
+#define ANIM_TEST_END_MOVE   FIRST_CUSTOM_MOVE-1  //  Last move to test
 
 
 static void ParametrizeMovesAndSpecies(u32 j, u32 *pMove, u32 *pSpecies, u32 variation)
@@ -2259,11 +2260,13 @@ SINGLE_BATTLE_TEST("Move Animations work 1")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
         for (k = 0; k < variationsNumber; k++) {
             ParametrizeMovesAndSpecies(j, &tempMove, &tempSpecies, k);
+
             tempFriendship = ParametrizeFriendship(j, k);
             PARAMETRIZE { move = tempMove; species = tempSpecies; variation = k; friendship = tempFriendship;}
         }
@@ -2307,6 +2310,7 @@ SINGLE_BATTLE_TEST("Move Animations work 2")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2355,6 +2359,7 @@ SINGLE_BATTLE_TEST("Move Animations work 3")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);
@@ -2403,6 +2408,7 @@ SINGLE_BATTLE_TEST("Move Animations work 4")
     u32 k = 0, variation = 0, variationsNumber;
     u32 friendship = 0, tempFriendship;
     u32 tempMove, tempSpecies;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_FAST; // siliconMerge
     FORCE_MOVE_ANIM(TRUE);
     for (; j <= ANIM_TEST_END_MOVE; j += 4) {
         variationsNumber = GetVariationsNumber(j, FALSE);

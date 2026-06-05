@@ -607,7 +607,9 @@ TEST("Type names fit on Pokedex Search Screen")
 
 TEST("Map names fit in popup")
 {
-    ASSUME(OW_POPUP_GENERATION == GEN_3);
+    // Start siliconMerge
+    //ASSUME(OW_POPUP_GENERATION == GEN_3);
+    // End siliconMerge
     const u32 fontId = FONT_NARROWER;
     u32 widthPx = 80;
     s8 mapGroup = 0;
