@@ -14,7 +14,7 @@
 #line 3
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 5
         .gender = TRAINER_GENDER_MALE,
 #line 6
@@ -22,7 +22,7 @@
 #line 7
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 0,
         .party = (const struct TrainerMon[])
         {
@@ -36,7 +36,7 @@
 #line 11
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 12
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 13
         .gender = TRAINER_GENDER_MALE,
 #line 14
@@ -46,7 +46,7 @@
 #line 16
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -84,7 +84,7 @@
 #line 28
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 29
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 30
         .gender = TRAINER_GENDER_MALE,
 #line 31
@@ -94,7 +94,7 @@
 #line 33
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -120,7 +120,7 @@
 #line 41
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 42
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 43
         .gender = TRAINER_GENDER_MALE,
 #line 44
@@ -130,7 +130,7 @@
 #line 46
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -180,7 +180,7 @@
 #line 62
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 63
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 64
         .gender = TRAINER_GENDER_MALE,
 #line 65
@@ -190,7 +190,7 @@
 #line 67
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -228,7 +228,7 @@
 #line 79
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 80
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 81
         .gender = TRAINER_GENDER_MALE,
 #line 82
@@ -238,7 +238,7 @@
 #line 84
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -276,7 +276,7 @@
 #line 96
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 97
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 98
         .gender = TRAINER_GENDER_MALE,
 #line 99
@@ -286,7 +286,7 @@
 #line 101
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -312,7 +312,7 @@
 #line 109
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 110
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 111
         .gender = TRAINER_GENDER_MALE,
 #line 112
@@ -322,7 +322,7 @@
 #line 114
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -360,7 +360,7 @@
 #line 126
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 127
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 128
         .gender = TRAINER_GENDER_MALE,
 #line 129
@@ -370,7 +370,7 @@
 #line 131
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -396,7 +396,7 @@
 #line 139
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 140
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 141
         .gender = TRAINER_GENDER_MALE,
 #line 142
@@ -406,7 +406,7 @@
 #line 144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -432,7 +432,7 @@
 #line 152
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 153
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 154
         .gender = TRAINER_GENDER_MALE,
 #line 155
@@ -442,7 +442,7 @@
 #line 157
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -480,7 +480,7 @@
 #line 169
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 170
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 171
         .gender = TRAINER_GENDER_MALE,
 #line 172
@@ -490,7 +490,7 @@
 #line 174
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -540,7 +540,7 @@
 #line 190
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 191
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 192
         .gender = TRAINER_GENDER_MALE,
 #line 193
@@ -550,7 +550,7 @@
 #line 195
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -588,7 +588,7 @@
 #line 207
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 208
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 209
         .gender = TRAINER_GENDER_MALE,
 #line 210
@@ -598,7 +598,7 @@
 #line 212
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -636,7 +636,7 @@
 #line 224
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 225
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 226
         .gender = TRAINER_GENDER_MALE,
 #line 227
@@ -646,7 +646,7 @@
 #line 229
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -684,7 +684,7 @@
 #line 241
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 242
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 243
         .gender = TRAINER_GENDER_MALE,
 #line 244
@@ -694,7 +694,7 @@
 #line 246
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -744,7 +744,7 @@
 #line 262
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 263
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 264
         .gender = TRAINER_GENDER_MALE,
 #line 265
@@ -754,7 +754,7 @@
 #line 267
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -780,7 +780,7 @@
 #line 275
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 276
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 277
         .gender = TRAINER_GENDER_MALE,
 #line 278
@@ -790,7 +790,7 @@
 #line 280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -840,7 +840,7 @@
 #line 296
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 297
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 298
         .gender = TRAINER_GENDER_MALE,
 #line 299
@@ -850,7 +850,7 @@
 #line 301
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -912,7 +912,7 @@
 #line 321
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 322
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 323
         .gender = TRAINER_GENDER_MALE,
 #line 324
@@ -922,7 +922,7 @@
 #line 326
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -960,7 +960,7 @@
 #line 338
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 339
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 340
         .gender = TRAINER_GENDER_MALE,
 #line 341
@@ -970,7 +970,7 @@
 #line 343
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1008,7 +1008,7 @@
 #line 355
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 356
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 357
         .gender = TRAINER_GENDER_MALE,
 #line 358
@@ -1018,7 +1018,7 @@
 #line 360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1068,7 +1068,7 @@
 #line 376
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 377
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 378
         .gender = TRAINER_GENDER_MALE,
 #line 379
@@ -1078,7 +1078,7 @@
 #line 381
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -1140,7 +1140,7 @@
 #line 401
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 402
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 403
         .gender = TRAINER_GENDER_MALE,
 #line 404
@@ -1150,7 +1150,7 @@
 #line 406
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1200,7 +1200,7 @@
 #line 422
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 423
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 424
         .gender = TRAINER_GENDER_MALE,
 #line 425
@@ -1210,7 +1210,7 @@
 #line 427
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -1236,7 +1236,7 @@
 #line 435
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 436
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 437
         .gender = TRAINER_GENDER_MALE,
 #line 438
@@ -1246,7 +1246,7 @@
 #line 440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1284,7 +1284,7 @@
 #line 452
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 453
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 454
         .gender = TRAINER_GENDER_MALE,
 #line 455
@@ -1294,7 +1294,7 @@
 #line 457
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1344,7 +1344,7 @@
 #line 473
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 474
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 475
         .gender = TRAINER_GENDER_MALE,
 #line 476
@@ -1354,7 +1354,7 @@
 #line 478
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1392,7 +1392,7 @@
 #line 490
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 491
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 492
         .gender = TRAINER_GENDER_MALE,
 #line 493
@@ -1402,7 +1402,7 @@
 #line 495
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1440,7 +1440,7 @@
 #line 507
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 508
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 509
         .gender = TRAINER_GENDER_MALE,
 #line 510
@@ -1450,7 +1450,7 @@
 #line 512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -1476,7 +1476,7 @@
 #line 520
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 521
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 522
         .gender = TRAINER_GENDER_MALE,
 #line 523
@@ -1486,7 +1486,7 @@
 #line 525
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1536,7 +1536,7 @@
 #line 541
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 542
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 543
         .gender = TRAINER_GENDER_MALE,
 #line 544
@@ -1546,7 +1546,7 @@
 #line 546
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1584,7 +1584,7 @@
 #line 558
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 559
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 560
         .gender = TRAINER_GENDER_MALE,
 #line 561
@@ -1594,7 +1594,7 @@
 #line 563
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -1620,7 +1620,7 @@
 #line 571
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 572
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 573
         .gender = TRAINER_GENDER_MALE,
 #line 574
@@ -1630,7 +1630,7 @@
 #line 576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1668,7 +1668,7 @@
 #line 588
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 589
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 590
         .gender = TRAINER_GENDER_MALE,
 #line 591
@@ -1678,7 +1678,7 @@
 #line 593
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1728,7 +1728,7 @@
 #line 609
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 610
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 611
         .gender = TRAINER_GENDER_MALE,
 #line 612
@@ -1738,7 +1738,7 @@
 #line 614
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1788,7 +1788,7 @@
 #line 630
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 631
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 632
         .gender = TRAINER_GENDER_MALE,
 #line 633
@@ -1798,7 +1798,7 @@
 #line 635
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1836,7 +1836,7 @@
 #line 647
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 648
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 649
         .gender = TRAINER_GENDER_MALE,
 #line 650
@@ -1846,7 +1846,7 @@
 #line 652
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1884,7 +1884,7 @@
 #line 664
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 665
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 666
         .gender = TRAINER_GENDER_MALE,
 #line 667
@@ -1894,7 +1894,7 @@
 #line 669
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -1932,7 +1932,7 @@
 #line 681
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 682
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 683
         .gender = TRAINER_GENDER_MALE,
 #line 684
@@ -1942,7 +1942,7 @@
 #line 686
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -1992,7 +1992,7 @@
 #line 702
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 703
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 704
         .gender = TRAINER_GENDER_MALE,
 #line 705
@@ -2002,7 +2002,7 @@
 #line 707
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -2076,7 +2076,7 @@
 #line 731
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 732
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 733
         .gender = TRAINER_GENDER_MALE,
 #line 734
@@ -2086,7 +2086,7 @@
 #line 736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2124,7 +2124,7 @@
 #line 748
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 749
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 750
         .gender = TRAINER_GENDER_MALE,
 #line 751
@@ -2134,7 +2134,7 @@
 #line 753
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2172,7 +2172,7 @@
 #line 765
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 766
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 767
         .gender = TRAINER_GENDER_MALE,
 #line 768
@@ -2182,7 +2182,7 @@
 #line 770
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2220,7 +2220,7 @@
 #line 782
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 783
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 784
         .gender = TRAINER_GENDER_MALE,
 #line 785
@@ -2230,7 +2230,7 @@
 #line 787
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2268,7 +2268,7 @@
 #line 799
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 800
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 801
         .gender = TRAINER_GENDER_MALE,
 #line 802
@@ -2278,7 +2278,7 @@
 #line 804
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2316,7 +2316,7 @@
 #line 816
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 817
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 818
         .gender = TRAINER_GENDER_MALE,
 #line 819
@@ -2326,7 +2326,7 @@
 #line 821
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -2352,7 +2352,7 @@
 #line 829
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 830
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 831
         .gender = TRAINER_GENDER_MALE,
 #line 832
@@ -2362,7 +2362,7 @@
 #line 834
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -2412,7 +2412,7 @@
 #line 850
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 851
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 852
         .gender = TRAINER_GENDER_MALE,
 #line 853
@@ -2422,7 +2422,7 @@
 #line 855
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2460,7 +2460,7 @@
 #line 867
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 868
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 869
         .gender = TRAINER_GENDER_MALE,
 #line 870
@@ -2470,7 +2470,7 @@
 #line 872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -2520,7 +2520,7 @@
 #line 888
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 889
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 890
         .gender = TRAINER_GENDER_MALE,
 #line 891
@@ -2530,7 +2530,7 @@
 #line 893
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -2556,7 +2556,7 @@
 #line 901
         .trainerClass = TRAINER_CLASS_SAILOR_FRLG,
 #line 902
-        .trainerPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .trainerPic = TRAINER_PIC_SAILOR_FRLG,
 #line 903
         .gender = TRAINER_GENDER_MALE,
 #line 904
@@ -2566,7 +2566,7 @@
 #line 906
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SAILOR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2604,7 +2604,7 @@
 #line 918
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 919
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 920
         .gender = TRAINER_GENDER_MALE,
 #line 921
@@ -2614,7 +2614,7 @@
 #line 923
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2663,7 +2663,7 @@
 #line 940
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 941
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 942
         .gender = TRAINER_GENDER_MALE,
 #line 943
@@ -2673,7 +2673,7 @@
 #line 945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2711,7 +2711,7 @@
 #line 957
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 958
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 959
         .gender = TRAINER_GENDER_MALE,
 #line 960
@@ -2721,7 +2721,7 @@
 #line 962
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -2747,7 +2747,7 @@
 #line 970
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 971
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 972
         .gender = TRAINER_GENDER_MALE,
 #line 973
@@ -2757,7 +2757,7 @@
 #line 975
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -2783,7 +2783,7 @@
 #line 983
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 984
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 985
         .gender = TRAINER_GENDER_MALE,
 #line 986
@@ -2793,7 +2793,7 @@
 #line 988
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2831,7 +2831,7 @@
 #line 1000
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 1001
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 1002
         .gender = TRAINER_GENDER_MALE,
 #line 1003
@@ -2841,7 +2841,7 @@
 #line 1005
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -2879,7 +2879,7 @@
 #line 1017
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 1018
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 1019
         .gender = TRAINER_GENDER_MALE,
 #line 1020
@@ -2889,7 +2889,7 @@
 #line 1022
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -2951,7 +2951,7 @@
 #line 1042
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1043
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1044
         .gender = TRAINER_GENDER_MALE,
 #line 1045
@@ -2961,7 +2961,7 @@
 #line 1047
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -2987,7 +2987,7 @@
 #line 1055
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1056
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1057
         .gender = TRAINER_GENDER_MALE,
 #line 1058
@@ -2997,7 +2997,7 @@
 #line 1060
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3035,7 +3035,7 @@
 #line 1072
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1073
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1074
         .gender = TRAINER_GENDER_MALE,
 #line 1075
@@ -3045,7 +3045,7 @@
 #line 1077
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3095,7 +3095,7 @@
 #line 1093
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1094
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1095
         .gender = TRAINER_GENDER_MALE,
 #line 1096
@@ -3105,7 +3105,7 @@
 #line 1098
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3143,7 +3143,7 @@
 #line 1110
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1111
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1112
         .gender = TRAINER_GENDER_MALE,
 #line 1113
@@ -3153,7 +3153,7 @@
 #line 1115
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -3215,7 +3215,7 @@
 #line 1135
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1136
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1137
         .gender = TRAINER_GENDER_MALE,
 #line 1138
@@ -3225,7 +3225,7 @@
 #line 1140
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -3251,7 +3251,7 @@
 #line 1148
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1149
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1150
         .gender = TRAINER_GENDER_MALE,
 #line 1151
@@ -3261,7 +3261,7 @@
 #line 1153
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3299,7 +3299,7 @@
 #line 1165
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1166
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1167
         .gender = TRAINER_GENDER_MALE,
 #line 1168
@@ -3309,7 +3309,7 @@
 #line 1170
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3347,7 +3347,7 @@
 #line 1182
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1183
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1184
         .gender = TRAINER_GENDER_MALE,
 #line 1185
@@ -3357,7 +3357,7 @@
 #line 1187
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3407,7 +3407,7 @@
 #line 1203
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1204
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1205
         .gender = TRAINER_GENDER_MALE,
 #line 1206
@@ -3417,7 +3417,7 @@
 #line 1208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3455,7 +3455,7 @@
 #line 1220
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1221
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1222
         .gender = TRAINER_GENDER_MALE,
 #line 1223
@@ -3465,7 +3465,7 @@
 #line 1225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3503,7 +3503,7 @@
 #line 1237
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 1238
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 1239
         .gender = TRAINER_GENDER_MALE,
 #line 1240
@@ -3513,7 +3513,7 @@
 #line 1242
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -3587,7 +3587,7 @@
 #line 1266
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1267
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1268
         .gender = TRAINER_GENDER_MALE,
 #line 1269
@@ -3597,7 +3597,7 @@
 #line 1271
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3635,7 +3635,7 @@
 #line 1283
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1284
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1285
         .gender = TRAINER_GENDER_MALE,
 #line 1286
@@ -3645,7 +3645,7 @@
 #line 1288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3683,7 +3683,7 @@
 #line 1300
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1301
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1302
         .gender = TRAINER_GENDER_MALE,
 #line 1303
@@ -3693,7 +3693,7 @@
 #line 1305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3743,7 +3743,7 @@
 #line 1321
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1322
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1323
         .gender = TRAINER_GENDER_MALE,
 #line 1324
@@ -3753,7 +3753,7 @@
 #line 1326
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3791,7 +3791,7 @@
 #line 1338
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1339
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1340
         .gender = TRAINER_GENDER_MALE,
 #line 1341
@@ -3801,7 +3801,7 @@
 #line 1343
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -3827,7 +3827,7 @@
 #line 1351
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1352
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1353
         .gender = TRAINER_GENDER_MALE,
 #line 1354
@@ -3837,7 +3837,7 @@
 #line 1356
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -3887,7 +3887,7 @@
 #line 1372
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 1373
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 1374
         .gender = TRAINER_GENDER_MALE,
 #line 1375
@@ -3897,7 +3897,7 @@
 #line 1377
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3935,7 +3935,7 @@
 #line 1389
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1390
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1391
         .gender = TRAINER_GENDER_MALE,
 #line 1392
@@ -3945,7 +3945,7 @@
 #line 1394
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -3983,7 +3983,7 @@
 #line 1406
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1407
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1408
         .gender = TRAINER_GENDER_MALE,
 #line 1409
@@ -3993,7 +3993,7 @@
 #line 1411
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4043,7 +4043,7 @@
 #line 1427
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1428
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1429
         .gender = TRAINER_GENDER_MALE,
 #line 1430
@@ -4053,7 +4053,7 @@
 #line 1432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -4143,7 +4143,7 @@
 #line 1468
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1469
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1470
         .gender = TRAINER_GENDER_MALE,
 #line 1471
@@ -4153,7 +4153,7 @@
 #line 1473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4203,7 +4203,7 @@
 #line 1489
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1490
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1491
         .gender = TRAINER_GENDER_MALE,
 #line 1492
@@ -4213,7 +4213,7 @@
 #line 1494
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -4246,7 +4246,7 @@
 #line 1506
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1507
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1508
         .gender = TRAINER_GENDER_MALE,
 #line 1509
@@ -4256,7 +4256,7 @@
 #line 1511
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4306,7 +4306,7 @@
 #line 1527
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1528
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1529
         .gender = TRAINER_GENDER_MALE,
 #line 1530
@@ -4316,7 +4316,7 @@
 #line 1532
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -4378,7 +4378,7 @@
 #line 1552
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1553
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1554
         .gender = TRAINER_GENDER_MALE,
 #line 1555
@@ -4388,7 +4388,7 @@
 #line 1557
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -4414,7 +4414,7 @@
 #line 1565
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 1566
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 1567
         .gender = TRAINER_GENDER_MALE,
 #line 1568
@@ -4424,7 +4424,7 @@
 #line 1570
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -4462,7 +4462,7 @@
 #line 1582
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1583
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1584
         .gender = TRAINER_GENDER_MALE,
 #line 1585
@@ -4472,7 +4472,7 @@
 #line 1587
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4522,7 +4522,7 @@
 #line 1603
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1604
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1605
         .gender = TRAINER_GENDER_MALE,
 #line 1606
@@ -4532,7 +4532,7 @@
 #line 1608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -4570,7 +4570,7 @@
 #line 1620
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1621
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1622
         .gender = TRAINER_GENDER_MALE,
 #line 1623
@@ -4580,7 +4580,7 @@
 #line 1625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -4642,7 +4642,7 @@
 #line 1645
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1646
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1647
         .gender = TRAINER_GENDER_MALE,
 #line 1648
@@ -4652,7 +4652,7 @@
 #line 1650
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -4678,7 +4678,7 @@
 #line 1658
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1659
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1660
         .gender = TRAINER_GENDER_MALE,
 #line 1661
@@ -4688,7 +4688,7 @@
 #line 1663
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -4740,7 +4740,7 @@
 #line 1683
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1684
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1685
         .gender = TRAINER_GENDER_MALE,
 #line 1686
@@ -4750,7 +4750,7 @@
 #line 1688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4800,7 +4800,7 @@
 #line 1704
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1705
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1706
         .gender = TRAINER_GENDER_MALE,
 #line 1707
@@ -4810,7 +4810,7 @@
 #line 1709
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -4862,7 +4862,7 @@
 #line 1729
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1730
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1731
         .gender = TRAINER_GENDER_MALE,
 #line 1732
@@ -4872,7 +4872,7 @@
 #line 1734
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -4910,7 +4910,7 @@
 #line 1746
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1747
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1748
         .gender = TRAINER_GENDER_MALE,
 #line 1749
@@ -4920,7 +4920,7 @@
 #line 1751
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -4991,7 +4991,7 @@
 #line 1779
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1780
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1781
         .gender = TRAINER_GENDER_MALE,
 #line 1782
@@ -5001,7 +5001,7 @@
 #line 1784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -5034,7 +5034,7 @@
 #line 1796
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1797
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1798
         .gender = TRAINER_GENDER_MALE,
 #line 1799
@@ -5044,7 +5044,7 @@
 #line 1801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5082,7 +5082,7 @@
 #line 1813
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1814
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1815
         .gender = TRAINER_GENDER_MALE,
 #line 1816
@@ -5092,7 +5092,7 @@
 #line 1818
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -5154,7 +5154,7 @@
 #line 1838
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1839
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1840
         .gender = TRAINER_GENDER_MALE,
 #line 1841
@@ -5164,7 +5164,7 @@
 #line 1843
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -5214,7 +5214,7 @@
 #line 1859
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 1860
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 1861
         .gender = TRAINER_GENDER_MALE,
 #line 1862
@@ -5224,7 +5224,7 @@
 #line 1864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5276,7 +5276,7 @@
 #line 1884
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 1885
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 1886
         .gender = TRAINER_GENDER_MALE,
 #line 1887
@@ -5286,7 +5286,7 @@
 #line 1889
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -5357,7 +5357,7 @@
 #line 1917
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 1918
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 1919
         .gender = TRAINER_GENDER_MALE,
 #line 1920
@@ -5367,7 +5367,7 @@
 #line 1922
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5419,7 +5419,7 @@
 #line 1942
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 1943
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 1944
         .gender = TRAINER_GENDER_MALE,
 #line 1945
@@ -5429,7 +5429,7 @@
 #line 1947
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -5538,7 +5538,7 @@
 #line 1991
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 1992
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 1993
         .gender = TRAINER_GENDER_MALE,
 #line 1994
@@ -5548,7 +5548,7 @@
 #line 1996
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -5619,7 +5619,7 @@
 #line 2024
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2025
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2026
         .gender = TRAINER_GENDER_MALE,
 #line 2027
@@ -5629,7 +5629,7 @@
 #line 2029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5681,7 +5681,7 @@
 #line 2049
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2050
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2051
         .gender = TRAINER_GENDER_MALE,
 #line 2052
@@ -5691,7 +5691,7 @@
 #line 2054
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -5717,7 +5717,7 @@
 #line 2062
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2063
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2064
         .gender = TRAINER_GENDER_MALE,
 #line 2065
@@ -5727,7 +5727,7 @@
 #line 2067
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -5798,7 +5798,7 @@
 #line 2095
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2096
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2097
         .gender = TRAINER_GENDER_MALE,
 #line 2098
@@ -5808,7 +5808,7 @@
 #line 2100
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -5834,7 +5834,7 @@
 #line 2108
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2109
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2110
         .gender = TRAINER_GENDER_MALE,
 #line 2111
@@ -5844,7 +5844,7 @@
 #line 2113
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5896,7 +5896,7 @@
 #line 2133
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2134
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2135
         .gender = TRAINER_GENDER_MALE,
 #line 2136
@@ -5906,7 +5906,7 @@
 #line 2138
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -5958,7 +5958,7 @@
 #line 2158
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2159
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2160
         .gender = TRAINER_GENDER_MALE,
 #line 2161
@@ -5968,7 +5968,7 @@
 #line 2163
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -6077,7 +6077,7 @@
 #line 2207
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2208
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2209
         .gender = TRAINER_GENDER_MALE,
 #line 2210
@@ -6087,7 +6087,7 @@
 #line 2212
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -6177,7 +6177,7 @@
 #line 2248
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2249
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2250
         .gender = TRAINER_GENDER_MALE,
 #line 2251
@@ -6187,7 +6187,7 @@
 #line 2253
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6258,7 +6258,7 @@
 #line 2281
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 2282
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 2283
         .gender = TRAINER_GENDER_MALE,
 #line 2284
@@ -6268,7 +6268,7 @@
 #line 2286
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6320,7 +6320,7 @@
 #line 2306
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2307
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2308
         .gender = TRAINER_GENDER_MALE,
 #line 2309
@@ -6330,7 +6330,7 @@
 #line 2311
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6380,7 +6380,7 @@
 #line 2327
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2328
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2329
         .gender = TRAINER_GENDER_MALE,
 #line 2330
@@ -6390,7 +6390,7 @@
 #line 2332
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -6416,7 +6416,7 @@
 #line 2340
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2341
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2342
         .gender = TRAINER_GENDER_MALE,
 #line 2343
@@ -6426,7 +6426,7 @@
 #line 2345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6464,7 +6464,7 @@
 #line 2357
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2358
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2359
         .gender = TRAINER_GENDER_MALE,
 #line 2360
@@ -6474,7 +6474,7 @@
 #line 2362
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6512,7 +6512,7 @@
 #line 2374
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2375
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2376
         .gender = TRAINER_GENDER_MALE,
 #line 2377
@@ -6522,7 +6522,7 @@
 #line 2379
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -6548,7 +6548,7 @@
 #line 2387
         .trainerClass = TRAINER_CLASS_BURGLAR_FRLG,
 #line 2388
-        .trainerPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .trainerPic = TRAINER_PIC_BURGLAR_FRLG,
 #line 2389
         .gender = TRAINER_GENDER_MALE,
 #line 2390
@@ -6558,7 +6558,7 @@
 #line 2392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BURGLAR_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6596,7 +6596,7 @@
 #line 2404
         .trainerClass = TRAINER_CLASS_ENGINEER_FRLG,
 #line 2405
-        .trainerPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .trainerPic = TRAINER_PIC_ENGINEER_FRLG,
 #line 2406
         .gender = TRAINER_GENDER_MALE,
 #line 2407
@@ -6606,7 +6606,7 @@
 #line 2409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6644,7 +6644,7 @@
 #line 2421
         .trainerClass = TRAINER_CLASS_ENGINEER_FRLG,
 #line 2422
-        .trainerPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .trainerPic = TRAINER_PIC_ENGINEER_FRLG,
 #line 2423
         .gender = TRAINER_GENDER_MALE,
 #line 2424
@@ -6654,7 +6654,7 @@
 #line 2426
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -6680,7 +6680,7 @@
 #line 2434
         .trainerClass = TRAINER_CLASS_ENGINEER_FRLG,
 #line 2435
-        .trainerPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .trainerPic = TRAINER_PIC_ENGINEER_FRLG,
 #line 2436
         .gender = TRAINER_GENDER_MALE,
 #line 2437
@@ -6690,7 +6690,7 @@
 #line 2439
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6740,7 +6740,7 @@
 #line 2455
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2456
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2457
         .gender = TRAINER_GENDER_MALE,
 #line 2458
@@ -6750,7 +6750,7 @@
 #line 2460
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6800,7 +6800,7 @@
 #line 2476
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2477
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2478
         .gender = TRAINER_GENDER_MALE,
 #line 2479
@@ -6810,7 +6810,7 @@
 #line 2481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6860,7 +6860,7 @@
 #line 2497
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2498
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2499
         .gender = TRAINER_GENDER_MALE,
 #line 2500
@@ -6870,7 +6870,7 @@
 #line 2502
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -6920,7 +6920,7 @@
 #line 2518
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2519
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2520
         .gender = TRAINER_GENDER_MALE,
 #line 2521
@@ -6930,7 +6930,7 @@
 #line 2523
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -6968,7 +6968,7 @@
 #line 2535
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2536
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2537
         .gender = TRAINER_GENDER_MALE,
 #line 2538
@@ -6978,7 +6978,7 @@
 #line 2540
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7004,7 +7004,7 @@
 #line 2548
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2549
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2550
         .gender = TRAINER_GENDER_MALE,
 #line 2551
@@ -7014,7 +7014,7 @@
 #line 2553
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -7076,7 +7076,7 @@
 #line 2573
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2574
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2575
         .gender = TRAINER_GENDER_MALE,
 #line 2576
@@ -7086,7 +7086,7 @@
 #line 2578
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -7148,7 +7148,7 @@
 #line 2598
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2599
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2600
         .gender = TRAINER_GENDER_MALE,
 #line 2601
@@ -7158,7 +7158,7 @@
 #line 2603
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7196,7 +7196,7 @@
 #line 2615
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2616
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2617
         .gender = TRAINER_GENDER_MALE,
 #line 2618
@@ -7206,7 +7206,7 @@
 #line 2620
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -7292,7 +7292,7 @@
 #line 2648
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2649
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2650
         .gender = TRAINER_GENDER_MALE,
 #line 2651
@@ -7302,7 +7302,7 @@
 #line 2653
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7340,7 +7340,7 @@
 #line 2665
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 2666
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 2667
         .gender = TRAINER_GENDER_MALE,
 #line 2668
@@ -7350,7 +7350,7 @@
 #line 2670
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7388,7 +7388,7 @@
 #line 2682
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2683
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2684
         .gender = TRAINER_GENDER_MALE,
 #line 2685
@@ -7398,7 +7398,7 @@
 #line 2687
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7436,7 +7436,7 @@
 #line 2699
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2700
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2701
         .gender = TRAINER_GENDER_MALE,
 #line 2702
@@ -7446,7 +7446,7 @@
 #line 2704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7484,7 +7484,7 @@
 #line 2716
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2717
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2718
         .gender = TRAINER_GENDER_MALE,
 #line 2719
@@ -7494,7 +7494,7 @@
 #line 2721
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -7544,7 +7544,7 @@
 #line 2737
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2738
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2739
         .gender = TRAINER_GENDER_MALE,
 #line 2740
@@ -7554,7 +7554,7 @@
 #line 2742
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7592,7 +7592,7 @@
 #line 2754
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2755
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2756
         .gender = TRAINER_GENDER_MALE,
 #line 2757
@@ -7602,7 +7602,7 @@
 #line 2759
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -7664,7 +7664,7 @@
 #line 2779
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2780
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2781
         .gender = TRAINER_GENDER_MALE,
 #line 2782
@@ -7674,7 +7674,7 @@
 #line 2784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -7724,7 +7724,7 @@
 #line 2800
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2801
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2802
         .gender = TRAINER_GENDER_MALE,
 #line 2803
@@ -7734,7 +7734,7 @@
 #line 2805
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7772,7 +7772,7 @@
 #line 2817
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2818
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2819
         .gender = TRAINER_GENDER_MALE,
 #line 2820
@@ -7782,7 +7782,7 @@
 #line 2822
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -7856,7 +7856,7 @@
 #line 2846
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2847
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2848
         .gender = TRAINER_GENDER_MALE,
 #line 2849
@@ -7866,7 +7866,7 @@
 #line 2851
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -7904,7 +7904,7 @@
 #line 2863
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2864
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2865
         .gender = TRAINER_GENDER_MALE,
 #line 2866
@@ -7914,7 +7914,7 @@
 #line 2868
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -7940,7 +7940,7 @@
 #line 2876
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2877
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2878
         .gender = TRAINER_GENDER_MALE,
 #line 2879
@@ -7950,7 +7950,7 @@
 #line 2881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -8012,7 +8012,7 @@
 #line 2901
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2902
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2903
         .gender = TRAINER_GENDER_MALE,
 #line 2904
@@ -8022,7 +8022,7 @@
 #line 2906
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8060,7 +8060,7 @@
 #line 2918
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2919
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2920
         .gender = TRAINER_GENDER_MALE,
 #line 2921
@@ -8070,7 +8070,7 @@
 #line 2923
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8096,7 +8096,7 @@
 #line 2931
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2932
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2933
         .gender = TRAINER_GENDER_MALE,
 #line 2934
@@ -8106,7 +8106,7 @@
 #line 2936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8144,7 +8144,7 @@
 #line 2948
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 2949
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 2950
         .gender = TRAINER_GENDER_MALE,
 #line 2951
@@ -8154,7 +8154,7 @@
 #line 2953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -8204,7 +8204,7 @@
 #line 2969
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 2970
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 2971
         .gender = TRAINER_GENDER_MALE,
 #line 2972
@@ -8214,7 +8214,7 @@
 #line 2974
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -8264,7 +8264,7 @@
 #line 2990
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 2991
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 2992
         .gender = TRAINER_GENDER_MALE,
 #line 2993
@@ -8274,7 +8274,7 @@
 #line 2995
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8312,7 +8312,7 @@
 #line 3007
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3008
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3009
         .gender = TRAINER_GENDER_MALE,
 #line 3010
@@ -8322,7 +8322,7 @@
 #line 3012
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8360,7 +8360,7 @@
 #line 3024
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3025
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3026
         .gender = TRAINER_GENDER_MALE,
 #line 3027
@@ -8370,7 +8370,7 @@
 #line 3029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8408,7 +8408,7 @@
 #line 3041
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3042
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3043
         .gender = TRAINER_GENDER_MALE,
 #line 3044
@@ -8418,7 +8418,7 @@
 #line 3046
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8456,7 +8456,7 @@
 #line 3058
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3059
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3060
         .gender = TRAINER_GENDER_MALE,
 #line 3061
@@ -8466,7 +8466,7 @@
 #line 3063
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -8492,7 +8492,7 @@
 #line 3071
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3072
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3073
         .gender = TRAINER_GENDER_MALE,
 #line 3074
@@ -8502,7 +8502,7 @@
 #line 3076
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -8564,7 +8564,7 @@
 #line 3096
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3097
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3098
         .gender = TRAINER_GENDER_MALE,
 #line 3099
@@ -8574,7 +8574,7 @@
 #line 3101
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8612,7 +8612,7 @@
 #line 3113
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 3114
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 3115
         .gender = TRAINER_GENDER_MALE,
 #line 3116
@@ -8622,7 +8622,7 @@
 #line 3118
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -8672,7 +8672,7 @@
 #line 3134
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3135
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3136
         .gender = TRAINER_GENDER_MALE,
 #line 3137
@@ -8682,7 +8682,7 @@
 #line 3139
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8720,7 +8720,7 @@
 #line 3151
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3152
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3153
         .gender = TRAINER_GENDER_MALE,
 #line 3154
@@ -8730,7 +8730,7 @@
 #line 3156
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8768,7 +8768,7 @@
 #line 3168
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3169
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3170
         .gender = TRAINER_GENDER_MALE,
 #line 3171
@@ -8778,7 +8778,7 @@
 #line 3173
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8816,7 +8816,7 @@
 #line 3185
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3186
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3187
         .gender = TRAINER_GENDER_MALE,
 #line 3188
@@ -8826,7 +8826,7 @@
 #line 3190
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8864,7 +8864,7 @@
 #line 3202
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3203
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3204
         .gender = TRAINER_GENDER_MALE,
 #line 3205
@@ -8874,7 +8874,7 @@
 #line 3207
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -8924,7 +8924,7 @@
 #line 3223
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 3224
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 3225
         .gender = TRAINER_GENDER_MALE,
 #line 3226
@@ -8934,7 +8934,7 @@
 #line 3228
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -8972,7 +8972,7 @@
 #line 3240
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3241
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3242
         .gender = TRAINER_GENDER_MALE,
 #line 3243
@@ -8982,7 +8982,7 @@
 #line 3245
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -9044,7 +9044,7 @@
 #line 3265
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3266
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3267
         .gender = TRAINER_GENDER_MALE,
 #line 3268
@@ -9054,7 +9054,7 @@
 #line 3270
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9092,7 +9092,7 @@
 #line 3282
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3283
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3284
         .gender = TRAINER_GENDER_MALE,
 #line 3285
@@ -9102,7 +9102,7 @@
 #line 3287
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9128,7 +9128,7 @@
 #line 3295
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3296
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3297
         .gender = TRAINER_GENDER_MALE,
 #line 3298
@@ -9138,7 +9138,7 @@
 #line 3300
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9188,7 +9188,7 @@
 #line 3316
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3317
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3318
         .gender = TRAINER_GENDER_MALE,
 #line 3319
@@ -9198,7 +9198,7 @@
 #line 3321
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9236,7 +9236,7 @@
 #line 3333
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3334
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3335
         .gender = TRAINER_GENDER_MALE,
 #line 3336
@@ -9246,7 +9246,7 @@
 #line 3338
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -9272,7 +9272,7 @@
 #line 3346
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3347
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3348
         .gender = TRAINER_GENDER_MALE,
 #line 3349
@@ -9282,7 +9282,7 @@
 #line 3351
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9332,7 +9332,7 @@
 #line 3367
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3368
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3369
         .gender = TRAINER_GENDER_MALE,
 #line 3370
@@ -9342,7 +9342,7 @@
 #line 3372
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9380,7 +9380,7 @@
 #line 3384
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3385
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3386
         .gender = TRAINER_GENDER_MALE,
 #line 3387
@@ -9390,7 +9390,7 @@
 #line 3389
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9428,7 +9428,7 @@
 #line 3401
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3402
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 3403
         .gender = TRAINER_GENDER_MALE,
 #line 3404
@@ -9438,7 +9438,7 @@
 #line 3406
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9476,7 +9476,7 @@
 #line 3418
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 3419
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3420
         .gender = TRAINER_GENDER_MALE,
 #line 3421
@@ -9486,7 +9486,7 @@
 #line 3423
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9536,7 +9536,7 @@
 #line 3439
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3440
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3441
         .gender = TRAINER_GENDER_MALE,
 #line 3442
@@ -9546,7 +9546,7 @@
 #line 3444
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -9620,7 +9620,7 @@
 #line 3468
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3469
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3470
         .gender = TRAINER_GENDER_MALE,
 #line 3471
@@ -9630,7 +9630,7 @@
 #line 3473
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9668,7 +9668,7 @@
 #line 3485
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3486
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3487
         .gender = TRAINER_GENDER_MALE,
 #line 3488
@@ -9678,7 +9678,7 @@
 #line 3490
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9728,7 +9728,7 @@
 #line 3506
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 3507
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 3508
         .gender = TRAINER_GENDER_MALE,
 #line 3509
@@ -9738,7 +9738,7 @@
 #line 3511
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9788,7 +9788,7 @@
 #line 3527
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 3528
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 3529
         .gender = TRAINER_GENDER_MALE,
 #line 3530
@@ -9798,7 +9798,7 @@
 #line 3532
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -9860,7 +9860,7 @@
 #line 3552
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 3553
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 3554
         .gender = TRAINER_GENDER_MALE,
 #line 3555
@@ -9870,7 +9870,7 @@
 #line 3557
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -9908,7 +9908,7 @@
 #line 3569
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 3570
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 3571
         .gender = TRAINER_GENDER_MALE,
 #line 3572
@@ -9918,7 +9918,7 @@
 #line 3574
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -9968,7 +9968,7 @@
 #line 3590
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 3591
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 3592
         .gender = TRAINER_GENDER_MALE,
 #line 3593
@@ -9978,7 +9978,7 @@
 #line 3595
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10004,7 +10004,7 @@
 #line 3603
         .trainerClass = TRAINER_CLASS_ROCKER_FRLG,
 #line 3604
-        .trainerPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKER_FRLG,
 #line 3605
         .gender = TRAINER_GENDER_MALE,
 #line 3606
@@ -10014,7 +10014,7 @@
 #line 3608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -10064,7 +10064,7 @@
 #line 3624
         .trainerClass = TRAINER_CLASS_ROCKER_FRLG,
 #line 3625
-        .trainerPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKER_FRLG,
 #line 3626
         .gender = TRAINER_GENDER_MALE,
 #line 3627
@@ -10074,7 +10074,7 @@
 #line 3629
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10112,7 +10112,7 @@
 #line 3641
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3642
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3643
         .gender = TRAINER_GENDER_MALE,
 #line 3644
@@ -10122,7 +10122,7 @@
 #line 3646
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10160,7 +10160,7 @@
 #line 3658
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3659
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3660
         .gender = TRAINER_GENDER_MALE,
 #line 3661
@@ -10170,7 +10170,7 @@
 #line 3663
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -10232,7 +10232,7 @@
 #line 3683
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3684
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3685
         .gender = TRAINER_GENDER_MALE,
 #line 3686
@@ -10242,7 +10242,7 @@
 #line 3688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -10304,7 +10304,7 @@
 #line 3708
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3709
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3710
         .gender = TRAINER_GENDER_MALE,
 #line 3711
@@ -10314,7 +10314,7 @@
 #line 3713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10352,7 +10352,7 @@
 #line 3725
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3726
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3727
         .gender = TRAINER_GENDER_MALE,
 #line 3728
@@ -10362,7 +10362,7 @@
 #line 3730
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10395,7 +10395,7 @@
 #line 3742
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3743
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3744
         .gender = TRAINER_GENDER_MALE,
 #line 3745
@@ -10405,7 +10405,7 @@
 #line 3747
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -10495,7 +10495,7 @@
 #line 3783
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3784
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3785
         .gender = TRAINER_GENDER_MALE,
 #line 3786
@@ -10505,7 +10505,7 @@
 #line 3788
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10531,7 +10531,7 @@
 #line 3796
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 3797
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 3798
         .gender = TRAINER_GENDER_MALE,
 #line 3799
@@ -10541,7 +10541,7 @@
 #line 3801
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10579,7 +10579,7 @@
 #line 3813
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3814
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3815
         .gender = TRAINER_GENDER_MALE,
 #line 3816
@@ -10589,7 +10589,7 @@
 #line 3818
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10627,7 +10627,7 @@
 #line 3830
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3831
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3832
         .gender = TRAINER_GENDER_MALE,
 #line 3833
@@ -10637,7 +10637,7 @@
 #line 3835
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -10687,7 +10687,7 @@
 #line 3851
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3852
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3853
         .gender = TRAINER_GENDER_MALE,
 #line 3854
@@ -10697,7 +10697,7 @@
 #line 3856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -10723,7 +10723,7 @@
 #line 3864
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3865
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3866
         .gender = TRAINER_GENDER_MALE,
 #line 3867
@@ -10733,7 +10733,7 @@
 #line 3869
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10771,7 +10771,7 @@
 #line 3881
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3882
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3883
         .gender = TRAINER_GENDER_MALE,
 #line 3884
@@ -10781,7 +10781,7 @@
 #line 3886
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10819,7 +10819,7 @@
 #line 3898
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 3899
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 3900
         .gender = TRAINER_GENDER_MALE,
 #line 3901
@@ -10829,7 +10829,7 @@
 #line 3903
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -10891,7 +10891,7 @@
 #line 3923
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 3924
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 3925
         .gender = TRAINER_GENDER_MALE,
 #line 3926
@@ -10901,7 +10901,7 @@
 #line 3928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -10939,7 +10939,7 @@
 #line 3940
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 3941
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 3942
         .gender = TRAINER_GENDER_MALE,
 #line 3943
@@ -10949,7 +10949,7 @@
 #line 3945
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -11023,7 +11023,7 @@
 #line 3969
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 3970
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 3971
         .gender = TRAINER_GENDER_MALE,
 #line 3972
@@ -11033,7 +11033,7 @@
 #line 3974
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -11095,7 +11095,7 @@
 #line 3994
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 3995
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 3996
         .gender = TRAINER_GENDER_MALE,
 #line 3997
@@ -11105,7 +11105,7 @@
 #line 3999
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11131,7 +11131,7 @@
 #line 4007
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4008
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4009
         .gender = TRAINER_GENDER_MALE,
 #line 4010
@@ -11141,7 +11141,7 @@
 #line 4012
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -11179,7 +11179,7 @@
 #line 4024
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4025
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4026
         .gender = TRAINER_GENDER_MALE,
 #line 4027
@@ -11189,7 +11189,7 @@
 #line 4029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -11251,7 +11251,7 @@
 #line 4049
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4050
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4051
         .gender = TRAINER_GENDER_MALE,
 #line 4052
@@ -11261,7 +11261,7 @@
 #line 4054
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -11311,7 +11311,7 @@
 #line 4070
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4071
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4072
         .gender = TRAINER_GENDER_MALE,
 #line 4073
@@ -11321,7 +11321,7 @@
 #line 4075
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -11359,7 +11359,7 @@
 #line 4087
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4088
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4089
         .gender = TRAINER_GENDER_MALE,
 #line 4090
@@ -11369,7 +11369,7 @@
 #line 4092
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -11395,7 +11395,7 @@
 #line 4100
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4101
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4102
         .gender = TRAINER_GENDER_MALE,
 #line 4103
@@ -11405,7 +11405,7 @@
 #line 4105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -11467,7 +11467,7 @@
 #line 4125
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4126
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4127
         .gender = TRAINER_GENDER_MALE,
 #line 4128
@@ -11477,7 +11477,7 @@
 #line 4130
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -11527,7 +11527,7 @@
 #line 4146
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4147
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4148
         .gender = TRAINER_GENDER_MALE,
 #line 4149
@@ -11537,7 +11537,7 @@
 #line 4151
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -11599,7 +11599,7 @@
 #line 4171
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4172
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4173
         .gender = TRAINER_GENDER_MALE,
 #line 4174
@@ -11609,7 +11609,7 @@
 #line 4176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -11647,7 +11647,7 @@
 #line 4188
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4189
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4190
         .gender = TRAINER_GENDER_MALE,
 #line 4191
@@ -11657,7 +11657,7 @@
 #line 4193
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -11707,7 +11707,7 @@
 #line 4209
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4210
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4211
         .gender = TRAINER_GENDER_MALE,
 #line 4212
@@ -11717,7 +11717,7 @@
 #line 4214
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -11779,7 +11779,7 @@
 #line 4234
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4235
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4236
         .gender = TRAINER_GENDER_MALE,
 #line 4237
@@ -11789,7 +11789,7 @@
 #line 4239
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -11827,7 +11827,7 @@
 #line 4251
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 4252
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 4253
         .gender = TRAINER_GENDER_MALE,
 #line 4254
@@ -11837,7 +11837,7 @@
 #line 4256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -11887,7 +11887,7 @@
 #line 4272
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4273
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4274
         .gender = TRAINER_GENDER_MALE,
 #line 4275
@@ -11897,7 +11897,7 @@
 #line 4277
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -11939,7 +11939,7 @@
 #line 4289
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4290
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4291
         .gender = TRAINER_GENDER_MALE,
 #line 4292
@@ -11949,7 +11949,7 @@
 #line 4294
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -12005,7 +12005,7 @@
 #line 4310
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4311
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4312
         .gender = TRAINER_GENDER_MALE,
 #line 4313
@@ -12015,7 +12015,7 @@
 #line 4315
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -12057,7 +12057,7 @@
 #line 4327
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4328
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4329
         .gender = TRAINER_GENDER_MALE,
 #line 4330
@@ -12067,7 +12067,7 @@
 #line 4332
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12095,7 +12095,7 @@
 #line 4340
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4341
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4342
         .gender = TRAINER_GENDER_MALE,
 #line 4343
@@ -12105,7 +12105,7 @@
 #line 4345
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -12161,7 +12161,7 @@
 #line 4361
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4362
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4363
         .gender = TRAINER_GENDER_MALE,
 #line 4364
@@ -12171,7 +12171,7 @@
 #line 4366
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -12213,7 +12213,7 @@
 #line 4378
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4379
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4380
         .gender = TRAINER_GENDER_MALE,
 #line 4381
@@ -12223,7 +12223,7 @@
 #line 4383
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12251,7 +12251,7 @@
 #line 4391
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4392
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4393
         .gender = TRAINER_GENDER_MALE,
 #line 4394
@@ -12261,7 +12261,7 @@
 #line 4396
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -12317,7 +12317,7 @@
 #line 4412
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 4413
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 4414
         .gender = TRAINER_GENDER_MALE,
 #line 4415
@@ -12327,7 +12327,7 @@
 #line 4417
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -12383,7 +12383,7 @@
 #line 4433
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4434
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4435
         .gender = TRAINER_GENDER_MALE,
 #line 4436
@@ -12393,7 +12393,7 @@
 #line 4438
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12424,7 +12424,7 @@
 #line 4448
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4449
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4450
         .gender = TRAINER_GENDER_MALE,
 #line 4451
@@ -12434,7 +12434,7 @@
 #line 4453
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12465,7 +12465,7 @@
 #line 4463
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4464
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4465
         .gender = TRAINER_GENDER_MALE,
 #line 4466
@@ -12475,7 +12475,7 @@
 #line 4468
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -12506,7 +12506,7 @@
 #line 4478
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4479
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4480
         .gender = TRAINER_GENDER_MALE,
 #line 4481
@@ -12516,7 +12516,7 @@
 #line 4483
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -12564,7 +12564,7 @@
 #line 4499
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4500
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4501
         .gender = TRAINER_GENDER_MALE,
 #line 4502
@@ -12574,7 +12574,7 @@
 #line 4504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -12622,7 +12622,7 @@
 #line 4520
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4521
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4522
         .gender = TRAINER_GENDER_MALE,
 #line 4523
@@ -12632,7 +12632,7 @@
 #line 4525
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -12680,7 +12680,7 @@
 #line 4541
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4542
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4543
         .gender = TRAINER_GENDER_MALE,
 #line 4544
@@ -12690,7 +12690,7 @@
 #line 4546
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -12776,7 +12776,7 @@
 #line 4578
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4579
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4580
         .gender = TRAINER_GENDER_MALE,
 #line 4581
@@ -12786,7 +12786,7 @@
 #line 4583
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -12872,7 +12872,7 @@
 #line 4615
         .trainerClass = TRAINER_CLASS_RIVAL_EARLY_FRLG,
 #line 4616
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_EARLY_FRLG,
 #line 4617
         .gender = TRAINER_GENDER_MALE,
 #line 4618
@@ -12882,7 +12882,7 @@
 #line 4620
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_EARLY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -12968,7 +12968,7 @@
 #line 4652
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4653
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4654
         .gender = TRAINER_GENDER_MALE,
 #line 4655
@@ -12978,7 +12978,7 @@
 #line 4657
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13016,7 +13016,7 @@
 #line 4669
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4670
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4671
         .gender = TRAINER_GENDER_MALE,
 #line 4672
@@ -13026,7 +13026,7 @@
 #line 4674
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -13116,7 +13116,7 @@
 #line 4710
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4711
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4712
         .gender = TRAINER_GENDER_MALE,
 #line 4713
@@ -13126,7 +13126,7 @@
 #line 4715
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -13176,7 +13176,7 @@
 #line 4731
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4732
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4733
         .gender = TRAINER_GENDER_MALE,
 #line 4734
@@ -13186,7 +13186,7 @@
 #line 4736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13238,7 +13238,7 @@
 #line 4756
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4757
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4758
         .gender = TRAINER_GENDER_MALE,
 #line 4759
@@ -13248,7 +13248,7 @@
 #line 4761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -13274,7 +13274,7 @@
 #line 4769
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4770
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4771
         .gender = TRAINER_GENDER_MALE,
 #line 4772
@@ -13284,7 +13284,7 @@
 #line 4774
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -13374,7 +13374,7 @@
 #line 4810
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4811
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4812
         .gender = TRAINER_GENDER_MALE,
 #line 4813
@@ -13384,7 +13384,7 @@
 #line 4815
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -13493,7 +13493,7 @@
 #line 4859
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4860
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4861
         .gender = TRAINER_GENDER_MALE,
 #line 4862
@@ -13503,7 +13503,7 @@
 #line 4864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13541,7 +13541,7 @@
 #line 4876
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4877
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4878
         .gender = TRAINER_GENDER_MALE,
 #line 4879
@@ -13551,7 +13551,7 @@
 #line 4881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13589,7 +13589,7 @@
 #line 4893
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4894
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4895
         .gender = TRAINER_GENDER_MALE,
 #line 4896
@@ -13599,7 +13599,7 @@
 #line 4898
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -13670,7 +13670,7 @@
 #line 4926
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4927
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4928
         .gender = TRAINER_GENDER_MALE,
 #line 4929
@@ -13680,7 +13680,7 @@
 #line 4931
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13718,7 +13718,7 @@
 #line 4943
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4944
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4945
         .gender = TRAINER_GENDER_MALE,
 #line 4946
@@ -13728,7 +13728,7 @@
 #line 4948
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -13778,7 +13778,7 @@
 #line 4964
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 4965
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 4966
         .gender = TRAINER_GENDER_MALE,
 #line 4967
@@ -13788,7 +13788,7 @@
 #line 4969
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -13826,7 +13826,7 @@
 #line 4981
         .trainerClass = TRAINER_CLASS_BOSS_FRLG,
 #line 4982
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_GIOVANNI_FRLG,
 #line 4983
         .gender = TRAINER_GENDER_MALE,
 #line 4984
@@ -13836,7 +13836,7 @@
 #line 4986
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -13886,7 +13886,7 @@
 #line 5002
         .trainerClass = TRAINER_CLASS_BOSS_FRLG,
 #line 5003
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_GIOVANNI_FRLG,
 #line 5004
         .gender = TRAINER_GENDER_MALE,
 #line 5005
@@ -13896,7 +13896,7 @@
 #line 5007
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -13958,7 +13958,7 @@
 #line 5027
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 5028
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_GIOVANNI_FRLG,
 #line 5029
         .gender = TRAINER_GENDER_MALE,
 #line 5030
@@ -13970,7 +13970,7 @@
 #line 5033
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_GIOVANNI_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -14079,7 +14079,7 @@
 #line 5077
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5078
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5079
         .gender = TRAINER_GENDER_MALE,
 #line 5080
@@ -14089,7 +14089,7 @@
 #line 5082
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14127,7 +14127,7 @@
 #line 5094
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5095
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5096
         .gender = TRAINER_GENDER_MALE,
 #line 5097
@@ -14137,7 +14137,7 @@
 #line 5099
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -14187,7 +14187,7 @@
 #line 5115
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5116
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5117
         .gender = TRAINER_GENDER_MALE,
 #line 5118
@@ -14197,7 +14197,7 @@
 #line 5120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14235,7 +14235,7 @@
 #line 5132
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5133
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5134
         .gender = TRAINER_GENDER_MALE,
 #line 5135
@@ -14245,7 +14245,7 @@
 #line 5137
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14283,7 +14283,7 @@
 #line 5149
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5150
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5151
         .gender = TRAINER_GENDER_MALE,
 #line 5152
@@ -14293,7 +14293,7 @@
 #line 5154
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14331,7 +14331,7 @@
 #line 5166
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5167
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5168
         .gender = TRAINER_GENDER_MALE,
 #line 5169
@@ -14341,7 +14341,7 @@
 #line 5171
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14379,7 +14379,7 @@
 #line 5183
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5184
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5185
         .gender = TRAINER_GENDER_MALE,
 #line 5186
@@ -14389,7 +14389,7 @@
 #line 5188
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14427,7 +14427,7 @@
 #line 5200
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5201
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5202
         .gender = TRAINER_GENDER_MALE,
 #line 5203
@@ -14437,7 +14437,7 @@
 #line 5205
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14475,7 +14475,7 @@
 #line 5217
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5218
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5219
         .gender = TRAINER_GENDER_MALE,
 #line 5220
@@ -14485,7 +14485,7 @@
 #line 5222
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14523,7 +14523,7 @@
 #line 5234
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5235
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5236
         .gender = TRAINER_GENDER_MALE,
 #line 5237
@@ -14533,7 +14533,7 @@
 #line 5239
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -14602,7 +14602,7 @@
 #line 5265
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5266
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5267
         .gender = TRAINER_GENDER_MALE,
 #line 5268
@@ -14612,7 +14612,7 @@
 #line 5270
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -14674,7 +14674,7 @@
 #line 5290
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5291
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5292
         .gender = TRAINER_GENDER_MALE,
 #line 5293
@@ -14684,7 +14684,7 @@
 #line 5295
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14736,7 +14736,7 @@
 #line 5315
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5316
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5317
         .gender = TRAINER_GENDER_MALE,
 #line 5318
@@ -14746,7 +14746,7 @@
 #line 5320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -14854,7 +14854,7 @@
 #line 5363
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5364
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5365
         .gender = TRAINER_GENDER_MALE,
 #line 5366
@@ -14864,7 +14864,7 @@
 #line 5368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -14914,7 +14914,7 @@
 #line 5384
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5385
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5386
         .gender = TRAINER_GENDER_MALE,
 #line 5387
@@ -14924,7 +14924,7 @@
 #line 5389
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -14962,7 +14962,7 @@
 #line 5401
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5402
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5403
         .gender = TRAINER_GENDER_MALE,
 #line 5404
@@ -14972,7 +14972,7 @@
 #line 5406
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15022,7 +15022,7 @@
 #line 5422
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5423
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5424
         .gender = TRAINER_GENDER_MALE,
 #line 5425
@@ -15032,7 +15032,7 @@
 #line 5427
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15082,7 +15082,7 @@
 #line 5443
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5444
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5445
         .gender = TRAINER_GENDER_MALE,
 #line 5446
@@ -15092,7 +15092,7 @@
 #line 5448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15130,7 +15130,7 @@
 #line 5460
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5461
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5462
         .gender = TRAINER_GENDER_MALE,
 #line 5463
@@ -15140,7 +15140,7 @@
 #line 5465
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15190,7 +15190,7 @@
 #line 5481
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5482
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5483
         .gender = TRAINER_GENDER_MALE,
 #line 5484
@@ -15200,7 +15200,7 @@
 #line 5486
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15238,7 +15238,7 @@
 #line 5498
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5499
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5500
         .gender = TRAINER_GENDER_MALE,
 #line 5501
@@ -15248,7 +15248,7 @@
 #line 5503
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -15310,7 +15310,7 @@
 #line 5523
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5524
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5525
         .gender = TRAINER_GENDER_MALE,
 #line 5526
@@ -15320,7 +15320,7 @@
 #line 5528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15358,7 +15358,7 @@
 #line 5540
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5541
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5542
         .gender = TRAINER_GENDER_MALE,
 #line 5543
@@ -15368,7 +15368,7 @@
 #line 5545
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15406,7 +15406,7 @@
 #line 5557
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5558
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5559
         .gender = TRAINER_GENDER_MALE,
 #line 5560
@@ -15416,7 +15416,7 @@
 #line 5562
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -15490,7 +15490,7 @@
 #line 5586
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5587
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5588
         .gender = TRAINER_GENDER_MALE,
 #line 5589
@@ -15500,7 +15500,7 @@
 #line 5591
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15550,7 +15550,7 @@
 #line 5607
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5608
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5609
         .gender = TRAINER_GENDER_MALE,
 #line 5610
@@ -15560,7 +15560,7 @@
 #line 5612
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15598,7 +15598,7 @@
 #line 5624
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5625
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5626
         .gender = TRAINER_GENDER_MALE,
 #line 5627
@@ -15608,7 +15608,7 @@
 #line 5629
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15658,7 +15658,7 @@
 #line 5645
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5646
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5647
         .gender = TRAINER_GENDER_MALE,
 #line 5648
@@ -15668,7 +15668,7 @@
 #line 5650
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15694,7 +15694,7 @@
 #line 5658
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5659
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5660
         .gender = TRAINER_GENDER_MALE,
 #line 5661
@@ -15704,7 +15704,7 @@
 #line 5663
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -15730,7 +15730,7 @@
 #line 5671
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5672
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5673
         .gender = TRAINER_GENDER_MALE,
 #line 5674
@@ -15740,7 +15740,7 @@
 #line 5676
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15778,7 +15778,7 @@
 #line 5688
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5689
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5690
         .gender = TRAINER_GENDER_MALE,
 #line 5691
@@ -15788,7 +15788,7 @@
 #line 5693
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -15838,7 +15838,7 @@
 #line 5709
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5710
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5711
         .gender = TRAINER_GENDER_MALE,
 #line 5712
@@ -15848,7 +15848,7 @@
 #line 5714
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -15938,7 +15938,7 @@
 #line 5750
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5751
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5752
         .gender = TRAINER_GENDER_MALE,
 #line 5753
@@ -15948,7 +15948,7 @@
 #line 5755
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -15986,7 +15986,7 @@
 #line 5767
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5768
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5769
         .gender = TRAINER_GENDER_MALE,
 #line 5770
@@ -15996,7 +15996,7 @@
 #line 5772
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -16034,7 +16034,7 @@
 #line 5784
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5785
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5786
         .gender = TRAINER_GENDER_MALE,
 #line 5787
@@ -16044,7 +16044,7 @@
 #line 5789
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -16106,7 +16106,7 @@
 #line 5809
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5810
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5811
         .gender = TRAINER_GENDER_MALE,
 #line 5812
@@ -16116,7 +16116,7 @@
 #line 5814
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -16166,7 +16166,7 @@
 #line 5830
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5831
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5832
         .gender = TRAINER_GENDER_MALE,
 #line 5833
@@ -16176,7 +16176,7 @@
 #line 5835
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -16226,7 +16226,7 @@
 #line 5851
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5852
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5853
         .gender = TRAINER_GENDER_MALE,
 #line 5854
@@ -16236,7 +16236,7 @@
 #line 5856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -16286,7 +16286,7 @@
 #line 5872
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5873
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5874
         .gender = TRAINER_GENDER_MALE,
 #line 5875
@@ -16296,7 +16296,7 @@
 #line 5877
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -16322,7 +16322,7 @@
 #line 5885
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5886
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5887
         .gender = TRAINER_GENDER_MALE,
 #line 5888
@@ -16332,7 +16332,7 @@
 #line 5890
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -16406,7 +16406,7 @@
 #line 5914
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 5915
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 5916
         .gender = TRAINER_GENDER_MALE,
 #line 5917
@@ -16416,7 +16416,7 @@
 #line 5919
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -16466,7 +16466,7 @@
 #line 5935
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 5936
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 5937
         .gender = TRAINER_GENDER_MALE,
 #line 5938
@@ -16478,7 +16478,7 @@
 #line 5941
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -16587,7 +16587,7 @@
 #line 5985
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 5986
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 5987
         .gender = TRAINER_GENDER_MALE,
 #line 5988
@@ -16599,7 +16599,7 @@
 #line 5991
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -16708,7 +16708,7 @@
 #line 6035
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6036
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6037
         .gender = TRAINER_GENDER_MALE,
 #line 6038
@@ -16720,7 +16720,7 @@
 #line 6041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -16829,7 +16829,7 @@
 #line 6085
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6086
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6087
         .gender = TRAINER_GENDER_MALE,
 #line 6088
@@ -16841,7 +16841,7 @@
 #line 6091
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -16950,7 +16950,7 @@
 #line 6135
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6136
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6137
         .gender = TRAINER_GENDER_MALE,
 #line 6138
@@ -16962,7 +16962,7 @@
 #line 6141
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17071,7 +17071,7 @@
 #line 6185
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6186
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6187
         .gender = TRAINER_GENDER_MALE,
 #line 6188
@@ -17083,7 +17083,7 @@
 #line 6191
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17192,7 +17192,7 @@
 #line 6235
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6236
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6237
         .gender = TRAINER_GENDER_MALE,
 #line 6238
@@ -17204,7 +17204,7 @@
 #line 6241
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17313,7 +17313,7 @@
 #line 6285
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6286
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6287
         .gender = TRAINER_GENDER_MALE,
 #line 6288
@@ -17325,7 +17325,7 @@
 #line 6291
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17434,7 +17434,7 @@
 #line 6335
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6336
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6337
         .gender = TRAINER_GENDER_MALE,
 #line 6338
@@ -17446,7 +17446,7 @@
 #line 6341
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17555,7 +17555,7 @@
 #line 6385
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6386
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 6387
         .gender = TRAINER_GENDER_MALE,
 #line 6388
@@ -17567,7 +17567,7 @@
 #line 6391
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17676,7 +17676,7 @@
 #line 6435
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6436
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6437
         .gender = TRAINER_GENDER_MALE,
 #line 6438
@@ -17688,7 +17688,7 @@
 #line 6441
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17797,7 +17797,7 @@
 #line 6485
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6486
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6487
         .gender = TRAINER_GENDER_MALE,
 #line 6488
@@ -17809,7 +17809,7 @@
 #line 6491
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -17918,7 +17918,7 @@
 #line 6535
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6536
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6537
         .gender = TRAINER_GENDER_MALE,
 #line 6538
@@ -17930,7 +17930,7 @@
 #line 6541
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18039,7 +18039,7 @@
 #line 6585
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6586
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6587
         .gender = TRAINER_GENDER_MALE,
 #line 6588
@@ -18051,7 +18051,7 @@
 #line 6591
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18160,7 +18160,7 @@
 #line 6635
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6636
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6637
         .gender = TRAINER_GENDER_MALE,
 #line 6638
@@ -18172,7 +18172,7 @@
 #line 6641
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18281,7 +18281,7 @@
 #line 6685
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6686
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6687
         .gender = TRAINER_GENDER_MALE,
 #line 6688
@@ -18293,7 +18293,7 @@
 #line 6691
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18402,7 +18402,7 @@
 #line 6735
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6736
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6737
         .gender = TRAINER_GENDER_MALE,
 #line 6738
@@ -18414,7 +18414,7 @@
 #line 6741
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18523,7 +18523,7 @@
 #line 6785
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 6786
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 6787
         .gender = TRAINER_GENDER_MALE,
 #line 6788
@@ -18535,7 +18535,7 @@
 #line 6791
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18644,7 +18644,7 @@
 #line 6835
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 6836
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_LORELEI_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_LORELEI_FRLG,
 #line 6837
         .gender = TRAINER_GENDER_MALE,
 #line 6838
@@ -18658,7 +18658,7 @@
 #line 6842
         .mugshotColor = MUGSHOT_COLOR_PURPLE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_LORELEI_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18769,7 +18769,7 @@
 #line 6886
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 6887
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_BRUNO_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_BRUNO_FRLG,
 #line 6888
         .gender = TRAINER_GENDER_MALE,
 #line 6889
@@ -18783,7 +18783,7 @@
 #line 6893
         .mugshotColor = MUGSHOT_COLOR_GREEN,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_BRUNO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -18894,7 +18894,7 @@
 #line 6937
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 6938
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_AGATHA_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_AGATHA_FRLG,
 #line 6939
         .gender = TRAINER_GENDER_MALE,
 #line 6940
@@ -18908,7 +18908,7 @@
 #line 6944
         .mugshotColor = MUGSHOT_COLOR_PINK,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_AGATHA_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -19019,7 +19019,7 @@
 #line 6988
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 6989
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_LANCE_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_LANCE_FRLG,
 #line 6990
         .gender = TRAINER_GENDER_MALE,
 #line 6991
@@ -19033,7 +19033,7 @@
 #line 6995
         .mugshotColor = MUGSHOT_COLOR_BLUE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_LANCE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -19144,7 +19144,7 @@
 #line 7039
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7040
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_BROCK_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_BROCK_FRLG,
 #line 7041
         .gender = TRAINER_GENDER_MALE,
 #line 7042
@@ -19154,7 +19154,7 @@
 #line 7044
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_BROCK_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -19203,7 +19203,7 @@
 #line 7061
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7062
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_MISTY_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_MISTY_FRLG,
 #line 7063
         .gender = TRAINER_GENDER_MALE,
 #line 7064
@@ -19215,7 +19215,7 @@
 #line 7067
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_MISTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -19267,7 +19267,7 @@
 #line 7087
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7088
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_LT_SURGE_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_LT_SURGE_FRLG,
 #line 7089
         .gender = TRAINER_GENDER_MALE,
 #line 7090
@@ -19279,7 +19279,7 @@
 #line 7093
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_LT_SURGE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -19350,7 +19350,7 @@
 #line 7121
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7122
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_ERIKA_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_ERIKA_FRLG,
 #line 7123
         .gender = TRAINER_GENDER_MALE,
 #line 7124
@@ -19362,7 +19362,7 @@
 #line 7127
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_ERIKA_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -19433,7 +19433,7 @@
 #line 7155
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7156
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_KOGA_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_KOGA_FRLG,
 #line 7157
         .gender = TRAINER_GENDER_MALE,
 #line 7158
@@ -19445,7 +19445,7 @@
 #line 7161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_KOGA_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -19535,7 +19535,7 @@
 #line 7197
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7198
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_BLAINE_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_BLAINE_FRLG,
 #line 7199
         .gender = TRAINER_GENDER_MALE,
 #line 7200
@@ -19547,7 +19547,7 @@
 #line 7203
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_BLAINE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -19637,7 +19637,7 @@
 #line 7239
         .trainerClass = TRAINER_CLASS_LEADER_FRLG,
 #line 7240
-        .trainerPic = TRAINER_PIC_FRONT_LEADER_SABRINA_FRLG,
+        .trainerPic = TRAINER_PIC_LEADER_SABRINA_FRLG,
 #line 7241
         .gender = TRAINER_GENDER_MALE,
 #line 7242
@@ -19649,7 +19649,7 @@
 #line 7245
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LEADER_SABRINA_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -19739,7 +19739,7 @@
 #line 7281
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 7282
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 7283
         .gender = TRAINER_GENDER_MALE,
 #line 7284
@@ -19749,7 +19749,7 @@
 #line 7286
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -19787,7 +19787,7 @@
 #line 7298
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 7299
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 7300
         .gender = TRAINER_GENDER_MALE,
 #line 7301
@@ -19797,7 +19797,7 @@
 #line 7303
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -19835,7 +19835,7 @@
 #line 7315
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 7316
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 7317
         .gender = TRAINER_GENDER_MALE,
 #line 7318
@@ -19845,7 +19845,7 @@
 #line 7320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19871,7 +19871,7 @@
 #line 7328
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 7329
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 7330
         .gender = TRAINER_GENDER_MALE,
 #line 7331
@@ -19881,7 +19881,7 @@
 #line 7333
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -19907,7 +19907,7 @@
 #line 7341
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 7342
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 7343
         .gender = TRAINER_GENDER_MALE,
 #line 7344
@@ -19917,7 +19917,7 @@
 #line 7346
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -19955,7 +19955,7 @@
 #line 7358
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7359
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7360
         .gender = TRAINER_GENDER_MALE,
 #line 7361
@@ -19965,7 +19965,7 @@
 #line 7363
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -20027,7 +20027,7 @@
 #line 7383
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7384
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7385
         .gender = TRAINER_GENDER_MALE,
 #line 7386
@@ -20037,7 +20037,7 @@
 #line 7388
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -20099,7 +20099,7 @@
 #line 7408
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7409
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7410
         .gender = TRAINER_GENDER_MALE,
 #line 7411
@@ -20109,7 +20109,7 @@
 #line 7413
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -20171,7 +20171,7 @@
 #line 7433
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7434
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7435
         .gender = TRAINER_GENDER_MALE,
 #line 7436
@@ -20181,7 +20181,7 @@
 #line 7438
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20255,7 +20255,7 @@
 #line 7462
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7463
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7464
         .gender = TRAINER_GENDER_MALE,
 #line 7465
@@ -20265,7 +20265,7 @@
 #line 7467
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20339,7 +20339,7 @@
 #line 7491
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7492
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7493
         .gender = TRAINER_GENDER_MALE,
 #line 7494
@@ -20349,7 +20349,7 @@
 #line 7496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20423,7 +20423,7 @@
 #line 7520
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7521
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7522
         .gender = TRAINER_GENDER_MALE,
 #line 7523
@@ -20433,7 +20433,7 @@
 #line 7525
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20507,7 +20507,7 @@
 #line 7549
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7550
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7551
         .gender = TRAINER_GENDER_MALE,
 #line 7552
@@ -20517,7 +20517,7 @@
 #line 7554
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20591,7 +20591,7 @@
 #line 7578
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7579
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7580
         .gender = TRAINER_GENDER_MALE,
 #line 7581
@@ -20601,7 +20601,7 @@
 #line 7583
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -20675,7 +20675,7 @@
 #line 7607
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7608
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7609
         .gender = TRAINER_GENDER_MALE,
 #line 7610
@@ -20685,7 +20685,7 @@
 #line 7612
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -20813,7 +20813,7 @@
 #line 7664
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7665
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7666
         .gender = TRAINER_GENDER_MALE,
 #line 7667
@@ -20823,7 +20823,7 @@
 #line 7669
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -20951,7 +20951,7 @@
 #line 7721
         .trainerClass = TRAINER_CLASS_RIVAL_LATE_FRLG,
 #line 7722
-        .trainerPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .trainerPic = TRAINER_PIC_RIVAL_LATE_FRLG,
 #line 7723
         .gender = TRAINER_GENDER_MALE,
 #line 7724
@@ -20961,7 +20961,7 @@
 #line 7726
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RIVAL_LATE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -21089,7 +21089,7 @@
 #line 7778
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 7779
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 7780
         .gender = TRAINER_GENDER_MALE,
 #line 7781
@@ -21103,7 +21103,7 @@
 #line 7785
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -21233,7 +21233,7 @@
 #line 7837
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 7838
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 7839
         .gender = TRAINER_GENDER_MALE,
 #line 7840
@@ -21247,7 +21247,7 @@
 #line 7844
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -21377,7 +21377,7 @@
 #line 7896
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 7897
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 7898
         .gender = TRAINER_GENDER_MALE,
 #line 7899
@@ -21391,7 +21391,7 @@
 #line 7903
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -21521,7 +21521,7 @@
 #line 7955
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 7956
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 7957
         .gender = TRAINER_GENDER_MALE,
 #line 7958
@@ -21531,7 +21531,7 @@
 #line 7960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21557,7 +21557,7 @@
 #line 7968
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 7969
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 7970
         .gender = TRAINER_GENDER_MALE,
 #line 7971
@@ -21567,7 +21567,7 @@
 #line 7973
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21593,7 +21593,7 @@
 #line 7981
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 7982
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 7983
         .gender = TRAINER_GENDER_MALE,
 #line 7984
@@ -21603,7 +21603,7 @@
 #line 7986
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21629,7 +21629,7 @@
 #line 7994
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 7995
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 7996
         .gender = TRAINER_GENDER_MALE,
 #line 7997
@@ -21639,7 +21639,7 @@
 #line 7999
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21665,7 +21665,7 @@
 #line 8007
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8008
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8009
         .gender = TRAINER_GENDER_MALE,
 #line 8010
@@ -21675,7 +21675,7 @@
 #line 8012
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -21713,7 +21713,7 @@
 #line 8024
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8025
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8026
         .gender = TRAINER_GENDER_MALE,
 #line 8027
@@ -21723,7 +21723,7 @@
 #line 8029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21749,7 +21749,7 @@
 #line 8037
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8038
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8039
         .gender = TRAINER_GENDER_MALE,
 #line 8040
@@ -21759,7 +21759,7 @@
 #line 8042
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21785,7 +21785,7 @@
 #line 8050
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8051
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8052
         .gender = TRAINER_GENDER_MALE,
 #line 8053
@@ -21795,7 +21795,7 @@
 #line 8055
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21821,7 +21821,7 @@
 #line 8063
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8064
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8065
         .gender = TRAINER_GENDER_MALE,
 #line 8066
@@ -21831,7 +21831,7 @@
 #line 8068
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21857,7 +21857,7 @@
 #line 8076
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8077
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8078
         .gender = TRAINER_GENDER_MALE,
 #line 8079
@@ -21867,7 +21867,7 @@
 #line 8081
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21893,7 +21893,7 @@
 #line 8089
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8090
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8091
         .gender = TRAINER_GENDER_MALE,
 #line 8092
@@ -21903,7 +21903,7 @@
 #line 8094
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -21953,7 +21953,7 @@
 #line 8110
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8111
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8112
         .gender = TRAINER_GENDER_MALE,
 #line 8113
@@ -21963,7 +21963,7 @@
 #line 8115
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -21989,7 +21989,7 @@
 #line 8123
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8124
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8125
         .gender = TRAINER_GENDER_MALE,
 #line 8126
@@ -21999,7 +21999,7 @@
 #line 8128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22025,7 +22025,7 @@
 #line 8136
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8137
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8138
         .gender = TRAINER_GENDER_MALE,
 #line 8139
@@ -22035,7 +22035,7 @@
 #line 8141
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22073,7 +22073,7 @@
 #line 8153
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8154
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8155
         .gender = TRAINER_GENDER_MALE,
 #line 8156
@@ -22083,7 +22083,7 @@
 #line 8158
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -22109,7 +22109,7 @@
 #line 8166
         .trainerClass = TRAINER_CLASS_CHANNELER_FRLG,
 #line 8167
-        .trainerPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .trainerPic = TRAINER_PIC_CHANNELER_FRLG,
 #line 8168
         .gender = TRAINER_GENDER_MALE,
 #line 8169
@@ -22119,7 +22119,7 @@
 #line 8171
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHANNELER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -22169,7 +22169,7 @@
 #line 8187
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 8188
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 8189
         .gender = TRAINER_GENDER_MALE,
 #line 8190
@@ -22179,7 +22179,7 @@
 #line 8192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22217,7 +22217,7 @@
 #line 8204
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8205
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8206
         .gender = TRAINER_GENDER_MALE,
 #line 8207
@@ -22227,7 +22227,7 @@
 #line 8209
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -22277,7 +22277,7 @@
 #line 8225
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8226
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8227
         .gender = TRAINER_GENDER_MALE,
 #line 8228
@@ -22287,7 +22287,7 @@
 #line 8230
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -22361,7 +22361,7 @@
 #line 8254
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8255
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8256
         .gender = TRAINER_GENDER_MALE,
 #line 8257
@@ -22371,7 +22371,7 @@
 #line 8259
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22409,7 +22409,7 @@
 #line 8271
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8272
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8273
         .gender = TRAINER_GENDER_MALE,
 #line 8274
@@ -22419,7 +22419,7 @@
 #line 8276
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -22481,7 +22481,7 @@
 #line 8296
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 8297
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 8298
         .gender = TRAINER_GENDER_MALE,
 #line 8299
@@ -22491,7 +22491,7 @@
 #line 8301
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -22562,7 +22562,7 @@
 #line 8329
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 8330
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 8331
         .gender = TRAINER_GENDER_MALE,
 #line 8332
@@ -22572,7 +22572,7 @@
 #line 8334
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22610,7 +22610,7 @@
 #line 8346
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8347
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8348
         .gender = TRAINER_GENDER_MALE,
 #line 8349
@@ -22620,7 +22620,7 @@
 #line 8351
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22658,7 +22658,7 @@
 #line 8363
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8364
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8365
         .gender = TRAINER_GENDER_MALE,
 #line 8366
@@ -22668,7 +22668,7 @@
 #line 8368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -22718,7 +22718,7 @@
 #line 8384
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8385
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8386
         .gender = TRAINER_GENDER_MALE,
 #line 8387
@@ -22728,7 +22728,7 @@
 #line 8389
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -22778,7 +22778,7 @@
 #line 8405
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8406
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8407
         .gender = TRAINER_GENDER_MALE,
 #line 8408
@@ -22788,7 +22788,7 @@
 #line 8410
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -22850,7 +22850,7 @@
 #line 8430
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8431
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8432
         .gender = TRAINER_GENDER_MALE,
 #line 8433
@@ -22860,7 +22860,7 @@
 #line 8435
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22898,7 +22898,7 @@
 #line 8447
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 8448
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 8449
         .gender = TRAINER_GENDER_MALE,
 #line 8450
@@ -22908,7 +22908,7 @@
 #line 8452
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -22946,7 +22946,7 @@
 #line 8464
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8465
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8466
         .gender = TRAINER_GENDER_MALE,
 #line 8467
@@ -22956,7 +22956,7 @@
 #line 8469
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -23006,7 +23006,7 @@
 #line 8485
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8486
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8487
         .gender = TRAINER_GENDER_MALE,
 #line 8488
@@ -23016,7 +23016,7 @@
 #line 8490
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -23066,7 +23066,7 @@
 #line 8506
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8507
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8508
         .gender = TRAINER_GENDER_MALE,
 #line 8509
@@ -23076,7 +23076,7 @@
 #line 8511
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23114,7 +23114,7 @@
 #line 8523
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 8524
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 8525
         .gender = TRAINER_GENDER_MALE,
 #line 8526
@@ -23124,7 +23124,7 @@
 #line 8528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23150,7 +23150,7 @@
 #line 8536
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 8537
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 8538
         .gender = TRAINER_GENDER_MALE,
 #line 8539
@@ -23160,7 +23160,7 @@
 #line 8541
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -23186,7 +23186,7 @@
 #line 8549
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 8550
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 8551
         .gender = TRAINER_GENDER_MALE,
 #line 8552
@@ -23196,7 +23196,7 @@
 #line 8554
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23234,7 +23234,7 @@
 #line 8566
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 8567
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 8568
         .gender = TRAINER_GENDER_MALE,
 #line 8569
@@ -23244,7 +23244,7 @@
 #line 8571
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23282,7 +23282,7 @@
 #line 8583
         .trainerClass = TRAINER_CLASS_COOL_COUPLE_FRLG,
 #line 8584
-        .trainerPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_COOL_COUPLE_FRLG,
 #line 8585
         .gender = TRAINER_GENDER_MALE,
 #line 8586
@@ -23292,7 +23292,7 @@
 #line 8588
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23344,7 +23344,7 @@
 #line 8608
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE_FRLG,
 #line 8609
-        .trainerPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNG_COUPLE_FRLG,
 #line 8610
         .gender = TRAINER_GENDER_MALE,
 #line 8611
@@ -23354,7 +23354,7 @@
 #line 8613
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23392,7 +23392,7 @@
 #line 8625
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 8626
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 8627
         .gender = TRAINER_GENDER_MALE,
 #line 8628
@@ -23402,7 +23402,7 @@
 #line 8630
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23440,7 +23440,7 @@
 #line 8642
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 8643
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 8644
         .gender = TRAINER_GENDER_MALE,
 #line 8645
@@ -23450,7 +23450,7 @@
 #line 8647
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23492,7 +23492,7 @@
 #line 8659
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE_FRLG,
 #line 8660
-        .trainerPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNG_COUPLE_FRLG,
 #line 8661
         .gender = TRAINER_GENDER_MALE,
 #line 8662
@@ -23502,7 +23502,7 @@
 #line 8664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23540,7 +23540,7 @@
 #line 8676
         .trainerClass = TRAINER_CLASS_SIS_AND_BRO_FRLG,
 #line 8677
-        .trainerPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .trainerPic = TRAINER_PIC_SIS_AND_BRO_FRLG,
 #line 8678
         .gender = TRAINER_GENDER_MALE,
 #line 8679
@@ -23550,7 +23550,7 @@
 #line 8681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23588,7 +23588,7 @@
 #line 8693
         .trainerClass = TRAINER_CLASS_SIS_AND_BRO_FRLG,
 #line 8694
-        .trainerPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .trainerPic = TRAINER_PIC_SIS_AND_BRO_FRLG,
 #line 8695
         .gender = TRAINER_GENDER_MALE,
 #line 8696
@@ -23598,7 +23598,7 @@
 #line 8698
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23636,7 +23636,7 @@
 #line 8710
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8711
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8712
         .gender = TRAINER_GENDER_MALE,
 #line 8713
@@ -23646,7 +23646,7 @@
 #line 8715
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23684,7 +23684,7 @@
 #line 8727
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8728
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8729
         .gender = TRAINER_GENDER_MALE,
 #line 8730
@@ -23694,7 +23694,7 @@
 #line 8732
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23732,7 +23732,7 @@
 #line 8744
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8745
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8746
         .gender = TRAINER_GENDER_MALE,
 #line 8747
@@ -23742,7 +23742,7 @@
 #line 8749
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23780,7 +23780,7 @@
 #line 8761
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 8762
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 8763
         .gender = TRAINER_GENDER_MALE,
 #line 8764
@@ -23790,7 +23790,7 @@
 #line 8766
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23828,7 +23828,7 @@
 #line 8778
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 8779
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 8780
         .gender = TRAINER_GENDER_MALE,
 #line 8781
@@ -23838,7 +23838,7 @@
 #line 8783
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -23876,7 +23876,7 @@
 #line 8795
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8796
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8797
         .gender = TRAINER_GENDER_MALE,
 #line 8798
@@ -23886,7 +23886,7 @@
 #line 8800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -23936,7 +23936,7 @@
 #line 8816
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8817
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8818
         .gender = TRAINER_GENDER_MALE,
 #line 8819
@@ -23946,7 +23946,7 @@
 #line 8821
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -23996,7 +23996,7 @@
 #line 8837
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8838
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8839
         .gender = TRAINER_GENDER_MALE,
 #line 8840
@@ -24006,7 +24006,7 @@
 #line 8842
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -24056,7 +24056,7 @@
 #line 8858
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8859
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8860
         .gender = TRAINER_GENDER_MALE,
 #line 8861
@@ -24066,7 +24066,7 @@
 #line 8863
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24104,7 +24104,7 @@
 #line 8875
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 8876
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 8877
         .gender = TRAINER_GENDER_MALE,
 #line 8878
@@ -24114,7 +24114,7 @@
 #line 8880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24152,7 +24152,7 @@
 #line 8892
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 8893
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 8894
         .gender = TRAINER_GENDER_MALE,
 #line 8895
@@ -24162,7 +24162,7 @@
 #line 8897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24200,7 +24200,7 @@
 #line 8909
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 8910
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 8911
         .gender = TRAINER_GENDER_MALE,
 #line 8912
@@ -24210,7 +24210,7 @@
 #line 8914
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24248,7 +24248,7 @@
 #line 8926
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 8927
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 8928
         .gender = TRAINER_GENDER_MALE,
 #line 8929
@@ -24258,7 +24258,7 @@
 #line 8931
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24296,7 +24296,7 @@
 #line 8943
         .trainerClass = TRAINER_CLASS_PKMN_PROF_FRLG,
 #line 8944
-        .trainerPic = TRAINER_PIC_FRONT_PROFESSOR_OAK_FRLG,
+        .trainerPic = TRAINER_PIC_PROFESSOR_OAK_FRLG,
 #line 8945
         .gender = TRAINER_GENDER_MALE,
 #line 8946
@@ -24306,7 +24306,7 @@
 #line 8948
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PROFESSOR_OAK_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24332,7 +24332,7 @@
 #line 8956
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 8957
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_F_FRLG,
 #line 8958
         .gender = TRAINER_GENDER_MALE,
 #line 8959
@@ -24342,7 +24342,7 @@
 #line 8961
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24380,7 +24380,7 @@
 #line 8973
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 8974
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_F_FRLG,
 #line 8975
         .gender = TRAINER_GENDER_MALE,
 #line 8976
@@ -24390,7 +24390,7 @@
 #line 8978
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -24461,7 +24461,7 @@
 #line 9006
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 9007
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 9008
         .gender = TRAINER_GENDER_MALE,
 #line 9009
@@ -24471,7 +24471,7 @@
 #line 9011
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24513,7 +24513,7 @@
 #line 9023
         .trainerClass = TRAINER_CLASS_TUBER_FRLG,
 #line 9024
-        .trainerPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .trainerPic = TRAINER_PIC_TUBER_F_FRLG,
 #line 9025
         .gender = TRAINER_GENDER_MALE,
 #line 9026
@@ -24523,7 +24523,7 @@
 #line 9028
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -24573,7 +24573,7 @@
 #line 9044
         .trainerClass = TRAINER_CLASS_PKMN_BREEDER_FRLG,
 #line 9045
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_BREEDER_FRLG,
 #line 9046
         .gender = TRAINER_GENDER_MALE,
 #line 9047
@@ -24583,7 +24583,7 @@
 #line 9049
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -24633,7 +24633,7 @@
 #line 9065
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 9066
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M_FRLG,
 #line 9067
         .gender = TRAINER_GENDER_MALE,
 #line 9068
@@ -24645,7 +24645,7 @@
 #line 9071
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24697,7 +24697,7 @@
 #line 9091
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 9092
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F_FRLG,
 #line 9093
         .gender = TRAINER_GENDER_MALE,
 #line 9094
@@ -24709,7 +24709,7 @@
 #line 9097
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24761,7 +24761,7 @@
 #line 9117
         .trainerClass = TRAINER_CLASS_AROMA_LADY_FRLG,
 #line 9118
-        .trainerPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_AROMA_LADY_FRLG,
 #line 9119
         .gender = TRAINER_GENDER_MALE,
 #line 9120
@@ -24771,7 +24771,7 @@
 #line 9122
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24809,7 +24809,7 @@
 #line 9134
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 9135
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 9136
         .gender = TRAINER_GENDER_MALE,
 #line 9137
@@ -24819,7 +24819,7 @@
 #line 9139
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -24869,7 +24869,7 @@
 #line 9155
         .trainerClass = TRAINER_CLASS_LADY_FRLG,
 #line 9156
-        .trainerPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_LADY_FRLG,
 #line 9157
         .gender = TRAINER_GENDER_MALE,
 #line 9158
@@ -24881,7 +24881,7 @@
 #line 9161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -24923,7 +24923,7 @@
 #line 9173
         .trainerClass = TRAINER_CLASS_PAINTER_FRLG,
 #line 9174
-        .trainerPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .trainerPic = TRAINER_PIC_PAINTER_FRLG,
 #line 9175
         .gender = TRAINER_GENDER_MALE,
 #line 9176
@@ -24933,7 +24933,7 @@
 #line 9178
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -24966,7 +24966,7 @@
 #line 9190
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 9191
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 9192
         .gender = TRAINER_GENDER_MALE,
 #line 9193
@@ -24976,7 +24976,7 @@
 #line 9195
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25028,7 +25028,7 @@
 #line 9215
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 9216
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 9217
         .gender = TRAINER_GENDER_MALE,
 #line 9218
@@ -25038,7 +25038,7 @@
 #line 9220
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25071,7 +25071,7 @@
 #line 9232
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 9233
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 9234
         .gender = TRAINER_GENDER_MALE,
 #line 9235
@@ -25081,7 +25081,7 @@
 #line 9237
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -25107,7 +25107,7 @@
 #line 9245
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 9246
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 9247
         .gender = TRAINER_GENDER_MALE,
 #line 9248
@@ -25117,7 +25117,7 @@
 #line 9250
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25155,7 +25155,7 @@
 #line 9262
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 9263
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 9264
         .gender = TRAINER_GENDER_MALE,
 #line 9265
@@ -25165,7 +25165,7 @@
 #line 9267
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25215,7 +25215,7 @@
 #line 9283
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 9284
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 9285
         .gender = TRAINER_GENDER_MALE,
 #line 9286
@@ -25225,7 +25225,7 @@
 #line 9288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25263,7 +25263,7 @@
 #line 9300
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 9301
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 9302
         .gender = TRAINER_GENDER_MALE,
 #line 9303
@@ -25273,7 +25273,7 @@
 #line 9305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25323,7 +25323,7 @@
 #line 9321
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 9322
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 9323
         .gender = TRAINER_GENDER_MALE,
 #line 9324
@@ -25333,7 +25333,7 @@
 #line 9326
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25404,7 +25404,7 @@
 #line 9354
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 9355
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 9356
         .gender = TRAINER_GENDER_MALE,
 #line 9357
@@ -25414,7 +25414,7 @@
 #line 9359
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25452,7 +25452,7 @@
 #line 9371
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9372
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9373
         .gender = TRAINER_GENDER_MALE,
 #line 9374
@@ -25462,7 +25462,7 @@
 #line 9376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25500,7 +25500,7 @@
 #line 9388
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9389
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9390
         .gender = TRAINER_GENDER_MALE,
 #line 9391
@@ -25510,7 +25510,7 @@
 #line 9393
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -25572,7 +25572,7 @@
 #line 9413
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9414
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9415
         .gender = TRAINER_GENDER_MALE,
 #line 9416
@@ -25582,7 +25582,7 @@
 #line 9418
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25632,7 +25632,7 @@
 #line 9434
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9435
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9436
         .gender = TRAINER_GENDER_MALE,
 #line 9437
@@ -25642,7 +25642,7 @@
 #line 9439
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25692,7 +25692,7 @@
 #line 9455
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9456
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9457
         .gender = TRAINER_GENDER_MALE,
 #line 9458
@@ -25702,7 +25702,7 @@
 #line 9460
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25752,7 +25752,7 @@
 #line 9476
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9477
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9478
         .gender = TRAINER_GENDER_MALE,
 #line 9479
@@ -25762,7 +25762,7 @@
 #line 9481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -25800,7 +25800,7 @@
 #line 9493
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9494
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_F_FRLG,
 #line 9495
         .gender = TRAINER_GENDER_MALE,
 #line 9496
@@ -25812,7 +25812,7 @@
 #line 9499
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25883,7 +25883,7 @@
 #line 9527
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 9528
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 9529
         .gender = TRAINER_GENDER_MALE,
 #line 9530
@@ -25895,7 +25895,7 @@
 #line 9533
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -25966,7 +25966,7 @@
 #line 9561
         .trainerClass = TRAINER_CLASS_SCIENTIST_FRLG,
 #line 9562
-        .trainerPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .trainerPic = TRAINER_PIC_SCIENTIST_FRLG,
 #line 9563
         .gender = TRAINER_GENDER_MALE,
 #line 9564
@@ -25976,7 +25976,7 @@
 #line 9566
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SCIENTIST_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -26085,7 +26085,7 @@
 #line 9610
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 9611
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 9612
         .gender = TRAINER_GENDER_MALE,
 #line 9613
@@ -26095,7 +26095,7 @@
 #line 9615
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -26145,7 +26145,7 @@
 #line 9631
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 9632
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 9633
         .gender = TRAINER_GENDER_MALE,
 #line 9634
@@ -26155,7 +26155,7 @@
 #line 9636
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26193,7 +26193,7 @@
 #line 9648
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 9649
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 9650
         .gender = TRAINER_GENDER_MALE,
 #line 9651
@@ -26203,7 +26203,7 @@
 #line 9653
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -26253,7 +26253,7 @@
 #line 9669
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 9670
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 9671
         .gender = TRAINER_GENDER_MALE,
 #line 9672
@@ -26263,7 +26263,7 @@
 #line 9674
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26289,7 +26289,7 @@
 #line 9682
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 9683
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 9684
         .gender = TRAINER_GENDER_MALE,
 #line 9685
@@ -26299,7 +26299,7 @@
 #line 9687
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -26349,7 +26349,7 @@
 #line 9703
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 9704
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 9705
         .gender = TRAINER_GENDER_MALE,
 #line 9706
@@ -26359,7 +26359,7 @@
 #line 9708
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -26433,7 +26433,7 @@
 #line 9732
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 9733
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 9734
         .gender = TRAINER_GENDER_MALE,
 #line 9735
@@ -26443,7 +26443,7 @@
 #line 9737
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26485,7 +26485,7 @@
 #line 9749
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 9750
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 9751
         .gender = TRAINER_GENDER_MALE,
 #line 9752
@@ -26495,7 +26495,7 @@
 #line 9754
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26537,7 +26537,7 @@
 #line 9766
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 9767
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 9768
         .gender = TRAINER_GENDER_MALE,
 #line 9769
@@ -26547,7 +26547,7 @@
 #line 9771
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26589,7 +26589,7 @@
 #line 9783
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 9784
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 9785
         .gender = TRAINER_GENDER_MALE,
 #line 9786
@@ -26599,7 +26599,7 @@
 #line 9788
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -26649,7 +26649,7 @@
 #line 9804
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 9805
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 9806
         .gender = TRAINER_GENDER_MALE,
 #line 9807
@@ -26659,7 +26659,7 @@
 #line 9809
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -26721,7 +26721,7 @@
 #line 9829
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 9830
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 9831
         .gender = TRAINER_GENDER_MALE,
 #line 9832
@@ -26731,7 +26731,7 @@
 #line 9834
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26773,7 +26773,7 @@
 #line 9846
         .trainerClass = TRAINER_CLASS_AROMA_LADY_FRLG,
 #line 9847
-        .trainerPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_AROMA_LADY_FRLG,
 #line 9848
         .gender = TRAINER_GENDER_MALE,
 #line 9849
@@ -26783,7 +26783,7 @@
 #line 9851
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -26833,7 +26833,7 @@
 #line 9867
         .trainerClass = TRAINER_CLASS_TUBER_FRLG,
 #line 9868
-        .trainerPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .trainerPic = TRAINER_PIC_TUBER_F_FRLG,
 #line 9869
         .gender = TRAINER_GENDER_MALE,
 #line 9870
@@ -26843,7 +26843,7 @@
 #line 9872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -26905,7 +26905,7 @@
 #line 9892
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 9893
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 9894
         .gender = TRAINER_GENDER_MALE,
 #line 9895
@@ -26915,7 +26915,7 @@
 #line 9897
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -26953,7 +26953,7 @@
 #line 9909
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 9910
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 9911
         .gender = TRAINER_GENDER_MALE,
 #line 9912
@@ -26963,7 +26963,7 @@
 #line 9914
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -26989,7 +26989,7 @@
 #line 9922
         .trainerClass = TRAINER_CLASS_PAINTER_FRLG,
 #line 9923
-        .trainerPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .trainerPic = TRAINER_PIC_PAINTER_FRLG,
 #line 9924
         .gender = TRAINER_GENDER_MALE,
 #line 9925
@@ -26999,7 +26999,7 @@
 #line 9927
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27032,7 +27032,7 @@
 #line 9939
         .trainerClass = TRAINER_CLASS_PAINTER_FRLG,
 #line 9940
-        .trainerPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .trainerPic = TRAINER_PIC_PAINTER_FRLG,
 #line 9941
         .gender = TRAINER_GENDER_MALE,
 #line 9942
@@ -27042,7 +27042,7 @@
 #line 9944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27075,7 +27075,7 @@
 #line 9956
         .trainerClass = TRAINER_CLASS_LADY_FRLG,
 #line 9957
-        .trainerPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_LADY_FRLG,
 #line 9958
         .gender = TRAINER_GENDER_MALE,
 #line 9959
@@ -27087,7 +27087,7 @@
 #line 9962
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -27143,7 +27143,7 @@
 #line 9978
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 9979
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 9980
         .gender = TRAINER_GENDER_MALE,
 #line 9981
@@ -27153,7 +27153,7 @@
 #line 9983
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27191,7 +27191,7 @@
 #line 9995
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 9996
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 9997
         .gender = TRAINER_GENDER_MALE,
 #line 9998
@@ -27201,7 +27201,7 @@
 #line 10000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -27251,7 +27251,7 @@
 #line 10016
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 10017
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 10018
         .gender = TRAINER_GENDER_MALE,
 #line 10019
@@ -27261,7 +27261,7 @@
 #line 10021
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -27311,7 +27311,7 @@
 #line 10037
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 10038
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_M_FRLG,
 #line 10039
         .gender = TRAINER_GENDER_MALE,
 #line 10040
@@ -27321,7 +27321,7 @@
 #line 10042
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27373,7 +27373,7 @@
 #line 10062
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET_FRLG,
 #line 10063
-        .trainerPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKET_GRUNT_F_FRLG,
 #line 10064
         .gender = TRAINER_GENDER_MALE,
 #line 10065
@@ -27383,7 +27383,7 @@
 #line 10067
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKET_GRUNT_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -27433,7 +27433,7 @@
 #line 10083
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 10084
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 10085
         .gender = TRAINER_GENDER_MALE,
 #line 10086
@@ -27443,7 +27443,7 @@
 #line 10088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27481,7 +27481,7 @@
 #line 10100
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 10101
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 10102
         .gender = TRAINER_GENDER_MALE,
 #line 10103
@@ -27491,7 +27491,7 @@
 #line 10105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27529,7 +27529,7 @@
 #line 10117
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 10118
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 10119
         .gender = TRAINER_GENDER_MALE,
 #line 10120
@@ -27539,7 +27539,7 @@
 #line 10122
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27577,7 +27577,7 @@
 #line 10134
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 10135
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 10136
         .gender = TRAINER_GENDER_MALE,
 #line 10137
@@ -27587,7 +27587,7 @@
 #line 10139
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27625,7 +27625,7 @@
 #line 10151
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 10152
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 10153
         .gender = TRAINER_GENDER_MALE,
 #line 10154
@@ -27635,7 +27635,7 @@
 #line 10156
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27673,7 +27673,7 @@
 #line 10168
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 10169
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 10170
         .gender = TRAINER_GENDER_MALE,
 #line 10171
@@ -27683,7 +27683,7 @@
 #line 10173
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27709,7 +27709,7 @@
 #line 10181
         .trainerClass = TRAINER_CLASS_SIS_AND_BRO_FRLG,
 #line 10182
-        .trainerPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .trainerPic = TRAINER_PIC_SIS_AND_BRO_FRLG,
 #line 10183
         .gender = TRAINER_GENDER_MALE,
 #line 10184
@@ -27719,7 +27719,7 @@
 #line 10186
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27757,7 +27757,7 @@
 #line 10198
         .trainerClass = TRAINER_CLASS_AROMA_LADY_FRLG,
 #line 10199
-        .trainerPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_AROMA_LADY_FRLG,
 #line 10200
         .gender = TRAINER_GENDER_MALE,
 #line 10201
@@ -27767,7 +27767,7 @@
 #line 10203
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27805,7 +27805,7 @@
 #line 10215
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 10216
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 10217
         .gender = TRAINER_GENDER_MALE,
 #line 10218
@@ -27815,7 +27815,7 @@
 #line 10220
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -27841,7 +27841,7 @@
 #line 10228
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 10229
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 10230
         .gender = TRAINER_GENDER_MALE,
 #line 10231
@@ -27851,7 +27851,7 @@
 #line 10233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27889,7 +27889,7 @@
 #line 10245
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 10246
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 10247
         .gender = TRAINER_GENDER_MALE,
 #line 10248
@@ -27899,7 +27899,7 @@
 #line 10250
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27937,7 +27937,7 @@
 #line 10262
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 10263
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 10264
         .gender = TRAINER_GENDER_MALE,
 #line 10265
@@ -27947,7 +27947,7 @@
 #line 10267
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -27985,7 +27985,7 @@
 #line 10279
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 10280
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 10281
         .gender = TRAINER_GENDER_MALE,
 #line 10282
@@ -27995,7 +27995,7 @@
 #line 10284
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28021,7 +28021,7 @@
 #line 10292
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 10293
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 10294
         .gender = TRAINER_GENDER_MALE,
 #line 10295
@@ -28031,7 +28031,7 @@
 #line 10297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28069,7 +28069,7 @@
 #line 10309
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 10310
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 10311
         .gender = TRAINER_GENDER_MALE,
 #line 10312
@@ -28079,7 +28079,7 @@
 #line 10314
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28105,7 +28105,7 @@
 #line 10322
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 10323
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 10324
         .gender = TRAINER_GENDER_MALE,
 #line 10325
@@ -28115,7 +28115,7 @@
 #line 10327
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28153,7 +28153,7 @@
 #line 10339
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 10340
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 10341
         .gender = TRAINER_GENDER_MALE,
 #line 10342
@@ -28163,7 +28163,7 @@
 #line 10344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28196,7 +28196,7 @@
 #line 10356
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 10357
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_F_FRLG,
 #line 10358
         .gender = TRAINER_GENDER_MALE,
 #line 10359
@@ -28206,7 +28206,7 @@
 #line 10361
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -28277,7 +28277,7 @@
 #line 10389
         .trainerClass = TRAINER_CLASS_AROMA_LADY_FRLG,
 #line 10390
-        .trainerPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_AROMA_LADY_FRLG,
 #line 10391
         .gender = TRAINER_GENDER_MALE,
 #line 10392
@@ -28287,7 +28287,7 @@
 #line 10394
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_AROMA_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28325,7 +28325,7 @@
 #line 10406
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE_FRLG,
 #line 10407
-        .trainerPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNG_COUPLE_FRLG,
 #line 10408
         .gender = TRAINER_GENDER_MALE,
 #line 10409
@@ -28335,7 +28335,7 @@
 #line 10411
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28373,7 +28373,7 @@
 #line 10423
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 10424
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 10425
         .gender = TRAINER_GENDER_MALE,
 #line 10426
@@ -28383,7 +28383,7 @@
 #line 10428
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -28473,7 +28473,7 @@
 #line 10464
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 10465
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 10466
         .gender = TRAINER_GENDER_MALE,
 #line 10467
@@ -28483,7 +28483,7 @@
 #line 10469
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -28539,7 +28539,7 @@
 #line 10485
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 10486
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 10487
         .gender = TRAINER_GENDER_MALE,
 #line 10488
@@ -28549,7 +28549,7 @@
 #line 10490
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28591,7 +28591,7 @@
 #line 10502
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 10503
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 10504
         .gender = TRAINER_GENDER_MALE,
 #line 10505
@@ -28601,7 +28601,7 @@
 #line 10507
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -28651,7 +28651,7 @@
 #line 10523
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 10524
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 10525
         .gender = TRAINER_GENDER_MALE,
 #line 10526
@@ -28661,7 +28661,7 @@
 #line 10528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28699,7 +28699,7 @@
 #line 10540
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 10541
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M_FRLG,
 #line 10542
         .gender = TRAINER_GENDER_MALE,
 #line 10543
@@ -28711,7 +28711,7 @@
 #line 10546
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -28763,7 +28763,7 @@
 #line 10566
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 10567
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M_FRLG,
 #line 10568
         .gender = TRAINER_GENDER_MALE,
 #line 10569
@@ -28775,7 +28775,7 @@
 #line 10572
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -28846,7 +28846,7 @@
 #line 10600
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 10601
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F_FRLG,
 #line 10602
         .gender = TRAINER_GENDER_MALE,
 #line 10603
@@ -28858,7 +28858,7 @@
 #line 10606
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -28908,7 +28908,7 @@
 #line 10622
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 10623
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F_FRLG,
 #line 10624
         .gender = TRAINER_GENDER_MALE,
 #line 10625
@@ -28920,7 +28920,7 @@
 #line 10628
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -28953,7 +28953,7 @@
 #line 10640
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 10641
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 10642
         .gender = TRAINER_GENDER_MALE,
 #line 10643
@@ -28965,7 +28965,7 @@
 #line 10646
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -29074,7 +29074,7 @@
 #line 10690
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 10691
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 10692
         .gender = TRAINER_GENDER_MALE,
 #line 10693
@@ -29086,7 +29086,7 @@
 #line 10696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -29195,7 +29195,7 @@
 #line 10740
         .trainerClass = TRAINER_CLASS_COOL_COUPLE_FRLG,
 #line 10741
-        .trainerPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_COOL_COUPLE_FRLG,
 #line 10742
         .gender = TRAINER_GENDER_MALE,
 #line 10743
@@ -29207,7 +29207,7 @@
 #line 10746
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -29259,7 +29259,7 @@
 #line 10766
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 10767
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 10768
         .gender = TRAINER_GENDER_MALE,
 #line 10769
@@ -29269,7 +29269,7 @@
 #line 10771
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29295,7 +29295,7 @@
 #line 10779
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 10780
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 10781
         .gender = TRAINER_GENDER_MALE,
 #line 10782
@@ -29305,7 +29305,7 @@
 #line 10784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -29376,7 +29376,7 @@
 #line 10812
         .trainerClass = TRAINER_CLASS_PAINTER_FRLG,
 #line 10813
-        .trainerPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .trainerPic = TRAINER_PIC_PAINTER_FRLG,
 #line 10814
         .gender = TRAINER_GENDER_MALE,
 #line 10815
@@ -29386,7 +29386,7 @@
 #line 10817
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29419,7 +29419,7 @@
 #line 10829
         .trainerClass = TRAINER_CLASS_GENTLEMAN_FRLG,
 #line 10830
-        .trainerPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .trainerPic = TRAINER_PIC_GENTLEMAN_FRLG,
 #line 10831
         .gender = TRAINER_GENDER_MALE,
 #line 10832
@@ -29429,7 +29429,7 @@
 #line 10834
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GENTLEMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -29467,7 +29467,7 @@
 #line 10846
         .trainerClass = TRAINER_CLASS_LADY_FRLG,
 #line 10847
-        .trainerPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .trainerPic = TRAINER_PIC_LADY_FRLG,
 #line 10848
         .gender = TRAINER_GENDER_MALE,
 #line 10849
@@ -29479,7 +29479,7 @@
 #line 10852
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LADY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -29535,7 +29535,7 @@
 #line 10872
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 10873
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 10874
         .gender = TRAINER_GENDER_MALE,
 #line 10875
@@ -29545,7 +29545,7 @@
 #line 10877
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -29595,7 +29595,7 @@
 #line 10893
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 10894
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_F_FRLG,
 #line 10895
         .gender = TRAINER_GENDER_MALE,
 #line 10896
@@ -29605,7 +29605,7 @@
 #line 10898
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -29655,7 +29655,7 @@
 #line 10914
         .trainerClass = TRAINER_CLASS_PKMN_BREEDER_FRLG,
 #line 10915
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_BREEDER_FRLG,
 #line 10916
         .gender = TRAINER_GENDER_MALE,
 #line 10917
@@ -29665,7 +29665,7 @@
 #line 10919
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29691,7 +29691,7 @@
 #line 10927
         .trainerClass = TRAINER_CLASS_PKMN_BREEDER_FRLG,
 #line 10928
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_BREEDER_FRLG,
 #line 10929
         .gender = TRAINER_GENDER_MALE,
 #line 10930
@@ -29701,7 +29701,7 @@
 #line 10932
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -29751,7 +29751,7 @@
 #line 10948
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 10949
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 10950
         .gender = TRAINER_GENDER_MALE,
 #line 10951
@@ -29761,7 +29761,7 @@
 #line 10953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -29787,7 +29787,7 @@
 #line 10961
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 10962
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 10963
         .gender = TRAINER_GENDER_MALE,
 #line 10964
@@ -29797,7 +29797,7 @@
 #line 10966
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -29859,7 +29859,7 @@
 #line 10986
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 10987
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 10988
         .gender = TRAINER_GENDER_MALE,
 #line 10989
@@ -29869,7 +29869,7 @@
 #line 10991
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -29907,7 +29907,7 @@
 #line 11003
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 11004
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 11005
         .gender = TRAINER_GENDER_MALE,
 #line 11006
@@ -29917,7 +29917,7 @@
 #line 11008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -29967,7 +29967,7 @@
 #line 11024
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 11025
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 11026
         .gender = TRAINER_GENDER_MALE,
 #line 11027
@@ -29977,7 +29977,7 @@
 #line 11029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30015,7 +30015,7 @@
 #line 11041
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 11042
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 11043
         .gender = TRAINER_GENDER_MALE,
 #line 11044
@@ -30025,7 +30025,7 @@
 #line 11046
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -30087,7 +30087,7 @@
 #line 11066
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 11067
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 11068
         .gender = TRAINER_GENDER_MALE,
 #line 11069
@@ -30097,7 +30097,7 @@
 #line 11071
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30123,7 +30123,7 @@
 #line 11079
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11080
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11081
         .gender = TRAINER_GENDER_MALE,
 #line 11082
@@ -30133,7 +30133,7 @@
 #line 11084
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30171,7 +30171,7 @@
 #line 11096
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11097
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11098
         .gender = TRAINER_GENDER_MALE,
 #line 11099
@@ -30181,7 +30181,7 @@
 #line 11101
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30231,7 +30231,7 @@
 #line 11117
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 11118
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 11119
         .gender = TRAINER_GENDER_MALE,
 #line 11120
@@ -30241,7 +30241,7 @@
 #line 11122
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30291,7 +30291,7 @@
 #line 11138
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11139
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11140
         .gender = TRAINER_GENDER_MALE,
 #line 11141
@@ -30301,7 +30301,7 @@
 #line 11143
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30339,7 +30339,7 @@
 #line 11155
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11156
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11157
         .gender = TRAINER_GENDER_MALE,
 #line 11158
@@ -30349,7 +30349,7 @@
 #line 11160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30387,7 +30387,7 @@
 #line 11172
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11173
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11174
         .gender = TRAINER_GENDER_MALE,
 #line 11175
@@ -30397,7 +30397,7 @@
 #line 11177
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30435,7 +30435,7 @@
 #line 11189
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11190
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11191
         .gender = TRAINER_GENDER_MALE,
 #line 11192
@@ -30445,7 +30445,7 @@
 #line 11194
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30471,7 +30471,7 @@
 #line 11202
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11203
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11204
         .gender = TRAINER_GENDER_MALE,
 #line 11205
@@ -30481,7 +30481,7 @@
 #line 11207
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30507,7 +30507,7 @@
 #line 11215
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11216
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11217
         .gender = TRAINER_GENDER_MALE,
 #line 11218
@@ -30517,7 +30517,7 @@
 #line 11220
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -30543,7 +30543,7 @@
 #line 11228
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11229
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11230
         .gender = TRAINER_GENDER_MALE,
 #line 11231
@@ -30553,7 +30553,7 @@
 #line 11233
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30591,7 +30591,7 @@
 #line 11245
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11246
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11247
         .gender = TRAINER_GENDER_MALE,
 #line 11248
@@ -30601,7 +30601,7 @@
 #line 11250
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30639,7 +30639,7 @@
 #line 11262
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11263
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11264
         .gender = TRAINER_GENDER_MALE,
 #line 11265
@@ -30649,7 +30649,7 @@
 #line 11267
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -30687,7 +30687,7 @@
 #line 11279
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11280
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11281
         .gender = TRAINER_GENDER_MALE,
 #line 11282
@@ -30697,7 +30697,7 @@
 #line 11284
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30747,7 +30747,7 @@
 #line 11300
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11301
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11302
         .gender = TRAINER_GENDER_MALE,
 #line 11303
@@ -30757,7 +30757,7 @@
 #line 11305
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30807,7 +30807,7 @@
 #line 11321
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11322
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11323
         .gender = TRAINER_GENDER_MALE,
 #line 11324
@@ -30817,7 +30817,7 @@
 #line 11326
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30867,7 +30867,7 @@
 #line 11342
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 11343
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 11344
         .gender = TRAINER_GENDER_MALE,
 #line 11345
@@ -30877,7 +30877,7 @@
 #line 11347
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30927,7 +30927,7 @@
 #line 11363
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 11364
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 11365
         .gender = TRAINER_GENDER_MALE,
 #line 11366
@@ -30937,7 +30937,7 @@
 #line 11368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -30987,7 +30987,7 @@
 #line 11384
         .trainerClass = TRAINER_CLASS_ENGINEER_FRLG,
 #line 11385
-        .trainerPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .trainerPic = TRAINER_PIC_ENGINEER_FRLG,
 #line 11386
         .gender = TRAINER_GENDER_MALE,
 #line 11387
@@ -30997,7 +30997,7 @@
 #line 11389
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ENGINEER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -31047,7 +31047,7 @@
 #line 11405
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 11406
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 11407
         .gender = TRAINER_GENDER_MALE,
 #line 11408
@@ -31057,7 +31057,7 @@
 #line 11410
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31095,7 +31095,7 @@
 #line 11422
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11423
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11424
         .gender = TRAINER_GENDER_MALE,
 #line 11425
@@ -31105,7 +31105,7 @@
 #line 11427
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31143,7 +31143,7 @@
 #line 11439
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11440
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11441
         .gender = TRAINER_GENDER_MALE,
 #line 11442
@@ -31153,7 +31153,7 @@
 #line 11444
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31191,7 +31191,7 @@
 #line 11456
         .trainerClass = TRAINER_CLASS_CAMPER_FRLG,
 #line 11457
-        .trainerPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .trainerPic = TRAINER_PIC_CAMPER_FRLG,
 #line 11458
         .gender = TRAINER_GENDER_MALE,
 #line 11459
@@ -31201,7 +31201,7 @@
 #line 11461
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CAMPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31239,7 +31239,7 @@
 #line 11473
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11474
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11475
         .gender = TRAINER_GENDER_MALE,
 #line 11476
@@ -31249,7 +31249,7 @@
 #line 11478
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31275,7 +31275,7 @@
 #line 11486
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11487
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11488
         .gender = TRAINER_GENDER_MALE,
 #line 11489
@@ -31285,7 +31285,7 @@
 #line 11491
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31311,7 +31311,7 @@
 #line 11499
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11500
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11501
         .gender = TRAINER_GENDER_MALE,
 #line 11502
@@ -31321,7 +31321,7 @@
 #line 11504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -31347,7 +31347,7 @@
 #line 11512
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 11513
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 11514
         .gender = TRAINER_GENDER_MALE,
 #line 11515
@@ -31357,7 +31357,7 @@
 #line 11517
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31395,7 +31395,7 @@
 #line 11529
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 11530
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 11531
         .gender = TRAINER_GENDER_MALE,
 #line 11532
@@ -31405,7 +31405,7 @@
 #line 11534
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31443,7 +31443,7 @@
 #line 11546
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 11547
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 11548
         .gender = TRAINER_GENDER_MALE,
 #line 11549
@@ -31453,7 +31453,7 @@
 #line 11551
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31491,7 +31491,7 @@
 #line 11563
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 11564
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 11565
         .gender = TRAINER_GENDER_MALE,
 #line 11566
@@ -31501,7 +31501,7 @@
 #line 11568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31539,7 +31539,7 @@
 #line 11580
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 11581
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 11582
         .gender = TRAINER_GENDER_MALE,
 #line 11583
@@ -31549,7 +31549,7 @@
 #line 11585
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31587,7 +31587,7 @@
 #line 11597
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 11598
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 11599
         .gender = TRAINER_GENDER_MALE,
 #line 11600
@@ -31597,7 +31597,7 @@
 #line 11602
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -31671,7 +31671,7 @@
 #line 11626
         .trainerClass = TRAINER_CLASS_LASS_FRLG,
 #line 11627
-        .trainerPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .trainerPic = TRAINER_PIC_LASS_FRLG,
 #line 11628
         .gender = TRAINER_GENDER_MALE,
 #line 11629
@@ -31681,7 +31681,7 @@
 #line 11631
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_LASS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -31755,7 +31755,7 @@
 #line 11655
         .trainerClass = TRAINER_CLASS_SUPER_NERD_FRLG,
 #line 11656
-        .trainerPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .trainerPic = TRAINER_PIC_SUPER_NERD_FRLG,
 #line 11657
         .gender = TRAINER_GENDER_MALE,
 #line 11658
@@ -31765,7 +31765,7 @@
 #line 11660
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SUPER_NERD_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -31815,7 +31815,7 @@
 #line 11676
         .trainerClass = TRAINER_CLASS_GAMER_FRLG,
 #line 11677
-        .trainerPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .trainerPic = TRAINER_PIC_GAMER_FRLG,
 #line 11678
         .gender = TRAINER_GENDER_MALE,
 #line 11679
@@ -31825,7 +31825,7 @@
 #line 11681
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_GAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31863,7 +31863,7 @@
 #line 11693
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 11694
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 11695
         .gender = TRAINER_GENDER_MALE,
 #line 11696
@@ -31873,7 +31873,7 @@
 #line 11698
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -31911,7 +31911,7 @@
 #line 11710
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 11711
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 11712
         .gender = TRAINER_GENDER_MALE,
 #line 11713
@@ -31921,7 +31921,7 @@
 #line 11715
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -31983,7 +31983,7 @@
 #line 11735
         .trainerClass = TRAINER_CLASS_ROCKER_FRLG,
 #line 11736
-        .trainerPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .trainerPic = TRAINER_PIC_ROCKER_FRLG,
 #line 11737
         .gender = TRAINER_GENDER_MALE,
 #line 11738
@@ -31993,7 +31993,7 @@
 #line 11740
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ROCKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32031,7 +32031,7 @@
 #line 11752
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 11753
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 11754
         .gender = TRAINER_GENDER_MALE,
 #line 11755
@@ -32041,7 +32041,7 @@
 #line 11757
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32079,7 +32079,7 @@
 #line 11769
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11770
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11771
         .gender = TRAINER_GENDER_MALE,
 #line 11772
@@ -32089,7 +32089,7 @@
 #line 11774
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -32151,7 +32151,7 @@
 #line 11794
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11795
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11796
         .gender = TRAINER_GENDER_MALE,
 #line 11797
@@ -32161,7 +32161,7 @@
 #line 11799
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -32223,7 +32223,7 @@
 #line 11819
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11820
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11821
         .gender = TRAINER_GENDER_MALE,
 #line 11822
@@ -32233,7 +32233,7 @@
 #line 11824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -32307,7 +32307,7 @@
 #line 11848
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11849
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11850
         .gender = TRAINER_GENDER_MALE,
 #line 11851
@@ -32317,7 +32317,7 @@
 #line 11853
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -32391,7 +32391,7 @@
 #line 11877
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 11878
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 11879
         .gender = TRAINER_GENDER_MALE,
 #line 11880
@@ -32401,7 +32401,7 @@
 #line 11882
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -32475,7 +32475,7 @@
 #line 11906
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 11907
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 11908
         .gender = TRAINER_GENDER_MALE,
 #line 11909
@@ -32485,7 +32485,7 @@
 #line 11911
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -32547,7 +32547,7 @@
 #line 11931
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11932
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11933
         .gender = TRAINER_GENDER_MALE,
 #line 11934
@@ -32557,7 +32557,7 @@
 #line 11936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32595,7 +32595,7 @@
 #line 11948
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11949
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11950
         .gender = TRAINER_GENDER_MALE,
 #line 11951
@@ -32605,7 +32605,7 @@
 #line 11953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32643,7 +32643,7 @@
 #line 11965
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11966
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11967
         .gender = TRAINER_GENDER_MALE,
 #line 11968
@@ -32653,7 +32653,7 @@
 #line 11970
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -32703,7 +32703,7 @@
 #line 11986
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 11987
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 11988
         .gender = TRAINER_GENDER_MALE,
 #line 11989
@@ -32713,7 +32713,7 @@
 #line 11991
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -32763,7 +32763,7 @@
 #line 12007
         .trainerClass = TRAINER_CLASS_BEAUTY_FRLG,
 #line 12008
-        .trainerPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .trainerPic = TRAINER_PIC_BEAUTY_FRLG,
 #line 12009
         .gender = TRAINER_GENDER_MALE,
 #line 12010
@@ -32773,7 +32773,7 @@
 #line 12012
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BEAUTY_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32811,7 +32811,7 @@
 #line 12024
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12025
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12026
         .gender = TRAINER_GENDER_MALE,
 #line 12027
@@ -32821,7 +32821,7 @@
 #line 12029
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -32871,7 +32871,7 @@
 #line 12045
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12046
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12047
         .gender = TRAINER_GENDER_MALE,
 #line 12048
@@ -32881,7 +32881,7 @@
 #line 12050
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -32931,7 +32931,7 @@
 #line 12066
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 12067
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 12068
         .gender = TRAINER_GENDER_MALE,
 #line 12069
@@ -32941,7 +32941,7 @@
 #line 12071
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -32979,7 +32979,7 @@
 #line 12083
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 12084
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 12085
         .gender = TRAINER_GENDER_MALE,
 #line 12086
@@ -32989,7 +32989,7 @@
 #line 12088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33027,7 +33027,7 @@
 #line 12100
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 12101
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 12102
         .gender = TRAINER_GENDER_MALE,
 #line 12103
@@ -33037,7 +33037,7 @@
 #line 12105
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33075,7 +33075,7 @@
 #line 12117
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 12118
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 12119
         .gender = TRAINER_GENDER_MALE,
 #line 12120
@@ -33085,7 +33085,7 @@
 #line 12122
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33127,7 +33127,7 @@
 #line 12134
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 12135
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 12136
         .gender = TRAINER_GENDER_MALE,
 #line 12137
@@ -33137,7 +33137,7 @@
 #line 12139
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33179,7 +33179,7 @@
 #line 12151
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 12152
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 12153
         .gender = TRAINER_GENDER_MALE,
 #line 12154
@@ -33189,7 +33189,7 @@
 #line 12156
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33231,7 +33231,7 @@
 #line 12168
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 12169
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 12170
         .gender = TRAINER_GENDER_MALE,
 #line 12171
@@ -33241,7 +33241,7 @@
 #line 12173
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -33291,7 +33291,7 @@
 #line 12189
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 12190
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 12191
         .gender = TRAINER_GENDER_MALE,
 #line 12192
@@ -33301,7 +33301,7 @@
 #line 12194
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33339,7 +33339,7 @@
 #line 12206
         .trainerClass = TRAINER_CLASS_BIKER_FRLG,
 #line 12207
-        .trainerPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .trainerPic = TRAINER_PIC_BIKER_FRLG,
 #line 12208
         .gender = TRAINER_GENDER_MALE,
 #line 12209
@@ -33349,7 +33349,7 @@
 #line 12211
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33387,7 +33387,7 @@
 #line 12223
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 12224
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 12225
         .gender = TRAINER_GENDER_MALE,
 #line 12226
@@ -33397,7 +33397,7 @@
 #line 12228
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33435,7 +33435,7 @@
 #line 12240
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 12241
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 12242
         .gender = TRAINER_GENDER_MALE,
 #line 12243
@@ -33445,7 +33445,7 @@
 #line 12245
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33483,7 +33483,7 @@
 #line 12257
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12258
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12259
         .gender = TRAINER_GENDER_MALE,
 #line 12260
@@ -33493,7 +33493,7 @@
 #line 12262
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -33555,7 +33555,7 @@
 #line 12282
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12283
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12284
         .gender = TRAINER_GENDER_MALE,
 #line 12285
@@ -33565,7 +33565,7 @@
 #line 12287
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -33627,7 +33627,7 @@
 #line 12307
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 12308
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 12309
         .gender = TRAINER_GENDER_MALE,
 #line 12310
@@ -33637,7 +33637,7 @@
 #line 12312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33675,7 +33675,7 @@
 #line 12324
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 12325
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 12326
         .gender = TRAINER_GENDER_MALE,
 #line 12327
@@ -33685,7 +33685,7 @@
 #line 12329
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -33747,7 +33747,7 @@
 #line 12349
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 12350
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 12351
         .gender = TRAINER_GENDER_MALE,
 #line 12352
@@ -33757,7 +33757,7 @@
 #line 12354
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33795,7 +33795,7 @@
 #line 12366
         .trainerClass = TRAINER_CLASS_PICNICKER_FRLG,
 #line 12367
-        .trainerPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .trainerPic = TRAINER_PIC_PICNICKER_FRLG,
 #line 12368
         .gender = TRAINER_GENDER_MALE,
 #line 12369
@@ -33805,7 +33805,7 @@
 #line 12371
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PICNICKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -33843,7 +33843,7 @@
 #line 12383
         .trainerClass = TRAINER_CLASS_FISHERMAN_FRLG,
 #line 12384
-        .trainerPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .trainerPic = TRAINER_PIC_FISHERMAN_FRLG,
 #line 12385
         .gender = TRAINER_GENDER_MALE,
 #line 12386
@@ -33853,7 +33853,7 @@
 #line 12388
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_FISHERMAN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -33939,7 +33939,7 @@
 #line 12416
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 12417
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 12418
         .gender = TRAINER_GENDER_MALE,
 #line 12419
@@ -33949,7 +33949,7 @@
 #line 12421
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -33975,7 +33975,7 @@
 #line 12429
         .trainerClass = TRAINER_CLASS_SIS_AND_BRO_FRLG,
 #line 12430
-        .trainerPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .trainerPic = TRAINER_PIC_SIS_AND_BRO_FRLG,
 #line 12431
         .gender = TRAINER_GENDER_MALE,
 #line 12432
@@ -33985,7 +33985,7 @@
 #line 12434
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34023,7 +34023,7 @@
 #line 12446
         .trainerClass = TRAINER_CLASS_SIS_AND_BRO_FRLG,
 #line 12447
-        .trainerPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .trainerPic = TRAINER_PIC_SIS_AND_BRO_FRLG,
 #line 12448
         .gender = TRAINER_GENDER_MALE,
 #line 12449
@@ -34033,7 +34033,7 @@
 #line 12451
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SIS_AND_BRO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34071,7 +34071,7 @@
 #line 12463
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 12464
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 12465
         .gender = TRAINER_GENDER_MALE,
 #line 12466
@@ -34081,7 +34081,7 @@
 #line 12468
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -34107,7 +34107,7 @@
 #line 12476
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 12477
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 12478
         .gender = TRAINER_GENDER_MALE,
 #line 12479
@@ -34117,7 +34117,7 @@
 #line 12481
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34159,7 +34159,7 @@
 #line 12493
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 12494
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 12495
         .gender = TRAINER_GENDER_MALE,
 #line 12496
@@ -34169,7 +34169,7 @@
 #line 12498
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34211,7 +34211,7 @@
 #line 12510
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 12511
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 12512
         .gender = TRAINER_GENDER_MALE,
 #line 12513
@@ -34221,7 +34221,7 @@
 #line 12515
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34263,7 +34263,7 @@
 #line 12527
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 12528
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 12529
         .gender = TRAINER_GENDER_MALE,
 #line 12530
@@ -34273,7 +34273,7 @@
 #line 12532
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34315,7 +34315,7 @@
 #line 12544
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 12545
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 12546
         .gender = TRAINER_GENDER_MALE,
 #line 12547
@@ -34325,7 +34325,7 @@
 #line 12549
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34367,7 +34367,7 @@
 #line 12561
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 12562
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 12563
         .gender = TRAINER_GENDER_MALE,
 #line 12564
@@ -34377,7 +34377,7 @@
 #line 12566
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34419,7 +34419,7 @@
 #line 12578
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 12579
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 12580
         .gender = TRAINER_GENDER_MALE,
 #line 12581
@@ -34429,7 +34429,7 @@
 #line 12583
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34471,7 +34471,7 @@
 #line 12595
         .trainerClass = TRAINER_CLASS_BLACK_BELT_FRLG,
 #line 12596
-        .trainerPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .trainerPic = TRAINER_PIC_BLACK_BELT_FRLG,
 #line 12597
         .gender = TRAINER_GENDER_MALE,
 #line 12598
@@ -34481,7 +34481,7 @@
 #line 12600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BLACK_BELT_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34523,7 +34523,7 @@
 #line 12612
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 12613
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 12614
         .gender = TRAINER_GENDER_MALE,
 #line 12615
@@ -34533,7 +34533,7 @@
 #line 12617
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34575,7 +34575,7 @@
 #line 12629
         .trainerClass = TRAINER_CLASS_CRUSH_KIN_FRLG,
 #line 12630
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_KIN_FRLG,
 #line 12631
         .gender = TRAINER_GENDER_MALE,
 #line 12632
@@ -34585,7 +34585,7 @@
 #line 12634
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_KIN_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34627,7 +34627,7 @@
 #line 12646
         .trainerClass = TRAINER_CLASS_TUBER_FRLG,
 #line 12647
-        .trainerPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .trainerPic = TRAINER_PIC_TUBER_F_FRLG,
 #line 12648
         .gender = TRAINER_GENDER_MALE,
 #line 12649
@@ -34637,7 +34637,7 @@
 #line 12651
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TUBER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -34687,7 +34687,7 @@
 #line 12667
         .trainerClass = TRAINER_CLASS_TWINS_FRLG,
 #line 12668
-        .trainerPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .trainerPic = TRAINER_PIC_TWINS_FRLG,
 #line 12669
         .gender = TRAINER_GENDER_MALE,
 #line 12670
@@ -34697,7 +34697,7 @@
 #line 12672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TWINS_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34735,7 +34735,7 @@
 #line 12684
         .trainerClass = TRAINER_CLASS_PAINTER_FRLG,
 #line 12685
-        .trainerPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .trainerPic = TRAINER_PIC_PAINTER_FRLG,
 #line 12686
         .gender = TRAINER_GENDER_MALE,
 #line 12687
@@ -34745,7 +34745,7 @@
 #line 12689
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PAINTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -34778,7 +34778,7 @@
 #line 12701
         .trainerClass = TRAINER_CLASS_YOUNGSTER_FRLG,
 #line 12702
-        .trainerPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNGSTER_FRLG,
 #line 12703
         .gender = TRAINER_GENDER_MALE,
 #line 12704
@@ -34788,7 +34788,7 @@
 #line 12706
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNGSTER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34826,7 +34826,7 @@
 #line 12718
         .trainerClass = TRAINER_CLASS_PKMN_BREEDER_FRLG,
 #line 12719
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_BREEDER_FRLG,
 #line 12720
         .gender = TRAINER_GENDER_MALE,
 #line 12721
@@ -34836,7 +34836,7 @@
 #line 12723
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_BREEDER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -34886,7 +34886,7 @@
 #line 12739
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE_FRLG,
 #line 12740
-        .trainerPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNG_COUPLE_FRLG,
 #line 12741
         .gender = TRAINER_GENDER_MALE,
 #line 12742
@@ -34896,7 +34896,7 @@
 #line 12744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34934,7 +34934,7 @@
 #line 12756
         .trainerClass = TRAINER_CLASS_YOUNG_COUPLE_FRLG,
 #line 12757
-        .trainerPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_YOUNG_COUPLE_FRLG,
 #line 12758
         .gender = TRAINER_GENDER_MALE,
 #line 12759
@@ -34944,7 +34944,7 @@
 #line 12761
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_YOUNG_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -34982,7 +34982,7 @@
 #line 12773
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12774
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12775
         .gender = TRAINER_GENDER_MALE,
 #line 12776
@@ -34992,7 +34992,7 @@
 #line 12778
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35030,7 +35030,7 @@
 #line 12790
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12791
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12792
         .gender = TRAINER_GENDER_MALE,
 #line 12793
@@ -35040,7 +35040,7 @@
 #line 12795
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35078,7 +35078,7 @@
 #line 12807
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER_FRLG,
 #line 12808
-        .trainerPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER_FRLG,
 #line 12809
         .gender = TRAINER_GENDER_MALE,
 #line 12810
@@ -35088,7 +35088,7 @@
 #line 12812
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BIRD_KEEPER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35126,7 +35126,7 @@
 #line 12824
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 12825
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 12826
         .gender = TRAINER_GENDER_MALE,
 #line 12827
@@ -35136,7 +35136,7 @@
 #line 12829
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -35162,7 +35162,7 @@
 #line 12837
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 12838
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_F_FRLG,
 #line 12839
         .gender = TRAINER_GENDER_MALE,
 #line 12840
@@ -35172,7 +35172,7 @@
 #line 12842
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -35243,7 +35243,7 @@
 #line 12870
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 12871
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 12872
         .gender = TRAINER_GENDER_MALE,
 #line 12873
@@ -35253,7 +35253,7 @@
 #line 12875
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -35279,7 +35279,7 @@
 #line 12883
         .trainerClass = TRAINER_CLASS_HIKER_FRLG,
 #line 12884
-        .trainerPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .trainerPic = TRAINER_PIC_HIKER_FRLG,
 #line 12885
         .gender = TRAINER_GENDER_MALE,
 #line 12886
@@ -35289,7 +35289,7 @@
 #line 12888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_HIKER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35327,7 +35327,7 @@
 #line 12900
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC_FRLG,
 #line 12901
-        .trainerPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC_FRLG,
 #line 12902
         .gender = TRAINER_GENDER_MALE,
 #line 12903
@@ -35337,7 +35337,7 @@
 #line 12905
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_RUIN_MANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35375,7 +35375,7 @@
 #line 12917
         .trainerClass = TRAINER_CLASS_POKEMANIAC_FRLG,
 #line 12918
-        .trainerPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMANIAC_FRLG,
 #line 12919
         .gender = TRAINER_GENDER_MALE,
 #line 12920
@@ -35385,7 +35385,7 @@
 #line 12922
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMANIAC_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35423,7 +35423,7 @@
 #line 12934
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 12935
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_M_FRLG,
 #line 12936
         .gender = TRAINER_GENDER_MALE,
 #line 12937
@@ -35433,7 +35433,7 @@
 #line 12939
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -35466,7 +35466,7 @@
 #line 12951
         .trainerClass = TRAINER_CLASS_PSYCHIC_FRLG,
 #line 12952
-        .trainerPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .trainerPic = TRAINER_PIC_PSYCHIC_F_FRLG,
 #line 12953
         .gender = TRAINER_GENDER_MALE,
 #line 12954
@@ -35476,7 +35476,7 @@
 #line 12956
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_PSYCHIC_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -35547,7 +35547,7 @@
 #line 12984
         .trainerClass = TRAINER_CLASS_JUGGLER_FRLG,
 #line 12985
-        .trainerPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .trainerPic = TRAINER_PIC_JUGGLER_FRLG,
 #line 12986
         .gender = TRAINER_GENDER_MALE,
 #line 12987
@@ -35557,7 +35557,7 @@
 #line 12989
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_JUGGLER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 4,
         .party = (const struct TrainerMon[])
         {
@@ -35619,7 +35619,7 @@
 #line 13009
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 13010
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M_FRLG,
 #line 13011
         .gender = TRAINER_GENDER_MALE,
 #line 13012
@@ -35631,7 +35631,7 @@
 #line 13015
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35683,7 +35683,7 @@
 #line 13035
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 13036
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F_FRLG,
 #line 13037
         .gender = TRAINER_GENDER_MALE,
 #line 13038
@@ -35695,7 +35695,7 @@
 #line 13041
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -35747,7 +35747,7 @@
 #line 13061
         .trainerClass = TRAINER_CLASS_CRUSH_GIRL_FRLG,
 #line 13062
-        .trainerPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .trainerPic = TRAINER_PIC_CRUSH_GIRL_FRLG,
 #line 13063
         .gender = TRAINER_GENDER_MALE,
 #line 13064
@@ -35757,7 +35757,7 @@
 #line 13066
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CRUSH_GIRL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -35813,7 +35813,7 @@
 #line 13082
         .trainerClass = TRAINER_CLASS_TAMER_FRLG,
 #line 13083
-        .trainerPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .trainerPic = TRAINER_PIC_TAMER_FRLG,
 #line 13084
         .gender = TRAINER_GENDER_MALE,
 #line 13085
@@ -35823,7 +35823,7 @@
 #line 13087
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_TAMER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -35873,7 +35873,7 @@
 #line 13103
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 13104
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_M_FRLG,
 #line 13105
         .gender = TRAINER_GENDER_MALE,
 #line 13106
@@ -35885,7 +35885,7 @@
 #line 13109
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -35956,7 +35956,7 @@
 #line 13137
         .trainerClass = TRAINER_CLASS_PKMN_RANGER_FRLG,
 #line 13138
-        .trainerPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .trainerPic = TRAINER_PIC_POKEMON_RANGER_F_FRLG,
 #line 13139
         .gender = TRAINER_GENDER_MALE,
 #line 13140
@@ -35968,7 +35968,7 @@
 #line 13143
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_POKEMON_RANGER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
@@ -36001,7 +36001,7 @@
 #line 13155
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 13156
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M_FRLG,
 #line 13157
         .gender = TRAINER_GENDER_MALE,
 #line 13158
@@ -36013,7 +36013,7 @@
 #line 13161
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -36122,7 +36122,7 @@
 #line 13205
         .trainerClass = TRAINER_CLASS_COOLTRAINER_FRLG,
 #line 13206
-        .trainerPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_F_FRLG,
 #line 13207
         .gender = TRAINER_GENDER_MALE,
 #line 13208
@@ -36134,7 +36134,7 @@
 #line 13211
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOLTRAINER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -36243,7 +36243,7 @@
 #line 13255
         .trainerClass = TRAINER_CLASS_COOL_COUPLE_FRLG,
 #line 13256
-        .trainerPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .trainerPic = TRAINER_PIC_COOL_COUPLE_FRLG,
 #line 13257
         .gender = TRAINER_GENDER_MALE,
 #line 13258
@@ -36255,7 +36255,7 @@
 #line 13261
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_COOL_COUPLE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -36307,7 +36307,7 @@
 #line 13281
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 13282
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 13283
         .gender = TRAINER_GENDER_MALE,
 #line 13284
@@ -36317,7 +36317,7 @@
 #line 13286
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -36367,7 +36367,7 @@
 #line 13302
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 13303
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 13304
         .gender = TRAINER_GENDER_MALE,
 #line 13305
@@ -36377,7 +36377,7 @@
 #line 13307
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -36427,7 +36427,7 @@
 #line 13323
         .trainerClass = TRAINER_CLASS_BUG_CATCHER_FRLG,
 #line 13324
-        .trainerPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .trainerPic = TRAINER_PIC_BUG_CATCHER_FRLG,
 #line 13325
         .gender = TRAINER_GENDER_MALE,
 #line 13326
@@ -36437,7 +36437,7 @@
 #line 13328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_BUG_CATCHER_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -36487,7 +36487,7 @@
 #line 13344
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 13345
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 13346
         .gender = TRAINER_GENDER_MALE,
 #line 13347
@@ -36497,7 +36497,7 @@
 #line 13349
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -36535,7 +36535,7 @@
 #line 13361
         .trainerClass = TRAINER_CLASS_SWIMMER_M_FRLG,
 #line 13362
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_M_FRLG,
 #line 13363
         .gender = TRAINER_GENDER_MALE,
 #line 13364
@@ -36545,7 +36545,7 @@
 #line 13366
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_M_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -36583,7 +36583,7 @@
 #line 13378
         .trainerClass = TRAINER_CLASS_SWIMMER_F_FRLG,
 #line 13379
-        .trainerPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .trainerPic = TRAINER_PIC_SWIMMER_F_FRLG,
 #line 13380
         .gender = TRAINER_GENDER_MALE,
 #line 13381
@@ -36593,7 +36593,7 @@
 #line 13383
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_SWIMMER_F_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
@@ -36631,7 +36631,7 @@
 #line 13395
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 13396
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_LORELEI_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_LORELEI_FRLG,
 #line 13397
         .gender = TRAINER_GENDER_MALE,
 #line 13398
@@ -36645,7 +36645,7 @@
 #line 13402
         .mugshotColor = MUGSHOT_COLOR_PURPLE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_LORELEI_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -36756,7 +36756,7 @@
 #line 13446
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 13447
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_BRUNO_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_BRUNO_FRLG,
 #line 13448
         .gender = TRAINER_GENDER_MALE,
 #line 13449
@@ -36770,7 +36770,7 @@
 #line 13453
         .mugshotColor = MUGSHOT_COLOR_GREEN,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_BRUNO_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -36881,7 +36881,7 @@
 #line 13497
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 13498
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_AGATHA_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_AGATHA_FRLG,
 #line 13499
         .gender = TRAINER_GENDER_MALE,
 #line 13500
@@ -36895,7 +36895,7 @@
 #line 13504
         .mugshotColor = MUGSHOT_COLOR_PINK,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_AGATHA_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -37006,7 +37006,7 @@
 #line 13548
         .trainerClass = TRAINER_CLASS_ELITE_FOUR_FRLG,
 #line 13549
-        .trainerPic = TRAINER_PIC_FRONT_ELITE_FOUR_LANCE_FRLG,
+        .trainerPic = TRAINER_PIC_ELITE_FOUR_LANCE_FRLG,
 #line 13550
         .gender = TRAINER_GENDER_MALE,
 #line 13551
@@ -37020,7 +37020,7 @@
 #line 13555
         .mugshotColor = MUGSHOT_COLOR_BLUE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_ELITE_FOUR_LANCE_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 5,
         .party = (const struct TrainerMon[])
         {
@@ -37131,7 +37131,7 @@
 #line 13599
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 13600
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 13601
         .gender = TRAINER_GENDER_MALE,
 #line 13602
@@ -37145,7 +37145,7 @@
 #line 13606
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -37275,7 +37275,7 @@
 #line 13658
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 13659
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 13660
         .gender = TRAINER_GENDER_MALE,
 #line 13661
@@ -37289,7 +37289,7 @@
 #line 13665
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -37419,7 +37419,7 @@
 #line 13717
         .trainerClass = TRAINER_CLASS_CHAMPION_FRLG,
 #line 13718
-        .trainerPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .trainerPic = TRAINER_PIC_CHAMPION_RIVAL_FRLG,
 #line 13719
         .gender = TRAINER_GENDER_MALE,
 #line 13720
@@ -37433,7 +37433,7 @@
 #line 13724
         .mugshotColor = MUGSHOT_COLOR_YELLOW,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CHAMPION_RIVAL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 6,
         .party = (const struct TrainerMon[])
         {
@@ -37563,7 +37563,7 @@
 #line 13776
         .trainerClass = TRAINER_CLASS_CUE_BALL_FRLG,
 #line 13777
-        .trainerPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .trainerPic = TRAINER_PIC_CUE_BALL_FRLG,
 #line 13778
         .gender = TRAINER_GENDER_MALE,
 #line 13779
@@ -37573,7 +37573,7 @@
 #line 13781
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
 #line 0
-        .trainerBackPic = TRAINER_PIC_FRONT_CUE_BALL_FRLG,
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {

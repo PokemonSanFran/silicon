@@ -1632,7 +1632,7 @@ static void Glass_PrintSortModeHeader(u32 windowId, u32 sort)
     StringCopy(percentString, gStringVar4);
 
     if (!sort)
-        StringCopy(percentString,gText_Blank);
+        StringCopy(percentString,gText_ExpandedPlaceholder_Empty);
 
     AddTextPrinterParameterized4(windowId, fontId, 22, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, percentString);
 
@@ -1662,7 +1662,7 @@ static const u8 *GetSortName(u32 sort)
         case GLASS_SORT_TRAINER_COMPLETED_FIRSTAZ:
             return sText_SortOrder_CompletedAZ;
         default:
-            return gText_Blank;
+            return gText_ExpandedPlaceholder_Empty;
     }
 }
 

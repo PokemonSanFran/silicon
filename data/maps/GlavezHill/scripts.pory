@@ -12,11 +12,6 @@ mapscripts GlavezHill_MapScripts {
     ]
 }
 
-script GlavezHill_Mapreview
-{
-    mappreview
-}
-
 script GlavezHeights_EventScript_006E7EFD
 {
     trainerbattle_single(TRAINER_006E7EFD,format("I am a Route Trainer"),format("I lost!"))

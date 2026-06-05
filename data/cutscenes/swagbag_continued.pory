@@ -1,0 +1,116 @@
+const LOCALID_OLIVER_SWAGBAG_CONTINUED = (LOCALID_PLAYER - 2)
+
+script SwagbagContinued_Script_MoveOliverBeforeTalkDexnav
+{
+    callnative(Script_ReturnBadgeFromMap)
+    switch(var(VAR_RESULT))
+    {
+        case FLAG_BADGE01_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,30,20,DIR_NORTH)
+        case FLAG_BADGE02_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,17,8,DIR_NORTH)
+        case FLAG_BADGE03_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,28,25,DIR_NORTH)
+    }
+    waitmovement(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+}
+
+script SwagbagContinued_Script_MoveOliverAfterTalkDexnav
+{
+    callnative(Script_ReturnBadgeFromMap)
+    switch(var(VAR_RESULT))
+    {
+        case FLAG_BADGE01_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,21,19,DIR_WEST)
+        case FLAG_BADGE02_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,5,2,DIR_NORTH)
+        case FLAG_BADGE03_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,20,24,DIR_WEST)
+    }
+            delay(32)
+            fadescreenswapbuffers(FADE_TO_BLACK)
+            removeobject(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+            fadescreenswapbuffers(FADE_FROM_BLACK)
+}
+
+script SwagbagContinued_Dialogue_StartDexnav
+{
+    addvar(VAR_TEMP_1,1)
+    callnative(Script_ShouldPlayerGetDexnav)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        return
+    }
+
+    lock
+    callnative(SpawnOliverForSwagbag)
+    call(SwagbagContinued_Script_MoveOliverBeforeTalkDexnav)
+    msgbox(format("Oliver should congratulate the player on two badges, as this scene happens after the player has two badges."),,SPEAKER_OLIVER)
+    msgbox(format("Oliver should explain to the player that the Halerba Research Institute finally finished their latest app."),,SPEAKER_PLAYER)
+    msgbox(format("Sharp Rise wants Charlotte and the player to test the app."),,SPEAKER_OLIVER)
+    msgbox(format("Oliver says you check your phone."),,SPEAKER_OLIVER)
+    closemessage
+    cueobjectplayer(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+    waitmovement(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+    call(EventScript_InstallDexnavApp)
+    msgbox(format("Oliver explains that the Dexnav helps players find Pokemon."),,SPEAKER_PLAYER)
+    msgbox(format("Oliver claims that the Halerba Research Institute has found a way to send a radioactive signal from the phone which will draw out specific species."),,SPEAKER_OLIVER)
+    msgbox(format("The more you battle Pokemon from a specific species using the Dexnav, better Pokemon will be found. Level, Egg Moves and Hidden Abilities are more common the more you like."),,SPEAKER_PLAYER)
+    msgbox(format("Oliver doesn't know how the science works but noted that somebody the Pokemon are unhappy."),,SPEAKER_OLIVER)
+    msgbox(format("Oliver should hint that increasing the streak of the Dexnav makes it more likely to find shinies."),,SPEAKER_PLAYER)
+    msgbox(format("Oliver should then leave and say something encouraging to the player."),,SPEAKER_OLIVER)
+    closemessage
+    call(SwagbagContinued_Script_MoveOliverAfterTalkDexnav)
+    call(TryAutoSave)
+    release
+    end
+}
+
+script SwagbagContinued_Script_MoveOliverBeforeTalk
+{
+    callnative(Script_ReturnBadgeFromMap)
+    switch(var(VAR_RESULT))
+    {
+        case FLAG_BADGE01_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,11,28,DIR_SOUTH)
+        case FLAG_BADGE02_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,9,15,DIR_SOUTH)
+        case FLAG_BADGE03_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,9,12,DIR_SOUTH)
+    }
+    waitmovement(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+}
+
+script SwagbagContinued_Script_MovePlayerAndOliverBeforeTalk
+{
+    callnative(Script_ReturnBadgeFromMap)
+    switch(var(VAR_RESULT))
+    {
+        case FLAG_BADGE01_GET:
+            moveobjecttocoords(LOCALID_PLAYER,10,28,DIR_EAST)
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,11,28,DIR_WEST)
+        case FLAG_BADGE02_GET:
+            moveobjecttocoords(LOCALID_PLAYER,9,16,DIR_NORTH)
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,9,15,DIR_SOUTH)
+        case FLAG_BADGE03_GET:
+            moveobjecttocoords(LOCALID_PLAYER,9,13,DIR_EAST)
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,10,13,DIR_WEST)
+    }
+    waitmovement(LOCALID_OLIVER_SWAGBAG_CONTINUED)
+    waitmovement(LOCALID_PLAYER)
+}
+
+script SwagbagContinued_Script_MovePlayerAndOliverAfterTalk
+{
+    callnative(Script_ReturnBadgeFromMap)
+    switch(var(VAR_RESULT))
+    {
+        case FLAG_BADGE01_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,12,29,DIR_SOUTH)
+        case FLAG_BADGE02_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,9,19,DIR_SOUTH)
+        case FLAG_BADGE03_GET:
+            moveobjecttocoords(LOCALID_OLIVER_SWAGBAG_CONTINUED,9,16,DIR_SOUTH)
+    }
+}
+

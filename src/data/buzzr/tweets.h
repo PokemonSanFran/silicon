@@ -682,4 +682,24 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_IMPROVBATTLING_ACTIVE] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("I saw {PLAYER} at the {STR_VAR_1} Improv Show! It’s awesome to see new Trainers to the region embracing local traditions."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_ImprovbattlingActive,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_IMPROVBATTLING_COMPLETE] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("{STR_VAR_1} Improv’s gimmick is super similar to the Battle Factory in Hoenn… or was it Sinnoh? Who did it first?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_ImprovbattlingComplete,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

@@ -77,9 +77,9 @@ void ResetDexNavSearch(void);
 bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
-u8 GetEncounterLevelFromMapData(u16 species, enum EncounterType environment); // phenomenon
+u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment); // phenomenon
 bool32 OnStep_DexNavSearch(void);
 
-extern u16 gDexNavSpecies;
+extern enum Species gDexNavSpecies;
 
 #endif // GUARD_DEXNAV_H

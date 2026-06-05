@@ -214,12 +214,12 @@ static const u8 sText_SingleShiny[] =_("Oh, a Shiny {B_OPPONENT_MON1_NAME} appea
 
 static bool32 IsEnemyAtPositionShiny(u32 position)
 {
-    return GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(position)]],MON_DATA_IS_SHINY);
+    return GetMonData(&gParties[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetBattlerAtPosition(position)]],MON_DATA_IS_SHINY);
 }
 
 static bool32 AreBothEnemiesSameSpecies(void)
 {
-    return GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]],MON_DATA_SPECIES) == GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],MON_DATA_SPECIES);
+    return GetMonData(&gParties[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]],MON_DATA_SPECIES) == GetMonData(&gParties[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]],MON_DATA_SPECIES);
 }
 
 static bool32 HasPlayerSeenShinyBefore(void)
