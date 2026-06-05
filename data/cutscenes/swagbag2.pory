@@ -78,7 +78,6 @@ script swagbag2_BringToCenter_Dialogue {
     msgbox(format("You should really talk to the staff. They're obsessed with delighting Trainers like you, and I'm sure they're expecting you."),,SPEAKER_OLIVER)
 
     msgbox(format("I will. Thanks for the tip!"),,SPEAKER_ALICIA)
-    msgbox(format("Oliver then leaves and wishes the player good luck."),,SPEAKER_PLAYER)
     goto(swagbag2_Dialogue_GiveGoldPotion)
 }
 
@@ -97,9 +96,9 @@ script swagbag2_Dialogue_GiveGoldPotion
     msgbox(format("This scene plays before the player challenges the 4th gym. If anybody asks, Sharp Rise didn't give this to the player sooner because they're very expensive and wanted to make sure the player was serious about the Gym Challenge."),,SPEAKER_PLAYER)
     msgbox(format("I'd also be fine with any other made up reason."),,SPEAKER_OLIVER)
     closemessage
-
     applymovement(OLIVER, swagbag2_LookAwayAndBack)
     waitmovement(0)
+    msgbox(format("Oliver then leaves and wishes the player good luck."),,SPEAKER_PLAYER)
     goto(swagbag2_Scene_End_Script)
 }
 
