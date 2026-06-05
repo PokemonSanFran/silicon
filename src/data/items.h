@@ -16284,7 +16284,7 @@ const struct ItemInfo gItemsInfo[] =
     //Start Pokevial Branch
     [ITEM_POKEVIAL] =
     {
-        .name = ITEM_NAME("Pokévial"),
+        .name = ITEM_NAME("Gold Potion"),
         .description = COMPOUND_STRING("Restores all\n""POKéMON to full\n""health."),
         .importance = 1,
 
