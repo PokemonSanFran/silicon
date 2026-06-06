@@ -21,6 +21,8 @@ void CB2_TestRunner(void);
 EWRAM_DATA struct TestRunnerState gTestRunnerState;
 EWRAM_DATA struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
+EWRAM_DATA struct SiliconExtraTestVariables gSiliconTestVariables;
+
 enum {
     CURRENT_TEST_STATE_ESTIMATE,
     CURRENT_TEST_STATE_RUN,

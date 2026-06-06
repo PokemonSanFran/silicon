@@ -95,6 +95,13 @@ struct FunctionTestRunnerState
     struct RiggedRNG rngList[RIGGED_RNG_COUNT];
 };
 
+struct SiliconExtraTestVariables
+{
+    bool32 temp;
+};
+
+extern struct SiliconExtraTestVariables gSiliconTestVariables;
+
 extern const struct TestRunner gFunctionTestRunner;
 extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
