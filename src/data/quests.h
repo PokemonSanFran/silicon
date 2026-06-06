@@ -4620,7 +4620,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     {
         .name = COMPOUND_STRING("Teach A Trainer To Fish"),
         .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Learn about The Perfect Cast from the fisherfolk around {STR_VAR_1}, and land a Shiny Pokémon!"),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped TeachtrainerfishA relive the glory days by telling him about a Shiny {STR_VAR_1}."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped TeachtrainerfishA relive the glory days by telling him about a Shiny {STR_VAR_2}."),
         .descFunc = GetQuestDesc_Teachatrainertofish,
         .map = COMPOUND_STRING("Lake Wajabi"),
         .sprite = OBJ_EVENT_GFX_QUEST_TEACHATRAINERTOFISHA,
