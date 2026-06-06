@@ -4739,6 +4739,9 @@ void Quest_TeachATrainerToFish_RecordEnemy(void)
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         return;
 
+    if (gIsFishingEncounter == FALSE)
+        return;
+
     enum Species species = SPECIES_NONE;
 
     for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
@@ -4751,9 +4754,6 @@ void Quest_TeachATrainerToFish_RecordEnemy(void)
     }
 
     if (species == SPECIES_NONE)
-        return;
-
-    if (Quest_TeachATrainerToFish_IsPerfectCast() == FALSE)
         return;
 
     VarSet(VAR_QUEST_TEACHATRAINERTOFISH,species);

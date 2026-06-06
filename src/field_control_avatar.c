@@ -22,6 +22,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "fldeff_misc.h"
+#include "fishing.h" // fishingUpdate
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
@@ -289,7 +290,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->tookStep)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
+        ResetChainFishingStreak(); //fishingUpdate
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
