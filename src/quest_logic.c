@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "fishing.h"
 #include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
@@ -58,6 +59,7 @@
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "event_scripts.h"
 
 void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
 {
@@ -4710,4 +4712,67 @@ void DebugQuest_ImprovBattling(u8 state)
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_6);
             break;
     }
+}
+
+// ***********************************************************************
+// Quest: Teach A Trainer To Fish
+// ***********************************************************************
+
+bool8 Quest_TeachATrainerToFish_IsPerfectCast(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return Quest_TeachATrainerToFish_ArePerfectCastComponentsSet();
+}
+
+bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void)
+{
+    if (gChainFishingDexNavStreak < MAX_u8)
+        return FALSE;
+
+    return (Quest_TeachATrainerToFish_IsPerfectCast());
+}
+
+void Quest_TeachATrainerToFish_RecordEnemy(void)
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+
+    enum Species species = SPECIES_NONE;
+
+    for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_IS_SHINY) == FALSE)
+            continue;
+
+        species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_SPECIES);
+        break;
+    }
+
+    if (species == SPECIES_NONE)
+        return;
+
+    if (Quest_TeachATrainerToFish_IsPerfectCast() == FALSE)
+        return;
+
+    VarSet(VAR_QUEST_TEACHATRAINERTOFISH,species);
+}
+
+static bool8 Quest_TeachATrainerToFish_ShouldRunExclaim(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return (VarGet(VAR_QUEST_TEACHATRAINERTOFISH) != SPECIES_NONE);
+}
+
+bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void)
+{
+    if (Quest_TeachATrainerToFish_ShouldRunExclaim() == FALSE)
+        return FALSE;
+
+    ScriptContext_SetupScript(TeachATrainerToFish_Dialogue_PlayerExclaimShiny);
+
+    return TRUE;
 }

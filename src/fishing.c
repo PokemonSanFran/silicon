@@ -733,3 +733,21 @@ static void StartParkRangerYellCutscene(struct Task *task)
     ScriptContext_SetupScript(Fishing_Cutscene_YellAtPlayer); //fishingUpdate
 }
 // End fishingUpdate
+// Start siliconQuests
+bool8 Quest_TeachATrainerToFish_ArePerfectCastComponentsSet(void)
+{
+    if (CalculateFishingTimeOfDayBoost() < FISHING_TIME_OF_DAY_BOOST)
+        return FALSE;
+
+
+    if (CalculateFishingProximityBoost() < (3 * FISHING_PROXIMITY_BOOST))
+        return FALSE;
+
+
+    if (Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold() == FALSE)
+        return FALSE;
+
+
+    return TRUE;
+}
+// End siliconQuests

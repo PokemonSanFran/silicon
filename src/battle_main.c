@@ -5535,6 +5535,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else
     {
+        Quest_TeachATrainerToFish_RecordEnemy(); // siliconMerge
         CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
         Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
