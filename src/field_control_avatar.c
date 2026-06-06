@@ -31,6 +31,7 @@
 #include "palette.h" // siliconMerge
 #include "phenomenon.h" // phenomenon
 #include "pokemon.h"
+#include "quest_logic.h" // siliconQuests
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -278,6 +279,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
+
+    // Start siliconQuests
+    if (Quest_TeachATrainerToFish_TryRunExclaimScript() == TRUE)
+        return TRUE;
+    // End siliconQuests
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
