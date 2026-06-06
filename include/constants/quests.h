@@ -1075,4 +1075,20 @@ enum
     CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION,
 };
 
+// ***********************************************************************
+// Quest: Teach A Trainer To Fish
+// ***********************************************************************
+//#define QUEST_TEACHATRAINERTOFISH
+
+#define MAP_QUEST_TEACHATRAINERTOFISH              MAP_WAJABI_LAKE
+#define OBJ_EVENT_GFX_QUEST_TEACHATRAINERTOFISHA   OBJ_EVENT_GFX_FISHERMAN
+
+enum
+{
+    STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED,
+    STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST,
+    STATE_QUEST_TEACHATRAINERTOFISH_REWARD,
+    STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE,
+};
+
 #endif // GUARD_CONSTANTS_QUESTS_H
