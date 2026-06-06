@@ -1,0 +1,11 @@
+//TeachATrainerToFish_
+
+script TeachATrainerToFish_Dialogue_PlayerExclaimShiny
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_TEACHATRAINERTOFISH)
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    msgbox(format("How lucky, a {STR_VAR_1}! TeachtrainerfishA will love to hear this story."),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_HAPPY)
+    closemessage
+    release
+    end
+}
