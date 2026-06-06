@@ -4,6 +4,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 mapscripts WajabiLake_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Theboywhocriedwithwolves_Ambrogio_Visibility_Script)
+        call_if_quest_inactive(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Script_HideLakeTeachTrainerFishA)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_WAJABI_LAKE, FALSE: Generic_Mappreview
