@@ -78,6 +78,7 @@
 #include "quest_ow.h"
 // End siliconMerge
 #include "constants/map_types.h"
+#include "constants/rgb.h"
 #include "ui_adventure_guide.h" // adventureGuide
 #include "constants/party_menu.h"
 
@@ -3140,7 +3141,7 @@ bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
     {
     case QUEST_MENU_OPEN:
     default:
-        BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         QuestMenu_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         ScriptContext_Stop();
         break;
