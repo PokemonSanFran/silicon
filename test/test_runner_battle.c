@@ -2171,7 +2171,16 @@ void ClosePokemon(u32 sourceLine)
             INVALID_IF(GetMonData(DATA.currentMon, MON_DATA_HP) == 0, "Battlers cannot be fainted");
         }
     }
-    UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NUM_NATURES) | DATA.gender);
+    if (gSiliconTestVariables.shouldUseManualPersonality)
+    {
+        UpdateMonPersonality(&DATA.currentMon->box, gSiliconTestVariables.manualPersonality);
+        gSiliconTestVariables.shouldUseManualPersonality = FALSE;
+        gSiliconTestVariables.manualPersonality = 0;
+    }
+    else
+    {
+        UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NUM_NATURES) | DATA.gender);
+    }
     data = DATA.isShiny;
     SetMonData(DATA.currentMon, MON_DATA_IS_SHINY, &data);
     DATA.currentMon = NULL;
@@ -2530,6 +2539,21 @@ void StartingStatus_(u32 sourceLine, enum StartingStatus status, u32 index)
     }
 }
 // End bdHazards
+
+//  Silicon options test functions
+void Personality_(u32 sourceLine, bool32 personality)
+{
+    INVALID_IF(!DATA.currentMon, "Personality outside of PLAYER/OPPONENT");
+    gSiliconTestVariables.shouldUseManualPersonality = TRUE;
+    gSiliconTestVariables.manualPersonality = personality;
+}
+
+void Nickname_(u32 sourceLine, const u8 *nickname)
+{
+    INVALID_IF(!DATA.currentMon, "Nickname outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_NICKNAME, nickname);
+}
+//  End Silicon options test functions
 
 static const char *const sBattlerIdentifiersSingles[] =
 {

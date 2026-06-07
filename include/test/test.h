@@ -97,7 +97,9 @@ struct FunctionTestRunnerState
 
 struct SiliconExtraTestVariables
 {
-    bool32 temp;
+    bool32 shouldUseManualPersonality:1;
+    bool32 temp:31;
+    u32 manualPersonality;
 };
 
 extern struct SiliconExtraTestVariables gSiliconTestVariables;
