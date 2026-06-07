@@ -114,13 +114,12 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Nickname")
 
 DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Personality")
 {
-    KNOWN_FAILING;
-    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_NICKNAME;
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR_VARIATION] = VISUAL_OPTION_COLOR_VARIATION_PERSONALITY;
     GIVEN {
         PLAYER(MON_TO_USE) { Shiny(FALSE); }
         PLAYER(MON_TO_USE) { Shiny(TRUE); }
-        OPPONENT(MON_TO_USE) { Shiny(FALSE); Personality(723649); }
-        OPPONENT(MON_TO_USE) { Shiny(TRUE); Personality(723649); }
+        OPPONENT(MON_TO_USE) { Shiny(FALSE); Personality(0x12345678); }
+        OPPONENT(MON_TO_USE) { Shiny(TRUE); Personality(0x12345678); }
     } WHEN {
         TURN { }
     } THEN {
