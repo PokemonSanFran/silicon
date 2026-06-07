@@ -6630,6 +6630,27 @@ static void Cmd_yesnobox(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
+#if TESTING
+        if (gSiliconTestVariables.autoPressYes)
+        {
+            gSiliconTestVariables.autoPressYes = FALSE;
+
+            PlaySE(SE_SELECT);
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            return;
+        }
+        else if (gSiliconTestVariables.autoPressNo)
+        {
+            gSiliconTestVariables.autoPressNo = FALSE;
+
+            gBattleCommunication[CURSOR_POSITION] = 1;
+            PlaySE(SE_SELECT);
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            return;
+        }
+#endif
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);

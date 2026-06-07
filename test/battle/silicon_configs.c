@@ -152,3 +152,73 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Personality")
         EXPECT_EQ(shinyBaseEqual, FALSE);
     }
 }
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Never")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_NEVER;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 0);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (Yes)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ASK;
+    GIVEN {
+        gSiliconTestVariables.autoPressYes = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Ask (No)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ASK;
+    GIVEN {
+        gSiliconTestVariables.autoPressNo = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 0);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ALWAYS;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        MESSAGE("Obtained Master Ball!");
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
+    }
+}
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ALWAYS;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        MESSAGE("Obtained Master Ball!");
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
+    }
+}
