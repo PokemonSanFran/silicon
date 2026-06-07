@@ -170,3 +170,76 @@ script TeachATrainerToFish_Dialogue_ExplainPerfectCast
     release
     end
 }
+
+script TeachATrainerToFish_Script_TeachTrainerFishA
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestComplete)
+    goto_if_quest_reward(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestReward)
+    goto_if_quest_active(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestActive)
+}
+
+script TeachATrainerToFish_Dialogue_QuestActive
+{
+    msgbox(format("How’s your technique? Have you mastered the Perfect Cast and battled a Shiny Pokémon?"),MSGBOX_YESNO,SPEAKER_TEACHTRAINERFISHA)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_PlayerTriesToLie)
+        msgbox(format("Come tell me a story once you’ve got one for real. Nobody likes a tall tale."),,SPEAKER_TEACHTRAINERFISHA)
+    }
+    else
+    {
+        buffermapname(STR_VAR_1,MAP_WAJABI_LAKE)
+        msgbox(format("It takes some people years, sometimes decades, to see the Perfect Cast. I’m sure the fisherfolk around {STR_VAR_1} can give you some ideas."),,SPEAKER_TEACHTRAINERFISHA)
+    }
+    closemessage
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_GiveReward
+{
+    msgbox(format("Tell me the tale."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("A Shiny {STR_VAR_1}. Wish I could have seen it myself."),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("Did you catch it?"),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("I - "),,SPEAKER_PLAYER)
+    msgbox(format("No. Don’t tell me. Keep this legendary tale for yourself, {PLAYER}."),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("I’m thrilled to see the next generation carrying on the craft. Take this, for humoring me."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    cueobjectplayer(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+    giveitem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1)
+    completequest(QUEST_TEACHATRAINERTOFISH)
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_QuestReward
+{
+    msgbox(format("I can smell it. You saw one!"),,SPEAKER_TEACHTRAINERFISHA)
+    checkitemspace(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        goto(TeachATrainerToFish_Dialogue_GiveReward)
+    }
+
+    msgbox(format("Come back when your bag has some space."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_QuestComplete
+{
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    msgbox(format("I think about your {STR_VAR_1} all the time. I hope fishing brings you as much joy as it does me."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    release
+    end
+}
+
