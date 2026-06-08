@@ -365,4 +365,51 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, Off")
     }
 }
 
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, 0x")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_0;
+
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_TO_USE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, Non-zero", u32 exp)
+{
+    enum optionBattleExpMultiplerValues multiplier;
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+
+    PARAMETRIZE { multiplier = BATTLE_OPTION_MULTIPLIER_1; }
+    PARAMETRIZE { multiplier = BATTLE_OPTION_MULTIPLIER_2; }
+
+
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = multiplier;
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_TO_USE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
+    } THEN {
+        results[i].exp = GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+    } FINALLY {
+        u32 baseExp = gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE];
+        u32 mult1Exp = results[0].exp - baseExp;
+        u32 mult2Exp = results[1].exp - baseExp;
+        EXPECT_MUL_EQ(mult1Exp, Q_4_12(2.0), mult2Exp);
+    }
+}
+
 #undef LEVEL_TO_USE
