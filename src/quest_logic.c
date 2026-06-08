@@ -4776,3 +4776,28 @@ bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void)
 
     return TRUE;
 }
+
+void DebugQuest_Teachatrainertofish(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST:
+        case STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING:
+            gSaveBlock3Ptr->hasSeenGuide[GUIDE_FISHING] = TRUE;
+            QuestMenu_ScriptSetActive(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_FISHING_ROD,1);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_TEACHATRAINERTOFISH);
+            VarSet(VAR_QUEST_TEACHATRAINERTOFISH,SPECIES_DONDOZO);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1);
+            break;
+    }
+}

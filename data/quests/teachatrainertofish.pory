@@ -23,27 +23,19 @@ script TeachATrainerToFish_Dialogue_PlayerExclaimShiny
 
 script TeachATrainerToFish_Dialogue_PlayerReactsToLie
 {
-    random(3)
+    random(2)
     switch (var(VAR_RESULT))
     {
         case 0: return
-        case 1: return
-        case 2: msgbox(format("How?!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
-        case 3: msgbox(format("I can't get anything past this guy!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+        case 1: msgbox(format("How can they tell?!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+        case 2: msgbox(format("I can't get anything past them!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
     }
     closemessage
 }
 
 script TeachATrainerToFish_Dialogue_PlayerTriesToLie
 {
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
-    msgbox(format("…"),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…"),,SPEAKER_TEACHTRAINERFISHA)
     msgbox(format("You’re lying. I can smell it on you."),,SPEAKER_TEACHTRAINERFISHA)
     closemessage
     call(TeachATrainerToFish_Dialogue_PlayerReactsToLie)
@@ -194,6 +186,8 @@ script TeachATrainerToFish_Dialogue_QuestActive
         msgbox(format("It takes some people years, sometimes decades, to see the Perfect Cast. I’m sure the fisherfolk around {STR_VAR_1} can give you some ideas."),,SPEAKER_TEACHTRAINERFISHA)
     }
     closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
     release
     end
 }
@@ -214,6 +208,8 @@ script TeachATrainerToFish_Dialogue_GiveReward
     closemessage
     cueobjectplayer(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
     giveitem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1)
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
     completequest(QUEST_TEACHATRAINERTOFISH)
     release
     end
@@ -239,6 +235,8 @@ script TeachATrainerToFish_Dialogue_QuestComplete
     bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
     msgbox(format("I think about your {STR_VAR_1} all the time. I hope fishing brings you as much joy as it does me."),,SPEAKER_TEACHTRAINERFISHA)
     closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
     release
     end
 }

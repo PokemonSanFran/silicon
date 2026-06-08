@@ -4627,6 +4627,50 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING] =
+            {
+                .name = COMPOUND_STRING("Still Hunting"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+        },
     },
     [QUEST_NERIENEQUEST2] =
     {
