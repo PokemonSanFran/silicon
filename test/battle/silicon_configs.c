@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 #include "palette.h"
+#include "load_save.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -152,6 +153,8 @@ DOUBLE_BATTLE_TEST("OPTIONS (VISUAL): Pokémon Variation, Personality")
     }
 }
 
+#undef MON_TO_USE
+
 WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Never")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_NEVER;
@@ -207,3 +210,117 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
     }
 }
+
+#define LEVEL_TO_USE 10
+
+static void AddMonToBox(void)
+{
+    struct BoxPokemon boxMon;
+    u16 species = SPECIES_TESTING_ERRATIC;
+    u8 speciesName[POKEMON_NAME_LENGTH + 1];
+    CreateBoxMon(&boxMon, species, LEVEL_TO_USE, Random32(), OTID_STRUCT_PLAYER_ID);
+
+    SetBoxMonData(&boxMon, MON_DATA_NICKNAME, &speciesName);
+    SetBoxMonData(&boxMon, MON_DATA_SPECIES, &species);
+    GiveBoxMonInitialMoveset(&boxMon);
+    gPokemonStoragePtr->boxes[0][0] = boxMon;
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, All")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ALL;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+        AddMonToBox();
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Party")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+        AddMonToBox();
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (no switch)")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ACTIVE;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+        AddMonToBox();
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
+        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (switching)")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_ACTIVE;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+        AddMonToBox();
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+#undef LEVEL_TO_USE
