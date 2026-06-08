@@ -413,3 +413,41 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, Non-zero", u32 exp)
 }
 
 #undef LEVEL_TO_USE
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Enabled")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_ENABLED;
+
+    GIVEN {
+        PLAYER(SPECIES_MEW) { HPEV(252); AttackEV(252); DefenseEV(252); SpAttackEV(252); SpDefenseEV(252); SpeedEV(252); }
+        OPPONENT(SPECIES_MEW) { HPEV(0); AttackEV(0); DefenseEV(0); SpAttackEV(0); SpDefenseEV(0); SpeedEV(0); }
+    } WHEN {
+        TURN { }
+    } THEN {
+        EXPECT_GT(player->hp, opponent->hp);
+        EXPECT_GT(player->attack, opponent->attack);
+        EXPECT_GT(player->defense, opponent->defense);
+        EXPECT_GT(player->spAttack, opponent->spAttack);
+        EXPECT_GT(player->spDefense, opponent->spDefense);
+        //  EXPECT_EQ(player->speed, opponent->speed); //   Speed is not set in the normal way in tests
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Effort Values, Disabled")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_DISABLED;
+
+    GIVEN {
+        PLAYER(SPECIES_MEW) { HPEV(252); AttackEV(252); DefenseEV(252); SpAttackEV(252); SpDefenseEV(252); SpeedEV(252); }
+        OPPONENT(SPECIES_MEW) { HPEV(0); AttackEV(0); DefenseEV(0); SpAttackEV(0); SpDefenseEV(0); SpeedEV(0); }
+    } WHEN {
+        TURN { }
+    } THEN {
+        EXPECT_EQ(player->hp, opponent->hp);
+        EXPECT_EQ(player->attack, opponent->attack);
+        EXPECT_EQ(player->defense, opponent->defense);
+        EXPECT_EQ(player->spAttack, opponent->spAttack);
+        EXPECT_EQ(player->spDefense, opponent->spDefense);
+        //  EXPECT_EQ(player->speed, opponent->speed); //   Speed is not set in the normal way in tests
+    }
+}

@@ -2373,6 +2373,7 @@ void HPEV_(u32 sourceLine, u32 hpEV)
     INVALID_IF(!DATA.currentMon, "HP EV outside of PLAYER/OPPONENT");
     INVALID_IF(hpEV > MAX_PER_STAT_EVS, "Illegal HP EV: %d", hpEV);
     SetMonData(DATA.currentMon, MON_DATA_HP_EV, &hpEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void AttackEV_(u32 sourceLine, u32 attackEV)
@@ -2380,6 +2381,7 @@ void AttackEV_(u32 sourceLine, u32 attackEV)
     INVALID_IF(!DATA.currentMon, "Attack EV outside of PLAYER/OPPONENT");
     INVALID_IF(attackEV > MAX_PER_STAT_EVS, "Illegal attack EV: %d", attackEV);
     SetMonData(DATA.currentMon, MON_DATA_ATK_EV, &attackEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void DefenseEV_(u32 sourceLine, u32 defenseEV)
@@ -2387,6 +2389,7 @@ void DefenseEV_(u32 sourceLine, u32 defenseEV)
     INVALID_IF(!DATA.currentMon, "Defense EV outside of PLAYER/OPPONENT");
     INVALID_IF(defenseEV > MAX_PER_STAT_EVS, "Illegal defense EV: %d", defenseEV);
     SetMonData(DATA.currentMon, MON_DATA_DEF_EV, &defenseEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void SpAttackEV_(u32 sourceLine, u32 spAttackEV)
@@ -2394,6 +2397,7 @@ void SpAttackEV_(u32 sourceLine, u32 spAttackEV)
     INVALID_IF(!DATA.currentMon, "SpAttack EV outside of PLAYER/OPPONENT");
     INVALID_IF(spAttackEV > MAX_PER_STAT_EVS, "Illegal special attack EV: %d", spAttackEV);
     SetMonData(DATA.currentMon, MON_DATA_SPATK_EV, &spAttackEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV)
@@ -2401,6 +2405,7 @@ void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV)
     INVALID_IF(!DATA.currentMon, "SpDefense EV outside of PLAYER/OPPONENT");
     INVALID_IF(spDefenseEV > MAX_PER_STAT_EVS, "Illegal special defense EV: %d", spDefenseEV);
     SetMonData(DATA.currentMon, MON_DATA_SPDEF_EV, &spDefenseEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void SpeedEV_(u32 sourceLine, u32 speedEV)
@@ -2408,6 +2413,7 @@ void SpeedEV_(u32 sourceLine, u32 speedEV)
     INVALID_IF(!DATA.currentMon, "Speed EV outside of PLAYER/OPPONENT");
     INVALID_IF(speedEV > MAX_PER_STAT_EVS, "Illegal speed EV: %d", speedEV);
     SetMonData(DATA.currentMon, MON_DATA_SPEED_EV, &speedEV);
+    CalculateMonStats(DATA.currentMon);
 }
 
 void Item_(u32 sourceLine, u32 item)
