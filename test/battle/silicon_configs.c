@@ -207,17 +207,3 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
     }
 }
-WILD_BATTLE_TEST("OPTIONS (BATTLE): Take Wild Items, Always")
-{
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS] = BATTLE_OPTION_TAKE_WILD_ITEMS_ALWAYS;
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_MASTER_BALL); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_GUILLOTINE); }
-    } SCENE {
-        MESSAGE("Obtained Master Ball!");
-    } THEN {
-        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MASTER_BALL), 1);
-    }
-}
