@@ -2,6 +2,7 @@
 #include "test/battle.h"
 #include "palette.h"
 #include "load_save.h"
+#include "event_data.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -491,5 +492,59 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Individual Values, Disabled")
         EXPECT_EQ(player->spAttack, opponent->spAttack);
         EXPECT_EQ(player->spDefense, opponent->spDefense);
         //  EXPECT_EQ(player->speed, opponent->speed); //   Speed is not set in the normal way in tests
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (under cap)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_CAP;
+    u16 *var;
+    GIVEN {
+        var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
+        *var = 0;
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_CAP_VALUE_0 - 1); }
+        OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_CAP_VALUE_0 - 1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0 - 1]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (at cap)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_CAP;
+    u16 *var;
+    GIVEN {
+        var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
+        *var = 0;
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_CAP_VALUE_0); }
+        OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_CAP_VALUE_0 - 1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Disabled")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    u16 *var;
+    GIVEN {
+        var = GetVarPointer(B_LEVEL_CAP_VARIABLE);
+        *var = 0;
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_CAP_VALUE_0); }
+        OPPONENT(SPECIES_SUNKERN) { Level(LEVEL_CAP_VALUE_0 - 1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
     }
 }
