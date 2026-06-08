@@ -26,6 +26,7 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fishing.h" // fishingUpdate
 #include "fldeff.h"
 #include "follower_npc.h"
 #include "gpu_regs.h"
@@ -1042,7 +1043,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
     CheckSetVisitedRouteFlags(); // siliconMerge
-    UpdateChainFishingStreak(); // fishingUpdate
+    ResetChainFishingStreak(); // fishingUpdate
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout, TRUE); // skip copying to Faded, gamma shift will take care of it
@@ -1132,7 +1133,7 @@ static void LoadMapFromWarp(bool32 a1)
     MoveAllRoamersToOtherLocationSets();
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);

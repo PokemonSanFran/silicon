@@ -17,7 +17,7 @@
 #define CREEPING_PROXIMITY              2
 #define MAX_PROXIMITY                   20
 
-#define DEXNAV_CHAIN_MAX                UCHAR_MAX // maximum chain value
+#define DEXNAV_CHAIN_MAX                MAX_u8 // maximum chain value
 
 // hidden Pokémon options - an approximation of values due to lack of available data
 #define HIDDEN_MON_STEP_COUNT       100  // Look for hidden Pokémon every x steps

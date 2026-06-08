@@ -4100,7 +4100,7 @@ static void PageEvolution_SpeciesData_PrintStats(u32 species, u32 windowId)
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,sStatNames[statIndex]);
         x+= POKEDEX_STATS_VALUE_X_PADDING;
         u32 stat = SpeciesFilter_GetStatForMon(statIndex,species);
-        ConvertIntToDecimalStringN(gStringVar1,stat,STR_CONV_MODE_LEADING_ZEROS,CountDigits(UCHAR_MAX));
+        ConvertIntToDecimalStringN(gStringVar1,stat,STR_CONV_MODE_LEADING_ZEROS,CountDigits(MAX_u8));
         PageStats_ChangeStatHighlightBasedOnValue(statIndex, stat);
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
         x -= POKEDEX_STATS_VALUE_X_PADDING;

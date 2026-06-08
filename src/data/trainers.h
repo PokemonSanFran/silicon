@@ -20779,10 +20779,10 @@
         },
     },
 #line 7890
-    [DIFFICULTY_NORMAL][TRAINER_188A6F20] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHD] =
     {
 #line 7891
-        .trainerName = _("188A6F20"),
+        .trainerName = _("TeachtrainerfishD"),
 #line 7892
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7893
@@ -20807,10 +20807,10 @@
         },
     },
 #line 7898
-    [DIFFICULTY_NORMAL][TRAINER_1932C509] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHD_2] =
     {
 #line 7899
-        .trainerName = _("1932C509"),
+        .trainerName = _("TeachtrainerfishD"),
 #line 7900
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7901
@@ -20835,10 +20835,10 @@
         },
     },
 #line 7906
-    [DIFFICULTY_NORMAL][TRAINER_19477C78] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE] =
     {
 #line 7907
-        .trainerName = _("19477C78"),
+        .trainerName = _("TeachtrainerfishE"),
 #line 7908
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7909
@@ -20863,10 +20863,10 @@
         },
     },
 #line 7914
-    [DIFFICULTY_NORMAL][TRAINER_19C5BAD7] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE_2] =
     {
 #line 7915
-        .trainerName = _("19C5BAD7"),
+        .trainerName = _("TeachtrainerfishE"),
 #line 7916
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7917
@@ -20891,10 +20891,10 @@
         },
     },
 #line 7922
-    [DIFFICULTY_NORMAL][TRAINER_19CD0726] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF] =
     {
 #line 7923
-        .trainerName = _("19CD0726"),
+        .trainerName = _("TeachtrainerfishF"),
 #line 7924
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7925
@@ -20919,10 +20919,10 @@
         },
     },
 #line 7930
-    [DIFFICULTY_NORMAL][TRAINER_19D7682B] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF_2] =
     {
 #line 7931
-        .trainerName = _("19D7682B"),
+        .trainerName = _("TeachtrainerfishF"),
 #line 7932
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7933

@@ -377,11 +377,11 @@ static u32 GetEggCycleStepsBasedOnGeneration(void)
         case GEN_1:
         case GEN_2:
         case GEN_3:
-        case GEN_7: return UCHAR_MAX + 1;
-        case GEN_4: return UCHAR_MAX;
+        case GEN_7: return MAX_u8 + 1;
+        case GEN_4: return MAX_u8;
         case GEN_5:
-        case GEN_6: return UCHAR_MAX + 2;
-        default: return (UCHAR_MAX / 2) + 1;
+        case GEN_6: return MAX_u8 + 2;
+        default: return (MAX_u8 / 2) + 1;
     }
 }
 

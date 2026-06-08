@@ -424,3 +424,12 @@ const u8 *GetQuestDesc_Improvbattling(void)
 	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_IMPROVBATTLING].desc[flag]);
 	return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Teachatrainertofish(void)
+{
+    u32 flag = ReturnQuestState(QUEST_TEACHATRAINERTOFISH);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_TEACHATRAINERTOFISH),MAP_NUM(MAP_QUEST_TEACHATRAINERTOFISH))->regionMapSectionId,0);
+    StringCopy(gStringVar2,GetSpeciesName(VarGet(VAR_QUEST_TEACHATRAINERTOFISH)));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_TEACHATRAINERTOFISH].desc[flag]);
+	return gStringVar4;
+}

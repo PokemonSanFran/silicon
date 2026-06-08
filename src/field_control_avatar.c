@@ -22,6 +22,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "fldeff_misc.h"
+#include "fishing.h" // fishingUpdate
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
@@ -31,6 +32,7 @@
 #include "palette.h" // siliconMerge
 #include "phenomenon.h" // phenomenon
 #include "pokemon.h"
+#include "quest_logic.h" // siliconQuests
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -279,11 +281,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
+    // Start siliconQuests
+    if (Quest_TeachATrainerToFish_TryRunExclaimScript() == TRUE)
+        return TRUE;
+    // End siliconQuests
+
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
     if (input->tookStep)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
+        ResetChainFishingStreak(); //fishingUpdate
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);

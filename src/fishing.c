@@ -16,6 +16,7 @@
 #include "config/fishing.h"
 // Start fishingUpdate
 #include "event_scripts.h"
+#include "fishing.h"
 #include "quest_logic.h"
 #include "event_data.h"
 #include "constants/event_objects.h"
@@ -428,7 +429,7 @@ static bool32 Fishing_NotEvenNibble(struct Task *task)
 {
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     AlignFishingAnimationFrames();
     StartParkRangerWaterCutscene(task); // fishingUpdate
@@ -450,7 +451,7 @@ static bool32 Fishing_GotAway(struct Task *task)
 {
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
@@ -661,7 +662,12 @@ static void AlignFishingAnimationFrames(void)
         SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, TRUE, playerSprite->y2);
 }
 
-void UpdateChainFishingStreak()
+void ResetChainFishingStreak(void)
+{
+    gChainFishingDexNavStreak = 0;
+}
+
+void UpdateChainFishingStreak(void)
 {
     if (!I_FISHING_CHAIN)
         return;
@@ -733,3 +739,21 @@ static void StartParkRangerYellCutscene(struct Task *task)
     ScriptContext_SetupScript(Fishing_Cutscene_YellAtPlayer); //fishingUpdate
 }
 // End fishingUpdate
+// Start siliconQuests
+bool8 Quest_TeachATrainerToFish_ArePerfectCastComponentsSet(void)
+{
+    if (CalculateFishingTimeOfDayBoost() < FISHING_TIME_OF_DAY_BOOST)
+        return FALSE;
+
+
+    if (CalculateFishingProximityBoost() < (3 * FISHING_PROXIMITY_BOOST))
+        return FALSE;
+
+
+    if (Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold() == FALSE)
+        return FALSE;
+
+
+    return TRUE;
+}
+// End siliconQuests

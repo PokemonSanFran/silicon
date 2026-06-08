@@ -702,4 +702,24 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_TEACHATRAINERTOFISH_FISHERFOLK] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Has anybody spent time with the Fisherfolk around {STR_VAR_1}? I thought fishing was supposed to be relaxing, but those guys are intense!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Watched a fishing documentary called “The Perfect Cast” about some Kalosian fishing techniques. I was too baked to understand, but Resido got a shoutout for a strong fishing culture! &masterthebaitt"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

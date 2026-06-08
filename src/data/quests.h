@@ -4618,14 +4618,59 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_TEACHATRAINERTOFISH] =
     {
-        .name = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
+        .name = COMPOUND_STRING("Teach A Trainer To Fish"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Learn about The Perfect Cast from the fisherfolk around {STR_VAR_1}, and land a Shiny Pokémon!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped TeachtrainerfishA relive the glory days by telling him about a Shiny {STR_VAR_2}."),
+        .descFunc = GetQuestDesc_Teachatrainertofish,
+        .map = COMPOUND_STRING("Lake Wajabi"),
+        .sprite = OBJ_EVENT_GFX_QUEST_TEACHATRAINERTOFISHA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING] =
+            {
+                .name = COMPOUND_STRING("Still Hunting"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+        },
     },
     [QUEST_NERIENEQUEST2] =
     {

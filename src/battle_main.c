@@ -5535,6 +5535,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else
     {
+        Quest_TeachATrainerToFish_RecordEnemy(); // siliconMerge
         CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
         Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
@@ -5901,7 +5902,6 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         if (gDexNavSpecies && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
