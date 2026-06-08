@@ -44,7 +44,7 @@ void Buzzr_IncrementSteps(void)
 
     steps = VarGet(VAR_BUZZR_STEP_COUNTER);
 
-    if (steps == USHRT_MAX)
+    if (steps == MAX_u16)
         return;
 
     VarSet(VAR_BUZZR_STEP_COUNTER,++steps);

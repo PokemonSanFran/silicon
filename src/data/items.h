@@ -16424,7 +16424,7 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_InfiniteSpray,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
-        .holdEffectParam = UCHAR_MAX,
+        .holdEffectParam = MAX_u8,
     },
     //End siliconMerge
     [ITEM_FAIRY_FEATHER] =
