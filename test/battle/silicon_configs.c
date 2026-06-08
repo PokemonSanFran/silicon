@@ -323,4 +323,46 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (switching)")
     }
 }
 
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, On")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_ON;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
+        MESSAGE("Erratic gained 2 Exp. Points and 1 Effort Value!");
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, Off")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_OFF;
+    GIVEN {
+        PLAYER(SPECIES_TESTING_ERRATIC) { Level(LEVEL_TO_USE); }
+        OPPONENT(SPECIES_SUNKERN) { Level(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
+        NOT MESSAGE("Erratic gained 2 Exp. Points and 1 Effort Value!");
+    } THEN {
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+    }
+}
+
 #undef LEVEL_TO_USE
