@@ -19,6 +19,7 @@
 #include "strings.h"
 #include "constants/party_menu.h"
 #include "constants/songs.h"
+#include "options_battle.h" // siliconMerge
 
 #define VALID_MON 0
 #define INVALID_MON 1
@@ -151,6 +152,11 @@ u32 IsBoxMonExcluded(struct BoxPokemon *boxmon)
 
 bool32 CanBoxMonBeSelected(struct BoxPokemon *boxmon)
 {
+    // Start siliconMerge
+    if (IsFaintedBoxMon(boxmon))
+        return FALSE;
+    // End siliconMerge
+
     if (!sPcMonSelectionTypes[sSelectionType].isStrict)
         return TRUE;
     return !IsBoxMonExcluded(boxmon);

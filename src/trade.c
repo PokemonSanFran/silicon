@@ -3354,12 +3354,18 @@ static void BufferTradeSceneStrings(void)
         StringCopy(gStringVar1, ingameTrade->otName);
         StringCopy_Nickname(gStringVar3, ingameTrade->nickname);
         */
-        //End surpriseTrade
         if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
             GetMonData(&gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC], MON_DATA_NICKNAME, name);
         else
             GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_NICKNAME, name);
         StringCopy_Nickname(gStringVar2, name);
+
+        GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_NAME,name);
+        StringCopy(gStringVar1, name);
+
+        GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME,name);
+        StringCopy(gStringVar3, name);
+        //End surpriseTrade
     }
 }
 
@@ -4570,12 +4576,23 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void BufferInGameTradeMonName(void)
 {
-    return; // surpriseTrade
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
+    // Start surpriseTrade
+    /*
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8005];
     GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
+    */
+
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        GetMonData(&gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC], MON_DATA_NICKNAME,nickname);
+    else
+        GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_NICKNAME,nickname);
+    StringCopy_Nickname(gStringVar1,nickname);
+
+    StringCopy(gStringVar2, GetSpeciesName(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES)));
+    // End surpriseTrade
 }
 
 static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTrade)
