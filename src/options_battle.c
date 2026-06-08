@@ -17,6 +17,7 @@
 #include "line_break.h"
 #include "event_data.h"
 #include "little_cup.h" // littlecup
+#include "test/test.h"
 
 // Battle Settings: Experience
 static u32 GetBattleExperienceOption(void);
@@ -310,8 +311,9 @@ void Script_AreIndividualValuesDisabled(void)
 
 bool32 AreIndividualValuesDisabled(void)
 {
-#ifdef TESTING
-    return FALSE;
+#if TESTING
+    if (!gSiliconTestVariables.overrideIVs)
+        return FALSE;
 #endif
     return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
 }

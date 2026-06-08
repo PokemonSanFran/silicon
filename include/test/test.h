@@ -100,6 +100,8 @@ struct SiliconExtraTestVariables
     bool32 shouldUseManualPersonality:1;
     bool32 autoPressYes:1;
     bool32 autoPressNo:1;
+    bool32 overrideEVs:1;
+    bool32 overrideIVs:1;
     bool32 temp:29;
     u32 manualPersonality;
 };
