@@ -3525,6 +3525,13 @@ static void Inventory_PrintFooter(void)
         case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Move_Favorite);
             break;
+        case INVENTORY_MESSAGE_ACCESS_FAVORITES:
+            {
+                u16 quantity = CountTotalItemQuantityInBag(itemId);
+                CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You can access the {STR_VAR_1} from the Free Space."));
+            }
+            break;
         case INVENTORY_MESSAGE_CANT_USE_ITEM:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Use);
             break;
@@ -4049,6 +4056,14 @@ bool8 isCurrentItemFavorite(void){
     return isFavoriteItem(pocketId, itemIdx);
 }
 
+bool8 hasFavoriteItem(void){
+    for(u8 pocketId = 0; pocketId < POCKETS_COUNT; pocketId++){
+        if(gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId] != 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static void Inventory_UseItem(u8 taskId)
 {
     //u16 currentOption = getSelectedItemOptionNum(sMenuDataPtr->itemIdxPickMode);
@@ -4096,13 +4111,17 @@ static void Inventory_UseItem(u8 taskId)
         case INVENTORY_ITEM_OPTION_FAVORITE:
         {
             bool8 isAlreadyFavorite = isCurrentItemFavorite();
-            //oldPocketId
+            bool8 alreadyHasFavorite = hasFavoriteItem();
+            bool8 forceFavoriteMessage = FALSE;
             if(pocketId != POCKET_FAVORITE_ITEMS){
                 if(!isAlreadyFavorite){
                     //Favorite
                     MoveItemToTop();
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
+
+                    if(!alreadyHasFavorite)
+                        forceFavoriteMessage = TRUE;
 
                     gSaveBlock3Ptr->InventoryData.itemIdx = 0;
                     gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
@@ -4140,7 +4159,11 @@ static void Inventory_UseItem(u8 taskId)
                     gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocketId]--;
                 }
             }
-            Inventory_RemoveMenu(taskId);
+            if(forceFavoriteMessage)
+                Task_ReturnToMainInventoryMenu(taskId, INVENTORY_MESSAGE_ACCESS_FAVORITES);
+            else
+                Inventory_RemoveMenu(taskId);
+
             ForceReloadInventory();
             Inventory_PrintItemList();
             Inventory_PrintDesc();
@@ -4383,6 +4406,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
                 case INVENTORY_MESSAGE_SORTED_ITEMS_BY:
+                case INVENTORY_MESSAGE_ACCESS_FAVORITES:
                     sMenuDataPtr->itemIdxPickMode = 0;
                     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_DEFAULT;
                     shouldOpenMenu = FALSE;
