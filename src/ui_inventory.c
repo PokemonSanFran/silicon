@@ -63,6 +63,9 @@ struct MenuResources
     u16 FavoritePocketItems[POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS][NUM_FAVORITE_ITEMS_ARRAY_SIZE];
     u8 inventoryMode;
     u8 partyDisplayMode;
+    struct ItemSlot* tempPocket;
+    u8 temp_itemIdx;
+    u8 temp_yFirstItem;
 };
 
 struct InventoryListMenuStruct
@@ -4649,6 +4652,64 @@ static void Task_Inventory_HandleCantMoveInput(u8 taskId)
     }
 }
 
+static struct ItemSlot *GetPocketSlots(u8 pocket)
+{
+    switch (pocket)
+    {
+    case POCKET_MEDICINE:
+        return gSaveBlock1Ptr->bag.bagPocket_Medicine;
+    case POCKET_POKE_BALLS:
+        return gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
+    case POCKET_BATTLE_ITEMS:
+        return gSaveBlock1Ptr->bag.bagPocket_BattleItems;
+    case POCKET_POWERUP:
+        return gSaveBlock1Ptr->bag.bagPocket_PowerUp;
+    case POCKET_BERRIES:
+        return gSaveBlock1Ptr->bag.bagPocket_Berries;
+    case POCKET_OTHER:
+        return gSaveBlock1Ptr->bag.bagPocket_Other;
+    case POCKET_TM_HM:
+        return gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
+    case POCKET_TREASURE:
+        return gSaveBlock1Ptr->bag.bagPocket_Treasure;
+    case POCKET_Z_CRYSTALS:
+        return gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
+    case POCKET_MEGA_STONES:
+        return gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
+    case POCKET_KEY_ITEMS:
+        return gSaveBlock1Ptr->bag.bagPocket_KeyItems;
+    default:
+        return NULL;
+    }
+}
+
+static void CreatePocketBackup(void)
+{
+    u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u16 count = getMaxItemsFromPocket(pocket);
+    struct ItemSlot *slots = GetPocketSlots(pocket);
+
+    if (slots == NULL)
+        return;
+
+    sMenuDataPtr->tempPocket = Alloc(sizeof(struct ItemSlot) * count);
+    memcpy(sMenuDataPtr->tempPocket, slots, sizeof(struct ItemSlot) * count);
+}
+
+static void RestorePocketBackup(void)
+{
+    u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u16 count = getMaxItemsFromPocket(pocket);
+    struct ItemSlot *slots = GetPocketSlots(pocket);
+
+    if (slots == NULL || sMenuDataPtr->tempPocket == NULL)
+        return;
+
+    memcpy(slots, sMenuDataPtr->tempPocket, sizeof(struct ItemSlot) * count);
+    Free(sMenuDataPtr->tempPocket);
+    sMenuDataPtr->tempPocket = NULL;
+}
+
 static void Inventory_EnterMoveMode(u8 taskId)
 {
     if(sMenuDataPtr->inventoryMode != INVENTORY_MODE_FIELD)
@@ -4668,7 +4729,10 @@ static void Inventory_EnterMoveMode(u8 taskId)
         gTasks[taskId].func = Task_Inventory_HandleCantMoveInput;
         return;
     }
-
+    
+    sMenuDataPtr->temp_itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
+    sMenuDataPtr->temp_yFirstItem = gSaveBlock3Ptr->InventoryData.yFirstItem;
+    CreatePocketBackup();
     sMenuDataPtr->currentSelectMode = INVENTORY_MODE_MOVE_ITEMS;
     Inventory_PrintFooter();
     Inventory_PrintItemList();
@@ -4720,8 +4784,15 @@ static void Task_Inventory_HandleMoveInput(u8 taskId)
         Inventory_MoveMode_HandleMoveUp(taskId);
     if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
         Inventory_MoveMode_HandleMoveDown(taskId);
-    else if (JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON) || JOY_NEW(A_BUTTON))
+    else if (JOY_NEW(SELECT_BUTTON) || JOY_NEW(A_BUTTON))
         Inventory_MoveMode_CancelMove(taskId);
+    else if (JOY_NEW(B_BUTTON)){
+        gSaveBlock3Ptr->InventoryData.itemIdx = sMenuDataPtr->temp_itemIdx;
+        gSaveBlock3Ptr->InventoryData.yFirstItem = sMenuDataPtr->temp_yFirstItem;
+        RestorePocketBackup();
+        //RecalculateCalculateCursorInventoryData();
+        Inventory_MoveMode_CancelMove(taskId);
+    }
 }
 
 static void Inventory_CancelFavorite(u8 taskId)
