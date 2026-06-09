@@ -4266,6 +4266,7 @@ static void RegisterItemIntoDirection(u8 direction)
 {
     u32 currentItem = Inventory_GetItemIdCurrentlySelected();
 
+    PlaySE(SE_SELECT);
     if(gSaveBlock3Ptr->InventoryData.registeredItem[direction] == currentItem)
     {
         gSaveBlock3Ptr->InventoryData.registeredItem[direction] = ITEM_NONE;
@@ -4634,6 +4635,7 @@ static void Task_Inventory_HandleRegisterDirection(u8 taskId)
     }
     else if (JOY_NEW(JOY_EXCL_DPAD))
     {
+        PlaySE(SE_SELECT);
         Inventory_CancelFavorite(taskId);
     }
 }
