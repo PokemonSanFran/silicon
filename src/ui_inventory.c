@@ -2760,7 +2760,7 @@ static const u8 sText_Help_Bar[]                    = _("{DPAD_LEFTRIGHT} Pocket
 static const u8 sText_Help_Bar_Battle[]             = _("{DPAD_LEFTRIGHT} Pockets {A_BUTTON} Pick {B_BUTTON} Return");
 static const u8 sText_Help_Bar_GiveItem[]           = _("{DPAD_LEFTRIGHT} Pockets {A_BUTTON} Pick {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Use[]                = _("{DPAD_UPDOWN} Options {A_BUTTON} Choose {B_BUTTON} Cancel");
-static const u8 sText_Help_Bar_Move[]               = _("Move the {STR_VAR_1} where? {DPAD_UPDOWN} Move {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Move[]               = _("Move the {STR_VAR_1} where? {DPAD_UPDOWN} Move {A_BUTTON} Place {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_Cant_Move_Favorite[] = _("You can't move a favorite item! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Cant_Use[]           = _("You can't use this item right now! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Cant_Toss[]          = _("You can't toss this item! {A_BUTTON} Confirm");
@@ -3483,8 +3483,8 @@ static void Inventory_PrintFooter(void)
     u32 x = 4;
     u32 y = 0;
     u32 font = FONT_NARROW;
-    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
-    u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
+    u32 lineSpacing = GetFontAttribute(font, FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     u32 itemId = Inventory_GetItemIdCurrentlySelected();
     u16 paletteIndex = INTERFACE_PALETTE_NUM * 16;
@@ -3532,7 +3532,7 @@ static void Inventory_PrintFooter(void)
             {
                 u16 quantity = CountTotalItemQuantityInBag(itemId);
                 CopyItemNameHandlePlural(itemId, gStringVar1, quantity);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You can access the {STR_VAR_1} from the Free Space."));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You can access the {STR_VAR_1} from the Free Space pocket."));
             }
             break;
         case INVENTORY_MESSAGE_CANT_USE_ITEM:
@@ -3555,6 +3555,7 @@ static void Inventory_PrintFooter(void)
             break;
     }
 
+    font = GetFontIdToFit(gStringVar4, FONT_NARROW, letterSpacing, 232);
     AddTextPrinterParameterized4(INVENTORY_WINDOW_FOOTER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_HELP_BAR], TEXT_SKIP_DRAW, gStringVar4);
 
     if(pocketId == POCKET_TM_HM)
@@ -4784,7 +4785,7 @@ static void Task_Inventory_HandleMoveInput(u8 taskId)
         Inventory_MoveMode_HandleMoveUp(taskId);
     if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
         Inventory_MoveMode_HandleMoveDown(taskId);
-    else if (JOY_NEW(SELECT_BUTTON) || JOY_NEW(A_BUTTON))
+    else if (JOY_NEW(A_BUTTON))
         Inventory_MoveMode_CancelMove(taskId);
     else if (JOY_NEW(B_BUTTON)){
         gSaveBlock3Ptr->InventoryData.itemIdx = sMenuDataPtr->temp_itemIdx;
