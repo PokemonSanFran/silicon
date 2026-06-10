@@ -588,3 +588,23 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
         NOT MESSAGE(AI_TRAINER_NAME " is about to send out Wobbuffet. Will you switch your Pokémon?");
     }
 }
+
+/*
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
+{
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_TESTING_PREEVO) { Level(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    }
+}
+*/
