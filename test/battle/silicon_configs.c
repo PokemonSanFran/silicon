@@ -548,3 +548,43 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Disabled")
         EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SHIFT)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE] = OPTIONS_BATTLE_STYLE_SHIFT;
+
+    GIVEN {
+        gSiliconTestVariables.overrideSwitchMode = TRUE;
+        //  Not testing actually switching pokemon right now
+        //  since that seems to not be possible
+        gSiliconTestVariables.autoPressNo = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE(AI_TRAINER_NAME " is about to send out Wobbuffet. Will you switch your Pokémon?");
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE] = OPTIONS_BATTLE_STYLE_SET;
+
+    GIVEN {
+        gSiliconTestVariables.overrideSwitchMode = TRUE;
+        gSiliconTestVariables.autoPressNo = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GUILLOTINE); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet fainted!");
+        NOT MESSAGE(AI_TRAINER_NAME " is about to send out Wobbuffet. Will you switch your Pokémon?");
+    }
+}

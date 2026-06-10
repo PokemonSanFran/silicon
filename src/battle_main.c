@@ -3196,7 +3196,8 @@ static void ClearSetBScriptingStruct(void)
     gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_SWITCH_STYLE];
 	// End siliconMerge
     #if TESTING
-    gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
+    if (!gSiliconTestVariables.overrideSwitchMode)
+        gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
     #endif
     gBattleScripting.expOnCatch = (GetConfig(B_EXP_CATCH) >= GEN_6);
     gBattleScripting.specialTrainerBattleType = specialBattleType;

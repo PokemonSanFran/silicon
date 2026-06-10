@@ -102,7 +102,8 @@ struct SiliconExtraTestVariables
     bool32 autoPressNo:1;
     bool32 overrideEVs:1;
     bool32 overrideIVs:1;
-    bool32 temp:29;
+    bool32 overrideSwitchMode:1;
+    bool32 temp:26;
     u32 manualPersonality;
 };
 
