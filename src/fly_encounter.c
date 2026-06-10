@@ -97,7 +97,7 @@ void FlyWildEncounter(enum FlyEncounterTypes encounterType)
     {
         gSpecialVar_Result = FALSE;
     }
-    else if (GetMonData(&gEnemyParty[0],MON_DATA_SPECIES) != SPECIES_NONE)
+    else if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES) != SPECIES_NONE)
     {
         BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;

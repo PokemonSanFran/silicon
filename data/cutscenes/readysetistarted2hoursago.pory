@@ -4,13 +4,15 @@ const OLIVER = 2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 
-script TwoHoursAgo_ObjectSetUp {
+script TwoHoursAgo_ObjectSetUp
+{
     setflag(FLAG_HIDE_CHARLOTTE)
-        setobjectmovementtype(OLIVER,MOVEMENT_TYPE_WANDER_AROUND)
-
-        if (var (VAR_PLAYER_HOME_STATE) > SLEPT_AFTER_SWAGBAG) { //If you've got four badges, Oliver no longer provides help and tutorials and isn't in the house
+    setobjectmovementtype(OLIVER,MOVEMENT_TYPE_WANDER_AROUND)
+    special(GetNumberOfBadges)
+    if (var(VAR_RESULT) > 0)
+    {
             setflag(FLAG_HIDE_OLIVER)
-        }
+    }
 }
 
 script TwoHoursAgo_CameraToPlayer_Script {

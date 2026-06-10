@@ -1111,7 +1111,7 @@ static const struct SubQuest sPersuasivePassenger_Sub[QUEST_PERSUASIVEPASSENGER_
 static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] = {
     sub_quest(128,
             COMPOUND_STRING("Bodegaburnoutdelivery_Strength_H"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route10,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1119,7 +1119,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(129,
             COMPOUND_STRING("Bodegaburnoutdelivery_A"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_PiocaBridge,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1127,7 +1127,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(130,
             COMPOUND_STRING("Bodegaburnoutdelivery_B"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route1,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1135,7 +1135,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(131,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_C"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Navalbase,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1143,7 +1143,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(132,
             COMPOUND_STRING("Bodegaburnoutdelivery_Strength_I"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route13,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1151,7 +1151,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(133,
             COMPOUND_STRING("Bodegaburnoutdelivery_Rock_Smash_F"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_HalerbaWilds,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1159,7 +1159,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(134,
             COMPOUND_STRING("Bodegaburnoutdelivery_Whirlpool_J"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_RouteE,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1167,7 +1167,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(135,
             COMPOUND_STRING("Bodegaburnoutdelivery_Rock_Smash_G"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Robinwilltunnel,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1175,7 +1175,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(136,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_D"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route100,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1183,7 +1183,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(137,
             COMPOUND_STRING("Bodegaburnoutdelivery_Cut_E"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route3,
             ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,
             QUEST_SPRITE_TYPE_ITEM,
@@ -1191,7 +1191,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(138,
             COMPOUND_STRING("Bodegaburnoutrescue_Rock_Smash_O"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route11,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_ROCK_SMASH_O,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1199,7 +1199,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(139,
             COMPOUND_STRING("Bodegaburnoutrescue_Cut_M"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_HalerbaWilds,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_CUT_M,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1207,7 +1207,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(140,
             COMPOUND_STRING("Bodegaburnoutrescue_Strength_Q"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route14,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_STRENGTH_Q,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1215,7 +1215,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(141,
             COMPOUND_STRING("Bodegaburnoutrescue_Dive_N"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Arantraz,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_DIVE_N,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1223,7 +1223,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(142,
             COMPOUND_STRING("Bodegaburnoutrescue_K"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route2,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_K,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1231,7 +1231,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(143,
             COMPOUND_STRING("Bodegaburnoutrescue_Rock_Smash_P"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route12,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_ROCK_SMASH_P,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1239,7 +1239,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(144,
             COMPOUND_STRING("Bodegaburnoutrescue_L"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route7,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_L,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1247,7 +1247,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(145,
             COMPOUND_STRING("Bodegaburnoutrescue_Whirlpool_S"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_RouteA,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_WHIRLPOOL_S,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -1255,7 +1255,7 @@ static const struct SubQuest sBodegaBurnout_Sub[QUEST_BODEGABURNOUT_SUB_COUNT] =
             ),
     sub_quest(146,
             COMPOUND_STRING("Bodegaburnoutrescue_Strength_R"),
-            gText_Blank,
+            gText_ExpandedPlaceholder_Empty,
             gText_Route4,
             OBJ_EVENT_GFX_BODEGABURNOUTRESCUE_STRENGTH_R,
             QUEST_SPRITE_TYPE_OBJECT,
@@ -2156,14 +2156,102 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_IMPROVBATTLING] =
     {
-        .name = gText_Quest_ImprovBattling_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_ImprovBattling_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_ImprovBattling_DoneDesc,
-        .map = gText_Quest_ImprovBattling_Map,
-        .sprite = OBJ_EVENT_GFX_RICH_BOY,
+        .name = COMPOUND_STRING("Improv Battling"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Win three battles in a row in the {STR_VAR_1} Improv show without using your own Pokémon!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You joined and conquered the {STR_VAR_1} Improv show!"),
+        .descFunc = GetQuestDesc_Improvbattling,
+        .map = COMPOUND_STRING("Petarosa Borough Improv"),
+        .sprite = OBJ_EVENT_GFX_QUEST_IMPROVBATTLING_A,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_IMPROVBATTLING_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_STARTED_QUEST]=
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_DEFEATED_A]=
+            {
+                .name = COMPOUND_STRING("Defeated A"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_DEFEATED_B]=
+            {
+                .name = COMPOUND_STRING("Defeated B"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_COMPLETED]=
+            {
+                .name = COMPOUND_STRING("Completed"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_BEFORE_ZENZU_RECRUIT]=
+            {
+                .name = COMPOUND_STRING("Before Zenzu Recruit"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_AFTER_ZENZU_RECRUIT]=
+            {
+                .name = COMPOUND_STRING("After Zenzu Recruit"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_NOT_STARTED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Not Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_STARTED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Started"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_X]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Defeated X"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_Y]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Defeated Y"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+            [STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_COMPLETED]=
+            {
+                .name = COMPOUND_STRING("Post Quest Battles Completed"),
+                .setupFunc = DebugQuest_ImprovBattling,
+                side_quest_map(MAP_PETAROSA_BOROUGH_IMPROV),
+                .warpId = 1,
+            },
+        },
     },
     [QUEST_BATTLEARCADEMINIQUEST] =
     {
@@ -4530,14 +4618,59 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_TEACHATRAINERTOFISH] =
     {
-        .name = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("???"),
-        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("???"),
-        .map = COMPOUND_STRING("???"),
-        .sprite = OBJ_EVENT_GFX_UNKNOWN,
+        .name = COMPOUND_STRING("Teach A Trainer To Fish"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Learn about The Perfect Cast from the fisherfolk around {STR_VAR_1}, and land a Shiny Pokémon!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped TeachtrainerfishA relive the glory days by telling him about a Shiny {STR_VAR_2}."),
+        .descFunc = GetQuestDesc_Teachatrainertofish,
+        .map = COMPOUND_STRING("Lake Wajabi"),
+        .sprite = OBJ_EVENT_GFX_QUEST_TEACHATRAINERTOFISHA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
         .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH_ORIGIN),
+                .warpId = 0,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING] =
+            {
+                .name = COMPOUND_STRING("Still Hunting"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+            [STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Teachatrainertofish,
+                side_quest_map(MAP_QUEST_TEACHATRAINERTOFISH),
+                .warpId = WARP_ID_NONE,
+                .x = 14,
+                .y = 31,
+            },
+        },
     },
     [QUEST_NERIENEQUEST2] =
     {

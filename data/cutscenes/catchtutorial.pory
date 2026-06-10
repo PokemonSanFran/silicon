@@ -96,7 +96,6 @@ script CatchTutorial_StartCatchingScene_Script
     special(SavePlayerParty)
     special(LoadWallyZigzagoon)
     special(StartWallyTutorialBattle)
-    waitstate
     goto(CatchTutorial_PostCatching_Script)
 }
 

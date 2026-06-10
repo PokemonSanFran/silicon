@@ -295,6 +295,9 @@ static bool8 GeneratePhenomenonTile(u8 numPhenomenon)
     if(headerId == 0xFFFF)
         return FALSE;
 
+    if (FlagGet(DN_FLAG_SEARCHING))
+        return FALSE;
+
     // Determine environment and encounter rate
     const struct WildPokemonInfo *landMonsInfo       = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo      = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;

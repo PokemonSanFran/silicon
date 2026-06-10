@@ -16,5 +16,7 @@ const u8 *GetQuestDesc_GetTheBandBackTogether(void);
 const u8 *GetQuestDesc_RestaurantExpansion1(void);
 const u8 *GetQuestDesc_Freetheinnocent(void);
 const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void);
+const u8 *GetQuestDesc_Improvbattling(void);
+const u8 *GetQuestDesc_Teachatrainertofish(void);
 
 #endif // GUARD_QUEST_FLAVOR_LOOKUP

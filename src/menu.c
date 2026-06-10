@@ -341,20 +341,20 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 left, u8 top, u8 width, u8 he
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
 {
     //Top Left
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 5, left - 1, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, sTileNum + 5, left - 1, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
     //Left Bar
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 7, left - 1, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, sTileNum + 7, left - 1, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
     //           _
     //Top Right
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 6, left + width, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, sTileNum + 6, left + width, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
     //Right Bar
-    FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 10, left + width, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, sTileNum + 10, left + width, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
     //Bottom Left
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 11), left - 1, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 11), left - 1, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
     //Bottom Bar
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 12), left, top + height, width, 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 12), left, top + height, width, 1, DLG_WINDOW_PALETTE_NUM);
     //Bottom Right
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(DLG_WINDOW_BASE_TILE_NUM + 13), left + width, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 13), left + width, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
     /*
     FillMenuTilemapBufferRect(bg,  1, left - 2,         top - 1,         1, 1);
     FillMenuTilemapBufferRect(bg,  3, left - 1,         top - 1,         1, 1);
@@ -1887,12 +1887,12 @@ static void UNUSED UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap 
     }
 }
 
-static void UNUSED LoadMonIconPalAtOffset(u8 palOffset, u16 speciesId)
+static void UNUSED LoadMonIconPalAtOffset(u8 palOffset, enum Species speciesId)
 {
     LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, PLTT_SIZE_4BPP);
 }
 
-static void UNUSED DrawMonIconAtPos(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
+static void UNUSED DrawMonIconAtPos(u8 windowId, enum Species speciesId, u32 personality, u16 x, u16 y)
 {
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality), x, y, 32, 32);
 }

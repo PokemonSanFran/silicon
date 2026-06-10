@@ -40,6 +40,7 @@ enum AdventureGuideList
     GUIDE_POKERUS,
     GUIDE_REMATCHES,
     GUIDE_BATTLE_FACILITY,
+    GUIDE_MINING,
     NUM_GUIDES,
 };
 

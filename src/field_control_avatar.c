@@ -6,7 +6,9 @@
 #include "daycare.h"
 #include "debug.h"
 #include "dexnav.h"
+#include "ui_dexnav.h" // dexnav
 #include "faraway_island.h"
+#include "follower_npc.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -20,16 +22,17 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "fldeff_misc.h"
+#include "fishing.h" // fishingUpdate
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
-#include "map_preview_screen.h" // mapPreviews
 #include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h" // siliconMerge
 #include "phenomenon.h" // phenomenon
 #include "pokemon.h"
+#include "quest_logic.h" // siliconQuests
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -39,9 +42,11 @@
 #include "trainer_hill.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
+#include "wild_encounter_ow.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
+#include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
@@ -67,7 +72,7 @@ static EWRAM_DATA u8 sPreviousDirection = 0;
 static void SetDirectionFromHeldKeys(u16);
 static u32 GetDirectionFromBitfield(u32);
 // End changePlayerDirection
-static void GetPlayerPosition(struct MapPosition *);
+void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
 static bool8 TryStartInteractionScript(struct MapPosition *, u16, enum Direction);
@@ -78,7 +83,6 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *, u8, enum Dire
 static const u8 *GetInteractedWaterScript(struct MapPosition *, u8, enum Direction);
 static bool32 TrySetupDiveDownScript(void);
 static bool32 TrySetupDiveEmergeScript(void);
-static bool8 TryStartStepBasedScript(struct MapPosition *, u16, enum Direction);
 static bool8 CheckStandardWildEncounter(u16);
 static bool8 TryArrowWarp(struct MapPosition *, u16, enum Direction);
 static bool8 IsWarpMetatileBehavior(u16);
@@ -118,6 +122,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->heldDirection2 = FALSE;
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
+    input->pressedLButton = FALSE; // dexnav
     input->pressedRButton = FALSE;
     input->input_field_1_1 = FALSE;
     input->input_field_1_2 = FALSE;
@@ -210,6 +215,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
+            // Start dexnav
+            if (newKeys & L_BUTTON)
+                input->pressedLButton = TRUE;
+            // End dexnav
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -272,14 +281,20 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
+    // Start siliconQuests
+    if (Quest_TeachATrainerToFish_TryRunExclaimScript() == TRUE)
+        return TRUE;
+    // End siliconQuests
+
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
     if (input->tookStep)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
+        ResetChainFishingStreak(); //fishingUpdate
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
-        if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
+        DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
+        if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
 
@@ -318,6 +333,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
 
+    //Start dexnav
+    if (input->pressedStartButton && FlagGet(DN_FLAG_SEARCHING) && Dexnav_OpenScanMode())
+        return TRUE;
+    //End dexnav
+
 // Start siliconMerge
     if (input->pressedStartButton && StartMenu_OpenNormalMode())
     /*
@@ -337,7 +357,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 
     // Start siliconMerge
-	if (input->pressedRButton && ToggleRunBehavior())
+	if (input->pressedLButton && ToggleRunBehavior())
         return TRUE;
 	// End siliconMerge
     if (input->pressedRButton && TryStartDexNavSearch())
@@ -361,7 +381,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     return FALSE;
 }
 
-static void GetPlayerPosition(struct MapPosition *position)
+void GetPlayerPosition(struct MapPosition *position)
 {
     PlayerGetDestCoords(&position->x, &position->y);
     position->elevation = PlayerGetElevation();
@@ -508,6 +528,8 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 
     if (PlayerHasFollowerNPC() && objectEventId == GetFollowerNPCObjectId())
         script = GetFollowerNPCScriptPointer();
+    else if (IsOverworldWildEncounter(&gObjectEvents[objectEventId], OWE_ANY))
+        script = GetOverworlWildEncounterScript(objectEventId);
     else if (gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_FOLLOWER)
         script = EventScript_Follower;
     else if (InTrainerHill() == TRUE)
@@ -699,7 +721,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         SetMsgSignPostAndVarFacing(direction);
         return Common_EventScript_ShowPokemonCenterSign;
     }
-    if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive())
+    if (IsFieldMoveUnlocked(FIELD_MOVE_ROCK_CLIMB) && MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive())
         return EventScript_UseRockClimb;
 
     elevation = position->elevation;
@@ -802,7 +824,7 @@ static bool32 TrySetupDiveEmergeScript(void)
     return FALSE;
 }
 
-static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior, enum Direction direction)
+bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior, enum Direction direction)
 {
     if (TryStartCoordEventScript(position) == TRUE)
         return TRUE;
@@ -981,7 +1003,7 @@ static void UpdateFriendshipStepCounter(void)
     (*ptr) %= 128;
     if (*ptr == 0)
     {
-        struct Pokemon *mon = gPlayerParty;
+        struct Pokemon *mon = gParties[B_TRAINER_PLAYER];
         for (i = 0; i < PARTY_SIZE; i++)
         {
             AdjustFriendship(mon, FRIENDSHIP_EVENT_WALKING);
@@ -992,7 +1014,7 @@ static void UpdateFriendshipStepCounter(void)
 
 static void UpdateFollowerStepCounter(void)
 {
-    if (gPlayerPartyCount > 0 && gFollowerSteps < (u16)-1)
+    if (gPartiesCount[B_TRAINER_PLAYER] > 0 && gFollowerSteps < (u16)-1)
         gFollowerSteps++;
 }
 
@@ -1034,9 +1056,26 @@ void RestartWildEncounterImmunitySteps(void)
     sWildEncounterImmunitySteps = 0;
 }
 
+static bool32 ShouldDisableRandomEncounters(void)
+{
+    if (FlagGet(WE_FLAG_NO_ENCOUNTER))
+        return TRUE;
+
+    if (!WE_VANILLA_RANDOM && WE_OW_ENCOUNTERS)
+    {
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && !WE_OWE_BATTLE_PIKE)
+            return FALSE;
+
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR && !WE_OWE_BATTLE_PYRAMID)
+            return FALSE;
+    }
+
+    return !WE_VANILLA_RANDOM;
+}
+
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-    if (FlagGet(OW_FLAG_NO_ENCOUNTER))
+    if (ShouldDisableRandomEncounters())
         return FALSE;
 
     if (sWildEncounterImmunitySteps < 4)

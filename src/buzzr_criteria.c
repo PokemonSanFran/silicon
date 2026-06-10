@@ -44,7 +44,7 @@ void Buzzr_IncrementSteps(void)
 
     steps = VarGet(VAR_BUZZR_STEP_COUNTER);
 
-    if (steps == USHRT_MAX)
+    if (steps == MAX_u16)
         return;
 
     VarSet(VAR_BUZZR_STEP_COUNTER,++steps);
@@ -210,7 +210,7 @@ void TweetCriteria_IsPsyopComplete(void)
 
 void TweetCriteria_IsPsyopActive(void)
 {
-    gSpecialVar_Result = (IsQuestActiveState(QUEST_PSYOP));
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_PSYOP) ||(IsQuestRewardState(QUEST_PSYOP)) || (IsQuestCompletedState(QUEST_PSYOP))) ;
 }
 
 void TweetCriteria_Quest_NPC_BetweenAStoneAndAHardPlace(void)
@@ -307,7 +307,7 @@ void TweetCriteria_Quest_Kitchenvolunteering(void)
 
 void TweetCriteria_Quest_RestoreespuleegymActive(void)
 {
-    gSpecialVar_Result = IsQuestActiveState(QUEST_RESTOREESPULEEGYM);
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_RESTOREESPULEEGYM) ||(IsQuestRewardState(QUEST_RESTOREESPULEEGYM)) || (IsQuestCompletedState(QUEST_RESTOREESPULEEGYM))) ;
 }
 
 void TweetCriteria_Quest_RestoreespuleegymComplete(void)
@@ -317,7 +317,7 @@ void TweetCriteria_Quest_RestoreespuleegymComplete(void)
 
 void TweetCriteria_Quest_RestorezenzugymActive(void)
 {
-    gSpecialVar_Result = IsQuestActiveState(QUEST_RESTOREZENZUGYM);
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_RESTOREESPULEEGYM) ||(IsQuestRewardState(QUEST_RESTOREESPULEEGYM)) || (IsQuestCompletedState(QUEST_RESTOREESPULEEGYM))) ;
 }
 
 void TweetCriteria_Quest_RestorezenzugymComplete(void)
@@ -338,5 +338,14 @@ void TweetCriteria_Quest_RestorehodoucityAssigned(void)
 void TweetCriteria_Quest_RestorehodoucityComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREHODOUGYM);
+}
+
+void TweetCriteria_Quest_ImprovbattlingComplete(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_IMPROVBATTLING);
+}
+void TweetCriteria_Quest_ImprovbattlingActive(void)
+{
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_IMPROVBATTLING) ||(IsQuestRewardState(QUEST_IMPROVBATTLING)) || (IsQuestCompletedState(QUEST_IMPROVBATTLING))) ;
 }
 

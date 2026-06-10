@@ -44,7 +44,6 @@ script Quest_Psyop_Script_JudgePokemon
     msgbox(format("Welcome to the &AuthenticHustle challenge. Show me your {STR_VAR_1} as proof of your grind!"),,SPEAKER_PSYOPWORKERA)
     closemessage
     special(ChoosePartyMon)
-    waitstate
 
     if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
     {

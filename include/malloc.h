@@ -41,7 +41,11 @@ struct MemBlock
     u8 data[0];
 };
 
-#define HEAP_SIZE 0x1C500
+//PSF TODO once 9906 is merged into expansion
+//1) reach out to jamie for the other fix required to make mid battle evolutions work
+//2) Revert this change and set HEAP_SIZE back to its original size
+//#define HEAP_SIZE 0x1C500
+#define HEAP_SIZE 0x1D500
 extern u8 gHeap[HEAP_SIZE];
 
 #if TESTING || !defined(NDEBUG)

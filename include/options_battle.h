@@ -102,7 +102,7 @@ void AttemptFleeWithL(u32, u32);
 
 // Battle Settings: HP & EXP Speed
 bool32 IsBarOptionInstant(u8);
-u32 GetHPFraction(u8);
+u32 GetHPFraction(enum BattlerId battlerId);
 u32 GetEXPScale(void);
 s32 SetInstantBarMove(struct BattleBarInfo *bar);
 

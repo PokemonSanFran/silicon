@@ -18,6 +18,7 @@ mapscripts PerlaciaCity_MapScripts {
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_PERLACIA_CITY, FALSE: Generic_Mappreview
+        VAR_TEMP_1, 0: SwagbagContinued_Dialogue_StartDexnav
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
     ]
 }

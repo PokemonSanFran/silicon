@@ -691,7 +691,7 @@ extern const u8 Route4_UncoverSecretLab_Script[];
 extern const u8 Earthquake_Natural_EventScript[];
 extern const u8 Phenomenon_StartEncounter[]; // phenomenon
 extern const u8 FlyEncounter_Script_GetEncounterType[]; // flyEncounters
-  
+
 // End siliconMerge
 extern const u8 Common_Movement_FollowerSafeStart[];
 extern const u8 Common_Movement_FollowerSafeEnd[];
@@ -721,6 +721,10 @@ extern const u8 EventScript_CancelMessageBox[];
 extern const u8 Common_EventScript_ShowPokemonCenterSign[];
 extern const u8 Common_EventScript_ShowPokemartSign[];
 // DexNav
+// Start dexnav
+extern const u8 EventScript_AskRestoreScript[];
+extern const u8 gText_AskRestoreStreak[];
+// End dexnav
 extern const u8 EventScript_StartDexNavBattle[];
 extern const u8 EventScript_NotFoundNearby[];
 extern const u8 EventScript_PokemonGotAway[];
@@ -833,5 +837,7 @@ extern const u8 EventScript_Questionnaire[];
 extern const u8 CableClub_EventScript_ShowBattleRecords_Frlg[];
 extern const u8 EventScript_Indigo_UltimateGoal[];
 extern const u8 EventScript_Indigo_HighestAuthority[];
+
+extern const u8 TeachATrainerToFish_Dialogue_PlayerExclaimShiny[]; // siliconQuests
 
 #endif // GUARD_EVENT_SCRIPTS_H
