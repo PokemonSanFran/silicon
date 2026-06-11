@@ -1,11 +1,6 @@
 static struct RegionMapNeighbors regionMapNeighbors[] =
 {
     {
-        .mapA = MAPSEC_CURENO_PORT,
-        .mapB = MAPSEC_PERLACIA_CITY,
-        .destination = MAPSEC_ROUTE_2,
-    },
-    {
         .mapA = 0,
         .mapB = 0,
         .destination = MAPSEC_QIU_VILLAGE,
@@ -98,37 +93,7 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
     {
         .mapA = 0,
         .mapB = 0,
-        .destination = MAPSEC_NAVAL_BASE,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_PINTILLONHOUSE,
-    },
-    {
-        .mapA = MAPSEC_POPIDORA_PIER,
-        .mapB = MAPSEC_ROUTE12,
-        .destination = MAPSEC_ANBEH_BEND,
-    },
-    {
-        .mapA = MAPSEC_POPIDORA_PIER,
-        .mapB = MAPSEC_ROUTE11,
-        .destination = MAPSEC_ANBEH_BEND,
-    },
-    {
-        .mapA = MAPSEC_ROUTE_12,
-        .mapB = MAPSEC_ROUTE_11,
-        .destination = MAPSEC_ANBEH_BEND,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
         .destination = MAPSEC_FORT_YOBU,
-    },
-    {
-        .mapA = MAPSEC_POPIDORA_PIER,
-        .mapB = MAPSEC_ROUTE4,
-        .destination = MAPSEC_FERRYBUILDING,
     },
     {
         .mapA = 0,
@@ -146,11 +111,6 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .destination = MAPSEC_OROLAND_COLISEUM,
     },
     {
-        .mapA = MAPSEC_ESPULEE_OUTSKIRTS,
-        .mapB = MAPSEC_ROBINWILLTUNNEL,
-        .destination = MAPSEC_PIOCA_BRIDGE,
-    },
-    {
         .mapA = 0,
         .mapB = 0,
         .destination = MAPSEC_LEAVERRA_FOREST,
@@ -159,6 +119,31 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .mapA = 0,
         .mapB = 0,
         .destination = MAPSEC_WISHAAST_LAKE,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_SECRET_PATH,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_HALERBAWILDS,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_SHARPRISESPIRE,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_PARC,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_CHAPEL_OF_CHIMES,
     },
     {
         .mapA = 0,
@@ -174,6 +159,46 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .mapA = 0,
         .mapB = 0,
         .destination = MAPSEC_ARANTRAZ,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_NAVAL_BASE,
+    },
+    {
+        .mapA = 0,
+        .mapB = 0,
+        .destination = MAPSEC_PINTILLONHOUSE,
+    },
+    {
+        .mapA = MAPSEC_CURENO_PORT,
+        .mapB = MAPSEC_PERLACIA_CITY,
+        .destination = MAPSEC_ROUTE2,
+    },
+    {
+        .mapA = MAPSEC_POPIDORA_PIER,
+        .mapB = MAPSEC_ROUTE12,
+        .destination = MAPSEC_ANBEH_BEND,
+    },
+    {
+        .mapA = MAPSEC_POPIDORA_PIER,
+        .mapB = MAPSEC_ROUTE11,
+        .destination = MAPSEC_ANBEH_BEND,
+    },
+    {
+        .mapA = MAPSEC_ROUTE12,
+        .mapB = MAPSEC_ROUTE11,
+        .destination = MAPSEC_ANBEH_BEND,
+    },
+    {
+        .mapA = MAPSEC_POPIDORA_PIER,
+        .mapB = MAPSEC_ROUTE4,
+        .destination = MAPSEC_FERRYBUILDING,
+    },
+    {
+        .mapA = MAPSEC_ESPULEE_OUTSKIRTS,
+        .mapB = MAPSEC_ROBINWILLTUNNEL,
+        .destination = MAPSEC_PIOCA_BRIDGE,
     },
     {
         .mapA = MAPSEC_ANBEH_BEND,
@@ -273,7 +298,7 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
     {
         .mapA = MAPSEC_CURENO_PORT,
         .mapB = MAPSEC_GLAVEZ_HILL,
-        .destination = MAPSEC_ROUTE_1,
+        .destination = MAPSEC_ROUTE1,
     },
     {
         .mapA = MAPSEC_CURENO_PORT,
@@ -291,12 +316,7 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .destination = MAPSEC_ROUTE2,
     },
     {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_SECRET_PATH,
-    },
-    {
-        .mapA = MAPSEC_ROUTE_4,
+        .mapA = MAPSEC_ROUTE4,
         .mapB = MAPSEC_OROLAND,
         .destination = MAPSEC_NONGYU_BRIDGE,
     },
@@ -306,7 +326,7 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .destination = MAPSEC_NONGYU_BRIDGE,
     },
     {
-        .mapA = MAPSEC_ROUTE_4,
+        .mapA = MAPSEC_ROUTE4,
         .mapB = MAPSEC_ZENZU_ISLAND,
         .destination = MAPSEC_NONGYU_BRIDGE,
     },
@@ -394,26 +414,6 @@ static struct RegionMapNeighbors regionMapNeighbors[] =
         .mapA = MAPSEC_ARANTRAZ,
         .mapB = MAPSEC_ESPULEE_OUTSKIRTS,
         .destination = MAPSEC_ROUTE_E,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_HALERBAWILDS,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_SHARPRISESPIRE,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_PARC,
-    },
-    {
-        .mapA = 0,
-        .mapB = 0,
-        .destination = MAPSEC_CHAPEL_OF_CHIMES,
     },
     {
         .mapA = MAPSEC_FORT_YOBU,

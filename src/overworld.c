@@ -930,6 +930,15 @@ void CheckSetVisitedRouteFlags(void)
     mapsec_u16_t mapA = MAPSEC_NONE;
     mapsec_u16_t mapB = MAPSEC_NONE;
     mapsec_u16_t mapDestination = MAPSEC_NONE;
+    mapsec_u16_t currentMap = gMapHeader.regionMapSectionId;
+
+//DebugPrintf("currentMap is %S",gRegionMapEntries[currentMap].name);
+
+    if (currentMap < RESIDO_MAPSEC_START)
+        return;
+
+    if (currentMap > RESIDO_MAPSEC_END)
+        return;
 
     for (u32 neighbors = 0; neighbors < ARRAY_COUNT(regionMapNeighbors); neighbors++)
     {
@@ -940,6 +949,14 @@ void CheckSetVisitedRouteFlags(void)
         u32 flagA = gRegionMapEntries[mapA].visitedFlag;
         u32 flagB = gRegionMapEntries[mapB].visitedFlag;
         u32 flagDestination = gRegionMapEntries[mapDestination].visitedFlag;
+//DebugPrintf("-------------------------------------");
+
+//DebugPrintf("map A is %S",gRegionMapEntries[mapA].name);
+//DebugPrintf("map B is %S",gRegionMapEntries[mapB].name);
+//DebugPrintf("map C is %S",gRegionMapEntries[mapDestination].name);
+
+        if (mapA != currentMap && mapB != currentMap && mapDestination != currentMap)
+            continue;
 
         if (mapDestination == MAPSEC_TORGEOT_CLIMB)
         {   
@@ -947,15 +964,18 @@ void CheckSetVisitedRouteFlags(void)
                 continue;
 
             FlagSet(flagDestination);
+            continue;
         }
 
-        if ((FlagGet(flagA) == FALSE) && flagA != 0)
-            continue;
+//DebugPrintf("evaluating map A is %S with flag %d",gRegionMapEntries[mapA].name,flagA);
+//DebugPrintf("evaluating map B is %S with flag %d",gRegionMapEntries[mapB].name,flagB);
+//DebugPrintf("evaluating map C is %S with flag %d",gRegionMapEntries[mapDestination].name,flagDestination);
+        
+        if ((FlagGet(flagA)) && (FlagGet(flagB)))
+            FlagSet(flagDestination);
 
-        if ((FlagGet(flagB) == FALSE) && flagB != 0)
-            continue;
-
-        FlagSet(flagDestination);
+        if ((flagA == 0) && (flagB == 0) && (mapDestination == currentMap))
+            FlagSet(flagDestination);
     }
 }
 // End siliconMerge
