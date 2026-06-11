@@ -2178,6 +2178,10 @@ static void Controller_HandleTrainerSlideBack(enum BattlerId battler)
 
 void Controller_WaitForHealthBar(enum BattlerId battler)
 {
+#if TESTING
+    if (gSiliconTestVariables.countHpBarMovement)
+        gSiliconTestVariables.counter++;
+#endif
     s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);

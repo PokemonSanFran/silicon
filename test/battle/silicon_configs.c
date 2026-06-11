@@ -660,3 +660,38 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Release)")
         EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
     }
 }
+
+SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Fast is faster than Normal)", u32 timeTaken)
+{
+    enum optionaBattleHPExpSpeed speed;
+    PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_NORMAL; }
+    PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_FAST; }
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = speed;
+        gSiliconTestVariables.counter = 0;
+        gSiliconTestVariables.countHpBarMovement = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUILLOTINE); }
+    } THEN {
+        results[i].timeTaken = gSiliconTestVariables.counter;
+    } FINALLY {
+        EXPECT_GT(results[0].timeTaken, results[1].timeTaken);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Instant)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED] = BATTLE_OPTION_BAR_SPEED_INSTANT;
+        gSiliconTestVariables.counter = 0;
+        gSiliconTestVariables.countHpBarMovement = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUILLOTINE); }
+    } THEN {
+        EXPECT_EQ(gSiliconTestVariables.counter, 1);
+    }
+}

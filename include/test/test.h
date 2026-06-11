@@ -103,8 +103,10 @@ struct SiliconExtraTestVariables
     bool32 overrideEVs:1;
     bool32 overrideIVs:1;
     bool32 overrideSwitchMode:1;
-    bool32 temp:26;
+    bool32 countHpBarMovement:1;
+    bool32 temp:25;
     u32 manualPersonality;
+    u32 counter;
 };
 
 extern struct SiliconExtraTestVariables gSiliconTestVariables;
