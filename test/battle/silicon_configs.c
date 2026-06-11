@@ -608,3 +608,55 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
     }
 }
 */
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Allowed)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_ALLOWED;
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUILLOTINE); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_NONE);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_WYNAUT);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Box)")
+{
+    //  Does not handle trying to withdraw mon from box
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_BOX;
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUILLOTINE); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Release)")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON] = BATTLE_OPTION_FAINTED_MON_RELEASE;
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUILLOTINE); SEND_OUT(player, 1); }
+    } THEN {
+        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_NONE);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WYNAUT);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    }
+}
