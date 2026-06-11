@@ -242,10 +242,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, All")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
         EXPECT_GT(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
         EXPECT_GT(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
@@ -266,10 +266,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Party")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
@@ -290,10 +290,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (no switch)")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
-        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
-        EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK_EV), 0);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
@@ -315,10 +315,10 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Experience, Active (switching)")
         TURN { SWITCH(player, 1); }
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPATK_EV), 0);
         EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
@@ -340,8 +340,8 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, On")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
         MESSAGE("Erratic gained 2 Exp. Points and 1 Effort Value!");
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
 }
 
@@ -361,8 +361,8 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Points Message, Off")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
         NOT MESSAGE("Erratic gained 2 Exp. Points and 1 Effort Value!");
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_EV), 0);
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_EV), 0);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
 }
 
@@ -381,7 +381,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, 0x")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
     } THEN {
-        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE]);
     }
 }
 
@@ -404,7 +404,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Exp Multiplier, Non-zero", u32 exp)
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
     } THEN {
-        results[i].exp = GetMonData(&gPlayerParty[0], MON_DATA_EXP);
+        results[i].exp = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP);
     } FINALLY {
         u32 baseExp = gExperienceTables[GROWTH_ERRATIC][LEVEL_TO_USE];
         u32 mult1Exp = results[0].exp - baseExp;
@@ -509,7 +509,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (under cap)")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0 - 1]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0 - 1]);
     }
 }
 
@@ -527,7 +527,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Enabled (at cap)")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
     }
 }
 
@@ -545,7 +545,7 @@ WILD_BATTLE_TEST("OPTIONS (BATTLE): Player level caps, Disabled")
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } THEN {
-        EXPECT_GT(GetMonData(&gPlayerParty[0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
+        EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[GROWTH_ERRATIC][LEVEL_CAP_VALUE_0]);
     }
 }
 
