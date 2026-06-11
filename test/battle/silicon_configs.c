@@ -695,3 +695,50 @@ SINGLE_BATTLE_TEST("OPTIONS (Battle): HP Speed (Instant)")
         EXPECT_EQ(gSiliconTestVariables.counter, 1);
     }
 }
+
+WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Fast is faster than Normal)", u32 timeTaken)
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    enum optionaBattleHPExpSpeed speed;
+    PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_NORMAL; }
+    PARAMETRIZE { speed = BATTLE_OPTION_BAR_SPEED_FAST; }
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_SPEED] = speed;
+        gSiliconTestVariables.counter = 0;
+        gSiliconTestVariables.countExpBarMovement = TRUE;
+        //  Level is set to some amount that moves the Exp bar a decent amount
+        PLAYER(SPECIES_WOBBUFFET) { Level(90); }
+        OPPONENT(SPECIES_BLISSEY);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_MEMENTO); }
+    } THEN {
+        results[i].timeTaken = gSiliconTestVariables.counter;
+    } FINALLY {
+        EXPECT_EQ(player->level, 90);   //  We don't actually want to mon to level up
+        EXPECT_GT(results[0].timeTaken, results[1].timeTaken);
+    }
+}
+
+WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Instant)")
+{
+    //  Necessry for exp to work
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_SPEED] = BATTLE_OPTION_BAR_SPEED_INSTANT;
+        gSiliconTestVariables.counter = 0;
+        gSiliconTestVariables.countExpBarMovement = TRUE;
+        //  Level is set to some amount that moves the Exp bar a decent amount
+        PLAYER(SPECIES_WOBBUFFET) { Level(90); }
+        OPPONENT(SPECIES_BLISSEY);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_MEMENTO); }
+    } THEN {
+        EXPECT_EQ(player->level, 90);   //  We don't actually want to mon to level up
+        EXPECT_EQ(gSiliconTestVariables.counter, 1);
+    }
+}

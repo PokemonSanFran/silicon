@@ -104,7 +104,8 @@ struct SiliconExtraTestVariables
     bool32 overrideIVs:1;
     bool32 overrideSwitchMode:1;
     bool32 countHpBarMovement:1;
-    bool32 temp:25;
+    bool32 countExpBarMovement:1;
+    bool32 temp:24;
     u32 manualPersonality;
     u32 counter;
 };
