@@ -40,7 +40,7 @@
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
-#include "dexnav.h"
+#include "ui_dexnav.h"
 #include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
@@ -851,7 +851,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, NULL, START_SIGNAL_OKAY
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexnavFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {

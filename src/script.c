@@ -217,12 +217,16 @@ u32 ScriptPeekWord(struct ScriptContext *ctx)
 void LockPlayerFieldControls(void)
 {
     sLockFieldControls = TRUE;
-    EndDexNavSearch();
+    // Start dexnav
+    PauseDexNavSearch();
+    //EndDexNavSearch();
+    // End dexnav
 }
 
 void UnlockPlayerFieldControls(void)
 {
     sLockFieldControls = FALSE;
+    ResumeDexNavSearch(); // dexnav
 }
 
 bool8 ArePlayerFieldControlsLocked(void)

@@ -881,6 +881,11 @@ void CreateMonWithIVs(struct Pokemon *mon, enum Species species, u8 level, u32 p
 
 bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 {
+    // Start siliconQuests
+    if (Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast())
+        return TRUE;
+    // End siliconQuests
+
     if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
         return FALSE;
 
@@ -5396,6 +5401,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_BAIYA;
         case TRAINER_CLASS_SHARPRISE_CEO:
             return MUS_VS_LUCREZIA;
+        case TRAINER_CLASS_DIANTHA:
+            return MUS_VS_DIANTHA;
 // End firstMusicUpdate
         default:
             if (GetCurrentRegion() == REGION_KANTO)

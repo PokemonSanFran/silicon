@@ -184,3 +184,15 @@ Great effort, but looks like I came out on top.
 ???
 ## TRAINER_IMPROV_6
 ???
+## TRAINER_QUEST_TEACHTRAINERFISHD
+Looks like beating me will be tricky too.
+## TRAINER_QUEST_TEACHTRAINERFISHD_2
+I need to focus on fishing or battling, but not both.
+## TRAINER_QUEST_TEACHTRAINERFISHE
+You’re not disciplined at all!
+## TRAINER_QUEST_TEACHTRAINERFISHE_2
+I can’t find a Shiny, but I found a win against you!
+## TRAINER_QUEST_TEACHTRAINERFISHF
+See? Didn’t need to interrupt anything.
+## TRAINER_QUEST_TEACHTRAINERFISHF_2
+Beat you and kept my streak!

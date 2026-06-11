@@ -4,6 +4,7 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 mapscripts WajabiLake_MapScripts{
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Theboywhocriedwithwolves_Ambrogio_Visibility_Script)
+        call_if_quest_inactive(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Script_HideLakeTeachTrainerFishA)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_WAJABI_LAKE, FALSE: Generic_Mappreview
@@ -11,12 +12,15 @@ mapscripts WajabiLake_MapScripts{
 
 }
 
-script WajabiLake_Membersonly_Dialogue{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BUTONLYINMYBACKYARD)
-    if (var(VAR_RESULT)){
-        release
-        end
-    }
+script WajabiLake_Script_CheckIfPlayerMember
+{
+    goto_if_quest_not_complete(QUEST_BUTONLYINMYBACKYARD,WajabiLake_Membersonly_Dialogue)
+    release
+    end
+}
+
+script WajabiLake_Membersonly_Dialogue
+{
     lock
     msgbox(format("Access is denied. This area is members only."),,SPEAKER_SPEAKER)
     msgbox(format("First place that even SharpriseCapital couldn't get me into..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
@@ -27,10 +31,99 @@ script WajabiLake_Membersonly_Dialogue{
     end
 }
 
-text gText_WajabiLake_Accessdenied{
-    format("Access is denied. This area is members only.")
+script WajabiLake_Script_Teachtrainerfishb
+{
+    lock
+    faceplayer
+    msgbox(format("Whenever you cast a fishing line, you’ll hook a Pokémon half of the time."),,SPEAKER_TEACHTRAINERFISHB)
+    bufferabilityname(STR_VAR_1,ABILITY_STICKY_HOLD)
+    msgbox(format("If the first Pokémon in your party has the ability {STR_VAR_1}, you’ll hook a Pokémon 86% of the time."),,SPEAKER_TEACHTRAINERFISHB)
+    bufferabilityname(STR_VAR_1,ABILITY_SUCTION_CUPS)
+    msgbox(format("I think it works for the ability {STR_VAR_1} too."),,SPEAKER_TEACHTRAINERFISHB)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHB,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHB)
+    release
+    end
 }
 
-text gText_WajabiLake_Firstplacethateven{
-    format("First place that even SharpriseCapital couldn't get me into...")
+script WajabiLake_Script_Teachtrainerfishc
+{
+    lock
+    faceplayer
+    msgbox(format("If you want to increase the odds of hooking a Pokémon while you fish, fish in a place that is surrounded by rocks, deep water, or places you can’t walk or swim."),,SPEAKER_TEACHTRAINERFISHC)
+    msgbox(format("Each rock increases the odds by 4%. If you’re totally surrounded, the total increase is 16%."),,SPEAKER_TEACHTRAINERFISHC)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHC,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHC)
+    release
+    end
+}
+
+script WajabiLake_Script_Teachtrainerfishd
+{
+    trainerbattle_single(TRAINER_QUEST_TEACHTRAINERFISHD,format("Getting The Perfect Cast when you’re near land is tricky!"),format("Beating you is also tricky."),WajabiLake_Dialogue_PostBattleTeachtrainerfishd)
+    handlerematch(WajabiLake_Script_RematchTeachtrainerfishd)
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishd)
+}
+
+script WajabiLake_Script_RematchTeachtrainerfishd
+{
+    trainerbattle_rematch(TRAINER_QUEST_TEACHTRAINERFISHD,format("I’ve been training while trying to get The Perfect Cast. I’m a better fisher and a better trainer!"),format("I need to focus on fishing or battling, but not both."))
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishd)
+}
+
+script WajabiLake_Dialogue_PostBattleTeachtrainerfishd
+{
+    msgbox(format("Here’s the secret: you should try to fish in the morning or evening. That’s when the fish are most likely to bite!"),,SPEAKER_TEACHTRAINERFISHD)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHD,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHD)
+    release
+    end
+}
+script WajabiLake_Script_Teachtrainerfishe
+{
+    trainerbattle_single(TRAINER_QUEST_TEACHTRAINERFISHE,format("Are you disciplined enough to get a long fishing streak?"),format("You’ve got it for sure."),WajabiLake_Dialogue_PostBattleTeachtrainerfishe)
+    handlerematch(WajabiLake_Script_RematchTeachtrainerfishe)
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishe)
+}
+
+script WajabiLake_Script_RematchTeachtrainerfishe
+{
+    trainerbattle_rematch(TRAINER_QUEST_TEACHTRAINERFISHE,format("I haven’t found a Shiny yet, have you?"),format("Will a Shiny Pokémon help me beat you?"))
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishe)
+}
+
+script WajabiLake_Dialogue_PostBattleTeachtrainerfishe
+{
+    msgbox(format("Researchers have talked about shiny rolls, and how a streak greater than 1 increases the rolls by 2x + 1… that’s all nonsense. Just buckle down and focus!"),,SPEAKER_TEACHTRAINERFISHE)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHE,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHE)
+    release
+    end
+}
+
+script WajabiLake_Script_Teachtrainerfishf
+{
+    trainerbattle_single(TRAINER_QUEST_TEACHTRAINERFISHF,format("I can’t move or I’ll break my streak."),format("I can’t battle you and fish - you’re too strong!"),WajabiLake_Dialogue_PostBattleTeachtrainerfishf)
+    handlerematch(WajabiLake_Script_RematchTeachtrainerfishf)
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishf)
+}
+
+script WajabiLake_Script_RematchTeachtrainerfishf
+{
+    trainerbattle_rematch(TRAINER_QUEST_TEACHTRAINERFISHF,format("My streak is at 19… no moving!"),format("Ah, lost it again! At least I can finally take a bathroom break."))
+    goto(WajabiLake_Dialogue_PostBattleTeachtrainerfishf)
+}
+
+script WajabiLake_Dialogue_PostBattleTeachtrainerfishf
+{
+    msgbox(format("Keeping a streak going requires a lot of discipline. You can’t move at all, not even to turn away! You can’t run from any battles. You can’t cast the line and miss a bite. You can’t leave the area. I even read you can’t turn off the game… whatever that means."),,SPEAKER_TEACHTRAINERFISHF)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHF,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHF)
+    release
+    end
 }

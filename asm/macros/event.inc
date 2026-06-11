@@ -2335,6 +2335,8 @@
     .byte QUEST_MENU_SET_ACTIVE
     .byte \quest
     delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+    setvar VAR_ADVENTURE_GUIDE_TO_OPEN, GUIDE_QUESTS
+    call RunAdventureGuideScript
 	.endm
 
 @ Completes the specified quest.

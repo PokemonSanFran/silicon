@@ -269,7 +269,9 @@
 #define VAR_PACIFIDLOG_TM_RECEIVED_DAY                   0x40C2
 #define VAR_QUEST_RPS_STREAK_COUNT                                    0x40C2 // PSF Var
 #define VAR_VICTORY_ROAD_1F_STATE                        0x40C3
-#define VAR_FOSSIL_RESURRECTION_STATE                    0x40C4
+#define VAR_DEXNAV_SPECIES                               0x40C3 // PSF Var
+#define VAR_DEXNAV_STEP_COUNTER                          0x40C4
+#define VAR_FOSSIL_RESURRECTION_STATE                    0x40C4 // PSF Var
 #define VAR_WHICH_FOSSIL_REVIVED                         0x40C5
 #define VAR_STEVENS_HOUSE_STATE                          0x40C6
 #define VAR_OLDALE_RIVAL_STATE                           0x40C7
@@ -289,6 +291,7 @@
 #define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
+#define VAR_QUEST_TEACHATRAINERTOFISH                    0x40D7 // PSF Var
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8
 #define VAR_NO_BAG_USE                                   0x40D8 // PSF Var
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9

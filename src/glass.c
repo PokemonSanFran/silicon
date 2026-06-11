@@ -1901,7 +1901,7 @@ static void HandleLocationStatsDefeated(u8* statArray)
 
 static void IncrementLocationStat(u32 stat, u8* statArray)
 {
-    if (statArray[stat] >= UCHAR_MAX)
+    if (statArray[stat] >= MAX_u8)
         return;
 
     statArray[stat]++;
@@ -2377,7 +2377,7 @@ static u8* CreateTrainerNameWindowAddText(u32* windowId)
 
 static void CopyTrainerNameWindowOntoNameplateMemory(u8* windowTileData, void *dest, u32 windowWidth)
 {
-    CpuCopy32(windowTileData + UCHAR_MAX + 1, dest, windowWidth * (TILE_SIZE_1BPP / 2));
+    CpuCopy32(windowTileData + MAX_u8 + 1, dest, windowWidth * (TILE_SIZE_1BPP / 2));
 }
 
 static u8 CalculateTrainerNameHorizontalPosition(u32 fontId, u32 trainerId, u32 letterSpacing)

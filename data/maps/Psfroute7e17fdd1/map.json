@@ -3,7 +3,7 @@
   "name": "Psfroute7e17fdd1",
   "layout": "LAYOUT_PSFROUTE7E17FDD1",
   "music": "MUS_GSC_ROUTE38",
-  "region_map_section": "MAPSEC_PSFROUTE7E17FDD1",
+  "region_map_section": "MAPSEC_ORRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",

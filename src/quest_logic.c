@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "fishing.h"
 #include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
@@ -58,6 +59,7 @@
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "event_scripts.h"
 
 void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
 {
@@ -2238,10 +2240,10 @@ void DebugQuest_RPS(u8 state)
 // ***********************************************************************
 // Quest:Cute Pokémon
 // ***********************************************************************
-u32 GetEiscueHint(u32 speciesId);
-u32 GetCorsolaHint(u32 speciesId);
-u32 GetDuskullHint(u32 speciesId);
-u32 GetScraftyHint(u32 speciesId);
+u32 GetEiscueHint(enum Species speciesId);
+u32 GetCorsolaHint(enum Species speciesId);
+u32 GetDuskullHint(enum Species speciesId);
+u32 GetScraftyHint(enum Species speciesId);
 void DebugQuest_CutePokemon_GiveMon(void);
 
 #define FLAG_SCRIPT_USE FLAG_TEMP_1
@@ -2265,7 +2267,7 @@ void BufferEiscueHeightPlusOne(void)
 u32 GetHintFromMon(void)
 {
     u32 remainingQuests = Quest_Generic_CountRemainingSubquests(QUEST_CUTEPOKEMON);
-    u32 speciesId = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    enum Species speciesId = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
     switch(remainingQuests)
     {
@@ -2277,7 +2279,7 @@ u32 GetHintFromMon(void)
     }
 }
 
-u32 GetEiscueHint(u32 speciesId)
+u32 GetEiscueHint(enum Species speciesId)
 {
     if (gSpeciesInfo[speciesId].types[0] != TYPE_ICE && gSpeciesInfo[speciesId].types[1] != TYPE_ICE)
         return VAR_CUTE_POKEMON_EISCUE_HINT_0;
@@ -2289,7 +2291,7 @@ u32 GetEiscueHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_PERLACIA;
 }
 
-u32 GetCorsolaHint(u32 speciesId)
+u32 GetCorsolaHint(enum Species speciesId)
 {
     if (GetSpeciesColor(speciesId) != BODY_COLOR_PINK)
         return VAR_CUTE_POKEMON_CORSOLA_HINT_0;
@@ -2301,7 +2303,7 @@ u32 GetCorsolaHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_QIU;
 }
 
-u32 GetDuskullHint(u32 speciesId)
+u32 GetDuskullHint(enum Species speciesId)
 {
     if (GetMonAbility(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004])!= ABILITY_LEVITATE)
         return VAR_CUTE_POKEMON_DUSKULL_HINT_0;
@@ -2313,7 +2315,7 @@ u32 GetDuskullHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_CRESALTA;
 }
 
-u32 GetScraftyHint(u32 speciesId)
+u32 GetScraftyHint(enum Species speciesId)
 {
     struct Pokemon *mon;
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
@@ -4708,6 +4710,94 @@ void DebugQuest_ImprovBattling(u8 state)
             break;
         case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_COMPLETED:
             FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_6);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Teach A Trainer To Fish
+// ***********************************************************************
+
+bool8 Quest_TeachATrainerToFish_IsPerfectCast(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return Quest_TeachATrainerToFish_ArePerfectCastComponentsSet();
+}
+
+bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void)
+{
+    if (gChainFishingDexNavStreak < MAX_u8)
+        return FALSE;
+
+    return (Quest_TeachATrainerToFish_IsPerfectCast());
+}
+
+void Quest_TeachATrainerToFish_RecordEnemy(void)
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+
+    if (gIsFishingEncounter == FALSE)
+        return;
+
+    enum Species species = SPECIES_NONE;
+
+    for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_IS_SHINY) == FALSE)
+            continue;
+
+        species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_SPECIES);
+        break;
+    }
+
+    if (species == SPECIES_NONE)
+        return;
+
+    VarSet(VAR_QUEST_TEACHATRAINERTOFISH,species);
+}
+
+static bool8 Quest_TeachATrainerToFish_ShouldRunExclaim(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return (VarGet(VAR_QUEST_TEACHATRAINERTOFISH) != SPECIES_NONE);
+}
+
+bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void)
+{
+    if (Quest_TeachATrainerToFish_ShouldRunExclaim() == FALSE)
+        return FALSE;
+
+    ScriptContext_SetupScript(TeachATrainerToFish_Dialogue_PlayerExclaimShiny);
+
+    return TRUE;
+}
+
+void DebugQuest_Teachatrainertofish(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST:
+        case STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING:
+            gSaveBlock3Ptr->hasSeenGuide[GUIDE_FISHING] = TRUE;
+            QuestMenu_ScriptSetActive(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_FISHING_ROD,1);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_TEACHATRAINERTOFISH);
+            VarSet(VAR_QUEST_TEACHATRAINERTOFISH,SPECIES_DONDOZO);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1);
             break;
     }
 }

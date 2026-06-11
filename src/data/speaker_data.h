@@ -3043,4 +3043,52 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_TEACHTRAINERFISHA] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishA"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHB] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishB"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHC] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishC"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHD] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishD"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHE] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishE"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHF] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishF"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

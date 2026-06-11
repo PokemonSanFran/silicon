@@ -61,6 +61,7 @@
 #include "quest_logic.h" // fogBattle
 #include "little_cup.h" // littlecup
 #include "phenomenon.h" // phenomenon
+#include "ui_dexnav.h" // dexnav
 #include "fishing.h"
 #include "field_effect.h" // flyEncounters
 
@@ -168,6 +169,9 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
     [REMATCH_FREETHEINNOCENTHIKERD] = REMATCH(TRAINER_QUEST_FREETHEINNOCENTHIKERD,TRAINER_QUEST_FREETHEINNOCENTHIKERD_2,TRAINER_QUEST_FREETHEINNOCENTHIKERD_2,TRAINER_QUEST_FREETHEINNOCENTHIKERD_2,TRAINER_QUEST_FREETHEINNOCENTHIKERD_2,MAP_LANJING_TUNNEL_B1F),
     [REMATCH_FREETHEINNOCENTHIKERF] = REMATCH(TRAINER_QUEST_FREETHEINNOCENTHIKERF,TRAINER_QUEST_FREETHEINNOCENTHIKERF_2,TRAINER_QUEST_FREETHEINNOCENTHIKERF_2,TRAINER_QUEST_FREETHEINNOCENTHIKERF_2,TRAINER_QUEST_FREETHEINNOCENTHIKERF_2,MAP_ROUTE10),
     [REMATCH_FREETHEINNOCENTHIKERG] = REMATCH(TRAINER_QUEST_FREETHEINNOCENTHIKERG,TRAINER_QUEST_FREETHEINNOCENTHIKERG_2,TRAINER_QUEST_FREETHEINNOCENTHIKERG_2,TRAINER_QUEST_FREETHEINNOCENTHIKERG_2,TRAINER_QUEST_FREETHEINNOCENTHIKERG_2,MAP_ROUTE7),
+    [REMATCH_TEACHTRAINERFISHD] = REMATCH(TRAINER_QUEST_TEACHTRAINERFISHD,TRAINER_QUEST_TEACHTRAINERFISHD_2,TRAINER_QUEST_TEACHTRAINERFISHD_2,TRAINER_QUEST_TEACHTRAINERFISHD_2,TRAINER_QUEST_TEACHTRAINERFISHD_2,MAP_WAJABI_LAKE),
+    [REMATCH_TEACHTRAINERFISHE] = REMATCH(TRAINER_QUEST_TEACHTRAINERFISHE,TRAINER_QUEST_TEACHTRAINERFISHE_2,TRAINER_QUEST_TEACHTRAINERFISHE_2,TRAINER_QUEST_TEACHTRAINERFISHE_2,TRAINER_QUEST_TEACHTRAINERFISHE_2,MAP_WAJABI_LAKE),
+    [REMATCH_TEACHTRAINERFISHF] = REMATCH(TRAINER_QUEST_TEACHTRAINERFISHF,TRAINER_QUEST_TEACHTRAINERFISHF_2,TRAINER_QUEST_TEACHTRAINERFISHF_2,TRAINER_QUEST_TEACHTRAINERFISHF_2,TRAINER_QUEST_TEACHTRAINERFISHF_2,MAP_WAJABI_LAKE),
     /*
     [REMATCH_ROSE] = REMATCH(TRAINER_ROSE_1, TRAINER_ROSE_2, TRAINER_ROSE_3, TRAINER_ROSE_4, TRAINER_ROSE_5, MAP_ROUTE118),
     [REMATCH_ANDRES] = REMATCH(TRAINER_ANDRES_1, TRAINER_ANDRES_2, TRAINER_ANDRES_3, TRAINER_ANDRES_4, TRAINER_ANDRES_5, MAP_ROUTE105),
@@ -388,6 +392,7 @@ static void DoStandardWildBattle(bool32 isDouble)
         VarSet(VAR_TEMP_E, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -407,6 +412,7 @@ void DoStandardWildBattle_Debug(void)
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
     //IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     //IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -421,6 +427,7 @@ void BattleSetup_StartRoamerBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -435,6 +442,7 @@ static void DoSafariBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
@@ -445,6 +453,7 @@ static void DoGhostBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_GHOST;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
@@ -458,6 +467,7 @@ static void DoBattlePikeWildBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -509,6 +519,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -521,6 +532,7 @@ void BattleSetup_StartScriptedDoubleWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -541,6 +553,7 @@ void StartMarowakBattle(void)
         CreateMonWithIVsPersonality(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_MAROWAK, 30, 31, personality);
     }
 
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
@@ -552,6 +565,7 @@ void BattleSetup_StartLatiBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -2212,6 +2226,7 @@ static void DoFogBattle(bool32 isDouble)
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
     gBattleTypeFlags |= BATTLE_TYPE_FOG;
+    Dexnav_StopOverworldFieldEffect(); // dexnav
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     u32 fogMon = SPECIES_FOG_UNKNOWN;
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &fogMon);

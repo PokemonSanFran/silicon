@@ -239,7 +239,9 @@
 #define FLAG_RECEIVED_CASTFORM               0x97
 #define FLAG_TALKED_TO_ELEANOR_POSTGAME      0x97 // Silicon Flag
 #define FLAG_RECEIVED_SUPER_ROD              0x98
+#define FLAG_DEXNAV_SEARCHING                0x98 // Silicon Flag
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
+#define FLAG_DEXNAV_DETECTOR                 0x99 // Silicon Flag
 #define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED  0x9A
 #define FLAG_FORTREE_NPC_TRADE_COMPLETED     0x9B
 #define FLAG_BATTLE_FRONTIER_TRADE_DONE      0x9C
@@ -1639,23 +1641,22 @@
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
 #define FLAG_VISITED_NAVAL_BASE                  (SYSTEM_FLAGS + 0x7C) //Silicon Flag
-#define FLAG_VISITED_PINTILLONHOUSE                (SYSTEM_FLAGS + 0x7D) //Silicon Flag
-#define FLAG_VISITED_MORAGASTEPS             (SYSTEM_FLAGS + 0x7E) //Silicon Flag
-#define FLAG_VISITED_DEYOUNGMUSEUM                 (SYSTEM_FLAGS + 0x7F) //Silicon Flag
-#define FLAG_VISITED_DUTCHWINDMILLS                (SYSTEM_FLAGS + 0x80) //Silicon Flag
+#define FLAG_VISITED_PINTILLONHOUSE              (SYSTEM_FLAGS + 0x7D) //Silicon Flag
+#define FLAG_UNUSED_0x7E                     (SYSTEM_FLAGS + 0x7E) //Silicon Flag
+#define FLAG_VISITED_0x7F                    (SYSTEM_FLAGS + 0x7F) //Silicon Flag
+#define FLAG_VISITED_0x80                     (SYSTEM_FLAGS + 0x80) //Silicon Flag
 #define FLAG_VISITED_ANBEH_BEND                 (SYSTEM_FLAGS + 0x81) //Silicon Flag
 #define FLAG_VISITED_PALACEFINEARTS                 (SYSTEM_FLAGS + 0x82) //Silicon Flag
 
 #define FLAG_VISITED_FORT_YOBU                      (SYSTEM_FLAGS + 0x83) // Silicon Flag
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
-#define FLAG_VISITED_TRANSPYRAMID                   (SYSTEM_FLAGS + 0x84)
 
 #define FLAG_VISITED_FERRYBUILDING                          (SYSTEM_FLAGS + 0x85) // Silicon Flag
 #define FLAG_VISITED_POPIDORA_PIER                          (SYSTEM_FLAGS + 0x86) // Silicon Flag
 #define FLAG_VISITED_SHARPRISESTADIUM                          (SYSTEM_FLAGS + 0x87) // Silicon Flag
 #define FLAG_VISITED_OROLAND_COLISEUM                          (SYSTEM_FLAGS + 0x88) // Silicon Flag
-#define FLAG_VISITED_OROLANDFERRY                          (SYSTEM_FLAGS + 0x89) // Silicon Flag
+#define FLAG_UNUSED_0x89 (SYSTEM_FLAGS + 0x89) // Silicon Flag
 #define FLAG_VISITED_PIOCA_BRIDGE                          (SYSTEM_FLAGS + 0x8A) // Silicon Flag
 #define FLAG_VISITED_ROBINWILLTUNNEL                          (SYSTEM_FLAGS + 0x8B) // Silicon Flag
 #define FLAG_VISITED_LEAVERRA_FOREST                          (SYSTEM_FLAGS + 0x8C) // Silicon Flag
@@ -1671,13 +1672,13 @@
 #define FLAG_VISITED_ROUTE4                          (SYSTEM_FLAGS + 0x96) // Silicon Flag
 #define FLAG_VISITED_ROUTE10                          (SYSTEM_FLAGS + 0x97) // Silicon Flag
 #define FLAG_VISITED_ROUTE8                          (SYSTEM_FLAGS + 0x98) // Silicon Flag
-#define FLAG_VISITED_PSFROUTE7E17FDD1                          (SYSTEM_FLAGS + 0x99) // Silicon Flag
+#define FLAG_UNUSED_0x99                             (SYSTEM_FLAGS + 0x99) // Silicon Flag
 #define FLAG_VISITED_ROUTE14                          (SYSTEM_FLAGS + 0x9A) // Silicon Flag
 #define FLAG_VISITED_ROUTE5                          (SYSTEM_FLAGS + 0x9B) // Silicon Flag
 #define FLAG_VISITED_ROUTE_D                          (SYSTEM_FLAGS + 0x9C) // Silicon Flag
 #define FLAG_VISITED_ROUTE6                          (SYSTEM_FLAGS + 0x9D) // Silicon Flag
 #define FLAG_VISITED_ROUTE3                          (SYSTEM_FLAGS + 0x9E) // Silicon Flag
-#define FLAG_VISITED_PSFROUTE9F45DA86                          (SYSTEM_FLAGS + 0x9F) // Silicon Flag
+#define FLAG_UNUSED_0x9F                             (SYSTEM_FLAGS + 0x9F) // Silicon Flag
 #define FLAG_VISITED_ROUTE_C                          (SYSTEM_FLAGS + 0xA0) // Silicon Flag
 #define FLAG_VISITED_ROUTE1                          (SYSTEM_FLAGS + 0xA1) // Silicon Flag
 #define FLAG_VISITED_ROUTE2                          (SYSTEM_FLAGS + 0xA2) // Silicon Flag

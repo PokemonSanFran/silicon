@@ -521,6 +521,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TOUR_GUIDE]          = {_("Tour Guide") },
     [TRAINER_CLASS_TOURIST]             = {_("Tourist") },
     [TRAINER_CLASS_TREEHUGGER]          = {_("Treehugger") },
+    [TRAINER_CLASS_DIANTHA] = { _("Kalos Champion") },
     // End Silicon
 };
 
@@ -5535,6 +5536,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else
     {
+        Quest_TeachATrainerToFish_RecordEnemy(); // siliconMerge
         CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
         Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
@@ -5901,7 +5903,6 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         if (gDexNavSpecies && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -5910,7 +5911,12 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
             TryIncrementSpeciesSearchLevel();
         }
         else
+        // Start dexnav
+        {
+            EndDexNavSearch();
             gSaveBlock3Ptr->dexNavChain = 0;
+        }
+        // End dexnav
 
         ClearCurrentTrainerWantRematchVsSeeker();
         gDexNavSpecies = SPECIES_NONE;

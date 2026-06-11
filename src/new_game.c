@@ -330,6 +330,8 @@ static void ResetItemFlags(void)
 #endif
 }
 
+// Start dexNav
+/*
 static void ResetDexNav(void)
 {
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
@@ -337,6 +339,13 @@ static void ResetDexNav(void)
 #endif
     gSaveBlock3Ptr->dexNavChain = 0;
 }
+*/
+static void ResetDexNav(void)
+{
+    memset(gSaveBlock2Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock2Ptr->dexNavSearchLevels));
+    gSaveBlock3Ptr->dexNavChain = 0;
+}
+// End dexNav
 
 // Start bootSequence
 void ResetBagAndParty(void)

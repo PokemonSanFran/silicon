@@ -6,6 +6,7 @@
 #include "daycare.h"
 #include "debug.h"
 #include "dexnav.h"
+#include "ui_dexnav.h" // dexnav
 #include "faraway_island.h"
 #include "follower_npc.h"
 #include "event_data.h"
@@ -21,6 +22,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "fldeff_misc.h"
+#include "fishing.h" // fishingUpdate
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
@@ -30,6 +32,7 @@
 #include "palette.h" // siliconMerge
 #include "phenomenon.h" // phenomenon
 #include "pokemon.h"
+#include "quest_logic.h" // siliconQuests
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -119,6 +122,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->heldDirection2 = FALSE;
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
+    input->pressedLButton = FALSE; // dexnav
     input->pressedRButton = FALSE;
     input->input_field_1_1 = FALSE;
     input->input_field_1_2 = FALSE;
@@ -211,6 +215,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
+            // Start dexnav
+            if (newKeys & L_BUTTON)
+                input->pressedLButton = TRUE;
+            // End dexnav
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -273,11 +281,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
+    // Start siliconQuests
+    if (Quest_TeachATrainerToFish_TryRunExclaimScript() == TRUE)
+        return TRUE;
+    // End siliconQuests
+
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
     if (input->tookStep)
     {
-        UpdateChainFishingStreak(); // fishingUpdate
+        ResetChainFishingStreak(); //fishingUpdate
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
@@ -320,6 +333,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
 
+    //Start dexnav
+    if (input->pressedStartButton && FlagGet(DN_FLAG_SEARCHING) && Dexnav_OpenScanMode())
+        return TRUE;
+    //End dexnav
+
 // Start siliconMerge
     if (input->pressedStartButton && StartMenu_OpenNormalMode())
     /*
@@ -339,7 +357,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 
     // Start siliconMerge
-	if (input->pressedRButton && ToggleRunBehavior())
+	if (input->pressedLButton && ToggleRunBehavior())
         return TRUE;
 	// End siliconMerge
     if (input->pressedRButton && TryStartDexNavSearch())

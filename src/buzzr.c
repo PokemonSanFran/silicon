@@ -1147,8 +1147,8 @@ static void ResetVerticalOffset(void)
 
 static void SetVerticalOffset(u32 offset)
 {
-    if (offset > UCHAR_MAX)
-        offset = UCHAR_MAX;
+    if (offset > MAX_u8)
+        offset = MAX_u8;
 
     sBuzzrState->verticalOffset = offset;
 }

@@ -11784,8 +11784,6 @@
       "name": "PetarosaBorough_Improv_Layout",
       "width": 5,
       "height": 13,
-      "border_width": 2,
-      "border_height": 2,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/PetarosaBorough_Improv/border.bin",

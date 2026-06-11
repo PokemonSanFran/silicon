@@ -79,6 +79,7 @@
 #include "data/battle_move_effects.h"
 #include "ui_pokedex.h" // pokedex
 #include "little_cup.h" // littlecup
+#include "ui_dexnav.h" // dexnav 
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
@@ -9890,6 +9891,14 @@ static void FinalizeCapture(void)
         u32 friendship = (B_FRIEND_BALL_MODIFIER >= GEN_8 ? 150 : 200);
         SetMonData(caughtMon, MON_DATA_FRIENDSHIP, &friendship);
     }
+
+    // Start dexnav
+    if (gDexNavSpecies && gDexnavStatFlags)
+    {
+        u32 friendship = Dexnav_CalculateNewFriendship(GetMonData(caughtMon, MON_DATA_FRIENDSHIP));
+        SetMonData(caughtMon, MON_DATA_FRIENDSHIP, &friendship);
+    }
+    // End dexnav
 }
 
 struct BallData

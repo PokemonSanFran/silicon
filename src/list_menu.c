@@ -462,7 +462,7 @@ static void ListMenu_WrapCursorToOppositeEnd(struct ListMenu *list,bool32 moving
 
     while (diffRows > 0)
     {
-        remainingRowDistance = diffRows > UCHAR_MAX ? UCHAR_MAX : diffRows;
+        remainingRowDistance = diffRows > MAX_u8 ? MAX_u8 : diffRows;
         ListMenuChangeSelection(list, TRUE, remainingRowDistance, movingDown);
         diffRows -= remainingRowDistance;
     }
