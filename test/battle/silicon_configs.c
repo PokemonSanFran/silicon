@@ -742,3 +742,30 @@ WILD_BATTLE_TEST("OPTIONS (Battle): EXP Speed (Instant)")
         EXPECT_EQ(gSiliconTestVariables.counter, 1);
     }
 }
+
+SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Font Switcher", u32 checksum)
+{
+    //  This test depends on hard-coded VRAM offsets in BS_OptionTestHandler
+    //  if the window that battle messages are printed on changes baseblock,
+    //  the offsets needs to be updated.
+
+    KNOWN_FAILING;
+
+    //  Only testing that the printed characters are different
+    enum optionBattleFontSwitcherValues font;
+    PARAMETRIZE { font = VISUAL_OPTION_FONT_SWITCHER_EMERALD; }
+    PARAMETRIZE { font = VISUAL_OPTION_FONT_SWITCHER_FIRERED; }
+    GIVEN {
+        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_FONT_SWITCHER] = font;
+        gSiliconTestVariables.counter = 0;
+        gSiliconTestVariables.checkFontGraphics = TRUE;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_OPTION_TEST_MOVE); }
+    } THEN {
+        results[i].checksum = gSiliconTestVariables.counter;
+    } FINALLY {
+        EXPECT_NE(results[0].checksum, results[1].checksum);
+    }
+}

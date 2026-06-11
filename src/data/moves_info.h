@@ -22035,6 +22035,23 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     },
 // End trainerExpTests
 
+    [MOVE_OPTION_TEST_MOVE] =
+    {
+        .name = COMPOUND_STRING("Option Test Move"),
+        .description = COMPOUND_STRING("Test move only"),
+        .effect = EFFECT_OPTION_TEST,
+        .power = 0,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .battleAnimScript = gBattleAnimMove_TestMoves,
+        .validApprenticeMove = FALSE,
+        .metronomeBanned = TRUE,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

@@ -12736,6 +12736,29 @@ void BS_HandleExpTestFinish(void)
 }
 // End trainerExpTests
 
+void BS_OptionTestHandler(void)
+{
+    NATIVE_ARGS();
+
+#if TESTING
+    if (gSiliconTestVariables.checkFontGraphics)
+    {
+        u32 *topVramStart = (u32 *)(BG_VRAM + 144 * TILE_SIZE_4BPP);
+        u32 *bottomVramStart = (u32 *)(BG_VRAM + 170 * TILE_SIZE_4BPP);
+        for (u32 tile = 0; tile < 20; tile++)
+        {
+            for (u32 line = 0; line < 8; line++)
+            {
+                gSiliconTestVariables.counter ^= topVramStart[8 * tile + line];
+                gSiliconTestVariables.counter ^= bottomVramStart[8 * tile + line];
+            }
+        }
+    }
+#endif
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 // Start pointsMessage
 void BS_JumpIfPointsMessagesOff(void)
 {

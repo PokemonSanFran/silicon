@@ -2665,7 +2665,7 @@ void BtlController_HandlePrintString(enum BattlerId battler)
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
-        if (gTestRunnerHeadless)
+        if (gTestRunnerHeadless && !gSiliconTestVariables.checkFontGraphics)
         {
             BtlController_Complete(battler);
             return;
