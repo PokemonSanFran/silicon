@@ -139,6 +139,7 @@ void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 enum RegionMapType GetRegionMapType(u32 mapSecId);
+void HandleVisitedFlags(void); // visitedFlags
 
 //Pokenav Fly funcs
 u32 FilterFlyDestination(struct RegionMap* regionMap);
@@ -146,5 +147,12 @@ void SetFlyDestination(struct RegionMap* regionMap);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
 extern const struct RegionMapInfo gRegionMapInfos[];
+
+struct RegionMapNeighbors
+{
+    mapsec_u16_t mapA;
+    mapsec_u16_t mapB;
+    mapsec_u16_t destination;
+};
 
 #endif //GUARD_REGION_MAP_H
