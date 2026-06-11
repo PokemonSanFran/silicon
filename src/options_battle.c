@@ -536,7 +536,8 @@ void SetFaintedMonBit(struct Pokemon *mon)
 
 u32 IsFaintedMon(struct Pokemon *mon)
 {
-    return (GetFaintedMonOptionValue() != BATTLE_OPTION_FAINTED_MON_ALLOWED && GetMonData(mon, MON_DATA_IS_FAINTED));
+    return (GetFaintedMonOptionValue() != BATTLE_OPTION_FAINTED_MON_ALLOWED && GetMonData(mon, MON_DATA_HP) == 0);
+    //return (GetFaintedMonOptionValue() != BATTLE_OPTION_FAINTED_MON_ALLOWED && GetMonData(mon, MON_DATA_IS_FAINTED));
 }
 
 u32 IsFaintedBoxMon(struct BoxPokemon *boxMon)
@@ -557,6 +558,7 @@ void PerformPlayerFaintedMonOperations(struct Pokemon *mon)
             CopyMonToPC(mon);
         ZeroMonData(mon);
         CompactPartySlots();
+        gPartiesCount[B_TRAINER_PLAYER] = CalculatePartyCount(B_TRAINER_PLAYER);
     }
 }
 
