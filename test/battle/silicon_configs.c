@@ -3,6 +3,9 @@
 #include "palette.h"
 #include "load_save.h"
 #include "event_data.h"
+#include "pokedex.h"
+#include "malloc.h"
+#include "constants/characters.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -768,4 +771,174 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Font Switcher", u32 checksum)
     } FINALLY {
         EXPECT_NE(results[0].checksum, results[1].checksum);
     }
+}
+
+TEST("OPTIONS (VISUAL): Units, distance (Metric, period)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_PERIOD;
+    u8 *str = ConvertMonHeightToString(123);
+    bool32 found_m = FALSE;
+    bool32 found_period = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_PERIOD)
+            found_period = TRUE;
+        if (str[index] == CHAR_m)
+            found_m = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_m, TRUE);
+    EXPECT_EQ(found_period, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, distance (Metric, comma)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_COMMA;
+    u8 *str = ConvertMonHeightToString(123);
+    bool32 found_m = FALSE;
+    bool32 found_comma = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_COMMA)
+            found_comma = TRUE;
+        if (str[index] == CHAR_m)
+            found_m = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_m, TRUE);
+    EXPECT_EQ(found_comma, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, mass (Metric, period)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_PERIOD;
+    u8 *str = ConvertMonWeightToString(123);
+    bool32 found_kg = FALSE;
+    bool32 found_period = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_PERIOD)
+            found_period = TRUE;
+        if (str[index] == CHAR_k && str[index + 1] == CHAR_g)
+            found_kg = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_kg, TRUE);
+    EXPECT_EQ(found_period, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, mass (Metric, comma)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_METRIC_COMMA;
+    u8 *str = ConvertMonWeightToString(123);
+    bool32 found_kg = FALSE;
+    bool32 found_comma = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_COMMA)
+            found_comma = TRUE;
+        if (str[index] == CHAR_k && str[index + 1] == CHAR_g)
+            found_kg = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_kg, TRUE);
+    EXPECT_EQ(found_comma, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, distance (Imperial, period)")
+{
+    //  Comma isn't actually used when measuring distance with this accuracy
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD;
+    u8 *str = ConvertMonHeightToString(123);
+    bool32 found_foot = FALSE;
+    bool32 found_inch = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_DBL_QUOTE_RIGHT)
+            found_inch = TRUE;
+        if (str[index] == CHAR_SGL_QUOTE_RIGHT)
+            found_foot = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_foot, TRUE);
+    EXPECT_EQ(found_inch, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, distance (Imperial, comma)")
+{
+    //  Comma isn't actually used when measuring distance with this accuracy
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_COMMA;
+    u8 *str = ConvertMonHeightToString(123);
+    bool32 found_foot = FALSE;
+    bool32 found_inch = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_DBL_QUOTE_RIGHT)
+            found_inch = TRUE;
+        if (str[index] == CHAR_SGL_QUOTE_RIGHT)
+            found_foot = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_foot, TRUE);
+    EXPECT_EQ(found_inch, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, mass (Imperial, period)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD;
+    u8 *str = ConvertMonWeightToString(123);
+    bool32 found_lbs = FALSE;
+    bool32 found_period = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_PERIOD)
+            found_period = TRUE;
+        if (str[index] == CHAR_l && str[index + 1] == CHAR_b && str[index + 2] == CHAR_s)
+            found_lbs = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_lbs, TRUE);
+    EXPECT_EQ(found_period, TRUE);
+    Free(str);
+}
+
+TEST("OPTIONS (VISUAL): Units, mass (Imperial, comma)")
+{
+    gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_UNITS] = VISUAL_OPTION_UNITS_IMPERIAL_COMMA;
+    u8 *str = ConvertMonWeightToString(123);
+    bool32 found_lbs = FALSE;
+    bool32 found_comma = FALSE;
+    u32 index = 0;
+    while (str[index] != EOS)
+    {
+        if (str[index] == CHAR_COMMA)
+            found_comma = TRUE;
+        if (str[index] == CHAR_l && str[index + 1] == CHAR_b && str[index + 2] == CHAR_s)
+            found_lbs = TRUE;
+        index++;
+    }
+
+    EXPECT_EQ(found_lbs, TRUE);
+    EXPECT_EQ(found_comma, TRUE);
+    Free(str);
 }
