@@ -633,4 +633,5 @@ u8 GetLedgeJumpDirectionWithBehavior(enum Direction direction, u8 nextBehavior);
 void Task_ObjectTransformation(u8 taskId);
 void TransformObjectByLocalIdIntoGraphicsId(u32 localId, u32 graphicsId);
 // End storyActionItems
+u32 GetObjectFlagFromLocalId(u32 localId); // siliconQuests
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

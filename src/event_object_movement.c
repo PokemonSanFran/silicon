@@ -229,7 +229,6 @@ static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphics
 
 static enum Species GetUnownSpecies(struct Pokemon *mon);
 
-static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16));
 static void StartSlowRunningAnim(struct ObjectEvent *objectEvent, struct Sprite *sprite, enum Direction direction);
 static bool8 ShouldProgressDespiteCollision(u32 movementType, u32 index); // siliconQuests
 
@@ -12181,38 +12180,34 @@ u8 GetObjectEventApricornTreeId(u8 objectEventId)
 // Start setObjectFlag
 void SetObjectFlagFromLocalId(u32 localId)
 {
-    HandleObjectFlagFromLocalId(localId, FlagSet);
+    FlagSet(GetObjectFlagFromLocalId(localId));
 }
 
 void ClearObjectFlagFromLocalId(u32 localId)
 {
-    HandleObjectFlagFromLocalId(localId, FlagClear);
+    FlagClear(GetObjectFlagFromLocalId(localId));
 }
 
-static void HandleObjectFlagFromLocalId(u32 localId, u8 (*func)(u16))
+// End setObjectFlag
+u32 GetObjectFlagFromLocalId(u32 localId)
 {
     const struct MapHeader *mapHeader = &gMapHeader;
     const struct MapEvents *events = mapHeader->events;
 
     if (events == NULL || events->objectEventCount == 0)
-        return;
+        return 0;
 
     const struct ObjectEventTemplate *templates = events->objectEvents;
-    u32 count = events->objectEventCount;
 
-    for (u32 eventIndex = 0; eventIndex < count; eventIndex++)
+    for (u32 eventIndex = 0; eventIndex < events->objectEventCount; eventIndex++)
     {
         if (templates[eventIndex].localId != localId)
             continue;
 
-        u32 flagId = templates[eventIndex].flagId;
-        if (flagId != 0 && func != NULL)
-            func(flagId);
-
-        return;
+        return templates[eventIndex].flagId;
     }
+    return 0;
 }
-// End setObjectFlag
 
 // Start storyActionItems
 void Task_ObjectTransformation(u8 taskId)

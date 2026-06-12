@@ -4801,3 +4801,51 @@ void DebugQuest_Teachatrainertofish(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Wildfire Risk
+// ***********************************************************************
+
+static const u16 treeFlags[] =
+{
+    FLAG_TREE_HALERBAWILDS_1,
+    FLAG_TREE_HALERBAWILDS_2,
+    FLAG_TREE_NAVAL_BASE_1,
+    FLAG_TREE_NAVAL_BASE_2,
+    FLAG_TREE_NAVAL_BASE_3,
+    FLAG_TREE_ROUTE3_1,
+    FLAG_TREE_ROUTE3_2,
+};
+
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    for (u32 treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+        FlagClear(treeFlags[treeIndex]);
+}
+
+void Quest_Wildfirerisk_CompleteSubquestForTree(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    u32 limit = QUEST_WILDFIRERISK_SUB_COUNT + 1;
+    u32 treeIndex = limit;
+    u32 flag = GetObjectFlagFromLocalId(gSpecialVar_LastTalked);
+
+    for (treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+    {
+        if (flag != treeFlags[treeIndex])
+            continue;
+
+        break;
+    }
+
+    if (treeIndex == limit)
+        return;
+
+    QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, treeIndex);
+}
+

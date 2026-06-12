@@ -90,5 +90,6 @@ void Quest_FlightPatterns_ClearFlightPath(void);
 bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void);
 void Quest_TeachATrainerToFish_RecordEnemy(void);
 bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void);
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void);
 
 #endif //GUARD_QUESTLOGIC_H
