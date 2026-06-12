@@ -43,7 +43,7 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-//reserved for debug                                                 
+//reserved for debug
 #define FLAG_UNUSED_0x020                                            0x20 // Unused                                                     Flag
 #define FLAG_UNUSED_0x021                                            0x21 // Unused                                                     Flag
 #define FLAG_UNUSED_0x022                                            0x22 // Unused                                                     Flag
@@ -226,22 +226,22 @@
 #define FLAG_DECORATION_3                                            0x7E
 #define FLAG_DECORATION_4                                            0x7F
 
-#define FLAG_TREE_ROUTE1_A                                           0x70
-#define FLAG_TREE_ROUTE1_B                                           0x71
-#define FLAG_TREE_ROUTE2_A                                           0x72
-#define FLAG_TREE_ROUTE2_B                                           0x73
-#define FLAG_TREE_ROUTE3_A                                           0x74
-#define FLAG_TREE_ROUTE3_B                                           0x75
-#define FLAG_TREE_ROUTE4_A                                           0x76
-#define FLAG_TREE_ROUTE4_B                                           0x77
-#define FLAG_TREE_ROUTE5_A                                           0x78
-#define FLAG_TREE_ROUTE5_B                                           0x79
-#define FLAG_TREE_ROUTE6_A                                           0x7A
-#define FLAG_TREE_ROUTE6_B                                           0x7B
-#define FLAG_TREE_ROUTE7_A                                           0x7C
-#define FLAG_TREE_ROUTE7_B                                           0x7D
-#define FLAG_TREE_ROUTE8_A                                           0x7E
-#define FLAG_TREE_ROUTE8_B                                           0x7F
+#define FLAG_TREE_HALERBAWILDS_1                                     0x70
+#define FLAG_TREE_HALERBAWILDS_2                                     0x71
+#define FLAG_TREE_NAVAL_BASE_1                                       0x72
+#define FLAG_TREE_NAVAL_BASE_2                                       0x73
+#define FLAG_TREE_NAVAL_BASE_3                                       0x74
+#define FLAG_TREE_ROUTE3_1                                           0x75
+#define FLAG_TREE_ROUTE3_2                                           0x76
+#define FLAG_TREE_PLACEHOLDER_7                                      0x77
+#define FLAG_TREE_PLACEHOLDER_8                                      0x78
+#define FLAG_TREE_PLACEHOLDER_9                                      0x79
+#define FLAG_TREE_PLACEHOLDER_10                                     0x7A
+#define FLAG_TREE_PLACEHOLDER_11                                     0x7B
+#define FLAG_TREE_PLACEHOLDER_12                                     0x7C
+#define FLAG_TREE_PLACEHOLDER_13                                     0x7D
+#define FLAG_TREE_PLACEHOLDER_14                                     0x7E
+#define FLAG_TREE_PLACEHOLDER_15                                     0x7F
 
 #define FLAG_DECORATION_5                                            0x80
 #define FLAG_DECORATION_6                                            0x81
@@ -260,22 +260,22 @@
 #define FLAG_RECEIVED_SUN_STONE_MOSSDEEP                             0x8E
 #define FLAG_WALLY_SPEECH                                            0x8F
 
-#define FLAG_TREE_ROUTE9_A                                           0x80
-#define FLAG_TREE_ROUTE9_B                                           0x81
-#define FLAG_TREE_ROUTE10_A                                          0x82
-#define FLAG_TREE_ROUTE10_B                                          0x83
-#define FLAG_TREE_ROUTE11_A                                          0x84
-#define FLAG_TREE_ROUTE11_B                                          0x85
-#define FLAG_TREE_ROUTE12_A                                          0x86
-#define FLAG_TREE_ROUTE12_B                                          0x87
-#define FLAG_TREE_ROUTE13_A                                          0x88
-#define FLAG_TREE_ROUTE13_B                                          0x89
-#define FLAG_TREE_ROUTE14_A                                          0x8A
-#define FLAG_TREE_ROUTE14_B                                          0x8B
-#define FLAG_TREE_ROUTE16_A                                          0x8C
-#define FLAG_TREE_ROUTE16_B                                          0x8D
-#define FLAG_TREE_ROUTE18_A                                          0x8E
-#define FLAG_TREE_ROUTE18_B                                          0x8F
+#define FLAG_TREE_PLACEHOLDER_16                                     0x80
+#define FLAG_TREE_PLACEHOLDER_17                                     0x81
+#define FLAG_TREE_PLACEHOLDER_18                                    0x82
+#define FLAG_TREE_PLACEHOLDER_19                                    0x83
+#define FLAG_TREE_PLACEHOLDER_20                                    0x84
+#define FLAG_TREE_PLACEHOLDER_21                                    0x85
+#define FLAG_TREE_PLACEHOLDER_22                                    0x86
+#define FLAG_TREE_PLACEHOLDER_23                                    0x87
+#define FLAG_TREE_PLACEHOLDER_24                                    0x88
+#define FLAG_TREE_PLACEHOLDER_25                                    0x89
+#define FLAG_TREE_PLACEHOLDER_26                                    0x8A
+#define FLAG_TREE_PLACEHOLDER_27                                    0x8B
+#define FLAG_TREE_PLACEHOLDER_28                                    0x8C
+#define FLAG_TREE_PLACEHOLDER_29                                    0x8D
+#define FLAG_TREE_PLACEHOLDER_30                                    0x8E
+#define FLAG_TREE_PLACEHOLDER_31                                    0x8F
 
 #define FLAG_RUSTURF_TUNNEL_OPENED                                   0x90
 #define FLAG_RECEIVED_RED_SCARF                                      0x91
@@ -294,22 +294,22 @@
 #define FLAG_RECEIVED_PREMIER_BALL_RUSTBORO                          0x9E
 #define FLAG_ENABLE_WALLY_MATCH_CALL                                 0x9F
 
-#define FLAG_TREE_ROUTE20_A                                          0x90
-#define FLAG_TREE_ROUTE20_B                                          0x91
-#define FLAG_TREE_ROUTE22_A                                          0x92
-#define FLAG_TREE_ROUTE22_B                                          0x93
-#define FLAG_TREE_ROUTE98_A                                          0x94
-#define FLAG_TREE_ROUTE98_B                                          0x95
-#define FLAG_TREE_ROUTE99_A                                          0x96
-#define FLAG_TREE_ROUTE99_B                                          0x97
-#define FLAG_TREE_ROUTE100_A                                         0x98
-#define FLAG_TREE_ROUTE100_B                                         0x99
-#define FLAG_TREE_ROUTE_A_A                                          0x9A
-#define FLAG_TREE_ROUTE_A_B                                          0x9B
-#define FLAG_TREE_ROUTE_B_A                                          0x9C
-#define FLAG_TREE_ROUTE_B_B                                          0x9D
-#define FLAG_TREE_ROUTE_C_A                                          0x9E
-#define FLAG_TREE_ROUTE_C_B                                          0x9F
+#define FLAG_TREE_PLACEHOLDER_32                                     0x90
+#define FLAG_TREE_PLACEHOLDER_33                                     0x91
+#define FLAG_TREE_PLACEHOLDER_34                                     0x92
+#define FLAG_TREE_PLACEHOLDER_35                                     0x93
+#define FLAG_TREE_PLACEHOLDER_36                                     0x94
+#define FLAG_TREE_PLACEHOLDER_37                                     0x95
+#define FLAG_TREE_PLACEHOLDER_38                                     0x96
+#define FLAG_TREE_PLACEHOLDER_39                                     0x97
+#define FLAG_TREE_PLACEHOLDER_40                                     0x98
+#define FLAG_TREE_PLACEHOLDER_41                                     0x99
+#define FLAG_TREE_PLACEHOLDER_42                                     0x9A
+#define FLAG_TREE_PLACEHOLDER_43                                     0x9B
+#define FLAG_TREE_PLACEHOLDER_44                                     0x9C
+#define FLAG_TREE_PLACEHOLDER_45                                     0x9D
+#define FLAG_TREE_PLACEHOLDER_46                                     0x9E
+#define FLAG_TREE_PLACEHOLDER_47                                     0x9F
 
 #define FLAG_ENABLE_SCOTT_MATCH_CALL                                 0xA0
 #define FLAG_ENABLE_MOM_MATCH_CALL                                   0xA1
@@ -328,10 +328,10 @@
 #define FLAG_RECEIVED_TM_SLUDGE_BOMB                                 0xAE
 #define FLAG_RECEIVED_TM_ROAR                                        0xAF
 
-#define FLAG_TREE_ROUTE_D_A                                          0xA0
-#define FLAG_TREE_ROUTE_D_B                                          0xA1
-#define FLAG_TREE_ROUTE_E_A                                          0xA2
-#define FLAG_TREE_ROUTE_E_B                                          0xA3
+#define FLAG_TREE_PLACEHOLDER_48                                     0xA0
+#define FLAG_TREE_PLACEHOLDER_49                                     0xA1
+#define FLAG_TREE_PLACEHOLDER_50                                     0xA2
+#define FLAG_TREE_PLACEHOLDER_51                                     0xA3
 #define FLAG_SILICON_UNUSED_0xA4                                     0xA4
 #define FLAG_SILICON_UNUSED_0xA5                                     0xA5
 #define FLAG_SILICON_UNUSED_0xA6                                     0xA6
