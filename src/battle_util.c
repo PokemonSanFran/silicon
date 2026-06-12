@@ -1907,6 +1907,10 @@ bool32 HandleFaintedMonActions(void)
                 if (gBattleMons[gBattleStruct->eventState.faintedActionBattler].hp == 0
                  && !(gAbsentBattlerFlags & (1u << gBattleStruct->eventState.faintedActionBattler)))
                 {
+                    // Start siliconMerge
+                    if (IsOnPlayerSide(gBattlerFainted))
+                        SetFaintedMonBit(&gParties[B_TRAINER_PLAYER][gBattlerPartyIndexes[gBattlerFainted]]); 
+                    // End siliconMerge
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
                     gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_HANDLE_NEXT_BATTLER;
                     return TRUE;

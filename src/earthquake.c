@@ -189,7 +189,7 @@ void LoadNaturalValues(void)
     u32 vertical = GenerateNaturalValue(MAX_NATURAL_VERTICAL_PAN);
     u32 shakes = GenerateNaturalShakes();
 
-    DebugPrintf("hor is %d, vertical is %d, shakes is %d",horizontal,vertical,shakes);
+    //DebugPrintf("hor is %d, vertical is %d, shakes is %d",horizontal,vertical,shakes);
 
     GenerateAftershock();
     VarSet(VAR_VERTICAL_PAN,vertical);

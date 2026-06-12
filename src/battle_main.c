@@ -521,6 +521,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TOUR_GUIDE]          = {_("Tour Guide") },
     [TRAINER_CLASS_TOURIST]             = {_("Tourist") },
     [TRAINER_CLASS_TREEHUGGER]          = {_("Treehugger") },
+    [TRAINER_CLASS_DIANTHA] = { _("Kalos Champion") },
     // End Silicon
 };
 

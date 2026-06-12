@@ -995,13 +995,11 @@ static const u16 sMapHealLocations[MAPSEC_NONE] =
     [MAPSEC_PETAROSA_BOROUGH]=HEAL_LOCATION_PETAROSA_BOROUGH,
     [MAPSEC_ROUTE11]=HEAL_LOCATION_ROUTE11,
     [MAPSEC_ROUTE8]=HEAL_LOCATION_ROUTE8,
-    [MAPSEC_PSFROUTE7E17FDD1]=HEAL_LOCATION_PSFROUTE7E17FDD1,
     [MAPSEC_ROUTE14]=HEAL_LOCATION_ROUTE14,
     [MAPSEC_ROUTE5]=HEAL_LOCATION_ROUTE5,
     [MAPSEC_ROUTE_D]=HEAL_LOCATION_ROUTE_D,
     [MAPSEC_ROUTE6]=HEAL_LOCATION_ROUTE6,
     [MAPSEC_ROUTE3]=HEAL_LOCATION_ROUTE3,
-    [MAPSEC_PSFROUTE9F45DA86]=HEAL_LOCATION_PSFROUTE9F45DA86,
     [MAPSEC_ROUTE16]=HEAL_LOCATION_ROUTE16,
     [MAPSEC_ROUTE_C]=HEAL_LOCATION_ROUTE_C,
     [MAPSEC_ROUTE1]=HEAL_LOCATION_ROUTE1,
@@ -1123,7 +1121,7 @@ enum TrolleyLocations {
     TROLLEY_PAINTED_LADIES, // LIGHT GREEN
     TROLLEY_CAPHE_CITY, // ORANGE
     TROLLEY_ESPULEE_OUTSKIRTS, // YELLOW
-    TROLLEY_TRANSPYRAMID, // BLUE
+    TROLLEY_HODOU_CITY, // BLUE
     TROLLEY_TREASURE_ISLAND, // BLUE
     TROLLEY_OROLAND, // BLUE
     TROLLEY_COUNT,
@@ -1154,7 +1152,7 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconY = (15 * 8),
         .nextTrolleyOptions = {
                                 .moveLeftStop  = TROLLEY_QIU_VILLAGE,
-                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveRightStop = TROLLEY_HODOU_CITY,
                                 .moveUpStop    = TROLLEY_IRISINA_TOWN,
                                 .moveDownStop  = TROLLEY_ESPULEE_OUTSKIRTS,
                             },
@@ -1224,7 +1222,7 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconY = (9 * 8) - 1,
         .nextTrolleyOptions = {
                                 .moveLeftStop  = TROLLEY_PAINTED_LADIES,
-                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveRightStop = TROLLEY_HODOU_CITY,
                                 .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
                                 .moveDownStop  = TROLLEY_IRISINA_TOWN,
                             },
@@ -1244,8 +1242,8 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
                             },
     },
 
-    [TROLLEY_TRANSPYRAMID] = {
-        .trolleyMapSec = MAPSEC_TRANSPYRAMID,
+    [TROLLEY_HODOU_CITY] = {
+        .trolleyMapSec = MAPSEC_HODOU_CITY,
         .trolleyCursorX = 17,
         .trolleyCursorY = 4,
         .trolleyLocationIconX = (15 * 8),
@@ -1265,10 +1263,10 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconX = (17 * 8),
         .trolleyLocationIconY = (3 * 8) + 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_TRANSPYRAMID,
+                                .moveLeftStop  = TROLLEY_HODOU_CITY,
                                 .moveRightStop = TROLLEY_OROLAND,
                                 .moveUpStop    = TROLLEY_CURENO_PORT,
-                                .moveDownStop  = TROLLEY_TRANSPYRAMID,
+                                .moveDownStop  = TROLLEY_HODOU_CITY,
                             },
     },
 
