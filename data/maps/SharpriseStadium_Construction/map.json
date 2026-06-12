@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "VSGarbodor_The_TideGrunt2_Battle_Script",
-      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_A"
+      "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_A"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "VSGarbodor_The_TideGrunt1_Battle_Script",
-      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_B"
+      "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_B"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
@@ -64,7 +64,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "VSGarbodor_The_TideGrunt4_Battle_Script",
-      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_A"
+      "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_A"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
@@ -77,7 +77,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "VSGarbodor_The_TideGrunt3_Battle_Script",
-      "flag": "FLAG_DEFEATED_CONSTRUCTION_ROCKET_B"
+      "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_B"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SKITTY",
