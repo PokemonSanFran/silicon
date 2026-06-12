@@ -13,11 +13,13 @@ Route110_TrickHousePuzzle7_OnResume:
 	end
 
 Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles::
-	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn
-	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn
-	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn
-	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn
-	call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn
+// Start siliconQuests
+	//call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn
+	//call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn
+	//call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn
+	//call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn
+	//call_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn
+// End siliconQuests
 	return
 
 @ Leftover from R/S, none of the below metatile scripts are ever called
@@ -72,12 +74,14 @@ Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff::
 	return
 
 Route110_TrickHousePuzzle7_OnTransition:
-	goto_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_TeleportedTransition
-	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
-	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
-	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
-	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
-	clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
+// Start siliconQuests
+	//goto_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_TeleportedTransition
+	//clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1
+	//clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2
+	//clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3
+	//clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4
+	//clearflag FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5
+// End siliconQuests
 	end
 
 Route110_TrickHousePuzzle7_EventScript_TeleportedTransition::

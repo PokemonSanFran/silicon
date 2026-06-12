@@ -6,7 +6,7 @@ MossdeepCity_Gym_MapScripts::
 // Start siliconQuests
 @ NOTE: Mossdeep Gym was redesigned between R/S and E. Leftover (and now functionally unused) scripts are commented below
 
-//MossdeepCity_Gym_OnTransition:
+MossdeepCity_Gym_OnTransition:
 	//setflag FLAG_TEMP_HIDE_FOLLOWER @ Hide follower since it can collide with moving statues
 	//end
 
@@ -123,7 +123,7 @@ MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed::
 	end
 
 MossdeepCity_Gym_EventScript_ClearSwitch1::
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_1 // siliconQuests
 	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
 	setmetatile 5, 5, METATILE_RSMossdeepGym_RedArrow_Left, FALSE
@@ -132,7 +132,7 @@ MossdeepCity_Gym_EventScript_ClearSwitch1::
 	end
 
 MossdeepCity_Gym_EventScript_ClearSwitch2::
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_2 // siliconQuests
 	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
 	setmetatile 8, 14, METATILE_RSMossdeepGym_RedArrow_Down, FALSE
@@ -141,7 +141,7 @@ MossdeepCity_Gym_EventScript_ClearSwitch2::
 	end
 
 MossdeepCity_Gym_EventScript_ClearSwitch3::
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_3 // siliconQuests
 	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
 	setmetatile 15, 17, METATILE_RSMossdeepGym_RedArrow_Right, FALSE
@@ -150,7 +150,7 @@ MossdeepCity_Gym_EventScript_ClearSwitch3::
 	end
 
 MossdeepCity_Gym_EventScript_ClearSwitch4::
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_4 // siliconQuests
 	applymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
 	waitmovement 0
 	setmetatile 1, 23, METATILE_RSMossdeepGym_RedArrow_Right, FALSE
