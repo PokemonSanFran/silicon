@@ -1324,10 +1324,6 @@ void FlagsVarWarp_EnterDimu()
 {
     FlagSet(FLAG_VISITED_HALERBA_CITY);
     FlagSet(FLAG_VISITED_HALERBAWILDS);
-    FlagSet(FLAG_VISITED_HALERBAWILDS_EAST);
-    FlagSet(FLAG_VISITED_HALERBAWILDS_NORTH);
-    FlagSet(FLAG_VISITED_HALERBAWILDS_SOUTH);
-    FlagSet(FLAG_VISITED_HALERBAWILDS_WEST);
     IncrementStorylineVariable();
     ClearGymTrainers(GYM_DIMU);
     Buzzr_MarkTweetAsRead(TWEET_GYM_HALERBA_CITY_BADGE);
