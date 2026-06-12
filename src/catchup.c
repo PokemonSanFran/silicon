@@ -1,6 +1,7 @@
 #include "global.h"
 #include "catchup.h"
 #include "event_data.h"
+#include "random.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 
@@ -145,13 +146,13 @@ void DoCatchUpMehanics(u32 partyIndex)
 
 void DoCatchUpEffortValues(u32 partyIndex)
 {
-    u32 statIndex, stat, effortValue;
+    u32 bonus[] = {MON_DATA_HP_EV, MON_DATA_ATK_EV, MON_DATA_DEF_EV, MON_DATA_SPATK_EV, MON_DATA_SPDEF_EV, MON_DATA_SPEED_EV};
+    Shuffle(bonus,NUM_STATS,sizeof(bonus[0]));
 
-    for (statIndex = 0; statIndex < NUM_STATS; statIndex++)
+    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
-        stat = MON_DATA_HP_EV + statIndex;
-
-        effortValue = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], stat);
+        u32 stat = bonus[statIndex];
+        u32 effortValue = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], stat);
 
         if (effortValue >= MAX_PER_STAT_EVS)
             continue;

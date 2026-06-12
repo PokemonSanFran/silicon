@@ -1880,15 +1880,6 @@
       "visitedFlag": "FLAG_VISITED_OROLAND_COLISEUM"
     },
     {
-      "id": "MAPSEC_OROLANDFERRY",
-      "name": "Orolandferry",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1,
-      "visitedFlag": "FLAG_VISITED_OROLANDFERRY"
-    },
-    {
       "id": "MAPSEC_PIOCA_BRIDGE",
       "name": "PiocaBridge",
       "x": 6,

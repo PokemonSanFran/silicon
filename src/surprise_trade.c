@@ -142,7 +142,6 @@ static u32 CalculateSurpriseTradeExperience(u32 currentLevelExp, u32 species)
 
     for (level = 0; level < (MAX_LEVEL + 1); level++)
     {
-
         newMonExp = gExperienceTables[growthRate][level];
         tradedMonExp -= newMonExp;
 
@@ -160,8 +159,8 @@ static u32 CalculateSurpriseTradeExperience(u32 currentLevelExp, u32 species)
 
     u32 exp = Random() % (newMonExp - currentLevelExp);
     u32 targetExp = currentLevelExp + exp;
-
-    return ((targetExp) > maxExp) ? maxExp : targetExp;
+    u32 returnValue = min(targetExp,maxExp);
+    return max(1,returnValue);
 }
 
 void AddSurpriseTradeMoves(struct Pokemon *mon)

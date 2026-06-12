@@ -2716,7 +2716,7 @@
 #define FLAG_NO_WHITEOUT                            (SYSTEM_FLAGS + 0xA6) // Unused Flag
 #define FLAG_FORCE_LOAD_OFFSCREEN_OBJ               (SYSTEM_FLAGS + 0xA7) // Unused Flag
 #define FLAG_DEXNAV_SEARCHING                       (SYSTEM_FLAGS + 0xA8) // Unused Flag
-#define FLAG_DEXNAV_DECECTOR                        (SYSTEM_FLAGS + 0xA9) // Unused Flag
+#define FLAG_DEXNAV_DETECTOR                        (SYSTEM_FLAGS + 0xA9) // Unused Flag
 #define FLAG_UNUSED_0x90A                           (SYSTEM_FLAGS + 0xAA) // Unused Flag
 #define FLAG_UNUSED_0x90B                           (SYSTEM_FLAGS + 0xAB) // Unused Flag
 #define FLAG_UNUSED_0x90C                           (SYSTEM_FLAGS + 0xAC) // Unused Flag

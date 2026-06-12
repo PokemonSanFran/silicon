@@ -97,6 +97,7 @@
 #include "quest_logic.h" // firstMusicUpdate
 #include "map_preview_screen.h" // mapPreviews
 #include "ui_map_system.h"
+#include "region_map.h" //HandleVisitedFlags
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
@@ -921,79 +922,61 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 }
 
 // Start siliconMerge
+
+#include "data/region_map/region_map_neighbors.h"
+
 void CheckSetVisitedRouteFlags(void)
 {
-    if ((VarGet(VAR_ARANTRAZ_STATE) >= BATTLED_TALA) && FlagGet(FLAG_VISITED_ANBEH_BEND))
-        FlagSet(FLAG_VISITED_ROUTE11);
+    mapsec_u16_t mapA = MAPSEC_NONE;
+    mapsec_u16_t mapB = MAPSEC_NONE;
+    mapsec_u16_t mapDestination = MAPSEC_NONE;
+    mapsec_u16_t currentMap = gMapHeader.regionMapSectionId;
 
-    if (FlagGet(FLAG_VISITED_FORT_YOBU) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE16);
+//DebugPrintf("currentMap is %S",gRegionMapEntries[currentMap].name);
 
-    if (FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_POPIDORA_PIER))
-        FlagSet(FLAG_VISITED_ROUTE4);
+    if (currentMap < RESIDO_MAPSEC_START)
+        return;
 
-    if (FlagGet(FLAG_VISITED_CAPHE_CITY) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
-        FlagSet(FLAG_VISITED_ROUTE10);
+    if (currentMap > RESIDO_MAPSEC_END)
+        return;
 
-    if (FlagGet(FLAG_VISITED_MERMEREZA_CITY) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
-        FlagSet(FLAG_VISITED_ROUTE8);
+    for (u32 neighbors = 0; neighbors < ARRAY_COUNT(regionMapNeighbors); neighbors++)
+    {
+        mapA = regionMapNeighbors[neighbors].mapA;
+        mapB = regionMapNeighbors[neighbors].mapB;
+        mapDestination = regionMapNeighbors[neighbors].destination;
 
-    if (FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE14);
+        u32 flagA = gRegionMapEntries[mapA].visitedFlag;
+        u32 flagB = gRegionMapEntries[mapB].visitedFlag;
+        u32 flagDestination = gRegionMapEntries[mapDestination].visitedFlag;
+//DebugPrintf("-------------------------------------");
 
-    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
-        FlagSet(FLAG_VISITED_ROUTE5);
+//DebugPrintf("map A is %S",gRegionMapEntries[mapA].name);
+//DebugPrintf("map B is %S",gRegionMapEntries[mapB].name);
+//DebugPrintf("map C is %S",gRegionMapEntries[mapDestination].name);
 
-    if(FlagGet(FLAG_VISITED_POPIDORA_PIER) && FlagGet(FLAG_VISITED_ARANTRAZ))
-        FlagSet(FLAG_VISITED_ROUTE_D);
+        if (mapA != currentMap && mapB != currentMap && mapDestination != currentMap)
+            continue;
 
-    if(FlagGet(FLAG_VISITED_CUCONU_TOWN) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
-        FlagSet(FLAG_VISITED_ROUTE6);
+        if (mapDestination == MAPSEC_TORGEOT_CLIMB)
+        {   
+            if (VarGet(VAR_TIME_TRAVEL_STATE) <= TIME_TRAVEL_NEVER_STARTED)
+                continue;
 
-    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_TORGEOT_CLIMB_BASE))
-        FlagSet(FLAG_VISITED_ROUTE3);
+            FlagSet(flagDestination);
+            continue;
+        }
 
-    if(FlagGet(FLAG_VISITED_ARANTRAZ) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
-        FlagSet(FLAG_VISITED_ROUTE_C);
+//DebugPrintf("evaluating map A is %S with flag %d",gRegionMapEntries[mapA].name,flagA);
+//DebugPrintf("evaluating map B is %S with flag %d",gRegionMapEntries[mapB].name,flagB);
+//DebugPrintf("evaluating map C is %S with flag %d",gRegionMapEntries[mapDestination].name,flagDestination);
+        
+        if ((FlagGet(flagA)) && (FlagGet(flagB)))
+            FlagSet(flagDestination);
 
-    if(FlagGet(FLAG_VISITED_GLAVEZ_HILL) && FlagGet(FLAG_VISITED_CURENO_PORT))
-        FlagSet(FLAG_VISITED_ROUTE1);
-
-    if(FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_CURENO_PORT))
-        FlagSet(FLAG_VISITED_ROUTE2);
-
-    if(FlagGet(FLAG_VISITED_WAJABI_LAKE) && FlagGet(FLAG_VISITED_QIU_VILLAGE))
-        FlagSet(FLAG_VISITED_ROUTE20);
-
-    if(FlagGet(FLAG_VISITED_ZENZU_ISLAND))
-        FlagSet(FLAG_VISITED_NONGYU_BRIDGE);
-
-    if(FlagGet(FLAG_VISITED_TORA_TOWN) && FlagGet(FLAG_VISITED_CAPHE_CITY))
-        FlagSet(FLAG_VISITED_ROUTE9);
-
-    if(FlagGet(FLAG_VISITED_TIRABUDIN_PLACE) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE7);
-
-    if(FlagGet(FLAG_VISITED_PETAROSA_BOROUGH) && FlagGet(FLAG_VISITED_CRESALTA_VISTA))
-        FlagSet(FLAG_VISITED_ROUTE13);
-
-    if(FlagGet(FLAG_VISITED_HALAI_ISLAND) && FlagGet(FLAG_VISITED_ARANTRAZ))
-        FlagSet(FLAG_VISITED_ROUTE_A);
-
-    if(FlagGet(FLAG_VISITED_CHASILLA) && FlagGet(FLAG_VISITED_OROLAND))
-        FlagSet(FLAG_VISITED_ROUTE99);
-
-    if(FlagGet(FLAG_VISITED_LEAVERRA_FOREST) && FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS))
-        FlagSet(FLAG_VISITED_ROUTE100);
-
-    if(FlagGet(FLAG_VISITED_ANBEH_BEND) && FlagGet(FLAG_VISITED_CAPHE_CITY))
-        FlagSet(FLAG_VISITED_ROUTE12);
-
-    if (FlagGet(FLAG_VISITED_OROLAND) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
-        FlagSet(FLAG_VISITED_ROUTE_B);
-
-    if(FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS) && FlagGet(FLAG_VISITED_CHASILLA))
-        FlagSet(FLAG_VISITED_ROUTE_E);
+        if ((flagA == 0) && (flagB == 0) && (mapDestination == currentMap))
+            FlagSet(flagDestination);
+    }
 }
 // End siliconMerge
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
