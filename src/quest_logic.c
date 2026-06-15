@@ -4808,13 +4808,13 @@ void DebugQuest_Teachatrainertofish(u8 state)
 
 static const u16 treeFlags[] =
 {
-    FLAG_TREE_HALERBAWILDS_1,
-    FLAG_TREE_HALERBAWILDS_2,
-    FLAG_TREE_NAVAL_BASE_1,
-    FLAG_TREE_NAVAL_BASE_2,
-    FLAG_TREE_NAVAL_BASE_3,
-    FLAG_TREE_ROUTE3_1,
-    FLAG_TREE_ROUTE3_2,
+    [RESIDO_TREE_HALERBA_WILDS_1] = FLAG_TREE_HALERBAWILDS_1,
+    [RESIDO_TREE_HALERBA_WILDS_2] = FLAG_TREE_HALERBAWILDS_2,
+    [RESIDO_TREE_NAVAL_BASE_1] = FLAG_TREE_NAVAL_BASE_1,
+    [RESIDO_TREE_NAVAL_BASE_2] = FLAG_TREE_NAVAL_BASE_2,
+    [RESIDO_TREE_NAVAL_BASE_3] = FLAG_TREE_NAVAL_BASE_3,
+    [RESIDO_TREE_ROUTE3_1] = FLAG_TREE_ROUTE3_1,
+    [RESIDO_TREE_ROUTE3_2] = FLAG_TREE_ROUTE3_2,
 };
 
 void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void)
@@ -4859,3 +4859,40 @@ void Quest_Wildfirerisk_CompleteSubquestForTree(void)
     Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward();
 }
 
+void DebugQuest_Wildfirerisk(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_WILDFIRERISK_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_WILDFIRERISK_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_TM,1);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_HALERBA_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_NAVAL_BASE_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_2);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_3);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_ROUTE3_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_REWARD,1);
+            break;
+    }
+}

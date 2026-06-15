@@ -15,7 +15,7 @@ script Wildfirerisk_Script_Interact
 script Wildfirerisk_Dialogue_StartQuest
 {
     msgbox(format("I don’t think I’ve slept in a week. I’m so anxious."),,SPEAKER_WILDFIRERISKWORKER)
-    checkitemspace(ITEM_TM_CUT,1)
+    checkitemspace(ITEM_QUEST_WILDFIRERISK_TM,1)
     if (var(VAR_RESULT) == FALSE)
     {
         msgbox(format("Don’t you get anxious when your bag has so many Technical Machines in it? You should lighten your load."),,SPEAKER_WILDFIRERISKWORKER)
@@ -32,7 +32,7 @@ script Wildfirerisk_Dialogue_StartQuest
         msgbox(format("I think cleaning up some of the brush will help, but the region is so big... Could you lend a hand?"),,SPEAKER_WILDFIRERISKWORKER)
         closemessage
         cueobjectplayer(LOCALID_QIU_WILDFIRERISKWORKER)
-        giveitem(ITEM_TM_CUT,1)
+        giveitem(ITEM_QUEST_WILDFIRERISK_TM,1)
         buffermovename(STR_VAR_1,MOVE_CUT)
         msgbox(format("If there’s a Pokémon in your party that can learn {STR_VAR_1}, you’ll be able to cut down brush that’s in your way, even if none of your Pokémon know the move."),,SPEAKER_WILDFIRERISKWORKER)
         closemessage

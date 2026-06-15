@@ -67,6 +67,7 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state);
 void DebugQuest_RestoreHodouCityGym(u8 state);
 void DebugQuest_ImprovBattling(u8 state);
 void DebugQuest_Teachatrainertofish(u8 state);
+void DebugQuest_Wildfirerisk(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);

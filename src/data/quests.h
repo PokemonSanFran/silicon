@@ -4171,7 +4171,73 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_QUEST_WILDFIRERISKWORKER,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sWildfireRisk_Sub,
-        .numSubquests = QUEST_WILDFIRERISK_SUB_COUNT
+        .numSubquests = QUEST_WILDFIRERISK_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_WILDFIRERISK_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not_Started"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_QUEST_WILDFIRERISK_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 15,
+            },
+            [STATE_QUEST_WILDFIRERISK_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started_Quest"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_QUEST_WILDFIRERISK_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 15,
+            },
+            [STATE_QUEST_WILDFIRERISK_CUT_HALERBA_BRUSH] =
+            {
+                .name = COMPOUND_STRING("Cut Halerba Brush"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_HALERBA_WILDS),
+                .warpId = WARP_ID_NONE,
+                .x = 5,
+                .y = 9,
+            },
+            [STATE_QUEST_WILDFIRERISK_CUT_NAVAL_BASE_BRUSH] =
+            {
+                .name = COMPOUND_STRING("Cut Naval Base Brush"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_NAVAL_BASE_EXTERIOR),
+                .warpId = WARP_ID_NONE,
+                .x = 2,
+                .y = 2,
+            },
+            [STATE_QUEST_WILDFIRERISK_CUT_ROUTE3_BRUSH] =
+            {
+                .name = COMPOUND_STRING("Cut Route3 Brush"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_ROUTE3),
+                .warpId = WARP_ID_NONE,
+                .x = 18,
+                .y = 17,
+            },
+            [STATE_QUEST_WILDFIRERISK_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_QUEST_WILDFIRERISK_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 15,
+            },
+            [STATE_QUEST_WILDFIRERISK_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Wildfirerisk,
+                side_quest_map(MAP_QUEST_WILDFIRERISK_ORIGIN),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 15,
+            },
+        },
     },
     [QUEST_THEBOYWHOCRIESWITHWOLVES] =
     {
