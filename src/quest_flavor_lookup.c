@@ -433,3 +433,11 @@ const u8 *GetQuestDesc_Teachatrainertofish(void)
 	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_TEACHATRAINERTOFISH].desc[flag]);
 	return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Wildfirerisk(void)
+{
+    u32 flag = ReturnQuestState(QUEST_WILDFIRERISK);
+    StringCopy(gStringVar1,GetItemName(ITEM_QUEST_WILDFIRERISK_REWARD));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_WILDFIRERISK].desc[flag]);
+	return gStringVar4;
+}

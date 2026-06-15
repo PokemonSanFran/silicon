@@ -1134,6 +1134,8 @@ enum
 // ***********************************************************************
 // Quest: Wildfire Risk
 // ***********************************************************************
-#define ITEM_QUEST_WILDFIRERISK_REWARD      ITEM_POTION
+
+#define ITEM_QUEST_WILDFIRERISK_REWARD            ITEM_POTION
+#define OBJ_EVENT_GFX_QUEST_WILDFIRERISKWORKER    OBJ_EVENT_GFX_ARTIST
 //#define QUEST_TEACHATRAINERTOFISH
 #endif // GUARD_CONSTANTS_QUESTS_H
