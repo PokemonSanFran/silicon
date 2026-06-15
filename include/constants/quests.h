@@ -1131,4 +1131,9 @@ enum
     STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE,
 };
 
+// ***********************************************************************
+// Quest: Wildfire Risk
+// ***********************************************************************
+#define ITEM_QUEST_WILDFIRERISK_REWARD      ITEM_POTION
+//#define QUEST_TEACHATRAINERTOFISH
 #endif // GUARD_CONSTANTS_QUESTS_H
