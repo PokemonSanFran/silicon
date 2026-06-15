@@ -4826,6 +4826,11 @@ void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void)
         FlagClear(treeFlags[treeIndex]);
 }
 
+void Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+}
+
 void Quest_Wildfirerisk_CompleteSubquestForTree(void)
 {
     if (IsQuestCompletedState(QUEST_WILDFIRERISK))
@@ -4847,5 +4852,10 @@ void Quest_Wildfirerisk_CompleteSubquestForTree(void)
         return;
 
     QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, treeIndex);
+
+    if (IsQuestActiveState(QUEST_WILDFIRERISK) == FALSE)
+        return;
+
+    Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward();
 }
 
