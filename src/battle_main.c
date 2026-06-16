@@ -5502,7 +5502,10 @@ static void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
         if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
-            PlayBGM(MUS_VICTORY_GYM_LEADER);
+// Start siliconMusic
+            //PlayBGM(MUS_VICTORY_GYM_LEADER);
+            PlayBGM(MUS_VICTORY_DIANTHA_FACILITY);
+// End siliconMusic
         else
             PlayBGM(MUS_VICTORY_TRAINER);
     }
@@ -5514,6 +5517,11 @@ static void HandleEndTurn_BattleWon(void)
 
         switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
         {
+// Start siliconMusic
+        case TRAINER_CLASS_DIANTHA:
+            PlayBGM(MUS_VICTORY_DIANTHA_FACILITY);
+            break;
+// End siliconMusic
         case TRAINER_CLASS_ELITE_FOUR:
         case TRAINER_CLASS_CHAMPION:
             PlayBGM(MUS_VICTORY_LEAGUE);
