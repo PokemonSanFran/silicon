@@ -199,7 +199,7 @@
     textVar[3] = (item & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
 }
-
+// Start Give Native Item
 #define PREPARE_ITEM_PLURAL_BUFFER(textVar, item, amount)       \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
@@ -210,6 +210,7 @@
     textVar[5] = B_BUFF_EOS;                                    \
 }
 
+// End Give Native Item
 #define PREPARE_SPECIES_BUFFER(textVar, species)                \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
