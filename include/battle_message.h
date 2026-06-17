@@ -101,6 +101,7 @@
 #define B_BUFF_ABILITY                      9
 #define B_BUFF_ITEM                         10
 #define B_BUFF_MON_NICK_WITH_PREFIX_LOWER   11 // lowercase prefix
+#define B_BUFF_ITEM_PLURAL                  12
 
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
@@ -197,6 +198,16 @@
     textVar[2] = item;                                          \
     textVar[3] = (item & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
+}
+
+#define PREPARE_ITEM_PLURAL_BUFFER(textVar, item, amount)       \
+{                                                               \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
+    textVar[1] = B_BUFF_ITEM_PLURAL;                            \
+    textVar[2] = item;                                          \
+    textVar[3] = (item & 0xFF00) >> 8;                          \
+    textVar[4] = amount;                                        \
+    textVar[5] = B_BUFF_EOS;                                    \
 }
 
 #define PREPARE_SPECIES_BUFFER(textVar, species)                \
