@@ -1546,9 +1546,9 @@ const struct Tileset gTileset_GeneralSilicon =
 {
     .isCompressed = TRUE,
     .isSecondary = FALSE,
-    .tiles = gTilesetTiles_GeneralSilicon,
-    .palettes = gTilesetPalettes_GeneralSilicon,
-    .metatiles = gMetatiles_GeneralSilicon,
-    .metatileAttributes = gMetatileAttributes_GeneralSilicon,
+    .tiles = gTilesetTiles_PorytilesManaged_GeneralSilicon,
+    .palettes = gTilesetPalettes_PorytilesManaged_GeneralSilicon,
+    .metatiles = gMetatiles_PorytilesManaged_GeneralSilicon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_GeneralSilicon,
     .callback = NULL,
 };

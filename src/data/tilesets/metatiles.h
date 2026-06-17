@@ -409,5 +409,5 @@ const u16 gMetatileAttributes_HallOfFame[] = INCBIN_U16("data/tilesets/secondary
 
 #endif // IS_FRLG
 
-const u16 gMetatiles_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/metatiles.bin");
-const u16 gMetatileAttributes_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/metatile_attributes.bin");
+const u16 gMetatiles_PorytilesManaged_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_GeneralSilicon[] = INCBIN_U16("data/tilesets/primary/general_silicon/porytiles_bin/metatile_attributes.bin");
