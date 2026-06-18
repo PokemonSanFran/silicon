@@ -1779,7 +1779,15 @@ void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite)
 {
     if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
         RecolorPlayerCharacters(sprite->oam.paletteNum);
-    //UpdatePalettesWithTime(PALETTES_ALL);
+}
+
+void SetPlayerPaletteTimeBlend(u32 paletteTag, struct Sprite *sprite)
+{
+    if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
+    {
+        RecolorPlayerCharacters(sprite->oam.paletteNum);
+        UpdatePalettesWithTime(1 << (sprite->oam.paletteNum + 16));
+    }
 }
 
 void SetPlayerAvatarToChampion(void)
