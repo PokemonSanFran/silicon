@@ -322,3 +322,29 @@ WILD_BATTLE_TEST("Points Messages: Gains EVs")
     }
 
 }
+
+WILD_BATTLE_TEST("Points Messages: No message when winning through suicide attacks")
+{
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP; // Battle Settings: Level
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1; // Battle Settings: Exp Multiplier
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE] = BATTLE_OPTION_EXPERIENCE_PARTY; // Battle Settings: Experience
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES] = BATTLE_OPTION_POINTS_MESSAGES_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_LOPUNNY) { Level(40);}
+        PLAYER(SPECIES_JYNX) { Level(100); HPEV(252); AttackEV(252); DefenseEV(6);}
+        OPPONENT(SPECIES_MEW) { Level(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FINAL_GAMBIT); }
+    } SCENE {
+        MESSAGE("Lopunny used Final Gambit!");
+        MESSAGE("The wild Mew fainted!");
+
+        NONE_OF{
+            MESSAGE("The Pokémon in your party\ngained experience and effort values!");
+        }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 0);
+    }
+
+}
