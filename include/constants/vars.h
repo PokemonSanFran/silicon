@@ -140,7 +140,7 @@
 #define VAR_ROUTE110_STATE                               0x4069
 #define VAR_ARANTRAZ_EXHIBIT_STATE                       0x4069 // PSF Var
 #define VAR_FRONTIER_LAST_FOUGHT_BOSS                               0x406A // PSF Var
-#define VAR_SHINZO_STATE                               0x406B // PSF Var
+#define VAR_CULTURAL_PURITY                               0x406B // PSF Var
 #define VAR_EMRYS_STATE                               0x406C // PSF Var
 #define VAR_PUA_STATE                               0x406D // PSF Var
 #define VAR_NERIENE_STATE                               0x406E // PSF Var

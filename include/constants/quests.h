@@ -1201,4 +1201,14 @@ enum
 #define QUEST_HANG20_REQUIRED_WINS CRESALTA_MON_COUNT
 #define MAP_QUEST_HANG20                    MAP_CRESALTA_VISTA
 
+// ***********************************************************************
+// Quest: Cultural Purity
+// ***********************************************************************
+//#define QUEST_CULTURALPURITY
+
+#define ITEM_QUEST_CULTURALPURITY_1         ITEM_KEY_TO_ROOM_1
+#define ITEM_QUEST_CULTURALPURITY_2         ITEM_KEY_TO_ROOM_2
+#define ITEM_QUEST_CULTURALPURITY_3         ITEM_KEY_TO_ROOM_4
+#define ITEM_QUEST_CULTURALPURITY_4         ITEM_KEY_TO_ROOM_6
+
 #endif // GUARD_CONSTANTS_QUESTS_H

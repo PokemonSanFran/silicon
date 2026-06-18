@@ -792,7 +792,6 @@ void FlagsVarWarp_EnterShinzo()
     FlagSet(TRAINER_FLAGS_START + TRAINER_031A849F);
     FlagSet(TRAINER_FLAGS_START + TRAINER_045FDD44);
     FlagSet(TRAINER_FLAGS_START + TRAINER_041FD20E);
-    VarSet(VAR_SHINZO_STATE, BATTLE_2_COMPLETE);
     VarSet(VAR_GYM_2_STATE, GYM_DEFEATED_LEADER);
     IncrementStorylineVariable();
     WowYoureStrong_GetBadgesAndSetTowerState();

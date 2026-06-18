@@ -5,9 +5,6 @@ mapscripts HodouCity_MapScripts{
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(HowDisappointing_ManageObject_Script)
-        call(Quest_CulturalPurity_HideLeader_Script)
-        call(Quest_CulturalPurity_HideBackUp_Script)
-        call(Quest_CulturalPurity_MoveGuard_Script)
         call(Restorehodoucity_Script_ControlPewfatVisibility)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_Rematches_Script_HideKeiYing)

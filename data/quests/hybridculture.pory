@@ -3,11 +3,8 @@ const SHINZO = 1
 const FLAG_HIDE_SHINZO = FLAG_TEMP_1
 //script Quest_HybridCulture
 
-script Quest_HybridCulture_HideLeader_Script{
-
-    if (var(VAR_SHINZO_STATE) != QUEST_1_COMPLETE){
-        setflag(FLAG_HIDE_SHINZO)
-    }
+script Quest_HybridCulture_HideLeader_Script
+{
 }
 
 script Quest_HybridCulture_CheckSubquests_Script{
@@ -90,7 +87,6 @@ script Quest_HybridCulture_Reward_Dialogue{
     call(Quest_HybridCulture_GiveReward_Script)
 
     completequest(QUEST_HYBRIDCULTURE)
-    setvar(VAR_SHINZO_STATE,QUEST_2_COMPLETE)
     setflag(FLAG_FACILITY_UNLOCK_SHINZO)
     end
 }
