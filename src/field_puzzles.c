@@ -17,7 +17,7 @@
 
 bool8 ShouldDoSecretLabDigEffect(void)
 {
-    if (FlagGet(FLAG_DISCOVERED_PARC))
+    if (VarGet(VAR_PARC_STATE) >= PLAYER_DISCOVERED_LAB)
         return FALSE;
 
     if (GetCurrentMap() != MAP_ROUTE4)
@@ -60,7 +60,6 @@ void DoSecretLabDigEffect(void)
         VarSet(VAR_PARC_STATE,PLAYER_DISCOVERED_LAB);
 
     PlaySE(SE_BANG);
-    FlagSet(FLAG_DISCOVERED_PARC);
 
     ScriptContext_SetupScript(ThisIsntRandom_CheckDoor_Script);
 }

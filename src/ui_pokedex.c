@@ -495,8 +495,8 @@ void Pokedex_SetupCallback(void)
             gMain.state++;
             break;
         case 6:
+            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
             ClearAllWindows();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             SpeciesGrid_ResetInterfaceSpriteIds();
             SpeciesGrid_PrintMonCursor();
             SpeciesGrid_PrintScrollbar();
@@ -519,6 +519,10 @@ void Pokedex_SetupCallback(void)
             gMain.state++;
             break;
         case 7:
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            gMain.state++;
+        case 8:
             firstOpen = FALSE;
             SetVBlankCallback(Pokedex_VBlankCB);
             SetMainCallback2(Pokedex_MainCB);

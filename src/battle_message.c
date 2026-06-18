@@ -3837,12 +3837,22 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             StringAppend(dst, gAbilitiesInfo[T1_READ_16(&src[srcID + 1])].name);
             srcID += 3;
             break;
+        case B_BUFF_ITEM_PLURAL: // Native Give Item
         case B_BUFF_ITEM: // item name
             hword = T1_READ_16(&src[srcID + 1]);
-            if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+            // Start Native Give Item
+            //if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) 
+            if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)
+                && (hword == ITEM_ENIGMA_BERRY_E_READER))
+            // End Native Give Item
             {
-                if (hword == ITEM_ENIGMA_BERRY_E_READER)
+                // Start Native Give Item
+                //if (hword == ITEM_ENIGMA_BERRY_E_READER)
+                if (gLinkPlayers[gBattleScripting.multiplayerId].id == gPotentialItemEffectBattler)
+                // End Native Give Item
                 {
+                // Start Native Give Item
+/*
                     if (gLinkPlayers[gBattleScripting.multiplayerId].id == gPotentialItemEffectBattler)
                     {
                         StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
@@ -3852,15 +3862,34 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                     {
                         StringAppend(dst, sText_EnigmaBerry);
                     }
+*/
+                    StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
+                    StringAppend(dst, sText_BerrySuffix);
+                // End Native Give Item
                 }
                 else
                 {
-                    CopyItemName(hword, dst);
+                // Start Native Give Item
+                    //CopyItemName(hword, dst);
+                    StringAppend(dst, sText_EnigmaBerry);
+                // End Native Give Item
                 }
             }
             else
             {
-                CopyItemName(hword, dst);
+                // Start Native Give Item
+                //CopyItemName(hword, dst);
+                if (src[srcID] == B_BUFF_ITEM_PLURAL)
+                {
+                    u32 amount = src[srcID + 3];
+                    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
+                    CopyItemNameHandlePlural(hword, gStringVar2, amount);
+                    StringExpandPlaceholders(dst, COMPOUND_STRING("{STR_VAR_1} {STR_VAR_2}"));
+                    srcID += 1;
+                }
+                else
+                    CopyItemName(hword, dst);
+                // End Native Give Item
             }
             srcID += 3;
             break;

@@ -5024,10 +5024,6 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     else
     {
         gPartyMenuUseExitCallback = TRUE;
-        // Start siliconMerge
-		if (VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
-            VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT, 0);
-		// End siliconMerge
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
