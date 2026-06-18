@@ -4896,3 +4896,232 @@ void DebugQuest_Wildfirerisk(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Quest: Hang 20
+// ***********************************************************************
+// * take index from the overall list
+// * get the species Id from that index
+// * create the pokemon in the opposing party
+// * create the object sprite from that pokemon
+// * depending on encounter type, the pokemon will do a series of movmement and attack the player
+
+struct WildGauntletData
+{
+    enum WildPokemonArea encounterType;
+    u8 index;
+    enum Species species;
+    u32 x;
+    u32 y;
+};
+
+const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
+{
+    [CRESALTA_MON_BERRY_0_1] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 22,
+        .y = 9,
+
+    },
+    [CRESALTA_MON_BERRY_0_2] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+
+    },
+    [CRESALTA_MON_BERRY_10_3] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 10,
+        .x = 18,
+        .y = 9,
+
+    },
+    [CRESALTA_MON_WATER_0_4] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 29,
+        .y = 1,
+
+    },
+    [CRESALTA_MON_PHENOMENON_0_5] =
+    {
+        .encounterType = WILD_AREA_PHENOMENON,
+        .index = 0,
+        .x = 17,
+        .y = 2,
+
+    },
+    [CRESALTA_MON_LAND_0_6] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+
+    },
+    [CRESALTA_MON_LAND_12_7] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 12,
+        .x = 22,
+        .y = 9,
+
+    },
+    [CRESALTA_MON_WATER_0_8] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 22,
+        .y = 0,
+
+    },
+    [CRESALTA_MON_ROCK_SMASH_0_9] =
+    {
+        .encounterType = WILD_AREA_ROCKS,
+        .index = 0,
+        .x = 25,
+        .y = 6,
+
+    },
+    [CRESALTA_MON_FISHING_0_10] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+
+    },
+    [CRESALTA_MON_FLYING_17_11] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 17,
+        .x = 22,
+        .y = 6,
+
+    },
+    [CRESALTA_MON_FLYING_19_12] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 19,
+        .x = 22,
+        .y = 6,
+
+    },
+    [CRESALTA_MON_FISHING_14_13] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 14,
+        .x = 20,
+        .y = 2,
+
+    },
+    [CRESALTA_MON_WATER_0_14] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+
+    },
+    [CRESALTA_MON_WATER_16_15] =
+    {
+        .species = SPECIES_PALAFIN_HERO,
+        .encounterType = WILD_AREA_WATER,
+        .index = 16,
+        .x = 20,
+        .y = 2,
+
+    },
+};
+
+static enum Species Quest_Hang20_GetWildSpecies(const struct WildPokemonInfo *wildMonInfo, enum CresaltaMonProgress progress, enum WildPokemonArea area, u32 index)
+{
+    if (cresaltaGauntletData[progress].species != SPECIES_NONE)
+        return cresaltaGauntletData[progress].species;
+
+    return wildMonInfo->wildPokemon[index].species;
+}
+
+void Quest_Hang20_GenerateWildBattle(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    u32 level = min((ChooseWildMonLevel(wildMonInfo->wildPokemon, index, area) +  progress),MAX_LEVEL);
+
+    CreateWildMon(species,level);
+};
+
+void ResetDefeatedCresaltaVista(void)
+{
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,0);
+}
+
+void CountDefeatedCresaltaVista(void)
+{
+    if (GetCurrentMap() != MAP_CRESALTA_VISTA)
+        return;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        return;
+
+    if (IsQuestActiveState(QUEST_HANG20) == FALSE)
+        return;
+
+    u32 defeatedCresaltaVistaCount = VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT);
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,++defeatedCresaltaVistaCount);
+
+    if (defeatedCresaltaVistaCount >=QUEST_HANG20_REQUIRED_WINS)
+        QuestMenu_ScriptSetReward(QUEST_HANG20);
+}
+
+void Quest_Hang20_SetObjectId(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    u32 modifier = 0, objectIdGfx = 0;
+
+    if (IsOverworldMonShiny())
+        modifier += OBJ_EVENT_MON_SHINY;
+
+    if (IsOverworldMonFemale())
+        modifier += OBJ_EVENT_MON_FEMALE;
+
+    objectIdGfx = (species + modifier + OBJ_EVENT_MON);
+    VarSet(VAR_OBJ_GFX_ID_0,objectIdGfx);
+}
+
+void Quest_Hang20_MoveObject(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    u32 x = cresaltaGauntletData[progress].x + 0;
+    u32 y = cresaltaGauntletData[progress].y + 0;
+    u32 localId = LOCALID_HANG20_OPPONENT;
+    SetObjEventTemplateCoords(localId,x,y);
+}
+
+void Quest_Hang20_PlayMonCry(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void Quest_Hang20_BufferLastSpecies(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    progress--;
+
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+}
