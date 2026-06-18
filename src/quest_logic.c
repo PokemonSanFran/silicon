@@ -2176,7 +2176,7 @@ void Quest_RPS_StopMoneyLoss(void)
     if (gBattleOutcome == B_OUTCOME_WON)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
     else
-        gBattleTypeFlags |= BATTLE_TYPE_FRONTIER;
+        gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
 }
 
 void DebugQuest_RPS(u8 state)
