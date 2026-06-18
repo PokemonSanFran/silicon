@@ -91,6 +91,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_CRESALTA_PUA",
       "graphics_id": "OBJ_EVENT_GFX_PUA",
       "x": 21,
       "y": 4,
@@ -208,6 +209,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_1F"
+    },
+    {
+      "local_id": "LOCALID_HANG20_OPPONENT",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 22,
+      "y": 9,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_TEMP_8"
     }
   ],
   "warp_events": [
@@ -258,15 +273,6 @@
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
       "script": "CutePokemon_Script_DebugGiveMon"
-    },
-    {
-      "type": "trigger",
-      "x": 22,
-      "y": 4,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_Hang20_Debug_Script"
     }
   ],
   "bg_events": []
