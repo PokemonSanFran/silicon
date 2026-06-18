@@ -1936,7 +1936,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     // Use palette from species palette table
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
-    SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
+    SetPlayerPaletteTimeBlend(sprite->template->paletteTag,sprite); // playerCustom
     if (OW_GFX_COMPRESS && sprite->usingSheet)
         sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
@@ -2094,7 +2094,7 @@ u8 CreateObjectGraphicsSpriteWithTag(u16 graphicsId, void (*callback)(struct Spr
     }
 
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
-    SetPlayerPalette(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); //playerCustom
+    SetPlayerPaletteTimeBlend(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); //playerCustom
 
     Free(spriteTemplate);
 
@@ -2168,7 +2168,7 @@ u8 CreateObjectGraphicsSprite2(u16 graphicsId, void (*callback)(struct Sprite *)
     }
 
     spriteId = CreateSprite(spriteTemplate, x, y, 0);
-    SetPlayerPalette(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); // playerCustom
+    SetPlayerPaletteTimeBlend(gSprites[spriteId].template->paletteTag,&gSprites[spriteId]); // playerCustom
 
     Free(spriteTemplate);
     return spriteId;
@@ -2235,7 +2235,7 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
         InitObjectPriorityByElevation(sprite, elevation);
         SetObjectSubpriorityByElevation(elevation, sprite, 1);
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
-        SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
+        SetPlayerPaletteTimeBlend(sprite->template->paletteTag,sprite); // playerCustom
     }
     return spriteId;
 }
@@ -3188,7 +3188,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
 
         ResetObjectEventFldEffData(objectEvent);
         SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
-        SetPlayerPalette(sprite->template->paletteTag,sprite); // playerCustom
+        SetPlayerPaletteTimeBlend(sprite->template->paletteTag,sprite); // playerCustom
         RestoreSavedOWEBehaviorState(objectEvent, sprite);
     }
     HandleRematchIconForSingleObjectEvent(objectEvent,objectEventId); // rematch_action
@@ -3248,7 +3248,7 @@ u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate *template, struct S
     // Start playerCustom
     //return UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
     u32 paletteNum = UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
-    SetPlayerPalette(template->paletteTag,sprite);
+    SetPlayerPaletteTimeBlend(template->paletteTag,sprite);
     return paletteNum;
     // End playerCustom
 }
@@ -3282,7 +3282,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
     sprite->y += 16 + sprite->centerToCornerVecY;
     if (objectEvent->trackedByCamera)
         CameraObjectReset();
-    SetPlayerPalette(graphicsInfo->paletteTag,sprite); // playerCustom
+    SetPlayerPaletteTimeBlend(graphicsInfo->paletteTag,sprite); // playerCustom
 }
 
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u16 graphicsId)
