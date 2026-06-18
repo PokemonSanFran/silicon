@@ -5,8 +5,8 @@ bool32 IsExperienceOptionNotActive(void);
 bool32 IsExperienceOptionAll(void);
 u64 ApplyExpMultipliers(struct Pokemon,s32);
 u32 GetMonItemHoldEffect(u16);
-void ApplyPointsBoxMons(u32, u16);
-void PrintExpShareMessage(void);
+u32 ApplyPointsBoxMons(u32, u16);
+void PrintExpShareMessage(u32 pcMonsThatReceivedPoints);
 bool32 IsMonInvalid(struct Pokemon tempMon);
 
 // Battle Settings: Multiplier

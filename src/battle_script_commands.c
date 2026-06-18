@@ -4171,7 +4171,7 @@ static void Cmd_getexp(void)
                             // Start Battle Settings: Experience
                             //gLastUsedItem = ITEM_EXP_SHARE;
                             //PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                            PrintExpShareMessage();
+                            PrintExpShareMessage(0);
                             // End Battle Settings: Experience
                             gBattleStruct->teamGotExpMsgPrinted = TRUE;
                         }
@@ -4329,8 +4329,8 @@ static void Cmd_getexp(void)
             }
             gBattleScripting.getexpState = 6; // we're done
 
-            ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
-            PrintExpShareMessage(); // Battle Settings: Experience
+            u32 pcMonsThatReceivedPoints = ApplyPointsBoxMons(gBattleStruct->expShareExpValue,gBattleMons[gBattlerFainted].species); // Battle Settings: Experience
+            PrintExpShareMessage(pcMonsThatReceivedPoints); // Battle Settings: Experience
         }
         break;
     case 6: // increment instruction

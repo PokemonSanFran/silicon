@@ -230,14 +230,16 @@ static bool32 HasAlreadyGivenPointsBoxMons(void)
     return FALSE;
 }
 
-void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
+u32 ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 {
     u32 boxId, boxPosition, totalEVs;
     struct Pokemon tempMon;
     struct BoxPokemon *boxMon;
+    u32 count = 0;
+    bool32 flag;
 
     if (!IsExperienceOptionAll() || HasAlreadyGivenPointsBoxMons())
-        return;
+        return 0;
 
     gBattleStruct->givenPointsBoxMons = TRUE;
 
@@ -246,6 +248,7 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             BoxMonAtToMon(boxId, boxPosition, &tempMon);
+            flag = FALSE;
 
             if (IsMonInvalid(tempMon))
                 continue;
@@ -257,14 +260,22 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 
             totalEVs = GetMonEVCount(&tempMon);
             if (totalEVs < MAX_TOTAL_EVS)
+            {
+                flag = TRUE;
                 CheckAndCalcEVs(totalEVs,defeatedSpecies,tempMon,boxMon);
+            }
 
-            if (IsMonMaxLevel(tempMon))
-                continue;
+            if (!IsMonMaxLevel(tempMon))
+            {
+                flag = TRUE;
+                CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            }
 
-            CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            if (flag)
+                count += 1;
         }
     }
+    return count;
 }
 
 static bool32 HasAlreadyPrintedGotExpMsg(void)
@@ -275,7 +286,7 @@ static bool32 HasAlreadyPrintedGotExpMsg(void)
     return FALSE;
 }
 
-void PrintExpShareMessage(void)
+void PrintExpShareMessage(u32 pcMonsThatReceivedPoints)
 {
     if(HasAlreadyPrintedGotExpMsg())
         return;
@@ -285,10 +296,10 @@ void PrintExpShareMessage(void)
 
     gBattleStruct->teamGotExpMsgPrinted = TRUE;
 
-    if (!IsExperienceOptionAll())
-        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
-    else
+    if (IsExperienceOptionAll() && pcMonsThatReceivedPoints > 0)
         PrepareStringBattle(STRINGID_ALLGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
+    else if (gBattleStruct->battlerExpReward > 0 || gBattleStruct->evsGiven > 0)
+        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
 }
 
 // ***********************************************************************
