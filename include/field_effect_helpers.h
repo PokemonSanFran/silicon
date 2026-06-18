@@ -41,6 +41,7 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite);
 void UpdateBubblesFieldEffect(struct Sprite *sprite);
 void UpdateSparkleFieldEffect(struct Sprite *sprite);
 void SetSpriteInvisible(u8 spriteId);
+void Task_Saving(u8 taskId); // autoSave
 void SavingSpriteCallback(struct Sprite *sprite); // autoSave
 void ShowWarpArrowSprite(u8 spriteId, enum Direction direction, s16 x, s16 y);
 
