@@ -323,10 +323,10 @@ static void SetSpriteId(u32, u32, u32);
 static void DestroyPartySprites(u32);
 static void DestroyAllPartySprites(void);
 
-static u8 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
+static u32 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
 static void PrintTrainerStateMark(enum ResidoTrainerIds, u32, u32);
 static void PrintElevatedTrainerStateMark(void);
-static u8 GetMarkFromTrainerId(enum ResidoTrainerIds, bool32);
+static u16 GetMarkFromTrainerId(enum ResidoTrainerIds, bool32);
 
 static void MoveSprites(u32, u32);
 static void MoveTrainerForNameplate(s32);
@@ -2822,10 +2822,8 @@ static bool8 IsTrainerDefeated(u32 trainerID)
 
 static bool8 IsTrainerRematch(enum ResidoTrainerIds trainerId)
 {
-    u32 tableIndex, trainerIndex;
-
-    for (tableIndex = 0; tableIndex < REMATCH_TABLE_ENTRIES; tableIndex++)
-        for (trainerIndex = 1; tableIndex < REMATCHES_COUNT ; trainerIndex++)
+    for (u32 tableIndex = 0; tableIndex < REMATCH_TABLE_ENTRIES; tableIndex++)
+        for (u32 trainerIndex = 1; trainerIndex < REMATCHES_COUNT; trainerIndex++)
             if (gRematchTable->trainerIds[trainerIndex] == trainerId)
                 return TRUE;
 
@@ -3153,7 +3151,7 @@ static void DestroyAllPartySprites(void)
         }
 }
 
-static u8 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
+static u32 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
 {
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
@@ -3195,7 +3193,7 @@ static void PrintElevatedTrainerStateMark(void)
     PrintTrainerStateMark(trainerId, screenRow, 0);
 }
 
-static u8 GetMarkFromTrainerId(enum ResidoTrainerIds trainerId, bool32 hover)
+static u16 GetMarkFromTrainerId(enum ResidoTrainerIds trainerId, bool32 hover)
 {
     u32 type = GetTrainerType(trainerId);
     bool32 rematch = IsTrainerRematch(trainerId);
