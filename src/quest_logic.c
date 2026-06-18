@@ -4911,8 +4911,9 @@ struct WildGauntletData
     enum WildPokemonArea encounterType;
     u8 index;
     enum Species species;
-    u32 x;
-    u32 y;
+    s16 x;
+    s16 y;
+    u8 elevation;
 };
 
 const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
@@ -4923,6 +4924,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 22,
         .y = 9,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_BERRY_0_2] =
@@ -4931,6 +4933,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 26,
         .y = 8,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_BERRY_10_3] =
@@ -4939,6 +4942,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 10,
         .x = 18,
         .y = 9,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_WATER_0_4] =
@@ -4947,6 +4951,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 29,
         .y = 1,
+        .elevation = 1,
 
     },
     [CRESALTA_MON_PHENOMENON_0_5] =
@@ -4955,6 +4960,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 17,
         .y = 2,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_LAND_0_6] =
@@ -4963,6 +4969,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 26,
         .y = 8,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_LAND_12_7] =
@@ -4971,6 +4978,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 12,
         .x = 22,
         .y = 9,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_WATER_0_8] =
@@ -4979,6 +4987,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 22,
         .y = 0,
+        .elevation = 1,
 
     },
     [CRESALTA_MON_ROCK_SMASH_0_9] =
@@ -4987,6 +4996,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 25,
         .y = 6,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_FISHING_0_10] =
@@ -4995,6 +5005,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 20,
         .y = 2,
+        .elevation = 1,
 
     },
     [CRESALTA_MON_FLYING_17_11] =
@@ -5003,6 +5014,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 17,
         .x = 22,
         .y = 6,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_FLYING_19_12] =
@@ -5011,6 +5023,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 19,
         .x = 22,
         .y = 6,
+        .elevation = 3,
 
     },
     [CRESALTA_MON_FISHING_14_13] =
@@ -5019,6 +5032,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 14,
         .x = 20,
         .y = 2,
+        .elevation = 1,
 
     },
     [CRESALTA_MON_WATER_0_14] =
@@ -5027,6 +5041,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 0,
         .x = 20,
         .y = 2,
+        .elevation = 1,
 
     },
     [CRESALTA_MON_WATER_16_15] =
@@ -5036,7 +5051,7 @@ const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
         .index = 16,
         .x = 20,
         .y = 2,
-
+        .elevation = 1,
     },
 };
 
@@ -5104,8 +5119,11 @@ void Quest_Hang20_MoveObject(void)
     u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
     u32 x = cresaltaGauntletData[progress].x + 0;
     u32 y = cresaltaGauntletData[progress].y + 0;
-    u32 localId = LOCALID_HANG20_OPPONENT;
-    SetObjEventTemplateCoords(localId,x,y);
+    u32 elevation = cresaltaGauntletData[progress].elevation;
+
+    VarSet(VAR_0x8009,x);
+    VarSet(VAR_0x8008,y);
+    VarSet(VAR_0x8007,elevation);
 }
 
 void Quest_Hang20_PlayMonCry(void)
@@ -5124,4 +5142,16 @@ void Quest_Hang20_BufferLastSpecies(void)
     const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
     enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
     StringCopy(gStringVar1,GetSpeciesName(species));
+}
+
+static bool8 Quest_Hang20_IsEnemyFromWater(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    return (area == WILD_AREA_WATER || area == WILD_AREA_FISHING || area == WILD_AREA_PHENOMENON);
+}
+
+void Script_Quest_Hang20_IsEnemyFromWater(void)
+{
+    gSpecialVar_Result = Quest_Hang20_IsEnemyFromWater();
 }

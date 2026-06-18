@@ -4,18 +4,30 @@ const LOCALID_CRESALTA_PUA_SURFING = (OBJ_EVENT_ID_CAMERA + 1)
 
 script Quest_Hang20_Script_StartBattle
 {
-    lock
+    callnative(ResetDefeatedCresaltaVista)
     while (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) != QUEST_HANG20_REQUIRED_WINS)
     {
         fadescreenswapbuffers(FADE_TO_BLACK)
-        removeobject(LOCALID_HANG20_OPPONENT)
+        if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 0)
+        {
+            removeobject(LOCALID_HANG20_OPPONENT)
+        }
         callnative(Quest_Hang20_GenerateWildBattle)
         callnative(Quest_Hang20_SetObjectId)
         callnative(Quest_Hang20_MoveObject)
-        clearobjectflagfromlocalid(LOCALID_HANG20_OPPONENT)
-        addobject(LOCALID_HANG20_OPPONENT)
+        spawnobject(OBJ_EVENT_GFX_VAR_0,LOCALID_HANG20_OPPONENT,VAR_0x8009,VAR_0x8008,MOVEMENT_TYPE_FACE_UP,VAR_0x8007)
         fadescreenswapbuffers(FADE_FROM_BLACK)
-        moveobjecttocoords(LOCALID_HANG20_OPPONENT,22,5,DIR_NORTH)
+        callnative(Script_Quest_Hang20_IsEnemyFromWater)
+        if (var(VAR_RESULT))
+        {
+            applymovement(LOCALID_PLAYER,moves(face_up))
+            moveobjecttocoords(LOCALID_HANG20_OPPONENT,22,3,DIR_SOUTH)
+        }
+        else
+        {
+            applymovement(LOCALID_PLAYER,moves(face_down))
+            moveobjecttocoords(LOCALID_HANG20_OPPONENT,22,5,DIR_NORTH)
+        }
         waitmovement(LOCALID_HANG20_OPPONENT)
         callnative(Quest_Hang20_PlayMonCry)
         waitmoncry
@@ -23,13 +35,27 @@ script Quest_Hang20_Script_StartBattle
         callnative(Quest_Hang20_BufferLastSpecies)
         special(GetBattleOutcome)
         call(Quest_Hang20_Script_HandleBattleEnd)
+        call(Quest_Hang20_Dialogue_EncouragePlayer)
+        goto_if_quest_reward(QUEST_HANG20,Quest_Hang20_Dialogue_Reward)
     }
+}
+
+script Quest_Hang20_Dialogue_EncouragePlayer
+{
+    switch(var(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
+    {
+        case 5: msgbox(format("You're taking names and chewing bubble gum out here!"),,SPEAKER_PUA,,EMOTE_HAPPY)
+        case 10: msgbox(format("That’s how you do it!"),,SPEAKER_PUA,,EMOTE_HAPPY)
+        case 14: msgbox(format("Keep that energy! Last one!"),,SPEAKER_PUA,TAIL_SHOUT,EMOTE_HAPPY)
+        default: return
+    }
+    closemessage
 }
 
 script Quest_Hang20_Script_StreakEnd
 {
     lock
-    msgbox(format("Couldn't hang? Das cool. Hit me up when you're ready to try again!"),,SPEAKER_PUA)
+    msgbox(format("Couldn't hang? Das cool. Hit me up when you're ready to get at it!"),,SPEAKER_PUA)
     closemessage
     release
     end
@@ -65,7 +91,6 @@ script Quest_Hang20_Interact_Script
 {
     lock
 	faceplayer
-    goto(Quest_Hang20_Dialogue_Complete)
     goto_if_quest_reward(QUEST_HANG20,Quest_Hang20_Dialogue_Reward)
     goto_if_quest_active(QUEST_HANG20,Quest_Hang20_Dialogue_Active)
     goto(Quest_Hang20_Dialogue_StartQuest)
@@ -115,12 +140,22 @@ script Quest_Hang20_Dialogue_Active
         msgbox(format("You're gonna need to defeat or capture {STR_VAR_2} wild Pokemon in a row. No stopping, no breaks, no feeling"),,SPEAKER_PUA)
     }
     msgbox(format("Ready to start?"),MSGBOX_YESNO,SPEAKER_PUA)
-
+    goto_if_eq(VAR_RESULT,NO,Quest_Hang20_Script_StreakEnd)
+    msgbox(format("Let's get it!"),,SPEAKER_PUA)
+    closemessage
+    applymovement(LOCALID_CRESALTA_PUA,moves(jump_in_place_right * 2))
+    moveobjecttocoords(LOCALID_PLAYER,22,4,DIR_SOUTH)
+    waitmovement(LOCALID_PLAYER)
+    goto(Quest_Hang20_Script_StartBattle)
 }
 
 script Quest_Hang20_Dialogue_Reward
 {
     lock
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_HANG20_OPPONENT)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    applymovement(LOCALID_PLAYER,moves(face_left))
     msgbox(format("No cap, you’re the absolute fiercest battler I’ve met in a minute."),,SPEAKER_PUA)
     checkitemspace(ITEM_QUEST_HANG20_REWARD,1)
     goto_if_eq(VAR_RESULT,TRUE,Quest_Hang20_Dialogue_Complete)
@@ -138,8 +173,8 @@ script Quest_Hang20_Dialogue_Complete
     buffermovename(STR_VAR_2,MOVE_SURF)
     msgbox(format("When you walk onto the water, you’ll hop on a {STR_VAR_1}, even if you don’t have a Pokémon that can learn {STR_VAR_2} with you."),,SPEAKER_PUA)
     closemessage
-    playbgm(MUS_SURF,TRUE)
     completequest(QUEST_HANG20)
+    playbgm(MUS_SURF,TRUE)
     msgbox(format("I’m gonna catch some waves. I’ll see you around."),,SPEAKER_PUA)
     closemessage
     applymovement(LOCALID_CRESALTA_PUA,moves(jump_up))
@@ -147,7 +182,7 @@ script Quest_Hang20_Dialogue_Complete
     removeobject(LOCALID_CRESALTA_PUA)
     spawnobject(OBJ_EVENT_GFX_PUA_SURFING,LOCALID_CRESALTA_PUA_SURFING,21,3,MOVEMENT_TYPE_FACE_UP,3)
     applymovement(LOCALID_CRESALTA_PUA_SURFING,moves(walk_up * 2, walk_right * 10))
-    delay(24)
+    delay(48)
     fadescreenswapbuffers(FADE_TO_BLACK)
     removeobject(LOCALID_CRESALTA_PUA_SURFING)
     waitmovement(LOCALID_CRESALTA_PUA_SURFING)
