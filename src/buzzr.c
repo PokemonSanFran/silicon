@@ -2096,5 +2096,9 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_IMPROVBATTLING_COMPLETE:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_HANG20_WARNING:
+        case TWEET_QUEST_HANG20_ROCKY_COASTS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
+            break;
     }
 }
