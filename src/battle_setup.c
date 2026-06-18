@@ -694,6 +694,7 @@ static void CB2_EndWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
+        ResetDefeatedCresaltaVista(); // siliconQuests
         HandleBattleVariantEndParty(); // flyEncounters
         SetMainCallback2(CB2_WhiteOut);
     }
@@ -725,6 +726,8 @@ static void CB2_EndScriptedWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
+        ResetDefeatedCresaltaVista(); // siliconQuests
+
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
@@ -1551,6 +1554,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
+        ResetDefeatedCresaltaVista(); // siliconQuests
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()) || FlagGet(B_FLAG_NO_WHITEOUT))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else

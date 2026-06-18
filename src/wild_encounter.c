@@ -1321,3 +1321,31 @@ bool8 IsOverworldMonFemale(void)
     return (gender = MON_FEMALE);
 }
 // End hiddenGrotto
+// Start siliconQuests
+const struct WildPokemonInfo *GetWildPokemonInfoFromHeaderId(enum WildPokemonArea area)
+{
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, area);
+
+    switch(area)
+    {
+        case WILD_AREA_LAND: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+         break;
+        case WILD_AREA_WATER: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo;
+         break;
+        case WILD_AREA_ROCKS: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].rockSmashMonsInfo;
+         break;
+        case WILD_AREA_FISHING: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].fishingMonsInfo;
+         break;
+        case WILD_AREA_HIDDEN: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
+         break;
+        case WILD_AREA_BERRY_TREES: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].berryMonsInfo;
+         break;
+        case WILD_AREA_FLY_MONS: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].flyMonsInfo;
+         break;
+        case WILD_AREA_PHENOMENON: return gWildMonHeaders[headerId].encounterTypes[timeOfDay].phenomenonMonsInfo;
+         break;
+    }
+    return NULL;
+}
+// End siliconQuests

@@ -548,7 +548,6 @@ script BattleTower_EventScript_WaitForLinkOpponentLoad{
     }
 
     call(BattleTower_EventScript_ShowYouToBattleRoom)
-    clearflag(FLAG_CANCEL_RESTORED_BATTLE_ROOM)
     setflag(FLAG_HIDE_FACILITY_OPPONENT)
     setvar(VAR_FACILITY_CHALLENGE_STATUS, 0)
         fadeblackandsetremovewarpfadeflag

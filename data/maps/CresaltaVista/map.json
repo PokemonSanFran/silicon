@@ -91,6 +91,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_CRESALTA_PUA",
       "graphics_id": "OBJ_EVENT_GFX_PUA",
       "x": 21,
       "y": 4,
@@ -258,15 +259,6 @@
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
       "script": "CutePokemon_Script_DebugGiveMon"
-    },
-    {
-      "type": "trigger",
-      "x": 22,
-      "y": 4,
-      "elevation": 0,
-      "var": "VAR_ALWAYS_ZERO",
-      "var_value": "0",
-      "script": "Quest_Hang20_Debug_Script"
     }
   ],
   "bg_events": []

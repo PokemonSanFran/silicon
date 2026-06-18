@@ -151,7 +151,6 @@ script Quest_Allthatglittersmightbegold_Reward_Dialogue{
         }
     msgbox(format("I was thinking while you were down there, I'm too old for that diving nonsense. Let me teach you something..."),,SPEAKER_ELIOR,,)
         call(Quest_Allthatglittersmightbegold_GiveReward_Script)
-        setflag(FLAG_UNLOCKED_DIVE)
         completequest(QUEST_ALLTHATGLITTERSMIGHTBEGOLD)
         closemessage
         end

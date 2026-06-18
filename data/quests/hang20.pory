@@ -1,138 +1,194 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const PUA = 6
-const FLAG_HIDE_PUA = FLAG_TEMP_6
 //Quest_Hang20_
 
-script Quest_Hang20_ResetCount_Script
+const LOCALID_CRESALTA_PUA_SURFING = (OBJ_EVENT_ID_CAMERA + 1)
+
+script Quest_Hang20_Script_StartBattle
 {
-    setvar(VAR_DEFEATED_CRESALTA_VISTA_COUNT,0)
-    return
+    callnative(ResetDefeatedCresaltaVista)
+    while (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) != QUEST_HANG20_REQUIRED_WINS)
+    {
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 0)
+        {
+            removeobject(LOCALID_HANG20_OPPONENT)
+        }
+        callnative(Quest_Hang20_GenerateWildBattle)
+        callnative(Quest_Hang20_SetObjectId)
+        callnative(Quest_Hang20_MoveObject)
+        spawnobject(OBJ_EVENT_GFX_VAR_0,LOCALID_HANG20_OPPONENT,VAR_0x8009,VAR_0x8008,MOVEMENT_TYPE_FACE_UP,VAR_0x8007)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        callnative(Script_Quest_Hang20_IsEnemyFromWater)
+        if (var(VAR_RESULT))
+        {
+            applymovement(LOCALID_PLAYER,moves(face_up))
+            moveobjecttocoords(LOCALID_HANG20_OPPONENT,22,3,DIR_SOUTH)
+        }
+        else
+        {
+            applymovement(LOCALID_PLAYER,moves(face_down))
+            moveobjecttocoords(LOCALID_HANG20_OPPONENT,22,5,DIR_NORTH)
+        }
+        waitmovement(LOCALID_HANG20_OPPONENT)
+        callnative(Quest_Hang20_PlayMonCry)
+        waitmoncry
+        dowildbattle
+        callnative(Quest_Hang20_BufferLastSpecies)
+        special(GetBattleOutcome)
+        call(Quest_Hang20_Script_HandleBattleEnd)
+        call(Quest_Hang20_Dialogue_EncouragePlayer)
+        goto_if_quest_reward(QUEST_HANG20,Quest_Hang20_Dialogue_Reward)
+    }
 }
 
-script Quest_Hang20_HideLeader_Script
+script Quest_Hang20_Dialogue_EncouragePlayer
 {
-	if (var(VAR_PUA_STATE) != BATTLE_1_COMPLETE)
-	{
-		setflag(FLAG_HIDE_PUA)
-	}
+    switch(var(VAR_DEFEATED_CRESALTA_VISTA_COUNT))
+    {
+        case 5: msgbox(format("You're taking names and chewing bubble gum out here!"),,SPEAKER_PUA,,EMOTE_HAPPY)
+        case 10: msgbox(format("That’s how you do it!"),,SPEAKER_PUA,,EMOTE_HAPPY)
+        case 14: msgbox(format("Keep that energy! Last one!"),,SPEAKER_PUA,TAIL_SHOUT,EMOTE_HAPPY)
+        default: return
+    }
+    closemessage
 }
 
-script Quest_Hang20_Debug_Script
+script Quest_Hang20_Script_StreakEnd
 {
-    addvar(VAR_TEMP_0,1)
-    setvar(VAR_DEFEATED_CRESALTA_VISTA_COUNT,47)
-    callnative(CountDefeatedCresaltaVista)
+    lock
+    msgbox(format("Couldn't hang? Das cool. Hit me up when you're ready to get at it!"),,SPEAKER_PUA)
+    closemessage
     release
+    end
+}
+
+script Quest_Hang20_Script_HandleBattleEnd
+{
+    switch (var(VAR_RESULT))
+    {
+        case B_OUTCOME_WON:
+            msgbox(format("The wild {STR_VAR_1} fled!"))
+            closemessage
+        case B_OUTCOME_PLAYER_TELEPORTED:
+            goto(Quest_Hang20_Script_StreakEnd)
+        case B_OUTCOME_RAN:
+            goto(Quest_Hang20_Script_StreakEnd)
+        default:
+            return
+    }
+}
+
+script Quest_Hang20_Script_HideLeader
+{
+    setobjectflagfromlocalid(LOCALID_CRESALTA_PUA)
+}
+
+script Quest_Hang20_Script_HideMon
+{
+    setobjectflagfromlocalid(LOCALID_HANG20_OPPONENT)
 }
 
 script Quest_Hang20_Interact_Script
 {
     lock
 	faceplayer
-	returnqueststate(QUEST_HANG20)
-
-	switch(var(VAR_RESULT))
-	{
-		case QUEST_MENU_SET_ACTIVE: goto(Quest_Hang20_Active_Dialogue)
-		case QUEST_MENU_SET_REWARD: goto(Quest_Hang20_Reward_Dialogue)
-		default: goto(Quest_Hang20_StartQuest_Dialogue)
-	}
+    goto_if_quest_reward(QUEST_HANG20,Quest_Hang20_Dialogue_Reward)
+    goto_if_quest_active(QUEST_HANG20,Quest_Hang20_Dialogue_Active)
+    goto(Quest_Hang20_Dialogue_StartQuest)
 }
 
-script Quest_Hang20_CheckPreCompletion
+script Quest_Hang20_Dialogue_StartQuest
 {
-    if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 29){
-        goto(Quest_Hang20_Secret_Dialogue)
+    checkitemspace(ITEM_QUEST_HANG20_TM)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Woah, your vibes are mad heavy. Or maybe that’s just your bag. Come back when you have room for a Technical Machine!"),,SPEAKER_PUA)
+        closemessage
+        releaseall
+        end
     }
-    return
-}
-
-script Quest_Hang20_StartQuest_Dialogue
-{
-
-    call(Quest_Hang20_CheckPreCompletion)
-
-    msgbox(format("Yoooo {PLAYER}, right? You're not Resido born, right?"))
-
-    msgbox(format("Yeah, I'm from Orre."))
-
-    msgbox(format("Oh damn, that's land locked, right?"))
-
-    msgbox(format("We're touching the sea, but not anything you can surf in, unfortunately."))
-
-    msgbox(format("No waves? Damn that sucks!"))
-    msgbox(format("You tryna learn how to ride the waves?"))
-
-    msgbox(format("Oh, I've never really given it a shot. Is it hard?"))
-
-    msgbox(format("It's tough, so we gotta make sure you're ready."))
-    msgbox(format("Wait, beating you doesn't make me tough enough?"))
-    msgbox(format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista."))
-
+    msgbox(format("Yo! {PLAYER}, yeah? You're not Resido born, right?"),,SPEAKER_PUA)
+    msgbox(format("Yeah, I'm from Orre."),,SPEAKER_PLAYER)
+    msgbox(format("Oh, that's landlocked, ain’t it?"),,SPEAKER_PUA)
+    msgbox(format("We're touching the sea, but not anything you can surf in, unfortunately."),,SPEAKER_PLAYER)
+    msgbox(format("No waves? Damn that sucks!"),,SPEAKER_PUA)
+    msgbox(format("You tryna learn how to ride the waves?"),,SPEAKER_PUA)
+    msgbox(format("Oh, I've never really given it a shot. Is it hard?"),,SPEAKER_PLAYER)
+    msgbox(format("Not with this!"),,SPEAKER_PUA)
+    closemessage
+    cueobjectplayer(LOCALID_CRESALTA_PUA)
+    giveitem(ITEM_QUEST_HANG20_TM,1)
+    buffermovename(STR_VAR_1,MOVE_SURF)
+    msgbox(format("If you have a Pokémon in your party that can learn {STR_VAR_1}, you can just walk toward the waves and they’ll handle it, no problem."),,SPEAKER_PUA)
+    msgbox(format("But sometimes that can be a hassle, you might not always want a Water-type Pokémon with you!"),,SPEAKER_PUA)
+    msgbox(format("Surfing for real is hard, but I could teach you. But first you gotta get comfortable around here - the Pokémon here are tougher than usual."),,SPEAKER_PUA)
     closemessage
     startquest(QUEST_HANG20)
+    msgbox(format("Hit me up once you're ready to start the training!"),,SPEAKER_PUA)
+    closemessage
     release
     end
 }
 
-script Quest_Hang20_Active_Dialogue
+script Quest_Hang20_Dialogue_Active
 {
-	if (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 28)
-	{
-		msgbox(format("Keep that energy!"),MSGBOX_NPC)
-	}
-	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 20)
-	{
-		msgbox(format("Maybe you're tough after all!"),MSGBOX_NPC)
-	}
-	elif (var(VAR_DEFEATED_CRESALTA_VISTA_COUNT) > 10)
-	{
-		msgbox(format("I saw you kicking ass out there!"),MSGBOX_NPC)
-	}
-	else
-	{
-		msgbox(format("I'll teach you to Surf if you can defeat 30 Pokémon here in a row. No healing items, no accessing the PC, no leaving CresaltaVista."),MSGBOX_NPC)
-	}
-	end
+    if (var(VAR_TEMP_0) > 0)
+    {
+        addvar(VAR_TEMP_0,1)
+        buffermovename(STR_VAR_1,MOVE_SURF)
+        buffernumberstring(STR_VAR_2,QUEST_HANG20_REQUIRED_WINS)
+        msgbox(format("A'ight, to make sure you're tough enough to {STR_VAR_1} on your own, you need to make sure you're as tough as possible."),,SPEAKER_PUA)
+        msgbox(format("You're gonna need to defeat or capture {STR_VAR_2} wild Pokemon in a row. No stopping, no breaks, no feeling"),,SPEAKER_PUA)
+    }
+    msgbox(format("Ready to start?"),MSGBOX_YESNO,SPEAKER_PUA)
+    goto_if_eq(VAR_RESULT,NO,Quest_Hang20_Script_StreakEnd)
+    msgbox(format("Let's get it!"),,SPEAKER_PUA)
+    closemessage
+    applymovement(LOCALID_CRESALTA_PUA,moves(jump_in_place_right * 2))
+    moveobjecttocoords(LOCALID_PLAYER,22,4,DIR_SOUTH)
+    waitmovement(LOCALID_PLAYER)
+    goto(Quest_Hang20_Script_StartBattle)
 }
 
-script Quest_Hang20_Reward_Dialogue
+script Quest_Hang20_Dialogue_Reward
 {
-    msgbox(format("Okay, beating me was no fluke, you're the real deal. Take this!"))
-    giveitem(ITEM_HM03,1)
-
-    msgbox(format("If you have a Pokémon in your party that can learn Surf, you can just walk onto the waves and handle it, no problem. Watch!"))
+    lock
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_HANG20_OPPONENT)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    applymovement(LOCALID_PLAYER,moves(face_left))
+    msgbox(format("No cap, you’re the absolute fiercest battler I’ve met in a minute."),,SPEAKER_PUA)
+    checkitemspace(ITEM_QUEST_HANG20_REWARD,1)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Hang20_Dialogue_Complete)
+    msgbox(format("I gotta hold up my end of the deal! Let me know when you’ve got room in your bag for something special."),,SPEAKER_PUA)
     closemessage
-    applymovement(PUA,Quest_Hang20_SurfAway_Movement)
+    release
+    end
+}
+
+script Quest_Hang20_Dialogue_Complete
+{
+    cueobjectplayer(LOCALID_CRESALTA_PUA)
+    giveitem(ITEM_QUEST_HANG20_REWARD,1)
+    bufferitemname(STR_VAR_1,ITEM_SURF_TOOL)
+    buffermovename(STR_VAR_2,MOVE_SURF)
+    msgbox(format("When you walk onto the water, you’ll hop on a {STR_VAR_1}, even if you don’t have a Pokémon that can learn {STR_VAR_2} with you."),,SPEAKER_PUA)
+    closemessage
     completequest(QUEST_HANG20)
-    waitmovement(PUA)
-    removeobject(PUA)
-    release
-    end
-}
-
-script Quest_Hang20_Secret_Dialogue
-{
-    msgbox(format("Hey, you're {PLAYER}, right? Killer waves, right? Not as good as back home, but still sick."))
-    msgbox(format("Here to catch some waves?"))
-    msgbox(format("I'm from Orre! We're landlocked, so I never learned to Surf."))
-    msgbox(format("Word? It's mad easy to learn though, hold on..."))
-    giveitem(ITEM_SURF_TOOL,1)
-    msgbox(format("If you've got a Pokémon that can learn Surf, you can just walk onto the waves now, no problem! Check it!"))
+    playbgm(MUS_SURF,TRUE)
+    msgbox(format("I’m gonna catch some waves. I’ll see you around."),,SPEAKER_PUA)
     closemessage
-    applymovement(PUA,Quest_Hang20_SurfAway_Movement)
-    waitmovement(PUA)
-    removeobject(PUA)
-    questmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HANG20)
+    applymovement(LOCALID_CRESALTA_PUA,moves(jump_up))
+    waitmovement(LOCALID_CRESALTA_PUA)
+    removeobject(LOCALID_CRESALTA_PUA)
+    spawnobject(OBJ_EVENT_GFX_PUA_SURFING,LOCALID_CRESALTA_PUA_SURFING,21,3,MOVEMENT_TYPE_FACE_UP,3)
+    applymovement(LOCALID_CRESALTA_PUA_SURFING,moves(walk_up * 2, walk_right * 10))
+    delay(48)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_CRESALTA_PUA_SURFING)
+    waitmovement(LOCALID_CRESALTA_PUA_SURFING)
+    fadedefaultbgm
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
-}
-
-movement Quest_Hang20_SurfAway_Movement
-{
-    walk_up * 3
-    walk_right * 5
-    walk_up * 3
-    step_end
 }
 
