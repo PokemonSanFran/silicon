@@ -239,6 +239,7 @@ static u8 HandleWarpFailedNotVisited(void);
 static void PrintWarpFailedHeaderTitleToWindow();
 static void PrintFailedTrolleyHeaderToWindow();
 static void HandleTrolleyWarpFailedNotVisited(u8 taskId) ;
+static void UpdateRegionMapCursor(void);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -1560,6 +1561,7 @@ static bool8 MapSystem_DoGfxSetup(void)
             sRegionMap->activeCursorState = CURSOR_SMALL_CURSOR_STATE;
 
         CreateSFRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
+        UpdateRegionMapCursor();
         if(sCurrentMapMode != MAP_MODE_TROLLEY)
             PrintHeaderTitleToWindow();
         else
