@@ -441,3 +441,13 @@ const u8 *GetQuestDesc_Wildfirerisk(void)
 	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_WILDFIRERISK].desc[flag]);
 	return gStringVar4;
 }
+
+const u8 *GetQuestDesc_Hang20(void)
+{
+    u32 flag = ReturnQuestState(QUEST_HANG20);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
+	ConvertIntToDecimalStringN(gStringVar2, QUEST_HANG20_REQUIRED_WINS, STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_HANG20_REQUIRED_WINS));
+    StringCopy(gStringVar3,GetMoveName(MOVE_SURF));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HANG20].desc[flag]);
+	return gStringVar4;
+}

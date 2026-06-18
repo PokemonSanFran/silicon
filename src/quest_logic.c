@@ -5155,3 +5155,26 @@ void Script_Quest_Hang20_IsEnemyFromWater(void)
 {
     gSpecialVar_Result = Quest_Hang20_IsEnemyFromWater();
 }
+
+void DebugQuest_Hang20(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HANG20_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_HANG20_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_TM,1);
+            break;
+        case STATE_QUEST_HANG20_REWARD:
+            VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,QUEST_HANG20_REQUIRED_WINS);
+            QuestMenu_ScriptSetReward(QUEST_HANG20);
+            break;
+        case STATE_QUEST_HANG20_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_REWARD,1);
+            break;
+    }
+}

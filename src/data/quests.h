@@ -4109,14 +4109,54 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_HANG20] =
     {
-        .name = gText_Quest_Hang20_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_Hang20_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_Hang20_DoneDesc,
-        .map = gText_Quest_Hang20_Map,
-        .sprite = OBJ_EVENT_GFX_SWIMMER_M,
+        .name = COMPOUND_STRING("Hang 20"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Pua wants to make sure you’re comfortable with the tougher Pokémon around {STR_VAR_1} waters. Talk to Pua and defeat {STR_VAR_2} wild Pokémon in a row."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Pua taught you how to {STR_VAR_3}, even without a Pokémon. You can travel all over the water now!"),
+        .descFunc = GetQuestDesc_Hang20,
+        .map = COMPOUND_STRING("Cresalta Vista Beach"),
+        .sprite = OBJ_EVENT_GFX_PUA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_HANG20_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_Hang20,
+                side_quest_map(MAP_QUEST_HANG20),
+                .warpId = WARP_ID_NONE,
+                .x = 22,
+                .y = 4,
+            },
+            [STATE_QUEST_HANG20_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_Hang20,
+                side_quest_map(MAP_QUEST_HANG20),
+                .warpId = WARP_ID_NONE,
+                .x = 22,
+                .y = 4,
+            },
+            [STATE_QUEST_HANG20_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_Hang20,
+                side_quest_map(MAP_QUEST_HANG20),
+                .warpId = WARP_ID_NONE,
+                .x = 22,
+                .y = 4,
+            },
+            [STATE_QUEST_HANG20_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_Hang20,
+                side_quest_map(MAP_QUEST_HANG20),
+                .warpId = WARP_ID_NONE,
+                .x = 22,
+                .y = 4,
+            },
+        },
     },
     [QUEST_ALLTHATGLITTERSMIGHTBEGOLD] =
     {
