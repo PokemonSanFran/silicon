@@ -9,8 +9,9 @@ mapscripts CresaltaVista_MapScripts
         call(BeachBattle_ObjectVisibility_Script)
         call(CutePokemon_Script_ControlMelissaCresaltaOutsideVisibility)
         call(Quest_ShutDownMedicineMan_ControlLeaderVisibility)
-        call(Quest_Hang20_ResetCount_Script)
-        call(Quest_Hang20_HideLeader_Script)
+        call(Quest_Hang20_Script_HideMon)
+        call_if_quest_complete(QUEST_HANG20,Quest_Hang20_Script_HideLeader)
+        call_if_not_defeated(TRAINER_PUA,Quest_Hang20_Script_HideLeader)
         call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_5,RestoreZenzuIsland_Script_HideStresscuporgnanizer)
         call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_1,Quest_Restorehodoucity_Script_CresaltaVista_HideJohnny)
     }

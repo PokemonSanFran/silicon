@@ -67,6 +67,8 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state);
 void DebugQuest_RestoreHodouCityGym(u8 state);
 void DebugQuest_ImprovBattling(u8 state);
 void DebugQuest_Teachatrainertofish(u8 state);
+void DebugQuest_Wildfirerisk(u8 state);
+void DebugQuest_Hang20(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -90,5 +92,8 @@ void Quest_FlightPatterns_ClearFlightPath(void);
 bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void);
 void Quest_TeachATrainerToFish_RecordEnemy(void);
 bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void);
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void);
+void CountDefeatedCresaltaVista(void);
+void ResetDefeatedCresaltaVista(void);
 
 #endif //GUARD_QUESTLOGIC_H

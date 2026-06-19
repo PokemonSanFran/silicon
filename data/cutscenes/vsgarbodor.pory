@@ -162,11 +162,29 @@ script VSGarbodor_RemoveGrunt {
         end
 }
 
-script VSGarbodor_CheckDefeated_Script {
-    if (flag(FLAG_DEFEATED_CONSTRUCTION_ROCKET_B) && flag(FLAG_DEFEATED_CONSTRUCTION_ROCKET_A) && flag(FLAG_DEFEATED_CONSTRUCTION_MON_A) && flag(FLAG_DEFEATED_CONSTRUCTION_MON_B)) {
-        goto(VSGarbodor_MoveCharlotte_Script)
+script VSGarbodor_CheckDefeated_Script
+{
+    if (defeated(TRAINER_FAKEROCKET_B) == FALSE)
+    {
+        return
     }
-    end
+
+    if (defeated(TRAINER_FAKEROCKET_A) == FALSE)
+    {
+        return
+    }
+
+    if (flag(FLAG_DEFEATED_CONSTRUCTION_MON_A) == FALSE)
+    {
+        return
+    }
+
+    if (flag(FLAG_DEFEATED_CONSTRUCTION_MON_B) == FALSE)
+    {
+        return
+    }
+
+    goto(VSGarbodor_MoveCharlotte_Script)
 }
 
 script VSGarbodor_PreventCrossingSides_Script {

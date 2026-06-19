@@ -722,4 +722,24 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_HANG20_WARNING] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("Has anybody tried to catch Pokémon around {STR_VAR_1}? These Pokémon are stronger than most of the Trainers around here!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HANG20_ROCKY_COASTS] =
+    {
+        .userId = BUZZR_USER_PLACEHOLDER,
+        .content = COMPOUND_STRING("The rocky coasts and freezing waters mean that only the strongest Pokémon can survive in {STR_VAR_1}’s beaches. Be careful!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_Hang20_FirstZapRead,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

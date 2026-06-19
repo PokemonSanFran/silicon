@@ -959,7 +959,7 @@ void CheckSetVisitedRouteFlags(void)
             continue;
 
         if (mapDestination == MAPSEC_TORGEOT_CLIMB)
-        {   
+        {
             if (VarGet(VAR_TIME_TRAVEL_STATE) <= TIME_TRAVEL_NEVER_STARTED)
                 continue;
 
@@ -970,7 +970,7 @@ void CheckSetVisitedRouteFlags(void)
 //DebugPrintf("evaluating map A is %S with flag %d",gRegionMapEntries[mapA].name,flagA);
 //DebugPrintf("evaluating map B is %S with flag %d",gRegionMapEntries[mapB].name,flagB);
 //DebugPrintf("evaluating map C is %S with flag %d",gRegionMapEntries[mapDestination].name,flagDestination);
-        
+
         if ((FlagGet(flagA)) && (FlagGet(flagB)))
             FlagSet(flagDestination);
 
@@ -1013,6 +1013,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(); // siliconQuests
     CheckSetVisitedRouteFlags(); // siliconMerge
     ResetChainFishingStreak(); // fishingUpdate
     InitMap();
@@ -1099,6 +1100,7 @@ static void LoadMapFromWarp(bool32 a1)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(); // siliconQuests
     CheckSetVisitedRouteFlags(); // siliconMerge
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();

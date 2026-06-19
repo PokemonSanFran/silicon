@@ -349,3 +349,9 @@ void TweetCriteria_Quest_ImprovbattlingActive(void)
     gSpecialVar_Result = (IsQuestActiveState(QUEST_IMPROVBATTLING) ||(IsQuestRewardState(QUEST_IMPROVBATTLING)) || (IsQuestCompletedState(QUEST_IMPROVBATTLING))) ;
 }
 
+void TweetCriteria_Quest_Hang20_FirstZapRead(void)
+{
+    gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_QUEST_HANG20_WARNING);
+}
+
+

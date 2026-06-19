@@ -311,7 +311,6 @@ script TirabudinPlace_Gym_Battle_Room_EventScript_WarpToLobby{
 }
 
 script TirabudinPlace_Gym_Battle_Room_EventScript_RetireChallenge{
-    setflag(FLAG_CANCEL_RESTORED_BATTLE_ROOM)
         goto(BattleTower_EventScript_WarpToLobbyLost)
         end
 }
