@@ -109,6 +109,8 @@ u16 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
 u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
 void Task_LinkFullSave(u8 taskId);
+bool8 IsSaveFileDamaged(void);
+bool8 IsSaveFileCorrrupt(void);
 
 // save_failed_screen.c
 void DoSaveFailedScreen(u8 saveType);

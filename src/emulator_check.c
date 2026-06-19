@@ -7,6 +7,7 @@
 #include "task.h"
 #include "gpu_regs.h"
 #include "decompress.h"
+#include "save.h"
 #include "intro.h"
 #include "main.h"
 #include "malloc.h"
@@ -15,6 +16,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "util.h"
+#include "string_util.h"
+#include "line_break.h"
 #include "emulator_check.h"
 #include "config/emulator_check.h"
 #include "constants/songs.h"
@@ -72,7 +75,7 @@ static const struct BgTemplate sBgTemplates[] = {
     },
 };
 
-#define WIN_WIDTH  23
+#define WIN_WIDTH  29
 #define WIN_HEIGHT 10
 
 static const struct WindowTemplate sWindowTemplates[] = {
@@ -89,7 +92,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .bg          = 1,
         .tilemapLeft = 1,
         .tilemapTop  = 16,
-        .width       = 17,
+        .width       = WIN_WIDTH,
         .height      = 2,
         .paletteNum  = 15,
         .baseBlock   = 1 + WIN_WIDTH * WIN_HEIGHT,
@@ -348,12 +351,9 @@ void RunEmulatorCheckUI(MainCallback callback)
 static void EmulatorCheck_Init(MainCallback callback)
 {
     sEmulatorCheckData = AllocZeroed(sizeof(struct EmulatorCheckData));
-        DebugPrintf("2");
     sEmulatorCheckData->savedCallback = callback;
-        DebugPrintf("3");
 
     SetMainCallback2(EmulatorCheck_SetupCB);
-        DebugPrintf("4");
 }
 
 static void EmulatorCheck_VBlankCB(void)
@@ -430,14 +430,49 @@ static void EmulatorCheck_PrintErrorText(void)
 {
     // main text
     FillWindowPixelBuffer(WIN_ERROR_MSG, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_ERROR_MSG, FONT_SMALL, 3, 1, sTextColors_ErrorMsg, TEXT_SKIP_DRAW, sText_ErrorMessage);
+    
+    if (IsSaveFileCorrrupt() == TRUE)
+        StringCopy(gStringVar4,COMPOUND_STRING("The saved game data is corrupted. Your previous save file will be loaded instead."));
+    else if (IsSaveFileDamaged() == TRUE)
+        StringCopy(gStringVar4,COMPOUND_STRING("Your previously saved adventure has been erased. This is often caused by corruption or damage. You will have to start a new adventure."));
+    else
+        StringCopy(gStringVar4,sText_ErrorMessage);
+
+    u32 fontId = FONT_SMALL;
+    if (IsSaveFileCorrrupt() || IsSaveFileDamaged())
+    {
+        fontId = FONT_NORMAL;
+        u32 windowWidth = GetWindowAttribute(WIN_ERROR_MSG,WINDOW_WIDTH) * TILE_WIDTH;
+        BreakStringAutomatic(gStringVar4,windowWidth,4,fontId,HIDE_SCROLL_PROMPT);
+        u32 spacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+        fontId = GetFontIdToFit(gStringVar4,fontId,spacing,windowWidth);
+    }
+    AddTextPrinterParameterized3(WIN_ERROR_MSG, fontId, 3, 1, sTextColors_ErrorMsg, TEXT_SKIP_DRAW, gStringVar4);
+
     CopyWindowToVram(WIN_ERROR_MSG, COPYWIN_GFX);
 
     // optional continue text
     if (ALLOW_BOOT_CONTINUATION)
     {
         FillWindowPixelBuffer(WIN_BOTTOM_MSG, PIXEL_FILL(0));
-        AddTextPrinterParameterized3(WIN_BOTTOM_MSG, FONT_NORMAL, 3, 1, sTextColors_Bottom, TEXT_SKIP_DRAW, sText_BottomMessage);
+
+        if (IsSaveFileCorrrupt() == TRUE)
+            StringCopy(gStringVar4,COMPOUND_STRING("Press {START_BUTTON} to continue your previous save."));
+        else if (IsSaveFileDamaged() == TRUE)
+            StringCopy(gStringVar4,COMPOUND_STRING("Press {START_BUTTON} to start your new adventure."));
+        else
+            StringCopy(gStringVar4,COMPOUND_STRING("Press {START_BUTTON} to continue."));
+
+        fontId = FONT_NORMAL;
+        if (IsSaveFileCorrrupt() || IsSaveFileDamaged())
+        {
+            fontId = FONT_NORMAL;
+            u32 windowWidth = GetWindowAttribute(WIN_ERROR_MSG,WINDOW_WIDTH) * TILE_WIDTH;
+            BreakStringAutomatic(gStringVar4,windowWidth,4,fontId,HIDE_SCROLL_PROMPT);
+            u32 spacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+            fontId = GetFontIdToFit(gStringVar4,fontId,spacing,windowWidth);
+        }
+        AddTextPrinterParameterized3(WIN_BOTTOM_MSG, fontId, 3, 1, sTextColors_ErrorMsg, TEXT_SKIP_DRAW, gStringVar4);
         CopyWindowToVram(WIN_BOTTOM_MSG, COPYWIN_GFX);
     }
 }
@@ -612,4 +647,15 @@ static void EmulatorCheck_MainCB(void)
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
+}
+
+void ShowErrorScreenOnCorruptSave(void)
+{
+    if ((IsSaveFileDamaged() == FALSE) && (IsSaveFileCorrrupt() == FALSE))
+        return;
+
+    sEmulatorCheckData = AllocZeroed(sizeof(struct EmulatorCheckData));
+    sEmulatorCheckData->savedCallback = gMain.callback2;
+
+    SetMainCallback2(EmulatorCheck_SetupCB);
 }

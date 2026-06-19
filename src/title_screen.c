@@ -29,6 +29,7 @@
 #include "save.h"
 #include "ui_main_menu.h"
 // End bootSequence
+#include "emulator_check.h"
 
 enum {
     TAG_VERSION = 1000,
@@ -803,6 +804,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
         // Start bootSequence
         SetCallbackFromSaveStatus();
+        ShowErrorScreenOnCorruptSave();
         StartTimer1();
         //SetMainCallback2(CB2_GoToMainMenu);
         // End bootSequence
