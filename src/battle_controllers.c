@@ -2772,7 +2772,10 @@ void BtlController_HandleStatusAnimation(enum BattlerId battler)
 
 void BtlController_HandleHitAnimation(enum BattlerId battler)
 {
-    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE || (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim))
+    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE
+     || (gTestRunnerHeadless
+      && !gSiliconTestVariables.checkVramUse
+      && !gBattleTestRunnerState->forceMoveAnim))
     {
         BtlController_Complete(battler);
     }
@@ -2787,7 +2790,7 @@ void BtlController_HandleHitAnimation(enum BattlerId battler)
 
 void BtlController_HandlePlaySE(enum BattlerId battler)
 {
-    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
+    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim && !gSiliconTestVariables.checkVramUse)
     {
         BtlController_Complete(battler);
         return;
@@ -2800,7 +2803,7 @@ void BtlController_HandlePlaySE(enum BattlerId battler)
 
 void BtlController_HandlePlayFanfareOrBGM(enum BattlerId battler)
 {
-    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
+    if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim && !gSiliconTestVariables.checkVramUse)
     {
         BtlController_Complete(battler);
         return;

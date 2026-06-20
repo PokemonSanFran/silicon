@@ -106,7 +106,8 @@ struct SiliconExtraTestVariables
     bool32 countHpBarMovement:1;
     bool32 countExpBarMovement:1;
     bool32 checkFontGraphics:1;
-    bool32 temp:23;
+    bool32 checkVramUse:1;
+    bool32 temp:22;
     u32 manualPersonality;
     u32 counter;
 };

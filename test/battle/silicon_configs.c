@@ -942,3 +942,28 @@ TEST("OPTIONS (VISUAL): Units, mass (Imperial, comma)")
     EXPECT_EQ(found_comma, TRUE);
     Free(str);
 }
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Animations", u32 lastTile)
+{
+    //  This test needs to compare VRAM
+    //  If more VRAM is non-zero, move animations has happened
+    bool32 anims;
+    PARAMETRIZE { anims = FALSE; }
+    PARAMETRIZE { anims = TRUE; }
+    GIVEN {
+        FORCE_MOVE_ANIM(TRUE);
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] = anims;
+        gSiliconTestVariables.checkVramUse = TRUE;
+        gSiliconTestVariables.counter = 0;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_NATURES_MADNESS); MOVE(opponent, MOVE_OPTION_TEST_MOVE); }
+    } THEN {
+        results[i].lastTile = gSiliconTestVariables.counter;
+    } FINALLY {
+        gSiliconTestVariables.checkVramUse = FALSE;
+        EXPECT_GT(results[0].lastTile, results[1].lastTile);
+        FORCE_MOVE_ANIM(FALSE);
+    }
+}

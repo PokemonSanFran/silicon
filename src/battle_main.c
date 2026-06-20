@@ -3203,6 +3203,13 @@ static void BattleStartClearSetData(void)
     {
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
+#if TESTING
+    else if (gSiliconTestVariables.checkVramUse)
+    {
+        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ANIMATIONS] == TRUE)
+            gHitMarker |= HITMARKER_NO_ANIMATIONS;
+    }
+#endif
 
     gMultiHitCounter = 0;
     gBattleOutcome = 0;

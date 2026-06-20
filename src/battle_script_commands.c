@@ -12754,6 +12754,23 @@ void BS_OptionTestHandler(void)
             }
         }
     }
+    if (gSiliconTestVariables.checkVramUse)
+    {
+        u32 *objVramStart = (u32 *)(OBJ_VRAM0);
+        u32 lastUsedTile = 0;
+        for (u32 tile = 0; tile < 1024; tile++)
+        {
+            for (u32 line = 0; line < 8; line++)
+            {
+                if (objVramStart[tile * 8 + line] != 0)
+                {
+                    lastUsedTile = tile;
+                    break;
+                }
+            }
+        }
+        gSiliconTestVariables.counter = lastUsedTile;
+    }
 #endif
 
     gBattlescriptCurrInstr = cmd->nextInstr;
