@@ -2798,7 +2798,7 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
 void StressCup_GivePlayerParty(void)
 {
     ZeroPlayerPartyMons();
-    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], FALSE, BATTLE_TYPE_TRAINER);
 }
 
 void DebugQuest_StressCup(u8 state)
