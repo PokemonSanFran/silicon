@@ -21,7 +21,7 @@
 #include "emulator_check.h"
 #include "config/emulator_check.h"
 #include "constants/songs.h"
-
+#include "frontier_pass.h"
 
 static void   EmulatorCheck_Init(MainCallback callback);
 static void   EmulatorCheck_VBlankCB(void);
@@ -491,7 +491,8 @@ static void Task_EmulatorCheckMainInput(u8 taskId)
     {
         PlaySE(SE_PC_OFF);
         FadeOutBGM(4);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        u32 color = ((IsSaveFileDamaged() == FALSE) && (IsSaveFileCorrrupt() == FALSE)) ? RGB_BLACK : RGB_WHITE;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, color);
         gTasks[taskId].func = Task_EmulatorCheckWaitFadeAndExitGracefully;
     }
     else if (gMain.newKeysRaw != 0)
@@ -590,6 +591,7 @@ static void EmulatorCheck_SetupCB(void)
         break;
     case 1:
         ScanlineEffect_Stop();
+        ResetGpuRegsAndBgs();
         FreeAllSpritePalettes();
         ResetPaletteFade();
         ResetSpriteData();
@@ -617,7 +619,7 @@ static void EmulatorCheck_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        // BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        //BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
         gMain.state++;
         break;
     case 7:
