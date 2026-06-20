@@ -340,21 +340,22 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 left, u8 top, u8 width, u8 he
 
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum)
 {
+    // PSF TODO handle drawing top tiles for menus that uses the dialogue frame, e.g. ui_mon_summary
     //Top Left
-    FillBgTilemapBufferRect(bg, sTileNum + 5, left - 1, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, 5, left - 1, top, 1, 1);
     //Left Bar
-    FillBgTilemapBufferRect(bg, sTileNum + 7, left - 1, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, 7, left - 1, top + 1, 1, height - 1);
     //           _
     //Top Right
-    FillBgTilemapBufferRect(bg, sTileNum + 6, left + width, top, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, 6, left + width, top, 1, 1);
     //Right Bar
-    FillBgTilemapBufferRect(bg, sTileNum + 10, left + width, top + 1, 1, height - 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, 10, left + width, top + 1, 1, height - 1);
     //Bottom Left
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 11), left - 1, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, BG_TILE_V_FLIP(11), left - 1, top + height, 1, 1);
     //Bottom Bar
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 12), left, top + height, width, 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, BG_TILE_V_FLIP(12), left, top + height, width, 1);
     //Bottom Right
-    FillBgTilemapBufferRect(bg, BG_TILE_V_FLIP(sTileNum + 13), left + width, top + height, 1, 1, DLG_WINDOW_PALETTE_NUM);
+    FillMenuTilemapBufferRect(bg, BG_TILE_V_FLIP(13), left + width, top + height, 1, 1);
     /*
     FillMenuTilemapBufferRect(bg,  1, left - 2,         top - 1,         1, 1);
     FillMenuTilemapBufferRect(bg,  3, left - 1,         top - 1,         1, 1);

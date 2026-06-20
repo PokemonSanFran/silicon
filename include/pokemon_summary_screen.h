@@ -32,6 +32,13 @@ enum PokemonSummaryScreenMode
     SUMMARY_MODE_SELECT_MOVE,
     SUMMARY_MODE_RELEARNER_BATTLE, // returning from move relearner initiated from battle moves page
     SUMMARY_MODE_RELEARNER_CONTEST, // returning from move relearner initiated from contest moves page
+
+    // start monSummary
+    SUMMARY_MODE_EDIT_IVS,
+    SUMMARY_MODE_MOVE_MENU,
+    SUMMARY_MODE_MOVE_DETAILS,
+    SUMMARY_MODE_HELD_ITEM_DESC,
+    // end monSummary
 };
 
 enum PokemonSummaryScreenPage
@@ -52,8 +59,10 @@ enum PokemonSummarySkillsMode
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, void (*callback)(void), u16 newMove);
+void SetMoveSlotToReplace(u8 slot); // monSummary
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetAnimDelayTaskId(u8 taskId);
+void SummaryScreen_DestroyAnimDelayTask(void); // monSummary
 bool32 CheckRelearnerStateFlag(enum MoveRelearnerStates state);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

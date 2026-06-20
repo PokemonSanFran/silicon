@@ -312,7 +312,7 @@ extern const u8 nullOptionLUT[];
 
 static const u8 sSpeciesListMenuFrameGfx[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_frame.png", ".4bpp");
 
-static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
+const u16 gTypes_Palettes[] = INCBIN_U16("graphics/types/types.gbapal");
 static const u16 pokedexPalettesText[] = INCGFX_U16("graphics/pokedex/ui/palettes/text.pal", ".gbapal");
 
 static const u32 pokedexSpeciesListTiles[] = INCGFX_U32("graphics/pokedex/ui/species_list_screen.png", ".4bpp.smol");
@@ -336,13 +336,24 @@ static const u32 speciesListCaptureIndicator_Alola[] = INCGFX_U32("graphics/poke
 static const u32 speciesListUncaughtIndicator_Alola[] = INCGFX_U32("graphics/pokedex/ui/species_list/emptyfolder_alola.png", ".4bpp.smol");
 static const u32 speciesListFileIcon[] = INCGFX_U32("graphics/pokedex/ui/species_list/file.png", ".4bpp.smol");
 static const u8 speciesListMenuCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.png", ".4bpp");
-static const u32 sTypes_Gfx[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
+const u32 gTypes_Gfx13x11[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_Type13x11 =
 {
-    .data = sTypes_Gfx,
+    .data = gTypes_Gfx13x11,
     .size = NUMBER_OF_MON_TYPES * (16 * 16),
     .tag = TAG_TERA_TYPE
+};
+
+const struct SpriteTemplate gSpriteTemplate_Type13x11 =
+{
+    .tileTag = TAG_TERA_TYPE,
+    .paletteTag = TAG_TERA_TYPE,
+    .oam = &sOamData_Type,
+    .anims = sSpriteAnimTable_Type,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 static const u8 *const sHelpBarTexts[] =
@@ -1276,7 +1287,7 @@ u32 GetPokedexPercentage(void)
 
 void LoadTypeSpritesAndPalettes(void)
 {
-    LoadPalette(sTypePalettes, OBJ_PLTT_ID(PAL_SLOT_MON_TYPE), 3 * PLTT_SIZE_4BPP);
+    LoadPalette(gTypes_Palettes, OBJ_PLTT_ID(PAL_SLOT_MON_TYPE), 3 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_Type13x11);
 }
 
@@ -2187,7 +2198,7 @@ static void SpeciesData_CreateTypeSprite(void)
         if (oldSpriteId != SPRITE_NONE)
             return;
 
-        SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x11, 0, 0, 2));
+        SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&gSpriteTemplate_Type13x11, 0, 0, 2));
         SpeciesData_SetTypeSpriteVisibility(typeIndex, TRUE);
     }
 }

@@ -44,6 +44,7 @@
 #include "text.h"
 #include "tv.h"
 #include "window.h"
+#include "ui_mon_summary.h" // monSummary
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -315,7 +316,7 @@ static void SpriteCB_MoveSelector(struct Sprite *);
 static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
-static void SummaryScreen_DestroyAnimDelayTask(void);
+//static void SummaryScreen_DestroyAnimDelayTask(void); // monSummary
 static bool32 ShouldShowMoveRelearner(void);
 static bool32 ShouldShowRename(void);
 static bool32 ShouldShowIvEvPrompt(void);
@@ -1199,6 +1200,27 @@ u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
 {
+    // Start monSummary
+    bool32 useBoxMon = FALSE;
+
+    if (mode == SUMMARY_MODE_BOX || mode == SUMMARY_MODE_BOX_CURSOR)
+    {
+        mode = SUMMARY_MODE_NORMAL;
+        useBoxMon = TRUE;
+    }
+
+    if (monIndex == PC_MON_CHOSEN)
+    {
+        useBoxMon = TRUE;
+        mons = GetBoxedMonPtr(gSpecialVar_MonBoxId, 0);
+        monIndex = gSpecialVar_MonBoxPos;
+        maxMonIndex = IN_BOX_COUNT - 1;
+    }
+
+    MonSummary_Init(mode, mons, monIndex, maxMonIndex, useBoxMon, callback);
+    return;
+    // End monSummary
+
     sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
     sMonSummaryScreen->mode = mode;
     if (monIndex == PC_MON_CHOSEN)
@@ -2769,6 +2791,13 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
         }
     }
 }
+
+// Start monSummary
+void SetMoveSlotToReplace(u8 slot)
+{
+    sMoveSlotToReplace = slot;
+}
+// End monSummary
 
 u8 GetMoveSlotToReplace(void)
 {
@@ -4588,7 +4617,10 @@ void SummaryScreen_SetAnimDelayTaskId(u8 taskId)
     sAnimDelayTaskId = taskId;
 }
 
-static void SummaryScreen_DestroyAnimDelayTask(void)
+// start monSummary
+//static void SummaryScreen_DestroyAnimDelayTask(void)
+void SummaryScreen_DestroyAnimDelayTask(void)
+// end monSummary
 {
     if (sAnimDelayTaskId != TASK_NONE)
     {
