@@ -10746,6 +10746,15 @@ static void Cmd_trygivecaughtmonnick(void)
         gBattleCommunication[MULTIUSE_STATE] = 0;
         gBattlescriptCurrInstr = cmd->nextInstr;
         break;
+// Start Battle Settings: Nickname
+    case 5:
+        if (!gPaletteFade.active && !IsTextPrinterActiveOnWindow(0))
+        {
+            if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+                gBattleCommunication[MULTIUSE_STATE] = 2;
+        }
+        break;
+// End Battle Settings: Nickname
     }
 }
 
