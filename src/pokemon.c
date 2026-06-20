@@ -6037,7 +6037,10 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
 
     // Set up sprite / sprite pointer buffers
     gfx->spriteBuffer = AllocZeroed(gfx->dataSize * MON_PIC_SIZE * MAX_MON_PIC_FRAMES * gfx->numSprites);
-    gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+    // monSummary Start
+    //gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 4);
+    // monSummary End
     if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
         failureFlags |= ALLOC_FAIL_BUFFER;
@@ -6822,7 +6825,7 @@ const u8 *GetMoveDesc(u32 moveId)
     return gMovesInfo[moveId].description;
 }
 
-static const u8* const categoryNames[] =
+const u8* const gDamageCategoryNames[] =
 {
     [DAMAGE_CATEGORY_PHYSICAL] = COMPOUND_STRING("Physical"),
     [DAMAGE_CATEGORY_SPECIAL] = COMPOUND_STRING("Special"),
@@ -6832,7 +6835,7 @@ static const u8* const categoryNames[] =
 const u8* GetMoveCategoryName(u32 moveId)
 {
     u32 category = GetMoveCategory(moveId);
-    return categoryNames[category];
+    return gDamageCategoryNames[category];
 }
 // End pokedex
 void UpdateDaysPassedSinceFormChange(u16 days)

@@ -402,7 +402,6 @@ static void PageEvolution_InitWindows(void);
 static void PageMoves_HandleInput(u8 taskId);
 static void PageEvolution_HandleInput(u8 taskId);
 static bool32 PageMoves_IsSelctedMoveEggMove(u32 currentPosition);
-static bool32 IsMoveInSilicon(u32 moveId);
 static void PageMoves_PopulateMovesList(void);
 static void PageMoves_PrintCursor(enum PokedexPageMovesWindows windowId);
 static void PageMoves_PrintMovesList(void);
@@ -1121,7 +1120,7 @@ static void UpdateMoveMethodIfExists(u16 moveId, enum MoveLearnMethods newMethod
     }
 }
 
-static bool32 IsMoveInSilicon(u32 moveId)
+bool32 IsMoveInSilicon(u32 moveId)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MOVES_PER_LETTER; moveIndex++)
     {

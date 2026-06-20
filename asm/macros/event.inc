@@ -1367,19 +1367,33 @@
 	.endm
 
 	@ Adds value to the player's money. If adding 'value' money would exceed MAX_MONEY, the player's money is set to MAX_MONEY.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro addmoney value:req, disable=0
+	@ start siliconBpBox
+	.macro addmoney value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=0, change=\value, subtract=FALSE
+	updatemoneybox
+	.endif
 	.byte SCR_OP_ADDMONEY
 	.4byte \value
-	.byte \disable
+	.if \update == TRUE
+	delay 30
+	updatemoneybox
+	.endif
 	.endm
 
 	@ Subtracts value from the player's money. If the player has less than 'value' money, their money is set to 0.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro removemoney value:req, disable=0
+	.macro removemoney value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=0, change=\value, subtract=TRUE
+	updatemoneybox
+	.endif
 	.byte SCR_OP_REMOVEMONEY
 	.4byte \value
-	.byte \disable
+	.if \update == TRUE
+	delay 30
+	updatemoneybox
+	.endif
+	@ end siliconBpBox
 	.endm
 
 	@ Checks if the player has money >= value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
@@ -1633,18 +1647,36 @@
 
 	@ Gives 'count' coins to the player, up to a total of MAX_COINS.
 	@ If the player already has MAX_COINS then VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
-	.macro addcoins count:req
+	@ start siliconBpBox
+	.macro addcoins count:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=1, change=\count, subtract=FALSE
+	updatecoinsbox 0, 0
+	.endif
 	.byte SCR_OP_ADDCOINS
 	.2byte \count
+	.if \update == TRUE
+	delay 30
+	updatecoinsbox 0, 0
+	.endif
 	.endm
 
 	@ Takes 'count' coins from the player.
 	@ If the player has fewer than 'count' coins then no coins are taken and VAR_RESULT is set to TRUE.
 	@ Otherwise VAR_RESULT is set to FALSE.
-	.macro removecoins count:req
+	.macro removecoins count:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=1, change=\count, subtract=TRUE
+	updatecoinsbox 0, 0
+	.endif
 	.byte SCR_OP_REMOVECOINS
 	.2byte \count
+	.if \update == TRUE
+	delay 30
+	updatecoinsbox 0, 0
+	.endif
 	.endm
+	@ end siliconBpBox
 
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item'.
 	@ If 'species2' is something other than SPECIES_NONE, then the battle is a double battle
@@ -3588,6 +3620,13 @@
 	.endm
 	@ End shopMenu
 
+	@ Start monSummary
+	.macro editmonivs slot=VAR_0x8004
+	callnative MonSummary_EditMonIVs
+	.2byte \slot
+	.endm
+	@ End monSummary
+
 	@ Manually buffer a string as the speaker's name for namebox.
 	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
 	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.
@@ -3740,3 +3779,51 @@
 	getbraillestringwidth \text
 	call EventScript_BrailleCursorWaitButton
 	.endm
+
+	@ start bpBox
+	.macro showbpbox x=0, y=0
+	callnative ScrFunc_showbpbox
+	.2byte \x
+	.2byte \y
+	.endm
+
+	.macro preparecurrencychange type=0, change=0, subtract=FALSE
+	callnative ScrFunc_preparecurrencychange
+	.byte \type
+	.4byte \change
+	.byte \subtract
+	.endm
+
+	.macro updatebpbox
+	callnative ScrFunc_updatebpbox
+	.endm
+
+	.macro hidebpbox
+	callnative ScrFunc_hidebpbox
+	.endm
+
+	.macro addbp value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=2, change=\value, subtract=FALSE
+	updatebpbox
+	.endif
+	givefrontierbattlepoints \value
+	.if \update == TRUE
+	delay 30
+	updatebpbox
+	.endif
+	.endm
+
+	.macro removebp value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=2, change=\value, subtract=TRUE
+	updatebpbox
+	.endif
+	callnative ScrFunc_removebp
+	.2byte \value
+	.if \update == TRUE
+	delay 30
+	updatebpbox
+	.endif
+	.endm
+	@ end bpBox
