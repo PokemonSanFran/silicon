@@ -220,7 +220,7 @@ BattleScript_SuccessBallThrowEnd::
 
 @ Start Battle Settings: Nickname
 BattleScript_DoNicknameCaughtMon::
-    setbyte gBattleCommunication + MULTIUSE_STATE, 2 @ Go straight to the case 2 of Cmd_trygivecaughtmonnick
+    setbyte gBattleCommunication + MULTIUSE_STATE, 5 @ Go straight to the case 5 of Cmd_trygivecaughtmonnick
     printstring STRINGID_LETSGIVEITANICKNAME
     goto BattleScript_GiveCaughtMonANickname
 @ End Battle Settings: Nickname
