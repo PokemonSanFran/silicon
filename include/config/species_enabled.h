@@ -55,7 +55,7 @@
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
 // To disable specific families, replace P_GEN_x_POKEMON with FALSE.
-#define P_FAMILY_BULBASAUR               FALSE 
+#define P_FAMILY_BULBASAUR               TRUE 
 #define P_FAMILY_CHARMANDER              FALSE
 #define P_FAMILY_SQUIRTLE                FALSE
 #define P_FAMILY_CATERPIE                FALSE
