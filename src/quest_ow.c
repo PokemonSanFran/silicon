@@ -142,9 +142,8 @@ static void SpriteCB_QuestIconDisappear(struct Sprite *sprite)
     SpriteCB_QuestIcon(sprite);
     u32 y = sprite->y;
 
-    sprite->y = y + (TILE_SIZE_1BPP / 2);
-    if (sprite->y > QUEST_OVERWORLD_ANIMATION_ICON_DISAPPEAR_POINT)
-        DestroySpriteAndFreeResources(sprite);
+    if (y < QUEST_OVERWORLD_ANIMATION_ICON_DISAPPEAR_POINT)
+        sprite->y = y + (TILE_SIZE_1BPP / 2);
 }
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
