@@ -439,7 +439,7 @@ static void EmulatorCheck_PrintErrorText(void)
         StringCopy(gStringVar4,sText_ErrorMessage);
 
     u32 fontId = FONT_SMALL;
-    if (IsSaveFileCorrrupt() || IsSaveFileDamaged())
+    if (IsSaveCorruptOrError())
     {
         fontId = FONT_NORMAL;
         u32 windowWidth = GetWindowAttribute(WIN_ERROR_MSG,WINDOW_WIDTH) * TILE_WIDTH;
@@ -464,7 +464,7 @@ static void EmulatorCheck_PrintErrorText(void)
             StringCopy(gStringVar4,COMPOUND_STRING("Press {START_BUTTON} to continue."));
 
         fontId = FONT_NORMAL;
-        if (IsSaveFileCorrrupt() || IsSaveFileDamaged())
+        if (IsSaveCorruptOrError())
         {
             fontId = FONT_NORMAL;
             u32 windowWidth = GetWindowAttribute(WIN_ERROR_MSG,WINDOW_WIDTH) * TILE_WIDTH;
@@ -491,7 +491,7 @@ static void Task_EmulatorCheckMainInput(u8 taskId)
     {
         PlaySE(SE_PC_OFF);
         FadeOutBGM(4);
-        u32 color = ((IsSaveFileDamaged() == FALSE) && (IsSaveFileCorrrupt() == FALSE)) ? RGB_BLACK : RGB_WHITE;
+        u32 color = (IsSaveCorruptOrError() == FALSE) ? RGB_BLACK : RGB_WHITE;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, color);
         gTasks[taskId].func = Task_EmulatorCheckWaitFadeAndExitGracefully;
     }
@@ -585,6 +585,10 @@ static void EmulatorCheck_SetupCB(void)
     switch (gMain.state)
     {
     case 0:
+        if (IsSaveCorruptOrError() == TRUE)
+            if (UpdatePaletteFade())
+                break;
+
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -619,7 +623,8 @@ static void EmulatorCheck_SetupCB(void)
         gMain.state++;
         break;
     case 6:
-        //BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
+        if (IsSaveCorruptOrError() == TRUE)
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
         gMain.state++;
         break;
     case 7:
@@ -653,7 +658,7 @@ static void EmulatorCheck_MainCB(void)
 
 void ShowErrorScreenOnCorruptSave(void)
 {
-    if ((IsSaveFileDamaged() == FALSE) && (IsSaveFileCorrrupt() == FALSE))
+    if (IsSaveCorruptOrError() == FALSE)
         return;
 
     sEmulatorCheckData = AllocZeroed(sizeof(struct EmulatorCheckData));

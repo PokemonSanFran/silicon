@@ -111,6 +111,7 @@ u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
 void Task_LinkFullSave(u8 taskId);
 bool8 IsSaveFileDamaged(void);
 bool8 IsSaveFileCorrrupt(void);
+bool8 IsSaveCorruptOrError(void);
 
 // save_failed_screen.c
 void DoSaveFailedScreen(u8 saveType);

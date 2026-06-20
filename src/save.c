@@ -1126,6 +1126,14 @@ void SetCallbackFromSaveStatus(void)
     SetMainCallback2(callback);
 }
 
+bool8 IsSaveCorruptOrError(void)
+{
+    if (IsSaveFileCorrrupt())
+        return TRUE;
+    
+    return IsSaveFileDamaged();
+}
+
 bool8 IsSaveFileCorrrupt(void)
 {
     return (gSaveFileStatus == SAVE_STATUS_CORRUPT);
