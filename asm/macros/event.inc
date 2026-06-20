@@ -2334,7 +2334,7 @@
     .byte SCR_OP_QUESTOVERWORLD
     .byte QUEST_MENU_SET_ACTIVE
     .byte \quest
-    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+    waitstate
     setvar VAR_ADVENTURE_GUIDE_TO_OPEN, GUIDE_QUESTS
     call RunAdventureGuideScript
 	.endm
@@ -2346,7 +2346,7 @@
     .byte SCR_OP_QUESTOVERWORLD
     .byte QUEST_MENU_COMPLETE_QUEST
     .byte \quest
-    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+    waitstate
 	.endm
 
 .macro unlockquest quest:req
