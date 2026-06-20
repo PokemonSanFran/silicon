@@ -406,9 +406,9 @@ static bool32 IsMoveInSilicon(u32 moveId);
 static void PageMoves_PopulateMovesList(void);
 static void PageMoves_PrintCursor(enum PokedexPageMovesWindows windowId);
 static void PageMoves_PrintMovesList(void);
-static void PageMoves_PrintMoveInfo(void);
+static void PageMoves_PrintMoveInfo(bool32 faded);
 static void PageMoves_PrintMoveDesc(void);
-static void PageMoves_PrintMove(void);
+static void PageMoves_PrintMove(bool32 faded);
 static u32 PageMoves_GetIdToPrint(void);
 static const u8 *GetFormOrSpeciesName(u32 species);
 static void PageEvolutions_PrintEvolution(enum PokedexPages page);
@@ -462,7 +462,7 @@ static void PageMoves_SetMoveId(u32, u32);
 void PageMoves_PrintLevelMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
 void PageMoves_PrintEggMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
 void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
-static void PageMoves_PrintMoveTypeName(void);
+static void PageMoves_PrintMoveTypeName(bool32 faded);
 static u32 PageMoves_GetContrastColor(u32 moveType);
 static void PrintMoveLearnMethods(void);
 void PageMoves_GenerateParentsArray(void);
@@ -696,7 +696,7 @@ void SetAndSetUpCurrentPage(u8 taskId)
     SetCurrentPage(pageId);
     InitializeBackgroundsAndLoadBackgroundGraphics();
     BeginNormalPaletteFade(PALETTES_ALL,0,16,0,RGB_WHITE);
-    Page_SetUp(taskId);
+    gTasks[taskId].func = Page_SetUp;
 }
 
 void (* const pageSetUpFuncLUT[])(void) =
@@ -1396,7 +1396,7 @@ static void PageMoves_ChangeListPosition(s32 delta)
     PlaySE(SE_SELECT);
     PageMoves_SetCurrentPositionInMoveList(newPosition);
     PageMoves_ChangeCursorPosition();
-    PageMoves_PrintMove();
+    PageMoves_PrintMove(FALSE);
     PrintMoveLearnMethods();
     PrintHelpBar(PAGE_MOVES_WINDOW_FOOTER);
 }
@@ -1463,16 +1463,16 @@ static void PageMoves_CreatePage(void)
     ParentDisplay_SetWindowId(WINDOW_NONE);
     PageMoves_PopulateMovesList();
     PageMoves_SnapToLoadedCursorAndPosition();
-    PageMoves_PrintMove();
+    PageMoves_PrintMove(TRUE);
     SpeciesGrid_SetFirstPageLoad(TRUE);
     PrintMoveLearnMethods();
     PrintHelpBar(PAGE_MOVES_WINDOW_FOOTER);
 }
 
-static void PageMoves_PrintMove(void)
+static void PageMoves_PrintMove(bool32 faded)
 {
     PageMoves_PrintMovesList();
-    PageMoves_PrintMoveInfo();
+    PageMoves_PrintMoveInfo(faded);
     PageMoves_PrintMoveDesc();
 }
 
@@ -1608,7 +1608,7 @@ enum LRDirections
     DATA_RIGHT,
 };
 
-static void PageMoves_PrintMoveInfo(void)
+static void PageMoves_PrintMoveInfo(bool32 faded)
 {
     enum PokedexPageMovesWindows windowId = PAGE_MOVES_WINDOW_MOVES_DATA;
     u32 currentPosition = PageMoves_GetCurrentPositionInMoveList();
@@ -1620,7 +1620,7 @@ static void PageMoves_PrintMoveInfo(void)
     u32 x = 0, y = 0, numDigits = 0, value = 0;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PageMoves_PrintMoveTypeName();
+    PageMoves_PrintMoveTypeName(faded);
 
     for (u32 listId = 0; listId < POKEDEX_PAGE_MOVE_DATA_COUNT; listId++)
     {
@@ -1694,7 +1694,7 @@ static void PageMoves_PrintMoveDesc(void)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void PageMoves_PrintMoveTypeName(void)
+static void PageMoves_PrintMoveTypeName(bool32 faded)
 {
     enum PokedexPageMovesWindows windowId = PAGE_MOVES_WINDOW_MOVES_DATA;
     u32 currentPosition = PageMoves_GetCurrentPositionInMoveList();
@@ -1708,7 +1708,9 @@ static void PageMoves_PrintMoveTypeName(void)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 colorConst = PageMoves_GetContrastColor(moveType);
 
-    FillPalette(gTypesInfo[moveType].siliconRGBValue,POKEDEX_TYPE_WINDOW_COLOR_ADDRESS, 2);
+    CpuFill16(gTypesInfo[moveType].siliconRGBValue, &gPlttBufferUnfaded[POKEDEX_TYPE_WINDOW_COLOR_ADDRESS], 2);
+    if (!faded)
+        CpuFill16(gTypesInfo[moveType].siliconRGBValue, &gPlttBufferFaded[POKEDEX_TYPE_WINDOW_COLOR_ADDRESS], 2);
 
     StringCopy(gStringVar1,gTypesInfo[moveType].name);
     StringAppend(gStringVar1,COMPOUND_STRING("-type"));
@@ -4933,7 +4935,7 @@ static const u16 statRankColors[] =
 static void PageStats_ChangeStatHighlightBasedOnValue(u32 statIndex, u32 value)
 {
     enum StatTierList rank = SpeciesFilter_GetRankForStat(statIndex,value);
-    FillPalette(statRankColors[rank],POKEDEX_STAT_HIGHLIGHT_PALETTE_ADDRESS + statIndex, 2);
+    CpuFill16(statRankColors[rank], &gPlttBufferUnfaded[POKEDEX_STAT_HIGHLIGHT_PALETTE_ADDRESS + statIndex], 2);
 }
 
 static void PageWeaknesses_InitWindows(void)

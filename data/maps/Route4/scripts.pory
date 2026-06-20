@@ -7,7 +7,7 @@ mapscripts Route4_MapScripts {
     }
     MAP_SCRIPT_ON_LOAD
     {
-        call_if_set(FLAG_DISCOVERED_PARC,Route4_MapScripts_OnLoad)
+        call_if_ge(VAR_PARC_STATE,PLAYER_DISCOVERED_LAB,Route4_MapScripts_OnLoad)
     }
     MAP_SCRIPT_ON_RESUME
     {

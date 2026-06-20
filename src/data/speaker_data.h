@@ -1783,10 +1783,10 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
-    [SPEAKER_FILIP] =
+    [SPEAKER_WILDFIRERISKWORKER] =
     {
-        .name = COMPOUND_STRING("Filip"),
-        .title = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Wildfireriskworker"),
+        .title = COMPOUND_STRING("Toxel Energy Enployee"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,

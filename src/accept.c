@@ -503,6 +503,8 @@ static void LoadAcceptPalettes(void)
     LoadPalette(sAcceptPalettesLUT[GetVisualColor()], PAL_SLOT_ACCEPT_UI, PLTT_SIZE_4BPP);
     LoadPalette(acceptPalettesEmail,PAL_SLOT_EMAIL,PLTT_SIZE_4BPP);
     LoadPalette(acceptPalettesText,PAL_SLOT_TEXT,PLTT_SIZE_4BPP);
+    gPlttBufferUnfaded[BG_PLTT_ID(0)] = RGB_BLACK;
+    gPlttBufferUnfaded[BG_PLTT_ID(1)] = RGB_BLACK;
 }
 
 static void ClearWindowCopyToVram(enum AcceptWindows windowId)

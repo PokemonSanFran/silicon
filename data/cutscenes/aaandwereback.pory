@@ -33,12 +33,12 @@ script AaandWereBack_Monologue
     }
 
     lock
-        msgbox(format("I've got all three Badges from this side of the pennisula. The ferry to Oroland looks like it's going to be broken until at least tomorrow, and I can't head west without Go-Goggles. It's been a long day... I think I should head back to CuconuTown and call it a night."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT,PHONE_OFF)
-        closemessage
-        call(AaandWereBack_WarpToCompound_Script)
-        release
-        setflag(FLAG_ACT_1_1_COMPLETE)
-        end
+    msgbox(format("I've got all three Badges from this side of the pennisula. The ferry to Oroland looks like it's going to be broken until at least tomorrow, and I can't head west without Go-Goggles. It's been a long day... I think I should head back to CuconuTown and call it a night."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SWEAT,PHONE_OFF)
+    closemessage
+    call(AaandWereBack_WarpToCompound_Script)
+    release
+    setflag(FLAG_ACT_1_1_COMPLETE)
+    end
 }
 
 script AaandWereBack_WarpToCompound_Script {

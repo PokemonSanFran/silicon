@@ -845,13 +845,14 @@ static void SwitchMode(u8 taskId)
         RemoveWindow(windowId);
     }
 
+    gSprites[GetMenuCursorSpriteId()].invisible = TRUE;
     FreeAllWindowBuffers();
     Free(sBgTilemapBuffer[BG0_MAINMENU_TEXT]);
     sBgTilemapBuffer[BG0_MAINMENU_TEXT] = AllocZeroed(BG_SCREEN_SIZE);
     memset(sBgTilemapBuffer[BG0_MAINMENU_TEXT],0,BG_SCREEN_SIZE);
     ScheduleBgCopyTilemapToVram(BG0_MAINMENU_TEXT);
 
-    MainMenu_SetUp(taskId);
+    gTasks[taskId].func = MainMenu_SetUp;
 }
 
 static void ToggleStatsBackground(void)
@@ -972,7 +973,7 @@ static void PrintMainMenuOptions(void)
 
         y = MainMenu_SetTextVerticalPosition(y, mode, optionIndex, letterHeight);
     }
-
+    gSprites[GetMenuCursorSpriteId()].invisible = FALSE;
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

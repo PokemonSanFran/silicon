@@ -95,5 +95,6 @@ u16 GenerateBerryMon(void); // wildEncounters
 bool8 IsOverworldMonShiny(void); // hidden_grotto
 bool8 IsOverworldMonFemale(void); //hidden_grotto
 bool8 WildEncounterCheck(u32, bool8); // flyEncounters
+const struct WildPokemonInfo *GetWildPokemonInfoFromHeaderId(enum WildPokemonArea area); // siliconQuests
 
 #endif // GUARD_WILD_ENCOUNTER_H

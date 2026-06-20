@@ -2176,7 +2176,7 @@ void Quest_RPS_StopMoneyLoss(void)
     if (gBattleOutcome == B_OUTCOME_WON)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
     else
-        gBattleTypeFlags |= BATTLE_TYPE_FRONTIER;
+        gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
 }
 
 void DebugQuest_RPS(u8 state)
@@ -4798,6 +4798,383 @@ void DebugQuest_Teachatrainertofish(u8 state)
         case STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_TEACHATRAINERTOFISH);
             AddBagItem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Wildfire Risk
+// ***********************************************************************
+
+static const u16 treeFlags[] =
+{
+    [RESIDO_TREE_HALERBA_WILDS_1] = FLAG_TREE_HALERBAWILDS_1,
+    [RESIDO_TREE_HALERBA_WILDS_2] = FLAG_TREE_HALERBAWILDS_2,
+    [RESIDO_TREE_NAVAL_BASE_1] = FLAG_TREE_NAVAL_BASE_1,
+    [RESIDO_TREE_NAVAL_BASE_2] = FLAG_TREE_NAVAL_BASE_2,
+    [RESIDO_TREE_NAVAL_BASE_3] = FLAG_TREE_NAVAL_BASE_3,
+    [RESIDO_TREE_ROUTE3_1] = FLAG_TREE_ROUTE3_1,
+    [RESIDO_TREE_ROUTE3_2] = FLAG_TREE_ROUTE3_2,
+};
+
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    for (u32 treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+        FlagClear(treeFlags[treeIndex]);
+}
+
+void Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+}
+
+void Quest_Wildfirerisk_CompleteSubquestForTree(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    u32 limit = QUEST_WILDFIRERISK_SUB_COUNT + 1;
+    u32 treeIndex = limit;
+    u32 flag = GetObjectFlagFromLocalId(gSpecialVar_LastTalked);
+
+    for (treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+    {
+        if (flag != treeFlags[treeIndex])
+            continue;
+
+        break;
+    }
+
+    if (treeIndex == limit)
+        return;
+
+    QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, treeIndex);
+
+    if (IsQuestActiveState(QUEST_WILDFIRERISK) == FALSE)
+        return;
+
+    Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward();
+}
+
+void DebugQuest_Wildfirerisk(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_WILDFIRERISK_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_WILDFIRERISK_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_TM,1);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_HALERBA_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_NAVAL_BASE_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_2);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_3);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_ROUTE3_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_REWARD,1);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Hang 20
+// ***********************************************************************
+// * take index from the overall list
+// * get the species Id from that index
+// * create the pokemon in the opposing party
+// * create the object sprite from that pokemon
+// * depending on encounter type, the pokemon will do a series of movmement and attack the player
+
+struct WildGauntletData
+{
+    enum WildPokemonArea encounterType;
+    u8 index;
+    enum Species species;
+    s16 x;
+    s16 y;
+    u8 elevation;
+};
+
+const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
+{
+    [CRESALTA_MON_BERRY_0_1] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 22,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_BERRY_0_2] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_BERRY_10_3] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 10,
+        .x = 18,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_WATER_0_4] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 29,
+        .y = 1,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_PHENOMENON_0_5] =
+    {
+        .encounterType = WILD_AREA_PHENOMENON,
+        .index = 0,
+        .x = 17,
+        .y = 2,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_LAND_0_6] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_LAND_12_7] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 12,
+        .x = 22,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_WATER_0_8] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 22,
+        .y = 0,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_ROCK_SMASH_0_9] =
+    {
+        .encounterType = WILD_AREA_ROCKS,
+        .index = 0,
+        .x = 25,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FISHING_0_10] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_FLYING_17_11] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 17,
+        .x = 22,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FLYING_19_12] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 19,
+        .x = 22,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FISHING_14_13] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 14,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_WATER_0_14] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_WATER_16_15] =
+    {
+        .species = SPECIES_PALAFIN_HERO,
+        .encounterType = WILD_AREA_WATER,
+        .index = 16,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+    },
+};
+
+static enum Species Quest_Hang20_GetWildSpecies(const struct WildPokemonInfo *wildMonInfo, enum CresaltaMonProgress progress, enum WildPokemonArea area, u32 index)
+{
+    if (cresaltaGauntletData[progress].species != SPECIES_NONE)
+        return cresaltaGauntletData[progress].species;
+
+    return wildMonInfo->wildPokemon[index].species;
+}
+
+void Quest_Hang20_GenerateWildBattle(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    u32 level = min((ChooseWildMonLevel(wildMonInfo->wildPokemon, index, area) +  progress),MAX_LEVEL);
+
+    CreateWildMon(species,level);
+};
+
+void ResetDefeatedCresaltaVista(void)
+{
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,0);
+}
+
+void CountDefeatedCresaltaVista(void)
+{
+    if (GetCurrentMap() != MAP_CRESALTA_VISTA)
+        return;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        return;
+
+    if (IsQuestActiveState(QUEST_HANG20) == FALSE)
+        return;
+
+    u32 defeatedCresaltaVistaCount = VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT);
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,++defeatedCresaltaVistaCount);
+
+    if (defeatedCresaltaVistaCount >=QUEST_HANG20_REQUIRED_WINS)
+        QuestMenu_ScriptSetReward(QUEST_HANG20);
+}
+
+void Quest_Hang20_SetObjectId(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    u32 modifier = 0, objectIdGfx = 0;
+
+    if (IsOverworldMonShiny())
+        modifier += OBJ_EVENT_MON_SHINY;
+
+    if (IsOverworldMonFemale())
+        modifier += OBJ_EVENT_MON_FEMALE;
+
+    objectIdGfx = (species + modifier + OBJ_EVENT_MON);
+    VarSet(VAR_OBJ_GFX_ID_0,objectIdGfx);
+}
+
+void Quest_Hang20_MoveObject(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    u32 x = cresaltaGauntletData[progress].x + 0;
+    u32 y = cresaltaGauntletData[progress].y + 0;
+    u32 elevation = cresaltaGauntletData[progress].elevation;
+
+    VarSet(VAR_0x8009,x);
+    VarSet(VAR_0x8008,y);
+    VarSet(VAR_0x8007,elevation);
+}
+
+void Quest_Hang20_PlayMonCry(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void Quest_Hang20_BufferLastSpecies(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    progress--;
+
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+}
+
+static bool8 Quest_Hang20_IsEnemyFromWater(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    return (area == WILD_AREA_WATER || area == WILD_AREA_FISHING || area == WILD_AREA_PHENOMENON);
+}
+
+void Script_Quest_Hang20_IsEnemyFromWater(void)
+{
+    gSpecialVar_Result = Quest_Hang20_IsEnemyFromWater();
+}
+
+void DebugQuest_Hang20(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HANG20_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_HANG20_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_TM,1);
+            break;
+        case STATE_QUEST_HANG20_REWARD:
+            VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,QUEST_HANG20_REQUIRED_WINS);
+            QuestMenu_ScriptSetReward(QUEST_HANG20);
+            break;
+        case STATE_QUEST_HANG20_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_REWARD,1);
             break;
     }
 }

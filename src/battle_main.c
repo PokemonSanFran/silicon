@@ -5510,7 +5510,10 @@ static void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
         if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
-            PlayBGM(MUS_VICTORY_GYM_LEADER);
+// Start siliconMusic
+            //PlayBGM(MUS_VICTORY_GYM_LEADER);
+            PlayBGM(MUS_VICTORY_DIANTHA_FACILITY);
+// End siliconMusic
         else
             PlayBGM(MUS_VICTORY_TRAINER);
     }
@@ -5522,6 +5525,11 @@ static void HandleEndTurn_BattleWon(void)
 
         switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
         {
+// Start siliconMusic
+        case TRAINER_CLASS_DIANTHA:
+            PlayBGM(MUS_VICTORY_DIANTHA_FACILITY);
+            break;
+// End siliconMusic
         case TRAINER_CLASS_ELITE_FOUR:
         case TRAINER_CLASS_CHAMPION:
             PlayBGM(MUS_VICTORY_LEAGUE);
@@ -5632,25 +5640,6 @@ void CountDefeatedGardenMons(void){
     }
 
     VarSet(VAR_DEFEATED_GARDEN_POKEMON,defeatedGardenMonCount);
-}
-
-void CountDefeatedCresaltaVista(void){
-    /*
-    If you're in CresaltaVista AND its not a Trainer battle, then increment the defeated count by one
-    If Hang 20 quest is active AND the count is more than 29, then go to the reward state
-*/
-    u8 defeatedCresaltaVistaCount = VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT);
-
-    if (GetCurrentMap() == MAP_CRESALTA_VISTA && (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))){
-        defeatedCresaltaVistaCount++;
-    }
-
-    if ((defeatedCresaltaVistaCount > 29) && QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_GET_ACTIVE)){
-        QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_SET_REWARD);
-        QuestMenu_GetSetQuestState(QUEST_HANG20,FLAG_REMOVE_ACTIVE);
-    }
-
-    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,defeatedCresaltaVistaCount);
 }
 
 void CountDefeatedBackyard(void)

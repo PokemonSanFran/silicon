@@ -164,7 +164,7 @@ static u8 CalculateLocationNameXPosition(u32, u8*, u32);
 
 static void PrintHelpBar(void);
 static const u8* GetHelpBarText(void);
-static const u8 *GetHelpBarTrainerText(u32);
+static const u8 *GetHelpBarTrainerText(enum ResidoTrainerIds);
 static const u8 *GetHelpBarLocationText(u32);
 
 static void Task_LocationInput(u8);
@@ -179,7 +179,7 @@ static void PlayCursorSound(bool32);
 
 static void HandleLocationStats(s32);
 static void PrintLocationStats(s32, u32);
-static u8 GetMapSectionFromTrainerId(u32);
+static u8 GetMapSectionFromTrainerId(enum ResidoTrainerIds);
 static void InitAllLocationStats(void);
 static void HandleLocationStatsTotal(u8*);
 static void HandleLocationStatsDiscovered(u8*);
@@ -233,14 +233,14 @@ static void SpriteCallback_Nameplate(struct Sprite *sprite);
 static void MoveNameplate(void);
 static u8 GetNameplateSpriteId(void);
 
-static u8 GetTrainerIdFromCurrentPosition(void);
-static u8 GetTrainerIdFromPosition(u32);
+static enum ResidoTrainerIds GetTrainerIdFromCurrentPosition(void);
+static enum ResidoTrainerIds GetTrainerIdFromPosition(u32);
 static void PrintTrainerName(void);
-static const u8 *GetTrainerName(u32);
+static const u8 *GetTrainerName(enum ResidoTrainerIds);
 static void* CalculateTrainerNameTileDestination(void);
 static u8* CreateTrainerNameWindowAddText(u32*);
 static void CopyTrainerNameWindowOntoNameplateMemory(u8*, void*, u32);
-static u8 CalculateTrainerNameHorizontalPosition(u32, u32, u32);
+static u8 CalculateTrainerNameHorizontalPosition(u32, enum ResidoTrainerIds, u32);
 static void DestroyNameplateSpriteId(void);
 
 static void PrintMonCursor(void);
@@ -292,7 +292,7 @@ static void InitalizeHoverSpriteId(void);
 static void DestroyHoverSpriteId(void);
 
 static bool8 IsTrainerDefeated(u32);
-static bool8 IsTrainerRematch(u32);
+static bool8 IsTrainerRematch(enum ResidoTrainerIds);
 
 static void SortAllTrainersAZ(u32);
 static void StoreTrainersInTempList(u32, u32*);
@@ -309,24 +309,24 @@ static void ResetTrainerRowAndCursor(void);
 static void EmptyTrainerList(void);
 
 static void PrintTrainerAndParty(u32);
-static u8 GetTrainerIdFromTrainerFromScreenRow(u32);
+static enum ResidoTrainerIds GetTrainerIdFromTrainerFromScreenRow(u32);
 static u8 GetListPositionFromScreenRow(u32);
-static u16 GetTrainerOWSpriteIfBattled(u32);
-static void PrintTrainerSprite(u32, u32);
-static void PrintParty(u32, u32);
+static u16 GetTrainerOWSpriteIfBattled(enum ResidoTrainerIds);
+static void PrintTrainerSprite(enum ResidoTrainerIds, u32);
+static void PrintParty(enum ResidoTrainerIds, u32);
 static void SavePartySizeForRow(u32, u32);
 static u8 GetPartySizeForRow(u32);
 static u8 CalculateHorizontalMonPosition(u32);
 static u8 CalculateHorizontalMonCursorPosition(u32);
-static void PrintPartyMon(u32,struct Pokemon*, u32, u32 y);
+static void PrintPartyMon(enum ResidoTrainerIds ,struct Pokemon*, u32, u32 y);
 static void SetSpriteId(u32, u32, u32);
 static void DestroyPartySprites(u32);
 static void DestroyAllPartySprites(void);
 
-static u8 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
-static void PrintTrainerStateMark(u32, u32, u32);
+static u32 CreateMarkSprite(u32, u32, u16, void (*callback)(struct Sprite*));
+static void PrintTrainerStateMark(enum ResidoTrainerIds, u32, u32);
 static void PrintElevatedTrainerStateMark(void);
-static u8 GetMarkFromTrainerId(u32, bool32);
+static u16 GetMarkFromTrainerId(enum ResidoTrainerIds, bool32);
 
 static void MoveSprites(u32, u32);
 static void MoveTrainerForNameplate(s32);
@@ -338,13 +338,13 @@ static void ChangeBackground(u32);
 
 static void Task_TrainerInput(u8);
 
-static void HandleTrainerModeAPress(u8, u32);
-static bool8 CanPlayTrainerReveal(u32);
-static enum RevealIds GetRevealFromTrainerId(u32);
-static void HandleCharacterReveal(u8, u32);
+static void HandleTrainerModeAPress(u8, enum ResidoTrainerIds);
+static bool8 CanPlayTrainerReveal(enum ResidoTrainerIds);
+static enum RevealIds GetRevealFromTrainerId(enum ResidoTrainerIds);
+static void HandleCharacterReveal(u8, enum ResidoTrainerIds);
 static void PlayTrainerReveal(u8 taskId);
 static void Task_LoadReveal(u8 taskId);
-static void HandlePartyMonSelection(u32, u8);
+static void HandlePartyMonSelection(enum ResidoTrainerIds, u8);
 static void GoToPokemonSummary(u8);
 static struct Pokemon *Glass_GetTempParty(void);
 static void Task_LoadPokemonSummary(u8);
@@ -941,8 +941,8 @@ static void Task_ChangeToTrainerModeAndReloadScreen(u8 taskId)
         return;
 
     CleanUpLocationMode(taskId);
-    ToggleGlassMode();
     FreeGlassBackgrounds();
+    ToggleGlassMode();
     InitBgsAndLoadBackgroundGraphics(FALSE);
     BeginNormalPaletteFade(PALETTES_ALL,0,16,0,RGB_BLACK);
     SetUpTrainerMode(taskId);
@@ -1625,18 +1625,14 @@ static void Glass_PrintSortModeHeader(u32 windowId, u32 sort)
 {
     u32 fontId = FONT_GLASS_BAR;
 
-    u8 *percentString = Alloc(USER_MAX_LENGTH*2);
-
     StringCopy(gStringVar1, GetSortName(sort));
     StringExpandPlaceholders(gStringVar4, sText_Total);
-    StringCopy(percentString, gStringVar4);
+    StringCopy(gStringVar2, gStringVar4);
 
     if (!sort)
-        StringCopy(percentString,gText_ExpandedPlaceholder_Empty);
+        StringCopy(gStringVar2,gText_ExpandedPlaceholder_Empty);
 
-    AddTextPrinterParameterized4(windowId, fontId, 22, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, percentString);
-
-    Free(percentString);
+    AddTextPrinterParameterized4(windowId, fontId, 22, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar2);
 }
 
 static const u8 *GetSortName(u32 sort)
@@ -1671,14 +1667,11 @@ static void PrintLocationName(void)
     u32 fontId = FONT_GLASS_BAR;
     u32 x = 0;
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
-    u8 *locationName = Alloc(USER_MAX_LENGTH*2);
-    StringCopy(locationName,GetLocationName(GetChosenLocation()));
+    StringCopy(gStringVar1,GetLocationName(GetChosenLocation()));
 
-    x = CalculateLocationNameXPosition(fontId, locationName, letterSpacing);
+    x = CalculateLocationNameXPosition(fontId, gStringVar1, letterSpacing);
 
-    AddTextPrinterParameterized4(GLASS_WINDOW_HEADER, fontId, x, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,locationName);
-
-    Free(locationName);
+    AddTextPrinterParameterized4(GLASS_WINDOW_HEADER, fontId, x, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar1);
 }
 
 static u8 CalculateLocationNameXPosition(u32 fontId, u8* locationName, u32 letterSpacing)
@@ -1708,7 +1701,7 @@ static const u8 *GetHelpBarText(void)
     return GetHelpBarLocationText(GetLocationIdFromCurrentPosition());
 }
 
-static const u8 *GetHelpBarTrainerText(u32 trainerId)
+static const u8 *GetHelpBarTrainerText(enum ResidoTrainerIds trainerId)
 {
     if (IsTrainerDiscovered(trainerId))
         return sText_HelpBarTrainers;
@@ -1806,7 +1799,7 @@ static void PrintLocationStats(s32 locationId, u32 windowId)
     PrintLocationRemaining(locationId, windowId, fontId);
 }
 
-static u8 GetMapSectionFromTrainerId(u32 trainerId)
+static u8 GetMapSectionFromTrainerId(enum ResidoTrainerIds trainerId)
 {
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].mapSec;
 }
@@ -1827,7 +1820,7 @@ static void CountAllTrainersAndAdjustStats(u32 checkedMap, u8 *outStats)
     if ((processAll == FALSE) && (checkedMap < RESIDO_MAPSEC_START || checkedMap >= RESIDO_MAPSEC_END))
         return;
 
-    for (u32 trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
+    for (enum ResidoTrainerIds trainerId = 0; trainerId < TRAINERS_COUNT; trainerId++)
     {
         u32 mapSecId = GetMapSectionFromTrainerId(trainerId);
 
@@ -2179,11 +2172,9 @@ static void CalcSetScreenRows(u32 numList, u32 currentRow)
 
 static void UpdatePartySizes(void)
 {
-    u32 trainerId, rowIndex;
-
-    for (rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
+    for (u32 rowIndex = 0; rowIndex < GLASS_TRAINER_MAX_SHOWED; rowIndex++)
     {
-        trainerId = GetTrainerIdFromTrainerFromScreenRow(rowIndex);
+        enum ResidoTrainerIds trainerId = GetTrainerIdFromTrainerFromScreenRow(rowIndex);
         SavePartySizeForRow(gTrainers[GetCurrentDifficultyLevel()][trainerId].partySize,rowIndex);
     }
 }
@@ -2309,12 +2300,12 @@ static u8 GetNameplateSpriteId(void)
     return sListMenuState.interfaceSpriteIds[GLASS_UI_NAMEPLATE];
 }
 
-static u8 GetTrainerIdFromCurrentPosition(void)
+static enum ResidoTrainerIds GetTrainerIdFromCurrentPosition(void)
 {
     return GetTrainerIdFromPosition(GetCurrentTrainerRow());
 }
 
-static u8 GetTrainerIdFromPosition(u32 position)
+static enum ResidoTrainerIds GetTrainerIdFromPosition(u32 position)
 {
     return sGlassLists->TrainerList[position];
 }
@@ -2329,7 +2320,7 @@ static void PrintTrainerName(void)
     RemoveWindow(windowId);
 }
 
-static const u8 *GetTrainerName(u32 trainerId)
+static const u8 *GetTrainerName(enum ResidoTrainerIds trainerId)
 {
     if ((GetNumListElements() + 1) == GetCurrentTrainerRow())
         return gText_Cancel;
@@ -2362,7 +2353,7 @@ static u8* CreateTrainerNameWindowAddText(u32* windowId)
 
     u32 fontId = FONT_GLASS_TRAINER_NAME;
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
-    u32 trainerId = GetTrainerIdFromCurrentPosition();
+    enum ResidoTrainerIds trainerId = GetTrainerIdFromCurrentPosition();
 
     u32 x = CalculateTrainerNameHorizontalPosition(fontId, trainerId, letterSpacing);
     u32 y = GLASS_TRAINER_NAMEPLATE_VERTICAL_PADDING;
@@ -2380,7 +2371,7 @@ static void CopyTrainerNameWindowOntoNameplateMemory(u8* windowTileData, void *d
     CpuCopy32(windowTileData + MAX_u8 + 1, dest, windowWidth * (TILE_SIZE_1BPP / 2));
 }
 
-static u8 CalculateTrainerNameHorizontalPosition(u32 fontId, u32 trainerId, u32 letterSpacing)
+static u8 CalculateTrainerNameHorizontalPosition(u32 fontId, enum ResidoTrainerIds trainerId, u32 letterSpacing)
 {
     u32 stringWidth = GetStringWidth(fontId,GetTrainerName(trainerId),letterSpacing) + 1;
 
@@ -2804,12 +2795,12 @@ static void DestroyHoverSpriteId(void)
     InitalizeHoverSpriteId();
 }
 
-u32 GetTrainerType(u32 trainerId)
+u32 GetTrainerType(enum ResidoTrainerIds trainerId)
 {
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].trainerType;
 }
 
-bool32 IsTrainerDiscovered(u32 trainerId)
+bool32 IsTrainerDiscovered(enum ResidoTrainerIds trainerId)
 {
     if (gSaveBlock3Ptr->glass.DiscoveredTrainer[trainerId] == TRUE)
         return TRUE;
@@ -2822,12 +2813,10 @@ static bool8 IsTrainerDefeated(u32 trainerID)
     return FlagGet(TRAINER_FLAGS_START + trainerID);
 }
 
-static bool8 IsTrainerRematch(u32 trainerId)
+static bool8 IsTrainerRematch(enum ResidoTrainerIds trainerId)
 {
-    u32 tableIndex, trainerIndex;
-
-    for (tableIndex = 0; tableIndex < REMATCH_TABLE_ENTRIES; tableIndex++)
-        for (trainerIndex = 1; tableIndex < REMATCHES_COUNT ; trainerIndex++)
+    for (u32 tableIndex = 0; tableIndex < REMATCH_TABLE_ENTRIES; tableIndex++)
+        for (u32 trainerIndex = 1; trainerIndex < REMATCHES_COUNT; trainerIndex++)
             if (gRematchTable->trainerIds[trainerIndex] == trainerId)
                 return TRUE;
 
@@ -2841,7 +2830,7 @@ void SetTrainersDiscovered(void)
     SetTrainerDiscovered(gTrainerBattleParameter.params.opponentA);
 }
 
-void SetTrainerDiscovered(u32 trainerId)
+void SetTrainerDiscovered(enum ResidoTrainerIds trainerId)
 {
    gSaveBlock3Ptr->glass.DiscoveredTrainer[trainerId] = TRUE;
 }
@@ -3012,7 +3001,7 @@ static void EmptyTrainerList(void)
 
 static void PrintTrainerAndParty(u32 screenRow)
 {
-    u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
+    enum ResidoTrainerIds trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
 
     EmptyTrainerScreenRowSpriteIds(screenRow);
 
@@ -3024,7 +3013,7 @@ static void PrintTrainerAndParty(u32 screenRow)
     PrintParty(trainerId, screenRow);
 }
 
-static u8 GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
+static enum ResidoTrainerIds GetTrainerIdFromTrainerFromScreenRow(u32 screenRow)
 {
     u32 listNum = GetListPositionFromScreenRow(screenRow);
     return GetTrainerIdFromPosition(listNum);
@@ -3043,7 +3032,7 @@ u32 GetOverworldSpriteFromTrainerId(enum ResidoTrainerIds trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][trainerId].objectEventGraphicsId;
 }
 
-static u16 GetTrainerOWSpriteIfBattled(u32 trainerId)
+static u16 GetTrainerOWSpriteIfBattled(enum ResidoTrainerIds trainerId)
 {
     if (IsTrainerDiscovered(trainerId))
         return GetOverworldSpriteFromTrainerId(trainerId);
@@ -3051,7 +3040,7 @@ static u16 GetTrainerOWSpriteIfBattled(u32 trainerId)
         return OBJ_EVENT_GFX_UNKNOWN;
 }
 
-static void PrintTrainerSprite(u32 trainerId, u32 screenRow)
+static void PrintTrainerSprite(enum ResidoTrainerIds trainerId, u32 screenRow)
 {
     u32 y = CalculateVerticalTrainerPosition(screenRow);
     u32 x = (PARTY_HEIGHT / 2);
@@ -3063,7 +3052,7 @@ static void PrintTrainerSprite(u32 trainerId, u32 screenRow)
     SetSpriteId(screenRow,PARTY_SIZE,spriteId);
 }
 
-static void PrintParty(u32 trainerId, u32 row)
+static void PrintParty(enum ResidoTrainerIds trainerId, u32 row)
 {
     struct Pokemon trainerParty[PARTY_SIZE];
 
@@ -3094,7 +3083,7 @@ static u8 CalculateHorizontalMonCursorPosition(u32 column)
     return CalculateHorizontalMonPosition(column) - 8;
 }
 
-static void PrintPartyMon(u32 trainerId, struct Pokemon* trainerParty, u32 index, u32 row)
+static void PrintPartyMon(enum ResidoTrainerIds trainerId, struct Pokemon* trainerParty, u32 index, u32 row)
 {
     u32 x = CalculateHorizontalMonPosition(index);
     u32 y = CalculateVerticalTrainerPosition(row);
@@ -3155,7 +3144,7 @@ static void DestroyAllPartySprites(void)
         }
 }
 
-static u8 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
+static u32 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sprite*))
 {
     struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
     TempSpriteTemplate.tileTag = TileTag;
@@ -3166,7 +3155,7 @@ static u8 CreateMarkSprite(u32 x, u32 y, u16 TileTag, void (*callback)(struct Sp
     return CreateSprite(&TempSpriteTemplate,x,y,0);
 }
 
-static void PrintTrainerStateMark(u32 trainerId, u32 screenRow, u32 subpriority)
+static void PrintTrainerStateMark(enum ResidoTrainerIds trainerId, u32 screenRow, u32 subpriority)
 {
     u32 spriteId;
     u32 x = PARTY_HEIGHT;
@@ -3192,12 +3181,12 @@ static void PrintTrainerStateMark(u32 trainerId, u32 screenRow, u32 subpriority)
 static void PrintElevatedTrainerStateMark(void)
 {
     u32 screenRow = GetCurrentCursorScreenRowPosition();
-    u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
+    enum ResidoTrainerIds trainerId = GetTrainerIdFromTrainerFromScreenRow(screenRow);
     DestroyHoverSpriteId();
     PrintTrainerStateMark(trainerId, screenRow, 0);
 }
 
-static u8 GetMarkFromTrainerId(u32 trainerId, bool32 hover)
+static u16 GetMarkFromTrainerId(enum ResidoTrainerIds trainerId, bool32 hover)
 {
     u32 type = GetTrainerType(trainerId);
     bool32 rematch = IsTrainerRematch(trainerId);
@@ -3270,7 +3259,7 @@ static bool8 IsCurrentRowIsDefeatedTrainer(u32 row)
     if (GetCurrentCursorScreenRowPosition() != row)
         return FALSE;
 
-    u32 trainerId = GetTrainerIdFromTrainerFromScreenRow(row);
+    enum ResidoTrainerIds trainerId = GetTrainerIdFromTrainerFromScreenRow(row);
 
     if (trainerId == TRAINER_NONE)
         return FALSE;
@@ -3334,7 +3323,7 @@ static void Task_TrainerInput(u8 taskId)
     PrintHelpBar();
 }
 
-static void HandleTrainerModeAPress(u8 taskId,u32 trainerId)
+static void HandleTrainerModeAPress(u8 taskId,enum ResidoTrainerIds trainerId)
 {
     if (IsTrainerCursorAtBottom())
         SwitchToLocationMode(taskId);
@@ -3344,7 +3333,7 @@ static void HandleTrainerModeAPress(u8 taskId,u32 trainerId)
         HandlePartyMonSelection(trainerId, taskId);
 }
 
-static bool8 CanPlayTrainerReveal(u32 trainerId)
+static bool8 CanPlayTrainerReveal(enum ResidoTrainerIds trainerId)
 {
     if (!GetRevealFromTrainerId(trainerId))
         return FALSE;
@@ -3355,12 +3344,12 @@ static bool8 CanPlayTrainerReveal(u32 trainerId)
     return FALSE;
 }
 
-static enum RevealIds GetRevealFromTrainerId(u32 trainerId)
+static enum RevealIds GetRevealFromTrainerId(enum ResidoTrainerIds trainerId)
 {
     return (gTrainers[GetCurrentDifficultyLevel()][trainerId].characterRevealId);
 }
 
-static void HandleCharacterReveal(u8 taskId, u32 trainerId)
+static void HandleCharacterReveal(u8 taskId, enum ResidoTrainerIds trainerId)
 {
     if (!CanPlayTrainerReveal(trainerId))
         PlaySE(SE_BOO);
@@ -3376,7 +3365,7 @@ static void PlayTrainerReveal(u8 taskId)
 
 static void Task_LoadReveal(u8 taskId)
 {
-    u32 trainerId;
+    enum ResidoTrainerIds trainerId;
 
     if (gPaletteFade.active)
         return;
@@ -3388,7 +3377,7 @@ static void Task_LoadReveal(u8 taskId)
     FreeAllWindowBuffers();
 }
 
-static void HandlePartyMonSelection(u32 trainerId, u8 taskId)
+static void HandlePartyMonSelection(enum ResidoTrainerIds trainerId, u8 taskId)
 {
     if (!IsTrainerDiscovered(trainerId))
         PlaySE(SE_BOO);
@@ -3417,7 +3406,7 @@ static void Task_LoadPokemonSummary(u8 taskId)
     struct Pokemon *party = Glass_GetTempParty();
 
     u32 selectedMon = GetCurrentTrainerColumn();
-    u32 trainerId = GetTrainerIdFromCurrentPosition();
+    enum ResidoTrainerIds trainerId = GetTrainerIdFromCurrentPosition();
 
     u32 partySize = (CreateNPCTrainerPartyFromTrainer(party, &gTrainers[GetCurrentDifficultyLevel()][trainerId], TRUE, BATTLE_TYPE_TRAINER)) - 1;
 
@@ -3519,11 +3508,12 @@ static void FreeGlassStructs(void)
 
 static void FreeGlassBackgrounds(void)
 {
-    u32 backgroundId;
-    for (backgroundId = 0; backgroundId < BG_GLASS_COUNT; backgroundId++)
+    for (u32 backgroundId = 0; backgroundId < BG_GLASS_COUNT; backgroundId++)
     {
-        if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
+        if (IsAppTrainerMode() && backgroundId == BG0_GLASS_TEXT_CONTENT) // i have no idea why the game crashes without this
+            continue;
+
+        TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
     }
 }
 

@@ -1921,9 +1921,8 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
 // start autoSave
 #define eState               data[0]
 #define eSavingSpriteID      data[1]
-#define eSavingAnimFrame     data[4]
+#define eSavingComplete      data[2]
 
-static void Task_Saving(u8 taskId);
 static u8 Saving_Init(struct Task *task);
 static u8 Saving_WaitForFinish(struct Task *task);
 
@@ -1939,7 +1938,7 @@ void FldEff_Saving(void)
     Task_Saving(taskId);
 }
 
-static void Task_Saving(u8 taskId)
+void Task_Saving(u8 taskId)
 {
     while (sSavingStateFuncs[gTasks[taskId].eState](&gTasks[taskId]))
         ;
@@ -1975,29 +1974,26 @@ static bool8 Saving_Init(struct Task *task)
     StartSpriteAnim(sprite, 0);
     sprite->x = x2 + 8;
     sprite->y = y2 + 8;
-    sprite->data[0] = playerObjEvent->currentCoords.x;
-    sprite->data[1] = playerObjEvent->currentCoords.y;
 
-    task->eSavingAnimFrame = 0;
+    task->eSavingComplete = FALSE;
     task->eState++;
     return FALSE;
 }
 
 static bool8 Saving_WaitForFinish(struct Task *task)
 {
-    FieldEffectActiveListRemove(FLDEFF_SAVING);
-    DestroyTask(FindTaskIdByFunc(Task_Saving));
-    task->eSavingAnimFrame++;
+    if (task->eSavingComplete)
+    {
+        FieldEffectFreeGraphicsResources(&gSprites[task->eSavingSpriteID]);
+        FieldEffectActiveListRemove(FLDEFF_SAVING);
+        DestroyTask(FindTaskIdByFunc(Task_Saving));
+    }
     return FALSE;
 }
 
 void SavingSpriteCallback(struct Sprite *sprite)
 {
-    if(FlagGet(FLAG_TEMP_F))
-    {
-        FieldEffectFreeGraphicsResources(sprite);
-        FlagClear(FLAG_TEMP_F);
-    }
+    //Dummy Callback for now
 }
 // End autoSave
 u32 FldEff_OWE_SpawnAnim(void)

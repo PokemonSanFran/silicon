@@ -6,9 +6,11 @@ script TryAutoSave
 
 script DoAutoSaveFieldEffect
 {
+    lockall
     dofieldeffect(FLDEFF_SAVING)
-    waitfieldeffect(FLDEFF_SAVING)
+    delay(1)
     callnative(DoAutoSave)
-    setflag(FLAG_TEMP_F)
+    waitfieldeffect(FLDEFF_SAVING)
+    releaseall
 }
 

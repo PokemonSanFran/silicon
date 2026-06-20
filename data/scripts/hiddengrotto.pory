@@ -13,6 +13,7 @@ script Hiddengrotto_EnterGrotto_Dialogue{
 
     closemessage
     special(HiddenGrotto_LoadGrottoAndWarpPlayer)
+	waitstate
     release
     end
 }
