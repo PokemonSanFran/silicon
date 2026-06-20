@@ -145,7 +145,6 @@ static u32 CountFavoriteQuests(void);
 u32 CountQuestsToSkip(void);
 bool32 ShouldSkipCountingQuests(enum QuestIdList questId);
 
-static void PopulateQuestName(u8 countQuest);
 static void PopulateListRowNameAndId(u8 row, u8 countQuest);
 static bool8 DoesQuestHaveChildrenAndNotInactive(s32 itemId);
 
@@ -1149,7 +1148,6 @@ u8 GenerateList(void)
             offset++;
         }
 
-        //PopulateQuestName(selectedQuestId);
         PopulateListRowNameAndId(newRow, selectedQuestId);
     }
     return numRow + offset;
@@ -1409,16 +1407,6 @@ u32 CountQuestsToSkip(void)
 bool32 ShouldSkipCountingQuests(enum QuestIdList questId)
 {
     return sSideQuests[questId].skipQuestWhenCounting;
-}
-
-void PopulateQuestName(u8 countQuest)
-{
-    if (QuestMenu_GetSetQuestState(countQuest, FLAG_GET_ACTIVE)) {
-        StringExpandPlaceholders(gStringVar4, sSideQuests[countQuest].name);
-        StringAppend(gStringVar1, gStringVar4);
-    } else {
-        StringAppend(gStringVar1, sText_Unk);
-    }
 }
 
 void PopulateListRowNameAndId(u8 row, u8 countQuest)
