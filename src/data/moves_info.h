@@ -22037,7 +22037,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
 
     [MOVE_OPTION_TEST_MOVE] =
     {
-        .name = COMPOUND_STRING("Option Test Move"),
+        .name = COMPOUND_STRING("Option Test"),
         .description = COMPOUND_STRING("Test move only"),
         .effect = EFFECT_OPTION_TEST,
         .power = 0,
