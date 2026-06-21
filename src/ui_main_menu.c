@@ -446,7 +446,7 @@ static const u8* const sMainMenuOptionNameLUT[] =
     [MAINMENU_NEWGAME] = COMPOUND_STRING("New Game"),
     [MAINMENU_ERASE] = COMPOUND_STRING("Erase All Data"),
     [MAINMENU_OPTIONS] = COMPOUND_STRING("Options"),
-    [MAINMENU_MENU_COUNT] = gText_Blank,
+    [MAINMENU_MENU_COUNT] = gText_ExpandedPlaceholder_Empty,
 };
 
 static const u8* const sTrainerCardsLUT[] =
@@ -470,9 +470,9 @@ static const u8* const sMainMenuTimeLUT[] =
 static const u8* const sMainMenuDifficultyNameLUT[] =
 {
     [BATTLE_OPTION_DIFFICULTY_EASY] = COMPOUND_STRING(" Cinematic"),
-    [BATTLE_OPTION_DIFFICULTY_NORMAL]  = gText_Blank,
+    [BATTLE_OPTION_DIFFICULTY_NORMAL]  = gText_ExpandedPlaceholder_Empty,
     [BATTLE_OPTION_DIFFICULTY_HARD]   = COMPOUND_STRING(" Challenge"),
-    [BATTLE_OPTION_DIFFICULTY_COUNT]    = gText_Blank,
+    [BATTLE_OPTION_DIFFICULTY_COUNT]    = gText_ExpandedPlaceholder_Empty,
 };
 
 
@@ -845,13 +845,14 @@ static void SwitchMode(u8 taskId)
         RemoveWindow(windowId);
     }
 
+    gSprites[GetMenuCursorSpriteId()].invisible = TRUE;
     FreeAllWindowBuffers();
     Free(sBgTilemapBuffer[BG0_MAINMENU_TEXT]);
     sBgTilemapBuffer[BG0_MAINMENU_TEXT] = AllocZeroed(BG_SCREEN_SIZE);
     memset(sBgTilemapBuffer[BG0_MAINMENU_TEXT],0,BG_SCREEN_SIZE);
     ScheduleBgCopyTilemapToVram(BG0_MAINMENU_TEXT);
 
-    MainMenu_SetUp(taskId);
+    gTasks[taskId].func = MainMenu_SetUp;
 }
 
 static void ToggleStatsBackground(void)
@@ -972,7 +973,7 @@ static void PrintMainMenuOptions(void)
 
         y = MainMenu_SetTextVerticalPosition(y, mode, optionIndex, letterHeight);
     }
-
+    gSprites[GetMenuCursorSpriteId()].invisible = FALSE;
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -1104,7 +1105,7 @@ static bool32 AreSettingsHardcore(void)
 
 static void BufferDifficultyStars(void)
 {
-    StringCopy(gStringVar4, gText_Blank);
+    StringCopy(gStringVar4, gText_ExpandedPlaceholder_Empty);
     for (u32 starIndex = 0; starIndex <= CalculateDifficultyStars(); starIndex++)
         StringAppend(gStringVar4, COMPOUND_STRING("{EMOJI_HEART}"));
 }
@@ -1371,7 +1372,7 @@ static void PrintPlayerParty(void)
 
     for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
     {
-        if(GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) == SPECIES_NONE)
+        if(GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SPECIES) == SPECIES_NONE)
             break;
 
         PrintSpeciesIcon(partyIndex, x, y);
@@ -1381,7 +1382,7 @@ static void PrintPlayerParty(void)
 
 static void PrintSpeciesIcon(u32 slot, u32 x, u32 y)
 {
-    struct Pokemon *mon = &gPlayerParty[slot];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
     u32 species = ReturnTransformationIfConditionMet(mon);
     u32 spriteId;
 

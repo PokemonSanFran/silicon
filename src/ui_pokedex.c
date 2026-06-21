@@ -56,8 +56,6 @@ static const u32* GetRelevantTilemap(u32);
 static void LoadPokedexPalettes(void);
 static void PlaySoundStartFadeQuitApp(u8);
 static void Task_WaitFadeAndExitGracefully(u8);
-static void FreeResources(void);
-static void FreeStructs(void);
 
 static void SpeciesGrid_ChangeSortAndReload(void);
 static u32 SpeciesGrid_IncrementSort(void);
@@ -314,7 +312,7 @@ extern const u8 nullOptionLUT[];
 
 static const u8 sSpeciesListMenuFrameGfx[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_frame.png", ".4bpp");
 
-static const u16 sTypePalettes[] = INCBIN_U16("graphics/types/types.gbapal");
+const u16 gTypes_Palettes[] = INCBIN_U16("graphics/types/types.gbapal");
 static const u16 pokedexPalettesText[] = INCGFX_U16("graphics/pokedex/ui/palettes/text.pal", ".gbapal");
 
 static const u32 pokedexSpeciesListTiles[] = INCGFX_U32("graphics/pokedex/ui/species_list_screen.png", ".4bpp.smol");
@@ -338,13 +336,24 @@ static const u32 speciesListCaptureIndicator_Alola[] = INCGFX_U32("graphics/poke
 static const u32 speciesListUncaughtIndicator_Alola[] = INCGFX_U32("graphics/pokedex/ui/species_list/emptyfolder_alola.png", ".4bpp.smol");
 static const u32 speciesListFileIcon[] = INCGFX_U32("graphics/pokedex/ui/species_list/file.png", ".4bpp.smol");
 static const u8 speciesListMenuCursor[] = INCGFX_U8("graphics/pokedex/ui/species_list/menu_cursor_bmp.png", ".4bpp");
-static const u32 sTypes_Gfx[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
+const u32 gTypes_Gfx13x11[] = INCBIN_U32("graphics/ui_menus/types/13x11/types.4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_Type13x11 =
 {
-    .data = sTypes_Gfx,
+    .data = gTypes_Gfx13x11,
     .size = NUMBER_OF_MON_TYPES * (16 * 16),
     .tag = TAG_TERA_TYPE
+};
+
+const struct SpriteTemplate gSpriteTemplate_Type13x11 =
+{
+    .tileTag = TAG_TERA_TYPE,
+    .paletteTag = TAG_TERA_TYPE,
+    .oam = &sOamData_Type,
+    .anims = sSpriteAnimTable_Type,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 static const u8 *const sHelpBarTexts[] =
@@ -374,7 +383,7 @@ static const u8 *const sSpeciesMenuTexts[] =
 
 static const u8 *const sortOrderNames[] =
 {
-    [ORDER_NUMERICAL]    = gText_Blank,
+    [ORDER_NUMERICAL]    = gText_ExpandedPlaceholder_Empty,
     [ORDER_ALPHABETICAL] = COMPOUND_STRING("&sort=alpha"),
     [ORDER_HEAVIEST]     = COMPOUND_STRING("&sort=heavy"),
     [ORDER_LIGHTEST]     = COMPOUND_STRING("&sort=light"),
@@ -422,7 +431,7 @@ static void Pokedex_InitializeAndSaveCallback(MainCallback callback)
         return;
     }
     firstOpen = TRUE;
-    SaveCallbackToPokedex(CB2_StartMenu_ReturnToUI);
+    SaveCallbackToPokedex(callback);
     SetMainCallback2(Pokedex_SetupCallback);
 }
 
@@ -435,12 +444,12 @@ static bool32 AllocateStructs(void)
     sFilterSet = AllocZeroed(sizeof(struct FiltersSet));
     sFilterSetTemp = AllocZeroed(sizeof(struct FiltersSet));
 
-    return (sPokedexState == NULL
-            && sPokedexLists == NULL
-            && sPokedexGridResources == NULL
-            && sSpeciesListMenu == NULL
-            && sFilterSet == NULL
-            && sFilterSetTemp == NULL
+        return (sPokedexState == NULL
+            || sPokedexLists == NULL
+            || sPokedexGridResources == NULL
+            || sSpeciesListMenu == NULL
+            || sFilterSet == NULL
+            || sFilterSetTemp == NULL
             );
 }
 
@@ -497,8 +506,8 @@ void Pokedex_SetupCallback(void)
             gMain.state++;
             break;
         case 6:
+            ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
             ClearAllWindows();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             SpeciesGrid_ResetInterfaceSpriteIds();
             SpeciesGrid_PrintMonCursor();
             SpeciesGrid_PrintScrollbar();
@@ -521,6 +530,10 @@ void Pokedex_SetupCallback(void)
             gMain.state++;
             break;
         case 7:
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            gMain.state++;
+        case 8:
             firstOpen = FALSE;
             SetVBlankCallback(Pokedex_VBlankCB);
             SetMainCallback2(Pokedex_MainCB);
@@ -753,7 +766,7 @@ static void Task_WaitFadeAndExitGracefully(u8 taskId)
     SetMainCallback2(sPokedexState->savedCallback);
     SpeciesGrid_SetSavedSpecies(SpeciesGrid_GetCurrentSpecies());
     SpeciesGrid_SetSavedSort(SpeciesGrid_GetSort());
-    FreeResources();
+    Pokedex_FreeResources();
     DestroyTask(taskId);
 }
 
@@ -765,7 +778,7 @@ void Pokedex_FadescreenAndExitGracefully(void)
     SetMainCallback2(Pokedex_MainCB);
 }
 
-static void FreeResources(void)
+void Pokedex_FreeResources(void)
 {
     SpeciesGrid_RemoveMonCursorSprite();
     SpeciesGrid_RemoveScrollbarSpriteId();
@@ -779,18 +792,19 @@ static void FreeResources(void)
     FreeSpritePalettesResetSpriteData();
 
     SpeciesFilter_ResetToDefault();
-    FreeStructs();
+    FreePokedexStructs();
     FreeBackgrounds();
     FreeAllWindowBuffers();
 }
 
-static void FreeStructs(void)
+void FreePokedexStructs(void)
 {
     TRY_FREE_AND_SET_NULL(sPokedexState);
     TRY_FREE_AND_SET_NULL(sPokedexLists);
     TRY_FREE_AND_SET_NULL(sPokedexGridResources);
     TRY_FREE_AND_SET_NULL(sSpeciesListMenu);
     TRY_FREE_AND_SET_NULL(sFilterSet);
+    //TRY_FREE_AND_SET_NULL(sFilterSetTemp);
 }
 
 void FreeBackgrounds(void)
@@ -799,7 +813,7 @@ void FreeBackgrounds(void)
 
     for (backgroundId = 0; backgroundId < BG_POKEDEX_COUNT; backgroundId++)
         if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
+            TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 }
 
 static void SpeciesGrid_ChangeSortAndReload(void)
@@ -1273,7 +1287,7 @@ u32 GetPokedexPercentage(void)
 
 void LoadTypeSpritesAndPalettes(void)
 {
-    LoadPalette(sTypePalettes, OBJ_PLTT_ID(PAL_SLOT_MON_TYPE), 3 * PLTT_SIZE_4BPP);
+    LoadPalette(gTypes_Palettes, OBJ_PLTT_ID(PAL_SLOT_MON_TYPE), 3 * PLTT_SIZE_4BPP);
     LoadCompressedSpriteSheet(&sSpriteSheet_Type13x11);
 }
 
@@ -1976,7 +1990,7 @@ static void SpeciesData_PrintSpeciesNumAndDesc(u32 shownSpecies, u32* padding)
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,CountDigits(RESIDO_DEX_COUNT));
     CopyMonCategoryText(shownSpecies,gStringVar2);
 
-    end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1} {STR_VAR_2}"));
+    end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("#{STR_VAR_1} {STR_VAR_2}"));
 
     BreakStringNaive(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, GetWindowAttribute(windowId, WINDOW_WIDTH));
@@ -2010,7 +2024,7 @@ static void SpeciesData_PrintCaught(enum PokedexPageWindows windowId, u32 fontId
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Caught {STR_VAR_1}/{STR_VAR_2}"));
     StringCopy(dexString, gStringVar4);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,dexString);
-    Free(dexString);
+    TRY_FREE_AND_SET_NULL(dexString);
 }
 
 static void SpeciesData_PrintFormName(u32 species, u32* padding)
@@ -2184,7 +2198,7 @@ static void SpeciesData_CreateTypeSprite(void)
         if (oldSpriteId != SPRITE_NONE)
             return;
 
-        SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x11, 0, 0, 2));
+        SpeciesData_SaveTypeSpriteId(typeIndex, CreateSprite(&gSpriteTemplate_Type13x11, 0, 0, 2));
         SpeciesData_SetTypeSpriteVisibility(typeIndex, TRUE);
     }
 }
@@ -2393,12 +2407,12 @@ static void SpeciesGrid_PrintMonNumber(u32 rowIndex, u32 columnIndex, u32 specie
     AddTextPrinterParameterized4(windowId, fontId, x, y, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), (GetFontAttribute(fontId, FONTATTR_LINE_SPACING)), sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar4);
 }
 
-u32 ConvertSpeciesIdToResidoDex(u32 speciesId)
+u32 ConvertSpeciesIdToResidoDex(enum Species speciesId)
 {
     return gSpeciesInfo[speciesId].residoDexNum;
 }
 
-bool8 SpeciesIsResidoDex(u32 speciesId)
+bool8 SpeciesIsResidoDex(enum Species speciesId)
 {
     for (enum ResidoDexNumbers speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
         if (speciesId == gResidoPokedexOrder_Numerical[speciesIndex])
@@ -3177,3 +3191,31 @@ bool32 SpeciesGrid_GetShouldPlayCry(void)
 {
     return sPokedexState->shouldPlayCry;
 }
+
+void Pokedex_SaveDexnavData(struct DexnavSavedData savedData)
+{
+    memcpy(&sPokedexState->dexnavSavedData,&savedData,sizeof(struct DexnavSavedData));
+}
+
+void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId)
+{
+    if (AllocateStructs())
+    {
+        SetMainCallback2(savedData.savedCallback);
+        return;
+    }
+
+    SpeciesGrid_ResetInterfaceSpriteIds();
+    SpeciesData_ResetTypeSpriteId();
+
+    Pokedex_SaveDexnavData(savedData);
+    ParentDisplay_SetFutureSpeciesId(savedData.species);
+    SaveCallbackToPokedex(savedData.savedCallback);
+    gTasks[taskId].tTargetPageId = POKEDEX_PAGE_INFORMATION;
+    SetAndSetUpCurrentPage(taskId);
+}
+
+/*
+ * TODO for pages
+    POKEDEX_PAGE_LOCATION,
+*/

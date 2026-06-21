@@ -94,11 +94,9 @@ COMMON_DATA u32 gDamagedSaveSectors = 0;
 COMMON_DATA u32 gSaveCounter = 0;
 COMMON_DATA struct SaveSector *gReadWriteSector = NULL; // Pointer to a buffer for reading/writing a sector
 COMMON_DATA u16 gIncrementalSectorId = 0;
-COMMON_DATA u16 gSaveUnusedVar = 0;
 COMMON_DATA u16 gSaveFileStatus = 0;
 COMMON_DATA MainCallback gGameContinueCallback = NULL;
 COMMON_DATA struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT] = {0};
-COMMON_DATA u16 gSaveUnusedVar2 = 0;
 COMMON_DATA u16 gSaveAttemptStatus = 0;
 
 EWRAM_DATA struct SaveSector gSaveDataBuffer = {0}; // Buffer used for reading/writing sectors
@@ -1127,5 +1125,24 @@ void SetCallbackFromSaveStatus(void)
 
     SetMainCallback2(callback);
 }
+
+bool8 IsSaveCorruptOrError(void)
+{
+    if (IsSaveFileCorrrupt())
+        return TRUE;
+    
+    return IsSaveFileDamaged();
+}
+
+bool8 IsSaveFileCorrrupt(void)
+{
+    return (gSaveFileStatus == SAVE_STATUS_CORRUPT);
+}
+
+bool8 IsSaveFileDamaged(void)
+{
+    return (gSaveFileStatus == SAVE_STATUS_ERROR);
+}
+
 // End bootSequence
 

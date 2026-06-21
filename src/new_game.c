@@ -1,4 +1,5 @@
 #include "global.h"
+#include "clock.h"
 #include "new_game.h"
 #include "random.h"
 #include "pokemon.h"
@@ -236,7 +237,7 @@ void NewGameInitData(void)
     ClearPlayerLinkBattleRecords();
     InitSeedotSizeRecord();
     InitLotadSizeRecord();
-    gPlayerPartyCount = 0;
+    gPartiesCount[B_TRAINER_PLAYER] = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
@@ -250,6 +251,7 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
+    UpdateDailySeed();
     WarpToTruck();
     if (IS_FRLG)
         RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
@@ -328,6 +330,8 @@ static void ResetItemFlags(void)
 #endif
 }
 
+// Start dexNav
+/*
 static void ResetDexNav(void)
 {
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
@@ -335,6 +339,13 @@ static void ResetDexNav(void)
 #endif
     gSaveBlock3Ptr->dexNavChain = 0;
 }
+*/
+static void ResetDexNav(void)
+{
+    memset(gSaveBlock2Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock2Ptr->dexNavSearchLevels));
+    gSaveBlock3Ptr->dexNavChain = 0;
+}
+// End dexNav
 
 // Start bootSequence
 void ResetBagAndParty(void)

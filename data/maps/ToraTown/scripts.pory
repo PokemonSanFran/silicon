@@ -12,6 +12,7 @@ mapscripts ToraTown_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_SHARPRISESPIRE_CONFERENCE_STATE, DEFEATED_THIRD_LEADER: WowYoureStrong_WalkToPlayer_Script
+        VAR_TEMP_1, 0: SwagbagContinued_Dialogue_StartDexnav
         FLAG_VISITED_TORA_TOWN, FALSE: Generic_Mappreview
     ]
 }

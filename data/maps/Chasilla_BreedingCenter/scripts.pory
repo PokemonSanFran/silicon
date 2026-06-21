@@ -162,7 +162,6 @@ script BreedingCenter_Script_DepositMonAtDaycare
     closemessage
     fadescreen(FADE_TO_BLACK)
     special(ChooseSendDaycareMon)
-    waitstate
     goto_if_eq(VAR_0x8004,PARTY_NOTHING_CHOSEN,BreedingCenter_Dialogue_NeverMind)
 
     specialvar(VAR_0x8005,GetSelectedMonNicknameAndSpecies)
@@ -724,7 +723,6 @@ script BreedingCenter_Script_AskPlayerGene
     closemessage
 
     special(ChoosePartyMon)
-    waitstate
     goto_if_eq(VAR_0x8004,PARTY_NOTHING_CHOSEN,BreedingCenter_Dialogue_NeverMind)
 
     callnative(BufferMonNicknameOrEggName)
@@ -732,7 +730,6 @@ script BreedingCenter_Script_AskPlayerGene
     closemessage
     fadescreen(FADE_TO_BLACK)
     callnative(EditPokemonIndividualValues)
-    waitstate
     callnative(CompareOldNewIndividualValues)
     goto(BreedingCenter_Script_ChargeForStatChanges)
 }

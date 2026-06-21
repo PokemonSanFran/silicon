@@ -258,7 +258,6 @@ script BattleTower_EventScript_TryEnterChallenge{
         case ATTENDANT_LINK_MULTIS: setvar(VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE)
     }
     special(ChoosePartyForBattleFrontier)
-    waitstate
     goto_if_eq(VAR_RESULT, 0, BattleTower_EventScript_LoadPartyCancelChallenge)
     msgbox(format("Before entering a BATTLE ROOM, your progress must be saved. Is that okay?"), MSGBOX_YESNO)
     switch(var(VAR_RESULT)){
@@ -362,7 +361,6 @@ script BattleTower_EventScript_TryCableLink{
     setvar(VAR_0x8005, 0)
 
     special(TryBattleLinkup)
-    waitstate
     switch(var(VAR_RESULT)){
         case LINKUP_SUCCESS: goto(BattleTower_EventScript_CableLinkSuccessful)
         case LINKUP_SOMEONE_NOT_READY: goto(CableClub_EventScript_AbortLinkSomeoneNotReady)
@@ -427,7 +425,6 @@ script BattleTower_EventScript_LinkSuccessful{
     waitmessage
     tower_save(CHALLENGE_STATUS_SAVING)
     special(SaveForBattleTowerLink)
-    waitstate
     playse(SE_SAVE)
     waitse
     return
@@ -551,7 +548,6 @@ script BattleTower_EventScript_WaitForLinkOpponentLoad{
     }
 
     call(BattleTower_EventScript_ShowYouToBattleRoom)
-    clearflag(FLAG_CANCEL_RESTORED_BATTLE_ROOM)
     setflag(FLAG_HIDE_FACILITY_OPPONENT)
     setvar(VAR_FACILITY_CHALLENGE_STATUS, 0)
         fadeblackandsetremovewarpfadeflag

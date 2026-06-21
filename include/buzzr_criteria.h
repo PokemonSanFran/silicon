@@ -52,5 +52,8 @@ void TweetCriteria_Quest_RestorezenzugymComplete(void);
 void TweetCriteria_Quest_RestorehodoucityFoundLeader(void);
 void TweetCriteria_Quest_RestorehodoucityAssigned(void);
 void TweetCriteria_Quest_RestorehodoucityComplete(void);
+void TweetCriteria_Quest_ImprovbattlingActive(void);
+void TweetCriteria_Quest_ImprovbattlingComplete(void);
+void TweetCriteria_Quest_Hang20_FirstZapRead(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H

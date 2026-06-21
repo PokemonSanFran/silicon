@@ -145,7 +145,6 @@ static u32 CountFavoriteQuests(void);
 u32 CountQuestsToSkip(void);
 bool32 ShouldSkipCountingQuests(enum QuestIdList questId);
 
-static void PopulateQuestName(u8 countQuest);
 static void PopulateListRowNameAndId(u8 row, u8 countQuest);
 static bool8 DoesQuestHaveChildrenAndNotInactive(s32 itemId);
 
@@ -1149,7 +1148,6 @@ u8 GenerateList(void)
             offset++;
         }
 
-        PopulateQuestName(selectedQuestId);
         PopulateListRowNameAndId(newRow, selectedQuestId);
     }
     return numRow + offset;
@@ -1409,16 +1407,6 @@ u32 CountQuestsToSkip(void)
 bool32 ShouldSkipCountingQuests(enum QuestIdList questId)
 {
     return sSideQuests[questId].skipQuestWhenCounting;
-}
-
-void PopulateQuestName(u8 countQuest)
-{
-    if (QuestMenu_GetSetQuestState(countQuest, FLAG_GET_ACTIVE)) {
-        StringExpandPlaceholders(gStringVar4, sSideQuests[countQuest].name);
-        StringAppend(gStringVar1, gStringVar4);
-    } else {
-        StringAppend(gStringVar1, sText_Unk);
-    }
 }
 
 void PopulateListRowNameAndId(u8 row, u8 countQuest)
@@ -1700,7 +1688,7 @@ static void GenerateQuestDescription(s32 questId)
 {
     if (questId == LIST_CANCEL)
     {
-        StringCopy(gStringVar1,gText_Blank);
+        StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
     }
     else if (GetCurrentQuestSubquestState() == FALSE) {
         if (IsQuestInactiveState(questId) == TRUE) {
@@ -1720,7 +1708,7 @@ static void GenerateQuestDescription(s32 questId)
             StringCopy(gStringVar1,
                     sSideQuests[sStateDataPtr->parentQuest].subquests[questId].desc);
         } else {
-            StringCopy(gStringVar1, gText_Blank);
+            StringCopy(gStringVar1, gText_ExpandedPlaceholder_Empty);
         }
     }
 
@@ -1776,7 +1764,7 @@ const u8 *GetQuestMap(s32 questId)
 const u8 *GetQuestRewardDesc(s32 questId)
 {
     if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
-        return gText_Blank;
+        return gText_ExpandedPlaceholder_Empty;
 
     return sSideQuests[questId].desc[FLAG_GET_REWARD];
 }
@@ -1897,6 +1885,27 @@ static void PrintAllQuestSprites(void)
     }
 }
 
+static void FreeQuestSpritePalette(u32 questId, enum QuestMenuRows row)
+{
+    u32 entityId = GetQuestSpriteEntityId(questId);
+    u32 type = GetQuestSpriteType(questId);
+    switch (type)
+    {
+        case QUEST_SPRITE_TYPE_PKMN:
+            FreeSpritePaletteByTag(entityId + OBJ_EVENT_MON);
+            break;
+        default:
+        case QUEST_SPRITE_TYPE_OBJECT:
+            const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(entityId);
+            FreeSpritePaletteByTag(graphicsInfo->paletteTag);
+            break;
+        case QUEST_SPRITE_TYPE_CANCEL:
+        case QUEST_SPRITE_TYPE_ITEM:
+            FreeSpritePaletteByTag(GetQuestSpriteTags(row));
+            break;
+    }
+
+}
 static void RemoveAllQuestSprites(void)
 {
     for (enum QuestMenuRows rowIndex = 0; rowIndex < QUEST_MENU_UX_ROW_COUNT; rowIndex++)
@@ -1909,9 +1918,11 @@ static void RemoveAllQuestSprites(void)
 
         DestroySprite(sprite);
         FieldEffectFreeTilesIfUnused(tileStart);
-
+        FreeQuestSpritePalette(quest, rowIndex);
         if (quest == QUEST_NONE)
+        {
             FreeSpriteTilesByTag(tag);
+        }
 
         SetQuestSpriteId(rowIndex, SPRITE_NONE);
         SetQuestSpriteTags(rowIndex,TAG_NONE);
@@ -1937,7 +1948,7 @@ static u32 GetQuestSpriteId(enum QuestMenuRows row)
     return sStateDataPtr->questSpriteInfo[row].spriteId;
 }
 
-static u32 UNUSED GetQuestSpriteTags(enum QuestMenuRows row)
+static u32 GetQuestSpriteTags(enum QuestMenuRows row)
 {
     return sStateDataPtr->questSpriteInfo[row].tileTag;
 }
@@ -2015,8 +2026,8 @@ static void PrintQuestSprite(s32 questId, enum QuestMenuRows row)
             spriteId = AddItemIconSprite(tag,tag,entityId);
             if (spriteId != MAX_SPRITES)
             {
-                gSprites[spriteId].x2 = x;
-                gSprites[spriteId].y2 = y;
+                gSprites[spriteId].x = x;
+                gSprites[spriteId].y = y;
             }
             break;
     }
@@ -2244,7 +2255,7 @@ static void GenerateFilterAmountName(void)
         }
         else
         {
-            StringCopy(gStringVar1,gText_Blank);
+            StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
         }
 
         ConvertIntToDecimalStringN(gStringVar2, GetDenominatorQuests(), STR_CONV_MODE_LEFT_ALIGN,digits);
@@ -2398,6 +2409,7 @@ void EnterSubsavedQuestModeAndCleanUp(u8 taskId, s16 *data,
 {
     if (DoesQuestHaveChildrenAndNotInactive(input))
     {
+        RemoveAllQuestSprites();
         PrepareFadeOut(taskId);
         PlaySE(SE_SELECT);
         sStateDataPtr->parentQuest = input;
@@ -2409,6 +2421,7 @@ void EnterSubsavedQuestModeAndCleanUp(u8 taskId, s16 *data,
 void IncrementFilterAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_INCREMENT);
         Task_QuestMenuCleanUp(taskId);
@@ -2418,6 +2431,7 @@ void IncrementFilterAndCleanUp(u8 taskId)
 void DecrementFilterAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_DECREMENT);
         Task_QuestMenuCleanUp(taskId);
@@ -2427,6 +2441,7 @@ void DecrementFilterAndCleanUp(u8 taskId)
 void IncrementSortAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_ALPHA);
         Task_QuestMenuCleanUp(taskId);
@@ -2437,6 +2452,7 @@ void ToggleFavoriteAndCleanUp(u8 taskId, u8 selectedQuestId)
 {
     if (!GetCurrentQuestSubquestState()
             && !CheckSelectedIsCancel(selectedQuestId)) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageFavorites(selectedQuestId);
         sStateDataPtr->restoreCursor = FALSE;
@@ -2453,6 +2469,7 @@ bool8 CheckSelectedIsCancel(u8 selectedQuestId)
 }
 void ReturnFromSubquestAndCleanUp(u8 taskId)
 {
+    RemoveAllQuestSprites();
     PrepareFadeOut(taskId);
     PlaySE(SE_SELECT);
     ManageMode(QUEST_ACTION_SUB);

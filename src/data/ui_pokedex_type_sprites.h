@@ -166,17 +166,6 @@ static const union AnimCmd *const sSpriteAnimTable_Type[NUMBER_OF_MON_TYPES] =
     [TYPE_STELLAR] = sSpriteAnim_TypeStellar
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Type13x11 =
-{
-    .tileTag = TAG_TERA_TYPE,
-    .paletteTag = TAG_TERA_TYPE,
-    .oam = &sOamData_Type,
-    .anims = sSpriteAnimTable_Type,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
 static const struct SpriteTemplate sSpriteTemplate_Type13x13 =
 {
     .tileTag = TAG_TERA_TYPE,

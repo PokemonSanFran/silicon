@@ -158,6 +158,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_QIU_WILDFIRERISKWORKER",
       "graphics_id": "OBJ_EVENT_GFX_ARTIST",
       "x": 7,
       "y": 14,
@@ -167,7 +168,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Wildfirerisk_Interact_Filip_Script",
+      "script": "Wildfirerisk_Script_Interact",
       "flag": "FLAG_TEMP_8"
     },
     {

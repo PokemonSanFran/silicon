@@ -40,7 +40,7 @@
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
-#include "dexnav.h"
+#include "ui_dexnav.h"
 #include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
@@ -151,6 +151,8 @@
 // save overwrite
 #define START_SAVE_OVERWRITE_X_FULLSCREEN   (-256)
 #define START_SAVE_OVERWRITE_X_CENTERSCREEN (-380)
+
+#define START_SAVE_OVERWRITE_BTN_COMBO      (A_BUTTON | START_BUTTON)
 
 enum StartMenuBackgrounds
 {
@@ -851,7 +853,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, NULL, START_SIGNAL_OKAY
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexnavFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {
@@ -997,9 +999,9 @@ void StartMenu_HoldPreviousSave(void)
     memcpy(&sStartMenuPreviousSave.rgbValues, &gSaveBlock3Ptr->rgbValues, (NUM_CUSTOM_COLOR_OPTIONS * NUM_COLOR_OPTIONS) * sizeof(u8));
 
     memset(sStartMenuPreviousSave.partySpecies, SPECIES_NONE, PARTY_SIZE * sizeof(u16));
-    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
     {
-        sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
     }
 
     memcpy(&sStartMenuPreviousSave.location, &gSaveBlock1Ptr->location, sizeof(struct WarpData));
@@ -1388,12 +1390,12 @@ static void StartMainSprite_App(void)
 static void StartMainSprite_PartyMon(void)
 {
     u8 *spriteIds = sStartMenuDataPtr->spriteIds;
-    struct Pokemon *mon = gPlayerParty;
+    struct Pokemon *mon = gParties[B_TRAINER_PLAYER];
     struct Sprite *sprite = NULL;
     u32 species, healthPercentage, status;
     bool32 isEgg;
 
-    if (!gPlayerPartyCount)
+    if (!gPartiesCount[B_TRAINER_PLAYER])
         return;
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -1699,10 +1701,10 @@ static void StartPrint_AppNameText(void)
         if (app)
             str = AppData_GetStruct(app)->name;
         else
-            str = gText_Blank; // blank as the app table has 'Free Space'
+            str = gText_ExpandedPlaceholder_Empty; // blank as the app table has 'Free Space'
 
         if (StartSetup_IsInSaveMode())
-            str = gText_Blank;
+            str = gText_ExpandedPlaceholder_Empty;
 
         StartPrint_Text(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0, str);
     }
@@ -1779,7 +1781,7 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     // clear (w/ black)
-    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
 
     // textbox
     StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
@@ -2710,7 +2712,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2722,7 +2724,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
                 return;
             }
 
-            if (JOY_NEW(A_BUTTON) && JOY_NEW(START_BUTTON))
+            if (JOY_HELD(START_SAVE_OVERWRITE_BTN_COMBO) == START_SAVE_OVERWRITE_BTN_COMBO)
             {
                 // unload sprites
                 SaveOverwrite_DestroySprites();
@@ -2763,7 +2765,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(A_BUTTON | START_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2777,7 +2779,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (!tTimer || JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);

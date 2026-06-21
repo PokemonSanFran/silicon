@@ -1783,10 +1783,10 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
-    [SPEAKER_FILIP] =
+    [SPEAKER_WILDFIRERISKWORKER] =
     {
-        .name = COMPOUND_STRING("Filip"),
-        .title = COMPOUND_STRING("???"),
+        .name = COMPOUND_STRING("Wildfireriskworker"),
+        .title = COMPOUND_STRING("Toxel Energy Enployee"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
@@ -1918,30 +1918,6 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Shinzo,
         .speakerPal = sSpeakerPal_Shinzo,
-    },
-    [SPEAKER_IMPROV_1] =
-    {
-        .name = COMPOUND_STRING("Improv 1"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Medium,
-        .speakerPal = sSpeakerPal_Medium,
-    },
-    [SPEAKER_IMPROV_2] =
-    {
-        .name = COMPOUND_STRING("Improv 2"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Girl,
-        .speakerPal = sSpeakerPal_Girl,
-    },
-    [SPEAKER_IMPROV_3] =
-    {
-        .name = COMPOUND_STRING("Improv 3"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Beauty,
-        .speakerPal = sSpeakerPal_Beauty,
     },
     [SPEAKER_CHRIS] =
     {
@@ -2890,30 +2866,6 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
-    [SPEAKER_THEATER_IMPROVTROUPEA] =
-    {
-        .name = COMPOUND_STRING("ImprovtroupeA"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
-    [SPEAKER_THEATER_IMPROVTROUPEB] =
-    {
-        .name = COMPOUND_STRING("ImprovtroupeB"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
-    [SPEAKER_THEATER_IMPROVTROUPEC] =
-    {
-        .name = COMPOUND_STRING("ImprovtroupeC"),
-        .title = COMPOUND_STRING("???"),
-        .gender = NON_HUMAN,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
     [SPEAKER_ARCADEMINI] =
     {
         .name = COMPOUND_STRING("Arcademini"),
@@ -2999,6 +2951,142 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     {
         .name = COMPOUND_STRING("Jason"),
         .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEA] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeA"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEB] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeB"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEC] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeC"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCED] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceD"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEE] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceE"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEF] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceF"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEG] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceG"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEH] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceH"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEX] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeX"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEY] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeY"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEZ] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeZ"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHA] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishA"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHB] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishB"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHC] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishC"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHD] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishD"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHE] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishE"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHF] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishF"),
+        .title = COMPOUND_STRING("Fisherfolk"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,

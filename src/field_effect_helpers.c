@@ -11,6 +11,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "trig.h"
+#include "wild_encounter_ow.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/rgb.h"
@@ -22,11 +23,13 @@
 #include "event_data.h"
 // End autoSave
 #include "phenomenon.h" // phenomenon
+#include "constants/species.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
-#define PAL_TAG_REFLECTION_OFFSET 0x2000 // reflection tag value is paletteTag + 0x2000
-#define PAL_RAW_REFLECTION_OFFSET 0x4000 // raw reflection tag is paletteNum + 0x4000
-#define HIGH_BRIDGE_PAL_TAG 0x4010
+#define PAL_TAG_REFLECTION_OFFSET 0x0800 // reflection tag value is paletteTag + 0x0800
+#define PAL_RAW_REFLECTION_OFFSET 0x3000 // raw reflection tag is paletteNum + 0x3000
+#define HIGH_BRIDGE_PAL_TAG (PAL_RAW_REFLECTION_OFFSET + 0x10)
+STATIC_ASSERT(NUM_SPECIES <= PAL_TAG_REFLECTION_OFFSET, TooManySpeciesForReflectionPaletteTags);
 // Build a unique tag for reflection's palette based on based tag, or paletteNum
 #define REFLECTION_PAL_TAG(tag, num) ((tag) == TAG_NONE ? (num) + PAL_RAW_REFLECTION_OFFSET : (tag) + PAL_TAG_REFLECTION_OFFSET)
 
@@ -71,6 +74,9 @@ void SetUpShadow(struct ObjectEvent *objectEvent)
 
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)
 {
+    if (IsOverworldWildEncounter(objectEvent, OWE_GENERATED))
+        return;
+
     struct Sprite *reflectionSprite;
 
     reflectionSprite = &gSprites[CreateCopySpriteAt(sprite, sprite->x, sprite->y, 152)];
@@ -170,7 +176,7 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
     u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
     u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-    if (paletteNum <= 16)
+    if (paletteNum == 0xFF)
     {
         // Load filtered palette
         u16 filteredData[16];
@@ -216,7 +222,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
         u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
         u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-        if (paletteNum >= 16)
+        if (paletteNum == 0xFF)
         {
             // Build filtered palette
             u16 filteredData[16];
@@ -1916,9 +1922,8 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
 // start autoSave
 #define eState               data[0]
 #define eSavingSpriteID      data[1]
-#define eSavingAnimFrame     data[4]
+#define eSavingComplete      data[2]
 
-static void Task_Saving(u8 taskId);
 static u8 Saving_Init(struct Task *task);
 static u8 Saving_WaitForFinish(struct Task *task);
 
@@ -1934,7 +1939,7 @@ void FldEff_Saving(void)
     Task_Saving(taskId);
 }
 
-static void Task_Saving(u8 taskId)
+void Task_Saving(u8 taskId)
 {
     while (sSavingStateFuncs[gTasks[taskId].eState](&gTasks[taskId]))
         ;
@@ -1963,33 +1968,50 @@ static bool8 Saving_Init(struct Task *task)
     SetSpritePosToMapCoords((playerObjEvent->currentCoords.x + x_diff), (playerObjEvent->currentCoords.y + y_diff), &x2, &y2);
     sprite->x = x2 + 8;
     sprite->y = y2 + 8;
-    sprite->data[0] = playerObjEvent->currentCoords.x;
-    sprite->data[1] = playerObjEvent->currentCoords.y;
 
     u32 fontId = FONT_OUTLINED;
     u32 x = 2;
     u32 y = 0;
     static const union TextColor color = {.background = 0, .foreground = 1, .shadow = 7, .accent = 0};
     AddSpriteTextPrinterParameterized6(spriteId, fontId, x, y, 0, 0, color, 0, COMPOUND_STRING("SAVING…"));
-    task->eSavingAnimFrame = 0;
+    task->eSavingComplete = FALSE;
     task->eState++;
     return FALSE;
 }
 
 static bool8 Saving_WaitForFinish(struct Task *task)
 {
-    FieldEffectActiveListRemove(FLDEFF_SAVING);
-    DestroyTask(FindTaskIdByFunc(Task_Saving));
-    task->eSavingAnimFrame++;
+    if (task->eSavingComplete)
+    {
+        FieldEffectFreeGraphicsResources(&gSprites[task->eSavingSpriteID]);
+        FieldEffectActiveListRemove(FLDEFF_SAVING);
+        DestroyTask(FindTaskIdByFunc(Task_Saving));
+    }
     return FALSE;
 }
 
 void SavingSpriteCallback(struct Sprite *sprite)
 {
-    if(FlagGet(FLAG_TEMP_F))
-    {
-        FieldEffectFreeGraphicsResources(sprite);
-        FlagClear(FLAG_TEMP_F);
-    }
+    //Dummy Callback for now
 }
 // End autoSave
+u32 FldEff_OWE_SpawnAnim(void)
+{
+    u8 spriteId;
+    enum SpawnDespawnTypeOWE spawnAnim = gFieldEffectArguments[2];
+    u32 visual = gOverworldWildEncounterFieldEffectInfo[spawnAnim].visual;
+    s16 xOffset = gOverworldWildEncounterFieldEffectInfo[spawnAnim].xOffset;
+    s16 yOffset = gOverworldWildEncounterFieldEffectInfo[spawnAnim].yOffset;
+    struct SpritePalette palette = GetOWESpawnDespawnAnimFldEffPalette(spawnAnim);
+
+    FieldEffect_LoadFadedPalette(&palette, COLOR_MAP_DARK_CONTRAST);
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 0);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[visual], gFieldEffectArguments[0] + xOffset, gFieldEffectArguments[1] + yOffset, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        struct Sprite *sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = 2;
+    }
+    return spriteId;
+}

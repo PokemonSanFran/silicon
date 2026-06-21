@@ -5,6 +5,7 @@
 #include "item.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
+#include "ui_mon_summary.h"
 #include "pokedex.h"
 #include "script_pokemon_util.h"
 #include "random.h"
@@ -333,7 +334,7 @@ static void ShowSiliconStarter(u32 slot)
     struct BoxPokemon *boxMons = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
     u32 maxMonIndex = IN_BOX_COUNT - 1;
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_BOX, boxMons, slot, maxMonIndex, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    MonSummary_Init(SUMMARY_MODE_LOCK_MOVES, boxMons, slot, maxMonIndex, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 u32 GetStarterFromSlot(enum SiliconStarters starterSlot)
@@ -443,9 +444,9 @@ void GiveSiliconStarter(enum SiliconStarters slot)
     SetStarterFriendship(boxSlot, slot, friendship);
     RollForShiny(boxSlot, slot);
 
-    BoxMonAtToMon(boxSlot, slot, &gPlayerParty[0]);
-    CalculateMonStats(&gPlayerParty[0]);
-    SetBoxMonAt(boxSlot, slot, &gPlayerParty[0].box);
+    BoxMonAtToMon(boxSlot, slot, &gParties[B_TRAINER_PLAYER][0]);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    SetBoxMonAt(boxSlot, slot, &gParties[B_TRAINER_PLAYER][0].box);
     CompactPartySlots();
 }
 
@@ -470,7 +471,7 @@ void MoveStarterToParty(void)
 {
     u32 species = VarGet(VAR_CHOSEN_PSF_STARTER);
     u32 starterSlot = GetSlotFromStarter(species);
-    BoxMonAtToMon(0,starterSlot,&gPlayerParty[0]);
+    BoxMonAtToMon(0,starterSlot,&gParties[B_TRAINER_PLAYER][0]);
 
     ResetPokemonStorageSystem();
     ResetPokedex();

@@ -61,7 +61,7 @@ script Quest_Returndoll_Script_InteractPokemon
 
 script Quest_Returndoll_Script_DoBattle
 {
-    setflag(B_FLAG_NO_RUNNING)
+    setflag(WE_FLAG_NO_RUNNING)
     dowildbattle
     goto(Quest_Returndoll_Script_PostBattle)
 }
@@ -92,7 +92,7 @@ script Quest_Returndoll_Dialogue_RepeatBattle
 
 script Quest_Returndoll_Script_PostBattle
 {
-    clearflag(B_FLAG_NO_RUNNING)
+    clearflag(WE_FLAG_NO_RUNNING)
     call(Quest_Returndoll_Script_RepeatBattle)
     playmoncry(SPECIES_QUEST_RETURNDOLL,CRY_MODE_ENCOUNTER)
 	fadedefaultbgm

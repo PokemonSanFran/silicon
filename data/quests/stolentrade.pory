@@ -61,7 +61,6 @@ script Quest_StolenTrade_AskForTrade_Dialogue
 script Quest_StolenTrade_DoTrade_Script
 {
 	special(ChoosePartyMon)
-	waitstate
 	copyvar(VAR_0x800A, VAR_0x8004)
 	goto_if_eq(VAR_0x8004, PARTY_NOTHING_CHOSEN, Quest_StolenTrade_NoTrade_Script)
 	copyvar(VAR_0x8005, VAR_0x800A)
@@ -72,7 +71,6 @@ script Quest_StolenTrade_DoTrade_Script
 	copyvar(VAR_0x8005, VAR_0x800A)
 	special(CreateInGameTradePokemon)
 	special(DoInGameTradeScene)
-	waitstate
 	bufferspeciesname(STR_VAR_1, VAR_0x8009)
     goto(Quest_StolenTrade_RunAfterTrade_Script)
 }

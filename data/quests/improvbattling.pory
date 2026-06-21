@@ -1,201 +1,577 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const IMPROV_1 = 1
-const IMPROV_2 = 2
-const IMPROV_3 = 3
+//Improvbattling_Script_
+//Improvbattling_Dialogue_
 
-//Quest_Improvbattling_
-
-script Quest_Improvbattling_Event_Script{
-    goto_if_quest_complete(QUEST_IMPROVBATTLING,Quest_Improvbattling_Complete_Script)
-    goto_if_quest_active(QUEST_IMPROVBATTLING,Quest_Improvbattling_Active_Script)
-    goto(Quest_Improvbattling_StartQuest_Script)
+script Improvbattling_Script_CheckQuestAndHideTroupe
+{
+    callnative(Script_Improvbattling_ShouldLeaderMoveOffStage)
+    call_if_eq(VAR_RESULT,TRUE,Improvbattling_Script_MoveTroupeA)
 }
 
-script Quest_Improvbattling_StartQuest_Script{
+script Improvbattling_Script_MoveTroupeA
+{
+    setobjectxyperm(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,4,4)
+}
+
+script Improvbattling_Script_HideNewImprovtroupe
+{
+    setobjectflagfromlocalid(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    setobjectflagfromlocalid(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
+    setobjectflagfromlocalid(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
+}
+
+script Improvbattling_Dialogue_ImprovaudienceD
+{
     lock
-    msgbox(format("Welcome to PetarosaBorough Improv!"),MSGBOX_NPC,SPEAKER_IMPROV_1)
-    msgbox(format("We're all about thinking on our feet and putting on a good show."),,SPEAKER_IMPROV_1)
-    msgbox(format("You're a Trainer right? Come do a performance with us! We have one coming up."),,SPEAKER_IMPROV_1)
-    msgbox(format("It'll make you a better Trainer, I'm certain."),,SPEAKER_IMPROV_1)
-
-    msgbox(format("What do you say? Want to do an improv show with us?"),MSGBOX_YESNO,SPEAKER_IMPROV_1)
-    call(Quest_Improvbattling_AskStartChallenge_Script)
-    release
-    end
-}
-
-script Quest_Improvbattling_AskStartChallenge_Script{
-    if (var(VAR_RESULT) == YES){
-        call(Quest_Improvbattling_CheckQuestAndStart)
-        goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
-    }else{
-        goto(Quest_Improvbattling_CancelChallenge)
-    }
-    return
-}
-
-script Quest_Improvbattling_CheckQuestAndStart{
-    returnqueststate(QUEST_IMPROVBATTLING)
-
-    if (var(VAR_RESULT)< QUEST_MENU_SET_ACTIVE){
-        startquest(QUEST_IMPROVBATTLING)
-    }
-    return
-}
-
-script Quest_Improvbattling_CancelChallenge{
-    msgbox(format("No problem, let me know if you change your mind!"),,SPEAKER_IMPROV_1)
-    release
-    end
-}
-
-script Quest_Improvbattling_Active_Script{
-    msgbox(format("Welcome back! Ready to perform?"),MSGBOX_NPC,SPEAKER_IMPROV_1)
-    goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
-}
-
-script Quest_Improvbattling_Complete_Script{
-    goto_if_quest_active(QUEST_RESTOREZENZUGYM,RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA)
-    msgbox(format("Our favorite improv performer! Let's put on a show."),,MSGBOX_NPC,SPEAKER_IMPROV_1)
-    goto(Quest_Improvbattling_SaveBeforeChallenge_Script)
-}
-
-script Quest_Improvbattling_SaveBeforeChallenge_Script{
-    msgbox(format("Before we start, let's save your game."),,SPEAKER_IMPROV_1)
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_PETAROSA_BOROUGH)
+    msgbox(format("How're you finding {STR_VAR_1}, youngster? Maybe when you grow up, you'll be successful enough to buy a house here too! Gotta be ready to put the work in though, mine cost me 9 figures! Hohohoho!"),,SPEAKER_IMPROVAUDIENCED)
     closemessage
-    startmenu_savescreen
-
-    if (var(VAR_RESULT) == FALSE){
-        goto(Quest_Improvbattling_CancelChallenge)
-    }
-
-    goto(Quest_Improvbattling_StartChallenge)
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCED,moves(face_original_direction))
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCED)
+    end
 }
 
-script Quest_Improvbattling_StartChallenge{
+script Improvbattling_Dialogue_ImprovaudienceE
+{
+    lock
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_TIRABUDIN_PLACE)
+    msgbox(format("BD, the Gym Leader of {STR_VAR_1} lives here. I feel for her, still having to deal with all the rabble every day. They hate her over there, and for what? Doing the right thing? You simply can't reason with some people. They think with their hearts, not their heads."),,SPEAKER_IMPROVAUDIENCEE)
+    closemessage
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEE,moves(face_original_direction))
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEE)
+    end
+}
+
+script Improvbattling_Dialogue_ImprovaudienceF
+{
+    lock
+    faceplayer
+    msgbox(format("I’m the founder of this place. Before Sharp Rise took over the League, alternative battling styles were way more popular. It’s getting harder and harder to keep the lights on as fewer people come out to these."),,SPEAKER_IMPROVAUDIENCEF)
+    closemessage
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEF,moves(face_original_direction))
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEF)
+    end
+}
+
+script Improvbattling_Dialogue_ImprovaudienceG
+{
+    lock
+    faceplayer
+    msgbox(format("The improv actors here are all early in the careers, but all want to break into acting full time."),,SPEAKER_IMPROVAUDIENCEG)
+    msgbox(format("I hope they get the chance!"),,SPEAKER_IMPROVAUDIENCEG)
+    closemessage
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEG,moves(face_original_direction))
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEG)
+    release
+    end
+}
+
+script Improvbattling_Dialogue_ImprovaudienceH
+{
+    lock
+    faceplayer
+    buffermovename(STR_VAR_2,MOVE_FIRE_PUNCH)
+    buffermovename(STR_VAR_3,MOVE_FLARE_BLITZ)
+    msgbox(format("Freeze is one of the worst status conditions you can be on the receiving end of, but here's a tip; if you have a physical Fire-type move like {STR_VAR_2} or {STR_VAR_3}, you should use that! You'll ALWAYS thaw out if you do that!"),,SPEAKER_IMPROVAUDIENCEH)
+    closemessage
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEH,moves(face_original_direction))
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVAUDIENCEH)
+    end
+}
+
+script Improvbattling_Script_RoutePlayer
+{
+    goto_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_3,Improvbattling_Script_PostQuestChallenge_PostRecruit)
+    goto_if_quest_complete(QUEST_IMPROVBATTLING,Improvbattling_Script_PostQuestChallenge)
+    goto_if_quest_active(QUEST_IMPROVBATTLING,Improvbattling_Script_ContinueChallenge)
+    goto_if_quest_not_active(QUEST_IMPROVBATTLING,Improvbattling_Script_StartQuest)
+}
+
+script Improvbattling_Script_StartQuest
+{
+    lock
+    msgbox(format("And now we need somebody brave from the audience!"),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Seems we have a volunteer already!"),,SPEAKER_IMPROVTROUPEB)
+    closemessage
+    msgbox(format("Wait no, I"),,SPEAKER_PLAYER,,EMOTE_SHOCK)
+    msgbox(format("Rules are rules, and the first rule of improv is to always “yes, and”! Come on up here!"),,SPEAKER_IMPROVTROUPEC)
+    call(Improvbattling_Script_MovePlayerToStage)
+    msgbox(format("Okay talk into the mic."),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Tell everybody your name, and where you’re from!"),,SPEAKER_IMPROVTROUPEA)
+    closemessage
+    applymovement(LOCALID_PLAYER,moves(face_down))
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("I'm {PLAYER}, and I'm from Agate Village, Orre."),,SPEAKER_PLAYER)
+    msgbox(format("You look tough {PLAYER}. Have you battled before?"),,SPEAKER_IMPROVTROUPEA)
+    call(Improvbattling_Dialogue_ChangeDialogueBasedOnProgress)
+    startquest(QUEST_IMPROVBATTLING)
+    goto(Improvbattling_Script_StartSwapEvent)
+}
+
+script Improvbattling_Dialogue_ChangeDialogueBasedOnProgress
+{
+    callnative(Script_Improvbattling_ReturnValueFromProgress)
+    switch (var(VAR_RESULT))
+    {
+        case CHECK_QUEST_IMPROVBATTLING_HAS_NOT_BEATEN_NERIENE:
+            msgbox(format("Yes, and I'm hoping to be Champion."),,SPEAKER_PLAYER)
+        case CHECK_QUEST_IMPROVBATTLING_HAS_BEATEN_NERIENE:
+            msgbox(format("Yes, and I just beat Neriene and I'm training to be the Champion."),,SPEAKER_PLAYER)
+        case CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION:
+            msgbox(format("Yes, and -"),,SPEAKER_PLAYER)
+            msgbox(format("Oh, I know you… you’re the Champion!"),,SPEAKER_IMPROVTROUPEC)
+    }
+    msgbox(format("Oh wow, a real contender! And great “yes, ands” too!"),,SPEAKER_IMPROVTROUPEB)
+    msgbox(format("Get ready folks, {PLAYER} is about to show us some serious skills!"),,SPEAKER_IMPROVTROUPEC)
+    closemessage
+}
+
+script Improvbattling_Script_MovePlayerToStage
+{
+    playse(SE_APPLAUSE)
+    closemessage
+    moveobjecttocoords(LOCALID_PLAYER,2,2,DIR_SOUTH)
+    waitmovement(LOCALID_PLAYER)
+    closemessage
+    waitse
+}
+
+script Improvbattling_Script_ContinueChallenge
+{
+    msgbox(format("And now returning to the stage, it’s our star, {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Give it up for {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
+    call(Improvbattling_Script_MovePlayerToStage)
+    msgbox(format("Let's see if they can keep up the momentum this time!"),,SPEAKER_IMPROVTROUPEA)
+    closemessage
+    goto(Improvbattling_Script_StartSwapEvent)
+}
+
+script Improvbattling_Script_PostQuestChallenge
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
+    msgbox(format("And now for a special {STR_VAR_1} Improv legend, {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Give it up for {PLAYER}!"),,SPEAKER_IMPROVTROUPEA)
+    call(Improvbattling_Script_MovePlayerToStage)
+    msgbox(format("Hopefully we can keep up this time!"),,SPEAKER_IMPROVTROUPEA,,EMOTE_SWEAT)
+    closemessage
+    goto(Improvbattling_Script_StartSwapEvent)
+}
+
+script Improvbattling_Script_StartSwapEvent
+{
+    applymovement(LOCALID_PLAYER,moves(face_up))
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("To start, you can't use your own Pokemon. I'll hold onto those..."),,SPEAKER_IMPROVTROUPEA)
+    closemessage
     special(SavePlayerParty)
-    //special(SwapOutPokemon)
-    //special(LoadEnemyParty)
-    call(Quest_Improvbattling_MovePlayer_Script)
-    applymovement(IMPROV_1,Common_Movement_WalkInPlaceDown)
-    waitmovement(IMPROV_1)
-    msgbox(format("Okay! Let's take your Pokémon for a second... you're going to use three of ours instead.Okay, let's do it!"),,SPEAKER_IMPROV_1)
+    msgbox(format("And you can use these instead."),,SPEAKER_IMPROVTROUPEA)
     closemessage
-    goto(Quest_Improvbattling_Battle1_Script)
-}
-
-script Quest_Improvbattling_MovePlayer_Script{
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-    if (var(VAR_TEMP_1) != 3){
-        fadescreenswapbuffers(FADE_TO_BLACK)
-        setobjectxy(PLAYER,2,3)
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        waitmovement(PLAYER)
-        TeleportCamera(2,3)
-        fadescreenswapbuffers(FADE_FROM_BLACK)
-    }
-    return
-}
-
-script Quest_Improvbattling_Battle1_Script{
-    trainerbattle_continue_after_lose(TRAINER_IMPROV_1,gText_Improvbattling_AndScene)
-
-        if(var(VAR_RESULT) == B_OUTCOME_WON){
-            goto(Quest_Improvbattling_PostBattle1_Script)
-        }
-
-    goto(Quest_Improvbattling_ExitChallenge_Script)
-}
-
-script Quest_Improvbattling_PostBattle1_Script{
-    msgbox(format("Let's heal those Pokémon."),,SPEAKER_IMPROV_1)
-    special(HealPlayerParty)
-    msgbox(format("Before your next battle, do you want to trade one of the Pokémon you just battled with wit one of the Pokémon I used? Totally up to you."),MSGBOX_YESNO,SPEAKER_IMPROV_1)
-
-    if (var(VAR_RESULT) == NO){
-        goto(Quest_Improvbattling_Battle2_Script)
-    }
-        msgbox(format("One day, this will actually load the swap Pokémon screen."),,SPEAKER_IMPROV_1)
-        closemessage
-        goto(Quest_Improvbattling_Battle2_Script)
-}
-
-script Quest_Improvbattling_Battle2_Script{
-        msgbox(format("Okay! Let's keep it going with the next battle."),,SPEAKER_IMPROV_2)
-        applymovement(IMPROV_2,Common_Movement_WalkInPlaceDown)
-        waitmovement(IMPROV_2)
-        msgbox(format("Let's perform a great show!"),,SPEAKER_IMPROV_2)
-        closemessage
-
-    trainerbattle_continue_after_lose(TRAINER_IMPROV_2,gText_Improvbattling_AndScene)
-
-        if(var(VAR_RESULT) == B_OUTCOME_WON){
-            goto(Quest_Improvbattling_PostBattle2_Script)
-        }
-    goto(Quest_Improvbattling_ExitChallenge_Script)
-}
-
-script Quest_Improvbattling_PostBattle2_Script{
-    msgbox(format("Let's heal those Pokémon."),,SPEAKER_IMPROV_2)
-        special(HealPlayerParty)
-        msgbox(format("Before your next battle, do you want to trade one of the Pokémon you just battled with wit one of the Pokémon I used? Totally up to you."),MSGBOX_YESNO,SPEAKER_IMPROV_2)
-
-        if (var(VAR_RESULT) == NO){
-            goto(Quest_Improvbattling_Battle3_Script)
-        }
-    msgbox(format("One day, this will actually load the swap Pokémon screen."),,SPEAKER_IMPROV_2)
-        closemessage
-        goto(Quest_Improvbattling_Battle3_Script)
-}
-
-script Quest_Improvbattling_Battle3_Script{
-        msgbox(format("Okay! Let's keep it going with the next battle."),,SPEAKER_IMPROV_3)
-        applymovement(IMPROV_3,Common_Movement_WalkInPlaceDown)
-        waitmovement(IMPROV_3)
-        msgbox(format("Let's perform a great show!"),,SPEAKER_IMPROV_3)
-        closemessage
-
-    trainerbattle_continue_after_lose(TRAINER_IMPROV_3,gText_Improvbattling_AndScene)
-
-        if(var(VAR_RESULT) == B_OUTCOME_WON){
-            goto(Quest_Improvbattling_PostBattle3_Script)
-        }
-    goto(Quest_Improvbattling_ExitChallenge_Script)
-}
-
-script Quest_Improvbattling_PostBattle3_Script{
-    call(Quest_Improvbattling_RestoreParty_Script)
-    msgbox(format("Thank you all for coming out tonight!"),,SPEAKER_IMPROV_3)
-    call_if_quest_not_complete(QUEST_IMPROVBATTLING,Quest_Improvbattling_Reward_Dialogue)
+    call(Improvbattling_Script_PerformSwap0)
+    cueobjectplayer(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,3,0,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
+    msgbox(format("Welcome to {STR_VAR_1} Improv, {PLAYER}. Let's put on a good show!"),,SPEAKER_IMPROVTROUPEC)
     closemessage
-    release
-    end
+    goto(Improvbattling_Script_StartBattle1)
+// start battle
+
+	//factory_generaterentalmons
+	//factory_generateopponentmons
+	//factory_getopponentmontype
+	//setorcopyvar(VAR_0x8005, VAR_RESULT)
+	//factory_getopponentstyle
+	//setorcopyvar (VAR_0x8006, VAR_RESULT)
+	//call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentType)
+	//call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentStyle)
+	//msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT)
+	//fadescreen(FADE_TO_BLACK)
+	//factory_setswapped
+	//factory_rentmons
+	//waitstate
 }
 
-script Quest_Improvbattling_Reward_Dialogue{
-    msgbox(format("You're a natural. Come practice with us anytime. Take this!"),,SPEAKER_IMPROV_3)
-    giveitem(ITEM_TM49)
+script Improvbattling_Script_StartBattle1
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_3,format("Well played! You've got some impressive skills."))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost)
+    goto(Improvbattling_Script_AfterBattle1)
+}
+
+script Improvbattling_Script_AfterBattle1
+{
+    random(7)
+    switch (var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format("sick"))
+        case 1: bufferstring(STR_VAR_1,format("tough"))
+        case 2: bufferstring(STR_VAR_1,format("intoxicating"))
+        case 3: bufferstring(STR_VAR_1,format("solid"))
+        case 4: bufferstring(STR_VAR_1,format("fiery"))
+        case 5: bufferstring(STR_VAR_1,format("electrifying"))
+        case 6: bufferstring(STR_VAR_1,format("fierce"))
+        case 7: bufferstring(STR_VAR_1,format("enchanting"))
+    }
+
+    msgbox(format("That was {STR_VAR_1}! Give it up for {PLAYER}!"),,SPEAKER_IMPROVTROUPEC)
+    closemessage
+    playse(SE_APPLAUSE)
+    waitse
+    msgbox(format("You're gonna battle ImprovtroupeB next."),,SPEAKER_IMPROVTROUPEC)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC,DIR_SOUTH)
+    bufferspeciesname(STR_VAR_1,SPECIES_BUNEARY)
+    buffermovename(STR_VAR_2,MOVE_CELEBRATE)
+    msgbox(format("Between you and me, they've got a {STR_VAR_1} that knows {STR_VAR_2}."),,SPEAKER_IMPROVTROUPEC,TAIL_WHISPER)
+    closemessage
+    msgbox(format("So {PLAYER}, do you want to trade one of the Pokemon you used in battle for one of mine?"),MSGBOX_YESNO,SPEAKER_IMPROVTROUPEC)
+    call_if_eq(VAR_RESULT,YES,Improvbattling_Script_PerformSwap1)
+    goto(Improvbattling_Script_BeforeBattle2)
+}
+
+script Improvbattling_Script_PerformSwap0
+{
+    special(SavePlayerParty)
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_KLEAVOR,50,0)
+    givemon(SPECIES_SCYTHER,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+}
+
+script Improvbattling_Script_PerformSwap1
+{
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_MAGMORTAR,50,0)
+    givemon(SPECIES_SCYTHER,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+    msgbox(format("Choose wisely!"),,SPEAKER_IMPROVTROUPEC)
+    closemessage
+}
+
+script Improvbattling_Script_PerformSwap2
+{
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_MAGMAR,50,0)
+    givemon(SPECIES_MAGMORTAR,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+    msgbox(format("What are you going to swap for?"),,SPEAKER_IMPROVTROUPEB)
+    closemessage
+}
+
+script Improvbattling_Script_BeforeBattle2
+{
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC,1,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB)
+    msgbox(format("Now the real show begins. Here's Act 2!"),,SPEAKER_IMPROVTROUPEB)
+    closemessage
+    goto(Improvbattling_Script_StartBattle2)
+}
+
+script Improvbattling_Script_StartBattle2
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_2,format("You got me this time!"))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost)
+    goto(Improvbattling_Script_AfterBattle2)
+}
+
+script Improvbattling_Script_AfterBattle2
+{
+    random(7)
+    switch (var(VAR_RESULT))
+    {
+        case 0: bufferstring(STR_VAR_1,format("sick"))
+        case 1: bufferstring(STR_VAR_1,format("tough"))
+        case 2: bufferstring(STR_VAR_1,format("intoxicating"))
+        case 3: bufferstring(STR_VAR_1,format("solid"))
+        case 4: bufferstring(STR_VAR_1,format("fiery"))
+        case 5: bufferstring(STR_VAR_1,format("electrifying"))
+        case 6: bufferstring(STR_VAR_1,format("fierce"))
+        case 7: bufferstring(STR_VAR_1,format("enchanting"))
+    }
+
+    msgbox(format("What a {STR_VAR_1} battle! Let's hear it for {PLAYER}!"),,SPEAKER_IMPROVTROUPEC)
+    closemessage
+    playse(SE_APPLAUSE)
+    waitse
+    msgbox(format("Your final battle will be against ImprovtroupeA."),,SPEAKER_IMPROVTROUPEB)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB,DIR_SOUTH)
+    bufferstring(STR_VAR_1,format("Grass"))
+    msgbox(format("If I'm remembering correctly, the most common type on their team is {STR_VAR_1}-type."),,SPEAKER_IMPROVTROUPEB,TAIL_WHISPER)
+    closemessage
+    msgbox(format("So {PLAYER}, do you want to trade one of the Pokemon you used in battle for one of mine?"),MSGBOX_YESNO,SPEAKER_IMPROVTROUPEB)
+    call_if_eq(VAR_RESULT,YES,Improvbattling_Script_PerformSwap2)
+    goto(Improvbattling_Script_BeforeBattle3)
+}
+
+script Improvbattling_Script_BeforeBattle3
+{
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB,3,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    msgbox(format("Now for the final battle of your performance!"),,SPEAKER_IMPROVTROUPEA)
+    closemessage
+    goto(Improvbattling_Script_StartBattle3)
+}
+
+script Improvbattling_Script_StartBattle3
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_6,format("You got the best of us!"))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost)
+    goto(Improvbattling_Script_AfterBattle3)
+}
+
+script Improvbattling_Script_AfterBattle3
+{
+    playse(SE_APPLAUSE)
+    msgbox(format("Wow! You're an improvisation natural, {PLAYER}."),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Have you thought about a career in acting at all?"),,SPEAKER_IMPROVTROUPEA,TAIL_WHISPER)
+    closemessage
+    waitse
     completequest(QUEST_IMPROVBATTLING)
-    return
+    goto(Improvbattling_Script_PlayerLost)
 }
 
-script Quest_Improvbattling_RestoreParty_Script{
-    return
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    special(LoadPlayerPartyBattleFrontier)
-    special(HealPlayerParty)
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-    return
+script Improvbattling_Script_RestoreParty
+{
+    callnative(ZeroPlayerPartyMons)
+    special(LoadPlayerParty)
 }
 
-script Quest_Improvbattling_ExitChallenge_Script{
-    call(Quest_Improvbattling_RestoreParty_Script)
-    msgbox(format("Thanks for performing with us! Come back sometime."),,SPEAKER_IMPROV_1)
+script Improvbattling_Script_PlayerLost
+{
+    call(Improvbattling_Script_RestoreParty)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,DIR_SOUTH)
+    msgbox(format("That’s our show! Thanks for coming out and supporting us, and another round of applause for {PLAYER}! Support your local Trainers!"),,SPEAKER_IMPROVTROUPEA)
     closemessage
+    playse(SE_APPLAUSE)
+    fadescreen(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEB,3,1)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEC,1,1)
+    setobjectxy(LOCALID_PLAYER,4,3)
+    TeleportCamera(4,3)
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,4,2)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("You were really great!"),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Anytime you want to join us again just come up on stage."),,SPEAKER_IMPROVTROUPEA)
+    msgbox(format("Unless one of us makes it big in the acting world, we'll be here!"),,SPEAKER_IMPROVTROUPEA)
+    closemessage
+    moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_NORTH)
+    applymovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,moves(walk_faster_down * 2))
+    waitmovement(LOCALID_PLAYER)
+    playse(SE_PIN)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    waitse
+    msgbox(format("You forgot your Pokémon!"),,SPEAKER_IMPROVTROUPEA)
+    closemessage
+    cueobjecttalking(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEA)
     release
     end
 }
 
-text gText_Improvbattling_AndScene{
-    format("Anddd scene!")
+script Improvbattling_Script_PostQuestChallenge_PostRecruit
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
+    msgbox(format("Welcome back the {STR_VAR_1} Improv legend, {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
+    msgbox(format("Let's hear it for {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
+    call(Improvbattling_Script_MovePlayerToStage)
+    goto(Improvbattling_Script_StartSwapEvent_PostRecruit)
 }
+
+script Improvbattling_Script_StartSwapEvent_PostRecruit
+{
+    applymovement(LOCALID_PLAYER,moves(face_up))
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("As usual, you can't use your own Pokemon. I'll hold onto those..."),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    msgbox(format("You'll battle with these."),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    call(Improvbattling_Script_PerformSwap0)
+    cueobjectplayer(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,3,0,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
+    buffermapname(STR_VAR_1,MAP_QUEST_IMPROVBATTLING)
+    msgbox(format("I hope your stardom continues to attact people here, {PLAYER}."),,SPEAKER_IMPROVTROUPEZ)
+    msgbox(format("Let's put on a good show!"),,SPEAKER_IMPROVTROUPEZ)
+    closemessage
+    goto(Improvbattling_Script_StartBattle1_PostRecruit)
+// start battle
+
+    //factory_generaterentalmons
+    //factory_generateopponentmons
+    //factory_getopponentmontype
+    //setorcopyvar(VAR_0x8005, VAR_RESULT)
+    //factory_getopponentstyle
+    //setorcopyvar (VAR_0x8006, VAR_RESULT)
+    //call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentType)
+    //call(BattleFrontier_BattleFactoryPreBattleRoom_EventScript_CommentOnOpponentStyle)
+    //msgbox(BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection, MSGBOX_DEFAULT)
+    //fadescreen(FADE_TO_BLACK)
+    //factory_setswapped
+    //factory_rentmons
+    //waitstate
+}
+
+
+script Improvbattling_Script_StartBattle1_PostRecruit
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_4,format("Well, at least more new talent is getting highlighted!"))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost_PostRecruit)
+    goto(Improvbattling_Script_AfterBattle1_PostRecruit)
+}
+
+script Improvbattling_Script_AfterBattle1_PostRecruit
+{
+    msgbox(format("Incredible as always, {PLAYER}!"),,SPEAKER_IMPROVTROUPEZ)
+    closemessage
+    playse(SE_APPLAUSE)
+    waitse
+    msgbox(format("ImprovtroupeY is up next."),,SPEAKER_IMPROVTROUPEZ)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,DIR_SOUTH)
+    bufferspeciesname(STR_VAR_1,SPECIES_BUNEARY)
+    buffermovename(STR_VAR_2,MOVE_CELEBRATE)
+    msgbox(format("Between you and me, they've got a {STR_VAR_1} that knows {STR_VAR_2}."),,SPEAKER_IMPROVTROUPEZ,TAIL_WHISPER)
+    closemessage
+    msgbox(format("So {PLAYER}, do you want to trade one of the Pokemon you used in battle for one of mine?"),MSGBOX_YESNO,SPEAKER_IMPROVTROUPEZ)
+    call_if_eq(VAR_RESULT,YES,Improvbattling_Script_PerformSwap1_PostRecruit)
+    goto(Improvbattling_Script_BeforeBattle2_PostRecruit)
+}
+
+script Improvbattling_Script_PerformSwap0_PostRecruit
+{
+    special(SavePlayerParty)
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_KLEAVOR,50,0)
+    givemon(SPECIES_SCYTHER,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+}
+
+script Improvbattling_Script_PerformSwap1_PostRecruit
+{
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_MAGMORTAR,50,0)
+    givemon(SPECIES_SCYTHER,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+    msgbox(format("What Pokemon do you want to swap?!"),,SPEAKER_IMPROVTROUPEZ)
+    closemessage
+}
+
+script Improvbattling_Script_PerformSwap2_PostRecruit
+{
+    callnative(ZeroPlayerPartyMons)
+    givemon(SPECIES_MAGMAR,50,0)
+    givemon(SPECIES_MAGMORTAR,50,0)
+    givemon(SPECIES_SCIZOR,50,0)
+    msgbox(format("What are you interested in?"),,SPEAKER_IMPROVTROUPEY)
+    closemessage
+}
+
+script Improvbattling_Script_BeforeBattle2_PostRecruit
+{
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,1,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
+    msgbox(format("I hope I can fill the shoes of ImprovtroupeB..."),,SPEAKER_IMPROVTROUPEY)
+    closemessage
+    goto(Improvbattling_Script_StartBattle2_PostRecruit)
+}
+
+script Improvbattling_Script_StartBattle2_PostRecruit
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_5,format("Did we live up to expectations?"))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost_PostRecruit)
+    goto(Improvbattling_Script_AfterBattle2_PostRecruit)
+}
+
+script Improvbattling_Script_AfterBattle2_PostRecruit
+{
+    msgbox(format("Thanks again for coming out, {PLAYER}!"),,SPEAKER_IMPROVTROUPEZ)
+    closemessage
+    playse(SE_APPLAUSE)
+    waitse
+    msgbox(format("Finally, you'll battle ImprovtroupeX."),,SPEAKER_IMPROVTROUPEY)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,DIR_SOUTH)
+    bufferstring(STR_VAR_1,format("Grass"))
+    msgbox(format("Heads up, {STR_VAR_1} is the most common type on their team."),,SPEAKER_IMPROVTROUPEY,TAIL_WHISPER)
+    closemessage
+    msgbox(format("{PLAYER}, do you want to trade one of the Pokemon you used in battle for one of mine?"),MSGBOX_YESNO,SPEAKER_IMPROVTROUPEY)
+    call_if_eq(VAR_RESULT,YES,Improvbattling_Script_PerformSwap2_PostRecruit)
+    goto(Improvbattling_Script_BeforeBattle3_PostRecruit)
+}
+
+script Improvbattling_Script_BeforeBattle3_PostRecruit
+{
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,3,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    msgbox(format("The legendary {PLAYER}! We've heard so much."),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    goto(Improvbattling_Script_StartBattle3_PostRecruit)
+}
+
+script Improvbattling_Script_StartBattle3_PostRecruit
+{
+    trainerbattle_continue_after_lose(TRAINER_IMPROV_3,format("We're not ready for somebody of your caliber!"))
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_eq(VAR_RESULT,B_OUTCOME_LOST,Improvbattling_Script_PlayerLost_PostRecruit)
+    goto(Improvbattling_Script_AfterBattle3_PostRecruit)
+}
+
+script Improvbattling_Script_AfterBattle3_PostRecruit
+{
+    playse(SE_APPLAUSE)
+    msgbox(format("The legend: {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    waitse
+    goto(Improvbattling_Script_PlayerLost_PostRecruit)
+}
+
+script Improvbattling_Script_PlayerLost_PostRecruit
+{
+    call(Improvbattling_Script_RestoreParty)
+    cueobject(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,DIR_SOUTH)
+    msgbox(format("Remember everybody, support your local Trainers!"),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    playse(SE_APPLAUSE)
+    fadescreen(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEY,3,1)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEZ,1,1)
+    setobjectxy(LOCALID_PLAYER,4,3)
+    TeleportCamera(4,3)
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
+    setobjectxy(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,4,2)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("You're always welcome here {PLAYER}!"),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    cueobjecttalking(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    msgbox(format("Here are your Pokemon."),,SPEAKER_IMPROVTROUPEX)
+    closemessage
+    moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_NORTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    moveobjecttocoords(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX,2,1,DIR_SOUTH)
+    waitmovement(LOCALID_PETAROSA_THEATER_IMPROVTROUPEX)
+    release
+    end
+}
+

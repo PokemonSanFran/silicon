@@ -165,7 +165,6 @@ script Debug_EventScript_CheckEVs
     getpartysize
     goto_if_eq(VAR_RESULT,0,Debug_NoPokemon)
 	special(ChoosePartyMon)
-	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End)
 	callnative(Script_GetChosenMonOffensiveEVs)
 	msgbox(format("ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
@@ -185,7 +184,6 @@ script Debug_EventScript_CheckIVs
 	getpartysize
 	goto_if_eq(VAR_RESULT, 0, Debug_NoPokemon)
 	special(ChoosePartyMon)
-	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End)
 	callnative(Script_GetChosenMonOffensiveIVs)
 	msgbox(format("ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}"), MSGBOX_DEFAULT)
@@ -201,27 +199,22 @@ script Debug_EventScript_CheckIVs_End
 
 script Debug_EventScript_Script_1
 {
-	startquest(QUEST_IBELIEVEICANFLY)
-	givemon(species=SPECIES_PIKACHU,level=50,item=0,move1=MOVE_FLY)
-  end
+	end
 }
 
 
 script Debug_EventScript_Script_2
 {
-	startquest(QUEST_FLIGHTPATTERNS)
 	end
 }
 
 script Debug_EventScript_Script_3
 {
-    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_3)
     end
 }
 
 script Debug_EventScript_Script_4
 {
-    completesubquest(QUEST_RESTAURANTEXPANSION1,SUB_QUEST_4)
 	end
 }
 
@@ -283,12 +276,10 @@ script Debug_HatchAnEgg
 	getpartysize
 	goto_if_eq(VAR_RESULT, 0, Debug_NoPokemon)
 	special(ChoosePartyMon)
-	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_HatchAnEgg_End)
 	specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
 	goto_if_ne(VAR_RESULT, SPECIES_EGG, DebugScript_HatchAnEgg_CantForceHatch)
 	special(EggHatch)
-	waitstate
 }
 script Debug_HatchAnEgg_End
 {
@@ -367,7 +358,6 @@ script Debug_EventScript_WallyTutorial
 	special(SavePlayerParty)
 	special(LoadWallyZigzagoon)
 	special(StartWallyTutorialBattle)
-	waitstate
 	special(LoadPlayerParty)
 	release
 	end
@@ -416,7 +406,6 @@ script Debug_EventScript_InflictStatus1_Close
 script Debug_EventScript_InflictStatus1_Single
 {
 	special(ChoosePartyMon)
-	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
 	specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
 	goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
@@ -446,7 +435,6 @@ script Debug_EventScript_InflictStatus1_Single
 script Debug_EventScript_KoPokemon
 {
 	special(ChoosePartyMon)
-	waitstate
 	goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
 	specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
 	goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
@@ -458,7 +446,6 @@ script Debug_EventScript_KoPokemon
 script Debug_EventScript_SetHiddenNature
 {
     special(ChoosePartyMon)
-    waitstate
     goto_if_ge(VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close)
     specialvar(VAR_RESULT, ScriptGetPartyMonSpecies)
     goto_if_eq(VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close)
@@ -501,7 +488,6 @@ script Debug_EventScript_SetHiddenNature
 script Debug_EventScript_SetAbility
 {
 	special(ChoosePartyMon)
-	waitstate
 	callnative(DebugNative_GetAbilityNames)
 	dynmultipush(gStringVar1, 0)
 	dynmultipush(gStringVar2, 1)
@@ -524,7 +510,6 @@ script Debug_EventScript_SetAbilityClose
 script Debug_EventScript_SetFriendship
 {
 	special(ChoosePartyMon)
-	waitstate
 	callnative(DebugNative_Party_SetFriendship)
 	releaseall
 	end
@@ -533,7 +518,6 @@ script Debug_EventScript_SetFriendship
 script Debug_EventScript_GivePokerus
 {
 	special(ChoosePartyMon)
-	waitstate
 	callnative(DebugNative_Party_SetPokerus)
 	releaseall
 	end

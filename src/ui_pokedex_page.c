@@ -395,7 +395,6 @@ static const struct WindowTemplate sPokedexPageLocationWindowTemplates[] =
 };
 
 static void Task_PrepareScreen_GridToPage(u8 taskId);
-static void Page_SetUp(u8 taskId);
 static void Task_PageMoves_LoadParent(u8 taskId);
 static bool32 AllocatePageStructs(enum PokedexPages page);
 static void PageMoves_InitWindows(void);
@@ -403,13 +402,12 @@ static void PageEvolution_InitWindows(void);
 static void PageMoves_HandleInput(u8 taskId);
 static void PageEvolution_HandleInput(u8 taskId);
 static bool32 PageMoves_IsSelctedMoveEggMove(u32 currentPosition);
-static bool32 IsMoveInSilicon(u32 moveId);
 static void PageMoves_PopulateMovesList(void);
 static void PageMoves_PrintCursor(enum PokedexPageMovesWindows windowId);
 static void PageMoves_PrintMovesList(void);
-static void PageMoves_PrintMoveInfo(void);
+static void PageMoves_PrintMoveInfo(bool32 faded);
 static void PageMoves_PrintMoveDesc(void);
-static void PageMoves_PrintMove(void);
+static void PageMoves_PrintMove(bool32 faded);
 static u32 PageMoves_GetIdToPrint(void);
 static const u8 *GetFormOrSpeciesName(u32 species);
 static void PageEvolutions_PrintEvolution(enum PokedexPages page);
@@ -438,6 +436,7 @@ static void PageMoves_CreatePage(void);
 static void PageEvolution_CreatePage(void);
 static void PageMoves_SwitchToSpeciesGrid(u8 taskId);
 static void Task_PreapreScreenPageToGrid(u8 taskId);
+static void Page_SetUp(u8 taskId);
 static void FreePageStructs(void);
 
 static void PageMoves_CreateCategorySprite(void);
@@ -462,7 +461,7 @@ static void PageMoves_SetMoveId(u32, u32);
 void PageMoves_PrintLevelMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
 void PageMoves_PrintEggMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
 void PageMoves_PrintMachineMethod(u32 species, u32 currentPosition, u32, u32, u32, enum PokedexPageMovesWindows windowId);
-static void PageMoves_PrintMoveTypeName(void);
+static void PageMoves_PrintMoveTypeName(bool32 faded);
 static u32 PageMoves_GetContrastColor(u32 moveType);
 static void PrintMoveLearnMethods(void);
 void PageMoves_GenerateParentsArray(void);
@@ -630,6 +629,7 @@ static void Task_PrepareScreenPageToPage(u8 taskId);
 static enum PokedexPages CalculateTargetPage(s32 delta);
 static void ClearPageData(void);
 void SetAndSetUpCurrentPage(u8 taskId);
+static void Task_ReturnToDexnav(u8 taskId);
 
 static const u16 pokedexPalettesFootprint[] = INCGFX_U16("graphics/pokedex/ui/palettes/footprint.pal", ".gbapal");
 static const u32 speciesListMonCursor[] = INCGFX_U32("graphics/pokedex/ui/species_list/mon.png", ".4bpp.smol");
@@ -695,7 +695,7 @@ void SetAndSetUpCurrentPage(u8 taskId)
     SetCurrentPage(pageId);
     InitializeBackgroundsAndLoadBackgroundGraphics();
     BeginNormalPaletteFade(PALETTES_ALL,0,16,0,RGB_WHITE);
-    Page_SetUp(taskId);
+    gTasks[taskId].func = Page_SetUp;
 }
 
 void (* const pageSetUpFuncLUT[])(void) =
@@ -998,6 +998,12 @@ static enum PokedexPages CalculateTargetPage(s32 delta)
 
 static void PageMoves_SwitchToSpeciesGrid(u8 taskId)
 {
+    if (sPokedexState->dexnavSavedData.species != SPECIES_NONE)
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+        gTasks[taskId].func = Task_ReturnToDexnav;
+        return;
+    }
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_PreapreScreenPageToGrid;
 }
@@ -1031,23 +1037,9 @@ static void Task_PreapreScreenPageToGrid(u8 taskId)
 
 static void FreePageStructs(void)
 {
-    enum PokedexPages page = GetCurrentPage();
-
-    if (page == POKEDEX_PAGE_MOVES)
-    {
-        if (sPokedexMovesPageData != NULL)
-            Free(sPokedexMovesPageData);
-    }
-    else if (page == POKEDEX_PAGE_EVOLUTION || page == POKEDEX_PAGE_FORMS || page == POKEDEX_PAGE_STATS)
-    {
-        if (sPokedexEvolutionPageData != NULL)
-            Free(sPokedexEvolutionPageData);
-    }
-    else if (page == POKEDEX_PAGE_LOCATION)
-    {
-        if (sPokedexLocationPageData != NULL)
-            Free(sPokedexLocationPageData);
-    }
+    TRY_FREE_AND_SET_NULL(sPokedexMovesPageData);
+    TRY_FREE_AND_SET_NULL(sPokedexEvolutionPageData);
+    TRY_FREE_AND_SET_NULL(sPokedexLocationPageData);
 }
 
 u8* GetMovePageHelpText(void)
@@ -1128,7 +1120,7 @@ static void UpdateMoveMethodIfExists(u16 moveId, enum MoveLearnMethods newMethod
     }
 }
 
-static bool32 IsMoveInSilicon(u32 moveId)
+bool32 IsMoveInSilicon(u32 moveId)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MOVES_PER_LETTER; moveIndex++)
     {
@@ -1403,7 +1395,7 @@ static void PageMoves_ChangeListPosition(s32 delta)
     PlaySE(SE_SELECT);
     PageMoves_SetCurrentPositionInMoveList(newPosition);
     PageMoves_ChangeCursorPosition();
-    PageMoves_PrintMove();
+    PageMoves_PrintMove(FALSE);
     PrintMoveLearnMethods();
     PrintHelpBar(PAGE_MOVES_WINDOW_FOOTER);
 }
@@ -1470,16 +1462,16 @@ static void PageMoves_CreatePage(void)
     ParentDisplay_SetWindowId(WINDOW_NONE);
     PageMoves_PopulateMovesList();
     PageMoves_SnapToLoadedCursorAndPosition();
-    PageMoves_PrintMove();
+    PageMoves_PrintMove(TRUE);
     SpeciesGrid_SetFirstPageLoad(TRUE);
     PrintMoveLearnMethods();
     PrintHelpBar(PAGE_MOVES_WINDOW_FOOTER);
 }
 
-static void PageMoves_PrintMove(void)
+static void PageMoves_PrintMove(bool32 faded)
 {
     PageMoves_PrintMovesList();
-    PageMoves_PrintMoveInfo();
+    PageMoves_PrintMoveInfo(faded);
     PageMoves_PrintMoveDesc();
 }
 
@@ -1615,7 +1607,7 @@ enum LRDirections
     DATA_RIGHT,
 };
 
-static void PageMoves_PrintMoveInfo(void)
+static void PageMoves_PrintMoveInfo(bool32 faded)
 {
     enum PokedexPageMovesWindows windowId = PAGE_MOVES_WINDOW_MOVES_DATA;
     u32 currentPosition = PageMoves_GetCurrentPositionInMoveList();
@@ -1627,7 +1619,7 @@ static void PageMoves_PrintMoveInfo(void)
     u32 x = 0, y = 0, numDigits = 0, value = 0;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    PageMoves_PrintMoveTypeName();
+    PageMoves_PrintMoveTypeName(faded);
 
     for (u32 listId = 0; listId < POKEDEX_PAGE_MOVE_DATA_COUNT; listId++)
     {
@@ -1701,7 +1693,7 @@ static void PageMoves_PrintMoveDesc(void)
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void PageMoves_PrintMoveTypeName(void)
+static void PageMoves_PrintMoveTypeName(bool32 faded)
 {
     enum PokedexPageMovesWindows windowId = PAGE_MOVES_WINDOW_MOVES_DATA;
     u32 currentPosition = PageMoves_GetCurrentPositionInMoveList();
@@ -1715,7 +1707,9 @@ static void PageMoves_PrintMoveTypeName(void)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 colorConst = PageMoves_GetContrastColor(moveType);
 
-    FillPalette(gTypesInfo[moveType].siliconRGBValue,POKEDEX_TYPE_WINDOW_COLOR_ADDRESS, 2);
+    CpuFill16(gTypesInfo[moveType].siliconRGBValue, &gPlttBufferUnfaded[POKEDEX_TYPE_WINDOW_COLOR_ADDRESS], 2);
+    if (!faded)
+        CpuFill16(gTypesInfo[moveType].siliconRGBValue, &gPlttBufferFaded[POKEDEX_TYPE_WINDOW_COLOR_ADDRESS], 2);
 
     StringCopy(gStringVar1,gTypesInfo[moveType].name);
     StringAppend(gStringVar1,COMPOUND_STRING("-type"));
@@ -3485,7 +3479,7 @@ static const u8 *GetFormOrSpeciesName(u32 species)
     return GetFormName(species);
 }
 
-static u32 ShouldUseMiniorException(u32 listId, u32 speciesId)
+static u32 ShouldUseMiniorException(u32 listId, enum Species speciesId)
 {
     if (speciesId != SPECIES_MINIOR_CORE)
         return speciesId;
@@ -3510,7 +3504,7 @@ static void PageEvolution_PrintEvolutionList(void)
 
     for (u32 listId = 0; listId < NUM_EVOLUTIONS_LIST_ROWS; listId++)
     {
-        u32 speciesId = PageEvolution_GetMonList(startingId + listId);
+        enum Species speciesId = PageEvolution_GetMonList(startingId + listId);
 
         if (speciesId == SPECIES_NONE)
             continue;
@@ -3852,7 +3846,7 @@ static void PageEvolution_PrintEvolutionDetails(void)
 
     BreakStringNaive(string, windowWidth, screenLines, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,string);
-    Free(string);
+    TRY_FREE_AND_SET_NULL(string);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -4072,7 +4066,7 @@ static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, u32 windowId)
         y -= TILE_SIZE_1BPP;
 
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,4);
-    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("#{STR_VAR_1}"));
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar3);
 }
 
@@ -4107,7 +4101,7 @@ static void PageEvolution_SpeciesData_PrintStats(u32 species, u32 windowId)
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,sStatNames[statIndex]);
         x+= POKEDEX_STATS_VALUE_X_PADDING;
         u32 stat = SpeciesFilter_GetStatForMon(statIndex,species);
-        ConvertIntToDecimalStringN(gStringVar1,stat,STR_CONV_MODE_LEADING_ZEROS,CountDigits(UCHAR_MAX));
+        ConvertIntToDecimalStringN(gStringVar1,stat,STR_CONV_MODE_LEADING_ZEROS,CountDigits(MAX_u8));
         PageStats_ChangeStatHighlightBasedOnValue(statIndex, stat);
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
         x -= POKEDEX_STATS_VALUE_X_PADDING;
@@ -4737,7 +4731,7 @@ static void PageInformation_PrintHeight(u32 species, enum PokedexPageInformation
     x = POKEDEX_INFO_MEASUREMENT_VALUE_X_STARTING;
 
     PageMoves_BufferMoveNameToString(heightString, gStringVar1, fontId, PAGE_INFORMATION_WINDOW_DATA);
-    Free(heightString);
+    TRY_FREE_AND_SET_NULL(heightString);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
 }
 
@@ -4754,7 +4748,7 @@ static void PageInformation_PrintWeight(u32 species, enum PokedexPageInformation
     x = POKEDEX_INFO_MEASUREMENT_VALUE_X_STARTING;
 
     PageMoves_BufferMoveNameToString(weightString, gStringVar1, fontId, PAGE_INFORMATION_WINDOW_DATA);
-    Free(weightString);
+    TRY_FREE_AND_SET_NULL(weightString);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
 }
 
@@ -4784,7 +4778,10 @@ static void PageInformation_PrintTypes(u32 species, enum PokedexPageInformationW
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_BLACK], TEXT_SKIP_DRAW,gStringVar1);
 
         u32 fontColor = PageMoves_GetContrastColor(types[typeIndex]);
-        FillPalette(gTypesInfo[types[typeIndex]].siliconRGBValue,POKEDEX_INFO_TYPE_WINDOW_COLOR_ADDRESS+typeIndex, 2);
+
+        //FillPalette(gTypesInfo[types[typeIndex]].siliconRGBValue,POKEDEX_INFO_TYPE_WINDOW_COLOR_ADDRESS+typeIndex, 2);
+        // Only fill the unfaded palette to avoid showing colors before fading away from white
+        CpuFill16(gTypesInfo[types[typeIndex]].siliconRGBValue, &gPlttBufferUnfaded[POKEDEX_INFO_TYPE_WINDOW_COLOR_ADDRESS+typeIndex], 2);
 
         PageMoves_EditPage_SaveTypeSpriteId(typeIndex, CreateSprite(&sSpriteTemplate_Type13x13,0,0,2));
         PageMoves_EditPage_SetTypeSpritePositionAndPalette(types[typeIndex],typeSpriteCoordinates[pageId][AXIS_X],y+typeSpriteCoordinates[pageId][AXIS_Y], typeIndex);
@@ -4937,7 +4934,7 @@ static const u16 statRankColors[] =
 static void PageStats_ChangeStatHighlightBasedOnValue(u32 statIndex, u32 value)
 {
     enum StatTierList rank = SpeciesFilter_GetRankForStat(statIndex,value);
-    FillPalette(statRankColors[rank],POKEDEX_STAT_HIGHLIGHT_PALETTE_ADDRESS + statIndex, 2);
+    CpuFill16(statRankColors[rank], &gPlttBufferUnfaded[POKEDEX_STAT_HIGHLIGHT_PALETTE_ADDRESS + statIndex], 2);
 }
 
 static void PageWeaknesses_InitWindows(void)
@@ -5137,7 +5134,7 @@ static void PageWeaknesses_PrintLegendText(void)
     PrependFontIdToFit(string, end, fontId, windowWidth);
 
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, colors, TEXT_SKIP_DRAW,string);
-    Free(string);
+    TRY_FREE_AND_SET_NULL(string);
 }
 
 static void PageWeaknesses_DrawWindowFrame(u32 windowId)
@@ -5203,4 +5200,15 @@ void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride)
         SpeciesGrid_SetShouldPlayCry(FALSE);
     }
 }
+static void Task_ReturnToDexnav(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
 
+    DestroyTask(taskId);
+    struct DexnavSavedData tempData = sPokedexState->dexnavSavedData;
+
+    ClearPageData();
+    FreePokedexStructs();
+    Dexnav_ReturnFromPokedex(tempData);
+}

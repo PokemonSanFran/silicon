@@ -1384,7 +1384,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
     else
     {
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 0x8, 0x10);
-        if (drawArrow == 0)
+        if (!drawArrow)
         {
             switch (gTextFlags.useAlternateDownArrow)
             {
@@ -1703,7 +1703,6 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         PrintGlyph(textPrinter);
-
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))
@@ -2105,6 +2104,16 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         ++str;
     }
 
+    // Start outlineFont
+    // decrement the last character width as well
+    if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+    {
+        lineWidth--;
+        if (width)
+            width--;
+    }
+    // End outlineFont
+
     if (lineWidth > width)
         return lineWidth;
     return width;
@@ -2333,7 +2342,7 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
 
-    if (isJapanese == 1)
+    if (isJapanese)
     {
         glyphs = gFontSmallJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);

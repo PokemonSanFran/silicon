@@ -26,6 +26,7 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fishing.h" // fishingUpdate
 #include "fldeff.h"
 #include "follower_npc.h"
 #include "gpu_regs.h"
@@ -42,6 +43,7 @@
 #include "nameplate.h" // siliconMerge
 #include "hidden_grotto.h" // hidden_grotto
 #include "map_name_popup.h"
+#include "map_preview_screen.h"
 #include "match_call.h"
 #include "menu.h"
 #include "metatile_behavior.h"
@@ -74,6 +76,7 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
+#include "wild_encounter_ow.h"
 #include "vs_seeker.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
@@ -94,6 +97,7 @@
 #include "quest_logic.h" // firstMusicUpdate
 #include "map_preview_screen.h" // mapPreviews
 #include "ui_map_system.h"
+#include "region_map.h" //HandleVisitedFlags
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 
@@ -238,7 +242,7 @@ EWRAM_DATA static struct WarpData sFixedDiveWarp = {0};
 EWRAM_DATA static struct WarpData sFixedHoleWarp = {0};
 EWRAM_DATA static mapsec_u16_t sLastMapSectionId = 0;
 EWRAM_DATA static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {0};
-EWRAM_DATA static u16 sAmbientCrySpecies = 0;
+EWRAM_DATA static enum Species sAmbientCrySpecies = SPECIES_NONE;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
 EWRAM_DATA static u8 sHoursOverride = 0; // used to override apparent time of day hours
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
@@ -469,10 +473,10 @@ void Overworld_ResetBattleFlagsAndVars(void)
     #endif
 
     FlagClear(B_FLAG_INVERSE_BATTLE);
-    FlagClear(B_FLAG_FORCE_DOUBLE_WILD);
-    FlagClear(B_SMART_WILD_AI_FLAG);
-    FlagClear(B_FLAG_NO_CATCHING);
-    FlagClear(B_FLAG_NO_RUNNING);
+    FlagClear(WE_FLAG_FORCE_DOUBLE_WILD);
+    FlagClear(WE_SMART_WILD_AI_FLAG);
+    FlagClear(WE_FLAG_NO_CATCHING);
+    FlagClear(WE_FLAG_NO_RUNNING);
     FlagClear(B_FLAG_DYNAMAX_BATTLE);
     FlagClear(B_FLAG_SKY_BATTLE);
     FlagClear(B_FLAG_NO_WHITEOUT);
@@ -918,91 +922,61 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 }
 
 // Start siliconMerge
+
+#include "data/region_map/region_map_neighbors.h"
+
 void CheckSetVisitedRouteFlags(void)
 {
-    if ((VarGet(VAR_ARANTRAZ_STATE) >= BATTLED_TALA) && FlagGet(FLAG_VISITED_ANBEH_BEND))
-        FlagSet(FLAG_VISITED_ROUTE11);
+    mapsec_u16_t mapA = MAPSEC_NONE;
+    mapsec_u16_t mapB = MAPSEC_NONE;
+    mapsec_u16_t mapDestination = MAPSEC_NONE;
+    mapsec_u16_t currentMap = gMapHeader.regionMapSectionId;
 
-    if (FlagGet(FLAG_VISITED_FORT_YOBU) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE16);
+//DebugPrintf("currentMap is %S",gRegionMapEntries[currentMap].name);
 
-    if (FlagGet(FLAG_VISITED_CRESALTA_VISTA) && FlagGet(FLAG_VISITED_HALERBAWILDS_WEST))
-        FlagSet(FLAG_VISITED_ROUTE22);
+    if (currentMap < RESIDO_MAPSEC_START)
+        return;
 
-    if (FlagGet(FLAG_VISITED_QIU_VILLAGE) && FlagGet(FLAG_VISITED_HALERBAWILDS_SOUTH))
-        FlagSet(FLAG_VISITED_ROUTE18);
+    if (currentMap > RESIDO_MAPSEC_END)
+        return;
 
-    if (FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_POPIDORA_PIER))
-        FlagSet(FLAG_VISITED_ROUTE4);
+    for (u32 neighbors = 0; neighbors < ARRAY_COUNT(regionMapNeighbors); neighbors++)
+    {
+        mapA = regionMapNeighbors[neighbors].mapA;
+        mapB = regionMapNeighbors[neighbors].mapB;
+        mapDestination = regionMapNeighbors[neighbors].destination;
 
-    if (FlagGet(FLAG_VISITED_CAPHE_CITY) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
-        FlagSet(FLAG_VISITED_ROUTE10);
+        u32 flagA = gRegionMapEntries[mapA].visitedFlag;
+        u32 flagB = gRegionMapEntries[mapB].visitedFlag;
+        u32 flagDestination = gRegionMapEntries[mapDestination].visitedFlag;
+//DebugPrintf("-------------------------------------");
 
-    if (FlagGet(FLAG_VISITED_MERMEREZA_CITY) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
-        FlagSet(FLAG_VISITED_ROUTE8);
+//DebugPrintf("map A is %S",gRegionMapEntries[mapA].name);
+//DebugPrintf("map B is %S",gRegionMapEntries[mapB].name);
+//DebugPrintf("map C is %S",gRegionMapEntries[mapDestination].name);
 
-    if (FlagGet(FLAG_VISITED_OROLAND) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
-        FlagSet(FLAG_VISITED_PSFROUTE7E17FDD1);
+        if (mapA != currentMap && mapB != currentMap && mapDestination != currentMap)
+            continue;
 
-    if (FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE14);
+        if (mapDestination == MAPSEC_TORGEOT_CLIMB)
+        {
+            if (VarGet(VAR_TIME_TRAVEL_STATE) <= TIME_TRAVEL_NEVER_STARTED)
+                continue;
 
-    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_MERMEREZA_CITY))
-        FlagSet(FLAG_VISITED_ROUTE5);
+            FlagSet(flagDestination);
+            continue;
+        }
 
-    if(FlagGet(FLAG_VISITED_POPIDORA_PIER) && FlagGet(FLAG_VISITED_ARANTRAZ))
-        FlagSet(FLAG_VISITED_ROUTE_D);
+//DebugPrintf("evaluating map A is %S with flag %d",gRegionMapEntries[mapA].name,flagA);
+//DebugPrintf("evaluating map B is %S with flag %d",gRegionMapEntries[mapB].name,flagB);
+//DebugPrintf("evaluating map C is %S with flag %d",gRegionMapEntries[mapDestination].name,flagDestination);
 
-    if(FlagGet(FLAG_VISITED_CUCONU_TOWN) && FlagGet(FLAG_VISITED_GLAVEZ_HILL))
-        FlagSet(FLAG_VISITED_ROUTE6);
+        if ((FlagGet(flagA)) && (FlagGet(flagB)))
+            FlagSet(flagDestination);
 
-    if(FlagGet(FLAG_VISITED_IRISINA_TOWN) && FlagGet(FLAG_VISITED_TORGEOT_CLIMB_BASE))
-        FlagSet(FLAG_VISITED_ROUTE3);
-
-    if(FlagGet(FLAG_VISITED_ANBEH_BEND) && FlagGet(FLAG_VISITED_POPIDORA_PIER))
-        FlagSet(FLAG_VISITED_PSFROUTE9F45DA86);
-
-    if(FlagGet(FLAG_VISITED_ARANTRAZ) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
-        FlagSet(FLAG_VISITED_ROUTE_C);
-
-    if(FlagGet(FLAG_VISITED_GLAVEZ_HILL) && FlagGet(FLAG_VISITED_CURENO_PORT))
-        FlagSet(FLAG_VISITED_ROUTE1);
-
-    if(FlagGet(FLAG_VISITED_PERLACIA_CITY) && FlagGet(FLAG_VISITED_CURENO_PORT))
-        FlagSet(FLAG_VISITED_ROUTE2);
-
-    if(FlagGet(FLAG_VISITED_WAJABI_LAKE) && FlagGet(FLAG_VISITED_QIU_VILLAGE))
-        FlagSet(FLAG_VISITED_ROUTE20);
-
-    if(FlagGet(FLAG_VISITED_ZENZU_ISLAND))
-        FlagSet(FLAG_VISITED_NONGYU_BRIDGE);
-
-    if(FlagGet(FLAG_VISITED_TORA_TOWN) && FlagGet(FLAG_VISITED_CAPHE_CITY))
-        FlagSet(FLAG_VISITED_ROUTE9);
-
-    if(FlagGet(FLAG_VISITED_TIRABUDIN_PLACE) && FlagGet(FLAG_VISITED_PINTILLONHOUSE))
-        FlagSet(FLAG_VISITED_ROUTE7);
-
-    if(FlagGet(FLAG_VISITED_PETAROSA_BOROUGH) && FlagGet(FLAG_VISITED_CRESALTA_VISTA))
-        FlagSet(FLAG_VISITED_ROUTE13);
-
-    if(FlagGet(FLAG_VISITED_HALAI_ISLAND) && FlagGet(FLAG_VISITED_ARANTRAZ))
-        FlagSet(FLAG_VISITED_ROUTE_A);
-
-    if(FlagGet(FLAG_VISITED_CHASILLA) && FlagGet(FLAG_VISITED_OROLAND))
-        FlagSet(FLAG_VISITED_ROUTE99);
-
-    if(FlagGet(FLAG_VISITED_LEAVERRA_FOREST) && FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS))
-        FlagSet(FLAG_VISITED_ROUTE100);
-
-    if(FlagGet(FLAG_VISITED_ANBEH_BEND) && FlagGet(FLAG_VISITED_CAPHE_CITY))
-        FlagSet(FLAG_VISITED_ROUTE12);
-
-    if (FlagGet(FLAG_VISITED_OROLAND) && FlagGet(FLAG_VISITED_HALAI_ISLAND))
-        FlagSet(FLAG_VISITED_ROUTE_B);
-
-    if(FlagGet(FLAG_VISITED_ESPULEE_OUTSKIRTS) && FlagGet(FLAG_VISITED_CHASILLA))
-        FlagSet(FLAG_VISITED_ROUTE_E);
+        if ((flagA == 0) && (flagB == 0) && (mapDestination == currentMap))
+            FlagSet(flagDestination);
+    }
 }
 // End siliconMerge
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
@@ -1039,8 +1013,9 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(); // siliconQuests
     CheckSetVisitedRouteFlags(); // siliconMerge
-    UpdateChainFishingStreak(); // fishingUpdate
+    ResetChainFishingStreak(); // fishingUpdate
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout, TRUE); // skip copying to Faded, gamma shift will take care of it
@@ -1056,7 +1031,14 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     RunOnResumeMapScript();
     ClearAllPhenomenonData(); // phenomenon
 
-    if (OW_HIDE_REPEAT_MAP_POPUP)
+    // Start mapPreviews
+    if (ShouldRunOutdoorMapPreview())
+    {
+        RunOutdoorMapPreview();
+    }
+    else if (OW_HIDE_REPEAT_MAP_POPUP)
+    //if (OW_HIDE_REPEAT_MAP_POPUP)
+    // End mapPreviews
     {
         if (gMapHeader.regionMapSectionId != sLastMapSectionId)
             ShowMapNamePopup();
@@ -1067,6 +1049,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
          || gMapHeader.regionMapSectionId != sLastMapSectionId)
             ShowMapNamePopup();
     }
+    SetMinimumOWESpawnTimer();
 }
 
 static void LoadMapFromWarp(bool32 a1)
@@ -1117,12 +1100,13 @@ static void LoadMapFromWarp(bool32 a1)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
+    Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(); // siliconQuests
     CheckSetVisitedRouteFlags(); // siliconMerge
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         InitBattlePyramidMap(FALSE);
@@ -1136,6 +1120,7 @@ static void LoadMapFromWarp(bool32 a1)
         UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         InitSecretBaseAppearance(TRUE);
     }
+    SetMinimumOWESpawnTimer();
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -1602,8 +1587,28 @@ void Overworld_FadeOutMapMusic(void)
     FadeOutMapMusic(4);
 }
 
+static bool32 ShouldPlayVanillaAmbientCry(void)
+{
+    switch (OW_AMBIENT_CRIES)
+    {
+    case OW_AMBIENT_CRIES_VANILLA:
+        return TRUE;
+    case OW_AMBIENT_CRIES_OWE_PRIORITY:
+        return !TryPlayAmbientCryOWE();
+    case OW_AMBIENT_CRIES_OWE_ONLY:
+        TryPlayAmbientCryOWE();
+        return FALSE;
+    case OW_AMBIENT_CRIES_NONE:
+    default:
+        return FALSE;
+    }
+}
+
 static void PlayAmbientCry(void)
 {
+    if (!ShouldPlayVanillaAmbientCry())
+        return;
+
     s16 x, y;
     s8 pan;
     s8 volume;
@@ -1658,8 +1663,8 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
         monsCount = CalculatePlayerPartyCount();
         for (i = 0; i < monsCount; i++)
         {
-            if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
-                && GetMonAbility(&gPlayerParty[0]) == ABILITY_SWARM)
+            if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_EGG)
+                && GetMonAbility(&gParties[B_TRAINER_PLAYER][0]) == ABILITY_SWARM)
             {
                 divBy = 2;
                 break;
@@ -1720,17 +1725,15 @@ enum MapType GetLastUsedWarpMapType(void)
     return GetMapTypeByWarpData(&gLastUsedWarp);
 }
 
-// start mapPreviews
-u8 GetLastUsedWarpMapSectionId(void)
+mapsec_u16_t GetLastUsedWarpMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gLastUsedWarp.mapGroup, gLastUsedWarp.mapNum)->regionMapSectionId;
 }
 
-u8 GetDestinationWarpMapSectionId(void)
+mapsec_u16_t GetDestinationWarpMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum)->regionMapSectionId;
 }
-// end mapPreviews
 bool8 IsMapTypeOutdoors(enum MapType mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
@@ -2037,6 +2040,7 @@ static void OverworldBasic(void)
         }
     }
     RestartPhenomenon(); // phenomenon
+    UpdateOverworldWildEncounter();
 }
 
 // This CB2 is used when starting
@@ -2323,6 +2327,7 @@ void CB2_ContinueSavedGame(void)
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;
     InitMatchCallCounters();
+    EndDexNavSearch(); // dexnav
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();
@@ -2533,12 +2538,13 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
         (*state)++;
         break;
     case 11:
-        // start mapPreviews
-        if (ShouldRunFadeInMapPreviewScreen())
-            RunFadeInMapPreviewScreen();
-        //if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        if (ShouldRunMapPreview() && CurrentMapHasPreviewScreen(MPS_TYPE_FADE_IN) == TRUE)
+        {
+            MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
+            RunMapPreviewScreenFadeIn(gMapHeader.regionMapSectionId);
+        }
         else if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
-        // end mapPreviews
+
             ShowMapNamePopup();
         (*state)++;
         break;

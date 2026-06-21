@@ -313,7 +313,6 @@ ContestHall_EventScript_TryWaitForLink::
 
 ContestHall_EventScript_WaitForLink::
 	special LinkContestWaitForConnection
-	waitstate
 	return
 
 ContestHall_EventScript_ContestantWalkToCenter::
@@ -1046,7 +1045,7 @@ ContestHall_EventScript_DontSkipPrize::
 
 @ This flag is never read
 ContestHall_EventScript_SetSketchFlag::
-	setflag FLAG_CONTEST_SKETCH_CREATED
+	//setflag FLAG_CONTEST_SKETCH_CREATED // siliconQuests
 	return
 
 ContestHall_EventScript_SetReadyForContestArtist::

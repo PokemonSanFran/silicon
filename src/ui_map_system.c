@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ui_map_system.h"
+#include "dexnav_accessors.h"
 #include "tv.h"
 #include "strings.h"
 #include "bg.h"
@@ -234,6 +235,11 @@ static void L2WaypointSpriteCallback(struct Sprite *sprite);
 static bool8 IsCurrentIndexLastInL2List(u32 index);
 
 static void PrintWarpPriceOnTooltip(u32 bgColor, u32 startTile);
+static u8 HandleWarpFailedNotVisited(void);
+static void PrintWarpFailedHeaderTitleToWindow();
+static void PrintFailedTrolleyHeaderToWindow();
+static void HandleTrolleyWarpFailedNotVisited(u8 taskId) ;
+static void UpdateRegionMapCursor(void);
 
 //==========CONST=DATA==========//
 static const struct BgTemplate sMenuBgTemplates[] =
@@ -994,13 +1000,11 @@ static const u16 sMapHealLocations[MAPSEC_NONE] =
     [MAPSEC_PETAROSA_BOROUGH]=HEAL_LOCATION_PETAROSA_BOROUGH,
     [MAPSEC_ROUTE11]=HEAL_LOCATION_ROUTE11,
     [MAPSEC_ROUTE8]=HEAL_LOCATION_ROUTE8,
-    [MAPSEC_PSFROUTE7E17FDD1]=HEAL_LOCATION_PSFROUTE7E17FDD1,
     [MAPSEC_ROUTE14]=HEAL_LOCATION_ROUTE14,
     [MAPSEC_ROUTE5]=HEAL_LOCATION_ROUTE5,
     [MAPSEC_ROUTE_D]=HEAL_LOCATION_ROUTE_D,
     [MAPSEC_ROUTE6]=HEAL_LOCATION_ROUTE6,
     [MAPSEC_ROUTE3]=HEAL_LOCATION_ROUTE3,
-    [MAPSEC_PSFROUTE9F45DA86]=HEAL_LOCATION_PSFROUTE9F45DA86,
     [MAPSEC_ROUTE16]=HEAL_LOCATION_ROUTE16,
     [MAPSEC_ROUTE_C]=HEAL_LOCATION_ROUTE_C,
     [MAPSEC_ROUTE1]=HEAL_LOCATION_ROUTE1,
@@ -1122,7 +1126,7 @@ enum TrolleyLocations {
     TROLLEY_PAINTED_LADIES, // LIGHT GREEN
     TROLLEY_CAPHE_CITY, // ORANGE
     TROLLEY_ESPULEE_OUTSKIRTS, // YELLOW
-    TROLLEY_TRANSPYRAMID, // BLUE
+    TROLLEY_HODOU_CITY, // BLUE
     TROLLEY_TREASURE_ISLAND, // BLUE
     TROLLEY_OROLAND, // BLUE
     TROLLEY_COUNT,
@@ -1153,7 +1157,7 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconY = (15 * 8),
         .nextTrolleyOptions = {
                                 .moveLeftStop  = TROLLEY_QIU_VILLAGE,
-                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveRightStop = TROLLEY_HODOU_CITY,
                                 .moveUpStop    = TROLLEY_IRISINA_TOWN,
                                 .moveDownStop  = TROLLEY_ESPULEE_OUTSKIRTS,
                             },
@@ -1223,7 +1227,7 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconY = (9 * 8) - 1,
         .nextTrolleyOptions = {
                                 .moveLeftStop  = TROLLEY_PAINTED_LADIES,
-                                .moveRightStop = TROLLEY_TRANSPYRAMID,
+                                .moveRightStop = TROLLEY_HODOU_CITY,
                                 .moveUpStop    = TROLLEY_ESPULEE_OUTSKIRTS,
                                 .moveDownStop  = TROLLEY_IRISINA_TOWN,
                             },
@@ -1243,8 +1247,8 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
                             },
     },
 
-    [TROLLEY_TRANSPYRAMID] = {
-        .trolleyMapSec = MAPSEC_TRANSPYRAMID,
+    [TROLLEY_HODOU_CITY] = {
+        .trolleyMapSec = MAPSEC_HODOU_CITY,
         .trolleyCursorX = 17,
         .trolleyCursorY = 4,
         .trolleyLocationIconX = (15 * 8),
@@ -1264,10 +1268,10 @@ static const struct TrolleyStop SFTrolleyStops[TROLLEY_COUNT] =
         .trolleyLocationIconX = (17 * 8),
         .trolleyLocationIconY = (3 * 8) + 1,
         .nextTrolleyOptions = {
-                                .moveLeftStop  = TROLLEY_TRANSPYRAMID,
+                                .moveLeftStop  = TROLLEY_HODOU_CITY,
                                 .moveRightStop = TROLLEY_OROLAND,
                                 .moveUpStop    = TROLLEY_CURENO_PORT,
-                                .moveDownStop  = TROLLEY_TRANSPYRAMID,
+                                .moveDownStop  = TROLLEY_HODOU_CITY,
                             },
     },
 
@@ -1557,6 +1561,7 @@ static bool8 MapSystem_DoGfxSetup(void)
             sRegionMap->activeCursorState = CURSOR_SMALL_CURSOR_STATE;
 
         CreateSFRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
+        UpdateRegionMapCursor();
         if(sCurrentMapMode != MAP_MODE_TROLLEY)
             PrintHeaderTitleToWindow();
         else
@@ -2417,6 +2422,8 @@ void CreateOWWaypointArrowSprite(void)
 #define WAYPOINT_FOUND_DURATION ((60 * 3) + UPDATE_WAYPOINT_INTERVAL)
 static void SpriteCB_HandleOWWaypointArrow(struct Sprite *sprite)
 {
+    sprite->invisible = Dexnav_IsSearchActive();
+
     if(sprite->data[4] == OWARROW_NO_SIGNAL_ANIM)
         return;
 
@@ -2477,8 +2484,7 @@ void CreateOverworldWaypointArrow(void)
 
 static void Task_DelayPrintOverworldWaypoint(u8 taskId)
 {
-    //if (FindTaskIdByFunc(Task_RunMapPreview_Script) != TASK_NONE)
-   if (ForestMapPreviewScreenIsRunning())
+    if (FadeInMapPreviewScreenIsRunning())
         return;
 
     if (!gPaletteFade.active)
@@ -2640,6 +2646,7 @@ static const u8 sText_TaxiHasLocationStateHeader[]         = _("Take taxi to {ST
 static const u8 sText_FlyLockedStateHeader[]         = _("You cannot Fly here yet.");
 static const u8 sText_FlyBlankStateHeader[]         = _("Select a destination to Fly to.");
 static const u8 sText_FlyHasLocationStateHeader[]         = _("Fly to {STR_VAR_1}?");
+static const u8 sText_CantWarpLocationStateHeader[]         = _("{STR_VAR_1}");
 
 static void PrintHeaderTitleToWindow()
 {
@@ -2671,7 +2678,9 @@ static void PrintHeaderTitleToWindow()
                 }
                 else
                 {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet."));
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_CantWarpLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 break;
             }
@@ -2692,8 +2701,10 @@ static void PrintHeaderTitleToWindow()
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 else
-            {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take G.R.U.N.T. here yet."));
+                {
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_CantWarpLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 break;
             }
@@ -2714,8 +2725,10 @@ static void PrintHeaderTitleToWindow()
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 else
-            {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiLockedStateHeader);
+                {
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_CantWarpLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 break;
             }
@@ -2734,7 +2747,84 @@ static void PrintHeaderTitleToWindow()
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
                 }
                 else
+                {
+                    StringCopy(gStringVar1, gRegionMapEntries[sRegionMap->mapSecId].name);
+                    StringExpandPlaceholders(gStringVar4, sText_CantWarpLocationStateHeader);
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar4);
+                }
+                break;
+            }
+    }
+
+    // Footer Printing
+    PrintMapFooter(FALSE);
+
+    // Load Windows
+    PutWindowTilemap(WINDOW_HEADER_TEXT);
+    CopyWindowToVram(WINDOW_HEADER_TEXT, 3);
+    PutWindowTilemap(WINDOW_FOOTER_TEXT);
+    CopyWindowToVram(WINDOW_FOOTER_TEXT, 3);
+    return;
+}
+
+static void PrintWarpFailedHeaderTitleToWindow()
+{
+    // Clear Windows
+    FillWindowPixelBuffer(WINDOW_HEADER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_FOOTER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    switch (sCurrentMapMode)
+    {
+        case MAP_MODE_DEFAULT:
             {
+                if ((sRegionMap->warpCounter == WARP_FAILED_PAUSE_START) && (sRegionMap->canUseFastTravel) == FALSE)
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You can't use Arriba indoors!"));
+                }
+                else if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an Arriba destination."));
+                }
+                else
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet.")); 
+                }
+                break;
+            }
+        case MAP_MODE_TROLLEY:
+            {
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("Select an G.R.U.N.T. destination."));
+                }
+                else
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take G.R.U.N.T. here yet."));
+                }
+                break;
+            }
+        case MAP_MODE_TAXI:
+            {
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiBlankStateHeader);
+                }
+                else
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_TaxiLockedStateHeader);
+                }
+                break;
+            }
+        case MAP_MODE_FLY_POKEMON:
+        case MAP_MODE_FLY_TOOL_BAG:
+        case MAP_MODE_FLY_TOOL_FIELD:
+            {
+                if(CheckIfHoverLocationIsMapSecNone())
+                {
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyBlankStateHeader);
+                }
+                else
+                {
                     AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_FlyLockedStateHeader);
                 }
                 break;
@@ -2751,6 +2841,7 @@ static void PrintHeaderTitleToWindow()
     CopyWindowToVram(WINDOW_FOOTER_TEXT, 3);
     return;
 }
+
 
 static void PrintMapFooter(bool32 confirmMode)
 {
@@ -2822,11 +2913,9 @@ static void PrintHeaderWarpConfirmToWindow(void)
 
 static const u8 sText_CanRideTheTrolley[]          = _("Take trolley to {STR_VAR_1}?");
 static const u8 sText_CantRideTrolleyYet[]         = _("You cannot take the trolley here yet.");
+static const u8 sText_BlankTrolleyName[]         = _("{STR_VAR_1}");
 static void PrintTrolleyHeaderToWindow()
 {
-    GetSFMapName(gStringVar1, SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec, 0);
-    StringExpandPlaceholders(gStringVar2, sText_CanRideTheTrolley);
-
     // Clear Windows
     FillWindowPixelBuffer(WINDOW_HEADER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WINDOW_FOOTER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -2834,9 +2923,17 @@ static void PrintTrolleyHeaderToWindow()
     // Header Printing
     u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
     if(hasVisited == LOCATION_VISITED)
+    {
+        GetSFMapName(gStringVar1, SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec, 0);
+        StringExpandPlaceholders(gStringVar2, sText_CanRideTheTrolley);
         AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar2);
+    }
     else
-        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_CantRideTrolleyYet);
+    {
+        GetSFMapName(gStringVar1, SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec, 0);
+        StringExpandPlaceholders(gStringVar2, sText_BlankTrolleyName);
+        AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, gStringVar2);
+    }
 
     // Footer Printing
     PrintMapFooter(TRUE);
@@ -2848,6 +2945,27 @@ static void PrintTrolleyHeaderToWindow()
     CopyWindowToVram(WINDOW_FOOTER_TEXT, 3);
     return;
 }
+
+static void PrintFailedTrolleyHeaderToWindow()
+{
+    // Clear Windows
+    FillWindowPixelBuffer(WINDOW_HEADER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_FOOTER_TEXT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    // Header Printing
+    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, sText_CantRideTrolleyYet);
+
+    // Footer Printing
+    PrintMapFooter(TRUE);
+
+    // Load Windows
+    PutWindowTilemap(WINDOW_HEADER_TEXT);
+    CopyWindowToVram(WINDOW_HEADER_TEXT, 3);
+    PutWindowTilemap(WINDOW_FOOTER_TEXT);
+    CopyWindowToVram(WINDOW_FOOTER_TEXT, 3);
+    return;
+}
+
 
 
 
@@ -3344,16 +3462,20 @@ static void Task_MapSystem_TrolleyMode_Main(u8 taskId)
 {
     if(JOY_NEW(A_BUTTON))
     {
-        PlaySE(SE_SELECT);
         u16 hasVisited = GetMapsecTypeHasVisited(SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec);
         if(hasVisited != LOCATION_VISITED)
+        {
+            sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
+            gTasks[taskId].func = HandleTrolleyWarpFailedNotVisited;
             return;
+        }
+
+        PlaySE(SE_SELECT);
 
         sRegionMap->warpCounter = 0;
         sRegionMap->mapSecId = SFTrolleyStops[sRegionMap->currentTrolley].trolleyMapSec;
         RemoveMoney(&gSaveBlock1Ptr->money, GetWarpPriceAtMapSecByMapType(sRegionMap->mapSecId));
         gTasks[taskId].func = Task_MapSystem_TrolleyMode_Warp;
-
         return;
     }
     if(JOY_NEW(B_BUTTON))
@@ -3606,10 +3728,8 @@ static u8 HandleAttemptWarpInput(void)
     }
     else
     {
-        if(GetMenuL2State())
-            sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
-        else
-            sRegionMap->inputCallback = ProcessRegionMapInput_Full;
+        sRegionMap->warpCounter = WARP_FAILED_PAUSE_START;
+        sRegionMap->inputCallback = HandleWarpFailedNotVisited;
     }
 
     return MAP_INPUT_NONE;
@@ -3869,6 +3989,76 @@ static u8 HandleWarpFailedNoCash(void)
 
     return MAP_INPUT_NONE;
 
+}
+
+static u8 HandleWarpFailedNotVisited(void) 
+{
+    switch(sRegionMap->warpCounter)
+    {
+        case WARP_FAILED_PAUSE_START:
+            PlaySE(SE_BOO);
+            PrintWarpFailedHeaderTitleToWindow();
+            sRegionMap->warpCounter--;
+            break;
+        case WARP_FAILED_PAUSE_END:
+            if(GetMenuL2State())
+                sRegionMap->inputCallback = ProcessRegionMapInput_L2_State;
+            else
+                sRegionMap->inputCallback = ProcessRegionMapInput_Full;
+            GetSFMapName(sRegionMap->mapSecName, sRegionMap->mapSecId, MAP_NAME_LENGTH);
+            PrintHeaderTitleToWindow();
+            sRegionMap->warpCounter = 0;
+            return MAP_INPUT_NONE;
+        default:
+            sRegionMap->warpCounter--;
+            break;
+    }
+
+    switch (sRegionMap->warpCounter % 8)
+    {
+        case 0:
+            sRegionMap->cursorSprite->x += 2;
+            break;
+        case 7:
+            sRegionMap->cursorSprite->x -= 2;
+            break;
+    }
+
+    return MAP_INPUT_NONE;
+}
+
+static void HandleTrolleyWarpFailedNotVisited(u8 taskId) 
+{
+    switch(sRegionMap->warpCounter)
+    {
+        case WARP_FAILED_PAUSE_START:
+            PlaySE(SE_BOO);
+            PrintFailedTrolleyHeaderToWindow();
+            sRegionMap->cursorSprite->callback = SpriteCallbackDummy;
+            sRegionMap->warpCounter--;
+            break;
+        case WARP_FAILED_PAUSE_END:
+            gTasks[taskId].func = Task_MapSystem_TrolleyMode_Main;
+            PrintTrolleyHeaderToWindow();
+            sRegionMap->cursorSprite->callback = SpriteCB_CursorMap_TrolleyMode;
+            sRegionMap->warpCounter = 0;
+            return;
+        default:
+            sRegionMap->warpCounter--;
+            break;
+    }
+
+    switch (sRegionMap->warpCounter % 8)
+    {
+        case 0:
+            sRegionMap->cursorSprite->x += 2;
+            break;
+        case 7:
+            sRegionMap->cursorSprite->x -= 2;
+            break;
+    }
+
+    return;
 }
 
 

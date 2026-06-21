@@ -209,7 +209,7 @@ EWRAM_DATA u8 gTweetOverworldWindowId = 0;
 EWRAM_DATA u16 overworldTweet = TWEET_NONE;
 
 static const u8 sText_OldestFirst[] =_("Oldest First");
-static const u8 sText_UsernamePrefix[] =_("+");
+static const u8 sText_UsernamePrefix[] =_("@");
 
 static const struct BgTemplate sBuzzrBgTemplates[] =
 {
@@ -1147,8 +1147,8 @@ static void ResetVerticalOffset(void)
 
 static void SetVerticalOffset(u32 offset)
 {
-    if (offset > UCHAR_MAX)
-        offset = UCHAR_MAX;
+    if (offset > MAX_u8)
+        offset = MAX_u8;
 
     sBuzzrState->verticalOffset = offset;
 }
@@ -2091,6 +2091,14 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM:
         case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREHODOUGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_IMPROVBATTLING_ACTIVE:
+        case TWEET_QUEST_IMPROVBATTLING_COMPLETE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HANG20_WARNING:
+        case TWEET_QUEST_HANG20_ROCKY_COASTS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
             break;
     }
 }

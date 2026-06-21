@@ -630,17 +630,6 @@ static const u8 sOptionMenuArrow_Left[]     = INCGFX_U8("graphics/ui_menus/optio
 static const u8 sOptionMenuArrow_Right[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_right.png", ".4bpp");
 
 static const u8 sOptionMenuSelector[]       = INCGFX_U8("graphics/ui_menus/options_menu/selector.png", ".4bpp");
-
-//Text
-static const u8 sText_Title_Settings_Hub[]  = COMPOUND_STRING("Settings Hub");
-static const u8 sText_Options_Text[]        = COMPOUND_STRING("Option Description");
-
-
-static const u8 sText_Discard_Text[]        = COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?");
-
-static const u8 sText_Help_Bar_Discard[]        = COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save");
-static const u8 sText_Help_Bar_Settings_Hub[]   = COMPOUND_STRING("{DPAD_LEFTRIGHT} Preset {A_BUTTON} Explore {B_BUTTON} Discard {START_BUTTON} Save and Quit");
-static const u8 sText_Help_Bar_Settings_Page[]  = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change {B_BUTTON} Discard {START_BUTTON} Save {L_BUTTON}{R_BUTTON} Next Page");
 // Preset
 
 static const struct OptionData Hub_Options[NUM_OF_PRESET_OPTIONS] = {
@@ -1386,7 +1375,7 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             },
         .optionDescription = {
             COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
-            COMPOUND_STRING("Pressing the {R_BUTTON} will change the player's behavior betweeen always walking and always running."),
+            COMPOUND_STRING("Pressing the {L_BUTTON} will change the player's behavior betweeen always walking and always running."),
             COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
             },
         .numOptions = 3,
@@ -1524,7 +1513,7 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
         },
-        .numOptions = 4,
+        .numOptions = BATTLE_OPTION_MULTIPLIER_COUNT,
     },
     [BATTLE_OPTIONS_EFFORT_VALUES] =
     {
@@ -2765,7 +2754,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 0;
 		y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Title_Settings_Hub);
+		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Settings Hub"));
 	}
 
 	// Current Settings Title --------------------------------------------------------------------------------------------------------------------
@@ -2895,7 +2884,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	x = 0;
 	y = 14;
 	if(ShouldShowDiscardDialogue){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Discard_Text);
+		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
 	}
 	else if(!areYouNotOnSettingsHub){
 		switch(currentScreenId){
@@ -2948,16 +2937,17 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	// Help Bar --------------------------------------------------------------------------------------------------------------------
 	x = 0;
 	y = 18;
-	if(ShouldShowDiscardDialogue){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Discard);
-	}
-	else if(!areYouNotOnSettingsHub){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Settings_Hub);
-	}
-	else{
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Settings_Page);
-	}
 
+//Text
+    if(ShouldShowDiscardDialogue){
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save"));
+    }
+    else if(!areYouNotOnSettingsHub){
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Preset {A_BUTTON} Explore {B_BUTTON} Discard {START_BUTTON} Save and Quit"));
+    }
+    else{
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Change {B_BUTTON} Discard {START_BUTTON} Save {L_BUTTON}{R_BUTTON} Next Page"));
+    }
 	// --------------------------------------------------------------------------------------------------------------------
 	PutWindowTilemap(windowId);
 	CopyWindowToVram(windowId, 3);

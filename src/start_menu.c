@@ -11,6 +11,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h" // autoSave
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -1529,6 +1530,7 @@ void DoAutoSave(void)
     IncrementGameStat(GAME_STAT_SAVED_GAME);
     TrySavingData(SAVE_NORMAL);
     gDifferentSaveFile = FALSE;
-    return;
+    u32 taskId = FindTaskIdByFunc(Task_Saving);
+    gTasks[taskId].data[2] = TRUE;
 }
 // End autoSave

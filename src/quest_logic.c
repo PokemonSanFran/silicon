@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "fake_rtc.h"
+#include "fishing.h"
 #include "ui_pokedex.h"
 #include "daycare.h"
 #include "constants/trainers.h"
@@ -58,6 +59,7 @@
 #include "constants/ui_map_system.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
+#include "event_scripts.h"
 
 void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
 {
@@ -77,7 +79,7 @@ void DebugQuest_EvolveMon(u32 old, u32 species)
     if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
         BoxMonAtToMon(gSpecialVar_MonBoxId,gSpecialVar_MonBoxPos, mon);
     else
-        mon = &gPlayerParty[gSpecialVar_0x8004];
+        mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
 
     SetMonData(mon, MON_DATA_SPECIES, &species);
     SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
@@ -92,7 +94,7 @@ static bool8 DebugQuest_MarkSpeciesForDeletion(u32 species)
 {
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
         if (GetMonData(mon, MON_DATA_SPECIES) != species)
             continue;
         gSpecialVar_0x8004 = i;
@@ -791,7 +793,7 @@ bool8 Quest_Taxicabturnaround_CheckSeaPokemon(void){
     u32 requiredHeight = 11;
     bool8 doesPokemonMatch = TRUE;
 
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    species = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
     height = gSpeciesInfo[species].height;
 
@@ -809,7 +811,7 @@ bool8 Quest_Taxicabturnaround_CheckSkyPokemon(void){
     u32 requiredSpeed= 80;
     bool8 doesPokemonMatch = TRUE;
 
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    species = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
     speed = gSpeciesInfo[species].baseSpeed;
 
@@ -828,7 +830,7 @@ bool8 Quest_Taxicabturnaround_CheckLandPokemon(void){
     u32 eggGroup[2] = {0,0};
     bool8 doesPokemonMatch = TRUE;
 
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    species = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
     eggGroup[0] = gSpeciesInfo[species].eggGroups[0];
     eggGroup[1] = gSpeciesInfo[species].eggGroups[1];
 
@@ -1622,7 +1624,7 @@ bool8 Quest_CompulsiveHealingPeerSupport_CheckIfPartyTypes(void)
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        pokemon = &gPlayerParty[i];
+        pokemon = &gParties[B_TRAINER_PLAYER][i];
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
             u32 species = GetMonData(pokemon, MON_DATA_SPECIES);
@@ -1701,7 +1703,7 @@ void TryToUpdateArtisanBalls1SubQuestsState(u16 itemId)
 void Quest_ArtisanBalls3_CheckBallSetReward(u32 battler)
 {
     bool32 isPlayerSide = (GetBattlerSide(battler) == B_SIDE_PLAYER);
-    bool32 usingApricornBall = IS_ITEM_APRICORN_BALL(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_POKEBALL));
+    bool32 usingApricornBall = IS_ITEM_APRICORN_BALL(GetMonData(&gParties[B_TRAINER_PLAYER][gBattlerPartyIndexes[battler]], MON_DATA_POKEBALL));
 
     bool32 battlingGymLeader = (gTrainers[gTrainerBattleParameter.params.opponentA]->trainerClass == TRAINER_CLASS_LEADER || gTrainers[gTrainerBattleParameter.params.opponentB]->trainerClass == TRAINER_CLASS_LEADER);
 
@@ -1801,13 +1803,13 @@ bool8 IsPartyFullOfShinyOctillery(void)
 
     for (gSpecialVar_0x8004 = 0; gSpecialVar_0x8004 <= partyCount; gSpecialVar_0x8004++)
     {
-        if(GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES) != QUEST_FRESHWATER_EVOLUTION_SPECIES)
+        if(GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES) != QUEST_FRESHWATER_EVOLUTION_SPECIES)
             continue;
 
-        if (IsMonShiny(&gPlayerParty[gSpecialVar_0x8004]))
+        if (IsMonShiny(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]))
             continue;
 
-        GetMonNickname(&gPlayerParty[gSpecialVar_0x8004], gStringVar1);
+        GetMonNickname(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], gStringVar1);
         return FALSE;
     }
 
@@ -2001,9 +2003,9 @@ u32 GetPartySlotIfMonCanMegaEvolve(void)
 
     gSpecialVar_Result = FALSE;
 
-    for (partySlot = 0; partySlot < gPlayerPartyCount; partySlot++)
+    for (partySlot = 0; partySlot < gPartiesCount[B_TRAINER_PLAYER]; partySlot++)
     {
-        pokemon = &gPlayerParty[partySlot];
+        pokemon = &gParties[B_TRAINER_PLAYER][partySlot];
 
         if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
             continue;
@@ -2097,33 +2099,33 @@ void Quest_DrugHelmetTest_ForgetMoveByPhase(void)
     u32 species, move;
     u32 phaseNum = VarGet(VAR_PHASE_NUMBER);
 
-    for (i = 0; i < gPlayerPartyCount; i++){
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0);
+    for (i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++){
+        species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES, 0);
         if(species == SPECIES_NONE)
             return;
 
-        if(GetMonData(&gPlayerParty[i], MON_DATA_MOVE2, 0) != MOVE_NONE){
+        if(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE2, 0) != MOVE_NONE){
             switch (phaseNum)
             {
                 case 1:
                     for(k = 1; k < MAX_MON_MOVES - 1; k++){
-                        move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k + 1, 0);
-                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
+                        move = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + k + 1, 0);
+                        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + k, &move);
                     }
                     move = MOVE_NONE;
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + k, &move);
+                    SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + k, &move);
                     break;
                 case 2:
-                    move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, 0);
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 1, &move);
+                    move = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + 2, 0);
+                    SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + 1, &move);
                     move = MOVE_NONE;
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 2, &move);
-                    SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + 3, &move);
+                    SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + 2, &move);
+                    SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + 3, &move);
                     break;
                 case 3:
                     move = MOVE_NONE;
                     for(l = 1; l < MAX_MON_MOVES; l++){
-                        SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + l, &move);
+                        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + l, &move);
                     }
                     break;
             }
@@ -2174,7 +2176,7 @@ void Quest_RPS_StopMoneyLoss(void)
     if (gBattleOutcome == B_OUTCOME_WON)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
     else
-        gBattleTypeFlags |= BATTLE_TYPE_FRONTIER;
+        gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
 }
 
 void DebugQuest_RPS(u8 state)
@@ -2238,10 +2240,10 @@ void DebugQuest_RPS(u8 state)
 // ***********************************************************************
 // Quest:Cute Pokémon
 // ***********************************************************************
-u32 GetEiscueHint(u32 speciesId);
-u32 GetCorsolaHint(u32 speciesId);
-u32 GetDuskullHint(u32 speciesId);
-u32 GetScraftyHint(u32 speciesId);
+u32 GetEiscueHint(enum Species speciesId);
+u32 GetCorsolaHint(enum Species speciesId);
+u32 GetDuskullHint(enum Species speciesId);
+u32 GetScraftyHint(enum Species speciesId);
 void DebugQuest_CutePokemon_GiveMon(void);
 
 #define FLAG_SCRIPT_USE FLAG_TEMP_1
@@ -2265,7 +2267,7 @@ void BufferEiscueHeightPlusOne(void)
 u32 GetHintFromMon(void)
 {
     u32 remainingQuests = Quest_Generic_CountRemainingSubquests(QUEST_CUTEPOKEMON);
-    u32 speciesId = GetMonData(&gPlayerParty[gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
+    enum Species speciesId = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],MON_DATA_SPECIES,NULL);
 
     switch(remainingQuests)
     {
@@ -2277,7 +2279,7 @@ u32 GetHintFromMon(void)
     }
 }
 
-u32 GetEiscueHint(u32 speciesId)
+u32 GetEiscueHint(enum Species speciesId)
 {
     if (gSpeciesInfo[speciesId].types[0] != TYPE_ICE && gSpeciesInfo[speciesId].types[1] != TYPE_ICE)
         return VAR_CUTE_POKEMON_EISCUE_HINT_0;
@@ -2289,7 +2291,7 @@ u32 GetEiscueHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_PERLACIA;
 }
 
-u32 GetCorsolaHint(u32 speciesId)
+u32 GetCorsolaHint(enum Species speciesId)
 {
     if (GetSpeciesColor(speciesId) != BODY_COLOR_PINK)
         return VAR_CUTE_POKEMON_CORSOLA_HINT_0;
@@ -2301,9 +2303,9 @@ u32 GetCorsolaHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_QIU;
 }
 
-u32 GetDuskullHint(u32 speciesId)
+u32 GetDuskullHint(enum Species speciesId)
 {
-    if (GetMonAbility(&gPlayerParty[gSpecialVar_0x8004])!= ABILITY_LEVITATE)
+    if (GetMonAbility(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004])!= ABILITY_LEVITATE)
         return VAR_CUTE_POKEMON_DUSKULL_HINT_0;
     if (!CanEvolve(speciesId))
         return VAR_CUTE_POKEMON_DUSKULL_HINT_1;
@@ -2313,10 +2315,10 @@ u32 GetDuskullHint(u32 speciesId)
     return VAR_CUTE_POKEMON_GREETING_CRESALTA;
 }
 
-u32 GetScraftyHint(u32 speciesId)
+u32 GetScraftyHint(enum Species speciesId)
 {
     struct Pokemon *mon;
-    mon = &gPlayerParty[gSpecialVar_0x8004];
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     enum CanMoveBeLearned monCanLearn = CanTeachMove(mon, MOVE_ACID_SPRAY);
 
     if (gSpeciesInfo[speciesId].eggGroups[0] != EGG_GROUP_DRAGON && gSpeciesInfo[speciesId].eggGroups[1] != EGG_GROUP_DRAGON)
@@ -2705,10 +2707,10 @@ void AwardPartyMonChampionRibbon(void)
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        if (IsMonInvalid(gPlayerParty[slot]))
+        if (IsMonInvalid(gParties[B_TRAINER_PLAYER][slot]))
             continue;
 
-        SetMonData(&gPlayerParty[slot],MON_DATA_CHAMPION_RIBBON,&giveRibbon);
+        SetMonData(&gParties[B_TRAINER_PLAYER][slot],MON_DATA_CHAMPION_RIBBON,&giveRibbon);
     }
 }
 
@@ -2721,10 +2723,10 @@ static bool8 DoesPartyMonHaveChampionRibbon(void)
 {
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        if (IsMonInvalid(gPlayerParty[slot]))
+        if (IsMonInvalid(gParties[B_TRAINER_PLAYER][slot]))
             continue;
 
-        if (DoesMonHaveChampionRibbon(gPlayerParty[slot]))
+        if (DoesMonHaveChampionRibbon(gParties[B_TRAINER_PLAYER][slot]))
             return TRUE;
     }
 
@@ -2763,21 +2765,21 @@ void Script_CheckIfAnyMonHasChampionRibbon(void)
 
 void Script_CheckIfChosenMonHasChampionRibbon(void)
 {
-    gSpecialVar_Result = DoesMonHaveChampionRibbon(gPlayerParty[gSpecialVar_0x8004]);
+    gSpecialVar_Result = DoesMonHaveChampionRibbon(gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
 }
 
 static u8 DoesPlayerHaveOneOrTwoUsableMon(void)
 {
-    if (gPlayerPartyCount == 1)
+    if (gPartiesCount[B_TRAINER_PLAYER] == 1)
         return PLAYER_HAS_ONE_MON;
 
     u32 aliveCount = 0;
 
-    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-                && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
-                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+                && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HP, NULL) != 0
+                && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             aliveCount++;
     }
 
@@ -2796,7 +2798,7 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
 void StressCup_GivePlayerParty(void)
 {
     ZeroPlayerPartyMons();
-    CreateNPCTrainerPartyFromTrainer(gPlayerParty, &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_STRESSCUPORGNANIZER_PLAYER], FALSE, BATTLE_TYPE_TRAINER);
 }
 
 void DebugQuest_StressCup(u8 state)
@@ -2887,7 +2889,7 @@ void CountDefeatedRabiesMon(void)
 
     for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
     {
-        if (GetMonData(&gEnemyParty[enemyPartyIndex],MON_DATA_SPECIES) != QUEST_RABIES_OUTBREAK_SPECIES)
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_SPECIES) != QUEST_RABIES_OUTBREAK_SPECIES)
             continue;
 
         defeatedGlameowCount++;
@@ -3140,7 +3142,7 @@ static bool8 Quest_Psyop_CheckPartyForTarget(void)
 {
     for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
     {
-        u32 species = GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES,NULL);
+        u32 species = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_SPECIES,NULL);
 
         if ((species == SPECIES_QUEST_PSYOP_TARGET) || (species == SPECIES_QUEST_PSYOP_REWARD))
             return TRUE;
@@ -3150,7 +3152,7 @@ static bool8 Quest_Psyop_CheckPartyForTarget(void)
 
 static enum QuestPsyopErrors Quest_Psyop_CheckTargetAttributes(void)
 {
-    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     u32 species = GetMonData(mon,MON_DATA_SPECIES,NULL);
 
     if ((species != SPECIES_QUEST_PSYOP_TARGET) && (species != SPECIES_QUEST_PSYOP_REWARD))
@@ -3190,7 +3192,7 @@ void Script_Quest_Psyop_CheckPartyForTarget(void)
 
 void Quest_Psyop_TransformTarget(void)
 {
-    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     u32 species = SPECIES_QUEST_PSYOP_REWARD;
 
     SetMonData(mon,MON_DATA_SPECIES,&species);
@@ -4023,7 +4025,7 @@ u32 CheckIfMonIsOddEgg(void)
     }
     else
     {
-        mon = &gPlayerParty[gSpecialVar_0x8004];
+        mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     }
 
     if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
@@ -4136,7 +4138,7 @@ u8 Quest_Restoreespuleeoutskirts_EvaluateChosenMon(void)
     }
     else
     {
-        pokemon = &gPlayerParty[gSpecialVar_0x8004];
+        pokemon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     }
 
     if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
@@ -4335,10 +4337,7 @@ void DebugQuest_RestoreZenzuIslandGym(u8 state)
         case STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING:
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING:
-            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
-            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            QuestMenu_SetupQuestState(QUEST_IMPROVBATTLING,STATE_QUEST_IMPROVBATTLING_COMPLETED);
             break;
         case STATE_QUEST_RESTOREZENZUISLANDGYM_RECRUIT_FROM_IMPROV_BATTLING:
             QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM,FLAG_SET_COMPLETED,SUB_QUEST_3);
@@ -4549,3 +4548,633 @@ void LetsGrabLunch_IncrementStoryVariable(void)
         VarSet(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE);
 }
 
+// ***********************************************************************
+// Cutscene: Swagbag Continued
+// ***********************************************************************
+
+static u32 ReturnBadgeFromMap(void)
+{
+    switch (GetCurrentMap())
+    {
+        default: return 0;
+        case MAP_MERMEREZA_CITY:
+        case MAP_MERMEREZA_CITY_GYM:         return FLAG_BADGE01_GET;
+        case MAP_TORA_TOWN:
+        case MAP_TORA_TOWN_GYM:              return FLAG_BADGE02_GET;
+        case MAP_PERLACIA_CITY:
+        case MAP_PERLACIA_CITY_GYM_ENTRANCE: return FLAG_BADGE03_GET;
+    }
+}
+
+void Script_ReturnBadgeFromMap(void)
+{
+    gSpecialVar_Result = ReturnBadgeFromMap();
+}
+
+void SpawnOliverForSwagbag(void)
+{
+    u32 localIdOliver = LOCALID_PLAYER - 2;
+    u32 x = 0, y = 0, movementBehavior = 0, elevation = 0;
+
+    switch (GetCurrentMap())
+    {
+        default: return;
+        case MAP_MERMEREZA_CITY:
+                 x = 30;
+                 y = 25;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
+        case MAP_TORA_TOWN:
+                 x = 17;
+                 y = 13;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
+        case MAP_PERLACIA_CITY:
+                 x = 20;
+                 y = 25;
+                 movementBehavior = MOVEMENT_TYPE_FACE_UP;
+                 elevation = 3;
+                 break;
+        case MAP_MERMEREZA_CITY_GYM:
+                 x = 4;
+                 y = 28;
+                 movementBehavior = MOVEMENT_TYPE_FACE_DOWN;
+                 elevation = 3;
+                 break;
+        case MAP_TORA_TOWN_GYM:
+                 x = 9;
+                 y = 12;
+                 movementBehavior = MOVEMENT_TYPE_FACE_DOWN;
+                 elevation = 4;
+                 break;
+        case MAP_PERLACIA_CITY_GYM_ENTRANCE:
+                 x = 9;
+                 y = 9;
+                 movementBehavior = MOVEMENT_TYPE_FACE_LEFT;
+                 elevation = 3;
+                 break;
+    }
+    SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_OLIVER, movementBehavior, localIdOliver, x+MAP_OFFSET, y+MAP_OFFSET, elevation);
+}
+
+static bool8 ShouldPlayerGetDexnav(void)
+{
+    if (FlagGet(FLAG_SYS_APP_DEXNAV_GET))
+        return FALSE;
+
+    return (GetNumberOfBadges() == 2);
+}
+
+void Script_ShouldPlayerGetDexnav(void)
+{
+    gSpecialVar_Result = ShouldPlayerGetDexnav();
+}
+// ***********************************************************************
+// Quest: Improv Battling
+// ***********************************************************************
+
+static bool8 Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    if (IsQuestCompletedState(QUEST_IMPROVBATTLING) == FALSE)
+        return FALSE;
+
+    if (IsQuestActiveState(QUEST_RESTOREZENZUGYM) == FALSE)
+        return FALSE;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_RESTOREZENZUGYM, FLAG_GET_COMPLETED, SUB_QUEST_3))
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Improvbattling_ShouldLeaderMoveOffStage(void)
+{
+    gSpecialVar_Result = Improvbattling_ShouldLeaderMoveOffStage();
+}
+
+static u32 Improvbattling_ReturnValueFromProgress(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS)
+        return CHECK_QUEST_IMPROVBATTLING_IS_CHAMPION;
+
+    if (FlagGet(FLAG_BADGE05_GET))
+        return CHECK_QUEST_IMPROVBATTLING_HAS_BEATEN_NERIENE;
+
+    return CHECK_QUEST_IMPROVBATTLING_HAS_NOT_BEATEN_NERIENE;
+}
+
+void Script_Improvbattling_ReturnValueFromProgress(void)
+{
+    gSpecialVar_Result = Improvbattling_ReturnValueFromProgress();
+}
+
+void DebugQuest_ImprovBattling(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_IMPROVBATTLING_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_IMPROVBATTLING);
+            SetTrainerDiscovered(TRAINER_IMPROV_1);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_DEFEATED_A:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_1);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_DEFEATED_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_2);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_COMPLETED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_3);
+            QuestMenu_ScriptSetComplete(QUEST_IMPROVBATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_BEFORE_ZENZU_RECRUIT:
+            QuestMenu_SetupQuestState(QUEST_RESTOREZENZUGYM,STATE_QUEST_RESTOREZENZUISLANDGYM_BEFORE_IMPROV_BATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_AFTER_ZENZU_RECRUIT:
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_NOT_STARTED:
+            QuestMenu_SetupQuestState(QUEST_RESTOREZENZUGYM,STATE_QUEST_RESTOREZENZUISLANDGYM_COMPLETE_IMPROV_BATTLING);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_STARTED:
+            SetTrainerDiscovered(TRAINER_IMPROV_4);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_X:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_4);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_DEFEATED_Y:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_5);
+            break;
+        case STATE_QUEST_IMPROVBATTLING_POST_QUEST_BATTLES_COMPLETED:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_IMPROV_6);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Teach A Trainer To Fish
+// ***********************************************************************
+
+bool8 Quest_TeachATrainerToFish_IsPerfectCast(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return Quest_TeachATrainerToFish_ArePerfectCastComponentsSet();
+}
+
+bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void)
+{
+    if (gChainFishingDexNavStreak < MAX_u8)
+        return FALSE;
+
+    return (Quest_TeachATrainerToFish_IsPerfectCast());
+}
+
+void Quest_TeachATrainerToFish_RecordEnemy(void)
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+
+    if (gIsFishingEncounter == FALSE)
+        return;
+
+    enum Species species = SPECIES_NONE;
+
+    for (u32 enemyPartyIndex = 0; enemyPartyIndex < PARTY_SIZE; enemyPartyIndex++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_IS_SHINY) == FALSE)
+            continue;
+
+        species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][enemyPartyIndex],MON_DATA_SPECIES);
+        break;
+    }
+
+    if (species == SPECIES_NONE)
+        return;
+
+    VarSet(VAR_QUEST_TEACHATRAINERTOFISH,species);
+}
+
+static bool8 Quest_TeachATrainerToFish_ShouldRunExclaim(void)
+{
+    if (IsQuestActiveState(QUEST_TEACHATRAINERTOFISH) == FALSE)
+        return FALSE;
+
+    return (VarGet(VAR_QUEST_TEACHATRAINERTOFISH) != SPECIES_NONE);
+}
+
+bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void)
+{
+    if (Quest_TeachATrainerToFish_ShouldRunExclaim() == FALSE)
+        return FALSE;
+
+    ScriptContext_SetupScript(TeachATrainerToFish_Dialogue_PlayerExclaimShiny);
+
+    return TRUE;
+}
+
+void DebugQuest_Teachatrainertofish(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_TEACHATRAINERTOFISH_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_STARTED_QUEST:
+        case STATE_QUEST_TEACHATRAINERTOFISH_STILL_HUNTING:
+            gSaveBlock3Ptr->hasSeenGuide[GUIDE_FISHING] = TRUE;
+            QuestMenu_ScriptSetActive(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_FISHING_ROD,1);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_TEACHATRAINERTOFISH);
+            VarSet(VAR_QUEST_TEACHATRAINERTOFISH,SPECIES_DONDOZO);
+            break;
+        case STATE_QUEST_TEACHATRAINERTOFISH_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_TEACHATRAINERTOFISH);
+            AddBagItem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Wildfire Risk
+// ***********************************************************************
+
+static const u16 treeFlags[] =
+{
+    [RESIDO_TREE_HALERBA_WILDS_1] = FLAG_TREE_HALERBAWILDS_1,
+    [RESIDO_TREE_HALERBA_WILDS_2] = FLAG_TREE_HALERBAWILDS_2,
+    [RESIDO_TREE_NAVAL_BASE_1] = FLAG_TREE_NAVAL_BASE_1,
+    [RESIDO_TREE_NAVAL_BASE_2] = FLAG_TREE_NAVAL_BASE_2,
+    [RESIDO_TREE_NAVAL_BASE_3] = FLAG_TREE_NAVAL_BASE_3,
+    [RESIDO_TREE_ROUTE3_1] = FLAG_TREE_ROUTE3_1,
+    [RESIDO_TREE_ROUTE3_2] = FLAG_TREE_ROUTE3_2,
+};
+
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    for (u32 treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+        FlagClear(treeFlags[treeIndex]);
+}
+
+void Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+}
+
+void Quest_Wildfirerisk_CompleteSubquestForTree(void)
+{
+    if (IsQuestCompletedState(QUEST_WILDFIRERISK))
+        return;
+
+    u32 limit = QUEST_WILDFIRERISK_SUB_COUNT + 1;
+    u32 treeIndex = limit;
+    u32 flag = GetObjectFlagFromLocalId(gSpecialVar_LastTalked);
+
+    for (treeIndex = 0; treeIndex < ARRAY_COUNT(treeFlags) ; treeIndex++)
+    {
+        if (flag != treeFlags[treeIndex])
+            continue;
+
+        break;
+    }
+
+    if (treeIndex == limit)
+        return;
+
+    QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, treeIndex);
+
+    if (IsQuestActiveState(QUEST_WILDFIRERISK) == FALSE)
+        return;
+
+    Quest_Wildfirerisk_CountRemainingSubquestsTryProgressReward();
+}
+
+void DebugQuest_Wildfirerisk(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_WILDFIRERISK_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_WILDFIRERISK_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_TM,1);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_HALERBA_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_HALERBA_WILDS_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_NAVAL_BASE_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_2);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_NAVAL_BASE_3);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_CUT_ROUTE3_BRUSH:
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_1);
+            QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK, FLAG_SET_COMPLETED, RESIDO_TREE_ROUTE3_2);
+            Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_WILDFIRERISK);
+            break;
+        case STATE_QUEST_WILDFIRERISK_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_WILDFIRERISK);
+            AddBagItem(ITEM_QUEST_WILDFIRERISK_REWARD,1);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Hang 20
+// ***********************************************************************
+// * take index from the overall list
+// * get the species Id from that index
+// * create the pokemon in the opposing party
+// * create the object sprite from that pokemon
+// * depending on encounter type, the pokemon will do a series of movmement and attack the player
+
+struct WildGauntletData
+{
+    enum WildPokemonArea encounterType;
+    u8 index;
+    enum Species species;
+    s16 x;
+    s16 y;
+    u8 elevation;
+};
+
+const struct WildGauntletData cresaltaGauntletData[CRESALTA_MON_COUNT] =
+{
+    [CRESALTA_MON_BERRY_0_1] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 22,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_BERRY_0_2] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_BERRY_10_3] =
+    {
+        .encounterType = WILD_AREA_BERRY_TREES,
+        .index = 10,
+        .x = 18,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_WATER_0_4] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 29,
+        .y = 1,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_PHENOMENON_0_5] =
+    {
+        .encounterType = WILD_AREA_PHENOMENON,
+        .index = 0,
+        .x = 17,
+        .y = 2,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_LAND_0_6] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 0,
+        .x = 26,
+        .y = 8,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_LAND_12_7] =
+    {
+        .encounterType = WILD_AREA_LAND,
+        .index = 12,
+        .x = 22,
+        .y = 9,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_WATER_0_8] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 22,
+        .y = 0,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_ROCK_SMASH_0_9] =
+    {
+        .encounterType = WILD_AREA_ROCKS,
+        .index = 0,
+        .x = 25,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FISHING_0_10] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_FLYING_17_11] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 17,
+        .x = 22,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FLYING_19_12] =
+    {
+        .encounterType = WILD_AREA_FLY_MONS,
+        .index = 19,
+        .x = 22,
+        .y = 6,
+        .elevation = 3,
+
+    },
+    [CRESALTA_MON_FISHING_14_13] =
+    {
+        .encounterType = WILD_AREA_FISHING,
+        .index = 14,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_WATER_0_14] =
+    {
+        .encounterType = WILD_AREA_WATER,
+        .index = 0,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+
+    },
+    [CRESALTA_MON_WATER_16_15] =
+    {
+        .species = SPECIES_PALAFIN_HERO,
+        .encounterType = WILD_AREA_WATER,
+        .index = 16,
+        .x = 20,
+        .y = 2,
+        .elevation = 1,
+    },
+};
+
+static enum Species Quest_Hang20_GetWildSpecies(const struct WildPokemonInfo *wildMonInfo, enum CresaltaMonProgress progress, enum WildPokemonArea area, u32 index)
+{
+    if (cresaltaGauntletData[progress].species != SPECIES_NONE)
+        return cresaltaGauntletData[progress].species;
+
+    return wildMonInfo->wildPokemon[index].species;
+}
+
+void Quest_Hang20_GenerateWildBattle(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    u32 level = min((ChooseWildMonLevel(wildMonInfo->wildPokemon, index, area) +  progress),MAX_LEVEL);
+
+    CreateWildMon(species,level);
+};
+
+void ResetDefeatedCresaltaVista(void)
+{
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,0);
+}
+
+void CountDefeatedCresaltaVista(void)
+{
+    if (GetCurrentMap() != MAP_CRESALTA_VISTA)
+        return;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        return;
+
+    if (IsQuestActiveState(QUEST_HANG20) == FALSE)
+        return;
+
+    u32 defeatedCresaltaVistaCount = VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT);
+    VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,++defeatedCresaltaVistaCount);
+
+    if (defeatedCresaltaVistaCount >=QUEST_HANG20_REQUIRED_WINS)
+        QuestMenu_ScriptSetReward(QUEST_HANG20);
+}
+
+void Quest_Hang20_SetObjectId(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    u32 modifier = 0, objectIdGfx = 0;
+
+    if (IsOverworldMonShiny())
+        modifier += OBJ_EVENT_MON_SHINY;
+
+    if (IsOverworldMonFemale())
+        modifier += OBJ_EVENT_MON_FEMALE;
+
+    objectIdGfx = (species + modifier + OBJ_EVENT_MON);
+    VarSet(VAR_OBJ_GFX_ID_0,objectIdGfx);
+}
+
+void Quest_Hang20_MoveObject(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    u32 x = cresaltaGauntletData[progress].x + 0;
+    u32 y = cresaltaGauntletData[progress].y + 0;
+    u32 elevation = cresaltaGauntletData[progress].elevation;
+
+    VarSet(VAR_0x8009,x);
+    VarSet(VAR_0x8008,y);
+    VarSet(VAR_0x8007,elevation);
+}
+
+void Quest_Hang20_PlayMonCry(void)
+{
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_SPECIES);
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void Quest_Hang20_BufferLastSpecies(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    progress--;
+
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    u32 index = cresaltaGauntletData[progress].index;
+    const struct WildPokemonInfo *wildMonInfo = GetWildPokemonInfoFromHeaderId(area);
+    enum Species species = Quest_Hang20_GetWildSpecies(wildMonInfo, progress, area, index);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+}
+
+static bool8 Quest_Hang20_IsEnemyFromWater(void)
+{
+    u32 progress = min(VarGet(VAR_DEFEATED_CRESALTA_VISTA_COUNT),CRESALTA_MON_COUNT);
+    enum WildPokemonArea area = cresaltaGauntletData[progress].encounterType;
+    return (area == WILD_AREA_WATER || area == WILD_AREA_FISHING || area == WILD_AREA_PHENOMENON);
+}
+
+void Script_Quest_Hang20_IsEnemyFromWater(void)
+{
+    gSpecialVar_Result = Quest_Hang20_IsEnemyFromWater();
+}
+
+void DebugQuest_Hang20(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HANG20_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_HANG20_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_TM,1);
+            break;
+        case STATE_QUEST_HANG20_REWARD:
+            VarSet(VAR_DEFEATED_CRESALTA_VISTA_COUNT,QUEST_HANG20_REQUIRED_WINS);
+            QuestMenu_ScriptSetReward(QUEST_HANG20);
+            break;
+        case STATE_QUEST_HANG20_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HANG20);
+            AddBagItem(ITEM_QUEST_HANG20_REWARD,1);
+            break;
+    }
+}

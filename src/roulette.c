@@ -27,6 +27,7 @@
 #include "trig.h"
 #include "tv.h"
 #include "window.h"
+#include "currency_box.h"
 #include "constants/coins.h"
 #include "constants/rgb.h"
 #include "constants/roulette.h"
@@ -430,8 +431,8 @@ static const u8 Roulette_Text_BoardWillBeCleared[] = _("The ROULETTE board will 
 static const u8 Roulette_Text_CoinCaseIsFull[] = _("Your COIN CASE is full!\nCoins can be exchanged for prizes.");
 
 static const u16 sWheel_Pal[] = INCGFX_U16("graphics/roulette/wheel.png", ".gbapal"); // also palette for grid
-static const u32 sGrid_Tilemap[] = INCBIN_U32("graphics/roulette/grid.bin.smolTM");
-static const u32 sWheel_Tilemap[] = INCBIN_U32("graphics/roulette/wheel.bin.smolTM");
+static const u32 sGrid_Tilemap[] = INCGFX_U32("graphics/roulette/grid.bin", ".smolTM");
+static const u32 sWheel_Tilemap[] = INCGFX_U32("graphics/roulette/wheel.bin", ".smolTM");
 static const struct BgTemplate sBgTemplates[] =
 {
     // Text box
@@ -1157,7 +1158,7 @@ static void InitRouletteTableData(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG))
+        switch (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG))
         {
         case SPECIES_SHROOMISH:
             sRoulette->partySpeciesFlags |= HAS_SHROOMISH;
@@ -1179,6 +1180,9 @@ static void InitRouletteTableData(void)
 #define tConsecutiveWins data[11]
 #define tWinningSquare   data[12]
 #define tCoins           data[13]
+
+// used only in the overworld
+#define tCoinsBoxPtr     14
 
 static void CB2_LoadRoulette(void)
 {
@@ -3323,7 +3327,8 @@ static void Task_FadeToRouletteGame(u8 taskId)
 static void Task_AcceptMinBet(u8 taskId)
 {
     ClearStdWindowAndFrame(0, TRUE);
-    HideCoinsWindow();
+    union CurrencyBoxValues coinsBox = { .asU32 = GetWordTaskArg(taskId, tCoinsBoxPtr) };
+    CurrencyBox_Destroy(coinsBox);
     FreeAllWindowBuffers();
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
@@ -3334,7 +3339,8 @@ static void Task_AcceptMinBet(u8 taskId)
 static void Task_DeclineMinBet(u8 taskId)
 {
     ClearStdWindowAndFrame(0, FALSE);
-    HideCoinsWindow();
+    union CurrencyBoxValues coinsBox = { .asU32 = GetWordTaskArg(taskId, tCoinsBoxPtr) };
+    CurrencyBox_Destroy(coinsBox);
     UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
@@ -3345,7 +3351,8 @@ static void Task_NotEnoughForMinBet(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         gSpecialVar_0x8004 = 1;
-        HideCoinsWindow();
+        union CurrencyBoxValues coinsBox = { .asU32 = GetWordTaskArg(taskId, tCoinsBoxPtr) };
+        CurrencyBox_Destroy(coinsBox);
         ClearStdWindowAndFrame(0, TRUE);
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
@@ -3369,7 +3376,6 @@ static void Task_PrintMinBet(u8 taskId)
 static void Task_PrintRouletteEntryMsg(u8 taskId)
 {
     s32 minBet;
-    PrintCoinsString(gTasks[taskId].tCoins);
     minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
 
@@ -3410,9 +3416,21 @@ void PlayRoulette(void)
 {
     u8 taskId;
     LockPlayerFieldControls();
-    ShowCoinsWindow(GetCoins(), 1, 1);
+
+    struct WindowTemplate template =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = CURRENCY_BOX_WIDTH,
+        .height = CURRENCY_BOX_HEIGHT,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .baseBlock = COINS_BOX_BASE_BLOCK
+    };
+    union CurrencyBoxValues coinsBox = CurrencyBox_Create(CURRENCY_BOX_COINS, &template);
     taskId = CreateTask(Task_PrintRouletteEntryMsg, 0);
     gTasks[taskId].tCoins = GetCoins();
+    SetWordTaskArg(taskId, tCoinsBoxPtr, coinsBox.asU32);
 }
 
 static void LoadOrFreeMiscSpritePalettesAndSheets(bool8 free)

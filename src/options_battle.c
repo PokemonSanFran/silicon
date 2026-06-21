@@ -230,14 +230,16 @@ static bool32 HasAlreadyGivenPointsBoxMons(void)
     return FALSE;
 }
 
-void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
+u32 ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 {
     u32 boxId, boxPosition, totalEVs;
     struct Pokemon tempMon;
     struct BoxPokemon *boxMon;
+    u32 count = 0;
+    bool32 flag;
 
     if (!IsExperienceOptionAll() || HasAlreadyGivenPointsBoxMons())
-        return;
+        return 0;
 
     gBattleStruct->givenPointsBoxMons = TRUE;
 
@@ -246,6 +248,7 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             BoxMonAtToMon(boxId, boxPosition, &tempMon);
+            flag = FALSE;
 
             if (IsMonInvalid(tempMon))
                 continue;
@@ -257,14 +260,22 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 
             totalEVs = GetMonEVCount(&tempMon);
             if (totalEVs < MAX_TOTAL_EVS)
+            {
+                flag = TRUE;
                 CheckAndCalcEVs(totalEVs,defeatedSpecies,tempMon,boxMon);
+            }
 
-            if (IsMonMaxLevel(tempMon))
-                continue;
+            if (!IsMonMaxLevel(tempMon))
+            {
+                flag = TRUE;
+                CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            }
 
-            CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            if (flag)
+                count += 1;
         }
     }
+    return count;
 }
 
 static bool32 HasAlreadyPrintedGotExpMsg(void)
@@ -275,7 +286,7 @@ static bool32 HasAlreadyPrintedGotExpMsg(void)
     return FALSE;
 }
 
-void PrintExpShareMessage(void)
+void PrintExpShareMessage(u32 pcMonsThatReceivedPoints)
 {
     if(HasAlreadyPrintedGotExpMsg())
         return;
@@ -285,10 +296,10 @@ void PrintExpShareMessage(void)
 
     gBattleStruct->teamGotExpMsgPrinted = TRUE;
 
-    if (!IsExperienceOptionAll())
-        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
-    else
+    if (IsExperienceOptionAll() && pcMonsThatReceivedPoints > 0)
         PrepareStringBattle(STRINGID_ALLGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
+    else if (gBattleStruct->battlerExpReward > 0 || gBattleStruct->evsGiven > 0)
+        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
 }
 
 // ***********************************************************************
@@ -491,7 +502,7 @@ static bool32 TryToMoveMonFromStorageSystem(void)
              && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
              && !IsFaintedBoxMon(&gPokemonStoragePtr->boxes[i][j]))
             {
-                BoxMonAtToMon(i, j, &gPlayerParty[0]);
+                BoxMonAtToMon(i, j, &gParties[B_TRAINER_PLAYER][0]);
                 ZeroBoxMonAt(i, j);
                 return TRUE;
             }
@@ -947,7 +958,7 @@ static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
     if (enemyMonLevel > playerMaxLevel)
         return average;
 
-    numPlayerMon = CalculatePartyCount(gPlayerParty);
+    numPlayerMon = CalculatePartyCount(B_TRAINER_PLAYER);
     difference = GetPartySizeDifference(numPlayerMon, numEnemyMon);
 
     if ((playerMaxLevel - enemyMonLevel) <= TRAINER_SCALING_THRESHOLD)
@@ -1224,7 +1235,7 @@ bool32 IsBarOptionInstant(u8 whichBar)
 #define B_HEALTHBAR_PIXELS 48
 #define B_EXPBAR_PIXELS 64
 
-u32 GetHPFraction(u8 battlerId)
+u32 GetHPFraction(enum BattlerId battlerId)
 {
     if (IsHPSpeedFast())
         return max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
@@ -1284,5 +1295,5 @@ bool32 IsMonNicknamed(struct Pokemon *mon)
 
 bool32 IsChosenMonNicknamed(void)
 {
-    return IsMonNicknamed(&gPlayerParty[gSpecialVar_0x8004]);
+    return IsMonNicknamed(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
 }

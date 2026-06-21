@@ -646,6 +646,9 @@ gSongTable::
 	song mus_dogwalker_gardener_bellhop_janitor, MUSIC_PLAYER_BGM, 0
 	song mus_tirabudin_place, MUSIC_PLAYER_BGM, 0
 	song mus_tirabudin_place_night, MUSIC_PLAYER_BGM, 0
+	song mus_vs_diantha, MUSIC_PLAYER_BGM, 0
+	song mus_encounter_hippie_treehugger, MUSIC_PLAYER_BGM, 0
+	song mus_victory_diantha_facility, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

@@ -324,6 +324,7 @@ $(FONTGFXDIR)/outlined_narrow.latfont: $(FONTGFXDIR)/latin_outlined_narrow.png
 TYPES13x11GFXDIR := graphics/ui_menus/types/13x11
 TYPES13x13GFXDIR := graphics/ui_menus/types/13x13
 TYPES15x14GFXDIR := graphics/ui_menus/types/15x14
+TYPES19x16GFXDIR := graphics/ui_menus/types/19x16
 
 $(TYPESGFXDIR)/types.gbapal: $(TYPESGFXDIR)/types1.gbapal \
                                   $(TYPESGFXDIR)/types2.gbapal \
@@ -338,6 +339,34 @@ $(TYPES13x13GFXDIR)/types.4bpp: $(types:%=$(TYPES13x13GFXDIR)/%.4bpp)
 
 $(TYPES15x14GFXDIR)/types.4bpp: $(types:%=$(TYPES15x14GFXDIR)/%.4bpp)
 	@cat $^ >$@
+
+$(TYPES19x16GFXDIR)/types.4bpp: $(types:%=$(TYPES19x16GFXDIR)/%.4bpp)
+	@cat $^ >$@
 # End pokedex
 
+# Start monSummary
+TYPES11x9GFXDIR := graphics/ui_menus/types/11x9
+TYPES128x16GFXDIR := graphics/ui_menus/types/128x16
+MONSUMMARYGFXDIR := graphics/ui_menus/mon_summary
 
+$(TYPES11x9GFXDIR)/types.4bpp: $(types:%=$(TYPES11x9GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(types:%=$(TYPES128x16GFXDIR)/%.4bpp): %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(MONSUMMARYGFXDIR)/infos/cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/stats/stat_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/moves/slot_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/moves/option_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+# End monSummary

@@ -47,6 +47,7 @@
 #include "window.h"
 #include "apprentice.h"
 #include "battle_pike.h"
+#include "currency_box.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -383,6 +384,7 @@ static const TaskFunc sContextMenuFuncs[] = {
     [ITEMMENULOCATION_WALLY] =                  NULL,
     [ITEMMENULOCATION_PCBOX] =                  Task_ItemContext_GiveToPC,
     [ITEMMENULOCATION_BERRY_TREE_MULCH] =       Task_FadeAndCloseBagMenuIfMulch,
+    [ITEMMENULOCATION_SUMMARY] =                Task_ItemContext_GiveToParty, // monSummary
 };
 
 static const struct YesNoFuncTable sYesNoTossFunctions = {ConfirmToss, CancelToss};
@@ -568,9 +570,9 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 1,
-        .width = 10,
-        .height = 2,
-        .paletteNum = 15,
+        .width = CURRENCY_BOX_WIDTH,
+        .height = CURRENCY_BOX_HEIGHT,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
         .baseBlock = 0x231,
     },
 };
@@ -956,7 +958,7 @@ static void GetItemNameFromPocket(u8 *dest, enum Item itemId)
         }
         break;
     case POCKET_BERRIES:
-        ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar1, ItemIdToBerryType(itemId), STR_CONV_MODE_LEADING_ZEROS, 2);
         end = CopyItemName(itemId, gStringVar2);
         PrependFontIdToFit(gStringVar2, end, FONT_NARROW, 61);
         StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
@@ -1252,10 +1254,10 @@ static void PrintItemQuantity(u8 windowId, s16 quantity)
 // Prints the quantity of items to be sold and the amount that would be earned
 static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 {
+    CurrencyBox_PrintMoneyAmount(windowId, 1, moneyEarned);
     ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, 0);
-    PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(moneyEarned), 1, moneyEarned, 0);
 }
 
 static void Task_BagMenu_HandleInput(u8 taskId)
@@ -1670,6 +1672,7 @@ static void OpenContextMenu(u8 taskId)
     case ITEMMENULOCATION_BERRY_TREE:
     case ITEMMENULOCATION_ITEMPC:
     case ITEMMENULOCATION_BERRY_TREE_MULCH:
+    case ITEMMENULOCATION_SUMMARY: // monSummary
     default:
         if (MenuHelpers_IsLinkActive() == TRUE || InUnionRoom() == TRUE)
         {
@@ -2312,7 +2315,7 @@ static void SellItem(u8 taskId)
     LoadBagItemListBuffers(gBagPosition.pocket);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
-    PrintMoneyAmountInMoneyBox(gBagMenu->windowIds[ITEMWIN_MONEY], GetMoney(&gSaveBlock1Ptr->money), 0);
+    CurrencyBox_Update(gBagMenu->moneyBox);
     gTasks[taskId].func = WaitAfterItemSell;
 }
 
@@ -2672,15 +2675,16 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTa
 
 static void DisplayCurrentMoneyWindow(void)
 {
-    u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
-    PrintMoneyAmountInMoneyBoxWithBorder(windowId, 1, 14, GetMoney(&gSaveBlock1Ptr->money));
-    AddMoneyLabelObject(19, 11);
+    u32 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
+    gBagMenu->moneyBox = CurrencyBox_Init(CURRENCY_BOX_MONEY, windowId, 1, 14);
 }
 
 static void RemoveMoneyWindow(void)
 {
-    BagMenu_RemoveWindow(ITEMWIN_MONEY);
-    RemoveMoneyLabelObject();
+    CurrencyBox_Destroy(gBagMenu->moneyBox);
+    gBagMenu->windowIds[ITEMWIN_MONEY] = WINDOW_NONE;
+    gBagMenu->moneyBox.asU32 = 0;
+    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void PrepareTMHMMoveWindow(void)

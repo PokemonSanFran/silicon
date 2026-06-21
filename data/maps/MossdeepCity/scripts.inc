@@ -3,10 +3,12 @@ MossdeepCity_MapScripts::
 	.byte 0
 
 MossdeepCity_OnTransition:
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
+    // Start siliconQuests
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
+	//clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
+    // End siliconQuests
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
 

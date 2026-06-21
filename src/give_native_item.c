@@ -105,6 +105,13 @@ void BS_GetPrizeNativeItem(void)
         return;
 
     AddBagItem(itemId, itemAmount);
-    PREPARE_ITEM_BUFFER(gBattleTextBuff1, itemId);
+    if (itemAmount == 1)
+    {
+         PREPARE_ITEM_BUFFER(gBattleTextBuff1, itemId);
+    }
+    else
+    {
+        PREPARE_ITEM_PLURAL_BUFFER(gBattleTextBuff1, itemId, itemAmount);
+    }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

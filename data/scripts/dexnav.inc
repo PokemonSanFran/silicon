@@ -29,7 +29,10 @@ EventScript_TooDark::
 	end
 
 sText_NotFoundNearby:
-	.string "It couldn't be found nearby.\n"
+// Start dexnav
+	//.string "It couldn't be found nearby.\n"
+	.string "{STR_VAR_1} couldn't be found nearby.\n"
+// End dexnav
 	.string "Try looking in a different area!$"
 
 sText_TryMovingSlower:

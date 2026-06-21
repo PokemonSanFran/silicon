@@ -565,6 +565,9 @@ enum
     MUS_DOGWALKER_GARDENER_BELLHOP_JANITOR,
     MUS_TIRABUDIN_PLACE,
     MUS_TIRABUDIN_PLACE_NIGHT,
+    MUS_VS_DIANTHA,
+    MUS_ENCOUNTER_HIPPIE_TREEHUGGER,
+    MUS_VICTORY_DIANTHA_FACILITY,
     MUS_LAST,
 };
 #define END_MUS (MUS_LAST - 1)
@@ -846,10 +849,8 @@ enum
 #define SE_PIKE_CURTAIN_CLOSE       267 // SE_CURTAIN
 #define SE_PIKE_CURTAIN_OPEN        268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE          269 // SE_USSOKI
-#define END_SE                      SE_SUDOWOODO_SHAKE
 
 // Music
-#define START_MUS                   350
 #define MUS_LITTLEROOT_TEST         350 // MUS_TETSUJI          // Unused, likely a test track.
 #define MUS_GSC_ROUTE38             351 // MUS_FIELD13          // Unused, likely a test track.
 #define MUS_CAUGHT                  352 // MUS_KACHI22

@@ -83,10 +83,11 @@
 #define FLDEFF_SMILEY_FACE_ICON          78
 #define FLDEFF_HALL_OF_FAME_RECORD_FRLG  79
 #define FLDEFF_PHOTO_FLASH               80
-enum  
+#define FLDEFF_OW_ENCOUNTER_SPAWN_ANIM   81
+enum
 {
   // Start qol_field_moves
-  FLDEFF_USE_SURF_TOOL = (FLDEFF_PHOTO_FLASH + 1),
+  FLDEFF_USE_SURF_TOOL = (FLDEFF_OW_ENCOUNTER_SPAWN_ANIM + 1),
   FLDEFF_USE_WATERFALL_TOOL,
   FLDEFF_USE_DIVE_TOOL,
   FLDEFF_USE_TELEPORT_TOOL,
@@ -94,7 +95,7 @@ enum
   FLDEFF_WANT_REMATCH, // rematch_action
   FLDEFF_SAVING, // autoSave
 };
-  
+
 
 #define FLDEFFOBJ_SHADOW_S              0
 #define FLDEFFOBJ_SHADOW_M              1
@@ -137,11 +138,12 @@ enum
 #define FLDEFFOBJ_TRACKS_SPOT           38
 #define FLDEFFOBJ_TRACKS_BUG            39
 #define FLDEFFOBJ_CAVE_DUST             40
-#define FLDEFFOBJ_SAVING                41 // autoSave
-#define FLDEFFOBJ_ROCK_CLIMB_BLOB       42
-#define FLDEFFOBJ_ROCK_CLIMB_DUST       43
-#define FLDEFFOBJ_ORAS_DOWSE_BRENDAN    44
-#define FLDEFFOBJ_ORAS_DOWSE_MAY        45
+#define FLDEFFOBJ_ROCK_CLIMB_BLOB       41
+#define FLDEFFOBJ_ROCK_CLIMB_DUST       42
+#define FLDEFFOBJ_ORAS_DOWSE_BRENDAN    43
+#define FLDEFFOBJ_ORAS_DOWSE_MAY        44
+#define FLDEFFOBJ_SHINY_SPARKLE         45
+#define FLDEFFOBJ_SAVING                46 // autoSave
 
 #define FLDEFF_PAL_TAG_CUT_GRASS          0x1000
 #define FLDEFF_PAL_TAG_SECRET_POWER_TREE  0x1003

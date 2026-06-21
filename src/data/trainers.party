@@ -26,6 +26,8 @@ Optional (but still recommended) fields for trainers:
     - Mugshot (enable Mugshots during battle transition
                set to one of Purple, Green, Pink, Blue or Yellow)
     - Starting Status (see include/constants/battle.h for values)
+    - Multi Party   (Half reduces two-trainer battle sides to 3 Pokemon each)
+                    (defaults to Full but requires B_MULTI_HALF_TEAMS to be FALSE)
 
 Pokemon are then specified using the Showdown Export format.
 If a field is not specified, it will use it's default value.
@@ -637,7 +639,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Blissey @ Chople Berry
 Ability: Serene Grace
 Level: 51
-Tera Type: Normal
 EVs: 252 HP/45 Def/1 Spe
 Bold Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -649,7 +650,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Farigiraf @ Sitrus Berry
 Ability: Cud Chew
 Level: 50
-Tera Type: Normal
 EVs: 48 HP/252 SpA/1 Spe
 Modest Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -1429,6 +1429,7 @@ IVs: 0 Atk
 
 Gyarados @ Gyaradosite  
 Ability: Intimidate  
+Level: 74
 EVs: 156 HP / 252 Atk / 100 Spe  
 Adamant Nature  
 - Waterfall  
@@ -1947,6 +1948,7 @@ Adamant Nature
 === TRAINER_DIANTHA ===
 Name: Diantha
 Pic: Cooltrainer F
+Class: Diantha
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Hawlucha @ Flying Gem  
@@ -3775,7 +3777,7 @@ Buneary
 Level: 1
 
 === TRAINER_IMPROV_1 ===
-Name: Blank
+Name: ImprovtroupeA
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
@@ -3783,7 +3785,7 @@ Buneary
 Level: 1
 
 === TRAINER_IMPROV_2 ===
-Name: Blank
+Name: ImprovtroupeB
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
@@ -3791,7 +3793,7 @@ Buneary
 Level: 1
 
 === TRAINER_IMPROV_3 ===
-Name: Blank
+Name: ImprovtroupeC
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
@@ -7885,48 +7887,48 @@ IVs: 22 HP / 22 Atk / 22 Def / 22 SpA / 22 SpD / 22 Spe
 - Substitute
 - Attract
 
-=== TRAINER_188A6F20 ===
-Name: 188A6F20
+=== TRAINER_QUEST_TEACHTRAINERFISHD ===
+Name: TeachtrainerfishD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_1932C509 ===
-Name: 1932C509
+=== TRAINER_QUEST_TEACHTRAINERFISHD_2 ===
+Name: TeachtrainerfishD
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_19477C78 ===
-Name: 19477C78
+=== TRAINER_QUEST_TEACHTRAINERFISHE ===
+Name: TeachtrainerfishE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_19C5BAD7 ===
-Name: 19C5BAD7
+=== TRAINER_QUEST_TEACHTRAINERFISHE_2 ===
+Name: TeachtrainerfishE
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_19CD0726 ===
-Name: 19CD0726
+=== TRAINER_QUEST_TEACHTRAINERFISHF ===
+Name: TeachtrainerfishF 
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_19D7682B ===
-Name: 19D7682B
+=== TRAINER_QUEST_TEACHTRAINERFISHF_2 ===
+Name: TeachtrainerfishF 
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
@@ -12061,32 +12063,84 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Buneary
 Level: 1
 
-=== TRAINER_B42E7E27 ===
-Name: B42E7E27
+=== TRAINER_CHAMPION_SHINJI ===
+Name: Shinji
+Pic: Cooltrainer M
+AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
+
+Gyarados @ Sitrus Berry  
+Ability: Intimidate  
+EVs: 252 HP / 4 Atk / 204 Def / 4 SpD / 44 Spe  
+Careful Nature  
+- Waterfall  
+- Thunder Wave  
+- Taunt  
+- Protect  
+
+Nidoking @ Life Orb  
+Ability: Sheer Force  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Earth Power  
+- Sludge Wave  
+- Ice Beam  
+- Flamethrower  
+
+Magmortar @ Heavy-Duty Boots  
+Ability: Flame Body  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Fire Blast  
+- Scorching Sands  
+- Thunderbolt  
+- Knock Off  
+
+Aggron @ Leftovers  
+Ability: Sturdy  
+EVs: 252 HP / 4 Def / 252 SpD  
+Careful Nature  
+- Stealth Rock  
+- Heavy Slam  
+- Body Press  
+- Toxic  
+
+Torterra @ Loaded Dice  
+Ability: Overgrow  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Shell Smash  
+- Headlong Rush  
+- Bullet Seed  
+- Rock Blast  
+
+Honchkrow @ Heavy-Duty Boots  
+Ability: Moxie  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Sucker Punch  
+- Brave Bird  
+- U-turn  
+- Night Slash  
+
+=== TRAINER_IMPROV_4 ===
+Name: ImprovtroupeX
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_C789FBF5 ===
-Name: C789FBF5
+=== TRAINER_IMPROV_5 ===
+Name: ImprovtroupeY
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
 Buneary
 Level: 1
 
-=== TRAINER_C7E06CB4 ===
-Name: C7E06CB4
-Pic: Cooltrainer M
-AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
-
-Buneary
-Level: 1
-
-=== TRAINER_C7F16F5B ===
-Name: C7F16F5B
+=== TRAINER_IMPROV_6 ===
+Name: ImprovtroupeZ
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 

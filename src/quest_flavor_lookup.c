@@ -186,7 +186,7 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
             if (storyline > 0)
                 return gText_PlayersAdventure_Flavor1;
             else
-                return gText_Blank;
+                return gText_ExpandedPlaceholder_Empty;
     }
 }
 
@@ -415,4 +415,39 @@ const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void)
         StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You recieved an Odd Egg, but will somebody want it?"));
     }
     return gStringVar4;
+}
+
+const u8 *GetQuestDesc_Improvbattling(void)
+{
+    u32 flag = ReturnQuestState(QUEST_IMPROVBATTLING);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_IMPROVBATTLING].desc[flag]);
+	return gStringVar4;
+}
+
+const u8 *GetQuestDesc_Teachatrainertofish(void)
+{
+    u32 flag = ReturnQuestState(QUEST_TEACHATRAINERTOFISH);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_TEACHATRAINERTOFISH),MAP_NUM(MAP_QUEST_TEACHATRAINERTOFISH))->regionMapSectionId,0);
+    StringCopy(gStringVar2,GetSpeciesName(VarGet(VAR_QUEST_TEACHATRAINERTOFISH)));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_TEACHATRAINERTOFISH].desc[flag]);
+	return gStringVar4;
+}
+
+const u8 *GetQuestDesc_Wildfirerisk(void)
+{
+    u32 flag = ReturnQuestState(QUEST_WILDFIRERISK);
+    StringCopy(gStringVar1,GetItemName(ITEM_QUEST_WILDFIRERISK_REWARD));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_WILDFIRERISK].desc[flag]);
+	return gStringVar4;
+}
+
+const u8 *GetQuestDesc_Hang20(void)
+{
+    u32 flag = ReturnQuestState(QUEST_HANG20);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
+	ConvertIntToDecimalStringN(gStringVar2, QUEST_HANG20_REQUIRED_WINS, STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_HANG20_REQUIRED_WINS));
+    StringCopy(gStringVar3,GetMoveName(MOVE_SURF));
+	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HANG20].desc[flag]);
+	return gStringVar4;
 }

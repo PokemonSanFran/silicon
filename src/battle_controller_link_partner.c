@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_main.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -151,7 +150,7 @@ static void LinkPartnerHandleDrawTrainerPic(enum BattlerId battler)
 
     trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, FALSE,
-                                       xPos, 80 + 4 * (8 - gTrainerBacksprites[trainerPicId].coordinates.size),
+                                       xPos, 80 + 4 * (8 - GetTrainerBackPicCoords(trainerPicId)->size),
                                        -1);
 }
 
@@ -163,7 +162,7 @@ static void LinkPartnerHandleTrainerSlideBack(enum BattlerId battler)
 static void LinkPartnerHandleIntroTrainerBallThrow(enum BattlerId battler)
 {
     enum TrainerPicID trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
-    const u16 *trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
+    const u16 *trainerPal = GetTrainerBackPicPalette(trainerPicId);
     // Link partner uses the same intro sequence as the player partner.
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox);
 }

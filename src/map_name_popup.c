@@ -13,11 +13,13 @@
 #include "region_map.h"
 #include "rtc.h"
 #include "start_menu.h"
+#include "strings.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "constants/battle_frontier.h"
 #include "constants/layouts.h"
+#include "constants/map_types.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
 #include "config/general.h"
@@ -213,18 +215,13 @@ static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
     [MAPSEC_TORGEOT_CLIMB] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_NAVAL_BASE] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_PINTILLONHOUSE] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_MORAGASTEPS] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_DEYOUNGMUSEUM] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_DUTCHWINDMILLS] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ANBEH_BEND] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_PALACEFINEARTS] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_FORT_YOBU] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_TRANSPYRAMID] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_FERRYBUILDING] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_POPIDORA_PIER] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_SHARPRISESTADIUM] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_OROLAND_COLISEUM] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_OROLANDFERRY] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_PIOCA_BRIDGE] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROBINWILLTUNNEL] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_LEAVERRA_FOREST] = MAPPOPUP_THEME_WOOD,
@@ -239,13 +236,11 @@ static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
     [MAPSEC_ROUTE4] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE10] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE8] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_PSFROUTE7E17FDD1] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE14] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE5] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE_D] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE6] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE3] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_PSFROUTE9F45DA86] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE_C] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE1] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE2] = MAPPOPUP_THEME_WOOD,
@@ -546,7 +541,6 @@ static void Task_MapNamePopUpWindow(u8 taskId)
 
 void HideMapNamePopUpWindow(void)
 {
-    HideQuestOverworld(); // siliconDaycare
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
     #ifdef UBFIX
@@ -595,9 +589,61 @@ static void UpdateSecondaryPopUpWindow(u8 secondaryPopUpWindowId)
     CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
 }
 
+static void MapNamePopupAppendFloorNum(u8 *map_name, s8 floorNum)
+{
+    if (floorNum == 0)
+        return;
+    u8 *dest = map_name;
+    while (*dest != EOS)
+        dest++;
+    *dest++ = CHAR_SPACE;
+    if (floorNum == FLOOR_ROOFTOP)
+    {
+        StringCopy(dest, gText_Rooftop);
+        return;
+    }
+    if (floorNum < 0)
+    {
+        *dest++ = CHAR_B;
+        floorNum *= -1;
+    }
+    dest = ConvertIntToDecimalStringN(dest, floorNum, STR_CONV_MODE_LEFT_ALIGN, 2);
+    *dest++ = CHAR_F;
+    *dest = EOS;
+}
+
+static bool32 IsCeladonDeptStore(const struct MapHeader *mapHeader)
+{
+    if (mapHeader->regionMapSectionId != MAPSEC_CELADON_CITY)
+        return FALSE;
+    if (mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_1F_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_2F_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_3F_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_4F_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_5F_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_ROOF_FRLG
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR_FRLG)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+u8 *GetPopUpMapName(u8 *dest, const struct MapHeader *mapHeader)
+{
+    if (IsCeladonDeptStore(mapHeader))
+        StringCopy(dest, COMPOUND_STRING("CELADON DEPT."));
+    else
+        GetMapName(dest, mapHeader->regionMapSectionId, 0);
+    if (mapHeader->floorNumber == 0)
+        return dest;
+    MapNamePopupAppendFloorNum(dest, mapHeader->floorNumber);
+    return dest;
+}
+
 static void ShowMapNamePopUpWindow(void)
 {
-    u8 mapDisplayHeader[27];
+    u8 mapDisplayHeader[MAP_POPUP_STRING_BUFFER_LENGTH];
     u8 *withoutPrefixPtr;
     u8 x;
     const u8 *mapDisplayHeaderSource;
@@ -607,23 +653,22 @@ static void ShowMapNamePopUpWindow(void)
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
         {
-            withoutPrefixPtr = &(mapDisplayHeader[6]);
+            withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
             mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE];
         }
         else
         {
-            withoutPrefixPtr = &(mapDisplayHeader[6]);
+            withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
             mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.curChallengeBattleNum];
         }
         StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
     }
     else
     {
-        withoutPrefixPtr = &(mapDisplayHeader[6]);
-        GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
+        withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
+        GetPopUpMapName(withoutPrefixPtr, &gMapHeader);
     }
 
-    HideQuestOverworld(); // siliconDaycare
     if (OW_POPUP_GENERATION == GEN_5)
     {
         if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
@@ -654,8 +699,9 @@ static void ShowMapNamePopUpWindow(void)
     }
     else
     {
-        x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 80);
-        AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
+        u32 fontId = GetFontIdToFit(withoutPrefixPtr, FONT_NORMAL, -1, 80);
+        x = GetStringCenterAlignXOffset(fontId, withoutPrefixPtr, 80);
+        AddTextPrinterParameterized(GetMapNamePopUpWindowId(), fontId, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
         CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
     }
 }
@@ -748,5 +794,20 @@ static void LoadMapNamePopUpWindowBg(void)
 void Script_MapPopUp(void)
 {
     ShowMapNamePopup();
+}
+
+void AccelerateMapPopUp(void)
+{
+    u32 taskId = FindTaskIdByFunc(Task_MapNamePopUpWindow);
+    if (taskId == TASK_NONE)
+        return;
+
+    struct Task *task = &gTasks[taskId];
+    DestroyTask(taskId);
+
+    ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
+    ClearStdWindowAndFrame(GetSecondaryPopUpWindowId(), TRUE);
+    HideMapNamePopUpWindow();
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
 }
 // end mapPreviews
