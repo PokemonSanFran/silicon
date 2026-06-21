@@ -2,7 +2,7 @@
   "id": "MAP_LANJING_TUNNEL",
   "name": "LanjingTunnel",
   "layout": "LAYOUT_ROBINWILLTUNNEL",
-  "music": "MUS_RG_MT_MOON",
+  "music": "MUS_CAVE",
   "region_map_section": "MAPSEC_ROBINWILLTUNNEL",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
