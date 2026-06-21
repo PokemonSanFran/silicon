@@ -35507,7 +35507,7 @@
                 MOVE_STEALTH_ROCK,
                 MOVE_HEAVY_SLAM,
                 MOVE_BODY_PRESS,
-                MOVE_TOXIC,
+                MOVE_IRON_DEFENSE,
             },
             },
             {
