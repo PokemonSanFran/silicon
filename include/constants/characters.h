@@ -48,6 +48,10 @@
 #define CHAR_SUPER_ER          0x2C
 #define CHAR_AMPERSAND         0x2D
 #define CHAR_PLUS              0x2E
+// Start newFontSymbols
+#define CHAR_OCTHORPE          0x2F
+#define CHAR_ATSIGN            0x30
+// End newFontSymbols
 //
 #define CHAR_LV                0x34
 #define CHAR_EQUALS            0x35

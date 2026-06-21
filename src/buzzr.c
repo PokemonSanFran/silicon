@@ -209,7 +209,7 @@ EWRAM_DATA u8 gTweetOverworldWindowId = 0;
 EWRAM_DATA u16 overworldTweet = TWEET_NONE;
 
 static const u8 sText_OldestFirst[] =_("Oldest First");
-static const u8 sText_UsernamePrefix[] =_("+");
+static const u8 sText_UsernamePrefix[] =_("@");
 
 static const struct BgTemplate sBuzzrBgTemplates[] =
 {

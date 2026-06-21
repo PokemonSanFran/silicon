@@ -4066,7 +4066,7 @@ static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, u32 windowId)
         y -= TILE_SIZE_1BPP;
 
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,4);
-    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("#{STR_VAR_1}"));
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar3);
 }
 
