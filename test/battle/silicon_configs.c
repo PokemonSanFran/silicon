@@ -967,3 +967,28 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Animations", u32 lastTile)
         FORCE_MOVE_ANIM(FALSE);
     }
 }
+
+SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
+{
+    KNOWN_FAILING;
+    enum optionsVisualTextSpeedValues speed;
+    PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_SLOW; }
+    PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_MEDIUM; }
+    PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_FAST; }
+    PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_INSTANT; }
+    GIVEN {
+        gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED] = speed;
+        gSiliconTestVariables.checkPrintSpeed = TRUE;
+        gSiliconTestVariables.counter = 0;
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { }
+    } THEN {
+        results[i].frames = gSiliconTestVariables.counter;
+    } FINALLY {
+        EXPECT_LT(results[0].frames, results[1].frames);
+        EXPECT_LT(results[1].frames, results[2].frames);
+        EXPECT_LT(results[2].frames, results[3].frames);
+    }
+}

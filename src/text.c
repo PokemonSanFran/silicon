@@ -17,6 +17,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/speaker_names.h"
+#include "test/test.h"
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -628,6 +629,12 @@ void RunTextPrinters(void)
                     if (!currentPrinter->active)
                         break;
                 }
+#if TESTING
+                if (gSiliconTestVariables.checkPrintSpeed)
+                {
+                    gSiliconTestVariables.counter++;
+                }
+#endif
             }
             else
             {
