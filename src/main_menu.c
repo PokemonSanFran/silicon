@@ -526,7 +526,7 @@ static const u8 *const sFemalePresetNames[] = {
 
 // Start Silicon Prologue
 static const u8 *const sChampionPresetNames[] = {
-        COMPOUND_STRING("Adam"),
+        COMPOUND_STRING("Shinji"),
 };
 // End Silicon Prologue
 // The number of male vs. female names is assumed to be the same.

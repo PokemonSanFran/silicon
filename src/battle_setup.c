@@ -2169,6 +2169,7 @@ bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 
 bool8 IsTrainerReadyForRematch(void)
 {
+    TRAINER_BATTLE_PARAM.opponentA = GetPSFRematchTrainerId(GetTrainerIdFromLastTalked()); // rematch_action
     return IsTrainerReadyForRematch_(gRematchTable, TRAINER_BATTLE_PARAM.opponentA);
 }
 

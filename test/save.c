@@ -5,8 +5,8 @@
 // If you would like to ensure save compatibility, update the values below with those for your hack. You can find these through the debug menu.
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
 #define T_SAVEBLOCK1_SIZE 15868
-#define T_SAVEBLOCK2_SIZE 3288
-#define T_SAVEBLOCK3_SIZE 1596
+#define T_SAVEBLOCK2_SIZE 3292
+#define T_SAVEBLOCK3_SIZE 1584
 #define T_POKEMONSTORAGE_SIZE 34144
 
 TEST("SaveBlock1 is backwards compatible")

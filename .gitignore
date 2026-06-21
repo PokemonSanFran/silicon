@@ -82,4 +82,7 @@ tools/aif2pcm/aif2pcm
 *.fastSmol
 *.smolTM
 __pycache__
+compile_commands.json
+.cache
+.ccls-cache
 .map_version

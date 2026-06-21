@@ -30,7 +30,6 @@ static u32 CreateNameplateWindow(void);
 static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker speaker);
 static void DestroyExistingWindow(void);
 static void DrawBottomNameplateTiles(u32, u32, u32, u32);
-static void DrawTopMessageBoxTiles(u32, u32, u32, u32);
 static void DrawSecondRowNameplateTiles(u32, u32, u32, u32);
 static void DrawThirdRowNameplateTiles(u32, u32, u32, u32);
 static void DrawTopNameplateTiles(u32, u32, u32, u32);
@@ -304,7 +303,7 @@ void DrawNameplate(void)
     }
     else
     {
-        DrawTopMessageBoxTiles(windowId, nameplateWidth, offset, nameplateTileWidth);
+        DrawTopMessageBoxTiles(windowId, MSGBOX_TOP_FIRST_TILE_OFFSET, MSGBOX_MIDDLE_TILE_OFFSET, MSGBOX_LAST_TILE_OFFSET);
     }
 
     PlaceNameplateOnTilemap(windowId);
@@ -343,6 +342,11 @@ static void DestroyExistingWindow(void)
     HideMapNamePopUpWindow();
 }
 
+void LoadNameplatePalette(enum Gender gender)
+{
+    LoadPalette(genderNameplatePaletteLUT[gender],BG_PLTT_ID(MUGSHOT_PALETTE_NUM),PLTT_SIZE_4BPP);
+}
+
 u32 CreateNameplateWindow(void)
 {
     enum Gender gender = GetSpeakerGender();
@@ -351,7 +355,7 @@ u32 CreateNameplateWindow(void)
     SetWindowTemplateFields(&nameplateTemplate, 0, WINDOW_TILELEFT, WINDOW_TILETOP,DISPLAY_TILE_WIDTH, MSGBOX_TILE_HEIGHT, MUGSHOT_PALETTE_NUM, NAMEPLATE_WINDOW_TEMPLATE);
     sMugshotWindow = AddWindow(&nameplateTemplate);
     u32 windowId = sMugshotWindow;
-    LoadPalette(genderNameplatePaletteLUT[gender],BG_PLTT_ID(MUGSHOT_PALETTE_NUM),PLTT_SIZE_4BPP);
+    LoadNameplatePalette(gender);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
     return windowId;
@@ -422,16 +426,16 @@ static u32 CalculateNameplateWidth(u32 nameWidth, u32 titleWidth)
     return max(width,MAX_TITLE_LENGTH);
 }
 
-static void DrawTopMessageBoxTiles(u32 windowId, u32 stringWidth, u32 offset, u32 nameplateTileWidth)
+void DrawTopMessageBoxTiles(u32 windowId, u32 firstTileOffset, u32 middleTileOffset, u32 lastTileOffset)
 {
     u32 index;
 
-    CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxLeftTop, 0, MSGBOX_TOP_FIRST_TILE_OFFSET);
+    CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxLeftTop, 0, firstTileOffset);
 
     for (index = 0; index < MSGBOX_TILE_WIDTH; index++)
-        CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxCenterTop, 0, MSGBOX_MIDDLE_TILE_OFFSET + index);
+        CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxCenterTop, 0, middleTileOffset + index);
 
-    CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxRightTop, 0, MSGBOX_LAST_TILE_OFFSET);
+    CopyToWindowPixelBuffer(windowId, (const void*)sMessageBoxRightTop, 0, lastTileOffset);
 }
 
 static void DrawBottomNameplateTiles(u32 windowId, u32 stringWidth, u32 offset, u32 nameplateTileWidth)

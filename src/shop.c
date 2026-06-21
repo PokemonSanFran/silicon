@@ -35,6 +35,7 @@
 #include "text_window.h"
 #include "tv.h"
 #include "shop_criteria.h"
+#include "currency_box.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -110,6 +111,7 @@ struct ShopData
     u8 iconSlot;
     u8 itemSpriteIds[2];
     s16 viewportObjects[OBJECT_EVENTS_COUNT][5];
+    union CurrencyBoxValues moneyBox;
 };
 
 static EWRAM_DATA struct MartInfo sMartInfo = {0};
@@ -565,6 +567,7 @@ static void CB2_InitBuyMenu(void)
 
 static void BuyMenuFreeMemory(void)
 {
+    CurrencyBox_Destroy(sShopData->moneyBox);
     if (sMartInfo.martType == MART_TYPE_NORMAL)
         TryFreeDynamicShopItemList(&sMartInfo.itemList);
 
@@ -794,8 +797,7 @@ static void BuyMenuDrawGraphics(void)
 {
     BuyMenuDrawMapGraphics();
     BuyMenuCopyMenuBgToBg1TilemapBuffer();
-    AddMoneyLabelObject(19, 11);
-    PrintMoneyAmountInMoneyBoxWithBorder(WIN_MONEY, 1, 13, GetMoney(&gSaveBlock1Ptr->money));
+    sShopData->moneyBox = CurrencyBox_Init(CURRENCY_BOX_MONEY, WIN_MONEY, 1, 13);
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
@@ -1226,7 +1228,7 @@ static void BuyMenuSubtractMoney(u8 taskId)
     IncrementGameStat(GAME_STAT_SHOPPED);
     RemoveMoney(&gSaveBlock1Ptr->money, sShopData->totalCost);
     PlaySE(SE_SHOP);
-    PrintMoneyAmountInMoneyBox(WIN_MONEY, GetMoney(&gSaveBlock1Ptr->money), 0);
+    CurrencyBox_Update(sShopData->moneyBox);
 
     if (sMartInfo.martType == MART_TYPE_NORMAL)
         gTasks[taskId].func = Task_ReturnToItemListAfterItemPurchase;
@@ -1296,7 +1298,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_QUANTITY_PRICE, PIXEL_FILL(1));
-    PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
+    CurrencyBox_PrintMoneyAmount(WIN_QUANTITY_PRICE, 1, sShopData->totalCost);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(WIN_QUANTITY_PRICE, gStringVar4, 0, 1, 0, COLORID_NORMAL);
@@ -1313,7 +1315,6 @@ static void Task_ExitBuyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        RemoveMoneyLabelObject();
         BuyMenuFreeMemory();
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);

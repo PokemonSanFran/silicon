@@ -639,7 +639,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Blissey @ Chople Berry
 Ability: Serene Grace
 Level: 51
-Tera Type: Normal
 EVs: 252 HP/45 Def/1 Spe
 Bold Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -651,7 +650,6 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 Farigiraf @ Sitrus Berry
 Ability: Cud Chew
 Level: 50
-Tera Type: Normal
 EVs: 48 HP/252 SpA/1 Spe
 Modest Nature
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
@@ -1431,6 +1429,7 @@ IVs: 0 Atk
 
 Gyarados @ Gyaradosite  
 Ability: Intimidate  
+Level: 74
 EVs: 156 HP / 252 Atk / 100 Spe  
 Adamant Nature  
 - Waterfall  
@@ -12064,13 +12063,65 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Buneary
 Level: 1
 
-=== TRAINER_B42E7E27 ===
-Name: B42E7E27
+=== TRAINER_CHAMPION_SHINJI ===
+Name: Shinji
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Gyarados @ Sitrus Berry  
+Ability: Intimidate  
+EVs: 252 HP / 4 Atk / 204 Def / 4 SpD / 44 Spe  
+Careful Nature  
+- Waterfall  
+- Thunder Wave  
+- Taunt  
+- Protect  
+
+Nidoking @ Life Orb  
+Ability: Sheer Force  
+EVs: 252 SpA / 4 SpD / 252 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Earth Power  
+- Sludge Wave  
+- Ice Beam  
+- Flamethrower  
+
+Magmortar @ Heavy-Duty Boots  
+Ability: Flame Body  
+EVs: 4 Def / 252 SpA / 252 Spe  
+Timid Nature  
+- Fire Blast  
+- Scorching Sands  
+- Thunderbolt  
+- Knock Off  
+
+Aggron @ Leftovers  
+Ability: Sturdy  
+EVs: 252 HP / 4 Def / 252 SpD  
+Careful Nature  
+- Stealth Rock  
+- Heavy Slam  
+- Body Press  
+- Toxic  
+
+Torterra @ Loaded Dice  
+Ability: Overgrow  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Shell Smash  
+- Headlong Rush  
+- Bullet Seed  
+- Rock Blast  
+
+Honchkrow @ Heavy-Duty Boots  
+Ability: Moxie  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Sucker Punch  
+- Brave Bird  
+- U-turn  
+- Night Slash  
 
 === TRAINER_IMPROV_4 ===
 Name: ImprovtroupeX
