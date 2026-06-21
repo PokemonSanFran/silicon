@@ -1990,7 +1990,7 @@ static void SpeciesData_PrintSpeciesNumAndDesc(u32 shownSpecies, u32* padding)
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,CountDigits(RESIDO_DEX_COUNT));
     CopyMonCategoryText(shownSpecies,gStringVar2);
 
-    end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1} {STR_VAR_2}"));
+    end = StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("#{STR_VAR_1} {STR_VAR_2}"));
 
     BreakStringNaive(gStringVar3, POKEDEX_SPECIESLIST_DATA_WIDTH, 2, fontId, HIDE_SCROLL_PROMPT);
     PrependFontIdToFit(gStringVar3, end, fontId, GetWindowAttribute(windowId, WINDOW_WIDTH));
