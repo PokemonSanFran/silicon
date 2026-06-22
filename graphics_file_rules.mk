@@ -344,4 +344,29 @@ $(TYPES19x16GFXDIR)/types.4bpp: $(types:%=$(TYPES19x16GFXDIR)/%.4bpp)
 	@cat $^ >$@
 # End pokedex
 
+# Start monSummary
+TYPES11x9GFXDIR := graphics/ui_menus/types/11x9
+TYPES128x16GFXDIR := graphics/ui_menus/types/128x16
+MONSUMMARYGFXDIR := graphics/ui_menus/mon_summary
 
+$(TYPES11x9GFXDIR)/types.4bpp: $(types:%=$(TYPES11x9GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(types:%=$(TYPES128x16GFXDIR)/%.4bpp): %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(MONSUMMARYGFXDIR)/infos/cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/stats/stat_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/moves/slot_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+
+$(MONSUMMARYGFXDIR)/moves/option_cursor.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 2
+# End monSummary

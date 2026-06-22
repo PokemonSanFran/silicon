@@ -18,5 +18,7 @@ void ClearMessageBoxAddOns();
 void DestroySpeakerIconSprite(void);
 void ForceClearMessageBoxData(void);
 void RandomizeNameplate(void);
+void DrawTopMessageBoxTiles(u32, u32, u32, u32);
+void LoadNameplatePalette(enum Gender gender);
 
 #endif // GUARD_UI_MUGSHOT

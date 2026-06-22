@@ -77,6 +77,7 @@
 #include "quest_logic.h"
 #include "quest_ow.h"
 // End siliconMerge
+#include "currency_box.h"
 #include "constants/map_types.h"
 #include "constants/rgb.h"
 #include "ui_adventure_guide.h" // adventureGuide
@@ -2354,28 +2355,36 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
 bool8 ScrCmd_addmoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);
+    // start siliconBpBox
+    /*
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
     {
+    */
         Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
         AddMoney(&gSaveBlock1Ptr->money, amount);
-    }
+    //}
+    // end siliconBpBox
     return FALSE;
 }
 
 bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);
+    // start siliconBpBox
+    /*
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
     {
+    */
         Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
         RemoveMoney(&gSaveBlock1Ptr->money, amount);
-    }
+    //}
+    // end siliconBpBox
     return FALSE;
 }
 
@@ -2403,7 +2412,23 @@ bool8 ScrCmd_showmoneybox(struct ScriptContext *ctx)
     {
         Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-        DrawMoneyBox(GetMoney(&gSaveBlock1Ptr->money), x, y);
+        union CurrencyBoxValues moneyBox = { .asU32 = ctx->data[3] };
+        assertf(moneyBox.active != TRUE, "moneybox instance already exists!")
+        {
+            return FALSE;
+        }
+
+        struct WindowTemplate template =
+        {
+            .bg = 0,
+            .tilemapLeft = x,
+            .tilemapTop = y,
+            .width = CURRENCY_BOX_WIDTH,
+            .height = CURRENCY_BOX_HEIGHT,
+            .paletteNum = DLG_WINDOW_PALETTE_NUM,
+            .baseBlock = MONEY_BOX_BASE_BLOCK
+        };
+        ctx->data[3] = CurrencyBox_Create(CURRENCY_BOX_MONEY, &template).asU32;
     }
     return FALSE;
 }
@@ -2415,7 +2440,8 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
     /*u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);*/
 
-    HideMoneyBox();
+    union CurrencyBoxValues values = { .asU32 = ctx->data[3] };
+    CurrencyBox_Destroy(values);
     return FALSE;
 }
 
@@ -2429,7 +2455,8 @@ bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
     {
         Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-        ChangeAmountInMoneyBox(GetMoney(&gSaveBlock1Ptr->money));
+        union CurrencyBoxValues values = { .asU32 = ctx->data[3] };
+        CurrencyBox_Update(values);
     }
     return FALSE;
 }
@@ -2441,7 +2468,23 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    ShowCoinsWindow(GetCoins(), x, y);
+    union CurrencyBoxValues moneyBox = { .asU32 = ctx->data[2] };
+    assertf(moneyBox.active != TRUE, "coinsbox instance already exists!")
+    {
+        return FALSE;
+    }
+
+    struct WindowTemplate template =
+    {
+        .bg = 0,
+        .tilemapLeft = x,
+        .tilemapTop = y,
+        .width = CURRENCY_BOX_WIDTH,
+        .height = CURRENCY_BOX_HEIGHT,
+        .paletteNum = DLG_WINDOW_PALETTE_NUM,
+        .baseBlock = COINS_BOX_BASE_BLOCK
+    };
+    ctx->data[2] = CurrencyBox_Create(CURRENCY_BOX_COINS, &template).asU32;
     return FALSE;
 }
 
@@ -2452,7 +2495,8 @@ bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    HideCoinsWindow();
+    union CurrencyBoxValues values = { .asU32 = ctx->data[2] };
+    CurrencyBox_Destroy(values);
     return FALSE;
 }
 
@@ -2463,7 +2507,8 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    PrintCoinsString(GetCoins());
+    union CurrencyBoxValues values = { .asU32 = ctx->data[2] };
+    CurrencyBox_Update(values);
     return FALSE;
 }
 

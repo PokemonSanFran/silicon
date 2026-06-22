@@ -1703,7 +1703,6 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         PrintGlyph(textPrinter);
-
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))
@@ -2104,6 +2103,16 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         }
         ++str;
     }
+
+    // Start outlineFont
+    // decrement the last character width as well
+    if (fontId == FONT_OUTLINED || fontId == FONT_OUTLINED_NARROW)
+    {
+        lineWidth--;
+        if (width)
+            width--;
+    }
+    // End outlineFont
 
     if (lineWidth > width)
         return lineWidth;

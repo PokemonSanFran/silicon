@@ -941,8 +941,8 @@ static void Task_ChangeToTrainerModeAndReloadScreen(u8 taskId)
         return;
 
     CleanUpLocationMode(taskId);
-    ToggleGlassMode();
     FreeGlassBackgrounds();
+    ToggleGlassMode();
     InitBgsAndLoadBackgroundGraphics(FALSE);
     BeginNormalPaletteFade(PALETTES_ALL,0,16,0,RGB_BLACK);
     SetUpTrainerMode(taskId);
@@ -1625,18 +1625,14 @@ static void Glass_PrintSortModeHeader(u32 windowId, u32 sort)
 {
     u32 fontId = FONT_GLASS_BAR;
 
-    u8 *percentString = Alloc(USER_MAX_LENGTH*2);
-
     StringCopy(gStringVar1, GetSortName(sort));
     StringExpandPlaceholders(gStringVar4, sText_Total);
-    StringCopy(percentString, gStringVar4);
+    StringCopy(gStringVar2, gStringVar4);
 
     if (!sort)
-        StringCopy(percentString,gText_ExpandedPlaceholder_Empty);
+        StringCopy(gStringVar2,gText_ExpandedPlaceholder_Empty);
 
-    AddTextPrinterParameterized4(windowId, fontId, 22, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, percentString);
-
-    Free(percentString);
+    AddTextPrinterParameterized4(windowId, fontId, 22, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW, gStringVar2);
 }
 
 static const u8 *GetSortName(u32 sort)
@@ -1671,14 +1667,11 @@ static void PrintLocationName(void)
     u32 fontId = FONT_GLASS_BAR;
     u32 x = 0;
     u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
-    u8 *locationName = Alloc(USER_MAX_LENGTH*2);
-    StringCopy(locationName,GetLocationName(GetChosenLocation()));
+    StringCopy(gStringVar1,GetLocationName(GetChosenLocation()));
 
-    x = CalculateLocationNameXPosition(fontId, locationName, letterSpacing);
+    x = CalculateLocationNameXPosition(fontId, gStringVar1, letterSpacing);
 
-    AddTextPrinterParameterized4(GLASS_WINDOW_HEADER, fontId, x, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,locationName);
-
-    Free(locationName);
+    AddTextPrinterParameterized4(GLASS_WINDOW_HEADER, fontId, x, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), sGlassWindowFontColors[GLASS_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar1);
 }
 
 static u8 CalculateLocationNameXPosition(u32 fontId, u8* locationName, u32 letterSpacing)
@@ -3515,11 +3508,12 @@ static void FreeGlassStructs(void)
 
 static void FreeGlassBackgrounds(void)
 {
-    u32 backgroundId;
-    for (backgroundId = 0; backgroundId < BG_GLASS_COUNT; backgroundId++)
+    for (u32 backgroundId = 0; backgroundId < BG_GLASS_COUNT; backgroundId++)
     {
-        if (sBgTilemapBuffer[backgroundId] != NULL)
-            Free(sBgTilemapBuffer[backgroundId]);
+        if (IsAppTrainerMode() && backgroundId == BG0_GLASS_TEXT_CONTENT) // i have no idea why the game crashes without this
+            continue;
+
+        TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
     }
 }
 

@@ -402,7 +402,6 @@ static void PageEvolution_InitWindows(void);
 static void PageMoves_HandleInput(u8 taskId);
 static void PageEvolution_HandleInput(u8 taskId);
 static bool32 PageMoves_IsSelctedMoveEggMove(u32 currentPosition);
-static bool32 IsMoveInSilicon(u32 moveId);
 static void PageMoves_PopulateMovesList(void);
 static void PageMoves_PrintCursor(enum PokedexPageMovesWindows windowId);
 static void PageMoves_PrintMovesList(void);
@@ -1121,7 +1120,7 @@ static void UpdateMoveMethodIfExists(u16 moveId, enum MoveLearnMethods newMethod
     }
 }
 
-static bool32 IsMoveInSilicon(u32 moveId)
+bool32 IsMoveInSilicon(u32 moveId)
 {
     for (u32 moveIndex = 0; moveIndex < MAX_MOVES_PER_LETTER; moveIndex++)
     {
@@ -4067,7 +4066,7 @@ static void PageEvolution_SpeciesData_PrintSpeciesNum(u32 species, u32 windowId)
         y -= TILE_SIZE_1BPP;
 
     ConvertIntToDecimalStringN(gStringVar1,natDexId,STR_CONV_MODE_LEADING_ZEROS,4);
-    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("¥{STR_VAR_1}"));
+    StringExpandPlaceholders(gStringVar3, COMPOUND_STRING("#{STR_VAR_1}"));
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sPokedexWindowFontColors[POKEDEX_FONT_COLOR_WHITE], TEXT_SKIP_DRAW,gStringVar3);
 }
 

@@ -54,7 +54,12 @@ static u16 HiddenGrotto_GetFlag(enum HiddenGrottoId grottoId)
 static u16 HiddenGrotto_GetSpecies(enum HiddenGrottoId grottoId)
 {
     enum HiddenGrottoSecretsId secret = HiddenGrotto_GetGrottoChoice(grottoId);
+    
+    if (secret < GROTTO_ITEM_COUNT)
+        return SPECIES_NONE;
+
     secret -= GROTTO_ITEM_COUNT;
+
     return hiddenGrottoData[grottoId].species[secret];
 }
 

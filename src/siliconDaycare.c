@@ -18,11 +18,10 @@
 #include "script.h"
 #include "siliconDaycare.h"
 #include "string_util.h"
+#include "ui_mon_summary.h"
 #include "tv.h"
 #include "constants/siliconDaycare.h"
 
-static void Debug_RandomizeBoxMonInidividualValues(struct BoxPokemon *mon);
-static void Debug_RandomizeMonInidividualValues(struct Pokemon *mon);
 static s16 CompactDaycareEggSlots(void);
 static u32 GetFirstPopulatedEggIndex(void);
 static s16 CompactDaycareEggSlots(void);
@@ -487,7 +486,7 @@ void EditPokemonIndividualValues(void)
     if (GetMonData(mon,MON_DATA_IS_EGG) == TRUE)
         SetupEggMon(mon);
 
-    ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_EDIT_IVS, mon, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 void CompareOldNewIndividualValues(void)
@@ -496,7 +495,7 @@ void CompareOldNewIndividualValues(void)
     struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
     struct Pokemon *mon = &daycare->viewMon;
     struct Pokemon *old = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    Debug_RandomizeMonInidividualValues(mon);
+    //Debug_RandomizeMonInidividualValues(mon);
 
     for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
     {
@@ -569,7 +568,7 @@ void ViewEggContents(void)
 void EditEggContents(void)
 {
     LoadEggContents(SUMMARY_MODE_LOCK_MOVES);
-    Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
+    //Debug_RandomizeBoxMonInidividualValues(&gSaveBlock1Ptr->daycare.daycareEgg[GetFirstPopulatedEggIndex()].egg);
 }
 
 static void LoadEggContents(u32 mode)
@@ -624,27 +623,8 @@ void ResetUnhatchedMonEgg(void)
     }
 }
 
-static void Debug_RandomizeMonInidividualValues(struct Pokemon *mon)
-{
-    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
-    {
-        u32 stat = Random() % MAX_PER_STAT_IVS;
-        SetMonData(mon,MON_DATA_HP_IV + statIndex,&stat);
-    }
-}
-
-static void Debug_RandomizeBoxMonInidividualValues(struct BoxPokemon *mon)
-{
-    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
-    {
-        u32 stat = Random() % MAX_PER_STAT_IVS;
-        SetBoxMonData(mon,MON_DATA_HP_IV + statIndex,&stat);
-    }
-}
-
 static void SetupEggMon(struct Pokemon *mon)
 {
-    DebugPrintf("SetupEggMon");
     struct Pokemon *temp = &gParties[B_TRAINER_OPPONENT_A][1];
     CreateHatchedMon(mon, temp);
 

@@ -48,6 +48,10 @@
 #define CHAR_SUPER_ER          0x2C
 #define CHAR_AMPERSAND         0x2D
 #define CHAR_PLUS              0x2E
+// Start newFontSymbols
+#define CHAR_OCTHORPE          0x2F
+#define CHAR_ATSIGN            0x30
+// End newFontSymbols
 //
 #define CHAR_LV                0x34
 #define CHAR_EQUALS            0x35
@@ -198,6 +202,7 @@
 #define CHAR_DPAD_NONE      0x0C
 
 // CHAR_EXTRA_SYMBOL chars
+#define CHAR_EXTRA_SYMBOL_START 0x100 // monSummary
 #define CHAR_UP_ARROW_2    0x00
 #define CHAR_DOWN_ARROW_2  0x01
 #define CHAR_LEFT_ARROW_2  0x02
@@ -208,6 +213,8 @@
 #define CHAR_ID            0x07
 #define CHAR_NO            0x08
 #define CHAR_UNDERSCORE    0x09
+#define CHAR_BIG_MULT_X    0x17 // monSummary
+#define CHAR_EMOJI_HEART   0xE7 // monSummary
 
 #define EXT_CTRL_CODE_COLOR                  0x01
 #define EXT_CTRL_CODE_HIGHLIGHT              0x02

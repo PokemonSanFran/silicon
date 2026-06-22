@@ -15,7 +15,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_RABIES] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("My cousin caught rabies in {STR_VAR_2}! Feral {STR_VAR_1} are attacking pets and people like crazy. Apparently the RSPCP's finally gonna do something about it and hook up people who can subdue or capture {STR_VAR_1} to chill things out over there. I'll be doing my part! &formycuz"),
+        .content = COMPOUND_STRING("My cousin caught rabies in {STR_VAR_2}! Feral {STR_VAR_1} are attacking pets and people like crazy. Apparently the RSPCP's finally gonna do something about it and hook up people who can subdue or capture {STR_VAR_1} to chill things out over there. I'll be doing my part! #formycuz"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Rabies,
         .quest = QUEST_RABIESOUTBREAK,
@@ -88,7 +88,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_STONE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Take the &MegaTrolleyChallenge and experience the best way to travel in Resido! Complete {STR_VAR_1} Mega rides, and visit the Mega G.R.U.N.T. HQ for a way to unlock your Pokémon’s Mega potential!"),
+        .content = COMPOUND_STRING("Take the #MegaTrolleyChallenge and experience the best way to travel in Resido! Complete {STR_VAR_1} Mega rides, and visit the Mega G.R.U.N.T. HQ for a way to unlock your Pokémon’s Mega potential!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Stone,
         .quest = QUEST_BETWEENASTONEANDAHARDPLACE,
@@ -269,7 +269,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NOPODMOD_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Went on a date tonight. Super hot, great texter… but he was one of those NoPo weirdos! Why can’t you just be normal?!?!?! &RedFlags"),
+        .content = COMPOUND_STRING("Went on a date tonight. Super hot, great texter… but he was one of those NoPo weirdos! Why can’t you just be normal?!?!?! #RedFlags"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_AlwaysTrue,
         .quest = 0,
@@ -309,7 +309,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_PSYOP] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Get ready for the &AuthenticHustle Challenge! You’ve gotta grind if you want your Phony {STR_VAR_1} to be peak. Catch one in a {STR_VAR_3}, max out its Effort Values, and come to {STR_VAR_2} to do the challenge right!"),
+        .content = COMPOUND_STRING("Get ready for the #AuthenticHustle Challenge! You’ve gotta grind if you want your Phony {STR_VAR_1} to be peak. Catch one in a {STR_VAR_3}, max out its Effort Values, and come to {STR_VAR_2} to do the challenge right!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_NPC_Psyop,
         .quest = 0,
@@ -329,7 +329,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_PSYOP_ACTIVE_B] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I did the &AuthenticHustle Challenge, and now my {STR_VAR_1} is super legit! Buckle down, unlock that {STR_VAR_2} mindset, and you can achieve the same. Keep pushing!"),
+        .content = COMPOUND_STRING("I did the #AuthenticHustle Challenge, and now my {STR_VAR_1} is super legit! Buckle down, unlock that {STR_VAR_2} mindset, and you can achieve the same. Keep pushing!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopActive,
         .quest = 0,
@@ -349,7 +349,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_PSYOP_COMPLETE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Working three jobs just to save up for {STR_VAR_2} and {STR_VAR_3} - that’s the grind! My {STR_VAR_1} is going to be maxed out, and nothing will stop me. Haters don’t + me."),
+        .content = COMPOUND_STRING("Working three jobs just to save up for {STR_VAR_2} and {STR_VAR_3} - that’s the grind! My {STR_VAR_1} is going to be maxed out, and nothing will stop me. Haters don’t @ me."),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_IsPsyopComplete,
         .quest = 0,
@@ -375,7 +375,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! &BallerOnABudget"),
+        .content = COMPOUND_STRING("Arriba is nice and all, but G.R.U.N.T. is so much cheaper! #BallerOnABudget"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times,
         .quest = 0,
@@ -415,7 +415,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_5] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Did anybody else do this &MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"),
+        .content = COMPOUND_STRING("Did anybody else do this #MegaTrolleyChallenge? Absolute scam. I’m walking to work just to spite them!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete,
         .quest = 0,
@@ -665,7 +665,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I went to {STR_VAR_1} Dojo and got totally wrecked! I need to focus on type specialization… &BackToTheLab"),
+        .content = COMPOUND_STRING("I went to {STR_VAR_1} Dojo and got totally wrecked! I need to focus on type specialization… #BackToTheLab"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_RestorehodoucityComplete,
         .quest = 0,
@@ -715,7 +715,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Watched a fishing documentary called “The Perfect Cast” about some Kalosian fishing techniques. I was too baked to understand, but Resido got a shoutout for a strong fishing culture! &masterthebaitt"),
+        .content = COMPOUND_STRING("Watched a fishing documentary called “The Perfect Cast” about some Kalosian fishing techniques. I was too baked to understand, but Resido got a shoutout for a strong fishing culture! #masterthebaitt"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_AlwaysTrue,
         .quest = 0,

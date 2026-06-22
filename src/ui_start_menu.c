@@ -152,6 +152,8 @@
 #define START_SAVE_OVERWRITE_X_FULLSCREEN   (-256)
 #define START_SAVE_OVERWRITE_X_CENTERSCREEN (-380)
 
+#define START_SAVE_OVERWRITE_BTN_COMBO      (A_BUTTON | START_BUTTON)
+
 enum StartMenuBackgrounds
 {
     START_BG_TEXT = 0,
@@ -1779,7 +1781,7 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     // clear (w/ black)
-    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
 
     // textbox
     StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
@@ -2710,7 +2712,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2722,7 +2724,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
                 return;
             }
 
-            if (JOY_NEW(A_BUTTON) && JOY_NEW(START_BUTTON))
+            if (JOY_HELD(START_SAVE_OVERWRITE_BTN_COMBO) == START_SAVE_OVERWRITE_BTN_COMBO)
             {
                 // unload sprites
                 SaveOverwrite_DestroySprites();
@@ -2763,7 +2765,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(A_BUTTON | START_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2777,7 +2779,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (!tTimer || JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);

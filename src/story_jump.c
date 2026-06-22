@@ -555,15 +555,14 @@ void GiveItems_Prologue_Intro(bool32 jumpType)
     if (FlagGet(FLAG_SYS_APP_PROLOUGE_GET))
         return;
 
-    u16 evs[NUM_STATS] = {0,252,252,4,0,0};
-    u16 ivs[NUM_STATS] = {31,31,31,31,31,31};
-    enum Move moves[4] = {MOVE_GLACIAL_LANCE,MOVE_HIGH_HORSEPOWER,MOVE_FLAMETHROWER,MOVE_EXPLOSION};
-
     InitPlayerTrainerId();
     AssignDefaultPlayerName();
 
     VarSet(B_LEVEL_CAP_VARIABLE,27);
-    ScriptGiveMonParameterized(B_SIDE_PLAYER,PARTY_SIZE,SPECIES_CALYREX_ICE,100,ITEM_WHITE_HERB,BALL_CHERISH,NATURE_ADAMANT,NUM_ABILITY_PERSONALITY,MON_GENDER_RANDOM,evs,ivs,moves,SHINY_MODE_RANDOM,FALSE,NUMBER_OF_MON_TYPES,0);
+
+    FlagSet(FLAG_DISABLE_SCALING);
+    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], &gTrainers[GetCurrentDifficultyLevel()][TRAINER_CHAMPION_SHINJI], FALSE, BATTLE_TYPE_TRAINER);
+    FlagClear(FLAG_DISABLE_SCALING);
 
     GivePlayerAllTechnicalMachines();
     GivePlayerHealingItems();

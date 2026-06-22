@@ -541,7 +541,6 @@ static void Task_MapNamePopUpWindow(u8 taskId)
 
 void HideMapNamePopUpWindow(void)
 {
-    HideQuestOverworld(); // siliconDaycare
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
     #ifdef UBFIX
@@ -670,7 +669,6 @@ static void ShowMapNamePopUpWindow(void)
         GetPopUpMapName(withoutPrefixPtr, &gMapHeader);
     }
 
-    HideQuestOverworld(); // siliconDaycare
     if (OW_POPUP_GENERATION == GEN_5)
     {
         if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())

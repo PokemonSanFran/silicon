@@ -154,7 +154,7 @@ u16 GetPSFRematchTrainerId(u16 trainerId)
 
     while (!HasTrainerBeenFought(gRematchTable[tableId].trainerIds[rematchTrainerIdx-1]))
     {
-        if (!rematchTrainerIdx)
+        if (rematchTrainerIdx == 0)
             break;
 
         rematchTrainerIdx--;
@@ -166,7 +166,7 @@ u16 GetPSFRematchTrainerId(u16 trainerId)
 static u32 GetRematchGameProgessVariable(void)
 {
     u32 storylineState = VarGet(VAR_STORYLINE_STATE);
-    s32 rematchIndex;
+    u32 rematchIndex;
 
     const u32 gameProgressMarkers[REMATCHES_COUNT] =
     {
@@ -177,11 +177,14 @@ static u32 GetRematchGameProgessVariable(void)
         STORY_1ST_TAKEDOWN,
     };
 
-    for (rematchIndex = REMATCHES_COUNT; rematchIndex > -1; rematchIndex--)
+    for (rematchIndex = (REMATCHES_COUNT - 1); rematchIndex < REMATCHES_COUNT; rematchIndex--)
+    {
+        if (rematchIndex == 0) 
+            break;
+
         if (storylineState >= gameProgressMarkers[rematchIndex])
             break;
-        else
-            continue;
+    }
 
     return rematchIndex;
 }
@@ -194,4 +197,18 @@ void ResetRematchIconOnObject(struct ObjectEvent *objectEvent)
 static void SetRematchIconOnObject(struct ObjectEvent *objectEvent)
 {
     objectEvent->hasRematchIcon = TRUE;
+}
+
+u16 GetTrainerIdFromLastTalked(void)
+{
+    u32 localId = gSpecialVar_LastTalked;
+    u32 mapNum = gSaveBlock1Ptr->location.mapNum;
+    u32 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+
+    const struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+
+    if (obj == NULL)
+        return TRAINER_NONE;
+
+    return GetTrainerFlagFromScript(obj->script);
 }

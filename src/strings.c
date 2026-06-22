@@ -189,6 +189,7 @@ const u8 *const gBagMenu_ReturnToStrings[] =
     [ITEMMENULOCATION_WALLY]               = gText_TheBattle,
     [ITEMMENULOCATION_PCBOX]               = gText_ThePC,
     [ITEMMENULOCATION_BERRY_TREE_MULCH]    = gText_TheField,
+    [ITEMMENULOCATION_SUMMARY]             = COMPOUND_STRING("Summary"), // monSummary
 };
 
 const u8 *const gPyramidBagMenu_ReturnToStrings[] =

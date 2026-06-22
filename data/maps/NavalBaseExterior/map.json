@@ -2,7 +2,7 @@
   "id": "MAP_NAVAL_BASE_EXTERIOR",
   "name": "NavalBaseExterior",
   "layout": "LAYOUT_NAVAL_BASE_EXTERIOR",
-  "music": "MUS_CAVE_OF_ORIGIN",
+  "music": "MUS_CAVE",
   "region_map_section": "MAPSEC_NAVAL_BASE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
