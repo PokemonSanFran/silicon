@@ -742,4 +742,84 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_CULTURAL_PURITY_AD] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Reject modernity. Embrace tradition. Join the Seafoam {STR_VAR_1} Society and learn true strength away from distractions."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_AD2] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Type diversity. Held items. Moves of different types. Do these actually make you stronger? All of the greats are focused. Shouldn’t you be?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_AD3] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Focus your mind. Focus your party. To begin your journey, narrow your party to only two types, and bring the tile to the northeastern bird in the tea leaves. Speak the word of the {STR_VAR_1}."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_Active,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYA] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Trainers are only supposed to train two types at a time. Distractions with diversity only take away from your core strength."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForA,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYB] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Our ancestors didn’t have their Pokémon hold items. Why should you?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForB,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYC] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Your Pokémon’s moves are stronger when their types match. You owe it to your Pokémon to let them access their rawest power."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForC,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYD] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Gym Leader Shinzo has seen the light and is training with the Seafoam {STR_VAR_1} Society. Why haven’t you started?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForD,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYD_CHAMPION] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Even Champion {PLAYER} has seen the light and is ready to grow stronger. Why haven't you?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForDChampion,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

@@ -2100,5 +2100,15 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_HANG20_ROCKY_COASTS:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
             break;
+        case TWEET_QUEST_CULTURAL_PURITY_AD:
+        case TWEET_QUEST_CULTURAL_PURITY_AD2:
+        case TWEET_QUEST_CULTURAL_PURITY_AD3:
+        case TWEET_QUEST_CULTURAL_PURITY_READYA:
+        case TWEET_QUEST_CULTURAL_PURITY_READYB:
+        case TWEET_QUEST_CULTURAL_PURITY_READYC:
+        case TWEET_QUEST_CULTURAL_PURITY_READYD:
+        case TWEET_QUEST_CULTURAL_PURITY_READYD_CHAMPION:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_CULTURAL_PURITY_MASCOT));
+            break;
     }
 }
