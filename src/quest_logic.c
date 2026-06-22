@@ -61,13 +61,39 @@
 #include "pokemon_storage_system.h"
 #include "event_scripts.h"
 
-void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
+const struct TrainerMon Quest_Generic_GetMonFromTrainer(enum ResidoTrainerIds trainer,u32 index, const struct Trainer *trainers, u32 rows)
 {
-    const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    return trainers[difficulty * rows + trainer].party[index];
+}
 
-    u32 species = mon.species;
+u32 Quest_Generic_GetIndexForMonTrainer(enum ResidoTrainerIds trainer, u32 index, const struct Trainer *trainers, u32 rows)
+{
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
+    enum Species species = mon.species;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        if (species != SPECIES_NONE)
+            break;
+
+        index = partyIndex;
+
+        const struct TrainerMon mon2 = Quest_Generic_GetMonFromTrainer(trainer,partyIndex,trainers,rows);
+        species = mon2.species;
+    }
+    return index;
+}
+
+void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var,const struct Trainer *trainers, u32 rows)
+{
+    index = Quest_Generic_GetIndexForMonTrainer(trainer,index,trainers,rows);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
     u32 female = (mon.gender == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
     u32 shiny = (mon.isShiny == TRUE) ? OBJ_EVENT_MON_SHINY: 0;
+
     VarSet(var,(OBJ_EVENT_MON + species + female + shiny));
 }
 
@@ -4396,12 +4422,12 @@ void Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
 
 void Quest_Restorehodoucity_LoadZacPokemon(void)
 {
-    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0);
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
 }
 
 void Quest_Restorehodoucity_LoadKevinPokemon(void)
 {
-    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1,&gTrainers[0][0],TRAINERS_COUNT);
 }
 
 void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
@@ -4530,7 +4556,7 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
     }
 
     VarSet(VAR_TEMP_0,species);
-    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
     StringCopy(gStringVar1,GetSpeciesName(species));
     StringCopy(gStringVar2,GetMoveName(move));
 }
@@ -5177,4 +5203,97 @@ void DebugQuest_Hang20(u8 state)
             AddBagItem(ITEM_QUEST_HANG20_REWARD,1);
             break;
     }
+}
+
+// ***********************************************************************
+// Quest: Cultural Purity
+// ***********************************************************************
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelA(void)
+{
+    if (gPartiesCount[B_TRAINER_PLAYER] == 1)
+        return TRUE;
+
+    bool32 typesList[NUMBER_OF_MON_TYPES];
+    u32 typeCount = 0;
+
+    for (u32 typeIndex = 0; typeIndex < NUMBER_OF_MON_TYPES; typeIndex++)
+        typesList[typeIndex] = FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        for (u32 slot = 0; slot < TYPES_PER_MON; slot++)
+            typesList[GetSpeciesType(species,slot)] = TRUE;
+    }
+
+    for (u32 typeIndex = 0; typeIndex < NUMBER_OF_MON_TYPES; typeIndex++)
+    {
+        if (typesList[typeIndex] == TRUE)
+            typeCount++;
+    }
+
+    return (typeCount < 3);
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelA(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelA();
+}
+
+bool8 Quest_CulturalPurity_HasDefeatedAllPeonsLevelA(void)
+{
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA1) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA2) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA3) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelA(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_HasDefeatedAllPeonsLevelA();
+}
+
+void Quest_CulturalPurity_LoadShinzoMon(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
+}
+
+void Quest_CulturalPurity_BufferShinzoMonName(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void Quest_CulturalPurity_GetShinzoMonCry(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
 }
