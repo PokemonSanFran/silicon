@@ -10266,7 +10266,7 @@
         },
     },
 #line 4012
-    [DIFFICULTY_NORMAL][TRAINER_CULTURALPURITY_A] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERA1] =
     {
 #line 4013
         .trainerName = _("Blank"),
@@ -10294,7 +10294,7 @@
         },
     },
 #line 4020
-    [DIFFICULTY_NORMAL][TRAINER_CULTURALPURITY_B] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERA2] =
     {
 #line 4021
         .trainerName = _("Blank"),
@@ -10322,10 +10322,10 @@
         },
     },
 #line 4028
-    [DIFFICULTY_NORMAL][TRAINER_BRAWLY] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERA3] =
     {
 #line 4029
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainera3"),
 #line 4030
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4031
@@ -10350,10 +10350,10 @@
         },
     },
 #line 4036
-    [DIFFICULTY_NORMAL][TRAINER_WALLACEARMY_LEAH] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERA4] =
     {
 #line 4037
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainera4"),
 #line 4038
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4039
@@ -10378,10 +10378,10 @@
         },
     },
 #line 4044
-    [DIFFICULTY_NORMAL][TRAINER_HALAI_ISLAND_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERB1] =
     {
 #line 4045
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainerb1"),
 #line 4046
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4047
@@ -10406,10 +10406,10 @@
         },
     },
 #line 4052
-    [DIFFICULTY_NORMAL][TRAINER_TIRABUDIN_PLACE_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERB2] =
     {
 #line 4053
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainerb2"),
 #line 4054
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4055
@@ -10434,10 +10434,10 @@
         },
     },
 #line 4060
-    [DIFFICULTY_NORMAL][TRAINER_CHASILLA_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERB3] =
     {
 #line 4061
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainerb3"),
 #line 4062
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4063
@@ -10462,10 +10462,10 @@
         },
     },
 #line 4068
-    [DIFFICULTY_NORMAL][TRAINER_PERLACIA_CITY_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERC1] =
     {
 #line 4069
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainerc1"),
 #line 4070
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4071
@@ -10490,10 +10490,10 @@
         },
     },
 #line 4076
-    [DIFFICULTY_NORMAL][TRAINER_ESPULEE_OUTSKIRTS_STAN] =
+    [DIFFICULTY_NORMAL][TRAINER_BACKROOMTRAINERC2] =
     {
 #line 4077
-        .trainerName = _("Blank"),
+        .trainerName = _("Backroomtrainerc2"),
 #line 4078
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4079
@@ -10518,10 +10518,10 @@
         },
     },
 #line 4084
-    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_SEMIFINALS] =
+    [DIFFICULTY_NORMAL][TRAINER_CULTHOUSEGUARD] =
     {
 #line 4085
-        .trainerName = _("Blank"),
+        .trainerName = _("Culthouseguard"),
 #line 4086
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4087
@@ -10546,10 +10546,10 @@
         },
     },
 #line 4092
-    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_A] =
+    [DIFFICULTY_NORMAL][TRAINER_CULTLEADER] =
     {
 #line 4093
-        .trainerName = _("Blank"),
+        .trainerName = _("Cultleader"),
 #line 4094
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4095
@@ -10574,7 +10574,7 @@
         },
     },
 #line 4100
-    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_B] =
+    [DIFFICULTY_NORMAL][TRAINER_WALLACEARMY_LEAH] =
     {
 #line 4101
         .trainerName = _("Blank"),
@@ -10602,7 +10602,7 @@
         },
     },
 #line 4108
-    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_C] =
+    [DIFFICULTY_NORMAL][TRAINER_HALAI_ISLAND_STAN] =
     {
 #line 4109
         .trainerName = _("Blank"),
@@ -10630,7 +10630,7 @@
         },
     },
 #line 4116
-    [DIFFICULTY_NORMAL][TRAINER_CHARLOTTE_IGUESSWESHOULDBENICE] =
+    [DIFFICULTY_NORMAL][TRAINER_TIRABUDIN_PLACE_STAN] =
     {
 #line 4117
         .trainerName = _("Blank"),
@@ -10658,7 +10658,7 @@
         },
     },
 #line 4124
-    [DIFFICULTY_NORMAL][TRAINER_CHERIE] =
+    [DIFFICULTY_NORMAL][TRAINER_CHASILLA_STAN] =
     {
 #line 4125
         .trainerName = _("Blank"),
@@ -10686,7 +10686,7 @@
         },
     },
 #line 4132
-    [DIFFICULTY_NORMAL][TRAINER_POLICECHIEF] =
+    [DIFFICULTY_NORMAL][TRAINER_PERLACIA_CITY_STAN] =
     {
 #line 4133
         .trainerName = _("Blank"),
@@ -10714,7 +10714,7 @@
         },
     },
 #line 4140
-    [DIFFICULTY_NORMAL][TRAINER_FAKEROCKET_A] =
+    [DIFFICULTY_NORMAL][TRAINER_ESPULEE_OUTSKIRTS_STAN] =
     {
 #line 4141
         .trainerName = _("Blank"),
@@ -10742,7 +10742,7 @@
         },
     },
 #line 4148
-    [DIFFICULTY_NORMAL][TRAINER_FAKEROCKET_B] =
+    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_SEMIFINALS] =
     {
 #line 4149
         .trainerName = _("Blank"),
@@ -10770,7 +10770,7 @@
         },
     },
 #line 4156
-    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_A] =
+    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_A] =
     {
 #line 4157
         .trainerName = _("Blank"),
@@ -10798,7 +10798,7 @@
         },
     },
 #line 4164
-    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_B] =
+    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_B] =
     {
 #line 4165
         .trainerName = _("Blank"),
@@ -10826,7 +10826,7 @@
         },
     },
 #line 4172
-    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_C] =
+    [DIFFICULTY_NORMAL][TRAINER_SHARPRISESTADIUM_C] =
     {
 #line 4173
         .trainerName = _("Blank"),
@@ -10854,7 +10854,7 @@
         },
     },
 #line 4180
-    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_D] =
+    [DIFFICULTY_NORMAL][TRAINER_CHARLOTTE_IGUESSWESHOULDBENICE] =
     {
 #line 4181
         .trainerName = _("Blank"),
@@ -10882,7 +10882,7 @@
         },
     },
 #line 4188
-    [DIFFICULTY_NORMAL][TRAINER_HOWDISAPPOINTING_GRUNT1] =
+    [DIFFICULTY_NORMAL][TRAINER_CHERIE] =
     {
 #line 4189
         .trainerName = _("Blank"),
@@ -10910,7 +10910,7 @@
         },
     },
 #line 4196
-    [DIFFICULTY_NORMAL][TRAINER_HOWDISAPPOINTING_GRUNT2] =
+    [DIFFICULTY_NORMAL][TRAINER_POLICECHIEF] =
     {
 #line 4197
         .trainerName = _("Blank"),
@@ -10938,7 +10938,7 @@
         },
     },
 #line 4204
-    [DIFFICULTY_NORMAL][TRAINER_ANGELDELIVERY_BIKERC] =
+    [DIFFICULTY_NORMAL][TRAINER_FAKEROCKET_A] =
     {
 #line 4205
         .trainerName = _("Blank"),
@@ -10966,7 +10966,7 @@
         },
     },
 #line 4212
-    [DIFFICULTY_NORMAL][TRAINER_ANGELDELIVERY_BIKERD] =
+    [DIFFICULTY_NORMAL][TRAINER_FAKEROCKET_B] =
     {
 #line 4213
         .trainerName = _("Blank"),
@@ -10994,7 +10994,7 @@
         },
     },
 #line 4220
-    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_1] =
+    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_A] =
     {
 #line 4221
         .trainerName = _("Blank"),
@@ -11022,7 +11022,7 @@
         },
     },
 #line 4228
-    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_2] =
+    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_B] =
     {
 #line 4229
         .trainerName = _("Blank"),
@@ -11050,7 +11050,7 @@
         },
     },
 #line 4236
-    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_3] =
+    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_C] =
     {
 #line 4237
         .trainerName = _("Blank"),
@@ -11078,7 +11078,7 @@
         },
     },
 #line 4244
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_NORMAL_1] =
+    [DIFFICULTY_NORMAL][TRAINER_ARANTRAZ_GHOST_D] =
     {
 #line 4245
         .trainerName = _("Blank"),
@@ -11106,7 +11106,7 @@
         },
     },
 #line 4252
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIGHTING_1] =
+    [DIFFICULTY_NORMAL][TRAINER_HOWDISAPPOINTING_GRUNT1] =
     {
 #line 4253
         .trainerName = _("Blank"),
@@ -11134,7 +11134,7 @@
         },
     },
 #line 4260
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FLYING_1] =
+    [DIFFICULTY_NORMAL][TRAINER_HOWDISAPPOINTING_GRUNT2] =
     {
 #line 4261
         .trainerName = _("Blank"),
@@ -11162,7 +11162,7 @@
         },
     },
 #line 4268
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_POISON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_ANGELDELIVERY_BIKERC] =
     {
 #line 4269
         .trainerName = _("Blank"),
@@ -11190,7 +11190,7 @@
         },
     },
 #line 4276
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GROUND_1] =
+    [DIFFICULTY_NORMAL][TRAINER_ANGELDELIVERY_BIKERD] =
     {
 #line 4277
         .trainerName = _("Blank"),
@@ -11218,7 +11218,7 @@
         },
     },
 #line 4284
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ROCK_1] =
+    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_1] =
     {
 #line 4285
         .trainerName = _("Blank"),
@@ -11246,7 +11246,7 @@
         },
     },
 #line 4292
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_BUG_1] =
+    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_2] =
     {
 #line 4293
         .trainerName = _("Blank"),
@@ -11274,7 +11274,7 @@
         },
     },
 #line 4300
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GHOST_1] =
+    [DIFFICULTY_NORMAL][TRAINER_DRUGHELMETTESTER_3] =
     {
 #line 4301
         .trainerName = _("Blank"),
@@ -11302,7 +11302,7 @@
         },
     },
 #line 4308
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_STEEL_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_NORMAL_1] =
     {
 #line 4309
         .trainerName = _("Blank"),
@@ -11330,7 +11330,7 @@
         },
     },
 #line 4316
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIRE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIGHTING_1] =
     {
 #line 4317
         .trainerName = _("Blank"),
@@ -11358,7 +11358,7 @@
         },
     },
 #line 4324
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_WATER_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FLYING_1] =
     {
 #line 4325
         .trainerName = _("Blank"),
@@ -11386,7 +11386,7 @@
         },
     },
 #line 4332
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GRASS_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_POISON_1] =
     {
 #line 4333
         .trainerName = _("Blank"),
@@ -11414,7 +11414,7 @@
         },
     },
 #line 4340
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ELECTRIC_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GROUND_1] =
     {
 #line 4341
         .trainerName = _("Blank"),
@@ -11442,7 +11442,7 @@
         },
     },
 #line 4348
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_PSYCHIC_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ROCK_1] =
     {
 #line 4349
         .trainerName = _("Blank"),
@@ -11470,7 +11470,7 @@
         },
     },
 #line 4356
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ICE_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_BUG_1] =
     {
 #line 4357
         .trainerName = _("Blank"),
@@ -11498,7 +11498,7 @@
         },
     },
 #line 4364
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DRAGON_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GHOST_1] =
     {
 #line 4365
         .trainerName = _("Blank"),
@@ -11526,7 +11526,7 @@
         },
     },
 #line 4372
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DARK_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_STEEL_1] =
     {
 #line 4373
         .trainerName = _("Blank"),
@@ -11554,7 +11554,7 @@
         },
     },
 #line 4380
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FAIRY_1] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIRE_1] =
     {
 #line 4381
         .trainerName = _("Blank"),
@@ -11582,7 +11582,7 @@
         },
     },
 #line 4388
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_NORMAL_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_WATER_1] =
     {
 #line 4389
         .trainerName = _("Blank"),
@@ -11610,7 +11610,7 @@
         },
     },
 #line 4396
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIGHTING_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GRASS_1] =
     {
 #line 4397
         .trainerName = _("Blank"),
@@ -11638,7 +11638,7 @@
         },
     },
 #line 4404
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FLYING_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ELECTRIC_1] =
     {
 #line 4405
         .trainerName = _("Blank"),
@@ -11666,7 +11666,7 @@
         },
     },
 #line 4412
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_POISON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_PSYCHIC_1] =
     {
 #line 4413
         .trainerName = _("Blank"),
@@ -11694,7 +11694,7 @@
         },
     },
 #line 4420
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GROUND_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ICE_1] =
     {
 #line 4421
         .trainerName = _("Blank"),
@@ -11722,7 +11722,7 @@
         },
     },
 #line 4428
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ROCK_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DRAGON_1] =
     {
 #line 4429
         .trainerName = _("Blank"),
@@ -11750,7 +11750,7 @@
         },
     },
 #line 4436
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_BUG_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DARK_1] =
     {
 #line 4437
         .trainerName = _("Blank"),
@@ -11778,7 +11778,7 @@
         },
     },
 #line 4444
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GHOST_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FAIRY_1] =
     {
 #line 4445
         .trainerName = _("Blank"),
@@ -11806,7 +11806,7 @@
         },
     },
 #line 4452
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_STEEL_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_NORMAL_2] =
     {
 #line 4453
         .trainerName = _("Blank"),
@@ -11834,7 +11834,7 @@
         },
     },
 #line 4460
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIRE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIGHTING_2] =
     {
 #line 4461
         .trainerName = _("Blank"),
@@ -11862,7 +11862,7 @@
         },
     },
 #line 4468
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_WATER_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FLYING_2] =
     {
 #line 4469
         .trainerName = _("Blank"),
@@ -11890,7 +11890,7 @@
         },
     },
 #line 4476
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GRASS_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_POISON_2] =
     {
 #line 4477
         .trainerName = _("Blank"),
@@ -11918,7 +11918,7 @@
         },
     },
 #line 4484
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ELECTRIC_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GROUND_2] =
     {
 #line 4485
         .trainerName = _("Blank"),
@@ -11946,7 +11946,7 @@
         },
     },
 #line 4492
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_PSYCHIC_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ROCK_2] =
     {
 #line 4493
         .trainerName = _("Blank"),
@@ -11974,7 +11974,7 @@
         },
     },
 #line 4500
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ICE_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_BUG_2] =
     {
 #line 4501
         .trainerName = _("Blank"),
@@ -12002,7 +12002,7 @@
         },
     },
 #line 4508
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DRAGON_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GHOST_2] =
     {
 #line 4509
         .trainerName = _("Blank"),
@@ -12030,7 +12030,7 @@
         },
     },
 #line 4516
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DARK_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_STEEL_2] =
     {
 #line 4517
         .trainerName = _("Blank"),
@@ -12058,7 +12058,7 @@
         },
     },
 #line 4524
-    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FAIRY_2] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FIRE_2] =
     {
 #line 4525
         .trainerName = _("Blank"),
@@ -12086,7 +12086,7 @@
         },
     },
 #line 4532
-    [DIFFICULTY_NORMAL][TRAINER_STRESSCUPORGNANIZER] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_WATER_2] =
     {
 #line 4533
         .trainerName = _("Blank"),
@@ -12114,7 +12114,7 @@
         },
     },
 #line 4540
-    [DIFFICULTY_NORMAL][TRAINER_STRESSCUPORGNANIZER_PLAYER] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_GRASS_2] =
     {
 #line 4541
         .trainerName = _("Blank"),
@@ -12142,7 +12142,7 @@
         },
     },
 #line 4548
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYA] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ELECTRIC_2] =
     {
 #line 4549
         .trainerName = _("Blank"),
@@ -12170,7 +12170,7 @@
         },
     },
 #line 4556
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYB] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_PSYCHIC_2] =
     {
 #line 4557
         .trainerName = _("Blank"),
@@ -12198,7 +12198,7 @@
         },
     },
 #line 4564
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_ICE_2] =
     {
 #line 4565
         .trainerName = _("Blank"),
@@ -12226,7 +12226,7 @@
         },
     },
 #line 4572
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DRAGON_2] =
     {
 #line 4573
         .trainerName = _("Blank"),
@@ -12254,7 +12254,7 @@
         },
     },
 #line 4580
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_DARK_2] =
     {
 #line 4581
         .trainerName = _("Blank"),
@@ -12282,7 +12282,7 @@
         },
     },
 #line 4588
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN] =
+    [DIFFICULTY_NORMAL][TRAINER_NOPOMOD_FAIRY_2] =
     {
 #line 4589
         .trainerName = _("Blank"),
@@ -12310,7 +12310,7 @@
         },
     },
 #line 4596
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEK] =
+    [DIFFICULTY_NORMAL][TRAINER_STRESSCUPORGNANIZER] =
     {
 #line 4597
         .trainerName = _("Blank"),
@@ -12338,7 +12338,7 @@
         },
     },
 #line 4604
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEL] =
+    [DIFFICULTY_NORMAL][TRAINER_STRESSCUPORGNANIZER_PLAYER] =
     {
 #line 4605
         .trainerName = _("Blank"),
@@ -12366,7 +12366,7 @@
         },
     },
 #line 4612
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYA] =
     {
 #line 4613
         .trainerName = _("Blank"),
@@ -12394,7 +12394,7 @@
         },
     },
 #line 4620
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYB] =
     {
 #line 4621
         .trainerName = _("Blank"),
@@ -12422,7 +12422,7 @@
         },
     },
 #line 4628
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYROCKSMASHG] =
     {
 #line 4629
         .trainerName = _("Blank"),
@@ -12450,7 +12450,7 @@
         },
     },
 #line 4636
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTD] =
     {
 #line 4637
         .trainerName = _("Blank"),
@@ -12478,7 +12478,7 @@
         },
     },
 #line 4644
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE] =
     {
 #line 4645
         .trainerName = _("Blank"),
@@ -12506,7 +12506,7 @@
         },
     },
 #line 4652
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEDIVEN] =
     {
 #line 4653
         .trainerName = _("Blank"),
@@ -12534,7 +12534,7 @@
         },
     },
 #line 4660
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEK] =
     {
 #line 4661
         .trainerName = _("Blank"),
@@ -12562,7 +12562,7 @@
         },
     },
 #line 4668
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEL] =
     {
 #line 4669
         .trainerName = _("Blank"),
@@ -12590,7 +12590,7 @@
         },
     },
 #line 4676
-    [DIFFICULTY_NORMAL][TRAINER_DIGGINGTIMEMEMBERA] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_BODEGABURNOUTRESCUEWHIRLPOOLS] =
     {
 #line 4677
         .trainerName = _("Blank"),
@@ -12618,7 +12618,7 @@
         },
     },
 #line 4684
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERC] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERA] =
     {
 #line 4685
         .trainerName = _("Blank"),
@@ -12646,7 +12646,7 @@
         },
     },
 #line 4692
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERC_2] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERB] =
     {
 #line 4693
         .trainerName = _("Blank"),
@@ -12674,7 +12674,7 @@
         },
     },
 #line 4700
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERD] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERC] =
     {
 #line 4701
         .trainerName = _("Blank"),
@@ -12702,7 +12702,7 @@
         },
     },
 #line 4708
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERD_2] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERD] =
     {
 #line 4709
         .trainerName = _("Blank"),
@@ -12730,7 +12730,7 @@
         },
     },
 #line 4716
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERF] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERE] =
     {
 #line 4717
         .trainerName = _("Blank"),
@@ -12758,7 +12758,7 @@
         },
     },
 #line 4724
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERF_2] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERF] =
     {
 #line 4725
         .trainerName = _("Blank"),
@@ -12786,7 +12786,7 @@
         },
     },
 #line 4732
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERG] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG] =
     {
 #line 4733
         .trainerName = _("Blank"),
@@ -12814,7 +12814,7 @@
         },
     },
 #line 4740
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERG_2] =
+    [DIFFICULTY_NORMAL][TRAINER_DIGGINGTIMEMEMBERA] =
     {
 #line 4741
         .trainerName = _("Blank"),
@@ -12842,7 +12842,7 @@
         },
     },
 #line 4748
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FINDTHEGUILTYPLANTH] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERC] =
     {
 #line 4749
         .trainerName = _("Blank"),
@@ -12870,7 +12870,7 @@
         },
     },
 #line 4756
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_FINDTHEGUILTYPLANTH_2] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERC_2] =
     {
 #line 4757
         .trainerName = _("Blank"),
@@ -12898,32 +12898,26 @@
         },
     },
 #line 4764
-    [DIFFICULTY_NORMAL][TRAINER_ZAC] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERD] =
     {
 #line 4765
-        .trainerName = _("Zac"),
-#line 4768
-        .trainerClass = TRAINER_CLASS_MARTIAL_ARTIST,
+        .trainerName = _("Blank"),
 #line 4766
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4767
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4769
-        .objectEventGraphicsId = OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_ZAC,
-#line 4770
-        .mapSec = MAPSEC_HODOU_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
         .partySize = 1,
         .party = (const struct TrainerMon[])
         {
             {
-#line 4772
+#line 4769
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4774
+#line 4771
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 4773
+#line 4770
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -12931,20 +12925,250 @@
             },
         },
     },
+#line 4772
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERD_2] =
+    {
+#line 4773
+        .trainerName = _("Blank"),
+#line 4774
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 4775
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4777
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4779
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4778
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4780
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERF] =
+    {
+#line 4781
+        .trainerName = _("Blank"),
+#line 4782
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4783
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4785
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4787
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4786
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4788
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERF_2] =
+    {
+#line 4789
+        .trainerName = _("Blank"),
+#line 4790
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4791
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4793
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4795
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4794
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4796
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERG] =
+    {
+#line 4797
+        .trainerName = _("Blank"),
+#line 4798
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4799
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4801
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4803
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4802
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4804
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FREETHEINNOCENTHIKERG_2] =
+    {
+#line 4805
+        .trainerName = _("Blank"),
+#line 4806
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4807
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4809
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4811
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4810
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4812
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FINDTHEGUILTYPLANTH] =
+    {
+#line 4813
+        .trainerName = _("Blank"),
+#line 4814
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4815
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4817
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4819
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4818
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4820
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_FINDTHEGUILTYPLANTH_2] =
+    {
+#line 4821
+        .trainerName = _("Blank"),
+#line 4822
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4823
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4825
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4827
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4826
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4828
+    [DIFFICULTY_NORMAL][TRAINER_ZAC] =
+    {
+#line 4829
+        .trainerName = _("Zac"),
+#line 4832
+        .trainerClass = TRAINER_CLASS_MARTIAL_ARTIST,
+#line 4830
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+#line 4831
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
+#line 4833
+        .objectEventGraphicsId = OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_ZAC,
+#line 4834
+        .mapSec = MAPSEC_HODOU_CITY,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 4836
+            .species = SPECIES_BUNEARY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 4838
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 4837
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
+        },
+    },
+#line 4839
     [DIFFICULTY_NORMAL][TRAINER_KEVIN] =
     {
-#line 4776
+#line 4840
         .trainerName = _("Kevin"),
-#line 4779
+#line 4843
         .trainerClass = TRAINER_CLASS_MARTIAL_ARTIST,
-#line 4777
+#line 4841
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4778
+#line 4842
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4780
+#line 4844
         .objectEventGraphicsId = OBJ_EVENT_GFX_QUEST_RESTOREHODOUGYM_KEVIN,
-#line 4781
+#line 4845
         .mapSec = MAPSEC_HODOU_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -12952,12 +13176,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4783
+#line 4847
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4785
+#line 4849
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 4784
+#line 4848
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -12965,20 +13189,20 @@
             },
         },
     },
-#line 4786
+#line 4850
     [DIFFICULTY_NORMAL][TRAINER_HOUSINGPROTEST_A] =
     {
-#line 4787
+#line 4851
         .trainerName = _("Rabia"),
-#line 4790
+#line 4854
         .trainerClass = TRAINER_CLASS_COMRADE,
-#line 4788
+#line 4852
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4789
+#line 4853
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4791
+#line 4855
         .objectEventGraphicsId = OBJ_EVENT_GFX_COMRADE_9,
-#line 4792
+#line 4856
         .mapSec = MAPSEC_ROUTE99,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -12986,12 +13210,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4794
+#line 4858
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4796
+#line 4860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 4795
+#line 4859
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -12999,20 +13223,20 @@
             },
         },
     },
-#line 4797
+#line 4861
     [DIFFICULTY_NORMAL][TRAINER_HOUSINGPROTEST_B] =
     {
-#line 4798
+#line 4862
         .trainerName = _("Vitomir"),
-#line 4801
+#line 4865
         .trainerClass = TRAINER_CLASS_COMRADE,
-#line 4799
+#line 4863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4800
+#line 4864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4802
+#line 4866
         .objectEventGraphicsId = OBJ_EVENT_GFX_COMRADE_9,
-#line 4803
+#line 4867
         .mapSec = MAPSEC_ROUTE99,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13020,12 +13244,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4805
+#line 4869
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4807
+#line 4871
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 4806
+#line 4870
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -13033,20 +13257,20 @@
             },
         },
     },
-#line 4808
+#line 4872
     [DIFFICULTY_NORMAL][TRAINER_00317DFA] =
     {
-#line 4809
+#line 4873
         .trainerName = _("00317DFA"),
-#line 4810
+#line 4874
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4813
+#line 4877
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 4811
+#line 4875
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4814
+#line 4878
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4812
+#line 4876
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13054,48 +13278,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4816
+#line 4880
             .species = SPECIES_HAPPINY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4819
+#line 4883
             .ev = TRAINER_PARTY_EVS(0, 0, 156, 0, 0, 0),
-#line 4821
+#line 4885
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4817
+#line 4881
             .ability = ABILITY_FRIEND_GUARD,
-#line 4818
+#line 4882
             .lvl = 19,
             .ball = POKEBALL_COUNT,
-#line 4820
+#line 4884
             .nature = NATURE_LAX,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4822
+#line 4886
                 MOVE_HELPING_HAND,
                 MOVE_LIGHT_SCREEN,
                 MOVE_ICY_WIND,
             },
             },
             {
-#line 4826
+#line 4890
             .species = SPECIES_SMOLIV,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4826
+#line 4890
             .heldItem = ITEM_ORAN_BERRY,
-#line 4829
+#line 4893
             .ev = TRAINER_PARTY_EVS(144, 12, 0, 0, 0, 0),
-#line 4831
+#line 4895
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 4827
+#line 4891
             .ability = ABILITY_HARVEST,
-#line 4828
+#line 4892
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 4830
+#line 4894
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4832
+#line 4896
                 MOVE_LEECH_SEED,
                 MOVE_CHARM,
                 MOVE_RAZOR_LEAF,
@@ -13103,23 +13327,23 @@
             },
             },
             {
-#line 4837
+#line 4901
             .species = SPECIES_SQUAWKABILLY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4840
+#line 4904
             .ev = TRAINER_PARTY_EVS(0, 84, 0, 64, 0, 0),
-#line 4842
+#line 4906
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 4838
+#line 4902
             .ability = ABILITY_HUSTLE,
-#line 4839
+#line 4903
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 4841
+#line 4905
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4843
+#line 4907
                 MOVE_QUICK_ATTACK,
                 MOVE_AIR_CUTTER,
                 MOVE_POUNCE,
@@ -13128,18 +13352,18 @@
             },
         },
     },
-#line 4848
+#line 4912
     [DIFFICULTY_NORMAL][TRAINER_0049EFE8] =
     {
-#line 4849
+#line 4913
         .trainerName = _("0049EFE8"),
-#line 4850
+#line 4914
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4851
+#line 4915
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4853
+#line 4917
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4852
+#line 4916
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13147,25 +13371,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4855
+#line 4919
             .species = SPECIES_VULPIX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4855
+#line 4919
             .heldItem = ITEM_CHARCOAL,
-#line 4857
+#line 4921
             .ev = TRAINER_PARTY_EVS(0, 56, 0, 44, 56, 0),
-#line 4859
+#line 4923
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4856
+#line 4920
             .ability = ABILITY_DROUGHT,
-#line 4860
+#line 4924
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 4858
+#line 4922
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4861
+#line 4925
                 MOVE_FIRE_SPIN,
                 MOVE_FLAME_CHARGE,
                 MOVE_WEATHER_BALL,
@@ -13173,46 +13397,46 @@
             },
             },
             {
-#line 4866
+#line 4930
             .species = SPECIES_SIZZLIPEDE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4866
+#line 4930
             .heldItem = ITEM_PASSHO_BERRY,
-#line 4868
+#line 4932
             .ev = TRAINER_PARTY_EVS(0, 56, 0, 100, 0, 0),
-#line 4870
+#line 4934
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4867
+#line 4931
             .ability = ABILITY_FLAME_BODY,
-#line 4871
+#line 4935
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 4869
+#line 4933
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4872
+#line 4936
                 MOVE_BUG_BITE,
                 MOVE_FLAME_WHEEL,
                 MOVE_SMOKESCREEN,
             },
             },
             {
-#line 4876
+#line 4940
             .species = SPECIES_LAMPENT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4879
+#line 4943
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4877
+#line 4941
             .ability = ABILITY_FLAME_BODY,
-#line 4880
+#line 4944
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 4878
+#line 4942
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4881
+#line 4945
                 MOVE_WILL_O_WISP,
                 MOVE_HEX,
                 MOVE_FIRE_SPIN,
@@ -13221,18 +13445,18 @@
             },
         },
     },
-#line 4886
+#line 4950
     [DIFFICULTY_NORMAL][TRAINER_023957DE] =
     {
-#line 4887
+#line 4951
         .trainerName = _("023957DE"),
-#line 4888
+#line 4952
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4889
+#line 4953
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4891
+#line 4955
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4890
+#line 4954
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13240,25 +13464,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4893
+#line 4957
             .species = SPECIES_DRAGONAIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4893
+#line 4957
             .heldItem = ITEM_ORAN_BERRY,
-#line 4896
+#line 4960
             .ev = TRAINER_PARTY_EVS(72, 0, 40, 0, 0, 40),
-#line 4898
+#line 4962
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4894
+#line 4958
             .ability = ABILITY_SHED_SKIN,
-#line 4895
+#line 4959
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 4897
+#line 4961
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4899
+#line 4963
                 MOVE_THUNDER_WAVE,
                 MOVE_DRAGON_TAIL,
                 MOVE_SUPERSONIC,
@@ -13266,46 +13490,46 @@
             },
             },
             {
-#line 4904
+#line 4968
             .species = SPECIES_DEINO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4907
+#line 4971
             .ev = TRAINER_PARTY_EVS(0, 148, 4, 0, 0, 0),
-#line 4909
+#line 4973
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4905
+#line 4969
             .ability = ABILITY_HUSTLE,
-#line 4906
+#line 4970
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 4908
+#line 4972
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4910
+#line 4974
                 MOVE_BITE,
                 MOVE_HEADBUTT,
                 MOVE_DRAGON_TAIL,
             },
             },
             {
-#line 4914
+#line 4978
             .species = SPECIES_ZWEILOUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4917
+#line 4981
             .ev = TRAINER_PARTY_EVS(0, 148, 0, 0, 0, 4),
-#line 4919
+#line 4983
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4915
+#line 4979
             .ability = ABILITY_HUSTLE,
-#line 4916
+#line 4980
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 4918
+#line 4982
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4920
+#line 4984
                 MOVE_BITE,
                 MOVE_FIRE_FANG,
                 MOVE_THUNDER_FANG,
@@ -13314,18 +13538,18 @@
             },
         },
     },
-#line 4925
+#line 4989
     [DIFFICULTY_NORMAL][TRAINER_006E7EFD] =
     {
-#line 4926
+#line 4990
         .trainerName = _("006E7EFD"),
-#line 4927
+#line 4991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4928
+#line 4992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4930
+#line 4994
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4929
+#line 4993
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13333,23 +13557,23 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4932
+#line 4996
             .species = SPECIES_HITMONCHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4935
+#line 4999
             .ev = TRAINER_PARTY_EVS(0, 56, 0, 100, 0, 0),
-#line 4937
+#line 5001
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 4933
+#line 4997
             .ability = ABILITY_INNER_FOCUS,
-#line 4934
+#line 4998
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 4936
+#line 5000
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4938
+#line 5002
                 MOVE_BATON_PASS,
                 MOVE_SWORDS_DANCE,
                 MOVE_VACUUM_WAVE,
@@ -13357,23 +13581,23 @@
             },
             },
             {
-#line 4943
+#line 5007
             .species = SPECIES_PAWMO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4946
+#line 5010
             .ev = TRAINER_PARTY_EVS(0, 56, 0, 100, 0, 0),
-#line 4948
+#line 5012
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 4944
+#line 5008
             .ability = ABILITY_IRON_FIST,
-#line 4945
+#line 5009
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 4947
+#line 5011
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4949
+#line 5013
                 MOVE_BATON_PASS,
                 MOVE_MACH_PUNCH,
                 MOVE_THUNDER_PUNCH,
@@ -13381,25 +13605,25 @@
             },
             },
             {
-#line 4954
+#line 5018
             .species = SPECIES_MIENSHAO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4954
+#line 5018
             .heldItem = ITEM_FOCUS_SASH,
-#line 4957
+#line 5021
             .ev = TRAINER_PARTY_EVS(72, 0, 36, 0, 0, 36),
-#line 4959
+#line 5023
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 4955
+#line 5019
             .ability = ABILITY_RECKLESS,
-#line 4956
+#line 5020
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 4958
+#line 5022
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4960
+#line 5024
                 MOVE_HIGH_JUMP_KICK,
                 MOVE_DETECT,
                 MOVE_ENDURE,
@@ -13408,18 +13632,18 @@
             },
         },
     },
-#line 4965
+#line 5029
     [DIFFICULTY_NORMAL][TRAINER_007F06A5] =
     {
-#line 4966
+#line 5030
         .trainerName = _("007F06A5"),
-#line 4967
+#line 5031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4968
+#line 5032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4970
+#line 5034
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4969
+#line 5033
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13427,83 +13651,83 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 4972
+#line 5036
             .species = SPECIES_MARSHTOMP,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4972
+#line 5036
             .heldItem = ITEM_SITRUS_BERRY,
-#line 4975
+#line 5039
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 4973
+#line 5037
             .ability = ABILITY_TORRENT,
-#line 4974
+#line 5038
             .lvl = 20,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4976
+#line 5040
                 MOVE_MIRROR_COAT,
                 MOVE_MUDDY_WATER,
                 MOVE_COUNTER,
             },
             },
             {
-#line 4980
+#line 5044
             .species = SPECIES_SLOWPOKE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4983
+#line 5047
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 4981
+#line 5045
             .ability = ABILITY_OWN_TEMPO,
-#line 4982
+#line 5046
             .lvl = 24,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4984
+#line 5048
                 MOVE_LIGHT_SCREEN,
                 MOVE_RAIN_DANCE,
                 MOVE_CHILLING_WATER,
             },
             },
             {
-#line 4988
+#line 5052
             .species = SPECIES_ARROKUDA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 4988
+#line 5052
             .heldItem = ITEM_METRONOME,
-#line 4991
+#line 5055
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 4989
+#line 5053
             .ability = ABILITY_PROPELLER_TAIL,
-#line 4990
+#line 5054
             .lvl = 24,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 4991
+#line 5055
                 MOVE_AQUA_JET,
             },
             },
         },
     },
-#line 4993
+#line 5057
     [DIFFICULTY_NORMAL][TRAINER_01103D48] =
     {
-#line 4994
+#line 5058
         .trainerName = _("01103D48"),
-#line 4995
+#line 5059
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 4999
+#line 5063
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 4996
+#line 5060
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 4998
+#line 5062
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 4997
+#line 5061
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13511,23 +13735,23 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5001
+#line 5065
             .species = SPECIES_PACHIRISU,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5004
+#line 5068
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 144, 0),
-#line 5006
+#line 5070
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5002
+#line 5066
             .ability = ABILITY_PICKUP,
-#line 5003
+#line 5067
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5005
+#line 5069
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5007
+#line 5071
                 MOVE_FOLLOW_ME,
                 MOVE_CHARGE_BEAM,
                 MOVE_THIEF,
@@ -13535,25 +13759,25 @@
             },
             },
             {
-#line 5012
+#line 5076
             .species = SPECIES_WATTREL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5012
+#line 5076
             .heldItem = ITEM_ORAN_BERRY,
-#line 5015
+#line 5079
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 64, 80, 0),
-#line 5017
+#line 5081
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5013
+#line 5077
             .ability = ABILITY_WIND_POWER,
-#line 5014
+#line 5078
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5016
+#line 5080
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5018
+#line 5082
                 MOVE_TAILWIND,
                 MOVE_ROOST,
                 MOVE_PLUCK,
@@ -13561,24 +13785,24 @@
             },
             },
             {
-#line 5023
+#line 5087
             .species = SPECIES_SHINX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5023
+#line 5087
             .heldItem = ITEM_MAGNET,
-#line 5026
+#line 5090
             .ev = TRAINER_PARTY_EVS(44, 56, 0, 44, 0, 0),
-#line 5027
+#line 5091
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5024
+#line 5088
             .ability = ABILITY_INTIMIDATE,
-#line 5025
+#line 5089
             .lvl = 21,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5028
+#line 5092
                 MOVE_BITE,
                 MOVE_CHARGE,
                 MOVE_SPARK,
@@ -13587,18 +13811,18 @@
             },
         },
     },
-#line 5033
+#line 5097
     [DIFFICULTY_NORMAL][TRAINER_0272920D] =
     {
-#line 5034
+#line 5098
         .trainerName = _("0272920D"),
-#line 5035
+#line 5099
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5036
+#line 5100
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5038
+#line 5102
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5037
+#line 5101
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13606,73 +13830,73 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5040
+#line 5104
             .species = SPECIES_CARVANHA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5040
+#line 5104
             .heldItem = ITEM_ROCKY_HELMET,
-#line 5043
+#line 5107
             .ev = TRAINER_PARTY_EVS(0, 116, 0, 28, 0, 0),
-#line 5045
+#line 5109
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5041
+#line 5105
             .ability = ABILITY_ROUGH_SKIN,
-#line 5042
+#line 5106
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5044
+#line 5108
             .nature = NATURE_BASHFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5046
+#line 5110
                 MOVE_AQUA_JET,
                 MOVE_BITE,
                 MOVE_FOCUS_ENERGY,
             },
             },
             {
-#line 5050
+#line 5114
             .species = SPECIES_THIEVUL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5053
+#line 5117
             .ev = TRAINER_PARTY_EVS(36, 0, 32, 24, 32, 24),
-#line 5055
+#line 5119
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5051
+#line 5115
             .ability = ABILITY_UNBURDEN,
-#line 5052
+#line 5116
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5054
+#line 5118
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5056
+#line 5120
                 MOVE_NASTY_PLOT,
                 MOVE_SNARL,
                 MOVE_QUICK_ATTACK,
             },
             },
             {
-#line 5060
+#line 5124
             .species = SPECIES_MURKROW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5060
+#line 5124
             .heldItem = ITEM_MENTAL_HERB,
-#line 5063
+#line 5127
             .ev = TRAINER_PARTY_EVS(56, 0, 56, 0, 0, 40),
-#line 5065
+#line 5129
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5061
+#line 5125
             .ability = ABILITY_PRANKSTER,
-#line 5062
+#line 5126
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5064
+#line 5128
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5066
+#line 5130
                 MOVE_HAZE,
                 MOVE_WING_ATTACK,
                 MOVE_TAUNT,
@@ -13681,20 +13905,20 @@
             },
         },
     },
-#line 5071
+#line 5135
     [DIFFICULTY_NORMAL][TRAINER_022A53A0] =
     {
-#line 5072
+#line 5136
         .trainerName = _("022A53A0"),
-#line 5073
+#line 5137
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5077
+#line 5141
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5074
+#line 5138
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5076
+#line 5140
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5075
+#line 5139
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13702,75 +13926,75 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5079
+#line 5143
             .species = SPECIES_KRICKETUNE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5079
+#line 5143
             .heldItem = ITEM_FOCUS_BAND,
-#line 5082
+#line 5146
             .ev = TRAINER_PARTY_EVS(28, 24, 36, 44, 0, 24),
-#line 5084
+#line 5148
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5080
+#line 5144
             .ability = ABILITY_SWARM,
-#line 5081
+#line 5145
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5083
+#line 5147
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5085
+#line 5149
                 MOVE_SING,
                 MOVE_STICKY_WEB,
                 MOVE_LEECH_LIFE,
             },
             },
             {
-#line 5089
+#line 5153
             .species = SPECIES_SEWADDLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5089
+#line 5153
             .heldItem = ITEM_FOCUS_BAND,
-#line 5092
+#line 5156
             .ev = TRAINER_PARTY_EVS(68, 20, 68, 0, 0, 0),
-#line 5094
+#line 5158
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 5090
+#line 5154
             .ability = ABILITY_SWARM,
-#line 5091
+#line 5155
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5093
+#line 5157
             .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5095
+#line 5159
                 MOVE_RAZOR_LEAF,
                 MOVE_STRUGGLE_BUG,
                 MOVE_ELECTROWEB,
             },
             },
             {
-#line 5099
+#line 5163
             .species = SPECIES_ARIADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5099
+#line 5163
             .heldItem = ITEM_SILVER_POWDER,
-#line 5102
+#line 5166
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 152, 0, 0),
-#line 5104
+#line 5168
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5100
+#line 5164
             .ability = ABILITY_SWARM,
-#line 5101
+#line 5165
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5103
+#line 5167
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5105
+#line 5169
                 MOVE_NIGHT_SHADE,
                 MOVE_FELL_STINGER,
                 MOVE_BUG_BITE,
@@ -13778,18 +14002,18 @@
             },
         },
     },
-#line 5111
+#line 5175
     [DIFFICULTY_NORMAL][TRAINER_012ED80D] =
     {
-#line 5112
+#line 5176
         .trainerName = _("012ED80D"),
-#line 5113
+#line 5177
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5114
+#line 5178
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5116
+#line 5180
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5115
+#line 5179
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13797,23 +14021,23 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5118
+#line 5182
             .species = SPECIES_MUDBRAY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5121
+#line 5185
             .ev = TRAINER_PARTY_EVS(0, 24, 128, 0, 0, 0),
-#line 5123
+#line 5187
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5119
+#line 5183
             .ability = ABILITY_STAMINA,
-#line 5120
+#line 5184
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5122
+#line 5186
             .nature = NATURE_LAX,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5124
+#line 5188
                 MOVE_STRENGTH,
                 MOVE_COUNTER,
                 MOVE_BULLDOZE,
@@ -13821,23 +14045,23 @@
             },
             },
             {
-#line 5129
+#line 5193
             .species = SPECIES_DRILBUR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5132
+#line 5196
             .ev = TRAINER_PARTY_EVS(0, 136, 0, 0, 0, 0),
-#line 5134
+#line 5198
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5130
+#line 5194
             .ability = ABILITY_SAND_FORCE,
-#line 5131
+#line 5195
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5133
+#line 5197
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5135
+#line 5199
                 MOVE_SANDSTORM,
                 MOVE_METAL_CLAW,
                 MOVE_BULLDOZE,
@@ -13845,23 +14069,23 @@
             },
             },
             {
-#line 5140
+#line 5204
             .species = SPECIES_NUMEL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5143
+#line 5207
             .ev = TRAINER_PARTY_EVS(0, 76, 0, 0, 72, 0),
-#line 5145
+#line 5209
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5141
+#line 5205
             .ability = ABILITY_SIMPLE,
-#line 5142
+#line 5206
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5144
+#line 5208
             .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5146
+#line 5210
                 MOVE_INCINERATE,
                 MOVE_BULLDOZE,
                 MOVE_FOCUS_ENERGY,
@@ -13869,20 +14093,20 @@
             },
         },
     },
-#line 5150
+#line 5214
     [DIFFICULTY_NORMAL][TRAINER_01E6E96E] =
     {
-#line 5151
+#line 5215
         .trainerName = _("01E6E96E"),
-#line 5152
+#line 5216
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5156
+#line 5220
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5153
+#line 5217
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5155
+#line 5219
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5154
+#line 5218
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13890,25 +14114,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5158
+#line 5222
             .species = SPECIES_MINIOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5158
+#line 5222
             .heldItem = ITEM_POWER_HERB,
-#line 5161
+#line 5225
             .ev = TRAINER_PARTY_EVS(0, 92, 0, 0, 56, 0),
-#line 5163
+#line 5227
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5159
+#line 5223
             .ability = ABILITY_SHIELDS_DOWN,
-#line 5160
+#line 5224
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5162
+#line 5226
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5164
+#line 5228
                 MOVE_METEOR_BEAM,
                 MOVE_ROLLOUT,
                 MOVE_ACROBATICS,
@@ -13916,25 +14140,25 @@
             },
             },
             {
-#line 5169
+#line 5233
             .species = SPECIES_VIVILLON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5169
+#line 5233
             .heldItem = ITEM_MENTAL_HERB,
-#line 5172
+#line 5236
             .ev = TRAINER_PARTY_EVS(80, 0, 0, 68, 0, 0),
-#line 5174
+#line 5238
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5170
+#line 5234
             .ability = ABILITY_FRIEND_GUARD,
-#line 5171
+#line 5235
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5173
+#line 5237
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5175
+#line 5239
                 MOVE_SWIFT,
                 MOVE_U_TURN,
                 MOVE_STUN_SPORE,
@@ -13942,25 +14166,25 @@
             },
             },
             {
-#line 5180
+#line 5244
             .species = SPECIES_SWELLOW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5180
+#line 5244
             .heldItem = ITEM_SILK_SCARF,
-#line 5183
+#line 5247
             .ev = TRAINER_PARTY_EVS(0, 148, 0, 0, 0, 0),
-#line 5185
+#line 5249
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5181
+#line 5245
             .ability = ABILITY_SCRAPPY,
-#line 5182
+#line 5246
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5184
+#line 5248
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5186
+#line 5250
                 MOVE_RAGE,
                 MOVE_AERIAL_ACE,
                 MOVE_U_TURN,
@@ -13968,20 +14192,20 @@
             },
         },
     },
-#line 5190
+#line 5254
     [DIFFICULTY_NORMAL][TRAINER_0092D526] =
     {
-#line 5191
+#line 5255
         .trainerName = _("0092D526"),
-#line 5192
+#line 5256
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5196
+#line 5260
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5193
+#line 5257
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5195
+#line 5259
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5194
+#line 5258
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -13989,46 +14213,46 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5198
+#line 5262
             .species = SPECIES_BOUNSWEET,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5201
+#line 5265
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 60, 96, 0),
-#line 5203
+#line 5267
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5199
+#line 5263
             .ability = ABILITY_LEAF_GUARD,
-#line 5200
+#line 5264
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5202
+#line 5266
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5204
+#line 5268
                 MOVE_MAGICAL_LEAF,
                 MOVE_DRAINING_KISS,
             },
             },
             {
-#line 5207
+#line 5271
             .species = SPECIES_AMOONGUSS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5207
+#line 5271
             .heldItem = ITEM_BLACK_SLUDGE,
-#line 5210
+#line 5274
             .ev = TRAINER_PARTY_EVS(0, 0, 84, 0, 0, 64),
-#line 5211
+#line 5275
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5208
+#line 5272
             .ability = ABILITY_EFFECT_SPORE,
-#line 5209
+#line 5273
             .lvl = 20,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5212
+#line 5276
                 MOVE_POISON_POWDER,
                 MOVE_VENOSHOCK,
                 MOVE_STUN_SPORE,
@@ -14036,23 +14260,23 @@
             },
             },
             {
-#line 5217
+#line 5281
             .species = SPECIES_CAPSAKID,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5220
+#line 5284
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 156, 0),
-#line 5222
+#line 5286
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5218
+#line 5282
             .ability = ABILITY_CHLOROPHYLL,
-#line 5219
+#line 5283
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5221
+#line 5285
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5223
+#line 5287
                 MOVE_MAGICAL_LEAF,
                 MOVE_GROWTH,
                 MOVE_INGRAIN,
@@ -14060,20 +14284,20 @@
             },
         },
     },
-#line 5227
+#line 5291
     [DIFFICULTY_NORMAL][TRAINER_00C593A8] =
     {
-#line 5228
+#line 5292
         .trainerName = _("00C593A8"),
-#line 5229
+#line 5293
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5233
+#line 5297
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5230
+#line 5294
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5232
+#line 5296
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5231
+#line 5295
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14081,71 +14305,71 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5235
+#line 5299
             .species = SPECIES_SPHEAL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5235
+#line 5299
             .heldItem = ITEM_WACAN_BERRY,
-#line 5238
+#line 5302
             .ev = TRAINER_PARTY_EVS(64, 84, 0, 0, 0, 0),
-#line 5240
+#line 5304
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5236
+#line 5300
             .ability = ABILITY_ICE_BODY,
-#line 5237
+#line 5301
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5239
+#line 5303
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5241
+#line 5305
                 MOVE_ROLLOUT,
                 MOVE_SNOWSCAPE,
             },
             },
             {
-#line 5244
+#line 5308
             .species = SPECIES_SEALEO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5244
+#line 5308
             .heldItem = ITEM_METRONOME,
-#line 5247
+#line 5311
             .ev = TRAINER_PARTY_EVS(44, 100, 0, 0, 0, 0),
-#line 5249
+#line 5313
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5245
+#line 5309
             .ability = ABILITY_ICE_BODY,
-#line 5246
+#line 5310
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5248
+#line 5312
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5250
+#line 5314
                 MOVE_ROLLOUT,
                 MOVE_SNOWSCAPE,
             },
             },
             {
-#line 5253
+#line 5317
             .species = SPECIES_JYNX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5256
+#line 5320
             .ev = TRAINER_PARTY_EVS(52, 0, 0, 0, 104, 0),
-#line 5258
+#line 5322
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5254
+#line 5318
             .ability = ABILITY_OBLIVIOUS,
-#line 5255
+#line 5319
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5257
+#line 5321
             .nature = NATURE_CALM,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5259
+#line 5323
                 MOVE_CONFUSION,
                 MOVE_ICY_WIND,
                 MOVE_PSYCHIC_NOISE,
@@ -14153,18 +14377,18 @@
             },
         },
     },
-#line 5263
+#line 5327
     [DIFFICULTY_NORMAL][TRAINER_01E7C79B] =
     {
-#line 5264
+#line 5328
         .trainerName = _("01E7C79B"),
-#line 5265
+#line 5329
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5266
+#line 5330
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5268
+#line 5332
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5267
+#line 5331
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14172,23 +14396,23 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5270
+#line 5334
             .species = SPECIES_DOTTLER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5273
+#line 5337
             .ev = TRAINER_PARTY_EVS(0, 0, 88, 0, 0, 64),
-#line 5275
+#line 5339
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5271
+#line 5335
             .ability = ABILITY_SWARM,
-#line 5272
+#line 5336
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5274
+#line 5338
             .nature = NATURE_CALM,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5276
+#line 5340
                 MOVE_REFLECT,
                 MOVE_LIGHT_SCREEN,
                 MOVE_CONFUSION,
@@ -14196,48 +14420,48 @@
             },
             },
             {
-#line 5281
+#line 5345
             .species = SPECIES_HATENNA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5281
+#line 5345
             .heldItem = ITEM_TWISTED_SPOON,
-#line 5284
+#line 5348
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 88, 56, 0),
-#line 5286
+#line 5350
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5282
+#line 5346
             .ability = ABILITY_ANTICIPATION,
-#line 5283
+#line 5347
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5285
+#line 5349
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5287
+#line 5351
                 MOVE_PSYBEAM,
                 MOVE_DISARMING_VOICE,
                 MOVE_NUZZLE,
             },
             },
             {
-#line 5291
+#line 5355
             .species = SPECIES_MEDITITE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5294
+#line 5358
             .ev = TRAINER_PARTY_EVS(0, 92, 40, 0, 0, 24),
-#line 5296
+#line 5360
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5292
+#line 5356
             .ability = ABILITY_PURE_POWER,
-#line 5293
+#line 5357
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5295
+#line 5359
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5297
+#line 5361
                 MOVE_ZEN_HEADBUTT,
                 MOVE_FORCE_PALM,
                 MOVE_WORK_UP,
@@ -14245,20 +14469,20 @@
             },
         },
     },
-#line 5301
+#line 5365
     [DIFFICULTY_NORMAL][TRAINER_01C7AF3F] =
     {
-#line 5302
+#line 5366
         .trainerName = _("01C7AF3F"),
-#line 5303
+#line 5367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5307
+#line 5371
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5304
+#line 5368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5306
+#line 5370
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5305
+#line 5369
         .mapSec = MAPSEC_GLAVEZ_HILL,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14266,27 +14490,27 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5309
+#line 5373
             .nickname = COMPOUND_STRING("Flabebe"),
-#line 5309
+#line 5373
             .species = SPECIES_FLABEBE_YELLOW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5309
+#line 5373
             .heldItem = ITEM_ORAN_BERRY,
-#line 5312
+#line 5376
             .ev = TRAINER_PARTY_EVS(0, 0, 52, 0, 0, 96),
-#line 5314
+#line 5378
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 5310
+#line 5374
             .ability = ABILITY_SYMBIOSIS,
-#line 5311
+#line 5375
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5313
+#line 5377
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5315
+#line 5379
                 MOVE_TEARFUL_LOOK,
                 MOVE_DISARMING_VOICE,
                 MOVE_MAGICAL_LEAF,
@@ -14294,48 +14518,48 @@
             },
             },
             {
-#line 5320
+#line 5384
             .species = SPECIES_RALTS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5323
+#line 5387
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 36, 116, 0),
-#line 5325
+#line 5389
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 5321
+#line 5385
             .ability = ABILITY_TRACE,
-#line 5322
+#line 5386
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5324
+#line 5388
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5326
+#line 5390
                 MOVE_DISARMING_VOICE,
                 MOVE_PSYBEAM,
                 MOVE_CHARGE_BEAM,
             },
             },
             {
-#line 5330
+#line 5394
             .species = SPECIES_KIRLIA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5330
+#line 5394
             .heldItem = ITEM_SITRUS_BERRY,
-#line 5333
+#line 5397
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 88, 64, 0),
-#line 5335
+#line 5399
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 5331
+#line 5395
             .ability = ABILITY_TRACE,
-#line 5332
+#line 5396
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5334
+#line 5398
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5336
+#line 5400
                 MOVE_DISARMING_VOICE,
                 MOVE_PSYBEAM,
                 MOVE_LIFE_DEW,
@@ -14343,20 +14567,20 @@
             },
         },
     },
-#line 5342
+#line 5406
     [DIFFICULTY_NORMAL][TRAINER_02EEB783] =
     {
-#line 5343
+#line 5407
         .trainerName = _("02EEB783"),
-#line 5344
+#line 5408
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5348
+#line 5412
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5345
+#line 5409
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5347
+#line 5411
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5346
+#line 5410
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14364,71 +14588,71 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5350
+#line 5414
             .species = SPECIES_YAMASK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5353
+#line 5417
             .ev = TRAINER_PARTY_EVS(80, 0, 0, 0, 76, 0),
-#line 5355
+#line 5419
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5351
+#line 5415
             .ability = ABILITY_MUMMY,
-#line 5352
+#line 5416
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5354
+#line 5418
             .nature = NATURE_QUIRKY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5356
+#line 5420
                 MOVE_WILL_O_WISP,
                 MOVE_PROTECT,
                 MOVE_HEX,
             },
             },
             {
-#line 5360
+#line 5424
             .species = SPECIES_HONEDGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5360
+#line 5424
             .heldItem = ITEM_OCCA_BERRY,
-#line 5363
+#line 5427
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 144),
-#line 5365
+#line 5429
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5361
+#line 5425
             .ability = ABILITY_NO_GUARD,
-#line 5362
+#line 5426
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5364
+#line 5428
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5366
+#line 5430
                 MOVE_AERIAL_ACE,
                 MOVE_SHADOW_SNEAK,
                 MOVE_IRON_HEAD,
             },
             },
             {
-#line 5370
+#line 5434
             .species = SPECIES_ROTOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5373
+#line 5437
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 96, 48),
-#line 5375
+#line 5439
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5371
+#line 5435
             .ability = ABILITY_LEVITATE,
-#line 5372
+#line 5436
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5374
+#line 5438
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5376
+#line 5440
                 MOVE_CHARGE,
                 MOVE_THUNDER_SHOCK,
                 MOVE_ASTONISH,
@@ -14437,20 +14661,20 @@
             },
         },
     },
-#line 5381
+#line 5445
     [DIFFICULTY_NORMAL][TRAINER_026E91A6] =
     {
-#line 5382
+#line 5446
         .trainerName = _("026E91A6"),
-#line 5383
+#line 5447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5387
+#line 5451
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5384
+#line 5448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5386
+#line 5450
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5385
+#line 5449
         .mapSec = MAPSEC_ROUTE8,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14458,25 +14682,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5389
+#line 5453
             .species = SPECIES_LAIRON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5389
+#line 5453
             .heldItem = ITEM_SITRUS_BERRY,
-#line 5392
+#line 5456
             .ev = TRAINER_PARTY_EVS(0, 0, 144, 0, 0, 0),
-#line 5394
+#line 5458
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5390
+#line 5454
             .ability = ABILITY_ROCK_HEAD,
-#line 5391
+#line 5455
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5393
+#line 5457
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5395
+#line 5459
                 MOVE_HEADBUTT,
                 MOVE_METAL_CLAW,
                 MOVE_ROCK_TOMB,
@@ -14484,48 +14708,48 @@
             },
             },
             {
-#line 5400
+#line 5464
             .species = SPECIES_KLINK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5400
+#line 5464
             .heldItem = ITEM_GANLON_BERRY,
-#line 5403
+#line 5467
             .ev = TRAINER_PARTY_EVS(0, 0, 4, 0, 104, 48),
-#line 5405
+#line 5469
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 5401
+#line 5465
             .ability = ABILITY_CLEAR_BODY,
-#line 5402
+#line 5466
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5404
+#line 5468
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5406
+#line 5470
                 MOVE_METAL_SOUND,
                 MOVE_CHARGE_BEAM,
                 MOVE_SANDSTORM,
             },
             },
             {
-#line 5410
+#line 5474
             .species = SPECIES_VAROOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5413
+#line 5477
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 152, 0),
-#line 5415
+#line 5479
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5411
+#line 5475
             .ability = ABILITY_OVERCOAT,
-#line 5412
+#line 5476
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5414
+#line 5478
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5416
+#line 5480
                 MOVE_SLUDGE,
                 MOVE_GYRO_BALL,
                 MOVE_HEADBUTT,
@@ -14534,18 +14758,18 @@
             },
         },
     },
-#line 5421
+#line 5485
     [DIFFICULTY_NORMAL][TRAINER_029E0EF0] =
     {
-#line 5422
+#line 5486
         .trainerName = _("029E0EF0"),
-#line 5423
+#line 5487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5424
+#line 5488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5426
+#line 5490
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5425
+#line 5489
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14553,23 +14777,23 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5428
+#line 5492
             .species = SPECIES_NIDORINO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5431
+#line 5495
             .ev = TRAINER_PARTY_EVS(0, 96, 16, 0, 0, 32),
-#line 5433
+#line 5497
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5429
+#line 5493
             .ability = ABILITY_POISON_POINT,
-#line 5430
+#line 5494
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5432
+#line 5496
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5434
+#line 5498
                 MOVE_TOXIC_SPIKES,
                 MOVE_DIG,
                 MOVE_POISON_STING,
@@ -14577,48 +14801,48 @@
             },
             },
             {
-#line 5439
+#line 5503
             .species = SPECIES_TENTACOOL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5442
+#line 5506
             .ev = TRAINER_PARTY_EVS(24, 0, 0, 0, 120, 0),
-#line 5444
+#line 5508
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5440
+#line 5504
             .ability = ABILITY_CLEAR_BODY,
-#line 5441
+#line 5505
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5443
+#line 5507
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5445
+#line 5509
                 MOVE_ACID_SPRAY,
                 MOVE_TOXIC,
                 MOVE_BUBBLE_BEAM,
             },
             },
             {
-#line 5449
+#line 5513
             .species = SPECIES_GULPIN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5449
+#line 5513
             .heldItem = ITEM_SITRUS_BERRY,
-#line 5452
+#line 5516
             .ev = TRAINER_PARTY_EVS(80, 72, 0, 0, 0, 0),
-#line 5454
+#line 5518
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5450
+#line 5514
             .ability = ABILITY_GLUTTONY,
-#line 5451
+#line 5515
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5453
+#line 5517
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5455
+#line 5519
                 MOVE_AMNESIA,
                 MOVE_ACID_ARMOR,
                 MOVE_ENCORE,
@@ -14627,20 +14851,20 @@
             },
         },
     },
-#line 5460
+#line 5524
     [DIFFICULTY_NORMAL][TRAINER_00E46F7D] =
     {
-#line 5461
+#line 5525
         .trainerName = _("00E46F7D"),
-#line 5462
+#line 5526
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5466
+#line 5530
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5463
+#line 5527
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5465
+#line 5529
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5464
+#line 5528
         .mapSec = MAPSEC_ROUTE6,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14648,46 +14872,46 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5468
+#line 5532
             .species = SPECIES_PUPITAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5471
+#line 5535
             .ev = TRAINER_PARTY_EVS(12, 92, 32, 0, 0, 12),
-#line 5473
+#line 5537
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5469
+#line 5533
             .ability = ABILITY_SHED_SKIN,
-#line 5470
+#line 5534
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5472
+#line 5536
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5474
+#line 5538
                 MOVE_STOMPING_TANTRUM,
                 MOVE_ROCK_SLIDE,
                 MOVE_PAYBACK,
             },
             },
             {
-#line 5478
+#line 5542
             .species = SPECIES_KABUTO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5481
+#line 5545
             .ev = TRAINER_PARTY_EVS(0, 36, 0, 112, 0, 0),
-#line 5483
+#line 5547
             .iv = TRAINER_PARTY_IVS(14, 31, 14, 14, 14, 14),
-#line 5479
+#line 5543
             .ability = ABILITY_WEAK_ARMOR,
-#line 5480
+#line 5544
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 5482
+#line 5546
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5484
+#line 5548
                 MOVE_AQUA_JET,
                 MOVE_ABSORB,
                 MOVE_ROCK_TOMB,
@@ -14695,25 +14919,25 @@
             },
             },
             {
-#line 5489
+#line 5553
             .species = SPECIES_TYRUNT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5489
+#line 5553
             .heldItem = ITEM_HARD_STONE,
-#line 5492
+#line 5556
             .ev = TRAINER_PARTY_EVS(0, 72, 80, 0, 0, 0),
-#line 5494
+#line 5558
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5490
+#line 5554
             .ability = ABILITY_STURDY,
-#line 5491
+#line 5555
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5493
+#line 5557
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5495
+#line 5559
                 MOVE_DRAGON_TAIL,
                 MOVE_BITE,
                 MOVE_ANCIENT_POWER,
@@ -14722,18 +14946,18 @@
             },
         },
     },
-#line 5500
+#line 5564
     [DIFFICULTY_NORMAL][TRAINER_040CEA33] =
     {
-#line 5501
+#line 5565
         .trainerName = _("040CEA33"),
-#line 5502
+#line 5566
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5503
+#line 5567
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5505
+#line 5569
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5504
+#line 5568
         .mapSec = MAPSEC_MERMEREZA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14741,50 +14965,50 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5507
+#line 5571
             .species = SPECIES_SHROODLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5507
+#line 5571
             .heldItem = ITEM_BIG_NUGGET,
-#line 5510
+#line 5574
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 128, 0, 0),
-#line 5512
+#line 5576
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5508
+#line 5572
             .ability = ABILITY_UNBURDEN,
-#line 5509
+#line 5573
             .lvl = 21,
             .ball = POKEBALL_COUNT,
-#line 5511
+#line 5575
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5513
+#line 5577
                 MOVE_FLING,
                 MOVE_ACROBATICS,
                 MOVE_BATON_PASS,
             },
             },
             {
-#line 5517
+#line 5581
             .species = SPECIES_CERULEDGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5517
+#line 5581
             .heldItem = ITEM_ASPEAR_BERRY,
-#line 5520
+#line 5584
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 136, 0, 0),
-#line 5522
+#line 5586
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5518
+#line 5582
             .ability = ABILITY_FLASH_FIRE,
-#line 5519
+#line 5583
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5521
+#line 5585
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5523
+#line 5587
                 MOVE_POLTERGEIST,
                 MOVE_BITTER_BLADE,
                 MOVE_DESTINY_BOND,
@@ -14792,20 +15016,20 @@
             },
         },
     },
-#line 5527
+#line 5591
     [DIFFICULTY_NORMAL][TRAINER_0389363C] =
     {
-#line 5528
+#line 5592
         .trainerName = _("0389363C"),
-#line 5529
+#line 5593
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5531
+#line 5595
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5530
+#line 5594
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT | AI_FLAG_PREFER_STATUS_MOVES | AI_FLAG_WEIGH_ABILITY_PREDICTION | AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_PREDICT_MOVE,
-#line 5533
+#line 5597
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5532
+#line 5596
         .mapSec = MAPSEC_MERMEREZA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14813,25 +15037,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5535
+#line 5599
             .species = SPECIES_LINOONE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5535
+#line 5599
             .heldItem = ITEM_FIGY_BERRY,
-#line 5538
+#line 5602
             .ev = TRAINER_PARTY_EVS(0, 132, 0, 0, 0, 0),
-#line 5540
+#line 5604
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5536
+#line 5600
             .ability = ABILITY_GLUTTONY,
-#line 5537
+#line 5601
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5539
+#line 5603
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5541
+#line 5605
                 MOVE_BELLY_DRUM,
                 MOVE_SNORE,
                 MOVE_REST,
@@ -14840,18 +15064,18 @@
             },
         },
     },
-#line 5546
+#line 5610
     [DIFFICULTY_NORMAL][TRAINER_032E8AC9] =
     {
-#line 5547
+#line 5611
         .trainerName = _("TRAINER_032E8AC9"),
-#line 5548
+#line 5612
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5550
+#line 5614
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT | AI_FLAG_PREFER_STATUS_MOVES | AI_FLAG_WEIGH_ABILITY_PREDICTION | AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_PREDICT_MOVE,
-#line 5549
+#line 5613
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5551
+#line 5615
         .mapSec = MAPSEC_MERMEREZA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14859,50 +15083,50 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5553
+#line 5617
             .species = SPECIES_PALPITOAD,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5553
+#line 5617
             .heldItem = ITEM_RINDO_BERRY,
-#line 5556
+#line 5620
             .ev = TRAINER_PARTY_EVS(0, 0, 96, 0, 0, 28),
-#line 5558
+#line 5622
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5554
+#line 5618
             .ability = ABILITY_SWIFT_SWIM,
-#line 5555
+#line 5619
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5557
+#line 5621
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5559
+#line 5623
                 MOVE_RAIN_DANCE,
                 MOVE_MUD_SHOT,
                 MOVE_WATER_PULSE,
             },
             },
             {
-#line 5563
+#line 5627
             .species = SPECIES_STUNKY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5563
+#line 5627
             .heldItem = ITEM_CHOPLE_BERRY,
-#line 5566
+#line 5630
             .ev = TRAINER_PARTY_EVS(0, 0, 68, 0, 0, 56),
-#line 5568
+#line 5632
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5564
+#line 5628
             .ability = ABILITY_STENCH,
-#line 5565
+#line 5629
             .lvl = 20,
             .ball = POKEBALL_COUNT,
-#line 5567
+#line 5631
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5569
+#line 5633
                 MOVE_TOXIC_SPIKES,
                 MOVE_VENOSHOCK,
                 MOVE_BODY_SLAM,
@@ -14910,20 +15134,20 @@
             },
         },
     },
-#line 5573
+#line 5637
     [DIFFICULTY_NORMAL][TRAINER_031A849F] =
     {
-#line 5574
+#line 5638
         .trainerName = _("031A849F"),
-#line 5575
+#line 5639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5579
+#line 5643
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5576
+#line 5640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5578
+#line 5642
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5577
+#line 5641
         .mapSec = MAPSEC_TORA_TOWN,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -14931,93 +15155,93 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5581
+#line 5645
             .species = SPECIES_MURKROW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5581
+#line 5645
             .heldItem = ITEM_TWISTED_SPOON,
-#line 5584
+#line 5648
             .ev = TRAINER_PARTY_EVS(0, 64, 0, 0, 64, 0),
-#line 5586
+#line 5650
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5582
+#line 5646
             .ability = ABILITY_PRANKSTER,
-#line 5583
+#line 5647
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5585
+#line 5649
             .nature = NATURE_DOCILE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5587
+#line 5651
                 MOVE_TAILWIND,
                 MOVE_DUAL_WINGBEAT,
                 MOVE_HEAT_WAVE,
             },
             },
             {
-#line 5591
+#line 5655
             .species = SPECIES_INKAY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5591
+#line 5655
             .heldItem = ITEM_ROSELI_BERRY,
-#line 5594
+#line 5658
             .ev = TRAINER_PARTY_EVS(0, 64, 0, 0, 64, 0),
-#line 5596
+#line 5660
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5592
+#line 5656
             .ability = ABILITY_CONTRARY,
-#line 5593
+#line 5657
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5595
+#line 5659
             .nature = NATURE_QUIRKY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5597
+#line 5661
                 MOVE_PSYBEAM,
                 MOVE_ROCK_SLIDE,
                 MOVE_FUTURE_SIGHT,
             },
             },
             {
-#line 5601
+#line 5665
             .species = SPECIES_LOKIX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5601
+#line 5665
             .heldItem = ITEM_CHOPLE_BERRY,
-#line 5604
+#line 5668
             .ev = TRAINER_PARTY_EVS(0, 128, 0, 0, 0, 0),
-#line 5606
+#line 5670
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5602
+#line 5666
             .ability = ABILITY_TINTED_LENS,
-#line 5603
+#line 5667
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5605
+#line 5669
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5607
+#line 5671
                 MOVE_AERIAL_ACE,
                 MOVE_TRAILBLAZE,
             },
             },
         },
     },
-#line 5610
+#line 5674
     [DIFFICULTY_NORMAL][TRAINER_045FDD44] =
     {
-#line 5611
+#line 5675
         .trainerName = _("045FDD44"),
-#line 5612
+#line 5676
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5615
+#line 5679
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5613
+#line 5677
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5614
+#line 5678
         .mapSec = MAPSEC_TORA_TOWN,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15025,93 +15249,93 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5617
+#line 5681
             .species = SPECIES_FOONGUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5617
+#line 5681
             .heldItem = ITEM_SHUCA_BERRY,
-#line 5620
+#line 5684
             .ev = TRAINER_PARTY_EVS(0, 0, 84, 0, 0, 40),
-#line 5622
+#line 5686
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5618
+#line 5682
             .ability = ABILITY_EFFECT_SPORE,
-#line 5619
+#line 5683
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5621
+#line 5685
             .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5623
+#line 5687
                 MOVE_POISON_POWDER,
                 MOVE_STUN_SPORE,
                 MOVE_POLLEN_PUFF,
             },
             },
             {
-#line 5627
+#line 5691
             .species = SPECIES_VAROOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5627
+#line 5691
             .heldItem = ITEM_PAYAPA_BERRY,
-#line 5630
+#line 5694
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 124),
-#line 5632
+#line 5696
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5628
+#line 5692
             .ability = ABILITY_OVERCOAT,
-#line 5629
+#line 5693
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5631
+#line 5695
             .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5633
+#line 5697
                 MOVE_TOXIC_SPIKES,
                 MOVE_TOXIC,
                 MOVE_VENOSHOCK,
             },
             },
             {
-#line 5637
+#line 5701
             .species = SPECIES_ARIADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5637
+#line 5701
             .heldItem = ITEM_SPELL_TAG,
-#line 5640
+#line 5704
             .ev = TRAINER_PARTY_EVS(0, 60, 52, 0, 0, 20),
-#line 5642
+#line 5706
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5638
+#line 5702
             .ability = ABILITY_SWARM,
-#line 5639
+#line 5703
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5641
+#line 5705
             .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5643
+#line 5707
                 MOVE_HEX,
                 MOVE_LEECH_LIFE,
             },
             },
         },
     },
-#line 5646
+#line 5710
     [DIFFICULTY_NORMAL][TRAINER_041FD20E] =
     {
-#line 5647
+#line 5711
         .trainerName = _("041FD20E"),
-#line 5648
+#line 5712
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5651
+#line 5715
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5649
+#line 5713
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5650
+#line 5714
         .mapSec = MAPSEC_TORA_TOWN,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15119,67 +15343,67 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5653
+#line 5717
             .species = SPECIES_MAREANIE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5653
+#line 5717
             .heldItem = ITEM_MYSTIC_WATER,
-#line 5656
+#line 5720
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 136),
-#line 5658
+#line 5722
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5654
+#line 5718
             .ability = ABILITY_LIMBER,
-#line 5655
+#line 5719
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5657
+#line 5721
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5659
+#line 5723
                 MOVE_LIQUIDATION,
                 MOVE_ICE_SPINNER,
             },
             },
             {
-#line 5662
+#line 5726
             .species = SPECIES_DEINO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5662
+#line 5726
             .heldItem = ITEM_NEVER_MELT_ICE,
-#line 5665
+#line 5729
             .ev = TRAINER_PARTY_EVS(0, 64, 0, 0, 64, 0),
-#line 5667
+#line 5731
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5663
+#line 5727
             .ability = ABILITY_HUSTLE,
-#line 5664
+#line 5728
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5666
+#line 5730
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5668
+#line 5732
                 MOVE_ICE_FANG,
                 MOVE_DRAGON_BREATH,
             },
             },
         },
     },
-#line 5671
+#line 5735
     [DIFFICULTY_NORMAL][TRAINER_0465BF77] =
     {
-#line 5672
+#line 5736
         .trainerName = _("0465BF77"),
-#line 5673
+#line 5737
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5676
+#line 5740
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5674
+#line 5738
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5675
+#line 5739
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15187,48 +15411,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5678
+#line 5742
             .species = SPECIES_MISDREAVUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5678
+#line 5742
             .heldItem = ITEM_QUICK_CLAW,
-#line 5681
+#line 5745
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 132, 0, 0),
-#line 5683
+#line 5747
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5679
+#line 5743
             .ability = ABILITY_LEVITATE,
-#line 5680
+#line 5744
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5682
+#line 5746
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5684
+#line 5748
                 MOVE_TAUNT,
                 MOVE_DESTINY_BOND,
                 MOVE_SHADOW_SNEAK,
             },
             },
             {
-#line 5688
+#line 5752
             .species = SPECIES_SHARPEDO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5691
+#line 5755
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 132, 0, 0),
-#line 5693
+#line 5757
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5689
+#line 5753
             .ability = ABILITY_SPEED_BOOST,
-#line 5690
+#line 5754
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5692
+#line 5756
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5694
+#line 5758
                 MOVE_DESTINY_BOND,
                 MOVE_TAUNT,
                 MOVE_ASSURANCE,
@@ -15237,18 +15461,18 @@
             },
         },
     },
-#line 5699
+#line 5763
     [DIFFICULTY_NORMAL][TRAINER_0467DF00] =
     {
-#line 5700
+#line 5764
         .trainerName = _("0467DF00"),
-#line 5701
+#line 5765
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5704
+#line 5768
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5702
+#line 5766
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5703
+#line 5767
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15256,51 +15480,51 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5706
+#line 5770
             .species = SPECIES_MILTANK,
-#line 5706
+#line 5770
             .gender = TRAINER_MON_FEMALE,
-#line 5706
+#line 5770
             .heldItem = ITEM_COVERT_CLOAK,
-#line 5709
+#line 5773
             .ev = TRAINER_PARTY_EVS(44, 0, 48, 0, 0, 40),
-#line 5711
+#line 5775
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5707
+#line 5771
             .ability = ABILITY_THICK_FAT,
-#line 5708
+#line 5772
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5710
+#line 5774
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5712
+#line 5776
                 MOVE_SANDSTORM,
                 MOVE_ROLLOUT,
                 MOVE_HEAL_BELL,
             },
             },
             {
-#line 5716
+#line 5780
             .species = SPECIES_GLIGAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5716
+#line 5780
             .heldItem = ITEM_BRIGHT_POWDER,
-#line 5719
+#line 5783
             .ev = TRAINER_PARTY_EVS(132, 0, 0, 0, 0, 0),
-#line 5721
+#line 5785
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5717
+#line 5781
             .ability = ABILITY_SAND_VEIL,
-#line 5718
+#line 5782
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5720
+#line 5784
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5722
+#line 5786
                 MOVE_FURY_CUTTER,
                 MOVE_TOXIC,
                 MOVE_KNOCK_OFF,
@@ -15308,25 +15532,25 @@
             },
             },
             {
-#line 5727
+#line 5791
             .species = SPECIES_CHANSEY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5727
+#line 5791
             .heldItem = ITEM_SMOOTH_ROCK,
-#line 5730
+#line 5794
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 136),
-#line 5732
+#line 5796
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5728
+#line 5792
             .ability = ABILITY_HEALER,
-#line 5729
+#line 5793
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5731
+#line 5795
             .nature = NATURE_GENTLE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5733
+#line 5797
                 MOVE_SANDSTORM,
                 MOVE_HEAL_PULSE,
                 MOVE_HYPER_VOICE,
@@ -15334,20 +15558,20 @@
             },
         },
     },
-#line 5737
+#line 5801
     [DIFFICULTY_NORMAL][TRAINER_04687C53] =
     {
-#line 5738
+#line 5802
         .trainerName = _("04687C53"),
-#line 5739
+#line 5803
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5742
+#line 5806
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5740
+#line 5804
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5743
+#line 5807
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5741
+#line 5805
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15355,25 +15579,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5745
+#line 5809
             .species = SPECIES_SLIGGOO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5745
+#line 5809
             .heldItem = ITEM_ORAN_BERRY,
-#line 5748
+#line 5812
             .ev = TRAINER_PARTY_EVS(0, 0, 136, 0, 0, 0),
-#line 5750
+#line 5814
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5746
+#line 5810
             .ability = ABILITY_GOOEY,
-#line 5747
+#line 5811
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 5749
+#line 5813
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5751
+#line 5815
                 MOVE_ACID_SPRAY,
                 MOVE_CHILLING_WATER,
                 MOVE_SKITTER_SMACK,
@@ -15381,20 +15605,20 @@
             },
         },
     },
-#line 5755
+#line 5819
     [DIFFICULTY_NORMAL][TRAINER_048D5D99] =
     {
-#line 5756
+#line 5820
         .trainerName = _("048D5D99"),
-#line 5757
+#line 5821
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5760
+#line 5824
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5758
+#line 5822
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5761
+#line 5825
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5759
+#line 5823
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15402,50 +15626,50 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5763
+#line 5827
             .species = SPECIES_ARON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5763
+#line 5827
             .heldItem = ITEM_SITRUS_BERRY,
-#line 5766
+#line 5830
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 132),
-#line 5768
+#line 5832
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5764
+#line 5828
             .ability = ABILITY_STURDY,
-#line 5765
+#line 5829
             .lvl = 27,
             .ball = POKEBALL_COUNT,
-#line 5767
+#line 5831
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5769
+#line 5833
                 MOVE_METAL_BURST,
                 MOVE_CURSE,
                 MOVE_HARDEN,
             },
             },
             {
-#line 5773
+#line 5837
             .species = SPECIES_ARON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5773
+#line 5837
             .heldItem = ITEM_FOCUS_BAND,
-#line 5776
+#line 5840
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 132),
-#line 5778
+#line 5842
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5774
+#line 5838
             .ability = ABILITY_STURDY,
-#line 5775
+#line 5839
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5777
+#line 5841
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5779
+#line 5843
                 MOVE_METAL_BURST,
                 MOVE_CURSE,
                 MOVE_ENDEAVOR,
@@ -15454,20 +15678,20 @@
             },
         },
     },
-#line 5784
+#line 5848
     [DIFFICULTY_NORMAL][TRAINER_04A59E40] =
     {
-#line 5785
+#line 5849
         .trainerName = _("04A59E40"),
-#line 5786
+#line 5850
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5789
+#line 5853
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5787
+#line 5851
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5790
+#line 5854
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5788
+#line 5852
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15475,26 +15699,26 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5792
+#line 5856
             .species = SPECIES_FLOETTE,
-#line 5792
+#line 5856
             .gender = TRAINER_MON_FEMALE,
-#line 5792
+#line 5856
             .heldItem = ITEM_LUM_BERRY,
-#line 5795
+#line 5859
             .ev = TRAINER_PARTY_EVS(32, 0, 104, 0, 0, 0),
-#line 5797
+#line 5861
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5793
+#line 5857
             .ability = ABILITY_FLOWER_VEIL,
-#line 5794
+#line 5858
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5796
+#line 5860
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5798
+#line 5862
                 MOVE_WISH,
                 MOVE_BATON_PASS,
                 MOVE_LIGHT_SCREEN,
@@ -15502,50 +15726,50 @@
             },
             },
             {
-#line 5803
+#line 5867
             .species = SPECIES_KINGLER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5803
+#line 5867
             .heldItem = ITEM_MYSTIC_WATER,
-#line 5806
+#line 5870
             .ev = TRAINER_PARTY_EVS(0, 48, 0, 88, 0, 0),
-#line 5808
+#line 5872
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5804
+#line 5868
             .ability = ABILITY_SHELL_ARMOR,
-#line 5805
+#line 5869
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5807
+#line 5871
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5809
+#line 5873
                 MOVE_BRICK_BREAK,
                 MOVE_RAZOR_SHELL,
                 MOVE_NIGHT_SLASH,
             },
             },
             {
-#line 5813
+#line 5877
             .species = SPECIES_SLOWBRO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5813
+#line 5877
             .heldItem = ITEM_MYSTIC_WATER,
-#line 5816
+#line 5880
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 136, 0),
-#line 5818
+#line 5882
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5814
+#line 5878
             .ability = ABILITY_REGENERATOR,
-#line 5815
+#line 5879
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5817
+#line 5881
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5819
+#line 5883
                 MOVE_AVALANCHE,
                 MOVE_PSYCHIC_NOISE,
                 MOVE_MUDDY_WATER,
@@ -15553,20 +15777,20 @@
             },
         },
     },
-#line 5824
+#line 5888
     [DIFFICULTY_NORMAL][TRAINER_04E334E9] =
     {
-#line 5825
+#line 5889
         .trainerName = _("04E334E9"),
-#line 5826
+#line 5890
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5829
+#line 5893
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5827
+#line 5891
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5830
+#line 5894
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5828
+#line 5892
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15574,25 +15798,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5832
+#line 5896
             .species = SPECIES_REMORAID,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5832
+#line 5896
             .heldItem = ITEM_ORAN_BERRY,
-#line 5835
+#line 5899
             .ev = TRAINER_PARTY_EVS(0, 136, 0, 0, 0, 0),
-#line 5837
+#line 5901
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5833
+#line 5897
             .ability = ABILITY_MOODY,
-#line 5834
+#line 5898
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5836
+#line 5900
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5838
+#line 5902
                 MOVE_SUBSTITUTE,
                 MOVE_PROTECT,
                 MOVE_ICY_WIND,
@@ -15600,25 +15824,25 @@
             },
             },
             {
-#line 5843
+#line 5907
             .species = SPECIES_REMORAID,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5843
+#line 5907
             .heldItem = ITEM_ORAN_BERRY,
-#line 5846
+#line 5910
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 136, 0),
-#line 5848
+#line 5912
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5844
+#line 5908
             .ability = ABILITY_MOODY,
-#line 5845
+#line 5909
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5847
+#line 5911
             .nature = NATURE_RASH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5849
+#line 5913
                 MOVE_SUBSTITUTE,
                 MOVE_PROTECT,
                 MOVE_BULLET_SEED,
@@ -15626,25 +15850,25 @@
             },
             },
             {
-#line 5854
+#line 5918
             .species = SPECIES_SCOVILLAIN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5854
+#line 5918
             .heldItem = ITEM_ORAN_BERRY,
-#line 5857
+#line 5921
             .ev = TRAINER_PARTY_EVS(16, 32, 16, 24, 32, 16),
-#line 5859
+#line 5923
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5855
+#line 5919
             .ability = ABILITY_MOODY,
-#line 5856
+#line 5920
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5858
+#line 5922
             .nature = NATURE_QUIRKY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5860
+#line 5924
                 MOVE_SUBSTITUTE,
                 MOVE_PROTECT,
                 MOVE_MAGICAL_LEAF,
@@ -15653,20 +15877,20 @@
             },
         },
     },
-#line 5865
+#line 5929
     [DIFFICULTY_NORMAL][TRAINER_05BDEABF] =
     {
-#line 5866
+#line 5930
         .trainerName = _("05BDEABF"),
-#line 5867
+#line 5931
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5870
+#line 5934
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5868
+#line 5932
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5871
+#line 5935
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5869
+#line 5933
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15674,22 +15898,22 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5873
+#line 5937
             .species = SPECIES_CAPSAKID,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5873
+#line 5937
             .heldItem = ITEM_SMOOTH_ROCK,
-#line 5876
+#line 5940
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5874
+#line 5938
             .ability = ABILITY_INSOMNIA,
-#line 5875
+#line 5939
             .lvl = 23,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5877
+#line 5941
                 MOVE_SANDSTORM,
                 MOVE_LEECH_SEED,
                 MOVE_SUBSTITUTE,
@@ -15697,22 +15921,22 @@
             },
             },
             {
-#line 5882
+#line 5946
             .species = SPECIES_FOONGUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5882
+#line 5946
             .heldItem = ITEM_SITRUS_BERRY,
-#line 5885
+#line 5949
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5883
+#line 5947
             .ability = ABILITY_EFFECT_SPORE,
-#line 5884
+#line 5948
             .lvl = 21,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5886
+#line 5950
                 MOVE_POISON_POWDER,
                 MOVE_POLLEN_PUFF,
                 MOVE_PROTECT,
@@ -15720,22 +15944,22 @@
             },
             },
             {
-#line 5891
+#line 5955
             .species = SPECIES_GOLETT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5891
+#line 5955
             .heldItem = ITEM_LEFTOVERS,
-#line 5894
+#line 5958
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5892
+#line 5956
             .ability = ABILITY_IRON_FIST,
-#line 5893
+#line 5957
             .lvl = 25,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5895
+#line 5959
                 MOVE_SANDSTORM,
                 MOVE_CURSE,
                 MOVE_KNOCK_OFF,
@@ -15744,20 +15968,20 @@
             },
         },
     },
-#line 5900
+#line 5964
     [DIFFICULTY_NORMAL][TRAINER_06400A0C] =
     {
-#line 5901
+#line 5965
         .trainerName = _("06400A0C"),
-#line 5902
+#line 5966
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5905
+#line 5969
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5903
+#line 5967
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5906
+#line 5970
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5904
+#line 5968
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15765,22 +15989,22 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5908
+#line 5972
             .species = SPECIES_CHARJABUG,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5908
+#line 5972
             .heldItem = ITEM_EJECT_BUTTON,
-#line 5911
+#line 5975
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5909
+#line 5973
             .ability = ABILITY_BATTERY,
-#line 5910
+#line 5974
             .lvl = 24,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5912
+#line 5976
                 MOVE_STICKY_WEB,
                 MOVE_LIGHT_SCREEN,
                 MOVE_ELECTROWEB,
@@ -15788,42 +16012,42 @@
             },
             },
             {
-#line 5917
+#line 5981
             .species = SPECIES_LAMPENT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5917
+#line 5981
             .heldItem = ITEM_CHERI_BERRY,
-#line 5920
+#line 5984
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5918
+#line 5982
             .ability = ABILITY_FLAME_BODY,
-#line 5919
+#line 5983
             .lvl = 25,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5921
+#line 5985
                 MOVE_NIGHT_SHADE,
                 MOVE_EMBER,
                 MOVE_WILL_O_WISP,
             },
             },
             {
-#line 5925
+#line 5989
             .species = SPECIES_DOUBLADE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5928
+#line 5992
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5926
+#line 5990
             .ability = ABILITY_NO_GUARD,
-#line 5927
+#line 5991
             .lvl = 26,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5929
+#line 5993
                 MOVE_SHADOW_SNEAK,
                 MOVE_SHADOW_CLAW,
                 MOVE_BRUTAL_SWING,
@@ -15831,20 +16055,20 @@
             },
         },
     },
-#line 5933
+#line 5997
     [DIFFICULTY_NORMAL][TRAINER_068B06CE] =
     {
-#line 5934
+#line 5998
         .trainerName = _("068B06CE"),
-#line 5935
+#line 5999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5938
+#line 6002
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 5936
+#line 6000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5939
+#line 6003
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5937
+#line 6001
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15852,48 +16076,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5941
+#line 6005
             .species = SPECIES_KOFFING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5944
+#line 6008
             .ev = TRAINER_PARTY_EVS(0, 56, 72, 0, 0, 0),
-#line 5946
+#line 6010
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5942
+#line 6006
             .ability = ABILITY_NEUTRALIZING_GAS,
-#line 5943
+#line 6007
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5945
+#line 6009
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5947
+#line 6011
                 MOVE_WILL_O_WISP,
                 MOVE_SLUDGE,
                 MOVE_BODY_SLAM,
             },
             },
             {
-#line 5951
+#line 6015
             .species = SPECIES_VULPIX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5951
+#line 6015
             .heldItem = ITEM_WIDE_LENS,
-#line 5954
+#line 6018
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 136, 0, 0),
-#line 5956
+#line 6020
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5952
+#line 6016
             .ability = ABILITY_FLASH_FIRE,
-#line 5953
+#line 6017
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 5955
+#line 6019
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5957
+#line 6021
                 MOVE_INFERNO,
                 MOVE_BABY_DOLL_EYES,
                 MOVE_DIG,
@@ -15901,50 +16125,50 @@
             },
             },
             {
-#line 5962
+#line 6026
             .species = SPECIES_GRANBULL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5962
+#line 6026
             .heldItem = ITEM_FLAME_ORB,
-#line 5965
+#line 6029
             .ev = TRAINER_PARTY_EVS(0, 28, 0, 0, 0, 108),
-#line 5967
+#line 6031
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5963
+#line 6027
             .ability = ABILITY_QUICK_FEET,
-#line 5964
+#line 6028
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5966
+#line 6030
             .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5968
+#line 6032
                 MOVE_FLING,
                 MOVE_FACADE,
                 MOVE_PROTECT,
             },
             },
             {
-#line 5972
+#line 6036
             .species = SPECIES_MAGBY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5972
+#line 6036
             .heldItem = ITEM_CHARCOAL,
-#line 5975
+#line 6039
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 48, 0, 0),
-#line 5977
+#line 6041
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5973
+#line 6037
             .ability = ABILITY_FLAME_BODY,
-#line 5974
+#line 6038
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 5976
+#line 6040
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5978
+#line 6042
                 MOVE_WILL_O_WISP,
                 MOVE_FLAME_WHEEL,
                 MOVE_LOW_KICK,
@@ -15952,20 +16176,20 @@
             },
         },
     },
-#line 5983
+#line 6047
     [DIFFICULTY_NORMAL][TRAINER_06BE2D1B] =
     {
-#line 5984
+#line 6048
         .trainerName = _("06BE2D1B"),
-#line 5985
+#line 6049
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 5987
+#line 6051
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 5986
+#line 6050
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 5989
+#line 6053
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 5988
+#line 6052
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -15973,118 +16197,118 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 5991
+#line 6055
             .species = SPECIES_TOGETIC,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 5991
+#line 6055
             .heldItem = ITEM_SCOPE_LENS,
-#line 5994
+#line 6058
             .ev = TRAINER_PARTY_EVS(0, 0, 72, 0, 0, 64),
-#line 5996
+#line 6060
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 5992
+#line 6056
             .ability = ABILITY_SUPER_LUCK,
-#line 5993
+#line 6057
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 5995
+#line 6059
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 5997
+#line 6061
                 MOVE_ANCIENT_POWER,
                 MOVE_PLAY_ROUGH,
                 MOVE_FOLLOW_ME,
             },
             },
             {
-#line 6001
+#line 6065
             .species = SPECIES_CUBCHOO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6004
+#line 6068
             .ev = TRAINER_PARTY_EVS(0, 92, 44, 0, 0, 0),
-#line 6005
+#line 6069
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6002
+#line 6066
             .ability = ABILITY_RATTLED,
-#line 6003
+#line 6067
             .lvl = 22,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6006
+#line 6070
                 MOVE_FROST_BREATH,
                 MOVE_DIG,
             },
             },
             {
-#line 6009
+#line 6073
             .species = SPECIES_MURKROW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6009
+#line 6073
             .heldItem = ITEM_SCOPE_LENS,
-#line 6012
+#line 6076
             .ev = TRAINER_PARTY_EVS(0, 92, 0, 36, 0, 0),
-#line 6014
+#line 6078
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6010
+#line 6074
             .ability = ABILITY_SUPER_LUCK,
-#line 6011
+#line 6075
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6013
+#line 6077
             .nature = NATURE_DOCILE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6015
+#line 6079
                 MOVE_TAILWIND,
                 MOVE_AIR_CUTTER,
                 MOVE_SNARL,
             },
             },
             {
-#line 6019
+#line 6083
             .species = SPECIES_ARIADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6019
+#line 6083
             .heldItem = ITEM_SCOPE_LENS,
-#line 6023
+#line 6087
             .ev = TRAINER_PARTY_EVS(0, 136, 0, 0, 0, 0),
-#line 6025
+#line 6089
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6020
+#line 6084
             .ability = ABILITY_SNIPER,
-#line 6021
+#line 6085
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 6024
+#line 6088
             .nature = NATURE_ADAMANT,
-#line 6022
+#line 6086
             .isShiny = TRUE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6026
+#line 6090
                 MOVE_CROSS_POISON,
                 MOVE_NIGHT_SLASH,
             },
             },
         },
     },
-#line 6029
+#line 6093
     [DIFFICULTY_NORMAL][TRAINER_06C68007] =
     {
-#line 6030
+#line 6094
         .trainerName = _("06C68007"),
-#line 6031
+#line 6095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6033
+#line 6097
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6032
+#line 6096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6035
+#line 6099
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6034
+#line 6098
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16092,69 +16316,69 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6037
+#line 6101
             .species = SPECIES_FLAAFFY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6037
+#line 6101
             .heldItem = ITEM_FAIRY_FEATHER,
-#line 6040
+#line 6104
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 20, 104, 0),
-#line 6042
+#line 6106
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6038
+#line 6102
             .ability = ABILITY_STATIC,
-#line 6039
+#line 6103
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6041
+#line 6105
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6043
+#line 6107
                 MOVE_DISCHARGE,
                 MOVE_DAZZLING_GLEAM,
             },
             },
             {
-#line 6046
+#line 6110
             .species = SPECIES_PILOSWINE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6046
+#line 6110
             .heldItem = ITEM_EXPERT_BELT,
-#line 6049
+#line 6113
             .ev = TRAINER_PARTY_EVS(0, 96, 0, 0, 0, 32),
-#line 6051
+#line 6115
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6047
+#line 6111
             .ability = ABILITY_OBLIVIOUS,
-#line 6048
+#line 6112
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6050
+#line 6114
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6052
+#line 6116
                 MOVE_BULLDOZE,
                 MOVE_ICY_WIND,
             },
             },
         },
     },
-#line 6055
+#line 6119
     [DIFFICULTY_NORMAL][TRAINER_06D2BD08] =
     {
-#line 6056
+#line 6120
         .trainerName = _("06D2BD08"),
-#line 6057
+#line 6121
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6060
+#line 6124
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6058
+#line 6122
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6061
+#line 6125
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6059
+#line 6123
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16162,87 +16386,87 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6063
+#line 6127
             .species = SPECIES_SPINDA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6063
+#line 6127
             .heldItem = ITEM_MAGO_BERRY,
-#line 6066
+#line 6130
             .ev = TRAINER_PARTY_EVS(36, 0, 0, 0, 96, 0),
-#line 6068
+#line 6132
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6064
+#line 6128
             .ability = ABILITY_TANGLED_FEET,
-#line 6065
+#line 6129
             .lvl = 27,
             .ball = POKEBALL_COUNT,
-#line 6067
+#line 6131
             .nature = NATURE_SERIOUS,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6069
+#line 6133
                 MOVE_ICY_WIND,
                 MOVE_PSYBEAM,
                 MOVE_DRAIN_PUNCH,
             },
             },
             {
-#line 6073
+#line 6137
             .species = SPECIES_LINOONE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6073
+#line 6137
             .heldItem = ITEM_BLUNDER_POLICY,
-#line 6076
+#line 6140
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6074
+#line 6138
             .ability = ABILITY_QUICK_FEET,
-#line 6075
+#line 6139
             .lvl = 25,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6077
+#line 6141
                 MOVE_ICY_WIND,
                 MOVE_BODY_SLAM,
                 MOVE_FURY_SWIPES,
             },
             },
             {
-#line 6081
+#line 6145
             .species = SPECIES_PORYGON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6084
+#line 6148
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6082
+#line 6146
             .ability = ABILITY_DOWNLOAD,
-#line 6083
+#line 6147
             .lvl = 27,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6085
+#line 6149
                 MOVE_ICY_WIND,
                 MOVE_TRI_ATTACK,
             },
             },
         },
     },
-#line 6088
+#line 6152
     [DIFFICULTY_NORMAL][TRAINER_070F6125] =
     {
-#line 6089
+#line 6153
         .trainerName = _("070F6125"),
-#line 6090
+#line 6154
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6093
+#line 6157
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6091
+#line 6155
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6094
+#line 6158
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6092
+#line 6156
         .mapSec = MAPSEC_ROUTE10,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16250,50 +16474,50 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6096
+#line 6160
             .species = SPECIES_MIENFOO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6096
+#line 6160
             .heldItem = ITEM_SALAC_BERRY,
-#line 6099
+#line 6163
             .ev = TRAINER_PARTY_EVS(20, 116, 0, 0, 0, 0),
-#line 6101
+#line 6165
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6097
+#line 6161
             .ability = ABILITY_INNER_FOCUS,
-#line 6098
+#line 6162
             .lvl = 27,
             .ball = POKEBALL_COUNT,
-#line 6100
+#line 6164
             .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6101
+#line 6165
                 MOVE_ENDURE,
                 MOVE_REVERSAL,
                 MOVE_ACROBATICS,
             },
             },
             {
-#line 6105
+#line 6169
             .species = SPECIES_HITMONLEE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6105
+#line 6169
             .heldItem = ITEM_BLACK_BELT,
-#line 6108
+#line 6172
             .ev = TRAINER_PARTY_EVS(0, 116, 0, 0, 0, 12),
-#line 6110
+#line 6174
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6106
+#line 6170
             .ability = ABILITY_UNBURDEN,
-#line 6107
+#line 6171
             .lvl = 26,
             .ball = POKEBALL_COUNT,
-#line 6109
+#line 6173
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6110
+#line 6174
                 MOVE_ENDURE,
                 MOVE_REVERSAL,
                 MOVE_VACUUM_WAVE,
@@ -16301,20 +16525,20 @@
             },
         },
     },
-#line 6114
+#line 6178
     [DIFFICULTY_NORMAL][TRAINER_07D063A5] =
     {
-#line 6115
+#line 6179
         .trainerName = _("07D063A5"),
-#line 6116
+#line 6180
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6119
+#line 6183
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6117
+#line 6181
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6120
+#line 6184
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6118
+#line 6182
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16322,113 +16546,113 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6122
+#line 6186
             .species = SPECIES_SQUAWKABILLY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6125
+#line 6189
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6127
+#line 6191
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6123
+#line 6187
             .ability = ABILITY_INTIMIDATE,
-#line 6124
+#line 6188
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6126
+#line 6190
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6128
+#line 6192
                 MOVE_HELPING_HAND,
                 MOVE_U_TURN,
             },
             },
             {
-#line 6131
+#line 6195
             .species = SPECIES_SQUAWKABILLY_BLUE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6131
+#line 6195
             .heldItem = ITEM_SHED_SHELL,
-#line 6134
+#line 6198
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6136
+#line 6200
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6132
+#line 6196
             .ability = ABILITY_INTIMIDATE,
-#line 6133
+#line 6197
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6135
+#line 6199
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6137
+#line 6201
                 MOVE_HELPING_HAND,
                 MOVE_AIR_SLASH,
             },
             },
             {
-#line 6140
+#line 6204
             .species = SPECIES_SQUAWKABILLY_WHITE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6140
+#line 6204
             .heldItem = ITEM_RED_CARD,
-#line 6143
+#line 6207
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6145
+#line 6209
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6141
+#line 6205
             .ability = ABILITY_INTIMIDATE,
-#line 6142
+#line 6206
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6144
+#line 6208
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6146
+#line 6210
                 MOVE_HELPING_HAND,
                 MOVE_HEAT_WAVE,
             },
             },
             {
-#line 6149
+#line 6213
             .species = SPECIES_SQUAWKABILLY_YELLOW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6149
+#line 6213
             .heldItem = ITEM_EJECT_BUTTON,
-#line 6152
+#line 6216
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6154
+#line 6218
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6150
+#line 6214
             .ability = ABILITY_INTIMIDATE,
-#line 6151
+#line 6215
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6153
+#line 6217
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6155
+#line 6219
                 MOVE_HELPING_HAND,
                 MOVE_AERIAL_ACE,
             },
             },
         },
     },
-#line 6158
+#line 6222
     [DIFFICULTY_NORMAL][TRAINER_09AEC824] =
     {
-#line 6159
+#line 6223
         .trainerName = _("09AEC824"),
-#line 6160
+#line 6224
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6163
+#line 6227
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6161
+#line 6225
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6162
+#line 6226
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16436,91 +16660,91 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6165
+#line 6229
             .species = SPECIES_DROWZEE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6168
+#line 6232
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 124, 0),
-#line 6169
+#line 6233
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6166
+#line 6230
             .ability = ABILITY_INNER_FOCUS,
-#line 6167
+#line 6231
             .lvl = 26,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6170
+#line 6234
                 MOVE_THUNDER_WAVE,
                 MOVE_NIGHT_SHADE,
                 MOVE_CONFUSION,
             },
             },
             {
-#line 6174
+#line 6238
             .species = SPECIES_PACHIRISU,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6177
+#line 6241
             .ev = TRAINER_PARTY_EVS(64, 0, 40, 0, 0, 24),
-#line 6179
+#line 6243
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6175
+#line 6239
             .ability = ABILITY_VOLT_ABSORB,
-#line 6176
+#line 6240
             .lvl = 22,
             .ball = POKEBALL_COUNT,
-#line 6178
+#line 6242
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6180
+#line 6244
                 MOVE_BITE,
                 MOVE_NUZZLE,
                 MOVE_THUNDER_FANG,
             },
             },
             {
-#line 6184
+#line 6248
             .species = SPECIES_SNIVY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6187
+#line 6251
             .ev = TRAINER_PARTY_EVS(0, 120, 0, 0, 0, 16),
-#line 6189
+#line 6253
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6185
+#line 6249
             .ability = ABILITY_OVERGROW,
-#line 6186
+#line 6250
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 6188
+#line 6252
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6190
+#line 6254
                 MOVE_PETAL_BLIZZARD,
                 MOVE_GLARE,
                 MOVE_BULLET_SEED,
             },
             },
             {
-#line 6194
+#line 6258
             .species = SPECIES_SHIINOTIC,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6197
+#line 6261
             .ev = TRAINER_PARTY_EVS(84, 0, 0, 0, 0, 44),
-#line 6199
+#line 6263
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6195
+#line 6259
             .ability = ABILITY_EFFECT_SPORE,
-#line 6196
+#line 6260
             .lvl = 24,
             .ball = POKEBALL_COUNT,
-#line 6198
+#line 6262
             .nature = NATURE_CALM,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6200
+#line 6264
                 MOVE_STUN_SPORE,
                 MOVE_DRAINING_KISS,
                 MOVE_CONFUSE_RAY,
@@ -16529,20 +16753,20 @@
             },
         },
     },
-#line 6205
+#line 6269
     [DIFFICULTY_NORMAL][TRAINER_09B7B6C8] =
     {
-#line 6206
+#line 6270
         .trainerName = _("09B7B6C8"),
-#line 6207
+#line 6271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6210
+#line 6274
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6208
+#line 6272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6211
+#line 6275
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6209
+#line 6273
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16550,63 +16774,63 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6213
+#line 6277
             .species = SPECIES_MALAMAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6213
+#line 6277
             .heldItem = ITEM_SITRUS_BERRY,
-#line 6216
+#line 6280
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 128, 0, 0),
-#line 6218
+#line 6282
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6214
+#line 6278
             .ability = ABILITY_CONTRARY,
-#line 6215
+#line 6279
             .lvl = 23,
             .ball = POKEBALL_COUNT,
-#line 6217
+#line 6281
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6219
+#line 6283
                 MOVE_SWAGGER,
                 MOVE_LIGHT_SCREEN,
                 MOVE_ACUPRESSURE,
             },
             },
             {
-#line 6223
+#line 6287
             .species = SPECIES_DITTO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6223
+#line 6287
             .heldItem = ITEM_CHOICE_SCARF,
-#line 6226
+#line 6290
             .ev = TRAINER_PARTY_EVS(0, 60, 0, 0, 72, 0),
-#line 6228
+#line 6292
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6224
+#line 6288
             .ability = ABILITY_IMPOSTER,
-#line 6225
+#line 6289
             .lvl = 29,
             .ball = POKEBALL_COUNT,
-#line 6227
+#line 6291
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
         },
     },
-#line 6230
+#line 6294
     [DIFFICULTY_NORMAL][TRAINER_0A542D33] =
     {
-#line 6231
+#line 6295
         .trainerName = _("0A542D33"),
-#line 6232
+#line 6296
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6235
+#line 6299
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6233
+#line 6297
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6234
+#line 6298
         .mapSec = MAPSEC_ROUTE9,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16614,77 +16838,77 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6237
+#line 6301
             .species = SPECIES_CLEFFA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6237
+#line 6301
             .heldItem = ITEM_MENTAL_HERB,
-#line 6240
+#line 6304
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 128, 0),
-#line 6242
+#line 6306
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6238
+#line 6302
             .ability = ABILITY_CUTE_CHARM,
-#line 6239
+#line 6303
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6241
+#line 6305
             .nature = NATURE_SERIOUS,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6243
+#line 6307
                 MOVE_HELPING_HAND,
                 MOVE_DAZZLING_GLEAM,
                 MOVE_LIGHT_SCREEN,
             },
             },
             {
-#line 6247
+#line 6311
             .species = SPECIES_CLEFAIRY,
-#line 6247
+#line 6311
             .gender = TRAINER_MON_MALE,
-#line 6247
+#line 6311
             .heldItem = ITEM_MENTAL_HERB,
-#line 6250
+#line 6314
             .ev = TRAINER_PARTY_EVS(0, 0, 64, 0, 0, 64),
-#line 6252
+#line 6316
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6248
+#line 6312
             .ability = ABILITY_CUTE_CHARM,
-#line 6249
+#line 6313
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6251
+#line 6315
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6253
+#line 6317
                 MOVE_HELPING_HAND,
                 MOVE_DAZZLING_GLEAM,
                 MOVE_LIGHT_SCREEN,
             },
             },
             {
-#line 6257
+#line 6321
             .species = SPECIES_CLEFABLE,
-#line 6257
+#line 6321
             .gender = TRAINER_MON_FEMALE,
-#line 6257
+#line 6321
             .heldItem = ITEM_MENTAL_HERB,
-#line 6260
+#line 6324
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 128, 0),
-#line 6262
+#line 6326
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6258
+#line 6322
             .ability = ABILITY_CUTE_CHARM,
-#line 6259
+#line 6323
             .lvl = 25,
             .ball = POKEBALL_COUNT,
-#line 6261
+#line 6325
             .nature = NATURE_SERIOUS,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6263
+#line 6327
                 MOVE_HELPING_HAND,
                 MOVE_DAZZLING_GLEAM,
                 MOVE_LIGHT_SCREEN,
@@ -16692,20 +16916,20 @@
             },
         },
     },
-#line 6267
+#line 6331
     [DIFFICULTY_NORMAL][TRAINER_0A8B9F88] =
     {
-#line 6268
+#line 6332
         .trainerName = _("0A8B9F88"),
-#line 6269
+#line 6333
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6271
+#line 6335
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6270
+#line 6334
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6273
+#line 6337
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6272
+#line 6336
         .mapSec = MAPSEC_ROUTE2,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16713,90 +16937,90 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6275
+#line 6339
             .species = SPECIES_MINIOR_METEOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6275
+#line 6339
             .heldItem = ITEM_METRONOME,
-#line 6278
+#line 6342
             .ev = TRAINER_PARTY_EVS(48, 0, 0, 84, 0, 0),
-#line 6280
+#line 6344
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6276
+#line 6340
             .ability = ABILITY_SHIELDS_DOWN,
-#line 6277
+#line 6341
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6279
+#line 6343
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6281
+#line 6345
                 MOVE_ROLLOUT,
             },
             },
             {
-#line 6283
+#line 6347
             .species = SPECIES_SPHEAL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6283
+#line 6347
             .heldItem = ITEM_EVIOLITE,
-#line 6286
+#line 6350
             .ev = TRAINER_PARTY_EVS(52, 80, 0, 0, 0, 0),
-#line 6288
+#line 6352
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6284
+#line 6348
             .ability = ABILITY_THICK_FAT,
-#line 6285
+#line 6349
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6287
+#line 6351
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6289
+#line 6353
                 MOVE_ROLLOUT,
             },
             },
             {
-#line 6291
+#line 6355
             .species = SPECIES_ANORITH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6291
+#line 6355
             .heldItem = ITEM_PASSHO_BERRY,
-#line 6294
+#line 6358
             .ev = TRAINER_PARTY_EVS(52, 0, 0, 80, 0, 0),
-#line 6296
+#line 6360
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6292
+#line 6356
             .ability = ABILITY_BATTLE_ARMOR,
-#line 6293
+#line 6357
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6295
+#line 6359
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6297
+#line 6361
                 MOVE_FURY_CUTTER,
             },
             },
         },
     },
-#line 6299
+#line 6363
     [DIFFICULTY_NORMAL][TRAINER_0A8FC005] =
     {
-#line 6300
+#line 6364
         .trainerName = _("0A8FC005"),
-#line 6301
+#line 6365
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6303
+#line 6367
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6302
+#line 6366
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6305
+#line 6369
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6304
+#line 6368
         .mapSec = MAPSEC_ROUTE4,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16804,25 +17028,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6307
+#line 6371
             .species = SPECIES_PELIPPER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6307
+#line 6371
             .heldItem = ITEM_NEVER_MELT_ICE,
-#line 6310
+#line 6374
             .ev = TRAINER_PARTY_EVS(72, 0, 0, 0, 56, 0),
-#line 6312
+#line 6376
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6308
+#line 6372
             .ability = ABILITY_DRIZZLE,
-#line 6309
+#line 6373
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6311
+#line 6375
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6313
+#line 6377
                 MOVE_AIR_CUTTER,
                 MOVE_ICY_WIND,
                 MOVE_CHILLING_WATER,
@@ -16830,25 +17054,25 @@
             },
             },
             {
-#line 6318
+#line 6382
             .species = SPECIES_TYRUNT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6318
+#line 6382
             .heldItem = ITEM_UTILITY_UMBRELLA,
-#line 6321
+#line 6385
             .ev = TRAINER_PARTY_EVS(40, 0, 0, 0, 0, 88),
-#line 6323
+#line 6387
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6319
+#line 6383
             .ability = ABILITY_STURDY,
-#line 6320
+#line 6384
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6322
+#line 6386
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6324
+#line 6388
                 MOVE_ICE_FANG,
                 MOVE_THUNDER_FANG,
                 MOVE_BITE,
@@ -16856,25 +17080,25 @@
             },
             },
             {
-#line 6329
+#line 6393
             .species = SPECIES_TENTACOOL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6329
+#line 6393
             .heldItem = ITEM_LEFTOVERS,
-#line 6332
+#line 6396
             .ev = TRAINER_PARTY_EVS(84, 0, 56, 0, 0, 0),
-#line 6334
+#line 6398
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6330
+#line 6394
             .ability = ABILITY_RAIN_DISH,
-#line 6331
+#line 6395
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6333
+#line 6397
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6335
+#line 6399
                 MOVE_WHIRLPOOL,
                 MOVE_TOXIC,
                 MOVE_ACID_ARMOR,
@@ -16882,25 +17106,25 @@
             },
             },
             {
-#line 6340
+#line 6404
             .species = SPECIES_GLIGAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6340
+#line 6404
             .heldItem = ITEM_SNOWBALL,
-#line 6343
+#line 6407
             .ev = TRAINER_PARTY_EVS(0, 56, 0, 0, 0, 76),
-#line 6345
+#line 6409
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6341
+#line 6405
             .ability = ABILITY_HYPER_CUTTER,
-#line 6342
+#line 6406
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6344
+#line 6408
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6346
+#line 6410
                 MOVE_VENOSHOCK,
                 MOVE_AERIAL_ACE,
                 MOVE_BREAKING_SWIPE,
@@ -16909,20 +17133,20 @@
             },
         },
     },
-#line 6351
+#line 6415
     [DIFFICULTY_NORMAL][TRAINER_0AAB38A6] =
     {
-#line 6352
+#line 6416
         .trainerName = _("0AAB38A6"),
-#line 6353
+#line 6417
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6355
+#line 6419
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6354
+#line 6418
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6357
+#line 6421
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6356
+#line 6420
         .mapSec = MAPSEC_ROUTE4,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -16930,48 +17154,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6359
+#line 6423
             .species = SPECIES_NINETALES,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6362
+#line 6426
             .ev = TRAINER_PARTY_EVS(60, 0, 0, 0, 72, 0),
-#line 6364
+#line 6428
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6360
+#line 6424
             .ability = ABILITY_FLASH_FIRE,
-#line 6361
+#line 6425
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6363
+#line 6427
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6365
+#line 6429
                 MOVE_EXTRASENSORY,
                 MOVE_SCORCHING_SANDS,
                 MOVE_HEX,
             },
             },
             {
-#line 6369
+#line 6433
             .species = SPECIES_KLAWF,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6369
+#line 6433
             .heldItem = ITEM_AIR_BALLOON,
-#line 6372
+#line 6436
             .ev = TRAINER_PARTY_EVS(48, 0, 0, 0, 0, 88),
-#line 6374
+#line 6438
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6370
+#line 6434
             .ability = ABILITY_ANGER_SHELL,
-#line 6371
+#line 6435
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6373
+#line 6437
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6375
+#line 6439
                 MOVE_BULLDOZE,
                 MOVE_VISE_GRIP,
                 MOVE_METAL_CLAW,
@@ -16979,25 +17203,25 @@
             },
             },
             {
-#line 6380
+#line 6444
             .species = SPECIES_KOFFING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6380
+#line 6444
             .heldItem = ITEM_ASSAULT_VEST,
-#line 6383
+#line 6447
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 44, 84),
-#line 6385
+#line 6449
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6381
+#line 6445
             .ability = ABILITY_LEVITATE,
-#line 6382
+#line 6446
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6384
+#line 6448
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6386
+#line 6450
                 MOVE_SLUDGE_BOMB,
                 MOVE_BODY_SLAM,
                 MOVE_VENOSHOCK,
@@ -17006,20 +17230,20 @@
             },
         },
     },
-#line 6391
+#line 6455
     [DIFFICULTY_NORMAL][TRAINER_0AF40D0B] =
     {
-#line 6392
+#line 6456
         .trainerName = _("0AF40D0B"),
-#line 6393
+#line 6457
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6395
+#line 6459
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6394
+#line 6458
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6397
+#line 6461
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6396
+#line 6460
         .mapSec = MAPSEC_PERLACIA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17027,48 +17251,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6399
+#line 6463
             .species = SPECIES_GOREBYSS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6399
+#line 6463
             .heldItem = ITEM_CHOICE_SCARF,
-#line 6402
+#line 6466
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6404
+#line 6468
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6400
+#line 6464
             .ability = ABILITY_SWIFT_SWIM,
-#line 6401
+#line 6465
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6403
+#line 6467
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6405
+#line 6469
                 MOVE_SURF,
             },
             },
             {
-#line 6407
+#line 6471
             .species = SPECIES_LILEEP,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6407
+#line 6471
             .heldItem = ITEM_CHOPLE_BERRY,
-#line 6410
+#line 6474
             .ev = TRAINER_PARTY_EVS(52, 0, 76, 0, 0, 0),
-#line 6412
+#line 6476
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6408
+#line 6472
             .ability = ABILITY_STORM_DRAIN,
-#line 6409
+#line 6473
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6411
+#line 6475
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6413
+#line 6477
                 MOVE_EARTH_POWER,
                 MOVE_GIGA_DRAIN,
                 MOVE_ANCIENT_POWER,
@@ -17077,20 +17301,20 @@
             },
         },
     },
-#line 6418
+#line 6482
     [DIFFICULTY_NORMAL][TRAINER_0B48C7D0] =
     {
-#line 6419
+#line 6483
         .trainerName = _("0B48C7D0"),
-#line 6420
+#line 6484
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6422
+#line 6486
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6421
+#line 6485
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6423
+#line 6487
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6424
+#line 6488
         .mapSec = MAPSEC_PERLACIA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17098,25 +17322,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6426
+#line 6490
             .species = SPECIES_AERODACTYL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6426
+#line 6490
             .heldItem = ITEM_DRAGON_FANG,
-#line 6429
+#line 6493
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 132, 0, 0),
-#line 6431
+#line 6495
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6427
+#line 6491
             .ability = ABILITY_PRESSURE,
-#line 6428
+#line 6492
             .lvl = 33,
             .ball = POKEBALL_COUNT,
-#line 6430
+#line 6494
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6432
+#line 6496
                 MOVE_ICE_FANG,
                 MOVE_BITE,
                 MOVE_DRAGON_BREATH,
@@ -17124,50 +17348,50 @@
             },
             },
             {
-#line 6437
+#line 6501
             .species = SPECIES_SILICOBRA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6437
+#line 6501
             .heldItem = ITEM_SMOOTH_ROCK,
-#line 6440
+#line 6504
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 124),
-#line 6442
+#line 6506
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6438
+#line 6502
             .ability = ABILITY_SAND_SPIT,
-#line 6439
+#line 6503
             .lvl = 34,
             .ball = POKEBALL_COUNT,
-#line 6441
+#line 6505
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6443
+#line 6507
                 MOVE_SAND_TOMB,
                 MOVE_WRAP,
                 MOVE_GLARE,
             },
             },
             {
-#line 6447
+#line 6511
             .species = SPECIES_SPIRITOMB,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6447
+#line 6511
             .heldItem = ITEM_WIDE_LENS,
-#line 6450
+#line 6514
             .ev = TRAINER_PARTY_EVS(36, 0, 88, 0, 0, 0),
-#line 6452
+#line 6516
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6448
+#line 6512
             .ability = ABILITY_PRESSURE,
-#line 6449
+#line 6513
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6451
+#line 6515
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6453
+#line 6517
                 MOVE_DREAM_EATER,
                 MOVE_NIGHT_SHADE,
                 MOVE_HYPNOSIS,
@@ -17175,25 +17399,25 @@
             },
             },
             {
-#line 6458
+#line 6522
             .species = SPECIES_DONPHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6458
+#line 6522
             .heldItem = ITEM_HARD_STONE,
-#line 6461
+#line 6525
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 124),
-#line 6463
+#line 6527
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6459
+#line 6523
             .ability = ABILITY_SAND_VEIL,
-#line 6460
+#line 6524
             .lvl = 34,
             .ball = POKEBALL_COUNT,
-#line 6462
+#line 6526
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6464
+#line 6528
                 MOVE_FIRE_FANG,
                 MOVE_ICE_FANG,
                 MOVE_THUNDER_FANG,
@@ -17202,20 +17426,20 @@
             },
         },
     },
-#line 6469
+#line 6533
     [DIFFICULTY_NORMAL][TRAINER_0C0A9B2F] =
     {
-#line 6470
+#line 6534
         .trainerName = _("0C0A9B2F"),
-#line 6471
+#line 6535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6473
+#line 6537
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6472
+#line 6536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6475
+#line 6539
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6474
+#line 6538
         .mapSec = MAPSEC_PERLACIA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17223,25 +17447,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6477
+#line 6541
             .species = SPECIES_TIRTOUGA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6477
+#line 6541
             .heldItem = ITEM_RINDO_BERRY,
-#line 6480
+#line 6544
             .ev = TRAINER_PARTY_EVS(0, 32, 0, 0, 0, 96),
-#line 6482
+#line 6546
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6478
+#line 6542
             .ability = ABILITY_SOLID_ROCK,
-#line 6479
+#line 6543
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6481
+#line 6545
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6483
+#line 6547
                 MOVE_ZEN_HEADBUTT,
                 MOVE_ANCIENT_POWER,
                 MOVE_AQUA_JET,
@@ -17249,25 +17473,25 @@
             },
             },
             {
-#line 6488
+#line 6552
             .species = SPECIES_SHIELDON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6488
+#line 6552
             .heldItem = ITEM_RED_CARD,
-#line 6491
+#line 6555
             .ev = TRAINER_PARTY_EVS(48, 80, 0, 0, 0, 0),
-#line 6493
+#line 6557
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6489
+#line 6553
             .ability = ABILITY_STURDY,
-#line 6490
+#line 6554
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6492
+#line 6556
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6494
+#line 6558
                 MOVE_IRON_HEAD,
                 MOVE_POWER_GEM,
                 MOVE_METAL_BURST,
@@ -17275,25 +17499,25 @@
             },
             },
             {
-#line 6499
+#line 6563
             .species = SPECIES_KLEAVOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6499
+#line 6563
             .heldItem = ITEM_KINGS_ROCK,
-#line 6502
+#line 6566
             .ev = TRAINER_PARTY_EVS(20, 0, 0, 0, 0, 108),
-#line 6504
+#line 6568
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6500
+#line 6564
             .ability = ABILITY_SWARM,
-#line 6501
+#line 6565
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6503
+#line 6567
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6505
+#line 6569
                 MOVE_WING_ATTACK,
                 MOVE_POUNCE,
                 MOVE_SMACK_DOWN,
@@ -17302,20 +17526,20 @@
             },
         },
     },
-#line 6510
+#line 6574
     [DIFFICULTY_NORMAL][TRAINER_0C543C80] =
     {
-#line 6511
+#line 6575
         .trainerName = _("0C543C80"),
-#line 6512
+#line 6576
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6514
+#line 6578
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6513
+#line 6577
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6516
+#line 6580
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6515
+#line 6579
         .mapSec = MAPSEC_ROUTE2,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17323,25 +17547,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6518
+#line 6582
             .species = SPECIES_SIGILYPH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6518
+#line 6582
             .heldItem = ITEM_FLAME_ORB,
-#line 6521
+#line 6585
             .ev = TRAINER_PARTY_EVS(52, 0, 0, 80, 0, 0),
-#line 6523
+#line 6587
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6519
+#line 6583
             .ability = ABILITY_MAGIC_GUARD,
-#line 6520
+#line 6584
             .lvl = 34,
             .ball = POKEBALL_COUNT,
-#line 6522
+#line 6586
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6524
+#line 6588
                 MOVE_AIR_CUTTER,
                 MOVE_CONFUSION,
                 MOVE_PSYCHO_SHIFT,
@@ -17349,49 +17573,49 @@
             },
             },
             {
-#line 6529
+#line 6593
             .species = SPECIES_CLEFAIRY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6529
+#line 6593
             .heldItem = ITEM_EJECT_BUTTON,
-#line 6532
+#line 6596
             .ev = TRAINER_PARTY_EVS(44, 0, 80, 0, 0, 0),
-#line 6534
+#line 6598
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6530
+#line 6594
             .ability = ABILITY_FRIEND_GUARD,
-#line 6531
+#line 6595
             .lvl = 37,
             .ball = POKEBALL_COUNT,
-#line 6533
+#line 6597
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6535
+#line 6599
                 MOVE_FOLLOW_ME,
                 MOVE_HELPING_HAND,
             },
             },
             {
-#line 6538
+#line 6602
             .species = SPECIES_TRAPINCH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6538
+#line 6602
             .heldItem = ITEM_FOCUS_SASH,
-#line 6541
+#line 6605
             .ev = TRAINER_PARTY_EVS(0, 128, 0, 0, 0, 0),
-#line 6543
+#line 6607
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6539
+#line 6603
             .ability = ABILITY_ARENA_TRAP,
-#line 6540
+#line 6604
             .lvl = 33,
             .ball = POKEBALL_COUNT,
-#line 6542
+#line 6606
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6544
+#line 6608
                 MOVE_BULLDOZE,
                 MOVE_ROCK_TOMB,
                 MOVE_BITE,
@@ -17399,25 +17623,25 @@
             },
             },
             {
-#line 6549
+#line 6613
             .species = SPECIES_COFAGRIGUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6549
+#line 6613
             .heldItem = ITEM_SITRUS_BERRY,
-#line 6552
+#line 6616
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 124),
-#line 6554
+#line 6618
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6550
+#line 6614
             .ability = ABILITY_MUMMY,
-#line 6551
+#line 6615
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6553
+#line 6617
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6555
+#line 6619
                 MOVE_HEX,
                 MOVE_WILL_O_WISP,
                 MOVE_MEAN_LOOK,
@@ -17426,20 +17650,20 @@
             },
         },
     },
-#line 6560
+#line 6624
     [DIFFICULTY_NORMAL][TRAINER_0C95C833] =
     {
-#line 6561
+#line 6625
         .trainerName = _("0C95C833"),
-#line 6562
+#line 6626
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6564
+#line 6628
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6563
+#line 6627
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6565
+#line 6629
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6566
+#line 6630
         .mapSec = MAPSEC_PERLACIA_CITY,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17447,48 +17671,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6568
+#line 6632
             .species = SPECIES_CARVANHA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6568
+#line 6632
             .heldItem = ITEM_CHOICE_SCARF,
-#line 6571
+#line 6635
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 124, 0, 0),
-#line 6573
+#line 6637
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6569
+#line 6633
             .ability = ABILITY_ROUGH_SKIN,
-#line 6570
+#line 6634
             .lvl = 36,
             .ball = POKEBALL_COUNT,
-#line 6572
+#line 6636
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6574
+#line 6638
                 MOVE_FLIP_TURN,
             },
             },
             {
-#line 6576
+#line 6640
             .species = SPECIES_ARCTOZOLT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6576
+#line 6640
             .heldItem = ITEM_SALAC_BERRY,
-#line 6579
+#line 6643
             .ev = TRAINER_PARTY_EVS(24, 0, 0, 100, 0, 0),
-#line 6581
+#line 6645
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6577
+#line 6641
             .ability = ABILITY_VOLT_ABSORB,
-#line 6578
+#line 6642
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6580
+#line 6644
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6582
+#line 6646
                 MOVE_ROCK_TOMB,
                 MOVE_ICY_WIND,
                 MOVE_ELECTRO_BALL,
@@ -17496,25 +17720,25 @@
             },
             },
             {
-#line 6587
+#line 6651
             .species = SPECIES_TORKOAL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6587
+#line 6651
             .heldItem = ITEM_SOFT_SAND,
-#line 6590
+#line 6654
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 0, 128),
-#line 6592
+#line 6656
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6588
+#line 6652
             .ability = ABILITY_SHELL_ARMOR,
-#line 6589
+#line 6653
             .lvl = 35,
             .ball = POKEBALL_COUNT,
-#line 6591
+#line 6655
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6593
+#line 6657
                 MOVE_BODY_SLAM,
                 MOVE_FLAME_WHEEL,
                 MOVE_BULLDOZE,
@@ -17523,20 +17747,20 @@
             },
         },
     },
-#line 6598
+#line 6662
     [DIFFICULTY_NORMAL][TRAINER_0D416B2C] =
     {
-#line 6599
+#line 6663
         .trainerName = _("0D416B2C"),
-#line 6600
+#line 6664
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6602
+#line 6666
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6601
+#line 6665
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6603
+#line 6667
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6604
+#line 6668
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17544,50 +17768,50 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6606
+#line 6670
             .species = SPECIES_WATTREL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6606
+#line 6670
             .heldItem = ITEM_EVIOLITE,
-#line 6609
+#line 6673
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 80, 60, 0),
-#line 6611
+#line 6675
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6607
+#line 6671
             .ability = ABILITY_WIND_POWER,
-#line 6608
+#line 6672
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6610
+#line 6674
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6611
+#line 6675
                 MOVE_DISCHARGE,
                 MOVE_U_TURN,
                 MOVE_TAILWIND,
             },
             },
             {
-#line 6615
+#line 6679
             .species = SPECIES_HITMONLEE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6615
+#line 6679
             .heldItem = ITEM_CELL_BATTERY,
-#line 6618
+#line 6682
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 60, 0, 0),
-#line 6620
+#line 6684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6616
+#line 6680
             .ability = ABILITY_LIMBER,
-#line 6617
+#line 6681
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6619
+#line 6683
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6620
+#line 6684
                 MOVE_BLAZE_KICK,
                 MOVE_SUCKER_PUNCH,
                 MOVE_LOW_SWEEP,
@@ -17595,25 +17819,25 @@
             },
             },
             {
-#line 6625
+#line 6689
             .species = SPECIES_DRAGONAIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6625
+#line 6689
             .heldItem = ITEM_TOXIC_ORB,
-#line 6628
+#line 6692
             .ev = TRAINER_PARTY_EVS(60, 0, 0, 0, 0, 80),
-#line 6630
+#line 6694
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6626
+#line 6690
             .ability = ABILITY_MARVEL_SCALE,
-#line 6627
+#line 6691
             .lvl = 42,
             .ball = POKEBALL_COUNT,
-#line 6629
+#line 6693
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6630
+#line 6694
                 MOVE_BODY_SLAM,
                 MOVE_WATER_PULSE,
                 MOVE_BREAKING_SWIPE,
@@ -17621,25 +17845,25 @@
             },
             },
             {
-#line 6635
+#line 6699
             .species = SPECIES_DONPHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6635
+#line 6699
             .heldItem = ITEM_IAPAPA_BERRY,
-#line 6638
+#line 6702
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 0, 0, 60),
-#line 6640
+#line 6704
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6636
+#line 6700
             .ability = ABILITY_STURDY,
-#line 6637
+#line 6701
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6639
+#line 6703
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6640
+#line 6704
                 MOVE_STOMPING_TANTRUM,
                 MOVE_KNOCK_OFF,
                 MOVE_FIRE_FANG,
@@ -17648,20 +17872,20 @@
             },
         },
     },
-#line 6645
+#line 6709
     [DIFFICULTY_NORMAL][TRAINER_0D4BA0F1] =
     {
-#line 6646
+#line 6710
         .trainerName = _("0D4BA0F1"),
-#line 6647
+#line 6711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6649
+#line 6713
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6648
+#line 6712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6650
+#line 6714
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6651
+#line 6715
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17669,25 +17893,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6653
+#line 6717
             .species = SPECIES_BARRASKEWDA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6653
+#line 6717
             .heldItem = ITEM_ROCKY_HELMET,
-#line 6656
+#line 6720
             .ev = TRAINER_PARTY_EVS(0, 0, 40, 0, 0, 100),
-#line 6658
+#line 6722
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6654
+#line 6718
             .ability = ABILITY_PROPELLER_TAIL,
-#line 6655
+#line 6719
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6657
+#line 6721
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6658
+#line 6722
                 MOVE_DIVE,
                 MOVE_DRILL_RUN,
                 MOVE_BITE,
@@ -17695,25 +17919,25 @@
             },
             },
             {
-#line 6663
+#line 6727
             .species = SPECIES_CRAMORANT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6663
+#line 6727
             .heldItem = ITEM_MYSTIC_WATER,
-#line 6666
+#line 6730
             .ev = TRAINER_PARTY_EVS(0, 0, 40, 100, 0, 0),
-#line 6668
+#line 6732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6664
+#line 6728
             .ability = ABILITY_GULP_MISSILE,
-#line 6665
+#line 6729
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6667
+#line 6731
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6668
+#line 6732
                 MOVE_SURF,
                 MOVE_DIVE,
                 MOVE_DRILL_PECK,
@@ -17721,25 +17945,25 @@
             },
             },
             {
-#line 6673
+#line 6737
             .species = SPECIES_PAWMOT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6673
+#line 6737
             .heldItem = ITEM_PUNCHING_GLOVE,
-#line 6676
+#line 6740
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 100, 0, 40),
-#line 6678
+#line 6742
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6674
+#line 6738
             .ability = ABILITY_VOLT_ABSORB,
-#line 6675
+#line 6739
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6677
+#line 6741
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6678
+#line 6742
                 MOVE_THUNDER_PUNCH,
                 MOVE_ICE_PUNCH,
                 MOVE_BRICK_BREAK,
@@ -17748,20 +17972,20 @@
             },
         },
     },
-#line 6683
+#line 6747
     [DIFFICULTY_NORMAL][TRAINER_0DA021EF] =
     {
-#line 6684
+#line 6748
         .trainerName = _("Billy"),
-#line 6685
+#line 6749
         .trainerPic = TRAINER_PIC_BIRD_KEEPER,
-#line 6687
+#line 6751
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6686
+#line 6750
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6688
+#line 6752
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6689
+#line 6753
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17769,25 +17993,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6691
+#line 6755
             .species = SPECIES_SQUAWKABILLY_BLUE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6691
+#line 6755
             .heldItem = ITEM_WACAN_BERRY,
-#line 6694
+#line 6758
             .ev = TRAINER_PARTY_EVS(0, 0, 80, 0, 0, 60),
-#line 6696
+#line 6760
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6692
+#line 6756
             .ability = ABILITY_INTIMIDATE,
-#line 6693
+#line 6757
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6695
+#line 6759
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6696
+#line 6760
                 MOVE_TAKE_DOWN,
                 MOVE_FLY,
                 MOVE_U_TURN,
@@ -17795,25 +18019,25 @@
             },
             },
             {
-#line 6701
+#line 6765
             .species = SPECIES_SQUAWKABILLY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6701
+#line 6765
             .heldItem = ITEM_FLAME_ORB,
-#line 6704
+#line 6768
             .ev = TRAINER_PARTY_EVS(60, 0, 0, 80, 0, 0),
-#line 6706
+#line 6770
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6702
+#line 6766
             .ability = ABILITY_GUTS,
-#line 6703
+#line 6767
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6705
+#line 6769
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6706
+#line 6770
                 MOVE_FACADE,
                 MOVE_LASH_OUT,
                 MOVE_DUAL_WINGBEAT,
@@ -17821,25 +18045,25 @@
             },
             },
             {
-#line 6711
+#line 6775
             .species = SPECIES_SQUAWKABILLY_YELLOW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6711
+#line 6775
             .heldItem = ITEM_WIDE_LENS,
-#line 6714
+#line 6778
             .ev = TRAINER_PARTY_EVS(0, 60, 0, 80, 0, 0),
-#line 6716
+#line 6780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6712
+#line 6776
             .ability = ABILITY_HUSTLE,
-#line 6713
+#line 6777
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 6715
+#line 6779
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6716
+#line 6780
                 MOVE_FOUL_PLAY,
                 MOVE_AERIAL_ACE,
                 MOVE_QUICK_ATTACK,
@@ -17847,25 +18071,25 @@
             },
             },
             {
-#line 6721
+#line 6785
             .species = SPECIES_SQUAWKABILLY_WHITE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6721
+#line 6785
             .heldItem = ITEM_LIFE_ORB,
-#line 6724
+#line 6788
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 80, 60, 0),
-#line 6726
+#line 6790
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6722
+#line 6786
             .ability = ABILITY_SHEER_FORCE,
-#line 6723
+#line 6787
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6725
+#line 6789
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6726
+#line 6790
                 MOVE_HURRICANE,
                 MOVE_HEAT_WAVE,
                 MOVE_POUNCE,
@@ -17874,20 +18098,20 @@
             },
         },
     },
-#line 6731
+#line 6795
     [DIFFICULTY_NORMAL][TRAINER_0E19F1A8] =
     {
-#line 6732
+#line 6796
         .trainerName = _("0E19F1A8"),
-#line 6733
+#line 6797
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6735
+#line 6799
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6734
+#line 6798
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6736
+#line 6800
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6737
+#line 6801
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -17895,25 +18119,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6739
+#line 6803
             .species = SPECIES_HITMONCHAN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6739
+#line 6803
             .heldItem = ITEM_ADRENALINE_ORB,
-#line 6742
+#line 6806
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 60, 0, 0),
-#line 6744
+#line 6808
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6740
+#line 6804
             .ability = ABILITY_KEEN_EYE,
-#line 6741
+#line 6805
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6743
+#line 6807
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6744
+#line 6808
                 MOVE_DRAIN_PUNCH,
                 MOVE_THUNDER_PUNCH,
                 MOVE_ICE_PUNCH,
@@ -17921,25 +18145,25 @@
             },
             },
             {
-#line 6749
+#line 6813
             .species = SPECIES_FLETCHINDER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6749
+#line 6813
             .heldItem = ITEM_FOCUS_SASH,
-#line 6752
+#line 6816
             .ev = TRAINER_PARTY_EVS(0, 60, 0, 80, 0, 0),
-#line 6754
+#line 6818
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6750
+#line 6814
             .ability = ABILITY_GALE_WINGS,
-#line 6751
+#line 6815
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6753
+#line 6817
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6754
+#line 6818
                 MOVE_FLY,
                 MOVE_STEEL_WING,
                 MOVE_FIRE_SPIN,
@@ -17947,25 +18171,25 @@
             },
             },
             {
-#line 6759
+#line 6823
             .species = SPECIES_SHIFTRY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6759
+#line 6823
             .heldItem = ITEM_POWER_HERB,
-#line 6762
+#line 6826
             .ev = TRAINER_PARTY_EVS(0, 0, 80, 0, 0, 60),
-#line 6764
+#line 6828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6760
+#line 6824
             .ability = ABILITY_WIND_RIDER,
-#line 6761
+#line 6825
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6763
+#line 6827
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6764
+#line 6828
                 MOVE_SOLAR_BLADE,
                 MOVE_THIEF,
                 MOVE_AERIAL_ACE,
@@ -17973,25 +18197,25 @@
             },
             },
             {
-#line 6769
+#line 6833
             .species = SPECIES_NOIVERN,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6769
+#line 6833
             .heldItem = ITEM_YACHE_BERRY,
-#line 6772
+#line 6836
             .ev = TRAINER_PARTY_EVS(0, 0, 80, 0, 0, 60),
-#line 6774
+#line 6838
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6770
+#line 6834
             .ability = ABILITY_INFILTRATOR,
-#line 6771
+#line 6835
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6773
+#line 6837
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6774
+#line 6838
                 MOVE_DRAGON_PULSE,
                 MOVE_PSYCHIC_NOISE,
                 MOVE_AIR_CUTTER,
@@ -18000,20 +18224,20 @@
             },
         },
     },
-#line 6779
+#line 6843
     [DIFFICULTY_NORMAL][TRAINER_0E42221A] =
     {
-#line 6780
+#line 6844
         .trainerName = _("0E42221A"),
-#line 6781
+#line 6845
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6783
+#line 6847
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6782
+#line 6846
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6784
+#line 6848
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6785
+#line 6849
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18021,25 +18245,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6787
+#line 6851
             .species = SPECIES_SCYTHER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6787
+#line 6851
             .heldItem = ITEM_WEAKNESS_POLICY,
-#line 6790
+#line 6854
             .ev = TRAINER_PARTY_EVS(0, 0, 140, 0, 0, 0),
-#line 6792
+#line 6856
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6788
+#line 6852
             .ability = ABILITY_TECHNICIAN,
-#line 6789
+#line 6853
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 6791
+#line 6855
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6792
+#line 6856
                 MOVE_BUG_BITE,
                 MOVE_TRAILBLAZE,
                 MOVE_DUAL_WINGBEAT,
@@ -18047,48 +18271,48 @@
             },
             },
             {
-#line 6797
+#line 6861
             .species = SPECIES_SWOOBAT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6797
+#line 6861
             .heldItem = ITEM_MARANGA_BERRY,
-#line 6800
+#line 6864
             .ev = TRAINER_PARTY_EVS(0, 0, 60, 0, 0, 80),
-#line 6802
+#line 6866
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6798
+#line 6862
             .ability = ABILITY_SIMPLE,
-#line 6799
+#line 6863
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 6801
+#line 6865
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6802
+#line 6866
                 MOVE_STORED_POWER,
                 MOVE_CALM_MIND,
             },
             },
             {
-#line 6805
+#line 6869
             .species = SPECIES_GREEDENT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6805
+#line 6869
             .heldItem = ITEM_GANLON_BERRY,
-#line 6808
+#line 6872
             .ev = TRAINER_PARTY_EVS(0, 80, 60, 0, 0, 0),
-#line 6809
+#line 6873
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6806
+#line 6870
             .ability = ABILITY_CHEEK_POUCH,
-#line 6807
+#line 6871
             .lvl = 45,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6809
+#line 6873
                 MOVE_BODY_PRESS,
                 MOVE_BODY_SLAM,
                 MOVE_SEED_BOMB,
@@ -18097,20 +18321,20 @@
             },
         },
     },
-#line 6814
+#line 6878
     [DIFFICULTY_NORMAL][TRAINER_0ED24EF1] =
     {
-#line 6815
+#line 6879
         .trainerName = _("0ED24EF1"),
-#line 6816
+#line 6880
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6818
+#line 6882
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6817
+#line 6881
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6819
+#line 6883
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6820
+#line 6884
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18118,25 +18342,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6822
+#line 6886
             .species = SPECIES_GLISCOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6822
+#line 6886
             .heldItem = ITEM_YACHE_BERRY,
-#line 6825
+#line 6889
             .ev = TRAINER_PARTY_EVS(0, 60, 0, 80, 0, 0),
-#line 6827
+#line 6891
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6823
+#line 6887
             .ability = ABILITY_HYPER_CUTTER,
-#line 6824
+#line 6888
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6826
+#line 6890
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6827
+#line 6891
                 MOVE_ROCK_SLIDE,
                 MOVE_BULLDOZE,
                 MOVE_FIRE_FANG,
@@ -18144,25 +18368,25 @@
             },
             },
             {
-#line 6832
+#line 6896
             .species = SPECIES_SHUCKLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6832
+#line 6896
             .heldItem = ITEM_LEFTOVERS,
-#line 6835
+#line 6899
             .ev = TRAINER_PARTY_EVS(0, 0, 80, 0, 0, 60),
-#line 6837
+#line 6901
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6833
+#line 6897
             .ability = ABILITY_STURDY,
-#line 6834
+#line 6898
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 6836
+#line 6900
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6837
+#line 6901
                 MOVE_KNOCK_OFF,
                 MOVE_INFESTATION,
                 MOVE_WRAP,
@@ -18170,25 +18394,25 @@
             },
             },
             {
-#line 6842
+#line 6906
             .species = SPECIES_KINGLER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6842
+#line 6906
             .heldItem = ITEM_ASSAULT_VEST,
-#line 6845
+#line 6909
             .ev = TRAINER_PARTY_EVS(0, 0, 60, 0, 0, 80),
-#line 6847
+#line 6911
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6843
+#line 6907
             .ability = ABILITY_SHEER_FORCE,
-#line 6844
+#line 6908
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6846
+#line 6910
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6847
+#line 6911
                 MOVE_LIQUIDATION,
                 MOVE_NIGHT_SLASH,
                 MOVE_METAL_CLAW,
@@ -18197,20 +18421,20 @@
             },
         },
     },
-#line 6852
+#line 6916
     [DIFFICULTY_NORMAL][TRAINER_0F03CF8D] =
     {
-#line 6853
+#line 6917
         .trainerName = _("0F03CF8D"),
-#line 6854
+#line 6918
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6856
+#line 6920
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 6855
+#line 6919
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6858
+#line 6922
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6857
+#line 6921
         .mapSec = MAPSEC_ARANTRAZ,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18218,25 +18442,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6860
+#line 6924
             .species = SPECIES_PIDGEOT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6860
+#line 6924
             .heldItem = ITEM_SCOPE_LENS,
-#line 6863
+#line 6927
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 0, 60, 0),
-#line 6865
+#line 6929
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6861
+#line 6925
             .ability = ABILITY_KEEN_EYE,
-#line 6862
+#line 6926
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 6864
+#line 6928
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6866
+#line 6930
                 MOVE_STEEL_WING,
                 MOVE_TAILWIND,
                 MOVE_UPROAR,
@@ -18244,25 +18468,25 @@
             },
             },
             {
-#line 6871
+#line 6935
             .species = SPECIES_BOMBIRDIER,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6871
+#line 6935
             .heldItem = ITEM_CHARTI_BERRY,
-#line 6874
+#line 6938
             .ev = TRAINER_PARTY_EVS(0, 80, 0, 0, 0, 60),
-#line 6876
+#line 6940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6872
+#line 6936
             .ability = ABILITY_ROCKY_PAYLOAD,
-#line 6873
+#line 6937
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6875
+#line 6939
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6876
+#line 6940
                 MOVE_FOUL_PLAY,
                 MOVE_ROCK_SLIDE,
                 MOVE_ACROBATICS,
@@ -18270,25 +18494,25 @@
             },
             },
             {
-#line 6881
+#line 6945
             .species = SPECIES_ORICORIO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6881
+#line 6945
             .heldItem = ITEM_ABSORB_BULB,
-#line 6884
+#line 6948
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 60, 80),
-#line 6886
+#line 6950
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6882
+#line 6946
             .ability = ABILITY_DANCER,
-#line 6883
+#line 6947
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6885
+#line 6949
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6886
+#line 6950
                 MOVE_REVELATION_DANCE,
                 MOVE_ACROBATICS,
                 MOVE_SWORDS_DANCE,
@@ -18296,25 +18520,25 @@
             },
             },
             {
-#line 6891
+#line 6955
             .species = SPECIES_NOCTOWL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6891
+#line 6955
             .heldItem = ITEM_WIDE_LENS,
-#line 6894
+#line 6958
             .ev = TRAINER_PARTY_EVS(0, 0, 100, 40, 0, 0),
-#line 6896
+#line 6960
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 6892
+#line 6956
             .ability = ABILITY_KEEN_EYE,
-#line 6893
+#line 6957
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 6895
+#line 6959
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6896
+#line 6960
                 MOVE_DREAM_EATER,
                 MOVE_AIR_SLASH,
                 MOVE_PSYBEAM,
@@ -18323,20 +18547,20 @@
             },
         },
     },
-#line 6901
+#line 6965
     [DIFFICULTY_NORMAL][TRAINER_0F3D8011] =
     {
-#line 6902
+#line 6966
         .trainerName = _("0F3D8011"),
-#line 6903
+#line 6967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6905
+#line 6969
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6904
+#line 6968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6906
+#line 6970
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6907
+#line 6971
         .mapSec = MAPSEC_ROUTE11,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18344,25 +18568,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6909
+#line 6973
             .species = SPECIES_CLEFAIRY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6909
+#line 6973
             .heldItem = ITEM_EVIOLITE,
-#line 6912
+#line 6976
             .ev = TRAINER_PARTY_EVS(252, 0, 48, 0, 0, 0),
-#line 6913
+#line 6977
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 6910
+#line 6974
             .ability = ABILITY_FRIEND_GUARD,
-#line 6911
+#line 6975
             .lvl = 54,
             .ball = POKEBALL_COUNT,
-#line 6914
+#line 6978
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6915
+#line 6979
                 MOVE_FOLLOW_ME,
                 MOVE_REFLECT,
                 MOVE_LIGHT_SCREEN,
@@ -18370,25 +18594,25 @@
             },
             },
             {
-#line 6920
+#line 6984
             .species = SPECIES_GREEDENT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6920
+#line 6984
             .heldItem = ITEM_SITRUS_BERRY,
-#line 6923
+#line 6987
             .ev = TRAINER_PARTY_EVS(252, 48, 0, 0, 0, 0),
-#line 6924
+#line 6988
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6921
+#line 6985
             .ability = ABILITY_CHEEK_POUCH,
-#line 6922
+#line 6986
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 6925
+#line 6989
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6926
+#line 6990
                 MOVE_BODY_PRESS,
                 MOVE_BODY_SLAM,
                 MOVE_COUNTER,
@@ -18396,25 +18620,25 @@
             },
             },
             {
-#line 6931
+#line 6995
             .species = SPECIES_ARBOLIVA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6931
+#line 6995
             .heldItem = ITEM_SITRUS_BERRY,
-#line 6934
+#line 6998
             .ev = TRAINER_PARTY_EVS(48, 0, 0, 0, 252, 0),
-#line 6935
+#line 6999
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 6932
+#line 6996
             .ability = ABILITY_HARVEST,
-#line 6933
+#line 6997
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 6936
+#line 7000
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6937
+#line 7001
                 MOVE_GIGA_DRAIN,
                 MOVE_EARTH_POWER,
                 MOVE_LEECH_SEED,
@@ -18422,25 +18646,25 @@
             },
             },
             {
-#line 6942
+#line 7006
             .species = SPECIES_PACHIRISU,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6942
+#line 7006
             .heldItem = ITEM_SITRUS_BERRY,
-#line 6945
+#line 7009
             .ev = TRAINER_PARTY_EVS(252, 0, 0, 48, 0, 0),
-#line 6946
+#line 7010
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6943
+#line 7007
             .ability = ABILITY_PICKUP,
-#line 6944
+#line 7008
             .lvl = 52,
             .ball = POKEBALL_COUNT,
-#line 6947
+#line 7011
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6948
+#line 7012
                 MOVE_WILD_CHARGE,
                 MOVE_PLAY_ROUGH,
                 MOVE_SEED_BOMB,
@@ -18448,25 +18672,25 @@
             },
             },
             {
-#line 6953
+#line 7017
             .species = SPECIES_POLTEAGEIST,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6953
+#line 7017
             .heldItem = ITEM_STARF_BERRY,
-#line 6956
+#line 7020
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 148, 152, 0),
-#line 6958
+#line 7022
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 6954
+#line 7018
             .ability = ABILITY_WEAK_ARMOR,
-#line 6955
+#line 7019
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 6957
+#line 7021
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6959
+#line 7023
                 MOVE_TEATIME,
                 MOVE_GIGA_DRAIN,
                 MOVE_SHADOW_BALL,
@@ -18475,20 +18699,20 @@
             },
         },
     },
-#line 6964
+#line 7028
     [DIFFICULTY_NORMAL][TRAINER_0F3DB5D8] =
     {
-#line 6965
+#line 7029
         .trainerName = _("0F3DB5D8"),
-#line 6966
+#line 7030
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 6968
+#line 7032
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 6967
+#line 7031
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 6970
+#line 7034
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 6969
+#line 7033
         .mapSec = MAPSEC_ROUTE11,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18496,25 +18720,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 6972
+#line 7036
             .species = SPECIES_TENTACRUEL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6972
+#line 7036
             .heldItem = ITEM_BLACK_SLUDGE,
-#line 6975
+#line 7039
             .ev = TRAINER_PARTY_EVS(48, 0, 0, 252, 0, 0),
-#line 6977
+#line 7041
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 6973
+#line 7037
             .ability = ABILITY_CLEAR_BODY,
-#line 6974
+#line 7038
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 6976
+#line 7040
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6978
+#line 7042
                 MOVE_TOXIC_SPIKES,
                 MOVE_VENOSHOCK,
                 MOVE_HEX,
@@ -18522,25 +18746,25 @@
             },
             },
             {
-#line 6983
+#line 7047
             .species = SPECIES_MISMAGIUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6983
+#line 7047
             .heldItem = ITEM_SPELL_TAG,
-#line 6986
+#line 7050
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 48, 0),
-#line 6987
+#line 7051
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 6984
+#line 7048
             .ability = ABILITY_LEVITATE,
-#line 6985
+#line 7049
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 6988
+#line 7052
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 6989
+#line 7053
                 MOVE_HEX,
                 MOVE_DAZZLING_GLEAM,
                 MOVE_MEAN_LOOK,
@@ -18548,25 +18772,25 @@
             },
             },
             {
-#line 6994
+#line 7058
             .species = SPECIES_ARIADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 6994
+#line 7058
             .heldItem = ITEM_FOCUS_SASH,
-#line 6997
+#line 7061
             .ev = TRAINER_PARTY_EVS(48, 252, 0, 0, 0, 0),
-#line 6998
+#line 7062
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 6995
+#line 7059
             .ability = ABILITY_SNIPER,
-#line 6996
+#line 7060
             .lvl = 52,
             .ball = POKEBALL_COUNT,
-#line 6999
+#line 7063
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7000
+#line 7064
                 MOVE_VENOSHOCK,
                 MOVE_TOXIC_THREAD,
                 MOVE_FELL_STINGER,
@@ -18575,20 +18799,20 @@
             },
         },
     },
-#line 7005
+#line 7069
     [DIFFICULTY_NORMAL][TRAINER_0F5F82C3] =
     {
-#line 7006
+#line 7070
         .trainerName = _("0F5F82C3"),
-#line 7007
+#line 7071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7009
+#line 7073
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7008
+#line 7072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7011
+#line 7075
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7010
+#line 7074
         .mapSec = MAPSEC_ROUTE11,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18596,25 +18820,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7013
+#line 7077
             .species = SPECIES_TOXICROAK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7013
+#line 7077
             .heldItem = ITEM_PAYAPA_BERRY,
-#line 7016
+#line 7080
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 48, 0, 0),
-#line 7017
+#line 7081
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7014
+#line 7078
             .ability = ABILITY_POISON_TOUCH,
-#line 7015
+#line 7079
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 7018
+#line 7082
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7019
+#line 7083
                 MOVE_FAKE_OUT,
                 MOVE_SUCKER_PUNCH,
                 MOVE_POISON_JAB,
@@ -18623,20 +18847,20 @@
             },
         },
     },
-#line 7024
+#line 7088
     [DIFFICULTY_NORMAL][TRAINER_0FFBCCB9] =
     {
-#line 7025
+#line 7089
         .trainerName = _("0FFBCCB9"),
-#line 7026
+#line 7090
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7028
+#line 7092
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7027
+#line 7091
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7030
+#line 7094
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7029
+#line 7093
         .mapSec = MAPSEC_ROUTE11,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18644,25 +18868,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7032
+#line 7096
             .species = SPECIES_DUSKNOIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7032
+#line 7096
             .heldItem = ITEM_WEAKNESS_POLICY,
-#line 7035
+#line 7099
             .ev = TRAINER_PARTY_EVS(252, 0, 48, 0, 0, 0),
-#line 7036
+#line 7100
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7033
+#line 7097
             .ability = ABILITY_PRESSURE,
-#line 7034
+#line 7098
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7037
+#line 7101
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7038
+#line 7102
                 MOVE_FUTURE_SIGHT,
                 MOVE_SHADOW_SNEAK,
                 MOVE_LEECH_LIFE,
@@ -18670,25 +18894,25 @@
             },
             },
             {
-#line 7043
+#line 7107
             .species = SPECIES_GALLADE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7043
+#line 7107
             .heldItem = ITEM_EXPERT_BELT,
-#line 7046
+#line 7110
             .ev = TRAINER_PARTY_EVS(0, 48, 0, 252, 0, 0),
-#line 7047
+#line 7111
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7044
+#line 7108
             .ability = ABILITY_JUSTIFIED,
-#line 7045
+#line 7109
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7048
+#line 7112
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7049
+#line 7113
                 MOVE_FUTURE_SIGHT,
                 MOVE_DRAIN_PUNCH,
                 MOVE_PSYCHO_CUT,
@@ -18696,25 +18920,25 @@
             },
             },
             {
-#line 7054
+#line 7118
             .species = SPECIES_GARDEVOIR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7054
+#line 7118
             .heldItem = ITEM_FAIRY_FEATHER,
-#line 7057
+#line 7121
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 48, 0),
-#line 7059
+#line 7123
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7055
+#line 7119
             .ability = ABILITY_TRACE,
-#line 7056
+#line 7120
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7058
+#line 7122
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7060
+#line 7124
                 MOVE_FUTURE_SIGHT,
                 MOVE_DRAINING_KISS,
                 MOVE_PSYCHIC,
@@ -18722,25 +18946,25 @@
             },
             },
             {
-#line 7065
+#line 7129
             .species = SPECIES_ORBEETLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7065
+#line 7129
             .heldItem = ITEM_LEFTOVERS,
-#line 7068
+#line 7132
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 48, 252, 0),
-#line 7070
+#line 7134
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7066
+#line 7130
             .ability = ABILITY_SWARM,
-#line 7067
+#line 7131
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 7069
+#line 7133
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7071
+#line 7135
                 MOVE_FUTURE_SIGHT,
                 MOVE_BUG_BUZZ,
                 MOVE_INFESTATION,
@@ -18749,20 +18973,20 @@
             },
         },
     },
-#line 7076
+#line 7140
     [DIFFICULTY_NORMAL][TRAINER_1075163A] =
     {
-#line 7077
+#line 7141
         .trainerName = _("1075163A"),
-#line 7078
+#line 7142
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7082
+#line 7146
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7079
+#line 7143
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7081
+#line 7145
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7080
+#line 7144
         .mapSec = MAPSEC_FORT_YOBU,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18770,25 +18994,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7084
+#line 7148
             .species = SPECIES_HYDREIGON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7084
+#line 7148
             .heldItem = ITEM_ROSELI_BERRY,
-#line 7087
+#line 7151
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 48, 0),
-#line 7088
+#line 7152
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7085
+#line 7149
             .ability = ABILITY_LEVITATE,
-#line 7086
+#line 7150
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 7089
+#line 7153
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7090
+#line 7154
                 MOVE_BELCH,
                 MOVE_ACROBATICS,
                 MOVE_DRAGON_BREATH,
@@ -18796,25 +19020,25 @@
             },
             },
             {
-#line 7095
+#line 7159
             .species = SPECIES_RELICANTH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7095
+#line 7159
             .heldItem = ITEM_SALAC_BERRY,
-#line 7098
+#line 7162
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 48, 0, 0),
-#line 7099
+#line 7163
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7096
+#line 7160
             .ability = ABILITY_STURDY,
-#line 7097
+#line 7161
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7100
+#line 7164
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7101
+#line 7165
                 MOVE_FLAIL,
                 MOVE_ROCK_TOMB,
                 MOVE_WATERFALL,
@@ -18822,25 +19046,25 @@
             },
             },
             {
-#line 7106
+#line 7170
             .species = SPECIES_LINOONE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7106
+#line 7170
             .heldItem = ITEM_IAPAPA_BERRY,
-#line 7109
+#line 7173
             .ev = TRAINER_PARTY_EVS(52, 248, 0, 0, 0, 0),
-#line 7111
+#line 7175
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7107
+#line 7171
             .ability = ABILITY_GLUTTONY,
-#line 7108
+#line 7172
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7110
+#line 7174
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7112
+#line 7176
                 MOVE_BELLY_DRUM,
                 MOVE_EXTREME_SPEED,
                 MOVE_THROAT_CHOP,
@@ -18849,20 +19073,20 @@
             },
         },
     },
-#line 7117
+#line 7181
     [DIFFICULTY_NORMAL][TRAINER_10751EAA] =
     {
-#line 7118
+#line 7182
         .trainerName = _("10751EAA"),
-#line 7119
+#line 7183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7123
+#line 7187
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7120
+#line 7184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7122
+#line 7186
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7121
+#line 7185
         .mapSec = MAPSEC_FORT_YOBU,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -18870,25 +19094,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7125
+#line 7189
             .species = SPECIES_WEEZING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7125
+#line 7189
             .heldItem = ITEM_PAYAPA_BERRY,
-#line 7128
+#line 7192
             .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 48),
-#line 7130
+#line 7194
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7126
+#line 7190
             .ability = ABILITY_LEVITATE,
-#line 7127
+#line 7191
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7129
+#line 7193
             .nature = NATURE_CALM,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7131
+#line 7195
                 MOVE_TOXIC_SPIKES,
                 MOVE_SLUDGE_BOMB,
                 MOVE_HEAT_WAVE,
@@ -18896,25 +19120,25 @@
             },
             },
             {
-#line 7136
+#line 7200
             .species = SPECIES_PANGORO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7136
+#line 7200
             .heldItem = ITEM_SITRUS_BERRY,
-#line 7139
+#line 7203
             .ev = TRAINER_PARTY_EVS(48, 252, 0, 0, 0, 0),
-#line 7141
+#line 7205
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7137
+#line 7201
             .ability = ABILITY_SCRAPPY,
-#line 7138
+#line 7202
             .lvl = 43,
             .ball = POKEBALL_COUNT,
-#line 7140
+#line 7204
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7142
+#line 7206
                 MOVE_SUBSTITUTE,
                 MOVE_CIRCLE_THROW,
                 MOVE_DARKEST_LARIAT,
@@ -18922,25 +19146,25 @@
             },
             },
             {
-#line 7147
+#line 7211
             .species = SPECIES_MAGMORTAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7147
+#line 7211
             .heldItem = ITEM_ASSAULT_VEST,
-#line 7150
+#line 7214
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 48, 252, 0),
-#line 7151
+#line 7215
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7148
+#line 7212
             .ability = ABILITY_FLAME_BODY,
-#line 7149
+#line 7213
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7152
+#line 7216
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7153
+#line 7217
                 MOVE_LAVA_PLUME,
                 MOVE_SCORCHING_SANDS,
                 MOVE_THUNDERBOLT,
@@ -18948,25 +19172,25 @@
             },
             },
             {
-#line 7158
+#line 7222
             .species = SPECIES_CRAMORANT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7158
+#line 7222
             .heldItem = ITEM_FOCUS_SASH,
-#line 7161
+#line 7225
             .ev = TRAINER_PARTY_EVS(48, 0, 0, 0, 252, 0),
-#line 7163
+#line 7227
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7159
+#line 7223
             .ability = ABILITY_GULP_MISSILE,
-#line 7160
+#line 7224
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7162
+#line 7226
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7164
+#line 7228
                 MOVE_AGILITY,
                 MOVE_SURF,
                 MOVE_ENDEAVOR,
@@ -18974,25 +19198,25 @@
             },
             },
             {
-#line 7169
+#line 7233
             .species = SPECIES_SKUNTANK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7169
+#line 7233
             .heldItem = ITEM_AIR_BALLOON,
-#line 7172
+#line 7236
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 48, 252, 0),
-#line 7174
+#line 7238
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7170
+#line 7234
             .ability = ABILITY_AFTERMATH,
-#line 7171
+#line 7235
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 7173
+#line 7237
             .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7175
+#line 7239
                 MOVE_HEX,
                 MOVE_VENOSHOCK,
                 MOVE_NASTY_PLOT,
@@ -19001,20 +19225,20 @@
             },
         },
     },
-#line 7180
+#line 7244
     [DIFFICULTY_NORMAL][TRAINER_10E3552B] =
     {
-#line 7181
+#line 7245
         .trainerName = _("10E3552B"),
-#line 7182
+#line 7246
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7184
+#line 7248
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7183
+#line 7247
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7185
+#line 7249
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7186
+#line 7250
         .mapSec = MAPSEC_FORT_YOBU,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19022,25 +19246,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7188
+#line 7252
             .species = SPECIES_MIENSHAO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7188
+#line 7252
             .heldItem = ITEM_FOCUS_SASH,
-#line 7191
+#line 7255
             .ev = TRAINER_PARTY_EVS(0, 48, 0, 252, 0, 0),
-#line 7192
+#line 7256
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7189
+#line 7253
             .ability = ABILITY_REGENERATOR,
-#line 7190
+#line 7254
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7193
+#line 7257
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7194
+#line 7258
                 MOVE_FAKE_OUT,
                 MOVE_DRAIN_PUNCH,
                 MOVE_KNOCK_OFF,
@@ -19048,25 +19272,25 @@
             },
             },
             {
-#line 7199
+#line 7263
             .species = SPECIES_SLOWBRO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7199
+#line 7263
             .heldItem = ITEM_LEFTOVERS,
-#line 7202
+#line 7266
             .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 48),
-#line 7204
+#line 7268
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7200
+#line 7264
             .ability = ABILITY_REGENERATOR,
-#line 7201
+#line 7265
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7203
+#line 7267
             .nature = NATURE_CALM,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7205
+#line 7269
                 MOVE_SCALD,
                 MOVE_THUNDER_WAVE,
                 MOVE_LIGHT_SCREEN,
@@ -19074,25 +19298,25 @@
             },
             },
             {
-#line 7210
+#line 7274
             .species = SPECIES_TOGETIC,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7210
+#line 7274
             .heldItem = ITEM_EVIOLITE,
-#line 7213
+#line 7277
             .ev = TRAINER_PARTY_EVS(252, 0, 48, 0, 0, 0),
-#line 7215
+#line 7279
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7211
+#line 7275
             .ability = ABILITY_SERENE_GRACE,
-#line 7212
+#line 7276
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7214
+#line 7278
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7216
+#line 7280
                 MOVE_DRAINING_KISS,
                 MOVE_ANCIENT_POWER,
                 MOVE_WISH,
@@ -19100,25 +19324,25 @@
             },
             },
             {
-#line 7221
+#line 7285
             .species = SPECIES_LIEPARD,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7221
+#line 7285
             .heldItem = ITEM_NORMAL_GEM,
-#line 7224
+#line 7288
             .ev = TRAINER_PARTY_EVS(0, 48, 0, 252, 0, 0),
-#line 7226
+#line 7290
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7222
+#line 7286
             .ability = ABILITY_UNBURDEN,
-#line 7223
+#line 7287
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7225
+#line 7289
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7227
+#line 7291
                 MOVE_U_TURN,
                 MOVE_FAKE_OUT,
                 MOVE_DARK_PULSE,
@@ -19127,20 +19351,20 @@
             },
         },
     },
-#line 7232
+#line 7296
     [DIFFICULTY_NORMAL][TRAINER_1114BC23] =
     {
-#line 7233
+#line 7297
         .trainerName = _("1114BC23"),
-#line 7234
+#line 7298
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7236
+#line 7300
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7235
+#line 7299
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7237
+#line 7301
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7238
+#line 7302
         .mapSec = MAPSEC_FORT_YOBU,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19148,25 +19372,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7240
+#line 7304
             .species = SPECIES_BRELOOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7240
+#line 7304
             .heldItem = ITEM_TOXIC_ORB,
-#line 7243
+#line 7307
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 48, 0, 0),
-#line 7245
+#line 7309
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7241
+#line 7305
             .ability = ABILITY_POISON_HEAL,
-#line 7242
+#line 7306
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7244
+#line 7308
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7246
+#line 7310
                 MOVE_SUBSTITUTE,
                 MOVE_DRAIN_PUNCH,
                 MOVE_GIGA_DRAIN,
@@ -19174,25 +19398,25 @@
             },
             },
             {
-#line 7251
+#line 7315
             .species = SPECIES_PARASECT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7251
+#line 7315
             .heldItem = ITEM_BIG_ROOT,
-#line 7254
+#line 7318
             .ev = TRAINER_PARTY_EVS(252, 0, 24, 0, 0, 24),
-#line 7256
+#line 7320
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7252
+#line 7316
             .ability = ABILITY_DRY_SKIN,
-#line 7253
+#line 7317
             .lvl = 47,
             .ball = POKEBALL_COUNT,
-#line 7255
+#line 7319
             .nature = NATURE_SERIOUS,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7257
+#line 7321
                 MOVE_LEECH_SEED,
                 MOVE_LEECH_LIFE,
                 MOVE_GIGA_DRAIN,
@@ -19200,25 +19424,25 @@
             },
             },
             {
-#line 7262
+#line 7326
             .species = SPECIES_CERULEDGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7262
+#line 7326
             .heldItem = ITEM_LEFTOVERS,
-#line 7265
+#line 7329
             .ev = TRAINER_PARTY_EVS(0, 48, 0, 252, 0, 0),
-#line 7267
+#line 7331
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7263
+#line 7327
             .ability = ABILITY_FLASH_FIRE,
-#line 7264
+#line 7328
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7266
+#line 7330
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7268
+#line 7332
                 MOVE_BITTER_BLADE,
                 MOVE_PHANTOM_FORCE,
                 MOVE_WILL_O_WISP,
@@ -19226,25 +19450,25 @@
             },
             },
             {
-#line 7273
+#line 7337
             .species = SPECIES_FLORGES,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7273
+#line 7337
             .heldItem = ITEM_BABIRI_BERRY,
-#line 7276
+#line 7340
             .ev = TRAINER_PARTY_EVS(252, 0, 48, 0, 0, 0),
-#line 7278
+#line 7342
             .iv = TRAINER_PARTY_IVS(14, 0, 14, 14, 14, 14),
-#line 7274
+#line 7338
             .ability = ABILITY_FLOWER_VEIL,
-#line 7275
+#line 7339
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7277
+#line 7341
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7279
+#line 7343
                 MOVE_MOONBLAST,
                 MOVE_STORED_POWER,
                 MOVE_CALM_MIND,
@@ -19253,20 +19477,20 @@
             },
         },
     },
-#line 7284
+#line 7348
     [DIFFICULTY_NORMAL][TRAINER_114EB3AD] =
     {
-#line 7285
+#line 7349
         .trainerName = _("114EB3AD"),
-#line 7286
+#line 7350
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7288
+#line 7352
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7287
+#line 7351
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7289
+#line 7353
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7290
+#line 7354
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19274,25 +19498,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7292
+#line 7356
             .species = SPECIES_PURUGLY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7292
+#line 7356
             .heldItem = ITEM_FOCUS_SASH,
-#line 7295
+#line 7359
             .ev = TRAINER_PARTY_EVS(0, 244, 124, 0, 0, 28),
-#line 7297
+#line 7361
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7293
+#line 7357
             .ability = ABILITY_DEFIANT,
-#line 7294
+#line 7358
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7296
+#line 7360
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7297
+#line 7361
                 MOVE_FAKE_OUT,
                 MOVE_DOUBLE_TEAM,
                 MOVE_BODY_SLAM,
@@ -19300,25 +19524,25 @@
             },
             },
             {
-#line 7302
+#line 7366
             .species = SPECIES_BRELOOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7302
+#line 7366
             .heldItem = ITEM_MUSCLE_BAND,
-#line 7305
+#line 7369
             .ev = TRAINER_PARTY_EVS(0, 248, 0, 0, 0, 148),
-#line 7307
+#line 7371
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7303
+#line 7367
             .ability = ABILITY_TECHNICIAN,
-#line 7304
+#line 7368
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7306
+#line 7370
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7307
+#line 7371
                 MOVE_MACH_PUNCH,
                 MOVE_BULLET_SEED,
                 MOVE_BULLDOZE,
@@ -19326,25 +19550,25 @@
             },
             },
             {
-#line 7312
+#line 7376
             .species = SPECIES_ZOROARK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7312
+#line 7376
             .heldItem = ITEM_RED_CARD,
-#line 7315
+#line 7379
             .ev = TRAINER_PARTY_EVS(0, 124, 0, 148, 124, 0),
-#line 7317
+#line 7381
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7313
+#line 7377
             .ability = ABILITY_ILLUSION,
-#line 7314
+#line 7378
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7316
+#line 7380
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7317
+#line 7381
                 MOVE_NIGHT_DAZE,
                 MOVE_FLAMETHROWER,
                 MOVE_EXTRASENSORY,
@@ -19352,25 +19576,25 @@
             },
             },
             {
-#line 7322
+#line 7386
             .species = SPECIES_GRANBULL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7322
+#line 7386
             .heldItem = ITEM_TOXIC_ORB,
-#line 7325
+#line 7389
             .ev = TRAINER_PARTY_EVS(0, 248, 52, 0, 0, 100),
-#line 7327
+#line 7391
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7323
+#line 7387
             .ability = ABILITY_QUICK_FEET,
-#line 7324
+#line 7388
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 7326
+#line 7390
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7327
+#line 7391
                 MOVE_ROAR,
                 MOVE_ICE_PUNCH,
                 MOVE_FIRE_PUNCH,
@@ -19379,20 +19603,20 @@
             },
         },
     },
-#line 7332
+#line 7396
     [DIFFICULTY_NORMAL][TRAINER_11EDE0DC] =
     {
-#line 7333
+#line 7397
         .trainerName = _("11EDE0DC"),
-#line 7334
+#line 7398
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7336
+#line 7400
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7335
+#line 7399
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7337
+#line 7401
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7338
+#line 7402
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19400,25 +19624,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7340
+#line 7404
             .species = SPECIES_SWALOT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7340
+#line 7404
             .heldItem = ITEM_PAYAPA_BERRY,
-#line 7343
+#line 7407
             .ev = TRAINER_PARTY_EVS(0, 0, 88, 0, 216, 96),
-#line 7345
+#line 7409
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7341
+#line 7405
             .ability = ABILITY_STICKY_HOLD,
-#line 7342
+#line 7406
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 7344
+#line 7408
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7345
+#line 7409
                 MOVE_TOXIC_SPIKES,
                 MOVE_SLUDGE_WAVE,
                 MOVE_GIGA_DRAIN,
@@ -19426,25 +19650,25 @@
             },
             },
             {
-#line 7350
+#line 7414
             .species = SPECIES_SCRAFTY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7350
+#line 7414
             .heldItem = ITEM_ROSELI_BERRY,
-#line 7353
+#line 7417
             .ev = TRAINER_PARTY_EVS(0, 116, 132, 0, 0, 148),
-#line 7355
+#line 7419
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7351
+#line 7415
             .ability = ABILITY_INTIMIDATE,
-#line 7352
+#line 7416
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7354
+#line 7418
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7355
+#line 7419
                 MOVE_DRAGON_TAIL,
                 MOVE_ZEN_HEADBUTT,
                 MOVE_DRAGON_DANCE,
@@ -19452,25 +19676,25 @@
             },
             },
             {
-#line 7360
+#line 7424
             .species = SPECIES_NIDOKING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7360
+#line 7424
             .heldItem = ITEM_RED_CARD,
-#line 7363
+#line 7427
             .ev = TRAINER_PARTY_EVS(136, 0, 44, 0, 136, 76),
-#line 7365
+#line 7429
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7361
+#line 7425
             .ability = ABILITY_SHEER_FORCE,
-#line 7362
+#line 7426
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 7364
+#line 7428
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7365
+#line 7429
                 MOVE_ICE_BEAM,
                 MOVE_VENOSHOCK,
                 MOVE_EARTH_POWER,
@@ -19478,25 +19702,25 @@
             },
             },
             {
-#line 7370
+#line 7434
             .species = SPECIES_HONCHKROW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7370
+#line 7434
             .heldItem = ITEM_SCOPE_LENS,
-#line 7373
+#line 7437
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 148, 0),
-#line 7375
+#line 7439
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7371
+#line 7435
             .ability = ABILITY_SUPER_LUCK,
-#line 7372
+#line 7436
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7374
+#line 7438
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7375
+#line 7439
                 MOVE_HEX,
                 MOVE_HEAT_WAVE,
                 MOVE_AIR_CUTTER,
@@ -19505,20 +19729,20 @@
             },
         },
     },
-#line 7380
+#line 7444
     [DIFFICULTY_NORMAL][TRAINER_120A20F6] =
     {
-#line 7381
+#line 7445
         .trainerName = _("120A20F6"),
-#line 7382
+#line 7446
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7384
+#line 7448
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7383
+#line 7447
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7385
+#line 7449
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7386
+#line 7450
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19526,25 +19750,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7388
+#line 7452
             .species = SPECIES_KLEFKI,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7388
+#line 7452
             .heldItem = ITEM_RED_CARD,
-#line 7391
+#line 7455
             .ev = TRAINER_PARTY_EVS(48, 0, 84, 0, 116, 148),
-#line 7393
+#line 7457
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7389
+#line 7453
             .ability = ABILITY_PRANKSTER,
-#line 7390
+#line 7454
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 7392
+#line 7456
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7393
+#line 7457
                 MOVE_SPIKES,
                 MOVE_STEEL_BEAM,
                 MOVE_MISTY_TERRAIN,
@@ -19552,25 +19776,25 @@
             },
             },
             {
-#line 7398
+#line 7462
             .species = SPECIES_SLURPUFF,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7398
+#line 7462
             .heldItem = ITEM_MISTY_SEED,
-#line 7401
+#line 7465
             .ev = TRAINER_PARTY_EVS(116, 0, 28, 252, 0, 0),
-#line 7403
+#line 7467
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7399
+#line 7463
             .ability = ABILITY_UNBURDEN,
-#line 7400
+#line 7464
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7402
+#line 7466
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7403
+#line 7467
                 MOVE_STICKY_WEB,
                 MOVE_SURF,
                 MOVE_FLAMETHROWER,
@@ -19578,25 +19802,25 @@
             },
             },
             {
-#line 7408
+#line 7472
             .species = SPECIES_MINIOR_INDIGO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7408
+#line 7472
             .heldItem = ITEM_SITRUS_BERRY,
-#line 7411
+#line 7475
             .ev = TRAINER_PARTY_EVS(0, 148, 0, 248, 0, 0),
-#line 7413
+#line 7477
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7409
+#line 7473
             .ability = ABILITY_SHIELDS_DOWN,
-#line 7410
+#line 7474
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 7412
+#line 7476
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7413
+#line 7477
                 MOVE_STEALTH_ROCK,
                 MOVE_ANCIENT_POWER,
                 MOVE_SCORCHING_SANDS,
@@ -19604,25 +19828,25 @@
             },
             },
             {
-#line 7418
+#line 7482
             .species = SPECIES_PANGORO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7418
+#line 7482
             .heldItem = ITEM_LIECHI_BERRY,
-#line 7421
+#line 7485
             .ev = TRAINER_PARTY_EVS(148, 116, 36, 0, 0, 100),
-#line 7423
+#line 7487
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7419
+#line 7483
             .ability = ABILITY_SCRAPPY,
-#line 7420
+#line 7484
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7422
+#line 7486
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7423
+#line 7487
                 MOVE_CIRCLE_THROW,
                 MOVE_LOW_KICK,
                 MOVE_EARTHQUAKE,
@@ -19631,20 +19855,20 @@
             },
         },
     },
-#line 7428
+#line 7492
     [DIFFICULTY_NORMAL][TRAINER_13113EC0] =
     {
-#line 7429
+#line 7493
         .trainerName = _("13113EC0"),
-#line 7430
+#line 7494
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7432
+#line 7496
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7431
+#line 7495
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7433
+#line 7497
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7434
+#line 7498
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19652,25 +19876,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7436
+#line 7500
             .species = SPECIES_VIKAVOLT,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7436
+#line 7500
             .heldItem = ITEM_QUICK_CLAW,
-#line 7439
+#line 7503
             .ev = TRAINER_PARTY_EVS(184, 0, 0, 0, 208, 8),
-#line 7441
+#line 7505
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7437
+#line 7501
             .ability = ABILITY_LEVITATE,
-#line 7438
+#line 7502
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7440
+#line 7504
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7442
+#line 7506
                 MOVE_STICKY_WEB,
                 MOVE_VOLT_SWITCH,
                 MOVE_ENERGY_BALL,
@@ -19678,25 +19902,25 @@
             },
             },
             {
-#line 7447
+#line 7511
             .species = SPECIES_BRONZONG,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7447
+#line 7511
             .heldItem = ITEM_RED_CARD,
-#line 7450
+#line 7514
             .ev = TRAINER_PARTY_EVS(248, 0, 140, 0, 0, 8),
-#line 7452
+#line 7516
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7448
+#line 7512
             .ability = ABILITY_HEATPROOF,
-#line 7449
+#line 7513
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 7451
+#line 7515
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7453
+#line 7517
                 MOVE_STEALTH_ROCK,
                 MOVE_ZEN_HEADBUTT,
                 MOVE_EARTHQUAKE,
@@ -19704,25 +19928,25 @@
             },
             },
             {
-#line 7458
+#line 7522
             .species = SPECIES_URSALUNA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7458
+#line 7522
             .heldItem = ITEM_BERSERK_GENE,
-#line 7461
+#line 7525
             .ev = TRAINER_PARTY_EVS(156, 124, 116, 0, 0, 0),
-#line 7463
+#line 7527
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7459
+#line 7523
             .ability = ABILITY_UNNERVE,
-#line 7460
+#line 7524
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7462
+#line 7526
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7464
+#line 7528
                 MOVE_PLAY_ROUGH,
                 MOVE_BRICK_BREAK,
                 MOVE_BODY_SLAM,
@@ -19731,20 +19955,20 @@
             },
         },
     },
-#line 7469
+#line 7533
     [DIFFICULTY_NORMAL][TRAINER_1387ABBC] =
     {
-#line 7470
+#line 7534
         .trainerName = _("1387ABBC"),
-#line 7471
+#line 7535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7473
+#line 7537
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7472
+#line 7536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7474
+#line 7538
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7475
+#line 7539
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19752,25 +19976,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7477
+#line 7541
             .species = SPECIES_ORBEETLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7477
+#line 7541
             .heldItem = ITEM_RED_CARD,
-#line 7480
+#line 7544
             .ev = TRAINER_PARTY_EVS(136, 0, 40, 224, 0, 0),
-#line 7482
+#line 7546
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7478
+#line 7542
             .ability = ABILITY_SWARM,
-#line 7479
+#line 7543
             .lvl = 50,
             .ball = POKEBALL_COUNT,
-#line 7481
+#line 7545
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7483
+#line 7547
                 MOVE_STICKY_WEB,
                 MOVE_HYPNOSIS,
                 MOVE_BUG_BUZZ,
@@ -19778,25 +20002,25 @@
             },
             },
             {
-#line 7488
+#line 7552
             .species = SPECIES_PRIMEAPE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7488
+#line 7552
             .heldItem = ITEM_EVIOLITE,
-#line 7491
+#line 7555
             .ev = TRAINER_PARTY_EVS(184, 0, 108, 0, 0, 104),
-#line 7493
+#line 7557
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7489
+#line 7553
             .ability = ABILITY_DEFIANT,
-#line 7490
+#line 7554
             .lvl = 48,
             .ball = POKEBALL_COUNT,
-#line 7492
+#line 7556
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7494
+#line 7558
                 MOVE_STEALTH_ROCK,
                 MOVE_STONE_EDGE,
                 MOVE_DRAIN_PUNCH,
@@ -19805,20 +20029,20 @@
             },
         },
     },
-#line 7499
+#line 7563
     [DIFFICULTY_NORMAL][TRAINER_148A3C6B] =
     {
-#line 7500
+#line 7564
         .trainerName = _("148A3C6B"),
-#line 7501
+#line 7565
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7503
+#line 7567
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7502
+#line 7566
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7504
+#line 7568
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7505
+#line 7569
         .mapSec = MAPSEC_TIRABUDIN_PLACE,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19826,25 +20050,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7507
+#line 7571
             .species = SPECIES_TOEDSCRUEL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7507
+#line 7571
             .heldItem = ITEM_YACHE_BERRY,
-#line 7510
+#line 7574
             .ev = TRAINER_PARTY_EVS(140, 0, 72, 0, 104, 80),
-#line 7512
+#line 7576
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7508
+#line 7572
             .ability = ABILITY_MYCELIUM_MIGHT,
-#line 7509
+#line 7573
             .lvl = 49,
             .ball = POKEBALL_COUNT,
-#line 7511
+#line 7575
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7513
+#line 7577
                 MOVE_SPORE,
                 MOVE_TOXIC_SPIKES,
                 MOVE_EARTH_POWER,
@@ -19852,25 +20076,25 @@
             },
             },
             {
-#line 7518
+#line 7582
             .species = SPECIES_NOCTOWL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7518
+#line 7582
             .heldItem = ITEM_BLUNDER_POLICY,
-#line 7521
+#line 7585
             .ev = TRAINER_PARTY_EVS(80, 0, 112, 52, 152, 0),
-#line 7523
+#line 7587
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7519
+#line 7583
             .ability = ABILITY_INSOMNIA,
-#line 7520
+#line 7584
             .lvl = 51,
             .ball = POKEBALL_COUNT,
-#line 7522
+#line 7586
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7524
+#line 7588
                 MOVE_HYPNOSIS,
                 MOVE_HURRICANE,
                 MOVE_WHIRLWIND,
@@ -19879,20 +20103,20 @@
             },
         },
     },
-#line 7529
+#line 7593
     [DIFFICULTY_NORMAL][TRAINER_14C5EE6C] =
     {
-#line 7530
+#line 7594
         .trainerName = _("14C5EE6C"),
-#line 7531
+#line 7595
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7533
+#line 7597
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7532
+#line 7596
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7534
+#line 7598
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7535
+#line 7599
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19900,25 +20124,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7537
+#line 7601
             .species = SPECIES_GYARADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7537
+#line 7601
             .heldItem = ITEM_WACAN_BERRY,
-#line 7540
+#line 7604
             .ev = TRAINER_PARTY_EVS(0, 144, 0, 252, 0, 4),
-#line 7542
+#line 7606
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7538
+#line 7602
             .ability = ABILITY_MOXIE,
-#line 7539
+#line 7603
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7541
+#line 7605
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7543
+#line 7607
                 MOVE_DRAGON_DANCE,
                 MOVE_EARTHQUAKE,
                 MOVE_AQUA_TAIL,
@@ -19926,24 +20150,24 @@
             },
             },
             {
-#line 7548
+#line 7612
             .species = SPECIES_CLEFABLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7548
+#line 7612
             .heldItem = ITEM_SITRUS_BERRY,
-#line 7551
+#line 7615
             .ev = TRAINER_PARTY_EVS(252, 0, 88, 0, 0, 60),
-#line 7552
+#line 7616
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7549
+#line 7613
             .ability = ABILITY_CUTE_CHARM,
-#line 7550
+#line 7614
             .lvl = 48,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7553
+#line 7617
                 MOVE_FOLLOW_ME,
                 MOVE_HELPING_HAND,
                 MOVE_REFLECT,
@@ -19952,20 +20176,20 @@
             },
         },
     },
-#line 7558
+#line 7622
     [DIFFICULTY_NORMAL][TRAINER_1508BB71] =
     {
-#line 7559
+#line 7623
         .trainerName = _("1508BB71"),
-#line 7560
+#line 7624
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7562
+#line 7626
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7561
+#line 7625
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7563
+#line 7627
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7564
+#line 7628
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -19973,25 +20197,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7566
+#line 7630
             .species = SPECIES_MAMOSWINE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7566
+#line 7630
             .heldItem = ITEM_LEFTOVERS,
-#line 7569
+#line 7633
             .ev = TRAINER_PARTY_EVS(208, 0, 184, 0, 8, 0),
-#line 7571
+#line 7635
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7567
+#line 7631
             .ability = ABILITY_SNOW_CLOAK,
-#line 7568
+#line 7632
             .lvl = 47,
             .ball = POKEBALL_COUNT,
-#line 7570
+#line 7634
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7572
+#line 7636
                 MOVE_SNOWSCAPE,
                 MOVE_BLIZZARD,
                 MOVE_REST,
@@ -19999,25 +20223,25 @@
             },
             },
             {
-#line 7577
+#line 7641
             .species = SPECIES_BEARTIC,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7577
+#line 7641
             .heldItem = ITEM_STARF_BERRY,
-#line 7580
+#line 7644
             .ev = TRAINER_PARTY_EVS(0, 252, 72, 0, 0, 72),
-#line 7582
+#line 7646
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7578
+#line 7642
             .ability = ABILITY_SNOW_CLOAK,
-#line 7579
+#line 7643
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7581
+#line 7645
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7583
+#line 7647
                 MOVE_SNOWSCAPE,
                 MOVE_AVALANCHE,
                 MOVE_SHEER_COLD,
@@ -20025,20 +20249,20 @@
             },
         },
     },
-#line 7587
+#line 7651
     [DIFFICULTY_NORMAL][TRAINER_1510C80A] =
     {
-#line 7588
+#line 7652
         .trainerName = _("1510C80A"),
-#line 7589
+#line 7653
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7591
+#line 7655
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7590
+#line 7654
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7592
+#line 7656
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7593
+#line 7657
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20046,25 +20270,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7595
+#line 7659
             .species = SPECIES_MUDSDALE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7595
+#line 7659
             .heldItem = ITEM_SMOOTH_ROCK,
-#line 7598
+#line 7662
             .ev = TRAINER_PARTY_EVS(156, 0, 244, 0, 0, 0),
-#line 7600
+#line 7664
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7596
+#line 7660
             .ability = ABILITY_STAMINA,
-#line 7597
+#line 7661
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 7599
+#line 7663
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7601
+#line 7665
                 MOVE_SANDSTORM,
                 MOVE_BODY_PRESS,
                 MOVE_COUNTER,
@@ -20072,25 +20296,25 @@
             },
             },
             {
-#line 7606
+#line 7670
             .species = SPECIES_SANDACONDA,
-#line 7606
+#line 7670
             .gender = TRAINER_MON_MALE,
-#line 7606
+#line 7670
             .heldItem = ITEM_RED_CARD,
-#line 7609
+#line 7673
             .ev = TRAINER_PARTY_EVS(152, 88, 156, 0, 0, 0),
-#line 7610
+#line 7674
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7607
+#line 7671
             .ability = ABILITY_SAND_SPIT,
-#line 7608
+#line 7672
             .lvl = 44,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7611
+#line 7675
                 MOVE_HURRICANE,
                 MOVE_DRILL_RUN,
                 MOVE_FIRE_FANG,
@@ -20098,24 +20322,24 @@
             },
             },
             {
-#line 7616
+#line 7680
             .species = SPECIES_KADABRA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7616
+#line 7680
             .heldItem = ITEM_LIFE_ORB,
-#line 7619
+#line 7683
             .ev = TRAINER_PARTY_EVS(0, 0, 148, 0, 252, 0),
-#line 7620
+#line 7684
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7617
+#line 7681
             .ability = ABILITY_MAGIC_GUARD,
-#line 7618
+#line 7682
             .lvl = 47,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7621
+#line 7685
                 MOVE_PSYCHIC,
                 MOVE_THUNDER_PUNCH,
                 MOVE_SHADOW_BALL,
@@ -20124,20 +20348,20 @@
             },
         },
     },
-#line 7626
+#line 7690
     [DIFFICULTY_NORMAL][TRAINER_15598A38] =
     {
-#line 7627
+#line 7691
         .trainerName = _("15598A38"),
-#line 7628
+#line 7692
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7630
+#line 7694
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7629
+#line 7693
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7631
+#line 7695
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7632
+#line 7696
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20145,25 +20369,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7634
+#line 7698
             .species = SPECIES_MEDICHAM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7634
+#line 7698
             .heldItem = ITEM_EXPERT_BELT,
-#line 7637
+#line 7701
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 144, 0, 0),
-#line 7639
+#line 7703
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7635
+#line 7699
             .ability = ABILITY_PURE_POWER,
-#line 7636
+#line 7700
             .lvl = 44,
             .ball = POKEBALL_COUNT,
-#line 7638
+#line 7702
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7640
+#line 7704
                 MOVE_HIGH_JUMP_KICK,
                 MOVE_POISON_JAB,
                 MOVE_ZEN_HEADBUTT,
@@ -20171,25 +20395,25 @@
             },
             },
             {
-#line 7645
+#line 7709
             .species = SPECIES_MEDICHAM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7645
+#line 7709
             .heldItem = ITEM_EXPERT_BELT,
-#line 7648
+#line 7712
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 148, 0, 0),
-#line 7650
+#line 7714
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7646
+#line 7710
             .ability = ABILITY_PURE_POWER,
-#line 7647
+#line 7711
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7649
+#line 7713
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7651
+#line 7715
                 MOVE_ICE_PUNCH,
                 MOVE_THUNDER_PUNCH,
                 MOVE_ZEN_HEADBUTT,
@@ -20197,25 +20421,25 @@
             },
             },
             {
-#line 7656
+#line 7720
             .species = SPECIES_LOKIX,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7656
+#line 7720
             .heldItem = ITEM_EXPERT_BELT,
-#line 7659
+#line 7723
             .ev = TRAINER_PARTY_EVS(0, 204, 0, 196, 0, 0),
-#line 7661
+#line 7725
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7657
+#line 7721
             .ability = ABILITY_TINTED_LENS,
-#line 7658
+#line 7722
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7660
+#line 7724
             .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7662
+#line 7726
                 MOVE_BUG_BITE,
                 MOVE_AERIAL_ACE,
                 MOVE_LASH_OUT,
@@ -20224,20 +20448,20 @@
             },
         },
     },
-#line 7667
+#line 7731
     [DIFFICULTY_NORMAL][TRAINER_15A66566] =
     {
-#line 7668
+#line 7732
         .trainerName = _("15A66566"),
-#line 7669
+#line 7733
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7671
+#line 7735
         .battleType = TRAINER_BATTLE_TYPE_DOUBLES,
-#line 7670
+#line 7734
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7672
+#line 7736
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7673
+#line 7737
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20245,25 +20469,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7675
+#line 7739
             .species = SPECIES_HAWLUCHA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7675
+#line 7739
             .heldItem = ITEM_ORAN_BERRY,
-#line 7678
+#line 7742
             .ev = TRAINER_PARTY_EVS(252, 0, 72, 0, 0, 72),
-#line 7680
+#line 7744
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7676
+#line 7740
             .ability = ABILITY_UNBURDEN,
-#line 7677
+#line 7741
             .lvl = 45,
             .ball = POKEBALL_COUNT,
-#line 7679
+#line 7743
             .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7681
+#line 7745
                 MOVE_TAUNT,
                 MOVE_ENCORE,
                 MOVE_HELPING_HAND,
@@ -20271,25 +20495,25 @@
             },
             },
             {
-#line 7686
+#line 7750
             .species = SPECIES_TRAPINCH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7686
+#line 7750
             .heldItem = ITEM_KINGS_ROCK,
-#line 7689
+#line 7753
             .ev = TRAINER_PARTY_EVS(76, 252, 72, 0, 0, 0),
-#line 7691
+#line 7755
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7687
+#line 7751
             .ability = ABILITY_ARENA_TRAP,
-#line 7688
+#line 7752
             .lvl = 40,
             .ball = POKEBALL_COUNT,
-#line 7690
+#line 7754
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7692
+#line 7756
                 MOVE_QUICK_ATTACK,
                 MOVE_BITE,
                 MOVE_STONE_EDGE,
@@ -20297,25 +20521,25 @@
             },
             },
             {
-#line 7697
+#line 7761
             .species = SPECIES_TRAPINCH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7697
+#line 7761
             .heldItem = ITEM_CHOICE_BAND,
-#line 7700
+#line 7764
             .ev = TRAINER_PARTY_EVS(76, 252, 72, 0, 0, 0),
-#line 7702
+#line 7766
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7698
+#line 7762
             .ability = ABILITY_ARENA_TRAP,
-#line 7699
+#line 7763
             .lvl = 40,
             .ball = POKEBALL_COUNT,
-#line 7701
+#line 7765
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7703
+#line 7767
                 MOVE_QUICK_ATTACK,
                 MOVE_BUG_BITE,
                 MOVE_STONE_EDGE,
@@ -20324,20 +20548,20 @@
             },
         },
     },
-#line 7708
+#line 7772
     [DIFFICULTY_NORMAL][TRAINER_15C87858] =
     {
-#line 7709
+#line 7773
         .trainerName = _("15C87858"),
-#line 7710
+#line 7774
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7712
+#line 7776
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7711
+#line 7775
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7713
+#line 7777
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7714
+#line 7778
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20345,20 +20569,20 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7716
+#line 7780
             .species = SPECIES_SWADLOON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7719
+#line 7783
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7717
+#line 7781
             .ability = ABILITY_OVERCOAT,
-#line 7718
+#line 7782
             .lvl = 45,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7720
+#line 7784
                 MOVE_LIGHT_SCREEN,
                 MOVE_SUBSTITUTE,
                 MOVE_PROTECT,
@@ -20366,20 +20590,20 @@
             },
             },
             {
-#line 7725
+#line 7789
             .species = SPECIES_GLIGAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7728
+#line 7792
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7726
+#line 7790
             .ability = ABILITY_HYPER_CUTTER,
-#line 7727
+#line 7791
             .lvl = 41,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7729
+#line 7793
                 MOVE_TOXIC,
                 MOVE_PROTECT,
                 MOVE_SUBSTITUTE,
@@ -20387,20 +20611,20 @@
             },
             },
             {
-#line 7734
+#line 7798
             .species = SPECIES_TOEDSCRUEL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7737
+#line 7801
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7735
+#line 7799
             .ability = ABILITY_MYCELIUM_MIGHT,
-#line 7736
+#line 7800
             .lvl = 44,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7738
+#line 7802
                 MOVE_SUBSTITUTE,
                 MOVE_LEECH_SEED,
                 MOVE_PROTECT,
@@ -20409,20 +20633,20 @@
             },
         },
     },
-#line 7743
+#line 7807
     [DIFFICULTY_NORMAL][TRAINER_1648CE6E] =
     {
-#line 7744
+#line 7808
         .trainerName = _("1648CE6E"),
-#line 7745
+#line 7809
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7747
+#line 7811
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7746
+#line 7810
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7748
+#line 7812
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7749
+#line 7813
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20430,51 +20654,51 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7751
+#line 7815
             .species = SPECIES_VANILLUXE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7751
+#line 7815
             .heldItem = ITEM_ICY_ROCK,
-#line 7754
+#line 7818
             .ev = TRAINER_PARTY_EVS(132, 0, 76, 0, 172, 16),
-#line 7756
+#line 7820
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7752
+#line 7816
             .ability = ABILITY_SNOW_WARNING,
-#line 7753
+#line 7817
             .lvl = 42,
             .ball = POKEBALL_COUNT,
-#line 7755
+#line 7819
             .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7757
+#line 7821
                 MOVE_MIST,
                 MOVE_BLIZZARD,
                 MOVE_EXPLOSION,
             },
             },
             {
-#line 7761
+#line 7825
             .species = SPECIES_CHANSEY,
-#line 7761
+#line 7825
             .gender = TRAINER_MON_FEMALE,
-#line 7761
+#line 7825
             .heldItem = ITEM_NEVER_MELT_ICE,
-#line 7764
+#line 7828
             .ev = TRAINER_PARTY_EVS(0, 0, 144, 0, 252, 0),
-#line 7766
+#line 7830
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7762
+#line 7826
             .ability = ABILITY_SERENE_GRACE,
-#line 7763
+#line 7827
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7765
+#line 7829
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7767
+#line 7831
                 MOVE_SNOWSCAPE,
                 MOVE_BLIZZARD,
                 MOVE_HEALING_WISH,
@@ -20482,25 +20706,25 @@
             },
             },
             {
-#line 7772
+#line 7836
             .species = SPECIES_LAPRAS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7772
+#line 7836
             .heldItem = ITEM_NEVER_MELT_ICE,
-#line 7775
+#line 7839
             .ev = TRAINER_PARTY_EVS(64, 0, 44, 0, 252, 40),
-#line 7777
+#line 7841
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7773
+#line 7837
             .ability = ABILITY_WATER_ABSORB,
-#line 7774
+#line 7838
             .lvl = 46,
             .ball = POKEBALL_COUNT,
-#line 7776
+#line 7840
             .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7778
+#line 7842
                 MOVE_SNOWSCAPE,
                 MOVE_BLIZZARD,
                 MOVE_PSYCHIC_NOISE,
@@ -20508,25 +20732,25 @@
             },
             },
             {
-#line 7783
+#line 7847
             .species = SPECIES_GOREBYSS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7783
+#line 7847
             .heldItem = ITEM_NEVER_MELT_ICE,
-#line 7786
+#line 7850
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 148, 252, 0),
-#line 7788
+#line 7852
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
-#line 7784
+#line 7848
             .ability = ABILITY_SWIFT_SWIM,
-#line 7785
+#line 7849
             .lvl = 41,
             .ball = POKEBALL_COUNT,
-#line 7787
+#line 7851
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7789
+#line 7853
                 MOVE_BLIZZARD,
                 MOVE_BOUNCE,
                 MOVE_SHELL_SMASH,
@@ -20535,20 +20759,20 @@
             },
         },
     },
-#line 7794
+#line 7858
     [DIFFICULTY_NORMAL][TRAINER_1710375D] =
     {
-#line 7795
+#line 7859
         .trainerName = _("1710375D"),
-#line 7796
+#line 7860
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7798
+#line 7862
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7797
+#line 7861
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7799
+#line 7863
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7800
+#line 7864
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20556,24 +20780,24 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7802
+#line 7866
             .species = SPECIES_EXCADRILL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7802
+#line 7866
             .heldItem = ITEM_AIR_BALLOON,
-#line 7805
+#line 7869
             .ev = TRAINER_PARTY_EVS(104, 252, 44, 0, 0, 0),
-#line 7806
+#line 7870
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7803
+#line 7867
             .ability = ABILITY_MOLD_BREAKER,
-#line 7804
+#line 7868
             .lvl = 45,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7807
+#line 7871
                 MOVE_EARTHQUAKE,
                 MOVE_SWORDS_DANCE,
                 MOVE_RAPID_SPIN,
@@ -20581,24 +20805,24 @@
             },
             },
             {
-#line 7812
+#line 7876
             .species = SPECIES_FRAXURE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7812
+#line 7876
             .heldItem = ITEM_SITRUS_BERRY,
-#line 7815
+#line 7879
             .ev = TRAINER_PARTY_EVS(92, 108, 172, 0, 0, 28),
-#line 7816
+#line 7880
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7813
+#line 7877
             .ability = ABILITY_MOLD_BREAKER,
-#line 7814
+#line 7878
             .lvl = 40,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7817
+#line 7881
                 MOVE_STOMPING_TANTRUM,
                 MOVE_SWORDS_DANCE,
                 MOVE_SCALE_SHOT,
@@ -20606,24 +20830,24 @@
             },
             },
             {
-#line 7822
+#line 7886
             .species = SPECIES_PANGORO,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7822
+#line 7886
             .heldItem = ITEM_EXPERT_BELT,
-#line 7825
+#line 7889
             .ev = TRAINER_PARTY_EVS(108, 248, 44, 0, 0, 0),
-#line 7826
+#line 7890
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7823
+#line 7887
             .ability = ABILITY_MOLD_BREAKER,
-#line 7824
+#line 7888
             .lvl = 46,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7827
+#line 7891
                 MOVE_DRAIN_PUNCH,
                 MOVE_THIEF,
                 MOVE_ICE_PUNCH,
@@ -20631,24 +20855,24 @@
             },
             },
             {
-#line 7832
+#line 7896
             .species = SPECIES_HAWLUCHA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7832
+#line 7896
             .heldItem = ITEM_PAYAPA_BERRY,
-#line 7835
+#line 7899
             .ev = TRAINER_PARTY_EVS(68, 248, 0, 0, 0, 80),
-#line 7836
+#line 7900
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7833
+#line 7897
             .ability = ABILITY_MOLD_BREAKER,
-#line 7834
+#line 7898
             .lvl = 45,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7837
+#line 7901
                 MOVE_SWORDS_DANCE,
                 MOVE_DUAL_WINGBEAT,
                 MOVE_FLYING_PRESS,
@@ -20657,20 +20881,20 @@
             },
         },
     },
-#line 7842
+#line 7906
     [DIFFICULTY_NORMAL][TRAINER_17DCC938] =
     {
-#line 7843
+#line 7907
         .trainerName = _("17DCC938"),
-#line 7844
+#line 7908
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7846
+#line 7910
         .battleType = TRAINER_BATTLE_TYPE_SINGLES,
-#line 7845
+#line 7909
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 7847
+#line 7911
         .trainerType = GLASS_TRAINER_TYPE_REGULAR,
-#line 7848
+#line 7912
         .mapSec = MAPSEC_HALERBAWILDS,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -20678,48 +20902,48 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 7850
+#line 7914
             .species = SPECIES_HONEDGE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7850
+#line 7914
             .heldItem = ITEM_ORAN_BERRY,
-#line 7853
+#line 7917
             .ev = TRAINER_PARTY_EVS(80, 160, 80, 0, 0, 80),
-#line 7854
+#line 7918
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7851
+#line 7915
             .ability = ABILITY_NO_GUARD,
-#line 7852
+#line 7916
             .lvl = 35,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7855
+#line 7919
                 MOVE_ROCK_SLIDE,
                 MOVE_FURY_CUTTER,
                 MOVE_STEEL_BEAM,
             },
             },
             {
-#line 7859
+#line 7923
             .species = SPECIES_DOUBLADE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7859
+#line 7923
             .heldItem = ITEM_SITRUS_BERRY,
-#line 7862
+#line 7926
             .ev = TRAINER_PARTY_EVS(172, 92, 132, 0, 0, 0),
-#line 7863
+#line 7927
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7860
+#line 7924
             .ability = ABILITY_NO_GUARD,
-#line 7861
+#line 7925
             .lvl = 40,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7864
+#line 7928
                 MOVE_BRICK_BREAK,
                 MOVE_GYRO_BALL,
                 MOVE_NIGHT_SLASH,
@@ -20727,25 +20951,25 @@
             },
             },
             {
-#line 7869
+#line 7933
             .species = SPECIES_AEGISLASH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7869
+#line 7933
             .heldItem = ITEM_AIR_BALLOON,
-#line 7872
+#line 7936
             .ev = TRAINER_PARTY_EVS(108, 252, 36, 0, 0, 0),
-#line 7874
+#line 7938
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7870
+#line 7934
             .ability = ABILITY_STANCE_CHANGE,
-#line 7871
+#line 7935
             .lvl = 42,
             .ball = POKEBALL_COUNT,
-#line 7873
+#line 7937
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7875
+#line 7939
                 MOVE_KINGS_SHIELD,
                 MOVE_SWORDS_DANCE,
                 MOVE_SHADOW_SNEAK,
@@ -20753,25 +20977,25 @@
             },
             },
             {
-#line 7880
+#line 7944
             .species = SPECIES_AEGISLASH,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7880
+#line 7944
             .heldItem = ITEM_LEFTOVERS,
-#line 7883
+#line 7947
             .ev = TRAINER_PARTY_EVS(108, 0, 36, 0, 252, 0),
-#line 7885
+#line 7949
             .iv = TRAINER_PARTY_IVS(22, 22, 22, 22, 22, 22),
-#line 7881
+#line 7945
             .ability = ABILITY_STANCE_CHANGE,
-#line 7882
+#line 7946
             .lvl = 42,
             .ball = POKEBALL_COUNT,
-#line 7884
+#line 7948
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 7886
+#line 7950
                 MOVE_KINGS_SHIELD,
                 MOVE_SHADOW_BALL,
                 MOVE_SUBSTITUTE,
@@ -20780,235 +21004,11 @@
             },
         },
     },
-#line 7891
+#line 7955
     [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHD] =
     {
-#line 7892
-        .trainerName = _("TeachtrainerfishD"),
-#line 7893
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7894
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7896
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7898
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7897
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7899
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHD_2] =
-    {
-#line 7900
-        .trainerName = _("TeachtrainerfishD"),
-#line 7901
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7902
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7904
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7906
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7905
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7907
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE] =
-    {
-#line 7908
-        .trainerName = _("TeachtrainerfishE"),
-#line 7909
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7910
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7912
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7914
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7913
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7915
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE_2] =
-    {
-#line 7916
-        .trainerName = _("TeachtrainerfishE"),
-#line 7917
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7918
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7920
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7922
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7921
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7923
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF] =
-    {
-#line 7924
-        .trainerName = _("TeachtrainerfishF"),
-#line 7925
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7926
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7928
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7930
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7929
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7931
-    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF_2] =
-    {
-#line 7932
-        .trainerName = _("TeachtrainerfishF"),
-#line 7933
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7934
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7936
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7938
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7937
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7939
-    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
-    {
-#line 7940
-        .trainerName = _("1A2CA162"),
-#line 7941
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7942
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7944
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7946
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7945
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7947
-    [DIFFICULTY_NORMAL][TRAINER_1A763631] =
-    {
-#line 7948
-        .trainerName = _("1A763631"),
-#line 7949
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 7950
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 7952
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 7954
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 7953
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 7955
-    [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
-    {
 #line 7956
-        .trainerName = _("1AE5CAF7"),
+        .trainerName = _("TeachtrainerfishD"),
 #line 7957
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7958
@@ -21033,10 +21033,10 @@
         },
     },
 #line 7963
-    [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHD_2] =
     {
 #line 7964
-        .trainerName = _("1AE89BEB"),
+        .trainerName = _("TeachtrainerfishD"),
 #line 7965
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7966
@@ -21061,10 +21061,10 @@
         },
     },
 #line 7971
-    [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE] =
     {
 #line 7972
-        .trainerName = _("1AEA3CEA"),
+        .trainerName = _("TeachtrainerfishE"),
 #line 7973
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7974
@@ -21089,10 +21089,10 @@
         },
     },
 #line 7979
-    [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHE_2] =
     {
 #line 7980
-        .trainerName = _("1B517ABD"),
+        .trainerName = _("TeachtrainerfishE"),
 #line 7981
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7982
@@ -21117,10 +21117,10 @@
         },
     },
 #line 7987
-    [DIFFICULTY_NORMAL][TRAINER_1B616469] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF] =
     {
 #line 7988
-        .trainerName = _("1B616469"),
+        .trainerName = _("TeachtrainerfishF"),
 #line 7989
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7990
@@ -21145,10 +21145,10 @@
         },
     },
 #line 7995
-    [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
+    [DIFFICULTY_NORMAL][TRAINER_QUEST_TEACHTRAINERFISHF_2] =
     {
 #line 7996
-        .trainerName = _("1BA35D11"),
+        .trainerName = _("TeachtrainerfishF"),
 #line 7997
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 7998
@@ -21173,10 +21173,10 @@
         },
     },
 #line 8003
-    [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
+    [DIFFICULTY_NORMAL][TRAINER_1A2CA162] =
     {
 #line 8004
-        .trainerName = _("1BB1218F"),
+        .trainerName = _("1A2CA162"),
 #line 8005
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8006
@@ -21201,10 +21201,10 @@
         },
     },
 #line 8011
-    [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
+    [DIFFICULTY_NORMAL][TRAINER_1A763631] =
     {
 #line 8012
-        .trainerName = _("1BC45966"),
+        .trainerName = _("1A763631"),
 #line 8013
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8014
@@ -21229,10 +21229,10 @@
         },
     },
 #line 8019
-    [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
     {
 #line 8020
-        .trainerName = _("1C2B088C"),
+        .trainerName = _("1AE5CAF7"),
 #line 8021
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8022
@@ -21257,10 +21257,10 @@
         },
     },
 #line 8027
-    [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
+    [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
     {
 #line 8028
-        .trainerName = _("1C6CA7F6"),
+        .trainerName = _("1AE89BEB"),
 #line 8029
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8030
@@ -21285,10 +21285,10 @@
         },
     },
 #line 8035
-    [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
+    [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
     {
 #line 8036
-        .trainerName = _("1CBE4FB1"),
+        .trainerName = _("1AEA3CEA"),
 #line 8037
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8038
@@ -21313,10 +21313,10 @@
         },
     },
 #line 8043
-    [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
+    [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
     {
 #line 8044
-        .trainerName = _("1CBFAF10"),
+        .trainerName = _("1B517ABD"),
 #line 8045
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8046
@@ -21341,10 +21341,10 @@
         },
     },
 #line 8051
-    [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
+    [DIFFICULTY_NORMAL][TRAINER_1B616469] =
     {
 #line 8052
-        .trainerName = _("1CC4D5D6"),
+        .trainerName = _("1B616469"),
 #line 8053
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8054
@@ -21369,10 +21369,10 @@
         },
     },
 #line 8059
-    [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
+    [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
     {
 #line 8060
-        .trainerName = _("1D63E5A1"),
+        .trainerName = _("1BA35D11"),
 #line 8061
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8062
@@ -21397,10 +21397,10 @@
         },
     },
 #line 8067
-    [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
+    [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
     {
 #line 8068
-        .trainerName = _("1D7A6DED"),
+        .trainerName = _("1BB1218F"),
 #line 8069
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8070
@@ -21425,10 +21425,10 @@
         },
     },
 #line 8075
-    [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
+    [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
     {
 #line 8076
-        .trainerName = _("1D93B10D"),
+        .trainerName = _("1BC45966"),
 #line 8077
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8078
@@ -21453,10 +21453,10 @@
         },
     },
 #line 8083
-    [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
+    [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
     {
 #line 8084
-        .trainerName = _("1DD07C78"),
+        .trainerName = _("1C2B088C"),
 #line 8085
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8086
@@ -21481,10 +21481,10 @@
         },
     },
 #line 8091
-    [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
+    [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
     {
 #line 8092
-        .trainerName = _("1E5E6E80"),
+        .trainerName = _("1C6CA7F6"),
 #line 8093
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8094
@@ -21509,10 +21509,10 @@
         },
     },
 #line 8099
-    [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
     {
 #line 8100
-        .trainerName = _("1EE34E30"),
+        .trainerName = _("1CBE4FB1"),
 #line 8101
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8102
@@ -21537,10 +21537,10 @@
         },
     },
 #line 8107
-    [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
+    [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
     {
 #line 8108
-        .trainerName = _("1F24A6B1"),
+        .trainerName = _("1CBFAF10"),
 #line 8109
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8110
@@ -21565,10 +21565,10 @@
         },
     },
 #line 8115
-    [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
+    [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
     {
 #line 8116
-        .trainerName = _("1F2A70D3"),
+        .trainerName = _("1CC4D5D6"),
 #line 8117
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8118
@@ -21593,10 +21593,10 @@
         },
     },
 #line 8123
-    [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
+    [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
     {
 #line 8124
-        .trainerName = _("1FD08020"),
+        .trainerName = _("1D63E5A1"),
 #line 8125
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8126
@@ -21621,10 +21621,10 @@
         },
     },
 #line 8131
-    [DIFFICULTY_NORMAL][TRAINER_200650CA] =
+    [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
     {
 #line 8132
-        .trainerName = _("200650CA"),
+        .trainerName = _("1D7A6DED"),
 #line 8133
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8134
@@ -21649,10 +21649,10 @@
         },
     },
 #line 8139
-    [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
+    [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
     {
 #line 8140
-        .trainerName = _("20170FA5"),
+        .trainerName = _("1D93B10D"),
 #line 8141
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8142
@@ -21677,10 +21677,10 @@
         },
     },
 #line 8147
-    [DIFFICULTY_NORMAL][TRAINER_20993B87] =
+    [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
     {
 #line 8148
-        .trainerName = _("20993B87"),
+        .trainerName = _("1DD07C78"),
 #line 8149
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8150
@@ -21705,10 +21705,10 @@
         },
     },
 #line 8155
-    [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
+    [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
     {
 #line 8156
-        .trainerName = _("20A10A97"),
+        .trainerName = _("1E5E6E80"),
 #line 8157
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8158
@@ -21733,10 +21733,10 @@
         },
     },
 #line 8163
-    [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
+    [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
     {
 #line 8164
-        .trainerName = _("20A6F3A6"),
+        .trainerName = _("1EE34E30"),
 #line 8165
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8166
@@ -21761,10 +21761,10 @@
         },
     },
 #line 8171
-    [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
+    [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
     {
 #line 8172
-        .trainerName = _("20DC389D"),
+        .trainerName = _("1F24A6B1"),
 #line 8173
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8174
@@ -21789,10 +21789,10 @@
         },
     },
 #line 8179
-    [DIFFICULTY_NORMAL][TRAINER_2177173C] =
+    [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
     {
 #line 8180
-        .trainerName = _("2177173C"),
+        .trainerName = _("1F2A70D3"),
 #line 8181
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8182
@@ -21817,10 +21817,10 @@
         },
     },
 #line 8187
-    [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
+    [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
     {
 #line 8188
-        .trainerName = _("2180E5CD"),
+        .trainerName = _("1FD08020"),
 #line 8189
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8190
@@ -21845,10 +21845,10 @@
         },
     },
 #line 8195
-    [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
+    [DIFFICULTY_NORMAL][TRAINER_200650CA] =
     {
 #line 8196
-        .trainerName = _("21EB8B2C"),
+        .trainerName = _("200650CA"),
 #line 8197
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8198
@@ -21873,10 +21873,10 @@
         },
     },
 #line 8203
-    [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
+    [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
     {
 #line 8204
-        .trainerName = _("22BA389B"),
+        .trainerName = _("20170FA5"),
 #line 8205
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8206
@@ -21901,10 +21901,10 @@
         },
     },
 #line 8211
-    [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
+    [DIFFICULTY_NORMAL][TRAINER_20993B87] =
     {
 #line 8212
-        .trainerName = _("22DD5E2B"),
+        .trainerName = _("20993B87"),
 #line 8213
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8214
@@ -21929,10 +21929,10 @@
         },
     },
 #line 8219
-    [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
+    [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
     {
 #line 8220
-        .trainerName = _("22E7DE36"),
+        .trainerName = _("20A10A97"),
 #line 8221
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8222
@@ -21957,10 +21957,10 @@
         },
     },
 #line 8227
-    [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
+    [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
     {
 #line 8228
-        .trainerName = _("23C3170F"),
+        .trainerName = _("20A6F3A6"),
 #line 8229
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8230
@@ -21985,10 +21985,10 @@
         },
     },
 #line 8235
-    [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
+    [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
     {
 #line 8236
-        .trainerName = _("23F50BC3"),
+        .trainerName = _("20DC389D"),
 #line 8237
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8238
@@ -22013,10 +22013,10 @@
         },
     },
 #line 8243
-    [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
+    [DIFFICULTY_NORMAL][TRAINER_2177173C] =
     {
 #line 8244
-        .trainerName = _("2434A25C"),
+        .trainerName = _("2177173C"),
 #line 8245
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8246
@@ -22041,10 +22041,10 @@
         },
     },
 #line 8251
-    [DIFFICULTY_NORMAL][TRAINER_245235C9] =
+    [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
     {
 #line 8252
-        .trainerName = _("245235C9"),
+        .trainerName = _("2180E5CD"),
 #line 8253
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8254
@@ -22069,10 +22069,10 @@
         },
     },
 #line 8259
-    [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
+    [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
     {
 #line 8260
-        .trainerName = _("246CBBD5"),
+        .trainerName = _("21EB8B2C"),
 #line 8261
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8262
@@ -22097,10 +22097,10 @@
         },
     },
 #line 8267
-    [DIFFICULTY_NORMAL][TRAINER_247FE019] =
+    [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
     {
 #line 8268
-        .trainerName = _("247FE019"),
+        .trainerName = _("22BA389B"),
 #line 8269
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8270
@@ -22125,10 +22125,10 @@
         },
     },
 #line 8275
-    [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
+    [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
     {
 #line 8276
-        .trainerName = _("24AAFD0D"),
+        .trainerName = _("22DD5E2B"),
 #line 8277
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8278
@@ -22153,10 +22153,10 @@
         },
     },
 #line 8283
-    [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
+    [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
     {
 #line 8284
-        .trainerName = _("2561CB61"),
+        .trainerName = _("22E7DE36"),
 #line 8285
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8286
@@ -22181,10 +22181,10 @@
         },
     },
 #line 8291
-    [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
+    [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
     {
 #line 8292
-        .trainerName = _("26268FB4"),
+        .trainerName = _("23C3170F"),
 #line 8293
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8294
@@ -22209,10 +22209,10 @@
         },
     },
 #line 8299
-    [DIFFICULTY_NORMAL][TRAINER_265174A6] =
+    [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
     {
 #line 8300
-        .trainerName = _("265174A6"),
+        .trainerName = _("23F50BC3"),
 #line 8301
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8302
@@ -22237,10 +22237,10 @@
         },
     },
 #line 8307
-    [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
+    [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
     {
 #line 8308
-        .trainerName = _("272FA5B8"),
+        .trainerName = _("2434A25C"),
 #line 8309
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8310
@@ -22265,10 +22265,10 @@
         },
     },
 #line 8315
-    [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
+    [DIFFICULTY_NORMAL][TRAINER_245235C9] =
     {
 #line 8316
-        .trainerName = _("27B23C10"),
+        .trainerName = _("245235C9"),
 #line 8317
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8318
@@ -22293,10 +22293,10 @@
         },
     },
 #line 8323
-    [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
+    [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
     {
 #line 8324
-        .trainerName = _("27CEF8F2"),
+        .trainerName = _("246CBBD5"),
 #line 8325
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8326
@@ -22321,10 +22321,10 @@
         },
     },
 #line 8331
-    [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
+    [DIFFICULTY_NORMAL][TRAINER_247FE019] =
     {
 #line 8332
-        .trainerName = _("27E6F69F"),
+        .trainerName = _("247FE019"),
 #line 8333
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8334
@@ -22349,10 +22349,10 @@
         },
     },
 #line 8339
-    [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
+    [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
     {
 #line 8340
-        .trainerName = _("28B294D2"),
+        .trainerName = _("24AAFD0D"),
 #line 8341
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8342
@@ -22377,10 +22377,10 @@
         },
     },
 #line 8347
-    [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
+    [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
     {
 #line 8348
-        .trainerName = _("28E0625E"),
+        .trainerName = _("2561CB61"),
 #line 8349
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8350
@@ -22405,10 +22405,10 @@
         },
     },
 #line 8355
-    [DIFFICULTY_NORMAL][TRAINER_292E386F] =
+    [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
     {
 #line 8356
-        .trainerName = _("292E386F"),
+        .trainerName = _("26268FB4"),
 #line 8357
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8358
@@ -22433,10 +22433,10 @@
         },
     },
 #line 8363
-    [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
+    [DIFFICULTY_NORMAL][TRAINER_265174A6] =
     {
 #line 8364
-        .trainerName = _("29AE727B"),
+        .trainerName = _("265174A6"),
 #line 8365
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8366
@@ -22461,10 +22461,10 @@
         },
     },
 #line 8371
-    [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
+    [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
     {
 #line 8372
-        .trainerName = _("2A305E88"),
+        .trainerName = _("272FA5B8"),
 #line 8373
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8374
@@ -22489,10 +22489,10 @@
         },
     },
 #line 8379
-    [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
+    [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
     {
 #line 8380
-        .trainerName = _("2A3F43CA"),
+        .trainerName = _("27B23C10"),
 #line 8381
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8382
@@ -22517,10 +22517,10 @@
         },
     },
 #line 8387
-    [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
+    [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
     {
 #line 8388
-        .trainerName = _("2A7BF9FF"),
+        .trainerName = _("27CEF8F2"),
 #line 8389
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8390
@@ -22545,10 +22545,10 @@
         },
     },
 #line 8395
-    [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
+    [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
     {
 #line 8396
-        .trainerName = _("2A83B15E"),
+        .trainerName = _("27E6F69F"),
 #line 8397
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8398
@@ -22573,10 +22573,10 @@
         },
     },
 #line 8403
-    [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
+    [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
     {
 #line 8404
-        .trainerName = _("2AD73BF3"),
+        .trainerName = _("28B294D2"),
 #line 8405
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8406
@@ -22601,10 +22601,10 @@
         },
     },
 #line 8411
-    [DIFFICULTY_NORMAL][TRAINER_2B163825] =
+    [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
     {
 #line 8412
-        .trainerName = _("2B163825"),
+        .trainerName = _("28E0625E"),
 #line 8413
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8414
@@ -22629,10 +22629,10 @@
         },
     },
 #line 8419
-    [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
+    [DIFFICULTY_NORMAL][TRAINER_292E386F] =
     {
 #line 8420
-        .trainerName = _("2B249E40"),
+        .trainerName = _("292E386F"),
 #line 8421
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8422
@@ -22657,10 +22657,10 @@
         },
     },
 #line 8427
-    [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
+    [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
     {
 #line 8428
-        .trainerName = _("2BCA066C"),
+        .trainerName = _("29AE727B"),
 #line 8429
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8430
@@ -22685,10 +22685,10 @@
         },
     },
 #line 8435
-    [DIFFICULTY_NORMAL][TRAINER_2C040422] =
+    [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
     {
 #line 8436
-        .trainerName = _("2C040422"),
+        .trainerName = _("2A305E88"),
 #line 8437
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8438
@@ -22713,10 +22713,10 @@
         },
     },
 #line 8443
-    [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
+    [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
     {
 #line 8444
-        .trainerName = _("2C22CE48"),
+        .trainerName = _("2A3F43CA"),
 #line 8445
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8446
@@ -22741,10 +22741,10 @@
         },
     },
 #line 8451
-    [DIFFICULTY_NORMAL][TRAINER_2C398893] =
+    [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
     {
 #line 8452
-        .trainerName = _("2C398893"),
+        .trainerName = _("2A7BF9FF"),
 #line 8453
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8454
@@ -22769,10 +22769,10 @@
         },
     },
 #line 8459
-    [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
+    [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
     {
 #line 8460
-        .trainerName = _("2C5FFA9F"),
+        .trainerName = _("2A83B15E"),
 #line 8461
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8462
@@ -22797,10 +22797,10 @@
         },
     },
 #line 8467
-    [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
+    [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
     {
 #line 8468
-        .trainerName = _("2D1A100A"),
+        .trainerName = _("2AD73BF3"),
 #line 8469
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8470
@@ -22825,10 +22825,10 @@
         },
     },
 #line 8475
-    [DIFFICULTY_NORMAL][TRAINER_2D203158] =
+    [DIFFICULTY_NORMAL][TRAINER_2B163825] =
     {
 #line 8476
-        .trainerName = _("2D203158"),
+        .trainerName = _("2B163825"),
 #line 8477
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8478
@@ -22853,10 +22853,10 @@
         },
     },
 #line 8483
-    [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
+    [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
     {
 #line 8484
-        .trainerName = _("2D29DC23"),
+        .trainerName = _("2B249E40"),
 #line 8485
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8486
@@ -22881,10 +22881,10 @@
         },
     },
 #line 8491
-    [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
+    [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
     {
 #line 8492
-        .trainerName = _("2D6DE246"),
+        .trainerName = _("2BCA066C"),
 #line 8493
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8494
@@ -22909,10 +22909,10 @@
         },
     },
 #line 8499
-    [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
+    [DIFFICULTY_NORMAL][TRAINER_2C040422] =
     {
 #line 8500
-        .trainerName = _("2D92F001"),
+        .trainerName = _("2C040422"),
 #line 8501
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8502
@@ -22937,10 +22937,10 @@
         },
     },
 #line 8507
-    [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
+    [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
     {
 #line 8508
-        .trainerName = _("2DC29B9E"),
+        .trainerName = _("2C22CE48"),
 #line 8509
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8510
@@ -22965,10 +22965,10 @@
         },
     },
 #line 8515
-    [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
+    [DIFFICULTY_NORMAL][TRAINER_2C398893] =
     {
 #line 8516
-        .trainerName = _("2E218A8E"),
+        .trainerName = _("2C398893"),
 #line 8517
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8518
@@ -22993,10 +22993,10 @@
         },
     },
 #line 8523
-    [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
+    [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
     {
 #line 8524
-        .trainerName = _("2E593FA9"),
+        .trainerName = _("2C5FFA9F"),
 #line 8525
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8526
@@ -23021,10 +23021,10 @@
         },
     },
 #line 8531
-    [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
+    [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
     {
 #line 8532
-        .trainerName = _("2EC49459"),
+        .trainerName = _("2D1A100A"),
 #line 8533
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8534
@@ -23049,10 +23049,10 @@
         },
     },
 #line 8539
-    [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
+    [DIFFICULTY_NORMAL][TRAINER_2D203158] =
     {
 #line 8540
-        .trainerName = _("2F0770D3"),
+        .trainerName = _("2D203158"),
 #line 8541
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8542
@@ -23077,10 +23077,10 @@
         },
     },
 #line 8547
-    [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
+    [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
     {
 #line 8548
-        .trainerName = _("2F09421D"),
+        .trainerName = _("2D29DC23"),
 #line 8549
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8550
@@ -23105,10 +23105,10 @@
         },
     },
 #line 8555
-    [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
+    [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
     {
 #line 8556
-        .trainerName = _("2FF79A0B"),
+        .trainerName = _("2D6DE246"),
 #line 8557
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8558
@@ -23133,10 +23133,10 @@
         },
     },
 #line 8563
-    [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
+    [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
     {
 #line 8564
-        .trainerName = _("3009CC76"),
+        .trainerName = _("2D92F001"),
 #line 8565
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8566
@@ -23161,10 +23161,10 @@
         },
     },
 #line 8571
-    [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
+    [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
     {
 #line 8572
-        .trainerName = _("30522A9A"),
+        .trainerName = _("2DC29B9E"),
 #line 8573
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8574
@@ -23189,10 +23189,10 @@
         },
     },
 #line 8579
-    [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
+    [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
     {
 #line 8580
-        .trainerName = _("30ACE135"),
+        .trainerName = _("2E218A8E"),
 #line 8581
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8582
@@ -23217,10 +23217,10 @@
         },
     },
 #line 8587
-    [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
+    [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
     {
 #line 8588
-        .trainerName = _("311B3EFC"),
+        .trainerName = _("2E593FA9"),
 #line 8589
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8590
@@ -23245,10 +23245,10 @@
         },
     },
 #line 8595
-    [DIFFICULTY_NORMAL][TRAINER_317B8932] =
+    [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
     {
 #line 8596
-        .trainerName = _("317B8932"),
+        .trainerName = _("2EC49459"),
 #line 8597
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8598
@@ -23273,10 +23273,10 @@
         },
     },
 #line 8603
-    [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
+    [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
     {
 #line 8604
-        .trainerName = _("31D36FE6"),
+        .trainerName = _("2F0770D3"),
 #line 8605
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8606
@@ -23301,10 +23301,10 @@
         },
     },
 #line 8611
-    [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
+    [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
     {
 #line 8612
-        .trainerName = _("32C1F13D"),
+        .trainerName = _("2F09421D"),
 #line 8613
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8614
@@ -23329,10 +23329,10 @@
         },
     },
 #line 8619
-    [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
+    [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
     {
 #line 8620
-        .trainerName = _("33AB4856"),
+        .trainerName = _("2FF79A0B"),
 #line 8621
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8622
@@ -23357,10 +23357,10 @@
         },
     },
 #line 8627
-    [DIFFICULTY_NORMAL][TRAINER_3566F099] =
+    [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
     {
 #line 8628
-        .trainerName = _("3566F099"),
+        .trainerName = _("3009CC76"),
 #line 8629
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8630
@@ -23385,10 +23385,10 @@
         },
     },
 #line 8635
-    [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
+    [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
     {
 #line 8636
-        .trainerName = _("35E0E027"),
+        .trainerName = _("30522A9A"),
 #line 8637
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8638
@@ -23413,10 +23413,10 @@
         },
     },
 #line 8643
-    [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
+    [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
     {
 #line 8644
-        .trainerName = _("36662EEF"),
+        .trainerName = _("30ACE135"),
 #line 8645
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8646
@@ -23441,10 +23441,10 @@
         },
     },
 #line 8651
-    [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
+    [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
     {
 #line 8652
-        .trainerName = _("3681E8DE"),
+        .trainerName = _("311B3EFC"),
 #line 8653
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8654
@@ -23469,10 +23469,10 @@
         },
     },
 #line 8659
-    [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
+    [DIFFICULTY_NORMAL][TRAINER_317B8932] =
     {
 #line 8660
-        .trainerName = _("3789DC6E"),
+        .trainerName = _("317B8932"),
 #line 8661
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8662
@@ -23497,10 +23497,10 @@
         },
     },
 #line 8667
-    [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
+    [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
     {
 #line 8668
-        .trainerName = _("37B9EFB7"),
+        .trainerName = _("31D36FE6"),
 #line 8669
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8670
@@ -23525,10 +23525,10 @@
         },
     },
 #line 8675
-    [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
+    [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
     {
 #line 8676
-        .trainerName = _("37EDB78E"),
+        .trainerName = _("32C1F13D"),
 #line 8677
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8678
@@ -23553,10 +23553,10 @@
         },
     },
 #line 8683
-    [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
+    [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
     {
 #line 8684
-        .trainerName = _("382E2AB3"),
+        .trainerName = _("33AB4856"),
 #line 8685
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8686
@@ -23581,10 +23581,10 @@
         },
     },
 #line 8691
-    [DIFFICULTY_NORMAL][TRAINER_3842496B] =
+    [DIFFICULTY_NORMAL][TRAINER_3566F099] =
     {
 #line 8692
-        .trainerName = _("3842496B"),
+        .trainerName = _("3566F099"),
 #line 8693
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8694
@@ -23609,10 +23609,10 @@
         },
     },
 #line 8699
-    [DIFFICULTY_NORMAL][TRAINER_387351C1] =
+    [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
     {
 #line 8700
-        .trainerName = _("387351C1"),
+        .trainerName = _("35E0E027"),
 #line 8701
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8702
@@ -23637,10 +23637,10 @@
         },
     },
 #line 8707
-    [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
+    [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
     {
 #line 8708
-        .trainerName = _("38A47BDB"),
+        .trainerName = _("36662EEF"),
 #line 8709
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8710
@@ -23665,10 +23665,10 @@
         },
     },
 #line 8715
-    [DIFFICULTY_NORMAL][TRAINER_3924756E] =
+    [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
     {
 #line 8716
-        .trainerName = _("3924756E"),
+        .trainerName = _("3681E8DE"),
 #line 8717
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8718
@@ -23693,10 +23693,10 @@
         },
     },
 #line 8723
-    [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
+    [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
     {
 #line 8724
-        .trainerName = _("3947ACC3"),
+        .trainerName = _("3789DC6E"),
 #line 8725
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8726
@@ -23721,10 +23721,10 @@
         },
     },
 #line 8731
-    [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
+    [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
     {
 #line 8732
-        .trainerName = _("39AD4606"),
+        .trainerName = _("37B9EFB7"),
 #line 8733
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8734
@@ -23749,10 +23749,10 @@
         },
     },
 #line 8739
-    [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
+    [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
     {
 #line 8740
-        .trainerName = _("39E0AE4F"),
+        .trainerName = _("37EDB78E"),
 #line 8741
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8742
@@ -23777,10 +23777,10 @@
         },
     },
 #line 8747
-    [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
+    [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
     {
 #line 8748
-        .trainerName = _("39E78D45"),
+        .trainerName = _("382E2AB3"),
 #line 8749
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8750
@@ -23805,10 +23805,10 @@
         },
     },
 #line 8755
-    [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
+    [DIFFICULTY_NORMAL][TRAINER_3842496B] =
     {
 #line 8756
-        .trainerName = _("3A11452B"),
+        .trainerName = _("3842496B"),
 #line 8757
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8758
@@ -23833,10 +23833,10 @@
         },
     },
 #line 8763
-    [DIFFICULTY_NORMAL][TRAINER_3A840205] =
+    [DIFFICULTY_NORMAL][TRAINER_387351C1] =
     {
 #line 8764
-        .trainerName = _("3A840205"),
+        .trainerName = _("387351C1"),
 #line 8765
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8766
@@ -23861,10 +23861,10 @@
         },
     },
 #line 8771
-    [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
+    [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
     {
 #line 8772
-        .trainerName = _("3AD97475"),
+        .trainerName = _("38A47BDB"),
 #line 8773
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8774
@@ -23889,10 +23889,10 @@
         },
     },
 #line 8779
-    [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
+    [DIFFICULTY_NORMAL][TRAINER_3924756E] =
     {
 #line 8780
-        .trainerName = _("3AEE4974"),
+        .trainerName = _("3924756E"),
 #line 8781
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8782
@@ -23917,10 +23917,10 @@
         },
     },
 #line 8787
-    [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
+    [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
     {
 #line 8788
-        .trainerName = _("3BAF0C60"),
+        .trainerName = _("3947ACC3"),
 #line 8789
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8790
@@ -23945,10 +23945,10 @@
         },
     },
 #line 8795
-    [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
+    [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
     {
 #line 8796
-        .trainerName = _("3BDED445"),
+        .trainerName = _("39AD4606"),
 #line 8797
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8798
@@ -23973,10 +23973,10 @@
         },
     },
 #line 8803
-    [DIFFICULTY_NORMAL][TRAINER_3C621048] =
+    [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
     {
 #line 8804
-        .trainerName = _("3C621048"),
+        .trainerName = _("39E0AE4F"),
 #line 8805
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8806
@@ -24001,10 +24001,10 @@
         },
     },
 #line 8811
-    [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
+    [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
     {
 #line 8812
-        .trainerName = _("3C74DAE2"),
+        .trainerName = _("39E78D45"),
 #line 8813
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8814
@@ -24029,10 +24029,10 @@
         },
     },
 #line 8819
-    [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
+    [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
     {
 #line 8820
-        .trainerName = _("3C7AC359"),
+        .trainerName = _("3A11452B"),
 #line 8821
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8822
@@ -24057,10 +24057,10 @@
         },
     },
 #line 8827
-    [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
+    [DIFFICULTY_NORMAL][TRAINER_3A840205] =
     {
 #line 8828
-        .trainerName = _("3CDE5F9E"),
+        .trainerName = _("3A840205"),
 #line 8829
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8830
@@ -24085,10 +24085,10 @@
         },
     },
 #line 8835
-    [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
+    [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
     {
 #line 8836
-        .trainerName = _("3CECE368"),
+        .trainerName = _("3AD97475"),
 #line 8837
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8838
@@ -24113,10 +24113,10 @@
         },
     },
 #line 8843
-    [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
+    [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
     {
 #line 8844
-        .trainerName = _("3CFF3841"),
+        .trainerName = _("3AEE4974"),
 #line 8845
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8846
@@ -24141,10 +24141,10 @@
         },
     },
 #line 8851
-    [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
+    [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
     {
 #line 8852
-        .trainerName = _("3D502E2F"),
+        .trainerName = _("3BAF0C60"),
 #line 8853
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8854
@@ -24169,10 +24169,10 @@
         },
     },
 #line 8859
-    [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
+    [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
     {
 #line 8860
-        .trainerName = _("3D7FDE57"),
+        .trainerName = _("3BDED445"),
 #line 8861
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8862
@@ -24197,10 +24197,10 @@
         },
     },
 #line 8867
-    [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
+    [DIFFICULTY_NORMAL][TRAINER_3C621048] =
     {
 #line 8868
-        .trainerName = _("3DCD0BBC"),
+        .trainerName = _("3C621048"),
 #line 8869
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8870
@@ -24225,10 +24225,10 @@
         },
     },
 #line 8875
-    [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
+    [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
     {
 #line 8876
-        .trainerName = _("3E17924C"),
+        .trainerName = _("3C74DAE2"),
 #line 8877
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8878
@@ -24253,10 +24253,10 @@
         },
     },
 #line 8883
-    [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
+    [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
     {
 #line 8884
-        .trainerName = _("3EB6FA04"),
+        .trainerName = _("3C7AC359"),
 #line 8885
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8886
@@ -24281,10 +24281,10 @@
         },
     },
 #line 8891
-    [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
+    [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
     {
 #line 8892
-        .trainerName = _("3EFCF1C8"),
+        .trainerName = _("3CDE5F9E"),
 #line 8893
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8894
@@ -24309,10 +24309,10 @@
         },
     },
 #line 8899
-    [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
+    [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
     {
 #line 8900
-        .trainerName = _("3F0BF52E"),
+        .trainerName = _("3CECE368"),
 #line 8901
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8902
@@ -24337,10 +24337,10 @@
         },
     },
 #line 8907
-    [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
+    [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
     {
 #line 8908
-        .trainerName = _("4000C8A0"),
+        .trainerName = _("3CFF3841"),
 #line 8909
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8910
@@ -24365,10 +24365,10 @@
         },
     },
 #line 8915
-    [DIFFICULTY_NORMAL][TRAINER_403D932D] =
+    [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
     {
 #line 8916
-        .trainerName = _("403D932D"),
+        .trainerName = _("3D502E2F"),
 #line 8917
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8918
@@ -24393,10 +24393,10 @@
         },
     },
 #line 8923
-    [DIFFICULTY_NORMAL][TRAINER_408862C4] =
+    [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
     {
 #line 8924
-        .trainerName = _("408862C4"),
+        .trainerName = _("3D7FDE57"),
 #line 8925
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8926
@@ -24421,10 +24421,10 @@
         },
     },
 #line 8931
-    [DIFFICULTY_NORMAL][TRAINER_419282AD] =
+    [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
     {
 #line 8932
-        .trainerName = _("419282AD"),
+        .trainerName = _("3DCD0BBC"),
 #line 8933
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8934
@@ -24449,10 +24449,10 @@
         },
     },
 #line 8939
-    [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
+    [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
     {
 #line 8940
-        .trainerName = _("419FCBAE"),
+        .trainerName = _("3E17924C"),
 #line 8941
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8942
@@ -24477,10 +24477,10 @@
         },
     },
 #line 8947
-    [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
+    [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
     {
 #line 8948
-        .trainerName = _("41B8591B"),
+        .trainerName = _("3EB6FA04"),
 #line 8949
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8950
@@ -24505,10 +24505,10 @@
         },
     },
 #line 8955
-    [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
+    [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
     {
 #line 8956
-        .trainerName = _("41DCF7BA"),
+        .trainerName = _("3EFCF1C8"),
 #line 8957
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8958
@@ -24533,10 +24533,10 @@
         },
     },
 #line 8963
-    [DIFFICULTY_NORMAL][TRAINER_4227B911] =
+    [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
     {
 #line 8964
-        .trainerName = _("4227B911"),
+        .trainerName = _("3F0BF52E"),
 #line 8965
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8966
@@ -24561,10 +24561,10 @@
         },
     },
 #line 8971
-    [DIFFICULTY_NORMAL][TRAINER_4239B726] =
+    [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
     {
 #line 8972
-        .trainerName = _("4239B726"),
+        .trainerName = _("4000C8A0"),
 #line 8973
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8974
@@ -24589,10 +24589,10 @@
         },
     },
 #line 8979
-    [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
+    [DIFFICULTY_NORMAL][TRAINER_403D932D] =
     {
 #line 8980
-        .trainerName = _("42BC1D70"),
+        .trainerName = _("403D932D"),
 #line 8981
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8982
@@ -24617,10 +24617,10 @@
         },
     },
 #line 8987
-    [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
+    [DIFFICULTY_NORMAL][TRAINER_408862C4] =
     {
 #line 8988
-        .trainerName = _("42BE3E94"),
+        .trainerName = _("408862C4"),
 #line 8989
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8990
@@ -24645,10 +24645,10 @@
         },
     },
 #line 8995
-    [DIFFICULTY_NORMAL][TRAINER_42C68371] =
+    [DIFFICULTY_NORMAL][TRAINER_419282AD] =
     {
 #line 8996
-        .trainerName = _("42C68371"),
+        .trainerName = _("419282AD"),
 #line 8997
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 8998
@@ -24673,10 +24673,10 @@
         },
     },
 #line 9003
-    [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
+    [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
     {
 #line 9004
-        .trainerName = _("432F34FA"),
+        .trainerName = _("419FCBAE"),
 #line 9005
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9006
@@ -24701,10 +24701,10 @@
         },
     },
 #line 9011
-    [DIFFICULTY_NORMAL][TRAINER_437E553A] =
+    [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
     {
 #line 9012
-        .trainerName = _("437E553A"),
+        .trainerName = _("41B8591B"),
 #line 9013
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9014
@@ -24729,10 +24729,10 @@
         },
     },
 #line 9019
-    [DIFFICULTY_NORMAL][TRAINER_4394141C] =
+    [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
     {
 #line 9020
-        .trainerName = _("4394141C"),
+        .trainerName = _("41DCF7BA"),
 #line 9021
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9022
@@ -24757,10 +24757,10 @@
         },
     },
 #line 9027
-    [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
+    [DIFFICULTY_NORMAL][TRAINER_4227B911] =
     {
 #line 9028
-        .trainerName = _("43B111AD"),
+        .trainerName = _("4227B911"),
 #line 9029
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9030
@@ -24785,10 +24785,10 @@
         },
     },
 #line 9035
-    [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
+    [DIFFICULTY_NORMAL][TRAINER_4239B726] =
     {
 #line 9036
-        .trainerName = _("43B30B5D"),
+        .trainerName = _("4239B726"),
 #line 9037
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9038
@@ -24813,10 +24813,10 @@
         },
     },
 #line 9043
-    [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
+    [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
     {
 #line 9044
-        .trainerName = _("43D6557C"),
+        .trainerName = _("42BC1D70"),
 #line 9045
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9046
@@ -24841,10 +24841,10 @@
         },
     },
 #line 9051
-    [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
+    [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
     {
 #line 9052
-        .trainerName = _("44251BF9"),
+        .trainerName = _("42BE3E94"),
 #line 9053
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9054
@@ -24869,10 +24869,10 @@
         },
     },
 #line 9059
-    [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
+    [DIFFICULTY_NORMAL][TRAINER_42C68371] =
     {
 #line 9060
-        .trainerName = _("44D28B98"),
+        .trainerName = _("42C68371"),
 #line 9061
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9062
@@ -24897,10 +24897,10 @@
         },
     },
 #line 9067
-    [DIFFICULTY_NORMAL][TRAINER_44E68738] =
+    [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
     {
 #line 9068
-        .trainerName = _("44E68738"),
+        .trainerName = _("432F34FA"),
 #line 9069
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9070
@@ -24925,10 +24925,10 @@
         },
     },
 #line 9075
-    [DIFFICULTY_NORMAL][TRAINER_44F86666] =
+    [DIFFICULTY_NORMAL][TRAINER_437E553A] =
     {
 #line 9076
-        .trainerName = _("44F86666"),
+        .trainerName = _("437E553A"),
 #line 9077
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9078
@@ -24953,10 +24953,10 @@
         },
     },
 #line 9083
-    [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
+    [DIFFICULTY_NORMAL][TRAINER_4394141C] =
     {
 #line 9084
-        .trainerName = _("458C3B90"),
+        .trainerName = _("4394141C"),
 #line 9085
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9086
@@ -24981,10 +24981,10 @@
         },
     },
 #line 9091
-    [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
+    [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
     {
 #line 9092
-        .trainerName = _("45CBA787"),
+        .trainerName = _("43B111AD"),
 #line 9093
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9094
@@ -25009,10 +25009,10 @@
         },
     },
 #line 9099
-    [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
+    [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
     {
 #line 9100
-        .trainerName = _("45E5EB22"),
+        .trainerName = _("43B30B5D"),
 #line 9101
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9102
@@ -25037,10 +25037,10 @@
         },
     },
 #line 9107
-    [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
+    [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
     {
 #line 9108
-        .trainerName = _("45ECBA80"),
+        .trainerName = _("43D6557C"),
 #line 9109
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9110
@@ -25065,10 +25065,10 @@
         },
     },
 #line 9115
-    [DIFFICULTY_NORMAL][TRAINER_460AB144] =
+    [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
     {
 #line 9116
-        .trainerName = _("460AB144"),
+        .trainerName = _("44251BF9"),
 #line 9117
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9118
@@ -25093,10 +25093,10 @@
         },
     },
 #line 9123
-    [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
+    [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
     {
 #line 9124
-        .trainerName = _("46169EA5"),
+        .trainerName = _("44D28B98"),
 #line 9125
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9126
@@ -25121,10 +25121,10 @@
         },
     },
 #line 9131
-    [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
+    [DIFFICULTY_NORMAL][TRAINER_44E68738] =
     {
 #line 9132
-        .trainerName = _("464C4C44"),
+        .trainerName = _("44E68738"),
 #line 9133
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9134
@@ -25149,10 +25149,10 @@
         },
     },
 #line 9139
-    [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
+    [DIFFICULTY_NORMAL][TRAINER_44F86666] =
     {
 #line 9140
-        .trainerName = _("473EE9DE"),
+        .trainerName = _("44F86666"),
 #line 9141
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9142
@@ -25177,10 +25177,10 @@
         },
     },
 #line 9147
-    [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
+    [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
     {
 #line 9148
-        .trainerName = _("4787A98D"),
+        .trainerName = _("458C3B90"),
 #line 9149
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9150
@@ -25205,10 +25205,10 @@
         },
     },
 #line 9155
-    [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
+    [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
     {
 #line 9156
-        .trainerName = _("479BBFEB"),
+        .trainerName = _("45CBA787"),
 #line 9157
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9158
@@ -25233,10 +25233,10 @@
         },
     },
 #line 9163
-    [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
+    [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
     {
 #line 9164
-        .trainerName = _("47EACF7E"),
+        .trainerName = _("45E5EB22"),
 #line 9165
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9166
@@ -25261,10 +25261,10 @@
         },
     },
 #line 9171
-    [DIFFICULTY_NORMAL][TRAINER_4848801D] =
+    [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
     {
 #line 9172
-        .trainerName = _("4848801D"),
+        .trainerName = _("45ECBA80"),
 #line 9173
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9174
@@ -25289,10 +25289,10 @@
         },
     },
 #line 9179
-    [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
+    [DIFFICULTY_NORMAL][TRAINER_460AB144] =
     {
 #line 9180
-        .trainerName = _("487BEC6D"),
+        .trainerName = _("460AB144"),
 #line 9181
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9182
@@ -25317,10 +25317,10 @@
         },
     },
 #line 9187
-    [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
+    [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
     {
 #line 9188
-        .trainerName = _("492E0A66"),
+        .trainerName = _("46169EA5"),
 #line 9189
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9190
@@ -25345,10 +25345,10 @@
         },
     },
 #line 9195
-    [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
+    [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
     {
 #line 9196
-        .trainerName = _("494ECB35"),
+        .trainerName = _("464C4C44"),
 #line 9197
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9198
@@ -25373,10 +25373,10 @@
         },
     },
 #line 9203
-    [DIFFICULTY_NORMAL][TRAINER_494F5379] =
+    [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
     {
 #line 9204
-        .trainerName = _("494F5379"),
+        .trainerName = _("473EE9DE"),
 #line 9205
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9206
@@ -25401,10 +25401,10 @@
         },
     },
 #line 9211
-    [DIFFICULTY_NORMAL][TRAINER_49805D55] =
+    [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
     {
 #line 9212
-        .trainerName = _("49805D55"),
+        .trainerName = _("4787A98D"),
 #line 9213
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9214
@@ -25429,10 +25429,10 @@
         },
     },
 #line 9219
-    [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
+    [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
     {
 #line 9220
-        .trainerName = _("49EA8A40"),
+        .trainerName = _("479BBFEB"),
 #line 9221
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9222
@@ -25457,10 +25457,10 @@
         },
     },
 #line 9227
-    [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
+    [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
     {
 #line 9228
-        .trainerName = _("4A323E4A"),
+        .trainerName = _("47EACF7E"),
 #line 9229
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9230
@@ -25485,10 +25485,10 @@
         },
     },
 #line 9235
-    [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
+    [DIFFICULTY_NORMAL][TRAINER_4848801D] =
     {
 #line 9236
-        .trainerName = _("4A3EB696"),
+        .trainerName = _("4848801D"),
 #line 9237
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9238
@@ -25513,10 +25513,10 @@
         },
     },
 #line 9243
-    [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
+    [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
     {
 #line 9244
-        .trainerName = _("4ABDB43A"),
+        .trainerName = _("487BEC6D"),
 #line 9245
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9246
@@ -25541,10 +25541,10 @@
         },
     },
 #line 9251
-    [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
+    [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
     {
 #line 9252
-        .trainerName = _("4AD6DB47"),
+        .trainerName = _("492E0A66"),
 #line 9253
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9254
@@ -25569,10 +25569,10 @@
         },
     },
 #line 9259
-    [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
+    [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
     {
 #line 9260
-        .trainerName = _("4AF51B8A"),
+        .trainerName = _("494ECB35"),
 #line 9261
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9262
@@ -25597,10 +25597,10 @@
         },
     },
 #line 9267
-    [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
+    [DIFFICULTY_NORMAL][TRAINER_494F5379] =
     {
 #line 9268
-        .trainerName = _("4B2BC403"),
+        .trainerName = _("494F5379"),
 #line 9269
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9270
@@ -25625,10 +25625,10 @@
         },
     },
 #line 9275
-    [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
+    [DIFFICULTY_NORMAL][TRAINER_49805D55] =
     {
 #line 9276
-        .trainerName = _("4B3B0356"),
+        .trainerName = _("49805D55"),
 #line 9277
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9278
@@ -25653,10 +25653,10 @@
         },
     },
 #line 9283
-    [DIFFICULTY_NORMAL][TRAINER_4B431569] =
+    [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
     {
 #line 9284
-        .trainerName = _("4B431569"),
+        .trainerName = _("49EA8A40"),
 #line 9285
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9286
@@ -25681,10 +25681,10 @@
         },
     },
 #line 9291
-    [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
+    [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
     {
 #line 9292
-        .trainerName = _("4B5B4954"),
+        .trainerName = _("4A323E4A"),
 #line 9293
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9294
@@ -25709,10 +25709,10 @@
         },
     },
 #line 9299
-    [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
+    [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
     {
 #line 9300
-        .trainerName = _("4C2D23EC"),
+        .trainerName = _("4A3EB696"),
 #line 9301
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9302
@@ -25737,10 +25737,10 @@
         },
     },
 #line 9307
-    [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
+    [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
     {
 #line 9308
-        .trainerName = _("4CE97031"),
+        .trainerName = _("4ABDB43A"),
 #line 9309
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9310
@@ -25765,10 +25765,10 @@
         },
     },
 #line 9315
-    [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
+    [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
     {
 #line 9316
-        .trainerName = _("4CF43F23"),
+        .trainerName = _("4AD6DB47"),
 #line 9317
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9318
@@ -25793,10 +25793,10 @@
         },
     },
 #line 9323
-    [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
+    [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
     {
 #line 9324
-        .trainerName = _("4D8F9D46"),
+        .trainerName = _("4AF51B8A"),
 #line 9325
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9326
@@ -25821,10 +25821,10 @@
         },
     },
 #line 9331
-    [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
+    [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
     {
 #line 9332
-        .trainerName = _("4D98F6C4"),
+        .trainerName = _("4B2BC403"),
 #line 9333
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9334
@@ -25849,10 +25849,10 @@
         },
     },
 #line 9339
-    [DIFFICULTY_NORMAL][TRAINER_4E072263] =
+    [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
     {
 #line 9340
-        .trainerName = _("4E072263"),
+        .trainerName = _("4B3B0356"),
 #line 9341
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9342
@@ -25877,10 +25877,10 @@
         },
     },
 #line 9347
-    [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
+    [DIFFICULTY_NORMAL][TRAINER_4B431569] =
     {
 #line 9348
-        .trainerName = _("4E0C1EFE"),
+        .trainerName = _("4B431569"),
 #line 9349
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9350
@@ -25905,10 +25905,10 @@
         },
     },
 #line 9355
-    [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
+    [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
     {
 #line 9356
-        .trainerName = _("4E226A6E"),
+        .trainerName = _("4B5B4954"),
 #line 9357
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9358
@@ -25933,10 +25933,10 @@
         },
     },
 #line 9363
-    [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
+    [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
     {
 #line 9364
-        .trainerName = _("4E5AAFAE"),
+        .trainerName = _("4C2D23EC"),
 #line 9365
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9366
@@ -25961,10 +25961,10 @@
         },
     },
 #line 9371
-    [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
+    [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
     {
 #line 9372
-        .trainerName = _("4F10DCA9"),
+        .trainerName = _("4CE97031"),
 #line 9373
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9374
@@ -25989,10 +25989,10 @@
         },
     },
 #line 9379
-    [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
+    [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
     {
 #line 9380
-        .trainerName = _("50AE78E5"),
+        .trainerName = _("4CF43F23"),
 #line 9381
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9382
@@ -26017,10 +26017,10 @@
         },
     },
 #line 9387
-    [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
+    [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
     {
 #line 9388
-        .trainerName = _("513A43EE"),
+        .trainerName = _("4D8F9D46"),
 #line 9389
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9390
@@ -26045,10 +26045,10 @@
         },
     },
 #line 9395
-    [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
+    [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
     {
 #line 9396
-        .trainerName = _("51A32DCA"),
+        .trainerName = _("4D98F6C4"),
 #line 9397
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9398
@@ -26073,10 +26073,10 @@
         },
     },
 #line 9403
-    [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
+    [DIFFICULTY_NORMAL][TRAINER_4E072263] =
     {
 #line 9404
-        .trainerName = _("51F6B834"),
+        .trainerName = _("4E072263"),
 #line 9405
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9406
@@ -26101,10 +26101,10 @@
         },
     },
 #line 9411
-    [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
+    [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
     {
 #line 9412
-        .trainerName = _("5209EDF0"),
+        .trainerName = _("4E0C1EFE"),
 #line 9413
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9414
@@ -26129,10 +26129,10 @@
         },
     },
 #line 9419
-    [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
+    [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
     {
 #line 9420
-        .trainerName = _("52CFC159"),
+        .trainerName = _("4E226A6E"),
 #line 9421
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9422
@@ -26157,10 +26157,10 @@
         },
     },
 #line 9427
-    [DIFFICULTY_NORMAL][TRAINER_538D052D] =
+    [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
     {
 #line 9428
-        .trainerName = _("538D052D"),
+        .trainerName = _("4E5AAFAE"),
 #line 9429
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9430
@@ -26185,10 +26185,10 @@
         },
     },
 #line 9435
-    [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
+    [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
     {
 #line 9436
-        .trainerName = _("53A1A61A"),
+        .trainerName = _("4F10DCA9"),
 #line 9437
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9438
@@ -26213,10 +26213,10 @@
         },
     },
 #line 9443
-    [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
+    [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
     {
 #line 9444
-        .trainerName = _("53B06C7B"),
+        .trainerName = _("50AE78E5"),
 #line 9445
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9446
@@ -26241,10 +26241,10 @@
         },
     },
 #line 9451
-    [DIFFICULTY_NORMAL][TRAINER_54110A38] =
+    [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
     {
 #line 9452
-        .trainerName = _("54110A38"),
+        .trainerName = _("513A43EE"),
 #line 9453
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9454
@@ -26269,10 +26269,10 @@
         },
     },
 #line 9459
-    [DIFFICULTY_NORMAL][TRAINER_549792BA] =
+    [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
     {
 #line 9460
-        .trainerName = _("549792BA"),
+        .trainerName = _("51A32DCA"),
 #line 9461
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9462
@@ -26297,10 +26297,10 @@
         },
     },
 #line 9467
-    [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
+    [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
     {
 #line 9468
-        .trainerName = _("54BAC2DA"),
+        .trainerName = _("51F6B834"),
 #line 9469
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9470
@@ -26325,10 +26325,10 @@
         },
     },
 #line 9475
-    [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
+    [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
     {
 #line 9476
-        .trainerName = _("54F170BE"),
+        .trainerName = _("5209EDF0"),
 #line 9477
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9478
@@ -26353,10 +26353,10 @@
         },
     },
 #line 9483
-    [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
+    [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
     {
 #line 9484
-        .trainerName = _("558F80F9"),
+        .trainerName = _("52CFC159"),
 #line 9485
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9486
@@ -26381,10 +26381,10 @@
         },
     },
 #line 9491
-    [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
+    [DIFFICULTY_NORMAL][TRAINER_538D052D] =
     {
 #line 9492
-        .trainerName = _("55CA00A1"),
+        .trainerName = _("538D052D"),
 #line 9493
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9494
@@ -26409,10 +26409,10 @@
         },
     },
 #line 9499
-    [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
+    [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
     {
 #line 9500
-        .trainerName = _("55D0BEAA"),
+        .trainerName = _("53A1A61A"),
 #line 9501
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9502
@@ -26437,10 +26437,10 @@
         },
     },
 #line 9507
-    [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
+    [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
     {
 #line 9508
-        .trainerName = _("55D90FA8"),
+        .trainerName = _("53B06C7B"),
 #line 9509
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9510
@@ -26465,10 +26465,10 @@
         },
     },
 #line 9515
-    [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
+    [DIFFICULTY_NORMAL][TRAINER_54110A38] =
     {
 #line 9516
-        .trainerName = _("55EBF949"),
+        .trainerName = _("54110A38"),
 #line 9517
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9518
@@ -26493,10 +26493,10 @@
         },
     },
 #line 9523
-    [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
+    [DIFFICULTY_NORMAL][TRAINER_549792BA] =
     {
 #line 9524
-        .trainerName = _("565DE3C4"),
+        .trainerName = _("549792BA"),
 #line 9525
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9526
@@ -26521,10 +26521,10 @@
         },
     },
 #line 9531
-    [DIFFICULTY_NORMAL][TRAINER_56775C71] =
+    [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
     {
 #line 9532
-        .trainerName = _("56775C71"),
+        .trainerName = _("54BAC2DA"),
 #line 9533
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9534
@@ -26549,10 +26549,10 @@
         },
     },
 #line 9539
-    [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
+    [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
     {
 #line 9540
-        .trainerName = _("56C1FE08"),
+        .trainerName = _("54F170BE"),
 #line 9541
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9542
@@ -26577,10 +26577,10 @@
         },
     },
 #line 9547
-    [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
+    [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
     {
 #line 9548
-        .trainerName = _("56E6EFAA"),
+        .trainerName = _("558F80F9"),
 #line 9549
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9550
@@ -26605,10 +26605,10 @@
         },
     },
 #line 9555
-    [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
+    [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
     {
 #line 9556
-        .trainerName = _("57E254F5"),
+        .trainerName = _("55CA00A1"),
 #line 9557
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9558
@@ -26633,10 +26633,10 @@
         },
     },
 #line 9563
-    [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
+    [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
     {
 #line 9564
-        .trainerName = _("57E7E83A"),
+        .trainerName = _("55D0BEAA"),
 #line 9565
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9566
@@ -26661,10 +26661,10 @@
         },
     },
 #line 9571
-    [DIFFICULTY_NORMAL][TRAINER_5819E497] =
+    [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
     {
 #line 9572
-        .trainerName = _("5819E497"),
+        .trainerName = _("55D90FA8"),
 #line 9573
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9574
@@ -26689,10 +26689,10 @@
         },
     },
 #line 9579
-    [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
+    [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
     {
 #line 9580
-        .trainerName = _("58A6A51E"),
+        .trainerName = _("55EBF949"),
 #line 9581
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9582
@@ -26717,10 +26717,10 @@
         },
     },
 #line 9587
-    [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
+    [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
     {
 #line 9588
-        .trainerName = _("58BEBECC"),
+        .trainerName = _("565DE3C4"),
 #line 9589
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9590
@@ -26745,10 +26745,10 @@
         },
     },
 #line 9595
-    [DIFFICULTY_NORMAL][TRAINER_58F43966] =
+    [DIFFICULTY_NORMAL][TRAINER_56775C71] =
     {
 #line 9596
-        .trainerName = _("58F43966"),
+        .trainerName = _("56775C71"),
 #line 9597
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9598
@@ -26773,10 +26773,10 @@
         },
     },
 #line 9603
-    [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
+    [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
     {
 #line 9604
-        .trainerName = _("59592DE4"),
+        .trainerName = _("56C1FE08"),
 #line 9605
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9606
@@ -26801,10 +26801,10 @@
         },
     },
 #line 9611
-    [DIFFICULTY_NORMAL][TRAINER_598585C1] =
+    [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
     {
 #line 9612
-        .trainerName = _("598585C1"),
+        .trainerName = _("56E6EFAA"),
 #line 9613
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9614
@@ -26829,10 +26829,10 @@
         },
     },
 #line 9619
-    [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
+    [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
     {
 #line 9620
-        .trainerName = _("59981F0D"),
+        .trainerName = _("57E254F5"),
 #line 9621
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9622
@@ -26857,10 +26857,10 @@
         },
     },
 #line 9627
-    [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
+    [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
     {
 #line 9628
-        .trainerName = _("59E335AB"),
+        .trainerName = _("57E7E83A"),
 #line 9629
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9630
@@ -26885,10 +26885,10 @@
         },
     },
 #line 9635
-    [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
+    [DIFFICULTY_NORMAL][TRAINER_5819E497] =
     {
 #line 9636
-        .trainerName = _("59FFFCED"),
+        .trainerName = _("5819E497"),
 #line 9637
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9638
@@ -26913,10 +26913,10 @@
         },
     },
 #line 9643
-    [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
+    [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
     {
 #line 9644
-        .trainerName = _("5ABF4FA4"),
+        .trainerName = _("58A6A51E"),
 #line 9645
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9646
@@ -26941,10 +26941,10 @@
         },
     },
 #line 9651
-    [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
+    [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
     {
 #line 9652
-        .trainerName = _("5AC61FE5"),
+        .trainerName = _("58BEBECC"),
 #line 9653
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9654
@@ -26969,10 +26969,10 @@
         },
     },
 #line 9659
-    [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
+    [DIFFICULTY_NORMAL][TRAINER_58F43966] =
     {
 #line 9660
-        .trainerName = _("5AD29FF8"),
+        .trainerName = _("58F43966"),
 #line 9661
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9662
@@ -26997,10 +26997,10 @@
         },
     },
 #line 9667
-    [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
+    [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
     {
 #line 9668
-        .trainerName = _("5AD4C218"),
+        .trainerName = _("59592DE4"),
 #line 9669
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9670
@@ -27025,10 +27025,10 @@
         },
     },
 #line 9675
-    [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
+    [DIFFICULTY_NORMAL][TRAINER_598585C1] =
     {
 #line 9676
-        .trainerName = _("5B5F6AE8"),
+        .trainerName = _("598585C1"),
 #line 9677
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9678
@@ -27053,10 +27053,10 @@
         },
     },
 #line 9683
-    [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
+    [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
     {
 #line 9684
-        .trainerName = _("5B6304FF"),
+        .trainerName = _("59981F0D"),
 #line 9685
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9686
@@ -27081,10 +27081,10 @@
         },
     },
 #line 9691
-    [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
+    [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
     {
 #line 9692
-        .trainerName = _("5B75B30F"),
+        .trainerName = _("59E335AB"),
 #line 9693
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9694
@@ -27109,10 +27109,10 @@
         },
     },
 #line 9699
-    [DIFFICULTY_NORMAL][TRAINER_5B983361] =
+    [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
     {
 #line 9700
-        .trainerName = _("5B983361"),
+        .trainerName = _("59FFFCED"),
 #line 9701
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9702
@@ -27137,10 +27137,10 @@
         },
     },
 #line 9707
-    [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
+    [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
     {
 #line 9708
-        .trainerName = _("5BD8EA81"),
+        .trainerName = _("5ABF4FA4"),
 #line 9709
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9710
@@ -27165,10 +27165,10 @@
         },
     },
 #line 9715
-    [DIFFICULTY_NORMAL][TRAINER_5C315841] =
+    [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
     {
 #line 9716
-        .trainerName = _("5C315841"),
+        .trainerName = _("5AC61FE5"),
 #line 9717
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9718
@@ -27193,10 +27193,10 @@
         },
     },
 #line 9723
-    [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
     {
 #line 9724
-        .trainerName = _("5C573C11"),
+        .trainerName = _("5AD29FF8"),
 #line 9725
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9726
@@ -27221,10 +27221,10 @@
         },
     },
 #line 9731
-    [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
+    [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
     {
 #line 9732
-        .trainerName = _("5CAB03DD"),
+        .trainerName = _("5AD4C218"),
 #line 9733
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9734
@@ -27249,10 +27249,10 @@
         },
     },
 #line 9739
-    [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
+    [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
     {
 #line 9740
-        .trainerName = _("5CBDB116"),
+        .trainerName = _("5B5F6AE8"),
 #line 9741
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9742
@@ -27277,10 +27277,10 @@
         },
     },
 #line 9747
-    [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
+    [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
     {
 #line 9748
-        .trainerName = _("5D0C4B8F"),
+        .trainerName = _("5B6304FF"),
 #line 9749
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9750
@@ -27305,10 +27305,10 @@
         },
     },
 #line 9755
-    [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
+    [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
     {
 #line 9756
-        .trainerName = _("5D2CCD41"),
+        .trainerName = _("5B75B30F"),
 #line 9757
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9758
@@ -27333,10 +27333,10 @@
         },
     },
 #line 9763
-    [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
+    [DIFFICULTY_NORMAL][TRAINER_5B983361] =
     {
 #line 9764
-        .trainerName = _("5D5F491E"),
+        .trainerName = _("5B983361"),
 #line 9765
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9766
@@ -27361,10 +27361,10 @@
         },
     },
 #line 9771
-    [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
+    [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
     {
 #line 9772
-        .trainerName = _("5D81D8F9"),
+        .trainerName = _("5BD8EA81"),
 #line 9773
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9774
@@ -27389,10 +27389,10 @@
         },
     },
 #line 9779
-    [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
+    [DIFFICULTY_NORMAL][TRAINER_5C315841] =
     {
 #line 9780
-        .trainerName = _("5D86E702"),
+        .trainerName = _("5C315841"),
 #line 9781
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9782
@@ -27417,10 +27417,10 @@
         },
     },
 #line 9787
-    [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
+    [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
     {
 #line 9788
-        .trainerName = _("5D9ABC58"),
+        .trainerName = _("5C573C11"),
 #line 9789
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9790
@@ -27445,10 +27445,10 @@
         },
     },
 #line 9795
-    [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
+    [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
     {
 #line 9796
-        .trainerName = _("5DA9F2AE"),
+        .trainerName = _("5CAB03DD"),
 #line 9797
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9798
@@ -27473,10 +27473,10 @@
         },
     },
 #line 9803
-    [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
+    [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
     {
 #line 9804
-        .trainerName = _("5E13316C"),
+        .trainerName = _("5CBDB116"),
 #line 9805
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9806
@@ -27501,10 +27501,10 @@
         },
     },
 #line 9811
-    [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
+    [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
     {
 #line 9812
-        .trainerName = _("5EA7A638"),
+        .trainerName = _("5D0C4B8F"),
 #line 9813
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9814
@@ -27529,10 +27529,10 @@
         },
     },
 #line 9819
-    [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
+    [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
     {
 #line 9820
-        .trainerName = _("5EB4C98F"),
+        .trainerName = _("5D2CCD41"),
 #line 9821
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9822
@@ -27557,10 +27557,10 @@
         },
     },
 #line 9827
-    [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
+    [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
     {
 #line 9828
-        .trainerName = _("5EF71DA1"),
+        .trainerName = _("5D5F491E"),
 #line 9829
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9830
@@ -27585,10 +27585,10 @@
         },
     },
 #line 9835
-    [DIFFICULTY_NORMAL][TRAINER_5F858802] =
+    [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
     {
 #line 9836
-        .trainerName = _("5F858802"),
+        .trainerName = _("5D81D8F9"),
 #line 9837
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9838
@@ -27613,10 +27613,10 @@
         },
     },
 #line 9843
-    [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
+    [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
     {
 #line 9844
-        .trainerName = _("5FA4C80F"),
+        .trainerName = _("5D86E702"),
 #line 9845
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9846
@@ -27641,10 +27641,10 @@
         },
     },
 #line 9851
-    [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
+    [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
     {
 #line 9852
-        .trainerName = _("5FD48FB2"),
+        .trainerName = _("5D9ABC58"),
 #line 9853
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9854
@@ -27669,10 +27669,10 @@
         },
     },
 #line 9859
-    [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
+    [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
     {
 #line 9860
-        .trainerName = _("5FF1DEC5"),
+        .trainerName = _("5DA9F2AE"),
 #line 9861
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9862
@@ -27697,10 +27697,10 @@
         },
     },
 #line 9867
-    [DIFFICULTY_NORMAL][TRAINER_6016A968] =
+    [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
     {
 #line 9868
-        .trainerName = _("6016A968"),
+        .trainerName = _("5E13316C"),
 #line 9869
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9870
@@ -27725,10 +27725,10 @@
         },
     },
 #line 9875
-    [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
+    [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
     {
 #line 9876
-        .trainerName = _("6058C03B"),
+        .trainerName = _("5EA7A638"),
 #line 9877
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9878
@@ -27753,10 +27753,10 @@
         },
     },
 #line 9883
-    [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
+    [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
     {
 #line 9884
-        .trainerName = _("60C3BD24"),
+        .trainerName = _("5EB4C98F"),
 #line 9885
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9886
@@ -27781,10 +27781,10 @@
         },
     },
 #line 9891
-    [DIFFICULTY_NORMAL][TRAINER_60C56554] =
+    [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
     {
 #line 9892
-        .trainerName = _("60C56554"),
+        .trainerName = _("5EF71DA1"),
 #line 9893
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9894
@@ -27809,10 +27809,10 @@
         },
     },
 #line 9899
-    [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
+    [DIFFICULTY_NORMAL][TRAINER_5F858802] =
     {
 #line 9900
-        .trainerName = _("60D66B86"),
+        .trainerName = _("5F858802"),
 #line 9901
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9902
@@ -27837,10 +27837,10 @@
         },
     },
 #line 9907
-    [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
+    [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
     {
 #line 9908
-        .trainerName = _("6102A0FC"),
+        .trainerName = _("5FA4C80F"),
 #line 9909
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9910
@@ -27865,10 +27865,10 @@
         },
     },
 #line 9915
-    [DIFFICULTY_NORMAL][TRAINER_61E76999] =
+    [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
     {
 #line 9916
-        .trainerName = _("61E76999"),
+        .trainerName = _("5FD48FB2"),
 #line 9917
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9918
@@ -27893,10 +27893,10 @@
         },
     },
 #line 9923
-    [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
+    [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
     {
 #line 9924
-        .trainerName = _("626AECE8"),
+        .trainerName = _("5FF1DEC5"),
 #line 9925
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9926
@@ -27921,10 +27921,10 @@
         },
     },
 #line 9931
-    [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
+    [DIFFICULTY_NORMAL][TRAINER_6016A968] =
     {
 #line 9932
-        .trainerName = _("62851FFB"),
+        .trainerName = _("6016A968"),
 #line 9933
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9934
@@ -27949,10 +27949,10 @@
         },
     },
 #line 9939
-    [DIFFICULTY_NORMAL][TRAINER_62C33409] =
+    [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
     {
 #line 9940
-        .trainerName = _("62C33409"),
+        .trainerName = _("6058C03B"),
 #line 9941
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9942
@@ -27977,10 +27977,10 @@
         },
     },
 #line 9947
-    [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
+    [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
     {
 #line 9948
-        .trainerName = _("62D0F875"),
+        .trainerName = _("60C3BD24"),
 #line 9949
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9950
@@ -28005,10 +28005,10 @@
         },
     },
 #line 9955
-    [DIFFICULTY_NORMAL][TRAINER_63409A54] =
+    [DIFFICULTY_NORMAL][TRAINER_60C56554] =
     {
 #line 9956
-        .trainerName = _("63409A54"),
+        .trainerName = _("60C56554"),
 #line 9957
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9958
@@ -28033,10 +28033,10 @@
         },
     },
 #line 9963
-    [DIFFICULTY_NORMAL][TRAINER_6397B964] =
+    [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
     {
 #line 9964
-        .trainerName = _("6397B964"),
+        .trainerName = _("60D66B86"),
 #line 9965
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9966
@@ -28061,10 +28061,10 @@
         },
     },
 #line 9971
-    [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
+    [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
     {
 #line 9972
-        .trainerName = _("63DB05B6"),
+        .trainerName = _("6102A0FC"),
 #line 9973
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9974
@@ -28089,10 +28089,10 @@
         },
     },
 #line 9979
-    [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
+    [DIFFICULTY_NORMAL][TRAINER_61E76999] =
     {
 #line 9980
-        .trainerName = _("63DC02C9"),
+        .trainerName = _("61E76999"),
 #line 9981
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9982
@@ -28117,10 +28117,10 @@
         },
     },
 #line 9987
-    [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
+    [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
     {
 #line 9988
-        .trainerName = _("6439D44C"),
+        .trainerName = _("626AECE8"),
 #line 9989
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9990
@@ -28145,10 +28145,10 @@
         },
     },
 #line 9995
-    [DIFFICULTY_NORMAL][TRAINER_64E30596] =
+    [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
     {
 #line 9996
-        .trainerName = _("64E30596"),
+        .trainerName = _("62851FFB"),
 #line 9997
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 9998
@@ -28173,10 +28173,10 @@
         },
     },
 #line 10003
-    [DIFFICULTY_NORMAL][TRAINER_6566F645] =
+    [DIFFICULTY_NORMAL][TRAINER_62C33409] =
     {
 #line 10004
-        .trainerName = _("6566F645"),
+        .trainerName = _("62C33409"),
 #line 10005
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10006
@@ -28201,10 +28201,10 @@
         },
     },
 #line 10011
-    [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
+    [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
     {
 #line 10012
-        .trainerName = _("656A39C8"),
+        .trainerName = _("62D0F875"),
 #line 10013
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10014
@@ -28229,10 +28229,10 @@
         },
     },
 #line 10019
-    [DIFFICULTY_NORMAL][TRAINER_656EC067] =
+    [DIFFICULTY_NORMAL][TRAINER_63409A54] =
     {
 #line 10020
-        .trainerName = _("656EC067"),
+        .trainerName = _("63409A54"),
 #line 10021
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10022
@@ -28257,10 +28257,10 @@
         },
     },
 #line 10027
-    [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
+    [DIFFICULTY_NORMAL][TRAINER_6397B964] =
     {
 #line 10028
-        .trainerName = _("65CE4F87"),
+        .trainerName = _("6397B964"),
 #line 10029
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10030
@@ -28285,10 +28285,10 @@
         },
     },
 #line 10035
-    [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
+    [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
     {
 #line 10036
-        .trainerName = _("662EBAAA"),
+        .trainerName = _("63DB05B6"),
 #line 10037
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10038
@@ -28313,10 +28313,10 @@
         },
     },
 #line 10043
-    [DIFFICULTY_NORMAL][TRAINER_66531C74] =
+    [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
     {
 #line 10044
-        .trainerName = _("66531C74"),
+        .trainerName = _("63DC02C9"),
 #line 10045
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10046
@@ -28341,10 +28341,10 @@
         },
     },
 #line 10051
-    [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
+    [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
     {
 #line 10052
-        .trainerName = _("66B16F22"),
+        .trainerName = _("6439D44C"),
 #line 10053
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10054
@@ -28369,10 +28369,10 @@
         },
     },
 #line 10059
-    [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
+    [DIFFICULTY_NORMAL][TRAINER_64E30596] =
     {
 #line 10060
-        .trainerName = _("66D26AEC"),
+        .trainerName = _("64E30596"),
 #line 10061
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10062
@@ -28397,10 +28397,10 @@
         },
     },
 #line 10067
-    [DIFFICULTY_NORMAL][TRAINER_675DA518] =
+    [DIFFICULTY_NORMAL][TRAINER_6566F645] =
     {
 #line 10068
-        .trainerName = _("675DA518"),
+        .trainerName = _("6566F645"),
 #line 10069
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10070
@@ -28425,10 +28425,10 @@
         },
     },
 #line 10075
-    [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
+    [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
     {
 #line 10076
-        .trainerName = _("677A22D7"),
+        .trainerName = _("656A39C8"),
 #line 10077
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10078
@@ -28453,10 +28453,10 @@
         },
     },
 #line 10083
-    [DIFFICULTY_NORMAL][TRAINER_6792B394] =
+    [DIFFICULTY_NORMAL][TRAINER_656EC067] =
     {
 #line 10084
-        .trainerName = _("6792B394"),
+        .trainerName = _("656EC067"),
 #line 10085
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10086
@@ -28481,10 +28481,10 @@
         },
     },
 #line 10091
-    [DIFFICULTY_NORMAL][TRAINER_683A2305] =
+    [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
     {
 #line 10092
-        .trainerName = _("683A2305"),
+        .trainerName = _("65CE4F87"),
 #line 10093
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10094
@@ -28509,10 +28509,10 @@
         },
     },
 #line 10099
-    [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
+    [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
     {
 #line 10100
-        .trainerName = _("692DD7CF"),
+        .trainerName = _("662EBAAA"),
 #line 10101
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10102
@@ -28537,10 +28537,10 @@
         },
     },
 #line 10107
-    [DIFFICULTY_NORMAL][TRAINER_698BB117] =
+    [DIFFICULTY_NORMAL][TRAINER_66531C74] =
     {
 #line 10108
-        .trainerName = _("698BB117"),
+        .trainerName = _("66531C74"),
 #line 10109
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10110
@@ -28565,10 +28565,10 @@
         },
     },
 #line 10115
-    [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
+    [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
     {
 #line 10116
-        .trainerName = _("69EE8132"),
+        .trainerName = _("66B16F22"),
 #line 10117
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10118
@@ -28593,10 +28593,10 @@
         },
     },
 #line 10123
-    [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
+    [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
     {
 #line 10124
-        .trainerName = _("6A35EE35"),
+        .trainerName = _("66D26AEC"),
 #line 10125
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10126
@@ -28621,10 +28621,10 @@
         },
     },
 #line 10131
-    [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
+    [DIFFICULTY_NORMAL][TRAINER_675DA518] =
     {
 #line 10132
-        .trainerName = _("6A3930E6"),
+        .trainerName = _("675DA518"),
 #line 10133
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10134
@@ -28649,10 +28649,10 @@
         },
     },
 #line 10139
-    [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
+    [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
     {
 #line 10140
-        .trainerName = _("6A48F28F"),
+        .trainerName = _("677A22D7"),
 #line 10141
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10142
@@ -28677,10 +28677,10 @@
         },
     },
 #line 10147
-    [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
+    [DIFFICULTY_NORMAL][TRAINER_6792B394] =
     {
 #line 10148
-        .trainerName = _("6A8EEC78"),
+        .trainerName = _("6792B394"),
 #line 10149
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10150
@@ -28705,10 +28705,10 @@
         },
     },
 #line 10155
-    [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
+    [DIFFICULTY_NORMAL][TRAINER_683A2305] =
     {
 #line 10156
-        .trainerName = _("6AABC7EA"),
+        .trainerName = _("683A2305"),
 #line 10157
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10158
@@ -28733,10 +28733,10 @@
         },
     },
 #line 10163
-    [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
+    [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
     {
 #line 10164
-        .trainerName = _("6ABE3EC1"),
+        .trainerName = _("692DD7CF"),
 #line 10165
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10166
@@ -28761,10 +28761,10 @@
         },
     },
 #line 10171
-    [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
+    [DIFFICULTY_NORMAL][TRAINER_698BB117] =
     {
 #line 10172
-        .trainerName = _("6B14C259"),
+        .trainerName = _("698BB117"),
 #line 10173
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10174
@@ -28789,10 +28789,10 @@
         },
     },
 #line 10179
-    [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
+    [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
     {
 #line 10180
-        .trainerName = _("6BEEE6BE"),
+        .trainerName = _("69EE8132"),
 #line 10181
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10182
@@ -28817,10 +28817,10 @@
         },
     },
 #line 10187
-    [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
+    [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
     {
 #line 10188
-        .trainerName = _("6C7736F9"),
+        .trainerName = _("6A35EE35"),
 #line 10189
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10190
@@ -28845,10 +28845,10 @@
         },
     },
 #line 10195
-    [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
+    [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
     {
 #line 10196
-        .trainerName = _("6CC913A2"),
+        .trainerName = _("6A3930E6"),
 #line 10197
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10198
@@ -28873,10 +28873,10 @@
         },
     },
 #line 10203
-    [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
+    [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
     {
 #line 10204
-        .trainerName = _("6D45549A"),
+        .trainerName = _("6A48F28F"),
 #line 10205
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10206
@@ -28901,10 +28901,10 @@
         },
     },
 #line 10211
-    [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
+    [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
     {
 #line 10212
-        .trainerName = _("6E1E82B2"),
+        .trainerName = _("6A8EEC78"),
 #line 10213
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10214
@@ -28929,10 +28929,10 @@
         },
     },
 #line 10219
-    [DIFFICULTY_NORMAL][TRAINER_6E663040] =
+    [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
     {
 #line 10220
-        .trainerName = _("6E663040"),
+        .trainerName = _("6AABC7EA"),
 #line 10221
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10222
@@ -28957,10 +28957,10 @@
         },
     },
 #line 10227
-    [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
+    [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
     {
 #line 10228
-        .trainerName = _("6ED2C120"),
+        .trainerName = _("6ABE3EC1"),
 #line 10229
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10230
@@ -28985,10 +28985,10 @@
         },
     },
 #line 10235
-    [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
+    [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
     {
 #line 10236
-        .trainerName = _("6F5C8078"),
+        .trainerName = _("6B14C259"),
 #line 10237
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10238
@@ -29013,10 +29013,10 @@
         },
     },
 #line 10243
-    [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
+    [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
     {
 #line 10244
-        .trainerName = _("6F5E9CF9"),
+        .trainerName = _("6BEEE6BE"),
 #line 10245
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10246
@@ -29041,10 +29041,10 @@
         },
     },
 #line 10251
-    [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
+    [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
     {
 #line 10252
-        .trainerName = _("6FC24896"),
+        .trainerName = _("6C7736F9"),
 #line 10253
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10254
@@ -29069,10 +29069,10 @@
         },
     },
 #line 10259
-    [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
+    [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
     {
 #line 10260
-        .trainerName = _("6FF3213D"),
+        .trainerName = _("6CC913A2"),
 #line 10261
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10262
@@ -29097,10 +29097,10 @@
         },
     },
 #line 10267
-    [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
+    [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
     {
 #line 10268
-        .trainerName = _("701AC24E"),
+        .trainerName = _("6D45549A"),
 #line 10269
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10270
@@ -29125,10 +29125,10 @@
         },
     },
 #line 10275
-    [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
+    [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
     {
 #line 10276
-        .trainerName = _("703B73C4"),
+        .trainerName = _("6E1E82B2"),
 #line 10277
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10278
@@ -29153,10 +29153,10 @@
         },
     },
 #line 10283
-    [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
+    [DIFFICULTY_NORMAL][TRAINER_6E663040] =
     {
 #line 10284
-        .trainerName = _("70C712D3"),
+        .trainerName = _("6E663040"),
 #line 10285
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10286
@@ -29181,10 +29181,10 @@
         },
     },
 #line 10291
-    [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
+    [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
     {
 #line 10292
-        .trainerName = _("70EAAAF5"),
+        .trainerName = _("6ED2C120"),
 #line 10293
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10294
@@ -29209,10 +29209,10 @@
         },
     },
 #line 10299
-    [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
     {
 #line 10300
-        .trainerName = _("70F1A62B"),
+        .trainerName = _("6F5C8078"),
 #line 10301
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10302
@@ -29237,10 +29237,10 @@
         },
     },
 #line 10307
-    [DIFFICULTY_NORMAL][TRAINER_7169C897] =
+    [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
     {
 #line 10308
-        .trainerName = _("7169C897"),
+        .trainerName = _("6F5E9CF9"),
 #line 10309
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10310
@@ -29265,10 +29265,10 @@
         },
     },
 #line 10315
-    [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
+    [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
     {
 #line 10316
-        .trainerName = _("7178DF27"),
+        .trainerName = _("6FC24896"),
 #line 10317
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10318
@@ -29293,10 +29293,10 @@
         },
     },
 #line 10323
-    [DIFFICULTY_NORMAL][TRAINER_7190E405] =
+    [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
     {
 #line 10324
-        .trainerName = _("7190E405"),
+        .trainerName = _("6FF3213D"),
 #line 10325
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10326
@@ -29321,10 +29321,10 @@
         },
     },
 #line 10331
-    [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
+    [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
     {
 #line 10332
-        .trainerName = _("71CE545E"),
+        .trainerName = _("701AC24E"),
 #line 10333
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10334
@@ -29349,10 +29349,10 @@
         },
     },
 #line 10339
-    [DIFFICULTY_NORMAL][TRAINER_7249425F] =
+    [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
     {
 #line 10340
-        .trainerName = _("7249425F"),
+        .trainerName = _("703B73C4"),
 #line 10341
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10342
@@ -29377,10 +29377,10 @@
         },
     },
 #line 10347
-    [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
+    [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
     {
 #line 10348
-        .trainerName = _("72641C9D"),
+        .trainerName = _("70C712D3"),
 #line 10349
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10350
@@ -29405,10 +29405,10 @@
         },
     },
 #line 10355
-    [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
+    [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
     {
 #line 10356
-        .trainerName = _("729F2BBB"),
+        .trainerName = _("70EAAAF5"),
 #line 10357
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10358
@@ -29433,10 +29433,10 @@
         },
     },
 #line 10363
-    [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
+    [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
     {
 #line 10364
-        .trainerName = _("72F25B41"),
+        .trainerName = _("70F1A62B"),
 #line 10365
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10366
@@ -29461,10 +29461,10 @@
         },
     },
 #line 10371
-    [DIFFICULTY_NORMAL][TRAINER_732D4997] =
+    [DIFFICULTY_NORMAL][TRAINER_7169C897] =
     {
 #line 10372
-        .trainerName = _("732D4997"),
+        .trainerName = _("7169C897"),
 #line 10373
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10374
@@ -29489,10 +29489,10 @@
         },
     },
 #line 10379
-    [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
+    [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
     {
 #line 10380
-        .trainerName = _("73A561CC"),
+        .trainerName = _("7178DF27"),
 #line 10381
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10382
@@ -29517,10 +29517,10 @@
         },
     },
 #line 10387
-    [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
+    [DIFFICULTY_NORMAL][TRAINER_7190E405] =
     {
 #line 10388
-        .trainerName = _("7420DB0C"),
+        .trainerName = _("7190E405"),
 #line 10389
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10390
@@ -29545,10 +29545,10 @@
         },
     },
 #line 10395
-    [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
+    [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
     {
 #line 10396
-        .trainerName = _("7435DE7C"),
+        .trainerName = _("71CE545E"),
 #line 10397
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10398
@@ -29573,10 +29573,10 @@
         },
     },
 #line 10403
-    [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
+    [DIFFICULTY_NORMAL][TRAINER_7249425F] =
     {
 #line 10404
-        .trainerName = _("75A2A667"),
+        .trainerName = _("7249425F"),
 #line 10405
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10406
@@ -29601,10 +29601,10 @@
         },
     },
 #line 10411
-    [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
+    [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
     {
 #line 10412
-        .trainerName = _("75D602F2"),
+        .trainerName = _("72641C9D"),
 #line 10413
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10414
@@ -29629,10 +29629,10 @@
         },
     },
 #line 10419
-    [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
+    [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
     {
 #line 10420
-        .trainerName = _("77DDBBAF"),
+        .trainerName = _("729F2BBB"),
 #line 10421
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10422
@@ -29657,10 +29657,10 @@
         },
     },
 #line 10427
-    [DIFFICULTY_NORMAL][TRAINER_783AB388] =
+    [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
     {
 #line 10428
-        .trainerName = _("783AB388"),
+        .trainerName = _("72F25B41"),
 #line 10429
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10430
@@ -29685,10 +29685,10 @@
         },
     },
 #line 10435
-    [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
+    [DIFFICULTY_NORMAL][TRAINER_732D4997] =
     {
 #line 10436
-        .trainerName = _("78564BE5"),
+        .trainerName = _("732D4997"),
 #line 10437
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10438
@@ -29713,10 +29713,10 @@
         },
     },
 #line 10443
-    [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
+    [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
     {
 #line 10444
-        .trainerName = _("7885ECAF"),
+        .trainerName = _("73A561CC"),
 #line 10445
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10446
@@ -29741,10 +29741,10 @@
         },
     },
 #line 10451
-    [DIFFICULTY_NORMAL][TRAINER_78B73516] =
+    [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
     {
 #line 10452
-        .trainerName = _("78B73516"),
+        .trainerName = _("7420DB0C"),
 #line 10453
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10454
@@ -29769,10 +29769,10 @@
         },
     },
 #line 10459
-    [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
+    [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
     {
 #line 10460
-        .trainerName = _("78BD858D"),
+        .trainerName = _("7435DE7C"),
 #line 10461
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10462
@@ -29797,10 +29797,10 @@
         },
     },
 #line 10467
-    [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
+    [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
     {
 #line 10468
-        .trainerName = _("7933DA6C"),
+        .trainerName = _("75A2A667"),
 #line 10469
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10470
@@ -29825,10 +29825,10 @@
         },
     },
 #line 10475
-    [DIFFICULTY_NORMAL][TRAINER_793992D8] =
+    [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
     {
 #line 10476
-        .trainerName = _("793992D8"),
+        .trainerName = _("75D602F2"),
 #line 10477
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10478
@@ -29853,10 +29853,10 @@
         },
     },
 #line 10483
-    [DIFFICULTY_NORMAL][TRAINER_797E296B] =
+    [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
     {
 #line 10484
-        .trainerName = _("797E296B"),
+        .trainerName = _("77DDBBAF"),
 #line 10485
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10486
@@ -29881,10 +29881,10 @@
         },
     },
 #line 10491
-    [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
+    [DIFFICULTY_NORMAL][TRAINER_783AB388] =
     {
 #line 10492
-        .trainerName = _("79EF1DEB"),
+        .trainerName = _("783AB388"),
 #line 10493
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10494
@@ -29909,10 +29909,10 @@
         },
     },
 #line 10499
-    [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
+    [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
     {
 #line 10500
-        .trainerName = _("7A03677D"),
+        .trainerName = _("78564BE5"),
 #line 10501
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10502
@@ -29937,10 +29937,10 @@
         },
     },
 #line 10507
-    [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
+    [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
     {
 #line 10508
-        .trainerName = _("7A0C086F"),
+        .trainerName = _("7885ECAF"),
 #line 10509
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10510
@@ -29965,10 +29965,10 @@
         },
     },
 #line 10515
-    [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
+    [DIFFICULTY_NORMAL][TRAINER_78B73516] =
     {
 #line 10516
-        .trainerName = _("7A89C403"),
+        .trainerName = _("78B73516"),
 #line 10517
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10518
@@ -29993,10 +29993,10 @@
         },
     },
 #line 10523
-    [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
+    [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
     {
 #line 10524
-        .trainerName = _("7A8D30C6"),
+        .trainerName = _("78BD858D"),
 #line 10525
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10526
@@ -30021,10 +30021,10 @@
         },
     },
 #line 10531
-    [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
+    [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
     {
 #line 10532
-        .trainerName = _("7ABC77C1"),
+        .trainerName = _("7933DA6C"),
 #line 10533
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10534
@@ -30049,10 +30049,10 @@
         },
     },
 #line 10539
-    [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
+    [DIFFICULTY_NORMAL][TRAINER_793992D8] =
     {
 #line 10540
-        .trainerName = _("7B5DF36F"),
+        .trainerName = _("793992D8"),
 #line 10541
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10542
@@ -30077,10 +30077,10 @@
         },
     },
 #line 10547
-    [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
+    [DIFFICULTY_NORMAL][TRAINER_797E296B] =
     {
 #line 10548
-        .trainerName = _("7C3BD57C"),
+        .trainerName = _("797E296B"),
 #line 10549
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10550
@@ -30105,10 +30105,10 @@
         },
     },
 #line 10555
-    [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
+    [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
     {
 #line 10556
-        .trainerName = _("7C4240E1"),
+        .trainerName = _("79EF1DEB"),
 #line 10557
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10558
@@ -30133,10 +30133,10 @@
         },
     },
 #line 10563
-    [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
+    [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
     {
 #line 10564
-        .trainerName = _("7C5056CA"),
+        .trainerName = _("7A03677D"),
 #line 10565
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10566
@@ -30161,10 +30161,10 @@
         },
     },
 #line 10571
-    [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
+    [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
     {
 #line 10572
-        .trainerName = _("7C8BD62F"),
+        .trainerName = _("7A0C086F"),
 #line 10573
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10574
@@ -30189,10 +30189,10 @@
         },
     },
 #line 10579
-    [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
+    [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
     {
 #line 10580
-        .trainerName = _("7C9308EF"),
+        .trainerName = _("7A89C403"),
 #line 10581
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10582
@@ -30217,10 +30217,10 @@
         },
     },
 #line 10587
-    [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
+    [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
     {
 #line 10588
-        .trainerName = _("7CAF6877"),
+        .trainerName = _("7A8D30C6"),
 #line 10589
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10590
@@ -30245,10 +30245,10 @@
         },
     },
 #line 10595
-    [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
+    [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
     {
 #line 10596
-        .trainerName = _("7CBB25EB"),
+        .trainerName = _("7ABC77C1"),
 #line 10597
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10598
@@ -30273,10 +30273,10 @@
         },
     },
 #line 10603
-    [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
+    [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
     {
 #line 10604
-        .trainerName = _("7CD1AAE1"),
+        .trainerName = _("7B5DF36F"),
 #line 10605
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10606
@@ -30301,10 +30301,10 @@
         },
     },
 #line 10611
-    [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
+    [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
     {
 #line 10612
-        .trainerName = _("7D0F1751"),
+        .trainerName = _("7C3BD57C"),
 #line 10613
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10614
@@ -30329,10 +30329,10 @@
         },
     },
 #line 10619
-    [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
+    [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
     {
 #line 10620
-        .trainerName = _("7D28CB20"),
+        .trainerName = _("7C4240E1"),
 #line 10621
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10622
@@ -30357,10 +30357,10 @@
         },
     },
 #line 10627
-    [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
+    [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
     {
 #line 10628
-        .trainerName = _("7D536E72"),
+        .trainerName = _("7C5056CA"),
 #line 10629
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10630
@@ -30385,10 +30385,10 @@
         },
     },
 #line 10635
-    [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
+    [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
     {
 #line 10636
-        .trainerName = _("7DC358C0"),
+        .trainerName = _("7C8BD62F"),
 #line 10637
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10638
@@ -30413,10 +30413,10 @@
         },
     },
 #line 10643
-    [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
+    [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
     {
 #line 10644
-        .trainerName = _("7DEC9A40"),
+        .trainerName = _("7C9308EF"),
 #line 10645
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10646
@@ -30441,10 +30441,10 @@
         },
     },
 #line 10651
-    [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
+    [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
     {
 #line 10652
-        .trainerName = _("7E2F7EB8"),
+        .trainerName = _("7CAF6877"),
 #line 10653
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10654
@@ -30469,10 +30469,10 @@
         },
     },
 #line 10659
-    [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
+    [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
     {
 #line 10660
-        .trainerName = _("7E7CD9D3"),
+        .trainerName = _("7CBB25EB"),
 #line 10661
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10662
@@ -30497,10 +30497,10 @@
         },
     },
 #line 10667
-    [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
+    [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
     {
 #line 10668
-        .trainerName = _("7E8CCD84"),
+        .trainerName = _("7CD1AAE1"),
 #line 10669
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10670
@@ -30525,10 +30525,10 @@
         },
     },
 #line 10675
-    [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
+    [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
     {
 #line 10676
-        .trainerName = _("8010F97E"),
+        .trainerName = _("7D0F1751"),
 #line 10677
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10678
@@ -30553,10 +30553,10 @@
         },
     },
 #line 10683
-    [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
+    [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
     {
 #line 10684
-        .trainerName = _("805C25F0"),
+        .trainerName = _("7D28CB20"),
 #line 10685
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10686
@@ -30581,10 +30581,10 @@
         },
     },
 #line 10691
-    [DIFFICULTY_NORMAL][TRAINER_80941A21] =
+    [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
     {
 #line 10692
-        .trainerName = _("80941A21"),
+        .trainerName = _("7D536E72"),
 #line 10693
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10694
@@ -30609,10 +30609,10 @@
         },
     },
 #line 10699
-    [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
+    [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
     {
 #line 10700
-        .trainerName = _("80AAA333"),
+        .trainerName = _("7DC358C0"),
 #line 10701
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10702
@@ -30637,10 +30637,10 @@
         },
     },
 #line 10707
-    [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
+    [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
     {
 #line 10708
-        .trainerName = _("810A3F32"),
+        .trainerName = _("7DEC9A40"),
 #line 10709
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10710
@@ -30665,10 +30665,10 @@
         },
     },
 #line 10715
-    [DIFFICULTY_NORMAL][TRAINER_811C7730] =
+    [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
     {
 #line 10716
-        .trainerName = _("811C7730"),
+        .trainerName = _("7E2F7EB8"),
 #line 10717
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10718
@@ -30693,10 +30693,10 @@
         },
     },
 #line 10723
-    [DIFFICULTY_NORMAL][TRAINER_814D0113] =
+    [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
     {
 #line 10724
-        .trainerName = _("814D0113"),
+        .trainerName = _("7E7CD9D3"),
 #line 10725
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10726
@@ -30721,10 +30721,10 @@
         },
     },
 #line 10731
-    [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
+    [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
     {
 #line 10732
-        .trainerName = _("822DC7A8"),
+        .trainerName = _("7E8CCD84"),
 #line 10733
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10734
@@ -30749,10 +30749,10 @@
         },
     },
 #line 10739
-    [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
+    [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
     {
 #line 10740
-        .trainerName = _("827A5D21"),
+        .trainerName = _("8010F97E"),
 #line 10741
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10742
@@ -30777,10 +30777,10 @@
         },
     },
 #line 10747
-    [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
+    [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
     {
 #line 10748
-        .trainerName = _("82A19B69"),
+        .trainerName = _("805C25F0"),
 #line 10749
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10750
@@ -30805,10 +30805,10 @@
         },
     },
 #line 10755
-    [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
+    [DIFFICULTY_NORMAL][TRAINER_80941A21] =
     {
 #line 10756
-        .trainerName = _("83008F9D"),
+        .trainerName = _("80941A21"),
 #line 10757
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10758
@@ -30833,10 +30833,10 @@
         },
     },
 #line 10763
-    [DIFFICULTY_NORMAL][TRAINER_831DE561] =
+    [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
     {
 #line 10764
-        .trainerName = _("831DE561"),
+        .trainerName = _("80AAA333"),
 #line 10765
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10766
@@ -30861,10 +30861,10 @@
         },
     },
 #line 10771
-    [DIFFICULTY_NORMAL][TRAINER_8327758B] =
+    [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
     {
 #line 10772
-        .trainerName = _("8327758B"),
+        .trainerName = _("810A3F32"),
 #line 10773
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10774
@@ -30889,10 +30889,10 @@
         },
     },
 #line 10779
-    [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
+    [DIFFICULTY_NORMAL][TRAINER_811C7730] =
     {
 #line 10780
-        .trainerName = _("834B75E7"),
+        .trainerName = _("811C7730"),
 #line 10781
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10782
@@ -30917,10 +30917,10 @@
         },
     },
 #line 10787
-    [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
+    [DIFFICULTY_NORMAL][TRAINER_814D0113] =
     {
 #line 10788
-        .trainerName = _("8365EA32"),
+        .trainerName = _("814D0113"),
 #line 10789
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10790
@@ -30945,10 +30945,10 @@
         },
     },
 #line 10795
-    [DIFFICULTY_NORMAL][TRAINER_83A26233] =
+    [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
     {
 #line 10796
-        .trainerName = _("83A26233"),
+        .trainerName = _("822DC7A8"),
 #line 10797
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10798
@@ -30973,10 +30973,10 @@
         },
     },
 #line 10803
-    [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
+    [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
     {
 #line 10804
-        .trainerName = _("83B9A038"),
+        .trainerName = _("827A5D21"),
 #line 10805
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10806
@@ -31001,10 +31001,10 @@
         },
     },
 #line 10811
-    [DIFFICULTY_NORMAL][TRAINER_840416CD] =
+    [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
     {
 #line 10812
-        .trainerName = _("840416CD"),
+        .trainerName = _("82A19B69"),
 #line 10813
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10814
@@ -31029,10 +31029,10 @@
         },
     },
 #line 10819
-    [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
+    [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
     {
 #line 10820
-        .trainerName = _("843DFC91"),
+        .trainerName = _("83008F9D"),
 #line 10821
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10822
@@ -31057,10 +31057,10 @@
         },
     },
 #line 10827
-    [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
+    [DIFFICULTY_NORMAL][TRAINER_831DE561] =
     {
 #line 10828
-        .trainerName = _("857ACD94"),
+        .trainerName = _("831DE561"),
 #line 10829
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10830
@@ -31085,10 +31085,10 @@
         },
     },
 #line 10835
-    [DIFFICULTY_NORMAL][TRAINER_8580525E] =
+    [DIFFICULTY_NORMAL][TRAINER_8327758B] =
     {
 #line 10836
-        .trainerName = _("8580525E"),
+        .trainerName = _("8327758B"),
 #line 10837
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10838
@@ -31113,10 +31113,10 @@
         },
     },
 #line 10843
-    [DIFFICULTY_NORMAL][TRAINER_866AE208] =
+    [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
     {
 #line 10844
-        .trainerName = _("866AE208"),
+        .trainerName = _("834B75E7"),
 #line 10845
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10846
@@ -31141,10 +31141,10 @@
         },
     },
 #line 10851
-    [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
+    [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
     {
 #line 10852
-        .trainerName = _("8677EFB3"),
+        .trainerName = _("8365EA32"),
 #line 10853
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10854
@@ -31169,10 +31169,10 @@
         },
     },
 #line 10859
-    [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
+    [DIFFICULTY_NORMAL][TRAINER_83A26233] =
     {
 #line 10860
-        .trainerName = _("86D37FF1"),
+        .trainerName = _("83A26233"),
 #line 10861
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10862
@@ -31197,10 +31197,10 @@
         },
     },
 #line 10867
-    [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
+    [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
     {
 #line 10868
-        .trainerName = _("86F7AA4A"),
+        .trainerName = _("83B9A038"),
 #line 10869
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10870
@@ -31225,10 +31225,10 @@
         },
     },
 #line 10875
-    [DIFFICULTY_NORMAL][TRAINER_872183CD] =
+    [DIFFICULTY_NORMAL][TRAINER_840416CD] =
     {
 #line 10876
-        .trainerName = _("872183CD"),
+        .trainerName = _("840416CD"),
 #line 10877
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10878
@@ -31253,10 +31253,10 @@
         },
     },
 #line 10883
-    [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
+    [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
     {
 #line 10884
-        .trainerName = _("87B5E929"),
+        .trainerName = _("843DFC91"),
 #line 10885
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10886
@@ -31281,10 +31281,10 @@
         },
     },
 #line 10891
-    [DIFFICULTY_NORMAL][TRAINER_885C781B] =
+    [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
     {
 #line 10892
-        .trainerName = _("885C781B"),
+        .trainerName = _("857ACD94"),
 #line 10893
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10894
@@ -31309,10 +31309,10 @@
         },
     },
 #line 10899
-    [DIFFICULTY_NORMAL][TRAINER_8878003B] =
+    [DIFFICULTY_NORMAL][TRAINER_8580525E] =
     {
 #line 10900
-        .trainerName = _("8878003B"),
+        .trainerName = _("8580525E"),
 #line 10901
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10902
@@ -31337,10 +31337,10 @@
         },
     },
 #line 10907
-    [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
+    [DIFFICULTY_NORMAL][TRAINER_866AE208] =
     {
 #line 10908
-        .trainerName = _("88864D1E"),
+        .trainerName = _("866AE208"),
 #line 10909
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10910
@@ -31365,10 +31365,10 @@
         },
     },
 #line 10915
-    [DIFFICULTY_NORMAL][TRAINER_8972F540] =
+    [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
     {
 #line 10916
-        .trainerName = _("8972F540"),
+        .trainerName = _("8677EFB3"),
 #line 10917
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10918
@@ -31393,10 +31393,10 @@
         },
     },
 #line 10923
-    [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
+    [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
     {
 #line 10924
-        .trainerName = _("898AF31D"),
+        .trainerName = _("86D37FF1"),
 #line 10925
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10926
@@ -31421,10 +31421,10 @@
         },
     },
 #line 10931
-    [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
+    [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
     {
 #line 10932
-        .trainerName = _("8A0B40C0"),
+        .trainerName = _("86F7AA4A"),
 #line 10933
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10934
@@ -31449,10 +31449,10 @@
         },
     },
 #line 10939
-    [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
+    [DIFFICULTY_NORMAL][TRAINER_872183CD] =
     {
 #line 10940
-        .trainerName = _("8A2C65A3"),
+        .trainerName = _("872183CD"),
 #line 10941
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10942
@@ -31477,10 +31477,10 @@
         },
     },
 #line 10947
-    [DIFFICULTY_NORMAL][TRAINER_8A829476] =
+    [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
     {
 #line 10948
-        .trainerName = _("8A829476"),
+        .trainerName = _("87B5E929"),
 #line 10949
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10950
@@ -31505,10 +31505,10 @@
         },
     },
 #line 10955
-    [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
+    [DIFFICULTY_NORMAL][TRAINER_885C781B] =
     {
 #line 10956
-        .trainerName = _("8AC1B5C1"),
+        .trainerName = _("885C781B"),
 #line 10957
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10958
@@ -31533,10 +31533,10 @@
         },
     },
 #line 10963
-    [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
+    [DIFFICULTY_NORMAL][TRAINER_8878003B] =
     {
 #line 10964
-        .trainerName = _("8AF40B23"),
+        .trainerName = _("8878003B"),
 #line 10965
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10966
@@ -31561,10 +31561,10 @@
         },
     },
 #line 10971
-    [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
+    [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
     {
 #line 10972
-        .trainerName = _("8B31AC38"),
+        .trainerName = _("88864D1E"),
 #line 10973
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10974
@@ -31589,10 +31589,10 @@
         },
     },
 #line 10979
-    [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
+    [DIFFICULTY_NORMAL][TRAINER_8972F540] =
     {
 #line 10980
-        .trainerName = _("8B32317E"),
+        .trainerName = _("8972F540"),
 #line 10981
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10982
@@ -31617,10 +31617,10 @@
         },
     },
 #line 10987
-    [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
+    [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
     {
 #line 10988
-        .trainerName = _("8B3657A9"),
+        .trainerName = _("898AF31D"),
 #line 10989
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10990
@@ -31645,10 +31645,10 @@
         },
     },
 #line 10995
-    [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
+    [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
     {
 #line 10996
-        .trainerName = _("8B3C49E3"),
+        .trainerName = _("8A0B40C0"),
 #line 10997
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 10998
@@ -31673,10 +31673,10 @@
         },
     },
 #line 11003
-    [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
+    [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
     {
 #line 11004
-        .trainerName = _("8B6D195D"),
+        .trainerName = _("8A2C65A3"),
 #line 11005
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11006
@@ -31701,10 +31701,10 @@
         },
     },
 #line 11011
-    [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
+    [DIFFICULTY_NORMAL][TRAINER_8A829476] =
     {
 #line 11012
-        .trainerName = _("8BB65E5E"),
+        .trainerName = _("8A829476"),
 #line 11013
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11014
@@ -31729,10 +31729,10 @@
         },
     },
 #line 11019
-    [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
+    [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
     {
 #line 11020
-        .trainerName = _("8C186D17"),
+        .trainerName = _("8AC1B5C1"),
 #line 11021
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11022
@@ -31757,10 +31757,10 @@
         },
     },
 #line 11027
-    [DIFFICULTY_NORMAL][TRAINER_8C853607] =
+    [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
     {
 #line 11028
-        .trainerName = _("8C853607"),
+        .trainerName = _("8AF40B23"),
 #line 11029
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11030
@@ -31785,10 +31785,10 @@
         },
     },
 #line 11035
-    [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
+    [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
     {
 #line 11036
-        .trainerName = _("8D6D5B2C"),
+        .trainerName = _("8B31AC38"),
 #line 11037
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11038
@@ -31813,10 +31813,10 @@
         },
     },
 #line 11043
-    [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
+    [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
     {
 #line 11044
-        .trainerName = _("8D93124A"),
+        .trainerName = _("8B32317E"),
 #line 11045
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11046
@@ -31841,10 +31841,10 @@
         },
     },
 #line 11051
-    [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
     {
 #line 11052
-        .trainerName = _("8DAF08C5"),
+        .trainerName = _("8B3657A9"),
 #line 11053
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11054
@@ -31869,10 +31869,10 @@
         },
     },
 #line 11059
-    [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
+    [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
     {
 #line 11060
-        .trainerName = _("8DE17D94"),
+        .trainerName = _("8B3C49E3"),
 #line 11061
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11062
@@ -31897,10 +31897,10 @@
         },
     },
 #line 11067
-    [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
+    [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
     {
 #line 11068
-        .trainerName = _("8E60CF6E"),
+        .trainerName = _("8B6D195D"),
 #line 11069
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11070
@@ -31925,10 +31925,10 @@
         },
     },
 #line 11075
-    [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
+    [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
     {
 #line 11076
-        .trainerName = _("8EA873A0"),
+        .trainerName = _("8BB65E5E"),
 #line 11077
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11078
@@ -31953,10 +31953,10 @@
         },
     },
 #line 11083
-    [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
+    [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
     {
 #line 11084
-        .trainerName = _("8EB76821"),
+        .trainerName = _("8C186D17"),
 #line 11085
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11086
@@ -31981,10 +31981,10 @@
         },
     },
 #line 11091
-    [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
+    [DIFFICULTY_NORMAL][TRAINER_8C853607] =
     {
 #line 11092
-        .trainerName = _("8ED15D51"),
+        .trainerName = _("8C853607"),
 #line 11093
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11094
@@ -32009,10 +32009,10 @@
         },
     },
 #line 11099
-    [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
+    [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
     {
 #line 11100
-        .trainerName = _("8F28F86A"),
+        .trainerName = _("8D6D5B2C"),
 #line 11101
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11102
@@ -32037,10 +32037,10 @@
         },
     },
 #line 11107
-    [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
+    [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
     {
 #line 11108
-        .trainerName = _("8F2EA270"),
+        .trainerName = _("8D93124A"),
 #line 11109
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11110
@@ -32065,10 +32065,10 @@
         },
     },
 #line 11115
-    [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
+    [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
     {
 #line 11116
-        .trainerName = _("8F9579E4"),
+        .trainerName = _("8DAF08C5"),
 #line 11117
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11118
@@ -32093,10 +32093,10 @@
         },
     },
 #line 11123
-    [DIFFICULTY_NORMAL][TRAINER_8F988020] =
+    [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
     {
 #line 11124
-        .trainerName = _("8F988020"),
+        .trainerName = _("8DE17D94"),
 #line 11125
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11126
@@ -32121,10 +32121,10 @@
         },
     },
 #line 11131
-    [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
+    [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
     {
 #line 11132
-        .trainerName = _("8FE817BA"),
+        .trainerName = _("8E60CF6E"),
 #line 11133
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11134
@@ -32149,10 +32149,10 @@
         },
     },
 #line 11139
-    [DIFFICULTY_NORMAL][TRAINER_90353D81] =
+    [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
     {
 #line 11140
-        .trainerName = _("90353D81"),
+        .trainerName = _("8EA873A0"),
 #line 11141
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11142
@@ -32177,10 +32177,10 @@
         },
     },
 #line 11147
-    [DIFFICULTY_NORMAL][TRAINER_9054973F] =
+    [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
     {
 #line 11148
-        .trainerName = _("9054973F"),
+        .trainerName = _("8EB76821"),
 #line 11149
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11150
@@ -32205,10 +32205,10 @@
         },
     },
 #line 11155
-    [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
+    [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
     {
 #line 11156
-        .trainerName = _("90A72ACF"),
+        .trainerName = _("8ED15D51"),
 #line 11157
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11158
@@ -32233,10 +32233,10 @@
         },
     },
 #line 11163
-    [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
+    [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
     {
 #line 11164
-        .trainerName = _("90E1658C"),
+        .trainerName = _("8F28F86A"),
 #line 11165
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11166
@@ -32261,10 +32261,10 @@
         },
     },
 #line 11171
-    [DIFFICULTY_NORMAL][TRAINER_918A1734] =
+    [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
     {
 #line 11172
-        .trainerName = _("918A1734"),
+        .trainerName = _("8F2EA270"),
 #line 11173
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11174
@@ -32289,10 +32289,10 @@
         },
     },
 #line 11179
-    [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
+    [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
     {
 #line 11180
-        .trainerName = _("91D249C3"),
+        .trainerName = _("8F9579E4"),
 #line 11181
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11182
@@ -32317,10 +32317,10 @@
         },
     },
 #line 11187
-    [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
+    [DIFFICULTY_NORMAL][TRAINER_8F988020] =
     {
 #line 11188
-        .trainerName = _("91D48E4E"),
+        .trainerName = _("8F988020"),
 #line 11189
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11190
@@ -32345,10 +32345,10 @@
         },
     },
 #line 11195
-    [DIFFICULTY_NORMAL][TRAINER_922542C3] =
+    [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
     {
 #line 11196
-        .trainerName = _("922542C3"),
+        .trainerName = _("8FE817BA"),
 #line 11197
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11198
@@ -32373,10 +32373,10 @@
         },
     },
 #line 11203
-    [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
+    [DIFFICULTY_NORMAL][TRAINER_90353D81] =
     {
 #line 11204
-        .trainerName = _("93009D3B"),
+        .trainerName = _("90353D81"),
 #line 11205
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11206
@@ -32401,10 +32401,10 @@
         },
     },
 #line 11211
-    [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
+    [DIFFICULTY_NORMAL][TRAINER_9054973F] =
     {
 #line 11212
-        .trainerName = _("93D9B506"),
+        .trainerName = _("9054973F"),
 #line 11213
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11214
@@ -32429,10 +32429,10 @@
         },
     },
 #line 11219
-    [DIFFICULTY_NORMAL][TRAINER_9427896B] =
+    [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
     {
 #line 11220
-        .trainerName = _("9427896B"),
+        .trainerName = _("90A72ACF"),
 #line 11221
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11222
@@ -32457,10 +32457,10 @@
         },
     },
 #line 11227
-    [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
+    [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
     {
 #line 11228
-        .trainerName = _("9501C16B"),
+        .trainerName = _("90E1658C"),
 #line 11229
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11230
@@ -32485,10 +32485,10 @@
         },
     },
 #line 11235
-    [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
+    [DIFFICULTY_NORMAL][TRAINER_918A1734] =
     {
 #line 11236
-        .trainerName = _("9566DD87"),
+        .trainerName = _("918A1734"),
 #line 11237
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11238
@@ -32513,10 +32513,10 @@
         },
     },
 #line 11243
-    [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
+    [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
     {
 #line 11244
-        .trainerName = _("95A74E78"),
+        .trainerName = _("91D249C3"),
 #line 11245
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11246
@@ -32541,10 +32541,10 @@
         },
     },
 #line 11251
-    [DIFFICULTY_NORMAL][TRAINER_963F893A] =
+    [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
     {
 #line 11252
-        .trainerName = _("963F893A"),
+        .trainerName = _("91D48E4E"),
 #line 11253
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11254
@@ -32569,10 +32569,10 @@
         },
     },
 #line 11259
-    [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
+    [DIFFICULTY_NORMAL][TRAINER_922542C3] =
     {
 #line 11260
-        .trainerName = _("966F37E6"),
+        .trainerName = _("922542C3"),
 #line 11261
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11262
@@ -32597,10 +32597,10 @@
         },
     },
 #line 11267
-    [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
+    [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
     {
 #line 11268
-        .trainerName = _("96859C9B"),
+        .trainerName = _("93009D3B"),
 #line 11269
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11270
@@ -32625,10 +32625,10 @@
         },
     },
 #line 11275
-    [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
+    [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
     {
 #line 11276
-        .trainerName = _("9695D7CC"),
+        .trainerName = _("93D9B506"),
 #line 11277
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11278
@@ -32653,10 +32653,10 @@
         },
     },
 #line 11283
-    [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
+    [DIFFICULTY_NORMAL][TRAINER_9427896B] =
     {
 #line 11284
-        .trainerName = _("96A60AED"),
+        .trainerName = _("9427896B"),
 #line 11285
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11286
@@ -32681,10 +32681,10 @@
         },
     },
 #line 11291
-    [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
+    [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
     {
 #line 11292
-        .trainerName = _("973C00CE"),
+        .trainerName = _("9501C16B"),
 #line 11293
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11294
@@ -32709,10 +32709,10 @@
         },
     },
 #line 11299
-    [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
+    [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
     {
 #line 11300
-        .trainerName = _("9784BB4E"),
+        .trainerName = _("9566DD87"),
 #line 11301
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11302
@@ -32737,10 +32737,10 @@
         },
     },
 #line 11307
-    [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
+    [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
     {
 #line 11308
-        .trainerName = _("9834CDCC"),
+        .trainerName = _("95A74E78"),
 #line 11309
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11310
@@ -32765,10 +32765,10 @@
         },
     },
 #line 11315
-    [DIFFICULTY_NORMAL][TRAINER_98547A36] =
+    [DIFFICULTY_NORMAL][TRAINER_963F893A] =
     {
 #line 11316
-        .trainerName = _("98547A36"),
+        .trainerName = _("963F893A"),
 #line 11317
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11318
@@ -32793,10 +32793,10 @@
         },
     },
 #line 11323
-    [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
+    [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
     {
 #line 11324
-        .trainerName = _("98C7143B"),
+        .trainerName = _("966F37E6"),
 #line 11325
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11326
@@ -32821,10 +32821,10 @@
         },
     },
 #line 11331
-    [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
+    [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
     {
 #line 11332
-        .trainerName = _("992FCC96"),
+        .trainerName = _("96859C9B"),
 #line 11333
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11334
@@ -32849,10 +32849,10 @@
         },
     },
 #line 11339
-    [DIFFICULTY_NORMAL][TRAINER_99D74322] =
+    [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
     {
 #line 11340
-        .trainerName = _("99D74322"),
+        .trainerName = _("9695D7CC"),
 #line 11341
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11342
@@ -32877,10 +32877,10 @@
         },
     },
 #line 11347
-    [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
+    [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
     {
 #line 11348
-        .trainerName = _("9A45ED29"),
+        .trainerName = _("96A60AED"),
 #line 11349
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11350
@@ -32905,10 +32905,10 @@
         },
     },
 #line 11355
-    [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
+    [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
     {
 #line 11356
-        .trainerName = _("9AAFB9A8"),
+        .trainerName = _("973C00CE"),
 #line 11357
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11358
@@ -32933,10 +32933,10 @@
         },
     },
 #line 11363
-    [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
+    [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
     {
 #line 11364
-        .trainerName = _("9B4CAAEF"),
+        .trainerName = _("9784BB4E"),
 #line 11365
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11366
@@ -32961,10 +32961,10 @@
         },
     },
 #line 11371
-    [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
+    [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
     {
 #line 11372
-        .trainerName = _("9B92F975"),
+        .trainerName = _("9834CDCC"),
 #line 11373
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11374
@@ -32989,10 +32989,10 @@
         },
     },
 #line 11379
-    [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
+    [DIFFICULTY_NORMAL][TRAINER_98547A36] =
     {
 #line 11380
-        .trainerName = _("9BA8D6B8"),
+        .trainerName = _("98547A36"),
 #line 11381
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11382
@@ -33017,10 +33017,10 @@
         },
     },
 #line 11387
-    [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
+    [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
     {
 #line 11388
-        .trainerName = _("9BBA4D3E"),
+        .trainerName = _("98C7143B"),
 #line 11389
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11390
@@ -33045,10 +33045,10 @@
         },
     },
 #line 11395
-    [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
+    [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
     {
 #line 11396
-        .trainerName = _("9BD745C1"),
+        .trainerName = _("992FCC96"),
 #line 11397
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11398
@@ -33073,10 +33073,10 @@
         },
     },
 #line 11403
-    [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
+    [DIFFICULTY_NORMAL][TRAINER_99D74322] =
     {
 #line 11404
-        .trainerName = _("9C9A9B43"),
+        .trainerName = _("99D74322"),
 #line 11405
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11406
@@ -33101,10 +33101,10 @@
         },
     },
 #line 11411
-    [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
+    [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
     {
 #line 11412
-        .trainerName = _("9CC51698"),
+        .trainerName = _("9A45ED29"),
 #line 11413
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11414
@@ -33129,10 +33129,10 @@
         },
     },
 #line 11419
-    [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
+    [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
     {
 #line 11420
-        .trainerName = _("9D0B799C"),
+        .trainerName = _("9AAFB9A8"),
 #line 11421
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11422
@@ -33157,10 +33157,10 @@
         },
     },
 #line 11427
-    [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
+    [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
     {
 #line 11428
-        .trainerName = _("9D2974CA"),
+        .trainerName = _("9B4CAAEF"),
 #line 11429
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11430
@@ -33185,10 +33185,10 @@
         },
     },
 #line 11435
-    [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
+    [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
     {
 #line 11436
-        .trainerName = _("9DE6AF69"),
+        .trainerName = _("9B92F975"),
 #line 11437
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11438
@@ -33213,10 +33213,10 @@
         },
     },
 #line 11443
-    [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
+    [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
     {
 #line 11444
-        .trainerName = _("9E9E96C3"),
+        .trainerName = _("9BA8D6B8"),
 #line 11445
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11446
@@ -33241,10 +33241,10 @@
         },
     },
 #line 11451
-    [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
+    [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
     {
 #line 11452
-        .trainerName = _("9EBDE860"),
+        .trainerName = _("9BBA4D3E"),
 #line 11453
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11454
@@ -33269,10 +33269,10 @@
         },
     },
 #line 11459
-    [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
+    [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
     {
 #line 11460
-        .trainerName = _("9F335F56"),
+        .trainerName = _("9BD745C1"),
 #line 11461
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11462
@@ -33297,10 +33297,10 @@
         },
     },
 #line 11467
-    [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
+    [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
     {
 #line 11468
-        .trainerName = _("9FB07CC0"),
+        .trainerName = _("9C9A9B43"),
 #line 11469
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11470
@@ -33325,10 +33325,10 @@
         },
     },
 #line 11475
-    [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
+    [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
     {
 #line 11476
-        .trainerName = _("9FFBEDD1"),
+        .trainerName = _("9CC51698"),
 #line 11477
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11478
@@ -33353,10 +33353,10 @@
         },
     },
 #line 11483
-    [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
+    [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
     {
 #line 11484
-        .trainerName = _("A03F3B0B"),
+        .trainerName = _("9D0B799C"),
 #line 11485
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11486
@@ -33381,10 +33381,10 @@
         },
     },
 #line 11491
-    [DIFFICULTY_NORMAL][TRAINER_A0852317] =
+    [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
     {
 #line 11492
-        .trainerName = _("A0852317"),
+        .trainerName = _("9D2974CA"),
 #line 11493
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11494
@@ -33409,10 +33409,10 @@
         },
     },
 #line 11499
-    [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
+    [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
     {
 #line 11500
-        .trainerName = _("A0CE2BCF"),
+        .trainerName = _("9DE6AF69"),
 #line 11501
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11502
@@ -33437,10 +33437,10 @@
         },
     },
 #line 11507
-    [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
+    [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
     {
 #line 11508
-        .trainerName = _("A122FEC6"),
+        .trainerName = _("9E9E96C3"),
 #line 11509
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11510
@@ -33465,10 +33465,10 @@
         },
     },
 #line 11515
-    [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
+    [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
     {
 #line 11516
-        .trainerName = _("A1502FA5"),
+        .trainerName = _("9EBDE860"),
 #line 11517
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11518
@@ -33493,10 +33493,10 @@
         },
     },
 #line 11523
-    [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
+    [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
     {
 #line 11524
-        .trainerName = _("A173BD9E"),
+        .trainerName = _("9F335F56"),
 #line 11525
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11526
@@ -33521,10 +33521,10 @@
         },
     },
 #line 11531
-    [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
+    [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
     {
 #line 11532
-        .trainerName = _("A1B34299"),
+        .trainerName = _("9FB07CC0"),
 #line 11533
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11534
@@ -33549,10 +33549,10 @@
         },
     },
 #line 11539
-    [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
+    [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
     {
 #line 11540
-        .trainerName = _("A226BBD6"),
+        .trainerName = _("9FFBEDD1"),
 #line 11541
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11542
@@ -33577,10 +33577,10 @@
         },
     },
 #line 11547
-    [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
+    [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
     {
 #line 11548
-        .trainerName = _("A26B64E5"),
+        .trainerName = _("A03F3B0B"),
 #line 11549
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11550
@@ -33605,10 +33605,10 @@
         },
     },
 #line 11555
-    [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
+    [DIFFICULTY_NORMAL][TRAINER_A0852317] =
     {
 #line 11556
-        .trainerName = _("A2F2E8FF"),
+        .trainerName = _("A0852317"),
 #line 11557
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11558
@@ -33633,10 +33633,10 @@
         },
     },
 #line 11563
-    [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
+    [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
     {
 #line 11564
-        .trainerName = _("A30D6A65"),
+        .trainerName = _("A0CE2BCF"),
 #line 11565
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11566
@@ -33661,10 +33661,10 @@
         },
     },
 #line 11571
-    [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
+    [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
     {
 #line 11572
-        .trainerName = _("A33F468D"),
+        .trainerName = _("A122FEC6"),
 #line 11573
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11574
@@ -33689,10 +33689,10 @@
         },
     },
 #line 11579
-    [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
+    [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
     {
 #line 11580
-        .trainerName = _("A377CCDF"),
+        .trainerName = _("A1502FA5"),
 #line 11581
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11582
@@ -33717,10 +33717,10 @@
         },
     },
 #line 11587
-    [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
+    [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
     {
 #line 11588
-        .trainerName = _("A393F9F0"),
+        .trainerName = _("A173BD9E"),
 #line 11589
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11590
@@ -33745,10 +33745,10 @@
         },
     },
 #line 11595
-    [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
+    [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
     {
 #line 11596
-        .trainerName = _("A39AB67C"),
+        .trainerName = _("A1B34299"),
 #line 11597
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11598
@@ -33773,10 +33773,10 @@
         },
     },
 #line 11603
-    [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
+    [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
     {
 #line 11604
-        .trainerName = _("A3EBD43B"),
+        .trainerName = _("A226BBD6"),
 #line 11605
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11606
@@ -33801,10 +33801,10 @@
         },
     },
 #line 11611
-    [DIFFICULTY_NORMAL][TRAINER_A489434F] =
+    [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
     {
 #line 11612
-        .trainerName = _("A489434F"),
+        .trainerName = _("A26B64E5"),
 #line 11613
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11614
@@ -33829,10 +33829,10 @@
         },
     },
 #line 11619
-    [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
+    [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
     {
 #line 11620
-        .trainerName = _("A49FED84"),
+        .trainerName = _("A2F2E8FF"),
 #line 11621
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11622
@@ -33857,10 +33857,10 @@
         },
     },
 #line 11627
-    [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
+    [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
     {
 #line 11628
-        .trainerName = _("A4BDD551"),
+        .trainerName = _("A30D6A65"),
 #line 11629
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11630
@@ -33885,10 +33885,10 @@
         },
     },
 #line 11635
-    [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
+    [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
     {
 #line 11636
-        .trainerName = _("A4D47D9E"),
+        .trainerName = _("A33F468D"),
 #line 11637
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11638
@@ -33913,10 +33913,10 @@
         },
     },
 #line 11643
-    [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
+    [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
     {
 #line 11644
-        .trainerName = _("A4DC84A0"),
+        .trainerName = _("A377CCDF"),
 #line 11645
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11646
@@ -33941,10 +33941,10 @@
         },
     },
 #line 11651
-    [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
+    [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
     {
 #line 11652
-        .trainerName = _("A4EC97B5"),
+        .trainerName = _("A393F9F0"),
 #line 11653
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11654
@@ -33969,10 +33969,10 @@
         },
     },
 #line 11659
-    [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
+    [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
     {
 #line 11660
-        .trainerName = _("A50CF67B"),
+        .trainerName = _("A39AB67C"),
 #line 11661
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11662
@@ -33997,10 +33997,10 @@
         },
     },
 #line 11667
-    [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
+    [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
     {
 #line 11668
-        .trainerName = _("A62D49C6"),
+        .trainerName = _("A3EBD43B"),
 #line 11669
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11670
@@ -34025,10 +34025,10 @@
         },
     },
 #line 11675
-    [DIFFICULTY_NORMAL][TRAINER_A6328173] =
+    [DIFFICULTY_NORMAL][TRAINER_A489434F] =
     {
 #line 11676
-        .trainerName = _("A6328173"),
+        .trainerName = _("A489434F"),
 #line 11677
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11678
@@ -34053,10 +34053,10 @@
         },
     },
 #line 11683
-    [DIFFICULTY_NORMAL][TRAINER_A686809A] =
+    [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
     {
 #line 11684
-        .trainerName = _("A686809A"),
+        .trainerName = _("A49FED84"),
 #line 11685
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11686
@@ -34081,10 +34081,10 @@
         },
     },
 #line 11691
-    [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
+    [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
     {
 #line 11692
-        .trainerName = _("A7154C64"),
+        .trainerName = _("A4BDD551"),
 #line 11693
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11694
@@ -34109,10 +34109,10 @@
         },
     },
 #line 11699
-    [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
+    [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
     {
 #line 11700
-        .trainerName = _("A725F3F3"),
+        .trainerName = _("A4D47D9E"),
 #line 11701
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11702
@@ -34137,10 +34137,10 @@
         },
     },
 #line 11707
-    [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
+    [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
     {
 #line 11708
-        .trainerName = _("A7376C87"),
+        .trainerName = _("A4DC84A0"),
 #line 11709
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11710
@@ -34165,10 +34165,10 @@
         },
     },
 #line 11715
-    [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
+    [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
     {
 #line 11716
-        .trainerName = _("A76F8352"),
+        .trainerName = _("A4EC97B5"),
 #line 11717
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11718
@@ -34193,10 +34193,10 @@
         },
     },
 #line 11723
-    [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
+    [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
     {
 #line 11724
-        .trainerName = _("A783BCA8"),
+        .trainerName = _("A50CF67B"),
 #line 11725
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11726
@@ -34221,10 +34221,10 @@
         },
     },
 #line 11731
-    [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
+    [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
     {
 #line 11732
-        .trainerName = _("A7D689F5"),
+        .trainerName = _("A62D49C6"),
 #line 11733
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11734
@@ -34249,10 +34249,10 @@
         },
     },
 #line 11739
-    [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
+    [DIFFICULTY_NORMAL][TRAINER_A6328173] =
     {
 #line 11740
-        .trainerName = _("A7DCD657"),
+        .trainerName = _("A6328173"),
 #line 11741
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11742
@@ -34277,10 +34277,10 @@
         },
     },
 #line 11747
-    [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
+    [DIFFICULTY_NORMAL][TRAINER_A686809A] =
     {
 #line 11748
-        .trainerName = _("A80F3799"),
+        .trainerName = _("A686809A"),
 #line 11749
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11750
@@ -34305,10 +34305,10 @@
         },
     },
 #line 11755
-    [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
+    [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
     {
 #line 11756
-        .trainerName = _("A82FABFC"),
+        .trainerName = _("A7154C64"),
 #line 11757
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11758
@@ -34333,10 +34333,10 @@
         },
     },
 #line 11763
-    [DIFFICULTY_NORMAL][TRAINER_A8413608] =
+    [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
     {
 #line 11764
-        .trainerName = _("A8413608"),
+        .trainerName = _("A725F3F3"),
 #line 11765
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11766
@@ -34361,10 +34361,10 @@
         },
     },
 #line 11771
-    [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
+    [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
     {
 #line 11772
-        .trainerName = _("A8BA94B6"),
+        .trainerName = _("A7376C87"),
 #line 11773
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11774
@@ -34389,10 +34389,10 @@
         },
     },
 #line 11779
-    [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
+    [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
     {
 #line 11780
-        .trainerName = _("A90E2D03"),
+        .trainerName = _("A76F8352"),
 #line 11781
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11782
@@ -34417,10 +34417,10 @@
         },
     },
 #line 11787
-    [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
+    [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
     {
 #line 11788
-        .trainerName = _("A968DBA5"),
+        .trainerName = _("A783BCA8"),
 #line 11789
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11790
@@ -34445,10 +34445,10 @@
         },
     },
 #line 11795
-    [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
+    [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
     {
 #line 11796
-        .trainerName = _("A990AE14"),
+        .trainerName = _("A7D689F5"),
 #line 11797
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11798
@@ -34473,10 +34473,10 @@
         },
     },
 #line 11803
-    [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
+    [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
     {
 #line 11804
-        .trainerName = _("A9F2709A"),
+        .trainerName = _("A7DCD657"),
 #line 11805
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11806
@@ -34501,10 +34501,10 @@
         },
     },
 #line 11811
-    [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
+    [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
     {
 #line 11812
-        .trainerName = _("AA81DD0B"),
+        .trainerName = _("A80F3799"),
 #line 11813
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11814
@@ -34529,10 +34529,10 @@
         },
     },
 #line 11819
-    [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
+    [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
     {
 #line 11820
-        .trainerName = _("AB576C3B"),
+        .trainerName = _("A82FABFC"),
 #line 11821
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11822
@@ -34557,10 +34557,10 @@
         },
     },
 #line 11827
-    [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
+    [DIFFICULTY_NORMAL][TRAINER_A8413608] =
     {
 #line 11828
-        .trainerName = _("ABD18218"),
+        .trainerName = _("A8413608"),
 #line 11829
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11830
@@ -34585,10 +34585,10 @@
         },
     },
 #line 11835
-    [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
+    [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
     {
 #line 11836
-        .trainerName = _("ABF9DAAF"),
+        .trainerName = _("A8BA94B6"),
 #line 11837
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11838
@@ -34613,10 +34613,10 @@
         },
     },
 #line 11843
-    [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
+    [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
     {
 #line 11844
-        .trainerName = _("ABFE6286"),
+        .trainerName = _("A90E2D03"),
 #line 11845
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11846
@@ -34641,10 +34641,10 @@
         },
     },
 #line 11851
-    [DIFFICULTY_NORMAL][TRAINER_AC004835] =
+    [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
     {
 #line 11852
-        .trainerName = _("AC004835"),
+        .trainerName = _("A968DBA5"),
 #line 11853
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11854
@@ -34669,10 +34669,10 @@
         },
     },
 #line 11859
-    [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
+    [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
     {
 #line 11860
-        .trainerName = _("ACB85CBA"),
+        .trainerName = _("A990AE14"),
 #line 11861
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11862
@@ -34697,10 +34697,10 @@
         },
     },
 #line 11867
-    [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
+    [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
     {
 #line 11868
-        .trainerName = _("ACE2090A"),
+        .trainerName = _("A9F2709A"),
 #line 11869
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11870
@@ -34725,10 +34725,10 @@
         },
     },
 #line 11875
-    [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
+    [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
     {
 #line 11876
-        .trainerName = _("AD1AA26D"),
+        .trainerName = _("AA81DD0B"),
 #line 11877
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11878
@@ -34753,10 +34753,10 @@
         },
     },
 #line 11883
-    [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
+    [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
     {
 #line 11884
-        .trainerName = _("AD70C4BA"),
+        .trainerName = _("AB576C3B"),
 #line 11885
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11886
@@ -34781,10 +34781,10 @@
         },
     },
 #line 11891
-    [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
+    [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
     {
 #line 11892
-        .trainerName = _("AD8C8210"),
+        .trainerName = _("ABD18218"),
 #line 11893
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11894
@@ -34809,10 +34809,10 @@
         },
     },
 #line 11899
-    [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
+    [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
     {
 #line 11900
-        .trainerName = _("ADC94E2C"),
+        .trainerName = _("ABF9DAAF"),
 #line 11901
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11902
@@ -34837,10 +34837,10 @@
         },
     },
 #line 11907
-    [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
+    [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
     {
 #line 11908
-        .trainerName = _("AE0ED10D"),
+        .trainerName = _("ABFE6286"),
 #line 11909
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11910
@@ -34865,10 +34865,10 @@
         },
     },
 #line 11915
-    [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
+    [DIFFICULTY_NORMAL][TRAINER_AC004835] =
     {
 #line 11916
-        .trainerName = _("AE99A6E1"),
+        .trainerName = _("AC004835"),
 #line 11917
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11918
@@ -34893,10 +34893,10 @@
         },
     },
 #line 11923
-    [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
+    [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
     {
 #line 11924
-        .trainerName = _("AE9CFA41"),
+        .trainerName = _("ACB85CBA"),
 #line 11925
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11926
@@ -34921,10 +34921,10 @@
         },
     },
 #line 11931
-    [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
+    [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
     {
 #line 11932
-        .trainerName = _("AEDC9768"),
+        .trainerName = _("ACE2090A"),
 #line 11933
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11934
@@ -34949,10 +34949,10 @@
         },
     },
 #line 11939
-    [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
+    [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
     {
 #line 11940
-        .trainerName = _("AF0898E7"),
+        .trainerName = _("AD1AA26D"),
 #line 11941
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11942
@@ -34977,10 +34977,10 @@
         },
     },
 #line 11947
-    [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
+    [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
     {
 #line 11948
-        .trainerName = _("AF765F9F"),
+        .trainerName = _("AD70C4BA"),
 #line 11949
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11950
@@ -35005,10 +35005,10 @@
         },
     },
 #line 11955
-    [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
+    [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
     {
 #line 11956
-        .trainerName = _("AFA4A980"),
+        .trainerName = _("AD8C8210"),
 #line 11957
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11958
@@ -35033,10 +35033,10 @@
         },
     },
 #line 11963
-    [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
+    [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
     {
 #line 11964
-        .trainerName = _("AFA5BAC9"),
+        .trainerName = _("ADC94E2C"),
 #line 11965
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11966
@@ -35061,10 +35061,10 @@
         },
     },
 #line 11971
-    [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
+    [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
     {
 #line 11972
-        .trainerName = _("AFD8F2EF"),
+        .trainerName = _("AE0ED10D"),
 #line 11973
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11974
@@ -35089,10 +35089,10 @@
         },
     },
 #line 11979
-    [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
+    [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
     {
 #line 11980
-        .trainerName = _("AFE855B1"),
+        .trainerName = _("AE99A6E1"),
 #line 11981
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11982
@@ -35117,10 +35117,10 @@
         },
     },
 #line 11987
-    [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
+    [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
     {
 #line 11988
-        .trainerName = _("AFFCC47E"),
+        .trainerName = _("AE9CFA41"),
 #line 11989
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11990
@@ -35145,10 +35145,10 @@
         },
     },
 #line 11995
-    [DIFFICULTY_NORMAL][TRAINER_B0FC622D] =
+    [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
     {
 #line 11996
-        .trainerName = _("B0FC622D"),
+        .trainerName = _("AEDC9768"),
 #line 11997
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 11998
@@ -35173,10 +35173,10 @@
         },
     },
 #line 12003
-    [DIFFICULTY_NORMAL][TRAINER_B1DA7383] =
+    [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
     {
 #line 12004
-        .trainerName = _("B1DA7383"),
+        .trainerName = _("AF0898E7"),
 #line 12005
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12006
@@ -35201,10 +35201,10 @@
         },
     },
 #line 12011
-    [DIFFICULTY_NORMAL][TRAINER_B253DEF2] =
+    [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
     {
 #line 12012
-        .trainerName = _("B253DEF2"),
+        .trainerName = _("AF765F9F"),
 #line 12013
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12014
@@ -35229,10 +35229,10 @@
         },
     },
 #line 12019
-    [DIFFICULTY_NORMAL][TRAINER_B2925134] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
     {
 #line 12020
-        .trainerName = _("B2925134"),
+        .trainerName = _("AFA4A980"),
 #line 12021
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12022
@@ -35257,10 +35257,10 @@
         },
     },
 #line 12027
-    [DIFFICULTY_NORMAL][TRAINER_B2A5CB2B] =
+    [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
     {
 #line 12028
-        .trainerName = _("B2A5CB2B"),
+        .trainerName = _("AFA5BAC9"),
 #line 12029
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12030
@@ -35285,10 +35285,10 @@
         },
     },
 #line 12035
-    [DIFFICULTY_NORMAL][TRAINER_B32A1E98] =
+    [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
     {
 #line 12036
-        .trainerName = _("B32A1E98"),
+        .trainerName = _("AFD8F2EF"),
 #line 12037
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12038
@@ -35313,10 +35313,10 @@
         },
     },
 #line 12043
-    [DIFFICULTY_NORMAL][TRAINER_B3B1644E] =
+    [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
     {
 #line 12044
-        .trainerName = _("B3B1644E"),
+        .trainerName = _("AFE855B1"),
 #line 12045
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12046
@@ -35341,10 +35341,10 @@
         },
     },
 #line 12051
-    [DIFFICULTY_NORMAL][TRAINER_B3CE95A4] =
+    [DIFFICULTY_NORMAL][TRAINER_AFFCC47E] =
     {
 #line 12052
-        .trainerName = _("B3CE95A4"),
+        .trainerName = _("AFFCC47E"),
 #line 12053
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12054
@@ -35369,10 +35369,10 @@
         },
     },
 #line 12059
-    [DIFFICULTY_NORMAL][TRAINER_B3FB2F4B] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_4] =
     {
 #line 12060
-        .trainerName = _("B3FB2F4B"),
+        .trainerName = _("ImprovtroupeX"),
 #line 12061
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12062
@@ -35397,10 +35397,10 @@
         },
     },
 #line 12067
-    [DIFFICULTY_NORMAL][TRAINER_B42E7E27] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_5] =
     {
 #line 12068
-        .trainerName = _("B42E7E27"),
+        .trainerName = _("ImprovtroupeY"),
 #line 12069
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12070
@@ -35425,10 +35425,10 @@
         },
     },
 #line 12075
-    [DIFFICULTY_NORMAL][TRAINER_IMPROV_4] =
+    [DIFFICULTY_NORMAL][TRAINER_IMPROV_6] =
     {
 #line 12076
-        .trainerName = _("ImprovtroupeX"),
+        .trainerName = _("ImprovtroupeZ"),
 #line 12077
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12078
@@ -35453,10 +35453,10 @@
         },
     },
 #line 12083
-    [DIFFICULTY_NORMAL][TRAINER_IMPROV_5] =
+    [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
     {
 #line 12084
-        .trainerName = _("ImprovtroupeY"),
+        .trainerName = _("C82E0F99"),
 #line 12085
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12086
@@ -35481,10 +35481,10 @@
         },
     },
 #line 12091
-    [DIFFICULTY_NORMAL][TRAINER_IMPROV_6] =
+    [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
     {
 #line 12092
-        .trainerName = _("ImprovtroupeZ"),
+        .trainerName = _("C84D5BA6"),
 #line 12093
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12094
@@ -35509,10 +35509,10 @@
         },
     },
 #line 12099
-    [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
+    [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
     {
 #line 12100
-        .trainerName = _("C82E0F99"),
+        .trainerName = _("C8563FAA"),
 #line 12101
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12102
@@ -35537,10 +35537,10 @@
         },
     },
 #line 12107
-    [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
+    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
     {
 #line 12108
-        .trainerName = _("C84D5BA6"),
+        .trainerName = _("LEAF"),
 #line 12109
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12110
@@ -35565,10 +35565,10 @@
         },
     },
 #line 12115
-    [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
+    [DIFFICULTY_NORMAL][TRAINER_RED] =
     {
 #line 12116
-        .trainerName = _("C8563FAA"),
+        .trainerName = _("RED"),
 #line 12117
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
 #line 12118
@@ -35585,62 +35585,6 @@
 #line 12122
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 12121
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 12123
-    [DIFFICULTY_NORMAL][TRAINER_LEAF] =
-    {
-#line 12124
-        .trainerName = _("LEAF"),
-#line 12125
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12126
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 12128
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12130
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12129
-            .lvl = 1,
-            .ball = POKEBALL_COUNT,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            },
-        },
-    },
-#line 12131
-    [DIFFICULTY_NORMAL][TRAINER_RED] =
-    {
-#line 12132
-        .trainerName = _("RED"),
-#line 12133
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12134
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
-#line 0
-        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 12136
-            .species = SPECIES_BUNEARY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12138
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12137
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
