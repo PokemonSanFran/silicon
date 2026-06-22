@@ -439,6 +439,7 @@ enum NameplatePhone
 #define MAX_TITLE_LENGTH                               68
 
 #define GFXTAG_SPEAKER_ICON                            10019
+#define PALTAG_SPEAKER_ICON                            (10029 | BLEND_IMMUNE_FLAG)
 #define SPEAKER_ICON_PAL_NUM                           5
 #define SPEAKER_ICON_Y                                 76
 #define SPEAKER_ICON_RIGHT_PADDING                     24
