@@ -2265,3 +2265,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/Chasilla_MochiShop/scripts.inc"
 
 	.include "data/maps/QiuVillage_Apartment_2F/scripts.inc"
+
+	.include "data/maps/HodouCity_Herbal/scripts.inc"

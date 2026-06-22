@@ -13723,6 +13723,18 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/QiuVillage_Apartment_2F/border.bin",
       "blockdata_filepath": "data/layouts/QiuVillage_Apartment_2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_HODOU_CITY_HERBAL",
+      "name": "HodouCity_Herbal_Layout",
+      "width": 11,
+      "height": 8,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/HodouCity_Herbal/border.bin",
+      "blockdata_filepath": "data/layouts/HodouCity_Herbal/map.bin"
     }
   ]
 }

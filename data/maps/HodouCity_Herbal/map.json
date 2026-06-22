@@ -1,0 +1,60 @@
+{
+  "id": "MAP_HODOU_CITY_HERBAL",
+  "name": "HodouCity_Herbal",
+  "layout": "LAYOUT_HODOU_CITY_HERBAL",
+  "music": "MUS_DUMMY",
+  "region_map_section": "MAPSEC_HODOU_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_HERBAL_BACKROOMGUARDA",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_Interact_BackroomguardA",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_HERBAL_TO_BACKROOM_A",
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_BACKROOM_A",
+      "dest_warp_id": "WARP_ID_BACKROOM_A_TO_HERBAL_LEFT"
+    },
+    {
+      "warp_id": "WARP_ID_HERBAL_TO_HODOU_LEFT",
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY",
+      "dest_warp_id": "WARP_ID_HODOU_TO_HERBAL"
+    },
+    {
+      "warp_id": "WARP_ID_HERBAL_TO_HODOU_RIGHT",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY",
+      "dest_warp_id": "WARP_ID_HODOU_TO_HERBAL"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
