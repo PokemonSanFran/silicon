@@ -44,7 +44,7 @@ script YouRealizeWereEvilRight_PhoneCall_Dialogue {
         closemessage
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,17,29)
-waitstate
+		waitstate
 }
 
 script YouRealizeWereEvilRight_Open_Dialogue {

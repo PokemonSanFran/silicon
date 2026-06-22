@@ -251,6 +251,7 @@ script VSGarbodor_DefeatedAll_Dialogue {
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ROUTE2, 255, 20, 22)
+		waitstate
         delay(100)
 }
 
@@ -319,6 +320,7 @@ script VSGarbodor_Negotiating_Dialogue
                 closemessage
                 fadeblackandsetremovewarpfadeflag
                 warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F, 7, 3)
+				waitstate
                 release
                 end
         }

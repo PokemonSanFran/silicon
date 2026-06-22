@@ -115,6 +115,7 @@ script Earthquake_ThatNight_Dialogue
     setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_HALAI_ISLAND,2)
+	waitstate
 }
 
 script Earthquake_ShowDestroyedCity_Script {
@@ -273,7 +274,7 @@ script Earthquake_AskPlayerWarp_Script {
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_ROUTE4,255,10,24)
-                end
+			waitstate
         }else {
                 msgbox(format("Okay, we've all got our orders. Let's stay in touch."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage

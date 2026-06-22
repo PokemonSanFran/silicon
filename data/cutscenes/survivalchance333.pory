@@ -99,6 +99,7 @@ script SurvivalChance333_PostBattle_Script {
         setvar(VAR_HALAI_ISLAND_STATE,START_SURVIVAL_CHANCE)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_HALAI_ISLAND,255,21,24)
+		waitstate
 }
 
 script SurvivalChance333_MoveCameraFreeze_Script {

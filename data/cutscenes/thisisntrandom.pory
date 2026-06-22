@@ -90,6 +90,7 @@ script ThisIsntRandom_UnlockDoor_Dialogue
         endcutscene
         fadeblackandsetremovewarpfadeflag
         warp(MAP_SECRET_PATH,0)
+		waitstate
         end
 }
 

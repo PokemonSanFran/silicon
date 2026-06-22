@@ -189,6 +189,7 @@ script WaitEvenThen_PostBossDialogue {
         if (var(VAR_RESULT) == YES){
         fadeblackandsetremovewarpfadeflag
             warp(MAP_HALAI_ISLAND,255,34,13)
+		waitstate
                 end
         }else {
                 msgbox(format("Meet us in the center of town, okay?"),,SPEAKER_BAIYA_TIDE)

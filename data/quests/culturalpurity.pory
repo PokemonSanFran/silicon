@@ -279,6 +279,7 @@ script Quest_CulturalPurity_PostBattle_Script{
     waitmovement(PLAYER)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_HODOU_CITY_RACISTHOUSE,0)
+		waitstate
 }
 
 script Quest_CulturalPurity_InsideClubhouse_Dialogue{

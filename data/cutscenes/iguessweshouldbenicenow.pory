@@ -297,6 +297,7 @@ script IGuessWeShouldBeNiceNow_End_Dialogue {
         clearflag(FLAG_HIDE_MAP_NAME_POPUP)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ESPULEE_OUTSKIRTS,6,33)
+		waitstate
         release
         end
 }

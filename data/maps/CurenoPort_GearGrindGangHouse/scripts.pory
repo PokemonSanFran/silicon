@@ -68,6 +68,7 @@ script CurenoPort_GearGrindGangHouse_Dialogue_KickOut
    call(CurenoPort_GearGrindGangHouse_Dialogue_GuardsBlockDoor)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_CURENO_PORT,2,21)
+	waitstate
     release
     end
 }

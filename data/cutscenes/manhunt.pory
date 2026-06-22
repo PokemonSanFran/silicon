@@ -67,6 +67,7 @@ script Manhunt_Assignment_Dialogue {
         {
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_PERLACIA_CITY,6,20)
+			waitstate
         }
     closemessage
     release
@@ -400,6 +401,7 @@ script Manhunt_StartVigrimBattle_Script
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,5,5)
+		waitstate
 }
 
 script Manhunt_MissionComplete_Dialogue {

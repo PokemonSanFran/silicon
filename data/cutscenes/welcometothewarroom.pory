@@ -208,6 +208,7 @@ script WelcomeToTheWarRoom_ExplainSitaution_Dialogue
 
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_ROUTE4,18,90)
+			waitstate
         }
 }
 

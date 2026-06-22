@@ -59,6 +59,7 @@ script SharpriseSpire_ElevatorAttendant_PickFloor_Script{
             case 4: warpsilent(MAP_SHARPRISE_SPIRE_PRODUCTION,2)
             case 5: warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,2)
         }
+		waitstate
 }
 
 script SharpriseSpire_ElevatorAttendant_Script {

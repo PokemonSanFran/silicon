@@ -298,6 +298,7 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         setvar(VAR_HALAI_ISLAND_STATE,WHY_ARE_YOU_HELPING_THEM)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_HALAI_ISLAND,255,26,6)
+		waitstate
 }
 
 script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
@@ -334,6 +335,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
             closemessage
             fadescreen(FADE_TO_BLACK)
             warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
+			waitstate
         } else {
             closemessage
                 release
@@ -393,6 +395,7 @@ script WhyAreYouHelpingThem_StartChampionship_Dialogue {
             setvar(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP)
                 fadescreen(FADE_TO_BLACK)
                 warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
+			waitstate
         }
 }
 

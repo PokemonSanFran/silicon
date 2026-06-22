@@ -117,6 +117,7 @@ script TheStrikeStrikesBack_PhoneCall_Dialogue{
             closemessage
         fadeblackandsetremovewarpfadeflag
                 warpsilent(MAP_ROUTE2,255,21,25)
+		waitstate
         }
     release
         end
