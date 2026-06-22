@@ -32,7 +32,7 @@
   "warp_events": [
     {
       "warp_id": "WARP_ID_HERBAL_TO_BACKROOM_A",
-      "x": 5,
+      "x": 4,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_BACKROOM_A",

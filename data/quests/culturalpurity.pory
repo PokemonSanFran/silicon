@@ -1,8 +1,13 @@
+script CulturalPurity_Script_Hide_HodouLeader
+{
+    setobjectflagfromlocalid(LOCALID_HODOU_SHINZO)
+}
+
 script CulturalPurity_Dialogue_StartQuest
 {
     lock
     faceplayer
-    msgbox(format("Player."),,SPEAKER_SHINZO)
+    msgbox(format("{PLAYER}."),,SPEAKER_SHINZO)
     checkitemspace(ITEM_QUEST_CULTURALPURITY_1,1)
     goto_if_eq(VAR_RESULT,TRUE,CulturalPurity_Dialogue_IntroduceCult)
     msgbox(format("There seems to be a lot in your bag. Come back when you’ve got more space for something vital!"),,SPEAKER_SHINZO)
@@ -13,4 +18,363 @@ script CulturalPurity_Dialogue_StartQuest
 
 script CulturalPurity_Dialogue_IntroduceCult
 {
+    setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_QUEST_1_NOT_STARTED)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("I’ve been learning more about Resido culture. What can you tell me of the Seafoam {STR_VAR_1} Society?"),,SPEAKER_SHINZO)
+    msgbox(format("I’ve never heard of that."),,SPEAKER_PLAYER)
+    msgbox(format("Really? Maybe because you’re new to the region…"),,SPEAKER_SHINZO)
+    msgbox(format("I’ve read about them online. They’re a secret society of Pokémon Trainers."),,SPEAKER_SHINZO)
+    msgbox(format("I haven’t heard of them because they’re secret!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SWEAT)
+    msgbox(format("They claim to help Trainers strip away modern distractions and are trying to bring Pokémon training back to its original roots."),,SPEAKER_SHINZO)
+    msgbox(format("I’m excited to find other Trainers that understand how important traditions are! That’s how I was trained in Sinnoh, and I think I can grow by finding people who share my values."),,SPEAKER_SHINZO)
+    msgbox(format("I’m having trouble figuring out how to actually join. I saw this online..."),,SPEAKER_SHINZO)
+    closemessage
+    showtweet(TWEET_QUEST_CULTURAL_PURITY_AD3)
+    msgbox(format("And I paid ¥500 for one of these."),,SPEAKER_SHINZO)
+    closemessage
+    cueobjectplayer(LOCALID_HODOU_SHINZO)
+    giveitem(ITEM_QUEST_CULTURALPURITY_1,1)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("But I haven’t been able to find them. I want to show you my true power - help me find the Seafoam {STR_VAR_1} Society, will you? Then I’ll be strong enough to show you and all of Resido the superiority of real, authentic Sinnoh culture!"),,SPEAKER_SHINZO)
+    closemessage
+    startquest(QUEST_CULTURALPURITY)
+    msgbox(format("Let’s both keep looking through the city."),,SPEAKER_SHINZO)
+    closemessage
+    moveobjecttocoords(LOCALID_HODOU_SHINZO,12,17,DIR_EAST)
+    delay(16)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_HODOU_SHINZO)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_BackroomguardA_Caw
+{
+    playmoncry(SPECIES_QUEST_CULTURAL_PURITY_MASCOT,CRY_MODE_NORMAL)
+    msgbox(format("Kaw!"),,SPEAKER_BACKROOMGUARDA,TAIL_SHOUT)
+    waitmoncry
+}
+
+script CulturalPurity_Script_Interact_BackroomguardA
+{
+    lock
+    faceplayer
+    goto_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A,CulturalPurity_Dialogue_WelcomeToA_Standalone)
+    goto_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_A,CulturalPurity_Dialogue_AskDonation_BackroomguardA)
+    call(CulturalPurity_Dialogue_BackroomguardA_Caw)
+    closemessage
+    goto_if_quest_active(QUEST_CULTURALPURITY,CulturalPurity_Dialogue_Begin_BackroomguardA)
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_Begin_BackroomguardA
+{
+    callnative(Script_Quest_CulturalPurity_IsPlayerReadyForLevelA)
+    goto_if_eq(VAR_RESULT,TRUE,CulturalPurity_Dialogue_ReadyForA_BackroomguardA)
+    msgbox(format("…Is this what they meant by a bird?  And now I can only bring two types of Pokémon, right?"),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_ReadyForA_BackroomguardA
+{
+    setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_A)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("Are you with the Seafoam {STR_VAR_1} Society?"),,SPEAKER_PLAYER,,EMOTE_CONFUSE)
+    closemessage
+    call(CulturalPurity_Dialogue_BackroomguardA_Caw)
+    msgbox(format("They are looking at you expectantly."))
+    closemessage
+    msgbox(format("Speak the word of… oh."),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_CONFUSE)
+    closemessage
+    playmoncry(SPECIES_QUEST_CULTURAL_PURITY_MASCOT,CRY_MODE_WEAK)
+    msgbox(format("Kaw?"),,SPEAKER_PLAYER)
+    waitmoncry
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("Welcome to Level A, young {STR_VAR_1}."),,SPEAKER_BACKROOMGUARDA)
+    msgbox(format("You have begun a wonderful journey that will strengthen your resolve as a human, as a Trainer, and as a citizen of the planet."),,SPEAKER_BACKROOMGUARDA)
+    buffernumberstring(STR_VAR_2,COST_QUEST_CULTURAL_PURITY_A)
+    msgbox(format("To enter Level A, you’ll need the initiation donation of ¥{STR_VAR_2}."),,SPEAKER_BACKROOMGUARDA)
+    msgbox(format("¥{STR_VAR_2}? The zap didn’t say anything about money!"),,SPEAKER_PLAYER,TAIL_SHOUT,EMOTE_SHOCK)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("Your donation is required to keep this vital movement alive - we use that money to educate more {STR_VAR_1}. You are helping the cause!"),,SPEAKER_BACKROOMGUARDA)
+    goto(CulturalPurity_Dialogue_AskDonation_BackroomguardA)
+}
+
+script CulturalPurity_Dialogue_AskDonation_BackroomguardA
+{
+    checkmoney(COST_QUEST_CULTURAL_PURITY_A)
+    showmoneybox(0,0)
+    goto_if_ne(VAR_RESULT,TRUE,CulturalPurity_Dialogue_DenyDonation_BackroomguardA)
+    msgbox(format("To enter Level A, you’ll need the initiation donation of ¥{STR_VAR_2}."),MSGBOX_YESNO,SPEAKER_BACKROOMGUARDA)
+    goto_if_eq(VAR_RESULT,NO,CulturalPurity_Dialogue_DenyDonation_BackroomguardA)
+    removemoney(COST_QUEST_CULTURAL_PURITY_A)
+    setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A)
+    waitbuttonpress
+    playse(SE_SHOP)
+    updatemoneybox
+    waitse
+    hidemoneybox
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_BRIDGE_WALK)
+    waitse
+    call(CulturalPurity_Script_RevealBackroomA)
+    playse(SE_BRIDGE_WALK)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    call(CulturalPurity_Dialogue_WelcomeToA)
+    release
+    end
+}
+
+script CulturalPurity_Script_RevealBackroomA
+{
+    setmetatile(4,1,0x251,FALSE)
+    special(DrawWholeMapView)
+}
+
+script CulturalPurity_Dialogue_WelcomeToA
+{
+    playmoncry(SPECIES_FEAROW,CRY_MODE_NORMAL)
+    msgbox(format("Kaw! Welcome to Level A."),,SPEAKER_BACKROOMGUARDA)
+    waitmoncry
+    closemessage
+}
+
+script CulturalPurity_Dialogue_WelcomeToA_Standalone
+{
+    call(CulturalPurity_Dialogue_WelcomeToA)
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_DenyDonation_BackroomguardA
+{
+    buffernumberstring(STR_VAR_2,COST_QUEST_CULTURAL_PURITY_A)
+    msgbox(format("Kaw! Return when you are ready to make your ¥{STR_VAR_2} donation."),,SPEAKER_BACKROOMGUARDA)
+    closemessage
+    hidemoneybox
+    release
+    end
+}
+
+script CulturalPurity_Script_TryRejectPlayerA
+{
+    if (var(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_B)
+    {
+        return
+    }
+    callnative(Script_Quest_CulturalPurity_IsPlayerReadyForLevelA)
+    goto_if_eq(VAR_RESULT,FALSE,CulturalPurity_Dialogue_RejectLevelA)
+}
+
+script CulturalPurity_Dialogue_RejectLevelA
+{
+    fadescreen(FADE_TO_BLACK)
+    msgbox(format("The lights turned off!"))
+    msgbox(format("Your party is not pure."),,SPEAKER_SOCIETY)
+    msgbox(format("You may only return when you have met the purity for our level."),,SPEAKER_SOCIETY)
+    msgbox(format("All the Pokémon in your party may only share one or two types."),,SPEAKER_SOCIETY)
+    msgbox(format("Begone."),,SPEAKER_SOCIETY)
+    closemessage
+    warpsilent(MAP_HODOU_CITY_HERBAL,WARP_ID_HERBAL_TO_BACKROOM_A)
+    waitstate
+    release
+    end
+}
+
+script CulturalPurity_Script_Hide_BackroomguardA
+{
+    setobjectflagfromlocalid(LOCALID_HERBAL_BACKROOMGUARDA)
+}
+
+script CulturalPurity_Script_InteractBackroomtrainerA1
+{
+    lock
+    faceplayer
+    call(CulturalPurity_Script_TryRejectPlayerA)
+    if (defeated(TRAINER_BACKROOMTRAINERA1) == FALSE)
+    {
+        msgbox(format("Purity is found from discipline and focus."),,SPEAKER_BACKROOMTRAINERA1)
+        closemessage
+        trainerbattle_no_intro(TRAINER_BACKROOMTRAINERA1,format("Impressive."))
+        addvar(VAR_CULTURAL_PURITY,1)
+        release
+        end
+    }
+    msgbox(format("I’m only Level A, but I can feel great power from you."),,SPEAKER_BACKROOMTRAINERA1)
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Script_InteractBackroomtrainerA2
+{
+    lock
+    faceplayer
+    call(CulturalPurity_Script_TryRejectPlayerA)
+    if (defeated(TRAINER_BACKROOMTRAINERA2) == FALSE)
+    {
+        msgbox(format("We’ve learned that distractions are the enemy of true power."),,SPEAKER_BACKROOMTRAINERA2)
+        closemessage
+        trainerbattle_no_intro(TRAINER_BACKROOMTRAINERA2,format("…Did I leave the stove on?"))
+        addvar(VAR_CULTURAL_PURITY,1)
+        release
+        end
+    }
+    msgbox(format("Focusing this hard is so difficult… How am I going to level up at this rate?"),,SPEAKER_BACKROOMTRAINERA2)
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Script_InteractBackroomtrainerA3
+{
+    lock
+    call(CulturalPurity_Script_TryRejectPlayerA)
+    if (defeated(TRAINER_BACKROOMTRAINERA3) == FALSE)
+    {
+        faceplayer
+        bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+        msgbox(format("The Seafoam {STR_VAR_1} Society is teaching us about the traditions of the first Trainers."),,SPEAKER_BACKROOMTRAINERA3)
+        closemessage
+        trainerbattle_no_intro(TRAINER_BACKROOMTRAINERA3,format("How long have you been a Trainer for?"))
+        addvar(VAR_CULTURAL_PURITY,1)
+        release
+        end
+    }
+    if (var(VAR_CULTURAL_PURITY) == CULTURAL_PURITY_READY_FOR_B)
+    {
+        msgbox(format("The Tora Gym Leader!? Here?"),,SPEAKER_BACKROOMTRAINERA3,,EMOTE_SHOCK)
+    }
+    else
+    {
+        faceplayer
+        msgbox(format("It’s really hard to battle under all these restrictions. I hear it gets even harder as you move up in level."),,SPEAKER_BACKROOMTRAINERA3)
+    }
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Script_InteractBackroomtrainerA4
+{
+    lock
+    faceplayer
+    call(CulturalPurity_Script_TryRejectPlayerA)
+    callnative(Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelA)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Welcome to Level A of the Seafoam Sparrow Society. Please, train with the other disciples. Once you’ve defeated them all, come talk to me."),,SPEAKER_BACKROOMTRAINERA4)
+        closemessage
+        release
+        end
+    }
+    if (defeated(TRAINER_BACKROOMTRAINERA4) == FALSE)
+    {
+        msgbox(format("You’re adapting well to only using two types. I’ll be the final test of Level A!"),,SPEAKER_BACKROOMTRAINERA4)
+        closemessage
+        trainerbattle_no_intro(TRAINER_BACKROOMTRAINERA4,format("Kaw! Excellent work."))
+        addvar(VAR_CULTURAL_PURITY,1)
+        goto(CulturalPurity_Dialogue_LevelACleared)
+    }
+    playmoncry(SPECIES_QUEST_CULTURAL_PURITY_MASCOT,CRY_MODE_NORMAL)
+    msgbox(format("Kaw!"),,SPEAKER_BACKROOMTRAINERA4,TAIL_SHOUT)
+    waitmoncry
+    call(CulturalPurity_Dialogue_ExplainLevelB)
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_ExplainLevelB
+{
+    bufferitemname(STR_VAR_1,ITEM_QUEST_CULTURALPURITY_2)
+    msgbox(format("To enter Level B, bring the {STR_VAR_1} to the south eastern birds of flour and sugar."),,SPEAKER_BACKROOMTRAINERA4)
+    msgbox(format("Level B requires that your party must only have two types and cannot be holding items."),,SPEAKER_BACKROOMTRAINERA4)
+}
+
+script CulturalPurity_Dialogue_LevelACleared
+{
+    msgbox(format("You’re ready for Level B."),,SPEAKER_BACKROOMTRAINERA4)
+    bufferitemname(STR_VAR_1,ITEM_QUEST_CULTURALPURITY_1)
+    msgbox(format("Let me see your {STR_VAR_1}."),,SPEAKER_BACKROOMTRAINERA4)
+    closemessage
+    removeitem(ITEM_QUEST_CULTURALPURITY_1,1)
+    cueobjecttalking(LOCALID_PLAYER)
+    cueobjecttalking(LOCALID_BACKROOMTRAINERA4)
+    giveitem(ITEM_QUEST_CULTURALPURITY_2,1)
+    call(CulturalPurity_Dialogue_ExplainLevelB)
+    closemessage
+    clearobjectflagfromlocalid(LOCALID_BACKROOMA_SHINZO)
+    playse(SE_EXIT)
+    addobject(LOCALID_BACKROOMA_SHINZO)
+    waitse
+    playSE(SE_PIN)
+    applymovement(LOCALID_BACKROOMA_SHINZO,moves(emote_exclamation_mark))
+    applymovement(LOCALID_PLAYER,moves(emote_exclamation_mark))
+    waitse
+    moveobjecttocoords(LOCALID_PLAYER,9,4,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_BACKROOMA_SHINZO,9,5,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("{PLAYER}! I finally found this place and you already finished Level A?"),,SPEAKER_SHINZO)
+    msgbox(format("Wait, how did you get in without a tile?"),,SPEAKER_PLAYER)
+    msgbox(format("I told them I lost mine, and I got a new one."),,SPEAKER_SHINZO)
+    msgbox(format("We got into a conversation on Buzzr about how to ignore cultures that are inferior to our own. You’re not from here, so you likely don’t see it, but Resido? Tora Town? A joke."),,SPEAKER_SHINZO)
+    msgbox(format("I’ll meet you at Level B. We’re going to get stronger."),,SPEAKER_SHINZO)
+    closemessage
+    moveobjecttocoords(LOCALID_BACKROOMA_SHINZO,10,1,DIR_WEST)
+    waitmovement(LOCALID_BACKROOMA_SHINZO)
+    playse(SE_BALL_OPEN)
+    applymovement(LOCALID_BACKROOMTRAINERA3,moves(face_right))
+    waitmovement(LOCALID_BACKROOMTRAINERA3)
+    callnative(Quest_CulturalPurity_LoadShinzoMon)
+    addobject(LOCALID_BACKROOMA_SHINZO_MON)
+    setobjectnewmovementtype(LOCALID_BACKROOMA_SHINZO_MON,MOVEMENT_TYPE_WALK_IN_PLACE_LEFT)
+    callnative(Quest_CulturalPurity_GetShinzoMonCry)
+    waitmoncry
+    release
+    end
+}
+
+script CulturalPurity_Script_Move_BackroomALeader
+{
+    if (var(VAR_CULTURAL_PURITY) > CULTURAL_PURITY_OPEN_B)
+    {
+        return
+    }
+    setobjectxyperm(LOCALID_BACKROOMA_SHINZO,10,1)
+    setobjectmovementtype(LOCALID_BACKROOMA_SHINZO,MOVEMENT_TYPE_FACE_LEFT)
+    setobjectmovementtype(LOCALID_BACKROOMTRAINERA3,MOVEMENT_TYPE_FACE_RIGHT)
+}
+
+script CulturalPurity_Script_Hide_BackroomALeader
+{
+    setobjectflagfromlocalid(LOCALID_BACKROOMA_SHINZO)
+    setobjectflagfromlocalid(LOCALID_BACKROOMA_SHINZO_MON)
+}
+
+script CulturalPurity_Dialogue_InteractShinzoMon
+{
+    lock
+    callnative(Quest_CulturalPurity_GetShinzoMonCry)
+    callnative(Quest_CulturalPurity_BufferShinzoMonName)
+    msgbox(format("Shinzo's {STR_VAR_1} looks excited to battle!"))
+    waitmoncry
+    closemessage
+    release
+    end
+}
+
+script CulturalPurity_Dialogue_InteractShinzoBackroomA
+{
+    lock
+    msgbox(format("Shinzo's focus is unbreakable right now."))
+    closemessage
+    release
+    end
 }

@@ -126,6 +126,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_HODOU_SHINZO",
       "graphics_id": "OBJ_EVENT_GFX_SHINZO",
       "x": 3,
       "y": 17,
@@ -270,11 +271,12 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_HODOU_TO_HERBAL",
       "x": 18,
       "y": 10,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_C",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_HODOU_CITY_HERBAL",
+      "dest_warp_id": "WARP_ID_HERBAL_TO_HODOU_RIGHT"
     },
     {
       "x": 29,

@@ -13,21 +13,108 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [
+  "object_events": [
     {
-      "x": 5,
-      "y": 5,
+      "local_id": "LOCALID_BACKROOMTRAINERA1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
+      "x": 1,
+      "y": 2,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "1"
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerA1",
+      "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_BACKROOMTRAINERA4",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerA4",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERA2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerA2",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERA3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerA3",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMA_SHINZO",
+      "graphics_id": "OBJ_EVENT_GFX_SHINZO",
       "x": 6,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "1"
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Dialogue_InteractShinzoBackroomA",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMA_SHINZO_MON",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 9,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Dialogue_InteractShinzoMon",
+      "flag": "FLAG_TEMP_2"
+    }
+  ],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_BACKROOM_A_TO_HERBAL_LEFT",
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_HERBAL",
+      "dest_warp_id": "WARP_ID_HERBAL_TO_BACKROOM_A"
+    },
+    {
+      "warp_id": "WARP_ID_BACKROOM_A_TO_HERBAL_RIGHT",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_HERBAL",
+      "dest_warp_id": "WARP_ID_HERBAL_TO_BACKROOM_A"
     }
   ],
   "coord_events": [],
