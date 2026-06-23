@@ -13747,6 +13747,18 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/HodouCity_Cookie/border.bin",
       "blockdata_filepath": "data/layouts/HodouCity_Cookie/map.bin"
+    },
+    {
+      "id": "LAYOUT_HODOU_CITY_ALLEY_1",
+      "name": "HodouCity_Alley_1_Layout",
+      "width": 5,
+      "height": 20,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mossdeep",
+      "border_filepath": "data/layouts/HodouCity_Alley1/border.bin",
+      "blockdata_filepath": "data/layouts/HodouCity_Alley1/map.bin"
     }
   ]
 }

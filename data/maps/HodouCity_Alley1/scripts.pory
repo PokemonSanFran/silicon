@@ -1,0 +1,9 @@
+mapscripts HodouCity_Alley1_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_B,CulturalPurity_Script_Move_BackroomALeader)
+        call_if_lt(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_B,CulturalPurity_Script_Hide_BackroomALeader)
+        call_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_B,CulturalPurity_Script_Hide_BackroomALeader)
+    }
+}

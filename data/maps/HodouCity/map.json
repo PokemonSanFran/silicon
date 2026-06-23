@@ -257,13 +257,6 @@
       "dest_warp_id": "1"
     },
     {
-      "x": 24,
-      "y": 20,
-      "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_A",
-      "dest_warp_id": "0"
-    },
-    {
       "x": 9,
       "y": 26,
       "elevation": 0,
@@ -279,11 +272,12 @@
       "dest_warp_id": "WARP_ID_HERBAL_TO_HODOU_RIGHT"
     },
     {
+      "warp_id": "WARP_ID_HODOU_TO_COOKIE",
       "x": 29,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_D",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_HODOU_CITY_COOKIE",
+      "dest_warp_id": "WARP_ID_COOKIE_TO_HODOU_RIGHT"
     },
     {
       "warp_id": "WARP_ID_HODOU_GYM_ENTRANCE",
@@ -299,6 +293,14 @@
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
+    },
+    {
+      "warp_id": "WARP_ID_HODOU_TO_ALLEY_1",
+      "x": 15,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_ALLEY_1",
+      "dest_warp_id": "WARP_ID_ALLEY_1_TO_HODOU"
     }
   ],
   "coord_events": [
