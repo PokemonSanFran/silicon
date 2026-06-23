@@ -5395,3 +5395,8 @@ void Script_Quest_CulturalPurity_IsPlayerReadyForLevelC(void)
 {
     gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelC();
 }
+
+void Quest_CulturalPurity_BufferCostRacks(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, COST_QUEST_CULTURAL_PURITY_C_TRUNCATED, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_C_TRUNCATED));
+}
