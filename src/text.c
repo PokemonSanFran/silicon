@@ -599,6 +599,13 @@ void RunTextPrinters(void)
         {
             if (currentPrinter->active)
             {
+#if TESTING
+                if (gSiliconTestVariables.checkPrintSpeed)
+                {
+                    gSiliconTestVariables.counter++;
+                }
+#endif
+
                 for (u32 repeat = 0; repeat < textRepeats || isInstantText; repeat++)
                 {
                     u32 renderState = RenderFont(currentPrinter);
@@ -629,12 +636,6 @@ void RunTextPrinters(void)
                     if (!currentPrinter->active)
                         break;
                 }
-#if TESTING
-                if (gSiliconTestVariables.checkPrintSpeed)
-                {
-                    gSiliconTestVariables.counter++;
-                }
-#endif
             }
             else
             {

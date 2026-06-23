@@ -972,7 +972,6 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Animations", u32 lastTile)
 
 SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
 {
-    KNOWN_FAILING;
     enum optionsVisualTextSpeedValues speed;
     PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_SLOW; }
     PARAMETRIZE { speed = VISUAL_OPTION_TEXTSPEED_MEDIUM; }
@@ -989,8 +988,8 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
     } THEN {
         results[i].frames = gSiliconTestVariables.counter;
     } FINALLY {
-        EXPECT_LT(results[0].frames, results[1].frames);
-        EXPECT_LT(results[1].frames, results[2].frames);
-        EXPECT_LT(results[2].frames, results[3].frames);
+        EXPECT_GT(results[0].frames, results[1].frames);
+        EXPECT_GT(results[1].frames, results[2].frames);
+        EXPECT_GT(results[2].frames, results[3].frames);
     }
 }

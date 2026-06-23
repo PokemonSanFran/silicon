@@ -39,6 +39,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 #include "silicon_shine.h" // siliconMerge
+#include "test/test.h"
 
 struct BattleWindowText
 {
@@ -3958,12 +3959,21 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 
     if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGMENT_TEXT || windowId == B_WIN_OAK_OLD_MAN)
     {
+#if TESTING
+        if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) && !gSiliconTestVariables.checkPrintSpeed)
+            speed = 1;
+        else if ((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !gSiliconTestVariables.checkPrintSpeed)
+            speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
+        else
+            speed = GetPlayerTextSpeedDelay();
+#else
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
             speed = 1;
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
             speed = GetPlayerTextSpeedDelay();
+#endif
 
         gTextFlags.canABSpeedUpPrint = 1;
     }
