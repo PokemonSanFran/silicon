@@ -842,6 +842,7 @@ script CulturalPurity_Script_ResumeBattle
 script CulturalPurity_Script_StartBattle
 {
     multi_2_vs_2(TRAINER_BACKROOMTRAINERC1,format("I blew my savings for this?"),TRAINER_BACKROOMTRAINERC2,format("I’ve never seen Trainers progress this quickly…"),PARTNER_SHINZO)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
     addvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_C)
     goto(CulturalPurity_Dialogue_LevelCCleared)
 }
