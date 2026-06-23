@@ -9,25 +9,70 @@
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
   "allow_escaping": false,
-  "allow_running": true,
-  "show_map_name": true,
+  "allow_running": false,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
+  "object_events": [
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERB2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerB2",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERB1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerB1",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERB3",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerB3",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_BACKROOM_B_TO_COOKIE_LEFT",
       "x": 5,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_PROUD_PANDA",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_HODOU_CITY_COOKIE",
+      "dest_warp_id": "WARP_ID_COOKIE_TO_BACKROOM_B"
     },
     {
+      "warp_id": "WARP_ID_BACKROOM_B_TO_COOKIE_RIGHT",
       "x": 6,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_PROUD_PANDA",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_HODOU_CITY_COOKIE",
+      "dest_warp_id": "WARP_ID_COOKIE_TO_BACKROOM_B"
     }
   ],
   "coord_events": [],

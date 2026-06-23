@@ -5268,6 +5268,34 @@ void Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelA(void)
     gSpecialVar_Result = Quest_CulturalPurity_HasDefeatedAllPeonsLevelA();
 }
 
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelB(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        enum Item item = GetMonData(mon,MON_DATA_HELD_ITEM);
+        if (item != ITEM_NONE)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelB(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelB();
+}
+
 void Quest_CulturalPurity_LoadShinzoMon(void)
 {
     u32 trainerId = PARTNER_SHINZO;
@@ -5296,4 +5324,74 @@ void Quest_CulturalPurity_GetShinzoMonCry(void)
 
     enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
     PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void Quest_CulturalPurity_BufferCostLevelB(void)
+{
+    ConvertIntToDecimalStringN(gStringVar2, COST_QUEST_CULTURAL_PURITY_B, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_B));
+}
+
+bool8 Quest_CulturalPurity_HasDefeatedAllPeonsLevelB(void)
+{
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB1) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB2) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelB(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_HasDefeatedAllPeonsLevelB();
+}
+
+void Quest_CulturalPurity_BufferCostLevelC(void)
+{
+    ConvertIntToDecimalStringN(gStringVar2, COST_QUEST_CULTURAL_PURITY_C, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_C));
+}
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelC(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelB() == FALSE)
+        return FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        u32 matchingMoves = 0;
+
+        for (u32 typeIndex = 0; typeIndex < TYPES_PER_MON; typeIndex++)
+        {
+            enum Type type = GetSpeciesType(species,typeIndex);
+
+            for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+            {
+                enum Move move = GetMonData(mon,MON_DATA_MOVE1 + moveIndex);
+
+                if (GetMoveType(move) == type)
+                    matchingMoves++;
+            }
+        }
+        if (matchingMoves < 2)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelC(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelC();
 }
