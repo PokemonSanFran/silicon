@@ -4635,6 +4635,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_ENCOUNTER_HIPPIE_TREEHUGGER) \
     X(MUS_VICTORY_DIANTHA_FACILITY) \
     X(MUS_CAVE) \
+    X(MUS_CAVE_DEEPER) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
