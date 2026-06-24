@@ -5400,3 +5400,36 @@ void Quest_CulturalPurity_BufferCostRacks(void)
 {
     ConvertIntToDecimalStringN(gStringVar1, COST_QUEST_CULTURAL_PURITY_C_TRUNCATED, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_C_TRUNCATED));
 }
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelD(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelB() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelC() == FALSE)
+        return FALSE;
+
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (GetMonData(&tempMon,MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+                continue;
+
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelD(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelD();
+}

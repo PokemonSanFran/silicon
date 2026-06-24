@@ -1,7 +1,10 @@
 mapscripts HodouCity_Racisthouse_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
+    MAP_SCRIPT_ON_TRANSITION
+    {
     }
-    MAP_SCRIPT_ON_FRAME_TABLE[
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0:CulturalPurity_Script_TryCultCutscene
     ]
 }
 
