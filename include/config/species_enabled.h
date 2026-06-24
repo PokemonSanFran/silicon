@@ -454,7 +454,7 @@
 #define P_FAMILY_KOMALA                  FALSE
 #define P_FAMILY_TURTONATOR              FALSE
 #define P_FAMILY_TOGEDEMARU              P_GEN_7_POKEMON
-#define P_FAMILY_MIMIKYU                 FALSE
+#define P_FAMILY_MIMIKYU                 P_GEN_7_POKEMON
 #define P_FAMILY_BRUXISH                 FALSE
 #define P_FAMILY_DRAMPA                  FALSE
 #define P_FAMILY_DHELMISE                P_GEN_7_POKEMON
