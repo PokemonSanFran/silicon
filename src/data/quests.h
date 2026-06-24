@@ -3490,10 +3490,10 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_CULTURALPURITY] =
     {
-        .name = gText_Quest_CulturalPurity_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_CulturalPurity_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_CulturalPurity_DoneDesc,
-        .map = gText_Quest_CulturalPurity_Map,
+        .name = COMPOUND_STRING("Cultural Purity"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING(""),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped show Shinzo that clinging to traditions doesn’t always make you stronger. He has a lot of growing to do."),
+        .map = COMPOUND_STRING("Hodou City"),
         .sprite = OBJ_EVENT_GFX_SHINZO,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
@@ -3504,6 +3504,7 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .name = gText_Quest_HybridCulture_Name,
         .desc[FLAG_GET_ACTIVE] = gText_Quest_HybridCulture_Desc,
         .desc[FLAG_GET_COMPLETED] = gText_Quest_HybridCulture_DoneDesc,
+        .descFunc = GetQuestDesc_CulturalPurity,
         .map = gText_Quest_HybridCulture_Map,
         .sprite = OBJ_EVENT_GFX_SHINZO,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
