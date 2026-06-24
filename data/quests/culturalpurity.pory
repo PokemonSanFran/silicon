@@ -321,11 +321,12 @@ script CulturalPurity_Dialogue_LevelACleared
     waitse
     moveobjecttocoords(LOCALID_PLAYER,9,4,DIR_SOUTH)
     moveobjecttocoords(LOCALID_BACKROOMA_SHINZO,9,5,DIR_NORTH)
+    buffermapname(STR_VAR_3,MAP_HODOU_CITY_RACISTHOUSE)
     waitmovement(LOCALID_PLAYER)
     msgbox(format("{PLAYER}! I finally found this place and you already finished Level A?"),,SPEAKER_SHINZO)
     msgbox(format("Wait, how did you get in without a tile?"),,SPEAKER_PLAYER)
     msgbox(format("I told them I lost mine, and I got a new one."),,SPEAKER_SHINZO)
-    msgbox(format("We got into a conversation on Buzzr about how to ignore cultures that are inferior to our own. You’re not from here, so you likely don’t see it, but Resido? Tora Town? A joke."),,SPEAKER_SHINZO)
+    msgbox(format("We got into a conversation on Buzzr about how to ignore cultures that are inferior to our own. You’re not from here, so you likely don’t see it, but Resido? {STR_VAR_3}? A joke."),,SPEAKER_SHINZO)
     msgbox(format("I’ll meet you at Level B. We’re going to get stronger."),,SPEAKER_SHINZO)
     closemessage
     moveobjecttocoords(LOCALID_BACKROOMA_SHINZO,10,1,DIR_WEST)
@@ -1147,10 +1148,11 @@ script CulturalPurity_Dialogue_InsideCultHouse
     closemessage
     cueobjecttalking(LOCALID_PLAYER)
     waitmovement(LOCALID_PLAYER)
+    buffermapname(STR_VAR_3,MAP_HODOU_CITY_RACISTHOUSE)
     msgbox(format("Thanks."),,SPEAKER_SHINZO)
     msgbox(format("Everything I know is Sinnoh."),,SPEAKER_SHINZO)
     msgbox(format("Most of my Pokémon are from there. How I dress, how I talk, what I eat."),,SPEAKER_SHINZO)
-    msgbox(format("And even though I’m in Tora Town, I’ve always sought to get even closer to my roots - but Tora Town is just a pale imitation."),,SPEAKER_SHINZO)
+    msgbox(format("And even though I’m in {STR_VAR_3}, I’ve always sought to get even closer to my roots - but {STR_VAR_3} is just a pale imitation."),,SPEAKER_SHINZO)
     msgbox(format("Resido has strong Trainers. I’ve met them. I’ve seen it. But things here are so different! How do I incorporate their strength without compromising my authentic Sinnoh self?"),,SPEAKER_SHINZO)
     msgbox(format("I have some thinking to do. I’ll talk to you later."),,SPEAKER_SHINZO)
     closemessage
