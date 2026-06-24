@@ -4,6 +4,8 @@ mapscripts HodouCity_MapScripts{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
+        call_if_quest_reward(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
+        call_if_quest_complete(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
         call(HowDisappointing_ManageObject_Script)
         call(Restorehodoucity_Script_ControlPewfatVisibility)
         callnative(LetsGrabLunch_IncrementStoryVariable)

@@ -917,6 +917,11 @@ script CulturalPurity_Dialogue_Culthouse_Caw
     waitmoncry
 }
 
+script CulturalPurity_Script_Hide_Culthouseguard
+{
+    setobjectflagfromlocalid(LOCALID_HODOU_CULTHOUSEGUARD)
+}
+
 script CulturalPurity_Script_Interact_Culthouseguard
 {
     lock
@@ -930,8 +935,8 @@ script CulturalPurity_Script_Interact_Culthouseguard
     closemessage
     moveobjecttocoords(LOCALID_PLAYER,12,16,DIR_NORTH)
     clearobjectflagfromlocalid(LOCALID_PLAYER)
-    applymovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD,moves(face_down))
-    waitmovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    applymovement(LOCALID_HODOU_CULTHOUSEGUARD,moves(face_down))
+    waitmovement(LOCALID_HODOU_CULTHOUSEGUARD)
     addobject(LOCALID_HODOU_SHINZO)
     setobjectmovementtype(LOCALID_HODOU_SHINZO,MOVEMENT_TYPE_FACE_UP)
     setobjectxy(LOCALID_HODOU_SHINZO,12,21)
@@ -972,10 +977,10 @@ script CulturalPurity_Dialogue_RejectCult
     msgbox(format("All right, that’s enough."),,SPEAKER_PLAYER)
     closemessage
     playse(SE_PIN)
-    applymovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD,moves(emote_exclamation_mark))
+    applymovement(LOCALID_HODOU_CULTHOUSEGUARD,moves(emote_exclamation_mark))
     applymovement(LOCALID_HODOU_SHINZO,moves(emote_exclamation_mark))
     waitmovement(LOCALID_HODOU_SHINZO)
-    waitmovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    waitmovement(LOCALID_HODOU_CULTHOUSEGUARD)
     waitse
     msgbox(format("We’ve followed every word so far, paid every donation, and even squawked like a bird!"),,SPEAKER_PLAYER)
     msgbox(format("This is where we draw the line."),,SPEAKER_PLAYER)
@@ -995,18 +1000,18 @@ script CulturalPurity_Dialogue_RejectCult
     waitmovement(LOCALID_PLAYER)
     opendoor(12,14)
     waitdooranim
-    moveobjecttocoords(LOCALID_HODOU_CITY_CULTHOUSEGUARD,12,14,DIR_NORTH)
-    waitmovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    moveobjecttocoords(LOCALID_HODOU_CULTHOUSEGUARD,12,14,DIR_NORTH)
+    waitmovement(LOCALID_HODOU_CULTHOUSEGUARD)
     playse(SE_EXIT)
-    removeobject(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    removeobject(LOCALID_HODOU_CULTHOUSEGUARD)
     waitse
     delay(16)
     delay(16)
     playse(SE_EXIT)
-    setobjectxyperm(LOCALID_HODOU_CITY_CULTHOUSEGUARD,12,14)
-    clearobjectflagfromlocalid(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
-    addobject(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
-    moveobjecttocoords(LOCALID_HODOU_CITY_CULTHOUSEGUARD,11,15,DIR_SOUTH)
+    setobjectxyperm(LOCALID_HODOU_CULTHOUSEGUARD,12,14)
+    clearobjectflagfromlocalid(LOCALID_HODOU_CULTHOUSEGUARD)
+    addobject(LOCALID_HODOU_CULTHOUSEGUARD)
+    moveobjecttocoords(LOCALID_HODOU_CULTHOUSEGUARD,11,15,DIR_SOUTH)
     waitse
     playse(SE_EXIT)
     spawnobject(OBJ_EVENT_GFX_LASS,LOCALID_HODOU_CULTLEADER,12,14,MOVEMENT_TYPE_FACE_DOWN)
@@ -1037,9 +1042,9 @@ script CulturalPurity_Script_ResumeBattleD
     moveobjecttocoords(LOCALID_PLAYER,12,16,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
 
-    moveobjecttocoords(LOCALID_HODOU_CITY_CULTHOUSEGUARD,11,15,DIR_SOUTH)
+    moveobjecttocoords(LOCALID_HODOU_CULTHOUSEGUARD,11,15,DIR_SOUTH)
     spawnobject(OBJ_EVENT_GFX_LASS,LOCALID_HODOU_CULTLEADER,12,15,MOVEMENT_TYPE_FACE_DOWN)
-    waitmovement(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    waitmovement(LOCALID_HODOU_CULTHOUSEGUARD)
 
     clearobjectflagfromlocalid(LOCALID_HODOU_SHINZO)
     setobjectmovementtype(LOCALID_HODOU_SHINZO,MOVEMENT_TYPE_FACE_UP)
@@ -1102,7 +1107,7 @@ script CulturalPurity_Dialogue_PostBattle
     waitse
     waitmovement(LOCALID_HODOU_SHINZO)
     waitmovement(LOCALID_PLAYER)
-    removeobject(LOCALID_HODOU_CITY_CULTHOUSEGUARD)
+    removeobject(LOCALID_HODOU_CULTHOUSEGUARD)
     removeobject(LOCALID_HODOU_CULTLEADER)
     fadescreenswapbuffers(FADE_FROM_WHITE)
     msgbox(format("How did they?..."),,SPEAKER_SHINZO)
