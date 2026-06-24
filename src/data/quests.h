@@ -1542,11 +1542,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
 {
     [QUEST_PLAYERSADVENTURE] =
     {
-        .name = gText_Quest_PlayersAdventure_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_PlayersAdventure_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_PlayersAdventure_DoneDesc,
+        .name = COMPOUND_STRING("{PLAYER}'s Adventure"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("!!"),
         .descFunc = GetQuestDesc_PlayersAdventure,
-        .map = gText_Quest_PlayersAdventure_Map,
+        .map = COMPOUND_STRING("Resido"),
         .sprite = OBJ_EVENT_GFX_BRENDAN_NORMAL,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
