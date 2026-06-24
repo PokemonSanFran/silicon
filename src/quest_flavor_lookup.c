@@ -32,6 +32,8 @@
 #include "constants/items.h"
 #include "constants/field_weather.h"
 #include "constants/songs.h"
+#include "constants/quests.h"
+#include "constants/trainer_slide.h"
 #include "constants/rgb.h"
 #include "constants/event_objects.h"
 #include "event_object_movement.h"
@@ -41,9 +43,119 @@
 
 #include "random.h"
 
+struct TextComponent
+{
+    const enum QuestFlavorGetNameType getType;
+    const u32 targetValue;
+};
+
+struct TextCondition
+{
+    const u32 targetValue;
+    const u32 dataAddress;
+    const enum QuestFlavorDataType dataType;
+    const enum ComparisonOperators compareOp;
+};
+
+struct PlayerAdventureText
+{
+	const u8 *text;
+    const struct TextComponent textComponent[4];
+    const struct TextCondition textCondition[20];
+};
+
+static const struct PlayerAdventureText playerAdventureText[] = 
+{
+    [0] = 
+    {
+        .text = COMPOUND_STRING("Defeat Magnus and claim your title as Champion of Resido!"),
+        .textCondition = 
+        {
+            [0] =
+            {
+                .targetValue = DEFEATED_MAGNUS,
+                .dataAddress = VAR_PROLOGUE_STATE,
+                .dataType = QUEST_FLAVOR_COMPARE_VAR,
+                .compareOp = LESS_THAN,
+            },
+        },
+    }
+};
+
+static u32 VarGet_Cast(u32 dataAddress)
+{
+    return VarGet((u16)dataAddress);
+}
+static u32 FlagGet_Cast(u32 dataAddress)
+{
+    return FlagGet((u16)dataAddress);
+}
+static u32 ReturnQuestState_Cast(u32 dataAddress)
+{
+    return ReturnQuestState((enum QuestIdList)dataAddress);
+}
+
+static u32 (* sGetFuncs[])(u32 dataAddress) =
+{
+    [QUEST_FLAVOR_COMPARE_FLAG] = FlagGet_Cast,
+    [QUEST_FLAVOR_COMPARE_VAR] = VarGet_Cast,
+    [QUEST_FLAVOR_COMPARE_QUEST] = ReturnQuestState_Cast,
+};
+
 const u8 *GetQuestDesc_PlayersAdventure(void)
 {
-    StringCopy(gStringVar4,COMPOUND_STRING("test"));
+    u32 actualNum = ARRAY_COUNT(playerAdventureText);
+    StringCopy(gStringVar4,COMPOUND_STRING(""));
+    
+    for (s32 totalNum = actualNum; totalNum != -1; totalNum--)
+    {
+        u32 checkNumOG = ARRAY_COUNT(playerAdventureText[totalNum].textCondition);
+        u32 passedCheck = 0;
+        
+    for (u32 checknum = checkNumOG; checknum != -1; checknum--)
+    {
+        u32 var1 = playerAdventureText[totalNum].textCondition[checknum].targetValue;
+        u32 dataAddress = playerAdventureText[totalNum].textCondition[checknum].dataAddress;
+
+        u32 var3 = sGetFuncs[0](dataAddress);
+        u32 var4 = playerAdventureText[totalNum].textCondition[checknum].compareOp;
+        bool32 var5;
+
+        switch(var4)
+        {
+            case LESS_THAN:
+            var5 = (var3 < var1);
+            break;
+            default:
+            case EQUAL:
+            var5 = (var3 == var1);
+            break;
+            case GREATER_THAN:
+            var5 = (var3 > var1);
+            break;
+            case LESS_THAN_OR_EQUAL:
+            var5 = (var3 <= var1);
+            break;
+            case GREATER_THAN_OR_EQUAL:
+            var5 = (var3 >= var1);
+            break;
+            case NOT_EQUAL:
+            var5 = (var3 != var1);
+            break;
+        }
+            
+            if (var5 == FALSE)
+                break;
+
+       passedCheck++; 
+    }
+        if (passedCheck == checkNumOG)
+{
+            StringCopy(gStringVar4,playerAdventureText[totalNum].text);
+            break;
+}
+
+}
     return gStringVar4;    
 }
 
