@@ -1,6 +1,7 @@
 #include "global.h"
 #include "random.h"
 #include "bg.h"
+#include "battle.h"
 #include "text_window.h"
 #include "window.h"
 #include "palette.h"
@@ -2825,6 +2826,9 @@ static bool8 IsTrainerRematch(enum ResidoTrainerIds trainerId)
 
 void SetTrainersDiscovered(void)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+        return;
+
     if (!gTrainerBattleParameter.params.opponentB)
         SetTrainerDiscovered(gTrainerBattleParameter.params.opponentB);
     SetTrainerDiscovered(gTrainerBattleParameter.params.opponentA);

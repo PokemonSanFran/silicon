@@ -53,6 +53,7 @@ static void HandleSpecialTrainerBattleEnd(void)
                     gSaveBlock1Ptr->playerParty[i] = gParties[B_TRAINER_PLAYER][i];
             }
         }
+        SetTrainersDiscovered(); // Google Glass
         break;
     }
 
