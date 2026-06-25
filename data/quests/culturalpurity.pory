@@ -182,7 +182,7 @@ script CulturalPurity_Dialogue_RejectLevelA
     msgbox(format("All the Pokémon in your party may only share one or two types."),,SPEAKER_SOCIETY)
     msgbox(format("Begone."),,SPEAKER_SOCIETY)
     closemessage
-    warpsilent(MAP_HODOU_CITY_HERBAL,WARP_ID_HERBAL_TO_BACKROOM_A)
+    warpsilent(MAP_QUEST_CULTURAL_PURITY_FRONT_A,WARP_ID_QUEST_CULTURAL_PURITY_SECRET_ENTRANCE_A)
     waitstate
     release
     end
@@ -349,6 +349,7 @@ script CulturalPurity_Script_Move_BackroomALeader
     {
         return
     }
+    callnative(Quest_CulturalPurity_LoadShinzoMon)
     setobjectxyperm(LOCALID_BACKROOMA_SHINZO,10,1)
     setobjectmovementtype(LOCALID_BACKROOMA_SHINZO,MOVEMENT_TYPE_FACE_LEFT)
     setobjectmovementtype(LOCALID_BACKROOMTRAINERA3,MOVEMENT_TYPE_FACE_RIGHT)
@@ -538,7 +539,7 @@ script CulturalPurity_Dialogue_RejectLevelB
     msgbox(format("All the Pokémon in your party must not be holding items."),,SPEAKER_SOCIETY)
     msgbox(format("Begone."),,SPEAKER_SOCIETY)
     closemessage
-    warpsilent(MAP_HODOU_CITY_HERBAL,WARP_ID_COOKIE_TO_BACKROOM_B)
+    warpsilent(MAP_QUEST_CULTURAL_PURITY_FRONT_B,WARP_ID_QUEST_CULTURAL_PURITY_SECRET_ENTRANCE_B)
     waitstate
     release
     end
@@ -771,7 +772,7 @@ script CulturalPurity_Dialogue_RejectLevelC
     msgbox(format("All the Pokémon in your party must know at least two moves that match their types."),,SPEAKER_SOCIETY)
     msgbox(format("Begone."),,SPEAKER_SOCIETY)
     closemessage
-    warpsilent(MAP_HODOU_CITY_HERBAL,WARP_ID_COOKIE_TO_BACKROOM_B)
+    warpsilent(MAP_QUEST_CULTURAL_PURITY_FRONT_C,WARP_ID_QUEST_CULTURAL_PURITY_SECRET_ENTRANCE_C)
     waitstate
     release
     end
@@ -844,7 +845,7 @@ script CulturalPurity_Script_StartBattleC
 {
     multi_2_vs_2(TRAINER_BACKROOMTRAINERC1,format("I blew my savings for this?"),TRAINER_BACKROOMTRAINERC2,format("I’ve never seen Trainers progress this quickly…"),PARTNER_SHINZO)
     call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-    addvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_C)
+    setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_D)
     goto(CulturalPurity_Dialogue_LevelCCleared)
 }
 
@@ -1061,6 +1062,7 @@ script CulturalPurity_Script_StartBattleD
     bufferspeciesname(STR_VAR_1,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
     msgbox(format("I’ll demonstrate the full might of the Seafoam {STR_VAR_1} Society!"),,SPEAKER_CULTLEADER,TAIL_SHOUT)
     closemessage
+    setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_CHALLENGED_LEADER)
     multi_2_vs_2(TRAINER_CULTHOUSEGUARD,format("..."),TRAINER_CULTLEADER,format("But my… focus is unmatched, my team so pure."),PARTNER_SHINZO)
     call(Silicon_Script_WhiteoutIfPlayerLostMulti)
     goto(CulturalPurity_Dialogue_PostBattle)
@@ -1115,7 +1117,7 @@ script CulturalPurity_Dialogue_PostBattle
     closemessage
     moveobjecttocoords(LOCALID_PLAYER,12,15,DIR_NORTH)
     waitmovement(LOCALID_PLAYER)
-    warpdoor(MAP_HODOU_CITY_RACISTHOUSE,WARP_ID_CULTHOUSE_TO_HODOU_RIGHT,0,0)
+    warpdoor(MAP_QUEST_CULTURAL_PURITY_BACK_D,WARP_ID_QUEST_CULTURAL_CULT_ENTRANCE,0,0)
     waitstate
 }
 
