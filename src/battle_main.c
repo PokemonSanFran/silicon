@@ -3203,6 +3203,7 @@ static void BattleStartClearSetData(void)
     {
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
+// Start silicon-specific-tests
 #if TESTING
     else if (gSiliconTestVariables.checkVramUse)
     {
@@ -3210,6 +3211,7 @@ static void BattleStartClearSetData(void)
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
 #endif
+// End silicon-specific-tests
 
     gMultiHitCounter = 0;
     gBattleOutcome = 0;

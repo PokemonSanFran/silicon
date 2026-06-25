@@ -22071,6 +22071,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     },
 // End trainerExpTests
 
+    // Start silicon-specific-tests
     [MOVE_OPTION_TEST_MOVE] =
     {
         .name = COMPOUND_STRING("Option Test"),
@@ -22087,6 +22088,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .validApprenticeMove = FALSE,
         .metronomeBanned = TRUE,
     },
+    // End silicon-specific-tests
 
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

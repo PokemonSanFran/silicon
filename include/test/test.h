@@ -95,6 +95,7 @@ struct FunctionTestRunnerState
     struct RiggedRNG rngList[RIGGED_RNG_COUNT];
 };
 
+// Start silicon-specific-tests
 struct SiliconExtraTestVariables
 {
     bool32 shouldUseManualPersonality:1;
@@ -114,6 +115,7 @@ struct SiliconExtraTestVariables
 };
 
 extern struct SiliconExtraTestVariables gSiliconTestVariables;
+// End silicon-specific-tests
 
 extern const struct TestRunner gFunctionTestRunner;
 extern struct FunctionTestRunnerState *gFunctionTestRunnerState;

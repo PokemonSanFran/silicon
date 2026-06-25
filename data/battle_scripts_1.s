@@ -6317,6 +6317,7 @@ BattleScript_EffectExpTestFinish::
 
 @ End trainerExpTests
 
+@ Start silicon-specific-tests
 BattleScript_OptionTest::
 	attackcanceler
 	printattackstring
@@ -6326,6 +6327,7 @@ BattleScript_OptionTest::
 	attackanimation
 	waitanimation
 	goto BattleScript_MoveEnd
+@ End silicon-specific-tests
 
 BattleScript_QuestionForfeitBattle::
 	printselectionstring STRINGID_QUESTIONFORFEITBATTLE

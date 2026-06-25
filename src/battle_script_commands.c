@@ -79,7 +79,7 @@
 #include "data/battle_move_effects.h"
 #include "ui_pokedex.h" // pokedex
 #include "little_cup.h" // littlecup
-#include "ui_dexnav.h" // dexnav 
+#include "ui_dexnav.h" // dexnav
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
@@ -6301,6 +6301,7 @@ static void Cmd_yesnobox(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
+// Start silicon-specific-tests
 #if TESTING
         if (gSiliconTestVariables.autoPressYes)
         {
@@ -6322,6 +6323,7 @@ static void Cmd_yesnobox(void)
             return;
         }
 #endif
+// End silicon-specific-tests
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
@@ -12745,6 +12747,7 @@ void BS_HandleExpTestFinish(void)
 }
 // End trainerExpTests
 
+// Start silicon-specific-tests
 void BS_OptionTestHandler(void)
 {
     NATIVE_ARGS();
@@ -12784,6 +12787,7 @@ void BS_OptionTestHandler(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+// End silicon-specific-tests
 
 // Start pointsMessage
 void BS_JumpIfPointsMessagesOff(void)

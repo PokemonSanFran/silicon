@@ -915,7 +915,7 @@ enum __attribute__((packed)) Move
     MOVE_EXP_TEST_FINISH,
     //MOVES_COUNT = MOVES_COUNT_GEN9,
 // End trainerExpTests
-    MOVE_OPTION_TEST_MOVE,
+    MOVE_OPTION_TEST_MOVE, // silicon-specific-tests
     MOVES_COUNT_CUSTOM,
     MOVES_COUNT = MOVES_COUNT_CUSTOM,
 

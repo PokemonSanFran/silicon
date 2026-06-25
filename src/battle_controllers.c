@@ -2178,10 +2178,12 @@ static void Controller_HandleTrainerSlideBack(enum BattlerId battler)
 
 void Controller_WaitForHealthBar(enum BattlerId battler)
 {
+// Start silicon-specific-tests
 #if TESTING
     if (gSiliconTestVariables.countHpBarMovement)
         gSiliconTestVariables.counter++;
 #endif
+// End silicon-specific-tests
     s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
@@ -2665,7 +2667,10 @@ void BtlController_HandlePrintString(enum BattlerId battler)
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
+        // Start silicon-specific-tests
+        //if (gTestRunnerHeadless)
         if (gTestRunnerHeadless && !gSiliconTestVariables.checkFontGraphics && !gSiliconTestVariables.checkPrintSpeed)
+        // End silicon-specific-tests
         {
             BtlController_Complete(battler);
             return;
@@ -2772,10 +2777,13 @@ void BtlController_HandleStatusAnimation(enum BattlerId battler)
 
 void BtlController_HandleHitAnimation(enum BattlerId battler)
 {
+    // Start silicon-specific-tests
+    //if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE || (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim))
     if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE
      || (gTestRunnerHeadless
       && !gSiliconTestVariables.checkVramUse
       && !gBattleTestRunnerState->forceMoveAnim))
+    // End silicon-specific-tests
     {
         BtlController_Complete(battler);
     }
@@ -2790,7 +2798,10 @@ void BtlController_HandleHitAnimation(enum BattlerId battler)
 
 void BtlController_HandlePlaySE(enum BattlerId battler)
 {
+    // Start silicon-specific-tests
+    //if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
     if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim && !gSiliconTestVariables.checkVramUse)
+    // End silicon-specific-tests
     {
         BtlController_Complete(battler);
         return;
@@ -2803,7 +2814,10 @@ void BtlController_HandlePlaySE(enum BattlerId battler)
 
 void BtlController_HandlePlayFanfareOrBGM(enum BattlerId battler)
 {
+    // Start silicon-specific-tests
+    //if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim)
     if (gTestRunnerHeadless && !gBattleTestRunnerState->forceMoveAnim && !gSiliconTestVariables.checkVramUse)
+    // End silicon-specific-tests
     {
         BtlController_Complete(battler);
         return;

@@ -74,7 +74,7 @@ static void PushBattlerAction(u32 sourceLine, enum BattlerId battlerId, u32 acti
 static void PrintAiMoveLog(enum BattlerId battlerId, u32 moveSlot, enum Move moveId, s32 totalScore);
 static void ClearAiLog(enum BattlerId battlerId);
 static const char *BattlerIdentifier(enum BattlerId battlerId);
-static void ZeroSiliconTestData(void);
+static void ZeroSiliconTestData(void); // silicon-specific-tests
 
 NAKED static void InvokeSingleTestFunctionWithStack(void *results, u32 i, struct BattlePokemon *player, struct BattlePokemon *opponent, SingleBattleTestFunction function, void *stack)
 {
@@ -1792,7 +1792,7 @@ void TestRunner_Battle_AfterLastTurn(void)
 
 static void TearDownBattle(void)
 {
-    ZeroSiliconTestData();
+    ZeroSiliconTestData(); // silicon-specific-tests
     // Zero out the parties, data in them could potentially carry over
     for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
         ZeroPartyMons(gParties[trainer]);
@@ -2113,6 +2113,7 @@ void ClosePokemon(u32 sourceLine)
             INVALID_IF(GetMonData(DATA.currentMon, MON_DATA_HP) == 0, "Battlers cannot be fainted");
         }
     }
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.shouldUseManualPersonality)
     {
         UpdateMonPersonality(&DATA.currentMon->box, gSiliconTestVariables.manualPersonality);
@@ -2121,8 +2122,9 @@ void ClosePokemon(u32 sourceLine)
     }
     else
     {
+    // End silicon-specific-tests
         UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NUM_NATURES) | DATA.gender);
-    }
+    } // silicon-specific-tests
     data = DATA.isShiny;
     SetMonData(DATA.currentMon, MON_DATA_IS_SHINY, &data);
     DATA.currentMon = NULL;
@@ -2273,8 +2275,10 @@ void HPIV_(u32 sourceLine, u32 hpIV)
     INVALID_IF(!DATA.currentMon, "HP IV outside of PLAYER/OPPONENT");
     INVALID_IF(hpIV > MAX_PER_STAT_IVS, "Illegal HP IV: %d", hpIV);
     SetMonData(DATA.currentMon, MON_DATA_HP_IV, &hpIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void AttackIV_(u32 sourceLine, u32 attackIV)
@@ -2282,8 +2286,10 @@ void AttackIV_(u32 sourceLine, u32 attackIV)
     INVALID_IF(!DATA.currentMon, "Attack IV outside of PLAYER/OPPONENT");
     INVALID_IF(attackIV > MAX_PER_STAT_IVS, "Illegal attack IV: %d", attackIV);
     SetMonData(DATA.currentMon, MON_DATA_ATK_IV, &attackIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void DefenseIV_(u32 sourceLine, u32 defenseIV)
@@ -2291,8 +2297,10 @@ void DefenseIV_(u32 sourceLine, u32 defenseIV)
     INVALID_IF(!DATA.currentMon, "Defense IV outside of PLAYER/OPPONENT");
     INVALID_IF(defenseIV > MAX_PER_STAT_IVS, "Illegal defense IV: %d", defenseIV);
     SetMonData(DATA.currentMon, MON_DATA_DEF_IV, &defenseIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpAttackIV_(u32 sourceLine, u32 spAttackIV)
@@ -2300,8 +2308,10 @@ void SpAttackIV_(u32 sourceLine, u32 spAttackIV)
     INVALID_IF(!DATA.currentMon, "SpAttack IV outside of PLAYER/OPPONENT");
     INVALID_IF(spAttackIV > MAX_PER_STAT_IVS, "Illegal special attack IV: %d", spAttackIV);
     SetMonData(DATA.currentMon, MON_DATA_SPATK_IV, &spAttackIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV)
@@ -2309,8 +2319,10 @@ void SpDefenseIV_(u32 sourceLine, u32 spDefenseIV)
     INVALID_IF(!DATA.currentMon, "SpDefense IV outside of PLAYER/OPPONENT");
     INVALID_IF(spDefenseIV > MAX_PER_STAT_IVS, "Illegal special defense IV: %d", spDefenseIV);
     SetMonData(DATA.currentMon, MON_DATA_SPDEF_IV, &spDefenseIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpeedIV_(u32 sourceLine, u32 speedIV)
@@ -2318,8 +2330,10 @@ void SpeedIV_(u32 sourceLine, u32 speedIV)
     INVALID_IF(!DATA.currentMon, "Speed IV outside of PLAYER/OPPONENT");
     INVALID_IF(speedIV > MAX_PER_STAT_IVS, "Illegal speed IV: %d", speedIV);
     SetMonData(DATA.currentMon, MON_DATA_SPEED_IV, &speedIV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideIVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void HPEV_(u32 sourceLine, u32 hpEV)
@@ -2327,8 +2341,10 @@ void HPEV_(u32 sourceLine, u32 hpEV)
     INVALID_IF(!DATA.currentMon, "HP EV outside of PLAYER/OPPONENT");
     INVALID_IF(hpEV > MAX_PER_STAT_EVS, "Illegal HP EV: %d", hpEV);
     SetMonData(DATA.currentMon, MON_DATA_HP_EV, &hpEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void AttackEV_(u32 sourceLine, u32 attackEV)
@@ -2336,8 +2352,10 @@ void AttackEV_(u32 sourceLine, u32 attackEV)
     INVALID_IF(!DATA.currentMon, "Attack EV outside of PLAYER/OPPONENT");
     INVALID_IF(attackEV > MAX_PER_STAT_EVS, "Illegal attack EV: %d", attackEV);
     SetMonData(DATA.currentMon, MON_DATA_ATK_EV, &attackEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void DefenseEV_(u32 sourceLine, u32 defenseEV)
@@ -2345,8 +2363,10 @@ void DefenseEV_(u32 sourceLine, u32 defenseEV)
     INVALID_IF(!DATA.currentMon, "Defense EV outside of PLAYER/OPPONENT");
     INVALID_IF(defenseEV > MAX_PER_STAT_EVS, "Illegal defense EV: %d", defenseEV);
     SetMonData(DATA.currentMon, MON_DATA_DEF_EV, &defenseEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpAttackEV_(u32 sourceLine, u32 spAttackEV)
@@ -2354,8 +2374,10 @@ void SpAttackEV_(u32 sourceLine, u32 spAttackEV)
     INVALID_IF(!DATA.currentMon, "SpAttack EV outside of PLAYER/OPPONENT");
     INVALID_IF(spAttackEV > MAX_PER_STAT_EVS, "Illegal special attack EV: %d", spAttackEV);
     SetMonData(DATA.currentMon, MON_DATA_SPATK_EV, &spAttackEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV)
@@ -2363,8 +2385,10 @@ void SpDefenseEV_(u32 sourceLine, u32 spDefenseEV)
     INVALID_IF(!DATA.currentMon, "SpDefense EV outside of PLAYER/OPPONENT");
     INVALID_IF(spDefenseEV > MAX_PER_STAT_EVS, "Illegal special defense EV: %d", spDefenseEV);
     SetMonData(DATA.currentMon, MON_DATA_SPDEF_EV, &spDefenseEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void SpeedEV_(u32 sourceLine, u32 speedEV)
@@ -2372,8 +2396,10 @@ void SpeedEV_(u32 sourceLine, u32 speedEV)
     INVALID_IF(!DATA.currentMon, "Speed EV outside of PLAYER/OPPONENT");
     INVALID_IF(speedEV > MAX_PER_STAT_EVS, "Illegal speed EV: %d", speedEV);
     SetMonData(DATA.currentMon, MON_DATA_SPEED_EV, &speedEV);
+    // Start silicon-specific-tests
     if (gSiliconTestVariables.overrideEVs)
         CalculateMonStats(DATA.currentMon);
+    // End silicon-specific-tests
 }
 
 void Item_(u32 sourceLine, u32 item)
@@ -2506,7 +2532,7 @@ void StartingStatus_(u32 sourceLine, enum StartingStatus status, u32 index)
 }
 // End bdHazards
 
-//  Silicon options test functions
+// Start silicon-specific-tests
 void Personality_(u32 sourceLine, bool32 personality)
 {
     INVALID_IF(!DATA.currentMon, "Personality outside of PLAYER/OPPONENT");
@@ -2519,7 +2545,7 @@ void Nickname_(u32 sourceLine, const u8 *nickname)
     INVALID_IF(!DATA.currentMon, "Nickname outside of PLAYER/OPPONENT");
     SetMonData(DATA.currentMon, MON_DATA_NICKNAME, nickname);
 }
-//  End Silicon options test functions
+// End silicon-specific-tests
 
 static const char *const sBattlerIdentifiersSingles[] =
 {
@@ -3796,7 +3822,9 @@ void AssumeMoveEffectStatChange_(u32 sourceLine, u32 moveId, struct StatChangeAs
     ASSUME(hasEffect == TRUE);
 }
 
+// Start silicon-specific-tests
 static void ZeroSiliconTestData(void)
 {
     CpuFill32(0, &gSiliconTestVariables, sizeof(struct SiliconExtraTestVariables));
 }
+// End silicon-specific-tests

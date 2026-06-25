@@ -2,6 +2,7 @@
 const struct SpeciesInfo gSpeciesInfoGen1[] =
 {
 #endif
+    // Start silicon-specific-tests
     [SPECIES_TESTING_PREEVO] =
     {
         .baseHP        = 190,
@@ -89,6 +90,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .teachableLearnset = sWobbuffetTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 2, SPECIES_TESTING_ERRATIC}),
     },
+    // End silicon-specific-tests
     [SPECIES_TESTING_ERRATIC] =
     {
         .baseHP        = 190,
