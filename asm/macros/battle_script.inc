@@ -2166,6 +2166,11 @@
 	.endm
 @ End trainerExpTests
 
+	@ Handle various options test checks
+	.macro optiontesthandler
+	callnative BS_OptionTestHandler
+	.endm
+
 @ Start pointsMessage
 .macro jumpifpointsmessageoff jumpInstr:req
 callnative BS_JumpIfPointsMessagesOff

@@ -95,6 +95,26 @@ struct FunctionTestRunnerState
     struct RiggedRNG rngList[RIGGED_RNG_COUNT];
 };
 
+struct SiliconExtraTestVariables
+{
+    bool32 shouldUseManualPersonality:1;
+    bool32 autoPressYes:1;
+    bool32 autoPressNo:1;
+    bool32 overrideEVs:1;
+    bool32 overrideIVs:1;
+    bool32 overrideSwitchMode:1;
+    bool32 countHpBarMovement:1;
+    bool32 countExpBarMovement:1;
+    bool32 checkFontGraphics:1;
+    bool32 checkVramUse:1;
+    bool32 checkPrintSpeed:1;
+    bool32 temp:21;
+    u32 manualPersonality;
+    u32 counter;
+};
+
+extern struct SiliconExtraTestVariables gSiliconTestVariables;
+
 extern const struct TestRunner gFunctionTestRunner;
 extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
 

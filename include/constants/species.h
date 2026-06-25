@@ -1726,6 +1726,9 @@ enum __attribute__((packed)) Species
     SPECIES_TESTING_SLOW,
     SPECIES_TESTING_FLUCTUATING,
     // End trainerExpTests
+    // Silicon tests
+    SPECIES_TESTING_PREEVO,
+    // End Silicon tests
     SPECIES_CUSTOM_END,
     SPECIES_EGG = SPECIES_CUSTOM_END,
     NUM_SPECIES = SPECIES_EGG,

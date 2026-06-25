@@ -6317,6 +6317,15 @@ BattleScript_EffectExpTestFinish::
 
 @ End trainerExpTests
 
+BattleScript_OptionTest::
+	attackcanceler
+	printattackstring
+	printstring STRINGID_FONT_CHECK
+	waitmessage B_WAIT_TIME_SHORTEST
+	optiontesthandler
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
 
 BattleScript_QuestionForfeitBattle::
 	printselectionstring STRINGID_QUESTIONFORFEITBATTLE

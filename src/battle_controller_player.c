@@ -1532,6 +1532,10 @@ static void Task_GiveExpWithExpBar(u8 taskId)
     }
     else
     {
+#if TESTING
+        if (gSiliconTestVariables.countExpBarMovement)
+            gSiliconTestVariables.counter++;
+#endif
         u8 monId = gTasks[taskId].tExpTask_monId;
         s32 gainedExp = GetTaskExpValue(taskId);
         enum BattlerId battler = gTasks[taskId].tExpTask_battler;

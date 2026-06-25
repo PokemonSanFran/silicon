@@ -622,7 +622,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_POUND; j < MOVES_COUNT_GEN1; j++)
     {
         // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -714,7 +714,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_SKETCH; j < MOVES_COUNT_GEN2; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -806,7 +806,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_FAKE_OUT; j < MOVES_COUNT_GEN3; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -898,7 +898,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_ROOST; j < MOVES_COUNT_GEN4; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -990,7 +990,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_HONE_CLAWS + 12; j < MOVES_COUNT_GEN5; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -1082,7 +1082,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_FLYING_PRESS; j < MOVES_COUNT_GEN6; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -1174,7 +1174,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_SHORE_UP; j < MOVES_COUNT_GEN7; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -1266,7 +1266,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_DYNAMAX_CANNON; j < MOVES_COUNT_GEN8; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))
@@ -1359,7 +1359,7 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
     for (enum Move j = MOVE_TERA_BLAST; j < MOVES_COUNT; j++)
     {
 // Start trainerExpTests
-        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH)
+        if (j == MOVE_EXP_TEST || j == MOVE_EXP_TEST_SETUP || j == MOVE_EXP_TEST_FINISH || j == MOVE_OPTION_TEST_MOVE)
             continue;
 // End trainerExpTests
         if (GetMoveCategory(j) != DAMAGE_CATEGORY_STATUS && !IgnoreMoveForSheerForceBoost(j))

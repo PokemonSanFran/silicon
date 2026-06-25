@@ -1059,6 +1059,10 @@ struct moveWithPP {
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
 #define Environment(environment) Environment_(__LINE__, environment)
 #define StartingStatus(status, index) StartingStatus_(__LINE__, status, index) // bdHazards
+//  Silicon options test functions
+#define Personality(personality) Personality_(__LINE__, personality)
+#define Nickname(nickname) Nickname_(__LINE__, nickname)
+//  End Silicon options test functions
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
@@ -1111,6 +1115,10 @@ void Ball_(u32 sourceLine, enum PokeBall ball); // siliconNewBalls
 void Shiny_(u32 sourceLine, bool32 isShiny);
 void Environment_(u32 sourceLine, u32 environment);
 void StartingStatus_(u32 sourceLine, enum StartingStatus startingStatus, u32 index); // bdHazards
+//  Silicon options test functions
+void Personality_(u32 sourceLine, bool32 personality);
+void Nickname_(u32 sourceLine, const u8 *nickname);
+//  End Silicon options test functions
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves
