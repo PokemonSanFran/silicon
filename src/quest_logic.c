@@ -5433,3 +5433,94 @@ void Script_Quest_CulturalPurity_IsPlayerReadyForLevelD(void)
 {
     gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelD();
 }
+
+void DebugQuest_CulturalPurity(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_CULTURAL_PURITY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_QUEST:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_QUEST_1_NOT_STARTED);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_CULTURAL_PURITY_AD3);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_1,1);
+            QuestMenu_ScriptSetActive(QUEST_CULTURALPURITY);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_A:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_A);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_A:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_A);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A1:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A2:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A2);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A3:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA3);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A3);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_A:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA4);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_1,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_2,1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_B);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_B:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_B);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_B:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_B);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_B);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_2,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_3,1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_B1:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_B1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_B2:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_B2);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB3);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_C);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_C:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_C);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_C:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_C);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_C);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_3,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_4,1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_C:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERC1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERC2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_D);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CHALLENGED_LEADER:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_CHALLENGED_LEADER);
+            SetTrainerDiscovered(TRAINER_CULTHOUSEGUARD);
+            SetTrainerDiscovered(TRAINER_CULTLEADER);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_REWARD:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_CULTHOUSEGUARD);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_CULTLEADER);
+            QuestMenu_ScriptSetReward(QUEST_CULTURALPURITY);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_4,1);
+            break;
+    }
+}
