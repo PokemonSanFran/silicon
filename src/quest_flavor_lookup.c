@@ -455,44 +455,49 @@ const u8 *GetQuestDesc_Hang20(void)
 const u8 *GetQuestDesc_CulturalPurity(void)
 {
     u32 flag = ReturnQuestState(QUEST_CULTURALPURITY);
-    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HANG20].desc[flag]);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_CULTURALPURITY].desc[flag]);
 
     if (flag != FLAG_GET_ACTIVE)
         return gStringVar4;
 
+    StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_CULTURAL_PURITY_MASCOT));
+
     switch (VarGet(VAR_CULTURAL_PURITY))
     {
+        case CULTURAL_PURITY_QUEST_1_NOT_STARTED:
         case CULTURAL_PURITY_READY_FOR_A:
         case CULTURAL_PURITY_PAYWALL_A:
-            StringCopy(gStringVar4,COMPOUND_STRING("Narrow your party to only two types, and bring the tile to the northeastern bird in the tea leaves."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Narrow your party to only two types, and bring the tile to the northeastern bird in the tea leaves."));
             break;
         case CULTURAL_PURITY_OPEN_A:
         case CULTURAL_PURITY_DEFEATED_A1:
         case CULTURAL_PURITY_DEFEATED_A2:
         case CULTURAL_PURITY_DEFEATED_A3:
-            StringCopy(gStringVar4,COMPOUND_STRING("Train with the Level A of the Seafoam {STR_VAR_1} Society."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Train with the Level A of the Seafoam {STR_VAR_1} Society."));
             break;
         case CULTURAL_PURITY_READY_FOR_B:
         case CULTURAL_PURITY_PAYWALL_B:
-            StringCopy(gStringVar4,COMPOUND_STRING("Bring the tile to the southeastern birds of flour and sugar."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Bring the tile to the southeastern birds of flour and sugar."));
             break;
         case CULTURAL_PURITY_OPEN_B:
         case CULTURAL_PURITY_DEFEATED_B1:
         case CULTURAL_PURITY_DEFEATED_B2:
-            StringCopy(gStringVar4,COMPOUND_STRING("Train with the Level B of the Seafoam {STR_VAR_1} Society."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Train with the Level B of the Seafoam {STR_VAR_1} Society."));
             break;
         case CULTURAL_PURITY_READY_FOR_C:
         case CULTURAL_PURITY_PAYWALL_C:
-            StringCopy(gStringVar4,COMPOUND_STRING("Bring the tile to the bird in the south western passage between two kingdoms."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Bring the tile to the bird in the south western passage between two kingdoms."));
             break;
         case CULTURAL_PURITY_OPEN_C:
-            StringCopy(gStringVar4,COMPOUND_STRING("Train with the Level C of the Seafoam {STR_VAR_1} Society."));
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Train with the Level C of the Seafoam {STR_VAR_1} Society."));
             break;
         case CULTURAL_PURITY_DEFEATED_C:
-            StringCopy(gStringVar4,COMPOUND_STRING("Bring the tile to the northeastern bird’s nest."));
+        case CULTURAL_PURITY_READY_FOR_D:
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Bring the tile to the northeastern bird’s nest."));
             break;
         default:
-            StringCopy(gStringVar4,COMPOUND_STRING("Help show Shinzo what true strength means. Defeat the Leader of the Seafoam {STR_VAR_1} Society!"));
+        case CULTURAL_PURITY_CHALLENGED_LEADER:
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Help show Shinzo what true strength means. Defeat the Leader of the Seafoam {STR_VAR_1} Society!"));
             break;
     }
 
