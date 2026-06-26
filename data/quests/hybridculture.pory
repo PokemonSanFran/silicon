@@ -1,116 +1,241 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const SHINZO = 1
-const FLAG_HIDE_SHINZO = FLAG_TEMP_1
-//script Quest_HybridCulture
+script HybridCulture_Script_Interact_Shinzo
+{
+    lock
+    faceplayer
+    goto_if_quest_reward(QUEST_HYBRIDCULTURE,HybridCulture_Dialogue_GiveRewardTora)
+    goto_if_quest_inactive(QUEST_HYBRIDCULTURE,HybridCulture_Dialogue_StartQuest)
+    closemessage
+    release
+    end
+}
 
-script Quest_HybridCulture_HideLeader_Script
+script HybridCulture_Dialogue_StartQuest
+{
+    msgbox(format("{PLAYER}! Do you like Resido?"),MSGBOX_YESNO,SPEAKER_SHINZO)
+    goto_if_eq(VAR_RESULT,TRUE,HybridCulture_Dialogue_StopQuest)
+    msgbox(format("I thought so! I want you to help me learn about Resido culture."),,SPEAKER_SHINZO)
+    msgbox(format("Shinzo, I’m happy to help, but I’m not from Resido. Orre, remember?"),,SPEAKER_PLAYER)
+    msgbox(format("I know. But I saw a list on Buzzr about -"),,SPEAKER_SHINZO)
+    msgbox(format("Wait, isn’t that how we started our last adventure?"),,SPEAKER_PLAYER)
+    msgbox(format("Yes, but this is different!"),,SPEAKER_SHINZO,,EMOTE_SWEAT)
+    msgbox(format("The list is from a very popular site called WatchVibes. They publish lots of… I think they’re called listicles. The author was born and raised in Resido. "),,SPEAKER_SHINZO)
+    msgbox(format("I did my homework!"),,SPEAKER_SHINZO)
+    msgbox(format("Wow. He did his homework."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    msgbox(format("Okay, so what’s this list?"),,SPEAKER_PLAYER)
+    closemessage
+    cueobjecttalking(LOCALID_TORA_SHINZO)
+    showtweet(TWEET_QUEST_HYBRID_CULTURE_LISTICLE_INTRO)
+    msgbox(format("I want to go see all of the things on this list. I know you’re not from here, but I feel a connection to you BECAUSE you’re not from here."),,SPEAKER_SHINZO)
+    msgbox(format("You said yourself that you like it here, and I think spending time with you will help me better appreciate what Resido has to offer."),,SPEAKER_SHINZO)
+    msgbox(format("I know you’re busy - you don’t even have to go out of your way to get to these places. I’ll just follow you around, and you can check out these places whenever it is convenient for you. Okay?"),,SPEAKER_SHINZO)
+    msgbox(format("Sure, I suppose that can’t hurt."),,SPEAKER_PLAYER)
+    msgbox(format("Thank you, {PLAYER}."),,SPEAKER_SHINZO,,EMOTE_HAPPY)
+    msgbox(format("I hope we’ll have a good time touring the region."),,SPEAKER_SHINZO)
+    msgbox(format("I’ll put all the locations on your ToDo list, but you can also read the Zaps on Buzzr."),,SPEAKER_SHINZO)
+    closemessage
+    startquest(QUEST_HYBRIDCULTURE)
+    goto(HybridCulture_Dialogue_CheckForNextLocation)
+}
+
+script HybridCulture_Dialogue_CheckOnShinzo
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_HYBRID_CULTURE_2)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_HYBRID_CULTURE)
+    msgbox(format("Does Shinzo still need help with those {STR_VAR_2} on {STR_VAR_1}?"),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    release
+    end
+}
+
+script HybridCulture_Try_StartAttraction1
+{
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_HYBRIDCULTURE)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        addvar(VAR_TEMP_2,1)
+        releaseall
+        end
+    }
+
+    callnative(Script_Quest_HybridCulture_ShouldStartAttraction1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        addvar(VAR_TEMP_2,1)
+        releaseall
+        end
+    }
+
+    callnative(Script_Quest_HybridCulture_IsSunrise)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        goto(HybridCulture_Dialogue_WrongTimeAttraction1)
+    }
+    else
+    {
+        goto(HybridCulture_Dialogue_StartAttraction1)
+    }
+}
+
+script HybridCulture_Dialogue_WrongTimeAttraction1
+{
+    lock
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PLAYER,1,37)
+    turnobject(LOCALID_PLAYER,DIR_WEST)
+    TeleportCamera(1,37)
+    spawnobject(OBJ_EVENT_GFX_SHINZO,LOCALID_QUEST_HYBRIDCULTURE_SHINZO,1,36,3)
+    applymovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO,moves(face_left))
+    applymovement(LOCALID_PLAYER,moves(face_left))
+    waitmovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    waitmovement(LOCALID_PLAYER)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+
+    callnative(BufferSunriseTimes)
+    msgbox(format("We're supposed to be here to watch the sun rise, right? We should come back between {STR_VAR_1} and {STR_VAR_2}."),,SPEAKER_SHINZO)
+    closemessage
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_StartAttraction1
+{
+    lock
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HYBRIDCULTURE,SUB_QUEST_1)
+
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PLAYER,1,37)
+    turnobject(LOCALID_PLAYER,DIR_WEST)
+    TeleportCamera(1,37)
+    spawnobject(OBJ_EVENT_GFX_SHINZO,LOCALID_QUEST_HYBRIDCULTURE_SHINZO,1,36,3)
+    applymovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO,moves(face_left))
+    applymovement(LOCALID_PLAYER,moves(face_left))
+    waitmovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    waitmovement(LOCALID_PLAYER)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+
+    buffermapname(STR_VAR_1,MAP_PIOCA_BRIDGE)
+    msgbox(format("Even growing up, I heard a lot about Resido’s {STR_VAR_1}."),,SPEAKER_SHINZO)
+    msgbox(format("That hue is quite fascinating! I’ve read that artists have tried to replicate these colors for years but never quite get it right."),,SPEAKER_SHINZO)
+    msgbox(format("It’s so much work to maintain this… but everybody seems perfectly happy to keep doing it, you know?"),,SPEAKER_SHINZO)
+    msgbox(format("I’m from Orre, and we have something equally ridiculous."),,SPEAKER_PLAYER)
+    msgbox(format("Realgam Tower is a huge casino and stadium built in the middle of the desert. It was built by a criminal organization, but it's been taken over by the local League since then."),,SPEAKER_PLAYER)
+    msgbox(format("It costs millions of dollars to get water and power to it and the brand new train system even goes to it."),,SPEAKER_PLAYER)
+    msgbox(format("It would be cheaper for the region to just build a new stadium somewhere closer to a city but…"),,SPEAKER_PLAYER)
+    msgbox(format("People love Realgam Tower and don’t want to tear it down. So we keep it up."),,SPEAKER_PLAYER)
+    msgbox(format("It’s part of our culture at this point. Orre has a Pokemon League in the middle of a desert where Pokemon don’t normally live. They’re totally defying the odds!"),,SPEAKER_PLAYER)
+    msgbox(format("…"),,SPEAKER_SHINZO)
+    msgbox(format("Player, could you take a picture of me as the sun rises?"),,SPEAKER_SHINZO)
+    closemessage
+    msgbox(format("Thank you."),,SPEAKER_SHINZO)
+    goto(HybridCulture_Dialogue_CheckForNextLocation)
+}
+
+script HybridCulture_Dialogue_StartAttraction2
+{
+    lock
+
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PLAYER,1,37)
+    turnobject(LOCALID_PLAYER,DIR_WEST)
+    TeleportCamera(1,37)
+    spawnobject(OBJ_EVENT_GFX_SHINZO,LOCALID_QUEST_HYBRIDCULTURE_SHINZO,1,36,3)
+    applymovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO,moves(face_left))
+    applymovement(LOCALID_PLAYER,moves(face_left))
+    waitmovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    waitmovement(LOCALID_PLAYER)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_HYBRID_CULTURE)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_CULTURAL_PURITY_MASCOT)
+    msgbox(format("What a huge tree!"),,SPEAKER_SHINZO)
+    msgbox(format("And I see some of the {STR_VAR_1} flying around the top."),,SPEAKER_SHINZO)
+    msgbox(format("Do you know why the {STR_VAR_1} are here?"),MSGBOX_YESNO,SPEAKER_SHINZO)
+    if (var(VAR_RESULT) == YES)
+    {
+        msgbox(format("Really?! You must be quite the researcher. Tell me the whole story sometime."),,SPEAKER_SHINZO)
+    }
+
+    msgbox(format("I kept trying to find an answer online, but couldn’t find anything with real proof."),,SPEAKER_SHINZO)
+    msgbox(format("Ever since the Seafoam {STR_VAR_2} incident, I’ve been trying to be more cautious about what I believe online."),,SPEAKER_SHINZO)
+    msgbox(format("It’s great that the {STR_VAR_1} were able to find somewhere they could exist safely. I wonder if Dimu has looked into -"),,SPEAKER_SHINZO)
+    playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
+    msgbox(format("Kaw!"))
+    closemessage
+
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HYBRIDCULTURE,SUB_QUEST_2)
+    goto(HybridCulture_Dialogue_CheckForNextLocation)
+}
+
+script HybridCulture_Dialogue_CheckForNextLocation
+{
+    callnative(Quest_HybridCulture_CountRemainingSubquestsTryProgressReward)
+    goto_if_quest_reward(QUEST_HYBRIDCULTURE,HybridCulture_Dialogue_Reward)
+    goto_if_subquest_not_complete(QUEST_HYBRIDCULTURE,SUB_QUEST_1,HybridCulture_Dialogue_EncourageStop1)
+    goto_if_subquest_not_complete(QUEST_HYBRIDCULTURE,SUB_QUEST_2,HybridCulture_Dialogue_EncourageStop2)
+    goto_if_subquest_not_complete(QUEST_HYBRIDCULTURE,SUB_QUEST_3,HybridCulture_Dialogue_EncourageStop3)
+    goto_if_subquest_not_complete(QUEST_HYBRIDCULTURE,SUB_QUEST_4,HybridCulture_Dialogue_EncourageStop4)
+    goto_if_subquest_not_complete(QUEST_HYBRIDCULTURE,SUB_QUEST_5,HybridCulture_Dialogue_EncourageStop5)
+}
+
+script HybridCulture_Script_HideShinzoInPlayer
+{
+    closemessage
+    setvar(VAR_LAST_TALKED,LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    fadeandremovelasttalked
+    release
+    end
+}
+
+script HybridCulture_Dialogue_EncourageStop1
+{
+    buffermapname(STR_VAR_3,MAP_QUEST_HYBRID_CULTURE_1)
+    callnative(BufferSunriseTimes)
+    msgbox(format("The first zap says to watch the sun rise from the center of {STR_VAR_3}. Let’s go there between {STR_VAR_1} and {STR_VAR_2}."),,SPEAKER_SHINZO)
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_EncourageStop2
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_HYBRID_CULTURE_2)
+    bufferspeciesname(STR_VAR_2,SPECIES_QUEST_HYBRID_CULTURE)
+    msgbox(format("Let’s go to {STR_VAR_1}! I want to see if the {STR_VAR_2} are as tough as everybody says."),,SPEAKER_SHINZO)
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_EncourageStop3
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_HYBRID_CULTURE_3)
+    msgbox(format("I’m hungry. Maybe we should get some food at {STR_VAR_1} Taco? "),,SPEAKER_SHINZO)
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_EncourageStop4
+{
+    buffermapname(STR_VAR_1,MAP_QUEST_HYBRID_CULTURE_4)
+    buffermapname(STR_VAR_2,MAP_QUEST_HYBRID_CULTURE_4_CITY)
+    msgbox(format("The {STR_VAR_1} sounds rather spooky… that’s east of {STR_VAR_2}, right? My Dark-type Pokémon will deal super effective damage against any ghosts!"),,SPEAKER_SHINZO)
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_EncourageStop5
+{
+    buffermapname(STR_VAR_3,MAP_QUEST_HYBRID_CULTURE_5)
+    callnative(BufferSunsetTimes)
+    msgbox(format("I wonder how early we need to start the climb to get to the top of {STR_VAR_3} in time to watch the sun set over Resido... we should be at the peak from {STR_VAR_1} to {STR_VAR_2}."),,SPEAKER_SHINZO)
+    goto(HybridCulture_Script_HideShinzoInPlayer)
+}
+
+script HybridCulture_Dialogue_StopQuest
+{
+    msgbox(format("Really? Oh, I got the wrong idea. Perhaps I’ll find somebody else."),,SPEAKER_SHINZO)
+    closemessage
+    release
+    end
+}
+
+script HybridCulture_Dialogue_GiveRewardTora
 {
 }
 
-script Quest_HybridCulture_CheckSubquests_Script{
-
-    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_HYBRIDCULTURE)
-
-    if (!var(VAR_RESULT)){
-        return
-    }
-
-    setvar(VAR_TEMP_0,0)
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HYBRIDCULTURE, SUB_QUEST_1)
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HYBRIDCULTURE, SUB_QUEST_2)
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_HYBRIDCULTURE, SUB_QUEST_3)
-    if (var(VAR_RESULT)){
-        addvar(VAR_TEMP_0,1)
-    }
-
-    if (var(VAR_TEMP_0) == QUEST_HYBRIDCULTURE_SUB_COUNT){
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_HYBRIDCULTURE)
-    }
-
-    return
+script HybridCulture_Dialogue_Reward
+{
 }
-
-script Quest_HybridCulture_Event_Script{
-    lock
-        call(Quest_HybridCulture_CheckSubquests_Script)
-        returnqueststate(QUEST_HYBRIDCULTURE)
-
-        switch(var(VAR_RESULT)){
-            case QUEST_MENU_SET_ACTIVE:
-                goto(Quest_HybridCulture_Active_Dialogue)
-            case QUEST_MENU_SET_REWARD: goto(Quest_HybridCulture_Reward_Dialogue)
-            case QUEST_MENU_COMPLETE_QUEST: goto(Quest_HybridCulture_Complete_Dialogue)
-            default: goto(Quest_HybridCulture_StartQuest_Dialogue)
-        }
-}
-
-script Quest_HybridCulture_StartQuest_Dialogue{
-    msgbox(format("Hey, thanks again for your help in HodouCity. That was a rough situation, but was a wake up call. That's not anything like what I want to be."),MSGBOX_NPC,SPEAKER_SHINZO)
-    msgbox(format("I think I need to learn more about the culture of Resido."),MSGBOX_NPC,SPEAKER_SHINZO)
-
-    msgbox(format("Have you started with just ToraTown? Maybe find the best parts of your culture and see how they're represented here."),MSGBOX_NPC,SPEAKER_ALICIA)
-
-    msgbox(format("I haven't yet. But perhaps that's a good idea."),MSGBOX_NPC,SPEAKER_SHINZO)
-    msgbox(format("Can you help with that? You're a traveling Trainer, so you'll see more of ToraTown than I will. What are the great parts of ToraTown culture?"),MSGBOX_NPC,SPEAKER_SHINZO)
-
-    startquest(QUEST_HYBRIDCULTURE)
-    end
-}
-
-script Quest_HybridCulture_Active_Dialogue{
-    msgbox(format("Have you had any luck learning about ToraTown culture?"),MSGBOX_NPC,SPEAKER_SHINZO)
-
-    end
-}
-
-script Quest_HybridCulture_Reward_Dialogue{
-    msgbox(format("Oh! What did you learn?"),MSGBOX_NPC,SPEAKER_SHINZO)
-    closemessage
-
-    fadescreenswapbuffers(FADE_TO_BLACK)
-    msgbox(format("{PLAYER} explained what they learned about ToraTown's food, traditions, and fashion."))
-    closemessage
-    fadescreenswapbuffers(FADE_FROM_BLACK)
-
-    msgbox(format("Thank you. In a way, it is beautiful to see my country appreciated in this new way. I'm glad the people here love my culture as much I do. Please, take this!"),MSGBOX_NPC,SPEAKER_SHINZO)
-    closemessage
-
-    call(Quest_HybridCulture_GiveReward_Script)
-
-    completequest(QUEST_HYBRIDCULTURE)
-    setflag(FLAG_FACILITY_UNLOCK_SHINZO)
-    end
-}
-
-script Quest_HybridCulture_GiveReward_Script{
-    giveitem(ITEM_MASTER_BALL,1)
-    return
-}
-
-script Quest_HybridCulture_Complete_Dialogue{
-    msgbox(format("I think for now, I'll go back to my Gym. Now that you're stronger, I'd love to battle you again!"),MSGBOX_NPC,SPEAKER_SHINZO)
-    closemessage
-
-    applymovement(SHINZO, moves(walk_down, walk_right * 2, face_up, step_end))
-    waitmovement(SHINZO)
-    opendoor(17,6)
-    waitdooranim
-    applymovement(SHINZO,Common_Movement_WalkUp2)
-    waitmovement(SHINZO)
-    //delay(16)
-    playse(SE_EXIT)
-    removeobject(SHINZO)
-    waitse
-    closedoor(17,6)
-    end
-}
-
