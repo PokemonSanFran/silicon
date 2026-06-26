@@ -40,9 +40,9 @@ script ToraTown_Gym_LeaderVisibility_Script
 
 script ToraTown_Gym_Entrance_Guy_Script
 {
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_3)
-    call(Quest_HybridCulture_CheckSubquests_Script)
-    msgbox(format("A lot of staff that train here to try stock up on Payapa and Shuca Berries. At first they were super expensive, since they don't really grow in Resido. But the trainers from Resido all give berries when defeated, and the trainers from Sinnoh all give berries from their homeland - which include the Payapa and the Shuca Berries! Needless to say, Trainers from Sinnoh became super popular super fast."),MSGBOX_NPC)
+    bufferitemnameplural(STR_VAR_1,ITEM_PAYAPA_BERRY,2)
+    bufferitemnameplural(STR_VAR_2,ITEM_SHUCA_BERRY,2)
+    msgbox(format("A lot of staff that train here to try stock up on {STR_VAR_1} and {STR_VAR_2}. At first they were super expensive, since they don't really grow in Resido. But the trainers from Resido all give berries when defeated, and the trainers from Sinnoh all give berries from their homeland - which include the {STR_VAR_1} and {STR_VAR_2}! Needless to say, Trainers from Sinnoh became super popular super fast."),MSGBOX_NPC)
     applymovement(2,Common_Movement_FaceLeft)
     end
 }

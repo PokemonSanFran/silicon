@@ -4,7 +4,6 @@ mapscripts ToraTown_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call(Quest_HybridCulture_HideLeader_Script)
         call(WowYoureStrong_HideObject_Script)
     }
     MAP_SCRIPT_ON_LOAD{
@@ -15,17 +14,6 @@ mapscripts ToraTown_MapScripts {
         VAR_TEMP_1, 0: SwagbagContinued_Dialogue_StartDexnav
         FLAG_VISITED_TORA_TOWN, FALSE: Generic_Mappreview
     ]
-}
-
-script ToraTown_FashionDesigner_Script{
-    msgbox(format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online."),MSGBOX_NPC)
-        subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_2)
-        call(Quest_HybridCulture_CheckSubquests_Script)
-        end
-}
-
-text gText_ToraTown_ImAFashion{
-    format("I'm a fashion designer. I can't afford to travel to Sinnoh... but I love when their tourists come here! They're always wearing the latest styles and fashions, and so much of it doesn't translate when looking online.")
 }
 
 script ToraTown_Dialogue_Trash
