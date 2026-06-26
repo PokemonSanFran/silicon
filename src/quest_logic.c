@@ -5524,3 +5524,79 @@ void DebugQuest_CulturalPurity(u8 state)
             break;
     }
 }
+
+void Quest_HybridCulture_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_HYBRIDCULTURE);
+}
+
+static bool8 Quest_HybridCulture_IsSunset(void)
+{
+    return GetTime_IsBetweenHours(NIGHT_HOUR_END,MORNING_HOUR_MIDDLE);
+}
+
+static bool8 Quest_HybridCulture_IsSunrise(void)
+{
+    return GetTime_IsBetweenHours(DAY_HOUR_END,NIGHT_HOUR_BEGIN);
+}
+
+void Script_Quest_HybridCulture_IsSunset(void)
+{
+    gSpecialVar_Result = Quest_HybridCulture_IsSunset();
+}
+
+void Script_Quest_HybridCulture_IsSunrise(void)
+{
+    gSpecialVar_Result = Quest_HybridCulture_IsSunrise();
+}
+
+static void BufferSunTimes(u32 begin, u32 end)
+{
+    ConvertIntToDecimalStringN(gStringVar1,begin,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_1}:00"));
+    StringCopy(gStringVar1,gStringVar4);
+
+    ConvertIntToDecimalStringN(gStringVar2,end,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
+    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_2}:00"));
+    StringCopy(gStringVar2,gStringVar4);
+}
+
+void BufferSunriseTimes(void)
+{
+    BufferSunTimes(NIGHT_HOUR_END,MORNING_HOUR_MIDDLE);
+}
+
+void BufferSunsetTimes(void)
+{
+    BufferSunTimes(DAY_HOUR_END,NIGHT_HOUR_BEGIN);
+}
+
+static bool8 Quest_HybridCulture_ShouldStartAttraction(enum HybridCultureAttractions attractionIndex)
+{
+    enum QuestIdList quest = QUEST_HYBRIDCULTURE;
+    if (QuestMenu_GetSetQuestState(quest,FLAG_GET_ACTIVE) == FALSE)
+        return FALSE;
+
+    return (QuestMenu_GetSetSubquestState(quest,FLAG_GET_COMPLETED,attractionIndex) == FALSE);
+}
+
+void Script_Quest_HybridCulture_ShouldStartAttraction1(enum HybridCultureAttractions attractionIndex)
+{
+    gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_PIOCA_BRIDGE_SUNRISE);
+}
+void Script_Quest_HybridCulture_ShouldStartAttraction2(enum HybridCultureAttractions attractionIndex)
+{
+    gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_ROUTE12_BIRDS);
+}
+void Script_Quest_HybridCulture_ShouldStartAttraction3(enum HybridCultureAttractions attractionIndex)
+{
+    gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_MERMEREZA_TACO);
+}
+void Script_Quest_HybridCulture_ShouldStartAttraction4(enum HybridCultureAttractions attractionIndex)
+{
+    gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_CHAPEL_OF_CHIMES);
+}
+void Script_Quest_HybridCulture_ShouldStartAttraction5(enum HybridCultureAttractions attractionIndex)
+{
+    gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_SUNSET_HIKE);
+}
