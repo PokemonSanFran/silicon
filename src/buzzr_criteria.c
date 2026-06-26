@@ -385,4 +385,27 @@ void TweetCriteria_Quest_CulturalPurity_ReadyForDChampion(void)
     gSpecialVar_Result = ((VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS) && (gSpecialVar_Result == TRUE));
 }
 
-
+void TweetCriteria_Quest_HybridCulture_HasQuestStarted(void)
+{
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_HYBRIDCULTURE));
+}
+void TweetCriteria_Quest_HybridCulture_HasSubquest1Completed(void)
+{
+    gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_1);
+}
+void TweetCriteria_Quest_HybridCulture_HasSubquest2Completed(void)
+{
+    gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_2);
+}
+void TweetCriteria_Quest_HybridCulture_HasSubquest3Completed(void)
+{
+    gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_3);
+}
+void TweetCriteria_Quest_HybridCulture_HasSubquest4Completed(void)
+{
+    gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_4);
+}
+void TweetCriteria_Quest_HybridCulture_HasSubquest5Completed(void)
+{
+    gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_5);
+}

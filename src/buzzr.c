@@ -2109,6 +2109,27 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
         case TWEET_QUEST_CULTURAL_PURITY_READYD:
         case TWEET_QUEST_CULTURAL_PURITY_READYD_CHAMPION:
             StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_CULTURAL_PURITY_MASCOT));
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_1:
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_1:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_1),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_1))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_2:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_2:
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_QUEST_HYBRID_CULTURE));
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_2),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_2))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_3:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_3:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_3),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_3))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_QUEST_HYBRID_CULTURE));
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_4:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_4:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_4),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_4))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_5:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_5:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_5),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_5))->regionMapSectionId,0);
             break;
     }
 }
