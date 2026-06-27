@@ -33,54 +33,15 @@
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/quests.h"
-#include "constants/trainer_slide.h"
 #include "constants/rgb.h"
 #include "constants/event_objects.h"
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
+#include "quest_flavor_lookup.h"
 #include "quest_strings.h"
 #include "battle_main.h"
-
 #include "random.h"
-
-struct TextComponent
-{
-    const enum QuestFlavorGetNameType getType;
-    const u32 targetValue;
-};
-
-struct TextCondition
-{
-    const u32 targetValue;
-    const u32 dataAddress;
-    const enum QuestFlavorDataType dataType;
-    const enum ComparisonOperators compareOp;
-};
-
-struct PlayerAdventureText
-{
-	const u8 *text;
-    const struct TextComponent textComponent[4];
-    const struct TextCondition textCondition[20];
-};
-
-static const struct PlayerAdventureText playerAdventureText[] = 
-{
-    [0] = 
-    {
-        .text = COMPOUND_STRING("Defeat Magnus and claim your title as Champion of Resido!"),
-        .textCondition = 
-        {
-            [0] =
-            {
-                .targetValue = DEFEATED_MAGNUS,
-                .dataAddress = VAR_PROLOGUE_STATE,
-                .dataType = QUEST_FLAVOR_COMPARE_VAR,
-                .compareOp = LESS_THAN,
-            },
-        },
-    }
-};
+#include "data/playerQuestText.h"
 
 static u32 VarGet_Cast(u32 dataAddress)
 {
@@ -104,69 +65,72 @@ static u32 (* sGetFuncs[])(u32 dataAddress) =
 
 const u8 *GetQuestDesc_PlayersAdventure(void)
 {
-    u32 actualNum = ARRAY_COUNT(playerAdventureText);
     StringCopy(gStringVar4,COMPOUND_STRING(""));
-    
-    for (s32 totalNum = actualNum; totalNum != -1; totalNum--)
-    {
-        u32 checkNumOG = ARRAY_COUNT(playerAdventureText[totalNum].textCondition);
-        u32 passedCheck = 0;
-        
-    for (u32 checknum = checkNumOG; checknum != -1; checknum--)
-    {
-        u32 var1 = playerAdventureText[totalNum].textCondition[checknum].targetValue;
-        u32 dataAddress = playerAdventureText[totalNum].textCondition[checknum].dataAddress;
 
-        u32 var3 = sGetFuncs[0](dataAddress);
-        u32 var4 = playerAdventureText[totalNum].textCondition[checknum].compareOp;
-        bool32 var5;
+    for (s32 flavorText = (ARRAY_COUNT(playerAdventureText)-1); (flavorText != -1); flavorText--)
+    {
+        u32 numPassingTests = 0, numTests = 0;
 
-        switch(var4)
+        for (u32 condition = 0; condition < ARRAY_COUNT(playerAdventureText[flavorText].textCondition); condition++)
         {
-            case LESS_THAN:
-            var5 = (var3 < var1);
-            break;
-            default:
-            case EQUAL:
-            var5 = (var3 == var1);
-            break;
-            case GREATER_THAN:
-            var5 = (var3 > var1);
-            break;
-            case LESS_THAN_OR_EQUAL:
-            var5 = (var3 <= var1);
-            break;
-            case GREATER_THAN_OR_EQUAL:
-            var5 = (var3 >= var1);
-            break;
-            case NOT_EQUAL:
-            var5 = (var3 != var1);
-            break;
-        }
-            
-            if (var5 == FALSE)
+            u32 dataAddress = playerAdventureText[flavorText].textCondition[condition].dataAddress;
+
+            if (dataAddress == 0)
+                continue;
+
+            numTests++;
+
+            u32 targetValue = playerAdventureText[flavorText].textCondition[condition].targetValue;
+            enum QuestFlavorDataType dataType = playerAdventureText[flavorText].textCondition[condition].dataType;
+            u32 observedValue = sGetFuncs[dataType](dataAddress);
+            u32 comparisonOperator = playerAdventureText[flavorText].textCondition[condition].compareOp;
+            bool32 compareResult;
+
+            switch(comparisonOperator)
+            {
+                default:
+                case EQUAL:
+                    compareResult = (observedValue == targetValue);
+                    break;
+                case LESS_THAN:
+                    compareResult = (observedValue < targetValue);
+                    break;
+                case GREATER_THAN:
+                    compareResult = (observedValue > targetValue);
+                    break;
+                case LESS_THAN_OR_EQUAL:
+                    compareResult = (observedValue <= targetValue);
+                    break;
+                case GREATER_THAN_OR_EQUAL:
+                    compareResult = (observedValue >= targetValue);
+                    break;
+                case NOT_EQUAL:
+                    compareResult = (observedValue != targetValue);
+                    break;
+            }
+
+            if (compareResult == FALSE)
                 break;
 
-       passedCheck++; 
-    }
-        if (passedCheck == checkNumOG)
-{
-            StringCopy(gStringVar4,playerAdventureText[totalNum].text);
+            numPassingTests++; 
+        }
+        if (numPassingTests == numTests)
+        {
+            StringCopy(gStringVar4,playerAdventureText[flavorText].text);
             break;
-}
-
-}
+        }
+    }
     return gStringVar4;    
 }
 
 const u8 *GetQuestDesc_RabiesOutbreak(void)
 {
-	u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
+    u8 defeatedGlameowCount = VarGet(VAR_DEFEATED_GLAMEOW_COUNT);
     StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
     GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
-	ConvertIntToDecimalStringN(gStringVar3, (QUEST_RABIES_OUTBREAK_COUNT - defeatedGlameowCount), STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_RABIES_OUTBREAK_COUNT));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RABIESOUTBREAK].desc[FLAG_GET_ACTIVE]);
-	return gStringVar4;
+    ConvertIntToDecimalStringN(gStringVar3, (QUEST_RABIES_OUTBREAK_COUNT - defeatedGlameowCount), STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_RABIES_OUTBREAK_COUNT));
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_RABIESOUTBREAK].desc[FLAG_GET_ACTIVE]);
+    return gStringVar4;
 }
 
 const u8  *GetQuestDesc_BetweenAStoneAndAHardPlace(void)
@@ -184,7 +148,7 @@ const u8 *GetQuestDesc_FreshwaterEvolution(void)
 {
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
     StringCopy(gStringVar2,GetSpeciesName(QUEST_FRESHWATER_EVOLUTION_SPECIES));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_FRESHWATEREVOLUTION].desc[FLAG_GET_ACTIVE]);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_FRESHWATEREVOLUTION].desc[FLAG_GET_ACTIVE]);
     return gStringVar4;
 }
 
@@ -378,8 +342,8 @@ const u8 *GetQuestDesc_Improvbattling(void)
 {
     u32 flag = ReturnQuestState(QUEST_IMPROVBATTLING);
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_IMPROVBATTLING].desc[flag]);
-	return gStringVar4;
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_IMPROVBATTLING].desc[flag]);
+    return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Teachatrainertofish(void)
@@ -387,24 +351,24 @@ const u8 *GetQuestDesc_Teachatrainertofish(void)
     u32 flag = ReturnQuestState(QUEST_TEACHATRAINERTOFISH);
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_TEACHATRAINERTOFISH),MAP_NUM(MAP_QUEST_TEACHATRAINERTOFISH))->regionMapSectionId,0);
     StringCopy(gStringVar2,GetSpeciesName(VarGet(VAR_QUEST_TEACHATRAINERTOFISH)));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_TEACHATRAINERTOFISH].desc[flag]);
-	return gStringVar4;
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_TEACHATRAINERTOFISH].desc[flag]);
+    return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Wildfirerisk(void)
 {
     u32 flag = ReturnQuestState(QUEST_WILDFIRERISK);
     StringCopy(gStringVar1,GetItemName(ITEM_QUEST_WILDFIRERISK_REWARD));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_WILDFIRERISK].desc[flag]);
-	return gStringVar4;
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_WILDFIRERISK].desc[flag]);
+    return gStringVar4;
 }
 
 const u8 *GetQuestDesc_Hang20(void)
 {
     u32 flag = ReturnQuestState(QUEST_HANG20);
     GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
-	ConvertIntToDecimalStringN(gStringVar2, QUEST_HANG20_REQUIRED_WINS, STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_HANG20_REQUIRED_WINS));
+    ConvertIntToDecimalStringN(gStringVar2, QUEST_HANG20_REQUIRED_WINS, STR_CONV_MODE_LEFT_ALIGN, CountDigits(QUEST_HANG20_REQUIRED_WINS));
     StringCopy(gStringVar3,GetMoveName(MOVE_SURF));
-	StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HANG20].desc[flag]);
-	return gStringVar4;
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HANG20].desc[flag]);
+    return gStringVar4;
 }
