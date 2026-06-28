@@ -693,7 +693,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Have dinner with Kei-Ying's at his home in {STR_VAR_1}."),
+    .text = COMPOUND_STRING("Have dinner with Kei-Ying at his home in {STR_VAR_1}."),
     .textComponent =
     {
       {
@@ -784,41 +784,63 @@ static const struct PlayerAdventureText playerAdventureText[] =
       }
     }
   },
+  {
+    .text = COMPOUND_STRING("Explore everything western Resido has to offer!"),
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Head to {STR_VAR_1} and the Arena construction site as soon as you can!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_CONSTRUCTION,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_CONSTRUCTION_STRIKE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = START_VS_GARBODOR,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_CALLED_TO_CONSTRUCTION,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help Charlotte clear out The Tide from {STR_VAR_1} and stop them from destroying the Arena!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_CONSTRUCTION,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_CONSTRUCTION_STRIKE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = START_VS_GARBODOR,
+      },
+    }
+  },
   /*
-     {
-     .text = COMPOUND_STRING("Head to {STR_VAR_1} and the Arena construction site as soon as you can!"),
-     .textComponent =
-     {
-     {
-     },
-     },
-     .textCondition = 
-     {
-     {
-     .dataType = ,
-     .dataAddress = ,
-     .compareOp = ,
-     .targetValue = ,
-     }
-     }
-     },
-     {
-     .text = COMPOUND_STRING("Help Charlotte clear out The Tide from {STR_VAR_1} and stop them from destroying the Arena!"),
-     .textComponent =
-     {
-     {
-     },
-     },
-     .textCondition = 
-     {
-     {
-     .dataType = ,
-     .dataAddress = ,
-     .compareOp = ,
-     .targetValue = ,
-     }
-     }
-     },
      {
      .text = COMPOUND_STRING("Get a good night's rest back in {STR_VAR_1}. "),// cucuno town
      .textComponent =
