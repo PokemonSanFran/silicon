@@ -43,6 +43,8 @@
 #include "random.h"
 #include "data/playerQuestText.h"
 
+static void ExpandStringsForQuestFlavor(s32 flavorText);
+
 static u32 VarGet_Cast(u32 dataAddress)
 {
     return VarGet((u16)dataAddress);
@@ -116,11 +118,55 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
         }
         if (numPassingTests == numTests)
         {
-            StringCopy(gStringVar4,playerAdventureText[flavorText].text);
+            ExpandStringsForQuestFlavor(flavorText);
+            StringExpandPlaceholders(gStringVar4,playerAdventureText[flavorText].text);
             break;
         }
     }
     return gStringVar4;    
+}
+
+static void ExpandStringsForQuestFlavor(s32 flavorText)
+{
+    static u8 *const holder[] = {gStringVar1, gStringVar2, gStringVar3 };
+
+    for (u32 string = 0; string < NUM_STRING_VARIABLES; string++)
+    {
+        enum QuestFlavorGetNameType type = playerAdventureText[flavorText].textComponent[string].textTargetType;
+
+        if (type == QUEST_FLAVOR_GET_NOTHING)
+            continue;
+
+        u32 target = playerAdventureText[flavorText].textComponent[string].textTargetValue;
+
+        switch(type)
+        {
+            default:
+                break;
+            case QUEST_FLAVOR_GET_NAME_MAP:
+                GetMapName(holder[string],Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(target),MAP_NUM(target))->regionMapSectionId,0);
+                break;
+            case QUEST_FLAVOR_GET_NAME_SPECIES:
+                StringCopy(holder[string],GetSpeciesName(target));
+                break;
+            case QUEST_FLAVOR_GET_NAME_ITEM:
+                StringCopy(holder[string],GetItemName(target));
+                break;
+            case QUEST_FLAVOR_GET_NAME_ITEM_PLURAL:
+                CopyItemNameHandlePlural(target,holder[string],3);
+                break;
+            case QUEST_FLAVOR_GET_NAME_ABILITY:
+                StringCopy(holder[string],GetAbilityName(target));
+                break;
+            case QUEST_FLAVOR_GET_NAME_MOVE:
+                StringCopy(holder[string],GetMoveName(target));
+                break;
+        }
+    }
+
+    
+
+
 }
 
 const u8 *GetQuestDesc_RabiesOutbreak(void)
