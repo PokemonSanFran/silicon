@@ -39,6 +39,7 @@
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
 #include "silicon_shine.h" // siliconMerge
+#include "test/test.h" // silicon-specific-tests
 
 struct BattleWindowText
 {
@@ -913,6 +914,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LIGHTSCREENWOREOFF]                   = COMPOUND_STRING("{B_DEF_TEAM1} team's Light Screen wore off!"),
     [STRINGID_AURORAVEILWOREOFF]                    = COMPOUND_STRING("{B_DEF_TEAM1} team's Aurora Veil wore off!"),
     [STRINGID_STICKYWEBDISAPPEAREDFROMYOU]          = COMPOUND_STRING("The sticky web has disappeared from the ground around you!"),
+    [STRINGID_FONT_CHECK]                           = COMPOUND_STRING("blergh"), // silicon-specific-tests
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -3841,7 +3843,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
         case B_BUFF_ITEM: // item name
             hword = T1_READ_16(&src[srcID + 1]);
             // Start Native Give Item
-            //if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) 
+            //if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
             if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)
                 && (hword == ITEM_ENIGMA_BERRY_E_READER))
             // End Native Give Item
@@ -3957,12 +3959,23 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 
     if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGMENT_TEXT || windowId == B_WIN_OAK_OLD_MAN)
     {
+// Start silicon-specific-tests
+#if TESTING
+        if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) && !gSiliconTestVariables.checkPrintSpeed)
+            speed = 1;
+        else if ((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !gSiliconTestVariables.checkPrintSpeed)
+            speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
+        else
+            speed = GetPlayerTextSpeedDelay();
+#else
+// End silicon-specific-tests
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
             speed = 1;
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
             speed = GetPlayerTextSpeedDelay();
+#endif // silicon-specific-tests
 
         gTextFlags.canABSpeedUpPrint = 1;
     }

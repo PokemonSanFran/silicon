@@ -61,13 +61,39 @@
 #include "pokemon_storage_system.h"
 #include "event_scripts.h"
 
-void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var)
+const struct TrainerMon Quest_Generic_GetMonFromTrainer(enum ResidoTrainerIds trainer,u32 index, const struct Trainer *trainers, u32 rows)
 {
-    const struct TrainerMon mon = gTrainers[GetCurrentDifficultyLevel()][trainer].party[index];
+    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    return trainers[difficulty * rows + trainer].party[index];
+}
 
-    u32 species = mon.species;
+u32 Quest_Generic_GetIndexForMonTrainer(enum ResidoTrainerIds trainer, u32 index, const struct Trainer *trainers, u32 rows)
+{
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
+    enum Species species = mon.species;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        if (species != SPECIES_NONE)
+            break;
+
+        index = partyIndex;
+
+        const struct TrainerMon mon2 = Quest_Generic_GetMonFromTrainer(trainer,partyIndex,trainers,rows);
+        species = mon2.species;
+    }
+    return index;
+}
+
+void Quest_Generic_LoadTrainersMonToOWVar(enum ResidoTrainerIds trainer, u32 index, u32 var,const struct Trainer *trainers, u32 rows)
+{
+    index = Quest_Generic_GetIndexForMonTrainer(trainer,index,trainers,rows);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
     u32 female = (mon.gender == MON_FEMALE) ? OBJ_EVENT_MON_FEMALE : 0;
     u32 shiny = (mon.isShiny == TRUE) ? OBJ_EVENT_MON_SHINY: 0;
+
     VarSet(var,(OBJ_EVENT_MON + species + female + shiny));
 }
 
@@ -4396,12 +4422,12 @@ void Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart(void)
 
 void Quest_Restorehodoucity_LoadZacPokemon(void)
 {
-    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0);
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_ZAC,0,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
 }
 
 void Quest_Restorehodoucity_LoadKevinPokemon(void)
 {
-    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1);
+    Quest_Generic_LoadTrainersMonToOWVar(TRAINER_KEVIN,0,VAR_OBJ_GFX_ID_1,&gTrainers[0][0],TRAINERS_COUNT);
 }
 
 void Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward(void)
@@ -4530,7 +4556,7 @@ void HousingProtest_BufferMostPowerfulAttackAndMove(void)
     }
 
     VarSet(VAR_TEMP_0,species);
-    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0);
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,usedIndex,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
     StringCopy(gStringVar1,GetSpeciesName(species));
     StringCopy(gStringVar2,GetMoveName(move));
 }
@@ -5175,6 +5201,326 @@ void DebugQuest_Hang20(u8 state)
         case STATE_QUEST_HANG20_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_HANG20);
             AddBagItem(ITEM_QUEST_HANG20_REWARD,1);
+            break;
+    }
+}
+
+// ***********************************************************************
+// Quest: Cultural Purity
+// ***********************************************************************
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelA(void)
+{
+    if (gPartiesCount[B_TRAINER_PLAYER] == 1)
+        return TRUE;
+
+    bool32 typesList[NUMBER_OF_MON_TYPES];
+    u32 typeCount = 0;
+
+    for (u32 typeIndex = 0; typeIndex < NUMBER_OF_MON_TYPES; typeIndex++)
+        typesList[typeIndex] = FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        for (u32 slot = 0; slot < TYPES_PER_MON; slot++)
+            typesList[GetSpeciesType(species,slot)] = TRUE;
+    }
+
+    for (u32 typeIndex = 0; typeIndex < NUMBER_OF_MON_TYPES; typeIndex++)
+    {
+        if (typesList[typeIndex] == TRUE)
+            typeCount++;
+    }
+
+    return (typeCount < 3);
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelA(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelA();
+}
+
+bool8 Quest_CulturalPurity_HasDefeatedAllPeonsLevelA(void)
+{
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA1) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA2) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA3) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelA(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_HasDefeatedAllPeonsLevelA();
+}
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelB(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        enum Item item = GetMonData(mon,MON_DATA_HELD_ITEM);
+        if (item != ITEM_NONE)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelB(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelB();
+}
+
+void Quest_CulturalPurity_LoadShinzoMon(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
+}
+
+void Quest_CulturalPurity_BufferShinzoMonName(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void Quest_CulturalPurity_GetShinzoMonCry(void)
+{
+    u32 trainerId = PARTNER_SHINZO;
+    u32 index = SHINZO_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void Quest_CulturalPurity_BufferCostLevelB(void)
+{
+    ConvertIntToDecimalStringN(gStringVar2, COST_QUEST_CULTURAL_PURITY_B, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_B));
+}
+
+bool8 Quest_CulturalPurity_HasDefeatedAllPeonsLevelB(void)
+{
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB1) == FALSE)
+        return FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB2) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_HasDefeatedAllPeonsLevelB(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_HasDefeatedAllPeonsLevelB();
+}
+
+void Quest_CulturalPurity_BufferCostLevelC(void)
+{
+    ConvertIntToDecimalStringN(gStringVar2, COST_QUEST_CULTURAL_PURITY_C, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_C));
+}
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelC(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelB() == FALSE)
+        return FALSE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        enum Species species = GetMonData(mon,MON_DATA_SPECIES_OR_EGG);
+
+        if (species == SPECIES_EGG)
+            continue;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        u32 matchingMoves = 0;
+
+        for (u32 typeIndex = 0; typeIndex < TYPES_PER_MON; typeIndex++)
+        {
+            enum Type type = GetSpeciesType(species,typeIndex);
+
+            for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+            {
+                enum Move move = GetMonData(mon,MON_DATA_MOVE1 + moveIndex);
+
+                if (GetMoveType(move) == type)
+                    matchingMoves++;
+            }
+        }
+        if (matchingMoves < 2)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelC(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelC();
+}
+
+void Quest_CulturalPurity_BufferCostRacks(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, COST_QUEST_CULTURAL_PURITY_C_TRUNCATED, STR_CONV_MODE_LEFT_ALIGN, CountDigits(COST_QUEST_CULTURAL_PURITY_C_TRUNCATED));
+}
+
+bool8 Quest_CulturalPurity_IsPlayerReadyForLevelD(void)
+{
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelA() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelB() == FALSE)
+        return FALSE;
+
+    if (Quest_CulturalPurity_IsPlayerReadyForLevelC() == FALSE)
+        return FALSE;
+
+    struct Pokemon tempMon;
+
+    for (u32 boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (u32 boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            BoxMonAtToMon(boxId, boxPosition, &tempMon);
+
+            if (GetMonData(&tempMon,MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+                continue;
+
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+void Script_Quest_CulturalPurity_IsPlayerReadyForLevelD(void)
+{
+    gSpecialVar_Result = Quest_CulturalPurity_IsPlayerReadyForLevelD();
+}
+
+void DebugQuest_CulturalPurity(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_CULTURAL_PURITY_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_QUEST:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_QUEST_1_NOT_STARTED);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_CULTURAL_PURITY_AD3);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_1,1);
+            QuestMenu_ScriptSetActive(QUEST_CULTURALPURITY);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_A:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_A);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_A:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_A);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A1:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A2:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A2);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_A3:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA3);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_A3);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_A:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERA4);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_1,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_2,1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_B);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_B:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_B);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_B:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_B);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_B);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_2,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_3,1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_B1:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB1);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_B1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_DEFEATED_B2:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_DEFEATED_B2);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_B:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERB3);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_C);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_C:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_PAYWALL_C);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_C:
+            RemoveMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_C);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_C);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_3,1);
+            AddBagItem(ITEM_QUEST_CULTURALPURITY_4,1);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_C:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERC1);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_BACKROOMTRAINERC2);
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_READY_FOR_D);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_CHALLENGED_LEADER:
+            VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_CHALLENGED_LEADER);
+            SetTrainerDiscovered(TRAINER_CULTHOUSEGUARD);
+            SetTrainerDiscovered(TRAINER_CULTLEADER);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_REWARD:
+            FlagSet(TRAINER_FLAGS_START + TRAINER_CULTHOUSEGUARD);
+            FlagSet(TRAINER_FLAGS_START + TRAINER_CULTLEADER);
+            QuestMenu_ScriptSetReward(QUEST_CULTURALPURITY);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_CULTURALPURITY);
+            RemoveBagItem(ITEM_QUEST_CULTURALPURITY_4,1);
             break;
     }
 }

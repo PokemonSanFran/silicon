@@ -3490,20 +3490,171 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_CULTURALPURITY] =
     {
-        .name = gText_Quest_CulturalPurity_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_CulturalPurity_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_CulturalPurity_DoneDesc,
-        .map = gText_Quest_CulturalPurity_Map,
+        .name = COMPOUND_STRING("Cultural Purity"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING(""),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped show Shinzo that clinging to traditions doesn’t always make you stronger. He has a lot of growing to do."),
+        .descFunc = GetQuestDesc_CulturalPurity,
+        .map = COMPOUND_STRING("Hodou City"),
         .sprite = OBJ_EVENT_GFX_SHINZO,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
-        .numSubquests = 0
+        .numSubquests = 0,
+        .states =
+        {
+            [STATE_QUEST_CULTURAL_PURITY_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_START),
+                .warpId = WARP_ID_NONE,
+                .x = 3,
+                .y = 16,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_START),
+                .warpId = WARP_ID_NONE,
+                .x = 3,
+                .y = 16,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_A] =
+            {
+                .name = COMPOUND_STRING("Asked Donate Level A"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_FRONT_A),
+                .warpId = WARP_ID_HERBAL_TO_HODOU_RIGHT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_A] =
+            {
+                .name = COMPOUND_STRING("Started Level A"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_A),
+                .warpId = WARP_ID_BACKROOM_A_TO_HERBAL_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_A1] =
+            {
+                .name = COMPOUND_STRING("Defeated A1"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_A),
+                .warpId = WARP_ID_BACKROOM_A_TO_HERBAL_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_A2] =
+            {
+                .name = COMPOUND_STRING("Defeated A2"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_A),
+                .warpId = WARP_ID_BACKROOM_A_TO_HERBAL_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_A3] =
+            {
+                .name = COMPOUND_STRING("Defeated A3"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_A),
+                .warpId = WARP_ID_BACKROOM_A_TO_HERBAL_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_A] =
+            {
+                .name = COMPOUND_STRING("Cleared Level A"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_A),
+                .warpId = WARP_ID_BACKROOM_A_TO_HERBAL_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_B] =
+            {
+                .name = COMPOUND_STRING("Asked Donate Level B"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_FRONT_B),
+                .warpId = WARP_ID_COOKIE_TO_HODOU_RIGHT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_B] =
+            {
+                .name = COMPOUND_STRING("Started Level B"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_B),
+                .warpId = WARP_ID_BACKROOM_B_TO_COOKIE_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_B1] =
+            {
+                .name = COMPOUND_STRING("Defeated B1"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_B),
+                .warpId = WARP_ID_BACKROOM_B_TO_COOKIE_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_B2] =
+            {
+                .name = COMPOUND_STRING("Defeated B2"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_B),
+                .warpId = WARP_ID_BACKROOM_B_TO_COOKIE_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_DEFEATED_B3] =
+            {
+                .name = COMPOUND_STRING("Defeated B3"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_B),
+                .warpId = WARP_ID_BACKROOM_B_TO_COOKIE_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_B] =
+            {
+                .name = COMPOUND_STRING("Cleared Level B"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_B),
+                .warpId = WARP_ID_BACKROOM_B_TO_COOKIE_LEFT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_ASKED_DONATE_LEVEL_C] =
+            {
+                .name = COMPOUND_STRING("Asked Donate Level C"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_FRONT_C),
+                .warpId = WARP_ID_ALLEY_1_TO_HODOU,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_STARTED_LEVEL_C] =
+            {
+                .name = COMPOUND_STRING("Started Level C"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_C),
+                .warpId = WARP_ID_BACKROOM_TO_ALLEY_1_RIGHT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_CLEARED_LEVEL_C] =
+            {
+                .name = COMPOUND_STRING("Cleared Level C"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_C),
+                .warpId = WARP_ID_BACKROOM_TO_ALLEY_1_RIGHT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_CHALLENGED_LEADER] =
+            {
+                .name = COMPOUND_STRING("Challenged Leader"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_FRONT_D),
+                .warpId = WARP_ID_NONE,
+                .x = 12,
+                .y = 16,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_D),
+                .warpId = WARP_ID_CULTHOUSE_TO_HODOU_RIGHT,
+            },
+            [STATE_QUEST_CULTURAL_PURITY_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_CulturalPurity,
+                side_quest_map(MAP_QUEST_CULTURAL_PURITY_BACK_D),
+                .warpId = WARP_ID_CULTHOUSE_TO_HODOU_RIGHT,
+            },
+        }
     },
     [QUEST_HYBRIDCULTURE] =
     {
         .name = gText_Quest_HybridCulture_Name,
         .desc[FLAG_GET_ACTIVE] = gText_Quest_HybridCulture_Desc,
         .desc[FLAG_GET_COMPLETED] = gText_Quest_HybridCulture_DoneDesc,
+        //.descFunc = GetQuestDesc_CulturalPurity,
         .map = gText_Quest_HybridCulture_Map,
         .sprite = OBJ_EVENT_GFX_SHINZO,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,

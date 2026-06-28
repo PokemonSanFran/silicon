@@ -1,12 +1,10 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-
 mapscripts HodouCity_Racisthouse_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_CulturalPurity_HideShinzoInside_Script)
-        call(Quest_CulturalPurity_MoveGuard_Script)
+    MAP_SCRIPT_ON_TRANSITION
+    {
     }
-    MAP_SCRIPT_ON_FRAME_TABLE[
-        VAR_TEMP_0, 0: Quest_CulturalPurity_InsideClubhouse_Dialogue
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
+        VAR_TEMP_0,0:CulturalPurity_Script_TryCultCutscene
     ]
 }
 
@@ -29,10 +27,10 @@ script HodouCity_Racisthouse_Scroll_Script
     }
 
     callnative(Quest_Hodoutunnels_SetVariable_HasDiscoveredScroll)
-    applymovement(PLAYER, moves(walk_in_place_up, emote_exclamation_mark, step_end))
+    applymovement(LOCALID_PLAYER, moves(walk_in_place_up, emote_exclamation_mark, step_end))
     delay(4)
     playse(SE_PIN)
-    waitmovement(PLAYER)
+    waitmovement(LOCALID_PLAYER)
 
     msgbox(format("There's no wall behind the scroll!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage

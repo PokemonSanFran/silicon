@@ -17,3 +17,14 @@ script RunAdventureGuideScript
     }
 }
 
+script Silicon_Script_WhiteoutIfPlayerLostMulti
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON)
+    {
+        return
+    }
+    fadescreen(FADE_TO_BLACK)
+    special(SetCB2WhiteOut)
+}
+

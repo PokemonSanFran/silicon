@@ -1,0 +1,52 @@
+{
+  "id": "MAP_HODOU_CITY_ALLEY_1",
+  "name": "HodouCity_Alley1",
+  "layout": "LAYOUT_HODOU_CITY_ALLEY_1",
+  "music": "MUS_HODOU_CITY",
+  "region_map_section": "MAPSEC_HODOU_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_ALLEY_1_BACKROOMGUARDC",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
+      "x": 0,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_Interact_BackroomguardC",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_ALLEY_1_TO_HODOU",
+      "x": 2,
+      "y": 0,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY",
+      "dest_warp_id": "WARP_ID_HODOU_TO_ALLEY_1"
+    },
+    {
+      "warp_id": "WARP_ID_ALLEY_1_TO_BACKROOM",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_BACKROOM_C",
+      "dest_warp_id": "WARP_ID_BACKROOM_TO_ALLEY_1_RIGHT"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

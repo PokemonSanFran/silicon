@@ -83,9 +83,8 @@ script SurvivalChance333_ExplainPlan_Dialogue {
 script SurvivalChance333_Battle_Script {
         msgbox(format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed."),,SPEAKER_CHIEF)
         closemessage
-        choose_mons
-        goto_if_eq(VAR_RESULT,0,SurvivalChance333_Battle_Script)
         multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_STEVEN)
+        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         goto(SurvivalChance333_PostBattle_Script)
 }
 

@@ -738,4 +738,6 @@ extern const u8 BattleScript_EffectExpTestSetup[];
 extern const u8 BattleScript_EffectExpTestFinish[];
 // End trainerExpTests
 
+extern const u8 BattleScript_OptionTest[]; // silicon-specific-tests
+
 #endif // GUARD_BATTLE_SCRIPTS_H

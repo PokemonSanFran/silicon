@@ -15,33 +15,50 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
-      "x": 8,
+      "local_id": "LOCALID_BACKROOMTRAINERC1",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
+      "x": 5,
       "y": 1,
-      "elevation": 3,
+      "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_CulturalPurity_BackroomC_Interact_Script",
-      "flag": "0"
+      "script": "CulturalPurity_Script_InteractBackroomtrainerC1",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_BACKROOMTRAINERC2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_InteractBackroomtrainerC2",
+      "flag": "FLAG_TEMP_1"
     }
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_BACKROOM_TO_ALLEY_1_LEFT",
       "x": 5,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "3"
+      "dest_map": "MAP_HODOU_CITY_ALLEY_1",
+      "dest_warp_id": "WARP_ID_ALLEY_1_TO_BACKROOM"
     },
     {
+      "warp_id": "WARP_ID_BACKROOM_TO_ALLEY_1_RIGHT",
       "x": 6,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY",
-      "dest_warp_id": "3"
+      "dest_map": "MAP_HODOU_CITY_ALLEY_1",
+      "dest_warp_id": "WARP_ID_ALLEY_1_TO_BACKROOM"
     }
   ],
   "coord_events": [],

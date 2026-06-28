@@ -23,19 +23,23 @@ script EnterShinzo_Event_Script {
     }
 }
 
-script ToraTown_Gym_HideLeaderScript{
-    setflag(FLAG_TEMP_1)
+script ToraTown_Gym_HideLeaderScript
+{
+    setobjectflagfromlocalid(LOCALID_TORAGYM_SHINZO)
 }
 
-script ToraTown_Gym_LeaderVisibility_Script{
-switch(var(VAR_SHINZO_STATE)){
-    case BATTLE_1_COMPLETE: call(ToraTown_Gym_HideLeaderScript)
-    case QUEST_1_COMPLETE: call(ToraTown_Gym_HideLeaderScript)
-    default: return
-}
+script ToraTown_Gym_LeaderVisibility_Script
+{
+    if (defeated(TRAINER_SHINZO) == FALSE)
+    {
+        return
+    }
+
+    call_if_quest_not_complete(QUEST_HYBRIDCULTURE,ToraTown_Gym_HideLeaderScript)
 }
 
-script ToraTown_Gym_Entrance_Guy_Script{
+script ToraTown_Gym_Entrance_Guy_Script
+{
     subquestmenu(QUEST_MENU_COMPLETE_QUEST, QUEST_HYBRIDCULTURE, SUB_QUEST_3)
     call(Quest_HybridCulture_CheckSubquests_Script)
     msgbox(format("A lot of staff that train here to try stock up on Payapa and Shuca Berries. At first they were super expensive, since they don't really grow in Resido. But the trainers from Resido all give berries when defeated, and the trainers from Sinnoh all give berries from their homeland - which include the Payapa and the Shuca Berries! Needless to say, Trainers from Sinnoh became super popular super fast."),MSGBOX_NPC)

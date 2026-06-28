@@ -2,7 +2,7 @@
   "id": "MAP_PARC",
   "name": "PARC",
   "layout": "LAYOUT_PARC",
-  "music": "MUS_CAVE",
+  "music": "MUS_CAVE_DEEPER",
   "region_map_section": "MAPSEC_PARC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

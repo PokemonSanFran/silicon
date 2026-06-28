@@ -559,7 +559,7 @@ const u16 gTrainerBackPicPalette_Pua[] = INCGFX_U16("graphics/trainers/palettes/
 const u16 gTrainerBackPicPalette_Keiying[] = INCGFX_U16("graphics/trainers/palettes/keiying.pal", ".gbapal");
 const u16 gTrainerBackPicPalette_Magnus[] = INCGFX_U16("graphics/trainers/palettes/magnus.pal", ".gbapal");
 const u16 gTrainerBackPicPalette_Neriene[] = INCGFX_U16("graphics/trainers/palettes/neriene.pal", ".gbapal");
-const u16 gTrainerBackPicPalette_Shinzo[] = INCGFX_U16("graphics/trainers/palettes/shinzo.pal", ".gbapal");
+const u16 gTrainerBackPicPalette_Shinzo[] = INCGFX_U16("graphics/trainers/back_pics/shinzo.png", ".gbapal");
 // End silicon
 
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");

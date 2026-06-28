@@ -2,7 +2,7 @@
   "id": "MAP_NAVAL_BASE",
   "name": "NavalBase",
   "layout": "LAYOUT_NAVAL_BASE",
-  "music": "MUS_CAVE",
+  "music": "MUS_CAVE_DEEPER",
   "region_map_section": "MAPSEC_NAVAL_BASE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

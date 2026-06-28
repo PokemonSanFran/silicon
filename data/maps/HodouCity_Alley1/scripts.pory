@@ -1,0 +1,7 @@
+mapscripts HodouCity_Alley1_MapScripts
+{
+    MAP_SCRIPT_ON_LOAD
+    {
+        call_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_C,CulturalPurity_Script_RevealBackroomC)
+    }
+}

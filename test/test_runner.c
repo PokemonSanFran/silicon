@@ -21,6 +21,8 @@ void CB2_TestRunner(void);
 EWRAM_DATA struct TestRunnerState gTestRunnerState;
 EWRAM_DATA struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
+EWRAM_DATA struct SiliconExtraTestVariables gSiliconTestVariables; // silicon-specific-tests
+
 enum {
     CURRENT_TEST_STATE_ESTIMATE,
     CURRENT_TEST_STATE_RUN,
@@ -161,7 +163,7 @@ void TestRunner_CheckMemory(void)
                     {
                         Test_MgbaPrintf("%s: %d bytes not freed", location, block->size);
                         gTestRunnerState.result = TEST_RESULT_FAIL;
-    
+
                         if (gTestRunnerState.expectedFailState == EXPECT_FAIL_OPEN)
                             gTestRunnerState.expectedFailState = EXPECT_FAIL_SUCCESS;
                         break;
@@ -256,7 +258,7 @@ top:
 
             if (gPersistentTestRunnerState.expectCrash)
                 gTestRunnerState.expectedResult = TEST_RESULT_CRASH;
-            
+
             gTestRunnerState.expectedFailLine = 0;
             gTestRunnerState.expectedFailState = NO_EXPECT_FAIL;
         }
@@ -765,7 +767,7 @@ void Test_ExitWithResult_(enum TestResult result, u32 stopLine, const void *retu
          gTestRunnerState.test->filename, stopLine,
          gTestRunnerState.expectedFailLine, stopLine);
     }
-    
+
     ReinitCallbacks();
     if (gTestRunnerState.state == STATE_REPORT_RESULT
      && gTestRunnerState.result != gTestRunnerState.expectedResult)

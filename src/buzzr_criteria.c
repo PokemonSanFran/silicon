@@ -354,4 +354,35 @@ void TweetCriteria_Quest_Hang20_FirstZapRead(void)
     gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_QUEST_HANG20_WARNING);
 }
 
+void TweetCriteria_Quest_CulturalPurity_Active(void)
+{
+    gSpecialVar_Result = (ReturnQuestState(QUEST_CULTURALPURITY) > FLAG_GET_INACTIVE); }
+
+void TweetCriteria_Quest_CulturalPurity_ReadyForA(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_A);
+}
+
+void TweetCriteria_Quest_CulturalPurity_ReadyForB(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_B);
+}
+
+void TweetCriteria_Quest_CulturalPurity_ReadyForC(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_C);
+}
+
+void TweetCriteria_Quest_CulturalPurity_ReadyForD(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_D);
+}
+
+void TweetCriteria_Quest_CulturalPurity_ReadyForDChampion(void)
+{
+    TweetCriteria_Quest_CulturalPurity_ReadyForD();
+
+    gSpecialVar_Result = ((VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS) && (gSpecialVar_Result == TRUE));
+}
+
 

@@ -170,8 +170,35 @@ Pic: Shinzo
 Gender: Male
 Music: Male
 
-Raichu
-Level: 1
+Weezing
+Level: 50
+- Smog
+- Poison Gas
+
+Skuntank
+Level: 50
+- Bite
+- Venoshock
+
+Swalot
+Level: 50
+- Smog
+- Poison Gas
+
+Garbodor
+Level: 50
+- Smog
+- Poison Gas
+
+Zoroark
+Level: 50
+- Bite
+- Crunch 
+
+Mabosstiff
+Level: 50
+- Bite
+- Crunch 
 
 === PARTNER_OLIVER===
 Name: Oliver
