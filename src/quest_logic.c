@@ -5600,3 +5600,35 @@ void Script_Quest_HybridCulture_ShouldStartAttraction5(enum HybridCultureAttract
 {
     gSpecialVar_Result = Quest_HybridCulture_ShouldStartAttraction(ATTRACTION_SUNSET_HIKE);
 }
+
+void CulturalPurity_BufferMonAndAttack(void)
+{
+    enum ResidoTrainerIds trainer = TRAINER_SHINZO_2;
+    u32 index = 2;
+    u32 rows = TRAINERS_COUNT;
+    const struct Trainer *trainers = &gTrainers[0][0];
+
+    index = Quest_Generic_GetIndexForMonTrainer(trainer,index,trainers,rows);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,index,trainers,rows);
+
+    enum Species species = mon.species;
+    enum Move move = mon.moves[0];
+    s32 movePower = -1;
+
+    for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+    {
+        enum Move tempMove = mon.moves[moveIndex];
+        u32 tempMovePower = GetMovePower(tempMove);
+
+        if (tempMovePower <= movePower)
+            continue;
+
+        move = tempMove;
+        movePower = tempMovePower;
+    }
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainer,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+    VarSet(VAR_0x8007,species);
+    StringCopy(gStringVar1,GetSpeciesName(species));
+    StringCopy(gStringVar2,GetMoveName(move));
+}

@@ -57,6 +57,8 @@ script HybridCulture_Try_StartAttraction1
         end
     }
 
+    goto_if_eq(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON,HybridCulture_Dialogue_CheckOnShinzo)
+
     callnative(Script_Quest_HybridCulture_ShouldStartAttraction1)
     if (var(VAR_RESULT) == FALSE)
     {
@@ -129,18 +131,43 @@ script HybridCulture_Dialogue_StartAttraction1
     goto(HybridCulture_Dialogue_CheckForNextLocation)
 }
 
+script HybridCulture_Try_StartAttraction2
+{
+    goto_if_eq(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON,HybridCulture_Script_ResumeBatle)
+
+    questmenu(QUEST_MENU_CHECK_ACTIVE,QUEST_HYBRIDCULTURE)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        addvar(VAR_TEMP_2,1)
+        releaseall
+        end
+    }
+
+    callnative(Script_Quest_HybridCulture_ShouldStartAttraction2)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        addvar(VAR_TEMP_2,1)
+        releaseall
+        end
+    }
+
+    goto(HybridCulture_Dialogue_StartAttraction2)
+}
+
 script HybridCulture_Dialogue_StartAttraction2
 {
     lock
-
+    setvar(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON)
     fadescreenswapbuffers(FADE_TO_BLACK)
-    setobjectxy(LOCALID_PLAYER,1,37)
+    setobjectxy(LOCALID_PLAYER,17,8)
     turnobject(LOCALID_PLAYER,DIR_WEST)
-    TeleportCamera(1,37)
-    spawnobject(OBJ_EVENT_GFX_SHINZO,LOCALID_QUEST_HYBRIDCULTURE_SHINZO,1,36,3)
-    applymovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO,moves(face_left))
-    applymovement(LOCALID_PLAYER,moves(face_left))
-    waitmovement(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    TeleportCamera(17,8)
+    clearobjectflagfromlocalid(LOCALID_ROUTE12_SHINZO)
+    setobjectxyperm(LOCALID_ROUTE12_SHINZO,16,8)
+    addobject(LOCALID_ROUTE12_SHINZO)
+    applymovement(LOCALID_ROUTE12_SHINZO,moves(face_up))
+    applymovement(LOCALID_PLAYER,moves(face_up))
+    waitmovement(LOCALID_ROUTE12_SHINZO)
     waitmovement(LOCALID_PLAYER)
     fadescreenswapbuffers(FADE_FROM_BLACK)
 
@@ -159,9 +186,110 @@ script HybridCulture_Dialogue_StartAttraction2
     msgbox(format("It’s great that the {STR_VAR_1} were able to find somewhere they could exist safely. I wonder if Dimu has looked into -"),,SPEAKER_SHINZO)
     playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
     msgbox(format("Kaw!"))
+    waitmoncry
     closemessage
+    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_WHITE,16,5)
+    clearobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
+    addobject(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
+    playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
+    applymovement(LOCALID_ROUTE12_SQUAWKABILLY_WHITE,moves(walk_faster_down * 4, lock_facing_direction, jump_up))
+    applymovement(LOCALID_ROUTE12_SHINZO,moves(lock_facing_direction, jump_down))
+    waitmoncry
+    waitmovement(LOCALID_ROUTE12_SHINZO)
+    waitmovement(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
+    msgbox(format("Kaw!"),,,TAIL_SHOUT)
+    closemessage
+    applymovement(LOCALID_PLAYER,moves(face_down))
+    waitmovement(LOCALID_PLAYER)
+    msgbox(format("Shinzo, are you okay?!"),,SPEAKER_PLAYER,,EMOTE_SHOCK)
+    msgbox(format("They're not messing aroun -"),,SPEAKER_SHINZO)
+    playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
+    msgbox(format("Kaw!"),,,TAIL_SHOUT)
+    bufferspeciesname(STR_VAR_1,SPECIES_QUEST_HYBRID_CULTURE)
+    msgbox(format("Another {STR_VAR_1} attacked!"))
+    waitmoncry
+    closemessage
+    setobjectxyperm(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,17,5)
+    clearobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    addobject(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
+    applymovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,moves(walk_faster_down * 4, lock_facing_direction, jump_up))
+    applymovement(LOCALID_PLAYER,moves(face_up, lock_facing_direction, jump_down))
+    waitmoncry
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    goto(HybridCulture_Script_StartBattle)
+}
 
+script HybridCulture_Script_HideLeaderAndBirds
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE12_SHINZO_MON)
+    setobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
+    setobjectflagfromlocalid(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    setobjectflagfromlocalid(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+}
+
+script HybridCulture_Script_BufferSpeciesAndMove
+{
+    callnative(CulturalPurity_BufferMonAndAttack)
+}
+
+script HybridCulture_Dialogue_DuringBattle
+{
+    lock
+    callnative(CulturalPurity_BufferMonAndAttack)
+    playmoncry(VAR_0x8007,CRY_MODE_ENCOUNTER)
+    msgbox(format("{STR_VAR_1}, {STR_VAR_2}!"),,SPEAKER_SHINZO,TAIL_SHOUT)
+    waitmoncry
+    closemessage
+    release
+    end
+}
+
+script HybridCulture_Script_ResumeBatle
+{
+    lock
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    applymovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN,moves(face_down))
+    applymovement(LOCALID_PLAYER,moves(face_up))
+    setobjectxy(LOCALID_PLAYER,17,10)
+    TeleportCamera(17,10)
+    waitmovement(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    waitmovement(LOCALID_PLAYER)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    playmoncry(SPECIES_QUEST_HYBRID_CULTURE,CRY_MODE_ENCOUNTER)
+    msgbox(format("Kaw!"),,,TAIL_SHOUT)
+    waitmoncry
+    closemessage
+    goto(HybridCulture_Script_StartBattle)
+}
+
+script HybridCulture_Script_StartBattle
+{
+    setwildbattle(SPECIES_QUEST_HYBRID_CULTURE,33,ITEM_NONE)
+    dowildbattle
+    goto(HybridCulture_Dialogue_AfterBattle)
+}
+
+script HybridCulture_Dialogue_AfterBattle
+{
+    lock
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setvar(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_DEFEATED_POKEMON)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_HYBRIDCULTURE,SUB_QUEST_2)
+    removeobject(LOCALID_ROUTE12_SQUAWKABILLY_WHITE)
+    removeobject(LOCALID_ROUTE12_SQUAWKABILLY_GREEN)
+    removeobject(LOCALID_ROUTE12_SHINZO_MON)
+    applymovement(LOCALID_ROUTE12_SHINZO,moves(unlock_facing_direction,face_right))
+    applymovement(LOCALID_PLAYER,moves(face_left))
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_ROUTE12_SHINZO)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("Are you okay?"),,SPEAKER_SHINZO)
+    bufferspeciesname(STR_VAR_1,SPECIES_SQUAWKABILLY)
+    msgbox(format("Yeah! One {STR_VAR_1} isn’t a big deal."),,SPEAKER_PLAYER)
+    msgbox(format("Great! I even caught the one that attacked me. I haven’t trained with a Pokémon outside of my speciality in so long!"),,SPEAKER_SHINZO)
+    closemessage
     goto(HybridCulture_Dialogue_CheckForNextLocation)
 }
 
@@ -179,8 +307,17 @@ script HybridCulture_Dialogue_CheckForNextLocation
 script HybridCulture_Script_HideShinzoInPlayer
 {
     closemessage
-    setvar(VAR_LAST_TALKED,LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
-    fadeandremovelasttalked
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    specialvar(VAR_0x8004,GetCurrentMap)
+    if (var(VAR_0x8004) == MAP_ROUTE12)
+    {
+        removeobject(LOCALID_ROUTE12_SHINZO)
+    }
+    else
+    {
+        removeobject(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
+    }
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
 }
