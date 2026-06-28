@@ -128,45 +128,41 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
 
 static void ExpandStringsForQuestFlavor(s32 flavorText)
 {
-    static u8 *const holder[] = {gStringVar1, gStringVar2, gStringVar3 };
+    static u8 *const stringVariables[NUM_STRING_VARIABLES] = {gStringVar1, gStringVar2, gStringVar3 };
 
-    for (u32 string = 0; string < NUM_STRING_VARIABLES; string++)
+    for (u32 stringIndex = 0; stringIndex < NUM_STRING_VARIABLES; stringIndex++)
     {
-        enum QuestFlavorGetNameType type = playerAdventureText[flavorText].textComponent[string].textTargetType;
+        enum QuestFlavorGetNameType type = playerAdventureText[flavorText].textComponent[stringIndex].textTargetType;
 
         if (type == QUEST_FLAVOR_GET_NOTHING)
             continue;
 
-        u32 target = playerAdventureText[flavorText].textComponent[string].textTargetValue;
+        u32 target = playerAdventureText[flavorText].textComponent[stringIndex].textTargetValue;
 
         switch(type)
         {
             default:
                 break;
             case QUEST_FLAVOR_GET_NAME_MAP:
-                GetMapName(holder[string],Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(target),MAP_NUM(target))->regionMapSectionId,0);
+                GetMapName(stringVariables[stringIndex],Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(target),MAP_NUM(target))->regionMapSectionId,0);
                 break;
             case QUEST_FLAVOR_GET_NAME_SPECIES:
-                StringCopy(holder[string],GetSpeciesName(target));
+                StringCopy(stringVariables[stringIndex],GetSpeciesName(target));
                 break;
             case QUEST_FLAVOR_GET_NAME_ITEM:
-                StringCopy(holder[string],GetItemName(target));
+                StringCopy(stringVariables[stringIndex],GetItemName(target));
                 break;
             case QUEST_FLAVOR_GET_NAME_ITEM_PLURAL:
-                CopyItemNameHandlePlural(target,holder[string],3);
+                CopyItemNameHandlePlural(target,stringVariables[stringIndex],3);
                 break;
             case QUEST_FLAVOR_GET_NAME_ABILITY:
-                StringCopy(holder[string],GetAbilityName(target));
+                StringCopy(stringVariables[stringIndex],GetAbilityName(target));
                 break;
             case QUEST_FLAVOR_GET_NAME_MOVE:
-                StringCopy(holder[string],GetMoveName(target));
+                StringCopy(stringVariables[stringIndex],GetMoveName(target));
                 break;
         }
     }
-
-    
-
-
 }
 
 const u8 *GetQuestDesc_RabiesOutbreak(void)
