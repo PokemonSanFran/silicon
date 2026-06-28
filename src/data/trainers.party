@@ -12047,13 +12047,63 @@ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI
 Buneary
 Level: 1
 
-=== TRAINER_AFFCC47E ===
+=== TRAINER_SHINZO_2 ===
 Name: AFFCC47E
 Pic: Cooltrainer M
 AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY / AI_FLAG_SMART_SWITCHING / AI_FLAG_OMNISCIENT
 
-Buneary
-Level: 1
+Tentacruel @ Mystic Water
+Ability: Clear Body
+Level: 26  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 100 SpA / 100 Spe
+Bold Nature
+IVs: 20 HP / 0 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Chilling Water
+- Acid Spray
+- Icy Wind
+- Toxic Spikes
+
+Salazzle @ Charcoal
+Ability: Corrosion
+Level: 27 
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 100 SpA / 100 Spe
+Timid Nature
+IVs: 20 HP / 0 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Incinerate
+- Acid Spray
+- Sunny Day
+- Poison Gas
+
+Shiftry @ Miracle Seed
+Ability: Chlorophyll
+Level: 26
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 100 HP / 100 Atk
+Careful Nature
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Razor Leaf
+- Rock Tomb
+
+Skuntank @ Black Sludge
+Ability: Stench
+Level: 28 
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 100 Atk / 100 Spe
+Adamant Nature
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Sucker Punch
+- Poison Tail
+- Bite
 
 === TRAINER_CHAMPION_SHINJI ===
 Name: Shinji
