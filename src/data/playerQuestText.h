@@ -9,16 +9,16 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = DEFEATED_MAGNUS,
-        .dataAddress = VAR_PROLOGUE_STATE,
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PROLOGUE_STATE,
         .compareOp = LESS_THAN,
+        .targetValue = DEFEATED_MAGNUS,
       },
       {
-        .targetValue = FALSE,
-        .dataAddress = TRAINER_FLAGS_START + TRAINER_MAGNUS_PROLOGUE,
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = TRAINER_FLAGS_START + TRAINER_MAGNUS_PROLOGUE,
         .compareOp = EQUAL,
+        .targetValue = FALSE,
       },
     },
   },
@@ -27,10 +27,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = WALK_INTO_HALL,
-        .dataAddress = VAR_PROLOGUE_STATE,
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PROLOGUE_STATE,
         .compareOp = EQUAL,
+        .targetValue = WALK_INTO_HALL,
       },
     },
   },
@@ -39,10 +39,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ELEANOR_ANNOUNCE,
-        .dataAddress = VAR_PROLOGUE_STATE,
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PROLOGUE_STATE,
         .compareOp = EQUAL,
+        .targetValue = ELEANOR_ANNOUNCE,
       },
     },
   },
@@ -51,10 +51,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = HAS_MET_CHARLOTTE,
-        .dataAddress = VAR_PLAYER_HOME_STATE,
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PLAYER_HOME_STATE,
         .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = HAS_MET_CHARLOTTE,
       }
     }
   },
@@ -70,35 +70,141 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = CHECKED_OUT_BEDROOM,
-        .dataAddress = VAR_PLAYER_HOME_STATE,
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PLAYER_HOME_STATE,
         .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = CHECKED_OUT_BEDROOM,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Take a long walk around {STR_VAR_1}, the region's old shipping hub. "),
+    {
+      .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+      .textTargetValue = MAP_CURENO_PORT,
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_CURENO_PORT_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = POST_HOW_DO_WE_GET_HOME,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Visit Adelaide on the League Ops Floor of {STR_VAR_1}! "),
+    {
+      .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+      .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_WOW_YOURE_STRONG,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG
+        .dataAddress = FLAG_BADGE03_GET,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = POST_WOW_YOURE_STRONG,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG
+        .dataAddress = FLAG_BADGE03_GET,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym!"),
+    {
+      .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+      .textTargetValue = MAP_PERLACIA_CITY,
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_BADGE03_GET,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Why are all those Trainers on {STR_VAR_1} yelling at that one guy?"),
+    {
+      .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+      .textTargetValue = MAP_POPIDORA_PIER,
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_GROUP_OF_ASSHOLES_STATE,
+        .compareOp = PLAYER_HAS_DEFEATED_THE_TIDE,
+        .targetValue = LESS_THAN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_VISITED_POPIDORA_PIER,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_VISITED_POPIDORA_PIER,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
       }
     }
   },
   /*
   {
-    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym!"),
+    .text = COMPOUND_STRING("Try defeating as many Trainers as you can on {STR_VAR_1}! "),// Anbeh Bendpopido
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
   {
-    .text = COMPOUND_STRING("Try defeating as many Trainers as you can on {STR_VAR_1}! "),// Route 10
+    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym!"),
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -107,10 +213,22 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Try defeating as many Trainers as you can on {STR_VAR_1}! "),// Route 10
+    .textCondition = 
+    {
+      {
+        .dataType = ,
+        .dataAddress = ,
+        .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -119,94 +237,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Try defeating as many Trainers as you can on {STR_VAR_1}! "),// Anbeh Bend
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
         .dataAddress = ,
-        .dataType = ,
         .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
-    {
-      {
         .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Why are all those Trainers on {STR_VAR_1} yelling at that one guy? ra pier"),// popidora pier hide until has visited popido
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym! "),// emrys
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Visit Adelaide on the League Ops Floor of {STR_VAR_1}! "),// sharprise spire hide until has talked to her
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
-      }
-    }
-  },
-  {
-    .text = COMPOUND_STRING("Take a long walk around Cureno Port, the region's old shipping hub. "),// cureno port
-    .textCondition = 
-    {
-      {
-        .targetValue = ,
-        .dataAddress = ,
-        .dataType = ,
-        .compareOp = ,
       }
     }
   },
@@ -215,10 +249,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -227,10 +261,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -239,10 +273,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -251,10 +285,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -263,10 +297,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -275,10 +309,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -287,10 +321,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -299,10 +333,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -311,10 +345,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -323,10 +357,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -335,10 +369,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -347,10 +381,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -359,10 +393,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -371,10 +405,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -383,10 +417,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -395,10 +429,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -407,10 +441,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -419,10 +453,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -431,10 +465,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -443,10 +477,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -455,10 +489,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -467,10 +501,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -479,10 +513,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -491,10 +525,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
@@ -503,10 +537,10 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textCondition = 
     {
       {
-        .targetValue = ,
-        .dataAddress = ,
         .dataType = ,
+        .dataAddress = ,
         .compareOp = ,
+        .targetValue = ,
       }
     }
   },
