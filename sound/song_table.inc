@@ -652,6 +652,10 @@ gSongTable::
 	song mus_cave, MUSIC_PLAYER_BGM, 0
 	song mus_cave_deeper, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_biker, MUSIC_PLAYER_BGM, 0
+	song mus_chasilla_gym, MUSIC_PLAYER_BGM, 0
+	song mus_encounter_bodybuilder_triathlete_surfer_scubadiver, MUSIC_PLAYER_BGM, 0
+	song mus_encounter_designer_developer_biohackers_product_managers_founder, MUSIC_PLAYER_BGM, 0
+	song mus_encounter_heir, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
