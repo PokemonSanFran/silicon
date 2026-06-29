@@ -5532,12 +5532,12 @@ void Quest_HybridCulture_CountRemainingSubquestsTryProgressReward(void)
 
 static bool8 Quest_HybridCulture_IsSunset(void)
 {
-    return GetTime_IsBetweenHours(NIGHT_HOUR_END,MORNING_HOUR_MIDDLE);
+    return GetTime_IsBetweenHours(DAY_HOUR_END,NIGHT_HOUR_BEGIN);
 }
 
 static bool8 Quest_HybridCulture_IsSunrise(void)
 {
-    return GetTime_IsBetweenHours(DAY_HOUR_END,NIGHT_HOUR_BEGIN);
+    return GetTime_IsBetweenHours(NIGHT_HOUR_END,MORNING_HOUR_MIDDLE);
 }
 
 void Script_Quest_HybridCulture_IsSunset(void)
