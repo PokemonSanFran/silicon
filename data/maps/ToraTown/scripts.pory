@@ -5,6 +5,7 @@ mapscripts ToraTown_MapScripts {
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(WowYoureStrong_HideObject_Script)
+        call(ToraTown_Script_HandleShinzoVisibility)
     }
     MAP_SCRIPT_ON_LOAD{
        call(Quest_ArtisanBalls3_ChangeDoorMetatile_Script)
@@ -25,5 +26,17 @@ script ToraTown_Dialogue_Trash
     closemessage
     release
     end
+}
+
+script ToraTown_Script_HandleShinzoVisibility
+{
+    goto_if_quest_not_complete(QUEST_CULTURALPURITY,HybridCulture_Script_HideShinzoInToraTown)
+    goto_if_quest_complete(QUEST_HYBRIDCULTURE,HybridCulture_Script_HideShinzoInToraTown)
+    goto_if_quest_active(QUEST_HYBRIDCULTURE,HybridCulture_Script_HideShinzoInToraTown)
+}
+
+script HybridCulture_Script_HideShinzoInToraTown
+{
+    setobjectflagfromlocalid(LOCALID_TORA_SHINZO)
 }
 
