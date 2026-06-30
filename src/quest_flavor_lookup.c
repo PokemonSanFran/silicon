@@ -503,3 +503,42 @@ const u8 *GetQuestDesc_CulturalPurity(void)
 
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_HybridCulture(void)
+{
+    u32 flag = ReturnQuestState(QUEST_HYBRIDCULTURE);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HYBRIDCULTURE].desc[flag]);
+
+    if (flag != FLAG_GET_ACTIVE)
+        return gStringVar4;
+
+    if (QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE,FLAG_GET_COMPLETED,SUB_QUEST_1) == FALSE)
+    {
+        BufferSunriseTimes();
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_1),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_1))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Watch the sun rise from the center of {STR_VAR_3}! Go between {STR_VAR_1} and {STR_VAR_2}."));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE,FLAG_GET_COMPLETED,SUB_QUEST_2) == FALSE)
+    {
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_2),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_2))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Go bird watching with Shinzo on {STR_VAR_3}."));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE,FLAG_GET_COMPLETED,SUB_QUEST_3) == FALSE)
+    {
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_3),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_3))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Get lunch with Shinzo at {STR_VAR_3} Taco."));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE,FLAG_GET_COMPLETED,SUB_QUEST_4) == FALSE)
+    {
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_4),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_4))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Find the deepest room of the {STR_VAR_3}."));
+    }
+    else if (QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE,FLAG_GET_COMPLETED,SUB_QUEST_5) == FALSE)
+    {
+        BufferSunsetTimes();
+        GetMapName(gStringVar3,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_5),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_5))->regionMapSectionId,0);
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Make the hike up {STR_VAR_3} and watch the sunset. Go between {STR_VAR_1} and {STR_VAR_2}."));
+    }
+
+    return gStringVar4;
+}
