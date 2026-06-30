@@ -138,7 +138,7 @@ static const struct SubQuest sHybridCulture_Sub[QUEST_HYBRIDCULTURE_SUB_COUNT] =
             COMPOUND_STRING("Watch Sunrise"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Pioca Bridge"),
-            OBJ_EVENT_GFX_GENTLEMAN,
+            OBJ_EVENT_GFX_SHINZO,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Discovered")
             ),
@@ -146,15 +146,15 @@ static const struct SubQuest sHybridCulture_Sub[QUEST_HYBRIDCULTURE_SUB_COUNT] =
             COMPOUND_STRING("Bird Watching"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Route 12"),
-            OBJ_EVENT_GFX_GENTLEMAN,
-            QUEST_SPRITE_TYPE_OBJECT,
+            SPECIES_SQUAWKABILLY_WHITE,
+            QUEST_SPRITE_TYPE_PKMN,
             COMPOUND_STRING("Discovered")
             ),
     sub_quest(16,
             COMPOUND_STRING("Lunch"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Mermereza Taco"),
-            OBJ_EVENT_GFX_GENTLEMAN,
+            OBJ_EVENT_GFX_SHINZO,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Discovered")
             ),
@@ -162,7 +162,7 @@ static const struct SubQuest sHybridCulture_Sub[QUEST_HYBRIDCULTURE_SUB_COUNT] =
             COMPOUND_STRING("Exploration"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Chapel of Chimes"),
-            OBJ_EVENT_GFX_GENTLEMAN,
+            OBJ_EVENT_GFX_SHINZO,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Discovered")
             ),
@@ -170,7 +170,7 @@ static const struct SubQuest sHybridCulture_Sub[QUEST_HYBRIDCULTURE_SUB_COUNT] =
             COMPOUND_STRING("Hiking"),
             COMPOUND_STRING(""),
             COMPOUND_STRING("Torgeot Climb"),
-            OBJ_EVENT_GFX_GENTLEMAN,
+            OBJ_EVENT_GFX_SHINZO,
             QUEST_SPRITE_TYPE_OBJECT,
             COMPOUND_STRING("Discovered")
             ),
@@ -3670,13 +3670,140 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     {
         .name = COMPOUND_STRING("Hybrid Culture"),
         .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING(""),
+        .desc[FLAG_GET_REWARD] = COMPOUND_STRING("Shinzo is waiting to thank you outside the Tora Town Gym."),
         .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You helped Shinzo see the value of Resido culture."),
-        //.descFunc = GetQuestDesc_CulturalPurity,
+        .descFunc = GetQuestDesc_HybridCulture,
         .map = COMPOUND_STRING("Tora Town"),
         .sprite = OBJ_EVENT_GFX_SHINZO,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sHybridCulture_Sub,
-        .numSubquests = QUEST_HYBRIDCULTURE_SUB_COUNT
+        .numSubquests = QUEST_HYBRIDCULTURE_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_HYBRID_CULTURE_NOT_STARTED] =
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_START),
+                .warpId = WARP_ID_NONE,
+                .x = 15,
+                .y = 7,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_STARTED_QUEST] =
+            {
+                .name = COMPOUND_STRING("Started Quest"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_START),
+                .warpId = WARP_ID_NONE,
+                .x = 15,
+                .y = 7,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_BEFORE_SUNRISE] =
+            {
+                .name = COMPOUND_STRING("Before Sunrise"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_1),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 38,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_AFTER_SUNRISE] =
+            {
+                .name = COMPOUND_STRING("After Sunrise"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_1),
+                .warpId = WARP_ID_NONE,
+                .x = 7,
+                .y = 38,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_BEFORE_BIRDS] =
+            {
+                .name = COMPOUND_STRING("Before Birds"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_2),
+                .warpId = WARP_ID_NONE,
+                .x = 17,
+                .y = 10,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_DURING_BIRDS] =
+            {
+                .name = COMPOUND_STRING("During Birds"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_2),
+                .warpId = WARP_ID_NONE,
+                .x = 17,
+                .y = 10,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_AFTER_BIRDS] =
+            {
+                .name = COMPOUND_STRING("After Birds"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_2),
+                .warpId = WARP_ID_NONE,
+                .x = 17,
+                .y = 10,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_BEFORE_LUNCH] =
+            {
+                .name = COMPOUND_STRING("Before Lunch"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_3),
+                .warpId = WARP_ID_MERMEREZA_BAR_LEFT,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_AFTER_LUNCH] =
+            {
+                .name = COMPOUND_STRING("After Lunch"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_3),
+                .warpId = WARP_ID_MERMEREZA_BAR_LEFT,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_BEFORE_EXPLORATION] =
+            {
+                .name = COMPOUND_STRING("Before Exploration"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_4),
+                .warpId = WARP_ID_CHAPEL_END_TO_INTERIOR,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_AFTER_EXPLORATION] =
+            {
+                .name = COMPOUND_STRING("After Exploration"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_4),
+                .warpId = WARP_ID_CHAPEL_END_TO_INTERIOR,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_BEFORE_HIKING] =
+            {
+                .name = COMPOUND_STRING("Before Hiking"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_5),
+                .x = 24,
+                .y = 49,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_AFTER_HIKING] =
+            {
+                .name = COMPOUND_STRING("After Hiking"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_5),
+                .x = 24,
+                .y = 49,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_REWARD] =
+            {
+                .name = COMPOUND_STRING("Reward"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_FINISH),
+                .x = 15,
+                .y = 7,
+            },
+            [STATE_QUEST_HYBRID_CULTURE_COMPLETE] =
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_HybridCulture,
+                side_quest_map(MAP_QUEST_HYBRID_CULTURE_FINISH),
+                .x = 15,
+                .y = 7,
+            },
+        }
     },
     [QUEST_ALOHAFROMALOLA] =
     {

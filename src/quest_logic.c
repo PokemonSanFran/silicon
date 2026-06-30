@@ -5632,3 +5632,63 @@ void CulturalPurity_BufferMonAndAttack(void)
     StringCopy(gStringVar1,GetSpeciesName(species));
     StringCopy(gStringVar2,GetMoveName(move));
 }
+
+void DebugQuest_HybridCulture(u8 state)
+{
+    switch (state)
+    {
+        case STATE_QUEST_HYBRID_CULTURE_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            QuestMenu_SetupQuestState(QUEST_HYBRIDCULTURE,STATE_QUEST_CULTURAL_PURITY_COMPLETE);
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_STARTED_QUEST:
+            QuestMenu_ScriptSetActive(QUEST_HYBRIDCULTURE);
+            Buzzr_MarkTweetAsRead(TWEET_QUEST_HYBRID_CULTURE_LISTICLE_INTRO);
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_BEFORE_SUNRISE:
+            FakeRtc_ForwardTimeTo(NIGHT_HOUR_END, 0, 0);
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_AFTER_SUNRISE:
+            QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_HybridCulture_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_BEFORE_BIRDS:
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_DURING_BIRDS:
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_QUEST_HYBRID_CULTURE), FLAG_SET_SEEN);
+            VarSet(VAR_HYBRID_CULTURE,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON);
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_AFTER_BIRDS:
+            VarSet(VAR_HYBRID_CULTURE,HYBRID_CULTURE_HAS_DEFEATED_POKEMON);
+            QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            Quest_HybridCulture_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_BEFORE_LUNCH:
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_AFTER_LUNCH:
+            AddMoney(&gSaveBlock1Ptr->money,COST_QUEST_CULTURAL_PURITY_TOTAL);
+            QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            Quest_HybridCulture_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_BEFORE_EXPLORATION:
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_AFTER_EXPLORATION:
+            QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_SET_COMPLETED, SUB_QUEST_4);
+            Quest_HybridCulture_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_BEFORE_HIKING:
+            FakeRtc_ForwardTimeTo(DAY_HOUR_END, 0, 0);
+            break;
+        case STATE_QUEST_HYBRID_CULTURE_AFTER_HIKING:
+            QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_SET_COMPLETED, SUB_QUEST_5);
+            Quest_HybridCulture_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_REWARD:
+            QuestMenu_ScriptSetReward(QUEST_HYBRIDCULTURE);
+            break;
+        case STATE_QUEST_CULTURAL_PURITY_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_HYBRIDCULTURE);
+            break;
+    }
+}
