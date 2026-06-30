@@ -153,6 +153,7 @@ enum InventoryColors
 
 enum Silicon_BagSortOptions
 {
+  ITEM_SORT_DEFAULT,
   ITEM_SORT_ALPHABETICALLY,
   ITEM_SORT_BY_TYPE,
   ITEM_SORT_BY_AMOUNT, //greatest -> least

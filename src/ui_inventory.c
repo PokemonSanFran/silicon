@@ -144,7 +144,6 @@ static void RemoveInventoryItem(u8 pocketId, u8 itemIdx, u16 quanity);
 void ItemUseInBattle_UseTMHM(u8 taskId);
 void ItemUseOutOfBattle_Repel_New(u8 taskId);
 bool8 shouldShowRegisteredItems(void);
-void ForceReloadInventory(void);
 static void Task_ReturnToMainInventoryMenu(u8 taskId, u8 message);
 static void RecalculateCalculateCursorInventoryData(void);
 bool8 shouldSkipPocket(u32 pocket);
@@ -287,12 +286,12 @@ static const u16 sMenuPalette_Yellow[]           = INCBIN_U16("graphics/ui_menus
 
 static const u8 sInventoryFontColors[][3] =
 {
-    [INVENTORY_FONT_BLACK]   = {TEXT_COLOR_TRANSPARENT,  3,  TEXT_COLOR_TRANSPARENT},
-    [INVENTORY_FONT_WHITE]   = {TEXT_COLOR_TRANSPARENT,  1,  TEXT_COLOR_TRANSPARENT},
-    [INVENTORY_FONT_HELP_BAR]   = {TEXT_COLOR_TRANSPARENT,  1,  3},
+    [INVENTORY_FONT_BLACK]         = {TEXT_COLOR_TRANSPARENT,  3, TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_WHITE]         = {TEXT_COLOR_TRANSPARENT,  1, TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_HELP_BAR]      = {TEXT_COLOR_TRANSPARENT,  1, 3},
     [INVENTORY_FONT_OUTLINE_COLOR] = {TEXT_COLOR_TRANSPARENT,  2, 1},
-    [INVENTORY_FONT_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
-    [INVENTORY_FONT_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_RED]           = {TEXT_COLOR_TRANSPARENT, 14, TEXT_COLOR_TRANSPARENT},
+    [INVENTORY_FONT_BLUE]          = {TEXT_COLOR_TRANSPARENT,  4, TEXT_COLOR_TRANSPARENT},
 };
 
 //==========FUNCTIONS==========//
@@ -889,6 +888,50 @@ u16 getMaxItemsFromPocket(u8 pocket)
     return 0;
 }
 
+#define VAR_SYS_INVENTORY_SORT_MEDICINE     VAR_TEMP_1
+#define VAR_SYS_INVENTORY_SORT_POKE_BALLS   VAR_TEMP_2
+#define VAR_SYS_INVENTORY_SORT_BATTLE_ITEMS VAR_TEMP_3
+#define VAR_SYS_INVENTORY_SORT_POWERUP      VAR_TEMP_4
+#define VAR_SYS_INVENTORY_SORT_BERRIES      VAR_TEMP_5
+#define VAR_SYS_INVENTORY_SORT_OTHER        VAR_TEMP_6
+#define VAR_SYS_INVENTORY_SORT_TM_HM        VAR_TEMP_7
+#define VAR_SYS_INVENTORY_SORT_TREASURE     VAR_TEMP_8
+#define VAR_SYS_INVENTORY_SORT_Z_CRYSTALS   VAR_TEMP_9
+#define VAR_SYS_INVENTORY_SORT_MEGA_STONES  VAR_TEMP_A
+#define VAR_SYS_INVENTORY_SORT_KEY_ITEMS    VAR_TEMP_B
+
+static const u16 sInventorySortVars[POCKETS_COUNT] =
+{
+    [POCKET_MEDICINE]     = VAR_SYS_INVENTORY_SORT_MEDICINE,
+    [POCKET_POKE_BALLS]   = VAR_SYS_INVENTORY_SORT_POKE_BALLS,
+    [POCKET_BATTLE_ITEMS] = VAR_SYS_INVENTORY_SORT_BATTLE_ITEMS,
+    [POCKET_POWERUP]      = VAR_SYS_INVENTORY_SORT_POWERUP,
+    [POCKET_BERRIES]      = VAR_SYS_INVENTORY_SORT_BERRIES,
+    [POCKET_OTHER]        = VAR_SYS_INVENTORY_SORT_OTHER,
+    [POCKET_TM_HM]        = VAR_SYS_INVENTORY_SORT_TM_HM,
+    [POCKET_TREASURE]     = VAR_SYS_INVENTORY_SORT_TREASURE,
+    [POCKET_Z_CRYSTALS]   = VAR_SYS_INVENTORY_SORT_Z_CRYSTALS,
+    [POCKET_MEGA_STONES]  = VAR_SYS_INVENTORY_SORT_MEGA_STONES,
+    [POCKET_KEY_ITEMS]    = VAR_SYS_INVENTORY_SORT_KEY_ITEMS,
+};
+
+static void SetInventorySortVar(u8 pocket, u8 type){
+    u16 SaveVar = sInventorySortVars[pocket];
+    if(SaveVar != 0)
+        VarSet(SaveVar, type);
+}
+
+static u16 GetInventorySortValue(u8 pocket){
+    return VarGet(sInventorySortVars[pocket]);
+}
+
+void SortWholeInventory(void){
+    u16 i;
+
+    for(i = 0; i < NUM_INVENTORY_POCKETS - 1; i++)
+        SortItemsInInventory(i, GetInventorySortValue(i));
+}
+
 void ForceReloadInventory(void){
     u16 i, j, k, itemId, count, maxCount;
     struct BagPocket *pocket;
@@ -902,7 +945,6 @@ void ForceReloadInventory(void){
             if(itemId == ITEM_NONE)
                 break;
         }
-
         sMenuDataPtr->numItems[i] = j + 1; // +1 for the Exit Button
     }
 
@@ -940,6 +982,7 @@ void ForceReloadInventory(void){
         }
     }
     sMenuDataPtr->numItems[POCKET_FAVORITE_ITEMS]++; //Exit Button
+    SortWholeInventory();
 }
 
 // Bag sorting
@@ -982,61 +1025,65 @@ static void SortItemsInInventory(u8 pocket, u8 type)
     u16 itemAmount = getMaxItemsFromPocket(pocket);
     u8 low = 0;
 
-    if(pocket <= POCKETS_COUNT)
-        low = gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket];
+    if(type != ITEM_SORT_DEFAULT){
+        if(pocket <= POCKETS_COUNT)
+            low = gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket];
 
-    switch (pocket)
-    {
-    case POCKET_MEDICINE:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Medicine;
+        switch (pocket)
+        {
+        case POCKET_MEDICINE:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Medicine;
+            break;
+        case POCKET_POKE_BALLS:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
+            break;
+        case POCKET_BATTLE_ITEMS:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_BattleItems;
         break;
-    case POCKET_POKE_BALLS:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
+        case POCKET_POWERUP:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_PowerUp;
         break;
-    case POCKET_BATTLE_ITEMS:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_BattleItems;
-    break;
-    case POCKET_POWERUP:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_PowerUp;
-    break;
-    case POCKET_BERRIES:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Berries;
+        case POCKET_BERRIES:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Berries;
+            break;
+        case POCKET_OTHER:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Other;
         break;
-    case POCKET_OTHER:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Other;
-    break;
-    case POCKET_TM_HM:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
-    break;
-    case POCKET_TREASURE:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Treasure;
-    break;
-    case POCKET_Z_CRYSTALS:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
-    break;
-    case POCKET_MEGA_STONES:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
-    break;
-    case POCKET_KEY_ITEMS:
-        itemMem = gSaveBlock1Ptr->bag.bagPocket_KeyItems;
+        case POCKET_TM_HM:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
         break;
-    case POCKET_FAVORITE_ITEMS:
-    default:
-        return;
+        case POCKET_TREASURE:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Treasure;
+        break;
+        case POCKET_Z_CRYSTALS:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
+        break;
+        case POCKET_MEGA_STONES:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
+        break;
+        case POCKET_KEY_ITEMS:
+            itemMem = gSaveBlock1Ptr->bag.bagPocket_KeyItems;
+            break;
+        case POCKET_FAVORITE_ITEMS:
+        default:
+            return;
+        }
+
+        switch (type)
+        {
+        case ITEM_SORT_ALPHABETICALLY:
+            MergeSort(itemMem, low, itemAmount - 1, CompareItemsAlphabetically);
+            break;
+        case ITEM_SORT_BY_AMOUNT:
+            MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
+            break;
+        default:
+            MergeSort(itemMem, low, itemAmount - 1, CompareItemsByType);
+            break;
+        }
     }
 
-    switch (type)
-    {
-    case ITEM_SORT_ALPHABETICALLY:
-        MergeSort(itemMem, low, itemAmount - 1, CompareItemsAlphabetically);
-        break;
-    case ITEM_SORT_BY_AMOUNT:
-        MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
-        break;
-    default:
-        MergeSort(itemMem, low, itemAmount - 1, CompareItemsByType);
-        break;
-    }
+    SetInventorySortVar(pocket, type);
 }
 
 static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*))
@@ -2694,17 +2741,18 @@ static const u8 *const sInventory_TossConfirm[] =
 
 static const u8 *const sInventory_OptionStrings[] =
 {
-    [INVENTORY_ITEM_OPTION_USE]      = COMPOUND_STRING("Use"),
-    [INVENTORY_ITEM_OPTION_GIVE]     = COMPOUND_STRING("Give"),
-    [INVENTORY_ITEM_OPTION_TOSS]     = COMPOUND_STRING("Toss"),
-    [INVENTORY_ITEM_OPTION_FAVORITE] = COMPOUND_STRING("Favorite"),
-    [INVENTORY_ITEM_OPTION_REGISTER] = COMPOUND_STRING("Register"),
-    [INVENTORY_ITEM_OPTION_CANCEL]   = COMPOUND_STRING("Cancel"),
-    [INVENTORY_ITEM_OPTION_UNFAVORITE]   = COMPOUND_STRING("Unfavorite"),
+    [INVENTORY_ITEM_OPTION_USE]        = COMPOUND_STRING("Use"),
+    [INVENTORY_ITEM_OPTION_GIVE]       = COMPOUND_STRING("Give"),
+    [INVENTORY_ITEM_OPTION_TOSS]       = COMPOUND_STRING("Toss"),
+    [INVENTORY_ITEM_OPTION_FAVORITE]   = COMPOUND_STRING("Favorite"),
+    [INVENTORY_ITEM_OPTION_REGISTER]   = COMPOUND_STRING("Register"),
+    [INVENTORY_ITEM_OPTION_CANCEL]     = COMPOUND_STRING("Cancel"),
+    [INVENTORY_ITEM_OPTION_UNFAVORITE] = COMPOUND_STRING("Unfavorite"),
 };
 
 static const u8 *const sSortTypeStrings[] =
 {
+    [ITEM_SORT_DEFAULT]        = COMPOUND_STRING("Default"),
     [ITEM_SORT_ALPHABETICALLY] = COMPOUND_STRING("Name"),
     [ITEM_SORT_BY_TYPE]        = COMPOUND_STRING("Type"),
     [ITEM_SORT_BY_AMOUNT]      = COMPOUND_STRING("Amount"),
@@ -2850,11 +2898,13 @@ static void Inventory_PrintHeaderCursor(enum Pocket pocketId)
     {
         if(!shouldSkipPocket(pocketIndex)){
             const u8* pixels = ((pocketId == pocketIndex) ? sInventoryPocketIcon1_Gfx : sInventoryPocketIcon0_Gfx);
-            BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, (const u8*) pixels, (x + (currentDrawnPocket * TILE_WIDTH)), 4, TILE_WIDTH, TILE_WIDTH);
+            BlitBitmapToWindow(INVENTORY_WINDOW_HEADER, (const u8*) pixels, (x + (6 * TILE_WIDTH) + (currentDrawnPocket * TILE_WIDTH)), 4, TILE_WIDTH, TILE_WIDTH);
             currentDrawnPocket++;
         }
     }
 }
+
+static const u8 sInventory_Pocket_Name[] = _("{STR_VAR_1} ({STR_VAR_2})");
 
 static void Inventory_PrintHeader(void)
 {
@@ -2865,7 +2915,10 @@ static void Inventory_PrintHeader(void)
     u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
 
     FillWindowPixelBuffer(INVENTORY_WINDOW_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-    AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, sInventory_TitleStrings[pocketId].string);
+    StringCopy(gStringVar1, sInventory_TitleStrings[pocketId].string);
+    StringCopy(gStringVar2, sSortTypeStrings[GetInventorySortValue(pocketId)]);
+    StringExpandPlaceholders(gStringVar4, sInventory_Pocket_Name);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_HEADER, font, x, y, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_WHITE], TEXT_SKIP_DRAW, gStringVar4);
     Inventory_PrintHeaderCursor(pocketId);
 
     PutWindowTilemap(INVENTORY_WINDOW_HEADER);
@@ -2985,7 +3038,7 @@ static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenLis
             if (moveType != TYPE_NONE && moveType != TYPE_STELLAR)
                 BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
 
-        FillPalette(gTypesInfo[moveType].siliconRGBValue,INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
+        FillPalette(gTypesInfo[moveType].siliconRGBValue, INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
     }
 }
 
