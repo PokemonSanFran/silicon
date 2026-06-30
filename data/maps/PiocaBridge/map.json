@@ -121,6 +121,258 @@
       "var": "VAR_GOLDENGATEBRIDGE_STATE",
       "var_value": "1",
       "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
     }
   ],
   "bg_events": []

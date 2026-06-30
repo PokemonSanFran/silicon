@@ -136,6 +136,15 @@
       "var": "VAR_TIME_TRAVEL_STATE",
       "var_value": "0",
       "script": "OkayLetsFixit_ReachTop_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 46,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Dialogue_StartAttraction5"
     }
   ],
   "bg_events": []
