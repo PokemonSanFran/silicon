@@ -191,11 +191,12 @@
       "dest_warp_id": "1"
     },
     {
+      "warp_id": "WARP_ID_OROLAND_TO_CHAPEL",
       "x": 1,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CHAPEL_TO_OROLAND"
     }
   ],
   "coord_events": [],
