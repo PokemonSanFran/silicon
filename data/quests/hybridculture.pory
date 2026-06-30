@@ -618,15 +618,15 @@ script HybridCulture_Script_GiveReward
         case MAP_TORA_TOWN:
             call(HybridCulture_Script_MovementGiveItemToraTown)
         case MAP_ROUTE12:
-                call(HybridCulture_Script_MovementGiveItemRoute12)
+            call(HybridCulture_Script_MovementGiveItemRoute12)
         default:
-                    call(HybridCulture_Script_MovementGiveItem)
+            call(HybridCulture_Script_MovementGiveItem)
     }
     giveitem(ITEM_QUEST_HYBRID_CULTURE_REWARD,1)
     buffermapname(STR_VAR_1,MAP_TORA_TOWN)
     msgbox(format("I’m feeling less insecure about my strength now. If you come to the {STR_VAR_1} Gym, I’d love to battle you at full strength!"),,SPEAKER_SHINZO)
     closemessage
-    completequest(QUEST_CULTURALPURITY)
+    completequest(QUEST_HYBRIDCULTURE)
     switch(var(VAR_0x8004))
     {
         case MAP_TORA_TOWN:
