@@ -5701,16 +5701,16 @@ void AndWeMarchOn_LoadTalaMon0(void)
 {
     u32 trainerId = TRAINER_TALA;
     u32 index = 0;
-    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINER_COUNT);
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
 
-    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINER_COUNT);
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
 }
 
 void AndWeMarchOn_LoadTalaMon1(void)
 {
     u32 trainerId = TRAINER_TALA;
     u32 index = 1;
-    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINER_COUNT);
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
 
-    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINER_COUNT);
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
 }
