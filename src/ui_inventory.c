@@ -3568,12 +3568,20 @@ static void Inventory_PrintTossMenu(void)
 
 static void Inventory_CreateTossMenu(u8 taskId)
 {
-    sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_HOW_MANY;
-    Inventory_PrintFooter();
-    Inventory_PrintTossMenu();
-    PlaySE(SE_WIN_OPEN);
-    DestroyTask(taskId);
-    CreateTask(Task_Inventory_HandleTossInput,0);
+    if(CountTotalItemQuantityInBag(Inventory_GetItemIdCurrentlySelected()) == 1){
+        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_CONFIRMATION;
+        Inventory_PrintFooter();
+        PlaySE(SE_WIN_OPEN);
+        Inventory_OpenMenu(taskId);
+    }
+    else{
+        sMenuDataPtr->currentSelectMode = INVENTORY_MODE_TOSS_HOW_MANY;
+        Inventory_PrintFooter();
+        Inventory_PrintTossMenu();
+        PlaySE(SE_WIN_OPEN);
+        DestroyTask(taskId);
+        CreateTask(Task_Inventory_HandleTossInput, 0);
+    }
 }
 
 static void Inventory_ChangeTossAmount(s32 direction)
@@ -3581,11 +3589,10 @@ static void Inventory_ChangeTossAmount(s32 direction)
     u32 ownedItems = CountTotalItemQuantityInBag(Inventory_GetItemIdCurrentlySelected());
     s32 numItems = (sMenuDataPtr->numItemsToToss + direction);
 
-    if (numItems < 0)
+    if (numItems < 1)
         numItems = ownedItems;
-
-    if (numItems >= ownedItems)
-        numItems = 0;
+    else if (numItems > ownedItems)
+        numItems = 1;
 
     sMenuDataPtr->numItemsToToss = numItems;
 
