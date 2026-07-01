@@ -1076,10 +1076,10 @@ static void SortItemsInInventory(u8 pocket, u8 type)
             MergeSort(itemMem, low, itemAmount - 1, CompareItemsAlphabetically);
             break;
         case ITEM_SORT_BY_AMOUNT:
-            if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
-                MergeSort(itemMem, low, itemAmount - 1, CompareItemsById);
-            else
-                MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
+            MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
+            break;
+        case ITEM_SORT_BY_NUMBER:
+            MergeSort(itemMem, low, itemAmount - 1, CompareItemsById);
             break;
         default:
             MergeSort(itemMem, low, itemAmount - 1, CompareItemsByType);
@@ -1226,7 +1226,11 @@ static s8 CompareItemsById(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot
     u32 id1 = itemSlot1->itemId;
     u32 id2 = itemSlot2->itemId;
 
-    if (id1 < id2)
+    if (itemSlot1->itemId == ITEM_NONE)
+        return 1;
+    else if (itemSlot2->itemId == ITEM_NONE)
+        return -1;
+    else if (id1 < id2)
         return -1;
     else if (id1 > id2)
         return 1;
@@ -2760,6 +2764,7 @@ static const u8 *const sSortTypeStrings[] =
     [ITEM_SORT_ALPHABETICALLY] = COMPOUND_STRING("Name"),
     [ITEM_SORT_BY_TYPE]        = COMPOUND_STRING("Type"),
     [ITEM_SORT_BY_AMOUNT]      = COMPOUND_STRING("Amount"),
+    [ITEM_SORT_BY_NUMBER]      = COMPOUND_STRING("Number"),
     [ITEM_SORT_CANCEL]         = COMPOUND_STRING("Cancel"),
 };
 
@@ -2794,7 +2799,7 @@ static u8 sSortTypePerPocket[POCKETS_COUNT][NUM_SORT_OPTIONS] =
     [POCKET_TM_HM] = { 
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
-        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_BY_NUMBER,
         ITEM_SORT_CANCEL
     },
     [POCKET_TREASURE] = { 
