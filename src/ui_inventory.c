@@ -150,6 +150,8 @@ bool8 shouldSkipPocket(u32 pocket);
 static bool8 ShouldHideSprite(u8 spriteID);
 static void UpdateDisplayMode(void);
 static void UpdateMonIconsPalettes(void);
+static void Inventory_DrawMoveTypeFrames(void);
+static void UpdateInventoryMoveTypeIDs(void);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -421,6 +423,7 @@ static bool8 Menu_DoGfxSetup(void)
         CreateUpArrowSprite();
         CreateDownArrowSprite();
         Inventory_PartyDisplay();
+        Inventory_DrawMoveTypeFrames();
         LoadPalette(sMenuInterfacePalette, 16, 32);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
@@ -781,7 +784,7 @@ static void Inventory_PartyDisplay(void)
         bool32 firstColumn = ((partyIndex % 2) == 0);
 
         ShowSpeciesIcon(partyIndex,x,y);
-        Inventory_AddMonPlatforms(firstColumn,partyIndex,x,y);
+        //Inventory_AddMonPlatforms(firstColumn,partyIndex,x,y);
 
         if (firstColumn)
         {
@@ -796,10 +799,16 @@ static void Inventory_PartyDisplay(void)
                 y -= 2;
         }
     }
-    Inventory_AddAllItemPlatforms();
-    CreateAllRegisteredItemIcon();
+    //Inventory_AddAllItemPlatforms();
+    //CreateAllRegisteredItemIcon();
     UpdateMonIconsPalettes();
 }
+
+#define TAG_SUMMARY_TYPE_1 0x1000
+#define TAG_SUMMARY_TYPE_2 TAG_SUMMARY_TYPE_1 + 1
+
+static const u16 sMenuInterfacePalette_Moves_1[] = INCBIN_U16("graphics/ui_menus/inventory/types/1.gbapal");
+static const u16 sMenuInterfacePalette_Moves_2[] = INCBIN_U16("graphics/ui_menus/inventory/types/2.gbapal");
 
 static void Menu_LoadGraphics(void)
 {
@@ -819,6 +828,9 @@ static void Menu_LoadGraphics(void)
     Inventory_LoadBackgroundPalette();
     LoadSpriteSheets(sInventory_SpriteGraphics.sheets);
     LoadSpritePalette(&sInventory_SpriteGraphics.palette);
+
+    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_1, TAG_SUMMARY_TYPE_1);
+    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_2, TAG_SUMMARY_TYPE_2);
 }
 
 static void Menu_InitWindows(void)
@@ -1254,6 +1266,8 @@ static void TrySortBag(void)
 
 #define HALF_SHOWN 3
 
+static void SpriteCallback_Inventory_TypeRows(struct Sprite *sprite);
+
 //Arrows
 static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
 {
@@ -1591,6 +1605,60 @@ u8 UpdateMonIconFrameCropped(struct Sprite *sprite)
     return result;
 }
 
+static void DestroyExtraPartySprites(void)
+{
+    static const u8 spriteBases[] =
+    {
+        INVENTORY_SPRITE_MON_HP_BAR_1,
+        INVENTORY_SPRITE_MON_STATUS_1,
+        INVENTORY_SPRITE_MON_EXP_BAR_1,
+        INVENTORY_SPRITE_MON_ITEM_1,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(spriteBases); i++)
+    {
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            u8 *spriteId = &sMenuDataPtr->spriteIDs[spriteBases[i] + slot];
+
+            if (*spriteId == SPRITE_NONE)
+                continue;
+
+            DestroySprite(&gSprites[*spriteId]);
+            *spriteId = SPRITE_NONE;
+        }
+    }
+}
+
+static void RecreateExtraPartySprites(u8 slot){
+    struct Pokemon *mon = &gPlayerParty[slot];
+    u32 species = ReturnTransformationIfConditionMet(mon);
+    u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
+    u32 percent = GetHPEggCyclePercent(slot);
+    u32 expPercent = GetExpPercent(slot);
+    u16 level = GetMonData(mon, MON_DATA_LEVEL);
+
+    u32 x = 16;
+    u32 y = 32;
+    bool32 firstColumn = ((slot % 2) == 0);
+
+    if(firstColumn){
+        x += 32;
+    }
+    else{
+        x = 16;
+        y += (26 * (slot / 3));
+
+        if (slot > 3)
+            y -= 2;
+    }
+
+    Inventory_CreateMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
+    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
+}
+
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
@@ -1634,10 +1702,13 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
     SetOamMatrixRotationScaling(gSprites[SpriteID].oam.matrixNum, -512, 512, 0);
 
     gSprites[SpriteID].invisible = FALSE;
-    Inventory_CreateMonBar(slot, species, status, percent, x, y);
-    Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
-    Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
-    Inventory_CreateHeldItemSprite(slot, mon, x, y);
+    //Inventory_CreateMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
+    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
+
+    //if(gSaveBlock3Ptr->InventoryData.pocketNum != POCKET_TM_HM)
+    //    RecreateExtraPartySprites(slot);
 
     return SpriteID;
 }
@@ -3103,6 +3174,20 @@ static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenLis
     }
     else
     {
+        x = 160;
+
+        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemScreenListIndex)
+            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Cursor_Gfx, x, y, 16, 16);
+
+        u32 moveType = (itemIndex == (numItems - 1)) ? TYPE_NORMAL : gMovesInfo[GetItemSecondaryId(itemId)].type;
+        if((gSaveBlock3Ptr->InventoryData.yFirstItem + itemScreenListIndex) != (numItems - 1))
+            if (moveType != TYPE_NONE && moveType != TYPE_STELLAR)
+                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
+
+        //FillPalette(gTypesInfo[moveType].siliconRGBValue, INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
+    }
+    /*else
+    {
         const struct TMHMGfxTable* gfx = &sTMHMGraphics[itemScreenListIndex];
 
         BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->left, x, y, 16, 16);
@@ -3123,7 +3208,7 @@ static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenLis
                 BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
 
         FillPalette(gTypesInfo[moveType].siliconRGBValue, INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
-    }
+    }*/
 }
 
 static const u8* sRegisteredIndicator[] =
@@ -3719,6 +3804,7 @@ static void Inventory_PrintToAllWindows(void)
     Inventory_PrintItemList();
     Inventory_PrintDesc();
     Inventory_PrintFooter();
+    UpdateInventoryMoveTypeIDs();
 }
 
 static void Task_MenuWaitFadeIn(u8 taskId)
@@ -4644,6 +4730,13 @@ static void Task_MenuMain(u8 taskId)
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
+        /*if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+            DestroyExtraPartySprites();
+        else{
+            for(u8 slot = 0; slot < PARTY_SIZE; slot++)
+                RecreateExtraPartySprites(slot);
+        }*/
+
         PlaySE(SE_SELECT);
         UpdateDisplayMode();
         Inventory_PrintToAllWindows();
@@ -4664,6 +4757,13 @@ static void Task_MenuMain(u8 taskId)
 
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
+
+        /*if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+            DestroyExtraPartySprites();
+        else{
+            for(u8 slot = 0; slot < PARTY_SIZE; slot++)
+                RecreateExtraPartySprites(slot);
+        }*/
 
         PlaySE(SE_SELECT);
         UpdateDisplayMode();
@@ -4970,4 +5070,156 @@ static void Inventory_TurnOff(u8 taskId)
     PlaySE(SE_PC_OFF);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_MenuTurnOff;
+}
+
+//Palette Stuff
+const u8 sInventory_MoveBarGfx[] = INCBIN_U8("graphics/ui_menus/inventory/types/types.4bpp");
+const u8 sInventory_MoveTypeGfx[] = INCBIN_U8("graphics/ui_menus/inventory/types/move_type_icons.4bpp");
+
+static const struct Subsprite sInventorySprite_128x16Subsprites[] =
+{
+    {
+        .x = 0, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = 32, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 8,
+        .priority = 1
+    },
+    {
+        .x = 64, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 16,
+        .priority = 1
+    },
+    {
+        .x = 96, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 16,
+        .priority = 1
+    },
+    {
+        .x = 128, .y = 0,
+        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .tileOffset = 24,
+        .priority = 1
+    },
+};
+
+static u32 InventorySprite_GetTypePaletteTag(enum Type type)
+{
+    return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
+}
+
+const struct SpriteTemplate sInventory_MoveBarSpriteTemplate =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = TAG_NONE,
+    .oam = &(const struct OamData){
+        .shape = SPRITE_SHAPE(8x8), .size = SPRITE_SIZE(8x8),
+        .priority = 2,
+    },
+    .anims = (const union AnimCmd *const[]){
+        #define TYPE_ANIM(type) [TYPE_ ##type] = (const union AnimCmd[]){ ANIMCMD_FRAME(TYPE_ ##type, 1), ANIMCMD_END }
+        TYPE_ANIM(NONE),
+        TYPE_ANIM(NORMAL),
+        TYPE_ANIM(FIGHTING),
+        TYPE_ANIM(FLYING),
+        TYPE_ANIM(POISON),
+        TYPE_ANIM(GROUND),
+        TYPE_ANIM(ROCK),
+        TYPE_ANIM(BUG),
+        TYPE_ANIM(GHOST),
+        TYPE_ANIM(STEEL),
+        TYPE_ANIM(MYSTERY),
+        TYPE_ANIM(FIRE),
+        TYPE_ANIM(WATER),
+        TYPE_ANIM(GRASS),
+        TYPE_ANIM(ELECTRIC),
+        TYPE_ANIM(PSYCHIC),
+        TYPE_ANIM(ICE),
+        TYPE_ANIM(DRAGON),
+        TYPE_ANIM(DARK),
+        TYPE_ANIM(FAIRY),
+        TYPE_ANIM(STELLAR),
+        #undef TYPE_ANIM
+    },
+    .images = &(const struct SpriteFrameImage){
+        .data = sInventory_MoveBarGfx,
+        .size = (128 * 16) / 2,
+        .relativeFrames = TRUE
+    },
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallback_Inventory_TypeRows
+};
+
+const struct SubspriteTable sInventory_128x16SubspriteTable[] =
+{
+    {
+        .subspriteCount = ARRAY_COUNT(sInventorySprite_128x16Subsprites),
+        .subsprites = sInventorySprite_128x16Subsprites
+    },
+    { 0, NULL }
+};
+
+static u8 InventorySprite_GetDynamicSpriteId(u8 id)
+{
+    return sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + id];
+}
+
+static void UpdateInventoryMoveTypeIDs(void){
+    u8 pocketNum = gSaveBlock3Ptr->InventoryData.pocketNum;
+    struct BagPocket *pocket = &gBagPockets[pocketNum];
+    u8 firstItemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem;
+    u8 numItemsInPocket = sMenuDataPtr->numItems[pocketNum];
+
+    for(u8 idx = 0; idx < INVENTORY_MAX_ITEMS_SHOWN; idx++){
+        if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM){
+            u16 itemId = pocket->itemSlots[firstItemIdx + idx].itemId;
+            u16 moveId = GetItemSecondaryId(itemId);
+            u32 moveType = (firstItemIdx + idx == (numItemsInPocket - 1)) ? TYPE_NONE : gMovesInfo[moveId].type;
+
+            gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = moveType;
+            DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %S Move: %S", idx, gTypesInfo[moveType].name, GetMoveName(moveId));
+        }
+        else
+            gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = TYPE_NONE;
+    }
+}
+
+static void SpriteCallback_Inventory_TypeRows(struct Sprite *sprite)
+{
+    u8 moveType = sprite->data[0];
+
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(InventorySprite_GetTypePaletteTag(moveType));
+    StartSpriteAnim(sprite, moveType);
+
+    if(gSaveBlock3Ptr->InventoryData.pocketNum != POCKET_TM_HM || moveType == TYPE_NONE)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+}
+
+static void InventorySprite_MonMove(u8 idx, s32 x, s32 y)
+{
+    u32 spriteId = CreateSprite(&sInventory_MoveBarSpriteTemplate, x, y, 2);
+    
+    gSprites[spriteId].data[1] = idx;
+    SetSubspriteTables(&gSprites[spriteId], sInventory_128x16SubspriteTable);
+    sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx] = spriteId;
+}
+
+#define INVENTORY_MOVES_GENERAL_SPRITE_BAR_X         (80)
+#define INVENTORY_MOVES_GENERAL_SPRITE_BAR_Y         (16)
+
+static void Inventory_DrawMoveTypeFrames(void)
+{
+    for (u32 i = 0; i < INVENTORY_MAX_ITEMS_SHOWN; i++)
+        InventorySprite_MonMove(i, INVENTORY_MOVES_GENERAL_SPRITE_BAR_X, INVENTORY_MOVES_GENERAL_SPRITE_BAR_Y + (16 * i));
+
+    UpdateInventoryMoveTypeIDs();
 }
