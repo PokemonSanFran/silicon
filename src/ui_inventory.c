@@ -159,6 +159,7 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
 static s8 CompareItemsByMost(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsByType(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
 static s8 CompareItemsById(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
+static u8 GetCurrentSortWindowIndex(u8 index);
 
 //Sprites
 static void CreateUpArrowSprite(void);
@@ -1075,7 +1076,10 @@ static void SortItemsInInventory(u8 pocket, u8 type)
             MergeSort(itemMem, low, itemAmount - 1, CompareItemsAlphabetically);
             break;
         case ITEM_SORT_BY_AMOUNT:
-            MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
+            if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
+                MergeSort(itemMem, low, itemAmount - 1, CompareItemsById);
+            else
+                MergeSort(itemMem, low, itemAmount - 1, CompareItemsByMost);
             break;
         default:
             MergeSort(itemMem, low, itemAmount - 1, CompareItemsByType);
@@ -1239,7 +1243,7 @@ static void TrySortBag(void)
     if (numItems <= 2)
         PlaySE(SE_FAILURE);
     else{
-        SortItemsInInventory(pocket, sMenuDataPtr->itemIdxPickMode);
+        SortItemsInInventory(pocket, GetCurrentSortWindowIndex(sMenuDataPtr->itemIdxPickMode));
         PlaySE(SE_SELECT);
     }
 }
@@ -2759,6 +2763,62 @@ static const u8 *const sSortTypeStrings[] =
     [ITEM_SORT_CANCEL]         = COMPOUND_STRING("Cancel"),
 };
 
+#define SORT_TYPE_PER_POCKET_DEFAULT ITEM_SORT_DEFAULT, ITEM_SORT_ALPHABETICALLY, ITEM_SORT_BY_TYPE, ITEM_SORT_BY_AMOUNT, ITEM_SORT_CANCEL
+
+static u8 sSortTypePerPocket[POCKETS_COUNT][NUM_SORT_OPTIONS] =
+{
+    [POCKET_MEDICINE] = { 
+        SORT_TYPE_PER_POCKET_DEFAULT,
+    },
+    [POCKET_POKE_BALLS] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_CANCEL
+    },
+    [POCKET_BATTLE_ITEMS] = { 
+        SORT_TYPE_PER_POCKET_DEFAULT,
+    },
+    [POCKET_POWERUP] = { 
+        SORT_TYPE_PER_POCKET_DEFAULT,
+    },
+    [POCKET_BERRIES] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_CANCEL
+    },
+    [POCKET_OTHER] = { 
+        SORT_TYPE_PER_POCKET_DEFAULT,
+    },
+    [POCKET_TM_HM] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_CANCEL
+    },
+    [POCKET_TREASURE] = { 
+        SORT_TYPE_PER_POCKET_DEFAULT,
+    },
+    [POCKET_Z_CRYSTALS] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_CANCEL
+    },
+    [POCKET_MEGA_STONES] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_BY_AMOUNT,
+        ITEM_SORT_CANCEL
+    },
+    [POCKET_KEY_ITEMS] = { 
+        ITEM_SORT_DEFAULT,
+        ITEM_SORT_ALPHABETICALLY,
+        ITEM_SORT_CANCEL
+    },
+};
+
 static u8 getNumInventoryOptions(u16 item){
     u8 i;
 
@@ -2769,6 +2829,25 @@ static u8 getNumInventoryOptions(u16 item){
 
     return NUM_INVENTORY_ITEM_OPTIONS;
 }
+
+static u8 GetCurrentSortWindowIndex(u8 index){
+    u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
+
+    return sSortTypePerPocket[pocket][index];
+}
+
+static u8 GetCurrentSortWindowNumOptions(void){
+    u8 i;
+    u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
+
+    for(i = 0; i < NUM_SORT_OPTIONS; i++){
+        if(sSortTypePerPocket[gSaveBlock3Ptr->InventoryData.pocketNum][i] == ITEM_SORT_CANCEL)
+            return i + 1;
+    }
+
+    return NUM_SORT_OPTIONS;
+}
+
 static u8 getSelectedItemNumOptions(void)
 {
     switch (sMenuDataPtr->currentSelectMode)
@@ -2776,7 +2855,7 @@ static u8 getSelectedItemNumOptions(void)
         case INVENTORY_MODE_TOSS_CONFIRMATION:
             return NUM_TOSS_CONFIRMATION_OPTIONS;
         case INVENTORY_MODE_REORDER:
-            return NUM_SORT_OPTIONS;
+            return GetCurrentSortWindowNumOptions();
         default:
             return getNumInventoryOptions(Inventory_GetItemIdCurrentlySelected());
     }
@@ -3273,7 +3352,6 @@ static void Inventory_PopulateMenuItems(void)
 
     for (u32 i = 0; i < sInventoryListMenu->menuItemsCount; i++)
     {
-
         if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_TOSS_CONFIRMATION)
         {
             menuIndex = i;
@@ -3282,7 +3360,7 @@ static void Inventory_PopulateMenuItems(void)
         }
         else if (sMenuDataPtr->currentSelectMode == INVENTORY_MODE_REORDER)
         {
-            menuIndex = i;
+            menuIndex = GetCurrentSortWindowIndex(i);
             sInventoryListMenu->menuItems[i].text = sSortTypeStrings[menuIndex];
             sInventoryListMenu->calcWidth = 6;
         }
@@ -3580,6 +3658,9 @@ static void Inventory_PrintFooter(void)
             break;
         case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
             StringCopy(gStringVar4, sText_Help_Bar_Cant_Move_Favorite);
+            break;
+        case INVENTORY_MESSAGE_CANT_REORDER:
+            StringCopy(gStringVar4, COMPOUND_STRING("You can't move items without default sort type! {A_BUTTON} Confirm"));
             break;
         case INVENTORY_MESSAGE_ACCESS_FAVORITES:
             {
@@ -4460,6 +4541,7 @@ static void Task_MenuMain(u8 taskId)
                 case INVENTORY_MODE_REGISTER:
                     break;
                     //Generic Messages
+                case INVENTORY_MESSAGE_CANT_REORDER:
                 case INVENTORY_MESSAGE_CANT_MOVE_FAVORITE:
                 case INVENTORY_MESSAGE_CANT_USE_ITEM:
                 case INVENTORY_MESSAGE_CANT_TOSS_ITEM:
@@ -4654,7 +4736,12 @@ static void Task_MenuMain(u8 taskId)
 
     if (JOY_NEW(SELECT_BUTTON))
     {
-        Inventory_EnterMoveMode(taskId);
+        if(GetInventorySortValue(gSaveBlock3Ptr->InventoryData.pocketNum) != ITEM_SORT_DEFAULT){
+            sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_REORDER;
+            Inventory_PrintToAllWindows();
+        }
+        else
+            Inventory_EnterMoveMode(taskId);
     }
 }
 
