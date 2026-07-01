@@ -1,37 +1,24 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const BAIYA = 1
-const FLAG_HIDE_BAIYA = FLAG_TEMP_1
-
-script NewAssholeAppears_HideBaiya_Script{
-    if (var(VAR_ROUTE10_STATE) > SAVED_BEFORE_BAIYA_ROUTE10){
-        setflag(FLAG_HIDE_BAIYA)
-    }
-    return
+script NewAssholeAppears_Script_HideBaiya
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE10_BAIYA)
 }
 
 script NewAssholeAppears_WalkToPlayer_Script {
     lockall
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-    applymovement(BAIYA,Common_Movement_ExclamationMark)
     playse(SE_PIN)
+    applymovement(LOCALID_ROUTE10_BAIYA,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_ROUTE10_BAIYA)
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
-    waitmovement(0)
-
-    switch(var(VAR_TEMP_0)){
-        case 0: applymovement(BAIYA, moves(walk_left * 4, step_end))
-        case 1: applymovement(BAIYA, moves(walk_left * 3, step_end))
-        case 2: applymovement(BAIYA, moves(walk_left * 2, step_end))
-        case 3: applymovement(BAIYA, moves(walk_left * 1, step_end))
-        case 4: applymovement(BAIYA, moves(step_end))
-    }
-    waitmovement(0)
-
-    switch(var(VAR_TEMP_1)){
-        case 2: applymovement(BAIYA, moves(walk_up, step_end))
-        case 6: applymovement(BAIYA, moves(walk_down, step_end))
-    }
-    waitmovement(0)
+    call(NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition)
     goto(BaiyaAlpha_Event_Script)
+}
+
+script NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition
+{
+    moveobjecttocoords(LOCALID_PLAYER,8,4,DIR_EAST)
+    moveobjecttocoords(LOCALID_ROUTE10_BAIYA,9,4,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_ROUTE10_BAIYA)
 }
 
 script BaiyaAlpha_Event_Script{
@@ -71,7 +58,7 @@ script NewAssholeAppears_BadgeJudge_Dialogue {
 
 script NewAssholeAppears_StartBattle_Script{
     lockall
-    faceplayer
+    call(NewAssholeAppears_Script_MovePlayerAndBaiyaIntoPosition)
     msgbox(format("Go mind your business in your own region."),,SPEAKER_BAIYA)
     closemessage
     trainerbattle_no_intro(TRAINER_BAIYA_NEWASSHOLEAPPEARS,format("...you're tough."))
@@ -96,16 +83,12 @@ script NewAssholeAppears_PostBattle_Script {
 }
 
 script NewAssholeAppears_BaiyaExit_Script{
-    getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-
-    switch(var(VAR_TEMP_1)){
-        case 2: applymovement(BAIYA, moves(walk_down * 8, step_end))
-        case 6: applymovement(BAIYA, moves(walk_up * 8, step_end))
-    }
+    moveobjecttocoords(LOCALID_ROUTE10_BAIYA,9,10,DIR_SOUTH)
+    delay(24)
     endcutscene
 	fadescreenswapbuffers(FADE_TO_BLACK)
     fadedefaultbgm
-    removeobject(BAIYA)
+    removeobject(LOCALID_ROUTE10_BAIYA)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
     addvar(VAR_STORYLINE_STATE,1)
     setvar(VAR_TEMP_0,0)
