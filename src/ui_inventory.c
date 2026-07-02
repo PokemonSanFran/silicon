@@ -49,6 +49,8 @@
 #include "ui_main_menu.h"
 #include "ui_start_menu.h"
 
+#define FORCE_VISIBILITY FALSE
+
 //==========DEFINES==========//
 struct MenuResources
 {
@@ -122,11 +124,13 @@ static void Inventory_LoadBackgroundPalette(void);
 static void removeTransparentBackground(void);
 static void Inventory_PartyDisplay(void);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
+
 static void Inventory_CreateHeldItemSprite(u32 partyIndex, struct Pokemon *mon, u32 x, u32 y);
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
 static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite);
+
 static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
@@ -423,7 +427,7 @@ static bool8 Menu_DoGfxSetup(void)
         CreateUpArrowSprite();
         CreateDownArrowSprite();
         Inventory_PartyDisplay();
-        Inventory_DrawMoveTypeFrames();
+        //Inventory_DrawMoveTypeFrames();
         LoadPalette(sMenuInterfacePalette, 16, 32);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
@@ -784,7 +788,7 @@ static void Inventory_PartyDisplay(void)
         bool32 firstColumn = ((partyIndex % 2) == 0);
 
         ShowSpeciesIcon(partyIndex,x,y);
-        //Inventory_AddMonPlatforms(firstColumn,partyIndex,x,y);
+        Inventory_AddMonPlatforms(firstColumn,partyIndex,x,y);
 
         if (firstColumn)
         {
@@ -799,8 +803,8 @@ static void Inventory_PartyDisplay(void)
                 y -= 2;
         }
     }
-    //Inventory_AddAllItemPlatforms();
-    //CreateAllRegisteredItemIcon();
+    Inventory_AddAllItemPlatforms();
+    CreateAllRegisteredItemIcon();
     UpdateMonIconsPalettes();
 }
 
@@ -1277,7 +1281,7 @@ static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
     sprite->data[0] += 8;
 
     if(gSaveBlock3Ptr->InventoryData.itemIdx == 0 || numitems < INVENTORY_MAX_ITEMS_SHOWN || gSaveBlock3Ptr->InventoryData.yFirstItem == 0)
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1298,7 +1302,7 @@ static void SpriteCallback_Inventory_DownArrow(struct Sprite *sprite)
     //DebugPrintf("SpriteCallback_Inventory_DownArrow remainingItems %d", remainingItems);
 
     if(itemIdx >= numitems - 1 || numitems < INVENTORY_MAX_ITEMS_SHOWN || remainingItems < HALF_SHOWN) //Because of the Exit Button
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1423,7 +1427,7 @@ static void CreateDownArrowSprite(void)
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems())
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1431,15 +1435,15 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1))
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
 
 static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
 {
-    if(shouldShowRegisteredItems() || (ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1) && ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1)))
-        sprite->invisible = TRUE;
+    if(shouldShowRegisteredItems() || (ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1) && ShouldHideSprite(INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1)))
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1447,7 +1451,7 @@ static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1455,7 +1459,7 @@ static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1))
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1463,7 +1467,7 @@ static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1))
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -1515,7 +1519,7 @@ void SpriteCB_MonIconCropped(struct Sprite *sprite)
 
     //Disable them when in the key items pocket
     if(shouldShowRegisteredItems())
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 
@@ -1605,60 +1609,6 @@ u8 UpdateMonIconFrameCropped(struct Sprite *sprite)
     return result;
 }
 
-static void DestroyExtraPartySprites(void)
-{
-    static const u8 spriteBases[] =
-    {
-        INVENTORY_SPRITE_MON_HP_BAR_1,
-        INVENTORY_SPRITE_MON_STATUS_1,
-        INVENTORY_SPRITE_MON_EXP_BAR_1,
-        INVENTORY_SPRITE_MON_ITEM_1,
-    };
-
-    for (u32 i = 0; i < ARRAY_COUNT(spriteBases); i++)
-    {
-        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        {
-            u8 *spriteId = &sMenuDataPtr->spriteIDs[spriteBases[i] + slot];
-
-            if (*spriteId == SPRITE_NONE)
-                continue;
-
-            DestroySprite(&gSprites[*spriteId]);
-            *spriteId = SPRITE_NONE;
-        }
-    }
-}
-
-static void RecreateExtraPartySprites(u8 slot){
-    struct Pokemon *mon = &gPlayerParty[slot];
-    u32 species = ReturnTransformationIfConditionMet(mon);
-    u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
-    u32 percent = GetHPEggCyclePercent(slot);
-    u32 expPercent = GetExpPercent(slot);
-    u16 level = GetMonData(mon, MON_DATA_LEVEL);
-
-    u32 x = 16;
-    u32 y = 32;
-    bool32 firstColumn = ((slot % 2) == 0);
-
-    if(firstColumn){
-        x += 32;
-    }
-    else{
-        x = 16;
-        y += (26 * (slot / 3));
-
-        if (slot > 3)
-            y -= 2;
-    }
-
-    Inventory_CreateMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
-    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
-}
-
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
@@ -1702,13 +1652,11 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
     SetOamMatrixRotationScaling(gSprites[SpriteID].oam.matrixNum, -512, 512, 0);
 
     gSprites[SpriteID].invisible = FALSE;
-    //Inventory_CreateMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
-    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
 
-    //if(gSaveBlock3Ptr->InventoryData.pocketNum != POCKET_TM_HM)
-    //    RecreateExtraPartySprites(slot);
+    Inventory_CreateMonBar(slot, species, status, percent, x, y);
+    Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
+    Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
+    Inventory_CreateHeldItemSprite(slot, mon, x, y);
 
     return SpriteID;
 }
@@ -2140,7 +2088,7 @@ static void Inventory_LoadBackgroundPalette(void)
 static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
 {
     if(!shouldShowRegisteredItems())
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
@@ -3362,7 +3310,7 @@ static void Inventory_PrintDesc(void)
         }
     }
     else
-{
+    {
         StringCopy(gStringVar1, sInventory_Exit_Desc);
         FreeItemIconSprite();
     }
@@ -4568,6 +4516,19 @@ static bool8 ShouldHideSprite(u8 spriteID){
             }
         }
         break;
+        case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+        {
+            switch(displayMode){
+                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
+                    return FALSE;
+                break;
+                default:
+                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
+                    return TRUE;
+                break;
+            }
+        }
+        break;
         case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
         {
             switch(displayMode){
@@ -4730,13 +4691,6 @@ static void Task_MenuMain(u8 taskId)
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
 
-        /*if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
-            DestroyExtraPartySprites();
-        else{
-            for(u8 slot = 0; slot < PARTY_SIZE; slot++)
-                RecreateExtraPartySprites(slot);
-        }*/
-
         PlaySE(SE_SELECT);
         UpdateDisplayMode();
         Inventory_PrintToAllWindows();
@@ -4757,13 +4711,6 @@ static void Task_MenuMain(u8 taskId)
 
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
         gSaveBlock3Ptr->InventoryData.yFirstItem = 0;
-
-        /*if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM)
-            DestroyExtraPartySprites();
-        else{
-            for(u8 slot = 0; slot < PARTY_SIZE; slot++)
-                RecreateExtraPartySprites(slot);
-        }*/
 
         PlaySE(SE_SELECT);
         UpdateDisplayMode();
@@ -5199,7 +5146,7 @@ static void SpriteCallback_Inventory_TypeRows(struct Sprite *sprite)
     StartSpriteAnim(sprite, moveType);
 
     if(gSaveBlock3Ptr->InventoryData.pocketNum != POCKET_TM_HM || moveType == TYPE_NONE)
-        sprite->invisible = TRUE;
+        sprite->invisible = FORCE_VISIBILITY;
     else
         sprite->invisible = FALSE;
 }
