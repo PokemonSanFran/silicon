@@ -822,12 +822,16 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help Charlotte clear out The Tide from {STR_VAR_1} and stop them from destroying the Arena!"),
+    .text = COMPOUND_STRING("Help Charlotte clear out The Tide from {STR_VAR_1} and stop them from destroying the {STR_VAR_2}!"),
     .textComponent =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_STADIUM_CONSTRUCTION,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
     .textCondition = 
@@ -840,228 +844,445 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
-  /*
-     {
-     .text = COMPOUND_STRING("Get a good night's rest back in {STR_VAR_1}. "),// cucuno town
-     .textComponent =
-     {
-     {
-     },
-     },
-     .textCondition = 
-     {
-     {
-     .dataType = ,
-     .dataAddress = ,
-     .compareOp = ,
-     .targetValue = ,
-     }
-     }
-     },
-     {
-     .text = COMPOUND_STRING("Get a good night's rest back in Cucuno Town."),
-     .textComponent =
-     {
-     {
-     },
-     },
-     .textCondition = 
-     {
-     {
-     .dataType = ,
-     .dataAddress = ,
-     .compareOp = ,
-     .targetValue = ,
-     }
-     }
-     },
-     {
-     .text = COMPOUND_STRING("Meet Charlotte and Oliver at the northern half of {STR_VAR_1}."),
-  .textComponent =
   {
+    .text = COMPOUND_STRING("Get a good night's rest back in {STR_VAR_1}. "),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CUCONU_TOWN,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_NEED_SLEEP_BEFORE_FRANK,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Meet Charlotte and Oliver at the northern half of {STR_VAR_1}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PIOCA_BRIDGE,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_GOLDENGATEBRIDGE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = CALLED_BY_CHARLOTTE,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Work with Charlotte to get Frank's journal from the maze inside {STR_VAR_1}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_LANJING_TUNNEL,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ROBINWILLIAMSTUNNEL_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = CHARLOTTE_INSIDE_TUNNEL,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ROBINWILLIAMSTUNNEL_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = FRANK_BOSS_DEFEATED,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Meet Charlotte in {STR_VAR_1}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ESPULEE_OUTSKIRTS_STATE,
+        .compareOp = EQUAL,
+        .targetValue = ROBINWILLIAMSTUNNEL_PUZZLES_SOLVED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Spend the night in {STR_VAR_1} at Charlotte's family Komala Kabin."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ESPULEE_OUTSKIRTS_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = CHARLOTTE_INVITED_KOMALACABIN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ESPULEE_OUTSKIRTS_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = CHARLOTTE_DEEP_STUDYING,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = CHARLOTTE_WAITING_LEAVERRA_FOREST,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Head to the deepest part of {STR_VAR_1} to deliver Frank's journal."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_LEAVERRA_FOREST,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = MET_FRANK,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = CHARLOTTE_WAITING_LEAVERRA_FOREST,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Defeat all of Frank's Trainer bots in {STR_VAR_1} and continue the training."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_LEAVERRA_FOREST,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = MET_FRANK,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = POST_HAVE_YOU_SEEN_THE_NEWS,
+      }
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Get debriefed on the social media hack on the League Ops Floor of {STR_VAR_1}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_LEAVERRA_FOREST_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_HAVE_YOU_SEEN_THE_NEWS,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = PRE_WELCOME_TO_THE_WAR_ROOM,
+      }
     },
   },
-  .textCondition = 
   {
+    .text = COMPOUND_STRING("Meet up with Charlotte and the police chief at the {STR_VAR_1} before going to {STR_VAR_2}."),
+    .textComponent =
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
-    }
-  }
-},
-{
-  .text = COMPOUND_STRING("Work with Charlotte to get Frank's journal from {STR_VAR_1}."),
-  .textComponent =
-  {
-    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_FERRYBUILDING
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_HALAI_ISLAND,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_WELCOME_TO_THE_WAR_ROOM,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_FERRYBUILDING_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = DEFEATED_SURVIVAL_CHANCE_BATTLE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_HALAI_ISLAND_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = WHY_ARE_YOU_HELPING_THEM,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Spend the night in {STR_VAR_1} at Charlotte's family Komala Kabin. "),// espulee outskirts
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Storm The Tide's HQ at the {STR_VAR_1}. Shut down The Tide's social media hack and help arrest all of their members! "),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_NAVAL_BASE,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_HALAI_ISLAND_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = POST_SURVIVAL_CHANCE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_NAVAL_BASE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = CHASE_VIGRIM,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Head to the deepest part of {STR_VAR_1} to deliver Frank's journal. "),// leaverra forest
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Navigate the {STR_VAR_1} and prevent Vigrim from escaping!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_NAVAL_BASE,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_NAVAL_BASE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = CHASE_VIGRIM,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_NAVAL_BASE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = SAVE_BAIYA_NAVAL_BASE,
+      }
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Defeat all of Frank's Trainer bots in {STR_VAR_1} and continue the training. "),// leaverra forest
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Defeat Kai: don't let Vigrim and Adaora escape the {STR_VAR_1}!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_NAVAL_BASE,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_NAVAL_BASE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = SAVE_BAIYA_NAVAL_BASE,
+      }
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Get debriefed on the social media hack on the League Ops Floor of {STR_VAR_1} "),// spire
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Get a good night's rest back in {STR_VAR_1} and get ready for the SharpRise Pokemon League Championship!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CUCONU_TOWN,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PLAYER_HOME_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = POST_NAVAL_BASE_RAID,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_PLAYER_HOME_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = NEXT_DAY_CHAMPIONSHIP,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = STORY_START_CHAMPIONSHIP,
+      }
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Meet up with Charlotte and the police chief at the {STR_VAR_1} before going to {STR_VAR_1}. ai island"),// ferry building hal
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Look at the tournament bracket to see your group's opponents, and explore {STR_VAR_1}."),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_CHAMPIONSHIP_EXPLAINED,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Storm The Tide's HQ at the {STR_VAR_1} {STR_VAR_2}. Shut down The Tide's social media hack and help arrest all of their members! "),// halai island naval base
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Head into the {STR_VAR_1} Arena from the {STR_VAR_2} Locker Room and win your Group Matches!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_LOCKERS
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_CHARLOTTE_WON_GROUP,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = STORY_GROUP_STATE_COMPLETE,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Navigate the {STR_VAR_1} and prevent Vigrim from escaping!"),// halai island naval base
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Congratulations on your Group Stage! Head back into the {STR_VAR_1} Arena for your Semifinal match!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_GROUP_STATE_COMPLETE,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Defeat Kai: don't let Vigrim and Adaora escape the {STR_VAR_1}!"),
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Go to the {STR_VAR_1} Skybox and watch the Semifinal match between Baiya and Charlotte."),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_SKYBOX,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_SEMIFINAL_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = STORY_READY_FINALS,
+      },
     }
-  }
-},
-{
-  .text = COMPOUND_STRING("Get a good night's rest back in {STR_VAR_1}. "),// cucuno town
-  .textComponent =
+  },
   {
+    .text = COMPOUND_STRING("Challenge Baiya in the {STR_VAR_1} Arena for the Championship!"),
+    .textComponent =
     {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
     },
-  },
-  .textCondition = 
-  {
+    .textCondition = 
     {
-      .dataType = ,
-      .dataAddress = ,
-      .compareOp = ,
-      .targetValue = ,
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_READY_FINALS,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = STORY_WON_FINALS,
+      },
     }
-  }
-},
-  */
-  };
+  },
+};
 
