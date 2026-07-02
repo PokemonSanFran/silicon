@@ -892,8 +892,9 @@ enum
 #define ITEM_QUEST_INSTALLNATUREPROBES_1            ITEM_NATURE_PROBE_1
 #define ITEM_QUEST_INSTALLNATUREPROBES_2            ITEM_NATURE_PROBE_2
 #define ITEM_QUEST_INSTALLNATUREPROBES_3            ITEM_NATURE_PROBE_3
+#define ITEM_QUEST_FAMILIAR_BELL                    ITEM_FAMILIAR_BELL
 
-#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER    OBJ_EVENT_GFX_BILL
+#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER    OBJ_EVENT_GFX_GENTLEMAN
 
 // ***********************************************************************
 // Quest: Restore EspuleeOutskirts Gym

@@ -16211,6 +16211,16 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
+    [ITEM_FAMILIAR_BELL] =
+    {
+        .name = ITEM_NAME("Familiar Bell"),
+        .description = COMPOUND_STRING("Attracts rare Pokémon."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
     [ITEM_BODEGA_DELIVERY_1] =
     {
         .name = ITEM_NAME("BodegaDelvry1"),
