@@ -67,5 +67,6 @@ void TweetCriteria_Quest_HybridCulture_HasSubquest2Completed(void);
 void TweetCriteria_Quest_HybridCulture_HasSubquest3Completed(void);
 void TweetCriteria_Quest_HybridCulture_HasSubquest4Completed(void);
 void TweetCriteria_Quest_HybridCulture_HasSubquest5Completed(void);
+void TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H

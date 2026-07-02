@@ -932,4 +932,24 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_NPC_RANGERS_HIRING] =
+    {
+        .userId = BUZZR_USER_LEAVERRA_RNGRS,
+        .content = COMPOUND_STRING("Get ready to learn more about our precious residents in Leaverra Forest thanks to our newly installed Nature Probes!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
+        .quest = 0,
+        .dislikeCount = 4,
+        .likeCount = 67,
+    },
+    [TWEET_QUEST_NPC_INSTALLPROBESWORKER_JOBHUNTING] =
+    {
+        .userId = BUZZR_USER_INSTALLPROBESWORKER,
+        .content = COMPOUND_STRING("Hi! I'm Installprobesworker, and if you're looking for an experienced Pokémon Ranger, check out my work on my profile."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
+        .quest = 0,
+        .dislikeCount = 0,
+        .likeCount = 3,
+    },
 };
