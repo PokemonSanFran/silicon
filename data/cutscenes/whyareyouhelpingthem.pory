@@ -88,7 +88,8 @@ script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
     return
 }
 
-script WhyAreYouHelpingThem_StartRaid {
+script WhyAreYouHelpingThem_StartRaid 
+{
     lock
     setvar(VAR_NAVAL_BASE_STATE,NAVAL_BASE_RAID_START)
     playse(SE_FAILURE)
@@ -161,6 +162,7 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
 }
 
 script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
+		clearflag(B_FLAG_NO_WHITEOUT)
         setvar(VAR_NAVAL_BASE_STATE,SAVE_BAIYA_NAVAL_BASE)
         addobject(ADAORA)
         call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
