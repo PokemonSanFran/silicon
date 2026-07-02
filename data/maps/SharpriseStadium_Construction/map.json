@@ -80,7 +80,7 @@
       "flag": "TRAINER_FLAGS_START+TRAINER_FAKEROCKET_B"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 4,
       "y": 5,
       "elevation": 3,
@@ -93,7 +93,7 @@
       "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_B"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 3,
       "y": 12,
       "elevation": 3,
@@ -106,7 +106,7 @@
       "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 22,
       "y": 12,
       "elevation": 3,
@@ -119,7 +119,7 @@
       "flag": "FLAG_DEFEATED_CONSTRUCTION_MON_A"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SKITTY",
+      "graphics_id": "OBJ_EVENT_MON+SPECIES_GARBODOR",
       "x": 18,
       "y": 5,
       "elevation": 3,
