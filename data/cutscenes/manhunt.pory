@@ -104,7 +104,7 @@ script Manhunt_Cherie_Battle_Script {
 script Manhunt_StartBattle1_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle1_Script)
-        multi_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
         startcutscene(JUMPPLAYER_MANHUNT_NEWS)
@@ -153,7 +153,7 @@ script Manhunt_Teodoro_Battle_Script {
 script Manhunt_StartBattle2_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle2_Script)
-        multi_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
         startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
@@ -220,7 +220,7 @@ script Manhunt_Dudley_Battle_Script
 script Manhunt_StartBattle3_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle3_Script)
-        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
         startcutscene(JUMPPLAYER_MANHUNT_BALL)
@@ -293,7 +293,7 @@ script Manhunt_Matthew_Battle_Script {
 script Manhunt_StartBattle4_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle4_Script)
-        multi_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
         startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
@@ -372,7 +372,7 @@ script Manhunt_Encounter_Vigrim_Dialogue {
 script Manhunt_StartVigrimBattle_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartVigrimBattle_Script)
-        multi_2_vs_1(TRAINER_VIGRIM,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_VIGRIM,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         lock
         faceplayer

@@ -139,7 +139,7 @@ msgbox(format("ROAR"))
 goto(IGuessWeShouldBeNiceNow_BossProtectBook_Script)
 }
 script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
-    playmoncry(SPECIES_GENGAR, CRY_MODE_ENCOUNTER)
+    playmoncry(SPECIES_CENTISKORCH, CRY_MODE_ENCOUNTER)
         playmoncry(SPECIES_CHANDELURE, CRY_MODE_ENCOUNTER)
         waitse
 
@@ -159,12 +159,12 @@ script IGuessWeShouldBeNiceNow_BossProtectBook_Script {
 }
 
 script IGuessWeShouldBeNiceNow_CoreEncounter_Script {
-        setwildbattle(SPECIES_GENGAR,60,ITEM_LIFE_ORB,SPECIES_GASTLY,70,ITEM_ORAN_BERRY)
-        playmoncry(SPECIES_GENGAR, CRY_MODE_ENCOUNTER)
+        setwildbattle(SPECIES_CENTISKORCH,60,ITEM_LIFE_ORB,SPECIES_SIZZLIPEDE,70,ITEM_ORAN_BERRY)
+        playmoncry(SPECIES_CENTISKORCH, CRY_MODE_ENCOUNTER)
         delay(40)
         waitmoncry
         setflag(FLAG_SYS_CTRL_OBJ_DELETE)
-        multi_fixed_wild(PARTNER_STEVEN)
+        multi_fixed_wild(PARTNER_CHARLOTTE)
         clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
         specialvar(VAR_RESULT, GetBattleOutcome)
         switch (var (VAR_RESULT)) {
