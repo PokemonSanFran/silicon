@@ -16181,6 +16181,36 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
+    [ITEM_NATURE_PROBE_1] =
+    {
+        .name = ITEM_NAME("NatureProbe1"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_NATURE_PROBE_2] =
+    {
+        .name = ITEM_NAME("NatureProbe2"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+    [ITEM_NATURE_PROBE_3] =
+    {
+        .name = ITEM_NAME("NatureProbe3"),
+        .description = COMPOUND_STRING("?????"),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
     [ITEM_BODEGA_DELIVERY_1] =
     {
         .name = ITEM_NAME("BodegaDelvry1"),

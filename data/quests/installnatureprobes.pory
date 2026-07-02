@@ -1,9 +1,9 @@
 //Quest_InstallNatureProbes_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const LIIDIA = 2
+const INSTALLNATUREPROBES = LOCALID_ROUTE100_INSTALLNATUREPROBES
 
-script Quest_InstallNatureProbes_Interact_Liidia_Script
+script Quest_InstallNatureProbes_Interact_InstallNatureProbes_Script
 {
 	lock
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
@@ -19,11 +19,31 @@ script Quest_InstallNatureProbes_Interact_Liidia_Script
 
 script Quest_InstallNatureProbes_StartQuest_Dialogue
 {
-	msgbox(format("Geez, I gotta work late tonight if I'm going to finish these reports and the install...\pActually, you're a Trainer! Trainers are exploring places and shit, right?"), MSGBOX_NPC,SPEAKER_DEFAULT)
-	msgbox(format("Can you help me with something? I don't think it'll put you too far out of your way. I need to install three probes in LeaverraForest for tracking Pokémon movement. One in the deepest part of the forest, one up on the tallest hill, and one over by the lakeshore. Installing is really easy, you just clip them to the sign posts that we've already got set up there."), MSGBOX_NPC,SPEAKER_DEFAULT)
-	msgbox(format("You've got a PokéDex? Great. I can upgrade it with the Resido Habitat Mode if you help me out."), MSGBOX_NPC,SPEAKER_DEFAULT)
+	msgbox("Reports still aren't finished…{PAUSE 30}\nAnd I've still got installation to do…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK,EMOTE_SWEAT)
+    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, emote_x, delay_16 * 4, face_player, delay_16 *2, emote_exclamation_mark))
+    waitmovement(0)
+    msgbox("Oh! I take it you're a Pokemon Trainer?\pWe're right outside of Leaverra Forest,\nthough I take it you know that.\nIt's surprisingly cold, isn't it?\pObviously we're in the north of Resido\nright now, but really the cold is because\nsunlight doesn't pierce the shade\lcreated by these tall redwood trees.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("Would you like to cut a deal?\pIf you can help me with some of my work,\nI'll give you something that'll make\nfinding Pokemon easier.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("It shouldn't be too hard.\nIt's something Trainers do all the time\nanyways.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("Sure, sounds good to me.", MSGBOX_AUTOCLOSE, SPEAKER_PLAYER, TAIL_TALK)
 
 	startquest(QUEST_INSTALLNATUREPROBES)
+
+    msgbox("You were granted Nature Probes by the\nman!")
+    
+    additem(ITEM_NATURE_PROBE_1)
+    additem(ITEM_NATURE_PROBE_2)
+    additem(ITEM_NATURE_PROBE_3)
+
+    msgbox("I am a member of the Espulee Wildlife\nRangers. We monitor the movements and\nbehavior of Pokemon so that we may\lanalyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("I have some probes that automatically\ncollect data and report back to the\nRangers.\pOnce installed it means I'm saved from\nhaving to go and do it in person.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("I wonder if you could place some under\nthe three signs around the forest?\nEverything else will be handled\lautomatically.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("One in the deepest part of the forest…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("And one by the bridges over the river.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("Leaverra Forest is a precious place.\pIt's a protected area for many species\nof Pokemon threatened by climate change\nand the degradation of natural habitats.\pYou wouldn't just be doing me a favor,\nyou'd be doing nature a favor.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+
+
 	release
 	end
 }
@@ -31,19 +51,33 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 script Quest_InstallNatureProbes_Active_Dialogue
 {
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
-	msgbox(format("What probes did you already install in LeaverraForest?"),MSGBOX_NPC,SPEAKER_DEFAULT)
+	lock
+    setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+    message(format("What probes did you already install in LeaverraForest?"))
+    waitmessage
+    waitbuttonpress
 
     if (var(VAR_TEMP_1) == 0){
-        msgbox(format("One probe goes in the deepest part of the forest."),MSGBOX_NPC,SPEAKER_DEFAULT)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        message(format("One probe goes in the deepest part of the forest."))
+        waitmessage
+        waitbuttonpress
     }
 
     if (var(VAR_TEMP_2) == 0){
-        msgbox(format("One probe goes on the tallest hill."),MSGBOX_NPC,SPEAKER_DEFAULT)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        message(format("One probe goes on the tallest hill."))
+        waitmessage
+        waitbuttonpress
     }
 
     if (var(VAR_TEMP_3) == 0){
-        msgbox(format("One probe goes by the lake shore."),MSGBOX_NPC,SPEAKER_DEFAULT)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        message(format("One probe goes by the lake shore."))
+        waitmessage
+        waitbuttonpress
     }
+    release
 }
 
 script Quest_InstallNatureProbes_InstallForestProbe_Script{
@@ -56,7 +90,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
         end
     }
 
-    msgbox(format("Yeah, this seems to match the description... deepest part of the forest."),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, this seems to match the description... deepest part of the forest."),SPEAKER_PLAYER)
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
@@ -77,7 +111,7 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
         release
         end
     }
-    msgbox(format("This is as good as a hill as I'm going to find, right?"),,SPEAKER_ALICIA)
+    msgbox(format("This is as good as a hill as I'm going to find, right?"),SPEAKER_PLAYER)
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
@@ -98,7 +132,7 @@ script Quest_InstallNatureProbes_InstallShoreProbe_Script{
         end
     }
 
-    msgbox(format("Just gotta make sure its attached correctly..."),,SPEAKER_ALICIA)
+    msgbox(format("Just gotta make sure its attached correctly..."),,SPEAKER_PLAYER)
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
@@ -152,20 +186,20 @@ script Quest_InstallNatureProbes_CheckCompletionRate_Script
 
 script Quest_InstallNatureProbes_Reward_Cutscene
 {
-    msgbox(format("Wow! You got all of them in? Let's test that..."),MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Wow! You got all of them in? Let's test that..."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
 
-    applymovement(LIIDIA,Common_Movement_FaceAwayPlayer)
-    waitmovement(LIIDIA)
+    applymovement(INSTALLNATUREPROBES,Common_Movement_FaceAwayPlayer)
+    waitmovement(INSTALLNATUREPROBES)
 
     playse(SE_PC_LOGIN)
     waitse
 
-    applymovement(LIIDIA,Common_Movement_FacePlayer)
-    waitmovement(LIIDIA)
-    msgbox(format("The tracking is working! You did great, thank you so much. Could I see your Pokédex please? Oh, this isn't the Residomodel... Orre? Fascinating. It should work the same..."),MSGBOX_NPC,SPEAKER_DEFAULT)
+    applymovement(INSTALLNATUREPROBES,Common_Movement_FacePlayer)
+    waitmovement(INSTALLNATUREPROBES)
+    msgbox(format("The tracking is working! You did great, thank you so much. Could I see your Pokédex please? Oh, this isn't the Residomodel... Orre? Fascinating. It should work the same..."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
     closemessage
 
-    msgbox(format("Okay, done!"),MSGBOX_NPC,SPEAKER_DEFAULT)
+    msgbox(format("Okay, done!"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
     playfanfare(MUS_OBTAIN_ITEM)
     msgbox(format("{PLAYER}'s Pokédex was upgraded with Habitat Mode!"))
     waitmessage
@@ -175,9 +209,9 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     playse(SE_POKENAV_CALL)
     waitse
 
-    msgbox(format("That's my boss, let me just answer that."),,SPEAKER_LIIDIA)
-    applymovement(LIIDIA,Common_Movement_FaceAwayPlayer)
-    waitmovement(LIIDIA)
+    msgbox(format("That's my boss, let me just answer that."),,SPEAKER_INSTALLNATUREPROBES)
+    applymovement(INSTALLNATUREPROBES,Common_Movement_FaceAwayPlayer)
+    waitmovement(INSTALLNATUREPROBES)
 
     msgbox(format("Go for Liidia!"),,,PHONE_ON)
     closemessage
@@ -187,20 +221,221 @@ script Quest_InstallNatureProbes_Reward_Cutscene
 
     playse(SE_POKENAV_HANG_UP)
     waitse
-    applymovement(LIIDIA,Common_Movement_FacePlayer)
-    waitmovement(LIIDIA)
+    applymovement(INSTALLNATUREPROBES,Common_Movement_FacePlayer)
+    waitmovement(INSTALLNATUREPROBES)
 
-    msgbox(format("He thanked me... and then told me that my job was redundant. He told I'm fired, and have to leave the premises immediately."),,SPEAKER_LIIDIA)
-    msgbox(format("I realize now, I think you put me out of a job. How could I be so... naive?"),,SPEAKER_LIIDIA)
+    msgbox(format("He thanked me... and then told me that my job was redundant. He told I'm fired, and have to leave the premises immediately."),,SPEAKER_INSTALLNATUREPROBES)
+    msgbox(format("I realize now, I think you put me out of a job. How could I be so... naive?"), SPEAKER_INSTALLNATUREPROBES)
     closemessage
 
-    applymovement(LIIDIA, moves(walk_right, walk_down * 7, step_end))
+    applymovement(INSTALLNATUREPROBES, moves(walk_right, walk_down * 7, step_end))
     applymovement(PLAYER, moves(delay_16, face_right, face_down, step_end))
 
-    waitmovement(LIIDIA)
-    removeobject(LIIDIA)
+    waitmovement(INSTALLNATUREPROBES)
+    removeobject(INSTALLNATUREPROBES)
     completequest(QUEST_INSTALLNATUREPROBES)
     release
     end
 }
+
+// script Quest_InstallNatureProbes_Interact_Liidia_Script
+// {
+// 	lock
+//     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+// 	returnqueststate(QUEST_INSTALLNATUREPROBES)
+
+// 	switch (var(VAR_RESULT))
+// 	{
+// 		case QUEST_MENU_SET_ACTIVE: goto(Quest_InstallNatureProbes_Active_Dialogue)
+// 		case QUEST_MENU_SET_REWARD: goto(Quest_InstallNatureProbes_Reward_Cutscene)
+// 		default: goto(Quest_InstallNatureProbes_StartQuest_Dialogue)
+// 	}
+// }
+
+// script Quest_InstallNatureProbes_StartQuest_Dialogue
+// {
+// 	msgbox(format("Geez, I gotta work late tonight if I'm going to finish these reports and the install...\pActually, you're a Trainer! Trainers are exploring places and shit, right?"), MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+// 	msgbox(format("Can you help me with something? I don't think it'll put you too far out of your way. I need to install three probes in LeaverraForest for tracking Pokémon movement. One in the deepest part of the forest, one up on the tallest hill, and one over by the lakeshore. Installing is really easy, you just clip them to the sign posts that we've already got set up there."), MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+// 	msgbox(format("You've got a PokéDex? Great. I can upgrade it with the Resido Habitat Mode if you help me out."), MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+
+// 	startquest(QUEST_INSTALLNATUREPROBES)
+// 	release
+// 	end
+// }
+
+// script Quest_InstallNatureProbes_Active_Dialogue
+// {
+//     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+// 	msgbox(format("What probes did you already install in LeaverraForest?"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+
+//     if (var(VAR_TEMP_1) == 0){
+//         msgbox(format("One probe goes in the deepest part of the forest."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+//     }
+
+//     if (var(VAR_TEMP_2) == 0){
+//         msgbox(format("One probe goes on the tallest hill."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+//     }
+
+//     if (var(VAR_TEMP_3) == 0){
+//         msgbox(format("One probe goes by the lake shore."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+//     }
+// }
+
+// script Quest_InstallNatureProbes_InstallForestProbe_Script{
+//     lock
+
+//     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+//     if(var(VAR_RESULT)){
+//         msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+//         release
+//         end
+//     }
+
+//     msgbox(format("Yeah, this seems to match the description... deepest part of the forest."),SPEAKER_PLAYER)
+
+//     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+//     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+//     playse(SE_CONTEST_HEART)
+//     msgbox(format("{PLAYER} installed the probe in the forest."))
+//     waitse
+//     waitmessage
+
+//     release
+//     return
+// }
+// script Quest_InstallNatureProbes_InstallHillProbe_Script{
+//     lock
+
+//     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+//     if(var(VAR_RESULT)){
+//         msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+//         release
+//         end
+//     }
+//     msgbox(format("This is as good as a hill as I'm going to find, right?"),SPEAKER_PLAYER)
+
+//     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+//     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+//     playse(SE_CONTEST_HEART)
+//     msgbox(format("{PLAYER} installed the probe on the hill."))
+//     waitse
+//     waitmessage
+
+//     release
+//     end
+// }
+// script Quest_InstallNatureProbes_InstallShoreProbe_Script{
+//     lock
+//     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
+//     if(var(VAR_RESULT)){
+//         msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+//         release
+//         end
+//     }
+
+//     msgbox(format("Just gotta make sure its attached correctly..."),,SPEAKER_PLAYER)
+
+//     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
+//     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+//     playse(SE_CONTEST_HEART)
+//     msgbox(format("{PLAYER} installed the probe by the shore."))
+//     waitse
+//     waitmessage
+
+//     release
+//     end
+// }
+
+// script Quest_InstallNatureProbes_CheckCompletionRate_Script
+// {
+//     questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_INSTALLNATUREPROBES)
+
+//     if (!var(VAR_RESULT)){
+//         release
+//         return
+//     }
+
+// 	setvar(VAR_TEMP_0, 0)
+// 	setvar(VAR_TEMP_1, 0)
+// 	setvar(VAR_TEMP_2, 0)
+// 	setvar(VAR_TEMP_3, 0)
+
+// 	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_1)
+// 	if (var(VAR_RESULT))
+// 	{
+// 		addvar(VAR_TEMP_0, 1)
+// 		addvar(VAR_TEMP_1, 1)
+// 	}
+// 	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_2)
+// 	if (var(VAR_RESULT))
+// 	{
+// 		addvar(VAR_TEMP_0, 1)
+// 		addvar(VAR_TEMP_2, 1)
+// 	}
+// 	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_3)
+// 	if (var(VAR_RESULT))
+// 	{
+// 		addvar(VAR_TEMP_0, 1)
+// 		addvar(VAR_TEMP_3, 1)
+// 	}
+
+// 	if (var(VAR_TEMP_0) == 3)
+// 	{
+// 		questmenu(QUEST_MENU_SET_REWARD, QUEST_INSTALLNATUREPROBES)
+// 	}
+// }
+
+// script Quest_InstallNatureProbes_Reward_Cutscene
+// {
+//     msgbox(format("Wow! You got all of them in? Let's test that..."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+
+//     applymovement(INSTALLNATUREPROBES,Common_Movement_FaceAwayPlayer)
+//     waitmovement(INSTALLNATUREPROBES)
+
+//     playse(SE_PC_LOGIN)
+//     waitse
+
+//     applymovement(INSTALLNATUREPROBES,Common_Movement_FacePlayer)
+//     waitmovement(INSTALLNATUREPROBES)
+//     msgbox(format("The tracking is working! You did great, thank you so much. Could I see your Pokédex please? Oh, this isn't the Residomodel... Orre? Fascinating. It should work the same..."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+//     closemessage
+
+//     msgbox(format("Okay, done!"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBES)
+//     playfanfare(MUS_OBTAIN_ITEM)
+//     msgbox(format("{PLAYER}'s Pokédex was upgraded with Habitat Mode!"))
+//     waitmessage
+//     waitfanfare
+//     closemessage
+
+//     playse(SE_POKENAV_CALL)
+//     waitse
+
+//     msgbox(format("That's my boss, let me just answer that."),,SPEAKER_INSTALLNATUREPROBES)
+//     applymovement(INSTALLNATUREPROBES,Common_Movement_FaceAwayPlayer)
+//     waitmovement(INSTALLNATUREPROBES)
+
+//     msgbox(format("Go for Liidia!"),,,PHONE_ON)
+//     closemessage
+//     delay(32)
+//     msgbox(format("...I understand."),,,PHONE_ON)
+//     closemessage
+
+//     playse(SE_POKENAV_HANG_UP)
+//     waitse
+//     applymovement(INSTALLNATUREPROBES,Common_Movement_FacePlayer)
+//     waitmovement(INSTALLNATUREPROBES)
+
+//     msgbox(format("He thanked me... and then told me that my job was redundant. He told I'm fired, and have to leave the premises immediately."),,SPEAKER_INSTALLNATUREPROBES)
+//     msgbox(format("I realize now, I think you put me out of a job. How could I be so... naive?"), SPEAKER_INSTALLNATUREPROBES)
+//     closemessage
+
+//     applymovement(INSTALLNATUREPROBES, moves(walk_right, walk_down * 7, step_end))
+//     applymovement(PLAYER, moves(delay_16, face_right, face_down, step_end))
+
+//     waitmovement(INSTALLNATUREPROBES)
+//     removeobject(INSTALLNATUREPROBES)
+//     completequest(QUEST_INSTALLNATUREPROBES)
+//     release
+//     end
+// }
 
