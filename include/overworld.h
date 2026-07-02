@@ -214,5 +214,6 @@ bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId);
 
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *);
+bool8 GetTime_IsBetweenHours(u32 begin, u32 end);
 
 #endif // GUARD_OVERWORLD_H

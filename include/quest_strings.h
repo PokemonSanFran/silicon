@@ -58,16 +58,6 @@ extern const u8 gText_Quest_RecruitLocalArtists_Desc[];
 extern const u8 gText_Quest_RecruitLocalArtists_DoneDesc[];
 extern const u8 gText_Quest_RecruitLocalArtists_Map[];
 
-extern const u8 gText_Quest_RestaurantExpansion2_Name[];
-extern const u8 gText_Quest_RestaurantExpansion2_Desc[];
-extern const u8 gText_Quest_RestaurantExpansion2_DoneDesc[];
-extern const u8 gText_Quest_RestaurantExpansion2_Map[];
-
-extern const u8 gText_Quest_HybridCulture_Name[];
-extern const u8 gText_Quest_HybridCulture_Desc[];
-extern const u8 gText_Quest_HybridCulture_DoneDesc[];
-extern const u8 gText_Quest_HybridCulture_Map[];
-
 extern const u8 gText_Quest_AlohaFromAlola_Name[];
 extern const u8 gText_Quest_AlohaFromAlola_Desc[];
 extern const u8 gText_Quest_AlohaFromAlola_DoneDesc[];

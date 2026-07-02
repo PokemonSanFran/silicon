@@ -26,6 +26,7 @@ const u8 *GetQuestDesc_Teachatrainertofish(void);
 const u8 *GetQuestDesc_Wildfirerisk(void);
 const u8 *GetQuestDesc_Hang20(void);
 const u8 *GetQuestDesc_CulturalPurity(void);
+const u8 *GetQuestDesc_HybridCulture(void);
 
 struct TextComponent
 {

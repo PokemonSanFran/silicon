@@ -70,6 +70,7 @@ void DebugQuest_Teachatrainertofish(u8 state);
 void DebugQuest_Wildfirerisk(u8 state);
 void DebugQuest_Hang20(u8 state);
 void DebugQuest_CulturalPurity(u8 state);
+void DebugQuest_HybridCulture(u8 state);
 
 void AwardPartyMonChampionRibbon(void);
 void Script_CheckIfAnyMonHasChampionRibbon(void);
@@ -96,5 +97,7 @@ bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void);
 void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void);
 void CountDefeatedCresaltaVista(void);
 void ResetDefeatedCresaltaVista(void);
+void BufferSunriseTimes(void);
+void BufferSunsetTimes(void);
 
 #endif //GUARD_QUESTLOGIC_H
