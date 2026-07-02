@@ -307,7 +307,8 @@ script VSGarbodor_Negotiating_Dialogue
         msgbox(format("They're only found in Unova, but they're impossible to get a hold of. They've been banned everywhere for like six years!"),,SPEAKER_CHARLOTTE,,EMOTE_SHOCK)
         msgbox(format("They are indeed removed from circulation worldwide, but consider it a perk. SharpRise Capital is an investor in Clay's Driftveil mining operations, and you've more than earned it. Make sure one of you wins the Championship with one of these!"),,SPEAKER_LUCREZIA)
         msgbox(format("Now, I think you two should head back to the Compound and get some rest."),,SPEAKER_LUCREZIA)
-        msgbox(format("Yeah, I'm beat. Do you want a ride back to the Compound?"), MSGBOX_YESNO,,SPEAKER_CHARLOTTE)
+        buffermapname(STR_VAR_1,MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F)
+        msgbox(format("Yeah, I'm beat. Do you want a ride back to {STR_VAR_1}?"), MSGBOX_YESNO,SPEAKER_CHARLOTTE)
 
         if (var (VAR_RESULT) == NO) {
 
