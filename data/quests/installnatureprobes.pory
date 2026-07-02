@@ -97,7 +97,7 @@ script Quest_InstallNatureProbes_InstallShoreProbe_Script{
         end
     }
 
-    msgbox(format("This looks pretty “by the bridge” to me. I'll put a probe down."),MSGBOX_DEFAULT,SPEAKER_PLAYER, TAIL_TALK)
+    msgbox(format("I think this is the deepest part of the forest. I'll put a probe down here."),MSGBOX_DEFAULT, SPEAKER_PLAYER, TAIL_TALK)
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_1)
@@ -144,7 +144,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
         end
     }
 
-    msgbox(format("I think this is the deepest part of the forest. I'll put a probe down here."),MSGBOX_DEFAULT, SPEAKER_PLAYER, TAIL_TALK)
+    msgbox(format("This looks pretty “by the bridge” to me. I'll put a probe down."),MSGBOX_DEFAULT,SPEAKER_PLAYER, TAIL_TALK)
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_3)
