@@ -9,7 +9,7 @@ mapscripts LeaverraForest_MapScripts {
 }
 
 script LeaverraForest_ForestSign_Script{
-    msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
+    msgbox("The inner clearing of Leaverra Forest\nwas once a giant redwood on its own.\pOver time, the trunk itself withered away\nand died, but underground, the massive\nroot system was full of vitality.\pHundreds of young sprouts began to come\nup in the ground, encircling the original\nlocation of the tree's trunk.\pToday, the trees around it stand in a\ncircle around the original space of the\ntrunk.",MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -17,7 +17,7 @@ script LeaverraForest_ForestSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallForestProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
         default:
             release
             end
@@ -25,7 +25,7 @@ script LeaverraForest_ForestSign_Script{
 }
 
 script LeaverraForest_HillSign_Script{
-   msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
+   msgbox("Leaverra Forest is part of the Espulee\nWatershed.\pWater flows from the slopes of the\nmountains into the creeks, meeting with\nthe ocean near Pioca Bridge.",MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -33,7 +33,7 @@ script LeaverraForest_HillSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallHillProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
         default:
             release
             end
@@ -41,7 +41,7 @@ script LeaverraForest_HillSign_Script{
 }
 
 script LeaverraForest_ShoreSign_Script{
-   msgbox(format("LeaverraForest Regional Park"),MSGBOX_SIGN)
+   msgbox("Fishing in Leaverra Forest is strictly\nprohibited due to the conservation of\naquatic wildlife. Prosecutors will be\lgiven significant fines.",MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
@@ -49,7 +49,7 @@ script LeaverraForest_ShoreSign_Script{
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallShoreProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
         default:
             release
             end
