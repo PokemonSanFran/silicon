@@ -41,7 +41,7 @@ script LeaverraForest_HillSign_Script{
 }
 
 script LeaverraForest_ShoreSign_Script{
-   msgbox("Fishing in Leaverra Forest is strictly\nprohibited due to the conservation of\naquatic wildlife. Prosecutors will be\lgiven significant fines.",MSGBOX_SIGN)
+   msgbox("Fishing in Leaverra Forest is strictly\nprohibited due to the conservation of\naquatic wildlife. Violators will be\lgiven significant fines.",MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
