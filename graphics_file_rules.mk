@@ -707,3 +707,11 @@ $(SPINDAGFXDIR)/spot_2.1bpp: %.1bpp: %.png
 
 $(SPINDAGFXDIR)/spot_3.1bpp: %.1bpp: %.png
 	$(GFX) $< $@ -plain -data_width 2
+
+UI_INVENTORY_TYPE_GFXDIR := graphics/ui_menus/inventory/types
+
+$(types:%=$(UI_INVENTORY_TYPE_GFXDIR)/%.4bpp): %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
+
+$(UI_INVENTORY_TYPE_GFXDIR)/types.4bpp: $(types:%=$(UI_INVENTORY_TYPE_GFXDIR)/%.4bpp)
+	@cat $^ >$@

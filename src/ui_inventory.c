@@ -49,7 +49,7 @@
 #include "ui_main_menu.h"
 #include "ui_start_menu.h"
 
-#define FORCE_VISIBILITY FALSE
+#define FORCE_VISIBILITY TRUE
 
 //==========DEFINES==========//
 struct MenuResources
@@ -61,7 +61,6 @@ struct MenuResources
     u8 windowInfoNum;
     u8 spriteIDs[NUM_INVENTORY_SPRITES];
     u16 numItems[NUM_INVENTORY_POCKETS];
-    u8 PartyPokemonIcon[PARTY_SIZE];
     u16 FavoritePocketItems[POCKETS_COUNT * MAX_INVENTORY_FAVORITE_ITEMS][NUM_FAVORITE_ITEMS_ARRAY_SIZE];
     u8 inventoryMode;
     u8 partyDisplayMode;
@@ -325,9 +324,6 @@ void InitializeInventoryData(void)
     sMenuDataPtr->windowInfoNum     = 0;
     sInventoryListMenu->inventoryMenuWindowId = WINDOW_NONE;
 
-    for(u32 i = 0; i < PARTY_SIZE; i++)
-        sMenuDataPtr->PartyPokemonIcon[i] = 0xFF;
-
     for(u32 i = 0; i < NUM_INVENTORY_SPRITES; i++)
         sMenuDataPtr->spriteIDs[i] = 0xFF;
 
@@ -427,7 +423,7 @@ static bool8 Menu_DoGfxSetup(void)
         CreateUpArrowSprite();
         CreateDownArrowSprite();
         Inventory_PartyDisplay();
-        //Inventory_DrawMoveTypeFrames();
+        Inventory_DrawMoveTypeFrames();
         LoadPalette(sMenuInterfacePalette, 16, 32);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
@@ -808,9 +804,6 @@ static void Inventory_PartyDisplay(void)
     UpdateMonIconsPalettes();
 }
 
-#define TAG_SUMMARY_TYPE_1 0x1000
-#define TAG_SUMMARY_TYPE_2 TAG_SUMMARY_TYPE_1 + 1
-
 static const u16 sMenuInterfacePalette_Moves_1[] = INCBIN_U16("graphics/ui_menus/inventory/types/1.gbapal");
 static const u16 sMenuInterfacePalette_Moves_2[] = INCBIN_U16("graphics/ui_menus/inventory/types/2.gbapal");
 
@@ -833,8 +826,8 @@ static void Menu_LoadGraphics(void)
     LoadSpriteSheets(sInventory_SpriteGraphics.sheets);
     LoadSpritePalette(&sInventory_SpriteGraphics.palette);
 
-    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_1, TAG_SUMMARY_TYPE_1);
-    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_2, TAG_SUMMARY_TYPE_2);
+    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_1, TAG_ITEM_INVENTORY_TMHM_TYPE_1);
+    LoadSpritePaletteWithTag(sMenuInterfacePalette_Moves_2, TAG_ITEM_INVENTORY_TMHM_TYPE_2);
 }
 
 static void Menu_InitWindows(void)
@@ -1629,13 +1622,13 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
     u32 currentStatus = GetAilmentFromStatus(status);
     u8 palette = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, slot + MON_STARTING_PALETTE_NUM);
 
-    sMenuDataPtr->PartyPokemonIcon[slot] = SpriteID;
+    sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MON_ICON_1 + slot] = SpriteID;
 
     y -= 8;
 
     SpriteID = CreateMonIcon(species, GetSpriteCallbackForIcon(percent, isEgg), x, y, 0, GetMonData(mon,MON_DATA_PERSONALITY));
 
-    sMenuDataPtr->PartyPokemonIcon[slot] = SpriteID;
+    sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MON_ICON_1 + slot] = SpriteID;
 
     gSprites[SpriteID].oam.matrixNum  = AllocOamMatrix();
     gSprites[SpriteID].oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -1653,10 +1646,10 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 
     gSprites[SpriteID].invisible = FALSE;
 
-    Inventory_CreateMonBar(slot, species, status, percent, x, y);
-    Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
-    Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
-    Inventory_CreateHeldItemSprite(slot, mon, x, y);
+    //Inventory_CreateMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
+    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
+    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
 
     return SpriteID;
 }
@@ -1739,7 +1732,7 @@ static void UpdateMonIconsPalettes(void){
     u8 displayMode = sMenuDataPtr->partyDisplayMode;
 
     for(slot = 0; slot < PARTY_SIZE; slot++){
-        u32 SpriteID = sMenuDataPtr->PartyPokemonIcon[slot];
+        u32 SpriteID = sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MON_ICON_1 + slot];
 
         if (SpriteID != 0xFF && IsMonNotEmpty(slot)){
             struct Pokemon *mon = &gPlayerParty[slot];
@@ -2096,7 +2089,7 @@ static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
 static void FreeRegisteredItemIconSprite(u8 slot)
 {
     u8 *spriteId = &sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_REGISTERED_ITEM_UP + slot];
-    u8 tag = TAG_ITEM_INVENTORY_REGISTERED_ICON + slot;
+    u8 tag = TAG_ITEM_INVENTORY_REGISTERED_ICON_1 + slot;
 
     if (*spriteId != SPRITE_NONE)
     {
@@ -2129,7 +2122,7 @@ static void CreateAllRegisteredItemIcon(void)
 static u8 CreateRegisteredItemIcon(u8 slot)
 {
     u8 itemSpriteId = SPRITE_NONE;
-    u8 tag = TAG_ITEM_INVENTORY_REGISTERED_ICON + slot;
+    u8 tag = TAG_ITEM_INVENTORY_REGISTERED_ICON_1 + slot;
     u8 *spriteId = &sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_REGISTERED_ITEM_UP + slot];
     u16 itemId = gSaveBlock3Ptr->InventoryData.registeredItem[slot];
 
@@ -5027,39 +5020,27 @@ static const struct Subsprite sInventorySprite_128x16Subsprites[] =
 {
     {
         .x = 0, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
+        .shape = SPRITE_SHAPE(64x32), .size = SPRITE_SIZE(64x32),
         .tileOffset = 0,
         .priority = 1
     },
     {
-        .x = 32, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 8,
+        .x = 96, .y = 0,
+        .shape = SPRITE_SHAPE(64x32), .size = SPRITE_SIZE(64x32),
+        .tileOffset = 32,
         .priority = 1
     },
     {
         .x = 64, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 16,
-        .priority = 1
-    },
-    {
-        .x = 96, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 16,
-        .priority = 1
-    },
-    {
-        .x = 128, .y = 0,
-        .shape = SPRITE_SHAPE(32x16), .size = SPRITE_SIZE(32x16),
-        .tileOffset = 24,
+        .shape = SPRITE_SHAPE(64x32), .size = SPRITE_SIZE(64x32),
+        .tileOffset = 32,
         .priority = 1
     },
 };
 
 static u32 InventorySprite_GetTypePaletteTag(enum Type type)
 {
-    return TAG_SUMMARY_TYPE_1 + (type >= TYPE_MYSTERY);
+    return TAG_ITEM_INVENTORY_TMHM_TYPE_1 + (type >= TYPE_MYSTERY);
 }
 
 const struct SpriteTemplate sInventory_MoveBarSpriteTemplate =
@@ -5097,7 +5078,7 @@ const struct SpriteTemplate sInventory_MoveBarSpriteTemplate =
     },
     .images = &(const struct SpriteFrameImage){
         .data = sInventory_MoveBarGfx,
-        .size = (128 * 16) / 2,
+        .size = (128 * 32) / 2,
         .relativeFrames = TRUE
     },
     .affineAnims = gDummySpriteAffineAnimTable,
