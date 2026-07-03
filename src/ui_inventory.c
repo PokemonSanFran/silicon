@@ -109,6 +109,7 @@ static void Inventory_TryPrintFavoriteIcon(enum Pocket pocketId, u32 itemIdx, u3
 static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex, u32 itemScreenListIndex);
 static void Inventory_PrintItemList(void);
 static void Inventory_PrintDesc(void);
+static void Inventory_HPBars(void);
 static void Inventory_PrintFooter(void);
 static void Inventory_PrintToAllWindows(void);
 static void FreeInventoryBackgrounds(void);
@@ -272,12 +273,21 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .height = 2,
         .paletteNum = 0,
     },
+    [INVENTORY_WINDOW_HP_BARS] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 8,
+        .height = 10,
+        .paletteNum = 2,
+    },
     DUMMY_WIN_TEMPLATE,
 };
 
 static const u16 sMenuInterfacePalette[]         = INCBIN_U16("graphics/ui_menus/inventory/interface_palette.gbapal");
-//static const u16 sMenuInterfacePalette_Sprites[] = INCBIN_U16("graphics/ui_menus/inventory/interface_palette_sprites.gbapal");
 static const u16 sMenuInterfacePalette_Sprites[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
+static const u16 sMenuInterfacePalette_HP_Bar[]  = INCBIN_U16("graphics/ui_menus/inventory/hp_bar/hp_bar_interface_palette.gbapal");
 
 static const u16 sMenuPalette[]                  = INCBIN_U16("graphics/ui_menus/inventory/palette_custom.gbapal");
 static const u16 sMenuPalette_Red[]              = INCBIN_U16("graphics/ui_menus/inventory/palettes/red.gbapal");
@@ -425,6 +435,7 @@ static bool8 Menu_DoGfxSetup(void)
         Inventory_PartyDisplay();
         Inventory_DrawMoveTypeFrames();
         LoadPalette(sMenuInterfacePalette, 16, 32);
+        LoadPalette(sMenuInterfacePalette_HP_Bar, 32, 32);
         CreateTask(Task_MenuWaitFadeIn, 0);
         gMain.state++;
         break;
@@ -1274,7 +1285,7 @@ static void SpriteCallback_Inventory_UpArrow(struct Sprite *sprite)
     sprite->data[0] += 8;
 
     if(gSaveBlock3Ptr->InventoryData.itemIdx == 0 || numitems < INVENTORY_MAX_ITEMS_SHOWN || gSaveBlock3Ptr->InventoryData.yFirstItem == 0)
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1295,7 +1306,7 @@ static void SpriteCallback_Inventory_DownArrow(struct Sprite *sprite)
     //DebugPrintf("SpriteCallback_Inventory_DownArrow remainingItems %d", remainingItems);
 
     if(itemIdx >= numitems - 1 || numitems < INVENTORY_MAX_ITEMS_SHOWN || remainingItems < HALF_SHOWN) //Because of the Exit Button
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1320,8 +1331,6 @@ static const u8 sInventorySelectorCursorToss_Gfx[] = INCBIN_U8("graphics/ui_menu
 
 static const u8 sInventoryPocketIcon0_Gfx[] = INCBIN_U8("graphics/ui_menus/inventory/pocket_0.4bpp");
 static const u8 sInventoryPocketIcon1_Gfx[] = INCBIN_U8("graphics/ui_menus/inventory/pocket_1.4bpp");
-
-static const u8 gInventoryHeldItem_Gfx[]       = INCBIN_U8("graphics/ui_menus/inventory/icons/held_item.4bpp");
 
 static const u8 gInventoryIcon_Pinned_Gfx[]      = INCBIN_U8("graphics/ui_menus/inventory/icons/pinned.4bpp");
 
@@ -1420,7 +1429,7 @@ static void CreateDownArrowSprite(void)
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems())
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1428,23 +1437,23 @@ static void SpriteCB_Species_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1))
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
 
 static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
 {
-    if(shouldShowRegisteredItems() || (ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1) && ShouldHideSprite(INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1)))
-        sprite->invisible = FORCE_VISIBILITY;
+    /*if(shouldShowRegisteredItems() || (ShouldHideSprite(INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1)))
+        sprite->invisible = TRUE;
     else
-        sprite->invisible = FALSE;
+        sprite->invisible = FALSE;*/
 }
 
 static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1452,7 +1461,7 @@ static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1))
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1460,7 +1469,7 @@ static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
 static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1))
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -1512,7 +1521,7 @@ void SpriteCB_MonIconCropped(struct Sprite *sprite)
 
     //Disable them when in the key items pocket
     if(shouldShowRegisteredItems())
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 
@@ -1725,6 +1734,7 @@ static void UpdateDisplayMode(void){
         sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM;
 
     UpdateMonIconsPalettes();
+    Inventory_HPBars();
 }
 
 static void UpdateMonIconsPalettes(void){
@@ -2081,7 +2091,7 @@ static void Inventory_LoadBackgroundPalette(void)
 static void SpriteCB_RegisteredItem_Icon_Callback(struct Sprite *sprite)
 {
     if(!shouldShowRegisteredItems())
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
@@ -3239,6 +3249,78 @@ static void Inventory_PrintItemList(void)
     CopyWindowToVram(INVENTORY_WINDOW_ITEM_LIST ,COPYWIN_FULL);
 }
 
+static const u8 gInventoryHeldItem_Gfx[] = INCBIN_U8("graphics/ui_menus/inventory/icons/held_item.4bpp");
+static const u8 gInventoryHP_Bar_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar.4bpp");
+static const u8 gInventoryExp_Bar_Gfx[]  = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/exp_bar.4bpp");
+static const u8 gInventoryStatus_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/icons/status_burn.4bpp");
+
+static void Inventory_HPBars(void)
+{
+    enum InventoryWindowIds windowId = INVENTORY_WINDOW_HP_BARS;
+    u32 x, x2, y, y2;
+    u32 font = FONT_NORMAL;
+    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
+    u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u32 moveNum;
+    u32 numitems = sMenuDataPtr->numItems[pocketId];
+    bool8 hideHPBar_Shadow = TRUE;
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    // Item Description
+    x  = 16;
+    x2 = 0;
+    y  = 0;
+    y2 = 0;
+
+    for (u32 partyIndex = 0; partyIndex <= PARTY_SIZE; partyIndex++){
+        bool32 firstColumn = ((partyIndex % 2) == 0);
+
+        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1)){}
+            BlitBitmapToWindow(windowId, gInventoryHeldItem_Gfx, x + 7, y + 7 , 8, 8);
+
+        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1)){
+            hideHPBar_Shadow = FALSE;
+            BlitBitmapToWindow(windowId, gInventoryHP_Bar_Gfx, x - 8, y + 17 , 16, 8);
+        }
+        else if(!ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1)){
+            u8 level = 100;
+            u8 font = INVENTORY_FONT_LIST;
+            u32 lineSpacing   = GetFontAttribute(font, FONTATTR_LINE_SPACING);
+            u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
+
+            hideHPBar_Shadow = FALSE;
+            
+            ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
+            AddTextPrinterParameterized4(windowId, font, x - 15, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+
+            BlitBitmapToWindow(windowId, gInventoryExp_Bar_Gfx, x - 8, y + 17 , 16, 8);
+        }
+        
+        gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]].invisible = TRUE;
+
+        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
+            BlitBitmapToWindow(windowId, gInventoryStatus_Gfx, x - 16, y + 8 , 8, 8);
+
+        if (firstColumn)
+        {
+            x += 32;
+        }
+        else
+        {
+            x = 16;
+            y += 26;
+
+            if (partyIndex > 3)
+                y -= 2;
+        }
+    }
+
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId,COPYWIN_FULL);
+}
+
 static void Inventory_PrintDesc(void)
 {
     u32 x, x2, y, y2;
@@ -3744,6 +3826,7 @@ static void Inventory_PrintToAllWindows(void)
     Inventory_PrintHeader();
     Inventory_PrintItemList();
     Inventory_PrintDesc();
+    Inventory_HPBars();
     Inventory_PrintFooter();
     UpdateInventoryMoveTypeIDs();
 }
@@ -5127,7 +5210,7 @@ static void SpriteCallback_Inventory_TypeRows(struct Sprite *sprite)
     StartSpriteAnim(sprite, moveType);
 
     if(gSaveBlock3Ptr->InventoryData.pocketNum != POCKET_TM_HM || moveType == TYPE_NONE)
-        sprite->invisible = FORCE_VISIBILITY;
+        sprite->invisible = TRUE;
     else
         sprite->invisible = FALSE;
 }
