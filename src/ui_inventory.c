@@ -1697,6 +1697,8 @@ static void UpdateDisplayMode(void){
     u16 itemId  = pocket->itemSlots[itemIdx].itemId;
     ItemUseFunc fieldUseFunc;
 
+    u8 pastDisplayMode = sMenuDataPtr->partyDisplayMode;
+
     if(pocketId == POCKET_FAVORITE_ITEMS)
         itemId = sMenuDataPtr->FavoritePocketItems[itemIdx][FAVORITE_ITEM_ID];
 
@@ -1760,8 +1762,10 @@ static void UpdateDisplayMode(void){
     if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
         sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM;
 
-    UpdateMonIconsPalettes();
-    Inventory_UpdateHPBarsDeferred();
+    if(pastDisplayMode != sMenuDataPtr->partyDisplayMode){
+        UpdateMonIconsPalettes();
+        Inventory_UpdateHPBarsDeferred();
+    }
 }
 
 static void UpdateMonIconsPalettes(void){
@@ -3161,32 +3165,7 @@ static void Inventory_TryPrintListCursor(enum Pocket pocketId, u32 itemScreenLis
         if((gSaveBlock3Ptr->InventoryData.yFirstItem + itemScreenListIndex) != (numItems - 1))
             if (moveType != TYPE_NONE && moveType != TYPE_STELLAR)
                 BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
-
-        //FillPalette(gTypesInfo[moveType].siliconRGBValue, INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
     }
-    /*else
-    {
-        const struct TMHMGfxTable* gfx = &sTMHMGraphics[itemScreenListIndex];
-
-        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->left, x, y, 16, 16);
-
-        for(j = 1; j < INVENTORY_CURSOR_SQUARES - 1; j++)
-            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->middle,(x + (j * 16)), y,  16, 16);
-
-        BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, gfx->right,(x + (j * 16)), y,  16, 16);
-
-        x = 160;
-
-        if((gSaveBlock3Ptr->InventoryData.itemIdx - gSaveBlock3Ptr->InventoryData.yFirstItem) == itemScreenListIndex)
-            BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sInventoryTMHM_Cursor_Gfx, x, y, 16, 16);
-
-        u32 moveType = (itemIndex == (numItems - 1)) ? TYPE_NORMAL : gMovesInfo[GetItemSecondaryId(itemId)].type;
-        if((gSaveBlock3Ptr->InventoryData.yFirstItem + itemScreenListIndex) != (numItems - 1))
-            if (moveType != TYPE_NONE && moveType != TYPE_STELLAR)
-                BlitBitmapToWindow(INVENTORY_WINDOW_ITEM_LIST, sTypeGraphics[moveType], x, y, 16, 16);
-
-        FillPalette(gTypesInfo[moveType].siliconRGBValue, INVENTORY_TMHM_PAL_COLOR_ADDRESS + itemScreenListIndex,2);
-    }*/
 }
 
 static const u8* sRegisteredIndicator[] =
@@ -3279,7 +3258,7 @@ static void Inventory_PrintItemList(void)
 static const u8 gInventoryHeldItem_Gfx[] = INCBIN_U8("graphics/ui_menus/inventory/icons/held_item.4bpp");
 static const u8 gInventoryHP_Bar_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/hp_bar.4bpp");
 static const u8 gInventoryExp_Bar_Gfx[]  = INCBIN_U8("graphics/ui_menus/inventory/hp_bar/exp_bar.4bpp");
-static const u8 gInventoryStatus_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventory/icons/status_burn.4bpp");
+static const u8 sInventoryMenuStatus_Burn_Gfx[] = INCBIN_U8("graphics/ui_menus/inventory/icons/status_burn.4bpp");
 
 static bool8 Inventory_ShouldDrawHPBarWindow(void)
 {
@@ -3333,8 +3312,18 @@ static void Inventory_HPBars(void)
     bool8 drawHpBar         = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
     bool8 drawExpBar        = !ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1);
     bool8 drawHPBarPlatform = Inventory_ShouldDrawHPBarWindow();
+    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+
+    if(shouldShowRegisteredItems())
+    {
+        Inventory_SetHPPlatformSpritesVisible(FALSE);
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, COPYWIN_FULL);
+        sMenuDataPtr->hpBarWindowVisible = FALSE;
+        return;
+    }
     
     // Item Description
     x  = 16;
@@ -3343,6 +3332,10 @@ static void Inventory_HPBars(void)
     y2 = 0;
 
     for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++){
+        struct Pokemon *mon = &gPlayerParty[partyIndex];
+        u16 species = GetMonData(mon, MON_DATA_LEVEL);
+        u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+        u16 status = GetMonData(mon, MON_DATA_STATUS);
         u32 hpPercent  = GetHPEggCyclePercent(partyIndex);
         u32 expPercent = GetExpPercent(partyIndex);
         u8 hpPlatformSpriteId = sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex];
@@ -3351,31 +3344,33 @@ static void Inventory_HPBars(void)
         if (hpPlatformSpriteId != SPRITE_NONE)
             gSprites[hpPlatformSpriteId].invisible = !drawHPBarPlatform;
 
-        if(drawHeldItem)
+        if(drawHeldItem && heldItem != ITEM_NONE)
             BlitBitmapToWindow(windowId, gInventoryHeldItem_Gfx, x + 7, y + 7 , 8, 8);
 
         if(drawHpBar){
             u32 frame = Inventory_ConvertPercentageIntoHpBarFrame(hpPercent);
-            BlitBitmapToWindow(windowId, gInventoryHP_Bar_Gfx, x - 8, y + 16 , 16, 8);
+            BlitBitmapRectToWindow(windowId, gInventoryHP_Bar_Gfx, 0, frame, HP_BAR_WIDTH, HP_BAR_SHEET_HEIGHT, x - 8, y + 16, HP_BAR_WIDTH, HP_BAR_FRAME_HEIGHT);
         }
         else if(drawExpBar){
-            struct Pokemon *mon = &gPlayerParty[partyIndex];
-
             u8 level = GetMonData(mon, MON_DATA_LEVEL);
             u8 font = INVENTORY_FONT_LIST;
             u32 lineSpacing   = GetFontAttribute(font, FONTATTR_LINE_SPACING);
             u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
-            u32 frame = Inventory_ConvertPercentageIntoHpBarFrame(hpPercent);
+            u32 frame = Inventory_ConvertPercentageIntoExpBarFrame(expPercent);
             
             ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
             AddTextPrinterParameterized4(windowId, font, x - 15, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
 
-            BlitBitmapToWindow(windowId, gInventoryExp_Bar_Gfx, x - 8, y + 16 , 16, 8);
+            BlitBitmapRectToWindow(windowId, gInventoryExp_Bar_Gfx, 0, frame, HP_BAR_WIDTH, HP_BAR_SHEET_HEIGHT, x - 8, y + 16, HP_BAR_WIDTH, HP_BAR_FRAME_HEIGHT);
         }
 
-        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
-            BlitBitmapToWindow(windowId, gInventoryStatus_Gfx, x - 16, y + 8 , 8, 8);
+        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1)){
+            if (!hpPercent)
+                status = INVENTORY_MON_STATUS_FAINTED;
+
+            BlitBitmapRectToWindow(windowId, sStartMenuSymbols_MonStatus, InventoryMonStatus_TranslateRawStatus(status) * 8, 0, 56, 8, x - 16, y + 8, 8,  8);
+        }
 
         if (firstColumn)
         {
@@ -3420,18 +3415,11 @@ static void Inventory_PrintDesc(void)
         if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
         {
             StringCopy(gStringVar1, GetItemDescription(itemId));
-
-            // Item Icon
-            x  = 2;
-            x2 = 4;
-            y  = 16;
-            y2 = 0;
-            ShowItemIcon(itemId, (x * 8) + x2, (y * 8) + y2);
         }
         else{
             u32 power, accuracy, movePP;
             moveNum = GetItemSecondaryId(itemId);
-            FreeItemIconSprite();
+            //FreeItemIconSprite();
 
             power    = gMovesInfo[moveNum].power;
             accuracy = gMovesInfo[moveNum].accuracy;
@@ -3458,6 +3446,13 @@ static void Inventory_PrintDesc(void)
             AddTextPrinterParameterized4(INVENTORY_WINDOW_DESC, font, (x * 8) + x2 - 1, (y * 8) + y2, -4, -4, sInventoryFontColors[INVENTORY_FONT_BLACK], 0xFF, gStringVar4);
             StringCopy(gStringVar1, gMovesInfo[moveNum].description);
         }
+
+        // Item Icon
+        x  = 2;
+        x2 = 4;
+        y  = 16;
+        y2 = 0;
+        ShowItemIcon(itemId, (x * 8) + x2, (y * 8) + y2);
     }
     else
     {
