@@ -782,6 +782,26 @@ static void Inventory_AddMonPlatforms(bool32 firstColumn, u32 partyIndex, u32 x,
     StartSpriteAnim(sprite, firstColumn);
 }
 
+static void UpdateHPPlatformInvisibility(void){
+    u8 displayMode = sMenuDataPtr->partyDisplayMode;
+    bool8 shouldHideHPPlataform = shouldShowRegisteredItems();
+
+    if(!shouldHideHPPlataform){
+        switch(displayMode){
+            case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
+                shouldHideHPPlataform = FALSE;
+            break;
+            default:
+            case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
+                shouldHideHPPlataform = TRUE;
+            break;
+        }
+    }
+    
+    for (u32 partyIndex = 0; partyIndex <= PARTY_SIZE; partyIndex++)
+        gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]].invisible = shouldHideHPPlataform;
+}
+
 static void Inventory_PartyDisplay(void)
 {
     u32 x = 16;
@@ -812,6 +832,7 @@ static void Inventory_PartyDisplay(void)
     }
     Inventory_AddAllItemPlatforms();
     CreateAllRegisteredItemIcon();
+
     UpdateMonIconsPalettes();
 }
 
@@ -3256,49 +3277,45 @@ static const u8 gInventoryStatus_Gfx[]   = INCBIN_U8("graphics/ui_menus/inventor
 
 static void Inventory_HPBars(void)
 {
-    enum InventoryWindowIds windowId = INVENTORY_WINDOW_HP_BARS;
     u32 x, x2, y, y2;
-    u32 font = FONT_NORMAL;
-    u32 lineSpacing = GetFontAttribute(font,FONTATTR_LINE_SPACING);
-    u32 letterSpacing = GetFontAttribute(font,FONTATTR_LETTER_SPACING);
-    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
-    u32 moveNum;
-    u32 numitems = sMenuDataPtr->numItems[pocketId];
-    bool8 hideHPBar_Shadow = TRUE;
+    enum InventoryWindowIds windowId = INVENTORY_WINDOW_HP_BARS;
+    bool8 drawHeldItem      = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
+    bool8 drawHpBar         = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
+    bool8 drawExpBar        = !ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1);
+    bool8 drawHPBarPlatform = (drawHpBar || drawExpBar) && !shouldShowRegisteredItems();
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    
     // Item Description
     x  = 16;
     x2 = 0;
     y  = 0;
     y2 = 0;
 
-    for (u32 partyIndex = 0; partyIndex <= PARTY_SIZE; partyIndex++){
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++){
+        u8 hpPlatformSpriteId = sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex];
         bool32 firstColumn = ((partyIndex % 2) == 0);
 
-        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1)){}
+        if (hpPlatformSpriteId != SPRITE_NONE)
+            gSprites[hpPlatformSpriteId].invisible = !drawHPBarPlatform;
+
+        if(drawHeldItem)
             BlitBitmapToWindow(windowId, gInventoryHeldItem_Gfx, x + 7, y + 7 , 8, 8);
 
-        if(!ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1)){
-            hideHPBar_Shadow = FALSE;
-            BlitBitmapToWindow(windowId, gInventoryHP_Bar_Gfx, x - 8, y + 17 , 16, 8);
-        }
-        else if(!ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1)){
+        if(drawHpBar)
+            BlitBitmapToWindow(windowId, gInventoryHP_Bar_Gfx, x - 8, y + 16 , 16, 8);
+        else if(drawExpBar){
             u8 level = 100;
             u8 font = INVENTORY_FONT_LIST;
             u32 lineSpacing   = GetFontAttribute(font, FONTATTR_LINE_SPACING);
             u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
-
-            hideHPBar_Shadow = FALSE;
             
             ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
             AddTextPrinterParameterized4(windowId, font, x - 15, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
 
-            BlitBitmapToWindow(windowId, gInventoryExp_Bar_Gfx, x - 8, y + 17 , 16, 8);
+            BlitBitmapToWindow(windowId, gInventoryExp_Bar_Gfx, x - 8, y + 16 , 16, 8);
         }
-        
-        gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]].invisible = TRUE;
 
         if(!ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
             BlitBitmapToWindow(windowId, gInventoryStatus_Gfx, x - 16, y + 8 , 8, 8);
@@ -3318,7 +3335,7 @@ static void Inventory_HPBars(void)
     }
 
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId,COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
 static void Inventory_PrintDesc(void)
