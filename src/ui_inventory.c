@@ -3360,7 +3360,10 @@ static void Inventory_HPBars(void)
             
             ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
-            AddTextPrinterParameterized4(windowId, font, x - 15, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+            if(level >= MAX_LEVEL)
+                AddTextPrinterParameterized4(windowId, font, x - 10, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
+            else
+                AddTextPrinterParameterized4(windowId, font, x - 9, y + 2, letterSpacing, lineSpacing, sInventoryFontColors[INVENTORY_FONT_OUTLINE_COLOR], TEXT_SKIP_DRAW, gStringVar4);
 
             BlitBitmapRectToWindow(windowId, gInventoryExp_Bar_Gfx, 0, frame, HP_BAR_WIDTH, HP_BAR_SHEET_HEIGHT, x - 8, y + 16, HP_BAR_WIDTH, HP_BAR_FRAME_HEIGHT);
         }
