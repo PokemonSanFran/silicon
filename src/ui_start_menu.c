@@ -1668,7 +1668,6 @@ static void StartPrint_QuestFlavorText(void)
 
     u32 fontId = FONT_SMALL_NARROW;
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 windowId = START_MAIN_WIN_TEXTBOX;
     u32 maxWidth = (GetWindowAttribute(windowId, WINDOW_WIDTH) * TILE_WIDTH) - 2;
     u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);

@@ -1284,5 +1284,70 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
+  {
+    .text = COMPOUND_STRING("Take a break and see all the sights on {STR_VAR_1}!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ZENZU_ISLAND,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_EXPLORE_ZENZU_ISLAND,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Win a friendly battle against Baiya on {STR_VAR_1}!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ZENZU_ISLAND,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_SAVE_BAIYA_ZENZU_ISLAND,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help Baiya with their Gym restoration program. Visit one the Gyms in {STR_VAR_1}, {STR_VAR_2}, or {STR_VAR_3} to see how you can get involved!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ZENZU_ISLAND,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_HODOU_CITY,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_BAIYA_EXPLAIN_RESTORATION,
+      },
+    }
+  },
 };
 
