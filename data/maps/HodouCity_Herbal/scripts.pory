@@ -1,0 +1,10 @@
+mapscripts HodouCity_Herbal_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+    }
+    MAP_SCRIPT_ON_LOAD
+    {
+        call_if_ge(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A,CulturalPurity_Script_RevealBackroomA)
+    }
+}

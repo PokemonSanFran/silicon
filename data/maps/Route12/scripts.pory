@@ -3,6 +3,8 @@ mapscripts Route12_MapScripts {
         call(Quest_ArtisanBalls2_CheckTrainerB_Script)
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_4,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerD)
         call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_16,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashP)
+        call_if_ne(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON,HybridCulture_Script_HideLeaderAndBirds)
+        call_if_eq(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON,HybridCulture_Script_BufferSpeciesAndMove)
     }
 }
 

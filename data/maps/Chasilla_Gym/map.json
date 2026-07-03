@@ -2,7 +2,7 @@
   "id": "MAP_CHASILLA_GYM",
   "name": "Chasilla_Gym",
   "layout": "LAYOUT_CHASILLA_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_CHASILLA_GYM",
   "region_map_section": "MAPSEC_CHASILLA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

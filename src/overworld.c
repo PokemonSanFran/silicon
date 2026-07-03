@@ -4294,3 +4294,13 @@ static void Task_OvwldCredits_WaitFade(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+// Start siliconQuests
+bool8 GetTime_IsBetweenHours(u32 begin, u32 end)
+{
+    s32 hours;
+    RtcCalcLocalTime();
+    hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
+    return (IsBetweenHours(hours,begin,end));
+}
+// End siliconQuests

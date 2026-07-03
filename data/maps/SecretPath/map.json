@@ -2,7 +2,7 @@
   "id": "MAP_SECRET_PATH",
   "name": "SecretPath",
   "layout": "LAYOUT_SECRET_PATH",
-  "music": "MUS_RG_POKE_MANSION",
+  "music": "MUS_CAVE",
   "region_map_section": "MAPSEC_SECRET_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

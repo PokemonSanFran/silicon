@@ -1,0 +1,60 @@
+{
+  "id": "MAP_HODOU_CITY_COOKIE",
+  "name": "HodouCity_Cookie",
+  "layout": "LAYOUT_HODOU_CITY_COOKIE",
+  "music": "MUS_HODOU_CITY",
+  "region_map_section": "MAPSEC_HODOU_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_COOKIE_BACKROOMGUARDB",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_Interact_BackroomguardB",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_COOKIE_TO_BACKROOM_B",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_BACKROOM_B",
+      "dest_warp_id": "WARP_ID_BACKROOM_B_TO_COOKIE_LEFT"
+    },
+    {
+      "warp_id": "WARP_ID_COOKIE_TO_HODOU_LEFT",
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY",
+      "dest_warp_id": "WARP_ID_HODOU_TO_COOKIE"
+    },
+    {
+      "warp_id": "WARP_ID_COOKIE_TO_HODOU_RIGHT",
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY",
+      "dest_warp_id": "WARP_ID_HODOU_TO_COOKIE"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

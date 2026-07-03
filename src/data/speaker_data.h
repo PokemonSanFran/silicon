@@ -3091,4 +3091,124 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_BACKROOMGUARDA] =
+    {
+        .name = COMPOUND_STRING("BackroomguardA"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA3] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA3"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA4] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA4"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMGUARDB] =
+    {
+        .name = COMPOUND_STRING("BackroomguardB"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB3] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB3"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMGUARDC] =
+    {
+        .name = COMPOUND_STRING("BackroomguardC"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERC1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerC1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERC2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerC2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_CULTHOUSEGUARD] =
+    {
+        .name = COMPOUND_STRING("Culthouseguard"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_CULTLEADER] =
+    {
+        .name = COMPOUND_STRING("Cultleader"),
+        .title = COMPOUND_STRING("Society Leader"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SOCIETY] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Society Members"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
 };

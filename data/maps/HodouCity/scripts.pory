@@ -4,14 +4,15 @@ mapscripts HodouCity_MapScripts{
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
+        call_if_quest_reward(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
+        call_if_quest_complete(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
         call(HowDisappointing_ManageObject_Script)
-        call(Quest_CulturalPurity_HideLeader_Script)
-        call(Quest_CulturalPurity_HideBackUp_Script)
-        call(Quest_CulturalPurity_MoveGuard_Script)
         call(Restorehodoucity_Script_ControlPewfatVisibility)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_Rematches_Script_HideKeiYing)
         call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideKeiYing)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ,CulturalPurity_Script_Hide_HodouLeader)
+        call_if_quest_not_inactive(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_HodouLeader)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

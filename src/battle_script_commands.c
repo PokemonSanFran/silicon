@@ -79,7 +79,7 @@
 #include "data/battle_move_effects.h"
 #include "ui_pokedex.h" // pokedex
 #include "little_cup.h" // littlecup
-#include "ui_dexnav.h" // dexnav 
+#include "ui_dexnav.h" // dexnav
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
@@ -6301,6 +6301,29 @@ static void Cmd_yesnobox(void)
         BattleCreateYesNoCursorAt(0);
         break;
     case 1:
+// Start silicon-specific-tests
+#if TESTING
+        if (gSiliconTestVariables.autoPressYes)
+        {
+            gSiliconTestVariables.autoPressYes = FALSE;
+
+            PlaySE(SE_SELECT);
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            return;
+        }
+        else if (gSiliconTestVariables.autoPressNo)
+        {
+            gSiliconTestVariables.autoPressNo = FALSE;
+
+            gBattleCommunication[CURSOR_POSITION] = 1;
+            PlaySE(SE_SELECT);
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            return;
+        }
+#endif
+// End silicon-specific-tests
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
@@ -12723,6 +12746,48 @@ void BS_HandleExpTestFinish(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 // End trainerExpTests
+
+// Start silicon-specific-tests
+void BS_OptionTestHandler(void)
+{
+    NATIVE_ARGS();
+
+#if TESTING
+    if (gSiliconTestVariables.checkFontGraphics)
+    {
+        u32 *topVramStart = (u32 *)(BG_VRAM + 144 * TILE_SIZE_4BPP);
+        u32 *bottomVramStart = (u32 *)(BG_VRAM + 170 * TILE_SIZE_4BPP);
+        for (u32 tile = 0; tile < 20; tile++)
+        {
+            for (u32 line = 0; line < 8; line++)
+            {
+                gSiliconTestVariables.counter ^= topVramStart[8 * tile + line];
+                gSiliconTestVariables.counter ^= bottomVramStart[8 * tile + line];
+            }
+        }
+    }
+    if (gSiliconTestVariables.checkVramUse)
+    {
+        u32 *objVramStart = (u32 *)(OBJ_VRAM0);
+        u32 lastUsedTile = 0;
+        for (u32 tile = 0; tile < 1024; tile++)
+        {
+            for (u32 line = 0; line < 8; line++)
+            {
+                if (objVramStart[tile * 8 + line] != 0)
+                {
+                    lastUsedTile = tile;
+                    break;
+                }
+            }
+        }
+        gSiliconTestVariables.counter = lastUsedTile;
+    }
+#endif
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+// End silicon-specific-tests
 
 // Start pointsMessage
 void BS_JumpIfPointsMessagesOff(void)

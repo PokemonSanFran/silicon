@@ -2166,6 +2166,13 @@
 	.endm
 @ End trainerExpTests
 
+@ Start silicon-specific-tests
+	@ Handle various options test checks
+	.macro optiontesthandler
+	callnative BS_OptionTestHandler
+	.endm
+@ End silicon-specific-tests
+
 @ Start pointsMessage
 .macro jumpifpointsmessageoff jumpInstr:req
 callnative BS_JumpIfPointsMessagesOff

@@ -17,6 +17,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/speaker_names.h"
+#include "test/test.h" // silicon-specific-tests
 
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
@@ -598,6 +599,15 @@ void RunTextPrinters(void)
         {
             if (currentPrinter->active)
             {
+// Start silicon-specific-tests
+#if TESTING
+                if (gSiliconTestVariables.checkPrintSpeed)
+                {
+                    gSiliconTestVariables.counter++;
+                }
+#endif
+// End silicon-specific-tests
+
                 for (u32 repeat = 0; repeat < textRepeats || isInstantText; repeat++)
                 {
                     u32 renderState = RenderFont(currentPrinter);

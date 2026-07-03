@@ -68,11 +68,6 @@ const u8 gText_Quest_RestaurantExpansion2_Desc[] =_("Description");
 const u8 gText_Quest_RestaurantExpansion2_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_RestaurantExpansion2_Map[] =_("MermerezaCity");
 
-const u8 gText_Quest_CulturalPurity_Name[] = _("Cultural Purity");
-const u8 gText_Quest_CulturalPurity_Desc[] =_("Description");
-const u8 gText_Quest_CulturalPurity_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_CulturalPurity_Map[] =_("HodouCity");
-
 const u8 gText_Quest_HybridCulture_Name[] = _("Hybrid Culture");
 const u8 gText_Quest_HybridCulture_Desc[] =_("Shinzo wants to better understandn the\nmixed culture of Resido & ToraTown.\nFind ToraTown's cultural gems!");
 const u8 gText_Quest_HybridCulture_DoneDesc[] =_("Shinzo has a lot to learn about Resido\nculture, but is greateful for your\nhelp.");

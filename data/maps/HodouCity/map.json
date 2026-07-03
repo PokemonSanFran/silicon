@@ -126,6 +126,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_HODOU_SHINZO",
       "graphics_id": "OBJ_EVENT_GFX_SHINZO",
       "x": 3,
       "y": 17,
@@ -135,34 +136,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_CulturalPurity_Interact_Event_Script",
+      "script": "CulturalPurity_Dialogue_StartQuest",
       "flag": "FLAG_TEMP_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 12,
-      "y": 15,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_CulturalPurity_Racist_Interact_Script",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-      "x": 12,
-      "y": 14,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_3"
     },
     {
       "local_id": "LOCALID_HODOU_CITY_KEVIN",
@@ -271,22 +246,30 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonC",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HODOU_CULTHOUSEGUARD",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "x": 12,
+      "y": 15,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "CulturalPurity_Script_Interact_Culthouseguard",
+      "flag": "FLAG_TEMP_3"
     }
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_HODOU_TO_CULTHOUSE",
       "x": 12,
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_RACISTHOUSE",
-      "dest_warp_id": "1"
-    },
-    {
-      "x": 24,
-      "y": 20,
-      "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_A",
-      "dest_warp_id": "0"
+      "dest_warp_id": "WARP_ID_CULTHOUSE_TO_HODOU_RIGHT"
     },
     {
       "x": 9,
@@ -296,18 +279,20 @@
       "dest_warp_id": "0"
     },
     {
+      "warp_id": "WARP_ID_HODOU_TO_HERBAL",
       "x": 18,
       "y": 10,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_C",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_HODOU_CITY_HERBAL",
+      "dest_warp_id": "WARP_ID_HERBAL_TO_HODOU_RIGHT"
     },
     {
+      "warp_id": "WARP_ID_HODOU_TO_COOKIE",
       "x": 29,
       "y": 5,
       "elevation": 0,
-      "dest_map": "MAP_HODOU_CITY_BACKROOM_D",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_HODOU_CITY_COOKIE",
+      "dest_warp_id": "WARP_ID_COOKIE_TO_HODOU_RIGHT"
     },
     {
       "warp_id": "WARP_ID_HODOU_GYM_ENTRANCE",
@@ -323,6 +308,14 @@
       "elevation": 0,
       "dest_map": "MAP_HODOU_CITY_POKEMON_CENTER_1F",
       "dest_warp_id": "0"
+    },
+    {
+      "warp_id": "WARP_ID_HODOU_TO_ALLEY_1",
+      "x": 15,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_HODOU_CITY_ALLEY_1",
+      "dest_warp_id": "WARP_ID_ALLEY_1_TO_HODOU"
     }
   ],
   "coord_events": [

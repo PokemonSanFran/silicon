@@ -742,4 +742,194 @@ const struct Tweet gTweets[] =
         .dislikeCount = 72,
         .likeCount = 4,
     },
+    [TWEET_QUEST_CULTURAL_PURITY_AD] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Reject modernity. Embrace tradition. Join the Seafoam {STR_VAR_1} Society and learn true strength away from distractions."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_AD2] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Type diversity. Held items. Moves of different types. Do these actually make you stronger? All of the greats are focused. Shouldn’t you be?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_AlwaysTrue,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_AD3] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Focus your mind. Focus your party. To begin your journey, narrow your party to only two types, and bring the tile to the northeastern bird in the tea leaves. Speak the word of the {STR_VAR_1}."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_Active,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYA] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Trainers are only supposed to train two types at a time. Distractions with diversity only take away from your core strength."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForA,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYB] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Our ancestors didn’t have their Pokémon hold items. Why should you?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForB,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYC] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Your Pokémon’s moves are stronger when their types match. You owe it to your Pokémon to let them access their rawest power."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForC,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYD] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Gym Leader Shinzo has seen the light and is training with the Seafoam {STR_VAR_1} Society. Why haven’t you started?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForD,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_CULTURAL_PURITY_READYD_CHAMPION] =
+    {
+        .userId = BUZZR_USER_SOCIETY,
+        .content = COMPOUND_STRING("Even Champion {PLAYER} has seen the light and is ready to grow stronger. Why haven't you?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_CulturalPurity_ReadyForDChampion,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_INTRO] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("We’ve got the top five hidden gems of Resido - visit them all and live how the locals live! Scroll for our top five!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_1] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("Start your day by watching the sunrise over Resido from the region’s pride and joy - the {STR_VAR_1}. The best view in the entire region is smack dab in the middle of the bridge!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_2] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("While they’re not native to this continent, Resido has a sizable population of wild {STR_VAR_2} that have made it their home! The trees of {STR_VAR_1} are the best way to spot these birds but watch out- they can be fierce in battle!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_3] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("Did battling with the {STR_VAR_2} wear you out? Refuel at {STR_VAR_1} Taqueria where you can find the finest tacos, burritos, and nachos in the region!"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_4] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("Work off those tacos by taking a looooonnnng walk in the {STR_VAR_1}. They say the inside is an impossible maze- can you find the deepest room before you join its residents… permanently?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_LISTICLE_5] =
+    {
+        .userId = BUZZR_USER_WATCHVIBES,
+        .content = COMPOUND_STRING("Make the hike up to {STR_VAR_1} and watch the sun set over Resido from the tallest point in the region. It’s a view you’ll never forget! "),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasQuestStarted,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_SHINZO_1] =
+    {
+        .userId = BUZZR_USER_SHINZO,
+        .content = COMPOUND_STRING("The {STR_VAR_1} is so long! Western regions have so many long bridges."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasSubquest1Completed,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_SHINZO_2] =
+    {
+        .userId = BUZZR_USER_SHINZO,
+        .content = COMPOUND_STRING("{STR_VAR_1} has a beautiful assortment of {STR_VAR_2}! I even caught a white one, but I probably won’t use it in battle."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasSubquest2Completed,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_SHINZO_3] =
+    {
+        .userId = BUZZR_USER_SHINZO,
+        .content = COMPOUND_STRING("I’d heard that {STR_VAR_1}’s food was good, but these tacos are incredible! It’s nothing like the tacos I had back home. What are they doing differently?..."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasSubquest3Completed,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_SHINZO_4] =
+    {
+        .userId = BUZZR_USER_SHINZO,
+        .content = COMPOUND_STRING("{STR_VAR_1} and Sinnoh’s Turnback Cave are both nearly inescapable mazes with a relationship to another world… How many locations like this are there?"),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasSubquest4Completed,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
+    [TWEET_QUEST_HYBRID_CULTURE_SHINZO_5] =
+    {
+        .userId = BUZZR_USER_SHINZO,
+        .content = COMPOUND_STRING("Finally! A hike that properly compares to Coronet’s grand heights. {STR_VAR_1}, and Resido itself, are rather beautiful."),
+        .isPrivate = FALSE,
+        .criteria = TweetCriteria_Quest_HybridCulture_HasSubquest5Completed,
+        .quest = 0,
+        .dislikeCount = 72,
+        .likeCount = 4,
+    },
 };

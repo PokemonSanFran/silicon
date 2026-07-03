@@ -457,7 +457,6 @@ static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
-static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
 // pokemon status
 static inline void MonStatus_InjectStatusGraphics(struct Sprite *, u32, u32);
@@ -1794,17 +1793,17 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
         StringCopy(gStringVar2, prevSave->playerName);
         GetMapNameGeneric(gStringVar3,
             Overworld_GetMapHeaderByGroupAndId(prevSave->location.mapGroup, prevSave->location.mapNum)->regionMapSectionId);
-        u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} in {STR_VAR_3} at "));
+        u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} - {STR_VAR_3} with "));
 
         ptr = ConvertIntToDecimalStringN(ptr, prevSave->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
         ptr = StringAppend(ptr, COMPOUND_STRING("{FONT_SMALL}:{FONT_SMALL_NARROW}"));
         ConvertIntToDecimalStringN(ptr, prevSave->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ptr = StringAppend(ptr, COMPOUND_STRING(" Playtime"));
 
         u32 x = GetStringCenterAlignXOffset(FONT_SMALL_NARROW, gStringVar1, TILE_TO_PIXELS(START_WIN_SAVE_OVERWRITE_WIDTH)) - 8;
         StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, x, TILE_TO_PIXELS(6), gStringVar1);
 
         x += StartPrint_ConvertStringLengthToPixels(gStringVar1, FONT_SMALL_NARROW) - 24;
-        BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(BlitSymbol_GetTimeOfDayFromPlaytime()), tWindowId, x, TILE_TO_PIXELS(6));
     }
 
     CopyWindowToVram(tWindowId, COPYWIN_FULL);
@@ -2211,41 +2210,6 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void)
 {
     return START_HELP_SYMBOL_SIG_0A + CellularSignal_GetCurrentStrength();
 }
-
-static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void)
-{
-    s32 hours, time;
-    struct StartMenuPreviousSave *prevSave = &sStartMenuPreviousSave;
-    hours = prevSave->playTimeHours;
-
-    if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
-    {
-        time = TIME_MORNING;
-    }
-    else if (IsBetweenHours(hours, MORNING_HOUR_MIDDLE, MORNING_HOUR_END)) // morning->day
-    {
-        time = TIME_MORNING;
-    }
-    else if (IsBetweenHours(hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END)) // evening
-    {
-        time = TIME_EVENING;
-    }
-    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_BEGIN + 1)) // evening->night
-    {
-        time = TIME_NIGHT;
-    }
-    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END)) // night
-    {
-        time = TIME_NIGHT;
-    }
-    else // day
-    {
-        time = TIME_DAY;
-    }
-
-    return time;
-}
-
 
 // mon status
 static inline void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)

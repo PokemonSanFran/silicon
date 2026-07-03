@@ -55,5 +55,17 @@ void TweetCriteria_Quest_RestorehodoucityComplete(void);
 void TweetCriteria_Quest_ImprovbattlingActive(void);
 void TweetCriteria_Quest_ImprovbattlingComplete(void);
 void TweetCriteria_Quest_Hang20_FirstZapRead(void);
+void TweetCriteria_Quest_CulturalPurity_ReadyForDChampion(void);
+void TweetCriteria_Quest_CulturalPurity_ReadyForD(void);
+void TweetCriteria_Quest_CulturalPurity_ReadyForC(void);
+void TweetCriteria_Quest_CulturalPurity_ReadyForB(void);
+void TweetCriteria_Quest_CulturalPurity_ReadyForA(void);
+void TweetCriteria_Quest_CulturalPurity_Active(void);
+void TweetCriteria_Quest_HybridCulture_HasQuestStarted(void);
+void TweetCriteria_Quest_HybridCulture_HasSubquest1Completed(void);
+void TweetCriteria_Quest_HybridCulture_HasSubquest2Completed(void);
+void TweetCriteria_Quest_HybridCulture_HasSubquest3Completed(void);
+void TweetCriteria_Quest_HybridCulture_HasSubquest4Completed(void);
+void TweetCriteria_Quest_HybridCulture_HasSubquest5Completed(void);
 
 #endif // GUARD_BUZZR_CRITERIA_H
