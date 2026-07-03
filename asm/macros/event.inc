@@ -827,6 +827,7 @@
     .macro trainerbattle_continue_after_lose trainer:req, lose_text:req
     setflag B_FLAG_NO_WHITEOUT
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+    clearflag B_FLAG_NO_WHITEOUT
     .endm
 	@ End siliconMerge
 
