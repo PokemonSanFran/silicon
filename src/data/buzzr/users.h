@@ -167,7 +167,7 @@ const struct Users gBuzzrUsers[] =
     },
     [BUZZR_USER_INSTALLPROBESWORKER] =
     {
-        .username = COMPOUND_STRING("InstallProbesWorker"),
+        .username = COMPOUND_STRING("Installnatureprobesworker"),
         .isVerified = FALSE,
     },
 };
