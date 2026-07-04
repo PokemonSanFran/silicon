@@ -18,7 +18,7 @@ buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallForestProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end
@@ -37,7 +37,7 @@ buffermapname(STR_VAR_3,MAP_PIOCA_BRIDGE)
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallHillProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end
@@ -54,7 +54,7 @@ buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
         case QUEST_MENU_SET_ACTIVE:
             goto(Quest_InstallNatureProbes_InstallShoreProbe_Script)
         case QUEST_MENU_COMPLETE_QUEST:
-            msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+            msgbox(format("There is a probe attached to the sign post."),MSGBOX_SIGN)
         default:
             release
             end
