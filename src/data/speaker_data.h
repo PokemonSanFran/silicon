@@ -2208,7 +2208,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerPal = sSpeakerPal_Bill,
     },
 
-    [SPEAKER_INSTALLNATUREPROBES] =
+    [SPEAKER_INSTALLNATUREPROBESWORKER] =
     {
         .name = COMPOUND_STRING("Installnatureprobes"),
         .title = COMPOUND_STRING("???"),
