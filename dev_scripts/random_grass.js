@@ -4,7 +4,7 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const grassTiles = [0x008, 0x009, 0x00A, 0x01F];
+const grassTiles = [0x009, 0x00A, 0x01F];
 
 export function onBlockChanged(x, y, prevBlock, newBlock) {
 
@@ -12,9 +12,9 @@ export function onBlockChanged(x, y, prevBlock, newBlock) {
         let selectedTile;
         
         if (Math.random() < 0.9) {
-            selectedTile = 0x008;
+            selectedTile = 0x009;
         } else {    
-            const i = randInt(0, 3); 
+            const i = randInt(0, 2); 
             selectedTile = grassTiles[i + 1]; 
         }
         
