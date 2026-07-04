@@ -5,7 +5,7 @@ const INSTALLNATUREPROBESWORKER = LOCALID_ROUTE100_INSTALLNATUREPROBES
 const PLAYER_X = VAR_TEMP_3
 const PLAYER_Y = VAR_TEMP_4
 
-script Quest_InstallNatureProbes_Interact_InstallNatureProbes_Script
+script Quest_InstallNatureProbes_Interact_InstallNatureProbesWorker_Script
 {
 	lock
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
