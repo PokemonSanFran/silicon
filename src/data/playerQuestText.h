@@ -1484,5 +1484,867 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
+  {
+    .text = COMPOUND_STRING("Get some rest at your new place in {STR_VAR_1}. Tomorrow, you begin destroying The Tide."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PETAROSA_BOROUGH,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_YOU_REALIZE_THEYRE_EVIL_RIGHT,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = STORY_MORNING_OF_TIMELINE_SPLIT,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("There's no turning back. Talk to Kei-Ying in the {STR_VAR_1} League Ops conference room to begin the operations to dismantle The Tide."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_MORNING_OF_TIMELINE_SPLIT,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh, Kei-Ying, or Oliver in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The task {STR_VAR_1} in your ToDo List has the details of your mission to dismantle The Tide's home base."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_LETSBURNTHISMOTHERDOWN,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The task {STR_VAR_1} in your ToDo List has the details of your mission to find and arrest the leader of The Tide, Vigrim."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_MANHUNT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The task {STR_VAR_1} in your ToDo List has the details of your mission to shutdown the training centers for members of The Tide."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_HOWDISAPPOINTING,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You started two missions to destroy The Tide, {STR_VAR_1} and {STR_VAR_2}. Check your ToDo List for details."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_LETSBURNTHISMOTHERDOWN,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_MANHUNT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You started two missions to destroy The Tide, {STR_VAR_1} and {STR_VAR_2}. Check your ToDo List for details."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_LETSBURNTHISMOTHERDOWN,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_HOWDISAPPOINTING,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You started two missions to destroy The Tide, {STR_VAR_1} and {STR_VAR_2}. Check your ToDo List for details."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_MANHUNT,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_HOWDISAPPOINTING,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_ACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_REWARD,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You started all three missions to destroy The Tide, {STR_VAR_1}, {STR_VAR_2} and {STR_VAR_3}. Check your ToDo List for details."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_LETSBURNTHISMOTHERDOWN,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_MANHUNT,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_HOWDISAPPOINTING,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Oliver in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Kei-Ying in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = GREATER_THAN_OR_EQUAL,
+        .targetValue = STORY_START_FALSE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = LESS_THAN_OR_EQUAL,
+        .targetValue = STORY_3RD_THE_TIDE_TAKEDOWN,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_LETSBURNTHISMOTHERDOWN,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_MANHUNT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HOWDISAPPOINTING,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Head into the {STR_VAR_1} Arena from the {STR_VAR_2} Locker Room and participate in the exhibition battle against Diantha!"),
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_SAVE_DIANTHA,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You had quite the battle against Diantha! Get some fresh air outside the {STR_VAR_1}."),
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_CONGRATULATED_BY_LUCREZIA,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The mysterious old lady told you to bring the {STR_VAR_1} to the highest point in the region... where is that?"),
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_ITEM,
+        .textTargetValue = ITEM_WISH_TAG,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RECIEVED_BAMBOO_STAR,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_VISITED_TORGEOT_CLIMB,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("If you want to fix your mistakes, the weird old man at the top of {STR_VAR_1} says you to leave behind a Pokemon with the spirit of a Champion."),
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_TORGEOT_CLIMB,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_TIME_TRAVEL_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TIME_TRAVEL_ASK_PLAYER,
+      },
+    }
+  },
 };
 
