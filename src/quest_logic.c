@@ -2711,8 +2711,11 @@ void ShowGarbodor(void)
     u32 fixedOtId = 38726;
     bool8 isShiny = TRUE;
     enum Item item = ITEM_NORMAL_GEM;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    StringCopy(otName,COMPOUND_STRING("Baiya"));
 
     CreateMon(&mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
+    SetMonData(&mon, MON_DATA_OT_NAME, &otName);
     SetMonData(&mon,MON_DATA_IS_SHINY,&isShiny);
     SetMonData(&mon,MON_DATA_HELD_ITEM,&item);
     CalculateMonStats(&mon);
