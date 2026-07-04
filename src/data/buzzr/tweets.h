@@ -944,7 +944,7 @@ const struct Tweet gTweets[] =
     },
     [TWEET_QUEST_NPC_INSTALLNATUREPROBESWORKER_JOBHUNTING] =
     {
-        .userId = BUZZR_USER_INSTALLPROBESWORKER,
+        .userId = BUZZR_USER_INSTALLNATUREPROBESWORKER,
         .content = COMPOUND_STRING("Hi! I'm Installprobesworker, and if you're looking for an experienced Pokémon Ranger, check out my work on my profile."),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
