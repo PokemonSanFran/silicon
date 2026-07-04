@@ -22,12 +22,12 @@ script Quest_InstallNatureProbes_Interact_InstallNatureProbesWorker_Script
 script Quest_InstallNatureProbes_StartQuest_Dialogue
 {
 	lock
-    msgbox("Reports still aren't finished…{PAUSE 30}\nAnd I've still got installation to do…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK,EMOTE_SWEAT)
-    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, emote_x, delay_16 * 4, face_player, delay_16 *2, emote_exclamation_mark))
+    msgbox("Reports still aren't finished…{PAUSE 30}\nAnd I've still got installation to do…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)
+    applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, emote_x, delay_16 * 4, face_player, delay_16 *2, emote_exclamation_mark))
     waitmovement(0)
-    msgbox("Oh! I take it you're a Pokemon Trainer?\pWe're right outside of Leaverra Forest,\nthough I take it you know that.\nIt's surprisingly cold, isn't it?\pObviously we're in the north of Resido\nright now, but really the cold is because\nsunlight doesn't pierce the shade\lcreated by these tall redwood trees.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("Would you like to cut a deal?\pIf you can help me with some of my work,\nI'll give you something that'll make\nfinding Pokemon easier.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("It shouldn't be too hard.\nIt's something Trainers do all the time\nanyways.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    msgbox("Oh! I take it you're a Pokemon Trainer?\pWe're right outside of {STR_VAR_1},\nthough I take it you know that.\nIt's surprisingly cold, isn't it?\pObviously we're in the north of Resido\nright now, but really the cold is because\nsunlight doesn't pierce the shade\lcreated by these tall redwood trees.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("Would you like to cut a deal?\pIf you can help me with some of my work,\nI'll give you something that'll make\nfinding Pokemon easier.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("It shouldn't be too hard.\nIt's something Trainers do all the time\nanyways.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("Sure, sounds good to me.", MSGBOX_AUTOCLOSE, SPEAKER_PLAYER, TAIL_TALK)
 
 	startquest(QUEST_INSTALLNATUREPROBES)
@@ -40,13 +40,14 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
     playfanfare(MUS_OBTAIN_ITEM)
     msgbox("You received Nature Probes from the man!\n{PAUSE 30}They were placed in your KEY ITEMS\npocket.")
 
-    msgbox("I am a member of the Espulee Wildlife\nRangers. We monitor the movements and\nbehavior of Pokemon so that we may\lanalyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("I have some probes that automatically\ncollect data and report back to the\nRangers.\pOnce installed it means I'm saved from\nhaving to go and do it in person.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("I wonder if you could place some under\nthe three signs around the forest?\nEverything else will be handled\lautomatically.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("One in the deepest part of the forest…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("And one by the bridges over the river.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
-    msgbox("Leaverra Forest is a precious place.\pIt's a protected area for many species\nof Pokemon threatened by climate change\nand the degradation of natural habitats.\pYou wouldn't just be doing me a favor,\nyou'd be doing nature a favor.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES, TAIL_TALK)
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox("I am a member of the {STR_VAR_1} Wildlife\nRangers. We monitor the movements and\nbehavior of Pokemon so that we may\lanalyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("I have some probes that automatically\ncollect data and report back to the\nRangers.\pOnce installed it means I'm saved from\nhaving to go and do it in person.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("I wonder if you could place some under\nthe three signs around the forest?\nEverything else will be handled\lautomatically.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("One in the deepest part of the forest…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("And one by the bridges over the river.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("{STR_VAR_1} is a precious place.\pIt's a protected area for many species\nof Pokemon threatened by climate change\nand the degradation of natural habitats.\pYou wouldn't just be doing me a favor,\nyou'd be doing nature a favor.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
 
 
 	release
@@ -58,33 +59,33 @@ script Quest_InstallNatureProbes_Active_Dialogue
     faceplayer
     call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
 	lock
-    setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+    setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
     message(format("What probes did you already install in LeaverraForest?"))
     waitmessage
     waitbuttonpress
 
     if (var(VAR_TEMP_1) == 0){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes in the deepest part of the forest."))
         waitmessage
         waitbuttonpress
     }
 
     if (var(VAR_TEMP_2) == 0){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes on the tallest hill."))
         waitmessage
         waitbuttonpress
     }
 
     if (var(VAR_TEMP_3) == 0){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBES)
+        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes by the lake shore."))
         waitmessage
         waitbuttonpress
     }
 
-    applymovement(INSTALLNATUREPROBES, moves(face_original_direction))
+    applymovement(INSTALLNATUREPROBESWORKER, moves(face_original_direction))
     release
 }
 
@@ -201,28 +202,28 @@ script Quest_InstallNatureProbes_Reward_Cutscene
 {
     faceplayer
     lock
-    msgbox("Hey there. Back so soon?",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    msgbox("Okay, let me check my phone.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, face_away_player))
+    msgbox("Hey there. Back so soon?",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    msgbox("Okay, let me check my phone.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player))
     delay(120)
-    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, face_player, delay_16 *2))
-    msgbox("The probes are working!\nWe're retrieving data!",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
+    applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_player, delay_16 *2))
+    msgbox("The probes are working!\nWe're retrieving data!",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     //Installnatureprobesworker gestures towards Player.
-    
-    msgbox("The Pokemon in Leaverra Forest are timid,\nreserved. They don't appear to people as\nopenly as they do in other places.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    msgbox("The Rangers developed this: the Familiar\nBell. It can draw Pokemon out that they\nmight be observed more easily.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    giveitem(ITEM_FAMILIAR_BELL)
-    msgbox("Thank you for your help! The Pokemon and\nthis place mean a lot to me.\pThe creek in Leaverra Forest is one of\nthe few free-flowing streams on this\ncoast that still provides suitable\lhabitat for Water-type Pokemon.\pThe water is cold, clear and well-\noxygenated. They need that to survive.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    msgbox("I'll call my boss and let him know\nthe probes are up.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, face_away_player, delay_16*2))
+    buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
+    msgbox("The Pokemon in {STR_VAR_1} are timid,\nreserved. They don't appear to people as\nopenly as they do in other places.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    msgbox("The Rangers developed this: the Familiar\nBell. It can draw Pokemon out that they\nmight be observed more easily.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    giveitem(ITEM_QUEST_INSTALLNATUREPROBES_REWARD)
+    msgbox("Thank you for your help! The Pokemon and\nthis place mean a lot to me.\pThe creek in {STR_VAR_1} is one of\nthe few free-flowing streams on this\ncoast that still provides suitable\lhabitat for Water-type Pokemon.\pThe water is cold, clear and well-\noxygenated. They need that to survive.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    msgbox("I'll call my boss and let him know\nthe probes are up.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player, delay_16*2))
     playse(SE_POKENAV_CALL)
     waitse
-    msgbox("Hey, it's me.{PAUSE 30} Good news!{PAUSE 30} The probes\nhave been installed in Leavarra Forest.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
-    msgbox("Mhm, okay… {PAUSE 60}Right… {PAUSE 30}I see… {PAUSE 60}\nI… I understand.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
+    msgbox("Hey, it's me.{PAUSE 30} Good news!{PAUSE 30} The probes\nhave been installed in Leavarra Forest.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    msgbox("Mhm, okay… {PAUSE 60}Right… {PAUSE 30}I see… {PAUSE 60}\nI… I understand.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     playse(SE_POKENAV_HANG_UP)
     waitse
-    applymovement(INSTALLNATUREPROBES, moves(delay_16 * 2, face_player, delay_16 *2))
-    msgbox("I see now that I've been naive.\pI've been informed by my superior that my\nservices are no longer needed.\pI'm dismissed from my job, and must\nvacate the premises immediately.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBES,TAIL_TALK)
+    applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_player, delay_16 *2))
+    msgbox("I see now that I've been naive.\pI've been informed by my superior that my\nservices are no longer needed.\pI'm dismissed from my job, and must\nvacate the premises immediately.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     closemessage
     getplayerxy(PLAYER_X, PLAYER_Y)
     if (var(PLAYER_X) == 12 && var(PLAYER_Y) == 6)
@@ -230,10 +231,10 @@ script Quest_InstallNatureProbes_Reward_Cutscene
         applymovement(PLAYER, moves(walk_left, face_right, delay_16 *2))
         waitmovement(0)
     }
-    applymovement(INSTALLNATUREPROBES, moves(walk_down * 3, delay_16*2))
+    applymovement(INSTALLNATUREPROBESWORKER, moves(walk_down * 3, delay_16*2))
     waitmovement(0)
     fadescreen(FADE_TO_BLACK)
-    removeobject(INSTALLNATUREPROBES)
+    removeobject(INSTALLNATUREPROBESWORKER)
     fadescreen(FADE_FROM_BLACK)
     
     completequest(QUEST_INSTALLNATUREPROBES)

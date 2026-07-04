@@ -165,7 +165,7 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("LeaverraRangers"),
         .isVerified = TRUE,
     },
-    [BUZZR_USER_INSTALLPROBESWORKER] =
+    [BUZZR_USER_INSTALLNATUREPROBESWORKER] =
     {
         .username = COMPOUND_STRING("Installnatureprobesworker"),
         .isVerified = FALSE,
