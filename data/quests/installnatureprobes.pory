@@ -8,7 +8,7 @@ const PLAYER_Y = VAR_TEMP_4
 script Quest_InstallNatureProbes_Interact_InstallNatureProbesWorker_Script
 {
 	lock
-    call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+    callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
 	returnqueststate(QUEST_INSTALLNATUREPROBES)
 
 	switch (var(VAR_RESULT))
@@ -55,7 +55,7 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 script Quest_InstallNatureProbes_Active_Dialogue
 {
     faceplayer
-    call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+    callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
 	lock
     setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
     message(format("What probes did you already install in LeaverraForest?"))
@@ -100,7 +100,7 @@ script Quest_InstallNatureProbes_InstallShoreProbe_Script{
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_1)
-    call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+    callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
     playse(SE_CONTEST_HEART) //playse(SE_SINGLE_ITEM)
     msgbox(format("{PLAYER} installed the probe by the shore."))
     waitse
@@ -123,7 +123,7 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_2)
-    call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+    callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
     playse(SE_CONTEST_HEART) //playse(SE_SINGLE_ITEM)
     msgbox(format("{PLAYER} installed the probe on the hill."))
     waitse
@@ -147,7 +147,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
 
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_3)
-    call(Quest_InstallNatureProbes_CheckCompletionRate_Script)
+    callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
     playse(SE_CONTEST_HEART) //playse(SE_SINGLE_ITEM)
     msgbox(format("{PLAYER} installed the probe in the forest."))
     waitse
@@ -227,16 +227,8 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     msgbox("I see now that I've been naive.\pI've been informed by my superior that my\nservices are no longer needed.\pI'm dismissed from my job, and must\nvacate the premises immediately.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     closemessage
     getplayerxy(PLAYER_X, PLAYER_Y)
-    if (var(PLAYER_X) == 12 && var(PLAYER_Y) == 6)
-    {
-        applymovement(PLAYER, moves(walk_left, face_right, delay_16 *2))
-        waitmovement(0)
-    }
-    applymovement(INSTALLNATUREPROBESWORKER, moves(walk_down * 3, delay_16*2))
-    waitmovement(0)
-    fadescreen(FADE_TO_BLACK)
-    removeobject(INSTALLNATUREPROBESWORKER)
-    fadescreen(FADE_FROM_BLACK)
+    moveobjecttocoords(INSTALLNATUREPROBES,12,8,DIR_SOUTH)
+    fadeandremovelasttalked
     
     completequest(QUEST_INSTALLNATUREPROBES)
     release

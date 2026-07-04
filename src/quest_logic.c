@@ -5692,3 +5692,8 @@ void DebugQuest_HybridCulture(u8 state)
             break;
     }
 }
+
+void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
+}
