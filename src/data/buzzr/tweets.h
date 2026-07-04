@@ -942,7 +942,7 @@ const struct Tweet gTweets[] =
         .dislikeCount = 4,
         .likeCount = 67,
     },
-    [TWEET_QUEST_NPC_INSTALLPROBESWORKER_JOBHUNTING] =
+    [TWEET_QUEST_NPC_INSTALLNATUREPROBESWORKER_JOBHUNTING] =
     {
         .userId = BUZZR_USER_INSTALLPROBESWORKER,
         .content = COMPOUND_STRING("Hi! I'm Installprobesworker, and if you're looking for an experienced Pokémon Ranger, check out my work on my profile."),
