@@ -935,7 +935,7 @@ const struct Tweet gTweets[] =
     [TWEET_QUEST_NPC_RANGERS_HIRING] =
     {
         .userId = BUZZR_USER_LEAVERRA_RNGRS,
-        .content = COMPOUND_STRING("Get ready to learn more about our precious residents in Leaverra Forest thanks to our newly installed Nature Probes!"),
+        .content = COMPOUND_STRING("Get ready to learn more about our precious residents in {STR_VAR_1} thanks to our newly installed Nature Probes!"),
         .isPrivate = FALSE,
         .criteria = TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
         .quest = 0,
