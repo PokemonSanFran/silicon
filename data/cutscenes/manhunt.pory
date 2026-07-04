@@ -237,7 +237,7 @@ script Manhunt_StartBattle3_Script
         playse(SE_BALL_OPEN)
         waitse
         addobject(CHARLOTTE_MON)
-        playmoncry(SPECIES_GROWLITHE,CRY_MODE_ENCOUNTER)
+        playmoncry(SPECIES_ARMAROUGE,CRY_MODE_ENCOUNTER)
         waitmoncry
 
         applymovement(PLAYER,Common_Movement_FaceRight)
