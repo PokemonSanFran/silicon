@@ -1349,5 +1349,140 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
+  {
+    .text = COMPOUND_STRING("Get some rest at your new place in {STR_VAR_1} after the tough conversation with SharpRise Captial."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PETAROSA_BOROUGH,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_BAIYA_CALL_ARANTRAZ,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_YOU_REALIZE_WERE_EVIL_RIGHT,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Learn to {STR_VAR_1} from the surfers at {STR_VAR_2}!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MOVE,
+        .textTargetValue = MOVE_SURF,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CRESALTA_VISTA,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_BAIYA_CALL_ARANTRAZ,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HANG20,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Meet Baiya on {STR_VAR_1} to discuss SharpRise Capital."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_BAIYA_CALL_ARANTRAZ,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = BAIYA_SUMMONED_ARANTRAZ,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HANG20,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Use {STR_VAR_1} to go to the northeastern side of the island. Baiya is waiting for you."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_ARRIVE_ARANTRAZ,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_HANG20,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Explore the lower levels of {STR_VAR_1} and find Baiya on the second level down."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = PRE_YOU_REALIZE_THEYRE_EVIL_RIGHT,
+      },
+    }
+  },
 };
 
