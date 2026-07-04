@@ -161,6 +161,9 @@ static void ExpandStringsForQuestFlavor(s32 flavorText)
             case QUEST_FLAVOR_GET_NAME_MOVE:
                 StringCopy(stringVariables[stringIndex],GetMoveName(target));
                 break;
+            case QUEST_FLAVOR_GET_NAME_QUEST:
+                StringCopy(stringVariables[stringIndex],GetQuestName(target));
+                break;
         }
     }
 }
