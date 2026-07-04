@@ -32,13 +32,11 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 
 	startquest(QUEST_INSTALLNATUREPROBES)
     
-    bufferstdstring(STR_VAR_3, STDSTRING_KEYITEMS)
-    additem(ITEM_QUEST_INSTALLNATUREPROBES_1)
+    cueobjectplayer(INSTALLNATUREPROBESWORKER)
+    giveitem(ITEM_QUEST_INSTALLNATUREPROBES_1)
     additem(ITEM_QUEST_INSTALLNATUREPROBES_2)
     additem(ITEM_QUEST_INSTALLNATUREPROBES_3)
-
-    playfanfare(MUS_OBTAIN_ITEM)
-    msgbox("You received Nature Probes from the man!\n{PAUSE 30}They were placed in your KEY ITEMS\npocket.")
+    closemessage
 
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox("I am a member of the {STR_VAR_1} Wildlife\nRangers. We monitor the movements and\nbehavior of Pokemon so that we may\lanalyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
@@ -93,7 +91,7 @@ script Quest_InstallNatureProbes_InstallShoreProbe_Script{
     lock
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     if(var(VAR_RESULT)){
-        msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
         release
         end
     }
@@ -117,7 +115,7 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     if(var(VAR_RESULT)){
-        msgbox(format("There is a probe attached to the sign post."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
         release
         end
     }
@@ -140,7 +138,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
 
     subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     if(var(VAR_RESULT)){
-        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER)
+        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
         release
         end
     }
@@ -208,11 +206,14 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     delay(120)
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_player, delay_16 *2))
     msgbox("The probes are working!\nWe're retrieving data!",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
-    //Installnatureprobesworker gestures towards Player.
+    cueobjectplayer(INSTALLNATUREPROBESWORKER)
     buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
     msgbox("The Pokemon in {STR_VAR_1} are timid,\nreserved. They don't appear to people as\nopenly as they do in other places.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
-    msgbox("The Rangers developed this: the Familiar\nBell. It can draw Pokemon out that they\nmight be observed more easily.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    bufferitemname(STR_VAR_1, ITEM_QUEST_INSTALLNATUREPROBES_REWARD)
+    msgbox("The Rangers developed this:\n{STR_VAR_1}\pIt can draw Pokemon out that they\nmight be observed more easily.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    cueobjectplayer(INSTALLNATUREPROBESWORKER)
     giveitem(ITEM_QUEST_INSTALLNATUREPROBES_REWARD)
+    closemessage
     msgbox("Thank you for your help! The Pokemon and\nthis place mean a lot to me.\pThe creek in {STR_VAR_1} is one of\nthe few free-flowing streams on this\ncoast that still provides suitable\lhabitat for Water-type Pokemon.\pThe water is cold, clear and well-\noxygenated. They need that to survive.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     msgbox("I'll call my boss and let him know\nthe probes are up.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player, delay_16*2))
