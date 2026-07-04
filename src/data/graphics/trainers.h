@@ -470,11 +470,11 @@ const u32 gTrainerFrontPic_PainterFrlg[] = INCGFX_U32("graphics/trainers/front_p
 const u16 gTrainerPalette_PainterFrlg[] = INCGFX_U16("graphics/trainers/palettes/painter_frlg.pal", ".gbapal");
 
 // Start silicon
-const u32 gTrainerFrontPic_SiliconPlayerM1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerM2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerM3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerN1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
-const u32 gTrainerFrontPic_SiliconPlayerN2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerM1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerM2.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerM3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerM3.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerN1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerN1.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_SiliconPlayerN2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerN2.png", ".4bpp.smol");
 const u32 gTrainerFrontPic_SiliconPlayerN3[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerN3.png", ".4bpp.smol");
 const u32 gTrainerFrontPic_SiliconPlayerF1[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF1.png", ".4bpp.smol");
 const u32 gTrainerFrontPic_SiliconPlayerF2[] = INCGFX_U32("graphics/trainers/front_pics/siliconPlayerF2.png", ".4bpp.smol");
@@ -522,11 +522,11 @@ const u16 gTrainerFrontPalette_Neriene[] = INCGFX_U16("graphics/trainers/front_p
 const u32 gTrainerFrontPic_Shinzo[] = INCGFX_U32("graphics/trainers/front_pics/shinzo.png", ".4bpp.smol");
 const u16 gTrainerFrontPalette_Shinzo[] = INCGFX_U16("graphics/trainers/front_pics/shinzo.pal", ".gbapal");
 
-const u8 gTrainerBackPic_SiliconPlayerM1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
-const u8 gTrainerBackPic_SiliconPlayerM2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
-const u8 gTrainerBackPic_SiliconPlayerM3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
-const u8 gTrainerBackPic_SiliconPlayerN1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
-const u8 gTrainerBackPic_SiliconPlayerN2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM2.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerM3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerM3.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerN1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerN1.png", ".4bpp");
+const u8 gTrainerBackPic_SiliconPlayerN2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerN2.png", ".4bpp");
 const u8 gTrainerBackPic_SiliconPlayerN3[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerN3.png", ".4bpp");
 const u8 gTrainerBackPic_SiliconPlayerF1[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF1.png", ".4bpp");
 const u8 gTrainerBackPic_SiliconPlayerF2[] = INCGFX_U8("graphics/trainers/back_pics/siliconPlayerF2.png", ".4bpp");

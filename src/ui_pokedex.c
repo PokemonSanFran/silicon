@@ -2305,6 +2305,10 @@ void SpeciesData_PrintCaptureIndicator(u32 species)
     gSprites[spriteId].oam.size = SPRITE_SIZE(16x16);
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].subpriority = 2;
+
+    if (isAlola)
+        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(PAL_POKEDEX_ALOLA_SPRITES);
+
     SpeciesData_SaveCaptureIndicatorSpriteId(spriteId);
 }
 
@@ -2355,6 +2359,7 @@ void SpeciesData_LoadCaptureIndicatorSprite(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator_Alola);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator_Alola);
     LoadSpritePalette(&sPokedexInterfaceSpritePalette);
+    LoadSpritePalette(&sAlolaSpritePalette);
 }
 
 static void SpeciesData_SaveCaptureIndicatorSpriteId(u32 spriteId)
@@ -2549,6 +2554,9 @@ static void SpeciesGrid_PrintCaptureIndicator(enum SpeciesListRows rowIndex, enu
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].subpriority = 0;
     SpeciesGrid_SaveCaptureIndicatorSpriteId(rowIndex, columnIndex, spriteId);
+
+    if (isAlola)
+        gSprites[spriteId].oam.paletteNum = IndexOfSpritePaletteTag(PAL_POKEDEX_ALOLA_SPRITES);
 }
 
 static void SpeciesGrid_LoadCaptureIndicatorSprite(void)
@@ -2586,6 +2594,7 @@ static void SpeciesGrid_LoadCaptureIndicatorSprite(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListUncaughtIndicator);
     LoadCompressedSpriteSheet(&sSpriteSheet_PokedexSpeciesListCaptureIndicator);
     LoadSpritePalette(&sPokedexInterfaceSpritePalette);
+    LoadSpritePalette(&sAlolaSpritePalette);
 }
 
 static u32 SpeciesGrid_GetCaptureIndicatorSpriteId(u32 row, u32 column)

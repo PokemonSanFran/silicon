@@ -127,11 +127,18 @@ extern const u16 gTypes_Palettes[];
 extern const struct SpriteTemplate gSpriteTemplate_Type13x11;
 
 static const u16 pokedexPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/palettes/default.gbapal");
+static const u16 alolaPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/species_list/emptyfolder_alola.gbapal");
 
 static const struct SpritePalette sPokedexInterfaceSpritePalette =
 {
     .data = pokedexPalettesDefault,
     .tag = PAL_POKEDEX_UI_SPRITES,
+};
+
+static const struct SpritePalette sAlolaSpritePalette =
+{
+    .data = alolaPalettesDefault,
+    .tag = PAL_POKEDEX_ALOLA_SPRITES,
 };
 
 static const u8 *const sEggGroupTexts[] =

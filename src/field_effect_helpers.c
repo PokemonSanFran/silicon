@@ -18,6 +18,7 @@
 #include "constants/songs.h"
 // Start autoSave
 #include "task.h"
+#include "text.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 // End autoSave
@@ -1946,35 +1947,33 @@ void Task_Saving(u8 taskId)
 
 static bool8 Saving_Init(struct Task *task)
 {
-    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    //s16 x = playerObjEvent->currentCoords.x;
-    //s16 y = playerObjEvent->currentCoords.y;
-    s16 x2;
-    s16 y2;
-    s16 x_diff;
-    s16 y_diff;
-
-    u8 spriteId;
-    struct Sprite *sprite;
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
+    LoadSpriteSheetByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0);
+    u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAVING], 0, 0, 0xFF);
     task->eSavingSpriteID = spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
+
     if (spriteId != MAX_SPRITES)
     {
-        sprite = &gSprites[spriteId];
         sprite->oam.priority = 0;
         sprite->invisible = FALSE;
         sprite->coordOffsetEnabled = TRUE;
     }
-    sprite = &gSprites[spriteId];
 
-    y_diff = 1;
-    x_diff = 0;
+    s16 y_diff = 1;
+    s16 x_diff = 0;
+    s16 x2;
+    s16 y2;
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetSpritePosToMapCoords((playerObjEvent->currentCoords.x + x_diff), (playerObjEvent->currentCoords.y + y_diff), &x2, &y2);
-    StartSpriteAnim(sprite, 0);
     sprite->x = x2 + 8;
     sprite->y = y2 + 8;
 
+    u32 fontId = FONT_OUTLINED;
+    u32 x = 2;
+    u32 y = 0;
+    static const union TextColor color = {.background = 0, .foreground = 1, .shadow = 7, .accent = 0};
+    AddSpriteTextPrinterParameterized6(spriteId, fontId, x, y, 0, 0, color, 0, COMPOUND_STRING("SAVING…"));
     task->eSavingComplete = FALSE;
     task->eState++;
     return FALSE;
