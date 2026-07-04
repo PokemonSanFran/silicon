@@ -157,16 +157,16 @@
     },
     {
       "type": "sign",
-      "x": 4,
-      "y": 9,
+      "x": 22,
+      "y": 41,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LeaverraForest_ShoreSign_Script"
     },
     {
       "type": "sign",
-      "x": 22,
-      "y": 41,
+      "x": 4,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LeaverraForest_HillSign_Script"

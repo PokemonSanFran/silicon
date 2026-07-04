@@ -885,6 +885,18 @@ enum
 };
 
 // ***********************************************************************
+// Quest: Install Nature Probes
+// ***********************************************************************
+//#define QUEST_INSTALLNATUREPROBES_
+
+#define ITEM_QUEST_INSTALLNATUREPROBES_1            ITEM_DEVON_SCOPE
+#define ITEM_QUEST_INSTALLNATUREPROBES_2            ITEM_STORAGE_KEY
+#define ITEM_QUEST_INSTALLNATUREPROBES_3            ITEM_DEVON_PARTS
+#define ITEM_QUEST_INSTALLNATUREPROBES_REWARD                    ITEM_FAME_CHECKER
+
+#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER    OBJ_EVENT_GFX_GENTLEMAN
+
+// ***********************************************************************
 // Quest: Restore EspuleeOutskirts Gym
 // ***********************************************************************
 //#define QUEST_RESTOREESPULEEGYM_
