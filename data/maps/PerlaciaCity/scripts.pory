@@ -9,10 +9,13 @@ mapscripts PerlaciaCity_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
     }
 
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER:WowYoureStrong_Script_CreateObjectsForBaiyaAndLucrezia
+    ]
+
     MAP_SCRIPT_ON_TRANSITION {
         call(Quest_StopMugging_HideObject_Script)
         call(Buzzr_HideReporter_Script)
-        call(WowYoureStrong_HideObject_Script)
         call(CutePokemon_Script_ControlMelissaPerlaciaOutsideVisibility)
     }
 

@@ -1359,26 +1359,14 @@ const struct SpritePalette gSpritePalette_CaveDust = {gFieldEffectObjectPalette_
 // Start autoSave
 const struct SpritePalette gSpritePalette_SavingFieldEffect     = {gFieldEffectObjectPaletteSaving, FLDEFF_PAL_TAG_SAVING};
 
-static const union AnimCmd sSavingAnim[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_JUMP(0),
-};
-
 static const struct SpriteFrameImage sPicTable_Saving[] = {
-    overworld_frame(gFieldEffectObjectPic_Saving, 8, 8, 0),
-};
-
-static const union AnimCmd *const sAnimTable_Saving[] =
-{
-    sSavingAnim,
+    overworld_frame(gFieldEffectObjectPic_Saving, 8, 4, 0),
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Saving = {
-    .tileTag = TAG_NONE,
+    .tileTag = FLDEFF_TILE_TAG_SAVING,
     .paletteTag = FLDEFF_PAL_TAG_SAVING,
-    .oam = &gObjectEventBaseOam_64x64,
-    .anims = sAnimTable_Saving,
+    .oam = &gObjectEventBaseOam_64x32,
     .images = sPicTable_Saving,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SavingSpriteCallback,
