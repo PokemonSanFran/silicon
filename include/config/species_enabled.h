@@ -292,7 +292,7 @@
 #define P_FAMILY_UXIE                    FALSE
 #define P_FAMILY_MESPRIT                 FALSE
 #define P_FAMILY_AZELF                   FALSE
-#define P_FAMILY_DIALGA                  FALSE
+#define P_FAMILY_DIALGA                  P_GEN_4_POKEMON 
 #define P_FAMILY_PALKIA                  FALSE
 #define P_FAMILY_HEATRAN                 FALSE
 #define P_FAMILY_REGIGIGAS               FALSE
