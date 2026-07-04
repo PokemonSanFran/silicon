@@ -2346,5 +2346,30 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
+  {
+    .text = COMPOUND_STRING("Was that a dream? Or is this another chance? Meet up with Baiya at the lowest point of {STR_VAR_1}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_MORNING_OF_TIMELINE_SPLIT,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_TIMELINE_TIMETRAVEL,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      },
+    }
+  },
 };
 
