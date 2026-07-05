@@ -52,7 +52,8 @@ script MaybeIFuckedUp_Dialogue
 
     if (flag(FLAG_VISITED_TORGEOT_CLIMB))
     {
-        msgbox(format("Tallest point... is that Twin Peaks? Do I have to do that hike again?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+		buffermapname(STR_VAR_1,MAP_TORGEOT_CLIMB)
+        msgbox(format("Tallest point... is that {STR_VAR_1}? Do I have to do that hike again?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
     else
     {
