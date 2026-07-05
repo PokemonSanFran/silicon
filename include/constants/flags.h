@@ -166,7 +166,7 @@
 //#define FLAG_PENDING_DAYCARE_EGG                                   0x55
 #define FLAG_UNHOUSED_REQUEST                                        0x56
 #define FLAG_FIRST_STEP_OUTSIDE                                      0x57
-#define FLAG_SILICON_UNUSED_0x58                                     0x58
+#define FLAG_PLAYER_USING_TAXI                                       0x58
 #define FLAG_SILICON_UNUSED_0x59                                     0x59
 #define FLAG_SILICON_UNUSED_0x5A                                     0x5A
 #define FLAG_SILICON_UNUSED_0x5B                                     0x5B
