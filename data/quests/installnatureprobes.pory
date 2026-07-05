@@ -58,25 +58,29 @@ script Quest_InstallNatureProbes_Active_Dialogue
     callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
 	lock
     setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
-    message(format("What probes did you already install in LeaverraForest?"))
+    buffermapname(STR_VAR_1, MAP_LEAVERRA_FOREST)
+    message(format("What probes did you already install in {STR_VAR_1}?"))
     waitmessage
     waitbuttonpress
 
-    if (var(VAR_TEMP_1) == 0){
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+    if (var(VAR_RESULT) == FALSE){
         setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes in the deepest part of the forest."))
         waitmessage
         waitbuttonpress
     }
 
-    if (var(VAR_TEMP_2) == 0){
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+    if (var(VAR_RESULT) == FALSE){
         setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes on the tallest hill."))
         waitmessage
         waitbuttonpress
     }
 
-    if (var(VAR_TEMP_3) == 0){
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
+    if (var(VAR_RESULT) == FALSE){
         setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
         message(format("One probe goes by the lake shore."))
         waitmessage
@@ -160,45 +164,6 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
     return
 }
 
-script Quest_InstallNatureProbes_CheckCompletionRate_Script
-{
-    questmenu(QUEST_MENU_CHECK_ACTIVE, QUEST_INSTALLNATUREPROBES)
-
-    if (!var(VAR_RESULT)){
-        release
-        return
-    }
-
-	setvar(VAR_TEMP_0, 0)
-	setvar(VAR_TEMP_1, 0)
-	setvar(VAR_TEMP_2, 0)
-	setvar(VAR_TEMP_3, 0)
-
-	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_3)
-	if (var(VAR_RESULT))
-	{
-		addvar(VAR_TEMP_0, 1)
-		addvar(VAR_TEMP_1, 1)
-	}
-	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_2)
-	if (var(VAR_RESULT))
-	{
-		addvar(VAR_TEMP_0, 1)
-		addvar(VAR_TEMP_2, 1)
-	}
-	subquestmenu(QUEST_MENU_CHECK_COMPLETE, QUEST_INSTALLNATUREPROBES, SUB_QUEST_3)
-	if (var(VAR_RESULT))
-	{
-		addvar(VAR_TEMP_0, 1)
-		addvar(VAR_TEMP_3, 1)
-	}
-
-	if (var(VAR_TEMP_0) == 3)
-	{
-		questmenu(QUEST_MENU_SET_REWARD, QUEST_INSTALLNATUREPROBES)
-	}
-}
-
 script Quest_InstallNatureProbes_Reward_Cutscene
 {
     faceplayer
@@ -222,7 +187,8 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player, delay_16*2))
     playse(SE_POKENAV_CALL)
     waitse
-    msgbox("Hey, it's me.{PAUSE 30} Good news!{PAUSE 30} The probes\nhave been installed in Leavarra Forest.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
+    msgbox("Hey, it's me.{PAUSE 30} Good news!{PAUSE 30} The probes\nhave been installed in {STR_VAR_1}.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     msgbox("Mhm, okay… {PAUSE 60}Right… {PAUSE 30}I see… {PAUSE 60}\nI… I understand.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     playse(SE_POKENAV_HANG_UP)
     waitse
