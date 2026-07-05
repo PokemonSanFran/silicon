@@ -255,7 +255,7 @@
 #define P_FAMILY_KYOGRE                  FALSE
 #define P_FAMILY_GROUDON                 FALSE
 #define P_FAMILY_RAYQUAZA                FALSE
-#define P_FAMILY_JIRACHI                 FALSE
+#define P_FAMILY_JIRACHI                 P_GEN_3_POKEMON 
 #define P_FAMILY_DEOXYS                  FALSE
 
 #define P_FAMILY_TURTWIG                 P_GEN_4_POKEMON
