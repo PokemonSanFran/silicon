@@ -5692,3 +5692,128 @@ void DebugQuest_HybridCulture(u8 state)
             break;
     }
 }
+
+// ***********************************************************************
+// Cutscene: Install Nature Probes
+// ***********************************************************************
+
+void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
+}
+
+// ***********************************************************************
+// Cutscene: And We March On
+// ***********************************************************************
+
+void AndWeMarchOn_LoadTalaMon0(void)
+{
+    u32 trainerId = TRAINER_TALA;
+    u32 index = 0;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_2,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void AndWeMarchOn_LoadTalaMon1(void)
+{
+    u32 trainerId = TRAINER_TALA;
+    u32 index = 1;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_3,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void AndWeMarchOn_PlayTalaMon1Cry(void)
+{
+    u32 trainerId = TRAINER_TALA;
+    u32 index = 0;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void AndWeMarchOn_PlayTalaMon0Cry(void)
+{
+    u32 trainerId = TRAINER_TALA;
+    u32 index = 1;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void AndWeMarchOn_LoadParadeKidMon0(void)
+{
+    u32 trainerId = TRAINER_1A2CA162;
+    u32 index = 0;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void AndWeMarchOn_LoadParadeKidMon1(void)
+{
+    u32 trainerId = TRAINER_1A2CA162;
+    u32 index = 1;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_1,&gTrainers[0][0],TRAINERS_COUNT);
+}
+
+void AndWeMarchOn_PlayParadeKidMon1Cry(void)
+{
+    u32 trainerId = TRAINER_1A2CA162;
+    u32 index = 0;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void AndWeMarchOn_PlayParadeKidMon0Cry(void)
+{
+    u32 trainerId = TRAINER_1A2CA162;
+    u32 index = 0;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gTrainers[0][0],TRAINERS_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+void AndWeMarchOn_BufferAttacks(void)
+{
+    enum ResidoTrainerIds trainer = TRAINER_TALA;
+    u32 rows = TRAINERS_COUNT;
+    const struct Trainer *trainers = &gTrainers[0][0];
+    enum Move move[2];
+
+    for (u32 index = 0; index < 2; index++)
+    {
+        u32 calcIndex = Quest_Generic_GetIndexForMonTrainer(trainer,index,trainers,rows);
+        const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,calcIndex,trainers,rows);
+
+        move[index] = mon.moves[0];
+        s32 movePower = -1;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            enum Move tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move[index] = tempMove;
+            movePower = tempMovePower;
+        }
+    }
+
+    StringCopy(gStringVar1,GetMoveName(move[0]));
+    StringCopy(gStringVar2,GetMoveName(move[1]));
+}

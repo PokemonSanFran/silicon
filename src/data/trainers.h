@@ -21179,12 +21179,12 @@
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
-        .partySize = 1,
+        .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
 #line 8007
-            .species = SPECIES_BUNEARY,
+            .species = SPECIES_FLYGON,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8009
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -21194,16 +21194,28 @@
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             },
+            {
+#line 8010
+            .species = SPECIES_CAMERUPT,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 8012
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 8011
+            .lvl = 1,
+            .ball = POKEBALL_COUNT,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            },
         },
     },
-#line 8010
+#line 8013
     [DIFFICULTY_NORMAL][TRAINER_1A763631] =
     {
-#line 8011
+#line 8014
         .trainerName = _("1A763631"),
-#line 8012
+#line 8015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8013
+#line 8016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21211,12 +21223,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8015
+#line 8018
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8017
+#line 8020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8016
+#line 8019
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21224,14 +21236,14 @@
             },
         },
     },
-#line 8018
+#line 8021
     [DIFFICULTY_NORMAL][TRAINER_1AE5CAF7] =
     {
-#line 8019
+#line 8022
         .trainerName = _("1AE5CAF7"),
-#line 8020
+#line 8023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8021
+#line 8024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21239,12 +21251,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8023
+#line 8026
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8025
+#line 8028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8024
+#line 8027
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21252,14 +21264,14 @@
             },
         },
     },
-#line 8026
+#line 8029
     [DIFFICULTY_NORMAL][TRAINER_1AE89BEB] =
     {
-#line 8027
+#line 8030
         .trainerName = _("1AE89BEB"),
-#line 8028
+#line 8031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8029
+#line 8032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21267,12 +21279,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8031
+#line 8034
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8033
+#line 8036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8032
+#line 8035
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21280,14 +21292,14 @@
             },
         },
     },
-#line 8034
+#line 8037
     [DIFFICULTY_NORMAL][TRAINER_1AEA3CEA] =
     {
-#line 8035
+#line 8038
         .trainerName = _("1AEA3CEA"),
-#line 8036
+#line 8039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8037
+#line 8040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21295,12 +21307,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8039
+#line 8042
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8041
+#line 8044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8040
+#line 8043
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21308,14 +21320,14 @@
             },
         },
     },
-#line 8042
+#line 8045
     [DIFFICULTY_NORMAL][TRAINER_1B517ABD] =
     {
-#line 8043
+#line 8046
         .trainerName = _("1B517ABD"),
-#line 8044
+#line 8047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8045
+#line 8048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21323,12 +21335,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8047
+#line 8050
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8049
+#line 8052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8048
+#line 8051
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21336,14 +21348,14 @@
             },
         },
     },
-#line 8050
+#line 8053
     [DIFFICULTY_NORMAL][TRAINER_1B616469] =
     {
-#line 8051
+#line 8054
         .trainerName = _("1B616469"),
-#line 8052
+#line 8055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8053
+#line 8056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21351,12 +21363,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8055
+#line 8058
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8057
+#line 8060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8056
+#line 8059
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21364,14 +21376,14 @@
             },
         },
     },
-#line 8058
+#line 8061
     [DIFFICULTY_NORMAL][TRAINER_1BA35D11] =
     {
-#line 8059
+#line 8062
         .trainerName = _("1BA35D11"),
-#line 8060
+#line 8063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8061
+#line 8064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21379,12 +21391,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8063
+#line 8066
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8065
+#line 8068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8064
+#line 8067
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21392,14 +21404,14 @@
             },
         },
     },
-#line 8066
+#line 8069
     [DIFFICULTY_NORMAL][TRAINER_1BB1218F] =
     {
-#line 8067
+#line 8070
         .trainerName = _("1BB1218F"),
-#line 8068
+#line 8071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8069
+#line 8072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21407,12 +21419,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8071
+#line 8074
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8073
+#line 8076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8072
+#line 8075
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21420,14 +21432,14 @@
             },
         },
     },
-#line 8074
+#line 8077
     [DIFFICULTY_NORMAL][TRAINER_1BC45966] =
     {
-#line 8075
+#line 8078
         .trainerName = _("1BC45966"),
-#line 8076
+#line 8079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8077
+#line 8080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21435,12 +21447,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8079
+#line 8082
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8081
+#line 8084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8080
+#line 8083
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21448,14 +21460,14 @@
             },
         },
     },
-#line 8082
+#line 8085
     [DIFFICULTY_NORMAL][TRAINER_1C2B088C] =
     {
-#line 8083
+#line 8086
         .trainerName = _("1C2B088C"),
-#line 8084
+#line 8087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8085
+#line 8088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21463,12 +21475,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8087
+#line 8090
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8089
+#line 8092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8088
+#line 8091
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21476,14 +21488,14 @@
             },
         },
     },
-#line 8090
+#line 8093
     [DIFFICULTY_NORMAL][TRAINER_1C6CA7F6] =
     {
-#line 8091
+#line 8094
         .trainerName = _("1C6CA7F6"),
-#line 8092
+#line 8095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8093
+#line 8096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21491,12 +21503,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8095
+#line 8098
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8097
+#line 8100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8096
+#line 8099
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21504,14 +21516,14 @@
             },
         },
     },
-#line 8098
+#line 8101
     [DIFFICULTY_NORMAL][TRAINER_1CBE4FB1] =
     {
-#line 8099
+#line 8102
         .trainerName = _("1CBE4FB1"),
-#line 8100
+#line 8103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8101
+#line 8104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21519,12 +21531,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8103
+#line 8106
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8105
+#line 8108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8104
+#line 8107
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21532,14 +21544,14 @@
             },
         },
     },
-#line 8106
+#line 8109
     [DIFFICULTY_NORMAL][TRAINER_1CBFAF10] =
     {
-#line 8107
+#line 8110
         .trainerName = _("1CBFAF10"),
-#line 8108
+#line 8111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8109
+#line 8112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21547,12 +21559,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8111
+#line 8114
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8113
+#line 8116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8112
+#line 8115
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21560,14 +21572,14 @@
             },
         },
     },
-#line 8114
+#line 8117
     [DIFFICULTY_NORMAL][TRAINER_1CC4D5D6] =
     {
-#line 8115
+#line 8118
         .trainerName = _("1CC4D5D6"),
-#line 8116
+#line 8119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8117
+#line 8120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21575,12 +21587,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8119
+#line 8122
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8121
+#line 8124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8120
+#line 8123
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21588,14 +21600,14 @@
             },
         },
     },
-#line 8122
+#line 8125
     [DIFFICULTY_NORMAL][TRAINER_1D63E5A1] =
     {
-#line 8123
+#line 8126
         .trainerName = _("1D63E5A1"),
-#line 8124
+#line 8127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8125
+#line 8128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21603,12 +21615,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8127
+#line 8130
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8129
+#line 8132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8128
+#line 8131
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21616,14 +21628,14 @@
             },
         },
     },
-#line 8130
+#line 8133
     [DIFFICULTY_NORMAL][TRAINER_1D7A6DED] =
     {
-#line 8131
+#line 8134
         .trainerName = _("1D7A6DED"),
-#line 8132
+#line 8135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8133
+#line 8136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21631,12 +21643,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8135
+#line 8138
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8137
+#line 8140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8136
+#line 8139
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21644,14 +21656,14 @@
             },
         },
     },
-#line 8138
+#line 8141
     [DIFFICULTY_NORMAL][TRAINER_1D93B10D] =
     {
-#line 8139
+#line 8142
         .trainerName = _("1D93B10D"),
-#line 8140
+#line 8143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8141
+#line 8144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21659,12 +21671,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8143
+#line 8146
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8145
+#line 8148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8144
+#line 8147
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21672,14 +21684,14 @@
             },
         },
     },
-#line 8146
+#line 8149
     [DIFFICULTY_NORMAL][TRAINER_1DD07C78] =
     {
-#line 8147
+#line 8150
         .trainerName = _("1DD07C78"),
-#line 8148
+#line 8151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8149
+#line 8152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21687,12 +21699,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8151
+#line 8154
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8153
+#line 8156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8152
+#line 8155
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21700,14 +21712,14 @@
             },
         },
     },
-#line 8154
+#line 8157
     [DIFFICULTY_NORMAL][TRAINER_1E5E6E80] =
     {
-#line 8155
+#line 8158
         .trainerName = _("1E5E6E80"),
-#line 8156
+#line 8159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8157
+#line 8160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21715,12 +21727,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8159
+#line 8162
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8161
+#line 8164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8160
+#line 8163
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21728,14 +21740,14 @@
             },
         },
     },
-#line 8162
+#line 8165
     [DIFFICULTY_NORMAL][TRAINER_1EE34E30] =
     {
-#line 8163
+#line 8166
         .trainerName = _("1EE34E30"),
-#line 8164
+#line 8167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8165
+#line 8168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21743,12 +21755,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8167
+#line 8170
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8169
+#line 8172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8168
+#line 8171
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21756,14 +21768,14 @@
             },
         },
     },
-#line 8170
+#line 8173
     [DIFFICULTY_NORMAL][TRAINER_1F24A6B1] =
     {
-#line 8171
+#line 8174
         .trainerName = _("1F24A6B1"),
-#line 8172
+#line 8175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8173
+#line 8176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21771,12 +21783,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8175
+#line 8178
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8177
+#line 8180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8176
+#line 8179
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21784,14 +21796,14 @@
             },
         },
     },
-#line 8178
+#line 8181
     [DIFFICULTY_NORMAL][TRAINER_1F2A70D3] =
     {
-#line 8179
+#line 8182
         .trainerName = _("1F2A70D3"),
-#line 8180
+#line 8183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8181
+#line 8184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21799,12 +21811,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8183
+#line 8186
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8185
+#line 8188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8184
+#line 8187
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21812,14 +21824,14 @@
             },
         },
     },
-#line 8186
+#line 8189
     [DIFFICULTY_NORMAL][TRAINER_1FD08020] =
     {
-#line 8187
+#line 8190
         .trainerName = _("1FD08020"),
-#line 8188
+#line 8191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8189
+#line 8192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21827,12 +21839,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8191
+#line 8194
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8193
+#line 8196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8192
+#line 8195
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21840,14 +21852,14 @@
             },
         },
     },
-#line 8194
+#line 8197
     [DIFFICULTY_NORMAL][TRAINER_200650CA] =
     {
-#line 8195
+#line 8198
         .trainerName = _("200650CA"),
-#line 8196
+#line 8199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8197
+#line 8200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21855,12 +21867,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8199
+#line 8202
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8201
+#line 8204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8200
+#line 8203
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21868,14 +21880,14 @@
             },
         },
     },
-#line 8202
+#line 8205
     [DIFFICULTY_NORMAL][TRAINER_20170FA5] =
     {
-#line 8203
+#line 8206
         .trainerName = _("20170FA5"),
-#line 8204
+#line 8207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8205
+#line 8208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21883,12 +21895,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8207
+#line 8210
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8209
+#line 8212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8208
+#line 8211
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21896,14 +21908,14 @@
             },
         },
     },
-#line 8210
+#line 8213
     [DIFFICULTY_NORMAL][TRAINER_20993B87] =
     {
-#line 8211
+#line 8214
         .trainerName = _("20993B87"),
-#line 8212
+#line 8215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8213
+#line 8216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21911,12 +21923,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8215
+#line 8218
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8217
+#line 8220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8216
+#line 8219
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21924,14 +21936,14 @@
             },
         },
     },
-#line 8218
+#line 8221
     [DIFFICULTY_NORMAL][TRAINER_20A10A97] =
     {
-#line 8219
+#line 8222
         .trainerName = _("20A10A97"),
-#line 8220
+#line 8223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8221
+#line 8224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21939,12 +21951,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8223
+#line 8226
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8225
+#line 8228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8224
+#line 8227
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21952,14 +21964,14 @@
             },
         },
     },
-#line 8226
+#line 8229
     [DIFFICULTY_NORMAL][TRAINER_20A6F3A6] =
     {
-#line 8227
+#line 8230
         .trainerName = _("20A6F3A6"),
-#line 8228
+#line 8231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8229
+#line 8232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21967,12 +21979,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8231
+#line 8234
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8233
+#line 8236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8232
+#line 8235
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -21980,14 +21992,14 @@
             },
         },
     },
-#line 8234
+#line 8237
     [DIFFICULTY_NORMAL][TRAINER_20DC389D] =
     {
-#line 8235
+#line 8238
         .trainerName = _("20DC389D"),
-#line 8236
+#line 8239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8237
+#line 8240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -21995,12 +22007,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8239
+#line 8242
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8241
+#line 8244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8240
+#line 8243
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22008,14 +22020,14 @@
             },
         },
     },
-#line 8242
+#line 8245
     [DIFFICULTY_NORMAL][TRAINER_2177173C] =
     {
-#line 8243
+#line 8246
         .trainerName = _("2177173C"),
-#line 8244
+#line 8247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8245
+#line 8248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22023,12 +22035,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8247
+#line 8250
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8249
+#line 8252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8248
+#line 8251
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22036,14 +22048,14 @@
             },
         },
     },
-#line 8250
+#line 8253
     [DIFFICULTY_NORMAL][TRAINER_2180E5CD] =
     {
-#line 8251
+#line 8254
         .trainerName = _("2180E5CD"),
-#line 8252
+#line 8255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8253
+#line 8256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22051,12 +22063,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8255
+#line 8258
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8257
+#line 8260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8256
+#line 8259
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22064,14 +22076,14 @@
             },
         },
     },
-#line 8258
+#line 8261
     [DIFFICULTY_NORMAL][TRAINER_21EB8B2C] =
     {
-#line 8259
+#line 8262
         .trainerName = _("21EB8B2C"),
-#line 8260
+#line 8263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8261
+#line 8264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22079,12 +22091,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8263
+#line 8266
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8265
+#line 8268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8264
+#line 8267
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22092,14 +22104,14 @@
             },
         },
     },
-#line 8266
+#line 8269
     [DIFFICULTY_NORMAL][TRAINER_22BA389B] =
     {
-#line 8267
+#line 8270
         .trainerName = _("22BA389B"),
-#line 8268
+#line 8271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8269
+#line 8272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22107,12 +22119,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8271
+#line 8274
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8273
+#line 8276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8272
+#line 8275
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22120,14 +22132,14 @@
             },
         },
     },
-#line 8274
+#line 8277
     [DIFFICULTY_NORMAL][TRAINER_22DD5E2B] =
     {
-#line 8275
+#line 8278
         .trainerName = _("22DD5E2B"),
-#line 8276
+#line 8279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8277
+#line 8280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22135,12 +22147,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8279
+#line 8282
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8281
+#line 8284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8280
+#line 8283
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22148,14 +22160,14 @@
             },
         },
     },
-#line 8282
+#line 8285
     [DIFFICULTY_NORMAL][TRAINER_22E7DE36] =
     {
-#line 8283
+#line 8286
         .trainerName = _("22E7DE36"),
-#line 8284
+#line 8287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8285
+#line 8288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22163,12 +22175,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8287
+#line 8290
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8289
+#line 8292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8288
+#line 8291
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22176,14 +22188,14 @@
             },
         },
     },
-#line 8290
+#line 8293
     [DIFFICULTY_NORMAL][TRAINER_23C3170F] =
     {
-#line 8291
+#line 8294
         .trainerName = _("23C3170F"),
-#line 8292
+#line 8295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8293
+#line 8296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22191,12 +22203,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8295
+#line 8298
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8297
+#line 8300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8296
+#line 8299
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22204,14 +22216,14 @@
             },
         },
     },
-#line 8298
+#line 8301
     [DIFFICULTY_NORMAL][TRAINER_23F50BC3] =
     {
-#line 8299
+#line 8302
         .trainerName = _("23F50BC3"),
-#line 8300
+#line 8303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8301
+#line 8304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22219,12 +22231,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8303
+#line 8306
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8305
+#line 8308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8304
+#line 8307
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22232,14 +22244,14 @@
             },
         },
     },
-#line 8306
+#line 8309
     [DIFFICULTY_NORMAL][TRAINER_2434A25C] =
     {
-#line 8307
+#line 8310
         .trainerName = _("2434A25C"),
-#line 8308
+#line 8311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8309
+#line 8312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22247,12 +22259,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8311
+#line 8314
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8313
+#line 8316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8312
+#line 8315
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22260,14 +22272,14 @@
             },
         },
     },
-#line 8314
+#line 8317
     [DIFFICULTY_NORMAL][TRAINER_245235C9] =
     {
-#line 8315
+#line 8318
         .trainerName = _("245235C9"),
-#line 8316
+#line 8319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8317
+#line 8320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22275,12 +22287,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8319
+#line 8322
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8321
+#line 8324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8320
+#line 8323
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22288,14 +22300,14 @@
             },
         },
     },
-#line 8322
+#line 8325
     [DIFFICULTY_NORMAL][TRAINER_246CBBD5] =
     {
-#line 8323
+#line 8326
         .trainerName = _("246CBBD5"),
-#line 8324
+#line 8327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8325
+#line 8328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22303,12 +22315,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8327
+#line 8330
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8329
+#line 8332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8328
+#line 8331
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22316,14 +22328,14 @@
             },
         },
     },
-#line 8330
+#line 8333
     [DIFFICULTY_NORMAL][TRAINER_247FE019] =
     {
-#line 8331
+#line 8334
         .trainerName = _("247FE019"),
-#line 8332
+#line 8335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8333
+#line 8336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22331,12 +22343,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8335
+#line 8338
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8337
+#line 8340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8336
+#line 8339
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22344,14 +22356,14 @@
             },
         },
     },
-#line 8338
+#line 8341
     [DIFFICULTY_NORMAL][TRAINER_24AAFD0D] =
     {
-#line 8339
+#line 8342
         .trainerName = _("24AAFD0D"),
-#line 8340
+#line 8343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8341
+#line 8344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22359,12 +22371,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8343
+#line 8346
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8345
+#line 8348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8344
+#line 8347
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22372,14 +22384,14 @@
             },
         },
     },
-#line 8346
+#line 8349
     [DIFFICULTY_NORMAL][TRAINER_2561CB61] =
     {
-#line 8347
+#line 8350
         .trainerName = _("2561CB61"),
-#line 8348
+#line 8351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8349
+#line 8352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22387,12 +22399,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8351
+#line 8354
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8353
+#line 8356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8352
+#line 8355
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22400,14 +22412,14 @@
             },
         },
     },
-#line 8354
+#line 8357
     [DIFFICULTY_NORMAL][TRAINER_26268FB4] =
     {
-#line 8355
+#line 8358
         .trainerName = _("26268FB4"),
-#line 8356
+#line 8359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8357
+#line 8360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22415,12 +22427,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8359
+#line 8362
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8361
+#line 8364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8360
+#line 8363
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22428,14 +22440,14 @@
             },
         },
     },
-#line 8362
+#line 8365
     [DIFFICULTY_NORMAL][TRAINER_265174A6] =
     {
-#line 8363
+#line 8366
         .trainerName = _("265174A6"),
-#line 8364
+#line 8367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8365
+#line 8368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22443,12 +22455,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8367
+#line 8370
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8369
+#line 8372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8368
+#line 8371
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22456,14 +22468,14 @@
             },
         },
     },
-#line 8370
+#line 8373
     [DIFFICULTY_NORMAL][TRAINER_272FA5B8] =
     {
-#line 8371
+#line 8374
         .trainerName = _("272FA5B8"),
-#line 8372
+#line 8375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8373
+#line 8376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22471,12 +22483,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8375
+#line 8378
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8377
+#line 8380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8376
+#line 8379
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22484,14 +22496,14 @@
             },
         },
     },
-#line 8378
+#line 8381
     [DIFFICULTY_NORMAL][TRAINER_27B23C10] =
     {
-#line 8379
+#line 8382
         .trainerName = _("27B23C10"),
-#line 8380
+#line 8383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8381
+#line 8384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22499,12 +22511,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8383
+#line 8386
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8385
+#line 8388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8384
+#line 8387
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22512,14 +22524,14 @@
             },
         },
     },
-#line 8386
+#line 8389
     [DIFFICULTY_NORMAL][TRAINER_27CEF8F2] =
     {
-#line 8387
+#line 8390
         .trainerName = _("27CEF8F2"),
-#line 8388
+#line 8391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8389
+#line 8392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22527,12 +22539,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8391
+#line 8394
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8393
+#line 8396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8392
+#line 8395
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22540,14 +22552,14 @@
             },
         },
     },
-#line 8394
+#line 8397
     [DIFFICULTY_NORMAL][TRAINER_27E6F69F] =
     {
-#line 8395
+#line 8398
         .trainerName = _("27E6F69F"),
-#line 8396
+#line 8399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8397
+#line 8400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22555,12 +22567,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8399
+#line 8402
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8401
+#line 8404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8400
+#line 8403
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22568,14 +22580,14 @@
             },
         },
     },
-#line 8402
+#line 8405
     [DIFFICULTY_NORMAL][TRAINER_28B294D2] =
     {
-#line 8403
+#line 8406
         .trainerName = _("28B294D2"),
-#line 8404
+#line 8407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8405
+#line 8408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22583,12 +22595,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8407
+#line 8410
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8409
+#line 8412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8408
+#line 8411
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22596,14 +22608,14 @@
             },
         },
     },
-#line 8410
+#line 8413
     [DIFFICULTY_NORMAL][TRAINER_28E0625E] =
     {
-#line 8411
+#line 8414
         .trainerName = _("28E0625E"),
-#line 8412
+#line 8415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8413
+#line 8416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22611,12 +22623,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8415
+#line 8418
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8417
+#line 8420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8416
+#line 8419
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22624,14 +22636,14 @@
             },
         },
     },
-#line 8418
+#line 8421
     [DIFFICULTY_NORMAL][TRAINER_292E386F] =
     {
-#line 8419
+#line 8422
         .trainerName = _("292E386F"),
-#line 8420
+#line 8423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8421
+#line 8424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22639,12 +22651,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8423
+#line 8426
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8425
+#line 8428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8424
+#line 8427
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22652,14 +22664,14 @@
             },
         },
     },
-#line 8426
+#line 8429
     [DIFFICULTY_NORMAL][TRAINER_29AE727B] =
     {
-#line 8427
+#line 8430
         .trainerName = _("29AE727B"),
-#line 8428
+#line 8431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8429
+#line 8432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22667,12 +22679,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8431
+#line 8434
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8433
+#line 8436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8432
+#line 8435
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22680,14 +22692,14 @@
             },
         },
     },
-#line 8434
+#line 8437
     [DIFFICULTY_NORMAL][TRAINER_2A305E88] =
     {
-#line 8435
+#line 8438
         .trainerName = _("2A305E88"),
-#line 8436
+#line 8439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8437
+#line 8440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22695,12 +22707,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8439
+#line 8442
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8441
+#line 8444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8440
+#line 8443
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22708,14 +22720,14 @@
             },
         },
     },
-#line 8442
+#line 8445
     [DIFFICULTY_NORMAL][TRAINER_2A3F43CA] =
     {
-#line 8443
+#line 8446
         .trainerName = _("2A3F43CA"),
-#line 8444
+#line 8447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8445
+#line 8448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22723,12 +22735,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8447
+#line 8450
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8449
+#line 8452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8448
+#line 8451
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22736,14 +22748,14 @@
             },
         },
     },
-#line 8450
+#line 8453
     [DIFFICULTY_NORMAL][TRAINER_2A7BF9FF] =
     {
-#line 8451
+#line 8454
         .trainerName = _("2A7BF9FF"),
-#line 8452
+#line 8455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8453
+#line 8456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22751,12 +22763,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8455
+#line 8458
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8457
+#line 8460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8456
+#line 8459
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22764,14 +22776,14 @@
             },
         },
     },
-#line 8458
+#line 8461
     [DIFFICULTY_NORMAL][TRAINER_2A83B15E] =
     {
-#line 8459
+#line 8462
         .trainerName = _("2A83B15E"),
-#line 8460
+#line 8463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8461
+#line 8464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22779,12 +22791,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8463
+#line 8466
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8465
+#line 8468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8464
+#line 8467
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22792,14 +22804,14 @@
             },
         },
     },
-#line 8466
+#line 8469
     [DIFFICULTY_NORMAL][TRAINER_2AD73BF3] =
     {
-#line 8467
+#line 8470
         .trainerName = _("2AD73BF3"),
-#line 8468
+#line 8471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8469
+#line 8472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22807,12 +22819,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8471
+#line 8474
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8473
+#line 8476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8472
+#line 8475
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22820,14 +22832,14 @@
             },
         },
     },
-#line 8474
+#line 8477
     [DIFFICULTY_NORMAL][TRAINER_2B163825] =
     {
-#line 8475
+#line 8478
         .trainerName = _("2B163825"),
-#line 8476
+#line 8479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8477
+#line 8480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22835,12 +22847,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8479
+#line 8482
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8481
+#line 8484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8480
+#line 8483
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22848,14 +22860,14 @@
             },
         },
     },
-#line 8482
+#line 8485
     [DIFFICULTY_NORMAL][TRAINER_2B249E40] =
     {
-#line 8483
+#line 8486
         .trainerName = _("2B249E40"),
-#line 8484
+#line 8487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8485
+#line 8488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22863,12 +22875,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8487
+#line 8490
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8489
+#line 8492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8488
+#line 8491
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22876,14 +22888,14 @@
             },
         },
     },
-#line 8490
+#line 8493
     [DIFFICULTY_NORMAL][TRAINER_2BCA066C] =
     {
-#line 8491
+#line 8494
         .trainerName = _("2BCA066C"),
-#line 8492
+#line 8495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8493
+#line 8496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22891,12 +22903,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8495
+#line 8498
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8497
+#line 8500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8496
+#line 8499
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22904,14 +22916,14 @@
             },
         },
     },
-#line 8498
+#line 8501
     [DIFFICULTY_NORMAL][TRAINER_2C040422] =
     {
-#line 8499
+#line 8502
         .trainerName = _("2C040422"),
-#line 8500
+#line 8503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8501
+#line 8504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22919,12 +22931,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8503
+#line 8506
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8505
+#line 8508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8504
+#line 8507
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22932,14 +22944,14 @@
             },
         },
     },
-#line 8506
+#line 8509
     [DIFFICULTY_NORMAL][TRAINER_2C22CE48] =
     {
-#line 8507
+#line 8510
         .trainerName = _("2C22CE48"),
-#line 8508
+#line 8511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8509
+#line 8512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22947,12 +22959,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8511
+#line 8514
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8513
+#line 8516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8512
+#line 8515
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22960,14 +22972,14 @@
             },
         },
     },
-#line 8514
+#line 8517
     [DIFFICULTY_NORMAL][TRAINER_2C398893] =
     {
-#line 8515
+#line 8518
         .trainerName = _("2C398893"),
-#line 8516
+#line 8519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8517
+#line 8520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -22975,12 +22987,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8519
+#line 8522
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8521
+#line 8524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8520
+#line 8523
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -22988,14 +23000,14 @@
             },
         },
     },
-#line 8522
+#line 8525
     [DIFFICULTY_NORMAL][TRAINER_2C5FFA9F] =
     {
-#line 8523
+#line 8526
         .trainerName = _("2C5FFA9F"),
-#line 8524
+#line 8527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8525
+#line 8528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23003,12 +23015,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8527
+#line 8530
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8529
+#line 8532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8528
+#line 8531
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23016,14 +23028,14 @@
             },
         },
     },
-#line 8530
+#line 8533
     [DIFFICULTY_NORMAL][TRAINER_2D1A100A] =
     {
-#line 8531
+#line 8534
         .trainerName = _("2D1A100A"),
-#line 8532
+#line 8535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8533
+#line 8536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23031,12 +23043,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8535
+#line 8538
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8537
+#line 8540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8536
+#line 8539
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23044,14 +23056,14 @@
             },
         },
     },
-#line 8538
+#line 8541
     [DIFFICULTY_NORMAL][TRAINER_2D203158] =
     {
-#line 8539
+#line 8542
         .trainerName = _("2D203158"),
-#line 8540
+#line 8543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8541
+#line 8544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23059,12 +23071,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8543
+#line 8546
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8545
+#line 8548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8544
+#line 8547
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23072,14 +23084,14 @@
             },
         },
     },
-#line 8546
+#line 8549
     [DIFFICULTY_NORMAL][TRAINER_2D29DC23] =
     {
-#line 8547
+#line 8550
         .trainerName = _("2D29DC23"),
-#line 8548
+#line 8551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8549
+#line 8552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23087,12 +23099,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8551
+#line 8554
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8553
+#line 8556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8552
+#line 8555
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23100,14 +23112,14 @@
             },
         },
     },
-#line 8554
+#line 8557
     [DIFFICULTY_NORMAL][TRAINER_2D6DE246] =
     {
-#line 8555
+#line 8558
         .trainerName = _("2D6DE246"),
-#line 8556
+#line 8559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8557
+#line 8560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23115,12 +23127,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8559
+#line 8562
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8561
+#line 8564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8560
+#line 8563
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23128,14 +23140,14 @@
             },
         },
     },
-#line 8562
+#line 8565
     [DIFFICULTY_NORMAL][TRAINER_2D92F001] =
     {
-#line 8563
+#line 8566
         .trainerName = _("2D92F001"),
-#line 8564
+#line 8567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8565
+#line 8568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23143,12 +23155,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8567
+#line 8570
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8569
+#line 8572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8568
+#line 8571
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23156,14 +23168,14 @@
             },
         },
     },
-#line 8570
+#line 8573
     [DIFFICULTY_NORMAL][TRAINER_2DC29B9E] =
     {
-#line 8571
+#line 8574
         .trainerName = _("2DC29B9E"),
-#line 8572
+#line 8575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8573
+#line 8576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23171,12 +23183,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8575
+#line 8578
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8577
+#line 8580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8576
+#line 8579
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23184,14 +23196,14 @@
             },
         },
     },
-#line 8578
+#line 8581
     [DIFFICULTY_NORMAL][TRAINER_2E218A8E] =
     {
-#line 8579
+#line 8582
         .trainerName = _("2E218A8E"),
-#line 8580
+#line 8583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8581
+#line 8584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23199,12 +23211,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8583
+#line 8586
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8585
+#line 8588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8584
+#line 8587
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23212,14 +23224,14 @@
             },
         },
     },
-#line 8586
+#line 8589
     [DIFFICULTY_NORMAL][TRAINER_2E593FA9] =
     {
-#line 8587
+#line 8590
         .trainerName = _("2E593FA9"),
-#line 8588
+#line 8591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8589
+#line 8592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23227,12 +23239,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8591
+#line 8594
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8593
+#line 8596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8592
+#line 8595
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23240,14 +23252,14 @@
             },
         },
     },
-#line 8594
+#line 8597
     [DIFFICULTY_NORMAL][TRAINER_2EC49459] =
     {
-#line 8595
+#line 8598
         .trainerName = _("2EC49459"),
-#line 8596
+#line 8599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8597
+#line 8600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23255,12 +23267,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8599
+#line 8602
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8601
+#line 8604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8600
+#line 8603
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23268,14 +23280,14 @@
             },
         },
     },
-#line 8602
+#line 8605
     [DIFFICULTY_NORMAL][TRAINER_2F0770D3] =
     {
-#line 8603
+#line 8606
         .trainerName = _("2F0770D3"),
-#line 8604
+#line 8607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8605
+#line 8608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23283,12 +23295,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8607
+#line 8610
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8609
+#line 8612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8608
+#line 8611
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23296,14 +23308,14 @@
             },
         },
     },
-#line 8610
+#line 8613
     [DIFFICULTY_NORMAL][TRAINER_2F09421D] =
     {
-#line 8611
+#line 8614
         .trainerName = _("2F09421D"),
-#line 8612
+#line 8615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8613
+#line 8616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23311,12 +23323,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8615
+#line 8618
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8617
+#line 8620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8616
+#line 8619
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23324,14 +23336,14 @@
             },
         },
     },
-#line 8618
+#line 8621
     [DIFFICULTY_NORMAL][TRAINER_2FF79A0B] =
     {
-#line 8619
+#line 8622
         .trainerName = _("2FF79A0B"),
-#line 8620
+#line 8623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8621
+#line 8624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23339,12 +23351,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8623
+#line 8626
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8625
+#line 8628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8624
+#line 8627
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23352,14 +23364,14 @@
             },
         },
     },
-#line 8626
+#line 8629
     [DIFFICULTY_NORMAL][TRAINER_3009CC76] =
     {
-#line 8627
+#line 8630
         .trainerName = _("3009CC76"),
-#line 8628
+#line 8631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8629
+#line 8632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23367,12 +23379,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8631
+#line 8634
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8633
+#line 8636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8632
+#line 8635
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23380,14 +23392,14 @@
             },
         },
     },
-#line 8634
+#line 8637
     [DIFFICULTY_NORMAL][TRAINER_30522A9A] =
     {
-#line 8635
+#line 8638
         .trainerName = _("30522A9A"),
-#line 8636
+#line 8639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8637
+#line 8640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23395,12 +23407,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8639
+#line 8642
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8641
+#line 8644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8640
+#line 8643
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23408,14 +23420,14 @@
             },
         },
     },
-#line 8642
+#line 8645
     [DIFFICULTY_NORMAL][TRAINER_30ACE135] =
     {
-#line 8643
+#line 8646
         .trainerName = _("30ACE135"),
-#line 8644
+#line 8647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8645
+#line 8648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23423,12 +23435,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8647
+#line 8650
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8649
+#line 8652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8648
+#line 8651
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23436,14 +23448,14 @@
             },
         },
     },
-#line 8650
+#line 8653
     [DIFFICULTY_NORMAL][TRAINER_311B3EFC] =
     {
-#line 8651
+#line 8654
         .trainerName = _("311B3EFC"),
-#line 8652
+#line 8655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8653
+#line 8656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23451,12 +23463,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8655
+#line 8658
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8657
+#line 8660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8656
+#line 8659
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23464,14 +23476,14 @@
             },
         },
     },
-#line 8658
+#line 8661
     [DIFFICULTY_NORMAL][TRAINER_317B8932] =
     {
-#line 8659
+#line 8662
         .trainerName = _("317B8932"),
-#line 8660
+#line 8663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8661
+#line 8664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23479,12 +23491,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8663
+#line 8666
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8665
+#line 8668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8664
+#line 8667
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23492,14 +23504,14 @@
             },
         },
     },
-#line 8666
+#line 8669
     [DIFFICULTY_NORMAL][TRAINER_31D36FE6] =
     {
-#line 8667
+#line 8670
         .trainerName = _("31D36FE6"),
-#line 8668
+#line 8671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8669
+#line 8672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23507,12 +23519,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8671
+#line 8674
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8673
+#line 8676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8672
+#line 8675
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23520,14 +23532,14 @@
             },
         },
     },
-#line 8674
+#line 8677
     [DIFFICULTY_NORMAL][TRAINER_32C1F13D] =
     {
-#line 8675
+#line 8678
         .trainerName = _("32C1F13D"),
-#line 8676
+#line 8679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8677
+#line 8680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23535,12 +23547,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8679
+#line 8682
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8681
+#line 8684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8680
+#line 8683
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23548,14 +23560,14 @@
             },
         },
     },
-#line 8682
+#line 8685
     [DIFFICULTY_NORMAL][TRAINER_33AB4856] =
     {
-#line 8683
+#line 8686
         .trainerName = _("33AB4856"),
-#line 8684
+#line 8687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8685
+#line 8688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23563,12 +23575,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8687
+#line 8690
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8689
+#line 8692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8688
+#line 8691
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23576,14 +23588,14 @@
             },
         },
     },
-#line 8690
+#line 8693
     [DIFFICULTY_NORMAL][TRAINER_3566F099] =
     {
-#line 8691
+#line 8694
         .trainerName = _("3566F099"),
-#line 8692
+#line 8695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8693
+#line 8696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23591,12 +23603,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8695
+#line 8698
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8697
+#line 8700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8696
+#line 8699
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23604,14 +23616,14 @@
             },
         },
     },
-#line 8698
+#line 8701
     [DIFFICULTY_NORMAL][TRAINER_35E0E027] =
     {
-#line 8699
+#line 8702
         .trainerName = _("35E0E027"),
-#line 8700
+#line 8703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8701
+#line 8704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23619,12 +23631,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8703
+#line 8706
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8705
+#line 8708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8704
+#line 8707
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23632,14 +23644,14 @@
             },
         },
     },
-#line 8706
+#line 8709
     [DIFFICULTY_NORMAL][TRAINER_36662EEF] =
     {
-#line 8707
+#line 8710
         .trainerName = _("36662EEF"),
-#line 8708
+#line 8711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8709
+#line 8712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23647,12 +23659,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8711
+#line 8714
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8713
+#line 8716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8712
+#line 8715
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23660,14 +23672,14 @@
             },
         },
     },
-#line 8714
+#line 8717
     [DIFFICULTY_NORMAL][TRAINER_3681E8DE] =
     {
-#line 8715
+#line 8718
         .trainerName = _("3681E8DE"),
-#line 8716
+#line 8719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8717
+#line 8720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23675,12 +23687,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8719
+#line 8722
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8721
+#line 8724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8720
+#line 8723
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23688,14 +23700,14 @@
             },
         },
     },
-#line 8722
+#line 8725
     [DIFFICULTY_NORMAL][TRAINER_3789DC6E] =
     {
-#line 8723
+#line 8726
         .trainerName = _("3789DC6E"),
-#line 8724
+#line 8727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8725
+#line 8728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23703,12 +23715,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8727
+#line 8730
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8729
+#line 8732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8728
+#line 8731
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23716,14 +23728,14 @@
             },
         },
     },
-#line 8730
+#line 8733
     [DIFFICULTY_NORMAL][TRAINER_37B9EFB7] =
     {
-#line 8731
+#line 8734
         .trainerName = _("37B9EFB7"),
-#line 8732
+#line 8735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8733
+#line 8736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23731,12 +23743,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8735
+#line 8738
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8737
+#line 8740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8736
+#line 8739
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23744,14 +23756,14 @@
             },
         },
     },
-#line 8738
+#line 8741
     [DIFFICULTY_NORMAL][TRAINER_37EDB78E] =
     {
-#line 8739
+#line 8742
         .trainerName = _("37EDB78E"),
-#line 8740
+#line 8743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8741
+#line 8744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23759,12 +23771,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8743
+#line 8746
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8745
+#line 8748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8744
+#line 8747
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23772,14 +23784,14 @@
             },
         },
     },
-#line 8746
+#line 8749
     [DIFFICULTY_NORMAL][TRAINER_382E2AB3] =
     {
-#line 8747
+#line 8750
         .trainerName = _("382E2AB3"),
-#line 8748
+#line 8751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8749
+#line 8752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23787,12 +23799,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8751
+#line 8754
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8753
+#line 8756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8752
+#line 8755
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23800,14 +23812,14 @@
             },
         },
     },
-#line 8754
+#line 8757
     [DIFFICULTY_NORMAL][TRAINER_3842496B] =
     {
-#line 8755
+#line 8758
         .trainerName = _("3842496B"),
-#line 8756
+#line 8759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8757
+#line 8760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23815,12 +23827,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8759
+#line 8762
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8761
+#line 8764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8760
+#line 8763
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23828,14 +23840,14 @@
             },
         },
     },
-#line 8762
+#line 8765
     [DIFFICULTY_NORMAL][TRAINER_387351C1] =
     {
-#line 8763
+#line 8766
         .trainerName = _("387351C1"),
-#line 8764
+#line 8767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8765
+#line 8768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23843,12 +23855,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8767
+#line 8770
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8769
+#line 8772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8768
+#line 8771
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23856,14 +23868,14 @@
             },
         },
     },
-#line 8770
+#line 8773
     [DIFFICULTY_NORMAL][TRAINER_38A47BDB] =
     {
-#line 8771
+#line 8774
         .trainerName = _("38A47BDB"),
-#line 8772
+#line 8775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8773
+#line 8776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23871,12 +23883,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8775
+#line 8778
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8777
+#line 8780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8776
+#line 8779
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23884,14 +23896,14 @@
             },
         },
     },
-#line 8778
+#line 8781
     [DIFFICULTY_NORMAL][TRAINER_3924756E] =
     {
-#line 8779
+#line 8782
         .trainerName = _("3924756E"),
-#line 8780
+#line 8783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8781
+#line 8784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23899,12 +23911,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8783
+#line 8786
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8785
+#line 8788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8784
+#line 8787
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23912,14 +23924,14 @@
             },
         },
     },
-#line 8786
+#line 8789
     [DIFFICULTY_NORMAL][TRAINER_3947ACC3] =
     {
-#line 8787
+#line 8790
         .trainerName = _("3947ACC3"),
-#line 8788
+#line 8791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8789
+#line 8792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23927,12 +23939,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8791
+#line 8794
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8793
+#line 8796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8792
+#line 8795
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23940,14 +23952,14 @@
             },
         },
     },
-#line 8794
+#line 8797
     [DIFFICULTY_NORMAL][TRAINER_39AD4606] =
     {
-#line 8795
+#line 8798
         .trainerName = _("39AD4606"),
-#line 8796
+#line 8799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8797
+#line 8800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23955,12 +23967,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8799
+#line 8802
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8801
+#line 8804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8800
+#line 8803
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23968,14 +23980,14 @@
             },
         },
     },
-#line 8802
+#line 8805
     [DIFFICULTY_NORMAL][TRAINER_39E0AE4F] =
     {
-#line 8803
+#line 8806
         .trainerName = _("39E0AE4F"),
-#line 8804
+#line 8807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8805
+#line 8808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -23983,12 +23995,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8807
+#line 8810
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8809
+#line 8812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8808
+#line 8811
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -23996,14 +24008,14 @@
             },
         },
     },
-#line 8810
+#line 8813
     [DIFFICULTY_NORMAL][TRAINER_39E78D45] =
     {
-#line 8811
+#line 8814
         .trainerName = _("39E78D45"),
-#line 8812
+#line 8815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8813
+#line 8816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24011,12 +24023,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8815
+#line 8818
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8817
+#line 8820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8816
+#line 8819
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24024,14 +24036,14 @@
             },
         },
     },
-#line 8818
+#line 8821
     [DIFFICULTY_NORMAL][TRAINER_3A11452B] =
     {
-#line 8819
+#line 8822
         .trainerName = _("3A11452B"),
-#line 8820
+#line 8823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8821
+#line 8824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24039,12 +24051,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8823
+#line 8826
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8825
+#line 8828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8824
+#line 8827
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24052,14 +24064,14 @@
             },
         },
     },
-#line 8826
+#line 8829
     [DIFFICULTY_NORMAL][TRAINER_3A840205] =
     {
-#line 8827
+#line 8830
         .trainerName = _("3A840205"),
-#line 8828
+#line 8831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8829
+#line 8832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24067,12 +24079,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8831
+#line 8834
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8833
+#line 8836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8832
+#line 8835
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24080,14 +24092,14 @@
             },
         },
     },
-#line 8834
+#line 8837
     [DIFFICULTY_NORMAL][TRAINER_3AD97475] =
     {
-#line 8835
+#line 8838
         .trainerName = _("3AD97475"),
-#line 8836
+#line 8839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8837
+#line 8840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24095,12 +24107,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8839
+#line 8842
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8841
+#line 8844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8840
+#line 8843
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24108,14 +24120,14 @@
             },
         },
     },
-#line 8842
+#line 8845
     [DIFFICULTY_NORMAL][TRAINER_3AEE4974] =
     {
-#line 8843
+#line 8846
         .trainerName = _("3AEE4974"),
-#line 8844
+#line 8847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8845
+#line 8848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24123,12 +24135,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8847
+#line 8850
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8849
+#line 8852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8848
+#line 8851
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24136,14 +24148,14 @@
             },
         },
     },
-#line 8850
+#line 8853
     [DIFFICULTY_NORMAL][TRAINER_3BAF0C60] =
     {
-#line 8851
+#line 8854
         .trainerName = _("3BAF0C60"),
-#line 8852
+#line 8855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8853
+#line 8856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24151,12 +24163,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8855
+#line 8858
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8857
+#line 8860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8856
+#line 8859
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24164,14 +24176,14 @@
             },
         },
     },
-#line 8858
+#line 8861
     [DIFFICULTY_NORMAL][TRAINER_3BDED445] =
     {
-#line 8859
+#line 8862
         .trainerName = _("3BDED445"),
-#line 8860
+#line 8863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8861
+#line 8864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24179,12 +24191,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8863
+#line 8866
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8865
+#line 8868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8864
+#line 8867
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24192,14 +24204,14 @@
             },
         },
     },
-#line 8866
+#line 8869
     [DIFFICULTY_NORMAL][TRAINER_3C621048] =
     {
-#line 8867
+#line 8870
         .trainerName = _("3C621048"),
-#line 8868
+#line 8871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8869
+#line 8872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24207,12 +24219,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8871
+#line 8874
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8873
+#line 8876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8872
+#line 8875
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24220,14 +24232,14 @@
             },
         },
     },
-#line 8874
+#line 8877
     [DIFFICULTY_NORMAL][TRAINER_3C74DAE2] =
     {
-#line 8875
+#line 8878
         .trainerName = _("3C74DAE2"),
-#line 8876
+#line 8879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8877
+#line 8880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24235,12 +24247,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8879
+#line 8882
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8881
+#line 8884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8880
+#line 8883
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24248,14 +24260,14 @@
             },
         },
     },
-#line 8882
+#line 8885
     [DIFFICULTY_NORMAL][TRAINER_3C7AC359] =
     {
-#line 8883
+#line 8886
         .trainerName = _("3C7AC359"),
-#line 8884
+#line 8887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8885
+#line 8888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24263,12 +24275,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8887
+#line 8890
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8889
+#line 8892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8888
+#line 8891
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24276,14 +24288,14 @@
             },
         },
     },
-#line 8890
+#line 8893
     [DIFFICULTY_NORMAL][TRAINER_3CDE5F9E] =
     {
-#line 8891
+#line 8894
         .trainerName = _("3CDE5F9E"),
-#line 8892
+#line 8895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8893
+#line 8896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24291,12 +24303,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8895
+#line 8898
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8897
+#line 8900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8896
+#line 8899
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24304,14 +24316,14 @@
             },
         },
     },
-#line 8898
+#line 8901
     [DIFFICULTY_NORMAL][TRAINER_3CECE368] =
     {
-#line 8899
+#line 8902
         .trainerName = _("3CECE368"),
-#line 8900
+#line 8903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8901
+#line 8904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24319,12 +24331,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8903
+#line 8906
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8905
+#line 8908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8904
+#line 8907
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24332,14 +24344,14 @@
             },
         },
     },
-#line 8906
+#line 8909
     [DIFFICULTY_NORMAL][TRAINER_3CFF3841] =
     {
-#line 8907
+#line 8910
         .trainerName = _("3CFF3841"),
-#line 8908
+#line 8911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8909
+#line 8912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24347,12 +24359,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8911
+#line 8914
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8913
+#line 8916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8912
+#line 8915
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24360,14 +24372,14 @@
             },
         },
     },
-#line 8914
+#line 8917
     [DIFFICULTY_NORMAL][TRAINER_3D502E2F] =
     {
-#line 8915
+#line 8918
         .trainerName = _("3D502E2F"),
-#line 8916
+#line 8919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8917
+#line 8920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24375,12 +24387,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8919
+#line 8922
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8921
+#line 8924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8920
+#line 8923
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24388,14 +24400,14 @@
             },
         },
     },
-#line 8922
+#line 8925
     [DIFFICULTY_NORMAL][TRAINER_3D7FDE57] =
     {
-#line 8923
+#line 8926
         .trainerName = _("3D7FDE57"),
-#line 8924
+#line 8927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8925
+#line 8928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24403,12 +24415,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8927
+#line 8930
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8929
+#line 8932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8928
+#line 8931
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24416,14 +24428,14 @@
             },
         },
     },
-#line 8930
+#line 8933
     [DIFFICULTY_NORMAL][TRAINER_3DCD0BBC] =
     {
-#line 8931
+#line 8934
         .trainerName = _("3DCD0BBC"),
-#line 8932
+#line 8935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8933
+#line 8936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24431,12 +24443,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8935
+#line 8938
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8937
+#line 8940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8936
+#line 8939
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24444,14 +24456,14 @@
             },
         },
     },
-#line 8938
+#line 8941
     [DIFFICULTY_NORMAL][TRAINER_3E17924C] =
     {
-#line 8939
+#line 8942
         .trainerName = _("3E17924C"),
-#line 8940
+#line 8943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8941
+#line 8944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24459,12 +24471,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8943
+#line 8946
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8945
+#line 8948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8944
+#line 8947
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24472,14 +24484,14 @@
             },
         },
     },
-#line 8946
+#line 8949
     [DIFFICULTY_NORMAL][TRAINER_3EB6FA04] =
     {
-#line 8947
+#line 8950
         .trainerName = _("3EB6FA04"),
-#line 8948
+#line 8951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8949
+#line 8952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24487,12 +24499,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8951
+#line 8954
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8953
+#line 8956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8952
+#line 8955
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24500,14 +24512,14 @@
             },
         },
     },
-#line 8954
+#line 8957
     [DIFFICULTY_NORMAL][TRAINER_3EFCF1C8] =
     {
-#line 8955
+#line 8958
         .trainerName = _("3EFCF1C8"),
-#line 8956
+#line 8959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8957
+#line 8960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24515,12 +24527,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8959
+#line 8962
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8961
+#line 8964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8960
+#line 8963
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24528,14 +24540,14 @@
             },
         },
     },
-#line 8962
+#line 8965
     [DIFFICULTY_NORMAL][TRAINER_3F0BF52E] =
     {
-#line 8963
+#line 8966
         .trainerName = _("3F0BF52E"),
-#line 8964
+#line 8967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8965
+#line 8968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24543,12 +24555,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8967
+#line 8970
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8969
+#line 8972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8968
+#line 8971
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24556,14 +24568,14 @@
             },
         },
     },
-#line 8970
+#line 8973
     [DIFFICULTY_NORMAL][TRAINER_4000C8A0] =
     {
-#line 8971
+#line 8974
         .trainerName = _("4000C8A0"),
-#line 8972
+#line 8975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8973
+#line 8976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24571,12 +24583,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8975
+#line 8978
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8977
+#line 8980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8976
+#line 8979
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24584,14 +24596,14 @@
             },
         },
     },
-#line 8978
+#line 8981
     [DIFFICULTY_NORMAL][TRAINER_403D932D] =
     {
-#line 8979
+#line 8982
         .trainerName = _("403D932D"),
-#line 8980
+#line 8983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8981
+#line 8984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24599,12 +24611,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8983
+#line 8986
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8985
+#line 8988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8984
+#line 8987
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24612,14 +24624,14 @@
             },
         },
     },
-#line 8986
+#line 8989
     [DIFFICULTY_NORMAL][TRAINER_408862C4] =
     {
-#line 8987
+#line 8990
         .trainerName = _("408862C4"),
-#line 8988
+#line 8991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8989
+#line 8992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24627,12 +24639,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8991
+#line 8994
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 8993
+#line 8996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 8992
+#line 8995
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24640,14 +24652,14 @@
             },
         },
     },
-#line 8994
+#line 8997
     [DIFFICULTY_NORMAL][TRAINER_419282AD] =
     {
-#line 8995
+#line 8998
         .trainerName = _("419282AD"),
-#line 8996
+#line 8999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 8997
+#line 9000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24655,12 +24667,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 8999
+#line 9002
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9001
+#line 9004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9000
+#line 9003
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24668,14 +24680,14 @@
             },
         },
     },
-#line 9002
+#line 9005
     [DIFFICULTY_NORMAL][TRAINER_419FCBAE] =
     {
-#line 9003
+#line 9006
         .trainerName = _("419FCBAE"),
-#line 9004
+#line 9007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9005
+#line 9008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24683,12 +24695,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9007
+#line 9010
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9009
+#line 9012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9008
+#line 9011
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24696,14 +24708,14 @@
             },
         },
     },
-#line 9010
+#line 9013
     [DIFFICULTY_NORMAL][TRAINER_41B8591B] =
     {
-#line 9011
+#line 9014
         .trainerName = _("41B8591B"),
-#line 9012
+#line 9015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9013
+#line 9016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24711,12 +24723,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9015
+#line 9018
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9017
+#line 9020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9016
+#line 9019
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24724,14 +24736,14 @@
             },
         },
     },
-#line 9018
+#line 9021
     [DIFFICULTY_NORMAL][TRAINER_41DCF7BA] =
     {
-#line 9019
+#line 9022
         .trainerName = _("41DCF7BA"),
-#line 9020
+#line 9023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9021
+#line 9024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24739,12 +24751,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9023
+#line 9026
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9025
+#line 9028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9024
+#line 9027
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24752,14 +24764,14 @@
             },
         },
     },
-#line 9026
+#line 9029
     [DIFFICULTY_NORMAL][TRAINER_4227B911] =
     {
-#line 9027
+#line 9030
         .trainerName = _("4227B911"),
-#line 9028
+#line 9031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9029
+#line 9032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24767,12 +24779,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9031
+#line 9034
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9033
+#line 9036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9032
+#line 9035
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24780,14 +24792,14 @@
             },
         },
     },
-#line 9034
+#line 9037
     [DIFFICULTY_NORMAL][TRAINER_4239B726] =
     {
-#line 9035
+#line 9038
         .trainerName = _("4239B726"),
-#line 9036
+#line 9039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9037
+#line 9040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24795,12 +24807,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9039
+#line 9042
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9041
+#line 9044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9040
+#line 9043
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24808,14 +24820,14 @@
             },
         },
     },
-#line 9042
+#line 9045
     [DIFFICULTY_NORMAL][TRAINER_42BC1D70] =
     {
-#line 9043
+#line 9046
         .trainerName = _("42BC1D70"),
-#line 9044
+#line 9047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9045
+#line 9048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24823,12 +24835,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9047
+#line 9050
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9049
+#line 9052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9048
+#line 9051
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24836,14 +24848,14 @@
             },
         },
     },
-#line 9050
+#line 9053
     [DIFFICULTY_NORMAL][TRAINER_42BE3E94] =
     {
-#line 9051
+#line 9054
         .trainerName = _("42BE3E94"),
-#line 9052
+#line 9055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9053
+#line 9056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24851,12 +24863,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9055
+#line 9058
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9057
+#line 9060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9056
+#line 9059
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24864,14 +24876,14 @@
             },
         },
     },
-#line 9058
+#line 9061
     [DIFFICULTY_NORMAL][TRAINER_42C68371] =
     {
-#line 9059
+#line 9062
         .trainerName = _("42C68371"),
-#line 9060
+#line 9063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9061
+#line 9064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24879,12 +24891,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9063
+#line 9066
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9065
+#line 9068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9064
+#line 9067
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24892,14 +24904,14 @@
             },
         },
     },
-#line 9066
+#line 9069
     [DIFFICULTY_NORMAL][TRAINER_432F34FA] =
     {
-#line 9067
+#line 9070
         .trainerName = _("432F34FA"),
-#line 9068
+#line 9071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9069
+#line 9072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24907,12 +24919,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9071
+#line 9074
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9073
+#line 9076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9072
+#line 9075
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24920,14 +24932,14 @@
             },
         },
     },
-#line 9074
+#line 9077
     [DIFFICULTY_NORMAL][TRAINER_437E553A] =
     {
-#line 9075
+#line 9078
         .trainerName = _("437E553A"),
-#line 9076
+#line 9079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9077
+#line 9080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24935,12 +24947,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9079
+#line 9082
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9081
+#line 9084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9080
+#line 9083
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24948,14 +24960,14 @@
             },
         },
     },
-#line 9082
+#line 9085
     [DIFFICULTY_NORMAL][TRAINER_4394141C] =
     {
-#line 9083
+#line 9086
         .trainerName = _("4394141C"),
-#line 9084
+#line 9087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9085
+#line 9088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24963,12 +24975,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9087
+#line 9090
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9089
+#line 9092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9088
+#line 9091
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -24976,14 +24988,14 @@
             },
         },
     },
-#line 9090
+#line 9093
     [DIFFICULTY_NORMAL][TRAINER_43B111AD] =
     {
-#line 9091
+#line 9094
         .trainerName = _("43B111AD"),
-#line 9092
+#line 9095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9093
+#line 9096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -24991,12 +25003,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9095
+#line 9098
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9097
+#line 9100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9096
+#line 9099
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25004,14 +25016,14 @@
             },
         },
     },
-#line 9098
+#line 9101
     [DIFFICULTY_NORMAL][TRAINER_43B30B5D] =
     {
-#line 9099
+#line 9102
         .trainerName = _("43B30B5D"),
-#line 9100
+#line 9103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9101
+#line 9104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25019,12 +25031,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9103
+#line 9106
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9105
+#line 9108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9104
+#line 9107
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25032,14 +25044,14 @@
             },
         },
     },
-#line 9106
+#line 9109
     [DIFFICULTY_NORMAL][TRAINER_43D6557C] =
     {
-#line 9107
+#line 9110
         .trainerName = _("43D6557C"),
-#line 9108
+#line 9111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9109
+#line 9112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25047,12 +25059,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9111
+#line 9114
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9113
+#line 9116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9112
+#line 9115
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25060,14 +25072,14 @@
             },
         },
     },
-#line 9114
+#line 9117
     [DIFFICULTY_NORMAL][TRAINER_44251BF9] =
     {
-#line 9115
+#line 9118
         .trainerName = _("44251BF9"),
-#line 9116
+#line 9119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9117
+#line 9120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25075,12 +25087,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9119
+#line 9122
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9121
+#line 9124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9120
+#line 9123
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25088,14 +25100,14 @@
             },
         },
     },
-#line 9122
+#line 9125
     [DIFFICULTY_NORMAL][TRAINER_44D28B98] =
     {
-#line 9123
+#line 9126
         .trainerName = _("44D28B98"),
-#line 9124
+#line 9127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9125
+#line 9128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25103,12 +25115,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9127
+#line 9130
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9129
+#line 9132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9128
+#line 9131
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25116,14 +25128,14 @@
             },
         },
     },
-#line 9130
+#line 9133
     [DIFFICULTY_NORMAL][TRAINER_44E68738] =
     {
-#line 9131
+#line 9134
         .trainerName = _("44E68738"),
-#line 9132
+#line 9135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9133
+#line 9136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25131,12 +25143,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9135
+#line 9138
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9137
+#line 9140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9136
+#line 9139
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25144,14 +25156,14 @@
             },
         },
     },
-#line 9138
+#line 9141
     [DIFFICULTY_NORMAL][TRAINER_44F86666] =
     {
-#line 9139
+#line 9142
         .trainerName = _("44F86666"),
-#line 9140
+#line 9143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9141
+#line 9144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25159,12 +25171,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9143
+#line 9146
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9145
+#line 9148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9144
+#line 9147
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25172,14 +25184,14 @@
             },
         },
     },
-#line 9146
+#line 9149
     [DIFFICULTY_NORMAL][TRAINER_458C3B90] =
     {
-#line 9147
+#line 9150
         .trainerName = _("458C3B90"),
-#line 9148
+#line 9151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9149
+#line 9152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25187,12 +25199,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9151
+#line 9154
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9153
+#line 9156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9152
+#line 9155
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25200,14 +25212,14 @@
             },
         },
     },
-#line 9154
+#line 9157
     [DIFFICULTY_NORMAL][TRAINER_45CBA787] =
     {
-#line 9155
+#line 9158
         .trainerName = _("45CBA787"),
-#line 9156
+#line 9159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9157
+#line 9160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25215,12 +25227,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9159
+#line 9162
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9161
+#line 9164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9160
+#line 9163
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25228,14 +25240,14 @@
             },
         },
     },
-#line 9162
+#line 9165
     [DIFFICULTY_NORMAL][TRAINER_45E5EB22] =
     {
-#line 9163
+#line 9166
         .trainerName = _("45E5EB22"),
-#line 9164
+#line 9167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9165
+#line 9168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25243,12 +25255,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9167
+#line 9170
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9169
+#line 9172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9168
+#line 9171
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25256,14 +25268,14 @@
             },
         },
     },
-#line 9170
+#line 9173
     [DIFFICULTY_NORMAL][TRAINER_45ECBA80] =
     {
-#line 9171
+#line 9174
         .trainerName = _("45ECBA80"),
-#line 9172
+#line 9175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9173
+#line 9176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25271,12 +25283,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9175
+#line 9178
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9177
+#line 9180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9176
+#line 9179
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25284,14 +25296,14 @@
             },
         },
     },
-#line 9178
+#line 9181
     [DIFFICULTY_NORMAL][TRAINER_460AB144] =
     {
-#line 9179
+#line 9182
         .trainerName = _("460AB144"),
-#line 9180
+#line 9183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9181
+#line 9184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25299,12 +25311,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9183
+#line 9186
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9185
+#line 9188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9184
+#line 9187
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25312,14 +25324,14 @@
             },
         },
     },
-#line 9186
+#line 9189
     [DIFFICULTY_NORMAL][TRAINER_46169EA5] =
     {
-#line 9187
+#line 9190
         .trainerName = _("46169EA5"),
-#line 9188
+#line 9191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9189
+#line 9192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25327,12 +25339,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9191
+#line 9194
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9193
+#line 9196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9192
+#line 9195
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25340,14 +25352,14 @@
             },
         },
     },
-#line 9194
+#line 9197
     [DIFFICULTY_NORMAL][TRAINER_464C4C44] =
     {
-#line 9195
+#line 9198
         .trainerName = _("464C4C44"),
-#line 9196
+#line 9199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9197
+#line 9200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25355,12 +25367,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9199
+#line 9202
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9201
+#line 9204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9200
+#line 9203
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25368,14 +25380,14 @@
             },
         },
     },
-#line 9202
+#line 9205
     [DIFFICULTY_NORMAL][TRAINER_473EE9DE] =
     {
-#line 9203
+#line 9206
         .trainerName = _("473EE9DE"),
-#line 9204
+#line 9207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9205
+#line 9208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25383,12 +25395,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9207
+#line 9210
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9209
+#line 9212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9208
+#line 9211
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25396,14 +25408,14 @@
             },
         },
     },
-#line 9210
+#line 9213
     [DIFFICULTY_NORMAL][TRAINER_4787A98D] =
     {
-#line 9211
+#line 9214
         .trainerName = _("4787A98D"),
-#line 9212
+#line 9215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9213
+#line 9216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25411,12 +25423,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9215
+#line 9218
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9217
+#line 9220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9216
+#line 9219
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25424,14 +25436,14 @@
             },
         },
     },
-#line 9218
+#line 9221
     [DIFFICULTY_NORMAL][TRAINER_479BBFEB] =
     {
-#line 9219
+#line 9222
         .trainerName = _("479BBFEB"),
-#line 9220
+#line 9223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9221
+#line 9224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25439,12 +25451,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9223
+#line 9226
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9225
+#line 9228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9224
+#line 9227
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25452,14 +25464,14 @@
             },
         },
     },
-#line 9226
+#line 9229
     [DIFFICULTY_NORMAL][TRAINER_47EACF7E] =
     {
-#line 9227
+#line 9230
         .trainerName = _("47EACF7E"),
-#line 9228
+#line 9231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9229
+#line 9232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25467,12 +25479,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9231
+#line 9234
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9233
+#line 9236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9232
+#line 9235
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25480,14 +25492,14 @@
             },
         },
     },
-#line 9234
+#line 9237
     [DIFFICULTY_NORMAL][TRAINER_4848801D] =
     {
-#line 9235
+#line 9238
         .trainerName = _("4848801D"),
-#line 9236
+#line 9239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9237
+#line 9240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25495,12 +25507,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9239
+#line 9242
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9241
+#line 9244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9240
+#line 9243
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25508,14 +25520,14 @@
             },
         },
     },
-#line 9242
+#line 9245
     [DIFFICULTY_NORMAL][TRAINER_487BEC6D] =
     {
-#line 9243
+#line 9246
         .trainerName = _("487BEC6D"),
-#line 9244
+#line 9247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9245
+#line 9248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25523,12 +25535,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9247
+#line 9250
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9249
+#line 9252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9248
+#line 9251
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25536,14 +25548,14 @@
             },
         },
     },
-#line 9250
+#line 9253
     [DIFFICULTY_NORMAL][TRAINER_492E0A66] =
     {
-#line 9251
+#line 9254
         .trainerName = _("492E0A66"),
-#line 9252
+#line 9255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9253
+#line 9256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25551,12 +25563,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9255
+#line 9258
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9257
+#line 9260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9256
+#line 9259
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25564,14 +25576,14 @@
             },
         },
     },
-#line 9258
+#line 9261
     [DIFFICULTY_NORMAL][TRAINER_494ECB35] =
     {
-#line 9259
+#line 9262
         .trainerName = _("494ECB35"),
-#line 9260
+#line 9263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9261
+#line 9264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25579,12 +25591,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9263
+#line 9266
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9265
+#line 9268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9264
+#line 9267
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25592,14 +25604,14 @@
             },
         },
     },
-#line 9266
+#line 9269
     [DIFFICULTY_NORMAL][TRAINER_494F5379] =
     {
-#line 9267
+#line 9270
         .trainerName = _("494F5379"),
-#line 9268
+#line 9271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9269
+#line 9272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25607,12 +25619,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9271
+#line 9274
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9273
+#line 9276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9272
+#line 9275
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25620,14 +25632,14 @@
             },
         },
     },
-#line 9274
+#line 9277
     [DIFFICULTY_NORMAL][TRAINER_49805D55] =
     {
-#line 9275
+#line 9278
         .trainerName = _("49805D55"),
-#line 9276
+#line 9279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9277
+#line 9280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25635,12 +25647,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9279
+#line 9282
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9281
+#line 9284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9280
+#line 9283
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25648,14 +25660,14 @@
             },
         },
     },
-#line 9282
+#line 9285
     [DIFFICULTY_NORMAL][TRAINER_49EA8A40] =
     {
-#line 9283
+#line 9286
         .trainerName = _("49EA8A40"),
-#line 9284
+#line 9287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9285
+#line 9288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25663,12 +25675,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9287
+#line 9290
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9289
+#line 9292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9288
+#line 9291
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25676,14 +25688,14 @@
             },
         },
     },
-#line 9290
+#line 9293
     [DIFFICULTY_NORMAL][TRAINER_4A323E4A] =
     {
-#line 9291
+#line 9294
         .trainerName = _("4A323E4A"),
-#line 9292
+#line 9295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9293
+#line 9296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25691,12 +25703,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9295
+#line 9298
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9297
+#line 9300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9296
+#line 9299
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25704,14 +25716,14 @@
             },
         },
     },
-#line 9298
+#line 9301
     [DIFFICULTY_NORMAL][TRAINER_4A3EB696] =
     {
-#line 9299
+#line 9302
         .trainerName = _("4A3EB696"),
-#line 9300
+#line 9303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9301
+#line 9304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25719,12 +25731,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9303
+#line 9306
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9305
+#line 9308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9304
+#line 9307
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25732,14 +25744,14 @@
             },
         },
     },
-#line 9306
+#line 9309
     [DIFFICULTY_NORMAL][TRAINER_4ABDB43A] =
     {
-#line 9307
+#line 9310
         .trainerName = _("4ABDB43A"),
-#line 9308
+#line 9311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9309
+#line 9312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25747,12 +25759,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9311
+#line 9314
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9313
+#line 9316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9312
+#line 9315
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25760,14 +25772,14 @@
             },
         },
     },
-#line 9314
+#line 9317
     [DIFFICULTY_NORMAL][TRAINER_4AD6DB47] =
     {
-#line 9315
+#line 9318
         .trainerName = _("4AD6DB47"),
-#line 9316
+#line 9319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9317
+#line 9320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25775,12 +25787,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9319
+#line 9322
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9321
+#line 9324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9320
+#line 9323
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25788,14 +25800,14 @@
             },
         },
     },
-#line 9322
+#line 9325
     [DIFFICULTY_NORMAL][TRAINER_4AF51B8A] =
     {
-#line 9323
+#line 9326
         .trainerName = _("4AF51B8A"),
-#line 9324
+#line 9327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9325
+#line 9328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25803,12 +25815,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9327
+#line 9330
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9329
+#line 9332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9328
+#line 9331
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25816,14 +25828,14 @@
             },
         },
     },
-#line 9330
+#line 9333
     [DIFFICULTY_NORMAL][TRAINER_4B2BC403] =
     {
-#line 9331
+#line 9334
         .trainerName = _("4B2BC403"),
-#line 9332
+#line 9335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9333
+#line 9336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25831,12 +25843,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9335
+#line 9338
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9337
+#line 9340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9336
+#line 9339
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25844,14 +25856,14 @@
             },
         },
     },
-#line 9338
+#line 9341
     [DIFFICULTY_NORMAL][TRAINER_4B3B0356] =
     {
-#line 9339
+#line 9342
         .trainerName = _("4B3B0356"),
-#line 9340
+#line 9343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9341
+#line 9344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25859,12 +25871,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9343
+#line 9346
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9345
+#line 9348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9344
+#line 9347
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25872,14 +25884,14 @@
             },
         },
     },
-#line 9346
+#line 9349
     [DIFFICULTY_NORMAL][TRAINER_4B431569] =
     {
-#line 9347
+#line 9350
         .trainerName = _("4B431569"),
-#line 9348
+#line 9351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9349
+#line 9352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25887,12 +25899,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9351
+#line 9354
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9353
+#line 9356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9352
+#line 9355
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25900,14 +25912,14 @@
             },
         },
     },
-#line 9354
+#line 9357
     [DIFFICULTY_NORMAL][TRAINER_4B5B4954] =
     {
-#line 9355
+#line 9358
         .trainerName = _("4B5B4954"),
-#line 9356
+#line 9359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9357
+#line 9360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25915,12 +25927,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9359
+#line 9362
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9361
+#line 9364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9360
+#line 9363
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25928,14 +25940,14 @@
             },
         },
     },
-#line 9362
+#line 9365
     [DIFFICULTY_NORMAL][TRAINER_4C2D23EC] =
     {
-#line 9363
+#line 9366
         .trainerName = _("4C2D23EC"),
-#line 9364
+#line 9367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9365
+#line 9368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25943,12 +25955,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9367
+#line 9370
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9369
+#line 9372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9368
+#line 9371
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25956,14 +25968,14 @@
             },
         },
     },
-#line 9370
+#line 9373
     [DIFFICULTY_NORMAL][TRAINER_4CE97031] =
     {
-#line 9371
+#line 9374
         .trainerName = _("4CE97031"),
-#line 9372
+#line 9375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9373
+#line 9376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25971,12 +25983,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9375
+#line 9378
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9377
+#line 9380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9376
+#line 9379
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -25984,14 +25996,14 @@
             },
         },
     },
-#line 9378
+#line 9381
     [DIFFICULTY_NORMAL][TRAINER_4CF43F23] =
     {
-#line 9379
+#line 9382
         .trainerName = _("4CF43F23"),
-#line 9380
+#line 9383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9381
+#line 9384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -25999,12 +26011,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9383
+#line 9386
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9385
+#line 9388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9384
+#line 9387
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26012,14 +26024,14 @@
             },
         },
     },
-#line 9386
+#line 9389
     [DIFFICULTY_NORMAL][TRAINER_4D8F9D46] =
     {
-#line 9387
+#line 9390
         .trainerName = _("4D8F9D46"),
-#line 9388
+#line 9391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9389
+#line 9392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26027,12 +26039,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9391
+#line 9394
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9393
+#line 9396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9392
+#line 9395
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26040,14 +26052,14 @@
             },
         },
     },
-#line 9394
+#line 9397
     [DIFFICULTY_NORMAL][TRAINER_4D98F6C4] =
     {
-#line 9395
+#line 9398
         .trainerName = _("4D98F6C4"),
-#line 9396
+#line 9399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9397
+#line 9400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26055,12 +26067,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9399
+#line 9402
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9401
+#line 9404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9400
+#line 9403
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26068,14 +26080,14 @@
             },
         },
     },
-#line 9402
+#line 9405
     [DIFFICULTY_NORMAL][TRAINER_4E072263] =
     {
-#line 9403
+#line 9406
         .trainerName = _("4E072263"),
-#line 9404
+#line 9407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9405
+#line 9408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26083,12 +26095,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9407
+#line 9410
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9409
+#line 9412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9408
+#line 9411
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26096,14 +26108,14 @@
             },
         },
     },
-#line 9410
+#line 9413
     [DIFFICULTY_NORMAL][TRAINER_4E0C1EFE] =
     {
-#line 9411
+#line 9414
         .trainerName = _("4E0C1EFE"),
-#line 9412
+#line 9415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9413
+#line 9416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26111,12 +26123,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9415
+#line 9418
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9417
+#line 9420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9416
+#line 9419
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26124,14 +26136,14 @@
             },
         },
     },
-#line 9418
+#line 9421
     [DIFFICULTY_NORMAL][TRAINER_4E226A6E] =
     {
-#line 9419
+#line 9422
         .trainerName = _("4E226A6E"),
-#line 9420
+#line 9423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9421
+#line 9424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26139,12 +26151,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9423
+#line 9426
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9425
+#line 9428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9424
+#line 9427
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26152,14 +26164,14 @@
             },
         },
     },
-#line 9426
+#line 9429
     [DIFFICULTY_NORMAL][TRAINER_4E5AAFAE] =
     {
-#line 9427
+#line 9430
         .trainerName = _("4E5AAFAE"),
-#line 9428
+#line 9431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9429
+#line 9432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26167,12 +26179,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9431
+#line 9434
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9433
+#line 9436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9432
+#line 9435
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26180,14 +26192,14 @@
             },
         },
     },
-#line 9434
+#line 9437
     [DIFFICULTY_NORMAL][TRAINER_4F10DCA9] =
     {
-#line 9435
+#line 9438
         .trainerName = _("4F10DCA9"),
-#line 9436
+#line 9439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9437
+#line 9440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26195,12 +26207,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9439
+#line 9442
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9441
+#line 9444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9440
+#line 9443
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26208,14 +26220,14 @@
             },
         },
     },
-#line 9442
+#line 9445
     [DIFFICULTY_NORMAL][TRAINER_50AE78E5] =
     {
-#line 9443
+#line 9446
         .trainerName = _("50AE78E5"),
-#line 9444
+#line 9447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9445
+#line 9448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26223,12 +26235,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9447
+#line 9450
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9449
+#line 9452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9448
+#line 9451
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26236,14 +26248,14 @@
             },
         },
     },
-#line 9450
+#line 9453
     [DIFFICULTY_NORMAL][TRAINER_513A43EE] =
     {
-#line 9451
+#line 9454
         .trainerName = _("513A43EE"),
-#line 9452
+#line 9455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9453
+#line 9456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26251,12 +26263,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9455
+#line 9458
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9457
+#line 9460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9456
+#line 9459
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26264,14 +26276,14 @@
             },
         },
     },
-#line 9458
+#line 9461
     [DIFFICULTY_NORMAL][TRAINER_51A32DCA] =
     {
-#line 9459
+#line 9462
         .trainerName = _("51A32DCA"),
-#line 9460
+#line 9463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9461
+#line 9464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26279,12 +26291,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9463
+#line 9466
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9465
+#line 9468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9464
+#line 9467
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26292,14 +26304,14 @@
             },
         },
     },
-#line 9466
+#line 9469
     [DIFFICULTY_NORMAL][TRAINER_51F6B834] =
     {
-#line 9467
+#line 9470
         .trainerName = _("51F6B834"),
-#line 9468
+#line 9471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9469
+#line 9472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26307,12 +26319,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9471
+#line 9474
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9473
+#line 9476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9472
+#line 9475
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26320,14 +26332,14 @@
             },
         },
     },
-#line 9474
+#line 9477
     [DIFFICULTY_NORMAL][TRAINER_5209EDF0] =
     {
-#line 9475
+#line 9478
         .trainerName = _("5209EDF0"),
-#line 9476
+#line 9479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9477
+#line 9480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26335,12 +26347,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9479
+#line 9482
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9481
+#line 9484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9480
+#line 9483
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26348,14 +26360,14 @@
             },
         },
     },
-#line 9482
+#line 9485
     [DIFFICULTY_NORMAL][TRAINER_52CFC159] =
     {
-#line 9483
+#line 9486
         .trainerName = _("52CFC159"),
-#line 9484
+#line 9487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9485
+#line 9488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26363,12 +26375,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9487
+#line 9490
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9489
+#line 9492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9488
+#line 9491
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26376,14 +26388,14 @@
             },
         },
     },
-#line 9490
+#line 9493
     [DIFFICULTY_NORMAL][TRAINER_538D052D] =
     {
-#line 9491
+#line 9494
         .trainerName = _("538D052D"),
-#line 9492
+#line 9495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9493
+#line 9496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26391,12 +26403,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9495
+#line 9498
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9497
+#line 9500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9496
+#line 9499
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26404,14 +26416,14 @@
             },
         },
     },
-#line 9498
+#line 9501
     [DIFFICULTY_NORMAL][TRAINER_53A1A61A] =
     {
-#line 9499
+#line 9502
         .trainerName = _("53A1A61A"),
-#line 9500
+#line 9503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9501
+#line 9504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26419,12 +26431,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9503
+#line 9506
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9505
+#line 9508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9504
+#line 9507
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26432,14 +26444,14 @@
             },
         },
     },
-#line 9506
+#line 9509
     [DIFFICULTY_NORMAL][TRAINER_53B06C7B] =
     {
-#line 9507
+#line 9510
         .trainerName = _("53B06C7B"),
-#line 9508
+#line 9511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9509
+#line 9512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26447,12 +26459,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9511
+#line 9514
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9513
+#line 9516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9512
+#line 9515
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26460,14 +26472,14 @@
             },
         },
     },
-#line 9514
+#line 9517
     [DIFFICULTY_NORMAL][TRAINER_54110A38] =
     {
-#line 9515
+#line 9518
         .trainerName = _("54110A38"),
-#line 9516
+#line 9519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9517
+#line 9520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26475,12 +26487,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9519
+#line 9522
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9521
+#line 9524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9520
+#line 9523
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26488,14 +26500,14 @@
             },
         },
     },
-#line 9522
+#line 9525
     [DIFFICULTY_NORMAL][TRAINER_549792BA] =
     {
-#line 9523
+#line 9526
         .trainerName = _("549792BA"),
-#line 9524
+#line 9527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9525
+#line 9528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26503,12 +26515,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9527
+#line 9530
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9529
+#line 9532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9528
+#line 9531
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26516,14 +26528,14 @@
             },
         },
     },
-#line 9530
+#line 9533
     [DIFFICULTY_NORMAL][TRAINER_54BAC2DA] =
     {
-#line 9531
+#line 9534
         .trainerName = _("54BAC2DA"),
-#line 9532
+#line 9535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9533
+#line 9536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26531,12 +26543,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9535
+#line 9538
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9537
+#line 9540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9536
+#line 9539
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26544,14 +26556,14 @@
             },
         },
     },
-#line 9538
+#line 9541
     [DIFFICULTY_NORMAL][TRAINER_54F170BE] =
     {
-#line 9539
+#line 9542
         .trainerName = _("54F170BE"),
-#line 9540
+#line 9543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9541
+#line 9544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26559,12 +26571,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9543
+#line 9546
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9545
+#line 9548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9544
+#line 9547
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26572,14 +26584,14 @@
             },
         },
     },
-#line 9546
+#line 9549
     [DIFFICULTY_NORMAL][TRAINER_558F80F9] =
     {
-#line 9547
+#line 9550
         .trainerName = _("558F80F9"),
-#line 9548
+#line 9551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9549
+#line 9552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26587,12 +26599,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9551
+#line 9554
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9553
+#line 9556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9552
+#line 9555
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26600,14 +26612,14 @@
             },
         },
     },
-#line 9554
+#line 9557
     [DIFFICULTY_NORMAL][TRAINER_55CA00A1] =
     {
-#line 9555
+#line 9558
         .trainerName = _("55CA00A1"),
-#line 9556
+#line 9559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9557
+#line 9560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26615,12 +26627,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9559
+#line 9562
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9561
+#line 9564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9560
+#line 9563
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26628,14 +26640,14 @@
             },
         },
     },
-#line 9562
+#line 9565
     [DIFFICULTY_NORMAL][TRAINER_55D0BEAA] =
     {
-#line 9563
+#line 9566
         .trainerName = _("55D0BEAA"),
-#line 9564
+#line 9567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9565
+#line 9568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26643,12 +26655,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9567
+#line 9570
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9569
+#line 9572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9568
+#line 9571
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26656,14 +26668,14 @@
             },
         },
     },
-#line 9570
+#line 9573
     [DIFFICULTY_NORMAL][TRAINER_55D90FA8] =
     {
-#line 9571
+#line 9574
         .trainerName = _("55D90FA8"),
-#line 9572
+#line 9575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9573
+#line 9576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26671,12 +26683,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9575
+#line 9578
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9577
+#line 9580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9576
+#line 9579
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26684,14 +26696,14 @@
             },
         },
     },
-#line 9578
+#line 9581
     [DIFFICULTY_NORMAL][TRAINER_55EBF949] =
     {
-#line 9579
+#line 9582
         .trainerName = _("55EBF949"),
-#line 9580
+#line 9583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9581
+#line 9584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26699,12 +26711,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9583
+#line 9586
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9585
+#line 9588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9584
+#line 9587
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26712,14 +26724,14 @@
             },
         },
     },
-#line 9586
+#line 9589
     [DIFFICULTY_NORMAL][TRAINER_565DE3C4] =
     {
-#line 9587
+#line 9590
         .trainerName = _("565DE3C4"),
-#line 9588
+#line 9591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9589
+#line 9592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26727,12 +26739,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9591
+#line 9594
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9593
+#line 9596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9592
+#line 9595
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26740,14 +26752,14 @@
             },
         },
     },
-#line 9594
+#line 9597
     [DIFFICULTY_NORMAL][TRAINER_56775C71] =
     {
-#line 9595
+#line 9598
         .trainerName = _("56775C71"),
-#line 9596
+#line 9599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9597
+#line 9600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26755,12 +26767,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9599
+#line 9602
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9601
+#line 9604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9600
+#line 9603
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26768,14 +26780,14 @@
             },
         },
     },
-#line 9602
+#line 9605
     [DIFFICULTY_NORMAL][TRAINER_56C1FE08] =
     {
-#line 9603
+#line 9606
         .trainerName = _("56C1FE08"),
-#line 9604
+#line 9607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9605
+#line 9608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26783,12 +26795,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9607
+#line 9610
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9609
+#line 9612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9608
+#line 9611
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26796,14 +26808,14 @@
             },
         },
     },
-#line 9610
+#line 9613
     [DIFFICULTY_NORMAL][TRAINER_56E6EFAA] =
     {
-#line 9611
+#line 9614
         .trainerName = _("56E6EFAA"),
-#line 9612
+#line 9615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9613
+#line 9616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26811,12 +26823,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9615
+#line 9618
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9617
+#line 9620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9616
+#line 9619
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26824,14 +26836,14 @@
             },
         },
     },
-#line 9618
+#line 9621
     [DIFFICULTY_NORMAL][TRAINER_57E254F5] =
     {
-#line 9619
+#line 9622
         .trainerName = _("57E254F5"),
-#line 9620
+#line 9623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9621
+#line 9624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26839,12 +26851,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9623
+#line 9626
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9625
+#line 9628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9624
+#line 9627
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26852,14 +26864,14 @@
             },
         },
     },
-#line 9626
+#line 9629
     [DIFFICULTY_NORMAL][TRAINER_57E7E83A] =
     {
-#line 9627
+#line 9630
         .trainerName = _("57E7E83A"),
-#line 9628
+#line 9631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9629
+#line 9632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26867,12 +26879,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9631
+#line 9634
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9633
+#line 9636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9632
+#line 9635
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26880,14 +26892,14 @@
             },
         },
     },
-#line 9634
+#line 9637
     [DIFFICULTY_NORMAL][TRAINER_5819E497] =
     {
-#line 9635
+#line 9638
         .trainerName = _("5819E497"),
-#line 9636
+#line 9639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9637
+#line 9640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26895,12 +26907,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9639
+#line 9642
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9641
+#line 9644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9640
+#line 9643
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26908,14 +26920,14 @@
             },
         },
     },
-#line 9642
+#line 9645
     [DIFFICULTY_NORMAL][TRAINER_58A6A51E] =
     {
-#line 9643
+#line 9646
         .trainerName = _("58A6A51E"),
-#line 9644
+#line 9647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9645
+#line 9648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26923,12 +26935,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9647
+#line 9650
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9649
+#line 9652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9648
+#line 9651
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26936,14 +26948,14 @@
             },
         },
     },
-#line 9650
+#line 9653
     [DIFFICULTY_NORMAL][TRAINER_58BEBECC] =
     {
-#line 9651
+#line 9654
         .trainerName = _("58BEBECC"),
-#line 9652
+#line 9655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9653
+#line 9656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26951,12 +26963,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9655
+#line 9658
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9657
+#line 9660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9656
+#line 9659
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26964,14 +26976,14 @@
             },
         },
     },
-#line 9658
+#line 9661
     [DIFFICULTY_NORMAL][TRAINER_58F43966] =
     {
-#line 9659
+#line 9662
         .trainerName = _("58F43966"),
-#line 9660
+#line 9663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9661
+#line 9664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -26979,12 +26991,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9663
+#line 9666
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9665
+#line 9668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9664
+#line 9667
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -26992,14 +27004,14 @@
             },
         },
     },
-#line 9666
+#line 9669
     [DIFFICULTY_NORMAL][TRAINER_59592DE4] =
     {
-#line 9667
+#line 9670
         .trainerName = _("59592DE4"),
-#line 9668
+#line 9671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9669
+#line 9672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27007,12 +27019,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9671
+#line 9674
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9673
+#line 9676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9672
+#line 9675
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27020,14 +27032,14 @@
             },
         },
     },
-#line 9674
+#line 9677
     [DIFFICULTY_NORMAL][TRAINER_598585C1] =
     {
-#line 9675
+#line 9678
         .trainerName = _("598585C1"),
-#line 9676
+#line 9679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9677
+#line 9680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27035,12 +27047,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9679
+#line 9682
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9681
+#line 9684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9680
+#line 9683
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27048,14 +27060,14 @@
             },
         },
     },
-#line 9682
+#line 9685
     [DIFFICULTY_NORMAL][TRAINER_59981F0D] =
     {
-#line 9683
+#line 9686
         .trainerName = _("59981F0D"),
-#line 9684
+#line 9687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9685
+#line 9688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27063,12 +27075,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9687
+#line 9690
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9689
+#line 9692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9688
+#line 9691
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27076,14 +27088,14 @@
             },
         },
     },
-#line 9690
+#line 9693
     [DIFFICULTY_NORMAL][TRAINER_59E335AB] =
     {
-#line 9691
+#line 9694
         .trainerName = _("59E335AB"),
-#line 9692
+#line 9695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9693
+#line 9696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27091,12 +27103,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9695
+#line 9698
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9697
+#line 9700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9696
+#line 9699
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27104,14 +27116,14 @@
             },
         },
     },
-#line 9698
+#line 9701
     [DIFFICULTY_NORMAL][TRAINER_59FFFCED] =
     {
-#line 9699
+#line 9702
         .trainerName = _("59FFFCED"),
-#line 9700
+#line 9703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9701
+#line 9704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27119,12 +27131,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9703
+#line 9706
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9705
+#line 9708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9704
+#line 9707
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27132,14 +27144,14 @@
             },
         },
     },
-#line 9706
+#line 9709
     [DIFFICULTY_NORMAL][TRAINER_5ABF4FA4] =
     {
-#line 9707
+#line 9710
         .trainerName = _("5ABF4FA4"),
-#line 9708
+#line 9711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9709
+#line 9712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27147,12 +27159,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9711
+#line 9714
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9713
+#line 9716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9712
+#line 9715
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27160,14 +27172,14 @@
             },
         },
     },
-#line 9714
+#line 9717
     [DIFFICULTY_NORMAL][TRAINER_5AC61FE5] =
     {
-#line 9715
+#line 9718
         .trainerName = _("5AC61FE5"),
-#line 9716
+#line 9719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9717
+#line 9720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27175,12 +27187,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9719
+#line 9722
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9721
+#line 9724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9720
+#line 9723
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27188,14 +27200,14 @@
             },
         },
     },
-#line 9722
+#line 9725
     [DIFFICULTY_NORMAL][TRAINER_5AD29FF8] =
     {
-#line 9723
+#line 9726
         .trainerName = _("5AD29FF8"),
-#line 9724
+#line 9727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9725
+#line 9728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27203,12 +27215,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9727
+#line 9730
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9729
+#line 9732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9728
+#line 9731
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27216,14 +27228,14 @@
             },
         },
     },
-#line 9730
+#line 9733
     [DIFFICULTY_NORMAL][TRAINER_5AD4C218] =
     {
-#line 9731
+#line 9734
         .trainerName = _("5AD4C218"),
-#line 9732
+#line 9735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9733
+#line 9736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27231,12 +27243,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9735
+#line 9738
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9737
+#line 9740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9736
+#line 9739
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27244,14 +27256,14 @@
             },
         },
     },
-#line 9738
+#line 9741
     [DIFFICULTY_NORMAL][TRAINER_5B5F6AE8] =
     {
-#line 9739
+#line 9742
         .trainerName = _("5B5F6AE8"),
-#line 9740
+#line 9743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9741
+#line 9744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27259,12 +27271,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9743
+#line 9746
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9745
+#line 9748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9744
+#line 9747
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27272,14 +27284,14 @@
             },
         },
     },
-#line 9746
+#line 9749
     [DIFFICULTY_NORMAL][TRAINER_5B6304FF] =
     {
-#line 9747
+#line 9750
         .trainerName = _("5B6304FF"),
-#line 9748
+#line 9751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9749
+#line 9752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27287,12 +27299,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9751
+#line 9754
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9753
+#line 9756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9752
+#line 9755
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27300,14 +27312,14 @@
             },
         },
     },
-#line 9754
+#line 9757
     [DIFFICULTY_NORMAL][TRAINER_5B75B30F] =
     {
-#line 9755
+#line 9758
         .trainerName = _("5B75B30F"),
-#line 9756
+#line 9759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9757
+#line 9760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27315,12 +27327,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9759
+#line 9762
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9761
+#line 9764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9760
+#line 9763
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27328,14 +27340,14 @@
             },
         },
     },
-#line 9762
+#line 9765
     [DIFFICULTY_NORMAL][TRAINER_5B983361] =
     {
-#line 9763
+#line 9766
         .trainerName = _("5B983361"),
-#line 9764
+#line 9767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9765
+#line 9768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27343,12 +27355,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9767
+#line 9770
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9769
+#line 9772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9768
+#line 9771
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27356,14 +27368,14 @@
             },
         },
     },
-#line 9770
+#line 9773
     [DIFFICULTY_NORMAL][TRAINER_5BD8EA81] =
     {
-#line 9771
+#line 9774
         .trainerName = _("5BD8EA81"),
-#line 9772
+#line 9775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9773
+#line 9776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27371,12 +27383,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9775
+#line 9778
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9777
+#line 9780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9776
+#line 9779
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27384,14 +27396,14 @@
             },
         },
     },
-#line 9778
+#line 9781
     [DIFFICULTY_NORMAL][TRAINER_5C315841] =
     {
-#line 9779
+#line 9782
         .trainerName = _("5C315841"),
-#line 9780
+#line 9783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9781
+#line 9784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27399,12 +27411,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9783
+#line 9786
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9785
+#line 9788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9784
+#line 9787
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27412,14 +27424,14 @@
             },
         },
     },
-#line 9786
+#line 9789
     [DIFFICULTY_NORMAL][TRAINER_5C573C11] =
     {
-#line 9787
+#line 9790
         .trainerName = _("5C573C11"),
-#line 9788
+#line 9791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9789
+#line 9792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27427,12 +27439,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9791
+#line 9794
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9793
+#line 9796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9792
+#line 9795
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27440,14 +27452,14 @@
             },
         },
     },
-#line 9794
+#line 9797
     [DIFFICULTY_NORMAL][TRAINER_5CAB03DD] =
     {
-#line 9795
+#line 9798
         .trainerName = _("5CAB03DD"),
-#line 9796
+#line 9799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9797
+#line 9800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27455,12 +27467,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9799
+#line 9802
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9801
+#line 9804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9800
+#line 9803
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27468,14 +27480,14 @@
             },
         },
     },
-#line 9802
+#line 9805
     [DIFFICULTY_NORMAL][TRAINER_5CBDB116] =
     {
-#line 9803
+#line 9806
         .trainerName = _("5CBDB116"),
-#line 9804
+#line 9807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9805
+#line 9808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27483,12 +27495,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9807
+#line 9810
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9809
+#line 9812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9808
+#line 9811
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27496,14 +27508,14 @@
             },
         },
     },
-#line 9810
+#line 9813
     [DIFFICULTY_NORMAL][TRAINER_5D0C4B8F] =
     {
-#line 9811
+#line 9814
         .trainerName = _("5D0C4B8F"),
-#line 9812
+#line 9815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9813
+#line 9816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27511,12 +27523,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9815
+#line 9818
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9817
+#line 9820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9816
+#line 9819
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27524,14 +27536,14 @@
             },
         },
     },
-#line 9818
+#line 9821
     [DIFFICULTY_NORMAL][TRAINER_5D2CCD41] =
     {
-#line 9819
+#line 9822
         .trainerName = _("5D2CCD41"),
-#line 9820
+#line 9823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9821
+#line 9824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27539,12 +27551,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9823
+#line 9826
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9825
+#line 9828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9824
+#line 9827
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27552,14 +27564,14 @@
             },
         },
     },
-#line 9826
+#line 9829
     [DIFFICULTY_NORMAL][TRAINER_5D5F491E] =
     {
-#line 9827
+#line 9830
         .trainerName = _("5D5F491E"),
-#line 9828
+#line 9831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9829
+#line 9832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27567,12 +27579,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9831
+#line 9834
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9833
+#line 9836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9832
+#line 9835
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27580,14 +27592,14 @@
             },
         },
     },
-#line 9834
+#line 9837
     [DIFFICULTY_NORMAL][TRAINER_5D81D8F9] =
     {
-#line 9835
+#line 9838
         .trainerName = _("5D81D8F9"),
-#line 9836
+#line 9839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9837
+#line 9840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27595,12 +27607,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9839
+#line 9842
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9841
+#line 9844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9840
+#line 9843
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27608,14 +27620,14 @@
             },
         },
     },
-#line 9842
+#line 9845
     [DIFFICULTY_NORMAL][TRAINER_5D86E702] =
     {
-#line 9843
+#line 9846
         .trainerName = _("5D86E702"),
-#line 9844
+#line 9847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9845
+#line 9848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27623,12 +27635,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9847
+#line 9850
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9849
+#line 9852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9848
+#line 9851
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27636,14 +27648,14 @@
             },
         },
     },
-#line 9850
+#line 9853
     [DIFFICULTY_NORMAL][TRAINER_5D9ABC58] =
     {
-#line 9851
+#line 9854
         .trainerName = _("5D9ABC58"),
-#line 9852
+#line 9855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9853
+#line 9856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27651,12 +27663,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9855
+#line 9858
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9857
+#line 9860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9856
+#line 9859
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27664,14 +27676,14 @@
             },
         },
     },
-#line 9858
+#line 9861
     [DIFFICULTY_NORMAL][TRAINER_5DA9F2AE] =
     {
-#line 9859
+#line 9862
         .trainerName = _("5DA9F2AE"),
-#line 9860
+#line 9863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9861
+#line 9864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27679,12 +27691,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9863
+#line 9866
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9865
+#line 9868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9864
+#line 9867
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27692,14 +27704,14 @@
             },
         },
     },
-#line 9866
+#line 9869
     [DIFFICULTY_NORMAL][TRAINER_5E13316C] =
     {
-#line 9867
+#line 9870
         .trainerName = _("5E13316C"),
-#line 9868
+#line 9871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9869
+#line 9872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27707,12 +27719,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9871
+#line 9874
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9873
+#line 9876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9872
+#line 9875
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27720,14 +27732,14 @@
             },
         },
     },
-#line 9874
+#line 9877
     [DIFFICULTY_NORMAL][TRAINER_5EA7A638] =
     {
-#line 9875
+#line 9878
         .trainerName = _("5EA7A638"),
-#line 9876
+#line 9879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9877
+#line 9880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27735,12 +27747,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9879
+#line 9882
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9881
+#line 9884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9880
+#line 9883
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27748,14 +27760,14 @@
             },
         },
     },
-#line 9882
+#line 9885
     [DIFFICULTY_NORMAL][TRAINER_5EB4C98F] =
     {
-#line 9883
+#line 9886
         .trainerName = _("5EB4C98F"),
-#line 9884
+#line 9887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9885
+#line 9888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27763,12 +27775,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9887
+#line 9890
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9889
+#line 9892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9888
+#line 9891
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27776,14 +27788,14 @@
             },
         },
     },
-#line 9890
+#line 9893
     [DIFFICULTY_NORMAL][TRAINER_5EF71DA1] =
     {
-#line 9891
+#line 9894
         .trainerName = _("5EF71DA1"),
-#line 9892
+#line 9895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9893
+#line 9896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27791,12 +27803,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9895
+#line 9898
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9897
+#line 9900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9896
+#line 9899
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27804,14 +27816,14 @@
             },
         },
     },
-#line 9898
+#line 9901
     [DIFFICULTY_NORMAL][TRAINER_5F858802] =
     {
-#line 9899
+#line 9902
         .trainerName = _("5F858802"),
-#line 9900
+#line 9903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9901
+#line 9904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27819,12 +27831,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9903
+#line 9906
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9905
+#line 9908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9904
+#line 9907
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27832,14 +27844,14 @@
             },
         },
     },
-#line 9906
+#line 9909
     [DIFFICULTY_NORMAL][TRAINER_5FA4C80F] =
     {
-#line 9907
+#line 9910
         .trainerName = _("5FA4C80F"),
-#line 9908
+#line 9911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9909
+#line 9912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27847,12 +27859,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9911
+#line 9914
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9913
+#line 9916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9912
+#line 9915
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27860,14 +27872,14 @@
             },
         },
     },
-#line 9914
+#line 9917
     [DIFFICULTY_NORMAL][TRAINER_5FD48FB2] =
     {
-#line 9915
+#line 9918
         .trainerName = _("5FD48FB2"),
-#line 9916
+#line 9919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9917
+#line 9920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27875,12 +27887,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9919
+#line 9922
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9921
+#line 9924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9920
+#line 9923
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27888,14 +27900,14 @@
             },
         },
     },
-#line 9922
+#line 9925
     [DIFFICULTY_NORMAL][TRAINER_5FF1DEC5] =
     {
-#line 9923
+#line 9926
         .trainerName = _("5FF1DEC5"),
-#line 9924
+#line 9927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9925
+#line 9928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27903,12 +27915,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9927
+#line 9930
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9929
+#line 9932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9928
+#line 9931
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27916,14 +27928,14 @@
             },
         },
     },
-#line 9930
+#line 9933
     [DIFFICULTY_NORMAL][TRAINER_6016A968] =
     {
-#line 9931
+#line 9934
         .trainerName = _("6016A968"),
-#line 9932
+#line 9935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9933
+#line 9936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27931,12 +27943,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9935
+#line 9938
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9937
+#line 9940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9936
+#line 9939
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27944,14 +27956,14 @@
             },
         },
     },
-#line 9938
+#line 9941
     [DIFFICULTY_NORMAL][TRAINER_6058C03B] =
     {
-#line 9939
+#line 9942
         .trainerName = _("6058C03B"),
-#line 9940
+#line 9943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9941
+#line 9944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27959,12 +27971,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9943
+#line 9946
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9945
+#line 9948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9944
+#line 9947
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -27972,14 +27984,14 @@
             },
         },
     },
-#line 9946
+#line 9949
     [DIFFICULTY_NORMAL][TRAINER_60C3BD24] =
     {
-#line 9947
+#line 9950
         .trainerName = _("60C3BD24"),
-#line 9948
+#line 9951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9949
+#line 9952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -27987,12 +27999,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9951
+#line 9954
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9953
+#line 9956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9952
+#line 9955
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28000,14 +28012,14 @@
             },
         },
     },
-#line 9954
+#line 9957
     [DIFFICULTY_NORMAL][TRAINER_60C56554] =
     {
-#line 9955
+#line 9958
         .trainerName = _("60C56554"),
-#line 9956
+#line 9959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9957
+#line 9960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28015,12 +28027,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9959
+#line 9962
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9961
+#line 9964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9960
+#line 9963
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28028,14 +28040,14 @@
             },
         },
     },
-#line 9962
+#line 9965
     [DIFFICULTY_NORMAL][TRAINER_60D66B86] =
     {
-#line 9963
+#line 9966
         .trainerName = _("60D66B86"),
-#line 9964
+#line 9967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9965
+#line 9968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28043,12 +28055,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9967
+#line 9970
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9969
+#line 9972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9968
+#line 9971
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28056,14 +28068,14 @@
             },
         },
     },
-#line 9970
+#line 9973
     [DIFFICULTY_NORMAL][TRAINER_6102A0FC] =
     {
-#line 9971
+#line 9974
         .trainerName = _("6102A0FC"),
-#line 9972
+#line 9975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9973
+#line 9976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28071,12 +28083,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9975
+#line 9978
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9977
+#line 9980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9976
+#line 9979
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28084,14 +28096,14 @@
             },
         },
     },
-#line 9978
+#line 9981
     [DIFFICULTY_NORMAL][TRAINER_61E76999] =
     {
-#line 9979
+#line 9982
         .trainerName = _("61E76999"),
-#line 9980
+#line 9983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9981
+#line 9984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28099,12 +28111,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9983
+#line 9986
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9985
+#line 9988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9984
+#line 9987
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28112,14 +28124,14 @@
             },
         },
     },
-#line 9986
+#line 9989
     [DIFFICULTY_NORMAL][TRAINER_626AECE8] =
     {
-#line 9987
+#line 9990
         .trainerName = _("626AECE8"),
-#line 9988
+#line 9991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9989
+#line 9992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28127,12 +28139,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9991
+#line 9994
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 9993
+#line 9996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 9992
+#line 9995
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28140,14 +28152,14 @@
             },
         },
     },
-#line 9994
+#line 9997
     [DIFFICULTY_NORMAL][TRAINER_62851FFB] =
     {
-#line 9995
+#line 9998
         .trainerName = _("62851FFB"),
-#line 9996
+#line 9999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 9997
+#line 10000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28155,12 +28167,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 9999
+#line 10002
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10001
+#line 10004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10000
+#line 10003
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28168,14 +28180,14 @@
             },
         },
     },
-#line 10002
+#line 10005
     [DIFFICULTY_NORMAL][TRAINER_62C33409] =
     {
-#line 10003
+#line 10006
         .trainerName = _("62C33409"),
-#line 10004
+#line 10007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10005
+#line 10008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28183,12 +28195,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10007
+#line 10010
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10009
+#line 10012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10008
+#line 10011
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28196,14 +28208,14 @@
             },
         },
     },
-#line 10010
+#line 10013
     [DIFFICULTY_NORMAL][TRAINER_62D0F875] =
     {
-#line 10011
+#line 10014
         .trainerName = _("62D0F875"),
-#line 10012
+#line 10015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10013
+#line 10016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28211,12 +28223,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10015
+#line 10018
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10017
+#line 10020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10016
+#line 10019
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28224,14 +28236,14 @@
             },
         },
     },
-#line 10018
+#line 10021
     [DIFFICULTY_NORMAL][TRAINER_63409A54] =
     {
-#line 10019
+#line 10022
         .trainerName = _("63409A54"),
-#line 10020
+#line 10023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10021
+#line 10024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28239,12 +28251,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10023
+#line 10026
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10025
+#line 10028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10024
+#line 10027
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28252,14 +28264,14 @@
             },
         },
     },
-#line 10026
+#line 10029
     [DIFFICULTY_NORMAL][TRAINER_6397B964] =
     {
-#line 10027
+#line 10030
         .trainerName = _("6397B964"),
-#line 10028
+#line 10031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10029
+#line 10032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28267,12 +28279,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10031
+#line 10034
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10033
+#line 10036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10032
+#line 10035
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28280,14 +28292,14 @@
             },
         },
     },
-#line 10034
+#line 10037
     [DIFFICULTY_NORMAL][TRAINER_63DB05B6] =
     {
-#line 10035
+#line 10038
         .trainerName = _("63DB05B6"),
-#line 10036
+#line 10039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10037
+#line 10040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28295,12 +28307,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10039
+#line 10042
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10041
+#line 10044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10040
+#line 10043
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28308,14 +28320,14 @@
             },
         },
     },
-#line 10042
+#line 10045
     [DIFFICULTY_NORMAL][TRAINER_63DC02C9] =
     {
-#line 10043
+#line 10046
         .trainerName = _("63DC02C9"),
-#line 10044
+#line 10047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10045
+#line 10048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28323,12 +28335,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10047
+#line 10050
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10049
+#line 10052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10048
+#line 10051
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28336,14 +28348,14 @@
             },
         },
     },
-#line 10050
+#line 10053
     [DIFFICULTY_NORMAL][TRAINER_6439D44C] =
     {
-#line 10051
+#line 10054
         .trainerName = _("6439D44C"),
-#line 10052
+#line 10055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10053
+#line 10056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28351,12 +28363,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10055
+#line 10058
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10057
+#line 10060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10056
+#line 10059
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28364,14 +28376,14 @@
             },
         },
     },
-#line 10058
+#line 10061
     [DIFFICULTY_NORMAL][TRAINER_64E30596] =
     {
-#line 10059
+#line 10062
         .trainerName = _("64E30596"),
-#line 10060
+#line 10063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10061
+#line 10064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28379,12 +28391,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10063
+#line 10066
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10065
+#line 10068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10064
+#line 10067
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28392,14 +28404,14 @@
             },
         },
     },
-#line 10066
+#line 10069
     [DIFFICULTY_NORMAL][TRAINER_6566F645] =
     {
-#line 10067
+#line 10070
         .trainerName = _("6566F645"),
-#line 10068
+#line 10071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10069
+#line 10072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28407,12 +28419,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10071
+#line 10074
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10073
+#line 10076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10072
+#line 10075
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28420,14 +28432,14 @@
             },
         },
     },
-#line 10074
+#line 10077
     [DIFFICULTY_NORMAL][TRAINER_656A39C8] =
     {
-#line 10075
+#line 10078
         .trainerName = _("656A39C8"),
-#line 10076
+#line 10079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10077
+#line 10080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28435,12 +28447,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10079
+#line 10082
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10081
+#line 10084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10080
+#line 10083
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28448,14 +28460,14 @@
             },
         },
     },
-#line 10082
+#line 10085
     [DIFFICULTY_NORMAL][TRAINER_656EC067] =
     {
-#line 10083
+#line 10086
         .trainerName = _("656EC067"),
-#line 10084
+#line 10087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10085
+#line 10088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28463,12 +28475,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10087
+#line 10090
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10089
+#line 10092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10088
+#line 10091
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28476,14 +28488,14 @@
             },
         },
     },
-#line 10090
+#line 10093
     [DIFFICULTY_NORMAL][TRAINER_65CE4F87] =
     {
-#line 10091
+#line 10094
         .trainerName = _("65CE4F87"),
-#line 10092
+#line 10095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10093
+#line 10096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28491,12 +28503,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10095
+#line 10098
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10097
+#line 10100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10096
+#line 10099
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28504,14 +28516,14 @@
             },
         },
     },
-#line 10098
+#line 10101
     [DIFFICULTY_NORMAL][TRAINER_662EBAAA] =
     {
-#line 10099
+#line 10102
         .trainerName = _("662EBAAA"),
-#line 10100
+#line 10103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10101
+#line 10104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28519,12 +28531,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10103
+#line 10106
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10105
+#line 10108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10104
+#line 10107
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28532,14 +28544,14 @@
             },
         },
     },
-#line 10106
+#line 10109
     [DIFFICULTY_NORMAL][TRAINER_66531C74] =
     {
-#line 10107
+#line 10110
         .trainerName = _("66531C74"),
-#line 10108
+#line 10111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10109
+#line 10112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28547,12 +28559,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10111
+#line 10114
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10113
+#line 10116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10112
+#line 10115
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28560,14 +28572,14 @@
             },
         },
     },
-#line 10114
+#line 10117
     [DIFFICULTY_NORMAL][TRAINER_66B16F22] =
     {
-#line 10115
+#line 10118
         .trainerName = _("66B16F22"),
-#line 10116
+#line 10119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10117
+#line 10120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28575,12 +28587,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10119
+#line 10122
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10121
+#line 10124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10120
+#line 10123
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28588,14 +28600,14 @@
             },
         },
     },
-#line 10122
+#line 10125
     [DIFFICULTY_NORMAL][TRAINER_66D26AEC] =
     {
-#line 10123
+#line 10126
         .trainerName = _("66D26AEC"),
-#line 10124
+#line 10127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10125
+#line 10128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28603,12 +28615,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10127
+#line 10130
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10129
+#line 10132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10128
+#line 10131
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28616,14 +28628,14 @@
             },
         },
     },
-#line 10130
+#line 10133
     [DIFFICULTY_NORMAL][TRAINER_675DA518] =
     {
-#line 10131
+#line 10134
         .trainerName = _("675DA518"),
-#line 10132
+#line 10135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10133
+#line 10136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28631,12 +28643,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10135
+#line 10138
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10137
+#line 10140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10136
+#line 10139
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28644,14 +28656,14 @@
             },
         },
     },
-#line 10138
+#line 10141
     [DIFFICULTY_NORMAL][TRAINER_677A22D7] =
     {
-#line 10139
+#line 10142
         .trainerName = _("677A22D7"),
-#line 10140
+#line 10143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10141
+#line 10144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28659,12 +28671,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10143
+#line 10146
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10145
+#line 10148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10144
+#line 10147
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28672,14 +28684,14 @@
             },
         },
     },
-#line 10146
+#line 10149
     [DIFFICULTY_NORMAL][TRAINER_6792B394] =
     {
-#line 10147
+#line 10150
         .trainerName = _("6792B394"),
-#line 10148
+#line 10151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10149
+#line 10152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28687,12 +28699,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10151
+#line 10154
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10153
+#line 10156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10152
+#line 10155
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28700,14 +28712,14 @@
             },
         },
     },
-#line 10154
+#line 10157
     [DIFFICULTY_NORMAL][TRAINER_683A2305] =
     {
-#line 10155
+#line 10158
         .trainerName = _("683A2305"),
-#line 10156
+#line 10159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10157
+#line 10160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28715,12 +28727,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10159
+#line 10162
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10161
+#line 10164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10160
+#line 10163
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28728,14 +28740,14 @@
             },
         },
     },
-#line 10162
+#line 10165
     [DIFFICULTY_NORMAL][TRAINER_692DD7CF] =
     {
-#line 10163
+#line 10166
         .trainerName = _("692DD7CF"),
-#line 10164
+#line 10167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10165
+#line 10168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28743,12 +28755,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10167
+#line 10170
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10169
+#line 10172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10168
+#line 10171
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28756,14 +28768,14 @@
             },
         },
     },
-#line 10170
+#line 10173
     [DIFFICULTY_NORMAL][TRAINER_698BB117] =
     {
-#line 10171
+#line 10174
         .trainerName = _("698BB117"),
-#line 10172
+#line 10175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10173
+#line 10176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28771,12 +28783,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10175
+#line 10178
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10177
+#line 10180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10176
+#line 10179
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28784,14 +28796,14 @@
             },
         },
     },
-#line 10178
+#line 10181
     [DIFFICULTY_NORMAL][TRAINER_69EE8132] =
     {
-#line 10179
+#line 10182
         .trainerName = _("69EE8132"),
-#line 10180
+#line 10183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10181
+#line 10184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28799,12 +28811,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10183
+#line 10186
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10185
+#line 10188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10184
+#line 10187
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28812,14 +28824,14 @@
             },
         },
     },
-#line 10186
+#line 10189
     [DIFFICULTY_NORMAL][TRAINER_6A35EE35] =
     {
-#line 10187
+#line 10190
         .trainerName = _("6A35EE35"),
-#line 10188
+#line 10191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10189
+#line 10192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28827,12 +28839,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10191
+#line 10194
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10193
+#line 10196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10192
+#line 10195
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28840,14 +28852,14 @@
             },
         },
     },
-#line 10194
+#line 10197
     [DIFFICULTY_NORMAL][TRAINER_6A3930E6] =
     {
-#line 10195
+#line 10198
         .trainerName = _("6A3930E6"),
-#line 10196
+#line 10199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10197
+#line 10200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28855,12 +28867,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10199
+#line 10202
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10201
+#line 10204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10200
+#line 10203
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28868,14 +28880,14 @@
             },
         },
     },
-#line 10202
+#line 10205
     [DIFFICULTY_NORMAL][TRAINER_6A48F28F] =
     {
-#line 10203
+#line 10206
         .trainerName = _("6A48F28F"),
-#line 10204
+#line 10207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10205
+#line 10208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28883,12 +28895,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10207
+#line 10210
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10209
+#line 10212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10208
+#line 10211
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28896,14 +28908,14 @@
             },
         },
     },
-#line 10210
+#line 10213
     [DIFFICULTY_NORMAL][TRAINER_6A8EEC78] =
     {
-#line 10211
+#line 10214
         .trainerName = _("6A8EEC78"),
-#line 10212
+#line 10215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10213
+#line 10216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28911,12 +28923,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10215
+#line 10218
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10217
+#line 10220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10216
+#line 10219
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28924,14 +28936,14 @@
             },
         },
     },
-#line 10218
+#line 10221
     [DIFFICULTY_NORMAL][TRAINER_6AABC7EA] =
     {
-#line 10219
+#line 10222
         .trainerName = _("6AABC7EA"),
-#line 10220
+#line 10223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10221
+#line 10224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28939,12 +28951,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10223
+#line 10226
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10225
+#line 10228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10224
+#line 10227
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28952,14 +28964,14 @@
             },
         },
     },
-#line 10226
+#line 10229
     [DIFFICULTY_NORMAL][TRAINER_6ABE3EC1] =
     {
-#line 10227
+#line 10230
         .trainerName = _("6ABE3EC1"),
-#line 10228
+#line 10231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10229
+#line 10232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28967,12 +28979,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10231
+#line 10234
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10233
+#line 10236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10232
+#line 10235
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -28980,14 +28992,14 @@
             },
         },
     },
-#line 10234
+#line 10237
     [DIFFICULTY_NORMAL][TRAINER_6B14C259] =
     {
-#line 10235
+#line 10238
         .trainerName = _("6B14C259"),
-#line 10236
+#line 10239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10237
+#line 10240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -28995,12 +29007,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10239
+#line 10242
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10241
+#line 10244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10240
+#line 10243
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29008,14 +29020,14 @@
             },
         },
     },
-#line 10242
+#line 10245
     [DIFFICULTY_NORMAL][TRAINER_6BEEE6BE] =
     {
-#line 10243
+#line 10246
         .trainerName = _("6BEEE6BE"),
-#line 10244
+#line 10247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10245
+#line 10248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29023,12 +29035,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10247
+#line 10250
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10249
+#line 10252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10248
+#line 10251
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29036,14 +29048,14 @@
             },
         },
     },
-#line 10250
+#line 10253
     [DIFFICULTY_NORMAL][TRAINER_6C7736F9] =
     {
-#line 10251
+#line 10254
         .trainerName = _("6C7736F9"),
-#line 10252
+#line 10255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10253
+#line 10256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29051,12 +29063,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10255
+#line 10258
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10257
+#line 10260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10256
+#line 10259
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29064,14 +29076,14 @@
             },
         },
     },
-#line 10258
+#line 10261
     [DIFFICULTY_NORMAL][TRAINER_6CC913A2] =
     {
-#line 10259
+#line 10262
         .trainerName = _("6CC913A2"),
-#line 10260
+#line 10263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10261
+#line 10264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29079,12 +29091,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10263
+#line 10266
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10265
+#line 10268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10264
+#line 10267
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29092,14 +29104,14 @@
             },
         },
     },
-#line 10266
+#line 10269
     [DIFFICULTY_NORMAL][TRAINER_6D45549A] =
     {
-#line 10267
+#line 10270
         .trainerName = _("6D45549A"),
-#line 10268
+#line 10271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10269
+#line 10272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29107,12 +29119,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10271
+#line 10274
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10273
+#line 10276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10272
+#line 10275
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29120,14 +29132,14 @@
             },
         },
     },
-#line 10274
+#line 10277
     [DIFFICULTY_NORMAL][TRAINER_6E1E82B2] =
     {
-#line 10275
+#line 10278
         .trainerName = _("6E1E82B2"),
-#line 10276
+#line 10279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10277
+#line 10280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29135,12 +29147,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10279
+#line 10282
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10281
+#line 10284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10280
+#line 10283
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29148,14 +29160,14 @@
             },
         },
     },
-#line 10282
+#line 10285
     [DIFFICULTY_NORMAL][TRAINER_6E663040] =
     {
-#line 10283
+#line 10286
         .trainerName = _("6E663040"),
-#line 10284
+#line 10287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10285
+#line 10288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29163,12 +29175,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10287
+#line 10290
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10289
+#line 10292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10288
+#line 10291
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29176,14 +29188,14 @@
             },
         },
     },
-#line 10290
+#line 10293
     [DIFFICULTY_NORMAL][TRAINER_6ED2C120] =
     {
-#line 10291
+#line 10294
         .trainerName = _("6ED2C120"),
-#line 10292
+#line 10295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10293
+#line 10296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29191,12 +29203,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10295
+#line 10298
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10297
+#line 10300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10296
+#line 10299
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29204,14 +29216,14 @@
             },
         },
     },
-#line 10298
+#line 10301
     [DIFFICULTY_NORMAL][TRAINER_6F5C8078] =
     {
-#line 10299
+#line 10302
         .trainerName = _("6F5C8078"),
-#line 10300
+#line 10303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10301
+#line 10304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29219,12 +29231,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10303
+#line 10306
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10305
+#line 10308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10304
+#line 10307
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29232,14 +29244,14 @@
             },
         },
     },
-#line 10306
+#line 10309
     [DIFFICULTY_NORMAL][TRAINER_6F5E9CF9] =
     {
-#line 10307
+#line 10310
         .trainerName = _("6F5E9CF9"),
-#line 10308
+#line 10311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10309
+#line 10312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29247,12 +29259,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10311
+#line 10314
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10313
+#line 10316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10312
+#line 10315
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29260,14 +29272,14 @@
             },
         },
     },
-#line 10314
+#line 10317
     [DIFFICULTY_NORMAL][TRAINER_6FC24896] =
     {
-#line 10315
+#line 10318
         .trainerName = _("6FC24896"),
-#line 10316
+#line 10319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10317
+#line 10320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29275,12 +29287,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10319
+#line 10322
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10321
+#line 10324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10320
+#line 10323
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29288,14 +29300,14 @@
             },
         },
     },
-#line 10322
+#line 10325
     [DIFFICULTY_NORMAL][TRAINER_6FF3213D] =
     {
-#line 10323
+#line 10326
         .trainerName = _("6FF3213D"),
-#line 10324
+#line 10327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10325
+#line 10328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29303,12 +29315,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10327
+#line 10330
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10329
+#line 10332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10328
+#line 10331
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29316,14 +29328,14 @@
             },
         },
     },
-#line 10330
+#line 10333
     [DIFFICULTY_NORMAL][TRAINER_701AC24E] =
     {
-#line 10331
+#line 10334
         .trainerName = _("701AC24E"),
-#line 10332
+#line 10335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10333
+#line 10336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29331,12 +29343,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10335
+#line 10338
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10337
+#line 10340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10336
+#line 10339
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29344,14 +29356,14 @@
             },
         },
     },
-#line 10338
+#line 10341
     [DIFFICULTY_NORMAL][TRAINER_703B73C4] =
     {
-#line 10339
+#line 10342
         .trainerName = _("703B73C4"),
-#line 10340
+#line 10343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10341
+#line 10344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29359,12 +29371,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10343
+#line 10346
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10345
+#line 10348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10344
+#line 10347
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29372,14 +29384,14 @@
             },
         },
     },
-#line 10346
+#line 10349
     [DIFFICULTY_NORMAL][TRAINER_70C712D3] =
     {
-#line 10347
+#line 10350
         .trainerName = _("70C712D3"),
-#line 10348
+#line 10351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10349
+#line 10352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29387,12 +29399,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10351
+#line 10354
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10353
+#line 10356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10352
+#line 10355
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29400,14 +29412,14 @@
             },
         },
     },
-#line 10354
+#line 10357
     [DIFFICULTY_NORMAL][TRAINER_70EAAAF5] =
     {
-#line 10355
+#line 10358
         .trainerName = _("70EAAAF5"),
-#line 10356
+#line 10359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10357
+#line 10360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29415,12 +29427,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10359
+#line 10362
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10361
+#line 10364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10360
+#line 10363
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29428,14 +29440,14 @@
             },
         },
     },
-#line 10362
+#line 10365
     [DIFFICULTY_NORMAL][TRAINER_70F1A62B] =
     {
-#line 10363
+#line 10366
         .trainerName = _("70F1A62B"),
-#line 10364
+#line 10367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10365
+#line 10368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29443,12 +29455,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10367
+#line 10370
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10369
+#line 10372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10368
+#line 10371
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29456,14 +29468,14 @@
             },
         },
     },
-#line 10370
+#line 10373
     [DIFFICULTY_NORMAL][TRAINER_7169C897] =
     {
-#line 10371
+#line 10374
         .trainerName = _("7169C897"),
-#line 10372
+#line 10375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10373
+#line 10376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29471,12 +29483,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10375
+#line 10378
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10377
+#line 10380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10376
+#line 10379
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29484,14 +29496,14 @@
             },
         },
     },
-#line 10378
+#line 10381
     [DIFFICULTY_NORMAL][TRAINER_7178DF27] =
     {
-#line 10379
+#line 10382
         .trainerName = _("7178DF27"),
-#line 10380
+#line 10383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10381
+#line 10384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29499,12 +29511,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10383
+#line 10386
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10385
+#line 10388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10384
+#line 10387
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29512,14 +29524,14 @@
             },
         },
     },
-#line 10386
+#line 10389
     [DIFFICULTY_NORMAL][TRAINER_7190E405] =
     {
-#line 10387
+#line 10390
         .trainerName = _("7190E405"),
-#line 10388
+#line 10391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10389
+#line 10392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29527,12 +29539,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10391
+#line 10394
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10393
+#line 10396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10392
+#line 10395
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29540,14 +29552,14 @@
             },
         },
     },
-#line 10394
+#line 10397
     [DIFFICULTY_NORMAL][TRAINER_71CE545E] =
     {
-#line 10395
+#line 10398
         .trainerName = _("71CE545E"),
-#line 10396
+#line 10399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10397
+#line 10400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29555,12 +29567,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10399
+#line 10402
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10401
+#line 10404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10400
+#line 10403
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29568,14 +29580,14 @@
             },
         },
     },
-#line 10402
+#line 10405
     [DIFFICULTY_NORMAL][TRAINER_7249425F] =
     {
-#line 10403
+#line 10406
         .trainerName = _("7249425F"),
-#line 10404
+#line 10407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10405
+#line 10408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29583,12 +29595,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10407
+#line 10410
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10409
+#line 10412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10408
+#line 10411
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29596,14 +29608,14 @@
             },
         },
     },
-#line 10410
+#line 10413
     [DIFFICULTY_NORMAL][TRAINER_72641C9D] =
     {
-#line 10411
+#line 10414
         .trainerName = _("72641C9D"),
-#line 10412
+#line 10415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10413
+#line 10416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29611,12 +29623,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10415
+#line 10418
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10417
+#line 10420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10416
+#line 10419
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29624,14 +29636,14 @@
             },
         },
     },
-#line 10418
+#line 10421
     [DIFFICULTY_NORMAL][TRAINER_729F2BBB] =
     {
-#line 10419
+#line 10422
         .trainerName = _("729F2BBB"),
-#line 10420
+#line 10423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10421
+#line 10424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29639,12 +29651,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10423
+#line 10426
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10425
+#line 10428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10424
+#line 10427
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29652,14 +29664,14 @@
             },
         },
     },
-#line 10426
+#line 10429
     [DIFFICULTY_NORMAL][TRAINER_72F25B41] =
     {
-#line 10427
+#line 10430
         .trainerName = _("72F25B41"),
-#line 10428
+#line 10431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10429
+#line 10432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29667,12 +29679,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10431
+#line 10434
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10433
+#line 10436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10432
+#line 10435
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29680,14 +29692,14 @@
             },
         },
     },
-#line 10434
+#line 10437
     [DIFFICULTY_NORMAL][TRAINER_732D4997] =
     {
-#line 10435
+#line 10438
         .trainerName = _("732D4997"),
-#line 10436
+#line 10439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10437
+#line 10440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29695,12 +29707,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10439
+#line 10442
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10441
+#line 10444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10440
+#line 10443
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29708,14 +29720,14 @@
             },
         },
     },
-#line 10442
+#line 10445
     [DIFFICULTY_NORMAL][TRAINER_73A561CC] =
     {
-#line 10443
+#line 10446
         .trainerName = _("73A561CC"),
-#line 10444
+#line 10447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10445
+#line 10448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29723,12 +29735,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10447
+#line 10450
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10449
+#line 10452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10448
+#line 10451
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29736,14 +29748,14 @@
             },
         },
     },
-#line 10450
+#line 10453
     [DIFFICULTY_NORMAL][TRAINER_7420DB0C] =
     {
-#line 10451
+#line 10454
         .trainerName = _("7420DB0C"),
-#line 10452
+#line 10455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10453
+#line 10456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29751,12 +29763,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10455
+#line 10458
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10457
+#line 10460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10456
+#line 10459
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29764,14 +29776,14 @@
             },
         },
     },
-#line 10458
+#line 10461
     [DIFFICULTY_NORMAL][TRAINER_7435DE7C] =
     {
-#line 10459
+#line 10462
         .trainerName = _("7435DE7C"),
-#line 10460
+#line 10463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10461
+#line 10464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29779,12 +29791,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10463
+#line 10466
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10465
+#line 10468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10464
+#line 10467
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29792,14 +29804,14 @@
             },
         },
     },
-#line 10466
+#line 10469
     [DIFFICULTY_NORMAL][TRAINER_75A2A667] =
     {
-#line 10467
+#line 10470
         .trainerName = _("75A2A667"),
-#line 10468
+#line 10471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10469
+#line 10472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29807,12 +29819,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10471
+#line 10474
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10473
+#line 10476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10472
+#line 10475
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29820,14 +29832,14 @@
             },
         },
     },
-#line 10474
+#line 10477
     [DIFFICULTY_NORMAL][TRAINER_75D602F2] =
     {
-#line 10475
+#line 10478
         .trainerName = _("75D602F2"),
-#line 10476
+#line 10479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10477
+#line 10480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29835,12 +29847,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10479
+#line 10482
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10481
+#line 10484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10480
+#line 10483
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29848,14 +29860,14 @@
             },
         },
     },
-#line 10482
+#line 10485
     [DIFFICULTY_NORMAL][TRAINER_77DDBBAF] =
     {
-#line 10483
+#line 10486
         .trainerName = _("77DDBBAF"),
-#line 10484
+#line 10487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10485
+#line 10488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29863,12 +29875,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10487
+#line 10490
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10489
+#line 10492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10488
+#line 10491
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29876,14 +29888,14 @@
             },
         },
     },
-#line 10490
+#line 10493
     [DIFFICULTY_NORMAL][TRAINER_783AB388] =
     {
-#line 10491
+#line 10494
         .trainerName = _("783AB388"),
-#line 10492
+#line 10495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10493
+#line 10496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29891,12 +29903,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10495
+#line 10498
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10497
+#line 10500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10496
+#line 10499
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29904,14 +29916,14 @@
             },
         },
     },
-#line 10498
+#line 10501
     [DIFFICULTY_NORMAL][TRAINER_78564BE5] =
     {
-#line 10499
+#line 10502
         .trainerName = _("78564BE5"),
-#line 10500
+#line 10503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10501
+#line 10504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29919,12 +29931,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10503
+#line 10506
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10505
+#line 10508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10504
+#line 10507
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29932,14 +29944,14 @@
             },
         },
     },
-#line 10506
+#line 10509
     [DIFFICULTY_NORMAL][TRAINER_7885ECAF] =
     {
-#line 10507
+#line 10510
         .trainerName = _("7885ECAF"),
-#line 10508
+#line 10511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10509
+#line 10512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29947,12 +29959,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10511
+#line 10514
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10513
+#line 10516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10512
+#line 10515
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29960,14 +29972,14 @@
             },
         },
     },
-#line 10514
+#line 10517
     [DIFFICULTY_NORMAL][TRAINER_78B73516] =
     {
-#line 10515
+#line 10518
         .trainerName = _("78B73516"),
-#line 10516
+#line 10519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10517
+#line 10520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -29975,12 +29987,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10519
+#line 10522
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10521
+#line 10524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10520
+#line 10523
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -29988,14 +30000,14 @@
             },
         },
     },
-#line 10522
+#line 10525
     [DIFFICULTY_NORMAL][TRAINER_78BD858D] =
     {
-#line 10523
+#line 10526
         .trainerName = _("78BD858D"),
-#line 10524
+#line 10527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10525
+#line 10528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30003,12 +30015,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10527
+#line 10530
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10529
+#line 10532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10528
+#line 10531
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30016,14 +30028,14 @@
             },
         },
     },
-#line 10530
+#line 10533
     [DIFFICULTY_NORMAL][TRAINER_7933DA6C] =
     {
-#line 10531
+#line 10534
         .trainerName = _("7933DA6C"),
-#line 10532
+#line 10535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10533
+#line 10536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30031,12 +30043,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10535
+#line 10538
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10537
+#line 10540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10536
+#line 10539
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30044,14 +30056,14 @@
             },
         },
     },
-#line 10538
+#line 10541
     [DIFFICULTY_NORMAL][TRAINER_793992D8] =
     {
-#line 10539
+#line 10542
         .trainerName = _("793992D8"),
-#line 10540
+#line 10543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10541
+#line 10544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30059,12 +30071,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10543
+#line 10546
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10545
+#line 10548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10544
+#line 10547
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30072,14 +30084,14 @@
             },
         },
     },
-#line 10546
+#line 10549
     [DIFFICULTY_NORMAL][TRAINER_797E296B] =
     {
-#line 10547
+#line 10550
         .trainerName = _("797E296B"),
-#line 10548
+#line 10551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10549
+#line 10552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30087,12 +30099,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10551
+#line 10554
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10553
+#line 10556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10552
+#line 10555
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30100,14 +30112,14 @@
             },
         },
     },
-#line 10554
+#line 10557
     [DIFFICULTY_NORMAL][TRAINER_79EF1DEB] =
     {
-#line 10555
+#line 10558
         .trainerName = _("79EF1DEB"),
-#line 10556
+#line 10559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10557
+#line 10560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30115,12 +30127,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10559
+#line 10562
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10561
+#line 10564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10560
+#line 10563
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30128,14 +30140,14 @@
             },
         },
     },
-#line 10562
+#line 10565
     [DIFFICULTY_NORMAL][TRAINER_7A03677D] =
     {
-#line 10563
+#line 10566
         .trainerName = _("7A03677D"),
-#line 10564
+#line 10567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10565
+#line 10568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30143,12 +30155,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10567
+#line 10570
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10569
+#line 10572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10568
+#line 10571
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30156,14 +30168,14 @@
             },
         },
     },
-#line 10570
+#line 10573
     [DIFFICULTY_NORMAL][TRAINER_7A0C086F] =
     {
-#line 10571
+#line 10574
         .trainerName = _("7A0C086F"),
-#line 10572
+#line 10575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10573
+#line 10576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30171,12 +30183,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10575
+#line 10578
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10577
+#line 10580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10576
+#line 10579
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30184,14 +30196,14 @@
             },
         },
     },
-#line 10578
+#line 10581
     [DIFFICULTY_NORMAL][TRAINER_7A89C403] =
     {
-#line 10579
+#line 10582
         .trainerName = _("7A89C403"),
-#line 10580
+#line 10583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10581
+#line 10584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30199,12 +30211,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10583
+#line 10586
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10585
+#line 10588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10584
+#line 10587
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30212,14 +30224,14 @@
             },
         },
     },
-#line 10586
+#line 10589
     [DIFFICULTY_NORMAL][TRAINER_7A8D30C6] =
     {
-#line 10587
+#line 10590
         .trainerName = _("7A8D30C6"),
-#line 10588
+#line 10591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10589
+#line 10592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30227,12 +30239,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10591
+#line 10594
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10593
+#line 10596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10592
+#line 10595
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30240,14 +30252,14 @@
             },
         },
     },
-#line 10594
+#line 10597
     [DIFFICULTY_NORMAL][TRAINER_7ABC77C1] =
     {
-#line 10595
+#line 10598
         .trainerName = _("7ABC77C1"),
-#line 10596
+#line 10599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10597
+#line 10600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30255,12 +30267,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10599
+#line 10602
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10601
+#line 10604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10600
+#line 10603
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30268,14 +30280,14 @@
             },
         },
     },
-#line 10602
+#line 10605
     [DIFFICULTY_NORMAL][TRAINER_7B5DF36F] =
     {
-#line 10603
+#line 10606
         .trainerName = _("7B5DF36F"),
-#line 10604
+#line 10607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10605
+#line 10608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30283,12 +30295,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10607
+#line 10610
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10609
+#line 10612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10608
+#line 10611
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30296,14 +30308,14 @@
             },
         },
     },
-#line 10610
+#line 10613
     [DIFFICULTY_NORMAL][TRAINER_7C3BD57C] =
     {
-#line 10611
+#line 10614
         .trainerName = _("7C3BD57C"),
-#line 10612
+#line 10615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10613
+#line 10616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30311,12 +30323,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10615
+#line 10618
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10617
+#line 10620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10616
+#line 10619
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30324,14 +30336,14 @@
             },
         },
     },
-#line 10618
+#line 10621
     [DIFFICULTY_NORMAL][TRAINER_7C4240E1] =
     {
-#line 10619
+#line 10622
         .trainerName = _("7C4240E1"),
-#line 10620
+#line 10623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10621
+#line 10624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30339,12 +30351,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10623
+#line 10626
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10625
+#line 10628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10624
+#line 10627
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30352,14 +30364,14 @@
             },
         },
     },
-#line 10626
+#line 10629
     [DIFFICULTY_NORMAL][TRAINER_7C5056CA] =
     {
-#line 10627
+#line 10630
         .trainerName = _("7C5056CA"),
-#line 10628
+#line 10631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10629
+#line 10632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30367,12 +30379,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10631
+#line 10634
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10633
+#line 10636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10632
+#line 10635
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30380,14 +30392,14 @@
             },
         },
     },
-#line 10634
+#line 10637
     [DIFFICULTY_NORMAL][TRAINER_7C8BD62F] =
     {
-#line 10635
+#line 10638
         .trainerName = _("7C8BD62F"),
-#line 10636
+#line 10639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10637
+#line 10640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30395,12 +30407,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10639
+#line 10642
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10641
+#line 10644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10640
+#line 10643
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30408,14 +30420,14 @@
             },
         },
     },
-#line 10642
+#line 10645
     [DIFFICULTY_NORMAL][TRAINER_7C9308EF] =
     {
-#line 10643
+#line 10646
         .trainerName = _("7C9308EF"),
-#line 10644
+#line 10647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10645
+#line 10648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30423,12 +30435,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10647
+#line 10650
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10649
+#line 10652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10648
+#line 10651
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30436,14 +30448,14 @@
             },
         },
     },
-#line 10650
+#line 10653
     [DIFFICULTY_NORMAL][TRAINER_7CAF6877] =
     {
-#line 10651
+#line 10654
         .trainerName = _("7CAF6877"),
-#line 10652
+#line 10655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10653
+#line 10656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30451,12 +30463,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10655
+#line 10658
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10657
+#line 10660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10656
+#line 10659
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30464,14 +30476,14 @@
             },
         },
     },
-#line 10658
+#line 10661
     [DIFFICULTY_NORMAL][TRAINER_7CBB25EB] =
     {
-#line 10659
+#line 10662
         .trainerName = _("7CBB25EB"),
-#line 10660
+#line 10663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10661
+#line 10664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30479,12 +30491,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10663
+#line 10666
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10665
+#line 10668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10664
+#line 10667
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30492,14 +30504,14 @@
             },
         },
     },
-#line 10666
+#line 10669
     [DIFFICULTY_NORMAL][TRAINER_7CD1AAE1] =
     {
-#line 10667
+#line 10670
         .trainerName = _("7CD1AAE1"),
-#line 10668
+#line 10671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10669
+#line 10672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30507,12 +30519,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10671
+#line 10674
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10673
+#line 10676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10672
+#line 10675
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30520,14 +30532,14 @@
             },
         },
     },
-#line 10674
+#line 10677
     [DIFFICULTY_NORMAL][TRAINER_7D0F1751] =
     {
-#line 10675
+#line 10678
         .trainerName = _("7D0F1751"),
-#line 10676
+#line 10679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10677
+#line 10680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30535,12 +30547,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10679
+#line 10682
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10681
+#line 10684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10680
+#line 10683
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30548,14 +30560,14 @@
             },
         },
     },
-#line 10682
+#line 10685
     [DIFFICULTY_NORMAL][TRAINER_7D28CB20] =
     {
-#line 10683
+#line 10686
         .trainerName = _("7D28CB20"),
-#line 10684
+#line 10687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10685
+#line 10688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30563,12 +30575,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10687
+#line 10690
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10689
+#line 10692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10688
+#line 10691
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30576,14 +30588,14 @@
             },
         },
     },
-#line 10690
+#line 10693
     [DIFFICULTY_NORMAL][TRAINER_7D536E72] =
     {
-#line 10691
+#line 10694
         .trainerName = _("7D536E72"),
-#line 10692
+#line 10695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10693
+#line 10696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30591,12 +30603,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10695
+#line 10698
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10697
+#line 10700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10696
+#line 10699
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30604,14 +30616,14 @@
             },
         },
     },
-#line 10698
+#line 10701
     [DIFFICULTY_NORMAL][TRAINER_7DC358C0] =
     {
-#line 10699
+#line 10702
         .trainerName = _("7DC358C0"),
-#line 10700
+#line 10703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10701
+#line 10704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30619,12 +30631,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10703
+#line 10706
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10705
+#line 10708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10704
+#line 10707
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30632,14 +30644,14 @@
             },
         },
     },
-#line 10706
+#line 10709
     [DIFFICULTY_NORMAL][TRAINER_7DEC9A40] =
     {
-#line 10707
+#line 10710
         .trainerName = _("7DEC9A40"),
-#line 10708
+#line 10711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10709
+#line 10712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30647,12 +30659,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10711
+#line 10714
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10713
+#line 10716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10712
+#line 10715
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30660,14 +30672,14 @@
             },
         },
     },
-#line 10714
+#line 10717
     [DIFFICULTY_NORMAL][TRAINER_7E2F7EB8] =
     {
-#line 10715
+#line 10718
         .trainerName = _("7E2F7EB8"),
-#line 10716
+#line 10719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10717
+#line 10720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30675,12 +30687,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10719
+#line 10722
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10721
+#line 10724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10720
+#line 10723
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30688,14 +30700,14 @@
             },
         },
     },
-#line 10722
+#line 10725
     [DIFFICULTY_NORMAL][TRAINER_7E7CD9D3] =
     {
-#line 10723
+#line 10726
         .trainerName = _("7E7CD9D3"),
-#line 10724
+#line 10727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10725
+#line 10728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30703,12 +30715,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10727
+#line 10730
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10729
+#line 10732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10728
+#line 10731
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30716,14 +30728,14 @@
             },
         },
     },
-#line 10730
+#line 10733
     [DIFFICULTY_NORMAL][TRAINER_7E8CCD84] =
     {
-#line 10731
+#line 10734
         .trainerName = _("7E8CCD84"),
-#line 10732
+#line 10735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10733
+#line 10736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30731,12 +30743,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10735
+#line 10738
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10737
+#line 10740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10736
+#line 10739
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30744,14 +30756,14 @@
             },
         },
     },
-#line 10738
+#line 10741
     [DIFFICULTY_NORMAL][TRAINER_8010F97E] =
     {
-#line 10739
+#line 10742
         .trainerName = _("8010F97E"),
-#line 10740
+#line 10743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10741
+#line 10744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30759,12 +30771,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10743
+#line 10746
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10745
+#line 10748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10744
+#line 10747
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30772,14 +30784,14 @@
             },
         },
     },
-#line 10746
+#line 10749
     [DIFFICULTY_NORMAL][TRAINER_805C25F0] =
     {
-#line 10747
+#line 10750
         .trainerName = _("805C25F0"),
-#line 10748
+#line 10751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10749
+#line 10752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30787,12 +30799,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10751
+#line 10754
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10753
+#line 10756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10752
+#line 10755
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30800,14 +30812,14 @@
             },
         },
     },
-#line 10754
+#line 10757
     [DIFFICULTY_NORMAL][TRAINER_80941A21] =
     {
-#line 10755
+#line 10758
         .trainerName = _("80941A21"),
-#line 10756
+#line 10759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10757
+#line 10760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30815,12 +30827,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10759
+#line 10762
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10761
+#line 10764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10760
+#line 10763
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30828,14 +30840,14 @@
             },
         },
     },
-#line 10762
+#line 10765
     [DIFFICULTY_NORMAL][TRAINER_80AAA333] =
     {
-#line 10763
+#line 10766
         .trainerName = _("80AAA333"),
-#line 10764
+#line 10767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10765
+#line 10768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30843,12 +30855,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10767
+#line 10770
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10769
+#line 10772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10768
+#line 10771
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30856,14 +30868,14 @@
             },
         },
     },
-#line 10770
+#line 10773
     [DIFFICULTY_NORMAL][TRAINER_810A3F32] =
     {
-#line 10771
+#line 10774
         .trainerName = _("810A3F32"),
-#line 10772
+#line 10775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10773
+#line 10776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30871,12 +30883,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10775
+#line 10778
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10777
+#line 10780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10776
+#line 10779
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30884,14 +30896,14 @@
             },
         },
     },
-#line 10778
+#line 10781
     [DIFFICULTY_NORMAL][TRAINER_811C7730] =
     {
-#line 10779
+#line 10782
         .trainerName = _("811C7730"),
-#line 10780
+#line 10783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10781
+#line 10784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30899,12 +30911,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10783
+#line 10786
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10785
+#line 10788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10784
+#line 10787
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30912,14 +30924,14 @@
             },
         },
     },
-#line 10786
+#line 10789
     [DIFFICULTY_NORMAL][TRAINER_814D0113] =
     {
-#line 10787
+#line 10790
         .trainerName = _("814D0113"),
-#line 10788
+#line 10791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10789
+#line 10792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30927,12 +30939,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10791
+#line 10794
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10793
+#line 10796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10792
+#line 10795
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30940,14 +30952,14 @@
             },
         },
     },
-#line 10794
+#line 10797
     [DIFFICULTY_NORMAL][TRAINER_822DC7A8] =
     {
-#line 10795
+#line 10798
         .trainerName = _("822DC7A8"),
-#line 10796
+#line 10799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10797
+#line 10800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30955,12 +30967,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10799
+#line 10802
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10801
+#line 10804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10800
+#line 10803
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30968,14 +30980,14 @@
             },
         },
     },
-#line 10802
+#line 10805
     [DIFFICULTY_NORMAL][TRAINER_827A5D21] =
     {
-#line 10803
+#line 10806
         .trainerName = _("827A5D21"),
-#line 10804
+#line 10807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10805
+#line 10808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -30983,12 +30995,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10807
+#line 10810
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10809
+#line 10812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10808
+#line 10811
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -30996,14 +31008,14 @@
             },
         },
     },
-#line 10810
+#line 10813
     [DIFFICULTY_NORMAL][TRAINER_82A19B69] =
     {
-#line 10811
+#line 10814
         .trainerName = _("82A19B69"),
-#line 10812
+#line 10815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10813
+#line 10816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31011,12 +31023,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10815
+#line 10818
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10817
+#line 10820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10816
+#line 10819
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31024,14 +31036,14 @@
             },
         },
     },
-#line 10818
+#line 10821
     [DIFFICULTY_NORMAL][TRAINER_83008F9D] =
     {
-#line 10819
+#line 10822
         .trainerName = _("83008F9D"),
-#line 10820
+#line 10823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10821
+#line 10824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31039,12 +31051,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10823
+#line 10826
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10825
+#line 10828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10824
+#line 10827
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31052,14 +31064,14 @@
             },
         },
     },
-#line 10826
+#line 10829
     [DIFFICULTY_NORMAL][TRAINER_831DE561] =
     {
-#line 10827
+#line 10830
         .trainerName = _("831DE561"),
-#line 10828
+#line 10831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10829
+#line 10832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31067,12 +31079,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10831
+#line 10834
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10833
+#line 10836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10832
+#line 10835
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31080,14 +31092,14 @@
             },
         },
     },
-#line 10834
+#line 10837
     [DIFFICULTY_NORMAL][TRAINER_8327758B] =
     {
-#line 10835
+#line 10838
         .trainerName = _("8327758B"),
-#line 10836
+#line 10839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10837
+#line 10840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31095,12 +31107,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10839
+#line 10842
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10841
+#line 10844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10840
+#line 10843
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31108,14 +31120,14 @@
             },
         },
     },
-#line 10842
+#line 10845
     [DIFFICULTY_NORMAL][TRAINER_834B75E7] =
     {
-#line 10843
+#line 10846
         .trainerName = _("834B75E7"),
-#line 10844
+#line 10847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10845
+#line 10848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31123,12 +31135,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10847
+#line 10850
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10849
+#line 10852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10848
+#line 10851
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31136,14 +31148,14 @@
             },
         },
     },
-#line 10850
+#line 10853
     [DIFFICULTY_NORMAL][TRAINER_8365EA32] =
     {
-#line 10851
+#line 10854
         .trainerName = _("8365EA32"),
-#line 10852
+#line 10855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10853
+#line 10856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31151,12 +31163,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10855
+#line 10858
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10857
+#line 10860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10856
+#line 10859
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31164,14 +31176,14 @@
             },
         },
     },
-#line 10858
+#line 10861
     [DIFFICULTY_NORMAL][TRAINER_83A26233] =
     {
-#line 10859
+#line 10862
         .trainerName = _("83A26233"),
-#line 10860
+#line 10863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10861
+#line 10864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31179,12 +31191,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10863
+#line 10866
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10865
+#line 10868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10864
+#line 10867
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31192,14 +31204,14 @@
             },
         },
     },
-#line 10866
+#line 10869
     [DIFFICULTY_NORMAL][TRAINER_83B9A038] =
     {
-#line 10867
+#line 10870
         .trainerName = _("83B9A038"),
-#line 10868
+#line 10871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10869
+#line 10872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31207,12 +31219,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10871
+#line 10874
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10873
+#line 10876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10872
+#line 10875
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31220,14 +31232,14 @@
             },
         },
     },
-#line 10874
+#line 10877
     [DIFFICULTY_NORMAL][TRAINER_840416CD] =
     {
-#line 10875
+#line 10878
         .trainerName = _("840416CD"),
-#line 10876
+#line 10879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10877
+#line 10880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31235,12 +31247,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10879
+#line 10882
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10881
+#line 10884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10880
+#line 10883
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31248,14 +31260,14 @@
             },
         },
     },
-#line 10882
+#line 10885
     [DIFFICULTY_NORMAL][TRAINER_843DFC91] =
     {
-#line 10883
+#line 10886
         .trainerName = _("843DFC91"),
-#line 10884
+#line 10887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10885
+#line 10888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31263,12 +31275,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10887
+#line 10890
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10889
+#line 10892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10888
+#line 10891
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31276,14 +31288,14 @@
             },
         },
     },
-#line 10890
+#line 10893
     [DIFFICULTY_NORMAL][TRAINER_857ACD94] =
     {
-#line 10891
+#line 10894
         .trainerName = _("857ACD94"),
-#line 10892
+#line 10895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10893
+#line 10896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31291,12 +31303,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10895
+#line 10898
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10897
+#line 10900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10896
+#line 10899
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31304,14 +31316,14 @@
             },
         },
     },
-#line 10898
+#line 10901
     [DIFFICULTY_NORMAL][TRAINER_8580525E] =
     {
-#line 10899
+#line 10902
         .trainerName = _("8580525E"),
-#line 10900
+#line 10903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10901
+#line 10904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31319,12 +31331,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10903
+#line 10906
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10905
+#line 10908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10904
+#line 10907
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31332,14 +31344,14 @@
             },
         },
     },
-#line 10906
+#line 10909
     [DIFFICULTY_NORMAL][TRAINER_866AE208] =
     {
-#line 10907
+#line 10910
         .trainerName = _("866AE208"),
-#line 10908
+#line 10911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10909
+#line 10912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31347,12 +31359,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10911
+#line 10914
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10913
+#line 10916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10912
+#line 10915
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31360,14 +31372,14 @@
             },
         },
     },
-#line 10914
+#line 10917
     [DIFFICULTY_NORMAL][TRAINER_8677EFB3] =
     {
-#line 10915
+#line 10918
         .trainerName = _("8677EFB3"),
-#line 10916
+#line 10919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10917
+#line 10920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31375,12 +31387,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10919
+#line 10922
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10921
+#line 10924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10920
+#line 10923
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31388,14 +31400,14 @@
             },
         },
     },
-#line 10922
+#line 10925
     [DIFFICULTY_NORMAL][TRAINER_86D37FF1] =
     {
-#line 10923
+#line 10926
         .trainerName = _("86D37FF1"),
-#line 10924
+#line 10927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10925
+#line 10928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31403,12 +31415,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10927
+#line 10930
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10929
+#line 10932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10928
+#line 10931
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31416,14 +31428,14 @@
             },
         },
     },
-#line 10930
+#line 10933
     [DIFFICULTY_NORMAL][TRAINER_86F7AA4A] =
     {
-#line 10931
+#line 10934
         .trainerName = _("86F7AA4A"),
-#line 10932
+#line 10935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10933
+#line 10936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31431,12 +31443,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10935
+#line 10938
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10937
+#line 10940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10936
+#line 10939
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31444,14 +31456,14 @@
             },
         },
     },
-#line 10938
+#line 10941
     [DIFFICULTY_NORMAL][TRAINER_872183CD] =
     {
-#line 10939
+#line 10942
         .trainerName = _("872183CD"),
-#line 10940
+#line 10943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10941
+#line 10944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31459,12 +31471,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10943
+#line 10946
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10945
+#line 10948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10944
+#line 10947
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31472,14 +31484,14 @@
             },
         },
     },
-#line 10946
+#line 10949
     [DIFFICULTY_NORMAL][TRAINER_87B5E929] =
     {
-#line 10947
+#line 10950
         .trainerName = _("87B5E929"),
-#line 10948
+#line 10951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10949
+#line 10952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31487,12 +31499,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10951
+#line 10954
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10953
+#line 10956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10952
+#line 10955
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31500,14 +31512,14 @@
             },
         },
     },
-#line 10954
+#line 10957
     [DIFFICULTY_NORMAL][TRAINER_885C781B] =
     {
-#line 10955
+#line 10958
         .trainerName = _("885C781B"),
-#line 10956
+#line 10959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10957
+#line 10960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31515,12 +31527,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10959
+#line 10962
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10961
+#line 10964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10960
+#line 10963
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31528,14 +31540,14 @@
             },
         },
     },
-#line 10962
+#line 10965
     [DIFFICULTY_NORMAL][TRAINER_8878003B] =
     {
-#line 10963
+#line 10966
         .trainerName = _("8878003B"),
-#line 10964
+#line 10967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10965
+#line 10968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31543,12 +31555,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10967
+#line 10970
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10969
+#line 10972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10968
+#line 10971
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31556,14 +31568,14 @@
             },
         },
     },
-#line 10970
+#line 10973
     [DIFFICULTY_NORMAL][TRAINER_88864D1E] =
     {
-#line 10971
+#line 10974
         .trainerName = _("88864D1E"),
-#line 10972
+#line 10975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10973
+#line 10976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31571,12 +31583,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10975
+#line 10978
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10977
+#line 10980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10976
+#line 10979
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31584,14 +31596,14 @@
             },
         },
     },
-#line 10978
+#line 10981
     [DIFFICULTY_NORMAL][TRAINER_8972F540] =
     {
-#line 10979
+#line 10982
         .trainerName = _("8972F540"),
-#line 10980
+#line 10983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10981
+#line 10984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31599,12 +31611,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10983
+#line 10986
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10985
+#line 10988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10984
+#line 10987
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31612,14 +31624,14 @@
             },
         },
     },
-#line 10986
+#line 10989
     [DIFFICULTY_NORMAL][TRAINER_898AF31D] =
     {
-#line 10987
+#line 10990
         .trainerName = _("898AF31D"),
-#line 10988
+#line 10991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10989
+#line 10992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31627,12 +31639,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10991
+#line 10994
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 10993
+#line 10996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 10992
+#line 10995
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31640,14 +31652,14 @@
             },
         },
     },
-#line 10994
+#line 10997
     [DIFFICULTY_NORMAL][TRAINER_8A0B40C0] =
     {
-#line 10995
+#line 10998
         .trainerName = _("8A0B40C0"),
-#line 10996
+#line 10999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 10997
+#line 11000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31655,12 +31667,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 10999
+#line 11002
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11001
+#line 11004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11000
+#line 11003
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31668,14 +31680,14 @@
             },
         },
     },
-#line 11002
+#line 11005
     [DIFFICULTY_NORMAL][TRAINER_8A2C65A3] =
     {
-#line 11003
+#line 11006
         .trainerName = _("8A2C65A3"),
-#line 11004
+#line 11007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11005
+#line 11008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31683,12 +31695,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11007
+#line 11010
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11009
+#line 11012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11008
+#line 11011
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31696,14 +31708,14 @@
             },
         },
     },
-#line 11010
+#line 11013
     [DIFFICULTY_NORMAL][TRAINER_8A829476] =
     {
-#line 11011
+#line 11014
         .trainerName = _("8A829476"),
-#line 11012
+#line 11015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11013
+#line 11016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31711,12 +31723,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11015
+#line 11018
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11017
+#line 11020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11016
+#line 11019
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31724,14 +31736,14 @@
             },
         },
     },
-#line 11018
+#line 11021
     [DIFFICULTY_NORMAL][TRAINER_8AC1B5C1] =
     {
-#line 11019
+#line 11022
         .trainerName = _("8AC1B5C1"),
-#line 11020
+#line 11023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11021
+#line 11024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31739,12 +31751,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11023
+#line 11026
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11025
+#line 11028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11024
+#line 11027
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31752,14 +31764,14 @@
             },
         },
     },
-#line 11026
+#line 11029
     [DIFFICULTY_NORMAL][TRAINER_8AF40B23] =
     {
-#line 11027
+#line 11030
         .trainerName = _("8AF40B23"),
-#line 11028
+#line 11031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11029
+#line 11032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31767,12 +31779,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11031
+#line 11034
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11033
+#line 11036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11032
+#line 11035
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31780,14 +31792,14 @@
             },
         },
     },
-#line 11034
+#line 11037
     [DIFFICULTY_NORMAL][TRAINER_8B31AC38] =
     {
-#line 11035
+#line 11038
         .trainerName = _("8B31AC38"),
-#line 11036
+#line 11039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11037
+#line 11040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31795,12 +31807,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11039
+#line 11042
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11041
+#line 11044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11040
+#line 11043
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31808,14 +31820,14 @@
             },
         },
     },
-#line 11042
+#line 11045
     [DIFFICULTY_NORMAL][TRAINER_8B32317E] =
     {
-#line 11043
+#line 11046
         .trainerName = _("8B32317E"),
-#line 11044
+#line 11047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11045
+#line 11048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31823,12 +31835,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11047
+#line 11050
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11049
+#line 11052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11048
+#line 11051
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31836,14 +31848,14 @@
             },
         },
     },
-#line 11050
+#line 11053
     [DIFFICULTY_NORMAL][TRAINER_8B3657A9] =
     {
-#line 11051
+#line 11054
         .trainerName = _("8B3657A9"),
-#line 11052
+#line 11055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11053
+#line 11056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31851,12 +31863,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11055
+#line 11058
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11057
+#line 11060
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11056
+#line 11059
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31864,14 +31876,14 @@
             },
         },
     },
-#line 11058
+#line 11061
     [DIFFICULTY_NORMAL][TRAINER_8B3C49E3] =
     {
-#line 11059
+#line 11062
         .trainerName = _("8B3C49E3"),
-#line 11060
+#line 11063
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11061
+#line 11064
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31879,12 +31891,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11063
+#line 11066
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11065
+#line 11068
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11064
+#line 11067
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31892,14 +31904,14 @@
             },
         },
     },
-#line 11066
+#line 11069
     [DIFFICULTY_NORMAL][TRAINER_8B6D195D] =
     {
-#line 11067
+#line 11070
         .trainerName = _("8B6D195D"),
-#line 11068
+#line 11071
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11069
+#line 11072
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31907,12 +31919,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11071
+#line 11074
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11073
+#line 11076
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11072
+#line 11075
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31920,14 +31932,14 @@
             },
         },
     },
-#line 11074
+#line 11077
     [DIFFICULTY_NORMAL][TRAINER_8BB65E5E] =
     {
-#line 11075
+#line 11078
         .trainerName = _("8BB65E5E"),
-#line 11076
+#line 11079
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11077
+#line 11080
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31935,12 +31947,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11079
+#line 11082
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11081
+#line 11084
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11080
+#line 11083
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31948,14 +31960,14 @@
             },
         },
     },
-#line 11082
+#line 11085
     [DIFFICULTY_NORMAL][TRAINER_8C186D17] =
     {
-#line 11083
+#line 11086
         .trainerName = _("8C186D17"),
-#line 11084
+#line 11087
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11085
+#line 11088
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31963,12 +31975,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11087
+#line 11090
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11089
+#line 11092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11088
+#line 11091
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -31976,14 +31988,14 @@
             },
         },
     },
-#line 11090
+#line 11093
     [DIFFICULTY_NORMAL][TRAINER_8C853607] =
     {
-#line 11091
+#line 11094
         .trainerName = _("8C853607"),
-#line 11092
+#line 11095
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11093
+#line 11096
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -31991,12 +32003,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11095
+#line 11098
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11097
+#line 11100
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11096
+#line 11099
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32004,14 +32016,14 @@
             },
         },
     },
-#line 11098
+#line 11101
     [DIFFICULTY_NORMAL][TRAINER_8D6D5B2C] =
     {
-#line 11099
+#line 11102
         .trainerName = _("8D6D5B2C"),
-#line 11100
+#line 11103
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11101
+#line 11104
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32019,12 +32031,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11103
+#line 11106
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11105
+#line 11108
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11104
+#line 11107
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32032,14 +32044,14 @@
             },
         },
     },
-#line 11106
+#line 11109
     [DIFFICULTY_NORMAL][TRAINER_8D93124A] =
     {
-#line 11107
+#line 11110
         .trainerName = _("8D93124A"),
-#line 11108
+#line 11111
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11109
+#line 11112
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32047,12 +32059,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11111
+#line 11114
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11113
+#line 11116
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11112
+#line 11115
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32060,14 +32072,14 @@
             },
         },
     },
-#line 11114
+#line 11117
     [DIFFICULTY_NORMAL][TRAINER_8DAF08C5] =
     {
-#line 11115
+#line 11118
         .trainerName = _("8DAF08C5"),
-#line 11116
+#line 11119
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11117
+#line 11120
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32075,12 +32087,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11119
+#line 11122
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11121
+#line 11124
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11120
+#line 11123
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32088,14 +32100,14 @@
             },
         },
     },
-#line 11122
+#line 11125
     [DIFFICULTY_NORMAL][TRAINER_8DE17D94] =
     {
-#line 11123
+#line 11126
         .trainerName = _("8DE17D94"),
-#line 11124
+#line 11127
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11125
+#line 11128
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32103,12 +32115,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11127
+#line 11130
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11129
+#line 11132
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11128
+#line 11131
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32116,14 +32128,14 @@
             },
         },
     },
-#line 11130
+#line 11133
     [DIFFICULTY_NORMAL][TRAINER_8E60CF6E] =
     {
-#line 11131
+#line 11134
         .trainerName = _("8E60CF6E"),
-#line 11132
+#line 11135
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11133
+#line 11136
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32131,12 +32143,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11135
+#line 11138
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11137
+#line 11140
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11136
+#line 11139
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32144,14 +32156,14 @@
             },
         },
     },
-#line 11138
+#line 11141
     [DIFFICULTY_NORMAL][TRAINER_8EA873A0] =
     {
-#line 11139
+#line 11142
         .trainerName = _("8EA873A0"),
-#line 11140
+#line 11143
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11141
+#line 11144
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32159,12 +32171,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11143
+#line 11146
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11145
+#line 11148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11144
+#line 11147
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32172,14 +32184,14 @@
             },
         },
     },
-#line 11146
+#line 11149
     [DIFFICULTY_NORMAL][TRAINER_8EB76821] =
     {
-#line 11147
+#line 11150
         .trainerName = _("8EB76821"),
-#line 11148
+#line 11151
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11149
+#line 11152
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32187,12 +32199,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11151
+#line 11154
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11153
+#line 11156
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11152
+#line 11155
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32200,14 +32212,14 @@
             },
         },
     },
-#line 11154
+#line 11157
     [DIFFICULTY_NORMAL][TRAINER_8ED15D51] =
     {
-#line 11155
+#line 11158
         .trainerName = _("8ED15D51"),
-#line 11156
+#line 11159
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11157
+#line 11160
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32215,12 +32227,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11159
+#line 11162
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11161
+#line 11164
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11160
+#line 11163
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32228,14 +32240,14 @@
             },
         },
     },
-#line 11162
+#line 11165
     [DIFFICULTY_NORMAL][TRAINER_8F28F86A] =
     {
-#line 11163
+#line 11166
         .trainerName = _("8F28F86A"),
-#line 11164
+#line 11167
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11165
+#line 11168
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32243,12 +32255,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11167
+#line 11170
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11169
+#line 11172
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11168
+#line 11171
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32256,14 +32268,14 @@
             },
         },
     },
-#line 11170
+#line 11173
     [DIFFICULTY_NORMAL][TRAINER_8F2EA270] =
     {
-#line 11171
+#line 11174
         .trainerName = _("8F2EA270"),
-#line 11172
+#line 11175
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11173
+#line 11176
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32271,12 +32283,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11175
+#line 11178
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11177
+#line 11180
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11176
+#line 11179
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32284,14 +32296,14 @@
             },
         },
     },
-#line 11178
+#line 11181
     [DIFFICULTY_NORMAL][TRAINER_8F9579E4] =
     {
-#line 11179
+#line 11182
         .trainerName = _("8F9579E4"),
-#line 11180
+#line 11183
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11181
+#line 11184
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32299,12 +32311,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11183
+#line 11186
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11185
+#line 11188
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11184
+#line 11187
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32312,14 +32324,14 @@
             },
         },
     },
-#line 11186
+#line 11189
     [DIFFICULTY_NORMAL][TRAINER_8F988020] =
     {
-#line 11187
+#line 11190
         .trainerName = _("8F988020"),
-#line 11188
+#line 11191
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11189
+#line 11192
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32327,12 +32339,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11191
+#line 11194
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11193
+#line 11196
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11192
+#line 11195
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32340,14 +32352,14 @@
             },
         },
     },
-#line 11194
+#line 11197
     [DIFFICULTY_NORMAL][TRAINER_8FE817BA] =
     {
-#line 11195
+#line 11198
         .trainerName = _("8FE817BA"),
-#line 11196
+#line 11199
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11197
+#line 11200
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32355,12 +32367,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11199
+#line 11202
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11201
+#line 11204
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11200
+#line 11203
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32368,14 +32380,14 @@
             },
         },
     },
-#line 11202
+#line 11205
     [DIFFICULTY_NORMAL][TRAINER_90353D81] =
     {
-#line 11203
+#line 11206
         .trainerName = _("90353D81"),
-#line 11204
+#line 11207
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11205
+#line 11208
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32383,12 +32395,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11207
+#line 11210
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11209
+#line 11212
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11208
+#line 11211
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32396,14 +32408,14 @@
             },
         },
     },
-#line 11210
+#line 11213
     [DIFFICULTY_NORMAL][TRAINER_9054973F] =
     {
-#line 11211
+#line 11214
         .trainerName = _("9054973F"),
-#line 11212
+#line 11215
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11213
+#line 11216
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32411,12 +32423,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11215
+#line 11218
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11217
+#line 11220
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11216
+#line 11219
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32424,14 +32436,14 @@
             },
         },
     },
-#line 11218
+#line 11221
     [DIFFICULTY_NORMAL][TRAINER_90A72ACF] =
     {
-#line 11219
+#line 11222
         .trainerName = _("90A72ACF"),
-#line 11220
+#line 11223
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11221
+#line 11224
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32439,12 +32451,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11223
+#line 11226
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11225
+#line 11228
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11224
+#line 11227
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32452,14 +32464,14 @@
             },
         },
     },
-#line 11226
+#line 11229
     [DIFFICULTY_NORMAL][TRAINER_90E1658C] =
     {
-#line 11227
+#line 11230
         .trainerName = _("90E1658C"),
-#line 11228
+#line 11231
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11229
+#line 11232
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32467,12 +32479,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11231
+#line 11234
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11233
+#line 11236
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11232
+#line 11235
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32480,14 +32492,14 @@
             },
         },
     },
-#line 11234
+#line 11237
     [DIFFICULTY_NORMAL][TRAINER_918A1734] =
     {
-#line 11235
+#line 11238
         .trainerName = _("918A1734"),
-#line 11236
+#line 11239
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11237
+#line 11240
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32495,12 +32507,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11239
+#line 11242
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11241
+#line 11244
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11240
+#line 11243
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32508,14 +32520,14 @@
             },
         },
     },
-#line 11242
+#line 11245
     [DIFFICULTY_NORMAL][TRAINER_91D249C3] =
     {
-#line 11243
+#line 11246
         .trainerName = _("91D249C3"),
-#line 11244
+#line 11247
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11245
+#line 11248
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32523,12 +32535,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11247
+#line 11250
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11249
+#line 11252
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11248
+#line 11251
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32536,14 +32548,14 @@
             },
         },
     },
-#line 11250
+#line 11253
     [DIFFICULTY_NORMAL][TRAINER_91D48E4E] =
     {
-#line 11251
+#line 11254
         .trainerName = _("91D48E4E"),
-#line 11252
+#line 11255
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11253
+#line 11256
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32551,12 +32563,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11255
+#line 11258
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11257
+#line 11260
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11256
+#line 11259
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32564,14 +32576,14 @@
             },
         },
     },
-#line 11258
+#line 11261
     [DIFFICULTY_NORMAL][TRAINER_922542C3] =
     {
-#line 11259
+#line 11262
         .trainerName = _("922542C3"),
-#line 11260
+#line 11263
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11261
+#line 11264
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32579,12 +32591,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11263
+#line 11266
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11265
+#line 11268
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11264
+#line 11267
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32592,14 +32604,14 @@
             },
         },
     },
-#line 11266
+#line 11269
     [DIFFICULTY_NORMAL][TRAINER_93009D3B] =
     {
-#line 11267
+#line 11270
         .trainerName = _("93009D3B"),
-#line 11268
+#line 11271
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11269
+#line 11272
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32607,12 +32619,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11271
+#line 11274
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11273
+#line 11276
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11272
+#line 11275
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32620,14 +32632,14 @@
             },
         },
     },
-#line 11274
+#line 11277
     [DIFFICULTY_NORMAL][TRAINER_93D9B506] =
     {
-#line 11275
+#line 11278
         .trainerName = _("93D9B506"),
-#line 11276
+#line 11279
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11277
+#line 11280
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32635,12 +32647,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11279
+#line 11282
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11281
+#line 11284
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11280
+#line 11283
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32648,14 +32660,14 @@
             },
         },
     },
-#line 11282
+#line 11285
     [DIFFICULTY_NORMAL][TRAINER_9427896B] =
     {
-#line 11283
+#line 11286
         .trainerName = _("9427896B"),
-#line 11284
+#line 11287
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11285
+#line 11288
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32663,12 +32675,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11287
+#line 11290
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11289
+#line 11292
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11288
+#line 11291
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32676,14 +32688,14 @@
             },
         },
     },
-#line 11290
+#line 11293
     [DIFFICULTY_NORMAL][TRAINER_9501C16B] =
     {
-#line 11291
+#line 11294
         .trainerName = _("9501C16B"),
-#line 11292
+#line 11295
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11293
+#line 11296
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32691,12 +32703,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11295
+#line 11298
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11297
+#line 11300
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11296
+#line 11299
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32704,14 +32716,14 @@
             },
         },
     },
-#line 11298
+#line 11301
     [DIFFICULTY_NORMAL][TRAINER_9566DD87] =
     {
-#line 11299
+#line 11302
         .trainerName = _("9566DD87"),
-#line 11300
+#line 11303
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11301
+#line 11304
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32719,12 +32731,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11303
+#line 11306
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11305
+#line 11308
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11304
+#line 11307
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32732,14 +32744,14 @@
             },
         },
     },
-#line 11306
+#line 11309
     [DIFFICULTY_NORMAL][TRAINER_95A74E78] =
     {
-#line 11307
+#line 11310
         .trainerName = _("95A74E78"),
-#line 11308
+#line 11311
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11309
+#line 11312
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32747,12 +32759,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11311
+#line 11314
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11313
+#line 11316
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11312
+#line 11315
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32760,14 +32772,14 @@
             },
         },
     },
-#line 11314
+#line 11317
     [DIFFICULTY_NORMAL][TRAINER_963F893A] =
     {
-#line 11315
+#line 11318
         .trainerName = _("963F893A"),
-#line 11316
+#line 11319
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11317
+#line 11320
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32775,12 +32787,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11319
+#line 11322
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11321
+#line 11324
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11320
+#line 11323
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32788,14 +32800,14 @@
             },
         },
     },
-#line 11322
+#line 11325
     [DIFFICULTY_NORMAL][TRAINER_966F37E6] =
     {
-#line 11323
+#line 11326
         .trainerName = _("966F37E6"),
-#line 11324
+#line 11327
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11325
+#line 11328
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32803,12 +32815,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11327
+#line 11330
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11329
+#line 11332
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11328
+#line 11331
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32816,14 +32828,14 @@
             },
         },
     },
-#line 11330
+#line 11333
     [DIFFICULTY_NORMAL][TRAINER_96859C9B] =
     {
-#line 11331
+#line 11334
         .trainerName = _("96859C9B"),
-#line 11332
+#line 11335
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11333
+#line 11336
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32831,12 +32843,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11335
+#line 11338
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11337
+#line 11340
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11336
+#line 11339
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32844,14 +32856,14 @@
             },
         },
     },
-#line 11338
+#line 11341
     [DIFFICULTY_NORMAL][TRAINER_9695D7CC] =
     {
-#line 11339
+#line 11342
         .trainerName = _("9695D7CC"),
-#line 11340
+#line 11343
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11341
+#line 11344
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32859,12 +32871,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11343
+#line 11346
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11345
+#line 11348
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11344
+#line 11347
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32872,14 +32884,14 @@
             },
         },
     },
-#line 11346
+#line 11349
     [DIFFICULTY_NORMAL][TRAINER_96A60AED] =
     {
-#line 11347
+#line 11350
         .trainerName = _("96A60AED"),
-#line 11348
+#line 11351
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11349
+#line 11352
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32887,12 +32899,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11351
+#line 11354
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11353
+#line 11356
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11352
+#line 11355
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32900,14 +32912,14 @@
             },
         },
     },
-#line 11354
+#line 11357
     [DIFFICULTY_NORMAL][TRAINER_973C00CE] =
     {
-#line 11355
+#line 11358
         .trainerName = _("973C00CE"),
-#line 11356
+#line 11359
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11357
+#line 11360
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32915,12 +32927,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11359
+#line 11362
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11361
+#line 11364
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11360
+#line 11363
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32928,14 +32940,14 @@
             },
         },
     },
-#line 11362
+#line 11365
     [DIFFICULTY_NORMAL][TRAINER_9784BB4E] =
     {
-#line 11363
+#line 11366
         .trainerName = _("9784BB4E"),
-#line 11364
+#line 11367
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11365
+#line 11368
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32943,12 +32955,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11367
+#line 11370
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11369
+#line 11372
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11368
+#line 11371
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32956,14 +32968,14 @@
             },
         },
     },
-#line 11370
+#line 11373
     [DIFFICULTY_NORMAL][TRAINER_9834CDCC] =
     {
-#line 11371
+#line 11374
         .trainerName = _("9834CDCC"),
-#line 11372
+#line 11375
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11373
+#line 11376
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32971,12 +32983,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11375
+#line 11378
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11377
+#line 11380
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11376
+#line 11379
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -32984,14 +32996,14 @@
             },
         },
     },
-#line 11378
+#line 11381
     [DIFFICULTY_NORMAL][TRAINER_98547A36] =
     {
-#line 11379
+#line 11382
         .trainerName = _("98547A36"),
-#line 11380
+#line 11383
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11381
+#line 11384
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -32999,12 +33011,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11383
+#line 11386
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11385
+#line 11388
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11384
+#line 11387
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33012,14 +33024,14 @@
             },
         },
     },
-#line 11386
+#line 11389
     [DIFFICULTY_NORMAL][TRAINER_98C7143B] =
     {
-#line 11387
+#line 11390
         .trainerName = _("98C7143B"),
-#line 11388
+#line 11391
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11389
+#line 11392
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33027,12 +33039,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11391
+#line 11394
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11393
+#line 11396
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11392
+#line 11395
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33040,14 +33052,14 @@
             },
         },
     },
-#line 11394
+#line 11397
     [DIFFICULTY_NORMAL][TRAINER_992FCC96] =
     {
-#line 11395
+#line 11398
         .trainerName = _("992FCC96"),
-#line 11396
+#line 11399
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11397
+#line 11400
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33055,12 +33067,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11399
+#line 11402
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11401
+#line 11404
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11400
+#line 11403
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33068,14 +33080,14 @@
             },
         },
     },
-#line 11402
+#line 11405
     [DIFFICULTY_NORMAL][TRAINER_99D74322] =
     {
-#line 11403
+#line 11406
         .trainerName = _("99D74322"),
-#line 11404
+#line 11407
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11405
+#line 11408
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33083,12 +33095,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11407
+#line 11410
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11409
+#line 11412
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11408
+#line 11411
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33096,14 +33108,14 @@
             },
         },
     },
-#line 11410
+#line 11413
     [DIFFICULTY_NORMAL][TRAINER_9A45ED29] =
     {
-#line 11411
+#line 11414
         .trainerName = _("9A45ED29"),
-#line 11412
+#line 11415
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11413
+#line 11416
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33111,12 +33123,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11415
+#line 11418
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11417
+#line 11420
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11416
+#line 11419
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33124,14 +33136,14 @@
             },
         },
     },
-#line 11418
+#line 11421
     [DIFFICULTY_NORMAL][TRAINER_9AAFB9A8] =
     {
-#line 11419
+#line 11422
         .trainerName = _("9AAFB9A8"),
-#line 11420
+#line 11423
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11421
+#line 11424
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33139,12 +33151,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11423
+#line 11426
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11425
+#line 11428
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11424
+#line 11427
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33152,14 +33164,14 @@
             },
         },
     },
-#line 11426
+#line 11429
     [DIFFICULTY_NORMAL][TRAINER_9B4CAAEF] =
     {
-#line 11427
+#line 11430
         .trainerName = _("9B4CAAEF"),
-#line 11428
+#line 11431
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11429
+#line 11432
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33167,12 +33179,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11431
+#line 11434
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11433
+#line 11436
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11432
+#line 11435
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33180,14 +33192,14 @@
             },
         },
     },
-#line 11434
+#line 11437
     [DIFFICULTY_NORMAL][TRAINER_9B92F975] =
     {
-#line 11435
+#line 11438
         .trainerName = _("9B92F975"),
-#line 11436
+#line 11439
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11437
+#line 11440
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33195,12 +33207,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11439
+#line 11442
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11441
+#line 11444
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11440
+#line 11443
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33208,14 +33220,14 @@
             },
         },
     },
-#line 11442
+#line 11445
     [DIFFICULTY_NORMAL][TRAINER_9BA8D6B8] =
     {
-#line 11443
+#line 11446
         .trainerName = _("9BA8D6B8"),
-#line 11444
+#line 11447
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11445
+#line 11448
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33223,12 +33235,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11447
+#line 11450
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11449
+#line 11452
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11448
+#line 11451
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33236,14 +33248,14 @@
             },
         },
     },
-#line 11450
+#line 11453
     [DIFFICULTY_NORMAL][TRAINER_9BBA4D3E] =
     {
-#line 11451
+#line 11454
         .trainerName = _("9BBA4D3E"),
-#line 11452
+#line 11455
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11453
+#line 11456
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33251,12 +33263,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11455
+#line 11458
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11457
+#line 11460
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11456
+#line 11459
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33264,14 +33276,14 @@
             },
         },
     },
-#line 11458
+#line 11461
     [DIFFICULTY_NORMAL][TRAINER_9BD745C1] =
     {
-#line 11459
+#line 11462
         .trainerName = _("9BD745C1"),
-#line 11460
+#line 11463
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11461
+#line 11464
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33279,12 +33291,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11463
+#line 11466
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11465
+#line 11468
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11464
+#line 11467
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33292,14 +33304,14 @@
             },
         },
     },
-#line 11466
+#line 11469
     [DIFFICULTY_NORMAL][TRAINER_9C9A9B43] =
     {
-#line 11467
+#line 11470
         .trainerName = _("9C9A9B43"),
-#line 11468
+#line 11471
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11469
+#line 11472
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33307,12 +33319,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11471
+#line 11474
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11473
+#line 11476
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11472
+#line 11475
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33320,14 +33332,14 @@
             },
         },
     },
-#line 11474
+#line 11477
     [DIFFICULTY_NORMAL][TRAINER_9CC51698] =
     {
-#line 11475
+#line 11478
         .trainerName = _("9CC51698"),
-#line 11476
+#line 11479
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11477
+#line 11480
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33335,12 +33347,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11479
+#line 11482
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11481
+#line 11484
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11480
+#line 11483
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33348,14 +33360,14 @@
             },
         },
     },
-#line 11482
+#line 11485
     [DIFFICULTY_NORMAL][TRAINER_9D0B799C] =
     {
-#line 11483
+#line 11486
         .trainerName = _("9D0B799C"),
-#line 11484
+#line 11487
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11485
+#line 11488
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33363,12 +33375,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11487
+#line 11490
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11489
+#line 11492
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11488
+#line 11491
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33376,14 +33388,14 @@
             },
         },
     },
-#line 11490
+#line 11493
     [DIFFICULTY_NORMAL][TRAINER_9D2974CA] =
     {
-#line 11491
+#line 11494
         .trainerName = _("9D2974CA"),
-#line 11492
+#line 11495
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11493
+#line 11496
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33391,12 +33403,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11495
+#line 11498
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11497
+#line 11500
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11496
+#line 11499
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33404,14 +33416,14 @@
             },
         },
     },
-#line 11498
+#line 11501
     [DIFFICULTY_NORMAL][TRAINER_9DE6AF69] =
     {
-#line 11499
+#line 11502
         .trainerName = _("9DE6AF69"),
-#line 11500
+#line 11503
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11501
+#line 11504
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33419,12 +33431,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11503
+#line 11506
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11505
+#line 11508
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11504
+#line 11507
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33432,14 +33444,14 @@
             },
         },
     },
-#line 11506
+#line 11509
     [DIFFICULTY_NORMAL][TRAINER_9E9E96C3] =
     {
-#line 11507
+#line 11510
         .trainerName = _("9E9E96C3"),
-#line 11508
+#line 11511
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11509
+#line 11512
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33447,12 +33459,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11511
+#line 11514
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11513
+#line 11516
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11512
+#line 11515
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33460,14 +33472,14 @@
             },
         },
     },
-#line 11514
+#line 11517
     [DIFFICULTY_NORMAL][TRAINER_9EBDE860] =
     {
-#line 11515
+#line 11518
         .trainerName = _("9EBDE860"),
-#line 11516
+#line 11519
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11517
+#line 11520
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33475,12 +33487,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11519
+#line 11522
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11521
+#line 11524
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11520
+#line 11523
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33488,14 +33500,14 @@
             },
         },
     },
-#line 11522
+#line 11525
     [DIFFICULTY_NORMAL][TRAINER_9F335F56] =
     {
-#line 11523
+#line 11526
         .trainerName = _("9F335F56"),
-#line 11524
+#line 11527
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11525
+#line 11528
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33503,12 +33515,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11527
+#line 11530
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11529
+#line 11532
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11528
+#line 11531
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33516,14 +33528,14 @@
             },
         },
     },
-#line 11530
+#line 11533
     [DIFFICULTY_NORMAL][TRAINER_9FB07CC0] =
     {
-#line 11531
+#line 11534
         .trainerName = _("9FB07CC0"),
-#line 11532
+#line 11535
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11533
+#line 11536
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33531,12 +33543,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11535
+#line 11538
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11537
+#line 11540
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11536
+#line 11539
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33544,14 +33556,14 @@
             },
         },
     },
-#line 11538
+#line 11541
     [DIFFICULTY_NORMAL][TRAINER_9FFBEDD1] =
     {
-#line 11539
+#line 11542
         .trainerName = _("9FFBEDD1"),
-#line 11540
+#line 11543
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11541
+#line 11544
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33559,12 +33571,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11543
+#line 11546
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11545
+#line 11548
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11544
+#line 11547
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33572,14 +33584,14 @@
             },
         },
     },
-#line 11546
+#line 11549
     [DIFFICULTY_NORMAL][TRAINER_A03F3B0B] =
     {
-#line 11547
+#line 11550
         .trainerName = _("A03F3B0B"),
-#line 11548
+#line 11551
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11549
+#line 11552
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33587,12 +33599,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11551
+#line 11554
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11553
+#line 11556
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11552
+#line 11555
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33600,14 +33612,14 @@
             },
         },
     },
-#line 11554
+#line 11557
     [DIFFICULTY_NORMAL][TRAINER_A0852317] =
     {
-#line 11555
+#line 11558
         .trainerName = _("A0852317"),
-#line 11556
+#line 11559
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11557
+#line 11560
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33615,12 +33627,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11559
+#line 11562
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11561
+#line 11564
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11560
+#line 11563
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33628,14 +33640,14 @@
             },
         },
     },
-#line 11562
+#line 11565
     [DIFFICULTY_NORMAL][TRAINER_A0CE2BCF] =
     {
-#line 11563
+#line 11566
         .trainerName = _("A0CE2BCF"),
-#line 11564
+#line 11567
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11565
+#line 11568
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33643,12 +33655,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11567
+#line 11570
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11569
+#line 11572
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11568
+#line 11571
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33656,14 +33668,14 @@
             },
         },
     },
-#line 11570
+#line 11573
     [DIFFICULTY_NORMAL][TRAINER_A122FEC6] =
     {
-#line 11571
+#line 11574
         .trainerName = _("A122FEC6"),
-#line 11572
+#line 11575
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11573
+#line 11576
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33671,12 +33683,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11575
+#line 11578
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11577
+#line 11580
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11576
+#line 11579
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33684,14 +33696,14 @@
             },
         },
     },
-#line 11578
+#line 11581
     [DIFFICULTY_NORMAL][TRAINER_A1502FA5] =
     {
-#line 11579
+#line 11582
         .trainerName = _("A1502FA5"),
-#line 11580
+#line 11583
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11581
+#line 11584
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33699,12 +33711,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11583
+#line 11586
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11585
+#line 11588
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11584
+#line 11587
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33712,14 +33724,14 @@
             },
         },
     },
-#line 11586
+#line 11589
     [DIFFICULTY_NORMAL][TRAINER_A173BD9E] =
     {
-#line 11587
+#line 11590
         .trainerName = _("A173BD9E"),
-#line 11588
+#line 11591
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11589
+#line 11592
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33727,12 +33739,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11591
+#line 11594
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11593
+#line 11596
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11592
+#line 11595
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33740,14 +33752,14 @@
             },
         },
     },
-#line 11594
+#line 11597
     [DIFFICULTY_NORMAL][TRAINER_A1B34299] =
     {
-#line 11595
+#line 11598
         .trainerName = _("A1B34299"),
-#line 11596
+#line 11599
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11597
+#line 11600
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33755,12 +33767,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11599
+#line 11602
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11601
+#line 11604
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11600
+#line 11603
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33768,14 +33780,14 @@
             },
         },
     },
-#line 11602
+#line 11605
     [DIFFICULTY_NORMAL][TRAINER_A226BBD6] =
     {
-#line 11603
+#line 11606
         .trainerName = _("A226BBD6"),
-#line 11604
+#line 11607
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11605
+#line 11608
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33783,12 +33795,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11607
+#line 11610
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11609
+#line 11612
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11608
+#line 11611
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33796,14 +33808,14 @@
             },
         },
     },
-#line 11610
+#line 11613
     [DIFFICULTY_NORMAL][TRAINER_A26B64E5] =
     {
-#line 11611
+#line 11614
         .trainerName = _("A26B64E5"),
-#line 11612
+#line 11615
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11613
+#line 11616
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33811,12 +33823,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11615
+#line 11618
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11617
+#line 11620
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11616
+#line 11619
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33824,14 +33836,14 @@
             },
         },
     },
-#line 11618
+#line 11621
     [DIFFICULTY_NORMAL][TRAINER_A2F2E8FF] =
     {
-#line 11619
+#line 11622
         .trainerName = _("A2F2E8FF"),
-#line 11620
+#line 11623
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11621
+#line 11624
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33839,12 +33851,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11623
+#line 11626
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11625
+#line 11628
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11624
+#line 11627
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33852,14 +33864,14 @@
             },
         },
     },
-#line 11626
+#line 11629
     [DIFFICULTY_NORMAL][TRAINER_A30D6A65] =
     {
-#line 11627
+#line 11630
         .trainerName = _("A30D6A65"),
-#line 11628
+#line 11631
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11629
+#line 11632
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33867,12 +33879,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11631
+#line 11634
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11633
+#line 11636
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11632
+#line 11635
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33880,14 +33892,14 @@
             },
         },
     },
-#line 11634
+#line 11637
     [DIFFICULTY_NORMAL][TRAINER_A33F468D] =
     {
-#line 11635
+#line 11638
         .trainerName = _("A33F468D"),
-#line 11636
+#line 11639
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11637
+#line 11640
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33895,12 +33907,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11639
+#line 11642
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11641
+#line 11644
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11640
+#line 11643
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33908,14 +33920,14 @@
             },
         },
     },
-#line 11642
+#line 11645
     [DIFFICULTY_NORMAL][TRAINER_A377CCDF] =
     {
-#line 11643
+#line 11646
         .trainerName = _("A377CCDF"),
-#line 11644
+#line 11647
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11645
+#line 11648
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33923,12 +33935,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11647
+#line 11650
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11649
+#line 11652
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11648
+#line 11651
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33936,14 +33948,14 @@
             },
         },
     },
-#line 11650
+#line 11653
     [DIFFICULTY_NORMAL][TRAINER_A393F9F0] =
     {
-#line 11651
+#line 11654
         .trainerName = _("A393F9F0"),
-#line 11652
+#line 11655
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11653
+#line 11656
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33951,12 +33963,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11655
+#line 11658
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11657
+#line 11660
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11656
+#line 11659
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33964,14 +33976,14 @@
             },
         },
     },
-#line 11658
+#line 11661
     [DIFFICULTY_NORMAL][TRAINER_A39AB67C] =
     {
-#line 11659
+#line 11662
         .trainerName = _("A39AB67C"),
-#line 11660
+#line 11663
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11661
+#line 11664
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -33979,12 +33991,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11663
+#line 11666
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11665
+#line 11668
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11664
+#line 11667
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -33992,14 +34004,14 @@
             },
         },
     },
-#line 11666
+#line 11669
     [DIFFICULTY_NORMAL][TRAINER_A3EBD43B] =
     {
-#line 11667
+#line 11670
         .trainerName = _("A3EBD43B"),
-#line 11668
+#line 11671
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11669
+#line 11672
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34007,12 +34019,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11671
+#line 11674
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11673
+#line 11676
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11672
+#line 11675
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34020,14 +34032,14 @@
             },
         },
     },
-#line 11674
+#line 11677
     [DIFFICULTY_NORMAL][TRAINER_A489434F] =
     {
-#line 11675
+#line 11678
         .trainerName = _("A489434F"),
-#line 11676
+#line 11679
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11677
+#line 11680
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34035,12 +34047,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11679
+#line 11682
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11681
+#line 11684
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11680
+#line 11683
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34048,14 +34060,14 @@
             },
         },
     },
-#line 11682
+#line 11685
     [DIFFICULTY_NORMAL][TRAINER_A49FED84] =
     {
-#line 11683
+#line 11686
         .trainerName = _("A49FED84"),
-#line 11684
+#line 11687
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11685
+#line 11688
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34063,12 +34075,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11687
+#line 11690
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11689
+#line 11692
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11688
+#line 11691
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34076,14 +34088,14 @@
             },
         },
     },
-#line 11690
+#line 11693
     [DIFFICULTY_NORMAL][TRAINER_A4BDD551] =
     {
-#line 11691
+#line 11694
         .trainerName = _("A4BDD551"),
-#line 11692
+#line 11695
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11693
+#line 11696
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34091,12 +34103,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11695
+#line 11698
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11697
+#line 11700
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11696
+#line 11699
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34104,14 +34116,14 @@
             },
         },
     },
-#line 11698
+#line 11701
     [DIFFICULTY_NORMAL][TRAINER_A4D47D9E] =
     {
-#line 11699
+#line 11702
         .trainerName = _("A4D47D9E"),
-#line 11700
+#line 11703
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11701
+#line 11704
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34119,12 +34131,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11703
+#line 11706
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11705
+#line 11708
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11704
+#line 11707
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34132,14 +34144,14 @@
             },
         },
     },
-#line 11706
+#line 11709
     [DIFFICULTY_NORMAL][TRAINER_A4DC84A0] =
     {
-#line 11707
+#line 11710
         .trainerName = _("A4DC84A0"),
-#line 11708
+#line 11711
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11709
+#line 11712
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34147,12 +34159,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11711
+#line 11714
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11713
+#line 11716
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11712
+#line 11715
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34160,14 +34172,14 @@
             },
         },
     },
-#line 11714
+#line 11717
     [DIFFICULTY_NORMAL][TRAINER_A4EC97B5] =
     {
-#line 11715
+#line 11718
         .trainerName = _("A4EC97B5"),
-#line 11716
+#line 11719
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11717
+#line 11720
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34175,12 +34187,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11719
+#line 11722
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11721
+#line 11724
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11720
+#line 11723
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34188,14 +34200,14 @@
             },
         },
     },
-#line 11722
+#line 11725
     [DIFFICULTY_NORMAL][TRAINER_A50CF67B] =
     {
-#line 11723
+#line 11726
         .trainerName = _("A50CF67B"),
-#line 11724
+#line 11727
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11725
+#line 11728
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34203,12 +34215,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11727
+#line 11730
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11729
+#line 11732
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11728
+#line 11731
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34216,14 +34228,14 @@
             },
         },
     },
-#line 11730
+#line 11733
     [DIFFICULTY_NORMAL][TRAINER_A62D49C6] =
     {
-#line 11731
+#line 11734
         .trainerName = _("A62D49C6"),
-#line 11732
+#line 11735
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11733
+#line 11736
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34231,12 +34243,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11735
+#line 11738
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11737
+#line 11740
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11736
+#line 11739
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34244,14 +34256,14 @@
             },
         },
     },
-#line 11738
+#line 11741
     [DIFFICULTY_NORMAL][TRAINER_A6328173] =
     {
-#line 11739
+#line 11742
         .trainerName = _("A6328173"),
-#line 11740
+#line 11743
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11741
+#line 11744
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34259,12 +34271,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11743
+#line 11746
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11745
+#line 11748
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11744
+#line 11747
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34272,14 +34284,14 @@
             },
         },
     },
-#line 11746
+#line 11749
     [DIFFICULTY_NORMAL][TRAINER_A686809A] =
     {
-#line 11747
+#line 11750
         .trainerName = _("A686809A"),
-#line 11748
+#line 11751
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11749
+#line 11752
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34287,12 +34299,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11751
+#line 11754
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11753
+#line 11756
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11752
+#line 11755
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34300,14 +34312,14 @@
             },
         },
     },
-#line 11754
+#line 11757
     [DIFFICULTY_NORMAL][TRAINER_A7154C64] =
     {
-#line 11755
+#line 11758
         .trainerName = _("A7154C64"),
-#line 11756
+#line 11759
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11757
+#line 11760
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34315,12 +34327,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11759
+#line 11762
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11761
+#line 11764
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11760
+#line 11763
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34328,14 +34340,14 @@
             },
         },
     },
-#line 11762
+#line 11765
     [DIFFICULTY_NORMAL][TRAINER_A725F3F3] =
     {
-#line 11763
+#line 11766
         .trainerName = _("A725F3F3"),
-#line 11764
+#line 11767
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11765
+#line 11768
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34343,12 +34355,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11767
+#line 11770
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11769
+#line 11772
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11768
+#line 11771
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34356,14 +34368,14 @@
             },
         },
     },
-#line 11770
+#line 11773
     [DIFFICULTY_NORMAL][TRAINER_A7376C87] =
     {
-#line 11771
+#line 11774
         .trainerName = _("A7376C87"),
-#line 11772
+#line 11775
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11773
+#line 11776
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34371,12 +34383,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11775
+#line 11778
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11777
+#line 11780
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11776
+#line 11779
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34384,14 +34396,14 @@
             },
         },
     },
-#line 11778
+#line 11781
     [DIFFICULTY_NORMAL][TRAINER_A76F8352] =
     {
-#line 11779
+#line 11782
         .trainerName = _("A76F8352"),
-#line 11780
+#line 11783
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11781
+#line 11784
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34399,12 +34411,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11783
+#line 11786
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11785
+#line 11788
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11784
+#line 11787
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34412,14 +34424,14 @@
             },
         },
     },
-#line 11786
+#line 11789
     [DIFFICULTY_NORMAL][TRAINER_A783BCA8] =
     {
-#line 11787
+#line 11790
         .trainerName = _("A783BCA8"),
-#line 11788
+#line 11791
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11789
+#line 11792
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34427,12 +34439,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11791
+#line 11794
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11793
+#line 11796
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11792
+#line 11795
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34440,14 +34452,14 @@
             },
         },
     },
-#line 11794
+#line 11797
     [DIFFICULTY_NORMAL][TRAINER_A7D689F5] =
     {
-#line 11795
+#line 11798
         .trainerName = _("A7D689F5"),
-#line 11796
+#line 11799
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11797
+#line 11800
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34455,12 +34467,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11799
+#line 11802
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11801
+#line 11804
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11800
+#line 11803
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34468,14 +34480,14 @@
             },
         },
     },
-#line 11802
+#line 11805
     [DIFFICULTY_NORMAL][TRAINER_A7DCD657] =
     {
-#line 11803
+#line 11806
         .trainerName = _("A7DCD657"),
-#line 11804
+#line 11807
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11805
+#line 11808
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34483,12 +34495,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11807
+#line 11810
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11809
+#line 11812
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11808
+#line 11811
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34496,14 +34508,14 @@
             },
         },
     },
-#line 11810
+#line 11813
     [DIFFICULTY_NORMAL][TRAINER_A80F3799] =
     {
-#line 11811
+#line 11814
         .trainerName = _("A80F3799"),
-#line 11812
+#line 11815
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11813
+#line 11816
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34511,12 +34523,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11815
+#line 11818
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11817
+#line 11820
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11816
+#line 11819
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34524,14 +34536,14 @@
             },
         },
     },
-#line 11818
+#line 11821
     [DIFFICULTY_NORMAL][TRAINER_A82FABFC] =
     {
-#line 11819
+#line 11822
         .trainerName = _("A82FABFC"),
-#line 11820
+#line 11823
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11821
+#line 11824
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34539,12 +34551,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11823
+#line 11826
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11825
+#line 11828
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11824
+#line 11827
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34552,14 +34564,14 @@
             },
         },
     },
-#line 11826
+#line 11829
     [DIFFICULTY_NORMAL][TRAINER_A8413608] =
     {
-#line 11827
+#line 11830
         .trainerName = _("A8413608"),
-#line 11828
+#line 11831
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11829
+#line 11832
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34567,12 +34579,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11831
+#line 11834
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11833
+#line 11836
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11832
+#line 11835
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34580,14 +34592,14 @@
             },
         },
     },
-#line 11834
+#line 11837
     [DIFFICULTY_NORMAL][TRAINER_A8BA94B6] =
     {
-#line 11835
+#line 11838
         .trainerName = _("A8BA94B6"),
-#line 11836
+#line 11839
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11837
+#line 11840
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34595,12 +34607,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11839
+#line 11842
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11841
+#line 11844
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11840
+#line 11843
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34608,14 +34620,14 @@
             },
         },
     },
-#line 11842
+#line 11845
     [DIFFICULTY_NORMAL][TRAINER_A90E2D03] =
     {
-#line 11843
+#line 11846
         .trainerName = _("A90E2D03"),
-#line 11844
+#line 11847
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11845
+#line 11848
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34623,12 +34635,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11847
+#line 11850
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11849
+#line 11852
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11848
+#line 11851
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34636,14 +34648,14 @@
             },
         },
     },
-#line 11850
+#line 11853
     [DIFFICULTY_NORMAL][TRAINER_A968DBA5] =
     {
-#line 11851
+#line 11854
         .trainerName = _("A968DBA5"),
-#line 11852
+#line 11855
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11853
+#line 11856
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34651,12 +34663,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11855
+#line 11858
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11857
+#line 11860
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11856
+#line 11859
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34664,14 +34676,14 @@
             },
         },
     },
-#line 11858
+#line 11861
     [DIFFICULTY_NORMAL][TRAINER_A990AE14] =
     {
-#line 11859
+#line 11862
         .trainerName = _("A990AE14"),
-#line 11860
+#line 11863
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11861
+#line 11864
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34679,12 +34691,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11863
+#line 11866
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11865
+#line 11868
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11864
+#line 11867
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34692,14 +34704,14 @@
             },
         },
     },
-#line 11866
+#line 11869
     [DIFFICULTY_NORMAL][TRAINER_A9F2709A] =
     {
-#line 11867
+#line 11870
         .trainerName = _("A9F2709A"),
-#line 11868
+#line 11871
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11869
+#line 11872
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34707,12 +34719,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11871
+#line 11874
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11873
+#line 11876
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11872
+#line 11875
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34720,14 +34732,14 @@
             },
         },
     },
-#line 11874
+#line 11877
     [DIFFICULTY_NORMAL][TRAINER_AA81DD0B] =
     {
-#line 11875
+#line 11878
         .trainerName = _("AA81DD0B"),
-#line 11876
+#line 11879
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11877
+#line 11880
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34735,12 +34747,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11879
+#line 11882
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11881
+#line 11884
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11880
+#line 11883
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34748,14 +34760,14 @@
             },
         },
     },
-#line 11882
+#line 11885
     [DIFFICULTY_NORMAL][TRAINER_AB576C3B] =
     {
-#line 11883
+#line 11886
         .trainerName = _("AB576C3B"),
-#line 11884
+#line 11887
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11885
+#line 11888
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34763,12 +34775,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11887
+#line 11890
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11889
+#line 11892
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11888
+#line 11891
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34776,14 +34788,14 @@
             },
         },
     },
-#line 11890
+#line 11893
     [DIFFICULTY_NORMAL][TRAINER_ABD18218] =
     {
-#line 11891
+#line 11894
         .trainerName = _("ABD18218"),
-#line 11892
+#line 11895
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11893
+#line 11896
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34791,12 +34803,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11895
+#line 11898
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11897
+#line 11900
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11896
+#line 11899
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34804,14 +34816,14 @@
             },
         },
     },
-#line 11898
+#line 11901
     [DIFFICULTY_NORMAL][TRAINER_ABF9DAAF] =
     {
-#line 11899
+#line 11902
         .trainerName = _("ABF9DAAF"),
-#line 11900
+#line 11903
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11901
+#line 11904
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34819,12 +34831,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11903
+#line 11906
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11905
+#line 11908
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11904
+#line 11907
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34832,14 +34844,14 @@
             },
         },
     },
-#line 11906
+#line 11909
     [DIFFICULTY_NORMAL][TRAINER_ABFE6286] =
     {
-#line 11907
+#line 11910
         .trainerName = _("ABFE6286"),
-#line 11908
+#line 11911
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11909
+#line 11912
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34847,12 +34859,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11911
+#line 11914
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11913
+#line 11916
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11912
+#line 11915
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34860,14 +34872,14 @@
             },
         },
     },
-#line 11914
+#line 11917
     [DIFFICULTY_NORMAL][TRAINER_AC004835] =
     {
-#line 11915
+#line 11918
         .trainerName = _("AC004835"),
-#line 11916
+#line 11919
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11917
+#line 11920
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34875,12 +34887,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11919
+#line 11922
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11921
+#line 11924
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11920
+#line 11923
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34888,14 +34900,14 @@
             },
         },
     },
-#line 11922
+#line 11925
     [DIFFICULTY_NORMAL][TRAINER_ACB85CBA] =
     {
-#line 11923
+#line 11926
         .trainerName = _("ACB85CBA"),
-#line 11924
+#line 11927
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11925
+#line 11928
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34903,12 +34915,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11927
+#line 11930
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11929
+#line 11932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11928
+#line 11931
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34916,14 +34928,14 @@
             },
         },
     },
-#line 11930
+#line 11933
     [DIFFICULTY_NORMAL][TRAINER_ACE2090A] =
     {
-#line 11931
+#line 11934
         .trainerName = _("ACE2090A"),
-#line 11932
+#line 11935
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11933
+#line 11936
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34931,12 +34943,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11935
+#line 11938
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11937
+#line 11940
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11936
+#line 11939
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34944,14 +34956,14 @@
             },
         },
     },
-#line 11938
+#line 11941
     [DIFFICULTY_NORMAL][TRAINER_AD1AA26D] =
     {
-#line 11939
+#line 11942
         .trainerName = _("AD1AA26D"),
-#line 11940
+#line 11943
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11941
+#line 11944
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34959,12 +34971,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11943
+#line 11946
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11945
+#line 11948
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11944
+#line 11947
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -34972,14 +34984,14 @@
             },
         },
     },
-#line 11946
+#line 11949
     [DIFFICULTY_NORMAL][TRAINER_AD70C4BA] =
     {
-#line 11947
+#line 11950
         .trainerName = _("AD70C4BA"),
-#line 11948
+#line 11951
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11949
+#line 11952
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -34987,12 +34999,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11951
+#line 11954
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11953
+#line 11956
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11952
+#line 11955
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35000,14 +35012,14 @@
             },
         },
     },
-#line 11954
+#line 11957
     [DIFFICULTY_NORMAL][TRAINER_AD8C8210] =
     {
-#line 11955
+#line 11958
         .trainerName = _("AD8C8210"),
-#line 11956
+#line 11959
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11957
+#line 11960
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35015,12 +35027,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11959
+#line 11962
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11961
+#line 11964
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11960
+#line 11963
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35028,14 +35040,14 @@
             },
         },
     },
-#line 11962
+#line 11965
     [DIFFICULTY_NORMAL][TRAINER_ADC94E2C] =
     {
-#line 11963
+#line 11966
         .trainerName = _("ADC94E2C"),
-#line 11964
+#line 11967
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11965
+#line 11968
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35043,12 +35055,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11967
+#line 11970
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11969
+#line 11972
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11968
+#line 11971
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35056,14 +35068,14 @@
             },
         },
     },
-#line 11970
+#line 11973
     [DIFFICULTY_NORMAL][TRAINER_AE0ED10D] =
     {
-#line 11971
+#line 11974
         .trainerName = _("AE0ED10D"),
-#line 11972
+#line 11975
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11973
+#line 11976
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35071,12 +35083,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11975
+#line 11978
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11977
+#line 11980
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11976
+#line 11979
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35084,14 +35096,14 @@
             },
         },
     },
-#line 11978
+#line 11981
     [DIFFICULTY_NORMAL][TRAINER_AE99A6E1] =
     {
-#line 11979
+#line 11982
         .trainerName = _("AE99A6E1"),
-#line 11980
+#line 11983
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11981
+#line 11984
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35099,12 +35111,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11983
+#line 11986
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11985
+#line 11988
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11984
+#line 11987
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35112,14 +35124,14 @@
             },
         },
     },
-#line 11986
+#line 11989
     [DIFFICULTY_NORMAL][TRAINER_AE9CFA41] =
     {
-#line 11987
+#line 11990
         .trainerName = _("AE9CFA41"),
-#line 11988
+#line 11991
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11989
+#line 11992
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35127,12 +35139,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11991
+#line 11994
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 11993
+#line 11996
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 11992
+#line 11995
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35140,14 +35152,14 @@
             },
         },
     },
-#line 11994
+#line 11997
     [DIFFICULTY_NORMAL][TRAINER_AEDC9768] =
     {
-#line 11995
+#line 11998
         .trainerName = _("AEDC9768"),
-#line 11996
+#line 11999
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 11997
+#line 12000
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35155,12 +35167,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 11999
+#line 12002
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12001
+#line 12004
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12000
+#line 12003
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35168,14 +35180,14 @@
             },
         },
     },
-#line 12002
+#line 12005
     [DIFFICULTY_NORMAL][TRAINER_AF0898E7] =
     {
-#line 12003
+#line 12006
         .trainerName = _("AF0898E7"),
-#line 12004
+#line 12007
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12005
+#line 12008
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35183,12 +35195,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12007
+#line 12010
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12009
+#line 12012
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12008
+#line 12011
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35196,14 +35208,14 @@
             },
         },
     },
-#line 12010
+#line 12013
     [DIFFICULTY_NORMAL][TRAINER_AF765F9F] =
     {
-#line 12011
+#line 12014
         .trainerName = _("AF765F9F"),
-#line 12012
+#line 12015
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12013
+#line 12016
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35211,12 +35223,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12015
+#line 12018
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12017
+#line 12020
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12016
+#line 12019
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35224,14 +35236,14 @@
             },
         },
     },
-#line 12018
+#line 12021
     [DIFFICULTY_NORMAL][TRAINER_AFA4A980] =
     {
-#line 12019
+#line 12022
         .trainerName = _("AFA4A980"),
-#line 12020
+#line 12023
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12021
+#line 12024
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35239,12 +35251,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12023
+#line 12026
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12025
+#line 12028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12024
+#line 12027
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35252,14 +35264,14 @@
             },
         },
     },
-#line 12026
+#line 12029
     [DIFFICULTY_NORMAL][TRAINER_AFA5BAC9] =
     {
-#line 12027
+#line 12030
         .trainerName = _("AFA5BAC9"),
-#line 12028
+#line 12031
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12029
+#line 12032
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35267,12 +35279,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12031
+#line 12034
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12033
+#line 12036
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12032
+#line 12035
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35280,14 +35292,14 @@
             },
         },
     },
-#line 12034
+#line 12037
     [DIFFICULTY_NORMAL][TRAINER_AFD8F2EF] =
     {
-#line 12035
+#line 12038
         .trainerName = _("AFD8F2EF"),
-#line 12036
+#line 12039
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12037
+#line 12040
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35295,12 +35307,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12039
+#line 12042
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12041
+#line 12044
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12040
+#line 12043
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35308,14 +35320,14 @@
             },
         },
     },
-#line 12042
+#line 12045
     [DIFFICULTY_NORMAL][TRAINER_AFE855B1] =
     {
-#line 12043
+#line 12046
         .trainerName = _("AFE855B1"),
-#line 12044
+#line 12047
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12045
+#line 12048
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35323,12 +35335,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12047
+#line 12050
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12049
+#line 12052
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12048
+#line 12051
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35336,14 +35348,14 @@
             },
         },
     },
-#line 12050
+#line 12053
     [DIFFICULTY_NORMAL][TRAINER_SHINZO_2] =
     {
-#line 12051
+#line 12054
         .trainerName = _("AFFCC47E"),
-#line 12052
+#line 12055
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12053
+#line 12056
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35351,30 +35363,30 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12055
+#line 12058
             .species = SPECIES_TENTACRUEL,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12055
-            .heldItem = ITEM_MYSTIC_WATER,
-#line 12061
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 100, 100, 0),
-#line 12063
-            .iv = TRAINER_PARTY_IVS(20, 0, 20, 20, 20, 20),
-#line 12056
-            .ability = ABILITY_CLEAR_BODY,
-#line 12057
-            .lvl = 26,
 #line 12058
-            .ball = BALL_MASTER,
-#line 12060
-            .friendship = 1,
-#line 12062
-            .nature = NATURE_BOLD,
+            .heldItem = ITEM_MYSTIC_WATER,
+#line 12064
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 100, 100, 0),
+#line 12066
+            .iv = TRAINER_PARTY_IVS(20, 0, 20, 20, 20, 20),
 #line 12059
+            .ability = ABILITY_CLEAR_BODY,
+#line 12060
+            .lvl = 26,
+#line 12061
+            .ball = BALL_MASTER,
+#line 12063
+            .friendship = 1,
+#line 12065
+            .nature = NATURE_BOLD,
+#line 12062
             .isShiny = FALSE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12064
+#line 12067
                 MOVE_CHILLING_WATER,
                 MOVE_ACID_SPRAY,
                 MOVE_ICY_WIND,
@@ -35382,30 +35394,30 @@
             },
             },
             {
-#line 12069
+#line 12072
             .species = SPECIES_SALAZZLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12069
-            .heldItem = ITEM_CHARCOAL,
-#line 12075
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 100, 100, 0),
-#line 12077
-            .iv = TRAINER_PARTY_IVS(20, 0, 20, 20, 20, 20),
-#line 12070
-            .ability = ABILITY_CORROSION,
-#line 12071
-            .lvl = 27,
 #line 12072
-            .ball = BALL_MASTER,
-#line 12074
-            .friendship = 1,
-#line 12076
-            .nature = NATURE_TIMID,
+            .heldItem = ITEM_CHARCOAL,
+#line 12078
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 100, 100, 0),
+#line 12080
+            .iv = TRAINER_PARTY_IVS(20, 0, 20, 20, 20, 20),
 #line 12073
+            .ability = ABILITY_CORROSION,
+#line 12074
+            .lvl = 27,
+#line 12075
+            .ball = BALL_MASTER,
+#line 12077
+            .friendship = 1,
+#line 12079
+            .nature = NATURE_TIMID,
+#line 12076
             .isShiny = FALSE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12078
+#line 12081
                 MOVE_INCINERATE,
                 MOVE_ACID_SPRAY,
                 MOVE_SUNNY_DAY,
@@ -35413,59 +35425,59 @@
             },
             },
             {
-#line 12083
+#line 12086
             .species = SPECIES_SHIFTRY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12083
-            .heldItem = ITEM_MIRACLE_SEED,
-#line 12089
-            .ev = TRAINER_PARTY_EVS(100, 100, 0, 0, 0, 0),
-#line 12091
-            .iv = TRAINER_PARTY_IVS(20, 20, 20, 20, 20, 20),
-#line 12084
-            .ability = ABILITY_CHLOROPHYLL,
-#line 12085
-            .lvl = 26,
 #line 12086
-            .ball = BALL_MASTER,
-#line 12088
-            .friendship = 1,
-#line 12090
-            .nature = NATURE_CAREFUL,
+            .heldItem = ITEM_MIRACLE_SEED,
+#line 12092
+            .ev = TRAINER_PARTY_EVS(100, 100, 0, 0, 0, 0),
+#line 12094
+            .iv = TRAINER_PARTY_IVS(20, 20, 20, 20, 20, 20),
 #line 12087
+            .ability = ABILITY_CHLOROPHYLL,
+#line 12088
+            .lvl = 26,
+#line 12089
+            .ball = BALL_MASTER,
+#line 12091
+            .friendship = 1,
+#line 12093
+            .nature = NATURE_CAREFUL,
+#line 12090
             .isShiny = FALSE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12092
+#line 12095
                 MOVE_RAZOR_LEAF,
                 MOVE_ROCK_TOMB,
             },
             },
             {
-#line 12095
+#line 12098
             .species = SPECIES_SKUNTANK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12095
-            .heldItem = ITEM_BLACK_SLUDGE,
-#line 12101
-            .ev = TRAINER_PARTY_EVS(0, 100, 0, 100, 0, 0),
-#line 12103
-            .iv = TRAINER_PARTY_IVS(20, 20, 20, 20, 20, 20),
-#line 12096
-            .ability = ABILITY_STENCH,
-#line 12097
-            .lvl = 28,
 #line 12098
-            .ball = BALL_MASTER,
-#line 12100
-            .friendship = 1,
-#line 12102
-            .nature = NATURE_ADAMANT,
+            .heldItem = ITEM_BLACK_SLUDGE,
+#line 12104
+            .ev = TRAINER_PARTY_EVS(0, 100, 0, 100, 0, 0),
+#line 12106
+            .iv = TRAINER_PARTY_IVS(20, 20, 20, 20, 20, 20),
 #line 12099
+            .ability = ABILITY_STENCH,
+#line 12100
+            .lvl = 28,
+#line 12101
+            .ball = BALL_MASTER,
+#line 12103
+            .friendship = 1,
+#line 12105
+            .nature = NATURE_ADAMANT,
+#line 12102
             .isShiny = FALSE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12104
+#line 12107
                 MOVE_SUCKER_PUNCH,
                 MOVE_POISON_TAIL,
                 MOVE_BITE,
@@ -35473,14 +35485,14 @@
             },
         },
     },
-#line 12108
+#line 12111
     [DIFFICULTY_NORMAL][TRAINER_CHAMPION_SHINJI] =
     {
-#line 12109
+#line 12112
         .trainerName = _("Shinji"),
-#line 12110
+#line 12113
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12111
+#line 12114
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35488,25 +35500,25 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12113
+#line 12116
             .species = SPECIES_GYARADOS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12113
+#line 12116
             .heldItem = ITEM_SITRUS_BERRY,
-#line 12115
+#line 12118
             .ev = TRAINER_PARTY_EVS(252, 4, 204, 44, 0, 4),
-#line 12117
+#line 12120
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12114
-            .ability = ABILITY_INTIMIDATE,
 #line 12117
+            .ability = ABILITY_INTIMIDATE,
+#line 12120
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12116
+#line 12119
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12117
+#line 12120
                 MOVE_WATERFALL,
                 MOVE_THUNDER_WAVE,
                 MOVE_TAUNT,
@@ -35514,25 +35526,25 @@
             },
             },
             {
-#line 12122
+#line 12125
             .species = SPECIES_NIDOKING,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12122
+#line 12125
             .heldItem = ITEM_LIFE_ORB,
-#line 12124
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 4),
-#line 12126
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 12123
-            .ability = ABILITY_SHEER_FORCE,
 #line 12127
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 4),
+#line 12129
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 12126
+            .ability = ABILITY_SHEER_FORCE,
+#line 12130
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12125
+#line 12128
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12127
+#line 12130
                 MOVE_EARTH_POWER,
                 MOVE_SLUDGE_WAVE,
                 MOVE_ICE_BEAM,
@@ -35540,25 +35552,25 @@
             },
             },
             {
-#line 12132
+#line 12135
             .species = SPECIES_MAGMORTAR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12132
+#line 12135
             .heldItem = ITEM_HEAVY_DUTY_BOOTS,
-#line 12134
+#line 12137
             .ev = TRAINER_PARTY_EVS(0, 0, 4, 252, 252, 0),
-#line 12136
+#line 12139
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12133
-            .ability = ABILITY_FLAME_BODY,
 #line 12136
+            .ability = ABILITY_FLAME_BODY,
+#line 12139
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12135
+#line 12138
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12136
+#line 12139
                 MOVE_FIRE_BLAST,
                 MOVE_SCORCHING_SANDS,
                 MOVE_THUNDERBOLT,
@@ -35566,25 +35578,25 @@
             },
             },
             {
-#line 12141
+#line 12144
             .species = SPECIES_AGGRON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12141
+#line 12144
             .heldItem = ITEM_LEFTOVERS,
-#line 12143
+#line 12146
             .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),
-#line 12145
+#line 12148
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12142
-            .ability = ABILITY_STURDY,
 #line 12145
+            .ability = ABILITY_STURDY,
+#line 12148
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12144
+#line 12147
             .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12145
+#line 12148
                 MOVE_STEALTH_ROCK,
                 MOVE_HEAVY_SLAM,
                 MOVE_BODY_PRESS,
@@ -35592,25 +35604,25 @@
             },
             },
             {
-#line 12150
+#line 12153
             .species = SPECIES_TORTERRA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12150
+#line 12153
             .heldItem = ITEM_LOADED_DICE,
-#line 12152
+#line 12155
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
-#line 12154
+#line 12157
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12151
-            .ability = ABILITY_OVERGROW,
 #line 12154
+            .ability = ABILITY_OVERGROW,
+#line 12157
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12153
+#line 12156
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12154
+#line 12157
                 MOVE_SHELL_SMASH,
                 MOVE_HEADLONG_RUSH,
                 MOVE_BULLET_SEED,
@@ -35618,25 +35630,25 @@
             },
             },
             {
-#line 12159
+#line 12162
             .species = SPECIES_HONCHKROW,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12159
+#line 12162
             .heldItem = ITEM_HEAVY_DUTY_BOOTS,
-#line 12161
+#line 12164
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 4),
-#line 12163
+#line 12166
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12160
-            .ability = ABILITY_MOXIE,
 #line 12163
+            .ability = ABILITY_MOXIE,
+#line 12166
             .lvl = 100,
             .ball = POKEBALL_COUNT,
-#line 12162
+#line 12165
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 12163
+#line 12166
                 MOVE_SUCKER_PUNCH,
                 MOVE_BRAVE_BIRD,
                 MOVE_U_TURN,
@@ -35645,14 +35657,14 @@
             },
         },
     },
-#line 12168
+#line 12171
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_4] =
     {
-#line 12169
+#line 12172
         .trainerName = _("ImprovtroupeX"),
-#line 12170
+#line 12173
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12171
+#line 12174
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35660,12 +35672,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12173
+#line 12176
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12175
+#line 12178
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12174
+#line 12177
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35673,14 +35685,14 @@
             },
         },
     },
-#line 12176
+#line 12179
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_5] =
     {
-#line 12177
+#line 12180
         .trainerName = _("ImprovtroupeY"),
-#line 12178
+#line 12181
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12179
+#line 12182
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35688,12 +35700,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12181
+#line 12184
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12183
+#line 12186
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12182
+#line 12185
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35701,14 +35713,14 @@
             },
         },
     },
-#line 12184
+#line 12187
     [DIFFICULTY_NORMAL][TRAINER_IMPROV_6] =
     {
-#line 12185
+#line 12188
         .trainerName = _("ImprovtroupeZ"),
-#line 12186
+#line 12189
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12187
+#line 12190
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35716,12 +35728,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12189
+#line 12192
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12191
+#line 12194
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12190
+#line 12193
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35729,14 +35741,14 @@
             },
         },
     },
-#line 12192
+#line 12195
     [DIFFICULTY_NORMAL][TRAINER_C82E0F99] =
     {
-#line 12193
+#line 12196
         .trainerName = _("C82E0F99"),
-#line 12194
+#line 12197
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12195
+#line 12198
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35744,12 +35756,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12197
+#line 12200
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12199
+#line 12202
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12198
+#line 12201
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35757,14 +35769,14 @@
             },
         },
     },
-#line 12200
+#line 12203
     [DIFFICULTY_NORMAL][TRAINER_C84D5BA6] =
     {
-#line 12201
+#line 12204
         .trainerName = _("C84D5BA6"),
-#line 12202
+#line 12205
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12203
+#line 12206
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35772,12 +35784,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12205
+#line 12208
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12207
+#line 12210
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12206
+#line 12209
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35785,14 +35797,14 @@
             },
         },
     },
-#line 12208
+#line 12211
     [DIFFICULTY_NORMAL][TRAINER_C8563FAA] =
     {
-#line 12209
+#line 12212
         .trainerName = _("C8563FAA"),
-#line 12210
+#line 12213
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12211
+#line 12214
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35800,12 +35812,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12213
+#line 12216
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12215
+#line 12218
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12214
+#line 12217
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35813,14 +35825,14 @@
             },
         },
     },
-#line 12216
+#line 12219
     [DIFFICULTY_NORMAL][TRAINER_LEAF] =
     {
-#line 12217
+#line 12220
         .trainerName = _("LEAF"),
-#line 12218
+#line 12221
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12219
+#line 12222
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35828,12 +35840,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12221
+#line 12224
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12223
+#line 12226
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12222
+#line 12225
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
@@ -35841,14 +35853,14 @@
             },
         },
     },
-#line 12224
+#line 12227
     [DIFFICULTY_NORMAL][TRAINER_RED] =
     {
-#line 12225
+#line 12228
         .trainerName = _("RED"),
-#line 12226
+#line 12229
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
-#line 12227
+#line 12230
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT,
 #line 0
         .multiTeamSize = MULTI_TEAM_SIZE_FULL,
@@ -35856,12 +35868,12 @@
         .party = (const struct TrainerMon[])
         {
             {
-#line 12229
+#line 12232
             .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 12231
+#line 12234
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 12230
+#line 12233
             .lvl = 1,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
