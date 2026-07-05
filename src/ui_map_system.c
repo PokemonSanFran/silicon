@@ -3674,6 +3674,7 @@ static u8 HandleAttemptWarpInput(void)
     u16 mapSecId;
     mapSecId = GetMapSecIdAt(sRegionMap->cursorPosX, sRegionMap->cursorPosY);
     sRegionMap->mapSecTypeHasVisited = GetMapsecTypeHasVisited(mapSecId);
+    FlagClear(FLAG_TEMP_1);
 
     if(sRegionMap->mapSecTypeHasVisited == LOCATION_VISITED)
     {
@@ -3707,7 +3708,7 @@ static u8 HandleAttemptWarpInput(void)
         {
             PlaySE(SE_SELECT);
             sRegionMap->warpCounter = 0;
-            FlagClear(FLAG_TEMP_1);
+            FlagSet(FLAG_TEMP_1);
             sRegionMap->inputCallback = HandleWarpTaxiCutscene;
         }
         else if((warpPrice > GetMoney(&gSaveBlock1Ptr->money)) && !QUEST_EXCEPTION_NO_PAY)
@@ -3805,7 +3806,7 @@ void WarpTaxiAfterCutscene(void)
     if (healLocation == HEAL_LOCATION_NONE)
         return;
 
-    if (!FlagGet(FLAG_TEMP_1))
+    if (FlagGet(FLAG_TEMP_1) == FALSE)
         return;
 
     SetWarpDestinationToHealLocation(healLocation);
