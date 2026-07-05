@@ -1947,7 +1947,7 @@ void VSGarbodor_ChooseGemBasedOnStarter(void)
 
 bool32 MaskOff_ShouldShowVigrim(void)
 {
-    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_4)
+    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_5)
         return FALSE;
     if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;

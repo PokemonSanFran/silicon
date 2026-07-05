@@ -2371,5 +2371,721 @@ static const struct PlayerAdventureText playerAdventureText[] =
       },
     }
   },
+  {
+    .text = COMPOUND_STRING("There's no turning back. Talk to Baiya in {STR_VAR_1} Mess Hall to finally fight back against the forces of SharpRise Capital."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = LAST_CHANCE_TRUE_TIMELINE_START,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help Baiya locate Eleanor to reunite the Resido Elite Four. Start with the newspaper in {STR_VAR_1} to start your investigation."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PERLACIA_CITY_NEWSPAPER,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = ASSIGNED_MASK_OFF,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The reporter in {STR_VAR_1} explained that Eleanor worked in {STR_VAR_2} helping small businesses grow and be sustainable."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PERLACIA_CITY_NEWSPAPER,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_MERMEREZA_CITY_CONSULTING,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = GOT_MASK_OFF_CLUE_1,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Eleanor's old coworker recalled that she used to treat the team to ramen in {STR_VAR_1}. Afterwards, she left to buy {STR_VAR_2} from her favorite store in {STR_VAR_3}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_TORA_TOWN,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_ITEM_PLURAL,
+        .textTargetValue = ITEM_DUSK_BALL,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_IRISINA_TOWN,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = GOT_MASK_OFF_CLUE_2,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Eleanor regularly bought {STR_VAR_3} from {STR_VAR_1} Ball Shop. She often had books from {STR_VAR_2} Library."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_IRISINA_TOWN_BALLS,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CAPHE_CITY_LIBRARY,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_ITEM_PLURAL,
+        .textTargetValue = ITEM_DUSK_BALL,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = GOT_MASK_OFF_CLUE_3,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Eleanor gave lectures about the value of raising Pokemon where they were captured. The librarian admired the battle prowess of her {STR_VAR_1}. Eleanor traversed Resido using {STR_VAR_2}."), 
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_SPECIES,
+        .textTargetValue = SPECIES_STANTLER,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MOVE,
+        .textTargetValue = MOVE_FLY,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = GOT_MASK_OFF_CLUE_4,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Eleanor used to live in {STR_VAR_1}. She would train her Pokemon on {STR_VAR_2}, and then relax with a walk around {STR_VAR_3}."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_QIU_VILLAGE,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ROUTE98,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_WISHAAST_LAKE,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = GOT_MASK_OFF_CLUE_5,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Vigrim wants to test your power now that you're working alongside them. Defeat them in a battle!"),
+    .textComponent =
+    {
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_START_TRUE_TIMELINE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_MASK_OFF_STATE,
+        .compareOp = EQUAL,
+        .targetValue = SAVE_VIGRIM_WISHAAST_LAKE_TRUE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Eleanor has gone to regroup with the Elite Four. She encouraged you to get some rest, as the battle continues tomorrow. Head home to {STR_VAR_1}!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_PETAROSA_BOROUGH,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_DEFEATED_VIGRIM,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .compareOp = EQUAL,
+        .targetValue = FALSE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("SharpRise Captial has revoked your perks, like your home. You can stay with Baiya on {STR_VAR_1} for now. Get some rest."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_DEFEATED_VIGRIM,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_FLAG,
+        .dataAddress = FLAG_LOCKEDOUT_PLAYED,
+        .compareOp = EQUAL,
+        .targetValue = TRUE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("There is an all hands meeting in the {STR_VAR_1} Mess Hall, but you were invited to a warehouse rave in {STR_VAR_2}. Where will you go first?"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CURENO_PORT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RECIVED_RAVE_INVITE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The Tide is launched a new initative on {STR_VAR_1} to help cripple SharpRise Capital. Celebrate at the warehouse rave in {STR_VAR_2}!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CURENO_PORT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_OR_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_ARANTRAZ_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_SPEECHSPEECH,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("The warehouse rave in {STR_VAR_1} was a trap by SharpRise Captial - defeat Kei-Ying in battle!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_CURENO_PORT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_WAREHOUSE_RAVE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = SAVE_KEIYING_WAREHOUSE,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("You defeated Kei-Ying and got his help in escaping...head to {STR_VAR_1} for all all hands meeting!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_OR_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_WAREHOUSE_RAVE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TOLD_BAIYA_ABOUT_KEIYING,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Team up with Eleanor, Tala, or Frank in the {STR_VAR_1} Mess Hall to begin weakening SharpRise Captial's hold on the region."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
+        .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Check the task {STR_VAR_1} in your ToDo List to continue working with Frank!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_TAXICABTURNAROUND,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Check the task {STR_VAR_1} in your ToDo List to continue working with Eleanor!"),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_BODEGABURNOUT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Help Tala and her reporter friend research fake news - complete tasks that you learn about on Buzzr!"),
+    .textComponent =
+    {
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Research fake news by completing tasks from Buzzr or check {STR_VAR_1} in your ToDo List to keep working with Eleanor."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_BODEGABURNOUT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Research fake news by completing tasks from Buzzr or check {STR_VAR_1} in your ToDo List to keep working with Frank."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_TAXICABTURNAROUND,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Check {STR_VAR_1} in your ToDo List to keep working with Frank or {STR_VAR_2} to work with Eleanor."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_TAXICABTURNAROUND,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_BODEGABURNOUT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = LESS_THAN,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
+  {
+    .text = COMPOUND_STRING("Check {STR_VAR_1} in your ToDo List to keep working with Frank, or {STR_VAR_2} to work with Eleanor, or complete more tasks from Buzzr to help Tala."),
+    .textComponent =
+    {
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_TAXICABTURNAROUND,
+      },
+      {
+        .textTargetType = QUEST_FLAVOR_GET_NAME_QUEST,
+        .textTargetValue = QUEST_BODEGABURNOUT,
+      },
+    },
+    .textCondition = 
+    {
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_STORYLINE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = STORY_RAVE_AND_SPEECH_COMPLETE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_BODEGABURNOUT,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_INACTIVE,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_QUEST,
+        .dataAddress = QUEST_TAXICABTURNAROUND,
+        .compareOp = NOT_EQUAL,
+        .targetValue = FLAG_GET_COMPLETED,
+      },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_QUEST_BREAKTHEINTERNET_STATE,
+        .compareOp = EQUAL,
+        .targetValue = TALKED_TO_REPORTER,
+      },
+    }
+  },
 };
 
