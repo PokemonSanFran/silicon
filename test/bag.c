@@ -103,55 +103,57 @@ TEST("Berries are sorted correctly in the bag")
 
 TEST("Items are correctly sorted and compacted in the bag")
 {
-    struct BagPocket *pocket = &gBagPockets[POCKET_ITEMS];
-    memset(pocket->itemSlots, 0, sizeof(gSaveBlock1Ptr->bag.items));
+    // Start inventory
+    /*
+       struct BagPocket *pocket = &gBagPockets[POCKET_ITEMS];
+       memset(pocket->itemSlots, 0, sizeof(gSaveBlock1Ptr->bag.items));
 
-    ASSUME(GetItemPocket(ITEM_NUGGET) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_NUGGET) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_TINY_MUSHROOM) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_MUSHROOM) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_PEARL) == POCKET_ITEMS);
-    ASSUME(GetItemPocket(ITEM_BIG_PEARL) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_NUGGET) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_BIG_NUGGET) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_TINY_MUSHROOM) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_BIG_MUSHROOM) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_PEARL) == POCKET_ITEMS);
+       ASSUME(GetItemPocket(ITEM_BIG_PEARL) == POCKET_ITEMS);
 
-    RUN_OVERWORLD_SCRIPT(
-        additem ITEM_NUGGET;
-        additem ITEM_BIG_NUGGET;
-        additem ITEM_TINY_MUSHROOM;
-        additem ITEM_BIG_MUSHROOM;
-        additem ITEM_PEARL;
-        additem ITEM_BIG_PEARL;
-    );
+       RUN_OVERWORLD_SCRIPT(
+       additem ITEM_NUGGET;
+       additem ITEM_BIG_NUGGET;
+       additem ITEM_TINY_MUSHROOM;
+       additem ITEM_BIG_MUSHROOM;
+       additem ITEM_PEARL;
+       additem ITEM_BIG_PEARL;
+       );
 
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[0].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[1].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TINY_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[2].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_BIG_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[3].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_PEARL);
-    EXPECT_EQ(pocket->itemSlots[4].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_BIG_PEARL);
-    EXPECT_EQ(pocket->itemSlots[5].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+       EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_NUGGET);
+       EXPECT_EQ(pocket->itemSlots[0].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
+       EXPECT_EQ(pocket->itemSlots[1].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TINY_MUSHROOM);
+       EXPECT_EQ(pocket->itemSlots[2].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_BIG_MUSHROOM);
+       EXPECT_EQ(pocket->itemSlots[3].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_PEARL);
+       EXPECT_EQ(pocket->itemSlots[4].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_BIG_PEARL);
+       EXPECT_EQ(pocket->itemSlots[5].quantity, 1);
+       EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
 
-    SortItemsInBag(&gBagPockets[POCKET_ITEMS], SORT_ALPHABETICALLY);
+       SortItemsInBag(&gBagPockets[POCKET_ITEMS], SORT_ALPHABETICALLY);
 
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_BIG_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_BIG_PEARL);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_PEARL);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_TINY_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+       EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_BIG_MUSHROOM);
+       EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
+       EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_BIG_PEARL);
+       EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_NUGGET);
+       EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_PEARL);
+       EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_TINY_MUSHROOM);
+       EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
 
     // Try removing the big items, check that everything is compacted correctly
 
     RUN_OVERWORLD_SCRIPT(
-        removeitem ITEM_BIG_NUGGET;
-        removeitem ITEM_BIG_MUSHROOM;
-        removeitem ITEM_BIG_PEARL;
+    removeitem ITEM_BIG_NUGGET;
+    removeitem ITEM_BIG_MUSHROOM;
+    removeitem ITEM_BIG_PEARL;
     );
 
     CompactItemsInBagPocket(POCKET_ITEMS);
@@ -166,4 +168,67 @@ TEST("Items are correctly sorted and compacted in the bag")
     EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+    */
+    struct BagPocket *pocket = &gBagPockets[POCKET_OTHER];
+    memset(pocket->itemSlots, 0, sizeof(gSaveBlock1Ptr->bag.bagPocket_Other));
+
+    ASSUME(GetItemPocket(ITEM_REPEL) == POCKET_OTHER);
+    ASSUME(GetItemPocket(ITEM_SUPER_REPEL) == POCKET_OTHER);
+    ASSUME(GetItemPocket(ITEM_MAX_REPEL) == POCKET_OTHER);
+    ASSUME(GetItemPocket(ITEM_LURE) == POCKET_OTHER);
+    ASSUME(GetItemPocket(ITEM_SUPER_LURE) == POCKET_OTHER);
+    ASSUME(GetItemPocket(ITEM_MAX_LURE) == POCKET_OTHER);
+
+    RUN_OVERWORLD_SCRIPT(
+            additem ITEM_REPEL;
+            additem ITEM_SUPER_REPEL;
+            additem ITEM_MAX_REPEL;
+            additem ITEM_LURE;
+            additem ITEM_SUPER_LURE;
+            additem ITEM_MAX_LURE;
+            );
+
+    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_REPEL);
+    EXPECT_EQ(pocket->itemSlots[0].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_SUPER_REPEL);
+    EXPECT_EQ(pocket->itemSlots[1].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_MAX_REPEL);
+    EXPECT_EQ(pocket->itemSlots[2].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_LURE);
+    EXPECT_EQ(pocket->itemSlots[3].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_SUPER_LURE);
+    EXPECT_EQ(pocket->itemSlots[4].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_MAX_LURE);
+    EXPECT_EQ(pocket->itemSlots[5].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+
+    SortItemsInBag(&gBagPockets[POCKET_OTHER], SORT_ALPHABETICALLY);
+
+    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_LURE);
+    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_MAX_LURE);
+    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_MAX_REPEL);
+    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_REPEL);
+    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_SUPER_LURE);
+    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_SUPER_REPEL);
+    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+
+    RUN_OVERWORLD_SCRIPT(
+            removeitem ITEM_SUPER_REPEL;
+            removeitem ITEM_LURE;
+            removeitem ITEM_MAX_LURE;
+            );
+
+    CompactItemsInBagPocket(POCKET_OTHER);
+
+    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_MAX_REPEL);
+    EXPECT_EQ(pocket->itemSlots[0].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_REPEL);
+    EXPECT_EQ(pocket->itemSlots[1].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_SUPER_LURE);
+    EXPECT_EQ(pocket->itemSlots[2].quantity, 1);
+    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_NONE);
+    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_NONE);
+    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_NONE);
+    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+    // End inventory
 }
