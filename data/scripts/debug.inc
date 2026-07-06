@@ -339,205 +339,193 @@ Debug_EventScript_CheckIVs_End::
 
 
 Debug_EventScript_Script_1::
-# 145 "data/scripts/debug.pory"
+# 202 "data/scripts/debug.pory"
 	callnative ClearBag
-# 146 "data/scripts/debug.pory"
+# 203 "data/scripts/debug.pory"
 	additem ITEM_X_ATTACK, 1
-# 147 "data/scripts/debug.pory"
+# 204 "data/scripts/debug.pory"
 	additem ITEM_CHERI_BERRY, 1
-# 148 "data/scripts/debug.pory"
+# 205 "data/scripts/debug.pory"
 	additem ITEM_ESCAPE_ROPE, 1
-# 149 "data/scripts/debug.pory"
+# 206 "data/scripts/debug.pory"
 	additem ITEM_SUPER_POTION, 1
-# 150 "data/scripts/debug.pory"
+# 207 "data/scripts/debug.pory"
 	additem ITEM_VENUSAURITE, 1
-# 151 "data/scripts/debug.pory"
+# 208 "data/scripts/debug.pory"
 	additem ITEM_BLACK_FLUTE, 1
-# 152 "data/scripts/debug.pory"
+# 209 "data/scripts/debug.pory"
 	additem ITEM_POKE_BALL, 1
-# 153 "data/scripts/debug.pory"
+# 210 "data/scripts/debug.pory"
 	additem ITEM_ZINC, 1
-# 154 "data/scripts/debug.pory"
+# 211 "data/scripts/debug.pory"
 	additem ITEM_TINY_MUSHROOM, 1
-# 155 "data/scripts/debug.pory"
+# 212 "data/scripts/debug.pory"
 	additem ITEM_FIRIUM_Z, 1
 	end
 
 
 Debug_EventScript_Script_2::
-# 161 "data/scripts/debug.pory"
-	callnative ClearBag
-# 162 "data/scripts/debug.pory"
-	additem ITEM_X_ATTACK, 1
-# 163 "data/scripts/debug.pory"
-	additem ITEM_X_DEFENSE, 1
-# 164 "data/scripts/debug.pory"
-	additem ITEM_X_SP_ATK, 1
-# 165 "data/scripts/debug.pory"
-	additem ITEM_X_SP_DEF, 1
-# 166 "data/scripts/debug.pory"
-	additem ITEM_X_SPEED, 1
-# 167 "data/scripts/debug.pory"
-	additem ITEM_FOCUS_SASH, 1
-# 168 "data/scripts/debug.pory"
-	additem ITEM_ORAN_BERRY, 1
-# 169 "data/scripts/debug.pory"
-	additem ITEM_STARF_BERRY, 1
-# 170 "data/scripts/debug.pory"
-	additem ITEM_PECHA_BERRY, 1
-# 171 "data/scripts/debug.pory"
-	additem ITEM_RAWST_BERRY, 1
-# 172 "data/scripts/debug.pory"
-	additem ITEM_ASPEAR_BERRY, 1
-# 173 "data/scripts/debug.pory"
-	additem ITEM_LEPPA_BERRY, 1
-# 174 "data/scripts/debug.pory"
-	additem ITEM_ESCAPE_ROPE, 1
-# 175 "data/scripts/debug.pory"
-	additem ITEM_MACH_BIKE, 1
-# 176 "data/scripts/debug.pory"
-	additem ITEM_HEXORB, 1
-# 177 "data/scripts/debug.pory"
-	additem ITEM_SCANNER, 1
-# 178 "data/scripts/debug.pory"
-	additem ITEM_FLY_TOOL, 1
-# 179 "data/scripts/debug.pory"
-	additem ITEM_ACRO_BIKE, 1
-# 180 "data/scripts/debug.pory"
-	additem ITEM_ROTOM_CATALOG, 1
-# 181 "data/scripts/debug.pory"
-	additem ITEM_SUPER_POTION, 1
-# 182 "data/scripts/debug.pory"
-	additem ITEM_HYPER_POTION, 1
-# 183 "data/scripts/debug.pory"
-	additem ITEM_MAX_POTION, 1
-# 184 "data/scripts/debug.pory"
-	additem ITEM_FULL_RESTORE, 1
-# 185 "data/scripts/debug.pory"
-	additem ITEM_REVIVE, 1
-# 186 "data/scripts/debug.pory"
-	additem ITEM_MAX_REVIVE, 1
-# 187 "data/scripts/debug.pory"
-	additem ITEM_VENUSAURITE, 1
-# 188 "data/scripts/debug.pory"
-	additem ITEM_CHARIZARDITE_X, 1
-# 189 "data/scripts/debug.pory"
-	additem ITEM_CHARIZARDITE_Y, 1
-# 190 "data/scripts/debug.pory"
-	additem ITEM_BLASTOISINITE, 1
-# 191 "data/scripts/debug.pory"
-	additem ITEM_BEEDRILLITE, 1
-# 192 "data/scripts/debug.pory"
-	additem ITEM_PIDGEOTITE, 1
-# 193 "data/scripts/debug.pory"
-	additem ITEM_BLACK_FLUTE, 1
-# 194 "data/scripts/debug.pory"
-	additem ITEM_WHITE_FLUTE, 1
-# 195 "data/scripts/debug.pory"
-	additem ITEM_REPEL, 1
-# 196 "data/scripts/debug.pory"
-	additem ITEM_SUPER_REPEL, 1
-# 197 "data/scripts/debug.pory"
-	additem ITEM_MAX_REPEL, 1
-# 198 "data/scripts/debug.pory"
-	additem ITEM_LURE, 1
-# 199 "data/scripts/debug.pory"
-	additem ITEM_POKE_BALL, 1
-# 200 "data/scripts/debug.pory"
-	additem ITEM_GREAT_BALL, 1
-# 201 "data/scripts/debug.pory"
-	additem ITEM_ULTRA_BALL, 1
-# 202 "data/scripts/debug.pory"
-	additem ITEM_MASTER_BALL, 1
-# 203 "data/scripts/debug.pory"
-	additem ITEM_PREMIER_BALL, 1
-# 204 "data/scripts/debug.pory"
-	additem ITEM_HEAL_BALL, 1
-# 205 "data/scripts/debug.pory"
-	additem ITEM_ZINC, 1
-# 206 "data/scripts/debug.pory"
-	additem ITEM_ABILITY_CAPSULE, 1
-# 207 "data/scripts/debug.pory"
-	additem ITEM_PP_UP, 1
-# 208 "data/scripts/debug.pory"
-	additem ITEM_PP_MAX, 1
-# 209 "data/scripts/debug.pory"
-	additem ITEM_HEALTH_FEATHER, 1
-# 210 "data/scripts/debug.pory"
-	additem ITEM_RARE_CANDY, 1
-# 211 "data/scripts/debug.pory"
-	additem ITEM_TINY_MUSHROOM, 1
-# 212 "data/scripts/debug.pory"
-	additem ITEM_BIG_MUSHROOM, 1
-# 213 "data/scripts/debug.pory"
-	additem ITEM_BALM_MUSHROOM, 1
-# 214 "data/scripts/debug.pory"
-	additem ITEM_PEARL, 1
-# 215 "data/scripts/debug.pory"
-	additem ITEM_BIG_PEARL, 1
-# 216 "data/scripts/debug.pory"
-	additem ITEM_PEARL_STRING, 1
-# 217 "data/scripts/debug.pory"
-	additem ITEM_FIRIUM_Z, 1
-# 218 "data/scripts/debug.pory"
-	additem ITEM_WATERIUM_Z, 1
 # 219 "data/scripts/debug.pory"
-	additem ITEM_ELECTRIUM_Z, 1
+	callnative ClearBag
 # 220 "data/scripts/debug.pory"
-	additem ITEM_GRASSIUM_Z, 1
+	additem ITEM_X_ATTACK, 1
 # 221 "data/scripts/debug.pory"
-	additem ITEM_ICIUM_Z, 1
+	additem ITEM_X_DEFENSE, 1
 # 222 "data/scripts/debug.pory"
-	additem ITEM_FIGHTINIUM_Z, 1
+	additem ITEM_X_SP_ATK, 1
 # 223 "data/scripts/debug.pory"
-	additem ITEM_TM429, 1
+	additem ITEM_X_SP_DEF, 1
 # 224 "data/scripts/debug.pory"
-	additem ITEM_TM430, 1
+	additem ITEM_X_SPEED, 1
 # 225 "data/scripts/debug.pory"
-	additem ITEM_TM431, 1
+	additem ITEM_FOCUS_SASH, 1
 # 226 "data/scripts/debug.pory"
-	additem ITEM_TM432, 1
+	additem ITEM_ORAN_BERRY, 1
 # 227 "data/scripts/debug.pory"
-	additem ITEM_TM433, 1
+	additem ITEM_STARF_BERRY, 1
 # 228 "data/scripts/debug.pory"
+	additem ITEM_PECHA_BERRY, 1
+# 229 "data/scripts/debug.pory"
+	additem ITEM_RAWST_BERRY, 1
+# 230 "data/scripts/debug.pory"
+	additem ITEM_ASPEAR_BERRY, 1
+# 231 "data/scripts/debug.pory"
+	additem ITEM_LEPPA_BERRY, 1
+# 232 "data/scripts/debug.pory"
+	additem ITEM_ESCAPE_ROPE, 1
+# 233 "data/scripts/debug.pory"
+	additem ITEM_MACH_BIKE, 1
+# 234 "data/scripts/debug.pory"
+	additem ITEM_HEXORB, 1
+# 235 "data/scripts/debug.pory"
+	additem ITEM_SCANNER, 1
+# 236 "data/scripts/debug.pory"
+	additem ITEM_FLY_TOOL, 1
+# 237 "data/scripts/debug.pory"
+	additem ITEM_ACRO_BIKE, 1
+# 238 "data/scripts/debug.pory"
+	additem ITEM_ROTOM_CATALOG, 1
+# 239 "data/scripts/debug.pory"
+	additem ITEM_SUPER_POTION, 1
+# 240 "data/scripts/debug.pory"
+	additem ITEM_HYPER_POTION, 1
+# 241 "data/scripts/debug.pory"
+	additem ITEM_MAX_POTION, 1
+# 242 "data/scripts/debug.pory"
+	additem ITEM_FULL_RESTORE, 1
+# 243 "data/scripts/debug.pory"
+	additem ITEM_REVIVE, 1
+# 244 "data/scripts/debug.pory"
+	additem ITEM_MAX_REVIVE, 1
+# 245 "data/scripts/debug.pory"
+	additem ITEM_VENUSAURITE, 1
+# 246 "data/scripts/debug.pory"
+	additem ITEM_CHARIZARDITE_X, 1
+# 247 "data/scripts/debug.pory"
+	additem ITEM_CHARIZARDITE_Y, 1
+# 248 "data/scripts/debug.pory"
+	additem ITEM_BLASTOISINITE, 1
+# 249 "data/scripts/debug.pory"
+	additem ITEM_BEEDRILLITE, 1
+# 250 "data/scripts/debug.pory"
+	additem ITEM_PIDGEOTITE, 1
+# 251 "data/scripts/debug.pory"
+	additem ITEM_BLACK_FLUTE, 1
+# 252 "data/scripts/debug.pory"
+	additem ITEM_WHITE_FLUTE, 1
+# 253 "data/scripts/debug.pory"
+	additem ITEM_REPEL, 1
+# 254 "data/scripts/debug.pory"
+	additem ITEM_SUPER_REPEL, 1
+# 255 "data/scripts/debug.pory"
+	additem ITEM_MAX_REPEL, 1
+# 256 "data/scripts/debug.pory"
+	additem ITEM_LURE, 1
+# 257 "data/scripts/debug.pory"
+	additem ITEM_POKE_BALL, 1
+# 258 "data/scripts/debug.pory"
+	additem ITEM_GREAT_BALL, 1
+# 259 "data/scripts/debug.pory"
+	additem ITEM_ULTRA_BALL, 1
+# 260 "data/scripts/debug.pory"
+	additem ITEM_MASTER_BALL, 1
+# 261 "data/scripts/debug.pory"
+	additem ITEM_PREMIER_BALL, 1
+# 262 "data/scripts/debug.pory"
+	additem ITEM_HEAL_BALL, 1
+# 263 "data/scripts/debug.pory"
+	additem ITEM_ZINC, 1
+# 264 "data/scripts/debug.pory"
+	additem ITEM_ABILITY_CAPSULE, 1
+# 265 "data/scripts/debug.pory"
+	additem ITEM_PP_UP, 1
+# 266 "data/scripts/debug.pory"
+	additem ITEM_PP_MAX, 1
+# 267 "data/scripts/debug.pory"
+	additem ITEM_HEALTH_FEATHER, 1
+# 268 "data/scripts/debug.pory"
+	additem ITEM_RARE_CANDY, 1
+# 269 "data/scripts/debug.pory"
+	additem ITEM_TINY_MUSHROOM, 1
+# 270 "data/scripts/debug.pory"
+	additem ITEM_BIG_MUSHROOM, 1
+# 271 "data/scripts/debug.pory"
+	additem ITEM_BALM_MUSHROOM, 1
+# 272 "data/scripts/debug.pory"
+	additem ITEM_PEARL, 1
+# 273 "data/scripts/debug.pory"
+	additem ITEM_BIG_PEARL, 1
+# 274 "data/scripts/debug.pory"
+	additem ITEM_PEARL_STRING, 1
+# 275 "data/scripts/debug.pory"
+	additem ITEM_FIRIUM_Z, 1
+# 276 "data/scripts/debug.pory"
+	additem ITEM_WATERIUM_Z, 1
+# 277 "data/scripts/debug.pory"
+	additem ITEM_ELECTRIUM_Z, 1
+# 278 "data/scripts/debug.pory"
+	additem ITEM_GRASSIUM_Z, 1
+# 279 "data/scripts/debug.pory"
+	additem ITEM_ICIUM_Z, 1
+# 280 "data/scripts/debug.pory"
+	additem ITEM_FIGHTINIUM_Z, 1
+# 281 "data/scripts/debug.pory"
+	additem ITEM_TM429, 1
+# 282 "data/scripts/debug.pory"
+	additem ITEM_TM430, 1
+# 283 "data/scripts/debug.pory"
+	additem ITEM_TM431, 1
+# 284 "data/scripts/debug.pory"
+	additem ITEM_TM432, 1
+# 285 "data/scripts/debug.pory"
+	additem ITEM_TM433, 1
+# 286 "data/scripts/debug.pory"
 	additem ITEM_TM434, 1
 	end
 
 
 Debug_EventScript_Script_3::
-# 234 "data/scripts/debug.pory"
-	callnative ClearBag
-# 235 "data/scripts/debug.pory"
-	additem ITEM_PECHA_BERRY, 1
-# 236 "data/scripts/debug.pory"
-	additem ITEM_CHERI_BERRY, 99
-# 237 "data/scripts/debug.pory"
-	additem ITEM_CHESTO_BERRY, 1
-# 238 "data/scripts/debug.pory"
-	additem ITEM_RAWST_BERRY, 3
-# 239 "data/scripts/debug.pory"
-	additem ITEM_ASPEAR_BERRY, 5
 	end
 
 
 Debug_EventScript_Script_4::
-# 245 "data/scripts/debug.pory"
+# 297 "data/scripts/debug.pory"
 	additem ITEM_LIECHI_BERRY, 4
 	end
 
 
 Debug_EventScript_Script_5::
-# 251 "data/scripts/debug.pory"
+# 303 "data/scripts/debug.pory"
 	givemon SPECIES_ROTOM, 50, 0
-# 252 "data/scripts/debug.pory"
+# 304 "data/scripts/debug.pory"
 	setwildbattle SPECIES_RATICATE, 50, 0
-# 253 "data/scripts/debug.pory"
+# 305 "data/scripts/debug.pory"
 	dowildbattle
 	end
 
 
 Debug_EventScript_Script_6::
-# 259 "data/scripts/debug.pory"
+# 311 "data/scripts/debug.pory"
 	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
 	end
 
@@ -559,1260 +547,708 @@ Debug_EventScript_Script_10::
 
 
 Debug_CheckSaveBlock::
-# 253 "data/scripts/debug.pory"
+# 337 "data/scripts/debug.pory"
 	callnative CheckSaveBlock1Size
-# 254 "data/scripts/debug.pory"
+# 338 "data/scripts/debug.pory"
 	msgbox Debug_CheckSaveBlock_Text_0, MSGBOX_DEFAULT
-# 255 "data/scripts/debug.pory"
+# 339 "data/scripts/debug.pory"
 	callnative CheckSaveBlock2Size
-# 256 "data/scripts/debug.pory"
+# 340 "data/scripts/debug.pory"
 	msgbox Debug_CheckSaveBlock_Text_1, MSGBOX_DEFAULT
-# 257 "data/scripts/debug.pory"
+# 341 "data/scripts/debug.pory"
 	callnative CheckSaveBlock3Size
-# 258 "data/scripts/debug.pory"
+# 342 "data/scripts/debug.pory"
 	msgbox Debug_CheckSaveBlock_Text_2, MSGBOX_DEFAULT
-# 259 "data/scripts/debug.pory"
+# 343 "data/scripts/debug.pory"
 	callnative CheckPokemonStorageSize
-# 260 "data/scripts/debug.pory"
+# 344 "data/scripts/debug.pory"
 	msgbox Debug_CheckSaveBlock_Text_3, MSGBOX_DEFAULT
-# 261 "data/scripts/debug.pory"
+# 345 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_CheckROMSpace::
-# 267 "data/scripts/debug.pory"
+# 351 "data/scripts/debug.pory"
 	callnative CheckROMSize
-# 268 "data/scripts/debug.pory"
+# 352 "data/scripts/debug.pory"
 	msgbox Debug_CheckROMSpace_Text_0, MSGBOX_DEFAULT
-# 269 "data/scripts/debug.pory"
+# 353 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_HatchAnEgg::
-# 275 "data/scripts/debug.pory"
+# 359 "data/scripts/debug.pory"
 	lockall
-# 276 "data/scripts/debug.pory"
+# 360 "data/scripts/debug.pory"
 	getpartysize
-# 277 "data/scripts/debug.pory"
+# 361 "data/scripts/debug.pory"
 	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
-# 278 "data/scripts/debug.pory"
+# 362 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 279 "data/scripts/debug.pory"
+# 363 "data/scripts/debug.pory"
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_HatchAnEgg_End
-# 280 "data/scripts/debug.pory"
+# 364 "data/scripts/debug.pory"
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 281 "data/scripts/debug.pory"
+# 365 "data/scripts/debug.pory"
 	goto_if_ne VAR_RESULT, SPECIES_EGG, DebugScript_HatchAnEgg_CantForceHatch
-# 282 "data/scripts/debug.pory"
+# 366 "data/scripts/debug.pory"
 	special EggHatch
 	return
 
 
 Debug_HatchAnEgg_End::
-# 286 "data/scripts/debug.pory"
+# 370 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_NoPokemon::
-<<<<<<< HEAD
-# 326 "data/scripts/debug.pory"
+# 376 "data/scripts/debug.pory"
 	msgbox Debug_NoPokemon_Text_0, MSGBOX_DEFAULT
-# 327 "data/scripts/debug.pory"
-=======
-# 292 "data/scripts/debug.pory"
-	msgbox Debug_NoPokemon_Text_0, MSGBOX_DEFAULT
-# 293 "data/scripts/debug.pory"
->>>>>>> main
+# 377 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 DebugScript_HatchAnEgg_CantForceHatch::
-<<<<<<< HEAD
-# 333 "data/scripts/debug.pory"
+# 383 "data/scripts/debug.pory"
 	msgbox DebugScript_HatchAnEgg_CantForceHatch_Text_0, MSGBOX_DEFAULT
-# 334 "data/scripts/debug.pory"
-=======
-# 299 "data/scripts/debug.pory"
-	msgbox DebugScript_HatchAnEgg_CantForceHatch_Text_0, MSGBOX_DEFAULT
-# 300 "data/scripts/debug.pory"
->>>>>>> main
+# 384 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 DebugScript_ZeroDaycareMons::
-<<<<<<< HEAD
-# 340 "data/scripts/debug.pory"
+# 390 "data/scripts/debug.pory"
 	msgbox DebugScript_ZeroDaycareMons_Text_0, MSGBOX_DEFAULT
-# 341 "data/scripts/debug.pory"
-=======
-# 306 "data/scripts/debug.pory"
-	msgbox DebugScript_ZeroDaycareMons_Text_0, MSGBOX_DEFAULT
-# 307 "data/scripts/debug.pory"
->>>>>>> main
+# 391 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 DebugScript_OneDaycareMons::
-<<<<<<< HEAD
-# 347 "data/scripts/debug.pory"
+# 397 "data/scripts/debug.pory"
 	msgbox DebugScript_OneDaycareMons_Text_0, MSGBOX_DEFAULT
-# 348 "data/scripts/debug.pory"
-=======
-# 313 "data/scripts/debug.pory"
-	msgbox DebugScript_OneDaycareMons_Text_0, MSGBOX_DEFAULT
-# 314 "data/scripts/debug.pory"
->>>>>>> main
+# 398 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 DebugScript_DaycareMonsNotCompatible::
-<<<<<<< HEAD
-# 354 "data/scripts/debug.pory"
+# 404 "data/scripts/debug.pory"
 	msgbox DebugScript_DaycareMonsNotCompatible_Text_0, MSGBOX_DEFAULT
-# 355 "data/scripts/debug.pory"
-=======
-# 320 "data/scripts/debug.pory"
-	msgbox DebugScript_DaycareMonsNotCompatible_Text_0, MSGBOX_DEFAULT
-# 321 "data/scripts/debug.pory"
->>>>>>> main
+# 405 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_ShowExpansionVersion::
-<<<<<<< HEAD
-# 361 "data/scripts/debug.pory"
+# 411 "data/scripts/debug.pory"
 	callnative BufferExpansionVersion
-# 362 "data/scripts/debug.pory"
+# 412 "data/scripts/debug.pory"
 	msgbox Debug_ShowExpansionVersion_Text_0, MSGBOX_DEFAULT
-# 363 "data/scripts/debug.pory"
-=======
-# 327 "data/scripts/debug.pory"
-	callnative BufferExpansionVersion
-# 328 "data/scripts/debug.pory"
-	msgbox Debug_ShowExpansionVersion_Text_0, MSGBOX_DEFAULT
-# 329 "data/scripts/debug.pory"
->>>>>>> main
+# 413 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_Follower_NPC_Not_Enabled::
-<<<<<<< HEAD
-# 369 "data/scripts/debug.pory"
+# 419 "data/scripts/debug.pory"
 	msgbox Debug_Follower_NPC_Not_Enabled_Text_0, MSGBOX_DEFAULT
-# 370 "data/scripts/debug.pory"
-=======
-# 335 "data/scripts/debug.pory"
-	msgbox Debug_Follower_NPC_Not_Enabled_Text_0, MSGBOX_DEFAULT
-# 336 "data/scripts/debug.pory"
->>>>>>> main
+# 420 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_Follower_NPC_Event_Script::
-<<<<<<< HEAD
-# 376 "data/scripts/debug.pory"
+# 426 "data/scripts/debug.pory"
 	lock
-# 377 "data/scripts/debug.pory"
+# 427 "data/scripts/debug.pory"
 	facefollowernpc
-# 378 "data/scripts/debug.pory"
+# 428 "data/scripts/debug.pory"
 	msgbox Debug_Follower_NPC_Event_Script_Text_0, MSGBOX_DEFAULT
-# 379 "data/scripts/debug.pory"
-=======
-# 342 "data/scripts/debug.pory"
-	lock
-# 343 "data/scripts/debug.pory"
-	facefollowernpc
-# 344 "data/scripts/debug.pory"
-	msgbox Debug_Follower_NPC_Event_Script_Text_0, MSGBOX_DEFAULT
-# 345 "data/scripts/debug.pory"
->>>>>>> main
+# 429 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_Steven_Multi::
-<<<<<<< HEAD
-# 385 "data/scripts/debug.pory"
+# 435 "data/scripts/debug.pory"
 	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
-# 386 "data/scripts/debug.pory"
-=======
-# 351 "data/scripts/debug.pory"
-	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
-# 352 "data/scripts/debug.pory"
+# 436 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_EventScript_WallyTutorial::
-# 358 "data/scripts/debug.pory"
+# 442 "data/scripts/debug.pory"
 	special SavePlayerParty
-# 359 "data/scripts/debug.pory"
+# 443 "data/scripts/debug.pory"
 	special LoadWallyZigzagoon
-# 360 "data/scripts/debug.pory"
+# 444 "data/scripts/debug.pory"
 	special StartWallyTutorialBattle
-# 361 "data/scripts/debug.pory"
+# 445 "data/scripts/debug.pory"
 	special LoadPlayerParty
-# 362 "data/scripts/debug.pory"
->>>>>>> main
+# 446 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_BerryPestsDisabled::
-<<<<<<< HEAD
-# 392 "data/scripts/debug.pory"
+# 452 "data/scripts/debug.pory"
 	msgbox Debug_BerryPestsDisabled_Text_0, MSGBOX_DEFAULT
-# 393 "data/scripts/debug.pory"
-=======
-# 368 "data/scripts/debug.pory"
-	msgbox Debug_BerryPestsDisabled_Text_0, MSGBOX_DEFAULT
-# 369 "data/scripts/debug.pory"
->>>>>>> main
+# 453 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_BerryWeedsDisabled::
-<<<<<<< HEAD
-# 399 "data/scripts/debug.pory"
+# 459 "data/scripts/debug.pory"
 	msgbox Debug_BerryWeedsDisabled_Text_0, MSGBOX_DEFAULT
-# 400 "data/scripts/debug.pory"
-=======
-# 375 "data/scripts/debug.pory"
-	msgbox Debug_BerryWeedsDisabled_Text_0, MSGBOX_DEFAULT
-# 376 "data/scripts/debug.pory"
->>>>>>> main
+# 460 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_EventScript_InflictStatus1::
-<<<<<<< HEAD
-# 408 "data/scripts/debug.pory"
+# 468 "data/scripts/debug.pory"
 	lockall
-# 409 "data/scripts/debug.pory"
+# 469 "data/scripts/debug.pory"
 	getpartysize
-# 410 "data/scripts/debug.pory"
+# 470 "data/scripts/debug.pory"
 	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
-# 411 "data/scripts/debug.pory"
+# 471 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_0, 0
-# 412 "data/scripts/debug.pory"
+# 472 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_1, 1
-# 413 "data/scripts/debug.pory"
+# 473 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_2, 2
-# 414 "data/scripts/debug.pory"
+# 474 "data/scripts/debug.pory"
 	dynmultistack 0, 0, FALSE, 3, FALSE, 0, NULL
-# 415 "data/scripts/debug.pory"
+# 475 "data/scripts/debug.pory"
 	switch VAR_RESULT
-# 417 "data/scripts/debug.pory"
+# 477 "data/scripts/debug.pory"
 	case 0, Debug_EventScript_InflictStatus1_2
-# 418 "data/scripts/debug.pory"
+# 478 "data/scripts/debug.pory"
 	case 1, Debug_EventScript_InflictStatus1_3
-# 419 "data/scripts/debug.pory"
-=======
-# 384 "data/scripts/debug.pory"
-	lockall
-# 385 "data/scripts/debug.pory"
-	getpartysize
-# 386 "data/scripts/debug.pory"
-	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
-# 387 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_0, 0
-# 388 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_1, 1
-# 389 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_2, 2
-# 390 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 3, FALSE, 0, NULL
-# 391 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 393 "data/scripts/debug.pory"
-	case 0, Debug_EventScript_InflictStatus1_2
-# 394 "data/scripts/debug.pory"
-	case 1, Debug_EventScript_InflictStatus1_3
-# 395 "data/scripts/debug.pory"
->>>>>>> main
+# 479 "data/scripts/debug.pory"
 	case 2, Debug_EventScript_InflictStatus1_4
 	return
 
 Debug_EventScript_InflictStatus1_2:
-<<<<<<< HEAD
-# 417 "data/scripts/debug.pory"
-=======
-# 393 "data/scripts/debug.pory"
->>>>>>> main
+# 477 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single
 	return
 
 Debug_EventScript_InflictStatus1_3:
-<<<<<<< HEAD
-# 418 "data/scripts/debug.pory"
-=======
-# 394 "data/scripts/debug.pory"
->>>>>>> main
+# 478 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Party
 	return
 
 Debug_EventScript_InflictStatus1_4:
-<<<<<<< HEAD
-# 419 "data/scripts/debug.pory"
+# 479 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Close
-# 420 "data/scripts/debug.pory"
-=======
-# 395 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Close
-# 396 "data/scripts/debug.pory"
->>>>>>> main
+# 480 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Close
 	return
 
 
 Debug_EventScript_InflictStatus1_Close::
-<<<<<<< HEAD
-# 427 "data/scripts/debug.pory"
-=======
-# 402 "data/scripts/debug.pory"
->>>>>>> main
+# 486 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_InflictStatus1_Single::
-<<<<<<< HEAD
-# 433 "data/scripts/debug.pory"
+# 492 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 434 "data/scripts/debug.pory"
-	waitstate
-# 435 "data/scripts/debug.pory"
+# 493 "data/scripts/debug.pory"
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-# 436 "data/scripts/debug.pory"
+# 494 "data/scripts/debug.pory"
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 437 "data/scripts/debug.pory"
+# 495 "data/scripts/debug.pory"
 	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
-# 438 "data/scripts/debug.pory"
+# 496 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
-# 439 "data/scripts/debug.pory"
+# 497 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
-# 440 "data/scripts/debug.pory"
+# 498 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
-# 441 "data/scripts/debug.pory"
+# 499 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
-# 442 "data/scripts/debug.pory"
+# 500 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
-# 443 "data/scripts/debug.pory"
+# 501 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
-# 444 "data/scripts/debug.pory"
+# 502 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
-# 445 "data/scripts/debug.pory"
+# 503 "data/scripts/debug.pory"
 	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-# 446 "data/scripts/debug.pory"
+# 504 "data/scripts/debug.pory"
 	switch VAR_RESULT
-# 448 "data/scripts/debug.pory"
+# 506 "data/scripts/debug.pory"
 	case 0, Debug_EventScript_InflictStatus1_Single_3
-# 449 "data/scripts/debug.pory"
+# 507 "data/scripts/debug.pory"
 	case 1, Debug_EventScript_InflictStatus1_Single_4
-# 450 "data/scripts/debug.pory"
+# 508 "data/scripts/debug.pory"
 	case 2, Debug_EventScript_InflictStatus1_Single_5
-# 451 "data/scripts/debug.pory"
+# 509 "data/scripts/debug.pory"
 	case 3, Debug_EventScript_InflictStatus1_Single_6
-# 452 "data/scripts/debug.pory"
+# 510 "data/scripts/debug.pory"
 	case 4, Debug_EventScript_InflictStatus1_Single_7
-# 453 "data/scripts/debug.pory"
+# 511 "data/scripts/debug.pory"
 	case 5, Debug_EventScript_InflictStatus1_Single_8
-# 454 "data/scripts/debug.pory"
+# 512 "data/scripts/debug.pory"
 	case 6, Debug_EventScript_InflictStatus1_Single_9
-# 455 "data/scripts/debug.pory"
+# 513 "data/scripts/debug.pory"
 	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Single_10
 Debug_EventScript_InflictStatus1_Single_1:
-# 457 "data/scripts/debug.pory"
-=======
-# 408 "data/scripts/debug.pory"
-	special ChoosePartyMon
-# 409 "data/scripts/debug.pory"
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-# 410 "data/scripts/debug.pory"
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 411 "data/scripts/debug.pory"
-	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
-# 412 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
-# 413 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
-# 414 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
-# 415 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
-# 416 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
-# 417 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
-# 418 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
-# 419 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-# 420 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 422 "data/scripts/debug.pory"
-	case 0, Debug_EventScript_InflictStatus1_Single_3
-# 423 "data/scripts/debug.pory"
-	case 1, Debug_EventScript_InflictStatus1_Single_4
-# 424 "data/scripts/debug.pory"
-	case 2, Debug_EventScript_InflictStatus1_Single_5
-# 425 "data/scripts/debug.pory"
-	case 3, Debug_EventScript_InflictStatus1_Single_6
-# 426 "data/scripts/debug.pory"
-	case 4, Debug_EventScript_InflictStatus1_Single_7
-# 427 "data/scripts/debug.pory"
-	case 5, Debug_EventScript_InflictStatus1_Single_8
-# 428 "data/scripts/debug.pory"
-	case 6, Debug_EventScript_InflictStatus1_Single_9
-# 429 "data/scripts/debug.pory"
-	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Single_10
-Debug_EventScript_InflictStatus1_Single_1:
-# 431 "data/scripts/debug.pory"
->>>>>>> main
+# 515 "data/scripts/debug.pory"
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_3:
-<<<<<<< HEAD
-# 448 "data/scripts/debug.pory"
-=======
-# 422 "data/scripts/debug.pory"
->>>>>>> main
+# 506 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Poison
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_4:
-<<<<<<< HEAD
-# 449 "data/scripts/debug.pory"
-=======
-# 423 "data/scripts/debug.pory"
->>>>>>> main
+# 507 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Paralysis
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_5:
-<<<<<<< HEAD
-# 450 "data/scripts/debug.pory"
-=======
-# 424 "data/scripts/debug.pory"
->>>>>>> main
+# 508 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Sleep
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_6:
-<<<<<<< HEAD
-# 451 "data/scripts/debug.pory"
-=======
-# 425 "data/scripts/debug.pory"
->>>>>>> main
+# 509 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Burn
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_7:
-<<<<<<< HEAD
-# 452 "data/scripts/debug.pory"
-=======
-# 426 "data/scripts/debug.pory"
->>>>>>> main
+# 510 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Freeze
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_8:
-<<<<<<< HEAD
-# 453 "data/scripts/debug.pory"
-=======
-# 427 "data/scripts/debug.pory"
->>>>>>> main
+# 511 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Single_Frostbite
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_9:
-<<<<<<< HEAD
-# 454 "data/scripts/debug.pory"
-=======
-# 428 "data/scripts/debug.pory"
->>>>>>> main
+# 512 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Close
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 Debug_EventScript_InflictStatus1_Single_10:
-<<<<<<< HEAD
-# 455 "data/scripts/debug.pory"
-=======
-# 429 "data/scripts/debug.pory"
->>>>>>> main
+# 513 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Close
 	goto Debug_EventScript_InflictStatus1_Single_1
 
 
-<<<<<<< HEAD
-Debug_EventScript_SetHiddenNature::
-# 463 "data/scripts/debug.pory"
-	special ChoosePartyMon
-# 464 "data/scripts/debug.pory"
-	waitstate
-# 465 "data/scripts/debug.pory"
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-# 466 "data/scripts/debug.pory"
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 467 "data/scripts/debug.pory"
-	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
-# 468 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_0, 0
-# 469 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_1, 1
-# 470 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_2, 2
-# 471 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_3, 3
-# 472 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_4, 4
-# 473 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_5, 5
-# 474 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_6, 6
-# 475 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_7, 7
-# 476 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_8, 8
-# 477 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_9, 9
-# 478 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_10, 10
-# 479 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_11, 11
-# 480 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_12, 12
-# 481 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_13, 13
-# 482 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_14, 14
-# 483 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_15, 15
-# 484 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_16, 16
-# 485 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_17, 17
-# 486 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_18, 18
-# 487 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_19, 19
-# 488 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_20, 20
-# 489 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_21, 21
-# 490 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_22, 22
-# 491 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_23, 23
-# 492 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_SetHiddenNature_Text_24, 24
-# 493 "data/scripts/debug.pory"
-	dynmultistack 0, 0, TRUE, 7, FALSE, 0, NULL
-# 495 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 497 "data/scripts/debug.pory"
-	case MULTI_B_PRESSED, Debug_EventScript_SetHiddenNature_3
-Debug_EventScript_SetHiddenNature_1:
-# 499 "data/scripts/debug.pory"
-	special SetHiddenNature
-# 500 "data/scripts/debug.pory"
-=======
 Debug_EventScript_KoPokemon::
-# 437 "data/scripts/debug.pory"
+# 521 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 438 "data/scripts/debug.pory"
+# 522 "data/scripts/debug.pory"
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-# 439 "data/scripts/debug.pory"
+# 523 "data/scripts/debug.pory"
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 440 "data/scripts/debug.pory"
+# 524 "data/scripts/debug.pory"
 	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
-# 441 "data/scripts/debug.pory"
+# 525 "data/scripts/debug.pory"
 	setko VAR_0x8004
-# 442 "data/scripts/debug.pory"
+# 526 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_SetHiddenNature::
-# 448 "data/scripts/debug.pory"
+# 532 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 449 "data/scripts/debug.pory"
+# 533 "data/scripts/debug.pory"
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-# 450 "data/scripts/debug.pory"
+# 534 "data/scripts/debug.pory"
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-# 451 "data/scripts/debug.pory"
+# 535 "data/scripts/debug.pory"
 	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
-# 452 "data/scripts/debug.pory"
+# 536 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_0, 0
-# 453 "data/scripts/debug.pory"
+# 537 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_1, 1
-# 454 "data/scripts/debug.pory"
+# 538 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_2, 2
-# 455 "data/scripts/debug.pory"
+# 539 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_3, 3
-# 456 "data/scripts/debug.pory"
+# 540 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_4, 4
-# 457 "data/scripts/debug.pory"
+# 541 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_5, 5
-# 458 "data/scripts/debug.pory"
+# 542 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_6, 6
-# 459 "data/scripts/debug.pory"
+# 543 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_7, 7
-# 460 "data/scripts/debug.pory"
+# 544 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_8, 8
-# 461 "data/scripts/debug.pory"
+# 545 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_9, 9
-# 462 "data/scripts/debug.pory"
+# 546 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_10, 10
-# 463 "data/scripts/debug.pory"
+# 547 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_11, 11
-# 464 "data/scripts/debug.pory"
+# 548 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_12, 12
-# 465 "data/scripts/debug.pory"
+# 549 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_13, 13
-# 466 "data/scripts/debug.pory"
+# 550 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_14, 14
-# 467 "data/scripts/debug.pory"
+# 551 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_15, 15
-# 468 "data/scripts/debug.pory"
+# 552 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_16, 16
-# 469 "data/scripts/debug.pory"
+# 553 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_17, 17
-# 470 "data/scripts/debug.pory"
+# 554 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_18, 18
-# 471 "data/scripts/debug.pory"
+# 555 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_19, 19
-# 472 "data/scripts/debug.pory"
+# 556 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_20, 20
-# 473 "data/scripts/debug.pory"
+# 557 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_21, 21
-# 474 "data/scripts/debug.pory"
+# 558 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_22, 22
-# 475 "data/scripts/debug.pory"
+# 559 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_23, 23
-# 476 "data/scripts/debug.pory"
+# 560 "data/scripts/debug.pory"
 	dynmultipush Debug_EventScript_SetHiddenNature_Text_24, 24
-# 477 "data/scripts/debug.pory"
+# 561 "data/scripts/debug.pory"
 	dynmultistack 0, 0, TRUE, 7, FALSE, 0, NULL
-# 479 "data/scripts/debug.pory"
+# 563 "data/scripts/debug.pory"
 	switch VAR_RESULT
-# 481 "data/scripts/debug.pory"
+# 565 "data/scripts/debug.pory"
 	case MULTI_B_PRESSED, Debug_EventScript_SetHiddenNature_3
 Debug_EventScript_SetHiddenNature_1:
-# 483 "data/scripts/debug.pory"
+# 567 "data/scripts/debug.pory"
 	special SetHiddenNature
-# 484 "data/scripts/debug.pory"
->>>>>>> main
+# 568 "data/scripts/debug.pory"
 	releaseall
 	end
 
 Debug_EventScript_SetHiddenNature_3:
-<<<<<<< HEAD
-# 497 "data/scripts/debug.pory"
-=======
-# 481 "data/scripts/debug.pory"
->>>>>>> main
+# 565 "data/scripts/debug.pory"
 	goto Debug_EventScript_InflictStatus1_Close
 	goto Debug_EventScript_SetHiddenNature_1
 
 
 Debug_EventScript_SetAbility::
-<<<<<<< HEAD
-# 506 "data/scripts/debug.pory"
+# 574 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 507 "data/scripts/debug.pory"
-	waitstate
-# 508 "data/scripts/debug.pory"
+# 575 "data/scripts/debug.pory"
 	callnative DebugNative_GetAbilityNames
-# 509 "data/scripts/debug.pory"
+# 576 "data/scripts/debug.pory"
 	dynmultipush gStringVar1, 0
-# 510 "data/scripts/debug.pory"
+# 577 "data/scripts/debug.pory"
 	dynmultipush gStringVar2, 1
-# 511 "data/scripts/debug.pory"
+# 578 "data/scripts/debug.pory"
 	dynmultipush gStringVar3, 2
-# 512 "data/scripts/debug.pory"
+# 579 "data/scripts/debug.pory"
 	dynmultistack 0, 0, FALSE, 3 FALSE, 0, NULL
-# 513 "data/scripts/debug.pory"
+# 580 "data/scripts/debug.pory"
 	switch VAR_RESULT
-# 515 "data/scripts/debug.pory"
+# 582 "data/scripts/debug.pory"
 	case MULTI_B_PRESSED, Debug_EventScript_SetAbility_3
 Debug_EventScript_SetAbility_1:
-# 517 "data/scripts/debug.pory"
+# 584 "data/scripts/debug.pory"
 	special SetAbility
-# 518 "data/scripts/debug.pory"
-=======
-# 490 "data/scripts/debug.pory"
-	special ChoosePartyMon
-# 491 "data/scripts/debug.pory"
-	callnative DebugNative_GetAbilityNames
-# 492 "data/scripts/debug.pory"
-	dynmultipush gStringVar1, 0
-# 493 "data/scripts/debug.pory"
-	dynmultipush gStringVar2, 1
-# 494 "data/scripts/debug.pory"
-	dynmultipush gStringVar3, 2
-# 495 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 3 FALSE, 0, NULL
-# 496 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 498 "data/scripts/debug.pory"
-	case MULTI_B_PRESSED, Debug_EventScript_SetAbility_3
-Debug_EventScript_SetAbility_1:
-# 500 "data/scripts/debug.pory"
-	special SetAbility
-# 501 "data/scripts/debug.pory"
->>>>>>> main
+# 585 "data/scripts/debug.pory"
 	goto Debug_EventScript_SetAbilityClose
 	return
 
 Debug_EventScript_SetAbility_3:
-<<<<<<< HEAD
-# 515 "data/scripts/debug.pory"
-=======
-# 498 "data/scripts/debug.pory"
->>>>>>> main
+# 582 "data/scripts/debug.pory"
 	goto Debug_EventScript_SetAbilityClose
 	goto Debug_EventScript_SetAbility_1
 
 
 Debug_EventScript_SetAbilityClose::
-<<<<<<< HEAD
-# 523 "data/scripts/debug.pory"
-=======
-# 506 "data/scripts/debug.pory"
+# 590 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_SetFriendship::
-# 512 "data/scripts/debug.pory"
+# 596 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 513 "data/scripts/debug.pory"
+# 597 "data/scripts/debug.pory"
 	callnative DebugNative_Party_SetFriendship
-# 514 "data/scripts/debug.pory"
+# 598 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_GivePokerus::
-# 520 "data/scripts/debug.pory"
+# 604 "data/scripts/debug.pory"
 	special ChoosePartyMon
-# 521 "data/scripts/debug.pory"
-	callnative DebugNative_Party_SetPokerus
-# 522 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Poison::
-# 528 "data/scripts/debug.pory"
-	setstatus1 STATUS1_POISON, VAR_0x8004
-# 529 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Paralysis::
-# 535 "data/scripts/debug.pory"
-	setstatus1 STATUS1_PARALYSIS, VAR_0x8004
-# 536 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Sleep::
-# 542 "data/scripts/debug.pory"
-	setstatus1 STATUS1_SLEEP, VAR_0x8004
-# 543 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Burn::
-# 549 "data/scripts/debug.pory"
-	setstatus1 STATUS1_BURN, VAR_0x8004
-# 550 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Freeze::
-# 556 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FREEZE, VAR_0x8004
-# 557 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Frostbite::
-# 563 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FROSTBITE, VAR_0x8004
-# 564 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Party::
-# 570 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
-# 571 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
-# 572 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
-# 573 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
-# 574 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
-# 575 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
-# 576 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
-# 577 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-# 578 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 580 "data/scripts/debug.pory"
-	case 0, Debug_EventScript_InflictStatus1_Party_3
-# 581 "data/scripts/debug.pory"
-	case 1, Debug_EventScript_InflictStatus1_Party_4
-# 582 "data/scripts/debug.pory"
-	case 2, Debug_EventScript_InflictStatus1_Party_5
-# 583 "data/scripts/debug.pory"
-	case 3, Debug_EventScript_InflictStatus1_Party_6
-# 584 "data/scripts/debug.pory"
-	case 4, Debug_EventScript_InflictStatus1_Party_7
-# 585 "data/scripts/debug.pory"
-	case 5, Debug_EventScript_InflictStatus1_Party_8
-# 586 "data/scripts/debug.pory"
-	case 6, Debug_EventScript_InflictStatus1_Party_9
-# 587 "data/scripts/debug.pory"
-	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Party_10
-Debug_EventScript_InflictStatus1_Party_1:
-# 589 "data/scripts/debug.pory"
-	releaseall
-	end
-
-Debug_EventScript_InflictStatus1_Party_3:
-# 580 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Poison
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_4:
-# 581 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Paralysis
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_5:
-# 582 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Sleep
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_6:
-# 583 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Burn
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_7:
-# 584 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Freeze
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_8:
-# 585 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Frostbite
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_9:
-# 586 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Close
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_10:
-# 587 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Close
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-
-Debug_EventScript_InflictStatus1_Party_Poison::
-# 595 "data/scripts/debug.pory"
-	setstatus1 STATUS1_POISON, PARTY_SIZE
-# 596 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Party_Paralysis::
-# 602 "data/scripts/debug.pory"
-	setstatus1 STATUS1_PARALYSIS, PARTY_SIZE
-# 603 "data/scripts/debug.pory"
->>>>>>> main
-	releaseall
-	end
-
-
-<<<<<<< HEAD
-Debug_EventScript_SetFriendship::
-# 529 "data/scripts/debug.pory"
-	special ChoosePartyMon
-# 530 "data/scripts/debug.pory"
-	waitstate
-# 531 "data/scripts/debug.pory"
-	callnative DebugNative_Party_SetFriendship
-# 532 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Poison::
-# 538 "data/scripts/debug.pory"
-	setstatus1 STATUS1_POISON, VAR_0x8004
-# 539 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Paralysis::
-# 545 "data/scripts/debug.pory"
-	setstatus1 STATUS1_PARALYSIS, VAR_0x8004
-# 546 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Sleep::
-# 552 "data/scripts/debug.pory"
-	setstatus1 STATUS1_SLEEP, VAR_0x8004
-# 553 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Burn::
-# 559 "data/scripts/debug.pory"
-	setstatus1 STATUS1_BURN, VAR_0x8004
-# 560 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Freeze::
-# 566 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FREEZE, VAR_0x8004
-# 567 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Single_Frostbite::
-# 573 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FROSTBITE, VAR_0x8004
-# 574 "data/scripts/debug.pory"
-	releaseall
-	end
-
-
-Debug_EventScript_InflictStatus1_Party::
-# 580 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
-# 581 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
-# 582 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
-# 583 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
-# 584 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
-# 585 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
-# 586 "data/scripts/debug.pory"
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
-# 587 "data/scripts/debug.pory"
-	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-# 588 "data/scripts/debug.pory"
-	switch VAR_RESULT
-# 590 "data/scripts/debug.pory"
-	case 0, Debug_EventScript_InflictStatus1_Party_3
-# 591 "data/scripts/debug.pory"
-	case 1, Debug_EventScript_InflictStatus1_Party_4
-# 592 "data/scripts/debug.pory"
-	case 2, Debug_EventScript_InflictStatus1_Party_5
-# 593 "data/scripts/debug.pory"
-	case 3, Debug_EventScript_InflictStatus1_Party_6
-# 594 "data/scripts/debug.pory"
-	case 4, Debug_EventScript_InflictStatus1_Party_7
-# 595 "data/scripts/debug.pory"
-	case 5, Debug_EventScript_InflictStatus1_Party_8
-# 596 "data/scripts/debug.pory"
-	case 6, Debug_EventScript_InflictStatus1_Party_9
-# 597 "data/scripts/debug.pory"
-	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Party_10
-Debug_EventScript_InflictStatus1_Party_1:
-# 599 "data/scripts/debug.pory"
-	releaseall
-	end
-
-Debug_EventScript_InflictStatus1_Party_3:
-# 590 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Poison
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_4:
-# 591 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Paralysis
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_5:
-# 592 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Sleep
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_6:
-# 593 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Burn
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_7:
-# 594 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Freeze
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_8:
-# 595 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Party_Frostbite
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_9:
-# 596 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Close
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-Debug_EventScript_InflictStatus1_Party_10:
-# 597 "data/scripts/debug.pory"
-	goto Debug_EventScript_InflictStatus1_Close
-	goto Debug_EventScript_InflictStatus1_Party_1
-
-
-Debug_EventScript_InflictStatus1_Party_Poison::
 # 605 "data/scripts/debug.pory"
-	setstatus1 STATUS1_POISON, PARTY_SIZE
+	callnative DebugNative_Party_SetPokerus
 # 606 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
-Debug_EventScript_InflictStatus1_Party_Paralysis::
+Debug_EventScript_InflictStatus1_Single_Poison::
 # 612 "data/scripts/debug.pory"
-	setstatus1 STATUS1_PARALYSIS, PARTY_SIZE
+	setstatus1 STATUS1_POISON, VAR_0x8004
 # 613 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
-Debug_EventScript_InflictStatus1_Party_Sleep::
+Debug_EventScript_InflictStatus1_Single_Paralysis::
 # 619 "data/scripts/debug.pory"
-	setstatus1 STATUS1_SLEEP, PARTY_SIZE
+	setstatus1 STATUS1_PARALYSIS, VAR_0x8004
 # 620 "data/scripts/debug.pory"
-=======
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Single_Sleep::
+# 626 "data/scripts/debug.pory"
+	setstatus1 STATUS1_SLEEP, VAR_0x8004
+# 627 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Single_Burn::
+# 633 "data/scripts/debug.pory"
+	setstatus1 STATUS1_BURN, VAR_0x8004
+# 634 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Single_Freeze::
+# 640 "data/scripts/debug.pory"
+	setstatus1 STATUS1_FREEZE, VAR_0x8004
+# 641 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Single_Frostbite::
+# 647 "data/scripts/debug.pory"
+	setstatus1 STATUS1_FROSTBITE, VAR_0x8004
+# 648 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Party::
+# 654 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
+# 655 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
+# 656 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
+# 657 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
+# 658 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
+# 659 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
+# 660 "data/scripts/debug.pory"
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
+# 661 "data/scripts/debug.pory"
+	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
+# 662 "data/scripts/debug.pory"
+	switch VAR_RESULT
+# 664 "data/scripts/debug.pory"
+	case 0, Debug_EventScript_InflictStatus1_Party_3
+# 665 "data/scripts/debug.pory"
+	case 1, Debug_EventScript_InflictStatus1_Party_4
+# 666 "data/scripts/debug.pory"
+	case 2, Debug_EventScript_InflictStatus1_Party_5
+# 667 "data/scripts/debug.pory"
+	case 3, Debug_EventScript_InflictStatus1_Party_6
+# 668 "data/scripts/debug.pory"
+	case 4, Debug_EventScript_InflictStatus1_Party_7
+# 669 "data/scripts/debug.pory"
+	case 5, Debug_EventScript_InflictStatus1_Party_8
+# 670 "data/scripts/debug.pory"
+	case 6, Debug_EventScript_InflictStatus1_Party_9
+# 671 "data/scripts/debug.pory"
+	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Party_10
+Debug_EventScript_InflictStatus1_Party_1:
+# 673 "data/scripts/debug.pory"
+	releaseall
+	end
+
+Debug_EventScript_InflictStatus1_Party_3:
+# 664 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Poison
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_4:
+# 665 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Paralysis
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_5:
+# 666 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Sleep
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_6:
+# 667 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Burn
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_7:
+# 668 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Freeze
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_8:
+# 669 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Party_Frostbite
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_9:
+# 670 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Close
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+Debug_EventScript_InflictStatus1_Party_10:
+# 671 "data/scripts/debug.pory"
+	goto Debug_EventScript_InflictStatus1_Close
+	goto Debug_EventScript_InflictStatus1_Party_1
+
+
+Debug_EventScript_InflictStatus1_Party_Poison::
+# 679 "data/scripts/debug.pory"
+	setstatus1 STATUS1_POISON, PARTY_SIZE
+# 680 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
+Debug_EventScript_InflictStatus1_Party_Paralysis::
+# 686 "data/scripts/debug.pory"
+	setstatus1 STATUS1_PARALYSIS, PARTY_SIZE
+# 687 "data/scripts/debug.pory"
+	releaseall
+	end
+
+
 Debug_EventScript_InflictStatus1_Party_Sleep::
-# 609 "data/scripts/debug.pory"
+# 693 "data/scripts/debug.pory"
 	setstatus1 STATUS1_SLEEP, PARTY_SIZE
-# 610 "data/scripts/debug.pory"
->>>>>>> main
+# 694 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_InflictStatus1_Party_Burn::
-<<<<<<< HEAD
-# 626 "data/scripts/debug.pory"
+# 700 "data/scripts/debug.pory"
 	setstatus1 STATUS1_BURN, PARTY_SIZE
-# 627 "data/scripts/debug.pory"
-=======
-# 616 "data/scripts/debug.pory"
-	setstatus1 STATUS1_BURN, PARTY_SIZE
-# 617 "data/scripts/debug.pory"
->>>>>>> main
+# 701 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_InflictStatus1_Party_Freeze::
-<<<<<<< HEAD
-# 633 "data/scripts/debug.pory"
+# 707 "data/scripts/debug.pory"
 	setstatus1 STATUS1_FREEZE, PARTY_SIZE
-# 634 "data/scripts/debug.pory"
-=======
-# 623 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FREEZE, PARTY_SIZE
-# 624 "data/scripts/debug.pory"
->>>>>>> main
+# 708 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_InflictStatus1_Party_Frostbite::
-<<<<<<< HEAD
-# 640 "data/scripts/debug.pory"
+# 714 "data/scripts/debug.pory"
 	setstatus1 STATUS1_FROSTBITE, PARTY_SIZE
-# 641 "data/scripts/debug.pory"
-=======
-# 630 "data/scripts/debug.pory"
-	setstatus1 STATUS1_FROSTBITE, PARTY_SIZE
-# 631 "data/scripts/debug.pory"
->>>>>>> main
+# 715 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_EWRAMCounters::
-<<<<<<< HEAD
-# 684 "data/scripts/debug.pory"
+# 761 "data/scripts/debug.pory"
 	callnative CheckEWRAMCounters
-# 685 "data/scripts/debug.pory"
+# 762 "data/scripts/debug.pory"
 	msgbox Debug_EventScript_EWRAMCounters_Text_0, MSGBOX_DEFAULT
-# 686 "data/scripts/debug.pory"
-=======
-# 677 "data/scripts/debug.pory"
-	callnative CheckEWRAMCounters
-# 678 "data/scripts/debug.pory"
-	msgbox Debug_EventScript_EWRAMCounters_Text_0, MSGBOX_DEFAULT
-# 679 "data/scripts/debug.pory"
->>>>>>> main
+# 763 "data/scripts/debug.pory"
 	release
 	end
 
 
 Debug_PrintFontTest::
-<<<<<<< HEAD
-# 692 "data/scripts/debug.pory"
+# 769 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_0, MSGBOX_DEFAULT
-# 693 "data/scripts/debug.pory"
+# 770 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_1, MSGBOX_DEFAULT
-# 694 "data/scripts/debug.pory"
+# 771 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_2, MSGBOX_DEFAULT
-# 695 "data/scripts/debug.pory"
+# 772 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_3, MSGBOX_DEFAULT
-# 696 "data/scripts/debug.pory"
+# 773 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_4, MSGBOX_DEFAULT
-# 697 "data/scripts/debug.pory"
+# 774 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_5, MSGBOX_DEFAULT
-# 698 "data/scripts/debug.pory"
+# 775 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_6, MSGBOX_DEFAULT
-# 699 "data/scripts/debug.pory"
+# 776 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_7, MSGBOX_DEFAULT
-# 700 "data/scripts/debug.pory"
+# 777 "data/scripts/debug.pory"
 	msgbox Debug_PrintFontTest_Text_8, MSGBOX_DEFAULT
-# 701 "data/scripts/debug.pory"
-=======
-# 685 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_0, MSGBOX_DEFAULT
-# 686 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_1, MSGBOX_DEFAULT
-# 687 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_2, MSGBOX_DEFAULT
-# 688 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_3, MSGBOX_DEFAULT
-# 689 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_4, MSGBOX_DEFAULT
-# 690 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_5, MSGBOX_DEFAULT
-# 691 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_6, MSGBOX_DEFAULT
-# 692 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_7, MSGBOX_DEFAULT
-# 693 "data/scripts/debug.pory"
-	msgbox Debug_PrintFontTest_Text_8, MSGBOX_DEFAULT
-# 694 "data/scripts/debug.pory"
->>>>>>> main
+# 778 "data/scripts/debug.pory"
 	releaseall
 	end
 
 
 Debug_EventScript_FontTest::
-<<<<<<< HEAD
-# 707 "data/scripts/debug.pory"
+# 784 "data/scripts/debug.pory"
 	lockall
-# 708 "data/scripts/debug.pory"
-=======
-# 700 "data/scripts/debug.pory"
-	lockall
-# 701 "data/scripts/debug.pory"
->>>>>>> main
+# 785 "data/scripts/debug.pory"
 	goto Debug_PrintFontTest
 	return
 
 
 Debug_EventScript_TellTheTime::
-<<<<<<< HEAD
-# 725 "data/scripts/debug.pory"
+# 802 "data/scripts/debug.pory"
 	callnative DebugMenu_CalculateTime
-# 726 "data/scripts/debug.pory"
+# 803 "data/scripts/debug.pory"
 	msgbox Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT
-# 727 "data/scripts/debug.pory"
+# 804 "data/scripts/debug.pory"
 	waitmessage
-# 728 "data/scripts/debug.pory"
-=======
-# 718 "data/scripts/debug.pory"
-	callnative DebugMenu_CalculateTime
-# 719 "data/scripts/debug.pory"
-	msgbox Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT
-# 720 "data/scripts/debug.pory"
-	waitmessage
-# 721 "data/scripts/debug.pory"
->>>>>>> main
+# 805 "data/scripts/debug.pory"
 	closemessage
 	end
 
 
 Debug_EventScript_PrintTimeOfDay::
-<<<<<<< HEAD
-# 734 "data/scripts/debug.pory"
+# 811 "data/scripts/debug.pory"
 	callnative DebugMenu_CalculateTimeOfDay
-# 735 "data/scripts/debug.pory"
+# 812 "data/scripts/debug.pory"
 	msgbox Debug_EventScript_PrintTimeOfDay_Text_0, MSGBOX_DEFAULT
-# 736 "data/scripts/debug.pory"
+# 813 "data/scripts/debug.pory"
 	waitmessage
-# 737 "data/scripts/debug.pory"
-=======
-# 727 "data/scripts/debug.pory"
-	callnative DebugMenu_CalculateTimeOfDay
-# 728 "data/scripts/debug.pory"
-	msgbox Debug_EventScript_PrintTimeOfDay_Text_0, MSGBOX_DEFAULT
-# 729 "data/scripts/debug.pory"
-	waitmessage
-# 730 "data/scripts/debug.pory"
->>>>>>> main
+# 814 "data/scripts/debug.pory"
 	closemessage
 	end
 
 
 Debug_EventScript_FakeRTCNotEnabled::
-<<<<<<< HEAD
-# 743 "data/scripts/debug.pory"
+# 820 "data/scripts/debug.pory"
 	msgbox Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT
-# 744 "data/scripts/debug.pory"
+# 821 "data/scripts/debug.pory"
 	waitmessage
-# 745 "data/scripts/debug.pory"
-=======
-# 736 "data/scripts/debug.pory"
-	msgbox Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT
-# 737 "data/scripts/debug.pory"
-	waitmessage
-# 738 "data/scripts/debug.pory"
->>>>>>> main
+# 822 "data/scripts/debug.pory"
 	closemessage
 	return
 
@@ -1842,615 +1278,359 @@ Debug_BoxFilledMessage_Text_0:
 Debug_EventScript_CheckEVs_Text_0:
 # 170 "data/scripts/debug.pory"
 	.string "ATK EVs: {STR_VAR_1}, SPATK EVs:\n"
-	.string "{STR_VAR_2}, SPEED EVs:\l"
+	.string "{STR_VAR_2}, SPEED EVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckEVs_Text_1:
 # 172 "data/scripts/debug.pory"
 	.string "HP EVs: {STR_VAR_1}, DEF EVs:\n"
-	.string "{STR_VAR_2}, SPDEF EVs:\l"
+	.string "{STR_VAR_2}, SPDEF EVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs_Text_0:
 # 189 "data/scripts/debug.pory"
 	.string "ATK IVs: {STR_VAR_1}, SPATK IVs:\n"
-	.string "{STR_VAR_2}, SPEED IVs:\l"
+	.string "{STR_VAR_2}, SPEED IVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs_Text_1:
 # 191 "data/scripts/debug.pory"
 	.string "HP IVs: {STR_VAR_1}, DEF IVs:\n"
-	.string "{STR_VAR_2}, SPDEF IVs:\l"
+	.string "{STR_VAR_2}, SPDEF IVs:\n"
 	.string "{STR_VAR_3}$"
 
 Debug_CheckSaveBlock_Text_0:
-<<<<<<< HEAD
-# 286 "data/scripts/debug.pory"
-=======
-# 254 "data/scripts/debug.pory"
->>>>>>> main
+# 338 "data/scripts/debug.pory"
 	.string "SaveBlock1 size:\n"
 	.string "{STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_CheckSaveBlock_Text_1:
-<<<<<<< HEAD
-# 288 "data/scripts/debug.pory"
-=======
-# 256 "data/scripts/debug.pory"
->>>>>>> main
+# 340 "data/scripts/debug.pory"
 	.string "SaveBlock2 size:\n"
 	.string "{STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_CheckSaveBlock_Text_2:
-<<<<<<< HEAD
-# 290 "data/scripts/debug.pory"
-=======
-# 258 "data/scripts/debug.pory"
->>>>>>> main
+# 342 "data/scripts/debug.pory"
 	.string "SaveBlock3 size:\n"
 	.string "{STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_CheckSaveBlock_Text_3:
-<<<<<<< HEAD
-# 292 "data/scripts/debug.pory"
-=======
-# 260 "data/scripts/debug.pory"
->>>>>>> main
+# 344 "data/scripts/debug.pory"
 	.string "{PKMN}Storage size:\n"
 	.string "{STR_VAR_1}b/{STR_VAR_2}b.\n"
 	.string "Free space: {STR_VAR_3}b.$"
 
 Debug_CheckROMSpace_Text_0:
-<<<<<<< HEAD
-# 300 "data/scripts/debug.pory"
-=======
-# 268 "data/scripts/debug.pory"
->>>>>>> main
+# 352 "data/scripts/debug.pory"
 	.string "ROM size: {STR_VAR_1}MB/32MB.\n"
 	.string "Free space: {STR_VAR_2}MB.$"
 
 Debug_NoPokemon_Text_0:
-<<<<<<< HEAD
-# 326 "data/scripts/debug.pory"
+# 376 "data/scripts/debug.pory"
 	.string "You have no Pokémon nor Eggs.$"
 
 DebugScript_HatchAnEgg_CantForceHatch_Text_0:
-# 333 "data/scripts/debug.pory"
+# 383 "data/scripts/debug.pory"
 	.string "That's not a Pokémon Egg.$"
 
 DebugScript_ZeroDaycareMons_Text_0:
-# 340 "data/scripts/debug.pory"
+# 390 "data/scripts/debug.pory"
 	.string "You have no Pokémon at Daycare.$"
 
 DebugScript_OneDaycareMons_Text_0:
-# 347 "data/scripts/debug.pory"
+# 397 "data/scripts/debug.pory"
 	.string "You have only one Pokémon at Daycare.$"
 
 DebugScript_DaycareMonsNotCompatible_Text_0:
-# 354 "data/scripts/debug.pory"
-=======
-# 292 "data/scripts/debug.pory"
-	.string "You have no Pokémon nor Eggs.$"
-
-DebugScript_HatchAnEgg_CantForceHatch_Text_0:
-# 299 "data/scripts/debug.pory"
-	.string "That's not a Pokémon Egg.$"
-
-DebugScript_ZeroDaycareMons_Text_0:
-# 306 "data/scripts/debug.pory"
-	.string "You have no Pokémon at Daycare.$"
-
-DebugScript_OneDaycareMons_Text_0:
-# 313 "data/scripts/debug.pory"
-	.string "You have only one Pokémon at Daycare.$"
-
-DebugScript_DaycareMonsNotCompatible_Text_0:
-# 320 "data/scripts/debug.pory"
->>>>>>> main
+# 404 "data/scripts/debug.pory"
 	.string "Your Pokémon at Daycare can't\n"
 	.string "have babies together!$"
 
 Debug_ShowExpansionVersion_Text_0:
-<<<<<<< HEAD
-# 362 "data/scripts/debug.pory"
+# 412 "data/scripts/debug.pory"
 	.string "pokeemerald-expansion {STR_VAR_1}$"
 
 Debug_Follower_NPC_Not_Enabled_Text_0:
-# 369 "data/scripts/debug.pory"
-=======
-# 328 "data/scripts/debug.pory"
-	.string "pokeemerald-expansion {STR_VAR_1}$"
-
-Debug_Follower_NPC_Not_Enabled_Text_0:
-# 335 "data/scripts/debug.pory"
->>>>>>> main
+# 419 "data/scripts/debug.pory"
 	.string "Feature unavailable.\n"
 	.string "Set FNPC_ENABLE_NPC_FOLLOWERS to\l"
 	.string "TRUE in 'include/config/follower_npc.h'.$"
 
 Debug_Follower_NPC_Event_Script_Text_0:
-<<<<<<< HEAD
-# 378 "data/scripts/debug.pory"
+# 428 "data/scripts/debug.pory"
 	.string "This is a Follower NPC test.$"
 
 Debug_BerryPestsDisabled_Text_0:
-# 392 "data/scripts/debug.pory"
-=======
-# 344 "data/scripts/debug.pory"
-	.string "This is a Follower NPC test.$"
-
-Debug_BerryPestsDisabled_Text_0:
-# 368 "data/scripts/debug.pory"
->>>>>>> main
+# 452 "data/scripts/debug.pory"
 	.string "OW_BERRY_PESTS is disabled.\n"
 	.string "Unable to force pests onto berry trees.$"
 
 Debug_BerryWeedsDisabled_Text_0:
-<<<<<<< HEAD
-# 399 "data/scripts/debug.pory"
-=======
-# 375 "data/scripts/debug.pory"
->>>>>>> main
+# 459 "data/scripts/debug.pory"
 	.string "OW_BERRY_WEEDS is disabled.\n"
 	.string "Unable to force weeds onto berry trees.$"
 
 Debug_EventScript_InflictStatus1_Text_0:
-<<<<<<< HEAD
-# 411 "data/scripts/debug.pory"
+# 471 "data/scripts/debug.pory"
 	.string "Single$"
 
 Debug_EventScript_InflictStatus1_Text_1:
-# 412 "data/scripts/debug.pory"
+# 472 "data/scripts/debug.pory"
 	.string "Party-wide$"
 
 Debug_EventScript_InflictStatus1_Text_2:
-# 413 "data/scripts/debug.pory"
+# 473 "data/scripts/debug.pory"
 	.string "Close$"
 
 Debug_EventScript_SetHiddenNature_Text_0:
-# 468 "data/scripts/debug.pory"
+# 536 "data/scripts/debug.pory"
 	.string "Hardy$"
 
 Debug_EventScript_SetHiddenNature_Text_1:
-# 469 "data/scripts/debug.pory"
+# 537 "data/scripts/debug.pory"
 	.string "Lonely$"
 
 Debug_EventScript_SetHiddenNature_Text_2:
-# 470 "data/scripts/debug.pory"
+# 538 "data/scripts/debug.pory"
 	.string "Brave$"
 
 Debug_EventScript_SetHiddenNature_Text_3:
-# 471 "data/scripts/debug.pory"
+# 539 "data/scripts/debug.pory"
 	.string "Adamant$"
 
 Debug_EventScript_SetHiddenNature_Text_4:
-# 472 "data/scripts/debug.pory"
+# 540 "data/scripts/debug.pory"
 	.string "Naughty$"
 
 Debug_EventScript_SetHiddenNature_Text_5:
-# 473 "data/scripts/debug.pory"
+# 541 "data/scripts/debug.pory"
 	.string "Bold$"
 
 Debug_EventScript_SetHiddenNature_Text_6:
-# 474 "data/scripts/debug.pory"
+# 542 "data/scripts/debug.pory"
 	.string "Docile$"
 
 Debug_EventScript_SetHiddenNature_Text_7:
-# 475 "data/scripts/debug.pory"
+# 543 "data/scripts/debug.pory"
 	.string "Relaxed$"
 
 Debug_EventScript_SetHiddenNature_Text_8:
-# 476 "data/scripts/debug.pory"
+# 544 "data/scripts/debug.pory"
 	.string "Impish$"
 
 Debug_EventScript_SetHiddenNature_Text_9:
-# 477 "data/scripts/debug.pory"
+# 545 "data/scripts/debug.pory"
 	.string "Lax$"
 
 Debug_EventScript_SetHiddenNature_Text_10:
-# 478 "data/scripts/debug.pory"
+# 546 "data/scripts/debug.pory"
 	.string "Timid$"
 
 Debug_EventScript_SetHiddenNature_Text_11:
-# 479 "data/scripts/debug.pory"
+# 547 "data/scripts/debug.pory"
 	.string "Hasty$"
 
 Debug_EventScript_SetHiddenNature_Text_12:
-# 480 "data/scripts/debug.pory"
+# 548 "data/scripts/debug.pory"
 	.string "Serious$"
 
 Debug_EventScript_SetHiddenNature_Text_13:
-# 481 "data/scripts/debug.pory"
+# 549 "data/scripts/debug.pory"
 	.string "Jolly$"
 
 Debug_EventScript_SetHiddenNature_Text_14:
-# 482 "data/scripts/debug.pory"
+# 550 "data/scripts/debug.pory"
 	.string "Naive$"
 
 Debug_EventScript_SetHiddenNature_Text_15:
-# 483 "data/scripts/debug.pory"
+# 551 "data/scripts/debug.pory"
 	.string "Modest$"
 
 Debug_EventScript_SetHiddenNature_Text_16:
-# 484 "data/scripts/debug.pory"
+# 552 "data/scripts/debug.pory"
 	.string "Mild$"
 
 Debug_EventScript_SetHiddenNature_Text_17:
-# 485 "data/scripts/debug.pory"
+# 553 "data/scripts/debug.pory"
 	.string "Quiet$"
 
 Debug_EventScript_SetHiddenNature_Text_18:
-# 486 "data/scripts/debug.pory"
+# 554 "data/scripts/debug.pory"
 	.string "Bashful$"
 
 Debug_EventScript_SetHiddenNature_Text_19:
-# 487 "data/scripts/debug.pory"
+# 555 "data/scripts/debug.pory"
 	.string "Rash$"
 
 Debug_EventScript_SetHiddenNature_Text_20:
-# 488 "data/scripts/debug.pory"
+# 556 "data/scripts/debug.pory"
 	.string "Calm$"
 
 Debug_EventScript_SetHiddenNature_Text_21:
-# 489 "data/scripts/debug.pory"
+# 557 "data/scripts/debug.pory"
 	.string "Gentle$"
 
 Debug_EventScript_SetHiddenNature_Text_22:
-# 490 "data/scripts/debug.pory"
+# 558 "data/scripts/debug.pory"
 	.string "Sassy$"
 
 Debug_EventScript_SetHiddenNature_Text_23:
-# 491 "data/scripts/debug.pory"
+# 559 "data/scripts/debug.pory"
 	.string "Careful$"
 
 Debug_EventScript_SetHiddenNature_Text_24:
-# 492 "data/scripts/debug.pory"
+# 560 "data/scripts/debug.pory"
 	.string "Quirky$"
 
 Debug_EventScript_EWRAMCounters_Text_0:
-# 685 "data/scripts/debug.pory"
-=======
-# 387 "data/scripts/debug.pory"
-	.string "Single$"
-
-Debug_EventScript_InflictStatus1_Text_1:
-# 388 "data/scripts/debug.pory"
-	.string "Party-wide$"
-
-Debug_EventScript_InflictStatus1_Text_2:
-# 389 "data/scripts/debug.pory"
-	.string "Close$"
-
-Debug_EventScript_SetHiddenNature_Text_0:
-# 452 "data/scripts/debug.pory"
-	.string "Hardy$"
-
-Debug_EventScript_SetHiddenNature_Text_1:
-# 453 "data/scripts/debug.pory"
-	.string "Lonely$"
-
-Debug_EventScript_SetHiddenNature_Text_2:
-# 454 "data/scripts/debug.pory"
-	.string "Brave$"
-
-Debug_EventScript_SetHiddenNature_Text_3:
-# 455 "data/scripts/debug.pory"
-	.string "Adamant$"
-
-Debug_EventScript_SetHiddenNature_Text_4:
-# 456 "data/scripts/debug.pory"
-	.string "Naughty$"
-
-Debug_EventScript_SetHiddenNature_Text_5:
-# 457 "data/scripts/debug.pory"
-	.string "Bold$"
-
-Debug_EventScript_SetHiddenNature_Text_6:
-# 458 "data/scripts/debug.pory"
-	.string "Docile$"
-
-Debug_EventScript_SetHiddenNature_Text_7:
-# 459 "data/scripts/debug.pory"
-	.string "Relaxed$"
-
-Debug_EventScript_SetHiddenNature_Text_8:
-# 460 "data/scripts/debug.pory"
-	.string "Impish$"
-
-Debug_EventScript_SetHiddenNature_Text_9:
-# 461 "data/scripts/debug.pory"
-	.string "Lax$"
-
-Debug_EventScript_SetHiddenNature_Text_10:
-# 462 "data/scripts/debug.pory"
-	.string "Timid$"
-
-Debug_EventScript_SetHiddenNature_Text_11:
-# 463 "data/scripts/debug.pory"
-	.string "Hasty$"
-
-Debug_EventScript_SetHiddenNature_Text_12:
-# 464 "data/scripts/debug.pory"
-	.string "Serious$"
-
-Debug_EventScript_SetHiddenNature_Text_13:
-# 465 "data/scripts/debug.pory"
-	.string "Jolly$"
-
-Debug_EventScript_SetHiddenNature_Text_14:
-# 466 "data/scripts/debug.pory"
-	.string "Naive$"
-
-Debug_EventScript_SetHiddenNature_Text_15:
-# 467 "data/scripts/debug.pory"
-	.string "Modest$"
-
-Debug_EventScript_SetHiddenNature_Text_16:
-# 468 "data/scripts/debug.pory"
-	.string "Mild$"
-
-Debug_EventScript_SetHiddenNature_Text_17:
-# 469 "data/scripts/debug.pory"
-	.string "Quiet$"
-
-Debug_EventScript_SetHiddenNature_Text_18:
-# 470 "data/scripts/debug.pory"
-	.string "Bashful$"
-
-Debug_EventScript_SetHiddenNature_Text_19:
-# 471 "data/scripts/debug.pory"
-	.string "Rash$"
-
-Debug_EventScript_SetHiddenNature_Text_20:
-# 472 "data/scripts/debug.pory"
-	.string "Calm$"
-
-Debug_EventScript_SetHiddenNature_Text_21:
-# 473 "data/scripts/debug.pory"
-	.string "Gentle$"
-
-Debug_EventScript_SetHiddenNature_Text_22:
-# 474 "data/scripts/debug.pory"
-	.string "Sassy$"
-
-Debug_EventScript_SetHiddenNature_Text_23:
-# 475 "data/scripts/debug.pory"
-	.string "Careful$"
-
-Debug_EventScript_SetHiddenNature_Text_24:
-# 476 "data/scripts/debug.pory"
-	.string "Quirky$"
-
-Debug_EventScript_EWRAMCounters_Text_0:
-# 678 "data/scripts/debug.pory"
->>>>>>> main
+# 762 "data/scripts/debug.pory"
 	.string "Follower Steps: {STR_VAR_1}.\n"
 	.string "Fishing Chain: {STR_VAR_2}.$"
 
 Debug_PrintFontTest_Text_0:
-<<<<<<< HEAD
-# 692 "data/scripts/debug.pory"
-=======
-# 685 "data/scripts/debug.pory"
->>>>>>> main
+# 769 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Angel Adept Blind Bodice Clique\n"
-	.string "Coast Dunce Docile Enact Eosin Furlong\l"
+	.string "Coast Dunce Docile Enact Eosin Furlong\n"
 	.string "Focal Gnome Gondola Human Hoist Inlet\l"
 	.string "Iodine Justin Jocose Knoll Koala Linden\l"
-	.string "Loads Milliner Modal Number Nodule\l"
-	.string "Onset Oddball Pneumo Poncho Quanta\l"
-	.string "Qophs Rhone Roman Snout Sodium Tundra\l"
-	.string "Tocsin Uncle Udder Vulcan Vocal Whale\l"
-	.string "Woman Xmas Xenon Yunnan Young Zloty\l"
-	.string "Zodiac.$"
+	.string "Loads Milliner Modal Number Nodule Onset\l"
+	.string "Oddball Pneumo Poncho Quanta Qophs\l"
+	.string "Rhone Roman Snout Sodium Tundra Tocsin\l"
+	.string "Uncle Udder Vulcan Vocal Whale Woman\l"
+	.string "Xmas Xenon Yunnan Young Zloty Zodiac.$"
 
 Debug_PrintFontTest_Text_1:
-<<<<<<< HEAD
-# 693 "data/scripts/debug.pory"
-=======
-# 686 "data/scripts/debug.pory"
->>>>>>> main
+# 770 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Angel angel adept for the nuance loads\n"
-	.string "of the arena cocoa and quaalude. Blind\l"
+	.string "of the arena cocoa and quaalude. Blind\n"
 	.string "blind bodice for the submit oboe of the\l"
-	.string "club snob and abbot. Clique clique\l"
-	.string "coast for the pouch loco of the franc\l"
-	.string "assoc and accede. Dunce dunce docile\l"
-	.string "for the loudness mastodon of the loud\l"
-	.string "statehood and huddle.$"
+	.string "club snob and abbot. Clique clique coast\l"
+	.string "for the pouch loco of the franc assoc\l"
+	.string "and accede. Dunce dunce docile for the\l"
+	.string "loudness mastodon of the loud statehood\l"
+	.string "and huddle.$"
 
 Debug_PrintFontTest_Text_2:
-<<<<<<< HEAD
-# 694 "data/scripts/debug.pory"
-=======
-# 687 "data/scripts/debug.pory"
->>>>>>> main
+# 771 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Enact enact eosin for the quench coed\n"
-	.string "of the pique canoe and bleep. Furlong\l"
-	.string "furlong focal for the genuflect\l"
-	.string "profound of the motif aloof and offers.\l"
-	.string "Gnome gnome gondola for the impugn\l"
-	.string "logos of the unplug analog and smuggle.\l"
-	.string "Human human hoist for the buddhist\l"
-	.string "alcohol of the riyadh caliph and\l"
-	.string "bathhouse.$"
+	.string "of the pique canoe and bleep. Furlong\n"
+	.string "furlong focal for the genuflect profound\l"
+	.string "of the motif aloof and offers. Gnome\l"
+	.string "gnome gondola for the impugn logos of\l"
+	.string "the unplug analog and smuggle. Human\l"
+	.string "human hoist for the buddhist alcohol of\l"
+	.string "the riyadh caliph and bathhouse.$"
 
 Debug_PrintFontTest_Text_3:
-<<<<<<< HEAD
-# 695 "data/scripts/debug.pory"
-=======
-# 688 "data/scripts/debug.pory"
->>>>>>> main
+# 772 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Inlet inlet iodine for the quince\n"
-	.string "champion of the ennui scampi and\l"
-	.string "shiite. Justin justin jocose for the\l"
-	.string "djibouti sojourn of the oranj raj and\l"
-	.string "hajjis. Knoll knoll koala for the\l"
-	.string "banknote lookout of the dybbuk\l"
-	.string "outlook and trekked. Linden linden\l"
-	.string "loads for the ulna monolog of the\l"
+	.string "champion of the ennui scampi and shiite.\n"
+	.string "Justin justin jocose for the djibouti\l"
+	.string "sojourn of the oranj raj and hajjis. Knoll\l"
+	.string "knoll koala for the banknote lookout of\l"
+	.string "the dybbuk outlook and trekked. Linden\l"
+	.string "linden loads for the ulna monolog of the\l"
 	.string "consul menthol and shallot.$"
 
 Debug_PrintFontTest_Text_4:
-<<<<<<< HEAD
-# 696 "data/scripts/debug.pory"
-=======
-# 689 "data/scripts/debug.pory"
->>>>>>> main
+# 773 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Milliner milliner modal for the alumna\n"
-	.string "solomon of the album custom and\l"
-	.string "summon. Number number nodule for the\l"
-	.string "unmade economic of the shotgun bison\l"
-	.string "and tunnel. Onset onset oddball for the\l"
-	.string "abandon podium of the antiquo tempo\l"
-	.string "and moonlit. Pneumo pneumo poncho for\l"
-	.string "the dauphin opossum of the holdup\l"
-	.string "bishop and supplies.$"
+	.string "solomon of the album custom and summon.\n"
+	.string "Number number nodule for the unmade\l"
+	.string "economic of the shotgun bison and\l"
+	.string "tunnel. Onset onset oddball for the\l"
+	.string "abandon podium of the antiquo tempo and\l"
+	.string "moonlit. Pneumo pneumo poncho for the\l"
+	.string "dauphin opossum of the holdup bishop and\l"
+	.string "supplies.$"
 
 Debug_PrintFontTest_Text_5:
-<<<<<<< HEAD
-# 697 "data/scripts/debug.pory"
-=======
-# 690 "data/scripts/debug.pory"
->>>>>>> main
+# 774 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Quanta quanta qophs for the inquest\n"
-	.string "sheqel of the cinq coq and suqqu. Rhone\l"
+	.string "sheqel of the cinq coq and suqqu. Rhone\n"
 	.string "rhone roman for the burnt porous of the\l"
 	.string "lemur clamor and carrot. Snout snout\l"
 	.string "sodium for the ensnare bosom of the\l"
-	.string "genus pathos and missing. Tundra\l"
-	.string "tundra tocsin for the nutmeg isotope\l"
-	.string "of the peasant ingot and ottoman.$"
+	.string "genus pathos and missing. Tundra tundra\l"
+	.string "tocsin for the nutmeg isotope of the\l"
+	.string "peasant ingot and ottoman.$"
 
 Debug_PrintFontTest_Text_6:
-<<<<<<< HEAD
-# 698 "data/scripts/debug.pory"
-=======
-# 691 "data/scripts/debug.pory"
->>>>>>> main
+# 775 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Uncle uncle udder for the dunes cloud\n"
-	.string "of the hindu thou and continuum. Vulcan\l"
-	.string "vulcan vocal for the alluvial ovoid of\l"
-	.string "the yugoslav chekhov and revved. Whale\l"
-	.string "whale woman for the meanwhile blowout\l"
-	.string "of the forepaw meadow and glowworm.\l"
-	.string "Xmas xmas xenon for the bauxite\l"
-	.string "doxology of the tableaux equinox and\l"
-	.string "exxon.$"
+	.string "of the hindu thou and continuum. Vulcan\n"
+	.string "vulcan vocal for the alluvial ovoid of the\l"
+	.string "yugoslav chekhov and revved. Whale whale\l"
+	.string "woman for the meanwhile blowout of the\l"
+	.string "forepaw meadow and glowworm. Xmas xmas\l"
+	.string "xenon for the bauxite doxology of the\l"
+	.string "tableaux equinox and exxon.$"
 
 Debug_PrintFontTest_Text_7:
-<<<<<<< HEAD
-# 699 "data/scripts/debug.pory"
-=======
-# 692 "data/scripts/debug.pory"
->>>>>>> main
+# 776 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}Yunnan yunnan young for the dynamo\n"
-	.string "coyote of the obloquy employ and\l"
-	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
-	.string "ozone of the franz laissez and buzzing.$"
+	.string "coyote of the obloquy employ and sayyid.\n"
+	.string "Zloty zloty zodiac for the gizmo ozone of\l"
+	.string "the franz laissez and buzzing.$"
 
 Debug_PrintFontTest_Text_8:
-<<<<<<< HEAD
-# 700 "data/scripts/debug.pory"
-=======
-# 693 "data/scripts/debug.pory"
->>>>>>> main
+# 777 "data/scripts/debug.pory"
 	.string "{FONT_SMALL_NARROWER}42 × 138 = 5796.\n"
-	.string "Mr Jock, TV quiz PhD: bags 20% fewer\l"
-	.string "lynx at a café; voilà, they're “worth”\l"
-	.string "♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11\l"
-	.string "Nintendo GBA can connect to a Nintendo\l"
-	.string "GameCube console! He claimed-though I\l"
-	.string "don't believe him-to have done so in an\l"
+	.string "Mr Jock, TV quiz PhD: bags 20% fewer lynx\n"
+	.string "at a café; voilà, they're “worth” ♂1/♀1 =\l"
+	.string "¥1. That's 10 + 9 - 8 = 11 Nintendo GBA\l"
+	.string "can connect to a Nintendo GameCube\l"
+	.string "console! He claimed-though I don't\l"
+	.string "believe him-to have done so in an\l"
 	.string "eyes-shut state…?$"
 
 Debug_EventScript_TellTheTime_Text_0:
-<<<<<<< HEAD
-# 726 "data/scripts/debug.pory"
-=======
-# 719 "data/scripts/debug.pory"
->>>>>>> main
+# 803 "data/scripts/debug.pory"
 	.string "Time and date:\n"
-	.string "{STR_VAR_1},\l"
+	.string "{STR_VAR_1},\n"
 	.string "{STR_VAR_2}:{STR_VAR_3}$"
 
 Debug_EventScript_PrintTimeOfDay_Text_0:
-<<<<<<< HEAD
-# 735 "data/scripts/debug.pory"
+# 812 "data/scripts/debug.pory"
 	.string "Time of day: {STR_VAR_1}$"
 
 Debug_EventScript_FakeRTCNotEnabled_Text_0:
-# 743 "data/scripts/debug.pory"
-=======
-# 728 "data/scripts/debug.pory"
-	.string "Time of day: {STR_VAR_1}$"
-
-Debug_EventScript_FakeRTCNotEnabled_Text_0:
-# 736 "data/scripts/debug.pory"
->>>>>>> main
+# 820 "data/scripts/debug.pory"
 	.string "You currently do not have Fake RTC\n"
 	.string "enabled. Please enable it in include/\l"
 	.string "config/overworld.h$"
 
 Debug_EventScript_InflictStatus1_Text_Close::
-<<<<<<< HEAD
-# 645 "data/scripts/debug.pory"
+# 719 "data/scripts/debug.pory"
 	.string "Close$"
 
 Debug_EventScript_InflictStatus1_Text_Poison::
-# 650 "data/scripts/debug.pory"
+# 724 "data/scripts/debug.pory"
 	.string "Poison$"
 
 Debug_EventScript_InflictStatus1_Text_Paralysis::
-# 655 "data/scripts/debug.pory"
+# 729 "data/scripts/debug.pory"
 	.string "Paralysis$"
 
 Debug_EventScript_InflictStatus1_Text_Sleep::
-# 660 "data/scripts/debug.pory"
+# 734 "data/scripts/debug.pory"
 	.string "Sleep$"
 
 Debug_EventScript_InflictStatus1_Text_Burn::
-# 665 "data/scripts/debug.pory"
+# 739 "data/scripts/debug.pory"
 	.string "Burn$"
 
 Debug_EventScript_InflictStatus1_Text_Freeze::
-# 670 "data/scripts/debug.pory"
+# 744 "data/scripts/debug.pory"
 	.string "Freeze$"
 
 Debug_EventScript_InflictStatus1_Text_Frostbite::
-# 675 "data/scripts/debug.pory"
-=======
-# 635 "data/scripts/debug.pory"
-	.string "Close$"
-
-Debug_EventScript_InflictStatus1_Text_Poison::
-# 640 "data/scripts/debug.pory"
-	.string "Poison$"
-
-Debug_EventScript_InflictStatus1_Text_Paralysis::
-# 645 "data/scripts/debug.pory"
-	.string "Paralysis$"
-
-Debug_EventScript_InflictStatus1_Text_Sleep::
-# 650 "data/scripts/debug.pory"
-	.string "Sleep$"
-
-Debug_EventScript_InflictStatus1_Text_Burn::
-# 655 "data/scripts/debug.pory"
-	.string "Burn$"
-
-Debug_EventScript_InflictStatus1_Text_Freeze::
-# 660 "data/scripts/debug.pory"
-	.string "Freeze$"
-
-Debug_EventScript_InflictStatus1_Text_Frostbite::
-# 665 "data/scripts/debug.pory"
->>>>>>> main
+# 749 "data/scripts/debug.pory"
 	.string "Frostbite$"
 
 Debug_EventScript_InflictStatus1_Text_KO::
-# 670 "data/scripts/debug.pory"
+# 754 "data/scripts/debug.pory"
 	.string "KO$"
