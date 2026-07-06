@@ -66,7 +66,7 @@ EventScript_BufferMedicinePocket::
     return
 
 EventScript_BufferBattleItemsPocket::
-    bufferstdstring STR_VAR_3, STDSTRING_BATTLEITEMS
+    bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
     call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
     return
 
@@ -81,7 +81,7 @@ EventScript_BufferBattleItemsZCrystals::
     return
 
 EventScript_BufferBattleItemsMegaStone::
-    bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONE
+    bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
     call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
     return
 
@@ -91,7 +91,7 @@ EventScript_BufferBattleItemsPowerUp::
     return
 
 EventScript_BufferTreasuresPocket::
-    bufferstdstring STR_VAR_3, STDSTRING_TREASURES
+    bufferstdstring STR_VAR_3, STDSTRING_TREASURE
     call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
     return
 // End inventory
@@ -297,7 +297,7 @@ Std_PutItemAway::
 
 EventScript_BufferPutAwayPocketName::
 	switch VAR_RESULT
-	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
+	//case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
 	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
 	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
 	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
@@ -305,7 +305,7 @@ EventScript_BufferPutAwayPocketName::
 	end
 
 EventScript_BufferPutAwayPocketItems::
-	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
+	//bufferstdstring STR_VAR_3, STDSTRING_ITEMS
 	return
 
 EventScript_BufferPutAwayPocketKeyItems::
@@ -323,6 +323,34 @@ EventScript_BufferPutAwayPocketTMCase::
 EventScript_BufferPutAwayPocketBerryPouch::
 	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
 	return
+
+EventScript_BufferPutAwayPocketMedicine::
+    bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
+    return
+
+EventScript_BufferPutAwayPocketBattleItems::
+    bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
+    return
+
+EventScript_BufferPutAwayPocketPowerup::
+    bufferstdstring STR_VAR_3, STDSTRING_POWERUP
+    return
+
+EventScript_BufferPutAwayPocketOther::
+    bufferstdstring STR_VAR_3, STDSTRING_OTHER
+    return
+
+EventScript_BufferPutAwayPocketTreasure::
+    bufferstdstring STR_VAR_3, STDSTRING_TREASURE
+    return
+
+EventScript_BufferPutAwayPocketZCrystals::
+    bufferstdstring STR_VAR_3, STDSTRING_Z_CRYSTALS
+    return
+
+EventScript_BufferPutAwayPocketMegaStones::
+    bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
+    return
 
 EventScript_TryPickUpHiddenCoins::
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_NoCaseForHiddenCoins
