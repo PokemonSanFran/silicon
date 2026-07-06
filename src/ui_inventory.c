@@ -784,7 +784,7 @@ static void Inventory_AddMonPlatforms(bool32 firstColumn, u32 partyIndex, u32 x,
     sprite = &gSprites[spriteIds[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]];
     sprite->x2 = x;
     sprite->y2 = y;
-    
+
     StartSpriteAnim(sprite, firstColumn);
 }
 
@@ -803,7 +803,7 @@ static void UpdateHPPlatformInvisibility(void){
             break;
         }
     }
-    
+
     for (u32 partyIndex = 0; partyIndex <= PARTY_SIZE; partyIndex++)
         gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]].invisible = shouldHideHPPlataform;
 }
@@ -1587,7 +1587,7 @@ static u32 GetExpPercent(u32 partyIndex)
         u8 growthRate = growthRate = gSpeciesInfo[species].growthRate;
         u32 expBetweenLevels  = gExperienceTables[growthRate][level + 1] - gExperienceTables[growthRate][level];
         u32 expSinceLastLevel = currentExp - gExperienceTables[growthRate][level];
-        
+
         return (expSinceLastLevel * 100) / expBetweenLevels;
     }
     else
@@ -2825,52 +2825,52 @@ static const u8 *const sSortTypeStrings[] =
 
 static u8 sSortTypePerPocket[POCKETS_COUNT][NUM_SORT_OPTIONS] =
 {
-    [POCKET_MEDICINE] = { 
+    [POCKET_MEDICINE] = {
         SORT_TYPE_PER_POCKET_DEFAULT,
     },
-    [POCKET_POKE_BALLS] = { 
+    [POCKET_POKE_BALLS] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_BY_AMOUNT,
         ITEM_SORT_CANCEL
     },
-    [POCKET_BATTLE_ITEMS] = { 
+    [POCKET_BATTLE_ITEMS] = {
         SORT_TYPE_PER_POCKET_DEFAULT,
     },
-    [POCKET_POWERUP] = { 
+    [POCKET_POWERUP] = {
         SORT_TYPE_PER_POCKET_DEFAULT,
     },
-    [POCKET_BERRIES] = { 
+    [POCKET_BERRIES] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_BY_AMOUNT,
         ITEM_SORT_CANCEL
     },
-    [POCKET_OTHER] = { 
+    [POCKET_OTHER] = {
         SORT_TYPE_PER_POCKET_DEFAULT,
     },
-    [POCKET_TM_HM] = { 
+    [POCKET_TM_HM] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_BY_NUMBER,
         ITEM_SORT_CANCEL
     },
-    [POCKET_TREASURE] = { 
+    [POCKET_TREASURE] = {
         SORT_TYPE_PER_POCKET_DEFAULT,
     },
-    [POCKET_Z_CRYSTALS] = { 
+    [POCKET_Z_CRYSTALS] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_BY_AMOUNT,
         ITEM_SORT_CANCEL
     },
-    [POCKET_MEGA_STONES] = { 
+    [POCKET_MEGA_STONES] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_BY_AMOUNT,
         ITEM_SORT_CANCEL
     },
-    [POCKET_KEY_ITEMS] = { 
+    [POCKET_KEY_ITEMS] = {
         ITEM_SORT_DEFAULT,
         ITEM_SORT_ALPHABETICALLY,
         ITEM_SORT_CANCEL
@@ -3324,7 +3324,7 @@ static void Inventory_HPBars(void)
         sMenuDataPtr->hpBarWindowVisible = FALSE;
         return;
     }
-    
+
     // Item Description
     x  = 16;
     x2 = 0;
@@ -3357,7 +3357,7 @@ static void Inventory_HPBars(void)
             u32 lineSpacing   = GetFontAttribute(font, FONTATTR_LINE_SPACING);
             u32 letterSpacing = GetFontAttribute(font, FONTATTR_LETTER_SPACING);
             u32 frame = Inventory_ConvertPercentageIntoExpBarFrame(expPercent);
-            
+
             ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3);
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{LV}{STR_VAR_1}"));
             if(level >= MAX_LEVEL)
@@ -5085,7 +5085,7 @@ static void Inventory_EnterMoveMode(u8 taskId)
         gTasks[taskId].func = Task_Inventory_HandleCantMoveInput;
         return;
     }
-    
+
     sMenuDataPtr->temp_itemIdx = gSaveBlock3Ptr->InventoryData.itemIdx;
     sMenuDataPtr->temp_yFirstItem = gSaveBlock3Ptr->InventoryData.yFirstItem;
     CreatePocketBackup();
@@ -5263,18 +5263,19 @@ static u8 InventorySprite_GetDynamicSpriteId(u8 id)
 }
 
 static void UpdateInventoryMoveTypeIDs(void){
-    u8 pocketNum = gSaveBlock3Ptr->InventoryData.pocketNum;
+    u32 pocketNum = gSaveBlock3Ptr->InventoryData.pocketNum;
     struct BagPocket *pocket = &gBagPockets[pocketNum];
-    u8 firstItemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem;
-    u8 numItemsInPocket = sMenuDataPtr->numItems[pocketNum];
+    u32 firstItemIdx = gSaveBlock3Ptr->InventoryData.yFirstItem;
+    u32 numItemsInPocket = sMenuDataPtr->numItems[pocketNum];
 
-    for(u8 idx = 0; idx < INVENTORY_MAX_ITEMS_SHOWN; idx++){
+    for(u32 idx = 0; idx < INVENTORY_MAX_ITEMS_SHOWN; idx++){
         if(gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_TM_HM){
-            u16 itemId = pocket->itemSlots[firstItemIdx + idx].itemId;
-            u16 moveId = GetItemSecondaryId(itemId);
-            u32 moveType = (firstItemIdx + idx == (numItemsInPocket - 1)) ? TYPE_NONE : gMovesInfo[moveId].type;
+            enum Item itemId = pocket->itemSlots[firstItemIdx + idx].itemId;
+            enum Move moveId = GetItemSecondaryId(itemId);
+            enum Type moveType = (firstItemIdx + idx == (numItemsInPocket - 1)) ? TYPE_NONE : gMovesInfo[moveId].type;
 
             gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = moveType;
+            DebugPrintf("type %d");
             DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %S Move: %S", idx, gTypesInfo[moveType].name, GetMoveName(moveId));
         }
         else
@@ -5298,7 +5299,7 @@ static void SpriteCallback_Inventory_TypeRows(struct Sprite *sprite)
 static void InventorySprite_MonMove(u8 idx, s32 x, s32 y)
 {
     u32 spriteId = CreateSprite(&sInventory_MoveBarSpriteTemplate, x, y, 2);
-    
+
     gSprites[spriteId].data[1] = idx;
     SetSubspriteTables(&gSprites[spriteId], sInventory_128x16SubspriteTable);
     sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx] = spriteId;
