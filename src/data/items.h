@@ -6188,6 +6188,43 @@ const struct ItemInfo gItemsInfo[] =
       .iconPalette = gItemIconPalette_Pidgeotite,
     },
 
+    [ITEM_BEEDRILLITE] =
+    {
+        .name = ITEM_NAME("Beedrillite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Beedrill to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_MEGA_STONES,
+        .sortType = ITEM_TYPE_MEGA_STONE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Beedrillite,
+        .iconPalette = gItemIconPalette_Beedrillite,
+    },
+
+    [ITEM_PIDGEOTITE] =
+    {
+        .name = ITEM_NAME("Pidgeotite"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_MEGA_STONE,
+        .description = COMPOUND_STRING(
+                "This stone enables\n"
+                "Pidgeot to Mega\n"
+                "Evolve in battle."),
+        .pocket = POCKET_MEGA_STONES,
+        .sortType = ITEM_TYPE_MEGA_STONE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Pidgeotite,
+        .iconPalette = gItemIconPalette_Pidgeotite,
+    },
+
+
     [ITEM_ALAKAZITE] =
     {
       .name = ITEM_NAME("Alakazite"),
