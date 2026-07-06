@@ -44,7 +44,9 @@ script HodouCity_Racisthouse_ScrollWarp_Script
     playse(SE_EXIT)
     fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_HODOU_CITY_TUNNEL,1)
-    waitstate
+	waitstate
+    release
+    end
 }
 
 script HodouCity_Racisthouse_ScrollNoWarp_Dialogue

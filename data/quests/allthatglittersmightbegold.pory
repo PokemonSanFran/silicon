@@ -42,6 +42,7 @@ script Quest_Allthatglittersmightbegold_BeforeVideo_Script{
         setvar(VAR_QUEST_GLITTERS_GOLD_STATE,NOT_SHOWN_PICTURE)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ROUTE_D_UNDERWATER,45,66)
+		waitstate
 }
 
 script Quest_Allthatglittersmightbegold_ShowVideo_Dialogue{
@@ -57,6 +58,7 @@ script Quest_Allthatglittersmightbegold_ShowVideo_Dialogue{
         clearflag(FLAG_SPAWN_INVISIBLE)
         delay(30)
         warpsilent(MAP_ROUTE_D,40,61)
+		waitstate
 }
 
 script Quest_Allthatglittersmightbegold_AfterVideo_Dialogue{
@@ -76,6 +78,7 @@ script Quest_Allthatglittersmightbegold_Active_Dialogue{
     closemessage
 
         warpsilent(MAP_ROUTE_D_UNDERWATER,42,19)
+		waitstate
 }
 
 script Quest_Allthatglittersmightbegold_CoreEncounter_Script{
@@ -124,6 +127,7 @@ script Quest_Allthatglittersmightbegold_ReturnSurface_Script{
         if (var(VAR_RESULT) == YES){
             setvar(VAR_QUEST_GLITTERS_GOLD_STATE,POST_DIVE)
             warpsilent(MAP_ROUTE_D,40,61)
+			waitstate
         }
 }
 

@@ -41,6 +41,7 @@ script Quest_ArtisanBalls2_DebugB_Script{
     msgbox(format("you recruited all the people"))
         fadeblackandsetremovewarpfadeflag
     warp(MAP_TORA_TOWN,4,16)
+		waitstate
     release
     end
 }

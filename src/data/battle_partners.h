@@ -132,12 +132,14 @@
         {
             {
 #line 53
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_DRAGONITE,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 53
+            .heldItem = ITEM_DRAGONINITE,
 #line 55
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 54
-            .lvl = 1,
+            .lvl = 100,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -164,7 +166,7 @@
         {
             {
 #line 63
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 65
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -196,7 +198,7 @@
         {
             {
 #line 73
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 75
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -228,7 +230,7 @@
         {
             {
 #line 83
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 85
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -260,7 +262,7 @@
         {
             {
 #line 93
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 95
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -292,7 +294,7 @@
         {
             {
 #line 103
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 105
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -324,7 +326,7 @@
         {
             {
 #line 113
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 115
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -356,7 +358,7 @@
         {
             {
 #line 123
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 125
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -388,7 +390,7 @@
         {
             {
 #line 133
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 135
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -420,7 +422,7 @@
         {
             {
 #line 143
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 145
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -452,7 +454,7 @@
         {
             {
 #line 153
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 155
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -484,7 +486,7 @@
         {
             {
 #line 163
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 165
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -712,6 +714,212 @@
                 MOVE_FAKE_OUT,
                 MOVE_REFLECT,
                 MOVE_LIGHT_SCREEN,
+            },
+            },
+        },
+    },
+#line 241
+    [DIFFICULTY_NORMAL][PARTNER_CHARLOTTE] =
+    {
+#line 242
+        .trainerName = _("Charlotte"),
+#line 244
+        .trainerClass = TRAINER_CLASS_CHARLOTTE,
+#line 243
+        .trainerPic = TRAINER_PIC_CHARLOTTE,
+#line 245
+        .gender = TRAINER_GENDER_MALE,
+#line 246
+        .encounterMusic = TRAINER_ENCOUNTER_MUSIC_MALE,
+#line 0
+        .multiTeamSize = MULTI_TEAM_SIZE_FULL,
+        .partySize = 6,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 248
+            .species = SPECIES_PALAFIN,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 248
+            .heldItem = ITEM_CHOICE_SCARF,
+#line 254
+            .ev = TRAINER_PARTY_EVS(0, 250, 0, 150, 0, 0),
+#line 256
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 249
+            .ability = ABILITY_ZERO_TO_HERO,
+#line 250
+            .lvl = 50,
+#line 251
+            .ball = BALL_MASTER,
+#line 253
+            .friendship = 1,
+#line 255
+            .nature = NATURE_ADAMANT,
+#line 252
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 256
+                MOVE_WAVE_CRASH,
+                MOVE_FLIP_TURN,
+                MOVE_CLOSE_COMBAT,
+                MOVE_ZEN_HEADBUTT,
+            },
+            },
+            {
+#line 261
+            .species = SPECIES_TALONFLAME,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 261
+            .heldItem = ITEM_SHARP_BEAK,
+#line 267
+            .ev = TRAINER_PARTY_EVS(0, 200, 0, 200, 0, 0),
+#line 269
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 262
+            .ability = ABILITY_GALE_WINGS,
+#line 263
+            .lvl = 49,
+#line 264
+            .ball = BALL_MASTER,
+#line 266
+            .friendship = 1,
+#line 268
+            .nature = NATURE_ADAMANT,
+#line 265
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 269
+                MOVE_BRAVE_BIRD,
+                MOVE_FLARE_BLITZ,
+                MOVE_TAILWIND,
+                MOVE_DUAL_WINGBEAT,
+            },
+            },
+            {
+#line 274
+            .species = SPECIES_DOUBLADE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 274
+            .heldItem = ITEM_EVIOLITE,
+#line 280
+            .ev = TRAINER_PARTY_EVS(50, 250, 0, 0, 0, 100),
+#line 282
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 275
+            .ability = ABILITY_NO_GUARD,
+#line 276
+            .lvl = 50,
+#line 277
+            .ball = BALL_MASTER,
+#line 279
+            .friendship = 1,
+#line 281
+            .nature = NATURE_ADAMANT,
+#line 278
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 282
+                MOVE_IRON_HEAD,
+                MOVE_SACRED_SWORD,
+                MOVE_SHADOW_CLAW,
+                MOVE_SWORDS_DANCE,
+            },
+            },
+            {
+#line 287
+            .species = SPECIES_TOEDSCRUEL,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 287
+            .heldItem = ITEM_GROUNDIUM_Z,
+#line 293
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 200, 200, 0),
+#line 295
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 288
+            .ability = ABILITY_MYCELIUM_MIGHT,
+#line 289
+            .lvl = 51,
+#line 290
+            .ball = BALL_MASTER,
+#line 292
+            .friendship = 1,
+#line 294
+            .nature = NATURE_MODEST,
+#line 291
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 296
+                MOVE_EARTH_POWER,
+                MOVE_ENERGY_BALL,
+                MOVE_SPORE,
+                MOVE_SLUDGE_BOMB,
+            },
+            },
+            {
+#line 301
+            .species = SPECIES_HYDREIGON,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 301
+            .heldItem = ITEM_FOCUS_SASH,
+#line 307
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 150, 250, 0),
+#line 309
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 302
+            .ability = ABILITY_LEVITATE,
+#line 303
+            .lvl = 52,
+#line 304
+            .ball = BALL_MASTER,
+#line 306
+            .friendship = 1,
+#line 308
+            .nature = NATURE_SERIOUS,
+#line 305
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 310
+                MOVE_DARK_PULSE,
+                MOVE_DRAGON_PULSE,
+                MOVE_FLAMETHROWER,
+                MOVE_FLASH_CANNON,
+            },
+            },
+            {
+#line 315
+            .species = SPECIES_GALLADE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 315
+            .heldItem = ITEM_GALLADITE,
+#line 321
+            .ev = TRAINER_PARTY_EVS(200, 200, 0, 0, 0, 0),
+#line 323
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 316
+            .ability = ABILITY_SHARPNESS,
+#line 317
+            .lvl = 53,
+#line 318
+            .ball = BALL_MASTER,
+#line 320
+            .friendship = 1,
+#line 322
+            .nature = NATURE_SERIOUS,
+#line 319
+            .isShiny = FALSE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 323
+                MOVE_SACRED_SWORD,
+                MOVE_PSYCHO_CUT,
+                MOVE_NIGHT_SLASH,
+                MOVE_TRICK_ROOM,
             },
             },
         },

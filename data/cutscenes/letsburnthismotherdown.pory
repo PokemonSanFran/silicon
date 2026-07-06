@@ -93,6 +93,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
     {
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ARANTRAZ,48,61)
+		waitstate
     }
     closemessage
     release
@@ -279,6 +280,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     fadedefaultbgm
     fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,34,5)
+	waitstate
     release
     end
 }

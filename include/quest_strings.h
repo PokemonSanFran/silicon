@@ -3,11 +3,6 @@
 
 extern const u8 gText_QuestAnnounce[];
 
-extern const u8 gText_Quest_PlayersAdventure_Name[];
-extern const u8 gText_Quest_PlayersAdventure_Desc[];
-extern const u8 gText_Quest_PlayersAdventure_DoneDesc[];
-extern const u8 gText_Quest_PlayersAdventure_Map[];
-
 extern const u8 gText_Quest_StolenTrade_Name[];
 extern const u8 gText_Quest_StolenTrade_Desc[];
 extern const u8 gText_Quest_StolenTrade_DoneDesc[];
@@ -983,64 +978,4 @@ extern const u8 gText_Quest_Skilllibrary_Sub6_Map[];
 extern const u8 gText_Quest_Skilllibrary_Sub7_Name[];
 extern const u8 gText_Quest_Skilllibrary_Sub7_Desc[];
 extern const u8 gText_Quest_Skilllibrary_Sub7_Map[];
-
-//quest flavor
-extern const u8 gText_ChampionsAdventure_Flavor2[];
-extern const u8 gText_ChampionsAdventure_Flavor3[];
-extern const u8 gText_PlayersAdventure_Flavor0[];
-extern const u8 gText_PlayersAdventure_Flavor1[];
-extern const u8 gText_PlayersAdventure_Flavor2[];
-extern const u8 gText_PlayersAdventure_Flavor3[];
-extern const u8 gText_PlayersAdventure_Flavor4[];
-extern const u8 gText_PlayersAdventure_Flavor5[];
-extern const u8 gText_PlayersAdventure_Flavor6[];
-extern const u8 gText_PlayersAdventure_Flavor7[];
-extern const u8 gText_PlayersAdventure_Flavor8[];
-extern const u8 gText_PlayersAdventure_Flavor9[];
-extern const u8 gText_PlayersAdventure_Flavor9_A[];
-extern const u8 gText_PlayersAdventure_Flavor9_B[];
-extern const u8 gText_PlayersAdventure_Flavor10[];
-extern const u8 gText_PlayersAdventure_HeadToSharpriseSpire[];
-extern const u8 gText_PlayersAdventure_Flavor11[];
-extern const u8 gText_PlayersAdventure_Flavor12[];
-extern const u8 gText_PlayersAdventure_Flavor13[];
-extern const u8 gText_PlayersAdventure_Flavor14[];
-extern const u8 gText_PlayersAdventure_Flavor15[];
-extern const u8 gText_PlayersAdventure_Flavor16[];
-extern const u8 gText_PlayersAdventure_Flavor17[];
-extern const u8 gText_PlayersAdventure_Flavor18[];
-extern const u8 gText_PlayersAdventure_Flavor19[];
-extern const u8 gText_PlayersAdventure_Flavor20[];
-extern const u8 gText_PlayersAdventure_Flavor21[];
-extern const u8 gText_PlayersAdventure_Flavor22[];
-extern const u8 gText_PlayersAdventure_Flavor23[];
-extern const u8 gText_PlayersAdventure_Flavor24[];
-extern const u8 gText_PlayersAdventure_Flavor25[];
-extern const u8 gText_PlayersAdventure_Flavor26[];
-extern const u8 gText_PlayersAdventure_Flavor27[];
-extern const u8 gText_PlayersAdventure_Flavor27A[];
-extern const u8 gText_PlayersAdventure_Flavor28[];
-extern const u8 gText_PlayersAdventure_Flavor29[];
-extern const u8 gText_PlayersAdventure_Flavor30[];
-extern const u8 gText_PlayersAdventure_Flavor31[];
-extern const u8 gText_PlayersAdventure_Flavor32[];
-extern const u8 gText_PlayersAdventure_Flavor33[];
-extern const u8 gText_PlayersAdventure_Flavor34[];
-extern const u8 gText_PlayersAdventure_Flavor34A[];
-extern const u8 gText_PlayersAdventure_Flavor35[];
-extern const u8 gText_PlayersAdventure_Flavor35A[];
-extern const u8 gText_PlayersAdventure_Flavor35B[];
-extern const u8 gText_PlayersAdventure_Flavor36[];
-extern const u8 gText_PlayersAdventure_Flavor36A[];
-extern const u8 gText_PlayersAdventure_Flavor37[];
-extern const u8 gText_PlayersAdventure_Flavor37A[];
-extern const u8 gText_PlayersAdventure_Flavor38[];
-extern const u8 gText_PlayersAdventure_Flavor38A[];
-extern const u8 gText_PlayersAdventure_Flavor39[];
-extern const u8 gText_PlayersAdventure_Flavor40[];
-extern const u8 gText_PlayersAdventure_Flavor41[];
-extern const u8 gText_PlayersAdventure_Flavor41A[];
-extern const u8 gText_PlayersAdventure_Flavor42[];
-extern const u8 gText_PlayersAdventure_Flavor43[];
-
 #endif // GUARD_QUEST_STRINGS_H

@@ -72,6 +72,7 @@ script LetsGrabLunch_PostBattle_Dialogue {
         fadedefaultbgm
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_ZENZU_ISLAND_RESTAURANT,14,9)
+		waitstate
         releaseall
         end
 }
@@ -172,6 +173,7 @@ script LetsGrabLunch_HodouCity {
         }else {
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_HODOU_CITY,16,7)
+			waitstate
         }
 }
 script LetsGrabLunch_EspuleeOutskirts {
@@ -186,6 +188,7 @@ script LetsGrabLunch_EspuleeOutskirts {
         }else {
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_ESPULEE_OUTSKIRTS,8,18)
+			waitstate
         }
 }
 script LetsGrabLunch_ZenzuIsland {
@@ -204,6 +207,7 @@ script LetsGrabLunch_ZenzuIsland {
         }else {
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_ZENZU_ISLAND,3,15)
+			waitstate
         }
 }
 
