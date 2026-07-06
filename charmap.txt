@@ -42,6 +42,10 @@
 SUPER_ER    = 2C
 '&'         = 2D
 '+'         = 2E
+@ Start newFontSymbols
+'#'         = 2F
+'@'         = 30
+@ End newFontSymbols
 LV          = 34
 '='         = 35
 ';'         = 36
@@ -158,7 +162,11 @@ SUPER_RE    = A0
 'ü'         = F6
 EMOJI_DIZZYEGG = F7
 '*'         = F8
-'@'         = F9
+@ Start newFontSymbols
+@ Link/Wireless-only, it's now deprecated to allow
+@ more freedom in designing the symbol for each fonts.
+@'@'         = F9
+@ End newFontSymbols
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
@@ -355,8 +363,9 @@ GROUDON        = FD 0D
 @ Start playerCustom
 SUBJECT        = FD 0E
 OBJECT         = FD 0F
-POSSESSIVE     = FD 10
+POSSESSIVE     = FE 10
 @ End playerCustom
+REGION         = FE 11
 
 @ battle string placeholders
 
@@ -378,7 +387,7 @@ B_ATK_PARTNER_NAME = FD 0E
 B_ATK_NAME_WITH_PREFIX = FD 0F
 B_DEF_NAME_WITH_PREFIX = FD 10
 B_EFF_NAME_WITH_PREFIX = FD 11 @ EFF = short for gEffectBattler
-@ FD 12 - preiously gActiveBattler with prefix
+@ FD 12 - previously gActiveBattler with prefix
 B_SCR_NAME_WITH_PREFIX = FD 13
 B_CURRENT_MOVE = FD 14
 B_LAST_MOVE = FD 15
@@ -439,14 +448,14 @@ B_EFFORT_VALUE = FD 48 @ printEVs
 NAME_END = FC 00
 
 @ special 0xF7 character
-DYNAMIC  =   F7
+DYNAMIC = F7
 
 @ more text functions
 
-COLOR = FC 01 @ use a color listed below right after
-HIGHLIGHT = FC 02 @ same as fc 01
-SHADOW = FC 03 @ same as fc 01
-COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
+COLOR = FC 01 @ use a color listed below right after. sets base text color
+HIGHLIGHT = FC 02 @ same as fc 01. sets background and accent color
+SHADOW = FC 03 @ same as fc 01. sets shadow color
+COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 colors
 PALETTE = FC 05 @ used in credits
 FONT = FC 06 @ Given a font id, or use font constants below instead
 RESET_FONT = FC 07
@@ -468,6 +477,9 @@ ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
 SPEAKER = FC 19
+ACCENT = FC 1A @ same as FC 01. sets accent color
+BACKGROUND = FC 1B @ same as FC 01. sets background color
+TEXT_COLORS = FC 1C @ takes 3 colors: text base color, shadow and accent
 
 @ Speaker names, the order must be matching with include/constants/speaker_names.h
 NAME_NONE = 00
@@ -487,6 +499,10 @@ FONT_SMALL_NARROWER = FC 06 0B
 FONT_SHORT_NARROW = FC 06 0C
 FONT_SHORT_NARROWER = FC 06 0D
 FONT_OUTLINE = FC 06 0E @ addCrimFont
+FONT_OUTLINE_NARROW = FC 06 0F
+
+FONT_MALE = FC 06 01
+FONT_FEMALE = FC 06 01
 
 @ colors
 

@@ -2,7 +2,7 @@
   "id": "MAP_ESPULEE_OUTSKIRTS",
   "name": "EspuleeOutskirts",
   "layout": "LAYOUT_ESPULEE_OUTSKIRTS",
-  "music": "MUS_LILYCOVE",
+  "music": "MUS_ESPULEE_OUTSKIRTS",
   "region_map_section": "MAPSEC_ESPULEE_OUTSKIRTS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -91,19 +91,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_COOK",
-      "x": 18,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EspuleeOutskirts_Biker_Interact_Script",
-      "flag": "FLAG_TEMP_6"
-    },
-    {
+      "local_id": "LOCALID_ESPULEE_OUTSKIRTS_IMELDA",
       "graphics_id": "OBJ_EVENT_GFX_IMELDA",
       "x": 15,
       "y": 32,
@@ -113,7 +101,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EspuleeOutskirts_Imelda_Interact_Script",
+      "script": "EspuleeOutskirts_Script_InteractImelda",
       "flag": "FLAG_TEMP_1"
     },
     {
@@ -141,6 +129,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EspuleeOutskirts_Girl_Interact_Script",
       "flag": "FLAG_TEMP_7"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 6,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ESPULEE_OUTSKIRTS_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 7,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ESPULEE_OUTSKIRTS_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -223,16 +237,6 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "NULL"
-    }
-  ],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 8,
-      "y": 17,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Quest_Restoreespuleeoutskirts_Debug_Script"
     }
   ]
 }

@@ -206,22 +206,22 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 sTMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.4bpp.smol");
+static const u32 sTMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tTiles.png", ".4bpp.smol");
 static const u32 sTMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tTiles.bin.smolTM");
 
-static const u32 sMenuTiles[]   = INCBIN_U32("graphics/ui_menus/options_menu/tiles.4bpp.smol");
+static const u32 sMenuTiles[]   = INCGFX_U32("graphics/ui_menus/options_menu/tiles.png", ".4bpp.smol");
 static const u32 sMenuTilemap[] = INCBIN_U32("graphics/ui_menus/options_menu/tiles.bin.smolTM");
-static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
+static const u16 sMenuPalette[] = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
 
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
+static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
+static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
+static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
+static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sMenuPalette_Violet[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
+static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
 enum Colors
 {
 	FONT_BLACK,
@@ -617,30 +617,19 @@ struct OptionData
 };
 
 //Graphics
-static const u8 sOptionMenuIcon_Game_Settings[]     = INCBIN_U8("graphics/ui_menus/options_menu/icon_game_settings.4bpp");
-static const u8 sOptionMenuIcon_Battle_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_battle_settings.4bpp");
-static const u8 sOptionMenuIcon_Visual_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_visual_settings.4bpp");
-static const u8 sOptionMenuIcon_Music_Settings[]    = INCBIN_U8("graphics/ui_menus/options_menu/icon_music_settings.4bpp");
-static const u8 sOptionMenuIcon_Random_Settings[]   = INCBIN_U8("graphics/ui_menus/options_menu/icon_random_settings.4bpp");
+static const u8 sOptionMenuIcon_Game_Settings[]     = INCGFX_U8("graphics/ui_menus/options_menu/icon_game_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Battle_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_battle_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Visual_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_visual_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Music_Settings[]    = INCGFX_U8("graphics/ui_menus/options_menu/icon_music_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Random_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_random_settings.png", ".4bpp");
 
 //Arrows
-static const u8 sOptionMenuArrow_Up[]       = INCBIN_U8("graphics/ui_menus/options_menu/arrow_up.4bpp");
-static const u8 sOptionMenuArrow_Down[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_down.4bpp");
-static const u8 sOptionMenuArrow_Left[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_left.4bpp");
-static const u8 sOptionMenuArrow_Right[]     = INCBIN_U8("graphics/ui_menus/options_menu/arrow_right.4bpp");
+static const u8 sOptionMenuArrow_Up[]       = INCGFX_U8("graphics/ui_menus/options_menu/arrow_up.png", ".4bpp");
+static const u8 sOptionMenuArrow_Down[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_down.png", ".4bpp");
+static const u8 sOptionMenuArrow_Left[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_left.png", ".4bpp");
+static const u8 sOptionMenuArrow_Right[]     = INCGFX_U8("graphics/ui_menus/options_menu/arrow_right.png", ".4bpp");
 
-static const u8 sOptionMenuSelector[]       = INCBIN_U8("graphics/ui_menus/options_menu/selector.4bpp");
-
-//Text
-static const u8 sText_Title_Settings_Hub[]  = COMPOUND_STRING("Settings Hub");
-static const u8 sText_Options_Text[]        = COMPOUND_STRING("Option Description");
-
-
-static const u8 sText_Discard_Text[]        = COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?");
-
-static const u8 sText_Help_Bar_Discard[]        = COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save");
-static const u8 sText_Help_Bar_Settings_Hub[]   = COMPOUND_STRING("{DPAD_LEFTRIGHT} Preset {A_BUTTON} Explore {B_BUTTON} Discard {START_BUTTON} Save and Quit");
-static const u8 sText_Help_Bar_Settings_Page[]  = COMPOUND_STRING("{DPAD_LEFTRIGHT} Change {B_BUTTON} Discard {START_BUTTON} Save {L_BUTTON}{R_BUTTON} Next Page");
+static const u8 sOptionMenuSelector[]       = INCGFX_U8("graphics/ui_menus/options_menu/selector.png", ".4bpp");
 // Preset
 
 static const struct OptionData Hub_Options[NUM_OF_PRESET_OPTIONS] = {
@@ -1344,7 +1333,7 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             },
         .optionDescription = {
             COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will proceed to the Main Menu."),
-            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to {PLAYER}'s adventure."),
+            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to the saved adventure."),
             },
         .numOptions = GAME_OPTION_SAVE_BOOT_COUNT,
     },
@@ -1384,7 +1373,7 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             },
         .optionDescription = {
             COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
-            COMPOUND_STRING("Pressing the {R_BUTTON} will change the player's behavior betweeen always walking and always running."),
+            COMPOUND_STRING("Pressing the {L_BUTTON} will change the player's behavior betweeen always walking and always running."),
             COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
             },
         .numOptions = 3,
@@ -1503,7 +1492,7 @@ static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTL
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
             COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
         },
-        .numOptions = 4,
+        .numOptions = BATTLE_OPTION_MULTIPLIER_COUNT,
     },
     [BATTLE_OPTIONS_EFFORT_VALUES] =
     {
@@ -2744,7 +2733,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 0;
 		y = 0;
 
-		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Title_Settings_Hub);
+		AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Settings Hub"));
 	}
 
 	// Current Settings Title --------------------------------------------------------------------------------------------------------------------
@@ -2874,7 +2863,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	x = 0;
 	y = 14;
 	if(ShouldShowDiscardDialogue){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Discard_Text);
+		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Are you sure you want to leave without\nsaving the changes?"));
 	}
 	else if(!areYouNotOnSettingsHub){
 		switch(currentScreenId){
@@ -2927,16 +2916,17 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	// Help Bar --------------------------------------------------------------------------------------------------------------------
 	x = 0;
 	y = 18;
-	if(ShouldShowDiscardDialogue){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Discard);
-	}
-	else if(!areYouNotOnSettingsHub){
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Settings_Hub);
-	}
-	else{
-		AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, sText_Help_Bar_Settings_Page);
-	}
 
+//Text
+    if(ShouldShowDiscardDialogue){
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{A_BUTTON} Yes {B_BUTTON} Cancel {START_BUTTON} Save"));
+    }
+    else if(!areYouNotOnSettingsHub){
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Preset {A_BUTTON} Explore {B_BUTTON} Discard {START_BUTTON} Save and Quit"));
+    }
+    else{
+        AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{DPAD_LEFTRIGHT} Change {B_BUTTON} Discard {START_BUTTON} Save {L_BUTTON}{R_BUTTON} Next Page"));
+    }
 	// --------------------------------------------------------------------------------------------------------------------
 	PutWindowTilemap(windowId);
 	CopyWindowToVram(windowId, 3);

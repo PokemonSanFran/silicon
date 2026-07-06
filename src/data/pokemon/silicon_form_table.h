@@ -692,7 +692,7 @@
     {
         .originalSpecies = SPECIES_MINIOR_CORE,
         .targetSpecies = SPECIES_MINIOR_METEOR,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT,
         .param1 = ABILITY_SHIELDS_DOWN,
         .param2 = HP_HIGHER_THAN,
         .param3 = 50,
@@ -701,7 +701,7 @@
     {
         .originalSpecies = SPECIES_MINIOR_METEOR,
         .targetSpecies = SPECIES_MINIOR_CORE,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT,
         .param1 = ABILITY_SHIELDS_DOWN,
         .param2 = HP_LOWER_EQ_THAN,
         .param3 = 50,
@@ -815,7 +815,7 @@
     {
         .originalSpecies = SPECIES_CRAMORANT,
         .targetSpecies = SPECIES_CRAMORANT_GORGING,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE,
         .param1 = ABILITY_GULP_MISSILE,
         .param2 = HP_HIGHER_THAN,
         .param3 = 50,
@@ -825,7 +825,7 @@
     {
         .originalSpecies = SPECIES_CRAMORANT,
         .targetSpecies = SPECIES_CRAMORANT_GULPING,
-        .method = FORM_CHANGE_BATTLE_HP_PERCENT,
+        .method = FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE,
         .param1 = ABILITY_GULP_MISSILE,
         .param2 = HP_LOWER_EQ_THAN,
         .param3 = 50,
@@ -834,7 +834,7 @@
     },
     {
         .originalSpecies = SPECIES_ANY,
-        .method = FORM_CHANGE_HIT_BY_MOVE,
+        .method = FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY,
         .targetSpecies = SPECIES_CRAMORANT,
         .param1 = ABILITY_GULP_MISSILE,
         .description = COMPOUND_STRING("Transforms after being hit by a move."),
@@ -893,6 +893,36 @@
         .param1 = ITEM_HATTERENENITE,
         .method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,
         .description = COMPOUND_STRING("Transforms when Mega Evolves while holding {STR_VAR_1}."),
+    },
+},
+    [POKEDEX_FORM_EISCUE] =
+{
+    {
+        .originalSpecies = SPECIES_EISCUE_NOICE,
+        .targetSpecies = SPECIES_EISCUE_ICE,
+        .method = FORM_CHANGE_BATTLE_WEATHER,
+        .param1 = B_WEATHER_ICY_ANY,
+        .param2 = ABILITY_ICE_FACE,
+        .description = COMPOUND_STRING("Transforms when weather is {STR_VAR_1} and ability is {STR_VAR_2}."),
+        .cosmeticFormConstant = POKEDEX_FORM_EISCUE,
+    },
+    {
+        .originalSpecies = SPECIES_EISCUE_ICE,
+        .targetSpecies = SPECIES_EISCUE_NOICE,
+        .method = FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG,
+        .param1 = ABILITY_GULP_MISSILE,
+        .param2 = HP_LOWER_EQ_THAN,
+        .param3 = 50,
+        .description = COMPOUND_STRING("Transforms after hitting themselves in confusion."),
+        .cosmeticFormConstant = POKEDEX_FORM_EISCUE,
+    },
+    {
+        .originalSpecies = SPECIES_EISCUE_ICE,
+        .targetSpecies = SPECIES_EISCUE_NOICE,
+        .method = FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY,
+        .param1 = ABILITY_GULP_MISSILE,
+        .description = COMPOUND_STRING("Transforms after being hit by a move."),
+        .cosmeticFormConstant = POKEDEX_FORM_CRAMORANT,
     },
 },
     [POKEDEX_FORM_COPPERAJAH] =
@@ -1017,13 +1047,13 @@
     {
         .originalSpecies = SPECIES_PALAFIN_ZERO,
         .targetSpecies = SPECIES_PALAFIN_HERO,
-        .method = FORM_CHANGE_BATTLE_SWITCH,
+        .method = FORM_CHANGE_BATTLE_SWITCH_OUT,
         .description = COMPOUND_STRING("Transforms when switched out."),
     },
     {
         .originalSpecies = SPECIES_PALAFIN_HERO,
         .targetSpecies = SPECIES_PALAFIN_ZERO,
-        .method = FORM_CHANGE_HIT_BY_MOVE,
+        .method = FORM_CHANGE_END_BATTLE,
         .description = COMPOUND_STRING("Transforms when fainted or the battle ends. "),
     },
 },

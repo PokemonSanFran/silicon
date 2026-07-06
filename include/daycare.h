@@ -2,6 +2,7 @@
 #define GUARD_DAYCARE_H
 
 #include "constants/daycare.h"
+#include "constants/species.h"
 
 struct RecordMixingDaycareMail
 {
@@ -19,13 +20,13 @@ void StoreSelectedPokemonInDaycare(void);
 u16 TakePokemonFromDaycare(void);
 void GetDaycareCost(void);
 u8 GetNumLevelsGainedFromDaycare(void);
-u16 GetEggSpecies(u16 species); // pokedex
+enum Species GetEggSpecies(enum Species species); // pokedex
 void TriggerPendingDaycareEgg(void);
 void RejectEggFromDayCare(void);
-void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation);
+void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLocation);
 void GiveEggFromDaycare(void);
 bool8 ShouldEggHatch(void);
-u16 GetSelectedMonNicknameAndSpecies(void);
+enum Species GetSelectedMonNicknameAndSpecies(void);
 void GetDaycareMonNicknames(void);
 u8 GetDaycareState(void);
 u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
@@ -33,8 +34,8 @@ void SetDaycareCompatibilityString(void);
 bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
-u8 GetEggMovesBySpecies(u16 species, u16 *eggMoves);
-bool8 SpeciesCanLearnEggMove(u16 species, u16 move);
+u8 GetEggMovesBySpecies(enum Species species, u16 *eggMoves);
+bool8 SpeciesCanLearnEggMove(enum Species species, enum Move move);
 void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon);
 u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 // Start siliconDaycare
@@ -42,6 +43,6 @@ void GenerateAndStoreEgg(struct DayCare *daycare, u32 eggIndex);
 u8 GetDaycareCompatibilityScoreFromSave(void);
 void BufferUnhatchedMonEgg(void);
 // End siliconDaycare
-u16 GetEggSpecies(u16 species); // surpriseTrade
+bool8 IsMonInUndiscoveredOrGenderless(enum Species species); // moveErrors
 
 #endif // GUARD_DAYCARE_H

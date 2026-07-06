@@ -139,8 +139,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 9,
-      "y": 31,
+      "x": 5,
+      "y": 17,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_DOWN_AND_UP",
       "movement_range_x": 0,
@@ -149,6 +149,130 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Quest_Theboywhocriedwithwolves_Interact_Ambrogio_Script",
       "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 20,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_WAJABI_LAKE_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 21,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_WAJABI_LAKE_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_WAJABI_ESPUELEETRADEPERSONA",
+      "graphics_id": "OBJ_EVENT_GFX_ESPULEETRADEPERSONA",
+      "x": 52,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Quest_Restoreespuleeoutskirts_Dialogue_InteractEspuleetradepersonA",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA",
+      "graphics_id": "OBJ_EVENT_GFX_QUEST_TEACHATRAINERTOFISHA",
+      "x": 14,
+      "y": 30,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TeachATrainerToFish_Script_TeachTrainerFishA",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHB",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 14,
+      "y": 34,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WajabiLake_Script_Teachtrainerfishb",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHC",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 18,
+      "y": 39,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WajabiLake_Script_Teachtrainerfishc",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHD",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 22,
+      "y": 43,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "WajabiLake_Script_Teachtrainerfishd",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHE",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 28,
+      "y": 48,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WajabiLake_Script_Teachtrainerfishe",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LAKE_WAJABI_TEACHTRAINERFISHF",
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 34,
+      "y": 52,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "WajabiLake_Script_Teachtrainerfishf",
+      "flag": "0"
     }
   ],
   "warp_events": [],
@@ -160,7 +284,7 @@
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "WajabiLake_Membersonly_Dialogue"
+      "script": "WajabiLake_Script_CheckIfPlayerMember"
     },
     {
       "type": "trigger",
@@ -169,7 +293,7 @@
       "elevation": 0,
       "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "WajabiLake_Membersonly_Dialogue"
+      "script": "WajabiLake_Script_CheckIfPlayerMember"
     }
   ],
   "bg_events": []

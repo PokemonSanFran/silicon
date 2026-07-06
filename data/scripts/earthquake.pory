@@ -4,7 +4,6 @@ script Earthquake_PlaySoundPlayerSurprise_EventScript
 {
     playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
-    //TODO this should be all the characters on screen, use the Vs.Seeker code to do this
     waitmovement(PLAYER)
 }
 
@@ -29,7 +28,7 @@ script Earthquake_Natural_EventScript
     call(Earthquake_PlaySoundPlayerSurprise_EventScript)
     call(Earthquake_Natural_Aftershock)
     callnative(BufferRandomEarthquakeString)
-    msgbox(gText_Placeholder_Earthquake,MSGBOX_SIGN,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("{STR_VAR_1}"),MSGBOX_SIGN,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     release
 }
@@ -63,7 +62,6 @@ text gText_Placeholder_Earthquake
     format("{STR_VAR_1}")
 }
 
-//PSF TODO populate with real text.
 text gText_NaturalEarthquake_0
 {
     format("this is placeholder. oh snap, an earthquake!")

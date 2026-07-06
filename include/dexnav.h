@@ -2,6 +2,47 @@
 #define GUARD_DEXNAV_H
 
 #include "config/dexnav.h"
+// Start dexnav
+#include "dexnav_accessors.h"
+
+struct DexNavSearch
+{
+    u16 species;
+    u16 moves[MAX_MON_MOVES];
+    u16 heldItem;
+    u8 abilityNum;
+    u8 potential;
+    u8 searchLevel;
+    u8 monLevel;
+    u8 proximity;
+    u8 environment;
+    s16 tileX;
+    s16 tileY;
+    u8 fldEffSpriteId;
+    u8 fldEffId;
+    u8 movementCount;
+    u8 windowId;
+    u8 iconSpriteId;
+    //u8 eyeSpriteId; // dexnav
+    u8 itemSpriteId;
+    u8 starSpriteIds[3];
+    u8 ownedIconSpriteId;
+    u8 exclamationSpriteId;
+    u32 startingTime;
+    u8 hiddenSearch:1;
+    u8 isHiddenMon:1;
+  // Start dexnav
+    u8 statFlags;
+    u8 abilityFlag:1;
+    u8 itemFlag:1;
+    u8 moveFlag:1;
+    u8 levelFlag:1;
+    u8 unk:1;
+    //u8 unk:6;
+  // End dexnav
+    u16 palBuffer[16];
+};
+// End dexnav
 
 // GUI Info
 enum RowGUIInfo
@@ -69,16 +110,23 @@ enum EncounterType
 #define DEXNAV_MASK_SPECIES         0x3FFF  // First 14 bits
 #define DEXNAV_MASK_ENVIRONMENT     0xC000  // Last two bit
 
-void EndDexNavSearch(u8 taskId);
+void EndDexNavSearch(void);
 void Task_OpenDexNavFromStartMenu(u8 taskId);
-void CB2_DexNavFromStartMenu(void);
-bool8 TryStartDexNavSearch(void);
+bool32 TryStartDexNavSearch(void);
 void TryIncrementSpeciesSearchLevel(void);
 void ResetDexNavSearch(void);
-bool8 TryFindHiddenPokemon(void);
+bool32 TryFindHiddenPokemon(void);
 u32 CalculateDexNavShinyRolls(void);
 void IncrementDexNavChain(void);
+u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment); // phenomenon
+bool32 OnStep_DexNavSearch(void);
+void CB2_DexNavFromStartMenu(void); // dexnav
+u8 GetSearchLevel(u32 species); // dexnav
+void CB1_DexNavSearchCallback(void);
+void PauseDexNavSearch(void); // dexnav
+void ResumeDexNavSearch(void); // dexnav
+void Dexnav_StopOverworldFieldEffect(void); // dexnav
 
-extern u16 gDexNavSpecies;
+extern enum Species gDexNavSpecies;
 
 #endif // GUARD_DEXNAV_H

@@ -10,24 +10,11 @@
 #include "sound.h"
 #include "task.h"
 #include "util.h"
+#include "quest_logic.h" // returningFog
 #include "constants/battle_anim.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 #include "constants/weather.h"
-
-static void UNUSED ReturnFogAfterClearing(u8 taskId)
-{
-    //PSF TODO hook this up to run when ShouldWildBattleBeFog returns TRUE during the actual field effect script
-    gTasks[taskId].data[0] = 0;
-
-    if (gPaletteFade.active)
-        return;
-
-    SetWeather(WEATHER_FOG_HORIZONTAL);
-    gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
-    ScriptContext_SetupScript(EventScript_RegenerateFog);
-    DestroyTask(taskId);
-}
 
 static void FieldCallback_Defog(void);
 static void FieldMove_Defog(void);
@@ -59,19 +46,36 @@ bool8 FldEff_Defog(void)
 }
 
 #define tFrameCount data[0]
+#define tFogType    data[1] // returningFog
 
 static void FieldMove_Defog(void)
 {
     PlaySE12WithPanning(SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER);
     SetWeatherScreenFadeOut();
     FieldEffectActiveListRemove(FLDEFF_DEFOG);
+    u32 fogType = GetSavedWeather(); // returningFog
     SetWeather(WEATHER_NONE);
     u32 taskId = CreateTask(EndDefogTask, 0);
     gTasks[taskId].tFrameCount = 0;
+    gTasks[taskId].tFogType = fogType; // returningFog
 };
+
+// start returningFog
+static void ReturnFogAfterClearing(u8 taskId)
+{
+    if (!gWeatherPtr->weatherGfxLoaded)
+        return;
+
+    ScriptContext_SetupScript(EventScript_RegenerateFog);
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+// end returningFog
 
 static void EndDefogTask(u8 taskId)
 {
+    // start returningFog
+    /*
     if (gPaletteFade.active)
         return;
 
@@ -79,6 +83,21 @@ static void EndDefogTask(u8 taskId)
 
     if (gTasks[taskId].tFrameCount != 120)
         return;
+    */
+
+    if (IsSEPlaying())
+        return;
+
+    if (ShouldWildBattleBeFog())
+    {
+        PlaySE12WithPanning(SE_M_FAINT_ATTACK, SOUND_PAN_ATTACKER);
+        gTasks[taskId].tFrameCount = 0;
+        SetWeather(gTasks[taskId].tFogType);
+        SetCurrentAndNextWeatherNoDelay(gTasks[taskId].tFogType);
+        gTasks[taskId].func = ReturnFogAfterClearing;
+        return;
+    }
+    // end returningFog
 
     gWeatherPtr->currWeather = WEATHER_NONE;
     DestroyTask(taskId);

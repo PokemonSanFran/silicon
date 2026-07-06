@@ -1,0 +1,47 @@
+{
+  "id": "MAP_CHAPEL_OF_CHIMES_END",
+  "name": "ChapelOfChimes_End",
+  "layout": "LAYOUT_CHAPEL_OF_CHIMES_END",
+  "music": "MUS_RG_POKE_TOWER",
+  "region_map_section": "MAPSEC_CHAPEL_OF_CHIMES",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_CHAPEL_END_TO_INTERIOR",
+      "x": 10,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
+      "dest_warp_id": "WARP_ID_CHAPEL_END_TO_INTERIOR"
+    },
+    {
+      "warp_id": "WARP_ID_CHAPEL_END_TO_OROLAND",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_OROLAND",
+      "dest_warp_id": "WARP_ID_OROLAND_TO_CHAPEL"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Dialogue_StartAttraction4"
+    }
+  ],
+  "bg_events": []
+}

@@ -8,3 +8,92 @@ mapscripts Route9_MapScripts {
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)
     }
 }
+
+script Route9_Script_Freetheinnocenthikerc
+{
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERC,format("It’s important to stay hydrated on hikes! Especially if you’re gonna be battling too!"),format("Well I sure hope there’s a spring nearby…"),Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+    handlerematch(Route9_Script_RematchFreetheinnocenthikerc)
+    goto(Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+}
+
+script Route9_Script_RematchFreetheinnocenthikerc
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERC,format("Hey again! Staying hydrated as I suggested?"),format("Your Pokemon look healthy and hydrated! Good job!"))
+    goto(Route9_Dialogue_PostBattleFreetheinnocenthikerc)
+}
+
+script Route9_Dialogue_PostBattleFreetheinnocenthikerc
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerc)
+    bufferitemname(STR_VAR_1,ITEM_SODA_POP)
+    msgbox(format("Though water’s best for humans, {STR_VAR_1} is more cost-efficient and nutritionally it’s the same for Pokemon."),,SPEAKER_FREETHEINNOCENTHIKERC)
+    closemessage
+    release
+    end
+}
+
+script Route9_EventScript_068B06CE
+{
+    trainerbattle_single(TRAINER_068B06CE,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06BE2D1B
+{
+    trainerbattle_single(TRAINER_06BE2D1B,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06C68007
+{
+    trainerbattle_single(TRAINER_06C68007,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_06D2BD08
+{
+    trainerbattle_single(TRAINER_06D2BD08,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_07D063A5
+{
+    trainerbattle_single(TRAINER_07D063A5,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_09AEC824
+{
+    trainerbattle_single(TRAINER_09AEC824,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_09B7B6C8
+{
+    trainerbattle_single(TRAINER_09B7B6C8,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_EventScript_0A542D33
+{
+    trainerbattle_single(TRAINER_0A542D33,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route9_Script_Interact_Quest_Restaurantexpansionbusser
+{
+    trainerbattle_single(TRAINER_QUEST_RESTAURANTEXPANSIONBUSSER,format("How am I supposed to land a gig when every job is askin' for 10 years of experience?"),format("Man, if you’re that tough, you could waltz into any job you wanted."),Route9_Script_Interact_Quest_Restaurantexpansionbusser)
+    call_if_quest_active(QUEST_RESTAURANTEXPANSION2,Quest_Restaurantexpansion2_Complete_Restaurantexpansionbusser)
+    msgbox(format("A simple gig would be nice, you know? Like bussing tables! Nobody needs experience to grab plates, right?"),,SPEAKER_RESTAURANTEXPANSIONBUSSER)
+    closemessage
+    release
+    end
+}

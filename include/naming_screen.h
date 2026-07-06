@@ -2,6 +2,7 @@
 #define GUARD_NAMING_SCREEN_H
 
 #include "main.h"
+#include "constants/species.h"
 
 enum {
     NAMING_SCREEN_PLAYER,
@@ -10,6 +11,7 @@ enum {
     NAMING_SCREEN_NICKNAME,
     NAMING_SCREEN_WALDA,
     NAMING_SCREEN_CODE,
+    NAMING_SCREEN_RIVAL,
     // Start playerCustom
     NAMING_SCREEN_SUBJECT_PRONOUN,
     NAMING_SCREEN_OBJECT_PRONOUN,
@@ -19,7 +21,8 @@ enum {
 
 extern void BattleMainCB2(void);
 
-void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback);
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpeciesOrPlayerGender, u16 monGender, u32 monPersonality, MainCallback returnCallback);
 void AssignDefaultPlayerName(void); // bootSequence
 void SetEOSForPlayerName(const u8*); // bootSequence
+
 #endif // GUARD_NAMING_SCREEN_H

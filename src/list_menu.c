@@ -162,8 +162,6 @@ static const struct SpriteTemplate sSpriteTemplate_ScrollArrowIndicator =
     .paletteTag = 0,
     .oam = &sOamData_ScrollArrowIndicator,
     .anims = sSpriteAnimTable_ScrollArrowIndicator,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_ScrollIndicatorArrow,
 };
 
@@ -344,19 +342,17 @@ static const struct SpriteTemplate sSpriteTemplate_RedArrowCursor =
     .paletteTag = 0,
     .oam = &sOamData_RedArrowCursor,
     .anims = sSpriteAnimTable_RedArrowCursor,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallback_RedArrowCursor,
 };
 
-static const u16 sRedInterface_Pal[]    = INCBIN_U16("graphics/interface/red.gbapal"); // Shared by all of the below gfx
-static const u32 sScrollIndicator_Gfx[] = INCBIN_U32("graphics/interface/scroll_indicator.4bpp.smol");
-static const u32 sOutlineCursor_Gfx[]   = INCBIN_U32("graphics/interface/outline_cursor.4bpp.smol");
-static const u32 sArrowCursor_Gfx[]     = INCBIN_U32("graphics/interface/arrow_cursor.4bpp.smol");
 // Start google_glass
-static const u32 sCrimCursor_Gfx[]   = INCBIN_U32("graphics/interface/crim_cursor.4bpp.smol");
-static const u16 sCrimInterface_Pal[]    = INCBIN_U16("graphics/interface/crim.gbapal");
+static const u32 sCrimCursor_Gfx[]   = INCGFX_U32("graphics/interface/crim_cursor.png", ".4bpp.smol");
+static const u16 sCrimInterface_Pal[]    = INCGFX_U16("graphics/interface/crim.pal", ".gbapal");
 // End google_glass
+static const u16 sRedInterface_Pal[]    = INCGFX_U16("graphics/interface/red.pal", ".gbapal"); // Shared by all of the below gfx
+static const u32 sScrollIndicator_Gfx[] = INCGFX_U32("graphics/interface/scroll_indicator.png", ".4bpp.smol");
+static const u32 sOutlineCursor_Gfx[]   = INCGFX_U32("graphics/interface/outline_cursor.png", ".4bpp.smol", "-num_tiles 8 -Wnum_tiles");
+static const u32 sArrowCursor_Gfx[]     = INCGFX_U32("graphics/interface/arrow_cursor.png", ".4bpp.smol");
 
 // code
 static void ListMenuDummyTask(u8 taskId)
@@ -466,7 +462,7 @@ static void ListMenu_WrapCursorToOppositeEnd(struct ListMenu *list,bool32 moving
 
     while (diffRows > 0)
     {
-        remainingRowDistance = diffRows > UCHAR_MAX ? UCHAR_MAX : diffRows;
+        remainingRowDistance = diffRows > MAX_u8 ? MAX_u8 : diffRows;
         ListMenuChangeSelection(list, TRUE, remainingRowDistance, movingDown);
         diffRows -= remainingRowDistance;
     }
@@ -579,6 +575,7 @@ void RedrawListMenu(u8 listTaskId)
     FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
     ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     ListMenuDrawCursor(list);
+    ListMenuCallSelectionChangedCallback(list, TRUE);
     CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
 }
 

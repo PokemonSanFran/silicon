@@ -1,16 +1,17 @@
 mapscripts RouteB_MapScripts{
-   MAP_SCRIPT_ON_TRANSITION{
-       call(Quest_Restorehodoucity_HideBlackbelt_RouteB_Script)
-}
-}
-
-
-script RouteB_EventScript_BlackbeltA{
-    trainerbattle_single(TRAINER_BLACKBELT_A,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-    if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-        goto(Quest_Restorehodoucity_Recruit_Blackbelt_A_Dialogue)
+   MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_2,Quest_Restorehodoucity_HideBlackbelt_RouteB_Script)
     }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
+}
+
+script RouteB_Script_Interact_Adam
+{
+    trainerbattle_single(TRAINER_ADAM,format("Improving as a Trainer requires understanding and managing luck in battle."),format("I need to stay composed when things aren’t going my way…"),RouteB_Script_Interact_Adam)
+    msgbox(format("Sifu Ying used to constantly remind me that accepting luck as part of battles would help develop my mindset."),,SPEAKER_ADAM)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Adam)
+    closemessage
+    release
     end
 }
+

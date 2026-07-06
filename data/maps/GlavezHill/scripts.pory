@@ -1,6 +1,9 @@
 mapscripts GlavezHill_MapScripts {
+	MAP_SCRIPT_ON_RESUME
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restaurantexpansion2_HideStaffB_Script)
         call(Quest_NeighborhoodCleanUp3_ObjectVisibility_Script)
 		call(Quest_GardenCleanUp_HideObjects_Script)
     }
@@ -9,18 +12,38 @@ mapscripts GlavezHill_MapScripts {
     ]
 }
 
-script GlavezHill_Mapreview
+script GlavezHeights_EventScript_006E7EFD
 {
-    mappreview
+    trainerbattle_single(TRAINER_006E7EFD,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+script GlavezHeights_EventScript_0272920D
+{
+    trainerbattle_single(TRAINER_0272920D,format("I am a Route Trainer"),format("I lost!"))
+    end
 }
 
-script GlavezHill_EventScript_Julia_Script{
-    trainerbattle_single(TRAINER_CHEF,gText_Julia_PreBattle,gText_Julia_PostBattle, Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
-       call(Quest_Restaurantexpansion2_TrainerB_PostBattle_Script)
+script GlavezHeights_EventScript_012ED80D
+{
+    trainerbattle_single(TRAINER_012ED80D,format("I am a Route Trainer"),format("I lost!"))
+    end
 }
-text gText_Julia_PreBattle{
-	format("")
+
+script GlavezHeights_EventScript_00C593A8
+{
+    trainerbattle_single(TRAINER_00C593A8,format("I am a Route Trainer"),format("I lost!"))
+    end
 }
-text gText_Julia_PostBattle{
-	format("")
+
+script GlavezHeights_EventScript_01C7AF3F
+{
+    trainerbattle_single(TRAINER_01C7AF3F,format("I am a Route Trainer"),format("I lost!"))
+    end
 }
+
+script GlavezHeights_EventScript_00317DFA
+{
+    trainerbattle_single(TRAINER_00317DFA,format("I am a Route Trainer"),format("I lost!"))
+    end
+}
+

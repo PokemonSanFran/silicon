@@ -1,20 +1,21 @@
 #ifndef GUARD_QUESTLOGIC_H
 #define GUARD_QUESTLOGIC_H
 
-bool32 HasPlayerJoinedTheTide(void);
+#include "constants/quest_logic.h"
+
+bool32 HasPlayerJoinedThe_Tide(void);
 u16 Quest_Generic_CountRemainingSubquests(u16);
 bool32 KitchenvolunteeringFunc_IsMapLayoutIdForPantryMaze(int);
 void Quest_Kitchenvolunteering_CreatePantryMaze(void);
 u8 Quest_Kitchenvolunteering_CountRemainingItems(void);
-void Quest_Rockcollector_RespawnStones(void);
 u32 GetCurrentMap(void);
-void Quest_Brucelee_UpdateType(u16 days);
+void Quest_TryCompulsiveHealingPeerSupport_UpdateType(u16 days);
 void TryToUpdateArtisanBalls1SubQuestsState(u16);
 void Quest_ArtisanBalls3_CheckBallSetReward(u32 battler);
 void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void);
 void Quest_Generic_CompleteSubquests(u16 relevantQuest);
 void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest);
-void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstKai(void);
+void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstBaiya(void);
 u32 VSGarbodor_GetGemFromType(void);
 void WowYoureStrong_GetBadgesAndSetTowerState(void);
 bool32 GenerateAndStartWildFogBattle(u32 headerId, u32 area);
@@ -22,6 +23,12 @@ void IncrementFogVariable(void);
 void SetFogVariableAfterLoss(void);
 bool32 ShouldWildBattleBeFog(void); // fogBattle
 u8* PrintUnknownLevel(u32 lvl, u32 battler, u8* text);
+u16 Quest_Persuasivepassenger_CheckQuestAndChooseDriver(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredTunnels(void);
+bool8 Quest_Hodoutunnels_GetVariable_HasDiscoveredScroll(void);
+bool8 Quest_Hodoutunnels_GetVariable_TalkedToElder(void);
+u32 Quest_BetweenAStoneAndAHardPlace_CountRides(void);
+void Quest_RockCollector_ComposeList(void);
 
 bool32 ShouldAskUnhoused(void);
 const u8* ReturnBattleScriptCantUseItem(void);
@@ -37,4 +44,60 @@ void DebugQuest_VSDeoxys(u8);
 void DebugQuest_RPS(u8);
 void DebugQuest_DrugHelmetTest(u8);
 void DebugQuest_RestoreTirabudinGym(u8);
+void DebugQuest_CompulsiveHealingPeerSupport(u8);
+void DebugQuest_StressCup(u8);
+void DebugQuest_RabiesOutbreak(u8);
+void DebugQuest_FreshwaterEvolution(u8);
+void DebugQuest_Smoothiecrafting(u8);
+void DebugQuest_Hodoutunnels(u8);
+void DebugQuest_Psyop(u8);
+void DebugQuest_BetweenAStoneAndAHardPlace(u8);
+void DebugQuest_RockCollector(u8);
+void DebugQuest_BodegaBurnout(u8);
+void DebugQuest_Getthebandbacktogether(u8);
+void DebugQuest_Restaurantexpansion1(u8 state);
+void DebugQuest_Restaurantexpansion2(u8 state);
+void DebugQuest_Diggingupadaorasdirt(u8 state);
+void DebugQuest_Returndoll(u8 state);
+void DebugQuest_Freetheinnocent(u8 state);
+void DebugQuest_Findtheguilty(u8 state);
+void DebugQuest_KitchenVolunteering(u8 state);
+void DebugQuest_RestoreEsupleeOutskirtsGym(u8 state);
+void DebugQuest_RestoreZenzuIslandGym(u8 state);
+void DebugQuest_RestoreHodouCityGym(u8 state);
+void DebugQuest_ImprovBattling(u8 state);
+void DebugQuest_Teachatrainertofish(u8 state);
+void DebugQuest_Wildfirerisk(u8 state);
+void DebugQuest_Hang20(u8 state);
+void DebugQuest_CulturalPurity(u8 state);
+void DebugQuest_HybridCulture(u8 state);
+
+void AwardPartyMonChampionRibbon(void);
+void Script_CheckIfAnyMonHasChampionRibbon(void);
+
+u32 exponent(u32 y, u32 x);
+void CountDefeatedRabiesMon(void);
+void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
+void Quest_SmoothieCrafting_BufferRecipe(void);
+void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
+u32 Quest_BodegaBurnout_CountRemainingSubquests(void);
+bool8 Quest_Freetheinnocent_FactsLearned(void);
+bool8 Quest_Freetheinnocent_CupFound(void);
+bool8 Quest_Freetheinnocent_CashierSpoken(void);
+bool8 IsHalaiIslandUnderConstruction(void);
+
+void Quest_FlightPatterns_SetLastFlightEncounter(u32);
+u32 Quest_FlightPatterns_GetFlightPath(void);
+void Quest_FlightPatterns_SetFlightPath(u32);
+enum FlyEncounterTypes Quest_FlightPatterns_GetEncounterType(u32, bool32);
+void Quest_FlightPatterns_ClearFlightPath(void);
+bool8 Quest_TeachATrainerToFish_TryRunExclaimScript(void);
+void Quest_TeachATrainerToFish_RecordEnemy(void);
+bool8 Quest_TeachATrainerToFish_IsMaxStreakAndPerfectCast(void);
+void Quest_Wildfirerisk_RegrowTreeIfQuestIncomplete(void);
+void CountDefeatedCresaltaVista(void);
+void ResetDefeatedCresaltaVista(void);
+void BufferSunriseTimes(void);
+void BufferSunsetTimes(void);
+
 #endif //GUARD_QUESTLOGIC_H

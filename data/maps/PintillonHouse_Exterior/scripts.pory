@@ -1,5 +1,5 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const KAI = 1
+const BAIYA = 1
 
 mapscripts PintillonHouse_Exterior_MapScripts
 {
@@ -16,7 +16,7 @@ mapscripts PintillonHouse_Exterior_MapScripts
 
 script PintillonHouse_MapScripts_OnTransition
 {
-    if (var(VAR_BATTLE_8_STATE) == DEFEATED_KAI_PINTILLONHOUSE)
+    if (var(VAR_BATTLE_8_STATE) == DEFEATED_BAIYA_PINTILLONHOUSE)
     {
         call(Battle8_SetUpObject_Script)
     }

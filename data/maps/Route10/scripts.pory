@@ -1,7 +1,115 @@
 mapscripts Route10_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
-            call(NewAssholeAppears_HideKai_Script)
+        call_if_gt(VAR_ROUTE10_STATE,SAVED_BEFORE_BAIYA_ROUTE10,NewAssholeAppears_Script_HideBaiya)
+        call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerG)
+
     }
+}
+script Route10_Script_Interact_BodegaburnoutDeliveryStrengthH
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_1,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryStrengthH)
+    bufferitemname(STR_VAR_1,ITEM_CLEAR_AMULET)
+    msgbox(format("Now with this {STR_VAR_1}, it won’t matter if she switches her Gyarados in…"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH)
+    closemessage
+    release
+    end
+}
+
+script Route10_Script_Interact_Quest_GetthebandbacktogetherbikerG
+{
+    trainerbattle_single(TRAINER_QUEST_GETTHEBANDBACKTOGETHERBIKERG,format("I’m trying to memorize all the routes in the region. Resido is so much bigger than it seems!"),format("All this traveling and I still couldn’t beat you."),Route10_Script_Interact_Quest_GetthebandbacktogetherbikerG)
+    call_if_quest_active(QUEST_GETTHEBANDBACKTOGETHER,Quest_Getthebandbacktogether_Complete_GetthebandbacktogetherbikerG)
+    msgbox(format("Poké Marts are testing a new item delivery system, and the Gear Grind Gang has been in talks to help with delivery. It would be a fun challenge!"),,SPEAKER_GETTHEBANDBACKTOGETHERBIKERG)
+    closemessage
+    release
+    end
+}
+
+script Route10_Script_Freetheinnocenthikerf
+{
+    trainerbattle_single(TRAINER_QUEST_FREETHEINNOCENTHIKERF,format("Stay curious! A diverse set of skills and interests makes you a better person! Having a diverse team makes you a better battler, too! Here, let me show you!"),format("Perhaps I’m focusing too much on battling…Back to hiking! Then, pottery!"),Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+    handlerematch(Route10_Script_RematchFreetheinnocenthikerf)
+    goto(Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+}
+
+script Route10_Script_RematchFreetheinnocenthikerf
+{
+    trainerbattle_rematch(TRAINER_QUEST_FREETHEINNOCENTHIKERF,format("I’ve been trying to flesh out the roles on my team. Wanna see?"),format("I don’t have a Pokemon with a role that can beat you!"))
+    goto(Route10_Dialogue_PostBattleFreetheinnocenthikerf)
+}
+
+script Route10_Dialogue_PostBattleFreetheinnocenthikerf
+{
+    goto_if_quest_not_inactive(QUEST_FREETHEINNOCENT,Quest_Freetheinnocent_Dialogue_Freetheinnocenthikerf)
+    msgbox(format("There’s a lot of tribalists out there. People who just belong to one “group”. But The Tide seems to cut through that. They’ve got all people of all walks of life on their side."),,SPEAKER_FREETHEINNOCENTHIKERF)
+    buffermapname(STR_VAR_1,MAP_CHASILLA)
+    msgbox(format("I’m part of a hiking club with some Tide members, and even the students of {STR_VAR_1} seem to be involved with ‘em!"),,SPEAKER_FREETHEINNOCENTHIKERF)
+    msgbox(format("The Tide is the diversity we should all strive for at its finest, in my opinion."),,SPEAKER_FREETHEINNOCENTHIKERF)
+    closemessage
+    release
+    end
+}
+
+script Route10_EventScript_0465BF77
+{
+    trainerbattle_single(TRAINER_0465BF77,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_0467DF00
+{
+    trainerbattle_single(TRAINER_0467DF00,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_04687C53
+{
+    trainerbattle_single(TRAINER_04687C53,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_048D5D99
+{
+    trainerbattle_single(TRAINER_048D5D99,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_04E334E9
+{
+    trainerbattle_single(TRAINER_04E334E9,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_04A59E40
+{
+    trainerbattle_single(TRAINER_04A59E40,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_05BDEABF
+{
+    trainerbattle_single(TRAINER_05BDEABF,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_06400A0C
+{
+    trainerbattle_single(TRAINER_06400A0C,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route10_EventScript_070F6125
+{
+    trainerbattle_single(TRAINER_070F6125,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
 

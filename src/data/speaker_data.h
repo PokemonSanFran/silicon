@@ -2,224 +2,224 @@
 #include "nameplate.h"
 #include "constants/nameplate.h"
 
-static const u32 gSpeakerIcon_Test[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/test.4bpp");
-static const u16 sSpeakerPal_Test[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/blaine.gbapal");
+static const u32 gSpeakerIcon_Test[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/test.png", ".4bpp");
+static const u16 sSpeakerPal_Test[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/blaine.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Blaine[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/blaine.4bpp");
-static const u16 sSpeakerPal_Blaine[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/blaine.gbapal");
+static const u32 gSpeakerIcon_Blaine[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/blaine.png", ".4bpp");
+static const u16 sSpeakerPal_Blaine[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/blaine.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Brock[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/brock.4bpp");
-static const u16 sSpeakerPal_Brock[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/brock.gbapal");
+static const u32 gSpeakerIcon_Brock[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/brock.png", ".4bpp");
+static const u16 sSpeakerPal_Brock[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/brock.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Bruno[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/bruno.4bpp");
-static const u16 sSpeakerPal_Bruno[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/bruno.gbapal");
+static const u32 gSpeakerIcon_Bruno[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/bruno.png", ".4bpp");
+static const u16 sSpeakerPal_Bruno[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/bruno.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Bug_Catcher[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/bug_catcher.4bpp");
-static const u16 sSpeakerPal_Bug_Catcher[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/bug_catcher.gbapal");
+static const u32 gSpeakerIcon_Bug_Catcher[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/bug_catcher.png", ".4bpp");
+static const u16 sSpeakerPal_Bug_Catcher[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/bug_catcher.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Shinzo[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/shinzo.4bpp");
-static const u16 sSpeakerPal_Shinzo[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/shinzo.gbapal");
+static const u32 gSpeakerIcon_Shinzo[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/shinzo.png", ".4bpp");
+static const u16 sSpeakerPal_Shinzo[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/shinzo.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Neriene[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/neriene.4bpp");
-static const u16 sSpeakerPal_Neriene[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/neriene.gbapal");
+static const u32 gSpeakerIcon_Neriene[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/neriene.png", ".4bpp");
+static const u16 sSpeakerPal_Neriene[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/neriene.png", ".gbapal");
 
-static const u32 gSpeakerIcon_AmiArgento[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/amiargento.4bpp");
-static const u16 sSpeakerPal_AmiArgento[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/amiargento.gbapal");
+static const u32 gSpeakerIcon_AmiArgento[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/amiargento.png", ".4bpp");
+static const u16 sSpeakerPal_AmiArgento[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/amiargento.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Elm[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/elm.4bpp");
-static const u16 sSpeakerPal_Elm[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/elm.gbapal");
+static const u32 gSpeakerIcon_Elm[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/elm.png", ".4bpp");
+static const u16 sSpeakerPal_Elm[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/elm.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Erika[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/erika.4bpp");
-static const u16 sSpeakerPal_Erika[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/erika.gbapal");
+static const u32 gSpeakerIcon_Erika[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/erika.png", ".4bpp");
+static const u16 sSpeakerPal_Erika[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/erika.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Belen[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/belen.4bpp");
-static const u16 sSpeakerPal_Belen[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/belen.gbapal");
+static const u32 gSpeakerIcon_Belen[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/belen.png", ".4bpp");
+static const u16 sSpeakerPal_Belen[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/belen.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Fisherman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/fisherman.4bpp");
-static const u16 sSpeakerPal_Fisherman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/fisherman.gbapal");
+static const u32 gSpeakerIcon_Fisherman[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/fisherman.png", ".4bpp");
+static const u16 sSpeakerPal_Fisherman[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/fisherman.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Alcmene[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/alcmene.4bpp");
-static const u16 sSpeakerPal_Alcmene[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/alcmene.gbapal");
+static const u32 gSpeakerIcon_Vigrim[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/vigrim.png", ".4bpp");
+static const u16 sSpeakerPal_Vigrim[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/vigrim.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Girl[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/girl.4bpp");
-static const u16 sSpeakerPal_Girl[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/girl.gbapal");
+static const u32 gSpeakerIcon_Girl[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/girl.png", ".4bpp");
+static const u16 sSpeakerPal_Girl[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/girl.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Green[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/green.4bpp");
-static const u16 sSpeakerPal_Green[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/green.gbapal");
+static const u32 gSpeakerIcon_Green[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/green.png", ".4bpp");
+static const u16 sSpeakerPal_Green[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/green.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Janine[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/janine.4bpp");
-static const u16 sSpeakerPal_Janine[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/janine.gbapal");
+static const u32 gSpeakerIcon_Janine[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/janine.png", ".4bpp");
+static const u16 sSpeakerPal_Janine[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/janine.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Dimu[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/dimu.4bpp");
-static const u16 sSpeakerPal_Dimu[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/dimu.gbapal");
+static const u32 gSpeakerIcon_Dimu[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/dimu.png", ".4bpp");
+static const u16 sSpeakerPal_Dimu[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/dimu.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Karen[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/karen.4bpp");
-static const u16 sSpeakerPal_Karen[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/karen.gbapal");
+static const u32 gSpeakerIcon_Karen[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/karen.png", ".4bpp");
+static const u16 sSpeakerPal_Karen[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/karen.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Kid[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kid.4bpp");
-static const u16 sSpeakerPal_Kid[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kid.gbapal");
+static const u32 gSpeakerIcon_Kid[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/kid.png", ".4bpp");
+static const u16 sSpeakerPal_Kid[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/kid.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Keiying[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/keiying.4bpp");
-static const u16 sSpeakerPal_Keiying[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/keiying.gbapal");
+static const u32 gSpeakerIcon_Keiying[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/keiying.png", ".4bpp");
+static const u16 sSpeakerPal_Keiying[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/keiying.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Kurt[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kurt.4bpp");
-static const u16 sSpeakerPal_Kurt[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kurt.gbapal");
+static const u32 gSpeakerIcon_Kurt[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/kurt.png", ".4bpp");
+static const u16 sSpeakerPal_Kurt[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/kurt.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Lance[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/lance.4bpp");
-static const u16 sSpeakerPal_Lance[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/lance.gbapal");
+static const u32 gSpeakerIcon_Lance[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/lance.png", ".4bpp");
+static const u16 sSpeakerPal_Lance[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/lance.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Lt_Surge[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/lt_surge.4bpp");
-static const u16 sSpeakerPal_Lt_Surge[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/lt_surge.gbapal");
+static const u32 gSpeakerIcon_Lt_Surge[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/lt_surge.png", ".4bpp");
+static const u16 sSpeakerPal_Lt_Surge[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/lt_surge.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Man[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/man.4bpp");
-static const u16 sSpeakerPal_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/man.gbapal");
+static const u32 gSpeakerIcon_Man[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/man.png", ".4bpp");
+static const u16 sSpeakerPal_Man[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/man.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Misty[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/misty.4bpp");
-static const u16 sSpeakerPal_Misty[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/misty.gbapal");
+static const u32 gSpeakerIcon_Misty[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/misty.png", ".4bpp");
+static const u16 sSpeakerPal_Misty[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/misty.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Kauna[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kauna.4bpp");
-static const u16 sSpeakerPal_Kauna[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kauna.gbapal");
+static const u32 gSpeakerIcon_Pua[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/pua.png", ".4bpp");
+static const u16 sSpeakerPal_Pua[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/pua.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Old_Man[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/old_man.4bpp");
-static const u16 sSpeakerPal_Old_Man[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/old_man.gbapal");
+static const u32 gSpeakerIcon_Old_Man[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/old_man.png", ".4bpp");
+static const u16 sSpeakerPal_Old_Man[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/old_man.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Old_Woman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/old_woman.4bpp");
-static const u16 sSpeakerPal_Old_Woman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/old_woman.gbapal");
+static const u32 gSpeakerIcon_Old_Woman[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/old_woman.png", ".4bpp");
+static const u16 sSpeakerPal_Old_Woman[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/old_woman.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Policeman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/policeman.4bpp");
-static const u16 sSpeakerPal_Policeman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/policeman.gbapal");
+static const u32 gSpeakerIcon_Policeman[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/policeman.png", ".4bpp");
+static const u16 sSpeakerPal_Policeman[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/policeman.png", ".gbapal");
 
-static const u32 gSpeakerIcon_BD[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/bd.4bpp");
-static const u16 sSpeakerPal_BD[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/bd.gbapal");
+static const u32 gSpeakerIcon_BD[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/bd.png", ".4bpp");
+static const u16 sSpeakerPal_BD[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/bd.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Red[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/red.4bpp");
-static const u16 sSpeakerPal_Red[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/red.gbapal");
+static const u32 gSpeakerIcon_Red[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/red.png", ".4bpp");
+static const u16 sSpeakerPal_Red[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/red.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Rocket_Grunt_F[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/rocket_grunt_f.4bpp");
-static const u16 sSpeakerPal_Rocket_Grunt_F[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/rocket_grunt_f.gbapal");
+static const u32 gSpeakerIcon_Rocket_Grunt_F[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/rocket_grunt_f.png", ".4bpp");
+static const u16 sSpeakerPal_Rocket_Grunt_F[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/rocket_grunt_f.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Rocket_Grunt_M[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/rocket_grunt_m.4bpp");
-static const u16 sSpeakerPal_Rocket_Grunt_M[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/rocket_grunt_m.gbapal");
+static const u32 gSpeakerIcon_Rocket_Grunt_M[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/rocket_grunt_m.png", ".4bpp");
+static const u16 sSpeakerPal_Rocket_Grunt_M[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/rocket_grunt_m.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Ramesh[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/ramesh.4bpp");
-static const u16 sSpeakerPal_Ramesh[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/ramesh.gbapal");
+static const u32 gSpeakerIcon_Ramesh[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/ramesh.png", ".4bpp");
+static const u16 sSpeakerPal_Ramesh[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/ramesh.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Silver[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/silver.4bpp");
-static const u16 sSpeakerPal_Silver[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/silver.gbapal");
+static const u32 gSpeakerIcon_Silver[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/silver.png", ".4bpp");
+static const u16 sSpeakerPal_Silver[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/silver.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Steven[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/steven.4bpp");
-static const u16 sSpeakerPal_Steven[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/steven.gbapal");
+static const u32 gSpeakerIcon_Steven[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/steven.png", ".4bpp");
+static const u16 sSpeakerPal_Steven[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/steven.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Swimmer_M[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/swimmer_m.4bpp");
-static const u16 sSpeakerPal_Swimmer_M[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/swimmer_m.gbapal");
+static const u32 gSpeakerIcon_Swimmer_M[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/swimmer_m.png", ".4bpp");
+static const u16 sSpeakerPal_Swimmer_M[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/swimmer_m.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Emrys[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/emrys.4bpp");
-static const u16 sSpeakerPal_Emrys[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/emrys.gbapal");
+static const u32 gSpeakerIcon_Emrys[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/emrys.png", ".4bpp");
+static const u16 sSpeakerPal_Emrys[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/emrys.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Will[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/will.4bpp");
-static const u16 sSpeakerPal_Will[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/will.gbapal");
+static const u32 gSpeakerIcon_Will[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/will.png", ".4bpp");
+static const u16 sSpeakerPal_Will[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/will.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Woman[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/woman.4bpp");
-static const u16 sSpeakerPal_Woman[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/woman.gbapal");
+static const u32 gSpeakerIcon_Woman[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/woman.png", ".4bpp");
+static const u16 sSpeakerPal_Woman[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/woman.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Youngster[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/youngster.4bpp");
-static const u16 sSpeakerPal_Youngster[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/youngster.gbapal");
+static const u32 gSpeakerIcon_Youngster[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/youngster.png", ".4bpp");
+static const u16 sSpeakerPal_Youngster[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/youngster.png", ".gbapal");
 
 //
-static const u32 gSpeakerIcon_Ace_Trainer_F[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/ace_trainer_f.4bpp");
-static const u16 sSpeakerPal_Ace_Trainer_F[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/ace_trainer_f.gbapal");
+static const u32 gSpeakerIcon_Ace_Trainer_F[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/ace_trainer_f.png", ".4bpp");
+static const u16 sSpeakerPal_Ace_Trainer_F[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/ace_trainer_f.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Ace_Trainer_M[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.4bpp");
-static const u16 sSpeakerPal_Ace_Trainer_M[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.gbapal");
+static const u32 gSpeakerIcon_Ace_Trainer_M[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.png", ".4bpp");
+static const u16 sSpeakerPal_Ace_Trainer_M[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/ace_trainer_m.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Kai[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kai.4bpp");
-static const u16 sSpeakerPal_Kai[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kai.gbapal");
+static const u32 gSpeakerIcon_Baiya[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/baiya.png", ".4bpp");
+static const u16 sSpeakerPal_Baiya[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/baiya.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Adaora[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/adaora.4bpp");
-static const u16 sSpeakerPal_Adaora[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/adaora.gbapal");
+static const u32 gSpeakerIcon_Adaora[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/adaora.png", ".4bpp");
+static const u16 sSpeakerPal_Adaora[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/adaora.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Aroma_Lady[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/aroma_lady.4bpp");
-static const u16 sSpeakerPal_Aroma_Lady[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/aroma_lady.gbapal");
+static const u32 gSpeakerIcon_Aroma_Lady[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/aroma_lady.png", ".4bpp");
+static const u16 sSpeakerPal_Aroma_Lady[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/aroma_lady.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Battle_Girl[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/battle_girl.4bpp");
-static const u16 sSpeakerPal_Battle_Girl[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/battle_girl.gbapal");
+static const u32 gSpeakerIcon_Battle_Girl[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/battle_girl.png", ".4bpp");
+static const u16 sSpeakerPal_Battle_Girl[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/battle_girl.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Beauty[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/beauty.4bpp");
-static const u16 sSpeakerPal_Beauty[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/beauty.gbapal");
+static const u32 gSpeakerIcon_Beauty[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/beauty.png", ".4bpp");
+static const u16 sSpeakerPal_Beauty[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/beauty.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Bill[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/bill.4bpp");
-static const u16 sSpeakerPal_Bill[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/bill.gbapal");
+static const u32 gSpeakerIcon_Bill[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/bill.png", ".4bpp");
+static const u16 sSpeakerPal_Bill[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/bill.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Bird_Keeper[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/bird_keeper.4bpp");
-static const u16 sSpeakerPal_Bird_Keeper[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/bird_keeper.gbapal");
+static const u32 gSpeakerIcon_Bird_Keeper[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/bird_keeper.png", ".4bpp");
+static const u16 sSpeakerPal_Bird_Keeper[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/bird_keeper.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Black_Belt[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/black_belt.4bpp");
-static const u16 sSpeakerPal_Black_Belt[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/black_belt.gbapal");
+static const u32 gSpeakerIcon_Black_Belt[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/black_belt.png", ".4bpp");
+static const u16 sSpeakerPal_Black_Belt[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/black_belt.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Boarder[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/boarder.4bpp");
-static const u16 sSpeakerPal_Boarder[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/boarder.gbapal");
+static const u32 gSpeakerIcon_Boarder[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/boarder.png", ".4bpp");
+static const u16 sSpeakerPal_Boarder[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/boarder.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Collector[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/collector.4bpp");
-static const u16 sSpeakerPal_Collector[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/collector.gbapal");
+static const u32 gSpeakerIcon_Collector[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/collector.png", ".4bpp");
+static const u16 sSpeakerPal_Collector[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/collector.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Eusine[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/eusine.4bpp");
-static const u16 sSpeakerPal_Eusine[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/eusine.gbapal");
+static const u32 gSpeakerIcon_Eusine[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/eusine.png", ".4bpp");
+static const u16 sSpeakerPal_Eusine[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/eusine.pal", ".gbapal");
 
-static const u32 gSpeakerIcon_Juggler[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/juggler.4bpp");
-static const u16 sSpeakerPal_Juggler[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/juggler.gbapal");
+static const u32 gSpeakerIcon_Juggler[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/juggler.png", ".4bpp");
+static const u16 sSpeakerPal_Juggler[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/juggler.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Kimono_Girl[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/kimono_girl.4bpp");
-static const u16 sSpeakerPal_Kimono_Girl[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/kimono_girl.gbapal");
+static const u32 gSpeakerIcon_Kimono_Girl[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/kimono_girl.png", ".4bpp");
+static const u16 sSpeakerPal_Kimono_Girl[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/kimono_girl.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Lass[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/lass.4bpp");
-static const u16 sSpeakerPal_Lass[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/lass.gbapal");
+static const u32 gSpeakerIcon_Lass[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/lass.png", ".4bpp");
+static const u16 sSpeakerPal_Lass[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/lass.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Li[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/li.4bpp");
-static const u16 sSpeakerPal_Li[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/li.gbapal");
+static const u32 gSpeakerIcon_Li[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/li.png", ".4bpp");
+static const u16 sSpeakerPal_Li[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/li.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Medium[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/medium.4bpp");
-static const u16 sSpeakerPal_Medium[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/medium.gbapal");
+static const u32 gSpeakerIcon_Medium[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/medium.png", ".4bpp");
+static const u16 sSpeakerPal_Medium[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/medium.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Medium_2[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/medium_2.4bpp");
-static const u16 sSpeakerPal_Medium_2[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/medium_2.gbapal");
+static const u32 gSpeakerIcon_Medium_2[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/medium_2.png", ".4bpp");
+static const u16 sSpeakerPal_Medium_2[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/medium_2.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Mom[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/mom.4bpp");
-static const u16 sSpeakerPal_Mom[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/mom.gbapal");
+static const u32 gSpeakerIcon_Mom[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/mom.png", ".4bpp");
+static const u16 sSpeakerPal_Mom[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/mom.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Petrel[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/petrel.4bpp");
-static const u16 sSpeakerPal_Petrel[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/petrel.gbapal");
+static const u32 gSpeakerIcon_Petrel[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/petrel.png", ".4bpp");
+static const u16 sSpeakerPal_Petrel[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/petrel.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Poke_Maniac[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/poke_maniac.4bpp");
-static const u16 sSpeakerPal_Poke_Maniac[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/poke_maniac.gbapal");
+static const u32 gSpeakerIcon_Poke_Maniac[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/poke_maniac.png", ".4bpp");
+static const u16 sSpeakerPal_Poke_Maniac[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/poke_maniac.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Proton[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/proton.4bpp");
-static const u16 sSpeakerPal_Proton[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/proton.gbapal");
+static const u32 gSpeakerIcon_Proton[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/proton.png", ".4bpp");
+static const u16 sSpeakerPal_Proton[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/proton.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Sage[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/sage.4bpp");
-static const u16 sSpeakerPal_Sage[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/sage.gbapal");
+static const u32 gSpeakerIcon_Sage[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/sage.png", ".4bpp");
+static const u16 sSpeakerPal_Sage[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/sage.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Super_Nerd[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/super_nerd.4bpp");
-static const u16 sSpeakerPal_Super_Nerd[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/super_nerd.gbapal");
+static const u32 gSpeakerIcon_Super_Nerd[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/super_nerd.png", ".4bpp");
+static const u16 sSpeakerPal_Super_Nerd[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/super_nerd.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Waiter[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/waiter.4bpp");
-static const u16 sSpeakerPal_Waiter[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/waiter.gbapal");
+static const u32 gSpeakerIcon_Waiter[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/waiter.png", ".4bpp");
+static const u16 sSpeakerPal_Waiter[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/waiter.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Firebreather[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/firebreather.4bpp");
-static const u16 sSpeakerPal_Firebreather[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/firebreather.gbapal");
+static const u32 gSpeakerIcon_Firebreather[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/firebreather.png", ".4bpp");
+static const u16 sSpeakerPal_Firebreather[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/firebreather.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Biker[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/60.4bpp");
-static const u16 sSpeakerPal_Biker[]  = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/60.gbapal");
+static const u32 gSpeakerIcon_Biker[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/60.png", ".4bpp");
+static const u16 sSpeakerPal_Biker[]  = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/60.png", ".gbapal");
 
-static const u32 gSpeakerIcon_Melissa[] = INCBIN_U32("graphics/ui_menus/msgbox/character_heads/erika.4bpp");
-static const u16 sSpeakerPal_Melissa[] = INCBIN_U16("graphics/ui_menus/msgbox/character_heads/erika.gbapal");
+static const u32 gSpeakerIcon_Melissa[] = INCGFX_U32("graphics/ui_menus/msgbox/character_heads/erika.png", ".4bpp");
+static const u16 sSpeakerPal_Melissa[] = INCGFX_U16("graphics/ui_menus/msgbox/character_heads/erika.png", ".gbapal");
 
 static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
 {
     [SPEAKER_TEST] =
     {
-        .name = _("Domimic"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Domimic"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Test,
         .speakerPal = sSpeakerPal_Test,
         //.speakerIcon = gSpeakerIcon_Super_Nerd,
@@ -227,1880 +227,2988 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     },
     [SPEAKER_DEFAULT] =
     {
-        .name = _("NPC"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("NPC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
     [SPEAKER_DIMU] =
     {
-        .name = _("Dimu"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Dimu"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Dimu,
         .speakerPal = sSpeakerPal_Dimu,
     },
     [SPEAKER_BLAINE] =
     {
-        .name = _("Blaine"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Blaine"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
     [SPEAKER_BROCK] =
     {
-        .name = _("Brock"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Brock"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
     [SPEAKER_BRUNO] =
     {
-        .name = _("Bruno"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bruno"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bruno,
         .speakerPal = sSpeakerPal_Bruno,
     },
     [SPEAKER_BUG_CATCHER] =
     {
-        .name = _("Bug Catcher"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bug Catcher"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_SHINZO] =
     {
-        .name = _("Shinzo"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Shinzo"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Shinzo,
         .speakerPal = sSpeakerPal_Shinzo,
     },
     [SPEAKER_NERIENE] =
     {
-        .name = _("Neriene"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Neriene"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Neriene,
         .speakerPal = sSpeakerPal_Neriene,
     },
     [SPEAKER_AMIARGENTO] =
     {
-        .name = _("Ami Argento"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Ami Argento"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_AmiArgento,
         .speakerPal = sSpeakerPal_AmiArgento,
     },
     [SPEAKER_ELM] =
     {
-        .name = _("Elm"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Elm"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Elm,
         .speakerPal = sSpeakerPal_Elm,
     },
     [SPEAKER_ERIKA] =
     {
-        .name = _("Erika"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Erika"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_BELEN] =
     {
-        .name = _("Belen"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Belen"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Belen,
         .speakerPal = sSpeakerPal_Belen,
     },
     [SPEAKER_FISHERMAN] =
     {
-        .name = _("Fisherman"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Fisherman"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
-    [SPEAKER_ALCMENE] =
+    [SPEAKER_VIGRIM] =
     {
-        .name = _("Alcmene"),
-        .title = _("Tide Leader"),
+        .name = COMPOUND_STRING("Vigrim"),
+        .title = COMPOUND_STRING("Tide Leader"),
         .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
-    [SPEAKER_ALCMENE_UNKNOWN] =
+    [SPEAKER_VIGRIM_UNKNOWN] =
     {
-        .name = _("???"),
-        .title = _("???"),
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("???"),
         .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Alcmene,
-        .speakerPal = sSpeakerPal_Alcmene,
+        .speakerIcon = gSpeakerIcon_Vigrim,
+        .speakerPal = sSpeakerPal_Vigrim,
     },
     [SPEAKER_GIRL] =
     {
-        .name = _("Girl"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Girl"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
     [SPEAKER_GREEN] =
     {
-        .name = _("Green"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Green"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
     [SPEAKER_JANINE] =
     {
-        .name = _("Janine"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Janine"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Janine,
         .speakerPal = sSpeakerPal_Janine,
     },
     [SPEAKER_KAREN] =
     {
-        .name = _("Karen"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Karen"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Karen,
         .speakerPal = sSpeakerPal_Karen,
     },
     [SPEAKER_KID] =
     {
-        .name = _("Kid"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Kid"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_KEIYING] =
     {
-        .name = _("Keiying"),
-        .title = _("Sharp Rise COO"),
+        .name = COMPOUND_STRING("Kei-Ying"),
+        .title = COMPOUND_STRING("SharpRise COO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Keiying,
         .speakerPal = sSpeakerPal_Keiying,
     },
     [SPEAKER_KEIYING_GYM] =
     {
-        .name = _("Keiying"),
-        .title = _("Ex-Gym Leader"),
+        .name = COMPOUND_STRING("Keiying"),
+        .title = COMPOUND_STRING("Ex-Gym Leader"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Keiying,
         .speakerPal = sSpeakerPal_Keiying,
     },
     [SPEAKER_KURT] =
     {
-        .name = _("Kurt"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Kurt"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
     [SPEAKER_LANCE] =
     {
-        .name = _("Lance"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Lance"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lance,
         .speakerPal = sSpeakerPal_Lance,
     },
     [SPEAKER_LT_SURGE] =
     {
-        .name = _("Lt.Surge"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Lt.Surge"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lt_Surge,
         .speakerPal = sSpeakerPal_Lt_Surge,
     },
     [SPEAKER_MAN] =
     {
-        .name = _("Man"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Man"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_MISTY] =
     {
-        .name = _("Misty"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Misty"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
-    [SPEAKER_KAUNA] =
+    [SPEAKER_PUA] =
     {
-        .name = _("Kauna"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Pua"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kauna,
-        .speakerPal = sSpeakerPal_Kauna,
+        .speakerIcon = gSpeakerIcon_Pua,
+        .speakerPal = sSpeakerPal_Pua,
     },
     [SPEAKER_OLD_MAN] =
     {
-        .name = _("Old Man"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Old Man"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_POLICEMAN] =
     {
-        .name = _("Policeman"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Policeman"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
     [SPEAKER_BD] =
     {
-        .name = _("BD"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("BD"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_BD,
         .speakerPal = sSpeakerPal_BD,
     },
     [SPEAKER_RED] =
     {
-        .name = _("Red"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Red"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Red,
         .speakerPal = sSpeakerPal_Red,
     },
     [SPEAKER_ROCKET_GRUNT_MALE] =
     {
-        .name = _("Rocket Grunt"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rocket Grunt"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
     [SPEAKER_ROCKET_GRUNT_FEMALE] =
     {
-        .name = _("Rocket Grunt"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rocket Grunt"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
     [SPEAKER_RAMESH] =
     {
-        .name = _("Ramesh"),
-        .title = _("Sharp Rise CMO"),
+        .name = COMPOUND_STRING("Ramesh"),
+        .title = COMPOUND_STRING("SharpRise CMO"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Ramesh,
         .speakerPal = sSpeakerPal_Ramesh,
     },
     [SPEAKER_SILVER] =
     {
-        .name = _("Silver"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Silver"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Silver,
         .speakerPal = sSpeakerPal_Silver,
     },
     [SPEAKER_STEVEN] =
     {
-        .name = _("Steven"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Steven"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
     [SPEAKER_SWIMMER_MALE] =
     {
-        .name = _("Swimmer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Swimmer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
     [SPEAKER_EMRYS] =
     {
-        .name = _("Emrys"),
-        .title = _("Gym Leader"),
+        .name = COMPOUND_STRING("Emrys"),
+        .title = COMPOUND_STRING("Gym Leader"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Emrys,
         .speakerPal = sSpeakerPal_Emrys,
     },
     [SPEAKER_WILL] =
     {
-        .name = _("Will"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Will"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Will,
         .speakerPal = sSpeakerPal_Will,
     },
     [SPEAKER_WOMAN] =
     {
-        .name = _("Woman"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Woman"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_YOUNGSTER] =
     {
-        .name = _("Youngster"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Youngster"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Youngster,
         .speakerPal = sSpeakerPal_Youngster,
     },
     [SPEAKER_FIREBREATHER] =
     {
-        .name = _("Firebreather"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Firebreather"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_BEAUTY] =
     {
-        .name = _("Beauty"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Beauty"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Beauty,
         .speakerPal = sSpeakerPal_Beauty,
     },
     [SPEAKER_BIRD_KEEPER] =
     {
-        .name = _("Bird Keeper"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bird Keeper"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
     [SPEAKER_BLACK_BELT] =
     {
-        .name = _("Black Belt"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Black Belt"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_EUSINE] =
     {
-        .name = _("Eusine"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Eusine"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Eusine,
         .speakerPal = sSpeakerPal_Eusine,
     },
     [SPEAKER_PROTON] =
     {
-        .name = _("Proton"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Proton"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
     },
     [SPEAKER_PETREL] =
     {
-        .name = _("Petrel"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Petrel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
     [SPEAKER_ADAORA] =
     {
-        .name = _("Adaora"),
-        .title = _("Tide Admin"),
+        .name = COMPOUND_STRING("Adaora"),
+        .title = COMPOUND_STRING("Tide Admin"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Adaora,
         .speakerPal = sSpeakerPal_Adaora,
     },
     [SPEAKER_ADAORA_FIRST_INTRO] =
     {
-        .name = _("Adaora"),
-        .title = _("Volunteer"),
+        .name = COMPOUND_STRING("Adaora"),
+        .title = COMPOUND_STRING("Volunteer"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Adaora,
         .speakerPal = sSpeakerPal_Adaora,
     },
-    [SPEAKER_KAI] =
+    [SPEAKER_BAIYA] =
     {
-        .name = _("Kai"),
-        .title = _("{PKMN} Trainer"),
+        .name = COMPOUND_STRING("Baiya"),
+        .title = COMPOUND_STRING("{PKMN} Trainer"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kai,
-        .speakerPal = sSpeakerPal_Kai,
+        .speakerIcon = gSpeakerIcon_Baiya,
+        .speakerPal = sSpeakerPal_Baiya,
     },
-    [SPEAKER_KAI_TIDE] =
+    [SPEAKER_BAIYA_TIDE] =
     {
-        .name = _("Kai"),
-        .title = _("The Tide"),
+        .name = COMPOUND_STRING("Baiya"),
+        .title = COMPOUND_STRING("The Tide"),
         .gender = MALE,
-        .speakerIcon = gSpeakerIcon_Kai,
-        .speakerPal = sSpeakerPal_Kai,
+        .speakerIcon = gSpeakerIcon_Baiya,
+        .speakerPal = sSpeakerPal_Baiya,
     },
     [SPEAKER_COLLECTOR] =
     {
-        .name = _("Collector"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Collector"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_BILL] =
     {
-        .name = _("Bill"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bill"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
     [SPEAKER_BOARDER] =
     {
-        .name = _("Boarder"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Boarder"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
     [SPEAKER_JUGGLER] =
     {
-        .name = _("Juggler"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Juggler"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Juggler,
         .speakerPal = sSpeakerPal_Juggler,
     },
     [SPEAKER_KIMONO_GIRL] =
     {
-        .name = _("Kimono Girl"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Kimono Girl"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kimono_Girl,
         .speakerPal = sSpeakerPal_Kimono_Girl,
     },
     [SPEAKER_LASS] =
     {
-        .name = _("Lass"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Lass"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
     [SPEAKER_MEDIUM] =
     {
-        .name = _("Medium"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Medium"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
     },
     [SPEAKER_MEDIUM_2] =
     {
-        .name = _("Medium"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Medium"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
     [SPEAKER_POKE_MANIAC] =
     {
-        .name = _("Poke Maniac"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Poke Maniac"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
     [SPEAKER_SAGE] =
     {
-        .name = _("Sage"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Sage"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Sage,
         .speakerPal = sSpeakerPal_Sage,
     },
     [SPEAKER_SUPER_NERD] =
     {
-        .name = _("Super Nerd"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Super Nerd"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
     [SPEAKER_ACE_TRAINER_M] =
     {
-        .name = _("Ace Trainer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ace Trainer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
     [SPEAKER_ACE_TRAINER_F] =
     {
-        .name = _("Ace Trainer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ace Trainer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
     [SPEAKER_LI] =
     {
-        .name = _("Li"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Li"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
     [SPEAKER_AROMA_LADY] =
     {
-        .name = _("Aroma Lady"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Aroma Lady"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
     [SPEAKER_BATTLE_GIRL] =
     {
-        .name = _("Battle Girl"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Battle Girl"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
     [SPEAKER_MOM] =
     {
-        .name = _("Mom"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Mom"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Mom,
         .speakerPal = sSpeakerPal_Mom,
     },
     [SPEAKER_WAITER] =
     {
-        .name = _("Waiter"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Waiter"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Waiter,
         .speakerPal = sSpeakerPal_Waiter,
     },
     [SPEAKER_NEWS] =
     {
-        .name = _("News"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("News"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
     [SPEAKER_ALICIA] =
     {
-        .name = _("{PLAYER}"),
-        .title = _("{PKMN} Trainer"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("{PLAYER}"),
+        .title = COMPOUND_STRING("{PKMN} Trainer"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Mom,
         .speakerPal = sSpeakerPal_Mom,
     },
     [SPEAKER_CHARLOTTE] =
     {
-        .name = _("Charlotte"),
-        .title = _("{PKMN} Trainer"),
+        .name = COMPOUND_STRING("Charlotte"),
+        .title = COMPOUND_STRING("{PKMN} Trainer"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Silver,
         .speakerPal = sSpeakerPal_Silver,
     },
     [SPEAKER_CHARLOTTE_SHARPRISE] =
     {
-        .name = _("Charlotte"),
-        .title = _("Enforcer"),
+        .name = COMPOUND_STRING("Charlotte"),
+        .title = COMPOUND_STRING("Enforcer"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Silver,
         .speakerPal = sSpeakerPal_Silver,
     },
     [SPEAKER_GRUNT] =
     {
-        .name = _("G.R.U.N.T."),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("GRUNT"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
     [SPEAKER_MARKETING_STAFF] =
     {
-        .name = _("Marketing Staff"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Marketing Staff"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_ANNOUNCER] =
     {
-        .name = _("Announcer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Announcer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_TALA] =
     {
-        .name = _("Tala"),
-        .title = _("Ex-Elite Four"),
+        .name = COMPOUND_STRING("Tala"),
+        .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Will,
         .speakerPal = sSpeakerPal_Will,
     },
     [SPEAKER_CROWD_A] =
     {
-        .name = _("Crowd Member"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Crowd Member"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
     [SPEAKER_CROWD_B] =
     {
-        .name = _("Crowd Member"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Crowd Member"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
     [SPEAKER_CROWD_C] =
     {
-        .name = _("Crowd Member"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Crowd Member"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_CROWD_D] =
     {
-        .name = _("Crowd Member"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Crowd Member"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_RUPERT] =
     {
-        .name = _("Rupert"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rupert"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_OLIVER] =
     {
-        .name = _("Oliver"),
-        .title = _("Assistant"),
+        .name = COMPOUND_STRING("Oliver"),
+        .title = COMPOUND_STRING("Assistant"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Elm,
         .speakerPal = sSpeakerPal_Elm,
     },
     [SPEAKER_RESIDENT_A] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
     [SPEAKER_RESIDENT_B] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
     [SPEAKER_RESIDENT_C] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_RESIDENT_D] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_SIARL] =
     {
-        .name =_("Siarl"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Siarl"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
-    [SPEAKER_ARMANDO] =
+    [SPEAKER_FRANK] =
     {
-        .name =_("Armando"),
-        .title = _("Ex-Elite Four"),
+        .name = COMPOUND_STRING("Frank"),
+        .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Bruno,
         .speakerPal = sSpeakerPal_Bruno,
     },
     [SPEAKER_DAGMAR] =
     {
-        .name = _("Dagmar"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Dagmar"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_GURL] =
     {
-        .name = _("Gurl"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Gurl"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_LEAGUE_STAFF_A] =
     {
-        .name = _("League Staff"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("League Staff"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_DAVID] =
     {
-        .name = _("David"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("David"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Waiter,
         .speakerPal = sSpeakerPal_Waiter,
     },
     [SPEAKER_ISHAN] =
     {
-        .name =_("Ishan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ishan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
     [SPEAKER_ROCKET_MEMBER_A] =
     {
-        .name = _("TheTide Member"),
-        .title = _("???"),
+        .name = COMPOUND_STRING("The Tide Member"),
+        .title = COMPOUND_STRING("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_M,
         .speakerPal = sSpeakerPal_Rocket_Grunt_M,
     },
     [SPEAKER_ROCKET_MEMBER_B] =
     {
-        .name = _("TheTide Member"),
-        .title = _("???"),
+        .name = COMPOUND_STRING("The Tide Member"),
+        .title = COMPOUND_STRING("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
-    [SPEAKER_ADELAIDE] =
+    [SPEAKER_LUCREZIA_BEFORE] =
     {
-        .name = _("Adelaide"),
-        .title = _("Sharp Rise CEO"),
+        .name = COMPOUND_STRING("Lucrezia"),
+        .title = COMPOUND_STRING("League Commissioner"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Proton,
+        .speakerPal = sSpeakerPal_Proton,
+    },
+    [SPEAKER_LUCREZIA] =
+    {
+        .name = COMPOUND_STRING("Lucrezia"),
+        .title = COMPOUND_STRING("SharpRise CEO"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Proton,
         .speakerPal = sSpeakerPal_Proton,
     },
     [SPEAKER_VITOMIR] =
     {
-        .name = _("Vitomir"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Vitomir"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
     [SPEAKER_RABIA] =
     {
-        .name = _("Rabia"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rabia"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Rocket_Grunt_F,
         .speakerPal = sSpeakerPal_Rocket_Grunt_F,
     },
     [SPEAKER_LANDLORD] =
     {
-        .name = _("Landlord"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Landlord"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Juggler,
         .speakerPal = sSpeakerPal_Juggler,
     },
     [SPEAKER_PROTEST_A] =
     {
-        .name = _("Protestor"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Protestor"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
     [SPEAKER_PROTEST_B] =
     {
-        .name = _("Protestor"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Protestor"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Beauty,
         .speakerPal = sSpeakerPal_Beauty,
     },
     [SPEAKER_PROTEST_C] =
     {
-        .name = _("Protestor"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Protestor"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_PROTEST_D] =
     {
-        .name = _("Protestor"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Protestor"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_JULIUS] =
     {
-        .name = _("Julius"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Julius"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_MADISON] =
     {
-        .name = _("Madison"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Madison"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_STRANDED_A] =
     {
-        .name = _("Stranded Citizen"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stranded Citizen"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_STRANDED_B] =
     {
-        .name = _("Stranded Citizen"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stranded Citizen"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_RESIDENT_E] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
     [SPEAKER_RESIDENT_F] =
     {
-        .name = _("Resident"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Resident"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
     [SPEAKER_MAGNUS] =
     {
-        .name = _("Magnus"),
-        .title = _("Ex-Elite Four"),
+        .name = COMPOUND_STRING("Magnus"),
+        .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
-    [SPEAKER_ELLEN] =
+    [SPEAKER_ELEANOR] =
     {
-        .name = _("Ellen"),
-        .title = _("Ex-Elite Four"),
+        .name = COMPOUND_STRING("Eleanor"),
+        .title = COMPOUND_STRING("Ex-Elite Four"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Karen,
         .speakerPal = sSpeakerPal_Karen,
     },
     [SPEAKER_ALEKSANDER] =
     {
-        .name = _("Aleksander"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Aleksander"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_SUMMER] =
     {
-        .name = _("Summer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Summer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
     [SPEAKER_MAID] =
     {
-        .name = _("Maid"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Maid"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_NEWS_B] =
     {
-        .name = _("News"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("News"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
     [SPEAKER_ARNAV] =
     {
-        .name = _("Arnav"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arnav"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
     [SPEAKER_TECH] =
     {
-        .name = _("Techie"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Techie"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
     [SPEAKER_CHIEF] =
     {
-        .name = _("Chief"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Chief"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
     [SPEAKER_DOYLE] =
     {
-        .name = _("Doyle"),
-        .title = _("Ex-Gym Leader"),
+        .name = COMPOUND_STRING("Doyle"),
+        .title = COMPOUND_STRING("Ex-Gym Leader"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
     [SPEAKER_IMELDA] =
     {
-        .name = _("Imelda"),
-        .title = _("Ex-Gym Leader"),
+        .name = COMPOUND_STRING("Imelda"),
+        .title = COMPOUND_STRING("Ex-Gym Leader"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
     [SPEAKER_DOOR] =
     {
-        .name = _("Door"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Door"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Misty,
         .speakerPal = sSpeakerPal_Misty,
     },
     [SPEAKER_TEODORO] =
     {
-        .name = _("Teodoro"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Teodoro"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_DUDLEY] =
     {
-        .name = _("Dudley"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Dudley"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_CHERIE] =
     {
-        .name = _("Cherie"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Cherie"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
     },
     [SPEAKER_MATTHEW] =
     {
-        .name = _("Matthew"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Matthew"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
     [SPEAKER_FANNY] =
     {
-        .name = _("Fanny"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Fanny"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_CRAIG] =
     {
-        .name = _("Craig"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Craig"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_ANTONE] =
     {
-        .name = _("Antone"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Antone"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
     [SPEAKER_ORI] =
     {
-        .name = _("Ori"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ori"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Woman,
         .speakerPal = sSpeakerPal_Old_Woman,
     },
     [SPEAKER_HIKO] =
     {
-        .name = _("Hiko"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Hiko"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_POLICE] =
     {
-        .name = _("Police"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Police"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
     [SPEAKER_MACK] =
     {
-        .name = _("Mack"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Mack"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_TYZONN] =
     {
-        .name = _("Tyzonn"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Tyzonn"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
     [SPEAKER_WILL2] =
     {
-        .name = _("Will"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Will"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
     [SPEAKER_RONNY] =
     {
-        .name = _("Ronny"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ronny"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_DAX] =
     {
-        .name = _("Dax"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Dax"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_BRENNAN] =
     {
-        .name = _("Brennan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Brennan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_ATTENDANT] =
     {
-        .name = _("Exhibit Attendant"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Exhibit Attendant"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_SPEAKER] =
     {
-        .name = _("Speaker"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Speaker"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Girl,
         .speakerPal = sSpeakerPal_Girl,
     },
     [SPEAKER_GHOST] =
     {
-        .name = _("Ghost"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ghost"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_ISMAIL] =
     {
-        .name = _("Ismail"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ismail"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_SERGEY] =
     {
-        .name = _("Sergey"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Sergey"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Collector,
         .speakerPal = sSpeakerPal_Collector,
     },
     [SPEAKER_REPORTER] =
     {
-        .name = _("Reporter"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Reporter"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_STAN_PERLACIA_CITY] =
     {
-        .name = _("Wallace Stan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Wallace Stan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
-    [SPEAKER_TROLLEY_GUY] =
+    [SPEAKER_TROLLEYWORKER] =
     {
-        .name = _("Trolley Guy"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Trolleyworker"),
+        .title = COMPOUND_STRING("GRUNT Employee"),
+        .gender = MALE,
         .speakerIcon = gSpeakerIcon_Man,
         .speakerPal = sSpeakerPal_Man,
     },
     [SPEAKER_HESTER] =
     {
-        .name = _("Hester"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Hester"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_SHARPRISECAPITAL_STAFF] =
     {
-        .name = _("Sharp Rise Staff"),
-        .title = _("???"),
+        .name = COMPOUND_STRING("SharpRise Staff"),
+        .title = COMPOUND_STRING("???"),
         .gender = NON_BINARY,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_TONALLI] =
     {
-        .name = _("Tonalli"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Tonalli"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_DRUMMER_B] =
     {
-        .name = _("Drummer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Drummer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
     [SPEAKER_DRUMMER_C] =
     {
-        .name = _("Drummer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Drummer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_DRUMMER_D] =
     {
-        .name = _("Drummer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Drummer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_LIIDIA] =
     {
-        .name = _("Liidia"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Liidia"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_RAINER] =
     {
-        .name = _("Rainer"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rainer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_BRONSON] =
     {
-        .name = _("Bronson"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bronson"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lt_Surge,
         .speakerPal = sSpeakerPal_Lt_Surge,
     },
     [SPEAKER_SHASHI] =
     {
-        .name = _("Shashi"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Shashi"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_LEAH] =
     {
-        .name = _("Leah"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Leah"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_GUARD] =
     {
-        .name = _("Guard"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Guard"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
     [SPEAKER_SHOPKEEPER] =
     {
-        .name = _("Shopkeeper"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Shopkeeper"),
+        .title = COMPOUND_STRING("Pokemon Center Staff"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
     [SPEAKER_ELIOR] =
     {
-        .name = _("Elior"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Elior"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
     [SPEAKER_LELAND] =
     {
-        .name = _("Leland"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Leland"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Man,
         .speakerPal = sSpeakerPal_Old_Man,
     },
     [SPEAKER_AMBROGIO] =
     {
-        .name = _("Ambrogio"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ambrogio"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
-    [SPEAKER_JORIS] =
+    [SPEAKER_HUNGRYPARENT] =
     {
-        .name = _("Joris"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Hungryparent"),
+        .title = COMPOUND_STRING("Adult"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_NURSE] =
     {
-        .name = _("Nurse"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Nurse"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Woman,
         .speakerPal = sSpeakerPal_Woman,
     },
     [SPEAKER_AUGUSTE] =
     {
-        .name = _("Auguste"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Auguste"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
     [SPEAKER_JULIA] =
     {
-        .name = _("Julia"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Julia"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
     [SPEAKER_ALICE] =
     {
-        .name = _("Alice"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Alice"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
     [SPEAKER_FERRAN] =
     {
-        .name = _("Ferran"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Ferran"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
     [SPEAKER_ANTHONY] =
     {
-        .name = _("Anthony"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Anthony"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
     [SPEAKER_SEVENSISTERS_TINA] =
     {
-        .name = _("Tina"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Tina"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_F,
         .speakerPal = sSpeakerPal_Ace_Trainer_F,
     },
 
     [SPEAKER_SEVENSISTERS_PAUL] =
     {
-        .name = _("Paul"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Paul"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
 
     [SPEAKER_SEVENSISTERS_JON] =
     {
-        .name = _("Jon"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Jon"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
 
     [SPEAKER_SEVENSISTERS_BRADLEY] =
     {
-        .name = _("Bradley"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Bradley"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Li,
         .speakerPal = sSpeakerPal_Li,
     },
 
     [SPEAKER_SEVENSISTERS_JO] =
     {
-        .name = _("Jo"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Jo"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
 
     [SPEAKER_SEVENSISTERS_HANNAH] =
     {
-        .name = _("Hannah"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Hannah"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bug_Catcher,
         .speakerPal = sSpeakerPal_Bug_Catcher,
     },
 
     [SPEAKER_SEVENSISTERS_RACHEL] =
     {
-        .name = _("Rachel"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rachel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
     [SPEAKER_KATHARINA] =
     {
-        .name = _("Katharina"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Katharina"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
     [SPEAKER_OFFICIANT] =
     {
-        .name = _("Officiant"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Officiant"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Old_Woman,
         .speakerPal = sSpeakerPal_Old_Woman,
     },
     [SPEAKER_HELEN] =
     {
-        .name = _("Helen"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Helen"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Fisherman,
         .speakerPal = sSpeakerPal_Fisherman,
     },
     [SPEAKER_RUSTY] =
     {
-        .name = _("Rusty"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Rusty"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kid,
         .speakerPal = sSpeakerPal_Kid,
     },
     [SPEAKER_WILLOW] =
     {
-        .name = _("Willow"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Willow"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_GRIFF] =
     {
-        .name = _("Griff"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Griff"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Youngster,
         .speakerPal = sSpeakerPal_Youngster,
     },
     [SPEAKER_LUNA] =
     {
-        .name = _("Luna"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Luna"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
     [SPEAKER_MAX] =
     {
-        .name = _("Max"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Max"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Bird_Keeper,
         .speakerPal = sSpeakerPal_Bird_Keeper,
     },
     [SPEAKER_BLAZE] =
     {
-        .name = _("B-Boy Blaze"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("B-Boy Blaze"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
     [SPEAKER_KIKI] =
     {
-        .name = _("Krumpin' Kiki"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Krumpin' Kiki"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
     [SPEAKER_EJ] =
     {
-        .name = _("Electric EJ"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Electric EJ"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
     [SPEAKER_WAITE] =
     {
-        .name = _("Waite"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Waite"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
         .speakerPal = sSpeakerPal_Ace_Trainer_M,
     },
     [SPEAKER_DEBRA] =
     {
-        .name = _("Debra"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Debra"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
     [SPEAKER_WALDRON] =
     {
-        .name = _("Waldron"),
-        .title = _("IT Employee"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Waldron"),
+        .title = COMPOUND_STRING("IT Employee"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Swimmer_M,
         .speakerPal = sSpeakerPal_Swimmer_M,
     },
     [SPEAKER_ISIDORE] =
     {
-        .name = _("Isidore"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Isidore"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Black_Belt,
         .speakerPal = sSpeakerPal_Black_Belt,
     },
-    [SPEAKER_FILIP] =
+    [SPEAKER_WILDFIRERISKWORKER] =
     {
-        .name = _("Filip"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Wildfireriskworker"),
+        .title = COMPOUND_STRING("Toxel Energy Enployee"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Petrel,
         .speakerPal = sSpeakerPal_Petrel,
     },
     [SPEAKER_GERTRUDE] =
     {
-        .name =_("Gertrude"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Gertrude"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_KHALEEL] =
     {
-        .name = _("Khaleel"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Khaleel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
-    [SPEAKER_KITVOL] =
-    {
-        .name = _("Kitvol"),
-        .title = _("???"),
-        .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Bill,
-        .speakerPal = sSpeakerPal_Bill,
-    },
     [SPEAKER_NANCY] =
     {
-        .name = _("Nancy"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Nancy"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Kurt,
         .speakerPal = sSpeakerPal_Kurt,
     },
     [SPEAKER_PANNEN] =
     {
-        .name = _("Pannen"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Pannen"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
     [SPEAKER_MADRONE] =
     {
-        .name = _("Professor Madrone"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Professor Madrone"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Elm,
         .speakerPal = sSpeakerPal_Elm,
     },
     [SPEAKER_BUZZR_CEO] =
     {
-        .name = _("Buzzr CEO"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Buzzr CEO"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
     [SPEAKER_PRESTO_CEO] =
     {
-        .name = _("Presto CEO"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Presto CEO"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Steven,
         .speakerPal = sSpeakerPal_Steven,
     },
     [SPEAKER_ARRIBA_DRIVER1] =
     {
-        .name = _("Arriba Driver 1"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba Driver 1"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
     [SPEAKER_ARRIBA_DRIVER2] =
     {
-        .name = _("Arriba Driver 2"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba Driver 2"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Firebreather,
         .speakerPal = sSpeakerPal_Firebreather,
     },
     [SPEAKER_ARRIBA_DRIVER3] =
     {
-        .name = _("Arriba Driver 3"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba Driver 3"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Boarder,
         .speakerPal = sSpeakerPal_Boarder,
     },
     [SPEAKER_PERSUASIVE_LANDLORD] =
     {
-        .name = _("Landlord"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Landlord"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
     [SPEAKER_PERSUASIVE_SIBLING] =
     {
-        .name =_("Sibling"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Sibling"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Battle_Girl,
         .speakerPal = sSpeakerPal_Battle_Girl,
     },
     [SPEAKER_ARRIBA_GRUNT1] =
     {
-        .name =_("Arriba Grunt 1"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba Grunt 1"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium_2,
         .speakerPal = sSpeakerPal_Medium_2,
     },
     [SPEAKER_ARRIBA_GRUNT2] =
     {
-        .name =_("Arriba Grunt 2"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba Grunt 2"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
     [SPEAKER_ARRIBA_CEO] =
     {
-        .name = _("Arriba CEO"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Arriba CEO"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Policeman,
         .speakerPal = sSpeakerPal_Policeman,
     },
     [SPEAKER_GYM_ATTENDANT] =
     {
-        .name = _("Gym Attendant"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Gym Attendant"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Shinzo,
         .speakerPal = sSpeakerPal_Shinzo,
     },
-    [SPEAKER_IMPROV_1] =
-    {
-        .name = _("Improv 1"),
-        .title = _("???"),
-        .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Medium,
-        .speakerPal = sSpeakerPal_Medium,
-    },
-    [SPEAKER_IMPROV_2] =
-    {
-        .name = _("Improv 2"),
-        .title = _("???"),
-        .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Girl,
-        .speakerPal = sSpeakerPal_Girl,
-    },
-    [SPEAKER_IMPROV_3] =
-    {
-        .name = _("Improv 3"),
-        .title = _("???"),
-        .gender = NON_BINARY,
-        .speakerIcon = gSpeakerIcon_Beauty,
-        .speakerPal = sSpeakerPal_Beauty,
-    },
     [SPEAKER_CHRIS] =
     {
-        .name = _("Chris"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Chris"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
     },
     [SPEAKER_LEE_PYRON] =
     {
-        .name = _("Lee Pyron"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Lee Pyron"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
     [SPEAKER_PROF_TRACHY] =
     {
-        .name = _("Prof Trachy"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Prof Trachy"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Lass,
         .speakerPal = sSpeakerPal_Lass,
     },
     [SPEAKER_DRUG_HELMET_TESTER] =
     {
-        .name = _("Drughelmettester"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Drughelmettester"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
     [SPEAKER_VSDEOGUY] =
     {
-        .name = _("Vsdeoguy"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Vsdeoguy"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Poke_Maniac,
         .speakerPal = sSpeakerPal_Poke_Maniac,
     },
     [SPEAKER_VSDEORESEARCHER] =
     {
-        .name = _("Vsdeoresearcher"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Vsdeoresearcher"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Super_Nerd,
         .speakerPal = sSpeakerPal_Super_Nerd,
     },
     [SPEAKER_ANGELDELIVERYBIKERA] =
     {
-        .name = _("AngeldeliverybikerA"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("AngeldeliverybikerA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
     [SPEAKER_ANGELDELIVERYBIKERB] =
     {
-        .name = _("AngeldeliverybikerB"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("AngeldeliverybikerB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
     [SPEAKER_ANGELDELIVERYBIKERC] =
     {
-        .name = _("AngeldeliverybikerC"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("AngeldeliverybikerC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
     [SPEAKER_ANGELDELIVERYBIKERD] =
     {
-        .name = _("AngeldeliverybikerD"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("AngeldeliverybikerD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Biker,
         .speakerPal = sSpeakerPal_Biker,
     },
     [SPEAKER_MELISSA] =
     {
-        .name = _("Melissa"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Melissa"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_OLD_WOMAN] =
     {
-        .name =_("Old Woman"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Old Woman"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_STAN_PERLACIA_CITYB] =
     {
-        .name =_("Stan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_STAN_PERLACIA_CITYC] =
     {
-        .name =_("Stan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_STAN_PERLACIA_CITYD] =
     {
-        .name =_("Stan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_STAN_PERLACIA_CITYE] =
     {
-        .name =_("Stan"),
-        .title = _("???"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Stan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Erika,
         .speakerPal = sSpeakerPal_Erika,
     },
     [SPEAKER_BREEDINGPARENT] =
     {
-        .name =_("Breedingparent"),
-        .title= _("Parent Manager"),
+        .name = COMPOUND_STRING("Breedingparent"),
+        .title = COMPOUND_STRING("Parent Manager"),
         .gender = MALE,
         .speakerIcon = gSpeakerIcon_Brock,
         .speakerPal = sSpeakerPal_Brock,
     },
     [SPEAKER_BREEDINGEGG] =
     {
-        .name =_("BreedingEgg"),
-        .title= _("Egg Manager"),
+        .name = COMPOUND_STRING("BreedingEgg"),
+        .title = COMPOUND_STRING("Egg Manager"),
         .gender = FEMALE,
         .speakerIcon = gSpeakerIcon_Aroma_Lady,
         .speakerPal = sSpeakerPal_Aroma_Lady,
     },
     [SPEAKER_BREEDINGGENE] =
     {
-        .name =_("Gene"),
-        .title= _("Stat Manager"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Gene"),
+        .title = COMPOUND_STRING("Stat Manager"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Blaine,
         .speakerPal = sSpeakerPal_Blaine,
     },
     [SPEAKER_PARKRANGER] =
     {
-        .name =_("Parkranger"),
-        .title= _("Park Ranger"),
-        .gender = NON_BINARY,
+        .name = COMPOUND_STRING("Parkranger"),
+        .title = COMPOUND_STRING("Park Ranger"),
+        .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Green,
         .speakerPal = sSpeakerPal_Green,
+    },
+    [SPEAKER_ADAM_UNKNOWN] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title= COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Ace_Trainer_M,
+        .speakerPal = sSpeakerPal_Ace_Trainer_M,
+    },
+    [SPEAKER_ELEANOR_PAST] =
+    {
+        .name = COMPOUND_STRING("Eleanor"),
+        .title = COMPOUND_STRING("Elite Four"),
+        .gender = FEMALE,
+        .speakerIcon = gSpeakerIcon_Karen,
+        .speakerPal = sSpeakerPal_Karen,
+    },
+    [SPEAKER_FRANK_PAST] =
+    {
+        .name = COMPOUND_STRING("Frank"),
+        .title = COMPOUND_STRING("Elite Four"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bruno,
+        .speakerPal = sSpeakerPal_Bruno,
+    },
+    [SPEAKER_NOPOMOD] =
+    {
+        .name = COMPOUND_STRING("NoPoMod"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_STRESSCUPORGANIZER] =
+    {
+        .name = COMPOUND_STRING("Stresscuporganizer"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ASPCAOFFICER] =
+    {
+        .name = COMPOUND_STRING("Aspcaofficer"),
+        .title = COMPOUND_STRING("RSPCP"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SPRINGTRAINER] =
+    {
+        .name = COMPOUND_STRING("Springtrainer"),
+        .title = COMPOUND_STRING("Bystander"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SMOOTHIESHOPKEEPER] =
+    {
+        .name = COMPOUND_STRING("Marble Slab Barista"),
+        .title = COMPOUND_STRING("Smoothieshopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SMOOTHIECUSTOMER] =
+    {
+        .name = COMPOUND_STRING("Customer"),
+        .title = COMPOUND_STRING("Smoothiecustomer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TUNNELSPERSON] =
+    {
+        .name = COMPOUND_STRING("Customer"),
+        .title = COMPOUND_STRING("Smoothiecustomer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERA] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerA"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERB] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerB"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPWORKERC] =
+    {
+        .name = COMPOUND_STRING("Worker"),
+        .title = COMPOUND_STRING("PsyopworkerC"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPTARGETA] =
+    {
+        .name = COMPOUND_STRING("{PKMN} Trainer"),
+        .title = COMPOUND_STRING("PsyoptargetA"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_PSYOPTARGETC] =
+    {
+        .name = COMPOUND_STRING("{PKMN} Trainer"),
+        .title = COMPOUND_STRING("PsyoptargetC"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SHOPUNIONREP] =
+    {
+        .name = COMPOUND_STRING("Shopunionrep"),
+        .title = COMPOUND_STRING("Shop Union Leader"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthh"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYA] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverya"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYB] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryb"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTC] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutc"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthi"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashf"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverywhirlpoolj"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliveryrocksmashg"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTD] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycutd"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTDELIVERYCUTE] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutdeliverycute"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmasho"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUECUTM] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuecutm"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthq"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEDIVEN] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuediven"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEK] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuek"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuerocksmashp"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEL] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuel"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUEWHIRLPOOLS] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuewhirlpools"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_BODEGABURNOUTRESCUESTRENGTHR] =
+    {
+        .name = COMPOUND_STRING("Bodegaburnoutrescuestrengthr"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERA] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERB] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERC] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERD] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERE] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherE"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERF] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherF"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_GETTHEBANDBACKTOGETHERBIKERG] =
+    {
+        .name = COMPOUND_STRING("GetthebandbacktogetherG"),
+        .title = COMPOUND_STRING("???"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorA"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorB"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMEXPEDITORC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymexpeditorC"),
+        .title = COMPOUND_STRING("Needles Expeditor"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookA"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookB"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookC"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookD"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookE"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookF"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMLINECOOKG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymlinecookG"),
+        .title = COMPOUND_STRING("Needles Line Cook"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefA"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefB"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefC"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFD] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefD"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFE] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefE"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFF] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefF"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFG] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefG"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFH] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefH"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFI] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefI"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMPREPCHEFJ] =
+    {
+        .name = COMPOUND_STRING("MermerezagymprepchefJ"),
+        .title = COMPOUND_STRING("Needles Prep Chef"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERA] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverA"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERB] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverB"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMSERVERC] =
+    {
+        .name = COMPOUND_STRING("MermerezagymserverC"),
+        .title = COMPOUND_STRING("Needles Server"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MERMEREZAGYMHOST] =
+    {
+        .name = COMPOUND_STRING("Mermerezagymchefhost"),
+        .title = COMPOUND_STRING("Needles Host"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_032E8AC9] =
+    {
+        .name = COMPOUND_STRING("032E8AC9"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_0389363C] =
+    {
+        .name = COMPOUND_STRING("0389363C"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_040CEA33] =
+    {
+        .name = COMPOUND_STRING("040CEA33"),
+        .title = COMPOUND_STRING("Mermereza Gym Trainer"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MOCHISHOPKEEPER] =
+    {
+        .name = COMPOUND_STRING("Mochishopkeeper"),
+        .title = COMPOUND_STRING("Shopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGINVESTTIGATOR] =
+    {
+        .name = COMPOUND_STRING("Digginginvesttigator"),
+        .title = COMPOUND_STRING("Private Investigator"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGTIDEMEMBERA] =
+    {
+        .name = COMPOUND_STRING("DiggingtidememberA"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DIGGINGTIDEMEMBERB] =
+    {
+        .name = COMPOUND_STRING("DiggingtidememberB"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ADAORAPARENT] =
+    {
+        .name = COMPOUND_STRING("Adaoraparent"),
+        .title = COMPOUND_STRING("Adaora's Parent"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RETURNDOLLCHILD] =
+    {
+        .name = COMPOUND_STRING("Returndollchild"),
+        .title = COMPOUND_STRING("Child"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTCOMRADEA] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentcomradea"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYVICTIMB] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyvictimb"),
+        .title = COMPOUND_STRING("Comrade"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERC] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerc"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERD] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerd"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERF] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerf"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTHIKERG] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocenthikerg"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYPLANTH] =
+    {
+        .name = COMPOUND_STRING("Findtheguiltyplanth"),
+        .title = COMPOUND_STRING("Hiker"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FREETHEINNOCENTBOBACASHIERI] =
+    {
+        .name = COMPOUND_STRING("Freetheinnocentbobacashieri"),
+        .title = COMPOUND_STRING("Shopkeeper"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_FINDTHEGUILTYFRIENDI] =
+    {
+        .name = COMPOUND_STRING("FindtheguilityfriendI"),
+        .title = COMPOUND_STRING("Triathlete"),
+        .gender = MALE,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONBUSSER] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionbusser"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONHOSTESS] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionhostess"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONCHEF] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionchef"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_RESTAURANTEXPANSIONLINECOOK] =
+    {
+        .name = COMPOUND_STRING("Restaurantexpansionlinecook"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONA] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonA"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONB] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonB"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONC] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonC"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSOND] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonD"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONE] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonE"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ESPULEETRADEPERSONF] =
+    {
+        .name = COMPOUND_STRING("EspuleetradepersonF"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MONTY] =
+    {
+        .name = COMPOUND_STRING("Monty"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_MONTYOPP] =
+    {
+        .name = COMPOUND_STRING("Montyopp"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ARCADEMINI] =
+    {
+        .name = COMPOUND_STRING("Arcademini"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+
+    [SPEAKER_KEVIN] =
+    {
+        .name = COMPOUND_STRING("Kevin"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ZAC] =
+    {
+        .name = COMPOUND_STRING("Zac"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_JOHNNY] =
+    {
+        .name = COMPOUND_STRING("Johnny"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ADAM] =
+    {
+        .name = COMPOUND_STRING("Adam"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_ANDREAS] =
+    {
+        .name = COMPOUND_STRING("Andreas"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_JUSTIN] =
+    {
+        .name = COMPOUND_STRING("Justin"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_JEFFREY] =
+    {
+        .name = COMPOUND_STRING("Jeffrey"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_DAJUAN] =
+    {
+        .name = COMPOUND_STRING("Dajuan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_JUAN] =
+    {
+        .name = COMPOUND_STRING("Juan"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_JASON] =
+    {
+        .name = COMPOUND_STRING("Jason"),
+        .title = COMPOUND_STRING("???"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEA] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeA"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEB] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeB"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEC] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeC"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCED] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceD"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEE] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceE"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEF] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceF"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEG] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceG"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVAUDIENCEH] =
+    {
+        .name = COMPOUND_STRING("ImprovaudienceH"),
+        .title = COMPOUND_STRING("Audience Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEX] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeX"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEY] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeY"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_IMPROVTROUPEZ] =
+    {
+        .name = COMPOUND_STRING("ImprovtroupeZ"),
+        .title = COMPOUND_STRING("Improv Troupe"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHA] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishA"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHB] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishB"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHC] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishC"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHD] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishD"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHE] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishE"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_TEACHTRAINERFISHF] =
+    {
+        .name = COMPOUND_STRING("TeachtrainerfishF"),
+        .title = COMPOUND_STRING("Fisherfolk"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMGUARDA] =
+    {
+        .name = COMPOUND_STRING("BackroomguardA"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA3] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA3"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERA4] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerA4"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMGUARDB] =
+    {
+        .name = COMPOUND_STRING("BackroomguardB"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERB3] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerB3"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMGUARDC] =
+    {
+        .name = COMPOUND_STRING("BackroomguardC"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERC1] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerC1"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_BACKROOMTRAINERC2] =
+    {
+        .name = COMPOUND_STRING("BackroomtrainerC2"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_CULTHOUSEGUARD] =
+    {
+        .name = COMPOUND_STRING("Culthouseguard"),
+        .title = COMPOUND_STRING("Society Member"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_CULTLEADER] =
+    {
+        .name = COMPOUND_STRING("Cultleader"),
+        .title = COMPOUND_STRING("Society Leader"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
+    },
+    [SPEAKER_SOCIETY] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Society Members"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Bill,
+        .speakerPal = sSpeakerPal_Bill,
     },
 };

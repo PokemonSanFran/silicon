@@ -8,7 +8,7 @@ mapscripts CuconuTown_SharpriseCompound_2F_MapScripts {
 
 script CuconuTown_Compound_2F_Bed_Script {
     lock
-        //If has not visited Arantraz after being called there by Kai, prevent player from sleeping
+        //If has not visited Arantraz after being called there by Baiya, prevent player from sleeping
         call(YouRealizeTheyreEvilRight_CantSleep_Script)
 
         //Heal Player
@@ -25,7 +25,6 @@ script CuconuTown_Compound_2F_Bed_Script {
 }
 
 script BedScript_SetNewTime_Script{
-//PSF TODO replace with call to check the current time of day
     random(4)
     switch(var(VAR_RESULT))
     {
@@ -35,13 +34,12 @@ script BedScript_SetNewTime_Script{
         case TIME_EVENING: bufferstring(STR_VAR_3,gText_BedScript_Evening)
         case TIME_NIGHT: bufferstring(STR_VAR_3,gText_BedScript_Night)
     }
-    msgbox(gText_BedScript_WhenShouldWake,,SPEAKER_ALICIA)
+    msgbox(format("{STR_VAR_3}\nI'll wake up again at..."),,SPEAKER_ALICIA)
 
     dynmultichoice(1,1,FALSE,3,0,NULL,gText_Morning, gText_Day, gText_Evening,gText_Night,"Not tired yet.")
     closemessage
     switch(var(VAR_RESULT))
     {
-//PSF TODO replace with call to advance time to next occurance of this time
         case TIME_MORNING: initclock(MORNING_HOUR_BEGIN,0)
         case TIME_DAY: initclock(DAY_HOUR_BEGIN,0)
         case TIME_EVENING: initclock(EVENING_HOUR_BEGIN,0)
@@ -61,12 +59,12 @@ script BedScript_AdvanceStory_Script{
     {
         case STORY_NOT_STARTED: call(TwoHoursAgo_GiveFashionCase_Script)
         case STORY_WEST_RESIDO_COMPLETE: call(AaandWereBack_FerryRepaired_Dialogue)
-        case STORY_NEED_SLEEP_BEFORE_ARMANDO: call(OffYouGo_WakeUp_Dialogue)
-        case STORY_ASSIGNED_ARMANDO_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
+        case STORY_NEED_SLEEP_BEFORE_FRANK: call(OffYouGo_WakeUp_Dialogue)
+        case STORY_ASSIGNED_FRANK_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
         case STORY_COMPLETED_NAVAL_BASE: call(WhyAreYouHelpingThem_StartChampionship_Dialogue)
         case STORY_POST_YOU_REALIZE_WERE_EVIL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
         case STORY_MORNING_AFTER_TIMETRAVEL: call(YouRealizeTheyreEvilRight_NoIdea_Dialogue)
-        case STORY_DEFEATED_ALCMENE: goto(LetsFixThis_EliteVideo_Dialogue)
+        case STORY_DEFEATED_VIGRIM: goto(LetsFixThis_EliteVideo_Dialogue)
         case STORY_PRE_EARTHQUAKE: goto(Earthquake_ThatNight_Dialogue)
         default:
     }

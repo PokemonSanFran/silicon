@@ -1,6 +1,5 @@
 mapscripts Route13_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_Restaurantexpansion2_HideStaffC_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
     }
     MAP_SCRIPT_ON_RESUME{
@@ -8,15 +7,13 @@ mapscripts Route13_MapScripts {
     }
 }
 
-
-script Route13_EventScript_Alice_Script{
-    trainerbattle_single(TRAINER_JAINTOR,gText_Alice_PreBattle,gText_Alice_PostBattle,Quest_Restaurantexpansion2_TrainerC_PostBattle_Script)
-        call(Quest_Restaurantexpansion2_TrainerC_PostBattle_Script)
+script Route13_Script_Interact_BodegaburnoutDeliveryStrengthI
+{
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_5,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryStrengthI)
+    bufferitemname(STR_VAR_1,ITEM_DUSK_STONE)
+    bufferspeciesname(STR_VAR_2,SPECIES_DOUBLADE)
+    msgbox(format("I can finally use this {STR_VAR_1} to evolve my {STR_VAR_2}!"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI)
+    closemessage
+    release
+    end
 }
-text gText_Alice_PreBattle{
-	format("")
-}
-text gText_Alice_PostBattle{
-	format("")
-}
-

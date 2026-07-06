@@ -2,7 +2,7 @@
   "id": "MAP_PIOCA_BRIDGE",
   "name": "PiocaBridge",
   "layout": "LAYOUT_PIOCA_BRIDGE",
-  "music": "MUS_EVER_GRANDE",
+  "music": "MUS_PIOCA_BRIDGE",
   "region_map_section": "MAPSEC_PIOCA_BRIDGE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -17,6 +17,11 @@
       "map": "MAP_PETAROSA_BOROUGH",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_FORT_YOBU",
+      "offset": 29,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -47,6 +52,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_ANGELDELIVERYBIKERA",
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
       "x": 6,
       "y": 18,
@@ -58,6 +64,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AngelDelivery_Script_CheckItemSpace",
       "flag": "FLAG_TEMP_5"
+    },
+    {
+      "local_id": "LOCALID_BODEGABURNOUTDELIVERY_A",
+      "graphics_id": "OBJ_EVENT_GFX_BODEGABURNOUTDELIVERY_A",
+      "x": 7,
+      "y": 29,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "PiocaBridge_Script_Interact_BodegaburnoutDeliveryA",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_FINDTHEGUILTYPLANTH",
+      "graphics_id": "OBJ_EVENT_GFX_FINDTHEGUILTYPLANTH",
+      "x": 26,
+      "y": 42,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "PiocaBridge_Script_Findtheguiltyplanth",
+      "flag": "FLAG_TEMP_2"
     }
   ],
   "warp_events": [
@@ -87,6 +121,258 @@
       "var": "VAR_GOLDENGATEBRIDGE_STATE",
       "var_value": "1",
       "script": "OffYouGo_WelcomeParty_Dialogue"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "HybridCulture_Try_StartAttraction1"
     }
   ],
   "bg_events": []

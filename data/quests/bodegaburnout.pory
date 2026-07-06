@@ -1,346 +1,566 @@
-//gText_Bodegaburnout_
 //Quest_Bodegaburnout_
 
-const DELIVER = 0
-const RESCUE = 1
-const CATCH =2
-const CATCH_STRONG = 3
-const CATCH_COLD  = 4
-const CATCH_SMART = 5
-const CATCH_FAIRY = 6
-
-script Quest_Bodegaburnout_Debug_Script{
-    msgbox(format("here are some pokemon to clear the quests with. there might be some in your boxes too."))
-        givemon(SPECIES_ARTICUNO,100,100)
-        givemon(SPECIES_BEARTIC,100,100)
-        givemon(SPECIES_METAGROSS,100,100,,NATURE_CALM)
-        givemon(SPECIES_ALAKAZAM,100,100,,NATURE_CALM)
-        givemon(SPECIES_MACHAMP,100,100)
-        givemon(SPECIES_MACHAMP,100,100)
-        givemon(SPECIES_CLEFAIRY,100,100)
-return
-}
-
-script Quest_Bodegaburnout_EliteFour_Dialogue{
-    msgbox(format("go talk to a bunch of different pokemart workers around the region."),MSGBOX_NPC,SPEAKER_ELLEN)
-
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) == QUEST_MENU_UNLOCK_QUEST){
-        call(Quest_Bodegaburnout_Debug_Script)
-        startquest(QUEST_BODEGABURNOUT)
+script Quest_Bodegaburnout_Dialouge_EleanorStart
+{
+    if (var(VAR_STORYLINE_STATE) >= STORY_1ST_TAKEDOWN)
+    {
+        msgbox(format("Your exploits so far have made us proud {PLAYER}! Let's hope our adventures are just as succesful!"),,SPEAKER_ELEANOR)
     }
-}
+    else
+    {
+        msgbox(format("I'm honored to see you finally working alongside us, {PLAYER}."),,SPEAKER_ELEANOR)
+    }
 
-script Quest_Bodegaburnout_Clerk_Discussion_Script{
-    msgbox(gText_Bodegaburnout_OhIHeard)
-    call(Quest_Bodegaburnout_LoadRequest_Script)
+    msgbox(format("The PokéMarts in Resido used to be run entirely by people. When Presto showed up, the app delivery and its so-called convenience really took the region by storm."),,SPEAKER_ELEANOR)
+    msgbox(format("The Poke Mart Staff union are going to try to make it harder for Presto to completely take over by also offering a delivery service, but they’re running into some hurdles and could use some help getting started."),,SPEAKER_ELEANOR)
+    buffermapname(STR_VAR_1,MAP_CRESALTA_VISTA)
+    msgbox(format("The Union HQ is in {STR_VAR_1}. Can you meet up with their leader? I told them you’d be coming."),,SPEAKER_ELEANOR)
+    msgbox(format("Of course, if you’re feeling impatient, you can go right to the source! I’m sure the Poke Mart Staff around the region would be excited for some help."),,SPEAKER_ELEANOR)
+    closemessage
+    startquest(QUEST_BODEGABURNOUT)
+    msgbox(format("It's easier to stay competitive if your competition is weaker, eh?"),,SPEAKER_ELEANOR)
+    closemessage
+    applymovement(LOCALID_ARANTRAZ_ELEANOR,moves(walk_up * 6))
+    waitmovement(LOCALID_ARANTRAZ_ELEANOR)
+    removeobject(LOCALID_ARANTRAZ_ELEANOR)
     release
     end
 }
 
-script Quest_Bodegaburnout_CheckSubquestState_Script{
-    specialvar(VAR_0x8008,Quest_Bodegaburnout_IsSubquestComplete)
-    returnqueststate(QUEST_BODEGABURNOUT)
-
-    if ((var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST) && (!var(VAR_0x8008))) {
-        goto(Quest_Bodegaburnout_Clerk_Discussion_Script)
-    }
-    return
+script Quest_Bodegaburnout_Dialogue_Active
+{
+    msgbox(format("I’ve got somebody in every Pokémon Center in the region. Could you help three of them find their delivery people, and do deliveries for three others?"),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("That should buy me enough time to help Eleanor with what we’re working on."),,SPEAKER_SHOPUNIONREP)
+    closemessage
+    release
+    end
 }
 
-script Quest_Bodegaburnout_LoadRequest_Script{
-    special(Quest_Bodegaburnout_LoadRequestText)
-    specialvar(VAR_RESULT,Quest_Bodegaburnout_GetQuestType)
+script Quest_Bodegaburnout_Dialouge_FirstActive
+{
+    goto_if_ge(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP,Quest_Bodegaburnout_Dialogue_Active)
 
-        switch(var(VAR_RESULT)){
-            case DELIVER:
-                goto(Quest_Bodegaburnout_Deliver_Dialogue)
-            case RESCUE:
-                goto(Quest_Bodegaburnout_Rescue_Dialogue)
-            default:
-                goto(Quest_Bodegaburnout_Catch_Dialogue)
-        }
+    setvar(VAR_QUEST_WAREHOUSEWARFARE_STATE,DEBRIEFED_BY_SHOP_UNION_REP)
+    msgbox(format("Are you {PLAYER}? Eleanor said you’d come."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("We recently rolled out Mart Delivery, where Trainers can order items and get them delivered in the field."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("It’s very similar to Presto’s offering, but minus the drones and plus sustainable local labor."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("Our pilot program is going… okay."),,SPEAKER_SHOPUNIONREP)
+    msgbox(format("Some of the delivery people got lost, and so we’re backed up on deliveries."),,SPEAKER_SHOPUNIONREP)
+    callnative(Script_Quest_BodegaBurnout_CountRemainingSubquests)
+    if (var(VAR_RESULT) != QUEST_BODEGABURNOUT_SUB_COUNT)
+{
+    msgbox(format("Oh! Looks like you’ve already been helping some of our people. Eleanor was right about you!"),,SPEAKER_SHOPUNIONREP)
+}
+    goto(Quest_Bodegaburnout_Dialogue_Active)
 }
 
-script Quest_Bodegaburnout_Deliver_Dialogue{
-   msgbox(gText_Bodegaburnout_CanYouDeliever)
+script Quest_Bodegaburnout_Script_HandleQuestDirection
+{
+    goto_if_quest_reward(QUEST_BODEGABURNOUT,Quest_Bodegaburnout_Dialouge_Reward)
 
-    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckLocationAndMatchItem)
-    if (!var(VAR_RESULT)){
-        callstd(STD_OBTAIN_ITEM)
+    callnative(Script_Quest_Bodegaburnout_ShouldShopkeeperExplainQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Script_ChooseExplainDialogue)
+
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
+}
+
+script Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext
+{
+    msgbox(format("Shopunionrep is working on something big with Presto. You should go meet up with them back at the Union HQ."),,SPEAKER_SHOPKEEPER)
+    closemessage
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_ChooseExplainDialogue
+{
+    callnative(Script_Quest_Bodegaburnout_GetShopkeeperActiveCode)
+    switch(var(VAR_RESULT))
+    {
+        case QUEST_BODEGABURNOUT_TYPE_DELIVERY_NO_ITEM: goto(Quest_Bodegaburnout_Dialogue_GiveDeliveryItem)
+        case QUEST_BODEGABURNOUT_TYPE_DELIVERY: goto(Quest_Bodegaburnout_Dialogue_ExplainDelivery)
+        case QUEST_BODEGABURNOUT_TYPE_RESCUE: goto(Quest_Bodegaburnout_Dialogue_ExplainRescue)
     }
-    else{
-        msgbox(gText_Bodegaburnout_OhRightIGave)
+}
+
+script Quest_Bodegaburnout_Dialogue_GiveDeliveryItem
+{
+    msgbox(format("I hear you’re helping with our delivery program rollout. We need to get this delivery out, but we’re super short staffed right now."),,SPEAKER_SHOPKEEPER)
+    closemessage
+    cueobjectplayer(VAR_LAST_TALKED)
+    callnative(Script_Quest_Bodegaburnout_LoadDeliveryItem)
+    callstd(STD_OBTAIN_ITEM)
+    goto(Quest_Bodegaburnout_Dialogue_ExplainDelivery)
+}
+
+script Quest_Bodegaburnout_Dialogue_ExplainDelivery
+{
+    callnative(Script_Quest_Bodegaburnout_BufferDeliveryItemName)
+    callnative(Script_Quest_Bodegaburnout_BufferTargetLocationName)
+    msgbox(format("This {STR_VAR_1} needs to be delivered to somebody in {STR_VAR_2}. Can you take it there?"),,SPEAKER_SHOPKEEPER)
+    closemessage
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Dialogue_ExplainRescue
+{
+    callnative(Script_Quest_Bodegaburnout_BufferTargetLocationName)
+    msgbox(format("One of our delivery people is missing in action. Their signal went dead around {STR_VAR_2}. Can you hunt them down?"),,SPEAKER_SHOPKEEPER)
+    closemessage
+
+    callnative(Script_Quest_Bodegaburnout_IsReadyForTakedownQuest)
+    goto_if_eq(VAR_RESULT,TRUE,Quest_Bodegaburnout_Dialogue_TellPlayerToGoNext)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Dialouge_Reward
+{
+    msgbox(format("Hey, everybody in the union has been talking about how much you’ve been helping the cause."),,SPEAKER_SHOPKEEPER)
+    checkitemspace(ITEM_QUEST_BODEGABURNOUT_REWARD,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Make room in your bag and come talk to me later."),,SPEAKER_SHOPKEEPER)
+        closemessage
+        release
+        end
+    }
+        msgbox(format("You can’t buy this anywhere, but we thought you should have it."),,SPEAKER_SHOPKEEPER)
+        closemessage
+        cueobjectplayer(VAR_LAST_TALKED)
+        giveitem(ITEM_QUEST_BODEGABURNOUT_REWARD,1)
+        completequest(QUEST_BODEGABURNOUT)
+        release
+        end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryStrengthH
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Man, where could this package be!? How long am I supposed to wait here? I knew I should have used Presto."),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH,TAIL_WHISPER,EMOTE_ANGRY)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_1)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CAPHE,1)
+        msgbox(format("Oh my gosh, are you the Poké Mart delivery? You have no idea how much of a lifesaver this is, thank you so much!"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH,,EMOTE_LOVE)
     }
     closemessage
     release
     end
 }
 
-script Quest_Bodegaburnout_Rescue_Dialogue{
-    msgbox(gText_Bodegaburnout_WentMissing)
-    special(Quest_Bodegaburnout_ClearRescueFlag)
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryA
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I’ve been having an awful day, and I ordered something for Poké Mart delivery, and it hasn’t come yet. Could today get any worse?"),,SPEAKER_BODEGABURNOUTDELIVERYA)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_2)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_QIU,1)
+        msgbox(format("Woah wait, is that my Poké Mart delivery? Maybe today isn’t so bad after all…"),,SPEAKER_BODEGABURNOUTDELIVERYA)
+    }
     closemessage
     release
     end
 }
 
-script Quest_Bodegaburnout_Catch_Dialogue{
-    msgbox(gText_Bodegaburnout_DoYouHave,MSGBOX_YESNO)
-
-    if (var(VAR_RESULT) == NO){
-        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
-    }else{
-        goto(Quest_Bodegaburnout_EvaluatePokemon_Script)
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryB
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Sorry for the tantrum, how embarrassing!"),,SPEAKER_BODEGABURNOUTDELIVERYB,,EMOTE_LAUGH)
+        msgbox(format("I ordered something from the Poké Mart delivery a few hours ago, and I’m just waiting for it."),,SPEAKER_BODEGABURNOUTDELIVERYB,,EMOTE_LAUGH)
     }
-}
-
-script Quest_Bodegaburnout_NoRefusePokemon_Dialogue{
-    msgbox(gText_Bodegaburnout_ComeBackWhen)
-    release
-    end
-}
-
-script Quest_Bodegaburnout_EvaluatePokemon_Script{
-    special(ChoosePartyMon)
-    waitstate
-
-    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN){
-        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_3)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALAI,1)
+        msgbox(format("Oh, and you had my package the whole time?"),,SPEAKER_BODEGABURNOUTDELIVERYB)
+        msgbox(format("Awkward…!"),,SPEAKER_BODEGABURNOUTDELIVERYB)
     }
-
-    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckRequiredPokemon)
-    if (!var(VAR_RESULT)){
-        goto(Quest_Bodegaburnout_WrongPokemon_Dialogue)
-    }
-
-    msgbox(gText_Bodegaburnout_AskForMon,MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO){
-        goto(Quest_Bodegaburnout_NoRefusePokemon_Dialogue)
-    }
-
-    special(HasEnoughMonsForDoubleBattle)
-    if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS){
-        goto(Quest_Bodegaburnout_NotEnough_Dialogue)
-    }
-
-    goto(Quest_Bodegaburnout_TakeMonMarkSubquest_Script)
-}
-
-script Quest_Bodegaburnout_WrongPokemon_Dialogue{
-    msgbox(gText_Bodegaburnout_YouKnowIDont)
     closemessage
     release
     end
 }
 
-script Quest_Bodegaburnout_NotEnough_Dialogue{
-    msgbox(gText_Bodegaburnout_ThatsYourLast)
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutC
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Oh man, did they get my order?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC,TAIL_WHISPER)
+        msgbox(format("What if they charged me but the order glitched out?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC,,EMOTE_SWEAT)
+        msgbox(format("Is the Poké Mart system faulty?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC,,EMOTE_CONFUSE)
+        msgbox(format("Should I call somebody?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC,,EMOTE_SAD)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_4)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_OROLAND,1)
+        msgbox(format("You have my package?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC)
+        msgbox(format("Is everything in there?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC)
+        msgbox(format("Did you get lost?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC)
+        msgbox(format("Did all my stuff make it okay?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTC)
+    }
     closemessage
     release
     end
 }
 
-script Quest_Bodegaburnout_TakeMonMarkSubquest_Script{
-    special(DeleteChosenPartyMon)
-    special(Quest_Bodegaburnout_Catch_MarkSubquestComplete)
-    call(Quest_Bodegaburnout_CheckNextStage_Script)
-    call(Quest_Bodegaburnout_CheckReward_Script)
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryStrengthI
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I’ve been waiting here for my delivery from the Poké Mart. I’m so excited to finally get it!"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_5)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_TORA,1)
+        msgbox(format("Oh thank God, my package, finally! Thank you!"),,SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHI)
+    }
     closemessage
     release
     end
 }
 
-script Quest_Bodegaburnout_CheckNextStage_Script{
-    specialvar(VAR_RESULT,Quest_Bodegaburnout_CheckReadyForNext)
-    if (var(VAR_RESULT)){
-        returnqueststate(QUEST_WAREHOUSEWARFARE)
-        if (var(VAR_RESULT) < QUEST_MENU_SET_ACTIVE){
-            goto(Quest_Warehousewarfare_CallPlayer_Dialogue)
-        }
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryRockSmashF
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Come on… what could be taking so long with this Poké Mart delivery?"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF,TAIL_WHISPER,EMOTE_ANGRY)
     }
-    return
-}
-
-script Quest_Bodegaburnout_CheckReward_Script{
-    specialvar(VAR_RESULT,Quest_Bodegaburnout_CountRemainingSubquests)
-
-    if (var(VAR_RESULT) == 0){
-        questmenu(QUEST_MENU_SET_REWARD,QUEST_BODEGABURNOUT)
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_6)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HALERBA,1)
+        msgbox(format("Finally! My Poké Mart delivery. What a hassle!"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHF,,EMOTE_ANGRY)
     }
-    return
-}
-
-script Quest_Bodegaburnout_Reward_Dialogue{
-    msgbox(gText_Bodegaburnout_HeyWeAllNoticed)
     closemessage
-    giveitem(ITEM_OVAL_CHARM,1)
-    msgbox(gText_Bodegaburnout_YoureARealOne)
-    completequest(QUEST_BODEGABURNOUT)
-    return
-}
-
-script Quest_Bodegaburnout_Warehousewarfare_Dialogue{
-    msgbox(gText_Bodegaburnout_WordHasBeenGetting)
-    return
-}
-
-text gText_Bodegaburnout_OhIHeard{
-    format("Oh, I heard you'd be coming. You're {PLAYER}, right?")
-}
-text gText_Bodegaburnout_ComeBackWhen{
-    format("Come back when you do! Or when you need anything, of course.")
-}
-text gText_Bodegaburnout_AskForMon{
-    format("Are you sure you're okay giving us this mon?")
-}
-text gText_Bodegaburnout_WordHasBeenGetting{
-    format("Word has getting around about you helping out. Thanks so much! You should meet with the leader of the union in CresaltaVista.")
-}
-text gText_Bodegaburnout_YouKnowIDont{
-    format("You know, I don't think that mon will work.")
-}
-text gText_Bodegaburnout_ThatsYourLast{
-    format("I can't take that! Its your last Mon!")
-}
-text gText_Bodegaburnout_HeyWeAllNoticed{
-    format("Hey, we all noticed you helping out, so we got you this.")
-}
-text gText_Bodegaburnout_YoureARealOne{
-    format("You're a real one!")
-}
-text gText_Bodegaburnout_DoYouHave{
-    format("We need a {STR_VAR_1} {STR_VAR_3} to help us {STR_VAR_2}.\NDo you have one?")
-}
-text gText_Bodegaburnout_CanYouDeliever{
-    format("Can you deliever this to {STR_VAR_1}? They're on {STR_VAR_2}.")
-}
-text gText_Bodegaburnout_WentMissing{
-    format("Can you help us find {STR_VAR_1}?\NWe sent them over to {STR_VAR_2} but they haven't returned...")
-}
-
-text gText_Bodegaburnout_OhRightIGave{
-    format("Huh? Oh right, I gave you the package already!")
-}
-
-// ***********************************************************************
-// Related NPCs
-// ***********************************************************************
-
-script Quest_Bodegaburnout_DeliveryA_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_1)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_DeliveryB_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_2)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_DeliveryC_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_3)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_DeliveryD_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_4)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_DeliveryE_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_5)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_DeliveryF_Dialogue{
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_BODEGABURNOUT,SUB_QUEST_6)
-    if (var(VAR_RESULT)){
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    }else{
-        msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-        call(Quest_Bodegaburnout_CheckReward_Script)
-    }
-    end
-}
-
-script Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script{
-    fadescreen(FADE_TO_BLACK)
-    removeobject(VAR_LAST_TALKED)
-    fadescreen(FADE_FROM_BLACK)
-    special(Quest_Bodegaburnout_DeliveryRescue_MarkSubquestCompleteAndRemoveItem)
-    call(Quest_Bodegaburnout_CheckReward_Script)
-    return
-}
-
-script Quest_Bodegaburnout_RescueA_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
     release
     end
 }
-script Quest_Bodegaburnout_RescueB_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryWhirlpoolJ
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I really want to test the limits of this delivery service! Do you think they have Pokémon equipped for crossing whirlpools? Will it be something strong?"),,SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_7)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_CRESALTA,1)
+        msgbox(format("Oh! You’re the delivery person. Thanks for coming all the way here for me!"),,SPEAKER_BODEGABURNOUTDELIVERYWHIRLPOOLJ,,EMOTE_HAPPY)
+    }
+    closemessage
     release
     end
 }
-script Quest_Bodegaburnout_RescueC_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryRockSmashG
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I’m really hoping this Poké Mart delivery comes soon! I’m sure they’ll get into the cave."),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG)
+        msgbox(format("And get down here."),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG)
+        msgbox(format("And have a Pokémon to smash these rocks…"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_8)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_IRISINA,1)
+        msgbox(format("Oh boy, oh boy, oh boy, you had my package the whole time? Why didn’t you say so?"),,SPEAKER_BODEGABURNOUTDELIVERYROCKSMASHG,,EMOTE_HAPPY)
+        msgbox(format("How did they even place an order in here…? There’s no cell signal! "),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    }
+    closemessage
     release
     end
 }
-script Quest_Bodegaburnout_RescueD_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutD
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("I ordered something from the Poké Mart Delivery test run, and it's still not here."),,SPEAKER_BODEGABURNOUTDELIVERYCUTD)
+        msgbox(format("Last time I do that!"),,SPEAKER_BODEGABURNOUTDELIVERYCUTD)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_9)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_HODOU,1)
+        msgbox(format("Oh! A skilled trainer is delivering the packages? Well that makes sense. Of course, you need somebody to move the trees and shrubs with a strong Pokémon!"),,SPEAKER_BODEGABURNOUTDELIVERYCUTD)
+    }
+    closemessage
     release
     end
 }
-script Quest_Bodegaburnout_RescueE_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutE
+{
+    checkitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,1)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("Even when the delivery person arrives… Do they have a Pokémon to clear that tree?"),,SPEAKER_BODEGABURNOUTDELIVERYCUTE)
+    }
+    else
+    {
+        subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_10)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+        cueobjecttalking(LOCALID_PLAYER)
+        removeitem(ITEM_QUEST_BODEGABURNOUT_DELIVERY_ZENZU,1)
+        msgbox(format("My package! Thank you so much for bringing it to me."),,SPEAKER_BODEGABURNOUTDELIVERYCUTE)
+    }
+    closemessage
     release
     end
 }
-script Quest_Bodegaburnout_RescueF_Dialogue{
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-    call(Quest_Bodegaburnout_RescueNPCAndCompleteSubquest_Script)
+
+script Route11_Script_Interact_BodegaburnoutRescueRockSmashO
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_11)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("I was delivering a package, and then I got caught in a battle with this snooty blonde… and after she left, my phone was dead!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
+    buffermapname(STR_VAR_1,MAP_CUCONU_TOWN)
+    msgbox(format("Which way is {STR_VAR_1}? I need to get back to work."),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("You’re a lifesaver. Thanks so much!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHO)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     release
     end
+}
+
+script HalerbaWilds_Script_Interact_BodegaburnoutRescueCutM
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_12)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Hey…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("I am sooo blazed."),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("I can’t even read my phone."),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    msgbox(format("…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    buffermapname(STR_VAR_1,MAP_HALERBA_CITY)
+    msgbox(format("Which way is {STR_VAR_1}?"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("Oh man, I need to drop off this package…"),,SPEAKER_BODEGABURNOUTRESCUECUTM)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_CUT_M, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_CUT_M)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Route14_Script_Interact_BodegaburnoutRescueStrengthQ
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_13)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Oh thank you so much! A wild Pokémon knocked a boulder down and I was trapped over here!"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("I need to deliver this Poké Mart package. Which way is {STR_VAR_1}?"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("Man, I hope I don’t get in trouble…"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHQ)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q)
+
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueDiveN
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_14)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("I was out doing a Poké Mart Delivery and decided to go for a quick Dive."),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
+    msgbox(format("I dove too deep and the pressure broke my phone."),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
+    msgbox(format("Could you point me towards Halai Island? Thanks!"),,SPEAKER_BODEGABURNOUTRESCUEDIVEN)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_DIVE_N, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_DIVE_N)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_15)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("I lost my phone on my way to a delivery, and I’m not good with directions!"),,SPEAKER_BODEGABURNOUTRESCUEK)
+    buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
+    msgbox(format("How do I get to {STR_VAR_1}? I want to make sure this package gets there."),,SPEAKER_BODEGABURNOUTRESCUEK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    msgbox(format("Thanks!"),,SPEAKER_BODEGABURNOUTRESCUEK)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_K, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_K)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueRockSmashP
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_16)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Oh! Thanks for getting rid of that rock."),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP,,EMOTE_SHOCK)
+    msgbox(format("I was trying to take a shortcut on my way back from a delivery and by the time  I realized this was a dead end it had totally blocked my way!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP)
+    msgbox(format("I should really learn how to smash the rocks myself."),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP)
+    msgbox(format("See you around!"),,SPEAKER_BODEGABURNOUTRESCUEROCKSMASHP)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueL
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_17)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Okay, I think the brain fog is gone. Gotta start on those deliveries now."),,SPEAKER_BODEGABURNOUTRESCUEL)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_L, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_L)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueWhirlpoolS
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_18)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Oh man, I lost track of time! I was supposed to be delivering something from the Poké Mart to a Trainer out here. I should go find them..."),,SPEAKER_BODEGABURNOUTRESCUEWHIRLPOOLS)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueStrengthR
+{
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_BODEGABURNOUT,SUB_QUEST_19)
+        callnative(Quest_Bodegaburnout_CountRemainingSubquestsTryProgressReward)
+    msgbox(format("Hey, my phone’s dead. Where are we?"),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHR)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    delay(30)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    buffermapname(STR_VAR_1,MAP_ROUTE4)
+    msgbox(format("{STR_VAR_1}? Oh perfect, I’m supposed to deliver a package at Anbeh Bend. Looks like I’m on the right track."),,SPEAKER_BODEGABURNOUTRESCUESTRENGTHR)
+    closemessage
+    applymovement(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R, moves(walk_up * 6))
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    removeobject(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    release
+    end
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_K)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueDiveN
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_DIVE_N)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashP
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_P)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueL
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_L)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueWhirlpoolS
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_WHIRLPOOL_S)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthR
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_R)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashO
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_ROCK_SMASH_O)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueCutM
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_CUT_M)
+}
+
+script Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueStrengthQ
+{
+    setobjectflagfromlocalid(LOCALID_BODEGABURNOUTRESCUE_STRENGTH_Q)
 }

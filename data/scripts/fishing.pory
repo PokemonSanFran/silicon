@@ -16,8 +16,8 @@ script Fishing_Cutscene_JumpOutOfWater
 script Fishing_Cutscene_YellAtPlayer
 {
     lock
-    msgbox(Fishing_Dialogue_PlayerReact,MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_SHOUT, EMOTE_SHOCK)
-    msgbox(Fishing_Dialogue_TheresNoFishing,MSGBOX_AUTOCLOSE,SPEAKER_PARKRANGER, TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Wha...!?"),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,TAIL_SHOUT, EMOTE_SHOCK)
+    msgbox(format("Hey! There’s no fishing here. Didn’t you read the signs!?"),MSGBOX_AUTOCLOSE,SPEAKER_PARKRANGER, TAIL_SHOUT,EMOTE_ANGRY)
     closemessage
 
     switch(var(VAR_RESULT))

@@ -27,9 +27,6 @@
 #include "constants/rgb.h"
 #include "map_name_popup.h"
 
-static u32 GetFrameCounter(void);
-static void IncrementFrameCounter(void);
-static void SetFrameCounter(u32 frameCounter);
 void Script_StartQuestOverworld(struct ScriptContext *ctx);
 void QuestOverworld(enum QuestMenuScriptCommandParameters state, enum QuestIdList quest, bool32 eggMode);
 static void PlaceQuestOverworldOnTilemap(u32 windowId);
@@ -40,22 +37,23 @@ static void BufferQuestName(enum QuestIdList quest, u32, bool32);
 static void PrintQuestName(u32, u32);
 static void BufferCTA(enum QuestMenuScriptCommandParameters state, u32, bool32);
 static void PrintCTA(u32, u32);
-static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 taskId, bool32 eggMode);
+static u32 PrintQuestSprite(enum QuestMenuScriptCommandParameters state, bool32 eggMode);
 static void Task_DoQuestOverworldSlide(u8 taskId);
+static void Task_DoQuestOverworldDestroy(u8 taskId);
 
-static const u16 questOverworldPalette[] = INCBIN_U16("graphics/quest_menu/palettes/questOverworld.gbapal");
+static const u16 questOverworldPalette[] = INCGFX_U16("graphics/quest_menu/palettes/questOverworld.pal", ".gbapal");
 
-static const u32 sQuestOverworldA[] = INCBIN_U32("graphics/quest_menu/ow/tileA.4bpp.smol");
-static const u32 sQuestOverworldB[] = INCBIN_U32("graphics/quest_menu/ow/tileB.4bpp.smol");
-static const u32 sQuestOverworldC[] = INCBIN_U32("graphics/quest_menu/ow/tileC.4bpp.smol");
-static const u32 sQuestOverworldD[] = INCBIN_U32("graphics/quest_menu/ow/tileD.4bpp.smol");
-static const u32 sQuestOverworldE[] = INCBIN_U32("graphics/quest_menu/ow/tileE.4bpp.smol");
-static const u32 sQuestOverworldF[] = INCBIN_U32("graphics/quest_menu/ow/tileF.4bpp.smol");
-static const u32 sQuestOverworldG[] = INCBIN_U32("graphics/quest_menu/ow/tileG.4bpp.smol");
-static const u32 sQuestOverworldH[] = INCBIN_U32("graphics/quest_menu/ow/tileH.4bpp.smol");
-static const u32 sQuestOverworldI[] = INCBIN_U32("graphics/quest_menu/ow/tileI.4bpp.smol");
+static const u32 sQuestOverworldA[] = INCGFX_U32("graphics/quest_menu/ow/tileA.png", ".4bpp.smol");
+static const u32 sQuestOverworldB[] = INCGFX_U32("graphics/quest_menu/ow/tileB.png", ".4bpp.smol");
+static const u32 sQuestOverworldC[] = INCGFX_U32("graphics/quest_menu/ow/tileC.png", ".4bpp.smol");
+static const u32 sQuestOverworldD[] = INCGFX_U32("graphics/quest_menu/ow/tileD.png", ".4bpp.smol");
+static const u32 sQuestOverworldE[] = INCGFX_U32("graphics/quest_menu/ow/tileE.png", ".4bpp.smol");
+static const u32 sQuestOverworldF[] = INCGFX_U32("graphics/quest_menu/ow/tileF.png", ".4bpp.smol");
+static const u32 sQuestOverworldG[] = INCGFX_U32("graphics/quest_menu/ow/tileG.png", ".4bpp.smol");
+static const u32 sQuestOverworldH[] = INCGFX_U32("graphics/quest_menu/ow/tileH.png", ".4bpp.smol");
+static const u32 sQuestOverworldI[] = INCGFX_U32("graphics/quest_menu/ow/tileI.png", ".4bpp.smol");
 
-const u32 gQuestIcon_Gfx[] = INCBIN_U32("graphics/quest_menu/ow/pokeball_sheet.4bpp.smol");
+const u32 gQuestIcon_Gfx[] = INCGFX_U32("graphics/quest_menu/ow/pokeball_sheet.png", ".4bpp.smol");
 
 static const struct CompressedSpriteSheet sSpriteSheet_QuestIcon[] =
 {
@@ -129,22 +127,23 @@ static const struct OamData sOam_QuestIcon =
 static void SpriteCB_QuestIcon(struct Sprite *sprite)
 {
     u32 state = sprite->data[0];
-    u32 frame = GetFrameCounter();
     StartSpriteAnimIfDifferent(sprite, state);
     u32 x = sprite->x;
-    u32 y = sprite->y;
 
     if (x < QUEST_OVERWORLD_ICON_X_DESTINATION)
         sprite->x = QUEST_OVERWORLD_ICON_X_DESTINATION;
 
     if (x > QUEST_OVERWORLD_ICON_X_DESTINATION)
         sprite->x = x - TILE_SIZE_1BPP;
+}
 
-    if (frame >= QUEST_OVERWORLD_ANIMATION_DISAPPEAR_START)
+static void SpriteCB_QuestIconDisappear(struct Sprite *sprite)
+{
+    SpriteCB_QuestIcon(sprite);
+    u32 y = sprite->y;
+
+    if (y < QUEST_OVERWORLD_ANIMATION_ICON_DISAPPEAR_POINT)
         sprite->y = y + (TILE_SIZE_1BPP / 2);
-
-    if (sprite->y > QUEST_OVERWORLD_ANIMATION_ICON_DISAPPEAR_POINT)
-        DestroySpriteAndFreeResources(sprite);
 }
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeball =
@@ -195,57 +194,6 @@ static const struct WindowTemplate sQuestOverworldWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-struct QuestOverworldDataStorage
-{
-    u16 frameCounter;
-};
-
-static struct QuestOverworldDataStorage *sQuestOverworldDataStorage = NULL;
-
-static u32 GetFrameCounter(void)
-{
-    return sQuestOverworldDataStorage->frameCounter;
-}
-
-static void SetFrameCounter(u32 frameCounter)
-{
-    sQuestOverworldDataStorage->frameCounter = frameCounter;
-}
-
-static void IncrementFrameCounter(void)
-{
-    u32 questOWFrameCounter = GetFrameCounter();
-
-    if (questOWFrameCounter >= QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP + 2)
-        return;
-
-    SetFrameCounter(++questOWFrameCounter);
-}
-
-static bool32 AllocateStructs(void)
-{
-    sQuestOverworldDataStorage = AllocZeroed(sizeof(struct QuestOverworldDataStorage));
-
-    return (sQuestOverworldDataStorage == NULL);
-}
-
-void QuestOverworld(enum QuestMenuScriptCommandParameters state, enum QuestIdList quest, bool32 eggMode)
-{
-    if (AllocateStructs())
-        return;
-
-    LoadPalette(questOverworldPalette,QUEST_OVERWORLD_PALETTE_INTERFACE_SLOT,PLTT_SIZE_4BPP);
-
-    u32 taskId = CreateTask(Task_DoQuestOverworldSlide,0);
-
-    for (enum QuestOverworldWindows windowIndex = 0; windowIndex < QUEST_OVERWORLD_WINDOW_COUNT; windowIndex++)
-        gTasks[taskId].data[windowIndex] = CreateQuestOverworldWindow(windowIndex);
-    BufferQuestName(quest,gTasks[taskId].data[QUEST_OVERWORLD_WINDOW_HEADER], eggMode);
-    BufferCTA(state,gTasks[taskId].data[QUEST_OVERWORLD_WINDOW_CTA], eggMode);
-
-    PrintQuestSprite(state, taskId, eggMode);
-}
-
 static u32 CreateQuestOverworldWindow(enum QuestOverworldWindows windowTemplateId)
 {
     u32 windowId = AddWindow(&sQuestOverworldWindowTemplates[windowTemplateId]);
@@ -255,9 +203,6 @@ static u32 CreateQuestOverworldWindow(enum QuestOverworldWindows windowTemplateI
 
 static void DrawQuestOverworldHeaderTiles(u32 windowId, u32 frame)
 {
-    if (frame > QUEST_OVERWORLD_ANIMATION_SLIDE_STOP)
-        return;
-
     u32 index;
     u32 tileOffset = QUEST_OVERWORLD_ANIMATION_SLIDE_STOP - frame;
 
@@ -274,9 +219,6 @@ static void DrawQuestOverworldHeaderTiles(u32 windowId, u32 frame)
 
 static void DrawQuestOverworldCTATiles(u32 windowId, u32 frame)
 {
-    if (frame > QUEST_OVERWORLD_ANIMATION_SLIDE_STOP)
-        return;
-
     u32 index;
     u32 tileOffset = QUEST_OVERWORLD_ANIMATION_SLIDE_STOP - frame;
     u32 cIndex = min(frame+1,3);
@@ -331,12 +273,6 @@ static void BufferQuestName(enum QuestIdList quest, u32 windowId, u32 eggMode)
 
 static void PrintQuestName(u32 windowId, u32 frame)
 {
-    if (frame > QUEST_OVERWORLD_ANIMATION_SLIDE_STOP)
-        return;
-
-    if (frame < QUEST_OVERWORLD_ANIMATION_SLIDE_TEXT_START)
-        return;
-
     u32 fontId = FONT_QUEST_OVERWORLD_HEADER;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
@@ -370,12 +306,6 @@ static void BufferCTA(enum QuestMenuScriptCommandParameters state, u32 windowId,
 
 static void PrintCTA(u32 windowId, u32 frame)
 {
-    if (frame > QUEST_OVERWORLD_ANIMATION_SLIDE_STOP)
-        return;
-
-    if (frame < QUEST_OVERWORLD_ANIMATION_SLIDE_TEXT_START)
-        return;
-
     u32 fontId = FONT_QUEST_OVERWORLD_HEADER;
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
@@ -390,7 +320,7 @@ static void PrintCTA(u32 windowId, u32 frame)
     AddTextPrinterParameterized4(windowId,fontId, x , y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar2);
 }
 
-static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 taskId, bool32 eggMode)
+static u32 PrintQuestSprite(enum QuestMenuScriptCommandParameters state, bool32 eggMode)
 {
     u32 spriteId;
     if (!eggMode)
@@ -406,58 +336,86 @@ static void PrintQuestSprite(enum QuestMenuScriptCommandParameters state, u32 ta
         gSprites[spriteId].oam.priority = 0;
     }
     gSprites[spriteId].data[0] = state;
-    gTasks[taskId].data[2] = spriteId;
+    return spriteId;
+}
+
+#define tHeaderWindowId data[0]
+#define tCtaWindowId data[1]
+#define tTimer data[2]
+#define tSpriteId data[3]
+
+void QuestOverworld(enum QuestMenuScriptCommandParameters state, enum QuestIdList quest, bool32 eggMode)
+{
+    LoadPalette(questOverworldPalette,QUEST_OVERWORLD_PALETTE_INTERFACE_SLOT,PLTT_SIZE_4BPP);
+
+    u32 taskId = CreateTask(Task_DoQuestOverworldSlide,0);
+
+    gTasks[taskId].tHeaderWindowId = CreateQuestOverworldWindow(QUEST_OVERWORLD_WINDOW_HEADER);
+    gTasks[taskId].tCtaWindowId = CreateQuestOverworldWindow(QUEST_OVERWORLD_WINDOW_CTA);
+
+    BufferQuestName(quest, gTasks[taskId].tHeaderWindowId, eggMode); //Stores in gStringVar1
+    BufferCTA(state, gTasks[taskId].tCtaWindowId , eggMode);  //Stores in gStringVar2
+
+    HideMapNamePopUpWindow();
+    gTasks[taskId].tSpriteId = PrintQuestSprite(state, eggMode);
+}
+
+static void Task_DoQuestOverworldDisappear(u8 taskId)
+{
+    if (gTasks[taskId].tTimer++ == QUEST_OVERWORLD_ANIMATION_DISAPPEAR_TIMER)
+    {
+        gTasks[taskId].func = Task_DoQuestOverworldDestroy;
+        gTasks[taskId].tTimer = 0;
+        return;
+    }
+    ChangeBgY(BG0_QUEST_OVERWORLD,(QUEST_OVERWORLD_BACKGROUND_HALF_TILE * gTasks[taskId].tTimer),BG_COORD_SET);
+}
+
+static void Task_DoQuestOverworldWait(u8 taskId)
+{
+    if (gTasks[taskId].tTimer++ < QUEST_OVERWORLD_ANIMATION_WAIT_TIME)
+        return;
+    gSprites[gTasks[taskId].tSpriteId].callback = SpriteCB_QuestIconDisappear;
+    gTasks[taskId].func = Task_DoQuestOverworldDisappear;
+    gTasks[taskId].tTimer = 0;
 }
 
 static void Task_DoQuestOverworldSlide(u8 taskId)
 {
-    u32 windowId[QUEST_OVERWORLD_WINDOW_COUNT];
-
-    windowId[QUEST_OVERWORLD_WINDOW_HEADER] = gTasks[taskId].data[0];
-    windowId[QUEST_OVERWORLD_WINDOW_CTA] = gTasks[taskId].data[1];
-
-    u32 frameCounter = GetFrameCounter();
-    IncrementFrameCounter();
-
-    DrawQuestOverworldHeaderTiles(windowId[QUEST_OVERWORLD_WINDOW_HEADER],frameCounter);
-    DrawQuestOverworldCTATiles(windowId[QUEST_OVERWORLD_WINDOW_CTA], frameCounter);
-
-    PrintQuestName(windowId[QUEST_OVERWORLD_WINDOW_HEADER], frameCounter);
-    PrintCTA(windowId[QUEST_OVERWORLD_WINDOW_CTA], frameCounter);
-
-    if (frameCounter >= QUEST_OVERWORLD_ANIMATION_DISAPPEAR_START && frameCounter < QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP)
+    if (gTasks[taskId].tTimer++ == QUEST_OVERWORLD_ANIMATION_SLIDE_STOP)
     {
-        ChangeBgY(BG0_QUEST_OVERWORLD,(QUEST_OVERWORLD_BACKGROUND_HALF_TILE * (frameCounter - QUEST_OVERWORLD_ANIMATION_DISAPPEAR_START)),BG_COORD_SET);
+        gTasks[taskId].func = Task_DoQuestOverworldWait;
+        gTasks[taskId].tTimer = 0;
+        return;
     }
 
-    for (enum QuestOverworldWindows windowIndex = 0; windowIndex < QUEST_OVERWORLD_WINDOW_COUNT; windowIndex++)
-        PlaceQuestOverworldOnTilemap(windowId[windowIndex]);
-
-    if (frameCounter <= QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP)
-        return;
-
-    HideMapNamePopUpWindow();
+    DrawQuestOverworldHeaderTiles(gTasks[taskId].tHeaderWindowId, gTasks[taskId].tTimer);
+    DrawQuestOverworldCTATiles(gTasks[taskId].tCtaWindowId, gTasks[taskId].tTimer);
+    
+    if (gTasks[taskId].tTimer >= QUEST_OVERWORLD_ANIMATION_SLIDE_TEXT_START)
+    {
+        PrintQuestName(gTasks[taskId].tHeaderWindowId, gTasks[taskId].tTimer);
+        PrintCTA(gTasks[taskId].tCtaWindowId, gTasks[taskId].tTimer);
+    }
+    PlaceQuestOverworldOnTilemap(gTasks[taskId].tHeaderWindowId);
+    PlaceQuestOverworldOnTilemap(gTasks[taskId].tCtaWindowId);
 }
 
-void HideQuestOverworld(void)
+static void Task_DoQuestOverworldDestroy(u8 taskId)
 {
-    u32 taskId = FindTaskIdByFunc(Task_DoQuestOverworldSlide);
+    ClearStdWindowAndFrameToTransparent(gTasks[taskId].tHeaderWindowId,TRUE);
+    RemoveWindow(gTasks[taskId].tHeaderWindowId);
+    ClearStdWindowAndFrameToTransparent(gTasks[taskId].tCtaWindowId,TRUE);
+    RemoveWindow(gTasks[taskId].tCtaWindowId);
 
-    if (taskId == TASK_NONE)
-        return;
-
-    if (!FuncIsActiveTask(Task_DoQuestOverworldSlide))
-        return;
-
-    Free(sQuestOverworldDataStorage);
-
-    for (enum QuestOverworldWindows windowIndex = 0; windowIndex < QUEST_OVERWORLD_WINDOW_COUNT; windowIndex++)
-    {
-        ClearStdWindowAndFrameToTransparent(gTasks[taskId].data[windowIndex],TRUE);
-        RemoveWindow(gTasks[taskId].data[windowIndex]);
-    }
-
-    DestroySpriteAndFreeResources(&gSprites[gTasks[taskId].data[2]]);
+    DestroySpriteAndFreeResources(&gSprites[gTasks[taskId].tSpriteId]);
     ChangeBgY(BG0_QUEST_OVERWORLD,0,BG_COORD_SET);
     DestroyTask(taskId);
+
+    ScriptContext_Enable();
 }
+
+#undef tHeaderWindowId
+#undef tCtaWindowId
+#undef tTimer
+#undef tSpriteId

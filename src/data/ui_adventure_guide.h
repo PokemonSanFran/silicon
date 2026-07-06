@@ -21,4 +21,45 @@ const struct AdventureGuideData AdventureGuideInfo[] =
             COMPOUND_STRING("When looking for a specific Pokémon to add to your party, the Pokédex's filter functionality allows for advanced searching and filtering to find the right Pokémon to solve any problem."),
         },
     },
+    [GUIDE_SURPRISE_TRADE] =
+    {
+        .title = COMPOUND_STRING("Surprise Trade"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_BASIC,
+        .description =
+        {
+            COMPOUND_STRING("With a Surprise Trade, you don’t choose who you’ll trade with or what you’ll get. Just choose a Pokémon you’re willing to part with from your Boxes or Party and your trade will be carried out automatically."),
+            COMPOUND_STRING("Trading Pokémon with other Trainers can also help you fill up your Pokédex! With Surprise Trades, you can trade with players from all over Resido!"),
+        },
+    },
+    [GUIDE_WAVES_OF_CHANGE] =
+    {
+        .title = COMPOUND_STRING("Waves of Change"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_ADVANCED,
+        .description =
+        {
+            COMPOUND_STRING("Help contribute to the Mutual Aid Fund! You can donate to any of the five different causes. Citizens from all over Resido will also contribute to the fund!"),
+        },
+    },
+    [GUIDE_MINING] =
+    {
+        .title = COMPOUND_STRING("Mining"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_ADVANCED,
+        .description =
+        {
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 3"),
+        },
+    },
+    [GUIDE_QUESTS] =
+    {
+        .title = COMPOUND_STRING("Quests"),
+        .isAdvancedGuide = ADVENTURE_GUIDE_ADVANCED,
+        .description =
+        {
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 1"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 2"),
+            COMPOUND_STRING("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel odio eleifend nunc auctor vestibulum in eget eros. Maecenas tincidunt dignissim aliquam. Nullam eros est, sollicitudin eu libero sit amet, tincidunt posuere metus. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. In laoreet ante in risus dictum consectetur. 3"),
+        },
+    },
 };

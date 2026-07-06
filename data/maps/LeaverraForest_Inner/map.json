@@ -2,7 +2,7 @@
   "id": "MAP_LEAVERRA_FOREST_INNER",
   "name": "LeaverraForest_Inner",
   "layout": "LAYOUT_LEAVERRA_FOREST_INNER",
-  "music": "MUS_MT_PYRE_EXTERIOR",
+  "music": "MUS_HALERBA_WILDS",
   "region_map_section": "MAPSEC_LEAVERRA_FOREST",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,9 +12,10 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_LEAVERRA_CHARLOTTE",
       "graphics_id": "OBJ_EVENT_GFX_CHARLOTTE",
       "x": 9,
       "y": 16,
@@ -28,7 +29,8 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ARMANDO",
+      "local_id": "LOCALID_LEAVERRA_FRANK",
+      "graphics_id": "OBJ_EVENT_GFX_FRANK",
       "x": 10,
       "y": 15,
       "elevation": 3,
@@ -37,23 +39,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LeaverraForest_Armando_Interact_Script",
+      "script": "LeaverraForest_Frank_Interact_Script",
       "flag": "FLAG_TEMP_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLIVER",
-      "x": 9,
-      "y": 18,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "FLAG_TEMP_3"
-    },
-    {
+      "local_id": "LOCALID_LEAVERRA_ROBOT_RIGHT",
       "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
       "x": 16,
       "y": 7,
@@ -63,10 +53,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Armandostraining_Interact_Robot_Script",
+      "script": "EnterTheMaster_Interact_Robot_Script",
       "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_LEAVERRA_ROBOT_LEFT",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 2,
       "y": 4,
@@ -76,8 +67,34 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Armandostraining_Interact_CharlotteRobot_Script",
+      "script": "EnterTheMaster_Interact_CharlotteRobot_Script",
       "flag": "FLAG_TEMP_4"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 14,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_LEAVERRA_FOREST_INNER_CLEARING_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 5,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_LEAVERRA_FOREST_INNER_CLEARING_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [

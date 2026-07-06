@@ -75,7 +75,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_TEMP_5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
@@ -101,7 +101,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_TEMP_5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
@@ -143,7 +143,7 @@
       "flag": "FLAG_TEMP_5"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 1,
       "y": 24,
       "elevation": 3,
@@ -156,7 +156,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_F",
+      "graphics_id": "OBJ_EVENT_GFX_COMRADE_6",
       "x": 2,
       "y": 24,
       "elevation": 3,
@@ -182,7 +182,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 2,
       "y": 19,
       "elevation": 3,
@@ -195,17 +195,70 @@
       "flag": "FLAG_TEMP_2"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_TEALA",
-      "x": 9,
-      "y": 33,
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "x": 8,
+      "y": 12,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route99_EventScript_Ferran_Script",
-      "flag": "FLAG_TEMP_7"
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "x": 2,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 8,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_99_1",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 8,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_99_2",
+      "script": "BerryTreeScript",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE99_RESTAURANTEXPANSIONCHEF",
+      "graphics_id": "OBJ_EVENT_GFX_RESTAURANTEXPANSIONCHEF",
+      "x": 0,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route99_Script_Interact_Quest_Restaurantexpansionchef",
+      "flag": "FLAG_TEMP_4"
     }
   ],
   "warp_events": [
@@ -220,48 +273,147 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 5,
-      "y": 18,
+      "x": 0,
+      "y": 24,
       "elevation": 0,
-      "var": "VAR_ROUTE99_STATE",
+      "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "HousingProtest_StartChanting_Dialogue"
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
     },
     {
       "type": "trigger",
       "x": 6,
-      "y": 18,
+      "y": 24,
       "elevation": 0,
-      "var": "VAR_ROUTE99_STATE",
+      "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "HousingProtest_StartChanting_Dialogue"
+      "script": "HousingProtest_MovePlayerIntoPosition"
     },
     {
       "type": "trigger",
       "x": 7,
-      "y": 18,
+      "y": 24,
       "elevation": 0,
-      "var": "VAR_ROUTE99_STATE",
+      "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "HousingProtest_StartChanting_Dialogue"
+      "script": "HousingProtest_MovePlayerIntoPosition"
     },
     {
       "type": "trigger",
       "x": 8,
-      "y": 18,
+      "y": 24,
       "elevation": 0,
-      "var": "VAR_ROUTE99_STATE",
+      "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "HousingProtest_StartChanting_Dialogue"
+      "script": "HousingProtest_MovePlayerIntoPosition"
     },
     {
       "type": "trigger",
       "x": 9,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
       "y": 18,
       "elevation": 0,
-      "var": "VAR_ROUTE99_STATE",
+      "var": "VAR_ALWAYS_ZERO",
       "var_value": "0",
-      "script": "HousingProtest_StartChanting_Dialogue"
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "HousingProtest_MovePlayerIntoPosition"
     }
   ],
   "bg_events": [

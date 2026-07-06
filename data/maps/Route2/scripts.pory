@@ -4,6 +4,7 @@ mapscripts Route2_MapScripts {
         call(Quest_NeighborhoodCleanUp_ObjectVisibility_Script)
         call(MaybeIFuckedUp_ShowOri_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_15,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueK)
     }
     MAP_SCRIPT_ON_LOAD {
         call(HeresHowThisIsGoingToGo_ConstructionCompleted_Script)
@@ -15,10 +16,9 @@ mapscripts Route2_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_CONSTRUCTION_STRIKE_STATE, STRIKE_HAS_BEGUN: TheStrikeStrikesBack_Intro_Dialogue
             VAR_CONSTRUCTION_STRIKE_STATE, DEFEATED_GARBODOR: VSGarbodor_Arrest_Script
-            VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_ADELAIDE: MaybeIFuckedUp_Dialogue
+            VAR_STORYLINE_STATE, STORY_CONGRATULATED_BY_LUCREZIA: MaybeIFuckedUp_Dialogue
     ]
 }
-
 
 script Route2_ConstructionVisibility_Script {
     switch (var(VAR_CONSTRUCTION_STRIKE_STATE)){
@@ -26,9 +26,33 @@ script Route2_ConstructionVisibility_Script {
         case STRIKE_HAS_BEGUN: call(TheStrikeStrikesBack_ObjectSetup_Script)
         case START_VS_GARBODOR: call(TheStrikeStrikesBack_ShowCrowd_Script)
         case DEFEATED_GARBODOR: call(VSGarbodor_Arrest_ObjectSetup_Script)
-        case THETIDE_ARRESTED: call(TheStrikeStrikesBack_HideObject_Script)
+        case THE_TIDE_ARRESTED: call(TheStrikeStrikesBack_HideObject_Script)
     }
 
     return
 }
 
+script Route2_Script_Interact_BodegaburnoutRescueK
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTRESCUEK,format("If I beat you, will you tell me how to get back to Espulee Outskirts?"),format("Could you help me anyways?"),Quest_Bodegaburnout_Script_Handle_BodegaburnoutRescueK)
+}
+
+script RouteA_Script_Interact_DiggingtidememberA
+{
+    trainerbattle_single(TRAINER_DIGGINGTIMEMEMBERA,format("I’ve never looked up to someone like I do Adaora. I wanna be strong just like her!"),format("Aw man, I hope I didn’t disappoint Adaora…"),Quest_Diggingupadaorasdirt_Dialogue_DiggingtidememberA)
+    goto(Quest_Diggingupadaorasdirt_Dialogue_DiggingtidememberA)
+}
+
+script Route2_EventScript_0C543C80
+{
+    trainerbattle_single(TRAINER_0C543C80,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route2_EventScript_0A8B9F88
+{
+    trainerbattle_single(TRAINER_0A8B9F88,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

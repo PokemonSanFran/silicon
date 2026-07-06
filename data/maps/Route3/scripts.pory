@@ -3,15 +3,13 @@ MAP_SCRIPT_ON_TRANSITION{
 }
 }
 
-
-script Route3_EventScript_DeliveryC{
-    trainerbattle_single(TRAINER_BODEGA_3,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryC_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
+script Route3_Script_Interact_BodegaburnoutDeliveryCutE
+{
+    trainerbattle_single(TRAINER_QUEST_BODEGABURNOUTDELIVERYCUTE,format("How long should I wait around for this package? Want to keep me company?"),format("How long was that battle…?"),Route3_Script_Interact_BodegaburnoutDeliveryCutE)
+    call_if_subquest_not_complete(QUEST_BODEGABURNOUT,SUB_QUEST_10,Quest_Bodegaburnout_Script_Handle_BodegaburnoutDeliveryCutE)
+    bufferitemname(STR_VAR_1,ITEM_METRONOME)
+    msgbox(format("The {STR_VAR_1} that I ordered is going to work out great!"),,SPEAKER_BODEGABURNOUTDELIVERYCUTE)
+    closemessage
+    release
+    end
 }

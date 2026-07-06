@@ -1,0 +1,41 @@
+const PLAYER = OBJ_EVENT_ID_PLAYER
+
+script StartTrolleySequence
+{
+	lock
+	hideplayer
+	checkmoney(FARE_BASE_TROLLEY)
+	if (var(VAR_RESULT))
+	{
+		goto(Trolley_AllowPlayer_Script)
+	}
+	else
+	{
+		goto(Trolley_DenyPlayer_Script)
+	}
+}
+
+script Trolley_DenyPlayer_Script
+{
+	callnative(BufferTrolleyBaseFare)
+	msgbox(format("You must have ¥{STR_VAR_1} to ride the G.R.U.N.T. Trolley."))
+	closemessage
+	goto(Trolley_MovePlayer_Script)
+}
+
+script Trolley_AllowPlayer_Script
+{
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	callnative(Script_OpenTrolley)
+	waitstate
+	goto(Trolley_MovePlayer_Script)
+}
+
+script Trolley_MovePlayer_Script
+{
+	applymovement(PLAYER,Common_Movement_WalkDown)
+	showplayer
+	waitmovement
+	release
+	end
+}

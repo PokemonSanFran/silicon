@@ -27,9 +27,8 @@ void PutFirstMemBlockHeader(void *block, u32 size)
     PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
-void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
+void UNUSED MonitorHeapOnAlloc(struct MemBlock *head, u32 size, const char *location, void *ptr)
 {
-    return;
     u32 totalHeapSize = 0;
     u32 freeHeapSize = 0;
 
@@ -44,7 +43,42 @@ void MonitorHeap(struct MemBlock *head, u32 size, const char *location)
 
     u32 used = totalHeapSize - freeHeapSize;
     u32 percent = used * 100 / totalHeapSize;
-    DebugPrintf("%s: %d bytes | Total Used: %d/%d (%d\%)",location,size,used,totalHeapSize,percent);
+
+    DebugPrintf("%s: %d bytes allocated at %X | Total Used: %d/%d (%d\%)", location, size, ptr, used, totalHeapSize, percent);
+    (void)location;
+    (void)size;
+    (void)ptr;
+    (void)used;
+    (void)totalHeapSize;
+    (void)percent;
+}
+
+void UNUSED MonitorHeapOnFree(struct MemBlock *head, void *pointer, const char *location)
+{
+    u32 totalHeapSize = 0;
+    u32 freeHeapSize = 0;
+    u32 usedBefore = 0;
+
+    struct MemBlock *cur = head;
+    do
+    {
+        totalHeapSize += cur->size;
+        if (!cur->allocated)
+            freeHeapSize += cur->size;
+        cur = cur->next;
+    } while (cur != head);
+
+    usedBefore = totalHeapSize - freeHeapSize;
+
+    struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
+    u32 blockSize = block->size;
+
+    DebugPrintf("%s: %d bytes freed at %X | Total Used before free: %d/%d", location, blockSize, pointer, usedBefore, totalHeapSize);
+    (void)location;
+    (void)pointer;
+    (void)blockSize;
+    (void)usedBefore;
+    (void)totalHeapSize;
 }
 
 void *AllocInternal(void *heapStart, u32 size, const char *location)
@@ -97,14 +131,14 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 pos->locationHi = ((uintptr_t)location) >> 14;
                 pos->locationLo = (uintptr_t)location;
 
-                MonitorHeap(head,size,location);
+                //MonitorHeapOnAlloc(head, size, location, pos->data);
                 return pos->data;
             }
         }
 
+#if TESTING
         if (pos->next == head)
         {
-#if TESTING
             const struct MemBlock *head = HeapHead();
             const struct MemBlock *block = head;
             do
@@ -120,13 +154,10 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 block = block->next;
             }
             while (block != head);
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
+        }
 #endif
-            if (location)
-            {
-                DebugPrintfLevel(MGBA_LOG_ERROR, "%s: out of memory trying to allocate %d bytes", location, size);
-            }
-            AGB_ASSERT(FALSE);
+        assertf(pos->next != head, "%s: out of memory trying to allocate %d bytes", location, size)
+        {
             return NULL;
         }
 
@@ -143,6 +174,8 @@ void FreeInternal(void *heapStart, void *pointer)
         AGB_ASSERT(block->magic == MALLOC_SYSTEM_ID);
         AGB_ASSERT(block->allocated == TRUE);
         block->allocated = FALSE;
+
+        //MonitorHeapOnFree(head, pointer, (const char *)(ROM_START | (block->locationHi << 14) | block->locationLo));
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.

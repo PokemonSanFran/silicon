@@ -17,7 +17,7 @@ script ToraTown_Musicvenue_Interact_Ladislau_Script{
 }
 
 script ToraTown_Musicvenue_Drummers_Dialogue{
-    msgbox(gText_ToraTown_Musicvenue_ManTheseDummers,MSGBOX_NPC)
+    msgbox(format("Man, these drummers are something else!"),MSGBOX_NPC)
     end
 }
 

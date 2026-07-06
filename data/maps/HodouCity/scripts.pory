@@ -1,20 +1,28 @@
 mapscripts HodouCity_MapScripts{
+	MAP_SCRIPT_ON_RESUME
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
+        call_if_quest_reward(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
+        call_if_quest_complete(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_Culthouseguard)
         call(HowDisappointing_ManageObject_Script)
-        call(Quest_CulturalPurity_HideLeader_Script)
-        call(Quest_CulturalPurity_HideBackUp_Script)
-        call(Quest_CulturalPurity_MoveGuard_Script)
-        call(Quest_Restorehodoucity_HidePewfatOutside_Script)
-        call(LetsGrabLunch_CheckRestorationProgress_Script)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
+        call(Restorehodoucity_Script_ControlPewfatVisibility)
+        callnative(LetsGrabLunch_IncrementStoryVariable)
+        call_if_quest_not_complete(QUEST_RESTOREHODOUGYM,Quest_Rematches_Script_HideKeiYing)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideKeiYing)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_COMPLETE_ARANTRAZ,CulturalPurity_Script_Hide_HodouLeader)
+        call_if_quest_not_inactive(QUEST_CULTURALPURITY,CulturalPurity_Script_Hide_HodouLeader)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         FLAG_VISITED_HODOU_CITY, FALSE: Generic_Mappreview
         VAR_STORYLINE_STATE, STORY_RESTORATION_1_COMPLETE: YouRealizeWereEvilRight_PhoneCall_Dialogue
     ]
-    MAP_SCRIPT_ON_LOAD{
-        call(Quest_Restorehodoucity_LockGymDoor_Script)
+    MAP_SCRIPT_ON_LOAD
+    {
+        call_if_quest_inactive(QUEST_RESTOREHODOUGYM,Quest_Restorehodoucity_LockGymDoor_Script)
+        call_if_set(FLAG_TIMELINE_FALSE,Quest_Restorehodoucity_LockGymDoor_Script)
     }
 }
 
@@ -35,11 +43,8 @@ script HodouCity_GymDoor_Dialogue
         return
     }
 
-    msgbox(format("The door is locked."),MSGBOX_SIGN)
+    msgbox(format("The door is locked. There is a worn down sign on the door."))
+    buffermapname(STR_VAR_1,MAP_HODOU_CITY)
+    msgbox(format("This Gym is no longer part of the official Resido Gym Challenge. This location has been decommissioned. We thank the people of {STR_VAR_1} for their community over the years.\nGym Leader K - \nthe sign is too ripped to read."),MSGBOX_SIGN)
     end
-}
-
-text gText_HodouCity_IMissTheOld
-{
-    format("I miss the old days. I get so nostalgic for my childhood...I loved growing up in these streets.")
 }

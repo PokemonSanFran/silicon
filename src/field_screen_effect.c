@@ -20,6 +20,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
+#include "map_preview_screen.h"
 #include "menu.h"
 #include "mirage_tower.h"
 #include "metatile_behavior.h"
@@ -39,7 +40,6 @@
 #include "constants/heal_locations.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
-#include "map_preview_screen.h" // mapPreviews
 #include "trainer_hill.h"
 #include "fldeff.h"
 #include "options_game.h" // autoSave
@@ -62,6 +62,11 @@ static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
 static void Task_StairWarp(u8);
 static void ForceStairsMovement(u32, s16*, s16*);
 
+static const u8 sText_PlayerScurriedToCenter[] = _("{PLAYER} scurried to a POKéMON CENTER,\nprotecting the exhausted and fainted\nPOKéMON from further harm…\p");
+static const u8 sText_PlayerScurriedBackHome[] = _("{PLAYER} scurried back home, protecting\nthe exhausted and fainted POKéMON from\nfurther harm…\p");
+static const u8 sText_PlayerRegroupCenter[] = _("{PLAYER} scurried to a POKéMON CENTER,\nto regroup and reconsider the battle\nstrategy…\p");
+static const u8 sText_PlayerRegroupHome[] = _("{PLAYER} scurried back home, to regroup\nand reconsider the battle strategy…\p");
+
 // data[0] is used universally by tasks in this file as a state for switches
 #define tState       data[0]
 
@@ -75,6 +80,45 @@ static const struct ScanlineEffectParams sFlashEffectParams =
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1
 };
+
+// Start shrinkPlayer
+static const union AffineAnimCmd sSpriteAffineAnim_ShrinkPlayerAtDoor[] =
+{
+    AFFINEANIMCMD_FRAME(-4, -4, 0, 60),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_GrowPlayerFromDoor[] =
+{
+    AFFINEANIMCMD_FRAME(196, 196, 0, 0),
+    AFFINEANIMCMD_FRAME(4, 4, 0, 15),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_ShrinkPlayerAtDoor[] =
+{
+    sSpriteAffineAnim_ShrinkPlayerAtDoor,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_GrowPlayerFromDoor[] =
+{
+    sSpriteAffineAnim_GrowPlayerFromDoor,
+};
+
+void Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion(u8 taskId)
+{
+    struct Sprite *sprite = &gSprites[gObjectEvents[gTasks[taskId].data[0]].spriteId];
+
+    if (sprite->affineAnimEnded)
+    {
+        FreeSpriteOamMatrix(sprite);
+        sprite->affineAnims = gDummySpriteAffineAnimTable;
+        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+        CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+        DestroyTask(taskId);
+    }
+}
+// End shrinkPlayer
 
 // code
 static void FillPalBufferWhite(void)
@@ -132,10 +176,7 @@ void WarpFadeOutScreen(void)
         FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
-        // start mapPreviews
-        //FadeScreen(FADE_TO_WHITE, 0);
-        FadeScreen(GetFadeScreenModeFromMapPreviewType(),0);
-        // End mapPreviews
+        FadeScreen(FADE_TO_WHITE, 0);
     }
 }
 
@@ -304,7 +345,12 @@ static void SetUpWarpExitTask(void)
 
 void FieldCB_DefaultWarpExit(void)
 {
-    Overworld_PlaySpecialMapMusic();
+    // Start firstMusicUpdate
+    //Overworld_PlaySpecialMapMusic();
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
+        Overworld_PlaySpecialMapMusic();
+    // End firstMusicUpdate
+    ResetSavedGrottoMon(); // hidden_grotto
     WarpFadeInScreen();
     SetUpWarpExitTask();
     FollowerNPC_WarpSetEnd();
@@ -371,6 +417,17 @@ static void Task_ExitDoor(u8 taskId)
             objEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
             ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->tState = 2;
+            // Start shrinkPlayer
+            u32 playerObjId = gPlayerAvatar.objectEventId;
+            struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = gSpriteAffineAnimTable_GrowPlayerFromDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+            u32 newTaskId = CreateTask(Task_DestroyEventObjSpriteMatrixOnAffineAnimCompletion, 0xFF);
+            if (newTaskId != 0xFF)
+                gTasks[newTaskId].data[0] = playerObjId;
+            // End shrinkPlayer
         }
         break;
     case 2:
@@ -393,7 +450,10 @@ static void Task_ExitDoor(u8 taskId)
         }
         break;
     case 4:
-        UnlockPlayerFieldControls();
+        // Don't unlock controls until the map preview has finished.
+        if (!FadeInMapPreviewScreenIsRunning())
+            UnlockPlayerFieldControls();
+
         DestroyTask(taskId);
         break;
     }
@@ -440,7 +500,10 @@ static void Task_ExitNonAnimDoor(u8 taskId)
         }
         break;
     case 3:
-        UnlockPlayerFieldControls();
+        // Don't unlock controls until the map preview has finished.
+        if (!FadeInMapPreviewScreenIsRunning())
+            UnlockPlayerFieldControls();
+
         DestroyTask(taskId);
         break;
     }
@@ -459,7 +522,10 @@ static void Task_ExitNonDoor(u8 taskId)
         if (WaitForWeatherFadeIn())
         {
             UnfreezeObjectEvents();
-            UnlockPlayerFieldControls();
+            // Don't unlock controls until the map preview has finished.
+            if (!FadeInMapPreviewScreenIsRunning())
+                UnlockPlayerFieldControls();
+
             DestroyTask(taskId);
         }
         break;
@@ -779,6 +845,14 @@ void Task_DoDoorWarp(u8 taskId)
                 ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], newState);
             }
 
+            // Start shrinkPlayer
+            struct Sprite *sprite = &gSprites[gObjectEvents[playerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+
+            // End shrinkPlayer
             task->tState = DOORWARP_HIDE_PLAYER;
         }
         break;
@@ -803,6 +877,14 @@ void Task_DoDoorWarp(u8 taskId)
         {
             ObjectEventClearHeldMovementIfActive(&gObjectEvents[followerObjId]);
             ObjectEventSetHeldMovement(&gObjectEvents[followerObjId], MOVEMENT_ACTION_WALK_NORMAL_UP);
+
+            // Start shrinkPlayer
+            struct Sprite *sprite = &gSprites[gObjectEvents[followerObjId].spriteId];
+            sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+            sprite->affineAnims = sSpriteAffineAnimTable_ShrinkPlayerAtDoor;
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+            InitSpriteAffineAnim(sprite);
+            // End shrinkPlayer
         }
 
         TryFadeOutOldMapMusic();
@@ -1391,7 +1473,7 @@ static bool32 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u32 x, u32
         break;
     case 1:
         RunTextPrinters();
-        if (!IsTextPrinterActive(windowId))
+        if (!IsTextPrinterActiveOnWindow(windowId))
         {
             gTasks[taskId].tPrintState = 0;
             return TRUE;
@@ -1414,13 +1496,13 @@ static const u8 *GenerateRecoveryMessage(u8 taskId)
     bool32 destinationIsPlayersHouse = (gTasks[taskId].tIsPlayerHouse == TRUE);
 
     if (forfeitTrainer && destinationIsPlayersHouse)
-        return gText_PlayerRegroupHome;
+        return sText_PlayerRegroupHome;
     else if (forfeitTrainer && !destinationIsPlayersHouse)
-        return gText_PlayerRegroupCenter;
+        return sText_PlayerRegroupCenter;
     else if (!forfeitTrainer && destinationIsPlayersHouse)
-        return gText_PlayerScurriedBackHome;
+        return sText_PlayerScurriedBackHome;
     else
-        return gText_PlayerScurriedToCenter;
+        return sText_PlayerScurriedToCenter;
 }
 
 static void Task_RushInjuredPokemonToCenter(u8 taskId)
@@ -1464,9 +1546,21 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         {
             DestroyTask(taskId);
             if (gTasks[taskId].tIsPlayerHouse)
+            {
+                if (IS_FRLG)
+                    StringCopy(gStringVar1, COMPOUND_STRING("PROF. OAK"));
+                else
+                    StringCopy(gStringVar1, COMPOUND_STRING("PROF. BIRCH"));
                 ScriptContext_SetupScript(EventScript_AfterWhiteOutMomHeal);
+            }
+            else if (IS_FRLG)
+            {
+                ScriptContext_SetupScript(EventScript_AfterWhiteOutHeal_Frlg);
+            }
             else
+            {
                 ScriptContext_SetupScript(EventScript_AfterWhiteOutHeal);
+            }
         }
         break;
     }
@@ -1700,7 +1794,7 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
 #undef tTimer
 #undef tDelay
 
-bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection)
+bool32 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, enum Direction playerDirection)
 {
     if (playerDirection == DIR_WEST)
     {

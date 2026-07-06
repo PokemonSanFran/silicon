@@ -1,32 +1,44 @@
 #include "global.h"
+#include "battle.h"
+#include "daycare.h"
+#include "event_data.h"
+#include "field_weather.h"
+#include "item.h"
+#include "mail.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "overworld.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
-#include "strings.h"
-#include "daycare.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
-#include "overworld.h"
-#include "text.h"
-#include "event_data.h"
 #include "region_map.h"
-#include "malloc.h"
-#include "constants/species.h"
-#include "constants/items.h"
-#include "constants/abilities.h"
-#include "constants/region_map_sections.h"
-#include "item.h"
-#include "constants/item.h"
-#include "constants/hold_effects.h"
-#include "mail.h"
-#include "constants/pokemon.h"
-#include "party_menu.h"
+#include "scanline_effect.h"
 #include "siliconStarter.h"
-#include "field_weather.h"
-#include "constants/weather.h"
-#include "battle.h"
 #include "string_util.h"
-#include "daycare.h"
+#include "strings.h"
 #include "surprise_trade.h"
+#include "text.h"
+#include "trade.h"
+#include "ui_adventure_guide.h"
+#include "constants/abilities.h"
+#include "constants/hold_effects.h"
+#include "constants/item.h"
+#include "constants/items.h"
+#include "constants/party_menu.h"
+#include "constants/pokemon.h"
+#include "constants/region_map_sections.h"
+#include "constants/rgb.h"
+#include "constants/species.h"
+#include "constants/ui_adventure_guide.h"
+#include "constants/weather.h"
 #include "data/surprise_trade_ot.h"
+
+extern const u16 gResidoPokedexOrder_Numerical[];
 
 static u32 GenerateSurpriseTradeSpecies(void);
 static u32 CalculateSurpriseTradeExperience(u32 level, u32 species);
@@ -42,11 +54,25 @@ static u32 GenerateSurpriseTradeAbility(u32 species);
 static bool32 IsItemBlocked(u32 item);
 static u32 GenerateSurpriseTradeItem(void);
 static u32 GenerateSurpriseTradeBall(void);
+static void SurpriseTrade_MainCB(void);
+static void SurpriseTrade_VBlankCB(void);
+static void SurpriseTrade_SetupCB(void);
+static void BufferMonSelectionSurpriseTrade(void);
 
 void CreateWonderTradePokemon(void)
 {
     u32 wonderTradeSpecies = GenerateSurpriseTradeSpecies();
-    u32 playerMonLevel = GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_LEVEL);
+    u32 playerMonLevel = 0;
+
+    if (gSpecialVar_0x8005 == PC_MON_CHOSEN)
+    {
+        playerMonLevel = GetBoxMonDataAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, MON_DATA_EXP);
+    }
+    else
+    {
+        playerMonLevel = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_EXP);
+    }
+
     u32 experience = CalculateSurpriseTradeExperience(playerMonLevel, wonderTradeSpecies);
     u32 newHeldItem = GenerateSurpriseTradeItem();
     u32 abilityNum = GenerateSurpriseTradeAbility(wonderTradeSpecies);
@@ -60,59 +86,47 @@ void CreateWonderTradePokemon(void)
     u32 otGender = surpriseTradeTrainer[trainer].otGender;
 
     u32 metLocation = METLOC_IN_GAME_TRADE;
+    u32 personality = GetMonPersonality(wonderTradeSpecies, MON_GENDER_RANDOM, NATURE_RANDOM, RANDOM_UNOWN_LETTER);
 
-    CreateMon(&gEnemyParty[0], wonderTradeSpecies, 1, USE_RANDOM_IVS, FALSE, 0, OT_ID_PRESET, otId);
+    CreateMon(&gParties[B_TRAINER_OPPONENT_A][0], wonderTradeSpecies, 1, personality,OTID_STRUCT_PRESET(otId));
 
-    bool32 isShiny = ShouldMonBeShiny(GetMonData(&gEnemyParty[0],MON_DATA_PERSONALITY),otId);
+    bool8 isShiny = ShouldMonBeShiny(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0],MON_DATA_PERSONALITY),otId);
 
-    SetMonData(&gEnemyParty[0], MON_DATA_EXP, &experience);
-    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &newHeldItem);
-    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
-    SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &isShiny);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_EXP, &experience);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &newHeldItem);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &abilityNum);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_IS_SHINY, &isShiny);
 
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, name);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_ID, &otId);
-    SetMonData(&gEnemyParty[0], MON_DATA_OT_GENDER, &otGender);
-    SetMonData(&gEnemyParty[0], MON_DATA_MET_LOCATION, &metLocation);
-    SetMonData(&gEnemyParty[0], MON_DATA_POKEBALL, &ball);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_NAME, name);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_ID, &otId);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_OT_GENDER, &otGender);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_POKEBALL, &ball);
 
-    AddSurpriseTradeEffortValues(&gEnemyParty[0]);
-    AddSurpriseTradeMoves(&gEnemyParty[0]);
+    AddSurpriseTradeEffortValues(&gParties[B_TRAINER_OPPONENT_A][0]);
+    AddSurpriseTradeMoves(&gParties[B_TRAINER_OPPONENT_A][0]);
 
-    CalculateMonStats(&gEnemyParty[0]);
+    CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
     Free(name);
 }
 
 static u32 GenerateSurpriseTradeSpecies(void)
 {
-    u32 species = Random() % RESIDO_DEX_COUNT;
-    u32 residoDexList[RESIDO_DEX_COUNT];
+    u32 listCount = RESIDO_DEX_COUNT;
+    u32 startIndex = (Random() % (listCount - 1)) + 1;
+    u32 species = 0;
 
-    for (u32 speciesIndex = 0; speciesIndex < RESIDO_DEX_COUNT; speciesIndex++)
-        residoDexList[speciesIndex] = speciesIndex;
-
-    Shuffle(residoDexList,RESIDO_DEX_COUNT,sizeof(residoDexList[0]));
-
-    for (u32 speciesIndex = 0; speciesIndex < NUM_SPECIES; speciesIndex++)
+    for (u32 speciesIndex = 0; speciesIndex < listCount; speciesIndex++)
     {
-        u32 newSpecies = residoDexList[speciesIndex];
-        //PSF TODO replace natDexNum with residoDexNum
-        if (gSpeciesInfo[newSpecies].natDexNum != species)
+        u32 listIndex = ((startIndex + speciesIndex) % (listCount - 1)) + 1;
+        species = gResidoPokedexOrder_Numerical[listIndex];
+
+        if (species == SPECIES_NONE || species >= NUM_SPECIES)
             continue;
 
-        if (gSpeciesInfo[newSpecies].isMegaEvolution)
-            continue;
+        const struct SpeciesInfo *info = &gSpeciesInfo[species];
 
-        if (gSpeciesInfo[newSpecies].isLegendary)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isMythical)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isUltraBeast)
-            continue;
-
-        if (gSpeciesInfo[newSpecies].isParadox)
+        if (info->isMegaEvolution || info->isSubLegendary || info->isMythical || info->isUltraBeast || info->isParadox || info->isRestrictedLegendary)
             continue;
 
         break;
@@ -120,20 +134,33 @@ static u32 GenerateSurpriseTradeSpecies(void)
     return GetEggSpecies(species);
 }
 
-static u32 CalculateSurpriseTradeExperience(u32 level, u32 species)
+static u32 CalculateSurpriseTradeExperience(u32 currentLevelExp, u32 species)
 {
     u32 growthRate = gSpeciesInfo[species].growthRate;
-    u32 expLimit = gExperienceTables[growthRate][level + 1];
-    u32 topLimit = gExperienceTables[growthRate][MAX_LEVEL];
+    u32 tradedMonExp = currentLevelExp;
+    u32 level = 0, newMonExp = 0;
 
-    u32 exp = Random() % expLimit;
+    for (level = 0; level < (MAX_LEVEL + 1); level++)
+    {
+        newMonExp = gExperienceTables[growthRate][level];
+        tradedMonExp -= newMonExp;
 
-    if (exp == 0)
-        exp = 1;
-    else if (exp > topLimit)
-        exp = topLimit;
+        if (tradedMonExp < 1)
+            break;
+    }
 
-    return exp;
+    u32 maxExp = gExperienceTables[growthRate][MAX_LEVEL];
+
+    if (currentLevelExp > maxExp)
+        return maxExp;
+
+    if (++level > MAX_LEVEL)
+        return currentLevelExp;
+
+    u32 exp = Random() % (newMonExp - currentLevelExp);
+    u32 targetExp = currentLevelExp + exp;
+    u32 returnValue = min(targetExp,maxExp);
+    return max(1,returnValue);
 }
 
 void AddSurpriseTradeMoves(struct Pokemon *mon)
@@ -276,7 +303,7 @@ static void CompactMoveSlots(struct Pokemon *mon)
         if (move == MOVE_NONE)
             continue;
 
-        ShiftMoveSlot(mon, i, i + 1);
+        ShiftMoveSlot(&mon->box, i, i + 1);
     }
 }
 
@@ -318,14 +345,23 @@ static u32 GenerateSurpriseTradeAbility(u32 species)
     return ability;
 }
 
-const u32 blockedHoldEffects[] =
+const enum ItemSortType blockedItemSortTypes[] =
+{
+    ITEM_TYPE_EVOLUTION_STONE,
+    ITEM_TYPE_EVOLUTION_ITEM,
+    ITEM_TYPE_SPECIAL_HELD_ITEM,
+    ITEM_TYPE_MEGA_STONE,
+    ITEM_TYPE_Z_CRYSTAL,
+    ITEM_TYPE_TERA_SHARD,
+};
+
+const enum HoldEffect blockedHoldEffects[] =
 {
     HOLD_EFFECT_NONE,
     HOLD_EFFECT_REPEL,
     HOLD_EFFECT_SOUL_DEW,
     HOLD_EFFECT_DEEP_SEA_TOOTH,
     HOLD_EFFECT_DEEP_SEA_SCALE,
-    HOLD_EFFECT_DRAGON_SCALE,
     HOLD_EFFECT_LIGHT_BALL,
     HOLD_EFFECT_THICK_CLUB,
     HOLD_EFFECT_LEEK,
@@ -346,13 +382,17 @@ const u32 blockedHoldEffects[] =
 
 static bool32 IsItemBlocked(u32 item)
 {
-    u32 itemHoldEffect = GetItemHoldEffect(item);
-
     if (GetItemImportance(item))
         return TRUE;
 
+    enum HoldEffect itemHoldEffect = GetItemHoldEffect(item);
     for (u32 holdIndex = 0; holdIndex < ARRAY_COUNT(blockedHoldEffects); holdIndex++)
         if (itemHoldEffect == blockedHoldEffects[holdIndex])
+            return TRUE;
+
+    enum ItemSortType itemType = gItemsInfo[item].sortType;
+    for (u32 sortTypeIndex = 0; sortTypeIndex < ARRAY_COUNT(blockedItemSortTypes); sortTypeIndex++)
+        if (itemType == blockedItemSortTypes[sortTypeIndex])
             return TRUE;
 
     return FALSE;
@@ -393,5 +433,94 @@ static u32 GenerateSurpriseTradeBall(void)
 
 void ShowTradedMonReturnToStartMenu(void)
 {
-    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gPlayerParty[gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
+    SetSurpriseTradeFlag(FALSE);
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC], 0, 0, CB2_StartMenu_ReturnToUI);
+    else
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], 0, 0, CB2_StartMenu_ReturnToUI);
+}
+
+void CB2_StartSurpriseTrade(void)
+{
+    enum AdventureGuideList targetGuide = GUIDE_SURPRISE_TRADE;
+
+    if (!shouldSkipGuide(targetGuide))
+    {
+        VarSet(VAR_ADVENTURE_GUIDE_TO_OPEN,targetGuide);
+        Adventure_Guide_Init(CB2_StartSurpriseTrade);
+        return;
+    }
+    EnterPokeStorageSurpriseTrade();
+}
+
+void CB2_ContinueSurpriseTrade(void)
+{
+    SurpriseTrade_Continue(CB2_StartMenu_ReturnToUI);
+}
+
+void SurpriseTrade_Continue(MainCallback callback)
+{
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+
+    gSpecialVar_0x8005 = gSpecialVar_0x8004;
+    SetMainCallback2(SurpriseTrade_SetupCB);
+}
+
+static void SurpriseTrade_SetupCB(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+            SetVBlankHBlankCallbacksToNull();
+            ClearScheduledBgCopiesToVram();
+            gMain.state++;
+            break;
+        case 1:
+            ScanlineEffect_Stop();
+            FreeAllSpritePalettes();
+            ResetPaletteFade();
+            ResetSpriteData();
+            ResetTasks();
+            gMain.state++;
+            break;
+        case 2:
+            CreateTask(Task_SurpriseTrade, 0);
+            gMain.state++;
+            break;
+        case 3:
+            SetVBlankCallback(SurpriseTrade_VBlankCB);
+            SetMainCallback2(SurpriseTrade_MainCB);
+            break;
+    }
+}
+
+static void SurpriseTrade_VBlankCB(void)
+{
+    LoadOam();
+    TransferPlttBuffer();
+}
+
+static void SurpriseTrade_MainCB(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    DoScheduledBgTilemapCopiesToVram();
+    UpdatePaletteFade();
+}
+
+static void BufferMonSelectionSurpriseTrade(void)
+{
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
+    SetMainCallback2(CB2_ContinueSurpriseTrade);
+}
+
+void SurpriseTrade_SetSurpriseTradeCallback(void)
+{
+    SetMainCallback2(BufferMonSelectionSurpriseTrade);
 }

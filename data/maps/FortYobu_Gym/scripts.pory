@@ -1,2 +1,30 @@
 mapscripts FortYobu_Gym_MapScripts {
 }
+
+script FortYobu_Gym_EventScript_1075163A
+{
+    trainerbattle_single(TRAINER_1075163A,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FortYobu_Gym_EventScript_10751EAA
+{
+    trainerbattle_single(TRAINER_10751EAA,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FortYobu_Gym_EventScript_10E3552B
+{
+    trainerbattle_single(TRAINER_10E3552B,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script FortYobu_Gym_EventScript_1114BC23
+{
+    trainerbattle_single(TRAINER_1114BC23,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}

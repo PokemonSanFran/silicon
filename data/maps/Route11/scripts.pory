@@ -1,24 +1,26 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const DAGMAR = 1
 
-mapscripts Route11_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION{
-    call(Quest_Restorehodoucity_HideBlackbelt_Route11_Script)
-        special(Quest_Bodegaburnout_CheckAndSetRescueFlag)
+mapscripts Route11_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_subquest_complete(QUEST_RESTOREHODOUGYM,SUB_QUEST_7,Quest_Restorehodoucity_HideBlackbelt_Route11_Script)
+        call_if_subquest_complete(QUEST_BODEGABURNOUT,SUB_QUEST_11,Quest_Bodegaburnout_Script_Hide_BodegaburnoutRescueRockSmashO)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_FAINTED_FOG_STATE, ENCOUNTERED_FOG_MON: WarpPlayerAfterFogEncounter
     ]
 }
 
-script Route11_EventScript_BlackbeltG{
-    trainerbattle_single(TRAINER_BLACKBELT_G,gText_ExpandedPlaceholder_Empty,gText_ExpandedPlaceholder_Empty)
-
-        if (var(VAR_QUEST_RESTOREHODOUGYM) == FIND_BLACKBELTS){
-            goto(Quest_Restorehodoucity_Recruit_Blackbelt_G_Dialogue)
-        }
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
+script Route11_Script_Interact_Juan
+{
+    trainerbattle_single(TRAINER_JUAN,format("Knowing when to switch Pokémon is a fundamental skill."),format("I need to better look at the best and worst case scenarios…"),Route11_Script_Interact_Juan)
+    msgbox(format("Sifu Ying also told us that switching Pokémon strategically can completely change the course of battle."),,SPEAKER_JUAN)
+    call_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_BLACKBELTS,Quest_RestoreHodouCityGym_Complete_Juan)
+    closemessage
+    release
+    end
 }
 
 script Route11_InteractHomeless_Script
@@ -32,5 +34,33 @@ script Route11_InteractHomeless_Script
     call(EventScript_UnhousedInteractPlayer)
     closemessage
     release
+    end
+}
+
+script Route11_EventScript_0F3D8011
+{
+    trainerbattle_single(TRAINER_0F3D8011,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_EventScript_0F3DB5D8
+{
+    trainerbattle_single(TRAINER_0F3DB5D8,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_EventScript_0F5F82C3
+{
+    trainerbattle_single(TRAINER_0F5F82C3,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+}
+
+script Route11_EventScript_0FFBCCB9
+{
+    trainerbattle_single(TRAINER_0FFBCCB9,format("I am a Route Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }

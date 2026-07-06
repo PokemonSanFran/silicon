@@ -177,25 +177,25 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u32 siliconBgTiles[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol");
-static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.bin.smolTM");
+static const u32 siliconBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/siliconBg.png", ".4bpp.smol");
+static const u32 siliconBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/siliconBg.bin.smolTM");
 
-static const u32 shadowBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.4bpp.smol");
+static const u32 shadowBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/shadowBg.png", ".4bpp.smol");
 static const u32 shadowBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/shadowBg.bin.smolTM");
 
-static const u32 boxesBgTiles[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.4bpp.smol");
+static const u32 boxesBgTiles[] = INCGFX_U32("graphics/ui_menus/character_customization/boxesBg.png", ".4bpp.smol");
 static const u32 boxesBgTilemap[] = INCBIN_U32("graphics/ui_menus/character_customization/boxesBg.bin.smolTM");
 
-static const u16 sMenuPalette[] = INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal");
-static const u16 sMenuPalette_Red[]      = INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal");
-static const u16 sMenuPalette_Black[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal");
-static const u16 sMenuPalette_Green[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal");
-static const u16 sMenuPalette_Blue[]     = INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal");
-static const u16 sMenuPalette_Platinum[] = INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal");
-static const u16 sMenuPalette_Scarlet[]  = INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal");
-static const u16 sMenuPalette_Violet[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal");
-static const u16 sMenuPalette_White[]    = INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal");
-static const u16 sMenuPalette_Yellow[]   = INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal");
+static const u16 sMenuPalette[] = INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal");
+static const u16 sMenuPalette_Red[]      = INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal");
+static const u16 sMenuPalette_Black[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal");
+static const u16 sMenuPalette_Green[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal");
+static const u16 sMenuPalette_Blue[]     = INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal");
+static const u16 sMenuPalette_Platinum[] = INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sMenuPalette_Scarlet[]  = INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sMenuPalette_Violet[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal");
+static const u16 sMenuPalette_White[]    = INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal");
+static const u16 sMenuPalette_Yellow[]   = INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal");
 
 static const u8 sMenuWindowFontColors[][3] =
 {
@@ -205,10 +205,10 @@ static const u8 sMenuWindowFontColors[][3] =
 
 
 
-static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/character_customization/up_arrow.4bpp.smol");
-static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/down_arrow.4bpp.smol");
-static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/character_customization/left_arrow.4bpp.smol");
-static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCBIN_U32("graphics/ui_menus/character_customization/right_arrow.4bpp.smol");
+static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/character_customization/up_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/down_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/left_arrow.png", ".4bpp.smol");
+static const u32 sCustomizationMenuRightArrow_Gfx[]     = INCGFX_U32("graphics/ui_menus/character_customization/right_arrow.png", ".4bpp.smol");
 
 static void SpriteCallback_UpArrow(struct Sprite *sprite)
 {
@@ -413,11 +413,8 @@ void CB2_CustomizationFromStartMenu(void)
     Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
 }
 
-void ResetCustomizationValuesData(void){
-    u8 i;
-
-    // PSF TODO Pick a single body type and then have one of our artists pick a canon set of colors for each artist
-
+void ResetCustomizationValuesData(void)
+{
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_BODY_TYPE]         = Random() % (NUM_BODY_TYPES); // Body type has no custom option
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SKIN_COLOR]        = Random() % (NUM_SKIN_COLOR - 1);
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]        = Random() % (NUM_HAIR_COLOR - 1);
@@ -427,15 +424,9 @@ void ResetCustomizationValuesData(void){
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]    = Random() % NUM_PRONOUN_TYPES;
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN] = Random() % NUM_PRONOUN_TYPES;
 
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++){
-        gSaveBlock3Ptr->playerSubjectPronoun[i]  = gText_He[i];
-        gSaveBlock3Ptr->playerObjectPronoun[i]   = gText_Him[i];
-        gSaveBlock3Ptr->playerPosesivePronoun[i] = gText_His[i];
-    }
-
-    gSaveBlock3Ptr->playerSubjectPronoun[PLAYER_NAME_LENGTH] = EOS;
-    gSaveBlock3Ptr->playerObjectPronoun[PLAYER_NAME_LENGTH] = EOS;
-    gSaveBlock3Ptr->playerPosesivePronoun[PLAYER_NAME_LENGTH] = EOS;
+    StringCopy(gSaveBlock3Ptr->playerSubjectPronoun,gText_He);
+    StringCopy(gSaveBlock3Ptr->playerObjectPronoun,gText_Him);
+    StringCopy(gSaveBlock3Ptr->playerPosesivePronoun,gText_His);
 
     FlagSet(FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED);
 }
@@ -462,7 +453,7 @@ void Character_Customization_Menu_Init(MainCallback callback)
     sMenuDataPtr->DrawnDialogue = DRAWN_DIALOGUE_HELP_BAR;
 
     for(i = 0; i < NUM_SPRITES; i++){
-        sMenuDataPtr->spriteIDs[i] = 0xFF;
+        sMenuDataPtr->spriteIDs[i] = SPRITE_NONE;
     }
 
 	for(i = 0; i < NUM_CUSTOMIZATION_PARTS; i++){
@@ -787,10 +778,10 @@ static void CreateTrainerFrontSprite()
     u8 trainerFrontPic = TRAINER_PIC_SILICON_PLAYER_M1 + bodyType;
     u8 spriteID = SPRITE_TRAINER_FRONT_SPRITE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF)
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE)
     {
         FreeAndDestroyTrainerPicSprite(sMenuDataPtr->spriteIDs[spriteID]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
     u32 paletteNum = AllocSpritePalette(OBJ_EVENT_PAL_TAG_SILICON);
@@ -804,15 +795,15 @@ static void CreateTrainerFrontSprite()
 static void CreateTrainerBackSprite(){
     u8 spriteID = SPRITE_TRAINER_BACK_SPRITE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
     u32 trainerBackPic = PlayerGetTrainerBackPicId();
-    DecompressTrainerBackPic(trainerBackPic, 0);
+    //DecompressTrainerBackPic(trainerBackPic, 0);
     SetMultiuseSpriteTemplateToTrainerBack(trainerBackPic, 0);
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] = CreateSprite(&gMultiuseSpriteTemplate, TRAINER_BACK_SPRITE_X, TRAINER_BACK_SPRITE_Y, 0);
 
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].oam.paletteNum = gSprites[sMenuDataPtr->spriteIDs[SPRITE_TRAINER_FRONT_SPRITE]].oam.paletteNum;
@@ -826,12 +817,12 @@ static void CreateTrainerOverworldSprite(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[sMenuDataPtr->spriteIDs[spriteID]], getPlayerAnimation());
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerOverworldSprite;
@@ -846,12 +837,12 @@ static void CreateTrainerOverworldBikeSprite(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_MACH_BIKE,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD_BIKE;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[sMenuDataPtr->spriteIDs[spriteID]], getBikeAnimation());
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerBikeOverworldSprite;
@@ -866,12 +857,12 @@ static void CreateTrainerOverworldPokemonCall(){
     u16 graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_FIELD_MOVE,bodyType);
     u8 spriteID = SPRITE_TRAINER_OVERWORLD_POKEMON_CALL;
 
-    if(sMenuDataPtr->spriteIDs[spriteID] != 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] != SPRITE_NONE){
         DestroySpriteAndFreeResources(&gSprites[sMenuDataPtr->spriteIDs[spriteID]]);
-        sMenuDataPtr->spriteIDs[spriteID] = 0xFF;
+        sMenuDataPtr->spriteIDs[spriteID] = SPRITE_NONE;
     }
 
-    if(sMenuDataPtr->spriteIDs[spriteID] == 0xFF){
+    if(sMenuDataPtr->spriteIDs[spriteID] == SPRITE_NONE){
         sMenuDataPtr->spriteIDs[spriteID] =  CreateObjectGraphicsSprite(graphicsId, SpriteCallbackDummy, TRAINER_OVERWORLD_PIC_X, TRAINER_OVERWORLD_PIC_Y, 0);
         StartSpriteAnim(&gSprites[spriteID], ANIM_STD_FACE_SOUTH);
         gSprites[sMenuDataPtr->spriteIDs[spriteID]].callback = SpriteCallback_TrainerPokemonCallOverworldSprite;
@@ -920,7 +911,7 @@ static bool8 Menu_DoGfxSetup(void)
         break;
     case 5:
         CreateTask(Task_MenuWaitFadeIn, 0);
-        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         gMain.state++;
         break;
     case 6:
@@ -933,7 +924,7 @@ static bool8 Menu_DoGfxSetup(void)
     case 7:
         PrintToWindow(FONT_CUSTOM_WHITE);
         CreateTrainerSprites();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     default:
@@ -953,6 +944,7 @@ static void FreeCustomizationBackgrounds(void)
 
 static void Menu_FreeResources(void)
 {
+    FreeAndDestroyTrainerPicSprite(sMenuDataPtr->spriteIDs[SPRITE_TRAINER_FRONT_SPRITE]);
     FreeAllSpritePalettes();
     if (sMenuDataPtr != NULL)
         Free(sMenuDataPtr);
@@ -973,7 +965,7 @@ static void Task_MenuWaitFadeAndBail(u8 taskId)
 
 static void Menu_FadeAndBail(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_MenuWaitFadeAndBail, 0);
     SetVBlankCallback(Menu_VBlankCB);
     SetMainCallback2(Menu_MainCB);
@@ -1402,7 +1394,7 @@ const struct CustomizationData Custom_Color_Options[NUM_COLOR_OPTIONS] =
     },
 };
 
-static const u8 sMenuSelector[] = INCBIN_U8("graphics/ui_menus/character_customization/selector.4bpp");
+static const u8 sMenuSelector[] = INCGFX_U8("graphics/ui_menus/character_customization/selector.png", ".4bpp");
 
 static const u8 sText_Title_Text[] = _("Character Customization");
 static const u8 sText_Custom[] = _("Custom");
@@ -1441,7 +1433,7 @@ static void PrintToWindow(u8 colorIdx)
             end = StringCopy(gStringVar4,Customization_Options[sMenuDataPtr->currentFirstOption + i].title);
             PrependFontIdToFit(gStringVar4,end,0,windowWidth);
 
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar4);
         }
 
         //Options Configuration
@@ -1494,7 +1486,7 @@ static void PrintToWindow(u8 colorIdx)
             y = 6;
             windowId = CUSTOM_WINDOW_VALUES;
 
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar4);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar4);
         }
 
         // Help Bar --------------------------------------------------------------------------------------------------------------------
@@ -1504,10 +1496,10 @@ static void PrintToWindow(u8 colorIdx)
 
         switch(sMenuDataPtr->DrawnDialogue){
             case DRAWN_DIALOGUE_HELP_BAR:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Help_Bar);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Help_Bar);
             break;
             case DRAWN_DIALOGUE_LEAVE_DIALOG:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Leave_Dialog);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Leave_Dialog);
             break;
         }
     }
@@ -1523,11 +1515,11 @@ static void PrintToWindow(u8 colorIdx)
         x = 8;
         y = 6;
         for(i = 0; i < NUM_COLOR_OPTIONS; i++){
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, Custom_Color_Options[i].title);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i*17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, Custom_Color_Options[i].title);
         }
 
         //Cancel Text
-        AddTextPrinterParameterized4(windowId, 8, x, y + (NUM_COLOR_OPTIONS * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Cancel);
+        AddTextPrinterParameterized4(windowId, 8, x, y + (NUM_COLOR_OPTIONS * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Cancel);
 
         //Options Configuration
         x = 14;
@@ -1537,7 +1529,7 @@ static void PrintToWindow(u8 colorIdx)
         for(i = 0; i < NUM_COLOR_OPTIONS; i++){
             end = StringCopy(gStringVar1,Custom_Color_Options[i].options[gSaveBlock3Ptr->rgbValues[sMenuDataPtr->cursorPlace][i]]);
             PrependFontIdToFit(gStringVar1,end,0,windowWidth);
-            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, gStringVar1);
+            AddTextPrinterParameterized4(windowId, 8, x, y + (i * 17), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, gStringVar1);
         }
 
 
@@ -1548,10 +1540,10 @@ static void PrintToWindow(u8 colorIdx)
 
         switch(sMenuDataPtr->DrawnDialogue){
             case DRAWN_DIALOGUE_HELP_BAR:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Help_Bar);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Help_Bar);
             break;
             case DRAWN_DIALOGUE_LEAVE_DIALOG:
-                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Leave_Dialog);
+                AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Leave_Dialog);
             break;
         }
     }
@@ -1559,7 +1551,7 @@ static void PrintToWindow(u8 colorIdx)
         x = 0;
         y = 0;
         windowId = CUSTOM_WINDOW_HEADER;
-        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], 0xFF, sText_Title_Text);
+        AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8), 0, 0, sMenuWindowFontColors[FONT_CUSTOM_WHITE], SPRITE_NONE, sText_Title_Text);
 
     for (enum CustomizeWindows windowId = 0; windowId < CUSTOM_WINDOW_COUNT; windowId++)
     {
@@ -1604,7 +1596,6 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
     };
 
     u32 cursor = sMenuDataPtr->cursorPlace;
-    // PSF TODO it would be nice if after leaving this screen, the cursor returned you to where you were, but I'm fairly certain this requires a refactor
     DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
     Menu_FreeResources();
 }
@@ -1679,7 +1670,7 @@ static void Task_MenuMain(u8 taskId)
             if(sMenuDataPtr->DrawnDialogue == DRAWN_DIALOGUE_LEAVE_DIALOG)
             {
                 PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
@@ -1699,7 +1690,7 @@ static void Task_MenuMain(u8 taskId)
                      sMenuDataPtr->cursorPlace == CUSTOMIZATION_POSSESIVE_PRONOUN))
             {
                 PlaySE(SE_SELECT);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gTasks[taskId].func = Character_Customization_Util_Trainer_Pronoun;
             }
         }
@@ -1721,7 +1712,7 @@ static void Task_MenuMain(u8 taskId)
             else
             {
                 PlaySE(SE_PC_OFF);
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 ResetSaveBlockCustomizationDataBeforeExit();
                 gTasks[taskId].func = Task_MenuTurnOff;
             }
@@ -1740,7 +1731,7 @@ static void Task_MenuMain(u8 taskId)
         if(!sMenuDataPtr->isCustomPaletteScren)
         {
             PlaySE(SE_PC_OFF);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_MenuTurnOff;
         }
         PrintToWindow(FONT_CUSTOM_BLACK);
@@ -1766,7 +1757,7 @@ void CustomizeCharacterFromOverworld(void)
 bool32 IsBackPicForSiliconPlayer(u32 picId)
 {
     for (u32 picIndex = 0; picIndex < NUM_BODY_TYPES; picIndex++)
-        if (picId == TRAINER_BACK_PIC_SILICON_PLAYER_M1 + picIndex)
+        if (picId == TRAINER_PIC_SILICON_PLAYER_M1 + picIndex)
             return TRUE;
 
     return FALSE;
@@ -1788,8 +1779,15 @@ void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite)
 {
     if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
         RecolorPlayerCharacters(sprite->oam.paletteNum);
-    // PSF TODO this should only happen in the overworld... how?
-    //UpdatePalettesWithTime(PALETTES_ALL);
+}
+
+void SetPlayerPaletteTimeBlend(u32 paletteTag, struct Sprite *sprite)
+{
+    if (paletteTag == OBJ_EVENT_PAL_TAG_SILICON)
+    {
+        RecolorPlayerCharacters(sprite->oam.paletteNum);
+        UpdatePalettesWithTime(1 << (sprite->oam.paletteNum + 16));
+    }
 }
 
 void SetPlayerAvatarToChampion(void)

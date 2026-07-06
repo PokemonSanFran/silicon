@@ -1,0 +1,7 @@
+script PrestoTerminal_EventScript
+{
+	lock
+	openprestoterminal
+	releaseall
+	end
+}

@@ -1,64 +1,57 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const CHARLOTTE = 1
-const ARMANDO = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-const FLAG_HIDE_ARMANDO = FLAG_TEMP_2
+const FRANK = 2
+const FLAG_HIDE_FRANK = FLAG_TEMP_2
 const FLAG_HIDE_OLIVER = FLAG_TEMP_3
 const FLAG_HIDE_ROBOTS = FLAG_TEMP_4
 
-script EnterTheMaster_LeaverraForest_Entrance_ObjectSetup_Script{
-    if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_WAITING_LEAVERRA_FOREST)
-	{
-        setflag(FLAG_HIDE_CHARLOTTE)
-    }
+script EnterTheMaster_Script_HideCharlotteEntrance
+{
+	setobjectflagfromlocalid(LOCALID_ROUTE100_CHARLOTTE)
 }
 
-script EnterTheMaster_LeaverraForest_ObjectSetup_Script{
-    if (var(VAR_LEAVERRA_FOREST_STATE) != CHARLOTTE_ENTERED_LEAVERRA_FOREST)
-	{
-        setflag(FLAG_HIDE_CHARLOTTE)
-    }
+script EnterTheMaster_Script_HideCharlotte
+{
+	setobjectflagfromlocalid(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
 }
 
-script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script{
-    switch (var(VAR_LEAVERRA_FOREST_STATE)){
+script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script
+{
+    switch (var(VAR_LEAVERRA_FOREST_STATE))
+    {
 		default:
         case CHARLOTTE_WAITING_LEAVERRA_FOREST:
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case CHARLOTTE_ENTERED_LEAVERRA_FOREST:
-        case POST_HAVE_YOU_SEEN_THE_NEWS: call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
+        case POST_HAVE_YOU_SEEN_THE_NEWS:
+            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case LEAVERRA_FOREST_MAZE_COMPLETE:
-        case MET_ARMANDO:call(EnterTheMaster_Inner_Object_SetUp_Script)
-        case FINISHED_ARMANDO_PUZZLES: return
+            return
+        case MET_FRANK:
+            call(EnterTheMaster_RepositionCharlotteToRobot_Script)
+        case FINISHED_FRANK_PUZZLES:
+            return
     }
-    return
 }
 
-script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script{
-    setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_ARMANDO)
-        setflag(FLAG_HIDE_OLIVER)
-        setflag(FLAG_HIDE_ROBOTS)
-        return
-}
-
-script EnterTheMaster_Inner_Object_SetUp_Script {
-    setflag(FLAG_HIDE_OLIVER)
-        call_if_quest_active(QUEST_ARMANDOSTRAINING,EnterTheMaster_RepositionCharlotte_Script)
-        call_if_quest_complete(QUEST_ARMANDOSTRAINING,EnterTheMaster_HideCharlotte_Script)
-        return
-}
-
-script EnterTheMaster_RepositionCharlotte_Script
+script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script
 {
-    setobjectxy(CHARLOTTE,2,5)
-        setobjectxyperm(CHARLOTTE,2,5)
-        turnobject(CHARLOTTE,DIR_NORTH)
-        return
+    call(EnterTheMaster_HideCharlotte_Script)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_FRANK)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_LEFT)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_RIGHT)
+}
+
+script EnterTheMaster_RepositionCharlotteToRobot_Script
+{
+    setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,2,5)
+    setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,2,5)
+    turnobject(LOCALID_LEAVERRA_CHARLOTTE,DIR_NORTH)
 }
 
 script EnterTheMaster_HideCharlotte_Script
 {
-    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
 }
 
 script EnterTheMaster_Interact_Script
@@ -80,37 +73,46 @@ script EnterTheMaster_Ready_Dialogue
 {
 
     setvar(VAR_LEAVERRA_FOREST_STATE,CHARLOTTE_ENTERED_LEAVERRA_FOREST)
-        msgbox(gText_EnterTheMaster_MorningReady,,SPEAKER_CHARLOTTE)
+        msgbox(format("Morning. Ready to find this old dude?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_AsReadyAs,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("As ready as I'm going to be!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterTheMaster_DaddySentAnother,,SPEAKER_CHARLOTTE)
+        msgbox(format("Daddy sent another care package, so if we stick together, I'll keep you healed up."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_ThanksDad,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Thanks… dad?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
 
-        applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,EnterTheMaster_WalkIntoWoods)
         waitmovement(0)
         playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
+        removeobject(LOCALID_LEAVERRA_CHARLOTTE)
         call(TryAutoSave)
         release
         end
+}
 
-        //PSF TODO implement follow me nonsense
+script EnterTheMaster_Script_StartFollow
+{
+	checkfollowernpc
+	if (var(VAR_RESULT) == TRUE)
+	{
+		release
+		end
+	}
+    special(HealPlayerParty)
+	setfollowernpc(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE,FNPC_ALL,EnterTheMaster_InteractFollower_Script,PARTNER_STEVEN)
 }
 
 script EnterTheMaster_InteractFollower_Script
 {
-    lock
 	random(4)
 
         switch(var(VAR_RESULT)){
-            case 0: msgbox(gText_EnterTheMaster_HowDoYouThink,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 1: msgbox(gText_EnterTheMaster_YouKnow,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 2: msgbox(gText_EnterTheMaster_IThoughtGymLeaders,MSGBOX_NPC,SPEAKER_CHARLOTTE)
-            case 3: msgbox(gText_EnterTheMaster_DoYouThinkTheyre,MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 0: msgbox(format("How do you think my new Pokémon is faring? I'm curious to see how it integrates with the rest of my team."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 1: msgbox(format("You know, I'm really sick of The Tide's shit. Its their fault we're stuck in this stupid forest."),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 2: msgbox(format("I thought Resido's Gym Leaders would be tougher. I wonder how their old Elite Four stacks up to Unova's?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
+            case 3: msgbox(format("Do you think they're going to be worth all this hassle?"),MSGBOX_NPC,SPEAKER_CHARLOTTE)
         }
 
     closemessage
@@ -118,34 +120,43 @@ script EnterTheMaster_InteractFollower_Script
         end
 }
 
-script EnterTheMaster_LeaveWoods_Script {
+script EnterTheMaster_LeaveWoods_Script
+{
     lock
-        faceplayer
-        msgbox(gText_EnterTheMaster_TiredAlready,,SPEAKER_CHARLOTTE)
-        closemessage
+	checkfollowernpc
+	if (var(VAR_RESULT) == FALSE)
+	{
+		release
+		end
+	}
+	facefollowernpc
+	msgbox(format("Tired already? I'll be waiting here."),,SPEAKER_CHARLOTTE)
+	closemessage
+	moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,48,24,DIR_NORTH)
+	waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
+	destroyfollowernpc
+	clearobjectflagfromlocalid(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
+	addobject(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE)
+	release
+	end
 }
 
 script EnterTheMaster_CompleteMaze_Dialogue {
 
     setvar(VAR_LEAVERRA_FOREST_STATE,LEAVERRA_FOREST_MAZE_COMPLETE)
         lock
-        addobject(CHARLOTTE)
-        setobjectxy(CHARLOTTE,24,22) //PSF TODO Remove when followers are implemented
-        setobjectxyperm(CHARLOTTE,24,22)
+		facefollowernpc
+        msgbox(format("I don't think there's anywhere else for them to be… they've gotta be in here."),,SPEAKER_CHARLOTTE)
 
-        faceplayer
-        msgbox(gText_EnterTheMaster_IDontThinkTheres,,SPEAKER_CHARLOTTE)
+        msgbox(format("You think they've just been alone in here, waiting for us for Dialga knows how long?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        msgbox(gText_EnterTheMaster_YouThinkTheyve,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-        msgbox(gText_EnterTheMaster_TheyreGettingPaid,,SPEAKER_CHARLOTTE)
+        msgbox(format("They're getting paid. "),,SPEAKER_CHARLOTTE)
         closemessage
-
-        applymovement(CHARLOTTE,EnterTheMaster_WalkIntoWoods)
-        waitmovement(0)
+		moveobjecttocoords(OBJ_EVENT_ID_NPC_FOLLOWER,25,21,DIR_NORTH)
+        waitmovement(OBJ_EVENT_ID_NPC_FOLLOWER)
         playse(SE_EXIT)
         waitse
-        removeobject(CHARLOTTE)
+		destroyfollowernpc
         call(TryAutoSave)
         release
         end
@@ -154,79 +165,83 @@ script EnterTheMaster_CompleteMaze_Dialogue {
 script EnterTheMaster_ClearingIntro_Dialogue
 {
         startcutscene(JUMPPLAYER_ENTERTHEMASTER)
-    setvar(VAR_LEAVERRA_FOREST_STATE,MET_ARMANDO)
+    setvar(VAR_LEAVERRA_FOREST_STATE,MET_FRANK)
+        playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
 
-        applymovement(PLAYER,EnterTheMaster_ApproachArmando)
+        applymovement(PLAYER, moves(walk_up * 1, step_end))
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_WelcomeTo,,SPEAKER_ARMANDO)
+    buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
+	msgbox(format("Charlotte and {PLAYER}! Welcome to the deepest part of {STR_VAR_1}."),,SPEAKER_FRANK)
+        msgbox(format("Are you Frank?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
-        msgbox(gText_EnterTheMaster_ThanksYoure,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-        reveal(REVEAL_ARMANDO)
-        msgbox(gText_EnterTheMaster_AndMyNotebook,,SPEAKER_ARMANDO)
+        reveal(REVEAL_FRANK)
+        msgbox(format("Yeah! My notebook?"),,SPEAKER_FRANK)
         closemessage
 
-        applymovement(ARMANDO,Common_Movement_FaceLeft)
-        applymovement(CHARLOTTE,EnterTheMaster_GiveNotebook)
+        applymovement(FRANK,Common_Movement_FaceLeft)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, face_right, delay_16, walk_in_place_slow_right, step_end))
         waitmovement(0)
 
 		bufferspeciesname(STR_VAR_1,SPECIES_HYDREIGON)
 		bufferspeciesname(STR_VAR_2,SPECIES_MAGMORTAR)
-        msgbox(gText_EnterTheMaster_GettingThemToBattle,,SPEAKER_ARMANDO)
+        buffermapname(STR_VAR_3,MAP_LANJING_TUNNEL)
+        msgbox(format("I hope {STR_VAR_1} and {STR_VAR_2} in {STR_VAR_3} weren't too much trouble. Getting 'em to battle without my direct commands was a challenge!"),,SPEAKER_FRANK)
 
-        msgbox(gText_EnterTheMaster_IsThatWhatYoure,,SPEAKER_CHARLOTTE)
+        msgbox(format("Is that what you're teaching us? Battling with our eyes closed? Sounds useful."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_EveryClientAlways,,SPEAKER_ARMANDO)
+        msgbox(format("Every client always sends me one of these… Let's get -"),,SPEAKER_FRANK)
         closemessage
 
         call(EnterTheMaster_StartEarthquake_Script)
 
-        applymovement(CHARLOTTE,EnterTheMaster_StandNextToPlayer)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_down, face_up, step_end))
         waitmovement(0)
 
-        applymovement(ARMANDO,EnterTheMaster_Pace)
+        applymovement(FRANK, moves(walk_left * 2, walk_right *2, walk_left * 2, walk_right *2, face_down, step_end))
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_AreEitherOfYou,,SPEAKER_ARMANDO)
+        msgbox(format("Either of you familiar with Scott's Trainer Theory?"),,SPEAKER_FRANK)
 
-        msgbox(gText_EnterTheMaster_YeahThatsTheBattleFrontier,,SPEAKER_CHARLOTTE)
+        msgbox(format("Yeah, that's the Battle Frontier guy, right?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_HmmTheSmartass,,SPEAKER_ARMANDO)
+        msgbox(format("Hmm, the smart alec actually knows something!"),,SPEAKER_FRANK)
 
-        msgbox(gText_EnterTheMaster_OhDoesEachPart,,SPEAKER_CHARLOTTE)
+        msgbox(format("Oh… does each part of this training map to each of those principles?"),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SorryDidntGoTo,MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("Sorry, didn't go to Battle prep school. Who is Scott and what are these principles?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
-        applymovement(CHARLOTTE,Common_Movement_FaceRight)
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceRight)
         applymovement(PLAYER,Common_Movement_FaceLeft)
         waitmovement(0)
 
-        msgbox(gText_EnterTheMaster_ScottIsTheFounder,,SPEAKER_CHARLOTTE)
+        msgbox(format("Scott is the founder of an amusement park in Hoenn. Its attractions were designed to test what Scott believed were the qualities that all Master trainers require… "),,SPEAKER_CHARLOTTE)
 
         delay(16)
-        fadescreen(FADE_TO_BLACK)
-        msgbox(gText_EnterTheMaster_OneEternity)
-        applymovement(CHARLOTTE,Common_Movement_FaceUp)
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        msgbox(format("One eternity later…"))
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_FaceUp)
         applymovement(PLAYER,Common_Movement_FaceUp)
         waitmovement(0)
-        fadescreen(FADE_FROM_BLACK)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
 
-        msgbox(gText_EnterTheMaster_AndSoConcludes,,SPEAKER_CHARLOTTE)
+        msgbox(format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SortaKindaNotReally,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_Oh,,SPEAKER_CHARLOTTE)
+        msgbox(format("…sorta, kinda, not really. If you think life is gonna to map one to one like that, you've gotta rude awakening ahead."),,SPEAKER_FRANK)
+        msgbox(format("…Oh."),,SPEAKER_CHARLOTTE)
 
-        msgbox(gText_EnterTheMaster_SoWhatsNext,MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(gText_EnterTheMaster_OneOfTheGoals,,SPEAKER_ARMANDO)
+        msgbox(format("So what's next?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        bufferitemname(STR_VAR_1,ITEM_MEGA_RING)
+        msgbox(format("{PLAYER}, you've probably seen other Trainers using Mega Evolution. SharpRise wants their Trainers have access to the most powerful techniques, so in addition to my fee, SharpRise has provided {PLAYER} with a {STR_VAR_1}. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here..."),,SPEAKER_FRANK)
         closemessage
+        cueobjectplayer(FRANK)
         giveitem(ITEM_MEGA_RING)
-        msgbox(gText_EnterTheMaster_CharlotteDoYou,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_MegaEvolution,,SPEAKER_CHARLOTTE)
-        msgbox(gText_EnterTheMaster_YouCan,,SPEAKER_CHARLOTTE)
+        msgbox(format("Charlotte, do you wanna - "),,SPEAKER_FRANK)
+        msgbox(format("When your Pokémon is holding its Mega Stone and you have a Key Stone, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability."),,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} will only work once per battle, and your Pokémon will revert back to normal after it faints or when the battle ends."),,SPEAKER_CHARLOTTE)
         call(EnterTheMaster_MegaEvolution_Dialogue)
-        msgbox(gText_EnterTheMaster_YouGot,,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_IfYouGo,MSGBOX_DEFAULT,SPEAKER_ARMANDO)
+        msgbox(format("Pretty much got all the basics."),,SPEAKER_FRANK)
+        msgbox(format("If you go further back into the clearing, there's battle simulation bots there. The right side one is for {PLAYER} - they're calibrated specifically based on the battle data that SharpRise Capital gave me for both of you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
         goto(EnterTheMaster_ExplainRobots_Dialogue)
 }
 
@@ -236,17 +251,16 @@ script EnterTheMaster_StartEarthquake_Script
 
     playse(SE_PIN)
     applymovement(PLAYER,Common_Movement_ExclamationMark)
-    applymovement(ARMANDO,Common_Movement_ExclamationMark)
-    applymovement(CHARLOTTE,Common_Movement_ExclamationMark)
-    waitmovement(CHARLOTTE)
+    applymovement(FRANK,Common_Movement_ExclamationMark)
+    applymovement(LOCALID_LEAVERRA_CHARLOTTE,Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_LEAVERRA_CHARLOTTE)
 
     call(Earthquake_Natural_Aftershock)
 
-    msgbox(gText_EnterTheMaster_NoInjuries,,SPEAKER_ARMANDO)
-    msgbox(gText_EnterTheMaster_NowThatsAnIdea,,SPEAKER_ARMANDO,TAIL_WHISPER)
+    msgbox(format("No injuries? Fantastic."),,SPEAKER_FRANK)
+    msgbox(format("Now that's an idea...\n{PAUSE 30}A training course set during a constant earthquake..."),,SPEAKER_FRANK,TAIL_WHISPER)
     closemessage
 }
-
 
 script EnterTheMaster_MegaEvolution_Dialogue
 {
@@ -259,19 +273,25 @@ script EnterTheMaster_MegaEvolution_Dialogue
     bufferpartymonnick(STR_VAR_1,VAR_0x8004)
     if (var(VAR_RESULT))
     {
-        msgbox(gText_EnterTheMaster_CanMegaEvolveSomeday,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} will be capable of Mega Evolution once it fully evolves, but it needs to be holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
     else
     {
-        msgbox(gText_EnterTheMaster_CanMegaEvolve,MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
+        msgbox(format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the right Mega Stone."),MSGBOX_DEFAULT,SPEAKER_CHARLOTTE)
     }
 }
 
 script EnterTheMaster_ExplainRobots_Dialogue{
-    msgbox(gText_EnterTheMaster_IfYouTalk,MSGBOX_DEFAULT,SPEAKER_ARMANDO)
-        msgbox(gText_EnterTheMaster_TheFirstStage,,SPEAKER_ARMANDO)
+    msgbox(format("If you talk to 'em, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that is assigned to you."),MSGBOX_DEFAULT,SPEAKER_FRANK)
+        msgbox(format("The first stage needed you to work together, but this time, you're on your own."),,SPEAKER_FRANK)
         closemessage
-        goto_if_quest_not_active(QUEST_ARMANDOSTRAINING,Quest_Armandostraining_StartQuest_Script)
+        msgbox(format("Okay, let's take a crack at these..."),,SPEAKER_CHARLOTTE)
+        closemessage
+        applymovement(LOCALID_LEAVERRA_CHARLOTTE, moves(walk_up, walk_left * 5, walk_up * 6, step_end))
+        fadescreenswapbuffers(FADE_TO_BLACK)
+        call(EnterTheMaster_RepositionCharlotteToRobot_Script)
+        fadescreenswapbuffers(FADE_FROM_BLACK)
+        fadedefaultbgm
         call(TryAutoSave)
         endcutscene
         release
@@ -283,204 +303,177 @@ movement EnterTheMaster_WalkIntoWoods {
         step_end
 }
 
-text gText_EnterTheMaster_MorningReady{
-    format("Morning. Ready to find this old dude?")
+script EnterTheMaster_Interact_Charlotte_Script{
+    lock
+    msgbox(format("Okay, what if I send out this Pokémon first..."),,SPEAKER_CHARLOTTE,TAIL_WHISPER)
+    release
+    end
 }
 
-text gText_EnterTheMaster_AsReadyAs{
-    format("As ready as I'm going to be!")
+script EnterTheMaster_GiveMons_Script{
+    //special(SavePlayerParty)
+    return
 }
 
-text gText_EnterTheMaster_DaddySentAnother{
-    format("Daddy sent another care package, so if we stick together, I'll keep you healed up.")
+script EnterTheMaster_ChooseMons_Script{
+    //choose_mons
+    //special(ReducePlayerPartyToSelectedMons)
+    return
 }
 
-text gText_EnterTheMaster_ThanksDad{
-    format("Thanks… dad?")
+script EnterTheMaster_Battle_Setup_Script{
+    call(EnterTheMaster_GiveMons_Script)
+    call(EnterTheMaster_ChooseMons_Script)
+    return
 }
 
-text gText_EnterTheMaster_HowDoYouThink{
-    format("How do you think my new Pokémon is faring? I'm curious to see how it integrates with the rest of my team.")
+script EnterTheMaster_Interact_Robot_Script{
+    lock
+    faceplayer
+    msgbox(format("Hello {PLAYER}. Which scenario would you like to run?"))
+
+    dynmultichoice(1,1,TRUE,4,0,NULL,
+        "Scenario 1",
+        "Scenario 2",
+        "Scenario 3",
+        "Scenario 4",
+        "Never mind.",
+    )
+
+    switch (var(VAR_RESULT)){
+        case 0:goto(EnterTheMaster_Battle_Robot1_Script)
+        case 1:goto(EnterTheMaster_Battle_Robot2_Script)
+        case 2:goto(EnterTheMaster_Battle_Robot3_Script)
+        case 3:goto(EnterTheMaster_Battle_Robot4_Script)
+    }
+    release
+    end
 }
 
-text gText_EnterTheMaster_YouKnow{
-    format("You know, I'm really sick of TheTide's shit. Its their fault we're stuck in this stupid forest.")
+script EnterTheMaster_CheckTrainer_Script{
+    msgbox(format("You've already completed this puzzle. Are you going to try again?"),MSGBOX_YESNO,SPEAKER_OLIVER)
+
+    if (var(VAR_RESULT) == NO){
+        goto(EnterTheMaster_Interact_Robot_Script)
+    }
+    return
 }
 
-text gText_EnterTheMaster_IThoughtGymLeaders{
-    format("I thought Resido's Gym Leaders would be tougher. I wonder how their old Elite Four stacks up to Unova's?")
+script EnterTheMaster_Battle_Robot1_Script{
+	if (defeated(TRAINER_FRANK_ROBOT_1))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+
+    setvar(VAR_TEMP_0,1)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_1,format("Robot 1 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
 }
 
-text gText_EnterTheMaster_DoYouThinkTheyre{
-    format("Do you think they're going to be worth all this hassle?")
+script EnterTheMaster_Battle_Robot2_Script{
+
+	if (defeated(TRAINER_FRANK_ROBOT_2))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+    setvar(VAR_TEMP_0,2)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_2,format("Robot 2 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
 }
 
-text gText_EnterTheMaster_TiredAlready{
-    format("Tired already? I'll be waiting here.")
+script EnterTheMaster_Battle_Robot3_Script{
+
+	if (defeated(TRAINER_FRANK_ROBOT_3))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+
+    setvar(VAR_TEMP_0,3)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_3,format("Robot 3 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
 }
 
-text gText_EnterTheMaster_IDontThinkTheres{
-    format("I don't think there's anywhere else for them to be… they've gotta be in here.")
+script EnterTheMaster_Battle_Robot4_Script{
+
+	if (defeated(TRAINER_FRANK_ROBOT_4))
+	{
+		call(EnterTheMaster_CheckTrainer_Script)
+	}
+    setvar(VAR_TEMP_0,4)
+    call(EnterTheMaster_Battle_Setup_Script)
+    trainerbattle_continue_after_lose(TRAINER_FRANK_ROBOT_4,format("Robot 4 lose text."))
+    msgbox(format("Excellent work!"))
+    call(EnterTheMaster_CheckReward_Script)
+    release
+    end
 }
 
-text gText_EnterTheMaster_YouThinkTheyve{
-    format("You think they've just been alone in here, waiting for us for Dialga knows how long?")
-}
-
-text gText_EnterTheMaster_TheyreGettingPaid{
-    format("They're getting paid. ")
-}
-
-text gText_EnterTheMaster_WelcomeTo{
-    format("Charlotte! {PLAYER}! Welcome to LeaverraForest. Excellent work so far!")
-}
-
-text gText_EnterTheMaster_ThanksYoure{
-    format("Thanks. You're Armando?")
-}
-
-text gText_EnterTheMaster_AndMyNotebook{
-    format("Yeah! And my notebook?")
-}
-
-text gText_EnterTheMaster_GettingThemToBattle{
-    format("I hope {STR_VAR_1} and {STR_VAR_2} in LanjingTunnel weren't too much trouble. Getting them to battle without my direct commands was certainly a challenge.")
-}
-
-text gText_EnterTheMaster_IsThatWhatYoure{
-    format("Is that what you're teaching us? Battling with our eyes closed? Sounds useful.")
-}
-
-text gText_EnterTheMaster_EveryClientAlways{
-    format("Every client always sends me a smartass… Let's get -")
-}
-
-text gText_EnterTheMaster_NoInjuries
+script EnterTheMaster_CheckReward_Script
 {
-    format("No injuries? Fantastic.")
+	if (!defeated(TRAINER_FRANK_ROBOT_1))
+	{
+		return
+	}
+	if (!defeated(TRAINER_FRANK_ROBOT_2))
+	{
+		return
+	}
+	if (!defeated(TRAINER_FRANK_ROBOT_3))
+	{
+		return
+	}
+	if (!defeated(TRAINER_FRANK_ROBOT_4))
+	{
+		return
+	}
+	goto(EnterTheMaster_CompleteQuest_Script)
 }
 
-text gText_EnterTheMaster_NowThatsAnIdea
-{
-    format("Now that's an idea...\n{PAUSE 30}A training course set during a constant earthquake...")
-}
-text gText_EnterTheMaster_AreEitherOfYou{
-    format("Are either of you familiar with the Scott's Trainer Theory?")
-}
-
-text gText_EnterTheMaster_YeahThatsTheBattleFrontier{
-    format("Yeah, that's the Battle Frontier guy, right?")
+script EnterTheMaster_Interact_CharlotteRobot_Script{
+    lock
+    msgbox(format("This robot is for Charlotte."),MSGBOX_AUTOCLOSE)
+    release
+    end
 }
 
-text gText_EnterTheMaster_HmmTheSmartass{
-    format("Hmm, the smartass actually knows something!")
+script EnterTheMaster_SetUpCompletion_Script{
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,9,16)
+    setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,9,16)
+    setobjectxy(PLAYER,10,16)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    TeleportCamera(10,16)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    return
 }
 
-text gText_EnterTheMaster_OhDoesEachPart{
-    format("Oh… does each part of this training map to each of those principles?")
+script EnterTheMaster_CompleteQuest_Script{
+    call(EnterTheMaster_SetUpCompletion_Script)
+    setvar(VAR_LEAVERRA_FOREST_STATE,FINISHED_FRANK_PUZZLES)
+    applymovement(FRANK,Common_Movement_FaceDown)
+    waitmovement(FRANK)
+    msgbox(format("It's been quite a week. Impressed you were both able to clear those puzzles so quickly."),,SPEAKER_FRANK)
+    msgbox(format("A week?!?"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)
+    msgbox(format("It feels like maybe a day at most!"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+    msgbox(format("Yeah, the forest has that effect on people..."),,SPEAKER_FRANK)
+    msgbox(format("Either way, good job. Go ahead and rest -"),,SPEAKER_FRANK)
+    closemessage
+    end
 }
 
-text gText_EnterTheMaster_SorryDidntGoTo{
-    format("Sorry, didn't go to Battle prep school. Who is Scott and what are these principles?")
-}
-
-text gText_EnterTheMaster_ScottIsTheFounder{
-    format("Scott is the founder of an amusement park in Hoenn. Its attractions were designed to test what Scott believed were the qualities that all Master trainers require… ")
-}
-
-text gText_EnterTheMaster_OneEternity{
-    format("One eternity later…")
-}
-text gText_EnterTheMaster_AndSoConcludes{
-    format("…and so concludes my theory on how your silly little tests correspond with each of Scott's 7 principles.")
-}
-
-text gText_EnterTheMaster_SortaKindaNotReally{
-    format("…sorta, kinda, not really. If you think life is going to map one to one like that for you, you've got a rude awakening ahead.")
-}
-
-text gText_EnterTheMaster_Oh{
-    format("…Oh.")
-}
-
-text gText_EnterTheMaster_SoWhatsNext{
-    format("So what's next?")
-}
-
-text gText_EnterTheMaster_OneOfTheGoals
-{
-    format("One of the goals of this training is to better acquaint you with Mega Evolution. Charlotte, I know you've already started to get a handle on it, but {PLAYER} here...")
-}
-
-text gText_EnterTheMaster_CharlotteDoYou
-{
-    format("Charlotte, do you wanna - ")
-}
-
-text gText_EnterTheMaster_MegaEvolution
-{
-    format("When your Pokémon is holding its Mega Stone and you have a Key Stone, you can press {START_BUTTON} in battle to trigger a transformation! At the beginning of your turn, your Pokémon will Mega Evolve, which will juice their stats and sometimes give them a new type or ability.")
-}
-
-text gText_EnterTheMaster_YouCan
-{
-    format("Your Key Stone will only work once per battle, and if your Pokémon will revert back to normal after it faints or when the battle ends.")
-}
-
-text gText_EnterTheMaster_CanMegaEvolve {
-    format("Your {STR_VAR_1} is capable of Mega Evolution, as long as its holding the right Mega Stone.")
-}
-
-text gText_EnterTheMaster_CanMegaEvolveSomeday {
-    format("Your {STR_VAR_1} will be capable of Mega Evolution once it fully evolves, but it needs to be holding the right Mega Stone.")
-}
-
-
-text gText_EnterTheMaster_YouGot
-{
-    format("Pretty much got all the basics.")
-}
-
-text gText_EnterTheMaster_IfYouGo{
-    format("If you go further back into the clearing, there are battle simulation robots there. The one on the right are for {PLAYER} - they're calibrated specifically based on the battle data that SharpriseCapital gave me for each of you.")
-}
-
-text gText_EnterTheMaster_IfYouTalk{
-    format("If you talk to them, they'll give you a refresher on how they work, but its pretty simple. The second stage of your training will be defeating the robot that are assigned to you.")
-}
-
-text gText_EnterTheMaster_TheFirstStage{
-    format("The first stage needed you to work together, but for this one, don't help each other.")
-}
-
-text gText_EnterTheMaster_OkayLetsACrack{
-    format("Okay, let's take a crack of these!")
-}
-
-movement EnterTheMaster_GiveNotebook {
-    walk_up
-        face_right
-        delay_16
-        walk_in_place_slow_right
-        step_end
-}
-
-movement EnterTheMaster_StandNextToPlayer {
-    walk_down
-        face_up
-        step_end
-}
-
-movement EnterTheMaster_Pace {
-    walk_left * 2
-        walk_right *2
-        walk_left * 2
-        walk_right *2
-        face_down
-        step_end
-}
-
-movement EnterTheMaster_ApproachArmando {
-    walk_up * 1
-        step_end
+movement EnterTheMaster_WalkAway{
+    walk_down * 2
+    step_end
 }

@@ -4,6 +4,7 @@
 #include "item.h"
 #include "main.h"
 #include "menu_helpers.h"
+#include "currency_box.h"
 
 enum {
     ITEMMENULOCATION_FIELD,
@@ -20,6 +21,7 @@ enum {
     ITEMMENULOCATION_PCBOX,
     ITEMMENULOCATION_BERRY_TREE_MULCH,
     ITEMMENULOCATION_LAST,
+    ITEMMENULOCATION_SUMMARY, // monSummary
 };
 
 // Window IDs for the item menu
@@ -90,7 +92,7 @@ struct BagMenu
     s16 graphicsLoadState;
     u8 unused2[14];
     u8 ALIGNED(4) pocketNameBuffer[32][32];
-    u8 unused3[4];
+    union CurrencyBoxValues moneyBox;
 };
 
 extern struct BagMenu *gBagMenu;
@@ -109,6 +111,7 @@ bool8 UseRegisteredKeyItemOnField(void);
 void CB2_GoToSellMenu(void);
 void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback);
 void DoWallyTutorialBagMenu(void);
+void InitOldManBag(void);
 void ResetBagScrollPositions(void);
 void ChooseBerryForMachine(MainCallback exitCallback);
 void CB2_ChooseBerry(void);

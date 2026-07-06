@@ -2,7 +2,7 @@
   "id": "MAP_ESPULEE_OUTSKIRTS_KOMALA_CABIN_2F",
   "name": "EspuleeOutskirts_KomalaCabin_2F",
   "layout": "LAYOUT_ESPULEE_OUTSKIRTS_SHORTTERMRENTAL_2F",
-  "music": "MUS_SCHOOL",
+  "music": "MUS_ESPULEE_OUTSKIRTS",
   "region_map_section": "MAPSEC_ESPULEE_OUTSKIRTS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [],
   "warp_events": [
     {

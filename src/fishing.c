@@ -16,6 +16,7 @@
 #include "config/fishing.h"
 // Start fishingUpdate
 #include "event_scripts.h"
+#include "fishing.h"
 #include "quest_logic.h"
 #include "event_data.h"
 #include "constants/event_objects.h"
@@ -71,6 +72,11 @@ static void StartParkRangerYellCutscene(struct Task *task);
     #define FISHING_GOOD_ROD_ODDS 33
     #define FISHING_SUPER_ROD_ODDS 50
 #endif
+
+static const u8 sText_OhABite[] = _("Oh! A bite!");
+static const u8 sText_PokemonOnHook[] = _("A POKéMON's on the hook!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_NotEvenANibble[] = _("Not even a nibble…{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItGotAway[] = _("It got away…{PAUSE_UNTIL_PRESS}");
 
 struct FriendshipHookChanceBoost
 {
@@ -280,7 +286,7 @@ static bool32 Fishing_CheckForBite(struct Task *task)
 
     firstMonHasSuctionOrSticky = Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold();
 
-    if(firstMonHasSuctionOrSticky && I_FISHING_STICKY_BOOST < GEN_4)
+    if (firstMonHasSuctionOrSticky && I_FISHING_STICKY_BOOST < GEN_4)
         bite = RandomPercentage(RNG_FISHING_GEN3_STICKY, FISHING_GEN3_STICKY_CHANCE);
 
     if (!bite)
@@ -298,7 +304,7 @@ static bool32 Fishing_CheckForBite(struct Task *task)
 static bool32 Fishing_GotBite(struct Task *task)
 {
     AlignFishingAnimationFrames();
-    AddTextPrinterParameterized(0, FONT_NORMAL, gText_OhABite, 0, 17, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, sText_OhABite, 0, 17, 0, NULL);
     task->tStep = FISHING_CHANGE_MINIGAME;
     task->tFrameCounter = 0;
     return FALSE;
@@ -308,14 +314,14 @@ static bool32 Fishing_ChangeMinigame(struct Task *task)
 {
     switch (I_FISHING_MINIGAME)
     {
-        case GEN_1:
-        case GEN_2:
-            task->tStep = FISHING_A_PRESS_NO_MINIGAME;
-            break;
-        case GEN_3:
-        default:
-            task->tStep = FISHING_WAIT_FOR_A;
-            break;
+    case GEN_1:
+    case GEN_2:
+        task->tStep = FISHING_A_PRESS_NO_MINIGAME;
+        break;
+    case GEN_3:
+    default:
+        task->tStep = FISHING_WAIT_FOR_A;
+        break;
     }
     return TRUE;
 }
@@ -377,7 +383,7 @@ static bool32 Fishing_MonOnHook(struct Task *task)
 {
     AlignFishingAnimationFrames();
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PokemonOnHook, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, sText_PokemonOnHook, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     task->tStep = FISHING_START_ENCOUNTER;
     task->tFrameCounter = 0;
     return FALSE;
@@ -392,7 +398,7 @@ static bool32 Fishing_StartEncounter(struct Task *task)
 
     if (task->tFrameCounter == 0)
     {
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -423,18 +429,18 @@ static bool32 Fishing_NotEvenNibble(struct Task *task)
 {
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     AlignFishingAnimationFrames();
     StartParkRangerWaterCutscene(task); // fishingUpdate
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     // Start fishingUpdate
     //FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    //AddTextPrinterParameterized2(0, FONT_NORMAL, gText_NotEvenANibble, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    //AddTextPrinterParameterized2(0, FONT_NORMAL, sText_NotEvenANibble, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     if (!task->tFishingForbidden)
     {
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_NotEvenANibble, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sText_NotEvenANibble, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     }
     // End fishingUpdate
     task->tStep = FISHING_NO_MON;
@@ -445,12 +451,12 @@ static bool32 Fishing_GotAway(struct Task *task)
 {
     // Start fishingUpdate
     //gChainFishingDexNavStreak = 0;
-    UpdateChainFishingStreak();
+    ResetChainFishingStreak();
     // End fishingUpdate
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_ItGotAway, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, sText_ItGotAway, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     task->tStep = FISHING_NO_MON;
     return TRUE;
 }
@@ -484,7 +490,7 @@ static bool32 Fishing_EndNoMon(struct Task *task)
 {
     RunTextPrinters();
     StartParkRangerYellCutscene(task); //fishingUpdate
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActiveOnWindow(0))
     {
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();
@@ -498,13 +504,13 @@ static bool32 Fishing_EndNoMon(struct Task *task)
 
 static bool32 DoesFishingMinigameAllowCancel(void)
 {
-    switch(I_FISHING_MINIGAME)
+    switch (I_FISHING_MINIGAME)
     {
-        case GEN_1:
-        case GEN_2:
-            return FALSE;
-        case GEN_3:
-        default:
+    case GEN_1:
+    case GEN_2:
+        return FALSE;
+    case GEN_3:
+    default:
             return TRUE;
     }
 }
@@ -513,10 +519,10 @@ static bool32 Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold(void)
 {
     enum Ability ability;
 
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_EGG))
         return FALSE;
 
-    ability = GetMonAbility(&gPlayerParty[0]);
+    ability = GetMonAbility(&gParties[B_TRAINER_PLAYER][0]);
 
     return (ability == ABILITY_SUCTION_CUPS || ability == ABILITY_STICKY_HOLD);
 }
@@ -545,7 +551,6 @@ static u32 CalculateFishingBiteOdds(u32 rod, bool32 isStickyHold)
         odds *= 2;
 
     odds = min(100, odds);
-    DebugPrintf("Fishing odds: %d", odds);
     return odds;
 }
 
@@ -568,7 +573,8 @@ static u32 CalculateFishingFollowerBoost()
 static u32 CalculateFishingProximityBoost()
 {
     s16 bobber_x, bobber_y, tile_x, tile_y;
-    u32 direction, facingDirection, numQualifyingTile = 0;
+    enum Direction direction, facingDirection;
+    u32 numQualifyingTile = 0;
     struct ObjectEvent *objectEvent;
 
     if (!I_FISHING_PROXIMITY)
@@ -594,7 +600,7 @@ static u32 CalculateFishingProximityBoost()
             numQualifyingTile++;
         else if (MapGridGetCollisionAt(tile_x, tile_y))
             numQualifyingTile++;
-        else if (GetMapBorderIdAt(tile_x, tile_y) == -1)
+        else if (GetMapBorderIdAt(tile_x, tile_y) == CONNECTION_INVALID)
             numQualifyingTile++;
     }
 
@@ -656,7 +662,12 @@ static void AlignFishingAnimationFrames(void)
         SetSurfBlob_PlayerOffset(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, TRUE, playerSprite->y2);
 }
 
-void UpdateChainFishingStreak()
+void ResetChainFishingStreak(void)
+{
+    gChainFishingDexNavStreak = 0;
+}
+
+void UpdateChainFishingStreak(void)
 {
     if (!I_FISHING_CHAIN)
         return;
@@ -672,7 +683,6 @@ u32 CalculateChainFishingShinyRolls(void)
     if (!I_FISHING_CHAIN || !gIsFishingEncounter)
         return 0;
     u32 a = 2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX);
-    DebugPrintf("Total Shiny Rolls %d", a);
     return a;
 }
 
@@ -729,3 +739,21 @@ static void StartParkRangerYellCutscene(struct Task *task)
     ScriptContext_SetupScript(Fishing_Cutscene_YellAtPlayer); //fishingUpdate
 }
 // End fishingUpdate
+// Start siliconQuests
+bool8 Quest_TeachATrainerToFish_ArePerfectCastComponentsSet(void)
+{
+    if (CalculateFishingTimeOfDayBoost() < FISHING_TIME_OF_DAY_BOOST)
+        return FALSE;
+
+
+    if (CalculateFishingProximityBoost() < (3 * FISHING_PROXIMITY_BOOST))
+        return FALSE;
+
+
+    if (Fishing_DoesFirstMonInPartyHaveSuctionCupsOrStickyHold() == FALSE)
+        return FALSE;
+
+
+    return TRUE;
+}
+// End siliconQuests

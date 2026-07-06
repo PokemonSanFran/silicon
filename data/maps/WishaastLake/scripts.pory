@@ -11,37 +11,41 @@ mapscripts WishaastLake_MapScripts {
 
 script WishaastLake_ObjectVisibility_Script {
     call(Manhunt_HideCharlotte_Script)
-    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ALCMENE)
 
-    specialvar(VAR_RESULT,ShouldShowAlcmene)
-    if (!var(VAR_RESULT))
-    {
-        call(Manhunt_HideAlcmene_Script)
-    }
-    return
+    if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR)
+	{
+		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ELEANOR)
+	}
+
+    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_VIGRIM)
+    callnative(Script_ShouldShowVigrim)
+    call_if_eq(VAR_RESULT,FALSE,Manhunt_HideVigrim_Script)
 }
 
-script WishaastLake_InteractEllen_Event_Script {
+script WishaastLake_InteractEleanor_Event_Script {
     lock
-        //PSF TODO figure out better pre / post battle speech
-        if (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){
-            call(MaskOff_Encounter_Alcmene_Dialogue)
+        if(var(VAR_STORYLINE_STATE) >= STORY_CLEAR){
+			goto(Rematches_Script_Eleanor)
+		} elif (flag(FLAG_TIMELINE_TRUE) && var(VAR_MASK_OFF_STATE) > GOT_MASK_OFF_CLUE_3){
+            goto(MaskOff_Encounter_Vigrim_Dialogue)
         } elif (flag(FLAG_TIMELINE_FALSE) && var(VAR_MANHUNT_STATE) > GOT_MANHUNT_CLUE_3){
-            call(Manhunt_Encounter_Alcmene_Dialogue)
-        } elif (var(VAR_STORYLINE_STATE) < STORY_ASSIGNED_ARMANDO_QUESTS){
+            goto(Manhunt_Encounter_Vigrim_Dialogue)
+        } elif (var(VAR_STORYLINE_STATE) < STORY_ASSIGNED_FRANK_QUESTS){
             msgbox("random flavor text about training here",MSGBOX_AUTOCLOSE)
-        }
+			closemessage
+		}
+
     release
-        end
+	end
 }
 
 script WishaastLake_Herb_Dealer_Script{
     lock
     faceplayer
-    msgbox(gText_WishaastLake_HeyManWhatCanI)
+    msgbox(format("hey man what can i get you today"))
 	waitmessage
 	pokemart(HerbDealerShop)
-    msgbox(gText_WishaastLake_ThanksComeAgain)
+    msgbox(format("thanks come again!"))
     // After making a successful purchase in a Poké Mart, the Id of the map that the Player
     // is at gets written to VAR_TEMP_1. If VAR_TEMP_1 is MAP_WISHAAST_LAKE in this context,
     // that's because the Player made a successful purchase there.
@@ -59,9 +63,9 @@ script WishaastLake_Interact_HerbBystander_Dialogue{
     questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_SHUTDOWNMEDICINEMAN)
 
     if(var(VAR_RESULT)){
-        msgbox(gText_WishaastLake_OhManDidYouHear,MSGBOX_NPC)
+        msgbox(format("oh man did you hear? the herb guy got shut down. looks like somebody ratted him out for not having a license. now we can only buy from that place in CresaltaVista!"),MSGBOX_NPC)
     }else {
-        msgbox(gText_WishaastLake_ThisGuyIs,MSGBOX_NPC)
+        msgbox(format("this guy has the best herbs, and so much cheaper than the place in CresaltaVista! I don't think this guy is like totally above board..."),MSGBOX_NPC)
     }
     end
 }

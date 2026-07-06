@@ -4,7 +4,7 @@
 
 #define PARTNER_NONE 0
 #define PARTNER_STEVEN 1
-#define PARTNER_KAI 2
+#define PARTNER_BAIYA 2
 #define PARTNER_ADAORA 3
 #define PARTNER_BD 4
 #define PARTNER_BELEN 5
@@ -12,12 +12,14 @@
 #define PARTNER_DOYLE 7
 #define PARTNER_EMRYS 8
 #define PARTNER_IMELDA 9
-#define PARTNER_KAUNA 10
+#define PARTNER_PUA 10
 #define PARTNER_KEI_YING 11
 #define PARTNER_MAGNUS 12
 #define PARTNER_NERIENE 13
 #define PARTNER_SHINZO 14
-#define PARTNER_RED 15
-#define PARTNER_COUNT 16
+#define PARTNER_OLIVER 15
+#define PARTNER_RED 16
+#define PARTNER_COUNT 17
+//Tests need PARTNER_COUNT to be at least 3 so we add a dummy partner
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

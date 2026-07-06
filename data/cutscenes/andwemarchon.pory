@@ -1,490 +1,360 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const CAMERA = OBJ_EVENT_ID_CAMERA
+const LOCALID_PARADE_TALA = (LOCALID_CAMERA + 1)
+const LOCALID_PARADE_CROWD_BD = LOCALID_PARADE_TALA + 1
+const LOCALID_PARADE_KID = LOCALID_PARADE_TALA + 2
+const LOCALID_PARADE_KID_MON_1 = LOCALID_PARADE_TALA + 3
+const LOCALID_PARADE_KID_MON_2 = LOCALID_PARADE_TALA + 4
+const LOCALID_PARADE_TALA_MON_1 = LOCALID_PARADE_TALA + 5
+const LOCALID_PARADE_TALA_MON_2 = LOCALID_PARADE_TALA + 6
 
-const PKMN1 = 1
-const PKMN2 = 2
-const PKMN3 = 3
-const PKMN4 = 4
-const TALA = 5
-const RUPERT = 26
-const PARADE_FLOAT_A = 9
-const PARADE_FLOAT_B = 8
-const PARADE_FLOAT_C = 7
+const LOCALID_PARADE_FLOAT_1 = LOCALID_PARADE_TALA + 7
+const LOCALID_PARADE_FLOAT_2 = LOCALID_PARADE_TALA + 8
+const LOCALID_PARADE_PERSON_1 = LOCALID_PARADE_TALA + 11
+const LOCALID_PARADE_PERSON_2 = LOCALID_PARADE_TALA + 12
+const LOCALID_PARADE_PERSON_3 = LOCALID_PARADE_TALA + 13
 
-const FLAG_HIDE_TALA_PKMN = FLAG_TEMP_1
-const FLAG_HIDE_RUPERT_PKMN = FLAG_TEMP_2
-const FLAG_HIDE_PARADE = FLAG_TEMP_3
+const LOCALID_PARADE_CROWD_1 = LOCALID_PARADE_TALA + 14
+const LOCALID_PARADE_CROWD_2 = LOCALID_PARADE_TALA + 15
+const LOCALID_PARADE_CROWD_3 = LOCALID_PARADE_TALA + 16
+const LOCALID_PARADE_CROWD_4 = LOCALID_PARADE_TALA + 17
+const LOCALID_PARADE_CROWD_5 = LOCALID_PARADE_TALA + 18
+const LOCALID_PARADE_CROWD_6 = LOCALID_PARADE_TALA + 19
+const LOCALID_PARADE_CROWD_7 = LOCALID_PARADE_TALA + 20
+const LOCALID_PARADE_CROWD_8 = LOCALID_PARADE_TALA + 21
+const LOCALID_PARADE_CROWD_9 = LOCALID_PARADE_TALA + 22
+const LOCALID_PARADE_CROWD_10 = LOCALID_PARADE_TALA + 23
+const LOCALID_PARADE_CROWD_11 = LOCALID_PARADE_TALA + 24
+const LOCALID_PARADE_CROWD_12 = LOCALID_PARADE_TALA + 25
+const LOCALID_PARADE_CROWD_13 = LOCALID_PARADE_TALA + 26
+const LOCALID_PARADE_CROWD_14 = LOCALID_PARADE_TALA + 27
+const LOCALID_PARADE_CROWD_15 = LOCALID_PARADE_TALA + 28
+const LOCALID_PARADE_CROWD_16 = LOCALID_PARADE_TALA + 29
+const LOCALID_PARADE_CROWD_17 = LOCALID_PARADE_TALA + 30
+const LOCALID_PARADE_CROWD_18 = LOCALID_PARADE_TALA + 31
+const LOCALID_PARADE_CROWD_19 = LOCALID_PARADE_TALA + 32
+const LOCALID_PARADE_CROWD_20 = LOCALID_PARADE_TALA + 33
+const LOCALID_PARADE_CROWD_21 = LOCALID_PARADE_TALA + 34
+const LOCALID_PARADE_CROWD_22 = LOCALID_PARADE_TALA + 35
 
-script AndWeMarchOn_ObjectVisibility_Script{
-    switch (var(VAR_TIRABUDIN_PLACE_STATE)){
-        case PARADE_NOT_STARTED: call(AndWeMarchOn_ObjectSetUp_Script)
-        case PARADE_COMPLETE: call(AndWeMarchOn_ObjectCleanUp_Script)
-    }
-    return
+script AndWeMarchOn_Script_MovePlayerFromNortheast
+{
+    goto(AndWeMarchOn_Script_StartParade)
 }
 
-script AndWeMarchOn_ObjectSetUp_Script {
-    setflag(FLAG_HIDE_TALA_PKMN)
-    setflag(FLAG_HIDE_RUPERT_PKMN)
+script AndWeMarchOn_Script_MovePlayerFromEast
+{
+    goto(AndWeMarchOn_Script_StartParade)
 }
 
-script AndWeMarchOn_ObjectCleanUp_Script {
-    setflag(FLAG_HIDE_TALA_PKMN)
-    setflag(FLAG_HIDE_RUPERT_PKMN)
-    setflag(FLAG_HIDE_PARADE)
+script AndWeMarchOn_Script_MovePlayerFromNorthwest
+{
+    goto(AndWeMarchOn_Script_StartParade)
 }
 
-script AndWeMarchOn_MoveCameraToParade_Script {
-        setvar(VAR_0x8004, 2)
-        setvar(VAR_0x8005, 9)
-        special(TeleportCamera)
-        special(SpawnCameraObject)
+script AndWeMarchOn_Script_MoveCameraToParade
+{
+    TeleportCamera(9,10)
+    special(SpawnCameraObject)
 }
 
-//TODO: Figure out audience members (vobjects?)
-//Look at "HeresHowThisIsGoingToGo", they can only be called on warp or on frame
+script AndWeMarchOn_Script_GenerateParade
+{
+    spawnobject(OBJ_EVENT_GFX_TALA,LOCALID_PARADE_TALA,10,10,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_NINJA_BOY,LOCALID_PARADE_KID,9,10,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_MON + SPECIES_NIDOQUEEN,LOCALID_PARADE_FLOAT_1,6,9,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_MON + SPECIES_NIDOKING,LOCALID_PARADE_FLOAT_2,6,11,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_BEAUTY,LOCALID_PARADE_PERSON_1,8,10,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_BEAUTY,LOCALID_PARADE_PERSON_2,7,10,MOVEMENT_TYPE_FACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_BEAUTY,LOCALID_PARADE_PERSON_3,6,10,MOVEMENT_TYPE_FACE_RIGHT)
+}
 
-script AndWeMarchOn_StartParadeMovement_Script {
+script AndWeMarchOn_Script_GenerateParadeCrowd
+{
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_1,16,6,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_2,17,7,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_3,18,7,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_4,21,6,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_5,22,6,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_6,23,7,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_7,24,6,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_8,25,7,3,DIR_SOUTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_9,26,7,3,DIR_SOUTH)
+
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_10,16,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_11,17,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_12,18,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_13,19,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_14,20,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_15,21,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_16,22,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_17,23,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_18,24,13,3,DIR_NORTH)
+    createvobject(OBJ_EVENT_GFX_BOY_2,LOCALID_PARADE_CROWD_19,25,13,3,DIR_NORTH)
+}
+
+script AndWeMarchOn_Script_WarpPlayerStartParade
+{
     lock
-        startcutscene(JUMPPLAYER_ANDWEMARCHON)
-        applymovement(PLAYER, AndWeMarchOn_WatchParade_Movement)
-        waitmovement(0)
-        fadescreen(FADE_TO_BLACK)
-        call(AndWeMarchOn_MoveCameraToParade_Script)
-        setobjectxyperm(PARADE_FLOAT_A, 26, 10)
-        setobjectxy(PARADE_FLOAT_A, 26, 10)
-        fadescreen(FADE_FROM_BLACK)
-
-        applymovement(CAMERA, AndWeMarchOn_PanCameraParadeStop_Movement)
-        applymovement(TALA, AndWeMarchOn_ParadeProcession_Movement)
-        applymovement(PARADE_FLOAT_A, AndWeMarchOn_ParadeProcession_Movement)
-        applymovement(PARADE_FLOAT_B, AndWeMarchOn_ParadeProcession_Movement)
-        applymovement(PARADE_FLOAT_C, AndWeMarchOn_ParadeProcession_Movement)
-
-        msgbox(gText_AndWeMarchOn_WowPeopleHere,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-        closemessage
-		waitmovement(CAMERA)
-		waitmovement(TALA)
-		waitmovement(PARADE_FLOAT_A)
-		waitmovement(PARADE_FLOAT_B)
-		waitmovement(PARADE_FLOAT_C)
-        waitmovement(0) //don't move on until parade finishes walking
-        special(RemoveCameraObject)
-
-        msgbox(gText_AndWeMarchOn_AndNowSomeWords,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
-        reveal(REVEAL_TALA)
-        closemessage
-        goto(AndWeMarchOn_Opening_Dialogue)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    setobjectxy(LOCALID_PLAYER,19,7)
+    TeleportCamera(19,7)
+    turnobject(LOCALID_PLAYER,DIR_SOUTH)
+    goto(AndWeMarchOn_Script_StartParade)
 }
 
-script AndWeMarchOn_Opening_Dialogue {
-    playbgm(MUS_ENCOUNTER_ELITE_FOUR,TRUE)
-    applymovement(TALA, AndWeMarchOn_LookAroundCrowd_Movement)
-        waitmovement(0)
-        playse(SE_APPLAUSE)
-        applymovement(TALA, AndWeMarchOn_WalkToFloatCenter_Movement)
-        waitmovement(0)
+script AndWeMarchOn_Script_MoveParade
+{
+    applymovement(LOCALID_PARADE_TALA,moves(walk_right * 12))
+    applymovement(LOCALID_CAMERA,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_FLOAT_1,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_FLOAT_2,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_PERSON_1,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_PERSON_2,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_PERSON_3,moves(walk_right * 12))
+    applymovement(LOCALID_PARADE_KID,moves(walk_right * 12))
+    waitmovement(LOCALID_PARADE_TALA)
+    waitmovement(LOCALID_PARADE_FLOAT_1)
+    waitmovement(LOCALID_PARADE_FLOAT_2)
+    waitmovement(LOCALID_PARADE_PERSON_1)
+    waitmovement(LOCALID_PARADE_PERSON_2)
+    waitmovement(LOCALID_PARADE_PERSON_3)
+    waitmovement(LOCALID_PARADE_KID)
+    waitmovement(LOCALID_CAMERA)
+}
 
-        msgbox(gText_AndWeMarchOn_Resido,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
-        closemessage
+script AndWeMarchOn_Script_StartParade
+{
+    lock
+    setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
+    startcutscene(JUMPPLAYER_ANDWEMARCHON)
+    spawnobject(OBJ_EVENT_GFX_BD,LOCALID_PARADE_CROWD_BD,15,13,MOVEMENT_TYPE_FACE_UP)
+    setflag(FLAG_FORCE_LOAD_OFFSCREEN_OBJ)
+    call(AndWeMarchOn_Script_MoveCameraToParade)
+    call(AndWeMarchOn_Script_GenerateParade)
+    clearflag(FLAG_FORCE_LOAD_OFFSCREEN_OBJ)
+    playbgm(MUS_ENCOUNTER_ELITE_FOUR,FALSE)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    call(AndWeMarchOn_Script_MoveParade)
+    msgbox(format("Wow, people here really love their Double Battles… but then why is Singles the official League format?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    closemessage
+    msgbox(format("And now, some words from our Grand Marshall, Tala!"),,SPEAKER_ANNOUNCER)
+    closemessage
+    setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_NOT_STARTED)
+    reveal(REVEAL_TALA)
+    goto(AndWeMarchOn_Dialogue_StartSpeech)
+}
 
-        //TODO implement fireworks on screen
+script AndWeMarchOn_Script_MoveProcession
+{
+    moveobjecttocoords(LOCALID_PARADE_FLOAT_1,16,8,DIR_EAST)
+    moveobjecttocoords(LOCALID_PARADE_FLOAT_2,16,12,DIR_EAST)
 
-        playse(SE_BANG)
+    moveobjecttocoords(LOCALID_PARADE_PERSON_1,17,12,DIR_NORTH)
+    moveobjecttocoords(LOCALID_PARADE_PERSON_2,19,8,DIR_SOUTH)
+    waitmovement(LOCALID_PARADE_PERSON_1)
+    waitmovement(LOCALID_PARADE_PERSON_2)
+    moveobjecttocoords(LOCALID_PARADE_PERSON_3,18,12,DIR_NORTH)
+    waitmovement(LOCALID_PARADE_PERSON_3)
+    moveobjecttocoords(LOCALID_PARADE_KID,21,8,DIR_SOUTH)
+}
+
+script AndWeMarchOn_Dialogue_StartSpeech
+{
+    call(AndWeMarchOn_Script_MoveProcession)
+    setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
+    applymovement(LOCALID_PARADE_TALA, moves(face_up, delay_16, face_down, delay_16))
+    waitmovement(LOCALID_PARADE_TALA)
+    playse(SE_APPLAUSE)
+    applymovement(LOCALID_PARADE_TALA, moves(walk_right, walk_right, walk_down, face_right, step_end))
+    waitmovement(LOCALID_PARADE_TALA)
+    waitse
+    msgbox(format("Resido!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+    closemessage
+    msgbox(format("Thank you for supporting our annual Doubles Parade! This has been a fuckin' blast! Who's having a good time?!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+    playse(SE_APPLAUSE)
+    closemessage
+    applymovement(LOCALID_PARADE_TALA, moves(walk_up * 2, delay_16, walk_down * 2, delay_16, walk_up * 2, step_end))
+    waitmovement(LOCALID_PARADE_TALA)
+    msgbox(format("We have a special guest for you all today! Rupert, please come up here!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+    closemessage
+    moveobjecttocoords(LOCALID_PARADE_KID,21,9,DIR_EAST)
+    waitmovement(LOCALID_PARADE_KID)
+    buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY)
+    msgbox(format("Rupert here is the winner of the {STR_VAR_1} Preparatory School graduation tournament! NORMALLY, the winner gets a scholarship from the Resido League. But our new corporate overlords have decided that growing the in-region talent isn't a budget priority!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    closemessage
+msgbox(format("Boo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A)
+    msgbox(format("Let's go Rupert!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B)
+    playse(SE_APPLAUSE)
+    msgbox(format("But that's not going to stop us from nurturing that talent ourselves!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    msgbox(format("Yaaaay Rupert!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C)
+    closemessage
+    waitse
+    goto(AndWeMarchOn_Dialogue_StartBattle)
+}
+
+script AndWeMarchOn_Dialogue_StartBattle
+{
+    msgbox(format("Rupert, are you ready to bring an old master out of retirement?"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    msgbox(format("Woooo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_D)
+    msgbox(format("Yeah!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A)
+    closemessage
+    moveobjecttocoords(LOCALID_PARADE_TALA,26,10,DIR_WEST)
+    moveobjecttocoords(LOCALID_PARADE_KID,21,10,DIR_EAST)
+    msgbox(format("Let's rock!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    closemessage
+    msgbox(format("And our battle is underway!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
+    closemessage
+
+    cueobjecttalking(LOCALID_PARADE_TALA)
+    playse(SE_BALL_OPEN)
+    playse(SE_BALL_OPEN)
+    callnative(AndWeMarchOn_LoadTalaMon0)
+    callnative(AndWeMarchOn_LoadTalaMon1)
+    callnative(AndWeMarchOn_LoadParadeKidMon0)
+    callnative(AndWeMarchOn_LoadParadeKidMon1)
+    spawnobject(OBJ_EVENT_GFX_VAR_0,LOCALID_PARADE_KID_MON_1,22,9,MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_VAR_1,LOCALID_PARADE_KID_MON_2,22,11,MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT)
+    spawnobject(OBJ_EVENT_GFX_VAR_2,LOCALID_PARADE_TALA_MON_1,25,9,MOVEMENT_TYPE_WALK_IN_PLACE_LEFT)
+    spawnobject(OBJ_EVENT_GFX_VAR_3,LOCALID_PARADE_TALA_MON_2,25,11,MOVEMENT_TYPE_WALK_IN_PLACE_LEFT)
+    callnative(AndWeMarchOn_PlayTalaMon0Cry)
+    waitmoncry
+    callnative(AndWeMarchOn_PlayTalaMon1Cry)
+    waitmoncry
+    callnative(AndWeMarchOn_PlayParadeKidMon0Cry)
+    waitmoncry
+    callnative(AndWeMarchOn_PlayParadeKidMon1Cry)
+    waitmoncry
+    callnative(AndWeMarchOn_BufferAttacks)
+    msgbox(format("Attack pattern Sigma!"),MSGBOX_DEFAULT,SPEAKER_RUPERT)
+    msgbox(format("{STR_VAR_1}! {STR_VAR_2}!"),MSGBOX_DEFAULT,SPEAKER_TALA)
+    closemessage
+    applymovement(LOCALID_PARADE_TALA_MON_1,moves(walk_faster_left) * 2)
+    applymovement(LOCALID_PARADE_TALA_MON_2,moves(walk_faster_left) * 2)
+    waitmovement(LOCALID_PARADE_TALA_MON_1)
+    waitmovement(LOCALID_PARADE_TALA_MON_2)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    playse(SE_M_THUNDERBOLT)
+    playse(SE_M_CUT)
+    delay(16)
+    playse(SE_FAINT)
+    waitse
+    applymovement(LOCALID_PARADE_KID_MON_1,moves(face_left))
+    applymovement(LOCALID_PARADE_KID_MON_2,moves(face_left))
+    waitmovement(LOCALID_PARADE_KID_MON_1)
+    waitmovement(LOCALID_PARADE_KID_MON_2)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    callnative(AndWeMarchOn_BufferAttacks)
+    msgbox(format("And with a swift {STR_VAR_1}-{STR_VAR_2} combo, Tala ends the battle in one turn! The exhibition winner is the Elite Four's TALAAAAAAA!"),MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
+    goto(AndWeMarchOn_Dialogue_FinishBattle)
+}
+
+script AndWeMarchOn_Dialogue_FinishBattle
+{
+playse(SE_APPLAUSE)
+msgbox(format("Damn, that's how she beat me too… wait, did they say Elite Four? Resido doesn't have those, does it?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+msgbox(format("Let's give it up for Rupert!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
+closemessage
         waitse
-        playse(SE_BANG)
-        waitse
-        msgbox(gText_AndWeMarchOn_ThankYouForSupporting,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
 
-        playse(SE_APPLAUSE)
-        waitse
-
-        applymovement(TALA, AndWeMarchOn_PaceBackForth_Movement)
-        waitmovement(0)
-        goto(AndWeMarchOn_InviteOntoStage_Dialogue)
-}
-
-script AndWeMarchOn_InviteOntoStage_Dialogue {
-        msgbox(gText_AndWeMarchOn_WeHaveASpecialGuest,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
-        closemessage
-
-        applymovement(RUPERT, AndWeMarchOn_WalkOntoStage_Movement)
-        waitmovement(0)
-
-        msgbox(gText_AndWeMarchOn_RupertHereIsTheWinner,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        closemessage
-
-        msgbox(gText_AndWeMarchOn_Boo,MSGBOX_DEFAULT,SPEAKER_CROWD_A)
-        msgbox(gText_AndWeMarchOn_LetsGo,MSGBOX_DEFAULT,SPEAKER_CROWD_B)
-
-        msgbox(gText_AndWeMarchOn_ButThatsNotGoing,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        closemessage
-
-        msgbox(gText_AndWeMarchOn_YayRupert,MSGBOX_DEFAULT,SPEAKER_CROWD_C)
-        goto(AndWeMarchOn_StartCutsceneBattle_Script)
-}
-
-script AndWeMarchOn_StartCutsceneBattle_Script {
-        msgbox(gText_AndWeMarchOn_RupertAreYouReady,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        msgbox(gText_AndWeMarchOn_Woo,MSGBOX_DEFAULT,SPEAKER_CROWD_D)
-        msgbox(gText_AndWeMarchOn_Yeah,MSGBOX_DEFAULT,SPEAKER_CROWD_A)
-        closemessage
-
-        applymovement(TALA, AndWeMarchOn_WalkToLeftSide_Movement)
-        applymovement(RUPERT, AndWeMarchOn_LookAroundCrowd_Movement)
-        waitmovement(0)
-        applymovement(RUPERT, Common_Movement_FaceLeft)
-        waitmovement(0)
-
-        msgbox(gText_AndWeMarchOn_LetsRock,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        closemessage
-
-        msgbox(gText_AndWeMarchOn_AndOurBattle,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
-        closemessage
-        goto(AndWeMarchOn_CutsceneBattleScript)
-
-}
-script AndWeMarchOn_CutsceneBattleScript {
-
-        applymovement(CAMERA,AndWeMarchOn_CenterBattleFrame_Movement)
         playse(SE_BALL_OPEN)
-        playse(SE_BALL_OPEN)
-        waitse
-        clearflag(FLAG_HIDE_TALA_PKMN)
-        addobject(PKMN1)
-        addobject(PKMN2)
-        playmoncry(SPECIES_GROUDON, CRY_MODE_ENCOUNTER)
-        waitmoncry
-        playmoncry(SPECIES_KYOGRE, CRY_MODE_ENCOUNTER)
-        waitmoncry
-
-        playse(SE_BALL_OPEN)
-        playse(SE_BALL_OPEN)
-        waitse
-        clearflag(FLAG_HIDE_RUPERT_PKMN)
-        addobject(PKMN3)
-        addobject(PKMN4)
-        playmoncry(SPECIES_AZUMARILL, CRY_MODE_ENCOUNTER)
-        waitmoncry
-        playmoncry(SPECIES_KECLEON, CRY_MODE_ENCOUNTER)
-        waitmoncry
-
-        msgbox(gText_AndWeMarchOn_AttackPatternSigma,MSGBOX_DEFAULT,SPEAKER_RUPERT)
-
-        msgbox(gText_AndWeMarchOn_HelpingHand,MSGBOX_DEFAULT,SPEAKER_TALA)
-        closemessage
-
-        applymovement(PKMN1, AndWeMarchOn_Attack_Movement)
-        applymovement(PKMN2, AndWeMarchOn_Attack_Movement)
-        waitmovement(0)
-
-        //PSF TODO figure out how to flash screen back
-        fadescreen(FADE_TO_BLACK)
-        playse(SE_M_THUNDERBOLT)
-        waitse
-        setobjectxy(PKMN3, 21, 9)
-        setobjectxy(PKMN4, 21, 11)
-        turnobject(PKMN3, DIR_EAST)
-        turnobject(PKMN4, DIR_EAST)
-        playse(SE_FAINT)
-        waitse
-		waitmovement(CAMERA)
-		waitmovement(PKMN1)
-		waitmovement(PKMN2)
-        fadescreen(FADE_FROM_BLACK)
-
-        msgbox(gText_AndWeMarchOn_AndWithASupercharged,MSGBOX_DEFAULT,SPEAKER_ANNOUNCER)
-        goto(AndWeMarchOn_PostBattle_Dialogue)
-}
-
-script AndWeMarchOn_PostBattle_Dialogue {
-
-        msgbox(gText_AndWeMarchOn_DamnThatsHow,MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-
-        msgbox(gText_AndWeMarchOn_LetsGiveItUp,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT,EMOTE_HAPPY)
-
-        playse(SE_APPLAUSE)
         waitse
 
-        playse(SE_BALL_OPEN)
-        waitse
-
-        removeobject(PKMN1)
-        removeobject(PKMN2)
-        removeobject(PKMN3)
-        removeobject(PKMN4)
-        applymovement(RUPERT, AndWeMarchOn_WalkOffStage_Movement)
-        waitmovement(0)
-        goto(AndWeMarchOn_PostBattleSpeech_Dialogue)
+    removeobject(LOCALID_PARADE_KID_MON_1)
+    removeobject(LOCALID_PARADE_KID_MON_2)
+    removeobject(LOCALID_PARADE_TALA_MON_1)
+    removeobject(LOCALID_PARADE_TALA_MON_2)
+    delay(16)
+    moveobjecttocoords(LOCALID_PARADE_KID,21,8,DIR_SOUTH)
+    goto(AndWeMarchOn_Dialogue_FinishSpeech)
 }
 
-script AndWeMarchOn_PostBattleSpeech_Dialogue {
+script AndWeMarchOn_Dialogue_FinishSpeech
+{
+    msgbox(format("It's been a wild year, hasn't it? Who's loving our new Pokémon League? The League that's too good for the likes of young Rupert."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    closemessage
 
-        msgbox(gText_AndWeMarchOn_ItsBeenAWildYear,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        closemessage
+    playse(SE_APPLAUSE)
+    waitse
 
-        playse(SE_APPLAUSE) //PSF TODO: change to booing sound
-        waitse
+    applymovement(LOCALID_PARADE_TALA, moves(walk_left* 3, step_end))
+    waitmovement(LOCALID_PARADE_TALA)
 
-        applymovement(TALA, AndWeMarchOn_WalkToSouthStage_Movement)
-        waitmovement(0)
+    msgbox(format("Oh, it's not all bad, is it? Yeah, our beloved elected officials sold our League to the highest bidder. And yeah, they've bulldozed all of our traditions and replaced them with some soulless husk of a League. AND YEAH, they pushed our entire battling community out and replaced them with highly paid drones that couldn't battle their way out of a paper bag…."),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    closemessage
 
-        msgbox(gText_AndWeMarchOn_OhItsNotAllBad,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
-        closemessage
+    applymovement(LOCALID_PARADE_TALA, moves(walk_right * 3, step_end))
+    waitmovement(LOCALID_PARADE_TALA)
 
-        applymovement(TALA, AndWeMarchOn_WalkToNorthStage_Movement)
-        waitmovement(0)
+    msgbox(format("Boo!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B)
 
-        msgbox(gText_AndWeMarchOn_Boo,MSGBOX_DEFAULT,SPEAKER_CROWD_B)
+    msgbox(format("Fuck these guys!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_FuckTheseGuys,MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Give us back our League!"),MSGBOX_DEFAULT,SPEAKER_CROWD_D,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_GiveUsBackOur,MSGBOX_DEFAULT,SPEAKER_CROWD_D,TAIL_SHOUT,EMOTE_ANGRY)
+    buffermapname(STR_VAR_1,MAP_TIRABUDIN_PLACE)
+    msgbox(format("But hey! It's not all bad, right? {STR_VAR_1} got to keep its Gym!"),MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    moveobjecttocoords(LOCALID_PARADE_CROWD_BD,15,17,DIR_SOUTH)
 
-        msgbox(gText_AndWeMarchOn_ButHeyItsNot,MSGBOX_DEFAULT,SPEAKER_TALA,TAIL_SHOUT)
+    msgbox(format("Traitor!"),MSGBOX_DEFAULT,SPEAKER_CROWD_A,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_Traitor,MSGBOX_DEFAULT,SPEAKER_CROWD_A,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("Down with BD!"),MSGBOX_DEFAULT,SPEAKER_CROWD_B,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_DownWith,MSGBOX_DEFAULT,SPEAKER_CROWD_B,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("What a slimeball!"),MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
 
-        msgbox(gText_AndWeMarchOn_WhatASlimeball,MSGBOX_DEFAULT,SPEAKER_CROWD_C,TAIL_SHOUT,EMOTE_ANGRY)
+    msgbox(format("…just not the way we would have hoped."),MSGBOX_DEFAULT,SPEAKER_TALA)
+    closemessage
+    waitmovement(LOCALID_PARADE_CROWD_BD)
 
-        msgbox(gText_AndWeMarchOn_JustNotTheWay,MSGBOX_DEFAULT,SPEAKER_TALA)
-        closemessage
+    applymovement(LOCALID_PARADE_TALA, moves(walk_right * 3, face_down, step_end))
+    waitmovement(LOCALID_PARADE_TALA)
 
-        applymovement(TALA, AndWeMarchOn_GoBackToCenter_Movement)
-        waitmovement(0)
-
-        msgbox(gText_AndWeMarchOn_WeveGotAResponsibility,MSGBOX_DEFAULT,SPEAKER_TALA)
-        closemessage
-        goto(AndWeMarchOn_ParadeEnd_Script)
-
+    msgbox(format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpRise Capital or otherwise, can take that away from us!"),MSGBOX_DEFAULT,SPEAKER_TALA)
+    closemessage
+    goto(AndWeMarchOn_Script_ParadeEnd)
 }
 
-script AndWeMarchOn_ParadeEnd_Script {
-
-        playse(SE_APPLAUSE)
-        playse(SE_APPLAUSE)
-        waitse
-        fadescreen(FADE_TO_BLACK)
-        removeobject(TALA)
-        removeobject(PARADE_FLOAT_A)
-        removeobject(PARADE_FLOAT_B)
-        removeobject(PARADE_FLOAT_C)
-        setflag(FLAG_HIDE_PARADE)
-        setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
-        special(ReturnCameraToPlayer)
-        fadescreen(FADE_FROM_BLACK)
-        savebgm(MUS_DUMMY)
-        fadedefaultbgm
-        call(TryAutoSave)
-        endcutscene
-        release
-        end
-}
-
-text gText_AndWeMarchOn_WowPeopleHere {
-    format("Wow, people here really love their Double Battles… but then why is Singles the official League  format?")
-}
-
-text gText_AndWeMarchOn_AndNowSomeWords {
-    format("And now, some words from our Grand Marshall, Tala!")
-}
-
-text gText_AndWeMarchOn_Resido {
-    format("Resido!")
-}
-
-text gText_AndWeMarchOn_ThankYouForSupporting {
-    format("Thank you for supporting our annual Doubles Parade! This has been a fuckin' blast! Who's having a good time?!")
-}
-
-text gText_AndWeMarchOn_WeHaveASpecialGuest {
-    format("We have a special guest for you all today! Rupert, please come up to the stage!")
-}
-
-text gText_AndWeMarchOn_RupertHereIsTheWinner {
-    format("Rupert here is the winner of the MermerezaCity Preparatory School graduation tournament! NORMALLY, the winner gets a scholarship from the Resido League. But our new corporate overlords have decided that growing the in-region talent isn't a budget priority!")
-}
-
-text gText_AndWeMarchOn_Boo {
-    format("Boo!")
-}
-
-text gText_AndWeMarchOn_LetsGo {
-    format("Let's go Rupert!")
-}
-
-text gText_AndWeMarchOn_ButThatsNotGoing {
-    format("But that's not going to stop us from nurturing that talent ourselves!")
-}
-
-text gText_AndWeMarchOn_YayRupert {
-    format("Yaaaay Rupert!")
-}
-
-text gText_AndWeMarchOn_RupertAreYouReady {
-    format("Rupert, are you ready to bring an old master out of retirement?")
-}
-
-text gText_AndWeMarchOn_Woo {
-    format("Woooo!")
-}
-
-text gText_AndWeMarchOn_Yeah {
-    format("Yeah!")
-}
-
-text gText_AndWeMarchOn_LetsRock {
-    format("Let's rock!")
-}
-
-text gText_AndWeMarchOn_AndOurBattle {
-    format("And our battle is underway!")
-}
-
-text gText_AndWeMarchOn_AttackPatternSigma {
-    format("Attack pattern Sigma!")
-}
-
-text gText_AndWeMarchOn_HelpingHand {
-    format("Helping Hand! Breaking Swipe!")
-}
-
-text gText_AndWeMarchOn_AndWithASupercharged {
-    format("And with a supercharged Breaking Swipe, Tala ends the battle in one turn! The exhibition winner is the Elite Four's TALA!")
-}
-
-text gText_AndWeMarchOn_DamnThatsHow {
-    format("Damn, that's how she beat me too… wait, did they say Elite Four? Resido doesn't have those, does it?")
-}
-
-text gText_AndWeMarchOn_LetsGiveItUp {
-    format("Let's give it up for Rupert!")
-}
-
-text gText_AndWeMarchOn_ItsBeenAWildYear {
-    format("It's been a wild year, hasn't it? Who's loving our new Pokémon League? The League that's too good for the likes of young Rupert.")
-}
-
-text gText_AndWeMarchOn_OhItsNotAllBad {
-    format("Oh, it's not all bad, is it? Yeah, our beloved elected officials sold our League to the highest bidder. And yeah, they've bulldozed all of our traditions and replaced them with some soulless husk of a League. AND YEAH, they pushed our entire battling community out and replaced them with highly paid drones that couldn't battle their way out of a paper bag….")
-}
-
-text gText_AndWeMarchOn_FuckTheseGuys {
-    format("Fuck these guys!")
-}
-
-text gText_AndWeMarchOn_GiveUsBackOur {
-    format("Give us back our League!")
-}
-
-text gText_AndWeMarchOn_ButHeyItsNot {
-    format("But hey! It's not all bad, right? TirabudinPlace got to keep its Gym!")
-}
-
-text gText_AndWeMarchOn_Traitor {
-    format("Traitor!")
-}
-
-text gText_AndWeMarchOn_DownWith {
-    format("Down with BD!")
-}
-
-text gText_AndWeMarchOn_WhatASlimeball {
-    format("What a slimeball!")
-}
-
-text gText_AndWeMarchOn_JustNotTheWay {
-    format("…just not the way we would have hoped.")
-}
-
-text gText_AndWeMarchOn_WeveGotAResponsibility {
-    format("We've got a responsibility here. The profit motive can not… WILL NOT erase our history. It lives on in our hearts. In our stories Our legends. And no corporation, SharpriseCapital or otherwise, can take that away from us!")
-}
-
-movement AndWeMarchOn_WatchParade_Movement{
-    face_down
-        step_end
-}
-
-movement AndWeMarchOn_PanCameraParadeStop_Movement{
-    walk_right * 14
-    step_end
-}
-
-movement AndWeMarchOn_ParadeProcession_Movement{
-    walk_right * 12
-    step_end
-}
-
-movement AndWeMarchOn_WalkToBattle_Movement{
-    walk_right * 4
-        step_end
-}
-
-movement AndWeMarchOn_LookAroundCrowd_Movement{
-    face_up
-        delay_16
-        face_down
-        delay_16
-        step_end
-}
-movement AndWeMarchOn_WalkToFloatCenter_Movement{
-    walk_right
-        walk_right
-        walk_down
-        face_right
-        step_end
-}
-movement AndWeMarchOn_PaceBackForth_Movement{
-    walk_up * 2
-        delay_16
-        walk_down * 4
-        delay_16
-        walk_up * 2
-        step_end
-}
-movement AndWeMarchOn_WalkOntoStage_Movement{
-    walk_up * 3
-        face_left
-        step_end
-}
-movement AndWeMarchOn_WalkToLeftSide_Movement{
-    walk_left
-        face_right
-        step_end
-}
-movement AndWeMarchOn_Attack_Movement{
-    walk_fast_right
-        walk_fast_right
-        step_end
-}
-movement AndWeMarchOn_WalkOffStage_Movement{
-    walk_down * 3
-        face_up
-        step_end
-}
-movement AndWeMarchOn_WalkToSouthStage_Movement{
-    walk_right * 3
-        step_end
-}
-movement AndWeMarchOn_WalkToNorthStage_Movement{
-    walk_left * 6
-        step_end
-}
-movement AndWeMarchOn_GoBackToCenter_Movement{
-    walk_right * 3
-        face_down
-        step_end
-}
-movement AndWeMarchOn_WalkCameraToParade_Movement{
-    walk_left * 16
-        walk_down * 2
-        step_end
-}
-movement AndWeMarchOn_CenterBattleFrame_Movement{
-    walk_right * 3
-    walk_down
-    step_end
+script AndWeMarchOn_Script_ParadeEnd
+{
+    playse(SE_APPLAUSE)
+    fadescreenswapbuffers(FADE_TO_BLACK)
+    waitse
+    removeobject(LOCALID_PARADE_TALA)
+    removeobject(LOCALID_PARADE_FLOAT_1)
+    removeobject(LOCALID_PARADE_FLOAT_2)
+    removeobject(LOCALID_PARADE_PERSON_1)
+    removeobject(LOCALID_PARADE_PERSON_2)
+    removeobject(LOCALID_PARADE_PERSON_3)
+    removeobject(LOCALID_PARADE_CROWD_BD)
+    removeobject(LOCALID_PARADE_KID)
+    removeobject(LOCALID_PARADE_KID_MON_1)
+    removeobject(LOCALID_PARADE_KID_MON_2)
+    removeobject(LOCALID_PARADE_TALA_MON_1)
+    removeobject(LOCALID_PARADE_TALA_MON_2)
+    removeobject(LOCALID_PARADE_CROWD_1)
+    removeobject(LOCALID_PARADE_CROWD_2)
+    removeobject(LOCALID_PARADE_CROWD_3)
+    removeobject(LOCALID_PARADE_CROWD_4)
+    removeobject(LOCALID_PARADE_CROWD_5)
+    removeobject(LOCALID_PARADE_CROWD_6)
+    removeobject(LOCALID_PARADE_CROWD_7)
+    removeobject(LOCALID_PARADE_CROWD_8)
+    removeobject(LOCALID_PARADE_CROWD_9)
+    removeobject(LOCALID_PARADE_CROWD_10)
+    removeobject(LOCALID_PARADE_CROWD_11)
+    removeobject(LOCALID_PARADE_CROWD_12)
+    removeobject(LOCALID_PARADE_CROWD_13)
+    removeobject(LOCALID_PARADE_CROWD_14)
+    removeobject(LOCALID_PARADE_CROWD_15)
+    removeobject(LOCALID_PARADE_CROWD_16)
+    removeobject(LOCALID_PARADE_CROWD_17)
+    removeobject(LOCALID_PARADE_CROWD_18)
+    removeobject(LOCALID_PARADE_CROWD_19)
+    setvar(VAR_TIRABUDIN_PLACE_STATE,PARADE_COMPLETE)
+    special(ReturnCameraToPlayer)
+    special(RemoveCameraObject)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
+    fadedefaultbgm
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }

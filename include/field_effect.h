@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
+#include "field_weather.h"
+
 extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
 extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
 extern const struct OamData gNewGameBirchOamAttributes;
@@ -16,7 +18,7 @@ void ReturnToFieldFromFlyMapSelect(void);
 void FieldCallback_UseFly(void);
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
-u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
+u8 CreateTrainerSprite(enum TrainerPicID trainerPicId, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void FldEff_TeleportWarpOut(void);
 void FieldEffectActiveListRemove(u8 id);
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
@@ -24,6 +26,7 @@ void FieldEffectActiveListAdd(u8 id);
 void FieldEffectScript_LoadTiles(u8 **script);
 void ApplyGlobalFieldPaletteTint(u8 paletteIdx); // siliconMerge
 void FieldEffectScript_LoadFadedPalette(u8 **script);
+void FieldEffect_LoadFadedPalette(struct SpritePalette *palette, enum ColorMapType colorMap);
 void FieldEffectScript_LoadPalette(u8 **script);
 void FieldEffectScript_CallNative(u8 **script, u32 *val);
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
@@ -48,7 +51,7 @@ void SpriteCB_AshLaunch(struct Sprite *sprite);
 
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
+u8 CreateMonSprite_PicBox(enum Species species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
 void ReturnToFieldFromRegionMapWarpSelect(void); // siliconMerge
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite); // autoSave
@@ -73,4 +76,6 @@ bool8 DiveFieldEffect_Init(struct Task *);
 bool8 DiveFieldEffect_TryWarp(struct Task *);
 // End qol_field_moves
 bool8 IsRockClimbActive(void);
+void ReturnToFieldFromRegionMapCheapTaxi(void);
+void FieldCallback_FlyIntoMap(void); // flyEncounters
 #endif // GUARD_FIELD_EFFECTS_H

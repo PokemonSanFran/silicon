@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_SPECIALS_H
 #define GUARD_FIELD_SPECIALS_H
 
+#include "constants/species.h"
+
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 extern u16 gScrollableMultichoice_ScrollOffset;
@@ -39,8 +41,14 @@ void GiveFrontierBattlePoints(u32 amount);
 void DeleteChosenPartyMon(void);
 // End siliconMerge
 void PreparePartyForSkyBattle(void);
+void TrySkyBattle(void); // flyEncounters
 void GetObjectPosition(u16*, u16*, u32, u32);
 bool32 CheckObjectAtXY(u32, u32);
-bool32 CheckPartyHasSpecies(u32);
+bool32 CheckBoxesForSpecies(u32); // siliconQuests
+u16 GetFrontierBattlePoints(void); // siliconMerge
+bool32 CheckPartyHasSpecies(enum Species);
+bool8 CutMoveRuinValleyCheck(void);
+void CutMoveOpenDottedHoleDoor(void);
+void RandomlyBoostPartyMemberFriendship(void); // siliconQuests
 
 #endif // GUARD_FIELD_SPECIALS_H

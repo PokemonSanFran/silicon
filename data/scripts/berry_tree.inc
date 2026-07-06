@@ -83,7 +83,6 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	fadescreen FADE_TO_BLACK
 	closemessage
 	special Bag_ChooseBerry
-	waitstate
 	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
@@ -159,6 +158,9 @@ BerryTree_EventScript_SetAdverbPoor::
 
 @ VAR_0x8006 here is the number of berries
 BerryTree_EventScript_CheckBerryFullyGrown::
+// Start wildEncounters
+	call BerryTree_EventScript_CheckForPests
+// End wildEncounters
 	buffernumberstring STR_VAR_2, VAR_0x8006
 	lock
 	faceplayer
@@ -251,7 +253,6 @@ BerryTree_EventScript_WaterBerry::
 	waitmessage
 	special ObjectEventInteractionWaterBerryTree
 	special DoWateringBerryTreeAnim
-	waitstate
 	message BerryTree_Text_PlantIsDelighted
 	waitmessage
 	waitbuttonpress
@@ -478,5 +479,8 @@ BerryTree_EventScript_EncounterPests::
 	return
 
 BerryTree_Text_APokemonAppeared:
-	.string "A Pokémon appeared!$"
+    .string "There was a wild Pokemon eating the\n"
+    .string "{STR_VAR_1}.{PAUSE 20}.{PAUSE 20}.{PAUSE 20} The wild Pokémon\n"
+    .string "attacked!$"
+    //.string "A Pokémon appeared!$"
 .endif

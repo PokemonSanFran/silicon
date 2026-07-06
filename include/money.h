@@ -2,7 +2,7 @@
 #define GUARD_MONEY_H
 
 // Start siliconMerge
-#define STARTING_MONEY 2891 // PSF TODO Balance this to be correct
+#define STARTING_MONEY 2891
 #define MAX_MONEY 99999999 // Can be increased to INT_MAX
 // #define MAX_MONEY 999999 // Can be increased to INT_MAX
 #define CHARLOTTE_MONEY (MAX_MONEY / 10) * 7
@@ -25,14 +25,6 @@ void AddMoney(u32 *moneyPtr, u32 toAdd);
 void RemoveMoney(u32 *moneyPtr, u32 toSub);
 bool8 IsEnoughForCostInVar0x8005(void);
 void SubtractMoneyFromVar0x8005(void);
-void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed);
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed);
-void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount);
-void ChangeAmountInMoneyBox(int amount);
-void DrawMoneyBox(int amount, u8 x, u8 y);
-void HideMoneyBox(void);
-void AddMoneyLabelObject(u16 x, u16 y);
-void RemoveMoneyLabelObject(void);
-u32 CalculateMoneyTextHorizontalPosition(u32 amount);
 
 #endif // GUARD_MONEY_H

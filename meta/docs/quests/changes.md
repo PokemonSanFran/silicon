@@ -61,8 +61,8 @@ Belen decides to start an entirely new restaurant in Caphe City aimed being a Co
 # Zenzu Changes✅
 
 ## ~~Let's Grab Lunch~~✅
-~~* Kai tells the Player that Doyle has no interest in working with The Tide because they're not thinking big enough~~
-~~* Kai says Doyle was recpetive to the actual idea, but wants to take the idea to a region where "things can actually get done"~~
+~~* Baiya tells the Player that Doyle has no interest in working with The Tide because they're not thinking big enough~~
+~~* Baiya says Doyle was recpetive to the actual idea, but wants to take the idea to a region where "things can actually get done"~~
 
 ## ~~RPS~~✅
 * Monty's dialogue needs to make it clear that he started this because he lost his house, but has kept on doing it because he's GOOD at making money from people

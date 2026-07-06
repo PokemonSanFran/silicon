@@ -1,10 +1,26 @@
 #ifndef GUARD_QUEST_FLAVOR_LOOKUP
 #define GUARD_QUEST_FLAVOR_LOOKUP
 
-const u8 *GetQuestDesc_PlayersAdventure();
-const u8 *GetQuestDoneDesc_PlayersAdventure();
-const u8 *GetQuestDesc_BringFruit();
-const u8 *GetQuestDesc_RabiesOutbreak();
-const u8 *GetQuestDesc_BetweenAStoneAndAHardPlace();
+const u8 *GetQuestDesc_PlayersAdventure(void);
+const u8 *GetQuestDoneDesc_PlayersAdventure(void);
+const u8 *GetQuestDesc_BringFruit(void);
+const u8 *GetQuestDesc_RabiesOutbreak(void);
+const u8 *GetQuestDesc_BetweenAStoneAndAHardPlace(void);
+const u8 *GetQuestDesc_FreshwaterEvolution(void);
+const u8 *GetQuestDesc_SmoothieCrafting(void);
+const u8 *GetQuestDesc_Hodoutunnels(void);
+const u8 *GetQuestDesc_Psyop(void);
+const u8 *GetQuestDesc_RockCollector(void);
+const u8 *GetQuestDesc_BodegaBurnout(void);
+const u8 *GetQuestDesc_GetTheBandBackTogether(void);
+const u8 *GetQuestDesc_RestaurantExpansion1(void);
+const u8 *GetQuestDesc_Freetheinnocent(void);
+const u8 *GetQuestDesc_RestoreEspuleeOutskirts(void);
+const u8 *GetQuestDesc_Improvbattling(void);
+const u8 *GetQuestDesc_Teachatrainertofish(void);
+const u8 *GetQuestDesc_Wildfirerisk(void);
+const u8 *GetQuestDesc_Hang20(void);
+const u8 *GetQuestDesc_CulturalPurity(void);
+const u8 *GetQuestDesc_HybridCulture(void);
 
 #endif // GUARD_QUEST_FLAVOR_LOOKUP

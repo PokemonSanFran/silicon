@@ -1,0 +1,243 @@
+//TeachATrainerToFish_Dialogue_
+//TeachATrainerToFish_Script_
+
+script TeachATrainerToFish_Script_HideCenterTeachTrainerFishA
+{
+    setobjectflagfromlocalid(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
+}
+
+script TeachATrainerToFish_Script_HideLakeTeachTrainerFishA
+{
+    setobjectflagfromlocalid(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+}
+
+script TeachATrainerToFish_Dialogue_PlayerExclaimShiny
+{
+    questmenu(QUEST_MENU_SET_REWARD,QUEST_TEACHATRAINERTOFISH)
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    msgbox(format("How lucky, a {STR_VAR_1}! TeachtrainerfishA will love to hear this story."),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_HAPPY)
+    closemessage
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_PlayerReactsToLie
+{
+    random(2)
+    switch (var(VAR_RESULT))
+    {
+        case 0: return
+        case 1: msgbox(format("How can they tell?!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+        case 2: msgbox(format("I can't get anything past them!"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+    }
+    closemessage
+}
+
+script TeachATrainerToFish_Dialogue_PlayerTriesToLie
+{
+    msgbox(format("…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…{PAUSE_UNTIL_PRESS}…"),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("You’re lying. I can smell it on you."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    call(TeachATrainerToFish_Dialogue_PlayerReactsToLie)
+}
+
+script TeachATrainerToFish_Dialogue_FirstInteract
+{
+    lock
+    faceplayer
+    checkitemspace(ITEM_FISHING_ROD,1)
+    goto_if_eq(VAR_RESULT,FALSE,TeachATrainerToFish_Dialogue_AskPlayerNoRoom)
+    goto_if_eq(VAR_RESULT,TRUE,TeachATrainerToFish_Dialogue_AskPlayerHasRoom)
+}
+
+script TeachATrainerToFish_Dialogue_AskPlayerNoRoom
+{
+    msgbox(format("Do you have room in that bag for something special?"),MSGBOX_YESNO,SPEAKER_TEACHTRAINERFISHA)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_PlayerTriesToLie)
+        msgbox(format("Can he smell the weight of my bag?"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_CONFUSE)
+    }
+    else
+    {
+        msgbox(format("Make some space and come talk to me."),,SPEAKER_PLAYER)
+    }
+    closemessage
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_AskPlayerHasRoom
+{
+    msgbox(format("Are you from around here?"),MSGBOX_YESNO,SPEAKER_TEACHTRAINERFISHA)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_PlayerTriesToLie)
+        msgbox(format("What do natives smell like?"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_CONFUSE)
+    }
+    else
+    {
+        msgbox(format("Well, on behalf of the fisherfolk, welcome to Resido."),,SPEAKER_TEACHTRAINERFISHA)
+    }
+    goto(TeachATrainerToFish_Script_GiveRod)
+}
+
+script TeachATrainerToFish_Script_GiveRod
+{
+    msgbox(format("I won’t even bother asking if you’re a Trainer - every Trainer worth their salt should have one of these."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    cueobjectplayer(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
+    giveitem(ITEM_FISHING_ROD,1)
+    openadventureguide(GUIDE_FISHING)
+    istweetread(TWEET_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY)
+    goto_if_eq(VAR_RESULT,TRUE,TeachATrainerToFish_Dialogue_AskPerfectCast_HasSeen)
+    goto(TeachATrainerToFish_Dialogue_AskPerfectCast_HasNotSeen)
+}
+
+script TeachATrainerToFish_Dialogue_AskPerfectCast
+{
+    msgbox(format("Have you heard of The Perfect Cast?"),MSGBOX_YESNO,SPEAKER_TEACHTRAINERFISHA)
+}
+
+script TeachATrainerToFish_Dialogue_AskPerfectCast_HasSeen
+{
+    call(TeachATrainerToFish_Dialogue_AskPerfectCast)
+    if(var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_TeachtrainerfishA_JudgesBuzzzr)
+    }
+    else
+    {
+        call(TeachATrainerToFish_Dialogue_TeachtrainerfishA_DoesntBite)
+    }
+    goto(TeachATrainerToFish_Dialogue_ExplainPerfectCast)
+}
+
+script TeachATrainerToFish_Dialogue_AskPerfectCast_HasNotSeen
+{
+    call(TeachATrainerToFish_Dialogue_AskPerfectCast)
+    if(var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_TeachtrainerfishA_DoesntBite)
+    }
+    else
+    {
+        call(TeachATrainerToFish_Dialogue_TeachtrainerfishA_JudgesBuzzzr)
+    }
+    goto(TeachATrainerToFish_Dialogue_ExplainPerfectCast)
+}
+
+script TeachATrainerToFish_Dialogue_TeachtrainerfishA_JudgesBuzzzr
+{
+    msgbox(format("I can tell exactly how much you use Buzzr."),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("You should work on that."),,SPEAKER_TEACHTRAINERFISHA)
+}
+
+script TeachATrainerToFish_Dialogue_TeachtrainerfishA_DoesntBite
+{
+    call(TeachATrainerToFish_Dialogue_PlayerTriesToLie)
+    msgbox(format("Unlike the fish, I don’t bite. You can be honest with me!"),,SPEAKER_TEACHTRAINERFISHA)
+}
+
+script TeachATrainerToFish_Dialogue_ExplainPerfectCast
+{
+    applymovement(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA,moves(face_right))
+    waitmovement(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
+    msgbox(format("The Perfect Cast... absolutely euphoric."),,SPEAKER_TEACHTRAINERFISHA,,EMOTE_HAPPY)
+    msgbox(format("It’s the greatest feeling known to man when you’re fishing and you’ve achieved complete and total flow."),,SPEAKER_TEACHTRAINERFISHA,,EMOTE_HAPPY)
+    msgbox(format("Every hook gets a Pokémon."),,SPEAKER_TEACHTRAINERFISHA,,EMOTE_HAPPY)
+    msgbox(format("Every Pokémon sparkles with a magnificent shine!"),,SPEAKER_TEACHTRAINERFISHA,,EMOTE_HAPPY)
+    msgbox(format("It’s hard work to get to the Perfect Cast. It takes many years. The fishermen in Resido have been cultivating their craft for years!"),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("I’m too old to pull it off anymore. But go, and learn from them, and experience joy."),,SPEAKER_TEACHTRAINERFISHA)
+    faceplayer
+    buffermapname(STR_VAR_1,MAP_WAJABI_LAKE)
+    msgbox(format("If you see a Shiny Pokémon while fishing, come to {STR_VAR_1} and tell me about it. I love a good story!"),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    moveobjecttocoords(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA,7,8,DIR_SOUTH)
+    startquest(QUEST_TEACHATRAINERTOFISH)
+    waitmovement(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
+    removeobject(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
+    playse(SE_EXIT)
+    waitse
+    release
+    end
+}
+
+script TeachATrainerToFish_Script_TeachTrainerFishA
+{
+    lock
+    faceplayer
+    goto_if_quest_complete(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestComplete)
+    goto_if_quest_reward(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestReward)
+    goto_if_quest_active(QUEST_TEACHATRAINERTOFISH,TeachATrainerToFish_Dialogue_QuestActive)
+}
+
+script TeachATrainerToFish_Dialogue_QuestActive
+{
+    msgbox(format("How’s your technique? Have you mastered the Perfect Cast and battled a Shiny Pokémon?"),MSGBOX_YESNO,SPEAKER_TEACHTRAINERFISHA)
+    if (var(VAR_RESULT) == YES)
+    {
+        call(TeachATrainerToFish_Dialogue_PlayerTriesToLie)
+        msgbox(format("Come tell me a story once you’ve got one for real. Nobody likes a tall tale."),,SPEAKER_TEACHTRAINERFISHA)
+    }
+    else
+    {
+        buffermapname(STR_VAR_1,MAP_WAJABI_LAKE)
+        msgbox(format("It takes some people years, sometimes decades, to see the Perfect Cast. I’m sure the fisherfolk around {STR_VAR_1} can give you some ideas."),,SPEAKER_TEACHTRAINERFISHA)
+    }
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_GiveReward
+{
+    msgbox(format("Tell me the tale."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("A Shiny {STR_VAR_1}. Wish I could have seen it myself."),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("Did you catch it?"),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("I - "),,SPEAKER_PLAYER)
+    msgbox(format("No. Don’t tell me. Keep this legendary tale for yourself, {PLAYER}."),,SPEAKER_TEACHTRAINERFISHA)
+    msgbox(format("I’m thrilled to see the next generation carrying on the craft. Take this, for humoring me."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    cueobjectplayer(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+    giveitem(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1)
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+    completequest(QUEST_TEACHATRAINERTOFISH)
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_QuestReward
+{
+    msgbox(format("I can smell it. You saw one!"),,SPEAKER_TEACHTRAINERFISHA)
+    checkitemspace(ITEM_QUEST_TEACHATRAINERTOFISH_REWARD,1)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        goto(TeachATrainerToFish_Dialogue_GiveReward)
+    }
+
+    msgbox(format("Come back when your bag has some space."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    release
+    end
+}
+
+script TeachATrainerToFish_Dialogue_QuestComplete
+{
+    bufferspeciesname(STR_VAR_1,VAR_QUEST_TEACHATRAINERTOFISH)
+    msgbox(format("I think about your {STR_VAR_1} all the time. I hope fishing brings you as much joy as it does me."),,SPEAKER_TEACHTRAINERFISHA)
+    closemessage
+    applymovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA,moves(face_original_direction))
+    waitmovement(LOCALID_LAKE_WAJABI_TEACHTRAINERFISHA)
+    release
+    end
+}
+

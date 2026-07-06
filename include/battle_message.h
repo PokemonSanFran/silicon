@@ -101,6 +101,7 @@
 #define B_BUFF_ABILITY                      9
 #define B_BUFF_ITEM                         10
 #define B_BUFF_MON_NICK_WITH_PREFIX_LOWER   11 // lowercase prefix
+#define B_BUFF_ITEM_PLURAL                  12
 
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
@@ -198,7 +199,18 @@
     textVar[3] = (item & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
 }
+// Start Give Native Item
+#define PREPARE_ITEM_PLURAL_BUFFER(textVar, item, amount)       \
+{                                                               \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
+    textVar[1] = B_BUFF_ITEM_PLURAL;                            \
+    textVar[2] = item;                                          \
+    textVar[3] = (item & 0xFF00) >> 8;                          \
+    textVar[4] = amount;                                        \
+    textVar[5] = B_BUFF_EOS;                                    \
+}
 
+// End Give Native Item
 #define PREPARE_SPECIES_BUFFER(textVar, species)                \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
@@ -250,11 +262,11 @@ struct BattleMsgData
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
-void BufferStringBattle(enum StringID stringID, u32 battler);
+void BufferStringBattle(enum StringID stringID, enum BattlerId battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
-void SetPpNumbersPaletteInMoveSelection(u32 battler);
+void SetPpNumbersPaletteInMoveSelection(enum BattlerId battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
@@ -276,6 +288,7 @@ extern const u8 gText_WhatWillWallyDo[];
 extern const u8 gText_LinkStandby[];
 extern const u8 gText_BattleMenu[];
 extern const u8 gText_SafariZoneMenu[];
+extern const u8 gText_SafariZoneMenuFrlg[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_MoveInterfacePpType[];
@@ -333,8 +346,6 @@ extern const u8 gText_EmptyString3[];
 extern const u8 gText_RecordBattleToPass[];
 extern const u8 gText_BattleRecordedOnPass[];
 extern const u8 gText_BattleTourney[];
-
-extern const u16 gMissStringIds[];
 extern const u16 gStatUpStringIds[];
 extern const u16 gStatDownStringIds[];
 

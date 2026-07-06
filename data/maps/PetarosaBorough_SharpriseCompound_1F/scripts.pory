@@ -2,8 +2,8 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 
 mapscripts PetarosaBorough_SharpriseCompound_1F_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_STORYLINE_STATE, STORY_WON_FINALS: BeingChampionIsHard_TimeSkip //PSF TODO figure out how to go directly to black
-            VAR_STORYLINE_STATE, STORY_MORNING_AFTER_TIMETRAVEL: YouRealizeTheyreEvilRight_NoIdea_Dialogue 
+        VAR_STORYLINE_STATE, STORY_WON_FINALS: BeingChampionIsHard_TimeSkip
+            VAR_STORYLINE_STATE, STORY_MORNING_AFTER_TIMETRAVEL: YouRealizeTheyreEvilRight_NoIdea_Dialogue
     ]
     MAP_SCRIPT_ON_TRANSITION {
         call(BeingChampionIsHard_ObjectCleanUp_Script)

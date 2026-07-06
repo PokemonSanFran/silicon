@@ -21,7 +21,7 @@ script SharpriseSpire_Elevator_AttendantMissing_Dialogue {
             lock
                 applymovement(PLAYER,Common_Movement_FaceLeft)
                 waitmovement(0)
-                msgbox(gText_SharpriseSpire_Elevator_TheAttendantIsGone,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+                msgbox(format("The attendant is gone...but I don't think the elevator works without their keycard. Guess I have to take the stairs."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
                 closemessage
 
                 release
@@ -61,7 +61,6 @@ script SharpriseSpire_ElevatorAttendant_PickFloor_Script{
         }
 }
 
-
 script SharpriseSpire_ElevatorAttendant_Script {
     lock
         faceplayer
@@ -71,7 +70,7 @@ script SharpriseSpire_ElevatorAttendant_Script {
         }
     copyvar(VAR_0x8005,VAR_TOWER_FLOOR)
 
-        special(ShowSharpriseSpireElevatorFloorSelect) // PSF TODO Figure out why the floor does not display correctly when you walk from 2F to 1F and then use the elevator
+        special(ShowSharpriseSpireElevatorFloorSelect)
         message(gText_WhichFloorWouldYouLike)
         waitmessage
         setvar(VAR_0x8004,0) //don't know what purpose this serves
@@ -162,7 +161,6 @@ script SharpriseSpireElevator_EventScript_MoveElevator{
         waitmovement(0)
         waitse
         special(MoveElevator)
-        waitstate
         setflag(FLAG_TEMP_2)
         return
 }

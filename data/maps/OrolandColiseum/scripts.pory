@@ -1,6 +1,4 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const EMRYS = 1
-const FLAG_HIDE_EMRYS = FLAG_TEMP_1
 
 mapscripts OrolandColiseum_MapScripts {
 
@@ -8,7 +6,7 @@ mapscripts OrolandColiseum_MapScripts {
         call(Quest_BuildingAnExhibit_HideLeader_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-        //FLAG_VISITED_OROLAND_COLISEUM, FALSE: Generic_Mappreview
+        FLAG_VISITED_OROLAND_COLISEUM, FALSE: Generic_Mappreview
 ]
 
 }

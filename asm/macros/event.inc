@@ -1,6 +1,11 @@
 	.set ALLOCATE_SCRIPT_CMD_TABLE, 0
 	.include "data/script_cmd_table.inc"
 
+	.set ALLOCATE_SPECIAL_TABLE, 0
+	.include "data/specials.inc"
+
+	.set _last_implicit_waitstate, -1
+
 	@ Does nothing.
 	.macro nop
 	.byte SCR_OP_NOP
@@ -58,6 +63,8 @@
 	STD_FIND_ITEM = 1
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
+	STD_PUT_ITEM_AWAY = 11
+	STD_RECEIVED_ITEM = 12
 
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
@@ -263,12 +270,15 @@
 	@ 'callnative's should set 'requests_effects=1' if the native
 	@ contains a call to 'Script_RequestEffects', which allows them
 	@ to be analyzed by 'RunScriptImmediatelyUntilEffect'.
-	.macro callnative func:req, requests_effects=0
+	.macro callnative func:req, requests_effects=0, waitstate=0
 	.byte SCR_OP_CALLNATIVE
 	.if \requests_effects == 0
 	.4byte \func
 	.else
 	.4byte \func + ROM_SIZE
+	.endif
+	.if \waitstate
+	waitstate implicit=1
 	.endif
 	.endm
 
@@ -286,6 +296,9 @@
 	.macro special function:req
 	.byte SCR_OP_SPECIAL
 	.2byte SPECIAL_\function
+	.if SPECIAL_WAITSTATE_\function
+	waitstate implicit=1
+	.endif
 	.endm
 
 	@ Calls a function listed in the table in data/specials.inc.
@@ -294,12 +307,25 @@
 	.byte SCR_OP_SPECIALVAR
 	.2byte \output
 	.2byte SPECIAL_\function
+	.if SPECIAL_WAITSTATE_\function
+	waitstate implicit=1
+	.endif
 	.endm
 
 	@ Blocks script execution until a command or C code manually unblocks it. Generally used with specific
 	@ commands and specials. Calling ScriptContext_Enable for instance will allow execution to continue.
-	.macro waitstate
+	@
+	@ implicit is set when a waitstate is generated as part of another command (e.g. special)
+	@ if an implicit waitstate is immediately followed by another waitstate, a warning is raised
+	.macro waitstate, implicit=0
+	.if _last_implicit_waitstate == .
+	.warning "explicit waitstate follows implicit waitstate, ignoring"
+	.else
 	.byte SCR_OP_WAITSTATE
+	.endif
+	.if \implicit
+	.set _last_implicit_waitstate, .
+	.endif
 	.endm
 
 	@ Blocks script execution for frames. (Pokemon Emerald runs at just shy of 60 frames per second.)
@@ -644,6 +670,10 @@
 		.endif
 	.endm
 
+	.macro waitmovementall
+	callnative Script_waitmovementall, requests_effects=1
+	.endm
+
 	@ Attempts to despawn the specified (localId) object on the specified map.
 	@ It also sets the object's visibility flag if it has one.
 	@ If no map is specified, then the current map is used.
@@ -726,7 +756,7 @@
 	OBJ_ID_NONE = 0
 
 	@ Configures the arguments for a trainer battle, then jumps to the appropriate script in scripts/trainer_battle.inc
-	.macro trainerbattle type:req localIdA:req, trainer_a:req, intro_text_a:req, lose_text_a:req, event_script_a:req, localIdB:req, trainer_b:req, intro_text_b:req, lose_text_b:req, event_script_b:req, victory_text:req, cannot_battle:req, isDouble:req, playMusicA:req, playMusicB:req, isRematch:req
+	.macro trainerbattle type:req localIdA:req, trainer_a:req, intro_text_a:req, lose_text_a:req, event_script_a:req, localIdB:req, trainer_b:req, intro_text_b:req, lose_text_b:req, event_script_b:req, victory_text:req, cannot_battle:req, isDouble:req, playMusicA:req, playMusicB:req, isRematch:req, rival_battle_flags=0
 	.byte SCR_OP_TRAINERBATTLE
 	.set trainerbattle_flags, 0
 	.ifgt \isDouble; .set trainerbattle_flags, trainerbattle_flags | (1 << 0); .endif
@@ -747,6 +777,7 @@
 	.4byte \event_script_b      @ retAddrB
 	.4byte \victory_text        @ victoryText
 	.4byte \cannot_battle       @ cannotBattle
+	.byte \rival_battle_flags	@ rivalBattleFlags
 	.endm
 
 	NO_MUSIC = FALSE
@@ -796,6 +827,7 @@
     .macro trainerbattle_continue_after_lose trainer:req, lose_text:req
     setflag B_FLAG_NO_WHITEOUT
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+    clearflag B_FLAG_NO_WHITEOUT
     .endm
 	@ End siliconMerge
 
@@ -803,6 +835,11 @@
 	@ Takes two trainers and defeat text for each
 	.macro trainerbattle_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req
 	trainerbattle TRAINER_BATTLE_TWO_TRAINERS_NO_INTRO, OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	.endm
+
+	@ Starts a trainer battle with victory text if the player loses. If flags is nonzero, the player will be healed after battle (and its assumed to be the tutorial battle)
+	.macro trainerbattle_earlyrival trainer:req, flags:req, lose_text:req, victory_text:req
+	trainerbattle TRAINER_BATTLE_EARLY_RIVAL, OBJ_ID_NONE, \trainer, NULL, \lose_text, NULL, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, \victory_text, NULL, FALSE, TRUE, FALSE, FALSE, \flags
 	.endm
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by the scripts in trainer_battle.inc, which
@@ -1012,6 +1049,23 @@
 	.byte \textTop
 	.endm
 
+	@ Sets dest to a species generated by one of the RandomSpeciesGeneratorOptions entries.
+	@ arg1 and arg2 are optional values forwarded to the option's filterFunc.
+	.macro getrandomspecies dest:req, option:req, arg1=0xFFFF, arg2=0xFFFF
+	callnative ScrCmd_getrandomspecies, requests_effects=1
+	.2byte \dest
+	.2byte \option
+	.2byte \arg1
+	.2byte \arg2
+	.endm
+
+	@ Sets dest to an item generated by one of the RandomItemGeneratorOptions entries.
+	.macro getrandomitem dest:req, option:req
+	callnative ScrCmd_getrandomitem, requests_effects=1
+	.2byte \dest
+	.2byte \option
+	.endm
+
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel
@@ -1023,9 +1077,9 @@
 	.2byte \level
 	.ifnb \item; .set givemon_flags, givemon_flags | (1 << 0); .endif
 	.ifnb \ball; .set givemon_flags, givemon_flags | (1 << 1); .endif
-	.ifnb \nature; .set givemon_flags, givemon_flags | (1 << 2); .endif
+	.set givemon_flags, givemon_flags | (1 << 2);
 	.ifnb \abilityNum; .set givemon_flags, givemon_flags | (1 << 3); .endif
-	.ifnb \gender; .set givemon_flags, givemon_flags | (1 << 4); .endif
+	.set givemon_flags, givemon_flags | (1 << 4);
 	.ifnb \hpEv; .set givemon_flags, givemon_flags | (1 << 5); .endif
 	.ifnb \atkEv; .set givemon_flags, givemon_flags | (1 << 6); .endif
 	.ifnb \defEv; .set givemon_flags, givemon_flags | (1 << 7); .endif
@@ -1049,9 +1103,9 @@
 	.4byte givemon_flags
 	.ifnb \item; .2byte \item; .endif
 	.ifnb \ball; .2byte \ball; .endif
-	.ifnb \nature; .2byte \nature; .endif
+	.ifnb \nature; .2byte \nature; .else; .2byte NATURE_MAY_SYNCHRONIZE; .endif
 	.ifnb \abilityNum; .2byte \abilityNum; .endif
-	.ifnb \gender; .2byte \gender; .endif
+	.ifnb \gender; .2byte \gender; .else; .2byte MON_GENDER_MAY_CUTE_CHARM; .endif
 	.ifnb \hpEv; .2byte \hpEv; .endif
 	.ifnb \atkEv; .2byte \atkEv; .endif
 	.ifnb \defEv; .2byte \defEv; .endif
@@ -1244,7 +1298,7 @@
 
 	@ Opens the Pokemart system, offering the specified products for sale.
 	@ Products should be a list of .2byte item values preceded by an .align 2
-	.macro pokemart products:req
+	.macro pokemart products=Pokemart_DefaultItemList
 	.byte SCR_OP_POKEMART
 	.4byte \products
 	.endm
@@ -1276,11 +1330,14 @@
 	.endm
 
 	@ Sets a berry tree's berry and growth stage. treeId is any BERRY_TREE_* constant (an index into berryTrees in SaveBlock1),
-	@ berry is any ITEM_TO_BERRY(ITEM_BERRY_NAME) value, and growthStage is any BERRY_STAGE_* constant.
-	.macro setberrytree treeId:req, berry:req, growthStage:req
+	@ berryId is any BERRY_ID_X value, and growthStage is any BERRY_STAGE_* constant.
+	.macro setberrytree treeId:req, berryId:req, growthStage:req
+	.if \berryId == 0 || \berryId > NUM_BERRIES
+		.error "setberrytree must use a valid berry index"
+	.endif
 	.byte SCR_OP_SETBERRYTREE
 	.byte \treeId
-	.byte \berry
+	.byte \berryId
 	.byte \growthStage
 	.endm
 
@@ -1311,19 +1368,33 @@
 	.endm
 
 	@ Adds value to the player's money. If adding 'value' money would exceed MAX_MONEY, the player's money is set to MAX_MONEY.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro addmoney value:req, disable=0
+	@ start siliconBpBox
+	.macro addmoney value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=0, change=\value, subtract=FALSE
+	updatemoneybox
+	.endif
 	.byte SCR_OP_ADDMONEY
 	.4byte \value
-	.byte \disable
+	.if \update == TRUE
+	delay 30
+	updatemoneybox
+	.endif
 	.endm
 
 	@ Subtracts value from the player's money. If the player has less than 'value' money, their money is set to 0.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro removemoney value:req, disable=0
+	.macro removemoney value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=0, change=\value, subtract=TRUE
+	updatemoneybox
+	.endif
 	.byte SCR_OP_REMOVEMONEY
 	.4byte \value
-	.byte \disable
+	.if \update == TRUE
+	delay 30
+	updatemoneybox
+	.endif
+	@ end siliconBpBox
 	.endm
 
 	@ Checks if the player has money >= value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
@@ -1443,6 +1514,18 @@
 	.2byte \y
 	.2byte \metatileId
 	.2byte \impassable
+	.endm
+
+	@ Set a metatile at all tiles within the bounds [xmin,ymin] to [xmax,ymax] inclusive with desired elevation
+	.macro setmetatileinrange xmin:req, ymin:req, xmax:req, ymax:req, metatileId:req, collision=FALSE, elevation=0xFF
+	callnative NativeFunc_SetMetatileInRange
+	.byte \xmin
+	.byte \ymin
+	.byte \xmax
+	.byte \ymax
+	.2byte \metatileId
+	.byte \collision
+	.byte \elevation
 	.endm
 
 	@ Queues a weather change to the default weather for the map.
@@ -1565,18 +1648,36 @@
 
 	@ Gives 'count' coins to the player, up to a total of MAX_COINS.
 	@ If the player already has MAX_COINS then VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
-	.macro addcoins count:req
+	@ start siliconBpBox
+	.macro addcoins count:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=1, change=\count, subtract=FALSE
+	updatecoinsbox 0, 0
+	.endif
 	.byte SCR_OP_ADDCOINS
 	.2byte \count
+	.if \update == TRUE
+	delay 30
+	updatecoinsbox 0, 0
+	.endif
 	.endm
 
 	@ Takes 'count' coins from the player.
 	@ If the player has fewer than 'count' coins then no coins are taken and VAR_RESULT is set to TRUE.
 	@ Otherwise VAR_RESULT is set to FALSE.
-	.macro removecoins count:req
+	.macro removecoins count:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=1, change=\count, subtract=TRUE
+	updatecoinsbox 0, 0
+	.endif
 	.byte SCR_OP_REMOVECOINS
 	.2byte \count
+	.if \update == TRUE
+	delay 30
+	updatecoinsbox 0, 0
+	.endif
 	.endm
+	@ end siliconBpBox
 
 	@ Prepares to start a wild battle against a 'species' at 'level' holding 'item'.
 	@ If 'species2' is something other than SPECIES_NONE, then the battle is a double battle
@@ -1695,123 +1796,6 @@
 	stringvar \stringVarId
 	.2byte \box
 	.endm
-
-
-	@ Start siliconMerge
-	@ Allows to setup wild battles with a customized Pokémon. It should be used before calling dowildbattle.
-    .macro setcustomwildmon species:req, level:req, item, ball, nature, abilityNum, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
-    .byte SCR_OP_SETCUSTOMWILDMON
-    .2byte \species
-    .byte \level
-    .ifb \item
-        .2byte ITEM_NONE
-    .else
-        .2byte \item
-    .endif
-    .ifb \ball
-        .byte 0
-    .else
-        .byte \ball
-    .endif
-    .ifb \nature
-        .byte NUM_NATURES
-    .else
-        .byte \nature
-    .endif
-    .ifb \abilityNum
-        .byte 3
-    .else
-        .byte \abilityNum
-    .endif
-    @evs
-    .ifb \hpEv
-        .byte 0
-    .else
-        .byte \hpEv
-    .endif
-    .ifb \atkEv
-        .byte 0
-    .else
-        .byte \atkEv
-    .endif
-    .ifb \defEv
-        .byte 0
-    .else
-        .byte \defEv
-    .endif
-    .ifb \speedEv
-        .byte 0
-    .else
-        .byte \speedEv
-    .endif
-    .ifb \spAtkEv
-        .byte 0
-    .else
-        .byte \spAtkEv
-    .endif
-    .ifb \spDefEv
-        .byte 0
-    .else
-        .byte \spDefEv
-    .endif
-    @ivs
-    .ifb \hpIv
-        .byte 32
-    .else
-        .byte \hpIv
-    .endif
-    .ifb \atkIv
-        .byte 32
-    .else
-        .byte \atkIv
-    .endif
-    .ifb \defIv
-        .byte 32
-    .else
-        .byte \defIv
-    .endif
-    .ifb \speedIv
-        .byte 32
-    .else
-        .byte \speedIv
-    .endif
-    .ifb \spAtkIv
-        .byte 32
-    .else
-        .byte \spAtkIv
-    .endif
-    .ifb \spDefIv
-        .byte 32
-    .else
-        .byte \spDefIv
-    .endif
-    .ifb \move1
-        .2byte 0
-    .else
-        .2byte \move1
-    .endif
-    .ifb \move2
-        .2byte 0
-    .else
-        .2byte \move2
-    .endif
-    .ifb \move3
-        .2byte 0
-    .else
-        .2byte \move3
-    .endif
-    .ifb \move4
-        .2byte 0
-    .else
-        .2byte \move4
-    .endif
-    .ifb \isShiny
-        .byte 0
-    .else
-        .byte \isShiny
-    .endif
-    .endm
-	@ End siliconMerge
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro textcolor color:req
@@ -2048,6 +2032,12 @@
 	.2byte \id
 	.endm
 
+	@ Gets the width of the specified message in the Braille font and sets the result to VAR_0x8004.
+	.macro getbraillestringwidth msg:req
+	.byte SCR_OP_GETBRAILLESTRINGWIDTH
+	.4byte \msg
+	.endm
+
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
@@ -2231,6 +2221,13 @@
 	callstd STD_FIND_ITEM
 	.endm
 
+	@ Prints the message "{PLAYER} put the {ITEM} in the {POCKET}." The item name is pluralized, if applicable.
+	.macro putitemaway item:req, amount=1
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	callstd STD_PUT_ITEM_AWAY
+	.endm
+
 	@ Equivalent to giveitem but for a single decoration.
 	.macro givedecoration decoration:req
 	setorcopyvar VAR_0x8000, \decoration
@@ -2270,6 +2267,11 @@
 
 	.macro setdynamicaifunc func:req
 	callnative ScriptSetDynamicAiFunc, requests_effects=1
+	.4byte \func
+	.endm
+
+	.macro setdynamicswitchaifunc func:req
+	callnative ScriptSetDynamicAiSwitchFunc, requests_effects=1
 	.4byte \func
 	.endm
 
@@ -2334,18 +2336,6 @@
 	settotemboost \battler, 0, 0, 0, 0, 0, 0, 2
 	.endm
 
-	@ Attempts to trigger a special evolution method in the overworld.
-	@ There may be other conditions required which are coded for in GetEvolutionTargetSpecies.
-	@ EX: tryspecialevo EVO_WATER_SCROLL, FALSE, FALSE triggers Kubfu's EVO_WATER_SCROLL evolution
-	@ 	  method, cannot be cancelled in the evolution scene, and will only evolve one Kubfu if there
-	@	  are multiple in the player's party.
-	.macro tryspecialevo evoMethod:req, canStopEvo=TRUE, tryMultiple=TRUE
-	setvar VAR_0x8000, \evoMethod
-	setvar VAR_0x8001, \canStopEvo
-	setvar VAR_0x8002, \tryMultiple
-	special TrySpecialScriptEvolution
-	.endm
-
     @ Start quests
 	.macro questmenu case:req, questId:req
     .byte SCR_OP_QUESTMENU
@@ -2377,7 +2367,9 @@
     .byte SCR_OP_QUESTOVERWORLD
     .byte QUEST_MENU_SET_ACTIVE
     .byte \quest
-    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+    waitstate
+    setvar VAR_ADVENTURE_GUIDE_TO_OPEN, GUIDE_QUESTS
+    call RunAdventureGuideScript
 	.endm
 
 @ Completes the specified quest.
@@ -2387,7 +2379,7 @@
     .byte SCR_OP_QUESTOVERWORLD
     .byte QUEST_MENU_COMPLETE_QUEST
     .byte \quest
-    delay QUEST_OVERWORLD_ANIMATION_DISAPPEAR_STOP
+    waitstate
 	.endm
 
 .macro unlockquest quest:req
@@ -2646,6 +2638,7 @@
     @ shows that tweet on the screeen.
     @ after a button press, hides the tweet
     .macro showtweet tweetId:req
+    closemessage
     buzzr MARK_READ \tweetId
     setflag FLAG_SYS_APP_BUZZR_GET
 	buzzr SHOW_TWEET \tweetId
@@ -2697,6 +2690,7 @@
 	@ Start siliconMerge
     @ Marks the beginning of a cutscene and skips cutscne if GAME_OPTION_CUTSCENE_SKIP is enabled
     .macro startcutscene ID:req
+    hidewaypoint
     setvar VAR_CUTSCENE_SKIP, \ID
     specialvar VAR_RESULT,ShouldSkipCutscene
     compare VAR_RESULT, 0
@@ -2705,6 +2699,7 @@
 
     @ Resets VAR_CUTSCENE_SKIP to its default value
     .macro endcutscene
+    showwaypoint
     special ResetCutsceneStatus
     .endm
 
@@ -2977,6 +2972,12 @@
     .endm
 	@ End siliconMerge
 
+	@ Sets the hp to 0 for the Pokémon in \slot.
+	.macro setko slot:req
+	callnative Script_SetKO, requests_effects=1
+	.2byte \slot
+	.endm
+
 	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
 	.macro checkteratype slot:req
 	callnative CheckTeraType, requests_effects=1
@@ -3005,9 +3006,9 @@
 	.endm
 
 	@ Buffers the nickname of the first alive party member.
-	.macro bufferlivemonnickname out:req
+	.macro bufferlivemonnickname stringVarId:req
 	callnative BufferFirstLiveMonNickname, requests_effects=1
-	.byte \out
+	stringvar \stringVarId
 	.endm
 
 	@ Executes Follower actions
@@ -3071,31 +3072,36 @@
     .2byte \dest
 	.endm
 
-    .macro askplayermon askText:req, denyText:req, notEnoughText:req, speakerId:req
-	special BufferMonNickname
-	msgbox \askText, MSGBOX_YESNO, \speakerId
+    .macro askplayermon askText:req, denyText:req, notEnoughText:req, speakerId:req, partyCheck=FALSE
+    special BufferMonNickname
+    msgbox \askText, MSGBOX_YESNO, \speakerId
+    copyvar VAR_TEMP_3,VAR_RESULT
     goto_if_eq VAR_RESULT, NO, 1f
-	special HasEnoughMonsForDoubleBattle
+    .if \partyCheck
+    compare VAR_0x8004, PC_MON_CHOSEN
+    goto_if_eq 4f
+    special HasEnoughMonsForDoubleBattle
     goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, 2f
-	special DeleteChosenPartyMon
+4:
+    .endif
+    special DeleteChosenPartyMon
     goto 3f
 
 1:
-	msgbox \denyText, , \speakerId
-	closemessage
-	release
+    msgbox \denyText, , \speakerId
+    closemessage
+    release
     end
 
 2:
-	msgbox \notEnoughText, , \speakerId
-	closemessage
-	release
+    msgbox \notEnoughText, , \speakerId
+    closemessage
+    release
     end
 3:
     .endm
 
-    .macro faderemoveobject objectId:req, movement:req
-    applymovement \objectId \movement
+    .macro faderemoveobject objectId:req
     fadescreen FADE_TO_BLACK
     removeobject \objectId
     fadescreen FADE_FROM_BLACK
@@ -3245,7 +3251,6 @@
 	.macro checkspecies speciesId:req, mode=NO_PARTY_SCREEN
 	.if \mode == OPEN_PARTY_SCREEN
 		special ChoosePartyMon
-		waitstate
 		callnative Scrcmd_checkspecies_choose, requests_effects=1
 		.2byte \speciesId
 	.else
@@ -3266,13 +3271,6 @@
 	.endm
 
 	@ Start siliconMerge
-    @ Show a map preview for the current map with the WEATHER type.
-    .macro mappreview
-    fadescreen FADE_TO_BLACK
-    callnative Script_MapPreview
-    waitstate
-    .endm
-
     @ Show the current map's name popup.
     .macro mappopup
     callnative Script_MapPopUp
@@ -3402,6 +3400,92 @@
 	.endm
 	@ End variableMoney
 
+	.macro setmultitrainerbattle trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, partnerId:req
+	callnative SetMultiTrainerBattle
+	.2byte \trainer_a
+	.4byte \lose_text_a
+	.2byte \trainer_b
+	.4byte \lose_text_b
+	.2byte \partnerId
+	.endm
+
+	@ facility version of `trainerbattle` macro. Used in Battle Pyramid and Trainer Hill
+	.macro facilitytrainerbattle facility:req
+	callnative FacilityTrainerBattle
+	.byte \facility
+	.endm
+
+	@ immediately starts a battle of the given facility
+	.macro dofacilitytrainerbattle facility:req
+	callnative DoFacilityTrainerBattle
+	.byte \facility
+	.endm
+
+	.macro ingame_trade tradeId:req wantTradeMsg:req, declineTradeJump:req, wrongMonJump:req, tradeCompleteMsg:req
+	setvar VAR_0x8005, \tradeId
+	specialvar VAR_0x8009, GetInGameTradeSpeciesInfo
+	msgbox \wantTradeMsg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, \declineTradeJump
+	chooseboxmon SELECT_PC_MON_TRADE
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, \declineTradeJump
+	specialvar VAR_0x800B, GetTradeSpecies
+	goto_if_ne VAR_0x800B, VAR_0x8009, \wrongMonJump
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox \tradeCompleteMsg, MSGBOX_DEFAULT
+	.endm
+
+	.macro move_tutor moveId:req, wantTeachingMsg:req, monSelectMsg:req, declinedJmp:req, taughtJmp:req, flagId=0
+	.if \flagId
+		goto_if_set \flagId, \taughtJmp
+	.endif
+	msgbox \wantTeachingMsg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, \declinedJmp
+	.if \flagId
+		call MoveTutor_EventScript_CanOnlyBeLearnedOnce
+		goto_if_eq VAR_RESULT, NO, \declinedJmp
+	.endif
+	msgbox \monSelectMsg, MSGBOX_DEFAULT
+	setvar VAR_0x8005, \moveId
+	call MoveTutor_EventScript_OpenBox
+	goto_if_eq VAR_RESULT, FALSE, \declinedJmp
+	.if \flagId
+		setflag \flagId
+	.endif
+	goto \taughtJmp
+	.endm
+
+	.macro chooseboxmon selectionType=SELECT_PC_MON_NORMAL
+	callnative ChooseBoxMon
+	.byte \selectionType
+	.endm
+
+	@ picks the first mon in party matching the given selectionType (enum PcMonSelectionType)
+	.macro pickpartymon selectionType:req
+	callnative PickPartyMon
+	.byte \selectionType
+	.endm
+
+	.macro mappreview duration:req
+	callnative MapPreviewScript
+	.2byte \duration
+	.endm
+
+	.macro tryspecialevo evoArg:req, canStopEvo=TRUE, tryMultiple=FALSE
+	setvar VAR_0x8000, \canStopEvo
+	setvar VAR_0x8005, \evoArg
+	.if \tryMultiple
+		setvar VAR_RESULT, 0
+		setvar VAR_0x8006, 0
+		callnative Script_TriggerMultipleEvolutions
+	.else
+		pickpartymon SELECT_PC_MON_EVOLUTION
+		callnative Script_TriggerUniqueEvolution
+	.endif
+	.endm
+
 @ Follower NPCs
 
 	@ Sets an existing NPC up to follow the player.
@@ -3426,7 +3510,7 @@
 		.2byte \battlePartner
 		.4byte \script
 		updatefollowingmon
-        1:
+		1:
 	.else
 		.error "setfollowernpc unavailable with FNPC_ENABLE_NPC_FOLLOWERS defined as FALSE"
 	.endif
@@ -3488,6 +3572,12 @@
 	.2byte \battlePartner
 	.endm
 
+    @ Start phenomenon
+    .macro setphenomenondata
+    .byte SCR_OP_PHENOMENON_DATA
+    .endm
+    @ End phenomenon
+
     @ Start adventureGuide
 	.macro openadventureguide guide:req
     setvar VAR_ADVENTURE_GUIDE_TO_OPEN, \guide
@@ -3495,12 +3585,69 @@
 	.endm
     @ End adventureGuide
 
+    @ Start trainerBattles
+	.macro cleargymtrainersandgetbadge gym:req
+    setvar VAR_CURRENT_GYM, \gym
+    callnative ClearGymTrainer_Script
+    .endm
+    @ end trainerBattles
+
+	@ Overworld Waypoint Macro - Hide Waypoint Sprite
+	.macro hidewaypoint
+	callnative HideOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Show Waypoint Sprite
+	.macro showwaypoint
+	callnative ShowOWWaypointArrow
+	.endm
+
+	@ Overworld Waypoint Macro - Toggle Waypoint Sprite
+	.macro togglewaypoint
+	callnative ToggleOWWaypointArrow
+	.endm
+
+	@ Start shopMenu
+	.macro openprestoterminal
+	fadescreen FADE_TO_BLACK
+	callnative OpenPrestoTerminalWithinScript
+	waitstate
+	.endm
+
+	.macro openpokemart products:req
+	callnative OpenPokeMartWithinScript
+	.4byte \products
+	waitstate
+	.endm
+	@ End shopMenu
+
+	@ Start monSummary
+	.macro editmonivs slot=VAR_0x8004
+	callnative MonSummary_EditMonIVs
+	.2byte \slot
+	.endm
+	@ End monSummary
+
 	@ Manually buffer a string as the speaker's name for namebox.
 	@ The next shown message/msgbox will include a namebox, if the provided string is not NULL.
 	@ An SP_NAME_* constant can also be used, it'll take the name from gSpeakerNamesTable instead.
 	.macro setspeaker name:req
 	callnative SetSpeaker
 	.4byte \name
+	.endm
+
+	@ Gives a random berry between the index ranges
+	.macro giverandomberry loBerry:req, hiBerry:req
+	.if \loBerry == 0 || \loBerry > NUM_BERRIES
+		.error "giverandomberry must use a valid berry index for first argument"
+	.endif
+	.if \hiBerry == 0 || \hiBerry > NUM_BERRIES
+		.error "giverandomberry must use a valid berry index for second argument"
+	.endif
+	callnative Script_GiveRandomBerry
+	.byte \loBerry
+	.byte \hiBerry
+	giveitem VAR_RESULT
 	.endm
 
 @ VS Seeker
@@ -3515,14 +3662,169 @@
 	.2byte \state
 	.endm
 
-	@ Retrieves the move relearner state and stores it in the specified var
-	.macro getmoverelearnerstate varId:req
-	callnative ScrCmd_getmoverelearnerstate, requests_effects=1
-	.4byte \varId
+@ Start pathfinder
+  @ Creates a movement script to the given coords by using Weighted A*.
+	@ This is meant to be used to remove branching in scripts,
+	@ since the algorithm can be slow.
+	.macro moveobjecttocoords localId:req, x:req, y:req, facingDirection:req, speed=1, maxnodes=256
+	callnative ScrCmd_moveobjecttocoords
+	.2byte \localId
+	.2byte \x
+	.2byte \y
+	.byte \facingDirection
+	.byte \speed
+	.4byte \maxnodes
 	.endm
 
-	@ Execute script if bag has TMs and/or HMs
-	.macro istmrelearneractive destination:req
-	callnative ScrCmd_istmrelearneractive, requests_effects=1
-	.4byte \destination
+	@ Creates a movement script for approaching the given object by using Weighted A*.
+	@ This is meant to be used to remove branching in scripts,
+	@ since the algorithm can be slow.
+	.macro approachobject localId:req, targetLocalId:req, facingDirection:req, approachDirection:req, speed=1, maxnodes=256
+	callnative ScrCmd_approachobject
+	.2byte \localId
+	.2byte \targetLocalId
+	.byte \facingDirection
+	.byte \approachDirection
+	.byte \speed
+	.4byte \maxnodes
 	.endm
+@ End pathfinder
+@ Start setObjectFlag
+    .macro setobjectflagfromlocalid localId:req
+	.byte SCR_OP_SETOBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+
+    .macro clearobjectflagfromlocalid localId:req
+	.byte SCR_OP_CLEAROBJECTFLAGFROMLOCALID
+	.2byte \localId
+	.endm
+@ End setObjectFlag
+
+@ Start fadeRemoveLastTalked
+    .macro fadeandremovelasttalked
+    fadescreenswapbuffers FADE_TO_BLACK
+    removeobject VAR_LAST_TALKED
+    fadescreenswapbuffers FADE_FROM_BLACK
+    .endm
+@ End fadeRemoveLastTalked
+
+	@ Sets a starting status for the next battle. Can be stacked.
+	.macro setstartingstatus status:req
+	callnative ScrCmd_setstartingstatus
+	.byte \status
+	.endm
+
+	@ Makes the player and specified (localId) object face one another.
+	.macro facetogether localIdOne=LOCALID_PLAYER, localIdTwo=VAR_LAST_TALKED
+	callnative ScriptFaceEachOther, requests_effects=1
+	.2byte \localIdOne
+	.2byte \localIdTwo
+	.endm
+
+	@ Saves the species of a specified (localId) object, or SPECIES_NONE if one is not found.
+	.macro getoverworldwildencounterspecies var:req, localId=VAR_LAST_TALKED
+	callnative SetOverworldObjectSpecies, requests_effects=1
+	.2byte \var
+	.2byte \localId
+	.endm
+
+	@ Starts an Overworld Wild Encounter with a specified (localId) object, if possible.
+	.macro tryoverworldwildencounter localId=VAR_LAST_TALKED
+	callnative StartWildBattleWithOWE, requests_effects=1
+	.2byte \localId
+	.endm
+
+	@ Start a scripted approach for a specified (localId) overworld wild encounter towards the player.
+	.macro overworldwildencounterapproach localId=VAR_LAST_TALKED
+	callnative OWEApproachForBattle, requests_effects=1
+	.2byte \localId
+	.endm
+
+@ FRLG
+
+
+	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_RG_OBTAIN_KEY_ITEM).
+	@ It then prints the message shown by using putitemaway.
+	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
+	loadword 0, \msg
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	setorcopyvar VAR_0x8002, \fanfare
+	callstd STD_RECEIVED_ITEM
+	.endm
+
+	@ Adds the specified item to the bag, then prints a message with fanfare. See description of msgreceiveditem.
+	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
+	additem \item, \amount
+	msgreceiveditem \msg, \item, \amount, \fanfare
+	.endm
+
+	@ Depends on the provided function. With the default argument, unlocks the specified entry in the Fame Checker.
+	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, \person
+	setvar VAR_0x8005, \index
+	special \function
+	.endm
+
+	@ Sets the 'defeated' flag for all trainers in the specified gym.
+	.macro set_gym_trainers_frlg gym:req
+	setvar VAR_0x8008, \gym
+	call Common_EventScript_SetGymTrainers_Frlg
+	.endm
+
+	@ Prints a braille message, then waits for users input.
+	.macro braillemessage_wait text:req
+	setvar VAR_0x8006, 0
+	braillemessage \text
+	getbraillestringwidth \text
+	call EventScript_BrailleCursorWaitButton
+	.endm
+
+	@ start bpBox
+	.macro showbpbox x=0, y=0
+	callnative ScrFunc_showbpbox
+	.2byte \x
+	.2byte \y
+	.endm
+
+	.macro preparecurrencychange type=0, change=0, subtract=FALSE
+	callnative ScrFunc_preparecurrencychange
+	.byte \type
+	.4byte \change
+	.byte \subtract
+	.endm
+
+	.macro updatebpbox
+	callnative ScrFunc_updatebpbox
+	.endm
+
+	.macro hidebpbox
+	callnative ScrFunc_hidebpbox
+	.endm
+
+	.macro addbp value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=2, change=\value, subtract=FALSE
+	updatebpbox
+	.endif
+	givefrontierbattlepoints \value
+	.if \update == TRUE
+	delay 30
+	updatebpbox
+	.endif
+	.endm
+
+	.macro removebp value:req, update=FALSE
+	.if \update == TRUE
+	preparecurrencychange type=2, change=\value, subtract=TRUE
+	updatebpbox
+	.endif
+	callnative ScrFunc_removebp
+	.2byte \value
+	.if \update == TRUE
+	delay 30
+	updatebpbox
+	.endif
+	.endm
+	@ end bpBox

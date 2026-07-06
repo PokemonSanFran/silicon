@@ -295,11 +295,9 @@ ImprovtroupeZ: I hope your stardom continues to attract people here!
 
 # Summary and Notes
 
-Player goes to a local improv theater and goes on stage, where the performers encourage the Player to perform with them. The performers take the Player's Pokémon, give them random Pokémon, and they have to battle with those. Two more battles ensue, following the rules of the Battle Factory. Once they're finished, they invite the Player to come back anytime. The owner of the theater talks about how Sharprise has extremely narrowed the battling market in Resido.
+Player goes to a local improv theater and goes on stage, where the performers encourage the Player to perform with them. The performers take the Player's Pokémon, give them random Pokémon, and they have to battle with those. Two more battles ensue, following the rules of the Battle Factory. Once they're finished, they invite the Player to come back anytime. The owner of the theater talks about how SharpRise has extremely narrowed the battling market in Resido.
 
 ---
 
 The player is able to access this quest after finishing "[Young Padawan](https://airtable.com/appJxoYhsNja2FfjK/shrcRVLWezjaT63bP/tbl0XF7TJc58WD4Bw/viwnITIE6FJVV13Gp/recNSdquhDRkvbA3O?blocks=hide)".
-
-
 

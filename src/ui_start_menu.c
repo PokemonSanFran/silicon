@@ -34,12 +34,14 @@
 #include "fake_rtc.h"
 #include "region_map.h"
 #include "sprite.h"
+#include "surprise_trade.h"
 #include "pokemon_icon.h"
 #include "util.h"
 #include "quests.h"
 #include "quest_flavor_lookup.h"
 #include "daycare.h"
-#include "dexnav.h"
+#include "ui_dexnav.h"
+#include "waves.h"
 #include "siliconDaycare.h"
 #include "event_object_movement.h"
 #include "field_control_avatar.h"
@@ -163,6 +165,8 @@
 #define START_SAVE_OVERWRITE_X_FULLSCREEN   (-256)
 #define START_SAVE_OVERWRITE_X_CENTERSCREEN (-380)
 
+#define START_SAVE_OVERWRITE_BTN_COMBO      (A_BUTTON | START_BUTTON)
+
 enum StartMenuBackgrounds
 {
     START_BG_TEXT = 0,
@@ -235,27 +239,6 @@ enum StartMenuCursorModes
     NUM_START_CURSORS
 };
 
-enum StartMenuHelpSymbols
-{
-    // Time Of Day
-    START_HELP_SYMBOL_TOD_M = 0, // Morning
-    START_HELP_SYMBOL_TOD_D,     // Day
-    START_HELP_SYMBOL_TOD_E,     // Evening
-    START_HELP_SYMBOL_TOD_N,     // Night
-
-    START_HELP_SYMBOL_MAP,
-
-    // Cellular Signal
-    START_HELP_SYMBOL_SIG_0B,    // animation for no signal modal
-    START_HELP_SYMBOL_SIG_0A,
-    START_HELP_SYMBOL_SIG_1,
-    START_HELP_SYMBOL_SIG_2,
-
-    START_HELP_SYMBOL_SWAP,
-
-    NUM_START_HELP_SYMBOLS
-};
-
 enum StartMenuEggInfoSymbols
 {
     START_EGG_INFO_SYMBOL_x = 0,
@@ -309,15 +292,6 @@ enum StartMenuHpBarPercentage
     START_HP_BAR_PERCENTAGE_9,
 
     NUM_START_HP_BAR_PERCENTAGES
-};
-
-enum StartMenuCellularSignals
-{
-    START_SIGNAL_NONE,
-    START_SIGNAL_OKAY,
-    START_SIGNAL_STRONG,
-
-    NUM_START_SIGNALS
 };
 
 enum StartMenuSetupSteps
@@ -493,12 +467,9 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *);
 static void AppGrid_HandleCursorVisibility(enum StartMenuModes mode);
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 static inline void BlitSymbol_EggInfo(enum StartMenuEggInfoSymbols, u16, u16);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOfDay);
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
-static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void);
 
 // pokemon status
 static inline enum StartMenuMonStatuses MonStatus_TranslateRawStatus(u32);
@@ -514,7 +485,6 @@ static void StartMoveMode_Exit(void);
 static bool32 StartMoveMode_SwapApps(void);
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);
 static void CellularSignal_StrengthError(u8);
 static void Task_StrengthError_Init(u8);
 
@@ -611,7 +581,7 @@ static const struct WindowTemplate sStartMenu_MainWindowTemplates[] =
 };
 
 // universal palette
-static const u16 sStartMenu_Palette[] = INCBIN_U16("graphics/ui_menus/start_menu/text.gbapal");
+static const u16 sStartMenu_Palette[] = INCGFX_U16("graphics/ui_menus/start_menu/text.pal", ".gbapal");
 
 static const struct {
     const u32 *tiles;
@@ -630,12 +600,12 @@ static const struct {
     },
     [START_BG_CAUTIONBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/save_overwrite_modal.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/start_menu/save_overwrite_modal.png", ".4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/save_overwrite_modal.bin"),
     },
     [START_BG_TEXTBOX] =
     {
-        .tiles = (const u32[])INCBIN_U32("graphics/ui_menus/start_menu/tiles.4bpp.smol"),
+        .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/start_menu/tiles.png", ".4bpp.smol"),
         // .palette set by the visual color option
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/textbox.bin"),
     },
@@ -649,23 +619,23 @@ static const struct {
 
 static const u16 *const sStartMenu_WallpaperPalettes[VISUAL_OPTION_COLOR_COUNT] =
 {
-    [VISUAL_OPTION_COLOR_RED]      = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/red.gbapal"),
-    [VISUAL_OPTION_COLOR_GREEN]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/green.gbapal"),
-    [VISUAL_OPTION_COLOR_BLUE]     = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/blue.gbapal"),
-    [VISUAL_OPTION_COLOR_YELLOW]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/yellow.gbapal"),
-    [VISUAL_OPTION_COLOR_BLACK]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/black.gbapal"),
-    [VISUAL_OPTION_COLOR_WHITE]    = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/white.gbapal"),
-    [VISUAL_OPTION_COLOR_PLATINUM] = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/platinum.gbapal"),
-    [VISUAL_OPTION_COLOR_SCARLET]  = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/scarlet.gbapal"),
-    [VISUAL_OPTION_COLOR_VIOLET]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palettes/violet.gbapal"),
-    [VISUAL_OPTION_COLOR_CUSTOM]   = (const u16[]) INCBIN_U16("graphics/ui_menus/options_menu/palette_custom.gbapal"),
+    [VISUAL_OPTION_COLOR_RED]      = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/red.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_GREEN]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/green.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_BLUE]     = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/blue.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_YELLOW]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/yellow.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_BLACK]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/black.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_WHITE]    = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/white.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_PLATINUM] = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/platinum.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_SCARLET]  = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/scarlet.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_VIOLET]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palettes/violet.pal", ".gbapal"),
+    [VISUAL_OPTION_COLOR_CUSTOM]   = (const u16[]) INCGFX_U16("graphics/ui_menus/options_menu/palette_custom.pal", ".gbapal"),
 };
 
 // blit graphics
-static const u8 sStartMenuSymbols_Help[] = INCBIN_U8("graphics/ui_menus/start_menu/help_symbols.4bpp");
-static const u8 sStartMenuSymbols_EggInfo[] = INCBIN_U8("graphics/ui_menus/start_menu/daycare_symbols.4bpp");
-static const u8 sStartMenuSymbols_MonStatus[] = INCBIN_U8("graphics/ui_menus/start_menu/mon_status.4bpp");
-static const u8 sStartMenuSymbols_HpBar[] = INCBIN_U8("graphics/ui_menus/start_menu/hp_bar.4bpp");
+static const u8 sStartMenuSymbols_Help[] = INCGFX_U8("graphics/ui_menus/start_menu/help_symbols.png", ".4bpp");
+static const u8 sStartMenuSymbols_EggInfo[] = INCGFX_U8("graphics/ui_menus/start_menu/daycare_symbols.png", ".4bpp");
+static const u8 sStartMenuSymbols_MonStatus[] = INCGFX_U8("graphics/ui_menus/start_menu/mon_status.png", ".4bpp");
+static const u8 sStartMenuSymbols_HpBar[] = INCGFX_U8("graphics/ui_menus/start_menu/hp_bar.png", ".4bpp");
 
 static const struct {
     const struct SpriteSheet sheets[NUM_START_TAGS];
@@ -674,15 +644,15 @@ static const struct {
 {
     {
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/app_cursor.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/app_cursor.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_APP_CURSOR_SIZE), START_TAG_APP_CURSOR
         },
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/apps.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/apps.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_APPS_SIZE), START_TAG_APPS
         },
         {
-            (const u16[])INCBIN_U16("graphics/ui_menus/start_menu/mon_platform.4bpp"),
+            (const u16[])INCGFX_U16("graphics/ui_menus/start_menu/mon_platform.png", ".4bpp"),
             TILE_OFFSET_4BPP(START_MAIN_SPRITE_MON_PLATFORMS_SIZE), START_TAG_MON_PLATFORMS
         },
         { NULL }
@@ -834,7 +804,7 @@ static const struct OamData sMonStatus_OamData =
     .size = SPRITE_SIZE(32x8),
 };
 
-static const u8 sBlankGfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
+static const u8 sBlankGfx[] = INCGFX_U8("graphics/interface/blank.png", ".4bpp");
 static const struct SpriteFrameImage sStartMenuDummyFrames[] = { obj_frame_tiles(sBlankGfx) };
 
 static const struct SpriteTemplate sMonStatus_SpriteTemplate =
@@ -886,7 +856,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_ARRIBA] =
     {
-        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Arriba"), FLAG_SYS_APP_MAP_GET, CB2_MapSystemFromStartMenu, START_SIGNAL_NONE
     },
     [START_APP_TODOS] =
     {
@@ -894,7 +864,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_DEXNAV] =
     {
-        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexNavFromStartMenu, START_SIGNAL_OKAY
+        COMPOUND_STRING("Dexnav"), FLAG_SYS_APP_DEXNAV_GET, CB2_DexnavFromStartMenu, START_SIGNAL_OKAY
     },
     [START_APP_POKEDEX] =
     {
@@ -912,15 +882,15 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     // second row
     [START_APP_TRAINER_CARD] =
     {
-        COMPOUND_STRING("Trainer Card"), 0, NULL
+        COMPOUND_STRING("Trainer Card"), FLAG_SYS_APP_QUEST_GET, CB2_InitUiMainMenuFromStartMenu
     },
     [START_APP_PRESTO] =
     {
         COMPOUND_STRING("Presto"), FLAG_SYS_APP_PRESTO_GET, CB2_PrestoFromStartMenu, START_SIGNAL_OKAY
     },
-    [START_APP_WAVES_OF_CHANGE] = // PSF TODO ui
+    [START_APP_WAVES_OF_CHANGE] =
     {
-        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Waves of Change"), FLAG_SYS_APP_WAVES_OF_CHANGE_GET, CB2_WavesFromStartMenu, START_SIGNAL_STRONG
     },
     [START_APP_CUSTOMIZE] =
     {
@@ -930,9 +900,9 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     {
         COMPOUND_STRING("Save"), 0, NULL
     },
-    [START_APP_SURPRISE_TRADE] = // PSF TODO ui
+    [START_APP_SURPRISE_TRADE] =
     {
-        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, NULL, START_SIGNAL_STRONG
+        COMPOUND_STRING("Surprise Trade"), FLAG_SYS_APP_SURPRISE_TRADE_GET, CB2_StartSurpriseTrade, START_SIGNAL_STRONG
     },
     [START_APP_GOOGLE_GLASS] =
     {
@@ -1040,9 +1010,9 @@ void StartMenu_HoldPreviousSave(void)
     memcpy(&sStartMenuPreviousSave.rgbValues, &gSaveBlock3Ptr->rgbValues, (NUM_CUSTOM_COLOR_OPTIONS * NUM_COLOR_OPTIONS) * sizeof(u8));
 
     memset(sStartMenuPreviousSave.partySpecies, SPECIES_NONE, PARTY_SIZE * sizeof(u16));
-    for (u32 i = 0; i < gPlayerPartyCount; i++)
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
     {
-        sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        sStartMenuPreviousSave.partySpecies[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
     }
 
     memcpy(&sStartMenuPreviousSave.location, &gSaveBlock1Ptr->location, sizeof(struct WarpData));
@@ -1431,12 +1401,12 @@ static void StartMainSprite_App(void)
 static void StartMainSprite_PartyMon(void)
 {
     u8 *spriteIds = sStartMenuDataPtr->spriteIds;
-    struct Pokemon *mon = gPlayerParty;
+    struct Pokemon *mon = gParties[B_TRAINER_PLAYER];
     struct Sprite *sprite = NULL;
     u32 species, healthPercentage, status;
     bool32 isEgg;
 
-    if (!gPlayerPartyCount)
+    if (!gPartiesCount[B_TRAINER_PLAYER])
         return;
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -1598,7 +1568,7 @@ static void StartPrint_HelpTopText(void)
     // SPACING
     StringCopy(strbuf[0], COMPOUND_STRING(" "));
 
-    // TIME OF DAY, 
+    // TIME OF DAY,
     enum TimeOfDay time = GetTimeOfDay();
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));
@@ -1742,10 +1712,10 @@ static void StartPrint_AppNameText(void)
         if (app)
             str = AppData_GetStruct(app)->name;
         else
-            str = gText_Blank; // blank as the app table has 'Free Space'
+            str = gText_ExpandedPlaceholder_Empty; // blank as the app table has 'Free Space'
 
         if (StartSetup_IsInSaveMode())
-            str = gText_Blank;
+            str = gText_ExpandedPlaceholder_Empty;
 
         StartPrint_Text(START_MAIN_WIN_APP_TITLE, FONT_SMALL, START_MAIN_WIN_APP_TITLE_WIDTH, X_CENTER_ALIGN, 0, str);
     }
@@ -1822,7 +1792,7 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     // clear (w/ black)
-    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+    FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
 
     // textbox
     StringCopy(gStringVar1, sStartMenuStrings_SaveResult[sStartMenuDataPtr->saveRes]);
@@ -1835,17 +1805,17 @@ static void StartPrint_SaveOverwriteText(u8 taskId)
         StringCopy(gStringVar2, prevSave->playerName);
         GetMapNameGeneric(gStringVar3,
             Overworld_GetMapHeaderByGroupAndId(prevSave->location.mapGroup, prevSave->location.mapNum)->regionMapSectionId);
-        u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} in {STR_VAR_3} at "));
+        u8 *ptr = StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{STR_VAR_2} - {STR_VAR_3} with "));
 
         ptr = ConvertIntToDecimalStringN(ptr, prevSave->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
         ptr = StringAppend(ptr, COMPOUND_STRING("{FONT_SMALL}:{FONT_SMALL_NARROW}"));
         ConvertIntToDecimalStringN(ptr, prevSave->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ptr = StringAppend(ptr, COMPOUND_STRING(" Playtime"));
 
         u32 x = GetStringCenterAlignXOffset(FONT_SMALL_NARROW, gStringVar1, TILE_TO_PIXELS(START_WIN_SAVE_OVERWRITE_WIDTH)) - 8;
         StartPrint_Text(tWindowId, FONT_SMALL_NARROW, START_WIN_SAVE_OVERWRITE_WIDTH, x, TILE_TO_PIXELS(6), gStringVar1);
 
         x += StartPrint_ConvertStringLengthToPixels(gStringVar1, FONT_SMALL_NARROW) - 24;
-        BlitSymbol_Help(BlitSymbol_ConvertTimeToHelp(BlitSymbol_GetTimeOfDayFromPlaytime()), tWindowId, x, TILE_TO_PIXELS(6));
     }
 
     CopyWindowToVram(tWindowId, COPYWIN_FULL);
@@ -1904,9 +1874,6 @@ static void AppData_InsertNewApps(void)
 {
     for (enum StartMenuApps app = START_APP_PARTY; app < NUM_START_APPS; app++)
     {
-        if (app == START_APP_TRAINER_CARD) //  PSF TODO Trainer Card disabled
-            continue;
-
         if (AppData_GetUnlockFlag(app) && AppData_GetIndexFromApp(app) == NUM_START_APPS)
         {
             u32 freeSlot = AppData_GetFirstEmptyIndex();
@@ -1957,9 +1924,7 @@ static bool32 AppData_GetUnlockFlag(enum StartMenuApps app)
 
 static enum StartMenuApps AppData_GetAppFromIndex(u8 idx)
 {
-    u32 app = gSaveBlock3Ptr->startMenuAppIndex[idx];
-
-    return (app == START_APP_TRAINER_CARD) ? START_APP_NONE : app; //  PSF TODO Trainer Card disabled
+    return gSaveBlock3Ptr->startMenuAppIndex[idx];
 }
 
 static const struct StartMenuAppData *AppData_GetStruct(enum StartMenuApps app)
@@ -2222,7 +2187,7 @@ static void SpriteCB_AppGrid_Cursor(struct Sprite *s)
 }
 
 // blit system
-static inline void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
+void BlitSymbol_Help(enum StartMenuHelpSymbols sym, u32 window, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(window, sStartMenuSymbols_Help, sym * 16, 0, 160, 16, x, y, 16, 16);
 }
@@ -2248,7 +2213,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOf
     }
 }
 
-static inline enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
+enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void)
 {
     return BlitSymbol_ConvertTimeToHelp(GetTimeOfDay());
 }
@@ -2257,41 +2222,6 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void)
 {
     return START_HELP_SYMBOL_SIG_0A + CellularSignal_GetCurrentStrength();
 }
-
-static inline enum TimeOfDay BlitSymbol_GetTimeOfDayFromPlaytime(void)
-{
-    s32 hours, time;
-    struct StartMenuPreviousSave *prevSave = &sStartMenuPreviousSave;
-    hours = prevSave->playTimeHours;
-
-    if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
-    {
-        time = TIME_MORNING;
-    }
-    else if (IsBetweenHours(hours, MORNING_HOUR_MIDDLE, MORNING_HOUR_END)) // morning->day
-    {
-        time = TIME_MORNING;
-    }
-    else if (IsBetweenHours(hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END)) // evening
-    {
-        time = TIME_EVENING;
-    }
-    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_BEGIN + 1)) // evening->night
-    {
-        time = TIME_NIGHT;
-    }
-    else if (IsBetweenHours(hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END)) // night
-    {
-        time = TIME_NIGHT;
-    }
-    else // day
-    {
-        time = TIME_DAY;
-    }
-
-    return time;
-}
-
 
 // mon status
 void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
@@ -2367,7 +2297,13 @@ static inline u32 MonStatus_GetHealthPercentage(struct Pokemon *mon)
     if (!GetMonData(mon, MON_DATA_IS_EGG))
         return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon, MON_DATA_MAX_HP)));
     else
-        return ((GetMonData(mon, MON_DATA_FRIENDSHIP)) * 100 / (gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].eggCycles));
+    {
+        u32 friendship = GetMonData(mon,MON_DATA_FRIENDSHIP);
+        u32 totalCycles = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].eggCycles;
+        u32 denominator = (friendship > totalCycles) ? (friendship + totalCycles) : totalCycles;
+
+        return friendship * 100 / denominator;
+    }
 }
 
 static inline s32 MonStatus_GetXIconCoord(u32 idx)
@@ -2498,7 +2434,7 @@ static bool32 StartMoveMode_SwapApps(void)
 
 
 // cellular signals
-static inline enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
+enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
 {
     u32 mapType = GetCurrentMapType();
 
@@ -2756,7 +2692,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2768,7 +2704,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
                 return;
             }
 
-            if (JOY_NEW(A_BUTTON) && JOY_NEW(START_BUTTON))
+            if (JOY_HELD(START_SAVE_OVERWRITE_BTN_COMBO) == START_SAVE_OVERWRITE_BTN_COMBO)
             {
                 // unload sprites
                 SaveOverwrite_DestroySprites();
@@ -2809,7 +2745,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (JOY_NEW(A_BUTTON | START_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);
@@ -2823,7 +2759,7 @@ static void Task_SaveOverwrite_Load(u8 taskId)
             if (!tTimer || JOY_NEW(B_BUTTON))
             {
                 // unload window
-                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(2));
+                FillWindowPixelBuffer(tWindowId, PIXEL_FILL(12));
                 CopyWindowToVram(tWindowId, COPYWIN_FULL);
                 FillWindowPixelBuffer(START_MAIN_WIN_HELP_BOTTOM, PIXEL_FILL(0));
                 CopyWindowToVram(START_MAIN_WIN_HELP_BOTTOM, COPYWIN_FULL);

@@ -1,25 +1,22 @@
 mapscripts CapheCity_MapScripts {
+	MAP_SCRIPT_ON_RESUME
+	{
+		callnative(WarpTaxiAfterCutscene)
+	}
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterAdaora_ObjectCleanUp_Script)
         call(Quest_Manofmanyhats_Liidia_Attendant_Visibility_Script)
-        call(RPS_Script_ControlMontyOppVisibility)
-        call(RestoreZenzuIsland_Script_ControlCapheMontyVisibility)
+        call_if_quest_not_inactive(QUEST_RPS,RPS_Script_HideMontyopp)
+        call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_1,RestoreZenzuIsland_Script_HideMonty)
+        call(Quest_Restaurantexpansion_Script_HideBelenCaphe)
     }
-    MAP_SCRIPT_ON_LOAD {
+    MAP_SCRIPT_ON_LOAD
+    {
         call(EnterAdaora_SetConeTiles_Script)
+        call(Quest_Restaurantexpansion_Script_BlockPantry)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         FLAG_VISITED_CAPHE_CITY, FALSE: Generic_Mappreview
     ]
-}
-
-script CapheCity_EventScript_DeliveryE{
-    returnqueststate(QUEST_BODEGABURNOUT)
-    if(var(VAR_RESULT) > QUEST_MENU_UNLOCK_QUEST){
-        goto(Quest_Bodegaburnout_DeliveryE_Dialogue)
-    }
-
-    msgbox(gText_ExpandedPlaceholder_Empty,MSGBOX_AUTOCLOSE)
-        end
 }

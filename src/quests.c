@@ -1,7 +1,7 @@
-//PSF TODO If a player recives a 2nd quest via startquest and the player has still never opened the questlog and done the tutorial, force the tutorial
 #include "global.h"
 #include "strings.h"
 #include "quest_strings.h"
+#include "story_jump.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -44,6 +44,7 @@
 #include "dma3.h"
 #include "options_visual.h"
 #include "trig.h"
+#include "line_break.h"
 
 struct QuestSpriteInfo
 {
@@ -144,7 +145,6 @@ static u32 CountFavoriteQuests(void);
 u32 CountQuestsToSkip(void);
 bool32 ShouldSkipCountingQuests(enum QuestIdList questId);
 
-static void PopulateQuestName(u8 countQuest);
 static void PopulateListRowNameAndId(u8 row, u8 countQuest);
 static bool8 DoesQuestHaveChildrenAndNotInactive(s32 itemId);
 
@@ -159,7 +159,6 @@ void CopyCursorTiles(u32 windowId, const void* tile1, const void* tile2, const v
 static void UpdateQuestDoneDesc(s32 questId);
 static void QuestMenu_UpdateQuestRewardDesc(s32 questId);
 const u8 *GetSubquestName(s32 questId);
-static const u8 *GetQuestDesc(s32 questId);
 static const u8 *GetQuestRewardDesc(s32 questId);
 static const u8 *GetQuestDoneDesc(s32 questId);
 static void PrintQuestDescription(s32 questId);
@@ -167,8 +166,6 @@ static void GenerateAndPrintDesc(s32 questId);
 static void GenerateQuestDescription(s32 questId);
 
 static bool8 IsQuestUnlocked(s32 questId);
-static bool8 IsQuestActiveState(s32 questId);
-static bool8 IsQuestRewardState(s32 questId);
 static bool8 IsSubquestCompletedState(s32 questId);
 
 static void GenerateStateAndPrint(u8 windowId, u32 itemId, u8 y);
@@ -245,95 +242,95 @@ static void HandleMenuArrowSpriteVisibility(struct Sprite *sprite);
 static bool32 IsCursorOrPositionAtTop(u32);
 static bool32 IsCursorOrPositionAtBottom(u32);
 
-static const u32 questArrowsBottom[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/bottom.4bpp.smol");
-static const u32 questArrowsTop[] = INCBIN_U32("graphics/ui_menus/glass/location/arrows/top.4bpp.smol");
-static const u16 questPalettesDefault[] = INCBIN_U16("graphics/ui_menus/glass/palettes/default.gbapal");
+static const u32 questArrowsBottom[] = INCGFX_U32("graphics/ui_menus/glass/location/arrows/bottom.png", ".4bpp.smol");
+static const u32 questArrowsTop[] = INCGFX_U32("graphics/ui_menus/glass/location/arrows/top.png", ".4bpp.smol");
+static const u16 questPalettesDefault[] = INCGFX_U16("graphics/ui_menus/glass/palettes/default.pal", ".gbapal");
 
-static const u32 sCarveTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve0.4bpp.smol");
-static const u32 sCarveTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve1.4bpp.smol");
-static const u32 sCarveTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve2.4bpp.smol");
-static const u32 sCarveTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve3.4bpp.smol");
-static const u32 sCarveTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve4.4bpp.smol");
-static const u32 sCarveTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve5.4bpp.smol");
-static const u32 sCarveTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve6.4bpp.smol");
-static const u32 sCarveTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve7.4bpp.smol");
-static const u32 sCarveTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve8.4bpp.smol");
-static const u32 sCarveTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve9.4bpp.smol");
-static const u32 sCarveTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve10.4bpp.smol");
-static const u32 sCarveTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve11.4bpp.smol");
-static const u32 sCarveTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve12.4bpp.smol");
-static const u32 sCarveTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve13.4bpp.smol");
-static const u32 sCarveTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve14.4bpp.smol");
-static const u32 sCarveTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve15.4bpp.smol");
-static const u32 sCarveTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve16.4bpp.smol");
-static const u32 sCarveTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve17.4bpp.smol");
-static const u32 sCarveTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve18.4bpp.smol");
-static const u32 sCarveTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/carve19.4bpp.smol");
+static const u32 sCarveTile0[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve0.png", ".4bpp.smol");
+static const u32 sCarveTile1[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve1.png", ".4bpp.smol");
+static const u32 sCarveTile2[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve2.png", ".4bpp.smol");
+static const u32 sCarveTile3[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve3.png", ".4bpp.smol");
+static const u32 sCarveTile4[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve4.png", ".4bpp.smol");
+static const u32 sCarveTile5[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve5.png", ".4bpp.smol");
+static const u32 sCarveTile6[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve6.png", ".4bpp.smol");
+static const u32 sCarveTile7[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve7.png", ".4bpp.smol");
+static const u32 sCarveTile8[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve8.png", ".4bpp.smol");
+static const u32 sCarveTile9[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve9.png", ".4bpp.smol");
+static const u32 sCarveTile10[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve10.png", ".4bpp.smol");
+static const u32 sCarveTile11[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve11.png", ".4bpp.smol");
+static const u32 sCarveTile12[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve12.png", ".4bpp.smol");
+static const u32 sCarveTile13[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve13.png", ".4bpp.smol");
+static const u32 sCarveTile14[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve14.png", ".4bpp.smol");
+static const u32 sCarveTile15[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve15.png", ".4bpp.smol");
+static const u32 sCarveTile16[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve16.png", ".4bpp.smol");
+static const u32 sCarveTile17[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve17.png", ".4bpp.smol");
+static const u32 sCarveTile18[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve18.png", ".4bpp.smol");
+static const u32 sCarveTile19[] = INCGFX_U32("graphics/quest_menu/carveTiles/carve19.png", ".4bpp.smol");
 
-static const u32 sCarvePlainTile0[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain0.4bpp.smol");
-static const u32 sCarvePlainTile1[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain1.4bpp.smol");
-static const u32 sCarvePlainTile2[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain2.4bpp.smol");
-static const u32 sCarvePlainTile3[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain3.4bpp.smol");
-static const u32 sCarvePlainTile4[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain4.4bpp.smol");
-static const u32 sCarvePlainTile5[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain5.4bpp.smol");
-static const u32 sCarvePlainTile6[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain6.4bpp.smol");
-static const u32 sCarvePlainTile7[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain7.4bpp.smol");
-static const u32 sCarvePlainTile8[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain8.4bpp.smol");
-static const u32 sCarvePlainTile9[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain9.4bpp.smol");
-static const u32 sCarvePlainTile10[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain10.4bpp.smol");
-static const u32 sCarvePlainTile11[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain11.4bpp.smol");
-static const u32 sCarvePlainTile12[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain12.4bpp.smol");
-static const u32 sCarvePlainTile13[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain13.4bpp.smol");
-static const u32 sCarvePlainTile14[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain14.4bpp.smol");
-static const u32 sCarvePlainTile15[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain15.4bpp.smol");
-static const u32 sCarvePlainTile16[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain16.4bpp.smol");
-static const u32 sCarvePlainTile17[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain17.4bpp.smol");
-static const u32 sCarvePlainTile18[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain18.4bpp.smol");
-static const u32 sCarvePlainTile19[] = INCBIN_U32("graphics/quest_menu/carveTiles/plain19.4bpp.smol");
+static const u32 sCarvePlainTile0[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain0.png", ".4bpp.smol");
+static const u32 sCarvePlainTile1[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain1.png", ".4bpp.smol");
+static const u32 sCarvePlainTile2[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain2.png", ".4bpp.smol");
+static const u32 sCarvePlainTile3[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain3.png", ".4bpp.smol");
+static const u32 sCarvePlainTile4[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain4.png", ".4bpp.smol");
+static const u32 sCarvePlainTile5[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain5.png", ".4bpp.smol");
+static const u32 sCarvePlainTile6[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain6.png", ".4bpp.smol");
+static const u32 sCarvePlainTile7[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain7.png", ".4bpp.smol");
+static const u32 sCarvePlainTile8[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain8.png", ".4bpp.smol");
+static const u32 sCarvePlainTile9[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain9.png", ".4bpp.smol");
+static const u32 sCarvePlainTile10[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain10.png", ".4bpp.smol");
+static const u32 sCarvePlainTile11[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain11.png", ".4bpp.smol");
+static const u32 sCarvePlainTile12[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain12.png", ".4bpp.smol");
+static const u32 sCarvePlainTile13[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain13.png", ".4bpp.smol");
+static const u32 sCarvePlainTile14[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain14.png", ".4bpp.smol");
+static const u32 sCarvePlainTile15[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain15.png", ".4bpp.smol");
+static const u32 sCarvePlainTile16[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain16.png", ".4bpp.smol");
+static const u32 sCarvePlainTile17[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain17.png", ".4bpp.smol");
+static const u32 sCarvePlainTile18[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain18.png", ".4bpp.smol");
+static const u32 sCarvePlainTile19[] = INCGFX_U32("graphics/quest_menu/carveTiles/plain19.png", ".4bpp.smol");
 
-static const u32 sCursorTile0[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile0.4bpp.smol");
-static const u32 sCursorTile1[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile1.4bpp.smol");
-static const u32 sCursorTile2[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile2.4bpp.smol");
-static const u32 sCursorTile3[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile3.4bpp.smol");
-static const u32 sCursorTile4[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile4.4bpp.smol");
-static const u32 sCursorTile5[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile5.4bpp.smol");
-static const u32 sCursorTile6[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile6.4bpp.smol");
-static const u32 sCursorTile7[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile7.4bpp.smol");
-static const u32 sCursorTile8[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile8.4bpp.smol");
-static const u32 sCursorTile9[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile9.4bpp.smol");
-static const u32 sCursorTile10[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile10.4bpp.smol");
-static const u32 sCursorTile11[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile11.4bpp.smol");
-static const u32 sCursorTile12[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile12.4bpp.smol");
-static const u32 sCursorTile13[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile13.4bpp.smol");
-static const u32 sCursorTile14[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile14.4bpp.smol");
-static const u32 sCursorTile15[] = INCBIN_U32("graphics/quest_menu/cursorTiles/cursorTile15.4bpp.smol");
+static const u32 sCursorTile0[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile0.png", ".4bpp.smol");
+static const u32 sCursorTile1[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile1.png", ".4bpp.smol");
+static const u32 sCursorTile2[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile2.png", ".4bpp.smol");
+static const u32 sCursorTile3[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile3.png", ".4bpp.smol");
+static const u32 sCursorTile4[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile4.png", ".4bpp.smol");
+static const u32 sCursorTile5[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile5.png", ".4bpp.smol");
+static const u32 sCursorTile6[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile6.png", ".4bpp.smol");
+static const u32 sCursorTile7[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile7.png", ".4bpp.smol");
+static const u32 sCursorTile8[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile8.png", ".4bpp.smol");
+static const u32 sCursorTile9[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile9.png", ".4bpp.smol");
+static const u32 sCursorTile10[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile10.png", ".4bpp.smol");
+static const u32 sCursorTile11[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile11.png", ".4bpp.smol");
+static const u32 sCursorTile12[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile12.png", ".4bpp.smol");
+static const u32 sCursorTile13[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile13.png", ".4bpp.smol");
+static const u32 sCursorTile14[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile14.png", ".4bpp.smol");
+static const u32 sCursorTile15[] = INCGFX_U32("graphics/quest_menu/cursorTiles/cursorTile15.png", ".4bpp.smol");
 
-static const u8 favoriteIndicatorBitmap[]  = INCBIN_U8("graphics/quest_menu/favoriteIndicator.4bpp");
-static const u8 subquestIndicatorBitmap[]  = INCBIN_U8("graphics/quest_menu/subquestIndicator.4bpp");
-static const u8 progressRewardBitmap[]  = INCBIN_U8("graphics/quest_menu/progressReward.4bpp");
-static const u8 progressActiveBitmap[]  = INCBIN_U8("graphics/quest_menu/progressActive.4bpp");
-static const u8 progressCompleteBitmap[] = INCBIN_U8("graphics/ui_menus/glass/marks/regularCompleteHover.4bpp");
-static const u8 locationBitmap[] = INCBIN_U8("graphics/quest_menu/location.4bpp");
-static const u8 carveBitmap[] = INCBIN_U8("graphics/quest_menu/carveBitmap.4bpp");
+static const u8 favoriteIndicatorBitmap[]  = INCGFX_U8("graphics/quest_menu/favoriteIndicator.png", ".4bpp");
+static const u8 subquestIndicatorBitmap[]  = INCGFX_U8("graphics/quest_menu/subquestIndicator.png", ".4bpp");
+static const u8 progressRewardBitmap[]  = INCGFX_U8("graphics/quest_menu/progressReward.png", ".4bpp");
+static const u8 progressActiveBitmap[]  = INCGFX_U8("graphics/quest_menu/progressActive.png", ".4bpp");
+static const u8 progressCompleteBitmap[] = INCGFX_U8("graphics/ui_menus/glass/marks/regularCompleteHover.png", ".4bpp");
+static const u8 locationBitmap[] = INCGFX_U8("graphics/quest_menu/location.png", ".4bpp");
+static const u8 carveBitmap[] = INCGFX_U8("graphics/quest_menu/carveBitmap.png", ".4bpp");
 
 // Tiles, palettes and tilemaps for the Quest Menu
-static const u32 sQuestMenuTiles[] = INCBIN_U32("graphics/quest_menu/menu.4bpp.smol");
+static const u32 sQuestMenuTiles[] = INCGFX_U32("graphics/quest_menu/menu.png", ".4bpp.smol");
 static const u32 sQuestMenuTilemap[] = INCBIN_U32("graphics/quest_menu/menu.bin.smolTM");
 
-static const u32 sQuestListTiles[] = INCBIN_U32("graphics/quest_menu/list.4bpp.smol");
+static const u32 sQuestListTiles[] = INCGFX_U32("graphics/quest_menu/list.png", ".4bpp.smol");
 static const u32 sQuestListTilemap[] = INCBIN_U32("graphics/quest_menu/list.bin.smolTM");
 
-static const u16 sQuestMenuListPal[] = INCBIN_U16("graphics/quest_menu/palettes/list.gbapal");
-static const u16 sQuestMenuPalettesBlack[] = INCBIN_U16("graphics/quest_menu/palettes/black.gbapal");
-static const u16 sQuestMenuPalettesBlue[] = INCBIN_U16("graphics/quest_menu/palettes/blue.gbapal");
-static const u16 sQuestMenuPalettesDefault[] = INCBIN_U16("graphics/quest_menu/palettes/default.gbapal");
-static const u16 sQuestMenuPalettesGreen[] = INCBIN_U16("graphics/quest_menu/palettes/green.gbapal");
-static const u16 sQuestMenuPalettesPlatinum[] = INCBIN_U16("graphics/quest_menu/palettes/platinum.gbapal");
-static const u16 sQuestMenuPalettesRed[] = INCBIN_U16("graphics/quest_menu/palettes/red.gbapal");
-static const u16 sQuestMenuPalettesScarlet[] = INCBIN_U16("graphics/quest_menu/palettes/scarlet.gbapal");
-static const u16 sQuestMenuPalettesViolet[] = INCBIN_U16("graphics/quest_menu/palettes/violet.gbapal");
-static const u16 sQuestMenuPalettesWhite[] = INCBIN_U16("graphics/quest_menu/palettes/white.gbapal");
-static const u16 sQuestMenuPalettesYellow[] = INCBIN_U16("graphics/quest_menu/palettes/yellow.gbapal");
+static const u16 sQuestMenuListPal[] = INCGFX_U16("graphics/quest_menu/palettes/list.pal", ".gbapal");
+static const u16 sQuestMenuPalettesBlack[] = INCGFX_U16("graphics/quest_menu/palettes/black.pal", ".gbapal");
+static const u16 sQuestMenuPalettesBlue[] = INCGFX_U16("graphics/quest_menu/palettes/blue.pal", ".gbapal");
+static const u16 sQuestMenuPalettesDefault[] = INCGFX_U16("graphics/quest_menu/palettes/default.pal", ".gbapal");
+static const u16 sQuestMenuPalettesGreen[] = INCGFX_U16("graphics/quest_menu/palettes/green.pal", ".gbapal");
+static const u16 sQuestMenuPalettesPlatinum[] = INCGFX_U16("graphics/quest_menu/palettes/platinum.pal", ".gbapal");
+static const u16 sQuestMenuPalettesRed[] = INCGFX_U16("graphics/quest_menu/palettes/red.pal", ".gbapal");
+static const u16 sQuestMenuPalettesScarlet[] = INCGFX_U16("graphics/quest_menu/palettes/scarlet.pal", ".gbapal");
+static const u16 sQuestMenuPalettesViolet[] = INCGFX_U16("graphics/quest_menu/palettes/violet.pal", ".gbapal");
+static const u16 sQuestMenuPalettesWhite[] = INCGFX_U16("graphics/quest_menu/palettes/white.pal", ".gbapal");
+static const u16 sQuestMenuPalettesYellow[] = INCGFX_U16("graphics/quest_menu/palettes/yellow.pal", ".gbapal");
 
 
 static const u32 *const questTiles[BG_QUEST_COUNT] =
@@ -1123,8 +1120,7 @@ u8 GenerateList(void)
 {
     u32 mode = GetCurrentQuestFilter();
     u32 numFavorites = CountFavoriteQuests();
-    u8 numRow = 0, offset = 0, newRow = 0, countQuest = 0,
-       selectedQuestId = 0;
+    u32 numRow = 0, offset = 0, newRow = 0, countQuest = 0, selectedQuestId = 0;
     u8 *sortedQuestList;
 
     sortedQuestList = DefineQuestOrder();
@@ -1152,7 +1148,6 @@ u8 GenerateList(void)
             offset++;
         }
 
-        PopulateQuestName(selectedQuestId);
         PopulateListRowNameAndId(newRow, selectedQuestId);
     }
     return numRow + offset;
@@ -1414,16 +1409,6 @@ bool32 ShouldSkipCountingQuests(enum QuestIdList questId)
     return sSideQuests[questId].skipQuestWhenCounting;
 }
 
-void PopulateQuestName(u8 countQuest)
-{
-    if (QuestMenu_GetSetQuestState(countQuest, FLAG_GET_ACTIVE)) {
-        StringExpandPlaceholders(gStringVar4, sSideQuests[countQuest].name);
-        StringAppend(gStringVar1, gStringVar4);
-    } else {
-        StringAppend(gStringVar1, sText_Unk);
-    }
-}
-
 void PopulateListRowNameAndId(u8 row, u8 countQuest)
 {
     if (GetCurrentQuestSubquestState())
@@ -1529,7 +1514,7 @@ void GenerateQuestLocation(s32 questId)
 {
     u8 *end;
 
-    if (questId < QUEST_PLAYERSADVENTURE)
+    if (questId < QUEST_PLAYERSADVENTURE || questId >= QUEST_COUNT)
         return;
 
     if (!GetCurrentQuestSubquestState())
@@ -1703,7 +1688,7 @@ static void GenerateQuestDescription(s32 questId)
 {
     if (questId == LIST_CANCEL)
     {
-        StringCopy(gStringVar1,gText_Blank);
+        StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
     }
     else if (GetCurrentQuestSubquestState() == FALSE) {
         if (IsQuestInactiveState(questId) == TRUE) {
@@ -1723,7 +1708,7 @@ static void GenerateQuestDescription(s32 questId)
             StringCopy(gStringVar1,
                     sSideQuests[sStateDataPtr->parentQuest].subquests[questId].desc);
         } else {
-            StringCopy(gStringVar1, gText_Blank);
+            StringCopy(gStringVar1, gText_ExpandedPlaceholder_Empty);
         }
     }
 
@@ -1778,37 +1763,26 @@ const u8 *GetQuestMap(s32 questId)
 
 const u8 *GetQuestRewardDesc(s32 questId)
 {
-    if (sSideQuests[questId].rewardDesc == NULL)
-        return gText_Blank;
+    if (sSideQuests[questId].desc[FLAG_GET_REWARD] == NULL)
+        return gText_ExpandedPlaceholder_Empty;
 
-    return sSideQuests[questId].rewardDesc;
+    return sSideQuests[questId].desc[FLAG_GET_REWARD];
 }
 
 const u8 *GetQuestDesc(s32 questId)
 {
-    switch (questId) {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDesc_PlayersAdventure();
-            break;
-        case QUEST_RABIESOUTBREAK:
-            return GetQuestDesc_RabiesOutbreak();
-            break;
-        case QUEST_BETWEENASTONEANDAHARDPLACE:
-            return GetQuestDesc_BetweenAStoneAndAHardPlace();
-            break;
-        default:
-            return sSideQuests[questId].desc;
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_ACTIVE];
+
+    return sSideQuests[questId].descFunc();
 }
 
 const u8 *GetQuestDoneDesc(s32 questId)
 {
-    switch (questId) {
-        case QUEST_PLAYERSADVENTURE:
-            return GetQuestDoneDesc_PlayersAdventure();
-        default:
-            return sSideQuests[questId].donedesc;
-    }
+    if (sSideQuests[questId].descFunc == NULL)
+        return sSideQuests[questId].desc[FLAG_GET_COMPLETED];
+
+    return sSideQuests[questId].descFunc();
 }
 
 void PrintQuestDescription(s32 questId)
@@ -1819,9 +1793,14 @@ void PrintQuestDescription(s32 questId)
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     u32 x = 4;
     u32 y = 0;
+    u32 maxWidth = (GetWindowAttribute(windowId, WINDOW_WIDTH) * TILE_WIDTH) - 2;
+    u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
+    u32 height = (GetWindowAttribute(windowId, WINDOW_HEIGHT) * TILE_WIDTH) / (letterHeight + lineSpacing);
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
+    StripLineBreaks(gStringVar3);
+    BreakStringNaive(gStringVar3, maxWidth, height, fontId, HIDE_SCROLL_PROMPT);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sQuestMenuWindowFontColors[QUEST_FONT_COLOR_DESC], TEXT_SKIP_DRAW, gStringVar3);
 
     CopyWindowToVram(windowId, COPYWIN_GFX);
@@ -1906,9 +1885,29 @@ static void PrintAllQuestSprites(void)
     }
 }
 
+static void FreeQuestSpritePalette(u32 questId, enum QuestMenuRows row)
+{
+    u32 entityId = GetQuestSpriteEntityId(questId);
+    u32 type = GetQuestSpriteType(questId);
+    switch (type)
+    {
+        case QUEST_SPRITE_TYPE_PKMN:
+            FreeSpritePaletteByTag(entityId + OBJ_EVENT_MON);
+            break;
+        default:
+        case QUEST_SPRITE_TYPE_OBJECT:
+            const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(entityId);
+            FreeSpritePaletteByTag(graphicsInfo->paletteTag);
+            break;
+        case QUEST_SPRITE_TYPE_CANCEL:
+        case QUEST_SPRITE_TYPE_ITEM:
+            FreeSpritePaletteByTag(GetQuestSpriteTags(row));
+            break;
+    }
+
+}
 static void RemoveAllQuestSprites(void)
 {
-    //PSF TODO the menu will run out of palettes after 20 scrolls and I have no idea why.
     for (enum QuestMenuRows rowIndex = 0; rowIndex < QUEST_MENU_UX_ROW_COUNT; rowIndex++)
     {
         struct Sprite *sprite = &gSprites[GetQuestSpriteId(rowIndex)];
@@ -1919,9 +1918,11 @@ static void RemoveAllQuestSprites(void)
 
         DestroySprite(sprite);
         FieldEffectFreeTilesIfUnused(tileStart);
-
+        FreeQuestSpritePalette(quest, rowIndex);
         if (quest == QUEST_NONE)
+        {
             FreeSpriteTilesByTag(tag);
+        }
 
         SetQuestSpriteId(rowIndex, SPRITE_NONE);
         SetQuestSpriteTags(rowIndex,TAG_NONE);
@@ -1947,7 +1948,7 @@ static u32 GetQuestSpriteId(enum QuestMenuRows row)
     return sStateDataPtr->questSpriteInfo[row].spriteId;
 }
 
-static u32 UNUSED GetQuestSpriteTags(enum QuestMenuRows row)
+static u32 GetQuestSpriteTags(enum QuestMenuRows row)
 {
     return sStateDataPtr->questSpriteInfo[row].tileTag;
 }
@@ -2025,8 +2026,8 @@ static void PrintQuestSprite(s32 questId, enum QuestMenuRows row)
             spriteId = AddItemIconSprite(tag,tag,entityId);
             if (spriteId != MAX_SPRITES)
             {
-                gSprites[spriteId].x2 = x;
-                gSprites[spriteId].y2 = y;
+                gSprites[spriteId].x = x;
+                gSprites[spriteId].y = y;
             }
             break;
     }
@@ -2051,6 +2052,8 @@ static void CropQuestIcons(u32 spriteId)
 
 static u32 GetQuestSpriteType(s32 questId)
 {
+    u32 parentQuest = sStateDataPtr->parentQuest;
+
     switch (questId)
     {
         case LIST_CANCEL:
@@ -2060,7 +2063,10 @@ static u32 GetQuestSpriteType(s32 questId)
             return QUEST_SPRITE_TYPE_EMPTY;
             break;
         default:
-            return sSideQuests[questId].spritetype;
+            if (GetCurrentQuestSubquestState())
+                return sSideQuests[parentQuest].subquests[questId].spritetype;
+            else
+                return sSideQuests[questId].spritetype;
             break;
     }
 }
@@ -2084,6 +2090,11 @@ static u32 GetQuestSpriteEntityId(s32 questId)
                 return sSideQuests[questId].sprite;
             break;
     }
+}
+
+u32 Quest_GetSubquestSpriteEntityId(enum QuestIdList parentQuest, enum SubQuestDefines questId)
+{
+    return sSideQuests[parentQuest].subquests[questId].sprite;
 }
 
 static const u8* const progressIndicatorLUT[] =
@@ -2244,7 +2255,7 @@ static void GenerateFilterAmountName(void)
         }
         else
         {
-            StringCopy(gStringVar1,gText_Blank);
+            StringCopy(gStringVar1,gText_ExpandedPlaceholder_Empty);
         }
 
         ConvertIntToDecimalStringN(gStringVar2, GetDenominatorQuests(), STR_CONV_MODE_LEFT_ALIGN,digits);
@@ -2398,6 +2409,7 @@ void EnterSubsavedQuestModeAndCleanUp(u8 taskId, s16 *data,
 {
     if (DoesQuestHaveChildrenAndNotInactive(input))
     {
+        RemoveAllQuestSprites();
         PrepareFadeOut(taskId);
         PlaySE(SE_SELECT);
         sStateDataPtr->parentQuest = input;
@@ -2409,6 +2421,7 @@ void EnterSubsavedQuestModeAndCleanUp(u8 taskId, s16 *data,
 void IncrementFilterAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_INCREMENT);
         Task_QuestMenuCleanUp(taskId);
@@ -2418,6 +2431,7 @@ void IncrementFilterAndCleanUp(u8 taskId)
 void DecrementFilterAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_DECREMENT);
         Task_QuestMenuCleanUp(taskId);
@@ -2427,6 +2441,7 @@ void DecrementFilterAndCleanUp(u8 taskId)
 void IncrementSortAndCleanUp(u8 taskId)
 {
     if (!GetCurrentQuestSubquestState()) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageMode(QUEST_ACTION_ALPHA);
         Task_QuestMenuCleanUp(taskId);
@@ -2437,6 +2452,7 @@ void ToggleFavoriteAndCleanUp(u8 taskId, u8 selectedQuestId)
 {
     if (!GetCurrentQuestSubquestState()
             && !CheckSelectedIsCancel(selectedQuestId)) {
+        RemoveAllQuestSprites();
         PlaySE(SE_SELECT);
         ManageFavorites(selectedQuestId);
         sStateDataPtr->restoreCursor = FALSE;
@@ -2453,6 +2469,7 @@ bool8 CheckSelectedIsCancel(u8 selectedQuestId)
 }
 void ReturnFromSubquestAndCleanUp(u8 taskId)
 {
+    RemoveAllQuestSprites();
     PrepareFadeOut(taskId);
     PlaySE(SE_SELECT);
     ManageMode(QUEST_ACTION_SUB);
@@ -2763,7 +2780,9 @@ void QuestMenu_SetupQuestState(u8 questId, u8 state)
 void QuestMenu_JumpToQuestState(u8 questId, u8 state)
 {
     QuestMenu_SetupQuestState(questId, state);
-    SetWarpDestination(questState.mapGroup, questState.mapNum, questState.warpId, questState.x, questState.y);
+
+    s32 warpId = ((questState.y == 0) && (questState.x == 0)) ? questState.warpId : WARP_ID_NONE;
+    SetWarpDestination(questState.mapGroup, questState.mapNum, warpId, questState.x, questState.y);
     DoWarp();
     ResetInitialPlayerAvatarState();
 }
@@ -2784,9 +2803,5 @@ u32 GetMaxQuestState(u16 questId)
 
     return MAX_QUEST_STATES;
 }
-
-// PSF TODO sprites jump when switching between filters
-// I assume this is because we are freeing the sprites too early
-// when scrolling the menu and first menu WAS a parent and then no longer is, it takes a frame or so to make the arrow disappear
 
 #undef questState

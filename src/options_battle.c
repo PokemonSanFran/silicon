@@ -4,7 +4,9 @@
 #include "options_battle.h"
 #include "pokemon.h"
 #include "battle_tower.h"
+#include "frontier_util.h"
 #include "pokemon_storage_system.h"
+#include "pokerus.h"
 #include "ui_options_menu.h"
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
@@ -15,10 +17,10 @@
 #include "line_break.h"
 #include "event_data.h"
 #include "little_cup.h" // littlecup
+#include "test/test.h"
 
 // Battle Settings: Experience
 static u32 GetBattleExperienceOption(void);
-static bool32 IsMonInvalid(struct Pokemon);
 static bool32 IsMonMaxLevel(struct Pokemon);
 static void CalcAndSetNewExp(struct BoxPokemon *, struct Pokemon,u32);
 static u32 GetEVYield(u32, u16);
@@ -89,7 +91,7 @@ bool32 IsExperienceOptionAll(void)
     return (GetBattleExperienceOption() == BATTLE_OPTION_EXPERIENCE_ALL);
 }
 
-static bool32 IsMonInvalid(struct Pokemon tempMon)
+bool32 IsMonInvalid(struct Pokemon tempMon)
 {
     if (GetMonData(&tempMon,MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
         return TRUE;
@@ -200,7 +202,7 @@ static u32 CalcNewEV(u32 statIndex, struct Pokemon tempMon,  u32 totalEVs, u32 e
     u32 heldItem, holdEffect, stat, bonus, evs;
     u32 evIncrease = 0, multiplier = 1;
 
-    if (CheckPartyHasHadPokerus(&tempMon, 0))
+    if (CheckMonHasHadPokerus(&tempMon))
         multiplier = 2;
 
     heldItem = GetMonData(&tempMon, MON_DATA_HELD_ITEM, 0);
@@ -229,14 +231,16 @@ static bool32 HasAlreadyGivenPointsBoxMons(void)
     return FALSE;
 }
 
-void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
+u32 ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 {
     u32 boxId, boxPosition, totalEVs;
     struct Pokemon tempMon;
     struct BoxPokemon *boxMon;
+    u32 count = 0;
+    bool32 flag;
 
     if (!IsExperienceOptionAll() || HasAlreadyGivenPointsBoxMons())
-        return;
+        return 0;
 
     gBattleStruct->givenPointsBoxMons = TRUE;
 
@@ -245,6 +249,7 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             BoxMonAtToMon(boxId, boxPosition, &tempMon);
+            flag = FALSE;
 
             if (IsMonInvalid(tempMon))
                 continue;
@@ -256,14 +261,22 @@ void ApplyPointsBoxMons(u32 battleEXP, u16 defeatedSpecies)
 
             totalEVs = GetMonEVCount(&tempMon);
             if (totalEVs < MAX_TOTAL_EVS)
+            {
+                flag = TRUE;
                 CheckAndCalcEVs(totalEVs,defeatedSpecies,tempMon,boxMon);
+            }
 
-            if (IsMonMaxLevel(tempMon))
-                continue;
+            if (!IsMonMaxLevel(tempMon))
+            {
+                flag = TRUE;
+                CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            }
 
-            CalcAndSetNewExp(boxMon,tempMon,battleEXP);
+            if (flag)
+                count += 1;
         }
     }
+    return count;
 }
 
 static bool32 HasAlreadyPrintedGotExpMsg(void)
@@ -274,7 +287,7 @@ static bool32 HasAlreadyPrintedGotExpMsg(void)
     return FALSE;
 }
 
-void PrintExpShareMessage(void)
+void PrintExpShareMessage(u32 pcMonsThatReceivedPoints)
 {
     if(HasAlreadyPrintedGotExpMsg())
         return;
@@ -284,10 +297,10 @@ void PrintExpShareMessage(void)
 
     gBattleStruct->teamGotExpMsgPrinted = TRUE;
 
-    if (!IsExperienceOptionAll())
-        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
-    else
+    if (IsExperienceOptionAll() && pcMonsThatReceivedPoints > 0)
         PrepareStringBattle(STRINGID_ALLGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
+    else if (gBattleStruct->battlerExpReward > 0 || gBattleStruct->evsGiven > 0)
+        PrepareStringBattle(STRINGID_PARTYGAINEDPOINTS, gBattleStruct->expGetterBattlerId);
 }
 
 // ***********************************************************************
@@ -309,8 +322,9 @@ void Script_AreIndividualValuesDisabled(void)
 
 bool32 AreIndividualValuesDisabled(void)
 {
-#ifdef TESTING
-    return FALSE;
+#if TESTING
+    if (!gSiliconTestVariables.overrideIVs)
+        return FALSE;
 #endif
     return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
 }
@@ -416,7 +430,7 @@ static bool8 PrintGameOverMessage(u8 taskId, u8 x, u8 y)
         break;
     case 1:
         RunTextPrinters();
-        if (!IsTextPrinterActive(windowId))
+        if (!IsTextPrinterActiveOnWindow(windowId))
         {
             gTasks[taskId].tPrintState = 0;
             return TRUE;
@@ -490,7 +504,7 @@ static bool32 TryToMoveMonFromStorageSystem(void)
              && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
              && !IsFaintedBoxMon(&gPokemonStoragePtr->boxes[i][j]))
             {
-                BoxMonAtToMon(i, j, &gPlayerParty[0]);
+                BoxMonAtToMon(i, j, &gParties[B_TRAINER_PLAYER][0]);
                 ZeroBoxMonAt(i, j);
                 return TRUE;
             }
@@ -554,6 +568,7 @@ void PerformPlayerFaintedMonOperations(struct Pokemon *mon)
             CopyMonToPC(mon);
         ZeroMonData(mon);
         CompactPartySlots();
+        gPartiesCount[B_TRAINER_PLAYER] = CalculatePartyCount(B_TRAINER_PLAYER);
     }
 }
 
@@ -644,33 +659,33 @@ u32 GetCurrentPSFLevelCap(void)
 
     switch (VarGet(B_LEVEL_CAP_VARIABLE))
     {
-        case 0: return 25;
-        case 1: return 28;
-        case 2: return 31;
-        case 3: return 34;
-        case 4: return 37;
-        case 5: return 40;
-        case 6: return 43;
-        case 7: return 46;
-        case 8: return 49;
-        case 9: return 52;
-        case 10: return 55;
-        case 11: return 58;
-        case 12: return 61;
-        case 13: return 64;
-        case 14: return 67;
-        case 15: return 70;
-        case 16: return 73;
-        case 17: return 74;
-        case 18: return 75;
-        case 19: return 76;
-        case 20: return 77;
-        case 21: return 79;
-        case 22: return 81;
-        case 23: return 83;
-        case 24: return 85;
-        case 25: return 87;
-        case 26: return 89;
+        case 0: return LEVEL_CAP_VALUE_0;
+        case 1: return LEVEL_CAP_VALUE_1;
+        case 2: return LEVEL_CAP_VALUE_2;
+        case 3: return LEVEL_CAP_VALUE_3;
+        case 4: return LEVEL_CAP_VALUE_4;
+        case 5: return LEVEL_CAP_VALUE_5;
+        case 6: return LEVEL_CAP_VALUE_6;
+        case 7: return LEVEL_CAP_VALUE_7;
+        case 8: return LEVEL_CAP_VALUE_8;
+        case 9: return LEVEL_CAP_VALUE_9;
+        case 10: return LEVEL_CAP_VALUE_10;
+        case 11: return LEVEL_CAP_VALUE_11;
+        case 12: return LEVEL_CAP_VALUE_12;
+        case 13: return LEVEL_CAP_VALUE_13;
+        case 14: return LEVEL_CAP_VALUE_14;
+        case 15: return LEVEL_CAP_VALUE_15;
+        case 16: return LEVEL_CAP_VALUE_16;
+        case 17: return LEVEL_CAP_VALUE_17;
+        case 18: return LEVEL_CAP_VALUE_18;
+        case 19: return LEVEL_CAP_VALUE_19;
+        case 20: return LEVEL_CAP_VALUE_20;
+        case 21: return LEVEL_CAP_VALUE_21;
+        case 22: return LEVEL_CAP_VALUE_22;
+        case 23: return LEVEL_CAP_VALUE_23;
+        case 24: return LEVEL_CAP_VALUE_24;
+        case 25: return LEVEL_CAP_VALUE_25;
+        case 26: return LEVEL_CAP_VALUE_26;
         default: return MAX_LEVEL;
     }
 }
@@ -796,7 +811,7 @@ bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
         return TRUE;
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_FIRST_ONLY:
     case BATTLE_OPTION_FIRST_POKEMON_CATCH_DUPLICATE:
-        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gSaveBlock1Ptr->location.mapGroup])
+        if (gSaveBlock3Ptr->firstPokemonCatchFlags[gMapHeader.regionMapSectionId])
             return FALSE;
         break;
     }
@@ -904,7 +919,6 @@ u32 HandleScaledLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 
    //if (IsPlayerUsingGlassOnDefeatedTrainer())
        //return origEnemyLevel;
-    // PSF TODO when player is accessing the Google Glass but has already beaten the Trainer, their original unsacled level should show, otherwise show the scaled level. We can acheieve this with a temp var/flag or maybe even a new battleTypeFlags
 
    return CalculatedScaledTrainerLevel(origEnemyLevel, origNumEnemyMon);
 }
@@ -919,7 +933,6 @@ u32 HandleScaledSpecies(u32 origSpecies)
 
 static u32 GetScaledSpecies(u32 origSpecies)
 {
-    // PSF TODO Update with formula to figure out when to evolve the Pokemonn
     return origSpecies;
 }
 
@@ -938,6 +951,9 @@ static u32 GetPartySizeDifference(u32 numPlayerMon, u32 numEnemyMon)
 
 static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
 {
+    if (FlagGet(FLAG_DISABLE_SCALING))
+        return enemyMonLevel;
+
     u32 numPlayerMon = 0, difference = 0;
     u32 playerMaxLevel = GetHighestLevelInPlayerParty();
     u32 average = AveragePlayerMaxEnemyMonLevels(enemyMonLevel,playerMaxLevel);
@@ -945,7 +961,7 @@ static u32 CalcRawScaledLevel(u32 enemyMonLevel, u32 numEnemyMon)
     if (enemyMonLevel > playerMaxLevel)
         return average;
 
-    numPlayerMon = CalculatePartyCount(gPlayerParty);
+    numPlayerMon = CalculatePartyCount(B_TRAINER_PLAYER);
     difference = GetPartySizeDifference(numPlayerMon, numEnemyMon);
 
     if ((playerMaxLevel - enemyMonLevel) <= TRAINER_SCALING_THRESHOLD)
@@ -997,7 +1013,6 @@ bool32 IsPointsMessagesOptionOn(void)
 
 void PrintMonRecievedEffortValues(bool32 wasSentOut, u8* expMonId)
 {
-    // PSF TODO: This returns 0 which is STRINGID_INTROMSG, which prints "Wild Poemon appeared!". When the option is off, the message is skipped entirely, with no delay. Right now, manually incrementing the switch case causes a delay, as if the message was there anyways.
     if (!IsPointsMessagesOptionOn())
         return;
 
@@ -1085,23 +1100,26 @@ bool32 IsLastUsedBallOptionAfterAndLastBallIsNone(void)
 static u32 GetBestBallForBattle(void)
 {
     u32 i;
-    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS];
-    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE;
-    u8 leftAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_LEFT);
-    u8 rightAtkFlankId = GetBattlerPosition(B_POSITION_PLAYER_RIGHT);
-    u8 atkId = (IsBattlerAlive(leftAtkFlankId)) ? leftAtkFlankId : rightAtkFlankId;
+    struct BagPocket *ballsPocket = &gBagPockets[POCKET_POKE_BALLS - 1];
+    u32 odds = 0, newOdds = 0, bestBall = ITEM_NONE, oldLastUsedItem = gLastUsedItem;
+    u8 atkId = GetCatchingAttacker();
     u8 defId = GetCatchingBattler();
 
     if (gMain.inBattle)
     {
         for (i = 0; i < ballsPocket->capacity; i++)
         {
-            if (ballsPocket->itemSlots[i].itemId == ITEM_NONE)
+            u32 ball = ballsPocket->itemSlots[i].itemId;
+
+            if (ball == ITEM_NONE)
                 break;
-            if (ballsPocket->itemSlots[i].itemId == ITEM_MASTER_BALL)
+
+            if (ball == ITEM_MASTER_BALL)
                 continue;
 
-            odds = GetCatchingOdds(atkId, defId, ballsPocket->itemSlots[i].itemId);
+            gLastUsedItem = ball;
+
+            odds = ComputeCaptureOdds(atkId,defId);
             if (odds > newOdds)
             {
                 newOdds = odds;
@@ -1109,6 +1127,7 @@ static u32 GetBestBallForBattle(void)
             }
         }
     }
+    gLastUsedItem = oldLastUsedItem;
 
     return bestBall;
 }
@@ -1219,7 +1238,7 @@ bool32 IsBarOptionInstant(u8 whichBar)
 #define B_HEALTHBAR_PIXELS 48
 #define B_EXPBAR_PIXELS 64
 
-u32 GetHPFraction(u8 battlerId)
+u32 GetHPFraction(enum BattlerId battlerId)
 {
     if (IsHPSpeedFast())
         return max(gBattleSpritesDataPtr->battleBars[battlerId].maxValue / (B_HEALTHBAR_PIXELS / 2), 1);
@@ -1279,5 +1298,5 @@ bool32 IsMonNicknamed(struct Pokemon *mon)
 
 bool32 IsChosenMonNicknamed(void)
 {
-    return IsMonNicknamed(&gPlayerParty[gSpecialVar_0x8004]);
+    return IsMonNicknamed(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
 }

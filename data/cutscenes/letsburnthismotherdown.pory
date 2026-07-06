@@ -3,7 +3,7 @@ const ARNAV = 1
 const TECHIE = 2
 const OLIVER = 3
 const CHARLOTTE = 4
-const ADELAIDE = 5
+const LUCREZIA = 5
 const CHIEF = 6
 const RAMESH = 7
 const KEIYING = 8
@@ -11,33 +11,32 @@ const KEIYING = 8
 const FLAG_HIDE_NERDS_COPS = FLAG_TEMP_1
 const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_3
-const FLAG_HIDE_ADELAIDE = FLAG_TEMP_4
+const FLAG_HIDE_LUCREZIA = FLAG_TEMP_4
 const FLAG_HIDE_RAMESH = FLAG_TEMP_5
 const FLAG_HIDE_KEIYING = FLAG_TEMP_6
 
-const KAI = 5
+const BAIYA = 5
 const CHARLOTTE_ARANTRAZ = 6
 const POLICE_A = 7
 const POLICE_B = 8
 
 const FLAG_HIDE_CHARLOTTE_ARANTRAZ = FLAG_TEMP_6
 const FLAG_HIDE_POLICE = FLAG_TEMP_7
-const FLAG_HIDE_KAI_ARANTRAZ = FLAG_TEMP_5
-
+const FLAG_HIDE_BAIYA_ARANTRAZ = FLAG_TEMP_5
 
 script LetsBurnThisMotherDown_ObjectShow_Script
 {
-    clearflag(FLAG_HIDE_KAI_ARANTRAZ)
+    clearflag(FLAG_HIDE_BAIYA_ARANTRAZ)
     setflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
     setflag(FLAG_HIDE_POLICE)
-    addobject(KAI)
-    setobjectxy(KAI,1,8)
-    setobjectxyperm(KAI,1,8)
+    addobject(BAIYA)
+    setobjectxy(BAIYA,1,8)
+    setobjectxyperm(BAIYA,1,8)
 }
 
 script LetsBurnThisMotherDown_ObjectHide_Script
 {
-    setflag(FLAG_HIDE_KAI_ARANTRAZ)
+    setflag(FLAG_HIDE_BAIYA_ARANTRAZ)
     setflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
     setflag(FLAG_HIDE_POLICE)
 }
@@ -56,13 +55,13 @@ script LetsBurnThisMotherDown_Interact_Oliver_Script
 
 script LetsBurnThisMotherDown_ActiveQuest_Dialogue
 {
-    msgbox(gText_LetsBurnThisMotherDown_YoureCloserToThe,MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout."),MSGBOX_NPC,SPEAKER_OLIVER)
 end
 }
 
 script LetsBurnThisMotherDown_CompleteQuest_Dialogue
 {
-    msgbox(gText_LetsBurnThisMotherDown_ImStillShocked,MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("I'm still shocked they were using the inside of Arantraz. Absolutely insane."),MSGBOX_NPC,SPEAKER_OLIVER)
     end
 }
 
@@ -70,11 +69,11 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
 {
     setvar(VAR_LETSBURNTHISMOTHERSTATE,ASSIGNED_BURN_MOTHER)
 
-    msgbox(format("We still need to find their new base of operations. Ever since we shut down NavalBase, we haven't been able to make heads or tails on where they're operating out of."),MSGBOX_NPC,SPEAKER_OLIVER)
+    msgbox(format("We still need to find their new base of operations. Ever since we shut down NavalBase we haven't been able to make heads or tails on where they're operating out of."),MSGBOX_NPC,SPEAKER_OLIVER)
 
-    msgbox(gText_LetsBurnThisMotherDown_YoureCloserToThe,,SPEAKER_OLIVER)
+    msgbox(format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout."),,SPEAKER_OLIVER)
 
-    msgbox(format("(I need to talk to Kai… I think I can still save him. I need to get to Arantraz.)"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("(I need to talk to Baiya… I think I can still save him. I need to get to Arantraz.)"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
@@ -83,13 +82,13 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
             msgbox(format("I don't want a repeat of what happened to Adaora."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
         case FALSE_TIMELINE_MAN_COMPLETE:
-            msgbox(format("Maybe without Alcemene, he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("Maybe without Alcemene he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
 
     msgbox(format("I think I can still help him. I need to get to Arantraz."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
     startquest(QUEST_LETSBURNTHISMOTHERDOWN)
     buffermapname(STR_VAR_1,MAP_ARANTRAZ)
-    msgbox(gText_YouHaveYourOrders_DoYouWantTo,MSGBOX_YESNO)
+    msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
     if (var(VAR_RESULT))
     {
         fadeblackandsetremovewarpfadeflag
@@ -110,43 +109,43 @@ script LetsBurnThisMotherDown_CheckActiveQuest_Script
 script LetsBurnThisMotherDown_ConfrontPlayer
 {
     lock
-    if (var(VAR_LETSBURNTHISMOTHERSTATE) == SAVE_KAI_ARANTRAZ)
+    if (var(VAR_LETSBURNTHISMOTHERSTATE) == SAVE_BAIYA_ARANTRAZ)
     {
         release
         end
     }
 
-    setvar(VAR_LETSBURNTHISMOTHERSTATE,SAVE_KAI_ARANTRAZ)
+    setvar(VAR_LETSBURNTHISMOTHERSTATE,SAVE_BAIYA_ARANTRAZ)
 
-    clearflag(FLAG_HIDE_KAI_ARANTRAZ)
-    addobject(KAI)
+    clearflag(FLAG_HIDE_BAIYA_ARANTRAZ)
+    addobject(BAIYA)
     playbgm(MUS_ENCOUNTER_CHAMPION,TRUE)
 
     applymovement(PLAYER,Common_Movement_WalkUp)
-    applymovement(KAI,LetsBurnThisMotherDown_WalkTowardsPlayer)
+    applymovement(BAIYA, moves(walk_down * 3))
     waitmovement(0)
 
-    msgbox(format("You chose the wrong side {PLAYER}!"),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("You chose the wrong side {PLAYER}!"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
     {
         case FALSE_TIMELINE_HOW_COMPLETE:
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-            msgbox(format("I know you heard about Adaora... Kai, it was brutal. I don't want that to happen to you!"),,SPEAKER_ALICIA)
+            msgbox(format("I know you heard about Adaora... Baiya, it was brutal. I don't want that to happen to you!"),,SPEAKER_ALICIA)
 
-            msgbox(format("{PLAYER}, do you think I'd be doing any of this if I was afraid of the police? We all knew the risks, and we're all willing to make sacrifices if it means doing the right thing."),,SPEAKER_KAI_TIDE)
+            msgbox(format("{PLAYER}, do you think I'd be doing any of this if I was afraid of the police? We all knew the risks, and we're all willing to make sacrifices if it means doing the right thing."),,SPEAKER_BAIYA_TIDE)
 
         case FALSE_TIMELINE_MAN_COMPLETE:
 
-            msgbox(format("The Tide isn't going to survive without Alcmene. This is a sinking ship, Kai."),,SPEAKER_ALICIA)
+            msgbox(format("The Tide isn't going to survive without Vigrim. This is a sinking ship, Baiya."),,SPEAKER_ALICIA)
 
-            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Residofrom you goes beyond Alcmene. Even if you take her down, there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
+            msgbox(format("What a stupid thing to say, {PLAYER}. Saving Resido from you goes beyond Vigrim. Even if you take her down there's hundreds of us to take up the cause."),,SPEAKER_ALICIA)
 
             msgbox(format("From ME?!?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_ANGRY)
     }
 
-    msgbox(format("Kai, I know you want to do good. But this isn't the way! If you want real meaningful change, let's work with them. They're good people. We all want the same thing!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+    msgbox(format("Baiya, I know you want to do good. But this isn't the way! If you want real meaningful change, let's work with them. They're good people. We all want the same thing!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
 specialvar(VAR_RESULT,GetFalseTimelineCompletion)
 switch(var(VAR_RESULT))
@@ -154,24 +153,24 @@ switch(var(VAR_RESULT))
       case FALSE_TIMELINE_NONE_COMPLETE:
       case FALSE_TIMELINE_MAN_COMPLETE:
       case FALSE_TIMELINE_HOW_COMPLETE:
-        msgbox(format("You don't think we've tried that? You just got here, {PLAYER}."),,SPEAKER_KAI_TIDE)
+        msgbox(format("You don't think we've tried that? You just got here, {PLAYER}."),,SPEAKER_BAIYA_TIDE)
 
       case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-        msgbox(format("Are you trying to tell me that the same company that is deupitzing transplants to attack civilians and works with the police to brutalize people are the 'good' guys?"),,SPEAKER_KAI_TIDE)
+        msgbox(format("Are you trying to tell me that the same company that is deputizing transplants to attack civilians and works with the police to brutalize people are the 'good' guys?"),,SPEAKER_BAIYA_TIDE)
 }
 
-    msgbox(format("You know, people here in Arantraz died trying to do things the right way… but anybody with power doesn't care. Not the government. Not SharpriseCapital. None of these ridiciulous companies!"),,SPEAKER_KAI_TIDE)
+    msgbox(format("You know, people here in Arantraz died trying to do things the right way… but anybody with power doesn't care. Not the government. Not SharpRise Capital. None of these ridiciulous companies!"),,SPEAKER_BAIYA_TIDE)
 
     closemessage
 
-    applymovement(KAI,Common_Movement_WalkDown)
+    applymovement(BAIYA,Common_Movement_WalkDown)
     waitmovement(0)
 
-    msgbox(format("They ignore us, and when we get fed up and take matters into our own hands, they label us terrorists. They frame us. They try to turn our region against us. For what? Feeding the homeless? Asking workers to be treated fairly? {PLAYER}, these people are monsters."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("They ignore us, and when we get fed up and take matters into our own hands, they label us terrorists. They frame us. They try to turn our region against us. For what? Feeding the homeless? Asking workers to be treated fairly? {PLAYER}, these people are monsters."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
-    msgbox(format("…"),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("…"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
-    msgbox(format("I always held back before. I didn't think it was fair to you, you didn't know the whole situation. But you know enough now, and still chose wrong."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("I always held back before. I didn't think it was fair to you, you didn't know the whole situation. But you know enough now, and still chose wrong."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
     startmenu_savescreen
     goto(LetsBurnThisMotherDown_StartBattle_Script)
@@ -183,7 +182,7 @@ script LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script
 
     if (var(VAR_TEMP_0) != 1)
     {
-        applymovement(PLAYER,LetsBurnThisMotherDown_WalkFromRight)
+        applymovement(PLAYER, moves(walk_down, walk_left, face_up))
     }
     elif (var(VAR_TEMP_1) == 9)
     {
@@ -191,7 +190,7 @@ script LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script
     }
     else
     {
-        applymovement(PLAYER,LetsBurnThisMotherDown_WalkFromUp)
+        applymovement(PLAYER, moves(walk_right, walk_down * 2, walk_left, face_up))
     }
     waitmovement(0)
 }
@@ -200,37 +199,37 @@ script LetsBurnThisMotherDown_StartBattle_Script
 {
     call(LetsBurnThisMotherDown_PositionPlayerBeforeBattle_Script)
 
-    msgbox(format("I'm going for revolution. With or without you."),MSGBOX_DEFAULT,SPEAKER_KAI_TIDE)
+    msgbox(format("We're winning this revolution. With or without you."),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
     closemessage
 
-    trainerbattle_no_intro(TRAINER_KAI_LETSBURNTHISMOTHERDOWN,format("Damn it! I can't keep up!"))
+    trainerbattle_no_intro(TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN,format("Damn it! I can't keep up!"))
     goto(LetsBurnThisMotherDown_PostBattle_Dialogue)
 }
 
 script LetsBurnThisMotherDown_PostBattle_Dialogue
 {
     startcutscene(JUMPPLAYER_LETSBURNTHISMOTHERDOWN)
-    setvar(VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_KAI_ARANTRAZ)
+    setvar(VAR_LETSBURNTHISMOTHERSTATE,DEFEATED_BAIYA_ARANTRAZ)
     questmenu(QUEST_MENU_SET_REWARD,QUEST_LETSBURNTHISMOTHERDOWN)
 
-    applymovement(KAI,LetsBurnThisMotherDown_WalkBackwards)
+    applymovement(BAIYA, moves(lock_facing_direction, walk_up, unlock_facing_direction))
     waitmovement(0)
 
-    buffermovename(STR_VAR_1,MOVE_HYPER_BEAM)
+    buffermovename(STR_VAR_1,MOVE_ARMOR_CANNON)
     msgbox(format("{STR_VAR_1}!"),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
-    playse(SE_M_HYPER_BEAM) //PSF TODO figure out what hyper beam looks like
+    playse(SE_M_HYPER_BEAM)
     waitse
-    fadescreen(FADE_TO_WHITE)
-    applymovement(KAI,LetsBurnThisMotherDown_HitByHyperBeam)
+    fadescreenswapbuffers(FADE_TO_WHITE)
+    applymovement(BAIYA, moves(walk_up, walk_right))
     waitmovement(0)
-    fadescreen(FADE_FROM_WHITE)
+    fadescreenswapbuffers(FADE_FROM_WHITE)
 
     clearflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
     addobject(CHARLOTTE_ARANTRAZ)
     playbgm(MUS_ENCOUNTER_BRENDAN,TRUE)
-    applymovement(6,LetsBurnThisMotherDown_Attack)
+    applymovement(6, moves(walk_down * 4))
     waitmovement(0)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
@@ -241,35 +240,40 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
             msgbox(format("What the hell are you doing?!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
         default:
-            msgbox(format("What the hell are you doing here?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+            msgbox(format("What the hell are you doing here? And did you just use {STR_VAR_1} on a person?!?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     }
 
-    msgbox(format("You two were always weirdly close, I noticed it back at the Championship. I was starting to think you double-crossed us, so I followed you. And then I took care of it."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("You two were always weirdly close, I noticed it back at the Championship. I was starting to think you double-crossed us, so I followed you. And then I handled the terrorist myself."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("We might disagree, but I would never call Baiya a terrorist..."),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
     {
+        case FALSE_TIMELINE_NONE_COMPLETE:
+            msgbox(format("Does being terrorist mean we can attack people with Pokemon?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+            msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like."),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_COMPLETE:
+            msgbox(format("I've watched you threaten people, but attacking them head on? After they're defeated?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
+            msgbox(format("All of those scrubs were nothing compared to Baiya. I don't respect him... but even I can admit he's strong. We can't take any chances, especially after you let your guard down!"),,SPEAKER_CHARLOTTE_SHARPRISE)
+        case FALSE_TIMELINE_HOW_COMPLETE:
+            msgbox(format("I've seen the police attack The Tide... but Baiya? He's a Trainer, like us! Are we supposed to attack him too?"),,SPEAKER_ALICIA)
+            msgbox(format("Yes."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("SharpRise Captial has deputized us to extermine The Tide. This is what extermination looks like."),,SPEAKER_CHARLOTTE_SHARPRISE)
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-            msgbox(format("So endangering his life is taking care of it!?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_ANGRY)
-            msgbox(format("We're supposed to exterminate The Tide. And I didn't think you were going to."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("No, I wasn't planning on attacking him after I already beat him."),,SPEAKER_ALICIA)
-            msgbox(format("Whatever."),,SPEAKER_CHARLOTTE_SHARPRISE)
-
-        default:
-            msgbox(format("No, I… they're not like the rest of TheTide. I thought we could work with them. I was wrong."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-            msgbox(format("Yeah, no shit! None of these people can be trusted. {PLAYER}, you could have gotten seriously hurt."),,SPEAKER_CHARLOTTE_SHARPRISE)
-            msgbox(format("I know, I know. I'm sorry."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+            msgbox(format("And as long as we defeat The Tide, the ends justify the means?"),,SPEAKER_ALICIA)
+            msgbox(format("Yeah, no shit! None of these people can be trusted."),,SPEAKER_CHARLOTTE_SHARPRISE)
+            msgbox(format("Somehow, you ended up as the Resido League Champion. You need to start acting like it."),,SPEAKER_CHARLOTTE_SHARPRISE)
     }
 
-    msgbox(format("The cops should be right behind me. You can't be fucking up like this."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("The authorities should be right behind me."),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
     clearflag(FLAG_HIDE_POLICE)
     addobject(POLICE_A)
     addobject(POLICE_B)
-    applymovement(POLICE_A,LetsBurnThisMotherDown_ArrestA)
-    applymovement(POLICE_B,LetsBurnThisMotherDown_ArrestB)
+    applymovement(POLICE_A, moves(walk_down))
+    applymovement(POLICE_B, moves(walk_down, walk_left, walk_down, face_right))
     waitmovement(0)
 
     fadedefaultbgm
@@ -279,11 +283,11 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     end
 }
 
-script LetsBurnThisMotherDown_ShowAdelaide_Script
+script LetsBurnThisMotherDown_ShowLucrezia_Script
 {
-    setobjectxy(ADELAIDE,33,5)
-    setobjectxyperm(ADELAIDE,33,5)
-    setobjectmovementtype(ADELAIDE,MOVEMENT_TYPE_FACE_RIGHT)
+    setobjectxy(LUCREZIA,33,5)
+    setobjectxyperm(LUCREZIA,33,5)
+    setobjectmovementtype(LUCREZIA,MOVEMENT_TYPE_FACE_RIGHT)
 }
 
 script LetsBurnThisMotherDown_MissionComplete_Dialogue
@@ -295,61 +299,61 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     switch(var(VAR_RESULT))
     {
        case FALSE_TIMELINE_NONE_COMPLETE:
-        msgbox(format("I'm sorry. I really thought I could change their mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-        msgbox(format("You're young, and it ended well."),,SPEAKER_ADELAIDE)
-        msgbox(gText_LetsBurnThisMotherDown_ShuttingDown,,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("I'm sorry. I really thought I could change his mind."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+        msgbox(format("You're young, and it ended well."),,SPEAKER_LUCREZIA)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
 
        case FALSE_TIMELINE_MAN_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You've taken out their new base of operations and we've arrested their leader!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You've taken out their new base of operations and we've arrested their leader!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning, but it heals eventually,right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_LUCREZIA)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
 
        case FALSE_TIMELINE_HOW_COMPLETE:
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You've taken out their new base of operations and we've taken away their ability to recruit!"),,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You've taken out their new base of operations and we've taken away their ability to recruit!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
 
        case FALSE_TIMELINE_MAN_HOW_COMPLETE:
-        msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_ADELAIDE)
-        msgbox(gText_LetsBurnThisMotherDown_ShuttingDown,,SPEAKER_ADELAIDE,,EMOTE_HAPPY)
+        msgbox(format("Another job well done, {PLAYER}."),,SPEAKER_LUCREZIA)
+        msgbox(format("Shutting down their new base before it even gets off the ground is a major win!"),,SPEAKER_LUCREZIA,,EMOTE_HAPPY)
         msgbox(format("Sure, shutting down a base is great... but why do I feel like we're not actually helping?"),,SPEAKER_ALICIA)
-        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
-        msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
+        msgbox(format("How could you not feel like you're helpful?"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
+        msgbox(format("You and Charlotte have finally dismantled The Tide!"),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
         msgbox(format("People were actively relying on the The Tide, I saw that with my own eyes. How do we help those people now?"),,SPEAKER_ALICIA)
         msgbox(format("I feel like all we've done so far is attack and harass people."),,SPEAKER_ALICIA,,EMOTE_SAD)
-        msgbox(format("Look, cleaning a wound hurts at the beginning, but it heals eventually,right?"),,SPEAKER_ADELAIDE)
-        msgbox(format("We're working for the greater good, and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_ADELAIDE)
-        msgbox(format("Is the greater good just a region without opposition to Adelaide?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+        msgbox(format("Look, cleaning a wound hurts at the beginning but it heals eventually, right?"),,SPEAKER_LUCREZIA)
+        msgbox(format("We're working for the greater good and its going to be even easier for us to help people directly without those anarchists getting in the way."),,SPEAKER_LUCREZIA)
+        msgbox(format("Is the greater good just a region without opposition to Lucrezia?"),,SPEAKER_ALICIA,TAIL_THOUGHT)
         msgbox(format("..."),,SPEAKER_ALICIA,TAIL_THOUGHT)
         closemessage
         delay(30)
     }
 
-    msgbox(gText_LetsBurnThisMotherDown_ImStillShocked,,SPEAKER_OLIVER)
+    msgbox(format("I'm still shocked they were using the inside of Arantraz. Absolutely insane."),,SPEAKER_OLIVER)
     closemessage
 
     applymovement(PLAYER,Common_Movement_FaceUp)
-    applymovement(ADELAIDE,Common_Movement_FaceUp)
+    applymovement(LUCREZIA,Common_Movement_FaceUp)
 
-    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding TheTide."),,SPEAKER_ADELAIDE)
+    msgbox(format("Police Chief Bill sent me an email with their current plan - they're going to treat the entire island as a crime scene and see if they can find anything else regarding The Tide."),,SPEAKER_LUCREZIA)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     if(var(VAR_RESULT) == FALSE_TIMELINE_HOW_COMPLETE)
     {
         msgbox(format("Did Chief Bill mention the arrests at all? Did they have to use force to get The Tide to comply?"),,SPEAKER_ALICIA,,EMOTE_SHOCK)
 
-        msgbox(format("I don't remember... but does it matter? Those scum should be rounded up by whatever means neccesary, even if that Kai boy showed promise."),,SPEAKER_ADELAIDE,,EMOTE_CONFUSE)
+        msgbox(format("I don't remember... but does it matter? Those scum should be rounded up by whatever means neccesary, even if that Baiya boy showed promise."),,SPEAKER_LUCREZIA,,EMOTE_CONFUSE)
     }
 
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
-    applymovement(ADELAIDE,LetsBurnThisMotherDown_LeaveRoom)
-    waitmovement(ADELAIDE)
+    applymovement(LUCREZIA, moves(walk_down * 6))
+    waitmovement(LUCREZIA)
     call(SharpriseSpire_Leagueops_ClearSecondaryCharacters_Script)
     completequest(QUEST_LETSBURNTHISMOTHERDOWN)
     setvar(VAR_LETSBURNTHISMOTHERSTATE,BURN_MOTHER_COMPLETE)
@@ -360,73 +364,3 @@ script LetsBurnThisMotherDown_MissionComplete_Dialogue
     end
 }
 
-text gText_LetsBurnThisMotherDown_YoureCloserToThe
-{
-    format("{PLAYER}, you're closer to the community then we are. Perhaps there's something you've learned, or could poke around to see if you can find traces of their new hideout.")
-}
-
-text gText_LetsBurnThisMotherDown_ImStillShocked
-{
-    format("I'm still shocked they were using the inside of Arantraz. Absolutely insane.")
-}
-
-movement LetsBurnThisMotherDown_WalkTowardsPlayer
-{
-    walk_down * 3
-}
-
-movement LetsBurnThisMotherDown_WalkBackwards
-{
-    lock_facing_direction
-    walk_up
-    unlock_facing_direction
-}
-
-movement LetsBurnThisMotherDown_HitByHyperBeam
-{
-    walk_up
-    walk_right
-}
-
-movement LetsBurnThisMotherDown_Attack
-{
-    walk_down * 4
-}
-
-movement LetsBurnThisMotherDown_ArrestA
-{
-    walk_down
-}
-
-movement LetsBurnThisMotherDown_ArrestB
-{
-    walk_down
-    walk_left
-    walk_down
-    face_right
-}
-
-movement LetsBurnThisMotherDown_WalkFromRight
-{
-    walk_down
-    walk_left
-    face_up
-}
-
-movement LetsBurnThisMotherDown_WalkFromUp
-{
-    walk_right
-    walk_down * 2
-    walk_left
-    face_up
-}
-
-movement LetsBurnThisMotherDown_LeaveRoom
-{
-    walk_down * 6
-}
-
-text gText_LetsBurnThisMotherDown_ShuttingDown
-{
-    format("Shutting down their new base before it even gets off the ground is a major win!")
-}

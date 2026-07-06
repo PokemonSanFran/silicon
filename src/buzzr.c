@@ -1,7 +1,11 @@
 #include "global.h"
 #include "random.h"
+#include "tv.h"
 #include "bg.h"
+#include "item.h"
 #include "text_window.h"
+#include "string_util.h"
+#include "line_break.h"
 #include "window.h"
 #include "palette.h"
 #include "task.h"
@@ -12,6 +16,7 @@
 #include "malloc.h"
 #include "scanline_effect.h"
 #include "constants/rgb.h"
+#include "constants/quest_ow.h"
 #include "decompress.h"
 #include "constants/songs.h"
 #include "sound.h"
@@ -22,16 +27,16 @@
 #include "buzzr.h"
 #include "buzzr_criteria.h"
 #include "data/buzzr/users.h"
-#include "data/buzzr/picture.h"
 #include "data/buzzr/tweets.h"
 #include "international_string_util.h"
 #include "gba/isagbprint.h"
 #include "event_data.h"
 #include "trig.h"
 #include "quests.h"
-#include "constants/quests.h"
 #include "script_menu.h"
 #include "field_weather.h"
+#include "quest_logic.h"
+#include "region_map.h"
 
 static void ResetQuestFanfareFlag(void);
 static void ResetPictureMode(void);
@@ -44,7 +49,7 @@ static void HandleArrowVisibility(struct Sprite *sprite, u32 arrowPos);
 static void SpriteCallback_Arrow(struct Sprite *sprite);
 static u8 GetArrowSpriteShape(u32 spriteConst);
 static u8 GetArrowSpriteSize(u32 spriteConst);
-static void CreateArrowSprite(u8 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *));
+static void CreateArrowSprite(u32 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *));
 static u32 CalculateCursorHeight(void);
 static void CreateCursorSprite(void);
 static void CreateUpArrowSprite(void);
@@ -66,8 +71,8 @@ static bool32 IsCurrentPositionTop(void);
 static u32 GetNumTimelineTweets(void);
 static u32 CalculateLastPosition(void);
 static bool32 IsCurrentPositionBottom(void);
-static void UpdatePosition(bool32 moveDown);
-static bool32 GetTweetIdFromPosition(u32 position);
+static bool8 UpdatePosition(bool32 moveDown);
+static u32 GetTweetIdFromPosition(u32 position);
 static void DebugPrintTimeline(u32 time);
 static void Task_BuzzrWaitFadeIn(u8 taskId);
 static void Task_MainInput(u8 taskId);
@@ -80,10 +85,7 @@ static void ChangeFilterAndReloadTimeline(u8 direction);
 static void ToggleSortAndReloadTimeline(void);
 static void ReloadTimeline(void);
 static void FadeAndBail(void);
-static u32 GetQuestTweetId(u32 tweetId);
-static void HandleQuestActivation(void);
 static void PlayQuestFanfare(void);
-static void ActivateQuest(u32 quest);
 static void Task_WaitFadeAndExitGracefully(u8 taskId);
 static void PlaySoundStartFadeQuitApp(u8 taskId);
 static void Buzzr_FreeResources(void);
@@ -92,6 +94,7 @@ static bool8 LoadGraphics(void);
 static void Buzzr_InitWindows(void);
 static u16 GetUserId(u16 tweetId);
 static const u8 *GetContent(u16 tweetId);
+static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId);
 static void *GetCriteria(u16 tweetId);
 static u16 GetQuest(u16 tweetId);
 static bool32 IsPrivate(u16 tweetId);
@@ -111,8 +114,8 @@ static void SetVerticalOffset(u32 offset);
 static u32 GetVerticalOffset(void);
 static u32 CalculateVerticalOffset(u32 numTweet, u32 previousTweet);
 static void PrintSortModeHeader(u8 windowId);
-static void PrintTweet(u16 selectedTweet, u32 verticalOffset, u32 typeTweet);
-static void HandleTweetBackground(u16 selectedTweet, u32 verticalOffset);
+static void PrintTweet(u32 numTweet, u16 selectedTweet, u32 verticalOffset, u32 typeTweet);
+static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalOffset);
 static void HandleTweetHeader(u16 tweetId, u32 verticalOffset, u32 typeTweet);
 static u32 UpdateHorizontalHeaderPosition(u8 *tweetUsername, u32 fontId);
 static void PrintTweet_OverworldHeader(u16 tweetId);
@@ -139,9 +142,8 @@ static void PrintMenuHeader(void);
 static const u8 *GetHelpBarText(void);
 static void PrintHelpBar(void);
 static const u32 *GetRelevantTiles(void);
-static const u32 *GetRelevantTilemap(void);
+static const u16 *GetRelevantTilemap(void);
 static const u16 *GetRelevantPalette(void);
-static void AllocTilemapBuffers(void);
 static void LoadBackground(void);
 static void ChangeBackground(void);
 static void ToggleSort(void);
@@ -156,8 +158,6 @@ static void LoadTimelineOrderFromSaveBlock(void);
 static void FilterTimeline(void);
 static void ReverseTimelineOrder(u32 numTimelineTweets, u32 index);
 static void SortTimeline(void);
-static bool32 HasQuestAndQuestNotActive(u32 tweetId);
-static void StoreQuestTweets(u32 index, u32 tweetId);
 static void AddTweetToTimeline(u32 index, u32 tweetId);
 static void AddNewTweetsToTimeline(void);
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex);
@@ -173,6 +173,14 @@ static void SetTweetFromOverworld(u16 tweetId);
 static void ClearTweetFromOverworld(void);
 static u32 GetTweetFromOverworld(void);
 static bool32 Buzzr_IsCalledFromOverworld(void);
+static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId);
+static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType);
+static void Buzzr_PrintHeaderIcons(void);
+static void Task_Buzzr_StartQuestAnimation(u8 taskId);
+static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId);
+static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId);
+static void CreateQuestSprite(void);
+static void SpriteCallback_QuestImage(struct Sprite *sprite);
 
 struct BuzzrState
 {
@@ -183,31 +191,25 @@ struct BuzzrState
     bool32 viewPic;
     u16 position;
     u8 verticalOffset;
+    u8 spriteIds[NUM_BUZZR_SPRITES];
 };
 
 struct BuzzrLists
 {
     u32 Timeline[TWEET_COUNT];
     u32 numTimelineTweets;
-    u32 QuestTweets[TWEET_COUNT];
     u32 TweetBitmap[NUM_TWEET_BITS];
 };
 
-static EWRAM_DATA struct BuzzrState *sBuzzrState = NULL;
-static EWRAM_DATA struct BuzzrLists *sBuzzrLists = NULL;
-
-static EWRAM_DATA u8 *sBg0TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
-static EWRAM_DATA u8 *sBg2TilemapBuffer = NULL;
-static const u32 TILEMAP_BUFFER_SIZE = (1024 * 2);
+static struct BuzzrState *sBuzzrState = NULL;
+static struct BuzzrLists *sBuzzrLists = NULL;
+static u8 *sBgTilemapBuffer[BG_BUZZR_COUNT] = {NULL};
 
 EWRAM_DATA u8 gTweetOverworldWindowId = 0;
 EWRAM_DATA u16 overworldTweet = TWEET_NONE;
 
-static const u8 sText_HelpBarReturn[] =_("{B_BUTTON} Return");
-static const u8 sText_HelpBarDefault[] =_("{DPAD_LEFTRIGHT} Filter {A_BUTTON} Expand {B_BUTTON} Close {START_BUTTON} Sort");
 static const u8 sText_OldestFirst[] =_("Oldest First");
-static const u8 sText_UsernamePrefix[] =_("+");
+static const u8 sText_UsernamePrefix[] =_("@");
 
 static const struct BgTemplate sBuzzrBgTemplates[] =
 {
@@ -219,8 +221,6 @@ static const struct BgTemplate sBuzzrBgTemplates[] =
     },
     {
         .bg = BG1_BACKGROUND_TWEETS,
-        //.charBaseIndex = 0,
-        //.mapBaseIndex = 29,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .priority = 1,
@@ -265,42 +265,40 @@ static const struct WindowTemplate sBuzzr_OverworldWindowTemplate =
     .tilemapTop = 1,
     .width = 30,
     .height = 18,
-    .paletteNum = 0,
+    .paletteNum = QUEST_OVERWORLD_PALETTE_INTERFACE_ID,
     .baseBlock = 1
 };
 
-static const u32 sLogomarkAllTilemap[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.bin.smolTM");
+static const u32 sZapBackgrounds[] = INCGFX_U32("graphics/ui_menus/buzzr/backgrounds/zap_backgrounds.png", ".4bpp");
 
-static const u32 sLogomarkAllTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkAll.4bpp.smol");
-static const u32 sLogomarkPlayerTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPlayer.4bpp.smol");
-static const u32 sLogomarkPrivateTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkPrivate.4bpp.smol");
-static const u32 sLogomarkQuestTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkQuest.4bpp.smol");
-static const u32 sLogomarkUnreadTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkUnread.4bpp.smol");
-static const u32 sLogomarkVerifiedTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/logomarkVerified.4bpp.smol");
+static const u32 sLogomarkAllTiles[] = INCGFX_U32("graphics/ui_menus/buzzr/buzzr_background.png", ".4bpp.smol");
+static const u16 sLogomarkAllTilemap[] = INCBIN_U16("graphics/ui_menus/buzzr/buzzr_background.bin.smolTM");
 
-static const u16 sLogomarkAllPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/logomarkAll.gbapal");
+static const u16 sLogomarkAllPalette[] = INCGFX_U16("graphics/ui_menus/buzzr/buzzr.pal", ".gbapal");
 
-static const u8 sVerified_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/verified.4bpp");
-static const u8 sPrivate_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/private.4bpp");
-static const u8 sMetrics_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/metrics_long.4bpp");
-static const u8 sUnread_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/unread.4bpp");
-static const u8 sPicture_Gfx[] = INCBIN_U8("graphics/ui_menus/buzzr/picture.4bpp");
+static const u8 sVerified_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/verified.png", ".4bpp");
+static const u8 sPrivate_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/private.png", ".4bpp");
+static const u8 sMetrics_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/metrics_long.png", ".4bpp");
+static const u8 sUnread_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/unread.png", ".4bpp");
+static const u8 sPicture_Gfx[] = INCGFX_U8("graphics/ui_menus/buzzr/picture.png", ".4bpp");
 
-const u32 sTweetBgTilemap3[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.bin.smolTM");
-const u32 sTweetBgTilemap4[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/1.bin.smolTM");
-const u32 sTweetBgTilemap5[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/2.bin.smolTM");
-const u32 sTweetBgTilemap6[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/3.bin.smolTM");
-const u32 sTweetBgTilemap7[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/4.bin.smolTM");
-const u32 sTweetBgTilemap8[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/5.bin.smolTM");
+static const u32 BuzzrUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/buzzr/up_arrow.png", ".4bpp.smol");
+static const u32 BuzzrDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/down_arrow.png", ".4bpp.smol");
+static const u32 BuzzrCursor_Gfx[]      = INCGFX_U32("graphics/ui_menus/buzzr/cursor.png", ".4bpp.smol");
 
-const u16 sTweetBgPalette[] = INCBIN_U16("graphics/ui_menus/buzzr/backgrounds/0.gbapal");
-
-const u32 sTweetBgTiles[] = INCBIN_U32("graphics/ui_menus/buzzr/backgrounds/0.4bpp.smol");
-
-static const u32 BuzzrUpArrow_Gfx[]        = INCBIN_U32("graphics/ui_menus/buzzr/up_arrow.4bpp.smol");
-static const u32 BuzzrDownArrow_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/down_arrow.4bpp.smol");
-static const u32 BuzzrCursor_Gfx[]      = INCBIN_U32("graphics/ui_menus/buzzr/cursor.4bpp.smol");
-
+static const struct {
+    const struct SpriteSheet sheets[NUM_BUZZR_SPRITE_TAGS];
+    const struct SpritePalette palette;
+} sBuzzr_SpriteGraphics =
+{
+    {
+        {
+            (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/icons.png", ".4bpp"),
+            TILE_OFFSET_4BPP(32), BUZZR_SPRITE_HEADER_TAG,
+        },
+    },
+    { sLogomarkAllPalette, PAL_UI_SPRITES}
+};
 enum FontColors
 {
     FONT_BLACK,
@@ -311,34 +309,6 @@ static const u8 BuzzrWindowFontColors[][3] =
 {
     [FONT_BLACK]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT},
     [FONT_WHITE]  = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,  TEXT_COLOR_TRANSPARENT},
-};
-
-const struct TweetBackground sTweetBgs[TWEET_BG_COUNT] =
-{
-    [TWEET_BG_3_LINE] =
-    {
-        .tilemap = sTweetBgTilemap3,
-    },
-    [TWEET_BG_4_LINE] =
-    {
-        .tilemap = sTweetBgTilemap4,
-    },
-    [TWEET_BG_5_LINE] =
-    {
-        .tilemap = sTweetBgTilemap5,
-    },
-    [TWEET_BG_6_LINE] =
-    {
-        .tilemap = sTweetBgTilemap6,
-    },
-    [TWEET_BG_7_LINE] =
-    {
-        .tilemap = sTweetBgTilemap7,
-    },
-    [TWEET_BG_8_LINE] =
-    {
-        .tilemap = sTweetBgTilemap8,
-    },
 };
 
 void CB2_BuzzrFromStartMenu(void)
@@ -466,7 +436,7 @@ static u8 GetArrowSpriteSize(u32 spriteConst)
 }
 
 
-static void CreateArrowSprite(u8 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *))
+static void CreateArrowSprite(u32 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spriteConst, void (*callback)(struct Sprite *))
 {
     u32 spriteId;
     const struct SpritePalette sBuzzrInterfaceSpritePalette[] =
@@ -519,6 +489,7 @@ static void CreateTimeline(void)
     ClearTimeline();
     FilterTimeline();
     SortTimeline();
+
 }
 
 static void ResetLoadStateToZero(void)
@@ -567,7 +538,6 @@ static void Buzzr_SetupCB(void)
             gMain.state++;
             break;
         case 2:
-            //DecompressTweetBgs();
             gMain.state++;
             break;
         case 3:
@@ -609,6 +579,7 @@ static void Buzzr_SetupCB(void)
             CreateUpArrowSprite();
             CreateCursorSprite();
             CreateDownArrowSprite();
+            CreateQuestSprite();
             gMain.state++;
             break;
         case 9:
@@ -617,6 +588,7 @@ static void Buzzr_SetupCB(void)
             gMain.state++;
             break;
         case 10:
+            Buzzr_PrintHeaderIcons();
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             gMain.state++;
             break;
@@ -629,19 +601,22 @@ static void Buzzr_SetupCB(void)
 
 static bool32 AllocZeroTilemapBuffers(void)
 {
-    sBg2TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg2TilemapBuffer == NULL)
-        return FALSE;
+    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+    {
+        sBgTilemapBuffer[backgroundId] = AllocZeroed(BG_SCREEN_SIZE);
 
-    sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg1TilemapBuffer == NULL)
-        return FALSE;
+        if (sBgTilemapBuffer[backgroundId] == NULL)
+            return FALSE;
 
-    sBg0TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
-    if (sBg0TilemapBuffer == NULL)
-        return FALSE;
-
+        memset(sBgTilemapBuffer[backgroundId],0,BG_SCREEN_SIZE);
+    }
     return TRUE;
+}
+
+static void SetScheduleBgs(u32 backgroundId)
+{
+    SetBgTilemapBuffer(backgroundId, sBgTilemapBuffer[backgroundId]);
+    ScheduleBgCopyTilemapToVram(backgroundId);
 }
 
 static void HandleAndShowBgs(void)
@@ -649,18 +624,11 @@ static void HandleAndShowBgs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBuzzrBgTemplates, NELEMS(sBuzzrBgTemplates));
 
-    SetBgTilemapBuffer(BG0_TEXT_CONTENT,sBg0TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(BG0_TEXT_CONTENT);
-
-    SetBgTilemapBuffer(BG1_BACKGROUND_TWEETS, sBg1TilemapBuffer);
-
-    SetBgTilemapBuffer(BG2_BACKGROUND_UI, sBg2TilemapBuffer);
-    ScheduleBgCopyTilemapToVram(BG2_BACKGROUND_UI);
-
-    ShowBg(BG0_TEXT_CONTENT);
-    if(IsTimelinePictureMode())
-        HideBg(BG1_BACKGROUND_TWEETS);
-    ShowBg(BG2_BACKGROUND_UI);
+    for (u32 backgroundId = 0; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+    {
+        SetScheduleBgs(backgroundId);
+        ShowBg(backgroundId);
+    }
 }
 
 static bool8 Buzzr_InitBgs(void)
@@ -725,7 +693,7 @@ static bool32 IsCurrentPositionBottom(void)
     return (sBuzzrState->position == lastPosition);
 }
 
-static void UpdatePosition(bool32 moveDown)
+static bool8 UpdatePosition(bool32 moveDown)
 {
     u32 currentPosition = GetCurrentPosition();
     u32 lastPosition = CalculateLastPosition();
@@ -733,23 +701,29 @@ static void UpdatePosition(bool32 moveDown)
     if (moveDown)
     {
         if (currentPosition == lastPosition)
+        {
             PlaySE(SE_BOO);
-        else
-            SetCurrentPosition(++currentPosition);
-
-        return;
+            return FALSE;
+        }
+        SetCurrentPosition(++currentPosition);
     }
     else
     {
         if (currentPosition == BUZZR_TIMELINE_TOP)
+        {
             PlaySE(SE_BOO);
-        else
-            SetCurrentPosition(--currentPosition);
+            return FALSE;
+        }
+        SetCurrentPosition(--currentPosition);
     }
+    return TRUE;
 }
 
-static bool32 GetTweetIdFromPosition(u32 position)
+static u32 GetTweetIdFromPosition(u32 position)
 {
+    if ((position < 0) || (position >= TWEET_COUNT))
+        position = 0;
+
     return sBuzzrLists->Timeline[position];
 }
 
@@ -777,18 +751,24 @@ void LoadPictureFromOverworld(void)
 
 static void Task_BuzzrWaitFadeIn(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        gTasks[taskId].func = Task_MainInput;
-    }
+    if (gPaletteFade.active)
+        return;
+
+    enum BuzzrZapIds currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
+    Buzzr_TryStartQuestFromTweet(currentTweetId,taskId);
 }
 
 static void Task_MainInput(u8 taskId)
 {
+    ResetQuestFanfareFlag();
+
     u32 currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
 
     if (!Buzzr_IsTweetRead(currentTweetId))
+    {
         Buzzr_MarkTweetAsRead(currentTweetId);
+        Buzzr_TryStartQuestFromTweet(currentTweetId,taskId);
+    }
 
     if(!IsTimelinePictureMode())
         HandleInput(taskId, currentTweetId);
@@ -806,16 +786,16 @@ static void HandleInput(u8 taskId, u32 currentTweetId)
     if (JOY_NEW(DPAD_RIGHT | R_BUTTON))
         ChangeFilterAndReloadTimeline(FILTER_RIGHT);
 
-    if (JOY_NEW(DPAD_UP) || JOY_HELD(DPAD_UP))
+    if (JOY_NEW(DPAD_UP) || JOY_REPEAT(DPAD_UP))
     {
-        UpdatePosition(FALSE);
-        PrintMenuHeaderAndTimeline();
+        if (UpdatePosition(FALSE))
+            PrintMenuHeaderAndTimeline();
     }
 
-    if (JOY_NEW(DPAD_DOWN) || JOY_HELD(DPAD_DOWN))
+    if (JOY_NEW(DPAD_DOWN) || JOY_REPEAT(DPAD_DOWN))
     {
-        UpdatePosition(TRUE);
-        PrintMenuHeaderAndTimeline();
+        if (UpdatePosition(TRUE))
+            PrintMenuHeaderAndTimeline();
     }
 
     if (JOY_NEW(B_BUTTON))
@@ -877,7 +857,6 @@ static void ChangeFilterAndReloadTimeline(u8 direction)
     ChangeFilter(direction);
     ResetPositionToZero();
     ReloadTimeline();
-    ChangeBackground();
 }
 
 static void ToggleSortAndReloadTimeline(void)
@@ -905,28 +884,6 @@ static void FadeAndBail(void)
     SetMainCallback2(Buzzr_MainCB);
 }
 
-static u32 GetQuestTweetId(u32 tweetId)
-{
-    return sBuzzrLists->QuestTweets[tweetId];
-}
-
-static void HandleQuestActivation(void)
-{
-    u32 tweetId, i;
-    for (i = 0; i < TWEET_COUNT; i++)
-    {
-        tweetId = GetQuestTweetId(i);
-
-        if (tweetId == TWEET_NONE)
-            break;
-
-        if (!Buzzr_IsTweetRead(tweetId))
-            continue;
-
-        ActivateQuest(GetQuest(tweetId));
-    }
-}
-
 static void PlayQuestFanfare(void)
 {
     PlayFanfare(MUS_LEVEL_UP);
@@ -934,69 +891,32 @@ static void PlayQuestFanfare(void)
     FlagSet(FLAG_QUEST_FANFARE);
 }
 
-static void ActivateQuest(u32 quest)
-{
-    QuestMenu_GetSetQuestState(quest,FLAG_SET_UNLOCKED);
-    QuestMenu_GetSetQuestState(quest,FLAG_SET_ACTIVE);
-    QuestMenu_CopyQuestName(gStringVar1, quest);
-    //StringCopy(gStringVar2,gText_QuestActive);
-
-    if (!FlagGet(FLAG_QUEST_FANFARE))
-        PlayQuestFanfare();
-
-    //PSF TODO When the sliding quest overworld message gets implemented, implement it to play here as well. If only one quest is activated, it should be "QUESTNAME is now active", but if there are multiple, it needs to print "3 quests are now active"
-    /*
-       questmenu QUEST_MENU_SET_ACTIVE, \quest
-       questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
-       bufferstring 1 gText_QuestActive
-       playfanfare MUS_LEVEL_UP
-       msgbox gText_QuestAnnounce, MSGBOX_SIGN
-       waitfanfare
-       */
-}
-
 static void Task_WaitFadeAndExitGracefully(u8 taskId)
 {
-    if (!gPaletteFade.active)
-    {
-        SetMainCallback2(sBuzzrState->savedCallback);
-        Buzzr_FreeResources();
-        ClearTweetFromOverworld();
-        ResetPictureMode();
-        DestroyTask(taskId);
-    }
+    if (gPaletteFade.active)
+        return;
+
+    SetMainCallback2(sBuzzrState->savedCallback);
+    ClearTweetFromOverworld();
+    ResetPictureMode();
+    Buzzr_FreeResources();
+    DestroyTask(taskId);
 }
 
 static void PlaySoundStartFadeQuitApp(u8 taskId)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    HandleQuestActivation();
     PlaySE(SE_PC_OFF);
     gTasks[taskId].func = Task_WaitFadeAndExitGracefully;
 }
 
 static void Buzzr_FreeResources(void)
 {
-    if (sBuzzrState != NULL)
-    {
-        Free(sBuzzrState);
-    }
-    if (sBuzzrLists != NULL)
-    {
-        Free(sBuzzrLists);
-    }
-    if (sBg2TilemapBuffer != NULL)
-    {
-        Free(sBg2TilemapBuffer);
-    }
-    if (sBg1TilemapBuffer != NULL)
-    {
-        Free(sBg1TilemapBuffer);
-    }
-    if (sBg0TilemapBuffer != NULL)
-    {
-        Free(sBg0TilemapBuffer);
-    }
+    TRY_FREE_AND_SET_NULL(sBuzzrState);
+    TRY_FREE_AND_SET_NULL(sBuzzrLists);
+
+    for (u32 backgroundId = BG1_BACKGROUND_TWEETS; backgroundId < BG_BUZZR_COUNT; backgroundId++)
+        TRY_FREE_AND_SET_NULL(sBgTilemapBuffer[backgroundId]);
 
     FreeAllWindowBuffers();
     ResetSpriteData();
@@ -1016,30 +936,31 @@ static void BufferToVram_Windows(void)
 static bool8 LoadGraphics(void)
 {
     const u32 *sTiles = GetRelevantTiles();
-    const u32 *sTilemap = GetRelevantTilemap();
+    const u16 *sTilemap = GetRelevantTilemap();
     const u16 *sPalette = GetRelevantPalette();
 
     switch (sBuzzrState->loadState)
     {
         case 0:
+            FreeTempTileDataBuffersIfPossible();
             ResetTempTileDataBuffers();
-            DecompressAndCopyTileDataToVram(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
+            DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
             sBuzzrState->loadState++;
             break;
         case 1:
-            if (FreeTempTileDataBuffersIfPossible() != TRUE)
-            {
-                DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
-                sBuzzrState->loadState++;
-            }
+            CopyToBgTilemapBuffer(BG2_BACKGROUND_UI,sTilemap,0,0);
+            sBuzzrState->loadState++;
             break;
         case 2:
             LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadSpriteSheets(sBuzzr_SpriteGraphics.sheets);
+            LoadSpritePalette(&sBuzzr_SpriteGraphics.palette);
             sBuzzrState->loadState++;
         default:
             ResetLoadStateToZero();
             return TRUE;
     }
+
     return FALSE;
 }
 
@@ -1057,8 +978,9 @@ static u16 GetUserId(u16 tweetId)
 
 static const u8 *GetContent(u16 tweetId)
 {
-    StringExpandPlaceholders(gStringVar1,gTweets[tweetId].content);
-    return gStringVar1;
+    Buzzr_ExpandStrings(tweetId);
+    StringExpandPlaceholders(gStringVar4,gTweets[tweetId].content);
+    return gStringVar4;
 }
 
 const u32* GetPictureTiles(u16 tweetId)
@@ -1066,10 +988,10 @@ const u32* GetPictureTiles(u16 tweetId)
     if (tweetId >= sizeof(gTweets) / sizeof(gTweets[0]))
         return NULL;
 
-    return gTweets[tweetId].tilesptr;
+    return gTweets[tweetId].tiles;
 }
 
-static void UNUSED *GetCriteria(u16 tweetId)
+static void *GetCriteria(u16 tweetId)
 {
     return gTweets[tweetId].criteria;
 }
@@ -1145,11 +1067,11 @@ static void HandleTimeline(void)
 {
     u32 currentPosition = GetCurrentPosition();
     s32 positionIndex = currentPosition - 1;
-    u32 numTweet, previousTweet, tweetIndex, verticalOffset;
+    u32 previousTweet, tweetIndex, verticalOffset;
 
     ResetVerticalOffset();
 
-    for (numTweet = 0; numTweet < MAX_NUM_TWEETS_SHOWN;numTweet++)
+    for (u32 numTweet = 0; numTweet < MAX_NUM_TWEETS_SHOWN;numTweet++)
     {
         previousTweet = GetTweetIdFromPosition(positionIndex);
         SetVerticalOffset(CalculateVerticalOffset(numTweet,previousTweet));
@@ -1160,7 +1082,7 @@ static void HandleTimeline(void)
 
         tweetIndex = GetTweetIdFromPosition(currentPosition + numTweet);
 
-        PrintTweet(tweetIndex,verticalOffset,MODE_TIMELINE);
+        PrintTweet(numTweet, tweetIndex,verticalOffset,MODE_TIMELINE);
         positionIndex++;
     }
 }
@@ -1172,22 +1094,40 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
 
 static const u32 GetNumContentLines(u16 tweetId)
 {
-    u32 count = 1;
     const u8 *str = GetContent(tweetId);
+    StripLineBreaks(gStringVar4);
+    u32 windowWidth = TWEET_WINDOW_WIDTH;
+    BreakStringNaive(gStringVar4, windowWidth, TWEET_MAX_NUM_LINES, FONT_BUZZR_TWEET, HIDE_SCROLL_PROMPT);
 
-    while (*str != EOS) {
-        if (*str == CHAR_NEWLINE) {
+    u32 count = 1;
+    while (*str != EOS)
+    {
+        if (*str == CHAR_NEWLINE)
             count++;
-        }
+
         str++;
     }
 
     return (count > TWEET_MIN_NUM_LINES) ? count : TWEET_MIN_NUM_LINES;
 }
 
+static u8 CalculateTweetContentTiles(u32 tweetId)
+{
+    u32 lines = GetNumContentLines(tweetId) * 2;
+
+    if (lines == 10 || lines == 12)
+        lines--;
+
+    if (lines == 4)
+        lines++;
+
+    return lines;
+}
+
 static u32 CalculateTweetContentHeight(u16 tweetId)
 {
-    return (GetNumContentLines(tweetId) * (GetFontAttribute(FONT_BUZZR_TWEET,FONTATTR_MAX_LETTER_HEIGHT)));
+    u32 lines = CalculateTweetContentTiles(tweetId);
+    return (TILE_TO_PIXELS(lines));
 }
 
 static u32 CalculateTweetHeaderHeight(void)
@@ -1197,7 +1137,7 @@ static u32 CalculateTweetHeaderHeight(void)
 
 static u32 CalculateTweetTotalHeight(u16 tweetId)
 {
-    return (CalculateTweetContentHeight(tweetId) + CalculateTweetHeaderHeight());
+    return (CalculateTweetContentHeight(tweetId) + TILE_SIZE_1BPP);
 }
 
 static void ResetVerticalOffset(void)
@@ -1207,8 +1147,8 @@ static void ResetVerticalOffset(void)
 
 static void SetVerticalOffset(u32 offset)
 {
-    if (offset > UCHAR_MAX)
-        offset = UCHAR_MAX;
+    if (offset > MAX_u8)
+        offset = MAX_u8;
 
     sBuzzrState->verticalOffset = offset;
 }
@@ -1226,8 +1166,6 @@ static u32 CalculateVerticalOffset(u32 numTweet, u32 previousTweet)
         return offset + TWEET_HEADER_TOP_PADDING;
     else
         return offset + (TWEET_MARGIN_BOTTOM + (CalculateTweetTotalHeight(previousTweet)));
-
-    //return offset;
 }
 
 static void PrintSortModeHeader(u8 windowId)
@@ -1237,35 +1175,50 @@ static void PrintSortModeHeader(u8 windowId)
     AddTextPrinterParameterized4(windowId, fontId,SORT_MODE_TEXT_X_POSITION, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW,sText_OldestFirst);
 }
 
-static void PrintTweet(u16 selectedTweet, u32 verticalOffset, u32 typeTweet)
+static void PrintTweet(u32 numTweet, u16 selectedTweet, u32 verticalOffset, u32 typeTweet)
 {
     if (selectedTweet == TWEET_NONE)
         return;
 
-    HandleTweetBackground(selectedTweet,verticalOffset);
+    HandleTweetBackground(numTweet, selectedTweet,verticalOffset);
     HandleTweetHeader(selectedTweet,verticalOffset, typeTweet);
     HandleTweetContent(selectedTweet,verticalOffset,typeTweet);
     HandleTweetIcons(selectedTweet,verticalOffset, typeTweet);
 }
 
-static void UNUSED HandleTweetBackground(u16 selectedTweet, u32 verticalOffset)
+static void HandleTweetBackground(u32 numTweet, u16 selectedTweet, u32 verticalOffset)
 {
-    /*
-    u32 x = 6;
-    u32 y = 19 + verticalOffset;
-    u32 tweetHeight = CalculateTweetContentHeight(selectedTweet);
-    u32 tweetWidth = 232;
+    u32 currentTileIndex = DISPLAY_TILE_WIDTH * (PIXELS_TO_TILES(verticalOffset));
 
-    const u32 *bgTiles = sTweetBgTiles;
-    const u32 *bgTilemap = sTweetBgTilemap3;
-    const u16 *bgPalette = sTweetBgPalette;
+    if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+        return;
 
-    DecompressDataWithHeaderWram(sTweetBgTilemap3, sBg1TilemapBuffer);
-    CopyToBgTilemapBufferRect(BG1_BACKGROUND_TWEETS, sBg1TilemapBuffer, 18, 6, 10, 10);
-    CopyBgTilemapBufferToVram(1);
-    ScheduleBgCopyTilemapToVram(BG1_BACKGROUND_TWEETS);
-    ShowBg(BG1_BACKGROUND_TWEETS);
-    */
+    const u8 *baseGfx = (const u8 *)sZapBackgrounds;
+
+    u32 isTopTweet = (numTweet == 0);
+    const u8 *topTweetGfx = (isTopTweet) ? baseGfx : (baseGfx + (3 * TWEET_BYTES_PER_ROW));
+
+    CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, topTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+    currentTileIndex += DISPLAY_TILE_WIDTH;
+
+    const u8 *middleTweetGfx = baseGfx + (1 * TWEET_BYTES_PER_ROW);
+    u32 midLines = CalculateTweetContentTiles(selectedTweet);
+
+    for (u32 i = 0; i < midLines; i++)
+    {
+        if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+            return;
+
+        CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, middleTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+        currentTileIndex += DISPLAY_TILE_WIDTH;
+    }
+
+    if (currentTileIndex >= TWEET_LAST_TILE_OFFSET)
+        return;
+
+    const u8 *bottomTweetGfx = (currentTileIndex < (TWEET_LAST_TILE_OFFSET - DISPLAY_TILE_WIDTH)) ? (baseGfx + (2 * TWEET_BYTES_PER_ROW)) : (baseGfx + (4 * TWEET_BYTES_PER_ROW));
+    CopyToWindowPixelBuffer(BUZZR_WINDOW_HEADER, bottomTweetGfx, TWEET_BYTES_PER_ROW, currentTileIndex);
+
 }
 
 static void HandleTweetHeader(u16 tweetId, u32 verticalOffset, u32 typeTweet)
@@ -1284,7 +1237,8 @@ static u32 UpdateHorizontalHeaderPosition(u8 *tweetUsername, u32 fontId)
 static void PrintTweet_OverworldHeader(u16 tweetId)
 {
     u32 windowId = gTweetOverworldWindowId;
-    PrintTweetHeader(tweetId, windowId, 0);
+    u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
+    PrintTweetHeader(tweetId, windowId, verticalOffset);
 }
 
 static void PrintTweet_TimelineHeader(u16 tweetId, u32 verticalOffset)
@@ -1311,7 +1265,11 @@ static void PrintPrivateTweetRecipient(u32 windowId,u32 x,u32 y,u32 fontId)
 static void PrintTweetHeader(u16 tweetId, u32 windowId, u32 verticalOffset)
 {
     u32 x = TWEET_HEADER_LEFT_PADDING;
-    u32 y = verticalOffset;
+    u32 y = (verticalOffset / 8) * 8;
+
+    if (verticalOffset > 16)
+        y += 2;
+
     u32 fontId = FONT_BUZZR_USER;
 
     u8 *tweetUsername = Alloc(USER_MAX_LENGTH*2);
@@ -1321,6 +1279,7 @@ static void PrintTweetHeader(u16 tweetId, u32 windowId, u32 verticalOffset)
     PrintUsername(windowId,x,y,tweetUsername,fontId);
     x += UpdateHorizontalHeaderPosition(tweetUsername,fontId);
     Free(tweetUsername);
+
 
     if (IsVerified(userId))
     {
@@ -1384,7 +1343,8 @@ static void PrintTweet_TimelineContent(u16 tweetId, u32 verticalOffset)
 static void PrintTweet_OverworldContent(u16 tweetId)
 {
     u32 windowId = gTweetOverworldWindowId;
-    u32 y = CalculateTweetHeaderHeight();
+    u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
+    u32 y = CalculateTweetHeaderHeight() + verticalOffset;
     const u8 *fontColor = BuzzrWindowFontColors[FONT_BLACK];
 
     PrintTweetContent(windowId, tweetId, fontColor, y);
@@ -1392,9 +1352,15 @@ static void PrintTweet_OverworldContent(u16 tweetId)
 
 static void PrintTweetContent(u32 windowId, u16 tweetId, const u8 *fontColor, u32 y)
 {
+    u32 x = 12;
+    u32 windowWidth = TWEET_WINDOW_WIDTH;
     u32 fontId = FONT_BUZZR_TWEET;
 
-    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET,12, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,GetContent(tweetId));
+    GetContent(tweetId);
+    StripLineBreaks(gStringVar4);
+    BreakStringNaive(gStringVar4, windowWidth, TWEET_MAX_NUM_LINES, fontId, HIDE_SCROLL_PROMPT);
+
+    AddTextPrinterParameterized4(windowId, FONT_BUZZR_TWEET, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar4);
 }
 
 static void HandleTweetIcons(u16 tweetId, u32 verticalOffset, u32 typeTweet)
@@ -1420,7 +1386,9 @@ static void PrintTweet_TimelineIcons(u16 tweetId, u32 verticalOffset)
 
 static u32 CalculateIndicatorIconHeight(u16 tweetId, u32 verticalOffset)
 {
-    return (verticalOffset + CalculateTweetTotalHeight(tweetId) - GetFontAttribute(FONT_BUZZR_TWEET,FONTATTR_MAX_LETTER_HEIGHT) + TWEET_INDICATOR_TOP_PADDING);
+    verticalOffset = (verticalOffset / 8) * 8;
+    u32 height = CalculateTweetContentHeight(tweetId);
+    return (verticalOffset + height - 2);
 }
 
 static bool32 CheckTweetPrintUnreadIcon(u32 windowId, u32 tweetId, u32 x, u32 y, u32 typeTweet)
@@ -1455,6 +1423,7 @@ static void PrintMenuHeaderAndTimeline(void)
 
     HandleMenuHeader();
     HandleTimeline();
+    PrintHelpBar();
 
     CopyWindowToVram(BUZZR_WINDOW_HEADER, COPYWIN_GFX);
 }
@@ -1470,7 +1439,25 @@ static void PrintMenuHeader(void)
 
 static const u8 *GetHelpBarText(void)
 {
-    return (IsTimelinePictureMode()) ? sText_HelpBarReturn : sText_HelpBarDefault;
+    u32 currentTweetId = GetTweetIdFromPosition(GetCurrentPosition());
+    bool32 hasPic = (GetPictureTiles(currentTweetId) != NULL);
+    bool32 isPictureMode = IsTimelinePictureMode();
+    bool32 numTweets = (GetNumTimelineTweets() > 1);
+
+    StringCopy(gStringVar4,COMPOUND_STRING(""));
+
+    if (!isPictureMode)
+        StringAppend(gStringVar4,COMPOUND_STRING("{DPAD_LEFTRIGHT} Filter "));
+
+    if (!isPictureMode && hasPic)
+        StringAppend(gStringVar4,COMPOUND_STRING("{A_BUTTON} Expand "));
+
+    StringAppend(gStringVar4,COMPOUND_STRING("{B_BUTTON} Return "));
+
+    if (!isPictureMode && numTweets)
+        StringAppend(gStringVar4,COMPOUND_STRING("{START_BUTTON} Sort "));
+
+    return gStringVar4;
 }
 
 static void PrintHelpBar(void)
@@ -1494,40 +1481,17 @@ static const u32 *GetRelevantTiles(void)
     if(IsTimelinePictureMode())
         return GetPictureTiles(tweetId);
     else
-    {
-        switch (GetFilter())
-        {
-            case TIMELINE_FILTER_ALL:
-                return sLogomarkAllTiles;
-                break;
-            case TIMELINE_FILTER_PLAYER:
-                return sLogomarkPlayerTiles;
-                break;
-            case TIMELINE_FILTER_UNREAD:
-                return sLogomarkUnreadTiles;
-                break;
-            case TIMELINE_FILTER_QUEST:
-                return sLogomarkQuestTiles;
-                break;
-            case TIMELINE_FILTER_VERIFIED:
-                return sLogomarkVerifiedTiles;
-                break;
-            default:
-            case TIMELINE_FILTER_PRIVATE:
-                return sLogomarkPrivateTiles;
-                break;
-        }
-    }
+        return sLogomarkAllTiles;
 }
 
-static const u32 *GetRelevantTilemap(void)
+static const u16 *GetRelevantTilemap(void)
 {
     u32 tweetId = GetTweetIdFromPosition(GetCurrentPosition());
     if (Buzzr_IsCalledFromOverworld())
         tweetId = overworldTweet;
 
     if(IsTimelinePictureMode())
-        return gTweets[tweetId].tilemapptr;
+        return gTweets[tweetId].tilemap;
     else
         return sLogomarkAllTilemap;
 }
@@ -1539,37 +1503,26 @@ static const u16 *GetRelevantPalette(void)
         tweetId = overworldTweet;
 
     if(IsTimelinePictureMode())
-        return gTweets[tweetId].palptr;
+        return gTweets[tweetId].pal;
     else
         return sLogomarkAllPalette;
-}
-
-static void AllocTilemapBuffers(void)
-{
-    Free(sBg2TilemapBuffer);
-    Free(sBg1TilemapBuffer);
-    Free(sBg0TilemapBuffer);
-    sBg2TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
-    sBg1TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
-    sBg0TilemapBuffer = Alloc(TILEMAP_BUFFER_SIZE);
 }
 
 static void LoadBackground(void)
 {
     const u32 *sTiles = GetRelevantTiles();
-    const u32 *sTilemap = GetRelevantTilemap();
+    const u16 *sTilemap = GetRelevantTilemap();
     const u16 *sPalette = GetRelevantPalette();
 
-    DecompressAndLoadBgGfxUsingHeap(BG2_BACKGROUND_UI, sTiles, 0, 0, 0);
-    DecompressDataWithHeaderWram(sTilemap, sBg2TilemapBuffer);
-    LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    ShowBg(BG2_BACKGROUND_UI);
+    DecompressAndLoadBgGfxUsingHeap(BG1_BACKGROUND_TWEETS, sTiles, 0, 0, 0);
+    DecompressDataWithHeaderWram((void*)sTilemap,sBgTilemapBuffer[BG1_BACKGROUND_TWEETS]);
+    LoadPalette(sPalette, BG_PLTT_ID(QUEST_OVERWORLD_PALETTE_INTERFACE_ID), PLTT_SIZE_4BPP);
 }
 
 static void ChangeBackground(void)
 {
     ResetAllBgsCoordinates();
-    AllocTilemapBuffers();
+    //AllocZeroTilemapBuffers();
     HandleAndShowBgs();
     LoadBackground();
 }
@@ -1707,24 +1660,6 @@ static void SortTimeline(void)
         ReverseTimelineOrder(numTimelineTweets,i);
 }
 
-static bool32 HasQuestAndQuestNotActive(u32 tweetId)
-{
-    u32 questId = GetQuest(tweetId);
-
-    if (questId == QUEST_PLAYERSADVENTURE)
-        return FALSE;
-
-    if (!QuestMenu_GetSetQuestState(questId,FLAG_GET_INACTIVE))
-        return FALSE;
-
-    return TRUE;
-}
-
-static void StoreQuestTweets(u32 index, u32 tweetId)
-{
-    sBuzzrLists->QuestTweets[index] = tweetId;
-}
-
 static void AddTweetToTimeline(u32 index, u32 tweetId)
 {
     AddTweetToBitmap(tweetId);
@@ -1733,7 +1668,7 @@ static void AddTweetToTimeline(u32 index, u32 tweetId)
 
 static void AddNewTweetsToTimeline(void)
 {
-    u32 tweetIndex = 0, numNewTweets = 0, numQuestTweets = 0;
+    u32 tweetIndex = 0, numNewTweets = 0;
     u32 newTweetsArray[TWEET_COUNT];
 
     for (tweetIndex = 1; tweetIndex < TWEET_COUNT; tweetIndex++)
@@ -1741,8 +1676,6 @@ static void AddNewTweetsToTimeline(void)
         if (gTweets[tweetIndex].content == NULL)
             continue;
 
-        if (HasQuestAndQuestNotActive(tweetIndex))
-            StoreQuestTweets(numQuestTweets++,tweetIndex);
         if (!CheckIfTweetCanBeAdded(tweetIndex))
             continue;
 
@@ -1755,12 +1688,10 @@ static void AddNewTweetsToTimeline(void)
 
 static bool32 CheckIfTweetCanBeAdded(u32 tweetIndex)
 {
-    return (!IsTweetInTimeline(tweetIndex) &&
-            (
-             IsTweetCriteriaMet(tweetIndex)
-             || Buzzr_IsTweetRead(tweetIndex)
-            )
-           );
+    if (IsTweetInTimeline(tweetIndex))
+        return FALSE;
+
+    return (IsTweetCriteriaMet(tweetIndex) || Buzzr_IsTweetRead(tweetIndex));
 }
 
 static void AddTweetToBitmap(u32 tweetId)
@@ -1779,8 +1710,13 @@ static bool32 IsTweetInTimeline(u32 tweetId)
 
 static bool32 IsTweetCriteriaMet(u16 tweetId)
 {
-    void (*tweetFunction)() = gTweets[tweetId].criteria;
-    tweetFunction();
+    void (*tweetFunction)(void) = GetCriteria(tweetId);
+
+    if (tweetFunction == NULL)
+        return FALSE;
+    else
+        tweetFunction();
+
     return gSpecialVar_Result;
 }
 
@@ -1837,14 +1773,12 @@ void Buzzr_ShowTweetOverworld(u16 tweetId)
     if (tweetId == TWEET_NONE)
         return;
 
+    SetTweetFromOverworld(tweetId);
     gTweetOverworldWindowId = AddWindow(&sBuzzr_OverworldWindowTemplate);
-    FillWindowPixelBuffer(gTweetOverworldWindowId, PIXEL_FILL(1));
 
-    LoadPalette(sLogomarkAllPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    // this works, but stuff in the background breaks
-    // PSF TODO revisit this after dynamic overworld palettes
+    LoadPalette(sLogomarkAllPalette, QUEST_OVERWORLD_PALETTE_INTERFACE_SLOT, PLTT_SIZE_4BPP);
 
-    PrintTweet(tweetId, 0, MODE_OVERWORLD);
+    PrintTweet(0, tweetId, 0, MODE_OVERWORLD);
 
     PutWindowTilemap(gTweetOverworldWindowId);
     CopyWindowToVram(gTweetOverworldWindowId, COPYWIN_FULL);
@@ -1853,6 +1787,8 @@ void Buzzr_ShowTweetOverworld(u16 tweetId)
 void Buzzr_HideTweetOverworld(void)
 {
     ClearToTransparentAndRemoveWindow(gTweetOverworldWindowId);
+    ClearTweetFromOverworld();
+    gTweetOverworldWindowId = WINDOW_NONE;
 }
 
 static void SetTweetFromOverworld(u16 tweetId)
@@ -1888,4 +1824,312 @@ void Task_OpenBuzzrFromScript(u8 taskId)
 static bool32 Buzzr_IsCalledFromOverworld(void)
 {
     return (overworldTweet != TWEET_NONE);
+}
+
+static void Buzzr_SetSpriteId(enum BuzzrSpriteIDs spriteType, u32 spriteId)
+{
+    sBuzzrState->spriteIds[spriteType] = spriteId;
+}
+
+static u32 Buzzr_GetSpriteId(enum BuzzrSpriteIDs spriteType)
+{
+    return sBuzzrState->spriteIds[spriteType];
+}
+
+static const struct OamData sBuzzrHeader_OamData =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+};
+
+static const struct SpriteTemplate sBuzzrHeaderSpriteTemplate =
+{
+    .tileTag = BUZZR_SPRITE_HEADER_TAG,
+    .paletteTag = PAL_UI_SPRITES,
+    .oam = &sBuzzrHeader_OamData,
+    .anims = (const union AnimCmd *const[])
+    {
+        [BUZZR_SPRITE_FILTER_ALL] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(ALL), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_UNREAD] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(UNREAD), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_QUEST] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(QUEST), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_PLAYER] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(PLAYER), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_VERIFIED] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(VERIFIED), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_PRIVATE] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(PRIVATE), 1), ANIMCMD_END },
+        [BUZZR_SPRITE_FILTER_CURSOR] = (const union AnimCmd[]){ ANIMCMD_FRAME(BUZZR_HEADER_FRAME(CURSOR), 1), ANIMCMD_END },
+    },
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static u32 Buzzr_CalculateHeaderIconXPosition(u32 index)
+{
+    return (155 + (index * 15));
+}
+
+static void SpriteCallback_FilterCursor(struct Sprite *sprite)
+{
+    u32 filter = GetFilter();
+    sprite->x = Buzzr_CalculateHeaderIconXPosition(filter);
+    sprite->invisible = IsTimelinePictureMode();
+}
+
+static void SpriteCallback_HeaderIconCallback(struct Sprite *sprite)
+{
+    sprite->invisible = IsTimelinePictureMode();
+}
+
+static void Buzzr_PrintHeaderIcons(void)
+{
+    const struct SpriteTemplate *template = &sBuzzrHeaderSpriteTemplate;
+    u32 x = Buzzr_CalculateHeaderIconXPosition(GetFilter());
+    u32 y = 7;
+    u32 spriteId = CreateSprite(template, x, y, 1);
+    struct Sprite *sprite = &gSprites[spriteId];
+    StartSpriteAnim(sprite, BUZZR_SPRITE_FILTER_CURSOR);
+    Buzzr_SetSpriteId(BUZZR_SPRITE_FILTER_CURSOR,spriteId);
+    gSprites[spriteId].callback = SpriteCallback_FilterCursor;
+
+    for (u32 spriteIndex = 0; spriteIndex < BUZZR_SPRITE_FILTER_CURSOR ; spriteIndex++)
+    {
+        spriteId = CreateSprite(template, Buzzr_CalculateHeaderIconXPosition(spriteIndex), y, 1);
+        Buzzr_SetSpriteId(spriteIndex,spriteId);
+        sprite = &gSprites[spriteId];
+        StartSpriteAnim(sprite, spriteIndex);
+        gSprites[spriteId].callback = SpriteCallback_HeaderIconCallback;
+    }
+}
+
+static void Buzzr_TryStartQuestFromTweet(u32 tweetId, u8 taskId)
+{
+    enum QuestIdList quest = Buzzr_ReturnUnstartedQuestFromTweet(tweetId);
+
+    if (quest == QUEST_NONE)
+    {
+        gTasks[taskId].func = Task_MainInput;
+        return;
+    }
+
+    QuestMenu_GetSetQuestState(quest,FLAG_SET_UNLOCKED);
+    QuestMenu_GetSetQuestState(quest,FLAG_SET_ACTIVE);
+
+    gTasks[taskId].func = Task_Buzzr_StartQuestAnimation;
+}
+
+static enum QuestIdList Buzzr_ReturnUnstartedQuestFromTweet(u32 tweetId)
+{
+    enum QuestIdList questId = GetQuest(tweetId);
+
+    if (questId == 0)
+        return QUEST_NONE;
+
+    if (IsQuestRewardState(questId))
+        return QUEST_NONE;
+
+    if (IsQuestCompletedState(questId))
+        return QUEST_NONE;
+
+    if (IsQuestActiveState(questId))
+        return QUEST_NONE;
+
+    return questId;
+}
+
+static void Task_Buzzr_StartQuestAnimation(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    u32 spriteId = Buzzr_GetSpriteId(BUZZR_SPRITE_QUEST);
+    struct Sprite *sprite = &gSprites[spriteId];
+
+    if (JOY_NEW(JOY_EXCL_DPAD))
+    {
+        sprite->x = BUZZR_QUEST_SPRITE_INITAL_POSITION;
+        sprite->invisible = TRUE;
+        gTasks[taskId].func = Task_MainInput;
+        return;
+    }
+
+    switch (data[0])
+    {
+        case BUZZR_QUEST_SPRITE_STATE_SLIDE_IN:
+            if (!FlagGet(FLAG_QUEST_FANFARE))
+                PlayQuestFanfare();
+            sprite->invisible = FALSE;
+            sprite->x += BUZZR_QUEST_SPRITE_MOVEMENT_SPEED;
+
+            if (sprite->x < 0)
+                return;
+
+            sprite->x = 0;
+            data[0] = BUZZR_QUEST_SPRITE_STATE_WAIT;
+            data[1] = 0;
+            break;
+        case BUZZR_QUEST_SPRITE_STATE_WAIT:
+            if (++data[1] < BUZZR_QUESTS_SPRITE_TIMER)
+                return;
+
+            data[0] = BUZZR_QUEST_SPRITE_STATE_SLIDE_OUT;
+            break;
+        case BUZZR_QUEST_SPRITE_STATE_SLIDE_OUT:
+            sprite->x -= BUZZR_QUEST_SPRITE_MOVEMENT_SPEED;
+
+            if (sprite->x > BUZZR_QUEST_SPRITE_INITAL_POSITION)
+                return;
+
+            sprite->x = BUZZR_QUEST_SPRITE_INITAL_POSITION;
+            sprite->invisible = TRUE;
+            gTasks[taskId].func = Task_MainInput;
+            break;
+    }
+}
+
+static void CreateQuestSprite(void)
+{
+    u32 SpriteTag = BUZZR_SPRITE_QUEST_TAG;
+    s32 x = BUZZR_QUEST_SPRITE_INITAL_POSITION, y = CalculateCursorHeight();
+
+    struct SpriteSheet sSpriteSheet_Quest =
+    {
+        (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/quest.png", ".4bpp"),
+        TILE_OFFSET_4BPP(32), SpriteTag,
+    };
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+
+    TempSpriteTemplate.tileTag = SpriteTag;
+    TempSpriteTemplate.callback = SpriteCallback_QuestImage;
+
+    LoadSpriteSheet(&sSpriteSheet_Quest);
+    u32 spriteId = CreateSprite(&TempSpriteTemplate,x,y, 0);
+    Buzzr_SetSpriteId(BUZZR_SPRITE_QUEST,spriteId);
+
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(64x32);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(64x32);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].invisible = TRUE;
+}
+
+static void SpriteCallback_QuestImage(struct Sprite *sprite)
+{
+    sprite->y = CalculateCursorHeight();
+}
+
+static void Buzzr_ExpandStrings(enum BuzzrZapIds tweetId)
+{
+    switch (tweetId)
+    {
+        default:
+            return;
+        case TWEET_QUEST_NPC_FRESHWATER:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_NPC_SMOOTHIE_COMPLETE:
+            StringCopy(gStringVar3,GetItemName(ITEM_FRESH_START_MOCHI));
+            break;
+        case TWEET_QUEST_NPC_SMOOTHIE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA_ICE_CREAM_SHOP),MAP_NUM(MAP_CHASILLA_ICE_CREAM_SHOP))->regionMapSectionId,0);
+            StringCopy(gStringVar3,GetItemName(QUEST_SMOOTHIE_CRAFTING_PRODUCT));
+            Quest_SmoothieCrafting_BufferRecipe();
+            break;
+        case TWEET_QUEST_NPC_RABIES:
+            StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_NPC_TUNNELS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HODOUTUNNELS),MAP_NUM(MAP_QUEST_HODOUTUNNELS))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_NPC_PSYOP:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_PSYOP),MAP_NUM(MAP_QUEST_PSYOP))->regionMapSectionId,0);
+            StringCopy(gStringVar3,GetItemName(ITEM_QUEST_PSYOP_TARGET_BALL));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_A:
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_B:
+            StringCopy(gStringVar2,GetAbilityName(ABILITY_HUSTLE));
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_ACTIVE_C:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_DEINO));
+            StringCopy(gStringVar2,GetAbilityName(ABILITY_HUSTLE));
+            break;
+        case TWEET_QUEST_NPC_PSYOP_COMPLETE:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            CopyItemNameHandlePlural(ITEM_IRON,gStringVar2,2);
+            CopyItemNameHandlePlural(ITEM_ZINC,gStringVar3,3);
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
+            break;
+        case TWEET_QUEST_NPC_STONE:
+            ConvertIntToDecimalStringN(gStringVar1,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES,STR_CONV_MODE_LEFT_ALIGN,2);
+            break;
+        case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2:
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_REVAVROOM));
+            break;
+        case TWEET_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_BETWEENASTONEANDAHARDPLACE),MAP_NUM(MAP_QUEST_BETWEENASTONEANDAHARDPLACE))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTAURANTEXPANSION1_2:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS),MAP_NUM(MAP_QUEST_RESTAURANTEXPANSION1_FLOWERS))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_DIGGINGUPADAORASDIRT_2:
+        case TWEET_QUEST_DIGGINGUPADAORASDIRT_3:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RETURNDOLL:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RETURNDOLL_TARGET),MAP_NUM(MAP_QUEST_RETURNDOLL_TARGET))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREESPULEEGYM_ACTIVE:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA:
+        case TWEET_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREESPULEEGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE:
+        case TWEET_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREZENZUGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREZENZUGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_RESTOREHODOUCITY_ASSIGNED_RESTORATION:
+        case TWEET_QUEST_RESTOREHODOUCITY_FOUND_LEADER:
+        case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM:
+        case TWEET_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_RESTOREHODOUGYM_ORIGIN),MAP_NUM(MAP_QUEST_RESTOREHODOUGYM_ORIGIN))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_IMPROVBATTLING_ACTIVE:
+        case TWEET_QUEST_IMPROVBATTLING_COMPLETE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_IMPROVBATTLING),MAP_NUM(MAP_QUEST_IMPROVBATTLING))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HANG20_WARNING:
+        case TWEET_QUEST_HANG20_ROCKY_COASTS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HANG20),MAP_NUM(MAP_QUEST_HANG20))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_CULTURAL_PURITY_AD:
+        case TWEET_QUEST_CULTURAL_PURITY_AD2:
+        case TWEET_QUEST_CULTURAL_PURITY_AD3:
+        case TWEET_QUEST_CULTURAL_PURITY_READYA:
+        case TWEET_QUEST_CULTURAL_PURITY_READYB:
+        case TWEET_QUEST_CULTURAL_PURITY_READYC:
+        case TWEET_QUEST_CULTURAL_PURITY_READYD:
+        case TWEET_QUEST_CULTURAL_PURITY_READYD_CHAMPION:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_QUEST_CULTURAL_PURITY_MASCOT));
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_1:
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_1:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_1),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_1))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_2:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_2:
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_QUEST_HYBRID_CULTURE));
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_2),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_2))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_3:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_3:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_3),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_3))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_QUEST_HYBRID_CULTURE));
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_4:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_4:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_4),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_4))->regionMapSectionId,0);
+            break;
+        case TWEET_QUEST_HYBRID_CULTURE_SHINZO_5:
+        case TWEET_QUEST_HYBRID_CULTURE_LISTICLE_5:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_5),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_5))->regionMapSectionId,0);
+            break;
+    }
 }

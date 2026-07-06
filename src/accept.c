@@ -25,6 +25,8 @@
 #include "ui_options_menu.h"
 #include "options_visual.h"
 #include "pc_screen_effect.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 u32 acceptFrameCounter;
 
@@ -87,36 +89,36 @@ static void PrintAcceptHelpBar(void);
 static u32 GetDevMode(void);
 static void SetDevMode(bool32);
 
-static const u16 acceptPalettesBlack[] = INCBIN_U16("graphics/accept/palettes/black.gbapal");
-static const u16 acceptPalettesBlue[] = INCBIN_U16("graphics/accept/palettes/blue.gbapal");
-static const u16 acceptPalettesDefault[] = INCBIN_U16("graphics/accept/palettes/default.gbapal");
-static const u16 acceptPalettesGreen[] = INCBIN_U16("graphics/accept/palettes/green.gbapal");
-static const u16 acceptPalettesPlatinum[] = INCBIN_U16("graphics/accept/palettes/platinum.gbapal");
-static const u16 acceptPalettesRed[] = INCBIN_U16("graphics/accept/palettes/red.gbapal");
-static const u16 acceptPalettesScarlet[] = INCBIN_U16("graphics/accept/palettes/scarlet.gbapal");
-static const u16 acceptPalettesViolet[] = INCBIN_U16("graphics/accept/palettes/violet.gbapal");
-static const u16 acceptPalettesWhite[] = INCBIN_U16("graphics/accept/palettes/white.gbapal");
-static const u16 acceptPalettesYellow[] = INCBIN_U16("graphics/accept/palettes/yellow.gbapal");
-static const u16 acceptPalettesEmail[] = INCBIN_U16("graphics/accept/palettes/email.gbapal");
-static const u16 acceptPalettesText[] = INCBIN_U16("graphics/accept/palettes/text.gbapal");
+static const u16 acceptPalettesBlack[] = INCGFX_U16("graphics/accept/palettes/black.pal", ".gbapal");
+static const u16 acceptPalettesBlue[] = INCGFX_U16("graphics/accept/palettes/blue.pal", ".gbapal");
+static const u16 acceptPalettesDefault[] = INCGFX_U16("graphics/accept/palettes/default.pal", ".gbapal");
+static const u16 acceptPalettesGreen[] = INCGFX_U16("graphics/accept/palettes/green.pal", ".gbapal");
+static const u16 acceptPalettesPlatinum[] = INCGFX_U16("graphics/accept/palettes/platinum.pal", ".gbapal");
+static const u16 acceptPalettesRed[] = INCGFX_U16("graphics/accept/palettes/red.pal", ".gbapal");
+static const u16 acceptPalettesScarlet[] = INCGFX_U16("graphics/accept/palettes/scarlet.pal", ".gbapal");
+static const u16 acceptPalettesViolet[] = INCGFX_U16("graphics/accept/palettes/violet.pal", ".gbapal");
+static const u16 acceptPalettesWhite[] = INCGFX_U16("graphics/accept/palettes/white.pal", ".gbapal");
+static const u16 acceptPalettesYellow[] = INCGFX_U16("graphics/accept/palettes/yellow.pal", ".gbapal");
+static const u16 acceptPalettesEmail[] = INCGFX_U16("graphics/accept/palettes/email.pal", ".gbapal");
+static const u16 acceptPalettesText[] = INCGFX_U16("graphics/accept/palettes/text.pal", ".gbapal");
 
-static const u32 desktopBgTiles[] = INCBIN_U32("graphics/accept/desktopbg.4bpp.smol");
+static const u32 desktopBgTiles[] = INCGFX_U32("graphics/accept/desktopbg.png", ".4bpp.smol");
 static const u32 desktopBgTilemap[] = INCBIN_U32("graphics/accept/desktopbg.bin.smolTM");
 
-static const u8 windowAnim0[] = INCBIN_U8("graphics/accept/frame0.4bpp");
-static const u8 windowAnim1[] = INCBIN_U8("graphics/accept/frame1.4bpp");
-static const u8 windowAnim2[] = INCBIN_U8("graphics/accept/frame2.4bpp");
-static const u8 windowAnim3[] = INCBIN_U8("graphics/accept/frame3.4bpp");
+static const u8 windowAnim0[] = INCGFX_U8("graphics/accept/frame0.png", ".4bpp");
+static const u8 windowAnim1[] = INCGFX_U8("graphics/accept/frame1.png", ".4bpp");
+static const u8 windowAnim2[] = INCGFX_U8("graphics/accept/frame2.png", ".4bpp");
+static const u8 windowAnim3[] = INCGFX_U8("graphics/accept/frame3.png", ".4bpp");
 
-static const u8 devAnim0[] = INCBIN_U8("graphics/accept/devFrame0.4bpp");
-static const u8 devAnim1[] = INCBIN_U8("graphics/accept/devFrame1.4bpp");
-static const u8 devAnim2[] = INCBIN_U8("graphics/accept/devFrame2.4bpp");
-static const u8 devAnim3[] = INCBIN_U8("graphics/accept/devFrame3.4bpp");
+static const u8 devAnim0[] = INCGFX_U8("graphics/accept/devFrame0.png", ".4bpp");
+static const u8 devAnim1[] = INCGFX_U8("graphics/accept/devFrame1.png", ".4bpp");
+static const u8 devAnim2[] = INCGFX_U8("graphics/accept/devFrame2.png", ".4bpp");
+static const u8 devAnim3[] = INCGFX_U8("graphics/accept/devFrame3.png", ".4bpp");
 
-static const u8 emailSelector[] = INCBIN_U8("graphics/accept/selector.4bpp");
+static const u8 emailSelector[] = INCGFX_U8("graphics/accept/selector.png", ".4bpp");
 
-static const u32 desktopMouseSprite[] = INCBIN_U32("graphics/accept/mouse.4bpp.smol");
-static const u32 acceptScrollbar[] = INCBIN_U32("graphics/accept/scrollbar.4bpp.smol");
+static const u32 desktopMouseSprite[] = INCGFX_U32("graphics/accept/mouse.png", ".4bpp.smol");
+static const u32 acceptScrollbar[] = INCGFX_U32("graphics/accept/scrollbar.png", ".4bpp.smol");
 
 static const u8 sAcceptWindowFontColors[][3] =
 {
@@ -343,7 +345,6 @@ static void Accept_SetupCallback(void)
             gMain.state++;
             break;
         case 5:
-            //PSF TODO figure out why this flashes pink when fading in
             BeginPCScreenEffect_TurnOn(0, 0, 0);
             gMain.state++;
             break;
@@ -357,6 +358,7 @@ static void Accept_SetupCallback(void)
             gMain.state++;
             break;
         case 8:
+            PlayBGM(MUS_ACCEPT_LETTER);
             SetVBlankCallback(Accept_VBlankCB);
             SetMainCallback2(Accept_MainCB);
             break;
@@ -501,6 +503,8 @@ static void LoadAcceptPalettes(void)
     LoadPalette(sAcceptPalettesLUT[GetVisualColor()], PAL_SLOT_ACCEPT_UI, PLTT_SIZE_4BPP);
     LoadPalette(acceptPalettesEmail,PAL_SLOT_EMAIL,PLTT_SIZE_4BPP);
     LoadPalette(acceptPalettesText,PAL_SLOT_TEXT,PLTT_SIZE_4BPP);
+    gPlttBufferUnfaded[BG_PLTT_ID(0)] = RGB_BLACK;
+    gPlttBufferUnfaded[BG_PLTT_ID(1)] = RGB_BLACK;
 }
 
 static void ClearWindowCopyToVram(enum AcceptWindows windowId)
@@ -829,7 +833,7 @@ static const u8* const sTextDevMessage[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ To automatically LOSE a battle,"),
     COMPOUND_STRING("press {DPAD_DOWN} and {B_BUTTON} and choose a Move."),
-    COMPOUND_STRING("{COLOR RED}Please lose against Tala and Alcemene."),
+    COMPOUND_STRING("{COLOR RED}Please lose against Tala and Vigrim."),
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ To jump to a Story Point"),
     COMPOUND_STRING("press {R_BUTTON} and {START_BUTTON} in the overworld"),
@@ -879,7 +883,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("Congratulations! We’re thrilled to"),
     COMPOUND_STRING("inform you that your application"),
-    COMPOUND_STRING("for the Sharprise Capital"),
+    COMPOUND_STRING("for the SharpRise Capital"),
     COMPOUND_STRING("Kickstart Grant has been accepted."),
     COMPOUND_STRING("You’ve proven yourself as one of"),
     COMPOUND_STRING("the brightest upcoming Pokémon"),
@@ -893,7 +897,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING("Resido region this September"),
     COMPOUND_STRING(""),
     COMPOUND_STRING("▶ Competing in the first-ever"),
-    COMPOUND_STRING("season of the Sharprise Capital"),
+    COMPOUND_STRING("season of the SharpRise Capital"),
     COMPOUND_STRING("Pokémon League (powered by"),
     COMPOUND_STRING("Presto)"),
     COMPOUND_STRING(""),
@@ -910,7 +914,7 @@ static const u8* const sTextEmail[] =
     COMPOUND_STRING(""),
     COMPOUND_STRING("Best,"),
     COMPOUND_STRING(""),
-    COMPOUND_STRING("The Sharprise Capital Team"),
+    COMPOUND_STRING("The SharpRise Capital Team"),
 };
 
 static void ShowEmailText(void)
@@ -1076,7 +1080,6 @@ static void PrintAcceptHelpBar(void)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
     BufferHelpBarText(gStringVar4);
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW, gStringVar4);
-    // PSF TODO following two lines will actually show the help bar, but some pixels are broken when in DevMode
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }

@@ -36,6 +36,8 @@
 #include "constants/party_menu.h"
 #include "constants/moves.h"
 #include "constants/quests.h"
+#include "constants/ui_map_system.h"
+#include "ui_map_system.h"
 #include "quests.h"
 #include "options_music.h"
 #include "daycare.h"
@@ -161,22 +163,16 @@ static void FieldCallback_UseFlyTool(void)
     gFieldCallback = NULL;
 }
 
-bool32 IsFlyToolUsed(void)
-{
-    return (VarGet(VAR_FLY_TOOL_SOURCE));
-}
-
 void ReturnToFieldOrBagFromFlyTool(void)
 {
-    if (VarGet(VAR_FLY_TOOL_SOURCE) == FLY_SOURCE_BAG)
-        GoToBagMenu(ITEMMENULOCATION_LAST, POCKET_KEY_ITEMS, CB2_ReturnToFieldWithOpenMenu);
-    else if (VarGet(VAR_FLY_TOOL_SOURCE) == FLY_SOURCE_FIELD)
-        SetMainCallback2(CB2_ReturnToField);
-}
+    enum MapModes mapMode = GetCurrentMapMode();
 
-void ResetFlyTool(void)
-{
-    VarSet(VAR_FLY_TOOL_SOURCE, 0);
+    if (IsCurrentMapMode_FlyToolFromBag(mapMode))
+        GoToBagMenu(ITEMMENULOCATION_LAST, POCKET_KEY_ITEMS, CB2_ReturnToFieldWithOpenMenu);
+    else if (IsCurrentMapMode_FlyToolFromField(mapMode))
+        SetMainCallback2(CB2_ReturnToField);
+    else
+        SetMainCallback2(CB2_ReturnToField);
 }
 
 // Surf
@@ -696,7 +692,7 @@ bool32 PartyHasMonLearnsKnowsFieldMove(u16 moveId)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        mon = &gPlayerParty[i];
+        mon = &gParties[B_TRAINER_PLAYER][i];
         if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) || GetMonData(mon, MON_DATA_IS_EGG))
             continue;
 

@@ -3,6 +3,7 @@
 
 #include "gba/types.h"
 #include "list_menu.h"
+#include "ui_dexnav.h"
 #include "main.h"
 #include "constants/ui_pokedex.h"
 #include "constants/characters.h"
@@ -37,6 +38,7 @@ struct FiltersSet
     struct Types filterTypes[TYPES_PER_MON];
     u16 filterAbility[MAX_MON_MOVES];
     struct Moves filterMoves[MAX_MON_MOVES];
+    u8 filterAlola[ALOLA_COUNT];
 };
 
 struct SpeciesMenu
@@ -76,6 +78,7 @@ struct PokedexState
     u16 futureMonSpeciesId;
     bool8 firstPageLoad;
     bool8 shouldPlayCry;
+    struct DexnavSavedData dexnavSavedData;
 };
 
 struct PokedexGridStaticResources
@@ -119,13 +122,23 @@ extern const u8 sPokedexWindowFontColors[][3];
 extern const u8 *const sFilterListTexts[];
 
 extern const struct PokemonFormTable pokemonFormTable[POKEDEX_FORM_COUNT][NUMBER_OF_MON_TYPES];
+extern const u32 gTypes_Gfx13x11[];
+extern const u16 gTypes_Palettes[];
+extern const struct SpriteTemplate gSpriteTemplate_Type13x11;
 
 static const u16 pokedexPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/palettes/default.gbapal");
+static const u16 alolaPalettesDefault[] = INCBIN_U16("graphics/pokedex/ui/species_list/emptyfolder_alola.gbapal");
 
 static const struct SpritePalette sPokedexInterfaceSpritePalette =
 {
     .data = pokedexPalettesDefault,
     .tag = PAL_POKEDEX_UI_SPRITES,
+};
+
+static const struct SpritePalette sAlolaSpritePalette =
+{
+    .data = alolaPalettesDefault,
+    .tag = PAL_POKEDEX_ALOLA_SPRITES,
 };
 
 static const u8 *const sEggGroupTexts[] =
@@ -153,7 +166,7 @@ static const u8 sText_MegaEvolution[] =_("Mega Evolution");
 
 void Task_OpenPokedexFromStartMenu(u8);
 void CB2_PokedexFromStartMenu(void);
-u32 ConvertSpeciesIdToResidoDex(u32 speciesId);
+u32 ConvertSpeciesIdToResidoDex(enum Species speciesId);
 u32 GetPokedexPercentage(void);
 bool32 SpeciesFilter_GetFilterChangeFlag(void);
 void Task_SpeciesFilter_Input(u8);
@@ -176,6 +189,7 @@ bool32 SpeciesFilter_IsSpeciesInEggGroups(u32);
 bool32 SpeciesFilter_CheckSpeciesTypesAgainstFilters(u32);
 bool32 SpeciesFilter_DoesSpeciesHaveAbility(u32);
 bool32 SpeciesFilter_DoesSpeciesLearnMoves(u32);
+bool32 SpeciesFilter_IsSpeciesFromAlola(u32);
 void FreeBackgrounds(void);
 void Pokedex_SetupCallback(void);
 void SpeciesFilter_SwitchToFromGrid(u8);
@@ -267,7 +281,13 @@ u32 SpeciesData_ConvertSpeciesToCosmeticFormId(u32 species);
 void PokedexPage_PlaySpeciesCry(u32 species, bool32 shouldOverride);
 bool32 SpeciesGrid_GetShouldPlayCry(void);
 void SpeciesGrid_SetShouldPlayCry(bool32 value);
-bool8 SpeciesIsResidoDex(u32 speciesId);
+bool8 SpeciesIsResidoDex(enum Species speciesId);
 bool8 SpeciesFilter_CheckEvolutionStatus(u32 species, enum PokedexEvolutionCheckMode mode);
+void Pokedex_SaveDexnavData(struct DexnavSavedData savedData);
+void Pokedex_InitFromDexnav(struct DexnavSavedData savedData, u8 taskId);
+void Pokedex_FreeResources(void);
+void FreePokedexStructs(void);
+void SetAndSetUpCurrentPage(u8 taskId);
+bool32 IsMoveInSilicon(u32 moveId);
 
 #endif // GUARD_UI_POKEDEX_H

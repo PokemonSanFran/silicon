@@ -1,5 +1,9 @@
-mapscripts PetarosaBorough_Improv_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION{
-        call(Quest_BuildingScope_ToggleObjects_Script)
-}
+mapscripts PetarosaBorough_Improv_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call(Improvbattling_Script_CheckQuestAndHideTroupe)
+        call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_3,RestoreZenzuIsland_Script_HideImprovtroupe)
+        call_if_subquest_not_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_3,Improvbattling_Script_HideNewImprovtroupe)
+    }
 }

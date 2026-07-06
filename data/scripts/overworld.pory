@@ -1,6 +1,5 @@
 script Generic_Mappreview
 {
-    mappreview
 }
 
 script RunAdventureGuideScript
@@ -16,5 +15,16 @@ script RunAdventureGuideScript
         callnative(OpenAdventureGuideFromScript)
         waitstate
     }
+}
+
+script Silicon_Script_WhiteoutIfPlayerLostMulti
+{
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON)
+    {
+        return
+    }
+    fadescreen(FADE_TO_BLACK)
+    special(SetCB2WhiteOut)
 }
 

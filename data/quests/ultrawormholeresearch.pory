@@ -2,7 +2,6 @@
 //Quest_Ultrawormholeresearch_
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const MADRONE = 1
 const FLAG_HIDE_TOTEM = FLAG_TEMP_1A
 const FLAG_HIDE_ULTRA_BEAST = FLAG_TEMP_1A
 
@@ -20,15 +19,15 @@ script Quest_Ultrawormholeresearch_TryRemoveTotem_Script{
 }
 
 script Quest_Ultrawormholeresearch_HiddenElevator_Script{
-    msgbox(gText_Ultrawormholeresearch_WaitEsperanto,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
-    msgbox(gText_Ultrawormholeresearch_TakeTheBook,MSGBOX_YESNO)
+    msgbox(format(""),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
+    msgbox(format(""),MSGBOX_YESNO)
 
     if (var(VAR_RESULT) == NO){
         closemessage
         release
         end
     }
-    msgbox(gText_Ultrawormholeresearch_TheBookcase)
+    msgbox(format(""))
     closemessage
     call(Quest_Ultrawormholeresearch_RevealHiddenWarp_Script)
     call(Quest_Ultrawormholeresearch_PlayerExplain_Dialogue)
@@ -43,28 +42,29 @@ script Quest_Ultrawormholeresearch_ShowWarp_Script{
 }
 
 script Quest_Ultrawormholeresearch_RevealHiddenWarp_Script{
-    fadescreen(FADE_TO_BLACK)
+    fadescreenswapbuffers(FADE_TO_BLACK)
     playse(SE_ROTATING_GATE)
     call(Quest_Ultrawormholeresearch_ShowWarp_Script)
     setobjectxy(PLAYER,0,3)
     TeleportCamera(0,3)
-    fadescreen(FADE_FROM_BLACK)
+    fadescreenswapbuffers(FADE_FROM_BLACK)
     return
 }
 
 script Quest_Ultrawormholeresearch_PlayerExplain_Dialogue{
-    msgbox(gText_Ultrawormholeresearch_Whatthehell,,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format(""),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
     closemessage
     return
 }
 
-script Quest_Ultrawormholeresearch_Preventvoid_Script{
+script Quest_Ultrawormholeresearch_Preventvoid_Script
+{
     lock
-    msgbox(gText_Ultrawormholeresearch_IWouldntGo,,SPEAKER_MADRONE)
+    msgbox(format("I wouldn't go in there right now if I was you."),,SPEAKER_MADRONE)
     closemessage
     applymovement(PLAYER,Common_Movement_WalkDown)
     waitmovement(PLAYER)
-    msgbox(gText_Ultrawormholeresearch_IDontThink,,SPEAKER_MADRONE)
+    msgbox(format("I don't think you used the computer to set a warp location... if you walk up those stairs now, you're probably going to be warped into the endless void. Forever."),,SPEAKER_MADRONE)
     closemessage
     release
     end
@@ -78,7 +78,6 @@ script Quest_Ultrawormholeresearch_StartQuest_Dialogue{
         end
     }
 
-    //PSF TODO add dialogue and movement here
 
     setflag(FLAG_QUEST_ULTRAWORMHOLE_TOTEM_POKEMON_0)
     startquest(QUEST_ULTRAWORMHOLERESEARCH)
@@ -99,7 +98,7 @@ script Quest_Ultrawormholeresearch_Reward_Dialogue{
 
 }
 script Quest_Ultrawormholeresearch_Active_Dialogue{
-
+    return
 }
 
 script Quest_Ultrawormholeresearch_ConstructMenu_Script{
@@ -141,12 +140,12 @@ script Quest_Ultrawormholeresearch_ConstructMenu_Script{
 
 script Quest_Ultrawormholeresearch_ComputerSetWarp_Menu{
     lock
-    msgbox(gText_Ultrawormholeresearch_WhichWormhole)
+    msgbox(format(""))
     call(Quest_Ultrawormholeresearch_ConstructMenu_Script)
     dynmultistack(0,0,TRUE,5,TRUE,0,NULL)
     copyvar(VAR_QUEST_ULTRAWORMHOLE_WARP_DESTINATION,VAR_RESULT)
     call(Quest_Ultrawormholeresearch_SetDynamicWarp_Script)
-    msgbox(gText_Ultrawormholeresearch_WarpHasBeenSet)
+    msgbox(format("The portal has been set to {STR_VAR_1}."))
     closemessage
     release
     end
@@ -201,8 +200,7 @@ script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     setflag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)
     special(Quest_Ultrawormholeresearch_SetTotemBattle)
-    special(StartRegiBattle) //PSF TODO should be start totem battle
-    waitstate
+    special(StartRegiBattle)
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
     switch(var(VAR_RESULT)){
@@ -214,7 +212,6 @@ script Quest_Ultrawormholeresearch_StartTotemBattle_Script{
     release
     end
 }
-
 
 script Quest_Ultrawormholeresearch_CaughtTotem_Script{
     special(Quest_Ultrawormholeresearch_SetDefeatedTotemFlag)
@@ -231,9 +228,9 @@ script Quest_Ultrawormholeresearch_ProfCallPlayer_Dialogue{
 
     call(Common_EventScript_PhoneRinging)
 
-    msgbox(gText_Ultrawormholeresearch_PlayerIs,,SPEAKER_MADRONE,,,PHONE_ON)
-    msgbox(gText_Ultrawormholeresearch_GreatJobCatching,,SPEAKER_MADRONE,,,PHONE_ON)
-    msgbox(gText_Ultrawormholeresearch_WhenYouComeBack,,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("{PLAYER} is that you? Excellent, this is Professor Madrone."),,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("Excellent job catching that {STR_VAR_1}. I've already sampled its environment data from your Pokédex, and I was able to open another portal!"),,SPEAKER_MADRONE,,,PHONE_ON)
+    msgbox(format("It's already set up on the computer for you."),,SPEAKER_MADRONE,,,PHONE_ON)
     closemessage
     playse(SE_POKENAV_HANG_UP)
     release
@@ -277,8 +274,7 @@ script Quest_Ultrawormholeresearch_StartUltraBeast_Script{
     waitmoncry
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     special(Quest_Ultrawormholeresearch_SetUltraBeastBattle)
-    special(StartRegiBattle) //PSF TODO should be start UB battle
-    waitstate
+    special(StartRegiBattle)
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
     specialvar(VAR_RESULT,GetBattleOutcome)
     switch(var(VAR_RESULT)){
@@ -315,7 +311,6 @@ script Quest_Ultrawormholeresearch_ControlUltraBeastVisibility_Script{
     return
 }
 
-//PSF TODO once maps are built, need to make sure this actually works. Ultra Beasts should not spawn after battling them until the player goes back to the Lab
 
 script Quest_Ultrawormholeresearch_ResetUltraBeastVisbility{
     if (flag(FLAG_QUEST_ULTRAWORMHOLE_BATTLED_ULTRA_BEAST)){
@@ -324,41 +319,3 @@ script Quest_Ultrawormholeresearch_ResetUltraBeastVisbility{
     return
 }
 
-text gText_Ultrawormholeresearch_WaitEsperanto{
-    format("")
-}
-text gText_Ultrawormholeresearch_TakeTheBook{
-    format("")
-}
-text gText_Ultrawormholeresearch_TheBookcase{
-    format("")
-}
-text gText_Ultrawormholeresearch_Whatthehell{
-    format("")
-}
-
-text gText_Ultrawormholeresearch_IWouldntGo{
-    format("I wouldn't go in there right now if I was you.")
-}
-
-text gText_Ultrawormholeresearch_IDontThink{
-    format("I don't think you used the computer to set a warp location... if you walk up those stairs now, you're probably going to be warped into the endless void. Forever.")
-}
-
-text gText_Ultrawormholeresearch_WhichWormhole{
-    format("")
-}
-
-text gText_Ultrawormholeresearch_WarpHasBeenSet{
-    format("The portal has been set to {STR_VAR_1}.")
-}
-
-text gText_Ultrawormholeresearch_PlayerIs{
-    format("{PLAYER} is that you? Excellent, this is Professor Madrone.")
-}
-text gText_Ultrawormholeresearch_GreatJobCatching{
-    format("Excellent job catching that {STR_VAR_1}. I've already sampled its environment data from your Pokédex, and I was able to open another portal!")
-}
-text gText_Ultrawormholeresearch_WhenYouComeBack{
-    format("It's already set up on the computer for you.")
-}

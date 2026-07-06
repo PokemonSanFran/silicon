@@ -5,16 +5,24 @@ const CAMERA = OBJ_EVENT_ID_CAMERA
 const FLAG_HIDE_HIKO = FLAG_TEMP_1
 const FLAG_HIDE_JIRACHI = FLAG_TEMP_2
 
-script OkayLetsFixIt_Object_Visibility_Script{
-    setflag(FLAG_HIDE_JIRACHI)
+script OkayLetsFixit_Object_Visibility_Script
+{
+	setflag(FLAG_HIDE_JIRACHI)
 
-    if (var(VAR_STORYLINE_STATE) != STORY_BEGIN_LETS_FIX_IT){
-        setflag(FLAG_HIDE_HIKO)
-    }
-    return
+	switch (var(VAR_TIME_TRAVEL_STATE))
+	{
+		case TIME_TRAVEL_FIRST_RETURN:
+		case TIME_TRAVEL_ASK_PLAYER:
+			return
+		default:
+			nop
+	}
+
+	setflag(FLAG_HIDE_HIKO)
 }
 
-script OkayLetsFixit_ReachTop_Script {
+script OkayLetsFixit_ReachTop_Script
+{
     setflag(FLAG_VISITED_TORGEOT_CLIMB)
 
     checkitem(ITEM_WISH_TAG, 1)
@@ -24,11 +32,12 @@ script OkayLetsFixit_ReachTop_Script {
         }
 
     lock
-        startcutscene(JUMPPLAYER_OKAYLETSFIXIT)
-        applymovement(PLAYER, OkayLetsFixit_WalkToPeak)
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
+		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_START_CUTSCENE)
+        applymovement(PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
         waitmovement(PLAYER)
         bufferitemname(STR_VAR_1,ITEM_WISH_TAG)
-        msgbox(gText_OkayLetsFixIt_TheBambooStar)
+        msgbox(format("The {STR_VAR_1} is glowing!"))
         closemessage
 
         playse(SE_M_DETECT)
@@ -41,21 +50,19 @@ script OkayLetsFixit_ReachTop_Script {
         addobject(HIKO)
         fadescreen(FADE_FROM_WHITE)
 
-        msgbox(gText_OkayLetsFixIt_ImGladYouCame,,SPEAKER_HIKO)
+        msgbox(format("Ah {PLAYER}, I'm glad you came. I'm Hiko."),,SPEAKER_HIKO)
         closemessage
 
-        applymovement(PLAYER, OkayLetsFixit_LookAround)
+        applymovement(PLAYER, moves(lock_facing_direction, walk_right, unlock_facing_direction, face_up, delay_16, face_down, delay_16, face_left, step_end))
         waitmovement(0)
 
-        msgbox(gText_OkayLetsFixIt_WhatWhereDidYou,,SPEAKER_ALICIA)
+        msgbox(format("What… where… did you come from?! What the hell is going on?"),,SPEAKER_ALICIA)
 
+        msgbox(format("Have you realized the error in your ways?"),,SPEAKER_HIKO)
 
-        msgbox(gText_OkayLetsFixIt_HaveYouRealized,,SPEAKER_HIKO)
+        msgbox(format("In coming here? Yeah, I think - "),,SPEAKER_ALICIA)
 
-        msgbox(gText_OkayLetsFixIt_InComingHere,,SPEAKER_ALICIA)
-
-
-        msgbox(gText_OkayLetsFixIt_LetsLookBack,,SPEAKER_HIKO)
+        msgbox(format("Let's look back."),,SPEAKER_HIKO)
         closemessage
 
         fadeblackandsetremovewarpfadeflag
@@ -63,199 +70,171 @@ script OkayLetsFixit_ReachTop_Script {
         end
 }
 
-script OkayLetsFixit_StartFlashback_Script {
+script OkayLetsFixit_StartFlashback_Script
+{
     lock
-        setvar(VAR_STORYLINE_STATE,STORY_BEGIN_LETS_FIX_IT)
-
-        msgbox(gText_OkayLetsFixIt_ThisWasTheNight,,SPEAKER_ALICIA)
-
+        playbgm(MUS_OKAY_LETS_FIX_IT,TRUE)
+		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_RETURN)
+        msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
 
         applymovement(HIKO, Common_Movement_FaceLeft)
         waitmovement(HIKO)
-        msgbox(gText_OkayLetsFixIt_Why,,SPEAKER_HIKO)
+        msgbox(format("Why?"),,SPEAKER_HIKO)
 
         applymovement(PLAYER, Common_Movement_FaceRight)
         waitmovement(PLAYER)
 
-        msgbox(gText_OkayLetsFixIt_IDidntBelieve,,SPEAKER_ALICIA,TAIL_WHISPER)
-        msgbox(gText_OkayLetsFixIt_YouSawItAll,,SPEAKER_HIKO)
-        msgbox(gText_OkayLetsFixIt_ImTheChampion,,SPEAKER_ALICIA,,EMOTE_SHOCK)
-        msgbox(gText_OkayLetsFixIt_AndNow,,SPEAKER_HIKO)
-        msgbox(gText_OkayLetsFixIt_AndNowIveBecome,,SPEAKER_ALICIA,,EMOTE_SAD)
+        msgbox(format("I heard Baiya and The Tide...but what I wanted was more important."),,SPEAKER_ALICIA,TAIL_WHISPER)
+        msgbox(format("You saw what they were saying with your own eyes, no?"),,SPEAKER_HIKO)
+        msgbox(format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpRise Capital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to."),,SPEAKER_ALICIA,,EMOTE_SHOCK)
+        msgbox(format("And now?"),,SPEAKER_HIKO)
+        msgbox(format("And now I've become a cog in the machine that they were trying to stop. I'm actually a part of the problem. Lives got worse because of me."),,SPEAKER_ALICIA,,EMOTE_SAD)
         closemessage
 
         delay(30)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_TORGEOT_CLIMB, 255, 17, 43)
+		waitstate
         end
 }
 
-script OkayLetsFixit_ReturnToPeak_Script {
+script OkayLetsFixit_ReturnToPeak_Script
+{
     lock
+        playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         clearflag(FLAG_TEMP_1)
-        addobject(HIKO)
 
-        call(OkayLetsFixit_TimelineReset_Script)
         applymovement(PLAYER, Common_Movement_FaceLeft)
         waitmovement(PLAYER)
 
-        applymovement(PLAYER, OkayLetsFixit_WatchCliffWalk)
-        applymovement(HIKO, OkayLetsFixit_WalkOffCliff)
-        special(SpawnCameraObject)
-        applymovement(CAMERA, OkayLetsFixit_PanCamera)
-        waitmovement(CAMERA)
-        waitmovement(HIKO)
-        waitmovement(PLAYER)
+		goto(OkayLetsFixit_ChooseMon_Dialogue)
+}
 
-        msgbox(gText_OkayLetsFixIt_WaitWhatWhoAreYou,,SPEAKER_ALICIA)
+script OkayLetsFixit_ChooseMon_Dialogue
+{
+	callnative(Script_CheckIfAnyMonHasChampionRibbon)
+	setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_ASK_PLAYER)
+	msgbox(format("You have the rare chance to make the right decision this time."),,SPEAKER_HIKO)
+	msgbox(format("I can create a bridge from here to a point in the past where you can make the right decision."),,SPEAKER_HIKO)
 
+	if (var(VAR_RESULT) == FALSE)
+	{
+		goto(OkayLetsFixit_StartTimeTravel_Script)
+	}
 
-        msgbox(gText_OkayLetsFixIt_IHopeYouMake,,SPEAKER_HIKO)
-        closemessage
-        playse(SE_ORB)
-        fadescreen(FADE_TO_WHITE) //PSF TODO Implement glowing with Hiko as source, mimic "DoOrbEffect"
-        delay(150)
-        removeobject(HIKO)
-        clearflag(FLAG_TEMP_2)
-        addobject(JIRACHI)
-        fadescreen(FADE_FROM_WHITE)
+	callnative(Script_DoesPlayerHaveOneOrTwoUsableMon)
+	if (var(VAR_RESULT) != PLAYER_HAS_TWO_USABLE_MONS)
+	{
+		goto(OkayLetsFixit_NotEnoughMons_Dialogue)
+	}
 
-        playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
-        waitmoncry
-        playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
-        waitmoncry
-        endcutscene
+	msgbox(format("But this bridge must be anchored on each end."),,SPEAKER_HIKO)
+	goto(OkayLetsFixit_ChooseMon_Script)
+}
+script OkayLetsFixit_ChooseMon_Script
+{
+	msgbox(format("You must leave behind a Pokemon with the spirit of a Champion to anchor this end."),,SPEAKER_HIKO)
+	special(ChoosePartyMon)
 
-        fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
+	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN)
+	{
+		goto(OkayLetsFixit_NotReady_Dialogue)
+	}
+
+	bufferpartymonnick(STR_VAR_1, VAR_0x8004)
+	callnative(Script_CheckIfChosenMonHasChampionRibbon)
+	if (var(VAR_RESULT) == TRUE)
+	{
+		goto(OkayLetsFixit_AskConfirm_Script)
+	}
+	else
+	{
+		msgbox(format("{STR_VAR_1} does not have the spirit of a Champion."),,SPEAKER_HIKO)
+		goto(OkayLetsFixit_ChooseMon_Script)
+	}
+}
+
+script OkayLetsFixit_NotReady_Dialogue
+{
+	msgbox(format("Until you are ready, we have nothing more to discuss."),,SPEAKER_HIKO)
+	closemessage
+	release
+	end
+}
+
+script OkayLetsFixit_NotEnoughMons_Dialogue
+{
+	msgbox(format("Your party needs more than one healthy Pokemon."),,SPEAKER_HIKO)
+	goto(OkayLetsFixit_NotReady_Dialogue)
+}
+
+script OkayLetsFixit_AskConfirm_Script
+{
+	msgbox(format("{STR_VAR_1} indeed has the heart of a Champion."),,SPEAKER_HIKO)
+	msgbox(format("Once you cross the bridge, there is no coming back."),,SPEAKER_HIKO)
+	msgbox(format("This Pokemon will stay here with me. It will be well taken care of, but it will never return to you."),,SPEAKER_HIKO)
+	closemessage
+	msgbox(format("Wait never? What do you mean?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+	msgbox(format("I have to give up {STR_VAR_1}, just like that?"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+	msgbox(format("That's not fair!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SHOCK)
+	msgbox(format("All actions have consequences. Are you ready?"),MSGBOX_YESNO,SPEAKER_HIKO)
+
+	if (var(VAR_RESULT) == YES)
+	{
+		special(DeleteChosenPartyMon)
+		goto(OkayLetsFixit_StartTimeTravel_Script)
+	}
+	else
+	{
+		goto(OkayLetsFixit_NotReady_Dialogue)
+	}
+}
+
+script OkayLetsFixit_StartTimeTravel_Script
+{
+	closemessage
+	applymovement(PLAYER, moves(delay_16 * 5, face_up, walk_right, walk_up * 4, step_end))
+	applymovement(HIKO, moves(walk_up, walk_right * 3, walk_up * 7, step_end))
+	special(SpawnCameraObject)
+	applymovement(CAMERA, moves(walk_right, walk_up * 6, step_end))
+	waitmovement(CAMERA)
+	waitmovement(HIKO)
+	waitmovement(PLAYER)
+
+	call(OkayLetsFixit_TimelineReset_Script)
+	msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
+	closemessage
+	playse(SE_ORB)
+	fadescreen(FADE_TO_WHITE)
+	delay(150)
+	removeobject(HIKO)
+	clearflag(FLAG_TEMP_2)
+	addobject(JIRACHI)
+	fadescreen(FADE_FROM_WHITE)
+
+	playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
+	waitmoncry
+	playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
+	waitmoncry
+	//endcutscene
+
+	fadeblackandsetremovewarpfadeflag
+	warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
 }
 
 script OkayLetsFixit_TimelineReset_Script {
         setflag(FLAG_TIMELINE_TIMETRAVEL)
         clearflag(FLAG_TIMELINE_FALSE)
 
+		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_SACRIFICE_COMPLETE)
         setvar(VAR_STORYLINE_STATE,STORY_MORNING_AFTER_TIMETRAVEL)
         setvar(VAR_MANHUNT_STATE,NOT_ASSIGNED)
         setvar(VAR_LETSBURNTHISMOTHERSTATE,NOT_ASSIGNED)
         setvar(VAR_HOWDISAPPOINTING_STATE,MISSION_NOT_ASSIGNED)
         removeitem(ITEM_WISH_TAG,1)
-
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_MANHUNT)
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_HOWDISAPPOINTING)
-        //questmenu(QUEST_MENU_UNCOMPLETE_QUEST,QUEST_LETSBURNTHISMOTHERDOWN)
-        //PSF TODO need to write text for the true timeline for when these quests are completed
 }
 
-text gText_OkayLetsFixIt_TheBambooStar {
-    format("The {STR_VAR_1} is glowing!")
-}
-
-text gText_OkayLetsFixIt_ImGladYouCame {
-    format("Ah {PLAYER}, I'm glad you came. I'm Hiko.")
-}
-
-text gText_OkayLetsFixIt_WhatWhereDidYou {
-    format("What… where… did you come from?! What the hell is going on?")
-}
-
-text gText_OkayLetsFixIt_HaveYouRealized {
-    format("Have you realized the error in your ways?")
-}
-
-text gText_OkayLetsFixIt_InComingHere {
-    format("In coming here? Yeah, I think - ")
-}
-
-text gText_OkayLetsFixIt_LetsLookBack {
-    format("Let's look back.")
-}
-
-text gText_OkayLetsFixIt_ThisWasTheNight {
-    format("This was the night I decided to help SharpriseCapital.")
-}
-text gText_OkayLetsFixIt_Why {
-    format("Why?")
-}
-text gText_OkayLetsFixIt_IDidntBelieve {
-    format("I heard Kai and TheTide...but what I wanted was more important.")
-}
-text gText_OkayLetsFixIt_YouSawItAll {
-    format("You saw what they were saying with your own eyes, no?")
-}
-text gText_OkayLetsFixIt_ImTheChampion {
-    format("I'm the Champion! And I wanted to be a Champion so bad... and I knew that going against SharpriseCapital meant that it was over. I didn't want to sacrifice anything to help them, and I knew I would have to.")
-}
-text gText_OkayLetsFixIt_AndNow{
-    format("And now?")
-}
-text gText_OkayLetsFixIt_AndNowIveBecome{
-    format("And now I've become a cog in the machine that they were trying to stop. I'm actually a part of the problem. Lives got worse because of me.")
-}
-
-text gText_OkayLetsFixIt_WaitWhatWhoAreYou {
-    format("Wait what - who are you? How are you -")
-}
-
-text gText_OkayLetsFixIt_IHopeYouMake {
-    format("I hope you make the right decision this time, {PLAYER}.")
-}
-
-text gText_OkayLetsFixIt_WhatTheHell {
-    format("What the hell was that? That dream was… insane. What the hell did I eat?")
-}
-
-text gText_OkayLetsFixIt_WasThatReal{
-    format("Was that real? I sided with SharpriseCapital and... made things worse? Yeah, that was worse. It was just a dream... but it felt so real!")
-}
-
-text gText_OkayLetsFixIt_WhatIfIt{
-    format("That regret felt so real though. I was so disappointed. I was so wrong. It was all wrong!")
-}
-
-text gText_OkayLetsFixIt_IRememberI{
-    format("I remember I yelled at Kai. I told him he couldn't hack it. I called them thugs. And I left. I was disguisting. Is he still there now?")
-}
-
-movement OkayLetsFixit_WalkToPeak {
-    walk_up * 4
-        walk_left * 7
-        step_end
-}
-
-movement OkayLetsFixit_LookAround {
-    lock_facing_direction
-        walk_right
-        unlock_facing_direction
-        face_up
-        delay_16
-        face_down
-        delay_16
-        face_left
-        step_end
-}
-
-movement OkayLetsFixit_WalkOffCliff {
-    walk_up
-        walk_right * 3
-        walk_up * 7
-        step_end
-}
-
-movement OkayLetsFixit_PanCamera {
-    walk_right
-        walk_up * 6
-        step_end
-}
-
-movement OkayLetsFixit_WatchCliffWalk {
-    delay_16 * 5
-        face_up
-        walk_right
-        walk_up * 4
-        step_end
-}
-
-movement OkayLetsFixIt_PaceNightmare {
+movement OkayLetsFixit_PaceNightmare {
     walk_down
         walk_left * 2
         walk_right * 2
