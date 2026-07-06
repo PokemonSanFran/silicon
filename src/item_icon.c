@@ -191,7 +191,7 @@ const u16 *GetItemIconPalette(enum Item itemId)
 }
 
 // Start inventory
-u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDest)
+u8 BlitItemIconToWindow(enum Item itemId, u8 windowId, u16 x, u16 y, void * paletteDest)
 {
     if (!AllocItemIconTemporaryBuffers())
         return 16;
