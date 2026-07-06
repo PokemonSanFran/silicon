@@ -74,6 +74,7 @@ script LockedOut_WarpPlayer_Script
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_HALAI_ISLAND,29,33)
+			waitstate
         }
 }
 

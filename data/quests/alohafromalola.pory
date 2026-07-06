@@ -128,6 +128,7 @@ script Quest_Alohafromalola_MoveToExhibition_Dialogue{
         setflag(FLAG_HIDE_MAP_NAME_POPUP)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_PERLACIA_CITY_GYM,255,11,6)
+		waitstate
 }
 
 script Quest_Alohafromalola_CreateCrowd_Script{
@@ -161,6 +162,7 @@ script Quest_Alohafromalola_StartBattle_Dialogue{
         delay(60)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_PERLACIA_CITY_GYM_ENTRANCE,255,9,13)
+		waitstate
 }
 
 script Quest_Alohafromalola_SetLeaderPosition_Thanks_Script{

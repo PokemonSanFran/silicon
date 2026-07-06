@@ -131,6 +131,7 @@ script Quest_StopMugging_Heal_Dialogue{
     special(ResetHealLocationToPerlaciaCity)
     fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_PERLACIA_CITY,25,31)
+	waitstate
     release
     end
 }

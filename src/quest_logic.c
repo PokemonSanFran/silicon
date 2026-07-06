@@ -1947,7 +1947,7 @@ void VSGarbodor_ChooseGemBasedOnStarter(void)
 
 bool32 MaskOff_ShouldShowVigrim(void)
 {
-    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_4)
+    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_5)
         return FALSE;
     if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;
@@ -2711,8 +2711,11 @@ void ShowGarbodor(void)
     u32 fixedOtId = 38726;
     bool8 isShiny = TRUE;
     enum Item item = ITEM_NORMAL_GEM;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    StringCopy(otName,COMPOUND_STRING("Baiya"));
 
     CreateMon(&mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
+    SetMonData(&mon, MON_DATA_OT_NAME, &otName);
     SetMonData(&mon,MON_DATA_IS_SHINY,&isShiny);
     SetMonData(&mon,MON_DATA_HELD_ITEM,&item);
     CalculateMonStats(&mon);

@@ -6,6 +6,25 @@
 #define QUEST_NAME_WIDTH 155
 #define QUEST_LOCATION_WIDTH (DISPLAY_WIDTH - (20 + QUEST_NAME_WIDTH))
 
+enum QuestFlavorGetNameType
+{
+  QUEST_FLAVOR_GET_NOTHING,
+  QUEST_FLAVOR_GET_NAME_MAP,
+  QUEST_FLAVOR_GET_NAME_SPECIES,
+  QUEST_FLAVOR_GET_NAME_ITEM,
+  QUEST_FLAVOR_GET_NAME_ITEM_PLURAL,
+  QUEST_FLAVOR_GET_NAME_ABILITY,
+  QUEST_FLAVOR_GET_NAME_MOVE,
+  QUEST_FLAVOR_GET_NAME_QUEST,
+};
+
+enum QuestFlavorDataType
+{
+  QUEST_FLAVOR_COMPARE_FLAG,
+  QUEST_FLAVOR_COMPARE_VAR,
+  QUEST_FLAVOR_COMPARE_QUEST,
+};
+
 enum QuestHelpBarStates
 {
     QUEST_HELP_BAR_NOT_PINNED_NOT_SUBQUEST,
@@ -164,14 +183,14 @@ struct SideQuest
 {
 	const u8 *name;
 	const u8 *desc[QUEST_STATE_COUNT];
-    const u8* (*descFunc)(void);
+  const u8* (*descFunc)(void);
 	const u8 *map;
 	const u16 sprite;
-    const u8 spritetype;
+  const u8 spritetype;
 	const struct SubQuest *subquests;
 	const u8 numSubquests;
-    const struct QuestState states[MAX_QUEST_STATES];
-    const bool8 skipQuestWhenCounting;
+  const struct QuestState states[MAX_QUEST_STATES];
+  const bool8 skipQuestWhenCounting;
 };
 
 extern const struct SideQuest sSideQuests[QUEST_COUNT];

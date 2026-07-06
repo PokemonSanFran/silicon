@@ -135,6 +135,7 @@ script WarehouseRave_PostBattle_Script
         waitmovement(0)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_CURENO_PORT,4)
+		waitstate
 }
 
 script WarehouseRave_OutsideWarehouse_Dialogue

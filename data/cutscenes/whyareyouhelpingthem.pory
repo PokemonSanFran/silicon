@@ -88,7 +88,8 @@ script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
     return
 }
 
-script WhyAreYouHelpingThem_StartRaid {
+script WhyAreYouHelpingThem_StartRaid 
+{
     lock
     setvar(VAR_NAVAL_BASE_STATE,NAVAL_BASE_RAID_START)
     playse(SE_FAILURE)
@@ -161,6 +162,7 @@ script WhyAreYouHelpingThem_PreBattleBoss_Script {
 }
 
 script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
+		clearflag(B_FLAG_NO_WHITEOUT)
         setvar(VAR_NAVAL_BASE_STATE,SAVE_BAIYA_NAVAL_BASE)
         addobject(ADAORA)
         call(WhyAreYouHelpingThem_MoveObjectAdaora_Script)
@@ -298,6 +300,7 @@ script WhyAreYouHelpingThem_PostBattle_Dialogue {
         setvar(VAR_HALAI_ISLAND_STATE,WHY_ARE_YOU_HELPING_THEM)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_HALAI_ISLAND,255,26,6)
+		waitstate
 }
 
 script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
@@ -334,6 +337,7 @@ script WhyAreYouHelpingThem_MissionDebrief_Dialogue {
             closemessage
             fadescreen(FADE_TO_BLACK)
             warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
+			waitstate
         } else {
             closemessage
                 release
@@ -393,6 +397,7 @@ script WhyAreYouHelpingThem_StartChampionship_Dialogue {
             setvar(VAR_STORYLINE_STATE,STORY_START_CHAMPIONSHIP)
                 fadescreen(FADE_TO_BLACK)
                 warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,9,6)
+			waitstate
         }
 }
 

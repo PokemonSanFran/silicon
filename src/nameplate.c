@@ -42,7 +42,6 @@ static void PrintSpeakerTitle(u32 windowId, enum NameplateSpeaker speaker);
 //WindowId + 1, 0 if window is not open
 static EWRAM_DATA u8 sMugshotWindow = 0;
 static EWRAM_DATA u8 sPortaitSpriteID = 0;
-static EWRAM_DATA u8 sPortaitPaletteID = 0;
 static u8* nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_COUNT] = {NULL};
 
 static const u16 gMessageBox_Pal[] = INCGFX_U16("graphics/ui_menus/msgbox/message_box.pal", ".gbapal");
@@ -509,44 +508,30 @@ static void DrawThirdRowNameplateTiles(u32 windowId, u32 nameplateWidth, u32 off
 
 static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker speaker)
 {
-    u32 palnum, paltag;
-    u32 spriteId = MAX_SPRITES;
-    u32 SpriteTag = GFXTAG_SPEAKER_ICON;
-    struct SpriteSheet sSpriteSheet_Speaker_Icon;
-    struct SpritePalette spritePalette;
-    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
-
     DestroySpeakerIconSprite();
 
-    TempSpriteTemplate.tileTag = SpriteTag;
-    palnum = AllocSpritePalette(SPEAKER_ICON_PAL_NUM);
-    paltag = GetSpritePaletteTagByPaletteNum(palnum);
-    sPortaitPaletteID = paltag;
-    FreeSpritePaletteByTag(paltag);
+    u32 spriteTag = GFXTAG_SPEAKER_ICON;
+    struct SpriteSheet sSpriteSheet_Speaker;
+    sSpriteSheet_Speaker.data = sSpeakerData[speaker].speakerIcon;
+    sSpriteSheet_Speaker.size = 2048;
+    sSpriteSheet_Speaker.tag = spriteTag;
+    LoadSpriteSheet(&sSpriteSheet_Speaker);
 
-    sSpriteSheet_Speaker_Icon.data = sSpeakerData[speaker].speakerIcon;
-    sSpriteSheet_Speaker_Icon.size = 2048;
-    sSpriteSheet_Speaker_Icon.tag = SpriteTag;
-    LoadSpriteSheet(&sSpriteSheet_Speaker_Icon);
+    u32 palTag = PALTAG_SPEAKER_ICON | BLEND_IMMUNE_FLAG;
+    struct SpritePalette sSpritePalette_Speaker;
+    sSpritePalette_Speaker.data = sSpeakerData[speaker].speakerPal;
+    sSpritePalette_Speaker.tag = palTag;
+    LoadSpritePalette(&sSpritePalette_Speaker);
 
-    spritePalette.data = sSpeakerData[speaker].speakerPal;
-    spritePalette.tag = paltag;
-    LoadSpritePalette(&spritePalette);
-
-    spriteId = CreateSprite(&TempSpriteTemplate, 0, 0, 0);
-
-    if (spriteId != MAX_SPRITES)
-    {
-        gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
-        gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
-
-        gSprites[spriteId].x = nameplateWidth - SPEAKER_ICON_RIGHT_PADDING;
-        gSprites[spriteId].y = SPEAKER_ICON_Y;
-        gSprites[spriteId].oam.priority = 0;
-
-        gSprites[spriteId].oam.paletteNum = palnum;
-        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
-    }
+    struct SpriteTemplate TempSpriteTemplate = gDummySpriteTemplate;
+    TempSpriteTemplate.tileTag    = spriteTag;
+    TempSpriteTemplate.paletteTag = palTag;
+    u32 x = nameplateWidth - SPEAKER_ICON_RIGHT_PADDING;
+    u32 y = SPEAKER_ICON_Y;
+    u32 spriteId = CreateSprite(&TempSpriteTemplate, x, y, 0);
+    gSprites[spriteId].oam.priority = 0;
+    gSprites[spriteId].oam.shape = SPRITE_SHAPE(32x32);
+    gSprites[spriteId].oam.size = SPRITE_SIZE(32x32);
 
     sPortaitSpriteID = spriteId;
     VarSet(VAR_MSGBOX_SPEAKER, SPEAKER_DEFAULT);
@@ -559,9 +544,8 @@ void DestroySpeakerIconSprite(void)
 
     DestroySpriteAndFreeResources(&gSprites[sPortaitSpriteID]);
     FreeSpriteTilesByTag(GFXTAG_SPEAKER_ICON);
-    FreeSpritePaletteByTag(sPortaitPaletteID);
+    FreeSpritePaletteByTag(PALTAG_SPEAKER_ICON);
     sPortaitSpriteID = 0;
-    VarSet(sPortaitPaletteID, 0);
 }
 
 static void AddNameplateTail(u32 windowId, u32 nameplateWidth, enum NameplateTail tail)
@@ -642,7 +626,6 @@ void ClearMessageBoxAddOns(void)
 void ForceClearMessageBoxData(void)
 {
     sPortaitSpriteID = 0;
-    sPortaitPaletteID = 0;
     sMugshotWindow = 0;
     ClearNameplateVariables();
 }

@@ -50,8 +50,8 @@ Pic: Baiya
 Gender: Male
 Music: Male
 
-Raichu
-Level: 1
+Dragonite @ Dragoninite
+Level: 100
 
 === PARTNER_ADAORA ===
 Name: Adaora
@@ -60,7 +60,7 @@ Pic: Adaora
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_BD ===
@@ -70,7 +70,7 @@ Pic: Bd
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_BELEN ===
@@ -80,7 +80,7 @@ Pic: Belen
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_DIMU ===
@@ -90,7 +90,7 @@ Pic: Dimu
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_DOYLE ===
@@ -100,7 +100,7 @@ Pic: Doyle
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_EMRYS ===
@@ -110,7 +110,7 @@ Pic: Emrys
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_IMELDA ===
@@ -120,7 +120,7 @@ Pic: Imelda
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_PUA ===
@@ -130,7 +130,7 @@ Pic: Pua
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_KEI_YING ===
@@ -140,7 +140,7 @@ Pic: Kei_Ying
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_MAGNUS ===
@@ -150,7 +150,7 @@ Pic: Magnus
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_NERIENE ===
@@ -160,7 +160,7 @@ Pic: Neriene
 Gender: Male
 Music: Male
 
-Raichu
+Buneary
 Level: 1
 
 === PARTNER_SHINZO ===
@@ -237,3 +237,90 @@ Modest Nature
 - Fake Out  
 - Reflect  
 - Light Screen  
+
+=== PARTNER_CHARLOTTE===
+Name: Charlotte
+Pic: Charlotte
+Class: Charlotte
+Gender: Male
+Music: Male
+
+Palafin @ Choice Scarf  
+Ability: Zero to Hero  
+Level: 50  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 250 Atk / 150 Spe  
+Adamant Nature  
+- Wave Crash  
+- Flip Turn  
+- Close Combat  
+- Zen Headbutt  
+
+Talonflame @ Sharp Beak  
+Ability: Gale Wings  
+Level: 49  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 200 Atk / 200 Spe  
+Adamant Nature  
+- Brave Bird  
+- Flare Blitz  
+- Tailwind  
+- Dual Wingbeat  
+
+Doublade @ Eviolite  
+Ability: No Guard  
+Level: 50  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 50 HP / 250 Atk / 100 SpD  
+Adamant Nature  
+- Iron Head  
+- Sacred Sword  
+- Shadow Claw  
+- Swords Dance  
+
+Toedscruel @ Groundium Z 
+Ability: Mycelium Might  
+Level: 51   
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 200 SpA / 200 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Earth Power  
+- Energy Ball  
+- Spore  
+- Sludge Bomb  
+
+Hydreigon @ Focus Sash  
+Ability: Levitate  
+Level: 52  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 250 SpA / 150 Spe  
+Serious Nature  
+IVs: 0 Atk  
+- Dark Pulse  
+- Dragon Pulse  
+- Flamethrower  
+- Flash Cannon
+
+Gallade @ Galladite  
+Ability: Sharpness  
+Level: 53  
+Ball: Master
+Shiny: No
+Happiness: 1
+EVs: 200 HP / 200 Atk  
+Serious Nature  
+- Sacred Sword  
+- Psycho Cut  
+- Night Slash  
+- Trick Room  

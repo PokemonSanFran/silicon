@@ -48,6 +48,7 @@ script AaandWereBack_WarpToCompound_Script {
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_CUCONU_TOWN_SHARPRISE_COMPOUND_1F,0)
+			waitstate
         }
 }
 

@@ -115,6 +115,7 @@ script Earthquake_ThatNight_Dialogue
     setvar(VAR_HALAI_ISLAND_STATE,POST_EARTHQUAKE)
     fadeblackandsetremovewarpfadeflag
     warp(MAP_HALAI_ISLAND,2)
+	waitstate
 }
 
 script Earthquake_ShowDestroyedCity_Script {
@@ -235,7 +236,8 @@ script Earthquake_PostRescue_Dialogue {
 
         msgbox(format("Let's check this message out."),MSGBOX_DEFAULT,SPEAKER_ADAORA,EMOTE_CONFUSE)
 
-        msgbox(format("“TM15@18030122@37.75030467013338, -122.3798002138461” It's just a bunch of nonsense. Maybe a glitch?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
+		bufferitemname(STR_VAR_1,ITEM_TM296)
+        msgbox(format("“{STR_VAR_1} @ 37.75030467013338, -122.3798002138461,{RIGHT_ARROW} 18030122” It's just a bunch of nonsense. Maybe a glitch?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("…I don't think so. Kei-ying was really trying to help me. Even when I had dinner with him, their energy was different from everybody else in SharpRise Capital."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
                 closemessage
@@ -273,7 +275,7 @@ script Earthquake_AskPlayerWarp_Script {
         if (var(VAR_RESULT) == YES){
             fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_ROUTE4,255,10,24)
-                end
+			waitstate
         }else {
                 msgbox(format("Okay, we've all got our orders. Let's stay in touch."),MSGBOX_DEFAULT,SPEAKER_ADAORA)
                 closemessage
