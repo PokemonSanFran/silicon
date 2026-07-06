@@ -132,12 +132,14 @@
         {
             {
 #line 53
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_DRAGONITE,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 53
+            .heldItem = ITEM_DRAGONINITE,
 #line 55
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 54
-            .lvl = 1,
+            .lvl = 100,
             .ball = POKEBALL_COUNT,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -164,7 +166,7 @@
         {
             {
 #line 63
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 65
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -196,7 +198,7 @@
         {
             {
 #line 73
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 75
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -228,7 +230,7 @@
         {
             {
 #line 83
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 85
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -260,7 +262,7 @@
         {
             {
 #line 93
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 95
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -292,7 +294,7 @@
         {
             {
 #line 103
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 105
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -324,7 +326,7 @@
         {
             {
 #line 113
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 115
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -356,7 +358,7 @@
         {
             {
 #line 123
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 125
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -388,7 +390,7 @@
         {
             {
 #line 133
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 135
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -420,7 +422,7 @@
         {
             {
 #line 143
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 145
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -452,7 +454,7 @@
         {
             {
 #line 153
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 155
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
@@ -484,7 +486,7 @@
         {
             {
 #line 163
-            .species = SPECIES_RAICHU,
+            .species = SPECIES_BUNEARY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 165
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
