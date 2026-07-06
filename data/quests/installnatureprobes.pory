@@ -22,6 +22,7 @@ script Quest_InstallNatureProbes_Interact_InstallNatureProbesWorker_Script
 script Quest_InstallNatureProbes_StartQuest_Dialogue
 {
 	lock
+    buffermapname(STR_VAR_1, MAP_LEAVERRA_FOREST)
     msgbox("Reports still aren't finished…{PAUSE 30}\nAnd I've still got installation to do…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, emote_x, delay_16 * 4, face_player, delay_16 *2, emote_exclamation_mark))
     waitmovement(0)
@@ -39,7 +40,7 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
     closemessage
 
     buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
-    msgbox("I am a member of the {STR_VAR_1} Wildlife\nRangers. We monitor the movements and\nbehavior of Pokemon so that we may\lanalyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("I am a member of the {STR_VAR_1}\nWildlife Rangers.\pWe monitor the movements and behavior of\nPokemon so that we may analyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("I have some probes that automatically\ncollect data and report back to the\nRangers.\pOnce installed it means I'm saved from\nhaving to go and do it in person.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("I wonder if you could place some under\nthe three signs around the forest?\nEverything else will be handled\lautomatically.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
@@ -59,32 +60,18 @@ script Quest_InstallNatureProbes_Active_Dialogue
 	lock
     setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
     buffermapname(STR_VAR_1, MAP_LEAVERRA_FOREST)
-    message(format("What probes did you already install in {STR_VAR_1}?"))
-    waitmessage
-    waitbuttonpress
-
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+    msgbox(format("What probes did you already install in\nLeaverraForest?"),MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     if (var(VAR_RESULT) == FALSE){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
-        message(format("One probe goes in the deepest part of the forest."))
-        waitmessage
-        waitbuttonpress
+        msgbox(format("One probe goes in the deepest part of the forest."),MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     }
-
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     if (var(VAR_RESULT) == FALSE){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
-        message(format("One probe goes on the tallest hill."))
-        waitmessage
-        waitbuttonpress
+        msgbox(format("One probe goes on the tallest hill."),MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     }
-
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
+    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
     if (var(VAR_RESULT) == FALSE){
-        setvar(VAR_MSGBOX_SPEAKER, SPEAKER_INSTALLNATUREPROBESWORKER)
-        message(format("One probe goes by the lake shore."))
-        waitmessage
-        waitbuttonpress
+        msgbox(format("One probe goes by the lake shore."),MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     }
 
     applymovement(INSTALLNATUREPROBESWORKER, moves(face_original_direction))
@@ -196,7 +183,7 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     msgbox("I see now that I've been naive.\pI've been informed by my superior that my\nservices are no longer needed.\pI'm dismissed from my job, and must\nvacate the premises immediately.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     closemessage
     getplayerxy(PLAYER_X, PLAYER_Y)
-    moveobjecttocoords(INSTALLNATUREPROBES,12,8,DIR_SOUTH)
+    moveobjecttocoords(INSTALLNATUREPROBESWORKER,12,8,DIR_SOUTH)
     fadeandremovelasttalked
     
     completequest(QUEST_INSTALLNATUREPROBES)

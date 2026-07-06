@@ -29,7 +29,7 @@ script LeaverraForest_HillSign_Script{
 buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
 buffermapname(STR_VAR_2,MAP_ESPULEE_OUTSKIRTS)
 buffermapname(STR_VAR_3,MAP_PIOCA_BRIDGE)
-   msgbox("{STR_VAR_1} is part of the {STR_VAR_2}\nWatershed.\pWater flows from the slopes of the\nmountains into the creeks, meeting with\nthe ocean near {STR_VAR_3}.",MSGBOX_SIGN)
+   msgbox("{STR_VAR_1} is part of the\n{STR_VAR_2} Watershed.\pWater flows from the slopes of the\nmountains into the creeks, meeting with\nthe ocean near {STR_VAR_3}.",MSGBOX_SIGN)
 
     returnqueststate(QUEST_INSTALLNATUREPROBES)
 
