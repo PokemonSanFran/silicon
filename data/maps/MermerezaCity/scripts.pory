@@ -3,11 +3,13 @@ mapscripts MermerezaCity_MapScripts {
 	{
 		callnative(WarpTaxiAfterCutscene)
 	}
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_SHARPRISESPIRE_CONFERENCE_STATE,DEFEATED_THIRD_LEADER:WowYoureStrong_Script_CreateObjectsForBaiyaAndLucrezia
+    ]
     MAP_SCRIPT_ON_TRANSITION
     {
         call(Quest_Recruitlocalartists_Ramesh_Visibility_Script)
         call(Quest_Recruitlocalartists_Smeargle_Visibility_Script)
-        call(WowYoureStrong_HideObject_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [

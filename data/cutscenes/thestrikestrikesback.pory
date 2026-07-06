@@ -81,7 +81,8 @@ script TheStrikeStrikesBack_CrowdFacesNorth_Script {
         waitmovement(0)
 }
 
-script TheStrikeStrikesBack_PhoneCall_Dialogue{
+script TheStrikeStrikesBack_PhoneCall_Dialogue
+{
     lock
     startcutscene(JUMPPLAYER_THESTRIKESTRIKESBACK)
         setvar(VAR_STORYLINE_STATE,STORY_CALLED_TO_CONSTRUCTION)
@@ -103,104 +104,88 @@ script TheStrikeStrikesBack_PhoneCall_Dialogue{
 
     msgbox(format("Heh, thanks! Means a lot."),,SPEAKER_ALICIA)
         msgbox(format("You're right though, we're both about to be very busy. I'll cut to the chase. Could you head down to Route2? Oliver will meet you there and explain everything."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
-        msgbox(format("Sure. Right now?"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
-        msgbox(format("As soon as you can."),MSGBOX_DEFAULT,SPEAKER_LUCREZIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
-
-        closemessage
+        msgbox(format("Sure. Be right there!"),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_DEFAULT,EMOTE_DEFAULT,PHONE_ON)
         playse(SE_POKENAV_HANG_UP)
+        closemessage
         waitse
-        msgbox(format("Do you want to go to Route2?"),MSGBOX_YESNO)
-
-        if (var(VAR_RESULT) == NO ) {
-            closemessage
-        } else {
-            closemessage
         fadeblackandsetremovewarpfadeflag
-                warpsilent(MAP_ROUTE2,255,21,25)
-		waitstate
-        }
+        warpsilent(MAP_ROUTE2,WARP_ID_NONE,21,25)
+        waitstate
     release
         end
 }
 
-script TheStrikeStrikesBack_Intro_Dialogue {
+script TheStrikeStrikesBack_Intro_Dialogue
+{
     lock
+    setvar(VAR_CONSTRUCTION_STRIKE_STATE,START_VS_GARBODOR)
 
-        getplayerxy(VAR_TEMP_0,VAR_TEMP_1)
-        if (var(VAR_TEMP_0) != 21){
-        fadeblackandsetremovewarpfadeflag
-            warpsilent(MAP_ROUTE2,255,21,25)
-                waitstate
-        }else{
-            setvar(VAR_CONSTRUCTION_STRIKE_STATE,START_VS_GARBODOR)
+            msgbox(format("Congratulations to you, {PLAYER}! You're caught up on the strikes, right?"),,SPEAKER_OLIVER)
 
-                msgbox(format("Congratulations to you, {PLAYER}! You're caught up on the strikes, right?"),,SPEAKER_OLIVER)
+            msgbox(format("Yeah, I saw them on the news. Why are we involved though?"),,SPEAKER_ALICIA)
 
-                msgbox(format("Yeah, I saw them on the news. Why are we involved though?"),,SPEAKER_ALICIA)
+            msgbox(format("Well, here's the problem. We - ! oh Lord."),,SPEAKER_OLIVER)
 
-                msgbox(format("Well, here's the problem. We - ! oh Lord."),,SPEAKER_OLIVER)
+            closemessage
 
-                closemessage
+            call(TheStrikeStrikesBack_AddRocketObjects_Script)
 
-                call(TheStrikeStrikesBack_AddRocketObjects_Script)
+            applymovement(VIGRIM,TheStrikeStrikesBack_WalkIntoFrame)
+            applymovement(ROCKET_A,TheStrikeStrikesBack_WalkIntoFrame)
+            applymovement(ROCKET_B,TheStrikeStrikesBack_WalkIntoFrame)
+            waitmovement(0)
 
-                applymovement(VIGRIM,TheStrikeStrikesBack_WalkIntoFrame)
-                applymovement(ROCKET_A,TheStrikeStrikesBack_WalkIntoFrame)
-                applymovement(ROCKET_B,TheStrikeStrikesBack_WalkIntoFrame)
-                waitmovement(0)
+            call(TheStrikeStrikesBack_CrowdFacesNorth_Script)
 
-                call(TheStrikeStrikesBack_CrowdFacesNorth_Script)
+            msgbox(format("My name is Vigrim, and I am the leader of The Tide. "),,SPEAKER_VIGRIM)
 
-                msgbox(format("My name is Vigrim, and I am the leader of The Tide. "),,SPEAKER_VIGRIM)
+            closemessage
+            reveal(REVEAL_VIGRIM)
 
-                closemessage
-                reveal(REVEAL_VIGRIM)
+            msgbox(format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all."),,SPEAKER_VIGRIM)
 
-                msgbox(format("We are fighting alongside the construction workers here, and we are hoping to come to a reasonable conclusion for all."),,SPEAKER_VIGRIM)
+            msgbox(format("Our single demand is that the pay for all Sharprise Stadium construction workers is doubled. Until this demand is met, these hard-working Resido laborers will dig not another hole, place another brick, or lay another cable."),,SPEAKER_VIGRIM)
 
-                msgbox(format("Our single demand is that the pay for all Sharprise Stadium construction workers is doubled. Until this demand is met, these hard-working Resido laborers will dig not another hole, place another brick, or lay another cable."),,SPEAKER_VIGRIM)
+            closemessage
 
-                closemessage
+            applymovement(VIGRIM,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(ROCKET_A,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(ROCKET_B,TheStrikeStrikesBack_WalkOutFrame)
+            applymovement(CHARLOTTE,Common_Movement_FaceLeft)
+            applymovement(PLAYER,Common_Movement_FaceDown)
+            applymovement(9,Common_Movement_FaceDown)
+            applymovement(7,Common_Movement_FaceLeft)
+            applymovement(6,Common_Movement_FaceRight)
 
-                applymovement(VIGRIM,TheStrikeStrikesBack_WalkOutFrame)
-                applymovement(ROCKET_A,TheStrikeStrikesBack_WalkOutFrame)
-                applymovement(ROCKET_B,TheStrikeStrikesBack_WalkOutFrame)
-                applymovement(CHARLOTTE,Common_Movement_FaceLeft)
-                applymovement(PLAYER,Common_Movement_FaceDown)
-                applymovement(9,Common_Movement_FaceDown)
-                applymovement(7,Common_Movement_FaceLeft)
-                applymovement(6,Common_Movement_FaceRight)
+            waitmovement(0)
 
-                waitmovement(0)
+            msgbox(format("Sigh, of course. Well, they're the reason we brought you here. We've received intel that The Tide is planning on using exploding Pokemon to bring down the construction site. The strike is just a distraction. "),,SPEAKER_OLIVER)
 
-                msgbox(format("Sigh, of course. Well, they're the reason we brought you here. We've received intel that The Tide is planning on using exploding Pokemon to bring down the construction site. The strike is just a distraction. "),,SPEAKER_OLIVER)
+            msgbox(format("Wait, what? That's insane!"),,SPEAKER_ALICIA)
 
-                msgbox(format("Wait, what? That's insane!"),,SPEAKER_ALICIA)
+            msgbox(format("Agreed, and that's why we need you two while Lucrezia and I work on a peaceful solution."),,SPEAKER_OLIVER)
 
-                msgbox(format("Agreed, and that's why we need you two while Lucrezia and I work on a peaceful solution."),,SPEAKER_OLIVER)
+            msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity."),,SPEAKER_OLIVER)
 
-                msgbox(format("The police are working to make sure the protests remain civil but we don't want a repeat of the riots in CapheCity."),,SPEAKER_OLIVER)
+            msgbox(format("We think The Tide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
 
-                msgbox(format("We think The Tide agitated wild Garbodor, and we need you to capture or knock them out while Lucrezia and I negotiate with Vigrim. Time is of the essence!"),,SPEAKER_OLIVER)
+            closemessage
 
-                closemessage
+            applymovement(OLIVER,TheStrikeStrikesBack_WalkOutFrame)
+            waitmovement(0)
+            applymovement(CHARLOTTE, moves(walk_left, face_up, step_end))
+            waitmovement(0)
 
-                applymovement(OLIVER,TheStrikeStrikesBack_WalkOutFrame)
-                waitmovement(0)
-                applymovement(CHARLOTTE, moves(walk_left, face_up, step_end))
-                waitmovement(0)
+            msgbox(format("{PLAYER}, I'll be in there when you're ready."),,SPEAKER_CHARLOTTE)
 
-                msgbox(format("{PLAYER}, I'll be in there when you're ready."),,SPEAKER_CHARLOTTE)
-
-                closemessage
-                applymovement(CHARLOTTE,TheStrikeStrikesBack_WalkOutFrame)
-                waitmovement(0)
-                call(TheStrikeStrikesBack_ObjectCleanup_Script)
-        call(TryAutoSave)
-    endcutscene
-                release
-                end
-        }
+            closemessage
+            applymovement(CHARLOTTE,TheStrikeStrikesBack_WalkOutFrame)
+            waitmovement(0)
+            call(TheStrikeStrikesBack_ObjectCleanup_Script)
+    call(TryAutoSave)
+endcutscene
+            release
+            end
 }
 
 movement TheStrikeStrikesBack_FaceNorth {

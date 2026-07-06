@@ -1,6 +1,6 @@
 mapscripts Route10_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(NewAssholeAppears_HideBaiya_Script)
+        call_if_gt(VAR_ROUTE10_STATE,SAVED_BEFORE_BAIYA_ROUTE10,NewAssholeAppears_Script_HideBaiya)
         call_if_subquest_complete(QUEST_GETTHEBANDBACKTOGETHER,SUB_QUEST_7,Quest_Getthebandbacktogether_Hide_GetthebandbacktogetherbikerG)
 
     }
