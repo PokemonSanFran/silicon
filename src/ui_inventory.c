@@ -591,7 +591,7 @@ static const u32* const sInventoryTilesLUT[] =
     [INVENTORY_BG_TEXT] = NULL,
     [INVENTORY_BG_NORMAL] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tallmerge.4bpp.smol"),
     [INVENTORY_BG_SHADOWS] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/tallmerge.4bpp.smol"),
-    [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/main_menu/siliconBg.4bpp.smol"),
+    [INVENTORY_BG_WALLPAPER] = (const u32[])INCBIN_U32("graphics/ui_menus/inventory/backgrounds/siliconBg.4bpp.smol"),
 };
 
 static const u32* const sInventoryTilemapLUT[] =
@@ -5274,8 +5274,11 @@ static void UpdateInventoryMoveTypeIDs(void){
             enum Move moveId = GetItemSecondaryId(itemId);
             enum Type moveType = (firstItemIdx + idx == (numItemsInPocket - 1)) ? TYPE_NONE : gMovesInfo[moveId].type;
 
+            if (moveId == 0)
+                moveType = TYPE_NONE;
+
             gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = moveType;
-            DebugPrintf("type %d");
+            DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %d Move: %d", idx, moveType,moveId);
             DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %S Move: %S", idx, gTypesInfo[moveType].name, GetMoveName(moveId));
         }
         else
