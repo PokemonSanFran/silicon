@@ -1762,6 +1762,15 @@ static void UpdateDisplayMode(void){
     if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_GIVE_ITEM)
         sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM;
 
+    if (pocketId == POCKET_Z_CRYSTALS)
+        sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM;
+
+    if (pocketId == POCKET_MEGA_STONES)
+        sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM;
+
+    if (itemId == LIST_CANCEL)
+        sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_DEFAULT;
+
     if (sMenuDataPtr->partyDisplayMode == INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY)
     {
         UpdateMonIconsPalettes();
@@ -3319,7 +3328,7 @@ static void Inventory_HPBars(void)
 {
     u32 x, x2, y, y2;
     enum InventoryWindowIds windowId = INVENTORY_WINDOW_HP_BARS;
-    bool8 drawHeldItem      = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
+    bool8 drawHeldItem      = !ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1);
     bool8 drawHpBar         = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
     bool8 drawExpBar        = !ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1);
     bool8 drawHPBarPlatform = Inventory_ShouldDrawHPBarWindow();
@@ -4659,77 +4668,93 @@ bool8 shouldSkipPocket(u32 pocket){
     return FALSE;
 }
 
-static bool8 ShouldHideSprite(u8 spriteID){
-    u8 displayMode = sMenuDataPtr->partyDisplayMode;
+static bool8 ShouldHideSprite(u8 spriteID)
+{
+    enum PartyInventoryDisplayMode displayMode = sMenuDataPtr->partyDisplayMode;
 
-    switch(spriteID){
+    if (displayMode == INVENTORY_PARTY_DISPLAY_MODE_DEFAULT)
+    {
+        switch (spriteID)
+        {
         case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
-        {
-            switch(displayMode){
-                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
-                    return FALSE;
-                break;
-                default:
-                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
-                    return TRUE;
-                break;
-            }
-        }
-        break;
         case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
-        {
-            switch(displayMode){
-                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
-                    return FALSE;
-                break;
-                default:
-                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
-                    return TRUE;
-                break;
-            }
-        }
-        break;
         case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
-        {
-            switch(displayMode){
-                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
-                    return FALSE;
-                break;
-                default:
-                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
-                    return TRUE;
-                break;
-            }
-        }
-        break;
         case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
-        {
-            switch(displayMode){
-                case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
-                case INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM:
-                    return FALSE;
-                break;
-                default:
-                    return TRUE;
-                break;
-            }
-        }
-        break;
         case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
-        {
-            switch(displayMode){
-                case INVENTORY_PARTY_DISPLAY_EXP_AND_LEVEL:
-                    return FALSE;
-                break;
-                default:
-                    return TRUE;
-                break;
-            }
+            return TRUE;
         }
-        break;
     }
 
-    return FALSE;
+    if (displayMode == INVENTORY_PARTY_DISPLAY_MODE_HELD_ITEM)
+    {
+        switch (spriteID)
+        {
+            case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+            case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+            case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
+            case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+                return TRUE;
+            case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+                return FALSE;
+        }
+    }
+
+    if (displayMode == INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS)
+    {
+        switch (spriteID)
+        {
+            case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+            case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+            case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
+                return FALSE;
+            case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+            case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+                return TRUE;
+        }
+    }
+
+    if (displayMode == INVENTORY_PARTY_DISPLAY_EXP_AND_LEVEL)
+    {
+        switch (spriteID)
+        {
+            case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+            case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+            case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
+                return TRUE;
+            case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+                return FALSE;
+            case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+                return TRUE;
+        }
+    }
+
+    if (displayMode == INVENTORY_PARTY_DISPLAY_ELEGIBILITY)
+    {
+        switch (spriteID)
+        {
+            case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+            case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+            case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
+            case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+            case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+                return TRUE;
+        }
+    }
+
+    if (displayMode == INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY)
+    {
+        switch (spriteID)
+        {
+            case INVENTORY_SPRITE_MON_STATUS_1...INVENTORY_SPRITE_MON_STATUS_6:
+            case INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1...INVENTORY_SPRITE_HP_PLATFORM_SHADOW_6:
+            case INVENTORY_SPRITE_MON_HP_BAR_1...INVENTORY_SPRITE_MON_HP_BAR_6:
+            case INVENTORY_SPRITE_MON_EXP_BAR_1...INVENTORY_SPRITE_MON_EXP_BAR_6:
+            case INVENTORY_SPRITE_MON_ITEM_1...INVENTORY_SPRITE_MON_ITEM_6:
+                return TRUE;
+        }
+    }
+
+    return TRUE;
 }
 
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
