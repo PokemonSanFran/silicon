@@ -6181,11 +6181,12 @@ const struct ItemInfo gItemsInfo[] =
         "Blastoise to Mega\n"
         "Evolve in battle."),
       .sortType = ITEM_TYPE_MEGA_STONE,
+      .pocket = POCKET_MEGA_STONES,
       .type = ITEM_USE_BAG_MENU,
       .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
       .flingPower = 80,
-      .iconPic = gItemIcon_Pidgeotite,
-      .iconPalette = gItemIconPalette_Pidgeotite,
+      .iconPic = gItemIcon_Blastoisinite,
+      .iconPalette = gItemIconPalette_Blastoisinite,
     },
 
     [ITEM_BEEDRILLITE] =
