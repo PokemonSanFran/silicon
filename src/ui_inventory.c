@@ -160,6 +160,7 @@ bool8 shouldSkipPocket(u32 pocket);
 static bool8 ShouldHideSprite(u8 spriteID);
 static void UpdateDisplayMode(void);
 static void UpdateMonIconsPalettes(void);
+static bool32 WillItemTransformMon(struct Pokemon* mon);
 static void Inventory_DrawMoveTypeFrames(void);
 static void UpdateInventoryMoveTypeIDs(void);
 
@@ -1771,16 +1772,41 @@ static void UpdateDisplayMode(void){
     if (itemId == LIST_CANCEL)
         sMenuDataPtr->partyDisplayMode = INVENTORY_PARTY_DISPLAY_MODE_DEFAULT;
 
-    if (sMenuDataPtr->partyDisplayMode == INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY)
-    {
-        UpdateMonIconsPalettes();
-    }
-
     if (pastDisplayMode != sMenuDataPtr->partyDisplayMode)
     {
         Inventory_UpdateHPBarsDeferred();
-        UpdateMonIconsPalettes();
     }
+
+    UpdateMonIconsPalettes();
+}
+
+static bool32 WillItemTransformMon(struct Pokemon* mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+
+    if (species == SPECIES_EGG)
+        return FALSE;
+
+    enum Item item = Inventory_GetItemIdCurrentlySelected();
+
+    if (item == LIST_CANCEL || item == ITEM_NONE)
+        return FALSE;
+
+    const struct FormChange *formChangeTable = GetSpeciesFormChanges(species);
+
+    if (formChangeTable == NULL)
+        return FALSE;
+
+    for (u32 form = 0; formChangeTable[form].method != FORM_CHANGE_TERMINATOR; form++)
+    {
+        if (formChangeTable[form].method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM || formChangeTable[form].method == FORM_CHANGE_BATTLE_PRIMAL_REVERSION)
+        {
+            u32 requirement = formChangeTable[form].param1;
+            if (requirement == item)
+                return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 static void UpdateMonIconsPalettes(void)
@@ -1792,52 +1818,62 @@ static void UpdateMonIconsPalettes(void)
     {
         u32 SpriteID = sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MON_ICON_1 + slot];
 
-        if (SpriteID != 0xFF && IsMonNotEmpty(slot))
+        if (SpriteID == 0xFF || IsMonNotEmpty(slot) == FALSE)
+            continue;
+
+        struct Pokemon *mon = &gPlayerParty[slot];
+        u32 species = ReturnTransformationIfConditionMet(mon);
+        u8 paletteNum = gSprites[SpriteID].oam.paletteNum;
+        u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
+        u32 currentStatus = GetAilmentFromStatus(status);
+        u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+        u16 currentHP = GetMonData(mon, MON_DATA_HP);
+        u8 newPaletteNum = paletteNum;
+
+        switch(displayMode)
         {
-            struct Pokemon *mon = &gPlayerParty[slot];
-            u32 species = ReturnTransformationIfConditionMet(mon);
-            u8 paletteNum = gSprites[SpriteID].oam.paletteNum;
-            u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
-            u32 currentStatus = GetAilmentFromStatus(status);
-            u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
-            u16 currentHP = GetMonData(mon, MON_DATA_HP);
-            u8 newPaletteNum = paletteNum;
-
-            switch(displayMode)
-            {
-                case INVENTORY_PARTY_DISPLAY_ELEGIBILITY:
-                case INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY:
+            case INVENTORY_PARTY_DISPLAY_ELEGIBILITY:
+            case INVENTORY_PARTY_DISPLAY_ATTACK_ELEGIBILITY:
+                {
+                    u8 eligibility = GetItemEligibility(slot, Inventory_GetItemIdCurrentlySelected());
+                    switch(eligibility)
                     {
-                        u8 eligibility = GetItemEligibility(slot, Inventory_GetItemIdCurrentlySelected());
-                        switch(eligibility)
-                        {
-                            case ELIGIBILITY_CANNOT:
-                                newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_BLACK, currentHP, paletteNum);
-                                break;
-                            case ELIGIBILITY_USABLE:
-                                newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, AILMENT_NONE, currentHP, paletteNum);
-                                break;
-                            case ELIGIBILITY_ALREADY_USED:
-                                newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_GREEN, currentHP, paletteNum);
-                                break;
-                            default:
-                                newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, AILMENT_NONE, currentHP, paletteNum);
-                                break;
-                        }
-
-                        gSprites[SpriteID].oam.paletteNum = newPaletteNum;
+                        case ELIGIBILITY_CANNOT:
+                            newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_BLACK, currentHP, paletteNum);
+                            break;
+                        case ELIGIBILITY_USABLE:
+                            newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, AILMENT_NONE, currentHP, paletteNum);
+                            break;
+                        case ELIGIBILITY_ALREADY_USED:
+                            newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_GREEN, currentHP, paletteNum);
+                            break;
+                        default:
+                            newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, AILMENT_NONE, currentHP, paletteNum);
+                            break;
                     }
-                    break;
-                case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
-                    newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, paletteNum);
+
                     gSprites[SpriteID].oam.paletteNum = newPaletteNum;
-                    break;
-                default:
+                }
+                break;
+            case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
+                newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, paletteNum);
+                gSprites[SpriteID].oam.paletteNum = newPaletteNum;
+                break;
+            default:
+                if (gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_MEGA_STONES)
+                {
+                    if (WillItemTransformMon(mon))
+                        newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, AILMENT_NONE, currentHP, paletteNum);
+                    else
+                        newPaletteNum = LoadMonIconPaletteWithRGBValue(species, personality, RGB_BLACK, currentHP, paletteNum);
+                }
+                else
+                {
                     currentStatus = 0;
                     newPaletteNum = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, paletteNum);
                     gSprites[SpriteID].oam.paletteNum = newPaletteNum;
                     break;
-            }
+                }
         }
     }
 }
