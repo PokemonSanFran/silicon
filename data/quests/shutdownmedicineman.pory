@@ -88,11 +88,9 @@ script Quest_ShutDownMedicineMan_Reward_Dialogue{
 }
 
 script Quest_ShutDownMedicineMan_HandleMoney_Script{
-    showmoneybox(0, 0)
-        waitbuttonpress
-        addmoney(2000)
+		showmoneybox(0, 0)
         playse(SE_SHOP)
-        updatemoneybox(0)
+        addmoney(2000,TRUE)
         waitse
         waitbuttonpress
         hidemoneybox

@@ -143,11 +143,11 @@ script RPS_Dialogue_QuestComplete
     msgbox(format("You know, when I started hustling, I was just trying to get my house back. But now? I'm just good at getting people to hand over their cash!"), MSGBOX_DEFAULT, SPEAKER_MONTY)
     msgbox(format("But for now, I'm not goin anywhere. {PLAYER}, anytime you want a rematch, I'll be here."), MSGBOX_DEFAULT, SPEAKER_MONTY)
     showmoneybox(0, 0)
-    addmoney(QUEST_RPS_BASE_WAGER)
-    waitbuttonpress
     playse(SE_SHOP)
-    updatemoneybox
+    addmoney(QUEST_RPS_BASE_WAGER,TRUE)
     msgbox(format("Next time, I'll play fair, hueh hueh hueh."), , SPEAKER_MONTY)
+	waitse
+    waitbuttonpress
     hidemoneybox
     closemessage
     completequest(QUEST_RPS)
@@ -159,11 +159,11 @@ script RPS_Dialogue_LostQuestBattle
 {
     msgbox(format("Tough break kid."), , SPEAKER_MONTY )
     showmoneybox(0, 0)
-    removemoney(QUEST_RPS_BASE_WAGER)
-    waitbuttonpress
     playse(SE_SHOP)
-    updatemoneybox
+    removemoney(QUEST_RPS_BASE_WAGER,TRUE)
     msgbox(format("Better luck next time!"), , SPEAKER_MONTY )
+	waitse
+    waitbuttonpress
     hidemoneybox
     closemessage
 }
@@ -260,11 +260,10 @@ script RPS_Dialogue_LostWagerBattle
     call (RPS_Script_StreakReset)
     msgbox(format("Hueh hueh hueh, victory is mine this time!"), , SPEAKER_MONTY)
     showmoneybox(0,0)
-    removemoney(QUEST_RPS_WAGER)
-    waitbuttonpress
     playse(SE_SHOP)
-    updatemoneybox
+    removemoney(QUEST_RPS_WAGER,TRUE)
     msgbox(format("Pleasure doing business with ya. Holler if you're up for another round."), ,SPEAKER_MONTY)
+	waitse
     waitbuttonpress
     hidemoneybox
     closemessage

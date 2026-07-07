@@ -112,12 +112,11 @@ script CulturalPurity_Dialogue_AskDonation_BackroomguardA
     goto_if_ne(VAR_RESULT,TRUE,CulturalPurity_Dialogue_DenyDonation_BackroomguardA)
     msgbox(format("To enter Level A, you’ll need the initiation donation of ¥{STR_VAR_2}."),MSGBOX_YESNO,SPEAKER_BACKROOMGUARDA)
     goto_if_eq(VAR_RESULT,NO,CulturalPurity_Dialogue_DenyDonation_BackroomguardA)
+    playse(SE_SHOP)
     removemoney(COST_QUEST_CULTURAL_PURITY_A)
     setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_A)
-    waitbuttonpress
-    playse(SE_SHOP)
-    updatemoneybox
     waitse
+    waitbuttonpress
     hidemoneybox
     closemessage
     fadescreen(FADE_TO_BLACK)
@@ -443,12 +442,11 @@ script CulturalPurity_Dialogue_AskDonation_BackroomguardB
     callnative(Quest_CulturalPurity_BufferCostLevelB)
     msgbox(format("To enter Level B, you’ll need the promotion donation of ¥{STR_VAR_2}."),MSGBOX_YESNO,SPEAKER_BACKROOMGUARDB)
     goto_if_eq(VAR_RESULT,NO,CulturalPurity_Dialogue_DenyDonation_BackroomguardB)
+    playse(SE_SHOP)
     removemoney(COST_QUEST_CULTURAL_PURITY_B)
     setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_B)
-    waitbuttonpress
-    playse(SE_SHOP)
-    updatemoneybox
     waitse
+    waitbuttonpress
     hidemoneybox
     closemessage
     fadescreen(FADE_TO_BLACK)
@@ -701,12 +699,11 @@ script CulturalPurity_Dialogue_AskDonation_BackroomguardC
     callnative(Quest_CulturalPurity_BufferCostLevelC)
     msgbox(format("To enter Level C, you’ll need the devotion donation of ¥{STR_VAR_2}."),MSGBOX_YESNO,SPEAKER_BACKROOMGUARDC)
     goto_if_eq(VAR_RESULT,NO,CulturalPurity_Dialogue_DenyDonation_BackroomguardC)
+    playse(SE_SHOP)
     removemoney(COST_QUEST_CULTURAL_PURITY_C)
     setvar(VAR_CULTURAL_PURITY,CULTURAL_PURITY_OPEN_C)
-    waitbuttonpress
-    playse(SE_SHOP)
-    updatemoneybox
     waitse
+    waitbuttonpress
     hidemoneybox
     closemessage
     fadescreen(FADE_TO_BLACK)

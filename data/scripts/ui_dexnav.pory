@@ -17,10 +17,10 @@ script EventScript_AskRestoreScript
 	if (var(VAR_RESULT) == YES)
 	{
 		callnative(Dexnav_RestorePreviousChain)
-		variableremovemoney(VAR_TEMP_1)
-		updatemoneybox
 		playse(SE_SHOP)
+		variableremovemoney(VAR_TEMP_1,TRUE)
 		waitse
+		waitbuttonpress
 	}
 	
 	hidemoneybox

@@ -430,8 +430,7 @@ script HybridCulture_Dialogue_StartAttraction3
     showmoneybox(0,0)
     cueobjecttalking(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
     playse(SE_SHOP)
-    addmoney(COST_QUEST_CULTURAL_PURITY_TOTAL)
-    updatemoneybox
+    addmoney(COST_QUEST_CULTURAL_PURITY_TOTAL,TRUE)
     waitse
     waitbuttonpress
     hidemoneybox

@@ -327,8 +327,10 @@ script Quest_ArtisanBalls2_AskRandomBall_Script {
 }
 
 script Quest_ArtisanBalls2_BuyRandomBall_Script {
-	removemoney(1300, 0)
-	updatemoneybox(0)
+	playse(SE_SHOP)
+	removemoney(1300, TRUE)
+	waitse
+	waitbuttonpress
 	switch (var(VAR_TEMP_1))
 	{
 		case 0:
