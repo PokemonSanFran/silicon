@@ -1770,6 +1770,7 @@ static void UpdateDisplayMode(void){
     if (pastDisplayMode != sMenuDataPtr->partyDisplayMode)
     {
         Inventory_UpdateHPBarsDeferred();
+        UpdateMonIconsPalettes();
     }
 }
 
