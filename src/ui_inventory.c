@@ -131,9 +131,7 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
 static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite);
-static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite);
 
-static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
 static u16 Inventory_GetItemIdCurrentlySelected(void);
 static u8 getItemOptionNum(u16 item, u8 num);
@@ -790,7 +788,7 @@ static void Inventory_PartyDisplay(void)
     u32 x = 16;
     u32 y = 32;
 
-    if (!gPlayerPartyCount)
+    if (!gPartiesCount[B_TRAINER_PLAYER])
         return;
 
     for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
@@ -1454,24 +1452,8 @@ static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
         sprite->invisible = FALSE;*/
 }
 
-static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
-{
-    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1))
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
-static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite)
-{
-    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1))
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
 static u8 GetItemEligibility(u8 partyIndex, u16 itemId){
-    struct Pokemon *mon = &gPlayerParty[partyIndex];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
     enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
     enum Pocket itemPocket = GetItemPocket(itemId);
     bool8 isItemTypeTMHM = (pocketId == POCKET_TM_HM   || itemPocket == POCKET_TM_HM);
@@ -1538,10 +1520,9 @@ static void *GetSpriteCallbackForIcon(u32 percent, bool32 isEgg)
 
 static u32 GetHPEggCyclePercent(u32 partyIndex)
 {
-    struct Pokemon *mon = &gPlayerParty[partyIndex];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
 
     if (!GetMonData(mon, MON_DATA_IS_EGG)){
-        u32 percent = ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon,MON_DATA_MAX_HP)));
         return ((GetMonData(mon, MON_DATA_HP)) * 100 / (GetMonData(mon,MON_DATA_MAX_HP)));
     }
     else
@@ -1550,7 +1531,7 @@ static u32 GetHPEggCyclePercent(u32 partyIndex)
 
 static u32 GetExpPercent(u32 partyIndex)
 {
-    struct Pokemon *mon = &gPlayerParty[partyIndex];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
 
     if (!GetMonData(mon, MON_DATA_IS_EGG)){
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1612,21 +1593,18 @@ u8 UpdateMonIconFrameCropped(struct Sprite *sprite)
 
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 {
-    struct Pokemon *mon = &gPlayerParty[slot];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
     u32 species = ReturnTransformationIfConditionMet(mon);
-    u8 displayMode = sMenuDataPtr->partyDisplayMode;
     u32 SpriteID = SPRITE_NONE;
 
     if (!IsMonNotEmpty(slot))
         return SpriteID;
 
     u32 percent = GetHPEggCyclePercent(slot);
-    u32 expPercent = GetExpPercent(slot);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
     u16 currentHP = GetMonData(mon, MON_DATA_HP);
-    u16 level = GetMonData(mon, MON_DATA_LEVEL);
     bool32 isEgg = (species == SPECIES_EGG);
-    u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
+    u32 status = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_STATUS);
     u32 currentStatus = GetAilmentFromStatus(status);
     u8 palette = LoadMonIconPaletteWithAilment(species, personality, currentStatus, currentHP, slot + MON_STARTING_PALETTE_NUM);
 
@@ -1748,7 +1726,7 @@ static void UpdateDisplayMode(void){
 
 static bool32 WillItemFromSlotTransformMon(u32 partyIndex)
 {
-    struct Pokemon *mon = &gPlayerParty[partyIndex];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
     return WillItemTransformMon(mon);
 }
 
@@ -1793,10 +1771,10 @@ static void UpdateMonIconsPalettes(void)
         if (SpriteID == 0xFF || IsMonNotEmpty(slot) == FALSE)
             continue;
 
-        struct Pokemon *mon = &gPlayerParty[slot];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
         u32 species = ReturnTransformationIfConditionMet(mon);
         u8 paletteNum = gSprites[SpriteID].oam.paletteNum;
-        u32 status = GetMonData(&gPlayerParty[slot], MON_DATA_STATUS);
+        u32 status = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_STATUS);
         u32 currentStatus = GetAilmentFromStatus(status);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
         u16 currentHP = GetMonData(mon, MON_DATA_HP);
@@ -1975,9 +1953,6 @@ void Inventory_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healt
 {
     struct WindowTemplate template = { .width = 4, .height = 4, .paletteNum = INVENTORY_PAL_SLOT_TEXT };
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
-    u8 font = INVENTORY_FONT_LIST;
-    s32 posX = 1;
-    s32 posY = 1;
 
     if (!healthPercentage)
         status = INVENTORY_MON_STATUS_FAINTED;
@@ -1995,9 +1970,6 @@ void Inventory_HPBarGraphics(struct Sprite *sprite, u32 status, u32 healthPercen
 {
     struct WindowTemplate template = { .width = 4, .height = 4, .paletteNum = INVENTORY_PAL_SLOT_TEXT };
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
-    u8 font = INVENTORY_FONT_LIST;
-    s32 posX = 1;
-    s32 posY = 1;
 
     if (!healthPercentage)
         status = INVENTORY_MON_STATUS_FAINTED;
@@ -2865,10 +2837,7 @@ static u8 GetCurrentSortWindowIndex(u8 index){
 }
 
 static u8 GetCurrentSortWindowNumOptions(void){
-    u8 i;
-    u8 pocket = gSaveBlock3Ptr->InventoryData.pocketNum;
-
-    for(i = 0; i < NUM_SORT_OPTIONS; i++){
+    for(u32 i = 0; i < NUM_SORT_OPTIONS; i++){
         if(sSortTypePerPocket[gSaveBlock3Ptr->InventoryData.pocketNum][i] == ITEM_SORT_CANCEL)
             return i + 1;
     }
@@ -3034,7 +3003,7 @@ static void Inventory_PrintHeader(void)
 
 static bool32 IsMonNotEmpty(u32 partyIndex)
 {
-    return (GetMonData(&gPlayerParty[partyIndex],MON_DATA_SPECIES_OR_EGG,NULL) != SPECIES_NONE);
+    return (GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_SPECIES_OR_EGG,NULL) != SPECIES_NONE);
 }
 
 static u32 Inventory_GetItemIdFromPocketIndex(u32 itemIndex, enum Pocket pocketId)
@@ -3276,13 +3245,11 @@ static void Inventory_PrintHPBarsMaybeDeferred(void)
 
 static void Inventory_HPBars(void)
 {
-    u32 x, x2, y, y2;
     enum InventoryWindowIds windowId = INVENTORY_WINDOW_HP_BARS;
     bool8 drawHeldItem      = !ShouldHideSprite(INVENTORY_SPRITE_MON_ITEM_1);
     bool8 drawHpBar         = !ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1);
     bool8 drawExpBar        = !ShouldHideSprite(INVENTORY_SPRITE_MON_EXP_BAR_1);
     bool8 drawHPBarPlatform = Inventory_ShouldDrawHPBarWindow();
-    enum Pocket pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -3296,13 +3263,11 @@ static void Inventory_HPBars(void)
     }
 
     // Item Description
-    x  = 16;
-    x2 = 0;
-    y  = 0;
-    y2 = 0;
+    u32 x  = 16;
+    u32 y  = 0;
 
     for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++){
-        struct Pokemon *mon = &gPlayerParty[partyIndex];
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
         u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
         u16 status = GetMonData(mon, MON_DATA_STATUS);
@@ -3316,7 +3281,6 @@ static void Inventory_HPBars(void)
             drawHPBarPlatform = FALSE;
             drawHpBar = FALSE;
         }
-
         if (hpPlatformSpriteId != SPRITE_NONE)
             gSprites[hpPlatformSpriteId].invisible = !drawHPBarPlatform;
 
@@ -4135,7 +4099,6 @@ void WaitSound(void){
 
 void ItemUseOutOfBattle_Repel_New(u8 taskId)
 {
-    u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
     u16 ItemId = gSpecialVar_ItemId;
     u16 LastRepelUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
     u16 remainingSteps = VarGet(VAR_REPEL_STEP_COUNT);
@@ -4716,7 +4679,6 @@ static bool8 ShouldHideSprite(u8 spriteID)
 /* This is the meat of the UI. This is where you wait for player inputs and can branch to other tasks accordingly */
 static void Task_MenuMain(u8 taskId)
 {
-    u32 numitems = sMenuDataPtr->numItems[gSaveBlock3Ptr->InventoryData.pocketNum];
     u32 numPress = 0;
 
     if (sMenuDataPtr->hpBarWindowClearDeferred)
