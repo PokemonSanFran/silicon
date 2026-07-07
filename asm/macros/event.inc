@@ -3376,19 +3376,31 @@
 
 	@ Start variableMoney
 	@ Adds value to the player's money. If adding 'value' money would exceed MAX_MONEY, the player's money is set to MAX_MONEY.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro variableaddmoney value:req, disable=0
-	.byte SCR_OP_VARIABLEADDMONEY
-	.4byte \value
-	.byte \disable
+	.macro variableaddmoney value:req, update=FALSE
+  .if \update == TRUE
+  preparevariablecurrencychange type=0, var=\value, subtract=FALSE
+  updatemoneybox
+  .endif
+  .byte SCR_OP_VARIABLEADDMONEY
+  .4byte \value
+  .if \update == TRUE
+  delay 30
+  updatemoneybox
+  .endif
 	.endm
 
 	@ Subtracts value from the player's money. If the player has less than 'value' money, their money is set to 0.
-	@ If 'disable' is set to anything but 0 then this command does nothing.
-	.macro variableremovemoney value:req, disable=0
+	.macro variableremovemoney value:req, update=FALSE
+  .if \update == TRUE
+  preparevariablecurrencychange type=0, var=\value, subtract=TRUE
+  updatemoneybox
+  .endif
 	.byte SCR_OP_VARIABLEREMOVEMONEY
 	.4byte \value
-	.byte \disable
+  .if \update == TRUE
+  delay 30
+  updatemoneybox
+  .endif
 	.endm
 
 	@ Checks if the player has money >= value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
@@ -3792,6 +3804,13 @@
 	callnative ScrFunc_preparecurrencychange
 	.byte \type
 	.4byte \change
+	.byte \subtract
+	.endm
+
+	.macro preparevariablecurrencychange type=0, var=0, subtract=FALSE
+	callnative ScrFunc_preparevariablecurrencychange
+	.byte \type
+	.4byte \var
 	.byte \subtract
 	.endm
 

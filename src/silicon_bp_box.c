@@ -77,3 +77,23 @@ void ScrFunc_preparecurrencychange(struct ScriptContext *ctx)
     union CurrencyBoxValues *values = (union CurrencyBoxValues *)ctx->data;
     values[3 - type].subtract = subtract;
 }
+
+void ScrFunc_preparevariablecurrencychange(struct ScriptContext *ctx)
+{
+    enum CurrencyBoxTypes type = ScriptReadByte(ctx);
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    bool32 subtract = ScriptReadByte(ctx);
+
+    // silently fail instead of wraps w/ max amount
+    // so that its more "accurate"
+    if (amount > MAX_u16)
+    {
+        amount = 0;
+        subtract = FALSE;
+    }
+
+    VarSet(VAR_TEMP_F, amount);
+
+    union CurrencyBoxValues *values = (union CurrencyBoxValues *)ctx->data;
+    values[3 - type].subtract = subtract;
+}
