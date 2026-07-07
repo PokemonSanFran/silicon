@@ -140,6 +140,7 @@ script YouHaveYourOrders_Assignment_Dialogue
         if (var(VAR_RESULT)){
         fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_HODOU_CITY,33,8)
+			waitstate
         }
 
     closemessage

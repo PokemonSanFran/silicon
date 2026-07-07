@@ -39,9 +39,19 @@ script HybridCulture_Dialogue_StartQuest
 
 script HybridCulture_Dialogue_CheckOnShinzo
 {
+	addvar(VAR_TEMP_2,1)
     buffermapname(STR_VAR_1,MAP_QUEST_HYBRID_CULTURE_2)
     bufferspeciesname(STR_VAR_2,SPECIES_QUEST_HYBRID_CULTURE)
     msgbox(format("Does Shinzo still need help with those {STR_VAR_2} on {STR_VAR_1}?"),,SPEAKER_PLAYER,TAIL_THOUGHT)
+    closemessage
+    release
+    end
+}
+
+script HybridCulture_Dialogue_HandleTimeline
+{
+	addvar(VAR_TEMP_2,1)
+    msgbox(format("I know Shinzo wants to see the sunset from up here... but I have something to do first."),,SPEAKER_PLAYER,TAIL_THOUGHT)
     closemessage
     release
     end
@@ -420,8 +430,7 @@ script HybridCulture_Dialogue_StartAttraction3
     showmoneybox(0,0)
     cueobjecttalking(LOCALID_QUEST_HYBRIDCULTURE_SHINZO)
     playse(SE_SHOP)
-    addmoney(COST_QUEST_CULTURAL_PURITY_TOTAL)
-    updatemoneybox
+    addmoney(COST_QUEST_CULTURAL_PURITY_TOTAL,TRUE)
     waitse
     waitbuttonpress
     hidemoneybox
@@ -527,6 +536,7 @@ script HybridCulture_Try_StartAttraction5
         end
     }
 
+	goto_if_eq(VAR_STORYLINE_STATE,STORY_BEGIN_LETS_FIX_IT,HybridCulture_Dialogue_HandleTimeline)
     goto_if_eq(VAR_CULTURAL_PURITY,HYBRID_CULTURE_HAS_CHALLENGED_POKEMON,HybridCulture_Dialogue_CheckOnShinzo)
 
     callnative(Script_Quest_HybridCulture_IsSunset)

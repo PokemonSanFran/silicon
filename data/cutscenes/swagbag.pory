@@ -43,14 +43,20 @@ script Swagbag_WelcomeToResido_Dialogue {
         end
 }
 
-script Swagbag_LeagueStipend_Dialogue {
-        msgbox(format("So first, you'll each be getting a stipend from the League, which should be hitting your accounts soon. That money is yours, no strings attached, so do whatever you like with it. Just don't spend it all in one place!"),,SPEAKER_OLIVER)
-        msgbox(format("Because accounting absolutely won't let us give you any more..."),,SPEAKER_OLIVER,TAIL_WHISPER)
-        closemessage
-        addmoney(50000,0)
-        setflag(FLAG_SYS_STARTER_APPS_GET)
-        goto(Swagbag_PokedexApps_Dialogue)
-        end
+script Swagbag_LeagueStipend_Dialogue 
+{
+	showmoneybox(0,0)
+	msgbox(format("So first, you'll each be getting a stipend from the League, which should be hitting your accounts soon. That money is yours, no strings attached, so do whatever you like with it. Just don't spend it all in one place!"),,SPEAKER_OLIVER)
+	msgbox(format("Because accounting absolutely won't let us give you any more..."),,SPEAKER_OLIVER,TAIL_WHISPER)
+	closemessage
+	playse(SE_SHOP)
+	addmoney(50000,TRUE)
+	setflag(FLAG_SYS_STARTER_APPS_GET)
+	waitse
+	waitbuttonpress
+	hidemoneybox
+	goto(Swagbag_PokedexApps_Dialogue)
+	end
 }
 
 script Swagbag_PokedexApps_Dialogue {

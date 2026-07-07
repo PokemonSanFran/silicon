@@ -162,10 +162,8 @@ script Quest_BuildingScope_Reward_Dialogue{
     msgbox(format("i'll send somebody over right now. thank you for subduing the ani - those people. what a misunderstanding! and this is for you..."),,SPEAKER_SHARPRISECAPITAL_STAFF)
 
 	showmoneybox(0, 0)
-    waitbuttonpress
-    addmoney(50000)
     playse(SE_SHOP)
-    updatemoneybox(0)
+    addmoney(50000,TRUE)
     waitse
     waitbuttonpress
     hidemoneybox

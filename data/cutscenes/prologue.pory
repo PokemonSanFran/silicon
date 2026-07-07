@@ -255,7 +255,8 @@ script Prologue_BeginAdventure_Dialogue
         setvar(VAR_CHOSEN_PSF_STARTER,CUTSCENE_NOT_PLAYED)
         setflag(FLAG_SPAWN_INVISIBLE)
         fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_BLACK_MAP) //go to character customization
+        warpsilent(MAP_THERE_CAN_ONLY_BE_ONE)
+		waitstate
     }
     closemessage
     end

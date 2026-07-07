@@ -15,6 +15,7 @@
 #include "item_icon.h"
 #include "item_use.h"
 #include "international_string_util.h"
+#include "line_break.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -1676,6 +1677,16 @@ static void StartPrint_QuestFlavorText(void)
     {
         StringCopy(gStringVar1, sStartMenuStrings_QuestFlavors[mode]);
     }
+
+    u32 fontId = FONT_SMALL_NARROW;
+    u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    u32 windowId = START_MAIN_WIN_TEXTBOX;
+    u32 maxWidth = (GetWindowAttribute(windowId, WINDOW_WIDTH) * TILE_WIDTH) - 2;
+    u32 letterHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
+    u32 height = (GetWindowAttribute(windowId, WINDOW_HEIGHT) * TILE_WIDTH) / (letterHeight + lineSpacing);
+
+    StripLineBreaks(gStringVar1);
+    BreakStringNaive(gStringVar1, maxWidth, height, fontId, HIDE_SCROLL_PROMPT);
 
     StartPrint_Text(START_MAIN_WIN_TEXTBOX, FONT_SMALL_NARROW, START_MAIN_WIN_TEXTBOX_WIDTH, 0, 0, gStringVar1);
 

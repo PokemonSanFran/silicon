@@ -101,7 +101,7 @@ script EnterTheMaster_Script_StartFollow
 		end
 	}
     special(HealPlayerParty)
-	setfollowernpc(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE,FNPC_ALL,EnterTheMaster_InteractFollower_Script,PARTNER_STEVEN)
+	setfollowernpc(LOCALID_LEAVERRA_FOLLOWER_CHARLOTTE,FNPC_ALL,EnterTheMaster_InteractFollower_Script,PARTNER_CHARLOTTE)
 }
 
 script EnterTheMaster_InteractFollower_Script

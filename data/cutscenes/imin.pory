@@ -85,7 +85,7 @@ script ImIn_ReleaseFromBall_Script {
         waitse
         clearflag(FLAG_HIDE_PKMN)
         addobject(PKMNA)
-        playmoncry(SPECIES_MACHAMP, CRY_MODE_ENCOUNTER)
+        playmoncry(SPECIES_LOPUNNY, CRY_MODE_ENCOUNTER)
         waitmoncry
 }
 
@@ -173,7 +173,8 @@ script ImIn_StartHouseBreak_Script
 
         call(ImIn_ReleaseFromBall_Script)
 
-        msgbox(format("Brick Break sure comes in handy when most houses are made of the stuff."),,SPEAKER_BAIYA_TIDE)
+		buffermovename(STR_VAR_1,MOVE_BRICK_BREAK)
+        msgbox(format("{STR_VAR_1} sure comes in handy."),,SPEAKER_BAIYA_TIDE)
                 closemessage
 
         playse(SE_M_BRICK_BREAK)
@@ -212,7 +213,7 @@ script ImIn_StartHouseBreak_Script
 
 script ImIn_UnlockDoor_Script
 {
-    setmetatile(11,6,0x228,FALSE)
+    setmetatile(11,6,0x228,TRUE)
         special(DrawWholeMapView)
 }
 

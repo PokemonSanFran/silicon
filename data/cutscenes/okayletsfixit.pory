@@ -67,6 +67,7 @@ script OkayLetsFixit_ReachTop_Script
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_OKAY_LETS_FIXIT_FLASHBACK, 255, 9, 4)
+		waitstate
         end
 }
 
@@ -220,6 +221,7 @@ script OkayLetsFixit_StartTimeTravel_Script
 
 	fadeblackandsetremovewarpfadeflag
 	warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
+	waitstate
 }
 
 script OkayLetsFixit_TimelineReset_Script {

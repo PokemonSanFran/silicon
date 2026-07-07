@@ -3884,28 +3884,18 @@ void Script_EndTrainerCanSeeIf(struct ScriptContext *ctx)
 bool8 ScrCmd_variableaddmoney(struct ScriptContext *ctx)
 {
     u32 amount = VarGet(ScriptReadWord(ctx));
-    u8 ignore = ScriptReadByte(ctx);
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    if (!ignore)
-    {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
-        AddMoney(&gSaveBlock1Ptr->money, amount);
-    }
+    AddMoney(&gSaveBlock1Ptr->money, amount);
     return FALSE;
 }
 
 bool8 ScrCmd_variableremovemoney(struct ScriptContext *ctx)
 {
     u32 amount = VarGet(ScriptReadWord(ctx));
-    u8 ignore = ScriptReadByte(ctx);
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
-    if (!ignore)
-    {
-        Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-
-        RemoveMoney(&gSaveBlock1Ptr->money, amount);
-    }
+    RemoveMoney(&gSaveBlock1Ptr->money, amount);
     return FALSE;
 }
 

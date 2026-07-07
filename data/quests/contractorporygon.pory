@@ -182,10 +182,8 @@ script Quest_ContractorPorygon_Subquest3_Script{
 
 script Quest_ContractorPorygon_HandleMoney_Script{
 	showmoneybox(0, 0)
-    waitbuttonpress
-    addmoney(200000)
     playse(SE_SHOP)
-    updatemoneybox(0)
+    addmoney(200000,TRUE)
     waitse
     waitbuttonpress
     hidemoneybox

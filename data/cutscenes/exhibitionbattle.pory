@@ -79,6 +79,7 @@ script ExhibitionBattle_BattleDiantha_Script {
         setvar(VAR_STORYLINE_STATE,STORY_POST_DIANTHA)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,9,5)
+		waitstate
 }
 
 script ExhibitionBattle_PostBattle_Dialogue

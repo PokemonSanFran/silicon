@@ -84,11 +84,13 @@ script Unhoused_AskDonation_Dialogue
     msgbox(("{STR_VAR_1}"),MSGBOX_YESNO,SPEAKER_UNHOUSED)
     if (var(VAR_RESULT) == YES)
     {
-        removemoney(UNHOUSED_ASK_AMOUNT,0)
-        updatemoneybox(0)
+		playse(SE_SHOP)
+        removemoney(UNHOUSED_ASK_AMOUNT,TRUE)
         callnative(RandomlyBoostPartyMemberFriendship)
         call(Unhoused_Script_BufferThanks)
         msgbox(("{STR_VAR_1}"),,SPEAKER_UNHOUSED)
+		waitse
+		waitbuttonpress
     }
     else
     {

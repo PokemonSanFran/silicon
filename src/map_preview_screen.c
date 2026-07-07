@@ -15,6 +15,7 @@
 #include "region_map.h"
 #include "script.h"
 #include "string_util.h"
+#include "quest_logic.h" // playerAdventureQuestText
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 
@@ -696,6 +697,16 @@ static const struct BgTemplate sMapPreviewBgTemplate[1] = {
 
 bool32 ShouldRunMapPreview(void)
 {
+    // Start playerAdventureQuestText
+    if (VarGet(VAR_PLAYER_HOME_STATE) < POST_SWAGBAG)
+        return FALSE;
+
+    if ((FlagGet(FLAG_FIRST_STEP_OUTSIDE) == FALSE) && (GetCurrentMap() == MAP_CUCONU_TOWN))
+    {
+        return TRUE;
+    }
+    // End playerAdventureQuestText
+
     if (MPS_ENABLE_MAP_PREVIEWS && FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
         return TRUE;
 
@@ -766,6 +777,7 @@ void MapPreview_LoadGfx(mapsec_u16_t mapsec)
         CopyToBgTilemapBuffer(0, sMapPreviewScreenData[idx].tilemapptr, 0, 0x000);
         CopyBgTilemapBufferToVram(0);
     }
+        FlagSet(FLAG_FIRST_STEP_OUTSIDE); // playerAdventureQuestText
 }
 
 void MapPreview_Unload(s32 windowId)

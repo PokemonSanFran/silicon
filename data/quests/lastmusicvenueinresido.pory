@@ -8,6 +8,7 @@ script Quest_LastMusicVenue_Debug_Script{
     questmenu(QUEST_MENU_SET_REWARD,QUEST_LASTMUSICVENUEINRESIDO)
         fadeblackandsetremovewarpfadeflag
     warp(MAP_TORA_TOWN,15,16)
+		waitstate
     release
     end
 }

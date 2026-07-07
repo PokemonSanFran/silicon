@@ -102,15 +102,13 @@ script Quest_StealTheAxe_Conclusion_Dialogue{
 
 script Quest_StealTheAxe_HandleMoney_Script{
     showmoneybox(0, 0)
-    waitbuttonpress
+    playse(SE_SHOP)
     if (var(VAR_TEMP_0) > 0){
-        addmoney(8000)
+        addmoney(8000,TRUE)
     }
     else{
-            addmoney(4000)
+            addmoney(4000,TRUE)
         }
-    playse(SE_SHOP)
-    updatemoneybox(0)
     waitse
     waitbuttonpress
     hidemoneybox

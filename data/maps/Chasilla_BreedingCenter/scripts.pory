@@ -513,10 +513,10 @@ script BreedingCenter_Script_TakeEggSequence
     if(var(VAR_RESULT) == YES)
     {
         call(BreedingCenter_Script_CheckPlayerMoney)
-        variableremovemoney(VAR_0x8005)
-        updatemoneybox
         playse(SE_SHOP)
+        variableremovemoney(VAR_0x8005,TRUE)
         waitse
+		waitbuttonpress
         hidemoneybox
         msgbox(format("Here's your Egg!"),,SPEAKER_BREEDINGEGG)
         goto(BreedingCenter_Script_GiveEggToPlayer)
@@ -772,10 +772,10 @@ script BreedingCenter_Dialogue_GeneNeverMind
 
 script BreedingCenter_Script_RemoveFundsFinishGene
 {
-    variableremovemoney(VAR_0x8005)
-    updatemoneybox
     playse(SE_SHOP)
+    variableremovemoney(VAR_0x8005,TRUE)
     waitse
+	waitbuttonpress
     hidemoneybox
     callnative(FinalizeIndividualValueChanges)
     msgbox(format("Your changes are complete. Let me know if you want to change any more of your Pokémon."),,SPEAKER_BREEDINGEGG)

@@ -134,17 +134,17 @@ script Quest_Diggingupadaorasdirt_Dialogue_ExplainGrowingUp
 script Quest_Diggingupadaorasdirt_Dialogue_DigginginvesttigatorReward
 {
     msgbox(format("I did some digging of my own, and it certainly does seem that this Adaora by all metrics is on the up-and-up."),,SPEAKER_DIGGINGINVESTTIGATOR)
-    msgbox(format("Well! I’m a man of my word. Here’s your reward."),,SPEAKER_DIGGINGINVESTTIGATOR)
     showmoneybox(0, 0)
-    addmoney(QUEST_DIGGINGUPADAORASDIRT_REWARD)
-    waitbuttonpress
+    msgbox(format("Well! I’m a man of my word. Here’s your reward."),,SPEAKER_DIGGINGINVESTTIGATOR)
     playse(SE_SHOP)
-    updatemoneybox
+    addmoney(QUEST_DIGGINGUPADAORASDIRT_REWARD,TRUE)
     msgbox(format("I had hoped, perhaps naively, that I’d be able to get a grasp on who Vigrim really is…Alas."),,SPEAKER_DIGGINGINVESTTIGATOR)
+	waitse
+    waitbuttonpress
     hidemoneybox
     msgbox(format("I don’t think my sources are bad. What a mysterious character…"),,SPEAKER_DIGGINGINVESTTIGATOR)
     msgbox(format("Thank you for your time. I’ll need to inform my client we’ve nothing serious on Adaora as of now."),,SPEAKER_DIGGINGINVESTTIGATOR)
-    msgbox(format("A client?... I didn’t know you were being hired to investigate."),,SPEAKER_ALICIA)
+    msgbox(format("A client? … I didn’t know you were being hired to investigate."),,SPEAKER_ALICIA)
     msgbox(format("Ha! Didn’t you now? Well, I can’t confirm anything. I suppose you’ll just have to guess."),,SPEAKER_DIGGINGINVESTTIGATOR)
     closemessage
     moveobjecttocoords(LOCALID_DIGGINGINVESTTIGATOR,0,8,DIR_NORTH)
