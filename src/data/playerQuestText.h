@@ -1401,6 +1401,12 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .compareOp = EQUAL,
         .targetValue = FLAG_GET_INACTIVE,
       },
+      {
+        .dataType = QUEST_FLAVOR_COMPARE_VAR,
+        .dataAddress = VAR_SHARPRISESPIRE_CONFERENCE_STATE,
+        .compareOp = EQUAL,
+        .targetValue = POST_YOU_REALIZE_WERE_EVIL_RIGHT,
+      },
     }
   },
   {
