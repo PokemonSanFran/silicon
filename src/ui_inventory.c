@@ -163,6 +163,7 @@ static void UpdateMonIconsPalettes(void);
 static bool32 WillItemTransformMon(struct Pokemon* mon);
 static void Inventory_DrawMoveTypeFrames(void);
 static void UpdateInventoryMoveTypeIDs(void);
+static bool32 WillItemFromSlotTransformMon(u32 partyIndex);
 
 //bag sort
 static void SortItemsInInventory(u8 pocket, u8 type);
@@ -1540,6 +1541,9 @@ static bool8 ShouldUpdateMonFrame(u8 partyIndex){
     if(eligibility == ELIGIBILITY_CANNOT)
         return FALSE;
 
+    if ((gSaveBlock3Ptr->InventoryData.pocketNum == POCKET_MEGA_STONES) && (!WillItemFromSlotTransformMon(partyIndex)))
+        return FALSE;
+
     return TRUE;
 }
 
@@ -1778,6 +1782,12 @@ static void UpdateDisplayMode(void){
     }
 
     UpdateMonIconsPalettes();
+}
+
+static bool32 WillItemFromSlotTransformMon(u32 partyIndex)
+{
+    struct Pokemon *mon = &gPlayerParty[partyIndex];
+    return WillItemTransformMon(mon);
 }
 
 static bool32 WillItemTransformMon(struct Pokemon* mon)
