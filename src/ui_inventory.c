@@ -123,21 +123,16 @@ static void Menu_FreeResources(void);
 static void Menu_FreeResourcesAndCallback(void);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
-static void Inventory_CreateMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y);
-static void Inventory_CreateStatusMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y);
-static void Inventory_CreateMonExpBar(u32 partyIndex, u32 species, u8 level,u32 expPercentage, u32 x, u32 y);
 static void Inventory_LoadBackgroundPalette(void);
 static void removeTransparentBackground(void);
 static void Inventory_PartyDisplay(void);
 static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y);
 
-static void Inventory_CreateHeldItemSprite(u32 partyIndex, struct Pokemon *mon, u32 x, u32 y);
 static void SpriteCB_Species_Icon_Dummy(struct Sprite *);
 static void SpriteCB_Held_Item_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite);
 
-static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite);
 static void SpriteCB_Mon_Exp_Bar_Icon_Dummy(struct Sprite *sprite);
 u8 UpdateMonIconFrameCropped(struct Sprite *sprite);
 static u16 Inventory_GetItemIdCurrentlySelected(void);
@@ -788,26 +783,6 @@ static void Inventory_AddMonPlatforms(bool32 firstColumn, u32 partyIndex, u32 x,
     sprite->y2 = y;
 
     StartSpriteAnim(sprite, firstColumn);
-}
-
-static void UpdateHPPlatformInvisibility(void){
-    u8 displayMode = sMenuDataPtr->partyDisplayMode;
-    bool8 shouldHideHPPlataform = shouldShowRegisteredItems();
-
-    if(!shouldHideHPPlataform){
-        switch(displayMode){
-            case INVENTORY_PARTY_DISPLAY_MODE_DEFAULT:
-                shouldHideHPPlataform = FALSE;
-            break;
-            default:
-            case INVENTORY_PARTY_DISPLAY_MODE_HP_AND_STATUS:
-                shouldHideHPPlataform = TRUE;
-            break;
-        }
-    }
-
-    for (u32 partyIndex = 0; partyIndex <= PARTY_SIZE; partyIndex++)
-        gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex]].invisible = shouldHideHPPlataform;
 }
 
 static void Inventory_PartyDisplay(void)
@@ -1479,14 +1454,6 @@ static void SpriteCB_Mon_Shadow_Bar_Icon_Dummy(struct Sprite *sprite)
         sprite->invisible = FALSE;*/
 }
 
-static void SpriteCB_Mon_HP_Status_Bar_Icon_Dummy(struct Sprite *sprite)
-{
-    if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1))
-        sprite->invisible = TRUE;
-    else
-        sprite->invisible = FALSE;
-}
-
 static void SpriteCB_Mon_HP_Bar_Icon_Dummy(struct Sprite *sprite)
 {
     if(shouldShowRegisteredItems() || ShouldHideSprite(INVENTORY_SPRITE_MON_HP_BAR_1))
@@ -1687,11 +1654,6 @@ static u8 ShowSpeciesIcon(u8 slot, u8 x, u8 y)
 
     gSprites[SpriteID].invisible = FALSE;
 
-    //Inventory_CreateMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateStatusMonBar(slot, species, status, percent, x, y);
-    //Inventory_CreateMonExpBar(slot, species, level, expPercent, x, y);
-    //Inventory_CreateHeldItemSprite(slot, mon, x, y);
-
     return SpriteID;
 }
 
@@ -1888,22 +1850,6 @@ static void UpdateMonIconsPalettes(void)
     }
 }
 
-static void Inventory_CreateHeldItemSprite(u32 partyIndex, struct Pokemon *mon, u32 x, u32 y)
-{
-    if (GetMonData(mon,MON_DATA_HELD_ITEM) == ITEM_NONE)
-        return;
-
-    u8 *spriteIds = sMenuDataPtr->spriteIDs;
-    struct Sprite *sprite = NULL;
-
-    spriteIds[INVENTORY_SPRITE_MON_ITEM_1 + partyIndex] = CreateSprite(&sInventory_HeldItemTemplate, 0, 0, 0);
-
-    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_ITEM_1 + partyIndex]];
-    sprite->x2 = x + 12;
-    sprite->y2 = y + 4;
-    sprite->callback = SpriteCB_Held_Item_Icon_Dummy;
-}
-
 static const u8 sBlankGfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
 static const struct SpriteFrameImage sInventoryDummyFrames[] = { obj_frame_tiles(sBlankGfx) };
 
@@ -2064,34 +2010,6 @@ void Inventory_HPBarGraphics(struct Sprite *sprite, u32 status, u32 healthPercen
     RemoveWindow(window);
 }
 
-static void Inventory_CreateMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y)
-{
-    u8 *spriteIds = sMenuDataPtr->spriteIDs;
-    struct Sprite *sprite = NULL;
-
-    spriteIds[INVENTORY_SPRITE_MON_HP_BAR_1 + partyIndex] = CreateSprite(&sMonStatus_SpriteTemplate, 16, 0, 0);
-
-    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_HP_BAR_1 + partyIndex]];
-    Inventory_HPBarGraphics(sprite, status, healthPercentage);
-    sprite->x2 = x - 17;
-    sprite->y2 = y + 12;
-    sprite->callback = SpriteCB_Mon_HP_Bar_Icon_Dummy;
-}
-
-static void Inventory_CreateStatusMonBar(u32 partyIndex, u32 species, u32 status,u32 healthPercentage, u32 x, u32 y)
-{
-    u8 *spriteIds = sMenuDataPtr->spriteIDs;
-    struct Sprite *sprite = NULL;
-
-    spriteIds[INVENTORY_SPRITE_MON_STATUS_1 + partyIndex] = CreateSprite(&sMonStatus_SpriteTemplate, 16, 0, 0);
-
-    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_STATUS_1 + partyIndex]];
-    Inventory_InjectStatusGraphics(sprite, status, healthPercentage);
-    sprite->x2 = x - 17;
-    sprite->y2 = y + 12;
-    sprite->callback = SpriteCB_Mon_HP_Status_Bar_Icon_Dummy;
-}
-
 static inline u32 Inventory_ConvertPercentageIntoExpBarFrame(u32 expPercentage)
 {
     // - 1 is required, otherwise we'll get NUM_INVENTORY_EXP_BAR_PERCENTAGES at full hp
@@ -2130,20 +2048,6 @@ void MonStatus_InjectExpBarGraphics(struct Sprite *sprite, u8 level, u32 expPerc
     CpuCopy32(tileData, (void *)(OBJ_VRAM0 + tileNum), TILE_OFFSET_4BPP(template.width * template.height));
 
     RemoveWindow(window);
-}
-
-static void Inventory_CreateMonExpBar(u32 partyIndex, u32 species, u8 level, u32 expPercentage, u32 x, u32 y)
-{
-    u8 *spriteIds = sMenuDataPtr->spriteIDs;
-    struct Sprite *sprite = NULL;
-
-    spriteIds[INVENTORY_SPRITE_MON_EXP_BAR_1 + partyIndex] = CreateSprite(&sMonStatus_ExpBarSpriteTemplate, 16, 0, 0);
-
-    sprite = &gSprites[spriteIds[INVENTORY_SPRITE_MON_EXP_BAR_1 + partyIndex]];
-    MonStatus_InjectExpBarGraphics(sprite, level, expPercentage);
-    sprite->x2 = x - 17;
-    sprite->y2 = y + 12;
-    sprite->callback = SpriteCB_Mon_Exp_Bar_Icon_Dummy;
 }
 
 static void Inventory_LoadBackgroundPalette(void)
@@ -3399,13 +3303,19 @@ static void Inventory_HPBars(void)
 
     for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++){
         struct Pokemon *mon = &gPlayerParty[partyIndex];
-        u16 species = GetMonData(mon, MON_DATA_LEVEL);
+        u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
         u16 status = GetMonData(mon, MON_DATA_STATUS);
         u32 hpPercent  = GetHPEggCyclePercent(partyIndex);
         u32 expPercent = GetExpPercent(partyIndex);
         u8 hpPlatformSpriteId = sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_HP_PLATFORM_SHADOW_1 + partyIndex];
         bool32 firstColumn = ((partyIndex % 2) == 0);
+
+        if (species == SPECIES_NONE)
+        {
+            drawHPBarPlatform = FALSE;
+            drawHpBar = FALSE;
+        }
 
         if (hpPlatformSpriteId != SPRITE_NONE)
             gSprites[hpPlatformSpriteId].invisible = !drawHPBarPlatform;
@@ -3435,7 +3345,7 @@ static void Inventory_HPBars(void)
         }
 
         if(!ShouldHideSprite(INVENTORY_SPRITE_MON_STATUS_1)){
-            if (!hpPercent)
+            if (!hpPercent && (species != SPECIES_EGG) && (species != SPECIES_NONE))
                 status = INVENTORY_MON_STATUS_FAINTED;
 
             BlitBitmapRectToWindow(windowId, sStartMenuSymbols_MonStatus, InventoryMonStatus_TranslateRawStatus(status) * 8, 0, 56, 8, x - 16, y + 8, 8,  8);
@@ -5338,11 +5248,6 @@ const struct SubspriteTable sInventory_128x16SubspriteTable[] =
     },
     { 0, NULL }
 };
-
-static u8 InventorySprite_GetDynamicSpriteId(u8 id)
-{
-    return sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + id];
-}
 
 static void UpdateInventoryMoveTypeIDs(void){
     u32 pocketNum = gSaveBlock3Ptr->InventoryData.pocketNum;
