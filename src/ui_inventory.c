@@ -67,8 +67,8 @@ struct MenuResources
     bool8 hpBarWindowVisible;
     bool8 hpBarWindowClearDeferred;
     struct ItemSlot* tempPocket;
-    u8 temp_itemIdx;
-    u8 temp_yFirstItem;
+    u16 temp_itemIdx;
+    u16 temp_yFirstItem;
 };
 
 struct InventoryListMenuStruct
@@ -4065,7 +4065,7 @@ static void PressedDownButton_Inventory(){
 static void RecalculateCalculateCursorInventoryData(){
     u8 pocket    = gSaveBlock3Ptr->InventoryData.pocketNum;
     u16 numitems = sMenuDataPtr->numItems[pocket];
-    u8 itemIdx   = gSaveBlock3Ptr->InventoryData.itemIdx;
+    u16 itemIdx   = gSaveBlock3Ptr->InventoryData.itemIdx;
 
     DebugPrintf("InitializeInventoryData itemIdx %d yFirstItem %d numitems %d pocket %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, pocket);
 
