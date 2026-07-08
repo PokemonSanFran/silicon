@@ -3802,6 +3802,47 @@ void DebugQuest_Findtheguilty(u8 state)
     }
 }
 
+void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
+}
+
+void DebugQuest_InstallNatureProbes(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_INSTALLNATUREPROBES);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST, 1);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_HILL, 1);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_SHORE, 1);
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            RemoveBagItem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            RemoveBagItem(ITEM_QUEST_INSTALLNATUREPROBES_SHORE, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_INSTALLNATUREPROBES);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_REWARD, 1);
+            break;
+    }
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************
@@ -5694,15 +5735,6 @@ void DebugQuest_HybridCulture(u8 state)
             QuestMenu_ScriptSetComplete(QUEST_HYBRIDCULTURE);
             break;
     }
-}
-
-// ***********************************************************************
-// Cutscene: Install Nature Probes
-// ***********************************************************************
-
-void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
-{
-    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
 }
 
 // ***********************************************************************
