@@ -51,6 +51,7 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
         playse(SE_EXIT)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS, 17,29)
+		waitstate
         end
     }
 }

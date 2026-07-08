@@ -163,6 +163,7 @@ script WaitHeDidWhat_PreparePlayer_Script {
             call(GroupStages_MoveObjects_Script)
                 fadeblackandsetremovewarpfadeflag
                 warpsilent(MAP_SHARPRISE_STADIUM_ARENA,0)
+				waitstate
         }
     release
         end

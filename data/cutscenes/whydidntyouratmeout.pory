@@ -43,6 +43,7 @@ script WhyDidntYouRatMeOut_StopPlayerLeaving {
         playse(SE_EXIT)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_STANDS,4,6)
+		waitstate
 }
 
 script WhyDidntYouRatMeOut_ConversationInStands {

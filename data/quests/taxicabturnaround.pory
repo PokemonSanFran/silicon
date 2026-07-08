@@ -3,10 +3,10 @@
 
 script Quest_Taxicabturnaround_Debug_Script{
     msgbox(format("here are some pokemon to clear the quests with. there might be some in your boxes too."))
+        givemon(SPECIES_NIDOKING,100,0)
+        givemon(SPECIES_AMPHAROS,100,0)
+        givemon(SPECIES_TENTACRUEL,100,0)
         givemon(SPECIES_GYARADOS,100,0)
-        givemon(SPECIES_WAILORD,100,0)
-        givemon(SPECIES_PERSIAN,100,0)
-        givemon(SPECIES_ARCANINE,100,0)
         givemon(SPECIES_DRAGONITE,100,0)
         givemon(SPECIES_AERODACTYL,100,0)
     return

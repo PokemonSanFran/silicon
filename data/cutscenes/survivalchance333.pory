@@ -83,7 +83,7 @@ script SurvivalChance333_ExplainPlan_Dialogue {
 script SurvivalChance333_Battle_Script {
         msgbox(format("Won't even be a fair fight. I could take both of you at the same time, with my eyes closed."),,SPEAKER_CHIEF)
         closemessage
-        multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_STEVEN)
+        multi_2_vs_1(TRAINER_POLICECHIEF,format("Hmph!"),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         goto(SurvivalChance333_PostBattle_Script)
 }
@@ -98,6 +98,7 @@ script SurvivalChance333_PostBattle_Script {
         setvar(VAR_HALAI_ISLAND_STATE,START_SURVIVAL_CHANCE)
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_HALAI_ISLAND,255,21,24)
+		waitstate
 }
 
 script SurvivalChance333_MoveCameraFreeze_Script {

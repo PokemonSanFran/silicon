@@ -1559,11 +1559,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
 {
     [QUEST_PLAYERSADVENTURE] =
     {
-        .name = gText_Quest_PlayersAdventure_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_PlayersAdventure_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_PlayersAdventure_DoneDesc,
+        .name = COMPOUND_STRING("{PLAYER}'s Adventure"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("!!"),
         .descFunc = GetQuestDesc_PlayersAdventure,
-        .map = gText_Quest_PlayersAdventure_Map,
+        .map = COMPOUND_STRING("Resido"),
         .sprite = OBJ_EVENT_GFX_BRENDAN_NORMAL,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
@@ -3200,7 +3200,52 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .sprite = OBJ_EVENT_GFX_ARTIST,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = sInstallNatureProbes_Sub,
-        .numSubquests = QUEST_INSTALLNATUREPROBES_SUB_COUNT
+        .numSubquests = QUEST_INSTALLNATUREPROBES_SUB_COUNT,
+        .states =
+        {
+            [STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED] = 
+            {
+                .name = COMPOUND_STRING("Not Started"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_INSTALLNATUREPROBES_STARTED] = 
+            {
+                .name = COMPOUND_STRING("Started"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED] = 
+            {
+                .name = COMPOUND_STRING("Hill Probe Installed"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED] = 
+            {
+                .name = COMPOUND_STRING("Forest Probe Installed"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED] = 
+            {
+                .name = COMPOUND_STRING("Shore Probe Installed"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+            [STATE_QUEST_INSTALLNATUREPROBES_COMPLETE] = 
+            {
+                .name = COMPOUND_STRING("Complete"),
+                .setupFunc = DebugQuest_InstallNatureProbes,
+                side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
+                .warpId = 0,
+            },
+        },
     },
     [QUEST_MANOFMANYHATS] =
     {

@@ -70,6 +70,7 @@ script GroupStages_PreparePlayer_Script {
 
         fadeblackandsetremovewarpfadeflag
             warpsilent(MAP_SHARPRISE_STADIUM_ARENA,255,5,6)
+			waitstate
         }
     release
         end
@@ -160,6 +161,7 @@ script GroupStages_RoundRobinGroupComplete_Script {
         waitse
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_SHARPRISE_STADIUM_LOCKERS,255,10,3)
+		waitstate
 }
 
 movement GroupStages_WalkToCenterStage {

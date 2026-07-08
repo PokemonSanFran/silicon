@@ -1947,7 +1947,7 @@ void VSGarbodor_ChooseGemBasedOnStarter(void)
 
 bool32 MaskOff_ShouldShowVigrim(void)
 {
-    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_4)
+    if (VarGet(VAR_MASK_OFF_STATE) < GOT_MASK_OFF_CLUE_5)
         return FALSE;
     if (VarGet(VAR_MASK_OFF_STATE) >= DEFEATED_MASK_OFF_VIGRIM)
         return FALSE;
@@ -2711,8 +2711,11 @@ void ShowGarbodor(void)
     u32 fixedOtId = 38726;
     bool8 isShiny = TRUE;
     enum Item item = ITEM_NORMAL_GEM;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    StringCopy(otName,COMPOUND_STRING("Baiya"));
 
     CreateMon(&mon, species, level, personality, OTID_STRUCT_PRESET(fixedOtId));
+    SetMonData(&mon, MON_DATA_OT_NAME, &otName);
     SetMonData(&mon,MON_DATA_IS_SHINY,&isShiny);
     SetMonData(&mon,MON_DATA_HELD_ITEM,&item);
     CalculateMonStats(&mon);
@@ -3795,6 +3798,47 @@ void DebugQuest_Findtheguilty(u8 state)
             break;
         case STATE_QUEST_FINDTHEGUILTY_COMPLETE:
             QuestMenu_ScriptSetComplete(QUEST_FINDTHEGUILTY);
+            break;
+    }
+}
+
+void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
+{
+    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
+}
+
+void DebugQuest_InstallNatureProbes(u8 state)
+{
+    switch (state)
+    {
+        default:
+        case STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED:
+            FlagSet(FLAG_SYS_STARTER_APPS_GET);
+            JumpPlayerTo_YoungPadawan(JUMP_DEBUG);
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_STARTED:
+            QuestMenu_ScriptSetActive(QUEST_INSTALLNATUREPROBES);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST, 1);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_HILL, 1);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_SHORE, 1);
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_2);
+            RemoveBagItem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED:
+            QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES, FLAG_SET_COMPLETED, SUB_QUEST_3);
+            RemoveBagItem(ITEM_QUEST_INSTALLNATUREPROBES_SHORE, 1);
+            Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward();
+            break;
+        case STATE_QUEST_INSTALLNATUREPROBES_COMPLETE:
+            QuestMenu_ScriptSetComplete(QUEST_INSTALLNATUREPROBES);
+            AddBagItem(ITEM_QUEST_INSTALLNATUREPROBES_REWARD, 1);
             break;
     }
 }
@@ -5691,15 +5735,6 @@ void DebugQuest_HybridCulture(u8 state)
             QuestMenu_ScriptSetComplete(QUEST_HYBRIDCULTURE);
             break;
     }
-}
-
-// ***********************************************************************
-// Cutscene: Install Nature Probes
-// ***********************************************************************
-
-void Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward(void)
-{
-    Quest_Generic_CountRemainingSubquestsTryProgressReward(QUEST_INSTALLNATUREPROBES);
 }
 
 // ***********************************************************************
