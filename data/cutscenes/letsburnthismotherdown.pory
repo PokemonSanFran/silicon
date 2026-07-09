@@ -24,6 +24,8 @@ const FLAG_HIDE_CHARLOTTE_ARANTRAZ = FLAG_TEMP_6
 const FLAG_HIDE_POLICE = FLAG_TEMP_7
 const FLAG_HIDE_BAIYA_ARANTRAZ = FLAG_TEMP_5
 
+const LOCALID_BAIYA_FAINTED = (LOCALID_CAMERA + 1)
+
 script LetsBurnThisMotherDown_ObjectShow_Script
 {
     clearflag(FLAG_HIDE_BAIYA_ARANTRAZ)
@@ -220,11 +222,12 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     msgbox(format("{STR_VAR_1}!"),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 
-    playse(SE_M_HYPER_BEAM)
-    waitse
     fadescreenswapbuffers(FADE_TO_WHITE)
-    applymovement(BAIYA, moves(walk_up, walk_right))
-    waitmovement(0)
+    playse(SE_M_HYPER_BEAM2)
+    waitse
+	removeobject(BAIYA)
+	delay(8)
+	spawnobject(OBJ_EVENT_GFX_BAIYA_FAINTED,LOCALID_BAIYA_FAINTED,2,7,MOVEMENT_TYPE_FACE_DOWN)
     fadescreenswapbuffers(FADE_FROM_WHITE)
 
     clearflag(FLAG_HIDE_CHARLOTTE_ARANTRAZ)
