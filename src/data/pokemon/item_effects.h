@@ -340,9 +340,9 @@ const u8 gItemEffect_SherbetSurprise[15] = {
     [9] = 0,
     [10] = 0,
     [11] = 0,
-    [12] = -30,
-    [13] = -30,
-    [14] = -30,
+    [12] = -128,
+    [13] = -128,
+    [14] = -128,
 };
 // End sherbetSurprise
 
