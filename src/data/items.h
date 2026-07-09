@@ -16410,9 +16410,8 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_POKEVIAL] =
     {
         .name = ITEM_NAME("Gold Potion"),
-        .description = COMPOUND_STRING("Restores all\n""POKéMON to full\n""health."),
+        .description = COMPOUND_STRING("A Potion that restores all party Pokemon to full health."),
         .importance = 1,
-
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Pokevial,
