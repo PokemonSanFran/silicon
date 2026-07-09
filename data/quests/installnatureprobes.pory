@@ -2,8 +2,6 @@
 
 const PLAYER = LOCALID_PLAYER
 const INSTALLNATUREPROBESWORKER = LOCALID_ROUTE100_INSTALLNATUREPROBES
-const PLAYER_X = VAR_TEMP_3
-const PLAYER_Y = VAR_TEMP_4
 
 script Quest_InstallNatureProbes_Interact_InstallNatureProbesWorker_Script
 {
@@ -24,6 +22,7 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 	lock
     buffermapname(STR_VAR_1, MAP_LEAVERRA_FOREST)
     msgbox("Reports still aren't finished…{PAUSE 30}\nAnd I've still got installation to do…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, emote_x, delay_16 * 4, face_player, delay_16 *2, emote_exclamation_mark))
     waitmovement(0)
     msgbox("Oh! I take it you're a Pokemon Trainer?\pWe're right outside of {STR_VAR_1},\nthough I take it you know that.\nIt's surprisingly cold, isn't it?\pObviously we're in the north of Resido\nright now, but really the cold is because\nsunlight doesn't pierce the shade\lcreated by these tall redwood trees.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
@@ -43,8 +42,8 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
     msgbox("I am a member of the {STR_VAR_1}\nWildlife Rangers.\pWe monitor the movements and behavior of\nPokemon so that we may analyze trends.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("I have some probes that automatically\ncollect data and report back to the\nRangers.\pOnce installed it means I'm saved from\nhaving to go and do it in person.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("I wonder if you could place some under\nthe three signs around the forest?\nEverything else will be handled\lautomatically.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
-    msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("One in the deepest part of the forest…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
+    msgbox("I need one at the top of the tallest hill…",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("And one by the bridges over the river.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
     msgbox("{STR_VAR_1} is a precious place.\pIt's a protected area for many species\nof Pokemon threatened by climate change\nand the degradation of natural habitats.\pYou wouldn't just be doing me a favor,\nyou'd be doing nature a favor.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER, TAIL_TALK)
 
@@ -52,6 +51,15 @@ script Quest_InstallNatureProbes_StartQuest_Dialogue
 	release
 	end
 }
+
+script InstallNatureProbes_Dialogue_CompleteProbe
+{
+	msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
+	closemessage
+	release
+	end
+}
+
 
 script Quest_InstallNatureProbes_Active_Dialogue
 {
@@ -80,16 +88,11 @@ script Quest_InstallNatureProbes_Active_Dialogue
 
 script Quest_InstallNatureProbes_InstallHillProbe_Script{
     lock
+	goto_if_subquest_complete(QUEST_INSTALLNATUREPROBES,SUB_QUEST_1,InstallNatureProbes_Dialogue_CompleteProbe)
 
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
-    if(var(VAR_RESULT)){
-        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
-        release
-        end
-    }
     msgbox(format("Well, this is the tallest hill in the forest. Must be where that probe goes."),MSGBOX_DEFAULT,SPEAKER_PLAYER, TAIL_TALK)
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
     cueobjecttalking(PLAYER)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_HILL)
     callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
@@ -104,16 +107,11 @@ script Quest_InstallNatureProbes_InstallHillProbe_Script{
 
 script Quest_InstallNatureProbes_InstallForestProbe_Script{
     lock
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
-    if(var(VAR_RESULT)){
-        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
-        release
-        end
-    }
+	goto_if_subquest_complete(QUEST_INSTALLNATUREPROBES,SUB_QUEST_2,InstallNatureProbes_Dialogue_CompleteProbe)
 
     msgbox(format("I think this is the deepest part of the forest. I'll put a probe down here."),MSGBOX_DEFAULT, SPEAKER_PLAYER, TAIL_TALK)
 
-    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_2)
+    subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_INSTALLNATUREPROBES,SUB_QUEST_1)
     cueobjecttalking(PLAYER)
     removeitem(ITEM_QUEST_INSTALLNATUREPROBES_FOREST)
     callnative(Quest_InstallNatureProbes_CountRemainingSubquestsTryProgressReward)
@@ -128,13 +126,7 @@ script Quest_InstallNatureProbes_InstallForestProbe_Script{
 
 script Quest_InstallNatureProbes_InstallShoreProbe_Script{
     lock
-
-    subquestmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_INSTALLNATUREPROBES,SUB_QUEST_3)
-    if(var(VAR_RESULT)){
-        msgbox(format("This is where one of that Ranger's probes is installed."),MSGBOX_DEFAULT,SPEAKER_PLAYER,TAIL_THOUGHT)
-        release
-        end
-    }
+	goto_if_subquest_complete(QUEST_INSTALLNATUREPROBES,SUB_QUEST_3,InstallNatureProbes_Dialogue_CompleteProbe)
 
     msgbox(format("This looks pretty “by the bridge” to me. I'll put a probe down."),MSGBOX_DEFAULT,SPEAKER_PLAYER, TAIL_TALK)
 
@@ -157,10 +149,12 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     lock
     msgbox("Hey there. Back so soon?",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     msgbox("Okay, let me check my phone.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+	closemessage
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player))
     delay(120)
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_player, delay_16 *2))
     msgbox("The probes are working!\nWe're retrieving data!",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+	closemessage
     cueobjectplayer(INSTALLNATUREPROBESWORKER)
     buffermapname(STR_VAR_1,MAP_LEAVERRA_FOREST)
     msgbox("The Pokemon in {STR_VAR_1} are timid,\nreserved. They don't appear to people as\nopenly as they do in other places.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
@@ -169,8 +163,10 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     cueobjectplayer(INSTALLNATUREPROBESWORKER)
     giveitem(ITEM_QUEST_INSTALLNATUREPROBES_REWARD)
     closemessage
+	buffermapname(STR_VAR_1,MAP_ESPULEE_OUTSKIRTS)
     msgbox("Thank you for your help! The Pokemon and\nthis place mean a lot to me.\pThe creek in {STR_VAR_1} is one of\nthe few free-flowing streams on this\ncoast that still provides suitable\lhabitat for Water-type Pokemon.\pThe water is cold, clear and well-\noxygenated. They need that to survive.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     msgbox("I'll call my boss and let him know\nthe probes are up.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
+	closemessage
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_away_player, delay_16*2))
     playse(SE_POKENAV_CALL)
     waitse
@@ -179,10 +175,10 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     msgbox("Mhm, okay… {PAUSE 60}Right… {PAUSE 30}I see… {PAUSE 60}\nI… I understand.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     playse(SE_POKENAV_HANG_UP)
     waitse
+	closemessage
     applymovement(INSTALLNATUREPROBESWORKER, moves(delay_16 * 2, face_player, delay_16 *2))
     msgbox("I see now that I've been naive.\pI've been informed by my superior that my\nservices are no longer needed.\pI'm dismissed from my job, and must\nvacate the premises immediately.",MSGBOX_DEFAULT,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_TALK)
     closemessage
-    getplayerxy(PLAYER_X, PLAYER_Y)
     moveobjecttocoords(INSTALLNATUREPROBESWORKER,12,8,DIR_SOUTH)
     fadeandremovelasttalked
     
@@ -190,3 +186,4 @@ script Quest_InstallNatureProbes_Reward_Cutscene
     release
     end
 }
+
