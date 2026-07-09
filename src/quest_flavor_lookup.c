@@ -508,3 +508,47 @@ const u8 *GetQuestDesc_HybridCulture(void)
 
     return gStringVar4;
 }
+
+const u8 *GetQuestDesc_InstallNatureProbes(void)
+{
+    u32 flag = ReturnQuestState(QUEST_INSTALLNATUREPROBES);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_INSTALLNATUREPROBES_TARGET),MAP_NUM(MAP_QUEST_INSTALLNATUREPROBES_TARGET))->regionMapSectionId,0);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_INSTALLNATUREPROBES].desc[flag]);
+
+    bool32 probeSet1 = QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES,FLAG_GET_COMPLETED,SUB_QUEST_1);
+    bool32 probeSet2 = QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES,FLAG_GET_COMPLETED,SUB_QUEST_2);
+    bool32 probeSet3 = QuestMenu_GetSetSubquestState(QUEST_INSTALLNATUREPROBES,FLAG_GET_COMPLETED,SUB_QUEST_3);
+
+    if (probeSet2 && probeSet3)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" The last one goes to the deepest part of forest."));
+    }
+    else if (probeSet1 && probeSet3)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" The last one goes atop the tallest hill."));
+    }       
+    else if (probeSet1 && probeSet2)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" The last one goes by the bridge."));
+    }
+    else if (probeSet1)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" One goes atop the tallest hill, the other by the bridge."));
+    }
+    else if (probeSet2)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" One goes in the deepest forest section, and one by the bridge."));
+    }
+    else if (probeSet3)
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" One goes in the deepest forest section, the other atop the tallest hill."));
+    }
+    else 
+    {
+        StringAppend(gStringVar4,COMPOUND_STRING(" One goes in the deepest forest section, one atop the tallest hill, and one by the bridge."));
+    }
+
+    return gStringVar4;
+}
+
+
