@@ -43,11 +43,6 @@ extern const u8 gText_Quest_ImprovBattling_Desc[];
 extern const u8 gText_Quest_ImprovBattling_DoneDesc[];
 extern const u8 gText_Quest_ImprovBattling_Map[];
 
-extern const u8 gText_Quest_InstallNatureProbes_Name[];
-extern const u8 gText_Quest_InstallNatureProbes_Desc[];
-extern const u8 gText_Quest_InstallNatureProbes_DoneDesc[];
-extern const u8 gText_Quest_InstallNatureProbes_Map[];
-
 extern const u8 gText_Quest_ManOfManyHats_Name[];
 extern const u8 gText_Quest_ManOfManyHats_Desc[];
 extern const u8 gText_Quest_ManOfManyHats_DoneDesc[];
@@ -445,16 +440,6 @@ extern const u8 gText_Quest_ImprovBattling_Sub3_Map[];
 extern const u8 gText_Quest_ImprovBattling_Sub4_Name[];
 extern const u8 gText_Quest_ImprovBattling_Sub4_Desc[];
 extern const u8 gText_Quest_ImprovBattling_Sub4_Map[];
-
-extern const u8 gText_Quest_InstallNatureProbes_Sub1_Name[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub1_Desc[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub1_Map[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub2_Name[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub2_Desc[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub2_Map[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub3_Name[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub3_Desc[];
-extern const u8 gText_Quest_InstallNatureProbes_Sub3_Map[];
 
 extern const u8 gText_Quest_RestaurantExpansion2_Sub1_Name[];
 extern const u8 gText_Quest_RestaurantExpansion2_Sub1_Desc[];
