@@ -27,6 +27,7 @@
 #include "text_window.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "nameplate.h" // inventory
 
 struct MenuInfoIcon
 {
@@ -419,6 +420,7 @@ static u16 UNUSED Menu_GetStdPalColor(u8 colorNum)
 void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 {
     LoadMessageBoxAndBorderGfx();
+    DrawNameplate(); // inventory
     DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, FONT_NORMAL, GetPlayerTextSpeedDelay(), string, callback);
     CopyWindowToVram(0, COPYWIN_FULL);
 }

@@ -54,6 +54,7 @@
 #include "options_battle.h" // siliconMerge
 #include "constants/inventory.h" // inventory
 #include "item_icon.h" // inventory
+#include "nameplate.h" // inventory
 
 #define TAG_POCKET_SCROLL_ARROW 110
 #define TAG_BAG_SCROLL_ARROW    111
@@ -1404,16 +1405,49 @@ u8 GetItemListPosition(u8 pocketId)
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
 {
+    SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    // Start inventory
+    /*
     s16 *data = gTasks[taskId].data;
 
     tMsgWindowId = AddItemMessageWindow(ITEMWIN_MESSAGE);
     FillWindowPixelBuffer(tMsgWindowId, PIXEL_FILL(1));
     DisplayMessageAndContinueTask(taskId, tMsgWindowId, 10, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
     ScheduleBgCopyTilemapToVram(1);
+    */
+    // End inventory
 }
+
+// Start inventory
+static void Task_CloseMessageAndRedraw(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            task->data[0]++;
+            break;
+        case 1:
+            if (IsTextPrinterActiveOnWindow(INVENTORY_WINDOW_TEXT_BOX) || ((!JOY_NEW(A_BUTTON)) && (!JOY_NEW(B_BUTTON))))
+                return;
+            ClearDialogWindowAndFrame(INVENTORY_WINDOW_TEXT_BOX, TRUE);
+            ClearMessageBoxAddOns();
+            task->data[0]++;
+            break;
+        case 2:
+            Inventory_RemoveMenu(taskId);
+            break;
+    }
+}
+// End inventory
 
 void CloseItemMessage(u8 taskId)
 {
+    // Start inventory
+    gTasks[taskId].func = Task_CloseMessageAndRedraw;
+    return;
+    // End inventory
+
     s16 *data = gTasks[taskId].data;
     u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];

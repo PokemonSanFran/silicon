@@ -19,6 +19,7 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "nameplate.h"
 #include "line_break.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -48,6 +49,7 @@
 #include "ui_pokedex.h"
 #include "ui_main_menu.h"
 #include "ui_start_menu.h"
+#include "pokevial.h"
 
 #define FORCE_VISIBILITY TRUE
 
@@ -180,7 +182,6 @@ static void Inventory_CreateMenu(void);
 static void Inventory_PrintListMenuText(u32 windowId, u32 menuItemsCount);
 static void Inventory_DrawWindowFrame(u32 windowId);
 static void Inventory_PrintCursorAndText(u32 windowId, u32 menuItemsCount);
-static void Task_Inventory_HandleMenuInput(u8 taskId);
 static void Inventory_HandleAButtonPress(u8 taskId);
 u32 Inventory_GetMenuPosition(void);
 static void Inventory_SetMenuPosition(u32 position);
@@ -282,6 +283,24 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 8,
         .height = 10,
         .paletteNum = 2,
+    },
+    [INVENTORY_WINDOW_TEXT_BOX] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = 1,
+        .tilemapTop = 11,
+        .width = DISPLAY_TILE_WIDTH - 2,
+        .height = 6,
+        .paletteNum = PAL_NUM_TEXT_BOX_PALETTE,
+    },
+    [INVENTORY_WINDOW_TEXT_BOX_NAMEPLATE] =
+    {
+        .bg = INVENTORY_BG_TEXT,
+        .tilemapLeft = 0,
+        .tilemapTop = 10,
+        .width = DISPLAY_TILE_WIDTH,
+        .height = 1,
+        .paletteNum = PAL_NUM_TEXT_BOX_PALETTE_NAMEPLATE,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -864,6 +883,7 @@ static void Menu_InitWindows(void)
 
         baseBlock += template.width * template.height;
     }
+    LoadMessageBoxGfx(INVENTORY_WINDOW_TEXT_BOX, INVENTORY_TEXT_BOX_BASE_TILE, BG_PLTT_ID(PAL_NUM_TEXT_BOX_PALETTE));
 }
 
 u16 getMaxItemsFromPocket(u8 pocket)
@@ -2892,6 +2912,7 @@ static const u8 sText_Help_Bar_SortItemsHow[]       = _("Sort items how? {DPAD_U
 static const u8 sText_Help_Bar_RegisterHow[]        = _("Register to what direction? {DPAD_NONE} Select {B_BUTTON} Cancel");
 static const u8 sText_Help_Bar_ItemsSorted[]        = _("Items sorted by {STR_VAR_1}! {A_BUTTON} Confirm");
 static const u8 sText_Help_Bar_Used_Item[]          = _("{PLAYER} used the {STR_VAR_1} {A_BUTTON} Confirm");
+static const u8 sText_Help_Bar_Return[]          = _("{B_BUTTON} Return");
 
 static u16 Inventory_GetItemIdCurrentlySelected(void){
     u8 pocketId = gSaveBlock3Ptr->InventoryData.pocketNum;
@@ -3355,7 +3376,11 @@ static void Inventory_PrintDesc(void)
     {
         u16 itemId = Inventory_GetItemIdCurrentlySelected();
         enum Pocket itemPocket = GetItemPocket(itemId);
-        if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
+        if (itemId == ITEM_GOLD_POTION)
+        {
+            BufferPokevialDesc();
+        }
+        else if(pocketId != POCKET_TM_HM && itemPocket != POCKET_TM_HM)
         {
             StringCopy(gStringVar1, GetItemDescription(itemId));
         }
@@ -3427,7 +3452,7 @@ static void Inventory_OpenMenu(u8 taskId)
     CreateTask(Task_Inventory_HandleMenuInput,0);
 }
 
-static void Inventory_RemoveMenu(u8 taskId)
+void Inventory_RemoveMenu(u8 taskId)
 {
     PlaySE(SE_BALL);
     u32 windowId = sInventoryListMenu->inventoryMenuWindowId;
@@ -3570,7 +3595,7 @@ static void Inventory_PrintCursorAndText(u32 windowId, u32 menuItemsCount)
     Inventory_PrintListMenuText(windowId,menuItemsCount);
 }
 
-static void Task_Inventory_HandleMenuInput(u8 taskId)
+void Task_Inventory_HandleMenuInput(u8 taskId)
 {
     if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT))
         Inventory_ChangeMenuPosition(-1);
@@ -3811,6 +3836,9 @@ static void Inventory_PrintFooter(void)
         case INVENTORY_MESSAGE_USED_ITEM:
             CopyItemName(itemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, sText_Help_Bar_Used_Item);
+            break;
+        case INVENTORY_MESSAGE_CANT_USE_POKEVIAL:
+            StringCopy(gStringVar4, sText_Help_Bar_Return);
             break;
         default:
             if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD)
@@ -4170,6 +4198,9 @@ static void Task_ItemUseOnField(u8 taskId)
         else if(itemType == ITEM_TYPE_REPEL){
             gTasks[taskId].func = ItemUseOutOfBattle_Repel_New;
         }
+        else if (itemId == ITEM_GOLD_POTION){
+            gTasks[taskId].func = ItemUseOutOfBattle_Pokevial;
+        }
         else
         {
             //DebugPrintf("Task_ItemUseOnField %d Test", itemId);
@@ -4353,7 +4384,8 @@ static void Inventory_UseItem(u8 taskId)
         itemIdx    = sMenuDataPtr->FavoritePocketItems[oldItemIdx][FAVORITE_ITEM_POCKET_INDEX];
     }
 
-    switch(currentOption){
+    switch(currentOption)
+    {
         case INVENTORY_ITEM_OPTION_USE:
             if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_FIELD)
                 Task_ItemUseOnField(taskId);
@@ -5266,4 +5298,22 @@ static void Inventory_DrawMoveTypeFrames(void)
         InventorySprite_MonMove(i, INVENTORY_MOVES_GENERAL_SPRITE_BAR_X, INVENTORY_MOVES_GENERAL_SPRITE_BAR_Y + (16 * i));
 
     UpdateInventoryMoveTypeIDs();
+}
+
+void SiliconInventoryPrintMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
+{
+    u32 x = 0, y = 1;
+
+    LoadNameplatePalette(0);
+    DrawDialogFrameWithCustomTileAndPalette(INVENTORY_WINDOW_TEXT_BOX, FALSE, INVENTORY_TEXT_BOX_BASE_TILE, PAL_NUM_TEXT_BOX_PALETTE);
+    AddTextPrinterParameterized4(INVENTORY_WINDOW_TEXT_BOX,FONT_NORMAL,x,y,0,0,sInventoryFontColors[INVENTORY_FONT_BLACK],TEXT_SKIP_DRAW,str);
+    CopyWindowToVram(INVENTORY_WINDOW_TEXT_BOX, COPYWIN_GFX);
+
+    DrawTopMessageBoxTiles(INVENTORY_WINDOW_TEXT_BOX_NAMEPLATE,INVENTORY_TEXT_BOX_NAMEPLATE_BASE_TILE_FIRST,INVENTORY_TEXT_BOX_NAMEPLATE_BASE_TILE_MIDDLE,INVENTORY_TEXT_BOX_NAMEPLATE_BASE_TILE_LAST);
+    PutWindowTilemap(INVENTORY_WINDOW_TEXT_BOX_NAMEPLATE);
+    CopyWindowToVram(INVENTORY_WINDOW_TEXT_BOX_NAMEPLATE, COPYWIN_FULL);
+
+    sMenuDataPtr->currentSelectMode = INVENTORY_MESSAGE_CANT_USE_POKEVIAL;
+    Inventory_PrintFooter();
+    gTasks[taskId].func = callback;
 }

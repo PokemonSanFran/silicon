@@ -62,6 +62,7 @@
 #include "options_battle.h" // siliconMerge
 #include "constants/map_types.h"
 #include "sprays.h" // siliconMerge
+#include "constants/rgb.h" // inventory
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -172,7 +173,7 @@ static void SetUpItemUseCallback(u8 taskId)
         type = gTasks[taskId].tEnigmaBerryType - 1;
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
-        
+
     // Start inventory
     SetMainCallback2(sItemUseCallbacks[type]); //asdf
     /*
@@ -908,7 +909,7 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
     gItemUseCB = ItemUseCB_Medicine; //asdf
-    
+
     SetUpItemUseCallback(taskId);
 }
 
@@ -1653,6 +1654,11 @@ static void UsePokevialFieldNo(u8 taskId)
 
 void PokevialPrintDosesAndConfirmMessage(u32 currentDoses, bool32 isPlayerUsingRegisteredKeyItem, u8 taskId)
 {
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    gItemUseCB = ItemUseCB_UsePokevial;
+    SetUpItemUseCallback(taskId);
+    return;
+
     u32 numDigits = CountDigits(currentDoses);
 
     ConvertIntToDecimalStringN(gStringVar2, currentDoses, STR_CONV_MODE_LEFT_ALIGN, numDigits);
