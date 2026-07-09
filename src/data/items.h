@@ -16414,6 +16414,7 @@ const struct ItemInfo gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
+        .effect = gItemEffect_Pokevial,
         .fieldUseFunc = ItemUseOutOfBattle_Pokevial,
         .iconPalette = gItemIconPalette_GoldPotion,
       .sortType = ITEM_TYPE_KEY_ITEMS,
