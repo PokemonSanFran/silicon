@@ -3883,6 +3883,7 @@ static void Task_MenuTurnOff(u8 taskId)
     if (!gPaletteFade.active)
     {
         gSpecialVar_ItemId = ITEM_NONE;
+        ResetSpriteData();
         removeTransparentBackground();
         SetMainCallback2(inventorySavedCallback);
         Menu_FreeResourcesAndCallback();
