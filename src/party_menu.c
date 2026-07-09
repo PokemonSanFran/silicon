@@ -8604,6 +8604,7 @@ void PokevialStartVariablesAndRun(u8 taskId, TaskFunc task)
     sPartyMenuInternal->tUsedOnSlot = FALSE;
     sPartyMenuInternal->tLastSlotUsed = gPartyMenu.slotId;
 
+    gPartyMenu.slotId = 0;
     UsePokevial(taskId);
 }
 
