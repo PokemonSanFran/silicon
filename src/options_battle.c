@@ -866,7 +866,7 @@ static u32 GetItemHealingOption(void)
 bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 checkBattleUse, bool8 checkHeldEffect)
 {
     if (GetItemHealingOption() != BATTLE_OPTION_ITEM_HEALING_DISABLED)
-        return FALSE;
+        return TRUE;
 
     if (checkFieldUse)
     {
