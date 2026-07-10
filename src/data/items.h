@@ -16417,7 +16417,7 @@ const struct ItemInfo gItemsInfo[] =
         .effect = gItemEffect_Pokevial,
         .fieldUseFunc = ItemUseOutOfBattle_Pokevial,
         .iconPalette = gItemIconPalette_GoldPotion,
-      .sortType = ITEM_TYPE_KEY_ITEMS,
+        .sortType = ITEM_TYPE_KEY_ITEMS,
     },
     //End Pokevial Branch
     //Start qol_field_moves
