@@ -616,12 +616,13 @@ static bool32 ShouldTrainerTypeImpactItemUse(void)
 
 bool32 CanUseBagItems(u16 itemId)
 {
-    if ((GetItemPocket(itemId) != POCKET_POKE_BALLS))
+    if (GetItemPocket(itemId) == POCKET_POKE_BALLS)
+        return TRUE;
+
+    switch (GetBagItemsOption())
     {
-        switch (GetBagItemsOption())
-        {
         case BATTLE_OPTION_BAG_ITEMS_NO_BOSS:
-            return !ShouldTrainerTypeImpactItemUse() ? TRUE : FALSE;
+            return (ShouldTrainerTypeImpactItemUse() == FALSE);
         case BATTLE_OPTION_BAG_ITEMS_NO_TRAINER:
             return !(gBattleTypeFlags & BATTLE_TYPE_TRAINER);
         case BATTLE_OPTION_BAG_ITEMS_4_ONLY:
@@ -630,15 +631,16 @@ bool32 CanUseBagItems(u16 itemId)
             return FALSE;
         default:
             return TRUE;
-        }
     }
     return TRUE;
 }
 
-void TryToIncreaseBattleItemUseCount(u16 itemId)
+void TryToIncreaseBattleItemUseCount(enum Item itemId)
 {
-    if (GetItemPocket(itemId) != POCKET_POKE_BALLS)
-        gBattleStruct->playerBattleItemCount++;
+    if (GetItemPocket(itemId) == POCKET_POKE_BALLS)
+        return;
+
+    gBattleStruct->playerBattleItemCount++;
 }
 
 // ***********************************************************************
@@ -835,9 +837,25 @@ void TryToSetFirstPokemonCatchFlag(void)
 
 static const u16 sHealingHeldItemEffects[HOLD_EFFECT_COUNT] =
 {
-    HOLD_EFFECT_RESTORE_HP, HOLD_EFFECT_CURE_PAR, HOLD_EFFECT_CURE_SLP, HOLD_EFFECT_CURE_PSN, HOLD_EFFECT_CURE_BRN, HOLD_EFFECT_CURE_FRZ, HOLD_EFFECT_RESTORE_PP,
-    HOLD_EFFECT_CURE_CONFUSION, HOLD_EFFECT_CURE_STATUS, HOLD_EFFECT_CONFUSE_SPICY, HOLD_EFFECT_CONFUSE_DRY, HOLD_EFFECT_CONFUSE_SWEET, HOLD_EFFECT_CONFUSE_BITTER,
-    HOLD_EFFECT_CONFUSE_SOUR, HOLD_EFFECT_MENTAL_HERB, HOLD_EFFECT_SHELL_BELL, HOLD_EFFECT_BIG_ROOT, HOLD_EFFECT_ENIGMA_BERRY, HOLD_EFFECT_RESTORE_PCT_HP,
+    HOLD_EFFECT_RESTORE_HP,
+    HOLD_EFFECT_CURE_PAR,
+    HOLD_EFFECT_CURE_SLP,
+    HOLD_EFFECT_CURE_PSN,
+    HOLD_EFFECT_CURE_BRN,
+    HOLD_EFFECT_CURE_FRZ,
+    HOLD_EFFECT_RESTORE_PP,
+    HOLD_EFFECT_CURE_CONFUSION,
+    HOLD_EFFECT_CURE_STATUS,
+    HOLD_EFFECT_CONFUSE_SPICY,
+    HOLD_EFFECT_CONFUSE_DRY,
+    HOLD_EFFECT_CONFUSE_SWEET,
+    HOLD_EFFECT_CONFUSE_BITTER,
+    HOLD_EFFECT_CONFUSE_SOUR,
+    HOLD_EFFECT_MENTAL_HERB,
+    HOLD_EFFECT_SHELL_BELL,
+    HOLD_EFFECT_BIG_ROOT,
+    HOLD_EFFECT_ENIGMA_BERRY,
+    HOLD_EFFECT_RESTORE_PCT_HP,
 };
 
 static u32 GetItemHealingOption(void)
@@ -847,43 +865,41 @@ static u32 GetItemHealingOption(void)
 
 bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 checkBattleUse, bool8 checkHeldEffect)
 {
-    ItemUseFunc itemUseFunc = GetItemFieldFunc(itemId);
-    u16 itemBattleUsageEffect = GetItemBattleUsage(itemId);
-    u32 i;
-    u16 itemHeldEffect = GetItemHoldEffect(itemId);
+    if (GetItemHealingOption() != BATTLE_OPTION_ITEM_HEALING_DISABLED)
+        return FALSE;
 
-    if (GetItemHealingOption() == BATTLE_OPTION_ITEM_HEALING_DISABLED)
+    if (checkFieldUse)
     {
-        if (checkFieldUse)
-        {
-            if (itemUseFunc == ItemUseOutOfBattle_Medicine
-             || itemUseFunc == ItemUseOutOfBattle_PPRecovery
-             || itemUseFunc == ItemUseOutOfBattle_SacredAsh
-             || itemUseFunc == ItemUseOutOfBattle_PPUp
-             || itemUseFunc == ItemUseOutOfBattle_PPUp)
-                return FALSE;
-        }
+        ItemUseFunc itemUseFunc = GetItemFieldFunc(itemId);
+        if (itemUseFunc == ItemUseOutOfBattle_Medicine
+                || itemUseFunc == ItemUseOutOfBattle_PPRecovery
+                || itemUseFunc == ItemUseOutOfBattle_SacredAsh
+                || itemUseFunc == ItemUseOutOfBattle_PPUp
+                || itemUseFunc == ItemUseOutOfBattle_PPUp)
+            return FALSE;
+    }
 
-        if (checkBattleUse)
-        {
-            if (itemBattleUsageEffect == EFFECT_ITEM_RESTORE_HP
-             || itemBattleUsageEffect == EFFECT_ITEM_CURE_STATUS
-             || itemBattleUsageEffect == EFFECT_ITEM_HEAL_AND_CURE_STATUS
-             || itemBattleUsageEffect == EFFECT_ITEM_REVIVE
-             || itemBattleUsageEffect == EFFECT_ITEM_RESTORE_PP
-             || itemBattleUsageEffect == EFFECT_ITEM_ENIGMA_BERRY_EREADER)
-                return FALSE;
-        }
+    if (checkBattleUse)
+    {
+        enum EffectItem itemBattleUsageEffect = GetItemBattleUsage(itemId);
+        if (itemBattleUsageEffect == EFFECT_ITEM_RESTORE_HP
+                || itemBattleUsageEffect == EFFECT_ITEM_CURE_STATUS
+                || itemBattleUsageEffect == EFFECT_ITEM_HEAL_AND_CURE_STATUS
+                || itemBattleUsageEffect == EFFECT_ITEM_REVIVE
+                || itemBattleUsageEffect == EFFECT_ITEM_RESTORE_PP
+                || itemBattleUsageEffect == EFFECT_ITEM_ENIGMA_BERRY_EREADER)
+            return FALSE;
+    }
 
-        if (checkHeldEffect)
+    if (checkHeldEffect)
+    {
+        enum HoldEffect itemHeldEffect = GetItemHoldEffect(itemId);
+        for (u32 i = HOLD_EFFECT_NONE; i < HOLD_EFFECT_COUNT; i++)
         {
-            for (i = HOLD_EFFECT_NONE; i < ARRAY_COUNT(sHealingHeldItemEffects); i++)
-            {
-                if (itemHeldEffect != sHealingHeldItemEffects[i])
-                    continue;
-                else
-                    return FALSE;
-            }
+            if (itemHeldEffect != sHealingHeldItemEffects[i])
+                continue;
+            else
+                return FALSE;
         }
     }
 
