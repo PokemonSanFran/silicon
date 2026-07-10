@@ -2445,11 +2445,11 @@ bool8 UseRegisteredKeyItemOnField(void)
     //u8 taskId;
     u32 taskId;
     ItemUseFunc itemFunc = NULL;
-    u16 firstRegisteredItems = getFirstRegisteredItem();
+    enum Item firstRegisteredItems = getFirstRegisteredItem();
     u8 numRegisteredItems = CountRegisteredItems();
-    // End inventory
 
     RemoveEmptyRegisteredItems();
+    // End inventory
 
     if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
@@ -2478,6 +2478,12 @@ bool8 UseRegisteredKeyItemOnField(void)
     */
     if (numRegisteredItems == 1)
     {
+        if (IsPlayerAllowedToUseHealingItems(firstRegisteredItems,TRUE,FALSE,TRUE) == FALSE)
+        {
+            ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
+            return TRUE;
+        }
+
         if (CheckBagHasItem(firstRegisteredItems, 1) == TRUE)
         {
             FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
@@ -2488,6 +2494,7 @@ bool8 UseRegisteredKeyItemOnField(void)
         {
             firstRegisteredItems = ITEM_NONE;
         }
+
     }
     else if (numRegisteredItems != 0)
     {
@@ -2600,6 +2607,13 @@ static void Task_KeyItemWheel(u8 taskId)
                 i = DpadInputToRegisteredItemIndex(TRUE);
                 if (i == 0 || data[i] == MAX_SPRITES)
                     break;
+
+                if (IsPlayerAllowedToUseHealingItems(gSaveBlock3Ptr->InventoryData.registeredItem[i - 1],TRUE,FALSE,TRUE) == FALSE)
+                {
+                    tState = 3;
+                    ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
+                    break;
+                }
 
                 gSpecialVar_ItemId = gSaveBlock3Ptr->InventoryData.registeredItem[i - 1];
                 FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
