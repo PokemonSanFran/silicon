@@ -4027,7 +4027,7 @@ static void RecalculateCalculateCursorInventoryData(){
     u16 numitems = sMenuDataPtr->numItems[pocket];
     u16 itemIdx   = gSaveBlock3Ptr->InventoryData.itemIdx;
 
-    DebugPrintf("InitializeInventoryData itemIdx %d yFirstItem %d numitems %d pocket %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, pocket);
+    //DebugPrintf("InitializeInventoryData itemIdx %d yFirstItem %d numitems %d pocket %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, pocket);
 
     if(itemIdx > numitems){
         gSaveBlock3Ptr->InventoryData.itemIdx = 0;
@@ -4603,7 +4603,7 @@ void RemoveEmptyRegisteredItems(void){
 }
 
 bool8 shouldSkipPocket(u32 pocket){
-    DebugPrintf("shouldSkipPocket pocket %d", pocket);
+    //DebugPrintf("shouldSkipPocket pocket %d", pocket);
 
     if(sMenuDataPtr->inventoryMode == INVENTORY_MODE_BATTLE){
         switch(pocket){
@@ -4915,7 +4915,7 @@ static void Task_MenuMain(u8 taskId)
             numPress--;
         }
         while(numPress != 0);
-        DebugPrintf("R_BUTTON itemIdx %d yFirstItem %d numitems %d numPress %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, numPress);
+        //DebugPrintf("R_BUTTON itemIdx %d yFirstItem %d numitems %d numPress %d", gSaveBlock3Ptr->InventoryData.itemIdx, gSaveBlock3Ptr->InventoryData.yFirstItem, numitems, numPress);
         Inventory_PrintToAllWindows();
     }
 
@@ -5261,8 +5261,8 @@ static void UpdateInventoryMoveTypeIDs(void){
                 moveType = TYPE_NONE;
 
             gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = moveType;
-            DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %d Move: %d", idx, moveType,moveId);
-            DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %S Move: %S", idx, gTypesInfo[moveType].name, GetMoveName(moveId));
+            //DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %d Move: %d", idx, moveType,moveId);
+            //DebugPrintf("UpdateInventoryMoveTypeIDs Id %d Type: %S Move: %S", idx, gTypesInfo[moveType].name, GetMoveName(moveId));
         }
         else
             gSprites[sMenuDataPtr->spriteIDs[INVENTORY_SPRITE_MOVE_1 + idx]].data[0] = TYPE_NONE;
