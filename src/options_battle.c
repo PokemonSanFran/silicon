@@ -874,6 +874,7 @@ bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 c
         if (itemUseFunc == ItemUseOutOfBattle_Medicine
                 || itemUseFunc == ItemUseOutOfBattle_PPRecovery
                 || itemUseFunc == ItemUseOutOfBattle_SacredAsh
+                || itemUseFunc == ItemUseOutOfBattle_Pokevial
                 || itemUseFunc == ItemUseOutOfBattle_PPUp
                 || itemUseFunc == ItemUseOutOfBattle_PPUp)
             return FALSE;
@@ -894,6 +895,10 @@ bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 c
     if (checkHeldEffect)
     {
         enum HoldEffect itemHeldEffect = GetItemHoldEffect(itemId);
+
+        if (itemHeldEffect == HOLD_EFFECT_NONE)
+            return TRUE;
+
         for (u32 i = HOLD_EFFECT_NONE; i < HOLD_EFFECT_COUNT; i++)
         {
             if (itemHeldEffect != sHealingHeldItemEffects[i])
