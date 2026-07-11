@@ -890,6 +890,31 @@ enum
 };
 
 // ***********************************************************************
+// Quest: Install Nature Probes
+// ***********************************************************************
+//#define QUEST_INSTALLNATUREPROBES_
+
+#define MAP_QUEST_INSTALLNATUREPROBES                  MAP_ROUTE100
+#define MAP_QUEST_INSTALLNATUREPROBES_TARGET           MAP_LEAVERRA_FOREST
+
+#define ITEM_QUEST_INSTALLNATUREPROBES_HILL            ITEM_STORAGE_KEY
+#define ITEM_QUEST_INSTALLNATUREPROBES_FOREST          ITEM_DEVON_SCOPE
+#define ITEM_QUEST_INSTALLNATUREPROBES_SHORE           ITEM_DEVON_PARTS
+#define ITEM_QUEST_INSTALLNATUREPROBES_REWARD          ITEM_FAME_CHECKER
+
+#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER    OBJ_EVENT_GFX_GENTLEMAN
+
+enum
+{
+    STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED,
+    STATE_QUEST_INSTALLNATUREPROBES_STARTED,
+    STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED,
+    STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED,
+    STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED,
+    STATE_QUEST_INSTALLNATUREPROBES_COMPLETE
+};
+
+// ***********************************************************************
 // Quest: Restore EspuleeOutskirts Gym
 // ***********************************************************************
 //#define QUEST_RESTOREESPULEEGYM_

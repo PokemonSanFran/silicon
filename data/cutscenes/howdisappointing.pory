@@ -13,6 +13,8 @@ const FLAG_HIDE_GRUNTA = FLAG_TEMP_5
 const FLAG_HIDE_GRUNTB = FLAG_TEMP_7
 const FLAG_HIDE_ADAORA = FLAG_TEMP_9
 
+const LOCALID_ADAORA_FAINTED = (LOCALID_CAMERA + 1)
+
 script HowDisappointing_ManageObject_Script
 {
     switch (var(VAR_HOWDISAPPOINTING_STATE))
@@ -325,6 +327,7 @@ script HowDisappointing_ArrestScene_Dialogue
     lock
     startcutscene(JUMPPLAYER_HOWDISAPPOINTING_ARREST)
     setvar(VAR_HOWDISAPPOINTING_STATE,DEFEATED_ADAORA_HODOU_CITY)
+	moveobjecttocoords(LOCALID_PLAYER,36,20,DIR_NORTH)
     clearflag(FLAG_HIDE_POLICE)
     setvar(VAR_OBJ_GFX_ID_0,OBJ_EVENT_GFX_SUDOWOODO)
     addobject(POLICE_MON)
@@ -337,6 +340,7 @@ script HowDisappointing_ArrestScene_Dialogue
     applymovement(POLICE_MON,HowDisappointing_WalkToArrest)
     applymovement(ADAORA,Common_Movement_FaceUp)
     waitmovement(POLICEA)
+	waitmovement(LOCALID_PLAYER)
     msgbox(format("All right officers. {SUBJECT} already beat me. My Pokemon are fainted and I'm not running."),,SPEAKER_ADAORA)
     bufferspeciesname(STR_VAR_1,SPECIES_MIGHTYENA)
     buffermovename(STR_VAR_2,MOVE_TAKE_DOWN)
@@ -346,6 +350,11 @@ script HowDisappointing_ArrestScene_Dialogue
     delay(8)
     applymovement(ADAORA,HowDisappointing_FallDown_Movement)
     waitmovement(ADAORA)
+	spawnobject(OBJ_EVENT_GFX_ADAORA_FAINTED,LOCALID_ADAORA_FAINTED,35,22,MOVEMENT_TYPE_FACE_DOWN)
+	delay(16)
+	moveobjecttocoords(LOCALID_PLAYER,36,22,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
+	delay(16)
     applymovement(PLAYER,Common_Movement_FaceUp)
     waitmovement(PLAYER)
     msgbox(format("What the hell? She was surrendering!"),,SPEAKER_ALICIA,TAIL_SHOUT,EMOTE_SAD)
@@ -614,6 +623,7 @@ script HowDisappointing_FallDown_Movement
     lock_facing_direction
     jump_2_down
     unlock_facing_direction
+	set_invisible
     step_end
 }
 

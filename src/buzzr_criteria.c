@@ -409,3 +409,7 @@ void TweetCriteria_Quest_HybridCulture_HasSubquest5Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_5);
 }
+void TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_INSTALLNATUREPROBES);
+}
