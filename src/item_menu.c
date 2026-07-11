@@ -167,7 +167,7 @@ static void PrintItemDescription(int);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void Task_CloseBagMenu(u8);
-static u8 AddItemMessageWindow(u8);
+static u8 UNUSED AddItemMessageWindow(u8);
 static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
 static void PrintItemQuantity(u8, s16);
@@ -3108,7 +3108,7 @@ static void BagMenu_RemoveWindow(u8 windowType)
     }
 }
 
-static u8 AddItemMessageWindow(u8 windowType)
+static u8 UNUSED AddItemMessageWindow(u8 windowType)
 {
     u8 *windowId = &gBagMenu->windowIds[windowType];
     if (*windowId == WINDOW_NONE)

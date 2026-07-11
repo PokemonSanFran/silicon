@@ -67,7 +67,7 @@
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8);
-static void Task_PartyMenuItemUseFromField(u8);
+static void UNUSED Task_PartyMenuItemUseFromField(u8);
 static void Task_UseItemfinder(u8);
 static void Task_CloseItemfinderMessage(u8);
 static void Task_HiddenItemNearby(u8);
@@ -94,7 +94,7 @@ static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
-static void ItemUseOnFieldCB_Honey(u8 taskId);
+static void UNUSED ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 //Start Pokevial Branch
 static void UsePokevialFieldYes(u8 taskId);
@@ -226,7 +226,7 @@ static void Task_CallItemUseOnFieldCallback(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-static void Task_PartyMenuItemUseFromField(u8 taskId)
+static void UNUSED Task_PartyMenuItemUseFromField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -1572,7 +1572,7 @@ void Task_UseHoneyOnField(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void ItemUseOnFieldCB_Honey(u8 taskId)
+static void UNUSED ItemUseOnFieldCB_Honey(u8 taskId)
 {
     Overworld_ResetStateAfterDigEscRope();
     RemoveBagItem(gSpecialVar_ItemId, 1);

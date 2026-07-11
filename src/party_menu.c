@@ -2126,7 +2126,7 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
     }
 }
 
-static void Task_ReturnToChooseMon(u8 taskId)
+static void UNUSED Task_ReturnToChooseMon(u8 taskId)
 {
     //BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_HandleChooseMonInput;
