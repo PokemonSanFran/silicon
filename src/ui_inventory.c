@@ -491,6 +491,7 @@ static void FreeInventoryBackgrounds(void)
 
 static void Menu_FreeResources(void)
 {
+    ResetSpriteData();
     TRY_FREE_AND_SET_NULL(sMenuDataPtr);
     TRY_FREE_AND_SET_NULL(sInventoryListMenu);
     FreeMonIconPalettes();
@@ -3884,7 +3885,6 @@ static void Task_MenuTurnOff(u8 taskId)
     if (!gPaletteFade.active)
     {
         gSpecialVar_ItemId = ITEM_NONE;
-        ResetSpriteData();
         removeTransparentBackground();
         SetMainCallback2(inventorySavedCallback);
         Menu_FreeResourcesAndCallback();
