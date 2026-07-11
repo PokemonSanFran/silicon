@@ -482,11 +482,12 @@ bool32 RemoveBagItem(enum Item itemId, u16 count)
         return FALSE;
 
     enum Pocket pocket = GetItemPocket(itemId);
+    if (pocket >= POCKETS_COUNT)
+        return FALSE;
 
-    if (isCurrentItemFavorite())
+    if (count >= CountTotalItemQuantityInBag(itemId) && (isCurrentItemFavorite()))
         gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket]--;
     //if (GetItemPocket(itemId) >= POCKETS_COUNT || itemId == ITEM_NONE)
-    if (pocket >= POCKETS_COUNT || itemId == ITEM_NONE)
     // End inventory
 
     // check Battle Pyramid Bag
