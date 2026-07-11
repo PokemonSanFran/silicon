@@ -297,7 +297,16 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId);
 static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId);
 static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
-static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
+// Start inventory
+//static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketMedicine(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketBattle_Items(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketPowerup(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketOther(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketTreasure(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketZ_Crystals(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketMega_Stones(u8 taskId);
+// End inventory
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
 // Start siliconMerge
 void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
@@ -620,11 +629,20 @@ static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
     { COMPOUND_STRING("Fill PC Boxes Fast"),        DebugAction_PCBag_Fill_PCBoxes_Fast },
     { COMPOUND_STRING("Fill PC Boxes Slow (LAG!)"), DebugAction_PCBag_Fill_PCBoxes_Slow },
     { COMPOUND_STRING("Fill PC Items") ,            DebugAction_PCBag_Fill_PCItemStorage },
-    { COMPOUND_STRING("Fill Pocket Items"),         DebugAction_PCBag_Fill_PocketItems },
+    //{ COMPOUND_STRING("Fill Pocket Items"),         DebugAction_PCBag_Fill_PocketItems },
     { COMPOUND_STRING("Fill Pocket Poké Balls"),    DebugAction_PCBag_Fill_PocketPokeBalls },
     { COMPOUND_STRING("Fill Pocket TMHM"),          DebugAction_PCBag_Fill_PocketTMHM },
     { COMPOUND_STRING("Fill Pocket Berries"),       DebugAction_PCBag_Fill_PocketBerries },
     { COMPOUND_STRING("Fill Pocket Key Items"),     DebugAction_PCBag_Fill_PocketKeyItems },
+        // Start inventory
+    { COMPOUND_STRING("Fill Pocket Medicine"),      DebugAction_PCBag_Fill_PocketMedicine},
+    { COMPOUND_STRING("Fill Pocket Battle Items"),  DebugAction_PCBag_Fill_PocketBattle_Items},
+    { COMPOUND_STRING("Fill Pocket Powerup"),       DebugAction_PCBag_Fill_PocketPowerup},
+    { COMPOUND_STRING("Fill Pocket Other"),         DebugAction_PCBag_Fill_PocketOther},
+    { COMPOUND_STRING("Fill Pocket Treasure"),      DebugAction_PCBag_Fill_PocketTreasure},
+    { COMPOUND_STRING("Fill Pocket Z-Crystals"),    DebugAction_PCBag_Fill_PocketZ_Crystals},
+    { COMPOUND_STRING("Fill Pocket Mega Stones"),   DebugAction_PCBag_Fill_PocketMega_Stones},
+        // End inventory
     { NULL }
 };
 
@@ -3964,6 +3982,8 @@ static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId)
     }
 }
 
+// Start inventory
+/*
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId)
 {
     enum Item itemId;
@@ -3974,6 +3994,86 @@ static void DebugAction_PCBag_Fill_PocketItems(u8 taskId)
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
     }
 }
+*/
+
+static void DebugAction_PCBag_Fill_PocketMedicine(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_MEDICINE && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketBattle_Items(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_BATTLE_ITEMS && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketPowerup(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_POWERUP && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketOther(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_OTHER && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketTreasure(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_TREASURE && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketZ_Crystals(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_Z_CRYSTALS && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketMega_Stones(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    {
+        if (GetItemPocket(itemId) == POCKET_MEGA_STONES && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+            AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+// End inventory
 
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
 {

@@ -1,6 +1,7 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
+#include "item.h"
 #include "constants/item.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
@@ -62,16 +63,35 @@ enum PACKED ItemSortType
     ITEM_TYPE_RELIC,
     ITEM_TYPE_FOSSIL,
     ITEM_TYPE_MAIL,
+    // Start inventory
+    ITEM_TYPE_POKE_BALL,
+    ITEM_TYPE_TMHM,
+    ITEM_TYPE_REPEL,
+    ITEM_TYPE_KEY_ITEMS,
+    ITEM_TYPE_UNUSABLE_KEY_ITEM,
+    NUM_ITEMS_TYPES,
+    // End inventory
 };
 
 typedef void (*ItemUseFunc)(u8);
 typedef bool32 (*ShopCriteriaFunc)(enum Item);
+
+enum ItemEligibility
+{
+    ELIGIBILITY_CANNOT,
+    ELIGIBILITY_USABLE,
+    ELIGIBILITY_ALREADY_USED,
+};
+
+struct Pokemon;
+typedef u8 (*ItemEligibilityFunc)(struct Pokemon *mon, enum Item itemId);
 
 struct ItemInfo
 {
     u32 price;
     u16 secondaryId;
     ItemUseFunc fieldUseFunc;
+    ItemEligibilityFunc eligibilityFunc;
     const u8 *description;
     const u8 *effect;
     const u8 *name;
@@ -264,7 +284,7 @@ void CompactItemsInBagPocket(enum Pocket pocketId);
 void MoveItemSlotInPocket(enum Pocket pocketId, u32 from, u32 to);
 void MoveItemSlotInPC(struct ItemSlot *itemSlots, u32 from, u32 to);
 void ClearBag(void);
-u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId);
+u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, enum Item itemId);
 u32 GetItemNativeGroup(enum Item itemId); // siliconMerge
                                           //
 u16 CountTotalItemQuantityInBag(enum Item itemId);
@@ -288,13 +308,15 @@ u32 GetItemStatus1Mask(enum Item itemId);
 bool32 ItemHasVolatileFlag(enum Item itemId, enum Volatile volatile);
 u32 GetItemSellPrice(enum Item itemId);
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect);
-ShopCriteriaFunc GetItemShopCriteriaFunc(u32 itemId);
-bool32 IsItemShopCriteriaFulfilled(u32 itemId);
+ShopCriteriaFunc GetItemShopCriteriaFunc(enum Item itemId);
+bool32 IsItemShopCriteriaFulfilled(enum Item itemId);
 
 // Start shopMenu
 enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId);
-enum ShopMenuCategories GetItemShopCategory(u16 itemId);
-u32 GetItemShopCriteriaGoal(u16 itemId);
+enum ShopMenuCategories GetItemShopCategory(enum Item itemId);
+u32 GetItemShopCriteriaGoal(enum Item itemId);
 // End shopMenu
+enum ItemSortType GetItemSortType(enum Item itemId); // inventory
+ItemEligibilityFunc GetItemEligibilityFunc(enum Item itemId);
 
 #endif // GUARD_ITEM_H

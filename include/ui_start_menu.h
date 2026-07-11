@@ -1,6 +1,8 @@
 #ifndef GUARD_UI_START_MENU_H
 #define GUARD_UI_START_MENU_H
 
+#include "sprite.h"
+
 enum StartMenuModes
 {
     START_MODE_NORMAL = 0,     // triggers in the overworld with START
@@ -76,6 +78,7 @@ bool32 StartMenu_OpenNormalMode(void);
 void CB2_StartMenu_ReturnToUI(void);
 void StartMenu_HoldPreviousSave(void);
 void StartMenu_ResetAppData(void);
+void MonStatus_InjectStatusGraphics(struct Sprite *, u32, u32);
 enum StartMenuHelpSymbols BlitSymbol_ConvertLocalTimeToHelp(void);
 void BlitSymbol_Help(enum StartMenuHelpSymbols, u32, u16, u16);
 enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void);

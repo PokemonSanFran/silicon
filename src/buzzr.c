@@ -297,7 +297,7 @@ static const struct {
             TILE_OFFSET_4BPP(32), BUZZR_SPRITE_HEADER_TAG,
         },
     },
-    { sLogomarkAllPalette, PAL_UI_SPRITES}
+    { sLogomarkAllPalette, BUZZR_PALTAG_SPRITES}
 };
 enum FontColors
 {
@@ -441,7 +441,7 @@ static void CreateArrowSprite(u32 SpriteTag,const u32 *gfx,u32 x, u32 y, u32 spr
     u32 spriteId;
     const struct SpritePalette sBuzzrInterfaceSpritePalette[] =
     {
-        {sLogomarkAllPalette, PAL_UI_SPRITES},
+        {sLogomarkAllPalette, BUZZR_PALTAG_SPRITES},
     };
 
 
@@ -1845,7 +1845,7 @@ static const struct OamData sBuzzrHeader_OamData =
 static const struct SpriteTemplate sBuzzrHeaderSpriteTemplate =
 {
     .tileTag = BUZZR_SPRITE_HEADER_TAG,
-    .paletteTag = PAL_UI_SPRITES,
+    .paletteTag = BUZZR_PALTAG_SPRITES,
     .oam = &sBuzzrHeader_OamData,
     .anims = (const union AnimCmd *const[])
     {

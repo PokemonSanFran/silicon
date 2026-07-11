@@ -30,6 +30,7 @@
 #include "task.h"
 #include "test_runner.h"
 #include "text.h"
+#include "ui_inventory.h" // inventory
 #include "trainer.h"
 #include "util.h"
 #include "window.h"
@@ -232,6 +233,7 @@ static enum Item GetNextBall(enum Item ballId)
         newBall = gPokeBalls[index].itemId;
         if (CheckBagHasItem(newBall, 1))
             return newBall;
+
     }
     return ballId;
 }
@@ -324,6 +326,10 @@ static void HandleInputChooseAction(enum BattlerId battler)
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
             break;
         case 1: // Top right
+            // Start inventory
+            FreeAllWindowBuffers();
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
+            // End inventory
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             break;
         case 2: // Bottom left
@@ -1656,7 +1662,10 @@ static void OpenBagAndChooseItem(enum BattlerId battler)
         gBattlerControllerFuncs[battler] = CompleteWhenChoseItem;
         ReshowBattleScreenDummy();
         CloseMainBattleScreen();
-        CB2_BagMenuFromBattle();
+        // Start inventory
+        Inventory_Init(ReshowBattleScreenAfterMenu, INVENTORY_MODE_BATTLE);
+        //CB2_BagMenuFromBattle();
+        // End inventory
     }
 }
 

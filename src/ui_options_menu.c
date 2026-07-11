@@ -746,7 +746,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [GAME_OPTIONS_SAVE_BEHAVIOR]     = GAME_OPTION_AUTOSAVE_ON,
             [GAME_OPTIONS_RUN]               = GAME_OPTION_RUN_ALWAYS,
             [GAME_OPTIONS_PUZZLES]           = GAME_OPTION_PUZZLES_ON,
-            [GAME_OPTIONS_ITEM_SORT]         = 2,
             [GAME_OPTIONS_CUTSCENE]          = GAME_OPTION_CUTSCENE_PLAY,
             [GAME_OPTIONS_SKIP_GUIDES]       = GAME_OPTION_GUIDE_SKIP_OFF,
         },
@@ -757,7 +756,6 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
             [GAME_OPTIONS_SAVE_BEHAVIOR]     = GAME_OPTION_AUTOSAVE_OFF,
             [GAME_OPTIONS_RUN]               = GAME_OPTION_RUN_ALWAYS,
             [GAME_OPTIONS_PUZZLES]           = GAME_OPTION_PUZZLES_ON,
-            [GAME_OPTIONS_ITEM_SORT]         = 4,
             [GAME_OPTIONS_CUTSCENE]          = GAME_OPTION_CUTSCENE_SKIP,
             [GAME_OPTIONS_SKIP_GUIDES]       = GAME_OPTION_GUIDE_SKIP_ALL,
         }
@@ -1392,25 +1390,6 @@ static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SE
             COMPOUND_STRING("Puzzles function as normal."),
             },
         .numOptions = 2,
-    },
-    [GAME_OPTIONS_ITEM_SORT] =
-    {
-        .title = COMPOUND_STRING("Item Sort"),
-        .options = {
-            COMPOUND_STRING("Off"),
-            COMPOUND_STRING("Name"),
-            COMPOUND_STRING("Type"),
-            COMPOUND_STRING("Amount"),
-            COMPOUND_STRING("Recency"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-            },
-        .numOptions = 5,
     },
     [GAME_OPTIONS_CUTSCENE] =
     {

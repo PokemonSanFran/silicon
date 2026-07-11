@@ -43,6 +43,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "ui_inventory.h"
 #include "vs_seeker.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
@@ -61,11 +62,12 @@
 #include "options_battle.h" // siliconMerge
 #include "constants/map_types.h"
 #include "sprays.h" // siliconMerge
+#include "constants/rgb.h" // inventory
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8);
-static void Task_PartyMenuItemUseFromField(u8);
+static void UNUSED Task_PartyMenuItemUseFromField(u8);
 static void Task_UseItemfinder(u8);
 static void Task_CloseItemfinderMessage(u8);
 static void Task_HiddenItemNearby(u8);
@@ -92,7 +94,7 @@ static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
-static void ItemUseOnFieldCB_Honey(u8 taskId);
+static void UNUSED ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 //Start Pokevial Branch
 static void UsePokevialFieldYes(u8 taskId);
@@ -172,6 +174,10 @@ static void SetUpItemUseCallback(u8 taskId)
     else
         type = GetItemType(gSpecialVar_ItemId) - 1;
 
+    // Start inventory
+    SetMainCallback2(sItemUseCallbacks[type]); //asdf
+    /*
+
     if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
     {
         FadeScreen(FADE_TO_BLACK, 0);
@@ -191,6 +197,8 @@ static void SetUpItemUseCallback(u8 taskId)
             CloseBattlePyramidBag(taskId);
         }
     }
+    */
+    // End inventory
 }
 
 static void SetUpItemUseOnFieldCallback(u8 taskId)
@@ -218,7 +226,7 @@ static void Task_CallItemUseOnFieldCallback(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-static void Task_PartyMenuItemUseFromField(u8 taskId)
+static void UNUSED Task_PartyMenuItemUseFromField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -900,7 +908,8 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine;
+    gItemUseCB = ItemUseCB_Medicine; //asdf
+
     SetUpItemUseCallback(taskId);
 }
 
@@ -1284,6 +1293,14 @@ static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
     }
 }
 
+// Start inventory
+void ItemUseFromInventory_PartyMenu(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_BattleScript;
+    ItemUseInBattle_ShowPartyMenu(taskId);
+}
+// End inventory
+
 void ItemUseInBattle_PartyMenu(u8 taskId)
 {
     gItemUseCB = ItemUseCB_BattleScript;
@@ -1555,7 +1572,7 @@ void Task_UseHoneyOnField(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void ItemUseOnFieldCB_Honey(u8 taskId)
+static void UNUSED ItemUseOnFieldCB_Honey(u8 taskId)
 {
     Overworld_ResetStateAfterDigEscRope();
     RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1566,10 +1583,14 @@ static void ItemUseOnFieldCB_Honey(u8 taskId)
 
 void ItemUseOutOfBattle_Honey(u8 taskId)
 {
-    sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
+    //ItemUseOutOfBattle_SweetScentTool
+    sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    SetUpItemUseOnFieldCallback(taskId);
+    /*sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
     gFieldCallback = FieldCB_UseItemOnField;
     gBagMenu->newScreenCallback = CB2_ReturnToField;
-    Task_FadeAndCloseBagMenu(taskId);
+    Task_FadeAndCloseBagMenu(taskId);*/
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
@@ -1633,6 +1654,11 @@ static void UsePokevialFieldNo(u8 taskId)
 
 void PokevialPrintDosesAndConfirmMessage(u32 currentDoses, bool32 isPlayerUsingRegisteredKeyItem, u8 taskId)
 {
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    gItemUseCB = ItemUseCB_UsePokevial;
+    SetUpItemUseCallback(taskId);
+    return;
+
     u32 numDigits = CountDigits(currentDoses);
 
     ConvertIntToDecimalStringN(gStringVar2, currentDoses, STR_CONV_MODE_LEFT_ALIGN, numDigits);
@@ -1860,8 +1886,8 @@ void ItemUseOnFieldCB_TeleportTool(u8 taskId)
 }
 void ItemUseOutOfBattle_SweetScentTool(u8 taskId)
 {
-        sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
-        SetUpItemUseOnFieldCallback(taskId);
+    sItemUseOnFieldCB = ItemUseOnFieldCB_SweetScentTool;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 static void ItemUseOnFieldCB_SweetScentTool(u8 taskId)
 {

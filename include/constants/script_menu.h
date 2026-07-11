@@ -236,6 +236,20 @@ enum
 #define STDSTRING_EARTH_BADGE      37
 #define STDSTRING_COINS            38
 
+// Start inventory
+enum StdString
+{
+    STDSTRING_MEDICINE = (STDSTRING_COINS + 1),
+    STDSTRING_BATTLE_ITEMS,
+    STDSTRING_POWERUP,
+    STDSTRING_OTHER,
+    STDSTRING_TREASURE,
+    STDSTRING_Z_CRYSTALS,
+    STDSTRING_MEGA_STONES,
+};
+// End inventory
+
+
 // Dynamic Multichoice Callbacks
 
 #define DYN_MULTICHOICE_CB_DEBUG      0

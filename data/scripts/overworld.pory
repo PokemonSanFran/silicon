@@ -28,3 +28,8 @@ script Silicon_Script_WhiteoutIfPlayerLostMulti
     special(SetCB2WhiteOut)
 }
 
+script EventScript_CannotUseHealingItem
+{
+    msgbox(format("Items that heal Pokemon are currently disabled!"),MSGBOX_SIGN)
+    end
+}

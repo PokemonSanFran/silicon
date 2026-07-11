@@ -361,6 +361,7 @@ void BtlController_EmitResetActionMoveSelection(enum BattlerId battler, u32 buff
 void BtlController_EmitEndLinkBattle(enum BattlerId battler, u32 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(enum BattlerId battler, u32 bufferId);
 void BtlController_EmitMidBattleEvo(enum BattlerId battler, u32 bufferId, u32 partyId, u32 species); // midBattleEvolution
+void BtlController_EmitNewInventoryMenu(enum BattlerId battler, u32 bufferId); // inventory
 
 void BtlController_Complete(enum BattlerId battler); // Can be used for all the controllers.
 void BtlController_Empty(enum BattlerId battler); // Empty command, does nothing, only completes the execution.

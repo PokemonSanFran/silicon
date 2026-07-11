@@ -1329,6 +1329,15 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_ARENA] = gText_BattleArena,
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
+    // Start inventory
+    [STDSTRING_MEDICINE]    = COMPOUND_STRING("Medicine"),
+    [STDSTRING_BATTLE_ITEMS] = COMPOUND_STRING("Battle Items"),
+    [STDSTRING_POWERUP]     = COMPOUND_STRING("Powerups"),
+    [STDSTRING_OTHER]       = COMPOUND_STRING("Other"),
+    [STDSTRING_TREASURE]   = COMPOUND_STRING("Treasure"),
+    [STDSTRING_Z_CRYSTALS]  = COMPOUND_STRING("Z-Crystals"),
+    [STDSTRING_MEGA_STONES]  = COMPOUND_STRING("Mega Stones"),
+    // End inventory
     [STDSTRING_BOULDER_BADGE] = gText_Boulderbadge,
     [STDSTRING_CASCADE_BADGE] = gText_Cascadebadge,
     [STDSTRING_THUNDER_BADGE] = gText_Thunderbadge,

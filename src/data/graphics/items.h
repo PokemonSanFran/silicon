@@ -2099,17 +2099,17 @@ const u32 gItemIcon_BerserkGene[] = INCGFX_U32("graphics/items/icons/berserk_gen
 const u16 gItemIconPalette_BerserkGene[] = INCGFX_U16("graphics/items/icon_palettes/berserk_gene.pal", ".gbapal");
 
 // Start Pokevial Branch
-const u32 gItemIcon_Pokevial0[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial1[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial2[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial3[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial4[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial5[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial6[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial7[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial8[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial9[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
-const u32 gItemIcon_Pokevial[] = INCGFX_U32("graphics/items/icons/gold_potion.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial0[] = INCGFX_U32("graphics/items/icons/pokevial0.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial1[] = INCGFX_U32("graphics/items/icons/pokevial1.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial2[] = INCGFX_U32("graphics/items/icons/pokevial2.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial3[] = INCGFX_U32("graphics/items/icons/pokevial3.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial4[] = INCGFX_U32("graphics/items/icons/pokevial4.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial5[] = INCGFX_U32("graphics/items/icons/pokevial5.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial6[] = INCGFX_U32("graphics/items/icons/pokevial6.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial7[] = INCGFX_U32("graphics/items/icons/pokevial7.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial8[] = INCGFX_U32("graphics/items/icons/pokevial8.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial9[] = INCGFX_U32("graphics/items/icons/pokevial9.png", ".4bpp.smol");
+const u32 gItemIcon_Pokevial[] = INCGFX_U32("graphics/items/icons/pokevial.png", ".4bpp.smol");
 
 const u16 gItemIconPalette_Pokevial[] = INCGFX_U16("graphics/items/icon_palettes/pokevial.pal", ".gbapal");
 //End Pokevial Branch

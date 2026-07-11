@@ -29,5 +29,7 @@ void SpriteCB_MonIcon(struct Sprite *sprite);
 void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum);
 u8 GetMonIconPaletteIndexFromSpecies(enum Species species);
 void SafeFreeMonIconPalette(enum Species species);
+u8 LoadMonIconPaletteWithAilment(enum Species species, u32 personality, u32 ailment, u16 currentHP, u8 paletteNum); // inventory
+u8 LoadMonIconPaletteWithRGBValue(enum Species species, u32 personality, u32 blendColor, u16 currentHP, u8 paletteNum); // inventory
 
 #endif // GUARD_POKEMON_ICON_H

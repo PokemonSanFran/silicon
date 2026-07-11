@@ -12,6 +12,7 @@
 #include "strings.h"
 #include "load_save.h"
 #include "item_use.h"
+#include "item_usability.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "graphics.h"
@@ -23,6 +24,7 @@
 #include "constants/hold_effects.h"
 #include "sprays.h" // siliconMerge
 #include "move.h" // siliconMerge
+#include "ui_inventory.h" // inventory
 #include "ui_shop.h" // shopMenu
 
 #define DUMMY_PC_BAG_POCKET                 \
@@ -98,11 +100,16 @@ struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pock
 {
     switch (pocket->id)
     {
+            // Start inventory
+        /*
     case POCKET_ITEMS:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
     case POCKET_TM_HM:
     case POCKET_BERRIES:
+    */
+        default:
+            // End inventory
         return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
     case POCKET_DUMMY:
         return BagPocket_GetSlotDataPC(pocket, pocketPos);
@@ -121,11 +128,16 @@ void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, stru
 
     switch (pocket->id)
     {
+            // Start inventory
+        /*
     case POCKET_ITEMS:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
     case POCKET_TM_HM:
     case POCKET_BERRIES:
+    */
+        default:
+            // End inventory
         BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
         break;
     case POCKET_DUMMY:
@@ -145,6 +157,55 @@ void ApplyNewEncryptionKeyToBagItems(u32 newKey)
     }
 }
 
+// Start inventory
+void SetBagItemsPointers(void)
+{
+    gBagPockets[POCKET_MEDICINE].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Medicine;
+    gBagPockets[POCKET_MEDICINE].capacity  = BAG_MEDICINE_COUNT;
+    gBagPockets[POCKET_MEDICINE].id = POCKET_MEDICINE;
+
+    gBagPockets[POCKET_POKE_BALLS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_PokeBalls;
+    gBagPockets[POCKET_POKE_BALLS].capacity  = BAG_POKEBALLS_COUNT;
+    gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
+
+    gBagPockets[POCKET_BATTLE_ITEMS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_BattleItems;
+    gBagPockets[POCKET_BATTLE_ITEMS].capacity  = BAG_BATTLE_ITEMS_COUNT;
+    gBagPockets[POCKET_BATTLE_ITEMS].id = POCKET_BATTLE_ITEMS;
+
+    gBagPockets[POCKET_POWERUP].itemSlots = gSaveBlock1Ptr->bag.bagPocket_PowerUp;
+    gBagPockets[POCKET_POWERUP].capacity  = BAG_POWERUP_COUNT;
+    gBagPockets[POCKET_POWERUP].id = POCKET_POWERUP;
+
+    gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Berries;
+    gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
+
+    gBagPockets[POCKET_OTHER].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Other;
+    gBagPockets[POCKET_OTHER].capacity  = BAG_OTHER_COUNT;
+    gBagPockets[POCKET_OTHER].id = POCKET_OTHER;
+
+    gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.bagPocket_TMsHMs;
+    gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
+
+    gBagPockets[POCKET_TREASURE].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Treasure;
+    gBagPockets[POCKET_TREASURE].capacity  = BAG_TREASURES_COUNT;
+    gBagPockets[POCKET_TREASURE].id = POCKET_TREASURE;
+
+    gBagPockets[POCKET_Z_CRYSTALS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Z_Crystals;
+    gBagPockets[POCKET_Z_CRYSTALS].capacity  = BAG_Z_CRYSTALS_COUNT;
+    gBagPockets[POCKET_Z_CRYSTALS].id = POCKET_Z_CRYSTALS;
+
+    gBagPockets[POCKET_MEGA_STONES].itemSlots = gSaveBlock1Ptr->bag.bagPocket_Mega_Stones;
+    gBagPockets[POCKET_MEGA_STONES].capacity  = BAG_MEGA_STONES_COUNT;
+    gBagPockets[POCKET_MEGA_STONES].id = POCKET_MEGA_STONES;
+
+    gBagPockets[POCKET_KEY_ITEMS].itemSlots = gSaveBlock1Ptr->bag.bagPocket_KeyItems;
+    gBagPockets[POCKET_KEY_ITEMS].capacity = BAG_KEYITEMS_COUNT;
+    gBagPockets[POCKET_KEY_ITEMS].id = POCKET_KEY_ITEMS;
+}
+
+/*
 void SetBagItemsPointers(void)
 {
     gBagPockets[POCKET_ITEMS].itemSlots = gSaveBlock1Ptr->bag.items;
@@ -160,13 +221,15 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
     gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
-    gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_TM_HM].capacity = BAG_TM_HM_COUNT;
     gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
     gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
 }
+*/
+// End inventory
 
 u8 *CopyItemName(enum Item itemId, u8 *dst)
 {
@@ -397,6 +460,10 @@ static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item i
         {
             if (tempPocketSlotQuantities[itemRemoveIndex] > 0)
                 BagPocket_SetSlotItemIdAndCount(pocket, itemRemoveIndex, itemId, tempPocketSlotQuantities[itemRemoveIndex] - 1);
+            /*
+            if ((tempPocketSlotQuantities[itemRemoveIndex] - 1) == 0)
+                TryToRemoveFavoriteItem(pocket->id, itemId);
+             */
         }
     }
 
@@ -409,9 +476,19 @@ static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item i
 
 bool32 RemoveBagItem(enum Item itemId, u16 count)
 {
+    // Start inventory
     itemId = SanitizeBagItemId(itemId);
     if (itemId == ITEM_NONE)
         return FALSE;
+
+    enum Pocket pocket = GetItemPocket(itemId);
+    if (pocket >= POCKETS_COUNT)
+        return FALSE;
+
+    if (count >= CountTotalItemQuantityInBag(itemId) && (isCurrentItemFavorite()))
+        gSaveBlock3Ptr->InventoryData.numFavoriteItems[pocket]--;
+    //if (GetItemPocket(itemId) >= POCKETS_COUNT || itemId == ITEM_NONE)
+    // End inventory
 
     // check Battle Pyramid Bag
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
@@ -895,6 +972,18 @@ ItemUseFunc GetItemFieldFunc(enum Item itemId)
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
+ItemEligibilityFunc GetItemEligibilityFunc(enum Item itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].eligibilityFunc;
+}
+
+// Start inventory
+enum ItemSortType GetItemSortType(enum Item itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].sortType;
+}
+// End inventory
+
 // Returns an item's battle effect script ID.
 enum EffectItem GetItemBattleUsage(enum Item itemId)
 {
@@ -995,39 +1084,45 @@ enum ShopMenuCategories ConvertPocketToCategory(enum Pocket pocketId)
 {
     static const enum ShopMenuCategories pocketToCategoryTable[POCKETS_COUNT] =
     {
-        [POCKET_ITEMS]      = SHOP_CATEGORY_OTHER_ITEMS,
+        [POCKET_MEDICINE]   = SHOP_CATEGORY_MEDICINE,
         [POCKET_POKE_BALLS] = SHOP_CATEGORY_POKE_BALLS,
-        [POCKET_TM_HM]      = SHOP_CATEGORY_TMS,
+        [POCKET_BATTLE_ITEMS] = SHOP_CATEGORY_BATTLE_ITEMS,
+        [POCKET_POWERUP] = SHOP_CATEGORY_POWER_UPS,
         [POCKET_BERRIES]    = SHOP_CATEGORY_BERRIES,
+        [POCKET_OTHER]      = SHOP_CATEGORY_OTHER_ITEMS,
+        [POCKET_TM_HM]      = SHOP_CATEGORY_TMS,
+        [POCKET_TREASURE]      = SHOP_CATEGORY_TREASURES,
+        [POCKET_Z_CRYSTALS]      = SHOP_CATEGORY_Z_CRYSTALS,
+        [POCKET_MEGA_STONES]      = SHOP_CATEGORY_MEGA_STONES,
         [POCKET_KEY_ITEMS]  = NUM_SHOP_CATEGORIES,
     };
 
     return pocketToCategoryTable[pocketId];
 }
 
-enum ShopMenuCategories GetItemShopCategory(u16 itemId)
+enum ShopMenuCategories GetItemShopCategory(enum Item itemId)
 {
     return ConvertPocketToCategory(GetItemPocket(itemId));
 }
 
-u32 GetItemShopCriteriaGoal(u16 itemId)
+u32 GetItemShopCriteriaGoal(enum Item itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].criteriaGoal;
 }
 
-u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, u16 itemId)
+u16 CountTotalItemQuantityInBagWithPocket(enum Pocket pocket, enum Item itemId)
 {
     return BagPocket_CountTotalItemQuantity(&gBagPockets[pocket], itemId);
 }
 
 // End shopMenu
 
-ShopCriteriaFunc GetItemShopCriteriaFunc(u32 itemId)
+ShopCriteriaFunc GetItemShopCriteriaFunc(enum Item itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].shopCriteriaFunc;
 }
 
-bool32 IsItemShopCriteriaFulfilled(u32 itemId)
+bool32 IsItemShopCriteriaFulfilled(enum Item itemId)
 {
     ShopCriteriaFunc func = GetItemShopCriteriaFunc(itemId);
 

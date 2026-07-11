@@ -36,7 +36,7 @@ enum optionBattleDifficulty GetBattleDifficulty(void);
 // Battle Settings: Bag Items
 u32 GetBagItemsOption(void);
 bool32 CanUseBagItems(u16 itemId);
-void TryToIncreaseBattleItemUseCount(u16 itemId);
+void TryToIncreaseBattleItemUseCount(enum Item itemId);
 
 // Battle Settings: Level
 u32 GetLevelOption(void);

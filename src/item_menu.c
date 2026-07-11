@@ -52,19 +52,38 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "options_battle.h" // siliconMerge
+#include "constants/inventory.h" // inventory
+#include "item_icon.h" // inventory
+#include "nameplate.h" // inventory
 
 #define TAG_POCKET_SCROLL_ARROW 110
 #define TAG_BAG_SCROLL_ARROW    111
+#define PAL_TAG_KEY_ITEM_WHEEL  0x9000 // inventory
 
 // The buffer for the bag item list needs to be large enough to hold the maximum
 // number of item slots that could fit in a single pocket, + 1 for Cancel.
 // This constant picks the max of the existing pocket sizes.
 // By default, the largest pocket is BAG_TMHM_COUNT at 64.
+// Start inventory
+/*
 #define MAX_POCKET_ITEMS  ((max(BAG_TMHM_COUNT,              \
                             max(BAG_BERRIES_COUNT,           \
                             max(BAG_ITEMS_COUNT,             \
                             max(BAG_KEYITEMS_COUNT,          \
                                 BAG_POKEBALLS_COUNT))))) + 1)
+                                */
+
+#define MAX_POCKET_ITEMS  ((max(BAG_MEDICINE_COUNT,         \
+                            max(BAG_POKEBALLS_COUNT,        \
+                            max(BAG_BATTLE_ITEMS_COUNT,     \
+                            max(BAG_POWERUP_COUNT,          \
+                            max(BAG_BERRIES_COUNT,          \
+                            max(BAG_OTHER_COUNT,            \
+                            max(BAG_TREASURES_COUNT,         \
+                            max(BAG_Z_CRYSTALS_COUNT,       \
+                            max(BAG_MEGA_STONES_COUNT,      \
+                            BAG_KEYITEMS_COUNT)))))))))) + 1)
+// End inventory
 
 // Up to 8 item slots can be visible at a time
 #define MAX_ITEMS_SHOWN 8
@@ -148,7 +167,7 @@ static void PrintItemDescription(int);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void Task_CloseBagMenu(u8);
-static u8 AddItemMessageWindow(u8);
+static u8 UNUSED AddItemMessageWindow(u8);
 static void RemoveItemMessageWindow(u8);
 static void ReturnToItemList(u8);
 static void PrintItemQuantity(u8, s16);
@@ -217,6 +236,7 @@ static void CancelToss(u8);
 static void ConfirmSell(u8);
 static void CancelSell(u8);
 static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId);
+static void Task_KeyItemWheel(u8 taskId); // inventory
 
 static const u8 sText_Var1CantBeHeldHere[] = _("The {STR_VAR_1} can't be held\nhere.");
 static const u8 sText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}?");
@@ -406,6 +426,161 @@ static const struct ScrollArrowsTemplate sBagScrollArrowsTemplate = {
 };
 
 static const u8 sRegisteredSelect_Gfx[] = INCGFX_U8("graphics/bag/select_button.png", ".4bpp");
+// Start inventory
+static const u32 sKeyItemBoxGfx[] = INCBIN_U32("graphics/ui_menus/inventory/key_item_box.4bpp");
+static const u16 sKeyItemBoxPal[] = INCBIN_U16("graphics/ui_menus/inventory/key_item_box.gbapal");
+
+static const struct SpritePalette sSpritePalette_KeyItemBox = {
+    .data = sKeyItemBoxPal,
+    .tag = PAL_TAG_KEY_ITEM_WHEEL,
+};
+
+static const struct SpriteFrameImage sPicTable_KeyItemBox[] = {
+    obj_frame_tiles(sKeyItemBoxGfx),
+};
+
+const struct OamData sOam_KeyItemBox = {
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1,
+    .objMode = ST_OAM_OBJ_BLEND,
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+};
+
+const struct OamData sOam_KeyItemBoxWin = {
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1,
+    .objMode = ST_OAM_OBJ_WINDOW,
+    .affineMode = ST_OAM_AFFINE_OFF,
+};
+
+static const union AnimCmd sSpriteAnim_KeyItemBox[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_KeyItemBox[] =
+{
+    sSpriteAnim_KeyItemBox
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBox0[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBox1[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0xC0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBox2[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x80, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBox3[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x40, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBoxGrow0[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x120, 0, 0),
+    AFFINEANIMCMD_FRAME(0x120, 0x120, 0, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x110, 0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBoxGrow1[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x120, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x120, 0x120, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x110, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0xC0, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0xC0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBoxGrow2[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x120, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x120, 0x120, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x110, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x80, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x80, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sAffineAnim_KeyItemBoxGrow3[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x120, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x120, 0x120, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x110, 0x110, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x40, 0),
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0x40, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const sAffineAnims_KeyItemBox[] =
+{
+    sAffineAnim_KeyItemBox0,
+    sAffineAnim_KeyItemBox1,
+    sAffineAnim_KeyItemBox2,
+    sAffineAnim_KeyItemBox3,
+    sAffineAnim_KeyItemBoxGrow0,
+    sAffineAnim_KeyItemBoxGrow1,
+    sAffineAnim_KeyItemBoxGrow2,
+    sAffineAnim_KeyItemBoxGrow3,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_KeyItemBox = {
+    .tileTag = PAL_TAG_KEY_ITEM_WHEEL,
+    .paletteTag = PAL_TAG_KEY_ITEM_WHEEL,
+    .oam = &sOam_KeyItemBox,
+    .anims = sSpriteAnimTable_KeyItemBox,
+    .images = sPicTable_KeyItemBox,
+    .affineAnims = sAffineAnims_KeyItemBox,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_KeyItemBoxWin = {
+    .tileTag = PAL_TAG_KEY_ITEM_WHEEL,
+    .paletteTag = PAL_TAG_KEY_ITEM_WHEEL,
+    .oam = &sOam_KeyItemBoxWin,
+    .anims = sSpriteAnimTable_KeyItemBox,
+    .images = sPicTable_KeyItemBox,
+    .affineAnims = sAffineAnims_KeyItemBox,
+    .callback = SpriteCallbackDummy,
+};
+
+static const u8 sKeyItemBoxXPos[MAX_REGISTERED_ITEMS] = {(DISPLAY_WIDTH / 2), (DISPLAY_WIDTH / 2) + 32, (DISPLAY_WIDTH / 2), (DISPLAY_WIDTH / 2) - 32};
+static const u8 sKeyItemBoxYPos[MAX_REGISTERED_ITEMS] = {(DISPLAY_HEIGHT / 2) - 32, (DISPLAY_HEIGHT / 2), (DISPLAY_HEIGHT / 2) + 32, (DISPLAY_HEIGHT / 2)};
+// End inventory
 
 enum {
     COLORID_NORMAL,
@@ -584,9 +759,20 @@ static EWRAM_DATA struct ListBuffer2 *sListBuffer2 = 0;
 EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyBag *sTempWallyBag = 0;
 
+// Start inventory
+// used to hold the palette for the 4th (clockwise) item in the key item wheel
+// so it can be scanline-copied into place
+// This could be 12 bytes smaller if we used AllocZeroed,
+// but that isn't really a lot of space
+static EWRAM_DATA ALIGNED(4) u16 sKeyItemWheelExtraPalette[16] = {0};
+// End inventory
+
 void ResetBagScrollPositions(void)
 {
-    gBagPosition.pocket = POCKET_ITEMS;
+    // Start inventory
+    //gBagPosition.pocket = POCKET_ITEMS;
+    gBagPosition.pocket = POCKET_MEDICINE;
+    // End inventory
     memset(gBagPosition.cursorPosition, 0, sizeof(gBagPosition.cursorPosition));
     memset(gBagPosition.scrollPosition, 0, sizeof(gBagPosition.scrollPosition));
 }
@@ -616,7 +802,10 @@ void CB2_ChooseBerry(void)
 // Choosing mulch to use
 void CB2_ChooseMulch(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_BERRY_TREE_MULCH, POCKET_ITEMS, CB2_ReturnToFieldContinueScript);
+    // Start inventory
+    //GoToBagMenu(ITEMMENULOCATION_BERRY_TREE_MULCH, POCKET_ITEMS, CB2_ReturnToFieldContinueScript);
+    GoToBagMenu(ITEMMENULOCATION_BERRY_TREE_MULCH, POCKET_OTHER, CB2_ReturnToFieldContinueScript);
+    // End inventory
 }
 
 // Choosing berry for Berry Blender or Berry Crush
@@ -1216,16 +1405,49 @@ u8 GetItemListPosition(u8 pocketId)
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
 {
+    SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    // Start inventory
+    /*
     s16 *data = gTasks[taskId].data;
 
     tMsgWindowId = AddItemMessageWindow(ITEMWIN_MESSAGE);
     FillWindowPixelBuffer(tMsgWindowId, PIXEL_FILL(1));
     DisplayMessageAndContinueTask(taskId, tMsgWindowId, 10, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
     ScheduleBgCopyTilemapToVram(1);
+    */
+    // End inventory
 }
+
+// Start inventory
+static void Task_CloseMessageAndRedraw(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            task->data[0]++;
+            break;
+        case 1:
+            if (IsTextPrinterActiveOnWindow(INVENTORY_WINDOW_TEXT_BOX) || ((!JOY_NEW(A_BUTTON)) && (!JOY_NEW(B_BUTTON))))
+                return;
+            ClearDialogWindowAndFrame(INVENTORY_WINDOW_TEXT_BOX, TRUE);
+            ClearMessageBoxAddOns();
+            task->data[0]++;
+            break;
+        case 2:
+            Inventory_RemoveMenu(taskId);
+            break;
+    }
+}
+// End inventory
 
 void CloseItemMessage(u8 taskId)
 {
+    // Start inventory
+    gTasks[taskId].func = Task_CloseMessageAndRedraw;
+    return;
+    // End inventory
+
     s16 *data = gTasks[taskId].data;
     u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
@@ -1691,7 +1913,10 @@ static void OpenContextMenu(u8 taskId)
         {
             switch (gBagPosition.pocket)
             {
-            case POCKET_ITEMS:
+            // Start inventory
+            //case ITEMS_POCKET:
+            case POCKET_MEDICINE:
+            // End inventory
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ItemsPocket, sizeof(sContextMenuItems_ItemsPocket));
@@ -2167,14 +2392,71 @@ static void Task_ItemContext_GiveToPC(u8 taskId)
 
 #define tUsingRegisteredKeyItem data[3] // See usage in item_use.c
 
+// Start inventory
+static u32 DpadInputToRegisteredItemIndex(bool32 check)
+{
+    u32 direction = INVENTORY_REGISTER_NUM_DIRECTIONS;
+
+    if (JOY_NEW(DPAD_UP))
+        direction = INVENTORY_REGISTER_DIRECTION_UP;
+    else if (JOY_NEW(DPAD_RIGHT))
+        direction = INVENTORY_REGISTER_DIRECTION_RIGHT;
+    else if (JOY_NEW(DPAD_DOWN))
+        direction = INVENTORY_REGISTER_DIRECTION_DOWN;
+    else if (JOY_NEW(DPAD_LEFT))
+        direction = INVENTORY_REGISTER_DIRECTION_LEFT;
+    if (direction != INVENTORY_REGISTER_NUM_DIRECTIONS && check && gSaveBlock3Ptr->InventoryData.registeredItem[direction] == ITEM_NONE)
+        return 0;
+
+    return direction + 1;
+}
+
+static u8 CountRegisteredItems(void)
+{
+    u8 i, count;
+
+    count = 0;
+
+ // If `check`, verify that slot actually has an item registered
+    for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++){
+        if(gSaveBlock3Ptr->InventoryData.registeredItem[i] != ITEM_NONE)
+            count++;
+    }
+
+    return count;
+}
+// End inventory
+
+static u16 getFirstRegisteredItem(void)
+{
+    u8 i;
+
+    for(i = 0; i < INVENTORY_REGISTER_NUM_DIRECTIONS; i++){
+        if(gSaveBlock3Ptr->InventoryData.registeredItem[i] != ITEM_NONE)
+            return gSaveBlock3Ptr->InventoryData.registeredItem[i];
+    }
+
+    return ITEM_NONE;
+}
+
 bool8 UseRegisteredKeyItemOnField(void)
 {
-    u8 taskId;
+    // Start inventory
+    //u8 taskId;
+    u32 taskId;
+    ItemUseFunc itemFunc = NULL;
+    enum Item firstRegisteredItems = getFirstRegisteredItem();
+    u8 numRegisteredItems = CountRegisteredItems();
+
+    RemoveEmptyRegisteredItems();
+    // End inventory
 
     if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
+    // Start inventory
+    /*
     if (gSaveBlock1Ptr->registeredItem != ITEM_NONE)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
@@ -2193,10 +2475,184 @@ bool8 UseRegisteredKeyItemOnField(void)
             gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         }
     }
+    */
+    if (numRegisteredItems == 1)
+    {
+        if (IsPlayerAllowedToUseHealingItems(firstRegisteredItems,TRUE,FALSE,TRUE) == FALSE)
+        {
+            ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
+            return TRUE;
+        }
+
+        if (CheckBagHasItem(firstRegisteredItems, 1) == TRUE)
+        {
+            FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
+            gSpecialVar_ItemId = firstRegisteredItems;
+            itemFunc = GetItemFieldFunc(firstRegisteredItems);
+        }
+        else
+        {
+            firstRegisteredItems = ITEM_NONE;
+        }
+
+    }
+    else if (numRegisteredItems != 0)
+    {
+        itemFunc = Task_KeyItemWheel;
+    }
+
+    if (itemFunc)
+    {
+        LockPlayerFieldControls();
+        FreezeObjectEvents();
+        PlayerFreeze();
+        StopPlayerAvatar();
+        taskId = CreateTask(itemFunc, 8);
+        gTasks[taskId].tUsingRegisteredKeyItem = TRUE;
+        return TRUE;
+    }
+    // End inventory
     ScriptContext_SetupScript(EventScript_SelectWithoutRegisteredItem);
     return TRUE;
 }
 
+// Start inventory
+static void HBlankCB_KeyItemWheel(void) {
+    u32 vCount = REG_VCOUNT;
+    if (vCount >= DISPLAY_HEIGHT) {
+        sKeyItemWheelExtraPalette[0] = 0;
+        return;
+    }
+
+    if (vCount >= 64 && sKeyItemWheelExtraPalette[0] == 0) {
+        CpuFastCopy(sKeyItemWheelExtraPalette, (u32*)(BG_PLTT + PLTT_ID(13)*2), PLTT_SIZE_4BPP);
+        sKeyItemWheelExtraPalette[0] = 0x8000;
+    }
+}
+
+#define tState data[0]
+#define tBoxSprite (data + 1)
+#define tBoxWinSprite (data + 1 + MAX_REGISTERED_ITEMS)
+#define tIconWindow (data + 1 + 2 * MAX_REGISTERED_ITEMS)
+
+static void FreeKeyItemWheelGfx(s16 *data)
+{
+    u32 i;
+    struct Sprite *sprite;
+    FreeSpriteTilesByTag(PAL_TAG_KEY_ITEM_WHEEL);
+    FreeSpritePaletteByTag(PAL_TAG_KEY_ITEM_WHEEL);
+
+    for (i = 0; i < 2 * MAX_REGISTERED_ITEMS; i++) {
+        if (tBoxSprite[i] >= MAX_SPRITES)
+            continue;
+        sprite = &gSprites[tBoxSprite[i]];
+        FreeSpriteOamMatrix(sprite);
+        DestroySprite(sprite);
+    }
+
+    for (i = 0; i < MAX_REGISTERED_ITEMS; i++) {
+        if (tIconWindow[i] == WINDOW_NONE)
+            continue;
+        FillWindowPixelBuffer(tIconWindow[i], 0);
+        ClearWindowTilemap(tIconWindow[i]);
+        CopyWindowToVram(tIconWindow[i], COPYWIN_MAP);
+        RemoveWindow(tIconWindow[i]);
+    }
+    SetHBlankCallback(NULL);
+    DisableInterrupts(INTR_FLAG_HBLANK);
+}
+
+static void Task_KeyItemWheel(u8 taskId)
+{
+    u32 i, j;
+    s16 *data = gTasks[taskId].data;
+    switch (tState)
+    {
+        case 0:
+            {
+                LoadSpritePalette(&sSpritePalette_KeyItemBox);
+                LoadSpriteSheetByTemplate(&sSpriteTemplate_KeyItemBox, 0, 0);
+
+                for (i = 0; i < MAX_REGISTERED_ITEMS; i++) {
+
+                    tBoxSprite[i] = j = CreateSprite(&sSpriteTemplate_KeyItemBox, sKeyItemBoxXPos[i], sKeyItemBoxYPos[i], 0);
+                    if (j < MAX_SPRITES)
+                        StartSpriteAffineAnim(&gSprites[j], i);
+                    tBoxWinSprite[i] = MAX_SPRITES;
+
+                    tIconWindow[i] = WINDOW_NONE;
+                    if (!gSaveBlock3Ptr->InventoryData.registeredItem[i] || !CheckBagHasItem(gSaveBlock3Ptr->InventoryData.registeredItem[i], 1))
+                        continue;
+                    tIconWindow[i] = j = AddWindowParameterized(0, sKeyItemBoxXPos[i] / 8 - 2, sKeyItemBoxYPos[i] / 8 - 2, 4, 4, i == 3 ? 13 : 13 + i, 16*(i+9));
+                    if (j == WINDOW_NONE)
+                        continue;
+                    PutWindowTilemap(j);
+                    BlitItemIconToWindow(gSaveBlock3Ptr->InventoryData.registeredItem[i], j, 4, 4, i == 3 ? sKeyItemWheelExtraPalette : NULL);
+                    CopyWindowToVram(j, COPYWIN_FULL);
+                }
+                SetHBlankCallback(HBlankCB_KeyItemWheel);
+                EnableInterrupts(INTR_FLAG_HBLANK);
+                PlaySE(SE_WIN_OPEN);
+
+                tState = (gSaveBlock1Ptr->flashLevel > 1) ? 4 : 1;
+                break;
+            }
+        case 1:
+            {
+                if (JOY_NEW(B_BUTTON) || JOY_NEW(SELECT_BUTTON)) {
+                    PlaySE(SE_SELECT);
+                    tState = 3;
+                    break;
+                }
+                i = DpadInputToRegisteredItemIndex(TRUE);
+                if (i == 0 || data[i] == MAX_SPRITES)
+                    break;
+
+                if (IsPlayerAllowedToUseHealingItems(gSaveBlock3Ptr->InventoryData.registeredItem[i - 1],TRUE,FALSE,TRUE) == FALSE)
+                {
+                    tState = 3;
+                    ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
+                    break;
+                }
+
+                gSpecialVar_ItemId = gSaveBlock3Ptr->InventoryData.registeredItem[i - 1];
+                FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
+                PlaySE(SE_SELECT);
+                StartSpriteAffineAnim(&gSprites[data[i]], i + 4 - 1);
+                data[15] = data[i];
+                tState = 2;
+                break;
+            }
+        case 2:
+            if (!gSprites[data[15]].affineAnimEnded)
+                break;
+            FreeKeyItemWheelGfx(data);
+            i = CreateTask(GetItemFieldFunc(gSpecialVar_ItemId), 8);
+            gTasks[i].tUsingRegisteredKeyItem = TRUE;
+            DestroyTask(taskId);
+            break;
+        case 3:
+            FreeKeyItemWheelGfx(data);
+            UnfreezeObjectEvents();
+            UnlockPlayerFieldControls();
+            DestroyTask(taskId);
+            break;
+        case 4:
+
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+            SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+
+            for (i = 0; i < MAX_REGISTERED_ITEMS; i++)
+                tBoxWinSprite[i] = CreateSprite(&sSpriteTemplate_KeyItemBoxWin, sKeyItemBoxXPos[i], sKeyItemBoxYPos[i], 0);
+            tState = 1;
+            break;
+    }
+}
+
+#undef tState
+#undef tBoxSprite
+#undef tIconWindow
+// End inventory
 #undef tUsingRegisteredKeyItem
 
 static void Task_ItemContext_Sell(u8 taskId)
@@ -2429,7 +2885,7 @@ static void PrepareBagForWallyTutorial(void)
 
     sTempWallyBag = AllocZeroed(sizeof(*sTempWallyBag));
     //memcpy(sTempWallyBag->bagPocket_Items, gSaveBlock1Ptr->bag.items, sizeof(gSaveBlock1Ptr->bag.items));// siliconMerge : Wally's bag does not need to wipe player's items.
-    memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bag.pokeBalls, sizeof(gSaveBlock1Ptr->bag.pokeBalls));
+    memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bag.bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bag.bagPocket_PokeBalls));
     sTempWallyBag->pocket = gBagPosition.pocket;
     for (i = 0; i < POCKETS_COUNT; i++)
     {
@@ -2437,7 +2893,7 @@ static void PrepareBagForWallyTutorial(void)
         sTempWallyBag->scrollPosition[i] = gBagPosition.scrollPosition[i];
     }
     //memset(gSaveBlock1Ptr->bag.items, 0, sizeof(gSaveBlock1Ptr->bag.items)); // siliconMerge : Wally's bag does not need to wipe player's items.
-    memset(gSaveBlock1Ptr->bag.pokeBalls, 0, sizeof(gSaveBlock1Ptr->bag.pokeBalls));
+    memset(gSaveBlock1Ptr->bag.bagPocket_PokeBalls, 0, sizeof(gSaveBlock1Ptr->bag.bagPocket_PokeBalls));
     ResetBagScrollPositions();
 }
 
@@ -2446,7 +2902,7 @@ static void RestoreBagAfterWallyTutorial(void)
     u32 i;
 
     //memcpy(gSaveBlock1Ptr->bag.items, sTempWallyBag->bagPocket_Items, sizeof(sTempWallyBag->bagPocket_Items));// siliconMerge : Wally's bag does not need to wipe player's items.
-    memcpy(gSaveBlock1Ptr->bag.pokeBalls, sTempWallyBag->bagPocket_PokeBalls, sizeof(sTempWallyBag->bagPocket_PokeBalls));
+    memcpy(gSaveBlock1Ptr->bag.bagPocket_PokeBalls, sTempWallyBag->bagPocket_PokeBalls, sizeof(sTempWallyBag->bagPocket_PokeBalls));
     gBagPosition.pocket = sTempWallyBag->pocket;
     for (i = 0; i < POCKETS_COUNT; i++)
     {
@@ -2461,7 +2917,10 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     //AddBagItem(ITEM_POTION, 1); // siliconMerge
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    // Start inventory
+    //GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_MEDICINE, CB2_SetUpReshowBattleScreenAfterMenu2);
+    // End inventory
 }
 
 void InitOldManBag(void)
@@ -2469,7 +2928,10 @@ void InitOldManBag(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    // Start inventory
+    //GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_MEDICINE, CB2_SetUpReshowBattleScreenAfterMenu2);
+    // End inventory
 }
 
 #define tTimer data[8]
@@ -2646,7 +3108,7 @@ static void BagMenu_RemoveWindow(u8 windowType)
     }
 }
 
-static u8 AddItemMessageWindow(u8 windowType)
+static u8 UNUSED AddItemMessageWindow(u8 windowType)
 {
     u8 *windowId = &gBagMenu->windowIds[windowType];
     if (*windowId == WINDOW_NONE)

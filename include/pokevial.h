@@ -14,6 +14,7 @@ void PokevialDoseDown(u8);
 
 bool32 PokevialRefill(void);
 const void *PokevialGetDoseIcon(void);
+void BufferPokevialDesc(void);
 
 enum pokevialPercentConstant {
     POKEVIAL_ICON_PERCENT_0,

@@ -35,6 +35,11 @@
 #include "constants/ui_resido_species.h" // pokedex
 #include "constants/ui_character_customization_menu.h" // playerCustom
 #include "constants/ui_adventure_guide.h" // adventureGuide
+// Start inventory
+#include "constants/inventory.h"
+#include "constants/item.h"
+#include "ui_inventory.h"
+// End inventory
 #include "constants/waves.h" // wavesOfChange
 #include "constants/hidden_grotto.h" // hiddenGrotto
 #include "constants/region_map_sections.h"
@@ -320,6 +325,18 @@ struct Glass
 };
 // End google_glass
 
+// Start inventory
+//Needs to be optimized
+struct NewInventoryData
+{
+    u8 numFavoriteItems[POCKETS_COUNT];
+    u16 itemIdx;
+    u8 pocketNum;
+    u16 yFirstItem;
+    u16 registeredItem[NUM_REGISTER_ITEMS];
+};
+// End inventory
+
 struct SaveBlock3
 {
 // Start siliconMerge
@@ -362,6 +379,7 @@ struct SaveBlock3
     */
     // End dexNav
     u8 dexNavChain;
+    struct NewInventoryData InventoryData; // inventory
     u8 previousDexNavChain;
     u8 hiddenGrottoSpawn[NUM_HIDDEN_GROTTO];
     u8 lastGrottoId;
@@ -1210,11 +1228,26 @@ struct ExternalEventFlags
 
 struct Bag
 {
+  // Start inventory
+  /*
     struct ItemSlot items[BAG_ITEMS_COUNT];
     struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
     struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
     struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
     struct ItemSlot berries[BAG_BERRIES_COUNT];
+  */
+    struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot bagPocket_BattleItems[BAG_BATTLE_ITEMS_COUNT];
+    struct ItemSlot bagPocket_PowerUp[BAG_POWERUP_COUNT];
+    struct ItemSlot bagPocket_Other[BAG_OTHER_COUNT];
+    struct ItemSlot bagPocket_Treasure[BAG_TREASURES_COUNT];
+    struct ItemSlot bagPocket_Z_Crystals[BAG_Z_CRYSTALS_COUNT];
+    struct ItemSlot bagPocket_Mega_Stones[BAG_MEGA_STONES_COUNT];
+    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    struct ItemSlot bagPocket_TMsHMs[BAG_TMHM_COUNT];
+  // End inventory
 };
 
 struct SaveBlock1
@@ -1263,14 +1296,22 @@ struct SaveBlock1
     /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
     /*0x271C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE];
     /*0x2728*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2734*/ u8 decorationDesks[10];
-    /*0x273E*/ u8 decorationChairs[10];
-    /*0x2748*/ u8 decorationPlants[10];
-    /*0x2752*/ u8 decorationOrnaments[30];
-    /*0x2770*/ u8 decorationMats[30];
-    /*0x278E*/ u8 decorationPosters[10];
-    /*0x2798*/ u8 decorationDolls[40];
-    /*0x27C0*/ u8 decorationCushions[10];
+    /*0x2734*/ //u8 decorationDesks[10];
+    /*0x273E*/ //u8 decorationChairs[10];
+    /*0x2748*/ //u8 decorationPlants[10];
+    /*0x2752*/ //u8 decorationOrnaments[30];
+    /*0x2770*/ //u8 decorationMats[30];
+    /*0x278E*/ //u8 decorationPosters[10];
+    /*0x2798*/ //u8 decorationDolls[40];
+    /*0x27C0*/ //u8 decorationCushions[10];
+    /*0x2734*/ u8 decorationDesks[1];
+    /*0x273E*/ u8 decorationChairs[1];
+    /*0x2748*/ u8 decorationPlants[1];
+    /*0x2752*/ u8 decorationOrnaments[1];
+    /*0x2770*/ u8 decorationMats[1];
+    /*0x278E*/ u8 decorationPosters[1];
+    /*0x2798*/ u8 decorationDolls[1];
+    /*0x27C0*/ u8 decorationCushions[1];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x27CA*/ //u8 padding4[2];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];

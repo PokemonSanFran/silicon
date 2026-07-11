@@ -104,6 +104,7 @@ enum Language
 // End siliconMerge
 #define POKE_NEWS_COUNT 16
 #define PC_ITEMS_COUNT 1 // siliconMerge
+
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 // Start siliconMerge
 //#define DECOR_MAX_SECRET_BASE 16
@@ -125,10 +126,19 @@ enum Language
 
 // Bag constants
 #define BAG_ITEMS_COUNT 525 // siliconMerge
-#define BAG_KEYITEMS_COUNT 93  // siliconMerge
-#define BAG_POKEBALLS_COUNT 27 // siliconMerge
-#define BAG_TMHM_COUNT 475 // siliconMerge
+#define BAG_KEYITEMS_COUNT 102  // siliconMerge
+#define BAG_POKEBALLS_COUNT 36 // siliconMerge
+#define BAG_TMHM_COUNT 436 // siliconMerge //PSF TODO make this not a magic number?
 #define BAG_BERRIES_COUNT 68 // siliconMerge
+// Start inventory
+#define BAG_MEDICINE_COUNT     44
+#define BAG_BATTLE_ITEMS_COUNT 172
+#define BAG_POWERUP_COUNT      144
+#define BAG_OTHER_COUNT        51
+#define BAG_TREASURES_COUNT    61
+#define BAG_Z_CRYSTALS_COUNT   35
+#define BAG_MEGA_STONES_COUNT  60
+// End inventory
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

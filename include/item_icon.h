@@ -13,5 +13,6 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, enum Item itemId);
 u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, enum Item itemId);
 const void *GetItemIconPic(enum Item itemId);
 const u16 *GetItemIconPalette(enum Item itemId);
+u8 BlitItemIconToWindow(enum Item itemId, u8 windowId, u16 x, u16 y, void * paletteDest); // inventory
 
 #endif //GUARD_ITEM_ICON_H

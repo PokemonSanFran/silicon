@@ -355,6 +355,14 @@ $(TYPES11x9GFXDIR)/types.4bpp: $(types:%=$(TYPES11x9GFXDIR)/%.4bpp)
 $(types:%=$(TYPES128x16GFXDIR)/%.4bpp): %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 2
 
+UI_INVENTORY_TYPE_GFXDIR := graphics/ui_menus/inventory/types
+
+$(types:%=$(UI_INVENTORY_TYPE_GFXDIR)/%.4bpp): %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
+
+$(UI_INVENTORY_TYPE_GFXDIR)/types.4bpp: $(types:%=$(UI_INVENTORY_TYPE_GFXDIR)/%.4bpp)
+	@cat $^ >$@
+
 $(TYPES128x16GFXDIR)/types.4bpp: $(types:%=$(TYPES128x16GFXDIR)/%.4bpp)
 	@cat $^ >$@
 

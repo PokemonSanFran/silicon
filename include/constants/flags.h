@@ -2719,7 +2719,7 @@
 #define FLAG_DEXNAV_DETECTOR                                         (SYSTEM_FLAGS + 0xA9) // Unused Flag
 #define FLAG_LITTLE_CUP_BATTLE                                       (SYSTEM_FLAGS + 0xAA) // Unused Flag
 #define FLAG_GROTTO_ROUTE22                                          (SYSTEM_FLAGS + 0xAB)
-#define FLAG_UNUSED_0x90C                                            (SYSTEM_FLAGS + 0xAC) // Unused Flag
+#define FLAG_SYS_USED_FROM_REGISTER_MENU                             (SYSTEM_FLAGS + 0xAC) // Unused Flag
 #define FLAG_UNUSED_0x90D                                            (SYSTEM_FLAGS + 0xAD) // Unused Flag
 #define FLAG_UNUSED_0x90E                                            (SYSTEM_FLAGS + 0xAE) // Unused Flag
 #define FLAG_UNUSED_0x90F                                            (SYSTEM_FLAGS + 0xAF) // Unused Flag

@@ -67,6 +67,19 @@
 #include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/flags.h"
+#include "new_game.h"
+#include "save.h"
+#include "start_menu.h"
+#include "ui_map_system.h"
+#include "buzzr.h"
+#include "glass.h"
+#include "constants/form_change_types.h"
+#include "ui_main_menu.h"
+#include "event_object_movement.h"
+#include "field_player_avatar.h"
+#include "ui_adventure_guide.h"
+#include "ui_inventory.h"
 #include "constants/map_types.h"
 
 // constants, structs
@@ -460,7 +473,6 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertTimeToHelp(enum TimeOf
 static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void);
 
 // pokemon status
-static inline void MonStatus_InjectStatusGraphics(struct Sprite *, u32, u32);
 static inline enum StartMenuMonStatuses MonStatus_TranslateRawStatus(u32);
 static inline u32 MonStatus_ConvertPercentageIntoHpBarFrame(u32);
 static inline void *MonStatus_GetSpriteCB(u32, bool32);
@@ -841,7 +853,7 @@ static const struct StartMenuAppData sStartMenu_AppData[NUM_START_APPS] =
     },
     [START_APP_BAG] =
     {
-        COMPOUND_STRING("Bag"), FLAG_SYS_APP_BAG_GET, CB2_BagMenuFromStartMenu
+        COMPOUND_STRING("Bag"), FLAG_SYS_APP_BAG_GET, CB2_InventoryFromStartMenu
     },
     [START_APP_ARRIBA] =
     {
@@ -2223,7 +2235,7 @@ static inline enum StartMenuHelpSymbols BlitSymbol_ConvertSignalToHelp(void)
 }
 
 // mon status
-static inline void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
+void MonStatus_InjectStatusGraphics(struct Sprite *sprite, u32 status, u32 healthPercentage)
 {
     struct WindowTemplate template = { .width = 4, .height = 2, .paletteNum = START_PAL_SLOT_TEXT };
     u32 tileNum = TILE_OFFSET_4BPP(sprite->oam.tileNum), window = AddWindow(&template);
@@ -2251,6 +2263,7 @@ static inline enum StartMenuMonStatuses MonStatus_TranslateRawStatus(u32 status)
     case STATUS1_SLEEP:
         return START_MON_STATUS_SLEEP;
     case STATUS1_POISON:
+    case STATUS1_TOXIC_POISON:
         return START_MON_STATUS_POISON;
     case STATUS1_BURN:
         return START_MON_STATUS_BURN;
@@ -2268,12 +2281,15 @@ static inline u32 MonStatus_ConvertPercentageIntoHpBarFrame(u32 healthPercentage
 {
     // - 1 is required, otherwise we'll get NUM_START_HP_BAR_PERCENTAGES at full hp
     enum StartMenuHpBarPercentage barHealthPercentage = (healthPercentage / 10) - 1;
-    u32 realFrame = barHealthPercentage * 8;
+    s32 realFrame = barHealthPercentage * 8;
 
     if (!healthPercentage)
         realFrame = START_HP_BAR_PERCENTAGE_0 * 8;
 
     if (!barHealthPercentage)
+        realFrame = START_HP_BAR_PERCENTAGE_1 * 8;
+
+    if(realFrame < 0 && healthPercentage != 0)
         realFrame = START_HP_BAR_PERCENTAGE_1 * 8;
 
     return realFrame;

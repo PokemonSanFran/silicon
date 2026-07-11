@@ -1,8 +1,11 @@
 #include "global.h"
-#include "pokevial.h"
 #include "constants/items.h"
 #include "graphics.h"
+#include "string_util.h"
+#include "tv.h"
 #include "math_util.h"
+#include "item.h"
+#include "pokevial.h"
 #include "random.h"
 
 static void PokevialFixDoseOverflow(void);
@@ -96,4 +99,26 @@ static u32 PokevialGetVialPercent(void)
 const void *PokevialGetDoseIcon(void)
 {
     return pokevialIconIndex[PokevialGetVialPercent()];
+}
+
+void BufferPokevialDesc(void)
+{
+    u32 currentDoses = PokevialGetDose();
+    StringCopy(gStringVar1, GetItemDescription(ITEM_GOLD_POTION));
+
+    switch(currentDoses)
+    {
+        case 0:
+            StringAppend(gStringVar1, COMPOUND_STRING(" It is empty and must be refilled by a Pokemon Center Attendant."));
+            break;
+        case 1:
+            StringAppend(gStringVar1, COMPOUND_STRING(" There is one dose left."));
+            break;
+        default:
+            u32 numDigits = CountDigits(currentDoses);
+            ConvertIntToDecimalStringN(gStringVar2, currentDoses, STR_CONV_MODE_LEFT_ALIGN, numDigits);
+            StringExpandPlaceholders(gStringVar3, COMPOUND_STRING(" There are {STR_VAR_2} doses left."));
+            StringAppend(gStringVar1, gStringVar3);
+            break;
+    }
 }
