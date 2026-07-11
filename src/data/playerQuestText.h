@@ -3528,7 +3528,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_ITEM,
-        .textTargetValue = ITEM_TM296,
+        .textTargetValue = ITEM_TM_DIG,
       },
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,

@@ -65,7 +65,7 @@ script ThisIsntRandom_UnlockDoor_Dialogue
         applymovement(BAIYA,Common_Movement_ExclamationMark)
         waitmovement(0)
 
-		bufferitemname(STR_VAR_1,ITEM_TM296)
+		bufferitemname(STR_VAR_1,ITEM_TM_DIG)
         msgbox(format("Oh,  “{STR_VAR_1}” is literally the Technical Machine! I feel pretty dumb, but damn good work."),,SPEAKER_ADAORA)
 
         closemessage

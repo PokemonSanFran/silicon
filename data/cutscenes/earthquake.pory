@@ -236,7 +236,7 @@ script Earthquake_PostRescue_Dialogue {
 
         msgbox(format("Let's check this message out."),MSGBOX_DEFAULT,SPEAKER_ADAORA,EMOTE_CONFUSE)
 
-		bufferitemname(STR_VAR_1,ITEM_TM296)
+		bufferitemname(STR_VAR_1,ITEM_TM_DIG)
         msgbox(format("“{STR_VAR_1} @ 37.75030467013338, -122.3798002138461,{RIGHT_ARROW} 18030122” It's just a bunch of nonsense. Maybe a glitch?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)
 
         msgbox(format("…I don't think so. Kei-ying was really trying to help me. Even when I had dinner with him, their energy was different from everybody else in SharpRise Capital."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
