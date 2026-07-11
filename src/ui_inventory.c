@@ -3169,7 +3169,7 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
 
             //Registered Items
 
-            x = GetStringRightAlignXOffset(fontId,gStringVar4,inventoryPadding) - 2;
+            x = 165;
             y += 3;
             for (u32 direction = INVENTORY_REGISTER_DIRECTION_UP; direction < INVENTORY_REGISTER_NUM_DIRECTIONS; direction++)
                 if(itemId == gSaveBlock3Ptr->InventoryData.registeredItem[direction])
