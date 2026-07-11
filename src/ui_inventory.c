@@ -3147,7 +3147,6 @@ static void Inventory_PrintItems(enum Pocket pocketId, u32 itemId, u32 itemIndex
     u32 lineSpacing = GetFontAttribute(fontId,FONTATTR_LINE_SPACING);
     u32 windowId = INVENTORY_WINDOW_ITEM_LIST;
     u32 itemListItemNameWidth = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH - 24;
-    u32 inventoryPadding = GetWindowAttribute(windowId,WINDOW_WIDTH) * TILE_WIDTH;
     enum Pocket itemPocket = GetItemPocket(itemId);
 
     if(itemId != ITEM_NONE)
