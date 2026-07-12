@@ -288,26 +288,6 @@ extern const u8 gText_Quest_WarehouseWarfare_Desc[];
 extern const u8 gText_Quest_WarehouseWarfare_DoneDesc[];
 extern const u8 gText_Quest_WarehouseWarfare_Map[];
 
-extern const u8 gText_Quest_RestoreToTheirFormerGlory_Name[];
-extern const u8 gText_Quest_RestoreToTheirFormerGlory_Desc[];
-extern const u8 gText_Quest_RestoreToTheirFormerGlory_DoneDesc[];
-extern const u8 gText_Quest_RestoreToTheirFormerGlory_Map[];
-
-extern const u8 gText_Quest_HowDisappointing_Name[];
-extern const u8 gText_Quest_HowDisappointing_Desc[];
-extern const u8 gText_Quest_HowDisappointing_DoneDesc[];
-extern const u8 gText_Quest_HowDisappointing_Map[];
-
-extern const u8 gText_Quest_LetsBurnThisMotherDown_Name[];
-extern const u8 gText_Quest_LetsBurnThisMotherDown_Desc[];
-extern const u8 gText_Quest_LetsBurnThisMotherDown_DoneDesc[];
-extern const u8 gText_Quest_LetsBurnThisMotherDown_Map[];
-
-extern const u8 gText_Quest_Manhunt_Name[];
-extern const u8 gText_Quest_Manhunt_Desc[];
-extern const u8 gText_Quest_Manhunt_DoneDesc[];
-extern const u8 gText_Quest_Manhunt_Map[];
-
 extern const u8 gText_Quest_RestoreEspuleeOutskirts_Name[];
 extern const u8 gText_Quest_RestoreEspuleeOutskirts_Desc[];
 extern const u8 gText_Quest_RestoreEspuleeOutskirts_DoneDesc[];

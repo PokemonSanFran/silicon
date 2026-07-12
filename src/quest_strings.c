@@ -308,16 +308,6 @@ const u8 gText_Quest_HowDisappointing_Desc[] = _("Shut down the The Tide project
 const u8 gText_Quest_HowDisappointing_DoneDesc[] = _("DoneDescription");
 const u8 gText_Quest_HowDisappointing_Map[] = _("HodouCity");
 
-const u8 gText_Quest_LetsBurnThisMotherDown_Name[] = _("Let's Burn This Mother Down.");
-const u8 gText_Quest_LetsBurnThisMotherDown_Desc[] = _("Go to Arantraz and\ntry to reason with Baiya!");
-const u8 gText_Quest_LetsBurnThisMotherDown_DoneDesc[] = _("DoneDescription");
-const u8 gText_Quest_LetsBurnThisMotherDown_Map[] = _("Arantraz");
-
-const u8 gText_Quest_Manhunt_Name[] = _("Manhunt.");
-const u8 gText_Quest_Manhunt_Desc[] = _("Start with the newspaper in Perlacia City\n and track down Vigrim!");
-const u8 gText_Quest_Manhunt_DoneDesc[] = _("DoneDescription");
-const u8 gText_Quest_Manhunt_Map[] = _("???");
-
 const u8 gText_Quest_RestoreEspuleeOutskirts_Name[] = _("Restore EspuleeOutskirts Gym");
 const u8 gText_Quest_RestoreEspuleeOutskirts_Desc[] = _("Description");
 const u8 gText_Quest_RestoreEspuleeOutskirts_DoneDesc[] = _("DoneDescription");
@@ -858,19 +848,6 @@ const u8 gText_Quest_WarehouseWarfare_Sub2_Map[] = _("RouteC");
 const u8 gText_Quest_WarehouseWarfare_Sub3_Name[] = _("Warehouse North");
 const u8 gText_Quest_WarehouseWarfare_Sub3_Desc[] = _("Sub Lorem");
 const u8 gText_Quest_WarehouseWarfare_Sub3_Map[] = _("RouteE");
-
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub1_Name[] = _("HodouCity");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub1_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub1_Map[] = _("HodouCity");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub2_Name[] = _("ZenzuIsland");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub2_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub2_Map[] = _("ZenzuIsland");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub3_Name[] = _("EspuleeOutskirts");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub3_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub3_Map[] = _("EspuleeOutskirts");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub4_Name[] = _("TirabudinPlace");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub4_Desc[] = _("Sub Lorem");
-const u8 gText_Quest_RestoreToTheirFormerGlory_Sub4_Map[] = _("TirabudinPlace");
 
 const u8 gText_Quest_RestoreEspuleeOutskirts_Sub1_Name[] = _("Krabby");
 const u8 gText_Quest_RestoreEspuleeOutskirts_Sub1_Desc[] = _("Sub Lorem");
