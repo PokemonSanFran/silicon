@@ -114,7 +114,7 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
             if (compareResult == FALSE)
                 break;
 
-            numPassingTests++; 
+            numPassingTests++;
         }
         if (numPassingTests == numTests)
         {
@@ -123,7 +123,7 @@ const u8 *GetQuestDesc_PlayersAdventure(void)
             break;
         }
     }
-    return gStringVar4;    
+    return gStringVar4;
 }
 
 static void ExpandStringsForQuestFlavor(s32 flavorText)
@@ -526,7 +526,7 @@ const u8 *GetQuestDesc_InstallNatureProbes(void)
     else if (probeSet1 && probeSet3)
     {
         StringAppend(gStringVar4,COMPOUND_STRING(" The last one goes atop the tallest hill."));
-    }       
+    }
     else if (probeSet1 && probeSet2)
     {
         StringAppend(gStringVar4,COMPOUND_STRING(" The last one goes by the bridge."));
@@ -543,7 +543,7 @@ const u8 *GetQuestDesc_InstallNatureProbes(void)
     {
         StringAppend(gStringVar4,COMPOUND_STRING(" One goes in the deepest forest section, the other atop the tallest hill."));
     }
-    else 
+    else
     {
         StringAppend(gStringVar4,COMPOUND_STRING(" One goes in the deepest forest section, one atop the tallest hill, and one by the bridge."));
     }
@@ -551,4 +551,109 @@ const u8 *GetQuestDesc_InstallNatureProbes(void)
     return gStringVar4;
 }
 
+const u8 *GetQuestDesc_Manhunt(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_MANHUNT);
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_MANHUNT].desc[flag]);
+
+    if ((flag == FLAG_GET_COMPLETED) && FlagGet(FLAG_TIMELINE_TIMETRAVEL))
+    {
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Beating up civilizations to hunt down and arrest Vigrim...? What a crazy dream."));
+        return gStringVar4;
+    }
+    else if (flag == FLAG_GET_ACTIVE)
+    {
+        if ((FlagGet(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_1) == FALSE))
+        {
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_MANHUNT_STOP_1),MAP_NUM(MAP_QUEST_MANHUNT_STOP_1))->regionMapSectionId,0);
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Ramesh believes the {STR_VAR_1} Newspaper might have a lead on where to find Vigrim."));
+        }
+        else if ((FlagGet(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_2) == FALSE))
+        {
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_MANHUNT_STOP_2),MAP_NUM(MAP_QUEST_MANHUNT_STOP_2))->regionMapSectionId,0);
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("There's a financial tie between The Tide and {STR_VAR_1} Consulting. Go investigate."));
+        }
+        else if ((FlagGet(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_3) == FALSE))
+        {
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_MANHUNT_STOP_3),MAP_NUM(MAP_QUEST_MANHUNT_STOP_3))->regionMapSectionId,0);
+            CopyItemNameHandlePlural(ITEM_DUSK_BALL,gStringVar2,3);
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("The Tide used to buy {STR_VAR_2} in bulk from the {STR_VAR_1} Ball Shop. Go investigate."));
+        }
+        else if ((FlagGet(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_4) == FALSE))
+        {
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_MANHUNT_STOP_4),MAP_NUM(MAP_QUEST_MANHUNT_STOP_4))->regionMapSectionId,0);
+            CopyItemNameHandlePlural(ITEM_DUSK_BALL,gStringVar2,3);
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("The Tide once got a bulk shipment of {STR_VAR_2} sent to {STR_VAR_1}. Go investigate."));
+        }
+        else if ((FlagGet(TRAINER_FLAGS_START + TRAINER_VIGRIM) == FALSE))
+        {
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_MANHUNT_STOP_5),MAP_NUM(MAP_QUEST_MANHUNT_STOP_5))->regionMapSectionId,0);
+            StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Vigrim has challenged you to a battle at {STR_VAR_1} at night. Defeat them and remove the Tide's leadership!"));
+        }
+        return gStringVar4;
+    }
+    return gStringVar4;
+}
+
+const u8 *GetQuestDesc_HowDisappointing(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_HOWDISAPPOINTING);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HOWDISAPPOINTING),MAP_NUM(MAP_QUEST_HOWDISAPPOINTING))->regionMapSectionId,0);
+
+    StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_HOWDISAPPOINTING].desc[flag]);
+
+    if ((flag == FLAG_GET_COMPLETED) && FlagGet(FLAG_TIMELINE_TIMETRAVEL))
+    {
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Raiding the {STR_VAR_1} Gym, brutalizing Adaora and other comrades...? What a crazy dream."));
+        return gStringVar4;
+    }
+
+    if ((flag == FLAG_GET_ACTIVE))
+    {
+        switch (VarGet(VAR_HOWDISAPPOINTING_STATE))
+        {
+            default:
+            case MISSION_ASSIGNED:
+                break;
+            case GYM_RAID_STARTED:
+                StringCopy(gStringVar2,COMPOUND_STRING("east and west sides"));
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Don't let The Tide get away! They're hiding somewhere in the {STR_VAR_2} of {STR_VAR_1}."));
+                break;
+            case GRUNT1_ARRESTED:
+                if (FlagGet(TRAINER_FLAGS_START + TRAINER_HOWDISAPPOINTING_GRUNT1))
+                {
+                    StringCopy(gStringVar2,COMPOUND_STRING("west"));
+                }
+                else
+                {
+                    StringCopy(gStringVar2,COMPOUND_STRING("east"));
+                }
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Don't let The Tide get away! They're hiding somewhere in the {STR_VAR_2} side of {STR_VAR_1}."));
+                break;
+            case GRUNT2_ARRESTED:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("The police have a read on the leader of The Tide's operation trying to escape near the {STR_VAR_1} entrance. Don't let them escape!"));
+                break;
+            case SAVED_BEFORE_ADAORA:
+                StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Defeat and arrest Adaora in {STR_VAR_1}!"));
+                break;
+        }
+    }
+
+    return gStringVar4;
+}
+
+const u8 *GetQuestDesc_Letsburnthismotherdown(void)
+{
+    enum QuestCases flag = ReturnQuestState(QUEST_LETSBURNTHISMOTHERDOWN);
+    GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_LETSBURNTHISMOTHERDOWN),MAP_NUM(MAP_QUEST_LETSBURNTHISMOTHERDOWN))->regionMapSectionId,0);
+
+    if ((flag == FLAG_GET_ACTIVE) && IsTrainerDiscovered(TRAINER_BAIYA_LETSBURNTHISMOTHERDOWN))
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Return to {STR_VAR_1} to finally defeat Baiya!"));
+    else if ((flag == FLAG_GET_COMPLETED) && FlagGet(FLAG_TIMELINE_TIMETRAVEL))
+        StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("Arresting Baiya at {STR_VAR_1} and shutting down The Tide's new base....? What a crazy dream."));
+    else
+        StringExpandPlaceholders(gStringVar4,sSideQuests[QUEST_LETSBURNTHISMOTHERDOWN].desc[flag]);
+
+    return gStringVar4;
+}
 

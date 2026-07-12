@@ -28,6 +28,9 @@ const u8 *GetQuestDesc_Hang20(void);
 const u8 *GetQuestDesc_CulturalPurity(void);
 const u8 *GetQuestDesc_HybridCulture(void);
 const u8 *GetQuestDesc_InstallNatureProbes(void);
+const u8 *GetQuestDesc_Manhunt(void);
+const u8 *GetQuestDesc_HowDisappointing(void);
+const u8 *GetQuestDesc_Letsburnthismotherdown(void);
 
 struct TextComponent
 {
