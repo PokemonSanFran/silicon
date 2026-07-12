@@ -5,9 +5,10 @@ mapscripts ZenzuIsland_MapScripts {
 	}
     MAP_SCRIPT_ON_TRANSITION {
         call(LetsGrabLunch_HideBaiya_Outside_Script)
-        call(Restorezenzugym_Script_HideDoyleOutside)
-        call_if_lt(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Restorezenzugym_Script_MoveDoyle)
         callnative(LetsGrabLunch_IncrementStoryVariable)
+        call_if_quest_complete(QUEST_RESTOREZENZUGYM,Restorezenzugym_Script_HideDoyle)
+        call_if_set(FLAG_TIMELINE_FALSE,Restorezenzugym_Script_HideDoyle)
+        call_if_lt(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Restorezenzugym_Script_MoveDoyle)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [

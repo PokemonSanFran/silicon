@@ -13,12 +13,6 @@ script Restorezenzugym_Script_MoveDoyle
     setobjectmovementtype(LOCALID_ZENZU_DOYLE,MOVEMENT_TYPE_FACE_UP)
 }
 
-script Restorezenzugym_Script_HideDoyleOutside
-{
-    call_if_quest_complete(QUEST_RESTOREZENZUGYM,Restorezenzugym_Script_HideDoyle)
-    call_if_set(FLAG_TIMELINE_FALSE,Restorezenzugym_Script_HideDoyle)
-}
-
 script Quest_Restorezenzygym_Script_StartBattle
 {
     faceplayer

@@ -12,14 +12,15 @@ mapscripts EspuleeOutskirts_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
-        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_HideImelda)
-        call_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_MoveImelda)
         call(EspuleeOutskirts_HideCharlotte_Script)
         call(EspuleeOutskirts_HideLiidia_Script)
         call(IGuessWeShouldBeNiceNow_HidePopup_Script)
         callnative(LetsGrabLunch_IncrementStoryVariable)
         call(Quest_Manofmanyhats_CheckDoorLock_Script)
         call(Quest_Breaktheinternet_EspuleeOutskirtsGirl_Visibility_Script)
+        call_if_quest_complete(QUEST_RESTOREESPULEEGYM,Quest_Restoreespuleeoutskirts_Script_HideImelda)
+        call_if_set(FLAG_TIMELINE_FALSE,Quest_Restoreespuleeoutskirts_Script_HideImelda)
+        call_if_ge(VAR_STORYLINE_STATE,STORY_BAIYA_EXPLAIN_RESTORATION,Quest_Restoreespuleeoutskirts_Script_MoveImelda)
     }
 
     MAP_SCRIPT_ON_FRAME_TABLE [
