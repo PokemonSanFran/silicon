@@ -346,8 +346,16 @@ script Quest_Restorehodoucity_Dialogue_AskAboutGym
   msgbox(format("Did you work at Hodou Gym? Johnny sent me to find you - he’s getting all of the old Gym Trainers together."),,SPEAKER_ALICIA)
 }
 
+script Quest_RestoreHodouCityGym_Script_FalseTimeline
+{
+    closemessage
+    release
+    end
+}
+
 script Quest_RestoreHodouCityGym_Complete_Adam
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_2)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -362,6 +370,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Andreas
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_3)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -376,6 +385,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Justin
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_4)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -390,6 +400,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Jeffrey
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_5)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -404,6 +415,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Dajuan
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_6)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -418,6 +430,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Juan
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_7)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)
@@ -432,6 +445,7 @@ call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVaria
 
 script Quest_RestoreHodouCityGym_Complete_Jason
 {
+    goto_if_true(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREHODOUGYM,SUB_QUEST_8)
     callnative(Quest_Restorehodoucity_CountRemainingSubquestsTryProgressReward)
 call_if_quest_reward(QUEST_RESTOREHODOUGYM,Restorehodoucity_Script_IncreaseVariable)

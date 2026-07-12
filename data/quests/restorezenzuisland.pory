@@ -161,6 +161,10 @@ script RestoreZenzuIsland_Script_HideDrughelmettester
 script RestoreZenzuIsland_Dialogue_RecruitDrughelmettester
 {
     lock
+    if (flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        return
+    }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_2)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     msgbox(format("Drughelmettester, you said you work in audio visual work, right?"),,SPEAKER_ALICIA)
@@ -188,6 +192,10 @@ script RestoreZenzuIsland_Script_HideMonty
 script RestoreZenzuIsland_Dialogue_RecruitMonty
 {
     lock
+    if (flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        return
+    }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_1)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     msgbox(format("Monty, you said you've made a bunch of money doing this, right?"),,SPEAKER_PLAYER)
@@ -216,6 +224,10 @@ script RestoreZenzuIsland_Script_HideImprovtroupe
 script RestoreZenzuIsland_Dialogue_RecruitImprovtroupeA
 {
     lock
+    if (flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        return
+    }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_3)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     msgbox(format("{PLAYER}! We're just taking a break - are you here to get some practice in?"),,SPEAKER_IMPROVTROUPEA)
@@ -246,6 +258,10 @@ script RestoreZenzuIsland_Script_HideArcademini
 script RestoreZenzuIsland_Dialogue_RecruitArcademini
 {
     lock
+    if (flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        return
+    }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_4)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
     msgbox(format("You've returned to administer more punishment, I hope?"),,SPEAKER_ARCADEMINI)
@@ -286,6 +302,10 @@ script RestoreZenzuIsland_Script_HideStresscuporgnanizer
 script RestoreZenzuIsland_Dialogue_RecruitStresscuporgnanizer
 {
     lock
+    if (flag(FLAG_TIMELINE_FALSE) == TRUE)
+    {
+        return
+    }
     subquestmenu(QUEST_MENU_COMPLETE_QUEST,QUEST_RESTOREZENZUGYM,SUB_QUEST_5)
     callnative(Quest_Restorezenzugym_CountRemainingSubquestsTryProgressReward)
 msgbox(format("Man I don't even know where I'd start looking for a job that'd fulfill me."),,SPEAKER_STRESSCUPORGANIZER)
