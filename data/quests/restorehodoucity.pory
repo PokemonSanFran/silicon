@@ -119,12 +119,13 @@ script Restorehodoucity_Script_ControlPewfatVisibility
 
 script Quest_Restorehodoucity_PewfatWalkInside_Script
 {
-    lock
     callnative(Script_Quest_RestoreHodouGym_CheckIfQuestShouldStart)
     if (var(VAR_RESULT) == FALSE)
     {
-        return
+        release
+        end
     }
+    lock
     setvar(VAR_QUEST_RESTOREHODOUGYM,POST_PEWFAT_INTO_GYM)
     delay(15)
     opendoor(22,3)
