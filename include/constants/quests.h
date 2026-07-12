@@ -1367,5 +1367,34 @@ enum
     STATE_QUEST_HYBRID_CULTURE_COMPLETE,
 };
 
+// ***********************************************************************
+// Quest: Lets Burn This Mother Down
+// ***********************************************************************
+//#define QUEST_LETSBURNTHISMOTHERDOWN
+
+#define MAP_QUEST_LETSBURNTHISMOTHERDOWN MAP_ARANTRAZ_HOSPITAL
+
+// ***********************************************************************
+// Quest: How Disappointing
+// ***********************************************************************
+//#define QUEST_HOWDISAPPOINTING
+
+#define MAP_QUEST_HOWDISAPPOINTING MAP_HODOU_CITY
+
+// ***********************************************************************
+// Quest: Manhunt
+// ***********************************************************************
+//#define QUEST_MANHUNT
+
+#define MAP_QUEST_MANHUNT_STOP_1 MAP_PERLACIA_CITY_NEWSPAPER
+#define MAP_QUEST_MANHUNT_STOP_2 MAP_MERMEREZA_CITY_CONSULTING
+#define MAP_QUEST_MANHUNT_STOP_3 MAP_IRISINA_TOWN_BALLS
+#define MAP_QUEST_MANHUNT_STOP_4 MAP_ROUTE98
+#define MAP_QUEST_MANHUNT_STOP_5 MAP_WISHAAST_LAKE
+
+#define TRAINER_QUEST_MANHUNT_CIVILIAN_1 TRAINER_CHERIE
+#define TRAINER_QUEST_MANHUNT_CIVILIAN_2 TRAINER_ALLEN
+#define TRAINER_QUEST_MANHUNT_CIVILIAN_3 TRAINER_TIANA
+#define TRAINER_QUEST_MANHUNT_CIVILIAN_4 TRAINER_SHANNON
 
 #endif // GUARD_CONSTANTS_QUESTS_H
