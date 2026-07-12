@@ -1571,10 +1571,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_MANHUNT] =
     {
-        .name = gText_Quest_Manhunt_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_Manhunt_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_Manhunt_DoneDesc,
-        .map = gText_Quest_Manhunt_Map,
+        .name = COMPOUND_STRING("Manhunt"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Destablize and weaken The Tide by finding and arresting their leader, Vigrim!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("You've arrested Vigrim, leader of The Tide."),
+        .descFunc = GetQuestDesc_Manhunt,
+        .map = COMPOUND_STRING("Resido Region"),
         .sprite = OBJ_EVENT_GFX_VIGRIM,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
@@ -1583,10 +1584,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_HOWDISAPPOINTING] =
     {
-        .name = gText_Quest_HowDisappointing_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_HowDisappointing_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_HowDisappointing_DoneDesc,
-        .map = gText_Quest_HowDisappointing_Map,
+        .name = COMPOUND_STRING("How Disappointing"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Cut off The Tide's recruitment and training centers - raid the {STR_VAR_1} Gym!"),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("The Tide's recruitiment and training was shut down, and Adaora was arrested during the raid."),
+        .descFunc = GetQuestDesc_HowDisappointing,
+        .map = COMPOUND_STRING("Hodou City"),
         .sprite = OBJ_EVENT_GFX_ADAORA,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
@@ -1595,10 +1597,11 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
     },
     [QUEST_LETSBURNTHISMOTHERDOWN] =
     {
-        .name = gText_Quest_LetsBurnThisMotherDown_Name,
-        .desc[FLAG_GET_ACTIVE] = gText_Quest_LetsBurnThisMotherDown_Desc,
-        .desc[FLAG_GET_COMPLETED] = gText_Quest_LetsBurnThisMotherDown_DoneDesc,
-        .map = gText_Quest_LetsBurnThisMotherDown_Map,
+        .name = COMPOUND_STRING("Let's Burn This Mother Down"),
+        .desc[FLAG_GET_ACTIVE] = COMPOUND_STRING("Eliminate The Tide's new base of operations, {STR_VAR_1}. Maybe Baiya can be reasoned with..."),
+        .desc[FLAG_GET_COMPLETED] = COMPOUND_STRING("Baiya was arrested and The Tide has lost their new headquarters."),
+        .descFunc = GetQuestDesc_Letsburnthismotherdown,
+        .map = COMPOUND_STRING("Arantraz"),
         .sprite = OBJ_EVENT_GFX_WALLY,
         .spritetype = QUEST_SPRITE_TYPE_OBJECT,
         .subquests = NULL,
@@ -3204,42 +3207,42 @@ const struct SideQuest sSideQuests[QUEST_COUNT] =
         .numSubquests = QUEST_INSTALLNATUREPROBES_SUB_COUNT,
         .states =
         {
-            [STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_NOT_STARTED] =
             {
                 .name = COMPOUND_STRING("Not Started"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
                 side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
                 .warpId = 0,
             },
-            [STATE_QUEST_INSTALLNATUREPROBES_STARTED] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_STARTED] =
             {
                 .name = COMPOUND_STRING("Started"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
                 side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
                 .warpId = 0,
             },
-            [STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_HILL_PROBE_INSTALLED] =
             {
                 .name = COMPOUND_STRING("Hill Probe Installed"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
                 side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
                 .warpId = 0,
             },
-            [STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_FOREST_PROBE_INSTALLED] =
             {
                 .name = COMPOUND_STRING("Forest Probe Installed"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
                 side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
                 .warpId = 0,
             },
-            [STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_SHORE_PROBE_INSTALLED] =
             {
                 .name = COMPOUND_STRING("Shore Probe Installed"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
                 side_quest_map(MAP_QUEST_INSTALLNATUREPROBES),
                 .warpId = 0,
             },
-            [STATE_QUEST_INSTALLNATUREPROBES_COMPLETE] = 
+            [STATE_QUEST_INSTALLNATUREPROBES_COMPLETE] =
             {
                 .name = COMPOUND_STRING("Complete"),
                 .setupFunc = DebugQuest_InstallNatureProbes,
