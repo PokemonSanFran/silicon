@@ -104,9 +104,10 @@ script Manhunt_Cherie_Battle_Script {
 script Manhunt_StartBattle1_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle1_Script)
-        multi_2_vs_1(TRAINER_CHERIE,format("…Please don't hurt us any further. What do you want?"),PARTNER_CHARLOTTE)
+        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_1,format("…Please don't hurt us any further. What do you want?"),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
+        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_1)
         startcutscene(JUMPPLAYER_MANHUNT_NEWS)
         msgbox(format("Start talking. Who's Vigrim behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
@@ -153,8 +154,9 @@ script Manhunt_Teodoro_Battle_Script {
 script Manhunt_StartBattle2_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle2_Script)
-        multi_2_vs_1(TRAINER_ALLEN,format("Damn punks."),PARTNER_CHARLOTTE)
+        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_2,format("Damn punks."),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_2)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
         startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
 
@@ -220,8 +222,9 @@ script Manhunt_Dudley_Battle_Script
 script Manhunt_StartBattle3_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle3_Script)
-        multi_2_vs_1(TRAINER_TIANA,format("Yikes!"),PARTNER_CHARLOTTE)
+        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_3,format("Yikes!"),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_3)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
         startcutscene(JUMPPLAYER_MANHUNT_BALL)
 
@@ -293,8 +296,9 @@ script Manhunt_Matthew_Battle_Script {
 script Manhunt_StartBattle4_Script
 {
         goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle4_Script)
-        multi_2_vs_1(TRAINER_SHANNON,format("Oh damn, looks like they were right."),PARTNER_CHARLOTTE)
+        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_4,format("Oh damn, looks like they were right."),PARTNER_CHARLOTTE)
         call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_4)
         setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
         startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
 
