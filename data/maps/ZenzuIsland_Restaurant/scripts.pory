@@ -3,7 +3,9 @@ const BAIYA = 3
 
 mapscripts ZenzuIsland_Restaurant_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        call(LetsGrabLunch_HideBaiya_Inside_Script)
+        call_if_le(VAR_STORYLINE_STATE,STORY_SAVE_BAIYA_ZENZU_ISLAND,LetsGrabLunch_HideBaiya_Inside_Script)
+        call_if_ge(VAR_STORYLINE_STATE,STORY_RESTORATION_1_COMPLETE,LetsGrabLunch_HideBaiya_Inside_Script)
+        call_if_set(FLAG_TIMELINE_FALSE,LetsGrabLunch_HideBaiya_Inside_Script)
         call(Quest_Manofmanyhats_Liidia_Waiter_Visibility_Script)
     }
 

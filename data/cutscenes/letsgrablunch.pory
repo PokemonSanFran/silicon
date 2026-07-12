@@ -4,17 +4,14 @@ const FLAG_HIDE_BAIYA = FLAG_TEMP_2
 
 //the quest log should also reflect this
 
-script LetsGrabLunch_HideBaiya_Outside_Script{
-    if (var(VAR_STORYLINE_STATE) != STORY_SAVE_BAIYA_ZENZU_ISLAND){
-        setflag(FLAG_HIDE_BAIYA)
-    }
-    return
+script LetsGrabLunch_HideBaiya_Outside_Script
+{
+    setobjectflagfromlocalid(LOCALID_ZENZU_ISLAND_BAIYA)
 }
-script LetsGrabLunch_HideBaiya_Inside_Script{
-    if (var(VAR_STORYLINE_STATE) != STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND && var(VAR_STORYLINE_STATE) != STORY_BAIYA_EXPLAIN_RESTORATION){
-        setflag(FLAG_HIDE_BAIYA)
-    }
-    return
+
+script LetsGrabLunch_HideBaiya_Inside_Script
+{
+    setobjectflagfromlocalid(LOCALID_HODOU_RESTAURANT_BAIYA)
 }
 
 script LetsGrabLunch_StartConversation_Dialogue {
