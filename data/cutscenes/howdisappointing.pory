@@ -477,7 +477,7 @@ script HowDisappointing_GiveNextDirection_Script
     else
 
    {
-        msgbox(format("We got a call that the leader was trying to flee near the village entrance. Get after 'em!"))
+        msgbox(format("We got a call that the leader was trying to flee near the city entrance. Get after 'em!"))
     }
     closemessage
     return
