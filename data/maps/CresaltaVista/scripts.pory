@@ -28,6 +28,7 @@ script CresaltaVista_Dialogue_Johnny
 {
     buffermapname(STR_VAR_1,MAP_QUEST_RESTOREHODOUGYM_ORIGIN)
     msgbox(format("I moved here from {STR_VAR_1} after I lost my job."),MSGBOX_NPC,SPEAKER_JOHNNY)
+    goto_if_set(FLAG_TIMELINE_FALSE,Quest_RestoreHodouCityGym_Script_FalseTimeline)
     goto_if_eq(VAR_QUEST_RESTOREHODOUGYM,FIND_HODOU_CITY_LEADER,Quest_Restorehodoucity_FirstJohnny_Interact_Script)
 }
 
