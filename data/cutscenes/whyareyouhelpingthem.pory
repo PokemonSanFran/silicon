@@ -88,7 +88,7 @@ script WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script {
     return
 }
 
-script WhyAreYouHelpingThem_StartRaid 
+script WhyAreYouHelpingThem_StartRaid
 {
     lock
     setvar(VAR_NAVAL_BASE_STATE,NAVAL_BASE_RAID_START)
@@ -175,6 +175,7 @@ script WhyAreYouHelpingThem_PostBattleBoss_Dialogue{
                 applymovement(VIGRIM,Common_Movement_WalkInPlaceLeft)
                 waitmovement(0)
                 giveitem(ITEM_MASTER_BALL,1)
+                clearflag(TRAINER_FLAGS_START + TRAINER_VIGRIM)
 
         }else {
 
