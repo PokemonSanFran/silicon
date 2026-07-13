@@ -1397,4 +1397,10 @@ enum
 #define TRAINER_QUEST_MANHUNT_CIVILIAN_3 TRAINER_TIANA
 #define TRAINER_QUEST_MANHUNT_CIVILIAN_4 TRAINER_SHANNON
 
+// ***********************************************************************
+// Cutscene: Manhunt
+// ***********************************************************************
+
+#define CHARLOTTE_MON_INDEX                    5
+
 #endif // GUARD_CONSTANTS_QUESTS_H

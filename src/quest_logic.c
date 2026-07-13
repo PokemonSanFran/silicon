@@ -5852,3 +5852,37 @@ void AndWeMarchOn_BufferAttacks(void)
     StringCopy(gStringVar1,GetMoveName(move[0]));
     StringCopy(gStringVar2,GetMoveName(move[1]));
 }
+
+// ***********************************************************************
+// Cutscene: Manhunt
+// ***********************************************************************
+
+void Manhunt_LoadCharlotteMon(void)
+{
+    u32 trainerId = PARTNER_CHARLOTTE;
+    u32 index = CHARLOTTE_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    Quest_Generic_LoadTrainersMonToOWVar(trainerId,index,VAR_OBJ_GFX_ID_0,&gBattlePartners[0][0],PARTNER_COUNT);
+}
+
+void Manhunt_BufferCharlotteMonName(void)
+{
+    u32 trainerId = PARTNER_CHARLOTTE;
+    u32 index = CHARLOTTE_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    StringCopy(gStringVar1,GetSpeciesName(mon.species));
+}
+
+void Manhunt_GetCharlotteMonCry(void)
+{
+    u32 trainerId = PARTNER_CHARLOTTE;
+    u32 index = CHARLOTTE_MON_INDEX;
+    index = Quest_Generic_GetIndexForMonTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+    const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainerId,index,&gBattlePartners[0][0],PARTNER_COUNT);
+
+    enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
+    PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
