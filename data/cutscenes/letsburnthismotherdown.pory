@@ -84,7 +84,7 @@ script LetsBurnThisMotherDown_StartQuest_Dialogue
         case FALSE_TIMELINE_MAN_HOW_COMPLETE:
             msgbox(format("I don't want a repeat of what happened to Adaora."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
         case FALSE_TIMELINE_MAN_COMPLETE:
-            msgbox(format("Maybe without Alcemene he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
+            msgbox(format("Maybe without Vigrim he'll finally listen to reason."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
     }
 
     msgbox(format("I think I can still help him. I need to get to Arantraz."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
