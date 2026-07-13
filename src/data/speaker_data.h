@@ -1244,7 +1244,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
     [SPEAKER_CHERIE] =
     {
         .name = COMPOUND_STRING("Cherie"),
-        .title = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Reporter"),
         .gender = NON_HUMAN,
         .speakerIcon = gSpeakerIcon_Medium,
         .speakerPal = sSpeakerPal_Medium,
@@ -2216,7 +2216,7 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
-    
+
     [SPEAKER_BODEGABURNOUTDELIVERYSTRENGTHH] =
     {
         .name = COMPOUND_STRING("Bodegaburnoutdeliverystrengthh"),
