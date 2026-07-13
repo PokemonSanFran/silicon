@@ -1,60 +1,70 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 
-mapscripts CuconuTown_SharpriseCompound_2F_MapScripts {
-    MAP_SCRIPT_ON_FRAME_TABLE [
+mapscripts CuconuTown_SharpriseCompound_2F_MapScripts
+{
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
         VAR_PLAYER_HOME_STATE, HAS_MET_CHARLOTTE: Swagbag_IncrementState_Script
     ]
 }
 
-script CuconuTown_Compound_2F_Bed_Script {
+script CuconuTown_Compound_2F_Bed_Script
+{
     lock
-        //If has not visited Arantraz after being called there by Baiya, prevent player from sleeping
-        call(YouRealizeTheyreEvilRight_CantSleep_Script)
+    //If has not visited Arantraz after being called there by Baiya, prevent player from sleeping
+    call(YouRealizeTheyreEvilRight_CantSleep_Script)
 
-        //Heal Player
-        callnative(HealPlayerParty)
+    callnative(HealPlayerParty)
 
-        fadescreen(FADE_TO_BLACK) //Player closes their eyes
-        delay(16)
+    fadescreen(FADE_TO_BLACK) //Player closes their eyes
+    delay(16)
 
-        //Ask the player when they should go to bed
-        gettime
-
-        call(BedScript_SetNewTime_Script)
-        goto(BedScript_AdvanceStory_Script)
+    //Ask the player when they should go to bed
+    call(BedScript_SetNewTime_Script)
+    goto(BedScript_AdvanceStory_Script)
 }
 
-script BedScript_SetNewTime_Script{
-    random(4)
-    switch(var(VAR_RESULT))
+script BedScript_SetNewTime_Script
+{
+    gettimeofday
+    switch(var(VAR_0x8000))
     {
         default:
-        case TIME_MORNING: bufferstring(STR_VAR_3,gText_BedScript_Morning)
-        case TIME_DAY: bufferstring(STR_VAR_3,gText_BedScript_Day)
-        case TIME_EVENING: bufferstring(STR_VAR_3,gText_BedScript_Evening)
-        case TIME_NIGHT: bufferstring(STR_VAR_3,gText_BedScript_Night)
+        case TIME_MORNING: bufferstring(STR_VAR_3,format("I'm still a little bit tired..."))
+        case TIME_DAY: bufferstring(STR_VAR_3,format("I could go for a nap."))
+        case TIME_EVENING: bufferstring(STR_VAR_3,format("I should get to bed early tonight!"))
+        case TIME_NIGHT: bufferstring(STR_VAR_3,format("Wow, it's late!"))
     }
+
+    if (var(VAR_STORYLINE_STATE) == STORY_NEED_SLEEP_BEFORE_FRANK)
+    {
+        closemessage
+        return
+    }
+
     msgbox(format("{STR_VAR_3}\nI'll wake up again at..."),,SPEAKER_ALICIA)
 
-    dynmultichoice(1,1,FALSE,3,0,NULL,gText_Morning, gText_Day, gText_Evening,gText_Night,"Not tired yet.")
+    dynmultichoice(1,1,FALSE,3,0,NULL,"Morning", "Day", "Evening", "Night", "Not tired yet.")
     closemessage
     switch(var(VAR_RESULT))
     {
-        case TIME_MORNING: initclock(MORNING_HOUR_BEGIN,0)
-        case TIME_DAY: initclock(DAY_HOUR_BEGIN,0)
-        case TIME_EVENING: initclock(EVENING_HOUR_BEGIN,0)
-        case TIME_NIGHT: initclock(NIGHT_HOUR_BEGIN,0)
+        case TIME_MORNING: fwdtime(MORNING_HOUR_BEGIN,0)
+        case TIME_DAY: fwdtime(DAY_HOUR_BEGIN,0)
+        case TIME_EVENING: fwdtime(EVENING_HOUR_BEGIN,0)
+        case TIME_NIGHT: fwdtime(NIGHT_HOUR_BEGIN,0)
         case MULTI_B_PRESSED: goto(BedScript_CancelSleep_Script)
     }
     return
 }
 
-script BedScript_CancelSleep_Script{
+script BedScript_CancelSleep_Script
+{
     fadescreen(FADE_FROM_BLACK)
     end
 }
 
-script BedScript_AdvanceStory_Script{
+script BedScript_AdvanceStory_Script
+{
     switch(var(VAR_STORYLINE_STATE))
     {
         case STORY_NOT_STARTED: call(TwoHoursAgo_GiveFashionCase_Script)
@@ -71,30 +81,5 @@ script BedScript_AdvanceStory_Script{
         fadescreen(FADE_FROM_BLACK)
         release
         end
-}
-
-text gText_BedScript_Morning
-{
-    format("I'm still a bit tired...")
-}
-
-text gText_BedScript_Day
-{
-    format("I could go for a nap.")
-}
-
-text gText_BedScript_Evening
-{
-    format("I should get to bed early tonight!")
-}
-
-text gText_BedScript_Night
-{
-    format("Wow, it's late!")
-}
-
-text gText_BedScript_WhenShouldWake
-{
-    format("{STR_VAR_3}\nI'll wake up again at...")
 }
 

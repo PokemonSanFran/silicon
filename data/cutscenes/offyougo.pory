@@ -24,44 +24,46 @@ script OffYouGo_WarpPlayer_Script{
     return
 }
 
-script OffYouGo_WakeUp_Dialogue {
-        startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
-        setvar(VAR_GOLDENGATEBRIDGE_STATE,CALLED_BY_CHARLOTTE)
-        setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_FRANK_QUESTS)
-        playse(SE_POKENAV_CALL)
-        waitse
-        playse(SE_POKENAV_CALL)
-        waitmessage
-        msgbox(format("Huh? Hello?"),,SPEAKER_ALICIA,,PHONE_ON)
+script OffYouGo_WakeUp_Dialogue
+{
+    fwdtime(MORNING_HOUR_BEGIN,0)
+    startcutscene(JUMPPLAYER_OFFYOUGO_PHONE)
+    setvar(VAR_GOLDENGATEBRIDGE_STATE,CALLED_BY_CHARLOTTE)
+    setvar(VAR_STORYLINE_STATE,STORY_ASSIGNED_FRANK_QUESTS)
+    playse(SE_POKENAV_CALL)
+    waitse
+    playse(SE_POKENAV_CALL)
+    waitmessage
+    msgbox(format("Huh? Hello?"),,SPEAKER_ALICIA,,PHONE_ON)
 
-        msgbox(format("Hey, where are you? Are you still asleep?"),,SPEAKER_CHARLOTTE,,PHONE_ON)
+    msgbox(format("Hey, where are you? Are you still asleep?"),,SPEAKER_CHARLOTTE,,PHONE_ON)
 
-        msgbox(format("…yeah, I'm in bed."),,SPEAKER_ALICIA,,PHONE_ON)
+    msgbox(format("…yeah, I'm in bed."),,SPEAKER_ALICIA,,PHONE_ON)
 
-        msgbox(format("Come on get up, didn't you see Oliver's text? We're waiting for you!"),,SPEAKER_CHARLOTTE,,PHONE_ON)
+    msgbox(format("Come on get up, didn't you see Oliver's text? We're waiting for you!"),,SPEAKER_CHARLOTTE,,PHONE_ON)
 
-        msgbox(format("Waiting for me…? Hold on, let me read…"),,SPEAKER_ALICIA,,PHONE_ON)
+    msgbox(format("Waiting for me…? Hold on, let me read…"),,SPEAKER_ALICIA,,PHONE_ON)
 
-        closemessage
+    closemessage
 
-        msgbox(format("Oliver: {PLAYER} and Charlotte, please meet me on the northern side of PiocaBridge. (32 mins ago)"))
+    msgbox(format("Oliver: {PLAYER} and Charlotte, please meet me on the northern side of PiocaBridge. (32 mins ago)"))
 
-        msgbox(format("Charlotte: I'll be right over! (31 mins ago)"),,SPEAKER_CHARLOTTE,,PHONE_ON)
+    msgbox(format("Charlotte: I'll be right over! (31 mins ago)"),,SPEAKER_CHARLOTTE,,PHONE_ON)
 
-        msgbox(format("Yeah, I didn't see that. I guess I'm on my way."),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, I didn't see that. I guess I'm on my way."),,SPEAKER_ALICIA)
 
-        msgbox(format("Ugh, fine, get your ass down here!"),,SPEAKER_CHARLOTTE)
+    msgbox(format("Ugh, fine, get your ass down here!"),,SPEAKER_CHARLOTTE)
 
-        closemessage
+    closemessage
 
-        playse(SE_POKENAV_HANG_UP)
-        waitse
+    playse(SE_POKENAV_HANG_UP)
+    waitse
 
-        msgbox(format("(How are they always up so early…?)"),,SPEAKER_ALICIA,TAIL_THOUGHT)
+    msgbox(format("(How are they always up so early…?)"),,SPEAKER_ALICIA,TAIL_THOUGHT)
 
-        closemessage
-        call(TryAutoSave)
-        endcutscene
+    closemessage
+    call(TryAutoSave)
+    endcutscene
 }
 
 script OffYouGo_WelcomeParty_Dialogue {
