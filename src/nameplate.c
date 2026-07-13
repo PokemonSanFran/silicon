@@ -38,6 +38,33 @@ static u32 GetSpeakerTitleWidth(u32 speaker);
 static void PlaceNameplateOnTilemap(u32 windowId);
 static void PrintSpeakerName(u32 windowId, enum NameplateSpeaker speaker);
 static void PrintSpeakerTitle(u32 windowId, enum NameplateSpeaker speaker);
+static const u32* GetSpeakerIcon(enum NameplateSpeaker speaker);
+static const u16* GetSpeakerPal(enum NameplateSpeaker speaker);
+
+const u8* GetSpeakerName(enum NameplateSpeaker speaker)
+{
+    return sSpeakerData[speaker].name;
+}
+
+const u8* GetSpeakerTitle(enum NameplateSpeaker speaker)
+{
+    return sSpeakerData[speaker].title;
+}
+
+static enum Gender GetSpeakerGender(void)
+{
+    return sSpeakerData[VarGet(VAR_MSGBOX_SPEAKER)].gender;
+}
+
+static const u32* GetSpeakerIcon(enum NameplateSpeaker speaker)
+{
+    return sSpeakerData[speaker].speakerIcon;
+}
+
+static const u16* GetSpeakerPal(enum NameplateSpeaker speaker)
+{
+    return sSpeakerData[speaker].speakerPal;
+}
 
 //WindowId + 1, 0 if window is not open
 static EWRAM_DATA u8 sMugshotWindow = 0;
@@ -362,12 +389,12 @@ u32 CreateNameplateWindow(void)
 
 static void BufferSpeakerTitle(u32 speaker)
 {
-    StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE],sSpeakerData[speaker].title);
+    StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE],GetSpeakerTitle(speaker));
 }
 
 static void BufferSpeakerName(u32 speaker)
 {
-    StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME],sSpeakerData[speaker].name);
+    StringExpandPlaceholders(nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME],GetSpeakerName(speaker));
 }
 
 u32 GetSpeakerNameWidth(u32 speaker, u32 phone)
@@ -387,11 +414,6 @@ u32 GetSpeakerNameWidth(u32 speaker, u32 phone)
     return (phoneMargin + GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME], letterSpacing));
 }
 
-static enum Gender GetSpeakerGender(void)
-{
-    return sSpeakerData[VarGet(VAR_MSGBOX_SPEAKER)].gender;
-}
-
 u32 GetSpeakerTitleWidth(u32 speaker)
 {
     u32 letterSpacing = GetFontAttribute(FONT_SPEAKER_NAME, FONTATTR_LETTER_SPACING);
@@ -405,7 +427,7 @@ u32 GetSpeakerTitleWidth(u32 speaker)
     if (sSpeakerData[speaker].title[0] == '\0')
         return defaultLength;
 
-    return GetStringWidth(FONT_SPEAKER_NAME, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE], letterSpacing);
+    return GetStringWidth(FONT_SPEAKER_TITLE, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE], letterSpacing);
 }
 
 static u32 CalculateNameplateTileWidth(u32 nameplateWidth)
@@ -422,7 +444,7 @@ static u32 CalculateNameplateWidth(u32 nameWidth, u32 titleWidth)
     else
         width = (35 + nameWidth);
 
-    return max(width,MAX_TITLE_LENGTH);
+    return max(width,MIN_TITLE_LENGTH);
 }
 
 void DrawTopMessageBoxTiles(u32 windowId, u32 firstTileOffset, u32 middleTileOffset, u32 lastTileOffset)
@@ -512,14 +534,14 @@ static void CreateSpeakerIconSprite(u32 nameplateWidth, enum NameplateSpeaker sp
 
     u32 spriteTag = GFXTAG_SPEAKER_ICON;
     struct SpriteSheet sSpriteSheet_Speaker;
-    sSpriteSheet_Speaker.data = sSpeakerData[speaker].speakerIcon;
+    sSpriteSheet_Speaker.data = GetSpeakerIcon(speaker);
     sSpriteSheet_Speaker.size = 2048;
     sSpriteSheet_Speaker.tag = spriteTag;
     LoadSpriteSheet(&sSpriteSheet_Speaker);
 
     u32 palTag = PALTAG_SPEAKER_ICON | BLEND_IMMUNE_FLAG;
     struct SpritePalette sSpritePalette_Speaker;
-    sSpritePalette_Speaker.data = sSpeakerData[speaker].speakerPal;
+    sSpritePalette_Speaker.data = GetSpeakerPal(speaker);
     sSpritePalette_Speaker.tag = palTag;
     LoadSpritePalette(&sSpritePalette_Speaker);
 

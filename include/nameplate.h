@@ -20,5 +20,7 @@ void ForceClearMessageBoxData(void);
 void RandomizeNameplate(void);
 void DrawTopMessageBoxTiles(u32, u32, u32, u32);
 void LoadNameplatePalette(enum Gender gender);
+const u8* GetSpeakerName(enum NameplateSpeaker speaker);
+const u8* GetSpeakerTitle(enum NameplateSpeaker speaker);
 
 #endif // GUARD_UI_MUGSHOT

@@ -452,7 +452,7 @@ enum NameplatePhone
 #define SPEAKER_NAME_X                                 4
 #define SPEAKER_NAME_Y                                 12
 #define SPEAKER_TITLE_Y                                1
-#define MAX_TITLE_LENGTH                               68
+#define MIN_TITLE_LENGTH                               68
 
 #define GFXTAG_SPEAKER_ICON                            10019
 #define PALTAG_SPEAKER_ICON                            (10029 | BLEND_IMMUNE_FLAG)
