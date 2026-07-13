@@ -1,4 +1,4 @@
-mapscripts PerlaciaCity_Newspaper_MapScripts
+mapscripts Oroland_Newspaper_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
     {

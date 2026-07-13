@@ -1101,16 +1101,20 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
             .healLocation = HEAL_LOCATION_PERLACIA_CITY_BOOMERS,
         },
         {
-            .name = COMPOUND_STRING("Newspaper"),
-            .healLocation = HEAL_LOCATION_PERLACIA_CITY_NEWSPAPER,
-        },
-        {
             .name = COMPOUND_STRING("Sanitation"),
             .healLocation = HEAL_LOCATION_PERLACIA_CITY_SANITATION,
         },
         {
             .name = COMPOUND_STRING("Sharprise Spire"),
             .healLocation = HEAL_LOCATION_SHARPRISESPIRE,
+        },
+    },
+
+    [MAPSEC_OROLAND] =
+    {
+        {
+            .name = COMPOUND_STRING("Newspaper"),
+            .healLocation = HEAL_LOCATION_OROLAND_NEWSPAPER,
         },
     },
 };
@@ -2787,7 +2791,7 @@ static void PrintWarpFailedHeaderTitleToWindow()
                 }
                 else
                 {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet.")); 
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You cannot take Arriba here yet."));
                 }
                 break;
             }
@@ -3992,7 +3996,7 @@ static u8 HandleWarpFailedNoCash(void)
 
 }
 
-static u8 HandleWarpFailedNotVisited(void) 
+static u8 HandleWarpFailedNotVisited(void)
 {
     switch(sRegionMap->warpCounter)
     {
@@ -4028,7 +4032,7 @@ static u8 HandleWarpFailedNotVisited(void)
     return MAP_INPUT_NONE;
 }
 
-static void HandleTrolleyWarpFailedNotVisited(u8 taskId) 
+static void HandleTrolleyWarpFailedNotVisited(u8 taskId)
 {
     switch(sRegionMap->warpCounter)
     {

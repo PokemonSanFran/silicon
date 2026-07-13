@@ -41,12 +41,12 @@ script Manhunt_Assignment_Dialogue
     lock
 
         setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_VIGRIM)
-        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_NEWSPAPER)
+        buffermapname(STR_VAR_1,MAP_OROLAND_NEWSPAPER)
         msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in {STR_VAR_1} is a good place to start, they ran a story on The Tide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
 
         call(TryAutoSave)
         startquest(QUEST_MANHUNT)
-        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_NEWSPAPER)
+        buffermapname(STR_VAR_1,MAP_OROLAND_NEWSPAPER)
         msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
         if (var(VAR_RESULT))
         {

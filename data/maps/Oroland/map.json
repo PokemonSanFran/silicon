@@ -204,7 +204,7 @@
       "x": 16,
       "y": 13,
       "elevation": 0,
-      "dest_map": "MAP_PERLACIA_CITY_NEWSPAPER",
+      "dest_map": "MAP_OROLAND_NEWSPAPER",
       "dest_warp_id": "WARP_ID_NEWSPAPER_TO_OROLAND"
     }
   ],

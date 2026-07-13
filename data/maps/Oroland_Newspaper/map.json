@@ -1,7 +1,7 @@
 {
-  "id": "MAP_PERLACIA_CITY_NEWSPAPER",
-  "name": "PerlaciaCity_Newspaper",
-  "layout": "LAYOUT_PERLACIA_CITY_NEWSPAPER",
+  "id": "MAP_OROLAND_NEWSPAPER",
+  "name": "Oroland_Newspaper",
+  "layout": "LAYOUT_OROLAND_NEWSPAPER",
   "music": "MUS_PETALBURG",
   "region_map_section": "MAPSEC_OROLAND",
   "requires_flash": false,

@@ -2402,7 +2402,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_PERLACIA_CITY_NEWSPAPER,
+        .textTargetValue = MAP_OROLAND_NEWSPAPER,
       },
     },
     .textCondition = 
@@ -2427,7 +2427,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
-        .textTargetValue = MAP_PERLACIA_CITY_NEWSPAPER,
+        .textTargetValue = MAP_OROLAND_NEWSPAPER,
       },
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,

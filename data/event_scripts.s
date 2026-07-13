@@ -2084,7 +2084,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/maps/PerlaciaCity/scripts.inc"
 .include "data/maps/PerlaciaCity_Gym/scripts.inc"
 .include "data/maps/PerlaciaCity_Gym_Entrance/scripts.inc"
-.include "data/maps/PerlaciaCity_Newspaper/scripts.inc"
+.include "data/maps/Oroland_Newspaper/scripts.inc"
 .include "data/maps/PerlaciaCity_PokemonCenter_1F/scripts.inc"
 .include "data/maps/PerlaciaCity_Sanitation/scripts.inc"
 .include "data/maps/PerlaciaCity_Startup/scripts.inc"

@@ -11299,16 +11299,16 @@
       "layout_version": "emerald"
     },
     {
-      "id": "LAYOUT_PERLACIA_CITY_NEWSPAPER",
-      "name": "PerlaciaCity_Newspaper_Layout",
+      "id": "LAYOUT_OROLAND_NEWSPAPER",
+      "name": "Oroland_Newspaper_Layout",
       "width": 16,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Facility",
-      "border_filepath": "data/layouts/PerlaciaCity_Newspaper/border.bin",
-      "blockdata_filepath": "data/layouts/PerlaciaCity_Newspaper/map.bin",
+      "border_filepath": "data/layouts/Oroland_Newspaper/border.bin",
+      "blockdata_filepath": "data/layouts/Oroland_Newspaper/map.bin",
       "layout_version": "emerald"
     },
     {
