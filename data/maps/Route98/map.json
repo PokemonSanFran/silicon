@@ -31,6 +31,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE98_MATTHEW",
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
       "x": 23,
       "y": 22,
@@ -40,7 +41,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route98_InteractMatthew_Event_Script",
+      "script": "Route98_Dialogue_InteractMatthew",
       "flag": "FLAG_TEMP_1"
     },
     {

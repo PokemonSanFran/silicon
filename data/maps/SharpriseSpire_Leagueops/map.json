@@ -94,6 +94,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_LEAGUEOPS_RAMESH",
       "graphics_id": "OBJ_EVENT_GFX_RAMESH",
       "x": 21,
       "y": 27,

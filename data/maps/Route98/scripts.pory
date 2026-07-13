@@ -1,5 +1,3 @@
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
-
 mapscripts Route98_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
@@ -22,8 +20,21 @@ script Route98_RouteFlag_Script{
 	return
 }
 
-script Route98_MapScripts_OnTransition {
-    setflag(FLAG_HIDE_CHARLOTTE)
+script Route98_MapScripts_OnTransition
+{
+}
+
+script Route98_Dialogue_InteractMatthew
+{
+    lock
+    call_if_ge(VAR_MASK_OFF_STATE,GOT_MASK_OFF_CLUE_4,Maskoff_Dialogue_Matthew)
+    call_if_set(FLAG_TIMELINE_FALSE,Manhunt_Dialogue_Matthew)
+    buffermapname(STR_VAR_1,MAP_OROLAND)
+    faceplayer
+    msgbox(format("“Wishaast”, it's a weird name, right? Well, it's named after an old {STR_VAR_1} mayor. He played a big part in turning this place from a wild marsh into what it is today - some of it was even incorporated into {STR_VAR_1} itself!"),,SPEAKER_MATTHEW)
+    closemessage
+    release
+    end
 }
 
 script Route98_InteractMatthew_Event_Script {
@@ -35,14 +46,6 @@ script Route98_InteractMatthew_Event_Script {
             default: msgbox("...",MSGBOX_AUTOCLOSE)
         }
         } else {
-            switch(var(VAR_MASK_OFF_STATE)){
-                case NOT_ASSIGNED:
-                case ASSIGNED_MASK_OFF:
-                case GOT_MASK_OFF_CLUE_1:
-                case GOT_MASK_OFF_CLUE_2:
-                case GOT_MASK_OFF_CLUE_3: return
-                default: call(MaskOff_QuestE_Dialogue)
-            }
         }
     release
         end

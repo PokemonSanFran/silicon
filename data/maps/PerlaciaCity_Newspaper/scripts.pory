@@ -1,27 +1,20 @@
-mapscripts PerlaciaCity_Newspaper_MapScripts{
-    MAP_SCRIPT_ON_TRANSITION {
-        call(Manhunt_HideCharlotte_Newspaper_Script)
+mapscripts PerlaciaCity_Newspaper_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
         call(Quest_Redomugging_Hide_Victim_Script)
     }
 }
 
-script PerlaciaCity_Newspaper_InteractCherie_Event_Script {
+script PerlaciaCity_Dialogue_InteractCherie
+{
     lock
-
-        if (flag(FLAG_TIMELINE_FALSE)){
-            switch(var(VAR_MANHUNT_STATE)){
-                case NOT_ASSIGNED: return
-                case ASSIGNED_FIND_VIGRIM: call(Manhunt_Cherie_Battle_Script)
-                default: msgbox("...",MSGBOX_AUTOCLOSE)
-            }
-
-        } else {
-            switch(var(VAR_MASK_OFF_STATE)){
-                case 0: return
-                case 8: return
-                default: call(MaskOff_QuestH_Dialogue)
-            }
-        }
+    goto_if_ge(VAR_MASK_OFF_STATE,ASSIGNED_MASK_OFF,Maskoff_Dialogue_Cherie)
+    call_if_set(FLAG_TIMELINE_FALSE,Manhunt_Dialogue_Cherie)
+    buffermapname(STR_VAR_1,MAP_MERMEREZA_CITY)
+    faceplayer
+    msgbox(format("Eleanor wasn't the only old Elite Four member who came from {STR_VAR_1}, there was also Armando. They were close friends I hear - at least until she disappeared, that is."),,SPEAKER_CHERIE)
+    closemessage
     release
-        end
+    end
 }

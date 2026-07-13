@@ -31,7 +31,7 @@ mapscripts SharpriseSpire_Leagueops_MapScripts{
                 call(CongratsYoureanAsshole_ObjectCleanUp_Script)
                 call(YouHaveYourOrders_ObjectSetUp_Script)
                 call(LetsBurnThisMotherDown_ShowLucrezia_Script)
-                call(Manhunt_ShowRamesh_Script)
+                call_if_quest_complete(QUEST_MANHUNT,Manhunt_Script_HideRamesh)
             case TRUE_RAID_START:
                   call(SharpriseSpire_Leagueops_TrueTimeline_Objects_Script)
             default: call(SharpriseSpire_Leagueops_EmptyConferenceRoomOffices)

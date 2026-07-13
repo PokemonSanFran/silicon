@@ -1,24 +1,10 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const RAMESH = 2
-const CHARLOTTE = 2
-const FLAG_HIDE_VIGRIM = FLAG_TEMP_1
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_2
-const MATTHEW = 1
+const LOCALID_MANHUNT_CHARLOTTE = LOCALID_CAMERA + 1
+const LOCALID_MANHUNT_CHARLOTTE_MON = LOCALID_CAMERA + 2
 
-const FLAG_HIDE_NERDS_COPS_SHARPRISESPIRE = FLAG_TEMP_1
-const FLAG_HIDE_CHARLOTTE_SHARPRISESPIRE = FLAG_TEMP_3
-const FLAG_HIDE_RAMESH_SHARPRISESPIRE = FLAG_TEMP_5
-
-script Manhunt_HideCharlotte_Newspaper_Script{
-    setflag(FLAG_HIDE_CHARLOTTE)
-    return
-}
-
-script Manhunt_ShowRamesh_Script{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_MANHUNT)
-    if(var(VAR_RESULT)){
-        setflag(FLAG_HIDE_RAMESH_SHARPRISESPIRE)
-    }
+script Manhunt_Script_HideRamesh
+{
+    setobjectflagfromlocalid(LOCALID_LEAGUEOPS_RAMESH)
 }
 
 script Manhunt_HideVigrim_Script
@@ -26,12 +12,8 @@ script Manhunt_HideVigrim_Script
     setobjectflagfromlocalid(LOCALID_LAKE_WISHAAST_VIGRIM)
 }
 
-script Manhunt_HideCharlotte_Script{
-    setflag(FLAG_HIDE_CHARLOTTE)
-    return
-}
-
-script Manhunt_Interact_Ramesh_Script{
+script Manhunt_Interact_Ramesh_Script
+{
     returnqueststate(QUEST_MANHUNT)
 
     switch(var(VAR_RESULT))
@@ -42,31 +24,34 @@ script Manhunt_Interact_Ramesh_Script{
     }
 }
 
-script Manhunt_ActiveQuest_Dialogue{
+script Manhunt_ActiveQuest_Dialogue
+{
     msgbox(format("Every second that I'm up here, I'm losing time on the upcoming promo… I hope you're able to track Vigrim down soon."),MSGBOX_NPC,SPEAKER_RAMESH)
     end
 }
 
-script Manhunt_CompleteQuest_Dialogue{
+script Manhunt_CompleteQuest_Dialogue
+{
     msgbox(format("I'll be back in the Production studio if you need me."),MSGBOX_NPC,SPEAKER_RAMESH)
     end
 }
 
-script Manhunt_Assignment_Dialogue {
+script Manhunt_Assignment_Dialogue
+{
     lock
 
         setvar(VAR_MANHUNT_STATE,ASSIGNED_FIND_VIGRIM)
-
-        msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in Perlacia City is a good place to start, they ran a story on The Tide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
+        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_NEWSPAPER)
+        msgbox(format("Go find Vigrim. Charlotte will help. The newspaper in {STR_VAR_1} is a good place to start, they ran a story on The Tide last year."),MSGBOX_NPC,SPEAKER_RAMESH)
 
         call(TryAutoSave)
         startquest(QUEST_MANHUNT)
-        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY)
+        buffermapname(STR_VAR_1,MAP_PERLACIA_CITY_NEWSPAPER)
         msgbox(format("Do you want to go to {STR_VAR_1}?"),MSGBOX_YESNO)
         if (var(VAR_RESULT))
         {
             fadeblackandsetremovewarpfadeflag
-            warpsilent(MAP_PERLACIA_CITY,6,20)
+            warpsilent(MAP_OROLAND,WARP_ID_OROLAND_TO_CENTER)
 			waitstate
         }
     closemessage
@@ -75,56 +60,94 @@ script Manhunt_Assignment_Dialogue {
 }
 
 //PerlaciaCity
-script Manhunt_Cherie_Battle_Script {
-    lock
-        playse(SE_EXIT)
-        waitse
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
-        applymovement(CHARLOTTE, moves(walk_down * 3, walk_left * 3, walk_down * 2, step_end))
 
-        msgbox(format("Hey, we're trying to find Vigrim, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
-
-        msgbox(format("Yeah, I wrote the The Tide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Vigrim… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
-
-        msgbox(format("Blessed? The Tide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
-
-        msgbox(format("…wait. You're that {PLAYER} kid, aren't you? "),,SPEAKER_CHERIE)
-
-        msgbox(format("That's us."),,SPEAKER_ALICIA)
-
-        msgbox(format("I should have recognized you two sooner. What're you doing snooping around here? Haven't you two helped enough? "),,SPEAKER_CHERIE)
-
-        msgbox(format("Hey, we just want to talk!"),,SPEAKER_ALICIA)
-
-        msgbox(format("As a matter of fact, get the hell out of here. Everything you two do is just hurting the region and lining the pockets of people who don't even care. Get out!"),,SPEAKER_CHERIE)
-        closemessage
-        goto(Manhunt_StartBattle1_Script)
+script Manhunt_Dialogue_Cherie
+{
+    goto_if_ge(VAR_MANHUNT_STATE,MANHUNT_COMPLETE,Manhunt_Dialogue_CherieQuestComplete_Wrapper)
+    goto_if_ge(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1,Manhunt_Dialogue_CherieRepeatHintWrapper)
+    goto_if_eq(VAR_MANHUNT_STATE,ASSIGNED_FIND_VIGRIM,Manhunt_Cherie_Battle_Script)
+    return
 }
+
+script Manhunt_Dialogue_CherieRepeatHintWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_CherieRepeatHint)
+    call(Manhunt_Dialogue_CherieQuestComplete)
+    closemessage
+    release
+    end
+}
+
+script Manhunt_Dialogue_CherieRepeatHint
+{
+    msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and The Tide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
+}
+
+script Manhunt_Dialogue_CherieQuestComplete_Wrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_CherieQuestComplete)
+    release
+    end
+}
+
+script Manhunt_Dialogue_CherieQuestComplete
+{
+    msgbox(format("Now please… leave us alone."),MSGBOX_AUTOCLOSE,SPEAKER_CHERIE)
+    closemessage
+}
+
+script Manhunt_Cherie_Battle_Script
+{
+    lock
+    playse(SE_EXIT)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_MANHUNT_CHARLOTTE,13,3,MOVEMENT_TYPE_FACE_DOWN)
+    moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,10,7,DIR_SOUTH)
+
+    msgbox(format("Hey, we're trying to find Vigrim, and we were told you might have a connection."),MSGBOX_NPC,SPEAKER_ALICIA)
+    waitse
+    msgbox(format("Yeah, I wrote the The Tide leadership piece a few months back. Those youngsters were long overdue for some positive press! And getting to really sit down with Vigrim… I feel blessed to have been able to do it! "),,SPEAKER_CHERIE)
+
+    msgbox(format("Blessed? The Tide? Ugh, they've infected you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
+
+    msgbox(format("…wait. You're that {PLAYER} kid, aren't you? "),,SPEAKER_CHERIE)
+
+    msgbox(format("That's us."),,SPEAKER_ALICIA)
+
+    msgbox(format("I should have recognized you two sooner. What're you doing snooping around here? Haven't you two helped enough? "),,SPEAKER_CHERIE)
+
+    msgbox(format("Hey, we just want to talk!"),,SPEAKER_ALICIA)
+
+    msgbox(format("As a matter of fact, get the hell out of here. Everything you two do is just hurting the region and lining the pockets of people who don't even care. Get out!"),,SPEAKER_CHERIE)
+    closemessage
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    goto(Manhunt_StartBattle1_Script)
+}
+
 script Manhunt_StartBattle1_Script
 {
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle1_Script)
-        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_1,format("…Please don't hurt us any further. What do you want?"),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
-        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_1)
-        startcutscene(JUMPPLAYER_MANHUNT_NEWS)
-        msgbox(format("Start talking. Who's Vigrim behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+    multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_1,format("…Please don't hurt us any further. What do you want?"),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1)
+    setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_1)
+    startcutscene(JUMPPLAYER_MANHUNT_NEWS)
+    msgbox(format("Start talking. Who's Vigrim behind the mask?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
         msgbox(format("Vigrim? I swear, I don't know who she is. Nobody does. I'm a reporter… I wouldn't keep that a secret."),,SPEAKER_CHERIE)
 
         msgbox(format("I KNOW you know some shit."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("The only lead I have is a consulting firm in MermerezaCity… there's money flowing between there and The Tide, or, at least there was. I never figured out what was going on though."),,SPEAKER_CHERIE)
-
+        call(Manhunt_Dialogue_CherieRepeatHint)
         msgbox(format("That's a start…"),,SPEAKER_ALICIA)
-
-        msgbox(format("Now please… leave us alone."),MSGBOX_AUTOCLOSE,SPEAKER_CHERIE)
-        applymovement(CHARLOTTE, moves(walk_up * 2, walk_right * 3, walk_up * 3, step_end))
-        waitmovement(0)
+        call(Manhunt_Dialogue_CherieQuestComplete)
+        moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,13,2,DIR_NORTH)
+        waitmovement(LOCALID_MANHUNT_CHARLOTTE)
         playse(SE_EXIT)
+        removeobject(LOCALID_MANHUNT_CHARLOTTE)
         waitse
-        removeobject(CHARLOTTE)
         call(TryAutoSave)
         endcutscene
         release
@@ -132,191 +155,323 @@ script Manhunt_StartBattle1_Script
 }
 
 //MermerezaCity
-script Manhunt_Teodoro_Battle_Script {
+
+script Manhunt_Dialogue_Teodoro
+{
+    goto_if_ge(VAR_MANHUNT_STATE,MANHUNT_COMPLETE,Manhunt_Dialogue_TeodoroQuestCompleteWrapper)
+    goto_if_ge(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2,Manhunt_Dialogue_TeodoroRepeatHintWrapper)
+    goto_if_eq(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_1,Manhunt_Teodoro_Battle_Script)
+    return
+}
+
+script Manhunt_Teodoro_Battle_Script
+{
     lock
-        playse(SE_EXIT)
-        waitse
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
-        applymovement(CHARLOTTE, moves(walk_up * 2, jump_2_up, face_right, step_end))
-        msgbox(format("What are some kids doing here?"),MSGBOX_NPC,SPEAKER_TEODORO)
+    playse(SE_EXIT)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_MANHUNT_CHARLOTTE,3,8,MOVEMENT_TYPE_FACE_DOWN)
+    waitse
+    applymovement(LOCALID_MANHUNT_CHARLOTTE, moves(walk_up * 2, jump_2_up, face_right, step_end))
+    msgbox(format("What are some kids doing here?"),MSGBOX_NPC,SPEAKER_TEODORO)
 
-        msgbox(format("You gonna make this easy? Or are you gonna keep protecting The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("You gonna make this easy? Or are you gonna keep protecting The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("The Tide? What the hell are you talking about? "),,SPEAKER_TEODORO)
+    msgbox(format("The Tide? What the hell are you talking about? "),,SPEAKER_TEODORO)
 
-        msgbox(format("We know you're working with The Tide, and we need to find their leader."),,SPEAKER_ALICIA)
+    msgbox(format("We know you're working with The Tide, and we need to find their leader."),,SPEAKER_ALICIA)
 
-        msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
-        closemessage
-        goto(Manhunt_StartBattle2_Script)
+    msgbox(format("Yeah, I did some work for them a while back. What about it? Gonna rat us out to your bosses?"),,SPEAKER_TEODORO)
+    closemessage
+    goto(Manhunt_StartBattle2_Script)
 }
 script Manhunt_StartBattle2_Script
 {
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle2_Script)
-        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_2,format("Damn punks."),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_2)
-        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
-        startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
+    multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_2,format("Damn punks."),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_2)
+    setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2)
+    startcutscene(JUMPPLAYER_MANHUNT_BUSINESS)
 
-        msgbox(format("Wow! They weren't really that strong… did Charlotte really need to go that hard?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
+    msgbox(format("Wow! They weren't really that strong… did Charlotte really need to go that hard?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
 
-        msgbox(format("What do you know about The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("What do you know about The Tide?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Look, I don't know what you're digging for. The Tide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
+    msgbox(format("Look, I don't know what you're digging for. The Tide is all above ground, nothing to hide, just trying to do some damn good in the world."),,SPEAKER_TEODORO)
 
-        msgbox(format("If you don't start talking this is going to get very messy."),,SPEAKER_CHARLOTTE_SHARPRISE,EMOTE_ANGRY)
+    msgbox(format("If you don't start talking this is going to get very messy."),,SPEAKER_CHARLOTTE_SHARPRISE,EMOTE_ANGRY)
 
-        msgbox(format("Wait! Okay, okay..."),,SPEAKER_TEODORO)
+    msgbox(format("Wait! Okay, okay..."),,SPEAKER_TEODORO)
 
-        msgbox(format("The only thing I can think of is that they buy Balls in bulk from that Speciality Ball Shop…"),,SPEAKER_TEODORO)
+    call(Manhunt_Dialogue_TeodoroRepeatHint)
 
-        msgbox(format("That's in IrisinaTown. Let's move... Champ."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("Let's move... Champ."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
-        applymovement(CHARLOTTE, moves(walk_down, jump_down, walk_down * 2, step_end))
-        waitmovement(0)
-        playse(SE_EXIT)
-        waitse
-        removeobject(CHARLOTTE)
-        call(TryAutoSave)
-        endcutscene
-        release
-        end
+    call(Manhunt_Dialogue_TeodoroQuestComplete)
+    applymovement(LOCALID_MANHUNT_CHARLOTTE, moves(walk_down, jump_down, walk_down * 2, step_end))
+    waitmovement(0)
+    playse(SE_EXIT)
+    waitse
+    removeobject(LOCALID_MANHUNT_CHARLOTTE)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }
 
-const CHARLOTTE_MON = 3
+
+script Manhunt_Dialogue_TeodoroRepeatHint
+{
+    buffermapname(STR_VAR_1,MAP_IRISINA_TOWN_BALLS)
+    msgbox(format("The only thing I can think of is that they buy Balls in bulk from that {STR_VAR_1} Speciality Ball Shop…"),,SPEAKER_TEODORO)
+}
+
+script Manhunt_Dialogue_TeodoroRepeatHintWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_TeodoroRepeatHint)
+    call(Manhunt_Dialogue_TeodoroQuestComplete)
+    closemessage
+    release
+    end
+}
+
+script Manhunt_Dialogue_TeodoroQuestComplete
+{
+    msgbox(format("God forbid some good people try to make some change without these tech cronies ruining it for everybody."),MSGBOX_AUTOCLOSE,SPEAKER_TEODORO)
+}
+
+script Manhunt_Dialogue_TeodoroQuestCompleteWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_TeodoroQuestComplete)
+    closemessage
+    release
+    end
+}
 
 //IrisinaTown_Balls
+script Manhunt_Dialogue_Dudley
+{
+    goto_if_ge(VAR_MANHUNT_STATE,MANHUNT_COMPLETE,Manhunt_Dialogue_DudleyQuestCompleteWrapper)
+    goto_if_ge(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3,Manhunt_Dialogue_DudleyRepeatHintWrapper)
+    goto_if_eq(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_2,Manhunt_Dudley_Battle_Script)
+    return
+}
+
 script Manhunt_Dudley_Battle_Script
 {
     lock
+    playse(SE_EXIT)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_MANHUNT_CHARLOTTE,8,2,MOVEMENT_TYPE_FACE_DOWN)
+    moveobjecttocoords(LOCALID_PLAYER,6,6,DIR_NORTH)
+    delay(16)
+    moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,6,4,DIR_SOUTH)
+    waitse
+    waitmovement(LOCALID_PLAYER)
+    playse(SE_PIN)
+    applymovement(LOCALID_IRISINA_BALLS_DUDLEY, moves(emote_exclamation_mark, face_up))
+    waitse
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    waitmovement(LOCALID_IRISINA_BALLS_DUDLEY)
 
-        playse(SE_EXIT)
-        waitse
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
-        applymovement(CHARLOTTE, moves(walk_down * 2, walk_left * 2, walk_down, step_end))
-        applymovement(1, moves(emote_exclamation_mark, face_up, delay_16, faceplayer, step_end))
+    msgbox(format("How can I help - "),,SPEAKER_DUDLEY)
 
-        msgbox(format("How can I help - "),MSGBOX_NPC,SPEAKER_DUDLEY)
+    msgbox(format("Vigrim. The Tide. Tell us what you know."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Alcemene. The Tide. Tell us what you know."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("What? The Tide? Yeah, they're one of our customers."),,SPEAKER_DUDLEY)
 
-        msgbox(format("What? The Tide? Yeah, they're one of our customers."),,SPEAKER_DUDLEY)
+    msgbox(format("What are they buying in bulk from you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("What are they buying in bulk from you?"),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("...\pI don't think I'm supposed to divulge that, but I can ask my boss."),,SPEAKER_DUDLEY)
 
-        msgbox(format("...\pI don't think I'm supposed to divulge that, but I can ask my boss."),,SPEAKER_DUDLEY)
+    msgbox(format("Don't bother your boss. After all, he's going to have to run the shop on his own after this."),,SPEAKER_CHARLOTTE_SHARPRISE)
 
-        msgbox(format("Don't bother your boss. After all, he's going to have to run the shop on his own after this."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("Whoa wait hold on!"),,SPEAKER_DUDLEY)
 
-        msgbox(format("Whoa wait hold on!"),,SPEAKER_DUDLEY)
-
-        msgbox(format("Charlotte, should we maybe..."),,SPEAKER_ALICIA)
-        msgbox(format("What's wrong Champ, having trouble keeping up?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
-        closemessage
-        goto(Manhunt_StartBattle3_Script)
+    msgbox(format("Charlotte, should we maybe..."),,SPEAKER_ALICIA)
+    msgbox(format("What's wrong Champ, having trouble keeping up?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
+    closemessage
+    goto(Manhunt_StartBattle3_Script)
 }
 script Manhunt_StartBattle3_Script
 {
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle3_Script)
-        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_3,format("Yikes!"),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_3)
-        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
-        startcutscene(JUMPPLAYER_MANHUNT_BALL)
+    multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_3,format("Yikes!"),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_3)
+    setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3)
+    startcutscene(JUMPPLAYER_MANHUNT_BALL)
 
-        msgbox(format("Shit man, I'm just doing my job!"),,SPEAKER_DUDLEY)
+    msgbox(format("Shit man, I'm just doing my job!"),,SPEAKER_DUDLEY)
 
-        msgbox(format("And we're just trying to do our job. Could you please just tell us what you know?"),,SPEAKER_ALICIA)
+    msgbox(format("And we're just trying to do our job. Could you please just tell us what you know?"),,SPEAKER_ALICIA)
 
-        msgbox(format("They bought a bunch of Dusk Balls in bulk. I don't know why, I don't know where they were going or what they were doing. "),,SPEAKER_DUDLEY)
+    msgbox(format("They bought a bunch of Dusk Balls in bulk. I don't know why, I don't know where they were going or what they were doing. "),,SPEAKER_DUDLEY)
 
-        msgbox(format("What else! Think hard, or else."),,SPEAKER_CHARLOTTE_SHARPRISE)
-        closemessage
+    msgbox(format("What else! Think hard, or else."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    closemessage
 
-        playse(SE_BALL_OPEN)
-        waitse
-        addobject(CHARLOTTE_MON)
-        playmoncry(SPECIES_ARMAROUGE,CRY_MODE_ENCOUNTER)
-        waitmoncry
+    playse(SE_BALL_OPEN)
+    callnative(Manhunt_LoadCharlotteMon)
+    spawnobject(OBJ_EVENT_GFX_VAR_0,LOCALID_MANHUNT_CHARLOTTE_MON,5,5,MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT)
+    waitse
+    callnative(Manhunt_GetCharlotteMonCry)
 
-        applymovement(PLAYER,Common_Movement_FaceRight)
-        msgbox(format("Woah, Charlotte, do we really need… -"),,SPEAKER_ALICIA)
-        waitmovement(PLAYER)
+    msgbox(format("Woah, Charlotte, do we really need… -"),,SPEAKER_ALICIA)
+    waitmoncry
 
-        msgbox(format("I got this {PLAYER} {EMOJI_NOTE}!"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_HAPPY)
-        closemessage
-        applymovement(CHARLOTTE,Common_Movement_WalkInPlaceLeft)
-        waitmovement(CHARLOTTE)
+    msgbox(format("I got this {PLAYER} {EMOJI_NOTE}!"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_HAPPY)
+    closemessage
 
-        msgbox(format("One time they had them delivered to Route98! That's all I know! Please don't hurt me…"),,SPEAKER_DUDLEY,EMOTE_SAD)
-        closemessage
-        applymovement(CHARLOTTE, moves(walk_left * 2, walk_down * 4, step_end))
-        waitmovement(0)
-        playse(SE_EXIT)
-        waitse
-        removeobject(CHARLOTTE)
-        removeobject(CHARLOTTE_MON)
-        call(TryAutoSave)
-        endcutscene
-        release
-        end
+    applymovement(LOCALID_MANHUNT_CHARLOTTE,Common_Movement_WalkInPlaceDown)
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    call(Manhunt_Dialogue_DudleyRepeatHint)
+    call(Manhunt_Dialogue_DudleyQuestComplete)
+    closemessage
+    playse(SE_BALL_OPEN)
+    removeobject(LOCALID_MANHUNT_CHARLOTTE_MON)
+    waitse
+    moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,4,8,DIR_SOUTH)
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    playse(SE_EXIT)
+    removeobject(LOCALID_MANHUNT_CHARLOTTE)
+    waitse
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }
 
-script Manhunt_TransformTreestoTallGrass {
-    setmetatile(24,29,0x015,TRUE)
-    setmetatile(24,28,0x015,TRUE)
-    setmetatile(24,27,0x015,TRUE)
-    setmetatile(24,26,0x015,TRUE)
+script Manhunt_Dialogue_DudleyRepeatHint
+{
+    buffermapname(STR_VAR_1,MAP_ROUTE98)
+    msgbox(format("One time they had them delivered to {STR_VAR_1}!"),,SPEAKER_DUDLEY,TAIL_SHOUT,EMOTE_SAD)
+}
+
+script Manhunt_Dialogue_DudleyRepeatHintWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_DudleyRepeatHint)
+    call(Manhunt_Dialogue_DudleyQuestComplete)
+    closemessage
+    release
+    end
+}
+
+script Manhunt_Dialogue_DudleyQuestComplete
+{
+    msgbox(format("Please don't hurt me…"),,SPEAKER_DUDLEY,TAIL_TALK,EMOTE_SAD)
+}
+
+script Manhunt_Dialogue_DudleyQuestCompleteWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_DudleyQuestComplete)
+    closemessage
+    release
+    end
+}
+
+
+script Manhunt_TransformTreestoTallGrass
+{
+    setmetatile(24,29,0x015,FALSE)
+    setmetatile(24,28,0x015,FALSE)
+    setmetatile(24,27,0x015,FALSE)
+    setmetatile(24,26,0x015,FALSE)
 }
 //Route98
-script Manhunt_Matthew_Battle_Script {
-        lock
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
-        call(Manhunt_TransformTreestoTallGrass)
-        applymovement(CHARLOTTE, moves(walk_up * 7, step_end))
-        waitmovement(0)
-        applymovement(MATTHEW,Common_Movement_FacePlayer)
-        waitmovement(MATTHEW)
-        msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
-        msgbox(format("Who's they?"),,SPEAKER_ALICIA)
-        msgbox(format("Yeah, Vigrim told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
-        msgbox(format("Look, we don't have to fight, but you need to tell us -"),,SPEAKER_ALICIA)
-        msgbox(format("Ignore {POSSESSIVE} good cop routine."),,SPEAKER_CHARLOTTE_SHARPRISE)
-        msgbox(format("This isn't a bit - I'm serious!"),,SPEAKER_ALICIA,TAIL_SHOUT)
-        msgbox(format("When dealing with terrorists, I prefer bad cop, worse cop."),,SPEAKER_CHARLOTTE_SHARPRISE)
-        msgbox(format("Guess which one I am?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
-        closemessage
-        goto(Manhunt_StartBattle4_Script)
+script Manhunt_Dialogue_Matthew
+{
+    goto_if_ge(VAR_MANHUNT_STATE,MANHUNT_COMPLETE,Manhunt_Dialogue_MatthewQuestCompleteWrapper)
+    goto_if_ge(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4,Manhunt_Dialogue_MatthewRepeatHintWrapper)
+    goto_if_eq(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_3,Manhunt_Matthew_Battle_Script)
+    return
 }
+
+script Manhunt_Matthew_Battle_Script
+{
+    lock
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_MANHUNT_CHARLOTTE,24,29,MOVEMENT_TYPE_FACE_DOWN)
+    call(Manhunt_TransformTreestoTallGrass)
+    moveobjecttocoords(LOCALID_PLAYER,22,22,DIR_EAST)
+    delay(32)
+    moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,24,22,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    msgbox(format("Oh damn, looks like they were right."),,SPEAKER_MATTHEW)
+    msgbox(format("Who's they?"),,SPEAKER_ALICIA)
+    msgbox(format("Yeah, Vigrim told me you'd be coming. But I wonder how tough you actually are!"),,SPEAKER_MATTHEW)
+    msgbox(format("Look, we don't have to fight, but you need to tell us -"),,SPEAKER_ALICIA)
+    msgbox(format("Ignore {POSSESSIVE} good cop routine."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("This isn't a bit - I'm serious!"),,SPEAKER_ALICIA,TAIL_SHOUT)
+    msgbox(format("When dealing with terrorists, I prefer bad cop, worse cop."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    msgbox(format("Guess which one I am?"),,SPEAKER_CHARLOTTE_SHARPRISE,,EMOTE_LAUGH)
+    closemessage
+    goto(Manhunt_StartBattle4_Script)
+}
+
 script Manhunt_StartBattle4_Script
 {
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartBattle4_Script)
-        multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_4,format("Oh damn, looks like they were right."),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_4)
-        setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
-        startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
+    multi_2_vs_1(TRAINER_QUEST_MANHUNT_CIVILIAN_4,format("Oh damn, looks like they were right."),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    setflag(TRAINER_FLAGS_START + TRAINER_QUEST_MANHUNT_CIVILIAN_4)
+    setvar(VAR_MANHUNT_STATE,GOT_MANHUNT_CLUE_4)
+    startcutscene(JUMPPLAYER_MANHUNT_ROUTE)
 
-        msgbox(format("You're no joke. Vigrim wants you to meet them at Wishaast Lake, after sunset. Just the two of you - no police or SharpRise Capital cronies, or the trail goes cold again. Up to you. They're tired of you hurting people just to track them down, and I agree, you're…"),MSGBOX_AUTOCLOSE,SPEAKER_MATTHEW)
-        closemessage
-        applymovement(MATTHEW,Common_Movement_FaceRight)
-        waitmovement(MATTHEW)
-        msgbox(format("a real piece of work."),,SPEAKER_MATTHEW)
-        msgbox(format("...You're lucky I was raised right, or I'd spit on you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
-        closemessage
-        applymovement(CHARLOTTE, moves(walk_left * 7, walk_up * 6, step_end))
-        waitmovement(0)
-        removeobject(CHARLOTTE)
-        call(TryAutoSave)
-        endcutscene
-        release
-        end
+    msgbox(format("You're no joke."),,SPEAKER_MATTHEW)
+    call(Manhunt_Dialogue_MatthewRepeatHint)
+    msgbox(format("They're tired of you hurting people just to track them down, and I agree…"),,SPEAKER_MATTHEW)
+    closemessage
+
+    applymovement(LOCALID_ROUTE98_MATTHEW,Common_Movement_FaceRight)
+    waitmovement(LOCALID_ROUTE98_MATTHEW)
+    call(Manhunt_Dialogue_MatthewQuestComplete)
+    msgbox(format("…You're lucky I was raised right, or I'd spit on you too."),,SPEAKER_CHARLOTTE_SHARPRISE)
+    closemessage
+    moveobjecttocoords(LOCALID_MANHUNT_CHARLOTTE,16,17,DIR_NORTH)
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
+    removeobject(LOCALID_MANHUNT_CHARLOTTE)
+    call(TryAutoSave)
+    endcutscene
+    release
+    end
 }
+
+script Manhunt_Dialogue_MatthewRepeatHint
+{
+    buffermapname(STR_VAR_1,MAP_WISHAAST_LAKE)
+    msgbox(format("Vigrim wants you to meet them at {STR_VAR_1}, after sunset. Just the two of you - no police or SharpRise Capital cronies, or the trail goes cold again. Up to you."),,SPEAKER_MATTHEW)
+}
+
+script Manhunt_Dialogue_MatthewRepeatHintWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_MatthewRepeatHint)
+    call(Manhunt_Dialogue_MatthewQuestComplete)
+    closemessage
+    release
+    end
+}
+
+script Manhunt_Dialogue_MatthewQuestComplete
+{
+    msgbox(format("You're a real piece of work."),,SPEAKER_MATTHEW)
+}
+
+script Manhunt_Dialogue_MatthewQuestCompleteWrapper
+{
+    lock
+    faceplayer
+    call(Manhunt_Dialogue_MatthewQuestComplete)
+    closemessage
+    release
+    end
+}
+
 
 script Manhunt_ReactAdaoraArrest_Dialogue
 {
@@ -341,20 +496,22 @@ script Manhunt_React_Dialogue
     return
 }
 
-script Manhunt_Encounter_Vigrim_Dialogue {
+script Manhunt_Encounter_Vigrim_Dialogue
+{
     lock
     faceplayer
+    moveobjecttocoords(LOCALID_PLAYER,21,26,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
 
-        if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_VIGRIM){
-            setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_VIGRIM)
-            startmenu_savescreen
-        }
+    if(var(VAR_MANHUNT_STATE) != SAVED_BEFORE_VIGRIM)
+    {
+        setvar(VAR_MANHUNT_STATE,SAVED_BEFORE_VIGRIM)
+        startmenu_savescreen
+    }
 
-        clearflag(FLAG_HIDE_CHARLOTTE)
-        addobject(CHARLOTTE)
-
-        applymovement(CHARLOTTE, moves(walk_up * 6, step_end))
-        waitmovement(0)
+    spawnobject(OBJ_EVENT_GFX_CHARLOTTE,LOCALID_MANHUNT_CHARLOTTE,20,33,MOVEMENT_TYPE_FACE_DOWN)
+    applymovement(LOCALID_MANHUNT_CHARLOTTE, moves(walk_up * 6, step_end))
+    waitmovement(LOCALID_MANHUNT_CHARLOTTE)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
@@ -369,22 +526,21 @@ script Manhunt_Encounter_Vigrim_Dialogue {
         case FALSE_TIMELINE_HOW_COMPLETE:
             call(Manhunt_ReactAdaoraArrest_Dialogue)
     }
-        closemessage
-        goto(Manhunt_StartVigrimBattle_Script)
+    closemessage
+    goto(Manhunt_StartVigrimBattle_Script)
 }
 
 script Manhunt_StartVigrimBattle_Script
 {
-        goto_if_eq(VAR_RESULT,0,Manhunt_StartVigrimBattle_Script)
-        multi_2_vs_1(TRAINER_VIGRIM,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_CHARLOTTE)
-        call(Silicon_Script_WhiteoutIfPlayerLostMulti)
-        lock
-        faceplayer
-        setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM)
-        addvar(VAR_STORYLINE_STATE,1)
-        startcutscene(JUMPPLAYER_MANHUNT_VIGRIM)
+    multi_2_vs_1(TRAINER_VIGRIM,format("If I don't have the strength to beat you, perhaps I don't have the strength to save Resido after all."),PARTNER_CHARLOTTE)
+    call(Silicon_Script_WhiteoutIfPlayerLostMulti)
+    lock
+    faceplayer
+    setvar(VAR_MANHUNT_STATE,DEFEATED_MANHUNT_VIGRIM)
+    addvar(VAR_STORYLINE_STATE,1)
+    startcutscene(JUMPPLAYER_MANHUNT_VIGRIM)
 
-        msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD)
+    msgbox(format("I won't fight you any further. Call your backup."),,SPEAKER_VIGRIM,TAIL_WHISPER,EMOTE_SAD)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
@@ -397,31 +553,32 @@ script Manhunt_StartVigrimBattle_Script
     closemessage
     playse(SE_POKENAV_CALL)
     waitse
-    msgbox(format("Lucrezia, I've defeated Alcemene. We'll be at the entrance to Lake Wishaast."),,SPEAKER_CHARLOTTE_SHARPRISE,,,PHONE_ON)
+    buffermapname(STR_VAR_1,MAP_WISHAAST_LAKE)
+    msgbox(format("Lucrezia, I've defeated Vigrim. We'll be at the entrance to {STR_VAR_1}."),,SPEAKER_CHARLOTTE_SHARPRISE,,,PHONE_ON)
 
-        msgbox(format("Really!? Excellent work if true. I was expecting an email, but this will do! I'll send the police right over, very well done indeed!"),,SPEAKER_LUCREZIA,,EMOTE_SHOCK,PHONE_ON)
+    msgbox(format("Really!? Excellent work if true. I was expecting an email, but this will do! I'll send the police right over, very well done indeed!"),,SPEAKER_LUCREZIA,,EMOTE_SHOCK,PHONE_ON)
 
-        closemessage
-
-        fadeblackandsetremovewarpfadeflag
-        warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,5,5)
-		waitstate
+    closemessage
+    fadeblackandsetremovewarpfadeflag
+    warpsilent(MAP_SHARPRISE_SPIRE_LEAGUEOPS,5,5)
+    waitstate
 }
 
-script Manhunt_MissionComplete_Dialogue {
+script Manhunt_MissionComplete_Dialogue
+{
     lock
+    setvar(VAR_MANHUNT_STATE,MANHUNT_COMPLETE)
 
-        setvar(VAR_MANHUNT_STATE,MANHUNT_COMPLETE)
+    applymovement(PLAYER,Common_Movement_FaceUp)
+    applymovement(LOCALID_LEAGUEOPS_RAMESH,Common_Movement_FaceDown)
+    waitmovement(LOCALID_LEAGUEOPS_RAMESH)
+    waitmovement(PLAYER)
 
-        applymovement(PLAYER,Common_Movement_FaceUp)
-        applymovement(RAMESH,Common_Movement_FaceDown)
-        waitmovement(0)
+    msgbox(format("Good job, {PLAYER}. You should proud of the work you've done today."),,SPEAKER_RAMESH)
 
-        msgbox(format("Good job, {PLAYER}. You should proud of the work you've done today."),,SPEAKER_RAMESH)
+    msgbox(format("Really? I feel like proud isn't quite the right emotion - things were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
 
-        msgbox(format("Really? I feel like proud isn't quite the right emotion - things were pretty rough out there."),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
-
-        msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader it's going to be even more difficult for The Tide to mobilize any further initatives. You're making things better and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
+    msgbox(format("Look at this way - we can already see them scrambling on Buzzr. Without their leader it's going to be even more difficult for The Tide to mobilize any further initatives. You're making things better and that's what's important."),,SPEAKER_RAMESH,,EMOTE_HAPPY)
 
     specialvar(VAR_RESULT,GetFalseTimelineCompletion)
     switch(var(VAR_RESULT))
@@ -431,7 +588,7 @@ script Manhunt_MissionComplete_Dialogue {
             msgbox(format("Then why do I feel like I'm making things worse?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
 
         case FALSE_TIMELINE_BURN_COMPLETE:
-            msgbox(format("No leader and no base. Without The Tide, will things actually get better?"),TAIL_THOUGHT,EMOTE_CONFUSE)
+            msgbox(format("No leader and no base. Without The Tide, will things actually get better?"),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_CONFUSE)
 
         case FALSE_TIMELINE_NONE_COMPLETE:
             msgbox(format("The others won't be this bad as long as I'm not working with Charlotte again... right?"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
@@ -440,7 +597,7 @@ script Manhunt_MissionComplete_Dialogue {
     closemessage
 
     completequest(QUEST_MANHUNT)
-        call(TryAutoSave)
+    call(TryAutoSave)
     endcutscene
     release
     call(ExhibitionBattle_TimeSkip_Script)
