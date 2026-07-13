@@ -177,6 +177,7 @@
   ],
   "warp_events": [
     {
+      "warp_id": "WARP_ID_OROLAND_TO_CENTER",
       "x": 14,
       "y": 18,
       "elevation": 0,
@@ -197,6 +198,14 @@
       "elevation": 0,
       "dest_map": "MAP_CHAPEL_OF_CHIMES_INTERIOR",
       "dest_warp_id": "WARP_ID_CHAPEL_TO_OROLAND"
+    },
+    {
+      "warp_id": "WARP_ID_OROLAND_TO_NEWSPAPER",
+      "x": 16,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_PERLACIA_CITY_NEWSPAPER",
+      "dest_warp_id": "WARP_ID_NEWSPAPER_TO_OROLAND"
     }
   ],
   "coord_events": [],

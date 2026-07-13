@@ -173,13 +173,6 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 6,
-      "y": 19,
-      "elevation": 0,
-      "dest_map": "MAP_PERLACIA_CITY_NEWSPAPER",
-      "dest_warp_id": "0"
-    },
-    {
       "warp_id": "WARPI_ID_SHARPRISE_SPIRE_FROM_CITY_RIGHT",
       "x": 6,
       "y": 10,
