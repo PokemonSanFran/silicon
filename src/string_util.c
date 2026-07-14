@@ -455,57 +455,36 @@ static const u8 *ExpandPlaceholder_PlayerName(void)
 }
 
 // Start playerCustom
-static const u8 *ExpandPlaceholder_PlayerSubjectPronoun(void)
+const u8 *ExpandPlaceholder_PlayerSubjectPronoun(void)
 {
-    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SUBJECT_PRONOUN]){
-        case 0:
-            return gText_They;
-        break;
-        case 1:
-            return gText_He;
-        break;
-        case 2:
-            return gText_She;
-        break;
-        default:
-            return gSaveBlock3Ptr->playerSubjectPronoun;
-        break;
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SUBJECT_PRONOUN])
+    {
+        case 0:  return gText_They;
+        case 1:  return gText_He;
+        case 2:  return gText_She;
+        default: return gSaveBlock3Ptr->playerSubjectPronoun;
     }
 }
 
-static const u8 *ExpandPlaceholder_PlayerObjectPronoun(void)
+const u8 *ExpandPlaceholder_PlayerObjectPronoun(void)
 {
-    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]){
-        case 0:
-            return gText_Them;
-        break;
-        case 1:
-            return gText_Him;
-        break;
-        case 2:
-            return gText_Her;
-        break;
-        default:
-            return gSaveBlock3Ptr->playerObjectPronoun;
-        break;
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN])
+    {
+        case 0:  return gText_Them;
+        case 1:  return gText_Him;
+        case 2:  return gText_Her;
+        default: return gSaveBlock3Ptr->playerObjectPronoun;
     }
 }
 
-static const u8 *ExpandPlaceholder_PlayerPosesivePronoun(void)
+const u8 *ExpandPlaceholder_PlayerPosesivePronoun(void)
 {
-    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN]){
-        case 0:
-            return gText_Their;
-        break;
-        case 1:
-            return gText_His;
-        break;
-        case 2:
-            return gText_Hers;
-        break;
-        default:
-            return gSaveBlock3Ptr->playerPosesivePronoun;
-        break;
+    switch(gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN])
+    {
+        case 0:  return gText_Their;
+        case 1:  return gText_His;
+        case 2:  return gText_Hers;
+        default: return gSaveBlock3Ptr->playerPosesivePronoun;
     }
 }
 // End playerCustom
@@ -608,8 +587,8 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_ARCHIE]       = ExpandPlaceholder_Archie,
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
-        [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
 // Start playerCustom
+        //[PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
         [PLACEHOLDER_ID_SUBJECT]      = ExpandPlaceholder_PlayerSubjectPronoun,
         [PLACEHOLDER_ID_OBJECT]       = ExpandPlaceholder_PlayerObjectPronoun,
         [PLACEHOLDER_ID_POSSESSIVE]   = ExpandPlaceholder_PlayerPosesivePronoun,

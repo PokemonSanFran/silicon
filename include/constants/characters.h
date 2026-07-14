@@ -279,7 +279,7 @@
 // Start playerCustom
 #define PLACEHOLDER_ID_SUBJECT       0xE
 #define PLACEHOLDER_ID_OBJECT        0xF
-#define PLACEHOLDER_ID_POSSESSIVE    0x10
+#define PLACEHOLDER_ID_POSSESSIVE    PLACEHOLDER_ID_GROUDON
 // End playerCustom
 #define PLACEHOLDER_ID_REGION        0x11
 

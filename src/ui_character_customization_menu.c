@@ -203,8 +203,6 @@ static const u8 sMenuWindowFontColors[][3] =
     [FONT_CUSTOM_WHITE]    = {TEXT_COLOR_TRANSPARENT,  TEXT_COLOR_WHITE,       TEXT_COLOR_TRANSPARENT},
 };
 
-
-
 static const u32 sCustomizationMenuUpArrow_Gfx[]        = INCGFX_U32("graphics/ui_menus/character_customization/up_arrow.png", ".4bpp.smol");
 static const u32 sCustomizationMenuDownArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/down_arrow.png", ".4bpp.smol");
 static const u32 sCustomizationMenuLeftArrow_Gfx[]      = INCGFX_U32("graphics/ui_menus/character_customization/left_arrow.png", ".4bpp.smol");
@@ -420,13 +418,13 @@ void ResetCustomizationValuesData(void)
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_HAIR_COLOR]        = Random() % (NUM_HAIR_COLOR - 1);
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_PRIMARY_COLOR]     = Random() % (NUM_PRIMARY_COLOR - 1);
     gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SECONDARY_COLOR]   = Random() % (NUM_PRIMARY_COLOR - 1);
-    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SUBJECT_PRONOUN]   = Random() % NUM_PRONOUN_TYPES;
-    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]    = Random() % NUM_PRONOUN_TYPES;
-    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN] = Random() % NUM_PRONOUN_TYPES;
+    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_SUBJECT_PRONOUN]   = Random() % NUM_NON_NEOPRONOUN_TYPES;
+    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_OBJECT_PRONOUN]    = Random() % NUM_NON_NEOPRONOUN_TYPES;
+    gSaveBlock3Ptr->customizationValues[CUSTOMIZATION_POSSESIVE_PRONOUN] = Random() % NUM_NON_NEOPRONOUN_TYPES;
 
-    StringCopy(gSaveBlock3Ptr->playerSubjectPronoun,gText_He);
-    StringCopy(gSaveBlock3Ptr->playerObjectPronoun,gText_Him);
-    StringCopy(gSaveBlock3Ptr->playerPosesivePronoun,gText_His);
+    StringCopy(gSaveBlock3Ptr->playerSubjectPronoun,ExpandPlaceholder_PlayerSubjectPronoun());
+    StringCopy(gSaveBlock3Ptr->playerObjectPronoun,ExpandPlaceholder_PlayerObjectPronoun());
+    StringCopy(gSaveBlock3Ptr->playerPosesivePronoun,ExpandPlaceholder_PlayerPosesivePronoun());
 
     FlagSet(FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED);
 }
@@ -434,8 +432,6 @@ void ResetCustomizationValuesData(void)
 // This is our main initialization function if you want to call the menu from elsewhere
 void Character_Customization_Menu_Init(MainCallback callback)
 {
-    u8 i, j;
-
     if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
     {
         SetMainCallback2(callback);
@@ -452,26 +448,30 @@ void Character_Customization_Menu_Init(MainCallback callback)
 
     sMenuDataPtr->DrawnDialogue = DRAWN_DIALOGUE_HELP_BAR;
 
-    for(i = 0; i < NUM_SPRITES; i++){
+    for(u32 i = 0; i < NUM_SPRITES; i++)
+    {
         sMenuDataPtr->spriteIDs[i] = SPRITE_NONE;
     }
 
-	for(i = 0; i < NUM_CUSTOMIZATION_PARTS; i++){
+	for(u32 i = 0; i < NUM_CUSTOMIZATION_PARTS; i++)
+    {
         sMenuDataPtr->Temp_Customization_Settings[i] = gSaveBlock3Ptr->customizationValues[i];
     }
 
-    for(i = CUSTOMIZATION_SKIN_COLOR; i < NUM_CUSTOM_COLOR_OPTIONS; i++){
-        for(j = 0; j < NUM_COLOR_OPTIONS; j++){
+    for(u32 i = CUSTOMIZATION_SKIN_COLOR; i < NUM_CUSTOM_COLOR_OPTIONS; i++)
+    {
+        for(u32 j = 0; j < NUM_COLOR_OPTIONS; j++)
+        {
             sMenuDataPtr->Temp_Custom_Color_Settings[i][j] = gSaveBlock3Ptr->rgbValues[i][j];
         }
     }
 
-    for(i = 0; i < PLAYER_NAME_LENGTH + 1; i++){
+    for(u32 i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
+    {
         sMenuDataPtr->Temp_playerSubjectPronoun[i] = gSaveBlock3Ptr->playerSubjectPronoun[i];
         sMenuDataPtr->Temp_playerObjectPronoun[i] = gSaveBlock3Ptr->playerObjectPronoun[i];
         sMenuDataPtr->Temp_playerPosesivePronoun[i] = gSaveBlock3Ptr->playerPosesivePronoun[i];
     }
-
 
     // initialize stuff
     sMenuDataPtr->savedCallback = callback;

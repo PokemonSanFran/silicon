@@ -361,9 +361,9 @@ MAXIE          = FD 0B
 KYOGRE         = FD 0C
 GROUDON        = FD 0D
 @ Start playerCustom
+POSSESSIVE     = FD 0D
 SUBJECT        = FD 0E
 OBJECT         = FD 0F
-POSSESSIVE     = FE 10
 @ End playerCustom
 REGION         = FE 11
 

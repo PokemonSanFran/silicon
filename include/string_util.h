@@ -56,5 +56,10 @@ void ConvertInternationalString(u8 *s, enum Language language);
 void StripExtCtrlCodes(u8 *str);
 u8 *StringCopyUppercase(u8 *dest, const u8 *src);
 bool32 DoesStringProperlyTerminate(const u8 *str, u32 last);
+// Start playerCustom
+const u8 *ExpandPlaceholder_PlayerPosesivePronoun(void);
+const u8 *ExpandPlaceholder_PlayerObjectPronoun(void);
+const u8 *ExpandPlaceholder_PlayerSubjectPronoun(void);
+// End playerCustom
 
 #endif // GUARD_STRING_UTIL_H

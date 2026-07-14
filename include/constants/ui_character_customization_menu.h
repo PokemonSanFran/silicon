@@ -143,7 +143,7 @@ enum PossessivePronouns
     PRONOUN_POSSESSIVE_COUNT,
 };
 
-#define NUM_PRONOUN_TYPES 3
+#define NUM_NON_NEOPRONOUN_TYPES PRONOUN_POSSESSIVE_CUSTOM
 #define NUM_COLOR_LEVEL 11
 
 enum PlayerPaletteSlots
