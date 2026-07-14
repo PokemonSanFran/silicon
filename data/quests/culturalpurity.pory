@@ -29,7 +29,7 @@ script CulturalPurity_Dialogue_IntroduceCult
     msgbox(format("I’m excited to find other Trainers that understand how important traditions are! That’s how I was trained in Sinnoh, and I think I can grow by finding people who share my values."),,SPEAKER_SHINZO)
     msgbox(format("I’m having trouble figuring out how to actually join. I saw this online..."),,SPEAKER_SHINZO)
     closemessage
-    showtweet(TWEET_QUEST_CULTURAL_PURITY_AD3)
+    showzap(ZAP_QUEST_CULTURAL_PURITY_AD3)
     msgbox(format("And I paid ¥500 for one of these."),,SPEAKER_SHINZO)
     closemessage
     cueobjectplayer(LOCALID_HODOU_SHINZO)

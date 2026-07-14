@@ -3371,29 +3371,29 @@ bool8 ScrCmd_toggleflag(struct ScriptContext *ctx)
 bool8 ScrCmd_buzzr(struct ScriptContext *ctx)
 {
     u8 mode = ScriptReadByte(ctx);
-    u16 tweetId = ScriptReadHalfword(ctx);
+    u16 zapId = ScriptReadHalfword(ctx);
 
     switch(mode){
         case GET_READ:
-            gSpecialVar_Result = Buzzr_IsTweetRead(tweetId);
+            gSpecialVar_Result = Buzzr_IsZapRead(zapId);
             break;
         case MARK_READ:
-            Buzzr_MarkTweetAsRead(tweetId);
+            Buzzr_MarkZapAsRead(zapId);
             break;
-        case SHOW_TWEET:
-            Buzzr_ShowTweetOverworld(tweetId);
+        case SHOW_ZAP:
+            Buzzr_ShowZapOverworld(zapId);
             break;
-        case HIDE_TWEET:
-            Buzzr_HideTweetOverworld();
+        case HIDE_ZAP:
+            Buzzr_HideZapOverworld();
             break;
         case CHECK_PIC:
-            if (GetPictureTiles(tweetId))
+            if (GetPictureTiles(zapId))
                 gSpecialVar_Result = TRUE;
             else
                 gSpecialVar_Result = FALSE;
             break;
         case SHOW_PIC:
-            Buzzr_ShowPicOverworld(VarGet(tweetId));
+            Buzzr_ShowPicOverworld(VarGet(zapId));
             break;
     }
     return TRUE;

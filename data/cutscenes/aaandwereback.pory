@@ -66,7 +66,7 @@ script AaandWereBack_FerryRepaired_Dialogue {
         startcutscene(JUMPPLAYER_AAANDWEREBACK)
         setvar(VAR_STORYLINE_STATE,STORY_FERRY_FIXED)
         setvar(VAR_FERRY_STATE,FERRY_HALAI_ISLAND_AVAILABLE)
-        showtweet(TWEET_STORY_GRUNT_RESTORED)
+        showzap(ZAP_STORY_GRUNT_RESTORED)
         msgbox(format("That's a different notification..."),SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
         msgbox(format("Looks like east Resido is next! Too bad there's no ferry directly to the Gym in Chasilla..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 

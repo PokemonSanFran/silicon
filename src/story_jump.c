@@ -754,7 +754,7 @@ void FlagsVarWarp_EnterFallkner()
     FlagSet(FLAG_VISITED_MERMEREZA_CITY);
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_MERMEREZA_CITY_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_MERMEREZA_CITY_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_BELEN);
     VarSet(VAR_GYM_1_STATE, MERMEREZA_GYM_DEFEATED_LEADER);
     ClearGymTrainers(GYM_BELEN);
@@ -786,7 +786,7 @@ void FlagsVarWarp_EnterShinzo()
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     ClearGymTrainers(GYM_SHINZO);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_TORA_TOWN_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_TORA_TOWN_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_SHINZO);
     FlagSet(TRAINER_FLAGS_START + TRAINER_031A849F);
     FlagSet(TRAINER_FLAGS_START + TRAINER_045FDD44);
@@ -824,7 +824,7 @@ void FlagsVarWarp_EnterEmrys()
     FlagSet(FLAG_VISITED_GLAVEZ_HILL);
     ClearGymTrainers(GYM_EMRYS);
     FlagSet(FLAG_SYS_APP_BUZZR_GET);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_PERLACIA_CITY_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_PERLACIA_CITY_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_EMRYS);
     FlagSet(TRAINER_FLAGS_START + TRAINER_0AF40D0B);
     FlagSet(TRAINER_FLAGS_START + TRAINER_0B48C7D0);
@@ -1021,7 +1021,7 @@ void FlagsVarWarp_AaandWereBack()
     VarSet(VAR_FERRY_STATE, FERRY_HALAI_ISLAND_AVAILABLE);
     FlagSet(FLAG_SYS_APP_DEXNAV_GET);
     FlagSet(FLAG_SYS_APP_GOOGLE_GLASS_GET);
-    Buzzr_MarkTweetAsRead(TWEET_STORY_GRUNT_RESTORED);
+    Buzzr_MarkZapAsRead(ZAP_STORY_GRUNT_RESTORED);
     SetWarpDestination(MAP_GROUP(MAP_CUCONU_TOWN),MAP_NUM(MAP_CUCONU_TOWN),0,USE_WARP_ID,USE_WARP_ID);
 }
 void JumpPlayerTo_ClearAllAct1(bool32 jumpType)
@@ -1103,7 +1103,7 @@ void FlagsVarWarp_EnterPua()
 {
     FlagSet(FLAG_CONSTRUCTION_BREAKING_NEWS);
     ClearGymTrainers(GYM_PUA);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_CHASILLA_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_CHASILLA_BADGE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_PUA);
     VarSet(VAR_PUA_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_4_STATE, GYM_DEFEATED_LEADER);
@@ -1239,7 +1239,7 @@ void FlagsVarWarp_EnterNeriene()
 {
     FlagSet(FLAG_VISITED_FORT_YOBU);
     ClearGymTrainers(GYM_NERIENE);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_FORT_YOBU_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_FORT_YOBU_BADGE);
     VarSet(VAR_GYM_5_STATE, GYM_DEFEATED_LEADER);
     VarSet(VAR_NERIENE_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_FORT_YOBU_STATE, DEFEATED_NERIENE);
@@ -1324,7 +1324,7 @@ void FlagsVarWarp_EnterDimu()
     FlagSet(FLAG_VISITED_HALERBAWILDS);
     IncrementStorylineVariable();
     ClearGymTrainers(GYM_DIMU);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_HALERBA_CITY_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_HALERBA_CITY_BADGE);
     VarSet(VAR_GYM_6_STATE, GYM_DEFEATED_LEADER);
     VarSet(VAR_DIMU_STATE, BATTLE_1_COMPLETE);
     FlagSet(TRAINER_FLAGS_START + TRAINER_DIMU);
@@ -1381,7 +1381,7 @@ void FlagsVarWarp_EnterBD()
 
     IncrementStorylineVariable();
     ClearGymTrainers(GYM_BD);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_TIRABUDIN_PLACE_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_TIRABUDIN_PLACE_BADGE);
     VarSet(VAR_BD_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_7_STATE, GYM_DEFEATED_LEADER);
     FlagSet(TRAINER_FLAGS_START + TRAINER_BD);
@@ -1432,7 +1432,7 @@ void FlagsVarWarp_EnterAmiArgento()
     FlagSet(FLAG_VISITED_IRISINA_TOWN);
     IncrementStorylineVariable();
     ClearGymTrainers(GYM_AMI);
-    Buzzr_MarkTweetAsRead(TWEET_GYM_IRISINA_TOWN_BADGE);
+    Buzzr_MarkZapAsRead(ZAP_GYM_IRISINA_TOWN_BADGE);
     VarSet(VAR_AMIARGENTO_STATE, BATTLE_1_COMPLETE);
     VarSet(VAR_GYM_8_STATE, GYM_DEFEATED_LEADER);
     FlagSet(TRAINER_FLAGS_START + TRAINER_JUAN_1);
@@ -2321,7 +2321,7 @@ void FlagsVarWarp_LetsFixThis()
             PRE_SPEECHSPEECH);
     PreventVariableFromReversion(VAR_WAREHOUSE_RAVE_STATE, warehouseState,
             GOT_RAVE_MESSAGE);
-    Buzzr_MarkTweetAsRead(TWEET_STORY_WAREHOUSE_RAVE);
+    Buzzr_MarkZapAsRead(ZAP_STORY_WAREHOUSE_RAVE);
     SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }
 
@@ -2413,12 +2413,12 @@ void JumpPlayerTo_Breaktheinternet(bool32 jumpType)
     if (IsJumpTypeDebug(jumpType))
         JumpPlayerTo_TrueTimelineStart(jumpType);
 
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_DEOXYS);
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_TUNNELS);
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
-    Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_STONE);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_RABIES);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_SMOOTHIE);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_DEOXYS);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_TUNNELS);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_FRESHWATER);
+    Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_STONE);
 
     QuestMenu_GetSetQuestState(QUEST_RABIESOUTBREAK,FLAG_SET_UNLOCKED);
     QuestMenu_GetSetQuestState(QUEST_SMOOTHIECRAFTING,FLAG_SET_UNLOCKED);
@@ -2707,7 +2707,7 @@ void FlagsVarWarp_Epilogue(void)
 {
     VarSet(VAR_STORYLINE_STATE, STORY_CLEAR);
     FlagSet(FLAG_SYS_GAME_CLEAR);
-    Buzzr_MarkTweetAsRead(TWEET_STORY_EPILOGUE);
+    Buzzr_MarkZapAsRead(ZAP_STORY_EPILOGUE);
     SetWarpDestination(MAP_GROUP(MAP_HALAI_ISLAND_BAIYA),MAP_NUM(MAP_HALAI_ISLAND_BAIYA),0,USE_WARP_ID,USE_WARP_ID);
 }
 

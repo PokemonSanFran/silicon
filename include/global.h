@@ -311,8 +311,8 @@ struct Buzzr
 {
     u8 Filter : 4;
     bool8 Sort : 1;
-    bool8 IsRead[TWEET_COUNT];
-    u8 Order[TWEET_COUNT];
+    bool8 IsRead[ZAP_COUNT];
+    u8 Order[ZAP_COUNT];
 };
 // End buzzr Branch
 

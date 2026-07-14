@@ -24,7 +24,7 @@ script HybridCulture_Dialogue_StartQuest
     msgbox(format("Okay, so what’s this list?"),,SPEAKER_PLAYER)
     closemessage
     cueobjecttalking(LOCALID_TORA_SHINZO)
-    showtweet(TWEET_QUEST_HYBRID_CULTURE_LISTICLE_INTRO)
+    showzap(ZAP_QUEST_HYBRID_CULTURE_LISTICLE_INTRO)
     msgbox(format("I want to go see all of the things on this list. I know you’re not from here, but I feel a connection to you BECAUSE you’re not from here."),,SPEAKER_SHINZO)
     msgbox(format("You said yourself that you like it here, and I think spending time with you will help me better appreciate what Resido has to offer."),,SPEAKER_SHINZO)
     msgbox(format("I know you’re busy - you don’t even have to go out of your way to get to these places. I’ll just follow you around, and you can check out these places whenever it is convenient for you. Okay?"),,SPEAKER_SHINZO)

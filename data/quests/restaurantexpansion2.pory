@@ -14,7 +14,7 @@ script Quest_Restaurantexpansion2_StartQuest
     faceplayer
     msgbox(format("{PLAYER}, did you see my zap?"),,SPEAKER_BELEN)
     closemessage
-    showtweet(TWEET_QUEST_RESTAURANTEXPANSION2)
+    showzap(ZAP_QUEST_RESTAURANTEXPANSION2)
     msgbox(format("The new model has been three stars, but I need to hire more!"),,SPEAKER_BELEN)
     msgbox(format("I went through my DMs and made a list of people who pass the freshness check. My staff needs to be as diverse as my menu!"),,SPEAKER_BELEN)
     msgbox(format("Can you go sniff them out, see if they’re ripe, and send them back here?"),,SPEAKER_BELEN)

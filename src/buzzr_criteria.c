@@ -50,7 +50,7 @@ void Buzzr_IncrementSteps(void)
     VarSet(VAR_BUZZR_STEP_COUNTER,++steps);
 }
 
-static bool32 TweetCriteria_CheckSteps(u32 cost)
+static bool32 ZapCriteria_CheckSteps(u32 cost)
 {
     u32 steps = VarGet(VAR_BUZZR_STEP_COUNTER);
 
@@ -61,184 +61,184 @@ static bool32 TweetCriteria_CheckSteps(u32 cost)
     return TRUE;
 }
 
-void TweetCriteria_AlwaysTrue(void)
+void ZapCriteria_AlwaysTrue(void)
 {
     gSpecialVar_Result = TRUE;
 }
 
-void TweetCriteria_Quest_NPC_Rabies(void)
+void ZapCriteria_Quest_NPC_Rabies(void)
 {
-    TweetCriteria_AlwaysTrue();
+    ZapCriteria_AlwaysTrue();
 }
 
-static bool32 TweetCriteria_HasTalkedReporter(void)
+static bool32 ZapCriteria_HasTalkedReporter(void)
 {
     return (VarGet(VAR_QUEST_BREAKTHEINTERNET_STATE) > TALA_MENTIONED_REPORTER);
 }
 
-static bool32 TweetCriteria_SocialMedia(void)
+static bool32 ZapCriteria_SocialMedia(void)
 {
-    bool32 talkedReporter = TweetCriteria_HasTalkedReporter();
-    bool32 hasSteps = TweetCriteria_CheckSteps(TWEET_SOCIAL_MEDIA_STEPS);
+    bool32 talkedReporter = ZapCriteria_HasTalkedReporter();
+    bool32 hasSteps = ZapCriteria_CheckSteps(ZAP_SOCIAL_MEDIA_STEPS);
     return (talkedReporter && hasSteps);
 }
 
-void TweetCriteria_Quest_NPC_Robbery(void)
+void ZapCriteria_Quest_NPC_Robbery(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Ice(void)
+void ZapCriteria_Quest_NPC_Ice(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Deoxys(void)
+void ZapCriteria_Quest_NPC_Deoxys(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Tunnels(void)
+void ZapCriteria_Quest_NPC_Tunnels(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Freshwater(void)
+void ZapCriteria_Quest_NPC_Freshwater(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Gem(void)
+void ZapCriteria_Quest_NPC_Gem(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_NPC_Stone(void)
+void ZapCriteria_Quest_NPC_Stone(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Gym_MermerezaCity_Badge(void)
+void ZapCriteria_Gym_MermerezaCity_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_MERMEREZA_CITY_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_MERMEREZA_CITY_BADGE);
 }
 
-void TweetCriteria_Gym_ToraTown_Badge(void)
+void ZapCriteria_Gym_ToraTown_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_TORA_TOWN_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_TORA_TOWN_BADGE);
 }
 
-void TweetCriteria_Gym_PerlaciaCity_Badge(void)
+void ZapCriteria_Gym_PerlaciaCity_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_PERLACIA_CITY_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_PERLACIA_CITY_BADGE);
 }
 
-void TweetCriteria_Gym_Chasilla_Badge(void)
+void ZapCriteria_Gym_Chasilla_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_CHASILLA_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_CHASILLA_BADGE);
 }
 
-void TweetCriteria_Gym_FortYobu_Badge(void)
+void ZapCriteria_Gym_FortYobu_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_FORT_YOBU_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_FORT_YOBU_BADGE);
 }
 
-void TweetCriteria_Gym_HalerbaCity_Badge(void)
+void ZapCriteria_Gym_HalerbaCity_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_HALERBA_CITY_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_HALERBA_CITY_BADGE);
 }
 
-void TweetCriteria_Gym_TirabudinPlace_Badge(void)
+void ZapCriteria_Gym_TirabudinPlace_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_TIRABUDIN_PLACE_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_TIRABUDIN_PLACE_BADGE);
 }
 
-void TweetCriteria_Gym_IrisinaTown_Badge(void)
+void ZapCriteria_Gym_IrisinaTown_Badge(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_GYM_IRISINA_TOWN_BADGE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_GYM_IRISINA_TOWN_BADGE);
 }
 
-void TweetCriteria_Story_GRUNT_Restored(void)
+void ZapCriteria_Story_GRUNT_Restored(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_STORY_GRUNT_RESTORED);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_STORY_GRUNT_RESTORED);
 }
 
-void TweetCriteria_Story_Strike_Begin1(void)
+void ZapCriteria_Story_Strike_Begin1(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_STORY_STRIKE_BEGIN_1);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_STORY_STRIKE_BEGIN_1);
 }
 
-void TweetCriteria_Story_Strike_Begin2(void)
+void ZapCriteria_Story_Strike_Begin2(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_STORY_STRIKE_BEGIN_2);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_STORY_STRIKE_BEGIN_2);
 }
 
-void TweetCriteria_Story_Warehouse_Rave(void)
+void ZapCriteria_Story_Warehouse_Rave(void)
 {
-	gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_STORY_WAREHOUSE_RAVE);
+	gSpecialVar_Result = Buzzr_IsZapRead(ZAP_STORY_WAREHOUSE_RAVE);
 }
 
-void TweetCriteria_StoryClear(void)
+void ZapCriteria_StoryClear(void)
 {
     gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR);
 }
 
-void TweetCriteria_IsCompulsiveHealingReward(void)
+void ZapCriteria_IsCompulsiveHealingReward(void)
 {
     gSpecialVar_Result = ((IsQuestRewardState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)) || (IsQuestCompletedState(QUEST_COMPULSIVEHEALINGPEERSUPPORTGROUP)));
 }
 
-void TweetCriteria_IsRabiesComplete(void)
+void ZapCriteria_IsRabiesComplete(void)
 {
     gSpecialVar_Result = (IsQuestCompletedState(QUEST_RABIESOUTBREAK));
 }
 
-void TweetCriteria_IsSmoothieCraftingComplete(void)
+void ZapCriteria_IsSmoothieCraftingComplete(void)
 {
     gSpecialVar_Result = (IsQuestCompletedState(QUEST_SMOOTHIECRAFTING));
 }
 
-void TweetCriteria_Quest_NPC_Psyop(void)
+void ZapCriteria_Quest_NPC_Psyop(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_IsPsyopComplete(void)
+void ZapCriteria_IsPsyopComplete(void)
 {
     gSpecialVar_Result = (IsQuestCompletedState(QUEST_PSYOP));
 }
 
-void TweetCriteria_IsPsyopActive(void)
+void ZapCriteria_IsPsyopActive(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_PSYOP) ||(IsQuestRewardState(QUEST_PSYOP)) || (IsQuestCompletedState(QUEST_PSYOP))) ;
 }
 
-void TweetCriteria_Quest_NPC_BetweenAStoneAndAHardPlace(void)
+void ZapCriteria_Quest_NPC_BetweenAStoneAndAHardPlace(void)
 {
-    gSpecialVar_Result = TweetCriteria_SocialMedia();
+    gSpecialVar_Result = ZapCriteria_SocialMedia();
 }
 
-void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times(void)
+void ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times(void)
 {
     gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=1);
 }
 
-void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times(void)
+void ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times(void)
 {
     gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=3);
 }
 
-void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times(void)
+void ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times(void)
 {
     gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=5);
 }
 
-void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times(void)
+void ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times(void)
 {
     gSpecialVar_Result = (Quest_BetweenAStoneAndAHardPlace_CountRides() >=9);
 }
 
-void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void)
+void ZapCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void)
 {
     gSpecialVar_Result = FALSE;
 
@@ -255,161 +255,161 @@ void TweetCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete(void)
     }
 }
 
-void TweetCriteria_Quest_RestaurantExpansion1_1(void)
+void ZapCriteria_Quest_RestaurantExpansion1_1(void)
 {
     gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 1));
 }
 
-void TweetCriteria_Quest_RestaurantExpansion1_2(void)
+void ZapCriteria_Quest_RestaurantExpansion1_2(void)
 {
     gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 2));
 }
 
-void TweetCriteria_Quest_RestaurantExpansion1_3(void)
+void ZapCriteria_Quest_RestaurantExpansion1_3(void)
 {
     gSpecialVar_Result = (Quest_Generic_CountRemainingSubquests(QUEST_RESTAURANTEXPANSION1) <= (QUEST_RESTAURANTEXPANSION1_SUB_COUNT - 3));
 }
 
-void TweetCriteria_Quest_Diggingupadaorasdirt_1(void)
+void ZapCriteria_Quest_Diggingupadaorasdirt_1(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CURENO_PORT_STATE) >= POST_HOW_DO_WE_GET_HOME);
 }
 
-void TweetCriteria_Quest_ReturnDollComplete(void)
+void ZapCriteria_Quest_ReturnDollComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RETURNDOLL);
 }
 
-void TweetCriteria_Quest_Freetheinnocent1(void)
+void ZapCriteria_Quest_Freetheinnocent1(void)
 {
     gSpecialVar_Result = TRUE;
 }
 
-void TweetCriteria_Quest_Freetheinnocent5(void)
+void ZapCriteria_Quest_Freetheinnocent5(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_FREETHEINNOCENT, FLAG_GET_COMPLETED, SUB_QUEST_6);
 }
 
-void TweetCriteria_Quest_Findtheguilty1(void)
+void ZapCriteria_Quest_Findtheguilty1(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_FINDTHEGUILTY);
 }
 
-void TweetCriteria_Quest_Restaurantexpansion1(void)
+void ZapCriteria_Quest_Restaurantexpansion1(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTAURANTEXPANSION1);
 }
 
-void TweetCriteria_Quest_Kitchenvolunteering(void)
+void ZapCriteria_Quest_Kitchenvolunteering(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTAURANTEXPANSION2);
 }
 
-void TweetCriteria_Quest_RestoreespuleegymActive(void)
+void ZapCriteria_Quest_RestoreespuleegymActive(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_RESTOREESPULEEGYM) ||(IsQuestRewardState(QUEST_RESTOREESPULEEGYM)) || (IsQuestCompletedState(QUEST_RESTOREESPULEEGYM))) ;
 }
 
-void TweetCriteria_Quest_RestoreespuleegymComplete(void)
+void ZapCriteria_Quest_RestoreespuleegymComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREESPULEEGYM);
 }
 
-void TweetCriteria_Quest_RestorezenzugymActive(void)
+void ZapCriteria_Quest_RestorezenzugymActive(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_RESTOREESPULEEGYM) ||(IsQuestRewardState(QUEST_RESTOREESPULEEGYM)) || (IsQuestCompletedState(QUEST_RESTOREESPULEEGYM))) ;
 }
 
-void TweetCriteria_Quest_RestorezenzugymComplete(void)
+void ZapCriteria_Quest_RestorezenzugymComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREZENZUGYM);
 }
 
-void TweetCriteria_Quest_RestorehodoucityFoundLeader(void)
+void ZapCriteria_Quest_RestorehodoucityFoundLeader(void)
 {
     gSpecialVar_Result = (VarGet(VAR_QUEST_RESTOREHODOUGYM) >= FOUND_HODOU_CITY_LEADER);
 }
 
-void TweetCriteria_Quest_RestorehodoucityAssigned(void)
+void ZapCriteria_Quest_RestorehodoucityAssigned(void)
 {
     gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_POST_BATTLE_BAIYA_ZENZU_ISLAND);
 }
 
-void TweetCriteria_Quest_RestorehodoucityComplete(void)
+void ZapCriteria_Quest_RestorehodoucityComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREHODOUGYM);
 }
 
-void TweetCriteria_Quest_ImprovbattlingComplete(void)
+void ZapCriteria_Quest_ImprovbattlingComplete(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_IMPROVBATTLING);
 }
-void TweetCriteria_Quest_ImprovbattlingActive(void)
+void ZapCriteria_Quest_ImprovbattlingActive(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_IMPROVBATTLING) ||(IsQuestRewardState(QUEST_IMPROVBATTLING)) || (IsQuestCompletedState(QUEST_IMPROVBATTLING))) ;
 }
 
-void TweetCriteria_Quest_Hang20_FirstZapRead(void)
+void ZapCriteria_Quest_Hang20_FirstZapRead(void)
 {
-    gSpecialVar_Result = Buzzr_IsTweetRead(TWEET_QUEST_HANG20_WARNING);
+    gSpecialVar_Result = Buzzr_IsZapRead(ZAP_QUEST_HANG20_WARNING);
 }
 
-void TweetCriteria_Quest_CulturalPurity_Active(void)
+void ZapCriteria_Quest_CulturalPurity_Active(void)
 {
     gSpecialVar_Result = (ReturnQuestState(QUEST_CULTURALPURITY) > FLAG_GET_INACTIVE); }
 
-void TweetCriteria_Quest_CulturalPurity_ReadyForA(void)
+void ZapCriteria_Quest_CulturalPurity_ReadyForA(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_A);
 }
 
-void TweetCriteria_Quest_CulturalPurity_ReadyForB(void)
+void ZapCriteria_Quest_CulturalPurity_ReadyForB(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_B);
 }
 
-void TweetCriteria_Quest_CulturalPurity_ReadyForC(void)
+void ZapCriteria_Quest_CulturalPurity_ReadyForC(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_C);
 }
 
-void TweetCriteria_Quest_CulturalPurity_ReadyForD(void)
+void ZapCriteria_Quest_CulturalPurity_ReadyForD(void)
 {
     gSpecialVar_Result = (VarGet(VAR_CULTURAL_PURITY) >= CULTURAL_PURITY_READY_FOR_D);
 }
 
-void TweetCriteria_Quest_CulturalPurity_ReadyForDChampion(void)
+void ZapCriteria_Quest_CulturalPurity_ReadyForDChampion(void)
 {
-    TweetCriteria_Quest_CulturalPurity_ReadyForD();
+    ZapCriteria_Quest_CulturalPurity_ReadyForD();
 
     gSpecialVar_Result = ((VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS) && (gSpecialVar_Result == TRUE));
 }
 
-void TweetCriteria_Quest_HybridCulture_HasQuestStarted(void)
+void ZapCriteria_Quest_HybridCulture_HasQuestStarted(void)
 {
     gSpecialVar_Result = (IsQuestActiveState(QUEST_HYBRIDCULTURE));
 }
-void TweetCriteria_Quest_HybridCulture_HasSubquest1Completed(void)
+void ZapCriteria_Quest_HybridCulture_HasSubquest1Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_1);
 }
-void TweetCriteria_Quest_HybridCulture_HasSubquest2Completed(void)
+void ZapCriteria_Quest_HybridCulture_HasSubquest2Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_2);
 }
-void TweetCriteria_Quest_HybridCulture_HasSubquest3Completed(void)
+void ZapCriteria_Quest_HybridCulture_HasSubquest3Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_3);
 }
-void TweetCriteria_Quest_HybridCulture_HasSubquest4Completed(void)
+void ZapCriteria_Quest_HybridCulture_HasSubquest4Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_4);
 }
-void TweetCriteria_Quest_HybridCulture_HasSubquest5Completed(void)
+void ZapCriteria_Quest_HybridCulture_HasSubquest5Completed(void)
 {
     gSpecialVar_Result = QuestMenu_GetSetSubquestState(QUEST_HYBRIDCULTURE, FLAG_GET_COMPLETED, SUB_QUEST_5);
 }
-void TweetCriteria_Quest_InstallNatureProbes_HasQuestCompleted(void)
+void ZapCriteria_Quest_InstallNatureProbes_HasQuestCompleted(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_INSTALLNATUREPROBES);
 }

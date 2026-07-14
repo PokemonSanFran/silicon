@@ -58,7 +58,7 @@ script EnterPua_PuaDefeated_Script {
     setvar(VAR_STORYLINE_STATE,STORY_DEFEAT_PUA)
     msgbox(format("That battle was off the hook! You've got mad skills, {PLAYER}. Take this, you earned it!"),,SPEAKER_PUA)
     closemessage
-    tweetfanfare(TWEET_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
+    zapfanfare(ZAP_GYM_CHASILLA_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM17)
     closemessage
     call(TryAutoSave)

@@ -1769,7 +1769,7 @@ void DebugQuest_Smoothiecrafting(u8 state)
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_STARTED:
             VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_SMOOTHIE);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_SMOOTHIE);
             QuestMenu_ScriptSetActive(QUEST_SMOOTHIECRAFTING);
             break;
         case STATE_QUEST_SMOOTHIECRAFTING_HAS_ITEMS:
@@ -1851,7 +1851,7 @@ void DebugQuest_FreshwaterEvolution(u8 state)
             break;
         case STATE_QUEST_FRESHWATER_STARTED:
             VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_FRESHWATER);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_FRESHWATER);
             QuestMenu_ScriptSetActive(QUEST_FRESHWATEREVOLUTION);
             break;
         case STATE_QUEST_FRESHWATER_REWARD:
@@ -2859,7 +2859,7 @@ void DebugQuest_RabiesOutbreak(u8 state)
             break;
         case STATE_QUEST_RABIES_STARTED:
             VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_RABIES);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_RABIES);
             QuestMenu_ScriptSetActive(QUEST_RABIESOUTBREAK);
             break;
         case STATE_QUEST_RABIES_DEFEATED_1:
@@ -3139,7 +3139,7 @@ void DebugQuest_Hodoutunnels(u8 state)
             break;
         case STATE_QUEST_HODOUTUNNELS_STARTED:
             VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_TUNNELS);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_TUNNELS);
             QuestMenu_ScriptSetActive(QUEST_HODOUTUNNELS);
             break;
         case STATE_QUEST_HODOUTUNNELS_TALKED_TO_ELDER:
@@ -3283,7 +3283,7 @@ void DebugQuest_BetweenAStoneAndAHardPlace(u8 state)
             break;
         case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_STARTED:
             VarSet(VAR_QUEST_BREAKTHEINTERNET_STATE,TALKED_TO_REPORTER);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_NPC_STONE);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_NPC_STONE);
             QuestMenu_ScriptSetActive(QUEST_BETWEENASTONEANDAHARDPLACE);
             break;
         case STATE_QUEST_BETWEENASTONEANDAHARDPLACE_GRUNT_RODE_1:
@@ -5488,7 +5488,7 @@ void DebugQuest_CulturalPurity(u8 state)
             break;
         case STATE_QUEST_CULTURAL_PURITY_STARTED_QUEST:
             VarSet(VAR_CULTURAL_PURITY,CULTURAL_PURITY_QUEST_1_NOT_STARTED);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_CULTURAL_PURITY_AD3);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_CULTURAL_PURITY_AD3);
             AddBagItem(ITEM_QUEST_CULTURALPURITY_1,1);
             QuestMenu_ScriptSetActive(QUEST_CULTURALPURITY);
             break;
@@ -5688,7 +5688,7 @@ void DebugQuest_HybridCulture(u8 state)
             break;
         case STATE_QUEST_HYBRID_CULTURE_STARTED_QUEST:
             QuestMenu_ScriptSetActive(QUEST_HYBRIDCULTURE);
-            Buzzr_MarkTweetAsRead(TWEET_QUEST_HYBRID_CULTURE_LISTICLE_INTRO);
+            Buzzr_MarkZapAsRead(ZAP_QUEST_HYBRID_CULTURE_LISTICLE_INTRO);
             break;
         case STATE_QUEST_HYBRID_CULTURE_BEFORE_SUNRISE:
             FakeRtc_ForwardTimeTo(NIGHT_HOUR_END, 0, 0);

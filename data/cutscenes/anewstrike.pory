@@ -3,8 +3,8 @@ script ANewStrike_BreakingNews_Dialogue {
     lockall
     startcutscene(JUMPPLAYER_ANEWSTRIKE)
     addvar(VAR_STORYLINE_STATE,1)
-    showtweet(TWEET_STORY_STRIKE_BEGIN_1)
-    showtweet(TWEET_STORY_STRIKE_BEGIN_2)
+    showzap(ZAP_STORY_STRIKE_BEGIN_1)
+    showzap(ZAP_STORY_STRIKE_BEGIN_2)
     goto(ANewStrike_PlayerSelf_Dialogue)
 }
 
