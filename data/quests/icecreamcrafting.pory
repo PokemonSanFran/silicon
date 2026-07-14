@@ -5,33 +5,6 @@ script Quest_SmoothieCrafting_Script_HideSmoothiecustomer
     setflag(FLAG_HIDE_SMOOTHIECUSTOMER)
 }
 
-script Quest_SmoothieCrafting_Script_Debug
-{
-    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        msgbox(format("you have item 1"))
-        closemessage
-        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_1,QUEST_SMOOTHIE_CRAFTING_QUANTITY_1)
-    }
-
-    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        msgbox(format("you have item 2"))
-        closemessage
-        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_2,QUEST_SMOOTHIE_CRAFTING_QUANTITY_2)
-    }
-
-    checkitem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
-    if (var(VAR_RESULT) == FALSE)
-    {
-        msgbox(format("you have item 3"))
-        closemessage
-        additem(QUEST_SMOOTHIE_CRAFTING_BERRY_3,QUEST_SMOOTHIE_CRAFTING_QUANTITY_3)
-    }
-}
-
 script Quest_SmoothieCrafting_Script_Interact
 {
     lock
@@ -50,9 +23,6 @@ script Quest_SmoothieCrafting_Script_Interact
 
 script Quest_SmoothieCrafting_Dialogue_GiveRecipe
 {
-#if TESTING
-    call(Quest_SmoothieCrafting_Script_Debug)
-#endif
     msgbox(format("Welcome to the Marble Slab’s soft opening!"),,SPEAKER_SMOOTHIESHOPKEEPER)
     callnative(Quest_SmoothieCrafting_BufferRecipe)
     bufferitemname(STR_VAR_1,QUEST_SMOOTHIE_CRAFTING_PRODUCT)
