@@ -85,7 +85,7 @@ const struct Zap gZaps[] =
     [ZAP_QUEST_NPC_FRESHWATER] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("There's this clearing in {STR_VAR_1} with no tall grass, beautiful trees and a fresh water spring. It's my favorite spot in the area. The water tastes better than any other I've ever tried, sometimes I swear its magical! I heard of a girl who had an octopus Pokemon turn shiny there!"),
+        .content = COMPOUND_STRING("There's this clearing in {STR_VAR_1} with beautiful trees and a freshwater spring. It's my favorite spot! The water tastes better than anywhere, I swear its magical! I heard a girl turned her octopus Pokemon shiny there!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Freshwater,
         .quest = QUEST_FRESHWATEREVOLUTION,

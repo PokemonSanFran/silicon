@@ -5,6 +5,11 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("{PLAYER}"),
         .isVerified = FALSE,
     },
+    [BUZZR_USER_RSPCP] =
+    {
+        .username = COMPOUND_STRING("Anti-Pokemon Cruelty"),
+        .isVerified = FALSE,
+    },
     [BUZZR_USER_BAIYA] =
     {
         .username = COMPOUND_STRING("ResidoReal"),
