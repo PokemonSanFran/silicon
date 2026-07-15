@@ -1405,7 +1405,10 @@ u8 GetItemListPosition(u8 pocketId)
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
 {
-    SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    if(!FlagGet(FLAG_SYS_USED_FROM_REGISTER_MENU))
+        SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    else
+        DisplayItemMessageOnField(taskId, str, Task_CloseCantUseKeyItemMessage);
     // Start inventory
     /*
     s16 *data = gTasks[taskId].data;
