@@ -12,6 +12,20 @@ const struct Zap gZaps[] =
         .dislikeCount = 0,
         .likeCount = 0,
     },
+    [ZAP_STORY_SUMMON] =
+    {
+        .userId = BUZZR_USER_OLIVER,
+        .content = COMPOUND_STRING("{PLAYER} and Charlotte, please meet me on the northern side of Pioca Bridge!"),
+        .isPrivate = TRUE,
+        .criteria = 0,
+    },
+    [ZAP_SUMMON_RESPONSE] =
+    {
+        .userId = BUZZR_USER_CHARLOTTE,
+        .content = COMPOUND_STRING("It's been 2 minutes, I'm leaving for Pioca Bridge without you!"),
+        .isPrivate = TRUE,
+        .criteria = 0,
+    },
     [ZAP_QUEST_NPC_RABIES] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
@@ -70,7 +84,7 @@ const struct Zap gZaps[] =
     },
     [ZAP_QUEST_NPC_FRESHWATER] =
     {
-        .userId = BUZZR_USER_VAUGHN,
+        .userId = BUZZR_USER_PLACEHOLDER,
         .content = COMPOUND_STRING("There's this clearing in {STR_VAR_1} with no tall grass, beautiful trees and a fresh water spring. It's my favorite spot in the area. The water tastes better than any other I've ever tried, sometimes I swear its magical! I heard of a girl who had an octopus Pokemon turn shiny there!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Freshwater,
