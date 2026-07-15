@@ -176,7 +176,7 @@ static void SetUpItemUseCallback(u8 taskId)
         type = GetItemType(gSpecialVar_ItemId) - 1;
 
     // Start inventory
-    SetMainCallback2(sItemUseCallbacks[type]); //asdf
+    SetMainCallback2(sItemUseCallbacks[type]);
     /*
 
     if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
@@ -914,7 +914,7 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine; //asdf
+    gItemUseCB = ItemUseCB_Medicine;
 
     SetUpItemUseCallback(taskId);
 }
@@ -1044,9 +1044,9 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
     if (REPEL_STEP_COUNT == 0)
         gTasks[taskId].func = Task_StartUseRepel;
     else if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-        DisplayItemMessage(taskId, FONT_NORMAL, gText_RepelEffectsLingered, CloseItemMessage);
+        DisplayItemMessageOnField(taskId, gText_RepelEffectsLingered, Task_CloseCantUseKeyItemMessage);
     else
-        DisplayItemMessageInBattlePyramid(taskId, gText_RepelEffectsLingered, Task_CloseBattlePyramidBagMessage);
+        DisplayItemMessageOnField(taskId, gText_RepelEffectsLingered, Task_CloseCantUseKeyItemMessage);
 }
 
 static void Task_StartUseRepel(u8 taskId)
@@ -1071,9 +1071,9 @@ static void Task_UseRepel(u8 taskId)
     #endif
         RemoveUsedItem();
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+            DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
     }
 }
 void HandleUseExpiredRepel(struct ScriptContext *ctx)
@@ -1088,9 +1088,9 @@ void ItemUseOutOfBattle_Lure(u8 taskId)
     if (LURE_STEP_COUNT == 0)
         gTasks[taskId].func = Task_StartUseLure;
     else if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-        DisplayItemMessage(taskId, FONT_NORMAL, gText_LureEffectsLingered, CloseItemMessage);
+        DisplayItemMessageOnField(taskId, gText_LureEffectsLingered, Task_CloseCantUseKeyItemMessage);
     else
-        DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsLingered, Task_CloseBattlePyramidBagMessage);
+        DisplayItemMessageOnField(taskId, gText_LureEffectsLingered, Task_CloseCantUseKeyItemMessage);
 }
 
 static void Task_StartUseLure(u8 taskId)
@@ -1115,9 +1115,9 @@ static void Task_UseLure(u8 taskId)
     #endif
         RemoveUsedItem();
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+            DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+            DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
     }
 }
 
