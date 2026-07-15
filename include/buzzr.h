@@ -9,16 +9,16 @@ extern u8 gZapOverworldWindowId;
 void Task_OpenBuzzrFromStartMenu(u8 taskId);
 void CB2_BuzzrFromStartMenu(void);
 void LoadPictureFromOverworld(void);
-const u32* GetPictureTiles(u16 zapId);
-bool32 Buzzr_IsZapRead(u16 zapId);
-void Buzzr_MarkZapAsRead(u16 zapId);
+const u32* GetPictureTiles(enum BuzzrZapIds zapId);
+bool32 Buzzr_IsZapRead(enum BuzzrZapIds zapId);
+void Buzzr_MarkZapAsRead(enum BuzzrZapIds zapId);
 void Buzzr_ResetSaveData(void);
-void Buzzr_ShowZapOverworld(u16 zapId);
+void Buzzr_ShowZapOverworld(enum BuzzrZapIds zapId);
 void Buzzr_HideZapOverworld(void);
-void Buzzr_ShowPicOverworld(u16 zapId);
+void Buzzr_ShowPicOverworld(enum BuzzrZapIds zapId);
 void Task_OpenBuzzrFromScript(u8 taskId);
-const u8 *GetUsername(u16 userId);
-bool32 IsVerified(u16 userId);
+const u8 *GetUsername(enum BuzzrUserIds userId);
+bool32 IsVerified(enum BuzzrUserIds userId);
 void PrintHeaderIcons(u8 windowId, const u8 *iconId, u16 x, u16 y);
 
 struct Users // src/data/buzzr/users
@@ -29,7 +29,7 @@ struct Users // src/data/buzzr/users
 
 struct Zap
 {
-    u16 userId;  // src/data/buzzr/users
+    enum BuzzrUserIds userId;  // src/data/buzzr/users
     const u8 *content; // src/data/buzzr/content
     const u32 *tiles; // src/data/buzzr/picture
     const u16 *tilemap;

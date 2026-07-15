@@ -72,7 +72,7 @@ static u32 GetNumTimelineZaps(void);
 static u32 CalculateLastPosition(void);
 static bool32 IsCurrentPositionBottom(void);
 static bool8 UpdatePosition(bool32 moveDown);
-static u32 GetZapIdFromPosition(u32 position);
+static enum BuzzrZapIds GetZapIdFromPosition(u32 position);
 static void DebugPrintTimeline(u32 time);
 static void Task_BuzzrWaitFadeIn(u8 taskId);
 static void Task_MainInput(u8 taskId);
@@ -92,50 +92,50 @@ static void Buzzr_FreeResources(void);
 static void BufferToVram_Windows(void);
 static bool8 LoadGraphics(void);
 static void Buzzr_InitWindows(void);
-static u16 GetUserId(u16 zapId);
-static const u8 *GetContent(u16 zapId);
+static enum BuzzrUserIds GetUserId(enum BuzzrZapIds zapId);
+static const u8 *GetContent(enum BuzzrZapIds zapId);
 static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId);
-static void *GetCriteria(u16 zapId);
-static u16 GetQuest(u16 zapId);
-static bool32 IsPrivate(u16 zapId);
-static u16 GetDislikes(u16 zapId);
-static u16 GetLikes(u16 zapId);
+static void *GetCriteria(enum BuzzrZapIds zapId);
+static u16 GetQuest(enum BuzzrZapIds zapId);
+static bool32 IsPrivate(enum BuzzrZapIds zapId);
+static u16 GetDislikes(enum BuzzrZapIds zapId);
+static u16 GetLikes(enum BuzzrZapIds zapId);
 static bool32 IsSortOrderOldestFirst(void);
 static bool32 IsTimelinePictureMode(void);
 static void HandleMenuHeader(void);
 static void HandleTimeline(void);
 static bool32 CheckIfPrintWillOverflow(u32 verticalOffset);
-static const u32 GetNumContentLines(u16 zapId);
-static u32 CalculateZapContentHeight(u16 zapId);
+static const u32 GetNumContentLines(enum BuzzrZapIds zapId);
+static u32 CalculateZapContentHeight(enum BuzzrZapIds zapId);
 static u32 CalculateZapHeaderHeight(void);
-static u32 CalculateZapTotalHeight(u16 zapId);
+static u32 CalculateZapTotalHeight(enum BuzzrZapIds zapId);
 static void ResetVerticalOffset(void);
 static void SetVerticalOffset(u32 offset);
 static u32 GetVerticalOffset(void);
 static u32 CalculateVerticalOffset(u32 numZap, u32 previousZap);
 static void PrintSortModeHeader(u8 windowId);
-static void PrintZap(u32 numZap, u16 selectedZap, u32 verticalOffset, u32 typeZap);
+static void PrintZap(u32 numZap, enum BuzzrZapIds selectedZap, u32 verticalOffset, u32 typeZap);
 static void HandleZapBackground(u32 numZap, u16 selectedZap, u32 verticalOffset);
-static void HandleZapHeader(u16 zapId, u32 verticalOffset, u32 typeZap);
+static void HandleZapHeader(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap);
 static u32 UpdateHorizontalHeaderPosition(u8 *zapUsername, u32 fontId);
-static void PrintZap_OverworldHeader(u16 zapId);
-static void PrintZap_TimelineHeader(u16 zapId, u32 verticalOffset);
+static void PrintZap_OverworldHeader(enum BuzzrZapIds zapId);
+static void PrintZap_TimelineHeader(enum BuzzrZapIds zapId, u32 verticalOffset);
 static void PrintUsername(u32 windowId, u32 x, u32 y, const u8 *username, u32 fontId);
 static void PrintPrivateZapRecipient(u32 windowId,u32 x,u32 y,u32 fontId);
-static void PrintZapHeader(u16 zapId, u32 windowId, u32 verticalOffset);
+static void PrintZapHeader(enum BuzzrZapIds zapId, u32 windowId, u32 verticalOffset);
 static const u8 GetFontColor(void);
 static void HandleZapMetrics(u16 selectedZap, u32 verticalOffset);
 static void PrintMetricIcons(u32 windowId, u32 x, u32 y);
-static void HandleZapContent(u16 zapId, u32 verticalOffset, u32 typeZap);
-static void PrintZap_TimelineContent(u16 zapId, u32 verticalOffset);
-static void PrintZap_OverworldContent(u16 zapId);
-static void PrintZapContent(u32 windowId, u16 zapId, const u8 *fontColor, u32 y);
-static void HandleZapIcons(u16 zapId, u32 verticalOffset, u32 typeZap);
-static void PrintZap_OverworldIcons(u16 zapId);
-static void PrintZap_TimelineIcons(u16 zapId, u32 verticalOffset);
-static u32 CalculateIndicatorIconHeight(u16 zapId, u32 verticalOffset);
+static void HandleZapContent(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap);
+static void PrintZap_TimelineContent(enum BuzzrZapIds zapId, u32 verticalOffset);
+static void PrintZap_OverworldContent(enum BuzzrZapIds zapId);
+static void PrintZapContent(u32 windowId, enum BuzzrZapIds zapId, const u8 *fontColor, u32 y);
+static void HandleZapIcons(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap);
+static void PrintZap_OverworldIcons(enum BuzzrZapIds zapId);
+static void PrintZap_TimelineIcons(enum BuzzrZapIds zapId, u32 verticalOffset);
+static u32 CalculateIndicatorIconHeight(enum BuzzrZapIds zapId, u32 verticalOffset);
 static bool32 CheckZapPrintUnreadIcon(u32 windowId, u32 zapId, u32 x, u32 y, u32 typeZap);
-static void CheckZapPrintPictureIcon(u32 windowId,u16 zapId,u32 x, u32 y);
+static void CheckZapPrintPictureIcon(u32 windowId,enum BuzzrZapIds zapId,u32 x, u32 y);
 static void PrintZapIcons(u32 zapId, u32 windowId, u32 x, u32 y, u32 typeZap);
 static void PrintMenuHeaderAndTimeline(void);
 static void PrintMenuHeader(void);
@@ -152,7 +152,7 @@ static u32 ChangeFilter(u32 action);
 static void ClearTimeline(void);
 static bool32 DoesZapMatchFilter(u32 zapId);
 static void SetNumTimelineZaps(u32 num);
-static u32 GetZapIdFromSaveblockPosition(u32 index);
+static enum BuzzrZapIds GetZapIdFromSaveblockPosition(u32 index);
 static bool32 IfZapIdInSaveBlockIsZero(u32 index);
 static void LoadTimelineOrderFromSaveBlock(void);
 static void FilterTimeline(void);
@@ -163,13 +163,13 @@ static void AddNewZapsToTimeline(void);
 static bool32 CheckIfZapCanBeAdded(u32 zapIndex);
 static void AddZapToBitmap(u32 zapId);
 static bool32 IsZapInTimeline(u32 zapId);
-static bool32 IsZapCriteriaMet(u16 zapId);
+static bool32 IsZapCriteriaMet(enum BuzzrZapIds zapId);
 static u32 GetFilter(void);
 static void ReadFilterAndModeFromSaveBlock(void);
 static void WriteTimelineOrderToSaveBlock(void);
 static u32 WriteFilterToSaveBlock(u32 filter);
 static bool32 WriteSortToSaveBlock(bool32 oldestTop);
-static void SetZapFromOverworld(u16 zapId);
+static void SetZapFromOverworld(enum BuzzrZapIds zapId);
 static void ClearZapFromOverworld(void);
 static u32 GetZapFromOverworld(void);
 static bool32 Buzzr_IsCalledFromOverworld(void);
@@ -719,7 +719,7 @@ static bool8 UpdatePosition(bool32 moveDown)
     return TRUE;
 }
 
-static u32 GetZapIdFromPosition(u32 position)
+static enum BuzzrZapIds GetZapIdFromPosition(u32 position)
 {
     if ((position < 0) || (position >= ZAP_COUNT))
         position = 0;
@@ -762,7 +762,7 @@ static void Task_MainInput(u8 taskId)
 {
     ResetQuestFanfareFlag();
 
-    u32 currentZapId = GetZapIdFromPosition(GetCurrentPosition());
+    enum BuzzrZapIds currentZapId = GetZapIdFromPosition(GetCurrentPosition());
 
     if (!Buzzr_IsZapRead(currentZapId))
     {
@@ -971,19 +971,19 @@ static void Buzzr_InitWindows(void)
     BufferToVram_Windows();
 }
 
-static u16 GetUserId(u16 zapId)
+static enum BuzzrUserIds GetUserId(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].userId;
 }
 
-static const u8 *GetContent(u16 zapId)
+static const u8 *GetContent(enum BuzzrZapIds zapId)
 {
     Buzzr_ExpandStrings(zapId);
     StringExpandPlaceholders(gStringVar4,gZaps[zapId].content);
     return gStringVar4;
 }
 
-const u32* GetPictureTiles(u16 zapId)
+const u32* GetPictureTiles(enum BuzzrZapIds zapId)
 {
     if (zapId >= sizeof(gZaps) / sizeof(gZaps[0]))
         return NULL;
@@ -991,37 +991,37 @@ const u32* GetPictureTiles(u16 zapId)
     return gZaps[zapId].tiles;
 }
 
-static void *GetCriteria(u16 zapId)
+static void *GetCriteria(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].criteria;
 }
 
-static u16 GetQuest(u16 zapId)
+static u16 GetQuest(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].quest;
 }
 
-static bool32 IsPrivate(u16 zapId)
+static bool32 IsPrivate(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].isPrivate;
 }
 
-static u16 GetDislikes(u16 zapId)
+static u16 GetDislikes(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].dislikeCount;
 }
 
-static u16 GetLikes(u16 zapId)
+static u16 GetLikes(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].likeCount;
 }
 
-bool32 Buzzr_IsZapRead(u16 zapId)
+bool32 Buzzr_IsZapRead(enum BuzzrZapIds zapId)
 {
     return gSaveBlock2Ptr->buzzr.IsRead[zapId];
 }
 
-const u8 *GetUsername(u16 userId)
+const u8 *GetUsername(enum BuzzrUserIds userId)
 {
     StringCopy(gStringVar3,sText_UsernamePrefix);
     StringExpandPlaceholders(gStringVar2,gBuzzrUsers[userId].username);
@@ -1029,7 +1029,7 @@ const u8 *GetUsername(u16 userId)
     return gStringVar3;
 }
 
-bool32 IsVerified(u16 userId)
+bool32 IsVerified(enum BuzzrUserIds userId)
 {
     return gBuzzrUsers[userId].isVerified;
 }
@@ -1052,8 +1052,7 @@ static bool32 IsTimelinePictureMode(void)
 static void HandleMenuHeader(void)
 {
     u8 windowId = BUZZR_WINDOW_HEADER;
-    u32 currentPosition = GetCurrentPosition();
-    u32 selectedZap = GetZapIdFromPosition(currentPosition);
+    enum BuzzrZapIds selectedZap = GetZapIdFromPosition(GetCurrentPosition());
 
     if ((IsSortOrderOldestFirst()) && (!IsTimelinePictureMode()))
         PrintSortModeHeader(BUZZR_WINDOW_HEADER);
@@ -1066,12 +1065,13 @@ static void HandleMenuHeader(void)
 static void HandleTimeline(void)
 {
     u32 currentPosition = GetCurrentPosition();
+    u32 verticalOffset;
     s32 positionIndex = currentPosition - 1;
-    u32 previousZap, zapIndex, verticalOffset;
+    enum BuzzrZapIds previousZap, zapIndex;
 
     ResetVerticalOffset();
 
-    for (u32 numZap = 0; numZap < MAX_NUM_ZAPS_SHOWN;numZap++)
+    for (u32 numZap = 0; numZap < MAX_NUM_ZAPS_SHOWN; numZap++)
     {
         previousZap = GetZapIdFromPosition(positionIndex);
         SetVerticalOffset(CalculateVerticalOffset(numZap,previousZap));
@@ -1092,7 +1092,7 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
     return (verticalOffset > TIMELINE_PRINT_HEIGHT);
 }
 
-static const u32 GetNumContentLines(u16 zapId)
+static const u32 GetNumContentLines(enum BuzzrZapIds zapId)
 {
     const u8 *str = GetContent(zapId);
     StripLineBreaks(gStringVar4);
@@ -1124,7 +1124,7 @@ static u8 CalculateZapContentTiles(u32 zapId)
     return lines;
 }
 
-static u32 CalculateZapContentHeight(u16 zapId)
+static u32 CalculateZapContentHeight(enum BuzzrZapIds zapId)
 {
     u32 lines = CalculateZapContentTiles(zapId);
     return (TILE_TO_PIXELS(lines));
@@ -1135,7 +1135,7 @@ static u32 CalculateZapHeaderHeight(void)
     return (GetFontAttribute(FONT_BUZZR_METRICS,FONTATTR_MAX_LETTER_HEIGHT));
 }
 
-static u32 CalculateZapTotalHeight(u16 zapId)
+static u32 CalculateZapTotalHeight(enum BuzzrZapIds zapId)
 {
     return (CalculateZapContentHeight(zapId) + TILE_SIZE_1BPP);
 }
@@ -1175,7 +1175,7 @@ static void PrintSortModeHeader(u8 windowId)
     AddTextPrinterParameterized4(windowId, fontId,SORT_MODE_TEXT_X_POSITION, 0, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW,sText_OldestFirst);
 }
 
-static void PrintZap(u32 numZap, u16 selectedZap, u32 verticalOffset, u32 typeZap)
+static void PrintZap(u32 numZap, enum BuzzrZapIds selectedZap, u32 verticalOffset, u32 typeZap)
 {
     if (selectedZap == ZAP_NONE)
         return;
@@ -1221,7 +1221,7 @@ static void HandleZapBackground(u32 numZap, u16 selectedZap, u32 verticalOffset)
 
 }
 
-static void HandleZapHeader(u16 zapId, u32 verticalOffset, u32 typeZap)
+static void HandleZapHeader(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap)
 {
     if (Buzzr_IsCalledFromOverworld())
         PrintZap_OverworldHeader(zapId);
@@ -1234,14 +1234,14 @@ static u32 UpdateHorizontalHeaderPosition(u8 *zapUsername, u32 fontId)
     return (GetStringWidth(fontId,zapUsername,GetFontAttribute(fontId,FONTATTR_LETTER_SPACING)) + ICON_SPACING);
 }
 
-static void PrintZap_OverworldHeader(u16 zapId)
+static void PrintZap_OverworldHeader(enum BuzzrZapIds zapId)
 {
     u32 windowId = gZapOverworldWindowId;
     u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
     PrintZapHeader(zapId, windowId, verticalOffset);
 }
 
-static void PrintZap_TimelineHeader(u16 zapId, u32 verticalOffset)
+static void PrintZap_TimelineHeader(enum BuzzrZapIds zapId, u32 verticalOffset)
 {
     u32 windowId = BUZZR_WINDOW_HEADER;
     PrintZapHeader(zapId, windowId, verticalOffset);
@@ -1262,7 +1262,7 @@ static void PrintPrivateZapRecipient(u32 windowId,u32 x,u32 y,u32 fontId)
     PrintUsername(windowId,x,y,GetUsername(BUZZR_USER_PLAYER),fontId);
 }
 
-static void PrintZapHeader(u16 zapId, u32 windowId, u32 verticalOffset)
+static void PrintZapHeader(enum BuzzrZapIds zapId, u32 windowId, u32 verticalOffset)
 {
     u32 x = ZAP_HEADER_LEFT_PADDING;
     u32 y = (verticalOffset / 8) * 8;
@@ -1273,7 +1273,7 @@ static void PrintZapHeader(u16 zapId, u32 windowId, u32 verticalOffset)
     u32 fontId = FONT_BUZZR_USER;
 
     u8 *zapUsername = Alloc(USER_MAX_LENGTH*2);
-    u32 userId = GetUserId(zapId);
+    enum BuzzrUserIds userId = GetUserId(zapId);
 
     StringCopy(zapUsername,GetUsername(userId));
     PrintUsername(windowId,x,y,zapUsername,fontId);
@@ -1323,7 +1323,7 @@ static void PrintMetricIcons(u32 windowId, u32 x, u32 y)
     BlitBitmapToWindow(windowId,sMetrics_Gfx,x,y,40,16);
 }
 
-static void HandleZapContent(u16 zapId, u32 verticalOffset, u32 typeZap)
+static void HandleZapContent(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap)
 {
     if (Buzzr_IsCalledFromOverworld())
         PrintZap_OverworldContent(zapId);
@@ -1331,7 +1331,7 @@ static void HandleZapContent(u16 zapId, u32 verticalOffset, u32 typeZap)
         PrintZap_TimelineContent(zapId, verticalOffset);
 }
 
-static void PrintZap_TimelineContent(u16 zapId, u32 verticalOffset)
+static void PrintZap_TimelineContent(enum BuzzrZapIds zapId, u32 verticalOffset)
 {
     u32 windowId = BUZZR_WINDOW_HEADER;
     u32 y = verticalOffset + CalculateZapHeaderHeight();
@@ -1340,7 +1340,7 @@ static void PrintZap_TimelineContent(u16 zapId, u32 verticalOffset)
     PrintZapContent(windowId, zapId, fontColor, y);
 }
 
-static void PrintZap_OverworldContent(u16 zapId)
+static void PrintZap_OverworldContent(enum BuzzrZapIds zapId)
 {
     u32 windowId = gZapOverworldWindowId;
     u32 verticalOffset = TILE_TO_PIXELS(GetWindowAttribute(windowId,WINDOW_TILEMAP_TOP));
@@ -1350,7 +1350,7 @@ static void PrintZap_OverworldContent(u16 zapId)
     PrintZapContent(windowId, zapId, fontColor, y);
 }
 
-static void PrintZapContent(u32 windowId, u16 zapId, const u8 *fontColor, u32 y)
+static void PrintZapContent(u32 windowId, enum BuzzrZapIds zapId, const u8 *fontColor, u32 y)
 {
     u32 x = 12;
     u32 windowWidth = ZAP_WINDOW_WIDTH;
@@ -1363,7 +1363,7 @@ static void PrintZapContent(u32 windowId, u16 zapId, const u8 *fontColor, u32 y)
     AddTextPrinterParameterized4(windowId, FONT_BUZZR_ZAP, x, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId, FONTATTR_LINE_SPACING), fontColor, TEXT_SKIP_DRAW,gStringVar4);
 }
 
-static void HandleZapIcons(u16 zapId, u32 verticalOffset, u32 typeZap)
+static void HandleZapIcons(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap)
 {
     if (Buzzr_IsCalledFromOverworld())
         PrintZap_OverworldIcons(zapId);
@@ -1371,20 +1371,20 @@ static void HandleZapIcons(u16 zapId, u32 verticalOffset, u32 typeZap)
         PrintZap_TimelineIcons(zapId, verticalOffset);
 }
 
-static void PrintZap_OverworldIcons(u16 zapId)
+static void PrintZap_OverworldIcons(enum BuzzrZapIds zapId)
 {
     u32 y = CalculateIndicatorIconHeight(zapId, 0);
 
     PrintZapIcons(zapId, gZapOverworldWindowId,ZAP_INDICATOR_X_POSITION,y, MODE_OVERWORLD);
 }
 
-static void PrintZap_TimelineIcons(u16 zapId, u32 verticalOffset)
+static void PrintZap_TimelineIcons(enum BuzzrZapIds zapId, u32 verticalOffset)
 {
     u32 y = CalculateIndicatorIconHeight(zapId, verticalOffset);
     PrintZapIcons(zapId, BUZZR_WINDOW_HEADER,ZAP_INDICATOR_X_POSITION,y, MODE_TIMELINE);
 }
 
-static u32 CalculateIndicatorIconHeight(u16 zapId, u32 verticalOffset)
+static u32 CalculateIndicatorIconHeight(enum BuzzrZapIds zapId, u32 verticalOffset)
 {
     verticalOffset = (verticalOffset / 8) * 8;
     u32 height = CalculateZapContentHeight(zapId);
@@ -1403,7 +1403,7 @@ static bool32 CheckZapPrintUnreadIcon(u32 windowId, u32 zapId, u32 x, u32 y, u32
     return TRUE;
 }
 
-static void CheckZapPrintPictureIcon(u32 windowId,u16 zapId,u32 x, u32 y)
+static void CheckZapPrintPictureIcon(u32 windowId,enum BuzzrZapIds zapId,u32 x, u32 y)
 {
     if (GetPictureTiles(zapId))
         PrintHeaderIcons(windowId, sPicture_Gfx, x, y);
@@ -1439,7 +1439,7 @@ static void PrintMenuHeader(void)
 
 static const u8 *GetHelpBarText(void)
 {
-    u32 currentZapId = GetZapIdFromPosition(GetCurrentPosition());
+    enum BuzzrZapIds currentZapId = GetZapIdFromPosition(GetCurrentPosition());
     bool32 hasPic = (GetPictureTiles(currentZapId) != NULL);
     bool32 isPictureMode = IsTimelinePictureMode();
     bool32 numZaps = (GetNumTimelineZaps() > 1);
@@ -1474,7 +1474,7 @@ static void PrintHelpBar(void)
 
 static const u32 *GetRelevantTiles(void)
 {
-    u32 zapId = GetZapIdFromPosition(GetCurrentPosition());
+    enum BuzzrZapIds zapId = GetZapIdFromPosition(GetCurrentPosition());
     if (Buzzr_IsCalledFromOverworld())
         zapId = overworldZap;
 
@@ -1486,7 +1486,7 @@ static const u32 *GetRelevantTiles(void)
 
 static const u16 *GetRelevantTilemap(void)
 {
-    u32 zapId = GetZapIdFromPosition(GetCurrentPosition());
+    enum BuzzrZapIds zapId = GetZapIdFromPosition(GetCurrentPosition());
     if (Buzzr_IsCalledFromOverworld())
         zapId = overworldZap;
 
@@ -1498,7 +1498,7 @@ static const u16 *GetRelevantTilemap(void)
 
 static const u16 *GetRelevantPalette(void)
 {
-    u32 zapId = GetZapIdFromPosition(GetCurrentPosition());
+    enum BuzzrZapIds zapId = GetZapIdFromPosition(GetCurrentPosition());
     if (Buzzr_IsCalledFromOverworld())
         zapId = overworldZap;
 
@@ -1560,34 +1560,16 @@ static void ClearTimeline(void)
 
 static bool32 DoesZapMatchFilter(u32 zapId)
 {
-    u32 userId = GetUserId(zapId);
+    enum BuzzrUserIds userId = GetUserId(zapId);
 
     switch (GetFilter())
     {
-        case TIMELINE_FILTER_ALL:
-            if (zapId != ZAP_NONE)
-                return TRUE;
-            break;
-        case TIMELINE_FILTER_UNREAD:
-            if (!Buzzr_IsZapRead(zapId))
-                return TRUE;
-            break;
-        case TIMELINE_FILTER_QUEST:
-            if (GetQuest(zapId))
-                return TRUE;
-            break;
-        case TIMELINE_FILTER_PLAYER:
-            if (userId == BUZZR_USER_PLAYER)
-                return TRUE;
-            break;
-        case TIMELINE_FILTER_VERIFIED:
-            if (IsVerified(userId))
-                return TRUE;
-            break;
-        case TIMELINE_FILTER_PRIVATE:
-            if (IsPrivate(zapId))
-                return TRUE;
-            break;
+        case TIMELINE_FILTER_ALL:     return (zapId != ZAP_NONE);
+        case TIMELINE_FILTER_UNREAD:  return (!Buzzr_IsZapRead(zapId));
+        case TIMELINE_FILTER_QUEST:   return (GetQuest(zapId) != 0);
+        case TIMELINE_FILTER_PLAYER:  return (userId == BUZZR_USER_PLAYER);
+        case TIMELINE_FILTER_VERIFIED:return (IsVerified(userId));
+        case TIMELINE_FILTER_PRIVATE: return (IsPrivate(zapId));
     }
     return FALSE;
 }
@@ -1597,7 +1579,7 @@ static void SetNumTimelineZaps(u32 num)
     sBuzzrLists->numTimelineZaps = num;
 }
 
-static u32 GetZapIdFromSaveblockPosition(u32 index)
+static enum BuzzrZapIds GetZapIdFromSaveblockPosition(u32 index)
 {
     return gSaveBlock2Ptr->buzzr.Order[index];
 }
@@ -1624,10 +1606,10 @@ static void LoadTimelineOrderFromSaveBlock(void)
 
 static void FilterTimeline(void)
 {
-    u32 selectedZap, orderIndex, timelineIndex = 0;
-    for (orderIndex = 0; orderIndex < ZAP_COUNT; orderIndex++)
+    u32 timelineIndex = 0;
+    for (u32 orderIndex = 0; orderIndex < ZAP_COUNT; orderIndex++)
     {
-        selectedZap = GetZapIdFromSaveblockPosition(orderIndex);
+        enum BuzzrZapIds selectedZap = GetZapIdFromSaveblockPosition(orderIndex);
 
         if (selectedZap == ZAP_NONE)
             break;
@@ -1642,7 +1624,7 @@ static void FilterTimeline(void)
 static void ReverseTimelineOrder(u32 numTimelineZaps, u32 index)
 {
     u32 tempIndex = (numTimelineZaps - index - 1);
-    u32 temp = GetZapIdFromPosition(index);
+    enum BuzzrZapIds temp = GetZapIdFromPosition(index);
 
     AddZapToTimeline(index,GetZapIdFromPosition(tempIndex));
     AddZapToTimeline(tempIndex,temp);
@@ -1708,7 +1690,7 @@ static bool32 IsZapInTimeline(u32 zapId)
     return (sBuzzrLists->ZapBitmap[index] & (1u << bit)) != 0;
 }
 
-static bool32 IsZapCriteriaMet(u16 zapId)
+static bool32 IsZapCriteriaMet(enum BuzzrZapIds zapId)
 {
     void (*zapFunction)(void) = GetCriteria(zapId);
 
@@ -1733,13 +1715,11 @@ static void ReadFilterAndModeFromSaveBlock(void)
 
 static void WriteTimelineOrderToSaveBlock(void)
 {
-    u32 j = 0;
-
-    for(j = 0; j < ZAP_COUNT; j++)
+    for(u32 j = 0; j < ZAP_COUNT; j++)
         gSaveBlock2Ptr->buzzr.Order[j] = GetZapIdFromPosition(j);
 }
 
-void Buzzr_MarkZapAsRead(u16 zapId)
+void Buzzr_MarkZapAsRead(enum BuzzrZapIds zapId)
 {
     gSaveBlock2Ptr->buzzr.IsRead[zapId] = TRUE;
 }
@@ -1768,7 +1748,7 @@ void Buzzr_ResetSaveData(void)
     }
 }
 
-void Buzzr_ShowZapOverworld(u16 zapId)
+void Buzzr_ShowZapOverworld(enum BuzzrZapIds zapId)
 {
     if (zapId == ZAP_NONE)
         return;
@@ -1791,7 +1771,7 @@ void Buzzr_HideZapOverworld(void)
     gZapOverworldWindowId = WINDOW_NONE;
 }
 
-static void SetZapFromOverworld(u16 zapId)
+static void SetZapFromOverworld(enum BuzzrZapIds zapId)
 {
     overworldZap = zapId;
 }
@@ -1806,7 +1786,7 @@ static u32 GetZapFromOverworld(void)
     return overworldZap;
 }
 
-void Buzzr_ShowPicOverworld(u16 zapId)
+void Buzzr_ShowPicOverworld(enum BuzzrZapIds zapId)
 {
     SetZapFromOverworld(zapId);
     CreateTask(Task_OpenBuzzrFromScript,0);
@@ -2024,13 +2004,14 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
             break;
         case ZAP_QUEST_NPC_SMOOTHIE_COMPLETE:
-            StringCopy(gStringVar3,GetItemName(ITEM_FRESH_START_MOCHI));
+            StringCopy(gStringVar1,GetItemName(ITEM_FRESH_START_MOCHI));
             break;
         case ZAP_QUEST_NPC_SMOOTHIE:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA_ICE_CREAM_SHOP),MAP_NUM(MAP_CHASILLA_ICE_CREAM_SHOP))->regionMapSectionId,0);
             StringCopy(gStringVar3,GetItemName(QUEST_SMOOTHIE_CRAFTING_PRODUCT));
             Quest_SmoothieCrafting_BufferRecipe();
             break;
+        case ZAP_QUEST_NPC_RABIES_COMPLETE:
         case ZAP_QUEST_NPC_RABIES:
             StringCopy(gStringVar1,GetSpeciesName(QUEST_RABIES_OUTBREAK_SPECIES));
             GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_RABIES_OUTBREAK_MAP),MAP_NUM(QUEST_RABIES_OUTBREAK_MAP))->regionMapSectionId,0);
@@ -2056,7 +2037,6 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
             StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
             CopyItemNameHandlePlural(ITEM_IRON,gStringVar2,2);
             CopyItemNameHandlePlural(ITEM_ZINC,gStringVar3,3);
-            StringCopy(gStringVar1,GetSpeciesName(SPECIES_SINISTEA_PHONY));
             break;
         case ZAP_QUEST_NPC_STONE:
             ConvertIntToDecimalStringN(gStringVar1,NUM_QUEST_BETWEENASTONEANDAHARDPLACE_TROLLEY_RIDES,STR_CONV_MODE_LEFT_ALIGN,2);
