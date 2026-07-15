@@ -14,6 +14,7 @@
 #include "gba/macro.h"
 #include "menu_helpers.h"
 #include "malloc.h"
+#include "move.h"
 #include "scanline_effect.h"
 #include "constants/rgb.h"
 #include "constants/quest_ow.h"
@@ -1161,7 +1162,6 @@ static u32 GetVerticalOffset(void)
 static u32 CalculateVerticalOffset(u32 numZap, u32 previousZap)
 {
     u32 offset = GetVerticalOffset();
-
     if (numZap == 0)
         return offset + ZAP_HEADER_TOP_PADDING;
     else
@@ -2000,6 +2000,10 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
     {
         default:
             return;
+        case ZAP_STORY_SUMMON:
+        case ZAP_SUMMON_RESPONSE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PIOCA_BRIDGE),MAP_NUM(MAP_PIOCA_BRIDGE))->regionMapSectionId,0);
+            break;
         case ZAP_QUEST_NPC_FRESHWATER:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(QUEST_FRESHWATER_EVOLUTION_MAP),MAP_NUM(QUEST_FRESHWATER_EVOLUTION_MAP))->regionMapSectionId,0);
             break;
@@ -2010,6 +2014,12 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA_ICE_CREAM_SHOP),MAP_NUM(MAP_CHASILLA_ICE_CREAM_SHOP))->regionMapSectionId,0);
             StringCopy(gStringVar3,GetItemName(QUEST_SMOOTHIE_CRAFTING_PRODUCT));
             Quest_SmoothieCrafting_BufferRecipe();
+            break;
+        case ZAP_QUEST_NPC_DEOXYS:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_DEOXYS));
+            break;
+        case ZAP_GYM_CHASILLA_BADGE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
             break;
         case ZAP_QUEST_NPC_RABIES_COMPLETE:
         case ZAP_QUEST_NPC_RABIES:
@@ -2110,6 +2120,213 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId)
         case ZAP_QUEST_HYBRID_CULTURE_SHINZO_5:
         case ZAP_QUEST_HYBRID_CULTURE_LISTICLE_5:
             GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_QUEST_HYBRID_CULTURE_5),MAP_NUM(MAP_QUEST_HYBRID_CULTURE_5))->regionMapSectionId,0);
+            break;
+        case ZAP_STORY_STRIKE_BEGIN_1:
+        case ZAP_STORY_STRIKE_BEGIN_2:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_SHARPRISE_STADIUM_CONSTRUCTION),MAP_NUM(MAP_SHARPRISE_STADIUM_CONSTRUCTION))->regionMapSectionId,0);
+            break;
+        case ZAP_STORY_WAREHOUSE_RAVE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
+            break;
+        case ZAP_ADAORA_MIDRIFF:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TORA_TOWN),MAP_NUM(MAP_TORA_TOWN))->regionMapSectionId,0);
+            break;
+        case ZAP_ADAORA_ZODIAC:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_CRUSTLE));
+            break;
+        case ZAP_NEEDLES_REVIEW:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_MERMEREZA_CITY),MAP_NUM(MAP_MERMEREZA_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_BAIYA_RUDE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE7),MAP_NUM(MAP_ROUTE7))->regionMapSectionId,0);
+            break;
+        case ZAP_BAIYA_MAINCHARACTER:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PINTILLON_HOUSE_EXTERIOR),MAP_NUM(MAP_PINTILLON_HOUSE_EXTERIOR))->regionMapSectionId,0);
+            break;
+        case ZAP_MEGACROSS_DEFENSE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_SHARPRISE_STADIUM_ARENA),MAP_NUM(MAP_SHARPRISE_STADIUM_ARENA))->regionMapSectionId,0);
+            break;
+        case ZAP_BD_MULTITASK:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_IRISINA_TOWN),MAP_NUM(MAP_IRISINA_TOWN))->regionMapSectionId,0);
+            break;
+        case ZAP_CAPHE_MORRIS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_YOBU_PIOCA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_FORT_YOBU),MAP_NUM(MAP_FORT_YOBU))->regionMapSectionId,0);
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PIOCA_BRIDGE),MAP_NUM(MAP_PIOCA_BRIDGE))->regionMapSectionId,0);
+            break;
+        case ZAP_IRISINA_QUEER:
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_IRISINA_TOWN),MAP_NUM(MAP_IRISINA_TOWN))->regionMapSectionId,0);
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_TIRABUDIN_ZINES:
+        case ZAP_TIRABUDIN_ZINES2:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TIRABUDIN_PLACE),MAP_NUM(MAP_TIRABUDIN_PLACE))->regionMapSectionId,0);
+            break;
+        case ZAP_TORA_MOCHI:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TORA_TOWN),MAP_NUM(MAP_TORA_TOWN))->regionMapSectionId,0);
+            break;
+        case ZAP_NEW_TRAINERS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CUCONU_TOWN),MAP_NUM(MAP_CUCONU_TOWN))->regionMapSectionId,0);
+            break;
+        case ZAP_BAIYA_CHEWING:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_MERMEREZA_CITY),MAP_NUM(MAP_MERMEREZA_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_CAPHE_QUEUE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_CHARLOTTE_PRODIGY:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_SHARPRISE_SPIRE_TOP),MAP_NUM(MAP_SHARPRISE_SPIRE_TOP))->regionMapSectionId,0);
+            break;
+        case ZAP_POPIDORA_FREAKS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_POPIDORA_PIER),MAP_NUM(MAP_POPIDORA_PIER))->regionMapSectionId,0);
+            break;
+        case ZAP_CURENO_TIDE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
+            break;
+        case ZAP_GOLD_BREEDING:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_SLOWPOKE));
+            break;
+        case ZAP_EARTHQUAKE_PANIC:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_POLITOED));
+            break;
+        case ZAP_LONG_BATTLE:
+            StringCopy(gStringVar1,GetMoveName(MOVE_HYPNOSIS));
+            break;
+        case ZAP_KEIYING_YOBU:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_FORT_YOBU),MAP_NUM(MAP_FORT_YOBU))->regionMapSectionId,0);
+            break;
+        case ZAP_TALA_FIRED:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_HOUNDOOM));
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TIRABUDIN_PLACE),MAP_NUM(MAP_TIRABUDIN_PLACE))->regionMapSectionId,0);
+            break;
+        case ZAP_BAIYA_TALA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TIRABUDIN_PLACE),MAP_NUM(MAP_TIRABUDIN_PLACE))->regionMapSectionId,0);
+            break;
+        case ZAP_RAID_PSA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_NAVAL_BASE),MAP_NUM(MAP_NAVAL_BASE))->regionMapSectionId,0);
+            break;
+        case ZAP_CHAMPIONSHIP_START:
+            StringCopy(gStringVar1,GetMoveName(MOVE_SHOCK_WAVE));
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_CHANDELURE));
+            break;
+        case ZAP_SHARPRISE_FAN:
+            StringCopy(gStringVar1,GetMoveName(MOVE_SALT_CURE));
+            break;
+        case ZAP_PLAYER_BAIYA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ZENZU_ISLAND),MAP_NUM(MAP_ZENZU_ISLAND))->regionMapSectionId,0);
+            break;
+        case ZAP_HODOU_JOHNNY:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_HODOU_CITY),MAP_NUM(MAP_HODOU_CITY))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_CLEFABLE));
+            break;
+        case ZAP_ZENZU_MOVING:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ZENZU_ISLAND),MAP_NUM(MAP_ZENZU_ISLAND))->regionMapSectionId,0);
+            break;
+        case ZAP_ESPULEE_SHELL:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS),MAP_NUM(MAP_ESPULEE_OUTSKIRTS))->regionMapSectionId,0);
+            break;
+        case ZAP_ARANTRAZ_UNSETTLING:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ARANTRAZ),MAP_NUM(MAP_ARANTRAZ))->regionMapSectionId,0);
+            break;
+        case ZAP_HODOU_FIGHT:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_HODOU_CITY),MAP_NUM(MAP_HODOU_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_PLAYER_RANCID:
+        case ZAP_SHARPRISE_FAR:
+            StringCopy(gStringVar1,GetItemName(ITEM_POKE_BALL));
+            break;
+        case ZAP_TORGEOT_CHILLS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TORGEOT_CLIMB),MAP_NUM(MAP_TORGEOT_CLIMB))->regionMapSectionId,0);
+            break;
+        case ZAP_IRISINA_BALL:
+            StringCopy(gStringVar1,GetItemName(ITEM_POKE_BALL));
+            CopyItemNameHandlePlural(ITEM_DUSK_BALL,gStringVar2,3);
+            break;
+        case ZAP_HALAI_NIGHTMARE:
+        case ZAP_HALAI_RECONSTRUCTION:
+        case ZAP_HALAI_AID:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_HALAI_ISLAND),MAP_NUM(MAP_HALAI_ISLAND))->regionMapSectionId,0);
+            break;
+        case ZAP_FIRST_PROTEST:
+        case ZAP_HUGE_TURNOUT:
+        case ZAP_CHAMP_STORMED:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_SHARPRISE_SPIRE_TOP),MAP_NUM(MAP_SHARPRISE_SPIRE_TOP))->regionMapSectionId,0);
+            break;
+        case ZAP_INKAY_HYPNOSIS:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_INKAY));
+            StringCopy(gStringVar2,GetMoveName(MOVE_HYPNOSIS));
+            break;
+        case ZAP_ALT_GIRL:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_IRISINA_TOWN),MAP_NUM(MAP_IRISINA_TOWN))->regionMapSectionId,0);
+            break;
+        case ZAP_CURENO_ANKLE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CURENO_PORT),MAP_NUM(MAP_CURENO_PORT))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_MURKROW));
+            break;
+        case ZAP_KALOS_TOURIST:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_GLAVEZ_HILL),MAP_NUM(MAP_GLAVEZ_HILL))->regionMapSectionId,0);
+            break;
+        case ZAP_BITE_MEGA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_BAD_EARTHQUAKE:
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_TYRANITAR));
+            break;
+        case ZAP_CHASILLA_EARTHQUAKE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CHASILLA),MAP_NUM(MAP_CHASILLA))->regionMapSectionId,0);
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_HALAI_ISLAND),MAP_NUM(MAP_HALAI_ISLAND))->regionMapSectionId,0);
+            break;
+        case ZAP_PIOCA_FIREWORKS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PIOCA_BRIDGE),MAP_NUM(MAP_PIOCA_BRIDGE))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_MAGMORTAR));
+            break;
+        case ZAP_MIME_WALLS:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_LANJING_TUNNEL),MAP_NUM(MAP_LANJING_TUNNEL))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_MIME_JR));
+            break;
+        case ZAP_CAPHE_ESPULEE:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CAPHE_CITY),MAP_NUM(MAP_CAPHE_CITY))->regionMapSectionId,0);
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ESPULEE_OUTSKIRTS),MAP_NUM(MAP_ESPULEE_OUTSKIRTS))->regionMapSectionId,0);
+            break;
+        case ZAP_VICTORY_TACO:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_MERMEREZA_CITY),MAP_NUM(MAP_MERMEREZA_CITY))->regionMapSectionId,0);
+            break;
+        case ZAP_SHEER_COLD:
+            StringCopy(gStringVar1,GetMoveName(MOVE_SHEER_COLD));
+            break;
+        case ZAP_BURN_HEAL:
+            CopyItemNameHandlePlural(ITEM_BURN_HEAL,gStringVar1,3);
+            break;
+        case ZAP_PRESTO_CREEPY:
+            CopyItemNameHandlePlural(ITEM_HYPER_POTION,gStringVar1,1);
+            GetMapName(gStringVar2,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_CRESALTA_VISTA),MAP_NUM(MAP_CRESALTA_VISTA))->regionMapSectionId,0);
+            break;
+        case ZAP_POMEG_SPICY:
+            CopyItemNameHandlePlural(ITEM_LIECHI_BERRY,gStringVar1,1);
+            break;
+        case ZAP_DRILBUR_EVOLVE:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_DRILBUR));
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_EXCADRILL));
+            break;
+        case ZAP_PINTILLION_SPEWPA:
+            GetMapName(gStringVar1,Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_PINTILLON_HOUSE_EXTERIOR),MAP_NUM(MAP_PINTILLON_HOUSE_EXTERIOR))->regionMapSectionId,0);
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_SPEWPA));
+            break;
+        case ZAP_BATON_PASS:
+            StringCopy(gStringVar1,GetMoveName(MOVE_BATON_PASS));
+            break;
+        case ZAP_CLUTCH_PRIORITY:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_LINOONE));
+            StringCopy(gStringVar2,GetMoveName(MOVE_EXTREME_SPEED));
+            StringCopy(gStringVar3,GetMoveName(MOVE_FAKE_OUT));
+            break;
+        case ZAP_DUSK_STONE:
+            StringCopy(gStringVar1,GetSpeciesName(SPECIES_DOUBLADE));
+            StringCopy(gStringVar2,GetSpeciesName(SPECIES_AEGISLASH));
+            StringCopy(gStringVar3,GetItemName(ITEM_DUSK_STONE));
             break;
     }
 }

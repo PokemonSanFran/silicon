@@ -15,14 +15,14 @@ const struct Zap gZaps[] =
     [ZAP_STORY_SUMMON] =
     {
         .userId = BUZZR_USER_OLIVER,
-        .content = COMPOUND_STRING("{PLAYER} and Charlotte, please meet me on the northern side of Pioca Bridge!"),
+        .content = COMPOUND_STRING("{PLAYER} and Charlotte, please meet me on the northern side of {STR_VAR_1}!"),
         .isPrivate = TRUE,
         .criteria = 0,
     },
     [ZAP_SUMMON_RESPONSE] =
     {
         .userId = BUZZR_USER_CHARLOTTE,
-        .content = COMPOUND_STRING("It's been 2 minutes, I'm leaving for Pioca Bridge without you!"),
+        .content = COMPOUND_STRING("It's been 2 minutes, I'm leaving for {STR_VAR_1} without you!"),
         .isPrivate = TRUE,
         .criteria = 0,
     },
@@ -62,7 +62,7 @@ const struct Zap gZaps[] =
     [ZAP_QUEST_NPC_DEOXYS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I think I was...Threatened by a Pokemon? It was the strangest thing. It was like it fell from the sky, faster than anything I'd ever seen, and then started zipping all around, flashing lights and making strange sounds. My poor Pokemon haven't been the same since. I've been looking up what it could've been and it seems hard to believe but...I think it might've been a Deoxys?"),
+        .content = COMPOUND_STRING("I think I was...Threatened by a Pokemon? It was the strangest thing. It was like it fell from the sky, faster than anything I'd ever seen, and then started zipping all around, flashing lights and making strange sounds. My poor Pokemon haven't been the same since. I've been looking up what it could've been and it seems hard to believe but...I think it might've been a {STR_VAR_1}?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Deoxys,
         .quest = QUEST_VSDEOXYS,
@@ -135,7 +135,7 @@ const struct Zap gZaps[] =
     [ZAP_GYM_CHASILLA_BADGE] =
     {
         .userId = BUZZR_USER_PUA,
-        .content = COMPOUND_STRING("My little buddies and I were stoked to get to know you {PLAYER}, your battle style was rad! Swing by Chasilla again some time, you hear? I'm no teacher but I bet the students there could learn something from you!"),
+        .content = COMPOUND_STRING("My little buddies and I were stoked to get to know you {PLAYER}, your battle style was rad! Swing by {STR_VAR_1} again some time, you hear? I'm no teacher but I bet the students there could learn something from you!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_Chasilla_Badge,
         .quest = 0,
@@ -155,7 +155,7 @@ const struct Zap gZaps[] =
     [ZAP_GYM_HALERBA_CITY_BADGE] =
     {
         .userId = BUZZR_USER_DIMU,
-        .content = COMPOUND_STRING("My battle with {PLAYER} today did significant harm to some of our nearby Acacia bushes. Props to the Gym Trainer who stepped in to water and secure them. It just about makes up for the loss."),
+        .content = COMPOUND_STRING("My battle with {PLAYER} today did significant harm to some of our nearby acacia bushes. Props to the Gym Trainer who stepped in to water and secure them. It just about makes up for the loss."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_HalerbaCity_Badge,
         .quest = 0,
@@ -195,7 +195,7 @@ const struct Zap gZaps[] =
     [ZAP_STORY_STRIKE_BEGIN_1] =
     {
         .userId = BUZZR_USER_NEWS,
-        .content = COMPOUND_STRING("BREAKING NEWS: Sharprise Stadium construction crew has declared a strike. Their demands are unclear at this time. This puts the upcoming dates of the Sharprise Capital League Championship in danger. (1/2)"),
+        .content = COMPOUND_STRING("BREAKING NEWS: {STR_VAR_1} construction crew has declared a strike. Their demands are unclear at this time. This puts the upcoming dates of the Sharprise Capital League Championship in danger. (1/2)"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Story_Strike_Begin1,
         .quest = 0,
@@ -205,7 +205,7 @@ const struct Zap gZaps[] =
     [ZAP_STORY_STRIKE_BEGIN_2] =
     {
         .userId = BUZZR_USER_NEWS,
-        .content = COMPOUND_STRING("BREAKING NEWS: Sharprise Stadium construction crew has declared a strike. Anonymous sources claim that The Tide is responsible for instigating this protest but we'll have more information as the situation develops. (2/2)"),
+        .content = COMPOUND_STRING("BREAKING NEWS: {STR_VAR_1} construction crew has declared a strike. Anonymous sources claim that The Tide is responsible for instigating this protest but we'll have more information as the situation develops. (2/2)"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Story_Strike_Begin2,
         .quest = 0,
@@ -215,7 +215,7 @@ const struct Zap gZaps[] =
     [ZAP_STORY_WAREHOUSE_RAVE] =
     {
         .userId = BUZZR_USER_TIDE_EVENT_BOT,
-        .content = COMPOUND_STRING("Come celebrate the return of the Elite Four! Tonight, in the Cureno Port Packing District. Follow the music to the center warehouse!"),
+        .content = COMPOUND_STRING("Come celebrate the return of the Elite Four! Tonight, in the {STR_VAR_1} Packing District. Follow the music to the center warehouse!"),
         .isPrivate = TRUE,
         .criteria = ZapCriteria_Story_Warehouse_Rave,
         .quest = 0,
@@ -905,7 +905,7 @@ const struct Zap gZaps[] =
     [ZAP_ADAORA_MIDRIFF] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("That girl from The Tide with the awesome midriff was just talking to people in the Pokemon Center in Tora Town like it was no big deal, just smack talking corpos for anyone to hear! She's a bold one, being so open about who she works with."),
+        .content = COMPOUND_STRING("That girl from The Tide with the awesome midriff was just talking to people in the Pokemon Center in {STR_VAR_1} like it was no big deal, just smack talking corpos for anyone to hear! She's a bold one, being so open about who she works with."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -915,7 +915,7 @@ const struct Zap gZaps[] =
     [ZAP_ADAORA_ZODIAC] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I just found out Adaora's zodiac sign is a Crustle? Me too! If I could be bothered to get out of bed I just know I'd be a badass vigilante lady as well!"),
+        .content = COMPOUND_STRING("I just found out Adaora's zodiac sign is a {STR_VAR_1}? Me too! If I could be bothered to get out of bed I just know I'd be a badass vigilante lady as well!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -975,7 +975,7 @@ const struct Zap gZaps[] =
     [ZAP_NEEDLES_REVIEW] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Needles in Mermereza is helmed by a head chef who is proficient in the kitchen and battles. My visit was busy, the dining area crammed to the walls - yet this did not deter the head chef, in fact, it motivated her! The seafood was exquisite, if not a little decadent, even for my tastes."),
+        .content = COMPOUND_STRING("Needles in {STR_VAR_1} is helmed by a head chef who is proficient in the kitchen and battles. My visit was busy, the dining area crammed to the walls - yet this did not deter the head chef, in fact, it motivated her! The seafood was exquisite, if not a little decadent, even for my tastes."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1015,7 +1015,7 @@ const struct Zap gZaps[] =
     [ZAP_BAIYA_RUDE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Some kid called Baiya just stormed through Route 7, berating a bunch of the trainers for being “Sharprise Stooges”. I couldn't believe the mouth on this guy! Then he beat like 3 of them in a row! Straight-up embarrassed them! Anyone else had any run-ins with this kid?"),
+        .content = COMPOUND_STRING("Some kid called Baiya just stormed through {STR_VAR_1}, berating a bunch of the trainers for being “Sharprise Stooges”. I couldn't believe the mouth on this guy! Then he beat like 3 of them in a row! Straight-up embarrassed them! Anyone else had any run-ins with this kid?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1025,7 +1025,7 @@ const struct Zap gZaps[] =
     [ZAP_BAIYA_MAINCHARACTER] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I see Buzzr are finding out about Baiya again. In-between yelling at people on the street for supporting Sharprise he apparently organises “track pick-up days” every other weekend and trains at Pintillion House every afternoon. Bro thinks he's the main character"),
+        .content = COMPOUND_STRING("I see Buzzr are finding out about Baiya again. In-between yelling at people on the street for supporting Sharprise he apparently organises “track pick-up days” every other weekend and trains at {STR_VAR_1} every afternoon. Bro thinks he's the main character"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1035,7 +1035,7 @@ const struct Zap gZaps[] =
     [ZAP_MEGACROSS_DEFENSE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Megacross Defense are helping make Resido the safest region in the world. Thanks to the co-operation of Sharprise Capital, the Sharprise Stadium will be the safest place in the world during the Championship! #talkshitgethit"),
+        .content = COMPOUND_STRING("Megacross Defense are helping make Resido the safest region in the world. Thanks to the co-operation of Sharprise Capital, the {STR_VAR_1} will be the safest place in the world during the Championship! #talkshitgethit"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1065,7 +1065,7 @@ const struct Zap gZaps[] =
     [ZAP_BD_MULTITASK] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Resido has the greatest multi-taskers in the world. I just got back from this Un. Real. Drag show in Irisina Town. Turns out the headliner is the Gym Leader there too?? I just got roped into it by a friend! I had no idea! #amiargento"),
+        .content = COMPOUND_STRING("Resido has the greatest multi-taskers in the world. I just got back from this Un. Real. Drag show in {STR_VAR_1}. Turns out the headliner is the Gym Leader there too?? I just got roped into it by a friend! I had no idea! #amiargento"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1075,7 +1075,7 @@ const struct Zap gZaps[] =
     [ZAP_CAPHE_MORRIS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Caphe City has fallen into disrepair for a very simple reason; a lack of political willpower. The region would rather chase short-term benefits from investments elsewhere. As mayor, I WILL make Resido's upper crust hear us. #MorrisForMayor"),
+        .content = COMPOUND_STRING("{STR_VAR_1} has fallen into disrepair for a very simple reason; a lack of political willpower. The region would rather chase short-term benefits from investments elsewhere. As mayor, I WILL make Resido's upper crust hear us. #MorrisForMayor"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1085,7 +1085,7 @@ const struct Zap gZaps[] =
     [ZAP_YOBU_PIOCA] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("They nearly demolished Fort Yobu to make way for Pioca Bridge, but the bridge's engineer found a way to redesign it so that wouldn't be necessary. Remember that next time your city council tells you we have to bulldoze to build new houses. #cityplanning"),
+        .content = COMPOUND_STRING("They nearly demolished {STR_VAR_1} to make way for {STR_VAR_2}, but the bridge's engineer found a way to redesign it so that wouldn't be necessary. Remember that next time your city council tells you we have to bulldoze to build new houses. #cityplanning"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1095,7 +1095,7 @@ const struct Zap gZaps[] =
     [ZAP_IRISINA_QUEER] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("LGBTQ+ folk, Irisina Town is where it's at nowadays! In case you missed the memo, Caphe is old hat. The bars are dingy, the drinks are weak and the vibes are off. Come down to Irisina sometime and see what our community can really be like! #LGBTQIA #Irisina #queercity"),
+        .content = COMPOUND_STRING("LGBTQ+ folk, {STR_VAR_2} is where it's at nowadays! In case you missed the memo, {STR_VAR_1} is old hat. The bars are dingy, the drinks are weak and the vibes are off. Come down to {STR_VAR_2} sometime and see what our community can really be like! #LGBTQIA #queercity"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1105,7 +1105,7 @@ const struct Zap gZaps[] =
     [ZAP_TIRABUDIN_ZINES] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Tirabudin Place Literary Journal has been going for decades, even as print media dies out, and I hope they can keep it up for a long time. We need more stuff like this. #Tirabudin #Poetry #Zines"),
+        .content = COMPOUND_STRING("{STR_VAR_1} Literary Journal has been going for decades, even as print media dies out, and I hope they can keep it up for a long time. We need more stuff like this. #Poetry #Zines"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1115,7 +1115,7 @@ const struct Zap gZaps[] =
     [ZAP_TIRABUDIN_ZINES2] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("If y'all are ever looking for a detox, check out the Tirabudin Place Literary Journal. I got sick of all the arguing online and gave it a look and man is it nice to just read cool things made by real creatives instead."),
+        .content = COMPOUND_STRING("If y'all are ever looking for a detox, check out the {STR_VAR_1} Literary Journal. I got sick of all the arguing online and gave it a look and man is it nice to just read cool things made by real creatives instead."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1125,7 +1125,7 @@ const struct Zap gZaps[] =
     [ZAP_TORA_MOCHI] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("The mochi shop in Tora Town closed down?? The one that'd been there for like 100 years?? Were The Tide threatening to burn that down too? Ugh. I'm sick of this year."),
+        .content = COMPOUND_STRING("The mochi shop in {STR_VAR_1} closed down?? The one that'd been there for like 100 years?? Were The Tide threatening to burn that down too? Ugh. I'm sick of this year."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1235,7 +1235,7 @@ const struct Zap gZaps[] =
     [ZAP_NEW_TRAINERS] =
     {
         .userId = BUZZR_USER_SHARPRISE_EMPLOYEE_A,
-        .content = COMPOUND_STRING("Feisty new trainers arrived in Cuconu Town today, ready to take on the world! Think you've got what it takes to beat them, Resido? Give it your best shot! It'll make our League season all the better!"),
+        .content = COMPOUND_STRING("Feisty new trainers arrived in {STR_VAR_1} today, ready to take on the world! Think you've got what it takes to beat them, Resido? Give it your best shot! It'll make our League season all the better!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1265,7 +1265,7 @@ const struct Zap gZaps[] =
     [ZAP_BAIYA_CHEWING] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Has anyone run into this blue-haired kid with the short fuse in Mermereza? Dude was chewing people out left and right over nothing! Not a great first impression for all the new folk imo"),
+        .content = COMPOUND_STRING("Has anyone run into this blue-haired kid with the short fuse in {STR_VAR_1}? Dude was chewing people out left and right over nothing! Not a great first impression for all the new folk imo"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1275,7 +1275,7 @@ const struct Zap gZaps[] =
     [ZAP_CAPHE_QUEUE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Queues everywhere in Caphe City today. Through the streets, into the alleys...And what do you know, there's a bunch of Tide people all over the place? What the hell are they up to now?"),
+        .content = COMPOUND_STRING("Queues everywhere in {STR_VAR_1} today. Through the streets, into the alleys...And what do you know, there's a bunch of Tide people all over the place? What the hell are they up to now?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1285,7 +1285,7 @@ const struct Zap gZaps[] =
     [ZAP_CHARLOTTE_PRODIGY] =
     {
         .userId = BUZZR_USER_LUCREZIA,
-        .content = COMPOUND_STRING("We received a visit from budding young prodigy, Charlotte at Sharprise Tower today. We decided to give her a Transport Card to commemorate the occasion. Best of luck, Charlotte! #leaguechallenge"),
+        .content = COMPOUND_STRING("We received a visit from budding young prodigy, Charlotte at {STR_VAR_1} today. We decided to give her something to commemorate the occasion! Best of luck, Charlotte! #leaguechallenge"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1295,7 +1295,7 @@ const struct Zap gZaps[] =
     [ZAP_POPIDORA_FREAKS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("New folk in Resido; we do not own those freaks trying to kick the man out of his shop at Popidora Pier! Seriously, what is The Tide's deal!? Ugh, I hate my region sometimes"),
+        .content = COMPOUND_STRING("New folk in Resido; we do not own those freaks trying to kick the man out of his shop at {STR_VAR_1}! Seriously, what is The Tide's deal!? Ugh, I hate my region sometimes"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1355,7 +1355,7 @@ const struct Zap gZaps[] =
     [ZAP_CURENO_TIDE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("There was almost a dust-up at the park in Cureno Port today! Thankfully it was broken up by someone from The Tide. First time I've ever seen them diffuse a situation, lmao"),
+        .content = COMPOUND_STRING("There was almost a dust-up at the park in {STR_VAR_1} today! Thankfully it was broken up by someone from The Tide. First time I've ever seen them diffuse a situation, lmao"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1395,7 +1395,7 @@ const struct Zap gZaps[] =
     [ZAP_GOLD_BREEDING] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Sharprise trainers get access to the Gold Tier program at the Chasilla Breeding Center? Where do I sign up!? I'm sick of sitting around waiting for my Slowpokes to kiss!"),
+        .content = COMPOUND_STRING("Sharprise trainers get access to the Gold Tier program at the {STR_VAR_1} Breeding Center? Where do I sign up!? I'm sick of sitting around waiting for my {STR_VAR_2} to kiss!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1405,7 +1405,7 @@ const struct Zap gZaps[] =
     [ZAP_EARTHQUAKE_PANIC] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Any other East-siders ever get nervous when ya hear something rumbling, thinking another earthquake's coming on? I just had a panic attack and it was literally my Politoed's stomach! LOL"),
+        .content = COMPOUND_STRING("Any other East-siders ever get nervous when ya hear something rumbling, thinking another earthquake's coming on? I just had a panic attack and it was literally my {STR_VAR_1}'s stomach! LOL"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1425,7 +1425,7 @@ const struct Zap gZaps[] =
     [ZAP_LONG_BATTLE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Just had a battle go over an hour because some dude kept hitting Hypnosis. I can't be the only one who misses double battles, right? At least they went quicker!"),
+        .content = COMPOUND_STRING("Just had a battle go over an hour because some dude kept hitting {STR_VAR_1}. I can't be the only one who misses double battles, right? At least they went quicker!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1435,7 +1435,7 @@ const struct Zap gZaps[] =
     [ZAP_KEIYING_YOBU] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("What was Kei-Ying doing at Fort Yobu today? He doesn't strike me as the kind of guy to wanna look at guns and lasers."),
+        .content = COMPOUND_STRING("What was Kei-Ying doing at {STR_VAR_1} today? He doesn't strike me as the kind of guy to wanna look at guns and lasers."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1465,7 +1465,7 @@ const struct Zap gZaps[] =
     [ZAP_TALA_FIRED] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I'm in my 20's and I don't think I could get a crowd as fired up as Tala if I had a live Houndoom! You should have heard this speech about keeping our traditions in Tirabudin alive today! Wow!"),
+        .content = COMPOUND_STRING("I'm in my 20's and I don't think I could get a crowd as fired up as Tala if I had a live {STR_VAR_1}! You should have heard this speech about keeping our traditions in {STR_VAR_2} alive today! Wow!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1475,7 +1475,7 @@ const struct Zap gZaps[] =
     [ZAP_BAIYA_TALA] =
     {
         .userId = BUZZR_USER_BAIYA,
-        .content = COMPOUND_STRING("If you enjoyed Tala's speech at Tirabudin Place recently then you should also want Sharprise and their lackeys out of their region. They're not compatible with what Resido should be!"),
+        .content = COMPOUND_STRING("If you enjoyed Tala's speech at {STR_VAR_1} recently then you should also want Sharprise and their lackeys out of their region. They're not compatible with what Resido should be!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1555,7 +1555,7 @@ const struct Zap gZaps[] =
     [ZAP_RAID_PSA] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("ATTENTION CIVILIANS: There is a situation ongoing today at the Halai Island Naval Base. Residents and tourists are strictly advised to steer clear and not cross the police cordon."),
+        .content = COMPOUND_STRING("ATTENTION CIVILIANS: There is a situation ongoing today at the {STR_VAR_1}. Residents and tourists are strictly advised to steer clear and not cross the police cordon."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1565,7 +1565,7 @@ const struct Zap gZaps[] =
     [ZAP_CHAMPIONSHIP_START] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Championships begin TODAY, BABY. I'm psyched! I've been following this all season. My money's on the kid with the Shock Wave Chandelure! Take that, Water types!"),
+        .content = COMPOUND_STRING("Championships begin TODAY, BABY. I'm psyched! I've been following this all season. My money's on the kid with the {STR_VAR_1} {STR_VAR_2}! Take that, Water-types!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1605,7 +1605,7 @@ const struct Zap gZaps[] =
     [ZAP_SHARPRISE_FAN] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Oh no, this League Championship has been sick. I've booked the whole day off work to watch the finals. Am I...Becoming a Sharprise fan? Someone Salt Cure me!"),
+        .content = COMPOUND_STRING("Oh no, this League Championship has been sick. I've booked the whole day off work to watch the finals. Am I...Becoming a Sharprise fan? Someone {STR_VAR_1} me!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1695,7 +1695,7 @@ const struct Zap gZaps[] =
     [ZAP_PLAYER_BAIYA] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Spotted {PLAYER} and Baiya having a friendly battle on Zenzu Island today. Got me real nostalgic for the Championship Finals. Are those two kinda buddy-buddy lately or something?"),
+        .content = COMPOUND_STRING("Spotted {PLAYER} and Baiya having a friendly battle on {STR_VAR_1} today. Got me real nostalgic for the Championship Finals. Are those two kinda buddy-buddy lately or something?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1705,7 +1705,7 @@ const struct Zap gZaps[] =
     [ZAP_HODOU_JOHNNY] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Yo, Houdou'ers. Did you guys see Johnny back in town today? I had to have my Wigglytuff Doubleslap me to make sure I wasn't seeing things! Something going on?"),
+        .content = COMPOUND_STRING("Yo, {STR_VAR_1} folk. Did you guys see Johnny back in town today? I had to have my {STR_VAR_2} slap me to make sure I wasn't seeing things! Something going on?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1715,7 +1715,7 @@ const struct Zap gZaps[] =
     [ZAP_ZENZU_MOVING] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Lotta people moving stuff around in and out of buildings on Zenzu Island right now. Like, more than usual..."),
+        .content = COMPOUND_STRING("Lotta people moving stuff around in and out of buildings on {STR_VAR_1} right now. Like, more than usual..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1725,7 +1725,7 @@ const struct Zap gZaps[] =
     [ZAP_ESPULEE_SHELL] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("The gym and antique store in Espulee Outskirts was a rare touch of humanity in that place. I was sad to see it a shell of its former self when I went back recently. I really am getting old..."),
+        .content = COMPOUND_STRING("The gym and antique store in {STR_VAR_1} was a rare touch of humanity in that place. I was sad to see it a shell of its former self when I went back recently. I really am getting old..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1745,7 +1745,7 @@ const struct Zap gZaps[] =
     [ZAP_ARANTRAZ_UNSETTLING] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Being at Arantraz gives me this weird, unsettled feeling. I mean I know it's a prison and all, but even worse than that. Place has to be giga haunted, and I bet there's so much we still don't know..."),
+        .content = COMPOUND_STRING("Being at {STR_VAR_1} gives me this weird, unsettled feeling. I mean I know it's a prison and all, but even worse than that. Place has to be giga haunted, and I bet there's so much we still don't know..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1755,7 +1755,7 @@ const struct Zap gZaps[] =
     [ZAP_HODOU_FIGHT] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Sharprise goons backed by corrupt cops are gonna close in our new training center and try and close it down tonight. Will Hodou stand with us or must we fight on our own?"),
+        .content = COMPOUND_STRING("Sharprise goons backed by corrupt cops are gonna close in our new training center and try and close it down tonight. Will {STR_VAR_1} stand with us or must we fight on our own?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1785,7 +1785,7 @@ const struct Zap gZaps[] =
     [ZAP_SHARPRISE_FAR] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("When are we gonna be sane and say this has all gone too far? Sharprise trainers bullying people at newspapers and consulting firms, making a Poke Ball seller cry? How are they any better than what they say The Tide are?"),
+        .content = COMPOUND_STRING("When are we gonna be sane and say this has all gone too far? Sharprise Trainers bullying people at newspapers and consulting firms, making a {STR_VAR_1} seller cry? How are they any better than what they say The Tide are?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1795,7 +1795,7 @@ const struct Zap gZaps[] =
     [ZAP_PLAYER_RANCID] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Pretty rancid atmosphere in the stadium today for {PLAYER}'s exhibition match. But if they just imagine their opponent's a harmless Poke Ball seller, that shouldn't bother them - right?"),
+        .content = COMPOUND_STRING("Pretty rancid atmosphere in the stadium today for {PLAYER}'s exhibition match. But if they just imagine their opponent's a harmless {STR_VAR_1} seller, that shouldn't bother them - right?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1815,7 +1815,7 @@ const struct Zap gZaps[] =
     [ZAP_TORGEOT_CHILLS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I still get chills just being around Torgeot Climb. Not even at the top! There's so much magic and mysticism here, nowhere else in Resido has a vibe like it."),
+        .content = COMPOUND_STRING("I still get chills just being around {STR_VAR_1}. Not even at the top! There's so much magic and mysticism here, nowhere else in Resido has a vibe like it."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1835,7 +1835,7 @@ const struct Zap gZaps[] =
     [ZAP_IRISINA_BALL] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("My pa's looking at closing down his Poke Ball shop. This nice lady used to swing by most nights and buy tons of Dusk Balls, but now he says she's gone and he can't get by without. Can anyone help?"),
+        .content = COMPOUND_STRING("My pa's looking at closing down his {STR_VAR_1} shop. He fondly remembers a nice lady used to swing by most nights and buy tons of {STR_VAR_2}, but now he says she's been gone for years..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1895,7 +1895,7 @@ const struct Zap gZaps[] =
     [ZAP_HALAI_NIGHTMARE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("This is horrible. It genuinely feels like a nightmare. I had friends on Halai...My thoughts go out to all who were affected..."),
+        .content = COMPOUND_STRING("This is horrible. It genuinely feels like a nightmare. I had friends on {STR_VAR_1}...My thoughts go out to all who were affected..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1905,7 +1905,7 @@ const struct Zap gZaps[] =
     [ZAP_HALAI_RECONSTRUCTION] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Reconstruction efforts underway in Halai. Casualties fall slightly short of triple digits. Aid is flowing but it's staggered, most infrastructure in place but weakened and hazardous."),
+        .content = COMPOUND_STRING("Reconstruction efforts underway in {STR_VAR_1}. Casualties fall slightly short of triple digits. Aid is flowing but it's staggered, most infrastructure in place but weakened and hazardous."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1915,7 +1915,7 @@ const struct Zap gZaps[] =
     [ZAP_HALAI_AID] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("In Halai giving out aid, an earthquake ain't gonna bring us down for good! We're way tougher than that! #halaiearthquake #residostrong"),
+        .content = COMPOUND_STRING("In {STR_VAR_1} giving out aid, an earthquake ain't gonna bring us down for good! We're way tougher than that! #earthquake #residostrong"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1935,7 +1935,7 @@ const struct Zap gZaps[] =
     [ZAP_FIRST_PROTEST] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I'm going to my first protest outside Sharprise Spire today. Idk, it just feels right. Resido hasn't felt like Resido lately and I think it's because they own most of it"),
+        .content = COMPOUND_STRING("I'm going to my first protest outside {STR_VAR_1} today. Idk, it just feels right. Resido hasn't felt like Resido lately and I think it's because they own most of it"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1945,7 +1945,7 @@ const struct Zap gZaps[] =
     [ZAP_HUGE_TURNOUT] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Huge turnout outside Sharprise Spire for the protest today! What's more, sounds like there's a big commotion inside! Did some of us break in? I don't even care!"),
+        .content = COMPOUND_STRING("Huge turnout outside {STR_VAR_1} for the protest today! What's more, sounds like there's a big commotion inside! Did some of us break in? I don't even care!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1955,7 +1955,7 @@ const struct Zap gZaps[] =
     [ZAP_CHAMP_STORMED] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("The Champ and The Elite Four STORMED Sharprise Spire and beat up all the execs?? AYO That is the most badass thing I've heard in my life. RESIDO FOREVER, BAYBEE!"),
+        .content = COMPOUND_STRING("The Champ and The Elite Four STORMED {STR_VAR_1} and beat up all the execs?? AYO That is the most badass thing I've heard in my life. RESIDO FOREVER, BAYBEE!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1965,7 +1965,7 @@ const struct Zap gZaps[] =
     [ZAP_INKAY_HYPNOSIS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("My Inkay learned Hypnosis last week and it is literally ruining my life. It put my MOM to sleep while she was cooking as a prank?? I gotta trade this thing for something bro"),
+        .content = COMPOUND_STRING("My {STR_VAR_1} learned {STR_VAR_2} last week and it is literally ruining my life. It put my MOM to sleep while she was cooking as a prank?? I gotta trade this thing for something bro"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1975,7 +1975,7 @@ const struct Zap gZaps[] =
     [ZAP_ALT_GIRL] =
     {
         .userId = BUZZR_USER_GIRL,
-        .content = COMPOUND_STRING("To the alt girl I locked eyes with in Irisina Town by the ball shop, PLEASE DM ME. I'm sorry I laughed. It's my defense mechanism when confronted with beautiful women!!"),
+        .content = COMPOUND_STRING("To the alt girl I locked eyes with in {STR_VAR_1} by the ball shop, PLEASE DM ME. I'm sorry I laughed. It's my defense mechanism when confronted with beautiful women!!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1985,7 +1985,7 @@ const struct Zap gZaps[] =
     [ZAP_CURENO_ANKLE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Sprained my ankle cycling around Cureno Port, waited 3 hours in A&E, had some mid noodles and now I'm sat at home in a cast with my Murkrow pecking away at my head. It's only Tuesday."),
+        .content = COMPOUND_STRING("Sprained my ankle cycling around {STR_VAR_1}, waited 3 hours in A&E, had some mid noodles and now I'm sat at home in a cast with my {STR_VAR_2} pecking away at my head. It's only Tuesday."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -1995,7 +1995,7 @@ const struct Zap gZaps[] =
     [ZAP_KALOS_TOURIST] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("These tourists from Kalos are SO RUDE. OMG. One of them asked ME for directions to Glavez Hill, I said I didn't know from here. He starts BERATING ME for not knowing?? Screw you, jerk!"),
+        .content = COMPOUND_STRING("These tourists from Kalos are SO RUDE. OMG. One of them asked ME for directions to {STR_VAR_1}, I said I didn't know from here. He starts BERATING ME for not knowing?? Screw you, jerk!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2005,7 +2005,7 @@ const struct Zap gZaps[] =
     [ZAP_BITE_MEGA] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("90% sure I just bit into a Mega Stone at one of the bakeries in Caphe City. I wanna see about suing but if I can find out what this Mega Evolves I might be in business for the League..."),
+        .content = COMPOUND_STRING("90% sure I just bit into a Mega Stone at one of the bakeries in {STR_VAR_1}. I wanna see about suing but if I can find out what this Mega Evolves I might be in business for the League..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2035,7 +2035,7 @@ const struct Zap gZaps[] =
     [ZAP_BAD_EARTHQUAKE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("When's the last time an earthquake this bad happened? I saw it on the news and I don't think a team of Tyranitar could have done that!"),
+        .content = COMPOUND_STRING("When's the last time an earthquake this bad happened? I saw it on the news and I don't think a team of {STR_VAR_1} could have done that!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2045,7 +2045,7 @@ const struct Zap gZaps[] =
     [ZAP_CHASILLA_EARTHQUAKE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("We even felt the ground shake a bit over here at Chasilla...Sending prayers out to everyone at Halai Island."),
+        .content = COMPOUND_STRING("We even felt the ground shake a bit over here at {STR_VAR_1}...Sending prayers out to everyone at {STR_VAR_2}."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2075,7 +2075,7 @@ const struct Zap gZaps[] =
     [ZAP_PIOCA_FIREWORKS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("The fireworks display at Pioca Bridge last night was AMAZING. The guys who train the Magmortars to shoot like that are national treasures."),
+        .content = COMPOUND_STRING("The fireworks display at {STR_VAR_1} last night was AMAZING. The guys who train the {STR_VAR_2} to shoot like that are national treasures."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2095,7 +2095,7 @@ const struct Zap gZaps[] =
     [ZAP_MIME_WALLS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("To the kid who thinks it's funny to have his Mime Jr. put up walls in front of people trying to get through Lanjing Tunnel - I'm gonna find you and give you a swirlie."),
+        .content = COMPOUND_STRING("To the kid who thinks it's funny to have his {STR_VAR_2} put up walls in front of people trying to get through {STR_VAR_1} - I'm gonna find you and give you a swirlie."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2105,7 +2105,7 @@ const struct Zap gZaps[] =
     [ZAP_CAPHE_ESPULEE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Some lady strutted through Caphe today in a fancy coat literally pinching her nose. Me and a buddy had a ¥5 bet to see if we could guess where she was from. I said Espulee. I love the smell of money"),
+        .content = COMPOUND_STRING("Some lady strutted through {STR_VAR_1} today in a fancy coat literally pinching her nose. Me and a buddy had a ¥5 bet to see if we could guess where she was from. I said {STR_VAR_2}. I love the smell of money"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2135,7 +2135,7 @@ const struct Zap gZaps[] =
     [ZAP_VICTORY_TACO] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Usually I treat myself to a Victory Taco after I win a battle but this kid passing through Mermereza totally stomped me today...How do I justify a Consolation Taco?..."),
+        .content = COMPOUND_STRING("Usually I treat myself to a Victory Taco after I win a battle but this kid passing through {STR_VAR_1} totally stomped me today...How do I justify a Consolation Taco?..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2145,7 +2145,7 @@ const struct Zap gZaps[] =
     [ZAP_SHEER_COLD] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I hit three Sheer Colds in a row today. Do I go gambling?"),
+        .content = COMPOUND_STRING("I hit three {STR_VAR_1}s in a row today. Do I go gambling?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2155,7 +2155,7 @@ const struct Zap gZaps[] =
     [ZAP_BURN_HEAL] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Applying Burn Heals are the worst. My Pokemon doesn't want me going near the affected area! Can't we just hose 'em down or something?"),
+        .content = COMPOUND_STRING("Applying {STR_VAR_1} are the worst. My Pokemon doesn't want me going near the affected area! Can't we just hose 'em down or something?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2175,7 +2175,7 @@ const struct Zap gZaps[] =
     [ZAP_PRESTO_CREEPY] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Can't lie I think Presto's a little too good lately...Like I ordered a Good Rod from all the way in Cresalta earlier today and it showed up like 3 hours later? Is that not almost a little creepy?"),
+        .content = COMPOUND_STRING("Can't lie I think Presto's a little too good lately...Like I ordered a {STR_VAR_1} from all the way in {STR_VAR_2} earlier today and it showed up like 3 hours later? Is that not almost a little creepy?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2185,7 +2185,7 @@ const struct Zap gZaps[] =
     [ZAP_POMEG_SPICY] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I tried a Pomeg Berry myself today out of curiosity. Big mistake! Those things are for Pokemon only! Spicy berries should not be a thing!"),
+        .content = COMPOUND_STRING("I tried a {STR_VAR_1} myself today out of curiosity. Big mistake! Those things are for Pokemon only! Spicy berries should not be a thing!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2195,7 +2195,7 @@ const struct Zap gZaps[] =
     [ZAP_DRILBUR_EVOLVE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("YESSS! My Drilbur finally evolved into Excadrill today! Only it went to hug me right away and I nearly died because of all the spikes. We'll figure it out!"),
+        .content = COMPOUND_STRING("YESSS! My {STR_VAR_1} finally evolved into {STR_VAR_2} today! Only it went to hug me right away and I nearly died because of all the spikes. We'll figure it out!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2205,7 +2205,7 @@ const struct Zap gZaps[] =
     [ZAP_PINTILLION_SPEWPA] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Today's the day. I'm taking on Pintillion House again! Last time I lost in literally the first battle but I've got a good feeling about this one! Let's get it, Spewpa!"),
+        .content = COMPOUND_STRING("Today's the day. I'm taking on {STR_VAR_1} again! Last time I lost in literally the first battle but I've got a good feeling about this one! Let's get it, {STR_VAR_2}!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2215,7 +2215,7 @@ const struct Zap gZaps[] =
     [ZAP_BATON_PASS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Oh. My. God. Today I pulled off a Baton Pass strategy during outside class, Pua just happened to be nearby and he shouted out that it was “beautiful”. I'm pretty sure I didn't even pass any stat changes but still!! “Beautiful!” Me! AHHHHHHHHH!"),
+        .content = COMPOUND_STRING("Oh. My. God. Today I pulled off a {STR_VAR_1} strategy during outside class, Pua just happened to be nearby and he shouted out that it was “beautiful”. I'm pretty sure I didn't even pass any stat changes but still!! “Beautiful!” Me! AHHHHHHHHH!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2225,7 +2225,7 @@ const struct Zap gZaps[] =
     [ZAP_CLUTCH_PRIORITY] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("So I thought I was about to clutch with my Arcanine's Extremespeed, but I got KO'd by Fake Out? You mean some priority moves have MORE priority than others!? This is too much man I'm going back to bartending"),
+        .content = COMPOUND_STRING("So I thought I was about to clutch with my {STR_VAR_1}'s {STR_VAR_2}, but I got KO'd by {STR_VAR_3}? You mean some priority moves have MORE priority than others!? This is too much man I'm going back to bartending"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
@@ -2245,7 +2245,7 @@ const struct Zap gZaps[] =
     [ZAP_DUSK_STONE] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("Note to self, Doublade evolves into Aegislash with a Dusk Stone...Not by giving it a shield you stole from the ren faire..."),
+        .content = COMPOUND_STRING("Note to self, {STR_VAR_1} evolves into {STR_VAR_2} with a {STR_VAR_3}...Not by giving it a shield you stole from the ren faire..."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
