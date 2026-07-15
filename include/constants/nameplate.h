@@ -470,7 +470,7 @@ enum NameplatePhone
 #define MSGBOX_TILE_HEIGHT                             4
 #define WINDOW_TILETOP                                 73
 #define WINDOW_TILELEFT                                0
-#define NAMEPLATE_WINDOW_TEMPLATE                      64
+#define NAMEPLATE_WINDOW_TEMPLATE                      32
 
 #define NAMEPLATE_TOP_FIRST_TILE_OFFSET                0
 #define NAMEPLATE_TOP_MIDDLE_TILE_OFFSET               (NAMEPLATE_TOP_FIRST_TILE_OFFSET + 1)
