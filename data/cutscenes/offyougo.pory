@@ -34,33 +34,28 @@ script OffYouGo_WakeUp_Dialogue
     waitse
     playse(SE_POKENAV_CALL)
     waitmessage
-    msgbox(format("Huh? Hello?"),,SPEAKER_ALICIA,,PHONE_ON)
+    msgbox(format("Huh? Hello?"),,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE,PHONE_ON)
 
-    msgbox(format("Hey, where are you? Are you still asleep?"),,SPEAKER_CHARLOTTE,,PHONE_ON)
+    msgbox(format("Hey, where are you? Are you still asleep?"),,SPEAKER_CHARLOTTE,TAIL_TALK,EMOTE_ANGRY,PHONE_ON)
 
-    msgbox(format("…yeah, I'm in bed."),,SPEAKER_ALICIA,,PHONE_ON)
+    msgbox(format("…yeah, I'm in bed."),,SPEAKER_ALICIA,TAIL_TALK,,PHONE_ON)
 
-    msgbox(format("Come on get up, didn't you see Oliver's text? We're waiting for you!"),,SPEAKER_CHARLOTTE,,PHONE_ON)
+    msgbox(format("Come on get up, didn't you see Oliver's zap? We're waiting for you!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY,PHONE_ON)
 
-    msgbox(format("Waiting for me…? Hold on, let me read…"),,SPEAKER_ALICIA,,PHONE_ON)
+    msgbox(format("Waiting for me…? Hold on, let me read…"),,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE,PHONE_ON)
 
-    closemessage
+    showzap(ZAP_STORY_SUMMON)
+    showzap(ZAP_SUMMON_RESPONSE)
 
-    msgbox(format("Oliver: {PLAYER} and Charlotte, please meet me on the northern side of PiocaBridge. (32 mins ago)"))
+    msgbox(format("Yeah, I didn't see that. I guess I'm on my way."),,SPEAKER_ALICIA,TAIL_TALK,,PHONE_ON)
 
-    msgbox(format("Charlotte: I'll be right over! (31 mins ago)"),,SPEAKER_CHARLOTTE,,PHONE_ON)
-
-    msgbox(format("Yeah, I didn't see that. I guess I'm on my way."),,SPEAKER_ALICIA)
-
-    msgbox(format("Ugh, fine, get your ass down here!"),,SPEAKER_CHARLOTTE)
-
+    msgbox(format("Ugh, fine, get your tail down here!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_ANGRY,PHONE_ON)
     closemessage
 
     playse(SE_POKENAV_HANG_UP)
+
+    msgbox(format("(How are they always up so early…?)"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SAD)
     waitse
-
-    msgbox(format("(How are they always up so early…?)"),,SPEAKER_ALICIA,TAIL_THOUGHT)
-
     closemessage
     call(TryAutoSave)
     endcutscene
