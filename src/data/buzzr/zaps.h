@@ -9,8 +9,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = 0,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_STORY_SUMMON] =
     {
@@ -18,6 +18,8 @@ const struct Zap gZaps[] =
         .content = COMPOUND_STRING("{PLAYER} and Charlotte, please meet me on the northern side of {STR_VAR_1}!"),
         .isPrivate = TRUE,
         .criteria = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_SUMMON_RESPONSE] =
     {
@@ -25,6 +27,8 @@ const struct Zap gZaps[] =
         .content = COMPOUND_STRING("It's been 2 minutes, I'm leaving for {STR_VAR_1} without you!"),
         .isPrivate = TRUE,
         .criteria = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_QUEST_NPC_RABIES] =
     {
@@ -33,8 +37,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Rabies,
         .quest = QUEST_RABIESOUTBREAK,
-        .dislikeCount = 8,
-        .likeCount = 46,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("4.5K"),
     },
     [ZAP_STORY_EPILOGUE] =
     {
@@ -46,8 +50,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_StoryClear,
         .quest = 0,
-        .dislikeCount = 12,
-        .likeCount = 13,
+        .dislikeCount = COMPOUND_STRING("23"),
+        .likeCount = COMPOUND_STRING("925"),
     },
     [ZAP_QUEST_NPC_SMOOTHIE] =
     {
@@ -56,8 +60,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Ice,
         .quest = QUEST_SMOOTHIECRAFTING,
-        .dislikeCount = 21,
-        .likeCount = 14,
+        .dislikeCount = COMPOUND_STRING("19"),
+        .likeCount = COMPOUND_STRING("8.6K"),
     },
     [ZAP_QUEST_NPC_DEOXYS] =
     {
@@ -66,8 +70,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Deoxys,
         .quest = QUEST_VSDEOXYS,
-        .dislikeCount = 24,
-        .likeCount = 46,
+        .dislikeCount = COMPOUND_STRING("17"),
+        .likeCount = COMPOUND_STRING("4.5K"),
         .tiles = (const u32[])INCGFX_U32("graphics/ui_menus/buzzr/zap_pics/3.png", ".4bpp.smol"),
         .tilemap = (const u16[])INCBIN_U16("graphics/ui_menus/buzzr/zap_pics/3.bin.smolTM"),
         .pal = (const u16[])INCGFX_U16("graphics/ui_menus/buzzr/zap_pics/3.png", ".gbapal"),
@@ -79,8 +83,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Tunnels,
         .quest = QUEST_HODOUTUNNELS,
-        .dislikeCount = 29,
-        .likeCount = 13,
+        .dislikeCount = COMPOUND_STRING("11"),
+        .likeCount = COMPOUND_STRING("4.1K"),
     },
     [ZAP_QUEST_NPC_FRESHWATER] =
     {
@@ -89,8 +93,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Freshwater,
         .quest = QUEST_FRESHWATEREVOLUTION,
-        .dislikeCount = 7,
-        .likeCount = 25,
+        .dislikeCount = COMPOUND_STRING("10"),
+        .likeCount = COMPOUND_STRING("5.3K"),
     },
     [ZAP_QUEST_NPC_STONE] =
     {
@@ -99,8 +103,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Stone,
         .quest = QUEST_BETWEENASTONEANDAHARDPLACE,
-        .dislikeCount = 25,
-        .likeCount = 32,
+        .dislikeCount = COMPOUND_STRING("10"),
+        .likeCount = COMPOUND_STRING("8.2K"),
     },
     [ZAP_GYM_MERMEREZA_CITY_BADGE] =
     {
@@ -109,8 +113,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_MermerezaCity_Badge,
         .quest = 0,
-        .dislikeCount = 10,
-        .likeCount = 37,
+        .dislikeCount = COMPOUND_STRING("83"),
+        .likeCount = COMPOUND_STRING("52K"),
     },
     [ZAP_GYM_TORA_TOWN_BADGE] =
     {
@@ -119,8 +123,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_ToraTown_Badge,
         .quest = 0,
-        .dislikeCount = 49,
-        .likeCount = 9,
+        .dislikeCount = COMPOUND_STRING("81"),
+        .likeCount = COMPOUND_STRING("57K"),
     },
     [ZAP_GYM_PERLACIA_CITY_BADGE] =
     {
@@ -129,8 +133,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_PerlaciaCity_Badge,
         .quest = 0,
-        .dislikeCount = 26,
-        .likeCount = 19,
+        .dislikeCount = COMPOUND_STRING("26"),
+        .likeCount = COMPOUND_STRING("69K"),
     },
     [ZAP_GYM_CHASILLA_BADGE] =
     {
@@ -139,8 +143,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_Chasilla_Badge,
         .quest = 0,
-        .dislikeCount = 40,
-        .likeCount = 35,
+        .dislikeCount = COMPOUND_STRING("48"),
+        .likeCount = COMPOUND_STRING("88K"),
     },
     [ZAP_GYM_FORT_YOBU_BADGE] =
     {
@@ -149,8 +153,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_FortYobu_Badge,
         .quest = 0,
-        .dislikeCount = 9,
-        .likeCount = 21,
+        .dislikeCount = COMPOUND_STRING("93"),
+        .likeCount = COMPOUND_STRING("73K"),
     },
     [ZAP_GYM_HALERBA_CITY_BADGE] =
     {
@@ -159,8 +163,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_HalerbaCity_Badge,
         .quest = 0,
-        .dislikeCount = 31,
-        .likeCount = 34,
+        .dislikeCount = COMPOUND_STRING("94"),
+        .likeCount = COMPOUND_STRING("18K"),
     },
     [ZAP_GYM_TIRABUDIN_PLACE_BADGE] =
     {
@@ -169,8 +173,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_TirabudinPlace_Badge,
         .quest = 0,
-        .dislikeCount = 33,
-        .likeCount = 34,
+        .dislikeCount = COMPOUND_STRING("56"),
+        .likeCount = COMPOUND_STRING("82K"),
     },
     [ZAP_GYM_IRISINA_TOWN_BADGE] =
     {
@@ -179,8 +183,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Gym_IrisinaTown_Badge,
         .quest = 0,
-        .dislikeCount = 20,
-        .likeCount = 18,
+        .dislikeCount = COMPOUND_STRING("59"),
+        .likeCount = COMPOUND_STRING("57K"),
     },
     [ZAP_STORY_GRUNT_RESTORED] =
     {
@@ -189,8 +193,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Story_GRUNT_Restored,
         .quest = 0,
-        .dislikeCount = 1,
-        .likeCount = 59,
+        .dislikeCount = COMPOUND_STRING("44"),
+        .likeCount = COMPOUND_STRING("355"),
     },
     [ZAP_STORY_STRIKE_BEGIN_1] =
     {
@@ -199,8 +203,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Story_Strike_Begin1,
         .quest = 0,
-        .dislikeCount = 57,
-        .likeCount = 12,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("11"),
     },
     [ZAP_STORY_STRIKE_BEGIN_2] =
     {
@@ -209,8 +213,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Story_Strike_Begin2,
         .quest = 0,
-        .dislikeCount = 21,
-        .likeCount = 99,
+        .dislikeCount = COMPOUND_STRING("99"),
+        .likeCount = COMPOUND_STRING("20"),
     },
     [ZAP_STORY_WAREHOUSE_RAVE] =
     {
@@ -219,8 +223,8 @@ const struct Zap gZaps[] =
         .isPrivate = TRUE,
         .criteria = ZapCriteria_Story_Warehouse_Rave,
         .quest = 0,
-        .dislikeCount = 3,
-        .likeCount = 43,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_QUEST_NOPODMOD_1] =
     {
@@ -229,8 +233,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 6,
-        .likeCount = 47,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_QUEST_NOPODMOD_2] =
     {
@@ -239,8 +243,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsCompulsiveHealingReward,
         .quest = 0,
-        .dislikeCount = 17,
-        .likeCount = 14,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_QUEST_NPC_RABIES_COMPLETE] =
     {
@@ -249,8 +253,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsRabiesComplete,
         .quest = 0,
-        .dislikeCount = 10,
-        .likeCount = 18,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("1.9K"),
     },
     [ZAP_QUEST_NPC_SMOOTHIE_COMPLETE] =
     {
@@ -259,8 +263,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsSmoothieCraftingComplete,
         .quest = 0,
-        .dislikeCount = 36,
-        .likeCount = 8,
+        .dislikeCount = COMPOUND_STRING("9"),
+        .likeCount = COMPOUND_STRING("832"),
     },
     [ZAP_QUEST_NPC_PSYOP] =
     {
@@ -269,8 +273,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Psyop,
         .quest = 0,
-        .dislikeCount = 21,
-        .likeCount = 14,
+        .dislikeCount = COMPOUND_STRING("21"),
+        .likeCount = COMPOUND_STRING("8.5K"),
     },
     [ZAP_QUEST_NPC_PSYOP_ACTIVE_A] =
     {
@@ -279,8 +283,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsPsyopActive,
         .quest = 0,
-        .dislikeCount = 44,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("51"),
+        .likeCount = COMPOUND_STRING("89"),
     },
     [ZAP_QUEST_NPC_PSYOP_ACTIVE_B] =
     {
@@ -289,8 +293,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsPsyopActive,
         .quest = 0,
-        .dislikeCount = 46,
-        .likeCount = 31,
+        .dislikeCount = COMPOUND_STRING("25"),
+        .likeCount = COMPOUND_STRING("57"),
     },
     [ZAP_QUEST_NPC_PSYOP_ACTIVE_C] =
     {
@@ -299,8 +303,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsPsyopActive,
         .quest = 0,
-        .dislikeCount = 33,
-        .likeCount = 25,
+        .dislikeCount = COMPOUND_STRING("44"),
+        .likeCount = COMPOUND_STRING("94"),
     },
     [ZAP_QUEST_NPC_PSYOP_COMPLETE] =
     {
@@ -309,8 +313,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_IsPsyopComplete,
         .quest = 0,
-        .dislikeCount = 1,
-        .likeCount = 48,
+        .dislikeCount = COMPOUND_STRING("61"),
+        .likeCount = COMPOUND_STRING("97"),
     },
     [ZAP_STORY_FALSETIMELINE] =
     {
@@ -319,8 +323,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = NULL,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("18K"),
+        .likeCount = COMPOUND_STRING("1.9K"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
     {
@@ -329,8 +333,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode1Times,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("23"),
+        .likeCount = COMPOUND_STRING("23"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_2] =
     {
@@ -339,8 +343,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode3Times,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("21"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_3] =
     {
@@ -349,8 +353,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode5Times,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("51"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_4] =
     {
@@ -359,8 +363,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_BetweenAStoneAndAHardPlace_HasRode9Times,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("260"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_5] =
     {
@@ -369,8 +373,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_BetweenAStoneAndAHardPlace_IsRewardOrComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("3"),
     },
     [ZAP_QUEST_RESTAURANTEXPANSION1_1] =
     {
@@ -379,8 +383,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestaurantExpansion1_1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("6.4K"),
     },
     [ZAP_QUEST_RESTAURANTEXPANSION1_2] =
     {
@@ -389,8 +393,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestaurantExpansion1_2,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("2.8K"),
     },
     [ZAP_QUEST_RESTAURANTEXPANSION1_3] =
     {
@@ -399,8 +403,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestaurantExpansion1_3,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("5"),
+        .likeCount = COMPOUND_STRING("2.8K"),
     },
     [ZAP_QUEST_DIGGINGUPADAORASDIRT_1] =
     {
@@ -409,8 +413,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Diggingupadaorasdirt_1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("83"),
+        .likeCount = COMPOUND_STRING("20"),
     },
     [ZAP_QUEST_DIGGINGUPADAORASDIRT_2] =
     {
@@ -419,8 +423,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Diggingupadaorasdirt_1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("448"),
+        .likeCount = COMPOUND_STRING("4"),
     },
     [ZAP_QUEST_DIGGINGUPADAORASDIRT_3] =
     {
@@ -429,8 +433,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Diggingupadaorasdirt_1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("10"),
+        .likeCount = COMPOUND_STRING("313"),
     },
     [ZAP_QUEST_DIGGINGUPADAORASDIRT_4] =
     {
@@ -439,8 +443,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("20"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_QUEST_RETURNDOLL] =
     {
@@ -449,8 +453,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_ReturnDollComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_QUEST_FREETHEINNOCENT_1] =
     {
@@ -459,8 +463,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Freetheinnocent1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("88"),
+        .likeCount = COMPOUND_STRING("25"),
     },
     [ZAP_QUEST_FREETHEINNOCENT_2] =
     {
@@ -469,8 +473,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Freetheinnocent1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("14"),
+        .likeCount = COMPOUND_STRING("43"),
     },
     [ZAP_QUEST_FREETHEINNOCENT_3] =
     {
@@ -479,8 +483,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Freetheinnocent1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("250"),
+        .likeCount = COMPOUND_STRING("21"),
     },
     [ZAP_QUEST_FREETHEINNOCENT_4] =
     {
@@ -489,8 +493,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Freetheinnocent1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("125"),
+        .likeCount = COMPOUND_STRING("17"),
     },
     [ZAP_QUEST_FREETHEINNOCENT_5] =
     {
@@ -499,8 +503,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Freetheinnocent5,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("13"),
     },
     [ZAP_QUEST_FINDTHEGUILTY_1] =
     {
@@ -509,8 +513,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Findtheguilty1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("306"),
+        .likeCount = COMPOUND_STRING("12"),
     },
     [ZAP_QUEST_RESTAURANTEXPANSION2] =
     {
@@ -519,8 +523,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Restaurantexpansion1,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("6K"),
     },
     [ZAP_QUEST_KITCHENVOLUNTEERING] =
     {
@@ -529,8 +533,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Kitchenvolunteering,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("752"),
     },
     [ZAP_QUEST_RESTOREESPULEEGYM_ACTIVE] =
     {
@@ -539,8 +543,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestoreespuleegymActive,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("141"),
     },
     [ZAP_QUEST_RESTOREESPULEEGYM_COMPLETE_BAIYA] =
     {
@@ -549,8 +553,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestoreespuleegymComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("6.2K"),
     },
     [ZAP_QUEST_RESTOREESPULEEGYM_COMPLETE_IMELDA] =
     {
@@ -559,8 +563,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestoreespuleegymComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("16"),
+        .likeCount = COMPOUND_STRING("2.6K"),
     },
     [ZAP_QUEST_RESTOREZENZUISLAND_ACTIVE] =
     {
@@ -569,8 +573,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorezenzugymActive,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("482"),
     },
     [ZAP_QUEST_RESTOREZENZUISLAND_COMPLETE_BAIYA] =
     {
@@ -579,8 +583,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorezenzugymComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("2.8K"),
     },
     [ZAP_QUEST_RESTOREZENZUISLAND_COMPLETE_DOYLE] =
     {
@@ -589,8 +593,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorezenzugymComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("18"),
+        .likeCount = COMPOUND_STRING("6.4K"),
     },
     [ZAP_QUEST_RESTOREHODOUCITY_ASSIGNED_RESTORATION] =
     {
@@ -599,8 +603,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorehodoucityAssigned,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("6"),
     },
     [ZAP_QUEST_RESTOREHODOUCITY_FOUND_LEADER] =
     {
@@ -609,8 +613,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorehodoucityFoundLeader,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("12"),
     },
     [ZAP_QUEST_RESTOREHODOUCITY_COMPLETE_RANDOM] =
     {
@@ -619,8 +623,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorehodoucityComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("1.8K"),
     },
     [ZAP_QUEST_RESTOREHODOUCITY_COMPLETE_JOHNNY] =
     {
@@ -629,8 +633,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_RestorehodoucityComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("2.4K"),
     },
     [ZAP_QUEST_IMPROVBATTLING_ACTIVE] =
     {
@@ -639,8 +643,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_ImprovbattlingActive,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("21"),
     },
     [ZAP_QUEST_IMPROVBATTLING_COMPLETE] =
     {
@@ -649,8 +653,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_ImprovbattlingComplete,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("301"),
+        .likeCount = COMPOUND_STRING("8"),
     },
     [ZAP_QUEST_TEACHATRAINERTOFISH_FISHERFOLK] =
     {
@@ -659,8 +663,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY] =
     {
@@ -669,8 +673,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("8"),
     },
     [ZAP_QUEST_HANG20_WARNING] =
     {
@@ -679,8 +683,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_QUEST_HANG20_ROCKY_COASTS] =
     {
@@ -689,8 +693,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Hang20_FirstZapRead,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("177"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_AD] =
     {
@@ -699,8 +703,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("90K"),
+        .likeCount = COMPOUND_STRING("24K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_AD2] =
     {
@@ -709,8 +713,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("38K"),
+        .likeCount = COMPOUND_STRING("72K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_AD3] =
     {
@@ -719,8 +723,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_Active,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("59K"),
+        .likeCount = COMPOUND_STRING("82K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_READYA] =
     {
@@ -729,8 +733,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_ReadyForA,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("97K"),
+        .likeCount = COMPOUND_STRING("69K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_READYB] =
     {
@@ -739,8 +743,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_ReadyForB,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("46K"),
+        .likeCount = COMPOUND_STRING("43K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_READYC] =
     {
@@ -749,8 +753,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_ReadyForC,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("73K"),
+        .likeCount = COMPOUND_STRING("79K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_READYD] =
     {
@@ -759,8 +763,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_ReadyForD,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("81K"),
+        .likeCount = COMPOUND_STRING("40K"),
     },
     [ZAP_QUEST_CULTURAL_PURITY_READYD_CHAMPION] =
     {
@@ -769,8 +773,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_CulturalPurity_ReadyForDChampion,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("53K"),
+        .likeCount = COMPOUND_STRING("48K"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_INTRO] =
     {
@@ -779,8 +783,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("410"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_1] =
     {
@@ -789,8 +793,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("298"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_2] =
     {
@@ -799,8 +803,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("497"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_3] =
     {
@@ -809,8 +813,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("111"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_4] =
     {
@@ -819,8 +823,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("473"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_LISTICLE_5] =
     {
@@ -829,8 +833,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasQuestStarted,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("455"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_SHINZO_1] =
     {
@@ -839,8 +843,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasSubquest1Completed,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("2.8K"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_SHINZO_2] =
     {
@@ -849,8 +853,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasSubquest2Completed,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("7.9K"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_SHINZO_3] =
     {
@@ -859,8 +863,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasSubquest3Completed,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("9.9K"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_SHINZO_4] =
     {
@@ -869,8 +873,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasSubquest4Completed,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("3.9K"),
     },
     [ZAP_QUEST_HYBRID_CULTURE_SHINZO_5] =
     {
@@ -879,8 +883,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_HybridCulture_HasSubquest5Completed,
         .quest = 0,
-        .dislikeCount = 72,
-        .likeCount = 4,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("8.1K"),
     },
     [ZAP_QUEST_NPC_RANGERS_HIRING] =
     {
@@ -889,8 +893,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
         .quest = 0,
-        .dislikeCount = 4,
-        .likeCount = 67,
+        .dislikeCount = COMPOUND_STRING("10"),
+        .likeCount = COMPOUND_STRING("34"),
     },
     [ZAP_QUEST_NPC_INSTALLNATUREPROBESWORKER_JOBHUNTING] =
     {
@@ -899,8 +903,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_InstallNatureProbes_HasQuestCompleted,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 3,
+        .dislikeCount = COMPOUND_STRING("51"),
+        .likeCount = COMPOUND_STRING("22"),
     },
     [ZAP_ADAORA_MIDRIFF] =
     {
@@ -909,8 +913,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("9"),
+        .likeCount = COMPOUND_STRING("36"),
     },
     [ZAP_ADAORA_ZODIAC] =
     {
@@ -919,8 +923,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("83"),
+        .likeCount = COMPOUND_STRING("23"),
     },
     [ZAP_LUCREZIA_JOB] =
     {
@@ -929,8 +933,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("186"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_ADAORA_TRUST] =
     {
@@ -939,8 +943,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("37"),
+        .likeCount = COMPOUND_STRING("5"),
     },
     [ZAP_ELEANOR_REMEMBER] =
     {
@@ -949,8 +953,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("12"),
     },
     [ZAP_FRANK_CAREFREE] =
     {
@@ -959,8 +963,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("220"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_BD_POPPERS] =
     {
@@ -969,8 +973,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("44"),
+        .likeCount = COMPOUND_STRING("43"),
     },
     [ZAP_NEEDLES_REVIEW] =
     {
@@ -979,8 +983,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("325"),
+        .likeCount = COMPOUND_STRING("52"),
     },
     [ZAP_CHARLOTTE_TRASH] =
     {
@@ -989,8 +993,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("38"),
     },
     [ZAP_DIMU_DISCOURSE] =
     {
@@ -999,8 +1003,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("211"),
+        .likeCount = COMPOUND_STRING("6"),
     },
     [ZAP_DOYLE_CRINGE] =
     {
@@ -1009,8 +1013,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("15"),
+        .likeCount = COMPOUND_STRING("24"),
     },
     [ZAP_BAIYA_RUDE] =
     {
@@ -1019,8 +1023,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("315"),
+        .likeCount = COMPOUND_STRING("12"),
     },
     [ZAP_BAIYA_MAINCHARACTER] =
     {
@@ -1029,8 +1033,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("191"),
+        .likeCount = COMPOUND_STRING("385"),
     },
     [ZAP_MEGACROSS_DEFENSE] =
     {
@@ -1039,8 +1043,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("8K"),
+        .likeCount = COMPOUND_STRING("166"),
     },
     [ZAP_PLAYER_PRESENCE] =
     {
@@ -1049,8 +1053,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("51"),
     },
     [ZAP_RAMESH_ANDROID] =
     {
@@ -1059,8 +1063,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("269"),
+        .likeCount = COMPOUND_STRING("69"),
     },
     [ZAP_BD_MULTITASK] =
     {
@@ -1069,8 +1073,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("70"),
     },
     [ZAP_CAPHE_MORRIS] =
     {
@@ -1079,8 +1083,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("21"),
+        .likeCount = COMPOUND_STRING("1.8K"),
     },
     [ZAP_YOBU_PIOCA] =
     {
@@ -1089,8 +1093,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("14"),
     },
     [ZAP_IRISINA_QUEER] =
     {
@@ -1099,8 +1103,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("23"),
     },
     [ZAP_TIRABUDIN_ZINES] =
     {
@@ -1109,8 +1113,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("24"),
     },
     [ZAP_TIRABUDIN_ZINES2] =
     {
@@ -1119,8 +1123,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("458"),
     },
     [ZAP_TORA_MOCHI] =
     {
@@ -1129,8 +1133,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("467"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_BELEN_BYSTANDER] =
     {
@@ -1139,8 +1143,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("16"),
+        .likeCount = COMPOUND_STRING("80"),
     },
     [ZAP_SHINZO_BYSTANDER] =
     {
@@ -1149,8 +1153,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("495"),
     },
     [ZAP_EMRYS_BYSTANDER] =
     {
@@ -1159,8 +1163,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("499"),
     },
     [ZAP_PUA_BYSTANDER] =
     {
@@ -1169,8 +1173,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("116"),
     },
     [ZAP_NERIENE_BYSTANDER] =
     {
@@ -1179,8 +1183,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("238"),
     },
     [ZAP_DIMU_BYSTANDER] =
     {
@@ -1189,8 +1193,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("419"),
     },
     [ZAP_BD_BYSTANDER] =
     {
@@ -1199,8 +1203,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("335"),
     },
     [ZAP_AMI_BYSTANDER] =
     {
@@ -1209,8 +1213,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("403"),
     },
     [ZAP_SHARPRISE_FLOWN] =
     {
@@ -1219,8 +1223,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("233"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_INVASIVE_POKEMON] =
     {
@@ -1229,8 +1233,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("11"),
     },
     [ZAP_NEW_TRAINERS] =
     {
@@ -1239,8 +1243,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("16"),
+        .likeCount = COMPOUND_STRING("79"),
     },
     [ZAP_LEAGUE_PROSPECTS] =
     {
@@ -1249,8 +1253,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("17"),
+        .likeCount = COMPOUND_STRING("60"),
     },
     [ZAP_STARTING_GUN] =
     {
@@ -1259,8 +1263,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("11"),
+        .likeCount = COMPOUND_STRING("27"),
     },
     [ZAP_BAIYA_CHEWING] =
     {
@@ -1269,8 +1273,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_CAPHE_QUEUE] =
     {
@@ -1279,8 +1283,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_CHARLOTTE_PRODIGY] =
     {
@@ -1289,8 +1293,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("17"),
+        .likeCount = COMPOUND_STRING("1.5K"),
     },
     [ZAP_POPIDORA_FREAKS] =
     {
@@ -1299,8 +1303,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("16"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_GO_GOGGLES] =
     {
@@ -1309,8 +1313,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("6"),
     },
     [ZAP_SHINJI_BUDGET] =
     {
@@ -1319,8 +1323,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_LUCREZIA_EMRYS] =
     {
@@ -1329,8 +1333,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("23"),
+        .likeCount = COMPOUND_STRING("604"),
     },
     [ZAP_BAIYA_CUSTOMS] =
     {
@@ -1339,8 +1343,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("345"),
+        .likeCount = COMPOUND_STRING("18"),
     },
     [ZAP_RAMESH_THANKS] =
     {
@@ -1349,8 +1353,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("1K"),
     },
     [ZAP_CURENO_TIDE] =
     {
@@ -1359,8 +1363,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_CHARLOTTE_WINNING] =
     {
@@ -1369,8 +1373,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("64"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_BAIYA_WINNING] =
     {
@@ -1379,8 +1383,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("14"),
+        .likeCount = COMPOUND_STRING("4"),
     },
     [ZAP_PLAYER_POLICE] =
     {
@@ -1389,8 +1393,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("434"),
     },
     [ZAP_GOLD_BREEDING] =
     {
@@ -1399,8 +1403,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("11"),
+        .likeCount = COMPOUND_STRING("9"),
     },
     [ZAP_EARTHQUAKE_PANIC] =
     {
@@ -1409,8 +1413,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("20"),
     },
     [ZAP_ARANTRAZ_SCANDAL] =
     {
@@ -1419,8 +1423,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("9"),
     },
     [ZAP_LONG_BATTLE] =
     {
@@ -1429,8 +1433,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("116"),
+        .likeCount = COMPOUND_STRING("36"),
     },
     [ZAP_KEIYING_YOBU] =
     {
@@ -1439,8 +1443,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("7"),
+        .likeCount = COMPOUND_STRING("5"),
     },
     [ZAP_KEIYING_COMPETITIVE] =
     {
@@ -1449,8 +1453,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("7.3K"),
     },
     [ZAP_CHARLOTTE_PLAYER] =
     {
@@ -1459,8 +1463,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("9"),
+        .likeCount = COMPOUND_STRING("9"),
     },
     [ZAP_TALA_FIRED] =
     {
@@ -1469,8 +1473,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_BAIYA_TALA] =
     {
@@ -1479,8 +1483,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_TIDE_CONSTRUCTION] =
     {
@@ -1489,8 +1493,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("11"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_GALAR_LEG] =
     {
@@ -1499,8 +1503,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("14"),
     },
     [ZAP_CHAMPIONSHIP_DELAYED] =
     {
@@ -1509,8 +1513,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("442"),
+        .likeCount = COMPOUND_STRING("99"),
     },
     [ZAP_CHARLOTTE_RANDOM] =
     {
@@ -1519,8 +1523,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("5"),
+        .likeCount = COMPOUND_STRING("8"),
     },
     [ZAP_FRANK_CASUAL] =
     {
@@ -1529,8 +1533,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("86"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_HACK_PSA] =
     {
@@ -1539,8 +1543,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("14"),
+        .likeCount = COMPOUND_STRING("7.9K"),
     },
     [ZAP_SHAPRRISE_HACK] =
     {
@@ -1549,8 +1553,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("18K"),
+        .likeCount = COMPOUND_STRING("51K"),
     },
     [ZAP_RAID_PSA] =
     {
@@ -1559,8 +1563,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("56"),
+        .likeCount = COMPOUND_STRING("48"),
     },
     [ZAP_CHAMPIONSHIP_START] =
     {
@@ -1569,8 +1573,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_POLICE_TIDE] =
     {
@@ -1579,8 +1583,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("5"),
     },
     [ZAP_BAIYA_TIDE] =
     {
@@ -1589,8 +1593,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("94"),
     },
     [ZAP_PLAYER_SHARP] =
     {
@@ -1599,8 +1603,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("79"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_SHARPRISE_FAN] =
     {
@@ -1609,8 +1613,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_SHAPRIRSE_HACK_2] =
     {
@@ -1619,8 +1623,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("18K"),
+        .likeCount = COMPOUND_STRING("60K"),
     },
     [ZAP_SHAPRRISE_HACK_3] =
     {
@@ -1629,8 +1633,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("78K"),
+        .likeCount = COMPOUND_STRING("94K"),
     },
     [ZAP_SHAPRRISE_HACK_4] =
     {
@@ -1639,8 +1643,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("33K"),
+        .likeCount = COMPOUND_STRING("89K"),
     },
     [ZAP_SHARPRISE_HACK_5] =
     {
@@ -1649,8 +1653,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("44K"),
+        .likeCount = COMPOUND_STRING("60K"),
     },
     [ZAP_SHARPRISE_HACK_6] =
     {
@@ -1659,8 +1663,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("29K"),
+        .likeCount = COMPOUND_STRING("62K"),
     },
     [ZAP_FANTASY_LEAGUE] =
     {
@@ -1669,8 +1673,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("59"),
     },
     [ZAP_PLAYER_CHAMPION] =
     {
@@ -1679,8 +1683,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("24"),
+        .likeCount = COMPOUND_STRING("81"),
     },
     [ZAP_PLAYER_BREAK] =
     {
@@ -1689,8 +1693,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("54"),
     },
     [ZAP_PLAYER_BAIYA] =
     {
@@ -1699,8 +1703,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("9"),
     },
     [ZAP_HODOU_JOHNNY] =
     {
@@ -1709,8 +1713,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("5"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_ZENZU_MOVING] =
     {
@@ -1719,8 +1723,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("377"),
+        .likeCount = COMPOUND_STRING("9"),
     },
     [ZAP_ESPULEE_SHELL] =
     {
@@ -1729,8 +1733,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("73"),
+        .likeCount = COMPOUND_STRING("24"),
     },
     [ZAP_TRAINING_VIBE] =
     {
@@ -1739,8 +1743,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_ARANTRAZ_UNSETTLING] =
     {
@@ -1749,8 +1753,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("434"),
     },
     [ZAP_HODOU_FIGHT] =
     {
@@ -1759,8 +1763,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("773"),
     },
     [ZAP_POLICE_BRUTE] =
     {
@@ -1769,8 +1773,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_TIDE_RIOTS] =
     {
@@ -1779,8 +1783,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("235"),
+        .likeCount = COMPOUND_STRING("404"),
     },
     [ZAP_SHARPRISE_FAR] =
     {
@@ -1789,8 +1793,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("542"),
     },
     [ZAP_PLAYER_RANCID] =
     {
@@ -1799,8 +1803,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("1.6K"),
     },
     [ZAP_CREEPY_LADY] =
     {
@@ -1809,8 +1813,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("17"),
+        .likeCount = COMPOUND_STRING("208"),
     },
     [ZAP_TORGEOT_CHILLS] =
     {
@@ -1819,8 +1823,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("41"),
+        .likeCount = COMPOUND_STRING("4"),
     },
     [ZAP_SHARPRISE_BOYCOTT] =
     {
@@ -1829,8 +1833,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("51"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_IRISINA_BALL] =
     {
@@ -1839,8 +1843,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("7"),
+        .likeCount = COMPOUND_STRING("88"),
     },
     [ZAP_E4_WATCH] =
     {
@@ -1849,8 +1853,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("2M"),
     },
     [ZAP_BAIYA_BUDDY] =
     {
@@ -1859,8 +1863,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("127"),
     },
     [ZAP_CHAMP_CHEATED] =
     {
@@ -1869,8 +1873,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("164"),
     },
     [ZAP_BUZZR_MISINFORMATION] =
     {
@@ -1879,8 +1883,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("433"),
+        .likeCount = COMPOUND_STRING("487"),
     },
     [ZAP_BODEGA_SHOUTOUT] =
     {
@@ -1889,8 +1893,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("465"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_HALAI_NIGHTMARE] =
     {
@@ -1899,8 +1903,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("15"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_HALAI_RECONSTRUCTION] =
     {
@@ -1909,8 +1913,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("156"),
+        .likeCount = COMPOUND_STRING("337"),
     },
     [ZAP_HALAI_AID] =
     {
@@ -1919,8 +1923,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("355"),
     },
     [ZAP_OLD_E4] =
     {
@@ -1929,8 +1933,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("8"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_FIRST_PROTEST] =
     {
@@ -1939,8 +1943,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("232"),
     },
     [ZAP_HUGE_TURNOUT] =
     {
@@ -1949,8 +1953,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_CHAMP_STORMED] =
     {
@@ -1959,8 +1963,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("13"),
+        .likeCount = COMPOUND_STRING("1.8K"),
     },
     [ZAP_INKAY_HYPNOSIS] =
     {
@@ -1969,8 +1973,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("15"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_ALT_GIRL] =
     {
@@ -1979,8 +1983,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_CURENO_ANKLE] =
     {
@@ -1989,8 +1993,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("11"),
+        .likeCount = COMPOUND_STRING("24"),
     },
     [ZAP_KALOS_TOURIST] =
     {
@@ -1999,8 +2003,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_BITE_MEGA] =
     {
@@ -2009,8 +2013,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_TIDE_DONE] =
     {
@@ -2019,8 +2023,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("73"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_TIDE_RUBBISH] =
     {
@@ -2029,8 +2033,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("51"),
+        .likeCount = COMPOUND_STRING("122"),
     },
     [ZAP_BAD_EARTHQUAKE] =
     {
@@ -2039,8 +2043,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("207"),
     },
     [ZAP_CHASILLA_EARTHQUAKE] =
     {
@@ -2049,8 +2053,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("7"),
     },
     [ZAP_OUTSIDER_CHAMPION] =
     {
@@ -2059,8 +2063,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_SICK_FINALS] =
     {
@@ -2069,8 +2073,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("468"),
     },
     [ZAP_PIOCA_FIREWORKS] =
     {
@@ -2079,8 +2083,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("15"),
     },
     [ZAP_HANO_BEACH] =
     {
@@ -2089,8 +2093,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("76"),
+        .likeCount = COMPOUND_STRING("55"),
     },
     [ZAP_MIME_WALLS] =
     {
@@ -2099,8 +2103,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("33"),
+        .likeCount = COMPOUND_STRING("1"),
     },
     [ZAP_CAPHE_ESPULEE] =
     {
@@ -2109,8 +2113,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("12"),
+        .likeCount = COMPOUND_STRING("24"),
     },
     [ZAP_COLD_COAST] =
     {
@@ -2119,8 +2123,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("2"),
     },
     [ZAP_DEVON_CORP] =
     {
@@ -2129,8 +2133,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("48"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_VICTORY_TACO] =
     {
@@ -2139,8 +2143,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("4"),
     },
     [ZAP_SHEER_COLD] =
     {
@@ -2149,8 +2153,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("4"),
+        .likeCount = COMPOUND_STRING("294"),
     },
     [ZAP_BURN_HEAL] =
     {
@@ -2159,8 +2163,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("0"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_OLD_BUZZR] =
     {
@@ -2169,8 +2173,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("48"),
+        .likeCount = COMPOUND_STRING("96"),
     },
     [ZAP_PRESTO_CREEPY] =
     {
@@ -2179,8 +2183,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("5"),
+        .likeCount = COMPOUND_STRING("45"),
     },
     [ZAP_POMEG_SPICY] =
     {
@@ -2189,8 +2193,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("0"),
     },
     [ZAP_DRILBUR_EVOLVE] =
     {
@@ -2199,8 +2203,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("5"),
     },
     [ZAP_PINTILLION_SPEWPA] =
     {
@@ -2209,8 +2213,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("3"),
+        .likeCount = COMPOUND_STRING("13"),
     },
     [ZAP_BATON_PASS] =
     {
@@ -2219,8 +2223,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("6"),
+        .likeCount = COMPOUND_STRING("5"),
     },
     [ZAP_CLUTCH_PRIORITY] =
     {
@@ -2229,8 +2233,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("2"),
+        .likeCount = COMPOUND_STRING("377"),
     },
     [ZAP_ASSES_TEAM] =
     {
@@ -2239,8 +2243,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("14"),
+        .likeCount = COMPOUND_STRING("394"),
     },
     [ZAP_DUSK_STONE] =
     {
@@ -2249,8 +2253,8 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("137"),
+        .likeCount = COMPOUND_STRING("155"),
     },
     [ZAP_STAT_CHANGE] =
     {
@@ -2259,7 +2263,7 @@ const struct Zap gZaps[] =
         .isPrivate = FALSE,
         .criteria = ZapCriteria_AlwaysTrue,
         .quest = 0,
-        .dislikeCount = 0,
-        .likeCount = 0,
+        .dislikeCount = COMPOUND_STRING("1"),
+        .likeCount = COMPOUND_STRING("100"),
     },
 };
