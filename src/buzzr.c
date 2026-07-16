@@ -99,8 +99,8 @@ static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId);
 static void *GetCriteria(enum BuzzrZapIds zapId);
 static u16 GetQuest(enum BuzzrZapIds zapId);
 static bool32 IsPrivate(enum BuzzrZapIds zapId);
-static u16 GetDislikes(enum BuzzrZapIds zapId);
-static u16 GetLikes(enum BuzzrZapIds zapId);
+static const u8* GetDislikes(enum BuzzrZapIds zapId);
+static const u8* GetLikes(enum BuzzrZapIds zapId);
 static bool32 IsSortOrderOldestFirst(void);
 static bool32 IsTimelinePictureMode(void);
 static void HandleMenuHeader(void);
@@ -1007,12 +1007,12 @@ static bool32 IsPrivate(enum BuzzrZapIds zapId)
     return gZaps[zapId].isPrivate;
 }
 
-static u16 GetDislikes(enum BuzzrZapIds zapId)
+static const u8* GetDislikes(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].dislikeCount;
 }
 
-static u16 GetLikes(enum BuzzrZapIds zapId)
+static const u8* GetLikes(enum BuzzrZapIds zapId)
 {
     return gZaps[zapId].likeCount;
 }
@@ -1251,6 +1251,7 @@ static void PrintUsername(u32 windowId, u32 x, u32 y, const u8 *username, u32 fo
 {
     u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     u32 lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    fontId = GetFontIdToFit(username,fontId,letterSpacing,ZAP_USERNAME_WIDTH);
 
     AddTextPrinterParameterized4(windowId, fontId,x, y, letterSpacing, lineSpacing, BuzzrWindowFontColors[GetFontColor()], TEXT_SKIP_DRAW,username);
 }
@@ -1306,21 +1307,23 @@ static const u8 GetFontColor(void)
 
 static void HandleZapMetrics(u16 selectedZap, u32 verticalOffset)
 {
-    u32 windowId = BUZZR_WINDOW_HEADER, x = 174, dislikes = GetDislikes(selectedZap), likes = GetLikes(selectedZap), fontId = FONT_BUZZR_METRICS, letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+    u32 windowId = BUZZR_WINDOW_HEADER, x = 167, fontId = FONT_BUZZR_METRICS, letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
     u32 y = verticalOffset;
 
     PrintMetricIcons(windowId,x,y);
 
-    ConvertIntToDecimalStringN(gStringVar2,likes,STR_CONV_MODE_LEFT_ALIGN,3);
-    AddTextPrinterParameterized4(windowId, fontId ,187, y, letterSpacing, GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW,gStringVar2);
+    StringCopy(gStringVar2,GetLikes(selectedZap));
+    fontId = GetFontIdToFit(gStringVar2,FONT_BUZZR_METRICS,letterSpacing,ZAP_METRIC_WIDTH);
+    AddTextPrinterParameterized4(windowId, fontId, 179, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar2);
 
-    ConvertIntToDecimalStringN(gStringVar2,dislikes,STR_CONV_MODE_LEFT_ALIGN,3);
-    AddTextPrinterParameterized4(windowId, fontId ,214, y, letterSpacing, GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW,gStringVar2);
+    StringCopy(gStringVar2,GetDislikes(selectedZap));
+    fontId = GetFontIdToFit(gStringVar2,FONT_BUZZR_METRICS,letterSpacing,ZAP_METRIC_WIDTH);
+    AddTextPrinterParameterized4(windowId, fontId, 213, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar2);
 }
 
 static void PrintMetricIcons(u32 windowId, u32 x, u32 y)
 {
-    BlitBitmapToWindow(windowId,sMetrics_Gfx,x,y,40,16);
+    BlitBitmapToWindow(windowId,sMetrics_Gfx,x,y,44,16);
 }
 
 static void HandleZapContent(enum BuzzrZapIds zapId, u32 verticalOffset, u32 typeZap)
