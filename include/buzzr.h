@@ -37,8 +37,8 @@ struct Zap
     void *criteria; // src/buzzr_criteria
     u16 quest; // include/constants/quests
     bool32 isPrivate;
-    u16 dislikeCount;
-    u16 likeCount;
+    const u8 *dislikeCount;
+    const u8 *likeCount;
 };
 
 struct ZapBackground
