@@ -61,7 +61,7 @@ const struct Zap gZaps[] =
     [ZAP_QUEST_NPC_DEOXYS] =
     {
         .userId = BUZZR_USER_PLACEHOLDER,
-        .content = COMPOUND_STRING("I think I was...Threatened by a Pokemon? It was the strangest thing. It was like it fell from the sky, faster than anything I'd ever seen, and then started zipping all around, flashing lights and making strange sounds. I've been looking up what it could've been and it seems hard to believe but...I think it might've been a {STR_VAR_1}?"),
+        .content = COMPOUND_STRING("I saw the strangest thing. A Pokemon, like, fell from the sky, faster than anything I'd ever seen, and then started zipping all around, flashing lights and making strange sounds. I've been looking up what it could've been and it seems hard to believe but...I think it might've been a {STR_VAR_1}?"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Deoxys,
         .quest = QUEST_VSDEOXYS,
@@ -314,12 +314,22 @@ const struct Zap gZaps[] =
     [ZAP_STORY_FALSETIMELINE] =
     {
         .userId = BUZZR_USER_SHARPRISECAPTIAL,
-        .content = COMPOUND_STRING("Our operations at Sharprise have long been hindered by the criminal actions of The Tide - as have, we believe, the wellbeing and prosperity of Resido. Our organisation no longer believes we can sit idly by whilst they continue, and will begin co-operating with authorities to see them disbanded. Thank you for your attention to this matter."),
+        .content = COMPOUND_STRING("Our operations at Sharprise have long been hindered by the criminal actions of The Tide - as have, we believe, the wellbeing and prosperity of Resido. (1/1)"),
         .isPrivate = FALSE,
         .criteria = NULL,
         .quest = 0,
         .dislikeCount = COMPOUND_STRING("18K"),
         .likeCount = COMPOUND_STRING("1.9K"),
+    },
+    [ZAP_STORY_FALSETIMELINE_2] =
+    {
+        .userId = BUZZR_USER_SHARPRISECAPTIAL,
+        .content = COMPOUND_STRING("Our organisation no longer believes we can sit idly by whilst they continue, and will begin co-operating with authorities to see them disbanded. Thank you for your attention to this matter. (2/2)"),
+        .isPrivate = FALSE,
+        .criteria = NULL,
+        .quest = 0,
+        .dislikeCount = COMPOUND_STRING("19K"),
+        .likeCount = COMPOUND_STRING("1.8K"),
     },
     [ZAP_QUEST_BETWEENASTONEANDAHARDPLACE_NPC_1] =
     {
