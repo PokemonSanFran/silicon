@@ -1116,7 +1116,7 @@ const u32 GetNumContentLines(enum BuzzrZapIds zapId)
     const u8 *str = GetContent(zapId);
     StripLineBreaks(gStringVar4);
     u32 windowWidth = ZAP_WINDOW_WIDTH;
-    BreakStringNaive(gStringVar4, windowWidth, ZAP_MAX_NUM_LINES, FONT_BUZZR_ZAP, HIDE_SCROLL_PROMPT);
+    BreakStringNaive(gStringVar4, windowWidth, 99, FONT_BUZZR_ZAP, HIDE_SCROLL_PROMPT);
 
     u32 count = 1;
     while (*str != EOS)
@@ -1135,7 +1135,7 @@ static u8 CalculateZapContentTiles(u32 zapId)
 {
     u32 lines = GetNumContentLines(zapId) * 2;
 
-    if (lines == 10 || lines == 12)
+    if (lines == 10 || lines == 12 || lines == 14)
         lines--;
 
     if (lines == 4)

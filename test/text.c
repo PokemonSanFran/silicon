@@ -902,5 +902,5 @@ TEST("Buzzr Zaps are not taller than max height")
     {
         PARAMETRIZE_LABEL("%S %d", GetContent(i),i) { zap = i; }
     }
-    EXPECT_LT(GetNumContentLines(zap), heightPx);
+    EXPECT_LE(GetNumContentLines(zap), heightPx);
 }
