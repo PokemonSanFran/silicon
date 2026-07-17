@@ -2,6 +2,8 @@
 #include "battle.h"
 #include "constants/trainers.h"
 #include "battle_anim.h"
+#include "event_data.h"
+#include "field_specials.h"
 #include "battle_setup.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
@@ -78,9 +80,15 @@ static bool32 ZapCriteria_HasTalkedReporter(void)
 
 static bool32 ZapCriteria_SocialMedia(void)
 {
-    bool32 talkedReporter = ZapCriteria_HasTalkedReporter();
-    bool32 hasSteps = ZapCriteria_CheckSteps(ZAP_SOCIAL_MEDIA_STEPS);
-    return (talkedReporter && hasSteps);
+    if (ZapCriteria_HasTalkedReporter() == FALSE)
+        return FALSE;
+
+    return ZapCriteria_CheckSteps(ZAP_SOCIAL_MEDIA_STEPS);
+}
+
+void ZapCriteria_RegularZap(void)
+{
+    gSpecialVar_Result = ZapCriteria_CheckSteps(ZAP_CHATTER_STEPS);
 }
 
 void ZapCriteria_Quest_NPC_Robbery(void)
@@ -387,7 +395,7 @@ void ZapCriteria_Quest_CulturalPurity_ReadyForDChampion(void)
 
 void ZapCriteria_Quest_HybridCulture_HasQuestStarted(void)
 {
-    gSpecialVar_Result = (IsQuestActiveState(QUEST_HYBRIDCULTURE));
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_HYBRIDCULTURE) ||(IsQuestRewardState(QUEST_HYBRIDCULTURE)) || (IsQuestCompletedState(QUEST_HYBRIDCULTURE))) ;
 }
 void ZapCriteria_Quest_HybridCulture_HasSubquest1Completed(void)
 {
@@ -413,3 +421,285 @@ void ZapCriteria_Quest_InstallNatureProbes_HasQuestCompleted(void)
 {
     gSpecialVar_Result = IsQuestCompletedState(QUEST_INSTALLNATUREPROBES);
 }
+
+void ZapCriteria_HasMetLucrezia(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_SHARPRISESPIRE_CONFERENCE_STATE) >= POST_WOW_YOURE_STRONG);
+}
+
+void ZapCriteria_AfterSorryAbout(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_FERRY_STATE) >=FERRY_ARANTRAZ_AVAILABLE);
+}
+
+void ZapCriteria_AfterChallengeStart(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_PLAYER_HOME_STATE) < SLEPT_AFTER_SWAGBAG)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_HasAllBadges(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (GetNumberOfBadges() < 8)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_HasOneBadges(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (GetNumberOfBadges() < 1)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_HasTwoBadges(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (GetNumberOfBadges() < 2)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_HasFlownIn(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_PLAYER_HOME_STATE) < HAS_MET_CHARLOTTE)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_AfterDefeatedCharlotte(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (FlagGet(TRAINER_FLAGS_START + TRAINER_CHARLOTTE_OLDASSHOLEAPPEARS) == FALSE)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_AfterWowYoureStrong(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_SHARPRISESPIRE_CONFERENCE_STATE) <= POST_WOW_YOURE_STRONG)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_AfterHowDoWeGetHome(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_SHARPRISESPIRE_CONFERENCE_STATE) <= POST_WOW_YOURE_STRONG)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_FinishedHousingProtest(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_ROUTE99_STATE) >= DEFEATED_THE_TIDE_ROUTE99);
+}
+
+void ZapCriteria_LearnedBreedingCenter(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CHASILLA_STATE) >= SWAGBAG_2_COMPLETE);
+}
+
+void ZapCriteria_VisitedArantraz(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (FlagGet(FLAG_VISITED_ARANTRAZ) == FALSE)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_AfterCapheRiot(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_KEIYING_STATE) >= STATE_KEIYING_POST_RAISON_DETRE);
+}
+
+void ZapCriteria_AfterBeachBattle(void)
+{
+    gSpecialVar_Result = (FlagGet(TRAINER_FLAGS_START + TRAINER_CHARLOTTE_BEACHBATTLE));
+}
+
+void ZapCriteria_AfterParade(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_TIRABUDIN_PLACE_STATE) < PARADE_COMPLETE)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_StrikeStarted(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_CONSTRUCTION_STRIKE_STATE) >= STRIKE_HAS_BEGUN);
+}
+
+void ZapCriteria_PostGarbodor(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) > STORY_DEFEATED_GARBODOR);
+}
+
+void ZapCriteria_HackStarted(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_LEAVERRA_FOREST_STATE) >= POST_HAVE_YOU_SEEN_THE_NEWS);
+}
+
+void ZapCriteria_HackStartedProgress(void)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (VarGet(VAR_LEAVERRA_FOREST_STATE) < POST_HAVE_YOU_SEEN_THE_NEWS)
+        return;
+
+    ZapCriteria_RegularZap();
+}
+
+void ZapCriteria_StartedNavalRaid(void)
+{
+    gSpecialVar_Result = VarGet(VAR_HALAI_ISLAND_STATE) >= START_SURVIVAL_CHANCE;
+}
+
+void ZapCriteria_FinishedNavalRaid(void)
+{
+    gSpecialVar_Result = VarGet(VAR_PLAYER_HOME_STATE) >= NEXT_DAY_CHAMPIONSHIP;
+}
+
+void ZapCriteria_TournamentStarted(void)
+{
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_CHAMPIONSHIP_EXPLAINED;
+}
+
+void ZapCriteria_GroupStagesComplete(void)
+{
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_GROUP_STATE_COMPLETE;
+}
+
+void ZapCriteria_BeforeFinals(void)
+{
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_READY_FINALS;
+}
+
+void ZapCriteria_IsChampion(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) >= STORY_WON_FINALS);
+}
+
+void ZapCriteria_ZenzuBattle(void)
+{
+    gSpecialVar_Result = IsTrainerDiscovered(TRAINER_BAIYA_LETSGRABLUNCH);
+}
+
+void ZapCriteria_FoundHodouLeader(void)
+{
+    gSpecialVar_Result = VarGet(VAR_QUEST_RESTOREHODOUGYM) >= FOUND_HODOU_CITY_LEADER;
+}
+
+void ZapCriteria_FinishedZenzu(void)
+{
+    gSpecialVar_Result = IsQuestCompletedState(QUEST_RESTOREZENZUGYM);
+}
+
+void ZapCriteria_HasCompletedOneRestoration(void)
+{
+    gSpecialVar_Result = (VarGet(VAR_STORYLINE_STATE) > STORY_RESTORATION_1_COMPLETE);
+}
+
+void ZapCriteria_ArrivedSummonedArantraz(void)
+{
+    gSpecialVar_Result = VarGet(VAR_ARANTRAZ_STATE) >= POST_ARRIVE_ARANTRAZ;
+}
+
+void ZapCriteria_StartedHowDisappointing(void)
+{
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_HOWDISAPPOINTING) ||(IsQuestRewardState(QUEST_HOWDISAPPOINTING)) || (IsQuestCompletedState(QUEST_HOWDISAPPOINTING))) ;
+}
+
+void ZapCriteria_StartedManhunt(void)
+{
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_MANHUNT) ||(IsQuestRewardState(QUEST_MANHUNT)) || (IsQuestCompletedState(QUEST_MANHUNT))) ;
+}
+
+void ZapCriteria_TwoTideTakedown(void)
+{
+    u32 count = 0;
+
+    if (IsQuestCompletedState(QUEST_MANHUNT))
+        count++;
+
+    if (IsQuestCompletedState(QUEST_HOWDISAPPOINTING))
+        count++;
+
+    if (IsQuestCompletedState(QUEST_LETSBURNTHISMOTHERDOWN))
+        count++;
+
+    gSpecialVar_Result = (count > 1);
+}
+
+void ZapCriteria_TideFinished(void)
+{
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_THE_TIDE_FINISHED;
+}
+
+void ZapCriteria_GotWishTag(void)
+{
+    gSpecialVar_Result = VarGet(VAR_STORYLINE_STATE) >= STORY_RECIEVED_BAMBOO_STAR;
+}
+
+void ZapCriteria_VisitedTorgeot(void)
+{
+    gSpecialVar_Result = FlagGet(FLAG_VISITED_TORGEOT_CLIMB);
+}
+
+void ZapCriteria_MaskOffAssigned(void)
+{
+    gSpecialVar_Result = VarGet(VAR_MASK_OFF_STATE) > ASSIGNED_MASK_OFF;
+}
+
+void ZapCriteria_SpeechComplete(void)
+{
+    gSpecialVar_Result = VarGet(VAR_ARANTRAZ_STATE) > POST_SPEECHSPEECH;
+}
+
+void ZapCriteria_RaveComplete(void)
+{
+    gSpecialVar_Result = VarGet(VAR_WAREHOUSE_RAVE_STATE) > DEFEATED_KEIYING_WAREHOUSE;
+}
+
+void ZapCriteria_BodegaBurnout(void)
+{
+    gSpecialVar_Result = (IsQuestActiveState(QUEST_WAREHOUSEWARFARE) ||(IsQuestRewardState(QUEST_WAREHOUSEWARFARE)) || (IsQuestCompletedState(QUEST_WAREHOUSEWARFARE))) ;
+}
+
+void ZapCriteria_EarthquakeHappened(void)
+{
+    gSpecialVar_Result = VarGet(VAR_HALAI_ISLAND_STATE) >= POST_EARTHQUAKE;
+}
+
+void ZapCriteria_TowerRaidStarted(void)
+{
+    gSpecialVar_Result = VarGet(VAR_TOWER_RAID_STATE) >= SEARCHING_RAMESH_HOUSE;
+}
+

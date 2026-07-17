@@ -39,6 +39,7 @@ struct Zap
     bool32 isPrivate;
     const u8 *dislikeCount;
     const u8 *likeCount;
+    bool32 shouldCorrupt;
 };
 
 struct ZapBackground
