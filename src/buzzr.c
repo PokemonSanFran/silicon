@@ -94,6 +94,8 @@ static void BufferToVram_Windows(void);
 static bool8 LoadGraphics(void);
 static void Buzzr_InitWindows(void);
 static enum BuzzrUserIds GetUserId(enum BuzzrZapIds zapId);
+static bool8 ShouldTweetContentFail(enum BuzzrZapIds zapId);
+static bool8 IsZapCorruptable(enum BuzzrZapIds zapId);
 static const u8 *GetContent(enum BuzzrZapIds zapId);
 static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId);
 static void *GetCriteria(enum BuzzrZapIds zapId);
@@ -977,10 +979,28 @@ static enum BuzzrUserIds GetUserId(enum BuzzrZapIds zapId)
     return gZaps[zapId].userId;
 }
 
+static bool8 IsZapCorruptable(enum BuzzrZapIds zapId)
+{
+    return gZaps[zapId].shouldCorrupt;
+}
+
+static bool8 ShouldTweetContentFail(enum BuzzrZapIds zapId)
+{
+    if (FlagGet(FLAG_TIMELINE_TRUE) == FALSE)
+        return FALSE;
+
+    return IsZapCorruptable(zapId);
+}
+
 static const u8 *GetContent(enum BuzzrZapIds zapId)
 {
     Buzzr_ExpandStrings(zapId);
-    StringExpandPlaceholders(gStringVar4,gZaps[zapId].content);
+
+    if (ShouldTweetContentFail(zapId))
+        StringCopy(gStringVar4,COMPOUND_STRING("This content is no longer available."));
+    else
+        StringExpandPlaceholders(gStringVar4,gZaps[zapId].content);
+
     return gStringVar4;
 }
 
@@ -1312,11 +1332,19 @@ static void HandleZapMetrics(u16 selectedZap, u32 verticalOffset)
 
     PrintMetricIcons(windowId,x,y);
 
-    StringCopy(gStringVar2,GetLikes(selectedZap));
+    if (ShouldTweetContentFail(selectedZap))
+        StringCopy(gStringVar2,COMPOUND_STRING("-"));
+    else
+        StringCopy(gStringVar2,GetLikes(selectedZap));
+
     fontId = GetFontIdToFit(gStringVar2,FONT_BUZZR_METRICS,letterSpacing,ZAP_METRIC_WIDTH);
     AddTextPrinterParameterized4(windowId, fontId, 179, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar2);
 
-    StringCopy(gStringVar2,GetDislikes(selectedZap));
+    if (ShouldTweetContentFail(selectedZap))
+        StringCopy(gStringVar2,COMPOUND_STRING("-"));
+    else
+        StringCopy(gStringVar2,GetDislikes(selectedZap));
+
     fontId = GetFontIdToFit(gStringVar2,FONT_BUZZR_METRICS,letterSpacing,ZAP_METRIC_WIDTH);
     AddTextPrinterParameterized4(windowId, fontId, 213, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar2);
 }
