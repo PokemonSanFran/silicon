@@ -1653,10 +1653,10 @@ static void AddZapToTimeline(u32 index, u32 zapId)
 
 static void AddNewZapsToTimeline(void)
 {
-    u32 zapIndex = 0, numNewZaps = 0;
+    u32 numNewZaps = 0;
     u32 newZapsArray[ZAP_COUNT];
 
-    for (zapIndex = 1; zapIndex < ZAP_COUNT; zapIndex++)
+    for (u32 zapIndex = (ZAP_NONE + 1); zapIndex < ZAP_COUNT; zapIndex++)
     {
         if (gZaps[zapIndex].content == NULL)
             continue;
@@ -1667,7 +1667,7 @@ static void AddNewZapsToTimeline(void)
         newZapsArray[numNewZaps++] = zapIndex;
     }
 
-    for (zapIndex = 0; zapIndex < numNewZaps; zapIndex++)
+    for (u32 zapIndex = 0; zapIndex < numNewZaps; zapIndex++)
         AddZapToTimeline((GetNumTimelineZaps() + zapIndex),newZapsArray[zapIndex]);
 }
 
