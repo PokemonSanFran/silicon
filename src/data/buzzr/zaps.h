@@ -50,7 +50,7 @@ const struct Zap gZaps[] =
     },
     [ZAP_QUEST_NPC_SMOOTHIE] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER,
+        .userId = BUZZR_USER_SMOOTHIE_TRAINER,
         .content = COMPOUND_STRING("I always go to the Marble Slab in {STR_VAR_1} before I start training with a new Pokémon. Their {STR_VAR_3} clears out a Pokémon’s toxins which makes them easier to train. It’s all natural too! Bring {STR_VAR_2} and they’ll make your first one free!"),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_NPC_Ice,
@@ -413,7 +413,7 @@ const struct Zap gZaps[] =
     },
     [ZAP_QUEST_DIGGINGUPADAORASDIRT_1] =
     {
-        .userId = BUZZR_USER_PLACEHOLDER,
+        .userId = BUZZR_USER_TIDE_MEMBER,
         .content = COMPOUND_STRING("Be mindful of this guy sniffin’ around asking questions about Adaora. I reckon he’s got “cop” written all over him."),
         .isPrivate = FALSE,
         .criteria = ZapCriteria_Quest_Diggingupadaorasdirt_1,
