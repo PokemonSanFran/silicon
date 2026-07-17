@@ -348,7 +348,7 @@ enum BuzzrZapMode
 };
 
 #define ZAP_SOCIAL_MEDIA_STEPS 20
-#define ZAP_CHATTER_STEPS 10
+#define ZAP_CHATTER_STEPS 500
 #define ZAP_WINDOW_WIDTH 219
 
 #define ZAP_METRIC_WIDTH 21

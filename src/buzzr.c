@@ -94,9 +94,8 @@ static void BufferToVram_Windows(void);
 static bool8 LoadGraphics(void);
 static void Buzzr_InitWindows(void);
 static enum BuzzrUserIds GetUserId(enum BuzzrZapIds zapId);
-static bool8 ShouldTweetContentFail(enum BuzzrZapIds zapId);
+static bool8 ShouldZapContentFail(enum BuzzrZapIds zapId);
 static bool8 IsZapCorruptable(enum BuzzrZapIds zapId);
-static const u8 *GetContent(enum BuzzrZapIds zapId);
 static void Buzzr_ExpandStrings(enum BuzzrZapIds zapId);
 static void *GetCriteria(enum BuzzrZapIds zapId);
 static u16 GetQuest(enum BuzzrZapIds zapId);
@@ -108,7 +107,6 @@ static bool32 IsTimelinePictureMode(void);
 static void HandleMenuHeader(void);
 static void HandleTimeline(void);
 static bool32 CheckIfPrintWillOverflow(u32 verticalOffset);
-static const u32 GetNumContentLines(enum BuzzrZapIds zapId);
 static u32 CalculateZapContentHeight(enum BuzzrZapIds zapId);
 static u32 CalculateZapHeaderHeight(void);
 static u32 CalculateZapTotalHeight(enum BuzzrZapIds zapId);
@@ -984,7 +982,7 @@ static bool8 IsZapCorruptable(enum BuzzrZapIds zapId)
     return gZaps[zapId].shouldCorrupt;
 }
 
-static bool8 ShouldTweetContentFail(enum BuzzrZapIds zapId)
+static bool8 ShouldZapContentFail(enum BuzzrZapIds zapId)
 {
     if (FlagGet(FLAG_TIMELINE_TRUE) == FALSE)
         return FALSE;
@@ -992,11 +990,11 @@ static bool8 ShouldTweetContentFail(enum BuzzrZapIds zapId)
     return IsZapCorruptable(zapId);
 }
 
-static const u8 *GetContent(enum BuzzrZapIds zapId)
+const u8 *GetContent(enum BuzzrZapIds zapId)
 {
     Buzzr_ExpandStrings(zapId);
 
-    if (ShouldTweetContentFail(zapId))
+    if (ShouldZapContentFail(zapId))
         StringCopy(gStringVar4,COMPOUND_STRING("This content is no longer available."));
     else
         StringExpandPlaceholders(gStringVar4,gZaps[zapId].content);
@@ -1113,7 +1111,7 @@ static bool32 CheckIfPrintWillOverflow(u32 verticalOffset)
     return (verticalOffset > TIMELINE_PRINT_HEIGHT);
 }
 
-static const u32 GetNumContentLines(enum BuzzrZapIds zapId)
+const u32 GetNumContentLines(enum BuzzrZapIds zapId)
 {
     const u8 *str = GetContent(zapId);
     StripLineBreaks(gStringVar4);
@@ -1129,7 +1127,8 @@ static const u32 GetNumContentLines(enum BuzzrZapIds zapId)
         str++;
     }
 
-    return (count > ZAP_MIN_NUM_LINES) ? count : ZAP_MIN_NUM_LINES;
+    count = max(count,ZAP_MIN_NUM_LINES);
+    return count;
 }
 
 static u8 CalculateZapContentTiles(u32 zapId)
@@ -1332,7 +1331,7 @@ static void HandleZapMetrics(u16 selectedZap, u32 verticalOffset)
 
     PrintMetricIcons(windowId,x,y);
 
-    if (ShouldTweetContentFail(selectedZap))
+    if (ShouldZapContentFail(selectedZap))
         StringCopy(gStringVar2,COMPOUND_STRING("-"));
     else
         StringCopy(gStringVar2,GetLikes(selectedZap));
@@ -1340,7 +1339,7 @@ static void HandleZapMetrics(u16 selectedZap, u32 verticalOffset)
     fontId = GetFontIdToFit(gStringVar2,FONT_BUZZR_METRICS,letterSpacing,ZAP_METRIC_WIDTH);
     AddTextPrinterParameterized4(windowId, fontId, 179, y, GetFontAttribute(fontId,FONTATTR_LETTER_SPACING), GetFontAttribute(fontId,FONTATTR_LINE_SPACING), BuzzrWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, gStringVar2);
 
-    if (ShouldTweetContentFail(selectedZap))
+    if (ShouldZapContentFail(selectedZap))
         StringCopy(gStringVar2,COMPOUND_STRING("-"));
     else
         StringCopy(gStringVar2,GetDislikes(selectedZap));

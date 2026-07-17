@@ -20,6 +20,8 @@ void Task_OpenBuzzrFromScript(u8 taskId);
 const u8 *GetUsername(enum BuzzrUserIds userId);
 bool32 IsVerified(enum BuzzrUserIds userId);
 void PrintHeaderIcons(u8 windowId, const u8 *iconId, u16 x, u16 y);
+const u32 GetNumContentLines(enum BuzzrZapIds zapId);
+const u8 *GetContent(enum BuzzrZapIds zapId);
 
 struct Users // src/data/buzzr/users
 {
