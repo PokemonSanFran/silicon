@@ -1405,7 +1405,10 @@ u8 GetItemListPosition(u8 pocketId)
 
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
 {
-    SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    if(!FlagGet(FLAG_SYS_USED_FROM_REGISTER_MENU))
+        SiliconInventoryPrintMessage(taskId,fontId,str,callback);
+    else
+        DisplayItemMessageOnField(taskId, str, Task_CloseCantUseKeyItemMessage);
     // Start inventory
     /*
     s16 *data = gTasks[taskId].data;
@@ -2478,12 +2481,6 @@ bool8 UseRegisteredKeyItemOnField(void)
     */
     if (numRegisteredItems == 1)
     {
-        if (IsPlayerAllowedToUseHealingItems(firstRegisteredItems,TRUE,FALSE,TRUE) == FALSE)
-        {
-            ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
-            return TRUE;
-        }
-
         if (CheckBagHasItem(firstRegisteredItems, 1) == TRUE)
         {
             FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
@@ -2495,6 +2492,8 @@ bool8 UseRegisteredKeyItemOnField(void)
             firstRegisteredItems = ITEM_NONE;
         }
 
+        if (itemFunc && IsPlayerAllowedToUseHealingItems(firstRegisteredItems,TRUE,FALSE,TRUE) == FALSE)
+            itemFunc = ItemUseOutOfBattle_CannotUseHealingItem;
     }
     else if (numRegisteredItems != 0)
     {
@@ -2608,13 +2607,6 @@ static void Task_KeyItemWheel(u8 taskId)
                 if (i == 0 || data[i] == MAX_SPRITES)
                     break;
 
-                if (IsPlayerAllowedToUseHealingItems(gSaveBlock3Ptr->InventoryData.registeredItem[i - 1],TRUE,FALSE,TRUE) == FALSE)
-                {
-                    tState = 3;
-                    ScriptContext_SetupScript(EventScript_CannotUseHealingItem);
-                    break;
-                }
-
                 gSpecialVar_ItemId = gSaveBlock3Ptr->InventoryData.registeredItem[i - 1];
                 FlagSet(FLAG_SYS_USED_FROM_REGISTER_MENU);
                 PlaySE(SE_SELECT);
@@ -2627,7 +2619,10 @@ static void Task_KeyItemWheel(u8 taskId)
             if (!gSprites[data[15]].affineAnimEnded)
                 break;
             FreeKeyItemWheelGfx(data);
-            i = CreateTask(GetItemFieldFunc(gSpecialVar_ItemId), 8);
+            if (IsPlayerAllowedToUseHealingItems(gSpecialVar_ItemId, TRUE, FALSE, TRUE) == FALSE)
+                i = CreateTask(ItemUseOutOfBattle_CannotUseHealingItem, 8);
+            else
+                i = CreateTask(GetItemFieldFunc(gSpecialVar_ItemId), 8);
             gTasks[i].tUsingRegisteredKeyItem = TRUE;
             DestroyTask(taskId);
             break;
