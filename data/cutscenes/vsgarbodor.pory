@@ -28,14 +28,6 @@ script VSGarbodor_Arrest_ObjectSetup_Script {
         setobjectxyperm(OLIVER, 21, 22)
 }
 
-script VSGarbodor_ObjectCleanUp_Script{
-    if ((var(VAR_STORYLINE_STATE) > STORY_FERRY_FIXED) && ((var(VAR_STORYLINE_STATE) != STORY_DEFEATED_GARBODOR))){
-        setflag(FLAG_HIDE_CHARLOTTE_COMPOUND)
-            setflag(FLAG_HIDE_OLIVER_COMPOUND)
-            return
-    }
-}
-
 script VSGarbodor_ConstructionObjectCleanUp_Script{
     if (var(VAR_CONSTRUCTION_STRIKE_STATE) != START_VS_GARBODOR){
         setflag(FLAG_HIDE_CHARLOTTE)
@@ -343,14 +335,12 @@ script VSGarbodor_FlyWithoutPlayer_Script {
         waitfieldeffect(FLDEFF_NPCFLY_OUT)
 }
 
-script VSGarbodor_ReturnToTheCompound_ObjectSetUp {
-    if (var(VAR_STORYLINE_STATE) == STORY_DEFEATED_GARBODOR){
-        setobjectxy(CHARLOTTE,7,2)
-            setobjectxyperm(CHARLOTTE,7,2)
-            setobjectmovementtype(CHARLOTTE,MOVEMENT_ACTION_FACE_DOWN)
-            setflag(FLAG_HIDE_OLIVER_COMPOUND)
-            return
-    }
+script VSGarbodor_ReturnToTheCompound_ObjectSetUp
+{
+    setobjectxy(SHARPRISE_COMPOUND_1F_CHARLOTTE,7,2)
+    setobjectxyperm(SHARPRISE_COMPOUND_1F_CHARLOTTE,7,2)
+    setobjectmovementtype(SHARPRISE_COMPOUND_1F_CHARLOTTE,MOVEMENT_ACTION_FACE_DOWN)
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 
 script VSGarbodor_ReturnToTheCompound_Dialogue {

@@ -1110,6 +1110,14 @@ static const struct L2LocationData L2_Info[MAPSEC_NONE][MAX_L2_COUNT] =
         },
     },
 
+    [MAPSEC_CHASILLA] =
+    {
+        {
+            .name = COMPOUND_STRING("Gym"),
+            .healLocation = HEAL_LOCATION_CHASILLA_GYM,
+        },
+    },
+
     [MAPSEC_OROLAND] =
     {
         {

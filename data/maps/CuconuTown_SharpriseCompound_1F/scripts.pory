@@ -1,9 +1,22 @@
-mapscripts CuconuTown_SharpriseCompound_1F_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
-        goto(CuconuTown_Compound_1F_MapScripts_OnTransition)
+mapscripts CuconuTown_SharpriseCompound_1F_MapScripts
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+        call_if_eq(VAR_STORYLINE_STATE,STORY_FERRY_FIXED,AaandWereBack_ObjectHide_Script)
+        call_if_eq(VAR_STORYLINE_STATE,STORY_DEFEATED_GARBODOR,VSGarbodor_ReturnToTheCompound_ObjectSetUp)
+
+        call_if_eq(VAR_PLAYER_HOME_STATE,HAS_NOT_MET_CHARLOTTE,ImProbablyBetterThanYou_ObjectSetUp)
+        call_if_eq(VAR_PLAYER_HOME_STATE,HAS_MET_CHARLOTTE,ImProbablyBetterThanYou_PostCutscene_ObjectSetUp_Script)
+        call_if_eq(VAR_PLAYER_HOME_STATE,CHECKED_OUT_BEDROOM,Swagbag_ObjectSetUp)
+        call_if_eq(VAR_PLAYER_HOME_STATE,POST_SWAGBAG,swagbag_ObjectHide_Script)
+        call_if_eq(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,TwoHoursAgo_ObjectSetUp)
+        call_if_eq(VAR_PLAYER_HOME_STATE,FINISHED_1_1,AaandWereBack_ObjectSetUp_Script)
+        call_if_eq(VAR_PLAYER_HOME_STATE,POST_NAVAL_BASE_RAID,WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script)
+        call_if_eq(VAR_PLAYER_HOME_STATE,NEXT_DAY_CHAMPIONSHIP,AaandWereBack_ObjectHide_Script)
     }
 
-    MAP_SCRIPT_ON_FRAME_TABLE [
+    MAP_SCRIPT_ON_FRAME_TABLE
+    [
         VAR_PLAYER_HOME_STATE, HAS_NOT_MET_CHARLOTTE: ImProbablyBetterThanYou_CharlotteIntro_Dialogue
         VAR_PLAYER_HOME_STATE, CHECKED_OUT_BEDROOM: Swagbag_WelcomeToResido_Dialogue
         VAR_PLAYER_HOME_STATE, POST_NAVAL_BASE_RAID:WhyAreYouHelpingThem_BackAtCompound_Dialogue
@@ -11,59 +24,36 @@ mapscripts CuconuTown_SharpriseCompound_1F_MapScripts {
     ]
 }
 
-script CuconuTown_Compound_1F_MapScripts_OnTransition {
-
-    call(AaandWereBack_ObjectHide_Script)
-    call(VSGarbodor_ReturnToTheCompound_ObjectSetUp)
-    call(VSGarbodor_ObjectCleanUp_Script)
-
-    switch (var(VAR_PLAYER_HOME_STATE)) {
-        case HAS_NOT_MET_CHARLOTTE: call(ImProbablyBetterThanYou_ObjectSetUp)
-        case HAS_MET_CHARLOTTE: call(ImProbablyBetterThanYou_PostCutscene_ObjectSetUp_Script)
-        case CHECKED_OUT_BEDROOM: call(Swagbag_ObjectSetUp)
-        case POST_SWAGBAG: call(swagbag_ObjectHide_Script)
-        case SLEPT_AFTER_SWAGBAG: call(TwoHoursAgo_ObjectSetUp)
-        case FINISHED_1_1: call(AaandWereBack_ObjectSetUp_Script)
-        case POST_NAVAL_BASE_RAID: call(WhyAreYouHelpingThem_BackAtCompound_ObjectSetUp_Script)
-        default: return
-    }
-
-}
-
-script Charlotte_CuconuTown_Compound_1F_InteractScript {
+script Charlotte_CuconuTown_Compound_1F_InteractScript
+{
     lock
-
-        if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE){
-            call(AaandWereBack_Charlotte_Dialogue)
-        }else {
-            call(ImProbablyBetterThanYou_Annoyed_Dialogue)
-        }
+    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE)
+    {
+        call(AaandWereBack_Charlotte_Dialogue)
+    }
+    else
+    {
+        call(ImProbablyBetterThanYou_Annoyed_Dialogue)
+    }
     release
-        end
+    end
 }
 
-script Oliver_CuconuTown_Compound_1F_InteractScript {
+script Oliver_CuconuTown_Compound_1F_InteractScript
+{
     lockall
+    call_if_ne(VAR_PLAYER_HOME_STATE,SLEPT_AFTER_SWAGBAG,swagbag_HelpPlayer_Script)
+    call_if_unset(FLAG_RECIEVED_LEFTOVERS,TwoHoursAgo_TheyreEager_Dialogue)
 
-        //var is 6, has leftovers, and temp1f is set: explain lefties
-        //var is 6, has leftovers, temmp1f is not set: help menu
-        //var is 6, does not have leftovers, explain league
-        //var is not 6, help menu
-
-        if (var(VAR_PLAYER_HOME_STATE) == SLEPT_AFTER_SWAGBAG){
-            if (flag(FLAG_RECIEVED_LEFTOVERS)){
-                if(flag(FLAG_TEMP_1F)){
-                    call(TwoHoursAgo_ExplainLeftovers_Dialouge)
-                }else {
-                    call(swagbag_HelpPlayer_Script)
-                }
-            }else {
-                call(TwoHoursAgo_TheyreEager_Dialogue)
-            }
-        }else {
-            call(swagbag_HelpPlayer_Script)
-        }
+    if(flag(FLAG_TEMP_1F))
+    {
+        call(TwoHoursAgo_ExplainLeftovers_Dialouge)
+    }
+    else
+    {
+        call(swagbag_HelpPlayer_Script)
+    }
     closemessage
-        releaseall
-        end
+    releaseall
+    end
 }
