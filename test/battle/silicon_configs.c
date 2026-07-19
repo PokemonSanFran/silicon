@@ -1160,3 +1160,24 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
         EXPECT_GT(results[2].frames, results[3].frames);
     }
 }
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RECOVER); MOVE(opponent, MOVE_RECOVER); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, player);
+            HP_BAR(player);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RECOVER, opponent);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(player->hp, 100);
+        EXPECT_EQ(opponent->hp, 200);
+    }
+}
