@@ -592,9 +592,9 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Switch Style (SET)")
     }
 }
 
-/*
-AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up)")
 {
+    //  EVO_LEVEL
     //  Necessary for being able to get exp
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
@@ -608,9 +608,175 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON)")
     } WHEN {
         TURN { }
         TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_TESTING_ERRATIC);
     }
 }
-*/
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Battle Only)")
+{
+    //  EVO_LEVEL_BATTLE_ONLY
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_TANDEMAUS) { Level(46); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_MAUSHOLD_FOUR);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Weather)")
+{
+    KNOWN_FAILING; // Doesn't currently have handling for battle weathers
+    //  EVO_LEVEL, IF_WEATHER
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_SLIGGOO) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAIN_DANCE); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GOODRA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Knows Move)")
+{
+    //  EVO_LEVEL, IF_KNOWS_MOVE
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_GIRAFARIG) { Level(49); }
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TWIN_BEAM); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_FARIGIRAF);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Type in party)")
+{
+    //  EVO_LEVEL, IF_TYPE_IN_PARTY
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_PANCHAM) { Level(44); }
+        PLAYER(SPECIES_ABSOL);
+        OPPONENT(SPECIES_CHANSEY) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PANGORO);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Use move X times)")
+{
+    //  EVO_LEVEL, _IF_USED_MOVE_X_TIMES
+    //  Had to edit the number of times the move needed to be used to fit within MAX_TURNS
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_PRIMEAPE) { Level(53); }
+        OPPONENT(SPECIES_GROUDON) { Moves(MOVE_CURSE, MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ANNIHILAPE);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Shedinja)")
+{
+    //  EVO_SPLIT_FORM_EVO
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        PLAYER(SPECIES_NINCADA) { Level(40); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NINJASK);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_SHEDINJA);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Kingambit)")
+{
+    //  EVO_LEVEL + IF_DEFEAT_X_WITH_ITEMS
+    //  Necessary for being able to get exp
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
+
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_SEQUENCE_SWITCHING);
+        PLAYER(SPECIES_BISHARP) { Level(71); Ability(ABILITY_PRESSURE); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_BISHARP) { HP(1); Moves(MOVE_MEMENTO); Item(ITEM_LEADERS_CREST); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_KINGAMBIT);
+    }
+}
 
 SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Fainted mon (Allowed)")
 {
