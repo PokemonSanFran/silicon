@@ -2442,6 +2442,8 @@ static void Controller_WaitForEvo(enum BattlerId battler)
         gBattleEnvironment = sSavedBattleEnvironment; // Evolution changes terrain.
         AllocateMonSpritesGfx(); // We need to allocate gfx for mons again
         UpdateStatsAfterLevelUp(sMidBattleEvolvedPartyId);
+        //  Update species in gBattleMons
+        gBattleMons[battler].species = GetMonData(&gParties[B_TRAINER_PLAYER][sMidBattleEvolvedPartyId], MON_DATA_SPECIES);
         ReshowBattleScreenAfterMenu();
     }
 }

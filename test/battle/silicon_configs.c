@@ -611,6 +611,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up)")
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_TESTING_ERRATIC);
+        EXPECT_EQ(player->species, SPECIES_TESTING_ERRATIC);
     }
 }
 
@@ -632,6 +633,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Battle O
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_MAUSHOLD_FOUR);
+        EXPECT_EQ(player->species, SPECIES_MAUSHOLD_FOUR);
     }
 }
 
@@ -653,6 +655,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Weather)
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GOODRA);
+        EXPECT_EQ(player->species, SPECIES_GOODRA);
     }
 }
 
@@ -674,6 +677,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Knows Mo
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_FARIGIRAF);
+        EXPECT_EQ(player->species, SPECIES_FARIGIRAF);
     }
 }
 
@@ -696,6 +700,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Type in 
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PANGORO);
+        EXPECT_EQ(player->species, SPECIES_PANGORO);
     }
 }
 
@@ -727,6 +732,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Use move
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ANNIHILAPE);
+        EXPECT_EQ(player->species, SPECIES_ANNIHILAPE);
     }
 }
 
@@ -752,6 +758,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Shedinja)")
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NINJASK);
+        EXPECT_EQ(player->species, SPECIES_NINJASK);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_SHEDINJA);
     }
 }
@@ -779,6 +786,7 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Kingambit)")
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_KINGAMBIT);
+        EXPECT_EQ(player->species, SPECIES_KINGAMBIT);
     }
 }
 
