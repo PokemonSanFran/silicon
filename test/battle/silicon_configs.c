@@ -637,7 +637,6 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Battle O
 
 AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Level Up, Weather)")
 {
-    KNOWN_FAILING; // Doesn't currently have handling for battle weathers
     //  EVO_LEVEL, IF_WEATHER
     //  Necessary for being able to get exp
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL] = BATTLE_OPTION_LEVEL_NO_CAP;
