@@ -6,6 +6,7 @@
 #include "pokedex.h"
 #include "malloc.h"
 #include "constants/characters.h"
+#include "test/overworld_script.h"
 
 #define MON_TO_USE SPECIES_TSAREENA
 
@@ -738,6 +739,10 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Mid Battle Evo (ON) (Shedinja)")
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] = BATTLE_OPTION_MID_BATTLE_EVOLUTION_ON;
+
+    RUN_OVERWORLD_SCRIPT(
+        additem ITEM_POKE_BALL;
+    );
 
     GIVEN {
         PLAYER(SPECIES_NINCADA) { Level(40); }
