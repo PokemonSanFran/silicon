@@ -1181,3 +1181,38 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing")
         EXPECT_EQ(opponent->hp, 200);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (On)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_OPPONENTS_ITEMS] = BATTLE_OPTION_OPPONENTS_ITEMS_ALLOWED;
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, opponent->maxHP);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (Off)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_OPPONENTS_ITEMS] = BATTLE_OPTION_OPPONENTS_ITEMS_DISABLED;
+        gSiliconTestVariables.opponentHasItems = TRUE;
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CRUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        NOT HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->hp, 1);
+    }
+}

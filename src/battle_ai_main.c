@@ -33,6 +33,7 @@
 #include "constants/trainers.h"
 
 #if TESTING
+#include "test/test.h"
 #include "test/battle.h"
 #endif
 
@@ -191,6 +192,10 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, enum BattlerId battler)
     gAiBattleData->chosenTarget[battler] = gBattlerTarget;
 }
 
+#if TESTING
+const enum Item sTestItems[4] = { ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE };
+#endif
+
 void BattleAI_SetupItems(void)
 {
     u8 *data = (u8 *)gBattleHistory;
@@ -198,6 +203,11 @@ void BattleAI_SetupItems(void)
     if (IsSpecialTrainer(trainerId))
         trainerId = TRAINER_NONE;
     const enum Item *items = GetTrainerItemsFromId(trainerId);
+
+#if TESTING
+    if (gSiliconTestVariables.opponentHasItems)
+        items = sTestItems;
+#endif
 
     for (u32 i = 0; i < sizeof(struct BattleHistory); i++)
         data[i] = 0;
