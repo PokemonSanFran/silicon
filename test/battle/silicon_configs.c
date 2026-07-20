@@ -1289,3 +1289,37 @@ AI_SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Opponent Items (Off)")
         EXPECT_EQ(opponent->hp, 1);
     }
 }
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Off)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_OFF;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_SPECIES), SPECIES_WYNAUT);
+    EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+    EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
+}
+
+TEST("OPTIONS (BATTLE): Trainer Scaling (Level)")
+{
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 50
+    );
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TRAINER_SCALING] = BATTLE_OPTION_TRAINER_SCALING_LEVEL;
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    u32 currTrainer = 15;
+    CreateNPCTrainerPartyFromTrainer(testParty, GetTrainerStructFromId(currTrainer), TRUE, BATTLE_TYPE_TRAINER);
+
+    EXPECT_GT(GetMonData(&testParty[0], MON_DATA_LEVEL), 1);
+    EXPECT_LT(GetMonData(&testParty[1], MON_DATA_LEVEL), 100);
+
+    Free(testParty);
+}
