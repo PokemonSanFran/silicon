@@ -1166,7 +1166,7 @@ SINGLE_BATTLE_TEST("OPTIONS (VISUAL): Text Speed", u32 frames)
     }
 }
 
-SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing")
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Primary effect")
 {
     GIVEN {
         gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
@@ -1184,6 +1184,67 @@ SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing")
     } THEN {
         EXPECT_EQ(player->hp, 100);
         EXPECT_EQ(opponent->hp, 200);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Absorb)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ABSORB); MOVE(opponent, MOVE_ABSORB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Strength Sap)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRENGTH_SAP); MOVE(opponent, MOVE_STRENGTH_SAP); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
+    }
+}
+
+SINGLE_BATTLE_TEST("OPTIONS (BATTLE): Move Healing (Secondary effect, Dream Eater)")
+{
+    GIVEN {
+        gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING] = BATTLE_OPTION_MOVE_HEALING_DISABLED;
+        PLAYER(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+        OPPONENT(SPECIES_KOMALA) { HP(100); MaxHP(200); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SOAK); MOVE(opponent, MOVE_SOAK); }
+        TURN { MOVE(player, MOVE_DREAM_EATER); MOVE(opponent, MOVE_DREAM_EATER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, player);
+        HP_BAR(opponent);
+        NOT HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_GT(opponent->hp, player->hp);
     }
 }
 
