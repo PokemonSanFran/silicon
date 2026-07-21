@@ -19,12 +19,12 @@ script Rematches_Dialogue_FirstEleanorTalk
     setflag(FLAG_TALKED_TO_ELEANOR_POSTGAME)
 	lock
 	faceplayer
-	msgbox(format("{PLAYER}."),,SPEAKER_ELEANOR)
-	msgbox(format("This is the calmest I've been since we've met.\pI don't think I've formally thanked you for all your help.\pYour sacrifice.\pYour commitment.\pI was truly honored to fight by your side."),,SPEAKER_ELEANOR)
-	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELEANOR)
-	msgbox(format("Huh? Didn't we battle twice?"),,SPEAKER_ALICIA,,EMOTE_CONFUSE)
+	msgbox(format("{PLAYER}."),,SPEAKER_ELEANOR,TAIL_TALK)
+	msgbox(format("This is the calmest I've been since we've met.\pI don't think I've formally thanked you for all your help.\pYour sacrifice.\pYour commitment.\pI was truly honored to fight by your side."),,SPEAKER_ELEANOR,TAIL_TALK)
+	msgbox(format("Now that I think about it... we've never battled before."),,SPEAKER_ELEANOR,TAIL_TALK)
+	msgbox(format("Huh? Didn't we battle twice?"),,SPEAKER_ALICIA,TAIL_TALK,EMOTE_CONFUSE)
 	msgbox(format("Actually, three times!"),,SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_SHOCK)
-	msgbox(format("You battled against Vigrim, yes.\pBut I would like to battle you as Eleanor, a member of the Elite Four."),,SPEAKER_ELEANOR)
+	msgbox(format("You battled against Vigrim, yes.\pBut I would like to battle you as Eleanor, a member of the Elite Four."),,SPEAKER_ELEANOR,TAIL_TALK)
 	goto(Rematches_Script_AskEleanorBattle)
 }
 
@@ -32,18 +32,18 @@ script Rematches_Script_AskEleanorBattle
 {
 	lock
 	faceplayer
-	msgbox(format("Are you ready to battle now?"),MSGBOX_YESNO,SPEAKER_ELEANOR)
+	msgbox(format("Are you ready to battle now?"),MSGBOX_YESNO,SPEAKER_ELEANOR,TAIL_TALK)
 	closemessage
 
 	if (var(VAR_RESULT) == NO)
 	{
-		msgbox(format("Come back when you're ready."),,SPEAKER_ELEANOR)
+		msgbox(format("Come back when you're ready."),,SPEAKER_ELEANOR,TAIL_TALK)
 		closemessage
 		release
 		end
 	}
 
-	msgbox(format("Let's see if I remember this...\pI'm Eleanor of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELEANOR)
+	msgbox(format("Let's see if I remember this...\pI'm Eleanor of the Resido Elite Four.\pTell me challenger, when the world is fighting against you, what do you do?\pGive up? Dig your heels in?\pAdapt?\pLet's test your resolve!"),,SPEAKER_ELEANOR,TAIL_TALK)
 	closemessage
 	trainerbattle_no_intro(TRAINER_ELEANOR,format("{PLAYER}, your strength knows no bounds!"))
 	setflag(FLAG_DAILY_ELEANOR_REMATCH)
@@ -53,7 +53,7 @@ script Rematches_Script_AskEleanorBattle
 script Rematches_Dialogue_EleanorComeBack
 {
 	lock
-	msgbox(format("52 years of age really starts to impact you! I can really only do one intense battle a day.\pI'd love to battle again tomorrow!"),MSGBOX_NPC,SPEAKER_ELEANOR,,EMOTE_SWEAT)
+	msgbox(format("52 years of age really starts to impact you! I can really only do one intense battle a day.\pI'd love to battle again tomorrow!"),MSGBOX_NPC,SPEAKER_ELEANOR,TAIL_TALK,EMOTE_SWEAT)
 	closemessage
 	release
 	end
@@ -67,7 +67,7 @@ script Rematches_Script_AskEleanorRematch
 	}
 	lock
 	faceplayer
-	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELEANOR)
+	msgbox(format("Good to see you again {PLAYER}. Resido is so lucky to have you."),,SPEAKER_ELEANOR,TAIL_TALK)
 	goto(Rematches_Script_AskEleanorBattle)
 }
 
@@ -88,13 +88,13 @@ script Rematches_Script_InteractKeiYing
 
 script Rematches_Dialogue_FirstKeiYingBattle
 {
-    msgbox(format("The time is now, is it? Very well! This is how it should be, {PLAYER}! This is no longer Sharprise COO vs Sharprise Kickstart Applicant…No, this is the Hodou City Gym Leader VS the Resido Champion! Give me your best!"),,SPEAKER_KEIYING)
+    msgbox(format("The time is now, is it? Very well! This is how it should be, {PLAYER}! This is no longer Sharprise COO vs Sharprise Kickstart Applicant…No, this is the Hodou City Gym Leader VS the Resido Champion! Give me your best!"),,SPEAKER_KEIYING,TAIL_TALK)
     closemessage
     call(Rematches_Script_BattleKeiYing)
     setvar(VAR_KEIYING_STATE,STATE_KEIYING_BATTLE_WON)
-    msgbox(format("You did not disappoint."),,SPEAKER_KEIYING)
-    msgbox(format("Where I’m from, you need to pass three extreme tests to earn the right to train with the greatest armor."),,SPEAKER_KEIYING)
-    msgbox(format("I believe you’ve more than proven your strength and determination."),,SPEAKER_KEIYING)
+    msgbox(format("You did not disappoint."),,SPEAKER_KEIYING,TAIL_TALK)
+    msgbox(format("Where I’m from, you need to pass three extreme tests to earn the right to train with the greatest armor."),,SPEAKER_KEIYING,TAIL_TALK)
+    msgbox(format("I believe you’ve more than proven your strength and determination."),,SPEAKER_KEIYING,TAIL_TALK)
     goto(Rematches_Script_GiveKubfu)
 }
 
@@ -153,7 +153,7 @@ script Rematches_Script_GiveKubfu1
     copyvar(VAR_TEMP_1,VAR_RESULT)
     if (var(VAR_RESULT) == MON_CANT_GIVE)
     {
-        msgbox(format("Make some room for two in your party or boxes, please."),,SPEAKER_KEIYING)
+        msgbox(format("Make some room for two in your party or boxes, please."),,SPEAKER_KEIYING,TAIL_TALK)
         closemessage
         release
         end
@@ -164,14 +164,14 @@ script Rematches_Script_GiveKubfu1
 
 script Rematches_Script_GiveKubfu2
 {
-    msgbox(format("This little Kubfu has a brother that needs a good home. If you will, please?"),,SPEAKER_KEIYING)
+    msgbox(format("This little Kubfu has a brother that needs a good home. If you will, please?"),,SPEAKER_KEIYING,TAIL_TALK)
     closemessage
     startmenu_savescreen
     givemon(SPECIES_KUBFU,30,ITEM_NONE)
     copyvar(VAR_TEMP_1,VAR_RESULT)
     if (var(VAR_RESULT) == MON_CANT_GIVE)
     {
-        msgbox(format("Make some room for another in your party or boxes, please."),,SPEAKER_KEIYING)
+        msgbox(format("Make some room for another in your party or boxes, please."),,SPEAKER_KEIYING,TAIL_TALK)
         closemessage
         release
         end
@@ -185,13 +185,13 @@ script Rematches_Script_GiveScrolls
     checkitemspace(ITEM_SCROLL_OF_DARKNESS,2)
     if (var(VAR_RESULT) == FALSE)
     {
-        msgbox(format("Make some room in your bag, please."),,SPEAKER_KEIYING)
+        msgbox(format("Make some room in your bag, please."),,SPEAKER_KEIYING,TAIL_TALK)
         closemessage
         release
         end
     }
     setvar(VAR_KEIYING_STATE,STATE_KEIYING_SCROLLS_RECIEVED)
-    msgbox(format("And these items will help you train those Kubfu to their best potential."),,SPEAKER_KEIYING)
+    msgbox(format("And these items will help you train those Kubfu to their best potential."),,SPEAKER_KEIYING,TAIL_TALK)
     closemessage
     giveitem(ITEM_SCROLL_OF_DARKNESS,1)
     giveitem(ITEM_SCROLL_OF_WATERS,1)
@@ -200,7 +200,7 @@ script Rematches_Script_GiveScrolls
 
 script Rematches_Dialogue_AfterKubfu
 {
-    msgbox(format("Take care of them, train well as I know you will…And come see me for a rematch one day."),,SPEAKER_KEIYING)
+    msgbox(format("Take care of them, train well as I know you will…And come see me for a rematch one day."),,SPEAKER_KEIYING,TAIL_TALK)
     closemessage
     release
     end
@@ -216,16 +216,309 @@ script Rematches_Script_DailyRematchKeiying
 {
     if (flag(FLAG_DAILY_KEIYING_REMATCH))
     {
-        msgbox(format("{PLAYER}, if you’re here for a rematch, can it wait for tomorrow? I am very worn out today."),,SPEAKER_KEIYING)
+        msgbox(format("{PLAYER}, if you’re here for a rematch, can it wait for tomorrow? I am very worn out today."),,SPEAKER_KEIYING,TAIL_TALK)
         closemessage
         release
         end
     }
 
-    msgbox(format("You’re back! For a rematch I assume? Magnificent."),,SPEAKER_KEIYING)
-    msgbox(format("I shan’t hold back! I know you wouldn’t forgive me."),,SPEAKER_KEIYING)
+    msgbox(format("You’re back! For a rematch I assume? Magnificent."),,SPEAKER_KEIYING,TAIL_TALK)
+    msgbox(format("I shan’t hold back! I know you wouldn’t forgive me."),,SPEAKER_KEIYING,TAIL_TALK)
     call(Rematches_Script_BattleKeiYing)
     closemessage
     release
     end
 }
+
+script Quest_Rematches_Script_HideBD
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE1_BD)
+}
+
+script Rematches_Script_BD
+{
+    lock
+    if (!flag(FLAG_TALKED_TO_BD_POSTGAME))
+    {
+        goto(Rematches_Dialogue_FirstBDTalk)
+    }
+    elif (defeated(TRAINER_BD_REMATCH))
+    {
+        goto(Rematches_Script_AskBDRematch)
+    }
+    goto(Rematches_Script_AskBDBattle)
+    release
+    end
+}
+
+script Rematches_Dialogue_FirstBDTalk
+{
+    setflag(FLAG_TALKED_TO_BD_POSTGAME)
+	lock
+	faceplayer
+	msgbox(format("BD reflects how they've learned and grown over the course of the story."),,SPEAKER_BD,TAIL_TALK)
+	goto(Rematches_Script_AskBDBattle)
+}
+
+script Rematches_Script_AskBDBattle
+{
+	lock
+	faceplayer
+	msgbox(format("BD asks player for battle."),MSGBOX_YESNO,SPEAKER_BD,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("BD tells the player to return when they're ready."),,SPEAKER_BD,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("BD says some words before the battle starts."),,SPEAKER_BD,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_BD_REMATCH,format("Congratulations. I should know I can't beat you."))
+	setflag(FLAG_DAILY_BD_REMATCH)
+    goto(Rematches_Dialogue_BDComeBack)
+}
+
+script Rematches_Dialogue_BDComeBack
+{
+	lock
+	msgbox(format("BD tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_BD,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskBDRematch
+{
+	if (flag(FLAG_DAILY_BD_REMATCH))
+	{
+		goto(Rematches_Dialogue_BDComeBack)
+	}
+	lock
+	faceplayer
+	msgbox(format("BD greets the player bfore challenging them to a battle."),,SPEAKER_BD,TAIL_TALK)
+	goto(Rematches_Script_AskBDBattle)
+}
+
+script Quest_Rematches_Script_HideTala
+{
+    setobjectflagfromlocalid(LOCALID_ARANTRAZ_TALA)
+}
+
+script Rematches_Script_Tala
+{
+    lock
+    if (!flag(FLAG_TALKED_TO_TALA_POSTGAME))
+    {
+        goto(Rematches_Dialogue_FirstTalaTalk)
+    }
+    elif (defeated(TRAINER_TALA))
+    {
+        goto(Rematches_Script_AskTalaRematch)
+    }
+    goto(Rematches_Script_AskTalaBattle)
+    release
+    end
+}
+
+script Rematches_Dialogue_FirstTalaTalk
+{
+    setflag(FLAG_TALKED_TO_TALA_POSTGAME)
+	lock
+	faceplayer
+	msgbox(format("Tala reflects how they've learned and grown over the course of the story."),,SPEAKER_TALA,TAIL_TALK)
+	goto(Rematches_Script_AskTalaBattle)
+}
+
+script Rematches_Script_AskTalaBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Tala asks player for battle."),MSGBOX_YESNO,SPEAKER_TALA,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Tala tells the player to return when they're ready."),,SPEAKER_TALA,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Tala says some words before the battle starts."),,SPEAKER_TALA,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_TALA,format("So strong...What this means for the future, who can say?"))
+	setflag(FLAG_DAILY_TALA_REMATCH)
+    goto(Rematches_Dialogue_TalaComeBack)
+}
+
+script Rematches_Dialogue_TalaComeBack
+{
+	lock
+	msgbox(format("Tala tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_TALA,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskTalaRematch
+{
+	if (flag(FLAG_DAILY_TALA_REMATCH))
+	{
+		goto(Rematches_Dialogue_TalaComeBack)
+	}
+	lock
+	faceplayer
+	msgbox(format("Tala greets the player before challenging them to a battle."),,SPEAKER_TALA,TAIL_TALK)
+	goto(Rematches_Script_AskTalaBattle)
+}
+
+script Quest_Rematches_Script_HideMagnus
+{
+    setobjectflagfromlocalid(LOCALID_ROUTE_13_MAGNUS)
+}
+
+script Rematches_Script_Magnus
+{
+    lock
+    if (!flag(FLAG_TALKED_TO_MAGNUS_POSTGAME))
+    {
+        goto(Rematches_Dialogue_FirstMagnusTalk)
+    }
+    elif (defeated(TRAINER_MAGNUS_PROLOGUE))
+    {
+        goto(Rematches_Script_AskMagnusRematch)
+    }
+    goto(Rematches_Script_AskMagnusBattle)
+    release
+    end
+}
+
+script Rematches_Dialogue_FirstMagnusTalk
+{
+    setflag(FLAG_TALKED_TO_MAGNUS_POSTGAME)
+	lock
+	faceplayer
+	msgbox(format("Magnus reflects how they've learned and grown over the course of the story."),,SPEAKER_MAGNUS,TAIL_TALK)
+	goto(Rematches_Script_AskMagnusBattle)
+}
+
+script Rematches_Script_AskMagnusBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Magnus asks player for battle."),MSGBOX_YESNO,SPEAKER_MAGNUS,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Magnus tells the player to return when they're ready."),,SPEAKER_MAGNUS,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Magnus says some words before the battle starts."),,SPEAKER_MAGNUS,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_MAGNUS_PROLOGUE,format("{PLAYER}, your strength knows no bounds!"))
+	setflag(FLAG_DAILY_MAGNUS_REMATCH)
+    goto(Rematches_Dialogue_MagnusComeBack)
+}
+
+script Rematches_Dialogue_MagnusComeBack
+{
+	lock
+	msgbox(format("Magnus tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_MAGNUS,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskMagnusRematch
+{
+	if (flag(FLAG_DAILY_MAGNUS_REMATCH))
+	{
+		goto(Rematches_Dialogue_MagnusComeBack)
+	}
+	lock
+	faceplayer
+	msgbox(format("Magnus greets the player before challenging to them to a battle."),,SPEAKER_MAGNUS,TAIL_TALK)
+	goto(Rematches_Script_AskMagnusBattle)
+}
+
+script Quest_Rematches_Script_HideFrank
+{
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_FRANK)
+}
+
+script Rematches_Script_Frank
+{
+    lock
+    if (!flag(FLAG_TALKED_TO_FRANK_POSTGAME))
+    {
+        goto(Rematches_Dialogue_FirstFrankTalk)
+    }
+    elif (defeated(TRAINER_FRANK))
+    {
+        goto(Rematches_Script_AskFrankRematch)
+    }
+    goto(Rematches_Script_AskFrankBattle)
+    release
+    end
+}
+
+script Rematches_Dialogue_FirstFrankTalk
+{
+    setflag(FLAG_TALKED_TO_FRANK_POSTGAME)
+	lock
+	faceplayer
+	msgbox(format("Frank reflects how they've learned and grown over the course of the story."),,SPEAKER_FRANK,TAIL_TALK)
+	goto(Rematches_Script_AskFrankBattle)
+}
+
+script Rematches_Script_AskFrankBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Frank asks player for battle."),MSGBOX_YESNO,SPEAKER_FRANK,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Frank tells the player to return when they're ready."),,SPEAKER_FRANK,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Frank says some words before the battle starts."),,SPEAKER_FRANK,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_FRANK,format("You are not only the present, {PLAYER}, but the future, too. It's clear as day to me."))
+	setflag(FLAG_DAILY_FRANK_REMATCH)
+    goto(Rematches_Dialogue_FrankComeBack)
+}
+
+script Rematches_Dialogue_FrankComeBack
+{
+	lock
+	msgbox(format("Frank tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_FRANK,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskFrankRematch
+{
+	if (flag(FLAG_DAILY_FRANK_REMATCH))
+	{
+		goto(Rematches_Dialogue_FrankComeBack)
+	}
+	lock
+	faceplayer
+	msgbox(format("Frank greets the player before challenging them to a battle."),,SPEAKER_FRANK,TAIL_TALK)
+	goto(Rematches_Script_AskFrankBattle)
+}
+
