@@ -43,6 +43,7 @@
 #include "constants/waves.h" // wavesOfChange
 #include "constants/hidden_grotto.h" // hiddenGrotto
 #include "constants/region_map_sections.h"
+#include "silicon_battle_frontier.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -557,6 +558,7 @@ struct RentalMon
     //u8 padding2[2];
 };
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 struct BattleDomeTrainer
 {
     u16 trainerId:10;
@@ -654,6 +656,19 @@ struct BattleFrontier
     /*0xEFB*/ u8 unused_EFB;
     /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
 };
+#else // siliconFrontier
+struct SiliconBattleFrontier
+{
+    u16 battlePoints;
+    u16 numBattles[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
+    struct SiliconFrontierStreaks streakData[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
+    struct RentalMon factoryRentalMons[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_FRONTIER_PARTY_SIZE];
+    enum SiliconFrontierPartner currentPartner[SILICON_FACILITY_COUNT];
+    u8 remainingSparringHeals;
+    u8 disableRecordBattle:1;
+    u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+};
+#endif // siliconFrontier
 
 struct ApprenticeQuestion
 {
@@ -739,7 +754,11 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     /*0x64C*/ struct BattleFrontier frontier;
+#else // siliconFrontier
+    struct SiliconBattleFrontier frontier; // siliconFrontier
+#endif // siliconFrontier
     // Start siliconMerge
 	u8 optionsGame[NUM_OPTIONS_GAME_SETTINGS];
     u8 optionsBattle[NUM_OPTIONS_BATTLE_SETTINGS];
