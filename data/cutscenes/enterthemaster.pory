@@ -18,26 +18,31 @@ script EnterTheMaster_LeaverraForest_Inner_ObjectSetup_Script
 {
     switch (var(VAR_LEAVERRA_FOREST_STATE))
     {
-		default:
         case CHARLOTTE_WAITING_LEAVERRA_FOREST:
             call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case CHARLOTTE_ENTERED_LEAVERRA_FOREST:
             call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
         case POST_HAVE_YOU_SEEN_THE_NEWS:
-            call(EnterTheMaster_LeaverraForest_Inner_HideObjects_Script)
+			call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideFrank)
+			call_if_quest_not_complete(QUEST_WAREHOUSEWARFARE,Quest_Rematches_Script_HideFrank)
+			setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
+			setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_LEFT)
+			setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_RIGHT)
         case LEAVERRA_FOREST_MAZE_COMPLETE:
             return
         case MET_FRANK:
             call(EnterTheMaster_RepositionCharlotteToRobot_Script)
         case FINISHED_FRANK_PUZZLES:
             return
+		default:
+            return
     }
 }
 
 script EnterTheMaster_LeaverraForest_Inner_HideObjects_Script
 {
-    call(EnterTheMaster_HideCharlotte_Script)
     setobjectflagfromlocalid(LOCALID_LEAVERRA_FRANK)
+    setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
     setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_LEFT)
     setobjectflagfromlocalid(LOCALID_LEAVERRA_ROBOT_RIGHT)
 }
@@ -47,11 +52,6 @@ script EnterTheMaster_RepositionCharlotteToRobot_Script
     setobjectxy(LOCALID_LEAVERRA_CHARLOTTE,2,5)
     setobjectxyperm(LOCALID_LEAVERRA_CHARLOTTE,2,5)
     turnobject(LOCALID_LEAVERRA_CHARLOTTE,DIR_NORTH)
-}
-
-script EnterTheMaster_HideCharlotte_Script
-{
-    setobjectflagfromlocalid(LOCALID_LEAVERRA_CHARLOTTE)
 }
 
 script EnterTheMaster_Interact_Script
