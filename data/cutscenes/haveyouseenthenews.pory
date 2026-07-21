@@ -56,6 +56,14 @@ script HaveYouSeenTheNews_AskHelp_Dialogue {
     }
 }
 
+script HaveYouSeenTheNews_Dialogue_Deputized
+{
+	msgbox(format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential."),,SPEAKER_FRANK)
+	closemessage
+	release
+	end
+}
+
 movement HaveYouSeenTheNews_LeaveClearingA {
     walk_down * 3
     step_end
