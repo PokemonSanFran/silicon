@@ -14,6 +14,7 @@
 #define FREE_ENIGMA_BERRY                   TRUE   // Frees up E-Reader Enigma Berry data (52 bytes).
 #define FREE_LINK_BATTLE_RECORDS            TRUE   // Frees up link battle record data (88 bytes).
 #define FREE_MYSTERY_GIFT                   TRUE   // Frees up Mystery Gift data (876 bytes).
+#define FREE_EMERALD_BATTLE_FRONTIER           TRUE   // siliconFrontier: Disables everything in the Battle Frontier except the pieces that are getting used in Silicon.
                                             // SaveBlock1 total: 2516 bytes
 // SaveBlock2 configs
 #define FREE_BATTLE_TOWER_E_READER          TRUE   // Frees up Battle Tower E-Reader data (188 bytes).

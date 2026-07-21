@@ -1469,6 +1469,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     show->bravoTrainerTower.kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     show->bravoTrainerTower.active = TRUE;
     StringCopy(show->bravoTrainerTower.playerName, gSaveBlock2Ptr->playerName);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     StringCopy(show->bravoTrainerTower.opponentName, gSaveBlock2Ptr->frontier.towerInterview.opponentName);
     show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.towerInterview.playerSpecies;
     show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.towerInterview.opponentSpecies;
@@ -1477,14 +1478,17 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     if (gSaveBlock2Ptr->frontier.towerLvlMode == FRONTIER_LVL_50)
         show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_50;
     else
+#endif // siliconFrontier
         show->bravoTrainerTower.btLevel = FRONTIER_MAX_LEVEL_OPEN;
     show->bravoTrainerTower.interviewResponse = gSpecialVar_0x8004;
     StorePlayerIdInNormalShow(show);
     show->bravoTrainerTower.playerLanguage = gGameLanguage;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (show->bravoTrainerTower.playerLanguage == LANGUAGE_JAPANESE || gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage == LANGUAGE_JAPANESE)
         show->bravoTrainerTower.opponentLanguage = LANGUAGE_JAPANESE;
     else
         show->bravoTrainerTower.opponentLanguage = gSaveBlock2Ptr->frontier.towerInterview.opponentLanguage;
+#endif // siliconFrontier
 }
 
 void TryPutSmartShopperOnAir(void)

@@ -617,6 +617,7 @@ static void SetupRoomObjectEvents(void)
 
 static void GetBattlePikeData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     switch (gSpecialVar_0x8005)
@@ -640,10 +641,12 @@ static void GetBattlePikeData(void)
             gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_50;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetBattlePikeData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     switch (gSpecialVar_0x8005)
@@ -680,13 +683,16 @@ static void SetBattlePikeData(void)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 static void IsNextRoomFinal(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum > NUM_PIKE_ROOMS)
         gSpecialVar_Result = TRUE;
     else
+#endif // siliconFrontier
         gSpecialVar_Result = FALSE;
 }
 
@@ -707,10 +713,12 @@ static void ClearInWildMonRoom(void)
 
 static void SavePikeChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+#endif // siliconFrontier
     SaveMapView();
     TrySavingData(SAVE_LINK);
 }
@@ -764,11 +772,13 @@ static void BufferNPCMessage(void)
 {
     int speechId;
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         speechId = sNPCTable[sNpcId].speechId1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 10)
         speechId = sNPCTable[sNpcId].speechId2;
     else
+#endif // siliconFrontier
         speechId = sNPCTable[sNpcId].speechId3;
 
     FrontierSpeechToString(sNPCSpeeches[speechId]);
@@ -893,11 +903,13 @@ static bool8 TryInflictRandomStatus(void)
 
     Shuffle(indices, FRONTIER_PARTY_SIZE, sizeof(indices[0]));
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 9)
         count = 2;
     else
+#endif // siliconFrontier
         count = 3;
 
     status = 0;
@@ -990,11 +1002,13 @@ static bool8 AtLeastOneHealthyMon(void)
     u8 healthyMonsCount;
     u8 count;
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 9)
         count = 2;
     else
+#endif // siliconFrontier
         count = 3;
 
     healthyMonsCount = 0;
@@ -1018,6 +1032,7 @@ static bool8 AtLeastOneHealthyMon(void)
 
 static u8 GetNextRoomType(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     bool8 roomTypesDisabled[NUM_PIKE_ROOM_TYPES - 1]; // excludes Brain room, which can't be disabled
     u8 i;
     u8 nextRoomType;
@@ -1094,6 +1109,9 @@ static u8 GetNextRoomType(void)
         TryInflictRandomStatus();
 
     return nextRoomType;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static u16 GetNPCRoomGraphicsId(void)
@@ -1109,6 +1127,7 @@ static bool8 UNUSED GetInWildMonRoom(void)
 
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     s32 monLevel;
     u8 headerId = GetBattlePikeWildMonHeaderId();
@@ -1153,11 +1172,13 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], wildMons[headerId][pikeMonId].moves[i], i);
 
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
+#endif // siliconFrontier
     return TRUE;
 }
 
 u8 GetBattlePikeWildMonHeaderId(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 headerId;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
@@ -1172,6 +1193,9 @@ u8 GetBattlePikeWildMonHeaderId(void)
         headerId = 3;
 
     return headerId;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void DoStatusInflictionScreenFlash(u8 taskId)
@@ -1330,6 +1354,7 @@ bool8 InBattlePike(void)
 
 static void SetHintedRoom(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i, count, id;
     u8 *roomCandidates;
 
@@ -1369,20 +1394,26 @@ static void SetHintedRoom(void)
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
             gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
     }
+#endif // siliconFrontier
 }
 
 static void GetHintedRoomIndex(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeHintedRoomIndex;
+#endif // siliconFrontier
 }
 
 static void GetRoomTypeHint(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSpecialVar_Result = sRoomTypeHints[gSaveBlock2Ptr->frontier.pikeHintedRoomType];
+#endif // siliconFrontier
 }
 
 static void PrepareOneTrainer(bool8 difficult)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     enum FrontierLevelMode lvlMode;
     u8 battleNum;
@@ -1411,10 +1442,12 @@ static void PrepareOneTrainer(bool8 difficult)
     SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = TRAINER_BATTLE_PARAM.opponentA;
+#endif // siliconFrontier
 }
 
 static void PrepareTwoTrainers(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u16 trainerId;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1452,14 +1485,17 @@ static void PrepareTwoTrainers(void)
     SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentB, 1);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = TRAINER_BATTLE_PARAM.opponentB;
+#endif // siliconFrontier
 }
 
 static void ClearPikeTrainerIds(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
 
     for (i = 0; i < NUM_PIKE_ROOMS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
+#endif // siliconFrontier
 }
 
 static void BufferTrainerIntro(void)
@@ -1497,6 +1533,7 @@ static bool8 AtLeastTwoAliveMons(void)
 
 static u8 GetPikeQueenFightType(u8 nextRoom)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 numPikeSymbols;
 
     u8 facility = FRONTIER_FACILITY_PIKE;
@@ -1525,6 +1562,9 @@ static u8 GetPikeQueenFightType(u8 nextRoom)
     }
 
     return ret;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void GetCurrentRoomPikeQueenFightType(void)
@@ -1534,15 +1574,19 @@ static void GetCurrentRoomPikeQueenFightType(void)
 
 static void HealSomeMonsBeforePikeQueen(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_0x8007];
 
     TryHealMons(toHealCount);
     gSpecialVar_Result = toHealCount;
+#endif // siliconFrontier
 }
 
 static void SetHealingroomTypesDisabled(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = gSpecialVar_0x8005;
+#endif // siliconFrontier
 }
 
 static void IsPartyFullHealed(void)
@@ -1586,6 +1630,7 @@ static void IsPartyFullHealed(void)
 
 static void SaveMonHeldItems(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -1594,10 +1639,12 @@ static void SaveMonHeldItems(void)
                                   MON_DATA_HELD_ITEM);
         gSaveBlock2Ptr->frontier.pikeHeldItemsBackup[i] = heldItem;
     }
+#endif // siliconFrontier
 }
 
 static void RestoreMonHeldItems(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -1606,10 +1653,12 @@ static void RestoreMonHeldItems(void)
                    MON_DATA_HELD_ITEM,
                    &gSaveBlock2Ptr->frontier.pikeHeldItemsBackup[i]);
     }
+#endif // siliconFrontier
 }
 
 static void InitPikeChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
@@ -1620,6 +1669,7 @@ static void InitPikeChallenge(void)
 
     TRAINER_BATTLE_PARAM.opponentA = 0;
     gBattleOutcome = 0;
+#endif // siliconFrontier
 }
 
 static bool8 CanEncounterWildMon(u8 enemyMonLevel)

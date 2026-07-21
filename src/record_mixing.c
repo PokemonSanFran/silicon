@@ -94,7 +94,9 @@ static struct RecordMixingDaycareMail *sRecordMixMailSave;
 static void *sBattleTowerSave;
 static LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void *sBattleTowerSave_Duplicate;
+#endif // siliconFrontier
 static u32 sRecordStructSize;
 static u8 sDaycareMailRandSum;
 #if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
@@ -179,10 +181,14 @@ static void SetSrcLookupPointers(void)
     sOldManSave = &gSaveBlock1Ptr->oldMan;
     sDewfordTrendsSave = gSaveBlock1Ptr->dewfordTrends;
     sRecordMixMailSave = &sRecordMixMail;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
+#endif // siliconFrontier
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
     sApprenticesSave = gSaveBlock2Ptr->apprentices;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.towerPlayer;
+#endif // siliconFrontier
 }
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
@@ -241,7 +247,9 @@ static void PrepareExchangePacket(void)
         memcpy(&sSentRecord->emerald.lilycoveLady, sLilycoveLadySave, sizeof(sSentRecord->emerald.lilycoveLady));
         memcpy(sSentRecord->emerald.dewfordTrends, sDewfordTrendsSave, sizeof(sSentRecord->emerald.dewfordTrends));
         GetRecordMixingDaycareMail(&sSentRecord->emerald.daycareMail);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         memcpy(&sSentRecord->emerald.battleTowerRecord, sBattleTowerSave, sizeof(sSentRecord->emerald.battleTowerRecord));
+#endif // siliconFrontier
         SanitizeEmeraldBattleTowerRecord(&sSentRecord->emerald.battleTowerRecord);
 
         if (GetMultiplayerId() == 0)
@@ -1125,13 +1133,18 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     {
         dst->twoPlayers[j].language = GAME_LANGUAGE;
         CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.opponentTrainerIds[j]);
+#endif // siliconFrontier
         StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.opponentNames[j]);
+#endif // siliconFrontier
     }
 
     for (i = 0; i < FRONTIER_LVL_MODE_COUNT; i++)
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         dst->onePlayer[RANKING_HALL_TOWER_SINGLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
         dst->onePlayer[RANKING_HALL_TOWER_DOUBLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_DOUBLES][i];
         dst->onePlayer[RANKING_HALL_TOWER_MULTIS][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_MULTIS][i];
@@ -1143,6 +1156,7 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
         dst->onePlayer[RANKING_HALL_PYRAMID][i].winStreak = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[i];
 
         dst->twoPlayers[i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_LINK_MULTIS][i];
+#endif // siliconFrontier
     }
 }
 

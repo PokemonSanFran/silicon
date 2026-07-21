@@ -83,15 +83,21 @@ void CallBattlePalaceFunction(void)
 
 static void InitPalaceChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+#endif // siliconFrontier
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+#endif // siliconFrontier
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = 0;
+#endif // siliconFrontier
 
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
     TRAINER_BATTLE_PARAM.opponentA = 0;
@@ -99,6 +105,7 @@ static void InitPalaceChallenge(void)
 
 static void GetPalaceData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -114,10 +121,12 @@ static void GetPalaceData(void)
         gSpecialVar_Result = ((gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]) != 0);
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetPalaceData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -136,10 +145,12 @@ static void SetPalaceData(void)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
     }
+#endif // siliconFrontier
 }
 
 static void GetPalaceCommentId(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -149,6 +160,7 @@ static void GetPalaceCommentId(void)
         gSpecialVar_Result = 3;
     else
         gSpecialVar_Result = 4;
+#endif // siliconFrontier
 }
 
 static void SetPalaceOpponent(void)
@@ -165,6 +177,7 @@ static void BufferOpponentIntroSpeech(void)
 
 static void IncrementPalaceStreak(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -176,19 +189,23 @@ static void IncrementPalaceStreak(void)
         if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][(lvlMode > gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode]) ? 1 : 0])
             gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
     }
+#endif // siliconFrontier
 }
 
 static void SavePalaceChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
+#endif // siliconFrontier
 }
 
 static void SetRandomPalacePrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -196,10 +213,12 @@ static void SetRandomPalacePrize(void)
         gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceLatePrizes[Random() % ARRAY_COUNT(sBattlePalaceLatePrizes)];
     else
         gSaveBlock2Ptr->frontier.palacePrize = sBattlePalaceEarlyPrizes[Random() % ARRAY_COUNT(sBattlePalaceEarlyPrizes)];
+#endif // siliconFrontier
 }
 
 static void GivePalacePrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (AddBagItem(gSaveBlock2Ptr->frontier.palacePrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.palacePrize, gStringVar1);
@@ -210,4 +229,5 @@ static void GivePalacePrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
+#endif // siliconFrontier
 }

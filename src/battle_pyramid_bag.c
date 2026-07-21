@@ -597,6 +597,7 @@ static bool8 LoadPyramidBagGfx(void)
 
 static void SetBagItemsListTemplate(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 i;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 
@@ -613,6 +614,7 @@ static void SetBagItemsListTemplate(void)
     gMultiuseListMenuTemplate.totalItems = gPyramidBagMenu->listMenuCount;
     gMultiuseListMenuTemplate.items = gPyramidBagMenu->bagListItems;
     gMultiuseListMenuTemplate.maxShowed = gPyramidBagMenu->listMenuMaxShown;
+#endif // siliconFrontier
 }
 
 static void CopyBagItemName(u8 *dst, enum Item itemId)
@@ -631,6 +633,7 @@ static void CopyBagItemName(u8 *dst, enum Item itemId)
 
 static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (onInit != TRUE)
     {
         PlaySE(SE_SELECT);
@@ -646,10 +649,12 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
         gPyramidBagMenu->isAltIcon ^= 1;
         PrintItemDescription(itemIndex);
     }
+#endif // siliconFrontier
 }
 
 static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 xAlign;
     if (itemIndex == LIST_CANCEL)
         return;
@@ -671,10 +676,12 @@ static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     xAlign = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 119);
     PyramidBagPrint_Quantity(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SKIP_DRAW, COLORID_DARK_GRAY);
+#endif // siliconFrontier
 }
 
 static void PrintItemDescription(s32 listMenuId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     const u8 *desc;
     if (listMenuId != LIST_CANCEL)
     {
@@ -688,6 +695,7 @@ static void PrintItemDescription(s32 listMenuId)
     }
     FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
     PyramidBagPrint(WIN_INFO, desc, 3, 0, 0, 1, 0, COLORID_DARK_GRAY);
+#endif // siliconFrontier
 }
 
 static void AddScrollArrows(void)
@@ -722,6 +730,7 @@ static void CreatePyramidBagInputTask(void)
 
 static void SwapItems(u8 id1, u8 id2)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 temp;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -732,10 +741,12 @@ static void SwapItems(u8 id1, u8 id2)
 
     SWAP(itemIds[id1], itemIds[id2], temp);
     SWAP(quantities[id1], quantities[id2], temp);
+#endif // siliconFrontier
 }
 
 static void MovePyramidBagItemSlotInList(u8 from, u8 to)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
@@ -769,10 +780,12 @@ static void MovePyramidBagItemSlotInList(u8 from, u8 to)
         itemIds[to] = firstSlotItemId;
         quantities[to] = firstSlotQuantity;
     }
+#endif // siliconFrontier
 }
 
 static void CompactItems(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i, j;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -797,10 +810,12 @@ static void CompactItems(void)
                 SwapItems(i, j);
         }
     }
+#endif // siliconFrontier
 }
 
 void UpdatePyramidBagList(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 i;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 
@@ -816,6 +831,7 @@ void UpdatePyramidBagList(void)
         gPyramidBagMenu->listMenuMaxShown = 8;
     else
         gPyramidBagMenu->listMenuMaxShown = gPyramidBagMenu->listMenuCount;
+#endif // siliconFrontier
 }
 
 void UpdatePyramidBagCursorPos(void)
@@ -924,9 +940,11 @@ static void Task_HandlePyramidBagInput(u8 taskId)
             break;
         default:
             PlaySE(SE_SELECT);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             gSpecialVar_ItemId = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][listId];
             tListPos = listId;
             tQuantity = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode][listId];
+#endif // siliconFrontier
             if (gPyramidBagMenuState.location == PYRAMIDBAG_LOC_PARTY)
                 TryCloseBagToGiveItem(taskId);
             else
@@ -1329,7 +1347,9 @@ static void Task_BeginItemSwap(u8 taskId)
     tListPos = gPyramidBagMenuState.scrollPosition + gPyramidBagMenuState.cursorPosition;
     gPyramidBagMenu->toSwapPos = tListPos;
     ListMenuSetTemplateField(tListTaskId, LISTFIELD_CURSORKIND, CURSOR_INVISIBLE);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     CopyItemName(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][tListPos], gStringVar1);
+#endif // siliconFrontier
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
     FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
     PyramidBagPrint(WIN_INFO, gStringVar4, 3, 0, 0, 1, 0, COLORID_DARK_GRAY);
@@ -1418,6 +1438,7 @@ static void CancelItemSwap(u8 taskId)
 
 void TryStoreHeldItemsInPyramidBag(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
     struct Pokemon *party = gParties[B_TRAINER_PLAYER];
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
@@ -1451,6 +1472,7 @@ void TryStoreHeldItemsInPyramidBag(void)
     gSpecialVar_Result = 0;
     Free(newItems);
     Free(newQuantities);
+#endif // siliconFrontier
 }
 
 static void InitPyramidBagWindows(void)
@@ -1557,7 +1579,9 @@ static void LoadPyramidBagPalette(void)
 {
     struct SpritePalette spritePalette;
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     spritePalette.data = gBattlePyramidBag_Pal + PLTT_ID(gSaveBlock2Ptr->frontier.lvlMode);
+#endif // siliconFrontier
     spritePalette.tag = TAG_PYRAMID_BAG;
     LoadSpritePalette(&spritePalette);
 }

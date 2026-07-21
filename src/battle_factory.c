@@ -129,13 +129,16 @@ void CallBattleFactoryFunction(void)
 static void InitFactoryChallenge(void)
 {
     u8 i;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+#endif // siliconFrontier
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
     {
         gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = 0;
@@ -145,6 +148,7 @@ static void InitFactoryChallenge(void)
     sPerformedRentalSwap = FALSE;
     for (i = 0; i < ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); i++)
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = 0xFFFF;
+#endif // siliconFrontier
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         gFrontierTempParty[i] = 0xFFFF;
 
@@ -154,6 +158,7 @@ static void InitFactoryChallenge(void)
 
 static void GetBattleFactoryData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -169,10 +174,12 @@ static void GetBattleFactoryData(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
         break;
     }
+#endif // siliconFrontie
 }
 
 static void SetBattleFactoryData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -195,15 +202,18 @@ static void SetBattleFactoryData(void)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SaveFactoryChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
+#endif // siliconFrontier
 }
 
 static void FactoryDummy1(void)
@@ -234,6 +244,7 @@ static void SetPerformedRentalSwap(void)
 
 static void GenerateOpponentMons(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, k;
     enum Species species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
@@ -306,6 +317,7 @@ static void GenerateOpponentMons(void)
         gFrontierTempParty[i] = monId;
         i++;
     }
+#endif // siliconFrontier
 }
 
 static void SetOpponentGfxVar(void)
@@ -315,6 +327,7 @@ static void SetOpponentGfxVar(void)
 
 static void SetRentalsToOpponentParty(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
@@ -330,10 +343,12 @@ static void SetRentalsToOpponentParty(void)
         gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum = GetBoxMonData(&gParties[B_TRAINER_OPPONENT_A][i].box, MON_DATA_ABILITY_NUM);
         SetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM, &gFacilityTrainerMons[gFrontierTempParty[i]].heldItem);
     }
+#endif // siliconFrontier
 }
 
 static void SetPlayerAndOpponentParties(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u8 monLevel;
     u16 monId;
@@ -377,10 +392,12 @@ static void SetPlayerAndOpponentParties(void)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 static void GenerateInitialRentalMons(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j;
     u8 firstMonId;
     u8 battleMode;
@@ -471,6 +488,7 @@ static void GenerateInitialRentalMons(void)
         monIds[i] = monId;
         i++;
     }
+    #endif // siliconFrontier
 }
 
 // Determines if the upcoming opponent has a single most-common
@@ -608,6 +626,7 @@ bool8 InBattleFactory(void)
 
 static void RestorePlayerPartyHeldItems(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
@@ -621,6 +640,7 @@ static void RestorePlayerPartyHeldItems(void)
                    MON_DATA_HELD_ITEM,
                    &gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[i].monId].heldItem);
     }
+#endif // siliconFrontier
 }
 
 // Get the IV to use for the opponent's pokémon.
@@ -653,6 +673,7 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 
 void FillFactoryBrainParty(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, k;
     enum Species species[FRONTIER_PARTY_SIZE];
     enum Item heldItems[FRONTIER_PARTY_SIZE];
@@ -708,6 +729,7 @@ void FillFactoryBrainParty(void)
                 &gParties[B_TRAINER_OPPONENT_A][i]);
         i++;
     }
+#endif // siliconFrontier
 }
 
 static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool8 useBetterRange)
@@ -751,6 +773,7 @@ static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool
 
 u8 GetNumPastRentalsRank(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 ret;
     u8 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
 
@@ -768,10 +791,15 @@ u8 GetNumPastRentalsRank(u8 battleMode, enum FrontierLevelMode lvlMode)
         ret = 5;
 
     return ret;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 u64 GetAiScriptsInBattleFactory(void)
 {
+    return 0;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (lvlMode == FRONTIER_LVL_TENT)
@@ -792,6 +820,7 @@ u64 GetAiScriptsInBattleFactory(void)
         else
             return AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
     }
+#endif // siliconFrontier
 }
 
 void SetMonMoveAvoidReturn(struct Pokemon *mon, enum Move moveArg, u8 moveSlot)
@@ -812,6 +841,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     #ifdef BUGFIX
         enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -825,6 +855,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
             fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
         else
             fixedIV = GetFactoryMonFixedIV(challengeNum, TRUE); // Last trainer in challenge uses higher IVs
+#endif // siliconFrontier
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -873,9 +904,11 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
 void FillFactoryTrainerParty(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ZeroEnemyPartyMons();
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         FillFactoryFrontierTrainerParty(TRAINER_BATTLE_PARAM.opponentA, 0);
     else
         FillFactoryTentTrainerParty(TRAINER_BATTLE_PARAM.opponentA, 0);
+#endif // siliconFrontier
 }

@@ -1921,6 +1921,7 @@ static bool32 ShouldTrainerRequestBattle(int matchCallId)
 
 static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     int j;
     u16 streak = 0;
@@ -1998,6 +1999,9 @@ static u16 GetFrontierStreakInfo(u16 facilityId, u32 *topicTextId)
     }
 
     return streak;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 void BufferPokedexRatingForMatchCall(u8 *destStr)

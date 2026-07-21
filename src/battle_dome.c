@@ -65,8 +65,10 @@ struct TourneyTreeLineSection
     u16 tile;
 };
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 #define DOME_TRAINERS gSaveBlock2Ptr->frontier.domeTrainers
 #define DOME_MONS     gSaveBlock2Ptr->frontier.domeMonIds
+#endif // siliconFrontier
 
 #define tState              data[0]
 
@@ -1760,22 +1762,27 @@ void CallBattleDomeFunction(void)
 
 static void InitDomeChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+#endif // siliconFrontier
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = 0;
 
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
     TRAINER_BATTLE_PARAM.opponentA = 0;
+#endif // siliconFrontier
 }
 
 static void GetDomeData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -1840,10 +1847,12 @@ static void GetDomeData(void)
         gSpecialVar_Result = (gSaveBlock2Ptr->frontier.domeLvlMode * 2) - 3 + gSaveBlock2Ptr->frontier.domeBattleMode;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetDomeData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -1906,10 +1915,12 @@ static void SetDomeData(void)
         gSaveBlock2Ptr->frontier.selectedPartyMons[3] = T1_READ_16(gSelectedOrderFromParty);
         break;
     }
+#endif // siliconFrontier
 }
 
 static void InitDomeTrainers(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, k;
     int monLevel;
     enum Species species[FRONTIER_PARTY_SIZE];
@@ -2112,6 +2123,7 @@ static void InitDomeTrainers(void)
 
     Free(rankingScores);
     Free(statValues);
+#endif // siliconFrontier
 }
 
 #define CALC_STAT(base, statIndex)                                                          \
@@ -2152,6 +2164,7 @@ static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, i
 
 static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u16 temp;
 
@@ -2160,17 +2173,22 @@ static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         SWAP(DOME_MONS[id1][i], DOME_MONS[id2][i], temp);
+#endif // siliconFrontier
 }
 
 static void BufferDomeRoundText(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
+#endif // siliconFrontier
 }
 
 static void BufferDomeOpponentName(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     CopyDomeTrainerName(gStringVar2, TRAINER_BATTLE_PARAM.opponentA);
+#endif // siliconFrontier
 }
 
 static void InitDomeOpponentParty(void)
@@ -2181,6 +2199,7 @@ static void InitDomeOpponentParty(void)
 
 static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     #ifdef BUGFIX
     u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
     #else
@@ -2190,6 +2209,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
 
     CreateFacilityMon(&gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]],
                       level, fixedIv, otId, 0, &gParties[B_TRAINER_OPPONENT_A][monPartyId]);
+#endif // siliconFrontier
 }
 
 static void CreateDomeOpponentMons(u16 tournamentTrainerId)
@@ -2258,6 +2278,7 @@ int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
 
 static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, moveIndex, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
 
@@ -2282,11 +2303,15 @@ static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
         }
     }
     return SelectOpponentMonsFromParty(partyMovePoints, allowRandom);
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 // Identical to function above, but uses EFFECTIVENESS_MODE_BAD
 static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, moveIndex, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
 
@@ -2311,6 +2336,9 @@ static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
         }
     }
     return SelectOpponentMonsFromParty(partyMovePoints, allowRandom);
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
@@ -2526,6 +2554,7 @@ static u8 GetDomeTrainerMonIvs(u16 trainerId)
 
 static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, opponentMax;
 
     // Get trainer's tournament id
@@ -2562,6 +2591,9 @@ static int TournamentIdOfOpponent(int roundId, int trainerId)
         else
             return 0xFF; // Already eliminated
     }
+#else // siliconFrontier
+    return 0xFF;
+#endif // siliconFrontier
 }
 
 static void SetDomeOpponentId(void)
@@ -2572,7 +2604,11 @@ static void SetDomeOpponentId(void)
 // While not an issue in-game, this will overflow if called after the player's opponent for the current round has been eliminated
 static u16 TrainerIdOfPlayerOpponent(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     return DOME_TRAINERS[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER)].trainerId;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void SetDomeOpponentGraphicsId(void)
@@ -2582,15 +2618,18 @@ static void SetDomeOpponentGraphicsId(void)
 
 static void SaveDomeChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
+#endif // siliconFrontier
 }
 
 static void IncrementDomeStreaks(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -2601,6 +2640,7 @@ static void IncrementDomeStreaks(void)
 
     if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] > gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][lvlMode])
         gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
+#endif // siliconFrontier
 }
 
 // For showing the opponent info card of the upcoming trainer
@@ -2914,6 +2954,7 @@ static void SpriteCB_MonIconCardScrollRight(struct Sprite *sprite)
 
 static void SpriteCB_HorizontalScrollArrow(struct Sprite *sprite)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int taskId1 = sprite->data[0];
     int arrId = gTasks[gTasks[taskId1].data[4]].data[1];
     int tournmanetTrainerId = sTourneyTreeTrainerIds[arrId];
@@ -2979,6 +3020,7 @@ static void SpriteCB_HorizontalScrollArrow(struct Sprite *sprite)
             }
         }
     }
+#endif // siliconFrontier
 }
 
 static void SpriteCB_VerticalScrollArrow(struct Sprite *sprite)
@@ -3755,6 +3797,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
 
 static u8 Task_GetInfoCardInput(u8 taskId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 input = INFOCARD_INPUT_NONE;
     int taskId2 = gTasks[taskId].data[4];
     int position = gTasks[taskId2].data[1];
@@ -3870,6 +3913,9 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     }
 
     return input;
+#else //siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 #undef tUsingAlternateSlot
@@ -4111,6 +4157,7 @@ static bool32 IsDomeComboMove(enum Move move)
 
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     struct TextPrinterTemplate textPrinter;
     int i, j, k;
     int trainerId = 0;
@@ -4281,8 +4328,12 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 enum Move move;
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     move = GetFrontierBrainMonMove(i, j);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 else if (trainerId == TRAINER_PLAYER)
                     move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
+#else // siliconFrontier
+                    move = MOVE_NONE;
+#endif // siliconFrontier
                 else
                     move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
                 u32 accuracy = GetMoveAccuracy(move);
@@ -4382,7 +4433,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     allocatedArray[j] = GetFrontierBrainMonEvs(i, j);
                 else
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                     allocatedArray[j] = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].evs[j];
+#else // siliconFrontier
+                    allocatedArray[j] = 0;
+#endif // siliconFrontier
             }
 
             // HP doesnt have a nature modifier, so just add it here
@@ -4394,7 +4449,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
                     nature = GetFrontierBrainMonNature(i);
                 else
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                     nature = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature;
+#else // siliconFrontier
+                    nature = 0;
+#endif // siliconFrontier
 
                 if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
                 {
@@ -4556,10 +4615,12 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentY = 36;
     AddTextPrinter(&textPrinter, 0, NULL);
     Free(allocatedArray);
+#endif // siliconFrontier
 }
 
 static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u8 tournamentId;
     int winStringId = 0;
@@ -4599,11 +4660,13 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].eliminatedAt == sCompetitorRangeByMatch[matchNum][2])
             {
                 // Set initial winStringId offset
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 StringCopy(gStringVar2, GetMoveName(gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]));
                 winStringId = DOME_TRAINERS[tournamentId].forfeited * 2; // (DOME_TEXT_WON_USING_MOVE - 1) or (DOME_TEXT_WON_ON_FORFEIT - 1)
 
                 if (gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId] == MOVE_NONE && DOME_TRAINERS[tournamentId].forfeited == FALSE)
                     winStringId = DOME_TEXT_WON_NO_MOVES - 1;
+#endif // siliconFrontier
             }
             else
             {
@@ -4624,10 +4687,14 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
         return winStringId + 2; // use DOME_TEXT_CHAMP_*
     else
         return winStringId + 1; // use DOME_TEXT_WON_*
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     struct TextPrinterTemplate textPrinter;
     int tournamentIds[2];
     int trainerIds[2];
@@ -4834,6 +4901,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     PutWindowTilemap(windowId + WIN_MATCH_NUMBER);
     CopyWindowToVram(windowId + WIN_MATCH_NUMBER, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
+#endif // siliconFrontier
 }
 
 static void ShowDomeTourneyTree(void)
@@ -4852,8 +4920,10 @@ static void ShowPreviousDomeTourneyTree(void)
     u8 taskId;
 
     SetFacilityTrainerAndMonPtrs();
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.lvlMode = gSaveBlock2Ptr->frontier.domeLvlMode - 1;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = DOME_FINAL;
+#endif // siliconFrontier
     taskId = CreateTask(Task_ShowTourneyTree, 0);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tNotInteractive = FALSE;
@@ -4977,6 +5047,7 @@ static void Task_HandleTourneyTreeInput(u8 taskId)
 // The 'cursor' is actually just which button sprite is currently doing the 'selected' animation
 static u8 UpdateTourneyTreeCursor(u8 taskId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 selection = TOURNEY_TREE_NO_SELECTION;
     int direction = MOVE_DIR_NONE;
     int tourneyTreeCursorSpriteId = gTasks[taskId].data[1];
@@ -5022,6 +5093,9 @@ static u8 UpdateTourneyTreeCursor(u8 taskId)
     }
 
     return selection;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 #undef MOVE_DIR_UP
@@ -5043,6 +5117,7 @@ static void ShowNonInteractiveDomeTourneyTree(void)
 
 static void ResolveDomeRoundWinners(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     if (gSpecialVar_0x8005 == DOME_PLAYER_WON_MATCH)
@@ -5068,11 +5143,13 @@ static void ResolveDomeRoundWinners(void)
         for (i = gSaveBlock2Ptr->frontier.curChallengeBattleNum; i < DOME_ROUNDS_COUNT; i++)
             DecideRoundWinners(i);
     }
+#endif // siliconFrontier
 }
 
 // Decides the winning move of an NPC vs NPC match
 static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roundId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, k;
     int moveScores[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
     enum Move moves[MAX_MON_MOVES * FRONTIER_PARTY_SIZE] = {MOVE_NONE};
@@ -5149,11 +5226,13 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     j = bestId;
     do
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         for (i = 0; i < roundId - 1; i++)
         {
             if (gSaveBlock2Ptr->frontier.domeWinningMoves[GetOpposingNPCTournamentIdByRound(winnerTournamentId, i)] == moves[j])
                 break;
         }
+#endif // siliconFrontier
         if (i != roundId - 1)
         {
             moveScores[j] = 0;
@@ -5184,10 +5263,14 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
         j = bestId;
 
     return moves[j];
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void Task_ShowTourneyTree(u8 taskId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     struct TextPrinterTemplate textPrinter;
     int notInteractive = gTasks[taskId].tNotInteractive;
@@ -5296,10 +5379,12 @@ static void Task_ShowTourneyTree(u8 taskId)
                         DrawTourneyAdvancementLine(i, var2);
                     }
                 }
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum != DOME_ROUND2)
                 {
                     DrawTourneyAdvancementLine(i, gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2);
                 }
+#endif // siliconFrontier
             }
             else if (notInteractive == FALSE)
             {
@@ -5311,6 +5396,7 @@ static void Task_ShowTourneyTree(u8 taskId)
                         DrawTourneyAdvancementLine(i, var2);
                     }
                 }
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum != DOME_ROUND1)
                 {
                     if (gTasks[taskId].tIsPrevTourneyTree)
@@ -5319,8 +5405,10 @@ static void Task_ShowTourneyTree(u8 taskId)
                         var2 = gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1;
                     DrawTourneyAdvancementLine(i, var2);
                 }
+#endif // siliconFrontier
             }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             if (gTasks[taskId].tIsPrevTourneyTree)
                 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
             else
@@ -5354,6 +5442,7 @@ static void Task_ShowTourneyTree(u8 taskId)
                     textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
                 }
             }
+#endif // siliconFrontier
 
             if (sTrainerNamePositions[i][0] == TOURNEYWIN_NAMES_LEFT)
                 textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
@@ -5416,6 +5505,7 @@ static void Task_ShowTourneyTree(u8 taskId)
         DestroyTask(taskId);
         break;
     }
+#endif // siliconFrontier
 }
 
 static void DrawTourneyAdvancementLine(u8 tournamentId, u8 roundId)
@@ -5438,6 +5528,7 @@ static void DrawTourneyAdvancementLine(u8 tournamentId, u8 roundId)
 // The non-interactive tourney tree that's shown when a round is completed
 static void Task_HandleStaticTourneyTreeInput(u8 taskId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     struct TextPrinterTemplate textPrinter;
 
@@ -5507,6 +5598,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 #undef STATE_FADE_IN
@@ -5690,6 +5782,7 @@ static void GetPlayerSeededBeforeOpponent(void)
 
 static void BufferLastDomeWinnerName(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     SetFacilityTrainerAndMonPtrs();
@@ -5699,11 +5792,13 @@ static void BufferLastDomeWinnerName(void)
             break;
     }
     CopyDomeTrainerName(gStringVar1, DOME_TRAINERS[i].trainerId);
+#endif // siliconFrontier
 }
 
 // For showing the previous tourney results before the player has entered a challenge
 static void InitRandomTourneyTreeResults(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j, k;
     int monLevel;
     enum Species species[FRONTIER_PARTY_SIZE];
@@ -5831,10 +5926,12 @@ static void InitRandomTourneyTreeResults(void)
         DecideRoundWinners(i);
 
     gSaveBlock2Ptr->frontier.lvlMode = lvlMode;
+#endif // siliconFrontier
 }
 
 static int TrainerIdToTournamentId(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -5844,11 +5941,15 @@ static int TrainerIdToTournamentId(u16 trainerId)
     }
 
     return i;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 // The same as the above one, but has global scope.
 int TrainerIdToDomeTournamentId(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -5858,6 +5959,9 @@ int TrainerIdToDomeTournamentId(u16 trainerId)
     }
 
     return i;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8 round)
@@ -5873,6 +5977,7 @@ static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8 round)
 // Determines which trainers won in the NPC vs NPC battles
 static void DecideRoundWinners(u8 roundId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     int moveSlot, monId1, monId2;
     int tournamentId1, tournamentId2;
@@ -5891,14 +5996,18 @@ static void DecideRoundWinners(u8 roundId)
         {
             DOME_TRAINERS[tournamentId2].isEliminated = TRUE;
             DOME_TRAINERS[tournamentId2].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
+#endif // siliconFrontier
         }
         // Frontier Brain always wins, check tournamentId2.
         else if (tournamentId2 != 0xFF && DOME_TRAINERS[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
         {
             DOME_TRAINERS[tournamentId1].isEliminated = TRUE;
             DOME_TRAINERS[tournamentId1].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId1] = GetWinningMove(tournamentId2, tournamentId1, roundId);
+#endif // siliconFrontier
         }
         // Decide which one of two trainers wins!
         else if (tournamentId2 != 0xFF)
@@ -5950,29 +6059,38 @@ static void DecideRoundWinners(u8 roundId)
             {
                 DOME_TRAINERS[tournamentId2].isEliminated = TRUE;
                 DOME_TRAINERS[tournamentId2].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
+#endif // siliconFrontier
             }
             else if (points1 < points2)
             {
                 DOME_TRAINERS[tournamentId1].isEliminated = TRUE;
                 DOME_TRAINERS[tournamentId1].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId1] = GetWinningMove(tournamentId2, tournamentId1, roundId);
+#endif // siliconFrontier
             }
             // Points are the same, so we favor the one with the higher id.
             else if (tournamentId1 > tournamentId2)
             {
                 DOME_TRAINERS[tournamentId2].isEliminated = TRUE;
                 DOME_TRAINERS[tournamentId2].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
+#endif // siliconFrontier
             }
             else
             {
                 DOME_TRAINERS[tournamentId1].isEliminated = TRUE;
                 DOME_TRAINERS[tournamentId1].eliminatedAt = roundId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
                 gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId1] = GetWinningMove(tournamentId2, tournamentId1, roundId);
+#endif // siliconFrontier
             }
         }
     }
+#endif // siliconFrontier
 }
 
 static void CopyDomeTrainerName(u8 *str, u16 trainerId)

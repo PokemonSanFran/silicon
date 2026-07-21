@@ -708,6 +708,7 @@ void CallBattleTowerFunc(void)
 
 static void InitTowerChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -718,6 +719,7 @@ static void InitTowerChallenge(void)
     ResetFrontierTrainerIds();
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
+#endif // siliconFrontier
 
     ValidateBattleTowerRecordChecksums();
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
@@ -726,6 +728,7 @@ static void InitTowerChallenge(void)
 
 static void GetTowerData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -743,10 +746,12 @@ static void GetTowerData(void)
         gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetTowerData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
@@ -767,6 +772,7 @@ static void SetTowerData(void)
         gSaveBlock2Ptr->frontier.towerLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetTowerBattleWon(void)
@@ -776,6 +782,7 @@ static void SetTowerBattleWon(void)
         ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
 #endif //FREE_BATTLE_TOWER_E_READER
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     // towerNumWins is never read outside this conditional
     if (gSaveBlock2Ptr->frontier.towerNumWins < MAX_STREAK)
         gSaveBlock2Ptr->frontier.towerNumWins++;
@@ -783,10 +790,12 @@ static void SetTowerBattleWon(void)
     gSaveBlock2Ptr->frontier.curChallengeBattleNum++;
     SaveCurrentWinStreak();
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+#endif // siliconFrontier
 }
 
 static bool8 ChooseSpecialBattleTowerTrainer(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i, j, validMons;
     s32 trainerIds[9];
     s32 idsCount = 0;
@@ -851,10 +860,14 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     {
         return FALSE;
     }
+#else // siliconFrontier
+        return TRUE;
+#endif // siliconFrontier
 }
 
 static void SetNextTowerOpponent(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     if (lvlMode == FRONTIER_LVL_TENT)
     {
@@ -904,12 +917,14 @@ static void SetNextTowerOpponent(void)
                 gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = TRAINER_BATTLE_PARAM.opponentA;
         }
     }
+#endif // siliconFrontier
 }
 
 
 
 void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 slotValues[6];
     u16 slotIds[6];
     s32 i, j, k;
@@ -999,6 +1014,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
 
     i = Random() % slotsCount;
     gSaveBlock2Ptr->frontier.towerRecords[slotIds[i]] = *newRecord;
+#endif // siliconFrontier
 }
 
 void FillTentTrainerParty(u8 monsCount)
@@ -1009,6 +1025,7 @@ void FillTentTrainerParty(u8 monsCount)
 
 static void GetOpponentIntroSpeech(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 trainerId;
     SetFacilityPtrsGetLevel();
 
@@ -1029,20 +1046,24 @@ static void GetOpponentIntroSpeech(void)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].greeting);
     else
         BufferApprenticeChallengeText(trainerId - TRAINER_RECORD_MIXING_APPRENTICE);
+#endif // siliconFrontier
 }
 
 static void SaveCurrentWinStreak(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
     if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < winStreak)
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = winStreak;
+#endif // siliconFrontier
 }
 
 static void SaveBattleTowerRecord(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     enum FrontierLevelMode lvlMode;
     u8 battleMode, class;
@@ -1087,10 +1108,12 @@ static void SaveBattleTowerRecord(void)
     playerRecord->language = gGameLanguage;
     CalcEmeraldBattleTowerChecksum(&gSaveBlock2Ptr->frontier.towerPlayer);
     SaveCurrentWinStreak();
+#endif // siliconFrontier
 }
 
 static void SaveTowerChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 challengeNum = (signed)(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE);
@@ -1103,6 +1126,7 @@ static void SaveTowerChallenge(void)
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
+#endif // siliconFrontier
 }
 
 static void BattleTowerNop1(void)
@@ -1142,6 +1166,7 @@ static void GetApprenticeMultiPartnerParty(u16 trainerId)
 
 static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i, count;
     enum Species validSpecies[3];
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1166,10 +1191,12 @@ static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
     {
         gFrontierTempParty[3] = validSpecies[Random() % count];
     } while (gFrontierTempParty[2] == gFrontierTempParty[3]);
+#endif // siliconFrontier
 }
 
 static void LoadMultiPartnerCandidatesData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i, j, k;
     u32 spArray[5];
     s32 r10;
@@ -1313,6 +1340,7 @@ static void LoadMultiPartnerCandidatesData(void)
         FlagClear(FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2);
         GetRecordMixFriendMultiPartnerParty(gSaveBlock2Ptr->frontier.trainerIds[7]);
     }
+#endif // siliconFrontier
 }
 
 static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
@@ -1328,11 +1356,13 @@ static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
             move = gFacilityTrainerMons[monId].moves[0];
             species = gFacilityTrainerMons[monId].species;
         }
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
             move = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gFrontierTempParty[gSpecialVar_0x8005 + 1]].moves[0];
             species = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[gFrontierTempParty[gSpecialVar_0x8005 + 1]].species;
         }
+#endif // siliconFrontier
         else
         {
             s32 i;
@@ -1360,6 +1390,7 @@ static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
 // PARTNER_MSGID_REJECT - If the player declines to be their partner
 static void ShowPartnerCandidateMessage(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i, j, partnerId;
     s32 monId;
     s32 UNUSED level = SetFacilityPtrsGetLevel();
@@ -1465,10 +1496,12 @@ static void ShowPartnerCandidateMessage(void)
         u8 apprenticeId = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
         ShowFieldMessage(sPartnerApprenticeTextTables[apprenticeId][gSpecialVar_0x8005]);
     }
+#endif // siliconFrontier
 }
 
 static void LoadLinkMultiOpponentsData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 challengeNum;
     s32 i, j;
     s32 trainerId = 0;
@@ -1554,6 +1587,7 @@ static void LoadLinkMultiOpponentsData(void)
     case 6:
         return;
     }
+#endif // siliconFrontier
 }
 
 static void TowerTryCloseLink(void)
@@ -1565,11 +1599,14 @@ static void TowerTryCloseLink(void)
 static void SetMultiPartnerGfx(void)
 {
     // 0xF below means use VAR_OBJ_GFX_ID_E
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[17], 0xF);
+#endif // siliconFrontier
 }
 
 static void SetTowerInterviewData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     u8 text[32];
 
@@ -1585,10 +1622,12 @@ static void SetTowerInterviewData(void)
     for (i = 0; i < VANILLA_POKEMON_NAME_LENGTH + 1; i++)
         gSaveBlock2Ptr->frontier.towerInterview.opponentMonNickname[i] = gBattleMons[0].nickname[i];
     gSaveBlock2Ptr->frontier.towerBattleOutcome = gBattleOutcome;
+#endif // siliconFrontier
 }
 
 static void ValidateBattleTowerRecordChecksums(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i, j;
     u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerPlayer);
     u32 checksum = 0;
@@ -1611,6 +1650,7 @@ static void ValidateBattleTowerRecordChecksums(void)
         if (gSaveBlock2Ptr->frontier.towerRecords[i].checksum != checksum)
             ClearBattleTowerRecord(&gSaveBlock2Ptr->frontier.towerRecords[i]);
     }
+#endif // siliconFrontier
 }
 
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *record)
@@ -1641,12 +1681,16 @@ static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
 
 u16 GetCurrentBattleTowerWinStreak(enum FrontierLevelMode lvlMode, u8 battleMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
 
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return MAX_STREAK;
+#endif // siliconFrontier
 }
 
 static u8 GetMonCountForBattleMode(u8 battleMode)
@@ -1668,6 +1712,7 @@ struct RibbonCounter
 
 static void AwardBattleTowerRibbons(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     u32 partyIndex;
 #ifdef BUGFIX
@@ -1730,12 +1775,14 @@ static void AwardBattleTowerRibbons(void)
             // End siliconMerge
         }
     }
+#endif // siliconFrontier
 }
 
 
 
 void TryHideBattleTowerReporter(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.challengeStatus == CHALLENGE_STATUS_SAVING)
         HideBattleTowerReporter();
     if (FlagGet(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE) == TRUE)
@@ -1743,6 +1790,7 @@ void TryHideBattleTowerReporter(void)
         HideBattleTowerReporter();
         FlagClear(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE);
     }
+#endif // siliconFrontier
 }
 
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst)
@@ -1881,6 +1929,7 @@ static void ValidateApprenticesChecksums(void)
 
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (trainerId == TRAINER_EREADER)
     {
         *dst = gGameLanguage;
@@ -1903,6 +1952,7 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
         else
             *dst = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
+#endif // siliconFrontier
 }
 
 static u16 GetBattleTentTrainerId(void)
@@ -1956,6 +2006,7 @@ u8 SetTentPtrsGetLevel(void)
 
 static void SetNextBattleTentOpponent(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     u16 trainerId;
 
@@ -1973,6 +2024,7 @@ static void SetNextBattleTentOpponent(void)
     SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum + 1 < TENT_STAGES_PER_CHALLENGE)
        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = TRAINER_BATTLE_PARAM.opponentA;
+#endif // siliconFrontier
 }
 
 static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
@@ -2046,6 +2098,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
 bool32 ValidateBattleTowerRecord(u8 recordId) // unused
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
     u32 checksum = 0;
@@ -2069,6 +2122,9 @@ bool32 ValidateBattleTowerRecord(u8 recordId) // unused
     {
         return TRUE;
     }
+#else // siliconFrontier
+        return TRUE;
+#endif // siliconFrontier
 }
 
 void TrySetLinkBattleTowerEnemyPartyLevel(void)
@@ -2167,9 +2223,11 @@ u16 PSF_GetBossTrainerID(void) {
 
 void Debug_MakeStreak40(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = 40;
 
         gSaveBlock2Ptr->frontier.towerWinStreaks[FRONTIER_MODE_SINGLES][1] = winStreak;
+#endif // siliconFrontier
 }
 
 u16 PSF_GetNormalFrontierTrainerID(void)
@@ -2180,6 +2238,7 @@ u16 PSF_GetNormalFrontierTrainerID(void)
 
 u16 PSF_GetFrontierTrainerID(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 trainerId;
     u16 battleNum = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
@@ -2189,10 +2248,14 @@ u16 PSF_GetFrontierTrainerID(void)
         trainerId = PSF_GetNormalFrontierTrainerID();
 
     return trainerId;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 void PSF_SetNextTowerOpponent(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 id;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     //u16 winStreak = GetCurrentFacilityWinStreak();
@@ -2228,5 +2291,6 @@ void PSF_SetNextTowerOpponent(void)
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum + 1 < FRONTIER_STAGES_PER_CHALLENGE)
             gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleParameter.params.opponentA;
     }
+#endif // siliconFrontier
 }
 // End siliconMerge

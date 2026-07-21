@@ -879,6 +879,7 @@ void CallFrontierUtilFunc(void)
 // VAR_TEMP_CHALLENGE_STATUS is used to react to the status in OnFrame map scripts
 static void GetChallengeStatus(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0xFF);
     switch (gSaveBlock2Ptr->frontier.challengeStatus)
     {
@@ -900,10 +901,12 @@ static void GetChallengeStatus(void)
         VarSet(VAR_TEMP_CHALLENGE_STATUS, gSaveBlock2Ptr->frontier.challengeStatus);
         break;
     }
+#endif // siliconFrontier
 }
 
 static void GetFrontierData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
     u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
     if (hasSymbol == 2)
@@ -934,10 +937,12 @@ static void GetFrontierData(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & gFrontierBrainInfo[facility].battledBit[hasSymbol];
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetFrontierData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
     u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
@@ -969,6 +974,7 @@ static void SetFrontierData(void)
         gSaveBlock2Ptr->frontier.battledBrainFlags |= gFrontierBrainInfo[facility].battledBit[hasSymbol];
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetSelectedPartyOrder(void)
@@ -1038,9 +1044,11 @@ static void ShowFacilityResultsWindow(void)
 
 static bool8 IsWinStreakActive(u32 challenge)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.winStreakActiveFlags & challenge)
         return TRUE;
     else
+#endif // siliconFrontier
         return FALSE;
 }
 
@@ -1077,17 +1085,23 @@ static void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 
 static void TowerPrintRecordStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 num = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode];
     TowerPrintStreak(gText_Record, num, x1, x2, y);
+#endif // siliconFrontier
 }
 
 static u16 TowerGetWinStreak(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void TowerPrintPrevOrCurrentStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
@@ -1158,11 +1172,15 @@ static void ShowTowerResultsWindow(u8 battleMode)
 // Battle Dome records.
 static u16 DomeGetWinStreak(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
@@ -1202,6 +1220,7 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, enum FrontierLevelMode l
 
 static void ShowDomeResultsWindow(u8 battleMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
@@ -1222,6 +1241,7 @@ static void ShowDomeResultsWindow(u8 battleMode)
     PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 112, 129);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+#endif // siliconFrontier
 }
 
 // Battle Palace records.
@@ -1237,17 +1257,23 @@ static void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 
 static void PalacePrintRecordStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 num = gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode];
     PalacePrintStreak(gText_Record, num, x1, x2, y);
+#endif // siliconFrontier
 }
 
 static u16 PalaceGetWinStreak(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void PalacePrintPrevOrCurrentStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
@@ -1301,11 +1327,15 @@ static void ShowPalaceResultsWindow(u8 battleMode)
 // Battle Pike records.
 static u16 PikeGetWinStreak(enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
@@ -1334,6 +1364,7 @@ static void PikePrintPrevOrCurrentStreak(enum FrontierLevelMode lvlMode, u8 x1, 
 
 static void ShowPikeResultsWindow(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gRecordsWindowId = AddWindow(&sFrontierResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
@@ -1350,6 +1381,7 @@ static void ShowPikeResultsWindow(void)
     PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 114, 129);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+#endif // siliconFrontier
 }
 
 // Battle Arena records.
@@ -1365,17 +1397,23 @@ static void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 
 static void ArenaPrintRecordStreak(enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 num = gSaveBlock2Ptr->frontier.arenaRecordStreaks[lvlMode];
     ArenaPrintStreak(gText_Record, num, x1, x2, y);
+#endif // siliconFrontier
 }
 
 static u16 ArenaGetWinStreak(enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 static void ArenaPrintPrevOrCurrentStreak(enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
@@ -1429,27 +1467,37 @@ static void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, 
 
 static void FactoryPrintRecordStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 num1 = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[battleMode][lvlMode];
     u16 num2 = gSaveBlock2Ptr->frontier.factoryRecordRentsCount[battleMode][lvlMode];
     FactoryPrintStreak(gText_Record, num1, num2, x1, x2, x3, y);
+#endif // siliconFrontier
 }
 
 static u16 FactoryGetWinStreak(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static u16 FactoryGetRentsCount(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
     if (rents > MAX_STREAK)
         return MAX_STREAK;
     else
         return rents;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
@@ -1516,17 +1564,23 @@ static void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 
 static void PyramidPrintRecordStreak(enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 num = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode];
     PyramidPrintStreak(gText_Record, num, x1, x2, y);
+#endif // siliconFrontier
 }
 
 static u16 PyramidGetWinStreak(enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 static void PyramidPrintPrevOrCurrentStreak(enum FrontierLevelMode lvlMode, u8 x1, u8 x2, u8 y)
@@ -1616,6 +1670,7 @@ static void ShowLinkContestResultsWindow(void)
 
 static void CheckPutFrontierTVShowOnAir(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 name[32];
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
@@ -1732,6 +1787,7 @@ static void CheckPutFrontierTVShowOnAir(void)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 static void Script_GetFrontierBrainStatus(void)
@@ -1781,6 +1837,7 @@ u8 GetFrontierBrainStatus(void)
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     switch (whichText)
     {
     case FRONTIER_BEFORE_TEXT:
@@ -1868,10 +1925,12 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 void ResetWinStreaks(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 battleMode, lvlMode;
 
     gSaveBlock2Ptr->frontier.winStreakActiveFlags = 0;
@@ -1896,10 +1955,12 @@ void ResetWinStreaks(void)
     }
     if (gSaveBlock2Ptr->frontier.challengeStatus != 0)
         gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_SAVING;
+#endif // siliconFrontier
 }
 
 u32 GetCurrentFacilityWinStreak(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
@@ -1923,14 +1984,19 @@ u32 GetCurrentFacilityWinStreak(void)
     default:
         return 0;
     }
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }
 
 void ResetFrontierTrainerIds(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.trainerIds); i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
+#endif // siliconFrontier
 }
 
 static void IsTrainerFrontierBrain(void)
@@ -1949,6 +2015,7 @@ u8 GetPlayerSymbolCountForFacility(u8 facility)
 
 static void GiveBattlePoints(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 challengeNum = 0;
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
@@ -2004,6 +2071,7 @@ static void GiveBattlePoints(void)
     if (points > 0xFFFF)
         points = 0xFFFF;
     gSaveBlock2Ptr->frontier.cardBattlePoints = points;
+#endif // siliconFrontier
 }
 
 static void GetFacilitySymbolCount(void)
@@ -2078,6 +2146,7 @@ static void AppendIfValid(enum Species species, u16 heldItem, u16 hp, enum Front
 // The names of ineligible Pokémon that have been caught are also buffered to print
 static void CheckPartyIneligibility(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 speciesArray[PARTY_SIZE];
     enum Item itemArray[PARTY_SIZE];
     s32 monId = 0;
@@ -2199,6 +2268,7 @@ static void CheckPartyIneligibility(void)
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_Result;
     }
     #undef numEligibleMons
+#endif // siliconFrontier
 }
 
 static void ValidateVisitingTrainer(void)
@@ -2208,6 +2278,7 @@ static void ValidateVisitingTrainer(void)
 
 static void IncrementWinStreak(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
@@ -2252,6 +2323,7 @@ static void IncrementWinStreak(void)
             gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode]++;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void RestoreHeldItems(void)
@@ -2439,6 +2511,7 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 
 static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i;
     s32 x;
     struct RankingHall1P records1P[HALL_RECORDS_COUNT];
@@ -2463,6 +2536,7 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
         for (i = 0; i < HALL_RECORDS_COUNT; i++)
             Print1PRecord(i, 1, 4, &records1P[i], hallFacilityId);
     }
+#endif // siliconFrontier
 }
 
 void ShowRankingHallRecordsWindow(void)
@@ -2814,6 +2888,7 @@ void ClearEnemyPartyAfterChallenge()
 
 bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 i;
     u8 facilityClass;
 
@@ -2852,6 +2927,7 @@ bool8 IsFrontierTrainerFemale(u16 trainerId)
     if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
         return TRUE;
     else
+#endif // siliconFrontier
         return FALSE;
 }
 
@@ -2941,6 +3017,7 @@ static void UNUSED GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 bat
 
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 i;
     u8 facilityClass;
     u8 trainerObjectGfxId;
@@ -3033,10 +3110,12 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
         VarSet(VAR_OBJ_GFX_ID_E, OBJ_EVENT_GFX_BOY_1);
         return;
     }
+#endif // siliconFrontier
 }
 
 u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 i;
     u8 facilityClass;
     u16 trainerObjectGfxId;
@@ -3090,10 +3169,14 @@ u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
     {
         return OBJ_EVENT_GFX_BOY_1;
     }
+#else // siliconFrontier
+        return OBJ_EVENT_GFX_BOY_1;
+#endif // siliconFrontier
 }
 
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     SetFacilityPtrsGetLevel();
 
 #if FREE_BATTLE_TOWER_E_READER == FALSE
@@ -3126,10 +3209,14 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
         else
             return gFacilityClassToPicIndex[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
     }
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 trainerClass = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
@@ -3178,10 +3265,14 @@ enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
     }
 
     return trainerClass;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 u8 GetFrontierTrainerFacilityClass(u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 facilityClass;
     SetFacilityPtrsGetLevel();
 
@@ -3213,10 +3304,14 @@ u8 GetFrontierTrainerFacilityClass(u16 trainerId)
     }
 
     return facilityClass;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     s32 i = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
@@ -3277,6 +3372,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     }
 
     dst[i] = EOS;
+#endif // siliconFrontier
 }
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)
@@ -3323,6 +3419,7 @@ void FrontierSpeechToString(const u16 *words)
 
 u8 SetFacilityPtrsGetLevel(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_TENT)
     {
         return SetTentPtrsGetLevel();
@@ -3333,6 +3430,9 @@ u8 SetFacilityPtrsGetLevel(void)
         gFacilityTrainerMons = gBattleFrontierMons;
         return GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
     }
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 u8 GetFrontierEnemyMonLevel(enum FrontierLevelMode lvlMode)

@@ -42,6 +42,7 @@ static void HandleFacilityTrainerBattleEnd(void)
     case FACILITY_BATTLE_PIKE_SINGLE:
     case FACILITY_BATTLE_PIKE_DOUBLE:
     case FACILITY_BATTLE_PYRAMID:
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         if (gSaveBlock2Ptr->frontier.battlesCount < 0xFFFFFF)
         {
             gSaveBlock2Ptr->frontier.battlesCount++;
@@ -52,6 +53,7 @@ static void HandleFacilityTrainerBattleEnd(void)
         {
             gSaveBlock2Ptr->frontier.battlesCount = 0xFFFFFF;
         }
+#endif // siliconFrontier
         break;
     case FACILITY_BATTLE_TRAINER_HILL:
     default:
@@ -90,7 +92,11 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
             break;
         case FRONTIER_MODE_MULTIS:
             FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             gPartnerTrainerId = gSaveBlock2Ptr->frontier.trainerIds[17];
+#else // siliconFrontier
+            gPartnerTrainerId = 0;
+#endif // siliconFrontier
             FillPartnerParty(gPartnerTrainerId);
             gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS;
             break;
@@ -117,9 +123,11 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE;
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         else
+#endif // siliconFrontier
         FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -127,9 +135,11 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         break;
     case FACILITY_BATTLE_ARENA:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_ARENA;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         else
+#endif // siliconFrontier
         FillTentTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -231,6 +241,7 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         // Record mixed player.
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         for (j = 0, i = 0; i < monCount; j++, i++)
         {
             if (gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[j].species != SPECIES_NONE
@@ -239,6 +250,7 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
                 CreateBattleTowerMon_HandleLevel(&gParties[trainer][i], &gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].party[j], FALSE);
             }
         }
+#endif // siliconFrontier
         return;
     }
     else

@@ -350,7 +350,9 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->opponentB = TRAINER_BATTLE_PARAM.opponentB;
     battleSave->partnerId = gPartnerTrainerId;
     battleSave->multiplayerId = gRecordedBattleMultiplayerId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     battleSave->lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+#endif // siliconFrontier
     battleSave->frontierFacility = sFrontierFacility;
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
     // Start siliconMerge
@@ -359,7 +361,7 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->textSpeed = gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TEXT_SPEED];
     //battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
 	// End siliconMerge
-
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (TRAINER_BATTLE_PARAM.opponentA >= TRAINER_RECORD_MIXING_FRIEND && TRAINER_BATTLE_PARAM.opponentA < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
@@ -404,6 +406,7 @@ bool32 MoveRecordedBattleToSaveData(void)
 
         battleSave->recordMixFriendLanguage = gSaveBlock2Ptr->frontier.towerRecords[gPartnerTrainerId - TRAINER_RECORD_MIXING_FRIEND].language;
     }
+#endif // siliconFrontier
 
     if (TRAINER_BATTLE_PARAM.opponentA >= TRAINER_RECORD_MIXING_APPRENTICE)
     {
@@ -469,7 +472,9 @@ static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *dst)
 
 static void CB2_RecordedBattleEnd(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.lvlMode = sLvlMode;
+#endif // siliconFrontier
     gBattleOutcome = 0;
     gBattleTypeFlags = 0;
     TRAINER_BATTLE_PARAM.opponentA = 0;
@@ -532,7 +537,9 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     TRAINER_BATTLE_PARAM.opponentB = src->opponentB;
     gPartnerTrainerId = src->partnerId;
     gRecordedBattleMultiplayerId = src->multiplayerId;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     sLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+#endif // siliconFrontier
     sFrontierFacility = src->frontierFacility;
     sFrontierBrainSymbol = src->frontierBrainSymbol;
     sBattleScene = src->battleScene;
@@ -549,7 +556,9 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
         sEasyChatSpeech[i] = src->easyChatSpeech[i];
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.lvlMode = src->lvlMode;
+#endif // siliconFrontier
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         for (j = 0; j < BATTLER_RECORD_SIZE; j++)

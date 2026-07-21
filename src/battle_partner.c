@@ -123,6 +123,7 @@ void FillPartnerParty(u16 trainerId)
         // Scrapped, lol.
         trainerName[0] = gGameLanguage;
     }
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         level = SetFacilityPtrsGetLevel();
@@ -139,11 +140,13 @@ void FillPartnerParty(u16 trainerId)
             SetMonData(&gParties[B_TRAINER_PARTNER][i], MON_DATA_OT_GENDER, &j);
         }
     }
+#endif // siliconFrontier
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         trainerId -= TRAINER_RECORD_MIXING_FRIEND;
         for (i = 0; i < FRONTIER_MULTI_PARTY_SIZE; i++)
         {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             struct EmeraldBattleTowerRecord *record = &gSaveBlock2Ptr->frontier.towerRecords[trainerId];
             struct BattleTowerPokemon monData = record->party[gSaveBlock2Ptr->frontier.trainerIds[18 + i]];
             StringCopy(trainerName, record->name);
@@ -164,6 +167,7 @@ void FillPartnerParty(u16 trainerId)
             SetMonData(&gParties[B_TRAINER_PARTNER][i], MON_DATA_OT_NAME, trainerName);
             j = IsFrontierTrainerFemale(trainerId + TRAINER_RECORD_MIXING_FRIEND);
             SetMonData(&gParties[B_TRAINER_PARTNER][i], MON_DATA_OT_GENDER, &j);
+#endif // siliconFrontier
         }
     }
     else
@@ -171,7 +175,9 @@ void FillPartnerParty(u16 trainerId)
         trainerId -= TRAINER_RECORD_MIXING_APPRENTICE;
         for (i = 0; i < FRONTIER_MULTI_PARTY_SIZE; i++)
         {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             CreateApprenticeMon(&gParties[B_TRAINER_PARTNER][i], &gSaveBlock2Ptr->apprentices[trainerId], gSaveBlock2Ptr->frontier.trainerIds[18 + i]);
+#endif // siliconFrontier
             j = IsFrontierTrainerFemale(trainerId + TRAINER_RECORD_MIXING_APPRENTICE);
             SetMonData(&gParties[B_TRAINER_PARTNER][i], MON_DATA_OT_GENDER, &j);
         }

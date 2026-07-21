@@ -656,11 +656,13 @@ static void ShowMapNamePopUpWindow(void)
             withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
             mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE];
         }
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         else
         {
             withoutPrefixPtr = &(mapDisplayHeader[MAP_POPUP_PREFIX_BUFFER_LENGTH]);
             mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[gSaveBlock2Ptr->frontier.curChallengeBattleNum];
         }
+#endif // siliconFrontier
         StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
     }
     else

@@ -1003,9 +1003,13 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
             return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
     }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     var = gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
         + gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
 
+#else // siliconFrontier
+    var = 0;
+#endif // siliconFrontier
     return sBattleTransitionTable_BattleFrontier[var % ARRAY_COUNT(sBattleTransitionTable_BattleFrontier)];
 }
 

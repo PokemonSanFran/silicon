@@ -109,20 +109,26 @@ void CallVerdanturfTentFunction(void)
 
 static void InitVerdanturfTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
+#endif // siliconFrontier
 }
 
 static void GetVerdanturfTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.verdanturfTentPrize;
+#endif // siliconFrontier
 }
 
 static void SetVerdanturfTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.verdanturfTentPrize = gSpecialVar_0x8006;
+#endif // siliconFrontier
 }
 
 static void SetVerdanturfTentTrainerGfx(void)
@@ -139,20 +145,25 @@ static void BufferVerdanturfTentTrainerIntro(void)
 
 static void SaveVerdanturfTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
+#endif // siliconFrontier
 }
 
 static void SetRandomVerdanturfTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.verdanturfTentPrize = sVerdanturfTentRewards[Random() % ARRAY_COUNT(sVerdanturfTentRewards)];
+#endif // siliconFrontier
 }
 
 static void GiveVerdanturfTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (AddBagItem(gSaveBlock2Ptr->frontier.verdanturfTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.verdanturfTentPrize, gStringVar1);
@@ -163,6 +174,7 @@ static void GiveVerdanturfTentPrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
+#endif // siliconFrontier
 }
 
 void CallFallarborTentFunction(void)
@@ -172,38 +184,49 @@ void CallFallarborTentFunction(void)
 
 static void InitFallarborTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+#endif // siliconFrontier
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 static void GetFallarborTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.fallarborTentPrize;
+#endif // siliconFrontier
 }
 
 static void SetFallarborTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.fallarborTentPrize = gSpecialVar_0x8006;
+#endif // siliconFrontier
 }
 
 static void SaveFallarborTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+#endif // siliconFrontier
     SaveGameFrontier();
 }
 
 static void SetRandomFallarborTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.fallarborTentPrize = sFallarborTentRewards[Random() % ARRAY_COUNT(sFallarborTentRewards)];
+#endif // siliconFrontier
 }
 
 static void GiveFallarborTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (AddBagItem(gSaveBlock2Ptr->frontier.fallarborTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.fallarborTentPrize, gStringVar1);
@@ -214,6 +237,7 @@ static void GiveFallarborTentPrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
+#endif // siliconFrontier
 }
 
 static void BufferFallarborTentTrainerName(void)
@@ -228,38 +252,49 @@ void CallSlateportTentFunction(void)
 
 static void InitSlateportTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
+#endif // siliconFrontier
     SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 static void GetSlateportTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.slateportTentPrize;
+#endif // siliconFrontier
 }
 
 static void SetSlateportTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.slateportTentPrize = gSpecialVar_0x8006;
+#endif // siliconFrontier
 }
 
 static void SaveSlateportTentChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+#endif // siliconFrontier
     SaveGameFrontier();
 }
 
 static void SetRandomSlateportTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.slateportTentPrize = sSlateportTentRewards[Random() % ARRAY_COUNT(sSlateportTentRewards)];
+#endif // siliconFrontier
 }
 
 static void GiveSlateportTentPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (AddBagItem(gSaveBlock2Ptr->frontier.slateportTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.slateportTentPrize, gStringVar1);
@@ -270,6 +305,7 @@ static void GiveSlateportTentPrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
+#endif // siliconFrontier
 }
 
 static void SelectInitialRentalMons(void)
@@ -342,7 +378,9 @@ static void GenerateInitialRentalMons(void)
         if (j != i + firstMonId)
             continue;
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = monSetId;
+#endif // siliconFrontier
         species[i] = gFacilityTrainerMons[monSetId].species;
         heldItems[i] = gFacilityTrainerMons[monSetId].heldItem;
         monIds[i] = monSetId;
@@ -352,6 +390,7 @@ static void GenerateInitialRentalMons(void)
 
 static void GenerateOpponentMons(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 trainerId;
     s32 i, j, k;
     const u16 *monSet;
@@ -426,4 +465,5 @@ static void GenerateOpponentMons(void)
         gFrontierTempParty[i] = sRandMonId;
         i++;
     }
+#endif // siliconFrontier
 }

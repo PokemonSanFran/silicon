@@ -847,6 +847,7 @@ void CallBattlePyramidFunction(void)
 
 static void InitPyramidChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     bool32 isCurrent;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -867,10 +868,12 @@ static void InitPyramidChallenge(void)
     InitBattlePyramidBagCursorPosition();
     TRAINER_BATTLE_PARAM.opponentA = 0;
     gBattleOutcome = 0;
+#endif // siliconFrontier
 }
 
 static void GetBattlePyramidData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     switch (gSpecialVar_0x8005)
@@ -900,10 +903,12 @@ static void GetBattlePyramidData(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PYRAMID_OPEN;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SetBattlePyramidData(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     switch (gSpecialVar_0x8005)
@@ -934,30 +939,36 @@ static void SetBattlePyramidData(void)
         gSaveBlock2Ptr->frontier.pyramidTrainerFlags = gSpecialVar_0x8006;
         break;
     }
+#endif // siliconFrontier
 }
 
 static void SavePyramidChallenge(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
+#endif // siliconFrontier
     SaveMapView();
     TrySavingData(SAVE_LINK);
 }
 
 static void SetBattlePyramidPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > 41)
         gSaveBlock2Ptr->frontier.pyramidPrize = sLongStreakRewardItems[Random() % ARRAY_COUNT(sLongStreakRewardItems)];
     else
         gSaveBlock2Ptr->frontier.pyramidPrize = sShortStreakRewardItems[Random() % ARRAY_COUNT(sShortStreakRewardItems)];
+#endif // siliconFrontier
 }
 
 static void GiveBattlePyramidPrize(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (AddBagItem(gSaveBlock2Ptr->frontier.pyramidPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.pyramidPrize, gStringVar1);
@@ -968,20 +979,24 @@ static void GiveBattlePyramidPrize(void)
     {
         gSpecialVar_Result = FALSE;
     }
+#endif // siliconFrontier
 }
 
 static void SeedPyramidFloor(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.pyramidRandoms); i++)
         gSaveBlock2Ptr->frontier.pyramidRandoms[i] = Random();
 
     gSaveBlock2Ptr->frontier.pyramidTrainerFlags = 0;
+#endif // siliconFrontier
 }
 
 static void SetPickupItem(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     int itemIndex;
     int randVal;
@@ -1020,6 +1035,7 @@ static void SetPickupItem(void)
 
     // Quantity of item to give
     gSpecialVar_0x8001 = 1;
+#endif // siliconFrontier
 }
 
 static void HidePyramidItem(void)
@@ -1088,11 +1104,13 @@ static void ShowPostBattleHintText(void)
         case HINT_REMAINING_TRAINERS:
             id = GetPyramidFloorTemplateId();
             textIndex = sPyramidFloorTemplates[id].numTrainers;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
             {
                 if ((1u << i) & gSaveBlock2Ptr->frontier.pyramidTrainerFlags)
                     textIndex--;
-            }
+        }
+#endif // siliconFrontier
             i = 1;
             break;
         case HINT_EXIT_SHORT_REMAINING_TRAINERS:
@@ -1120,12 +1138,14 @@ static void ShowPostBattleHintText(void)
 
 static void UpdatePyramidWinStreak(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] < 999)
         gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode]++;
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] > gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode])
         gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
+#endif // siliconFrontier
 }
 
 static void GetCurrentBattlePyramidLocation(void)
@@ -1135,6 +1155,7 @@ static void GetCurrentBattlePyramidLocation(void)
 
 static void UpdatePyramidLightRadius(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     switch (gSpecialVar_0x8006)
     {
     case PYRAMID_LIGHT_SET_RADIUS:
@@ -1176,6 +1197,7 @@ static void UpdatePyramidLightRadius(void)
         }
         break;
     }
+#endif // siliconFrontier
 }
 
 static void ClearPyramidPartyHeldItems(void)
@@ -1202,7 +1224,9 @@ static void Task_SetPyramidFloorPalette(u8 taskId)
 {
     if (gPaletteFade.active)
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         CpuCopy16(gBattlePyramidFloor_Pal[gSaveBlock2Ptr->frontier.curChallengeBattleNum], &gPlttBufferUnfaded[BG_PLTT_ID(6)], PLTT_SIZE_4BPP);
+#endif // siliconFrontier
         DestroyTask(taskId);
     }
 }
@@ -1321,12 +1345,20 @@ static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForEx
 
 u16 LocalIdToPyramidTrainerId(u8 localId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 bool8 GetBattlePyramidTrainerFlag(u8 eventId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     return gSaveBlock2Ptr->frontier.pyramidTrainerFlags & ((1u << gObjectEvents[eventId].localId) - 1);
+#else // siliconFrontier
+    return FALSE;
+#endif // siliconFrontier
 }
 
 void MarkApproachingPyramidTrainersAsBattled(void)
@@ -1345,8 +1377,10 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
 
     for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
             gSaveBlock2Ptr->frontier.pyramidTrainerFlags |= 1u << i;
+#endif // siliconFrontier
     }
 
     gObjectEvents[gSelectedObjectEvent].movementType = MOVEMENT_TYPE_WANDER_AROUND;
@@ -1400,8 +1434,13 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
     u8 name[POKEMON_NAME_LENGTH + 1];
     int i, j;
     u32 id;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 lvl = gSaveBlock2Ptr->frontier.lvlMode;
     u16 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] / 7) % TOTAL_PYRAMID_ROUNDS;
+#else // siliconFrontier
+    u32 lvl = 0;
+    u16 round = 0;
+#endif // siliconFrontier
     const struct BattlePyramidRequirement *reqs = &sBattlePyramidRequirementsByRound[round];
     enum Species species = forceSpecies;
     u32 bstLim;
@@ -1558,18 +1597,21 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
         Free(abilities);
     }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] >= 140)
     {
         id = (Random() % 17) + 15;
         for (i = 0; i < NUM_STATS; i++)
             SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP_IV + i, &id);
     }
+#endif // siliconFrontier
 
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 #else
 void GenerateBattlePyramidWildMon(enum Species forceSpecies)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 name[POKEMON_NAME_LENGTH + 1];
     int i;
     const struct PyramidWildMon *wildMons;
@@ -1639,6 +1681,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
             SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP_IV + i, &id);
     }
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
+#endif // siliconFrontier
 }
 #endif
 
@@ -1669,7 +1712,9 @@ void PausePyramidChallenge(void)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
         RestorePyramidPlayerParty();
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         gSaveBlock2Ptr->frontier.challengeStatus = CHALLENGE_STATUS_PAUSED;
+#endif // siliconFrontier
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         LoadPlayerParty();
     }
@@ -1715,6 +1760,7 @@ static void UNUSED BattlePyramidRetireChallenge(void)
 
 static u16 GetUniqueTrainerId(u8 objectEventId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u16 trainerId;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1746,10 +1792,14 @@ static u16 GetUniqueTrainerId(u8 objectEventId)
     }
 
     return trainerId;
+#else // siliconFrontier
+    return 0;
+#endif // siliconFrontier
 }
 
 void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPosition)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int y, x;
     int i;
     u8 entranceSquareId, exitSquareId;
@@ -1800,6 +1850,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
     }
     RunOnLoadMapScript();
     Free(floorLayoutOffsets);
+#endif // siliconFrontier
 }
 
 void LoadBattlePyramidObjectEventTemplates(void)
@@ -1808,8 +1859,10 @@ void LoadBattlePyramidObjectEventTemplates(void)
     u8 id;
     u8 entranceSquareId, exitSquareId;
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
+#endif // siliconFrontier
 
     id = GetPyramidFloorTemplateId();
     GetPyramidEntranceAndExitSquareIds(&entranceSquareId, &exitSquareId);
@@ -1864,6 +1917,7 @@ void LoadBattlePyramidFloorObjectEventScripts(void)
 
 static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSquareId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     *entranceSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % NUM_PYRAMID_FLOOR_SQUARES;
     *exitSquareId = gSaveBlock2Ptr->frontier.pyramidRandoms[0] % NUM_PYRAMID_FLOOR_SQUARES;
 
@@ -1872,6 +1926,7 @@ static void GetPyramidEntranceAndExitSquareIds(u8 *entranceSquareId, u8 *exitSqu
         *entranceSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[3] + 1 ) % NUM_PYRAMID_FLOOR_SQUARES;
         *exitSquareId = (gSaveBlock2Ptr->frontier.pyramidRandoms[0] + NUM_PYRAMID_FLOOR_SQUARES - 1) % NUM_PYRAMID_FLOOR_SQUARES;
     }
+#endif // siliconFrontier
 }
 
 static void SetPyramidObjectPositionsUniformly(u8 objType)
@@ -1885,7 +1940,11 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
     u8 *floorLayoutOffsets = AllocZeroed(NUM_PYRAMID_FLOOR_SQUARES);
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     squareId = gSaveBlock2Ptr->frontier.pyramidRandoms[2] % NUM_PYRAMID_FLOOR_SQUARES;
+#else // siliconFrontier
+    squareId = 0;
+#endif // siliconFrontier
     if (objType == OBJ_TRAINERS)
     {
         numObjects = sPyramidFloorTemplates[id].numTrainers;
@@ -1901,6 +1960,7 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
     {
         do
         {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
             do
             {
                 if (bits & 1)
@@ -1924,6 +1984,7 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
                         bits |= 1;
                 }
             } while (!(bits & 2));
+#endif // siliconFrontier
 
         } while (!(bits & 4) && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, squareId, objectStartIndex + i));
         bits &= 1;
@@ -2053,6 +2114,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
 
 static bool8 TrySetPyramidObjectEventPositionInSquare(u8 objType, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int x, y;
 
     if (gSaveBlock2Ptr->frontier.pyramidRandoms[0] & 1)
@@ -2077,12 +2139,14 @@ static bool8 TrySetPyramidObjectEventPositionInSquare(u8 objType, u8 *floorLayou
             }
         }
     }
+#endif // siliconFrontier
 
     return TRUE;
 }
 
 static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j;
     const struct MapHeader *mapHeader;
     struct ObjectEventTemplate *floorEvents = gSaveBlock1Ptr->objectEventTemplates;
@@ -2122,11 +2186,13 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8
         }
     }
 
+#endif // siliconFrontier
     return TRUE;
 }
 
 static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     int rand = (gSaveBlock2Ptr->frontier.pyramidRandoms[0]) | (gSaveBlock2Ptr->frontier.pyramidRandoms[1] << 16);
     u8 id = GetPyramidFloorTemplateId();
@@ -2141,10 +2207,12 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
             rand >>= 8;
         }
     }
+#endif // siliconFrontier
 }
 
 static u8 GetPyramidFloorTemplateId(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     int rand = gSaveBlock2Ptr->frontier.pyramidRandoms[3] % 100;
     int floor = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
@@ -2154,6 +2222,7 @@ static u8 GetPyramidFloorTemplateId(void)
         if (rand < sPyramidFloorTemplateOptions[i][0])
             return sPyramidFloorTemplateOptions[i][1];
     }
+#endif // siliconFrontier
     return 0;
 }
 
@@ -2173,6 +2242,7 @@ u8 GetNumBattlePyramidObjectEvents(void)
 
 static void InitPyramidBagItems(enum FrontierLevelMode lvlMode)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
@@ -2183,10 +2253,12 @@ static void InitPyramidBagItems(enum FrontierLevelMode lvlMode)
 
     AddPyramidBagItem(ITEM_HYPER_POTION, 1);
     AddPyramidBagItem(ITEM_ETHER, 1);
+#endif // siliconFrontier
 }
 
 u16 GetBattlePyramidPickupItemId(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int rand;
     u32 i;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -2210,4 +2282,7 @@ u16 GetBattlePyramidPickupItemId(void)
         return sPickupItemsLvlOpen[round][i];
     else
         return sPickupItemsLvl50[round][i];
+#else // siliconFrontier
+        return 0;
+#endif // siliconFrontier
 }

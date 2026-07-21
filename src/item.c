@@ -664,6 +664,7 @@ u16 CountTotalItemQuantityInBag(enum Item itemId)
 
 static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -685,11 +686,13 @@ static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count)
         }
     }
 
+#endif // siliconFrontier
     return FALSE;
 }
 
 static bool32 CheckPyramidBagHasSpace(enum Item itemId, u16 count)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -710,12 +713,14 @@ static bool32 CheckPyramidBagHasSpace(enum Item itemId, u16 count)
                 return TRUE;
         }
     }
+#endif // siliconFrontier
 
     return FALSE;
 }
 
 bool32 AddPyramidBagItem(enum Item itemId, u16 count)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 i;
 
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
@@ -790,10 +795,14 @@ bool32 AddPyramidBagItem(enum Item itemId, u16 count)
         Free(newQuantities);
         return FALSE;
     }
+#else // siliconFrontier
+        return FALSE;
+#endif // siliconFrontier
 }
 
 bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 i;
 
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
@@ -861,6 +870,9 @@ bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
             return FALSE;
         }
     }
+#else // siliconFrontier
+            return FALSE;
+#endif // siliconFrontier
 }
 
 static u16 SanitizeItemId(enum Item itemId)

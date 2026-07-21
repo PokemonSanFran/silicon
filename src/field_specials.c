@@ -2288,6 +2288,7 @@ void UpdateFrontierManiac(u16 daysSince)
 
 void ShowFrontierManiacMessage(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] =
     {
         [FRONTIER_MANIAC_TOWER_SINGLES] =
@@ -2431,11 +2432,13 @@ void ShowFrontierManiacMessage(void)
     for (i = 0; i < FRONTIER_MANIAC_MESSAGE_COUNT - 1 && sFrontierManiacStreakThresholds[facility][i] < winStreak; i++);
 
     ShowFieldMessage(sFrontierManiacMessages[facility][i]);
+#endif // siliconFrontier
 }
 
 // gSpecialVar_0x8005 and 0x8006 here are used by MoveElevator
 void BufferBattleTowerElevatorFloors(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     static const u16 sBattleTowerStreakThresholds[] = {
         7, 14, 21, 28, 35, 49, 63, 77, 91, 0
     };
@@ -2463,6 +2466,7 @@ void BufferBattleTowerElevatorFloors(void)
 
     gSpecialVar_0x8005 = 4;
     gSpecialVar_0x8006 = 12;
+#endif // siliconFrontier
 }
 
 // Scrollable Multichoice task data defines
@@ -3205,7 +3209,7 @@ void GiveFrontierBattlePoints(u32 amount)
     if (pointsToBeSet > MAX_BATTLE_FRONTIER_POINTS)
         pointsToBeSet = MAX_BATTLE_FRONTIER_POINTS;
 
-    gSaveBlock2Ptr->frontier.cardBattlePoints = pointsToBeSet;
+    //gSaveBlock2Ptr->frontier.cardBattlePoints = pointsToBeSet; siliconMerge
     gSaveBlock2Ptr->frontier.battlePoints = pointsToBeSet;
 	/*
 	    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
