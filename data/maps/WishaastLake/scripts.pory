@@ -14,8 +14,11 @@ script WishaastLake_ObjectVisibility_Script {
 	{
 		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_ELEANOR)
 	}
+	else
+	{
+		setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_VIGRIM)
+	}
 
-    setvar(VAR_OBJ_GFX_ID_1,OBJ_EVENT_GFX_VIGRIM)
     callnative(Script_ShouldShowVigrim)
     call_if_eq(VAR_RESULT,FALSE,Manhunt_HideVigrim_Script)
 }
