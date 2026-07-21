@@ -47,7 +47,7 @@ script TirabudinPlace_Gym_BDRematch_Script{
 
 script TirabudinPlace_Gym_PreRematch_Dialogue{
     msgbox(format("{PLAYER}! So glad I don't have to hold back anymore... and I can break out the real good batches!"),MSGBOX_NPC,SPEAKER_BD)
-    trainerbattle_no_intro(TRAINER_DRUG_BD,gText_TirabudinPlace_Gym_IShouldTryBattlingSober)
+    trainerbattle_no_intro(TRAINER_INVERSEHALLUCINOGENIC_BD,gText_TirabudinPlace_Gym_IShouldTryBattlingSober)
     goto(TirabudinPlace_Gym_PostRematch_Dialogue)
 }
 
