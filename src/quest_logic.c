@@ -1975,6 +1975,9 @@ bool32 ShouldShowVigrim(void)
     if (VarGet(VAR_STORYLINE_STATE) < STORY_EAST_RESIDO_COMPLETE)
         return TRUE;
 
+    if ((VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR) && (IsQuestCompletedState(QUEST_PERSUASIVEPASSENGER)))
+        return TRUE;
+
     return FALSE;
 }
 
