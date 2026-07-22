@@ -85,10 +85,8 @@ static void InitPalaceChallenge(void)
 {
 #if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-#endif // siliconFrontier
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;

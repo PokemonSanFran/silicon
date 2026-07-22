@@ -40,7 +40,9 @@ EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 EWRAM_DATA static u8 sLvlMode = 0;
+#endif // siliconFrontier
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;

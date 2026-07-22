@@ -38,7 +38,9 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool8 useBetterRange);
+#endif // siliconFrontier
 static enum FactoryStyle GetMoveBattleStyle(enum Move move);
 
 // Number of moves needed on the team to be considered using a certain battle style
@@ -732,6 +734,7 @@ void FillFactoryBrainParty(void)
 #endif // siliconFrontier
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool8 useBetterRange)
 {
     u16 numMons, monId;
@@ -770,6 +773,7 @@ static u16 GetFactoryMonId(enum FrontierLevelMode lvlMode, u8 challengeNum, bool
 
     return monId;
 }
+#endif // siliconFrontier
 
 u8 GetNumPastRentalsRank(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
@@ -831,6 +835,7 @@ void SetMonMoveAvoidReturn(struct Pokemon *mon, enum Move moveArg, u8 moveSlot)
     SetMonMoveSlot(mon, move, moveSlot);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 {
     u8 i;
@@ -841,7 +846,6 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     #ifdef BUGFIX
         enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -855,7 +859,6 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
             fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
         else
             fixedIV = GetFactoryMonFixedIV(challengeNum, TRUE); // Last trainer in challenge uses higher IVs
-#endif // siliconFrontier
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -901,6 +904,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
                 &gParties[B_TRAINER_OPPONENT_A][firstMonId + i]);
     }
 }
+#endif // siliconFrontier
 
 void FillFactoryTrainerParty(void)
 {

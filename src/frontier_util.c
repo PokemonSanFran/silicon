@@ -98,7 +98,9 @@ static void ShowFactoryResultsWindow(u8);
 static void ShowArenaResultsWindow(void);
 static void ShowPyramidResultsWindow(void);
 static void ShowLinkContestResultsWindow(void);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void CopyFrontierBrainText(bool8 playerWonText);
+#endif // siliconFrontier
 static u16 *MakeCaughtBannesSpeciesList(u32 totalBannedSpecies);
 static void PrintBannedSpeciesName(u8 windowId, u32 itemId, u8 y);
 static void Task_BannedSpeciesWindowInput(u8 taskId);
@@ -1169,18 +1171,15 @@ static void ShowTowerResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 // Battle Dome records.
 static u16 DomeGetWinStreak(u8 battleMode, enum FrontierLevelMode lvlMode)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
-#else // siliconFrontier
-        return 0;
-#endif // siliconFrontier
 }
 
 static void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
@@ -1217,6 +1216,7 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, enum FrontierLevelMode l
     else
         PrintTwoStrings(gText_Prev, gText_ClearStreak, winStreak, x1, x2, y);
 }
+#endif // siliconFrontier
 
 static void ShowDomeResultsWindow(u8 battleMode)
 {
@@ -1324,18 +1324,15 @@ static void ShowPalaceResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 // Battle Pike records.
 static u16 PikeGetWinStreak(enum FrontierLevelMode lvlMode)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     if (winStreak > MAX_STREAK)
         return MAX_STREAK;
     else
         return winStreak;
-#else // siliconFrontier
-        return 0;
-#endif // siliconFrontier
 }
 
 static void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
@@ -1361,6 +1358,7 @@ static void PikePrintPrevOrCurrentStreak(enum FrontierLevelMode lvlMode, u8 x1, 
     else
         PrintTwoStrings(gText_Prev, gText_RoomsCleared, winStreak, x1, x2, y);
 }
+#endif // siliconFrontier
 
 static void ShowPikeResultsWindow(void)
 {
@@ -2097,6 +2095,7 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void AppendCaughtBannedMonSpeciesName(enum Species species, u8 count, s32 numBannedMonsCaught)
 {
     if (count == 1)
@@ -2140,6 +2139,7 @@ static void AppendIfValid(enum Species species, u16 heldItem, u16 hp, enum Front
     itemsArray[*count] = heldItem;
     (*count)++;
 }
+#endif // siliconFrontier
 
 // gSpecialVar_Result is the level mode before and after calls to this function
 // gSpecialVar_0x8004 is used to store the return value instead (TRUE if there are insufficient eligible mons)
@@ -2389,6 +2389,7 @@ static void SetFacilityBrainObjectEvent(void)
     SetFrontierBrainObjEventGfx(VarGet(VAR_FRONTIER_FACILITY));
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 // Battle Frontier Ranking Hall records.
 static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hallRecord, s32 hallFacilityId)
 {
@@ -2508,6 +2509,7 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
     Free(playerHallRecords);
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
 }
+#endif // siliconFrontier
 
 static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 {
@@ -2796,6 +2798,7 @@ s32 GetFronterBrainSymbol(void)
     return symbol;
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 // Called for intro speech as well despite the fact that its handled in the map scripts files instead
 static void CopyFrontierBrainText(bool8 playerWonText)
 {
@@ -2823,6 +2826,7 @@ static void CopyFrontierBrainText(bool8 playerWonText)
         break;
     }
 }
+#endif // siliconFrontier
 
 // Start siliconMerge
 

@@ -77,18 +77,24 @@ static void InitPyramidBagWindows(void);
 static void CreatePyramidBagSprite(void);
 static void CreateSwapLine(void);
 static void LoadPyramidBagPalette(void);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void ShakePyramidBag(void);
+#endif // siliconFrontier
 static void ShowNumToToss(void);
 static void CloseBattlePyramidBagTextWindow(void);
 static bool8 LoadPyramidBagGfx(void);
 static bool8 LoadPyramidBagMenu(void);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void ShowItemIcon(enum Item itemId, bool8 isAlt);
 static void CopyBagItemName(u8 *dst, enum Item itemId);
 static void FreeItemIconSpriteByAltId(u8);
+#endif // siliconFrontier
 static void PrintItemDescription(s32);
 static void PrintSelectorArrowAtPos(u8, u8);
 static void PyramidBagPrint(u8, const u8 *, u8, u8, u8, u8, u8, u8);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void PyramidBagPrint_Quantity(u8, const u8 *, u8, u8, u8, u8, u8, u8);
+#endif // siliconFrontier
 static u8 OpenMenuActionWindowById(u8);
 static void CloseMenuActionWindowById(u8);
 static void PrintMenuActionText_SingleRow(u8);
@@ -98,7 +104,9 @@ static void CreatePyramidBagYesNo(u8, const struct YesNoFuncTable *);
 static void DrawTossNumberWindow(u8);
 static void UpdateSwapLinePos(u8);
 static void SetSwapLineInvisibility(bool8);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void SpriteCB_BagWaitForShake(struct Sprite *);
+#endif // siliconFrontier
 static void BagAction_UseOnField(u8);
 static void BagAction_Toss(u8);
 static void BagAction_Give(u8);
@@ -617,6 +625,7 @@ static void SetBagItemsListTemplate(void)
 #endif // siliconFrontier
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void CopyBagItemName(u8 *dst, enum Item itemId)
 {
     if (GetItemPocket(itemId) == POCKET_BERRIES)
@@ -630,6 +639,7 @@ static void CopyBagItemName(u8 *dst, enum Item itemId)
         CopyItemName(itemId, dst);
     }
 }
+#endif // siliconFrontier
 
 static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
@@ -728,9 +738,9 @@ static void CreatePyramidBagInputTask(void)
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, gPyramidBagMenuState.scrollPosition, gPyramidBagMenuState.cursorPosition);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void SwapItems(u8 id1, u8 id2)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u16 temp;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -741,8 +751,8 @@ static void SwapItems(u8 id1, u8 id2)
 
     SWAP(itemIds[id1], itemIds[id2], temp);
     SWAP(quantities[id1], quantities[id2], temp);
-#endif // siliconFrontier
 }
+#endif // siliconFrontier
 
 static void MovePyramidBagItemSlotInList(u8 from, u8 to)
 {
@@ -783,9 +793,9 @@ static void MovePyramidBagItemSlotInList(u8 from, u8 to)
 #endif // siliconFrontier
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void CompactItems(void)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i, j;
     u16 *itemIds = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -810,8 +820,8 @@ static void CompactItems(void)
                 SwapItems(i, j);
         }
     }
-#endif // siliconFrontier
 }
+#endif // siliconFrontier
 
 void UpdatePyramidBagList(void)
 {
@@ -1499,10 +1509,12 @@ static void PyramidBagPrint(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpa
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors[colorTableId], speed, src);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void PyramidBagPrint_Quantity(u8 windowId, const u8 *src, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorTableId)
 {
     AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, letterSpacing, lineSpacing, sTextColors[colorTableId], speed, src);
 }
+#endif // siliconFrontier
 
 static void DrawTossNumberWindow(u8 windowId)
 {
@@ -1560,6 +1572,7 @@ static void CloseBattlePyramidBagTextWindow(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void FreeItemIconSprite(u8 spriteArrId)
 {
     u8 *spriteId = &gPyramidBagMenu->spriteIds[spriteArrId];
@@ -1574,6 +1587,7 @@ static void FreeItemIconSprite(u8 spriteArrId)
         *spriteId = SPRITE_NONE;
     }
 }
+#endif // siliconFrontier
 
 static void LoadPyramidBagPalette(void)
 {
@@ -1592,6 +1606,7 @@ static void CreatePyramidBagSprite(void)
     *spriteId = CreateSprite(&sSpriteTemplate_PyramidBag, 68, 56, 0);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void ShakePyramidBag(void)
 {
     struct Sprite *sprite = &gSprites[gPyramidBagMenu->spriteIds[PBAG_SPRITE_BAG]];
@@ -1633,6 +1648,7 @@ static void FreeItemIconSpriteByAltId(bool8 isAlt)
 {
     FreeItemIconSprite(isAlt + PBAG_SPRITE_ITEM_ICON);
 }
+#endif // siliconFrontier
 
 static void CreateSwapLine(void)
 {

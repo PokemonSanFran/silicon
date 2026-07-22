@@ -864,10 +864,10 @@ u16 LocalIdToHillTrainerId(u8 localId)
 
 bool8 GetHillTrainerFlag(u8 objectEventId)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
     u8 bitId = gObjectEvents[objectEventId].localId - 1 + trainerIndexStart;
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     return gSaveBlock2Ptr->frontier.trainerFlags & (1u << bitId);
 #else // siliconFrontier
     return FALSE;
@@ -876,10 +876,10 @@ bool8 GetHillTrainerFlag(u8 objectEventId)
 
 void SetHillTrainerFlag(void)
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i;
     u8 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
     {
         if (gSaveBlock2Ptr->frontier.trainerIds[i] == TRAINER_BATTLE_PARAM.opponentA)

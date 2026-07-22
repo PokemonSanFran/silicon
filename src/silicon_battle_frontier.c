@@ -14,9 +14,9 @@ void SiliconFrontier_SetNumberBattles(enum SiliconFrontierFacility facility, enu
 u16 SiliconFrontier_GetNumberAllBattles(void)
 {
     u32 total = 0;
-    (for enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
+    for (enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
     {
-        (for enum SiliconFrontierChallengeType type = 0; type < SILICON_FRONTIER_CHALLENGE_TYPE_COUNT; type++)
+        for (enum SiliconFrontierChallengeType type = 0; type < SILICON_FRONTIER_CHALLENGE_TYPE_COUNT; type++)
         {
             total += SiliconFrontier_GetNumberBattles(facility,type);
         }
@@ -86,7 +86,7 @@ void SiliconFrontier_SetRemainingHeals(u32 value)
     gSaveBlock2Ptr->frontier.remainingSparringHeals = value;
 }
 
-u8 SiliconFrontier_ResetRemainingHeals(void)
+void SiliconFrontier_ResetRemainingHeals(void)
 {
     SiliconFrontier_SetRemainingHeals(RESTRICTED_SPARRING_MAX_HEALS_COUNT);
 }
@@ -121,7 +121,7 @@ void SiliconFrontier_SetSelectedPartyMon(u32 saveBlockSlot, u32 partySlot)
     gSaveBlock2Ptr->frontier.selectedPartyMons[saveBlockSlot] = partySlot;
 }
 
-void SiliconFrontier_GetSelectedPartyMon(u32 saveBlockSlot)
+u32 SiliconFrontier_GetSelectedPartyMon(u32 saveBlockSlot)
 {
     return gSaveBlock2Ptr->frontier.selectedPartyMons[saveBlockSlot];
 }

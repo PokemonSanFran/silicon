@@ -56,7 +56,9 @@ static void GenerateInitialRentalMons(void);
  *
  */
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static u16 sRandMonId;
+#endif // siliconFrontier
 
 void static (*const sVerdanturfTentFuncs[])(void) =
 {

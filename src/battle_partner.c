@@ -25,8 +25,12 @@ void FillPartnerParty(u16 trainerId)
 {
     s32 i, j, k;
     u32 firstIdPart = 0, secondIdPart = 0, thirdIdPart = 0;
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u32 ivs, level, personality;
     u16 monId;
+#else // siliconFrontier
+    u32 personality;
+#endif // siliconFrontier
     u32 otID;
     u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
@@ -123,9 +127,9 @@ void FillPartnerParty(u16 trainerId)
         // Scrapped, lol.
         trainerName[0] = gGameLanguage;
     }
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
         level = SetFacilityPtrsGetLevel();
         ivs = GetFrontierTrainerFixedIvs(trainerId);
         otID = Random32();
@@ -139,8 +143,8 @@ void FillPartnerParty(u16 trainerId)
             j = IsFrontierTrainerFemale(trainerId);
             SetMonData(&gParties[B_TRAINER_PARTNER][i], MON_DATA_OT_GENDER, &j);
         }
-    }
 #endif // siliconFrontier
+    }
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         trainerId -= TRAINER_RECORD_MIXING_FRIEND;

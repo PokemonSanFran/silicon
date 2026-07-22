@@ -188,7 +188,9 @@ static void Select_Task_FadeSpeciesName(u8);
 static void Select_Task_OpenChosenMonPics(u8);
 static void Select_Task_HandleChooseMons(u8);
 static void Select_Task_HandleMenu(u8);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void CreateFrontierFactorySelectableMons(u8);
+#endif
 static void CreateSlateportTentSelectableMons(u8);
 static void Select_SetBallSpritePaletteNum(u8);
 static void Select_ErasePopupMenu(u8);
@@ -1710,9 +1712,9 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #undef STATE_MENU_REINIT
 #undef STATE_MENU_RESHOW
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     u8 i = 0;
     u8 ivs = 0;
     u8 level = 0;
@@ -1744,8 +1746,8 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
                 level, ivs, otId, FLAG_FRONTIER_MON_FACTORY,
                 &sFactorySelectScreen->mons[i + firstMonId].monData);
     }
-#endif // siliconFrontier
 }
+#endif // siliconFrontier
 
 static void CreateSlateportTentSelectableMons(u8 firstMonId)
 {

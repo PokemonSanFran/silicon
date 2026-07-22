@@ -82,9 +82,11 @@ static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u8 healCount);
 static void Task_DoStatusInflictionScreenFlash(u8 taskId);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 AtLeastTwoAliveMons(void);
 static u8 SpeciesToPikeMonId(enum Species species);
 static bool8 CanEncounterWildMon(u8 monLevel);
+#endif
 static u8 GetPikeQueenFightType(u8);
 static bool8 StatusInflictionFadeOut(struct Task *task);
 static bool8 StatusInflictionFadeIn(struct Task *task);
@@ -857,6 +859,7 @@ bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
     return ret;
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 DoesTypePreventStatus(enum Species species, u32 status)
 {
     bool8 ret = FALSE;
@@ -887,7 +890,9 @@ static bool8 DoesTypePreventStatus(enum Species species, u32 status)
     }
     return ret;
 }
+#endif // siliconFrontier
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 TryInflictRandomStatus(void)
 {
     u8 j, i;
@@ -903,13 +908,11 @@ static bool8 TryInflictRandomStatus(void)
 
     Shuffle(indices, FRONTIER_PARTY_SIZE, sizeof(indices[0]));
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 9)
         count = 2;
     else
-#endif // siliconFrontier
         count = 3;
 
     status = 0;
@@ -995,20 +998,20 @@ static bool8 TryInflictRandomStatus(void)
 
     return TRUE;
 }
+#endif // siliconFrontier
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 AtLeastOneHealthyMon(void)
 {
     u8 i;
     u8 healthyMonsCount;
     u8 count;
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         count = 1;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 9)
         count = 2;
     else
-#endif // siliconFrontier
         count = 3;
 
     healthyMonsCount = 0;
@@ -1029,6 +1032,7 @@ static bool8 AtLeastOneHealthyMon(void)
     else
         return TRUE;
 }
+#endif // siliconFrontier
 
 static u8 GetNextRoomType(void)
 {
@@ -1511,7 +1515,7 @@ static void BufferTrainerIntro(void)
             FrontierSpeechToString(gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentB].speechBefore);
     }
 }
-
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 AtLeastTwoAliveMons(void)
 {
     struct Pokemon *mon;
@@ -1530,6 +1534,7 @@ static bool8 AtLeastTwoAliveMons(void)
     else
         return TRUE;
 }
+#endif // siliconFrontier
 
 static u8 GetPikeQueenFightType(u8 nextRoom)
 {
@@ -1672,6 +1677,7 @@ static void InitPikeChallenge(void)
 #endif // siliconFrontier
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 CanEncounterWildMon(u8 enemyMonLevel)
 {
     if (!GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_EGG))
@@ -1701,3 +1707,4 @@ static u8 SpeciesToPikeMonId(enum Species species)
 
     return ret;
 }
+#endif

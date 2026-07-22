@@ -88,7 +88,9 @@ static void ClearPyramidPartyHeldItems(void);
 static void SetPyramidFloorPalette(void);
 static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void InitPyramidBagItems(enum FrontierLevelMode lvlMode);
+#endif // siliconFrontier
 static u8 GetPyramidFloorTemplateId(void);
 static u8 GetPostBattleDirectionHintTextIndex(int *, u8, u8);
 static void Task_SetPyramidFloorPalette(u8);
@@ -99,7 +101,9 @@ static void SetPyramidObjectPositionsUniformly(u8);
 static bool8 SetPyramidObjectPositionsInAndNearSquare(u8, u8);
 static bool8 SetPyramidObjectPositionsNearSquare(u8, u8);
 static bool8 TrySetPyramidObjectEventPositionInSquare(u8, u8 *, u8, u8);
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u8);
+#endif // siliconFrontier
 
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.
@@ -1758,9 +1762,9 @@ static void UNUSED BattlePyramidRetireChallenge(void)
     ScriptContext_SetupScript(BattlePyramid_Retire);
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static u16 GetUniqueTrainerId(u8 objectEventId)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
     u16 trainerId;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1792,10 +1796,8 @@ static u16 GetUniqueTrainerId(u8 objectEventId)
     }
 
     return trainerId;
-#else // siliconFrontier
-    return 0;
-#endif // siliconFrontier
 }
+#endif // siliconFrontier
 
 void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPosition)
 {
@@ -2144,9 +2146,9 @@ static bool8 TrySetPyramidObjectEventPositionInSquare(u8 objType, u8 *floorLayou
     return TRUE;
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8 *floorLayoutOffsets, u8 squareId, u8 objectEventId)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i, j;
     const struct MapHeader *mapHeader;
     struct ObjectEventTemplate *floorEvents = gSaveBlock1Ptr->objectEventTemplates;
@@ -2186,9 +2188,9 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8
         }
     }
 
-#endif // siliconFrontier
     return TRUE;
 }
+#endif // siliconFrontier
 
 static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
 {
@@ -2240,9 +2242,9 @@ u8 GetNumBattlePyramidObjectEvents(void)
     return i;
 }
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 static void InitPyramidBagItems(enum FrontierLevelMode lvlMode)
 {
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     int i;
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
@@ -2253,8 +2255,8 @@ static void InitPyramidBagItems(enum FrontierLevelMode lvlMode)
 
     AddPyramidBagItem(ITEM_HYPER_POTION, 1);
     AddPyramidBagItem(ITEM_ETHER, 1);
-#endif // siliconFrontier
 }
+#endif // siliconFrontier
 
 u16 GetBattlePyramidPickupItemId(void)
 {
