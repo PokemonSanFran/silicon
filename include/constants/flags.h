@@ -332,10 +332,10 @@
 #define FLAG_TREE_PLACEHOLDER_49                                     0xA1
 #define FLAG_TREE_PLACEHOLDER_50                                     0xA2
 #define FLAG_TREE_PLACEHOLDER_51                                     0xA3
-#define FLAG_SILICON_UNUSED_0xA4                                     0xA4
-#define FLAG_SILICON_UNUSED_0xA5                                     0xA5
-#define FLAG_SILICON_UNUSED_0xA6                                     0xA6
-#define FLAG_SILICON_UNUSED_0xA7                                     0xA7
+#define FLAG_TALKED_TO_BD_POSTGAME                                   0xA4
+#define FLAG_TALKED_TO_TALA_POSTGAME                                 0xA5
+#define FLAG_TALKED_TO_MAGNUS_POSTGAME                               0xA6
+#define FLAG_TALKED_TO_FRANK_POSTGAME                                0xA7
 #define FLAG_SILICON_UNUSED_0xA8                                     0xA8
 #define FLAG_SILICON_UNUSED_0xA9                                     0xA9
 #define FLAG_SILICON_UNUSED_0xAA                                     0xAA
@@ -2772,10 +2772,10 @@
 #define FLAG_DAILY_QUEST_KITCHENVOLUNTEERING                         (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_ELEANOR_REMATCH                                   (DAILY_FLAGS_START + 0x2)
 #define FLAG_DAILY_KEIYING_REMATCH                                   (DAILY_FLAGS_START + 0x3)
-#define FLAG_SILICON_UNUSED_0x924                                    (DAILY_FLAGS_START + 0x4)
-#define FLAG_SILICON_UNUSED_0x925                                    (DAILY_FLAGS_START + 0x5)
-#define FLAG_SILICON_UNUSED_0x926                                    (DAILY_FLAGS_START + 0x6)
-#define FLAG_SILICON_UNUSED_0x927                                    (DAILY_FLAGS_START + 0x7)
+#define FLAG_DAILY_BD_REMATCH                                        (DAILY_FLAGS_START + 0x4)
+#define FLAG_DAILY_TALA_REMATCH                                      (DAILY_FLAGS_START + 0x5)
+#define FLAG_DAILY_MAGNUS_REMATCH                                    (DAILY_FLAGS_START + 0x6)
+#define FLAG_DAILY_FRANK_REMATCH                                     (DAILY_FLAGS_START + 0x7)
 #define FLAG_SILICON_UNUSED_0x928                                    (DAILY_FLAGS_START + 0x8)
 #define FLAG_SILICON_UNUSED_0x929                                    (DAILY_FLAGS_START + 0x9)
 #define FLAG_SILICON_UNUSED_0x92A                                    (DAILY_FLAGS_START + 0xA)
