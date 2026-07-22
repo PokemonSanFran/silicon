@@ -6,12 +6,12 @@ const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 
 script TwoHoursAgo_ObjectSetUp
 {
-    setflag(FLAG_HIDE_CHARLOTTE)
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_CHARLOTTE)
     setobjectmovementtype(OLIVER,MOVEMENT_TYPE_WANDER_AROUND)
     special(GetNumberOfBadges)
     if (var(VAR_RESULT) > 0)
     {
-            setflag(FLAG_HIDE_OLIVER)
+        setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
     }
 }
 

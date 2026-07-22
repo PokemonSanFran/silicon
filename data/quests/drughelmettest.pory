@@ -39,6 +39,9 @@ script Quest_DrugHelmetTest_Dialogue_StartQuest
 
 script Quest_DrugHelmetTest_Dialogue_Active
 {
+	cleartrainerflag(TRAINER_DRUGHELMETTESTER_1)
+	cleartrainerflag(TRAINER_DRUGHELMETTESTER_2)
+	cleartrainerflag(TRAINER_DRUGHELMETTESTER_3)
     msgbox(format("You’re back! I hope you’re ready to tackle these head on."),MSGBOX_DEFAULT,SPEAKER_DRUG_HELMET_TESTER)
     msgbox(format("I’ll manage, I was just a little disoriented."),MSGBOX_AUTOCLOSE,SPEAKER_ALICIA,0,EMOTE_SWEAT,0)
     waitmessage
@@ -51,7 +54,7 @@ script Quest_DrugHelmetTest_Script_RewardQuest
     checkitemspace(ITEM_QUEST_DRUGHELMETTEST_REWARD,5)
     if(!var(VAR_RESULT))
     {
-        msgbox(format("Swing by once you’ve got some space. I have a reward with your name on it?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+        msgbox(format("Swing by once you’ve got some space. I have a reward with your name on it!"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
     }
     else
     {
@@ -127,6 +130,8 @@ script Quest_DrugHelmetTest_Script_PostFirstTestBattle
     else
     {
         msgbox(format("Did we juice it up too much?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+		closemessage
+		bypass_healblock
     }
     releaseall
     end
@@ -166,6 +171,8 @@ script Quest_DrugHelmetTest_Script_PostSecondTestBattle
     else
     {
         msgbox(format("Should we have taken it a little lower?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+		closemessage
+		bypass_healblock
     }
     releaseall
     end
@@ -206,6 +213,8 @@ script Quest_DrugHelmetTest_Script_PostThirdTestBattle
     else
     {
         msgbox(format("Did I overload your circuit or the helmet’s?"),MSGBOX_AUTOCLOSE,SPEAKER_DRUG_HELMET_TESTER)
+		closemessage
+		bypass_healblock
     }
     releaseall
     end

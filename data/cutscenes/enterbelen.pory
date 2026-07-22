@@ -532,7 +532,7 @@ script EnterBelen_BelenDefeated_Script
     closemessage
     special(GetNumberOfBadges)
     call_if_eq(VAR_RESULT,1,EnterBelen_ExplainBuzzr_Dialogue)
-    tweetfanfare(TWEET_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
+    zapfanfare(ZAP_GYM_MERMEREZA_CITY_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM01)
     msgbox(format("Oh, the food!"),,SPEAKER_BELEN)
     closemessage
@@ -547,8 +547,8 @@ script EnterBelen_BelenDefeated_Script
 
 script EnterBelen_ExplainBuzzr_Dialogue
 {
-    msgbox(format("I'll serve up that tweet now!"),,SPEAKER_BELEN)
-    msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
+    msgbox(format("I'll serve up that zap now!"),,SPEAKER_BELEN)
+    msgbox(format("What's a zap?"),,SPEAKER_ALICIA)
     msgbox(format("You haven't tasted the wonders of Buzzr?"),,SPEAKER_BELEN)
     msgbox(format("Everybody in the region uses the app! You can send messages and post updates about your world. In the SharpRise Capital League, when you defeat a Gym Leader, we celebrate with a post on Buzzr! When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_BELEN)
     call(EnterBelen_DownloadBuzzr_Dialogue)

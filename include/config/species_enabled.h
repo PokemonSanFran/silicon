@@ -69,7 +69,7 @@
 #define P_FAMILY_NIDORAN                 P_GEN_1_POKEMON
 #define P_FAMILY_CLEFAIRY                P_GEN_1_POKEMON
 #define P_FAMILY_VULPIX                  P_GEN_1_POKEMON
-#define P_FAMILY_JIGGLYPUFF              FALSE
+#define P_FAMILY_JIGGLYPUFF              P_GEN_1_POKEMON
 #define P_FAMILY_ZUBAT                   FALSE
 #define P_FAMILY_ODDISH                  FALSE
 #define P_FAMILY_PARAS                   P_GEN_1_POKEMON
@@ -172,7 +172,7 @@
 #define P_FAMILY_DELIBIRD                FALSE
 #define P_FAMILY_MANTINE                 FALSE
 #define P_FAMILY_SKARMORY                FALSE
-#define P_FAMILY_HOUNDOUR                FALSE
+#define P_FAMILY_HOUNDOUR                P_GEN_2_POKEMON
 #define P_FAMILY_PHANPY                  P_GEN_2_POKEMON
 #define P_FAMILY_STANTLER                P_GEN_2_POKEMON
 #define P_FAMILY_SMEARGLE                P_GEN_2_POKEMON
@@ -255,8 +255,8 @@
 #define P_FAMILY_KYOGRE                  FALSE
 #define P_FAMILY_GROUDON                 FALSE
 #define P_FAMILY_RAYQUAZA                FALSE
-#define P_FAMILY_JIRACHI                 P_GEN_3_POKEMON 
-#define P_FAMILY_DEOXYS                  FALSE
+#define P_FAMILY_JIRACHI                 P_GEN_3_POKEMON
+#define P_FAMILY_DEOXYS                  P_GEN_3_POKEMON
 
 #define P_FAMILY_TURTWIG                 P_GEN_4_POKEMON
 #define P_FAMILY_CHIMCHAR                FALSE
@@ -292,7 +292,7 @@
 #define P_FAMILY_UXIE                    FALSE
 #define P_FAMILY_MESPRIT                 FALSE
 #define P_FAMILY_AZELF                   FALSE
-#define P_FAMILY_DIALGA                  P_GEN_4_POKEMON 
+#define P_FAMILY_DIALGA                  P_GEN_4_POKEMON
 #define P_FAMILY_PALKIA                  FALSE
 #define P_FAMILY_HEATRAN                 FALSE
 #define P_FAMILY_REGIGIGAS               FALSE
@@ -332,7 +332,7 @@
 #define P_FAMILY_SANDILE                 FALSE
 #define P_FAMILY_DARUMAKA                FALSE
 #define P_FAMILY_MARACTUS                FALSE
-#define P_FAMILY_DWEBBLE                 FALSE
+#define P_FAMILY_DWEBBLE                 P_GEN_5_POKEMON
 #define P_FAMILY_SCRAGGY                 P_GEN_5_POKEMON
 #define P_FAMILY_SIGILYPH                P_GEN_5_POKEMON
 #define P_FAMILY_YAMASK                  P_GEN_5_POKEMON

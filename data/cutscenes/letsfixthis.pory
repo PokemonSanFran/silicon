@@ -37,7 +37,7 @@ script LetsFixThis_GetMessage_Dialogue
 
         playse(SE_POKENAV_CALL)
         waitse
-        showtweet(TWEET_STORY_WAREHOUSE_RAVE)
+        showzap(ZAP_STORY_WAREHOUSE_RAVE)
 
         msgbox(format("Oh, looks like we both got the same message… It's from The Tide Events account."),,SPEAKER_BAIYA_TIDE)
 

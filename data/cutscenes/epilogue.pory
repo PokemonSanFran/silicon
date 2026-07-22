@@ -112,10 +112,10 @@ script Epilogue_Dialogue_ConversationAboutProgress
     ))
     msgbox(text=format("...Thanks Tala."),speaker=SPEAKER_BAIYA,tail=TAIL_DEFAULT,emote=EMOTE_DEFAULT)
     closemessage
-    goto(Epilogue_Script_ShowTweetLeaveMap)
+    goto(Epilogue_Script_ShowZapLeaveMap)
 }
 
-script Epilogue_Script_ShowTweetLeaveMap
+script Epilogue_Script_ShowZapLeaveMap
 {
     fadescreenspeed(FADE_TO_BLACK,24)
 	clearflag(FLAG_DONT_TRANSITION_MUSIC)
@@ -129,7 +129,7 @@ script Epilogue_Script_ShowTweetLeaveMap
 
 script Epilogue_Script_GoToCredits
 {
-    showtweet(TWEET_STORY_EPILOGUE)
+    showzap(ZAP_STORY_EPILOGUE)
     endcutscene
     fadescreenswapbuffers(FADE_TO_BLACK)
     callnative(StartCredits)
@@ -140,7 +140,7 @@ script Epilogue_Script_GoToCredits
 
 script Epilogue_Script_WarpToBaiya
 {
-    marktweetread(TWEET_STORY_EPILOGUE)
+    markzapread(ZAP_STORY_EPILOGUE)
     fadeblackandsetremovewarpfadeflag
     warpsilent(MAP_HALAI_ISLAND_BAIYA,0)
     waitstate

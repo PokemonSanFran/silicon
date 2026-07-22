@@ -89,7 +89,7 @@ script TeachATrainerToFish_Script_GiveRod
     cueobjectplayer(LOCALID_GLAVEZ_POKEMON_CENTER_TEACHTRAINERFISHA)
     giveitem(ITEM_FISHING_ROD,1)
     openadventureguide(GUIDE_FISHING)
-    istweetread(TWEET_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY)
+    iszapread(ZAP_QUEST_TEACHATRAINERTOFISH_DOCUMENTARY)
     goto_if_eq(VAR_RESULT,TRUE,TeachATrainerToFish_Dialogue_AskPerfectCast_HasSeen)
     goto(TeachATrainerToFish_Dialogue_AskPerfectCast_HasNotSeen)
 }

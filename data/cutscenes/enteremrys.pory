@@ -86,7 +86,7 @@ script EnterEmrys_Defeated_Script {
     msgbox(format("Wow, I'll really need to re-think my tactical core values. Awesome battle, {PLAYER}!"),,SPEAKER_EMRYS)
     closemessage
     call(EnterEmrys_ExplainBuzzr_Dialogue)
-    tweetfanfare(TWEET_GYM_PERLACIA_CITY_BADGE,MUS_GET_BADGE)
+    zapfanfare(ZAP_GYM_PERLACIA_CITY_BADGE,MUS_GET_BADGE)
     giveitem(ITEM_TM34)
     setvar(VAR_TEMP_0,0)
     call(TryAutoSave)
@@ -103,7 +103,7 @@ script EnterEmrys_ExplainBuzzr_Dialogue {
     }
 
     msgbox(format("Let us record this achievement for the masses on Buzzr to see!"),,SPEAKER_EMRYS)
-    msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
+    msgbox(format("What's a zap?"),,SPEAKER_ALICIA)
     msgbox(format("No wonder you haven't properly accimlated!"),,SPEAKER_EMRYS)
     msgbox(format("Buzzr is a medium by which one can tap into the zzeitgiest of the region - everybody can use their phones to write history! Your spoils of victory in Resido's Pokémon League are posts from the Gym Leader.When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_EMRYS)
     call(EnterBelen_DownloadBuzzr_Dialogue)

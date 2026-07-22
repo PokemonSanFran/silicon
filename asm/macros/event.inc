@@ -2615,60 +2615,60 @@
 
 	@ Start buzzr
     @ Handles all functions related to buzzr
-    @ Takes a mode and a tweetId
-	.macro buzzr mode:req, tweetId:req
+    @ Takes a mode and a zapId
+	.macro buzzr mode:req, zapId:req
 	.byte SCR_OP_BUZZR
     .byte \mode
-    .2byte \tweetId
+    .2byte \zapId
 	.endm
 
-    @ Takes a tweetId as an input,
+    @ Takes a zapId as an input,
     @ returns the read status to VAR_RESULT
-    .macro istweetread tweetId:req
-	buzzr GET_READ \tweetId
+    .macro iszapread zapId:req
+	buzzr GET_READ \zapId
 	.endm
 
-    @ Takes a tweetId as an input,
-    @ marks that tweet as read
-    .macro marktweetread tweetId:req
-    buzzr MARK_READ \tweetId
+    @ Takes a zapId as an input,
+    @ marks that zap as read
+    .macro markzapread zapId:req
+    buzzr MARK_READ \zapId
 	.endm
 
-    @ Takes a tweetId as an input,
-    @ shows that tweet on the screeen.
-    @ after a button press, hides the tweet
-    .macro showtweet tweetId:req
+    @ Takes a zapId as an input,
+    @ shows that zap on the screeen.
+    @ after a button press, hides the zap
+    .macro showzap zapId:req
     closemessage
-    buzzr MARK_READ \tweetId
+    buzzr MARK_READ \zapId
     setflag FLAG_SYS_APP_BUZZR_GET
-	buzzr SHOW_TWEET \tweetId
+	buzzr SHOW_ZAP \zapId
     waitbuttonpress
-    buzzr HIDE_TWEET 0
-    buzzr CHECK_PIC \tweetId
-    setvar VAR_TEMP_1, \tweetId
+    buzzr HIDE_ZAP 0
+    buzzr CHECK_PIC \zapId
+    setvar VAR_TEMP_1, \zapId
     compare VAR_RESULT TRUE
     call_if_eq Buzzr_CheckPic_MacroScript
 	.endm
 
-    .macro call_if_tweet_read tweetId:req, dest:req
-	buzzr GET_READ \tweetId
+    .macro call_if_zap_read zapId:req, dest:req
+	buzzr GET_READ \zapId
     call_if_eq VAR_RESULT, TRUE, \dest
     .endm
 
-    .macro goto_if_tweet_read tweetId:req, dest:req
-	buzzr GET_READ \tweetId
+    .macro goto_if_zap_read zapId:req, dest:req
+	buzzr GET_READ \zapId
     goto_if_eq VAR_RESULT, TRUE, \dest
     .endm
 
-    .macro tweetfanfare tweetId:req, song:req
+    .macro zapfanfare zapId:req, song:req
     playfanfare \song
-    buzzr MARK_READ \tweetId
-	buzzr SHOW_TWEET \tweetId
+    buzzr MARK_READ \zapId
+	buzzr SHOW_ZAP \zapId
     waitfanfare
     waitbuttonpress
-    buzzr HIDE_TWEET 0
-    buzzr CHECK_PIC \tweetId
-    setvar VAR_TEMP_1, \tweetId
+    buzzr HIDE_ZAP 0
+    buzzr CHECK_PIC \zapId
+    setvar VAR_TEMP_1, \zapId
     compare VAR_RESULT TRUE
     call_if_eq Buzzr_CheckPic_MacroScript
 	.endm

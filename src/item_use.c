@@ -91,7 +91,6 @@ static void Task_StartUseRepel(u8);
 static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
 static void Task_UseLure(u8 taskId);
-static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 static void UNUSED ItemUseOnFieldCB_Honey(u8 taskId);
@@ -127,6 +126,7 @@ void Task_OpenRegisteredHexorb(u8 taskId);
 // End hexorb Branch
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CantUseHealingItems[] = _("Items that heal Pokemon are currently\ndisabled!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
@@ -175,7 +175,7 @@ static void SetUpItemUseCallback(u8 taskId)
         type = GetItemType(gSpecialVar_ItemId) - 1;
 
     // Start inventory
-    SetMainCallback2(sItemUseCallbacks[type]); //asdf
+    SetMainCallback2(sItemUseCallbacks[type]);
     /*
 
     if (gTasks[taskId].tUsingRegisteredKeyItem && type == (ITEM_USE_PARTY_MENU - 1))
@@ -262,7 +262,12 @@ static void DisplayCannotDismountBikeMessage(u8 taskId, bool8 isUsingRegisteredK
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, sText_CantDismountBike);
 }
 
-static void Task_CloseCantUseKeyItemMessage(u8 taskId)
+void ItemUseOutOfBattle_CannotUseHealingItem(u8 taskId)
+{
+    DisplayCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem, sText_CantUseHealingItems);
+}
+
+void Task_CloseCantUseKeyItemMessage(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, TRUE);
     DestroyTask(taskId);
@@ -908,7 +913,7 @@ static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gItemUseCB = ItemUseCB_Medicine; //asdf
+    gItemUseCB = ItemUseCB_Medicine;
 
     SetUpItemUseCallback(taskId);
 }

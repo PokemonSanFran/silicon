@@ -1,22 +1,28 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const CHARLOTTE = 1
 const OLIVER = 2
-const FLAG_HIDE_CHARLOTTE = FLAG_TEMP_1
-const FLAG_HIDE_OLIVER = FLAG_TEMP_2
 
-script AaandWereBack_ObjectSetUp_Script {
-    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE){
-        setflag(FLAG_HIDE_OLIVER)
+script AaandWereBack_ObjectSetUp_Script
+{
+    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE)
+    {
+        setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
     }
-    return
+
+    if (var(VAR_STORYLINE_STATE) >= STORY_FERRY_FIXED)
+    {
+        if (var(VAR_STORYLINE_STATE) != STORY_DEFEATED_GARBODOR)
+        {
+            setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_CHARLOTTE)
+            setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
+        }
+    }
 }
 
-script AaandWereBack_ObjectHide_Script {
-    if (var(VAR_STORYLINE_STATE) == STORY_FERRY_FIXED){
-        setflag(FLAG_HIDE_CHARLOTTE)
-        setflag(FLAG_HIDE_OLIVER)
-    }
-    return
+script AaandWereBack_ObjectHide_Script
+{
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_CHARLOTTE)
+    setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
 }
 
 script AaandWereBack_Monologue
@@ -66,7 +72,7 @@ script AaandWereBack_FerryRepaired_Dialogue {
         startcutscene(JUMPPLAYER_AAANDWEREBACK)
         setvar(VAR_STORYLINE_STATE,STORY_FERRY_FIXED)
         setvar(VAR_FERRY_STATE,FERRY_HALAI_ISLAND_AVAILABLE)
-        showtweet(TWEET_STORY_GRUNT_RESTORED)
+        showzap(ZAP_STORY_GRUNT_RESTORED)
         msgbox(format("That's a different notification..."),SPEAKER_ALICIA,TAIL_THOUGHT,EMOTE_CONFUSE)
         msgbox(format("Looks like east Resido is next! Too bad there's no ferry directly to the Gym in Chasilla..."),MSGBOX_DEFAULT,SPEAKER_ALICIA,TAIL_THOUGHT)
 

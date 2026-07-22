@@ -4,6 +4,7 @@
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_setup.h"
+#include "buzzr.h"
 #include "item.h"
 #include "main_menu.h"
 #include "malloc.h"
@@ -888,3 +889,36 @@ TEST("Battle strings fit on the battle message window")
     Free(battleString);
 }
 //*/
+
+TEST("Buzzr Zaps are not taller than max height")
+{
+    u32 i;
+    const u32 heightPx = ZAP_MAX_NUM_LINES;
+    enum BuzzrZapIds zap = ZAP_NONE;
+
+    StringCopy(gSaveBlock2Ptr->playerName,COMPOUND_STRING("////////////////"));
+
+    for (i = 1; i < ZAP_COUNT; i++)
+    {
+        PARAMETRIZE_LABEL("%S %d", GetContent(i),i) { zap = i; }
+    }
+    EXPECT_LE(GetNumContentLines(zap), heightPx);
+}
+
+TEST("Buzzr Usernames are not wider than max width")
+{
+    u32 i;
+    enum BuzzrUserIds user = BUZZR_USER_PLAYER;
+
+    const u32 widthPx = ZAP_USERNAME_WIDTH;
+    const u32 fontId = FONT_BUZZR_USER;
+    const u32 letterSpacing = GetFontAttribute(fontId,FONTATTR_LETTER_SPACING);
+
+    StringCopy(gSaveBlock2Ptr->playerName,COMPOUND_STRING("////////////////"));
+
+    for (i = 0; i < BUZZR_USER_COUNT; i++)
+    {
+        PARAMETRIZE_LABEL("%S %d", GetUsername(i),i) { user = i; }
+    }
+    EXPECT_LE(GetStringWidth(fontId,GetUsername(user),letterSpacing), widthPx);
+}

@@ -4,22 +4,24 @@
 #include "gba/types.h"
 #include "main.h"
 
-extern u8 gTweetOverworldWindowId;
+extern u8 gZapOverworldWindowId;
 
 void Task_OpenBuzzrFromStartMenu(u8 taskId);
 void CB2_BuzzrFromStartMenu(void);
 void LoadPictureFromOverworld(void);
-const u32* GetPictureTiles(u16 tweetId);
-bool32 Buzzr_IsTweetRead(u16 tweetId);
-void Buzzr_MarkTweetAsRead(u16 tweetId);
+const u32* GetPictureTiles(enum BuzzrZapIds zapId);
+bool32 Buzzr_IsZapRead(enum BuzzrZapIds zapId);
+void Buzzr_MarkZapAsRead(enum BuzzrZapIds zapId);
 void Buzzr_ResetSaveData(void);
-void Buzzr_ShowTweetOverworld(u16 tweetId);
-void Buzzr_HideTweetOverworld(void);
-void Buzzr_ShowPicOverworld(u16 tweetId);
+void Buzzr_ShowZapOverworld(enum BuzzrZapIds zapId);
+void Buzzr_HideZapOverworld(void);
+void Buzzr_ShowPicOverworld(enum BuzzrZapIds zapId);
 void Task_OpenBuzzrFromScript(u8 taskId);
-const u8 *GetUsername(u16 userId);
-bool32 IsVerified(u16 userId);
+const u8 *GetUsername(enum BuzzrUserIds userId);
+bool32 IsVerified(enum BuzzrUserIds userId);
 void PrintHeaderIcons(u8 windowId, const u8 *iconId, u16 x, u16 y);
+const u32 GetNumContentLines(enum BuzzrZapIds zapId);
+const u8 *GetContent(enum BuzzrZapIds zapId);
 
 struct Users // src/data/buzzr/users
 {
@@ -27,9 +29,9 @@ struct Users // src/data/buzzr/users
     bool32 isVerified;
 };
 
-struct Tweet
+struct Zap
 {
-    u16 userId;  // src/data/buzzr/users
+    enum BuzzrUserIds userId;  // src/data/buzzr/users
     const u8 *content; // src/data/buzzr/content
     const u32 *tiles; // src/data/buzzr/picture
     const u16 *tilemap;
@@ -37,11 +39,12 @@ struct Tweet
     void *criteria; // src/buzzr_criteria
     u16 quest; // include/constants/quests
     bool32 isPrivate;
-    u16 dislikeCount;
-    u16 likeCount;
+    const u8 *dislikeCount;
+    const u8 *likeCount;
+    bool32 shouldCorrupt;
 };
 
-struct TweetBackground
+struct ZapBackground
 {
     const u32 *tileset;
     const u32 *tilemap;
@@ -81,23 +84,23 @@ enum FilterActions
 enum BuzzrBackgroundTemplates
 {
     BG0_TEXT_CONTENT,
-    BG1_BACKGROUND_TWEETS,
+    BG1_BACKGROUND_ZAPS,
     BG2_BACKGROUND_UI,
     BG_BUZZR_COUNT,
 };
 
-enum TweetBackgroundConstants
+enum ZapBackgroundConstants
 {
-    TWEET_BG_0_LINE,
-    TWEET_BG_1_LINE,
-    TWEET_BG_2_LINE,
-    TWEET_BG_3_LINE,
-    TWEET_BG_4_LINE,
-    TWEET_BG_5_LINE,
-    TWEET_BG_6_LINE,
-    TWEET_BG_7_LINE,
-    TWEET_BG_8_LINE,
-    TWEET_BG_COUNT,
+    ZAP_BG_0_LINE,
+    ZAP_BG_1_LINE,
+    ZAP_BG_2_LINE,
+    ZAP_BG_3_LINE,
+    ZAP_BG_4_LINE,
+    ZAP_BG_5_LINE,
+    ZAP_BG_6_LINE,
+    ZAP_BG_7_LINE,
+    ZAP_BG_8_LINE,
+    ZAP_BG_COUNT,
 };
 
 enum BuzzrSpriteIDs
@@ -133,7 +136,7 @@ enum BuzzrWindowIds
 {
     BUZZR_WINDOW_HELP_BAR,
     BUZZR_WINDOW_HEADER,
-    BUZZR_WINDOW_TWEETS,
+    BUZZR_WINDOW_ZAPS,
     BUZZR_WINDOW_DUMMY,
     BUZZR_WINDOW_COUNT
 };

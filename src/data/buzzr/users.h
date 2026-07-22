@@ -5,6 +5,11 @@ const struct Users gBuzzrUsers[] =
         .username = COMPOUND_STRING("{PLAYER}"),
         .isVerified = FALSE,
     },
+    [BUZZR_USER_RSPCP] =
+    {
+        .username = COMPOUND_STRING("Anti-Pokemon Cruelty"),
+        .isVerified = FALSE,
+    },
     [BUZZR_USER_BAIYA] =
     {
         .username = COMPOUND_STRING("ResidoReal"),
@@ -168,6 +173,46 @@ const struct Users gBuzzrUsers[] =
     [BUZZR_USER_INSTALLNATUREPROBESWORKER] =
     {
         .username = COMPOUND_STRING("Installnatureprobesworker"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_SHARPRISE_EMPLOYEE_A] =
+    {
+        .username = COMPOUND_STRING("SharpestRiser"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_ELDERLY] =
+    {
+        .username = COMPOUND_STRING("OldGuy"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_ELDERLY_B] =
+    {
+        .username = COMPOUND_STRING("OldGuy2"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_RANDOM_MIDDLE_AGED] =
+    {
+        .username = COMPOUND_STRING("MiddleAged"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_SHARPRISE_LEAGUE_A] =
+    {
+        .username = COMPOUND_STRING("SharpriseLeague"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_GIRL] =
+    {
+        .username = COMPOUND_STRING("RandomGirl"),
+        .isVerified = TRUE,
+    },
+    [BUZZR_USER_SMOOTHIE_TRAINER] =
+    {
+        .username = COMPOUND_STRING("SmoothieTrainer"),
+        .isVerified = FALSE,
+    },
+    [BUZZR_USER_TIDE_MEMBER] =
+    {
+        .username = COMPOUND_STRING("Tide Member"),
         .isVerified = FALSE,
     },
 };

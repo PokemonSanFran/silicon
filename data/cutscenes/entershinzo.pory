@@ -38,7 +38,7 @@ script EnterShinzo_ShinzoDefeated_Script {
     msgbox(format("Thank you, {PLAYER}. You exploited my mistakes amazingly. I hope you're proud!"),,SPEAKER_SHINZO)
     closemessage
     call(EnterShinzo_ExplainBuzzr_Dialogue)
-    tweetfanfare(TWEET_GYM_TORA_TOWN_BADGE,MUS_OBTAIN_BADGE)
+    zapfanfare(ZAP_GYM_TORA_TOWN_BADGE,MUS_OBTAIN_BADGE)
     giveitem(ITEM_TM02)
     closemessage
     addvar(VAR_STORYLINE_STATE,1)
@@ -58,8 +58,8 @@ script EnterShinzo_ExplainBuzzr_Dialogue{
         return
     }
 
-    msgbox(format("You've earned a tweet from me."),,SPEAKER_SHINZO)
-    msgbox(format("What's a tweet?"),,SPEAKER_ALICIA)
+    msgbox(format("You've earned a zap from me."),,SPEAKER_SHINZO)
+    msgbox(format("What's a zap?"),,SPEAKER_ALICIA)
     msgbox(format("You've never experienced Buzzr? Maybe you're lucky."),,SPEAKER_SHINZO)
     msgbox(format("Buzzr lets you send messages and post updates. its good for keeping up with what regular people think. In this region's Pokémon League, you don't get Badges like back home. instead we post about it on Buzzr. When all the leaders have posted about you, you've qualified for the Championship."),,SPEAKER_SHINZO)
     call(EnterBelen_DownloadBuzzr_Dialogue)

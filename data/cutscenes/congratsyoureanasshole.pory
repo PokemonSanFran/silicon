@@ -75,7 +75,7 @@ script CongratsYoureanAsshole_FalseTimelineSplit_Script
         setvar(VAR_STORYLINE_STATE,STORY_START_FALSE_TIMELINE)
 
         fadescreen(FADE_TO_BLACK)
-        showtweet(TWEET_STORY_FALSETIMELINE)
+        showzap(ZAP_STORY_FALSETIMELINE)
         fadescreen(FADE_FROM_BLACK)
 
         msgbox(format("Thank you for that… worldwide, our message is getting positive reception, but within the region, there is still some negativity."),MSGBOX_DEFAULT,SPEAKER_RAMESH)

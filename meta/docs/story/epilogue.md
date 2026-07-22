@@ -25,7 +25,7 @@ if we want to tie the hellscape of the region together
 > 
 > Screen fades to black
 > 
-> ~~tweet~~ Zap appears on the screen, directed to Alicia from Baiya:
+> ~~zap~~ Zap appears on the screen, directed to Alicia from Baiya:
 > 
 > "We've got more work to do - let's get at it!"
 > 

@@ -207,7 +207,7 @@ script Quest_Psyop_Script_Interact_PsyoptargetC
     msgbox(format("I’ve been trying to get an Antique {STR_VAR_1} , but I’m not having any luck so far."),,SPEAKER_PSYOPTARGETC)
     msgbox(format("Did you know you can tell which ones are Antique Form by looking for a sticker on their underside? It’s a detail that’s very easy to miss."),,SPEAKER_PSYOPTARGETC)
 
-    istweetread(TWEET_QUEST_NPC_PSYOP)
+    iszapread(ZAP_QUEST_NPC_PSYOP)
     if (var(VAR_RESULT) == FALSE)
     {
         closemessage

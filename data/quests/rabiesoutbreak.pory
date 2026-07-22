@@ -31,7 +31,7 @@ script RabiesOutbreak_Reward_Dialogue
     msgbox(format("Oh, I wasn’t looking for anything, I was trying to help with the rabies outbreak."),,SPEAKER_ALICIA)
     msgbox(format("Rabies? Hold up, what in the world?"),,SPEAKER_ASPCAOFFICER,,EMOTE_SHOCK)
     msgbox(format("I read it online - let me show you."),,SPEAKER_ALICIA)
-    showtweet(TWEET_QUEST_NPC_RABIES)
+    showzap(ZAP_QUEST_NPC_RABIES)
     msgbox(format("Whoa, that’s way off the mark. No way that’s true."),,SPEAKER_ASPCAOFFICER,,EMOTE_LAUGH)
     msgbox(format("My crew found that {STR_VAR_1} here are prone to carrying Pokérus - it acts like a viral infection, but it speeds up growth. I’m here to dig into that situation."),,SPEAKER_ASPCAOFFICER)
     msgbox(format("But Pokérus ain’t nothing like rabies - it doesn't harm people or Pokemon so no cause for alarm."),,SPEAKER_ASPCAOFFICER)
