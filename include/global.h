@@ -558,7 +558,6 @@ struct RentalMon
     //u8 padding2[2];
 };
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 struct BattleDomeTrainer
 {
     u16 trainerId:10;
@@ -570,6 +569,7 @@ struct BattleDomeTrainer
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
 #define BATTLE_TOWER_RECORD_COUNT 5
 
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 struct BattleFrontier
 {
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
