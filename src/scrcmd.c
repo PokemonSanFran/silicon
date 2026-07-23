@@ -71,7 +71,7 @@
 #include "quest_logic.h"
 #include "buzzr.h"
 #include "pokevial.h"
-#include "options_visual.h"
+#include "options_visual.h" // timePrinting
 #include "qol_field_moves.h" // qol_field_moves
 #include "glass.h"
 #include "options_music.h"
