@@ -4022,6 +4022,7 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
     return FALSE;
 }
 
+// Start timePrinting
 void ScrFunc_timeprintingcurrent(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
@@ -4035,3 +4036,5 @@ void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
     u32 minutes = VarGet(ScriptReadHalfword(ctx));
     FormatGivenTimeForOutput(sScriptStringVars[stringVarIndex],hours,minutes);
 }
+// End timePrinting
+
