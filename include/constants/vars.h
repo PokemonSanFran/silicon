@@ -157,7 +157,8 @@
 #define VAR_NAVAL_BASE_STATE                              0x4074 // PSF Var
 #define VAR_AMIARGENTO_STATE                               0x4075 // PSF Var
 #define VAR_GYM_1_STATE                               0x4076 // PSF Var
-#define VAR_GYM_2_STATE                               0x4077 // PSF Var
+#define VAR_GYM_2_STATE                               VAR_CULTURAL_PURITY // PSF Var
+#define VAR_UNUSED_0x4077 0x4077 // PSF Var
 #define VAR_GYM_3_STATE                               0x4078 // PSF Var
 #define VAR_GYM_4_STATE                               0x4079 // PSF Var
 #define VAR_GYM_5_STATE                               0x407A // PSF Var
