@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_CHASILLA_GYM_PUA",
       "graphics_id": "OBJ_EVENT_GFX_PUA",
       "x": 4,
       "y": 2,

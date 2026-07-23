@@ -3,7 +3,7 @@ const SHINZO = 1
 
 script EnterShinzo_ShinzoIntro_Dialogue
 {
-	setvar(VAR_GYM_2_STATE, GYM_SAVE_BEFORE_LEADER)
+	setvar(VAR_GYM_2_STATE, TORA_GYM_SAVE_BEFORE_BATTLE)
 		msgbox(format("Congratulations on reaching the summit, {PLAYER}! I'm Shinzo."),MSGBOX_NPC,SPEAKER_SHINZO)
 		reveal(REVEAL_SHINZO)
 		msgbox(format("Most Trainers are totally worn out when they reach me. Are you a foreigner?"),,SPEAKER_SHINZO)
@@ -34,7 +34,7 @@ script EnterShinzo_StartGymBattle_Script
 script EnterShinzo_ShinzoDefeated_Script {
     lockall
     cleargymtrainersandgetbadge(GYM_SHINZO)
-    setvar(VAR_GYM_2_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_GYM_2_STATE,TORA_GYM_LEADER_DEFEATED)
     msgbox(format("Thank you, {PLAYER}. You exploited my mistakes amazingly. I hope you're proud!"),,SPEAKER_SHINZO)
     closemessage
     call(EnterShinzo_ExplainBuzzr_Dialogue)
@@ -47,6 +47,7 @@ script EnterShinzo_ShinzoDefeated_Script {
     call(TryAutoSave)
     call(AaandWereBack_Monologue)
     releaseall
+	clearflag(FLAG_TEMP_1)
     end
 }
 
@@ -69,8 +70,8 @@ script EnterShinzo_ExplainBuzzr_Dialogue{
 }
 
 script EnterShinzo_PostDefeat1_Dialogue {
-    setvar(VAR_GYM_2_STATE,GYM_EXPLAINED_BADGE_AND_TM)
         lockall
+		setflag(FLAG_TEMP_1)
         msgbox(format("Traded Pokémon up to Level Psfgymlevel2 will recognize your ShinzoBadge Badge and the skill it represents. That TM teaches Psfgymattacknum2, which does exactly what it sounds like."),MSGBOX_NPC,SPEAKER_SHINZO)
         closemessage
         releaseall

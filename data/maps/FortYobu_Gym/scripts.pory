@@ -1,4 +1,7 @@
 mapscripts FortYobu_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+		call(FortYobu_Gym_LeaderVisibility_Script)
+    }
 }
 
 script FortYobu_Gym_EventScript_1075163A
@@ -28,3 +31,28 @@ script FortYobu_Gym_EventScript_1114BC23
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
 }
+
+script FortYobu_Gym_LeaderVisibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_START_CHAMPIONSHIP)
+	{
+        return
+	}
+
+    call_if_quest_not_complete(QUEST_NERIENEQUEST2,Quest_Rematches_Script_HideNeriene)
+}
+
+script EnterNeriene_Event_Script {
+	goto_if_quest_complete(QUEST_NERIENEQUEST2,Rematches_Script_Neriene)
+    switch (var (VAR_GYM_5_STATE)) {
+    case GYM_SAVE_BEFORE_LEADER:
+        goto(EnterNeriene_StartBattle_Script)
+    case GYM_DEFEATED_LEADER:
+        goto(EnterNeriene_PostDefeat1_Dialogue)
+    case GYM_EXPLAINED_BADGE_AND_TM:
+        goto(EnterNeriene_PostDefeat2_Dialogue)
+    default:
+        goto(EnterNeriene_Intro_Dialogue)
+    }
+}
+

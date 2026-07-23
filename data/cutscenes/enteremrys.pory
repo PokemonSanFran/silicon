@@ -1,31 +1,33 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
-const EMRYS = 1
-const FLAG_HIDE_PUZZLE = FLAG_TEMP_1
-const FLAG_HIDE_EMRYS = FLAG_TEMP_3
 
-script EnterEmrys_LeaderPosition_Script{
-    switch (var (VAR_GYM_3_STATE)) {
-        case 0: return
-        case 1: setflag(FLAG_TEMP_1)
-        default: goto(EnterEmrys_StartBattle_ObjectSetup_Script)
+script EnterEmrys_LeaderPosition_Script
+{
+	goto_if_eq(VAR_GYM_3_STATE,PERLACIA_GYM_SAVE_BEFORE_BATTLE,EnterEmrys_StartBattle_ObjectSetup_Script)
 
-    }
+	if (var(VAR_GYM_3_STATE < PERLACIA_GYM_PUZZLE_COMPLETE))
+	{
+		return
+	}
+
+	setobjectflagfromlocalid(LOCALID_PERLACIA_GYM_PUZZLE_KID_3)
 }
 
-script EnterEmrys_ObjectSetUp_Script {
-    setobjectmovementtype(EMRYS, MOVEMENT_TYPE_FACE_LEFT)
+script EnterEmrys_ObjectSetUp_Script 
+{
+    setobjectmovementtype(LOCALID_PERLACIA_GYM_EMRYS, MOVEMENT_TYPE_FACE_LEFT)
 }
 
-script EnterEmrys_StartBattle_ObjectSetup_Script {
-    setflag(FLAG_TEMP_1)
-    setobjectxy(EMRYS, 10, 6)
-    setobjectxyperm(EMRYS, 10, 6)
-    setobjectmovementtype(EMRYS, MOVEMENT_TYPE_LOOK_AROUND)
+script EnterEmrys_StartBattle_ObjectSetup_Script 
+{
+	setobjectflagfromlocalid(LOCALID_PERLACIA_GYM_PUZZLE_KID_3)
+	setobjectxy(LOCALID_PERLACIA_GYM_EMRYS, 10, 6)
+	setobjectxyperm(LOCALID_PERLACIA_GYM_EMRYS, 10, 6)
+	setobjectmovementtype(LOCALID_PERLACIA_GYM_EMRYS, MOVEMENT_TYPE_LOOK_AROUND)
 }
 
 script AutomaticSolvePuzzle_Script {
     lock
-    setvar(VAR_GYM_3_STATE,GYM_PUZZLE_COMPLETE)
+    setvar(VAR_GYM_3_STATE,PERLACIA_GYM_PUZZLE_COMPLETE)
     msgbox(format("Puzzle is solved. Leave and come back."), MSGBOX_NPC)
     closemessage
     release
@@ -33,41 +35,27 @@ script AutomaticSolvePuzzle_Script {
 }
 
 script EnterEmrys_WalkToBattlefield_Script {
-    setvar(VAR_GYM_3_STATE, GYM_LEADER_ON_BATTLEFIELD)
+    setvar(VAR_GYM_3_STATE, PERLACIA_GYM_LEADER_ON_BATTLEFIELD)
     lock
     playse(SE_PIN)
-    applymovement(EMRYS, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_PERLACIA_GYM_EMRYS, Common_Movement_ExclamationMark)
     waitmovement(0)
-    applymovement(EMRYS, moves(walk_right * 9, walk_down, face_left, step_end))
+    applymovement(LOCALID_PERLACIA_GYM_EMRYS, moves(walk_right * 9, walk_down, face_left, step_end))
     waitmovement(0)
     releaseall
     end
 }
 
-script Emrys_Event_Script {
-    lockall
-    switch (var (VAR_GYM_3_STATE)) {
-    case 2:
-        goto(EnterEmrys_MuseumArrangement_Dialogue)
-    case 3:
-        goto(EnterEmrys_StartBattle_Script)
-    case 4:
-        goto(EnterEmrys_PostBattle_Dialogue)
-    case 5:
-        goto(EnterEmrys_PostBattle_Dialogue2)
-    }
-}
-
 script EnterEmrys_MuseumArrangement_Dialogue {
-    setvar(VAR_GYM_3_STATE,GYM_LEADER_ON_BATTLEFIELD)
+    setvar(VAR_GYM_3_STATE, PERLACIA_GYM_LEADER_ON_BATTLEFIELD)
     msgbox(format("I was thinking about the arrangement of the museum. Museums tend to organize through etic categories, but I always wonder... how far off are we from their emic counterparts...? Sorry, I'm Emrys, Chief of the Perlacia City Gym!"), MSGBOX_NPC,SPEAKER_EMRYS)
     reveal(REVEAL_EMRYS)
-    applymovement(EMRYS, moves(face_up, delay_16, face_down, delay_16, face_right, delay_16, face_left, step_end))
+    applymovement(LOCALID_PERLACIA_GYM_EMRYS, moves(face_up, delay_16, face_down, delay_16, face_right, delay_16, face_left, step_end))
     waitmovement(0)
     msgbox(format("Has your visit been a positive time investment? There was a ton of qualitative research into curating the best possible experience for both patrons and challengers."),,SPEAKER_EMRYS)
         msgbox(format("Uh... yup. Yeah. It's cool."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
     msgbox(format("I can hear the Orre in you. Enchanting."),,SPEAKER_EMRYS)
-    setvar(VAR_GYM_3_STATE,GYM_SAVE_BEFORE_LEADER)
+    setvar(VAR_GYM_3_STATE,PERLACIA_GYM_SAVE_BEFORE_BATTLE)
         startmenu_savescreen
     goto(EnterEmrys_StartBattle_Script)
 }
@@ -79,7 +67,7 @@ script EnterEmrys_StartBattle_Script {
 script EnterEmrys_Defeated_Script {
     lockall
     cleargymtrainersandgetbadge(GYM_EMRYS)
-    setvar(VAR_GYM_3_STATE,GYM_DEFEATED_LEADER)
+    setvar(VAR_GYM_3_STATE,PERLACIA_GYM_LEADER_DEFEATED)
     setvar(VAR_EMRYS_STATE,BATTLE_1_COMPLETE)
     addvar(VAR_STORYLINE_STATE, 1)
     call(WowYoureStrong_CheckCutsceneScript)
@@ -113,9 +101,9 @@ script EnterEmrys_ExplainBuzzr_Dialogue {
 }
 
 script EnterEmrys_PostBattle_Dialogue {
+	setflag(FLAG_TEMP_2)
 	bufferitemname(STR_VAR_1,ITEM_TM03)
 	buffermovename(STR_VAR_2,MOVE_ICE_SHARD)
-    setvar(VAR_GYM_3_STATE,GYM_EXPLAINED_BADGE_AND_TM)
     msgbox(format("{STR_VAR_1} is like a shaman in your pocket and will teach {STR_VAR_2}."), MSGBOX_NPC,SPEAKER_EMRYS)
         closemessage
     releaseall

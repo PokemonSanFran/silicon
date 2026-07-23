@@ -522,3 +522,395 @@ script Rematches_Script_AskFrankRematch
 	goto(Rematches_Script_AskFrankBattle)
 }
 
+script Quest_Rematches_Script_HideBelen
+{
+    setobjectflagfromlocalid(LOCALID_MERMEREZA_GYM_BELEN)
+}
+
+script Rematches_Script_Belen
+{
+    lock
+    if (defeated(TRAINER_FRANK))
+    {
+        goto(Rematches_Script_AskBelenRematch)
+    }
+    goto(Rematches_Script_AskBelenBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskBelenBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Belen asks player for battle."),MSGBOX_YESNO,SPEAKER_BELEN,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Belen tells the player to return when they're ready."),,SPEAKER_BELEN,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Belen says some words before the battle starts."),,SPEAKER_BELEN,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_BELEN_REMATCH,format(""))
+	setflag(FLAG_DAILY_BELEN_REMATCH)
+    goto(Rematches_Dialogue_BelenComeBack)
+}
+
+script Rematches_Dialogue_BelenComeBack
+{
+	lock
+	msgbox(format("Belen tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_BELEN,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskBelenRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Belen greets the player before challenging them to a battle."),,SPEAKER_BELEN,TAIL_TALK)
+	goto(Rematches_Script_AskBelenBattle)
+}
+
+script Quest_Rematches_Script_HideShinzo
+{
+    setobjectflagfromlocalid(LOCALID_TORAGYM_SHINZO)
+}
+
+script Rematches_Script_Shinzo
+{
+    lock
+    if (defeated(TRAINER_SHINZO_REMATCH))
+    {
+        goto(Rematches_Script_AskShinzoRematch)
+    }
+    goto(Rematches_Script_AskShinzoBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskShinzoBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Shinzo asks player for battle."),MSGBOX_YESNO,SPEAKER_SHINZO,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Shinzo tells the player to return when they're ready."),,SPEAKER_SHINZO,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Shinzo says some words before the battle starts."),,SPEAKER_SHINZO,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_SHINZO_REMATCH,format(""))
+	setflag(FLAG_DAILY_SHINZO_REMATCH)
+    goto(Rematches_Dialogue_ShinzoComeBack)
+}
+
+script Rematches_Dialogue_ShinzoComeBack
+{
+	lock
+	msgbox(format("Shinzo tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_SHINZO,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskShinzoRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Shinzo greets the player before challenging them to a battle."),,SPEAKER_SHINZO,TAIL_TALK)
+	goto(Rematches_Script_AskShinzoBattle)
+}
+
+script Quest_Rematches_Script_HideEmrys
+{
+    setobjectflagfromlocalid(LOCALID_PERLACIA_GYM_EMRYS)
+}
+
+script Rematches_Script_Emrys
+{
+    lock
+    if (defeated(TRAINER_EMRYS_REMATCH))
+    {
+        goto(Rematches_Script_AskEmrysRematch)
+    }
+    goto(Rematches_Script_AskEmrysBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskEmrysBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Emrys asks player for battle."),MSGBOX_YESNO,SPEAKER_EMRYS,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Emrys tells the player to return when they're ready."),,SPEAKER_EMRYS,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Emrys says some words before the battle starts."),,SPEAKER_EMRYS,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_EMRYS_REMATCH,format(""))
+	setflag(FLAG_DAILY_EMRYS_REMATCH)
+    goto(Rematches_Dialogue_EmrysComeBack)
+}
+
+script Rematches_Dialogue_EmrysComeBack
+{
+	lock
+	msgbox(format("Emrys tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_EMRYS,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskEmrysRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Emrys greets the player before challenging them to a battle."),,SPEAKER_EMRYS,TAIL_TALK)
+	goto(Rematches_Script_AskEmrysBattle)
+}
+
+script Quest_Rematches_Script_HidePua
+{
+    setobjectflagfromlocalid(LOCALID_CHASILLA_GYM_PUA)
+}
+
+script Rematches_Script_Pua
+{
+    lock
+    if (defeated(TRAINER_PUA_REMATCH))
+    {
+        goto(Rematches_Script_AskPuaRematch)
+    }
+    goto(Rematches_Script_AskPuaBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskPuaBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Pua asks player for battle."),MSGBOX_YESNO,SPEAKER_PUA,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Pua tells the player to return when they're ready."),,SPEAKER_PUA,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Pua says some words before the battle starts."),,SPEAKER_PUA,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_PUA_REMATCH,format(""))
+	setflag(FLAG_DAILY_PUA_REMATCH)
+    goto(Rematches_Dialogue_PuaComeBack)
+}
+
+script Rematches_Dialogue_PuaComeBack
+{
+	lock
+	msgbox(format("Pua tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_PUA,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskPuaRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Pua greets the player before challenging them to a battle."),,SPEAKER_PUA,TAIL_TALK)
+	goto(Rematches_Script_AskPuaBattle)
+}
+
+script Quest_Rematches_Script_HideNeriene
+{
+    setobjectflagfromlocalid(LOCALID_FORT_YOBU_GYM_NERIENE)
+}
+
+script Rematches_Script_Neriene
+{
+    lock
+    if (defeated(TRAINER_NERIENE_REMATCH))
+    {
+        goto(Rematches_Script_AskNerieneRematch)
+    }
+    goto(Rematches_Script_AskNerieneBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskNerieneBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Neriene asks player for battle."),MSGBOX_YESNO,SPEAKER_NERIENE,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Neriene tells the player to return when they're ready."),,SPEAKER_NERIENE,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Neriene says some words before the battle starts."),,SPEAKER_NERIENE,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_NERIENE_REMATCH,format(""))
+	setflag(FLAG_DAILY_NERIENE_REMATCH)
+    goto(Rematches_Dialogue_NerieneComeBack)
+}
+
+script Rematches_Dialogue_NerieneComeBack
+{
+	lock
+	msgbox(format("Neriene tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_NERIENE,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskNerieneRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Neriene greets the player before challenging them to a battle."),,SPEAKER_NERIENE,TAIL_TALK)
+	goto(Rematches_Script_AskNerieneBattle)
+}
+
+script Quest_Rematches_Script_HideDimu
+{
+    setobjectflagfromlocalid(LOCALID_HALERBA_GYM_DIMU)
+}
+
+script Rematches_Script_Dimu
+{
+    lock
+    if (defeated(TRAINER_DIMU_REMATCH))
+    {
+        goto(Rematches_Script_AskDimuRematch)
+    }
+    goto(Rematches_Script_AskDimuBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskDimuBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Dimu asks player for battle."),MSGBOX_YESNO,SPEAKER_DIMU,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Dimu tells the player to return when they're ready."),,SPEAKER_DIMU,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Dimu says some words before the battle starts."),,SPEAKER_DIMU,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_DIMU_REMATCH,format(""))
+	setflag(FLAG_DAILY_DIMU_REMATCH)
+    goto(Rematches_Dialogue_DimuComeBack)
+}
+
+script Rematches_Dialogue_DimuComeBack
+{
+	lock
+	msgbox(format("Dimu tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_DIMU,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskDimuRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Dimu greets the player before challenging them to a battle."),,SPEAKER_DIMU,TAIL_TALK)
+	goto(Rematches_Script_AskDimuBattle)
+}
+
+script Quest_Rematches_Script_HideAmi
+{
+    setobjectflagfromlocalid(LOCALID_IRISINA_GYM_AMI)
+}
+
+script Rematches_Script_Ami
+{
+    lock
+    if (defeated(TRAINER_AMIARGENTO_REMATCH))
+    {
+        goto(Rematches_Script_AskAmiRematch)
+    }
+    goto(Rematches_Script_AskAmiBattle)
+    release
+    end
+}
+
+script Rematches_Script_AskAmiBattle
+{
+	lock
+	faceplayer
+	msgbox(format("Ami asks player for battle."),MSGBOX_YESNO,SPEAKER_AMIARGENTO,TAIL_TALK)
+	closemessage
+
+	if (var(VAR_RESULT) == NO)
+	{
+		msgbox(format("Ami tells the player to return when they're ready."),,SPEAKER_AMIARGENTO,TAIL_TALK)
+		closemessage
+		release
+		end
+	}
+
+	msgbox(format("Ami says some words before the battle starts."),,SPEAKER_AMIARGENTO,TAIL_TALK)
+	closemessage
+	trainerbattle_no_intro(TRAINER_AMIARGENTO_REMATCH,format(""))
+	setflag(FLAG_DAILY_AMI_REMATCH)
+    goto(Rematches_Dialogue_AmiComeBack)
+}
+
+script Rematches_Dialogue_AmiComeBack
+{
+	lock
+	msgbox(format("Ami tells the player to come back tomorrow for another rematch."),MSGBOX_NPC,SPEAKER_AMIARGENTO,TAIL_TALK,EMOTE_SWEAT)
+	closemessage
+	release
+	end
+}
+
+script Rematches_Script_AskAmiRematch
+{
+	lock
+	faceplayer
+	msgbox(format("Ami greets the player before challenging them to a battle."),,SPEAKER_AMIARGENTO,TAIL_TALK)
+	goto(Rematches_Script_AskAmiBattle)
+}
+

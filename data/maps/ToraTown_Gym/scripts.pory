@@ -10,16 +10,16 @@ mapscripts ToraTown_Gym_MapScripts {
     ]
 }
 
-script EnterShinzo_Event_Script {
-    switch (var (VAR_GYM_2_STATE)) {
-        case 3:
-            goto(EnterShinzo_StartGymBattle_Script)
-        case 4:
-            goto(EnterShinzo_PostDefeat1_Dialogue)
-        case 5:
-            goto(EnterShinzo_PostDefeat2_Dialogue)
-        default:
-            goto(EnterShinzo_ShinzoIntro_Dialogue)
+script EnterShinzo_Event_Script 
+{
+	goto_if_quest_complete(QUEST_HYBRIDCULTURE,Rematches_Script_Shinzo)
+    switch (var(VAR_GYM_2_STATE)) 
+	{
+        default: goto(EnterShinzo_ShinzoIntro_Dialogue)
+        case TORA_GYM_SAVE_BEFORE_BATTLE: goto(EnterShinzo_StartGymBattle_Script)
+        case TORA_GYM_LEADER_DEFEATED:
+			goto_if_set(FLAG_TEMP_1,EnterShinzo_PostDefeat2_Dialogue)
+			goto(EnterShinzo_PostDefeat1_Dialogue)
     }
 }
 
@@ -30,10 +30,10 @@ script ToraTown_Gym_HideLeaderScript
 
 script ToraTown_Gym_LeaderVisibility_Script
 {
-    if (defeated(TRAINER_SHINZO) == FALSE)
-    {
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ)
+	{
         return
-    }
+	}
 
     call_if_quest_not_complete(QUEST_HYBRIDCULTURE,ToraTown_Gym_HideLeaderScript)
 }

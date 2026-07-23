@@ -7,9 +7,27 @@ mapscripts HalerbaCity_Gym_MapScripts {
     }
 }
 
-script HalerbaCity_Gym_LeaderVisibility_Script{
-    if (var(VAR_DIMU_STATE) != NO_BADGE && var(VAR_DIMU_STATE) != QUEST_2_COMPLETE){
-        setflag(FLAG_HIDE_DIMU)
-    }
-    return
+script HalerbaCity_Gym_LeaderVisibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_START_CHAMPIONSHIP)
+	{
+        return
+	}
+
+    call_if_quest_not_complete(QUEST_POISONEDLAKEINVESTIGATION,Quest_Rematches_Script_HideDimu)
 }
+
+script EnterDimu_Event_Script {
+	goto_if_quest_complete(QUEST_POISONEDLAKEINVESTIGATION,Rematches_Script_Dimu)
+    switch (var (VAR_GYM_6_STATE)) {
+        case GYM_SAVE_BEFORE_LEADER:
+            goto(EnterDimu_StartGymBattle_Script)
+        case GYM_DEFEATED_LEADER:
+                goto(EnterDimu_PostGymBattle1_Dialogue)
+        case GYM_EXPLAINED_BADGE_AND_TM:
+                    goto(EnterDimu_PostGymBattle2_Dialogue)
+        default:
+                        goto(EnterDimu_Intro_Dialogue)
+    }
+}
+

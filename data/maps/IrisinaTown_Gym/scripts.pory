@@ -1,2 +1,30 @@
 mapscripts IrisinaTown_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+	call(IrisinaTown_Gym_LeaderVisibility_Script)
+    }
+}
+
+script IrisinaTown_Gym_LeaderVisibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_START_CHAMPIONSHIP)
+	{
+        return
+	}
+
+    call_if_quest_not_complete(QUEST_POPUPEVENT,Quest_Rematches_Script_HideAmi)
+}
+
+script EnterAmiArgento_Event_Script {
+	goto_if_quest_complete(QUEST_POPUPEVENT,Rematches_Script_Ami)
+    switch (var(VAR_GYM_8_STATE)) {
+        case GYM_SAVE_BEFORE_LEADER:
+            goto(EnterAmiArgento_FacePlayerBeforeBattle_Script)
+
+        case GYM_DEFEATED_LEADER:
+                goto(EnterAmiArgento_PostGymBattle1_Dialogue)
+        case GYM_EXPLAINED_BADGE_AND_TM:
+                    goto(EnterAmiArgento_PostGymBattle2_Dialogue)
+        default:
+                    goto(EnterAmiArgento_AskAboutGym_Dialogue)
+    }
 }

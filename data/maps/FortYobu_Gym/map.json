@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FORT_YOBU_GYM_NERIENE",
       "graphics_id": "OBJ_EVENT_GFX_NERIENE",
       "x": 14,
       "y": 4,
