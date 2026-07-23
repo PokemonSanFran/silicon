@@ -530,7 +530,7 @@ script Quest_Rematches_Script_HideBelen
 script Rematches_Script_Belen
 {
     lock
-    if (defeated(TRAINER_FRANK))
+    if (defeated(TRAINER_BELEN_REMATCH))
     {
         goto(Rematches_Script_AskBelenRematch)
     }
@@ -573,6 +573,10 @@ script Rematches_Dialogue_BelenComeBack
 script Rematches_Script_AskBelenRematch
 {
 	lock
+	if (flag(FLAG_DAILY_BELEN_REMATCH))
+	{
+		goto(Rematches_Dialogue_BelenComeBack)
+	}
 	faceplayer
 	msgbox(format("Belen greets the player before challenging them to a battle."),,SPEAKER_BELEN,TAIL_TALK)
 	goto(Rematches_Script_AskBelenBattle)
@@ -629,6 +633,10 @@ script Rematches_Dialogue_ShinzoComeBack
 script Rematches_Script_AskShinzoRematch
 {
 	lock
+	if (flag(FLAG_DAILY_SHINZO_REMATCH))
+	{
+		goto(Rematches_Dialogue_ShinzoComeBack)
+	}
 	faceplayer
 	msgbox(format("Shinzo greets the player before challenging them to a battle."),,SPEAKER_SHINZO,TAIL_TALK)
 	goto(Rematches_Script_AskShinzoBattle)
@@ -685,6 +693,10 @@ script Rematches_Dialogue_EmrysComeBack
 script Rematches_Script_AskEmrysRematch
 {
 	lock
+	if (flag(FLAG_DAILY_EMRYS_REMATCH))
+	{
+		goto(Rematches_Dialogue_EmrysComeBack)
+	}
 	faceplayer
 	msgbox(format("Emrys greets the player before challenging them to a battle."),,SPEAKER_EMRYS,TAIL_TALK)
 	goto(Rematches_Script_AskEmrysBattle)
@@ -741,6 +753,10 @@ script Rematches_Dialogue_PuaComeBack
 script Rematches_Script_AskPuaRematch
 {
 	lock
+	if (flag(FLAG_DAILY_PUA_REMATCH))
+	{
+		goto(Rematches_Dialogue_PuaComeBack)
+	}
 	faceplayer
 	msgbox(format("Pua greets the player before challenging them to a battle."),,SPEAKER_PUA,TAIL_TALK)
 	goto(Rematches_Script_AskPuaBattle)
@@ -797,6 +813,10 @@ script Rematches_Dialogue_NerieneComeBack
 script Rematches_Script_AskNerieneRematch
 {
 	lock
+	if (flag(FLAG_DAILY_NERIENE_REMATCH))
+	{
+		goto(Rematches_Dialogue_NerieneComeBack)
+	}
 	faceplayer
 	msgbox(format("Neriene greets the player before challenging them to a battle."),,SPEAKER_NERIENE,TAIL_TALK)
 	goto(Rematches_Script_AskNerieneBattle)
@@ -822,6 +842,10 @@ script Rematches_Script_Dimu
 script Rematches_Script_AskDimuBattle
 {
 	lock
+	if (flag(FLAG_DAILY_DIMU_REMATCH))
+	{
+		goto(Rematches_Dialogue_DimuComeBack)
+	}
 	faceplayer
 	msgbox(format("Dimu asks player for battle."),MSGBOX_YESNO,SPEAKER_DIMU,TAIL_TALK)
 	closemessage
@@ -909,6 +933,10 @@ script Rematches_Dialogue_AmiComeBack
 script Rematches_Script_AskAmiRematch
 {
 	lock
+	if (flag(FLAG_DAILY_AMI_REMATCH))
+	{
+		goto(Rematches_Dialogue_AmiComeBack)
+	}
 	faceplayer
 	msgbox(format("Ami greets the player before challenging them to a battle."),,SPEAKER_AMIARGENTO,TAIL_TALK)
 	goto(Rematches_Script_AskAmiBattle)
