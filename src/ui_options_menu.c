@@ -943,6 +943,7 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
         [VISUAL_PRESET_DEFAULT]  = {
             [VISUAL_OPTIONS_PRESET]          = VISUAL_PRESET_DEFAULT,
             [VISUAL_OPTIONS_UNITS]           = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD,
+            [VISUAL_OPTIONS_TIME]            = VISUAL_OPTION_12_HOUR,
             [VISUAL_OPTIONS_TEXT_SPEED]      = VISUAL_OPTION_TEXTSPEED_FAST,
             [VISUAL_OPTIONS_FONT_SWITCHER]   = VISUAL_OPTION_FONT_SWITCHER_EMERALD,
             [VISUAL_OPTIONS_COLOR]           = VISUAL_OPTION_COLOR_PLATINUM,
@@ -951,6 +952,7 @@ static const u8 Preset_Options[NUM_OF_PRESET_OPTIONS][NUM_MAX_SETTINGS][MAX_OPTI
         [VISUAL_PRESET_SPEEDRUN] = {
             [VISUAL_OPTIONS_PRESET]          = VISUAL_PRESET_SPEEDRUN,
             [VISUAL_OPTIONS_UNITS]           = VISUAL_OPTION_UNITS_IMPERIAL_PERIOD,
+            [VISUAL_OPTIONS_TIME]            = VISUAL_OPTION_12_HOUR,
             [VISUAL_OPTIONS_TEXT_SPEED]      = VISUAL_OPTION_TEXTSPEED_INSTANT,
             [VISUAL_OPTIONS_FONT_SWITCHER]   = VISUAL_OPTION_FONT_SWITCHER_EMERALD,
             [VISUAL_OPTIONS_COLOR]           = VISUAL_OPTION_COLOR_PLATINUM,
@@ -1948,6 +1950,19 @@ static const struct OptionData VisualSettings_Settings_Options[NUM_OPTIONS_VISUA
             COMPOUND_STRING("The Pokémon Cranidos weighs 31,5 kg."),
             },
         .numOptions = VISUAL_OPTION_UNITS_COUNT,
+    },
+    [VISUAL_OPTIONS_TIME] =
+    {
+        .title = COMPOUND_STRING("Time"),
+        .options = {
+            COMPOUND_STRING("24 Hour"),
+            COMPOUND_STRING("12 Hour"),
+            },
+        .optionDescription = {
+            COMPOUND_STRING("The most interesting time of day is 16:20."),
+            COMPOUND_STRING("The most interesting time of day is 4:20 PM."),
+            },
+        .numOptions = VISUAL_OPTION_TIME_COUNT,
     },
     [VISUAL_OPTIONS_TEXT_SPEED] =
     {

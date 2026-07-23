@@ -71,6 +71,7 @@
 #include "quest_logic.h"
 #include "buzzr.h"
 #include "pokevial.h"
+#include "options_visual.h"
 #include "qol_field_moves.h" // qol_field_moves
 #include "glass.h"
 #include "options_music.h"
@@ -4019,4 +4020,18 @@ bool8 ScrCmd_getbraillestringwidth(struct ScriptContext * ctx)
 
     gSpecialVar_0x8004 = GetStringWidth(FONT_BRAILLE, msg, -1);
     return FALSE;
+}
+
+void ScrFunc_timeprintingcurrent(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    FormatCurrentTimeForOutput(sScriptStringVars[stringVarIndex]);
+}
+
+void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u32 hours = VarGet(ScriptReadHalfword(ctx));
+    u32 minutes = VarGet(ScriptReadHalfword(ctx));
+    FormatGivenTimeForOutput(sScriptStringVars[stringVarIndex],hours,minutes);
 }

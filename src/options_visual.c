@@ -1,5 +1,6 @@
 #include "global.h"
 #include "text.h"
+#include "rtc.h"
 #include "ui_options_menu.h"
 
 // ***********************************************************************
@@ -54,6 +55,31 @@ u32 GetDecimalSeparatorChar(void)
         return CHAR_PERIOD;
     else
         return CHAR_COMMA;
+}
+
+// ***********************************************************************
+// Visual Settings: Time Switcher
+// ***********************************************************************
+
+static u32 GetTimeOption(void)
+{
+    return gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_TIME];
+}
+
+static bool32 IsTime24Hour(void)
+{
+    return (GetTimeOption() == VISUAL_OPTION_24_HOUR);
+}
+
+void FormatCurrentTimeForOutput(u8* txtPtr)
+{
+    RtcCalcLocalTime();
+    FormatDecimalTimeWithoutSeconds(txtPtr,gLocalTime.hours,gLocalTime.minutes,IsTime24Hour());
+}
+
+void FormatGivenTimeForOutput(u8* txtPtr, u32 hours, u32 minutes)
+{
+    FormatDecimalTimeWithoutSeconds(txtPtr,hours,minutes,IsTime24Hour());
 }
 
 // ***********************************************************************

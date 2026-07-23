@@ -10,4 +10,7 @@ enum optionVisualColor GetVisualColor(void);
 // Visual Settings: Color Variation
 enum optionsVisualColorVariationValues GetColorVariationOption(void);
 
+// Visual Settings: Time
+void FormatGivenTimeForOutput(u8* txtPtr, u32 hours, u32 minutes);
+void FormatCurrentTimeForOutput(u8* txtPtr);
 #endif // GUARD_OPTIONS_VISUAL_H
