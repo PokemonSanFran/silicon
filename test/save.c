@@ -6,7 +6,7 @@
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
 #define T_SAVEBLOCK1_SIZE 15812
 #define T_SAVEBLOCK2_SIZE 3608
-#define T_SAVEBLOCK3_SIZE 1616
+#define T_SAVEBLOCK3_SIZE 1612
 #define T_POKEMONSTORAGE_SIZE 34144
 
 TEST("SaveBlock1 is backwards compatible")
