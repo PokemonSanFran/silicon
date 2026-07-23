@@ -556,7 +556,7 @@ script Rematches_Script_AskBelenBattle
 
 	msgbox(format("Belen says some words before the battle starts."),,SPEAKER_BELEN,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_BELEN_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_BELEN_REMATCH,format("Aye, aye, aye...My battling's getting stale!"))
 	setflag(FLAG_DAILY_BELEN_REMATCH)
     goto(Rematches_Dialogue_BelenComeBack)
 }
@@ -616,7 +616,7 @@ script Rematches_Script_AskShinzoBattle
 
 	msgbox(format("Shinzo says some words before the battle starts."),,SPEAKER_SHINZO,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_SHINZO_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_SHINZO_REMATCH,format("Hnngh! My pride can't take much more of these..."))
 	setflag(FLAG_DAILY_SHINZO_REMATCH)
     goto(Rematches_Dialogue_ShinzoComeBack)
 }
@@ -676,7 +676,7 @@ script Rematches_Script_AskEmrysBattle
 
 	msgbox(format("Emrys says some words before the battle starts."),,SPEAKER_EMRYS,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_EMRYS_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_EMRYS_REMATCH,format("I'm history..."))
 	setflag(FLAG_DAILY_EMRYS_REMATCH)
     goto(Rematches_Dialogue_EmrysComeBack)
 }
@@ -736,7 +736,7 @@ script Rematches_Script_AskPuaBattle
 
 	msgbox(format("Pua says some words before the battle starts."),,SPEAKER_PUA,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_PUA_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_PUA_REMATCH,format("Phew! I got washed again! You're as tough as they come!"))
 	setflag(FLAG_DAILY_PUA_REMATCH)
     goto(Rematches_Dialogue_PuaComeBack)
 }
@@ -796,7 +796,7 @@ script Rematches_Script_AskNerieneBattle
 
 	msgbox(format("Neriene says some words before the battle starts."),,SPEAKER_NERIENE,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_NERIENE_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_NERIENE_REMATCH,format("I've failed again. I...Have no excuses."))
 	setflag(FLAG_DAILY_NERIENE_REMATCH)
     goto(Rematches_Dialogue_NerieneComeBack)
 }
@@ -860,7 +860,7 @@ script Rematches_Script_AskDimuBattle
 
 	msgbox(format("Dimu says some words before the battle starts."),,SPEAKER_DIMU,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_DIMU_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_DIMU_REMATCH,format("Nice one. You clearly wanted it more than me. Perhaps I should interrogate that."))
 	setflag(FLAG_DAILY_DIMU_REMATCH)
     goto(Rematches_Dialogue_DimuComeBack)
 }
@@ -916,7 +916,7 @@ script Rematches_Script_AskAmiBattle
 
 	msgbox(format("Ami says some words before the battle starts."),,SPEAKER_AMIARGENTO,TAIL_TALK)
 	closemessage
-	trainerbattle_no_intro(TRAINER_AMIARGENTO_REMATCH,format(""))
+	trainerbattle_no_intro(TRAINER_AMIARGENTO_REMATCH,format("A brilliant encore! Nothing better! I loved every second of it!"))
 	setflag(FLAG_DAILY_AMI_REMATCH)
     goto(Rematches_Dialogue_AmiComeBack)
 }
