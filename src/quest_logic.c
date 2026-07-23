@@ -49,6 +49,7 @@
 #include "quest_logic.h"
 #include "battle_util.h"
 #include "pokemon.h"
+#include "options_visual.h"
 #include "field_specials.h"
 #include "fly_encounter.h"
 #include "battle_scripts.h"
@@ -5599,13 +5600,8 @@ void Script_Quest_HybridCulture_IsSunrise(void)
 
 static void BufferSunTimes(u32 begin, u32 end)
 {
-    ConvertIntToDecimalStringN(gStringVar1,begin,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_1}:00"));
-    StringCopy(gStringVar1,gStringVar4);
-
-    ConvertIntToDecimalStringN(gStringVar2,end,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_2}:00"));
-    StringCopy(gStringVar2,gStringVar4);
+    FormatGivenTimeForOutput(gStringVar1,begin,0);
+    FormatGivenTimeForOutput(gStringVar2,end,0);
 }
 
 void BufferSunriseTimes(void)
