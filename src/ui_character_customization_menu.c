@@ -95,7 +95,9 @@ static void PrintToWindow(u8 colorIdx);
 static void Task_MenuWaitFadeIn(u8 taskId);
 static void Task_MenuMain(u8 taskId);
 static void RecolorPlayerCharacters(u8 palnum);
-void CB2_ReturnToCostumizationMenu(void);
+void CB2_ReturnToCostumizationMenu_Subject(void);
+void CB2_ReturnToCostumizationMenu_Possessive(void);
+void CB2_ReturnToCostumizationMenu_Object(void);
 
 static void CreateTrainerFrontSprite(void);
 static void CreateTrainerBackSprite(void);
@@ -401,14 +403,14 @@ void Task_OpenCharacterCustomizationMenuFromStartMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        Character_Customization_Menu_Init(CB2_ReturnToFieldWithOpenMenu);
+        Character_Customization_Menu_Init(CB2_ReturnToFieldWithOpenMenu,CUSTOMIZATION_BODY_TYPE,CUSTOMIZATION_BODY_TYPE);
         DestroyTask(taskId);
     }
 }
 
 void CB2_CustomizationFromStartMenu(void)
 {
-    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI,CUSTOMIZATION_BODY_TYPE,CUSTOMIZATION_BODY_TYPE);
 }
 
 void ResetCustomizationValuesData(void)
@@ -430,7 +432,7 @@ void ResetCustomizationValuesData(void)
 }
 
 // This is our main initialization function if you want to call the menu from elsewhere
-void Character_Customization_Menu_Init(MainCallback callback)
+void Character_Customization_Menu_Init(MainCallback callback, u32 cursorPlace, u32 currentFirstOption)
 {
     if ((sMenuDataPtr = AllocZeroed(sizeof(struct MenuResources))) == NULL)
     {
@@ -441,8 +443,8 @@ void Character_Customization_Menu_Init(MainCallback callback)
     if(!FlagGet(FLAG_SYS_CUSTOMIZATION_DATA_INITIALIZED))
         ResetCustomizationValuesData();
 
-    sMenuDataPtr->cursorPlace = 0;
-    sMenuDataPtr->currentFirstOption = 0;
+    sMenuDataPtr->cursorPlace = cursorPlace;
+    sMenuDataPtr->currentFirstOption = currentFirstOption;
     sMenuDataPtr->isCustomPaletteScren = FALSE;
     sMenuDataPtr->PlayerSpriteState = 0;
 
@@ -1595,8 +1597,15 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
         [CUSTOMIZATION_POSSESIVE_PRONOUN] = gSaveBlock3Ptr->playerPosesivePronoun,
     };
 
+    void* CB2_PronounFunctions[] =
+    {
+        [CUSTOMIZATION_SUBJECT_PRONOUN]   = CB2_ReturnToCostumizationMenu_Subject,
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = CB2_ReturnToCostumizationMenu_Object, 
+        [CUSTOMIZATION_POSSESIVE_PRONOUN] = CB2_ReturnToCostumizationMenu_Possessive,
+    };
+
     u32 cursor = sMenuDataPtr->cursorPlace;
-    DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToCostumizationMenu);
+    DoNamingScreen(namingScreenTypes[cursor], pronounBuffers[cursor], gSaveBlock2Ptr->playerGender, 0, 0, CB2_PronounFunctions[cursor]);
     Menu_FreeResources();
 }
 
@@ -1751,7 +1760,7 @@ static void Task_MenuMain(u8 taskId)
 
 void CustomizeCharacterFromOverworld(void)
 {
-    Character_Customization_Menu_Init(CB2_ReturnToFieldContinueScript);
+    Character_Customization_Menu_Init(CB2_ReturnToFieldContinueScript,CUSTOMIZATION_BODY_TYPE,CUSTOMIZATION_BODY_TYPE);
 }
 
 bool32 IsBackPicForSiliconPlayer(u32 picId)
@@ -2109,8 +2118,21 @@ void SetCustomPlayerPalette(u16 *palette, u8 (*rgbValues)[NUM_CUSTOM_COLOR_OPTIO
     }
 }
 
-void CB2_ReturnToCostumizationMenu(void)
+void CB2_ReturnToCostumizationMenu_Subject(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI);
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI,CUSTOMIZATION_SUBJECT_PRONOUN,CUSTOMIZATION_HAIR_COLOR);
 }
+
+void CB2_ReturnToCostumizationMenu_Object(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI,CUSTOMIZATION_OBJECT_PRONOUN,CUSTOMIZATION_HAIR_COLOR);
+}
+
+void CB2_ReturnToCostumizationMenu_Possessive(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    Character_Customization_Menu_Init(CB2_StartMenu_ReturnToUI,CUSTOMIZATION_POSSESIVE_PRONOUN,CUSTOMIZATION_HAIR_COLOR);
+}
+
