@@ -1354,8 +1354,10 @@ void Task_OpenTrolleyMapSystemFromStation(u8 taskId)
 
 static bool8 MapSystem_DoesCurrentMapAllowFastTravel(void)
 {
-    enum StartMenuCellularSignals signal = CellularSignal_GetCurrentStrength();
-    return (signal == START_SIGNAL_STRONG);
+    if (IsHalaiIslandUnderCrisis())
+        return FALSE;
+
+    return (CellularSignal_GetCurrentStrength() == START_SIGNAL_STRONG);
 }
 
 void CB2_OpenFlyMapSystem(MainCallback callback, enum MapModes mode)
@@ -2672,7 +2674,7 @@ static void PrintHeaderTitleToWindow()
             {
             if ((sRegionMap->warpCounter == WARP_FAILED_PAUSE_START) && (sRegionMap->canUseFastTravel) == FALSE)
             {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You can't use Arriba indoors!"));
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("There's no signal right now!"));
             }
             else if(CheckIfHoverLocationIsMapSecNone())
                 {
@@ -2791,7 +2793,7 @@ static void PrintWarpFailedHeaderTitleToWindow()
             {
                 if ((sRegionMap->warpCounter == WARP_FAILED_PAUSE_START) && (sRegionMap->canUseFastTravel) == FALSE)
                 {
-                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("You can't use Arriba indoors!"));
+                    AddTextPrinterParameterized4(WINDOW_HEADER_TEXT, 7, 4, 0, 0, 0, sMenuWindowFontColors[FONT_MAP_WHITE], 0xFF, COMPOUND_STRING("There's no signal right now!"));
                 }
                 else if(CheckIfHoverLocationIsMapSecNone())
                 {
