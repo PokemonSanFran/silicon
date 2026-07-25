@@ -17,6 +17,10 @@ void m4aMPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed);
 void m4aMPlayFadeOutTemporarily(struct MusicPlayerInfo *mplayInfo, u16 speed);
 void m4aMPlayFadeIn(struct MusicPlayerInfo *mplayInfo, u16 speed);
 void m4aMPlayImmInit(struct MusicPlayerInfo *mplayInfo);
+// Start lowPassFilter
+void m4aSetLowpassFilter(u8 coefficient);
+void m4aResetLowpassFilter(void);
+// End lowPassFilter
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;

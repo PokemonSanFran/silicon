@@ -657,6 +657,55 @@ bool8 IsSpecialSEPlaying(void)
     return TRUE;
 }
 
+// Start lowPassFilter
+static void Task_SetLowPassFilter(u8 taskId)
+{
+    if (gSoundInfo.lowPassFilterCoeff > gTasks[taskId].data[0])
+    {
+        gSoundInfo.lowPassFilterCoeff = max(gSoundInfo.lowPassFilterCoeff + gTasks[taskId].data[1], 0);
+        if (gSoundInfo.lowPassFilterCoeff < gTasks[taskId].data[0])
+            gSoundInfo.lowPassFilterCoeff = gTasks[taskId].data[0];
+    }
+    else if (gSoundInfo.lowPassFilterCoeff < gTasks[taskId].data[0])
+    {
+        gSoundInfo.lowPassFilterCoeff = min(gSoundInfo.lowPassFilterCoeff + gTasks[taskId].data[1], 255);
+        if (gSoundInfo.lowPassFilterCoeff > gTasks[taskId].data[0])
+            gSoundInfo.lowPassFilterCoeff = gTasks[taskId].data[0];
+    }
+
+    if (gSoundInfo.lowPassFilterCoeff == gTasks[taskId].data[0])
+        DestroyTask(taskId);
+}
+
+void SetLightLowPassFilter(void)
+{
+    u8 taskId = CreateTask(Task_SetLowPassFilter, 80);
+    gTasks[taskId].data[0] = LOW_PASS_FILTER_LIGHT;
+    gTasks[taskId].data[1] = max(abs(gSoundInfo.lowPassFilterCoeff - LOW_PASS_FILTER_LIGHT) / 30, 1);
+}
+
+void SetMediumLowPassFilter(void)
+{
+    u8 taskId = CreateTask(Task_SetLowPassFilter, 80);
+    gTasks[taskId].data[0] = LOW_PASS_FILTER_MEDIUM;
+    gTasks[taskId].data[1] = max(abs(gSoundInfo.lowPassFilterCoeff - LOW_PASS_FILTER_MEDIUM) / 30, 1);
+}
+
+void SetDarkLowPassFilter(void)
+{
+    u8 taskId = CreateTask(Task_SetLowPassFilter, 80);
+    gTasks[taskId].data[0] = LOW_PASS_FILTER_DARK;
+    gTasks[taskId].data[1] = max(abs(gSoundInfo.lowPassFilterCoeff - LOW_PASS_FILTER_DARK) / 30, 1);
+}
+
+void ResetLowPassFilter(void)
+{
+    u8 taskId = CreateTask(Task_SetLowPassFilter, 80);
+    gTasks[taskId].data[0] = LOW_PASS_FILTER_BYPASS;
+    gTasks[taskId].data[1] = max(abs(gSoundInfo.lowPassFilterCoeff - LOW_PASS_FILTER_BYPASS) / 30, 1);
+}
+// End lowPassFilter
+
 void StopSE(void)
 {
     m4aMPlayStop(&gMPlayInfo_SE1);
