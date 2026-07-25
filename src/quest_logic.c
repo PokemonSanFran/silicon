@@ -1892,54 +1892,23 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
-u32 VSGarbodor_RandomlyChooseTypeFromStarter(void)
+enum Type VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
-    u32 type = Random() % 2;
-    u32 gemType = 0;
+    u32 typeIndex = (VarGet(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE) ? 0 : 1;
+    enum Species species = SanitizeSpeciesId(VarGet(VAR_CHOSEN_PSF_STARTER));
 
-    switch(VarGet(VAR_CHOSEN_PSF_STARTER))
-    {
-        case 0: return gemType = gSpeciesInfo[SPECIES_SCYTHER].types[type];
-        case 1: return gemType = gSpeciesInfo[SPECIES_CHARMANDER].types[type];
-        case 2: return gemType = gSpeciesInfo[SPECIES_PETILIL].types[type];
-        case 3: return gemType = gSpeciesInfo[SPECIES_FLAAFFY].types[type];
-        case 4: return gemType = gSpeciesInfo[SPECIES_MAREANIE].types[type];
-        case 5: return gemType = gSpeciesInfo[SPECIES_ARON].types[type];
-        case 6: return gemType = gSpeciesInfo[SPECIES_SWINUB].types[type];
-        case 7: return gemType = gSpeciesInfo[SPECIES_HATTREM].types[type];
-        default: return gemType = gSpeciesInfo[SPECIES_PANCHAM].types[type];
-    }
-
+    return GetSpeciesType(species,typeIndex);
 }
 
-u32 VSGarbodor_GetGemFromType(void)
+enum Item VSGarbodor_ChooseGemBasedOnStarter(void)
 {
-    switch(VSGarbodor_RandomlyChooseTypeFromStarter())
-    {
-        case TYPE_NORMAL: return ITEM_NORMAL_GEM;
-        case TYPE_FIGHTING: return ITEM_FIGHTING_GEM;
-        case TYPE_FLYING: return ITEM_FLYING_GEM;
-        case TYPE_POISON: return ITEM_POISON_GEM;
-        case TYPE_GROUND: return ITEM_GROUND_GEM;
-        case TYPE_ROCK: return ITEM_ROCK_GEM;
-        case TYPE_BUG: return ITEM_BUG_GEM;
-        case TYPE_GHOST: return ITEM_GHOST_GEM;
-        case TYPE_STEEL: return ITEM_STEEL_GEM;
-        case TYPE_FIRE: return ITEM_FIRE_GEM;
-        case TYPE_WATER: return ITEM_WATER_GEM;
-        case TYPE_GRASS: return ITEM_GRASS_GEM;
-        case TYPE_ELECTRIC: return ITEM_ELECTRIC_GEM;
-        case TYPE_PSYCHIC: return ITEM_PSYCHIC_GEM;
-        case TYPE_ICE: return ITEM_ICE_GEM;
-        case TYPE_DRAGON: return ITEM_DRAGON_GEM;
-        case TYPE_DARK: return ITEM_DARK_GEM;
-        default: return ITEM_FAIRY_GEM;
-    }
+    enum Type type = VSGarbodor_RandomlyChooseTypeFromStarter();
+    return gTypesInfo[type].gem;
 }
 
-void VSGarbodor_ChooseGemBasedOnStarter(void)
+void Script_VSGarbodor_ChooseGemBasedOnStarter(void)
 {
-    gSpecialVar_0x8003 = VSGarbodor_GetGemFromType();
+    gSpecialVar_0x8003 = gTypesInfo[VSGarbodor_RandomlyChooseTypeFromStarter()].gem;
 }
 
 // ***********************************************************************

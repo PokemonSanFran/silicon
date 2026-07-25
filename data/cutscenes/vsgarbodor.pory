@@ -292,7 +292,7 @@ script VSGarbodor_Negotiating_Dialogue
         msgbox(format("Thank you both, and I'm sorry you had to get dragged into this. I'll work with our team to figure out what to do about the Championship."),,SPEAKER_LUCREZIA)
         msgbox(format("To show my appreciation, I have these for you."),,SPEAKER_LUCREZIA)
         closemessage
-        special(VSGarbodor_ChooseGemBasedOnStarter)
+		callnative(Script_VSGarbodor_ChooseGemBasedOnStarter)
         giveitem(VAR_0x8003,1)
 
         msgbox(format("How did you get these? I've been trying to get daddy to buy me a set of these for YEARS!"),,SPEAKER_CHARLOTTE,TAIL_SHOUT,EMOTE_SHOCK)

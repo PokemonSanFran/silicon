@@ -16,7 +16,7 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void);
 void Quest_Generic_CompleteSubquests(u16 relevantQuest);
 void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest);
 void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstBaiya(void);
-u32 VSGarbodor_GetGemFromType(void);
+enum Item VSGarbodor_ChooseGemBasedOnStarter(void);
 void WowYoureStrong_GetBadgesAndSetTowerState(void);
 bool32 GenerateAndStartWildFogBattle(u32 headerId, u32 area);
 void IncrementFogVariable(void);

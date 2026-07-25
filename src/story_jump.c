@@ -1480,7 +1480,9 @@ void JumpPlayerTo_TheStrikeStrikesBack(bool32 jumpType)
 void GiveItems_VSGarbodor(bool32 jumpType)
 {
     if (VarGet(VAR_STORYLINE_STATE) < STORY_NEED_SLEEP_BEFORE_FRANK)
-        AddBagItem(VSGarbodor_GetGemFromType(),1);
+    {
+        AddBagItem(VSGarbodor_ChooseGemBasedOnStarter(),1);
+    }
 }
 
 void FlagsVarWarp_VSGarbodor()
