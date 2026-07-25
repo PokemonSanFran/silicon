@@ -5907,3 +5907,31 @@ void Script_ShouldPlayerSkipWakeUpTimeSelect(void)
 {
     gSpecialVar_Result = ShouldPlayerSkipWakeUpTimeSelect();
 }
+
+// ***********************************************************************
+// Cutscene: Let's Finish This
+// ***********************************************************************
+
+void Script_BufferNumberOfCompletedTakedownQuests(void)
+{
+    u32 count = 1;
+
+    if (IsQuestCompletedState(QUEST_BREAKTHEINTERNET))
+        count++;
+    if (IsQuestCompletedState(QUEST_WAREHOUSEWARFARE))
+        count++;
+    if (IsQuestCompletedState(QUEST_PERSUASIVEPASSENGER))
+        count++;
+
+    switch (count)
+    {
+        default:StringCopy(gStringVar1,COMPOUND_STRING("Some"));
+                break;
+        case 2: StringCopy(gStringVar1,COMPOUND_STRING("Two"));
+                break;
+        case 3: StringCopy(gStringVar1,COMPOUND_STRING("Three"));
+                break;
+        case 4: StringCopy(gStringVar1,COMPOUND_STRING("Four"));
+                break;
+    }
+}

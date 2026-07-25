@@ -237,13 +237,7 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
 
         applymovement(KEIYING, moves(walk_down * 3, walk_right * 5, walk_up, walk_in_place_slow_left, delay_16, walk_in_place_slow_right, delay_16, walk_down, walk_left * 6, step_end))
         waitmovement(0)
-
-        msgbox(format("Wait, I thought that hallway just goes upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-        msgbox(format("Yeah, it does. Daddy just teleports to work!"),,SPEAKER_SUMMER)
-        msgbox(format("…what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
-
-        msgbox(format("SharpRise Capital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday."),,SPEAKER_SUMMER)
+		call(KeiyingRaisonDetre_Dialogue_ExplainWarpPanels)
 
         msgbox(format("Oh damn, you weren't kidding."),MSGBOX_DEFAULT,SPEAKER_ALICIA)
 
@@ -258,6 +252,17 @@ script KeiyingRaisonDetre_RunToWork_Dialogue {
         closemessage
         goto(KeiyingRaisonDetre_NewsStory_Script)
         end
+}
+
+script KeiyingRaisonDetre_Dialogue_ExplainWarpPanels
+{
+	msgbox(format("Wait, I thought that hallway just goes upstairs?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+	msgbox(format("Yeah, it does. Daddy just teleports to work!"),,SPEAKER_SUMMER)
+	msgbox(format("…what?"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
+
+	msgbox(format("SharpRise Capital has a ton of money in warp tiles. All the executives have panels from their house to their office installed. He literally teleports to work, everyday."),,SPEAKER_SUMMER)
+
 }
 
 script KeiyingRaisonDetre_NewsStory_Script {
