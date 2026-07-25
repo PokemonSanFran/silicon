@@ -5924,3 +5924,35 @@ void BufferFavoriteFood(void)
 
     StringCopy(gStringVar1,foods[food]);
 }
+
+// ***********************************************************************
+// Cutscene: Warehouse Rave
+// ***********************************************************************
+
+static bool32 WarehouseRave_IsRaveHappening(void)
+{
+    u32 raveVar = VarGet(VAR_WAREHOUSE_RAVE_STATE);
+
+    if (raveVar < GOT_RAVE_MESSAGE)
+        return FALSE;
+
+    if (raveVar >= TOLD_BAIYA_ABOUT_KEIYING)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_WarehouseRave_IsRaveHappening(void)
+{
+    gSpecialVar_Result = WarehouseRave_IsRaveHappening();
+}
+
+static bool32 WarehouseRave_IsRaveMusicPlaying(void)
+{
+    return (GetCurrentMapMusic() == MUS_WAREHOUSE_RAVE);
+}
+
+void Script_WarehouseRave_IsRaveMusicPlaying(void)
+{
+    gSpecialVar_Result = WarehouseRave_IsRaveMusicPlaying();
+}

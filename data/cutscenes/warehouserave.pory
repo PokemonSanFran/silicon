@@ -8,6 +8,47 @@ script WarehouseRave_SetUpRave_Script
     playbgm(MUS_WAREHOUSE_RAVE,TRUE)
 }
 
+script WarehouseRave_Script_StartOutsideMusic
+{
+	callnative(Script_WarehouseRave_IsRaveHappening)
+	if (var(VAR_RESULT) == FALSE)
+	{
+		release
+		end
+	}
+
+	callnative(Script_WarehouseRave_IsRaveMusicPlaying)
+	if (var(VAR_RESULT) == TRUE)
+	{
+		release
+		end
+	}
+
+	callnative(SetDarkLowPassFilter)
+	playbgm(MUS_WAREHOUSE_RAVE,TRUE)
+	release
+	end
+}
+
+script WarehouseRave_Script_StopOutsideMusic
+{
+	callnative(Script_WarehouseRave_IsRaveMusicPlaying)
+	if (var(VAR_RESULT) == FALSE)
+	{
+		release
+		end
+	}
+	fadedefaultbgm
+	callnative(ResetLowPassFilter)
+	release
+	end
+}
+
+script WarehouseRave_Hide_Keiying
+{
+setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
+}
+
 script WarehouseRave_Script_AddBaiya
 {
     spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=LOCALID_CURENO_BAIYA,x=29,y=33,movementType=MOVEMENT_TYPE_FACE_DOWN,elevation=3)
