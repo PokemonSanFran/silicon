@@ -910,8 +910,8 @@ static u8 MainMenu_SetTextHorizontalPosition(enum MainMenuModes mode, enum MainM
     u32 value = (optionIndex == TRAINERCARD_MONEY_VALUE) ? GetMoney(&gSaveBlock1Ptr->money) : GetFrontierBattlePoints();
     u32 numDigits = CountDigits(value);
 
-    u8 bufferBPDigits[] = {0,76,72,68,64};
-    u8 bufferMoneyDigits[] = {0,73,68,63,58,53,48,43,38};
+    u8 bufferBPDigits[] = {76,76,72,68,64};
+    u8 bufferMoneyDigits[] = {73,73,68,63,58,53,48,43,38};
 
     if (optionIndex == TRAINERCARD_MONEY_VALUE)
         return sTextHorizontalPosition[mode] + bufferMoneyDigits[numDigits];
