@@ -1960,6 +1960,9 @@ static void Task_Buzzr_StartQuestAnimation(u8 taskId)
         return;
     }
 
+    static const union TextColor color = {.background = 0, .foreground = 1, .shadow = 2, .accent = 0};
+    AddSpriteTextPrinterParameterized6(spriteId, FONT_OUTLINED, 6, 16, 0, 0, color, TEXT_SKIP_DRAW, COMPOUND_STRING("NEW TASK"));
+
     switch (data[0])
     {
         case BUZZR_QUEST_SPRITE_STATE_SLIDE_IN:
