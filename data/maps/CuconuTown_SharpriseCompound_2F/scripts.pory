@@ -36,7 +36,8 @@ script BedScript_SetNewTime_Script
         case TIME_NIGHT: bufferstring(STR_VAR_3,format("Wow, it's late!"))
     }
 
-    if (var(VAR_STORYLINE_STATE) == STORY_NEED_SLEEP_BEFORE_FRANK)
+	callnative(Script_ShouldPlayerSkipWakeUpTimeSelect)
+    if (var(VAR_RESULT) == TRUE)
     {
         closemessage
         return

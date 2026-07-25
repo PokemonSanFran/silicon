@@ -5885,3 +5885,25 @@ void Manhunt_GetCharlotteMonCry(void)
     enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
     PlayCry_Script(species, CRY_MODE_ENCOUNTER);
 }
+
+// ***********************************************************************
+// Cutscene: Player Sleep
+// ***********************************************************************
+
+static bool8 ShouldPlayerSkipWakeUpTimeSelect(void)
+{
+    u32 storyline = VarGet(VAR_STORYLINE_STATE);
+
+    if (storyline == STORY_NEED_SLEEP_BEFORE_FRANK)
+        return TRUE;
+
+    if (storyline == STORY_PRE_EARTHQUAKE)
+        return TRUE;
+
+    return FALSE;
+}
+
+void Script_ShouldPlayerSkipWakeUpTimeSelect(void)
+{
+    gSpecialVar_Result = ShouldPlayerSkipWakeUpTimeSelect();
+}
