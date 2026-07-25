@@ -64,6 +64,7 @@ script Earthquake_PostRescue_Objects_Script {
 
 script Earthquake_ThatNight_Dialogue
 {
+	fwdtime(1,0)
     startcutscene(JUMPPLAYER_EARTHQUAKE_INSIDE)
 
     clearflag(FLAG_HIDE_BAIYA_HOUSE)
@@ -292,6 +293,24 @@ script Earthquake_AskPlayerWarp_Script {
         call(TryAutoSave)
         release
         end
+}
+
+script Earthquake_Script_PreventPlayerLeaving
+{
+    callnative(Script_IsHalaiIslandUnderCrisis)
+    if (var(VAR_RESULT) == FALSE)
+    {
+        release
+        end
+    }
+    lock
+	buffermapname(STR_VAR_1,MAP_HALAI_ISLAND)
+	msgbox(format("I need to help the citizens of {STR_VAR_1} first."),,SPEAKER_PLAYER,TAIL_THOUGHT,EMOTE_SHOCK)
+	closemessage
+	applymovement(LOCALID_PLAYER,moves(walk_down))
+	waitmovement
+	release
+	end
 }
 
 movement Earthquake_PanCameraLeft {

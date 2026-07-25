@@ -422,6 +422,15 @@
       "var": "VAR_TEMP_0",
       "var_value": "0",
       "script": "CutePokemon_Script_DebugGiveMon"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 2,
+      "elevation": 0,
+      "var": "VAR_ALWAYS_ZERO",
+      "var_value": "0",
+      "script": "Earthquake_Script_PreventPlayerLeaving"
     }
   ],
   "bg_events": []
