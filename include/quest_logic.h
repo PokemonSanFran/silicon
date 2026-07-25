@@ -86,6 +86,7 @@ bool8 Quest_Freetheinnocent_FactsLearned(void);
 bool8 Quest_Freetheinnocent_CupFound(void);
 bool8 Quest_Freetheinnocent_CashierSpoken(void);
 bool8 IsHalaiIslandUnderConstruction(void);
+bool8 IsHalaiIslandUnderCrisis(void);
 
 void Quest_FlightPatterns_SetLastFlightEncounter(u32);
 u32 Quest_FlightPatterns_GetFlightPath(void);

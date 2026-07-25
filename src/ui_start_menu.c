@@ -3,6 +3,7 @@
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
+#include "quest_logic.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "field_weather.h"
@@ -2450,6 +2451,9 @@ enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
 
     if (mapType > MAP_TYPE_SECRET_BASE)
         mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
+
+    if (IsHalaiIslandUnderCrisis())
+        return START_SIGNAL_NONE;
 
     return sCellularSignal_FilterByMapTypes[mapType];
 }
