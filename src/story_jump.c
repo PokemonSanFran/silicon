@@ -657,6 +657,9 @@ void GiveItems_StarterChoice(bool32 jumpType)
 
     u32 slot = Random() % SILICON_STARTER_COUNT;
     VarSet(VAR_CHOSEN_PSF_STARTER,GetStarterFromSlot(slot));
+    enum PlayerFavoriteFoods food = Random() % PLAYER_FAVORITE_FOOD_COUNT;
+    VarSet(VAR_PLAYER_FAVORITE_FOOD,food);
+
 
     GenerateGiveStarterToPlayer();
 }

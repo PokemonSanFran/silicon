@@ -5904,3 +5904,23 @@ void Script_BufferNumberOfCompletedTakedownQuests(void)
                 break;
     }
 }
+
+// ***********************************************************************
+// Cutscene: There Can Only Be One
+// ***********************************************************************
+
+void BufferFavoriteFood(void)
+{
+    const u8* foods[] =
+    {
+        [PLAYER_FAVORITE_FOOD_PIZZA] = gText_MascarponePizza,
+        [PLAYER_FAVORITE_FOOD_BURGER] = gText_GreenChiliBurger,
+        [PLAYER_FAVORITE_FOOD_EGGS] = gText_ChilaquilesEgg,
+        [PLAYER_FAVORITE_FOOD_BAGEL] = gText_BaconAsiagoBagel,
+        [PLAYER_FAVORITE_FOOD_SORBET] = gText_SavorySorbet,
+    };
+    
+    enum PlayerFavoriteFoods food = VarGet(VAR_PLAYER_FAVORITE_FOOD);
+
+    StringCopy(gStringVar1,foods[food]);
+}
