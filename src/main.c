@@ -449,8 +449,11 @@ static void WaitForVBlank(void)
     {
         // Desynchronization may occur if wireless adapter is connected
         // and we call VBlankIntrWait();
-        while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
-            ;
+        // Start siliconImproveBattery
+        asm("swi 0x5");
+        //while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
+            //;
+        // End siliconImproveBattery
     }
     else
     {
