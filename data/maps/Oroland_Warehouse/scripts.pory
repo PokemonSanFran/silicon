@@ -1,9 +1,15 @@
 mapscripts Oroland_Warehouse_MapScripts
 {
     MAP_SCRIPT_ON_TRANSITION
-    {
-        goto(Oroland_Warehouse_MapScripts_OnTransition)
-    }
+	{
+		callnative(Script_WarehouseRave_IsRaveHappening)
+		if (var(VAR_RESULT) == TRUE)
+		{
+			call(WarehouseRave_SetUpRave_Script)
+		}
+		call_if_ne(VAR_WAREHOUSE_RAVE_STATE,SAVE_KEIYING_WAREHOUSE,WarehouseRave_Hide_Keiying)
+		call_if_eq(VAR_WAREHOUSE_RAVE_STATE,SAVE_KEIYING_WAREHOUSE,WarehouseRave_MoveObject_Script)
+	}
     MAP_SCRIPT_ON_RESUME
     {
         call(WarehouseRave_ControlExits_Script)
@@ -14,17 +20,3 @@ mapscripts Oroland_Warehouse_MapScripts
     }
 }
 
-script Oroland_Warehouse_MapScripts_OnTransition
-{
-    switch (var(VAR_WAREHOUSE_RAVE_STATE))
-    {
-        case GOT_RAVE_MESSAGE:
-            call(WarehouseRave_SetUpRave_Script)
-            setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
-        case SAVE_KEIYING_WAREHOUSE:
-            call(WarehouseRave_MoveObject_Script)
-            call(WarehouseRave_SetUpRave_Script)
-        default:
-            setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
-    }
-}
