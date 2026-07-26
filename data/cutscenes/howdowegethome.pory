@@ -21,7 +21,7 @@ script HowDoWeGetHome_PostSceneObjectCleanUp_Script{
 }
 
 script HowDoWeGetHome_FerryFixed_Script{
-    if (var(VAR_STORYLINE_STATE) > STORY_WEST_RESIDO_COMPLETE){
+    if (var(VAR_STORYLINE_STATE) > STORY_EAST_RESIDO_COMPLETE){
         setobjectflagfromlocalid(LOCALID_CURENO_CROWDWOMAN)
         setobjectflagfromlocalid(LOCALID_CURENO_KEI_YING)
         setobjectflagfromlocalid(LOCALID_CURENO_MADISON)

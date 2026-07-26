@@ -27,7 +27,7 @@ mapscripts CuconuTown_SharpriseCompound_1F_MapScripts
 script Charlotte_CuconuTown_Compound_1F_InteractScript
 {
     lock
-    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE)
+    if (var(VAR_STORYLINE_STATE) == STORY_EAST_RESIDO_COMPLETE)
     {
         call(AaandWereBack_Charlotte_Dialogue)
     }

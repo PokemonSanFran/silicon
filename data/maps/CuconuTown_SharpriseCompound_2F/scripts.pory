@@ -69,7 +69,7 @@ script BedScript_AdvanceStory_Script
     switch(var(VAR_STORYLINE_STATE))
     {
         case STORY_NOT_STARTED: call(TwoHoursAgo_GiveFashionCase_Script)
-        case STORY_WEST_RESIDO_COMPLETE: call(AaandWereBack_FerryRepaired_Dialogue)
+        case STORY_EAST_RESIDO_COMPLETE: call(AaandWereBack_FerryRepaired_Dialogue)
         case STORY_NEED_SLEEP_BEFORE_FRANK: call(OffYouGo_WakeUp_Dialogue)
         case STORY_ASSIGNED_FRANK_QUESTS: call(IGuessWeShouldBeNiceNow_AdvanceTime_Script)
         case STORY_COMPLETED_NAVAL_BASE: call(WhyAreYouHelpingThem_StartChampionship_Dialogue)

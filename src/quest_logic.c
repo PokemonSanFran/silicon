@@ -1942,7 +1942,7 @@ bool32 ShouldShowVigrim(void)
     if (Manhunt_ShouldShowVigrim())
         return TRUE;
 
-    if (VarGet(VAR_STORYLINE_STATE) < STORY_EAST_RESIDO_COMPLETE)
+    if (VarGet(VAR_STORYLINE_STATE) < STORY_WEST_RESIDO_COMPLETE)
         return TRUE;
 
     if ((VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR) && (IsQuestCompletedState(QUEST_PERSUASIVEPASSENGER)))
