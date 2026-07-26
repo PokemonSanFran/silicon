@@ -4,6 +4,7 @@ mapscripts CurenoPort_MapScripts {
 		callnative(WarpTaxiAfterCutscene)
 	}
     MAP_SCRIPT_ON_TRANSITION {
+		call(WarehouseRave_Script_StartOutsideMusic)
         call(Quest_StolenTrade_HideObjectB_Script)
         call(HowDoWeGetHome_PostSceneObjectCleanUp_Script)
         call(HowDoWeGetHome_FerryFixed_Script)
@@ -19,3 +20,4 @@ mapscripts CurenoPort_MapScripts {
         VAR_WAREHOUSE_RAVE_STATE, DEFEATED_KEIYING_WAREHOUSE: WarehouseRave_OutsideWarehouse_Dialogue
     ]
 }
+
