@@ -10,38 +10,13 @@ script WarehouseRave_SetUpRave_Script
 
 script WarehouseRave_Script_StartOutsideMusic
 {
-	callnative(Script_WarehouseRave_IsRaveHappening)
+	callnative(Script_ShouldUpdateMusicForRave)
 	if (var(VAR_RESULT) == FALSE)
 	{
-		release
-		end
+		return
 	}
 
-	callnative(Script_WarehouseRave_IsRaveMusicPlaying)
-	if (var(VAR_RESULT) == TRUE)
-	{
-		release
-		end
-	}
-
-	callnative(SetDarkLowPassFilter)
 	playbgm(MUS_WAREHOUSE_RAVE,TRUE)
-	release
-	end
-}
-
-script WarehouseRave_Script_StopOutsideMusic
-{
-	callnative(Script_WarehouseRave_IsRaveMusicPlaying)
-	if (var(VAR_RESULT) == FALSE)
-	{
-		release
-		end
-	}
-	fadedefaultbgm
-	callnative(ResetLowPassFilter)
-	release
-	end
 }
 
 script WarehouseRave_Hide_Keiying
