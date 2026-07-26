@@ -891,6 +891,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return FALSE;
     }
 
+    UpdateMusicForRave(); // lowPassFilter
     TrySetHiddenGrottoSecrets(); // hiddenGrotto
     IncrementRematchStepCounter();
     Buzzr_IncrementSteps(); // siliconMerge

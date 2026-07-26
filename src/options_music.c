@@ -4,6 +4,7 @@
 #include "constants/cries.h"
 #include "options_music.h"
 #include "overworld.h"
+#include "quest_logic.h"
 #include "sound.h"
 #include "constants/species.h"
 #include "random.h"
@@ -75,6 +76,7 @@ void PreviewBGM(u32 currentOptionId, u32 musicOption)
 void ResetCurrentlyPlayingMusic(void)
 {
     PlayBGM(GetCorrectMusicForScenario());
+    UpdateMusicForRave();
 }
 
 // ***********************************************************************
