@@ -47,6 +47,7 @@ bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
 // Start lowPassFilter
 void ResetLowPassFilter(void);
+void SetLightLowPassFilter(void);
 void SetMediumLowPassFilter(void);
 void SetDarkLowPassFilter(void);
 // End lowPassFilter

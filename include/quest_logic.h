@@ -78,6 +78,7 @@ void Script_CheckIfAnyMonHasChampionRibbon(void);
 
 u32 exponent(u32 y, u32 x);
 void CountDefeatedRabiesMon(void);
+void UpdateMusicForRave(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_SmoothieCrafting_BufferRecipe(void);
 void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
