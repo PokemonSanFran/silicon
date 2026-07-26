@@ -5936,7 +5936,7 @@ static bool32 WarehouseRave_IsRaveHappening(void)
     if (raveVar < GOT_RAVE_MESSAGE)
         return FALSE;
 
-    if (raveVar >= TOLD_BAIYA_ABOUT_KEIYING)
+    if (raveVar >= DEFEATED_KEIYING_WAREHOUSE)
         return FALSE;
 
     return TRUE;
@@ -5956,3 +5956,74 @@ void Script_WarehouseRave_IsRaveMusicPlaying(void)
 {
     gSpecialVar_Result = WarehouseRave_IsRaveMusicPlaying();
 }
+
+static u32 WarehouseRave_GetDistanceFromBuilding(void)
+{
+    s32 playerLocation[AXIS_COUNT];
+    s32 doorLocation[AXIS_COUNT];
+    u32 delta[AXIS_COUNT];
+    u32 distance = 0;
+
+    playerLocation[AXIS_X] = gSaveBlock1Ptr->pos.x;
+    playerLocation[AXIS_Y] = gSaveBlock1Ptr->pos.y;
+
+    doorLocation[AXIS_X] = gMapHeader.events->warps[WARP_ID_CURENO_TO_WAREHOUSE].x;
+    doorLocation[AXIS_Y] = gMapHeader.events->warps[WARP_ID_CURENO_TO_WAREHOUSE].y;
+
+   for (u32 axisIndex = 0; axisIndex < AXIS_COUNT; axisIndex++)
+   {
+        delta[axisIndex] = abs(doorLocation[axisIndex] - playerLocation[axisIndex]);
+        distance += delta[axisIndex];
+   }
+
+   return distance;
+}
+
+bool32 ShouldUpdateMusicForRave(void)
+{
+    if (WarehouseRave_IsRaveHappening() == FALSE)
+        return FALSE;
+
+    u32 distance = WarehouseRave_GetDistanceFromBuilding();
+    return (distance < 10);
+}
+
+void Script_ShouldUpdateMusicForRave(void)
+{
+    gSpecialVar_Result = ShouldUpdateMusicForRave();
+}
+
+void UpdateMusicForRave(void)
+{
+    if (GetCurrentMap() != MAP_CURENO_PORT)
+        return;
+
+    if (ShouldUpdateMusicForRave() == FALSE)
+    {
+        if (WarehouseRave_IsRaveMusicPlaying() == FALSE)
+            return;
+
+        Overworld_ChangeMusicToDefault();
+        ResetLowPassFilter();
+        return;
+    }
+
+    u32 distance = WarehouseRave_GetDistanceFromBuilding();
+    switch (distance)
+    {
+        case 0:        ResetLowPassFilter();
+            break;
+        case 1 ... 3:  SetLightLowPassFilter(); 
+            break;
+        case 4 ... 8:  SetMediumLowPassFilter(); 
+            break;
+        case 9 ... 10: SetDarkLowPassFilter(); 
+            break;
+    }
+
+    if (WarehouseRave_IsRaveMusicPlaying())
+        return;
+
+    PlayNewMapMusic(MUS_WAREHOUSE_RAVE);
+}
+
