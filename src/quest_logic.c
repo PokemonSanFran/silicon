@@ -6027,3 +6027,16 @@ void UpdateMusicForRave(void)
     PlayNewMapMusic(MUS_WAREHOUSE_RAVE);
 }
 
+// ***********************************************************************
+// Cutscene: Enter The Master
+// ***********************************************************************
+
+void EnterTheMaster_BufferPlayerPronouns(void)
+{
+    StringCopy(gStringVar2,COMPOUND_STRING(""));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerSubjectPronoun);
+    StringAppend(gStringVar2,COMPOUND_STRING(" / "));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerObjectPronoun);
+    StringAppend(gStringVar2,COMPOUND_STRING(" / "));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerPosesivePronoun);
+}
