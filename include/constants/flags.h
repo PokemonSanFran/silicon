@@ -2698,7 +2698,7 @@
 #define FLAG_SMART_WILD_AI                                           (SYSTEM_FLAGS + 0x95) // Unused Flag
 #define FLAG_SKY_BATTLE                                              (SYSTEM_FLAGS + 0x96) // Unused Flag
 #define FLAG_POST_SKY_BATTLE                                         (SYSTEM_FLAGS + 0x97) // Unused Flag
-#define FLAG_REMOVE_WARP_FADE                                        (SYSTEM_FLAGS + 0x98) // Unused Flag
+#define FLAG_REMOVE_WARP_FADE_OUT                                        (SYSTEM_FLAGS + 0x98) // Unused Flag
 #define FLAG_SPAWN_INVISIBLE                                         (SYSTEM_FLAGS + 0x99) // Unused Flag
 #define FLAG_SHARPRISESTADIUM_TOURNAMENT_HAPPENING                   (SYSTEM_FLAGS + 0x9A) // Unused Flag
 #define FLAG_SHOULD_SKIP_CREDITS                                     (SYSTEM_FLAGS + 0x9B) // Unused Flag
