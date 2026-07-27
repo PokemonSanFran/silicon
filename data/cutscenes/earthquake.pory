@@ -77,11 +77,6 @@ script Earthquake_ThatNight_Dialogue
     fadescreen(FADE_FROM_BLACK)
 
     call(Earthquake_PlayFake_EventScript)
-
-    playse(SE_PIN)
-    applymovement(PLAYER,Common_Movement_ExclamationMark)
-    applymovement(BAIYA_HOUSE,Common_Movement_ExclamationMark)
-
     call(Earthquake_Fake_Aftershock)
 
     msgbox(format("{PLAYER}, are you okay?"),MSGBOX_DEFAULT,SPEAKER_BAIYA_TIDE)

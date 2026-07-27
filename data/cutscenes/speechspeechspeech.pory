@@ -214,12 +214,6 @@ script SpeechSpeechSpeech_EliteReveal_Dialogue {
 
         call(Earthquake_PlayFake_EventScript)
 
-        playse(SE_PIN)
-        applymovement(GRUNTA,Common_Movement_ExclamationMark)
-        applymovement(GRUNTB,Common_Movement_ExclamationMark)
-        applymovement(LOCALID_FREETHEINNOCENTCOMRADEA,Common_Movement_ExclamationMark)
-        applymovement(GRUNTD,Common_Movement_ExclamationMark)
-        waitmovement(GRUNTD)
 
         call(Earthquake_WaitOutShake)
 
