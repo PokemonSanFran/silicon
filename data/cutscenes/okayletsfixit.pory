@@ -59,7 +59,6 @@ script OkayLetsFixit_ReachTop_Script
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_OKAY_LETS_FIXIT_FLASHBACK, 255, 9, 4)
-		setflag(FLAG_REMOVE_WARP_FADE_IN)
 		waitstate
         end
 }

@@ -22617,6 +22617,20 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_SimpleSable,
         .iconPalette = gItemIconPalette_SimpleSable,
     },
+    [ITEM_WISH_TAG] =
+    {
+      .name = ITEM_NAME("Wish Tag"),
+      .price = 0,
+      .description = COMPOUND_STRING(
+        "A heavily worn piece of paper with a shiny green ribbon attached. The faded text is impossible to read."),
+      .importance = 1,
+      .pocket = POCKET_KEY_ITEMS,
+      .type = ITEM_USE_PARTY_MENU,
+      .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+      .iconPic = gItemIcon_WishTag,
+      .iconPalette = gItemIconPalette_WishTag,
+      .sortType = ITEM_TYPE_UNUSABLE_KEY_ITEM,
+    },
     // End siliconMerge
   };
 

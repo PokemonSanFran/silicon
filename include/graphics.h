@@ -3609,6 +3609,8 @@ extern const u32 gItemIcon_SherbetSurprise[];
 extern const u16 gItemIconPalette_SherbetSurprise[];
 extern const u32 gItemIcon_SimpleSable[];
 extern const u16 gItemIconPalette_SimpleSable[];
+extern const u32 gItemIcon_WishTag[];
+extern const u16 gItemIconPalette_WishTag[];
 extern const u32 gItemIcon_SouthMahjongTile[];
 extern const u16 gItemIconPalette_SouthMahjongTile[];
 extern const u32 gItemIcon_SpikedConcha[];
