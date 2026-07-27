@@ -889,6 +889,8 @@ enum
     STATE_QUEST_FINDTHEGUILTY_COMPLETE,
 };
 
+#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER       OBJ_EVENT_GFX_GENTLEMAN
+
 // ***********************************************************************
 // Quest: Install Nature Probes
 // ***********************************************************************
@@ -902,7 +904,18 @@ enum
 #define ITEM_QUEST_INSTALLNATUREPROBES_SHORE           ITEM_DEVON_PARTS
 #define ITEM_QUEST_INSTALLNATUREPROBES_REWARD          ITEM_FAME_CHECKER
 
-#define OBJ_EVENT_GFX_INSTALLNATUREPROBES_RANGER    OBJ_EVENT_GFX_GENTLEMAN
+// ***********************************************************************
+// Quest: Man of Many Hats
+// ***********************************************************************
+//#define QUEST_MANOFMANYHATS_
+
+#define MAP_QUEST_MANOFMANYHATS                  MAP_ROUTE100
+#define MAP_QUEST_MANOFMANYHATS_TARGET           MAP_LEAVERRA_FOREST
+
+#define ITEM_QUEST_MANOFMANYHATS_1
+#define ITEM_QUEST_MANOFMANYHATS_2
+#define ITEM_QUEST_MANOFMANYHATS_3
+#define ITEM_QUEST_MANOFMANYHATS_4
 
 enum
 {

@@ -43,11 +43,6 @@ const u8 gText_Quest_ImprovBattling_Desc[] =_("Description");
 const u8 gText_Quest_ImprovBattling_DoneDesc[] =_("DoneDescription");
 const u8 gText_Quest_ImprovBattling_Map[] =_("PetarosaBorough");
 
-const u8 gText_Quest_ManOfManyHats_Name[] = _("Man of Many Hats");
-const u8 gText_Quest_ManOfManyHats_Desc[] =_("Description");
-const u8 gText_Quest_ManOfManyHats_DoneDesc[] =_("DoneDescription");
-const u8 gText_Quest_ManOfManyHats_Map[] =_("Zenzu Restaurant");
-
 const u8 gText_Quest_RecruitLocalArtists_Name[] = _("Recruit Local Artists");
 const u8 gText_Quest_RecruitLocalArtists_Desc[] =_("Description");
 const u8 gText_Quest_RecruitLocalArtists_DoneDesc[] =_("DoneDescription");

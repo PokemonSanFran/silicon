@@ -1,84 +1,103 @@
 const FLAG_HIDE_INSTALLNATUREPROBESWORKER = FLAG_TEMP_A
 const LOCKED_DOOR = 8
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
-const INSTALLNATUREPROBESWORKER = LOCALID_ZENZUISLANDRESTO_INSTALLNATUREPROBESWORKER
+// const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_INSTALLNATUREPROBESWORKER
+// const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
+// const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
+const INSTALLNATUREPROBESWORKER_INTERACT = VAR_LAST_TALKED
 
 //Quest_Manofmanyhats_
 
+//For the visibility scripts, var(VAR_RESULT) must always be first in the if statement, as it will first check the result given by Quest_ManOfManyHats_ManOfManyHatsIncrementX, which is then overwritten by the second condition in the if
+
 script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Visibility_Script{
-    returnqueststate(QUEST_INSTALLNATUREPROBES)
+	callnative(Quest_ManOfManyHats_GetVariable_SawBoba)
+	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
+	
+		setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
+	}
 
-        if (var(VAR_RESULT) != QUEST_MENU_COMPLETE_QUEST || var(VAR_QUEST_MANOFMANYHATS) != 0){
-            setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-        }
-    return
-}
-
-script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script{
-        if (var(VAR_QUEST_MANOFMANYHATS) != SEEN_INSTALLNATUREPROBESWORKER_1ST){
-            setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-        }
-    return
+	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Visibility_Script{
-        if (var(VAR_QUEST_MANOFMANYHATS) < SEEN_INSTALLNATUREPROBESWORKER_2ND){
-            setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-        }
-    return
+	callnative(Quest_ManOfManyHats_GetVariable_SawFish)
+	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
+		setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
+	}
+	return
+}
+
+script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script{
+	callnative(Quest_ManOfManyHats_GetVariable_SawArcade)
+	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
+			setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
+	}
+	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Dialogue{
-    addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-    closemessage
-    release
-    end
-}
-
-script Quest_Manofmanyhats_Installnatureprobesworker_StationAttendant_Dialogue{
-    addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-    closemessage
-    release
-    end
-}
-
-script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
-    lock
-    goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Active_Dialogue)
-    goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Reward_Dialogue)
-    goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Complete_Dialogue)
-    goto(Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue)
+	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementBoba)
+	msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	closemessage
+	release
+	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
+	if(var(VAR_QUEST_MANOFMANYHATS) == 112){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
+	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue{
-    addvar(VAR_QUEST_MANOFMANYHATS,1)
-    msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-    closemessage
-    goto(Quest_Manofmanyhats_StartQuest_Dialogue)
+	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementFish)
+	msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	closemessage
+	release
+	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
+	if(var(VAR_QUEST_MANOFMANYHATS) == 121){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
+	return
+}
+
+script Quest_Manofmanyhats_Installnatureprobesworker_ArcadeAttendant_Dialogue{
+	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementArcade)
+	msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	closemessage
+	release
+	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
+	if(var(VAR_QUEST_MANOFMANYHATS) == 211){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
+	return
+}
+
+script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
+	lock
+	goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Active_Dialogue)
+	goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Reward_Dialogue)
+	goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Complete_Dialogue)
+
+	//getmap
+	if(var(VAR_RESULT) == MAP_QIU_VILLAGE_RESTAURANT){}
+	if(var(VAR_RESULT) == MAP_WAJABI_LAKE){}
+	if(var(VAR_RESULT) == MAP_POPIDORA_PIER_ARCADE){}
 }
 
 script Quest_Manofmanyhats_StartQuest_Dialogue{
-    playse(SE_PIN)
-    applymovement(INSTALLNATUREPROBESWORKER, moves(emote_exclamation_mark, delay_16, face_player, step_end))
-    waitse
-    lock
-    msgbox(format("Oh... you're {PLAYER}. Thanks again for your... help."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER)
-    msgbox(format("Things haven't really gotten better since I last saw you."),,SPEAKER_INSTALLNATUREPROBESWORKER,EMOTE_SWEAT)
-    closemessage
-    applymovement(INSTALLNATUREPROBESWORKER,Common_Movement_FaceLeft)
-    waitmovement(INSTALLNATUREPROBESWORKER)
-    msgbox(format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-    msgbox(format("Yeah, I saw you working near the trolleys, and at that restaurant too."),,SPEAKER_PLAYER,,EMOTE_SWEAT)
-    applymovement(INSTALLNATUREPROBESWORKER,Common_Movement_FacePlayer)
-    waitmovement(INSTALLNATUREPROBESWORKER)
-    msgbox(format("Yeah, they're not going well. And neither is this!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-    msgbox(format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_ANGRY)
-    msgbox(format("Sorry to ask another favor... could you get them for me?"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-    setvar(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD)
-    startquest(QUEST_MANOFMANYHATS)
-    call(Quest_Manofmanyhats_Active_Dialogue)
+	playse(SE_PIN)
+	applymovement(INSTALLNATUREPROBESWORKER_INTERACT, moves(emote_exclamation_mark, delay_16, face_player, step_end))
+	waitse
+	lock
+	msgbox(format("Oh... you're {PLAYER}. Thanks again for your... help."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox(format("Things haven't really gotten better since I last saw you."),,SPEAKER_INSTALLNATUREPROBESWORKER,EMOTE_SWEAT)
+	closemessage
+	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
+	waitmovement(INSTALLNATUREPROBESWORKER_INTERACT)
+	msgbox(format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox(format("Yeah, I saw you working near the trolleys, and at that restaurant too."),,SPEAKER_PLAYER,,EMOTE_SWEAT)
+	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FacePlayer)
+	waitmovement(INSTALLNATUREPROBESWORKER_INTERACT)
+	msgbox(format("Yeah, they're not going well. And neither is this!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox(format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_ANGRY)
+	msgbox(format("Sorry to ask another favor... could you get them for me?"),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	setvar(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD)
+	startquest(QUEST_MANOFMANYHATS)
+	call(Quest_Manofmanyhats_Active_Dialogue)
 }
 
 script Quest_Manofmanyhats_Active_Dialogue{
@@ -86,53 +105,53 @@ script Quest_Manofmanyhats_Active_Dialogue{
 }
 
 script Quest_Manofmanyhats_Reward_Dialogue{
-    msgbox(format("Oh! You got my headphones, thank you so much!"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_HAPPY)
+	msgbox(format("Oh! You got my headphones, thank you so much!"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_HAPPY)
 
-        if (!flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS) && !flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET)){
-            msgbox(format("Oh, and if you saw anything else in there, go ahead and grab it. "),,SPEAKER_INSTALLNATUREPROBESWORKER)
-            msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-        }else{
-            msgbox(format("There was other stuff there, do you want it?"),,SPEAKER_PLAYER)
-            msgbox(format("Nah."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-            msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-        }
-    applymovement(INSTALLNATUREPROBESWORKER,Common_Movement_FaceLeft)
-    completequest(QUEST_MANOFMANYHATS)
-    release
-        end
+	if (!flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS) && !flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET)){
+		msgbox(format("Oh, and if you saw anything else in there, go ahead and grab it. "),,SPEAKER_INSTALLNATUREPROBESWORKER)
+		msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	}else{
+		msgbox(format("There was other stuff there, do you want it?"),,SPEAKER_PLAYER)
+		msgbox(format("Nah."),,SPEAKER_INSTALLNATUREPROBESWORKER)
+		msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	}
+	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
+	completequest(QUEST_MANOFMANYHATS)
+	release
+		end
 }
 
 script Quest_Manofmanyhats_Complete_Dialogue{
-    random(3)
-    switch (var(VAR_RESULT)){
-        case 0: msgbox(format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
-        case 1: msgbox(format("You are my fire...\pThe one desire..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
-        case 2: msgbox(format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
-    }
-    msgbox(format("Those headphones must be noise cancelling..."),,SPEAKER_PLAYER,TAIL_WHISPER,EMOTE_SWEAT)
-    closemessage
-    release
-    end
+	random(3)
+	switch (var(VAR_RESULT)){
+		case 0: msgbox(format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+		case 1: msgbox(format("You are my fire...\pThe one desire..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+		case 2: msgbox(format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+	}
+	msgbox(format("Those headphones must be noise cancelling..."),,SPEAKER_PLAYER,TAIL_WHISPER,EMOTE_SWEAT)
+	closemessage
+	release
+	end
 }
 
 script Quest_Manofmanyhats_EnterDoorCombination_Dialogue{
-    setvar(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR)
-        msgbox(format("Okay, Installnatureprobesworker said the combination was 3444..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
-        closemessage
-        playse(SE_DING_DONG)
-        waitse
-        playse(SE_BANG)
-        waitse
-        setmetatile(13,8,0x248,FALSE)
-        special(DrawWholeMapView)
-        warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
-        waitstate
-        end
+	setvar(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR)
+	msgbox(format("Okay, INSTALLNATUREPROBESWORKER_INTERACT said the combination was 3444..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+	closemessage
+	playse(SE_DING_DONG)
+	waitse
+	playse(SE_BANG)
+	waitse
+	setmetatile(13,8,0x248,FALSE)
+	special(DrawWholeMapView)
+	warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
+	waitstate
+	end
 }
 
 script Quest_Manofmanyhats_CheckDoorLock_Script{
-    if (var(VAR_QUEST_MANOFMANYHATS) > OPEN_LOCKED_DOOR){
-        setflag(FLAG_UNLOCK_DOOR)
-    }
+	if (var(VAR_QUEST_MANOFMANYHATS) > OPEN_LOCKED_DOOR){
+		setflag(FLAG_UNLOCK_DOOR)
+	}
 }
 

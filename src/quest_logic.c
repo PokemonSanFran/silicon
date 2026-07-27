@@ -3842,6 +3842,103 @@ void DebugQuest_InstallNatureProbes(u8 state)
             break;
     }
 }
+/*
+void SetVariableBit(u32 varConst, u32 bit, bool32 bitValue)
+{
+    u32 var = VarGet(varConst);
+
+    if (bitValue)
+        var |= (1 << bit); //if bitValue == true
+    else
+        var &= ~(1 << bit);
+
+    VarSet(varConst,var);
+}
+
+bool8 GetVariableBit(u32 varConst, u32 bit)
+{
+    u32 var = VarGet(varConst);
+    return (var >> bit) & 1;
+}
+*/
+void Quest_ManOfManyHats_ManOfManyHatsIncrementBoba(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST,TRUE);
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsIncrementFish(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND,TRUE);
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsIncrementArcade(void)
+{
+    if(!GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD))
+        SetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD,TRUE);
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawBoba(void)
+{
+    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
+    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
+    return varBit;
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawFish(void)
+{
+    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
+    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
+    return varBit;
+}
+
+bool32 Quest_ManOfManyHats_GetVariable_SawArcade(void)
+{
+    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
+    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
+    return varBit;
+}
+
+bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
+{
+    bool32 boba = Quest_ManOfManyHats_GetVariable_SawBoba();
+    bool32 fish = Quest_ManOfManyHats_GetVariable_SawFish();
+    bool32 arcade = Quest_ManOfManyHats_GetVariable_SawArcade();
+
+    if (boba && fish && arcade)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible(void)
+{
+	u32 var = VarGet(VAR_QUEST_MANOFMANYHATS);
+	u32 bit = 0;
+
+	switch(VarGet(VAR_TEMP_A))
+	{
+		case SEEN_INSTALLNATUREPROBESWORKER_1ST: //If Boba was third job visited
+			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
+				bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
+			break;
+		case SEEN_INSTALLNATUREPROBESWORKER_2ND: //If Fisherman was 3rd job visited
+			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
+				bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
+			break;
+		case SEEN_INSTALLNATUREPROBESWORKER_3RD: //If Arcade was 3rd job visited
+			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
+				bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
+			break;
+		default:
+			break;
+	}
+    
+	var |= (2 << bit);
+
+    VarSet(VAR_QUEST_MANOFMANYHATS,var);
+}
 
 // ***********************************************************************
 // Cutscene: Earthquake
