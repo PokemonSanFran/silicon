@@ -1,24 +1,16 @@
-const PLAYER = OBJ_EVENT_ID_PLAYER
-const HIKO = 1
-const JIRACHI = 2
 const CAMERA = OBJ_EVENT_ID_CAMERA
-const FLAG_HIDE_HIKO = FLAG_TEMP_1
-const FLAG_HIDE_JIRACHI = FLAG_TEMP_2
 
-script OkayLetsFixit_Object_Visibility_Script
+script OkayLetsFixit_Script_HikoVisibility
 {
-	setflag(FLAG_HIDE_JIRACHI)
-
-	switch (var(VAR_TIME_TRAVEL_STATE))
+	if (var(VAR_TIME_TRAVEL_STATE) == TIME_TRAVEL_FIRST_RETURN)
 	{
-		case TIME_TRAVEL_FIRST_RETURN:
-		case TIME_TRAVEL_ASK_PLAYER:
-			return
-		default:
-			nop
+		return
 	}
-
-	setflag(FLAG_HIDE_HIKO)
+	if (var(VAR_TIME_TRAVEL_STATE) == TIME_TRAVEL_ASK_PLAYER)
+	{
+		return
+	}
+	setobjectflagfromlocalid(LOCALID_TORGEOT_HIKO)
 }
 
 script OkayLetsFixit_ReachTop_Script
@@ -34,8 +26,8 @@ script OkayLetsFixit_ReachTop_Script
     lock
         playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_START_CUTSCENE)
-        applymovement(PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
-        waitmovement(PLAYER)
+        applymovement(LOCALID_PLAYER, moves(walk_up * 4, walk_left * 7, step_end))
+        waitmovement(LOCALID_PLAYER)
         bufferitemname(STR_VAR_1,ITEM_WISH_TAG)
         msgbox(format("The {STR_VAR_1} is glowing!"))
         closemessage
@@ -44,16 +36,16 @@ script OkayLetsFixit_ReachTop_Script
         dofieldeffectsparkle(17, 42, 0)
         waitfieldeffect(FLDEFF_SPARKLE)
         playse(SE_ORB)
-        fadescreen(FADE_TO_WHITE)
+        fadescreenswapbuffers(FADE_TO_WHITE)
         delay(150)
-        clearflag(FLAG_HIDE_HIKO)
-        addobject(HIKO)
-        fadescreen(FADE_FROM_WHITE)
+		clearobjectflagfromlocalid(LOCALID_TORGEOT_HIKO)
+		addobject(LOCALID_TORGEOT_HIKO)
+        fadescreenswapbuffers(FADE_FROM_WHITE)
 
         msgbox(format("Ah {PLAYER}, I'm glad you came. I'm Hiko."),,SPEAKER_HIKO)
         closemessage
 
-        applymovement(PLAYER, moves(lock_facing_direction, walk_right, unlock_facing_direction, face_up, delay_16, face_down, delay_16, face_left, step_end))
+        applymovement(LOCALID_PLAYER, moves(lock_facing_direction, walk_right, unlock_facing_direction, face_up, delay_16, face_down, delay_16, face_left, step_end))
         waitmovement(0)
 
         msgbox(format("What… where… did you come from?! What the hell is going on?"),,SPEAKER_ALICIA)
@@ -67,6 +59,7 @@ script OkayLetsFixit_ReachTop_Script
 
         fadeblackandsetremovewarpfadeflag
         warpsilent(MAP_OKAY_LETS_FIXIT_FLASHBACK, 255, 9, 4)
+		setflag(FLAG_REMOVE_WARP_FADE_IN)
 		waitstate
         end
 }
@@ -78,12 +71,12 @@ script OkayLetsFixit_StartFlashback_Script
 		setvar(VAR_TIME_TRAVEL_STATE,TIME_TRAVEL_FIRST_RETURN)
         msgbox(format("This was the night I decided to help SharpRise Capital."),,SPEAKER_ALICIA)
 
-        applymovement(HIKO, Common_Movement_FaceLeft)
-        waitmovement(HIKO)
+        applymovement(LOCALID_TORGEOT_HIKO, Common_Movement_FaceLeft)
+        waitmovement(LOCALID_TORGEOT_HIKO)
         msgbox(format("Why?"),,SPEAKER_HIKO)
 
-        applymovement(PLAYER, Common_Movement_FaceRight)
-        waitmovement(PLAYER)
+        applymovement(LOCALID_PLAYER, Common_Movement_FaceRight)
+        waitmovement(LOCALID_PLAYER)
 
         msgbox(format("I heard Baiya and The Tide...but what I wanted was more important."),,SPEAKER_ALICIA,TAIL_WHISPER)
         msgbox(format("You saw what they were saying with your own eyes, no?"),,SPEAKER_HIKO)
@@ -105,8 +98,8 @@ script OkayLetsFixit_ReturnToPeak_Script
         playbgm(MUS_OKAY_LETS_FIX_IT,FALSE)
         clearflag(FLAG_TEMP_1)
 
-        applymovement(PLAYER, Common_Movement_FaceLeft)
-        waitmovement(PLAYER)
+        applymovement(LOCALID_PLAYER, Common_Movement_FaceLeft)
+        waitmovement(LOCALID_PLAYER)
 
 		goto(OkayLetsFixit_ChooseMon_Dialogue)
 }
@@ -193,34 +186,38 @@ script OkayLetsFixit_AskConfirm_Script
 
 script OkayLetsFixit_StartTimeTravel_Script
 {
+	fadeoutbgm(1)
 	closemessage
-	applymovement(PLAYER, moves(delay_16 * 5, face_up, walk_right, walk_up * 4, step_end))
-	applymovement(HIKO, moves(walk_up, walk_right * 3, walk_up * 7, step_end))
+	applymovement(LOCALID_PLAYER, moves(delay_16 * 5, face_up, walk_right, walk_up * 4, step_end))
+	applymovement(LOCALID_TORGEOT_HIKO, moves(walk_up, walk_right * 3, walk_up * 7, step_end))
 	special(SpawnCameraObject)
 	applymovement(CAMERA, moves(walk_right, walk_up * 6, step_end))
 	waitmovement(CAMERA)
-	waitmovement(HIKO)
-	waitmovement(PLAYER)
+	waitmovement(LOCALID_TORGEOT_HIKO)
+	waitmovement(LOCALID_PLAYER)
 
 	call(OkayLetsFixit_TimelineReset_Script)
 	msgbox(format("I hope you make the right decision this time, {PLAYER}."),,SPEAKER_HIKO)
 	closemessage
-	playse(SE_ORB)
-	fadescreen(FADE_TO_WHITE)
-	delay(150)
-	removeobject(HIKO)
-	clearflag(FLAG_TEMP_2)
-	addobject(JIRACHI)
-	fadescreen(FADE_FROM_WHITE)
 
 	playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
 	waitmoncry
+
+    callnative(TransformHikoIntoJirachi)
+	delay(45)
+
 	playmoncry(SPECIES_JIRACHI, CRY_MODE_ENCOUNTER)
 	waitmoncry
-	//endcutscene
+
+	setvar(VAR_RESULT,4)
+	playse(SE_ORB)
+	special(DoOrbEffect)
+	waitstate
+	waitse
 
 	fadeblackandsetremovewarpfadeflag
 	warpsilent(MAP_PETAROSA_BOROUGH_SHARPRISE_COMPOUND_1F, 255, 9, 7)
+	callnative(m4aMPlayAllContinue)
 	waitstate
 }
 

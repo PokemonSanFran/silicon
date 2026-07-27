@@ -2793,6 +2793,18 @@ void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
     gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
 }
 
+static u32 LetsFixThis_GenerateWishingMonGraphicsId(void)
+{
+    enum Species species = SPECIES_JIRACHI;
+    return (OBJ_EVENT_MON + species);
+}
+
+void TransformHikoIntoJirachi(void)
+{
+    u32 graphicsId = LetsFixThis_GenerateWishingMonGraphicsId();
+    TransformObjectByLocalIdIntoGraphicsId(LOCALID_TORGEOT_HIKO,graphicsId);
+}
+
 // ***********************************************************************
 // Quest: Stress Cup
 // ***********************************************************************
