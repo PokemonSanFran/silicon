@@ -145,6 +145,30 @@ static bool8 DebugQuest_MarkSpeciesForDeletion(u32 species)
     return FALSE;
 }
 
+enum Species GetHighestLevelMonFromNPC(enum ResidoTrainerIds trainer, const struct Trainer *trainers, u32 rows)
+{
+    u32 level = 0;
+    enum Species species = SPECIES_NONE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,partyIndex,trainers,rows);
+
+        enum Species newSpecies = mon.species;
+        if (newSpecies == SPECIES_NONE)
+            continue;
+
+        u32 newLevel = mon.lvl;
+        if (newLevel >= level)
+        {
+            level = newLevel;
+            species = newSpecies;
+        }
+    }
+
+    return species;
+}
+
 bool32 HasPlayerJoinedThe_Tide(void)
 {
     return (FlagGet(FLAG_TIMELINE_TRUE));
@@ -2073,6 +2097,13 @@ bool32 CanMonMegaEvolve(u32 species)
             continue;
 
     return TRUE;
+}
+
+void BufferHighestLevelBaiyaMon(void)
+{
+    enum Species species = GetHighestLevelMonFromNPC(TRAINER_BAIYA_FINALS, &gTrainers[0][0], TRAINERS_COUNT);
+    species = GetEggSpecies(species);
+    StringCopy(gStringVar1,GetSpeciesName(species));
 }
 
 // ***********************************************************************
@@ -6051,4 +6082,35 @@ void EnterTheMaster_BufferPlayerPronouns(void)
     StringAppend(gStringVar2,gSaveBlock3Ptr->playerObjectPronoun);
     StringAppend(gStringVar2,COMPOUND_STRING(" / "));
     StringAppend(gStringVar2,gSaveBlock3Ptr->playerPosesivePronoun);
+}
+
+// ***********************************************************************
+// Cutscene: Lets Burn This Mother Down 
+// ***********************************************************************
+
+void LetsBurnThisMotherDown_BufferMostPowerfulAttack(void)
+{
+    enum Move move = MOVE_NONE;
+    u32 movePower = GetMovePower(move), trainer = PARTNER_CHARLOTTE;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gBattlePartners[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+        }
+    }
+    StringCopy(gStringVar1,GetMoveName(move));
 }

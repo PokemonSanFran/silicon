@@ -83,7 +83,7 @@ text gText_EspuleeOutskirts_Shorttermrental_WhichOne
 
 script EspuleeOutskirts_Shorttermrental_ReadBaiyaDossier_Script
 {
-	bufferspeciesname(STR_VAR_1,SPECIES_DRATINI)
+	callnative(BufferHighestLevelBaiyaMon)
 	msgbox(EspuleeOutskirts_Shorttermrental_BaiyaDossier)
 	bufferstring(STR_VAR_3,"Baiya's")
 	msgbox(format("The rest of the pages are just extremely detailed notes for all of {STR_VAR_3} battles..."))
