@@ -569,9 +569,9 @@ struct BattleDomeTrainer
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
 #define BATTLE_TOWER_RECORD_COUNT 5
 
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
 struct BattleFrontier
 {
+#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
@@ -655,20 +655,20 @@ struct BattleFrontier
     /*0xEFA*/ u8 unused_EFA;
     /*0xEFB*/ u8 unused_EFB;
     /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
-};
 #else // siliconFrontier
-struct SiliconBattleFrontier
-{
     u16 battlePoints;
+    u16 currentChallenge;
+    enum SiliconFrontierChallengeType lastChallengeType[SILICON_FACILITY_COUNT];
     u16 numBattles[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
     struct SiliconFrontierStreaks streakData[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
     struct RentalMon factoryRentalMons[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_FRONTIER_PARTY_SIZE];
     enum SiliconFrontierPartner currentPartner[SILICON_FACILITY_COUNT];
-    u8 remainingSparringHeals;
+    u8 remainingSparringHeals:2;
+    enum Type chosenSparringType;
     u8 disableRecordBattle:1;
-    u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
-};
+    u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
 #endif // siliconFrontier
+};
 
 struct ApprenticeQuestion
 {
@@ -754,11 +754,7 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
-#if FREE_EMERALD_BATTLE_FRONTIER == FALSE
-    /*0x64C*/ struct BattleFrontier frontier;
-#else // siliconFrontier
-    struct SiliconBattleFrontier frontier; // siliconFrontier
-#endif // siliconFrontier
+    struct BattleFrontier frontier;
     // Start siliconMerge
 	u8 optionsGame[NUM_OPTIONS_GAME_SETTINGS];
     u8 optionsBattle[NUM_OPTIONS_BATTLE_SETTINGS];
