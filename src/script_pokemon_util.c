@@ -279,18 +279,28 @@ void ReducePlayerPartyToSelectedMons(void)
 }
 
 // Start siliconMerge
-void LevelUpAllPokemonTo100(void)
+void LevelAllPokemonToX(u32 level)
 {
     for (u32 i = 0; i < PARTY_SIZE; i++)
-	{
+    {
         struct Pokemon *pokemon = &gParties[B_TRAINER_PLAYER][i];
-        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) != SPECIES_NONE)
-		{
-            u32 exp = gExperienceTables[gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].growthRate][MAX_LEVEL];
-            SetMonData(pokemon, MON_DATA_EXP, &exp);
-            CalculateMonStats(pokemon);
-        }
+        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            continue;
+
+        u32 exp = gExperienceTables[gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].growthRate][level];
+        SetMonData(pokemon, MON_DATA_EXP, &exp);
+        CalculateMonStats(pokemon);
     }
+}
+
+void LevelAllPokemonTo50(void)
+{
+    LevelAllPokemonToX(50);
+}
+
+void LevelUpAllPokemonTo100(void)
+{
+    LevelAllPokemonToX(MAX_LEVEL);
 }
 // End siliconMerge
 void CanHyperTrain(struct ScriptContext *ctx)
