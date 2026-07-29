@@ -936,6 +936,7 @@ void StartMenu_Init(enum StartMenuModes mode)
     if (mode >= START_MODE_SAVE_SCRIPT && mode < NUM_START_MODES)
         cb = CB2_ReturnToFieldContinueScript;
 
+    FlagClear(FLAG_SYS_SAVE_SUCCESSFUL);
     sStartMenuDataPtr = AllocZeroed(sizeof(struct StartMenuData));
     if (!sStartMenuDataPtr)
     {

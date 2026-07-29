@@ -2720,8 +2720,8 @@
 #define FLAG_LITTLE_CUP_BATTLE                                       (SYSTEM_FLAGS + 0xAA) // Unused Flag
 #define FLAG_GROTTO_ROUTE22                                          (SYSTEM_FLAGS + 0xAB)
 #define FLAG_SYS_USED_FROM_REGISTER_MENU                             (SYSTEM_FLAGS + 0xAC) // Unused Flag
-#define FLAG_UNUSED_0x90D                                            (SYSTEM_FLAGS + 0xAD) // Unused Flag
-#define FLAG_UNUSED_0x90E                                            (SYSTEM_FLAGS + 0xAE) // Unused Flag
+#define FLAG_SYS_SAVE_SUCCESSFUL                                     (SYSTEM_FLAGS + 0xAD) // Unused Flag
+#define FLAG_SYS_FRONTIER_CHALLENGE_STARTED                          (SYSTEM_FLAGS + 0xAE) // Unused Flag
 #define FLAG_UNUSED_0x90F                                            (SYSTEM_FLAGS + 0xAF) // Unused Flag
 
 #define FLAG_UNUSED_0x910                                            (SYSTEM_FLAGS + 0xB0) // Unused Flag
