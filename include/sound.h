@@ -45,6 +45,12 @@ void SE12PanpotControl(s8 pan);
 bool8 IsSEPlaying(void);
 bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
+// Start lowPassFilter
+void ResetLowPassFilter(void);
+void SetLightLowPassFilter(void);
+void SetMediumLowPassFilter(void);
+void SetDarkLowPassFilter(void);
+// End lowPassFilter
 void Task_DuckBGMForPokemonCry(u8 taskId);
 void StopSE(void); //dexnav
 

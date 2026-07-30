@@ -1470,6 +1470,7 @@ u16 GetCorrectMusicForScenario(void)
 
 void Overworld_PlaySpecialMapMusic(void)
 {
+    ResetLowPassFilter();
     u16 music = GetCurrLocationDefaultMusic();
 
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_STOP)
@@ -1506,6 +1507,7 @@ void Overworld_ClearSavedMusic(void)
 
 static void TransitionMapMusic(void)
 {
+    ResetLowPassFilter();
     if (gDisableMapMusicChangeOnMapLoad == MUSIC_DISABLE_STOP)
     {
         StopMapMusic();

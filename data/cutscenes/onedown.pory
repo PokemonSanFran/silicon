@@ -48,13 +48,6 @@ script OneDown_StartCutscene_Script {
 script OneDown_StartEarthquake_Script{
 
         call(Earthquake_PlayFake_EventScript)
-
-        playse(SE_PIN)
-        applymovement(PLAYER,Common_Movement_ExclamationMark)
-        applymovement(MAGNUS,Common_Movement_ExclamationMark)
-        applymovement(ADAORA,Common_Movement_ExclamationMark)
-        waitmovement(ADAORA)
-
         call(Earthquake_Fake_Aftershock)
         goto(OneDown_Finish_Dialogue)
 }

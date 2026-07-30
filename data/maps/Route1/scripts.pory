@@ -2,6 +2,7 @@ mapscripts Route1_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_ArtisanBalls2_CheckTrainerA_Script)
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+		call_if_quest_not_complete(QUEST_RESTORETIRABUDINGYM,Quest_Rematches_Script_HideBD)
     }
     MAP_SCRIPT_ON_LOAD
     {

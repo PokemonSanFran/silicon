@@ -3112,7 +3112,7 @@
     .macro fadeblackandsetremovewarpfadeflag
     fadescreen FADE_TO_BLACK
     setflag FLAG_HIDE_MAP_NAME_POPUP
-    setflag FLAG_REMOVE_WARP_FADE
+    setflag FLAG_REMOVE_WARP_FADE_OUT
     .endm
 
     @
@@ -3847,3 +3847,17 @@
 	.endif
 	.endm
 	@ end bpBox
+
+  @ start timePrinting
+  .macro buffertimecurrent stringVarId:req
+	callnative ScrFunc_timeprintingcurrent
+  stringvar \stringVarId
+  .endm
+
+  .macro buffertimegiven stringVarId:req, hours:req, minutes=0
+	callnative ScrFunc_timeprintinggiven
+  stringvar \stringVarId
+  .2byte \hours
+  .2byte \minutes
+  .endm
+  @ end timePrinting

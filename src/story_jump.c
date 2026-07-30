@@ -657,6 +657,9 @@ void GiveItems_StarterChoice(bool32 jumpType)
 
     u32 slot = Random() % SILICON_STARTER_COUNT;
     VarSet(VAR_CHOSEN_PSF_STARTER,GetStarterFromSlot(slot));
+    enum PlayerFavoriteFoods food = Random() % PLAYER_FAVORITE_FOOD_COUNT;
+    VarSet(VAR_PLAYER_FAVORITE_FOOD,food);
+
 
     GenerateGiveStarterToPlayer();
 }
@@ -791,7 +794,7 @@ void FlagsVarWarp_EnterShinzo()
     FlagSet(TRAINER_FLAGS_START + TRAINER_031A849F);
     FlagSet(TRAINER_FLAGS_START + TRAINER_045FDD44);
     FlagSet(TRAINER_FLAGS_START + TRAINER_041FD20E);
-    VarSet(VAR_GYM_2_STATE, GYM_DEFEATED_LEADER);
+    VarSet(VAR_GYM_2_STATE, TORA_GYM_LEADER_DEFEATED);
     IncrementStorylineVariable();
     WowYoureStrong_GetBadgesAndSetTowerState();
     SetWarpDestination(MAP_GROUP(MAP_TORA_TOWN_GYM),MAP_NUM(MAP_TORA_TOWN_GYM),0,USE_WARP_ID,USE_WARP_ID);
@@ -831,7 +834,7 @@ void FlagsVarWarp_EnterEmrys()
     FlagSet(TRAINER_FLAGS_START + TRAINER_0C95C833);
     FlagSet(TRAINER_FLAGS_START + TRAINER_0AAB38A6);
     VarSet(VAR_EMRYS_STATE, BATTLE_1_COMPLETE);
-    VarSet(VAR_GYM_3_STATE, GYM_DEFEATED_LEADER);
+    VarSet(VAR_GYM_3_STATE, PERLACIA_GYM_LEADER_DEFEATED);
     IncrementStorylineVariable();
     WowYoureStrong_GetBadgesAndSetTowerState();
     SetWarpDestination(MAP_GROUP(MAP_PERLACIA_CITY_GYM),MAP_NUM(MAP_PERLACIA_CITY_GYM),0,USE_WARP_ID,USE_WARP_ID);
@@ -1480,7 +1483,9 @@ void JumpPlayerTo_TheStrikeStrikesBack(bool32 jumpType)
 void GiveItems_VSGarbodor(bool32 jumpType)
 {
     if (VarGet(VAR_STORYLINE_STATE) < STORY_NEED_SLEEP_BEFORE_FRANK)
-        AddBagItem(VSGarbodor_GetGemFromType(),1);
+    {
+        AddBagItem(VSGarbodor_ChooseGemBasedOnStarter(),1);
+    }
 }
 
 void FlagsVarWarp_VSGarbodor()

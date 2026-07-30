@@ -6,7 +6,10 @@ extern const u8 gCgb3Vol[];
 
 #define BSS_CODE __attribute__((section(".bss.code")))
 
-BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0xB40] = {0};
+// Start lowPassFilter
+//BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0xB40] = {0};
+BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0xB74] = {0};
+// End lowPassFilter
 BSS_CODE ALIGNED(4) u32 hq_buffer_ptr[0x160] = {0};
 
 struct SoundInfo gSoundInfo;
@@ -405,6 +408,12 @@ void SoundInit(struct SoundInfo *soundInfo)
 
     SampleFreqSet(SOUND_MODE_FREQ_13379);
 
+    // Start lowPassFilter
+    soundInfo->lowPassFilterCoeff = LOW_PASS_FILTER_BYPASS;
+    soundInfo->lowPassFilterStateLeft = 0;
+    soundInfo->lowPassFilterStateRight = 0;
+    // End lowPassFilter
+
     soundInfo->ident = ID_NUMBER;
 }
 
@@ -572,6 +581,30 @@ void m4aSoundVSyncOn(void)
     soundInfo->pcmDmaCounter = 0;
     soundInfo->ident = ident - 10;
 }
+
+// Start lowPassFilter
+void m4aSetLowpassFilter(u8 coefficient)
+{
+    struct SoundInfo *soundInfo = SOUND_INFO_PTR;
+
+    if (soundInfo->ident != ID_NUMBER)
+        return;
+
+    soundInfo->lowPassFilterCoeff = coefficient;
+}
+
+void m4aResetLowpassFilter(void)
+{
+    struct SoundInfo *soundInfo = SOUND_INFO_PTR;
+
+    if (soundInfo->ident != ID_NUMBER)
+        return;
+
+    soundInfo->lowPassFilterCoeff = LOW_PASS_FILTER_BYPASS;
+    soundInfo->lowPassFilterStateLeft = 0;
+    soundInfo->lowPassFilterStateRight = 0;
+}
+// End lowPassFilter
 
 void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tracks, u8 trackCount)
 {

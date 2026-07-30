@@ -16,7 +16,7 @@ void Quest_ArtisanBalls3_CheckFirstBattlerBallsAndSetReward(void);
 void Quest_Generic_CompleteSubquests(u16 relevantQuest);
 void Quest_Generic_MakeQuestRewardIfSubquestsComplete(u32 relevantQuest);
 void YouRealizeTheyreEvilRight_SetFlagIfGemUsedAgainstBaiya(void);
-u32 VSGarbodor_GetGemFromType(void);
+enum Item VSGarbodor_ChooseGemBasedOnStarter(void);
 void WowYoureStrong_GetBadgesAndSetTowerState(void);
 bool32 GenerateAndStartWildFogBattle(u32 headerId, u32 area);
 void IncrementFogVariable(void);
@@ -78,6 +78,7 @@ void Script_CheckIfAnyMonHasChampionRibbon(void);
 
 u32 exponent(u32 y, u32 x);
 void CountDefeatedRabiesMon(void);
+void UpdateMusicForRave(void);
 void TryRabiesPokerus(struct BoxPokemon *boxMon, u32 species);
 void Quest_SmoothieCrafting_BufferRecipe(void);
 void Quest_BetweenAStoneAndAHardPlace_TryIncrementQuestState(void);
@@ -86,6 +87,7 @@ bool8 Quest_Freetheinnocent_FactsLearned(void);
 bool8 Quest_Freetheinnocent_CupFound(void);
 bool8 Quest_Freetheinnocent_CashierSpoken(void);
 bool8 IsHalaiIslandUnderConstruction(void);
+bool8 IsHalaiIslandUnderCrisis(void);
 
 void Quest_FlightPatterns_SetLastFlightEncounter(u32);
 u32 Quest_FlightPatterns_GetFlightPath(void);

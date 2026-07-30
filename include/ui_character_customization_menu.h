@@ -5,7 +5,7 @@
 
 void Task_OpenCharacterCustomizationMenuFromStartMenu(u8 taskId);
 void CB2_CustomizationFromStartMenu(void);
-void Character_Customization_Menu_Init(MainCallback callback);
+void Character_Customization_Menu_Init(MainCallback callback, u32 cursorPlace, u32 currentFirstOption);
 void SetPlayerPalette(u32 paletteTag, struct Sprite *sprite);
 void SetPlayerPaletteTimeBlend(u32 paletteTag, struct Sprite *sprite);
 void SetPlayerAvatarToChampion(void);

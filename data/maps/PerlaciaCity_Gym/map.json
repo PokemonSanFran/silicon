@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_PERLACIA_GYM_EMRYS",
       "graphics_id": "OBJ_EVENT_GFX_EMRYS",
       "x": 1,
       "y": 5,
@@ -28,6 +29,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_PERLACIA_GYM_PUZZLE_KID_3",
       "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
       "x": 6,
       "y": 2,
@@ -41,6 +43,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PERLACIA_GYM_PUZZLE_KID_2",
       "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
       "x": 5,
       "y": 3,
@@ -54,6 +57,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
+      "local_id": "LOCALID_PERLACIA_GYM_PUZZLE_KID_1",
       "graphics_id": "OBJ_EVENT_GFX_GAMEBOY_KID",
       "x": 4,
       "y": 2,
@@ -142,6 +146,15 @@
       "type": "trigger",
       "x": 3,
       "y": 2,
+      "elevation": 0,
+      "var": "VAR_GYM_3_STATE",
+      "var_value": "1",
+      "script": "EnterEmrys_WalkToBattlefield_Script"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 8,
       "elevation": 0,
       "var": "VAR_GYM_3_STATE",
       "var_value": "1",

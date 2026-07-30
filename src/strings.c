@@ -1344,3 +1344,10 @@ const u8 gText_Morning[] = _("Morning");
 const u8 gText_Evening[] = _("Evening");
 const u8 gText_Night[]   = _("Night");
 // End siliconDNS
+// Start playerFavoriteFood
+const u8 gText_MascarponePizza[] = _("Mascarpone pizza");
+const u8 gText_GreenChiliBurger[] = _("Green chili burgers");
+const u8 gText_ChilaquilesEgg[] = _("Chilaquiles & eggs");
+const u8 gText_BaconAsiagoBagel[] = _("Bacon & asiago bagels");
+const u8 gText_SavorySorbet[] = _("Savory sorbet");
+// End playerFavoriteFood

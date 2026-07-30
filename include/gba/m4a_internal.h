@@ -168,6 +168,15 @@ struct SoundChannel
 
 #define PCM_DMA_BUF_SIZE 2464 // size of Direct Sound buffer
 
+// Start lowPassFilter
+#define LOW_PASS_FILTER_BYPASS 0xFF
+#define LOW_PASS_FILTER_VERY_DARK 0x10
+#define LOW_PASS_FILTER_DARK 0x20
+#define LOW_PASS_FILTER_MEDIUM 0x40
+#define LOW_PASS_FILTER_LIGHT 0x80
+#define LOW_PASS_FILTER_VERY_LIGHT 0xC0
+// End lowPassFilter
+
 struct MusicPlayerInfo;
 
 typedef void (*MPlayFunc)();
@@ -211,7 +220,13 @@ struct SoundInfo
     MPlayFunc *MPlayJumpTable;
     PlyNoteFunc plynote;
     ExtVolPitFunc ExtVolPit;
-    u8 gap2[16];
+    // Start lowPassFilter
+    //u8 gap2[16];
+    s16 lowPassFilterStateLeft;
+    s16 lowPassFilterStateRight;
+    u8 lowPassFilterCoeff;
+    u8 gap2[11];
+    // End lowPassFilter
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
     s8 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };

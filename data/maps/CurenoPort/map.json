@@ -409,6 +409,7 @@
       "dest_warp_id": "1"
     },
     {
+      "warp_id": "WARP_ID_CURENO_TO_WAREHOUSE",
       "x": 25,
       "y": 32,
       "elevation": 0,

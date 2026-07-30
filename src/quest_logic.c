@@ -49,6 +49,7 @@
 #include "quest_logic.h"
 #include "battle_util.h"
 #include "pokemon.h"
+#include "options_visual.h"
 #include "field_specials.h"
 #include "fly_encounter.h"
 #include "battle_scripts.h"
@@ -142,6 +143,30 @@ static bool8 DebugQuest_MarkSpeciesForDeletion(u32 species)
     }
 
     return FALSE;
+}
+
+enum Species GetHighestLevelMonFromNPC(enum ResidoTrainerIds trainer, const struct Trainer *trainers, u32 rows)
+{
+    u32 level = 0;
+    enum Species species = SPECIES_NONE;
+
+    for (u32 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        const struct TrainerMon mon = Quest_Generic_GetMonFromTrainer(trainer,partyIndex,trainers,rows);
+
+        enum Species newSpecies = mon.species;
+        if (newSpecies == SPECIES_NONE)
+            continue;
+
+        u32 newLevel = mon.lvl;
+        if (newLevel >= level)
+        {
+            level = newLevel;
+            species = newSpecies;
+        }
+    }
+
+    return species;
 }
 
 bool32 HasPlayerJoinedThe_Tide(void)
@@ -1891,54 +1916,23 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
-u32 VSGarbodor_RandomlyChooseTypeFromStarter(void)
+enum Type VSGarbodor_RandomlyChooseTypeFromStarter(void)
 {
-    u32 type = Random() % 2;
-    u32 gemType = 0;
+    u32 typeIndex = (VarGet(VAR_INNER_CONSTRUCTION_SITE_STATE) == PLAYER_LEFT_SIDE) ? 0 : 1;
+    enum Species species = SanitizeSpeciesId(VarGet(VAR_CHOSEN_PSF_STARTER));
 
-    switch(VarGet(VAR_CHOSEN_PSF_STARTER))
-    {
-        case 0: return gemType = gSpeciesInfo[SPECIES_SCYTHER].types[type];
-        case 1: return gemType = gSpeciesInfo[SPECIES_CHARMANDER].types[type];
-        case 2: return gemType = gSpeciesInfo[SPECIES_PETILIL].types[type];
-        case 3: return gemType = gSpeciesInfo[SPECIES_FLAAFFY].types[type];
-        case 4: return gemType = gSpeciesInfo[SPECIES_MAREANIE].types[type];
-        case 5: return gemType = gSpeciesInfo[SPECIES_ARON].types[type];
-        case 6: return gemType = gSpeciesInfo[SPECIES_SWINUB].types[type];
-        case 7: return gemType = gSpeciesInfo[SPECIES_HATTREM].types[type];
-        default: return gemType = gSpeciesInfo[SPECIES_PANCHAM].types[type];
-    }
-
+    return GetSpeciesType(species,typeIndex);
 }
 
-u32 VSGarbodor_GetGemFromType(void)
+enum Item VSGarbodor_ChooseGemBasedOnStarter(void)
 {
-    switch(VSGarbodor_RandomlyChooseTypeFromStarter())
-    {
-        case TYPE_NORMAL: return ITEM_NORMAL_GEM;
-        case TYPE_FIGHTING: return ITEM_FIGHTING_GEM;
-        case TYPE_FLYING: return ITEM_FLYING_GEM;
-        case TYPE_POISON: return ITEM_POISON_GEM;
-        case TYPE_GROUND: return ITEM_GROUND_GEM;
-        case TYPE_ROCK: return ITEM_ROCK_GEM;
-        case TYPE_BUG: return ITEM_BUG_GEM;
-        case TYPE_GHOST: return ITEM_GHOST_GEM;
-        case TYPE_STEEL: return ITEM_STEEL_GEM;
-        case TYPE_FIRE: return ITEM_FIRE_GEM;
-        case TYPE_WATER: return ITEM_WATER_GEM;
-        case TYPE_GRASS: return ITEM_GRASS_GEM;
-        case TYPE_ELECTRIC: return ITEM_ELECTRIC_GEM;
-        case TYPE_PSYCHIC: return ITEM_PSYCHIC_GEM;
-        case TYPE_ICE: return ITEM_ICE_GEM;
-        case TYPE_DRAGON: return ITEM_DRAGON_GEM;
-        case TYPE_DARK: return ITEM_DARK_GEM;
-        default: return ITEM_FAIRY_GEM;
-    }
+    enum Type type = VSGarbodor_RandomlyChooseTypeFromStarter();
+    return gTypesInfo[type].gem;
 }
 
-void VSGarbodor_ChooseGemBasedOnStarter(void)
+void Script_VSGarbodor_ChooseGemBasedOnStarter(void)
 {
-    gSpecialVar_0x8003 = VSGarbodor_GetGemFromType();
+    gSpecialVar_0x8003 = gTypesInfo[VSGarbodor_RandomlyChooseTypeFromStarter()].gem;
 }
 
 // ***********************************************************************
@@ -1972,7 +1966,10 @@ bool32 ShouldShowVigrim(void)
     if (Manhunt_ShouldShowVigrim())
         return TRUE;
 
-    if (VarGet(VAR_STORYLINE_STATE) < STORY_EAST_RESIDO_COMPLETE)
+    if (VarGet(VAR_STORYLINE_STATE) < STORY_WEST_RESIDO_COMPLETE)
+        return TRUE;
+
+    if ((VarGet(VAR_STORYLINE_STATE) >= STORY_CLEAR) && (IsQuestCompletedState(QUEST_PERSUASIVEPASSENGER)))
         return TRUE;
 
     return FALSE;
@@ -2100,6 +2097,13 @@ bool32 CanMonMegaEvolve(u32 species)
             continue;
 
     return TRUE;
+}
+
+void BufferHighestLevelBaiyaMon(void)
+{
+    enum Species species = GetHighestLevelMonFromNPC(TRAINER_BAIYA_FINALS, &gTrainers[0][0], TRAINERS_COUNT);
+    species = GetEggSpecies(species);
+    StringCopy(gStringVar1,GetSpeciesName(species));
 }
 
 // ***********************************************************************
@@ -2818,6 +2822,18 @@ static u8 DoesPlayerHaveOneOrTwoUsableMon(void)
 void Script_DoesPlayerHaveOneOrTwoUsableMon(void)
 {
     gSpecialVar_Result = DoesPlayerHaveOneOrTwoUsableMon();
+}
+
+static u32 LetsFixThis_GenerateWishingMonGraphicsId(void)
+{
+    enum Species species = SPECIES_JIRACHI;
+    return (OBJ_EVENT_MON + species);
+}
+
+void TransformHikoIntoJirachi(void)
+{
+    u32 graphicsId = LetsFixThis_GenerateWishingMonGraphicsId();
+    TransformObjectByLocalIdIntoGraphicsId(LOCALID_TORGEOT_HIKO,graphicsId);
 }
 
 // ***********************************************************************
@@ -5693,13 +5709,8 @@ void Script_Quest_HybridCulture_IsSunrise(void)
 
 static void BufferSunTimes(u32 begin, u32 end)
 {
-    ConvertIntToDecimalStringN(gStringVar1,begin,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_1}:00"));
-    StringCopy(gStringVar1,gStringVar4);
-
-    ConvertIntToDecimalStringN(gStringVar2,end,STR_CONV_MODE_LEADING_ZEROS,CountDigits(DAY_HOUR_END));
-    StringExpandPlaceholders(gStringVar4,COMPOUND_STRING("{STR_VAR_2}:00"));
-    StringCopy(gStringVar2,gStringVar4);
+    FormatGivenTimeForOutput(gStringVar1,begin,0);
+    FormatGivenTimeForOutput(gStringVar2,end,0);
 }
 
 void BufferSunriseTimes(void)
@@ -5982,4 +5993,221 @@ void Manhunt_GetCharlotteMonCry(void)
 
     enum Species species = (index == PARTY_SIZE) ? SPECIES_NONE : mon.species;
     PlayCry_Script(species, CRY_MODE_ENCOUNTER);
+}
+
+// ***********************************************************************
+// Cutscene: Player Sleep
+// ***********************************************************************
+
+static bool8 ShouldPlayerSkipWakeUpTimeSelect(void)
+{
+    u32 storyline = VarGet(VAR_STORYLINE_STATE);
+
+    if (storyline == STORY_NEED_SLEEP_BEFORE_FRANK)
+        return TRUE;
+
+    if (storyline == STORY_PRE_EARTHQUAKE)
+        return TRUE;
+
+    return FALSE;
+}
+
+void Script_ShouldPlayerSkipWakeUpTimeSelect(void)
+{
+    gSpecialVar_Result = ShouldPlayerSkipWakeUpTimeSelect();
+}
+
+// ***********************************************************************
+// Cutscene: Let's Finish This
+// ***********************************************************************
+
+void Script_BufferNumberOfCompletedTakedownQuests(void)
+{
+    u32 count = 1;
+
+    if (IsQuestCompletedState(QUEST_BREAKTHEINTERNET))
+        count++;
+    if (IsQuestCompletedState(QUEST_WAREHOUSEWARFARE))
+        count++;
+    if (IsQuestCompletedState(QUEST_PERSUASIVEPASSENGER))
+        count++;
+
+    switch (count)
+    {
+        default:StringCopy(gStringVar1,COMPOUND_STRING("Some"));
+                break;
+        case 2: StringCopy(gStringVar1,COMPOUND_STRING("Two"));
+                break;
+        case 3: StringCopy(gStringVar1,COMPOUND_STRING("Three"));
+                break;
+        case 4: StringCopy(gStringVar1,COMPOUND_STRING("Four"));
+                break;
+    }
+}
+
+// ***********************************************************************
+// Cutscene: There Can Only Be One
+// ***********************************************************************
+
+void BufferFavoriteFood(void)
+{
+    const u8* foods[] =
+    {
+        [PLAYER_FAVORITE_FOOD_PIZZA] = gText_MascarponePizza,
+        [PLAYER_FAVORITE_FOOD_BURGER] = gText_GreenChiliBurger,
+        [PLAYER_FAVORITE_FOOD_EGGS] = gText_ChilaquilesEgg,
+        [PLAYER_FAVORITE_FOOD_BAGEL] = gText_BaconAsiagoBagel,
+        [PLAYER_FAVORITE_FOOD_SORBET] = gText_SavorySorbet,
+    };
+    
+    enum PlayerFavoriteFoods food = VarGet(VAR_PLAYER_FAVORITE_FOOD);
+
+    StringCopy(gStringVar1,foods[food]);
+}
+
+// ***********************************************************************
+// Cutscene: Warehouse Rave
+// ***********************************************************************
+
+static bool32 WarehouseRave_IsRaveHappening(void)
+{
+    u32 raveVar = VarGet(VAR_WAREHOUSE_RAVE_STATE);
+
+    if (raveVar < GOT_RAVE_MESSAGE)
+        return FALSE;
+
+    if (raveVar >= DEFEATED_KEIYING_WAREHOUSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_WarehouseRave_IsRaveHappening(void)
+{
+    gSpecialVar_Result = WarehouseRave_IsRaveHappening();
+}
+
+static bool32 WarehouseRave_IsRaveMusicPlaying(void)
+{
+    return (GetCurrentMapMusic() == MUS_WAREHOUSE_RAVE);
+}
+
+void Script_WarehouseRave_IsRaveMusicPlaying(void)
+{
+    gSpecialVar_Result = WarehouseRave_IsRaveMusicPlaying();
+}
+
+static u32 WarehouseRave_GetDistanceFromBuilding(void)
+{
+    s32 playerLocation[AXIS_COUNT];
+    s32 doorLocation[AXIS_COUNT];
+    u32 delta[AXIS_COUNT];
+    u32 distance = 0;
+
+    playerLocation[AXIS_X] = gSaveBlock1Ptr->pos.x;
+    playerLocation[AXIS_Y] = gSaveBlock1Ptr->pos.y;
+
+    doorLocation[AXIS_X] = gMapHeader.events->warps[WARP_ID_CURENO_TO_WAREHOUSE].x;
+    doorLocation[AXIS_Y] = gMapHeader.events->warps[WARP_ID_CURENO_TO_WAREHOUSE].y;
+
+   for (u32 axisIndex = 0; axisIndex < AXIS_COUNT; axisIndex++)
+   {
+        delta[axisIndex] = abs(doorLocation[axisIndex] - playerLocation[axisIndex]);
+        distance += delta[axisIndex];
+   }
+
+   return distance;
+}
+
+bool32 ShouldUpdateMusicForRave(void)
+{
+    if (WarehouseRave_IsRaveHappening() == FALSE)
+        return FALSE;
+
+    u32 distance = WarehouseRave_GetDistanceFromBuilding();
+    return (distance < 10);
+}
+
+void Script_ShouldUpdateMusicForRave(void)
+{
+    gSpecialVar_Result = ShouldUpdateMusicForRave();
+}
+
+void UpdateMusicForRave(void)
+{
+    if (GetCurrentMap() != MAP_CURENO_PORT)
+        return;
+
+    if (ShouldUpdateMusicForRave() == FALSE)
+    {
+        if (WarehouseRave_IsRaveMusicPlaying() == FALSE)
+            return;
+
+        Overworld_ChangeMusicToDefault();
+        ResetLowPassFilter();
+        return;
+    }
+
+    u32 distance = WarehouseRave_GetDistanceFromBuilding();
+    switch (distance)
+    {
+        case 0:        ResetLowPassFilter();
+            break;
+        case 1 ... 3:  SetLightLowPassFilter(); 
+            break;
+        case 4 ... 8:  SetMediumLowPassFilter(); 
+            break;
+        case 9 ... 10: SetDarkLowPassFilter(); 
+            break;
+    }
+
+    if (WarehouseRave_IsRaveMusicPlaying())
+        return;
+
+    PlayNewMapMusic(MUS_WAREHOUSE_RAVE);
+}
+
+// ***********************************************************************
+// Cutscene: Enter The Master
+// ***********************************************************************
+
+void EnterTheMaster_BufferPlayerPronouns(void)
+{
+    StringCopy(gStringVar2,COMPOUND_STRING(""));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerSubjectPronoun);
+    StringAppend(gStringVar2,COMPOUND_STRING(" / "));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerObjectPronoun);
+    StringAppend(gStringVar2,COMPOUND_STRING(" / "));
+    StringAppend(gStringVar2,gSaveBlock3Ptr->playerPosesivePronoun);
+}
+
+// ***********************************************************************
+// Cutscene: Lets Burn This Mother Down 
+// ***********************************************************************
+
+void LetsBurnThisMotherDown_BufferMostPowerfulAttack(void)
+{
+    enum Move move = MOVE_NONE;
+    u32 movePower = GetMovePower(move), trainer = PARTNER_CHARLOTTE;
+
+    for (u32 index = 0; index < PARTY_SIZE; index++)
+    {
+        const struct TrainerMon mon = gBattlePartners[GetCurrentDifficultyLevel()][trainer].party[index];
+
+        if (SanitizeSpeciesId(mon.species) == SPECIES_NONE)
+            break;
+
+        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+        {
+            u32 tempMove = mon.moves[moveIndex];
+            u32 tempMovePower = GetMovePower(tempMove);
+
+            if (tempMovePower <= movePower)
+                continue;
+
+            move = tempMove;
+            movePower = tempMovePower;
+        }
+    }
+    StringCopy(gStringVar1,GetMoveName(move));
 }

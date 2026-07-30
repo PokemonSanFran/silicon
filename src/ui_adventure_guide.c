@@ -221,6 +221,7 @@ static const u8 sMenuWindowFontColors[][3] =
     [FONT_COLOR_ADVENTURE_WHITE_2] = {TEXT_COLOR_TRANSPARENT,  PAL_ID_ADVENTURE_LIST_TEXT,  TEXT_COLOR_TRANSPARENT},
     [FONT_COLOR_ADVENTURE_RED]     = {TEXT_COLOR_TRANSPARENT,  14, TEXT_COLOR_TRANSPARENT},
     [FONT_COLOR_ADVENTURE_BLUE]    = {TEXT_COLOR_TRANSPARENT,  4,  TEXT_COLOR_TRANSPARENT},
+    [FONT_COLOR_ADVENTURE_BLACK_OUTLINED]   = {TEXT_COLOR_TRANSPARENT,  3,  1},
 };
 
 //==========FUNCTIONS==========//
@@ -786,9 +787,9 @@ static const u8* AdventureGuide_GetGuideTitle(enum AdventureGuideList guide)
 
 static void AdventureGuide_PrintGuideList(void)
 {
-    u32 font = FONT_NORMAL;
+    u32 font = FONT_OUTLINED;
     enum AdventureWindows windowId = WINDOW_ADVENTURE_LIST;
-    u32 colorIdx = FONT_COLOR_ADVENTURE_WHITE_2;
+    u32 colorIdx = FONT_COLOR_ADVENTURE_BLACK_OUTLINED;
 
     FillPalette(ADVENTURE_CURSOR_COLOR,PAL_INDEX_CURSOR,2);
     FillPalette(ADVENTURE_LIST_TEXT_COLOR,PAL_INDEX_LIST_TEXT,2);
@@ -801,7 +802,7 @@ static void AdventureGuide_PrintGuideList(void)
     for (u32 i = 0; i < MAX_ADVENTURE_GUIDE_ITEMS; i++)
     {
         u32 x = (((i % MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 15) * 8) + 4;
-        u32 y = 1 + ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 16);
+        u32 y = ((i / MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW) * 16);
         u32 j = i + (sMenuDataPtr->yFirstItem * MAX_ADVENTURE_GUIDE_ITEMS_PER_ROW);
         AddTextPrinterParameterized4(windowId, font, x, y, 0, 0, sMenuWindowFontColors[colorIdx], TEXT_SKIP_DRAW, AdventureGuide_GetGuideTitle(j));
     }

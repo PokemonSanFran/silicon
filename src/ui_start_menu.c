@@ -3,6 +3,7 @@
 #include "strings.h"
 #include "bg.h"
 #include "data.h"
+#include "quest_logic.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "field_weather.h"
@@ -72,6 +73,7 @@
 #include "save.h"
 #include "start_menu.h"
 #include "ui_map_system.h"
+#include "options_visual.h"
 #include "buzzr.h"
 #include "glass.h"
 #include "constants/form_change_types.h"
@@ -1574,9 +1576,7 @@ static void StartPrint_HelpTopText(void)
     StringAppend(strbuf[0], sStartMenuStrings_TimeOfDay[time]);
     StringAppend(strbuf[0], COMPOUND_STRING(", "));
 
-    // HOUR:MINUTES MERIDIEM
-    struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
-    FormatDecimalTimeWithoutSeconds(strbuf[1], rtc->hour, rtc->minute, FALSE);
+    FormatCurrentTimeForOutput(strbuf[1]);
     StringAppend(strbuf[0], strbuf[1]);
 
     x += TILE_TO_PIXELS(2);
@@ -2451,6 +2451,9 @@ enum StartMenuCellularSignals CellularSignal_GetCurrentStrength(void)
 
     if (mapType > MAP_TYPE_SECRET_BASE)
         mapType = (mapType % (MAP_TYPE_SECRET_BASE + 1));
+
+    if (IsHalaiIslandUnderCrisis())
+        return START_SIGNAL_NONE;
 
     return sCellularSignal_FilterByMapTypes[mapType];
 }

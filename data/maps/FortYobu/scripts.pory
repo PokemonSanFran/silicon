@@ -1,7 +1,7 @@
 
 mapscripts FortYobu_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_STORYLINE_STATE, STORY_EAST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
+        VAR_STORYLINE_STATE, STORY_WEST_RESIDO_COMPLETE: TheStrikeStrikesBack_PhoneCall_Dialogue
         VAR_FORT_YOBU_STATE, DEFEATED_NERIENE: FriendsForDinner_Intro_Dialogue
         FLAG_VISITED_FORT_YOBU, FALSE: Generic_Mappreview
     ]
