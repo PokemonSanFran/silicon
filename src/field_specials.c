@@ -3837,10 +3837,15 @@ bool32 IsTrainerRegistered(void)
 // Always returns FALSE
 bool32 ShouldDistributeEonTicket(void)
 {
+    // Start siliconMerge
+    return FALSE;
+    /*
     if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
 
     return TRUE;
+    */
+    // End siliconMerge
 }
 
 #define tState data[0]

@@ -454,49 +454,17 @@
 #define VAR_SILICON_UNUSED_0x40F4                                   0x40F4 // Unused Var
 #define VAR_SILICON_UNUSED_0x40F5                                   0x40F5 // Unused Var
 #define VAR_SILICON_UNUSED_0x40F6                                   0x40F6 // Unused Var
+#define VAR_SILICON_UNUSED_0x40F7                                   0x40F7 // Unused Var
+#define VAR_SILICON_UNUSED_0x40F8                                   0x40F8 // Unused Var
+#define VAR_SILICON_UNUSED_0x40F9                                   0x40F9 // Unused Var
+#define VAR_SILICON_UNUSED_0x40FA                                   0x40FA // Unused Var
+#define VAR_SILICON_UNUSED_0x40FB                                   0x40FB // Unused Var
+#define VAR_SILICON_UNUSED_0x40FC                                   0x40FC // Unused Var
+#define VAR_SILICON_UNUSED_0x40FD                                   0x40FD // Unused Var
+#define VAR_SILICON_UNUSED_0x40FE                                   0x40FE // Unused Var
 
 
-// need to remove code from elsewhere first
-
-#define VAR_DISTRIBUTE_EON_TICKET                                   0x40F7 // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
-/*
-src/field_specials.c  
-in section `bool32 ShouldDistributeEonTicket(void)` (lines 3630 to 3636)  
-delete lines 3632, 3634 and 3635 so the section should now be:
-
-// Always returns FALSE  
-bool32 ShouldDistributeEonTicket(void)  
-{  
-    return FALSE;  
-}  
-
-__  
-data/scripts/cable_club.inc  
-in section `CableClub_EventScript_DistributeEonTicket::` (lines 33 to 43)  
-delete line 40 `setvar VAR_DISTRIBUTE_EON_TICKET, 0`
-*/
-
-#define VAR_GIFT_UNUSED_1                                           0x40F8 // Var is written to, but never read
-#define VAR_GIFT_UNUSED_2                                           0x40F9 // Var is written to, but never read
-#define VAR_GIFT_UNUSED_3                                           0x40FA // Var is written to, but never read
-#define VAR_GIFT_UNUSED_4                                           0x40FB // Var is written to, but never read
-#define VAR_GIFT_UNUSED_5                                           0x40FC // Var is written to, but never read
-#define VAR_GIFT_UNUSED_6                                           0x40FD // Var is written to, but never read
-#define VAR_GIFT_UNUSED_7                                           0x40FE // var is written to, but never read
-/*
-src/event_data.c  
-in section `void ClearMysteryGiftVars(void)` (lines 132 to 142)  
-delete lines 135 to 141 so the section should now be:
-
-void ClearMysteryGiftVars(void)  
-{  
-    VarSet(VAR_GIFT_PICHU_SLOT, 0);  
-}  
-
-*/
-
-
-#define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2                            0x40FF // Leftover from RS, never set
+#define VAR_SILICON_UNUSED_0x40FF                                   0x40FF // Leftover from RS, never set
 /*
 data/maps/Route110_TrickHousePuzzle7/scripts.inc  
 > you may have already deleted these sections if you followed [Reclaim Unused Flags](https://github.com/pret/pokeemerald/wiki/Reclaim-Unused-Flags)
