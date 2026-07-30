@@ -126,6 +126,8 @@ static void SpeciesFilter_EditPage_FixCursorXCoorindate(void);
 static void SpeciesFilter_EditPage_UpdateEntitiesOnScreen(void);
 static void SpeciesFilter_EditPage_PrintInformation(void);
 static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFilterList currentFilter, u32 optionIndex);
+static bool8 SpeciesFilter_IsSignatureMoveUnlocked(enum Move move);
+static bool8 SpeciesFilter_IsSignatureAbilityUnlocked(enum Ability ability);
 static void SpeciesFilter_EditPage_PrintMoveAbilityManageCursor(enum FilterPageWindows_Move windowId, u32 fontId, u32 letterSpacing, u32 maxHeight);
 static void SpeciesFilter_EditPage_PopulateSelectedWindow(void);
 static void SpeciesFilter_EditPage_ChangeColumn(s32 delta);
@@ -2058,7 +2060,10 @@ static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFil
         case FILTER_LIST_COLOR:
             return sDexColorTexts[optionIndex];
         case FILTER_LIST_ABILITY:
-            return GetAbilityName(optionIndex);
+            if (SpeciesFilter_IsSignatureAbilityUnlocked(optionIndex))
+                return GetAbilityName(optionIndex);
+            else
+                return COMPOUND_STRING("???");
         case FILTER_LIST_EVOLUTION:
             return sEvolutionStageTexts[optionIndex];
         case FILTER_LIST_ALOLA:
@@ -2067,8 +2072,96 @@ static const u8 *const SpeciesFilter_EditPage_GetStringForEntity(enum PokedexFil
         case FILTER_LIST_MOVE2:
         case FILTER_LIST_MOVE3:
         case FILTER_LIST_MOVE4:
-            return GetMoveName(optionIndex);
+            if (SpeciesFilter_IsSignatureMoveUnlocked(optionIndex))
+                return GetMoveName(optionIndex);
+            else
+                return COMPOUND_STRING("???");
     }
+}
+
+static bool8 SpeciesFilter_IsSignatureAbilityUnlocked(enum Ability ability)
+{
+    static const enum Species sRKSSystemSpeciesList[] =
+    {
+        SPECIES_SILVALLY,
+        SPECIES_TYPE_NULL,
+    };
+
+    static const enum Species sBeastBoostSpeciesList[] =
+    {
+        SPECIES_NIHILEGO,
+        SPECIES_BUZZWOLE,
+        SPECIES_PHEROMOSA,
+        SPECIES_XURKITREE,
+        SPECIES_CELESTEELA,
+        SPECIES_KARTANA, SPECIES_GUZZLORD, SPECIES_POIPOLE, SPECIES_NAGANADEL, SPECIES_STAKATAKA, SPECIES_BLACEPHALON, };
+
+    const enum Species *species = NULL;
+    u32 count = 0;
+
+    switch (ability)
+    {
+        case ABILITY_RKS_SYSTEM: 
+            species = sRKSSystemSpeciesList;
+            count = ARRAY_COUNT(sRKSSystemSpeciesList);
+            break;
+        case ABILITY_BEAST_BOOST: 
+            species = sBeastBoostSpeciesList;
+            count = ARRAY_COUNT(sBeastBoostSpeciesList);
+            break;
+        default:
+            return TRUE;
+    }
+
+    for (u32 speciesIndex = 0; speciesIndex < count; speciesIndex++)
+    {
+        if(GetSetPokedexFlag(SpeciesToNationalPokedexNum(species[speciesIndex]),FLAG_GET_CAUGHT))
+            return TRUE;
+
+    }
+    return FALSE;
+}
+
+static bool8 SpeciesFilter_IsSignatureMoveUnlocked(enum Move move)
+{
+    static const enum Species sMultiAttackSpeciesList[] =
+    {
+        SPECIES_SILVALLY,
+        SPECIES_TYPE_NULL,
+    };
+
+    static const enum Species sWickedBlowSurgingStrikesSpeciesList[] =
+    {
+        SPECIES_KUBFU,
+        SPECIES_URSHIFU_SINGLE_STRIKE,
+        SPECIES_URSHIFU_RAPID_STRIKE,
+    };
+
+    const enum Species *species = NULL;
+    u32 count = 0;
+
+    switch (move)
+    {
+        case MOVE_WICKED_BLOW: 
+        case MOVE_SURGING_STRIKES:
+            species = sWickedBlowSurgingStrikesSpeciesList;
+            count = ARRAY_COUNT(sWickedBlowSurgingStrikesSpeciesList);
+            break;
+        case MOVE_MULTI_ATTACK: 
+            species = sMultiAttackSpeciesList;
+            count = ARRAY_COUNT(sMultiAttackSpeciesList);
+            break;
+        default:
+            return TRUE;
+    }
+
+    for (u32 speciesIndex = 0; speciesIndex < count; speciesIndex++)
+    {
+        if(GetSetPokedexFlag(SpeciesToNationalPokedexNum(species[speciesIndex]),FLAG_GET_CAUGHT))
+            return TRUE;
+
+    }
+    return FALSE;
 }
 
 static void SpeciesFilter_EditPage_PopulateSelectedWindow(void)
@@ -2826,9 +2919,19 @@ static void SpeciesFilter_EditPage_PrintDescription(void)
     if (SpeciesFilter_EditPage_GetMode() == FILTER_MODE_OPTIONSELECT)
     {
         if (currentFilter == FILTER_LIST_ABILITY)
-            end = StringCopy(gStringVar2, GetAbilityDesc(moveId));
+        {
+            if (SpeciesFilter_IsSignatureAbilityUnlocked(moveId))
+                end = StringCopy(gStringVar2, GetAbilityDesc(moveId));
+            else
+                end = StringCopy(gStringVar2, COMPOUND_STRING("???"));
+        }
         else
-            end = StringCopy(gStringVar2, GetMoveDesc(moveId));
+        {
+            if (SpeciesFilter_IsSignatureMoveUnlocked(moveId))
+                end = StringCopy(gStringVar2, GetMoveDesc(moveId));
+            else
+                end = StringCopy(gStringVar2, COMPOUND_STRING("???"));
+        }
         PrependFontIdToFit(gStringVar2, end, fontId, descWidth);
         AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, color, TEXT_SKIP_DRAW,gStringVar2);
     }
