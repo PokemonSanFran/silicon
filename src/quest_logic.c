@@ -1913,6 +1913,29 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
     }
 }
 
+bool32 ShouldBaiyaCallPlayer(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) != STORY_POST_YOU_REALIZE_WERE_EVIL)
+        return FALSE;
+
+    if (FlagGet(FLAG_BAIYA_CALL_ARANTRAZ) == FALSE)
+        return FALSE;
+
+
+    switch (gMapHeader.mapType)
+    {
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
+        return (++(*GetVarPointer(VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER)) >= 10);
+        break;
+    default:
+        return FALSE;
+    }
+    return FALSE;
+}
+
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
@@ -6114,3 +6137,31 @@ void LetsBurnThisMotherDown_BufferMostPowerfulAttack(void)
     }
     StringCopy(gStringVar1,GetMoveName(move));
 }
+
+// ***********************************************************************
+// Cutscene: A New Strike
+// ***********************************************************************
+
+bool32 ShouldStartANewStrike(void)
+{
+    if (GetNumberOfBadges() < 6)
+        return FALSE;
+
+    if (FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS) == FALSE)
+        return FALSE;
+
+
+    switch (gMapHeader.mapType)
+    {
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
+        return (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) >= 250);
+        break;
+    default:
+        return FALSE;
+    }
+    return FALSE;
+}
+
