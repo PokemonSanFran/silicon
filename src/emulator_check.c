@@ -489,6 +489,9 @@ static void Task_EmulatorCheckMainInput(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON) && ALLOW_BOOT_CONTINUATION)
     {
+        if(IsSaveFileDamaged())
+            ClearSaveData();
+
         PlaySE(SE_PC_OFF);
         FadeOutBGM(4);
         u32 color = (IsSaveCorruptOrError() == FALSE) ? RGB_BLACK : RGB_WHITE;
