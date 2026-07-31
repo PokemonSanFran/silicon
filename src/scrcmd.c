@@ -4038,3 +4038,23 @@ void ScrFunc_timeprintinggiven(struct ScriptContext *ctx)
 }
 // End timePrinting
 
+bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
+{
+    u16 num;
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 numOrVar = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if (numOrVar != 65535)
+        {
+            num = VarGet(numOrVar);
+            DebugPrintfLevel(MGBA_LOG_INFO, "%S, %u", str, num);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_INFO, "%S", str);
+        }
+    }
+    return FALSE;
+}
