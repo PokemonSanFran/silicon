@@ -2342,5 +2342,12 @@ extern const u8 gText_Morning[];
 extern const u8 gText_Evening[];
 extern const u8 gText_Night[];
 // End siliconDNS
+// Start playerFavoriteFood
+extern const u8 gText_MascarponePizza[];
+extern const u8 gText_GreenChiliBurger[];
+extern const u8 gText_ChilaquilesEgg[];
+extern const u8 gText_BaconAsiagoBagel[];
+extern const u8 gText_SavorySorbet[];
+// End playerFavoriteFood
 
 #endif // GUARD_STRINGS_H

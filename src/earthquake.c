@@ -292,3 +292,28 @@ void BufferRandomEarthquakeString(void)
     u32 randIndex = Random() % (ARRAY_COUNT(feltEarthquakeArray));
     StringCopy(gStringVar1,feltEarthquakeArray[randIndex]);
 }
+
+bool32 ShouldLocalIdFromVarReactToEarthquake(u32 var)
+{
+    u32 localId = VarGet(var);  
+    struct ObjectEvent *object = &gObjectEvents[localId];
+
+    if (object == NULL)
+        return FALSE;
+
+    if (object->active == FALSE)
+        return FALSE;
+
+    if (object->invisible == TRUE)
+        return FALSE;
+
+    if (object->inanimate == TRUE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void Script_ShouldReactToEarthquake(void)
+{
+    gSpecialVar_Result = ShouldLocalIdFromVarReactToEarthquake(VAR_0x800A);
+}

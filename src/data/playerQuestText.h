@@ -392,7 +392,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = EQUAL,
-        .targetValue = STORY_WEST_RESIDO_COMPLETE,
+        .targetValue = STORY_EAST_RESIDO_COMPLETE,
       }
     }
   },
@@ -552,7 +552,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -583,7 +583,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -614,7 +614,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -645,7 +645,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -676,7 +676,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -707,7 +707,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -768,7 +768,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = LESS_THAN,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -792,7 +792,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
         .dataAddress = VAR_STORYLINE_STATE,
         .compareOp = EQUAL,
-        .targetValue = STORY_EAST_RESIDO_COMPLETE,
+        .targetValue = STORY_WEST_RESIDO_COMPLETE,
       },
     }
   },

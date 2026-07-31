@@ -170,7 +170,7 @@ static u32 GetRematchGameProgessVariable(void)
 
     const u32 gameProgressMarkers[REMATCHES_COUNT] =
     {
-        STORY_WEST_RESIDO_ONLY,
+        STORY_EAST_RESIDO_ONLY,
         STORY_COMPLETE_ARANTRAZ,
         STORY_COMPLETED_NAVAL_BASE,
         STORY_RESTORATION_1_COMPLETE,

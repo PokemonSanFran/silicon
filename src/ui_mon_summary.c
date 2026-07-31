@@ -2664,7 +2664,12 @@ static void InfosPageMisc_PrintTextBox(void)
     u32 x = SUMMARY_INFOS_MISC_TEXT_BOX_X, y = SUMMARY_INFOS_MISC_TEXT_BOX_Y;
     enum MonSummaryFontColors color = SUMMARY_FNTCLR_INTERFACE;
 
-    if (!SummaryInput_IsWithinSubMode())
+    if (!SummaryInput_IsWithinSubMode() && IsTradedMon(&sMonSummaryDataPtr->mon))
+    {
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Recieved in a trade."));
+        SummaryPrint_AddText(SUMMARY_MAIN_WIN_PAGE_TEXT, FONT_NORMAL, x, y, color, gStringVar4);
+    }
+    else if (!SummaryInput_IsWithinSubMode())
     {
         ConvertUIntToDecimalStringN(gStringVar1, mon->metLevel, STR_CONV_MODE_LEFT_ALIGN, CountDigits(MAX_LEVEL));
         GetMapName(gStringVar2, mon->metLocation, 0);

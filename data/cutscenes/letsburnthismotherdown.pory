@@ -218,7 +218,7 @@ script LetsBurnThisMotherDown_PostBattle_Dialogue
     applymovement(BAIYA, moves(lock_facing_direction, walk_up, unlock_facing_direction))
     waitmovement(0)
 
-    buffermovename(STR_VAR_1,MOVE_ARMOR_CANNON)
+	callnative(LetsBurnThisMotherDown_BufferMostPowerfulAttack)
     msgbox(format("{STR_VAR_1}!"),,SPEAKER_CHARLOTTE_SHARPRISE)
     closemessage
 

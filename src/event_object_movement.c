@@ -2765,11 +2765,23 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 6};
     }
     // Gym type advantage/disadvantage
-    if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
+    // Start siliconMerge
+    //if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
+    if (GetCurrentMapMusic() == MUS_GYM 
+            || GetCurrentMapMusic() == MUS_RG_GYM
+            //|| GetCurrentMapMusic() == MUS_MERMEREZA_GYM
+            || GetCurrentMapMusic() == MUS_TORA_GYM
+            || GetCurrentMapMusic() == MUS_PERLACIA_GYM
+            || GetCurrentMapMusic() == MUS_CHASILLA_GYM
+            || GetCurrentMapMusic() == MUS_FORT_YOBU_GYM
+            || GetCurrentMapMusic() == MUS_TIRABUDIN_PLACE_GYM
+            //|| GetCurrentMapMusic() == MUS_HALERBA_GYM
+            //|| GetCurrentMapMusic() == MUS_IRISINA_GYM
+            //|| GetCurrentMapMusic() == MUS_MASTER_DOJO_DECOMISSIONED
+       )
     {
         switch (gMapHeader.regionMapSectionId)
         {
-             // Start siliconMerge
              /*
         case MAPSEC_RUSTBORO_CITY:
         case MAPSEC_PEWTER_CITY:
@@ -2810,6 +2822,21 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
             multi = TYPE_GROUND;
             break;
             */
+        case MAPSEC_TORA_TOWN:
+            multi = TYPE_DARK;
+            break;
+        case MAPSEC_PERLACIA_CITY:
+            multi = TYPE_WATER;
+            break;
+        case MAPSEC_TIRABUDIN_PLACE:
+            multi = TYPE_POISON;
+            break;
+        case MAPSEC_HALERBA_CITY:
+            multi = TYPE_GRASS;
+            break;
+        case MAPSEC_HODOU_CITY:
+            multi = TYPE_FIGHTING;
+            break;
              // End siliconMerge
         default:
             multi = NUMBER_OF_MON_TYPES;

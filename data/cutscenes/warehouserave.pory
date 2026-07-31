@@ -8,6 +8,22 @@ script WarehouseRave_SetUpRave_Script
     playbgm(MUS_WAREHOUSE_RAVE,TRUE)
 }
 
+script WarehouseRave_Script_StartOutsideMusic
+{
+	callnative(Script_ShouldUpdateMusicForRave)
+	if (var(VAR_RESULT) == FALSE)
+	{
+		return
+	}
+
+	playbgm(MUS_WAREHOUSE_RAVE,TRUE)
+}
+
+script WarehouseRave_Hide_Keiying
+{
+setobjectflagfromlocalid(LOCALID_WAREHOUSE_KEI_YING)
+}
+
 script WarehouseRave_Script_AddBaiya
 {
     spawnobject(graphicsId=OBJ_EVENT_GFX_BAIYA,localId=LOCALID_CURENO_BAIYA,x=29,y=33,movementType=MOVEMENT_TYPE_FACE_DOWN,elevation=3)

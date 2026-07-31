@@ -2,10 +2,21 @@ mapscripts PerlaciaCity_Gym_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(EnterEmrys_LeaderPosition_Script)
         call(Quest_Alohafromalola_SetLeaderPosition_Battle_Script)
+		call(PerlaciaCity_Gym_LeaderVisibility_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE[
         VAR_EMRYS_STATE,EXHIBITION_READY: Quest_Alohafromalola_StartBattle_Dialogue
     ]
+}
+
+script PerlaciaCity_Gym_LeaderVisibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ)
+	{
+        return
+	}
+
+    call_if_quest_not_complete(QUEST_BUILDINGANEXHIBIT,Quest_Rematches_Script_HideEmrys)
 }
 
 script PerlaciaCity_Gym_EventScript_0AF40D0B
@@ -34,5 +45,19 @@ script PerlaciaCity_Gym_EventScript_0C0A9B2F
     trainerbattle_single(TRAINER_0C0A9B2F,format("I am a Perlacia Gym Trainer"),format("I lost!"))
     msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
     end
+}
+
+script Emrys_Event_Script 
+{
+    lockall
+	goto_if_quest_complete(QUEST_BUILDINGANEXHIBIT,Rematches_Script_Emrys)
+    switch (var (VAR_GYM_3_STATE)) 
+	{
+		default: goto(EnterEmrys_MuseumArrangement_Dialogue)
+		case PERLACIA_GYM_SAVE_BEFORE_BATTLE: goto(EnterEmrys_StartBattle_Script)
+		case PERLACIA_GYM_LEADER_DEFEATED:
+			goto_if_set(FLAG_TEMP_2,EnterEmrys_PostBattle_Dialogue2)
+			goto(EnterEmrys_PostBattle_Dialogue)
+    }
 }
 

@@ -136,7 +136,7 @@ script WeCanStopYouActually_Arrest_Dialogue {
 script WeCanActuallyStopYou_Script_GoToPerpWalk
 {
     setflag(FLAG_SYS_GAME_CLEAR)
-    setflag(FLAG_REMOVE_WARP_FADE)
+    setflag(FLAG_REMOVE_WARP_FADE_OUT)
     setflag(FLAG_SHOULD_SKIP_CREDITS)
     startmenu_savescreen
     warpsilent(MAP_WE_CAN_STOP_YOU_ACTUALLY_CUTSCENE,0)

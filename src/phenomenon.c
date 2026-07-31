@@ -684,6 +684,27 @@ bool8 IsFieldEffectForPhenomenon(u32 fieldEffectId)
     return (fieldEffectId == FLDEFF_SHAKING_GRASS || fieldEffectId == FLDEFF_SHAKING_LONG_GRASS || fieldEffectId == FLDEFF_SAND_HOLE || fieldEffectId == FLDEFF_CAVE_DUST || fieldEffectId == FLDEFF_WATER_SURFACING);
 }
 
+static u8 GetVolumeBasedOnPlayerDistance(void)
+{
+    if(sPhenomenonData[0].active == FALSE)
+        return 0;
+
+    s16 phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
+    s16 phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
+    s16 playerX, playerY;
+    PlayerGetDestCoords(&playerX, &playerY);
+
+    s32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
+    if (distance <= 0)
+        return 0;
+
+    u32 volume = MAX_u8 * distance / MAX_PHENOMENON_DISTANCE;
+    if (volume > MAX_u8)
+        return 0;
+
+    return volume;
+}
+
 void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
 {
     u32 fieldEffectId = sprite->sWaitFldEff;
@@ -691,23 +712,16 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
     if (!IsFieldEffectForPhenomenon(fieldEffectId))
         return;
 
-    s16 phenomenonX = 0, phenomenonY = 0;
-
-    if(sPhenomenonData[0].active)
-    {
-        phenomenonX = sPhenomenonData[0].coordX + MAP_OFFSET;
-        phenomenonY = sPhenomenonData[0].coordY + MAP_OFFSET;
-    }
-
-    u32 sound = MUS_DUMMY, delay = 0;
-    s16 playerX, playerY;
-    PlayerGetDestCoords(&playerX, &playerY);
-    u32 distance = MAX_PHENOMENON_DISTANCE - (CalculateDistanceBetweenPoints(playerX, playerY, phenomenonX, phenomenonY) - 1);
-    u32 volume = 65535 * distance / MAX_PHENOMENON_DISTANCE;
+    u32 volume = GetVolumeBasedOnPlayerDistance();
+    
+    if (volume == 0)
+        return;
 
     m4aMPlayVolumeControl(&gMPlayInfo_SE1,TRACKS_ALL,volume);
     m4aMPlayVolumeControl(&gMPlayInfo_SE2,TRACKS_ALL,volume);
     m4aMPlayVolumeControl(&gMPlayInfo_SE3,TRACKS_ALL,volume);
+
+    u32 sound = MUS_DUMMY, delay = 0;
 
     switch (fieldEffectId)
     {
@@ -715,18 +729,16 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
         case FLDEFF_SHAKING_GRASS:
         case FLDEFF_SHAKING_LONG_GRASS:
             sound = SE_SUDOWOODO_SHAKE;
-            delay = PHENOMENON_SOUND_DELAY_GRASS;;
+            delay = PHENOMENON_SOUND_DELAY_GRASS;
             break;
         case FLDEFF_SAND_HOLE:
         case FLDEFF_CAVE_DUST:
             sound = SE_LAVARIDGE_FALL_WARP;
             delay = PHENOMENON_SOUND_DELAY_DUST;
-            delay = 150;
             break;
         case FLDEFF_WATER_SURFACING:
             sound = SE_M_BUBBLE;
             delay = PHENOMENON_SOUND_DELAY_WATER;
-            delay = 200;
             break;
     }
 

@@ -119,7 +119,7 @@ script Epilogue_Script_ShowZapLeaveMap
 {
     fadescreenspeed(FADE_TO_BLACK,24)
 	clearflag(FLAG_DONT_TRANSITION_MUSIC)
-    setflag(FLAG_REMOVE_WARP_FADE)
+    setflag(FLAG_REMOVE_WARP_FADE_OUT)
     setflag(FLAG_SPAWN_INVISIBLE)
     warpsilent(MAP_BLACK_MAP,0)
     waitstate

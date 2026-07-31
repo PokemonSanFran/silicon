@@ -1,6 +1,7 @@
 mapscripts Route13_MapScripts {
     MAP_SCRIPT_ON_TRANSITION{
         call(Quest_Ultrawormholeresearch_ControlTotemVisibility)
+		call_if_lt(VAR_STORYLINE_STATE,STORY_CLEAR,Quest_Rematches_Script_HideMagnus)
     }
     MAP_SCRIPT_ON_RESUME{
         call(Quest_Ultrawormholeresearch_TryRemoveTotem_Script)

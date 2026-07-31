@@ -82,24 +82,28 @@ script LetsFinishThis_Debrief_Dialogue
 
         msgbox(format("The hardest part of that plan is actually just getting to Lucrezia. The rest of that is fairly plausible, given we survive."),,SPEAKER_ELEANOR)
 
-        msgbox(format("Two old coots, some has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in."),,SPEAKER_TALA)
+	callnative(Script_BufferNumberOfCompletedTakedownQuests)
+        msgbox(format("{STR_VAR_1} has-beens, and a bunch of kids running into the belly of the beast? Count me the hell in. But how do we get in?"),,SPEAKER_TALA)
+		closemessage
+		delay(24)
 
         msgbox(format("The warp panels!"),MSGBOX_DEFAULT,SPEAKER_ALICIA)
         closemessage
         goto(LetsFinishThis_GoToFlashback_Script)
 }
 
-script LetsFinishThis_GoToFlashback_Script {
-    fadescreen(FADE_TO_BLACK)
-        msgbox(format("this is a flashback to Oliver's kids explaining the warp panels."),MSGBOX_AUTOCLOSE)
-        fadescreen(FADE_FROM_BLACK)
-        goto(LetsFinishThis_StartPlanning_Dialogue)
+script LetsFinishThis_GoToFlashback_Script 
+{
+	fadescreen(FADE_TO_BLACK)
+	call(KeiyingRaisonDetre_Dialogue_ExplainWarpPanels)
+	closemessage
+	fadescreen(FADE_FROM_BLACK)
+	goto(LetsFinishThis_StartPlanning_Dialogue)
 }
 
 script LetsFinishThis_StartPlanning_Dialogue {
     lock
-
-        msgbox(format("Nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him."),,SPEAKER_ADAORA)
+        msgbox(format("That works... but nobody has seen Keiying since their stunt in the warehouse. Cops have been crawling all over that neighborhood and house looking for him."),,SPEAKER_ADAORA)
 
         msgbox(format("How about Ramesh? That workaholic absolutely has a panel in their place. And no police looking for them."),,SPEAKER_FRANK)
         closemessage

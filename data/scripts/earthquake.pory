@@ -3,8 +3,15 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 script Earthquake_PlaySoundPlayerSurprise_EventScript
 {
     playse(SE_PIN)
-    applymovement(PLAYER,Common_Movement_ExclamationMark)
-    waitmovement(PLAYER)
+	setvar(VAR_0x800A,0)
+	do {
+		callnative(Script_ShouldReactToEarthquake)
+		if (var(VAR_RESULT))
+		{
+			applymovement(VAR_0x800A,moves(emote_exclamation_mark))
+		}
+		addvar(VAR_0x800A,1)
+	} while (var(VAR_0x800A) < 256)
 }
 
 script Earthquake_PlayNatural_EventScript
@@ -19,6 +26,7 @@ script Earthquake_PlayFake_EventScript
     callnative(GetStoryLoadFakeEarthquake)
     playse(SE_M_EARTHQUAKE)
     special(ShakeCamera)
+    call(Earthquake_PlaySoundPlayerSurprise_EventScript)
 }
 
 script Earthquake_Natural_EventScript

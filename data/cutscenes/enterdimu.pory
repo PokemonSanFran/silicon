@@ -1,19 +1,6 @@
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const DIMU = 1
 
-script EnterDimu_Event_Script {
-    switch (var (VAR_GYM_6_STATE)) {
-        case GYM_SAVE_BEFORE_LEADER:
-            goto(EnterDimu_StartGymBattle_Script)
-        case GYM_DEFEATED_LEADER:
-                goto(EnterDimu_PostGymBattle1_Dialogue)
-        case GYM_EXPLAINED_BADGE_AND_TM:
-                    goto(EnterDimu_PostGymBattle2_Dialogue)
-        default:
-                        goto(EnterDimu_Intro_Dialogue)
-    }
-}
-
 script EnterDimu_Intro_Dialogue {
     lock
         reveal(REVEAL_DIMU)

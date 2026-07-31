@@ -334,15 +334,65 @@ static void AddSurpriseTradeEffortValues(struct Pokemon* mon)
 
 static u32 GenerateSurpriseTradeAbility(u32 species)
 {
-    u32 ability = Random() % NUM_NORMAL_ABILITY_SLOTS;
+    bool32 hasAbility[NUM_ABILITY_SLOTS];
+    for (u32 abilityIndex = 0; abilityIndex < NUM_ABILITY_SLOTS; abilityIndex++)
+        hasAbility[abilityIndex] = (GetSpeciesAbility(species,abilityIndex) != ABILITY_NONE);
 
-    if (gSpeciesInfo[species].abilities[2] == ABILITY_NONE)
-        return ability;
+    u32 abilityChance[NUM_ABILITY_SLOTS];
+    if ((hasAbility[0] == FALSE) && (hasAbility[1] == TRUE) && (hasAbility[2] == FALSE))
+    {
+        abilityChance[0] = 0;
+        abilityChance[1] = 10;
+        abilityChance[2] = 0;
+    }
+    else if ((hasAbility[0] == FALSE) && (hasAbility[1] == FALSE) && (hasAbility[2] == TRUE))
+    {
+        abilityChance[0] = 0;
+        abilityChance[1] = 0;
+        abilityChance[2] = 10;
+    }
+    else if ((hasAbility[0] == TRUE) && (hasAbility[1] == FALSE) && (hasAbility[2] == FALSE))
+    {
+        abilityChance[0] = 10;
+        abilityChance[1] = 0;
+        abilityChance[2] = 0;
+    }
+    else if ((hasAbility[0] == TRUE) && (hasAbility[1] == FALSE) && (hasAbility[2] == TRUE))
+    {
+        abilityChance[0] = 8;
+        abilityChance[1] = 0;
+        abilityChance[2] = 10;
+    }
+    else if ((hasAbility[0] == TRUE) && (hasAbility[1] == TRUE) && (hasAbility[2] == FALSE))
+    {
+        abilityChance[0] = 5;
+        abilityChance[1] = 10;
+        abilityChance[2] = 0;
+    }
+    else if ((hasAbility[0] == FALSE) && (hasAbility[1] == TRUE) && (hasAbility[2] == TRUE))
+    {
+        abilityChance[0] = 0;
+        abilityChance[1] = 8;
+        abilityChance[2] = 10;
+    }
+    else 
+    {
+        abilityChance[0] = 4;
+        abilityChance[1] = 8;
+        abilityChance[2] = 10;
+    }
 
-    if ((Random() % 10) < 2)
-        return 2;
+    u32 random = Random() % 10;
+    u32 slot = 0;
 
-    return ability;
+    if (random < abilityChance[0])
+        slot = 0;
+    else if (random < abilityChance[1])
+        slot = 1;
+    else
+        slot = 2;
+
+    return slot;
 }
 
 const enum ItemSortType blockedItemSortTypes[] =

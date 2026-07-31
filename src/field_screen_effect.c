@@ -44,6 +44,7 @@
 #include "fldeff.h"
 #include "options_game.h" // autoSave
 #include "battle.h"
+#include "quest_logic.h" // siliconMerge
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -160,15 +161,14 @@ void FadeInFromBlack(void)
 
 void WarpFadeOutScreen(void)
 {
-    enum MapType currentMapType = GetCurrentMapType();
-
     // start removeWarpFadescreen
-    if (FlagGet(FLAG_REMOVE_WARP_FADE))
+    if (FlagGet(FLAG_REMOVE_WARP_FADE_OUT))
     {
-        FlagClear(FLAG_REMOVE_WARP_FADE);
+        FlagClear(FLAG_REMOVE_WARP_FADE_OUT);
         return;
     }
     // end removeWarpFadescreen
+    enum MapType currentMapType = GetCurrentMapType();
 
     switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
@@ -1250,6 +1250,8 @@ static void LoadOrbEffectPalette(bool8 blueOrb)
     else
         color[0] = RGB_BLUE;
 
+    color[0] = RGB_WHITE; // siliconMerge
+
     for (i = 0; i < 16; i++)
         LoadPalette(color, BG_PLTT_ID(15) + i, PLTT_SIZEOF(1));
 }
@@ -1401,6 +1403,15 @@ void DoOrbEffect(void)
         tBlueOrb = FALSE;
         tCenterX = 120;
     }
+    // Start siliconMerge
+    if (gSpecialVar_Result == 4)
+    {
+        tBlueOrb = FALSE;
+        tCenterX = 136;
+        tCenterY = 40;
+        return;
+    }
+    // End siliconMerge
     else
     {
         tBlueOrb = TRUE;

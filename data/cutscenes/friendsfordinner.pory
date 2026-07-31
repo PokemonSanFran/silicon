@@ -44,7 +44,6 @@ script FriendsForDinner_Intro_Dialogue
 {
     lock
     startcutscene(JUMPPLAYER_FRIENDSFORDINNER)
-    bufferitemname(STR_VAR_1,ITEM_LAVA_COOKIE)
 
     playbgm(MUS_MT_PYRE,FALSE)
 
@@ -109,6 +108,7 @@ script FriendsForDinner_AcceptInvite_Dialogue {
         applymovement(KEIYING,Common_Movement_FacePlayer)
         waitmovement(0)
 
+		callnative(BufferFavoriteFood)	
         msgbox(format("My house has the teal shutters, it'll be easy to spot. My kids mentoned you love to eat {STR_VAR_1}, so we'll make sure you have that tonight."),,SPEAKER_KEIYING)
 
         msgbox(format("I'll see you for dinner then?"),,SPEAKER_KEIYING)

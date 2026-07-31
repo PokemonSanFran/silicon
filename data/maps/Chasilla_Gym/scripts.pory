@@ -2,10 +2,23 @@ const PLAYER = OBJ_EVENT_ID_PLAYER
 const ATTENDANT = 2
 
 mapscripts Chasilla_Gym_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+		call(Chasilla_Gym_LeaderVisibility_Script)
+    }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
         VAR_TEMP_0, 0: Chasilla_Gym_EventScript_EligibilityChecker
     ]
+}
+
+script Chasilla_Gym_LeaderVisibility_Script
+{
+    if (var(VAR_STORYLINE_STATE) < STORY_COMPLETE_ARANTRAZ)
+	{
+        return
+	}
+
+    call_if_quest_not_complete(QUEST_WHIRLPOOLFERRY,Quest_Rematches_Script_HidePua)
 }
 
 script Chasilla_Gym_EventScript_EligibilityChecker
@@ -148,59 +161,18 @@ script Chasilla_Gym_Attendant_Victory_Script
     msgbox(format("Congrats on the win, {PLAYER}!. I wonder how he battles when he's not here in the Gym..."),MSGBOX_NPC)
 }
 
-text gText_Chasilla_Gym_WelcomeTo
+script EnterPua_Event_Script 
 {
-    format("Welcome to Chasilla Gym! We only battle with our freshly bred Pokémon.")
-}
-text gText_Chasilla_Gym_ComeTalkToMe
-{
-    format("Our Gym can be confusing - good luck in there, but come talk to me if you have any questions!")
-}
-text gText_Chasilla_Gym_WeHaveState
-{
-    format("In order to level the playing field, you can only battle with Pokémon that are capable of evolving, but have not yet begun evolving.")
-}
-text gText_Chasilla_Gym_OhItLooks
-{
-    format("Oh, it looks like your party is already unevolved. You came prepared.")
-}
-text gText_Chasilla_Gym_ForExample
-{
-    format("For example, your {STR_VAR_1} will turn into {STR_VAR_2} during battle.")
-}
-text gText_Chasilla_Gym_DidYouWant
-{
-    format("Did you want to ask about any other rules?")
-}
-text gText_Chasilla_Gym_DoesntLook
-{
-    format("It doesn't look like any of the Pokémon in your party are related to evolution though.")
-}
-text gText_Chasilla_Gym_ComeBack
-{
-    format("Come back when you have some! We always suggest that Trainers use our state of the art breeding facilities. See you soon!")
-}
-text gText_Chasilla_Gym_WillNotGain
-{
-    format("At the beginning of every battle in this Gym, your Pokémon will revert to its earliest evolution level and back to Level 5. They will not gain experience or effort values during battle.")
-}
-
-text gText_Chasilla_Gym_ForgetMoves
-{
-    format("If your Pokémon know a move that an earlier evolution cannot learn, they'll forget it during battle.")
-}
-
-text gText_Chasilla_Gym_NonEvolve
-{
-    format("If you have a Pokémon in your party that is not related to evolution, it will disappear from your party.")
-}
-
-text gText_Chasilla_Gym_DontWorry
-{
-    format("Don't worry! At the end of battle, all your Pokémon will go back to normal.")
-}
-
-text gText_Chasilla_Gym_YouDidIt
-{
-    format("Congrats on the win, {PLAYER}!. I wonder how he battles when he's not here in the Gym...")
+	goto_if_quest_complete(QUEST_WHIRLPOOLFERRY,Rematches_Script_Pua)
+    switch (var (VAR_GYM_4_STATE)) 
+	{
+		case GYM_SAVE_BEFORE_LEADER:
+			goto(EnterPua_StartGymBattle_Script)
+		case GYM_DEFEATED_LEADER:
+			goto(EnterPua_PostDefeat1_Dialogue)
+		case GYM_EXPLAINED_BADGE_AND_TM:
+			goto(EnterPua_PostDefeat2_Dialogue)
+		default:
+			goto(EnterPua_PuaIntro_Dialogue)
+    }
 }

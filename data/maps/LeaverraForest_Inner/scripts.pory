@@ -12,14 +12,14 @@ mapscripts LeaverraForest_Inner_MapScripts
     ]
 }
 
-script LeaverraForest_Frank_Interact_Script {
+script LeaverraForest_Frank_Interact_Script 
+{
     lock
     faceplayer
-    switch (var(VAR_LEAVERRA_FOREST_STATE)){
-        case POST_HAVE_YOU_SEEN_THE_NEWS: msgbox(format("Sounds like you've been deputized, kid. Just make sure you don't end up a pawn, yeah? You've got real potential."),,SPEAKER_FRANK)
-        default: call(EnterTheMaster_ExplainRobots_Dialogue)
-            }
-        closemessage
-        release
-        end
-    }
+	goto_if_eq(VAR_STORYLINE_STATE,STORY_CLEAR,Rematches_Script_Frank)
+	goto_if_eq(VAR_LEAVERRA_FOREST_STATE,POST_HAVE_YOU_SEEN_THE_NEWS,HaveYouSeenTheNews_Dialogue_Deputized)
+	call(EnterTheMaster_ExplainRobots_Dialogue)
+	closemessage
+	release
+	end
+}

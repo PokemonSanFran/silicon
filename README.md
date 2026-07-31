@@ -1,5 +1,5 @@
 # Pokémon Silicon
-This repository contains the source code for Pokémon Silicon. Pokémon Silicon is a game designed to be played on the Gameboy Advance and is a modification of Pokémon Emerald.
+This repository contains the source code for Pokémon Silicon. Pokémon Silicon is a game designed to be played on the Game Boy Advance.
 
 ## Contributing to Pokémon Silicon
 These instructions assume you're using Linux or WSL.
@@ -10,14 +10,14 @@ These instructions assume you're using Linux or WSL.
 ```console
 git clone --recursive https://gitlab.com/YOUR_USERNAME/silicon.git
 ```
-3. [Install go](https://go.dev/doc/install). go is required for building poryscript. Because poryscript is a submodule, using a pre-built binary won't work.
+3. [Install go](https://go.dev/doc/install). `go` is required for building `poryscript`. `poryscript` is a submodule, so using a pre-built binary won't work.
 4. Change into the newly cloned directory and attempt to build the game.
 ```console
 cd silicon ; git checkout main ; make clean ; make -j
 ```
 5. Base development off `main`. Replace `newBranch` with the name of the feature you're working on.
 ```console
-git switch -c newBranch
+git switch -c feature/newBranch
 ```
 6. Once your feature is ready to be merged, open a merge / pull request on the platform of your choice.
 

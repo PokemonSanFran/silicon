@@ -4,7 +4,7 @@ const OLIVER = 2
 
 script AaandWereBack_ObjectSetUp_Script
 {
-    if (var(VAR_STORYLINE_STATE) == STORY_WEST_RESIDO_COMPLETE)
+    if (var(VAR_STORYLINE_STATE) == STORY_EAST_RESIDO_COMPLETE)
     {
         setobjectflagfromlocalid(SHARPRISE_COMPOUND_1F_OLIVER)
     }
@@ -28,7 +28,7 @@ script AaandWereBack_ObjectHide_Script
 script AaandWereBack_Monologue
 {
     addvar(VAR_TEMP_0,1)
-    if (var(VAR_STORYLINE_STATE) != STORY_WEST_RESIDO_COMPLETE)
+    if (var(VAR_STORYLINE_STATE) != STORY_EAST_RESIDO_COMPLETE)
     {
         return
     }
