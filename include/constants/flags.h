@@ -90,7 +90,7 @@
 #define FLAG_RECEIVED_HM_FLY                                         0x3E
 #define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT                          0x3F
 
-#define FLAG_FACILITY_UNLOCK_LIKO                                    0x30
+#define FLAG_FACILITY_UNLOCK_PUA                                     0x30
 #define FLAG_FACILITY_UNLOCK_CHARLOTTE                               0x31
 #define FLAG_FACILITY_UNLOCK_AMI_ARGENTO                             0x32
 #define FLAG_FACILITY_UNLOCK_TALA                                    0x33
