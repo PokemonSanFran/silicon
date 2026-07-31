@@ -4602,7 +4602,10 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     u32 level = GetLevelFromBoxMonExp(boxmon);
 
     struct Mail mail;
-    metloc_u8_t metLocation = METLOC_IN_GAME_TRADE;
+    // Start siliconMerge
+    //metloc_u8_t metLocation = METLOC_IN_GAME_TRADE;
+    metloc_u16_t metLocation = METLOC_IN_GAME_TRADE;
+    // End siliconMerge
     u8 mailNum;
     struct Pokemon *pokemon = &gParties[B_TRAINER_OPPONENT_A][0];
 
