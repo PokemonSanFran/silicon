@@ -63,5 +63,6 @@ typedef s32 mapsec_s32_t;
 // would have to rearrange the substructs' contents in order to minimize
 // how much more space a wider Met Location would consume.
 typedef mapsec_u8_t metloc_u8_t;
+typedef mapsec_u16_t metloc_u16_t; // siliconMerge
 
 #endif //GUARD_GAMETYPES_H

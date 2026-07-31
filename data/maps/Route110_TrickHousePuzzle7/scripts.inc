@@ -88,15 +88,15 @@ Route110_TrickHousePuzzle7_EventScript_TeleportedTransition::
 	end
 
 Route110_TrickHousePuzzle7_OnLoad:
-	call_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles
+	//call_if_eq VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_UpdateSwitchMetatiles // siliconMerge
 	end
 
 Route110_TrickHousePuzzle7_OnFrame:
-	map_script_2 VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_ClearState2
+	//map_script_2 VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1, Route110_TrickHousePuzzle7_EventScript_ClearState2 // siliconMerge
 	.2byte 0
 
 Route110_TrickHousePuzzle7_EventScript_ClearState2::
-	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 0
+	//setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 0 // siliconMerge
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Scroll::

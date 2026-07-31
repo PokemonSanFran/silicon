@@ -102,5 +102,7 @@ void CountDefeatedCresaltaVista(void);
 void ResetDefeatedCresaltaVista(void);
 void BufferSunriseTimes(void);
 void BufferSunsetTimes(void);
+bool32 ShouldBaiyaCallPlayer(void);
+bool32 ShouldStartANewStrike(void);
 
 #endif //GUARD_QUESTLOGIC_H

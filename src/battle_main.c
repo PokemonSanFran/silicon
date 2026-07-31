@@ -5557,7 +5557,6 @@ static void HandleEndTurn_BattleWon(void)
         Quest_TeachATrainerToFish_RecordEnemy(); // siliconMerge
         CountDefeatedBackyard(); // siliconMerge
         CountDefeatedCresaltaVista(); // siliconMerge
-        Quest_Wildfirerisk_CheckDefeatedMon(); // siliconMerge
         CountDefeatedRabiesMon(); // siliconMerge
         CountDefeatedGardenMons(); // siliconMerge
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
@@ -5663,66 +5662,6 @@ void CountDefeatedBackyard(void)
     }
 
     VarSet(VAR_DEFEATED_BACKYARD_COUNT,defeatedBackyardCount);
-}
-
-u8 Quest_Wildfirerisk_GetPercentage(void)
-{
-    u16 defeatedFireCount = VarGet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT);
-    u16 defeatedElectricCount = VarGet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT);
-    u16 defeatedFlyingCount = VarGet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT);
-    u16 defeatedTotal = (defeatedFireCount + defeatedElectricCount + defeatedFlyingCount);
-
-    return (defeatedTotal * 100)/300;
-}
-
-u8 Quest_Wildfirerisk_CheckDefeatedMon(void)
-{
-    u8 i = 0;
-    u8 defeatedFireCount = VarGet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT);
-    u8 defeatedElectricCount = VarGet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT);
-    u8 defeatedFlyingCount = VarGet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT);
-
-    for (i = 0;i < 6;i++)
-    {
-        if((gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[0] == TYPE_FIRE) || (gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[1] == TYPE_FIRE)){
-            defeatedFireCount++;
-
-            if (defeatedFireCount >= 100){
-                defeatedFireCount = 100;
-                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_1);
-            }
-            VarSet(VAR_QUEST_WILDFIRERISK_FIRE_COUNT,defeatedFireCount);
-        }
-
-        if (gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[0] == TYPE_ELECTRIC || gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[1] == TYPE_ELECTRIC){
-
-            defeatedElectricCount++;
-
-            if (defeatedElectricCount >= 100){
-                defeatedElectricCount = 100;
-                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_2);
-            }
-            VarSet(VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT,defeatedElectricCount);
-        }
-
-        if (gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[0] == TYPE_FLYING || gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES)].types[1] == TYPE_FLYING){
-
-            defeatedFlyingCount++;
-
-            if (defeatedFlyingCount >= 100){
-                defeatedFlyingCount = 100;
-                QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_SET_COMPLETED,SUB_QUEST_3);
-            }
-            VarSet(VAR_QUEST_WILDFIRERISK_FLYING_COUNT,defeatedFlyingCount);
-        }
-    }
-
-    if (QuestMenu_GetSetQuestState(QUEST_WILDFIRERISK, FLAG_GET_ACTIVE))
-    {
-        if (QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_1) && QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_2) && QuestMenu_GetSetSubquestState(QUEST_WILDFIRERISK,FLAG_GET_COMPLETED,SUB_QUEST_3))
-            QuestMenu_GetSetQuestState(QUEST_WILDFIRERISK,FLAG_SET_REWARD);
-    }
-    return 1;
 }
 // End siliconMerge
 

@@ -571,7 +571,6 @@ gSpecials::
 	def_special CopyMonFromStolenTradeStorage
     def_special CheckPartyHasOneMon
     def_special ConvertChallengeTurnsToRank
-    def_special Quest_Wildfirerisk_GetPercentage
     def_special KitchenvolunteeringFunc_GeneratePantryItem
     def_special KitchenvolunteeringFunc_CheckProgressAndSetReward
     def_special KitchenvolunteeringFunc_ChooseRandomPantryItem

@@ -371,7 +371,10 @@ static void AddHatchedMonToParty(u8 id)
     enum NationalDexOrder nationalDexNum;
     u8 name[POKEMON_NAME_LENGTH + 1];
     u16 metLevel;
-    metloc_u8_t metLocation;
+    // Start siliconMerge
+    //metloc_u8_t metLocation;
+    metloc_u16_t metLocation;
+    // End siliconMerge
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][id];
 
     CreateHatchedMon(mon, &gParties[B_TRAINER_OPPONENT_A][0]);
