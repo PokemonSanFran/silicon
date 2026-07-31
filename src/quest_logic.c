@@ -3933,27 +3933,27 @@ void Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible(void)
 	u32 var = VarGet(VAR_QUEST_MANOFMANYHATS);
 	u32 bit = 0;
 
-	switch(VarGet(VAR_TEMP_A))
-	{
-		case SEEN_INSTALLNATUREPROBESWORKER_1ST: //If Boba was third job visited
-			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
-				bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
-			break;
-		case SEEN_INSTALLNATUREPROBESWORKER_2ND: //If Fisherman was 3rd job visited
-			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
-				bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
-			break;
-		case SEEN_INSTALLNATUREPROBESWORKER_3RD: //If Arcade was 3rd job visited
-			if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs())
-				bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
-			break;
-		default:
-			break;
-	}
-    
-	var |= (2 << bit);
+    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == TRUE)
+    {
 
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_QIU_VILLAGE_RESTAURANT) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_QIU_VILLAGE_RESTAURANT))
+        bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_WAJABI_LAKE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_WAJABI_LAKE))
+        bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POPIDORA_PIER_ARCADE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POPIDORA_PIER_ARCADE))
+        bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
+            
+    var |= (2 << bit);
     VarSet(VAR_QUEST_MANOFMANYHATS,var);
+    
+    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_1ST) & 2)
+       gSpecialVar_Result = 1;
+    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_2ND) & 2)
+        gSpecialVar_Result = 2;
+    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_3RD) & 2)
+        gSpecialVar_Result = 3;
+    DebugPrintf("Wubalubadubdub");
+    }
 }
 
 // ***********************************************************************

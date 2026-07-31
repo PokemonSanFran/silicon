@@ -4049,11 +4049,11 @@ bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
         if (numOrVar != 65535)
         {
             num = VarGet(numOrVar);
-            DebugPrintfLevel(MGBA_LOG_INFO, "%S, %u", str, num);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
         }
         else
         {
-            DebugPrintfLevel(MGBA_LOG_INFO, "%S", str);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
         }
     }
     return FALSE;
