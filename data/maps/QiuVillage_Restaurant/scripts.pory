@@ -2,6 +2,7 @@ mapscripts QiuVillage_Restaurant_MapScripts{
     MAP_SCRIPT_ON_TRANSITION
     {
         call(CutePokemon_Script_ControlMelissaQiuInsideVisibility)
+        call(Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Visibility_Script)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
         [

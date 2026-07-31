@@ -2,5 +2,6 @@ mapscripts PopidoraPier_Arcade_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
         call_if_subquest_complete(QUEST_RESTOREZENZUGYM,SUB_QUEST_4,RestoreZenzuIsland_Script_HideArcademini)
+        call(Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script)
     }
 }

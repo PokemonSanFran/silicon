@@ -37,33 +37,33 @@ script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Dialogue{
+	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementBoba)
 	msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
 	closemessage
 	release
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
 	if(var(VAR_QUEST_MANOFMANYHATS) == 112){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
-	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue{
+	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementFish)
 	msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
 	closemessage
 	release
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
 	if(var(VAR_QUEST_MANOFMANYHATS) == 121){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
-	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_ArcadeAttendant_Dialogue{
+	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementArcade)
 	msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
 	closemessage
 	release
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
 	if(var(VAR_QUEST_MANOFMANYHATS) == 211){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
-	return
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
@@ -71,11 +71,7 @@ script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
 	goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Active_Dialogue)
 	goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Reward_Dialogue)
 	goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Complete_Dialogue)
-
-	//getmap
-	if(var(VAR_RESULT) == MAP_QIU_VILLAGE_RESTAURANT){}
-	if(var(VAR_RESULT) == MAP_WAJABI_LAKE){}
-	if(var(VAR_RESULT) == MAP_POPIDORA_PIER_ARCADE){}
+	return
 }
 
 script Quest_Manofmanyhats_StartQuest_Dialogue{
