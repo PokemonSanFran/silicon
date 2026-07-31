@@ -321,8 +321,8 @@
 #define VAR_QUEST_SKILLLIBRARY_TM_COUNT                             0x409B
 #define VAR_QUEST_ULTRAWORMHOLE_WARP_DESTINATION                    0x409C
 #define VAR_QUEST_WAREHOUSEWARFARE_STATE                            0x409D
-#define VAR_QUEST_WILDFIRERISK_ELECTRIC_COUNT                       0x409E
-#define VAR_QUEST_WILDFIRERISK_FIRE_COUNT                           0x409F
+#define VAR_SILICON_UNUSED_0x409E                                   0x409E
+#define VAR_SILICON_UNUSED_0x409F                                   0x409F
 
 #define VAR_CABLE_CLUB_TUTORIAL_STATE                               0x40A0
 #define VAR_FRONTIER_BATTLE_MODE                                    0x40A1
