@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "quest_logic.h"
+#include "overworld.h"
 #include "tv.h"
 #include "strings.h"
 #include "party_menu.h"
@@ -38,22 +39,8 @@ void SiliconFrontier_ResetCurrentChallenge(void);
 void SiliconFrontier_SetCurrentChallengeFromVars(void);
 void SiliconFrontier_SetCurrentChallenge(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
 
-/*
-   struct SiliconFrontierData siliconFrontierData[SILICON_FACILITY_COUNT] =
-   {
-   [SILICON_FACILITY_TOWER] =
-   {
-   .silverBadge =,
-   .silverBoss =,
-   .goldBadge =,
-   .goldBoss =,
-   .name = COMPOUND_STRING("Battle Tower"),
-   .mapsec = MAPSEC_TIRABUDIN_PLACE,
-   .rule = NULL, // dojo needs only one type
-   .rule = NULL, // unique items for all
-   },
-   };
-   */
+#include "data/silicon_frontier/facilities.h"
+#include "data/silicon_frontier/trainers.h"
 
 u16 SiliconFrontier_GetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
 {
@@ -187,22 +174,11 @@ void SiliconFrontier_SetFacilityToVarFromMap(void)
 
 enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void)
 {
-    u32 map = GetCurrentMap();
+    for (enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
+        if (GetCurrentRegionMapSectionId() == gSiliconFrontierData[facility].mapsec)
+            return facility;
 
-    switch (map)
-    {
-        case MAP_TIRABUDIN_PLACE_GYM:
-        case MAP_TIRABUDIN_PLACE_GYM_BATTLE_ROOM:
-        case MAP_TIRABUDIN_PLACE_GYM_LOBBY:
-            return SILICON_FACILITY_TOWER;
-        case MAP_ZENZU_ISLAND:
-            return SILICON_FACILITY_ARCADE;
-        case MAP_HODOU_CITY_GYM:
-            return SILICON_FACILITY_SPARRING;
-        case MAP_ESPULEE_OUTSKIRTS:
-            return SILICON_FACILITY_FACTORY;
-        default: return SILICON_FACILITY_NONE;
-    }
+    return SILICON_FACILITY_NONE;
 }
 
 void SiliconFrontier_ResetCurrentChallenge(void)
