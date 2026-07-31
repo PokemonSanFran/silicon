@@ -170,7 +170,7 @@ static const struct SiliconExpTestData sKai_AssholeshomeTrainers =
         TRAINER_NONE
     },
 };
-static const struct SiliconExpTestData sKauna_GymTrainers =
+static const struct SiliconExpTestData sPua_GymTrainers =
 {
     .startLevel = LEVEL_CAP_VALUE_5,
     .targetLevel = LEVEL_CAP_VALUE_6,
@@ -512,11 +512,11 @@ AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kai Assholeshome")
 
     SiliconExpTest(&sKai_AssholeshomeTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }
-AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Kauna Gym")
+AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Pua Gym")
 {
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER] = BATTLE_OPTION_MULTIPLIER_1;
 
-    SiliconExpTest(&sKauna_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
+    SiliconExpTest(&sPua_GymTrainers, SILICON_MINIMUM_BENCH_LEVEL_PERCENT);
 }*/
 AI_SINGLE_BATTLE_TEST("Silicon Exp Test: Tala")
 {
