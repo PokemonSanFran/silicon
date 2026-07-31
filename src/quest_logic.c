@@ -2554,6 +2554,26 @@ void DebugQuest_AngelDelivery(u8 state)
 // ***********************************************************************
 // Quest: VS Deoxys
 // ***********************************************************************
+
+void VsDeoxys_CreatePerfectMinior(void)
+{
+    FlagSet(P_FLAG_FORCE_NO_SHINY);
+    enum Species species = SPECIES_MINIOR_CORE_ORANGE;
+    u32 level = 30;
+    CreateWildMon(species, level);
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+
+    enum Item item = ITEM_MOON_STONE;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+
+    u8 iv = MAX_PER_STAT_IVS;
+    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
+        SetMonData(mon, MON_DATA_HP_IV + statIndex, &iv);
+
+    FlagClear(P_FLAG_FORCE_NO_SHINY);
+    CalculateMonStats(mon);
+}
+
 void DebugQuest_VSDeoxys(u8 state)
 {
     switch (state)

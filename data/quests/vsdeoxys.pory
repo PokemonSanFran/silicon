@@ -147,13 +147,10 @@ script Vsdeoxys_Script_CreateMiniorObject
 script Vsdeoxys_Script_Encounter
 {
     call(Vsdeoxys_Script_PlayCry)
-    setflag(P_FLAG_FORCE_NO_SHINY)
-    setwildbattle(SPECIES_MINIOR_CORE_ORANGE, 30, ITEM_NONE)
-    //setwildbattle(species=SPECIES_MINIOR_CORE_ORANGE, level=30, item=ITEM_NONE,hpIv=31,atkIv=31,defIv=31,speedIv=31,spAtkIv=31, spDefIv=31)
+	callnative(VsDeoxys_CreatePerfectMinior)
     setflag(FLAG_SYS_CTRL_OBJ_DELETE)
     dowildbattle
     clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
-    clearflag(P_FLAG_FORCE_NO_SHINY)
 
     specialvar(VAR_RESULT, GetBattleOutcome)
     if (var(VAR_RESULT) == B_OUTCOME_CAUGHT)
