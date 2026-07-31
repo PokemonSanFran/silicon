@@ -1600,7 +1600,7 @@ static void Character_Customization_Util_Trainer_Pronoun(u8 taskId)
     void* CB2_PronounFunctions[] =
     {
         [CUSTOMIZATION_SUBJECT_PRONOUN]   = CB2_ReturnToCostumizationMenu_Subject,
-        [CUSTOMIZATION_OBJECT_PRONOUN]    = CB2_ReturnToCostumizationMenu_Object, 
+        [CUSTOMIZATION_OBJECT_PRONOUN]    = CB2_ReturnToCostumizationMenu_Object,
         [CUSTOMIZATION_POSSESIVE_PRONOUN] = CB2_ReturnToCostumizationMenu_Possessive,
     };
 

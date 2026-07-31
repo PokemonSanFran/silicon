@@ -99,7 +99,7 @@ WILD_BATTLE_TEST("Wild Minior appear in Meteor form without transforming")// To 
 SINGLE_BATTLE_TEST("Trainers' Minior appear in Core form")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) 
+        PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_MINIOR_METEOR) { Ability(ABILITY_SHIELDS_DOWN); }
     } WHEN {
         TURN {}

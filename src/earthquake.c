@@ -295,7 +295,7 @@ void BufferRandomEarthquakeString(void)
 
 bool32 ShouldLocalIdFromVarReactToEarthquake(u32 var)
 {
-    u32 localId = VarGet(var);  
+    u32 localId = VarGet(var);
     struct ObjectEvent *object = &gObjectEvents[localId];
 
     if (object == NULL)

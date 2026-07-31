@@ -2767,7 +2767,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     // Gym type advantage/disadvantage
     // Start siliconMerge
     //if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
-    if (GetCurrentMapMusic() == MUS_GYM 
+    if (GetCurrentMapMusic() == MUS_GYM
             || GetCurrentMapMusic() == MUS_RG_GYM
             //|| GetCurrentMapMusic() == MUS_MERMEREZA_GYM
             || GetCurrentMapMusic() == MUS_TORA_GYM

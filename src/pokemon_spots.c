@@ -20,7 +20,7 @@
  * Thus for a pokemon that uses four spots,The entire 32 bit personality value is used.
  *
  * The personality is read from right to left as the left-most digits are used for gender and nature.
- * For instance, for single-spotted pokemon, the right-most digits are first. 
+ * For instance, for single-spotted pokemon, the right-most digits are first.
  * This is preferable as those are more independant
  *
  * If the personality value is 0x87654321, then:
@@ -123,7 +123,7 @@ static const struct MonSpotTemplate* GetSpeciesSpots(enum Species species)
 {
     switch (species)
     {
-    case SPECIES_SPINDA: 
+    case SPECIES_SPINDA:
             return &gSpindaSpotTemplate;
     default:
         return NULL;

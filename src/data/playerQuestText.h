@@ -2,11 +2,11 @@
 #include "quest_flavor_lookup.h"
 #include "constants/maps.h"
 
-static const struct PlayerAdventureText playerAdventureText[] = 
+static const struct PlayerAdventureText playerAdventureText[] =
 {
   {
     .text = COMPOUND_STRING("Defeat Magnus and claim your title as Champion of Resido!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -24,7 +24,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("The party is for you! Grab a good seat before Eleanor starts her speech."),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -36,7 +36,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Get everybody's reactions to the announcement, and then get some air outside."),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -48,7 +48,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Go upstairs and check out your room, and explore the rest of the house."),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -69,11 +69,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_CUCONU_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -87,11 +87,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .text = COMPOUND_STRING("Take a long walk around {STR_VAR_1}, the region's old shipping hub. "),
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_CURENO_PORT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -112,11 +112,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -134,7 +134,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -155,11 +155,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_PERLACIA_CITY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -179,11 +179,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .text = COMPOUND_STRING("Why are all those Trainers on {STR_VAR_1} yelling at that one guy?"),
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_POPIDORA_PIER,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -201,7 +201,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -222,11 +222,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_ANBEH_BEND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -244,7 +244,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -265,11 +265,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_TORA_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -290,11 +290,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_CAPHE_CITY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -312,7 +312,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything eastern Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -333,11 +333,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_ROUTE10,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -358,11 +358,11 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
       {
-        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP, 
+        .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_MERMEREZA_CITY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -386,7 +386,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CUCONU_TOWN,
       }
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -413,7 +413,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -438,7 +438,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CHASILLA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -463,7 +463,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = ITEM_GO_GOGGLES,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -496,7 +496,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -521,7 +521,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -538,7 +538,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym!"),//irisina gym 
+    .text = COMPOUND_STRING("Defeat the {STR_VAR_1} Gym!"),//irisina gym
     .textComponent =
     {
       {
@@ -546,7 +546,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_IRISINA_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -577,7 +577,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PINTILLON_HOUSE_INTERIOR_1F,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -608,7 +608,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_TIRABUDIN_PLACE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -639,7 +639,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALERBA_CITY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -670,7 +670,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CRESALTA_VISTA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -701,7 +701,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PETAROSA_BOROUGH,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -737,7 +737,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything western Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -762,7 +762,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_FORT_YOBU_GYM,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -786,7 +786,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
   },
   {
     .text = COMPOUND_STRING("Explore everything western Resido has to offer!"),
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -805,7 +805,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_CONSTRUCTION,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -834,7 +834,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -853,7 +853,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CUCONU_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -872,7 +872,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PIOCA_BRIDGE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -891,7 +891,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_LANJING_TUNNEL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -916,7 +916,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -935,7 +935,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ESPULEE_OUTSKIRTS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -966,7 +966,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_LEAVERRA_FOREST,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -991,7 +991,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_LEAVERRA_FOREST,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1016,7 +1016,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1045,7 +1045,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1076,7 +1076,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_NAVAL_BASE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1101,7 +1101,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_NAVAL_BASE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1126,7 +1126,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_NAVAL_BASE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1145,7 +1145,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CUCONU_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1176,7 +1176,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1199,7 +1199,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_LOCKERS
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1224,7 +1224,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1243,7 +1243,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_SKYBOX,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1268,7 +1268,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1293,7 +1293,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ZENZU_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1312,7 +1312,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ZENZU_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1339,7 +1339,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HODOU_CITY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1358,7 +1358,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PETAROSA_BOROUGH,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -1387,7 +1387,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CRESALTA_VISTA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -1418,7 +1418,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_FLAG,
@@ -1449,7 +1449,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1480,7 +1480,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1499,7 +1499,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PETAROSA_BOROUGH,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1524,7 +1524,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1543,7 +1543,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1580,7 +1580,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_LETSBURNTHISMOTHERDOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1641,7 +1641,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_MANHUNT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1702,7 +1702,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_HOWDISAPPOINTING,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1767,7 +1767,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_MANHUNT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1832,7 +1832,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_HOWDISAPPOINTING,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1897,7 +1897,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_HOWDISAPPOINTING,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -1966,7 +1966,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_HOWDISAPPOINTING,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2019,14 +2019,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2061,14 +2061,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver or Kei-Ying in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2103,14 +2103,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Oliver in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh or Oliver in their offices on the League Ops floor of {STR_VAR_1} to recieve your missions."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2145,14 +2145,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Kei-Ying in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Kei-Ying in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2187,14 +2187,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Ramesh in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2229,14 +2229,14 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),  
+    .text = COMPOUND_STRING("Help SharpRise Captial destroy The Tide. Visit Oliver in his office on the League Ops floor of {STR_VAR_1} to recieve your last mission."),
     {
       {
         .textTargetType = QUEST_FLAVOR_GET_NAME_MAP,
         .textTargetValue = MAP_SHARPRISE_SPIRE_LEAGUEOPS,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2282,7 +2282,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2300,7 +2300,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_STADIUM_ARENA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2318,7 +2318,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = ITEM_WISH_TAG,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2342,7 +2342,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_TORGEOT_CLIMB,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2361,7 +2361,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2386,7 +2386,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2405,7 +2405,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_OROLAND_NEWSPAPER,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2434,7 +2434,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_MERMEREZA_CITY_CONSULTING,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2467,7 +2467,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_IRISINA_TOWN,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2500,7 +2500,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = ITEM_DUSK_BALL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2517,7 +2517,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     }
   },
   {
-    .text = COMPOUND_STRING("Eleanor gave lectures about the value of raising Pokemon where they were captured. The librarian admired the battle prowess of her {STR_VAR_1}. Eleanor traversed Resido using {STR_VAR_2}."), 
+    .text = COMPOUND_STRING("Eleanor gave lectures about the value of raising Pokemon where they were captured. The librarian admired the battle prowess of her {STR_VAR_1}. Eleanor traversed Resido using {STR_VAR_2}."),
     .textComponent =
     {
       {
@@ -2529,7 +2529,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MOVE_FLY,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2562,7 +2562,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_WISHAAST_LAKE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2583,7 +2583,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2608,7 +2608,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PETAROSA_BOROUGH,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2633,7 +2633,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2662,7 +2662,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CURENO_PORT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2685,7 +2685,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CURENO_PORT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2710,7 +2710,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_CURENO_PORT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2729,7 +2729,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2754,7 +2754,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2791,7 +2791,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_TAXICABTURNAROUND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2834,7 +2834,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BODEGABURNOUT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2873,7 +2873,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2910,7 +2910,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BODEGABURNOUT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -2953,7 +2953,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_TAXICABTURNAROUND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3000,7 +3000,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BODEGABURNOUT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3053,7 +3053,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BODEGABURNOUT,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3102,7 +3102,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_PERSUASIVEPASSENGER,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3145,7 +3145,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_WAREHOUSEWARFARE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3188,7 +3188,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BREAKTHEINTERNET,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3235,7 +3235,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_WAREHOUSEWARFARE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3288,7 +3288,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_PERSUASIVEPASSENGER,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3341,7 +3341,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_WAREHOUSEWARFARE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3398,7 +3398,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = QUEST_BREAKTHEINTERNET,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3453,7 +3453,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ARANTRAZ_MESS_HALL,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3472,7 +3472,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND_BAIYA,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3491,7 +3491,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3511,7 +3511,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3535,7 +3535,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ROUTE4,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3555,7 +3555,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ROUTE4,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3575,7 +3575,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_ROUTE4,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3605,7 +3605,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_PARC,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3631,7 +3631,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_HALAI_ISLAND,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3651,7 +3651,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_QIU_VILLAGE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3670,7 +3670,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_QIU_VILLAGE,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3693,7 +3693,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3718,7 +3718,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
         .textTargetValue = MAP_SHARPRISE_SPIRE_1F,
       },
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,
@@ -3733,7 +3733,7 @@ static const struct PlayerAdventureText playerAdventureText[] =
     .textComponent =
     {
     },
-    .textCondition = 
+    .textCondition =
     {
       {
         .dataType = QUEST_FLAVOR_COMPARE_VAR,

@@ -438,7 +438,7 @@
 #define VAR_SILICON_UNUSED_0x40E5                                   0x40E5 // Unused Var
 #define VAR_DAILY_SLOTS                                             0x40E6 // Must match FRLG
 #define VAR_DAILY_WILDS                                             0x40E7 // Must match FRLG
-#define VAR_DAILY_BLENDER                                           0x40E8 // Must match FRLG 
+#define VAR_DAILY_BLENDER                                           0x40E8 // Must match FRLG
 #define VAR_DAILY_PLANTED_BERRIES                                   0x40E9 // Must match FRLG
 #define VAR_DAILY_PICKED_BERRIES                                    0x40EA // Must match FRLG
 #define VAR_DAILY_ROULETTE                                          0x40EB // Must match FRLG
@@ -466,10 +466,10 @@
 
 #define VAR_SILICON_UNUSED_0x40FF                                   0x40FF // Leftover from RS, never set
 /*
-data/maps/Route110_TrickHousePuzzle7/scripts.inc  
+data/maps/Route110_TrickHousePuzzle7/scripts.inc
 > you may have already deleted these sections if you followed [Reclaim Unused Flags](https://github.com/pret/pokeemerald/wiki/Reclaim-Unused-Flags)
-(NOTE: doing this will also free up 5 flags `FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1` to 5)  
-in the map_script header, delete: (lines 2 to 5)  
+(NOTE: doing this will also free up 5 flags `FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1` to 5)
+in the map_script header, delete: (lines 2 to 5)
 
 	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle7_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_OnTransition
@@ -519,7 +519,7 @@ delete lines and entire sections ( now lines 4 to 93)
 
 	Route110_TrickHousePuzzle7_EventScript_ClearState2
 
-	
+
 then delete entire sections (now lines 15 to 130)
 	@ Unused, leftover from R/S
 

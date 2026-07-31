@@ -713,7 +713,7 @@ void SpriteCB_PlayFieldEffectSound(struct Sprite *sprite)
         return;
 
     u32 volume = GetVolumeBasedOnPlayerDistance();
-    
+
     if (volume == 0)
         return;
 

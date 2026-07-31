@@ -1,7 +1,7 @@
 #ifndef GUARD_OW_SYNCHRONIZE_H
 #define GUARD_OW_SYNCHRONIZE_H
 
-enum GeneratedMonOrigin 
+enum GeneratedMonOrigin
 {
     WILDMON_ORIGIN,
     STATIC_WILDMON_ORIGIN,

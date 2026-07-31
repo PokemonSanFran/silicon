@@ -78,7 +78,7 @@ static enum PokeBall GetBattlerPokeballItemId(enum BattlerId battler);
 #define GFX_TAG_BEAST_BALL   55026
 #define GFX_TAG_CHERISH_BALL 55027
 // Start siliconNewBalls
-enum 
+enum
 {
     GFX_TAG_VITALITY_BALL = GFX_TAG_CHERISH_BALL + 1,
     GFX_TAG_PSYCHE_BALL,

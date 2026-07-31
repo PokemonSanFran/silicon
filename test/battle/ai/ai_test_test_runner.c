@@ -164,9 +164,9 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_SCORE with SCORE_TIE_RANDOM randomizes AI move 
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_ICE_BEAM); Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_ICE_BEAM); Speed(3); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_ICE_BEAM, target: playerRight); 
-            EXPECT_MOVE(opponentRight, MOVE_ICE_BEAM, target: playerRight); 
-            SEND_OUT(playerLeft, 2); 
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_ICE_BEAM, target: playerRight);
+            EXPECT_MOVE(opponentRight, MOVE_ICE_BEAM, target: playerRight);
+            SEND_OUT(playerLeft, 2);
             SEND_OUT(playerRight, 3);
         }
     } SCENE {
@@ -201,7 +201,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_TARGET with TARGET_TIE_CHOSEN can correctly con
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget); 
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget);
             SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } SCENE {
         MESSAGE("Wobbuffet fainted!");
@@ -228,7 +228,7 @@ AI_DOUBLE_BATTLE_TEST("TIE_BREAK_TARGET correctly controls AI target selection w
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_THUNDERBOLT); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget); 
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_THUNDERBOLT, target: expectedTarget); EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: expectedTarget);
             SEND_OUT(playerLeft, 2); SEND_OUT(playerRight, 3); }
     } SCENE {
         MESSAGE("Wobbuffet fainted!");

@@ -2101,11 +2101,11 @@ static bool8 SpeciesFilter_IsSignatureAbilityUnlocked(enum Ability ability)
 
     switch (ability)
     {
-        case ABILITY_RKS_SYSTEM: 
+        case ABILITY_RKS_SYSTEM:
             species = sRKSSystemSpeciesList;
             count = ARRAY_COUNT(sRKSSystemSpeciesList);
             break;
-        case ABILITY_BEAST_BOOST: 
+        case ABILITY_BEAST_BOOST:
             species = sBeastBoostSpeciesList;
             count = ARRAY_COUNT(sBeastBoostSpeciesList);
             break;
@@ -2142,12 +2142,12 @@ static bool8 SpeciesFilter_IsSignatureMoveUnlocked(enum Move move)
 
     switch (move)
     {
-        case MOVE_WICKED_BLOW: 
+        case MOVE_WICKED_BLOW:
         case MOVE_SURGING_STRIKES:
             species = sWickedBlowSurgingStrikesSpeciesList;
             count = ARRAY_COUNT(sWickedBlowSurgingStrikesSpeciesList);
             break;
-        case MOVE_MULTI_ATTACK: 
+        case MOVE_MULTI_ATTACK:
             species = sMultiAttackSpeciesList;
             count = ARRAY_COUNT(sMultiAttackSpeciesList);
             break;

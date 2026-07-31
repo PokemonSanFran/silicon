@@ -150,7 +150,7 @@ TEST("(Pokerus) No infection when P_POKERUS_FLAG_INFECTION is clear")
 
 TEST("(Pokerus) Test GetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKERUS_STRAIN")
 {
-    u32 strain = 0; 
+    u32 strain = 0;
     u32 daysLeft = 0;
     for (u32 i = 0; i < 16; i++)
     {
@@ -174,7 +174,7 @@ TEST("(Pokerus) Test GetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKE
 
 TEST("(Pokerus) Test SetMonData for MON_DATA_POKERUS_DAYS_LEFT and MON_DATA_POKERUS_STRAIN")
 {
-    u32 strain = 0; 
+    u32 strain = 0;
     u32 daysLeft = 0;
     for (u32 i = 0; i < 16; i++)
     {
@@ -289,7 +289,7 @@ TEST("(Pokerus) Test CheckMonHasHadPokerus general behavior")
 TEST("(Pokerus) Test UpdatePartyPokerusTime general behavior")
 {
     u32 enabled = 0;
-    u32 strain = 0; 
+    u32 strain = 0;
     s32 daysLeft = 0;
     s32 daysPassed = 0;
     for (u32 i = 0; i < 16; i++)
@@ -325,7 +325,7 @@ TEST("(Pokerus) Test UpdatePartyPokerusTime general behavior")
         else
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKERUS_STRAIN), strain);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKERUS_DAYS_LEFT), max(0, daysLeft - daysPassed));
-    } 
+    }
     else
     {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKERUS_STRAIN), strain);

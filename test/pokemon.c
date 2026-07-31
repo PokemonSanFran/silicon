@@ -569,7 +569,7 @@ TEST("Optimised SetMonData")
 TEST("CalculateMonStats")
 {
     ZeroPlayerPartyMons();
-    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED; // Battle Settings: Individual Values 
+    gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES] = BATTLE_OPTION_INDIVIDUAL_VALUES_ENABLED; // Battle Settings: Individual Values
     gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES] = BATTLE_OPTION_EFFORT_VALUES_ENABLED; // Battle Settings: Effort Values
 
     RUN_OVERWORLD_SCRIPT(

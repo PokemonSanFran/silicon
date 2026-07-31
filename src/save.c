@@ -1130,7 +1130,7 @@ bool8 IsSaveCorruptOrError(void)
 {
     if (IsSaveFileCorrrupt())
         return TRUE;
-    
+
     return IsSaveFileDamaged();
 }
 
