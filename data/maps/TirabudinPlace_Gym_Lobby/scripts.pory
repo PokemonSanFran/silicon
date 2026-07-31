@@ -29,11 +29,9 @@ script TirabudinPlace_Gym_Lobby_RepositionAttendant_Script{
     return
 }
 
-script TirabudinPlace_Gym_Lobby_Attendant_Singles{
-    questmenu(QUEST_MENU_CHECK_COMPLETE,QUEST_RESTORETIRABUDINGYM)
-    //if(var(VAR_RESULT)){
-        //goto(BattleTower_EventScript_Attendant)
-    //}
+script TirabudinPlace_Gym_Lobby_Attendant_Singles
+{
+    goto_if_quest_complete(QUEST_RESTORETIRABUDINGYM,SiliconFrontier_Dialogue_InteractAttendant)
     msgbox(format("If you're here for the Gym, its right through these doors."),MSGBOX_NPC,SPEAKER_GYM_ATTENDANT)
     end
 }
