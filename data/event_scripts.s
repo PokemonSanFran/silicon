@@ -94,6 +94,7 @@
 #include "constants/rtc.h" @ siliconDNS
 #include "constants/ui_adventure_guide.h" @ adventureGuide
 #include "constants/ui_map_system.h"
+#include "constants/silicon_battle_frontier.h" @ siliconFrontier
 @ End siliconMerge
 #include "constants/fly_encounter.h" @ flyEncounters
 #include "constants/speaker_names.h"
@@ -1811,6 +1812,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/nickname.inc" @ Battle Settings: Nickname
 .include "data/scripts/cutscene.inc"
 .include "data/scripts/fishing.inc"
+.include "data/scripts/silicon_frontier/general.inc" @ siliconFrontier
 .include "data/scripts/save.inc" @ autoSave
 .include "data/scripts/phenomenon.inc" @ autoSave
 .include "data/scripts/pokemart.inc" @ shopMenu
