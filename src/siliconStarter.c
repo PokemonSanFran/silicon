@@ -292,7 +292,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_CAREFUL,
         .ball = BALL_GREAT,
-        .moves = {MOVE_WORK_UP, MOVE_LOW_SWEEP, MOVE_TAUNT, MOVE_CIRCLE_THROW},
+        .moves = {MOVE_WORK_UP, MOVE_ARM_THRUST, MOVE_LOW_KICK, MOVE_LEER},
         .friendship = 124,
         .nextExpPercent = 55,
         .species = SPECIES_PANCHAM,
