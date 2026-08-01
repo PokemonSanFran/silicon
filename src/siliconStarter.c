@@ -199,7 +199,7 @@ const struct StarterMonTemplate sStarterMonTable[] =
         },
         .nature = NATURE_RELAXED,
         .ball = BALL_HEAL,
-        .moves = {MOVE_PROTECT, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
+        .moves = {MOVE_IRON_DEFENSE, MOVE_ROAR, MOVE_ROCK_TOMB, MOVE_METAL_CLAW},
         .friendship = 173,
         .nextExpPercent = 32,
         .species = SPECIES_ARON,
