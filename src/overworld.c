@@ -84,11 +84,10 @@
 #include "constants/event_objects.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
-#include "constants/rgb.h" // siliconMerge
+#include "constants/rgb.h" // gGlobalFieldTintMode
 #include "qol_field_moves.h" // qol_field_moves
 #include "options_game.h" // Game Settings
 #include "options_battle.h" // Battle Settings
@@ -634,27 +633,29 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
         objectEventTemplate->movementType = movementType;
 }
 
-// Start siliconMerge
+// Start gGlobalFieldTintMode
 void InitMapView(void)
 // static void InitMapView(void)
-// End siliconMerge
+// End gGlobalFieldTintMode
 {
     ResetFieldCamera();
-// Start siliconMerge
+// Start gGlobalFieldTintMode
     for (s32 paletteIndex = 0; paletteIndex < 15; paletteIndex++)
         ApplyGlobalFieldPaletteTint(paletteIndex);
-// End siliconMerge
+// End gGlobalFieldTintMode
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
     InitTilesetAnimations();
-} // siliconMerge
+}
 
+// Start gGlobalFieldTintMode
 void RemoveTintFromObjectEvents(void)
 {
     if (gGlobalFieldTintMode == GLOBAL_FIELD_TINT_NONE)
         RemoveTintFromObjectEventPalettes();
 }
+// End gGlobalFieldTintMode
 
 const struct MapLayout *GetMapLayout(u16 mapLayoutId)
 {

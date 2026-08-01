@@ -3598,6 +3598,7 @@ void SetDeoxysRockPalette(void)
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
     // Set faded to all black, weather blending handled during fade-in
     CpuFill16(RGB_BLACK, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(paletteNum); // gGlobalFieldTintMode
 }
 
 void SetPCBoxToSendMon(u8 boxId)

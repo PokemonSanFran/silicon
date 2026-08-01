@@ -1661,7 +1661,7 @@ Common_EventScript_LegendaryFlewAway::
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end
-@ Start siliconMerge
+@ Start gGlobalFieldTintMode
 Script_SetGrayscaleTint::
     setptr GLOBAL_FIELD_TINT_GRAYSCALE, gGlobalFieldTintMode
     callnative InitMapView
@@ -1677,7 +1677,7 @@ Script_RemoveTint::
     callnative RemoveTintFromObjectEvents
     callnative InitMapView
     return
-    @ End siliconMerge
+@ End gGlobalFieldTintMode
 
 EventScript_VsSeekerChargingDone::
 	special VsSeekerFreezeObjectsAfterChargeComplete

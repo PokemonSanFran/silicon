@@ -21,7 +21,7 @@
 #include "constants/rgb.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
-#include "event_object_movement.h" // siliconMerge
+#include "event_object_movement.h" // gGlobalFieldTintMode
 #include "constants/metatile_behaviors_frlg.h"
 #include "wild_encounter.h"
 
@@ -37,7 +37,7 @@ EWRAM_DATA u16 ALIGNED(4) sBackupMapData[MAX_MAP_DATA_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags sMapConnectionFlags = {0};
-EWRAM_DATA u8 gGlobalFieldTintMode = GLOBAL_FIELD_TINT_NONE; // siliconMerge
+EWRAM_DATA u8 gGlobalFieldTintMode = GLOBAL_FIELD_TINT_NONE; // gGlobalFieldTintMode
 
 COMMON_DATA struct BackupMapLayout gBackupMapLayout = {0};
 
@@ -1016,10 +1016,9 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
     }
 }
 
-// Below two are dummied functions from FRLG, used to tint the overworld palettes for the Quest Log
+// Start gGlobalFieldTintMode
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
-    // Start siliconMerge
 	switch (gGlobalFieldTintMode)
     {
         case GLOBAL_FIELD_TINT_NONE:
@@ -1034,9 +1033,9 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
             return;
     }
     CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
-	// End siliconMerge
 
 }
+// End gGlobalFieldTintMode
 
 static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
@@ -1054,7 +1053,7 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             else
                 LoadPaletteFast(tileset->palettes, destOffset, size);
             gPlttBufferFaded[destOffset] = gPlttBufferUnfaded[destOffset] = RGB_BLACK;
-            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
+            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1); // gGlobalFieldTintMode
         }
         else if (tileset->isSecondary == TRUE)
         {
@@ -1064,11 +1063,12 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
                 CpuCopy16(tileset->palettes[numPalsInPrimary], &gPlttBufferUnfaded[destOffset], size);
             else
                 LoadPaletteFast(tileset->palettes[numPalsInPrimary], destOffset, size);
+            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1); // gGlobalFieldTintMode
         }
         else
         {
             LoadPalette((const u16 *)tileset->palettes, destOffset, size);
-            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
+            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1); // gGlobalFieldTintMode
         }
     }
 }

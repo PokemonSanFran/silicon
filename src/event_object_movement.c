@@ -3549,7 +3549,7 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
-    ApplyGlobalFieldPaletteTint(paletteSlot); // siliconMerge
+    ApplyGlobalFieldPaletteTint(paletteSlot); // gGlobalFieldTintMode
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
@@ -4047,10 +4047,13 @@ void InitObjectEventPalettes(u8 reflectionType)
     }
 }
 
+// Start gGlobalFieldTintMode
 void RemoveTintFromObjectEventPalettes()
 {
     PatchObjectPaletteRange(sObjectPaletteTagSets[sCurrentReflectionType], 0, 5);
 }
+// End gGlobalFieldTintMode
+
 u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;

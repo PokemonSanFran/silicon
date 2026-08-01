@@ -873,7 +873,7 @@ void FieldEffectScript_LoadTiles(u8 **script)
     (*script) += 4;
 }
 
-// start siliconMerge
+// start gGlobalFieldTintMode
 void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 {
     switch (gGlobalFieldTintMode)
@@ -891,7 +891,8 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
     }
     CpuFastCopy(&gPlttBufferUnfaded[(paletteIdx + 16) * 16], &gPlttBufferFaded[(paletteIdx + 16) * 16], 0x20);
 }
-// End siliconMerge
+// End gGlobalFieldTintMode
+
 static bool32 ShouldFieldEffectBeFogBlended(u8 *script)
 {
     u32 ptr = FieldEffectScript_ReadWord(&script);
@@ -904,10 +905,10 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     u32 paletteSlot = LoadSpritePalette(palette);
-// Start siliconMerge
+// Start gGlobalFieldTintMode
     if (IndexOfSpritePaletteTag(palette->tag == 0xFF))
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
-// End siliconMerge
+// End gGlobalFieldTintMode
     (*script) += 4;
     SetPaletteColorMapType(paletteSlot + 16, T1_READ_8(*script));
     (*script)++;
@@ -925,10 +926,10 @@ void FieldEffectScript_LoadPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
-// Start siliconMerge
+// Start gGlobalFieldTintMode
     if (IndexOfSpritePaletteTag(palette->tag != 0xFF))
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
-// End siliconMerge
+// End gGlobalFieldTintMode
     (*script) += 4;
 }
 
