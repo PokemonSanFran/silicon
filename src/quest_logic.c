@@ -3940,63 +3940,92 @@ void Quest_ManOfManyHats_ManOfManyHatsIncrementArcade(void)
 
 bool32 Quest_ManOfManyHats_GetVariable_SawBoba(void)
 {
-    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
-    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
-    return varBit;
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_1ST);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayBoba(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_1ST + 3));
 }
 
 bool32 Quest_ManOfManyHats_GetVariable_SawFish(void)
 {
-    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
-    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
-    return varBit;
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_2ND);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayFish(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_2ND + 3));
 }
 
 bool32 Quest_ManOfManyHats_GetVariable_SawArcade(void)
 {
-    u32 varBit = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
-    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
-    return varBit;
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD);
+}
+
+bool32 Quest_ManOfManyHats_ShouldStayArcade(void)
+{
+return GetVariableBit(VAR_QUEST_MANOFMANYHATS,(SEEN_INSTALLNATUREPROBESWORKER_3RD + 3));
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayBoba(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayBoba();
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayFish(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayFish();
+}
+
+void Script_Quest_ManOfManyHats_ShouldStayArcade(void)
+{
+    gSpecialVar_Result = Quest_ManOfManyHats_ShouldStayArcade();
 }
 
 bool32 Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs(void)
 {
-    bool32 boba = Quest_ManOfManyHats_GetVariable_SawBoba();
-    bool32 fish = Quest_ManOfManyHats_GetVariable_SawFish();
-    bool32 arcade = Quest_ManOfManyHats_GetVariable_SawArcade();
-
-    if (boba && fish && arcade)
-        return TRUE;
-    else
+    if (Quest_ManOfManyHats_GetVariable_SawBoba() == FALSE)
         return FALSE;
+ 
+    if (Quest_ManOfManyHats_GetVariable_SawFish() == FALSE)
+         return FALSE;
+
+    if (Quest_ManOfManyHats_GetVariable_SawArcade() == FALSE)
+        return FALSE;
+
+    return TRUE;
 }
 
 void Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible(void)
 {
-	u32 var = VarGet(VAR_QUEST_MANOFMANYHATS);
-	u32 bit = 0;
+    gSpecialVar_Result = FALSE;
 
-    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == TRUE)
+    if(Quest_ManOfManyHats_ManOfManyHatsSeenAllJobs() == FALSE)
+        return;
+
+    if (IsQuestActiveState(QUEST_MANOFMANYHATS))
+        return;
+
+    u32 bit = 0;
+    switch (GetCurrentMap())
     {
+        case MAP_QIU_VILLAGE_RESTAURANT:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
+            break;
+        case MAP_WAJABI_LAKE:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
+            break;
+        case MAP_POPIDORA_PIER_ARCADE:
+            bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
+            break;
+        default:
+            return;
+        }
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_QIU_VILLAGE_RESTAURANT) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_QIU_VILLAGE_RESTAURANT))
-        bit = SEEN_INSTALLNATUREPROBESWORKER_1ST;
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_WAJABI_LAKE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_WAJABI_LAKE))
-        bit = SEEN_INSTALLNATUREPROBESWORKER_2ND;
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POPIDORA_PIER_ARCADE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POPIDORA_PIER_ARCADE))
-        bit = SEEN_INSTALLNATUREPROBESWORKER_3RD;
-            
-    var |= (2 << bit);
-    VarSet(VAR_QUEST_MANOFMANYHATS,var);
-    
-    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_1ST) & 2)
-       gSpecialVar_Result = 1;
-    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_2ND) & 2)
-        gSpecialVar_Result = 2;
-    if ((var >> SEEN_INSTALLNATUREPROBESWORKER_3RD) & 2)
-        gSpecialVar_Result = 3;
-    DebugPrintf("Wubalubadubdub");
-    }
+    bit += 3;
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,bit,TRUE);
+    gSpecialVar_Result = TRUE;
 }
 
 // ***********************************************************************

@@ -1,75 +1,96 @@
 const FLAG_HIDE_INSTALLNATUREPROBESWORKER = FLAG_TEMP_A
 const LOCKED_DOOR = 8
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
-// const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_INSTALLNATUREPROBESWORKER
-// const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
-// const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
+const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_RESTAURANT_INSTALLNATUREPROBESWORKER
+const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
+const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_INTERACT = VAR_LAST_TALKED
 
 //Quest_Manofmanyhats_
 
-//For the visibility scripts, var(VAR_RESULT) must always be first in the if statement, as it will first check the result given by Quest_ManOfManyHats_ManOfManyHatsIncrementX, which is then overwritten by the second condition in the if
-
-script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Visibility_Script{
-	callnative(Quest_ManOfManyHats_GetVariable_SawBoba)
-	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
-	
-		setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-	}
-
-	return
+script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Visibility_Script
+{
+    call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Boba)
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        return
+    }
+    callnative(Script_Quest_ManOfManyHats_ShouldStayBoba)
+    call_if_eq(VAR_RESULT,FALSE,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Boba)
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Visibility_Script{
-	callnative(Quest_ManOfManyHats_GetVariable_SawFish)
-	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
-		setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-	}
-	return
+script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Boba
+{
+    setobjectflagfromlocalid(INSTALLNATUREPROBESWORKER_WAITER)
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script{
-	callnative(Quest_ManOfManyHats_GetVariable_SawArcade)
-	if (var(VAR_RESULT) == 1 || returnqueststate(QUEST_INSTALLNATUREPROBES) != QUEST_MENU_COMPLETE_QUEST){
-			setflag(FLAG_HIDE_INSTALLNATUREPROBESWORKER)
-	}
-	return
+script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Visibility_Script
+{
+    call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Fish)
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        return
+    }
+    callnative(Script_Quest_ManOfManyHats_ShouldStayFish)
+    call_if_eq(VAR_RESULT,FALSE,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Fish)
 }
+
+script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Fish
+{
+    setobjectflagfromlocalid(INSTALLNATUREPROBESWORKER_FISHERMAN)
+}
+
+script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script
+{
+    call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade)
+    questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
+    if (var(VAR_RESULT) == TRUE)
+    {
+        return
+    }
+    callnative(Script_Quest_ManOfManyHats_ShouldStayArcade)
+    call_if_eq(VAR_RESULT,FALSE,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade)
+}
+
+script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade
+{
+    setobjectflagfromlocalid(INSTALLNATUREPROBESWORKER_ATTENDANT)
+}
+
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Dialogue{
 	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementBoba)
 	msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-	debugprint("VAR_RESULT", VAR_RESULT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	debugprint("VAR_RESULT", VAR_RESULT)
-	closemessage
-	release
-	if(var(VAR_RESULT) == 1){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
+	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+    closemessage
+    release
+    end
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue{
 	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementFish)
 	msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-	debugprint("VAR_RESULT", VAR_RESULT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	debugprint("VAR_RESULT", VAR_RESULT)
-	closemessage
-	release
-	if(var(VAR_RESULT) == 2){goto(Quest_Manofmanyhats_StartQuest_Dialogue)}
+	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+    closemessage
+    release
+    end
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_ArcadeAttendant_Dialogue{
 	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementArcade)
 	msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
-	debugprint("VAR_RESULT", VAR_RESULT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	debugprint("VAR_RESULT", VAR_RESULT)
-	closemessage
-	release
-	if(var(VAR_RESULT) == 3){goto(Quest_Manofmanyhats_StartQuest_Dialogue)} 
+	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+    closemessage
+    release
+    end
 }
 
 script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
@@ -97,7 +118,6 @@ script Quest_Manofmanyhats_StartQuest_Dialogue{
 	msgbox(format("Yeah, they're not going well. And neither is this!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
 	msgbox(format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_ANGRY)
 	msgbox(format("Sorry to ask another favor... could you get them for me?"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-	setvar(VAR_QUEST_MANOFMANYHATS,SEEN_INSTALLNATUREPROBESWORKER_3RD)
 	startquest(QUEST_MANOFMANYHATS)
 	call(Quest_Manofmanyhats_Active_Dialogue)
 }
