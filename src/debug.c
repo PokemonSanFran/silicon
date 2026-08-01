@@ -4752,6 +4752,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_TORA_TOWN_NIGHT) \
     X(MUS_GRAFFITIARTIST_STREETARTIST_PUNK_BUSKER_DANCER_ROBOTPERFORMER_DRAGPERFORMER_JUGGLER) \
     X(MUS_ENCOUNTER_STUDENT) \
+    X(MUS_OROLAND) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
