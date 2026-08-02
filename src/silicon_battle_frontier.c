@@ -1,14 +1,20 @@
 #include "global.h"
 #include "event_data.h"
+#include "constants/nameplate.h"
+#include "battle_frontier.h"
+#include "constants/battle_frontier.h"
 #include "quest_logic.h"
 #include "overworld.h"
 #include "tv.h"
 #include "strings.h"
 #include "party_menu.h"
 #include "script_pokemon_util.h"
+#include "pokemon.h"
 #include "item.h"
 #include "battle.h"
 #include "string_util.h"
+#include "battle_transition.h"
+#include "battle_setup.h"
 #include "silicon_battle_frontier.h"
 
 u16 SiliconFrontier_GetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
@@ -38,9 +44,11 @@ enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void);
 void SiliconFrontier_ResetCurrentChallenge(void);
 void SiliconFrontier_SetCurrentChallengeFromVars(void);
 void SiliconFrontier_SetCurrentChallenge(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
+static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount);
 
 #include "data/silicon_frontier/facilities.h"
 #include "data/silicon_frontier/trainers.h"
+#include "data/silicon_frontier/mons.h"
 
 u16 SiliconFrontier_GetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
 {
@@ -603,4 +611,345 @@ void BufferPartySizeForChallenge(void)
 {
     u32 partySize = SiliconFroniter_GetPartySizeFromCurrentChallenge();
     ConvertIntToDecimalStringN(gStringVar2,partySize,STR_CONV_MODE_LEFT_ALIGN,CountDigits(partySize));
+}
+
+enum SiliconFrontierTrainerIds GetRandomSiliconFrontierTrainer(void)
+{
+    enum SiliconFrontierTrainerIds min = SILICON_FRONTIER_TRAINER_SPECIAL_END;
+    enum SiliconFrontierTrainerIds max = SILICON_FRONTIER_TRAINER_COUNT - 1;
+    return RandomUniform(RNG_RANDOM_SILICON_FRONTIER_TRAINER, min,max);
+}
+
+u16 SiliconFrontier_GetTrainerFlag(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].unlockFlag;
+}
+
+bool8 SiliconFrontier_IsBossUnlocked(enum SiliconFrontierTrainerIds trainerId)
+{
+    u32 flag = SiliconFrontier_GetTrainerFlag(trainerId);
+
+    if (flag == 0)
+        return TRUE;
+
+    return (FlagGet(flag));
+}
+
+enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStreak)
+{
+    currentStreak = (currentStreak + 1) - SILICON_FRONTIER_STREAK_LENGTH_BOSS;
+    u32 bossIndex = currentStreak / SILICON_FRONTIER_STREAK_LENGTH_BOSS;
+    u32 possibleTrainer = SILICON_FRONTIER_TRAINER_BOSS_START + bossIndex;
+
+    while (possibleTrainer >= SILICON_FRONTIER_TRAINER_BOSS_END)
+        possibleTrainer -= SILICON_FRONTIER_BOSS_COUNT;
+
+    if (SiliconFrontier_IsBossUnlocked(possibleTrainer) == FALSE)
+        return GetRandomSiliconFrontierTrainer();
+
+    return possibleTrainer;
+}
+
+enum SiliconFrontierTrainerIds SiliconFrontier_GetBossFromCurrentFacility(enum BossPhases phase)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    return gSiliconFrontierData[facility].boss[phase];
+}
+
+enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+
+    if (((currentStreak + 1) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
+        return GetRandomSiliconFrontierTrainer();
+
+    if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_SILVER_BEFORE)
+        return SiliconFrontier_GetBossFromCurrentFacility(SILICON_FRONTIER_BOSS_PHASE_SILVER);
+    else if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_GOLD_BEFORE)
+        return SiliconFrontier_GetBossFromCurrentFacility(SILICON_FRONTIER_BOSS_PHASE_GOLD);
+    else if (((currentStreak + 1) % SILICON_FRONTIER_STREAK_LENGTH_SILVER) == 0)
+        return SiliconFrontier_GetBossFromCurrentFacility(SILICON_FRONTIER_BOSS_PHASE_BEYOND);
+
+    return SiliconFrontier_GetNextGenericBoss(currentStreak);
+}
+
+bool8 SiliconFroniter_IsCurrentChallengeTypeDouble(void)
+{
+    return (SiliconFrontier_GetTypeFromCurrentChallenge() != SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE);
+}
+
+bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void)
+{
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+
+    if (challengeType == SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE)
+        return FALSE;
+
+    if (challengeType == SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE)
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 SiliconFroniter_IsCurrentChallengeTypeLinkMulti(void)
+{
+    return (SiliconFrontier_GetTypeFromCurrentChallenge() == SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI);
+}
+
+void SiliconFrontier_SetAllOpponents(void)
+{
+    TRAINER_BATTLE_PARAM.opponentA = SiliconFrontier_GenerateOpponent();
+
+    TRAINER_BATTLE_PARAM.opponentB = SILICON_FRONTIER_TRAINER_NONE;
+
+    if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
+        return;
+
+    TRAINER_BATTLE_PARAM.opponentB = SiliconFrontier_GenerateOpponent();
+}
+
+const u16 SiliconFrontier_GetObjectGfxId(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].objectGfxId;
+}
+
+const u8* SiliconFrontier_GetTrainerName(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].trainerName;
+}
+
+const u8* SiliconFrontier_GetBattleText(enum SiliconFrontierSpeechStrings stringId, enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].text[stringId];
+}
+
+const u8* SiliconFrontier_GetPlayerLossText(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].text[SILICON_FRONTIER_TEXT_PLAYER_LOST];
+}
+
+u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].trainerClass;
+}
+
+void SiliconFrontier_SetAllOpponentsObjects(void)
+{
+    VarSet(VAR_OBJ_GFX_ID_0,SiliconFrontier_GetObjectGfxId(TRAINER_BATTLE_PARAM.opponentA));
+    VarSet(VAR_OBJ_GFX_ID_1,SiliconFrontier_GetObjectGfxId(TRAINER_BATTLE_PARAM.opponentB));
+
+}
+
+const u8* SiliconFrontier_GetOpponentIntroText(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].text[SILICON_FRONTIER_TEXT_BEFORE];
+}
+
+enum NameplateSpeaker SiliconFrontier_GetSpeaker(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].speaker;
+}
+
+enum NameplateTail SiliconFrontier_GetTail(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].tail;
+}
+
+enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].emote;
+}
+
+void SiliconFrontier_BufferOpponentText(enum SiliconFrontierTrainerIds trainerId)
+{
+    VarSet(VAR_MSGBOX_SPEAKER,SiliconFrontier_GetSpeaker(trainerId));
+    VarSet(VAR_MSGBOX_TAIL,SiliconFrontier_GetTail(trainerId));
+    VarSet(VAR_MSGBOX_EMOTE,SiliconFrontier_GetEmote(trainerId));
+    StringCopy(gStringVar1,SiliconFrontier_GetOpponentIntroText(trainerId));
+}
+
+void SiliconFrontier_SetUpTextA(void)
+{
+    SiliconFrontier_BufferOpponentText(TRAINER_BATTLE_PARAM.opponentA);
+}
+
+void SiliconFrontier_SetUpTextB(void)
+{
+    SiliconFrontier_BufferOpponentText(TRAINER_BATTLE_PARAM.opponentB);
+}
+
+static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount)
+{
+    const u16 *monSet = gSiliconFrontierTrainers[trainerId].monSet;
+
+    u32 bfMonCount = 0;
+    u32 monId = monSet[bfMonCount];
+    while (monId != SILICON_FRONTIER_MON_NULL)
+    {
+        bfMonCount++;
+        monId = monSet[bfMonCount];
+        if (monId == SILICON_FRONTIER_MON_NULL)
+            break;
+    }
+
+    u32 i = 0;
+    u32 j = 0;
+    u32 firstMonId = 0;
+    u32 otID = Random32();
+    u32 chosenMonIndices[monCount];
+    bfMonCount--;
+    while (i != monCount)
+    {
+        u32 monIndex = RandomUniform(RNG_RANDOM_SILICON_FRONTIER_MON,0,bfMonCount);
+        monId = monSet[monIndex];
+
+        // Ensure this Pokémon species isn't a duplicate.
+        for (j = 0; j < i + firstMonId; j++)
+        {
+            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_SPECIES) == gSiliconFrontierMons[monId].species)
+                break;
+        }
+        if (j != i + firstMonId)
+            continue;
+
+        // Ensure this Pokemon's held item isn't a duplicate.
+        for (j = 0; j < i + firstMonId; j++)
+        {
+            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) != ITEM_NONE
+             && GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) == gSiliconFrontierMons[monId].heldItem)
+                break;
+        }
+        if (j != i + firstMonId)
+            continue;
+
+        chosenMonIndices[i] = monId;
+        u8 fixedIV = MAX_PER_STAT_IVS;
+        CreateFacilityMon(&gSiliconFrontierMons[monId],
+                SILICON_FRONTIER_LEVEL, fixedIV, otID, 0,
+                &gParties[B_TRAINER_OPPONENT_A][i + firstMonId]);
+
+        // The Pokémon was successfully added to the trainer's party, so it's safe to move on to
+        // the next party slot.
+        i++;
+    }
+}
+
+static void SiliconFrontier_FillOpponentParties(void)
+{
+    ZeroEnemyPartyMons();
+    u32 partySize = SiliconFroniter_GetPartySizeFromCurrentChallenge();
+    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentA,partySize);
+    if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
+        return;
+    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize);
+}
+
+void SiliconFrontier_SetUpOpponent(void)
+{
+    SiliconFrontier_SetAllOpponents();
+    SiliconFrontier_SetAllOpponentsObjects();
+    SiliconFrontier_FillOpponentParties();
+    SiliconFrontier_SetAllOpponentsObjects();
+}
+
+static void SiliconFrontier_IncreaseNumBattles(void)
+{
+
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+
+    u32 battles = SiliconFrontier_GetNumberBattles(facility,challengeType);
+
+    if (++battles > MAX_u32)
+        return;
+
+    SiliconFrontier_SetNumberBattles(facility,challengeType,battles);
+}
+
+static void HandleFacilityTrainerBattleEnd(void)
+{
+    SiliconFrontier_IncreaseNumBattles();
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+static void Task_StartBattleAfterTransition(u8 taskId)
+{
+    if (IsBattleTransitionDone() == TRUE)
+    {
+        gMain.savedCallback = HandleFacilityTrainerBattleEnd;
+        SetMainCallback2(CB2_InitBattle);
+        DestroyTask(taskId);
+    }
+}
+
+
+void SiliconFrontier_StartFacilityBattle(void)
+{
+    gBattleScripting.specialTrainerBattleType = FACILITY_BATTLE_TOWER; // Needed for pokeemerald
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+
+    if (SiliconFroniter_IsCurrentChallengeTypeLinkMulti())
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_TOWER_LINK_MULTI;
+    else if (SiliconFroniter_IsCurrentChallengeTypeMulti())
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS;
+    else if (SiliconFroniter_IsCurrentChallengeTypeDouble())
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+
+    CreateTask(Task_StartBattleAfterTransition, 1);
+    PlayMapChosenOrBattleBGM(0);
+    BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
+}
+
+void SiliconFrontier_TryIncrementWinStreakAndRecord(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+
+    if (++currentStreak > MAX_u16)
+        return;
+
+    SiliconFrontier_SetCurrentStreak(facility,challengeType,currentStreak);
+
+    if (currentStreak <= SiliconFrontier_GetLongestStreak(facility,challengeType))
+        return;
+
+    SiliconFrontier_SetLongestStreak(facility,challengeType,currentStreak);
+}
+
+u32 SiliconFrontier_CalculateStreakBP(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+
+    if (((currentStreak) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
+    {
+        u32 points = (currentStreak / 10) + 1;
+        return (points > 10) ? 10 : points;
+    }
+
+    if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_SILVER)
+        return 50;
+    else if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_GOLD)
+        return 50;
+
+    return 20;
+}
+
+void SiliconFrontier_BufferBP(void)
+{
+    u32 value = SiliconFrontier_CalculateStreakBP();
+    VarSet(VAR_0x8007,value);
+    ConvertIntToDecimalStringN(gStringVar1,STR_CONV_MODE_LEFT_ALIGN,value,CountDigits(value));
+}
+
+void SiliconFrontier_BufferStreakString(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    ConvertIntToDecimalStringN(gStringVar2,STR_CONV_MODE_LEFT_ALIGN,value,CountDigits(value));
 }

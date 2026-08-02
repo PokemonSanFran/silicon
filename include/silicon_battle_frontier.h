@@ -3,6 +3,10 @@
 
 #include "constants/silicon_battle_frontier.h"
 #include "constants/trainers.h"
+#include "constants/nameplate.h"
+u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId);
+const u8* SiliconFrontier_GetTrainerName(enum SiliconFrontierTrainerIds trainerId);
+const u8* SiliconFrontier_GetBattleText(enum SiliconFrontierSpeechStrings stringId, enum SiliconFrontierTrainerIds trainerId);
 
 struct SiliconFrontierStreaks
 {
@@ -16,19 +20,20 @@ struct SiliconFrontierTrainers
 {
     u16 unlockFlag;
     u8 trainerClass;
+    u16 objectGfxId;
     const u8 *trainerName;
-    const u8 *introText;
-    const u8 *playerWinText;
-    const u8 *playerLossText;
+    const u8* text[SILICON_FRONTIER_TEXT_PLAYER_COUNT];
     const u16 monSet[SILICON_FRONTIER_MON_SET_SIZE];
+    enum NameplateSpeaker speaker;
+    enum NameplateTail tail;
+    enum NameplateEmotes emote;
 };
 
 struct SiliconFrontierData
 {
-    u16 silverBadge;
-    enum SiliconFrontierTrainerIds silverBoss;
-    u16 goldBadge;
-    enum SiliconFrontierTrainerIds goldBoss;
+    u16 badge[SILICON_FRONTIER_BOSS_PHASE_COUNT];
+    enum SiliconFrontierTrainerIds boss[SILICON_FRONTIER_BOSS_PHASE_COUNT];
+    const u8 *originalName;
     const u8 *name;
     mapsec_s16_t mapsec;
 };

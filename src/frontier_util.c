@@ -1,6 +1,7 @@
 #include "global.h"
 #include "frontier_util.h"
 #include "easy_chat.h"
+#include "silicon_battle_frontier.h"
 #include "event_data.h"
 #include "battle_setup.h"
 #include "overworld.h"
@@ -1835,6 +1836,7 @@ u8 GetFrontierBrainStatus(void)
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
+    StringCopy(gStringVar4,SiliconFrontier_GetBattleText(whichText,trainerId));
 #if FREE_EMERALD_BATTLE_FRONTIER == FALSE
     switch (whichText)
     {
@@ -3214,7 +3216,7 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
             return gFacilityClassToPicIndex[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
     }
 #else // siliconFrontier
-    return 0;
+    return gFacilityClassToPicIndex[SiliconFrontier_GetTrainerClass(trainerId)];
 #endif // siliconFrontier
 }
 
@@ -3270,7 +3272,7 @@ enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
 
     return trainerClass;
 #else // siliconFrontier
-    return 0;
+    return gFacilityClassToTrainerClass[SiliconFrontier_GetTrainerClass(trainerId)];
 #endif // siliconFrontier
 }
 
@@ -3377,6 +3379,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
     dst[i] = EOS;
 #endif // siliconFrontier
+    StringCopy(dst,SiliconFrontier_GetTrainerName(trainerId));
 }
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)

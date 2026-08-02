@@ -103,12 +103,12 @@ script SiliconFrontier_Script_ChoosePartyMons
         goto(SiliconFrontier_Dialogue_InvalidParty)
     }
     msgbox(format("Your party has been registered! You must now save the game to proceed."))
-    setflag(FLAG_SYS_FRONTIER_CHALLENGE_STARTED)
+    //setflag(FLAG_SYS_FRONTIER_CHALLENGE_STARTED)
     startmenu_savescreen
     goto_if_unset(FLAG_SYS_SAVE_SUCCESSFUL,SiliconFrontier_Script_NeedToSave)
     msgbox(format("If you turn off your game before saving again, you will be disqualified, and your prizes will be forfeit."))
     closemessage
-    goto(SiliconFrontier_Script_WalkIntoRoom)
+    goto(SiliconFrontier_Script_LeaveRoom)
 }
 
 script SiliconFrontier_Script_NeedToSave
@@ -119,35 +119,91 @@ script SiliconFrontier_Script_NeedToSave
     goto(SiliconFrontier_Script_QuitAttendant)
 }
 
+script SiliconFrontier_Script_LeaveRoom
+{
+    moveobjecttocoords(LOCALID_BATTLE_TOWER_SINGLES_ATTENDANT,5,2,DIR_WEST)
+    delay(32)
+    opendoor(4,1)
+    moveobjecttocoords(LOCALID_PLAYER,4,3,DIR_NORTH)
+    waitmovement(LOCALID_PLAYER)
+    waitdooranim
+    playse(SE_EXIT)
+    applymovement(LOCALID_PLAYER,moves(walk_up * 2,set_invisible))
+    waitmovement(LOCALID_PLAYER)
+    waitse
+    closedoor(4,1)
+    waitdooranim
+    warpsilent(MAP_TIRABUDIN_PLACE_GYM_BATTLE_ROOM,0)
+    waitstate
+}
+
 script SiliconFrontier_Script_WalkIntoRoom
 {
-    //lock
-    //attendant walk into position
-    //walk into position
-    //goto(SiliconFrontier_Script_StartBattle)
+    lock
+    goto(SiliconFrontier_Script_StartBattle)
 }
 
 script SiliconFrontier_Script_StartBattle
 {
-    callnative(LevelAllPokemonTo50)
+    moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_EAST)
+    callnative(LevelUpAllPokemonForFrontier)
+
+    callnative(SiliconFrontier_SetUpOpponent)
+
+    removeobject(LOCALID_TOWER_OPPONENT_A)
+    clearflag(FLAG_HIDE_FACILITY_OPPONENT)
+    addobject(LOCALID_TOWER_OPPONENT_A)
+
+    moveobjecttocoords(LOCALID_TOWER_OPPONENT_A,6,5,DIR_WEST)
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_TOWER_OPPONENT_A)
+
+    callnative(SiliconFrontier_SetUpTextA)
+    msgbox(format("{STR_VAR_1}"))
+    closemessage
+
+    moveobjecttocoords(LOCALID_PLAYER,4,5,DIR_EAST)
+    moveobjecttocoords(LOCALID_TOWER_OPPONENT_A,5,5,DIR_WEST)
+
+    waitmovement(LOCALID_PLAYER)
+    waitmovement(LOCALID_TOWER_OPPONENT_A)
+    callnative(SiliconFrontier_StartFacilityBattle)
+    specialvar(VAR_RESULT,GetBattleOutcome)
+    goto_if_ne(VAR_RESULT,B_OUTCOME_WON,SiliconFrontier_Script_LossBattle)
+    goto(SiliconFrontier_Script_WonBattle)
+    end
     //enable recorded battles
-    //choose frontier opponent
-    //load frontier mons
-    //set opponent id
-    //opponent walks into position
-    //load opponent text based on trainer id
-    //start battle
 }
 
 script SiliconFrontier_Script_WonBattle
 {
-    //lock
-    //increment win streak
-    //if win streak is greater than record, update record
-    //increment num battles
-    //opponent walk away
-    //make invisible
-    //player gets BP prize for battle
+    lock
+    callnative(SiliconFrontier_TryIncrementWinStreakAndRecord)
+    applymovement(LOCALID_TOWER_OPPONENT_A,moves(walk_up * 4,set_invisible))
+    moveobjecttocoords(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT,2,5,DIR_EAST)
+    callnative(SiliconFrontier_BufferBP)
+    variableaddbp(VAR_0x8007,TRUE)
+    moveobjecttocoords(LOCALID_PLAYER,2,5,DIR_WEST)
+    waitmovement(LOCALID_TOWER_OPPONENT_A)
+    playse(SE_EXIT)
+    waitse
+    bypass_healblock
+    cueobjectplayer(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT)
+    playse(SE_USE_ITEM)
+    msgbox(format("Your party has been healed."),MSGBOX_AUTOCLOSE)
+    waitse
+    callnative(SiliconFrontier_BufferStreakString)
+    msgbox(format("Would you like to continue your streak of {STR_VAR_2} battles?"))
+    dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave", "Record")
+    switch(var(VAR_RESULT))
+    {
+        case 0:
+            closemessage
+            end
+        case 1:
+            return
+        case 2:
+    }
     //if hit 50 or 100 for the first time, reward player
     //attendant heals player
     //attendant asks if they're ready for battle X
