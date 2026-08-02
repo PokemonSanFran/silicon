@@ -3834,6 +3834,20 @@
 	.endif
 	.endm
 
+    .macro variableaddbp var:req, update=FALSE
+	.if \update == TRUE
+	preparevariablecurrencychange type=2, var=\var, subtract=FALSE
+	updatebpbox
+	.endif
+	callnative ScrCmd_variableaddbp
+	.2byte \var
+	.if \update == TRUE
+	delay 30
+	updatebpbox
+	.endif
+	.endm
+
+
 	.macro removebp value:req, update=FALSE
 	.if \update == TRUE
 	preparecurrencychange type=2, change=\value, subtract=TRUE

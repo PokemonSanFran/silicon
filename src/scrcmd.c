@@ -3913,6 +3913,15 @@ bool8 ScrCmd_variablecheckmoney(struct ScriptContext *ctx)
     }
     return FALSE;
 }
+
+bool8 ScrCmd_variableaddbp(struct ScriptContext *ctx)
+{
+    u32 amount = VarGet(ScriptReadWord(ctx));
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    GiveFrontierBattlePoints(amount);
+    return FALSE;
+}
 // End siliconMerge
 // Start phenomenon
 bool8 ScrCmd_setphenomenondata(struct ScriptContext *ctx)
