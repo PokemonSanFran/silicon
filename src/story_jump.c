@@ -127,7 +127,6 @@ static void JumpPlayerTo_RestoreZenzuIsland(bool32);
 static void JumpPlayerTo_RestoreEspuleeOutskirts(bool32);
 //static void JumpPlayerTo_RestoreTirabudinPlace(bool32);
 static void JumpPlayerTo_YouRealizeWereEvilRight(bool32);
-static void JumpPlayerTo_YouRealizeTheyreEvilRight_Phone(bool32);
 static void JumpPlayerTo_YouRealizeTheyreEvilRight_Island(bool32);
 static void JumpPlayerTo_CongratsYoureanAsshole(bool32);
 static void JumpPlayerTo_YouHaveYourOrders(bool32);

@@ -2592,7 +2592,8 @@ void DebugQuest_RestoreTirabudinGym(u8 state)
     {
         default:
         case STATE_QUEST_RESTORETIRABUDINGYM_NOT_STARTED:
-            JumpPlayerTo_LetsGrabLunch(JUMP_DEBUG);
+            JumpPlayerTo_YouRealizeTheyreEvilRight_Phone(JUMP_DEBUG);
+            QuestMenu_ScriptSetComplete(QUEST_SHUTDOWNMEDICINEMAN);
             QuestMenu_ScriptSetComplete(QUEST_INVERSEHALLUCINOGENIC);
             QuestMenu_ScriptSetComplete(QUEST_RESTOREESPULEEGYM);
             break;
@@ -5962,7 +5963,7 @@ void BufferFavoriteFood(void)
         [PLAYER_FAVORITE_FOOD_BAGEL] = gText_BaconAsiagoBagel,
         [PLAYER_FAVORITE_FOOD_SORBET] = gText_SavorySorbet,
     };
-    
+
     enum PlayerFavoriteFoods food = VarGet(VAR_PLAYER_FAVORITE_FOOD);
 
     StringCopy(gStringVar1,foods[food]);
@@ -6056,11 +6057,11 @@ void UpdateMusicForRave(void)
     {
         case 0:        ResetLowPassFilter();
             break;
-        case 1 ... 3:  SetLightLowPassFilter(); 
+        case 1 ... 3:  SetLightLowPassFilter();
             break;
-        case 4 ... 8:  SetMediumLowPassFilter(); 
+        case 4 ... 8:  SetMediumLowPassFilter();
             break;
-        case 9 ... 10: SetDarkLowPassFilter(); 
+        case 9 ... 10: SetDarkLowPassFilter();
             break;
     }
 
@@ -6085,7 +6086,7 @@ void EnterTheMaster_BufferPlayerPronouns(void)
 }
 
 // ***********************************************************************
-// Cutscene: Lets Burn This Mother Down 
+// Cutscene: Lets Burn This Mother Down
 // ***********************************************************************
 
 void LetsBurnThisMotherDown_BufferMostPowerfulAttack(void)
