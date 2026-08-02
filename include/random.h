@@ -251,6 +251,8 @@ enum RandomTag
     RNG_AI_DMG_ROLL_RANDOM,
     RNG_RANDOM_BERRY,
     RNG_RANDOM_BALL,
+    RNG_RANDOM_SILICON_FRONTIER_TRAINER, // siliconFrontier
+    RNG_RANDOM_SILICON_FRONTIER_MON, // siliconFrontier
 };
 
 #define RandomWeighted(tag, ...) \
