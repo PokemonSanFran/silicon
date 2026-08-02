@@ -205,7 +205,7 @@ enum OtIdMethod
 #define FRIENDSHIP_EVENT_MASSAGE          9
 
 // Start siliconMerge
-enum 
+enum
 {
   FRIENDSHIP_EVENT_MUTUAL_AID = (FRIENDSHIP_EVENT_MASSAGE + 1),
 };

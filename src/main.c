@@ -319,7 +319,7 @@ static void ReadKeys(void)
             gMain.heldKeys |= A_BUTTON;
 		// Start LButtonTurbo
             gMain.newKeys ^= A_BUTTON;
-        } 
+        }
 		// End LButtonTurbo
     }
 

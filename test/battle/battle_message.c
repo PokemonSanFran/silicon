@@ -267,7 +267,7 @@ AI_ONE_VS_TWO_BATTLE_TEST("Battle Message: STRINGID_INTROMSG, STRINGID_INTROSEND
         OPPONENT_B(SPECIES_WYNAUT)      { Moves(MOVE_TACKLE);  }
         OPPONENT_B(SPECIES_GIRAFARIG)   { Moves(MOVE_PSYCHIC); }
     } WHEN {
-        TURN { 
+        TURN {
             EXPECT_SWITCH(opponentLeft, 1);
             EXPECT_SWITCH(opponentRight, 1);
         }

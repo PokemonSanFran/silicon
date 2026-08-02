@@ -916,6 +916,8 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext_SetupScript(EventScript_EggHatch);
             return TRUE;
         }
+        /*
+        // Start siliconMerge
         if (AbnormalWeatherHasExpired() == TRUE)
         {
             ScriptContext_SetupScript(AbnormalWeather_EventScript_EndEventAndCleanup_1);
@@ -928,18 +930,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoWallyCall() == TRUE)
         {
-            // Start siliconMerge
-			ScriptContext_SetupScript(ANewStrike_BreakingNews_Dialogue);
-            //ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
-			// End siliconMerge
+            ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
             return TRUE;
         }
         if (ShouldDoScottFortreeCall() == TRUE)
         {
-            // Start siliconMerge
-			//ScriptContext_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
-            ScriptContext_SetupScript(YouRealizeTheyreEvilRight_CallPlayer_Dialogue);
-			// End siliconMerge
+			ScriptContext_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
             return TRUE;
         }
         if (ShouldDoScottBattleFrontierCall() == TRUE)
@@ -949,19 +945,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         }
         if (ShouldDoRoxanneCall() == TRUE)
         {
-            //ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne); // siliconMerge
+            ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne);
             return TRUE;
         }
         if (ShouldDoRivalRayquazaCall() == TRUE)
         {
             ScriptContext_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall);
-			// Start siliconMerge
-            return TRUE;
-        }
-        if (ShouldDoNaturalEarthquake() == TRUE)
-        {
-            ScriptContext_SetupScript(Earthquake_Natural_EventScript);
-			// End siliconMerge
             return TRUE;
         }
         if (UpdateVsSeekerStepCounter())
@@ -969,6 +958,8 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
+        */
+        // End siliconMerge
         // Start phenomenon
         if(CheckForPhenomenon() == TRUE)
         {
@@ -976,6 +967,23 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             return TRUE;
         }
         // End phenomenon
+        // Start siliconMerge
+        if (ShouldStartANewStrike() == TRUE)
+        {
+			ScriptContext_SetupScript(ANewStrike_BreakingNews_Dialogue);
+            return TRUE;
+        }
+        if (ShouldBaiyaCallPlayer() == TRUE)
+        {
+            ScriptContext_SetupScript(YouRealizeTheyreEvilRight_CallPlayer_Dialogue);
+            return TRUE;
+        }
+        if (ShouldDoNaturalEarthquake() == TRUE)
+        {
+            ScriptContext_SetupScript(Earthquake_Natural_EventScript);
+            return TRUE;
+        }
+        // End siliconMerge
     }
 
     if (SafariZoneTakeStep() == TRUE)

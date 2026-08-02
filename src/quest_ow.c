@@ -391,7 +391,7 @@ static void Task_DoQuestOverworldSlide(u8 taskId)
 
     DrawQuestOverworldHeaderTiles(gTasks[taskId].tHeaderWindowId, gTasks[taskId].tTimer);
     DrawQuestOverworldCTATiles(gTasks[taskId].tCtaWindowId, gTasks[taskId].tTimer);
-    
+
     if (gTasks[taskId].tTimer >= QUEST_OVERWORLD_ANIMATION_SLIDE_TEXT_START)
     {
         PrintQuestName(gTasks[taskId].tHeaderWindowId, gTasks[taskId].tTimer);

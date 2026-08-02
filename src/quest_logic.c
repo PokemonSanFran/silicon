@@ -1913,6 +1913,29 @@ void YouRealizeTheyreEvilRight_GetMapForCompletedRestoration(void)
     }
 }
 
+bool32 ShouldBaiyaCallPlayer(void)
+{
+    if (VarGet(VAR_STORYLINE_STATE) != STORY_POST_YOU_REALIZE_WERE_EVIL)
+        return FALSE;
+
+    if (FlagGet(FLAG_BAIYA_CALL_ARANTRAZ) == FALSE)
+        return FALSE;
+
+
+    switch (gMapHeader.mapType)
+    {
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
+        return (++(*GetVarPointer(VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER)) >= 10);
+        break;
+    default:
+        return FALSE;
+    }
+    return FALSE;
+}
+
 // ***********************************************************************
 // Cutscene: VSGarbodor
 // ***********************************************************************
@@ -2531,6 +2554,26 @@ void DebugQuest_AngelDelivery(u8 state)
 // ***********************************************************************
 // Quest: VS Deoxys
 // ***********************************************************************
+
+void VsDeoxys_CreatePerfectMinior(void)
+{
+    FlagSet(P_FLAG_FORCE_NO_SHINY);
+    enum Species species = SPECIES_MINIOR_CORE_ORANGE;
+    u32 level = 30;
+    CreateWildMon(species, level);
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+
+    enum Item item = ITEM_MOON_STONE;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+
+    u8 iv = MAX_PER_STAT_IVS;
+    for (u32 statIndex = 0; statIndex < NUM_STATS; statIndex++)
+        SetMonData(mon, MON_DATA_HP_IV + statIndex, &iv);
+
+    FlagClear(P_FLAG_FORCE_NO_SHINY);
+    CalculateMonStats(mon);
+}
+
 void DebugQuest_VSDeoxys(u8 state)
 {
     switch (state)
@@ -6115,3 +6158,31 @@ void LetsBurnThisMotherDown_BufferMostPowerfulAttack(void)
     }
     StringCopy(gStringVar1,GetMoveName(move));
 }
+
+// ***********************************************************************
+// Cutscene: A New Strike
+// ***********************************************************************
+
+bool32 ShouldStartANewStrike(void)
+{
+    if (GetNumberOfBadges() < 6)
+        return FALSE;
+
+    if (FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS) == FALSE)
+        return FALSE;
+
+
+    switch (gMapHeader.mapType)
+    {
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
+        return (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) >= 250);
+        break;
+    default:
+        return FALSE;
+    }
+    return FALSE;
+}
+

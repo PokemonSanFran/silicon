@@ -33,7 +33,7 @@
  * the player's side has a second trainer such as Mossdeep Space Center tag battle with
  * trainer Steven. gParties[B_TRAINER_OPPONENT_B] is only used in battles with two opponent trainers.
  * In a double battle where the battle side only has a single trainer, both battlers on that battle
- * side will reside in the same party (gParties[B_TRAINER_PLAYER] for player side and 
+ * side will reside in the same party (gParties[B_TRAINER_PLAYER] for player side and
  * gParties[B_TRAINER_OPPONENT_A] for opponent side).
  * Note in link multi battles, parties are set locally on each player's device, meaning
  * even if a player is in the right position, on their device they will still occupy

@@ -412,10 +412,7 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
 
 bool32 ShouldDoWallyCall(void)
 {
-// Start siliconMerge
-    //This function runs after the player has 6 badges and takes 250 steps - this triggers the "A New Strike" cutscene.
-    if (GetNumberOfBadges() > 5 && FlagGet(FLAG_CONSTRUCTION_BREAKING_NEWS))
-// End siliconMerge
+    if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
     {
         switch (gMapHeader.mapType)
         {
@@ -423,7 +420,7 @@ bool32 ShouldDoWallyCall(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_ANEWSTRIKE_STEP_COUNTER)) < 250) // siliconMerge
+            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
                 return FALSE;
             break;
         default:
@@ -440,11 +437,7 @@ bool32 ShouldDoWallyCall(void)
 
 bool32 ShouldDoScottFortreeCall(void)
 {
-// Start siliconMerge
-    //This function runs 10 steps after "You Realize We're Evil" plays
-    if (VarGet(VAR_STORYLINE_STATE) == STORY_POST_YOU_REALIZE_WERE_EVIL && FlagGet(FLAG_BAIYA_CALL_ARANTRAZ))
-    //if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
-// End siliconMerge
+    if (FlagGet(FLAG_SCOTT_CALL_FORTREE_GYM))
     {
         switch (gMapHeader.mapType)
         {
@@ -452,7 +445,7 @@ bool32 ShouldDoScottFortreeCall(void)
         case MAP_TYPE_CITY:
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_BAIYA_CALL_ARANTRAZ_STEP_COUNTER)) < 10) // siliconMerge
+            if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
                 return FALSE;
             break;
         default:
@@ -3848,10 +3841,15 @@ bool32 IsTrainerRegistered(void)
 // Always returns FALSE
 bool32 ShouldDistributeEonTicket(void)
 {
+    // Start siliconMerge
+    return FALSE;
+    /*
     if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
 
     return TRUE;
+    */
+    // End siliconMerge
 }
 
 #define tState data[0]

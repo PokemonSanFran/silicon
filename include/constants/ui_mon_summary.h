@@ -414,7 +414,7 @@ typedef const u8 *(*HelpBarTextFunc)(u32);  // we can't directly attach the enum
 // that are often needed for the interface, to avoid too many GetMonData
 struct MonSummary
 {
-    u16 species;
+    enum Species species;
     u8 isShiny:1;
     u8 abilityNum:1;
     u8 markings:4;
@@ -422,7 +422,7 @@ struct MonSummary
     u8 padding:1;
     u8 level;
     u8 ailment;
-    metloc_u8_t metLocation;
+    metloc_u16_t metLocation;
     u8 metLevel;
     u32 personality;
     u32 exp;

@@ -61,5 +61,5 @@ void Dexnav_SavePreviousChain(void);
 void Dexnav_RestorePreviousChain(void);
 u32 Dexnav_CalculateNewFriendship(u32 friendship);
 u32 Dexnav_CountFlags(void);
-  
+
 #endif // GUARD_UI_DEXNAV_H

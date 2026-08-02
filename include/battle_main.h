@@ -115,7 +115,6 @@ void CountDefeatedGlameow(void);
 void CountDefeatedGardenMons(void);
 void CountDefeatedCresaltaVista(void);
 void CountDefeatedBackyard(void);
-u8 Quest_Wildfirerisk_CheckDefeatedMon(void);
 // End siliconMerge
 u32 GeneratePersonalityForGender(u32 gender, enum Species species);
 void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);

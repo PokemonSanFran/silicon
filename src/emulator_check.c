@@ -295,7 +295,7 @@ bool32 IsInaccurateEmulator(void)
         vu16 *const soundcnt_h = (vu16 *)0x04000082;
         u16 savedX = *soundcnt_x;
         u16 savedH = *soundcnt_h;
-        
+
         *soundcnt_x = 0x0080;  // enable master sound
         *soundcnt_h = 0xFFFF;
         result = *soundcnt_h;
@@ -414,7 +414,7 @@ static void EmulatorCheck_InitWindows(void)
     DeactivateAllTextPrinters();
     ScheduleBgCopyTilemapToVram(0);
 
-    // main text    
+    // main text
     PutWindowTilemap(WIN_ERROR_MSG);
     CopyWindowToVram(WIN_ERROR_MSG, 3);
 
@@ -430,7 +430,7 @@ static void EmulatorCheck_PrintErrorText(void)
 {
     // main text
     FillWindowPixelBuffer(WIN_ERROR_MSG, PIXEL_FILL(0));
-    
+
     if (IsSaveFileCorrrupt() == TRUE)
         StringCopy(gStringVar4,COMPOUND_STRING("The saved game data is corrupted. Your previous save file will be loaded instead."));
     else if (IsSaveFileDamaged() == TRUE)
@@ -489,6 +489,9 @@ static void Task_EmulatorCheckMainInput(u8 taskId)
 {
     if (JOY_NEW(START_BUTTON) && ALLOW_BOOT_CONTINUATION)
     {
+        if(IsSaveFileDamaged())
+            ClearSaveData();
+
         PlaySE(SE_PC_OFF);
         FadeOutBGM(4);
         u32 color = (IsSaveCorruptOrError() == FALSE) ? RGB_BLACK : RGB_WHITE;

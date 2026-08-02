@@ -1038,7 +1038,7 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
                 // No rematch ready, but if the player has defeated them in
                 // a rematch before, advance to the final call.
                 // Note: The 2 "rematch" teams battled includes the first non-rematch battle.
-                else if (CountBattledRematchTeams(idx) >= 2) i += 3; 
+                else if (CountBattledRematchTeams(idx) >= 2) i += 3;
                 // No rematch ready and never defeated in a rematch, advance to congratulations call.
                 else i++;
             } while (0);

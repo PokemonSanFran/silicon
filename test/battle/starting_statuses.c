@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("TryStartingStatuses properly set up on first turn")
 {
-    enum StartingStatus status = 0; 
+    enum StartingStatus status = 0;
     enum Hazards hazard = HAZARDS_NONE;
 
     PARAMETRIZE { status = STARTING_STATUS_SPIKES_PLAYER_L1; hazard = HAZARDS_SPIKES; }
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("TryStartingStatuses properly set up on first turn")
 SINGLE_BATTLE_TEST("TryStartingStatuses properly set up after death")
 {
     u32 deadMons = 0;
-    enum StartingStatus status = 0; 
+    enum StartingStatus status = 0;
     enum Hazards hazard = HAZARDS_NONE;
 
     for (u32 j = 1; j <= 5; j++)
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("TryStartingStatuses properly set up after death")
 
 SINGLE_BATTLE_TEST("TryStartingStatuses properly works even if the effect was removed")
 {
-    enum StartingStatus status = 0; 
+    enum StartingStatus status = 0;
     enum Hazards hazard = HAZARDS_NONE;
 
     PARAMETRIZE { status = STARTING_STATUS_SPIKES_PLAYER_L1; hazard = HAZARDS_SPIKES; }
@@ -86,7 +86,7 @@ SINGLE_BATTLE_TEST("TryStartingStatuses properly works even if the effect was re
 
 SINGLE_BATTLE_TEST("StaringStatuses check the 6th index for the last pokemon even if the party is less than 6")
 {
-    enum StartingStatus status = 0; 
+    enum StartingStatus status = 0;
     enum Hazards hazard = HAZARDS_NONE;
 
     PARAMETRIZE { status = STARTING_STATUS_SPIKES_PLAYER_L1; hazard = HAZARDS_SPIKES; }
