@@ -30,6 +30,7 @@
 #include "constants/abilities.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "constants/silicon_battle_frontier.h" // siliconMerge
 #include "pokevial.h" //Pokevial Branch
 #include "options_battle.h" // siliconMerge
 #include "ui_pokedex.h" // pokedex
@@ -293,14 +294,9 @@ void LevelAllPokemonToX(u32 level)
     }
 }
 
-void LevelAllPokemonTo50(void)
+void LevelUpAllPokemonForFrontier(void)
 {
-    LevelAllPokemonToX(50);
-}
-
-void LevelUpAllPokemonTo100(void)
-{
-    LevelAllPokemonToX(MAX_LEVEL);
+    LevelAllPokemonToX(SILICON_FRONTIER_LEVEL);
 }
 // End siliconMerge
 void CanHyperTrain(struct ScriptContext *ctx)
