@@ -613,7 +613,6 @@ gSpecials::
     def_special PSF_GetFrontierBrainStatus
     def_special Debug_MakeStreak40
     def_special PSF_GiveFacilitySymbol
-    def_special LevelUpAllPokemonTo100
     def_special SavePlayerPartyBattleFrontier
     def_special LoadPlayerPartyBattleFrontier
 
