@@ -14,6 +14,7 @@ mapscripts TirabudinPlace_Gym_MapScripts {
 script TirabudinPlace_Gym_Leader_Visibility
 {
 	call_if_quest_not_complete(QUEST_SHUTDOWNMEDICINEMAN,Quest_Restoretirabudinplace_Leader_Visibility_Script)
+	call_if_quest_not_complete(QUEST_INVERSEHALLUCINOGENIC,Quest_Restoretirabudinplace_Leader_Visibility_Script)
 }
 
 script TirabudinPlace_Gym_MapScripts_OnTransition {
@@ -62,14 +63,48 @@ script TirabudinPlace_Gym_PostRematch_Dialogue{
     end
 }
 
-text gText_TirabudinPlace_Gym_PlayerAreYou{
-    format("{PLAYER}! So glad I don't have to hold back anymore... and I can break out the real good batches!")
-}
-
 text gText_TirabudinPlace_Gym_IShouldTryBattlingSober{
     format("I should try battling sober some day...")
 }
 
-text gText_TirabudinPlace_Gym_OohImBurned{
-    format("Oof, I'm burned out! Let's battle again tomorrow, okay?")
+script TirabudinGym_EventScript_11EDE0DC
+{
+    trainerbattle_single(TRAINER_11EDE0DC,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_148A3C6B
+{
+    trainerbattle_single(TRAINER_148A3C6B,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_13113EC0
+{
+    trainerbattle_single(TRAINER_13113EC0,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_120A20F6
+{
+    trainerbattle_single(TRAINER_120A20F6,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_1387ABBC
+{
+    trainerbattle_single(TRAINER_1387ABBC,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
+
+}
+script TirabudinGym_EventScript_114EB3AD
+{
+    trainerbattle_single(TRAINER_114EB3AD,format("I am a BD Gym Trainer"),format("I lost!"))
+    msgbox(format("You defeated me!"),MSGBOX_AUTOCLOSE)
+    end
 }
