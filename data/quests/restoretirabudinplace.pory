@@ -34,6 +34,8 @@ script Quest_Restoretirabudinplace_Dialogue_Quit
     completequest(QUEST_RESTORETIRABUDINGYM)
     msgbox(format("I'm done for now. But I'm not leaving the region like Eleanor. I'll see you around."),MSGBOX_NPC,SPEAKER_BD)
     closemessage
+    warpsilent(MAP_TIRABUDIN_PLACE_GYM_LOBBY,4,6)
+    waitstate
     release
     end
 }
