@@ -5403,6 +5403,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_LUCREZIA;
         case TRAINER_CLASS_DIANTHA:
             return MUS_VS_DIANTHA;
+        case TRAINER_CLASS_THE_TIDE_LEADER:
+            return MUS_VS_VIGRIM;
 // End firstMusicUpdate
         default:
             if (GetCurrentRegion() == REGION_KANTO)

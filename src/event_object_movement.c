@@ -2769,7 +2769,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     //if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
     if (GetCurrentMapMusic() == MUS_GYM
             || GetCurrentMapMusic() == MUS_RG_GYM
-            //|| GetCurrentMapMusic() == MUS_MERMEREZA_GYM
+            || GetCurrentMapMusic() == MUS_MERMEREZA_GYM
             || GetCurrentMapMusic() == MUS_TORA_GYM
             || GetCurrentMapMusic() == MUS_PERLACIA_GYM
             || GetCurrentMapMusic() == MUS_CHASILLA_GYM
