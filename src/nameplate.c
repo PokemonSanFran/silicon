@@ -253,8 +253,8 @@ static const u32* const nameplateRightTopLUT[] =
 
 static const u8 sMenuWindowFontColors[][3] =
 {
-    [FONT_BLACK]    = {TEXT_COLOR_TRANSPARENT,  13,   TEXT_COLOR_TRANSPARENT},
-    [FONT_WHITE]    = {TEXT_COLOR_TRANSPARENT,  10,   TEXT_COLOR_TRANSPARENT},
+    [FONT_NAMEPLATE_COLOR_BLACK]    = {TEXT_COLOR_TRANSPARENT,  13,   TEXT_COLOR_TRANSPARENT},
+    [FONT_NAMEPLATE_COLOR_WHITE]    = {TEXT_COLOR_TRANSPARENT,  10,   TEXT_COLOR_TRANSPARENT},
 };
 
 static enum NameplateSpeaker LoadDynamicSpeaker(void)
@@ -606,7 +606,7 @@ static void PrintSpeakerTitle(u32 windowId, enum NameplateSpeaker speaker)
     if (sSpeakerData[speaker].title[0] == '\0')
         return;
 
-    AddTextPrinterParameterized4(windowId, FONT_SPEAKER_TITLE, SPEAKER_NAME_X, SPEAKER_TITLE_Y, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE]);
+    AddTextPrinterParameterized4(windowId, FONT_SPEAKER_TITLE, SPEAKER_NAME_X, SPEAKER_TITLE_Y, 0, 0, sMenuWindowFontColors[FONT_NAMEPLATE_COLOR_WHITE], TEXT_SKIP_DRAW, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_TITLE]);
 }
 
 static void PrintSpeakerName(u32 windowId, enum NameplateSpeaker speaker)
@@ -614,7 +614,7 @@ static void PrintSpeakerName(u32 windowId, enum NameplateSpeaker speaker)
     if (sSpeakerData[speaker].name[0] == '\0')
         return;
 
-    AddTextPrinterParameterized4(windowId, FONT_SPEAKER_NAME, SPEAKER_NAME_X, SPEAKER_NAME_Y, 0, 0, sMenuWindowFontColors[FONT_BLACK], TEXT_SKIP_DRAW, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME]);
+    AddTextPrinterParameterized4(windowId, FONT_SPEAKER_NAME, SPEAKER_NAME_X, SPEAKER_NAME_Y, 0, 0, sMenuWindowFontColors[FONT_NAMEPLATE_COLOR_BLACK], TEXT_SKIP_DRAW, nameplateString[NAMEPLATE_SPEAKER_ATTRIBUTE_NAME]);
 }
 
 

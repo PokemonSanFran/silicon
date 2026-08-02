@@ -10,8 +10,8 @@ enum NameplateAttributes
 
 enum NamePlateColors
 {
-    FONT_BLACK,
-    FONT_WHITE,
+    FONT_NAMEPLATE_COLOR_BLACK,
+    FONT_NAMEPLATE_COLOR_WHITE,
 };
 
 enum NameplateSpeaker
