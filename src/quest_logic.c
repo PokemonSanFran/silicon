@@ -6185,3 +6185,11 @@ bool32 ShouldStartANewStrike(void)
     return FALSE;
 }
 
+// ***********************************************************************
+// Cutscene: Group Stages / Finals
+// ***********************************************************************
+
+bool8 IsPlayerInSharpriseArena(void)
+{
+    return (GetCurrentMap() == MAP_SHARPRISE_STADIUM_ARENA);
+}
