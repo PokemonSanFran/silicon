@@ -4755,6 +4755,7 @@ static void DebugAction_Quest_SelectState(u8 taskId)
     X(MUS_VS_VIGRIM) \
     X(MUS_MERMEREZA_GYM) \
     X(MUS_OROLAND_NIGHT) \
+    X(MUS_VICTORY_TOURNAMENT) \
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \

@@ -662,6 +662,7 @@ gSongTable::
 	song mus_vs_vigrim, MUSIC_PLAYER_BGM, 0
 	song mus_mermereza_gym, MUSIC_PLAYER_BGM, 0
 	song mus_oroland_night, MUSIC_PLAYER_BGM, 0
+	song mus_victory_tournament, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2
