@@ -104,5 +104,6 @@ void BufferSunriseTimes(void);
 void BufferSunsetTimes(void);
 bool32 ShouldBaiyaCallPlayer(void);
 bool32 ShouldStartANewStrike(void);
+bool8 IsPlayerInSharpriseArena(void);
 
 #endif //GUARD_QUESTLOGIC_H

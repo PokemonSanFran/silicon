@@ -5548,6 +5548,11 @@ static void HandleEndTurn_BattleWon(void)
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
+// Start siliconMusic
+        if (IsPlayerInSharpriseArena())
+            PlayBGM(MUS_VICTORY_TOURNAMENT);
+        else
+// End siliconMusic
             PlayBGM(MUS_VICTORY_TRAINER);
             break;
         }
