@@ -65,11 +65,7 @@ static EWRAM_DATA u8  currentScreenId = 0;
 static EWRAM_DATA u8  currentFirstOption = 0;
 static EWRAM_DATA bool8 areYouNotOnSettingsHub = FALSE;
 
-static u8 Temporal_Options_Game_Settings[NUM_OPTIONS_GAME_SETTINGS];     //This is a temporal data used for the Discard Feature on Leave Dialog
-static u8 Temporal_Options_Battle_Settings[NUM_OPTIONS_BATTLE_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static u8 Temporal_Options_Music_Settings[NUM_OPTIONS_MUSIC_SETTINGS];   //This is a temporal data used for the Discard Feature on Leave Dialog
-static u8 Temporal_Options_Visual_Settings[NUM_OPTIONS_VISUAL_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
-static u8 Temporal_Options_Random_Settings[NUM_OPTIONS_RANDOM_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
+static u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
 
 //==========STATIC=DEFINES==========//
 static void Menu_RunSetup(void);
@@ -106,27 +102,27 @@ void CopyTemporalDataToSaveBlockData()
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsGame[j] = Temporal_Options_Game_Settings[j];
+					gSaveBlock2Ptr->optionsGame[j] = TemporalOptions[GAME_SETTINGS][j];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsBattle[j] = Temporal_Options_Battle_Settings[j];
+					gSaveBlock2Ptr->optionsBattle[j] = TemporalOptions[BATTLE_SETTINGS][j];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsVisual[j] = Temporal_Options_Visual_Settings[j];
+					gSaveBlock2Ptr->optionsVisual[j] = TemporalOptions[VISUAL_SETTINGS][j];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsMusic[j] = Temporal_Options_Music_Settings[j];
+					gSaveBlock2Ptr->optionsMusic[j] = TemporalOptions[MUSIC_SETTINGS][j];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsRandom[j] = Temporal_Options_Random_Settings[j];
+					gSaveBlock2Ptr->optionsRandom[j] = TemporalOptions[RANDOM_SETTINGS][j];
 				}
 				break;
 		}
@@ -141,27 +137,27 @@ void CopySaveBlockDataToTemporalData()
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					Temporal_Options_Game_Settings[j] = gSaveBlock2Ptr->optionsGame[j];
+					TemporalOptions[GAME_SETTINGS][j] = gSaveBlock2Ptr->optionsGame[j];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					Temporal_Options_Battle_Settings[j] = gSaveBlock2Ptr->optionsBattle[j];
+					TemporalOptions[BATTLE_SETTINGS][j] = gSaveBlock2Ptr->optionsBattle[j];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					Temporal_Options_Visual_Settings[j] = gSaveBlock2Ptr->optionsVisual[j];
+					TemporalOptions[VISUAL_SETTINGS][j] = gSaveBlock2Ptr->optionsVisual[j];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					Temporal_Options_Music_Settings[j] = gSaveBlock2Ptr->optionsMusic[j];
+					TemporalOptions[MUSIC_SETTINGS][j] = gSaveBlock2Ptr->optionsMusic[j];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					Temporal_Options_Random_Settings[j] = gSaveBlock2Ptr->optionsRandom[j];
+					TemporalOptions[RANDOM_SETTINGS][j] = gSaveBlock2Ptr->optionsRandom[j];
 				}
 				break;
 		}
@@ -1200,27 +1196,27 @@ void HandlePresetData()
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
-					Temporal_Options_Game_Settings[i] = gSaveBlock2Ptr->optionsGame[i];
+					TemporalOptions[GAME_SETTINGS][i] = gSaveBlock2Ptr->optionsGame[i];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_BATTLE_SETTINGS; i++){
-					Temporal_Options_Battle_Settings[i] = gSaveBlock2Ptr->optionsBattle[i];
+					TemporalOptions[BATTLE_SETTINGS][i] = gSaveBlock2Ptr->optionsBattle[i];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_VISUAL_SETTINGS; i++){
-					Temporal_Options_Visual_Settings[i] = gSaveBlock2Ptr->optionsVisual[i];
+					TemporalOptions[VISUAL_SETTINGS][i] = gSaveBlock2Ptr->optionsVisual[i];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_MUSIC_SETTINGS; i++){
-					Temporal_Options_Music_Settings[i] = gSaveBlock2Ptr->optionsMusic[i];
+					TemporalOptions[MUSIC_SETTINGS][i] = gSaveBlock2Ptr->optionsMusic[i];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_RANDOM_SETTINGS; i++){
-					Temporal_Options_Random_Settings[i] = gSaveBlock2Ptr->optionsRandom[i];
+					TemporalOptions[RANDOM_SETTINGS][i] = gSaveBlock2Ptr->optionsRandom[i];
 				}
 				break;
 		}
@@ -1229,27 +1225,27 @@ void HandlePresetData()
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
-					Temporal_Options_Game_Settings[i] = Preset_Options[GAME_SETTINGS][Temporal_Options_Game_Settings[0]][i];
+					TemporalOptions[GAME_SETTINGS][i] = Preset_Options[GAME_SETTINGS][TemporalOptions[GAME_SETTINGS][0]][i];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_BATTLE_SETTINGS; i++){
-					Temporal_Options_Battle_Settings[i] = Preset_Options[BATTLE_SETTINGS][Temporal_Options_Battle_Settings[0]][i];
+					TemporalOptions[BATTLE_SETTINGS][i] = Preset_Options[BATTLE_SETTINGS][TemporalOptions[BATTLE_SETTINGS][0]][i];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_VISUAL_SETTINGS; i++){
-					Temporal_Options_Visual_Settings[i] = Preset_Options[VISUAL_SETTINGS][Temporal_Options_Visual_Settings[0]][i];
+					TemporalOptions[VISUAL_SETTINGS][i] = Preset_Options[VISUAL_SETTINGS][TemporalOptions[VISUAL_SETTINGS][0]][i];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_MUSIC_SETTINGS; i++){
-					Temporal_Options_Music_Settings[i] = Preset_Options[MUSIC_SETTINGS][Temporal_Options_Music_Settings[0]][i];
+					TemporalOptions[MUSIC_SETTINGS][i] = Preset_Options[MUSIC_SETTINGS][TemporalOptions[MUSIC_SETTINGS][0]][i];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_RANDOM_SETTINGS; i++){
-					Temporal_Options_Random_Settings[i] = Preset_Options[RANDOM_SETTINGS][Temporal_Options_Random_Settings[0]][i];
+					TemporalOptions[RANDOM_SETTINGS][i] = Preset_Options[RANDOM_SETTINGS][TemporalOptions[RANDOM_SETTINGS][0]][i];
 				}
 				break;
 		}
@@ -1260,20 +1256,20 @@ bool8 AreYouOnCustomPresetData()
 {
 	switch(currentScreenId){
 		case GAME_SETTINGS:
-			return (Temporal_Options_Game_Settings[0] == GAME_PRESET_CUSTOM);
+			return (TemporalOptions[GAME_SETTINGS][0] == GAME_PRESET_CUSTOM);
 			break;
 		case BATTLE_SETTINGS:
-			return (Temporal_Options_Battle_Settings[0] == BATTLE_PRESET_CUSTOM);
+			return (TemporalOptions[BATTLE_SETTINGS][0] == BATTLE_PRESET_CUSTOM);
 			break;
 		case VISUAL_SETTINGS:
-			return (Temporal_Options_Visual_Settings[0] == VISUAL_PRESET_CUSTOM);
+			return (TemporalOptions[VISUAL_SETTINGS][0] == VISUAL_PRESET_CUSTOM);
 			break;
 		case MUSIC_SETTINGS:
-			return (Temporal_Options_Music_Settings[0] == MUSIC_PRESET_CUSTOM);
+			return (TemporalOptions[MUSIC_SETTINGS][0] == MUSIC_PRESET_CUSTOM);
 			break;
 		default:
 		case RANDOM_SETTINGS:
-			return (Temporal_Options_Random_Settings[0] == RANDOM_PRESET_CUSTOM);
+			return (TemporalOptions[RANDOM_SETTINGS][0] == RANDOM_PRESET_CUSTOM);
 			break;
 	}
 }
@@ -1282,19 +1278,19 @@ void ChangeCurrentScreenPresetDataToCustom()
 {
 	switch(currentScreenId){
 		case GAME_SETTINGS:
-			Temporal_Options_Game_Settings[0] = GAME_PRESET_CUSTOM;
+			TemporalOptions[GAME_SETTINGS][0] = GAME_PRESET_CUSTOM;
 			break;
 		case BATTLE_SETTINGS:
-			Temporal_Options_Battle_Settings[0] = BATTLE_PRESET_CUSTOM;
+			TemporalOptions[BATTLE_SETTINGS][0] = BATTLE_PRESET_CUSTOM;
 			break;
 		case VISUAL_SETTINGS:
-			Temporal_Options_Visual_Settings[0] = VISUAL_PRESET_CUSTOM;
+			TemporalOptions[VISUAL_SETTINGS][0] = VISUAL_PRESET_CUSTOM;
 			break;
 		case MUSIC_SETTINGS:
-			Temporal_Options_Music_Settings[0] = MUSIC_PRESET_CUSTOM;
+			TemporalOptions[MUSIC_SETTINGS][0] = MUSIC_PRESET_CUSTOM;
 			break;
 		case RANDOM_SETTINGS:
-			Temporal_Options_Random_Settings[0] = RANDOM_PRESET_CUSTOM;
+			TemporalOptions[RANDOM_SETTINGS][0] = RANDOM_PRESET_CUSTOM;
 			break;
 	}
 }
@@ -2807,19 +2803,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 			switch(i){
 				case GAME_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].options[Temporal_Options_Game_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].options[TemporalOptions[GAME_SETTINGS][0]]);
 					break;
 				case BATTLE_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].options[Temporal_Options_Battle_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].options[TemporalOptions[BATTLE_SETTINGS][0]]);
 					break;
 				case VISUAL_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].options[Temporal_Options_Visual_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].options[TemporalOptions[VISUAL_SETTINGS][0]]);
 					break;
 				case MUSIC_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].options[Temporal_Options_Music_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].options[TemporalOptions[MUSIC_SETTINGS][0]]);
 					break;
 				case RANDOM_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].options[Temporal_Options_Random_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].options[TemporalOptions[RANDOM_SETTINGS][0]]);
 					break;
 			}
 			y = y + 2;
@@ -2832,31 +2828,31 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Game_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[GAME_SETTINGS][GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Battle_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[BATTLE_SETTINGS][GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Visual_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[VISUAL_SETTINGS][GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Music_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[MUSIC_SETTINGS][GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Random_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].options[TemporalOptions[RANDOM_SETTINGS][GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
@@ -2874,19 +2870,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	else if(!areYouNotOnSettingsHub){
 		switch(currentScreenId){
 			case GAME_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].optionDescription[Temporal_Options_Game_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].optionDescription[TemporalOptions[GAME_SETTINGS][0]]);
 				break;
 			case BATTLE_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].optionDescription[Temporal_Options_Battle_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].optionDescription[TemporalOptions[BATTLE_SETTINGS][0]]);
 				break;
 			case VISUAL_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].optionDescription[Temporal_Options_Visual_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].optionDescription[TemporalOptions[VISUAL_SETTINGS][0]]);
 				break;
 			case MUSIC_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].optionDescription[Temporal_Options_Music_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].optionDescription[TemporalOptions[MUSIC_SETTINGS][0]]);
 				break;
 			case RANDOM_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].optionDescription[Temporal_Options_Random_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].optionDescription[TemporalOptions[RANDOM_SETTINGS][0]]);
 				break;
 		}
 	}
@@ -2895,19 +2891,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         switch(currentScreenId)
         {
             case GAME_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[GAME_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Game_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[GAME_SETTINGS][currentOptionId].optionDescription[TemporalOptions[GAME_SETTINGS][currentOptionId]]);
                 break;
             case BATTLE_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[BATTLE_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Battle_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[BATTLE_SETTINGS][currentOptionId].optionDescription[TemporalOptions[BATTLE_SETTINGS][currentOptionId]]);
                 break;
             case VISUAL_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[VISUAL_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Visual_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[VISUAL_SETTINGS][currentOptionId].optionDescription[TemporalOptions[VISUAL_SETTINGS][currentOptionId]]);
                 break;
             case MUSIC_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[MUSIC_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Music_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[MUSIC_SETTINGS][currentOptionId].optionDescription[TemporalOptions[MUSIC_SETTINGS][currentOptionId]]);
                 break;
             default:
-                StringExpandPlaceholders(gStringVar1,Settings_Options[RANDOM_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Random_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[RANDOM_SETTINGS][currentOptionId].optionDescription[TemporalOptions[RANDOM_SETTINGS][currentOptionId]]);
 
                 break;
         }
@@ -2959,7 +2955,7 @@ static void Task_MenuTurnOff(u8 taskId)
 
 static void RecolorWindow(){
 	FreeAllSpritePalettes();
-	switch(Temporal_Options_Visual_Settings[VISUAL_OPTIONS_COLOR]){
+	switch(TemporalOptions[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]){
 		case VISUAL_OPTION_COLOR_BLACK:
 			LoadPalette(sMenuPalette_Black, 0, 32);
 			break;
@@ -3036,35 +3032,35 @@ static void Task_MenuMain(u8 taskId)
             //For Presets
             switch(currentScreenId){
                 case GAME_SETTINGS:
-                    if(Temporal_Options_Game_Settings[0] > 0)
-                        Temporal_Options_Game_Settings[0]--;
+                    if(TemporalOptions[GAME_SETTINGS][0] > 0)
+                        TemporalOptions[GAME_SETTINGS][0]--;
                     else
-                        Temporal_Options_Game_Settings[0] = Settings_Options[GAME_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[GAME_SETTINGS][0] = Settings_Options[GAME_SETTINGS][0].numOptions - 1;
                 break;
                 case BATTLE_SETTINGS:
-                    if(Temporal_Options_Battle_Settings[0] > 0)
-                        Temporal_Options_Battle_Settings[0]--;
+                    if(TemporalOptions[BATTLE_SETTINGS][0] > 0)
+                        TemporalOptions[BATTLE_SETTINGS][0]--;
                     else
-                        Temporal_Options_Battle_Settings[0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[BATTLE_SETTINGS][0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 1;
                 break;
                 case VISUAL_SETTINGS:
-                    if(Temporal_Options_Visual_Settings[0] > 0)
-                        Temporal_Options_Visual_Settings[0]--;
+                    if(TemporalOptions[VISUAL_SETTINGS][0] > 0)
+                        TemporalOptions[VISUAL_SETTINGS][0]--;
                     else
-                        Temporal_Options_Visual_Settings[0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[VISUAL_SETTINGS][0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 1;
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[0] > 0)
-                        Temporal_Options_Music_Settings[0]--;
+                    if(TemporalOptions[MUSIC_SETTINGS][0] > 0)
+                        TemporalOptions[MUSIC_SETTINGS][0]--;
                     else
-                        Temporal_Options_Music_Settings[0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 1;
-                PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
+                        TemporalOptions[MUSIC_SETTINGS][0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 1;
+                PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[0] > 0)
-                        Temporal_Options_Random_Settings[0]--;
+                    if(TemporalOptions[RANDOM_SETTINGS][0] > 0)
+                        TemporalOptions[RANDOM_SETTINGS][0]--;
                     else
-                        Temporal_Options_Random_Settings[0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 1;
+                        TemporalOptions[RANDOM_SETTINGS][0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 1;
                 break;
             }
 
@@ -3076,39 +3072,39 @@ static void Task_MenuMain(u8 taskId)
 			// For Other Options
 			switch(currentScreenId){
 				case GAME_SETTINGS:
-					if(Temporal_Options_Game_Settings[currentOptionId] > 0){
-						Temporal_Options_Game_Settings[currentOptionId]--;
+					if(TemporalOptions[GAME_SETTINGS][currentOptionId] > 0){
+						TemporalOptions[GAME_SETTINGS][currentOptionId]--;
 					}
 					else
-						Temporal_Options_Game_Settings[currentOptionId] = Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[GAME_SETTINGS][currentOptionId] = Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1;
 					break;
 				case BATTLE_SETTINGS:
-					if(Temporal_Options_Battle_Settings[currentOptionId] > 0)
-						Temporal_Options_Battle_Settings[currentOptionId]--;
+					if(TemporalOptions[BATTLE_SETTINGS][currentOptionId] > 0)
+						TemporalOptions[BATTLE_SETTINGS][currentOptionId]--;
 					else
-						Temporal_Options_Battle_Settings[currentOptionId] = Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[BATTLE_SETTINGS][currentOptionId] = Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1;
 					break;
 				case VISUAL_SETTINGS:
-					if(Temporal_Options_Visual_Settings[currentOptionId] > 0)
-						Temporal_Options_Visual_Settings[currentOptionId]--;
+					if(TemporalOptions[VISUAL_SETTINGS][currentOptionId] > 0)
+						TemporalOptions[VISUAL_SETTINGS][currentOptionId]--;
 					else
-						Temporal_Options_Visual_Settings[currentOptionId] = Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1;
+						TemporalOptions[VISUAL_SETTINGS][currentOptionId] = Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1;
 
                     if(currentOptionId == VISUAL_OPTIONS_COLOR)
                         RecolorWindow();
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[currentOptionId] > 0)
-                        Temporal_Options_Music_Settings[currentOptionId]--;
+                    if(TemporalOptions[MUSIC_SETTINGS][currentOptionId] > 0)
+                        TemporalOptions[MUSIC_SETTINGS][currentOptionId]--;
                     else
-                        Temporal_Options_Music_Settings[currentOptionId] = Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1;
-                    PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
+                        TemporalOptions[MUSIC_SETTINGS][currentOptionId] = Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1;
+                    PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[currentOptionId] > 0)
-                        Temporal_Options_Random_Settings[currentOptionId]--;
+                    if(TemporalOptions[RANDOM_SETTINGS][currentOptionId] > 0)
+                        TemporalOptions[RANDOM_SETTINGS][currentOptionId]--;
                     else
-                        Temporal_Options_Random_Settings[currentOptionId] = Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1;
+                        TemporalOptions[RANDOM_SETTINGS][currentOptionId] = Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1;
                 break;
             }
 
@@ -3124,35 +3120,35 @@ static void Task_MenuMain(u8 taskId)
             //For Presets
             switch(currentScreenId){
                 case GAME_SETTINGS:
-                    if(Temporal_Options_Game_Settings[0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
-                        Temporal_Options_Game_Settings[0]++;
+                    if(TemporalOptions[GAME_SETTINGS][0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
+                        TemporalOptions[GAME_SETTINGS][0]++;
                     else
-                        Temporal_Options_Game_Settings[0] = 0;
+                        TemporalOptions[GAME_SETTINGS][0] = 0;
                 break;
                 case BATTLE_SETTINGS:
-                    if(Temporal_Options_Battle_Settings[0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
-                        Temporal_Options_Battle_Settings[0]++;
+                    if(TemporalOptions[BATTLE_SETTINGS][0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
+                        TemporalOptions[BATTLE_SETTINGS][0]++;
                     else
-                        Temporal_Options_Battle_Settings[0] = 0;
+                        TemporalOptions[BATTLE_SETTINGS][0] = 0;
                 break;
                 case VISUAL_SETTINGS:
-                    if(Temporal_Options_Visual_Settings[0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
-                        Temporal_Options_Visual_Settings[0]++;
+                    if(TemporalOptions[VISUAL_SETTINGS][0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
+                        TemporalOptions[VISUAL_SETTINGS][0]++;
                     else
-                        Temporal_Options_Visual_Settings[0] = 0;
+                        TemporalOptions[VISUAL_SETTINGS][0] = 0;
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
-                        Temporal_Options_Music_Settings[0]++;
+                    if(TemporalOptions[MUSIC_SETTINGS][0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
+                        TemporalOptions[MUSIC_SETTINGS][0]++;
                     else
-                        Temporal_Options_Music_Settings[0] = 0;
-                PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
+                        TemporalOptions[MUSIC_SETTINGS][0] = 0;
+                PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
-                        Temporal_Options_Random_Settings[0]++;
+                    if(TemporalOptions[RANDOM_SETTINGS][0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
+                        TemporalOptions[RANDOM_SETTINGS][0]++;
                     else
-                        Temporal_Options_Random_Settings[0] = 0;
+                        TemporalOptions[RANDOM_SETTINGS][0] = 0;
                 break;
             }
 
@@ -3164,44 +3160,44 @@ static void Task_MenuMain(u8 taskId)
 			//For other Options
 			switch(currentScreenId){
 				case GAME_SETTINGS:
-					if(Temporal_Options_Game_Settings[currentOptionId] < Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1){
-						Temporal_Options_Game_Settings[currentOptionId]++;
+					if(TemporalOptions[GAME_SETTINGS][currentOptionId] < Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1){
+						TemporalOptions[GAME_SETTINGS][currentOptionId]++;
 					}
 					else
-						Temporal_Options_Game_Settings[currentOptionId] = 0;
+						TemporalOptions[GAME_SETTINGS][currentOptionId] = 0;
 					break;
 				case BATTLE_SETTINGS:
-					if(Temporal_Options_Battle_Settings[currentOptionId] < Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1){
-						Temporal_Options_Battle_Settings[currentOptionId]++;
+					if(TemporalOptions[BATTLE_SETTINGS][currentOptionId] < Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1){
+						TemporalOptions[BATTLE_SETTINGS][currentOptionId]++;
 					}
 					else
-						Temporal_Options_Battle_Settings[currentOptionId] = 0;
+						TemporalOptions[BATTLE_SETTINGS][currentOptionId] = 0;
 					break;
 				case VISUAL_SETTINGS:
-					if(Temporal_Options_Visual_Settings[currentOptionId] < Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1){
-						Temporal_Options_Visual_Settings[currentOptionId]++;
+					if(TemporalOptions[VISUAL_SETTINGS][currentOptionId] < Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1){
+						TemporalOptions[VISUAL_SETTINGS][currentOptionId]++;
 					}
 					else
-						Temporal_Options_Visual_Settings[currentOptionId] = 0;
+						TemporalOptions[VISUAL_SETTINGS][currentOptionId] = 0;
 
                     if(currentOptionId == VISUAL_OPTIONS_COLOR)
                             RecolorWindow();
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[currentOptionId] < Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1){
-                        Temporal_Options_Music_Settings[currentOptionId]++;
+                    if(TemporalOptions[MUSIC_SETTINGS][currentOptionId] < Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1){
+                        TemporalOptions[MUSIC_SETTINGS][currentOptionId]++;
                     }
                     else
-                        Temporal_Options_Music_Settings[currentOptionId] = 0;
+                        TemporalOptions[MUSIC_SETTINGS][currentOptionId] = 0;
 
-                    PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
+                    PreviewBGM(currentOptionId, TemporalOptions[MUSIC_SETTINGS][currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[currentOptionId] < Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1){
-                        Temporal_Options_Random_Settings[currentOptionId]++;
+                    if(TemporalOptions[RANDOM_SETTINGS][currentOptionId] < Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1){
+                        TemporalOptions[RANDOM_SETTINGS][currentOptionId]++;
                     }
                     else
-                        Temporal_Options_Random_Settings[currentOptionId] = 0;
+                        TemporalOptions[RANDOM_SETTINGS][currentOptionId] = 0;
                 break;
             }
 
@@ -3351,31 +3347,31 @@ bool32 HaveSettingsChanged(void)
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsGame[j] != Temporal_Options_Game_Settings[j])
+					if (gSaveBlock2Ptr->optionsGame[j] != TemporalOptions[GAME_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsBattle[j] != Temporal_Options_Battle_Settings[j])
+					if (gSaveBlock2Ptr->optionsBattle[j] != TemporalOptions[BATTLE_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsVisual[j] != Temporal_Options_Visual_Settings[j])
+					if (gSaveBlock2Ptr->optionsVisual[j] != TemporalOptions[VISUAL_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsMusic[j] != Temporal_Options_Music_Settings[j])
+					if (gSaveBlock2Ptr->optionsMusic[j] != TemporalOptions[MUSIC_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsRandom[j] != Temporal_Options_Random_Settings[j])
+					if (gSaveBlock2Ptr->optionsRandom[j] != TemporalOptions[RANDOM_SETTINGS][j])
 						return TRUE;
 				}
 				break;
@@ -3386,7 +3382,7 @@ bool32 HaveSettingsChanged(void)
 
 void PlaySoundEffectBasedOnTemporalMute(u16 songNum)
 {
-    if (!Temporal_Options_Music_Settings[MUSIC_OPTIONS_MUTE_SOUNDFX])
+    if (!TemporalOptions[MUSIC_SETTINGS][MUSIC_OPTIONS_MUTE_SOUNDFX])
         PlaySE(songNum);
 }
 
