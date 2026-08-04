@@ -8,7 +8,7 @@ script SiliconFrontier_Dialogue_AskResume
     }
     else
     {
-        msgbox(format("Are you here to continue your {STR_VAR_1} challenge?"),MSGBOX_YESNO)
+        msgbox(format("Welcome back! Are you here to continue your {STR_VAR_1} challenge?"),MSGBOX_YESNO)
     }
     if (var(VAR_RESULT) == NO)
     {
@@ -23,7 +23,6 @@ script SiliconFrontier_Dialogue_AskResume
 script SiliconFrontier_Dialogue_InteractAttendant
 {
     lock
-    msgbox(format("Welcome to the Battle Tower!"))
     callnative(Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility)
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_CHALLENGE_TYPE_NONE,SiliconFrontier_Dialogue_AskResume)
     goto(SiliconFroniter_Dialogue_AskMenu)
@@ -32,29 +31,75 @@ script SiliconFrontier_Dialogue_InteractAttendant
 script SiliconFrontier_Dialogue_ExplainFacility
 {
     msgbox(format("What would you like information on?"))
-    dynmultichoice(0,0,FALSE,4,0,NULL, "Rules", "Pokemon Allowed", "Battle Points", "Saving", "Badges", "Never mind.")
+    dynmultichoice(0,0,FALSE,4,0,NULL, "Rules", "Pokemon Allowed", "Battle Points", "Saving", "Bosses", "Never mind.")
     switch(var(VAR_RESULT))
     {
-        case 0: msgbox(format("I explain the rules of the facility."))
-        case 1: msgbox(format("I explain which Pokemon are allowed."))
-        case 2: msgbox(format("I explain Battle Points."))
-        case 3: msgbox(format("I explain saving."))
-        case 4: msgbox(format("I explain getting badges at 50 and 100 win streaks."))
+        case 0: call(SiliconFrontier_ExplainBattleTower)
+        case 1: call(SiliconFrontier_Dialogue_AllowedPokemon)
+        case 2: call(SiliconFrontier_Dialogue_BattlePoints)
+        case 3: call(SiliconFrontier_Dialogue_ExplainSaving)
+        case 4: call(SiliconFrontier_Dialogue_ExplainBadges)
         default: goto(SiliconFroniter_Dialogue_AskMenu)
     }
-    goto(SiliconFroniter_Dialogue_AskMenu)
+    goto(SiliconFrontier_Dialogue_ExplainFacility)
+}
+
+script SiliconFrontier_ExplainBattleTower
+{
+    callnative(Script_BufferGetFacilityName)
+    msgbox(format("At the {STR_VAR_1}, defeat as many Trainers in a row as you can! Once you register with your party, you battle against a randomly chosen Trainer. If you defeat them, your party is healed and then you battle another Trainer. You keep going until you finally lose."))
+}
+
+script SiliconFrontier_Dialogue_AllowedPokemon
+{
+    callnative(Script_SiliconFroniter_CountCaughtBlockedSpecies)
+    msgbox(format("You can compete with any Pokemon normally found in Resido."))
+    if (var(VAR_0x8005))
+    {
+        msgbox(format("You cannot compete with these Pokemon."))
+        callnative(ShowBattleFrontierCaughtBannedSpecies)
+        waitstate
+    }
+}
+
+script SiliconFrontier_Dialogue_BattlePoints
+{
+    callnative(Script_BufferBasePoints)
+    msgbox(format("After every win, you recieve {STR_VAR_1} Battle Point. Battle Points can be used to purchases prizes!"))
+
+    callnative(Script_BufferBossPoints)
+    msgbox(format("Every {STR_VAR_1} wins, you'll get {STR_VAR_2} Battle Points, and every win after that will reward an extra {STR_VAR_3} Battle Point."))
+
+    callnative(Script_BufferMilestonePoints)
+    msgbox(format("After earning the {STR_VAR_1} or {STR_VAR_2} for the first time, you'll get a one time bonus of {STR_VAR_3} Points!"))
+}
+
+script SiliconFrontier_Dialogue_ExplainSaving
+{
+    msgbox(format("Once your party has been registered, you must save the game to proceed."))
+    call(SiliconFrontier_Dialogue_IfYouReset)
+    msgbox(format("Don't try to cheat!"))
+}
+
+script SiliconFrontier_Dialogue_ExplainBadges
+{
+    callnative(Script_BufferSilverBadgeAndStreak)
+    msgbox(format("After winning {STR_VAR_1} battles in a row, Trainers will recieve the {STR_VAR_2}."))
+    callnative(Script_BufferGoldBadgeAndStreak)
+    msgbox(format("If they can get to a streak of {STR_VAR_1} wins, Trainers will recieve the coveted {STR_VAR_2}!"))
 }
 
 script SiliconFroniter_Dialogue_AskMenu
 {
-    msgbox(format("What would you like to do?"))
+    callnative(Script_BufferGetFacilityName)
+    msgbox(format("Welcome to the {STR_VAR_1}! What would you like to do?"))
     dynmultichoice(0,0,FALSE,4,0,NULL, "Start Challenge", "Info", "Never mind.")
     switch (var(VAR_RESULT))
     {
         case 0: goto(SiliconFrontier_Script_RegisterChallenge)
         case 1: goto(SiliconFrontier_Dialogue_ExplainFacility)
         case MULTI_B_PRESSED:
-        case 2: goto(SiliconFrontier_Script_QuitAttendant)
+        case 2: goto(SiliconFroniter_Dialogue_AskMenu)
     }
 }
 
@@ -103,12 +148,18 @@ script SiliconFrontier_Script_ChoosePartyMons
         goto(SiliconFrontier_Dialogue_InvalidParty)
     }
     msgbox(format("Your party has been registered! You must now save the game to proceed."))
-    //setflag(FLAG_SYS_FRONTIER_CHALLENGE_STARTED)
+    setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_STARTED)
     startmenu_savescreen
     goto_if_unset(FLAG_SYS_SAVE_SUCCESSFUL,SiliconFrontier_Script_NeedToSave)
-    msgbox(format("If you turn off your game before saving again, you will be disqualified, and your prizes will be forfeit."))
+    special(ReducePlayerPartyToSelectedMons)
+    call(SiliconFrontier_Dialogue_IfYouReset)
     closemessage
     goto(SiliconFrontier_Script_LeaveRoom)
+}
+
+script SiliconFrontier_Dialogue_IfYouReset
+{
+    msgbox(format("If you turn off or reset your game before saving again, you will be disqualified, and your entire streak and prizes will be forfeit."))
 }
 
 script SiliconFrontier_Script_NeedToSave
@@ -140,11 +191,13 @@ script SiliconFrontier_Script_LeaveRoom
 script SiliconFrontier_Script_WalkIntoRoom
 {
     lock
+    setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_IN_PROGRESS)
     goto(SiliconFrontier_Script_StartBattle)
 }
 
 script SiliconFrontier_Script_StartBattle
 {
+    callnative(SiliconFrontier_AllowRecordedBattle)
     moveobjecttocoords(LOCALID_PLAYER,3,5,DIR_EAST)
     callnative(LevelUpAllPokemonForFrontier)
 
@@ -168,63 +221,92 @@ script SiliconFrontier_Script_StartBattle
     waitmovement(LOCALID_PLAYER)
     waitmovement(LOCALID_TOWER_OPPONENT_A)
     callnative(SiliconFrontier_StartFacilityBattle)
+    waitstate
+    callnative(SiliconFrontier_DisableRecordedBattle)
     specialvar(VAR_RESULT,GetBattleOutcome)
     goto_if_ne(VAR_RESULT,B_OUTCOME_WON,SiliconFrontier_Script_LossBattle)
     goto(SiliconFrontier_Script_WonBattle)
     end
-    //enable recorded battles
+}
+
+script SiliconFroniter_Script_RecordBattle
+{
+	frontier_savebattle
+    if (var(VAR_RESULT) == FALSE)
+    {
+        msgbox(format("There was an error of some kind. Your battle could not be saved."))
+    }
+    else
+    {
+        playse(SE_SAVE)
+        msgbox(format("Your battle was recorded! You can watch it later."))
+    }
+    goto(SiliconFrontier_Script_BattleMenu)
 }
 
 script SiliconFrontier_Script_WonBattle
 {
     lock
     callnative(SiliconFrontier_TryIncrementWinStreakAndRecord)
-    applymovement(LOCALID_TOWER_OPPONENT_A,moves(walk_up * 4,set_invisible))
-    moveobjecttocoords(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT,2,5,DIR_EAST)
+    showbpbox
     callnative(SiliconFrontier_BufferBP)
     variableaddbp(VAR_0x8007,TRUE)
+    applymovement(LOCALID_TOWER_OPPONENT_A,moves(walk_up * 4,set_invisible))
+    moveobjecttocoords(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT,1,5,DIR_EAST)
     moveobjecttocoords(LOCALID_PLAYER,2,5,DIR_WEST)
     waitmovement(LOCALID_TOWER_OPPONENT_A)
     playse(SE_EXIT)
-    waitse
     bypass_healblock
     cueobjectplayer(LOCALID_TIRABUDIN_BATTLE_ROOM_ATTENDANT)
-    playse(SE_USE_ITEM)
-    msgbox(format("Your party has been healed."),MSGBOX_AUTOCLOSE)
+    hidebpbox
     waitse
+    callnative(SiliconFrontier_TryAwardBadge)
+    call_if_ne(VAR_RESULT,SILICON_FRONTIER_BOSS_PHASE_COUNT,SiliconFrontier_Dialogue_AwardBadge)
+    playse(SE_USE_ITEM)
     callnative(SiliconFrontier_BufferStreakString)
-    msgbox(format("Would you like to continue your streak of {STR_VAR_2} battles?"))
-    dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave", "Record")
+    goto(SiliconFrontier_Script_BattleMenu)
+}
+
+script SiliconFrontier_Script_BattleMenu
+{
+    msgbox(format("Your party has been fully healed. Would you like to continue your {STR_VAR_2} battle streak?"))
+    waitse
+    //dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave", "Record")
+    dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave")
     switch(var(VAR_RESULT))
     {
         case 0:
             closemessage
-            end
+            goto(SiliconFrontier_Script_StartBattle)
         case 1:
-            return
+            goto(SiliconFrontier_Script_LeaveChallenge)
         case 2:
+            goto(SiliconFroniter_Script_RecordBattle)
     }
-    //if hit 50 or 100 for the first time, reward player
-    //attendant heals player
-    //attendant asks if they're ready for battle X
-    //player can leave or continue or record battle or look at current records
-    //if continue
-    //goto(SiliconFrontier_Script_StartBattle)
-    //if end warp back to front
+}
+
+script SiliconFrontier_Dialogue_AwardBadge
+{
+    callnative(SiliconFrontier_BufferAwardSpeech)
+    msgbox(format("Congratulations on your win against {STR_VAR_1}!"))
+    playfanfare(MUS_GET_BADGE)
+    msgbox(format("For your wonderful achievement of a {STR_VAR_2} win streak, we are proud to present you with the {STR_VAR_3}!"))
+    waitfanfare
+
+    if (var(VAR_RESULT) == SILICON_FRONTIER_BOSS_PHASE_SILVER)
+    {
+        call(SiliconFrontier_BufferGoldMilestone)
+        msgbox(format("We look forward to seeing you achieve a {STR_VAR_1} win streak!"))
+    }
+
+    msgbox(format("We hope you continue training with us going forward!"))
 }
 
 script SiliconFrontier_Script_LossBattle
 {
-    //lock
-    //clear current facility var
-    //clear current challenge type var
-    // set "last challenge" in saveblock
-    //clear save scumming flag
-    //warp back to front desk
-    //load player party
-    //clear selected party mons
-    //tell player bye bye
-    //run save
+    lock
+    callnative(SiliconFrontier_ResetCurrentStreak)
+    goto(SiliconFrontier_Dialogue_LeaveBattleRoom)
 }
 
 script SiliconFrontier_Dialogue_InvalidParty
@@ -263,6 +345,7 @@ script SiliconFrontier_Dialogue_InvalidParty
         addvar(VAR_0x8006,1)
     } while (var(VAR_0x8006) < FRONTIER_DOUBLES_PARTY_SIZE)
     special(LoadPlayerParty)
+    callnative(SiliconFrontier_ResetCurrentChallenge)
     goto(SiliconFrontier_Script_AdjustPartyQuit)
 }
 
@@ -278,4 +361,62 @@ script SiliconFrontier_Script_AdjustPartyQuit
 {
     msgbox(format("Please adjust your party and return once you're ready."))
     goto(SiliconFrontier_Script_QuitAttendant)
+}
+
+script Debug_ToggleBosses
+{
+    msgbox(format("what boss do you want to unlock?"))
+    dynmultichoice(0,0,TRUE,5,0,NULL,"Pua","Baiya","Ami_Argento","Tala","Dimu","Adaora","Emrys","Magnus","Bd","Charlotte","Neriene","Frank","Shinzo","Kei_Ying","Belen","Eleanor")
+    callnative(DebugToggleBosses)
+    msgbox(format("done"))
+    closemessage
+    end
+}
+
+script SiliconFrontier_Dialogue_Disqualified
+{
+    lock
+    faceplayer
+    callnative(SiliconFrontier_ResetCurrentStreak)
+    msgbox(format("You turned off or reset your game during the challenge! Unfortunately, your entire streak is now forfeit."))
+    goto(SiliconFrontier_Script_SaveAfterQuitChallenge)
+}
+
+script SiliconFrontier_Script_LeaveChallenge
+{
+    msgbox(format("You will stop the current challenge. You are free to return at any time, and your streak will be resumed."))
+    closemessage
+    goto(SiliconFrontier_Dialogue_LeaveBattleRoom)
+}
+
+script SiliconFrontier_Dialogue_LeaveBattleRoom
+{
+    setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_ENDED)
+    warpsilent(MAP_TIRABUDIN_PLACE_GYM_LOBBY,4,5)
+    waitstate
+}
+
+script SiliconFrontier_Script_SaveAfterQuitChallenge
+{
+    lock
+    msgbox(format("We will now save your progress. Please wait."))
+    closemessage
+    callnative(SiliconFrontier_ResetCurrentChallenge)
+    special(LoadPlayerParty)
+    setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_NOT_STARTED)
+    setflag(FLAG_SHOULD_SKIP_CREDITS)
+    startmenu_savescreen
+    clearflag(FLAG_SHOULD_SKIP_CREDITS)
+    call_if_unset(FLAG_SYS_SAVE_SUCCESSFUL,SiliconFrontier_Dialogue_SaveFailed)
+    goto(SiliconFrontier_Script_QuitAttendant)
+}
+
+script SiliconFrontier_Dialogue_SaveFailed
+{
+    msgbox(format("Saving your progress did not work. Your progress has not been saved. Please try to save again."))
+}
+
+script SiliconFrontier_Script_FacePlayerUp
+{
+    turnobject(LOCALID_PLAYER,DIR_NORTH)
 }

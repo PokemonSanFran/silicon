@@ -8,6 +8,9 @@ u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId);
 const u8* SiliconFrontier_GetTrainerName(enum SiliconFrontierTrainerIds trainerId);
 const u8* SiliconFrontier_GetBattleText(enum SiliconFrontierSpeechStrings stringId, enum SiliconFrontierTrainerIds trainerId);
 
+bool32 SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(enum Species species);
+u32 SiliconFroniter_CountCaughtBlockedSpecies(void);
+
 struct SiliconFrontierStreaks
 {
     u16 currentStreak;
@@ -31,7 +34,9 @@ struct SiliconFrontierTrainers
 
 struct SiliconFrontierData
 {
+    u8 milestone[SILICON_FRONTIER_BOSS_PHASE_COUNT];
     u16 badge[SILICON_FRONTIER_BOSS_PHASE_COUNT];
+    const u8 *badgeName[SILICON_FRONTIER_BOSS_PHASE_COUNT];
     enum SiliconFrontierTrainerIds boss[SILICON_FRONTIER_BOSS_PHASE_COUNT];
     const u8 *originalName;
     const u8 *name;

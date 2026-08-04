@@ -5,7 +5,7 @@ mapscripts TirabudinPlace_Gym_BattleRoom_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
-        VAR_ALWAYS_ZERO, 0: SiliconFrontier_Script_WalkIntoRoom
+        VAR_SILICON_FACILITY_CHALLENGE_STATUS, SILICON_FRONTIER_CHALLENGE_STARTED: SiliconFrontier_Script_WalkIntoRoom
     ]
 }
 

@@ -1,6 +1,9 @@
 #include "global.h"
 #include "event_data.h"
+#include "pokedex.h"
+#include "ui_pokedex.h"
 #include "constants/nameplate.h"
+#include "frontier_util.h"
 #include "battle_frontier.h"
 #include "constants/battle_frontier.h"
 #include "quest_logic.h"
@@ -180,10 +183,45 @@ void SiliconFrontier_SetFacilityToVarFromMap(void)
     VarSet(VAR_0x8006,SiliconFrontier_GetFacilityFromMap());
 }
 
+u8 SiliconFrontier_GetFacilityMilestoneRequirement(enum SiliconFrontierFacility facility,  enum BossPhases phase)
+{
+    return gSiliconFrontierData[facility].milestone[phase];
+}
+
+u16 SiliconFrontier_GetFacilityBadge(enum SiliconFrontierFacility facility,  enum BossPhases phase)
+{
+    return gSiliconFrontierData[facility].badge[phase];
+}
+
+const u8* SiliconFrontier_GetFacilityBadgeName(enum SiliconFrontierFacility facility,  enum BossPhases phase)
+{
+    return gSiliconFrontierData[facility].badgeName[phase];
+}
+
+enum SiliconFrontierTrainerIds SiliconFrontier_GetFacilityBoss(enum SiliconFrontierFacility facility,  enum BossPhases phase)
+{
+    return gSiliconFrontierData[facility].boss[phase];
+}
+
+const u8* SiliconFrontier_GetFacilityOriginalName(enum SiliconFrontierFacility facility)
+{
+    return gSiliconFrontierData[facility].originalName;
+}
+
+const u8* SiliconFrontier_GetFacilityName(enum SiliconFrontierFacility facility)
+{
+    return gSiliconFrontierData[facility].name;
+}
+
+mapsec_s16_t SiliconFrontier_GetFacilityMapsec(enum SiliconFrontierFacility facility)
+{
+    return gSiliconFrontierData[facility].mapsec;
+}
+
 enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void)
 {
     for (enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
-        if (GetCurrentRegionMapSectionId() == gSiliconFrontierData[facility].mapsec)
+        if (GetCurrentRegionMapSectionId() == SiliconFrontier_GetFacilityMapsec(facility))
             return facility;
 
     return SILICON_FACILITY_NONE;
@@ -303,7 +341,6 @@ void SiliconFrontier_SetSelectedMons(void)
     u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
     for (u32 i = 0; i < size; i++)
         gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
-    ReducePlayerPartyToSelectedMons();
 }
 
 u16 const VarToPartyIndexMap[MAX_FRONTIER_PARTY_SIZE] =
@@ -653,7 +690,7 @@ enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStr
 enum SiliconFrontierTrainerIds SiliconFrontier_GetBossFromCurrentFacility(enum BossPhases phase)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
-    return gSiliconFrontierData[facility].boss[phase];
+    return SiliconFrontier_GetFacilityBoss(facility,phase);
 }
 
 enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void)
@@ -793,13 +830,10 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         if (monId == SILICON_FRONTIER_MON_NULL)
             break;
     }
-
-    u32 i = 0;
-    u32 j = 0;
-    u32 firstMonId = 0;
-    u32 otID = Random32();
-    u32 chosenMonIndices[monCount];
     bfMonCount--;
+
+    u32 i = 0, j = 0, firstMonId = 0;
+    u32 otID = Random32();
     while (i != monCount)
     {
         u32 monIndex = RandomUniform(RNG_RANDOM_SILICON_FRONTIER_MON,0,bfMonCount);
@@ -817,18 +851,14 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         // Ensure this Pokemon's held item isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) != ITEM_NONE
-             && GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) == gSiliconFrontierMons[monId].heldItem)
+            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) != ITEM_NONE && GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) == gSiliconFrontierMons[monId].heldItem)
                 break;
         }
         if (j != i + firstMonId)
             continue;
 
-        chosenMonIndices[i] = monId;
         u8 fixedIV = MAX_PER_STAT_IVS;
-        CreateFacilityMon(&gSiliconFrontierMons[monId],
-                SILICON_FRONTIER_LEVEL, fixedIV, otID, 0,
-                &gParties[B_TRAINER_OPPONENT_A][i + firstMonId]);
+        CreateFacilityMon(&gSiliconFrontierMons[monId], SILICON_FRONTIER_LEVEL, fixedIV, otID, 0, &gParties[B_TRAINER_OPPONENT_A][i + firstMonId]);
 
         // The Pokémon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
@@ -927,23 +957,21 @@ u32 SiliconFrontier_CalculateStreakBP(void)
 
     if (((currentStreak) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
     {
-        u32 points = (currentStreak / 10) + 1;
-        return (points > 10) ? 10 : points;
+        u32 points = (currentStreak / SILICON_FRONTIER_BP_REWARD_BASE_MAX) + SILICON_FRONTIER_BP_REWARD_BASE;
+        return (points > SILICON_FRONTIER_BP_REWARD_BASE_MAX) ? SILICON_FRONTIER_BP_REWARD_BASE_MAX : points;
     }
 
     if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_SILVER)
-        return 50;
+        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE;
     else if (currentStreak == SILICON_FRONTIER_STREAK_LENGTH_GOLD)
-        return 50;
+        return SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE;
 
-    return 20;
+    return SILICON_FRONTIER_BP_REWARD_BASE_MAX;
 }
 
 void SiliconFrontier_BufferBP(void)
 {
-    u32 value = SiliconFrontier_CalculateStreakBP();
-    VarSet(VAR_0x8007,value);
-    ConvertIntToDecimalStringN(gStringVar1,STR_CONV_MODE_LEFT_ALIGN,value,CountDigits(value));
+    VarSet(VAR_0x8007,SiliconFrontier_CalculateStreakBP());
 }
 
 void SiliconFrontier_BufferStreakString(void)
@@ -951,5 +979,191 @@ void SiliconFrontier_BufferStreakString(void)
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType);
-    ConvertIntToDecimalStringN(gStringVar2,STR_CONV_MODE_LEFT_ALIGN,value,CountDigits(value));
+
+    if (value >= MAX_u16)
+        StringCopy(gStringVar2,COMPOUND_STRING("infinite"));
+    else
+        ConvertIntToDecimalStringN(gStringVar2,value,STR_CONV_MODE_LEFT_ALIGN,CountDigits(value));
 }
+
+void SiliconFrontier_TryAwardBadge(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    gSpecialVar_Result = SILICON_FRONTIER_BOSS_PHASE_COUNT;
+
+    for (u32 milestoneIndex = 0; milestoneIndex < (SILICON_FRONTIER_BOSS_PHASE_GOLD + 1); milestoneIndex++)
+    {
+        if (streak != SiliconFrontier_GetFacilityMilestoneRequirement(facility,milestoneIndex))
+            continue;
+
+        u32 badge = SiliconFrontier_GetFacilityBadge(facility,milestoneIndex);
+        if (FlagGet(badge) == TRUE)
+            continue;
+
+        FlagSet(badge);
+        gSpecialVar_Result = streak;
+        return;
+    }
+}
+
+void SiliconFrontier_BufferAwardSpeech(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    u32 phase = streak / SILICON_FRONTIER_STREAK_LENGTH_SILVER;
+
+    enum SiliconFrontierTrainerIds trainer = SiliconFrontier_GetFacilityBoss(facility,phase);
+    GetFrontierTrainerName(gStringVar1,trainer);
+
+    u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    ConvertIntToDecimalStringN(gStringVar2,value,STR_CONV_MODE_LEFT_ALIGN,CountDigits(value));
+
+    StringCopy(gStringVar3,SiliconFrontier_GetFacilityBadgeName(facility,phase));
+}
+
+void SiliconFrontier_BufferGoldMilestone(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    u32 milestone = SiliconFrontier_GetFacilityMilestoneRequirement(facility,SILICON_FRONTIER_BOSS_PHASE_GOLD);
+    ConvertIntToDecimalStringN(gStringVar1,milestone,STR_CONV_MODE_LEFT_ALIGN,CountDigits(milestone));
+}
+
+u32 SiliconFroniter_CountCaughtBlockedSpecies(void)
+{
+    u32 count = 0;
+    for (u32 speciesIndex = 0; speciesIndex < NUM_SPECIES; speciesIndex++)
+    {
+        if (IsSpeciesEnabled(speciesIndex) == FALSE)
+            continue;
+
+        enum Species species = GET_BASE_SPECIES_ID(speciesIndex);
+
+        if (ConvertSpeciesIdToResidoDex(species) == RESIDO_DEX_NONE)
+            continue;
+
+        if (species != speciesIndex)
+            continue;
+
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT) == FALSE)
+            continue;
+
+        if (SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(species) == FALSE)
+            continue;
+
+        count++;
+    }
+    return count;
+}
+
+void Script_SiliconFroniter_CountCaughtBlockedSpecies(void)
+{
+    gSpecialVar_0x8005 = SiliconFroniter_CountCaughtBlockedSpecies();
+}
+
+bool32 SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(enum Species species)
+{
+    enum Species baseSpecies = GET_BASE_SPECIES_ID(species);
+    if (gSpeciesInfo[baseSpecies].isFrontierBanned == TRUE)
+        return TRUE;
+    if (gSpeciesInfo[baseSpecies].isUltraBeast == TRUE)
+        return TRUE;
+    if (gSpeciesInfo[baseSpecies].isRestrictedLegendary == TRUE)
+        return TRUE;
+    if (gSpeciesInfo[baseSpecies].isMythical == TRUE)
+        return TRUE;
+    if (gSpeciesInfo[baseSpecies].isSubLegendary == TRUE)
+        return TRUE;
+
+    return FALSE;
+}
+
+void DebugToggleBosses(void)
+{
+    u32 trainer;
+    switch(gSpecialVar_Result)
+    {
+        default:
+        case 0: trainer = SILICON_FRONTIER_TRAINER_PUA;
+                break;
+        case 1: trainer = SILICON_FRONTIER_TRAINER_BAIYA;
+                break;
+        case 2: trainer = SILICON_FRONTIER_TRAINER_AMI_ARGENTO;
+                break;
+        case 3: trainer = SILICON_FRONTIER_TRAINER_TALA;
+                break;
+        case 4: trainer = SILICON_FRONTIER_TRAINER_DIMU;
+                break;
+        case 5: trainer = SILICON_FRONTIER_TRAINER_ADAORA;
+                break;
+        case 6: trainer = SILICON_FRONTIER_TRAINER_EMRYS;
+                break;
+        case 7: trainer = SILICON_FRONTIER_TRAINER_MAGNUS;
+                break;
+        case 8: trainer = SILICON_FRONTIER_TRAINER_BD;
+                break;
+        case 9: trainer = SILICON_FRONTIER_TRAINER_CHARLOTTE;
+                break;
+        case 10: trainer = SILICON_FRONTIER_TRAINER_NERIENE;
+                 break;
+        case 11: trainer = SILICON_FRONTIER_TRAINER_FRANK;
+                 break;
+        case 12: trainer = SILICON_FRONTIER_TRAINER_SHINZO;
+                 break;
+        case 13: trainer = SILICON_FRONTIER_TRAINER_KEI_YING;
+                 break;
+        case 14: trainer = SILICON_FRONTIER_TRAINER_BELEN;
+                 break;
+        case 15: trainer = SILICON_FRONTIER_TRAINER_ELEANOR;
+                 break;
+    }
+    FlagSet(SiliconFrontier_GetTrainerFlag(trainer));
+}
+
+void Script_BufferGetFacilityName(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+    StringCopy(gStringVar1,SiliconFrontier_GetFacilityName(facility));
+}
+
+void Script_BufferBasePoints(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1,SILICON_FRONTIER_BP_REWARD_BASE,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_BP_REWARD_BASE));
+}
+
+void Script_BufferBossPoints(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1,SILICON_FRONTIER_STREAK_LENGTH_BOSS,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_STREAK_LENGTH_BOSS));
+    ConvertIntToDecimalStringN(gStringVar2,SILICON_FRONTIER_BP_REWARD_BOSS,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_BP_REWARD_BOSS));
+    ConvertIntToDecimalStringN(gStringVar3,SILICON_FRONTIER_BP_REWARD_BASE,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_BP_REWARD_BASE));
+}
+
+void Script_BufferMilestonePoints(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+    StringCopy(gStringVar1,SiliconFrontier_GetFacilityBadgeName(facility,SILICON_FRONTIER_BOSS_PHASE_SILVER));
+    StringCopy(gStringVar2,SiliconFrontier_GetFacilityBadgeName(facility,SILICON_FRONTIER_BOSS_PHASE_GOLD));
+    ConvertIntToDecimalStringN(gStringVar3,SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_BP_REWARD_BOSS_MILESTONE));
+}
+
+void Script_BufferSilverBadgeAndStreak(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+    ConvertIntToDecimalStringN(gStringVar1,SILICON_FRONTIER_STREAK_LENGTH_SILVER ,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_STREAK_LENGTH_SILVER));
+    StringCopy(gStringVar2,SiliconFrontier_GetFacilityBadgeName(facility,SILICON_FRONTIER_BOSS_PHASE_SILVER));
+}
+
+void Script_BufferGoldBadgeAndStreak(void)
+{
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+    ConvertIntToDecimalStringN(gStringVar1,SILICON_FRONTIER_STREAK_LENGTH_GOLD ,STR_CONV_MODE_LEFT_ALIGN,CountDigits(SILICON_FRONTIER_STREAK_LENGTH_GOLD));
+    StringCopy(gStringVar2,SiliconFrontier_GetFacilityBadgeName(facility,SILICON_FRONTIER_BOSS_PHASE_GOLD));
+}
+
+void SiliconFrontier_ResetCurrentStreak(void)
+{
+    SiliconFrontier_SetCurrentStreak(SiliconFrontier_GetFacilityFromCurrentChallenge(),SiliconFrontier_GetTypeFromCurrentChallenge(), 0);
+}
+
