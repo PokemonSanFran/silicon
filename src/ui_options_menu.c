@@ -60,9 +60,9 @@ enum WindowIds
 static EWRAM_DATA struct MenuResources *sMenuDataPtr = NULL;
 static EWRAM_DATA u8 *sBgTilemapBuffer[MENU_BACKGROUND_COUNT] = {NULL};
 static EWRAM_DATA bool8 ShouldShowDiscardDialogue = FALSE;
-static EWRAM_DATA u8  currentOptionId = 0;
-static EWRAM_DATA u8  currentScreenId = 0;
-static EWRAM_DATA u8  currentFirstOption = 0;
+static EWRAM_DATA u8 currentOptionId = 0;
+static EWRAM_DATA u8 currentScreenId = 0;
+static EWRAM_DATA u8 currentFirstOption = 0;
 static EWRAM_DATA bool8 areYouNotOnSettingsHub = FALSE;
 
 static u8 TemporalOptions[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS]; //This is a temporal data used for the Discard Feature on Leave Dialog
@@ -613,11 +613,20 @@ struct OptionData
 };
 
 //Graphics
-static const u8 sOptionMenuIcon_Game_Settings[]     = INCGFX_U8("graphics/ui_menus/options_menu/icon_game_settings.png", ".4bpp");
-static const u8 sOptionMenuIcon_Battle_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_battle_settings.png", ".4bpp");
-static const u8 sOptionMenuIcon_Visual_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_visual_settings.png", ".4bpp");
-static const u8 sOptionMenuIcon_Music_Settings[]    = INCGFX_U8("graphics/ui_menus/options_menu/icon_music_settings.png", ".4bpp");
-static const u8 sOptionMenuIcon_Random_Settings[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_random_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Settings_Game[]   = INCGFX_U8("graphics/ui_menus/options_menu/icon_game_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Settings_Battle[] = INCGFX_U8("graphics/ui_menus/options_menu/icon_battle_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Settings_Visual[] = INCGFX_U8("graphics/ui_menus/options_menu/icon_visual_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Settings_Music[]  = INCGFX_U8("graphics/ui_menus/options_menu/icon_music_settings.png", ".4bpp");
+static const u8 sOptionMenuIcon_Settings_Random[] = INCGFX_U8("graphics/ui_menus/options_menu/icon_random_settings.png", ".4bpp");
+
+static const u8* const sOptionMenuIcons[SETTINGS_COUNT] =
+{
+    [GAME_SETTINGS]   = sOptionMenuIcon_Settings_Game,
+    [BATTLE_SETTINGS] = sOptionMenuIcon_Settings_Battle,
+    [VISUAL_SETTINGS] = sOptionMenuIcon_Settings_Visual,
+    [MUSIC_SETTINGS]  = sOptionMenuIcon_Settings_Music,
+    [RANDOM_SETTINGS] = sOptionMenuIcon_Settings_Random,
+};
 
 //Arrows
 static const u8 sOptionMenuArrow_Up[]       = INCGFX_U8("graphics/ui_menus/options_menu/arrow_up.png", ".4bpp");
@@ -2651,23 +2660,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		y = 2;
 
 		for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-			switch(i){
-				case GAME_SETTINGS:
-					BlitBitmapToWindow(windowId, sOptionMenuIcon_Game_Settings, (x*8) + 2, (y*8) + 5, 16, 16);
-					break;
-				case BATTLE_SETTINGS:
-					BlitBitmapToWindow(windowId, sOptionMenuIcon_Battle_Settings, (x*8) + 2, (y*8) + 5, 16, 16);
-					break;
-				case VISUAL_SETTINGS:
-					BlitBitmapToWindow(windowId, sOptionMenuIcon_Visual_Settings, (x*8) + 2, (y*8) + 5, 16, 16);
-					break;
-				case MUSIC_SETTINGS:
-					BlitBitmapToWindow(windowId, sOptionMenuIcon_Music_Settings, (x*8) + 2, (y*8) + 5, 16, 16);
-					break;
-				default:
-					BlitBitmapToWindow(windowId, sOptionMenuIcon_Random_Settings, (x*8) + 2, (y*8) + 5, 16, 16);
-					break;
-			}
+            BlitBitmapToWindow(windowId, sOptionMenuIcons[i], (x*8) + 2, (y*8) + 5, 16, 16);
 
 			y = y + 2;
 		}
@@ -2678,23 +2671,7 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		x = 0;
 		y = 0;
 
-		switch(currentScreenId){
-			case GAME_SETTINGS:
-				BlitBitmapToWindow(windowId, sOptionMenuIcon_Game_Settings, (x*8), (y*8), 16, 16);
-				break;
-			case BATTLE_SETTINGS:
-				BlitBitmapToWindow(windowId, sOptionMenuIcon_Battle_Settings, (x*8), (y*8), 16, 16);
-				break;
-			case VISUAL_SETTINGS:
-				BlitBitmapToWindow(windowId, sOptionMenuIcon_Visual_Settings, (x*8), (y*8) + 1, 16, 16);
-				break;
-			case MUSIC_SETTINGS:
-				BlitBitmapToWindow(windowId, sOptionMenuIcon_Music_Settings, (x*8), (y*8), 16, 16);
-				break;
-			default:
-				BlitBitmapToWindow(windowId, sOptionMenuIcon_Random_Settings, (x*8), (y*8) + 1, 16, 16);
-				break;
-		}
+        BlitBitmapToWindow(windowId, sOptionMenuIcons[currentScreenId], (x*8), (y*8), 16, 16);
 	}
 	// Up Arrow --------------------------------------------------------------------------------------------------------------------
 	x = 7;
