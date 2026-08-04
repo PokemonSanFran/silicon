@@ -1303,7 +1303,7 @@ static void StartSetup_Graphics(void)
     }
 
     // misc gfx that needs to be loaded manually
-    LoadPalette(sStartMenu_WallpaperPalettes[gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]],
+    LoadPalette(sStartMenu_WallpaperPalettes[OptionsMenu_GetSavedOptions(VISUAL_SETTINGS,VISUAL_OPTIONS_COLOR)],
                 BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     SetBackdropFromColor(RGB_BLACK);
 

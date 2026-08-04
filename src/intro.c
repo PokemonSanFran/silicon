@@ -1158,7 +1158,7 @@ void CB2_InitCopyrightScreenAfterBootup(void)
             Sav2_ClearSetDefault();
         // Start siliconMerge
 		//SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
-        SetPokemonCryStereo(gSaveBlock2Ptr->optionsMusic[MUSIC_OPTIONS_SPEAKER]);
+        SetPokemonCryStereo(OptionsMenu_GetSavedOptions(MUSIC_SETTINGS,MUSIC_OPTIONS_SPEAKER));
 		// End siliconMerge
         InitHeap(gHeap, HEAP_SIZE);
     }

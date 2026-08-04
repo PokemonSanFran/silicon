@@ -867,7 +867,7 @@ bool8 shouldSkipGuide(u8 guideNum){
         else
             gSaveBlock3Ptr->hasSeenGuide[guideNum] = TRUE;
 
-        switch(gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_SKIP_GUIDES]){
+        switch(OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_SKIP_GUIDES)){
             case GAME_OPTION_GUIDE_SKIP_GENERAL:
                 //Skip general guides only
                 if(AdventureGuideInfo[guideNum].isAdvancedGuide != ADVENTURE_GUIDE_ADVANCED)

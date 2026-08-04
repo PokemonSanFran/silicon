@@ -304,7 +304,7 @@ static void ReadKeys(void)
 
     // Remap L to A if the L=A option is enabled.
     // Start siliconMerge
-	if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+	if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)
 	//if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
 	// End Start siliconMerge
     {

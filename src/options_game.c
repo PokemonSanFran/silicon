@@ -18,7 +18,7 @@
 
 static u32 GetSaveBootOption(void)
 {
-    return gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_SAVE_BOOT];
+    return OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_SAVE_BOOT);
 }
 
 bool32 CheckSaveBootAndFileStatus()
@@ -39,7 +39,7 @@ extern const u8 DoAutoSaveFieldEffect[];
 
 static bool32 IsAutosaveTurnedOn(void)
 {
-    return gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_SAVE_BEHAVIOR];
+    return OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_SAVE_BEHAVIOR);
 }
 
 void Script_IsAutosaveTurnedOn(void)
@@ -73,7 +73,7 @@ static bool32 CanPlayerRun(void)
 
 static u32 GetRunBehaviorOption(void)
 {
-    return gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_RUN];
+    return OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_RUN);
 }
 
 bool32 PlayerNotOnBikeShouldWalk(u16 heldKeys)
@@ -98,7 +98,7 @@ bool32 PlayerNotOnBikeShouldWalk(u16 heldKeys)
 
 u32 GetPuzzleValue(void)
 {
-	return gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_PUZZLES];
+    return OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_PUZZLES);
 }
 
 // ***********************************************************************
@@ -114,7 +114,7 @@ static void ResetCutsceneVariable(void);
 
 u32 GetCutsceneOptionValue(void)
 {
-    return gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_CUTSCENE];
+    return OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_CUTSCENE);
 }
 
 bool32 ShouldSkipCutscene(void)

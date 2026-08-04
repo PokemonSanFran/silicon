@@ -78,7 +78,7 @@ static u32 GetHPSpeedOption(void);
 
 static u32 GetBattleExperienceOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXPERIENCE];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXPERIENCE);
 }
 
 bool32 IsExperienceOptionNotActive(void)
@@ -309,7 +309,7 @@ void PrintExpShareMessage(u32 pcMonsThatReceivedPoints)
 
 u32 GetExperienceExpMultiplerValue(void)
 {
-    return (gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_MULTIPLIER]);
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_MULTIPLIER);
 }
 
 // ***********************************************************************
@@ -326,7 +326,7 @@ bool32 AreIndividualValuesDisabled(void)
     if (!gSiliconTestVariables.overrideIVs)
         return FALSE;
 #endif
-    return !(gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INDIVIDUAL_VALUES]);
+    return (OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_INDIVIDUAL_VALUES) == BATTLE_OPTION_INDIVIDUAL_VALUES_DISABLED);
 }
 
 // ***********************************************************************
@@ -340,7 +340,7 @@ void Script_AreEffortValuesEnabled(void)
 
 bool32 AreEffortValuesEnabled(void)
 {
-   return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EFFORT_VALUES];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EFFORT_VALUES);
 }
 
 bool32 IsFieldForEffortValues(u32 field)
@@ -394,7 +394,7 @@ static const u8 sGameOverTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHI
 
 static u32 GetRespawnOptionValue(void)
 {
-    return (gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_WHITEOUT]);
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_WHITEOUT);
 }
 
 static u32 IsWhiteoutSetToDeath(void)
@@ -536,7 +536,7 @@ void SetUpFieldCallbackOnWhiteOut(void)
 
 u32 GetFaintedMonOptionValue(void)
 {
-    return (gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FAINTED_MON]);
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_FAINTED_MON);
 }
 
 void SetFaintedMonBit(struct Pokemon *mon)
@@ -578,7 +578,7 @@ void PerformPlayerFaintedMonOperations(struct Pokemon *mon)
 
 enum optionBattleDifficulty GetBattleDifficulty(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_BATTLE_DIFFICULTY];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_BATTLE_DIFFICULTY);
 }
 
 // ***********************************************************************
@@ -592,7 +592,7 @@ enum optionBattleDifficulty GetBattleDifficulty(void)
 
 u32 GetBagItemsOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_BAG_ITEMS];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_BAG_ITEMS);
 }
 
 static bool32 IsTrainerTypeNotRegular(u32 trainerId)
@@ -651,7 +651,7 @@ void TryToIncreaseBattleItemUseCount(enum Item itemId)
 
 u32 GetLevelOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_PLAYER_LEVEL];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_PLAYER_LEVEL);
 }
 
 u32 GetCurrentPSFLevelCap(void)
@@ -698,7 +698,7 @@ u32 GetCurrentPSFLevelCap(void)
 
 static u32 GetOpponentsItemsOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_OPPONENTS_ITEMS];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_OPPONENTS_ITEMS);
 }
 
 u32 CanAIUseItems(void)
@@ -715,7 +715,7 @@ u32 CanAIUseItems(void)
 
 static u32 GetCenterHealingOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_CENTER_HEALING];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_CENTER_HEALING);
 }
 
 u32 CanHealPlayer(void)
@@ -732,7 +732,7 @@ u32 CanHealPlayer(void)
 
 u32 GetTakeWildItemsOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TAKE_WILD_ITEMS];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TAKE_WILD_ITEMS);
 }
 
 // ***********************************************************************
@@ -743,7 +743,7 @@ u32 GetTakeWildItemsOption(void)
 
 static u32 GetMoveHealingOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MOVE_HEALING];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MOVE_HEALING);
 }
 
 static bool32 IsBattlerOwnedByPlayer(u8 battlerId)
@@ -796,7 +796,7 @@ u32 IsPlayerAllowedToUseHealingMoves(u8 battlerId, u16 moveId)
 
 u32 GetFirstPokemonCatchOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_FIRST_POKEMON_CATCH];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_FIRST_POKEMON_CATCH);
 }
 
 bool32 IsPlayerAllowedToCatchBattler(u8 battlerId)
@@ -860,7 +860,7 @@ static const u16 sHealingHeldItemEffects[HOLD_EFFECT_COUNT] =
 
 static u32 GetItemHealingOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_ITEM_HEALING];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_ITEM_HEALING);
 }
 
 bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 checkBattleUse, bool8 checkHeldEffect)
@@ -917,7 +917,7 @@ bool32 IsPlayerAllowedToUseHealingItems(u16 itemId, bool8 checkFieldUse, bool8 c
 
 static u32 GetTrainerScalingOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_TRAINER_SCALING];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_TRAINER_SCALING);
 }
 
 static bool32 IsTrainerScalingNotParty(void)
@@ -1024,7 +1024,7 @@ static u32 CalculatedScaledTrainerLevel(u32 origEnemyLevel, u32 origNumEnemyMon)
 
 static u32 GetPointsMessagesOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_POINTS_MESSAGES];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_POINTS_MESSAGES);
 }
 
 bool32 IsPointsMessagesOptionOn(void)
@@ -1073,7 +1073,7 @@ u32 PrintMonRecievedEffortAndExperience(u8* expMonId, bool32 printBoosted)
 
 static u32 GetMidBattleEvolutionOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_MID_BATTLE_EVOLUTION];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_MID_BATTLE_EVOLUTION);
 }
 
 bool32 IsMidBattleEvolutionOn(void)
@@ -1087,7 +1087,7 @@ bool32 IsMidBattleEvolutionOn(void)
 
 static u32 GetLastUsedBallOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_LAST_USED_BALL];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_LAST_USED_BALL);
 }
 
 bool32 IsLastUsedBallOn(void)
@@ -1199,7 +1199,7 @@ void HandleLastUsedBallOnSaveblock(void)
 
 static u32 GetQuickRunOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_QUICK_RUN];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_QUICK_RUN);
 }
 
 static bool32 IsQuickRunSetToL(void)
@@ -1236,12 +1236,12 @@ void AttemptFleeWithL(u32 battler, u32 mode)
 
 static u32 GetHPSpeedOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_HP_SPEED];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_HP_SPEED);
 }
 
 static u32 GetEXPSpeedOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_EXP_SPEED];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_EXP_SPEED);
 }
 
 static u32 IsHPSpeedFast(void)
@@ -1296,7 +1296,7 @@ u32 GetEXPScale(void)
 
 enum optionBattleIntro GetBattleIntroSkip(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_INTRO];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_INTRO);
 }
 
 // ***********************************************************************
@@ -1305,7 +1305,7 @@ enum optionBattleIntro GetBattleIntroSkip(void)
 
 u32 GetNicknameOption(void)
 {
-    return gSaveBlock2Ptr->optionsBattle[BATTLE_OPTIONS_NICKNAME];
+    return OptionsMenu_GetSavedOptions(BATTLE_SETTINGS,BATTLE_OPTIONS_NICKNAME);
 }
 
 bool32 IsMonNicknamed(struct Pokemon *mon)

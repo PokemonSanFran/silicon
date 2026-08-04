@@ -1463,7 +1463,7 @@ int SetCableClubWarp(void)
 extern const u8 EventScript_ToggleRunBehavior_Message[];
 static bool32 ToggleRunBehavior(void)
 {
-    if (gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_RUN] != GAME_OPTION_RUN_TOGGLE)
+    if (OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_RUN) != GAME_OPTION_RUN_TOGGLE)
         return FALSE;
 
     PlaySE(SE_SELECT);

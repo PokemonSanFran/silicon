@@ -2965,7 +2965,7 @@ void TryToAddMoveInfoWindow(void)
 
     // Start siliconMerge
     //if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)
     // End siliconMerge
         return;
 
@@ -3080,7 +3080,7 @@ void TryHideLastUsedBall(void)
 {
     // Start siliconMerge
     //if (B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (B_LAST_USED_BALL_BUTTON == L_BUTTON && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)
     // End siliconMerge
         return;
 
@@ -3095,7 +3095,7 @@ void TryRestoreLastUsedBall(void)
 
     // Start siliconMerge
     //if (B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    if (B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsGame[GAME_OPTIONS_BUTTON_MODE] == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (B_LAST_USED_BALL_BUTTON == L_BUTTON && OptionsMenu_GetSavedOptions(GAME_SETTINGS,GAME_OPTIONS_BUTTON_MODE) == OPTIONS_BUTTON_MODE_L_EQUALS_A)
     // End siliconMerge
         return;
 
