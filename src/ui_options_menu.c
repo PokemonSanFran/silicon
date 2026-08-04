@@ -94,6 +94,16 @@ static bool32 AllocZeroedTilemapBuffers(void);
 static void HandleAndShowBgs(void);
 static void SetScheduleBgs(u32 backgroundId);
 
+u8 OptionsMenu_GetSavedOptions(u32 category, u32 setting)
+{
+    return gSaveBlock2Ptr->options[category][setting];
+}
+
+void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value)
+{
+    gSaveBlock2Ptr->options[category][setting] = value;
+}
+
 void CopyTemporalDataToSaveBlockData()
 {
 	u8 i, j;
@@ -102,27 +112,27 @@ void CopyTemporalDataToSaveBlockData()
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsGame[j] = TemporalOptions[GAME_SETTINGS][j];
+					gSaveBlock2Ptr->options[GAME_SETTINGS][j] = TemporalOptions[i][j];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsBattle[j] = TemporalOptions[BATTLE_SETTINGS][j];
+					gSaveBlock2Ptr->options[BATTLE_SETTINGS][j] = TemporalOptions[i][j];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsVisual[j] = TemporalOptions[VISUAL_SETTINGS][j];
+					gSaveBlock2Ptr->options[VISUAL_SETTINGS][j] = TemporalOptions[i][j];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsMusic[j] = TemporalOptions[MUSIC_SETTINGS][j];
+					gSaveBlock2Ptr->options[MUSIC_SETTINGS][j] = TemporalOptions[i][j];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					gSaveBlock2Ptr->optionsRandom[j] = TemporalOptions[RANDOM_SETTINGS][j];
+					gSaveBlock2Ptr->options[RANDOM_SETTINGS][j] = TemporalOptions[i][j];
 				}
 				break;
 		}
@@ -137,27 +147,27 @@ void CopySaveBlockDataToTemporalData()
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					TemporalOptions[GAME_SETTINGS][j] = gSaveBlock2Ptr->optionsGame[j];
+					TemporalOptions[GAME_SETTINGS][j] = gSaveBlock2Ptr->options[GAME_SETTINGS][j];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					TemporalOptions[BATTLE_SETTINGS][j] = gSaveBlock2Ptr->optionsBattle[j];
+					TemporalOptions[BATTLE_SETTINGS][j] = gSaveBlock2Ptr->options[BATTLE_SETTINGS][j];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					TemporalOptions[VISUAL_SETTINGS][j] = gSaveBlock2Ptr->optionsVisual[j];
+					TemporalOptions[VISUAL_SETTINGS][j] = gSaveBlock2Ptr->options[VISUAL_SETTINGS][j];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					TemporalOptions[MUSIC_SETTINGS][j] = gSaveBlock2Ptr->optionsMusic[j];
+					TemporalOptions[MUSIC_SETTINGS][j] = gSaveBlock2Ptr->options[MUSIC_SETTINGS][j];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					TemporalOptions[RANDOM_SETTINGS][j] = gSaveBlock2Ptr->optionsRandom[j];
+					TemporalOptions[RANDOM_SETTINGS][j] = gSaveBlock2Ptr->options[RANDOM_SETTINGS][j];
 				}
 				break;
 		}
@@ -461,7 +471,7 @@ static void SetScheduleBgs(u32 backgroundId)
 
 static void LoadOptionsMenuPalettes(void)
 {
-    switch(gSaveBlock2Ptr->optionsVisual[VISUAL_OPTIONS_COLOR]){
+    switch(gSaveBlock2Ptr->options[VISUAL_SETTINGS][VISUAL_OPTIONS_COLOR]){
         case VISUAL_OPTION_COLOR_BLACK:
             LoadPalette(sMenuPalette_Black, 0, 32);
             break;
@@ -1205,27 +1215,27 @@ void HandlePresetData()
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_GAME_SETTINGS; i++){
-					TemporalOptions[GAME_SETTINGS][i] = gSaveBlock2Ptr->optionsGame[i];
+					TemporalOptions[GAME_SETTINGS][i] = gSaveBlock2Ptr->options[GAME_SETTINGS][i];
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_BATTLE_SETTINGS; i++){
-					TemporalOptions[BATTLE_SETTINGS][i] = gSaveBlock2Ptr->optionsBattle[i];
+					TemporalOptions[BATTLE_SETTINGS][i] = gSaveBlock2Ptr->options[BATTLE_SETTINGS][i];
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_VISUAL_SETTINGS; i++){
-					TemporalOptions[VISUAL_SETTINGS][i] = gSaveBlock2Ptr->optionsVisual[i];
+					TemporalOptions[VISUAL_SETTINGS][i] = gSaveBlock2Ptr->options[VISUAL_SETTINGS][i];
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_MUSIC_SETTINGS; i++){
-					TemporalOptions[MUSIC_SETTINGS][i] = gSaveBlock2Ptr->optionsMusic[i];
+					TemporalOptions[MUSIC_SETTINGS][i] = gSaveBlock2Ptr->options[MUSIC_SETTINGS][i];
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(i = 1 ;i < NUM_OPTIONS_RANDOM_SETTINGS; i++){
-					TemporalOptions[RANDOM_SETTINGS][i] = gSaveBlock2Ptr->optionsRandom[i];
+					TemporalOptions[RANDOM_SETTINGS][i] = gSaveBlock2Ptr->options[RANDOM_SETTINGS][i];
 				}
 				break;
 		}
@@ -1306,11 +1316,11 @@ void ChangeCurrentScreenPresetDataToCustom()
 
 void UNUSED ChangePresetDataToCustom()
 {
-	gSaveBlock2Ptr->optionsGame[0] = GAME_PRESET_CUSTOM;
-	gSaveBlock2Ptr->optionsBattle[0] = BATTLE_PRESET_CUSTOM;
-	gSaveBlock2Ptr->optionsVisual[0] = VISUAL_PRESET_CUSTOM;
-	gSaveBlock2Ptr->optionsMusic[0] = MUSIC_PRESET_CUSTOM;
-	gSaveBlock2Ptr->optionsRandom[0] = RANDOM_PRESET_CUSTOM;
+	gSaveBlock2Ptr->options[GAME_SETTINGS][0] = GAME_PRESET_CUSTOM;
+	gSaveBlock2Ptr->options[BATTLE_SETTINGS][0] = BATTLE_PRESET_CUSTOM;
+	gSaveBlock2Ptr->options[VISUAL_SETTINGS][0] = VISUAL_PRESET_CUSTOM;
+	gSaveBlock2Ptr->options[MUSIC_SETTINGS][0] = MUSIC_PRESET_CUSTOM;
+	gSaveBlock2Ptr->options[RANDOM_SETTINGS][0] = RANDOM_PRESET_CUSTOM;
 }
 
 // For Game Settings
@@ -3294,25 +3304,25 @@ void OptionMenu_ResetAllToDefault(void)
 
 	for (i = 0; i < NUM_OPTIONS_GAME_SETTINGS; i++)
 	{
-		gSaveBlock2Ptr->optionsGame[i] = Preset_Options[GAME_SETTINGS][GAME_PRESET_DEFAULT][i];
+		gSaveBlock2Ptr->options[GAME_SETTINGS][i] = Preset_Options[GAME_SETTINGS][GAME_PRESET_DEFAULT][i];
 	}
 
 	for (i = 0; i < NUM_OPTIONS_BATTLE_SETTINGS; i++)
 	{
-		gSaveBlock2Ptr->optionsBattle[i] = Preset_Options[BATTLE_SETTINGS][BATTLE_PRESET_DEFAULT][i];
+		gSaveBlock2Ptr->options[BATTLE_SETTINGS][i] = Preset_Options[BATTLE_SETTINGS][BATTLE_PRESET_DEFAULT][i];
 	}
 	for (i = 0; i < NUM_OPTIONS_MUSIC_SETTINGS; i++)
 	{
-		gSaveBlock2Ptr->optionsMusic[i] = Preset_Options[MUSIC_SETTINGS][MUSIC_PRESET_DEFAULT][i];
+		gSaveBlock2Ptr->options[MUSIC_SETTINGS][i] = Preset_Options[MUSIC_SETTINGS][MUSIC_PRESET_DEFAULT][i];
 	}
 
 	for (i = 0; i < NUM_OPTIONS_RANDOM_SETTINGS; i++)
 	{
-		gSaveBlock2Ptr->optionsRandom[i] = Preset_Options[RANDOM_SETTINGS][RANDOM_PRESET_DEFAULT][i];
+		gSaveBlock2Ptr->options[RANDOM_SETTINGS][i] = Preset_Options[RANDOM_SETTINGS][RANDOM_PRESET_DEFAULT][i];
 	}
 	for (i = 0; i < NUM_OPTIONS_VISUAL_SETTINGS; i++)
 	{
-		gSaveBlock2Ptr->optionsVisual[i] = Preset_Options[VISUAL_SETTINGS][VISUAL_PRESET_DEFAULT][i];
+		gSaveBlock2Ptr->options[VISUAL_SETTINGS][i] = Preset_Options[VISUAL_SETTINGS][VISUAL_PRESET_DEFAULT][i];
 	}
 }
 
@@ -3324,31 +3334,31 @@ bool32 HaveSettingsChanged(void)
 		switch(i){
 			case GAME_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_GAME_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsGame[j] != TemporalOptions[GAME_SETTINGS][j])
+					if (gSaveBlock2Ptr->options[GAME_SETTINGS][j] != TemporalOptions[GAME_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_BATTLE_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsBattle[j] != TemporalOptions[BATTLE_SETTINGS][j])
+					if (gSaveBlock2Ptr->options[BATTLE_SETTINGS][j] != TemporalOptions[BATTLE_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_VISUAL_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsVisual[j] != TemporalOptions[VISUAL_SETTINGS][j])
+					if (gSaveBlock2Ptr->options[VISUAL_SETTINGS][j] != TemporalOptions[VISUAL_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_MUSIC_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsMusic[j] != TemporalOptions[MUSIC_SETTINGS][j])
+					if (gSaveBlock2Ptr->options[MUSIC_SETTINGS][j] != TemporalOptions[MUSIC_SETTINGS][j])
 						return TRUE;
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(j = 0 ;j < NUM_OPTIONS_RANDOM_SETTINGS; j++){
-					if (gSaveBlock2Ptr->optionsRandom[j] != TemporalOptions[RANDOM_SETTINGS][j])
+					if (gSaveBlock2Ptr->options[RANDOM_SETTINGS][j] != TemporalOptions[RANDOM_SETTINGS][j])
 						return TRUE;
 				}
 				break;

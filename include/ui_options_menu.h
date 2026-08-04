@@ -11,6 +11,8 @@ void CB2_InitUIOptionMenuFromMainMenu(void);
 void CB2_InitUiOptionMenuFromDevLetter(void);
 void SetUpMainMenuFromOutsideGame(void);
 void OptionMenu_ResetAllToDefault(void);
+u8 OptionsMenu_GetSavedOptions(u32 category, u32 setting);
+void OptionsMenu_SetSavedOptions(u32 category, u32 setting, u32 value);
 
 enum OptionsIds
 {
