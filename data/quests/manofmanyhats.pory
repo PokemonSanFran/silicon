@@ -1,14 +1,15 @@
 const FLAG_HIDE_INSTALLNATUREPROBESWORKER = FLAG_TEMP_A
-const LOCKED_DOOR = 8
 const FLAG_UNLOCK_DOOR = FLAG_TEMP_2
 const INSTALLNATUREPROBESWORKER_WAITER = LOCALID_QIU_VILLAGE_RESTAURANT_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_FISHERMAN = LOCALID_POPIDORA_ARCADE_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_ATTENDANT = LOCALID_LAKE_WAJABI_INSTALLNATUREPROBESWORKER
 const INSTALLNATUREPROBESWORKER_INTERACT = VAR_LAST_TALKED
+const TOOK_STATION_ITEM1 = FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM1
+const TOOK_STATION_ITEM2 = FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM2
 
-//Quest_Manofmanyhats_
+//Quest_ManOfManyHats_
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Visibility_Script
+script Quest_ManOfManyHats_Installnatureprobesworker_Waiter_Visibility_Script
 {
     call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Boba)
     questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
@@ -25,7 +26,7 @@ script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Boba
     setobjectflagfromlocalid(INSTALLNATUREPROBESWORKER_WAITER)
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Visibility_Script
+script Quest_ManOfManyHats_Installnatureprobesworker_Fisherman_Visibility_Script
 {
     call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Fish)
     questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
@@ -42,7 +43,7 @@ script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Fish
     setobjectflagfromlocalid(INSTALLNATUREPROBESWORKER_FISHERMAN)
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Attendant_Visibility_Script
+script Quest_ManOfManyHats_Installnatureprobesworker_Attendant_Visibility_Script
 {
     call_if_quest_not_complete(QUEST_INSTALLNATUREPROBES,Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade)
     questmenu(QUEST_MENU_CHECK_INACTIVE,QUEST_MANOFMANYHATS)
@@ -60,106 +61,162 @@ script Quest_ManOfManyHats_Script_HideInstallNatureProbesWorker_Arcade
 }
 
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Waiter_Dialogue{
-	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
+script Quest_ManOfManyHats_Installnatureprobesworker_Waiter_Dialogue{
+	call(Quest_ManOfManyHats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementBoba)
-	msgbox(format("They didn't teach me how to work the boba machine..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	msgbox("A “20% sweetness” boba order?{PAUSE 30} You must\nbe joking! {PAUSE 30}The machine only has buttons\nfor 10 or 30%!",,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)	
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+	goto_if_eq(VAR_RESULT,TRUE,Quest_ManOfManyHats_StartQuest_Dialogue)
     closemessage
     release
     end
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue{
-	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
+script Quest_ManOfManyHats_Installnatureprobesworker_Fisherman_Dialogue{
+	call(Quest_ManOfManyHats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementFish)
-	msgbox(format("Not a single bite... this is not going to pay the rent!"),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	msgbox("Is this too tangled…?{PAUSE 30} No, surely it's not.\nBut, it looks so{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.{PAUSE 60}Gah!",,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+	goto_if_eq(VAR_RESULT,TRUE,Quest_ManOfManyHats_StartQuest_Dialogue)
     closemessage
     release
     end
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_ArcadeAttendant_Dialogue{
-	call(Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script)
+script Quest_ManOfManyHats_Installnatureprobesworker_ArcadeAttendant_Dialogue{
+	call(Quest_ManOfManyHats_Installnatureprobesworker_Interact_Script)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsIncrementArcade)
-	msgbox(format("They did WHAT on the trackway? I don't know if I can do this..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
+	msgbox("Ugh! The buttons on this thing are all\ncovered in butter! How does that even\nhappen?\pAnd more importantly… How am I gonna\nclean all this?",,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_SWEAT)
 	callnative(Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible)
-	goto_if_eq(VAR_RESULT,TRUE,Quest_Manofmanyhats_StartQuest_Dialogue)
+	goto_if_eq(VAR_RESULT,TRUE,Quest_ManOfManyHats_StartQuest_Dialogue)
     closemessage
     release
     end
 }
 
-script Quest_Manofmanyhats_Installnatureprobesworker_Interact_Script{
+script Quest_ManOfManyHats_Installnatureprobesworker_Interact_Script{
 	lock
-	goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Active_Dialogue)
-	goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Reward_Dialogue)
-	goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_Manofmanyhats_Complete_Dialogue)
+	goto_if_quest_reward(QUEST_MANOFMANYHATS,Quest_ManOfManyHats_Reward_Dialogue)
+	goto_if_quest_active(QUEST_MANOFMANYHATS,Quest_ManOfManyHats_Active_Dialogue)
+	goto_if_quest_complete(QUEST_MANOFMANYHATS,Quest_ManOfManyHats_Complete_Dialogue)
 	return
 }
 
-script Quest_Manofmanyhats_StartQuest_Dialogue{
+script Quest_ManOfManyHats_StartQuest_Dialogue{
 	playse(SE_PIN)
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT, moves(emote_exclamation_mark, delay_16, face_player, step_end))
 	waitse
 	lock
-	msgbox(format("Oh... you're {PLAYER}. Thanks again for your... help."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER)
-	msgbox(format("Things haven't really gotten better since I last saw you."),,SPEAKER_INSTALLNATUREPROBESWORKER,EMOTE_SWEAT)
+	msgbox("It's you. I remember you.",MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("To this day I'm thankful for your help.\nAnd don't worry, I don't blame you for how\nthings went down.",,SPEAKER_INSTALLNATUREPROBESWORKER,EMOTE_SWEAT)
 	closemessage
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
+	msgbox("…Things have of course been rough. I've\nbeen working multiple jobs to pay the\nbills.",,SPEAKER_INSTALLNATUREPROBESWORKER,EMOTE_SWEAT)
 	waitmovement(INSTALLNATUREPROBESWORKER_INTERACT)
-	msgbox(format("I had to get a bunch of jobs to make up for that one. I've got bills to pay!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-	msgbox(format("Yeah, I saw you working near the trolleys, and at that restaurant too."),,SPEAKER_PLAYER,,EMOTE_SWEAT)
+	closemessage
+	msgbox("Yeah, I feel like I've seen you all over\nthe place.",,SPEAKER_PLAYER,,EMOTE_SWEAT)
+	msgbox("I miss my ranger job…",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	closemessage
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FacePlayer)
 	waitmovement(INSTALLNATUREPROBESWORKER_INTERACT)
-	msgbox(format("Yeah, they're not going well. And neither is this!"),,SPEAKER_INSTALLNATUREPROBESWORKER)
-	msgbox(format("And the worst part is, I left my headphones at the Ranger station in EspuleeOutskirts! I'm working so many jobs I don't have time to go back and get them..."),,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_ANGRY)
-	msgbox(format("Sorry to ask another favor... could you get them for me?"),,SPEAKER_INSTALLNATUREPROBESWORKER)
+	buffermapname(STR_VAR_1,MAP_QUEST_MANOFMANYHATS_TARGET)
+	msgbox("Worst part is? I left my favorite head-\nphones back at the ranger station on\n{STR_VAR_1}.\pI can't even wile the time away\nwith some music.",,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_ANGRY)
+	checkitem(ITEM_QUEST_MANOFMANYHATS_HEADPHONES, 1)
+	goto_if_eq(VAR_RESULT,TRUE,Quest_ManOfManyHats_RewardPreActive_Dialogue)
+	msgbox("I'd go get them if I could, but I'm too\nbusy and don't have the time.",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("I don't suppose I could ask you for yet\nanother favor? Do you think you could\nretrieve my headphones from the ranger\lstation on {STR_VAR_1}?",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("Of course. It's the least I can do.",,SPEAKER_PLAYER)
+	msgbox("Oh, please. You shouldn't blame yourself.\nT'was the ever-uncaring nature of the\npowers that be!",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("Anyway, the door code is “J4CKW41K3r”.\nGood luck!",,SPEAKER_INSTALLNATUREPROBESWORKER)
 	startquest(QUEST_MANOFMANYHATS)
-	call(Quest_Manofmanyhats_Active_Dialogue)
 }
 
-script Quest_Manofmanyhats_Active_Dialogue{
-   msgbox(format("The Ranger station is in EspuleeOutskirts. The code for the door... it was something like 3444, I think."),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER)
+script Quest_ManOfManyHats_RewardPreActive_Dialogue
+{
+	msgbox("Lucky for you, I already have them!",,SPEAKER_PLAYER)
+	closemessage
+	cueobjecttalking(LOCALID_PLAYER)
+	removeitem(ITEM_QUEST_MANOFMANYHATS_HEADPHONES,1)
+	msgbox("O-oh? Really? How is that even possible?",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("Well, these'll be a big help for me!\nIn terms of morale, at least. Thank you\nonce again!",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
+	completequest(QUEST_MANOFMANYHATS)
+
 }
 
-script Quest_Manofmanyhats_Reward_Dialogue{
-	msgbox(format("Oh! You got my headphones, thank you so much!"),MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_HAPPY)
+script Quest_ManOfManyHats_Active_Dialogue{
+   lock
+   faceplayer
+   msgbox("Have you found my trusty headphones\nyet?",,SPEAKER_INSTALLNATUREPROBESWORKER)
+   msgbox("With nothing to listen to I'm left alone\nwith my own thoughts. And let me tell you,\nmy thoughts aren't very fun!",,SPEAKER_INSTALLNATUREPROBESWORKER)
+   applymovement(INSTALLNATUREPROBESWORKER_INTERACT, moves(face_original_direction, delay_16*2))
+   waitmovement(0)
+   closemessage
+   release
+   end
+}
 
-	if (!flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS) && !flag(FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET)){
-		msgbox(format("Oh, and if you saw anything else in there, go ahead and grab it. "),,SPEAKER_INSTALLNATUREPROBESWORKER)
-		msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-	}else{
-		msgbox(format("There was other stuff there, do you want it?"),,SPEAKER_PLAYER)
-		msgbox(format("Nah."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-		msgbox(format("That stuff was there before me, and probably will be there forever."),,SPEAKER_INSTALLNATUREPROBESWORKER)
-	}
+script Quest_ManOfManyHats_Reward_Dialogue{
+	msgbox("Hey, I got your headphones back!",,SPEAKER_PLAYER)
+	cueobjecttalking(LOCALID_PLAYER)
+	msgbox("Wowza! This is the most exciting day I've\nhad all week!",MSGBOX_NPC,SPEAKER_INSTALLNATUREPROBESWORKER,,EMOTE_HAPPY)
+
+	msgbox("Y'know there were some other things at\nthe ranger station too. Do you want\nthem?",,SPEAKER_PLAYER)
+	msgbox("Nah.",,SPEAKER_INSTALLNATUREPROBESWORKER)
+	msgbox("I know what you're talking about.\pThey were there before I was even hired\nand will probably be there forever if\nsomeone doesn't take them,\lso I say you should have them.",,SPEAKER_INSTALLNATUREPROBESWORKER)
+
 	applymovement(INSTALLNATUREPROBESWORKER_INTERACT,Common_Movement_FaceLeft)
 	completequest(QUEST_MANOFMANYHATS)
 	release
-		end
+	end
 }
 
-script Quest_Manofmanyhats_Complete_Dialogue{
+script Quest_ManOfManyHats_Complete_Dialogue{
 	random(3)
 	switch (var(VAR_RESULT)){
-		case 0: msgbox(format("At the car wash, woah\pTalking about the car wash, yeah\pCome on y'all and sing it for me..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
-		case 1: msgbox(format("You are my fire...\pThe one desire..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
-		case 2: msgbox(format("Can't fight the moonlight\pDeep in the dark, you'll surrender your heart..."),,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+		case 0: msgbox("Needless to say, I keep a check\n{PAUSE 60}She was a bad-bad, nevertheless…",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+		case 1: msgbox("Ooh-ooh, some things you just can't\nrefuuuuuuse\pShe wanna ride me like a cruise and\nI'm nooooot tryna loooose",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
+		case 2: msgbox("Then you're left in the dust, unless\n{PAUSE 60}I stuck by ya\n{PAUSE 60}You're the sunflower,\l{PAUSE 60}I think your love would be too much",,SPEAKER_INSTALLNATUREPROBESWORKER,TAIL_SHOUT)
 	}
-	msgbox(format("Those headphones must be noise cancelling..."),,SPEAKER_PLAYER,TAIL_WHISPER,EMOTE_SWEAT)
+	msgbox("Those headphones must be noise\ncancelling...",,SPEAKER_PLAYER,TAIL_WHISPER,EMOTE_SWEAT)
 	closemessage
 	release
 	end
 }
 
-script Quest_Manofmanyhats_EnterDoorCombination_Dialogue{
-	setvar(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR)
-	msgbox(format("Okay, INSTALLNATUREPROBESWORKER_INTERACT said the combination was 3444..."),,SPEAKER_PLAYER,TAIL_THOUGHT)
+script Quest_ManOfManyHats_GuessDoorCombination_Dialogue
+{
+	msgbox("It needs a password…",,SPEAKER_PLAYER,TAIL_THOUGHT)
+	special(EnterCode)
+    waitstate
+    special(GetCodeFeedback)
+	if(var(VAR_RESULT) == QUEST_MANOFMANYHATS)
+	{
+		callnative(Quest_ManOfManyHats_SetDoorUnlockBit)
+		playse(SE_DING_DONG)
+		waitse
+		playse(SE_BANG)
+		waitse
+		setmetatile(13,8,0x248,FALSE)
+		special(DrawWholeMapView)
+		msgbox("That may be the most insane guess I have\never made in my life.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+		closemessage
+		warpdoor(MAP_ESPULEE_OUTSKIRTS_RANGER,0)
+		waitstate
+		end
+	}
+	else
+	{
+		playse(SE_FAILURE)
+		msgbox("Something tells me guessing isn't gonna\nget me anywhere.",,SPEAKER_PLAYER,TAIL_THOUGHT)
+		end
+	}
+}
+
+script Quest_ManOfManyHats_EnterDoorCombination_Dialogue{
+	msgbox("Okay, INSTALLNATUREPROBESWORKER said the\ncombination was J4CKW41K3r{PAUSE 30}.{PAUSE 30}.{PAUSE 30}.",,SPEAKER_PLAYER,TAIL_THOUGHT)
 	closemessage
+	callnative(Quest_ManOfManyHats_SetDoorUnlockBit)
 	playse(SE_DING_DONG)
 	waitse
 	playse(SE_BANG)
@@ -171,9 +228,8 @@ script Quest_Manofmanyhats_EnterDoorCombination_Dialogue{
 	end
 }
 
-script Quest_Manofmanyhats_CheckDoorLock_Script{
-	if (var(VAR_QUEST_MANOFMANYHATS) > OPEN_LOCKED_DOOR){
-		setflag(FLAG_UNLOCK_DOOR)
-	}
+script Quest_ManOfManyHats_CheckDoorLock_Script{
+	callnative(Script_Quest_ManOfManyHats_GetDoorUnlockBit)
+	if(var(VAR_RESULT)==TRUE){setflag(FLAG_UNLOCK_DOOR)}
 }
 

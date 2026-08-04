@@ -285,7 +285,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Quest_Manofmanyhats_Installnatureprobesworker_Fisherman_Dialogue",
+      "script": "Quest_ManOfManyHats_Installnatureprobesworker_Fisherman_Dialogue",
       "flag": "FLAG_TEMP_A"
     }
   ],

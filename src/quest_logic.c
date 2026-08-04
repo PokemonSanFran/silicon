@@ -4028,6 +4028,21 @@ void Quest_ManOfManyHats_ManOfManyHatsSetThirdJobVisible(void)
     gSpecialVar_Result = TRUE;
 }
 
+void Quest_ManOfManyHats_SetDoorUnlockBit(void)
+{
+    SetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR,TRUE);
+}
+
+bool32 Quest_ManOfManyHats_GetDoorUnlockBit(void)
+{
+    return GetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR);
+}
+
+void Script_Quest_ManOfManyHats_GetDoorUnlockBit(void)
+{
+    gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR);
+}
+
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************

@@ -23,9 +23,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_WIDE_LENS",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_MANOFMANYHATS_STATION_STOCK_1",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_WIDE_LENS"
+      "flag": "FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -36,9 +36,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ROCKY_HELMET",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_MANOFMANYHATS_STATION_STOCK_2",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_ROCKY_HELMET"
+      "flag": "FLAG_ITEM_QUEST_MANOFMANYHATS_ITEM3"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -49,9 +49,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_OAKS_PARCEL",
+      "trainer_sight_or_berry_tree_id": "ITEM_QUEST_MANOFMANYHATS_HEADPHONES",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ESPULEE_OUTSKIRTS_RANGER_HEADPHONES"
+      "flag": "FLAG_ITEM_QUEST_MANOFMANYHATS_HEADPHONES"
     }
   ],
   "warp_events": [
