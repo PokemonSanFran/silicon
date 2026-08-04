@@ -1308,1336 +1308,1327 @@ void UNUSED ChangePresetDataToCustom()
 	gSaveBlock2Ptr->optionsRandom[0] = RANDOM_PRESET_CUSTOM;
 }
 
-// For Game Settings asdf
-static const struct OptionData GameSettings_Settings_Options[NUM_OPTIONS_GAME_SETTINGS] =
+// For Game Settings
+static const struct OptionData Settings_Options[SETTINGS_COUNT][NUM_OPTIONS_MAX_SETTINGS] =
 {
-    [GAME_OPTIONS_PRESET] =
+    [GAME_SETTINGS] = 
     {
-        .title = COMPOUND_STRING("Game Settings"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("Speedrun"),
-            COMPOUND_STRING("Custom"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Default Description"),
-            COMPOUND_STRING("Speedrun Description"),
-            COMPOUND_STRING("Custom Description"),
-            },
-        .numOptions = GAME_PRESET_COUNT,
-    },
-    [GAME_OPTIONS_SAVE_BOOT] =
-    {
-        .title = COMPOUND_STRING("Save Boot"),
-        .options = {
-            COMPOUND_STRING("Traditional"),
-            COMPOUND_STRING("Continue"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will proceed to the Main Menu."),
-            COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to the saved adventure."),
-            },
-        .numOptions = GAME_OPTION_SAVE_BOOT_COUNT,
-    },
-    [GAME_OPTIONS_BUTTON_MODE] =
-    {
-        .title = COMPOUND_STRING("Button Mode"),
-        .options = {
-            COMPOUND_STRING("{L_BUTTON}{R_BUTTON}"),
-            COMPOUND_STRING("{L_BUTTON} {EMOJI_EQUALS} {A_BUTTON}"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("{L_BUTTON} and {R_BUTTON} are used for navigation within menus."),
-            COMPOUND_STRING("Pressing {L_BUTTON} is treated like {A_BUTTON}. {R_BUTTON} is used for navigation within menus. When {L_BUTTON} is held, it is treated like a turbo {A_BUTTON}."),
-            },
-        .numOptions = OPTIONS_BUTTON_MODE_L_MODE_COUNT,
-    },
-    [GAME_OPTIONS_SAVE_BEHAVIOR] =
-    {
-        .title = COMPOUND_STRING("Save Behavior"),
-        .options = {
-            COMPOUND_STRING("Manual"),
-            COMPOUND_STRING("Automatic"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Players will need to manually save their progress."),
-            COMPOUND_STRING("Progress will automatically save after ten wild battles since the last save, after every cutscene, and after every heal at the Pokémon Center."),
-            },
-        .numOptions = GAME_OPTION_AUTOSAVE_COUNT,
-    },
-    [GAME_OPTIONS_RUN] =
-    {
-        .title = COMPOUND_STRING("Run"),
-        .options = {
-            COMPOUND_STRING("Always"),
-            COMPOUND_STRING("Toggle"),
-            COMPOUND_STRING("Manual"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
-            COMPOUND_STRING("Pressing the {L_BUTTON} will change the player's behavior betweeen always walking and always running."),
-            COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
-            },
-        .numOptions = 3,
-    },
-    [GAME_OPTIONS_PUZZLES] =
-    {
-        .title = COMPOUND_STRING("Puzzles"),
-        .options = {
-            COMPOUND_STRING("Disabled"),
-            COMPOUND_STRING("Normal"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Puzzles outside of Pokémon battles are disabled."),
-            COMPOUND_STRING("Puzzles function as normal."),
-            },
-        .numOptions = 2,
-    },
-    [GAME_OPTIONS_CUTSCENE] =
-    {
-        .title = COMPOUND_STRING("Cutscenes"),
-        .options = {
-            COMPOUND_STRING("Play"),
-            //COMPOUND_STRING("Ask"),
-            //COMPOUND_STRING("Hold"),
-            COMPOUND_STRING("Skip"),
-            },
-        .optionDescription = {
-            //COMPOUND_STRING("Story related scenes without gameplay will play as normal."),
-            COMPOUND_STRING("Story related scenes without gameplay will play as normal. The player can hold {START_BUTTON} to automatically skip the cutscene."),
-            //COMPOUND_STRING("Before every story related scene,the player is asked if they would like to play or skip the cutscene."),
-            //COMPOUND_STRING("During every story related scene,the player can hold {START_BUTTON} to automaticlaly skip the cutscene."),
-            COMPOUND_STRING("Every story related scene without gameplay is automatically skipped."),
-            },
-        .numOptions = GAME_OPTION_CUTSCENE_COUNT,
-    },
-    [GAME_OPTIONS_SKIP_GUIDES] =
-    {
-        .title = COMPOUND_STRING("Adventure Guides"),
-        .options = {
-            COMPOUND_STRING("Skip None"),
-            COMPOUND_STRING("Skip General"),
-            COMPOUND_STRING("Skip All"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The game will instruct and inform players about all systems and mechanics."),
-            COMPOUND_STRING("The game will instruct and inform players about all mechanics and additions that are new to Pokémon Silicon."),
-            COMPOUND_STRING("The game will not instruct players about any game mehanics."),
-        },
-        .numOptions = GAME_OPTION_GUIDE_SKIP_COUNT,
-    },
-};
-
-// For Battle Settings
-
-static const struct OptionData BattleSettings_Settings_Options[NUM_OPTIONS_BATTLE_SETTINGS] =
-{
-    [BATTLE_OPTIONS_PRESET] =
-    {
-        .title = COMPOUND_STRING("Battle Settings"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("Challenge"),
-            COMPOUND_STRING("Speedrun"),
-            COMPOUND_STRING("Nuzlocke"),
-            COMPOUND_STRING("Kaizo"),
-            COMPOUND_STRING("Custom"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Default Description"),
-            COMPOUND_STRING("Challenge Description"),
-            COMPOUND_STRING("Speedrun Description"),
-            COMPOUND_STRING("Nuzlocke Description"),
-            COMPOUND_STRING("Kaizo Description"),
-            COMPOUND_STRING("Custom Description"),
-        },
-        .numOptions = 6,
-    },
-    [BATTLE_OPTIONS_EXPERIENCE] =
-    {
-        .title = COMPOUND_STRING("Experience"),
-        .options = {
-            COMPOUND_STRING("All"),
-            COMPOUND_STRING("Party"),
-            COMPOUND_STRING("Active"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party and the player's PC storage boxes."),
-            COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party."),
-            COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to the Pokemon that participated in battle."),
-        },
-        .numOptions = 3,
-    },
-    [BATTLE_OPTIONS_POINTS_MESSAGES] =
-    {
-        .title = COMPOUND_STRING("Points Message"),
-        .options = {
-            COMPOUND_STRING("On"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When a Pokémon gains Experience or Effort Values, a message will be displayed."),
-            COMPOUND_STRING("When a Pokémon gains Experience of Effort Values a message will NOT be displayed."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_EXP_MULTIPLIER] =
-    {
-        .title = COMPOUND_STRING("Exp Multiplier"),
-        .options = {
-            COMPOUND_STRING("0"),
-            COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("2"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Exp. Points earned in battle are multiplied by 0."),
-            COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
-            COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
-        },
-        .numOptions = BATTLE_OPTION_MULTIPLIER_COUNT,
-    },
-    [BATTLE_OPTIONS_EFFORT_VALUES] =
-    {
-        .title = COMPOUND_STRING("Effort Values"),
-        .options = {
-            COMPOUND_STRING("Disabled"),
-            COMPOUND_STRING("Enabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When a Pokémon's stats are calculated, their Effort Values do not impact the calculation."),
-            COMPOUND_STRING("When a Pokémon's stats are calculated, their Effort Values impact the calculation normally."),
-        },
-        .numOptions = BATTLE_OPTION_EFFORT_VALUES_COUNT,
-    },
-    [BATTLE_OPTIONS_INDIVIDUAL_VALUES] =
-    {
-        .title = COMPOUND_STRING("Individual Values"),
-        .options = {
-            COMPOUND_STRING("Disabled"),
-            COMPOUND_STRING("Enabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When a Pokémon's stats are calculated, their Individual Values are assumed to be 31 / Perfect."),
-            COMPOUND_STRING("When a Pokémon's stats are calculated, their Individual Values are not altered in any way."),
-        },
-        .numOptions = BATTLE_OPTION_INDIVIDUAL_VALUES_COUNT,
-    },
-    [BATTLE_OPTIONS_PLAYER_LEVEL] =
-    {
-        .title = COMPOUND_STRING("Player Level"),
-        .options = {
-            COMPOUND_STRING("Level Cap"),
-            COMPOUND_STRING("No Cap"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("As the player progresses, their Pokémon will never grow past a certain level. This level grows throughout the game."),
-            COMPOUND_STRING("Pokémon have no restrictions on their ability to grow."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_TRAINER_SCALING] =
-    {
-        .title = COMPOUND_STRING("Trainer Scaling"),
-        .options = {
-            COMPOUND_STRING("Party"),
-            COMPOUND_STRING("Level"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Enemy Trainer Pokémon species and levels change based on the size of the player's party and the highest leveled Pokémon in their party."),
-            COMPOUND_STRING("Enemy Trainer Pokémon levels change based on the size of the player's party and the highest leveled Pokémon in their party."),
-            COMPOUND_STRING("Enemy Trainer Pokémon do not change."),
-        },
-        .numOptions = BATTLE_OPTION_TRAINER_SCALING_COUNT,
-    },
-    [BATTLE_OPTIONS_WILD_SCALING] =
-    {
-        .title = COMPOUND_STRING("Wild Scaling"),
-        .options = {
-            COMPOUND_STRING("On"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-        },
-        .numOptions = BATTLE_OPTION_WILD_SCALING_COUNT,
-    },
-    [BATTLE_OPTIONS_SWITCH_STYLE] =
-    {
-        .title = COMPOUND_STRING("Switch Style"),
-        .options = {
-            COMPOUND_STRING("Switch"),
-            COMPOUND_STRING("Set"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The player is allowed to switch their Pokémon whenver the opponent sends out their next Pokémon."),
-            COMPOUND_STRING("The player is not allowed to switch their Pokémon whenever the opponent sends out their next Pokémon."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_TAKE_WILD_ITEMS] =
-    {
-        .title = COMPOUND_STRING("Take Wild Items"),
-        .options = {
-            COMPOUND_STRING("Never"),
-            COMPOUND_STRING("Ask"),
-            COMPOUND_STRING("Always"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When Wild Pokémon faint while holding an item nothing happens."),
-            COMPOUND_STRING("When Wild Pokémon faint while holding an item the player is asked if they want to take it."),
-            COMPOUND_STRING("When Wild Pokémon faint while holding an item the player will add the item to their Bag."),
-        },
-        .numOptions = 3,
-    },
-    [BATTLE_OPTIONS_LAST_USED_BALL] =
-    {
-        .title = COMPOUND_STRING("Last Used Ball"),
-        .options = {
-            COMPOUND_STRING("Last Ball"),
-            COMPOUND_STRING("Best Ball"),
-            COMPOUND_STRING("After 1st"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the last one thrown by the palyer."),
-            COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the ball with the best chance of success."),
-            COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the last one thrown by the player during this battle."),
-            COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will NOT throw a Poké Ball."),
-        },
-        .numOptions = BATTLE_OPTION_BALL_COUNT,
-    },
-    [BATTLE_OPTIONS_QUICK_RUN] =
-    {
-        .title = COMPOUND_STRING("Quick Run"),
-        .options = {
-            COMPOUND_STRING("{B_BUTTON} {RIGHT_ARROW} {A_BUTTON}"),
-            COMPOUND_STRING("{L_BUTTON}"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("In a battle, pressing {B_BUTTON} {RIGHT_ARROW} {A_BUTTON} from the main battle menu will attempt to run from battle."),
-            COMPOUND_STRING("In a battle, pressing {L_BUTTON} from the main battle menu will attempt to run from battle."),
-            COMPOUND_STRING("In a battle, there is no button to quickly flee."),
-        },
-        .numOptions = BATTLE_OPTION_QUICK_RUN_COUNT,
-    },
-    [BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] =
-    {
-        .title = COMPOUND_STRING("Mid Battle Evo"),
-        .options = {
-            COMPOUND_STRING("On"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("If a Pokémon meets the threshold for evolution during battle, it will evolve during the battle."),
-            COMPOUND_STRING("If a Pokémon meets the threshold for evolution during battle, it will evolve after the player wins the battle."),
-        },
-        .numOptions = BATTLE_OPTION_MID_BATTLE_EVOLUTION_COUNT,
-    },
-    [BATTLE_OPTIONS_BATTLE_DIFFICULTY] =
-    {
-        .title = COMPOUND_STRING("Battle Difficulty"),
-        .options = {
-            COMPOUND_STRING("Cinematic"),
-            COMPOUND_STRING("Standard"),
-            COMPOUND_STRING("Challenge"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Battles use weaker Pokemon and strategies. This is the difficulty of a normal Pokemon title. Designed for those that don't want a challenge."),
-            COMPOUND_STRING("Battles use strong Pokemon and strategies. More difficult than a normal Pokemon title. Designed for players of all skill levels."),
-            COMPOUND_STRING("Battles use extreme Pokemon and strategies. Designed only for battling experts."),
-        },
-        .numOptions = BATTLE_OPTION_DIFFICULTY_COUNT,
-    },
-    [BATTLE_OPTIONS_FAINTED_MON] =
-    {
-        .title = COMPOUND_STRING("Fainted Mon"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("Box"),
-            COMPOUND_STRING("Release"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Pokémon in the player's party faint normally."),
-            COMPOUND_STRING("Pokémon in the player's party are sent to the box when they faint, and cannot be withdrawn."),
-            COMPOUND_STRING("Pokémon in the player's party are released when they faint."),
-        },
-        .numOptions = 3,
-    },
-    [BATTLE_OPTIONS_FIRST_POKEMON_CATCH] =
-    {
-        .title = COMPOUND_STRING("First Pokemon Catch"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("First Only"),
-            COMPOUND_STRING("Duplicate"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Players can catch Pokémon normally."),
-            COMPOUND_STRING("Players can catch only catch the first Pokémon encoutered on a route. Shiny Pokémon can always be captured."),
-            COMPOUND_STRING("Players can catch only catch the first  new Pokémon encoutered on a route. Shiny Pokémon can always be captured."),
-        },
-        .numOptions = 3,
-    },
-    [BATTLE_OPTIONS_NICKNAME] =
-    {
-        .title = COMPOUND_STRING("Nickname"),
-        .options = {
-            COMPOUND_STRING("Ask"),
-            COMPOUND_STRING("Forced"),
-            COMPOUND_STRING("None"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Players are asked if they want to nickname a new Pokémon upon capture."),
-            COMPOUND_STRING("Players forced to nickname a new Pokémon upon capture."),
-            COMPOUND_STRING("Players are not asked if they want to nickname a new Pokémon upon capture."),
-        },
-        .numOptions = 3,
-    },
-    [BATTLE_OPTIONS_WHITEOUT] =
-    {
-        .title = COMPOUND_STRING("Whiteout"),
-        .options = {
-            COMPOUND_STRING("Respawn"),
-            COMPOUND_STRING("Death"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("When 'Fainted Mon' is turned on & the player whites out, a Pokémon is withdrawn from PC. If there are no Pokémon, the game loads the last save."),
-            COMPOUND_STRING("When 'Fainted Mon' is turned on & the player whites out, the save file is permanently deleted!"),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_ITEM_HEALING] =
-    {
-        .title = COMPOUND_STRING("Item Healing"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("Disabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Players can use items to heal Hit Points and Power Points."),
-            COMPOUND_STRING("Players can not use items to heal Hit Points and Power Points."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_CENTER_HEALING] =
-    {
-        .title = COMPOUND_STRING("Center Healing"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("Disabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Pokémon Centers and rest stops will heal the player's party."),
-            COMPOUND_STRING("Pokémon Centers and rest stops will not heal the player's party."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_MOVE_HEALING] =
-    {
-        .title = COMPOUND_STRING("Move Healing"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("Disabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Players can use moves to heal Hit Points and Power Points."),
-            COMPOUND_STRING("Players can not use moves to heal Hit Points and Power Points."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_BAG_ITEMS] =
-    {
-        .title = COMPOUND_STRING("Bag Items"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("No Boss"),
-            COMPOUND_STRING("No Trainer"),
-            COMPOUND_STRING("4 Items"),
-            COMPOUND_STRING("No Items"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The player can use items during battle."),
-            COMPOUND_STRING("The player cannot use items during Gym and Important battles."),
-            COMPOUND_STRING("The player cannot use items during Trainer battles."),
-            COMPOUND_STRING("The player can use up to 4 items during a single battle."),
-            COMPOUND_STRING("The player cannot use items during battle."),
-        },
-        .numOptions = 5,
-    },
-    [BATTLE_OPTIONS_OPPONENTS_ITEMS] =
-    {
-        .title = COMPOUND_STRING("Opponent Items"),
-        .options = {
-            COMPOUND_STRING("Allowed"),
-            COMPOUND_STRING("Disabled"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Opposing Trainers can use up to 4 items during battle."),
-            COMPOUND_STRING("Opposing Trainers can not use items during battle."),
-        },
-        .numOptions = 2,
-    },
-    /*
-    [BATTLE_OPTIONS_BASE_STAT_EQUALIZER] =
-    {
-        .title = COMPOUND_STRING("Base Stat Equalizer"),
-        .options = {
-            COMPOUND_STRING("Disabled"),
-            COMPOUND_STRING("100"),
-            COMPOUND_STRING("255"),
-            COMPOUND_STRING("500"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Disabled"),
-            COMPOUND_STRING("100"),
-            COMPOUND_STRING("255"),
-            COMPOUND_STRING("500"),
-        },
-        .numOptions = 4,
-    },
-    [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE] =
-    {
-        .title = COMPOUND_STRING("One Type Challenge"),
-        .options = {
-            COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("Fighting"),
-            COMPOUND_STRING("Flying"),
-            COMPOUND_STRING("Poison"),
-            COMPOUND_STRING("Ground"),
-            COMPOUND_STRING("Rock"),
-            COMPOUND_STRING("Bug"),
-            COMPOUND_STRING("Ghost"),
-            COMPOUND_STRING("Steel"),
-            COMPOUND_STRING("Fire"),
-            COMPOUND_STRING("Water"),
-            COMPOUND_STRING("Grass"),
-            COMPOUND_STRING("Electric"),
-            COMPOUND_STRING("Psychic"),
-            COMPOUND_STRING("Ice"),
-            COMPOUND_STRING("Dragon"),
-            COMPOUND_STRING("Dark"),
-            COMPOUND_STRING("Fairy"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("Fighting"),
-            COMPOUND_STRING("Flying"),
-            COMPOUND_STRING("Poison"),
-            COMPOUND_STRING("Ground"),
-            COMPOUND_STRING("Rock"),
-            COMPOUND_STRING("Bug"),
-            COMPOUND_STRING("Ghost"),
-            COMPOUND_STRING("Steel"),
-            COMPOUND_STRING("Fire"),
-            COMPOUND_STRING("Water"),
-            COMPOUND_STRING("Grass"),
-            COMPOUND_STRING("Electric"),
-            COMPOUND_STRING("Psychic"),
-            COMPOUND_STRING("Ice"),
-            COMPOUND_STRING("Dragon"),
-            COMPOUND_STRING("Dark"),
-            COMPOUND_STRING("Fairy"),
-        },
-        .numOptions = NUMBER_OF_MON_TYPES + 1,
-    },
-    */
-    [BATTLE_OPTIONS_TYPE_ICONS] =
-    {
-        .title = COMPOUND_STRING("Type Icons"),
-        .options = {
-            COMPOUND_STRING("Show"),
-            COMPOUND_STRING("Hide"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Not implemented."),
-            COMPOUND_STRING("Not implemented."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_ANIMATIONS] =
-    {
-        .title = COMPOUND_STRING("Animations"),
-        .options = {
-            COMPOUND_STRING("On"),
-            COMPOUND_STRING("Off"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are played."),
-            COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are not played."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_INTRO] =
-    {
-        .title = COMPOUND_STRING("Battle Intro"),
-        .options = {
-            COMPOUND_STRING("Normal"),
-            COMPOUND_STRING("Skip"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The slide animation that happens at the beginning of the battle plays normally."),
-            COMPOUND_STRING("The slide animation that happens at the beginning of the battle is skipped."),
-        },
-        .numOptions = 2,
-    },
-    [BATTLE_OPTIONS_HP_SPEED] =
-    {
-        .title = COMPOUND_STRING("HP Speed"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("Fast"),
-            COMPOUND_STRING("Instant"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The speed at which the HP bar will change  is normal."),
-            COMPOUND_STRING("The speed at which the HP bar will change  is fast."),
-            COMPOUND_STRING("The speed at which the HP bar will change  is instaneous."),
-        },
-        .numOptions = BATTLE_OPTION_BAR_SPEED_COUNT,
-    },
-    [BATTLE_OPTIONS_EXP_SPEED] =
-    {
-        .title = COMPOUND_STRING("EXP Speed"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("Fast"),
-            COMPOUND_STRING("Instant"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("The speed at which the HP bar will change  is normal."),
-            COMPOUND_STRING("The speed at which the HP bar will change  is fast."),
-            COMPOUND_STRING("The speed at which the HP bar will change  is instaneous."),
-        },
-        .numOptions = BATTLE_OPTION_BAR_SPEED_COUNT,
-    },
-};
-
-// For Visual Settings
-
-static const struct OptionData VisualSettings_Settings_Options[NUM_OPTIONS_VISUAL_SETTINGS] =
-{
-    [VISUAL_OPTIONS_PRESET] =
-    {
-        .title = COMPOUND_STRING("Visual Settings"),
-        .options = {
-            COMPOUND_STRING("Default"),
-            COMPOUND_STRING("Speedrun"),
-            COMPOUND_STRING("Custom"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Default Description"),
-            COMPOUND_STRING("Speedrun Description"),
-            COMPOUND_STRING("Custom Description"),
-            },
-        .numOptions = 3,
-    },
-    [VISUAL_OPTIONS_UNITS] =
-    {
-        .title = COMPOUND_STRING("Units"),
-        .options = {
-            COMPOUND_STRING("Imperial ."),
-            COMPOUND_STRING("Metric ."),
-            COMPOUND_STRING("Imperial ,"),
-            COMPOUND_STRING("Metric ,"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("The Pokémon Cranidos weighs 64.4 lbs."),
-            COMPOUND_STRING("The Pokémon Cranidos weighs 31.5 kg."),
-            COMPOUND_STRING("The Pokémon Cranidos weighs 64,4 lbs."),
-            COMPOUND_STRING("The Pokémon Cranidos weighs 31,5 kg."),
-            },
-        .numOptions = VISUAL_OPTION_UNITS_COUNT,
-    },
-    [VISUAL_OPTIONS_TIME] =
-    {
-        .title = COMPOUND_STRING("Time"),
-        .options = {
-            COMPOUND_STRING("24 Hour"),
-            COMPOUND_STRING("12 Hour"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("The most interesting time of day is 16:20."),
-            COMPOUND_STRING("The most interesting time of day is 4:20 PM."),
-            },
-        .numOptions = VISUAL_OPTION_TIME_COUNT,
-    },
-    [VISUAL_OPTIONS_TEXT_SPEED] =
-    {
-        .title = COMPOUND_STRING("Text Speed"),
-        .options = {
-            COMPOUND_STRING("Slow"),
-            COMPOUND_STRING("Medium"),
-            COMPOUND_STRING("Fast"),
-            COMPOUND_STRING("Instant"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Slow"),
-            COMPOUND_STRING("Medium"),
-            COMPOUND_STRING("Fast"),
-            COMPOUND_STRING("Instant"),
-            },
-        .numOptions = 4,
-    },
-    [VISUAL_OPTIONS_FONT_SWITCHER] =
-    {
-        .title = COMPOUND_STRING("Font Switcher"),
-        .options = {
-            COMPOUND_STRING("Emerald"),
-            COMPOUND_STRING("Fire Red"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("All interfaces will use the font from Emerald."),
-            COMPOUND_STRING("All interfaces will use the font from Fire Red."),
-            },
-        .numOptions = 2,
-    },
-    [VISUAL_OPTIONS_COLOR] =
-    {
-        .title = COMPOUND_STRING("Color"),
-        .options = {
-            COMPOUND_STRING("Red"),
-            COMPOUND_STRING("Green"),
-            COMPOUND_STRING("Blue"),
-            COMPOUND_STRING("Yellow"),
-            COMPOUND_STRING("Black"),
-            COMPOUND_STRING("White"),
-            COMPOUND_STRING("Platinum"),
-            COMPOUND_STRING("Scarlet"),
-            COMPOUND_STRING("Violet"),
-            COMPOUND_STRING("Custom"),
-            },
-        .optionDescription = {
-            COMPOUND_STRING("Game elements will use Red as an accent color."),
-            COMPOUND_STRING("Game elements will use Green as an accent color."),
-            COMPOUND_STRING("Game elements will use Blue as an accent color."),
-            COMPOUND_STRING("Game elements will use Yellow as an accent color."),
-            COMPOUND_STRING("Game elements will use Black as an accent color."),
-            COMPOUND_STRING("Game elements will use White as an accent color."),
-            COMPOUND_STRING("Game elements will use Platinum as an accent color."),
-            COMPOUND_STRING("Game elements will use Scarlet as an accent color."),
-            COMPOUND_STRING("Game elements will use Violet as an accent color."),
-            COMPOUND_STRING("Game elements will use a custom accent color."),
-            },
-        .numOptions = 10,
-    },
-    [VISUAL_OPTIONS_COLOR_VARIATION] =
-    {
-        .title = COMPOUND_STRING("Pokémon Variation"),
-        .options = {
-            COMPOUND_STRING("None"),
-            COMPOUND_STRING("Persona"),
-            COMPOUND_STRING("Stats"),
-            COMPOUND_STRING("Nickname"),
-        },
-        .optionDescription = {
-            COMPOUND_STRING("Your Pokémon's color will not be influenced by any other factors."),
-            COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's hidden personality value."),
-            COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's Individual Values."),
-            COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's nickname and the Pokémon's Original Trainer's name."),
-        },
-        .numOptions = VISUAL_OPTION_COLOR_VARIATION_COUNT,
-    },
-};
-
-// For Music Settings
-
-static const struct OptionData MusicSettings_Settings_Options[NUM_OPTIONS_MUSIC_SETTINGS] =
-{
-    [MUSIC_OPTIONS_PRESET] =
-    {
-        .title = COMPOUND_STRING("Music Settings"),
-        .options =
+        [GAME_OPTIONS_PRESET] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-            COMPOUND_STRING("Custom"),
+            .title = COMPOUND_STRING("Game Settings"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Speedrun"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default Description"),
+                COMPOUND_STRING("Speedrun Description"),
+                COMPOUND_STRING("Custom Description"),
+            },
+            .numOptions = GAME_PRESET_COUNT,
         },
-        .optionDescription =
+        [GAME_OPTIONS_SAVE_BOOT] =
         {
-            COMPOUND_STRING("PSF Description"),
-            COMPOUND_STRING("LGPE Description"),
-            COMPOUND_STRING("HGSS Description"),
-            COMPOUND_STRING("ORAS Description"),
-            COMPOUND_STRING("BDSP Description"),
-            COMPOUND_STRING("BW2 Description"),
-            COMPOUND_STRING("XY Description"),
-            COMPOUND_STRING("USUM Description"),
-            COMPOUND_STRING("SWSH Description"),
-            COMPOUND_STRING("SV Description"),
-            COMPOUND_STRING("Custom Description"),
+            .title = COMPOUND_STRING("Save Boot"),
+            .options = {
+                COMPOUND_STRING("Traditional"),
+                COMPOUND_STRING("Continue"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will proceed to the Main Menu."),
+                COMPOUND_STRING("After pressing {START_BUTTON} on the title screen, the game will directly proceed to the saved adventure."),
+            },
+            .numOptions = GAME_OPTION_SAVE_BOOT_COUNT,
         },
-        .numOptions = MUSIC_PRESET_COUNT,
+        [GAME_OPTIONS_BUTTON_MODE] =
+        {
+            .title = COMPOUND_STRING("Button Mode"),
+            .options = {
+                COMPOUND_STRING("{L_BUTTON}{R_BUTTON}"),
+                COMPOUND_STRING("{L_BUTTON} {EMOJI_EQUALS} {A_BUTTON}"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("{L_BUTTON} and {R_BUTTON} are used for navigation within menus."),
+                COMPOUND_STRING("Pressing {L_BUTTON} is treated like {A_BUTTON}. {R_BUTTON} is used for navigation within menus. When {L_BUTTON} is held, it is treated like a turbo {A_BUTTON}."),
+            },
+            .numOptions = OPTIONS_BUTTON_MODE_L_MODE_COUNT,
+        },
+        [GAME_OPTIONS_SAVE_BEHAVIOR] =
+        {
+            .title = COMPOUND_STRING("Save Behavior"),
+            .options = {
+                COMPOUND_STRING("Manual"),
+                COMPOUND_STRING("Automatic"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Players will need to manually save their progress."),
+                COMPOUND_STRING("Progress will automatically save after ten wild battles since the last save, after every cutscene, and after every heal at the Pokémon Center."),
+            },
+            .numOptions = GAME_OPTION_AUTOSAVE_COUNT,
+        },
+        [GAME_OPTIONS_RUN] =
+        {
+            .title = COMPOUND_STRING("Run"),
+            .options = {
+                COMPOUND_STRING("Always"),
+                COMPOUND_STRING("Toggle"),
+                COMPOUND_STRING("Manual"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The player will always run. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will walk."),
+                COMPOUND_STRING("Pressing the {L_BUTTON} will change the player's behavior betweeen always walking and always running."),
+                COMPOUND_STRING("The player will always walk. When holding the {B_BUTTON} and using {DPAD_UPDOWN}, the player will run."),
+            },
+            .numOptions = 3,
+        },
+        [GAME_OPTIONS_PUZZLES] =
+        {
+            .title = COMPOUND_STRING("Puzzles"),
+            .options = {
+                COMPOUND_STRING("Disabled"),
+                COMPOUND_STRING("Normal"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Puzzles outside of Pokémon battles are disabled."),
+                COMPOUND_STRING("Puzzles function as normal."),
+            },
+            .numOptions = 2,
+        },
+        [GAME_OPTIONS_CUTSCENE] =
+        {
+            .title = COMPOUND_STRING("Cutscenes"),
+            .options = {
+                COMPOUND_STRING("Play"),
+                //COMPOUND_STRING("Ask"),
+                //COMPOUND_STRING("Hold"),
+                COMPOUND_STRING("Skip"),
+            },
+            .optionDescription = {
+                //COMPOUND_STRING("Story related scenes without gameplay will play as normal."),
+                COMPOUND_STRING("Story related scenes without gameplay will play as normal. The player can hold {START_BUTTON} to automatically skip the cutscene."),
+                //COMPOUND_STRING("Before every story related scene,the player is asked if they would like to play or skip the cutscene."),
+                //COMPOUND_STRING("During every story related scene,the player can hold {START_BUTTON} to automaticlaly skip the cutscene."),
+                COMPOUND_STRING("Every story related scene without gameplay is automatically skipped."),
+            },
+            .numOptions = GAME_OPTION_CUTSCENE_COUNT,
+        },
+        [GAME_OPTIONS_SKIP_GUIDES] =
+        {
+            .title = COMPOUND_STRING("Adventure Guides"),
+            .options = {
+                COMPOUND_STRING("Skip None"),
+                COMPOUND_STRING("Skip General"),
+                COMPOUND_STRING("Skip All"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The game will instruct and inform players about all systems and mechanics."),
+                COMPOUND_STRING("The game will instruct and inform players about all mechanics and additions that are new to Pokémon Silicon."),
+                COMPOUND_STRING("The game will not instruct players about any game mehanics."),
+            },
+            .numOptions = GAME_OPTION_GUIDE_SKIP_COUNT,
+        },
     },
-    [MUSIC_OPTIONS_SPEAKER] =
+    [BATTLE_SETTINGS] = 
     {
-        .title = COMPOUND_STRING("Speaker"),
-        .options =
+        [BATTLE_OPTIONS_PRESET] =
         {
-            COMPOUND_STRING("Mono"),
-            COMPOUND_STRING("Stereo"),
+            .title = COMPOUND_STRING("Battle Settings"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Challenge"),
+                COMPOUND_STRING("Speedrun"),
+                COMPOUND_STRING("Nuzlocke"),
+                COMPOUND_STRING("Kaizo"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default Description"),
+                COMPOUND_STRING("Challenge Description"),
+                COMPOUND_STRING("Speedrun Description"),
+                COMPOUND_STRING("Nuzlocke Description"),
+                COMPOUND_STRING("Kaizo Description"),
+                COMPOUND_STRING("Custom Description"),
+            },
+            .numOptions = 6,
         },
-        .optionDescription =
+        [BATTLE_OPTIONS_EXPERIENCE] =
         {
-            COMPOUND_STRING("Mono"),
-            COMPOUND_STRING("Stereo"),
+            .title = COMPOUND_STRING("Experience"),
+            .options = {
+                COMPOUND_STRING("All"),
+                COMPOUND_STRING("Party"),
+                COMPOUND_STRING("Active"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party and the player's PC storage boxes."),
+                COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to all the Pokemon in the player's party."),
+                COMPOUND_STRING("Exp. Points and Effort Values earned in battle are given to the Pokemon that participated in battle."),
+            },
+            .numOptions = 3,
         },
-        .numOptions = 2,
+        [BATTLE_OPTIONS_POINTS_MESSAGES] =
+        {
+            .title = COMPOUND_STRING("Points Message"),
+            .options = {
+                COMPOUND_STRING("On"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("When a Pokémon gains Experience or Effort Values, a message will be displayed."),
+                COMPOUND_STRING("When a Pokémon gains Experience of Effort Values a message will NOT be displayed."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_EXP_MULTIPLIER] =
+        {
+            .title = COMPOUND_STRING("Exp Multiplier"),
+            .options = {
+                COMPOUND_STRING("0"),
+                COMPOUND_STRING("Normal"),
+                COMPOUND_STRING("2"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Exp. Points earned in battle are multiplied by 0."),
+                COMPOUND_STRING("Exp. Points earned in battle are multiplied by 1."),
+                COMPOUND_STRING("Exp. Points earned in battle are multiplied by 2."),
+            },
+            .numOptions = BATTLE_OPTION_MULTIPLIER_COUNT,
+        },
+        [BATTLE_OPTIONS_EFFORT_VALUES] =
+        {
+            .title = COMPOUND_STRING("Effort Values"),
+            .options = {
+                COMPOUND_STRING("Disabled"),
+                COMPOUND_STRING("Enabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("When a Pokémon's stats are calculated, their Effort Values do not impact the calculation."),
+                COMPOUND_STRING("When a Pokémon's stats are calculated, their Effort Values impact the calculation normally."),
+            },
+            .numOptions = BATTLE_OPTION_EFFORT_VALUES_COUNT,
+        },
+        [BATTLE_OPTIONS_INDIVIDUAL_VALUES] =
+        {
+            .title = COMPOUND_STRING("Individual Values"),
+            .options = {
+                COMPOUND_STRING("Disabled"),
+                COMPOUND_STRING("Enabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("When a Pokémon's stats are calculated, their Individual Values are assumed to be 31 / Perfect."),
+                COMPOUND_STRING("When a Pokémon's stats are calculated, their Individual Values are not altered in any way."),
+            },
+            .numOptions = BATTLE_OPTION_INDIVIDUAL_VALUES_COUNT,
+        },
+        [BATTLE_OPTIONS_PLAYER_LEVEL] =
+        {
+            .title = COMPOUND_STRING("Player Level"),
+            .options = {
+                COMPOUND_STRING("Level Cap"),
+                COMPOUND_STRING("No Cap"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("As the player progresses, their Pokémon will never grow past a certain level. This level grows throughout the game."),
+                COMPOUND_STRING("Pokémon have no restrictions on their ability to grow."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_TRAINER_SCALING] =
+        {
+            .title = COMPOUND_STRING("Trainer Scaling"),
+            .options = {
+                COMPOUND_STRING("Party"),
+                COMPOUND_STRING("Level"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Enemy Trainer Pokémon species and levels change based on the size of the player's party and the highest leveled Pokémon in their party."),
+                COMPOUND_STRING("Enemy Trainer Pokémon levels change based on the size of the player's party and the highest leveled Pokémon in their party."),
+                COMPOUND_STRING("Enemy Trainer Pokémon do not change."),
+            },
+            .numOptions = BATTLE_OPTION_TRAINER_SCALING_COUNT,
+        },
+        [BATTLE_OPTIONS_WILD_SCALING] =
+        {
+            .title = COMPOUND_STRING("Wild Scaling"),
+            .options = {
+                COMPOUND_STRING("On"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Not implemented."),
+                COMPOUND_STRING("Not implemented."),
+            },
+            .numOptions = BATTLE_OPTION_WILD_SCALING_COUNT,
+        },
+        [BATTLE_OPTIONS_SWITCH_STYLE] =
+        {
+            .title = COMPOUND_STRING("Switch Style"),
+            .options = {
+                COMPOUND_STRING("Switch"),
+                COMPOUND_STRING("Set"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The player is allowed to switch their Pokémon whenver the opponent sends out their next Pokémon."),
+                COMPOUND_STRING("The player is not allowed to switch their Pokémon whenever the opponent sends out their next Pokémon."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_TAKE_WILD_ITEMS] =
+        {
+            .title = COMPOUND_STRING("Take Wild Items"),
+            .options = {
+                COMPOUND_STRING("Never"),
+                COMPOUND_STRING("Ask"),
+                COMPOUND_STRING("Always"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("When Wild Pokémon faint while holding an item nothing happens."),
+                COMPOUND_STRING("When Wild Pokémon faint while holding an item the player is asked if they want to take it."),
+                COMPOUND_STRING("When Wild Pokémon faint while holding an item the player will add the item to their Bag."),
+            },
+            .numOptions = 3,
+        },
+        [BATTLE_OPTIONS_LAST_USED_BALL] =
+        {
+            .title = COMPOUND_STRING("Last Used Ball"),
+            .options = {
+                COMPOUND_STRING("Last Ball"),
+                COMPOUND_STRING("Best Ball"),
+                COMPOUND_STRING("After 1st"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the last one thrown by the palyer."),
+                COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the ball with the best chance of success."),
+                COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will throw a Poké Ball. This ball is the last one thrown by the player during this battle."),
+                COMPOUND_STRING("In a wild battle, pressing {R_BUTTON} from the main battle menu will NOT throw a Poké Ball."),
+            },
+            .numOptions = BATTLE_OPTION_BALL_COUNT,
+        },
+        [BATTLE_OPTIONS_QUICK_RUN] =
+        {
+            .title = COMPOUND_STRING("Quick Run"),
+            .options = {
+                COMPOUND_STRING("{B_BUTTON} {RIGHT_ARROW} {A_BUTTON}"),
+                COMPOUND_STRING("{L_BUTTON}"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("In a battle, pressing {B_BUTTON} {RIGHT_ARROW} {A_BUTTON} from the main battle menu will attempt to run from battle."),
+                COMPOUND_STRING("In a battle, pressing {L_BUTTON} from the main battle menu will attempt to run from battle."),
+                COMPOUND_STRING("In a battle, there is no button to quickly flee."),
+            },
+            .numOptions = BATTLE_OPTION_QUICK_RUN_COUNT,
+        },
+        [BATTLE_OPTIONS_MID_BATTLE_EVOLUTION] =
+        {
+            .title = COMPOUND_STRING("Mid Battle Evo"),
+            .options = {
+                COMPOUND_STRING("On"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("If a Pokémon meets the threshold for evolution during battle, it will evolve during the battle."),
+                COMPOUND_STRING("If a Pokémon meets the threshold for evolution during battle, it will evolve after the player wins the battle."),
+            },
+            .numOptions = BATTLE_OPTION_MID_BATTLE_EVOLUTION_COUNT,
+        },
+        [BATTLE_OPTIONS_BATTLE_DIFFICULTY] =
+        {
+            .title = COMPOUND_STRING("Battle Difficulty"),
+            .options = {
+                COMPOUND_STRING("Cinematic"),
+                COMPOUND_STRING("Standard"),
+                COMPOUND_STRING("Challenge"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Battles use weaker Pokemon and strategies. This is the difficulty of a normal Pokemon title. Designed for those that don't want a challenge."),
+                COMPOUND_STRING("Battles use strong Pokemon and strategies. More difficult than a normal Pokemon title. Designed for players of all skill levels."),
+                COMPOUND_STRING("Battles use extreme Pokemon and strategies. Designed only for battling experts."),
+            },
+            .numOptions = BATTLE_OPTION_DIFFICULTY_COUNT,
+        },
+        [BATTLE_OPTIONS_FAINTED_MON] =
+        {
+            .title = COMPOUND_STRING("Fainted Mon"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("Box"),
+                COMPOUND_STRING("Release"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Pokémon in the player's party faint normally."),
+                COMPOUND_STRING("Pokémon in the player's party are sent to the box when they faint, and cannot be withdrawn."),
+                COMPOUND_STRING("Pokémon in the player's party are released when they faint."),
+            },
+            .numOptions = 3,
+        },
+        [BATTLE_OPTIONS_FIRST_POKEMON_CATCH] =
+        {
+            .title = COMPOUND_STRING("First Pokemon Catch"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("First Only"),
+                COMPOUND_STRING("Duplicate"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Players can catch Pokémon normally."),
+                COMPOUND_STRING("Players can catch only catch the first Pokémon encoutered on a route. Shiny Pokémon can always be captured."),
+                COMPOUND_STRING("Players can catch only catch the first  new Pokémon encoutered on a route. Shiny Pokémon can always be captured."),
+            },
+            .numOptions = 3,
+        },
+        [BATTLE_OPTIONS_NICKNAME] =
+        {
+            .title = COMPOUND_STRING("Nickname"),
+            .options = {
+                COMPOUND_STRING("Ask"),
+                COMPOUND_STRING("Forced"),
+                COMPOUND_STRING("None"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Players are asked if they want to nickname a new Pokémon upon capture."),
+                COMPOUND_STRING("Players forced to nickname a new Pokémon upon capture."),
+                COMPOUND_STRING("Players are not asked if they want to nickname a new Pokémon upon capture."),
+            },
+            .numOptions = 3,
+        },
+        [BATTLE_OPTIONS_WHITEOUT] =
+        {
+            .title = COMPOUND_STRING("Whiteout"),
+            .options = {
+                COMPOUND_STRING("Respawn"),
+                COMPOUND_STRING("Death"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("When 'Fainted Mon' is turned on & the player whites out, a Pokémon is withdrawn from PC. If there are no Pokémon, the game loads the last save."),
+                COMPOUND_STRING("When 'Fainted Mon' is turned on & the player whites out, the save file is permanently deleted!"),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_ITEM_HEALING] =
+        {
+            .title = COMPOUND_STRING("Item Healing"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("Disabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Players can use items to heal Hit Points and Power Points."),
+                COMPOUND_STRING("Players can not use items to heal Hit Points and Power Points."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_CENTER_HEALING] =
+        {
+            .title = COMPOUND_STRING("Center Healing"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("Disabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Pokémon Centers and rest stops will heal the player's party."),
+                COMPOUND_STRING("Pokémon Centers and rest stops will not heal the player's party."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_MOVE_HEALING] =
+        {
+            .title = COMPOUND_STRING("Move Healing"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("Disabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Players can use moves to heal Hit Points and Power Points."),
+                COMPOUND_STRING("Players can not use moves to heal Hit Points and Power Points."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_BAG_ITEMS] =
+        {
+            .title = COMPOUND_STRING("Bag Items"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("No Boss"),
+                COMPOUND_STRING("No Trainer"),
+                COMPOUND_STRING("4 Items"),
+                COMPOUND_STRING("No Items"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The player can use items during battle."),
+                COMPOUND_STRING("The player cannot use items during Gym and Important battles."),
+                COMPOUND_STRING("The player cannot use items during Trainer battles."),
+                COMPOUND_STRING("The player can use up to 4 items during a single battle."),
+                COMPOUND_STRING("The player cannot use items during battle."),
+            },
+            .numOptions = 5,
+        },
+        [BATTLE_OPTIONS_OPPONENTS_ITEMS] =
+        {
+            .title = COMPOUND_STRING("Opponent Items"),
+            .options = {
+                COMPOUND_STRING("Allowed"),
+                COMPOUND_STRING("Disabled"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Opposing Trainers can use up to 4 items during battle."),
+                COMPOUND_STRING("Opposing Trainers can not use items during battle."),
+            },
+            .numOptions = 2,
+        },
+        /*
+           [BATTLE_OPTIONS_BASE_STAT_EQUALIZER] =
+           {
+           .title = COMPOUND_STRING("Base Stat Equalizer"),
+           .options = {
+           COMPOUND_STRING("Disabled"),
+           COMPOUND_STRING("100"),
+           COMPOUND_STRING("255"),
+           COMPOUND_STRING("500"),
+           },
+           .optionDescription = {
+           COMPOUND_STRING("Disabled"),
+           COMPOUND_STRING("100"),
+           COMPOUND_STRING("255"),
+           COMPOUND_STRING("500"),
+           },
+           .numOptions = 4,
+           },
+           [BATTLE_OPTIONS_ONE_TYPE_CHALLENGE] =
+           {
+           .title = COMPOUND_STRING("One Type Challenge"),
+           .options = {
+           COMPOUND_STRING("Normal"),
+           COMPOUND_STRING("Fighting"),
+           COMPOUND_STRING("Flying"),
+           COMPOUND_STRING("Poison"),
+           COMPOUND_STRING("Ground"),
+           COMPOUND_STRING("Rock"),
+           COMPOUND_STRING("Bug"),
+           COMPOUND_STRING("Ghost"),
+           COMPOUND_STRING("Steel"),
+           COMPOUND_STRING("Fire"),
+           COMPOUND_STRING("Water"),
+           COMPOUND_STRING("Grass"),
+           COMPOUND_STRING("Electric"),
+           COMPOUND_STRING("Psychic"),
+           COMPOUND_STRING("Ice"),
+           COMPOUND_STRING("Dragon"),
+           COMPOUND_STRING("Dark"),
+           COMPOUND_STRING("Fairy"),
+           },
+           .optionDescription = {
+           COMPOUND_STRING("Normal"),
+           COMPOUND_STRING("Fighting"),
+           COMPOUND_STRING("Flying"),
+           COMPOUND_STRING("Poison"),
+           COMPOUND_STRING("Ground"),
+           COMPOUND_STRING("Rock"),
+           COMPOUND_STRING("Bug"),
+           COMPOUND_STRING("Ghost"),
+           COMPOUND_STRING("Steel"),
+           COMPOUND_STRING("Fire"),
+           COMPOUND_STRING("Water"),
+           COMPOUND_STRING("Grass"),
+           COMPOUND_STRING("Electric"),
+           COMPOUND_STRING("Psychic"),
+           COMPOUND_STRING("Ice"),
+           COMPOUND_STRING("Dragon"),
+           COMPOUND_STRING("Dark"),
+           COMPOUND_STRING("Fairy"),
+           },
+           .numOptions = NUMBER_OF_MON_TYPES + 1,
+           },
+           */
+        [BATTLE_OPTIONS_TYPE_ICONS] =
+        {
+            .title = COMPOUND_STRING("Type Icons"),
+            .options = {
+                COMPOUND_STRING("Show"),
+                COMPOUND_STRING("Hide"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Not implemented."),
+                COMPOUND_STRING("Not implemented."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_ANIMATIONS] =
+        {
+            .title = COMPOUND_STRING("Animations"),
+            .options = {
+                COMPOUND_STRING("On"),
+                COMPOUND_STRING("Off"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are played."),
+                COMPOUND_STRING("Graphical battle elements such as move animations,  status afflications and weather are not played."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_INTRO] =
+        {
+            .title = COMPOUND_STRING("Battle Intro"),
+            .options = {
+                COMPOUND_STRING("Normal"),
+                COMPOUND_STRING("Skip"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The slide animation that happens at the beginning of the battle plays normally."),
+                COMPOUND_STRING("The slide animation that happens at the beginning of the battle is skipped."),
+            },
+            .numOptions = 2,
+        },
+        [BATTLE_OPTIONS_HP_SPEED] =
+        {
+            .title = COMPOUND_STRING("HP Speed"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Fast"),
+                COMPOUND_STRING("Instant"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The speed at which the HP bar will change  is normal."),
+                COMPOUND_STRING("The speed at which the HP bar will change  is fast."),
+                COMPOUND_STRING("The speed at which the HP bar will change  is instaneous."),
+            },
+            .numOptions = BATTLE_OPTION_BAR_SPEED_COUNT,
+        },
+        [BATTLE_OPTIONS_EXP_SPEED] =
+        {
+            .title = COMPOUND_STRING("EXP Speed"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Fast"),
+                COMPOUND_STRING("Instant"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The speed at which the HP bar will change  is normal."),
+                COMPOUND_STRING("The speed at which the HP bar will change  is fast."),
+                COMPOUND_STRING("The speed at which the HP bar will change  is instaneous."),
+            },
+            .numOptions = BATTLE_OPTION_BAR_SPEED_COUNT,
+        },
     },
-    [MUSIC_OPTIONS_SURF] =
+    [VISUAL_SETTINGS] =
     {
-        .title = COMPOUND_STRING("Surf"),
-        .options =
+        [VISUAL_OPTIONS_PRESET] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Visual Settings"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Speedrun"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default Description"),
+                COMPOUND_STRING("Speedrun Description"),
+                COMPOUND_STRING("Custom Description"),
+            },
+            .numOptions = 3,
         },
-        .optionDescription =
+        [VISUAL_OPTIONS_UNITS] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Units"),
+            .options = {
+                COMPOUND_STRING("Imperial ."),
+                COMPOUND_STRING("Metric ."),
+                COMPOUND_STRING("Imperial ,"),
+                COMPOUND_STRING("Metric ,"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The Pokémon Cranidos weighs 64.4 lbs."),
+                COMPOUND_STRING("The Pokémon Cranidos weighs 31.5 kg."),
+                COMPOUND_STRING("The Pokémon Cranidos weighs 64,4 lbs."),
+                COMPOUND_STRING("The Pokémon Cranidos weighs 31,5 kg."),
+            },
+            .numOptions = VISUAL_OPTION_UNITS_COUNT,
         },
-        .numOptions = MUSIC_OPTIONS_COUNT,
+        [VISUAL_OPTIONS_TIME] =
+        {
+            .title = COMPOUND_STRING("Time"),
+            .options = {
+                COMPOUND_STRING("24 Hour"),
+                COMPOUND_STRING("12 Hour"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("The most interesting time of day is 16:20."),
+                COMPOUND_STRING("The most interesting time of day is 4:20 PM."),
+            },
+            .numOptions = VISUAL_OPTION_TIME_COUNT,
+        },
+        [VISUAL_OPTIONS_TEXT_SPEED] =
+        {
+            .title = COMPOUND_STRING("Text Speed"),
+            .options = {
+                COMPOUND_STRING("Slow"),
+                COMPOUND_STRING("Medium"),
+                COMPOUND_STRING("Fast"),
+                COMPOUND_STRING("Instant"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Slow"),
+                COMPOUND_STRING("Medium"),
+                COMPOUND_STRING("Fast"),
+                COMPOUND_STRING("Instant"),
+            },
+            .numOptions = 4,
+        },
+        [VISUAL_OPTIONS_FONT_SWITCHER] =
+        {
+            .title = COMPOUND_STRING("Font Switcher"),
+            .options = {
+                COMPOUND_STRING("Emerald"),
+                COMPOUND_STRING("Fire Red"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("All interfaces will use the font from Emerald."),
+                COMPOUND_STRING("All interfaces will use the font from Fire Red."),
+            },
+            .numOptions = 2,
+        },
+        [VISUAL_OPTIONS_COLOR] =
+        {
+            .title = COMPOUND_STRING("Color"),
+            .options = {
+                COMPOUND_STRING("Red"),
+                COMPOUND_STRING("Green"),
+                COMPOUND_STRING("Blue"),
+                COMPOUND_STRING("Yellow"),
+                COMPOUND_STRING("Black"),
+                COMPOUND_STRING("White"),
+                COMPOUND_STRING("Platinum"),
+                COMPOUND_STRING("Scarlet"),
+                COMPOUND_STRING("Violet"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Game elements will use Red as an accent color."),
+                COMPOUND_STRING("Game elements will use Green as an accent color."),
+                COMPOUND_STRING("Game elements will use Blue as an accent color."),
+                COMPOUND_STRING("Game elements will use Yellow as an accent color."),
+                COMPOUND_STRING("Game elements will use Black as an accent color."),
+                COMPOUND_STRING("Game elements will use White as an accent color."),
+                COMPOUND_STRING("Game elements will use Platinum as an accent color."),
+                COMPOUND_STRING("Game elements will use Scarlet as an accent color."),
+                COMPOUND_STRING("Game elements will use Violet as an accent color."),
+                COMPOUND_STRING("Game elements will use a custom accent color."),
+            },
+            .numOptions = 10,
+        },
+        [VISUAL_OPTIONS_COLOR_VARIATION] =
+        {
+            .title = COMPOUND_STRING("Pokémon Variation"),
+            .options = {
+                COMPOUND_STRING("None"),
+                COMPOUND_STRING("Persona"),
+                COMPOUND_STRING("Stats"),
+                COMPOUND_STRING("Nickname"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Your Pokémon's color will not be influenced by any other factors."),
+                COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's hidden personality value."),
+                COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's Individual Values."),
+                COMPOUND_STRING("Your Pokémon's color will be influenced by the Pokémon's nickname and the Pokémon's Original Trainer's name."),
+            },
+            .numOptions = VISUAL_OPTION_COLOR_VARIATION_COUNT,
+        },
     },
-    [MUSIC_OPTIONS_BIKE] =
+    [MUSIC_SETTINGS] = 
     {
-        .title = COMPOUND_STRING("Bike"),
-        .options =
+        [MUSIC_OPTIONS_PRESET] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Music Settings"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF Description"),
+                COMPOUND_STRING("LGPE Description"),
+                COMPOUND_STRING("HGSS Description"),
+                COMPOUND_STRING("ORAS Description"),
+                COMPOUND_STRING("BDSP Description"),
+                COMPOUND_STRING("BW2 Description"),
+                COMPOUND_STRING("XY Description"),
+                COMPOUND_STRING("USUM Description"),
+                COMPOUND_STRING("SWSH Description"),
+                COMPOUND_STRING("SV Description"),
+                COMPOUND_STRING("Custom Description"),
+            },
+            .numOptions = MUSIC_PRESET_COUNT,
         },
-        .optionDescription =
+        [MUSIC_OPTIONS_SPEAKER] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Speaker"),
+            .options =
+            {
+                COMPOUND_STRING("Mono"),
+                COMPOUND_STRING("Stereo"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("Mono"),
+                COMPOUND_STRING("Stereo"),
+            },
+            .numOptions = 2,
         },
-        .numOptions = MUSIC_OPTIONS_COUNT,
+        [MUSIC_OPTIONS_SURF] =
+        {
+            .title = COMPOUND_STRING("Surf"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_BIKE] =
+        {
+            .title = COMPOUND_STRING("Bike"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_WILD] =
+        {
+            .title = COMPOUND_STRING("Wild Battle"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_TRAINER] =
+        {
+            .title = COMPOUND_STRING("Trainer Battle"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_GYM] =
+        {
+            .title = COMPOUND_STRING("Gym Battle"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_TOURNAMENT] =
+        {
+            .title = COMPOUND_STRING("Tournament Battle"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_CHAMPION] =
+        {
+            .title = COMPOUND_STRING("Champion Battle"),
+            .options =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("PSF"),
+                COMPOUND_STRING("LGPE"),
+                COMPOUND_STRING("HGSS"),
+                COMPOUND_STRING("ORAS"),
+                COMPOUND_STRING("BDSP"),
+                COMPOUND_STRING("BW2"),
+                COMPOUND_STRING("XY"),
+                COMPOUND_STRING("USUM"),
+                COMPOUND_STRING("SWSH"),
+                COMPOUND_STRING("SV"),
+            },
+            .numOptions = MUSIC_OPTIONS_COUNT,
+        },
+        [MUSIC_OPTIONS_MUTE_MUSIC] =
+        {
+            .title = COMPOUND_STRING("Mute Music"),
+            .options =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
+        },
+        [MUSIC_OPTIONS_MUTE_SOUNDFX] =
+        {
+            .title = COMPOUND_STRING("Mute Sound Effects"),
+            .options =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
+        },
+        [MUSIC_OPTIONS_MUTE_CRIES] =
+        {
+            .title = COMPOUND_STRING("Mute Cries"),
+            .options =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
+        },
+        [MUSIC_OPTIONS_MUTE_FANFARES] =
+        {
+            .title = COMPOUND_STRING("Mute Fanfares"),
+            .options =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .optionDescription =
+            {
+                COMPOUND_STRING("Unmuted"),
+                COMPOUND_STRING("Muted"),
+            },
+            .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
+        },
     },
-    [MUSIC_OPTIONS_WILD] =
+    [RANDOM_SETTINGS] = 
     {
-        .title = COMPOUND_STRING("Wild Battle"),
-        .options =
+        [RANDOM_OPTIONS_PRESET] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Random Settings"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Sane"),
+                COMPOUND_STRING("Crazy"),
+                COMPOUND_STRING("Total Chaos"),
+                COMPOUND_STRING("Custom"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default Description"),
+                COMPOUND_STRING("Sane Description"),
+                COMPOUND_STRING("Crazy Description"),
+                COMPOUND_STRING("Total Chaos Description"),
+                COMPOUND_STRING("Custom Description"),
+            },
+            .numOptions = 5,
         },
-        .optionDescription =
+        [RANDOM_OPTIONS_STARTER] =
         {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
+            .title = COMPOUND_STRING("Starter"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
         },
-        .numOptions = MUSIC_OPTIONS_COUNT,
+        [RANDOM_OPTIONS_WILD_BATTLE] =
+        {
+            .title = COMPOUND_STRING("Wild Battle"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_TRAINER_BATTLE] =
+        {
+            .title = COMPOUND_STRING("Trainer Battle"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_EVOLUTION] =
+        {
+            .title = COMPOUND_STRING("Evolution"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Legends"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Legends"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 4,
+        },
+        [RANDOM_OPTIONS_EVOLUTION_METHOD] =
+        {
+            .title = COMPOUND_STRING("Evolution Method"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_TYPE_EFFECTIVENESS] =
+        {
+            .title = COMPOUND_STRING("Type Effectiveness"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_BASE_STATS] =
+        {
+            .title = COMPOUND_STRING("Base Stats"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_TYPES] =
+        {
+            .title = COMPOUND_STRING("Types"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_ABILITIES] =
+        {
+            .title = COMPOUND_STRING("Abilities"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_LEVEL_UP_MOVES] =
+        {
+            .title = COMPOUND_STRING("Level Up Moves"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_TMS] =
+        {
+            .title = COMPOUND_STRING("TMs"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_MOVE_TUTORS] =
+        {
+            .title = COMPOUND_STRING("Move Tutors"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_LEARNSETS] =
+        {
+            .title = COMPOUND_STRING("Learnsets"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_ITEMS] =
+        {
+            .title = COMPOUND_STRING("Items"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_STATIC_ENCOUNTERS] =
+        {
+            .title = COMPOUND_STRING("Static Encounters"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        },
+        [RANDOM_OPTIONS_TRAINERS] =
+        {
+            .title = COMPOUND_STRING("Trainers"),
+            .options = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .optionDescription = {
+                COMPOUND_STRING("Default"),
+                COMPOUND_STRING("Random"),
+                COMPOUND_STRING("Chaos"),
+            },
+            .numOptions = 3,
+        }
     },
-    [MUSIC_OPTIONS_TRAINER] =
-    {
-        .title = COMPOUND_STRING("Trainer Battle"),
-        .options =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .numOptions = MUSIC_OPTIONS_COUNT,
-    },
-    [MUSIC_OPTIONS_GYM] =
-    {
-        .title = COMPOUND_STRING("Gym Battle"),
-        .options =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .numOptions = MUSIC_OPTIONS_COUNT,
-    },
-    [MUSIC_OPTIONS_TOURNAMENT] =
-    {
-        .title = COMPOUND_STRING("Tournament Battle"),
-        .options =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .numOptions = MUSIC_OPTIONS_COUNT,
-    },
-    [MUSIC_OPTIONS_CHAMPION] =
-    {
-        .title = COMPOUND_STRING("Champion Battle"),
-        .options =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("PSF"),
-            COMPOUND_STRING("LGPE"),
-            COMPOUND_STRING("HGSS"),
-            COMPOUND_STRING("ORAS"),
-            COMPOUND_STRING("BDSP"),
-            COMPOUND_STRING("BW2"),
-            COMPOUND_STRING("XY"),
-            COMPOUND_STRING("USUM"),
-            COMPOUND_STRING("SWSH"),
-            COMPOUND_STRING("SV"),
-        },
-        .numOptions = MUSIC_OPTIONS_COUNT,
-    },
-    [MUSIC_OPTIONS_MUTE_MUSIC] =
-    {
-        .title = COMPOUND_STRING("Mute Music"),
-        .options =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
-    },
-    [MUSIC_OPTIONS_MUTE_SOUNDFX] =
-    {
-        .title = COMPOUND_STRING("Mute Sound Effects"),
-        .options =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
-    },
-    [MUSIC_OPTIONS_MUTE_CRIES] =
-    {
-        .title = COMPOUND_STRING("Mute Cries"),
-        .options =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
-    },
-    [MUSIC_OPTIONS_MUTE_FANFARES] =
-    {
-        .title = COMPOUND_STRING("Mute Fanfares"),
-        .options =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .optionDescription =
-        {
-            COMPOUND_STRING("Unmuted"),
-            COMPOUND_STRING("Muted"),
-        },
-        .numOptions = MUSIC_OPTIONS_MUTE_COUNT,
-    },
-};
-
-// For Random Settings
-
-static const struct OptionData RandomSettings_Settings_Options[NUM_OPTIONS_RANDOM_SETTINGS] =
-{
-	[RANDOM_OPTIONS_PRESET] =
-	{
-		.title = COMPOUND_STRING("Random Settings"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Sane"),
-			COMPOUND_STRING("Crazy"),
-			COMPOUND_STRING("Total Chaos"),
-			COMPOUND_STRING("Custom"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default Description"),
-			COMPOUND_STRING("Sane Description"),
-			COMPOUND_STRING("Crazy Description"),
-			COMPOUND_STRING("Total Chaos Description"),
-			COMPOUND_STRING("Custom Description"),
-		},
-		.numOptions = 5,
-	},
-	[RANDOM_OPTIONS_STARTER] =
-	{
-		.title = COMPOUND_STRING("Starter"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_WILD_BATTLE] =
-	{
-		.title = COMPOUND_STRING("Wild Battle"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_TRAINER_BATTLE] =
-	{
-		.title = COMPOUND_STRING("Trainer Battle"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_EVOLUTION] =
-	{
-		.title = COMPOUND_STRING("Evolution"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Legends"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Legends"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 4,
-	},
-	[RANDOM_OPTIONS_EVOLUTION_METHOD] =
-	{
-		.title = COMPOUND_STRING("Evolution Method"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_TYPE_EFFECTIVENESS] =
-	{
-		.title = COMPOUND_STRING("Type Effectiveness"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_BASE_STATS] =
-	{
-		.title = COMPOUND_STRING("Base Stats"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_TYPES] =
-	{
-		.title = COMPOUND_STRING("Types"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_ABILITIES] =
-	{
-		.title = COMPOUND_STRING("Abilities"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_LEVEL_UP_MOVES] =
-	{
-		.title = COMPOUND_STRING("Level Up Moves"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_TMS] =
-	{
-		.title = COMPOUND_STRING("TMs"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_MOVE_TUTORS] =
-	{
-		.title = COMPOUND_STRING("Move Tutors"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_LEARNSETS] =
-	{
-		.title = COMPOUND_STRING("Learnsets"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_ITEMS] =
-	{
-		.title = COMPOUND_STRING("Items"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_STATIC_ENCOUNTERS] =
-	{
-		.title = COMPOUND_STRING("Static Encounters"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	},
-	[RANDOM_OPTIONS_TRAINERS] =
-	{
-		.title = COMPOUND_STRING("Trainers"),
-		.options = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.optionDescription = {
-			COMPOUND_STRING("Default"),
-			COMPOUND_STRING("Random"),
-			COMPOUND_STRING("Chaos"),
-		},
-		.numOptions = 3,
-	}
 };
 
 static void PrintToWindow(u8 windowId, u8 colorIdx)
@@ -2775,31 +2766,31 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, GameSettings_Settings_Options[GetCurrentSlotOption(i)].title);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].title);
 					y = y + 2;
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, BattleSettings_Settings_Options[GetCurrentSlotOption(i)].title);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].title);
 					y = y + 2;
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, VisualSettings_Settings_Options[GetCurrentSlotOption(i)].title);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].title);
 					y = y + 2;
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, MusicSettings_Settings_Options[GetCurrentSlotOption(i)].title);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].title);
 					y = y + 2;
 				}
 				break;
 			default:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, RandomSettings_Settings_Options[GetCurrentSlotOption(i)].title);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 4, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].title);
 					y = y + 2;
 				}
 				break;
@@ -2816,19 +2807,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 
 			switch(i){
 				case GAME_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, GameSettings_Settings_Options[0].options[Temporal_Options_Game_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].options[Temporal_Options_Game_Settings[0]]);
 					break;
 				case BATTLE_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, BattleSettings_Settings_Options[0].options[Temporal_Options_Battle_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].options[Temporal_Options_Battle_Settings[0]]);
 					break;
 				case VISUAL_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, VisualSettings_Settings_Options[0].options[Temporal_Options_Visual_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].options[Temporal_Options_Visual_Settings[0]]);
 					break;
 				case MUSIC_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, MusicSettings_Settings_Options[0].options[Temporal_Options_Music_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].options[Temporal_Options_Music_Settings[0]]);
 					break;
 				case RANDOM_SETTINGS:
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, RandomSettings_Settings_Options[0].options[Temporal_Options_Random_Settings[0]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].options[Temporal_Options_Random_Settings[0]]);
 					break;
 			}
 			y = y + 2;
@@ -2841,31 +2832,31 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 		switch(currentScreenId){
 			case GAME_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, GameSettings_Settings_Options[GetCurrentSlotOption(i)].options[Temporal_Options_Game_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Game_Settings[GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case BATTLE_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, BattleSettings_Settings_Options[GetCurrentSlotOption(i)].options[Temporal_Options_Battle_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Battle_Settings[GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case VISUAL_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, VisualSettings_Settings_Options[GetCurrentSlotOption(i)].options[Temporal_Options_Visual_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Visual_Settings[GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case MUSIC_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, MusicSettings_Settings_Options[GetCurrentSlotOption(i)].options[Temporal_Options_Music_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Music_Settings[GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
 			case RANDOM_SETTINGS:
 				for(i = 0; i < NUM_OF_POSSIBLE_OPTIONS_THAT_FIT_ON_SCREEN; i++){
-					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, RandomSettings_Settings_Options[GetCurrentSlotOption(i)].options[Temporal_Options_Random_Settings[GetCurrentSlotOption(i)]]);
+					AddTextPrinterParameterized4(windowId, 8, (x*8) + 6, (y*8) + 4, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][GetCurrentSlotOption(i)].options[Temporal_Options_Random_Settings[GetCurrentSlotOption(i)]]);
 					y = y + 2;
 				}
 				break;
@@ -2883,19 +2874,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
 	else if(!areYouNotOnSettingsHub){
 		switch(currentScreenId){
 			case GAME_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, GameSettings_Settings_Options[0].optionDescription[Temporal_Options_Game_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[GAME_SETTINGS][0].optionDescription[Temporal_Options_Game_Settings[0]]);
 				break;
 			case BATTLE_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, BattleSettings_Settings_Options[0].optionDescription[Temporal_Options_Battle_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[BATTLE_SETTINGS][0].optionDescription[Temporal_Options_Battle_Settings[0]]);
 				break;
 			case VISUAL_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, VisualSettings_Settings_Options[0].optionDescription[Temporal_Options_Visual_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[VISUAL_SETTINGS][0].optionDescription[Temporal_Options_Visual_Settings[0]]);
 				break;
 			case MUSIC_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, MusicSettings_Settings_Options[0].optionDescription[Temporal_Options_Music_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[MUSIC_SETTINGS][0].optionDescription[Temporal_Options_Music_Settings[0]]);
 				break;
 			case RANDOM_SETTINGS:
-				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, RandomSettings_Settings_Options[0].optionDescription[Temporal_Options_Random_Settings[0]]);
+				AddTextPrinterParameterized4(windowId, 8, (x*8)+4, (y*8), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, Settings_Options[RANDOM_SETTINGS][0].optionDescription[Temporal_Options_Random_Settings[0]]);
 				break;
 		}
 	}
@@ -2904,19 +2895,19 @@ static void PrintToWindow(u8 windowId, u8 colorIdx)
         switch(currentScreenId)
         {
             case GAME_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,GameSettings_Settings_Options[currentOptionId].optionDescription[Temporal_Options_Game_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[GAME_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Game_Settings[currentOptionId]]);
                 break;
             case BATTLE_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,BattleSettings_Settings_Options[currentOptionId].optionDescription[Temporal_Options_Battle_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[BATTLE_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Battle_Settings[currentOptionId]]);
                 break;
             case VISUAL_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,VisualSettings_Settings_Options[currentOptionId].optionDescription[Temporal_Options_Visual_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[VISUAL_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Visual_Settings[currentOptionId]]);
                 break;
             case MUSIC_SETTINGS:
-                StringExpandPlaceholders(gStringVar1,MusicSettings_Settings_Options[currentOptionId].optionDescription[Temporal_Options_Music_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[MUSIC_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Music_Settings[currentOptionId]]);
                 break;
             default:
-                StringExpandPlaceholders(gStringVar1,RandomSettings_Settings_Options[currentOptionId].optionDescription[Temporal_Options_Random_Settings[currentOptionId]]);
+                StringExpandPlaceholders(gStringVar1,Settings_Options[RANDOM_SETTINGS][currentOptionId].optionDescription[Temporal_Options_Random_Settings[currentOptionId]]);
 
                 break;
         }
@@ -3048,32 +3039,32 @@ static void Task_MenuMain(u8 taskId)
                     if(Temporal_Options_Game_Settings[0] > 0)
                         Temporal_Options_Game_Settings[0]--;
                     else
-                        Temporal_Options_Game_Settings[0] = GameSettings_Settings_Options[0].numOptions - 1;
+                        Temporal_Options_Game_Settings[0] = Settings_Options[GAME_SETTINGS][0].numOptions - 1;
                 break;
                 case BATTLE_SETTINGS:
                     if(Temporal_Options_Battle_Settings[0] > 0)
                         Temporal_Options_Battle_Settings[0]--;
                     else
-                        Temporal_Options_Battle_Settings[0] = BattleSettings_Settings_Options[0].numOptions - 1;
+                        Temporal_Options_Battle_Settings[0] = Settings_Options[BATTLE_SETTINGS][0].numOptions - 1;
                 break;
                 case VISUAL_SETTINGS:
                     if(Temporal_Options_Visual_Settings[0] > 0)
                         Temporal_Options_Visual_Settings[0]--;
                     else
-                        Temporal_Options_Visual_Settings[0] = VisualSettings_Settings_Options[0].numOptions - 1;
+                        Temporal_Options_Visual_Settings[0] = Settings_Options[VISUAL_SETTINGS][0].numOptions - 1;
                 break;
                 case MUSIC_SETTINGS:
                     if(Temporal_Options_Music_Settings[0] > 0)
                         Temporal_Options_Music_Settings[0]--;
                     else
-                        Temporal_Options_Music_Settings[0] = MusicSettings_Settings_Options[0].numOptions - 1;
+                        Temporal_Options_Music_Settings[0] = Settings_Options[MUSIC_SETTINGS][0].numOptions - 1;
                 PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
                     if(Temporal_Options_Random_Settings[0] > 0)
                         Temporal_Options_Random_Settings[0]--;
                     else
-                        Temporal_Options_Random_Settings[0] = RandomSettings_Settings_Options[0].numOptions - 1;
+                        Temporal_Options_Random_Settings[0] = Settings_Options[RANDOM_SETTINGS][0].numOptions - 1;
                 break;
             }
 
@@ -3089,19 +3080,19 @@ static void Task_MenuMain(u8 taskId)
 						Temporal_Options_Game_Settings[currentOptionId]--;
 					}
 					else
-						Temporal_Options_Game_Settings[currentOptionId] = GameSettings_Settings_Options[currentOptionId].numOptions - 1;
+						Temporal_Options_Game_Settings[currentOptionId] = Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1;
 					break;
 				case BATTLE_SETTINGS:
 					if(Temporal_Options_Battle_Settings[currentOptionId] > 0)
 						Temporal_Options_Battle_Settings[currentOptionId]--;
 					else
-						Temporal_Options_Battle_Settings[currentOptionId] = BattleSettings_Settings_Options[currentOptionId].numOptions - 1;
+						Temporal_Options_Battle_Settings[currentOptionId] = Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1;
 					break;
 				case VISUAL_SETTINGS:
 					if(Temporal_Options_Visual_Settings[currentOptionId] > 0)
 						Temporal_Options_Visual_Settings[currentOptionId]--;
 					else
-						Temporal_Options_Visual_Settings[currentOptionId] = VisualSettings_Settings_Options[currentOptionId].numOptions - 1;
+						Temporal_Options_Visual_Settings[currentOptionId] = Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1;
 
                     if(currentOptionId == VISUAL_OPTIONS_COLOR)
                         RecolorWindow();
@@ -3110,14 +3101,14 @@ static void Task_MenuMain(u8 taskId)
                     if(Temporal_Options_Music_Settings[currentOptionId] > 0)
                         Temporal_Options_Music_Settings[currentOptionId]--;
                     else
-                        Temporal_Options_Music_Settings[currentOptionId] = MusicSettings_Settings_Options[currentOptionId].numOptions - 1;
+                        Temporal_Options_Music_Settings[currentOptionId] = Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1;
                     PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
                     if(Temporal_Options_Random_Settings[currentOptionId] > 0)
                         Temporal_Options_Random_Settings[currentOptionId]--;
                     else
-                        Temporal_Options_Random_Settings[currentOptionId] = RandomSettings_Settings_Options[currentOptionId].numOptions - 1;
+                        Temporal_Options_Random_Settings[currentOptionId] = Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1;
                 break;
             }
 
@@ -3133,32 +3124,32 @@ static void Task_MenuMain(u8 taskId)
             //For Presets
             switch(currentScreenId){
                 case GAME_SETTINGS:
-                    if(Temporal_Options_Game_Settings[0] < GameSettings_Settings_Options[0].numOptions - 1)
+                    if(Temporal_Options_Game_Settings[0] < Settings_Options[GAME_SETTINGS][0].numOptions - 1)
                         Temporal_Options_Game_Settings[0]++;
                     else
                         Temporal_Options_Game_Settings[0] = 0;
                 break;
                 case BATTLE_SETTINGS:
-                    if(Temporal_Options_Battle_Settings[0] < BattleSettings_Settings_Options[0].numOptions - 1)
+                    if(Temporal_Options_Battle_Settings[0] < Settings_Options[BATTLE_SETTINGS][0].numOptions - 1)
                         Temporal_Options_Battle_Settings[0]++;
                     else
                         Temporal_Options_Battle_Settings[0] = 0;
                 break;
                 case VISUAL_SETTINGS:
-                    if(Temporal_Options_Visual_Settings[0] < VisualSettings_Settings_Options[0].numOptions - 1)
+                    if(Temporal_Options_Visual_Settings[0] < Settings_Options[VISUAL_SETTINGS][0].numOptions - 1)
                         Temporal_Options_Visual_Settings[0]++;
                     else
                         Temporal_Options_Visual_Settings[0] = 0;
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[0] < MusicSettings_Settings_Options[0].numOptions - 1)
+                    if(Temporal_Options_Music_Settings[0] < Settings_Options[MUSIC_SETTINGS][0].numOptions - 1)
                         Temporal_Options_Music_Settings[0]++;
                     else
                         Temporal_Options_Music_Settings[0] = 0;
                 PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[0] < RandomSettings_Settings_Options[0].numOptions - 1)
+                    if(Temporal_Options_Random_Settings[0] < Settings_Options[RANDOM_SETTINGS][0].numOptions - 1)
                         Temporal_Options_Random_Settings[0]++;
                     else
                         Temporal_Options_Random_Settings[0] = 0;
@@ -3173,21 +3164,21 @@ static void Task_MenuMain(u8 taskId)
 			//For other Options
 			switch(currentScreenId){
 				case GAME_SETTINGS:
-					if(Temporal_Options_Game_Settings[currentOptionId] < GameSettings_Settings_Options[currentOptionId].numOptions - 1){
+					if(Temporal_Options_Game_Settings[currentOptionId] < Settings_Options[GAME_SETTINGS][currentOptionId].numOptions - 1){
 						Temporal_Options_Game_Settings[currentOptionId]++;
 					}
 					else
 						Temporal_Options_Game_Settings[currentOptionId] = 0;
 					break;
 				case BATTLE_SETTINGS:
-					if(Temporal_Options_Battle_Settings[currentOptionId] < BattleSettings_Settings_Options[currentOptionId].numOptions - 1){
+					if(Temporal_Options_Battle_Settings[currentOptionId] < Settings_Options[BATTLE_SETTINGS][currentOptionId].numOptions - 1){
 						Temporal_Options_Battle_Settings[currentOptionId]++;
 					}
 					else
 						Temporal_Options_Battle_Settings[currentOptionId] = 0;
 					break;
 				case VISUAL_SETTINGS:
-					if(Temporal_Options_Visual_Settings[currentOptionId] < VisualSettings_Settings_Options[currentOptionId].numOptions - 1){
+					if(Temporal_Options_Visual_Settings[currentOptionId] < Settings_Options[VISUAL_SETTINGS][currentOptionId].numOptions - 1){
 						Temporal_Options_Visual_Settings[currentOptionId]++;
 					}
 					else
@@ -3197,7 +3188,7 @@ static void Task_MenuMain(u8 taskId)
                             RecolorWindow();
                 break;
                 case MUSIC_SETTINGS:
-                    if(Temporal_Options_Music_Settings[currentOptionId] < MusicSettings_Settings_Options[currentOptionId].numOptions - 1){
+                    if(Temporal_Options_Music_Settings[currentOptionId] < Settings_Options[MUSIC_SETTINGS][currentOptionId].numOptions - 1){
                         Temporal_Options_Music_Settings[currentOptionId]++;
                     }
                     else
@@ -3206,7 +3197,7 @@ static void Task_MenuMain(u8 taskId)
                     PreviewBGM(currentOptionId, Temporal_Options_Music_Settings[currentOptionId]);
                 break;
                 case RANDOM_SETTINGS:
-                    if(Temporal_Options_Random_Settings[currentOptionId] < RandomSettings_Settings_Options[currentOptionId].numOptions - 1){
+                    if(Temporal_Options_Random_Settings[currentOptionId] < Settings_Options[RANDOM_SETTINGS][currentOptionId].numOptions - 1){
                         Temporal_Options_Random_Settings[currentOptionId]++;
                     }
                     else
