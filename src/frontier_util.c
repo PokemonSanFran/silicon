@@ -1,7 +1,8 @@
 #include "global.h"
 #include "frontier_util.h"
 #include "easy_chat.h"
-#include "silicon_battle_frontier.h"
+#include "ui_pokedex.h" // siliconFrontier
+#include "silicon_battle_frontier.h" // siliconFrontier
 #include "event_data.h"
 #include "battle_setup.h"
 #include "overworld.h"
@@ -822,7 +823,8 @@ static const u16 sFrontierTrainerIdRangesHard[][2] =
     {FRONTIER_TRAINER_JAXON,   FRONTIER_TRAINER_GRETEL}, // 200 - 299
 };
 
-#define BANNED_SPECIES_SHOWN 6
+//#define BANNED_SPECIES_SHOWN 6
+#define BANNED_SPECIES_SHOWN 5 // siliconFrontier
 
 static const struct ListMenuTemplate sCaughtBannedSpeciesListTemplate =
 {
@@ -853,7 +855,7 @@ static const struct WindowTemplate sBannedSpeciesWindowTemplateMain =
     .width = 12,
     .height = 2 * BANNED_SPECIES_SHOWN,
     .paletteNum = 15,
-    .baseBlock = 1,
+    //.baseBlock = 1, // siliconFrontier
 };
 
 #define TAG_LIST_ARROWS 5425
@@ -3531,7 +3533,13 @@ static u16 *MakeCaughtBannesSpeciesList(u32 totalBannedSpecies)
             continue;
 
         enum Species baseSpecies = GET_BASE_SPECIES_ID(i);
-        if (baseSpecies == i && gSpeciesInfo[baseSpecies].isFrontierBanned)
+        // Start siliconFrontier
+        if (ConvertSpeciesIdToResidoDex(i) == RESIDO_DEX_NONE)
+            continue;
+
+        if (baseSpecies == i && (SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(i)))
+        //if (baseSpecies == i && gSpeciesInfo[baseSpecies].isFrontierBanned)
+        // End siliconFrontier
         {
             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(baseSpecies), FLAG_GET_CAUGHT))
             {
@@ -3562,12 +3570,17 @@ void ShowBattleFrontierCaughtBannedSpecies(void)
 {
     u8 windowId;
     struct ListMenuTemplate listTemplate = sCaughtBannedSpeciesListTemplate;
-    u32 totalCaughtBanned = gSpecialVar_0x8005;
+    // Start siliconFrontier
+    //u32 totalCaughtBanned = gSpecialVar_0x8005;
+    u32 totalCaughtBanned = SiliconFroniter_CountCaughtBlockedSpecies();
+    // End siliconFrontier
     listTemplate.totalItems = totalCaughtBanned;
 
     // create window
     LoadMessageBoxAndBorderGfx();
+    u32 baseBlock = CalculateNextWindowBaseblock();
     windowId = AddWindow(&sBannedSpeciesWindowTemplateMain);
+    SetWindowAttribute(windowId, WINDOW_BASE_BLOCK, baseBlock);
     DrawStdWindowFrame(windowId, FALSE);
     listTemplate.windowId = windowId;
 
