@@ -3837,7 +3837,6 @@
     .macro variableaddbp var:req, update=FALSE
 	.if \update == TRUE
 	preparevariablecurrencychange type=2, var=\var, subtract=FALSE
-	updatebpbox
 	.endif
 	callnative ScrCmd_variableaddbp
 	.2byte \var
