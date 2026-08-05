@@ -58,6 +58,7 @@ data/quests/*.inc
 data/cutscenes/*.inc
 data/scripts/*.inc
 data/scripts/restored_battle_frontier/*.inc
+data/scripts/silicon_frontier/*.inc
 src/data/battle_partners.h
 src/data/trainers.h
 *.mermaid
