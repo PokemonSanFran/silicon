@@ -995,7 +995,7 @@ void SiliconFrontier_TryAwardBadge(void)
 
     for (u32 milestoneIndex = 0; milestoneIndex < (SILICON_FRONTIER_BOSS_PHASE_GOLD + 1); milestoneIndex++)
     {
-        if (streak != SiliconFrontier_GetFacilityMilestoneRequirement(facility,milestoneIndex))
+        if (streak < SiliconFrontier_GetFacilityMilestoneRequirement(facility,milestoneIndex))
             continue;
 
         u32 badge = SiliconFrontier_GetFacilityBadge(facility,milestoneIndex);
@@ -1018,7 +1018,7 @@ void SiliconFrontier_BufferAwardSpeech(void)
     enum SiliconFrontierTrainerIds trainer = SiliconFrontier_GetFacilityBoss(facility,phase);
     GetFrontierTrainerName(gStringVar1,trainer);
 
-    u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    u32 value = SiliconFrontier_GetFacilityMilestoneRequirement(facility,phase);
     ConvertIntToDecimalStringN(gStringVar2,value,STR_CONV_MODE_LEFT_ALIGN,CountDigits(value));
 
     StringCopy(gStringVar3,SiliconFrontier_GetFacilityBadgeName(facility,phase));
