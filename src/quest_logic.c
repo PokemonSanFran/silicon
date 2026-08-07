@@ -4043,6 +4043,15 @@ void Script_Quest_ManOfManyHats_GetDoorUnlockBit(void)
     gSpecialVar_Result = GetVariableBit(VAR_QUEST_MANOFMANYHATS,OPEN_LOCKED_DOOR);
 }
 
+void Script_Quest_ManOfManyHats_SetForcedTextSpeedFastFlag(void)
+{
+    gTextFlags.forceFastTextSpeed = TRUE;
+}
+
+void Script_Quest_ManOfManyHats_ClearForcedTextSpeedFastFlag(void)
+{
+    gTextFlags.forceFastTextSpeed = FALSE;
+}
 // ***********************************************************************
 // Cutscene: Earthquake
 // ***********************************************************************
