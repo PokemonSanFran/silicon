@@ -12276,7 +12276,7 @@
     {
       "id": "LAYOUT_ESPULEE_OUTSKIRTS_RANGER",
       "name": "EspuleeOutskirts_Ranger_Layout",
-      "width": 4,
+      "width": 6,
       "height": 5,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_PokemonCenter",

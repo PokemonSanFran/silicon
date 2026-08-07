@@ -234,3 +234,19 @@ script Quest_ManOfManyHats_CheckDoorLock_Script{
 	if(var(VAR_RESULT)==TRUE){setflag(FLAG_UNLOCK_DOOR)}
 }
 
+script Quest_ManofManyHats_ManOfManyHatsComputerScreen
+{
+	msgbox("There is an email on the screen.")
+	msgbox(
+		"Dear Ranger Installnatureprobesworker:\p"
+		"The probes have been sent off to your\nstation and should arrive within the\nweek. We trust you'll have the knowledge\lto place them in the most advantageous\lpositions possible.\pWe can not stress enough the importance\nof researching these Ultra Wormholes,\nunderstanding the energy they emit and\ltheir relationship to Pokemon habitats\lis imperative. Do keep us updated on your\lprogress.\p"
+		"Regards,\nO")
+	closemessage
+}
+
+script Quest_ManofManyHats_ManOfManyHatsComputerBookshelf
+{
+	msgbox(
+		"DATA LOG 291:\nThis is a big one. We've recently learned\nthat there was an attack by a mysterious\lPokemon being referred to as an “Ultra\lBeast” in this very forest some years\lago.\pThe creature was ultimately subdued by\nthe government and the incident kept\nsecret from the general public. Sharprise\lbegan researching Ultra Wormholes only\lshortly before the incident occurred.\pWe'll need to keep on our toes…")
+	closemessage
+}
