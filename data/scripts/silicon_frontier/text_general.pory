@@ -1,0 +1,328 @@
+//script SiliconFrontier_Dialogue_
+script SiliconFrontier_Dialogue_WelcomeBackNewChallenge
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WelcomeBackNewChallenge)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WelcomeBackContinueChallenge
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WelcomeBackContinueChallenge)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WelcomeToThe
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WelcomeToThe)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_HopeToSeeYou
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_HopeToSeeYou)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WhatWouldYouLikeInfo
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WhatWouldYouLikeInfo)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_ExplainFacility
+{
+    callnative(Script_BufferGetFacilityName)
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_ExplainFacility)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouCanCompete
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouCanCompete)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouCannotCompete
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouCannotCompete)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouRecieveBP
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouRecieveBP)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_EveryXWins
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EveryXWins)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_OneTimeBonus
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_OneTimeBonus)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_OnceYourParty
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_OnceYourParty)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+
+script SiliconFrontier_Dialogue_DontTryToCheat
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_DontTryToCheat)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WinningSilver
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WinningSilver)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WinningGold
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WinningGold)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WhichChallenge
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WhichChallenge)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WhichPokemon
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WhichPokemon)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YourPartyHas
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YourPartyHas)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_IfYouReset
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_IfYouReset)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouCannotEnter
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouCannotEnter)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+
+script SiliconFrontier_Dialogue_YourPartyHasBeenHealed
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YourPartyHasBeenHealed)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_ThereWasAnError
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_ThereWasAnError)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YourBattleWasRecorded
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YourBattleWasRecorded)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_CongratulationsOnYourWin
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_CongratulationsOnYourWin)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_ForYourWonderfulAchievement
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_ForYourWonderfulAchievement)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}

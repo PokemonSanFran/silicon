@@ -1,0 +1,35 @@
+script RestrictedSparring_Script_PickSparringType
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    if (var(VAR_TEMP_F) == SILICON_FACILITY_SPARRING)
+    {
+        msgbox(format("Which type do you want to register with?"),,SPEAKER_RESTRICTED_SPARRING)
+        dynmultipush(COMPOUND_STRING("Normal"),SPARRING_TYPE_NORMAL)
+        dynmultipush(COMPOUND_STRING("Fighting"),SPARRING_TYPE_FIGHTING)
+        dynmultipush(COMPOUND_STRING("Flying"),SPARRING_TYPE_FLYING)
+        dynmultipush(COMPOUND_STRING("Poison"),SPARRING_TYPE_POISON)
+        dynmultipush(COMPOUND_STRING("Ground"),SPARRING_TYPE_GROUND)
+        dynmultipush(COMPOUND_STRING("Rock"),SPARRING_TYPE_ROCK)
+        dynmultipush(COMPOUND_STRING("Bug"),SPARRING_TYPE_BUG)
+        dynmultipush(COMPOUND_STRING("Ghost"),SPARRING_TYPE_GHOST)
+        dynmultipush(COMPOUND_STRING("Steel"),SPARRING_TYPE_STEEL)
+        dynmultipush(COMPOUND_STRING("Fire"),SPARRING_TYPE_FIRE)
+        dynmultipush(COMPOUND_STRING("Water"),SPARRING_TYPE_WATER)
+        dynmultipush(COMPOUND_STRING("Grass"),SPARRING_TYPE_GRASS)
+        dynmultipush(COMPOUND_STRING("Electric"),SPARRING_TYPE_ELECTRIC)
+        dynmultipush(COMPOUND_STRING("Psychic"),SPARRING_TYPE_PSYCHIC)
+        dynmultipush(COMPOUND_STRING("Ice"),SPARRING_TYPE_ICE)
+        dynmultipush(COMPOUND_STRING("Dragon"),SPARRING_TYPE_DRAGON)
+        dynmultipush(COMPOUND_STRING("Dark"),SPARRING_TYPE_DARK)
+        dynmultipush(COMPOUND_STRING("Fairy"),SPARRING_TYPE_FAIRY)
+        dynmultipush(COMPOUND_STRING("Never mind."),MULTI_B_PRESSED)
+        dynmultistack(0, 0, FALSE, 5, TRUE, 0, NULL)
+        goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
+    }
+    else
+    {
+        setvar(VAR_RESULT,SPARRING_TYPE_COUNT)
+    }
+    callnative(SiliconFrontier_SetCurrentChallengeSparringTypeFromVarResult)
+}
+

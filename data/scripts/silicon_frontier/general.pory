@@ -1,6 +1,7 @@
 script SiliconFrontier_Dialogue_InteractAttendant
 {
     lock
+    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
     callnative(Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility)
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_CHALLENGE_TYPE_NONE,SiliconFrontier_Dialogue_AskResume)
     goto(SiliconFroniter_Dialogue_AskMenu)
@@ -12,18 +13,17 @@ script SiliconFrontier_Dialogue_AskResume
     callnative(SiliconFrontier_GetLastChallengeStreakLength)
     if (var(VAR_RESULT) == 0)
     {
-        msgbox(format("Welcome back! Are you ready to start a new {STR_VAR_1} challenge?"),MSGBOX_YESNO)
+        call(SiliconFrontier_Dialogue_WelcomeBackNewChallenge)
     }
     else
     {
-        msgbox(format("Welcome back! Are you here to continue your {STR_VAR_1} challenge?"),MSGBOX_YESNO)
+        call(SiliconFrontier_Dialogue_WelcomeBackContinueChallenge)
     }
     if (var(VAR_RESULT) == NO)
     {
         callnative(SiliconFrontier_ResetLastChallenge)
         return
     }
-    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
     callnative(SiliconFrontier_SetCurrentChallengeFromLastChallenge)
     goto(SiliconFrontier_Script_ChoosePartyMons)
 }
@@ -31,88 +31,82 @@ script SiliconFrontier_Dialogue_AskResume
 script SiliconFroniter_Dialogue_AskMenu
 {
     callnative(Script_BufferGetFacilityName)
-    msgbox(format("Welcome to the {STR_VAR_1}! What would you like to do?"))
-    dynmultichoice(0,0,FALSE,4,0,NULL, "Start Challenge", "Info", "Never mind.")
+    call(SiliconFrontier_Dialogue_WelcomeToThe)
+    dynmultichoice(0,0,FALSE,3,0,NULL, "Start Challenge", "Info", "Never mind.")
     switch (var(VAR_RESULT))
     {
         case 0: goto(SiliconFrontier_Script_RegisterChallenge)
-        case 1: goto(SiliconFrontier_Dialogue_ExplainFacility)
+        case 1: goto(SiliconFrontier_Dialogue_ExplainFacilityMenu)
         case MULTI_B_PRESSED:
         case 2: goto(SiliconFrontier_Script_QuitAttendant)
     }
 }
 script SiliconFrontier_Script_QuitAttendant
 {
-    msgbox(format("We hope to see you again!"))
+    call(SiliconFrontier_Dialogue_HopeToSeeYou)
     closemessage
     release
     end
 }
 
-script SiliconFrontier_Dialogue_ExplainFacility
+script SiliconFrontier_Dialogue_ExplainFacilityMenu
 {
-    msgbox(format("What would you like information on?"))
-    dynmultichoice(0,0,FALSE,4,0,NULL, "Rules", "Pokemon Allowed", "Battle Points", "Saving", "Bosses", "Never mind.")
+    call(SiliconFrontier_Dialogue_WhatWouldYouLikeInfo)
+    dynmultichoice(0,0,FALSE,3,0,NULL, "Rules", "Pokemon Allowed", "Battle Points", "Saving", "Bosses", "Never mind.")
     switch(var(VAR_RESULT))
     {
-        case 0: call(SiliconFrontier_ExplainBattleTower)
+        case 0: call(SiliconFrontier_Dialogue_ExplainFacility)
         case 1: call(SiliconFrontier_Dialogue_AllowedPokemon)
         case 2: call(SiliconFrontier_Dialogue_BattlePoints)
         case 3: call(SiliconFrontier_Dialogue_ExplainSaving)
         case 4: call(SiliconFrontier_Dialogue_ExplainBadges)
         default: goto(SiliconFroniter_Dialogue_AskMenu)
     }
-    goto(SiliconFrontier_Dialogue_ExplainFacility)
-}
-
-script SiliconFrontier_ExplainBattleTower
-{
-    callnative(Script_BufferGetFacilityName)
-    msgbox(format("At the {STR_VAR_1}, defeat as many Trainers in a row as you can! Once you register with your party, you battle against a randomly chosen Trainer. If you defeat them, your party is healed and then you battle another Trainer. You keep going until you finally lose."))
+    goto(SiliconFrontier_Dialogue_ExplainFacilityMenu)
 }
 
 script SiliconFrontier_Dialogue_AllowedPokemon
 {
     callnative(Script_SiliconFroniter_CountCaughtBlockedSpecies)
-    msgbox(format("You can compete with any Pokemon normally found in Resido."))
+    call(SiliconFrontier_Dialogue_YouCanCompete)
     if (var(VAR_0x8005))
     {
-        msgbox(format("You cannot compete with these Pokemon."))
-            callnative(ShowBattleFrontierCaughtBannedSpecies)
-            waitstate
+        call(SiliconFrontier_Dialogue_YouCannotCompete)
+        callnative(ShowBattleFrontierCaughtBannedSpecies)
+        waitstate
     }
 }
 
 script SiliconFrontier_Dialogue_BattlePoints
 {
     callnative(Script_BufferBasePoints)
-    msgbox(format("After every win, you recieve {STR_VAR_1} Battle Point. Battle Points can be used to purchases prizes!"))
+    call(SiliconFrontier_Dialogue_YouRecieveBP)
 
     callnative(Script_BufferBossPoints)
-    msgbox(format("Every {STR_VAR_1} wins, you'll get {STR_VAR_2} Battle Points, and every win after that will reward an extra {STR_VAR_3} Battle Point."))
+    call(SiliconFrontier_Dialogue_EveryXWins)
 
     callnative(Script_BufferMilestonePoints)
-    msgbox(format("After earning the {STR_VAR_1} or {STR_VAR_2} for the first time, you'll get a one time bonus of {STR_VAR_3} Points!"))
+    call(SiliconFrontier_Dialogue_OneTimeBonus)
 }
 
 script SiliconFrontier_Dialogue_ExplainSaving
 {
-    msgbox(format("Once your party has been registered, you must save the game to proceed."))
+    call(SiliconFrontier_Dialogue_OnceYourParty)
     call(SiliconFrontier_Dialogue_IfYouReset)
-    msgbox(format("Don't try to cheat!"))
+    call(SiliconFrontier_Dialogue_DontTryToCheat)
 }
 
 script SiliconFrontier_Dialogue_ExplainBadges
 {
     callnative(Script_BufferSilverBadgeAndStreak)
-    msgbox(format("After winning {STR_VAR_1} battles in a row, Trainers will recieve the {STR_VAR_2}."))
+    call(SiliconFrontier_Dialogue_WinningSilver)
     callnative(Script_BufferGoldBadgeAndStreak)
-    msgbox(format("If they can get to a streak of {STR_VAR_1} wins, Trainers will recieve the coveted {STR_VAR_2}!"))
+    call(SiliconFrontier_Dialogue_WinningGold)
 }
 
 script SiliconFrontier_Script_RegisterChallenge
 {
-    msgbox(format("Which challenge would you like to start?"))
+    call(SiliconFrontier_Dialogue_WhichChallenge)
     dynmultipush(gText_Single,SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE)
     dynmultipush(gText_Double,SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE)
     dynmultipush(gText_Multi,SILICON_FRONTIER_CHALLENGE_TYPE_MULTI)
@@ -121,42 +115,8 @@ script SiliconFrontier_Script_RegisterChallenge
     goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
     callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
     callnative(SiliconFrontier_SetCurrentChallengeChallengeTypeFromVarResult)
-    call(SiliconFrontier_Script_PickSparringType)
+    call(RestrictedSparring_Script_PickSparringType)
     goto(SiliconFrontier_Script_ChoosePartyMons)
-}
-
-script SiliconFrontier_Script_PickSparringType
-{
-    if (var(VAR_0x8006) == SILICON_FACILITY_SPARRING)
-    {
-        msgbox(format("Which type do you want to register with?"))
-        dynmultipush(COMPOUND_STRING("Normal"),SPARRING_TYPE_NORMAL)
-        dynmultipush(COMPOUND_STRING("Fighting"),SPARRING_TYPE_FIGHTING)
-        dynmultipush(COMPOUND_STRING("Flying"),SPARRING_TYPE_FLYING)
-        dynmultipush(COMPOUND_STRING("Poison"),SPARRING_TYPE_POISON)
-        dynmultipush(COMPOUND_STRING("Ground"),SPARRING_TYPE_GROUND)
-        dynmultipush(COMPOUND_STRING("Rock"),SPARRING_TYPE_ROCK)
-        dynmultipush(COMPOUND_STRING("Bug"),SPARRING_TYPE_BUG)
-        dynmultipush(COMPOUND_STRING("Ghost"),SPARRING_TYPE_GHOST)
-        dynmultipush(COMPOUND_STRING("Steel"),SPARRING_TYPE_STEEL)
-        dynmultipush(COMPOUND_STRING("Fire"),SPARRING_TYPE_FIRE)
-        dynmultipush(COMPOUND_STRING("Water"),SPARRING_TYPE_WATER)
-        dynmultipush(COMPOUND_STRING("Grass"),SPARRING_TYPE_GRASS)
-        dynmultipush(COMPOUND_STRING("Electric"),SPARRING_TYPE_ELECTRIC)
-        dynmultipush(COMPOUND_STRING("Psychic"),SPARRING_TYPE_PSYCHIC)
-        dynmultipush(COMPOUND_STRING("Ice"),SPARRING_TYPE_ICE)
-        dynmultipush(COMPOUND_STRING("Dragon"),SPARRING_TYPE_DRAGON)
-        dynmultipush(COMPOUND_STRING("Dark"),SPARRING_TYPE_DARK)
-        dynmultipush(COMPOUND_STRING("Fairy"),SPARRING_TYPE_FAIRY)
-        dynmultipush(COMPOUND_STRING("Never mind."),MULTI_B_PRESSED)
-        dynmultistack(0, 0, FALSE, 5, TRUE, 0, NULL)
-        goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
-    }
-    else
-    {
-        setvar(VAR_RESULT,SPARRING_TYPE_COUNT)
-    }
-    callnative(SiliconFrontier_SetCurrentChallengeSparringTypeFromVarResult)
 }
 
 script SiliconFrontier_Script_ChoosePartner
@@ -178,7 +138,7 @@ script SiliconFrontier_Script_ChoosePartyMons
         goto(SiliconFrontier_Dialogue_NotEnough)
     }
     call(SiliconFrontier_Script_ChoosePartner)
-    msgbox(format("Which Pokemon will you enter the Facility with?"))
+    call(SiliconFrontier_Dialogue_WhichPokemon)
     closemessage
     special(SavePlayerParty)
     callnative(SiliconFrontier_SetPartyScreenPickAmount)
@@ -191,7 +151,7 @@ script SiliconFrontier_Script_ChoosePartyMons
     {
         goto(SiliconFrontier_Dialogue_InvalidParty)
     }
-msgbox(format("Your party has been registered! You must now save the game to proceed."))
+    call(SiliconFrontier_Dialogue_YourPartyHas)
     setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_STARTED)
     startmenu_savescreen
     goto_if_unset(FLAG_SYS_SAVE_SUCCESSFUL,SiliconFrontier_Script_NeedToSave)
@@ -201,17 +161,12 @@ msgbox(format("Your party has been registered! You must now save the game to pro
     goto(SiliconFrontier_Script_LeaveRoom)
 }
 
-script SiliconFrontier_Dialogue_IfYouReset
-{
-    msgbox(format("If you turn off or reset your game before saving again, you will be disqualified, and your entire streak and prizes will be forfeit."))
-}
-
 script SiliconFrontier_Script_NeedToSave
 {
     special(LoadPlayerParty)
     callnative(SiliconFrontier_ResetCurrentPartner)
     callnative(SiliconFrontier_ResetCurrentChallenge)
-    msgbox(format("Unfortunately, you cannot enter the facility until you save. Please return when you're ready to save."))
+    call(SiliconFrontier_Dialogue_YouCannotEnter)
     goto(SiliconFrontier_Script_QuitAttendant)
 }
 
@@ -299,10 +254,9 @@ script SiliconFrontier_Script_BattleMenu
 {
     playse(SE_USE_ITEM)
     callnative(SiliconFrontier_BufferStreakString)
-    msgbox(format("Your party has been fully healed. Would you like to continue your {STR_VAR_2} battle streak?"))
+    call(SiliconFrontier_Dialogue_YourPartyHasBeenHealed)
     waitse
-    dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave", "Record")
-    //dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave")
+    dynmultichoice(0,0,TRUE,3,0,NULL, "Continue", "Leave", "Record")
     switch(var(VAR_RESULT))
     {
         case 0:
@@ -320,12 +274,12 @@ script SiliconFroniter_Script_RecordBattle
     frontier_savebattle
     if (var(VAR_RESULT) == FALSE)
     {
-        msgbox(format("There was an error of some kind. Your battle could not be saved."))
+        call(SiliconFrontier_Dialogue_ThereWasAnError)
     }
     else
     {
         playse(SE_SAVE)
-            msgbox(format("Your battle was recorded! You can watch it later."))
+        call(SiliconFrontier_Dialogue_YourBattleWasRecorded)
     }
     goto(SiliconFrontier_Script_BattleMenu)
 }
@@ -333,18 +287,18 @@ script SiliconFroniter_Script_RecordBattle
 script SiliconFrontier_Dialogue_AwardBadge
 {
     callnative(SiliconFrontier_BufferAwardSpeech)
-    msgbox(format("Congratulations on your win against {STR_VAR_1}!"))
+    call(SiliconFrontier_Dialogue_CongratulationsOnYourWin)
     playfanfare(MUS_GET_BADGE)
-    msgbox(format("For your wonderful achievement of a {STR_VAR_2} win streak, we are proud to present you with the {STR_VAR_3}!"))
+    call(SiliconFrontier_Dialogue_ForYourWonderfulAchievement)
     waitfanfare
 
     if (var(VAR_RESULT) == SILICON_FRONTIER_BOSS_PHASE_SILVER)
     {
         call(SiliconFrontier_BufferGoldMilestone)
-            msgbox(format("We look forward to seeing you achieve a {STR_VAR_1} win streak!"))
+        msgbox(format("We look forward to seeing you achieve a {STR_VAR_1} win streak!"),,SPEAKER_BATTLE_JAM)
     }
 
-    msgbox(format("We hope you continue training with us going forward!"))
+    msgbox(format("We hope you continue training with us going forward!"),,SPEAKER_BATTLE_JAM)
 }
 
 script SiliconFrontier_Script_LossBattle
@@ -356,7 +310,7 @@ script SiliconFrontier_Script_LossBattle
 
 script SiliconFrontier_Script_LeaveChallenge
 {
-    msgbox(format("You will stop the current challenge. You are free to return at any time, and your streak will be resumed."))
+    msgbox(format("You will stop the current challenge. You are free to return at any time, and your streak will be resumed."),,SPEAKER_BATTLE_JAM)
     closemessage
     goto(SiliconFrontier_Dialogue_LeaveBattleRoom)
 }
@@ -373,14 +327,14 @@ script SiliconFrontier_Dialogue_Disqualified
     lock
     faceplayer
     callnative(SiliconFrontier_ResetCurrentStreak)
-    msgbox(format("You turned off or reset your game during the challenge! Unfortunately, your entire streak is now forfeit."))
+    msgbox(format("You turned off or reset your game during the challenge! Unfortunately, your entire streak is now forfeit."),,SPEAKER_BATTLE_JAM)
     goto(SiliconFrontier_Script_SaveAfterQuitChallenge)
 }
 
 script SiliconFrontier_Script_SaveAfterQuitChallenge
 {
     lock
-    msgbox(format("We will now save your progress. Please wait."))
+    msgbox(format("We will now save your progress. Please wait."),,SPEAKER_BATTLE_JAM)
     closemessage
     callnative(SiliconFrontier_ResetCurrentPartner)
     callnative(SiliconFrontier_ResetCurrentChallenge)
@@ -395,14 +349,14 @@ script SiliconFrontier_Script_SaveAfterQuitChallenge
 
 script SiliconFrontier_Dialogue_SaveFailed
 {
-    msgbox(format("Saving your progress did not work. Your progress has not been saved. Please try to save again."))
+    msgbox(format("Saving your progress did not work. Your progress has not been saved. Please try to save again."),,SPEAKER_BATTLE_JAM)
 }
 
 script SiliconFrontier_Dialogue_NotEnough
 {
     callnative(BufferLastChallengeType)
     callnative(BufferPartySizeForChallenge)
-    msgbox(format("Taking on a {STR_VAR_1} challenge requires that you have at least {STR_VAR_2} Pokemon in your party."))
+    msgbox(format("Taking on a {STR_VAR_1} challenge requires that you have at least {STR_VAR_2} Pokemon in your party."),,SPEAKER_BATTLE_JAM)
     goto(SiliconFrontier_Script_AdjustPartyQuit)
 }
 
@@ -416,28 +370,28 @@ script SiliconFrontier_Dialogue_InvalidParty
         {
             case SILICON_FRONTIER_ELIGIBILITY_CODE_PASS: delay(1)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_EGG:
-                 msgbox(format("{STR_VAR_1} is an Egg. It cannot be entered."))
+                 msgbox(format("{STR_VAR_1} is an Egg. It cannot be entered."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_LEGENDARY:
-                 msgbox(format("{STR_VAR_1} isn't a Pokemon we're familiar with... I don't think its fair to enter with this."))
+                 msgbox(format("{STR_VAR_1} isn't a Pokemon we're familiar with... I don't think its fair to enter with this."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES:
-                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."))
+                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ITEM:
-                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."))
+                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_TYPE:
-                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."))
+                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES_ITEM:
-                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."))
-                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."))
+                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_JAM)
+                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES_TYPE:
-                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."))
-                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."))
+                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_JAM)
+                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ITEM_TYPE:
-                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."))
-                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."))
+                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
+                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ALL:
-                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."))
-                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."))
-                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."))
+                 msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_JAM)
+                 msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
+                 msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
         }
         addvar(VAR_0x8006,1)
     } while (var(VAR_0x8006) < FRONTIER_DOUBLES_PARTY_SIZE)
@@ -449,7 +403,7 @@ script SiliconFrontier_Dialogue_InvalidParty
 
 script SiliconFrontier_Script_AdjustPartyQuit
 {
-    msgbox(format("Please adjust your party and return once you're ready."))
+    msgbox(format("Please adjust your party and return once you're ready."),,SPEAKER_BATTLE_JAM)
     goto(SiliconFrontier_Script_QuitAttendant)
 }
 
