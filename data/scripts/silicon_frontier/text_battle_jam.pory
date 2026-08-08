@@ -123,3 +123,68 @@ script BattleJam_Dialogue_ForYourWonderfulAchievement
 {
     msgbox(format("For your wonderful achievement of a {STR_VAR_2} win streak, we are proud to present you with the {STR_VAR_3}!"),,SPEAKER_BATTLE_JAM)
 }
+
+script BattleJam_Dialogue_WeLookForward
+{
+    msgbox(format("We look forward to seeing you achieve a {STR_VAR_1} win streak!"),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_WeHopeContinue
+{
+    msgbox(format("We hope you continue training with us going forward!"),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_YouWillStop
+{
+    msgbox(format("You will stop the current challenge. You are free to return at any time, and your streak will be resumed."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_YouTurnedOff
+{
+    msgbox(format("You turned off or reset your game during the challenge! Unfortunately, your entire streak is now forfeit."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_WeWillNow
+{
+    msgbox(format("We will now save your progress. Please wait."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_SaveFailed
+{
+    msgbox(format("Saving your progress did not work. Your progress has not been saved. Please try to save again."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_NotEnoughMons
+{
+    msgbox(format("Taking on a {STR_VAR_1} challenge requires that you have at least {STR_VAR_2} Pokemon in your party."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_AdjustPartyQuit
+{
+    msgbox(format("Please adjust your party and return once you're ready."),,SPEAKER_BATTLE_JAM)
+}
+
+script BattleJam_Dialogue_EligibilityEgg
+{
+    msgbox(format("{STR_VAR_1} is an Egg. It cannot be entered."),,SPEAKER_BATTLE_JAM)
+}
+script BattleJam_Dialogue_EligibilityLegendary
+{
+    msgbox(format("{STR_VAR_1} isn't a Pokemon we're familiar with... I don't think its fair to enter with this."),,SPEAKER_BATTLE_JAM)
+
+}
+script BattleJam_Dialogue_EligibilitySpecies
+{
+
+    msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_JAM)
+}
+script BattleJam_Dialogue_EligibilityItem
+{
+    msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
+
+}
+script BattleJam_Dialogue_EligibilityType
+{
+    msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
+
+}

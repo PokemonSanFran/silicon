@@ -326,3 +326,169 @@ script SiliconFrontier_Dialogue_ForYourWonderfulAchievement
         case SILICON_FACILITY_FACTORY:
     }
 }
+
+script SiliconFrontier_Dialogue_WeLookForward
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WeLookForward)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WeHopeContinue
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WeHopeContinue)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouWillStop
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouWillStop)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_YouTurnedOff
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_YouTurnedOff)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_WeWillNow
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_WeWillNow)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_SaveFailed
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_SaveFailed)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_NotEnoughMons
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_NotEnoughMons)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_AdjustPartyQuit
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_AdjustPartyQuit)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
+script SiliconFrontier_Dialogue_EligibilityEgg
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EligibilityEgg)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+script SiliconFrontier_Dialogue_EligibilityLegendary
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EligibilityLegendary)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+script SiliconFrontier_Dialogue_EligibilitySpecies
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EligibilitySpecies)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+script SiliconFrontier_Dialogue_EligibilityItem
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EligibilityItem)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+script SiliconFrontier_Dialogue_EligibilityType
+{
+    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
+    switch(var(VAR_TEMP_F))
+    {
+        case SILICON_FACILITY_SPARRING:
+        case SILICON_FACILITY_TOWER:
+            call(BattleJam_Dialogue_EligibilityType)
+        case SILICON_FACILITY_ARCADE:
+        case SILICON_FACILITY_FACTORY:
+    }
+}
+
