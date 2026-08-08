@@ -3381,7 +3381,15 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
     dst[i] = EOS;
 #endif // siliconFrontier
-    StringCopy(dst,SiliconFrontier_GetTrainerName(trainerId));
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+    {
+        enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
+        StringCopy(dst,gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
+    }
+    else
+    {
+        StringCopy(dst,SiliconFrontier_GetTrainerName(trainerId));
+    }
 }
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)
