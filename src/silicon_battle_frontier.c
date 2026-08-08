@@ -153,9 +153,9 @@ void SiliconFrontier_DecreaseRemainingHeals(void)
     SiliconFrontier_SetRemainingHeals(heals);
 }
 
-void SiliconFrontier_SetFacilityToVarFromMap(void)
+void Script_SiliconFrontier_GetFacilityFromCurrentChallenge(void)
 {
-    VarSet(VAR_0x8006,SiliconFrontier_GetFacilityFromMap());
+    VarSet(VAR_TEMP_F,SiliconFrontier_GetFacilityFromCurrentChallenge());
 }
 
 u8 SiliconFrontier_GetFacilityMilestoneRequirement(enum SiliconFrontierFacility facility,  enum BossPhases phase)
@@ -1215,4 +1215,3 @@ void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void)
 {
     VarSet(VAR_TEMP_0,SiliconFrontier_GetTypeFromCurrentChallenge());
 }
-
