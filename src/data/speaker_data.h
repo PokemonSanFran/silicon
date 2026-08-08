@@ -3220,4 +3220,36 @@ static const struct SpeakerData sSpeakerData[NUM_SPEAKERS] =
         .speakerIcon = gSpeakerIcon_Bill,
         .speakerPal = sSpeakerPal_Bill,
     },
+    [SPEAKER_BATTLE_JAM] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Battle Jam Attendant"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Brock,
+        .speakerPal = sSpeakerPal_Brock,
+    },
+    [SPEAKER_BATTLE_STUDIO] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Battle Studio Attendant"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Misty,
+        .speakerPal = sSpeakerPal_Misty,
+    },
+    [SPEAKER_RESTRICTED_SPARRING] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Restricted Sparring Attendant"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Erika,
+        .speakerPal = sSpeakerPal_Erika,
+    },
+    [SPEAKER_BATTLE_CONVENTION] =
+    {
+        .name = COMPOUND_STRING("???"),
+        .title = COMPOUND_STRING("Battle Convention Attendant"),
+        .gender = NON_HUMAN,
+        .speakerIcon = gSpeakerIcon_Blaine,
+        .speakerPal = sSpeakerPal_Blaine,
+    },
 };
