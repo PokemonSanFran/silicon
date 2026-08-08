@@ -21,10 +21,10 @@ script SiliconFrontier_Dialogue_AskResume
     if (var(VAR_RESULT) == NO)
     {
         callnative(SiliconFrontier_ResetLastChallenge)
-            return
+        return
     }
-    callnative(Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility)
-    callnative(SiliconFrontier_ResetLastChallenge)
+    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
+    callnative(SiliconFrontier_SetCurrentChallengeFromLastChallenge)
     goto(SiliconFrontier_Script_ChoosePartyMons)
 }
 
@@ -115,24 +115,69 @@ script SiliconFrontier_Script_RegisterChallenge
     msgbox(format("Which challenge would you like to start?"))
     dynmultipush(gText_Single,SILICON_FRONTIER_CHALLENGE_TYPE_SINGLE)
     dynmultipush(gText_Double,SILICON_FRONTIER_CHALLENGE_TYPE_DOUBLE)
-    dynmultipush(COMPOUND_STRING("Multi"),SILICON_FRONTIER_CHALLENGE_TYPE_MULTI)
+    dynmultipush(gText_Multi,SILICON_FRONTIER_CHALLENGE_TYPE_MULTI)
     dynmultipush("Never mind.",MULTI_B_PRESSED)
     dynmultistack(0, 0, FALSE, 3, TRUE, 0, NULL)
     goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
+    callnative(SiliconFrontier_SetCurrentChallengeFacilityFromMap)
+    callnative(SiliconFrontier_SetCurrentChallengeChallengeTypeFromVarResult)
+    call(SiliconFrontier_Script_PickSparringType)
     goto(SiliconFrontier_Script_ChoosePartyMons)
+}
+
+script SiliconFrontier_Script_PickSparringType
+{
+    if (var(VAR_0x8006) == SILICON_FACILITY_SPARRING)
+    {
+        msgbox(format("Which type do you want to register with?"))
+        dynmultipush(COMPOUND_STRING("Normal"),SPARRING_TYPE_NORMAL)
+        dynmultipush(COMPOUND_STRING("Fighting"),SPARRING_TYPE_FIGHTING)
+        dynmultipush(COMPOUND_STRING("Flying"),SPARRING_TYPE_FLYING)
+        dynmultipush(COMPOUND_STRING("Poison"),SPARRING_TYPE_POISON)
+        dynmultipush(COMPOUND_STRING("Ground"),SPARRING_TYPE_GROUND)
+        dynmultipush(COMPOUND_STRING("Rock"),SPARRING_TYPE_ROCK)
+        dynmultipush(COMPOUND_STRING("Bug"),SPARRING_TYPE_BUG)
+        dynmultipush(COMPOUND_STRING("Ghost"),SPARRING_TYPE_GHOST)
+        dynmultipush(COMPOUND_STRING("Steel"),SPARRING_TYPE_STEEL)
+        dynmultipush(COMPOUND_STRING("Fire"),SPARRING_TYPE_FIRE)
+        dynmultipush(COMPOUND_STRING("Water"),SPARRING_TYPE_WATER)
+        dynmultipush(COMPOUND_STRING("Grass"),SPARRING_TYPE_GRASS)
+        dynmultipush(COMPOUND_STRING("Electric"),SPARRING_TYPE_ELECTRIC)
+        dynmultipush(COMPOUND_STRING("Psychic"),SPARRING_TYPE_PSYCHIC)
+        dynmultipush(COMPOUND_STRING("Ice"),SPARRING_TYPE_ICE)
+        dynmultipush(COMPOUND_STRING("Dragon"),SPARRING_TYPE_DRAGON)
+        dynmultipush(COMPOUND_STRING("Dark"),SPARRING_TYPE_DARK)
+        dynmultipush(COMPOUND_STRING("Fairy"),SPARRING_TYPE_FAIRY)
+        dynmultipush(COMPOUND_STRING("Never mind."),MULTI_B_PRESSED)
+        dynmultistack(0, 0, FALSE, 5, TRUE, 0, NULL)
+        goto_if_eq(VAR_RESULT,MULTI_B_PRESSED,SiliconFrontier_Script_QuitAttendant)
+    }
+    else
+    {
+        setvar(VAR_RESULT,SPARRING_TYPE_COUNT)
+    }
+    callnative(SiliconFrontier_SetCurrentChallengeSparringTypeFromVarResult)
+}
+
+script SiliconFrontier_Script_ChoosePartner
+{
+    callnative(Script_SiliconFrontier_GetTypeFromCurrentChallenge)
+    if (var(VAR_TEMP_0) != SILICON_FRONTIER_CHALLENGE_TYPE_MULTI)
+    {
+        return
+    }
+    callnative(SiliconFrontier_DebugChoosePartner)
 }
 
 script SiliconFrontier_Script_ChoosePartyMons
 {
-    callnative(SiliconFrontier_SetCurrentChallengeFromVars)
     callnative(SiliconFrontier_SetLastChallengeFromCurrentChallenge)
-
     callnative(Script_SiliconFrontier_IsPartyValidForChallenge)
     if (var(VAR_RESULT) == FALSE)
     {
         goto(SiliconFrontier_Dialogue_NotEnough)
     }
-
+    call(SiliconFrontier_Script_ChoosePartner)
     msgbox(format("Which Pokemon will you enter the Facility with?"))
     closemessage
     special(SavePlayerParty)
@@ -164,6 +209,7 @@ script SiliconFrontier_Dialogue_IfYouReset
 script SiliconFrontier_Script_NeedToSave
 {
     special(LoadPlayerParty)
+    callnative(SiliconFrontier_ResetCurrentPartner)
     callnative(SiliconFrontier_ResetCurrentChallenge)
     msgbox(format("Unfortunately, you cannot enter the facility until you save. Please return when you're ready to save."))
     goto(SiliconFrontier_Script_QuitAttendant)
@@ -246,13 +292,13 @@ script SiliconFrontier_Script_WonBattle
     waitse
     callnative(SiliconFrontier_TryAwardBadge)
     call_if_ne(VAR_RESULT,SILICON_FRONTIER_BOSS_PHASE_COUNT,SiliconFrontier_Dialogue_AwardBadge)
-    playse(SE_USE_ITEM)
-    callnative(SiliconFrontier_BufferStreakString)
     goto(SiliconFrontier_Script_BattleMenu)
 }
 
 script SiliconFrontier_Script_BattleMenu
 {
+    playse(SE_USE_ITEM)
+    callnative(SiliconFrontier_BufferStreakString)
     msgbox(format("Your party has been fully healed. Would you like to continue your {STR_VAR_2} battle streak?"))
     waitse
     dynmultichoice(0,0,TRUE,4,0,NULL, "Continue", "Leave", "Record")
@@ -336,6 +382,7 @@ script SiliconFrontier_Script_SaveAfterQuitChallenge
     lock
     msgbox(format("We will now save your progress. Please wait."))
     closemessage
+    callnative(SiliconFrontier_ResetCurrentPartner)
     callnative(SiliconFrontier_ResetCurrentChallenge)
     special(LoadPlayerParty)
     setvar(VAR_SILICON_FACILITY_CHALLENGE_STATUS,SILICON_FRONTIER_CHALLENGE_NOT_STARTED)
@@ -396,6 +443,7 @@ script SiliconFrontier_Dialogue_InvalidParty
     } while (var(VAR_0x8006) < FRONTIER_DOUBLES_PARTY_SIZE)
     special(LoadPlayerParty)
     callnative(SiliconFrontier_ResetCurrentChallenge)
+    callnative(SiliconFrontier_ResetCurrentPartner)
     goto(SiliconFrontier_Script_AdjustPartyQuit)
 }
 

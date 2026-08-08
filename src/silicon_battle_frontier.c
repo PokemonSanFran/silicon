@@ -19,124 +19,124 @@
 #include "battle_transition.h"
 #include "battle_setup.h"
 #include "silicon_battle_frontier.h"
-
-u16 SiliconFrontier_GetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
-void SiliconFrontier_SetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value);
-u16 SiliconFrontier_GetNumberAllBattles(void);
-u16 SiliconFrontier_GetCurrentStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
-void SiliconFrontier_SetCurrentStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value);
-u16 SiliconFrontier_GetLongestStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
-void SiliconFrontier_SetLongestStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value);
-enum SiliconFrontierPartner SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility);
-void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierPartner partner);
-struct RentalMon SiliconFrontier_GetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot);
-void SiliconFrontier_SetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot, struct RentalMon originalMon);
-enum SiliconFrontierPartner SiliconFrontier_GetCurrentPartner(enum SiliconFrontierChallengeType challengeType);
-void SiliconFrontier_SetCurrentPartner(enum SiliconFrontierChallengeType challengeType, enum SiliconFrontierPartner currentPartner);
-u8 SiliconFrontier_GetRemainingHeals(void);
-void SiliconFrontier_SetRemainingHeals(u32 value);
-void SiliconFrontier_ResetRemainingHeals(void);
-void SiliconFrontier_DecreaseRemainingHeals(void);
-void SiliconFrontier_AllowRecordedBattle(void);
-void SiliconFrontier_DisableRecordedBattle(void);
-bool32 SiliconFrontier_CanBattleBeRecorded(void);
-void SiliconFrontier_SetSelectedPartyMon(u32 saveBlockSlot, u32 partySlot);
-u32 SiliconFrontier_GetSelectedPartyMon(u32 saveBlockSlot);
-void SiliconFrontier_SetFacilityToVarFromMap(void);
-enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void);
-void SiliconFrontier_ResetCurrentChallenge(void);
-void SiliconFrontier_SetCurrentChallengeFromVars(void);
-void SiliconFrontier_SetCurrentChallenge(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType);
-static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount);
-
+#include "silicon_frontier_accessors.h"
 #include "data/silicon_frontier/facilities.h"
 #include "data/silicon_frontier/trainers.h"
 #include "data/silicon_frontier/mons.h"
 
-u16 SiliconFrontier_GetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
+enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void);
+u32 SiliconFrontier_GetNumberAllBattles(void);
+void SiliconFrontier_ResetRemainingHeals(void);
+void SiliconFrontier_DecreaseRemainingHeals(void);
+void SiliconFrontier_SetFacilityToVarFromMap(void);
+u8 SiliconFrontier_GetFacilityMilestoneRequirement(enum SiliconFrontierFacility facility,  enum BossPhases phase);
+u16 SiliconFrontier_GetFacilityBadge(enum SiliconFrontierFacility facility,  enum BossPhases phase);
+const u8* SiliconFrontier_GetFacilityBadgeName(enum SiliconFrontierFacility facility,  enum BossPhases phase);
+enum SiliconFrontierTrainerIds SiliconFrontier_GetFacilityBoss(enum SiliconFrontierFacility facility,  enum BossPhases phase);
+const u8* SiliconFrontier_GetFacilityOriginalName(enum SiliconFrontierFacility facility);
+const u8* SiliconFrontier_GetFacilityName(enum SiliconFrontierFacility facility);
+mapsec_s16_t SiliconFrontier_GetFacilityMapsec(enum SiliconFrontierFacility facility);
+enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void);
+void SiliconFrontier_ResetCurrentChallenge(void);
+void SiliconFrontier_SetCurrentChallengeFromVars(void);
+void SiliconFrontier_GetLastChallengeStreakLength(void);
+void SiliconFrontier_SetLastChallengeFromCurrentChallenge(void);
+void Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void);
+void BufferLastChallengeType(void);
+void SiliconFrontier_ResetLastChallenge(void);
+static u32 SiliconFroniter_GetPartySizeFromCurrentChallenge(void);
+void SiliconFrontier_SetPartyScreenPickAmount(void);
+void SiliconFrontier_SetSelectedMons(void);
+void SiliconFrontier_ResetPartyIndexVars(void);
+static bool32 SiliconFrontier_CheckMon_Egg(u32 partyIndex, struct Pokemon *mon, enum Species speciesArray[], enum Item itemArray[]);
+static bool32 SiliconFrontier_CheckMon_Legendary(u32 partyIndex, struct Pokemon *mon, enum Species speciesArray[], enum Item itemArray[]);
+static bool32 SiliconFrontier_CheckMon_UniqueSpecies(u32 partyIndex, struct Pokemon *mon, enum Species speciesArray[], enum Item itemArray[]);
+static bool32 SiliconFrontier_CheckMon_UniqueItem(u32 partyIndex, struct Pokemon *mon, enum Species speciesArray[], enum Item itemArray[]);
+static bool32 SiliconFroniter_CheckMon_MatchingType(u32 partyIndex, struct Pokemon *mon, enum Species speciesArray[], enum Item itemArray[]);
+void SiliconFrontier_FailCheck(u32 partyIndex, enum SiliconFrontierEligiblity checkIndex);
+static bool8 SiliconFrontier_GetCheck(u32 partyIndex, enum SiliconFrontierEligiblity checkIndex);
+void SiliconFrontier_CheckMonEligibility(void);
+bool32 SiliconFrontier_IsPartyValidForChallenge(void);
+void Script_SiliconFrontier_IsPartyValidForChallenge(void);
+static bool32 SiliconFrontier_AreChosenMonsEligible(void);
+void Script_SiliconFrontier_AreChosenMonsEligible(void);
+void SiliconFrontier_ReturnPartyCodes(void);
+void BufferPartySizeForChallenge(void);
+enum SiliconFrontierTrainerIds GetRandomSiliconFrontierTrainer(void);
+u16 SiliconFrontier_GetTrainerFlag(enum SiliconFrontierTrainerIds trainerId);
+bool8 SiliconFrontier_IsBossUnlocked(enum SiliconFrontierTrainerIds trainerId);
+enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStreak);
+enum SiliconFrontierTrainerIds SiliconFrontier_GetBossFromCurrentFacility(enum BossPhases phase);
+enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void);
+bool8 SiliconFroniter_IsCurrentChallengeTypeDouble(void);
+bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void);
+bool8 SiliconFroniter_IsCurrentChallengeTypeLinkMulti(void);
+void SiliconFrontier_SetAllOpponents(void);
+const u16 SiliconFrontier_GetObjectGfxId(enum SiliconFrontierTrainerIds trainerId);
+const u8* SiliconFrontier_GetTrainerName(enum SiliconFrontierTrainerIds trainerId);
+const u8* SiliconFrontier_GetBattleText(enum SiliconFrontierSpeechStrings stringId, enum SiliconFrontierTrainerIds trainerId);
+const u8* SiliconFrontier_GetPlayerLossText(enum SiliconFrontierTrainerIds trainerId);
+u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId);
+void SiliconFrontier_SetAllOpponentsObjects(void);
+const u8* SiliconFrontier_GetOpponentIntroText(enum SiliconFrontierTrainerIds trainerId);
+enum NameplateSpeaker SiliconFrontier_GetSpeaker(enum SiliconFrontierTrainerIds trainerId);
+enum NameplateTail SiliconFrontier_GetTail(enum SiliconFrontierTrainerIds trainerId);
+enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds trainerId);
+void SiliconFrontier_BufferOpponentText(enum SiliconFrontierTrainerIds trainerId);
+void SiliconFrontier_SetUpTextA(void);
+void SiliconFrontier_SetUpTextB(void);
+static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount, enum BattleTrainer trainer);
+static void SiliconFrontier_FillOpponentParties(void);
+void SiliconFrontier_SetUpOpponent(void);
+//static void SiliconFrontier_IncreaseNumBattles(void);
+static void HandleFacilityTrainerBattleEnd(void);
+static void Task_StartBattleAfterTransition(u8 taskId);
+void SiliconFrontier_StartFacilityBattle(void);
+void SiliconFrontier_TryIncrementWinStreakAndRecord(void);
+u32 SiliconFrontier_CalculateStreakBP(void);
+void SiliconFrontier_BufferBP(void);
+void SiliconFrontier_BufferStreakString(void);
+void SiliconFrontier_TryAwardBadge(void);
+void SiliconFrontier_BufferAwardSpeech(void);
+void SiliconFrontier_BufferGoldMilestone(void);
+u32 SiliconFroniter_CountCaughtBlockedSpecies(void);
+void Script_SiliconFroniter_CountCaughtBlockedSpecies(void);
+bool32 SiliconFrontier_ShouldSpeciesBeBlockedFromFrontier(enum Species species);
+void DebugToggleBosses(void);
+void Script_BufferGetFacilityName(void);
+void Script_BufferBasePoints(void);
+void Script_BufferBossPoints(void);
+void Script_BufferMilestonePoints(void);
+void Script_BufferSilverBadgeAndStreak(void);
+void Script_BufferGoldBadgeAndStreak(void);
+void SiliconFrontier_ResetCurrentStreak(void);
+u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId);
+void SiliconFrontier_DebugChoosePartner(void);
+void SiliconFrontier_ResetCurrentPartner(void);
+void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void);
+
+enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void)
 {
-    return gSaveBlock2Ptr->frontier.numBattles[facility][challengeType];
+    return SiliconFrontier_GetTypeFromLastChallenge(SiliconFrontier_GetFacilityFromMap());
 }
 
-void SiliconFrontier_SetNumberBattles(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value)
-{
-    gSaveBlock2Ptr->frontier.numBattles[facility][challengeType] = value;
-}
-
-u16 SiliconFrontier_GetNumberAllBattles(void)
+/*
+u32 SiliconFrontier_GetNumberAllBattles(void)
 {
     u32 total = 0;
     for (enum SiliconFrontierFacility facility = 0; facility < SILICON_FACILITY_COUNT; facility++)
     {
-        for (enum SiliconFrontierChallengeType type = 0; type < SILICON_FRONTIER_CHALLENGE_TYPE_COUNT; type++)
+        for (enum SiliconFrontierSparringTypes sparringType = 0; sparringType < SPARRING_TYPE_COUNT; sparringType++)
         {
-            total += SiliconFrontier_GetNumberBattles(facility,type);
+            for (enum SiliconFrontierChallengeType type = 0; type < SILICON_FRONTIER_CHALLENGE_TYPE_COUNT; type++)
+            {
+                total += SiliconFrontier_GetNumberBattles(facility,type,sparringType);
+            }
         }
     }
-
     return min(total, MAX_u32);
 }
-
-u16 SiliconFrontier_GetCurrentStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
-{
-    return gSaveBlock2Ptr->frontier.streakData[facility][challengeType].currentStreak;
-}
-
-void SiliconFrontier_SetCurrentStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value)
-{
-    gSaveBlock2Ptr->frontier.streakData[facility][challengeType].currentStreak = value;
-}
-
-u16 SiliconFrontier_GetLongestStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
-{
-    return gSaveBlock2Ptr->frontier.streakData[facility][challengeType].longestStreak;
-}
-
-void SiliconFrontier_SetLongestStreak(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType, u32 value)
-{
-    gSaveBlock2Ptr->frontier.streakData[facility][challengeType].longestStreak = value;
-}
-
-enum SiliconFrontierPartner SiliconFrontier_GetLongestStreakPartner(enum SiliconFrontierFacility facility)
-{
-    return gSaveBlock2Ptr->frontier.streakData[facility][SILICON_FRONTIER_CHALLENGE_TYPE_MULTI].longestStreakPartner;
-}
-
-void SiliconFrontier_SetLongestStreakPartner(enum SiliconFrontierFacility facility, enum SiliconFrontierPartner partner)
-{
-    gSaveBlock2Ptr->frontier.streakData[facility][SILICON_FRONTIER_CHALLENGE_TYPE_MULTI].longestStreakPartner = partner;
-}
-
-struct RentalMon SiliconFrontier_GetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot)
-{
-    return gSaveBlock2Ptr->frontier.factoryRentalMons[challengeType][slot];
-}
-
-void SiliconFrontier_SetPlayerFactoryRentalMon(enum SiliconFrontierChallengeType challengeType, u32 slot, struct RentalMon originalMon)
-{
-    return;
-    // should just copy into the slot
-}
-
-enum SiliconFrontierPartner SiliconFrontier_GetCurrentPartner(enum SiliconFrontierChallengeType challengeType)
-{
-    return gSaveBlock2Ptr->frontier.currentPartner[challengeType];
-}
-
-void SiliconFrontier_SetCurrentPartner(enum SiliconFrontierChallengeType challengeType, enum SiliconFrontierPartner currentPartner)
-{
-    gSaveBlock2Ptr->frontier.currentPartner[challengeType] = currentPartner;
-}
-
-u8 SiliconFrontier_GetRemainingHeals(void)
-{
-    return gSaveBlock2Ptr->frontier.remainingSparringHeals;
-}
-
-void SiliconFrontier_SetRemainingHeals(u32 value)
-{
-    gSaveBlock2Ptr->frontier.remainingSparringHeals = value;
-}
+*/
 
 void SiliconFrontier_ResetRemainingHeals(void)
 {
@@ -151,31 +151,6 @@ void SiliconFrontier_DecreaseRemainingHeals(void)
         heals--;
 
     SiliconFrontier_SetRemainingHeals(heals);
-}
-
-void SiliconFrontier_AllowRecordedBattle(void)
-{
-    gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
-}
-
-void SiliconFrontier_DisableRecordedBattle(void)
-{
-    gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
-}
-
-bool32 SiliconFrontier_CanBattleBeRecorded(void)
-{
-    return (gSaveBlock2Ptr->frontier.disableRecordBattle == FALSE);
-}
-
-void SiliconFrontier_SetSelectedPartyMon(u32 saveBlockSlot, u32 partySlot)
-{
-    gSaveBlock2Ptr->frontier.selectedPartyMons[saveBlockSlot] = partySlot;
-}
-
-u32 SiliconFrontier_GetSelectedPartyMon(u32 saveBlockSlot)
-{
-    return gSaveBlock2Ptr->frontier.selectedPartyMons[saveBlockSlot];
 }
 
 void SiliconFrontier_SetFacilityToVarFromMap(void)
@@ -229,66 +204,64 @@ enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromMap(void)
 
 void SiliconFrontier_ResetCurrentChallenge(void)
 {
-    SiliconFrontier_SetCurrentChallenge(SILICON_FACILITY_NONE,SILICON_FRONTIER_CHALLENGE_TYPE_NONE);
+    SiliconFrontier_SetCurrentChallengeFacility(SILICON_FACILITY_NONE);
+    SiliconFrontier_SetCurrentChallengeChallengeType(SILICON_FRONTIER_CHALLENGE_TYPE_NONE);
+    SiliconFrontier_SetCurrentChallengeSparringType(SPARRING_TYPE_COUNT);
 }
 
-
-void SiliconFrontier_SetCurrentChallengeFromVars(void)
+void SiliconFrontier_SetCurrentChallengeSparringTypeFromVarResult(void)
 {
-    SiliconFrontier_SetCurrentChallenge(SiliconFrontier_GetFacilityFromMap(),gSpecialVar_Result);
+    SiliconFrontier_SetCurrentChallengeSparringType(gSpecialVar_Result);
 }
 
-void SiliconFrontier_SetCurrentChallenge(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
+void SiliconFrontier_SetCurrentChallengeFacilityFromMap(void)
 {
-    u16 value = 0;
-    value |= (u16)facility & MAX_u8;
-    value |= ((u16)challengeType & MAX_u8) << 8;
-    gSaveBlock2Ptr->frontier.currentChallenge = value;
+    SiliconFrontier_SetCurrentChallengeFacility(SiliconFrontier_GetFacilityFromMap());
 }
 
-u16 SiliconFrontier_GetCurrentChallenge(void)
+void SiliconFrontier_SetCurrentChallengeChallengeTypeFromVarResult(void)
 {
-    return gSaveBlock2Ptr->frontier.currentChallenge;
+    SiliconFrontier_SetCurrentChallengeChallengeType(gSpecialVar_Result);
 }
 
-enum SiliconFrontierFacility SiliconFrontier_GetFacilityFromCurrentChallenge(void)
+static enum Type SiliconFrontier_ConvertSparringTypeToMonType(enum SiliconFrontierSparringTypes type)
 {
-    return ((SiliconFrontier_GetCurrentChallenge()) & MAX_u8);
-}
+    for (enum Type typeIndex = TYPE_NONE; typeIndex < NUMBER_OF_MON_TYPES; typeIndex++)
+    {
+        if (gTypesInfo[typeIndex].sparringType == type)
+            return typeIndex;
+    }
 
-enum SiliconFrontierChallengeType SiliconFrontier_GetTypeFromCurrentChallenge(void)
-{
-    return ((SiliconFrontier_GetCurrentChallenge() >> 8) & MAX_u8);
-}
-
-enum Type SiliconFacility_GetChosenSparringType(void)
-{
-    return gSaveBlock2Ptr->frontier.chosenSparringType;
-}
-
-static void SiliconFacility_SetChosenSparringType(enum Type type)
-{
-    gSaveBlock2Ptr->frontier.chosenSparringType = type;
-}
-
-static enum SiliconFrontierChallengeType SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void)
-{
-    return gSaveBlock2Ptr->frontier.lastChallengeType[SiliconFrontier_GetFacilityFromMap()];
+    return TYPE_NONE;
 }
 
 void SiliconFrontier_GetLastChallengeStreakLength(void)
 {
-    gSpecialVar_Result = SiliconFrontier_GetCurrentStreak(SiliconFrontier_GetFacilityFromMap(),SiliconFrontier_GetLastChallengeTypeFromCurrentFacility());
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromMap();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetLastChallengeTypeFromCurrentFacility();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    gSpecialVar_Result = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 }
 
-static void SiliconFrontier_SetLastChallenge(enum SiliconFrontierFacility facility, enum SiliconFrontierChallengeType challengeType)
+void SiliconFrontier_SetCurrentChallengeFromLastChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.lastChallengeType[facility] = challengeType;
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromLastChallenge(facility);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetLastSparringType(facility);
+
+    SiliconFrontier_SetCurrentChallengeChallengeType(challengeType);
+    SiliconFrontier_SetCurrentChallengeSparringType(sparringType);
 }
 
 void SiliconFrontier_SetLastChallengeFromCurrentChallenge(void)
 {
-    SiliconFrontier_SetLastChallenge(SiliconFrontier_GetFacilityFromCurrentChallenge(),SiliconFrontier_GetTypeFromCurrentChallenge());
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+    enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    SiliconFrontier_SetLastChallengeChallengeType(facility,challengeType);
+    SiliconFrontier_SetLastChallengeSparringType(facility,sparringType);
 }
 
 void Script_SiliconFrontier_GetLastChallengeTypeFromCurrentFacility(void)
@@ -312,7 +285,10 @@ void BufferLastChallengeType(void)
 
 void SiliconFrontier_ResetLastChallenge(void)
 {
-    SiliconFrontier_SetLastChallenge(SiliconFrontier_GetFacilityFromMap(),SILICON_FRONTIER_CHALLENGE_TYPE_NONE);
+    enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
+
+    SiliconFrontier_SetLastChallengeChallengeType(facility,SILICON_FRONTIER_CHALLENGE_TYPE_NONE);
+    SiliconFrontier_SetLastChallengeSparringType(facility,SPARRING_TYPE_COUNT);
 }
 
 const u8 SiliconFrontier_PartySizes[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT] =
@@ -340,7 +316,7 @@ void SiliconFrontier_SetSelectedMons(void)
 {
     u32 size = SiliconFroniter_GetPartySizeFromCurrentChallenge();
     for (u32 i = 0; i < size; i++)
-        gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
+        SiliconFrontier_SetSelectedPartyMon(i,gSelectedOrderFromParty[i]);
 }
 
 u16 const VarToPartyIndexMap[MAX_FRONTIER_PARTY_SIZE] =
@@ -432,7 +408,7 @@ static bool32 SiliconFroniter_CheckMon_MatchingType(u32 partyIndex, struct Pokem
         return TRUE;
 
     enum Species species = SanitizeSpeciesId(GetMonData(mon, MON_DATA_SPECIES_OR_EGG));
-    enum Type requiredType = SiliconFacility_GetChosenSparringType();
+    enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
 
     for (u32 typeIndex = 0; typeIndex < 2; typeIndex++)
     {
@@ -561,7 +537,9 @@ void SiliconFrontier_ReturnPartyCodes(void)
         VarSet(VAR_0x8004,partyIndex);
         BufferMonNickname();
         StringCopy(gStringVar2,GetItemName(GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_HELD_ITEM)));
-        StringCopy(gStringVar3,gTypesInfo[SiliconFacility_GetChosenSparringType()].name);
+        enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
+
+        StringCopy(gStringVar3,gTypesInfo[requiredType].name);
         gSpecialVar_Result = SILICON_FRONTIER_ELIGIBILITY_CODE_ALL;
         return;
     }
@@ -575,7 +553,9 @@ void SiliconFrontier_ReturnPartyCodes(void)
         VarSet(VAR_0x8004,partyIndex);
         BufferMonNickname();
         StringCopy(gStringVar2,GetItemName(GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_HELD_ITEM)));
-        StringCopy(gStringVar3,gTypesInfo[SiliconFacility_GetChosenSparringType()].name);
+        enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
+
+        StringCopy(gStringVar3,gTypesInfo[requiredType].name);
         gSpecialVar_Result = SILICON_FRONTIER_ELIGIBILITY_CODE_ITEM_TYPE;
         return;
     }
@@ -589,7 +569,9 @@ void SiliconFrontier_ReturnPartyCodes(void)
         VarSet(VAR_0x8004,partyIndex);
         BufferMonNickname();
         StringCopy(gStringVar2,GetItemName(GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex],MON_DATA_HELD_ITEM)));
-        StringCopy(gStringVar3,gTypesInfo[SiliconFacility_GetChosenSparringType()].name);
+        enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
+
+        StringCopy(gStringVar3,gTypesInfo[requiredType].name);
         gSpecialVar_Result = SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES_TYPE;
         return;
     }
@@ -636,7 +618,9 @@ void SiliconFrontier_ReturnPartyCodes(void)
     {
         VarSet(VAR_0x8004,partyIndex);
         BufferMonNickname();
-        StringCopy(gStringVar3,gTypesInfo[SiliconFacility_GetChosenSparringType()].name);
+        enum Type requiredType = SiliconFrontier_ConvertSparringTypeToMonType(SiliconFrontier_GetCurrentChallengeSparringType());
+
+        StringCopy(gStringVar3,gTypesInfo[requiredType].name);
         gSpecialVar_Result = SILICON_FRONTIER_ELIGIBILITY_CODE_TYPE;
         return;
     }
@@ -697,7 +681,10 @@ enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
     if (((currentStreak + 1) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
         return GetRandomSiliconFrontierTrainer();
@@ -744,6 +731,7 @@ void SiliconFrontier_SetAllOpponents(void)
     if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
         return;
 
+    gPartnerTrainerId = TRAINER_PARTNER(SiliconFrontier_GetCurrentPartner());
     TRAINER_BATTLE_PARAM.opponentB = SiliconFrontier_GenerateOpponent();
 }
 
@@ -817,7 +805,7 @@ void SiliconFrontier_SetUpTextB(void)
     SiliconFrontier_BufferOpponentText(TRAINER_BATTLE_PARAM.opponentB);
 }
 
-static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount)
+static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount, enum BattleTrainer trainer)
 {
     const u16 *monSet = gSiliconFrontierTrainers[trainerId].monSet;
 
@@ -842,7 +830,7 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         // Ensure this Pokémon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_SPECIES) == gSiliconFrontierMons[monId].species)
+            if (GetMonData(&gParties[trainer][j], MON_DATA_SPECIES) == gSiliconFrontierMons[monId].species)
                 break;
         }
         if (j != i + firstMonId)
@@ -851,14 +839,14 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
         // Ensure this Pokemon's held item isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
         {
-            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) != ITEM_NONE && GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_HELD_ITEM) == gSiliconFrontierMons[monId].heldItem)
+            if (GetMonData(&gParties[trainer][j], MON_DATA_HELD_ITEM) != ITEM_NONE && GetMonData(&gParties[trainer][j], MON_DATA_HELD_ITEM) == gSiliconFrontierMons[monId].heldItem)
                 break;
         }
         if (j != i + firstMonId)
             continue;
 
         u8 fixedIV = MAX_PER_STAT_IVS;
-        CreateFacilityMon(&gSiliconFrontierMons[monId], SILICON_FRONTIER_LEVEL, fixedIV, otID, 0, &gParties[B_TRAINER_OPPONENT_A][i + firstMonId]);
+        CreateFacilityMon(&gSiliconFrontierMons[monId], SILICON_FRONTIER_LEVEL, fixedIV, otID, 0, &gParties[trainer][i + firstMonId]);
 
         // The Pokémon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
@@ -869,11 +857,14 @@ static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trai
 static void SiliconFrontier_FillOpponentParties(void)
 {
     ZeroEnemyPartyMons();
+    ZeroPartyMons(gParties[B_TRAINER_PARTNER]);
+
     u32 partySize = SiliconFroniter_GetPartySizeFromCurrentChallenge();
-    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentA,partySize);
+    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentA,partySize,B_TRAINER_OPPONENT_A);
     if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
         return;
-    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize);
+    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize,B_TRAINER_OPPONENT_B);
+    SiliconFrontier_FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB,partySize,B_TRAINER_PARTNER);
 }
 
 void SiliconFrontier_SetUpOpponent(void)
@@ -884,6 +875,7 @@ void SiliconFrontier_SetUpOpponent(void)
     SiliconFrontier_SetAllOpponentsObjects();
 }
 
+/*
 static void SiliconFrontier_IncreaseNumBattles(void)
 {
 
@@ -897,10 +889,11 @@ static void SiliconFrontier_IncreaseNumBattles(void)
 
     SiliconFrontier_SetNumberBattles(facility,challengeType,battles);
 }
+*/
 
 static void HandleFacilityTrainerBattleEnd(void)
 {
-    SiliconFrontier_IncreaseNumBattles();
+    //SiliconFrontier_IncreaseNumBattles();
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -936,24 +929,28 @@ void SiliconFrontier_TryIncrementWinStreakAndRecord(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
     if (++currentStreak > MAX_u16)
         return;
 
-    SiliconFrontier_SetCurrentStreak(facility,challengeType,currentStreak);
+    SiliconFrontier_SetCurrentStreak(facility,challengeType,sparringType, currentStreak);
 
-    if (currentStreak <= SiliconFrontier_GetLongestStreak(facility,challengeType))
+    if (currentStreak <= SiliconFrontier_GetLongestStreak(facility,challengeType, sparringType))
         return;
 
-    SiliconFrontier_SetLongestStreak(facility,challengeType,currentStreak);
+    SiliconFrontier_SetLongestStreak(facility,challengeType,sparringType, currentStreak);
 }
 
 u32 SiliconFrontier_CalculateStreakBP(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
     if (((currentStreak) % SILICON_FRONTIER_STREAK_LENGTH_BOSS) != 0)
     {
@@ -978,7 +975,9 @@ void SiliconFrontier_BufferStreakString(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 value = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
     if (value >= MAX_u16)
         StringCopy(gStringVar2,COMPOUND_STRING("infinite"));
@@ -990,7 +989,9 @@ void SiliconFrontier_TryAwardBadge(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
     gSpecialVar_Result = SILICON_FRONTIER_BOSS_PHASE_COUNT;
 
     for (u32 milestoneIndex = 0; milestoneIndex < (SILICON_FRONTIER_BOSS_PHASE_GOLD + 1); milestoneIndex++)
@@ -1012,7 +1013,9 @@ void SiliconFrontier_BufferAwardSpeech(void)
 {
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
-    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType);
+    enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
+
+    u32 streak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
     u32 phase = streak / SILICON_FRONTIER_STREAK_LENGTH_SILVER;
 
     enum SiliconFrontierTrainerIds trainer = SiliconFrontier_GetFacilityBoss(facility,phase);
@@ -1164,6 +1167,52 @@ void Script_BufferGoldBadgeAndStreak(void)
 
 void SiliconFrontier_ResetCurrentStreak(void)
 {
-    SiliconFrontier_SetCurrentStreak(SiliconFrontier_GetFacilityFromCurrentChallenge(),SiliconFrontier_GetTypeFromCurrentChallenge(), 0);
+    SiliconFrontier_SetCurrentStreak(SiliconFrontier_GetFacilityFromCurrentChallenge(),SiliconFrontier_GetTypeFromCurrentChallenge(), SiliconFrontier_GetCurrentChallengeSparringType(),0);
+}
+
+u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId)
+{
+    const u32 partnerMapping[SILICON_FRONTIER_PARTNER_COUNT] =
+    {
+        [SILICON_FRONTIER_PARTNER_PUA] = PARTNER_PUA,
+        [SILICON_FRONTIER_PARTNER_CHARLOTTE] = PARTNER_CHARLOTTE,
+        //[SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = PARTNER_AMI_ARGENTO,
+        //[SILICON_FRONTIER_PARTNER_TALA] = PARTNER_TALA,
+        [SILICON_FRONTIER_PARTNER_TALA] = 1,
+        [SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = 1,
+        [SILICON_FRONTIER_PARTNER_DIMU] = PARTNER_DIMU,
+        [SILICON_FRONTIER_PARTNER_ADAORA] = PARTNER_ADAORA,
+        [SILICON_FRONTIER_PARTNER_EMRYS] = PARTNER_EMRYS,
+        [SILICON_FRONTIER_PARTNER_MAGNUS] = PARTNER_MAGNUS,
+        [SILICON_FRONTIER_PARTNER_BD] = PARTNER_BD,
+        [SILICON_FRONTIER_PARTNER_BAIYA] = PARTNER_BAIYA,
+        [SILICON_FRONTIER_PARTNER_NERIENE] = PARTNER_NERIENE,
+        //[SILICON_FRONTIER_PARTNER_FRANK] = PARTNER_FRANK,
+        [SILICON_FRONTIER_PARTNER_FRANK] = 1,
+        [SILICON_FRONTIER_PARTNER_SHINZO] = PARTNER_SHINZO,
+        [SILICON_FRONTIER_PARTNER_KEI_YING] = PARTNER_KEI_YING,
+        [SILICON_FRONTIER_PARTNER_BELEN] = PARTNER_BELEN,
+        //[SILICON_FRONTIER_PARTNER_ELEANOR] = PARTNER_ELEANOR,
+        [SILICON_FRONTIER_PARTNER_ELEANOR] = 1,
+    };
+
+    return partnerMapping[partnerId];
+}
+
+void SiliconFrontier_DebugChoosePartner(void)
+{
+    u32 partner = SiliconFrontier_TranslatePartnerId(Random() % SILICON_FRONTIER_PARTNER_COUNT);
+
+    SiliconFrontier_SetCurrentPartner(partner);
+}
+
+void SiliconFrontier_ResetCurrentPartner(void)
+{
+    SiliconFrontier_SetCurrentPartner(SILICON_FRONTIER_PARTNER_NONE);
+}
+
+void Script_SiliconFrontier_GetTypeFromCurrentChallenge(void)
+{
+    VarSet(VAR_TEMP_0,SiliconFrontier_GetTypeFromCurrentChallenge());
 }
 

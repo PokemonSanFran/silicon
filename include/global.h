@@ -569,6 +569,46 @@ struct BattleDomeTrainer
 #define DOME_TOURNAMENT_TRAINERS_COUNT 16
 #define BATTLE_TOWER_RECORD_COUNT 5
 
+#include "constants/abilities.h"
+#include "constants/pokeball.h"
+
+struct BattleFrontierRecordMon
+{
+    u32 species:11;
+    u32 heldItem:11;
+    u32 gender:2;
+    u32 isShiny:1;
+};
+
+struct SiliconLastChallenge
+{
+    u16 challengeType:3;
+    u16 sparringType:5;
+};
+
+struct SiliconCurrentChallenge
+{
+    u16 facility:3;
+    u16 challengeType:3;
+    u16 sparringType:5;
+};
+
+struct BattleFrontierPartnerMon
+{
+    u32 status:16;
+    u16 hp:14;
+    u32 heldItem:11;
+    u8 pp[MAX_MON_MOVES];
+};
+
+struct FacilityRecords
+{
+    struct BattleFrontierRecordMon longestStreakParty[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_FRONTIER_PARTY_SIZE];
+    struct BattleFrontierRecordMon longestPartnerStreakParty[FRONTIER_MULTI_PARTY_SIZE];
+    struct SiliconFrontierStreaks streakData[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
+    u8 longestStreakPartner;
+};
+
 struct BattleFrontier
 {
 #if FREE_EMERALD_BATTLE_FRONTIER == FALSE
@@ -580,9 +620,9 @@ struct BattleFrontier
 #endif //FREE_BATTLE_TOWER_E_READER
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
-              u8 challengePaused:1;
-              u8 disableRecordBattle:1;
-              //u8 padding1:4;
+    u8 challengePaused:1;
+    u8 disableRecordBattle:1;
+    //u8 padding1:4;
     /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
     /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
     /*0xCB4*/ u16 trainerIds[20];
@@ -626,8 +666,8 @@ struct BattleFrontier
     /*0xE08*/ u16 pikeRecordStreaks[FRONTIER_LVL_MODE_COUNT];
     /*0xE0C*/ u16 pikeTotalStreaks[FRONTIER_LVL_MODE_COUNT];
     /*0xE10*/ u8 pikeHintedRoomIndex:3;
-              u8 pikeHintedRoomType:4;
-              u8 pikeHealingRoomsDisabled:1;
+    u8 pikeHintedRoomType:4;
+    u8 pikeHealingRoomsDisabled:1;
     /*0xE11*/ //u8 padding2;
     /*0xE12*/ u16 pikeHeldItemsBackup[FRONTIER_PARTY_SIZE];
     /*0xE18*/ u16 pyramidPrize;
@@ -656,17 +696,22 @@ struct BattleFrontier
     /*0xEFB*/ u8 unused_EFB;
     /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
 #else // siliconFrontier
-    u16 battlePoints;
-    u16 currentChallenge;
-    enum SiliconFrontierChallengeType lastChallengeType[SILICON_FACILITY_COUNT];
-    u16 numBattles[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
-    struct SiliconFrontierStreaks streakData[SILICON_FACILITY_COUNT][SILICON_FRONTIER_CHALLENGE_TYPE_COUNT];
-    struct RentalMon factoryRentalMons[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][MAX_FRONTIER_PARTY_SIZE];
-    enum SiliconFrontierPartner currentPartner[SILICON_FACILITY_COUNT];
-    u8 remainingSparringHeals:2;
-    enum Type chosenSparringType;
-    u8 disableRecordBattle:1;
+    struct FacilityRecords tower;
+    struct FacilityRecords arcade;
+    struct FacilityRecords factory;
+    struct FacilityRecords sparring[SPARRING_TYPE_COUNT];
+
+    struct BattleFrontierPartnerMon partnerSparring[FRONTIER_MULTI_PARTY_SIZE];
+
+    u16 factoryRentalMonIds[SILICON_FRONTIER_CHALLENGE_TYPE_COUNT][FRONTIER_PARTY_SIZE];
+
     u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+    u8 currentPartner;
+    u8 remainingSparringHeals : 2;
+    u8 disableRecordBattle    : 1;
+    struct SiliconCurrentChallenge currentChallenge;
+    struct SiliconLastChallenge lastChallenge[SILICON_FACILITY_COUNT];
+    u16 battlePoints;
 #endif // siliconFrontier
 };
 
@@ -737,7 +782,7 @@ struct SaveBlock2
              //u16 padding1:4;
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 filler_90[0x8];
+    ///*0x90*/ u8 filler_90[0x8]; // siliconMerge
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokémon Colosseum/XD
