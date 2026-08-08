@@ -13,6 +13,7 @@
 #include "constants/pokeball.h"
 #include "difficulty.h"
 #include "debug.h"
+#include "constants/silicon_battle_frontier.h"
 
 #define MAX_TRAINER_ITEMS 4
 
@@ -198,6 +199,7 @@ struct TypeInfo
     u16 zCrystal;
     //u16 teraShard;
     //u16 arceusForm;
+    enum SiliconFrontierSparringTypes sparringType;
 };
 
 struct FollowerMsgInfo
