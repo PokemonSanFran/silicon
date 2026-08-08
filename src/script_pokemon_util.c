@@ -285,10 +285,14 @@ void LevelAllPokemonToX(u32 level)
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon *pokemon = &gParties[B_TRAINER_PLAYER][i];
-        if (GetMonData(pokemon, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+        enum Species species = GetMonData(pokemon, MON_DATA_SPECIES, NULL);
+        if (species == SPECIES_NONE)
             continue;
 
-        u32 exp = gExperienceTables[gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].growthRate][level];
+        if (GetMonData(pokemon, MON_DATA_LEVEL, NULL) < SILICON_FRONTIER_LEVEL)
+            continue;
+
+        u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
         SetMonData(pokemon, MON_DATA_EXP, &exp);
         CalculateMonStats(pokemon);
     }
