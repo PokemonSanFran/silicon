@@ -24,7 +24,7 @@ struct SiliconFrontierTrainers
     u16 objectGfxId;
     const u8 *trainerName;
     const u8* text[SILICON_FRONTIER_TEXT_PLAYER_COUNT];
-    const u16 monSet[SILICON_FRONTIER_MON_SET_SIZE];
+    const u16 monSet[SILICON_FRONTIER_MON_ID_BATTLE_COUNT][SILICON_FRONTIER_MON_SET_SIZE];
     enum NameplateSpeaker speaker;
     enum NameplateTail tail;
     enum NameplateEmotes emote;

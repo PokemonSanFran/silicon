@@ -807,7 +807,9 @@ void SiliconFrontier_SetUpTextB(void)
 
 static void SiliconFrontier_FillTrainerParty(enum SiliconFrontierTrainerIds trainerId, u32 monCount, enum BattleTrainer trainer)
 {
-    const u16 *monSet = gSiliconFrontierTrainers[trainerId].monSet;
+    enum SiliconFrontierMonIdChallengeType monIDtype = (SiliconFroniter_IsCurrentChallengeTypeDouble()) ? SILICON_FRONTIER_MON_ID_BATTLE_DOUBLES : SILICON_FRONTIER_MON_ID_BATTLE_SINGLES;
+
+    const u16 *monSet = gSiliconFrontierTrainers[trainerId].monSet[monIDtype];
 
     u32 bfMonCount = 0;
     u32 monId = monSet[bfMonCount];

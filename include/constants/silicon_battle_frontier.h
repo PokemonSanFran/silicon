@@ -58,6 +58,13 @@ enum SiliconFrontierChallengeType
     SILICON_FRONTIER_CHALLENGE_TYPE_COUNT,
 };
 
+enum SiliconFrontierMonIdChallengeType
+{
+    SILICON_FRONTIER_MON_ID_BATTLE_SINGLES,
+    SILICON_FRONTIER_MON_ID_BATTLE_DOUBLES,
+    SILICON_FRONTIER_MON_ID_BATTLE_COUNT,
+};
+
 enum SiliconFrontierFacility
 {
     SILICON_FACILITY_NONE,
