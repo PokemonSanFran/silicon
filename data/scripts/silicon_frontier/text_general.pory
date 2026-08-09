@@ -5,10 +5,13 @@ script SiliconFrontier_Dialogue_WelcomeBackNewChallenge
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WelcomeBackNewChallenge)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WelcomeBackNewChallenge)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WelcomeBackNewChallenge)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WelcomeBackNewChallenge)
     }
 }
 
@@ -18,10 +21,13 @@ script SiliconFrontier_Dialogue_WelcomeBackContinueChallenge
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WelcomeBackContinueChallenge)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WelcomeBackContinueChallenge)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WelcomeBackContinueChallenge)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WelcomeBackContinueChallenge)
     }
 }
 
@@ -31,10 +37,13 @@ script SiliconFrontier_Dialogue_WelcomeToThe
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WelcomeToThe)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WelcomeToThe)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WelcomeToThe)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WelcomeToThe)
     }
 }
 
@@ -44,10 +53,13 @@ script SiliconFrontier_Dialogue_HopeToSeeYou
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_HopeToSeeYou)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_HopeToSeeYou)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_HopeToSeeYou)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_HopeToSeeYou)
     }
 }
 
@@ -57,10 +69,13 @@ script SiliconFrontier_Dialogue_WhatWouldYouLikeInfo
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WhatWouldYouLikeInfo)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WhatWouldYouLikeInfo)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WhatWouldYouLikeInfo)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WhatWouldYouLikeInfo)
     }
 }
 
@@ -71,10 +86,13 @@ script SiliconFrontier_Dialogue_ExplainFacility
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_ExplainFacility)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_ExplainFacility)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_ExplainFacility)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_ExplainFacility)
     }
 }
 
@@ -84,10 +102,13 @@ script SiliconFrontier_Dialogue_YouCanCompete
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouCanCompete)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouCanCompete)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouCanCompete)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouCanCompete)
     }
 }
 
@@ -97,10 +118,13 @@ script SiliconFrontier_Dialogue_YouCannotCompete
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouCannotCompete)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouCannotCompete)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouCannotCompete)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouCannotCompete)
     }
 }
 
@@ -110,10 +134,13 @@ script SiliconFrontier_Dialogue_YouRecieveBP
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouRecieveBP)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouRecieveBP)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouRecieveBP)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouRecieveBP)
     }
 }
 
@@ -123,10 +150,13 @@ script SiliconFrontier_Dialogue_EveryXWins
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_EveryXWins)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_EveryXWins)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_EveryXWins)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_EveryXWins)
     }
 }
 
@@ -136,10 +166,13 @@ script SiliconFrontier_Dialogue_OneTimeBonus
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_OneTimeBonus)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_OneTimeBonus)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_OneTimeBonus)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_OneTimeBonus)
     }
 }
 
@@ -149,10 +182,13 @@ script SiliconFrontier_Dialogue_OnceYourParty
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_OnceYourParty)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_OnceYourParty)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_OnceYourParty)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_OnceYourParty)
     }
 }
 
@@ -163,10 +199,13 @@ script SiliconFrontier_Dialogue_DontTryToCheat
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_DontTryToCheat)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_DontTryToCheat)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_DontTryToCheat)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_DontTryToCheat)
     }
 }
 
@@ -176,10 +215,13 @@ script SiliconFrontier_Dialogue_WinningSilver
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WinningSilver)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WinningSilver)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WinningSilver)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WinningSilver)
     }
 }
 
@@ -189,10 +231,13 @@ script SiliconFrontier_Dialogue_WinningGold
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WinningGold)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WinningGold)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WinningGold)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WinningGold)
     }
 }
 
@@ -202,10 +247,13 @@ script SiliconFrontier_Dialogue_WhichChallenge
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WhichChallenge)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WhichChallenge)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WhichChallenge)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WhichChallenge)
     }
 }
 
@@ -215,10 +263,13 @@ script SiliconFrontier_Dialogue_WhichPokemon
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WhichPokemon)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WhichPokemon)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WhichPokemon)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WhichPokemon)
     }
 }
 
@@ -228,10 +279,13 @@ script SiliconFrontier_Dialogue_YourPartyHas
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YourPartyHas)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YourPartyHas)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YourPartyHas)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YourPartyHas)
     }
 }
 
@@ -241,10 +295,13 @@ script SiliconFrontier_Dialogue_IfYouReset
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_IfYouReset)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_IfYouReset)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_IfYouReset)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_IfYouReset)
     }
 }
 
@@ -254,10 +311,13 @@ script SiliconFrontier_Dialogue_YouCannotEnter
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouCannotEnter)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouCannotEnter)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouCannotEnter)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouCannotEnter)
     }
 }
 
@@ -268,10 +328,13 @@ script SiliconFrontier_Dialogue_YourPartyHasBeenHealed
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YourPartyHasBeenHealed)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YourPartyHasBeenHealed)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YourPartyHasBeenHealed)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YourPartyHasBeenHealed)
     }
 }
 
@@ -281,10 +344,13 @@ script SiliconFrontier_Dialogue_ThereWasAnError
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_ThereWasAnError)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_ThereWasAnError)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_ThereWasAnError)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_ThereWasAnError)
     }
 }
 
@@ -294,10 +360,13 @@ script SiliconFrontier_Dialogue_YourBattleWasRecorded
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YourBattleWasRecorded)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YourBattleWasRecorded)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YourBattleWasRecorded)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YourBattleWasRecorded)
     }
 }
 
@@ -307,10 +376,13 @@ script SiliconFrontier_Dialogue_CongratulationsOnYourWin
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_CongratulationsOnYourWin)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_CongratulationsOnYourWin)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_CongratulationsOnYourWin)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_CongratulationsOnYourWin)
     }
 }
 
@@ -320,10 +392,13 @@ script SiliconFrontier_Dialogue_ForYourWonderfulAchievement
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_ForYourWonderfulAchievement)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_ForYourWonderfulAchievement)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_ForYourWonderfulAchievement)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_ForYourWonderfulAchievement)
     }
 }
 
@@ -333,10 +408,13 @@ script SiliconFrontier_Dialogue_WeLookForward
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WeLookForward)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WeLookForward)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WeLookForward)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WeLookForward)
     }
 }
 
@@ -346,10 +424,13 @@ script SiliconFrontier_Dialogue_WeHopeContinue
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WeHopeContinue)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WeHopeContinue)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WeHopeContinue)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WeHopeContinue)
     }
 }
 
@@ -359,10 +440,13 @@ script SiliconFrontier_Dialogue_YouWillStop
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouWillStop)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouWillStop)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouWillStop)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouWillStop)
     }
 }
 
@@ -372,10 +456,13 @@ script SiliconFrontier_Dialogue_YouTurnedOff
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_YouTurnedOff)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_YouTurnedOff)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_YouTurnedOff)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_YouTurnedOff)
     }
 }
 
@@ -385,10 +472,13 @@ script SiliconFrontier_Dialogue_WeWillNow
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_WeWillNow)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_WeWillNow)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_WeWillNow)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_WeWillNow)
     }
 }
 
@@ -398,10 +488,13 @@ script SiliconFrontier_Dialogue_SaveFailed
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_SaveFailed)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_SaveFailed)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_SaveFailed)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_SaveFailed)
     }
 }
 
@@ -411,10 +504,13 @@ script SiliconFrontier_Dialogue_NotEnoughMons
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_NotEnoughMons)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_NotEnoughMons)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_NotEnoughMons)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_NotEnoughMons)
     }
 }
 
@@ -424,10 +520,13 @@ script SiliconFrontier_Dialogue_AdjustPartyQuit
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_AdjustPartyQuit)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_AdjustPartyQuit)
     }
 }
 
@@ -437,10 +536,13 @@ script SiliconFrontier_Dialogue_EligibilityEgg
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_EligibilityEgg)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_EligibilityEgg)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_EligibilityEgg)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_EligibilityEgg)
     }
 }
 script SiliconFrontier_Dialogue_EligibilityLegendary
@@ -449,10 +551,13 @@ script SiliconFrontier_Dialogue_EligibilityLegendary
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_EligibilityLegendary)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_EligibilityLegendary)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_EligibilityLegendary)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_EligibilityLegendary)
     }
 }
 script SiliconFrontier_Dialogue_EligibilitySpecies
@@ -461,10 +566,13 @@ script SiliconFrontier_Dialogue_EligibilitySpecies
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_EligibilitySpecies)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_EligibilitySpecies)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_EligibilitySpecies)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_EligibilitySpecies)
     }
 }
 script SiliconFrontier_Dialogue_EligibilityItem
@@ -473,22 +581,12 @@ script SiliconFrontier_Dialogue_EligibilityItem
     switch(var(VAR_TEMP_F))
     {
         case SILICON_FACILITY_SPARRING:
+                    call(RestrictedSparring_Dialogue_EligibilityItem)
         case SILICON_FACILITY_TOWER:
             call(BattleJam_Dialogue_EligibilityItem)
         case SILICON_FACILITY_ARCADE:
+                    call(BattleStudio_Dialogue_EligibilityItem)
         case SILICON_FACILITY_FACTORY:
+                    call(BattleConvention_Dialogue_EligibilityItem)
     }
 }
-script SiliconFrontier_Dialogue_EligibilityType
-{
-    callnative(Script_SiliconFrontier_GetFacilityFromCurrentChallenge)
-    switch(var(VAR_TEMP_F))
-    {
-        case SILICON_FACILITY_SPARRING:
-        case SILICON_FACILITY_TOWER:
-            call(BattleJam_Dialogue_EligibilityType)
-        case SILICON_FACILITY_ARCADE:
-        case SILICON_FACILITY_FACTORY:
-    }
-}
-

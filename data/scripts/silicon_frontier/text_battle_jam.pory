@@ -171,7 +171,6 @@ script BattleJam_Dialogue_EligibilityEgg
 script BattleJam_Dialogue_EligibilityLegendary
 {
     msgbox(format("{STR_VAR_1} isn't a Pokemon we're familiar with... I don't think its fair to enter with this."),,SPEAKER_BATTLE_JAM)
-
 }
 script BattleJam_Dialogue_EligibilitySpecies
 {
@@ -181,10 +180,4 @@ script BattleJam_Dialogue_EligibilitySpecies
 script BattleJam_Dialogue_EligibilityItem
 {
     msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_JAM)
-
-}
-script BattleJam_Dialogue_EligibilityType
-{
-    msgbox(format("You selected {STR_VAR_3}-type for this challenge, but {STR_VAR_1} does not have that type."),,SPEAKER_BATTLE_JAM)
-
 }

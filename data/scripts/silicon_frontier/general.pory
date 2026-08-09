@@ -365,28 +365,28 @@ script SiliconFrontier_Dialogue_InvalidParty
         {
             case SILICON_FRONTIER_ELIGIBILITY_CODE_PASS: delay(1)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_EGG:
-                call(BattleJam_Dialogue_EligibilityEgg)
+                call(SiliconFrontier_Dialogue_EligibilityEgg)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_LEGENDARY:
-                call(BattleJam_Dialogue_EligibilityLegendary)
+                call(SiliconFrontier_Dialogue_EligibilityLegendary)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES:
-                call(BattleJam_Dialogue_EligibilitySpecies)
+                call(SiliconFrontier_Dialogue_EligibilitySpecies)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ITEM:
-                call(BattleJam_Dialogue_EligibilityItem)
+                call(SiliconFrontier_Dialogue_EligibilityItem)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_TYPE:
-                call(BattleJam_Dialogue_EligibilityType)
+                call(RestrictedSparring_Dialogue_EligibilityType)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES_ITEM:
-                call(BattleJam_Dialogue_EligibilitySpecies)
-                call(BattleJam_Dialogue_EligibilityItem)
+                call(SiliconFrontier_Dialogue_EligibilitySpecies)
+                call(SiliconFrontier_Dialogue_EligibilityItem)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_SPECIES_TYPE:
-                call(BattleJam_Dialogue_EligibilitySpecies)
-                call(BattleJam_Dialogue_EligibilityType)
+                call(SiliconFrontier_Dialogue_EligibilitySpecies)
+                call(RestrictedSparring_Dialogue_EligibilityType)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ITEM_TYPE:
-                call(BattleJam_Dialogue_EligibilityType)
-                call(BattleJam_Dialogue_EligibilityItem)
+                call(RestrictedSparring_Dialogue_EligibilityType)
+                call(SiliconFrontier_Dialogue_EligibilityItem)
             case SILICON_FRONTIER_ELIGIBILITY_CODE_ALL:
-                call(BattleJam_Dialogue_EligibilitySpecies)
-                call(BattleJam_Dialogue_EligibilityType)
-                call(BattleJam_Dialogue_EligibilityItem)
+                call(SiliconFrontier_Dialogue_EligibilitySpecies)
+                call(RestrictedSparring_Dialogue_EligibilityType)
+                call(SiliconFrontier_Dialogue_EligibilityItem)
         }
         addvar(VAR_0x8006,1)
     } while (var(VAR_0x8006) < FRONTIER_DOUBLES_PARTY_SIZE)

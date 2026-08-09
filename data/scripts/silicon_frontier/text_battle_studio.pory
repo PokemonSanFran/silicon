@@ -1,0 +1,184 @@
+//script BattleStudio_Dialogue_
+script BattleStudio_Dialogue_WelcomeBackNewChallenge
+{
+    msgbox(format("Welcome back! Are you ready to start a new {STR_VAR_1} challenge?"),MSGBOX_YESNO,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WelcomeBackContinueChallenge
+{
+    msgbox(format("Welcome back! Are you here to continue your {STR_VAR_1} challenge?"),MSGBOX_YESNO,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WelcomeToThe
+{
+    msgbox(format("Welcome to the {STR_VAR_1}! What would you like to do?"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_HopeToSeeYou
+{
+    msgbox(format("We hope to see you again!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WhatWouldYouLikeInfo
+{
+    msgbox(format("What would you like information on?"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_ExplainFacility
+{
+    msgbox(format("At the {STR_VAR_1}, defeat as many Trainers in a row as you can! Once you register with your party, you battle against a randomly chosen Trainer. If you defeat them, your party is healed and then you battle another Trainer. You keep going until you finally lose."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouCanCompete
+{
+    msgbox(format("You can compete with any Pokemon normally found in Resido."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouCannotCompete
+{
+    msgbox(format("You cannot compete with these Pokemon."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouRecieveBP
+{
+    msgbox(format("After every win, you recieve {STR_VAR_1} Battle Point. Battle Points can be used to purchases prizes!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_EveryXWins
+{
+    msgbox(format("Every {STR_VAR_1} wins, you'll get {STR_VAR_2} Battle Points, and every win after that will reward an extra {STR_VAR_3} Battle Point."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_OneTimeBonus
+{
+    msgbox(format("After earning the {STR_VAR_1} or {STR_VAR_2} for the first time, you'll get a one time bonus of {STR_VAR_3} Points!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_OnceYourParty
+{
+    msgbox(format("Once your party has been registered, you must save the game to proceed."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_DontTryToCheat
+{
+    msgbox(format("Don't try to cheat!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WinningSilver
+{
+    msgbox(format("After winning {STR_VAR_1} battles in a row, Trainers will recieve the {STR_VAR_2}."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WinningGold
+{
+    msgbox(format("If they can get to a streak of {STR_VAR_1} wins, Trainers will recieve the coveted {STR_VAR_2}!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WhichChallenge
+{
+    msgbox(format("Which challenge would you like to start?"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WhichPokemon
+{
+    msgbox(format("Which Pokemon will you enter the Facility with?"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YourPartyHas
+{
+    msgbox(format("Your party has been registered! You must now save the game to proceed."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_IfYouReset
+{
+    msgbox(format("If you turn off or reset your game before saving again, you will be disqualified, and your entire streak and prizes will be forfeit."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouCannotEnter
+{
+    msgbox(format("Unfortunately, you cannot enter the facility until you save. Please return when you're ready to save."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YourPartyHasBeenHealed
+{
+    msgbox(format("Your party has been fully healed. Would you like to continue your {STR_VAR_2} battle streak?"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_ThereWasAnError
+{
+    msgbox(format("There was an error of some kind. Your battle could not be saved."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YourBattleWasRecorded
+{
+    msgbox(format("Your battle was recorded! You can watch it later."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_CongratulationsOnYourWin
+{
+    msgbox(format("Congratulations on your win against {STR_VAR_1}!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_ForYourWonderfulAchievement
+{
+    msgbox(format("For your wonderful achievement of a {STR_VAR_2} win streak, we are proud to present you with the {STR_VAR_3}!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WeLookForward
+{
+    msgbox(format("We look forward to seeing you achieve a {STR_VAR_1} win streak!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WeHopeContinue
+{
+    msgbox(format("We hope you continue training with us going forward!"),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouWillStop
+{
+    msgbox(format("You will stop the current challenge. You are free to return at any time, and your streak will be resumed."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_YouTurnedOff
+{
+    msgbox(format("You turned off or reset your game during the challenge! Unfortunately, your entire streak is now forfeit."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_WeWillNow
+{
+    msgbox(format("We will now save your progress. Please wait."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_SaveFailed
+{
+    msgbox(format("Saving your progress did not work. Your progress has not been saved. Please try to save again."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_NotEnoughMons
+{
+    msgbox(format("Taking on a {STR_VAR_1} challenge requires that you have at least {STR_VAR_2} Pokemon in your party."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_AdjustPartyQuit
+{
+    msgbox(format("Please adjust your party and return once you're ready."),,SPEAKER_BATTLE_STUDIO)
+}
+
+script BattleStudio_Dialogue_EligibilityEgg
+{
+    msgbox(format("{STR_VAR_1} is an Egg. It cannot be entered."),,SPEAKER_BATTLE_STUDIO)
+}
+script BattleStudio_Dialogue_EligibilityLegendary
+{
+    msgbox(format("{STR_VAR_1} isn't a Pokemon we're familiar with... I don't think its fair to enter with this."),,SPEAKER_BATTLE_STUDIO)
+
+}
+script BattleStudio_Dialogue_EligibilitySpecies
+{
+
+    msgbox(format("Each species in your registered party must be a unique species. {STR_VAR_1}'s species was in your registered party more than once."),,SPEAKER_BATTLE_STUDIO)
+}
+script BattleStudio_Dialogue_EligibilityItem
+{
+    msgbox(format("Each item held in your registered party must be a unique item. {STR_VAR_1} is holding {STR_VAR_2}, which is already held by another member of your registered party."),,SPEAKER_BATTLE_STUDIO)
+}
