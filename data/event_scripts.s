@@ -1813,7 +1813,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 .include "data/scripts/cutscene.inc"
 .include "data/scripts/fishing.inc"
 .include "data/scripts/silicon_frontier/general.inc" @ siliconFrontier
+.include "data/scripts/silicon_frontier/movement.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_battle_jam.inc" @ siliconFrontier
+.include "data/scripts/silicon_frontier/movement_battle_jam.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_battle_convention.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_battle_studio.inc" @ siliconFrontier
 .include "data/scripts/silicon_frontier/text_restricted_sparring.inc" @ siliconFrontier

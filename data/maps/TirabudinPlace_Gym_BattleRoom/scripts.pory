@@ -1,7 +1,10 @@
 mapscripts TirabudinPlace_Gym_BattleRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION
     {
-        setflag(FLAG_HIDE_FACILITY_OPPONENT)
+        setobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_A)
+        setobjectflagfromlocalid(LOCALID_TOWER_OPPONENT_B)
+        callnative(SiliconFrontier_SetPartnerObject)
+        call(BattleJam_Script_TryHidePartner)
     }
     MAP_SCRIPT_ON_FRAME_TABLE
     [
