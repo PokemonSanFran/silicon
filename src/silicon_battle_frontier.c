@@ -82,6 +82,7 @@ const u8* SiliconFrontier_GetOpponentIntroText(enum SiliconFrontierTrainerIds tr
 enum NameplateSpeaker SiliconFrontier_GetSpeaker(enum SiliconFrontierTrainerIds trainerId);
 enum NameplateTail SiliconFrontier_GetTail(enum SiliconFrontierTrainerIds trainerId);
 enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds trainerId);
+enum SiliconFrontierPartner SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId);
 void SiliconFrontier_BufferOpponentText(enum SiliconFrontierTrainerIds trainerId);
 void SiliconFrontier_SetUpTextA(void);
 void SiliconFrontier_SetUpTextB(void);
@@ -656,6 +657,16 @@ bool8 SiliconFrontier_IsBossUnlocked(enum SiliconFrontierTrainerIds trainerId)
     return (FlagGet(flag));
 }
 
+bool8 SiliconFrontier_IsPossibleTrainerAlsoOpponent(enum SiliconFrontierTrainerIds possibleTrainer)
+{
+    u32 partner = SiliconFrontier_GetPartnerFromTrainer(possibleTrainer);
+
+    if (partner == PARTNER_NONE)
+        return FALSE;
+
+    return (partner == SiliconFrontier_GetCurrentPartner());
+}
+
 enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStreak)
 {
     currentStreak = (currentStreak + 1) - SILICON_FRONTIER_STREAK_LENGTH_BOSS;
@@ -666,6 +677,9 @@ enum SiliconFrontierTrainerIds SiliconFrontier_GetNextGenericBoss(u32 currentStr
         possibleTrainer -= SILICON_FRONTIER_BOSS_COUNT;
 
     if (SiliconFrontier_IsBossUnlocked(possibleTrainer) == FALSE)
+        return GetRandomSiliconFrontierTrainer();
+
+    if (SiliconFrontier_IsPossibleTrainerAlsoOpponent(possibleTrainer) == TRUE)
         return GetRandomSiliconFrontierTrainer();
 
     return possibleTrainer;
@@ -682,7 +696,6 @@ enum SiliconFrontierTrainerIds SiliconFrontier_GenerateOpponent(void)
     enum SiliconFrontierFacility facility = SiliconFrontier_GetFacilityFromCurrentChallenge();
     enum SiliconFrontierChallengeType challengeType = SiliconFrontier_GetTypeFromCurrentChallenge();
     enum SiliconFrontierSparringTypes sparringType = SiliconFrontier_GetCurrentChallengeSparringType();
-
 
     u32 currentStreak = SiliconFrontier_GetCurrentStreak(facility,challengeType, sparringType);
 
@@ -729,15 +742,18 @@ bool8 SiliconFroniter_IsCurrentChallengeTypeLinkMulti(void)
 
 void SiliconFrontier_SetAllOpponents(void)
 {
-    TRAINER_BATTLE_PARAM.opponentA = SiliconFrontier_GenerateOpponent();
+    gPartnerTrainerId = (SiliconFroniter_IsCurrentChallengeTypeMulti()) ? TRAINER_PARTNER(SiliconFrontier_GetCurrentPartner()) : PARTNER_NONE;
 
+    TRAINER_BATTLE_PARAM.opponentA = SiliconFrontier_GenerateOpponent();
     TRAINER_BATTLE_PARAM.opponentB = SILICON_FRONTIER_TRAINER_NONE;
 
     if (SiliconFroniter_IsCurrentChallengeTypeMulti() == FALSE)
         return;
 
-    gPartnerTrainerId = TRAINER_PARTNER(SiliconFrontier_GetCurrentPartner());
     TRAINER_BATTLE_PARAM.opponentB = SiliconFrontier_GenerateOpponent();
+
+    while (TRAINER_BATTLE_PARAM.opponentB == TRAINER_BATTLE_PARAM.opponentA)
+        TRAINER_BATTLE_PARAM.opponentB = GetRandomSiliconFrontierTrainer();
 }
 
 const u16 SiliconFrontier_GetObjectGfxId(enum SiliconFrontierTrainerIds trainerId)
@@ -794,6 +810,11 @@ enum NameplateTail SiliconFrontier_GetTail(enum SiliconFrontierTrainerIds traine
 enum NameplateEmotes SiliconFrontier_GetEmote(enum SiliconFrontierTrainerIds trainerId)
 {
     return gSiliconFrontierTrainers[trainerId].emote;
+}
+
+enum SiliconFrontierPartner SiliconFrontier_GetPartnerFromTrainer(enum SiliconFrontierTrainerIds trainerId)
+{
+    return gSiliconFrontierTrainers[trainerId].partner;
 }
 
 void SiliconFrontier_BufferOpponentText(enum SiliconFrontierTrainerIds trainerId)
