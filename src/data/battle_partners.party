@@ -12,6 +12,7 @@ Pic: Steven
 Gender: Male
 Music: Male
 AI: Basic Trainer
+Overworld Sprite: Steven
 
 Metang
 Brave Nature
@@ -49,6 +50,7 @@ Class: Comrade
 Pic: Baiya
 Gender: Male
 Music: Male
+Overworld Sprite: Baiya
 
 Dragonite @ Dragoninite
 Level: 100
@@ -59,6 +61,7 @@ Class: Comrade
 Pic: Adaora
 Gender: Male
 Music: Male
+Overworld Sprite: Adaora
 
 Buneary
 Level: 1
@@ -69,6 +72,7 @@ Class: Ex Leader
 Pic: Bd
 Gender: Male
 Music: Male
+Overworld Sprite: Bd
 
 Buneary
 Level: 1
@@ -79,6 +83,7 @@ Class: Leader
 Pic: Belen
 Gender: Male
 Music: Male
+Overworld Sprite: Belen
 
 Buneary
 Level: 1
@@ -89,6 +94,7 @@ Class: Leader
 Pic: Dimu
 Gender: Male
 Music: Male
+Overworld Sprite: Dimu
 
 Buneary
 Level: 1
@@ -99,6 +105,7 @@ Class: Leader
 Pic: Doyle
 Gender: Male
 Music: Male
+Overworld Sprite: Doyle
 
 Buneary
 Level: 1
@@ -109,6 +116,7 @@ Class: Leader
 Pic: Emrys
 Gender: Male
 Music: Male
+Overworld Sprite: Emrys
 
 Buneary
 Level: 1
@@ -119,6 +127,7 @@ Class: Ex Leader
 Pic: Imelda
 Gender: Male
 Music: Male
+Overworld Sprite: Imelda
 
 Buneary
 Level: 1
@@ -129,6 +138,7 @@ Class: Leader
 Pic: Pua
 Gender: Male
 Music: Male
+Overworld Sprite: Pua
 
 Buneary
 Level: 1
@@ -139,6 +149,7 @@ Class: Ex Leader
 Pic: Kei_Ying
 Gender: Male
 Music: Male
+Overworld Sprite: KeiYing
 
 Buneary
 Level: 1
@@ -149,6 +160,7 @@ Class: Ex Elite Four
 Pic: Magnus
 Gender: Male
 Music: Male
+Overworld Sprite: Magnus
 
 Buneary
 Level: 1
@@ -159,6 +171,7 @@ Class: Leader
 Pic: Neriene
 Gender: Male
 Music: Male
+Overworld Sprite: Neriene
 
 Buneary
 Level: 1
@@ -169,6 +182,7 @@ Class: Leader
 Pic: Shinzo
 Gender: Male
 Music: Male
+Overworld Sprite: Shinzo
 
 Weezing
 Level: 50
@@ -206,6 +220,7 @@ Class: Pkmn Trainer 1
 Pic: Expert M
 Gender: Male
 Music: Male
+Overworld Sprite: Oliver
 
 Togetic @ Weakness Policy  
 Ability: Hustle  
@@ -244,6 +259,7 @@ Pic: Charlotte
 Class: Charlotte
 Gender: Male
 Music: Male
+Overworld Sprite: Charlotte
 
 Palafin @ Choice Scarf  
 Ability: Zero to Hero  
@@ -324,3 +340,47 @@ Serious Nature
 - Psycho Cut  
 - Night Slash  
 - Trick Room  
+
+=== PARTNER_TALA ===
+Name: Tala
+Class: Leader
+Pic: Tala
+Gender: Male
+Music: Male
+Overworld Sprite: Tala
+
+Buneary
+Level: 1
+
+=== PARTNER_AMIARGENTO ===
+Name: AmiArgento
+Class: Leader
+Pic: Ami
+Gender: Male
+Music: Male
+Overworld Sprite: AmiArgento
+
+Buneary
+Level: 1
+
+=== PARTNER_FRANK ===
+Name: Frank
+Class: Leader
+Pic: Frank
+Gender: Male
+Music: Male
+Overworld Sprite: Frank
+
+Buneary
+Level: 1
+
+=== PARTNER_ELEANOR ===
+Name: Eleanor
+Class: Leader
+Pic: Eleanor
+Gender: Male
+Music: Male
+Overworld Sprite: Eleanor
+
+Buneary
+Level: 1
