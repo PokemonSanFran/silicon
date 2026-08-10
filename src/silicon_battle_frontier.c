@@ -717,6 +717,11 @@ bool8 SiliconFroniter_IsCurrentChallengeTypeMulti(void)
     return TRUE;
 }
 
+void Script_SiliconFroniter_IsCurrentChallengeTypeMulti(void)
+{
+    VarSet(VAR_TEMP_E,SiliconFroniter_IsCurrentChallengeTypeMulti());
+}
+
 bool8 SiliconFroniter_IsCurrentChallengeTypeLinkMulti(void)
 {
     return (SiliconFrontier_GetTypeFromCurrentChallenge() == SILICON_FRONTIER_CHALLENGE_TYPE_LINK_MULTI);
@@ -760,11 +765,15 @@ u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId)
     return gSiliconFrontierTrainers[trainerId].trainerClass;
 }
 
+void SiliconFrontier_SetPartnerObject(void)
+{
+    VarSet(VAR_OBJ_GFX_ID_2,gBattlePartners[GetCurrentDifficultyLevel()][SiliconFrontier_GetCurrentPartner()].objectEventGraphicsId);
+}
+
 void SiliconFrontier_SetAllOpponentsObjects(void)
 {
     VarSet(VAR_OBJ_GFX_ID_0,SiliconFrontier_GetObjectGfxId(TRAINER_BATTLE_PARAM.opponentA));
     VarSet(VAR_OBJ_GFX_ID_1,SiliconFrontier_GetObjectGfxId(TRAINER_BATTLE_PARAM.opponentB));
-
 }
 
 const u8* SiliconFrontier_GetOpponentIntroText(enum SiliconFrontierTrainerIds trainerId)
@@ -874,7 +883,6 @@ void SiliconFrontier_SetUpOpponent(void)
     SiliconFrontier_SetAllOpponents();
     SiliconFrontier_SetAllOpponentsObjects();
     SiliconFrontier_FillOpponentParties();
-    SiliconFrontier_SetAllOpponentsObjects();
 }
 
 /*
@@ -1178,10 +1186,8 @@ u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId)
     {
         [SILICON_FRONTIER_PARTNER_PUA] = PARTNER_PUA,
         [SILICON_FRONTIER_PARTNER_CHARLOTTE] = PARTNER_CHARLOTTE,
-        //[SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = PARTNER_AMI_ARGENTO,
-        //[SILICON_FRONTIER_PARTNER_TALA] = PARTNER_TALA,
-        [SILICON_FRONTIER_PARTNER_TALA] = 1,
-        [SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = 1,
+        [SILICON_FRONTIER_PARTNER_AMI_ARGENTO] = PARTNER_AMIARGENTO,
+        [SILICON_FRONTIER_PARTNER_TALA] = PARTNER_TALA,
         [SILICON_FRONTIER_PARTNER_DIMU] = PARTNER_DIMU,
         [SILICON_FRONTIER_PARTNER_ADAORA] = PARTNER_ADAORA,
         [SILICON_FRONTIER_PARTNER_EMRYS] = PARTNER_EMRYS,
@@ -1189,13 +1195,11 @@ u32 SiliconFrontier_TranslatePartnerId(enum SiliconFrontierPartner partnerId)
         [SILICON_FRONTIER_PARTNER_BD] = PARTNER_BD,
         [SILICON_FRONTIER_PARTNER_BAIYA] = PARTNER_BAIYA,
         [SILICON_FRONTIER_PARTNER_NERIENE] = PARTNER_NERIENE,
-        //[SILICON_FRONTIER_PARTNER_FRANK] = PARTNER_FRANK,
-        [SILICON_FRONTIER_PARTNER_FRANK] = 1,
+        [SILICON_FRONTIER_PARTNER_FRANK] = PARTNER_FRANK,
         [SILICON_FRONTIER_PARTNER_SHINZO] = PARTNER_SHINZO,
         [SILICON_FRONTIER_PARTNER_KEI_YING] = PARTNER_KEI_YING,
         [SILICON_FRONTIER_PARTNER_BELEN] = PARTNER_BELEN,
-        //[SILICON_FRONTIER_PARTNER_ELEANOR] = PARTNER_ELEANOR,
-        [SILICON_FRONTIER_PARTNER_ELEANOR] = 1,
+        [SILICON_FRONTIER_PARTNER_ELEANOR] = PARTNER_ELEANOR,
     };
 
     return partnerMapping[partnerId];
