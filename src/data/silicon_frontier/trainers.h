@@ -107,6 +107,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_PUA,
     },
     [SILICON_FRONTIER_TRAINER_CHARLOTTE] =
     {
@@ -161,6 +162,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_CHARLOTTE,
     },
     [SILICON_FRONTIER_TRAINER_AMI_ARGENTO] =
     {
@@ -215,6 +217,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_AMIARGENTO,
     },
     [SILICON_FRONTIER_TRAINER_TALA] =
     {
@@ -269,6 +272,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_TALA,
     },
     [SILICON_FRONTIER_TRAINER_DIMU] =
     {
@@ -323,6 +327,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_DIMU,
     },
     [SILICON_FRONTIER_TRAINER_ADAORA] =
     {
@@ -377,6 +382,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_ADAORA,
     },
     [SILICON_FRONTIER_TRAINER_EMRYS] =
     {
@@ -431,6 +437,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_EMRYS,
     },
     [SILICON_FRONTIER_TRAINER_MAGNUS] =
     {
@@ -485,6 +492,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_MAGNUS,
     },
     [SILICON_FRONTIER_TRAINER_BD] =
     {
@@ -539,6 +547,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_BD,
     },
     [SILICON_FRONTIER_TRAINER_BAIYA] =
     {
@@ -593,6 +602,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_BAIYA,
     },
     [SILICON_FRONTIER_TRAINER_NERIENE] =
     {
@@ -647,6 +657,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_NERIENE,
     },
     [SILICON_FRONTIER_TRAINER_FRANK] =
     {
@@ -701,6 +712,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_FRANK,
     },
     [SILICON_FRONTIER_TRAINER_SHINZO] =
     {
@@ -755,6 +767,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_SHINZO,
     },
     [SILICON_FRONTIER_TRAINER_KEI_YING] =
     {
@@ -809,6 +822,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_KEI_YING,
     },
     [SILICON_FRONTIER_TRAINER_BELEN] =
     {
@@ -863,6 +877,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_BELEN,
     },
     [SILICON_FRONTIER_TRAINER_ELEANOR] =
     {
@@ -917,6 +932,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_ELEANOR,
     },
     [SILICON_FRONTIER_TRAINER_IMELDA] =
     {
@@ -971,6 +987,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_IMELDA,
     },
     [SILICON_FRONTIER_TRAINER_IMELDA_SILVER] =
     {
@@ -1025,6 +1042,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_IMELDA,
     },
     [SILICON_FRONTIER_TRAINER_IMELDA_GOLD] =
     {
@@ -1079,6 +1097,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_IMELDA,
     },
     [SILICON_FRONTIER_TRAINER_DOYLE] =
     {
@@ -1133,6 +1152,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_DOYLE,
     },
     [SILICON_FRONTIER_TRAINER_DOYLE_SILVER] =
     {
@@ -1187,6 +1207,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_DOYLE,
     },
     [SILICON_FRONTIER_TRAINER_DOYLE_GOLD] =
     {
@@ -1241,6 +1262,7 @@ const struct SiliconFrontierTrainers gSiliconFrontierTrainers[SILICON_FRONTIER_T
 
             },
         },
+        .partner = PARTNER_DOYLE,
     },
     [SILICON_FRONTIER_TRAINER_TOWER] =
     {

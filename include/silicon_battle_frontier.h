@@ -3,6 +3,7 @@
 
 #include "constants/silicon_battle_frontier.h"
 #include "constants/trainers.h"
+#include "constants/battle_partner.h"
 #include "constants/nameplate.h"
 u16 SiliconFrontier_GetTrainerClass(enum SiliconFrontierTrainerIds trainerId);
 const u8* SiliconFrontier_GetTrainerName(enum SiliconFrontierTrainerIds trainerId);
@@ -28,6 +29,7 @@ struct SiliconFrontierTrainers
     enum NameplateSpeaker speaker;
     enum NameplateTail tail;
     enum NameplateEmotes emote;
+    u8 partner;
 };
 
 struct SiliconFrontierData
